@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -179,12 +181,14 @@ func (nc *NNCompare) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) 
 
 // ComparisonType returns the comparison type to use
 func (nc *NNCompare) ComparisonType() NNComparisonType {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[NNComparisonType](objref.IDOf(nc), objc.RegisterName("comparisonType"))
 	return _r
 }
 
 // Threshold returns the threshold to use when comparing for equality.  Two values will be considered to be equal if the absolute value of their difference is less than, or equal, to the specified threshold: result = |b - a| <= threshold
 func (nc *NNCompare) Threshold() float32 {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[float32](objref.IDOf(nc), objc.RegisterName("threshold"))
 	return _r
 }

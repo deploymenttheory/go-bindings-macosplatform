@@ -5,9 +5,12 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -149,8 +152,8 @@ func (mc *MutableContact) WithNote(note string) *MutableContact {
 }
 
 // WithImageData sets the profile picture of a contact.
-func (mc *MutableContact) WithImageData(imageData obj.Object) *MutableContact {
-	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setImageData:"), objref.IDOf(imageData))
+func (mc *MutableContact) WithImageData(imageData []byte) *MutableContact {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setImageData:"), rt.BytesToNSData(imageData))
 	return mc
 }
 
@@ -205,12 +208,14 @@ func (mc *MutableContact) WithInstantMessageAddresses(items ...obj.Object) *Muta
 
 // WithBirthday sets a date component for the Gregorian birthday of the contact.
 func (mc *MutableContact) WithBirthday(birthday obj.Object) *MutableContact {
+	defer runtime.KeepAlive(birthday)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setBirthday:"), objref.IDOf(birthday))
 	return mc
 }
 
 // WithNonGregorianBirthday sets a date component for the non-Gregorian birthday of the contact.
 func (mc *MutableContact) WithNonGregorianBirthday(nonGregorianBirthday obj.Object) *MutableContact {
+	defer runtime.KeepAlive(nonGregorianBirthday)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setNonGregorianBirthday:"), objref.IDOf(nonGregorianBirthday))
 	return mc
 }

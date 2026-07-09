@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -119,71 +121,83 @@ func (gitcod *GraphImToColOpDescriptor) WithDataLayout(dataLayout GraphTensorNam
 
 // SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom sets the descriptor’s padding to the given values.
 func (gitcod *GraphImToColOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft int, paddingRight int, paddingTop int, paddingBottom int) {
+	defer runtime.KeepAlive(gitcod)
 	objc.Send[objc.ID](objref.IDOf(gitcod), objc.RegisterName("setExplicitPaddingWithPaddingLeft:paddingRight:paddingTop:paddingBottom:"), paddingLeft, paddingRight, paddingTop, paddingBottom)
 }
 
 // KernelWidth returns the property that defines the kernel size in width dimension.
 func (gitcod *GraphImToColOpDescriptor) KernelWidth() int {
+	defer runtime.KeepAlive(gitcod)
 	_r := objc.Send[int](objref.IDOf(gitcod), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
 // KernelHeight returns the property that defines the kernel size  in height dimension.
 func (gitcod *GraphImToColOpDescriptor) KernelHeight() int {
+	defer runtime.KeepAlive(gitcod)
 	_r := objc.Send[int](objref.IDOf(gitcod), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
 // StrideInX returns the property that defines the stride in width dimension.
 func (gitcod *GraphImToColOpDescriptor) StrideInX() int {
+	defer runtime.KeepAlive(gitcod)
 	_r := objc.Send[int](objref.IDOf(gitcod), objc.RegisterName("strideInX"))
 	return _r
 }
 
 // StrideInY returns the property that defines the stride in height dimension.
 func (gitcod *GraphImToColOpDescriptor) StrideInY() int {
+	defer runtime.KeepAlive(gitcod)
 	_r := objc.Send[int](objref.IDOf(gitcod), objc.RegisterName("strideInY"))
 	return _r
 }
 
 // DilationRateInX returns the property that defines the dilation in width dimension.
 func (gitcod *GraphImToColOpDescriptor) DilationRateInX() int {
+	defer runtime.KeepAlive(gitcod)
 	_r := objc.Send[int](objref.IDOf(gitcod), objc.RegisterName("dilationRateInX"))
 	return _r
 }
 
 // DilationRateInY returns the property that defines the dilation in height dimension.
 func (gitcod *GraphImToColOpDescriptor) DilationRateInY() int {
+	defer runtime.KeepAlive(gitcod)
 	_r := objc.Send[int](objref.IDOf(gitcod), objc.RegisterName("dilationRateInY"))
 	return _r
 }
 
 // PaddingLeft returns the property that defines the padding in width dimension on the left side.
 func (gitcod *GraphImToColOpDescriptor) PaddingLeft() int {
+	defer runtime.KeepAlive(gitcod)
 	_r := objc.Send[int](objref.IDOf(gitcod), objc.RegisterName("paddingLeft"))
 	return _r
 }
 
 // PaddingRight returns the property that defines the padding in width dimension on the right side.
 func (gitcod *GraphImToColOpDescriptor) PaddingRight() int {
+	defer runtime.KeepAlive(gitcod)
 	_r := objc.Send[int](objref.IDOf(gitcod), objc.RegisterName("paddingRight"))
 	return _r
 }
 
 // PaddingTop returns the property that defines the padding in height dimension at the top.
 func (gitcod *GraphImToColOpDescriptor) PaddingTop() int {
+	defer runtime.KeepAlive(gitcod)
 	_r := objc.Send[int](objref.IDOf(gitcod), objc.RegisterName("paddingTop"))
 	return _r
 }
 
 // PaddingBottom returns the property that defines the padding in height dimension at the bottom.
 func (gitcod *GraphImToColOpDescriptor) PaddingBottom() int {
+	defer runtime.KeepAlive(gitcod)
 	_r := objc.Send[int](objref.IDOf(gitcod), objc.RegisterName("paddingBottom"))
 	return _r
 }
 
 // DataLayout returns the property that defines the layout of source or output  tensor. e.g. `batch x channels x width x height` for `NCHW` layout
 func (gitcod *GraphImToColOpDescriptor) DataLayout() GraphTensorNamedDataLayout {
+	defer runtime.KeepAlive(gitcod)
 	_r := objc.Send[GraphTensorNamedDataLayout](objref.IDOf(gitcod), objc.RegisterName("dataLayout"))
 	return _r
 }

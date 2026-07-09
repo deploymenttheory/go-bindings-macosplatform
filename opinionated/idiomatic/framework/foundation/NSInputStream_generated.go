@@ -5,10 +5,12 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -50,9 +52,9 @@ func inputStreamAdopt(id objc.ID) *InputStream {
 }
 
 // NewInputStreamWithData creates a new InputStream.
-func NewInputStreamWithData(data *Data) *InputStream {
+func NewInputStreamWithData(data []byte) *InputStream {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSInputStream")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), rt.BytesToNSData(data))
 	return inputStreamAdopt(_id)
 }
 
@@ -70,6 +72,16 @@ func NewInputStreamWithFileAtPath(path string) *InputStream {
 	return inputStreamAdopt(_id)
 }
 
+// WithDelegate sets the delegate.
+func (is *InputStream) WithDelegate(delegate StreamDelegate) *InputStream {
+	_shim := newStreamDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(is), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(is), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return is
+}
+
 // WithObservationInfo sets the observation info.
 func (is *InputStream) WithObservationInfo(observationInfo unsafe.Pointer) *InputStream {
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setObservationInfo:"), observationInfo)
@@ -77,20 +89,22 @@ func (is *InputStream) WithObservationInfo(observationInfo unsafe.Pointer) *Inpu
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (is *InputStream) WithScriptingProperties(scriptingProperties obj.Object) *InputStream {
-	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (is *InputStream) WithScriptingProperties(scriptingProperties map[string]obj.Object) *InputStream {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return is
 }
 
 // ReadMaxLength reads max length.
-func (is *InputStream) ReadMaxLength(len_ int) (result int, buffer uint8) {
+func (is *InputStream) ReadMaxLength(length int) (result int, buffer uint8) {
+	defer runtime.KeepAlive(is)
 	var _out0 uint8
-	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("read:maxLength:"), unsafe.Pointer(&_out0), len_)
+	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("read:maxLength:"), unsafe.Pointer(&_out0), length)
 	return _r, _out0
 }
 
 // GetBufferLength wraps the corresponding Objective-C method.
-func (is *InputStream) GetBufferLength() (ok bool, buffer uint8, len_ int) {
+func (is *InputStream) GetBufferLength() (ok bool, buffer uint8, length int) {
+	defer runtime.KeepAlive(is)
 	var _out0 uint8
 	var _out1 int
 	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("getBuffer:length:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
@@ -99,6 +113,7 @@ func (is *InputStream) GetBufferLength() (ok bool, buffer uint8, len_ int) {
 
 // HasBytesAvailable reports whether the object has bytes available.
 func (is *InputStream) HasBytesAvailable() bool {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("hasBytesAvailable"))
 	return _r
 }

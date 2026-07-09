@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRLaundryWasherModeClusterModeOptionStructAdopt(id objc.ID) *MTRLaundryWas
 
 // Description returns the object's -description text.
 func (mlwmcmos *MTRLaundryWasherModeClusterModeOptionStruct) Description() string {
+	defer runtime.KeepAlive(mlwmcmos)
 	return rt.Description(objref.IDOf(mlwmcmos))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mlwmcmos *MTRLaundryWasherModeClusterModeOptionStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mlwmcmos)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mlwmcmos), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mlwmcmos *MTRLaundryWasherModeClusterModeOptionStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mlwmcmos)
 	return rt.IsKind(objref.IDOf(mlwmcmos), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mlwmcmos *MTRLaundryWasherModeClusterModeOptionStruct) String() string {
+	defer runtime.KeepAlive(mlwmcmos)
 	return rt.Description(objref.IDOf(mlwmcmos))
 }
 
@@ -78,12 +86,14 @@ func (mlwmcmos *MTRLaundryWasherModeClusterModeOptionStruct) WithLabel(label str
 
 // WithMode sets the mode.
 func (mlwmcmos *MTRLaundryWasherModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTRLaundryWasherModeClusterModeOptionStruct {
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(mlwmcmos), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return mlwmcmos
 }
 
 // Label returns the label.
 func (mlwmcmos *MTRLaundryWasherModeClusterModeOptionStruct) Label() string {
+	defer runtime.KeepAlive(mlwmcmos)
 	_r := objc.Send[objc.ID](objref.IDOf(mlwmcmos), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -92,18 +102,22 @@ func (mlwmcmos *MTRLaundryWasherModeClusterModeOptionStruct) Label() string {
 }
 
 // Mode returns the mode.
-func (mlwmcmos *MTRLaundryWasherModeClusterModeOptionStruct) Mode() obj.Object {
+func (mlwmcmos *MTRLaundryWasherModeClusterModeOptionStruct) Mode() *foundation.Number {
+	defer runtime.KeepAlive(mlwmcmos)
 	_r := objc.Send[objc.ID](objref.IDOf(mlwmcmos), objc.RegisterName("mode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ModeTags returns the mode tags.
 func (mlwmcmos *MTRLaundryWasherModeClusterModeOptionStruct) ModeTags() obj.Object {
+	defer runtime.KeepAlive(mlwmcmos)
 	_r := objc.Send[objc.ID](objref.IDOf(mlwmcmos), objc.RegisterName("modeTags"))
 	return obj.Wrap(_r)
 }
 
 // SetModeTags wraps the corresponding Objective-C method.
 func (mlwmcmos *MTRLaundryWasherModeClusterModeOptionStruct) SetModeTags(modeTags obj.Object) {
+	defer runtime.KeepAlive(mlwmcmos)
+	defer runtime.KeepAlive(modeTags)
 	objc.Send[objc.ID](objref.IDOf(mlwmcmos), objc.RegisterName("setModeTags:"), objref.IDOf(modeTags))
 }

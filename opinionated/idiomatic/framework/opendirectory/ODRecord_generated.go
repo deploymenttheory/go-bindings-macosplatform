@@ -5,6 +5,7 @@
 package opendirectory
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func recordAdopt(id objc.ID) *Record {
 
 // Description returns the object's -description text.
 func (r *Record) Description() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (r *Record) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (r *Record) IsKind(className string) bool {
+	defer runtime.KeepAlive(r)
 	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (r *Record) String() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
@@ -77,6 +83,7 @@ func NewRecord() *Record {
 
 // SetNodeCredentialsPassword sets credentials for the record’s node.
 func (r *Record) SetNodeCredentialsPassword(inUsername string, inPassword string) error {
+	defer runtime.KeepAlive(r)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("setNodeCredentials:password:error:"), purego.NSString(inUsername), purego.NSString(inPassword), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -87,6 +94,7 @@ func (r *Record) SetNodeCredentialsPassword(inUsername string, inPassword string
 
 // SetNodeCredentialsUsingKerberosCache sets the credentials for interaction with the record’s node using a Kerberos cache.
 func (r *Record) SetNodeCredentialsUsingKerberosCache(inCacheName string) error {
+	defer runtime.KeepAlive(r)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("setNodeCredentialsUsingKerberosCache:error:"), purego.NSString(inCacheName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -95,8 +103,9 @@ func (r *Record) SetNodeCredentialsUsingKerberosCache(inCacheName string) error 
 	return nil
 }
 
-// PasswordPolicyAndReturnError returns a dictionary containing the password policy for the record.
-func (r *Record) PasswordPolicyAndReturnError() (result obj.Object, err error) {
+// PasswordPolicy returns a dictionary containing the password policy for the record.
+func (r *Record) PasswordPolicy() (result obj.Object, err error) {
+	defer runtime.KeepAlive(r)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("passwordPolicyAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -107,6 +116,7 @@ func (r *Record) PasswordPolicyAndReturnError() (result obj.Object, err error) {
 
 // VerifyPassword verifies the password for interaction with the record.
 func (r *Record) VerifyPassword(inPassword string) error {
+	defer runtime.KeepAlive(r)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("verifyPassword:error:"), purego.NSString(inPassword), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -117,6 +127,7 @@ func (r *Record) VerifyPassword(inPassword string) error {
 
 // ChangePasswordToPassword changes the record’s password.
 func (r *Record) ChangePasswordToPassword(oldPassword string, newPassword string) error {
+	defer runtime.KeepAlive(r)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("changePassword:toPassword:error:"), purego.NSString(oldPassword), purego.NSString(newPassword), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -129,6 +140,7 @@ func (r *Record) ChangePasswordToPassword(oldPassword string, newPassword string
 //
 // SynchronizeAndReturnError returns an error if the operation did not succeed.
 func (r *Record) SynchronizeAndReturnError() error {
+	defer runtime.KeepAlive(r)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(r), objc.RegisterName("synchronizeAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -137,8 +149,10 @@ func (r *Record) SynchronizeAndReturnError() error {
 	return nil
 }
 
-// RecordDetailsForAttributesError returns a dictionary of attributes with their respective values.
-func (r *Record) RecordDetailsForAttributesError(inAttributes obj.Object) (result obj.Object, err error) {
+// RecordDetailsForAttributes returns a dictionary of attributes with their respective values.
+func (r *Record) RecordDetailsForAttributes(inAttributes obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(inAttributes)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("recordDetailsForAttributes:error:"), objref.IDOf(inAttributes), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -147,8 +161,10 @@ func (r *Record) RecordDetailsForAttributesError(inAttributes obj.Object) (resul
 	return obj.Wrap(_r), nil
 }
 
-// ValuesForAttributeError returns the values of an attribute of the record.
-func (r *Record) ValuesForAttributeError(inAttribute obj.Object) (result obj.Object, err error) {
+// ValuesForAttribute returns the values of an attribute of the record.
+func (r *Record) ValuesForAttribute(inAttribute obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(inAttribute)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("valuesForAttribute:error:"), objref.IDOf(inAttribute), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -159,6 +175,9 @@ func (r *Record) ValuesForAttributeError(inAttribute obj.Object) (result obj.Obj
 
 // SetValueForAttribute sets the values of an attribute of the record.
 func (r *Record) SetValueForAttribute(inValueOrValues obj.Object, inAttribute obj.Object) error {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(inValueOrValues)
+	defer runtime.KeepAlive(inAttribute)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("setValue:forAttribute:error:"), objref.IDOf(inValueOrValues), objref.IDOf(inAttribute), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -169,6 +188,8 @@ func (r *Record) SetValueForAttribute(inValueOrValues obj.Object, inAttribute ob
 
 // RemoveValuesForAttribute removes all values from an attribute of the record.
 func (r *Record) RemoveValuesForAttribute(inAttribute obj.Object) error {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(inAttribute)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("removeValuesForAttribute:error:"), objref.IDOf(inAttribute), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -179,6 +200,9 @@ func (r *Record) RemoveValuesForAttribute(inAttribute obj.Object) error {
 
 // AddValueToAttribute adds a value to an attribute of the record.
 func (r *Record) AddValueToAttribute(inValue obj.Object, inAttribute obj.Object) error {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(inValue)
+	defer runtime.KeepAlive(inAttribute)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("addValue:toAttribute:error:"), objref.IDOf(inValue), objref.IDOf(inAttribute), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -189,6 +213,9 @@ func (r *Record) AddValueToAttribute(inValue obj.Object, inAttribute obj.Object)
 
 // RemoveValueFromAttribute removes a value from an attribute of the record.
 func (r *Record) RemoveValueFromAttribute(inValue obj.Object, inAttribute obj.Object) error {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(inValue)
+	defer runtime.KeepAlive(inAttribute)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("removeValue:fromAttribute:error:"), objref.IDOf(inValue), objref.IDOf(inAttribute), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -201,6 +228,7 @@ func (r *Record) RemoveValueFromAttribute(inValue obj.Object, inAttribute obj.Ob
 //
 // DeleteRecordAndReturnError returns an error if the operation did not succeed.
 func (r *Record) DeleteRecordAndReturnError() error {
+	defer runtime.KeepAlive(r)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(r), objc.RegisterName("deleteRecordAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -209,8 +237,9 @@ func (r *Record) DeleteRecordAndReturnError() error {
 	return nil
 }
 
-// PoliciesAndReturnError this will copy any policies configured for the record. This will copy any policies configured for the record.
-func (r *Record) PoliciesAndReturnError() (result obj.Object, err error) {
+// Policies this will copy any policies configured for the record. This will copy any policies configured for the record.
+func (r *Record) Policies() (result obj.Object, err error) {
+	defer runtime.KeepAlive(r)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("policiesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -219,8 +248,9 @@ func (r *Record) PoliciesAndReturnError() (result obj.Object, err error) {
 	return obj.Wrap(_r), nil
 }
 
-// EffectivePoliciesAndReturnError this will copy any policies configured for the record. This will copy any policies configured for the record.
-func (r *Record) EffectivePoliciesAndReturnError() (result obj.Object, err error) {
+// EffectivePolicies this will copy any policies configured for the record. This will copy any policies configured for the record.
+func (r *Record) EffectivePolicies() (result obj.Object, err error) {
+	defer runtime.KeepAlive(r)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("effectivePoliciesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -229,8 +259,9 @@ func (r *Record) EffectivePoliciesAndReturnError() (result obj.Object, err error
 	return obj.Wrap(_r), nil
 }
 
-// SupportedPoliciesAndReturnError this will return a dictionary of supported policies. This will return a dictionary of supported policies, if appropriate, the value will be the maximum value allowed for the policy in question.  For example, if password history is available, it will state how much history is supported.
-func (r *Record) SupportedPoliciesAndReturnError() (result obj.Object, err error) {
+// SupportedPolicies this will return a dictionary of supported policies. This will return a dictionary of supported policies, if appropriate, the value will be the maximum value allowed for the policy in question.  For example, if password history is available, it will state how much history is supported.
+func (r *Record) SupportedPolicies() (result obj.Object, err error) {
+	defer runtime.KeepAlive(r)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("supportedPoliciesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -241,6 +272,8 @@ func (r *Record) SupportedPoliciesAndReturnError() (result obj.Object, err error
 
 // SetPolicies this will set the policy for the record. This will set the policy for the record.  Policies are evaluated in combination with node-level policies.
 func (r *Record) SetPolicies(policies obj.Object) error {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(policies)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("setPolicies:error:"), objref.IDOf(policies), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -251,6 +284,9 @@ func (r *Record) SetPolicies(policies obj.Object) error {
 
 // SetPolicyValue this will set a specific policy setting for the record. This will set a specific policy setting for the record.
 func (r *Record) SetPolicyValue(policy obj.Object, value obj.Object) error {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(policy)
+	defer runtime.KeepAlive(value)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("setPolicy:value:error:"), objref.IDOf(policy), objref.IDOf(value), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -261,6 +297,8 @@ func (r *Record) SetPolicyValue(policy obj.Object, value obj.Object) error {
 
 // RemovePolicy this will remove a specific policy setting from the record. This will remove a specific policy setting from the record.
 func (r *Record) RemovePolicy(policy obj.Object) error {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(policy)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("removePolicy:error:"), objref.IDOf(policy), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -271,6 +309,9 @@ func (r *Record) RemovePolicy(policy obj.Object) error {
 
 // AddAccountPolicyToCategory this will add a specific policy to the specific category for the record. This will add a specific policy to the specific category for the record. The specified policy will be applied, in combination with any node policies, to the specified record when policies are evaluated.
 func (r *Record) AddAccountPolicyToCategory(policy obj.Object, category obj.Object) error {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(policy)
+	defer runtime.KeepAlive(category)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("addAccountPolicy:toCategory:error:"), objref.IDOf(policy), objref.IDOf(category), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -281,6 +322,9 @@ func (r *Record) AddAccountPolicyToCategory(policy obj.Object, category obj.Obje
 
 // RemoveAccountPolicyFromCategory this will remove a specific policy from the specific category for the record. This will remove a specific policy from the specific category for the record.
 func (r *Record) RemoveAccountPolicyFromCategory(policy obj.Object, category obj.Object) error {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(policy)
+	defer runtime.KeepAlive(category)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("removeAccountPolicy:fromCategory:error:"), objref.IDOf(policy), objref.IDOf(category), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -291,6 +335,8 @@ func (r *Record) RemoveAccountPolicyFromCategory(policy obj.Object, category obj
 
 // SetAccountPolicies this will set the policies for the record. This will set the policies for the record, replacing any existing policies.  All of the policies in the set will be applied to the record when policies are evaluated.
 func (r *Record) SetAccountPolicies(policies obj.Object) error {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(policies)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("setAccountPolicies:error:"), objref.IDOf(policies), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -299,8 +345,9 @@ func (r *Record) SetAccountPolicies(policies obj.Object) error {
 	return nil
 }
 
-// AccountPoliciesAndReturnError returns a dictionary containing any policies configured for the record. Returns a dictionary containing any policies configured for the record. Does not include any policies set for the node. Returns a dictionary containing any policies configured for the record.
-func (r *Record) AccountPoliciesAndReturnError() (result obj.Object, err error) {
+// AccountPolicies returns a dictionary containing any policies configured for the record. Returns a dictionary containing any policies configured for the record. Does not include any policies set for the node. Returns a dictionary containing any policies configured for the record.
+func (r *Record) AccountPolicies() (result obj.Object, err error) {
+	defer runtime.KeepAlive(r)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("accountPoliciesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -313,6 +360,7 @@ func (r *Record) AccountPoliciesAndReturnError() (result obj.Object, err error) 
 //
 // AuthenticationAllowedAndReturnError returns an error if the operation did not succeed.
 func (r *Record) AuthenticationAllowedAndReturnError() error {
+	defer runtime.KeepAlive(r)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(r), objc.RegisterName("authenticationAllowedAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -323,6 +371,7 @@ func (r *Record) AuthenticationAllowedAndReturnError() error {
 
 // PasswordChangeAllowed determines if policies allow the password change. Determines if policies allow the password change.  Password content policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.  The failure of any single policy will deny the password change. This check is only definitive at the time it was requested. The policy or the environment could change before the password change is actually requested.  Errors from the password change request should be consulted.
 func (r *Record) PasswordChangeAllowed(newPassword string) error {
+	defer runtime.KeepAlive(r)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("passwordChangeAllowed:error:"), purego.NSString(newPassword), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -333,18 +382,21 @@ func (r *Record) PasswordChangeAllowed(newPassword string) error {
 
 // WillPasswordExpire determines if the password will expire within the specified time. Determines if the password will expire (i.e. need to be changed) between now and the specified number of seconds in the future. Password change policies are evaluated.  Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.
 func (r *Record) WillPasswordExpire(willExpireIn uint64) bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("willPasswordExpire:"), willExpireIn)
 	return _r
 }
 
 // WillAuthenticationsExpire determines if authentications will expire within the specified time. Determines if authentications will expire (i.e. session and/or account expires) between now and the specified number of seconds in the future.  Authentication policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.
 func (r *Record) WillAuthenticationsExpire(willExpireIn uint64) bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("willAuthenticationsExpire:"), willExpireIn)
 	return _r
 }
 
 // RecordType returns type of the record. The record type.
 func (r *Record) RecordType() string {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("recordType"))
 	if _r == 0 {
 		return ""
@@ -354,6 +406,7 @@ func (r *Record) RecordType() string {
 
 // RecordName returns name of the record. This is the official record name.
 func (r *Record) RecordName() string {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("recordName"))
 	if _r == 0 {
 		return ""
@@ -363,18 +416,22 @@ func (r *Record) RecordName() string {
 
 // SecondsUntilPasswordExpires determines how many seconds until the password expires. Determines how many seconds until the password expires (i.e. needs changing).  Password change policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.
 func (r *Record) SecondsUntilPasswordExpires() int64 {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[int64](objref.IDOf(r), objc.RegisterName("secondsUntilPasswordExpires"))
 	return _r
 }
 
 // SecondsUntilAuthenticationsExpire determines how many seconds until authentications expire. Determines how many seconds until authentications expire (i.e. session and/or account expires). Authentication policies are evaluated.   Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.
 func (r *Record) SecondsUntilAuthenticationsExpire() int64 {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[int64](objref.IDOf(r), objc.RegisterName("secondsUntilAuthenticationsExpire"))
 	return _r
 }
 
 // AddMemberRecord adds a member record to this group record.
 func (r *Record) AddMemberRecord(inRecord *Record) error {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(inRecord)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("addMemberRecord:error:"), objref.IDOf(inRecord), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -385,6 +442,8 @@ func (r *Record) AddMemberRecord(inRecord *Record) error {
 
 // RemoveMemberRecord removes a record as a member of this group record.
 func (r *Record) RemoveMemberRecord(inRecord *Record) error {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(inRecord)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("removeMemberRecord:error:"), objref.IDOf(inRecord), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -395,6 +454,8 @@ func (r *Record) RemoveMemberRecord(inRecord *Record) error {
 
 // IsMemberRecord determines whether a given record is a member of this group record.
 func (r *Record) IsMemberRecord(inRecord *Record) error {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(inRecord)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("isMemberRecord:error:"), objref.IDOf(inRecord), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

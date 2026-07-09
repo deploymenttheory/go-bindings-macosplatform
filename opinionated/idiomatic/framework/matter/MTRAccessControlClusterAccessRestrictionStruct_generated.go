@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRAccessControlClusterAccessRestrictionStructAdopt(id objc.ID) *MTRAccessC
 
 // Description returns the object's -description text.
 func (maccars *MTRAccessControlClusterAccessRestrictionStruct) Description() string {
+	defer runtime.KeepAlive(maccars)
 	return rt.Description(objref.IDOf(maccars))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (maccars *MTRAccessControlClusterAccessRestrictionStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(maccars)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(maccars), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (maccars *MTRAccessControlClusterAccessRestrictionStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(maccars)
 	return rt.IsKind(objref.IDOf(maccars), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (maccars *MTRAccessControlClusterAccessRestrictionStruct) String() string {
+	defer runtime.KeepAlive(maccars)
 	return rt.Description(objref.IDOf(maccars))
 }
 
@@ -72,24 +80,28 @@ func NewMTRAccessControlClusterAccessRestrictionStruct() *MTRAccessControlCluste
 
 // WithType sets the type.
 func (maccars *MTRAccessControlClusterAccessRestrictionStruct) WithType(type_ obj.Object) *MTRAccessControlClusterAccessRestrictionStruct {
+	defer runtime.KeepAlive(type_)
 	objc.Send[objc.ID](objref.IDOf(maccars), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return maccars
 }
 
 // WithID sets the ID.
-func (maccars *MTRAccessControlClusterAccessRestrictionStruct) WithID(id_ obj.Object) *MTRAccessControlClusterAccessRestrictionStruct {
-	objc.Send[objc.ID](objref.IDOf(maccars), objc.RegisterName("setId:"), objref.IDOf(id_))
+func (maccars *MTRAccessControlClusterAccessRestrictionStruct) WithID(identifier obj.Object) *MTRAccessControlClusterAccessRestrictionStruct {
+	defer runtime.KeepAlive(identifier)
+	objc.Send[objc.ID](objref.IDOf(maccars), objc.RegisterName("setId:"), objref.IDOf(identifier))
 	return maccars
 }
 
 // Type returns the type.
-func (maccars *MTRAccessControlClusterAccessRestrictionStruct) Type() obj.Object {
+func (maccars *MTRAccessControlClusterAccessRestrictionStruct) Type() *foundation.Number {
+	defer runtime.KeepAlive(maccars)
 	_r := objc.Send[objc.ID](objref.IDOf(maccars), objc.RegisterName("type"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ID returns the ID.
-func (maccars *MTRAccessControlClusterAccessRestrictionStruct) ID() obj.Object {
+func (maccars *MTRAccessControlClusterAccessRestrictionStruct) ID() *foundation.Number {
+	defer runtime.KeepAlive(maccars)
 	_r := objc.Send[objc.ID](objref.IDOf(maccars), objc.RegisterName("id"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

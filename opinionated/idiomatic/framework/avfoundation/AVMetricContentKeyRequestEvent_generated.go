@@ -5,9 +5,11 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,24 +56,28 @@ func NewMetricContentKeyRequestEvent() *MetricContentKeyRequestEvent {
 
 // ContentKeySpecifier returns the content key specifier for the request.
 func (mckre *MetricContentKeyRequestEvent) ContentKeySpecifier() *ContentKeySpecifier {
+	defer runtime.KeepAlive(mckre)
 	_r := objc.Send[objc.ID](objref.IDOf(mckre), objc.RegisterName("contentKeySpecifier"))
 	return ContentKeySpecifierFromID(_r)
 }
 
 // MediaType returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
-func (mckre *MetricContentKeyRequestEvent) MediaType() obj.Object {
+func (mckre *MetricContentKeyRequestEvent) MediaType() *foundation.String {
+	defer runtime.KeepAlive(mckre)
 	_r := objc.Send[objc.ID](objref.IDOf(mckre), objc.RegisterName("mediaType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // IsClientInitiated reports whether the content key resource request was initiated by the client.
 func (mckre *MetricContentKeyRequestEvent) IsClientInitiated() bool {
+	defer runtime.KeepAlive(mckre)
 	_r := objc.Send[bool](objref.IDOf(mckre), objc.RegisterName("isClientInitiated"))
 	return _r
 }
 
 // MediaResourceRequestEvent returns the media resource request event which was used to satisfy the content key.
 func (mckre *MetricContentKeyRequestEvent) MediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
+	defer runtime.KeepAlive(mckre)
 	_r := objc.Send[objc.ID](objref.IDOf(mckre), objc.RegisterName("mediaResourceRequestEvent"))
 	return MetricMediaResourceRequestEventFromID(_r)
 }

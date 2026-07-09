@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,12 +61,14 @@ func (gsdmp *GeometricSpreadingDistanceModelParameters) WithRolloffFactor(rollof
 
 // WithFadeOutParameters sets a distance over which the framework fades out the mixer’s sound.
 func (gsdmp *GeometricSpreadingDistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *GeometricSpreadingDistanceModelParameters {
+	defer runtime.KeepAlive(fadeOutParameters)
 	objc.Send[objc.ID](objref.IDOf(gsdmp), objc.RegisterName("setFadeOutParameters:"), objref.IDOf(fadeOutParameters))
 	return gsdmp
 }
 
 // RolloffFactor returns the rolloff factor.
 func (gsdmp *GeometricSpreadingDistanceModelParameters) RolloffFactor() float64 {
+	defer runtime.KeepAlive(gsdmp)
 	_r := objc.Send[float64](objref.IDOf(gsdmp), objc.RegisterName("rolloffFactor"))
 	return _r
 }

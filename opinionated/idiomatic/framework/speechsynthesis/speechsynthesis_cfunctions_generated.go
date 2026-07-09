@@ -121,13 +121,13 @@ func GetVoiceInfo(selector int, voiceInfo unsafe.Pointer) (result int16, voice V
 var _fnMakeVoiceSpec func(int, int, unsafe.Pointer) int16
 
 // MakeVoiceSpec calls the SpeechSynthesis framework function MakeVoiceSpec.
-func MakeVoiceSpec(creator int, id_ int) (result int16, voice VoiceSpec) {
+func MakeVoiceSpec(creator int, identifier int) (result int16, voice VoiceSpec) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMakeVoiceSpec == nil {
 		ebipurego.RegisterLibFunc(&_fnMakeVoiceSpec, _lib, "MakeVoiceSpec")
 	}
 	var _out0 VoiceSpec
-	_ret := _fnMakeVoiceSpec(creator, id_, unsafe.Pointer(&_out0))
+	_ret := _fnMakeVoiceSpec(creator, identifier, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 

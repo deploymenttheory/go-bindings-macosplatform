@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParamsAdopt
 
 // Description returns the object's -description text.
 func (maccobcwp *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) Description() string {
+	defer runtime.KeepAlive(maccobcwp)
 	return rt.Description(objref.IDOf(maccobcwp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (maccobcwp *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(maccobcwp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(maccobcwp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (maccobcwp *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(maccobcwp)
 	return rt.IsKind(objref.IDOf(maccobcwp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (maccobcwp *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) String() string {
+	defer runtime.KeepAlive(maccobcwp)
 	return rt.Description(objref.IDOf(maccobcwp))
 }
 
@@ -72,36 +80,42 @@ func NewMTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams()
 
 // WithCommissioningTimeout sets the commissioning timeout.
 func (maccobcwp *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) WithCommissioningTimeout(commissioningTimeout obj.Object) *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams {
+	defer runtime.KeepAlive(commissioningTimeout)
 	objc.Send[objc.ID](objref.IDOf(maccobcwp), objc.RegisterName("setCommissioningTimeout:"), objref.IDOf(commissioningTimeout))
 	return maccobcwp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (maccobcwp *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(maccobcwp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return maccobcwp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (maccobcwp *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(maccobcwp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return maccobcwp
 }
 
 // CommissioningTimeout returns the commissioning timeout.
-func (maccobcwp *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) CommissioningTimeout() obj.Object {
+func (maccobcwp *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) CommissioningTimeout() *foundation.Number {
+	defer runtime.KeepAlive(maccobcwp)
 	_r := objc.Send[objc.ID](objref.IDOf(maccobcwp), objc.RegisterName("commissioningTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (maccobcwp *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) TimedInvokeTimeoutMs() obj.Object {
+func (maccobcwp *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(maccobcwp)
 	_r := objc.Send[objc.ID](objref.IDOf(maccobcwp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (maccobcwp *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) ServerSideProcessingTimeout() obj.Object {
+func (maccobcwp *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(maccobcwp)
 	_r := objc.Send[objc.ID](objref.IDOf(maccobcwp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

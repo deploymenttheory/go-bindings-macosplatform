@@ -296,6 +296,37 @@ func (e FetchRequestResultType) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that specify the possible types of changes that are reported.
+type FetchedResultsChangeType uint64
+
+const (
+	// Specifies that an object was inserted.
+	FetchedResultsChangeInsert FetchedResultsChangeType = 1
+	// Specifies that an object was deleted.
+	FetchedResultsChangeDelete FetchedResultsChangeType = 2
+	// Specifies that an object was moved.
+	FetchedResultsChangeMove FetchedResultsChangeType = 3
+	// Specifies that an object was changed.
+	FetchedResultsChangeUpdate FetchedResultsChangeType = 4
+)
+
+// String returns the FetchedResultsChangeType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FetchedResultsChangeType) String() string {
+	switch e {
+	case FetchedResultsChangeInsert:
+		return "FetchedResultsChangeInsert"
+	case FetchedResultsChangeDelete:
+		return "FetchedResultsChangeDelete"
+	case FetchedResultsChangeMove:
+		return "FetchedResultsChangeMove"
+	case FetchedResultsChangeUpdate:
+		return "FetchedResultsChangeUpdate"
+	default:
+		return fmt.Sprintf("FetchedResultsChangeType(%d)", int64(e))
+	}
+}
+
 // The concurrency types you can use with a managed object context.
 type ManagedObjectContextConcurrencyType uint64
 

@@ -5,9 +5,11 @@
 package naturallanguage
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,22 +51,27 @@ func embeddingAdopt(id objc.ID) *Embedding {
 
 // Description returns the object's -description text.
 func (e *Embedding) Description() string {
+	defer runtime.KeepAlive(e)
 	return rt.Description(objref.IDOf(e))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (e *Embedding) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(e)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(e), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (e *Embedding) IsKind(className string) bool {
+	defer runtime.KeepAlive(e)
 	return rt.IsKind(objref.IDOf(e), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (e *Embedding) String() string {
+	defer runtime.KeepAlive(e)
 	return rt.Description(objref.IDOf(e))
 }
 
@@ -75,102 +82,118 @@ func NewEmbedding() *Embedding {
 }
 
 // ContainsString requests a Boolean value that indicates whether the term is in the vocabulary.
-func (e *Embedding) ContainsString(string_ string) bool {
-	_r := objc.Send[bool](objref.IDOf(e), objc.RegisterName("containsString:"), purego.NSString(string_))
+func (e *Embedding) ContainsString(str string) bool {
+	defer runtime.KeepAlive(e)
+	_r := objc.Send[bool](objref.IDOf(e), objc.RegisterName("containsString:"), purego.NSString(str))
 	return _r
 }
 
 // DistanceBetweenStringAndStringDistanceType calculates the distance between two strings in the vocabulary space.
 func (e *Embedding) DistanceBetweenStringAndStringDistanceType(firstString string, secondString string, distanceType DistanceType) float64 {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("distanceBetweenString:andString:distanceType:"), purego.NSString(firstString), purego.NSString(secondString), distanceType)
 	return _r
 }
 
 // EnumerateNeighborsForStringMaximumCountDistanceTypeUsing passes the nearest strings of a string in the vocabulary to a block.
-func (e *Embedding) EnumerateNeighborsForStringMaximumCountDistanceTypeUsing(string_ string, maxCount int, distanceType DistanceType, block func(obj.Object, float64, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("enumerateNeighborsForString:maximumCount:distanceType:usingBlock:"), purego.NSString(string_), maxCount, distanceType, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64, _b2 unsafe.Pointer) {
+func (e *Embedding) EnumerateNeighborsForStringMaximumCountDistanceTypeUsing(str string, maxCount int, distanceType DistanceType, block func(obj.Object, float64, *bool)) {
+	defer runtime.KeepAlive(e)
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("enumerateNeighborsForString:maximumCount:distanceType:usingBlock:"), purego.NSString(str), maxCount, distanceType, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64, _b2 unsafe.Pointer) {
 		block(obj.Wrap(_b0), _b1, (*bool)(_b2))
 	}))
 }
 
 // EnumerateNeighborsForStringMaximumCountMaximumDistanceDistanceTypeUsing passes the nearest strings, within a radius of a string in the vocabulary, to a block.
-func (e *Embedding) EnumerateNeighborsForStringMaximumCountMaximumDistanceDistanceTypeUsing(string_ string, maxCount int, maxDistance float64, distanceType DistanceType, block func(obj.Object, float64, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("enumerateNeighborsForString:maximumCount:maximumDistance:distanceType:usingBlock:"), purego.NSString(string_), maxCount, maxDistance, distanceType, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64, _b2 unsafe.Pointer) {
+func (e *Embedding) EnumerateNeighborsForStringMaximumCountMaximumDistanceDistanceTypeUsing(str string, maxCount int, maxDistance float64, distanceType DistanceType, block func(obj.Object, float64, *bool)) {
+	defer runtime.KeepAlive(e)
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("enumerateNeighborsForString:maximumCount:maximumDistance:distanceType:usingBlock:"), purego.NSString(str), maxCount, maxDistance, distanceType, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64, _b2 unsafe.Pointer) {
 		block(obj.Wrap(_b0), _b1, (*bool)(_b2))
 	}))
 }
 
 // NeighborsForStringMaximumCountDistanceType retrieves a limited number of strings near a string in the vocabulary.
-func (e *Embedding) NeighborsForStringMaximumCountDistanceType(string_ string, maxCount int, distanceType DistanceType) []string {
-	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("neighborsForString:maximumCount:distanceType:"), purego.NSString(string_), maxCount, distanceType)
+func (e *Embedding) NeighborsForStringMaximumCountDistanceType(str string, maxCount int, distanceType DistanceType) []string {
+	defer runtime.KeepAlive(e)
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("neighborsForString:maximumCount:distanceType:"), purego.NSString(str), maxCount, distanceType)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // NeighborsForStringMaximumCountMaximumDistanceDistanceType retrieves a limited number of strings, within a radius of a string, in the vocabulary.
-func (e *Embedding) NeighborsForStringMaximumCountMaximumDistanceDistanceType(string_ string, maxCount int, maxDistance float64, distanceType DistanceType) []string {
-	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("neighborsForString:maximumCount:maximumDistance:distanceType:"), purego.NSString(string_), maxCount, maxDistance, distanceType)
+func (e *Embedding) NeighborsForStringMaximumCountMaximumDistanceDistanceType(str string, maxCount int, maxDistance float64, distanceType DistanceType) []string {
+	defer runtime.KeepAlive(e)
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("neighborsForString:maximumCount:maximumDistance:distanceType:"), purego.NSString(str), maxCount, maxDistance, distanceType)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // VectorForString requests the vector for the given term.
-func (e *Embedding) VectorForString(string_ string) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("vectorForString:"), purego.NSString(string_))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+func (e *Embedding) VectorForString(str string) []*foundation.Number {
+	defer runtime.KeepAlive(e)
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("vectorForString:"), purego.NSString(str))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *foundation.Number { return foundation.NumberFromID(_id) })
 }
 
 // GetVectorForString copies a vector into the given a pointer to a float array.
-func (e *Embedding) GetVectorForString(string_ string) (ok bool, vector float32) {
+func (e *Embedding) GetVectorForString(str string) (ok bool, vector float32) {
+	defer runtime.KeepAlive(e)
 	var _out0 float32
-	_r := objc.Send[bool](objref.IDOf(e), objc.RegisterName("getVector:forString:"), unsafe.Pointer(&_out0), purego.NSString(string_))
+	_r := objc.Send[bool](objref.IDOf(e), objc.RegisterName("getVector:forString:"), unsafe.Pointer(&_out0), purego.NSString(str))
 	return _r, _out0
 }
 
 // EnumerateNeighborsForVectorMaximumCountDistanceTypeUsing passes the nearest strings of a location in the vocabulary space to a closure.
-func (e *Embedding) EnumerateNeighborsForVectorMaximumCountDistanceTypeUsing(vector []obj.Object, maxCount int, distanceType DistanceType, block func(obj.Object, float64, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("enumerateNeighborsForVector:maximumCount:distanceType:usingBlock:"), purego.SliceToNSArray(vector, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), maxCount, distanceType, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64, _b2 unsafe.Pointer) {
+func (e *Embedding) EnumerateNeighborsForVectorMaximumCountDistanceTypeUsing(vector []*foundation.Number, maxCount int, distanceType DistanceType, block func(obj.Object, float64, *bool)) {
+	defer runtime.KeepAlive(e)
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("enumerateNeighborsForVector:maximumCount:distanceType:usingBlock:"), purego.SliceToNSArray(vector, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), maxCount, distanceType, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64, _b2 unsafe.Pointer) {
 		block(obj.Wrap(_b0), _b1, (*bool)(_b2))
 	}))
 }
 
 // EnumerateNeighborsForVectorMaximumCountMaximumDistanceDistanceTypeUsing passes the nearest strings, within a radius of a location in the vocabulary space, to a block.
-func (e *Embedding) EnumerateNeighborsForVectorMaximumCountMaximumDistanceDistanceTypeUsing(vector []obj.Object, maxCount int, maxDistance float64, distanceType DistanceType, block func(obj.Object, float64, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("enumerateNeighborsForVector:maximumCount:maximumDistance:distanceType:usingBlock:"), purego.SliceToNSArray(vector, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), maxCount, maxDistance, distanceType, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64, _b2 unsafe.Pointer) {
+func (e *Embedding) EnumerateNeighborsForVectorMaximumCountMaximumDistanceDistanceTypeUsing(vector []*foundation.Number, maxCount int, maxDistance float64, distanceType DistanceType, block func(obj.Object, float64, *bool)) {
+	defer runtime.KeepAlive(e)
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("enumerateNeighborsForVector:maximumCount:maximumDistance:distanceType:usingBlock:"), purego.SliceToNSArray(vector, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), maxCount, maxDistance, distanceType, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64, _b2 unsafe.Pointer) {
 		block(obj.Wrap(_b0), _b1, (*bool)(_b2))
 	}))
 }
 
 // NeighborsForVectorMaximumCountDistanceType retrieves a limited number of strings near a location in the vocabulary space.
-func (e *Embedding) NeighborsForVectorMaximumCountDistanceType(vector []obj.Object, maxCount int, distanceType DistanceType) []string {
-	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("neighborsForVector:maximumCount:distanceType:"), purego.SliceToNSArray(vector, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), maxCount, distanceType)
+func (e *Embedding) NeighborsForVectorMaximumCountDistanceType(vector []*foundation.Number, maxCount int, distanceType DistanceType) []string {
+	defer runtime.KeepAlive(e)
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("neighborsForVector:maximumCount:distanceType:"), purego.SliceToNSArray(vector, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), maxCount, distanceType)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // NeighborsForVectorMaximumCountMaximumDistanceDistanceType retrieves a limited number of strings within a radius of a location in the vocabulary space.
-func (e *Embedding) NeighborsForVectorMaximumCountMaximumDistanceDistanceType(vector []obj.Object, maxCount int, maxDistance float64, distanceType DistanceType) []string {
-	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("neighborsForVector:maximumCount:maximumDistance:distanceType:"), purego.SliceToNSArray(vector, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), maxCount, maxDistance, distanceType)
+func (e *Embedding) NeighborsForVectorMaximumCountMaximumDistanceDistanceType(vector []*foundation.Number, maxCount int, maxDistance float64, distanceType DistanceType) []string {
+	defer runtime.KeepAlive(e)
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("neighborsForVector:maximumCount:maximumDistance:distanceType:"), purego.SliceToNSArray(vector, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), maxCount, maxDistance, distanceType)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Dimension returns the dimension.
 func (e *Embedding) Dimension() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("dimension"))
 	return _r
 }
 
 // VocabularySize returns the vocabulary size.
 func (e *Embedding) VocabularySize() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("vocabularySize"))
 	return _r
 }
 
 // Language returns the language.
-func (e *Embedding) Language() obj.Object {
+func (e *Embedding) Language() *foundation.String {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("language"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Revision returns the revision.
 func (e *Embedding) Revision() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("revision"))
 	return _r
 }

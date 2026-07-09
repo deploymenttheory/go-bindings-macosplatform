@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func resourceStatePassDescriptorAdopt(id objc.ID) *ResourceStatePassDescriptor {
 
 // Description returns the object's -description text.
 func (rspd *ResourceStatePassDescriptor) Description() string {
+	defer runtime.KeepAlive(rspd)
 	return rt.Description(objref.IDOf(rspd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rspd *ResourceStatePassDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rspd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rspd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rspd *ResourceStatePassDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(rspd)
 	return rt.IsKind(objref.IDOf(rspd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rspd *ResourceStatePassDescriptor) String() string {
+	defer runtime.KeepAlive(rspd)
 	return rt.Description(objref.IDOf(rspd))
 }
 
@@ -74,6 +81,7 @@ func NewResourceStatePassDescriptor() *ResourceStatePassDescriptor {
 
 // SampleBufferAttachments returns the sample buffer attachments.
 func (rspd *ResourceStatePassDescriptor) SampleBufferAttachments() *ResourceStatePassSampleBufferAttachmentDescriptorArray {
+	defer runtime.KeepAlive(rspd)
 	_r := objc.Send[objc.ID](objref.IDOf(rspd), objc.RegisterName("sampleBufferAttachments"))
 	return ResourceStatePassSampleBufferAttachmentDescriptorArrayFromID(_r)
 }

@@ -34,7 +34,7 @@ type CssmAclKeychainPromptSelector struct {
 type CssmAclProcessSubjectSelector struct {
 	Version uint16
 	Mask    uint16
-	Uid     uint32
+	UID     uint32
 	Gid     uint32
 }
 
@@ -74,8 +74,8 @@ type CssmCspOperationalStatistics struct {
 }
 
 type CssmDbSchemaIndexInfo struct {
-	AttributeId         uint32
-	IndexId             uint32
+	AttributeID         uint32
+	IndexID             uint32
 	IndexType           uint32
 	IndexedDataLocation uint32
 }

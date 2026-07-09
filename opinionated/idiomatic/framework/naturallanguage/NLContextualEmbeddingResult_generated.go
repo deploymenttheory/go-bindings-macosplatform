@@ -5,7 +5,10 @@
 package naturallanguage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,16 +50,20 @@ func contextualEmbeddingResultAdopt(id objc.ID) *ContextualEmbeddingResult {
 
 // Description returns the object's -description text.
 func (cer *ContextualEmbeddingResult) Description() string {
+	defer runtime.KeepAlive(cer)
 	return rt.Description(objref.IDOf(cer))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cer *ContextualEmbeddingResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cer)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cer), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cer *ContextualEmbeddingResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(cer)
 	return rt.IsKind(objref.IDOf(cer), className)
 }
 
@@ -68,6 +75,7 @@ func NewContextualEmbeddingResult() *ContextualEmbeddingResult {
 
 // String returns a copy of the input string used to generate the embedding vectors.
 func (cer *ContextualEmbeddingResult) String() string {
+	defer runtime.KeepAlive(cer)
 	_r := objc.Send[objc.ID](objref.IDOf(cer), objc.RegisterName("string"))
 	if _r == 0 {
 		return ""
@@ -76,13 +84,15 @@ func (cer *ContextualEmbeddingResult) String() string {
 }
 
 // Language returns the language that the framework identified or used when processing the input string.
-func (cer *ContextualEmbeddingResult) Language() obj.Object {
+func (cer *ContextualEmbeddingResult) Language() *foundation.String {
+	defer runtime.KeepAlive(cer)
 	_r := objc.Send[objc.ID](objref.IDOf(cer), objc.RegisterName("language"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // SequenceLength returns the number of embedding vectors the request generates.
 func (cer *ContextualEmbeddingResult) SequenceLength() int {
+	defer runtime.KeepAlive(cer)
 	_r := objc.Send[int](objref.IDOf(cer), objc.RegisterName("sequenceLength"))
 	return _r
 }

@@ -5,9 +5,11 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,8 +61,8 @@ func (npis *NEVPNProtocolIPSec) WithUseExtendedAuthentication(useExtendedAuthent
 }
 
 // WithSharedSecretReference sets a persistent keychain reference to a keychain item containing the IKE shared secret.
-func (npis *NEVPNProtocolIPSec) WithSharedSecretReference(sharedSecretReference obj.Object) *NEVPNProtocolIPSec {
-	objc.Send[objc.ID](objref.IDOf(npis), objc.RegisterName("setSharedSecretReference:"), objref.IDOf(sharedSecretReference))
+func (npis *NEVPNProtocolIPSec) WithSharedSecretReference(sharedSecretReference []byte) *NEVPNProtocolIPSec {
+	objc.Send[objc.ID](objref.IDOf(npis), objc.RegisterName("setSharedSecretReference:"), rt.BytesToNSData(sharedSecretReference))
 	return npis
 }
 
@@ -89,20 +91,20 @@ func (npis *NEVPNProtocolIPSec) WithUsername(username string) *NEVPNProtocolIPSe
 }
 
 // WithPasswordReference sets a persistent keychain reference to a keychain item containing the password component of the tunneling protocol authentication credential.
-func (npis *NEVPNProtocolIPSec) WithPasswordReference(passwordReference obj.Object) *NEVPNProtocolIPSec {
-	objc.Send[objc.ID](objref.IDOf(npis), objc.RegisterName("setPasswordReference:"), objref.IDOf(passwordReference))
+func (npis *NEVPNProtocolIPSec) WithPasswordReference(passwordReference []byte) *NEVPNProtocolIPSec {
+	objc.Send[objc.ID](objref.IDOf(npis), objc.RegisterName("setPasswordReference:"), rt.BytesToNSData(passwordReference))
 	return npis
 }
 
 // WithIdentityReference sets a persistent keychain reference to a keychain item containing the certificate and private key components of the tunneling protocol authentication credential.
-func (npis *NEVPNProtocolIPSec) WithIdentityReference(identityReference obj.Object) *NEVPNProtocolIPSec {
-	objc.Send[objc.ID](objref.IDOf(npis), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
+func (npis *NEVPNProtocolIPSec) WithIdentityReference(identityReference []byte) *NEVPNProtocolIPSec {
+	objc.Send[objc.ID](objref.IDOf(npis), objc.RegisterName("setIdentityReference:"), rt.BytesToNSData(identityReference))
 	return npis
 }
 
 // WithIdentityData sets the certificate and private key components of the tunneling protocol authentication credential, in PKCS12 format.
-func (npis *NEVPNProtocolIPSec) WithIdentityData(identityData obj.Object) *NEVPNProtocolIPSec {
-	objc.Send[objc.ID](objref.IDOf(npis), objc.RegisterName("setIdentityData:"), objref.IDOf(identityData))
+func (npis *NEVPNProtocolIPSec) WithIdentityData(identityData []byte) *NEVPNProtocolIPSec {
+	objc.Send[objc.ID](objref.IDOf(npis), objc.RegisterName("setIdentityData:"), rt.BytesToNSData(identityData))
 	return npis
 }
 
@@ -120,6 +122,7 @@ func (npis *NEVPNProtocolIPSec) WithDisconnectOnSleep(disconnectOnSleep bool) *N
 
 // WithProxySettings sets the proxy settings to use for HTTP and HTTPS connections that route through the VPN.
 func (npis *NEVPNProtocolIPSec) WithProxySettings(proxySettings *NEProxySettings) *NEVPNProtocolIPSec {
+	defer runtime.KeepAlive(proxySettings)
 	objc.Send[objc.ID](objref.IDOf(npis), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
 	return npis
 }
@@ -162,24 +165,28 @@ func (npis *NEVPNProtocolIPSec) WithEnforceRoutes(enforceRoutes bool) *NEVPNProt
 
 // AuthenticationMethod returns the method used to authenticate with the IPSec server. Note that if this property is set to NEVPNIKEAuthenticationMethodNone, extended authentication will still be negotiated if useExtendedAuthentication is set to YES.
 func (npis *NEVPNProtocolIPSec) AuthenticationMethod() NEVPNIKEAuthenticationMethod {
+	defer runtime.KeepAlive(npis)
 	_r := objc.Send[NEVPNIKEAuthenticationMethod](objref.IDOf(npis), objc.RegisterName("authenticationMethod"))
 	return _r
 }
 
 // UseExtendedAuthentication reports whether a flag indicating if extended authentication will be negotiated. This authentication is in addition to the IKE authentication used to authenticate the endpoints of the IKE session. For IKE version 1, when this flag is set X-Auth authentication will be negotiated as part of the IKE session, using the username and password properties as the credential. For IKE version 2, when this flag is set EAP authentication will be negotiated as part of the IKE session, using the username, password, and/or identity properties as the credential depending on which EAP method the server requires.
 func (npis *NEVPNProtocolIPSec) UseExtendedAuthentication() bool {
+	defer runtime.KeepAlive(npis)
 	_r := objc.Send[bool](objref.IDOf(npis), objc.RegisterName("useExtendedAuthentication"))
 	return _r
 }
 
 // SharedSecretReference returns a persistent reference to a keychain item of class kSecClassGenericPassword containing the IKE shared secret.
-func (npis *NEVPNProtocolIPSec) SharedSecretReference() obj.Object {
+func (npis *NEVPNProtocolIPSec) SharedSecretReference() []byte {
+	defer runtime.KeepAlive(npis)
 	_r := objc.Send[objc.ID](objref.IDOf(npis), objc.RegisterName("sharedSecretReference"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // LocalIdentifier returns a string identifying the local IPSec endpoint for authentication purposes.
 func (npis *NEVPNProtocolIPSec) LocalIdentifier() string {
+	defer runtime.KeepAlive(npis)
 	_r := objc.Send[objc.ID](objref.IDOf(npis), objc.RegisterName("localIdentifier"))
 	if _r == 0 {
 		return ""
@@ -189,6 +196,7 @@ func (npis *NEVPNProtocolIPSec) LocalIdentifier() string {
 
 // RemoteIdentifier returns a string identifying the remote IPSec endpoint for authentication purposes.
 func (npis *NEVPNProtocolIPSec) RemoteIdentifier() string {
+	defer runtime.KeepAlive(npis)
 	_r := objc.Send[objc.ID](objref.IDOf(npis), objc.RegisterName("remoteIdentifier"))
 	if _r == 0 {
 		return ""

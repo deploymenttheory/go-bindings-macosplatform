@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,16 @@ func NewNEFilterPacketProvider() *NEFilterPacketProvider {
 
 // DelayCurrentPacket delay a packet currently processed by a packet handler.
 func (nfpp *NEFilterPacketProvider) DelayCurrentPacket(context_ *NEFilterPacketContext) *NEPacket {
+	defer runtime.KeepAlive(nfpp)
+	defer runtime.KeepAlive(context_)
 	_r := objc.Send[objc.ID](objref.IDOf(nfpp), objc.RegisterName("delayCurrentPacket:"), objref.IDOf(context_))
 	return NEPacketFromID(_r)
 }
 
 // AllowPacket allow delivery of a previously-delayed packet.
 func (nfpp *NEFilterPacketProvider) AllowPacket(packet *NEPacket) {
+	defer runtime.KeepAlive(nfpp)
+	defer runtime.KeepAlive(packet)
 	objc.Send[objc.ID](objref.IDOf(nfpp), objc.RegisterName("allowPacket:"), objref.IDOf(packet))
 }
 

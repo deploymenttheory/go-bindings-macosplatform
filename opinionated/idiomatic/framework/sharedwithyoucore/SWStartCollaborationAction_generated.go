@@ -5,6 +5,8 @@
 package sharedwithyoucore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -55,11 +57,14 @@ func NewStartCollaborationAction() *StartCollaborationAction {
 
 // FulfillUsingURLCollaborationIdentifier informs an app to set up the universal link and device independent identifier to provide to the system.
 func (sca *StartCollaborationAction) FulfillUsingURLCollaborationIdentifier(url string, collaborationIdentifier obj.Object) {
+	defer runtime.KeepAlive(sca)
+	defer runtime.KeepAlive(collaborationIdentifier)
 	objc.Send[objc.ID](objref.IDOf(sca), objc.RegisterName("fulfillUsingURL:collaborationIdentifier:"), rt.FileURL(url), objref.IDOf(collaborationIdentifier))
 }
 
 // CollaborationMetadata returns the collaboration metadata.
 func (sca *StartCollaborationAction) CollaborationMetadata() *CollaborationMetadata {
+	defer runtime.KeepAlive(sca)
 	_r := objc.Send[objc.ID](objref.IDOf(sca), objc.RegisterName("collaborationMetadata"))
 	return CollaborationMetadataFromID(_r)
 }

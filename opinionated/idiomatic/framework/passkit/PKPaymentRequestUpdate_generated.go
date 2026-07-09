@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func paymentRequestUpdateAdopt(id objc.ID) *PaymentRequestUpdate {
 
 // Description returns the object's -description text.
 func (pru *PaymentRequestUpdate) Description() string {
+	defer runtime.KeepAlive(pru)
 	return rt.Description(objref.IDOf(pru))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pru *PaymentRequestUpdate) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pru)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pru), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pru *PaymentRequestUpdate) IsKind(className string) bool {
+	defer runtime.KeepAlive(pru)
 	return rt.IsKind(objref.IDOf(pru), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pru *PaymentRequestUpdate) String() string {
+	defer runtime.KeepAlive(pru)
 	return rt.Description(objref.IDOf(pru))
 }
 
@@ -104,24 +111,28 @@ func (pru *PaymentRequestUpdate) WithMultiTokenContexts(items ...*PaymentTokenCo
 
 // WithRecurringPaymentRequest sets the recurring payment request to update the payment request with.
 func (pru *PaymentRequestUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestUpdate {
+	defer runtime.KeepAlive(recurringPaymentRequest)
 	objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("setRecurringPaymentRequest:"), objref.IDOf(recurringPaymentRequest))
 	return pru
 }
 
 // WithAutomaticReloadPaymentRequest sets the automatic reload payment request to update the payment request with.
 func (pru *PaymentRequestUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestUpdate {
+	defer runtime.KeepAlive(automaticReloadPaymentRequest)
 	objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("setAutomaticReloadPaymentRequest:"), objref.IDOf(automaticReloadPaymentRequest))
 	return pru
 }
 
 // WithDeferredPaymentRequest sets the deferred payment request to update the payment request with.
 func (pru *PaymentRequestUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestUpdate {
+	defer runtime.KeepAlive(deferredPaymentRequest)
 	objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("setDeferredPaymentRequest:"), objref.IDOf(deferredPaymentRequest))
 	return pru
 }
 
 // Status returns the status.
 func (pru *PaymentRequestUpdate) Status() PaymentAuthorizationStatus {
+	defer runtime.KeepAlive(pru)
 	_r := objc.Send[PaymentAuthorizationStatus](objref.IDOf(pru), objc.RegisterName("status"))
 	return _r
 }
@@ -130,6 +141,7 @@ func (pru *PaymentRequestUpdate) Status() PaymentAuthorizationStatus {
 //
 // PaymentSummaryItems returns the collection as a Go slice.
 func (pru *PaymentRequestUpdate) PaymentSummaryItems() []*PaymentSummaryItem {
+	defer runtime.KeepAlive(pru)
 	_arr := objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("paymentSummaryItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PaymentSummaryItem { return PaymentSummaryItemFromID(_id) })
 }
@@ -138,6 +150,7 @@ func (pru *PaymentRequestUpdate) PaymentSummaryItems() []*PaymentSummaryItem {
 //
 // ShippingMethods returns the collection as a Go slice.
 func (pru *PaymentRequestUpdate) ShippingMethods() []*ShippingMethod {
+	defer runtime.KeepAlive(pru)
 	_arr := objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("shippingMethods"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ShippingMethod { return ShippingMethodFromID(_id) })
 }
@@ -146,24 +159,28 @@ func (pru *PaymentRequestUpdate) ShippingMethods() []*ShippingMethod {
 //
 // MultiTokenContexts returns the collection as a Go slice.
 func (pru *PaymentRequestUpdate) MultiTokenContexts() []*PaymentTokenContext {
+	defer runtime.KeepAlive(pru)
 	_arr := objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("multiTokenContexts"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PaymentTokenContext { return PaymentTokenContextFromID(_id) })
 }
 
 // RecurringPaymentRequest returns the recurring payment request.
 func (pru *PaymentRequestUpdate) RecurringPaymentRequest() *RecurringPaymentRequest {
+	defer runtime.KeepAlive(pru)
 	_r := objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("recurringPaymentRequest"))
 	return RecurringPaymentRequestFromID(_r)
 }
 
 // AutomaticReloadPaymentRequest returns the automatic reload payment request.
 func (pru *PaymentRequestUpdate) AutomaticReloadPaymentRequest() *AutomaticReloadPaymentRequest {
+	defer runtime.KeepAlive(pru)
 	_r := objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("automaticReloadPaymentRequest"))
 	return AutomaticReloadPaymentRequestFromID(_r)
 }
 
 // DeferredPaymentRequest returns the deferred payment request.
 func (pru *PaymentRequestUpdate) DeferredPaymentRequest() *DeferredPaymentRequest {
+	defer runtime.KeepAlive(pru)
 	_r := objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("deferredPaymentRequest"))
 	return DeferredPaymentRequestFromID(_r)
 }

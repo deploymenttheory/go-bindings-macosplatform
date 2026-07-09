@@ -5,7 +5,10 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func healthConceptIdentifierAdopt(id objc.ID) *HealthConceptIdentifier {
 
 // Description returns the object's -description text.
 func (hci *HealthConceptIdentifier) Description() string {
+	defer runtime.KeepAlive(hci)
 	return rt.Description(objref.IDOf(hci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hci *HealthConceptIdentifier) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hci *HealthConceptIdentifier) IsKind(className string) bool {
+	defer runtime.KeepAlive(hci)
 	return rt.IsKind(objref.IDOf(hci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hci *HealthConceptIdentifier) String() string {
+	defer runtime.KeepAlive(hci)
 	return rt.Description(objref.IDOf(hci))
 }
 
@@ -73,7 +81,8 @@ func NewHealthConceptIdentifier() *HealthConceptIdentifier {
 }
 
 // Domain returns the domain this identifier belongs to. This value identifies the group of concepts the identifier comes from. For example, if the identifier represents a medication, the category will be the medication domain.
-func (hci *HealthConceptIdentifier) Domain() obj.Object {
+func (hci *HealthConceptIdentifier) Domain() *foundation.String {
+	defer runtime.KeepAlive(hci)
 	_r := objc.Send[objc.ID](objref.IDOf(hci), objc.RegisterName("domain"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }

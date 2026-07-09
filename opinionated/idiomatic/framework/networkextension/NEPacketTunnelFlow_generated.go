@@ -6,8 +6,10 @@ package networkextension
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,22 +51,27 @@ func nEPacketTunnelFlowAdopt(id objc.ID) *NEPacketTunnelFlow {
 
 // Description returns the object's -description text.
 func (nptf *NEPacketTunnelFlow) Description() string {
+	defer runtime.KeepAlive(nptf)
 	return rt.Description(objref.IDOf(nptf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nptf *NEPacketTunnelFlow) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nptf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nptf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nptf *NEPacketTunnelFlow) IsKind(className string) bool {
+	defer runtime.KeepAlive(nptf)
 	return rt.IsKind(objref.IDOf(nptf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nptf *NEPacketTunnelFlow) String() string {
+	defer runtime.KeepAlive(nptf)
 	return rt.Description(objref.IDOf(nptf))
 }
 
@@ -76,12 +83,14 @@ func NewNEPacketTunnelFlow() *NEPacketTunnelFlow {
 
 // ReadPacketsWithCompletionHandler reads IP packets from the TUN interface.
 func (nptf *NEPacketTunnelFlow) ReadPacketsWithCompletionHandler(completionHandler func(obj.Object, obj.Object)) {
+	defer runtime.KeepAlive(nptf)
 	objc.Send[objc.ID](objref.IDOf(nptf), objc.RegisterName("readPacketsWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { completionHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 }
 
 // WritePacketsWithProtocols writes IP packets to the TUN interface.
-func (nptf *NEPacketTunnelFlow) WritePacketsWithProtocols(packets []obj.Object, protocols []obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(nptf), objc.RegisterName("writePackets:withProtocols:"), purego.SliceToNSArray(packets, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(protocols, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (nptf *NEPacketTunnelFlow) WritePacketsWithProtocols(packets [][]byte, protocols []*foundation.Number) bool {
+	defer runtime.KeepAlive(nptf)
+	_r := objc.Send[bool](objref.IDOf(nptf), objc.RegisterName("writePackets:withProtocols:"), purego.SliceToNSArray(packets, func(_v []byte) objc.ID { return rt.BytesToNSData(_v) }), purego.SliceToNSArray(protocols, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
@@ -89,6 +98,7 @@ func (nptf *NEPacketTunnelFlow) WritePacketsWithProtocols(packets []obj.Object, 
 //
 // ReadPacketObjects blocks until the operation completes or ctx is cancelled.
 func (nptf *NEPacketTunnelFlow) ReadPacketObjects(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(nptf)
 	type _result struct {
 		val obj.Object
 		err error
@@ -111,6 +121,7 @@ func (nptf *NEPacketTunnelFlow) ReadPacketObjects(ctx context.Context) (result o
 
 // WritePacketObjects write multiple IP packets to the TUN interface.
 func (nptf *NEPacketTunnelFlow) WritePacketObjects(packets []*NEPacket) bool {
+	defer runtime.KeepAlive(nptf)
 	_r := objc.Send[bool](objref.IDOf(nptf), objc.RegisterName("writePacketObjects:"), purego.SliceToNSArray(packets, func(_v *NEPacket) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }

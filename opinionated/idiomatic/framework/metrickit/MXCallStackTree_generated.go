@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func callStackTreeAdopt(id objc.ID) *CallStackTree {
 
 // Description returns the object's -description text.
 func (cst *CallStackTree) Description() string {
+	defer runtime.KeepAlive(cst)
 	return rt.Description(objref.IDOf(cst))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cst *CallStackTree) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cst)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cst), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cst *CallStackTree) IsKind(className string) bool {
+	defer runtime.KeepAlive(cst)
 	return rt.IsKind(objref.IDOf(cst), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cst *CallStackTree) String() string {
+	defer runtime.KeepAlive(cst)
 	return rt.Description(objref.IDOf(cst))
 }
 
@@ -73,7 +80,8 @@ func NewCallStackTree() *CallStackTree {
 }
 
 // JSONRepresentation returns the contents of the stack tree in JSON format.
-func (cst *CallStackTree) JSONRepresentation() obj.Object {
+func (cst *CallStackTree) JSONRepresentation() []byte {
+	defer runtime.KeepAlive(cst)
 	_r := objc.Send[objc.ID](objref.IDOf(cst), objc.RegisterName("JSONRepresentation"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

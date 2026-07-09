@@ -5,6 +5,8 @@
 package imagecapturecore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,18 +56,21 @@ func NewScannerFeatureEnumeration() *ScannerFeatureEnumeration {
 
 // WithCurrentValue sets the current value. The current value can be set to one of the possible values in the "values" property below￼.
 func (sfe *ScannerFeatureEnumeration) WithCurrentValue(currentValue obj.Object) *ScannerFeatureEnumeration {
+	defer runtime.KeepAlive(currentValue)
 	objc.Send[objc.ID](objref.IDOf(sfe), objc.RegisterName("setCurrentValue:"), objref.IDOf(currentValue))
 	return sfe
 }
 
 // CurrentValue returns the current value. The current value can be set to one of the possible values in the "values" property below￼.
 func (sfe *ScannerFeatureEnumeration) CurrentValue() obj.Object {
+	defer runtime.KeepAlive(sfe)
 	_r := objc.Send[objc.ID](objref.IDOf(sfe), objc.RegisterName("currentValue"))
 	return obj.Wrap(_r)
 }
 
 // DefaultValue returns ￼The default value. The default value can be set to one of the possible values in the "values" property below.
 func (sfe *ScannerFeatureEnumeration) DefaultValue() obj.Object {
+	defer runtime.KeepAlive(sfe)
 	_r := objc.Send[objc.ID](objref.IDOf(sfe), objc.RegisterName("defaultValue"))
 	return obj.Wrap(_r)
 }
@@ -74,6 +79,7 @@ func (sfe *ScannerFeatureEnumeration) DefaultValue() obj.Object {
 //
 // Values returns the collection as a Go slice.
 func (sfe *ScannerFeatureEnumeration) Values() []obj.Object {
+	defer runtime.KeepAlive(sfe)
 	_arr := objc.Send[objc.ID](objref.IDOf(sfe), objc.RegisterName("values"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -82,6 +88,7 @@ func (sfe *ScannerFeatureEnumeration) Values() []obj.Object {
 //
 // MenuItemLabels returns the collection as a Go slice.
 func (sfe *ScannerFeatureEnumeration) MenuItemLabels() []string {
+	defer runtime.KeepAlive(sfe)
 	_arr := objc.Send[objc.ID](objref.IDOf(sfe), objc.RegisterName("menuItemLabels"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -90,6 +97,7 @@ func (sfe *ScannerFeatureEnumeration) MenuItemLabels() []string {
 //
 // MenuItemLabelsTooltips returns the collection as a Go slice.
 func (sfe *ScannerFeatureEnumeration) MenuItemLabelsTooltips() []string {
+	defer runtime.KeepAlive(sfe)
 	_arr := objc.Send[objc.ID](objref.IDOf(sfe), objc.RegisterName("menuItemLabelsTooltips"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

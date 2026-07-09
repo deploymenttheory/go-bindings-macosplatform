@@ -5,6 +5,8 @@
 package corespotlight
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func userQueryAdopt(id objc.ID) *UserQuery {
 
 // NewUserQueryWithUserQueryStringUserQueryContext creates a new user query that searches for the specified term.
 func NewUserQueryWithUserQueryStringUserQueryContext(userQueryString string, userQueryContext *UserQueryContext) *UserQuery {
+	defer runtime.KeepAlive(userQueryContext)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CSUserQuery")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUserQueryString:userQueryContext:"), purego.NSString(userQueryString), objref.IDOf(userQueryContext))
 	return userQueryAdopt(_id)
@@ -74,16 +77,21 @@ func (uq *UserQuery) WithProtectionClasses(items ...obj.Object) *UserQuery {
 
 // UserEngagedWithItemVisibleItemsUserInteractionType wraps the corresponding Objective-C method.
 func (uq *UserQuery) UserEngagedWithItemVisibleItemsUserInteractionType(item *SearchableItem, visibleItems []*SearchableItem, userInteractionType UserInteraction) {
+	defer runtime.KeepAlive(uq)
+	defer runtime.KeepAlive(item)
 	objc.Send[objc.ID](objref.IDOf(uq), objc.RegisterName("userEngagedWithItem:visibleItems:userInteractionType:"), objref.IDOf(item), purego.SliceToNSArray(visibleItems, func(_v *SearchableItem) objc.ID { return objref.IDOf(_v) }), userInteractionType)
 }
 
 // UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType wraps the corresponding Objective-C method.
 func (uq *UserQuery) UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion *Suggestion, visibleSuggestions []*Suggestion, userInteractionType UserInteraction) {
+	defer runtime.KeepAlive(uq)
+	defer runtime.KeepAlive(suggestion)
 	objc.Send[objc.ID](objref.IDOf(uq), objc.RegisterName("userEngagedWithSuggestion:visibleSuggestions:userInteractionType:"), objref.IDOf(suggestion), purego.SliceToNSArray(visibleSuggestions, func(_v *Suggestion) objc.ID { return objref.IDOf(_v) }), userInteractionType)
 }
 
 // FoundSuggestionCount returns the found suggestion count.
 func (uq *UserQuery) FoundSuggestionCount() int {
+	defer runtime.KeepAlive(uq)
 	_r := objc.Send[int](objref.IDOf(uq), objc.RegisterName("foundSuggestionCount"))
 	return _r
 }

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTROperationalCredentialsClusterAddNOCParamsAdopt(id objc.ID) *MTROperation
 
 // Description returns the object's -description text.
 func (moccanp *MTROperationalCredentialsClusterAddNOCParams) Description() string {
+	defer runtime.KeepAlive(moccanp)
 	return rt.Description(objref.IDOf(moccanp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (moccanp *MTROperationalCredentialsClusterAddNOCParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(moccanp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(moccanp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (moccanp *MTROperationalCredentialsClusterAddNOCParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(moccanp)
 	return rt.IsKind(objref.IDOf(moccanp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (moccanp *MTROperationalCredentialsClusterAddNOCParams) String() string {
+	defer runtime.KeepAlive(moccanp)
 	return rt.Description(objref.IDOf(moccanp))
 }
 
@@ -71,85 +79,96 @@ func NewMTROperationalCredentialsClusterAddNOCParams() *MTROperationalCredential
 }
 
 // WithNocValue sets the noc value.
-func (moccanp *MTROperationalCredentialsClusterAddNOCParams) WithNocValue(nocValue obj.Object) *MTROperationalCredentialsClusterAddNOCParams {
-	objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("setNocValue:"), objref.IDOf(nocValue))
+func (moccanp *MTROperationalCredentialsClusterAddNOCParams) WithNocValue(nocValue []byte) *MTROperationalCredentialsClusterAddNOCParams {
+	objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("setNocValue:"), rt.BytesToNSData(nocValue))
 	return moccanp
 }
 
 // WithIcacValue sets the icac value.
-func (moccanp *MTROperationalCredentialsClusterAddNOCParams) WithIcacValue(icacValue obj.Object) *MTROperationalCredentialsClusterAddNOCParams {
-	objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("setIcacValue:"), objref.IDOf(icacValue))
+func (moccanp *MTROperationalCredentialsClusterAddNOCParams) WithIcacValue(icacValue []byte) *MTROperationalCredentialsClusterAddNOCParams {
+	objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("setIcacValue:"), rt.BytesToNSData(icacValue))
 	return moccanp
 }
 
 // WithIpkValue sets the ipk value.
-func (moccanp *MTROperationalCredentialsClusterAddNOCParams) WithIpkValue(ipkValue obj.Object) *MTROperationalCredentialsClusterAddNOCParams {
-	objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("setIpkValue:"), objref.IDOf(ipkValue))
+func (moccanp *MTROperationalCredentialsClusterAddNOCParams) WithIpkValue(ipkValue []byte) *MTROperationalCredentialsClusterAddNOCParams {
+	objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("setIpkValue:"), rt.BytesToNSData(ipkValue))
 	return moccanp
 }
 
 // WithCaseAdminSubject sets the case admin subject.
 func (moccanp *MTROperationalCredentialsClusterAddNOCParams) WithCaseAdminSubject(caseAdminSubject obj.Object) *MTROperationalCredentialsClusterAddNOCParams {
+	defer runtime.KeepAlive(caseAdminSubject)
 	objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("setCaseAdminSubject:"), objref.IDOf(caseAdminSubject))
 	return moccanp
 }
 
 // WithAdminVendorID sets the admin vendor ID.
 func (moccanp *MTROperationalCredentialsClusterAddNOCParams) WithAdminVendorID(adminVendorId obj.Object) *MTROperationalCredentialsClusterAddNOCParams {
+	defer runtime.KeepAlive(adminVendorId)
 	objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("setAdminVendorId:"), objref.IDOf(adminVendorId))
 	return moccanp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (moccanp *MTROperationalCredentialsClusterAddNOCParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterAddNOCParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return moccanp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (moccanp *MTROperationalCredentialsClusterAddNOCParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterAddNOCParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return moccanp
 }
 
 // NocValue returns the noc value.
-func (moccanp *MTROperationalCredentialsClusterAddNOCParams) NocValue() obj.Object {
+func (moccanp *MTROperationalCredentialsClusterAddNOCParams) NocValue() []byte {
+	defer runtime.KeepAlive(moccanp)
 	_r := objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("nocValue"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // IcacValue returns the icac value.
-func (moccanp *MTROperationalCredentialsClusterAddNOCParams) IcacValue() obj.Object {
+func (moccanp *MTROperationalCredentialsClusterAddNOCParams) IcacValue() []byte {
+	defer runtime.KeepAlive(moccanp)
 	_r := objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("icacValue"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // IpkValue returns the ipk value.
-func (moccanp *MTROperationalCredentialsClusterAddNOCParams) IpkValue() obj.Object {
+func (moccanp *MTROperationalCredentialsClusterAddNOCParams) IpkValue() []byte {
+	defer runtime.KeepAlive(moccanp)
 	_r := objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("ipkValue"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // CaseAdminSubject returns the case admin subject.
-func (moccanp *MTROperationalCredentialsClusterAddNOCParams) CaseAdminSubject() obj.Object {
+func (moccanp *MTROperationalCredentialsClusterAddNOCParams) CaseAdminSubject() *foundation.Number {
+	defer runtime.KeepAlive(moccanp)
 	_r := objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("caseAdminSubject"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // AdminVendorID returns the admin vendor ID.
-func (moccanp *MTROperationalCredentialsClusterAddNOCParams) AdminVendorID() obj.Object {
+func (moccanp *MTROperationalCredentialsClusterAddNOCParams) AdminVendorID() *foundation.Number {
+	defer runtime.KeepAlive(moccanp)
 	_r := objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("adminVendorId"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (moccanp *MTROperationalCredentialsClusterAddNOCParams) TimedInvokeTimeoutMs() obj.Object {
+func (moccanp *MTROperationalCredentialsClusterAddNOCParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(moccanp)
 	_r := objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (moccanp *MTROperationalCredentialsClusterAddNOCParams) ServerSideProcessingTimeout() obj.Object {
+func (moccanp *MTROperationalCredentialsClusterAddNOCParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(moccanp)
 	_r := objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

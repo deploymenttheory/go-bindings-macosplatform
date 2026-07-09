@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,35 +50,42 @@ func mTRClusterPathAdopt(id objc.ID) *MTRClusterPath {
 
 // Description returns the object's -description text.
 func (mcp *MTRClusterPath) Description() string {
+	defer runtime.KeepAlive(mcp)
 	return rt.Description(objref.IDOf(mcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcp *MTRClusterPath) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcp *MTRClusterPath) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcp)
 	return rt.IsKind(objref.IDOf(mcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcp *MTRClusterPath) String() string {
+	defer runtime.KeepAlive(mcp)
 	return rt.Description(objref.IDOf(mcp))
 }
 
 // Endpoint returns the endpoint.
-func (mcp *MTRClusterPath) Endpoint() obj.Object {
+func (mcp *MTRClusterPath) Endpoint() *foundation.Number {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("endpoint"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Cluster returns the cluster.
-func (mcp *MTRClusterPath) Cluster() obj.Object {
+func (mcp *MTRClusterPath) Cluster() *foundation.Number {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("cluster"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRClusterPath marks MTRClusterPath — and, by embedding promotion, its

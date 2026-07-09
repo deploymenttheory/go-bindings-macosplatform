@@ -6,6 +6,8 @@ package gamekit
 
 import (
 	"context"
+	"runtime"
+	"time"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +52,27 @@ func achievementAdopt(id objc.ID) *Achievement {
 
 // Description returns the object's -description text.
 func (a *Achievement) Description() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (a *Achievement) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (a *Achievement) IsKind(className string) bool {
+	defer runtime.KeepAlive(a)
 	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (a *Achievement) String() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
@@ -78,6 +85,7 @@ func NewAchievementWithIdentifier(identifier string) *Achievement {
 
 // NewAchievementWithIdentifierPlayer initializes an achievement for a player.
 func NewAchievementWithIdentifierPlayer(identifier string, player *Player) *Achievement {
+	defer runtime.KeepAlive(player)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKAchievement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:player:"), purego.NSString(identifier), objref.IDOf(player))
 	return achievementAdopt(_id)
@@ -110,6 +118,7 @@ func (a *Achievement) WithShowsCompletionBanner(showsCompletionBanner bool) *Ach
 
 // Identifier returns achievement identifier
 func (a *Achievement) Identifier() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -119,30 +128,35 @@ func (a *Achievement) Identifier() string {
 
 // PercentComplete returns required, Percentage of achievement complete.
 func (a *Achievement) PercentComplete() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("percentComplete"))
 	return _r
 }
 
 // IsCompleted reports whether set to false until percentComplete = 100.
 func (a *Achievement) IsCompleted() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isCompleted"))
 	return _r
 }
 
 // LastReportedDate returns date the achievement was last reported. Read-only. Created at initialization
-func (a *Achievement) LastReportedDate() obj.Object {
+func (a *Achievement) LastReportedDate() time.Time {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("lastReportedDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ShowsCompletionBanner reports whether a banner will be momentarily displayed after reporting a completed achievement
 func (a *Achievement) ShowsCompletionBanner() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("showsCompletionBanner"))
 	return _r
 }
 
 // Player returns the identifier of the player that earned the achievement.
 func (a *Achievement) Player() *Player {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
@@ -151,6 +165,7 @@ func (a *Achievement) Player() *Player {
 //
 // ReportAchievement blocks until the operation completes or ctx is cancelled.
 func (a *Achievement) ReportAchievement(ctx context.Context) error {
+	defer runtime.KeepAlive(a)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -168,12 +183,14 @@ func (a *Achievement) ReportAchievement(ctx context.Context) error {
 
 // IsHidden reports whether the object is hidden.
 func (a *Achievement) IsHidden() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isHidden"))
 	return _r
 }
 
 // PlayerID returns the player ID.
 func (a *Achievement) PlayerID() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("playerID"))
 	if _r == 0 {
 		return ""
@@ -185,6 +202,7 @@ func (a *Achievement) PlayerID() string {
 //
 // SelectChallengeablePlayers blocks until the operation completes or ctx is cancelled.
 func (a *Achievement) SelectChallengeablePlayers(ctx context.Context, players []*Player) (result obj.Object, err error) {
+	defer runtime.KeepAlive(a)
 	type _result struct {
 		val obj.Object
 		err error
@@ -208,6 +226,7 @@ func (a *Achievement) SelectChallengeablePlayers(ctx context.Context, players []
 
 // IssueChallengeToPlayersMessage * This method is obsolete. It will never be invoked and its implementation does nothing**
 func (a *Achievement) IssueChallengeToPlayersMessage(playerIDs []string, message string) {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("issueChallengeToPlayers:message:"), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }), purego.NSString(message))
 }
 
@@ -215,6 +234,7 @@ func (a *Achievement) IssueChallengeToPlayersMessage(playerIDs []string, message
 //
 // SelectChallengeablePlayerIDs blocks until the operation completes or ctx is cancelled.
 func (a *Achievement) SelectChallengeablePlayerIDs(ctx context.Context, playerIDs []string) (result obj.Object, err error) {
+	defer runtime.KeepAlive(a)
 	type _result struct {
 		val obj.Object
 		err error

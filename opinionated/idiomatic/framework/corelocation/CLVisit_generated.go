@@ -5,6 +5,9 @@
 package corelocation
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func visitAdopt(id objc.ID) *Visit {
 
 // Description returns the object's -description text.
 func (v_ *Visit) Description() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (v_ *Visit) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (v_ *Visit) IsKind(className string) bool {
+	defer runtime.KeepAlive(v_)
 	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (v_ *Visit) String() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
@@ -73,13 +81,15 @@ func NewVisit() *Visit {
 }
 
 // ArrivalDate returns the arrival date.
-func (v_ *Visit) ArrivalDate() obj.Object {
+func (v_ *Visit) ArrivalDate() time.Time {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("arrivalDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // DepartureDate returns the departure date.
-func (v_ *Visit) DepartureDate() obj.Object {
+func (v_ *Visit) DepartureDate() time.Time {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("departureDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }

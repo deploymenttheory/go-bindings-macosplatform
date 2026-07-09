@@ -5,6 +5,8 @@
 package sharedwithyoucore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,41 +49,49 @@ func personIdentityProofAdopt(id objc.ID) *PersonIdentityProof {
 
 // Description returns the object's -description text.
 func (pip *PersonIdentityProof) Description() string {
+	defer runtime.KeepAlive(pip)
 	return rt.Description(objref.IDOf(pip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pip *PersonIdentityProof) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pip)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pip *PersonIdentityProof) IsKind(className string) bool {
+	defer runtime.KeepAlive(pip)
 	return rt.IsKind(objref.IDOf(pip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pip *PersonIdentityProof) String() string {
+	defer runtime.KeepAlive(pip)
 	return rt.Description(objref.IDOf(pip))
 }
 
 // InclusionHashes returns hashes of missing Merkle tree nodes that can provide proof of inclusion. The data contains an array of SHA256 hash of the user's combined public identities.
 //
 // InclusionHashes returns the collection as a Go slice.
-func (pip *PersonIdentityProof) InclusionHashes() []obj.Object {
+func (pip *PersonIdentityProof) InclusionHashes() [][]byte {
+	defer runtime.KeepAlive(pip)
 	_arr := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("inclusionHashes"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) []byte { return rt.NSDataToBytes(_id) })
 }
 
 // PublicKey returns public key of local device
-func (pip *PersonIdentityProof) PublicKey() obj.Object {
+func (pip *PersonIdentityProof) PublicKey() []byte {
+	defer runtime.KeepAlive(pip)
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("publicKey"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // PublicKeyIndex returns index of local public key in the Merkle tree This data can be used to determine if the node is the left or the right child
 func (pip *PersonIdentityProof) PublicKeyIndex() int {
+	defer runtime.KeepAlive(pip)
 	_r := objc.Send[int](objref.IDOf(pip), objc.RegisterName("publicKeyIndex"))
 	return _r
 }

@@ -142,8 +142,8 @@ func (o *CAMetalLayer) EDRMetadata() *CAEDRMetadata {
 	return CAEDRMetadataFromID(_ret)
 }
 
-func (o *CAMetalLayer) SetEDRMetadata(eDRMetadata *CAEDRMetadata) {
-	o.Ptr().Send(_cAMetalLayerSelSetEDRMetadata, eDRMetadata.Ptr())
+func (o *CAMetalLayer) SetEDRMetadata(edrMetadata *CAEDRMetadata) {
+	o.Ptr().Send(_cAMetalLayerSelSetEDRMetadata, edrMetadata.Ptr())
 }
 
 func (o *CAMetalLayer) DisplaySyncEnabled() bool {

@@ -5,6 +5,8 @@
 package pencilkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func strokePointAdopt(id objc.ID) *StrokePoint {
 
 // Description returns the object's -description text.
 func (sp *StrokePoint) Description() string {
+	defer runtime.KeepAlive(sp)
 	return rt.Description(objref.IDOf(sp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sp *StrokePoint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sp *StrokePoint) IsKind(className string) bool {
+	defer runtime.KeepAlive(sp)
 	return rt.IsKind(objref.IDOf(sp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sp *StrokePoint) String() string {
+	defer runtime.KeepAlive(sp)
 	return rt.Description(objref.IDOf(sp))
 }
 
@@ -90,54 +97,63 @@ func NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondar
 
 // Location returns location of the point.
 func (sp *StrokePoint) Location() corefoundation.CGPoint {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(sp), objc.RegisterName("location"))
 	return _r
 }
 
 // TimeOffset returns time offset since the start of the stroke path in seconds.
 func (sp *StrokePoint) TimeOffset() float64 {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("timeOffset"))
 	return _r
 }
 
 // Size returns size of the point.
 func (sp *StrokePoint) Size() corefoundation.CGSize {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(sp), objc.RegisterName("size"))
 	return _r
 }
 
 // Opacity returns opacity of the point 0-2.
 func (sp *StrokePoint) Opacity() float64 {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("opacity"))
 	return _r
 }
 
 // Azimuth returns azimuth of the point in radians, 0.0-2π radians
 func (sp *StrokePoint) Azimuth() float64 {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("azimuth"))
 	return _r
 }
 
 // Force returns force used to create this point.
 func (sp *StrokePoint) Force() float64 {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("force"))
 	return _r
 }
 
 // Altitude returns altitude used to create this point in radians, 0.0-π/2 radians
 func (sp *StrokePoint) Altitude() float64 {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("altitude"))
 	return _r
 }
 
 // SecondaryScale returns the scaling of the point for secondary effects. For example the scaling of the pigment in the watercolor ink.
 func (sp *StrokePoint) SecondaryScale() float64 {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("secondaryScale"))
 	return _r
 }
 
 // Threshold returns the threshold for clipping the stroke rendering. When rendering only pixels with an alpha greater than the threshold are drawn. A threshold of 0 has no affect on rendering, a threshold of 1 does not draw anything. Thresholds are only used for some inks, eg. `PKInkIdentifierReed`.
 func (sp *StrokePoint) Threshold() float64 {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("threshold"))
 	return _r
 }

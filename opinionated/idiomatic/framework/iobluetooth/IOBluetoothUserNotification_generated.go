@@ -5,6 +5,8 @@
 package iobluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func iOBluetoothUserNotificationAdopt(id objc.ID) *IOBluetoothUserNotification {
 
 // Description returns the object's -description text.
 func (ibun *IOBluetoothUserNotification) Description() string {
+	defer runtime.KeepAlive(ibun)
 	return rt.Description(objref.IDOf(ibun))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ibun *IOBluetoothUserNotification) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ibun)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ibun), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ibun *IOBluetoothUserNotification) IsKind(className string) bool {
+	defer runtime.KeepAlive(ibun)
 	return rt.IsKind(objref.IDOf(ibun), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ibun *IOBluetoothUserNotification) String() string {
+	defer runtime.KeepAlive(ibun)
 	return rt.Description(objref.IDOf(ibun))
 }
 
@@ -74,5 +81,6 @@ func NewIOBluetoothUserNotification() *IOBluetoothUserNotification {
 
 // Unregister called to unregister the target notification.
 func (ibun *IOBluetoothUserNotification) Unregister() {
+	defer runtime.KeepAlive(ibun)
 	objc.Send[objc.ID](objref.IDOf(ibun), objc.RegisterName("unregister"))
 }

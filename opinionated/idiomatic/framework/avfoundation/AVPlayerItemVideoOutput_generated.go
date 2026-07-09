@@ -5,10 +5,14 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,16 +52,16 @@ func playerItemVideoOutputAdopt(id objc.ID) *PlayerItemVideoOutput {
 }
 
 // NewPlayerItemVideoOutputWithPixelBufferAttributes creates a video output object using the specified pixel buffer attributes.
-func NewPlayerItemVideoOutputWithPixelBufferAttributes(pixelBufferAttributes obj.Object) *PlayerItemVideoOutput {
+func NewPlayerItemVideoOutputWithPixelBufferAttributes(pixelBufferAttributes map[string]obj.Object) *PlayerItemVideoOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemVideoOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPixelBufferAttributes:"), objref.IDOf(pixelBufferAttributes))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPixelBufferAttributes:"), rt.MapToDict(pixelBufferAttributes, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return playerItemVideoOutputAdopt(_id)
 }
 
 // NewPlayerItemVideoOutputWithOutputSettings creates a video output object initialized with the specified output settings.
-func NewPlayerItemVideoOutputWithOutputSettings(outputSettings obj.Object) *PlayerItemVideoOutput {
+func NewPlayerItemVideoOutputWithOutputSettings(outputSettings map[string]obj.Object) *PlayerItemVideoOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemVideoOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOutputSettings:"), objref.IDOf(outputSettings))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOutputSettings:"), rt.MapToDict(outputSettings, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return playerItemVideoOutputAdopt(_id)
 }
 
@@ -69,19 +73,22 @@ func (pivo *PlayerItemVideoOutput) WithSuppressesPlayerRendering(suppressesPlaye
 
 // HasNewPixelBufferForItemTime returns a Boolean value that indicates whether video output is available for the specified item time.
 func (pivo *PlayerItemVideoOutput) HasNewPixelBufferForItemTime(itemTime coremedia.CMTime) bool {
+	defer runtime.KeepAlive(pivo)
 	_r := objc.Send[bool](objref.IDOf(pivo), objc.RegisterName("hasNewPixelBufferForItemTime:"), itemTime)
 	return _r
 }
 
 // RequestNotificationOfMediaDataChangeWithAdvanceInterval tells the receiver that the video out put client is entering a quiescent state.
 func (pivo *PlayerItemVideoOutput) RequestNotificationOfMediaDataChangeWithAdvanceInterval(interval float64) {
+	defer runtime.KeepAlive(pivo)
 	objc.Send[objc.ID](objref.IDOf(pivo), objc.RegisterName("requestNotificationOfMediaDataChangeWithAdvanceInterval:"), interval)
 }
 
 // DelegateQueue returns the delegate queue.
-func (pivo *PlayerItemVideoOutput) DelegateQueue() obj.Object {
+func (pivo *PlayerItemVideoOutput) DelegateQueue() *foundation.Object {
+	defer runtime.KeepAlive(pivo)
 	_r := objc.Send[objc.ID](objref.IDOf(pivo), objc.RegisterName("delegateQueue"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 var _ PlayerItemOutputProvider = (*PlayerItemVideoOutput)(nil)

@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func cNNNormalizationNodeAdopt(id objc.ID) *CNNNormalizationNode {
 
 // NewCNNNormalizationNodeWithSource creates a new CNNNormalizationNode.
 func NewCNNNormalizationNodeWithSource(sourceNode *NNImageNode) *CNNNormalizationNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNormalizationNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNNormalizationNodeAdopt(_id)
@@ -78,18 +81,21 @@ func (cnn *CNNNormalizationNode) WithLabel(label string) *CNNNormalizationNode {
 
 // Alpha returns the value of alpha.  Default is 1.0. Must be non-negative.
 func (cnn *CNNNormalizationNode) Alpha() float32 {
+	defer runtime.KeepAlive(cnn)
 	_r := objc.Send[float32](objref.IDOf(cnn), objc.RegisterName("alpha"))
 	return _r
 }
 
 // Beta returns the value of beta.  Default is 5.0
 func (cnn *CNNNormalizationNode) Beta() float32 {
+	defer runtime.KeepAlive(cnn)
 	_r := objc.Send[float32](objref.IDOf(cnn), objc.RegisterName("beta"))
 	return _r
 }
 
 // Delta returns the value of delta.  Default is 1.0
 func (cnn *CNNNormalizationNode) Delta() float32 {
+	defer runtime.KeepAlive(cnn)
 	_r := objc.Send[float32](objref.IDOf(cnn), objc.RegisterName("delta"))
 	return _r
 }

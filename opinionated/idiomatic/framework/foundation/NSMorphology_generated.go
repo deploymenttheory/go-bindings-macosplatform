@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func morphologyAdopt(id objc.ID) *Morphology {
 
 // Description returns the object's -description text.
 func (m *Morphology) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Morphology) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Morphology) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Morphology) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
@@ -130,67 +136,78 @@ func (m *Morphology) WithObservationInfo(observationInfo unsafe.Pointer) *Morpho
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (m *Morphology) WithScriptingProperties(scriptingProperties obj.Object) *Morphology {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (m *Morphology) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Morphology {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return m
 }
 
 // GrammaticalGender returns the grammatical gender.
 func (m *Morphology) GrammaticalGender() GrammaticalGender {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[GrammaticalGender](objref.IDOf(m), objc.RegisterName("grammaticalGender"))
 	return _r
 }
 
 // PartOfSpeech returns the part of speech.
 func (m *Morphology) PartOfSpeech() GrammaticalPartOfSpeech {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[GrammaticalPartOfSpeech](objref.IDOf(m), objc.RegisterName("partOfSpeech"))
 	return _r
 }
 
 // Number returns the number.
 func (m *Morphology) Number() GrammaticalNumber {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[GrammaticalNumber](objref.IDOf(m), objc.RegisterName("number"))
 	return _r
 }
 
 // GrammaticalCase returns the grammatical case.
 func (m *Morphology) GrammaticalCase() GrammaticalCase {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[GrammaticalCase](objref.IDOf(m), objc.RegisterName("grammaticalCase"))
 	return _r
 }
 
 // Determination returns the determination.
 func (m *Morphology) Determination() GrammaticalDetermination {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[GrammaticalDetermination](objref.IDOf(m), objc.RegisterName("determination"))
 	return _r
 }
 
 // GrammaticalPerson returns the grammatical person.
 func (m *Morphology) GrammaticalPerson() GrammaticalPerson {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[GrammaticalPerson](objref.IDOf(m), objc.RegisterName("grammaticalPerson"))
 	return _r
 }
 
 // PronounType returns the pronoun type.
 func (m *Morphology) PronounType() GrammaticalPronounType {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[GrammaticalPronounType](objref.IDOf(m), objc.RegisterName("pronounType"))
 	return _r
 }
 
 // Definiteness returns the definiteness.
 func (m *Morphology) Definiteness() GrammaticalDefiniteness {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[GrammaticalDefiniteness](objref.IDOf(m), objc.RegisterName("definiteness"))
 	return _r
 }
 
 // CustomPronounForLanguage returns any custom pronoun behavior this morphology applies to the given language.
 func (m *Morphology) CustomPronounForLanguage(language string) *MorphologyCustomPronoun {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("customPronounForLanguage:"), purego.NSString(language))
 	return MorphologyCustomPronounFromID(_r)
 }
 
 // SetCustomPronounForLanguage sets a custom pronoun behavior for this morphology to apply to the given language.
 func (m *Morphology) SetCustomPronounForLanguage(features *MorphologyCustomPronoun, language string) error {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(features)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(m), objc.RegisterName("setCustomPronoun:forLanguage:error:"), objref.IDOf(features), purego.NSString(language), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -201,6 +218,7 @@ func (m *Morphology) SetCustomPronounForLanguage(features *MorphologyCustomProno
 
 // IsUnspecified reports whether the object is unspecified.
 func (m *Morphology) IsUnspecified() bool {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("isUnspecified"))
 	return _r
 }

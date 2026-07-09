@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -98,17 +100,22 @@ func (cin *CNNInstanceNormalization) WithLabel(label string) *CNNInstanceNormali
 
 // ReloadGammaAndBetaFromDataSource reinitialize the filter using the data source provided at kernel initialization.
 func (cin *CNNInstanceNormalization) ReloadGammaAndBetaFromDataSource() {
+	defer runtime.KeepAlive(cin)
 	objc.Send[objc.ID](objref.IDOf(cin), objc.RegisterName("reloadGammaAndBetaFromDataSource"))
 }
 
 // ResultStateForSourceImageSourceStatesDestinationImage return a MPSCNNInstanceNormalizationGradientState object for the provided source image, source states, and destination image.
 func (cin *CNNInstanceNormalization) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage obj.Object, sourceStates []obj.Object, destinationImage obj.Object) obj.Object {
+	defer runtime.KeepAlive(cin)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(destinationImage)
 	_r := objc.Send[objc.ID](objref.IDOf(cin), objc.RegisterName("resultStateForSourceImage:sourceStates:destinationImage:"), objref.IDOf(sourceImage), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationImage))
 	return obj.Wrap(_r)
 }
 
 // Epsilon returns the epsilon value used to bias the variance when normalizing.
 func (cin *CNNInstanceNormalization) Epsilon() float32 {
+	defer runtime.KeepAlive(cin)
 	_r := objc.Send[float32](objref.IDOf(cin), objc.RegisterName("epsilon"))
 	return _r
 }

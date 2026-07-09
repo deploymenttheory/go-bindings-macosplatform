@@ -1,4 +1,6 @@
 func (x *Serializer) PropertyList(data obj.Object) (obj.Object, PropertyListFormat, error) {
+defer runtime.KeepAlive(x)
+defer runtime.KeepAlive(data)
 var _out0 PropertyListFormat
 var _nsErr uintptr
 _r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyListWithData:format:error:"), objref.IDOf(data), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))

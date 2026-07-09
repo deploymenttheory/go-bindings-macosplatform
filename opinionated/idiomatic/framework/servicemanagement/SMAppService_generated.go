@@ -6,6 +6,7 @@ package servicemanagement
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func appServiceAdopt(id objc.ID) *AppService {
 
 // Description returns the object's -description text.
 func (as *AppService) Description() string {
+	defer runtime.KeepAlive(as)
 	return rt.Description(objref.IDOf(as))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (as *AppService) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(as), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (as *AppService) IsKind(className string) bool {
+	defer runtime.KeepAlive(as)
 	return rt.IsKind(objref.IDOf(as), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (as *AppService) String() string {
+	defer runtime.KeepAlive(as)
 	return rt.Description(objref.IDOf(as))
 }
 
@@ -80,6 +86,7 @@ func NewAppService() *AppService {
 //
 // RegisterAndReturnError returns an error if the operation did not succeed.
 func (as *AppService) RegisterAndReturnError() error {
+	defer runtime.KeepAlive(as)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(as), objc.RegisterName("registerAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -92,6 +99,7 @@ func (as *AppService) RegisterAndReturnError() error {
 //
 // UnregisterAndReturnError returns an error if the operation did not succeed.
 func (as *AppService) UnregisterAndReturnError() error {
+	defer runtime.KeepAlive(as)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(as), objc.RegisterName("unregisterAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -104,6 +112,7 @@ func (as *AppService) UnregisterAndReturnError() error {
 //
 // Unregister blocks until the operation completes or ctx is cancelled.
 func (as *AppService) Unregister(ctx context.Context) error {
+	defer runtime.KeepAlive(as)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -121,6 +130,7 @@ func (as *AppService) Unregister(ctx context.Context) error {
 
 // Status returns the status for the service The status API can be used to check what selection a user has made regarding allowing the service to launch. If the user has denied execution, the return value will be SMAppServiceRequiresApproval. If the service has been unregistered, the return value will be SMAppServiceNotRegistered
 func (as *AppService) Status() AppServiceStatus {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[AppServiceStatus](objref.IDOf(as), objc.RegisterName("status"))
 	return _r
 }

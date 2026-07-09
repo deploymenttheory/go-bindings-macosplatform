@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func wKWebViewConfigurationAdopt(id objc.ID) *WKWebViewConfiguration {
 
 // Description returns the object's -description text.
 func (wwvc *WKWebViewConfiguration) Description() string {
+	defer runtime.KeepAlive(wwvc)
 	return rt.Description(objref.IDOf(wwvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wwvc *WKWebViewConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wwvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wwvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wwvc *WKWebViewConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(wwvc)
 	return rt.IsKind(objref.IDOf(wwvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wwvc *WKWebViewConfiguration) String() string {
+	defer runtime.KeepAlive(wwvc)
 	return rt.Description(objref.IDOf(wwvc))
 }
 
@@ -80,6 +87,7 @@ func NewWKWebViewConfiguration() *WKWebViewConfiguration {
 
 // WithProcessPool sets the object that coordinates the processes the web view uses to render its web content and execute scripts.
 func (wwvc *WKWebViewConfiguration) WithProcessPool(processPool *WKProcessPool) *WKWebViewConfiguration {
+	defer runtime.KeepAlive(processPool)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwvc), objc.RegisterName("setProcessPool:"), objref.IDOf(processPool))
 	})
@@ -88,6 +96,7 @@ func (wwvc *WKWebViewConfiguration) WithProcessPool(processPool *WKProcessPool) 
 
 // WithPreferences sets the object that manages the preference-related settings for the web view.
 func (wwvc *WKWebViewConfiguration) WithPreferences(preferences *WKPreferences) *WKWebViewConfiguration {
+	defer runtime.KeepAlive(preferences)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwvc), objc.RegisterName("setPreferences:"), objref.IDOf(preferences))
 	})
@@ -96,6 +105,7 @@ func (wwvc *WKWebViewConfiguration) WithPreferences(preferences *WKPreferences) 
 
 // WithUserContentController sets the object that coordinates interactions between your app’s native code and the webpage’s scripts and other content.
 func (wwvc *WKWebViewConfiguration) WithUserContentController(userContentController *WKUserContentController) *WKWebViewConfiguration {
+	defer runtime.KeepAlive(userContentController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwvc), objc.RegisterName("setUserContentController:"), objref.IDOf(userContentController))
 	})
@@ -104,6 +114,7 @@ func (wwvc *WKWebViewConfiguration) WithUserContentController(userContentControl
 
 // WithWebExtensionController sets the web extension controller to associate with the web view.
 func (wwvc *WKWebViewConfiguration) WithWebExtensionController(webExtensionController *WKWebExtensionController) *WKWebViewConfiguration {
+	defer runtime.KeepAlive(webExtensionController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwvc), objc.RegisterName("setWebExtensionController:"), objref.IDOf(webExtensionController))
 	})
@@ -112,6 +123,7 @@ func (wwvc *WKWebViewConfiguration) WithWebExtensionController(webExtensionContr
 
 // WithWebsiteDataStore sets the object you use to get and set the site’s cookies and to track the cached data objects.
 func (wwvc *WKWebViewConfiguration) WithWebsiteDataStore(websiteDataStore *WKWebsiteDataStore) *WKWebViewConfiguration {
+	defer runtime.KeepAlive(websiteDataStore)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwvc), objc.RegisterName("setWebsiteDataStore:"), objref.IDOf(websiteDataStore))
 	})
@@ -168,6 +180,7 @@ func (wwvc *WKWebViewConfiguration) WithMediaTypesRequiringUserActionForPlayback
 
 // WithDefaultWebpagePreferences sets the default preferences to use when loading and rendering content.
 func (wwvc *WKWebViewConfiguration) WithDefaultWebpagePreferences(defaultWebpagePreferences *WKWebpagePreferences) *WKWebViewConfiguration {
+	defer runtime.KeepAlive(defaultWebpagePreferences)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwvc), objc.RegisterName("setDefaultWebpagePreferences:"), objref.IDOf(defaultWebpagePreferences))
 	})
@@ -208,6 +221,7 @@ func (wwvc *WKWebViewConfiguration) WithSupportsAdaptiveImageGlyph(supportsAdapt
 
 // ProcessPool returns the process pool from which to obtain the view's web content process. When a web view is initialized, a new web content process will be created for it from the specified pool, or an existing process in that pool will be used.
 func (wwvc *WKWebViewConfiguration) ProcessPool() *WKProcessPool {
+	defer runtime.KeepAlive(wwvc)
 	var _mainthread0 *WKProcessPool
 	purego.Main(func() {
 		_mainthread0 = func() *WKProcessPool {
@@ -221,6 +235,7 @@ func (wwvc *WKWebViewConfiguration) ProcessPool() *WKProcessPool {
 
 // Preferences returns the preference settings to be used by the web view.
 func (wwvc *WKWebViewConfiguration) Preferences() *WKPreferences {
+	defer runtime.KeepAlive(wwvc)
 	var _mainthread0 *WKPreferences
 	purego.Main(func() {
 		_mainthread0 = func() *WKPreferences {
@@ -234,6 +249,7 @@ func (wwvc *WKWebViewConfiguration) Preferences() *WKPreferences {
 
 // UserContentController returns the user content controller to associate with the web view.
 func (wwvc *WKWebViewConfiguration) UserContentController() *WKUserContentController {
+	defer runtime.KeepAlive(wwvc)
 	var _mainthread0 *WKUserContentController
 	purego.Main(func() {
 		_mainthread0 = func() *WKUserContentController {
@@ -247,6 +263,7 @@ func (wwvc *WKWebViewConfiguration) UserContentController() *WKUserContentContro
 
 // WebExtensionController returns the web extension controller to associate with the web view.
 func (wwvc *WKWebViewConfiguration) WebExtensionController() *WKWebExtensionController {
+	defer runtime.KeepAlive(wwvc)
 	var _mainthread0 *WKWebExtensionController
 	purego.Main(func() {
 		_mainthread0 = func() *WKWebExtensionController {
@@ -260,6 +277,7 @@ func (wwvc *WKWebViewConfiguration) WebExtensionController() *WKWebExtensionCont
 
 // WebsiteDataStore returns the website data store to be used by the web view.
 func (wwvc *WKWebViewConfiguration) WebsiteDataStore() *WKWebsiteDataStore {
+	defer runtime.KeepAlive(wwvc)
 	var _mainthread0 *WKWebsiteDataStore
 	purego.Main(func() {
 		_mainthread0 = func() *WKWebsiteDataStore {
@@ -273,6 +291,7 @@ func (wwvc *WKWebViewConfiguration) WebsiteDataStore() *WKWebsiteDataStore {
 
 // SuppressesIncrementalRendering reports whether the web view suppresses content rendering until it is fully loaded into memory. The default value is false.
 func (wwvc *WKWebViewConfiguration) SuppressesIncrementalRendering() bool {
+	defer runtime.KeepAlive(wwvc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -286,6 +305,7 @@ func (wwvc *WKWebViewConfiguration) SuppressesIncrementalRendering() bool {
 
 // ApplicationNameForUserAgent returns the name of the application as used in the user agent string.
 func (wwvc *WKWebViewConfiguration) ApplicationNameForUserAgent() string {
+	defer runtime.KeepAlive(wwvc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -302,6 +322,7 @@ func (wwvc *WKWebViewConfiguration) ApplicationNameForUserAgent() string {
 
 // AllowsAirPlayForMediaPlayback reports whether airPlay is allowed. The default value is true.
 func (wwvc *WKWebViewConfiguration) AllowsAirPlayForMediaPlayback() bool {
+	defer runtime.KeepAlive(wwvc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -315,6 +336,7 @@ func (wwvc *WKWebViewConfiguration) AllowsAirPlayForMediaPlayback() bool {
 
 // ShowsSystemScreenTimeBlockingView reports whether the System Screen Time blocking view should be shown. The default value is true.
 func (wwvc *WKWebViewConfiguration) ShowsSystemScreenTimeBlockingView() bool {
+	defer runtime.KeepAlive(wwvc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -328,6 +350,7 @@ func (wwvc *WKWebViewConfiguration) ShowsSystemScreenTimeBlockingView() bool {
 
 // UpgradeKnownHostsToHTTPS reports whether HTTP requests to servers known to support HTTPS should be automatically upgraded to HTTPS requests. The default value is true.
 func (wwvc *WKWebViewConfiguration) UpgradeKnownHostsToHTTPS() bool {
+	defer runtime.KeepAlive(wwvc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -341,6 +364,7 @@ func (wwvc *WKWebViewConfiguration) UpgradeKnownHostsToHTTPS() bool {
 
 // MediaTypesRequiringUserActionForPlayback returns the media types requiring user action for playback.
 func (wwvc *WKWebViewConfiguration) MediaTypesRequiringUserActionForPlayback() WKAudiovisualMediaTypes {
+	defer runtime.KeepAlive(wwvc)
 	var _mainthread0 WKAudiovisualMediaTypes
 	purego.Main(func() {
 		_mainthread0 = func() WKAudiovisualMediaTypes {
@@ -354,6 +378,7 @@ func (wwvc *WKWebViewConfiguration) MediaTypesRequiringUserActionForPlayback() W
 
 // DefaultWebpagePreferences returns the set of default webpage preferences to use when loading and rendering content. These default webpage preferences are additionally passed to the navigation delegate in -webView:decidePolicyForNavigationAction:preferences:decisionHandler:.
 func (wwvc *WKWebViewConfiguration) DefaultWebpagePreferences() *WKWebpagePreferences {
+	defer runtime.KeepAlive(wwvc)
 	var _mainthread0 *WKWebpagePreferences
 	purego.Main(func() {
 		_mainthread0 = func() *WKWebpagePreferences {
@@ -367,6 +392,7 @@ func (wwvc *WKWebViewConfiguration) DefaultWebpagePreferences() *WKWebpagePrefer
 
 // LimitsNavigationsToAppBoundDomains wraps the corresponding Objective-C method.
 func (wwvc *WKWebViewConfiguration) LimitsNavigationsToAppBoundDomains() bool {
+	defer runtime.KeepAlive(wwvc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -380,6 +406,7 @@ func (wwvc *WKWebViewConfiguration) LimitsNavigationsToAppBoundDomains() bool {
 
 // AllowsInlinePredictions reports whether inline predictions are allowed. The default value is `NO`. If false, inline predictions are disabled regardless of the system setting. If true, they are enabled based on the system setting.
 func (wwvc *WKWebViewConfiguration) AllowsInlinePredictions() bool {
+	defer runtime.KeepAlive(wwvc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -393,6 +420,7 @@ func (wwvc *WKWebViewConfiguration) AllowsInlinePredictions() bool {
 
 // UserInterfaceDirectionPolicy returns the directionality of user interface elements. Possible values are described in WKUserInterfaceDirectionPolicy. The default value is WKUserInterfaceDirectionPolicyContent.
 func (wwvc *WKWebViewConfiguration) UserInterfaceDirectionPolicy() WKUserInterfaceDirectionPolicy {
+	defer runtime.KeepAlive(wwvc)
 	var _mainthread0 WKUserInterfaceDirectionPolicy
 	purego.Main(func() {
 		_mainthread0 = func() WKUserInterfaceDirectionPolicy {
@@ -406,6 +434,7 @@ func (wwvc *WKWebViewConfiguration) UserInterfaceDirectionPolicy() WKUserInterfa
 
 // SupportsAdaptiveImageGlyph reports whether insertion of adaptive image glyphs is allowed. The default value is `NO`. If `NO`, adaptive image glyphs are inserted as regular images. If `YES`, they are inserted with the full adaptive sizing behavior.
 func (wwvc *WKWebViewConfiguration) SupportsAdaptiveImageGlyph() bool {
+	defer runtime.KeepAlive(wwvc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

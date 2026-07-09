@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func rNNMatrixTrainingStateAdopt(id objc.ID) *RNNMatrixTrainingState {
 
 // Description returns the object's -description text.
 func (rmts *RNNMatrixTrainingState) Description() string {
+	defer runtime.KeepAlive(rmts)
 	return rt.Description(objref.IDOf(rmts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rmts *RNNMatrixTrainingState) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rmts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rmts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rmts *RNNMatrixTrainingState) IsKind(className string) bool {
+	defer runtime.KeepAlive(rmts)
 	return rt.IsKind(objref.IDOf(rmts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rmts *RNNMatrixTrainingState) String() string {
+	defer runtime.KeepAlive(rmts)
 	return rt.Description(objref.IDOf(rmts))
 }
 

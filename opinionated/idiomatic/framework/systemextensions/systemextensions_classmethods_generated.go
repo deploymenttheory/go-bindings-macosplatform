@@ -5,6 +5,8 @@
 package systemextensions
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -19,18 +21,21 @@ func SharedManager() *SystemExtensionManager {
 
 // ActivationRequestForExtensionQueue creates a request to activate a System Extension.
 func ActivationRequestForExtensionQueue(identifier string, queue obj.Object) *SystemExtensionRequest {
+	defer runtime.KeepAlive(queue)
 	_r := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionRequest")), objc.RegisterName("activationRequestForExtension:queue:"), purego.NSString(identifier), objref.IDOf(queue))
 	return SystemExtensionRequestFromID(_r)
 }
 
 // DeactivationRequestForExtensionQueue creates a request to deactivate a System Extension.
 func DeactivationRequestForExtensionQueue(identifier string, queue obj.Object) *SystemExtensionRequest {
+	defer runtime.KeepAlive(queue)
 	_r := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionRequest")), objc.RegisterName("deactivationRequestForExtension:queue:"), purego.NSString(identifier), objref.IDOf(queue))
 	return SystemExtensionRequestFromID(_r)
 }
 
 // PropertiesRequestForExtensionQueue creates a request to get information about System Extensions. This method creates a new request to retrieve the properties of any System Extensions matching the given identifier.
 func PropertiesRequestForExtensionQueue(identifier string, queue obj.Object) *SystemExtensionRequest {
+	defer runtime.KeepAlive(queue)
 	_r := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionRequest")), objc.RegisterName("propertiesRequestForExtension:queue:"), purego.NSString(identifier), objref.IDOf(queue))
 	return SystemExtensionRequestFromID(_r)
 }

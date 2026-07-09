@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func animationContextAdopt(id objc.ID) *AnimationContext {
 
 // Description returns the object's -description text.
 func (ac *AnimationContext) Description() string {
+	defer runtime.KeepAlive(ac)
 	return rt.Description(objref.IDOf(ac))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ac *AnimationContext) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ac)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ac), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ac *AnimationContext) IsKind(className string) bool {
+	defer runtime.KeepAlive(ac)
 	return rt.IsKind(objref.IDOf(ac), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ac *AnimationContext) String() string {
+	defer runtime.KeepAlive(ac)
 	return rt.Description(objref.IDOf(ac))
 }
 
@@ -80,6 +87,7 @@ func (ac *AnimationContext) WithDuration(duration float64) *AnimationContext {
 
 // WithTimingFunction sets the timing function used for all animations within this animation proxy group.
 func (ac *AnimationContext) WithTimingFunction(timingFunction obj.Object) *AnimationContext {
+	defer runtime.KeepAlive(timingFunction)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
 	return ac
 }
@@ -98,18 +106,21 @@ func (ac *AnimationContext) WithAllowsImplicitAnimation(allowsImplicitAnimation 
 
 // Duration returns the duration.
 func (ac *AnimationContext) Duration() float64 {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[float64](objref.IDOf(ac), objc.RegisterName("duration"))
 	return _r
 }
 
 // TimingFunction returns the timing function.
 func (ac *AnimationContext) TimingFunction() obj.Object {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("timingFunction"))
 	return obj.Wrap(_r)
 }
 
 // AllowsImplicitAnimation wraps the corresponding Objective-C method.
 func (ac *AnimationContext) AllowsImplicitAnimation() bool {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("allowsImplicitAnimation"))
 	return _r
 }

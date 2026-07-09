@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func warpGeometryAdopt(id objc.ID) *WarpGeometry {
 
 // Description returns the object's -description text.
 func (wg *WarpGeometry) Description() string {
+	defer runtime.KeepAlive(wg)
 	return rt.Description(objref.IDOf(wg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wg *WarpGeometry) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wg)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wg *WarpGeometry) IsKind(className string) bool {
+	defer runtime.KeepAlive(wg)
 	return rt.IsKind(objref.IDOf(wg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wg *WarpGeometry) String() string {
+	defer runtime.KeepAlive(wg)
 	return rt.Description(objref.IDOf(wg))
 }
 

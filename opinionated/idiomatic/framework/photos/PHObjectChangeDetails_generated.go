@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func objectChangeDetailsAdopt(id objc.ID) *ObjectChangeDetails {
 
 // Description returns the object's -description text.
 func (ocd *ObjectChangeDetails) Description() string {
+	defer runtime.KeepAlive(ocd)
 	return rt.Description(objref.IDOf(ocd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ocd *ObjectChangeDetails) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ocd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ocd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ocd *ObjectChangeDetails) IsKind(className string) bool {
+	defer runtime.KeepAlive(ocd)
 	return rt.IsKind(objref.IDOf(ocd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ocd *ObjectChangeDetails) String() string {
+	defer runtime.KeepAlive(ocd)
 	return rt.Description(objref.IDOf(ocd))
 }
 
@@ -74,24 +81,28 @@ func NewObjectChangeDetails() *ObjectChangeDetails {
 
 // ObjectBeforeChanges returns the object before changes.
 func (ocd *ObjectChangeDetails) ObjectBeforeChanges() obj.Object {
+	defer runtime.KeepAlive(ocd)
 	_r := objc.Send[objc.ID](objref.IDOf(ocd), objc.RegisterName("objectBeforeChanges"))
 	return obj.Wrap(_r)
 }
 
 // ObjectAfterChanges returns the object after changes.
 func (ocd *ObjectChangeDetails) ObjectAfterChanges() obj.Object {
+	defer runtime.KeepAlive(ocd)
 	_r := objc.Send[objc.ID](objref.IDOf(ocd), objc.RegisterName("objectAfterChanges"))
 	return obj.Wrap(_r)
 }
 
 // AssetContentChanged wraps the corresponding Objective-C method.
 func (ocd *ObjectChangeDetails) AssetContentChanged() bool {
+	defer runtime.KeepAlive(ocd)
 	_r := objc.Send[bool](objref.IDOf(ocd), objc.RegisterName("assetContentChanged"))
 	return _r
 }
 
 // ObjectWasDeleted wraps the corresponding Objective-C method.
 func (ocd *ObjectChangeDetails) ObjectWasDeleted() bool {
+	defer runtime.KeepAlive(ocd)
 	_r := objc.Send[bool](objref.IDOf(ocd), objc.RegisterName("objectWasDeleted"))
 	return _r
 }

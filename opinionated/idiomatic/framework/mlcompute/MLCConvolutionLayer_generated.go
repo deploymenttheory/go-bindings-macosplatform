@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,30 +67,35 @@ func (cl *ConvolutionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Con
 
 // Descriptor returns the convolution descriptor
 func (cl *ConvolutionLayer) Descriptor() *ConvolutionDescriptor {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("descriptor"))
 	return ConvolutionDescriptorFromID(_r)
 }
 
 // Weights returns the weights tensor used by the convolution layer
 func (cl *ConvolutionLayer) Weights() *Tensor {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("weights"))
 	return TensorFromID(_r)
 }
 
 // Biases returns the bias tensor used by the convolution layer
 func (cl *ConvolutionLayer) Biases() *Tensor {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("biases"))
 	return TensorFromID(_r)
 }
 
 // WeightsParameter returns the weights tensor parameter used for optimizer update
 func (cl *ConvolutionLayer) WeightsParameter() *TensorParameter {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("weightsParameter"))
 	return TensorParameterFromID(_r)
 }
 
 // BiasesParameter returns the bias tensor parameter used for optimizer update
 func (cl *ConvolutionLayer) BiasesParameter() *TensorParameter {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("biasesParameter"))
 	return TensorParameterFromID(_r)
 }

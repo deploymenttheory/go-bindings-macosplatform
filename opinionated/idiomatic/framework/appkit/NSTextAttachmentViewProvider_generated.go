@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func textAttachmentViewProviderAdopt(id objc.ID) *TextAttachmentViewProvider {
 
 // Description returns the object's -description text.
 func (tavp *TextAttachmentViewProvider) Description() string {
+	defer runtime.KeepAlive(tavp)
 	return rt.Description(objref.IDOf(tavp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tavp *TextAttachmentViewProvider) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tavp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tavp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tavp *TextAttachmentViewProvider) IsKind(className string) bool {
+	defer runtime.KeepAlive(tavp)
 	return rt.IsKind(objref.IDOf(tavp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tavp *TextAttachmentViewProvider) String() string {
+	defer runtime.KeepAlive(tavp)
 	return rt.Description(objref.IDOf(tavp))
 }
 
@@ -74,6 +81,7 @@ func NewTextAttachmentViewProvider() *TextAttachmentViewProvider {
 
 // WithView sets the text attachment’s view.
 func (tavp *TextAttachmentViewProvider) WithView(view ViewProvider) *TextAttachmentViewProvider {
+	defer runtime.KeepAlive(view)
 	objc.Send[objc.ID](objref.IDOf(tavp), objc.RegisterName("setView:"), objref.IDOf(view))
 	return tavp
 }
@@ -86,29 +94,34 @@ func (tavp *TextAttachmentViewProvider) WithTracksTextAttachmentViewBounds(track
 
 // LoadView draws the custom view hierarchy that text attachment view subclasses implement.
 func (tavp *TextAttachmentViewProvider) LoadView() {
+	defer runtime.KeepAlive(tavp)
 	objc.Send[objc.ID](objref.IDOf(tavp), objc.RegisterName("loadView"))
 }
 
 // TextAttachment returns the text attachment.
 func (tavp *TextAttachmentViewProvider) TextAttachment() *TextAttachment {
+	defer runtime.KeepAlive(tavp)
 	_r := objc.Send[objc.ID](objref.IDOf(tavp), objc.RegisterName("textAttachment"))
 	return TextAttachmentFromID(_r)
 }
 
 // TextLayoutManager returns the text layout manager.
 func (tavp *TextAttachmentViewProvider) TextLayoutManager() *TextLayoutManager {
+	defer runtime.KeepAlive(tavp)
 	_r := objc.Send[objc.ID](objref.IDOf(tavp), objc.RegisterName("textLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
 // View returns the view.
 func (tavp *TextAttachmentViewProvider) View() *View {
+	defer runtime.KeepAlive(tavp)
 	_r := objc.Send[objc.ID](objref.IDOf(tavp), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
 // TracksTextAttachmentViewBounds wraps the corresponding Objective-C method.
 func (tavp *TextAttachmentViewProvider) TracksTextAttachmentViewBounds() bool {
+	defer runtime.KeepAlive(tavp)
 	_r := objc.Send[bool](objref.IDOf(tavp), objc.RegisterName("tracksTextAttachmentViewBounds"))
 	return _r
 }

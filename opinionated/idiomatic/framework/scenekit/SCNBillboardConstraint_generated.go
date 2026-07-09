@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -77,6 +79,7 @@ func (bc *BillboardConstraint) WithIncremental(incremental bool) *BillboardConst
 
 // FreeAxes returns the free axes.
 func (bc *BillboardConstraint) FreeAxes() BillboardAxis {
+	defer runtime.KeepAlive(bc)
 	_r := objc.Send[BillboardAxis](objref.IDOf(bc), objc.RegisterName("freeAxes"))
 	return _r
 }

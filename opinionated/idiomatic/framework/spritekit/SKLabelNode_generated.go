@@ -5,10 +5,14 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -110,6 +114,7 @@ func (ln *LabelNode) WithText(text string) *LabelNode {
 
 // WithAttributedText sets the attributed string displayed by the label.
 func (ln *LabelNode) WithAttributedText(attributedText obj.Object) *LabelNode {
+	defer runtime.KeepAlive(attributedText)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAttributedText:"), objref.IDOf(attributedText))
 	})
@@ -126,6 +131,7 @@ func (ln *LabelNode) WithFontSize(fontSize float64) *LabelNode {
 
 // WithFontColor sets the color of the label.
 func (ln *LabelNode) WithFontColor(fontColor obj.Object) *LabelNode {
+	defer runtime.KeepAlive(fontColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
 	})
@@ -142,6 +148,7 @@ func (ln *LabelNode) WithColorBlendFactor(colorBlendFactor float64) *LabelNode {
 
 // WithColor sets an alternative to the font color that can be used for animations.
 func (ln *LabelNode) WithColor(color obj.Object) *LabelNode {
+	defer runtime.KeepAlive(color)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setColor:"), objref.IDOf(color))
 	})
@@ -246,6 +253,7 @@ func (ln *LabelNode) WithName(name string) *LabelNode {
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (ln *LabelNode) WithPhysicsBody(physicsBody *PhysicsBody) *LabelNode {
+	defer runtime.KeepAlive(physicsBody)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	})
@@ -254,6 +262,7 @@ func (ln *LabelNode) WithPhysicsBody(physicsBody *PhysicsBody) *LabelNode {
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (ln *LabelNode) WithUserData(userData obj.Object) *LabelNode {
+	defer runtime.KeepAlive(userData)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	})
@@ -262,6 +271,7 @@ func (ln *LabelNode) WithUserData(userData obj.Object) *LabelNode {
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (ln *LabelNode) WithReachConstraints(reachConstraints *ReachConstraints) *LabelNode {
+	defer runtime.KeepAlive(reachConstraints)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	})
@@ -278,9 +288,9 @@ func (ln *LabelNode) WithConstraints(items ...*Constraint) *LabelNode {
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
-func (ln *LabelNode) WithAttributeValues(attributeValues obj.Object) *LabelNode {
+func (ln *LabelNode) WithAttributeValues(attributeValues map[string]*AttributeValue) *LabelNode {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAttributeValues:"), rt.MapToDict(attributeValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *AttributeValue) objc.ID { return objref.IDOf(_v) }))
 	})
 	return ln
 }
@@ -327,6 +337,7 @@ func (ln *LabelNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CG
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (ln *LabelNode) WithAccessibilityParent(accessibilityParent obj.Object) *LabelNode {
+	defer runtime.KeepAlive(accessibilityParent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	})
@@ -359,6 +370,7 @@ func (ln *LabelNode) WithAccessibilityEnabled(accessibilityEnabled bool) *LabelN
 
 // VerticalAlignmentMode returns the vertical alignment mode.
 func (ln *LabelNode) VerticalAlignmentMode() LabelVerticalAlignmentMode {
+	defer runtime.KeepAlive(ln)
 	var _mainthread0 LabelVerticalAlignmentMode
 	purego.Main(func() {
 		_mainthread0 = func() LabelVerticalAlignmentMode {
@@ -372,6 +384,7 @@ func (ln *LabelNode) VerticalAlignmentMode() LabelVerticalAlignmentMode {
 
 // HorizontalAlignmentMode returns the horizontal alignment mode.
 func (ln *LabelNode) HorizontalAlignmentMode() LabelHorizontalAlignmentMode {
+	defer runtime.KeepAlive(ln)
 	var _mainthread0 LabelHorizontalAlignmentMode
 	purego.Main(func() {
 		_mainthread0 = func() LabelHorizontalAlignmentMode {
@@ -385,6 +398,7 @@ func (ln *LabelNode) HorizontalAlignmentMode() LabelHorizontalAlignmentMode {
 
 // NumberOfLines determines the number of lines to draw. The default value is 1 (single line). A value of 0 means no limit. If the height of the text reaches the # of lines the text will be truncated using the line break mode.
 func (ln *LabelNode) NumberOfLines() int {
+	defer runtime.KeepAlive(ln)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -398,6 +412,7 @@ func (ln *LabelNode) NumberOfLines() int {
 
 // PreferredMaxLayoutWidth returns if nonzero, this is used when determining layout width for multiline labels. Default is zero.
 func (ln *LabelNode) PreferredMaxLayoutWidth() float64 {
+	defer runtime.KeepAlive(ln)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -411,6 +426,7 @@ func (ln *LabelNode) PreferredMaxLayoutWidth() float64 {
 
 // FontName returns the font name.
 func (ln *LabelNode) FontName() string {
+	defer runtime.KeepAlive(ln)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -427,6 +443,7 @@ func (ln *LabelNode) FontName() string {
 
 // Text returns the text.
 func (ln *LabelNode) Text() string {
+	defer runtime.KeepAlive(ln)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -442,12 +459,13 @@ func (ln *LabelNode) Text() string {
 }
 
 // AttributedText returns the attributed text.
-func (ln *LabelNode) AttributedText() obj.Object {
-	var _mainthread0 obj.Object
+func (ln *LabelNode) AttributedText() *foundation.AttributedString {
+	defer runtime.KeepAlive(ln)
+	var _mainthread0 *foundation.AttributedString
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.AttributedString {
 			_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("attributedText"))
-			return obj.Wrap(_r)
+			return foundation.AttributedStringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -456,6 +474,7 @@ func (ln *LabelNode) AttributedText() obj.Object {
 
 // FontSize returns the font size.
 func (ln *LabelNode) FontSize() float64 {
+	defer runtime.KeepAlive(ln)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -469,6 +488,7 @@ func (ln *LabelNode) FontSize() float64 {
 
 // FontColor returns base color that the text is rendered with (if supported by the font)
 func (ln *LabelNode) FontColor() obj.Object {
+	defer runtime.KeepAlive(ln)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -482,6 +502,7 @@ func (ln *LabelNode) FontColor() obj.Object {
 
 // ColorBlendFactor returns controls the blending between the rendered text and a color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
 func (ln *LabelNode) ColorBlendFactor() float64 {
+	defer runtime.KeepAlive(ln)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -495,6 +516,7 @@ func (ln *LabelNode) ColorBlendFactor() float64 {
 
 // Color returns color to be blended with the text based on the colorBlendFactor
 func (ln *LabelNode) Color() obj.Object {
+	defer runtime.KeepAlive(ln)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -508,6 +530,7 @@ func (ln *LabelNode) Color() obj.Object {
 
 // BlendMode sets the blend mode to use when composing the sprite with the final framebuffer.
 func (ln *LabelNode) BlendMode() BlendMode {
+	defer runtime.KeepAlive(ln)
 	var _mainthread0 BlendMode
 	purego.Main(func() {
 		_mainthread0 = func() BlendMode {

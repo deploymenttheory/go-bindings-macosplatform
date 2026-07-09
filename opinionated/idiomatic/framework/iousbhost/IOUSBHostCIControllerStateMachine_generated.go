@@ -5,6 +5,7 @@
 package iousbhost
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,27 +51,33 @@ func hostCIControllerStateMachineAdopt(id objc.ID) *HostCIControllerStateMachine
 
 // Description returns the object's -description text.
 func (hccsm *HostCIControllerStateMachine) Description() string {
+	defer runtime.KeepAlive(hccsm)
 	return rt.Description(objref.IDOf(hccsm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hccsm *HostCIControllerStateMachine) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hccsm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hccsm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hccsm *HostCIControllerStateMachine) IsKind(className string) bool {
+	defer runtime.KeepAlive(hccsm)
 	return rt.IsKind(objref.IDOf(hccsm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hccsm *HostCIControllerStateMachine) String() string {
+	defer runtime.KeepAlive(hccsm)
 	return rt.Description(objref.IDOf(hccsm))
 }
 
-// NewHostCIControllerStateMachineWithInterfaceError initializes an IOUSBHostCIControllerStateMachine object The IOUSBHostCIControllerStateMachine defaults to the IOUSBHostCIControllerStateOff state.
-func NewHostCIControllerStateMachineWithInterfaceError(interface_ *HostControllerInterface) (result *HostCIControllerStateMachine, err error) {
+// NewHostCIControllerStateMachineWithInterface initializes an IOUSBHostCIControllerStateMachine object The IOUSBHostCIControllerStateMachine defaults to the IOUSBHostCIControllerStateOff state.
+func NewHostCIControllerStateMachineWithInterface(interface_ *HostControllerInterface) (result *HostCIControllerStateMachine, err error) {
+	defer runtime.KeepAlive(interface_)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOUSBHostCIControllerStateMachine")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterface:error:"), objref.IDOf(interface_), unsafe.Pointer(&_nsErr))
@@ -82,6 +89,7 @@ func NewHostCIControllerStateMachineWithInterfaceError(interface_ *HostControlle
 
 // EnqueueUpdatedFrameTimestamp enqueue frame and timestamp messages for delivery to the kernel driver If the controller interface is in the IOUSBHostCIControllerStateActive state, messages with the type IOUSBHostCIMessageTypeFrameNumberUpdate and IOUSBHostCIMessageTypeFrameTimestampUpdate will be generated using the provided inputs, and enqueued for delivery to the kernel driver. The frame and timestamp information provided effectively measure the duration of the controller's 1ms frame in terms of system time.  A 1% frame duration variation is permitted.  A larger frame duration variation will result in a IOUSBHostCIExceptionTypeFrameUpdateError.
 func (hccsm *HostCIControllerStateMachine) EnqueueUpdatedFrameTimestamp(frame uint64, timestamp uint64) error {
+	defer runtime.KeepAlive(hccsm)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(hccsm), objc.RegisterName("enqueueUpdatedFrame:timestamp:error:"), frame, timestamp, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -92,12 +100,14 @@ func (hccsm *HostCIControllerStateMachine) EnqueueUpdatedFrameTimestamp(frame ui
 
 // ControllerState returns the controller state.
 func (hccsm *HostCIControllerStateMachine) ControllerState() HostCIControllerState {
+	defer runtime.KeepAlive(hccsm)
 	_r := objc.Send[HostCIControllerState](objref.IDOf(hccsm), objc.RegisterName("controllerState"))
 	return _r
 }
 
 // ControllerInterface returns the controller interface.
 func (hccsm *HostCIControllerStateMachine) ControllerInterface() *HostControllerInterface {
+	defer runtime.KeepAlive(hccsm)
 	_r := objc.Send[objc.ID](objref.IDOf(hccsm), objc.RegisterName("controllerInterface"))
 	return HostControllerInterfaceFromID(_r)
 }

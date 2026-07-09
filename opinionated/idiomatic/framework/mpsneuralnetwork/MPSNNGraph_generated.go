@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func nNGraphAdopt(id objc.ID) *NNGraph {
 
 // Description returns the object's -description text.
 func (ng *NNGraph) Description() string {
+	defer runtime.KeepAlive(ng)
 	return rt.Description(objref.IDOf(ng))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ng *NNGraph) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ng)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ng), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ng *NNGraph) IsKind(className string) bool {
+	defer runtime.KeepAlive(ng)
 	return rt.IsKind(objref.IDOf(ng), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ng *NNGraph) String() string {
+	defer runtime.KeepAlive(ng)
 	return rt.Description(objref.IDOf(ng))
 }
 
@@ -78,53 +85,62 @@ func (ng *NNGraph) WithOutputStateIsTemporary(outputStateIsTemporary bool) *NNGr
 
 // ReloadFromDataSources reinitialize all graph nodes from data sources A number of the nodes that make up a graph have a data source associated with them, for example a MPSCNNConvolutionDataSource or a MPSCNNBatchNormalizationDataSource. Generally, the data is read from these once at graph initialization time and then not looked at again, except during the weight / parameter update phase of the corresponding gradient nodes and then only if CPU updates are requested.  Otherwise, update occurs on the GPU, and the data in the data source is thereafter ignored. It can happen, though, that your application has determined the graph should load a new set of weights from the data source. When this method is called, the graph will find all nodes that support reloading and direct them to reinitialize themselves based on their data source. This process occurs immediately. Your application will need to make sure any GPU work being done by the graph is complete to ensure data coherency. Most nodes do not have a data source and will not be modified. Nodes that are not used by the graph will not be updated.
 func (ng *NNGraph) ReloadFromDataSources() {
+	defer runtime.KeepAlive(ng)
 	objc.Send[objc.ID](objref.IDOf(ng), objc.RegisterName("reloadFromDataSources"))
 }
 
 // ReadCountForSourceImageAtIndex find the number of times a image will be read by the graph * From the set of images (or image batches) passed in to the graph, find the number of times the graph will read an image.  This may be needed by your application to correctly set the MPSImage.readCount property.
 func (ng *NNGraph) ReadCountForSourceImageAtIndex(index int) int {
+	defer runtime.KeepAlive(ng)
 	_r := objc.Send[int](objref.IDOf(ng), objc.RegisterName("readCountForSourceImageAtIndex:"), index)
 	return _r
 }
 
 // ReadCountForSourceStateAtIndex find the number of times a state will be read by the graph * From the set of state (or state batches) passed in to the graph, find the number of times the graph will read a state.  This may be needed by your application to correctly set the MPSState.readCount property.
 func (ng *NNGraph) ReadCountForSourceStateAtIndex(index int) int {
+	defer runtime.KeepAlive(ng)
 	_r := objc.Send[int](objref.IDOf(ng), objc.RegisterName("readCountForSourceStateAtIndex:"), index)
 	return _r
 }
 
 // SourceImageHandles get a list of identifiers for source images needed to calculate the result image
 func (ng *NNGraph) SourceImageHandles() []obj.Object {
+	defer runtime.KeepAlive(ng)
 	_r := objc.Send[objc.ID](objref.IDOf(ng), objc.RegisterName("sourceImageHandles"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SourceStateHandles get a list of identifiers for source state objects needed to calculate the result image Not guaranteed to be in the same order as resultStateHandles
 func (ng *NNGraph) SourceStateHandles() []obj.Object {
+	defer runtime.KeepAlive(ng)
 	_r := objc.Send[objc.ID](objref.IDOf(ng), objc.RegisterName("sourceStateHandles"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // IntermediateImageHandles get a list of identifiers for intermediate images objects produced by the graph
 func (ng *NNGraph) IntermediateImageHandles() []obj.Object {
+	defer runtime.KeepAlive(ng)
 	_r := objc.Send[objc.ID](objref.IDOf(ng), objc.RegisterName("intermediateImageHandles"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ResultStateHandles get a list of identifiers for result state objects produced by the graph Not guaranteed to be in the same order as sourceStateHandles
 func (ng *NNGraph) ResultStateHandles() []obj.Object {
+	defer runtime.KeepAlive(ng)
 	_r := objc.Send[objc.ID](objref.IDOf(ng), objc.RegisterName("resultStateHandles"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // OutputStateIsTemporary reports whether should MPSState objects produced by -encodeToCommandBuffer... be temporary objects. See MPSState description. Default: false
 func (ng *NNGraph) OutputStateIsTemporary() bool {
+	defer runtime.KeepAlive(ng)
 	_r := objc.Send[bool](objref.IDOf(ng), objc.RegisterName("outputStateIsTemporary"))
 	return _r
 }
 
 // ResultImageIsNeeded reports whether set at -init time. If false, nil will be returned from -encode calls and some computation may be omitted.
 func (ng *NNGraph) ResultImageIsNeeded() bool {
+	defer runtime.KeepAlive(ng)
 	_r := objc.Send[bool](objref.IDOf(ng), objc.RegisterName("resultImageIsNeeded"))
 	return _r
 }

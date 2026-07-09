@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRDeviceEnergyManagementClusterPowerAdjustStartEventAdopt(id objc.ID) *MTR
 
 // Description returns the object's -description text.
 func (mdemcpase *MTRDeviceEnergyManagementClusterPowerAdjustStartEvent) Description() string {
+	defer runtime.KeepAlive(mdemcpase)
 	return rt.Description(objref.IDOf(mdemcpase))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdemcpase *MTRDeviceEnergyManagementClusterPowerAdjustStartEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdemcpase)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdemcpase), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdemcpase *MTRDeviceEnergyManagementClusterPowerAdjustStartEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdemcpase)
 	return rt.IsKind(objref.IDOf(mdemcpase), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdemcpase *MTRDeviceEnergyManagementClusterPowerAdjustStartEvent) String() string {
+	defer runtime.KeepAlive(mdemcpase)
 	return rt.Description(objref.IDOf(mdemcpase))
 }
 

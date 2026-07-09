@@ -5,6 +5,8 @@
 package speech
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func speechRecognitionRequestAdopt(id objc.ID) *SpeechRecognitionRequest {
 
 // Description returns the object's -description text.
 func (srr *SpeechRecognitionRequest) Description() string {
+	defer runtime.KeepAlive(srr)
 	return rt.Description(objref.IDOf(srr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (srr *SpeechRecognitionRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(srr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(srr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (srr *SpeechRecognitionRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(srr)
 	return rt.IsKind(objref.IDOf(srr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (srr *SpeechRecognitionRequest) String() string {
+	defer runtime.KeepAlive(srr)
 	return rt.Description(objref.IDOf(srr))
 }
 
@@ -107,18 +114,21 @@ func (srr *SpeechRecognitionRequest) WithAddsPunctuation(addsPunctuation bool) *
 
 // WithCustomizedLanguageModel sets the customized language model.
 func (srr *SpeechRecognitionRequest) WithCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) *SpeechRecognitionRequest {
+	defer runtime.KeepAlive(customizedLanguageModel)
 	objc.Send[objc.ID](objref.IDOf(srr), objc.RegisterName("setCustomizedLanguageModel:"), objref.IDOf(customizedLanguageModel))
 	return srr
 }
 
 // TaskHint returns a value that indicates the type of speech recognition being performed. The default value of this property is “SFSpeechRecognitionTaskHint/unspecified“. For a valid list of values, see “SFSpeechRecognitionTaskHint“.
 func (srr *SpeechRecognitionRequest) TaskHint() SpeechRecognitionTaskHint {
+	defer runtime.KeepAlive(srr)
 	_r := objc.Send[SpeechRecognitionTaskHint](objref.IDOf(srr), objc.RegisterName("taskHint"))
 	return _r
 }
 
 // ShouldReportPartialResults wraps the corresponding Objective-C method.
 func (srr *SpeechRecognitionRequest) ShouldReportPartialResults() bool {
+	defer runtime.KeepAlive(srr)
 	_r := objc.Send[bool](objref.IDOf(srr), objc.RegisterName("shouldReportPartialResults"))
 	return _r
 }
@@ -127,12 +137,14 @@ func (srr *SpeechRecognitionRequest) ShouldReportPartialResults() bool {
 //
 // ContextualStrings returns the collection as a Go slice.
 func (srr *SpeechRecognitionRequest) ContextualStrings() []string {
+	defer runtime.KeepAlive(srr)
 	_arr := objc.Send[objc.ID](objref.IDOf(srr), objc.RegisterName("contextualStrings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // InteractionIdentifier returns an identifier string that you use to describe the type of interaction associated with the speech recognition request. If different parts of your app have different speech recognition needs, you can use this property to identify the part of your app that is making each request. For example, if one part of your app lets users speak phone numbers and another part lets users speak street addresses, consistently identifying the part of the app that makes a recognition request may help improve the accuracy of the results.
 func (srr *SpeechRecognitionRequest) InteractionIdentifier() string {
+	defer runtime.KeepAlive(srr)
 	_r := objc.Send[objc.ID](objref.IDOf(srr), objc.RegisterName("interactionIdentifier"))
 	if _r == 0 {
 		return ""
@@ -142,18 +154,21 @@ func (srr *SpeechRecognitionRequest) InteractionIdentifier() string {
 
 // RequiresOnDeviceRecognition reports whether a Boolean value that determines whether a request must keep its audio data on the device. Set this property to `true` to prevent an “SFSpeechRecognitionRequest“ from sending audio over the network. However, on-device requests won't be as accurate. > Note: > The request only honors this setting if the “SFSpeechRecognizer/supportsOnDeviceRecognition“ (“SFSpeechRecognizer“) property is also `true`.
 func (srr *SpeechRecognitionRequest) RequiresOnDeviceRecognition() bool {
+	defer runtime.KeepAlive(srr)
 	_r := objc.Send[bool](objref.IDOf(srr), objc.RegisterName("requiresOnDeviceRecognition"))
 	return _r
 }
 
 // AddsPunctuation reports whether to add punctuation to speech recognition results. Set this property to `true` for the speech framework to automatically include punctuation in the recognition results. Punctuation includes a period or question mark at the end of a sentence, and a comma within a sentence.
 func (srr *SpeechRecognitionRequest) AddsPunctuation() bool {
+	defer runtime.KeepAlive(srr)
 	_r := objc.Send[bool](objref.IDOf(srr), objc.RegisterName("addsPunctuation"))
 	return _r
 }
 
 // CustomizedLanguageModel returns the customized language model.
 func (srr *SpeechRecognitionRequest) CustomizedLanguageModel() *SpeechLanguageModelConfiguration {
+	defer runtime.KeepAlive(srr)
 	_r := objc.Send[objc.ID](objref.IDOf(srr), objc.RegisterName("customizedLanguageModel"))
 	return SpeechLanguageModelConfigurationFromID(_r)
 }

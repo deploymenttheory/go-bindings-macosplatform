@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,6 +52,7 @@ func scriptClassDescriptionAdopt(id objc.ID) *ScriptClassDescription {
 
 // NewScriptClassDescriptionWithSuiteNameClassNameDictionary initializes and returns a newly allocated instance of NSScriptClassDescription.
 func NewScriptClassDescriptionWithSuiteNameClassNameDictionary(suiteName string, className string, classDeclaration obj.Object) *ScriptClassDescription {
+	defer runtime.KeepAlive(classDeclaration)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScriptClassDescription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSuiteName:className:dictionary:"), purego.NSString(suiteName), purego.NSString(className), objref.IDOf(classDeclaration))
 	return scriptClassDescriptionAdopt(_id)
@@ -62,25 +65,29 @@ func (scd *ScriptClassDescription) WithObservationInfo(observationInfo unsafe.Po
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (scd *ScriptClassDescription) WithScriptingProperties(scriptingProperties obj.Object) *ScriptClassDescription {
-	objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (scd *ScriptClassDescription) WithScriptingProperties(scriptingProperties map[string]obj.Object) *ScriptClassDescription {
+	objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return scd
 }
 
 // MatchesAppleEventCode returns a Boolean value indicating whether a primary or secondary Apple event code in the receiver matches the passed code.
 func (scd *ScriptClassDescription) MatchesAppleEventCode(appleEventCode int) bool {
+	defer runtime.KeepAlive(scd)
 	_r := objc.Send[bool](objref.IDOf(scd), objc.RegisterName("matchesAppleEventCode:"), appleEventCode)
 	return _r
 }
 
 // SupportsCommand returns a Boolean value indicating whether the receiver or any superclass supports the specified command.
 func (scd *ScriptClassDescription) SupportsCommand(commandDescription *ScriptCommandDescription) bool {
+	defer runtime.KeepAlive(scd)
+	defer runtime.KeepAlive(commandDescription)
 	_r := objc.Send[bool](objref.IDOf(scd), objc.RegisterName("supportsCommand:"), objref.IDOf(commandDescription))
 	return _r
 }
 
 // TypeForKey returns the name of the declared type of the attribute or relationship identified by the passed key.
 func (scd *ScriptClassDescription) TypeForKey(key string) string {
+	defer runtime.KeepAlive(scd)
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("typeForKey:"), purego.NSString(key))
 	if _r == 0 {
 		return ""
@@ -90,18 +97,21 @@ func (scd *ScriptClassDescription) TypeForKey(key string) string {
 
 // ClassDescriptionForKey returns the class description instance for the class type of the specified attribute or relationship.
 func (scd *ScriptClassDescription) ClassDescriptionForKey(key string) *ScriptClassDescription {
+	defer runtime.KeepAlive(scd)
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("classDescriptionForKey:"), purego.NSString(key))
 	return ScriptClassDescriptionFromID(_r)
 }
 
 // AppleEventCodeForKey returns the Apple event code for the specified attribute or relationship in the receiver.
 func (scd *ScriptClassDescription) AppleEventCodeForKey(key string) int {
+	defer runtime.KeepAlive(scd)
 	_r := objc.Send[int](objref.IDOf(scd), objc.RegisterName("appleEventCodeForKey:"), purego.NSString(key))
 	return _r
 }
 
 // KeyWithAppleEventCode given an Apple event code that identifies a property or element class, returns the key for the corresponding attribute, one-to-one relationship, or one-to-many relationship.
 func (scd *ScriptClassDescription) KeyWithAppleEventCode(appleEventCode int) string {
+	defer runtime.KeepAlive(scd)
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("keyWithAppleEventCode:"), appleEventCode)
 	if _r == 0 {
 		return ""
@@ -111,36 +121,42 @@ func (scd *ScriptClassDescription) KeyWithAppleEventCode(appleEventCode int) str
 
 // IsLocationRequiredToCreateForKey returns a Boolean value indicating whether an insertion location must be specified when creating a new object in the specified to-many relationship of the receiver.
 func (scd *ScriptClassDescription) IsLocationRequiredToCreateForKey(toManyRelationshipKey string) bool {
+	defer runtime.KeepAlive(scd)
 	_r := objc.Send[bool](objref.IDOf(scd), objc.RegisterName("isLocationRequiredToCreateForKey:"), purego.NSString(toManyRelationshipKey))
 	return _r
 }
 
 // HasPropertyForKey returns a Boolean value indicating whether the described class has a property identified by the specified key.
 func (scd *ScriptClassDescription) HasPropertyForKey(key string) bool {
+	defer runtime.KeepAlive(scd)
 	_r := objc.Send[bool](objref.IDOf(scd), objc.RegisterName("hasPropertyForKey:"), purego.NSString(key))
 	return _r
 }
 
 // HasOrderedToManyRelationshipForKey returns a Boolean value indicating whether the described class has an ordered to-many relationship identified by the specified key.
 func (scd *ScriptClassDescription) HasOrderedToManyRelationshipForKey(key string) bool {
+	defer runtime.KeepAlive(scd)
 	_r := objc.Send[bool](objref.IDOf(scd), objc.RegisterName("hasOrderedToManyRelationshipForKey:"), purego.NSString(key))
 	return _r
 }
 
 // HasReadablePropertyForKey returns a Boolean value indicating whether the described class has a readable property identified by the specified key.
 func (scd *ScriptClassDescription) HasReadablePropertyForKey(key string) bool {
+	defer runtime.KeepAlive(scd)
 	_r := objc.Send[bool](objref.IDOf(scd), objc.RegisterName("hasReadablePropertyForKey:"), purego.NSString(key))
 	return _r
 }
 
 // HasWritablePropertyForKey returns a Boolean value indicating whether the described class has a writable property identified by the specified key.
 func (scd *ScriptClassDescription) HasWritablePropertyForKey(key string) bool {
+	defer runtime.KeepAlive(scd)
 	_r := objc.Send[bool](objref.IDOf(scd), objc.RegisterName("hasWritablePropertyForKey:"), purego.NSString(key))
 	return _r
 }
 
 // SuiteName returns the suite name.
 func (scd *ScriptClassDescription) SuiteName() string {
+	defer runtime.KeepAlive(scd)
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("suiteName"))
 	if _r == 0 {
 		return ""
@@ -150,6 +166,7 @@ func (scd *ScriptClassDescription) SuiteName() string {
 
 // ImplementationClassName returns the implementation class name.
 func (scd *ScriptClassDescription) ImplementationClassName() string {
+	defer runtime.KeepAlive(scd)
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("implementationClassName"))
 	if _r == 0 {
 		return ""
@@ -159,18 +176,21 @@ func (scd *ScriptClassDescription) ImplementationClassName() string {
 
 // SuperclassDescription returns the superclass description.
 func (scd *ScriptClassDescription) SuperclassDescription() *ScriptClassDescription {
+	defer runtime.KeepAlive(scd)
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("superclassDescription"))
 	return ScriptClassDescriptionFromID(_r)
 }
 
 // AppleEventCode returns the apple event code.
 func (scd *ScriptClassDescription) AppleEventCode() int {
+	defer runtime.KeepAlive(scd)
 	_r := objc.Send[int](objref.IDOf(scd), objc.RegisterName("appleEventCode"))
 	return _r
 }
 
 // DefaultSubcontainerAttributeKey returns the default subcontainer attribute key.
 func (scd *ScriptClassDescription) DefaultSubcontainerAttributeKey() string {
+	defer runtime.KeepAlive(scd)
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("defaultSubcontainerAttributeKey"))
 	if _r == 0 {
 		return ""
@@ -180,6 +200,7 @@ func (scd *ScriptClassDescription) DefaultSubcontainerAttributeKey() string {
 
 // IsReadOnlyKey returns a Boolean value indicating whether a specified property in the receiver is read-only.
 func (scd *ScriptClassDescription) IsReadOnlyKey(key string) bool {
+	defer runtime.KeepAlive(scd)
 	_r := objc.Send[bool](objref.IDOf(scd), objc.RegisterName("isReadOnlyKey:"), purego.NSString(key))
 	return _r
 }

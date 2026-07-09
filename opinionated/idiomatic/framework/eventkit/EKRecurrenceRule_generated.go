@@ -5,7 +5,10 @@
 package eventkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -48,26 +51,30 @@ func recurrenceRuleAdopt(id objc.ID) *RecurrenceRule {
 
 // NewRecurrenceRuleRecurrenceWithFrequencyIntervalEnd initializes and returns a simple recurrence rule with a given frequency, interval, and end.
 func NewRecurrenceRuleRecurrenceWithFrequencyIntervalEnd(type_ RecurrenceFrequency, interval int, end *RecurrenceEnd) *RecurrenceRule {
+	defer runtime.KeepAlive(end)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("EKRecurrenceRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRecurrenceWithFrequency:interval:end:"), type_, interval, objref.IDOf(end))
 	return recurrenceRuleAdopt(_id)
 }
 
 // NewRecurrenceRuleRecurrenceWithFrequencyIntervalDaysOfTheWeekDaysOfTheMonthMonthsOfTheYearWeeksOfTheYearDaysOfTheYearSetPositionsEnd initializes and returns a recurrence rule with a given frequency and additional scheduling information.
-func NewRecurrenceRuleRecurrenceWithFrequencyIntervalDaysOfTheWeekDaysOfTheMonthMonthsOfTheYearWeeksOfTheYearDaysOfTheYearSetPositionsEnd(type_ RecurrenceFrequency, interval int, days []*RecurrenceDayOfWeek, monthDays []obj.Object, months []obj.Object, weeksOfTheYear []obj.Object, daysOfTheYear []obj.Object, setPositions []obj.Object, end *RecurrenceEnd) *RecurrenceRule {
+func NewRecurrenceRuleRecurrenceWithFrequencyIntervalDaysOfTheWeekDaysOfTheMonthMonthsOfTheYearWeeksOfTheYearDaysOfTheYearSetPositionsEnd(type_ RecurrenceFrequency, interval int, days []*RecurrenceDayOfWeek, monthDays []*foundation.Number, months []*foundation.Number, weeksOfTheYear []*foundation.Number, daysOfTheYear []*foundation.Number, setPositions []*foundation.Number, end *RecurrenceEnd) *RecurrenceRule {
+	defer runtime.KeepAlive(end)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("EKRecurrenceRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRecurrenceWithFrequency:interval:daysOfTheWeek:daysOfTheMonth:monthsOfTheYear:weeksOfTheYear:daysOfTheYear:setPositions:end:"), type_, interval, purego.SliceToNSArray(days, func(_v *RecurrenceDayOfWeek) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(monthDays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(months, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(weeksOfTheYear, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(daysOfTheYear, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(setPositions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(end))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRecurrenceWithFrequency:interval:daysOfTheWeek:daysOfTheMonth:monthsOfTheYear:weeksOfTheYear:daysOfTheYear:setPositions:end:"), type_, interval, purego.SliceToNSArray(days, func(_v *RecurrenceDayOfWeek) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(monthDays, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(months, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(weeksOfTheYear, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(daysOfTheYear, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(setPositions, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objref.IDOf(end))
 	return recurrenceRuleAdopt(_id)
 }
 
 // WithRecurrenceEnd sets indicates when the recurrence rule ends.
 func (rr *RecurrenceRule) WithRecurrenceEnd(recurrenceEnd *RecurrenceEnd) *RecurrenceRule {
+	defer runtime.KeepAlive(recurrenceEnd)
 	objc.Send[objc.ID](objref.IDOf(rr), objc.RegisterName("setRecurrenceEnd:"), objref.IDOf(recurrenceEnd))
 	return rr
 }
 
 // CalendarIdentifier returns calendar used by this recurrence rule.
 func (rr *RecurrenceRule) CalendarIdentifier() string {
+	defer runtime.KeepAlive(rr)
 	_r := objc.Send[objc.ID](objref.IDOf(rr), objc.RegisterName("calendarIdentifier"))
 	if _r == 0 {
 		return ""
@@ -77,24 +84,28 @@ func (rr *RecurrenceRule) CalendarIdentifier() string {
 
 // RecurrenceEnd returns this property defines when the the repeating event is scheduled to end. The end date can be specified by a number of occurrences, or with an end date.
 func (rr *RecurrenceRule) RecurrenceEnd() *RecurrenceEnd {
+	defer runtime.KeepAlive(rr)
 	_r := objc.Send[objc.ID](objref.IDOf(rr), objc.RegisterName("recurrenceEnd"))
 	return RecurrenceEndFromID(_r)
 }
 
 // Frequency returns this property designates the unit of time used to describe the recurrence pattern.
 func (rr *RecurrenceRule) Frequency() RecurrenceFrequency {
+	defer runtime.KeepAlive(rr)
 	_r := objc.Send[RecurrenceFrequency](objref.IDOf(rr), objc.RegisterName("frequency"))
 	return _r
 }
 
 // Interval returns the interval of a EKRecurrenceRule is an integer value which specifies how often the recurrence rule repeats over the unit of time described by the EKRecurrenceFrequency. For example, if the EKRecurrenceFrequency is EKRecurrenceWeekly, then an interval of 1 means the pattern is repeated every week. A value of 2 indicates it is repeated every other week, 3 means every third week, and so on. The value must be a positive integer; 0 is not a valid value, and nil will be returned if the client attempts to initialize a rule with a negative or zero interval.
 func (rr *RecurrenceRule) Interval() int {
+	defer runtime.KeepAlive(rr)
 	_r := objc.Send[int](objref.IDOf(rr), objc.RegisterName("interval"))
 	return _r
 }
 
 // FirstDayOfTheWeek returns recurrence patterns can specify which day of the week should be treated as the first day. Possible values for this property are integers 0 and 1-7, which correspond to days of the week with Sunday = 1. Zero indicates that the property is not set for this recurrence. The first day of the week only affects the way the recurrence is expanded for weekly recurrence patterns with an interval greater than 1. For those types of recurrence patterns, the Calendar framework will set firstDayOfTheWeek to be 2 (Monday). In all other cases, this property will be set to zero. The iCalendar spec stipulates that the default value is Monday if this property is not set.
 func (rr *RecurrenceRule) FirstDayOfTheWeek() int {
+	defer runtime.KeepAlive(rr)
 	_r := objc.Send[int](objref.IDOf(rr), objc.RegisterName("firstDayOfTheWeek"))
 	return _r
 }
@@ -103,6 +114,7 @@ func (rr *RecurrenceRule) FirstDayOfTheWeek() int {
 //
 // DaysOfTheWeek returns the collection as a Go slice.
 func (rr *RecurrenceRule) DaysOfTheWeek() []*RecurrenceDayOfWeek {
+	defer runtime.KeepAlive(rr)
 	_arr := objc.Send[objc.ID](objref.IDOf(rr), objc.RegisterName("daysOfTheWeek"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecurrenceDayOfWeek { return RecurrenceDayOfWeekFromID(_id) })
 }
@@ -111,6 +123,7 @@ func (rr *RecurrenceRule) DaysOfTheWeek() []*RecurrenceDayOfWeek {
 //
 // DaysOfTheMonth returns the collection as a Go slice.
 func (rr *RecurrenceRule) DaysOfTheMonth() []obj.Object {
+	defer runtime.KeepAlive(rr)
 	_arr := objc.Send[objc.ID](objref.IDOf(rr), objc.RegisterName("daysOfTheMonth"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -119,6 +132,7 @@ func (rr *RecurrenceRule) DaysOfTheMonth() []obj.Object {
 //
 // DaysOfTheYear returns the collection as a Go slice.
 func (rr *RecurrenceRule) DaysOfTheYear() []obj.Object {
+	defer runtime.KeepAlive(rr)
 	_arr := objc.Send[objc.ID](objref.IDOf(rr), objc.RegisterName("daysOfTheYear"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -127,6 +141,7 @@ func (rr *RecurrenceRule) DaysOfTheYear() []obj.Object {
 //
 // WeeksOfTheYear returns the collection as a Go slice.
 func (rr *RecurrenceRule) WeeksOfTheYear() []obj.Object {
+	defer runtime.KeepAlive(rr)
 	_arr := objc.Send[objc.ID](objref.IDOf(rr), objc.RegisterName("weeksOfTheYear"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -135,6 +150,7 @@ func (rr *RecurrenceRule) WeeksOfTheYear() []obj.Object {
 //
 // MonthsOfTheYear returns the collection as a Go slice.
 func (rr *RecurrenceRule) MonthsOfTheYear() []obj.Object {
+	defer runtime.KeepAlive(rr)
 	_arr := objc.Send[objc.ID](objref.IDOf(rr), objc.RegisterName("monthsOfTheYear"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -143,6 +159,7 @@ func (rr *RecurrenceRule) MonthsOfTheYear() []obj.Object {
 //
 // SetPositions returns the collection as a Go slice.
 func (rr *RecurrenceRule) SetPositions() []obj.Object {
+	defer runtime.KeepAlive(rr)
 	_arr := objc.Send[objc.ID](objref.IDOf(rr), objc.RegisterName("setPositions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

@@ -5,7 +5,10 @@
 package oslog
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func logMessageComponentAdopt(id objc.ID) *LogMessageComponent {
 
 // Description returns the object's -description text.
 func (lmc *LogMessageComponent) Description() string {
+	defer runtime.KeepAlive(lmc)
 	return rt.Description(objref.IDOf(lmc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lmc *LogMessageComponent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lmc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lmc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lmc *LogMessageComponent) IsKind(className string) bool {
+	defer runtime.KeepAlive(lmc)
 	return rt.IsKind(objref.IDOf(lmc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lmc *LogMessageComponent) String() string {
+	defer runtime.KeepAlive(lmc)
 	return rt.Description(objref.IDOf(lmc))
 }
 
@@ -74,6 +82,7 @@ func NewLogMessageComponent() *LogMessageComponent {
 
 // FormatSubstring returns the text immediately preceding a placeholder. This can be an empty string if there is nothing between two placeholders, or between the placeholder and the bounds of the string.
 func (lmc *LogMessageComponent) FormatSubstring() string {
+	defer runtime.KeepAlive(lmc)
 	_r := objc.Send[objc.ID](objref.IDOf(lmc), objc.RegisterName("formatSubstring"))
 	if _r == 0 {
 		return ""
@@ -83,6 +92,7 @@ func (lmc *LogMessageComponent) FormatSubstring() string {
 
 // Placeholder returns the placeholder text. Is empty for is the last component.
 func (lmc *LogMessageComponent) Placeholder() string {
+	defer runtime.KeepAlive(lmc)
 	_r := objc.Send[objc.ID](objref.IDOf(lmc), objc.RegisterName("placeholder"))
 	if _r == 0 {
 		return ""
@@ -92,36 +102,42 @@ func (lmc *LogMessageComponent) Placeholder() string {
 
 // ArgumentCategory returns the type of argument corresponding to the placeholder; see OSLogMessageComponentArgumentCategory.
 func (lmc *LogMessageComponent) ArgumentCategory() LogMessageComponentArgumentCategory {
+	defer runtime.KeepAlive(lmc)
 	_r := objc.Send[LogMessageComponentArgumentCategory](objref.IDOf(lmc), objc.RegisterName("argumentCategory"))
 	return _r
 }
 
 // ArgumentDataValue returns the argument as a sequence of bytes. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
-func (lmc *LogMessageComponent) ArgumentDataValue() obj.Object {
+func (lmc *LogMessageComponent) ArgumentDataValue() []byte {
+	defer runtime.KeepAlive(lmc)
 	_r := objc.Send[objc.ID](objref.IDOf(lmc), objc.RegisterName("argumentDataValue"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ArgumentDoubleValue returns the argument as a double-precision floating point number; the value is undefined if the argument cannot be decoded or if this is the last component.
 func (lmc *LogMessageComponent) ArgumentDoubleValue() float64 {
+	defer runtime.KeepAlive(lmc)
 	_r := objc.Send[float64](objref.IDOf(lmc), objc.RegisterName("argumentDoubleValue"))
 	return _r
 }
 
 // ArgumentInt64Value returns the argument as a 64-bit signed integer; the value is undefined if it cannot be decoded or if this is the last component.
 func (lmc *LogMessageComponent) ArgumentInt64Value() int64 {
+	defer runtime.KeepAlive(lmc)
 	_r := objc.Send[int64](objref.IDOf(lmc), objc.RegisterName("argumentInt64Value"))
 	return _r
 }
 
 // ArgumentNumberValue returns the argument as a number. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
-func (lmc *LogMessageComponent) ArgumentNumberValue() obj.Object {
+func (lmc *LogMessageComponent) ArgumentNumberValue() *foundation.Number {
+	defer runtime.KeepAlive(lmc)
 	_r := objc.Send[objc.ID](objref.IDOf(lmc), objc.RegisterName("argumentNumberValue"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ArgumentStringValue returns the argument as a string. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
 func (lmc *LogMessageComponent) ArgumentStringValue() string {
+	defer runtime.KeepAlive(lmc)
 	_r := objc.Send[objc.ID](objref.IDOf(lmc), objc.RegisterName("argumentStringValue"))
 	if _r == 0 {
 		return ""
@@ -131,6 +147,7 @@ func (lmc *LogMessageComponent) ArgumentStringValue() string {
 
 // ArgumentUInt64Value returns the argument as a 64-bit unsigned integer; the value is undefined if the argument cannot be decoded or if this is the last component.
 func (lmc *LogMessageComponent) ArgumentUInt64Value() uint64 {
+	defer runtime.KeepAlive(lmc)
 	_r := objc.Send[uint64](objref.IDOf(lmc), objc.RegisterName("argumentUInt64Value"))
 	return _r
 }

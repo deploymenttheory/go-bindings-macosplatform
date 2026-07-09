@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func managedObjectModelAdopt(id objc.ID) *ManagedObjectModel {
 
 // Description returns the object's -description text.
 func (mom *ManagedObjectModel) Description() string {
+	defer runtime.KeepAlive(mom)
 	return rt.Description(objref.IDOf(mom))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mom *ManagedObjectModel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mom)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mom), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mom *ManagedObjectModel) IsKind(className string) bool {
+	defer runtime.KeepAlive(mom)
 	return rt.IsKind(objref.IDOf(mom), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mom *ManagedObjectModel) String() string {
+	defer runtime.KeepAlive(mom)
 	return rt.Description(objref.IDOf(mom))
 }
 
@@ -87,61 +94,71 @@ func (mom *ManagedObjectModel) WithEntities(items ...*EntityDescription) *Manage
 }
 
 // WithLocalizationDictionary sets the localization dictionary of the model.
-func (mom *ManagedObjectModel) WithLocalizationDictionary(localizationDictionary obj.Object) *ManagedObjectModel {
-	objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("setLocalizationDictionary:"), objref.IDOf(localizationDictionary))
+func (mom *ManagedObjectModel) WithLocalizationDictionary(localizationDictionary map[string]string) *ManagedObjectModel {
+	objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("setLocalizationDictionary:"), rt.MapToDict(localizationDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return mom
 }
 
 // WithVersionIdentifiers sets the set of developer-defined version identifiers for the object model.
 func (mom *ManagedObjectModel) WithVersionIdentifiers(versionIdentifiers obj.Object) *ManagedObjectModel {
+	defer runtime.KeepAlive(versionIdentifiers)
 	objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("setVersionIdentifiers:"), objref.IDOf(versionIdentifiers))
 	return mom
 }
 
 // EntitiesForConfiguration returns the entities of the model for a specified configuration.
 func (mom *ManagedObjectModel) EntitiesForConfiguration(configuration string) []*EntityDescription {
+	defer runtime.KeepAlive(mom)
 	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("entitiesForConfiguration:"), purego.NSString(configuration))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *EntityDescription { return EntityDescriptionFromID(_id) })
 }
 
 // SetEntitiesForConfiguration associates the specified entities with the model using the given configuration name.
 func (mom *ManagedObjectModel) SetEntitiesForConfiguration(entities []*EntityDescription, configuration string) {
+	defer runtime.KeepAlive(mom)
 	objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("setEntities:forConfiguration:"), purego.SliceToNSArray(entities, func(_v *EntityDescription) objc.ID { return objref.IDOf(_v) }), purego.NSString(configuration))
 }
 
 // SetFetchRequestTemplateForName associates the specified fetch request with the receiver using the given name.
 func (mom *ManagedObjectModel) SetFetchRequestTemplateForName(fetchRequestTemplate obj.Object, name string) {
+	defer runtime.KeepAlive(mom)
+	defer runtime.KeepAlive(fetchRequestTemplate)
 	objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("setFetchRequestTemplate:forName:"), objref.IDOf(fetchRequestTemplate), purego.NSString(name))
 }
 
 // FetchRequestTemplateForName returns the fetch request with a specified name.
 func (mom *ManagedObjectModel) FetchRequestTemplateForName(name string) obj.Object {
+	defer runtime.KeepAlive(mom)
 	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("fetchRequestTemplateForName:"), purego.NSString(name))
 	return obj.Wrap(_r)
 }
 
 // FetchRequestFromTemplateWithNameSubstitutionVariables returns a copy of the fetch request template with the variables substituted by values from the substitutions dictionary.
-func (mom *ManagedObjectModel) FetchRequestFromTemplateWithNameSubstitutionVariables(name string, variables obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("fetchRequestFromTemplateWithName:substitutionVariables:"), purego.NSString(name), objref.IDOf(variables))
+func (mom *ManagedObjectModel) FetchRequestFromTemplateWithNameSubstitutionVariables(name string, variables map[string]obj.Object) obj.Object {
+	defer runtime.KeepAlive(mom)
+	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("fetchRequestFromTemplateWithName:substitutionVariables:"), purego.NSString(name), rt.MapToDict(variables, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
 // IsConfigurationCompatibleWithStoreMetadata returns a Boolean value that indicates whether a given configuration in the model is compatible with given metadata from a persistent store.
-func (mom *ManagedObjectModel) IsConfigurationCompatibleWithStoreMetadata(configuration string, metadata obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(mom), objc.RegisterName("isConfiguration:compatibleWithStoreMetadata:"), purego.NSString(configuration), objref.IDOf(metadata))
+func (mom *ManagedObjectModel) IsConfigurationCompatibleWithStoreMetadata(configuration string, metadata map[string]obj.Object) bool {
+	defer runtime.KeepAlive(mom)
+	_r := objc.Send[bool](objref.IDOf(mom), objc.RegisterName("isConfiguration:compatibleWithStoreMetadata:"), purego.NSString(configuration), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // EntitiesByName returns the entities by name.
-func (mom *ManagedObjectModel) EntitiesByName() obj.Object {
+func (mom *ManagedObjectModel) EntitiesByName() map[string]*EntityDescription {
+	defer runtime.KeepAlive(mom)
 	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("entitiesByName"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *EntityDescription { return EntityDescriptionFromID(_id) })
 }
 
 // Entities returns the entities.
 //
 // Entities returns the collection as a Go slice.
 func (mom *ManagedObjectModel) Entities() []*EntityDescription {
+	defer runtime.KeepAlive(mom)
 	_arr := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("entities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EntityDescription { return EntityDescriptionFromID(_id) })
 }
@@ -150,36 +167,42 @@ func (mom *ManagedObjectModel) Entities() []*EntityDescription {
 //
 // Configurations returns the collection as a Go slice.
 func (mom *ManagedObjectModel) Configurations() []string {
+	defer runtime.KeepAlive(mom)
 	_arr := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("configurations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // LocalizationDictionary returns the localization dictionary.
-func (mom *ManagedObjectModel) LocalizationDictionary() obj.Object {
+func (mom *ManagedObjectModel) LocalizationDictionary() map[string]string {
+	defer runtime.KeepAlive(mom)
 	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("localizationDictionary"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // FetchRequestTemplatesByName returns the fetch request templates by name.
-func (mom *ManagedObjectModel) FetchRequestTemplatesByName() obj.Object {
+func (mom *ManagedObjectModel) FetchRequestTemplatesByName() map[string]obj.Object {
+	defer runtime.KeepAlive(mom)
 	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("fetchRequestTemplatesByName"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // VersionIdentifiers returns the version identifiers.
 func (mom *ManagedObjectModel) VersionIdentifiers() obj.Object {
+	defer runtime.KeepAlive(mom)
 	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("versionIdentifiers"))
 	return obj.Wrap(_r)
 }
 
 // EntityVersionHashesByName returns the entity version hashes by name.
-func (mom *ManagedObjectModel) EntityVersionHashesByName() obj.Object {
+func (mom *ManagedObjectModel) EntityVersionHashesByName() map[string][]byte {
+	defer runtime.KeepAlive(mom)
 	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("entityVersionHashesByName"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) []byte { return rt.NSDataToBytes(_id) })
 }
 
 // VersionChecksum returns the version checksum.
 func (mom *ManagedObjectModel) VersionChecksum() string {
+	defer runtime.KeepAlive(mom)
 	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("versionChecksum"))
 	if _r == 0 {
 		return ""

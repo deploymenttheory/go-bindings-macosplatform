@@ -5,6 +5,8 @@
 package contactsui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func contactViewControllerAdopt(id objc.ID) *ContactViewController {
 
 // Description returns the object's -description text.
 func (cvc *ContactViewController) Description() string {
+	defer runtime.KeepAlive(cvc)
 	return rt.Description(objref.IDOf(cvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cvc *ContactViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cvc *ContactViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(cvc)
 	return rt.IsKind(objref.IDOf(cvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cvc *ContactViewController) String() string {
+	defer runtime.KeepAlive(cvc)
 	return rt.Description(objref.IDOf(cvc))
 }
 
@@ -80,6 +87,7 @@ func NewContactViewController() *ContactViewController {
 
 // WithContact sets the contact being displayed.
 func (cvc *ContactViewController) WithContact(contact obj.Object) *ContactViewController {
+	defer runtime.KeepAlive(contact)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvc), objc.RegisterName("setContact:"), objref.IDOf(contact))
 	})
@@ -88,6 +96,7 @@ func (cvc *ContactViewController) WithContact(contact obj.Object) *ContactViewCo
 
 // Contact returns the contact.
 func (cvc *ContactViewController) Contact() obj.Object {
+	defer runtime.KeepAlive(cvc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

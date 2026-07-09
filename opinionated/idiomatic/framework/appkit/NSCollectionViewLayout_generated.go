@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,27 +53,33 @@ func collectionViewLayoutAdopt(id objc.ID) *CollectionViewLayout {
 
 // Description returns the object's -description text.
 func (cvl *CollectionViewLayout) Description() string {
+	defer runtime.KeepAlive(cvl)
 	return rt.Description(objref.IDOf(cvl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cvl *CollectionViewLayout) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cvl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cvl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cvl *CollectionViewLayout) IsKind(className string) bool {
+	defer runtime.KeepAlive(cvl)
 	return rt.IsKind(objref.IDOf(cvl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cvl *CollectionViewLayout) String() string {
+	defer runtime.KeepAlive(cvl)
 	return rt.Description(objref.IDOf(cvl))
 }
 
 // NewCollectionViewLayoutialLayoutAttributesForAppearingItemAtIndexPath returns the starting layout information for an item being inserted into the collection view.
 func NewCollectionViewLayoutialLayoutAttributesForAppearingItemAtIndexPath(itemIndexPath obj.Object) *CollectionViewLayout {
+	defer runtime.KeepAlive(itemIndexPath)
 	var _mainthread0 *CollectionViewLayout
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewLayout {
@@ -84,6 +93,8 @@ func NewCollectionViewLayoutialLayoutAttributesForAppearingItemAtIndexPath(itemI
 
 // NewCollectionViewLayoutialLayoutAttributesForAppearingSupplementaryElementOfKindAtIndexPath returns the starting layout information for a supplementary view being added to the collection view.
 func NewCollectionViewLayoutialLayoutAttributesForAppearingSupplementaryElementOfKindAtIndexPath(elementKind obj.Object, elementIndexPath obj.Object) *CollectionViewLayout {
+	defer runtime.KeepAlive(elementKind)
+	defer runtime.KeepAlive(elementIndexPath)
 	var _mainthread0 *CollectionViewLayout
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewLayout {
@@ -97,6 +108,8 @@ func NewCollectionViewLayoutialLayoutAttributesForAppearingSupplementaryElementO
 
 // NewCollectionViewLayoutialLayoutAttributesForAppearingDecorationElementOfKindAtIndexPath returns the starting layout information for a decoration view being added to the collection view.
 func NewCollectionViewLayoutialLayoutAttributesForAppearingDecorationElementOfKindAtIndexPath(elementKind obj.Object, decorationIndexPath obj.Object) *CollectionViewLayout {
+	defer runtime.KeepAlive(elementKind)
+	defer runtime.KeepAlive(decorationIndexPath)
 	var _mainthread0 *CollectionViewLayout
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewLayout {
@@ -110,6 +123,7 @@ func NewCollectionViewLayoutialLayoutAttributesForAppearingDecorationElementOfKi
 
 // InvalidateLayout invalidates all layout information and triggers a layout update.
 func (cvl *CollectionViewLayout) InvalidateLayout() {
+	defer runtime.KeepAlive(cvl)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("invalidateLayout"))
 	})
@@ -118,6 +132,8 @@ func (cvl *CollectionViewLayout) InvalidateLayout() {
 
 // InvalidateLayoutWithContext invalidates specific parts of the layout using the specified context object.
 func (cvl *CollectionViewLayout) InvalidateLayoutWithContext(context_ *CollectionViewLayoutInvalidationContext) {
+	defer runtime.KeepAlive(cvl)
+	defer runtime.KeepAlive(context_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("invalidateLayoutWithContext:"), objref.IDOf(context_))
 	})
@@ -126,6 +142,9 @@ func (cvl *CollectionViewLayout) InvalidateLayoutWithContext(context_ *Collectio
 
 // RegisterNibForDecorationViewOfKind registers a nib file to use when creating the layout’s decoration views.
 func (cvl *CollectionViewLayout) RegisterNibForDecorationViewOfKind(nib *Nib, elementKind obj.Object) {
+	defer runtime.KeepAlive(cvl)
+	defer runtime.KeepAlive(nib)
+	defer runtime.KeepAlive(elementKind)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("registerNib:forDecorationViewOfKind:"), objref.IDOf(nib), objref.IDOf(elementKind))
 	})
@@ -134,6 +153,7 @@ func (cvl *CollectionViewLayout) RegisterNibForDecorationViewOfKind(nib *Nib, el
 
 // CollectionView returns the collection view.
 func (cvl *CollectionViewLayout) CollectionView() *CollectionView {
+	defer runtime.KeepAlive(cvl)
 	var _mainthread0 *CollectionView
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionView {
@@ -147,6 +167,7 @@ func (cvl *CollectionViewLayout) CollectionView() *CollectionView {
 
 // PrepareLayout prepares the layout object to begin laying out content.
 func (cvl *CollectionViewLayout) PrepareLayout() {
+	defer runtime.KeepAlive(cvl)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareLayout"))
 	})
@@ -155,6 +176,7 @@ func (cvl *CollectionViewLayout) PrepareLayout() {
 
 // LayoutAttributesForElementsInRect returns the layout attribute objects for all items and views in the specified rectangle.
 func (cvl *CollectionViewLayout) LayoutAttributesForElementsInRect(rect corefoundation.CGRect) []*CollectionViewLayoutAttributes {
+	defer runtime.KeepAlive(cvl)
 	var _mainthread0 []*CollectionViewLayoutAttributes
 	purego.Main(func() {
 		_mainthread0 = func() []*CollectionViewLayoutAttributes {
@@ -168,6 +190,8 @@ func (cvl *CollectionViewLayout) LayoutAttributesForElementsInRect(rect corefoun
 
 // LayoutAttributesForItemAtIndexPath returns the layout attributes for the item at the specified index path.
 func (cvl *CollectionViewLayout) LayoutAttributesForItemAtIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes {
+	defer runtime.KeepAlive(cvl)
+	defer runtime.KeepAlive(indexPath)
 	var _mainthread0 *CollectionViewLayoutAttributes
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewLayoutAttributes {
@@ -181,6 +205,9 @@ func (cvl *CollectionViewLayout) LayoutAttributesForItemAtIndexPath(indexPath ob
 
 // LayoutAttributesForSupplementaryViewOfKindAtIndexPath returns the layout attributes of the supplementary view at the specified location in your layout.
 func (cvl *CollectionViewLayout) LayoutAttributesForSupplementaryViewOfKindAtIndexPath(elementKind obj.Object, indexPath obj.Object) *CollectionViewLayoutAttributes {
+	defer runtime.KeepAlive(cvl)
+	defer runtime.KeepAlive(elementKind)
+	defer runtime.KeepAlive(indexPath)
 	var _mainthread0 *CollectionViewLayoutAttributes
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewLayoutAttributes {
@@ -194,6 +221,9 @@ func (cvl *CollectionViewLayout) LayoutAttributesForSupplementaryViewOfKindAtInd
 
 // LayoutAttributesForDecorationViewOfKindAtIndexPath returns the layout attributes of the decoration view at the specified location in your layout.
 func (cvl *CollectionViewLayout) LayoutAttributesForDecorationViewOfKindAtIndexPath(elementKind obj.Object, indexPath obj.Object) *CollectionViewLayoutAttributes {
+	defer runtime.KeepAlive(cvl)
+	defer runtime.KeepAlive(elementKind)
+	defer runtime.KeepAlive(indexPath)
 	var _mainthread0 *CollectionViewLayoutAttributes
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewLayoutAttributes {
@@ -207,6 +237,7 @@ func (cvl *CollectionViewLayout) LayoutAttributesForDecorationViewOfKindAtIndexP
 
 // LayoutAttributesForDropTargetAtPoint returns layout attributes for the drop target at the specified point.
 func (cvl *CollectionViewLayout) LayoutAttributesForDropTargetAtPoint(pointInCollectionView corefoundation.CGPoint) *CollectionViewLayoutAttributes {
+	defer runtime.KeepAlive(cvl)
 	var _mainthread0 *CollectionViewLayoutAttributes
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewLayoutAttributes {
@@ -220,6 +251,8 @@ func (cvl *CollectionViewLayout) LayoutAttributesForDropTargetAtPoint(pointInCol
 
 // LayoutAttributesForInterItemGapBeforeIndexPath returns layout attributes for the inter-item gap at the specified location in your layout.
 func (cvl *CollectionViewLayout) LayoutAttributesForInterItemGapBeforeIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes {
+	defer runtime.KeepAlive(cvl)
+	defer runtime.KeepAlive(indexPath)
 	var _mainthread0 *CollectionViewLayoutAttributes
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewLayoutAttributes {
@@ -233,6 +266,7 @@ func (cvl *CollectionViewLayout) LayoutAttributesForInterItemGapBeforeIndexPath(
 
 // ShouldInvalidateLayoutForBoundsChange returns a Boolean indicating whether a bounds change triggers a layout update.
 func (cvl *CollectionViewLayout) ShouldInvalidateLayoutForBoundsChange(newBounds corefoundation.CGRect) bool {
+	defer runtime.KeepAlive(cvl)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -246,6 +280,7 @@ func (cvl *CollectionViewLayout) ShouldInvalidateLayoutForBoundsChange(newBounds
 
 // InvalidationContextForBoundsChange returns an invalidation context object that defines the portions of the layout that need to be updated.
 func (cvl *CollectionViewLayout) InvalidationContextForBoundsChange(newBounds corefoundation.CGRect) *CollectionViewLayoutInvalidationContext {
+	defer runtime.KeepAlive(cvl)
 	var _mainthread0 *CollectionViewLayoutInvalidationContext
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewLayoutInvalidationContext {
@@ -259,6 +294,9 @@ func (cvl *CollectionViewLayout) InvalidationContextForBoundsChange(newBounds co
 
 // ShouldInvalidateLayoutForPreferredLayoutAttributesWithOriginalAttributes returns a Boolean indicating whether changes to a cell’s layout attributes trigger a larger layout update.
 func (cvl *CollectionViewLayout) ShouldInvalidateLayoutForPreferredLayoutAttributesWithOriginalAttributes(preferredAttributes *CollectionViewLayoutAttributes, originalAttributes *CollectionViewLayoutAttributes) bool {
+	defer runtime.KeepAlive(cvl)
+	defer runtime.KeepAlive(preferredAttributes)
+	defer runtime.KeepAlive(originalAttributes)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -272,6 +310,9 @@ func (cvl *CollectionViewLayout) ShouldInvalidateLayoutForPreferredLayoutAttribu
 
 // InvalidationContextForPreferredLayoutAttributesWithOriginalAttributes returns an invalidation context object that defines the portions of the layout that need to be updated.
 func (cvl *CollectionViewLayout) InvalidationContextForPreferredLayoutAttributesWithOriginalAttributes(preferredAttributes *CollectionViewLayoutAttributes, originalAttributes *CollectionViewLayoutAttributes) *CollectionViewLayoutInvalidationContext {
+	defer runtime.KeepAlive(cvl)
+	defer runtime.KeepAlive(preferredAttributes)
+	defer runtime.KeepAlive(originalAttributes)
 	var _mainthread0 *CollectionViewLayoutInvalidationContext
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewLayoutInvalidationContext {
@@ -285,6 +326,7 @@ func (cvl *CollectionViewLayout) InvalidationContextForPreferredLayoutAttributes
 
 // TargetContentOffsetForProposedContentOffsetWithScrollingVelocity returns the offset value to use for the collection view’s content at the end of scrolling.
 func (cvl *CollectionViewLayout) TargetContentOffsetForProposedContentOffsetWithScrollingVelocity(proposedContentOffset corefoundation.CGPoint, velocity corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(cvl)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -298,6 +340,7 @@ func (cvl *CollectionViewLayout) TargetContentOffsetForProposedContentOffsetWith
 
 // TargetContentOffsetForProposedContentOffset returns the offset value to use after an animated layout update or change.
 func (cvl *CollectionViewLayout) TargetContentOffsetForProposedContentOffset(proposedContentOffset corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(cvl)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -311,6 +354,7 @@ func (cvl *CollectionViewLayout) TargetContentOffsetForProposedContentOffset(pro
 
 // CollectionViewContentSize returns the collection view content size.
 func (cvl *CollectionViewLayout) CollectionViewContentSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(cvl)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -324,6 +368,7 @@ func (cvl *CollectionViewLayout) CollectionViewContentSize() corefoundation.CGSi
 
 // PrepareForCollectionViewUpdates performs needed tasks before items are inserted, deleted, or moved within the collection view.
 func (cvl *CollectionViewLayout) PrepareForCollectionViewUpdates(updateItems []*CollectionViewUpdateItem) {
+	defer runtime.KeepAlive(cvl)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareForCollectionViewUpdates:"), purego.SliceToNSArray(updateItems, func(_v *CollectionViewUpdateItem) objc.ID { return objref.IDOf(_v) }))
 	})
@@ -332,6 +377,7 @@ func (cvl *CollectionViewLayout) PrepareForCollectionViewUpdates(updateItems []*
 
 // FinalizeCollectionViewUpdates performs needed steps after items are inserted, deleted, or moved within a collection view.
 func (cvl *CollectionViewLayout) FinalizeCollectionViewUpdates() {
+	defer runtime.KeepAlive(cvl)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalizeCollectionViewUpdates"))
 	})
@@ -340,6 +386,7 @@ func (cvl *CollectionViewLayout) FinalizeCollectionViewUpdates() {
 
 // PrepareForAnimatedBoundsChange prepares the layout object for animated changes to the collection view’s bounds or for the insertion or deletion of items.
 func (cvl *CollectionViewLayout) PrepareForAnimatedBoundsChange(oldBounds corefoundation.CGRect) {
+	defer runtime.KeepAlive(cvl)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareForAnimatedBoundsChange:"), oldBounds)
 	})
@@ -348,6 +395,7 @@ func (cvl *CollectionViewLayout) PrepareForAnimatedBoundsChange(oldBounds corefo
 
 // FinalizeAnimatedBoundsChange cleans up after any animated changes to the collection view’s bounds or after the insertion or deletion of items.
 func (cvl *CollectionViewLayout) FinalizeAnimatedBoundsChange() {
+	defer runtime.KeepAlive(cvl)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalizeAnimatedBoundsChange"))
 	})
@@ -356,6 +404,8 @@ func (cvl *CollectionViewLayout) FinalizeAnimatedBoundsChange() {
 
 // PrepareForTransitionToLayout prepares the layout object to be uninstalled from the collection view.
 func (cvl *CollectionViewLayout) PrepareForTransitionToLayout(newLayout *CollectionViewLayout) {
+	defer runtime.KeepAlive(cvl)
+	defer runtime.KeepAlive(newLayout)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareForTransitionToLayout:"), objref.IDOf(newLayout))
 	})
@@ -364,6 +414,8 @@ func (cvl *CollectionViewLayout) PrepareForTransitionToLayout(newLayout *Collect
 
 // PrepareForTransitionFromLayout prepares the layout object to be installed in the collection view.
 func (cvl *CollectionViewLayout) PrepareForTransitionFromLayout(oldLayout *CollectionViewLayout) {
+	defer runtime.KeepAlive(cvl)
+	defer runtime.KeepAlive(oldLayout)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareForTransitionFromLayout:"), objref.IDOf(oldLayout))
 	})
@@ -372,6 +424,7 @@ func (cvl *CollectionViewLayout) PrepareForTransitionFromLayout(oldLayout *Colle
 
 // FinalizeLayoutTransition performs any final steps related to a layout transition before the transition animations actually occur.
 func (cvl *CollectionViewLayout) FinalizeLayoutTransition() {
+	defer runtime.KeepAlive(cvl)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalizeLayoutTransition"))
 	})
@@ -380,6 +433,8 @@ func (cvl *CollectionViewLayout) FinalizeLayoutTransition() {
 
 // FinalLayoutAttributesForDisappearingItemAtIndexPath returns the ending layout information for an item being removed from the collection view.
 func (cvl *CollectionViewLayout) FinalLayoutAttributesForDisappearingItemAtIndexPath(itemIndexPath obj.Object) *CollectionViewLayoutAttributes {
+	defer runtime.KeepAlive(cvl)
+	defer runtime.KeepAlive(itemIndexPath)
 	var _mainthread0 *CollectionViewLayoutAttributes
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewLayoutAttributes {
@@ -393,6 +448,9 @@ func (cvl *CollectionViewLayout) FinalLayoutAttributesForDisappearingItemAtIndex
 
 // FinalLayoutAttributesForDisappearingSupplementaryElementOfKindAtIndexPath returns the ending layout information for a supplementary view being removed from the collection view.
 func (cvl *CollectionViewLayout) FinalLayoutAttributesForDisappearingSupplementaryElementOfKindAtIndexPath(elementKind obj.Object, elementIndexPath obj.Object) *CollectionViewLayoutAttributes {
+	defer runtime.KeepAlive(cvl)
+	defer runtime.KeepAlive(elementKind)
+	defer runtime.KeepAlive(elementIndexPath)
 	var _mainthread0 *CollectionViewLayoutAttributes
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewLayoutAttributes {
@@ -406,6 +464,9 @@ func (cvl *CollectionViewLayout) FinalLayoutAttributesForDisappearingSupplementa
 
 // FinalLayoutAttributesForDisappearingDecorationElementOfKindAtIndexPath returns the ending layout information for a decoration view being removed from the collection view.
 func (cvl *CollectionViewLayout) FinalLayoutAttributesForDisappearingDecorationElementOfKindAtIndexPath(elementKind obj.Object, decorationIndexPath obj.Object) *CollectionViewLayoutAttributes {
+	defer runtime.KeepAlive(cvl)
+	defer runtime.KeepAlive(elementKind)
+	defer runtime.KeepAlive(decorationIndexPath)
 	var _mainthread0 *CollectionViewLayoutAttributes
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewLayoutAttributes {
@@ -418,12 +479,15 @@ func (cvl *CollectionViewLayout) FinalLayoutAttributesForDisappearingDecorationE
 }
 
 // IndexPathsToDeleteForSupplementaryViewOfKind returns the index paths for any supplementary views that the layout object wants to remove from the collection view.
-func (cvl *CollectionViewLayout) IndexPathsToDeleteForSupplementaryViewOfKind(elementKind obj.Object) obj.Object {
-	var _mainthread0 obj.Object
+// The order of the returned elements is unspecified.
+func (cvl *CollectionViewLayout) IndexPathsToDeleteForSupplementaryViewOfKind(elementKind obj.Object) []*foundation.IndexPath {
+	defer runtime.KeepAlive(cvl)
+	defer runtime.KeepAlive(elementKind)
+	var _mainthread0 []*foundation.IndexPath
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []*foundation.IndexPath {
 			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("indexPathsToDeleteForSupplementaryViewOfKind:"), objref.IDOf(elementKind))
-			return obj.Wrap(_r)
+			return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.IndexPath { return foundation.IndexPathFromID(_id) })
 		}()
 	})
 	return _mainthread0
@@ -431,12 +495,15 @@ func (cvl *CollectionViewLayout) IndexPathsToDeleteForSupplementaryViewOfKind(el
 }
 
 // IndexPathsToDeleteForDecorationViewOfKind returns index paths for any decoration views that the layout object wants to remove from the collection view.
-func (cvl *CollectionViewLayout) IndexPathsToDeleteForDecorationViewOfKind(elementKind obj.Object) obj.Object {
-	var _mainthread0 obj.Object
+// The order of the returned elements is unspecified.
+func (cvl *CollectionViewLayout) IndexPathsToDeleteForDecorationViewOfKind(elementKind obj.Object) []*foundation.IndexPath {
+	defer runtime.KeepAlive(cvl)
+	defer runtime.KeepAlive(elementKind)
+	var _mainthread0 []*foundation.IndexPath
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []*foundation.IndexPath {
 			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("indexPathsToDeleteForDecorationViewOfKind:"), objref.IDOf(elementKind))
-			return obj.Wrap(_r)
+			return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.IndexPath { return foundation.IndexPathFromID(_id) })
 		}()
 	})
 	return _mainthread0
@@ -444,12 +511,15 @@ func (cvl *CollectionViewLayout) IndexPathsToDeleteForDecorationViewOfKind(eleme
 }
 
 // IndexPathsToInsertForSupplementaryViewOfKind returns the index paths for any supplementary views that the layout object wants to add to the collection view.
-func (cvl *CollectionViewLayout) IndexPathsToInsertForSupplementaryViewOfKind(elementKind obj.Object) obj.Object {
-	var _mainthread0 obj.Object
+// The order of the returned elements is unspecified.
+func (cvl *CollectionViewLayout) IndexPathsToInsertForSupplementaryViewOfKind(elementKind obj.Object) []*foundation.IndexPath {
+	defer runtime.KeepAlive(cvl)
+	defer runtime.KeepAlive(elementKind)
+	var _mainthread0 []*foundation.IndexPath
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []*foundation.IndexPath {
 			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("indexPathsToInsertForSupplementaryViewOfKind:"), objref.IDOf(elementKind))
-			return obj.Wrap(_r)
+			return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.IndexPath { return foundation.IndexPathFromID(_id) })
 		}()
 	})
 	return _mainthread0
@@ -457,12 +527,15 @@ func (cvl *CollectionViewLayout) IndexPathsToInsertForSupplementaryViewOfKind(el
 }
 
 // IndexPathsToInsertForDecorationViewOfKind returns the index paths for any decoration views that the layout object wants to add to the collection view.
-func (cvl *CollectionViewLayout) IndexPathsToInsertForDecorationViewOfKind(elementKind obj.Object) obj.Object {
-	var _mainthread0 obj.Object
+// The order of the returned elements is unspecified.
+func (cvl *CollectionViewLayout) IndexPathsToInsertForDecorationViewOfKind(elementKind obj.Object) []*foundation.IndexPath {
+	defer runtime.KeepAlive(cvl)
+	defer runtime.KeepAlive(elementKind)
+	var _mainthread0 []*foundation.IndexPath
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []*foundation.IndexPath {
 			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("indexPathsToInsertForDecorationViewOfKind:"), objref.IDOf(elementKind))
-			return obj.Wrap(_r)
+			return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.IndexPath { return foundation.IndexPathFromID(_id) })
 		}()
 	})
 	return _mainthread0

@@ -147,11 +147,11 @@ func AVPlayerItemFromID(id objc.ID) *AVPlayerItem {
 }
 
 // Returns a new player item with a specified URL.
-func AVPlayerItemPlayerItemWithURL(uRL *foundation.NSURL) *AVPlayerItem {
+func AVPlayerItemPlayerItemWithURL(url *foundation.NSURL) *AVPlayerItem {
 	var _mainthread0 *AVPlayerItem
 	purego.Main(func() {
 		_mainthread0 = func() *AVPlayerItem {
-			_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerItem), _aVPlayerItemSelPlayerItemWithURL, uRL.Ptr())
+			_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerItem), _aVPlayerItemSelPlayerItemWithURL, url.Ptr())
 			if _ret != 0 {
 				_ret.Send(objc.RegisterName("retain"))
 			}
@@ -192,8 +192,8 @@ func AVPlayerItemPlayerItemWithAssetAutomaticallyLoadedAssetKeys(asset *AVAsset,
 }
 
 // Creates a player item with a specified URL.
-func (o *AVPlayerItem) InitWithURL(uRL *foundation.NSURL) *AVPlayerItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelInitWithURL, uRL.Ptr())
+func (o *AVPlayerItem) InitWithURL(url *foundation.NSURL) *AVPlayerItem {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelInitWithURL, url.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

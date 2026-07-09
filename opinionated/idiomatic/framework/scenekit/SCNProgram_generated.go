@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func programAdopt(id objc.ID) *Program {
 
 // Description returns the object's -description text.
 func (p *Program) Description() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (p *Program) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (p *Program) IsKind(className string) bool {
+	defer runtime.KeepAlive(p)
 	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (p *Program) String() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
@@ -121,12 +128,14 @@ func (p *Program) WithOpaque(opaque bool) *Program {
 }
 
 // SetSemanticForSymbolOptions associates a SceneKit semantic identifier with the specified GLSL vertex attribute or uniform variable.
-func (p *Program) SetSemanticForSymbolOptions(semantic string, symbol string, options obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setSemantic:forSymbol:options:"), purego.NSString(semantic), purego.NSString(symbol), objref.IDOf(options))
+func (p *Program) SetSemanticForSymbolOptions(semantic string, symbol string, options map[string]obj.Object) {
+	defer runtime.KeepAlive(p)
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setSemantic:forSymbol:options:"), purego.NSString(semantic), purego.NSString(symbol), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SemanticForSymbol returns the SceneKit semantic identifiers associated with the specified GLSL vertex attribute or uniform variable.
 func (p *Program) SemanticForSymbol(symbol string) string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("semanticForSymbol:"), purego.NSString(symbol))
 	if _r == 0 {
 		return ""
@@ -136,6 +145,7 @@ func (p *Program) SemanticForSymbol(symbol string) string {
 
 // VertexShader determines the receiver's vertex shader.
 func (p *Program) VertexShader() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("vertexShader"))
 	if _r == 0 {
 		return ""
@@ -145,6 +155,7 @@ func (p *Program) VertexShader() string {
 
 // FragmentShader determines the receiver's fragment shader.
 func (p *Program) FragmentShader() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fragmentShader"))
 	if _r == 0 {
 		return ""
@@ -154,6 +165,7 @@ func (p *Program) FragmentShader() string {
 
 // TessellationControlShader determines the receiver's tessellation control shader. Tessellation shaders require OpenGL Core Profile.
 func (p *Program) TessellationControlShader() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("tessellationControlShader"))
 	if _r == 0 {
 		return ""
@@ -163,6 +175,7 @@ func (p *Program) TessellationControlShader() string {
 
 // TessellationEvaluationShader determines the receiver's tessellation evaluation shader. Tessellation shaders require OpenGL Core Profile.
 func (p *Program) TessellationEvaluationShader() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("tessellationEvaluationShader"))
 	if _r == 0 {
 		return ""
@@ -172,6 +185,7 @@ func (p *Program) TessellationEvaluationShader() string {
 
 // GeometryShader determines the receiver's geometry shader. Geometry shaders require OpenGL Core Profile.
 func (p *Program) GeometryShader() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("geometryShader"))
 	if _r == 0 {
 		return ""
@@ -181,6 +195,7 @@ func (p *Program) GeometryShader() string {
 
 // VertexFunctionName determines the receiver's vertex function name. The name of the vertex function (for Metal programs).
 func (p *Program) VertexFunctionName() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("vertexFunctionName"))
 	if _r == 0 {
 		return ""
@@ -190,6 +205,7 @@ func (p *Program) VertexFunctionName() string {
 
 // FragmentFunctionName determines the receiver's fragment function name. The name of the fragment function (for Metal programs).
 func (p *Program) FragmentFunctionName() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fragmentFunctionName"))
 	if _r == 0 {
 		return ""
@@ -199,6 +215,7 @@ func (p *Program) FragmentFunctionName() string {
 
 // IsOpaque reports whether determines the receiver's fragment are opaque or not. Defaults to true.
 func (p *Program) IsOpaque() bool {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isOpaque"))
 	return _r
 }

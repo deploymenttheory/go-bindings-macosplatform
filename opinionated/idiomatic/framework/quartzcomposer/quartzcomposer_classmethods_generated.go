@@ -5,9 +5,12 @@
 package quartzcomposer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -18,8 +21,8 @@ func CompositionWithFile(path string) obj.Object {
 }
 
 // CompositionWithData wraps the corresponding Objective-C method.
-func CompositionWithData(data obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("QCComposition")), objc.RegisterName("compositionWithData:"), objref.IDOf(data))
+func CompositionWithData(data []byte) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("QCComposition")), objc.RegisterName("compositionWithData:"), rt.BytesToNSData(data))
 	return obj.Wrap(_r)
 }
 
@@ -31,6 +34,7 @@ func CompositionLayerWithFile(path string) obj.Object {
 
 // CompositionLayerWithComposition wraps the corresponding Objective-C method.
 func CompositionLayerWithComposition(composition obj.Object) obj.Object {
+	defer runtime.KeepAlive(composition)
 	_r := objc.Send[objc.ID](objc.ID(_class("QCCompositionLayer")), objc.RegisterName("compositionLayerWithComposition:"), objref.IDOf(composition))
 	return obj.Wrap(_r)
 }

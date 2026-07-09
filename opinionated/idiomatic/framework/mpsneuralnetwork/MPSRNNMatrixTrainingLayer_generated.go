@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func rNNMatrixTrainingLayerAdopt(id objc.ID) *RNNMatrixTrainingLayer {
 
 // Description returns the object's -description text.
 func (rmtl *RNNMatrixTrainingLayer) Description() string {
+	defer runtime.KeepAlive(rmtl)
 	return rt.Description(objref.IDOf(rmtl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rmtl *RNNMatrixTrainingLayer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rmtl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rmtl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rmtl *RNNMatrixTrainingLayer) IsKind(className string) bool {
+	defer runtime.KeepAlive(rmtl)
 	return rt.IsKind(objref.IDOf(rmtl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rmtl *RNNMatrixTrainingLayer) String() string {
+	defer runtime.KeepAlive(rmtl)
 	return rt.Description(objref.IDOf(rmtl))
 }
 
@@ -96,41 +103,48 @@ func (rmtl *RNNMatrixTrainingLayer) WithAccumulateWeightGradients(accumulateWeig
 
 // CreateWeightMatrices initializes a set of matrices that can be used in training for weight and bias matrices in the forward and backward passes. The layout, datatype and number of matrices is the same as for the outputs of
 func (rmtl *RNNMatrixTrainingLayer) CreateWeightMatrices(matricesOut []obj.Object) {
+	defer runtime.KeepAlive(rmtl)
 	objc.Send[objc.ID](objref.IDOf(rmtl), objc.RegisterName("createWeightMatrices:"), purego.SliceToNSArray(matricesOut, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // InputFeatureChannels returns the number of feature channels input vector/matrix.
 func (rmtl *RNNMatrixTrainingLayer) InputFeatureChannels() int {
+	defer runtime.KeepAlive(rmtl)
 	_r := objc.Send[int](objref.IDOf(rmtl), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
 // OutputFeatureChannels returns the number of feature channels in the output vector/matrix.
 func (rmtl *RNNMatrixTrainingLayer) OutputFeatureChannels() int {
+	defer runtime.KeepAlive(rmtl)
 	_r := objc.Send[int](objref.IDOf(rmtl), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }
 
 // StoreAllIntermediateStates reports whether if true then calls to functions
 func (rmtl *RNNMatrixTrainingLayer) StoreAllIntermediateStates() bool {
+	defer runtime.KeepAlive(rmtl)
 	_r := objc.Send[bool](objref.IDOf(rmtl), objc.RegisterName("storeAllIntermediateStates"))
 	return _r
 }
 
 // RecurrentOutputIsTemporary reports whether how recurrent output states from
 func (rmtl *RNNMatrixTrainingLayer) RecurrentOutputIsTemporary() bool {
+	defer runtime.KeepAlive(rmtl)
 	_r := objc.Send[bool](objref.IDOf(rmtl), objc.RegisterName("recurrentOutputIsTemporary"))
 	return _r
 }
 
 // TrainingStateIsTemporary reports whether how training output states from
 func (rmtl *RNNMatrixTrainingLayer) TrainingStateIsTemporary() bool {
+	defer runtime.KeepAlive(rmtl)
 	_r := objc.Send[bool](objref.IDOf(rmtl), objc.RegisterName("trainingStateIsTemporary"))
 	return _r
 }
 
 // AccumulateWeightGradients reports whether if yes then the computed weight gradients are accumulated on top of existing values in calls to the gradient computation functions: encodeGradientSequenceToCommandBuffer. Defaults to false.
 func (rmtl *RNNMatrixTrainingLayer) AccumulateWeightGradients() bool {
+	defer runtime.KeepAlive(rmtl)
 	_r := objc.Send[bool](objref.IDOf(rmtl), objc.RegisterName("accumulateWeightGradients"))
 	return _r
 }

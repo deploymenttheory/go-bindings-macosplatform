@@ -5,9 +5,11 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,6 +50,8 @@ func lightProbeAdopt(id objc.ID) *LightProbe {
 
 // NewLightProbeWithReflectiveTextureIrradianceTexture initializes a light probe with the specified cube map textures.
 func NewLightProbeWithReflectiveTextureIrradianceTexture(reflectiveTexture *Texture, irradianceTexture *Texture) *LightProbe {
+	defer runtime.KeepAlive(reflectiveTexture)
+	defer runtime.KeepAlive(irradianceTexture)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLLightProbe")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReflectiveTexture:irradianceTexture:"), objref.IDOf(reflectiveTexture), objref.IDOf(irradianceTexture))
 	return lightProbeAdopt(_id)
@@ -67,12 +71,14 @@ func (lp *LightProbe) WithColorSpace(colorSpace string) *LightProbe {
 
 // WithParent sets the parent object that contains this object.
 func (lp *LightProbe) WithParent(parent ObjectProvider) *LightProbe {
+	defer runtime.KeepAlive(parent)
 	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return lp
 }
 
 // WithInstance sets the primary object, if applicable, of which this object is an instance.
 func (lp *LightProbe) WithInstance(instance ObjectProvider) *LightProbe {
+	defer runtime.KeepAlive(instance)
 	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return lp
 }
@@ -85,31 +91,36 @@ func (lp *LightProbe) WithHidden(hidden bool) *LightProbe {
 
 // GenerateSphericalHarmonicsFromIrradiance generates spherical harmonics information based on the light probe’s irradiance texture.
 func (lp *LightProbe) GenerateSphericalHarmonicsFromIrradiance(sphericalHarmonicsLevel int) {
+	defer runtime.KeepAlive(lp)
 	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("generateSphericalHarmonicsFromIrradiance:"), sphericalHarmonicsLevel)
 }
 
 // ReflectiveTexture returns the reflective texture.
 func (lp *LightProbe) ReflectiveTexture() *Texture {
+	defer runtime.KeepAlive(lp)
 	_r := objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("reflectiveTexture"))
 	return TextureFromID(_r)
 }
 
 // IrradianceTexture returns the irradiance texture.
 func (lp *LightProbe) IrradianceTexture() *Texture {
+	defer runtime.KeepAlive(lp)
 	_r := objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("irradianceTexture"))
 	return TextureFromID(_r)
 }
 
 // SphericalHarmonicsLevel returns the spherical harmonics level.
 func (lp *LightProbe) SphericalHarmonicsLevel() int {
+	defer runtime.KeepAlive(lp)
 	_r := objc.Send[int](objref.IDOf(lp), objc.RegisterName("sphericalHarmonicsLevel"))
 	return _r
 }
 
 // SphericalHarmonicsCoefficients returns the spherical harmonics coefficients.
-func (lp *LightProbe) SphericalHarmonicsCoefficients() obj.Object {
+func (lp *LightProbe) SphericalHarmonicsCoefficients() []byte {
+	defer runtime.KeepAlive(lp)
 	_r := objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("sphericalHarmonicsCoefficients"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ LightProvider = (*LightProbe)(nil)

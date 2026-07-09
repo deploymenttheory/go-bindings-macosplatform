@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func geometryTessellatorAdopt(id objc.ID) *GeometryTessellator {
 
 // Description returns the object's -description text.
 func (gt *GeometryTessellator) Description() string {
+	defer runtime.KeepAlive(gt)
 	return rt.Description(objref.IDOf(gt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gt *GeometryTessellator) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gt *GeometryTessellator) IsKind(className string) bool {
+	defer runtime.KeepAlive(gt)
 	return rt.IsKind(objref.IDOf(gt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gt *GeometryTessellator) String() string {
+	defer runtime.KeepAlive(gt)
 	return rt.Description(objref.IDOf(gt))
 }
 
@@ -114,42 +121,49 @@ func (gt *GeometryTessellator) WithSmoothingMode(smoothingMode TessellationSmoot
 
 // TessellationFactorScale specifies the scale factor applied to the per-patch tessellation factors. Defaults to 1.
 func (gt *GeometryTessellator) TessellationFactorScale() float64 {
+	defer runtime.KeepAlive(gt)
 	_r := objc.Send[float64](objref.IDOf(gt), objc.RegisterName("tessellationFactorScale"))
 	return _r
 }
 
 // IsAdaptive reports whether specifies if the tessellation should be uniform or adaptive. Defaults to false.
 func (gt *GeometryTessellator) IsAdaptive() bool {
+	defer runtime.KeepAlive(gt)
 	_r := objc.Send[bool](objref.IDOf(gt), objc.RegisterName("isAdaptive"))
 	return _r
 }
 
 // IsScreenSpace reports whether specifies if the level of tessellation should be adapted in screenSpace. Defaults to false.
 func (gt *GeometryTessellator) IsScreenSpace() bool {
+	defer runtime.KeepAlive(gt)
 	_r := objc.Send[bool](objref.IDOf(gt), objc.RegisterName("isScreenSpace"))
 	return _r
 }
 
 // EdgeTessellationFactor specifies the edge tessellation factor. Defaults to 1. This has no effect for adaptive subdivision
 func (gt *GeometryTessellator) EdgeTessellationFactor() float64 {
+	defer runtime.KeepAlive(gt)
 	_r := objc.Send[float64](objref.IDOf(gt), objc.RegisterName("edgeTessellationFactor"))
 	return _r
 }
 
 // InsideTessellationFactor specifies the inside tessellation factor. Defaults to 1. This has no effect for adaptive subdivision
 func (gt *GeometryTessellator) InsideTessellationFactor() float64 {
+	defer runtime.KeepAlive(gt)
 	_r := objc.Send[float64](objref.IDOf(gt), objc.RegisterName("insideTessellationFactor"))
 	return _r
 }
 
 // MaximumEdgeLength specifies the maximum edge length. Defaults to 1. This has no effect for non-adaptive subdivision
 func (gt *GeometryTessellator) MaximumEdgeLength() float64 {
+	defer runtime.KeepAlive(gt)
 	_r := objc.Send[float64](objref.IDOf(gt), objc.RegisterName("maximumEdgeLength"))
 	return _r
 }
 
 // SmoothingMode returns defaults to SCNTessellationSmoothingModeNone.
 func (gt *GeometryTessellator) SmoothingMode() TessellationSmoothingMode {
+	defer runtime.KeepAlive(gt)
 	_r := objc.Send[TessellationSmoothingMode](objref.IDOf(gt), objc.RegisterName("smoothingMode"))
 	return _r
 }

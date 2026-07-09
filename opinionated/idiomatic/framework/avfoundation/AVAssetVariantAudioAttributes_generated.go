@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func assetVariantAudioAttributesAdopt(id objc.ID) *AssetVariantAudioAttributes {
 
 // Description returns the object's -description text.
 func (avaa *AssetVariantAudioAttributes) Description() string {
+	defer runtime.KeepAlive(avaa)
 	return rt.Description(objref.IDOf(avaa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (avaa *AssetVariantAudioAttributes) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(avaa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(avaa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (avaa *AssetVariantAudioAttributes) IsKind(className string) bool {
+	defer runtime.KeepAlive(avaa)
 	return rt.IsKind(objref.IDOf(avaa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (avaa *AssetVariantAudioAttributes) String() string {
+	defer runtime.KeepAlive(avaa)
 	return rt.Description(objref.IDOf(avaa))
 }
 
@@ -74,6 +81,8 @@ func NewAssetVariantAudioAttributes() *AssetVariantAudioAttributes {
 
 // RenditionSpecificAttributesForMediaOption provides attributes for a specific audio media selection option. If no rendition specific attributes are declared, it will be nil. - Parameter mediaSelectionOption: The option to return rendition specific information for.
 func (avaa *AssetVariantAudioAttributes) RenditionSpecificAttributesForMediaOption(mediaSelectionOption *MediaSelectionOption) *AssetVariantAudioRenditionSpecificAttributes {
+	defer runtime.KeepAlive(avaa)
+	defer runtime.KeepAlive(mediaSelectionOption)
 	_r := objc.Send[objc.ID](objref.IDOf(avaa), objc.RegisterName("renditionSpecificAttributesForMediaOption:"), objref.IDOf(mediaSelectionOption))
 	return AssetVariantAudioRenditionSpecificAttributesFromID(_r)
 }
@@ -82,6 +91,7 @@ func (avaa *AssetVariantAudioAttributes) RenditionSpecificAttributesForMediaOpti
 //
 // FormatIDs returns the collection as a Go slice.
 func (avaa *AssetVariantAudioAttributes) FormatIDs() []obj.Object {
+	defer runtime.KeepAlive(avaa)
 	_arr := objc.Send[objc.ID](objref.IDOf(avaa), objc.RegisterName("formatIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

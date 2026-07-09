@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func musicTrackAdopt(id objc.ID) *MusicTrack {
 
 // Description returns the object's -description text.
 func (mt *MusicTrack) Description() string {
+	defer runtime.KeepAlive(mt)
 	return rt.Description(objref.IDOf(mt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mt *MusicTrack) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mt *MusicTrack) IsKind(className string) bool {
+	defer runtime.KeepAlive(mt)
 	return rt.IsKind(objref.IDOf(mt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mt *MusicTrack) String() string {
+	defer runtime.KeepAlive(mt)
 	return rt.Description(objref.IDOf(mt))
 }
 
@@ -74,6 +81,7 @@ func NewMusicTrack() *MusicTrack {
 
 // WithDestinationAudioUnit sets the audio unit that receives the track’s events.
 func (mt *MusicTrack) WithDestinationAudioUnit(destinationAudioUnit AudioUnitProvider) *MusicTrack {
+	defer runtime.KeepAlive(destinationAudioUnit)
 	objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("setDestinationAudioUnit:"), objref.IDOf(destinationAudioUnit))
 	return mt
 }
@@ -134,71 +142,84 @@ func (mt *MusicTrack) WithUsesAutomatedParameters(usesAutomatedParameters bool) 
 
 // DestinationAudioUnit returns the AVAudioUnit which will receive the track's events This is mutually exclusive with setting a destination MIDIEndpoint.  The AU must already be attached to an audio engine, and the track must be part of the AVAudioSequencer associated with that engine. When playing, the track will send its events to that AVAudioUnit. The destination AU cannot be changed while the track's sequence is playing.
 func (mt *MusicTrack) DestinationAudioUnit() *AudioUnit {
+	defer runtime.KeepAlive(mt)
 	_r := objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("destinationAudioUnit"))
 	return AudioUnitFromID(_r)
 }
 
 // DestinationMIDIEndpoint returns the destination midi endpoint.
 func (mt *MusicTrack) DestinationMIDIEndpoint() int {
+	defer runtime.KeepAlive(mt)
 	_r := objc.Send[int](objref.IDOf(mt), objc.RegisterName("destinationMIDIEndpoint"))
 	return _r
 }
 
 // IsLoopingEnabled reports whether or not the track is looped. If loopRange has not been set, the full track will be looped.
 func (mt *MusicTrack) IsLoopingEnabled() bool {
+	defer runtime.KeepAlive(mt)
 	_r := objc.Send[bool](objref.IDOf(mt), objc.RegisterName("isLoopingEnabled"))
 	return _r
 }
 
 // NumberOfLoops returns the number of times that the track's loop will repeat If set to AVMusicTrackLoopCountForever, the track will loop forever. Otherwise, legal values start with 1.
 func (mt *MusicTrack) NumberOfLoops() int {
+	defer runtime.KeepAlive(mt)
 	_r := objc.Send[int](objref.IDOf(mt), objc.RegisterName("numberOfLoops"))
 	return _r
 }
 
 // OffsetTime returns offset the track's start time to the specified time in beats By default this value is zero.
 func (mt *MusicTrack) OffsetTime() float64 {
+	defer runtime.KeepAlive(mt)
 	_r := objc.Send[float64](objref.IDOf(mt), objc.RegisterName("offsetTime"))
 	return _r
 }
 
 // IsMuted reports whether the track is muted
 func (mt *MusicTrack) IsMuted() bool {
+	defer runtime.KeepAlive(mt)
 	_r := objc.Send[bool](objref.IDOf(mt), objc.RegisterName("isMuted"))
 	return _r
 }
 
 // IsSoloed reports whether the track is soloed
 func (mt *MusicTrack) IsSoloed() bool {
+	defer runtime.KeepAlive(mt)
 	_r := objc.Send[bool](objref.IDOf(mt), objc.RegisterName("isSoloed"))
 	return _r
 }
 
 // LengthInBeats returns the total duration of the track in beats This will return the beat of the last event in the track plus any additional time that may be needed for fading out of ending notes or round a loop point to musical bar, etc.  If this has not been set by the user, the track length will always be adjusted to the end of the last active event in a track and is adjusted dynamically as events are added or removed. The property will return the maximum of the user-set track length, or the calculated length.
 func (mt *MusicTrack) LengthInBeats() float64 {
+	defer runtime.KeepAlive(mt)
 	_r := objc.Send[float64](objref.IDOf(mt), objc.RegisterName("lengthInBeats"))
 	return _r
 }
 
 // LengthInSeconds returns the total duration of the track in seconds This will return time of the last event in the track plus any additional time that may be needed for fading out of ending notes or round a loop point to musical bar, etc.  If this has not been set by the user, the track length will always be adjusted to the end of the last active event in a track and is adjusted dynamically as events are added or removed. The property will return the maximum of the user-set track length, or the calculated length.
 func (mt *MusicTrack) LengthInSeconds() float64 {
+	defer runtime.KeepAlive(mt)
 	_r := objc.Send[float64](objref.IDOf(mt), objc.RegisterName("lengthInSeconds"))
 	return _r
 }
 
 // TimeResolution returns the time resolution value for the sequence, in ticks (pulses) per quarter note (PPQN) If a MIDI file was used to construct the containing sequence, the resolution will be what was in the file. If you want to keep a time resolution when writing a new file, you can retrieve this value and then specify it when calling -[AVAudioSequencer writeToFile:flags:withResolution]. It has no direct bearing on the rendering or notion of time of the sequence itself, just its representation in MIDI files. By default this is set to either 480 if the sequence was created manually, or a value based on what was in a MIDI file if the sequence was created from a MIDI file. This can only be retrieved from the tempo track.
 func (mt *MusicTrack) TimeResolution() int {
+	defer runtime.KeepAlive(mt)
 	_r := objc.Send[int](objref.IDOf(mt), objc.RegisterName("timeResolution"))
 	return _r
 }
 
 // AddEventAtBeat adds a music event to a track at the time you specify.
 func (mt *MusicTrack) AddEventAtBeat(event *MusicEvent, beat float64) {
+	defer runtime.KeepAlive(mt)
+	defer runtime.KeepAlive(event)
 	objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("addEvent:atBeat:"), objref.IDOf(event), beat)
 }
 
 // UsesAutomatedParameters reports whether the track is an automation track. If set to true, this can be used to contain, parameter automation events, exclusively. Adding any other event types will generate exceptions. If a track already contains non-parameter events, setting this to true will generate an exception.
 func (mt *MusicTrack) UsesAutomatedParameters() bool {
+	defer runtime.KeepAlive(mt)
 	_r := objc.Send[bool](objref.IDOf(mt), objc.RegisterName("usesAutomatedParameters"))
 	return _r
 }

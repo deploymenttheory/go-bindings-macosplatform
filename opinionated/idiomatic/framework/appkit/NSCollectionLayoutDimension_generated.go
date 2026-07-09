@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func collectionLayoutDimensionAdopt(id objc.ID) *CollectionLayoutDimension {
 
 // Description returns the object's -description text.
 func (cld *CollectionLayoutDimension) Description() string {
+	defer runtime.KeepAlive(cld)
 	return rt.Description(objref.IDOf(cld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cld *CollectionLayoutDimension) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cld)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cld *CollectionLayoutDimension) IsKind(className string) bool {
+	defer runtime.KeepAlive(cld)
 	return rt.IsKind(objref.IDOf(cld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cld *CollectionLayoutDimension) String() string {
+	defer runtime.KeepAlive(cld)
 	return rt.Description(objref.IDOf(cld))
 }
 
@@ -80,6 +87,7 @@ func NewCollectionLayoutDimension() *CollectionLayoutDimension {
 
 // IsFractionalWidth reports whether the object is fractional width.
 func (cld *CollectionLayoutDimension) IsFractionalWidth() bool {
+	defer runtime.KeepAlive(cld)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -93,6 +101,7 @@ func (cld *CollectionLayoutDimension) IsFractionalWidth() bool {
 
 // IsFractionalHeight reports whether the object is fractional height.
 func (cld *CollectionLayoutDimension) IsFractionalHeight() bool {
+	defer runtime.KeepAlive(cld)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -106,6 +115,7 @@ func (cld *CollectionLayoutDimension) IsFractionalHeight() bool {
 
 // IsAbsolute reports whether the object is absolute.
 func (cld *CollectionLayoutDimension) IsAbsolute() bool {
+	defer runtime.KeepAlive(cld)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -119,6 +129,7 @@ func (cld *CollectionLayoutDimension) IsAbsolute() bool {
 
 // IsEstimated reports whether the object is estimated.
 func (cld *CollectionLayoutDimension) IsEstimated() bool {
+	defer runtime.KeepAlive(cld)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -132,6 +143,7 @@ func (cld *CollectionLayoutDimension) IsEstimated() bool {
 
 // Dimension returns the dimension.
 func (cld *CollectionLayoutDimension) Dimension() float64 {
+	defer runtime.KeepAlive(cld)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {

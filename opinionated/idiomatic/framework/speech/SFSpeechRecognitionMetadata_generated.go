@@ -5,6 +5,8 @@
 package speech
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func speechRecognitionMetadataAdopt(id objc.ID) *SpeechRecognitionMetadata {
 
 // Description returns the object's -description text.
 func (srm *SpeechRecognitionMetadata) Description() string {
+	defer runtime.KeepAlive(srm)
 	return rt.Description(objref.IDOf(srm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (srm *SpeechRecognitionMetadata) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(srm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(srm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (srm *SpeechRecognitionMetadata) IsKind(className string) bool {
+	defer runtime.KeepAlive(srm)
 	return rt.IsKind(objref.IDOf(srm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (srm *SpeechRecognitionMetadata) String() string {
+	defer runtime.KeepAlive(srm)
 	return rt.Description(objref.IDOf(srm))
 }
 
@@ -74,30 +81,35 @@ func NewSpeechRecognitionMetadata() *SpeechRecognitionMetadata {
 
 // SpeakingRate returns the number of words spoken per minute.
 func (srm *SpeechRecognitionMetadata) SpeakingRate() float64 {
+	defer runtime.KeepAlive(srm)
 	_r := objc.Send[float64](objref.IDOf(srm), objc.RegisterName("speakingRate"))
 	return _r
 }
 
 // AveragePauseDuration returns the average pause duration between words, measured in seconds.
 func (srm *SpeechRecognitionMetadata) AveragePauseDuration() float64 {
+	defer runtime.KeepAlive(srm)
 	_r := objc.Send[float64](objref.IDOf(srm), objc.RegisterName("averagePauseDuration"))
 	return _r
 }
 
 // SpeechStartTimestamp returns the start timestamp of speech in the audio.
 func (srm *SpeechRecognitionMetadata) SpeechStartTimestamp() float64 {
+	defer runtime.KeepAlive(srm)
 	_r := objc.Send[float64](objref.IDOf(srm), objc.RegisterName("speechStartTimestamp"))
 	return _r
 }
 
 // SpeechDuration returns the duration in seconds of speech in the audio.
 func (srm *SpeechRecognitionMetadata) SpeechDuration() float64 {
+	defer runtime.KeepAlive(srm)
 	_r := objc.Send[float64](objref.IDOf(srm), objc.RegisterName("speechDuration"))
 	return _r
 }
 
 // VoiceAnalytics returns an analysis of the transcription segment's vocal properties.
 func (srm *SpeechRecognitionMetadata) VoiceAnalytics() *VoiceAnalytics {
+	defer runtime.KeepAlive(srm)
 	_r := objc.Send[objc.ID](objref.IDOf(srm), objc.RegisterName("voiceAnalytics"))
 	return VoiceAnalyticsFromID(_r)
 }

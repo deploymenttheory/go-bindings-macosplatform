@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func renderPassAttachmentDescriptorAdopt(id objc.ID) *RenderPassAttachmentDescri
 
 // Description returns the object's -description text.
 func (rpad *RenderPassAttachmentDescriptor) Description() string {
+	defer runtime.KeepAlive(rpad)
 	return rt.Description(objref.IDOf(rpad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rpad *RenderPassAttachmentDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rpad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rpad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rpad *RenderPassAttachmentDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(rpad)
 	return rt.IsKind(objref.IDOf(rpad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rpad *RenderPassAttachmentDescriptor) String() string {
+	defer runtime.KeepAlive(rpad)
 	return rt.Description(objref.IDOf(rpad))
 }
 
@@ -124,54 +131,63 @@ func (rpad *RenderPassAttachmentDescriptor) WithStoreActionOptions(storeActionOp
 
 // Level returns the mipmap level of the texture to be used for rendering.  Default is zero.
 func (rpad *RenderPassAttachmentDescriptor) Level() int {
+	defer runtime.KeepAlive(rpad)
 	_r := objc.Send[int](objref.IDOf(rpad), objc.RegisterName("level"))
 	return _r
 }
 
 // Slice returns the slice of the texture to be used for rendering.  Default is zero.
 func (rpad *RenderPassAttachmentDescriptor) Slice() int {
+	defer runtime.KeepAlive(rpad)
 	_r := objc.Send[int](objref.IDOf(rpad), objc.RegisterName("slice"))
 	return _r
 }
 
 // DepthPlane returns the depth plane of the texture to be used for rendering.  Default is zero.
 func (rpad *RenderPassAttachmentDescriptor) DepthPlane() int {
+	defer runtime.KeepAlive(rpad)
 	_r := objc.Send[int](objref.IDOf(rpad), objc.RegisterName("depthPlane"))
 	return _r
 }
 
 // ResolveLevel returns the mipmap level of the resolve texture to be used for multisample resolve.  Defaults to zero.
 func (rpad *RenderPassAttachmentDescriptor) ResolveLevel() int {
+	defer runtime.KeepAlive(rpad)
 	_r := objc.Send[int](objref.IDOf(rpad), objc.RegisterName("resolveLevel"))
 	return _r
 }
 
 // ResolveSlice returns the texture slice of the resolve texture to be used for multisample resolve.  Defaults to zero.
 func (rpad *RenderPassAttachmentDescriptor) ResolveSlice() int {
+	defer runtime.KeepAlive(rpad)
 	_r := objc.Send[int](objref.IDOf(rpad), objc.RegisterName("resolveSlice"))
 	return _r
 }
 
 // ResolveDepthPlane returns the texture depth plane of the resolve texture to be used for multisample resolve.  Defaults to zero.
 func (rpad *RenderPassAttachmentDescriptor) ResolveDepthPlane() int {
+	defer runtime.KeepAlive(rpad)
 	_r := objc.Send[int](objref.IDOf(rpad), objc.RegisterName("resolveDepthPlane"))
 	return _r
 }
 
 // LoadAction returns the action to be performed with this attachment at the beginning of a render pass.  Default is MTLLoadActionDontCare unless specified by a creation or init method.
 func (rpad *RenderPassAttachmentDescriptor) LoadAction() LoadAction {
+	defer runtime.KeepAlive(rpad)
 	_r := objc.Send[LoadAction](objref.IDOf(rpad), objc.RegisterName("loadAction"))
 	return _r
 }
 
 // StoreAction returns the action to be performed with this attachment at the end of a render pass.  Default is MTLStoreActionDontCare unless specified by a creation or init method.
 func (rpad *RenderPassAttachmentDescriptor) StoreAction() StoreAction {
+	defer runtime.KeepAlive(rpad)
 	_r := objc.Send[StoreAction](objref.IDOf(rpad), objc.RegisterName("storeAction"))
 	return _r
 }
 
 // StoreActionOptions returns optional configuration for the store action performed with this attachment at the end of a render pass.  Default is MTLStoreActionOptionNone.
 func (rpad *RenderPassAttachmentDescriptor) StoreActionOptions() StoreActionOptions {
+	defer runtime.KeepAlive(rpad)
 	_r := objc.Send[StoreActionOptions](objref.IDOf(rpad), objc.RegisterName("storeActionOptions"))
 	return _r
 }

@@ -5,7 +5,10 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func nEIPv6RouteAdopt(id objc.ID) *NEIPv6Route {
 
 // Description returns the object's -description text.
 func (npr *NEIPv6Route) Description() string {
+	defer runtime.KeepAlive(npr)
 	return rt.Description(objref.IDOf(npr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (npr *NEIPv6Route) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(npr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(npr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (npr *NEIPv6Route) IsKind(className string) bool {
+	defer runtime.KeepAlive(npr)
 	return rt.IsKind(objref.IDOf(npr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (npr *NEIPv6Route) String() string {
+	defer runtime.KeepAlive(npr)
 	return rt.Description(objref.IDOf(npr))
 }
 
 // NewNEIPv6RouteWithDestinationAddressNetworkPrefixLength initialize the NEIPv6Route
 func NewNEIPv6RouteWithDestinationAddressNetworkPrefixLength(address string, networkPrefixLength obj.Object) *NEIPv6Route {
+	defer runtime.KeepAlive(networkPrefixLength)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NEIPv6Route")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestinationAddress:networkPrefixLength:"), purego.NSString(address), objref.IDOf(networkPrefixLength))
 	return nEIPv6RouteAdopt(_id)
@@ -81,6 +90,7 @@ func (npr *NEIPv6Route) WithGatewayAddress(gatewayAddress string) *NEIPv6Route {
 
 // DestinationAddress returns an IPv6 address represented as a string.
 func (npr *NEIPv6Route) DestinationAddress() string {
+	defer runtime.KeepAlive(npr)
 	_r := objc.Send[objc.ID](objref.IDOf(npr), objc.RegisterName("destinationAddress"))
 	if _r == 0 {
 		return ""
@@ -89,13 +99,15 @@ func (npr *NEIPv6Route) DestinationAddress() string {
 }
 
 // DestinationNetworkPrefixLength returns a number containing the length in bits of the network prefix of the destination network. This prefix in combination with the destinationAddress property is used to determine the destination network of the route.
-func (npr *NEIPv6Route) DestinationNetworkPrefixLength() obj.Object {
+func (npr *NEIPv6Route) DestinationNetworkPrefixLength() *foundation.Number {
+	defer runtime.KeepAlive(npr)
 	_r := objc.Send[objc.ID](objref.IDOf(npr), objc.RegisterName("destinationNetworkPrefixLength"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // GatewayAddress returns the IPv6 address of the route's gateway. If this property is nil then the route's gateway will be set to the tunnel's virtual interface.
 func (npr *NEIPv6Route) GatewayAddress() string {
+	defer runtime.KeepAlive(npr)
 	_r := objc.Send[objc.ID](objref.IDOf(npr), objc.RegisterName("gatewayAddress"))
 	if _r == 0 {
 		return ""

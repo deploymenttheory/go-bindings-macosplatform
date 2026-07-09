@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTL4StaticLinkingDescriptorAdopt(id objc.ID) *MTL4StaticLinkingDescriptor {
 
 // Description returns the object's -description text.
 func (msld *MTL4StaticLinkingDescriptor) Description() string {
+	defer runtime.KeepAlive(msld)
 	return rt.Description(objref.IDOf(msld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msld *MTL4StaticLinkingDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msld)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msld *MTL4StaticLinkingDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(msld)
 	return rt.IsKind(objref.IDOf(msld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msld *MTL4StaticLinkingDescriptor) String() string {
+	defer runtime.KeepAlive(msld)
 	return rt.Description(objref.IDOf(msld))
 }
 
@@ -87,8 +94,8 @@ func (msld *MTL4StaticLinkingDescriptor) WithPrivateFunctionDescriptors(items ..
 }
 
 // WithGroups sets assigns groups of functions to match call-site attributes in shader code.
-func (msld *MTL4StaticLinkingDescriptor) WithGroups(groups obj.Object) *MTL4StaticLinkingDescriptor {
-	objc.Send[objc.ID](objref.IDOf(msld), objc.RegisterName("setGroups:"), objref.IDOf(groups))
+func (msld *MTL4StaticLinkingDescriptor) WithGroups(groups map[string]obj.Object) *MTL4StaticLinkingDescriptor {
+	objc.Send[objc.ID](objref.IDOf(msld), objc.RegisterName("setGroups:"), rt.MapToDict(groups, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return msld
 }
 
@@ -96,6 +103,7 @@ func (msld *MTL4StaticLinkingDescriptor) WithGroups(groups obj.Object) *MTL4Stat
 //
 // FunctionDescriptors returns the collection as a Go slice.
 func (msld *MTL4StaticLinkingDescriptor) FunctionDescriptors() []*MTL4FunctionDescriptor {
+	defer runtime.KeepAlive(msld)
 	_arr := objc.Send[objc.ID](objref.IDOf(msld), objc.RegisterName("functionDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTL4FunctionDescriptor { return MTL4FunctionDescriptorFromID(_id) })
 }
@@ -104,12 +112,14 @@ func (msld *MTL4StaticLinkingDescriptor) FunctionDescriptors() []*MTL4FunctionDe
 //
 // PrivateFunctionDescriptors returns the collection as a Go slice.
 func (msld *MTL4StaticLinkingDescriptor) PrivateFunctionDescriptors() []*MTL4FunctionDescriptor {
+	defer runtime.KeepAlive(msld)
 	_arr := objc.Send[objc.ID](objref.IDOf(msld), objc.RegisterName("privateFunctionDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTL4FunctionDescriptor { return MTL4FunctionDescriptorFromID(_id) })
 }
 
 // Groups returns assigns groups of functions to match call-site attributes in shader code. Function groups help the compiler reduce the number of candidate functions it needs to evaluate for shader function calls, potentially increasing runtime performance.
-func (msld *MTL4StaticLinkingDescriptor) Groups() obj.Object {
+func (msld *MTL4StaticLinkingDescriptor) Groups() map[string]obj.Object {
+	defer runtime.KeepAlive(msld)
 	_r := objc.Send[objc.ID](objref.IDOf(msld), objc.RegisterName("groups"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

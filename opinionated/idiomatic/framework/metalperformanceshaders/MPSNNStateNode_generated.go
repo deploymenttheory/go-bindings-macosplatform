@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func nNStateNodeAdopt(id objc.ID) *NNStateNode {
 
 // Description returns the object's -description text.
 func (nsn *NNStateNode) Description() string {
+	defer runtime.KeepAlive(nsn)
 	return rt.Description(objref.IDOf(nsn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nsn *NNStateNode) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nsn)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nsn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nsn *NNStateNode) IsKind(className string) bool {
+	defer runtime.KeepAlive(nsn)
 	return rt.IsKind(objref.IDOf(nsn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nsn *NNStateNode) String() string {
+	defer runtime.KeepAlive(nsn)
 	return rt.Description(objref.IDOf(nsn))
 }
 
@@ -82,12 +89,14 @@ func (nsn *NNStateNode) WithSynchronizeResource(synchronizeResource bool) *NNSta
 
 // ExportFromGraph reports whether tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits. When exportFromGraph = true, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly. This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: false
 func (nsn *NNStateNode) ExportFromGraph() bool {
+	defer runtime.KeepAlive(nsn)
 	_r := objc.Send[bool](objref.IDOf(nsn), objc.RegisterName("exportFromGraph"))
 	return _r
 }
 
 // SynchronizeResource reports whether set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
 func (nsn *NNStateNode) SynchronizeResource() bool {
+	defer runtime.KeepAlive(nsn)
 	_r := objc.Send[bool](objref.IDOf(nsn), objc.RegisterName("synchronizeResource"))
 	return _r
 }

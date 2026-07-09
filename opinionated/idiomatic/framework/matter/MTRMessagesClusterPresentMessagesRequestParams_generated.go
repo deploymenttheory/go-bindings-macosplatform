@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRMessagesClusterPresentMessagesRequestParamsAdopt(id objc.ID) *MTRMessage
 
 // Description returns the object's -description text.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) Description() string {
+	defer runtime.KeepAlive(mmcpmrp)
 	return rt.Description(objref.IDOf(mmcpmrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmcpmrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmcpmrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmcpmrp)
 	return rt.IsKind(objref.IDOf(mmcpmrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) String() string {
+	defer runtime.KeepAlive(mmcpmrp)
 	return rt.Description(objref.IDOf(mmcpmrp))
 }
 
@@ -71,31 +79,35 @@ func NewMTRMessagesClusterPresentMessagesRequestParams() *MTRMessagesClusterPres
 }
 
 // WithMessageID sets the message ID.
-func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithMessageID(messageID obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
-	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithMessageID(messageID []byte) *MTRMessagesClusterPresentMessagesRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setMessageID:"), rt.BytesToNSData(messageID))
 	return mmcpmrp
 }
 
 // WithPriority sets the priority.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithPriority(priority obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
+	defer runtime.KeepAlive(priority)
 	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setPriority:"), objref.IDOf(priority))
 	return mmcpmrp
 }
 
 // WithMessageControl sets the message control.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithMessageControl(messageControl obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
+	defer runtime.KeepAlive(messageControl)
 	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setMessageControl:"), objref.IDOf(messageControl))
 	return mmcpmrp
 }
 
 // WithStartTime sets the start time.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithStartTime(startTime obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
+	defer runtime.KeepAlive(startTime)
 	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return mmcpmrp
 }
 
 // WithDuration sets the duration.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithDuration(duration obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
+	defer runtime.KeepAlive(duration)
 	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return mmcpmrp
 }
@@ -108,48 +120,56 @@ func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithMessageText(m
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mmcpmrp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mmcpmrp
 }
 
 // MessageID returns the message ID.
-func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) MessageID() obj.Object {
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) MessageID() []byte {
+	defer runtime.KeepAlive(mmcpmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("messageID"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Priority returns the priority.
-func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) Priority() obj.Object {
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) Priority() *foundation.Number {
+	defer runtime.KeepAlive(mmcpmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("priority"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MessageControl returns the message control.
-func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) MessageControl() obj.Object {
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) MessageControl() *foundation.Number {
+	defer runtime.KeepAlive(mmcpmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("messageControl"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StartTime returns the start time.
-func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) StartTime() obj.Object {
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) StartTime() *foundation.Number {
+	defer runtime.KeepAlive(mmcpmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("startTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Duration returns the duration.
-func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) Duration() obj.Object {
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) Duration() *foundation.Number {
+	defer runtime.KeepAlive(mmcpmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("duration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MessageText returns the message text.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) MessageText() string {
+	defer runtime.KeepAlive(mmcpmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("messageText"))
 	if _r == 0 {
 		return ""
@@ -159,23 +179,28 @@ func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) MessageText() str
 
 // Responses returns the responses.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) Responses() obj.Object {
+	defer runtime.KeepAlive(mmcpmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("responses"))
 	return obj.Wrap(_r)
 }
 
 // SetResponses wraps the corresponding Objective-C method.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) SetResponses(responses obj.Object) {
+	defer runtime.KeepAlive(mmcpmrp)
+	defer runtime.KeepAlive(responses)
 	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setResponses:"), objref.IDOf(responses))
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) TimedInvokeTimeoutMs() obj.Object {
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mmcpmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) ServerSideProcessingTimeout() obj.Object {
+func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mmcpmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

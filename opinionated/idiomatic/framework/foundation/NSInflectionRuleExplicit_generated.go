@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,6 +52,7 @@ func inflectionRuleExplicitAdopt(id objc.ID) *InflectionRuleExplicit {
 
 // NewInflectionRuleExplicitWithMorphology creates an inflection rule with the given morphology.
 func NewInflectionRuleExplicitWithMorphology(morphology *Morphology) *InflectionRuleExplicit {
+	defer runtime.KeepAlive(morphology)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSInflectionRuleExplicit")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMorphology:"), objref.IDOf(morphology))
 	return inflectionRuleExplicitAdopt(_id)
@@ -62,13 +65,14 @@ func (ire *InflectionRuleExplicit) WithObservationInfo(observationInfo unsafe.Po
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ire *InflectionRuleExplicit) WithScriptingProperties(scriptingProperties obj.Object) *InflectionRuleExplicit {
-	objc.Send[objc.ID](objref.IDOf(ire), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ire *InflectionRuleExplicit) WithScriptingProperties(scriptingProperties map[string]obj.Object) *InflectionRuleExplicit {
+	objc.Send[objc.ID](objref.IDOf(ire), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ire
 }
 
 // Morphology returns the morphology.
 func (ire *InflectionRuleExplicit) Morphology() *Morphology {
+	defer runtime.KeepAlive(ire)
 	_r := objc.Send[objc.ID](objref.IDOf(ire), objc.RegisterName("morphology"))
 	return MorphologyFromID(_r)
 }

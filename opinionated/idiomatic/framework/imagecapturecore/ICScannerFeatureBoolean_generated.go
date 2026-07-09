@@ -5,6 +5,8 @@
 package imagecapturecore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,6 +61,7 @@ func (sfb *ScannerFeatureBoolean) WithValue(value bool) *ScannerFeatureBoolean {
 
 // Value wraps the corresponding Objective-C method.
 func (sfb *ScannerFeatureBoolean) Value() bool {
+	defer runtime.KeepAlive(sfb)
 	_r := objc.Send[bool](objref.IDOf(sfb), objc.RegisterName("value"))
 	return _r
 }

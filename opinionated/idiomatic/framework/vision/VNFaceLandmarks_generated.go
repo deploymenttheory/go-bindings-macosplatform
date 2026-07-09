@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func faceLandmarksAdopt(id objc.ID) *FaceLandmarks {
 
 // Description returns the object's -description text.
 func (fl *FaceLandmarks) Description() string {
+	defer runtime.KeepAlive(fl)
 	return rt.Description(objref.IDOf(fl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fl *FaceLandmarks) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fl *FaceLandmarks) IsKind(className string) bool {
+	defer runtime.KeepAlive(fl)
 	return rt.IsKind(objref.IDOf(fl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fl *FaceLandmarks) String() string {
+	defer runtime.KeepAlive(fl)
 	return rt.Description(objref.IDOf(fl))
 }
 
 // Confidence returns the confidence.
 func (fl *FaceLandmarks) Confidence() float32 {
+	defer runtime.KeepAlive(fl)
 	_r := objc.Send[float32](objref.IDOf(fl), objc.RegisterName("confidence"))
 	return _r
 }

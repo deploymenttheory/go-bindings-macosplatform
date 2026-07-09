@@ -5,6 +5,7 @@
 package addressbook
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,27 +51,33 @@ func recordAdopt(id objc.ID) *Record {
 
 // Description returns the object's -description text.
 func (r *Record) Description() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (r *Record) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (r *Record) IsKind(className string) bool {
+	defer runtime.KeepAlive(r)
 	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (r *Record) String() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // NewRecordWithAddressBook creates a new Record.
 func NewRecordWithAddressBook(addressBook *AddressBook) *Record {
+	defer runtime.KeepAlive(addressBook)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ABRecord")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAddressBook:"), objref.IDOf(addressBook))
 	return recordAdopt(_id)
@@ -78,12 +85,15 @@ func NewRecordWithAddressBook(addressBook *AddressBook) *Record {
 
 // ValueForProperty wraps the corresponding Objective-C method.
 func (r *Record) ValueForProperty(property string) obj.Object {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("valueForProperty:"), purego.NSString(property))
 	return obj.Wrap(_r)
 }
 
 // SetValueForProperty wraps the corresponding Objective-C method.
 func (r *Record) SetValueForProperty(value obj.Object, property string) error {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(value)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("setValue:forProperty:error:"), objref.IDOf(value), purego.NSString(property), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -94,18 +104,21 @@ func (r *Record) SetValueForProperty(value obj.Object, property string) error {
 
 // RemoveValueForProperty removes value for property.
 func (r *Record) RemoveValueForProperty(property string) bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("removeValueForProperty:"), purego.NSString(property))
 	return _r
 }
 
 // IsReadOnly reports whether the object is read only.
 func (r *Record) IsReadOnly() bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("isReadOnly"))
 	return _r
 }
 
 // UniqueID returns the unique ID.
 func (r *Record) UniqueID() string {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("uniqueId"))
 	if _r == 0 {
 		return ""
@@ -115,6 +128,7 @@ func (r *Record) UniqueID() string {
 
 // DisplayName returns the display name.
 func (r *Record) DisplayName() string {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""

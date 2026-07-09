@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func eventViewControllerAdopt(id objc.ID) *EventViewController {
 
 // Description returns the object's -description text.
 func (evc *EventViewController) Description() string {
+	defer runtime.KeepAlive(evc)
 	return rt.Description(objref.IDOf(evc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (evc *EventViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(evc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(evc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (evc *EventViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(evc)
 	return rt.IsKind(objref.IDOf(evc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (evc *EventViewController) String() string {
+	defer runtime.KeepAlive(evc)
 	return rt.Description(objref.IDOf(evc))
 }
 
@@ -88,6 +95,7 @@ func (evc *EventViewController) WithControllerUserInteractionEnabled(controllerU
 
 // ControllerUserInteractionEnabled wraps the corresponding Objective-C method.
 func (evc *EventViewController) ControllerUserInteractionEnabled() bool {
+	defer runtime.KeepAlive(evc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

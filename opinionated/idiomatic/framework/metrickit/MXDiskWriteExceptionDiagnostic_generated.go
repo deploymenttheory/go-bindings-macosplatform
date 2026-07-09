@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,14 @@ func NewDiskWriteExceptionDiagnostic() *DiskWriteExceptionDiagnostic {
 
 // CallStackTree returns the application call stack tree associated with the excessive disk writes.
 func (dwed *DiskWriteExceptionDiagnostic) CallStackTree() *CallStackTree {
+	defer runtime.KeepAlive(dwed)
 	_r := objc.Send[objc.ID](objref.IDOf(dwed), objc.RegisterName("callStackTree"))
 	return CallStackTreeFromID(_r)
 }
 
 // TotalWritesCaused returns total disk writes caused in the scope of this disk write exception. Dimensioned as NSUnitInformationStorage.
 func (dwed *DiskWriteExceptionDiagnostic) TotalWritesCaused() obj.Object {
+	defer runtime.KeepAlive(dwed)
 	_r := objc.Send[objc.ID](objref.IDOf(dwed), objc.RegisterName("totalWritesCaused"))
 	return obj.Wrap(_r)
 }

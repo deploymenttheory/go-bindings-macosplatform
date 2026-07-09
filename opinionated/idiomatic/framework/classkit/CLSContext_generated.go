@@ -6,6 +6,7 @@ package classkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -90,6 +91,7 @@ func (c *Context) WithDisplayOrder(displayOrder int) *Context {
 
 // WithTopic sets the area of study to which a context relates.
 func (c *Context) WithTopic(topic obj.Object) *Context {
+	defer runtime.KeepAlive(topic)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTopic:"), objref.IDOf(topic))
 	return c
 }
@@ -120,27 +122,32 @@ func (c *Context) WithSummary(summary string) *Context {
 
 // WithThumbnail sets an optional thumbnail image associated with the context.
 func (c *Context) WithThumbnail(thumbnail obj.Object) *Context {
+	defer runtime.KeepAlive(thumbnail)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setThumbnail:"), objref.IDOf(thumbnail))
 	return c
 }
 
 // BecomeActive tells a context to become the active context.
 func (c *Context) BecomeActive() {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("becomeActive"))
 }
 
 // ResignActive tells a context to stop being the active context.
 func (c *Context) ResignActive() {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("resignActive"))
 }
 
 // AddProgressReportingCapabilities adds a progress reporting capability to the set of capabilities for the context.
-func (c *Context) AddProgressReportingCapabilities(capabilities obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("addProgressReportingCapabilities:"), objref.IDOf(capabilities))
+func (c *Context) AddProgressReportingCapabilities(capabilities []*ProgressReportingCapability) {
+	defer runtime.KeepAlive(c)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("addProgressReportingCapabilities:"), rt.SliceToNSSet(capabilities, func(_v *ProgressReportingCapability) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ResetProgressReportingCapabilities resets the set of capabilities for the context.
 func (c *Context) ResetProgressReportingCapabilities() {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("resetProgressReportingCapabilities"))
 }
 
@@ -148,12 +155,14 @@ func (c *Context) ResetProgressReportingCapabilities() {
 //
 // IdentifierPath returns the collection as a Go slice.
 func (c *Context) IdentifierPath() []string {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("identifierPath"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Identifier returns app-assigned identifier. This identifier should work across users and devices and be unique with regards to its siblings within its parent. The identifier could be used to embed information later used for deep linking. For example:
 func (c *Context) Identifier() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -162,19 +171,22 @@ func (c *Context) Identifier() string {
 }
 
 // UniversalLinkURL returns alternative deep link URL using universal links. If your app supports universal links, you can supply them here to link the content this context represents.
-func (c *Context) UniversalLinkURL() obj.Object {
+func (c *Context) UniversalLinkURL() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("universalLinkURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Type returns type of this context The type that best describes this context.
 func (c *Context) Type() ContextType {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[ContextType](objref.IDOf(c), objc.RegisterName("type"))
 	return _r
 }
 
 // CustomTypeName returns an optional user-visible name for the context if its type is CLSContextTypeCustom. This property is relevant only if the type is CLSContextTypeCustom. This string should be localized. If this property is not set for a context of type CLSContextTypeCustom, Schoolwork app will use a default localized string ‘Custom’ as the name of the activity representing this context.
 func (c *Context) CustomTypeName() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("customTypeName"))
 	if _r == 0 {
 		return ""
@@ -184,6 +196,7 @@ func (c *Context) CustomTypeName() string {
 
 // Title returns title of this context. For example:
 func (c *Context) Title() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -193,42 +206,50 @@ func (c *Context) Title() string {
 
 // DisplayOrder returns the displayOrder is by default sorted ascending. Set the displayOrder if you want your contexts to be displayed in a particular order. The sort key is used as a way to sort sibling contexts in a particular order.
 func (c *Context) DisplayOrder() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("displayOrder"))
 	return _r
 }
 
 // Topic returns topic associated with this context. See above for valid, predefined topics.
-func (c *Context) Topic() obj.Object {
+func (c *Context) Topic() *foundation.String {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("topic"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // IsAssignable reports whether this property is true if the context can be assigned as an activity. The default value of this property is true. This should be set to false for a context that is used as a container for other contexts, but by itself, is not an assignable activity.
 func (c *Context) IsAssignable() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isAssignable"))
 	return _r
 }
 
 // SuggestedAge returns suggested age range of students, expressed in years, for whom this context is suitable. This information is intended to help teachers to choose age-appropriate activities for their students. The default value is [0, NSIntegerMax - 1]. This is
 func (c *Context) SuggestedAge() foundation.NSRange {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(c), objc.RegisterName("suggestedAge"))
 	return _r
 }
 
 // SuggestedCompletionTime returns suggested time range, expressed in minutes, to complete the activity. This information will help teachers as they choose activities for their students. The default value is [0, NSIntegerMax - 1]. This is
 func (c *Context) SuggestedCompletionTime() foundation.NSRange {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(c), objc.RegisterName("suggestedCompletionTime"))
 	return _r
 }
 
 // ProgressReportingCapabilities specifies progress reporting capablities of the app for this context. This information is intended to help teachers as they choose activities for their students. By default a CLSContext will have one CLSProgressReportingCapability instance of kind CLSProgressReportingCapabilityKindDuration. More progress reporting capabilities can be specified via '-addProgressReportingCapabilities:' to customize this set.
-func (c *Context) ProgressReportingCapabilities() obj.Object {
+// The order of the returned elements is unspecified.
+func (c *Context) ProgressReportingCapabilities() []*ProgressReportingCapability {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("progressReportingCapabilities"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *ProgressReportingCapability { return ProgressReportingCapabilityFromID(_id) })
 }
 
 // Summary returns an optional user-visible summary describing the context limited to 4000 characters in length. This may be used to provide information about the types of activities available under a given context or the context itself. This string should be localized.
 func (c *Context) Summary() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("summary"))
 	if _r == 0 {
 		return ""
@@ -238,23 +259,28 @@ func (c *Context) Summary() string {
 
 // Thumbnail returns an optional thumbnail image associated with the context. The size of this image should be equal to or larger than 80x80 pixels and equal to or smaller than 330x330 pixels. Images larger than 330x330 pixels will be scaled down. Images with both dimensions smaller than 80x80 pixels will not be accepted.
 func (c *Context) Thumbnail() obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("thumbnail"))
 	return obj.Wrap(_r)
 }
 
 // IsActive reports whether self is the active context.
 func (c *Context) IsActive() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isActive"))
 	return _r
 }
 
 // RemoveFromParent removes the context from its parent.
 func (c *Context) RemoveFromParent() {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("removeFromParent"))
 }
 
 // AddChildContext adds the specifed context as a child of the context receiving the method call.
 func (c *Context) AddChildContext(child *Context) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(child)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("addChildContext:"), objref.IDOf(child))
 }
 
@@ -262,6 +288,7 @@ func (c *Context) AddChildContext(child *Context) {
 //
 // DescendantMatchingIdentifierPathCompletion blocks until the operation completes or ctx is cancelled.
 func (c *Context) DescendantMatchingIdentifierPathCompletion(ctx context.Context, identifierPath []string) (result *Context, err error) {
+	defer runtime.KeepAlive(c)
 	type _result struct {
 		val *Context
 		err error
@@ -285,16 +312,21 @@ func (c *Context) DescendantMatchingIdentifierPathCompletion(ctx context.Context
 
 // AddNavigationChildContext adds a child context that users can navigate to from this context.
 func (c *Context) AddNavigationChildContext(child *Context) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(child)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("addNavigationChildContext:"), objref.IDOf(child))
 }
 
 // RemoveNavigationChildContext removes the specified context as a presentable child of this context.
 func (c *Context) RemoveNavigationChildContext(child *Context) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(child)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("removeNavigationChildContext:"), objref.IDOf(child))
 }
 
 // Parent returns the parent of this context.
 func (c *Context) Parent() *Context {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("parent"))
 	return ContextFromID(_r)
 }
@@ -303,18 +335,21 @@ func (c *Context) Parent() *Context {
 //
 // NavigationChildContexts returns the collection as a Go slice.
 func (c *Context) NavigationChildContexts() []*Context {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("navigationChildContexts"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Context { return ContextFromID(_id) })
 }
 
 // CreateNewActivity creates and returns a new activity instance for the context.
 func (c *Context) CreateNewActivity() *Activity {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("createNewActivity"))
 	return ActivityFromID(_r)
 }
 
 // CurrentActivity returns the current activity. Activity associated with a context.  If no activity was ever created this is nil. See:
 func (c *Context) CurrentActivity() *Activity {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("currentActivity"))
 	return ActivityFromID(_r)
 }

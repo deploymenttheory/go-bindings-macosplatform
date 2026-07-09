@@ -8908,7 +8908,7 @@
       },
       "unseen": {
         "doc": "A Boolean value indicating whether the user has seen the call.",
-        "url": "https://developer.apple.com/documentation/intents/incallrecord/unseen-2m7sz"
+        "url": "https://developer.apple.com/documentation/intents/incallrecord/unseen-8qab3"
       }
     },
     "INCallRecordFilter": {
@@ -9212,7 +9212,7 @@
       },
       "isFocused": {
         "doc": "The user’s preference for receiving communication notifications.",
-        "url": "https://developer.apple.com/documentation/intents/infocusstatus/isfocused-8ytve"
+        "url": "https://developer.apple.com/documentation/intents/infocusstatus/isfocused-78wbx"
       }
     },
     "INFocusStatusCenter": {
@@ -9346,7 +9346,7 @@
       },
       "charging": {
         "doc": "A Boolean value that indicates whether the electric vehicle is currently charging.",
-        "url": "https://developer.apple.com/documentation/intents/ingetcarpowerlevelstatusintentresponse/charging-6xnqj"
+        "url": "https://developer.apple.com/documentation/intents/ingetcarpowerlevelstatusintentresponse/charging-7aamu"
       },
       "chargingFormulaArguments": {
         "doc": "The parameters the electric vehicle’s charging model uses to calculate the duration of a charge.",
@@ -9405,8 +9405,8 @@
         "url": "https://developer.apple.com/documentation/intents/ingetcarpowerlevelstatusintentresponse/minimumbatterycapacity"
       },
       "minutesToFull": {
-        "doc": "The number of minutes it takes to fully charge the electric vehicle’s battery.",
-        "url": "https://developer.apple.com/documentation/intents/ingetcarpowerlevelstatusintentresponse/minutestofull-2kbt6"
+        "doc": "The number of minutes it will take to fully charge the electric vehicle’s battery.",
+        "url": "https://developer.apple.com/documentation/intents/ingetcarpowerlevelstatusintentresponse/minutestofull-25vcb"
       }
     },
     "INGetReservationDetailsIntent": {
@@ -9626,7 +9626,7 @@
       },
       "numberOfChildren": {
         "doc": "The number of children staying at the lodging location.",
-        "url": "https://developer.apple.com/documentation/intents/inlodgingreservation/numberofchildren-2n3e2"
+        "url": "https://developer.apple.com/documentation/intents/inlodgingreservation/numberofchildren-1dm3g"
       },
       "reservationDuration": {
         "doc": "The date and time range that indicates the beginning and end of the reservation.",
@@ -10228,7 +10228,7 @@
       },
       "partySize": {
         "doc": "The number of passengers that the ride must accommodate.",
-        "url": "https://developer.apple.com/documentation/intents/inrequestrideintent/partysize-39k7z"
+        "url": "https://developer.apple.com/documentation/intents/inrequestrideintent/partysize-64kfc"
       },
       "paymentMethod": {
         "doc": "The user’s requested payment method.",
@@ -10388,7 +10388,7 @@
       },
       "partySize": {
         "doc": "The number of people in the party.",
-        "url": "https://developer.apple.com/documentation/intents/inrestaurantreservation/partysize-9ux0p"
+        "url": "https://developer.apple.com/documentation/intents/inrestaurantreservation/partysize-9mtpk"
       },
       "reservationDuration": {
         "doc": "The date and time range that defines beginning and end of the restaurant reservation.",
@@ -10744,7 +10744,7 @@
       },
       "unseen": {
         "doc": "A Boolean value that indicates whether the user has seen the call yet.",
-        "url": "https://developer.apple.com/documentation/intents/insearchcallhistoryintent/unseen-9ua7o"
+        "url": "https://developer.apple.com/documentation/intents/insearchcallhistoryintent/unseen-1mohp"
       }
     },
     "INSearchCallHistoryIntentResponse": {
@@ -11034,7 +11034,7 @@
       },
       "searchResultsCount": {
         "doc": "The number of photos that match the search parameters.",
-        "url": "https://developer.apple.com/documentation/intents/insearchforphotosintentresponse/searchresultscount-3i5mz"
+        "url": "https://developer.apple.com/documentation/intents/insearchforphotosintentresponse/searchresultscount-82lnb"
       }
     },
     "INSeat": {
@@ -11204,7 +11204,7 @@
       },
       "enableAirConditioner": {
         "doc": "A Boolean value indicating whether to turn on the air conditioner system.",
-        "url": "https://developer.apple.com/documentation/intents/insetclimatesettingsincarintent/enableairconditioner-9q3dr"
+        "url": "https://developer.apple.com/documentation/intents/insetclimatesettingsincarintent/enableairconditioner-3prnk"
       },
       "enableAutoMode": {
         "doc": "A Boolean value indicating whether to enable automatic mode for the climate control system.",
@@ -11220,11 +11220,11 @@
       },
       "fanSpeedIndex": {
         "doc": "An integer value indicating the desired fan speed position.",
-        "url": "https://developer.apple.com/documentation/intents/insetclimatesettingsincarintent/fanspeedindex-4c1rr"
+        "url": "https://developer.apple.com/documentation/intents/insetclimatesettingsincarintent/fanspeedindex-wz49"
       },
       "fanSpeedPercentage": {
         "doc": "A floating-point value indicating the requested fan speed specified as a percentage of the maximum speed.",
-        "url": "https://developer.apple.com/documentation/intents/insetclimatesettingsincarintent/fanspeedpercentage-7i2hq"
+        "url": "https://developer.apple.com/documentation/intents/insetclimatesettingsincarintent/fanspeedpercentage-ep0u"
       },
       "init(enableFan:enableAirConditioner:enableClimateControl:enableAutoMode:airCirculationMode:fanSpeedIndex:fanSpeedPercentage:relativeFanSpeedSetting:temperature:relativeTemperatureSetting:climateZone:carName:)": {
         "doc": "Creates the intent object with the specified climate settings information.",
@@ -11260,7 +11260,7 @@
       },
       "enable": {
         "doc": "A Boolean indicating whether to enable or disable the defroster.",
-        "url": "https://developer.apple.com/documentation/intents/insetdefrostersettingsincarintent/enable-9xte9"
+        "url": "https://developer.apple.com/documentation/intents/insetdefrostersettingsincarintent/enable-8tf0i"
       },
       "init(enable:defroster:carName:)": {
         "doc": "Initializes the intent object with the specified defroster information.",
@@ -11372,7 +11372,7 @@
       },
       "frequency": {
         "doc": "The broadcast frequency of the radio station.",
-        "url": "https://developer.apple.com/documentation/intents/insetradiostationintent/frequency-2ctw6"
+        "url": "https://developer.apple.com/documentation/intents/insetradiostationintent/frequency-63rbb"
       },
       "init(radioType:frequency:stationName:channel:presetNumber:)": {
         "doc": "Initializes the intent object with the specified climate settings information.",
@@ -11412,7 +11412,7 @@
       },
       "enableMassage": {
         "doc": "A Boolean value indicating whether to enable the seat massage system.",
-        "url": "https://developer.apple.com/documentation/intents/insetseatsettingsincarintent/enablemassage-46ndx"
+        "url": "https://developer.apple.com/documentation/intents/insetseatsettingsincarintent/enablemassage-5jf2s"
       },
       "init(enableHeating:enableCooling:enableMassage:seat:level:relativeLevel:carName:)": {
         "doc": "Initializes the intent object with the specified climate settings information.",
@@ -11620,7 +11620,7 @@
       },
       "searchResultsCount": {
         "doc": "The number of photos that match the search parameters.",
-        "url": "https://developer.apple.com/documentation/intents/instartphotoplaybackintentresponse/searchresultscount-5r7e7"
+        "url": "https://developer.apple.com/documentation/intents/instartphotoplaybackintentresponse/searchresultscount-6ns8y"
       }
     },
     "INStartVideoCallIntent": {

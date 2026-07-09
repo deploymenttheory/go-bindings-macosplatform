@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func queryGenerationTokenAdopt(id objc.ID) *QueryGenerationToken {
 
 // Description returns the object's -description text.
 func (qgt *QueryGenerationToken) Description() string {
+	defer runtime.KeepAlive(qgt)
 	return rt.Description(objref.IDOf(qgt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (qgt *QueryGenerationToken) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(qgt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(qgt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (qgt *QueryGenerationToken) IsKind(className string) bool {
+	defer runtime.KeepAlive(qgt)
 	return rt.IsKind(objref.IDOf(qgt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (qgt *QueryGenerationToken) String() string {
+	defer runtime.KeepAlive(qgt)
 	return rt.Description(objref.IDOf(qgt))
 }
 

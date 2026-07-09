@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -62,6 +64,7 @@ func NewGlassEffectView() *GlassEffectView {
 
 // WithContentView sets the view to embed in glass.
 func (gev *GlassEffectView) WithContentView(contentView ViewProvider) *GlassEffectView {
+	defer runtime.KeepAlive(contentView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	})
@@ -78,6 +81,7 @@ func (gev *GlassEffectView) WithCornerRadius(cornerRadius float64) *GlassEffectV
 
 // WithTintColor sets the color the glass effect view uses to tint the background and glass effect toward.
 func (gev *GlassEffectView) WithTintColor(tintColor *Color) *GlassEffectView {
+	defer runtime.KeepAlive(tintColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setTintColor:"), objref.IDOf(tintColor))
 	})
@@ -231,6 +235,7 @@ func (gev *GlassEffectView) WithWantsLayer(wantsLayer bool) *GlassEffectView {
 
 // WithLayer sets the layer.
 func (gev *GlassEffectView) WithLayer(layer obj.Object) *GlassEffectView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -280,6 +285,7 @@ func (gev *GlassEffectView) WithBackgroundFilters(items ...obj.Object) *GlassEff
 
 // WithCompositingFilter sets the compositing filter.
 func (gev *GlassEffectView) WithCompositingFilter(compositingFilter obj.Object) *GlassEffectView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -297,6 +303,7 @@ func (gev *GlassEffectView) WithContentFilters(items ...obj.Object) *GlassEffect
 
 // WithShadow sets the shadow.
 func (gev *GlassEffectView) WithShadow(shadow *Shadow) *GlassEffectView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -345,6 +352,7 @@ func (gev *GlassEffectView) WithPreparedContentRect(preparedContentRect corefoun
 
 // WithNextKeyView sets the next key view.
 func (gev *GlassEffectView) WithNextKeyView(nextKeyView ViewProvider) *GlassEffectView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -394,6 +402,7 @@ func (gev *GlassEffectView) WithPrefersCompactControlSizeMetrics(prefersCompactC
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (gev *GlassEffectView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GlassEffectView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -450,6 +459,7 @@ func (gev *GlassEffectView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExte
 
 // WithPressureConfiguration sets the pressure configuration.
 func (gev *GlassEffectView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GlassEffectView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -458,6 +468,7 @@ func (gev *GlassEffectView) WithPressureConfiguration(pressureConfiguration *Pre
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (gev *GlassEffectView) WithNextResponder(nextResponder ResponderProvider) *GlassEffectView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -466,6 +477,7 @@ func (gev *GlassEffectView) WithNextResponder(nextResponder ResponderProvider) *
 
 // WithMenu sets returns the responder’s menu.
 func (gev *GlassEffectView) WithMenu(menu *Menu) *GlassEffectView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -474,6 +486,7 @@ func (gev *GlassEffectView) WithMenu(menu *Menu) *GlassEffectView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (gev *GlassEffectView) WithUserActivity(userActivity obj.Object) *GlassEffectView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -482,6 +495,7 @@ func (gev *GlassEffectView) WithUserActivity(userActivity obj.Object) *GlassEffe
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (gev *GlassEffectView) WithTouchBar(touchBar *TouchBar) *GlassEffectView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -490,6 +504,7 @@ func (gev *GlassEffectView) WithTouchBar(touchBar *TouchBar) *GlassEffectView {
 
 // ContentView returns the view to embed in glass. - Important: `NSGlassEffectView` only guarantees the `contentView` will be placed inside the glass effect; arbitrary subviews aren't guaranteed specific behavior with regard to z-order in relation to the content view or glass effect.
 func (gev *GlassEffectView) ContentView() *View {
+	defer runtime.KeepAlive(gev)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -503,6 +518,7 @@ func (gev *GlassEffectView) ContentView() *View {
 
 // CornerRadius returns the amount of curvature for all corners of the glass.
 func (gev *GlassEffectView) CornerRadius() float64 {
+	defer runtime.KeepAlive(gev)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -516,6 +532,7 @@ func (gev *GlassEffectView) CornerRadius() float64 {
 
 // TintColor returns the color the glass effect view uses to tint the background and glass effect toward.
 func (gev *GlassEffectView) TintColor() *Color {
+	defer runtime.KeepAlive(gev)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -529,6 +546,7 @@ func (gev *GlassEffectView) TintColor() *Color {
 
 // Style returns the style of glass this view uses.
 func (gev *GlassEffectView) Style() GlassEffectViewStyle {
+	defer runtime.KeepAlive(gev)
 	var _mainthread0 GlassEffectViewStyle
 	purego.Main(func() {
 		_mainthread0 = func() GlassEffectViewStyle {

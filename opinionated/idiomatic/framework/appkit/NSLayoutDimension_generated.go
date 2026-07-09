@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,54 +55,69 @@ func NewLayoutDimension() *LayoutDimension {
 
 // ConstraintEqualToConstant returns a constraint that defines a constant size for the anchor’s size attribute.
 func (ld *LayoutDimension) ConstraintEqualToConstant(c float64) *LayoutConstraint {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[objc.ID](objref.IDOf(ld), objc.RegisterName("constraintEqualToConstant:"), c)
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintGreaterThanOrEqualToConstant returns a constraint that defines the minimum size for the anchor’s size attribute.
 func (ld *LayoutDimension) ConstraintGreaterThanOrEqualToConstant(c float64) *LayoutConstraint {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[objc.ID](objref.IDOf(ld), objc.RegisterName("constraintGreaterThanOrEqualToConstant:"), c)
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintLessThanOrEqualToConstant returns a constraint that defines the maximum size for the anchor’s size attribute.
 func (ld *LayoutDimension) ConstraintLessThanOrEqualToConstant(c float64) *LayoutConstraint {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[objc.ID](objref.IDOf(ld), objc.RegisterName("constraintLessThanOrEqualToConstant:"), c)
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintEqualToAnchorMultiplier returns a constraint that defines the anchor’s size attribute as equal to the specified anchor multiplied by the constant.
 func (ld *LayoutDimension) ConstraintEqualToAnchorMultiplier(anchor *LayoutDimension, m float64) *LayoutConstraint {
+	defer runtime.KeepAlive(ld)
+	defer runtime.KeepAlive(anchor)
 	_r := objc.Send[objc.ID](objref.IDOf(ld), objc.RegisterName("constraintEqualToAnchor:multiplier:"), objref.IDOf(anchor), m)
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintGreaterThanOrEqualToAnchorMultiplier returns a constraint that defines the anchor’s size attribute as greater than or equal to the specified anchor multiplied by the constant.
 func (ld *LayoutDimension) ConstraintGreaterThanOrEqualToAnchorMultiplier(anchor *LayoutDimension, m float64) *LayoutConstraint {
+	defer runtime.KeepAlive(ld)
+	defer runtime.KeepAlive(anchor)
 	_r := objc.Send[objc.ID](objref.IDOf(ld), objc.RegisterName("constraintGreaterThanOrEqualToAnchor:multiplier:"), objref.IDOf(anchor), m)
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintLessThanOrEqualToAnchorMultiplier returns a constraint that defines the anchor’s size attribute as less than or equal to the specified anchor multiplied by the constant.
 func (ld *LayoutDimension) ConstraintLessThanOrEqualToAnchorMultiplier(anchor *LayoutDimension, m float64) *LayoutConstraint {
+	defer runtime.KeepAlive(ld)
+	defer runtime.KeepAlive(anchor)
 	_r := objc.Send[objc.ID](objref.IDOf(ld), objc.RegisterName("constraintLessThanOrEqualToAnchor:multiplier:"), objref.IDOf(anchor), m)
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintEqualToAnchorMultiplierConstant returns a constraint that defines the anchor’s size attribute as equal to the specified size attribute multiplied by a constant plus an offset.
 func (ld *LayoutDimension) ConstraintEqualToAnchorMultiplierConstant(anchor *LayoutDimension, m float64, c float64) *LayoutConstraint {
+	defer runtime.KeepAlive(ld)
+	defer runtime.KeepAlive(anchor)
 	_r := objc.Send[objc.ID](objref.IDOf(ld), objc.RegisterName("constraintEqualToAnchor:multiplier:constant:"), objref.IDOf(anchor), m, c)
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintGreaterThanOrEqualToAnchorMultiplierConstant returns a constraint that defines the anchor’s size attribute as greater than or equal to the specified anchor multiplied by the constant plus an offset.
 func (ld *LayoutDimension) ConstraintGreaterThanOrEqualToAnchorMultiplierConstant(anchor *LayoutDimension, m float64, c float64) *LayoutConstraint {
+	defer runtime.KeepAlive(ld)
+	defer runtime.KeepAlive(anchor)
 	_r := objc.Send[objc.ID](objref.IDOf(ld), objc.RegisterName("constraintGreaterThanOrEqualToAnchor:multiplier:constant:"), objref.IDOf(anchor), m, c)
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintLessThanOrEqualToAnchorMultiplierConstant returns a constraint that defines the anchor’s size attribute as greater than or equal to the specified anchor multiplied by the constant plus an offset.
 func (ld *LayoutDimension) ConstraintLessThanOrEqualToAnchorMultiplierConstant(anchor *LayoutDimension, m float64, c float64) *LayoutConstraint {
+	defer runtime.KeepAlive(ld)
+	defer runtime.KeepAlive(anchor)
 	_r := objc.Send[objc.ID](objref.IDOf(ld), objc.RegisterName("constraintLessThanOrEqualToAnchor:multiplier:constant:"), objref.IDOf(anchor), m, c)
 	return LayoutConstraintFromID(_r)
 }

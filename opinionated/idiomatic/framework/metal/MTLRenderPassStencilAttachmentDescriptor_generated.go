@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -119,12 +121,14 @@ func (rpsad *RenderPassStencilAttachmentDescriptor) WithStoreActionOptions(store
 
 // ClearStencil returns the clear stencil value to be used if the loadAction property is MTLLoadActionClear
 func (rpsad *RenderPassStencilAttachmentDescriptor) ClearStencil() uint32 {
+	defer runtime.KeepAlive(rpsad)
 	_r := objc.Send[uint32](objref.IDOf(rpsad), objc.RegisterName("clearStencil"))
 	return _r
 }
 
 // StencilResolveFilter returns the filter to be used for stencil multisample resolve. Defaults to MTLMultisampleStencilResolveFilterSample0.
 func (rpsad *RenderPassStencilAttachmentDescriptor) StencilResolveFilter() MultisampleStencilResolveFilter {
+	defer runtime.KeepAlive(rpsad)
 	_r := objc.Send[MultisampleStencilResolveFilter](objref.IDOf(rpsad), objc.RegisterName("stencilResolveFilter"))
 	return _r
 }

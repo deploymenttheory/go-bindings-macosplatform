@@ -163,8 +163,8 @@ func (o *NERelayManager) IsUIToggleEnabled() bool {
 	return _ret
 }
 
-func (o *NERelayManager) SetUIToggleEnabled(uIToggleEnabled bool) {
-	o.Ptr().Send(_nERelayManagerSelSetUIToggleEnabled, uIToggleEnabled)
+func (o *NERelayManager) SetUIToggleEnabled(uiToggleEnabled bool) {
+	o.Ptr().Send(_nERelayManagerSelSetUIToggleEnabled, uiToggleEnabled)
 }
 
 // @property allowDNSFailover @discussion Determines if DNS queries that fail over relay can fallback to default DNS

@@ -5,6 +5,8 @@
 package sharedwithyoucore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func collaborationShareOptionsAdopt(id objc.ID) *CollaborationShareOptions {
 
 // Description returns the object's -description text.
 func (cso *CollaborationShareOptions) Description() string {
+	defer runtime.KeepAlive(cso)
 	return rt.Description(objref.IDOf(cso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cso *CollaborationShareOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cso)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cso *CollaborationShareOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(cso)
 	return rt.IsKind(objref.IDOf(cso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cso *CollaborationShareOptions) String() string {
+	defer runtime.KeepAlive(cso)
 	return rt.Description(objref.IDOf(cso))
 }
 
@@ -82,6 +89,7 @@ func NewCollaborationShareOptionsWithOptionsGroups(optionsGroups []*Collaboratio
 
 // NewCollaborationShareOptionsWithCoder creates and initializes a collaboration share options object.
 func NewCollaborationShareOptionsWithCoder(coder obj.Object) *CollaborationShareOptions {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWCollaborationShareOptions")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return collaborationShareOptionsAdopt(_id)
@@ -104,12 +112,14 @@ func (cso *CollaborationShareOptions) WithSummary(summary string) *Collaboration
 //
 // OptionsGroups returns the collection as a Go slice.
 func (cso *CollaborationShareOptions) OptionsGroups() []*CollaborationOptionsGroup {
+	defer runtime.KeepAlive(cso)
 	_arr := objc.Send[objc.ID](objref.IDOf(cso), objc.RegisterName("optionsGroups"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollaborationOptionsGroup { return CollaborationOptionsGroupFromID(_id) })
 }
 
 // Summary returns localized string to summarize the selected collaboration options. If nil, "Share Options" will be displayed by default.
 func (cso *CollaborationShareOptions) Summary() string {
+	defer runtime.KeepAlive(cso)
 	_r := objc.Send[objc.ID](objref.IDOf(cso), objc.RegisterName("summary"))
 	if _r == 0 {
 		return ""

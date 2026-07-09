@@ -5,7 +5,10 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -48,21 +51,25 @@ func fileHandleSerialPortAttachmentAdopt(id objc.ID) *FileHandleSerialPortAttach
 
 // NewFileHandleSerialPortAttachmentWithFileHandleForReadingFileHandleForWriting creates a serial port attachment object from the specified file handles.
 func NewFileHandleSerialPortAttachmentWithFileHandleForReadingFileHandleForWriting(fileHandleForReading obj.Object, fileHandleForWriting obj.Object) *FileHandleSerialPortAttachment {
+	defer runtime.KeepAlive(fileHandleForReading)
+	defer runtime.KeepAlive(fileHandleForWriting)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZFileHandleSerialPortAttachment")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileHandleForReading:fileHandleForWriting:"), objref.IDOf(fileHandleForReading), objref.IDOf(fileHandleForWriting))
 	return fileHandleSerialPortAttachmentAdopt(_id)
 }
 
 // FileHandleForReading returns file handle for reading from the file. Data written to fileHandleForReading goes to the guest.
-func (fhspa *FileHandleSerialPortAttachment) FileHandleForReading() obj.Object {
+func (fhspa *FileHandleSerialPortAttachment) FileHandleForReading() *foundation.FileHandle {
+	defer runtime.KeepAlive(fhspa)
 	_r := objc.Send[objc.ID](objref.IDOf(fhspa), objc.RegisterName("fileHandleForReading"))
-	return obj.Wrap(_r)
+	return foundation.FileHandleFromID(_r)
 }
 
 // FileHandleForWriting returns file handle for writing to the file. Data sent from the guest appears on fileHandleForWriting.
-func (fhspa *FileHandleSerialPortAttachment) FileHandleForWriting() obj.Object {
+func (fhspa *FileHandleSerialPortAttachment) FileHandleForWriting() *foundation.FileHandle {
+	defer runtime.KeepAlive(fhspa)
 	_r := objc.Send[objc.ID](objref.IDOf(fhspa), objc.RegisterName("fileHandleForWriting"))
-	return obj.Wrap(_r)
+	return foundation.FileHandleFromID(_r)
 }
 
 var _ SerialPortAttachmentProvider = (*FileHandleSerialPortAttachment)(nil)

@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -51,6 +52,9 @@ func mTRBaseClusterICDManagementAdopt(id objc.ID) *MTRBaseClusterICDManagement {
 
 // NewMTRBaseClusterICDManagementWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterICDManagementWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterICDManagement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterICDManagement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterICDManagementAdopt(_id)
@@ -60,6 +64,8 @@ func NewMTRBaseClusterICDManagementWithDeviceEndpointIDQueue(device *MTRBaseDevi
 //
 // RegisterClientWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) RegisterClientWithParamsCompletion(ctx context.Context, params *MTRICDManagementClusterRegisterClientParams) (result *MTRICDManagementClusterRegisterClientResponseParams, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRICDManagementClusterRegisterClientResponseParams
 		err error
@@ -85,6 +91,8 @@ func (mbcim *MTRBaseClusterICDManagement) RegisterClientWithParamsCompletion(ctx
 //
 // StayActiveRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) StayActiveRequestWithParamsCompletion(ctx context.Context, params *MTRICDManagementClusterStayActiveRequestParams) (result *MTRICDManagementClusterStayActiveResponseParams, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRICDManagementClusterStayActiveResponseParams
 		err error
@@ -110,6 +118,7 @@ func (mbcim *MTRBaseClusterICDManagement) StayActiveRequestWithParamsCompletion(
 //
 // ReadAttributeIdleModeDurationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeIdleModeDurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -135,6 +144,8 @@ func (mbcim *MTRBaseClusterICDManagement) ReadAttributeIdleModeDurationWithCompl
 //
 // SubscribeAttributeIdleModeDurationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeIdleModeDurationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -160,6 +171,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeIdleModeDurationWith
 //
 // ReadAttributeActiveModeDurationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeActiveModeDurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -185,6 +197,8 @@ func (mbcim *MTRBaseClusterICDManagement) ReadAttributeActiveModeDurationWithCom
 //
 // SubscribeAttributeActiveModeDurationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeActiveModeDurationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -210,6 +224,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeActiveModeDurationWi
 //
 // ReadAttributeActiveModeThresholdWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeActiveModeThresholdWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -235,6 +250,8 @@ func (mbcim *MTRBaseClusterICDManagement) ReadAttributeActiveModeThresholdWithCo
 //
 // SubscribeAttributeActiveModeThresholdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeActiveModeThresholdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -260,6 +277,8 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeActiveModeThresholdW
 //
 // ReadAttributeRegisteredClientsWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeRegisteredClientsWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -285,6 +304,8 @@ func (mbcim *MTRBaseClusterICDManagement) ReadAttributeRegisteredClientsWithPara
 //
 // SubscribeAttributeRegisteredClientsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeRegisteredClientsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -310,6 +331,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeRegisteredClientsWit
 //
 // ReadAttributeICDCounterWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeICDCounterWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -335,6 +357,8 @@ func (mbcim *MTRBaseClusterICDManagement) ReadAttributeICDCounterWithCompletion(
 //
 // SubscribeAttributeICDCounterWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeICDCounterWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -360,6 +384,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeICDCounterWithParams
 //
 // ReadAttributeClientsSupportedPerFabricWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeClientsSupportedPerFabricWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -385,6 +410,8 @@ func (mbcim *MTRBaseClusterICDManagement) ReadAttributeClientsSupportedPerFabric
 //
 // SubscribeAttributeClientsSupportedPerFabricWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeClientsSupportedPerFabricWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -410,6 +437,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeClientsSupportedPerF
 //
 // ReadAttributeUserActiveModeTriggerHintWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeUserActiveModeTriggerHintWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -435,6 +463,8 @@ func (mbcim *MTRBaseClusterICDManagement) ReadAttributeUserActiveModeTriggerHint
 //
 // SubscribeAttributeUserActiveModeTriggerHintWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeUserActiveModeTriggerHintWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -460,6 +490,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeUserActiveModeTrigge
 //
 // ReadAttributeUserActiveModeTriggerInstructionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeUserActiveModeTriggerInstructionWithCompletion(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val string
 		err error
@@ -485,6 +516,8 @@ func (mbcim *MTRBaseClusterICDManagement) ReadAttributeUserActiveModeTriggerInst
 //
 // SubscribeAttributeUserActiveModeTriggerInstructionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeUserActiveModeTriggerInstructionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -510,6 +543,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeUserActiveModeTrigge
 //
 // ReadAttributeOperatingModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeOperatingModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -535,6 +569,8 @@ func (mbcim *MTRBaseClusterICDManagement) ReadAttributeOperatingModeWithCompleti
 //
 // SubscribeAttributeOperatingModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeOperatingModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -560,6 +596,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeOperatingModeWithPar
 //
 // ReadAttributeMaximumCheckInBackOffWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeMaximumCheckInBackOffWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -585,6 +622,8 @@ func (mbcim *MTRBaseClusterICDManagement) ReadAttributeMaximumCheckInBackOffWith
 //
 // SubscribeAttributeMaximumCheckInBackOffWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeMaximumCheckInBackOffWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -610,6 +649,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeMaximumCheckInBackOf
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -635,6 +675,8 @@ func (mbcim *MTRBaseClusterICDManagement) ReadAttributeGeneratedCommandListWithC
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -660,6 +702,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeGeneratedCommandList
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -685,6 +728,8 @@ func (mbcim *MTRBaseClusterICDManagement) ReadAttributeAcceptedCommandListWithCo
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -710,6 +755,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeAcceptedCommandListW
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -735,6 +781,8 @@ func (mbcim *MTRBaseClusterICDManagement) ReadAttributeAttributeListWithCompleti
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -760,6 +808,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeAttributeListWithPar
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -785,6 +834,8 @@ func (mbcim *MTRBaseClusterICDManagement) ReadAttributeFeatureMapWithCompletion(
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -810,6 +861,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeFeatureMapWithParams
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -835,6 +887,8 @@ func (mbcim *MTRBaseClusterICDManagement) ReadAttributeClusterRevisionWithComple
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
@@ -109,36 +111,42 @@ func (dtr *DetectTrajectoriesRequest) WithRevision(revision int) *DetectTrajecto
 
 // TrajectoryLength returns the number of points required to analyze a parabola that indicates a trajectory.
 func (dtr *DetectTrajectoriesRequest) TrajectoryLength() int {
+	defer runtime.KeepAlive(dtr)
 	_r := objc.Send[int](objref.IDOf(dtr), objc.RegisterName("trajectoryLength"))
 	return _r
 }
 
 // ObjectMinimumNormalizedRadius specifies the minimum radius of the bounding circle of the object to be tracked. This can be used to filter out noise and small objects. The default is 0.0, which means no filtering is applied. Changing the property from frame to frame can produce eratic trajectories as objects will either disappear or be added to the tracking base on this filtering. The value is specified in normalized coordinates.
 func (dtr *DetectTrajectoriesRequest) ObjectMinimumNormalizedRadius() float32 {
+	defer runtime.KeepAlive(dtr)
 	_r := objc.Send[float32](objref.IDOf(dtr), objc.RegisterName("objectMinimumNormalizedRadius"))
 	return _r
 }
 
 // MinimumObjectSize returns the minimum object size.
 func (dtr *DetectTrajectoriesRequest) MinimumObjectSize() float32 {
+	defer runtime.KeepAlive(dtr)
 	_r := objc.Send[float32](objref.IDOf(dtr), objc.RegisterName("minimumObjectSize"))
 	return _r
 }
 
 // ObjectMaximumNormalizedRadius specifies the maximum radius of the bounding circle of the object to be tracked. This can be used to filter out unwanted trajectories from larger objects moving through the scene. The default is 1.0, which means no filtering is applied. Changing the maximum from frame to frame can produce eratic trajectories as objects will either disappear or be added to the tracking base on this filtering. The size is specified in normalized coordinates.
 func (dtr *DetectTrajectoriesRequest) ObjectMaximumNormalizedRadius() float32 {
+	defer runtime.KeepAlive(dtr)
 	_r := objc.Send[float32](objref.IDOf(dtr), objc.RegisterName("objectMaximumNormalizedRadius"))
 	return _r
 }
 
 // MaximumObjectSize returns the maximum object size.
 func (dtr *DetectTrajectoriesRequest) MaximumObjectSize() float32 {
+	defer runtime.KeepAlive(dtr)
 	_r := objc.Send[float32](objref.IDOf(dtr), objc.RegisterName("maximumObjectSize"))
 	return _r
 }
 
 // TargetFrameTime specifies the desired target frame time for processing trajectory detection. This can be used for real-time processing of frames, which requires execution with a specific amount of time. The target frame time is evaluated from frame-to-frame. If processing takes longer than this target frame time for the currect frame, it will attempt to reduce the amount of time taken by reducing the accuracy (down to a set minimum) for the next frame. If a frame takes less time than this target, then accuracy of the next frame will be increased (up to a set maximum). The default value is kCMTimeIndefinite, meaning accuracy stays at the predefined maximum.
 func (dtr *DetectTrajectoriesRequest) TargetFrameTime() coremedia.CMTime {
+	defer runtime.KeepAlive(dtr)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(dtr), objc.RegisterName("targetFrameTime"))
 	return _r
 }

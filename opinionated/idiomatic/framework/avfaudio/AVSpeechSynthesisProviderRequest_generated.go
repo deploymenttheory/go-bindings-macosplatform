@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func speechSynthesisProviderRequestAdopt(id objc.ID) *SpeechSynthesisProviderReq
 
 // Description returns the object's -description text.
 func (sspr *SpeechSynthesisProviderRequest) Description() string {
+	defer runtime.KeepAlive(sspr)
 	return rt.Description(objref.IDOf(sspr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sspr *SpeechSynthesisProviderRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sspr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sspr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sspr *SpeechSynthesisProviderRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(sspr)
 	return rt.IsKind(objref.IDOf(sspr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sspr *SpeechSynthesisProviderRequest) String() string {
+	defer runtime.KeepAlive(sspr)
 	return rt.Description(objref.IDOf(sspr))
 }
 
 // NewSpeechSynthesisProviderRequestWithSSMLRepresentationVoice creates a request with a voice and a description.
 func NewSpeechSynthesisProviderRequestWithSSMLRepresentationVoice(text string, voice *SpeechSynthesisProviderVoice) *SpeechSynthesisProviderRequest {
+	defer runtime.KeepAlive(voice)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVSpeechSynthesisProviderRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSSMLRepresentation:voice:"), purego.NSString(text), objref.IDOf(voice))
 	return speechSynthesisProviderRequestAdopt(_id)
@@ -75,6 +83,7 @@ func NewSpeechSynthesisProviderRequestWithSSMLRepresentationVoice(text string, v
 
 // SsmlRepresentation returns the SSML representation of the text to be synthesized with the corresponding speech synthesis attributes for customization of pitch, rate, intonation, and more.
 func (sspr *SpeechSynthesisProviderRequest) SsmlRepresentation() string {
+	defer runtime.KeepAlive(sspr)
 	_r := objc.Send[objc.ID](objref.IDOf(sspr), objc.RegisterName("ssmlRepresentation"))
 	if _r == 0 {
 		return ""
@@ -84,6 +93,7 @@ func (sspr *SpeechSynthesisProviderRequest) SsmlRepresentation() string {
 
 // Voice returns the voice to be used in this speech request
 func (sspr *SpeechSynthesisProviderRequest) Voice() *SpeechSynthesisProviderVoice {
+	defer runtime.KeepAlive(sspr)
 	_r := objc.Send[objc.ID](objref.IDOf(sspr), objc.RegisterName("voice"))
 	return SpeechSynthesisProviderVoiceFromID(_r)
 }

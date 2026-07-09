@@ -5,6 +5,7 @@
 package metalkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func textureLoaderAdopt(id objc.ID) *TextureLoader {
 
 // Description returns the object's -description text.
 func (tl *TextureLoader) Description() string {
+	defer runtime.KeepAlive(tl)
 	return rt.Description(objref.IDOf(tl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tl *TextureLoader) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tl *TextureLoader) IsKind(className string) bool {
+	defer runtime.KeepAlive(tl)
 	return rt.IsKind(objref.IDOf(tl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tl *TextureLoader) String() string {
+	defer runtime.KeepAlive(tl)
 	return rt.Description(objref.IDOf(tl))
 }
 
@@ -75,10 +81,12 @@ func NewTextureLoader() *TextureLoader {
 	return textureLoaderAdopt(_id)
 }
 
-// NewTexturesWithContentsOfURLsOptionsError synchronously loads image data and creates new Metal textures from the specified list of URLs.
-func (tl *TextureLoader) NewTexturesWithContentsOfURLsOptionsError(uRLs []obj.Object, options obj.Object) (result []obj.Object, err error) {
+// NewTexturesWithContentsOfURLsOptions synchronously loads image data and creates new Metal textures from the specified list of URLs.
+func (tl *TextureLoader) NewTexturesWithContentsOfURLsOptions(urls []string, options obj.Object) (result []obj.Object, err error) {
+	defer runtime.KeepAlive(tl)
+	defer runtime.KeepAlive(options)
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("newTexturesWithContentsOfURLs:options:error:"), purego.SliceToNSArray(uRLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("newTexturesWithContentsOfURLs:options:error:"), purego.SliceToNSArray(urls, func(_v string) objc.ID { return rt.FileURL(_v) }), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}

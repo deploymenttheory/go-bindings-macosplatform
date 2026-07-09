@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func transformOrientOpAdopt(id objc.ID) *TransformOrientOp {
 
 // Description returns the object's -description text.
 func (too *TransformOrientOp) Description() string {
+	defer runtime.KeepAlive(too)
 	return rt.Description(objref.IDOf(too))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (too *TransformOrientOp) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(too)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(too), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (too *TransformOrientOp) IsKind(className string) bool {
+	defer runtime.KeepAlive(too)
 	return rt.IsKind(objref.IDOf(too), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (too *TransformOrientOp) String() string {
+	defer runtime.KeepAlive(too)
 	return rt.Description(objref.IDOf(too))
 }
 
@@ -72,6 +79,7 @@ func NewTransformOrientOp() *TransformOrientOp {
 
 // Name returns the name.
 func (too *TransformOrientOp) Name() string {
+	defer runtime.KeepAlive(too)
 	_r := objc.Send[objc.ID](objref.IDOf(too), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -81,6 +89,7 @@ func (too *TransformOrientOp) Name() string {
 
 // AnimatedValue returns the animated value.
 func (too *TransformOrientOp) AnimatedValue() *AnimatedQuaternion {
+	defer runtime.KeepAlive(too)
 	_r := objc.Send[objc.ID](objref.IDOf(too), objc.RegisterName("animatedValue"))
 	return AnimatedQuaternionFromID(_r)
 }

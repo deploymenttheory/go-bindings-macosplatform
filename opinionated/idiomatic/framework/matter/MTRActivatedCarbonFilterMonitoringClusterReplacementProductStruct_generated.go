@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRActivatedCarbonFilterMonitoringClusterReplacementProductStructAdopt(id o
 
 // Description returns the object's -description text.
 func (macfmcrps *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) Description() string {
+	defer runtime.KeepAlive(macfmcrps)
 	return rt.Description(objref.IDOf(macfmcrps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (macfmcrps *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(macfmcrps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(macfmcrps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (macfmcrps *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(macfmcrps)
 	return rt.IsKind(objref.IDOf(macfmcrps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (macfmcrps *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) String() string {
+	defer runtime.KeepAlive(macfmcrps)
 	return rt.Description(objref.IDOf(macfmcrps))
 }
 
@@ -72,6 +80,7 @@ func NewMTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct() *MTR
 
 // WithProductIdentifierType sets the product identifier type.
 func (macfmcrps *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) WithProductIdentifierType(productIdentifierType obj.Object) *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct {
+	defer runtime.KeepAlive(productIdentifierType)
 	objc.Send[objc.ID](objref.IDOf(macfmcrps), objc.RegisterName("setProductIdentifierType:"), objref.IDOf(productIdentifierType))
 	return macfmcrps
 }
@@ -83,13 +92,15 @@ func (macfmcrps *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStru
 }
 
 // ProductIdentifierType returns the product identifier type.
-func (macfmcrps *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) ProductIdentifierType() obj.Object {
+func (macfmcrps *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) ProductIdentifierType() *foundation.Number {
+	defer runtime.KeepAlive(macfmcrps)
 	_r := objc.Send[objc.ID](objref.IDOf(macfmcrps), objc.RegisterName("productIdentifierType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ProductIdentifierValue returns the product identifier value.
 func (macfmcrps *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) ProductIdentifierValue() string {
+	defer runtime.KeepAlive(macfmcrps)
 	_r := objc.Send[objc.ID](objref.IDOf(macfmcrps), objc.RegisterName("productIdentifierValue"))
 	if _r == 0 {
 		return ""

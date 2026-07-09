@@ -5,7 +5,10 @@
 package pushkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func pushCredentialsAdopt(id objc.ID) *PushCredentials {
 
 // Description returns the object's -description text.
 func (pc *PushCredentials) Description() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pc *PushCredentials) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pc *PushCredentials) IsKind(className string) bool {
+	defer runtime.KeepAlive(pc)
 	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pc *PushCredentials) String() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
@@ -73,13 +81,15 @@ func NewPushCredentials() *PushCredentials {
 }
 
 // Type returns the push type constant associated with the token. For possible values, see “PushKit/PKPushType“.
-func (pc *PushCredentials) Type() obj.Object {
+func (pc *PushCredentials) Type() *foundation.String {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("type"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Token returns a unique device token to use when sending push notifications to the current device. Forward this token to the server you use to generate push notifications. When preparing to deliver a push notification to the current device, include the token in the HTTP request you send to Apple Push Notification service (APNs).
-func (pc *PushCredentials) Token() obj.Object {
+func (pc *PushCredentials) Token() []byte {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("token"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

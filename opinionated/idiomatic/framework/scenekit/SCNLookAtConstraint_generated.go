@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewLookAtConstraint() *LookAtConstraint {
 
 // WithTarget sets the node toward which constrained nodes will point after being reoriented.
 func (lac *LookAtConstraint) WithTarget(target NodeProvider) *LookAtConstraint {
+	defer runtime.KeepAlive(target)
 	objc.Send[objc.ID](objref.IDOf(lac), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return lac
 }
@@ -83,12 +86,14 @@ func (lac *LookAtConstraint) WithIncremental(incremental bool) *LookAtConstraint
 
 // Target returns the target.
 func (lac *LookAtConstraint) Target() *Node {
+	defer runtime.KeepAlive(lac)
 	_r := objc.Send[objc.ID](objref.IDOf(lac), objc.RegisterName("target"))
 	return NodeFromID(_r)
 }
 
 // GimbalLockEnabled reports whether the receiver enables the gimbal lock. Defaults to false. Enabling the gimbal lock prevents the receiver from rotating the constrained node around to roll axis.
 func (lac *LookAtConstraint) GimbalLockEnabled() bool {
+	defer runtime.KeepAlive(lac)
 	_r := objc.Send[bool](objref.IDOf(lac), objc.RegisterName("gimbalLockEnabled"))
 	return _r
 }

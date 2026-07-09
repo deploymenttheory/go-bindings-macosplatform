@@ -5,6 +5,9 @@
 package avfoundation
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func assetResourceLoadingContentInformationRequestAdopt(id objc.ID) *AssetResour
 
 // Description returns the object's -description text.
 func (arlcir *AssetResourceLoadingContentInformationRequest) Description() string {
+	defer runtime.KeepAlive(arlcir)
 	return rt.Description(objref.IDOf(arlcir))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (arlcir *AssetResourceLoadingContentInformationRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(arlcir)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(arlcir), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (arlcir *AssetResourceLoadingContentInformationRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(arlcir)
 	return rt.IsKind(objref.IDOf(arlcir), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (arlcir *AssetResourceLoadingContentInformationRequest) String() string {
+	defer runtime.KeepAlive(arlcir)
 	return rt.Description(objref.IDOf(arlcir))
 }
 
@@ -91,8 +99,8 @@ func (arlcir *AssetResourceLoadingContentInformationRequest) WithByteRangeAccess
 }
 
 // WithRenewalDate sets the date at which a new resource loading request will be issued for resources that expire, if the media system still requires it.
-func (arlcir *AssetResourceLoadingContentInformationRequest) WithRenewalDate(renewalDate obj.Object) *AssetResourceLoadingContentInformationRequest {
-	objc.Send[objc.ID](objref.IDOf(arlcir), objc.RegisterName("setRenewalDate:"), objref.IDOf(renewalDate))
+func (arlcir *AssetResourceLoadingContentInformationRequest) WithRenewalDate(renewalDate time.Time) *AssetResourceLoadingContentInformationRequest {
+	objc.Send[objc.ID](objref.IDOf(arlcir), objc.RegisterName("setRenewalDate:"), rt.TimeToNSDate(renewalDate))
 	return arlcir
 }
 
@@ -104,6 +112,7 @@ func (arlcir *AssetResourceLoadingContentInformationRequest) WithEntireLengthAva
 
 // ContentType returns a UTI that indicates the type of data contained by the requested resource. Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you should set the value of this property to a UTI indicating the type of data contained by the requested resource.
 func (arlcir *AssetResourceLoadingContentInformationRequest) ContentType() string {
+	defer runtime.KeepAlive(arlcir)
 	_r := objc.Send[objc.ID](objref.IDOf(arlcir), objc.RegisterName("contentType"))
 	if _r == 0 {
 		return ""
@@ -115,30 +124,35 @@ func (arlcir *AssetResourceLoadingContentInformationRequest) ContentType() strin
 //
 // AllowedContentTypes returns the collection as a Go slice.
 func (arlcir *AssetResourceLoadingContentInformationRequest) AllowedContentTypes() []string {
+	defer runtime.KeepAlive(arlcir)
 	_arr := objc.Send[objc.ID](objref.IDOf(arlcir), objc.RegisterName("allowedContentTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ContentLength indicates the length of the requested resource, in bytes. Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you should set the value of this property to the number of bytes contained by the requested resource.
 func (arlcir *AssetResourceLoadingContentInformationRequest) ContentLength() int64 {
+	defer runtime.KeepAlive(arlcir)
 	_r := objc.Send[int64](objref.IDOf(arlcir), objc.RegisterName("contentLength"))
 	return _r
 }
 
 // IsByteRangeAccessSupported reports whether random access to arbitrary ranges of bytes of the resource is supported. Such support also allows portions of the resource to be requested more than once. Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you should set the value of this property to true if you support random access to arbitrary ranges of bytes of the resource. If you do not set this property to true for resources that must be loaded incrementally, loading of the resource may fail. Such resources include anything that contains media data.
 func (arlcir *AssetResourceLoadingContentInformationRequest) IsByteRangeAccessSupported() bool {
+	defer runtime.KeepAlive(arlcir)
 	_r := objc.Send[bool](objref.IDOf(arlcir), objc.RegisterName("isByteRangeAccessSupported"))
 	return _r
 }
 
 // RenewalDate returns for resources that expire, the date at which a new AVAssetResourceLoadingRequest will be issued for a renewal of this resource, if the media system still requires it. Before you finish loading an AVAssetResourceLoadingRequest, if the resource is prone to expiry you should set the value of this property to the date at which a renewal should be triggered. This value should be set sufficiently early enough to allow an AVAssetResourceRenewalRequest, delivered to your delegate via -resourceLoader:shouldWaitForRenewalOfRequestedResource:, to finish before the actual expiry time. Otherwise media playback may fail.
-func (arlcir *AssetResourceLoadingContentInformationRequest) RenewalDate() obj.Object {
+func (arlcir *AssetResourceLoadingContentInformationRequest) RenewalDate() time.Time {
+	defer runtime.KeepAlive(arlcir)
 	_r := objc.Send[objc.ID](objref.IDOf(arlcir), objc.RegisterName("renewalDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // IsEntireLengthAvailableOnDemand reports whether asset data loading can expect data to be produced immediately. Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you may set this property to true to indicate that all asset data can be produced immediately, e.g., because the data is fully cached, or because the custom URL scheme ultimately refers to files on local storage. This allows significant data flow optimizations. For backward compatibility, this property defaults to false.
 func (arlcir *AssetResourceLoadingContentInformationRequest) IsEntireLengthAvailableOnDemand() bool {
+	defer runtime.KeepAlive(arlcir)
 	_r := objc.Send[bool](objref.IDOf(arlcir), objc.RegisterName("isEntireLengthAvailableOnDemand"))
 	return _r
 }

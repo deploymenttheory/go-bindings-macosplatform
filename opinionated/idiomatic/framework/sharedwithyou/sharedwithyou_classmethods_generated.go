@@ -5,6 +5,8 @@
 package sharedwithyou
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -28,5 +30,8 @@ func IsSystemCollaborationSupportAvailable() bool {
 
 // ShowAlertWithParticipantHighlightInWindow shows alert with participant highlight in window.
 func ShowAlertWithParticipantHighlightInWindow(participant obj.Object, highlight *CollaborationHighlight, window obj.Object) {
+	defer runtime.KeepAlive(participant)
+	defer runtime.KeepAlive(highlight)
+	defer runtime.KeepAlive(window)
 	objc.Send[objc.ID](objc.ID(_class("SWRemoveParticipantAlert")), objc.RegisterName("showAlertWithParticipant:highlight:inWindow:"), objref.IDOf(participant), objref.IDOf(highlight), objref.IDOf(window))
 }

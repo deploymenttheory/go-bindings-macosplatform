@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func assetVariantAudioRenditionSpecificAttributesAdopt(id objc.ID) *AssetVariant
 
 // Description returns the object's -description text.
 func (avarsa *AssetVariantAudioRenditionSpecificAttributes) Description() string {
+	defer runtime.KeepAlive(avarsa)
 	return rt.Description(objref.IDOf(avarsa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (avarsa *AssetVariantAudioRenditionSpecificAttributes) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(avarsa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(avarsa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (avarsa *AssetVariantAudioRenditionSpecificAttributes) IsKind(className string) bool {
+	defer runtime.KeepAlive(avarsa)
 	return rt.IsKind(objref.IDOf(avarsa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (avarsa *AssetVariantAudioRenditionSpecificAttributes) String() string {
+	defer runtime.KeepAlive(avarsa)
 	return rt.Description(objref.IDOf(avarsa))
 }
 
@@ -74,24 +81,28 @@ func NewAssetVariantAudioRenditionSpecificAttributes() *AssetVariantAudioRenditi
 
 // ChannelCount returns if it is not declared, the value will be negative. A channel count greater than two indicates that the variant offers a rich multichannel authoring.
 func (avarsa *AssetVariantAudioRenditionSpecificAttributes) ChannelCount() int {
+	defer runtime.KeepAlive(avarsa)
 	_r := objc.Send[int](objref.IDOf(avarsa), objc.RegisterName("channelCount"))
 	return _r
 }
 
 // IsBinaural reports whether indicates that the variant is best suited for delivery to headphones. A binaural variant may originate from a direct binaural recording or from the processing of a multichannel audio source.
 func (avarsa *AssetVariantAudioRenditionSpecificAttributes) IsBinaural() bool {
+	defer runtime.KeepAlive(avarsa)
 	_r := objc.Send[bool](objref.IDOf(avarsa), objc.RegisterName("isBinaural"))
 	return _r
 }
 
 // IsImmersive reports whether indicates that this variant contains virtualized or otherwise pre-processed audio content that is suitable for a variety of purposes. If a variant audio redition is immersive it is eligible for rendering either to headphones or speakers.
 func (avarsa *AssetVariantAudioRenditionSpecificAttributes) IsImmersive() bool {
+	defer runtime.KeepAlive(avarsa)
 	_r := objc.Send[bool](objref.IDOf(avarsa), objc.RegisterName("isImmersive"))
 	return _r
 }
 
 // IsDownmix reports whether indicates that this variant is declared as a downmix derivative of other media of greater channel count. If one or more multichannel variants are also provided, the dowmix is assumed to be compatible in its internal timing and other attributes with those variants. Typically this is because it has been derived from the same source. A downmix can be used as a suitable substitute for a multichannel variant under some conditions.
 func (avarsa *AssetVariantAudioRenditionSpecificAttributes) IsDownmix() bool {
+	defer runtime.KeepAlive(avarsa)
 	_r := objc.Send[bool](objref.IDOf(avarsa), objc.RegisterName("isDownmix"))
 	return _r
 }

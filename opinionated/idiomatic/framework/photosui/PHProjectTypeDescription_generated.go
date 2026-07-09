@@ -5,7 +5,10 @@
 package photosui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,34 @@ func projectTypeDescriptionAdopt(id objc.ID) *ProjectTypeDescription {
 
 // Description returns the object's -description text.
 func (ptd *ProjectTypeDescription) Description() string {
+	defer runtime.KeepAlive(ptd)
 	return rt.Description(objref.IDOf(ptd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ptd *ProjectTypeDescription) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ptd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ptd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ptd *ProjectTypeDescription) IsKind(className string) bool {
+	defer runtime.KeepAlive(ptd)
 	return rt.IsKind(objref.IDOf(ptd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ptd *ProjectTypeDescription) String() string {
+	defer runtime.KeepAlive(ptd)
 	return rt.Description(objref.IDOf(ptd))
 }
 
 // NewProjectTypeDescriptionWithProjectTypeTitleDescriptionImageSubtypeDescriptions a designated initializer for project type descriptions with the full subtype hierarchy specified up front and a standard string for description text.
 func NewProjectTypeDescriptionWithProjectTypeTitleDescriptionImageSubtypeDescriptions(projectType obj.Object, localizedTitle string, localizedDescription string, image obj.Object, subtypeDescriptions []*ProjectTypeDescription) *ProjectTypeDescription {
+	defer runtime.KeepAlive(projectType)
+	defer runtime.KeepAlive(image)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHProjectTypeDescription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProjectType:title:description:image:subtypeDescriptions:"), objref.IDOf(projectType), purego.NSString(localizedTitle), purego.NSString(localizedDescription), objref.IDOf(image), purego.SliceToNSArray(subtypeDescriptions, func(_v *ProjectTypeDescription) objc.ID { return objref.IDOf(_v) }))
 	return projectTypeDescriptionAdopt(_id)
@@ -75,6 +85,9 @@ func NewProjectTypeDescriptionWithProjectTypeTitleDescriptionImageSubtypeDescrip
 
 // NewProjectTypeDescriptionWithProjectTypeTitleAttributedDescriptionImageSubtypeDescriptions a designated initializer for project type descriptions with the full subtype hierarchy specified up front and an attributed string for description text.
 func NewProjectTypeDescriptionWithProjectTypeTitleAttributedDescriptionImageSubtypeDescriptions(projectType obj.Object, localizedTitle string, localizedAttributedDescription obj.Object, image obj.Object, subtypeDescriptions []*ProjectTypeDescription) *ProjectTypeDescription {
+	defer runtime.KeepAlive(projectType)
+	defer runtime.KeepAlive(localizedAttributedDescription)
+	defer runtime.KeepAlive(image)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHProjectTypeDescription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProjectType:title:attributedDescription:image:subtypeDescriptions:"), objref.IDOf(projectType), purego.NSString(localizedTitle), objref.IDOf(localizedAttributedDescription), objref.IDOf(image), purego.SliceToNSArray(subtypeDescriptions, func(_v *ProjectTypeDescription) objc.ID { return objref.IDOf(_v) }))
 	return projectTypeDescriptionAdopt(_id)
@@ -82,6 +95,8 @@ func NewProjectTypeDescriptionWithProjectTypeTitleAttributedDescriptionImageSubt
 
 // NewProjectTypeDescriptionWithProjectTypeTitleDescriptionImage a convenience initializer without subtype descriptions.
 func NewProjectTypeDescriptionWithProjectTypeTitleDescriptionImage(projectType obj.Object, localizedTitle string, localizedDescription string, image obj.Object) *ProjectTypeDescription {
+	defer runtime.KeepAlive(projectType)
+	defer runtime.KeepAlive(image)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHProjectTypeDescription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProjectType:title:description:image:"), objref.IDOf(projectType), purego.NSString(localizedTitle), purego.NSString(localizedDescription), objref.IDOf(image))
 	return projectTypeDescriptionAdopt(_id)
@@ -89,6 +104,8 @@ func NewProjectTypeDescriptionWithProjectTypeTitleDescriptionImage(projectType o
 
 // NewProjectTypeDescriptionWithProjectTypeTitleDescriptionImageCanProvideSubtypes a designated initializer for project type descriptions with lazily fetched subtypes and a standard description string.
 func NewProjectTypeDescriptionWithProjectTypeTitleDescriptionImageCanProvideSubtypes(projectType obj.Object, localizedTitle string, localizedDescription string, image obj.Object, canProvideSubtypes bool) *ProjectTypeDescription {
+	defer runtime.KeepAlive(projectType)
+	defer runtime.KeepAlive(image)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHProjectTypeDescription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProjectType:title:description:image:canProvideSubtypes:"), objref.IDOf(projectType), purego.NSString(localizedTitle), purego.NSString(localizedDescription), objref.IDOf(image), canProvideSubtypes)
 	return projectTypeDescriptionAdopt(_id)
@@ -96,19 +113,24 @@ func NewProjectTypeDescriptionWithProjectTypeTitleDescriptionImageCanProvideSubt
 
 // NewProjectTypeDescriptionWithProjectTypeTitleAttributedDescriptionImageCanProvideSubtypes a designated initializer for project type descriptions with lazily fetched subtypes and an attributed description string.
 func NewProjectTypeDescriptionWithProjectTypeTitleAttributedDescriptionImageCanProvideSubtypes(projectType obj.Object, localizedTitle string, localizedAttributedDescription obj.Object, image obj.Object, canProvideSubtypes bool) *ProjectTypeDescription {
+	defer runtime.KeepAlive(projectType)
+	defer runtime.KeepAlive(localizedAttributedDescription)
+	defer runtime.KeepAlive(image)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHProjectTypeDescription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProjectType:title:attributedDescription:image:canProvideSubtypes:"), objref.IDOf(projectType), purego.NSString(localizedTitle), objref.IDOf(localizedAttributedDescription), objref.IDOf(image), canProvideSubtypes)
 	return projectTypeDescriptionAdopt(_id)
 }
 
 // ProjectType returns identifier for the project type info. These should be added to the extensible string enum defined in PhotosUITypes.h.
-func (ptd *ProjectTypeDescription) ProjectType() obj.Object {
+func (ptd *ProjectTypeDescription) ProjectType() *foundation.String {
+	defer runtime.KeepAlive(ptd)
 	_r := objc.Send[objc.ID](objref.IDOf(ptd), objc.RegisterName("projectType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // LocalizedTitle returns localized title and description of the project type to be displayed to the user. The title is required, but description is optional.
 func (ptd *ProjectTypeDescription) LocalizedTitle() string {
+	defer runtime.KeepAlive(ptd)
 	_r := objc.Send[objc.ID](objref.IDOf(ptd), objc.RegisterName("localizedTitle"))
 	if _r == 0 {
 		return ""
@@ -118,6 +140,7 @@ func (ptd *ProjectTypeDescription) LocalizedTitle() string {
 
 // LocalizedDescription returns the localized description.
 func (ptd *ProjectTypeDescription) LocalizedDescription() string {
+	defer runtime.KeepAlive(ptd)
 	_r := objc.Send[objc.ID](objref.IDOf(ptd), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""
@@ -126,13 +149,15 @@ func (ptd *ProjectTypeDescription) LocalizedDescription() string {
 }
 
 // LocalizedAttributedDescription returns the localized attributed description.
-func (ptd *ProjectTypeDescription) LocalizedAttributedDescription() obj.Object {
+func (ptd *ProjectTypeDescription) LocalizedAttributedDescription() *foundation.AttributedString {
+	defer runtime.KeepAlive(ptd)
 	_r := objc.Send[objc.ID](objref.IDOf(ptd), objc.RegisterName("localizedAttributedDescription"))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // Image returns optional image to be associated with the project type in the picker; PNG images are recommended.
 func (ptd *ProjectTypeDescription) Image() obj.Object {
+	defer runtime.KeepAlive(ptd)
 	_r := objc.Send[objc.ID](objref.IDOf(ptd), objc.RegisterName("image"))
 	return obj.Wrap(_r)
 }
@@ -141,12 +166,14 @@ func (ptd *ProjectTypeDescription) Image() obj.Object {
 //
 // SubtypeDescriptions returns the collection as a Go slice.
 func (ptd *ProjectTypeDescription) SubtypeDescriptions() []*ProjectTypeDescription {
+	defer runtime.KeepAlive(ptd)
 	_arr := objc.Send[objc.ID](objref.IDOf(ptd), objc.RegisterName("subtypeDescriptions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ProjectTypeDescription { return ProjectTypeDescriptionFromID(_id) })
 }
 
 // CanProvideSubtypes reports whether for spase instances canProvideSubtypes is an indicator if subtypes can be fetched from the data source. If subtypeDescriptions is not empty it will also return true.
 func (ptd *ProjectTypeDescription) CanProvideSubtypes() bool {
+	defer runtime.KeepAlive(ptd)
 	_r := objc.Send[bool](objref.IDOf(ptd), objc.RegisterName("canProvideSubtypes"))
 	return _r
 }

@@ -5,10 +5,13 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,6 +64,7 @@ func NewEmitterNode() *EmitterNode {
 
 // WithParticleTexture sets the texture to use to render a particle.
 func (en *EmitterNode) WithParticleTexture(particleTexture TextureProvider) *EmitterNode {
+	defer runtime.KeepAlive(particleTexture)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleTexture:"), objref.IDOf(particleTexture))
 	})
@@ -77,6 +81,7 @@ func (en *EmitterNode) WithParticleBlendMode(particleBlendMode BlendMode) *Emitt
 
 // WithParticleColor sets the average initial color for a particle.
 func (en *EmitterNode) WithParticleColor(particleColor obj.Object) *EmitterNode {
+	defer runtime.KeepAlive(particleColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColor:"), objref.IDOf(particleColor))
 	})
@@ -149,6 +154,7 @@ func (en *EmitterNode) WithParticleColorAlphaSpeed(particleColorAlphaSpeed float
 
 // WithParticleColorSequence sets the sequence used to specify the color components of a particle over its lifetime.
 func (en *EmitterNode) WithParticleColorSequence(particleColorSequence *KeyframeSequence) *EmitterNode {
+	defer runtime.KeepAlive(particleColorSequence)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorSequence:"), objref.IDOf(particleColorSequence))
 	})
@@ -181,6 +187,7 @@ func (en *EmitterNode) WithParticleColorBlendFactorSpeed(particleColorBlendFacto
 
 // WithParticleColorBlendFactorSequence sets the sequence used to specify the color blend factor of a particle over its lifetime.
 func (en *EmitterNode) WithParticleColorBlendFactorSequence(particleColorBlendFactorSequence *KeyframeSequence) *EmitterNode {
+	defer runtime.KeepAlive(particleColorBlendFactorSequence)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorBlendFactorSequence:"), objref.IDOf(particleColorBlendFactorSequence))
 	})
@@ -341,6 +348,7 @@ func (en *EmitterNode) WithParticleScaleSpeed(particleScaleSpeed float64) *Emitt
 
 // WithParticleScaleSequence sets the sequence used to specify the scale factor of a particle over its lifetime.
 func (en *EmitterNode) WithParticleScaleSequence(particleScaleSequence *KeyframeSequence) *EmitterNode {
+	defer runtime.KeepAlive(particleScaleSequence)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleScaleSequence:"), objref.IDOf(particleScaleSequence))
 	})
@@ -373,6 +381,7 @@ func (en *EmitterNode) WithParticleAlphaSpeed(particleAlphaSpeed float64) *Emitt
 
 // WithParticleAlphaSequence sets the sequence used to specify the alpha value of a particle over its lifetime.
 func (en *EmitterNode) WithParticleAlphaSequence(particleAlphaSequence *KeyframeSequence) *EmitterNode {
+	defer runtime.KeepAlive(particleAlphaSequence)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleAlphaSequence:"), objref.IDOf(particleAlphaSequence))
 	})
@@ -381,6 +390,7 @@ func (en *EmitterNode) WithParticleAlphaSequence(particleAlphaSequence *Keyframe
 
 // WithParticleAction sets an action executed by new particles.
 func (en *EmitterNode) WithParticleAction(particleAction *Action) *EmitterNode {
+	defer runtime.KeepAlive(particleAction)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleAction:"), objref.IDOf(particleAction))
 	})
@@ -397,6 +407,7 @@ func (en *EmitterNode) WithFieldBitMask(fieldBitMask uint32) *EmitterNode {
 
 // WithTargetNode sets the target node that renders the emitter’s particles.
 func (en *EmitterNode) WithTargetNode(targetNode NodeProvider) *EmitterNode {
+	defer runtime.KeepAlive(targetNode)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setTargetNode:"), objref.IDOf(targetNode))
 	})
@@ -405,6 +416,7 @@ func (en *EmitterNode) WithTargetNode(targetNode NodeProvider) *EmitterNode {
 
 // WithShader sets a custom shader used to determine how particles are rendered.
 func (en *EmitterNode) WithShader(shader *Shader) *EmitterNode {
+	defer runtime.KeepAlive(shader)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setShader:"), objref.IDOf(shader))
 	})
@@ -533,6 +545,7 @@ func (en *EmitterNode) WithName(name string) *EmitterNode {
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (en *EmitterNode) WithPhysicsBody(physicsBody *PhysicsBody) *EmitterNode {
+	defer runtime.KeepAlive(physicsBody)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	})
@@ -541,6 +554,7 @@ func (en *EmitterNode) WithPhysicsBody(physicsBody *PhysicsBody) *EmitterNode {
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (en *EmitterNode) WithUserData(userData obj.Object) *EmitterNode {
+	defer runtime.KeepAlive(userData)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	})
@@ -549,6 +563,7 @@ func (en *EmitterNode) WithUserData(userData obj.Object) *EmitterNode {
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (en *EmitterNode) WithReachConstraints(reachConstraints *ReachConstraints) *EmitterNode {
+	defer runtime.KeepAlive(reachConstraints)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	})
@@ -565,9 +580,9 @@ func (en *EmitterNode) WithConstraints(items ...*Constraint) *EmitterNode {
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
-func (en *EmitterNode) WithAttributeValues(attributeValues obj.Object) *EmitterNode {
+func (en *EmitterNode) WithAttributeValues(attributeValues map[string]*AttributeValue) *EmitterNode {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAttributeValues:"), rt.MapToDict(attributeValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *AttributeValue) objc.ID { return objref.IDOf(_v) }))
 	})
 	return en
 }
@@ -614,6 +629,7 @@ func (en *EmitterNode) WithAccessibilityFrame(accessibilityFrame corefoundation.
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (en *EmitterNode) WithAccessibilityParent(accessibilityParent obj.Object) *EmitterNode {
+	defer runtime.KeepAlive(accessibilityParent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	})
@@ -646,6 +662,7 @@ func (en *EmitterNode) WithAccessibilityEnabled(accessibilityEnabled bool) *Emit
 
 // AdvanceSimulationTime advances the emitter particle simulation.
 func (en *EmitterNode) AdvanceSimulationTime(sec float64) {
+	defer runtime.KeepAlive(en)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("advanceSimulationTime:"), sec)
 	})
@@ -654,6 +671,7 @@ func (en *EmitterNode) AdvanceSimulationTime(sec float64) {
 
 // ResetSimulation removes all existing particles and restarts the simulation.
 func (en *EmitterNode) ResetSimulation() {
+	defer runtime.KeepAlive(en)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("resetSimulation"))
 	})
@@ -662,6 +680,7 @@ func (en *EmitterNode) ResetSimulation() {
 
 // ParticleTexture returns the texture to be used for the particles.
 func (en *EmitterNode) ParticleTexture() *Texture {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 *Texture
 	purego.Main(func() {
 		_mainthread0 = func() *Texture {
@@ -675,6 +694,7 @@ func (en *EmitterNode) ParticleTexture() *Texture {
 
 // ParticleBlendMode returns the blend mode for each particle. Defaults to SKBlendModeAlpha.
 func (en *EmitterNode) ParticleBlendMode() BlendMode {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 BlendMode
 	purego.Main(func() {
 		_mainthread0 = func() BlendMode {
@@ -688,6 +708,7 @@ func (en *EmitterNode) ParticleBlendMode() BlendMode {
 
 // ParticleColor returns the starting color for each particle. Defaults to clear.
 func (en *EmitterNode) ParticleColor() obj.Object {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -701,6 +722,7 @@ func (en *EmitterNode) ParticleColor() obj.Object {
 
 // ParticleColorRedRange returns the random variance about each color component for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleColorRedRange() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -714,6 +736,7 @@ func (en *EmitterNode) ParticleColorRedRange() float64 {
 
 // ParticleColorGreenRange returns the particle color green range.
 func (en *EmitterNode) ParticleColorGreenRange() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -727,6 +750,7 @@ func (en *EmitterNode) ParticleColorGreenRange() float64 {
 
 // ParticleColorBlueRange returns the particle color blue range.
 func (en *EmitterNode) ParticleColorBlueRange() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -740,6 +764,7 @@ func (en *EmitterNode) ParticleColorBlueRange() float64 {
 
 // ParticleColorAlphaRange returns the particle color alpha range.
 func (en *EmitterNode) ParticleColorAlphaRange() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -753,6 +778,7 @@ func (en *EmitterNode) ParticleColorAlphaRange() float64 {
 
 // ParticleColorRedSpeed returns the rate at which to modify each color component for each particle (per second).
 func (en *EmitterNode) ParticleColorRedSpeed() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -766,6 +792,7 @@ func (en *EmitterNode) ParticleColorRedSpeed() float64 {
 
 // ParticleColorGreenSpeed returns the particle color green speed.
 func (en *EmitterNode) ParticleColorGreenSpeed() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -779,6 +806,7 @@ func (en *EmitterNode) ParticleColorGreenSpeed() float64 {
 
 // ParticleColorBlueSpeed returns the particle color blue speed.
 func (en *EmitterNode) ParticleColorBlueSpeed() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -792,6 +820,7 @@ func (en *EmitterNode) ParticleColorBlueSpeed() float64 {
 
 // ParticleColorAlphaSpeed returns the particle color alpha speed.
 func (en *EmitterNode) ParticleColorAlphaSpeed() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -805,6 +834,7 @@ func (en *EmitterNode) ParticleColorAlphaSpeed() float64 {
 
 // ParticleColorSequence returns the particle color sequence.
 func (en *EmitterNode) ParticleColorSequence() *KeyframeSequence {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 *KeyframeSequence
 	purego.Main(func() {
 		_mainthread0 = func() *KeyframeSequence {
@@ -818,6 +848,7 @@ func (en *EmitterNode) ParticleColorSequence() *KeyframeSequence {
 
 // ParticleColorBlendFactor returns the starting color blend for each particle. Behaves the same as SKSpriteNode. Defaults to 0.0.
 func (en *EmitterNode) ParticleColorBlendFactor() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -831,6 +862,7 @@ func (en *EmitterNode) ParticleColorBlendFactor() float64 {
 
 // ParticleColorBlendFactorRange returns the random variance about the starting color blend for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleColorBlendFactorRange() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -844,6 +876,7 @@ func (en *EmitterNode) ParticleColorBlendFactorRange() float64 {
 
 // ParticleColorBlendFactorSpeed returns the rate at which to modify the color blend for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleColorBlendFactorSpeed() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -857,6 +890,7 @@ func (en *EmitterNode) ParticleColorBlendFactorSpeed() float64 {
 
 // ParticleColorBlendFactorSequence returns the particle color blend factor sequence.
 func (en *EmitterNode) ParticleColorBlendFactorSequence() *KeyframeSequence {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 *KeyframeSequence
 	purego.Main(func() {
 		_mainthread0 = func() *KeyframeSequence {
@@ -870,6 +904,7 @@ func (en *EmitterNode) ParticleColorBlendFactorSequence() *KeyframeSequence {
 
 // ParticlePosition returns the starting position for each particle in the emitter's coordinate space. Defaults to (0.0, 0,0).
 func (en *EmitterNode) ParticlePosition() corefoundation.CGPoint {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -883,6 +918,7 @@ func (en *EmitterNode) ParticlePosition() corefoundation.CGPoint {
 
 // ParticlePositionRange returns the random variance about the starting position for each particle in the emitter's coordinate space. Defaults to (0.0, 0,0).
 func (en *EmitterNode) ParticlePositionRange() corefoundation.CGVector {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 corefoundation.CGVector
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGVector {
@@ -896,6 +932,7 @@ func (en *EmitterNode) ParticlePositionRange() corefoundation.CGVector {
 
 // ParticleSpeed returns the starting speed for each particle along its emission vector. Defaults to 0.0.
 func (en *EmitterNode) ParticleSpeed() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -909,6 +946,7 @@ func (en *EmitterNode) ParticleSpeed() float64 {
 
 // ParticleSpeedRange returns the random variance about the starting speed for each particle along its emission vector. Defaults to 0.0.
 func (en *EmitterNode) ParticleSpeedRange() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -922,6 +960,7 @@ func (en *EmitterNode) ParticleSpeedRange() float64 {
 
 // EmissionAngle returns the angle at which to emit each new particle, in radians. Defaults to 0.0.
 func (en *EmitterNode) EmissionAngle() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -935,6 +974,7 @@ func (en *EmitterNode) EmissionAngle() float64 {
 
 // EmissionAngleRange returns the random variance about the angle at which to emit each new particle, in radians. Defaults to 0.0.
 func (en *EmitterNode) EmissionAngleRange() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -948,6 +988,7 @@ func (en *EmitterNode) EmissionAngleRange() float64 {
 
 // XAcceleration returns the acceleration to apply to each particles velocity. Useful for simulating effects such as wind or gravity. Defaults to 0.0.
 func (en *EmitterNode) XAcceleration() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -961,6 +1002,7 @@ func (en *EmitterNode) XAcceleration() float64 {
 
 // YAcceleration returns the y acceleration.
 func (en *EmitterNode) YAcceleration() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -974,6 +1016,7 @@ func (en *EmitterNode) YAcceleration() float64 {
 
 // ParticleBirthRate returns the rate at which new particles are generated, in particles per second. Defaults to 0.0.
 func (en *EmitterNode) ParticleBirthRate() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -987,6 +1030,7 @@ func (en *EmitterNode) ParticleBirthRate() float64 {
 
 // NumParticlesToEmit returns the number of particles that will be emitted. If set to 0, there is no limit. Defaults to 0.
 func (en *EmitterNode) NumParticlesToEmit() int {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1000,6 +1044,7 @@ func (en *EmitterNode) NumParticlesToEmit() int {
 
 // ParticleLifetime returns the lifetime of each particle, in seconds. Defaults to 0.0.
 func (en *EmitterNode) ParticleLifetime() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1013,6 +1058,7 @@ func (en *EmitterNode) ParticleLifetime() float64 {
 
 // ParticleLifetimeRange returns the random variance about the lifetime of each particle, in seconds. Defaults to 0.0.
 func (en *EmitterNode) ParticleLifetimeRange() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1026,6 +1072,7 @@ func (en *EmitterNode) ParticleLifetimeRange() float64 {
 
 // ParticleRotation returns the starting z-rotation for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleRotation() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1039,6 +1086,7 @@ func (en *EmitterNode) ParticleRotation() float64 {
 
 // ParticleRotationRange returns the random variance about the starting z-rotation for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleRotationRange() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1052,6 +1100,7 @@ func (en *EmitterNode) ParticleRotationRange() float64 {
 
 // ParticleRotationSpeed returns the rate at which to modify the z-rotation for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleRotationSpeed() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1065,6 +1114,7 @@ func (en *EmitterNode) ParticleRotationSpeed() float64 {
 
 // ParticleSize returns the starting size for each particle. If set to CGSizeZero (the default) the particles will start at the size of the texture assigned to particleTexture. Note that particleScale and particleScaleRange will also have an effect on the effective size of each new particle.
 func (en *EmitterNode) ParticleSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -1078,6 +1128,7 @@ func (en *EmitterNode) ParticleSize() corefoundation.CGSize {
 
 // ParticleScale returns the starting scale for each particle. Defaults to 1.0.
 func (en *EmitterNode) ParticleScale() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1091,6 +1142,7 @@ func (en *EmitterNode) ParticleScale() float64 {
 
 // ParticleScaleRange returns the random variance about the starting scale for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleScaleRange() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1104,6 +1156,7 @@ func (en *EmitterNode) ParticleScaleRange() float64 {
 
 // ParticleScaleSpeed returns the rate at which to modify the scale for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleScaleSpeed() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1117,6 +1170,7 @@ func (en *EmitterNode) ParticleScaleSpeed() float64 {
 
 // ParticleScaleSequence returns the particle scale sequence.
 func (en *EmitterNode) ParticleScaleSequence() *KeyframeSequence {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 *KeyframeSequence
 	purego.Main(func() {
 		_mainthread0 = func() *KeyframeSequence {
@@ -1130,6 +1184,7 @@ func (en *EmitterNode) ParticleScaleSequence() *KeyframeSequence {
 
 // ParticleAlpha returns the starting alpha for each particle. Defaults to 1.0.
 func (en *EmitterNode) ParticleAlpha() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1143,6 +1198,7 @@ func (en *EmitterNode) ParticleAlpha() float64 {
 
 // ParticleAlphaRange returns the random variance about the starting alpha for each particle. Defaults to 1.0.
 func (en *EmitterNode) ParticleAlphaRange() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1156,6 +1212,7 @@ func (en *EmitterNode) ParticleAlphaRange() float64 {
 
 // ParticleAlphaSpeed returns the rate at which to modify the alpha for each particle. Defaults to 1.0.
 func (en *EmitterNode) ParticleAlphaSpeed() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1169,6 +1226,7 @@ func (en *EmitterNode) ParticleAlphaSpeed() float64 {
 
 // ParticleAlphaSequence returns the particle alpha sequence.
 func (en *EmitterNode) ParticleAlphaSequence() *KeyframeSequence {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 *KeyframeSequence
 	purego.Main(func() {
 		_mainthread0 = func() *KeyframeSequence {
@@ -1182,6 +1240,7 @@ func (en *EmitterNode) ParticleAlphaSequence() *KeyframeSequence {
 
 // ParticleAction specifies an action executed by new particles.
 func (en *EmitterNode) ParticleAction() *Action {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 *Action
 	purego.Main(func() {
 		_mainthread0 = func() *Action {
@@ -1195,6 +1254,7 @@ func (en *EmitterNode) ParticleAction() *Action {
 
 // FieldBitMask defines what logical 'categories' of fields this particles emitted respond to. Defaults to all bits set (all categories). Can be forced off via affectedByGravity.
 func (en *EmitterNode) FieldBitMask() uint32 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 uint32
 	purego.Main(func() {
 		_mainthread0 = func() uint32 {
@@ -1208,6 +1268,7 @@ func (en *EmitterNode) FieldBitMask() uint32 {
 
 // TargetNode returns normally the particles are rendered as if they were a child of the SKEmitterNode, they can also be rendered as if they were a child of any other node in the scene by setting the targetNode property. Defaults to nil (standard behavior).
 func (en *EmitterNode) TargetNode() *Node {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 *Node
 	purego.Main(func() {
 		_mainthread0 = func() *Node {
@@ -1221,6 +1282,7 @@ func (en *EmitterNode) TargetNode() *Node {
 
 // Shader returns the shader.
 func (en *EmitterNode) Shader() *Shader {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 *Shader
 	purego.Main(func() {
 		_mainthread0 = func() *Shader {
@@ -1234,6 +1296,7 @@ func (en *EmitterNode) Shader() *Shader {
 
 // ParticleZPosition returns the starting z-position for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleZPosition() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1247,6 +1310,7 @@ func (en *EmitterNode) ParticleZPosition() float64 {
 
 // ParticleRenderOrder returns the order in which particles will be rendered. Defaults to SKParticleRenderOrderOldestLast.
 func (en *EmitterNode) ParticleRenderOrder() ParticleRenderOrder {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 ParticleRenderOrder
 	purego.Main(func() {
 		_mainthread0 = func() ParticleRenderOrder {
@@ -1260,6 +1324,7 @@ func (en *EmitterNode) ParticleRenderOrder() ParticleRenderOrder {
 
 // ParticleZPositionRange returns the random variance about the starting z-position for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleZPositionRange() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1273,6 +1338,7 @@ func (en *EmitterNode) ParticleZPositionRange() float64 {
 
 // ParticleZPositionSpeed returns the rate at which to modify the z-position for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleZPositionSpeed() float64 {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {

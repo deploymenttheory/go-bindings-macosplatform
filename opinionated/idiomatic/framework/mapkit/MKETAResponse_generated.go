@@ -5,6 +5,9 @@
 package mapkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func eTAResponseAdopt(id objc.ID) *ETAResponse {
 
 // Description returns the object's -description text.
 func (er *ETAResponse) Description() string {
+	defer runtime.KeepAlive(er)
 	return rt.Description(objref.IDOf(er))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (er *ETAResponse) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(er)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(er), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (er *ETAResponse) IsKind(className string) bool {
+	defer runtime.KeepAlive(er)
 	return rt.IsKind(objref.IDOf(er), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (er *ETAResponse) String() string {
+	defer runtime.KeepAlive(er)
 	return rt.Description(objref.IDOf(er))
 }
 
@@ -74,36 +82,42 @@ func NewETAResponse() *ETAResponse {
 
 // Source returns the source.
 func (er *ETAResponse) Source() *MapItem {
+	defer runtime.KeepAlive(er)
 	_r := objc.Send[objc.ID](objref.IDOf(er), objc.RegisterName("source"))
 	return MapItemFromID(_r)
 }
 
 // Destination returns the destination.
 func (er *ETAResponse) Destination() *MapItem {
+	defer runtime.KeepAlive(er)
 	_r := objc.Send[objc.ID](objref.IDOf(er), objc.RegisterName("destination"))
 	return MapItemFromID(_r)
 }
 
 // ExpectedTravelTime returns the expected travel time.
 func (er *ETAResponse) ExpectedTravelTime() float64 {
+	defer runtime.KeepAlive(er)
 	_r := objc.Send[float64](objref.IDOf(er), objc.RegisterName("expectedTravelTime"))
 	return _r
 }
 
 // ExpectedArrivalDate returns the expected arrival date.
-func (er *ETAResponse) ExpectedArrivalDate() obj.Object {
+func (er *ETAResponse) ExpectedArrivalDate() time.Time {
+	defer runtime.KeepAlive(er)
 	_r := objc.Send[objc.ID](objref.IDOf(er), objc.RegisterName("expectedArrivalDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ExpectedDepartureDate returns the expected departure date.
-func (er *ETAResponse) ExpectedDepartureDate() obj.Object {
+func (er *ETAResponse) ExpectedDepartureDate() time.Time {
+	defer runtime.KeepAlive(er)
 	_r := objc.Send[objc.ID](objref.IDOf(er), objc.RegisterName("expectedDepartureDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // TransportType returns the transport type.
 func (er *ETAResponse) TransportType() DirectionsTransportType {
+	defer runtime.KeepAlive(er)
 	_r := objc.Send[DirectionsTransportType](objref.IDOf(er), objc.RegisterName("transportType"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package videotoolbox
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,37 @@ func superResolutionScalerParametersAdopt(id objc.ID) *SuperResolutionScalerPara
 
 // Description returns the object's -description text.
 func (srsp *SuperResolutionScalerParameters) Description() string {
+	defer runtime.KeepAlive(srsp)
 	return rt.Description(objref.IDOf(srsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (srsp *SuperResolutionScalerParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(srsp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(srsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (srsp *SuperResolutionScalerParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(srsp)
 	return rt.IsKind(objref.IDOf(srsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (srsp *SuperResolutionScalerParameters) String() string {
+	defer runtime.KeepAlive(srsp)
 	return rt.Description(objref.IDOf(srsp))
 }
 
 // NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame creates a new super-resolution scaler parameters instance.
 func NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame(sourceFrame *FrameProcessorFrame, previousFrame *FrameProcessorFrame, previousOutputFrame *FrameProcessorFrame, opticalFlow *FrameProcessorOpticalFlow, submissionMode SuperResolutionScalerParametersSubmissionMode, destinationFrame *FrameProcessorFrame) *SuperResolutionScalerParameters {
+	defer runtime.KeepAlive(sourceFrame)
+	defer runtime.KeepAlive(previousFrame)
+	defer runtime.KeepAlive(previousOutputFrame)
+	defer runtime.KeepAlive(opticalFlow)
+	defer runtime.KeepAlive(destinationFrame)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VTSuperResolutionScalerParameters")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:previousFrame:previousOutputFrame:opticalFlow:submissionMode:destinationFrame:"), objref.IDOf(sourceFrame), objref.IDOf(previousFrame), objref.IDOf(previousOutputFrame), objref.IDOf(opticalFlow), submissionMode, objref.IDOf(destinationFrame))
 	return superResolutionScalerParametersAdopt(_id)
@@ -75,36 +87,42 @@ func NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutpu
 
 // SourceFrame returns current source frame, which must be non `nil`.
 func (srsp *SuperResolutionScalerParameters) SourceFrame() *FrameProcessorFrame {
+	defer runtime.KeepAlive(srsp)
 	_r := objc.Send[objc.ID](objref.IDOf(srsp), objc.RegisterName("sourceFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
 // PreviousFrame returns previous source frame in presentation time order, which is `nil` for the first frame.
 func (srsp *SuperResolutionScalerParameters) PreviousFrame() *FrameProcessorFrame {
+	defer runtime.KeepAlive(srsp)
 	_r := objc.Send[objc.ID](objref.IDOf(srsp), objc.RegisterName("previousFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
 // PreviousOutputFrame returns previous output frame in presentation time order, which is `nil` for the first frame.
 func (srsp *SuperResolutionScalerParameters) PreviousOutputFrame() *FrameProcessorFrame {
+	defer runtime.KeepAlive(srsp)
 	_r := objc.Send[objc.ID](objref.IDOf(srsp), objc.RegisterName("previousOutputFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
 // OpticalFlow returns optional object that contains forward and backward optical flow with the previous frame. You only need this if optical flow is pre-computed. For the first frame this is `nil`.
 func (srsp *SuperResolutionScalerParameters) OpticalFlow() *FrameProcessorOpticalFlow {
+	defer runtime.KeepAlive(srsp)
 	_r := objc.Send[objc.ID](objref.IDOf(srsp), objc.RegisterName("opticalFlow"))
 	return FrameProcessorOpticalFlowFromID(_r)
 }
 
 // SubmissionMode returns ordering of the input frames in this submission relative to the previous submission.
 func (srsp *SuperResolutionScalerParameters) SubmissionMode() SuperResolutionScalerParametersSubmissionMode {
+	defer runtime.KeepAlive(srsp)
 	_r := objc.Send[SuperResolutionScalerParametersSubmissionMode](objref.IDOf(srsp), objc.RegisterName("submissionMode"))
 	return _r
 }
 
 // DestinationFrame returns destination frame that contains user-allocated pixel buffer that receives the results.
 func (srsp *SuperResolutionScalerParameters) DestinationFrame() *FrameProcessorFrame {
+	defer runtime.KeepAlive(srsp)
 	_r := objc.Send[objc.ID](objref.IDOf(srsp), objc.RegisterName("destinationFrame"))
 	return FrameProcessorFrameFromID(_r)
 }

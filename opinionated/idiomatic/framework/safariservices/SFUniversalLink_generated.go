@@ -5,6 +5,8 @@
 package safariservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func universalLinkAdopt(id objc.ID) *UniversalLink {
 
 // Description returns the object's -description text.
 func (ul *UniversalLink) Description() string {
+	defer runtime.KeepAlive(ul)
 	return rt.Description(objref.IDOf(ul))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ul *UniversalLink) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ul)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ul), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ul *UniversalLink) IsKind(className string) bool {
+	defer runtime.KeepAlive(ul)
 	return rt.IsKind(objref.IDOf(ul), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ul *UniversalLink) String() string {
+	defer runtime.KeepAlive(ul)
 	return rt.Description(objref.IDOf(ul))
 }
 
@@ -80,19 +87,22 @@ func (ul *UniversalLink) WithEnabled(enabled bool) *UniversalLink {
 }
 
 // WebpageURL returns the URL passed when initializing the receiver.
-func (ul *UniversalLink) WebpageURL() obj.Object {
+func (ul *UniversalLink) WebpageURL() string {
+	defer runtime.KeepAlive(ul)
 	_r := objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("webpageURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // ApplicationURL returns the file URL to the application that can handle this universal link.
-func (ul *UniversalLink) ApplicationURL() obj.Object {
+func (ul *UniversalLink) ApplicationURL() string {
+	defer runtime.KeepAlive(ul)
 	_r := objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("applicationURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // IsEnabled reports whether this universal link is enabled. If it is enabled, the URL will open in the application instead of the browser. Set this property when the user indicates they wish to enable or disable this universal link.
 func (ul *UniversalLink) IsEnabled() bool {
+	defer runtime.KeepAlive(ul)
 	_r := objc.Send[bool](objref.IDOf(ul), objc.RegisterName("isEnabled"))
 	return _r
 }

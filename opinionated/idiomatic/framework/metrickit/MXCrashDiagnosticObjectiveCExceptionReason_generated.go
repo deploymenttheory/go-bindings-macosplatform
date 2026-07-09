@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func crashDiagnosticObjectiveCExceptionReasonAdopt(id objc.ID) *CrashDiagnosticO
 
 // Description returns the object's -description text.
 func (cdocer *CrashDiagnosticObjectiveCExceptionReason) Description() string {
+	defer runtime.KeepAlive(cdocer)
 	return rt.Description(objref.IDOf(cdocer))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cdocer *CrashDiagnosticObjectiveCExceptionReason) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cdocer)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cdocer), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cdocer *CrashDiagnosticObjectiveCExceptionReason) IsKind(className string) bool {
+	defer runtime.KeepAlive(cdocer)
 	return rt.IsKind(objref.IDOf(cdocer), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cdocer *CrashDiagnosticObjectiveCExceptionReason) String() string {
+	defer runtime.KeepAlive(cdocer)
 	return rt.Description(objref.IDOf(cdocer))
 }
 
@@ -73,19 +80,22 @@ func NewCrashDiagnosticObjectiveCExceptionReason() *CrashDiagnosticObjectiveCExc
 }
 
 // JSONRepresentation returns the contents of the exception reason in JSON format.
-func (cdocer *CrashDiagnosticObjectiveCExceptionReason) JSONRepresentation() obj.Object {
+func (cdocer *CrashDiagnosticObjectiveCExceptionReason) JSONRepresentation() []byte {
+	defer runtime.KeepAlive(cdocer)
 	_r := objc.Send[objc.ID](objref.IDOf(cdocer), objc.RegisterName("JSONRepresentation"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // DictionaryRepresentation returns convenience method to return a NSDictionary representation of this MXCrashDiagnosticObjectiveCExceptionReason object.
 func (cdocer *CrashDiagnosticObjectiveCExceptionReason) DictionaryRepresentation() obj.Object {
+	defer runtime.KeepAlive(cdocer)
 	_r := objc.Send[objc.ID](objref.IDOf(cdocer), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
 
 // ComposedMessage returns a human-readable message string summarizing the reason for the exception.
 func (cdocer *CrashDiagnosticObjectiveCExceptionReason) ComposedMessage() string {
+	defer runtime.KeepAlive(cdocer)
 	_r := objc.Send[objc.ID](objref.IDOf(cdocer), objc.RegisterName("composedMessage"))
 	if _r == 0 {
 		return ""
@@ -95,6 +105,7 @@ func (cdocer *CrashDiagnosticObjectiveCExceptionReason) ComposedMessage() string
 
 // FormatString returns a string representing the exception message before arguments are substituted into the message
 func (cdocer *CrashDiagnosticObjectiveCExceptionReason) FormatString() string {
+	defer runtime.KeepAlive(cdocer)
 	_r := objc.Send[objc.ID](objref.IDOf(cdocer), objc.RegisterName("formatString"))
 	if _r == 0 {
 		return ""
@@ -106,12 +117,14 @@ func (cdocer *CrashDiagnosticObjectiveCExceptionReason) FormatString() string {
 //
 // Arguments returns the collection as a Go slice.
 func (cdocer *CrashDiagnosticObjectiveCExceptionReason) Arguments() []string {
+	defer runtime.KeepAlive(cdocer)
 	_arr := objc.Send[objc.ID](objref.IDOf(cdocer), objc.RegisterName("arguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ExceptionType returns a human-readable string denoting type of the exception
 func (cdocer *CrashDiagnosticObjectiveCExceptionReason) ExceptionType() string {
+	defer runtime.KeepAlive(cdocer)
 	_r := objc.Send[objc.ID](objref.IDOf(cdocer), objc.RegisterName("exceptionType"))
 	if _r == 0 {
 		return ""
@@ -121,6 +134,7 @@ func (cdocer *CrashDiagnosticObjectiveCExceptionReason) ExceptionType() string {
 
 // ExceptionName returns a string representing name of the exception This will align with the "name" field of the NSException
 func (cdocer *CrashDiagnosticObjectiveCExceptionReason) ExceptionName() string {
+	defer runtime.KeepAlive(cdocer)
 	_r := objc.Send[objc.ID](objref.IDOf(cdocer), objc.RegisterName("exceptionName"))
 	if _r == 0 {
 		return ""

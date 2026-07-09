@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -75,24 +77,28 @@ func (smidm *SendMessageIntentDonationMetadata) WithRecipientCount(recipientCoun
 
 // MentionsCurrentUser wraps the corresponding Objective-C method.
 func (smidm *SendMessageIntentDonationMetadata) MentionsCurrentUser() bool {
+	defer runtime.KeepAlive(smidm)
 	_r := objc.Send[bool](objref.IDOf(smidm), objc.RegisterName("mentionsCurrentUser"))
 	return _r
 }
 
 // IsReplyToCurrentUser reports whether the object is reply to current user.
 func (smidm *SendMessageIntentDonationMetadata) IsReplyToCurrentUser() bool {
+	defer runtime.KeepAlive(smidm)
 	_r := objc.Send[bool](objref.IDOf(smidm), objc.RegisterName("isReplyToCurrentUser"))
 	return _r
 }
 
 // NotifyRecipientAnyway wraps the corresponding Objective-C method.
 func (smidm *SendMessageIntentDonationMetadata) NotifyRecipientAnyway() bool {
+	defer runtime.KeepAlive(smidm)
 	_r := objc.Send[bool](objref.IDOf(smidm), objc.RegisterName("notifyRecipientAnyway"))
 	return _r
 }
 
 // RecipientCount returns the recipient count.
 func (smidm *SendMessageIntentDonationMetadata) RecipientCount() int {
+	defer runtime.KeepAlive(smidm)
 	_r := objc.Send[int](objref.IDOf(smidm), objc.RegisterName("recipientCount"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package fileprovider
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func fileProviderDomainVersionAdopt(id objc.ID) *FileProviderDomainVersion {
 
 // Description returns the object's -description text.
 func (fpdv *FileProviderDomainVersion) Description() string {
+	defer runtime.KeepAlive(fpdv)
 	return rt.Description(objref.IDOf(fpdv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fpdv *FileProviderDomainVersion) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fpdv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fpdv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fpdv *FileProviderDomainVersion) IsKind(className string) bool {
+	defer runtime.KeepAlive(fpdv)
 	return rt.IsKind(objref.IDOf(fpdv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fpdv *FileProviderDomainVersion) String() string {
+	defer runtime.KeepAlive(fpdv)
 	return rt.Description(objref.IDOf(fpdv))
 }
 
@@ -74,6 +81,7 @@ func NewFileProviderDomainVersion() *FileProviderDomainVersion {
 
 // Next creates a new version that supersedes the current version.
 func (fpdv *FileProviderDomainVersion) Next() *FileProviderDomainVersion {
+	defer runtime.KeepAlive(fpdv)
 	_r := objc.Send[objc.ID](objref.IDOf(fpdv), objc.RegisterName("next"))
 	return FileProviderDomainVersionFromID(_r)
 }

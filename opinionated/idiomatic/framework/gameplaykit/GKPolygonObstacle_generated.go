@@ -5,6 +5,7 @@
 package gameplaykit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -56,6 +57,7 @@ func NewPolygonObstacleWithPointsCount(points unsafe.Pointer, numPoints int) *Po
 
 // VertexCount returns number of vertices on this polygon
 func (po *PolygonObstacle) VertexCount() int {
+	defer runtime.KeepAlive(po)
 	_r := objc.Send[int](objref.IDOf(po), objc.RegisterName("vertexCount"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func shareBlockedIdentityAdopt(id objc.ID) *ShareBlockedIdentity {
 
 // Description returns the object's -description text.
 func (sbi *ShareBlockedIdentity) Description() string {
+	defer runtime.KeepAlive(sbi)
 	return rt.Description(objref.IDOf(sbi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sbi *ShareBlockedIdentity) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sbi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sbi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sbi *ShareBlockedIdentity) IsKind(className string) bool {
+	defer runtime.KeepAlive(sbi)
 	return rt.IsKind(objref.IDOf(sbi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sbi *ShareBlockedIdentity) String() string {
+	defer runtime.KeepAlive(sbi)
 	return rt.Description(objref.IDOf(sbi))
 }
 
@@ -72,12 +79,14 @@ func NewShareBlockedIdentity() *ShareBlockedIdentity {
 
 // UserIdentity returns the identity of the user who has been blocked from requesting access to the share.
 func (sbi *ShareBlockedIdentity) UserIdentity() *UserIdentity {
+	defer runtime.KeepAlive(sbi)
 	_r := objc.Send[objc.ID](objref.IDOf(sbi), objc.RegisterName("userIdentity"))
 	return UserIdentityFromID(_r)
 }
 
 // Contact returns a displayable CNContact representing the blocked user. If the blocked identity does not exist in the user's contacts or is not accessible, returns a newly created `CNContact`. This provides formatted blocked identity information suitable for display in the application's UI.
 func (sbi *ShareBlockedIdentity) Contact() obj.Object {
+	defer runtime.KeepAlive(sbi)
 	_r := objc.Send[objc.ID](objref.IDOf(sbi), objc.RegisterName("contact"))
 	return obj.Wrap(_r)
 }

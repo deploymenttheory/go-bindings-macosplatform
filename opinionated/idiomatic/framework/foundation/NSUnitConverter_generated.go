@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func unitConverterAdopt(id objc.ID) *UnitConverter {
 
 // Description returns the object's -description text.
 func (uc *UnitConverter) Description() string {
+	defer runtime.KeepAlive(uc)
 	return rt.Description(objref.IDOf(uc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (uc *UnitConverter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(uc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(uc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (uc *UnitConverter) IsKind(className string) bool {
+	defer runtime.KeepAlive(uc)
 	return rt.IsKind(objref.IDOf(uc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (uc *UnitConverter) String() string {
+	defer runtime.KeepAlive(uc)
 	return rt.Description(objref.IDOf(uc))
 }
 
@@ -77,19 +83,21 @@ func (uc *UnitConverter) WithObservationInfo(observationInfo unsafe.Pointer) *Un
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (uc *UnitConverter) WithScriptingProperties(scriptingProperties obj.Object) *UnitConverter {
-	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (uc *UnitConverter) WithScriptingProperties(scriptingProperties map[string]obj.Object) *UnitConverter {
+	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return uc
 }
 
 // BaseUnitValueFromValue wraps the corresponding Objective-C method.
 func (uc *UnitConverter) BaseUnitValueFromValue(value float64) float64 {
+	defer runtime.KeepAlive(uc)
 	_r := objc.Send[float64](objref.IDOf(uc), objc.RegisterName("baseUnitValueFromValue:"), value)
 	return _r
 }
 
 // ValueFromBaseUnitValue wraps the corresponding Objective-C method.
 func (uc *UnitConverter) ValueFromBaseUnitValue(baseUnitValue float64) float64 {
+	defer runtime.KeepAlive(uc)
 	_r := objc.Send[float64](objref.IDOf(uc), objc.RegisterName("valueFromBaseUnitValue:"), baseUnitValue)
 	return _r
 }

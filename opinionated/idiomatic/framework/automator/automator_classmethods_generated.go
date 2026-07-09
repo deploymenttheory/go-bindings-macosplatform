@@ -5,6 +5,7 @@
 package automator
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -15,8 +16,9 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// RunWorkflowAtURLWithInputError loads and runs the specified workflow file.
-func RunWorkflowAtURLWithInputError(fileURL string, input obj.Object) (result obj.Object, err error) {
+// RunWorkflowAtURLWithInput loads and runs the specified workflow file.
+func RunWorkflowAtURLWithInput(fileURL string, input obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(input)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("AMWorkflow")), objc.RegisterName("runWorkflowAtURL:withInput:error:"), rt.FileURL(fileURL), objref.IDOf(input), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

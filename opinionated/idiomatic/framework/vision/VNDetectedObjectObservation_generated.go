@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,12 +50,14 @@ func detectedObjectObservationAdopt(id objc.ID) *DetectedObjectObservation {
 
 // BoundingBox returns the bounding box of the detected object. The coordinates are normalized to the dimensions of the processed image, with the origin at the image's lower-left corner.
 func (doo *DetectedObjectObservation) BoundingBox() corefoundation.CGRect {
+	defer runtime.KeepAlive(doo)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(doo), objc.RegisterName("boundingBox"))
 	return _r
 }
 
 // GlobalSegmentationMask returns the resulting CVPixelBuffer from requests that generate a segmentation mask for the entire image.
 func (doo *DetectedObjectObservation) GlobalSegmentationMask() *PixelBufferObservation {
+	defer runtime.KeepAlive(doo)
 	_r := objc.Send[objc.ID](objref.IDOf(doo), objc.RegisterName("globalSegmentationMask"))
 	return PixelBufferObservationFromID(_r)
 }

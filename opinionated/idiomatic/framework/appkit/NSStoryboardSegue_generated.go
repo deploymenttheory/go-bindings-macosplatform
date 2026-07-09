@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,35 @@ func storyboardSegueAdopt(id objc.ID) *StoryboardSegue {
 
 // Description returns the object's -description text.
 func (ss *StoryboardSegue) Description() string {
+	defer runtime.KeepAlive(ss)
 	return rt.Description(objref.IDOf(ss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ss *StoryboardSegue) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ss)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ss *StoryboardSegue) IsKind(className string) bool {
+	defer runtime.KeepAlive(ss)
 	return rt.IsKind(objref.IDOf(ss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ss *StoryboardSegue) String() string {
+	defer runtime.KeepAlive(ss)
 	return rt.Description(objref.IDOf(ss))
 }
 
 // NewStoryboardSegueWithIdentifierSourceDestination the designated initializer for a storyboard segue.
 func NewStoryboardSegueWithIdentifierSourceDestination(identifier obj.Object, sourceController obj.Object, destinationController obj.Object) *StoryboardSegue {
+	defer runtime.KeepAlive(identifier)
+	defer runtime.KeepAlive(sourceController)
+	defer runtime.KeepAlive(destinationController)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSStoryboardSegue")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:source:destination:"), objref.IDOf(identifier), objref.IDOf(sourceController), objref.IDOf(destinationController))
 	return storyboardSegueAdopt(_id)
@@ -75,23 +86,27 @@ func NewStoryboardSegueWithIdentifierSourceDestination(identifier obj.Object, so
 
 // Perform performs a visual transition from one controller to another.
 func (ss *StoryboardSegue) Perform() {
+	defer runtime.KeepAlive(ss)
 	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("perform"))
 }
 
 // Identifier returns the identifier.
-func (ss *StoryboardSegue) Identifier() obj.Object {
+func (ss *StoryboardSegue) Identifier() *foundation.String {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("identifier"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // SourceController returns the source controller.
 func (ss *StoryboardSegue) SourceController() obj.Object {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("sourceController"))
 	return obj.Wrap(_r)
 }
 
 // DestinationController returns the destination controller.
 func (ss *StoryboardSegue) DestinationController() obj.Object {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("destinationController"))
 	return obj.Wrap(_r)
 }

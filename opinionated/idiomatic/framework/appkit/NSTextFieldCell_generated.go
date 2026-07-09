@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -47,12 +50,12 @@ func textFieldCellAdopt(id objc.ID) *TextFieldCell {
 }
 
 // NewTextFieldCellTextCell initializes a text field cell that displays the specified string.
-func NewTextFieldCellTextCell(string_ string) *TextFieldCell {
+func NewTextFieldCellTextCell(str string) *TextFieldCell {
 	var _mainthread0 *TextFieldCell
 	purego.Main(func() {
 		_mainthread0 = func() *TextFieldCell {
 			_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextFieldCell")), objc.RegisterName("alloc"))
-			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(str))
 			return textFieldCellAdopt(_id)
 		}()
 	})
@@ -61,6 +64,7 @@ func NewTextFieldCellTextCell(string_ string) *TextFieldCell {
 
 // NewTextFieldCellWithCoder initializes a text field cell from data in the provided unarchiver.
 func NewTextFieldCellWithCoder(coder obj.Object) *TextFieldCell {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *TextFieldCell
 	purego.Main(func() {
 		_mainthread0 = func() *TextFieldCell {
@@ -74,6 +78,7 @@ func NewTextFieldCellWithCoder(coder obj.Object) *TextFieldCell {
 
 // WithBackgroundColor sets the color of the cell’s background.
 func (tfc *TextFieldCell) WithBackgroundColor(backgroundColor *Color) *TextFieldCell {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -90,6 +95,7 @@ func (tfc *TextFieldCell) WithDrawsBackground(drawsBackground bool) *TextFieldCe
 
 // WithTextColor sets the color to use to draw the cell’s text.
 func (tfc *TextFieldCell) WithTextColor(textColor *Color) *TextFieldCell {
+	defer runtime.KeepAlive(textColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	})
@@ -114,6 +120,7 @@ func (tfc *TextFieldCell) WithPlaceholderString(placeholderString string) *TextF
 
 // WithPlaceholderAttributedString sets the placeholder text for the cell, specified as an attributed string.
 func (tfc *TextFieldCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TextFieldCell {
+	defer runtime.KeepAlive(placeholderAttributedString)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	})
@@ -131,6 +138,7 @@ func (tfc *TextFieldCell) WithAllowedInputSourceLocales(items ...obj.Object) *Te
 
 // WithControlView sets the view associated with the cell.
 func (tfc *TextFieldCell) WithControlView(controlView ViewProvider) *TextFieldCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -155,6 +163,7 @@ func (tfc *TextFieldCell) WithState(state int) *TextFieldCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (tfc *TextFieldCell) WithTarget(target obj.Object) *TextFieldCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -259,6 +268,7 @@ func (tfc *TextFieldCell) WithWraps(wraps bool) *TextFieldCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (tfc *TextFieldCell) WithFont(font *Font) *TextFieldCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -267,6 +277,7 @@ func (tfc *TextFieldCell) WithFont(font *Font) *TextFieldCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (tfc *TextFieldCell) WithFormatter(formatter obj.Object) *TextFieldCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -275,6 +286,7 @@ func (tfc *TextFieldCell) WithFormatter(formatter obj.Object) *TextFieldCell {
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (tfc *TextFieldCell) WithObjectValue(objectValue obj.Object) *TextFieldCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -323,6 +335,7 @@ func (tfc *TextFieldCell) WithIntegerValue(integerValue int) *TextFieldCell {
 
 // WithImage sets the image displayed by the cell, if any.
 func (tfc *TextFieldCell) WithImage(image *Image) *TextFieldCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -339,6 +352,7 @@ func (tfc *TextFieldCell) WithControlSize(controlSize ControlSize) *TextFieldCel
 
 // WithRepresentedObject sets the object represented by the cell.
 func (tfc *TextFieldCell) WithRepresentedObject(representedObject obj.Object) *TextFieldCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -347,6 +361,7 @@ func (tfc *TextFieldCell) WithRepresentedObject(representedObject obj.Object) *T
 
 // WithMenu sets the cell’s contextual menu.
 func (tfc *TextFieldCell) WithMenu(menu *Menu) *TextFieldCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -435,6 +450,7 @@ func (tfc *TextFieldCell) WithFocusRingType(focusRingType FocusRingType) *TextFi
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (tfc *TextFieldCell) WithAttributedStringValue(attributedStringValue obj.Object) *TextFieldCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -483,6 +499,7 @@ func (tfc *TextFieldCell) WithControlTint(controlTint ControlTint) *TextFieldCel
 
 // SetWantsNotificationForMarkedText directs the cell’s associated field editor to post text change notifications.
 func (tfc *TextFieldCell) SetWantsNotificationForMarkedText(flag bool) {
+	defer runtime.KeepAlive(tfc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setWantsNotificationForMarkedText:"), flag)
 	})
@@ -491,6 +508,7 @@ func (tfc *TextFieldCell) SetWantsNotificationForMarkedText(flag bool) {
 
 // BackgroundColor returns the background color.
 func (tfc *TextFieldCell) BackgroundColor() *Color {
+	defer runtime.KeepAlive(tfc)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -504,6 +522,7 @@ func (tfc *TextFieldCell) BackgroundColor() *Color {
 
 // DrawsBackground wraps the corresponding Objective-C method.
 func (tfc *TextFieldCell) DrawsBackground() bool {
+	defer runtime.KeepAlive(tfc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -517,6 +536,7 @@ func (tfc *TextFieldCell) DrawsBackground() bool {
 
 // TextColor returns the text color.
 func (tfc *TextFieldCell) TextColor() *Color {
+	defer runtime.KeepAlive(tfc)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -530,6 +550,7 @@ func (tfc *TextFieldCell) TextColor() *Color {
 
 // BezelStyle returns the bezel style.
 func (tfc *TextFieldCell) BezelStyle() TextFieldBezelStyle {
+	defer runtime.KeepAlive(tfc)
 	var _mainthread0 TextFieldBezelStyle
 	purego.Main(func() {
 		_mainthread0 = func() TextFieldBezelStyle {
@@ -543,6 +564,7 @@ func (tfc *TextFieldCell) BezelStyle() TextFieldBezelStyle {
 
 // PlaceholderString returns the placeholder string.
 func (tfc *TextFieldCell) PlaceholderString() string {
+	defer runtime.KeepAlive(tfc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -558,12 +580,13 @@ func (tfc *TextFieldCell) PlaceholderString() string {
 }
 
 // PlaceholderAttributedString returns the placeholder attributed string.
-func (tfc *TextFieldCell) PlaceholderAttributedString() obj.Object {
-	var _mainthread0 obj.Object
+func (tfc *TextFieldCell) PlaceholderAttributedString() *foundation.AttributedString {
+	defer runtime.KeepAlive(tfc)
+	var _mainthread0 *foundation.AttributedString
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.AttributedString {
 			_r := objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("placeholderAttributedString"))
-			return obj.Wrap(_r)
+			return foundation.AttributedStringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -574,6 +597,7 @@ func (tfc *TextFieldCell) PlaceholderAttributedString() obj.Object {
 //
 // AllowedInputSourceLocales returns the collection as a Go slice.
 func (tfc *TextFieldCell) AllowedInputSourceLocales() []string {
+	defer runtime.KeepAlive(tfc)
 	var _mainthread0 []string
 	purego.Main(func() {
 		_mainthread0 = func() []string {

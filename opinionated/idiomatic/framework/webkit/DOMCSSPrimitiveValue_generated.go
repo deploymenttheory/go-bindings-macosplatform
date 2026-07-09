@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -57,22 +59,26 @@ func (dpv *DOMCSSPrimitiveValue) WithCSSText(cssText string) *DOMCSSPrimitiveVal
 
 // SetFloatValueFloatValue wraps the corresponding Objective-C method.
 func (dpv *DOMCSSPrimitiveValue) SetFloatValueFloatValue(unitType uint16, floatValue float32) {
+	defer runtime.KeepAlive(dpv)
 	objc.Send[objc.ID](objref.IDOf(dpv), objc.RegisterName("setFloatValue:floatValue:"), unitType, floatValue)
 }
 
 // GetFloatValue wraps the corresponding Objective-C method.
 func (dpv *DOMCSSPrimitiveValue) GetFloatValue(unitType uint16) float32 {
+	defer runtime.KeepAlive(dpv)
 	_r := objc.Send[float32](objref.IDOf(dpv), objc.RegisterName("getFloatValue:"), unitType)
 	return _r
 }
 
 // SetStringValueStringValue wraps the corresponding Objective-C method.
 func (dpv *DOMCSSPrimitiveValue) SetStringValueStringValue(stringType uint16, stringValue string) {
+	defer runtime.KeepAlive(dpv)
 	objc.Send[objc.ID](objref.IDOf(dpv), objc.RegisterName("setStringValue:stringValue:"), stringType, purego.NSString(stringValue))
 }
 
 // StringValue returns the string value.
 func (dpv *DOMCSSPrimitiveValue) StringValue() string {
+	defer runtime.KeepAlive(dpv)
 	_r := objc.Send[objc.ID](objref.IDOf(dpv), objc.RegisterName("getStringValue"))
 	if _r == 0 {
 		return ""
@@ -82,35 +88,41 @@ func (dpv *DOMCSSPrimitiveValue) StringValue() string {
 
 // CounterValue returns the counter value.
 func (dpv *DOMCSSPrimitiveValue) CounterValue() *DOMCounter {
+	defer runtime.KeepAlive(dpv)
 	_r := objc.Send[objc.ID](objref.IDOf(dpv), objc.RegisterName("getCounterValue"))
 	return DOMCounterFromID(_r)
 }
 
 // RectValue returns the rect value.
 func (dpv *DOMCSSPrimitiveValue) RectValue() *DOMRect {
+	defer runtime.KeepAlive(dpv)
 	_r := objc.Send[objc.ID](objref.IDOf(dpv), objc.RegisterName("getRectValue"))
 	return DOMRectFromID(_r)
 }
 
 // RGBColorValue returns the rgb color value.
 func (dpv *DOMCSSPrimitiveValue) RGBColorValue() *DOMRGBColor {
+	defer runtime.KeepAlive(dpv)
 	_r := objc.Send[objc.ID](objref.IDOf(dpv), objc.RegisterName("getRGBColorValue"))
 	return DOMRGBColorFromID(_r)
 }
 
 // PrimitiveType returns the primitive type.
 func (dpv *DOMCSSPrimitiveValue) PrimitiveType() uint16 {
+	defer runtime.KeepAlive(dpv)
 	_r := objc.Send[uint16](objref.IDOf(dpv), objc.RegisterName("primitiveType"))
 	return _r
 }
 
 // SetFloatValue wraps the corresponding Objective-C method.
 func (dpv *DOMCSSPrimitiveValue) SetFloatValue(unitType uint16, floatValue float32) {
+	defer runtime.KeepAlive(dpv)
 	objc.Send[objc.ID](objref.IDOf(dpv), objc.RegisterName("setFloatValue::"), unitType, floatValue)
 }
 
 // SetStringValue wraps the corresponding Objective-C method.
 func (dpv *DOMCSSPrimitiveValue) SetStringValue(stringType uint16, stringValue string) {
+	defer runtime.KeepAlive(dpv)
 	objc.Send[objc.ID](objref.IDOf(dpv), objc.RegisterName("setStringValue::"), stringType, purego.NSString(stringValue))
 }
 

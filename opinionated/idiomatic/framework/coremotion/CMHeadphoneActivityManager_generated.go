@@ -5,6 +5,8 @@
 package coremotion
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func headphoneActivityManagerAdopt(id objc.ID) *HeadphoneActivityManager {
 
 // Description returns the object's -description text.
 func (ham *HeadphoneActivityManager) Description() string {
+	defer runtime.KeepAlive(ham)
 	return rt.Description(objref.IDOf(ham))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ham *HeadphoneActivityManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ham)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ham), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ham *HeadphoneActivityManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(ham)
 	return rt.IsKind(objref.IDOf(ham), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ham *HeadphoneActivityManager) String() string {
+	defer runtime.KeepAlive(ham)
 	return rt.Description(objref.IDOf(ham))
 }
 
@@ -74,34 +81,40 @@ func NewHeadphoneActivityManager() *HeadphoneActivityManager {
 
 // StopActivityUpdates stops headphone activity updates.
 func (ham *HeadphoneActivityManager) StopActivityUpdates() {
+	defer runtime.KeepAlive(ham)
 	objc.Send[objc.ID](objref.IDOf(ham), objc.RegisterName("stopActivityUpdates"))
 }
 
 // StopStatusUpdates stops headphone status updates.
 func (ham *HeadphoneActivityManager) StopStatusUpdates() {
+	defer runtime.KeepAlive(ham)
 	objc.Send[objc.ID](objref.IDOf(ham), objc.RegisterName("stopStatusUpdates"))
 }
 
 // IsActivityAvailable reports whether the object is activity available.
 func (ham *HeadphoneActivityManager) IsActivityAvailable() bool {
+	defer runtime.KeepAlive(ham)
 	_r := objc.Send[bool](objref.IDOf(ham), objc.RegisterName("isActivityAvailable"))
 	return _r
 }
 
 // IsActivityActive reports whether the object is activity active.
 func (ham *HeadphoneActivityManager) IsActivityActive() bool {
+	defer runtime.KeepAlive(ham)
 	_r := objc.Send[bool](objref.IDOf(ham), objc.RegisterName("isActivityActive"))
 	return _r
 }
 
 // IsStatusAvailable reports whether the object is status available.
 func (ham *HeadphoneActivityManager) IsStatusAvailable() bool {
+	defer runtime.KeepAlive(ham)
 	_r := objc.Send[bool](objref.IDOf(ham), objc.RegisterName("isStatusAvailable"))
 	return _r
 }
 
 // IsStatusActive reports whether the object is status active.
 func (ham *HeadphoneActivityManager) IsStatusActive() bool {
+	defer runtime.KeepAlive(ham)
 	_r := objc.Send[bool](objref.IDOf(ham), objc.RegisterName("isStatusActive"))
 	return _r
 }

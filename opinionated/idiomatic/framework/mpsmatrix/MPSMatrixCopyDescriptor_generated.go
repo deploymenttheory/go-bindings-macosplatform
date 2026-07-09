@@ -5,6 +5,8 @@
 package mpsmatrix
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,27 +47,33 @@ func matrixCopyDescriptorAdopt(id objc.ID) *MatrixCopyDescriptor {
 
 // Description returns the object's -description text.
 func (mcd *MatrixCopyDescriptor) Description() string {
+	defer runtime.KeepAlive(mcd)
 	return rt.Description(objref.IDOf(mcd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcd *MatrixCopyDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcd *MatrixCopyDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcd)
 	return rt.IsKind(objref.IDOf(mcd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcd *MatrixCopyDescriptor) String() string {
+	defer runtime.KeepAlive(mcd)
 	return rt.Description(objref.IDOf(mcd))
 }
 
 // NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOffset initialize a MPSMatrixCopyDescriptor using offsets generated on the GPU Use this method when the offsets needed are coming from GPU based computation.
 func NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOffset(sourceMatrices []obj.Object, destinationMatrices []obj.Object, offsets obj.Object, byteOffset int) *MatrixCopyDescriptor {
+	defer runtime.KeepAlive(offsets)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSMatrixCopyDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceMatrices:destinationMatrices:offsetVector:offset:"), purego.SliceToNSArray(sourceMatrices, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(destinationMatrices, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(offsets), byteOffset)
 	return matrixCopyDescriptorAdopt(_id)

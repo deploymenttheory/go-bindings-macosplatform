@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func attributeDescriptorAdopt(id objc.ID) *AttributeDescriptor {
 
 // Description returns the object's -description text.
 func (ad *AttributeDescriptor) Description() string {
+	defer runtime.KeepAlive(ad)
 	return rt.Description(objref.IDOf(ad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ad *AttributeDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ad *AttributeDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(ad)
 	return rt.IsKind(objref.IDOf(ad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ad *AttributeDescriptor) String() string {
+	defer runtime.KeepAlive(ad)
 	return rt.Description(objref.IDOf(ad))
 }
 
@@ -92,18 +99,21 @@ func (ad *AttributeDescriptor) WithBufferIndex(bufferIndex int) *AttributeDescri
 
 // Format returns the format.
 func (ad *AttributeDescriptor) Format() AttributeFormat {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[AttributeFormat](objref.IDOf(ad), objc.RegisterName("format"))
 	return _r
 }
 
 // Offset returns the offset.
 func (ad *AttributeDescriptor) Offset() int {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[int](objref.IDOf(ad), objc.RegisterName("offset"))
 	return _r
 }
 
 // BufferIndex returns the buffer index.
 func (ad *AttributeDescriptor) BufferIndex() int {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[int](objref.IDOf(ad), objc.RegisterName("bufferIndex"))
 	return _r
 }

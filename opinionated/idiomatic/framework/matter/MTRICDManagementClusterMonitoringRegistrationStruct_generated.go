@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRICDManagementClusterMonitoringRegistrationStructAdopt(id objc.ID) *MTRIC
 
 // Description returns the object's -description text.
 func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) Description() string {
+	defer runtime.KeepAlive(mmcmrs)
 	return rt.Description(objref.IDOf(mmcmrs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmcmrs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmcmrs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmcmrs)
 	return rt.IsKind(objref.IDOf(mmcmrs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) String() string {
+	defer runtime.KeepAlive(mmcmrs)
 	return rt.Description(objref.IDOf(mmcmrs))
 }
 
@@ -72,48 +80,56 @@ func NewMTRICDManagementClusterMonitoringRegistrationStruct() *MTRICDManagementC
 
 // WithCheckInNodeID sets the check in node ID.
 func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) WithCheckInNodeID(checkInNodeID obj.Object) *MTRICDManagementClusterMonitoringRegistrationStruct {
+	defer runtime.KeepAlive(checkInNodeID)
 	objc.Send[objc.ID](objref.IDOf(mmcmrs), objc.RegisterName("setCheckInNodeID:"), objref.IDOf(checkInNodeID))
 	return mmcmrs
 }
 
 // WithMonitoredSubject sets the monitored subject.
 func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) WithMonitoredSubject(monitoredSubject obj.Object) *MTRICDManagementClusterMonitoringRegistrationStruct {
+	defer runtime.KeepAlive(monitoredSubject)
 	objc.Send[objc.ID](objref.IDOf(mmcmrs), objc.RegisterName("setMonitoredSubject:"), objref.IDOf(monitoredSubject))
 	return mmcmrs
 }
 
 // WithClientType sets the client type.
 func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) WithClientType(clientType obj.Object) *MTRICDManagementClusterMonitoringRegistrationStruct {
+	defer runtime.KeepAlive(clientType)
 	objc.Send[objc.ID](objref.IDOf(mmcmrs), objc.RegisterName("setClientType:"), objref.IDOf(clientType))
 	return mmcmrs
 }
 
 // WithFabricIndex sets the fabric index.
 func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) WithFabricIndex(fabricIndex obj.Object) *MTRICDManagementClusterMonitoringRegistrationStruct {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(mmcmrs), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mmcmrs
 }
 
 // CheckInNodeID returns the check in node ID.
-func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) CheckInNodeID() obj.Object {
+func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) CheckInNodeID() *foundation.Number {
+	defer runtime.KeepAlive(mmcmrs)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmrs), objc.RegisterName("checkInNodeID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MonitoredSubject returns the monitored subject.
-func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) MonitoredSubject() obj.Object {
+func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) MonitoredSubject() *foundation.Number {
+	defer runtime.KeepAlive(mmcmrs)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmrs), objc.RegisterName("monitoredSubject"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ClientType returns the client type.
-func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) ClientType() obj.Object {
+func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) ClientType() *foundation.Number {
+	defer runtime.KeepAlive(mmcmrs)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmrs), objc.RegisterName("clientType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // FabricIndex returns the fabric index.
-func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) FabricIndex() obj.Object {
+func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) FabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(mmcmrs)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmrs), objc.RegisterName("fabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

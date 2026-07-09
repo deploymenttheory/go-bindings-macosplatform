@@ -557,8 +557,8 @@ func (o *NSLayoutManager) DrawGlyphsForGlyphRangeAtPoint(glyphsToShow foundation
 }
 
 // Renders the glyphs at the specified positions, using the specified attributes.
-func (o *NSLayoutManager) ShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext(glyphs *uint16, positions *corefoundation.CGPoint, glyphCount int, font *NSFont, textMatrix corefoundation.CGAffineTransform, attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], cGContext unsafe.Pointer) {
-	o.Ptr().Send(_nSLayoutManagerSelShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext, glyphs, positions, glyphCount, font.Ptr(), textMatrix, attributes.Ptr(), cGContext)
+func (o *NSLayoutManager) ShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext(glyphs *uint16, positions *corefoundation.CGPoint, glyphCount int, font *NSFont, textMatrix corefoundation.CGAffineTransform, attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], cgContext unsafe.Pointer) {
+	o.Ptr().Send(_nSLayoutManagerSelShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext, glyphs, positions, glyphCount, font.Ptr(), textMatrix, attributes.Ptr(), cgContext)
 }
 
 // Fills background rectangles with a color.

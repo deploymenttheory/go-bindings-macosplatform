@@ -50,8 +50,8 @@ func (o *TKTokenSmartCardPINAuthOperation) PINFormat() *TKSmartCardPINFormat {
 	return TKSmartCardPINFormatFromID(_ret)
 }
 
-func (o *TKTokenSmartCardPINAuthOperation) SetPINFormat(pINFormat *TKSmartCardPINFormat) {
-	o.Ptr().Send(_tKTokenSmartCardPINAuthOperationSelSetPINFormat, pINFormat.Ptr())
+func (o *TKTokenSmartCardPINAuthOperation) SetPINFormat(pinFormat *TKSmartCardPINFormat) {
+	o.Ptr().Send(_tKTokenSmartCardPINAuthOperationSelSetPINFormat, pinFormat.Ptr())
 }
 
 // @discussion APDU template into which PIN gets filled in. If set to nil, the system will not attempt to authenticate by sending the formatted APDU to the SmartCard, but rather the token itself is expected to perform the authentication.  It is preferred to provide APDUTemplate if possible, because it allows using hardware PINPad for secure PIN entry (provided that the reader has one).
@@ -63,8 +63,8 @@ func (o *TKTokenSmartCardPINAuthOperation) APDUTemplate() *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
-func (o *TKTokenSmartCardPINAuthOperation) SetAPDUTemplate(aPDUTemplate *foundation.NSData) {
-	o.Ptr().Send(_tKTokenSmartCardPINAuthOperationSelSetAPDUTemplate, aPDUTemplate.Ptr())
+func (o *TKTokenSmartCardPINAuthOperation) SetAPDUTemplate(apduTemplate *foundation.NSData) {
+	o.Ptr().Send(_tKTokenSmartCardPINAuthOperationSelSetAPDUTemplate, apduTemplate.Ptr())
 }
 
 // @discussion Offset in bytes within APDU template to mark the location for filling in the PIN.
@@ -73,8 +73,8 @@ func (o *TKTokenSmartCardPINAuthOperation) PINByteOffset() int {
 	return _ret
 }
 
-func (o *TKTokenSmartCardPINAuthOperation) SetPINByteOffset(pINByteOffset int) {
-	o.Ptr().Send(_tKTokenSmartCardPINAuthOperationSelSetPINByteOffset, pINByteOffset)
+func (o *TKTokenSmartCardPINAuthOperation) SetPINByteOffset(pinByteOffset int) {
+	o.Ptr().Send(_tKTokenSmartCardPINAuthOperationSelSetPINByteOffset, pinByteOffset)
 }
 
 // @discussion TKSmartCard to which the formatted APDU gets sent in order to authenticate (used only if 'APDUTemplate' is set).
@@ -99,6 +99,6 @@ func (o *TKTokenSmartCardPINAuthOperation) PIN() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-func (o *TKTokenSmartCardPINAuthOperation) SetPIN(pIN *foundation.NSString) {
-	o.Ptr().Send(_tKTokenSmartCardPINAuthOperationSelSetPIN, pIN.Ptr())
+func (o *TKTokenSmartCardPINAuthOperation) SetPIN(pin *foundation.NSString) {
+	o.Ptr().Send(_tKTokenSmartCardPINAuthOperationSelSetPIN, pin.Ptr())
 }

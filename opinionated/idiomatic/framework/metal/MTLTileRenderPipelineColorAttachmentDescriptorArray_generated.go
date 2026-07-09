@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func tileRenderPipelineColorAttachmentDescriptorArrayAdopt(id objc.ID) *TileRend
 
 // Description returns the object's -description text.
 func (trpcada *TileRenderPipelineColorAttachmentDescriptorArray) Description() string {
+	defer runtime.KeepAlive(trpcada)
 	return rt.Description(objref.IDOf(trpcada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (trpcada *TileRenderPipelineColorAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(trpcada)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(trpcada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (trpcada *TileRenderPipelineColorAttachmentDescriptorArray) IsKind(className string) bool {
+	defer runtime.KeepAlive(trpcada)
 	return rt.IsKind(objref.IDOf(trpcada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (trpcada *TileRenderPipelineColorAttachmentDescriptorArray) String() string {
+	defer runtime.KeepAlive(trpcada)
 	return rt.Description(objref.IDOf(trpcada))
 }
 
@@ -74,11 +81,14 @@ func NewTileRenderPipelineColorAttachmentDescriptorArray() *TileRenderPipelineCo
 
 // ObjectAtIndexedSubscript returns the render pipeline state for the specified color attachment.
 func (trpcada *TileRenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *TileRenderPipelineColorAttachmentDescriptor {
+	defer runtime.KeepAlive(trpcada)
 	_r := objc.Send[objc.ID](objref.IDOf(trpcada), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return TileRenderPipelineColorAttachmentDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets the render pipeline state for a specified color attachment.
 func (trpcada *TileRenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *TileRenderPipelineColorAttachmentDescriptor, attachmentIndex int) {
+	defer runtime.KeepAlive(trpcada)
+	defer runtime.KeepAlive(attachment)
 	objc.Send[objc.ID](objref.IDOf(trpcada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }

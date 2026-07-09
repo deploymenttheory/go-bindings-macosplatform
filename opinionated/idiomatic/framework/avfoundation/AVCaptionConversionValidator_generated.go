@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
@@ -50,27 +51,33 @@ func captionConversionValidatorAdopt(id objc.ID) *CaptionConversionValidator {
 
 // Description returns the object's -description text.
 func (ccv *CaptionConversionValidator) Description() string {
+	defer runtime.KeepAlive(ccv)
 	return rt.Description(objref.IDOf(ccv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ccv *CaptionConversionValidator) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ccv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ccv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ccv *CaptionConversionValidator) IsKind(className string) bool {
+	defer runtime.KeepAlive(ccv)
 	return rt.IsKind(objref.IDOf(ccv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ccv *CaptionConversionValidator) String() string {
+	defer runtime.KeepAlive(ccv)
 	return rt.Description(objref.IDOf(ccv))
 }
 
 // NewCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings creates an object that validates captions for a conversion operation.
 func NewCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings(captions []*Caption, timeRange coremedia.CMTimeRange, conversionSettings obj.Object) *CaptionConversionValidator {
+	defer runtime.KeepAlive(conversionSettings)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptionConversionValidator")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCaptions:timeRange:conversionSettings:"), purego.SliceToNSArray(captions, func(_v *Caption) objc.ID { return objref.IDOf(_v) }), timeRange, objref.IDOf(conversionSettings))
 	return captionConversionValidatorAdopt(_id)
@@ -80,6 +87,7 @@ func NewCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings(captio
 //
 // ValidateCaptionConversionWithWarningHandler blocks until the operation completes or ctx is cancelled.
 func (ccv *CaptionConversionValidator) ValidateCaptionConversionWithWarningHandler(ctx context.Context) (result *CaptionConversionWarning, err error) {
+	defer runtime.KeepAlive(ccv)
 	type _result struct {
 		val *CaptionConversionWarning
 		err error
@@ -102,11 +110,13 @@ func (ccv *CaptionConversionValidator) ValidateCaptionConversionWithWarningHandl
 
 // StopValidating stops the active validation operation.
 func (ccv *CaptionConversionValidator) StopValidating() {
+	defer runtime.KeepAlive(ccv)
 	objc.Send[objc.ID](objref.IDOf(ccv), objc.RegisterName("stopValidating"))
 }
 
 // Status indicates the status of the validation.
 func (ccv *CaptionConversionValidator) Status() CaptionConversionValidatorStatus {
+	defer runtime.KeepAlive(ccv)
 	_r := objc.Send[CaptionConversionValidatorStatus](objref.IDOf(ccv), objc.RegisterName("status"))
 	return _r
 }
@@ -115,12 +125,14 @@ func (ccv *CaptionConversionValidator) Status() CaptionConversionValidatorStatus
 //
 // Captions returns the collection as a Go slice.
 func (ccv *CaptionConversionValidator) Captions() []*Caption {
+	defer runtime.KeepAlive(ccv)
 	_arr := objc.Send[objc.ID](objref.IDOf(ccv), objc.RegisterName("captions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Caption { return CaptionFromID(_id) })
 }
 
 // TimeRange returns the timeRange of the media timeline into which the specified captions must be integrated. The start of this timeRange may be less than the start of the timeRange of the initial caption in the captions array, if the captions are to appear only after the start of accompanying video or audio. If no definite duration for the media timeline is known, the timeRange can have a duration of kCMTimePositiveInfinity. However, in order to perform a comprehensive validation of a conversion to closed captions, setting the duration of the timeRange to the duration of accompanying video media is recommended.
 func (ccv *CaptionConversionValidator) TimeRange() coremedia.CMTimeRange {
+	defer runtime.KeepAlive(ccv)
 	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(ccv), objc.RegisterName("timeRange"))
 	return _r
 }
@@ -129,6 +141,7 @@ func (ccv *CaptionConversionValidator) TimeRange() coremedia.CMTimeRange {
 //
 // Warnings returns the collection as a Go slice.
 func (ccv *CaptionConversionValidator) Warnings() []*CaptionConversionWarning {
+	defer runtime.KeepAlive(ccv)
 	_arr := objc.Send[objc.ID](objref.IDOf(ccv), objc.RegisterName("warnings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptionConversionWarning { return CaptionConversionWarningFromID(_id) })
 }

@@ -5,6 +5,8 @@
 package coremediaio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,27 +50,33 @@ func extensionStreamFormatAdopt(id objc.ID) *ExtensionStreamFormat {
 
 // Description returns the object's -description text.
 func (esf *ExtensionStreamFormat) Description() string {
+	defer runtime.KeepAlive(esf)
 	return rt.Description(objref.IDOf(esf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (esf *ExtensionStreamFormat) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(esf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(esf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (esf *ExtensionStreamFormat) IsKind(className string) bool {
+	defer runtime.KeepAlive(esf)
 	return rt.IsKind(objref.IDOf(esf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (esf *ExtensionStreamFormat) String() string {
+	defer runtime.KeepAlive(esf)
 	return rt.Description(objref.IDOf(esf))
 }
 
 // NewExtensionStreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations creates a stream format with a format description and frame durations.
 func NewExtensionStreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations(formatDescription obj.Object, maxFrameDuration coremedia.CMTime, minFrameDuration coremedia.CMTime, validFrameDurations []obj.Object) *ExtensionStreamFormat {
+	defer runtime.KeepAlive(formatDescription)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionStreamFormat")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormatDescription:maxFrameDuration:minFrameDuration:validFrameDurations:"), objref.IDOf(formatDescription), maxFrameDuration, minFrameDuration, purego.SliceToNSArray(validFrameDurations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return extensionStreamFormatAdopt(_id)
@@ -76,18 +84,21 @@ func NewExtensionStreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurati
 
 // FormatDescription returns the format description of the samples delivered by the stream.
 func (esf *ExtensionStreamFormat) FormatDescription() obj.Object {
+	defer runtime.KeepAlive(esf)
 	_r := objc.Send[objc.ID](objref.IDOf(esf), objc.RegisterName("formatDescription"))
 	return obj.Wrap(_r)
 }
 
 // MinFrameDuration returns the minimum frame duration (AKA maximum frame rate).
 func (esf *ExtensionStreamFormat) MinFrameDuration() coremedia.CMTime {
+	defer runtime.KeepAlive(esf)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(esf), objc.RegisterName("minFrameDuration"))
 	return _r
 }
 
 // MaxFrameDuration returns the maximum frame duration (AKA minimum frame rate).
 func (esf *ExtensionStreamFormat) MaxFrameDuration() coremedia.CMTime {
+	defer runtime.KeepAlive(esf)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(esf), objc.RegisterName("maxFrameDuration"))
 	return _r
 }
@@ -96,6 +107,7 @@ func (esf *ExtensionStreamFormat) MaxFrameDuration() coremedia.CMTime {
 //
 // ValidFrameDurations returns the collection as a Go slice.
 func (esf *ExtensionStreamFormat) ValidFrameDurations() []obj.Object {
+	defer runtime.KeepAlive(esf)
 	_arr := objc.Send[objc.ID](objref.IDOf(esf), objc.RegisterName("validFrameDurations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

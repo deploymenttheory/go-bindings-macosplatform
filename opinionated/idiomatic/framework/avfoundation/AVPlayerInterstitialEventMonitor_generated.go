@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func playerInterstitialEventMonitorAdopt(id objc.ID) *PlayerInterstitialEventMon
 
 // Description returns the object's -description text.
 func (piem *PlayerInterstitialEventMonitor) Description() string {
+	defer runtime.KeepAlive(piem)
 	return rt.Description(objref.IDOf(piem))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (piem *PlayerInterstitialEventMonitor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(piem)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(piem), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (piem *PlayerInterstitialEventMonitor) IsKind(className string) bool {
+	defer runtime.KeepAlive(piem)
 	return rt.IsKind(objref.IDOf(piem), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (piem *PlayerInterstitialEventMonitor) String() string {
+	defer runtime.KeepAlive(piem)
 	return rt.Description(objref.IDOf(piem))
 }
 
 // NewPlayerInterstitialEventMonitorWithPrimaryPlayer creates an observer with a player item.
 func NewPlayerInterstitialEventMonitorWithPrimaryPlayer(primaryPlayer *Player) *PlayerInterstitialEventMonitor {
+	defer runtime.KeepAlive(primaryPlayer)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerInterstitialEventMonitor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPrimaryPlayer:"), objref.IDOf(primaryPlayer))
 	return playerInterstitialEventMonitorAdopt(_id)
@@ -77,12 +85,14 @@ func NewPlayerInterstitialEventMonitorWithPrimaryPlayer(primaryPlayer *Player) *
 
 // PrimaryPlayer returns the AVPlayer that will play the primaryItems of the receiver's interstitial events.
 func (piem *PlayerInterstitialEventMonitor) PrimaryPlayer() *Player {
+	defer runtime.KeepAlive(piem)
 	_r := objc.Send[objc.ID](objref.IDOf(piem), objc.RegisterName("primaryPlayer"))
 	return PlayerFromID(_r)
 }
 
 // InterstitialPlayer returns the AVQueuePlayer that will play interstitial items during suspension of playback of primary items.
 func (piem *PlayerInterstitialEventMonitor) InterstitialPlayer() *QueuePlayer {
+	defer runtime.KeepAlive(piem)
 	_r := objc.Send[objc.ID](objref.IDOf(piem), objc.RegisterName("interstitialPlayer"))
 	return QueuePlayerFromID(_r)
 }
@@ -91,24 +101,28 @@ func (piem *PlayerInterstitialEventMonitor) InterstitialPlayer() *QueuePlayer {
 //
 // Events returns the collection as a Go slice.
 func (piem *PlayerInterstitialEventMonitor) Events() []*PlayerInterstitialEvent {
+	defer runtime.KeepAlive(piem)
 	_arr := objc.Send[objc.ID](objref.IDOf(piem), objc.RegisterName("events"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerInterstitialEvent { return PlayerInterstitialEventFromID(_id) })
 }
 
 // CurrentEvent returns the current interstitial event. Has a value of nil during playback of primary content by the primary player.
 func (piem *PlayerInterstitialEventMonitor) CurrentEvent() *PlayerInterstitialEvent {
+	defer runtime.KeepAlive(piem)
 	_r := objc.Send[objc.ID](objref.IDOf(piem), objc.RegisterName("currentEvent"))
 	return PlayerInterstitialEventFromID(_r)
 }
 
 // CurrentEventSkippableState returns the skippable event state for the currentEvent. If currentEvent is nil, then the value will be AVPlayerInterstitialEventSkippableEventStateNotSkippable.
 func (piem *PlayerInterstitialEventMonitor) CurrentEventSkippableState() PlayerInterstitialEventSkippableEventState {
+	defer runtime.KeepAlive(piem)
 	_r := objc.Send[PlayerInterstitialEventSkippableEventState](objref.IDOf(piem), objc.RegisterName("currentEventSkippableState"))
 	return _r
 }
 
 // CurrentEventSkipControlLabel returns the skip control label for the currentEvent. If a localizedStringsBundle has been set on the AVPlayerInterstitialEventController, and a skipControlLocalizedLabelBundleKey is set on the currentEvent, then this value will be the localized string that was matched to the event's skipControlLocalizedLabelBundleKey for the corresponding system language in the supplied Bundle, if any. If currentEvent is nil, then the value will be nil.
 func (piem *PlayerInterstitialEventMonitor) CurrentEventSkipControlLabel() string {
+	defer runtime.KeepAlive(piem)
 	_r := objc.Send[objc.ID](objref.IDOf(piem), objc.RegisterName("currentEventSkipControlLabel"))
 	if _r == 0 {
 		return ""

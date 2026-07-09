@@ -975,8 +975,8 @@ func RbString(arg uint) uint {
 }
 
 // C function: rb_absint_numwords
-func RbAbsintNumwords(val uint, word_numbits uint, nlz_bits_ret *uint) uint {
-	return _rb_absint_numwords(val, word_numbits, nlz_bits_ret)
+func RbAbsintNumwords(val uint, wordNumbits uint, nlzBitsRet *uint) uint {
+	return _rb_absint_numwords(val, wordNumbits, nlzBitsRet)
 }
 
 // C function: rb_absint_singlebit_p
@@ -985,8 +985,8 @@ func RbAbsintSinglebitP(val uint) int {
 }
 
 // C function: rb_absint_size
-func RbAbsintSize(val uint, nlz_bits_ret *int32) uint {
-	return _rb_absint_size(val, nlz_bits_ret)
+func RbAbsintSize(val uint, nlzBitsRet *int32) uint {
+	return _rb_absint_size(val, nlzBitsRet)
 }
 
 // C function: rb_add_event_hook
@@ -1050,13 +1050,13 @@ func RbArrayLen(a uint) int {
 }
 
 // C function: rb_array_ptr_use_end
-func RbArrayPtrUseEnd(a uint, allow_transient int) {
-	_rb_array_ptr_use_end(a, allow_transient)
+func RbArrayPtrUseEnd(a uint, allowTransient int) {
+	_rb_array_ptr_use_end(a, allowTransient)
 }
 
 // C function: rb_array_ptr_use_start
-func RbArrayPtrUseStart(a uint, allow_transient int) *uint {
-	return _rb_array_ptr_use_start(a, allow_transient)
+func RbArrayPtrUseStart(a uint, allowTransient int) *uint {
+	return _rb_array_ptr_use_start(a, allowTransient)
 }
 
 // C function: rb_ary_aref
@@ -1405,8 +1405,8 @@ func RbBigOr(arg uint, arg2 uint) uint {
 }
 
 // C function: rb_big_pack
-func RbBigPack(val uint, buf unsafe.Pointer, num_longs int) {
-	_rb_big_pack(val, buf, num_longs)
+func RbBigPack(val uint, buf unsafe.Pointer, numLongs int) {
+	_rb_big_pack(val, buf, numLongs)
 }
 
 // C function: rb_big_plus
@@ -1435,8 +1435,8 @@ func RbBigSign(arg uint) int {
 }
 
 // C function: rb_big_unpack
-func RbBigUnpack(buf unsafe.Pointer, num_longs int) uint {
-	return _rb_big_unpack(buf, num_longs)
+func RbBigUnpack(buf unsafe.Pointer, numLongs int) uint {
+	return _rb_big_unpack(buf, numLongs)
 }
 
 // C function: rb_big_xor
@@ -1705,8 +1705,8 @@ func RbCloneSetup(clone uint, obj uint) {
 }
 
 // C function: rb_close_before_exec
-func RbCloseBeforeExec(lowfd int, maxhint int, noclose_fds uint) {
-	_rb_close_before_exec(lowfd, maxhint, noclose_fds)
+func RbCloseBeforeExec(lowfd int, maxhint int, nocloseFds uint) {
+	_rb_close_before_exec(lowfd, maxhint, nocloseFds)
 }
 
 // C function: rb_cmperr
@@ -1920,8 +1920,8 @@ func RbDataObjectGet(obj uint) unsafe.Pointer {
 }
 
 // C function: rb_data_object_make
-func RbDataObjectMake(klass uint, mark_func unsafe.Pointer, free_func unsafe.Pointer, datap unsafe.Pointer, size uint) uint {
-	return _rb_data_object_make(klass, mark_func, free_func, datap, size)
+func RbDataObjectMake(klass uint, markFunc unsafe.Pointer, freeFunc unsafe.Pointer, datap unsafe.Pointer, size uint) uint {
+	return _rb_data_object_make(klass, markFunc, freeFunc, datap, size)
 }
 
 // C function: rb_data_object_wrap
@@ -2745,8 +2745,8 @@ func RbGetArgv() uint {
 }
 
 // C function: rb_get_kwargs
-func RbGetKwargs(keyword_hash uint, table *uint, required int, optional int, arg *uint) int {
-	return _rb_get_kwargs(keyword_hash, table, required, optional, arg)
+func RbGetKwargs(keywordHash uint, table *uint, required int, optional int, arg *uint) int {
+	return _rb_get_kwargs(keywordHash, table, required, optional, arg)
 }
 
 // C function: rb_get_path

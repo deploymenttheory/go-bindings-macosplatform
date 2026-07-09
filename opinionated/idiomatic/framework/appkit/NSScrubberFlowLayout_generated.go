@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -77,6 +79,8 @@ func (sfl *ScrubberFlowLayout) WithItemSize(itemSize corefoundation.CGSize) *Scr
 
 // InvalidateLayoutForItemsAtIndexes informs the scrubber that it should perform a new layout pass for the items at the specified indexes.
 func (sfl *ScrubberFlowLayout) InvalidateLayoutForItemsAtIndexes(invalidItemIndexes obj.Object) {
+	defer runtime.KeepAlive(sfl)
+	defer runtime.KeepAlive(invalidItemIndexes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sfl), objc.RegisterName("invalidateLayoutForItemsAtIndexes:"), objref.IDOf(invalidItemIndexes))
 	})
@@ -85,6 +89,7 @@ func (sfl *ScrubberFlowLayout) InvalidateLayoutForItemsAtIndexes(invalidItemInde
 
 // ItemSpacing returns the amount of horizontal spacing between items in points. The default value is 0.0.
 func (sfl *ScrubberFlowLayout) ItemSpacing() float64 {
+	defer runtime.KeepAlive(sfl)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -98,6 +103,7 @@ func (sfl *ScrubberFlowLayout) ItemSpacing() float64 {
 
 // ItemSize returns the frame size for each item, if not provided by the scrubber's delegate. The default value is { 50.0, 30.0 }.
 func (sfl *ScrubberFlowLayout) ItemSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(sfl)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {

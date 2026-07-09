@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,30 +49,35 @@ func mTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsAdopt(id ob
 
 // Description returns the object's -description text.
 func (mtndcodrp *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) Description() string {
+	defer runtime.KeepAlive(mtndcodrp)
 	return rt.Description(objref.IDOf(mtndcodrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtndcodrp *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtndcodrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtndcodrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtndcodrp *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtndcodrp)
 	return rt.IsKind(objref.IDOf(mtndcodrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtndcodrp *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) String() string {
+	defer runtime.KeepAlive(mtndcodrp)
 	return rt.Description(objref.IDOf(mtndcodrp))
 }
 
-// NewMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsWithResponseValueError initialize an MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-func NewMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, err error) {
+// NewMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsWithResponseValue initialize an MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -79,13 +85,14 @@ func NewMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsWithResp
 }
 
 // WithOperationalDataset sets the operational dataset.
-func (mtndcodrp *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) WithOperationalDataset(operationalDataset obj.Object) *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams {
-	objc.Send[objc.ID](objref.IDOf(mtndcodrp), objc.RegisterName("setOperationalDataset:"), objref.IDOf(operationalDataset))
+func (mtndcodrp *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) WithOperationalDataset(operationalDataset []byte) *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mtndcodrp), objc.RegisterName("setOperationalDataset:"), rt.BytesToNSData(operationalDataset))
 	return mtndcodrp
 }
 
 // OperationalDataset returns the operational dataset.
-func (mtndcodrp *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) OperationalDataset() obj.Object {
+func (mtndcodrp *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) OperationalDataset() []byte {
+	defer runtime.KeepAlive(mtndcodrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodrp), objc.RegisterName("operationalDataset"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

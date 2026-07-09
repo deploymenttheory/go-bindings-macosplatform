@@ -6,6 +6,7 @@ package photos
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func assetResourceManagerAdopt(id objc.ID) *AssetResourceManager {
 
 // Description returns the object's -description text.
 func (arm *AssetResourceManager) Description() string {
+	defer runtime.KeepAlive(arm)
 	return rt.Description(objref.IDOf(arm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (arm *AssetResourceManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(arm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(arm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (arm *AssetResourceManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(arm)
 	return rt.IsKind(objref.IDOf(arm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (arm *AssetResourceManager) String() string {
+	defer runtime.KeepAlive(arm)
 	return rt.Description(objref.IDOf(arm))
 }
 
@@ -79,6 +85,9 @@ func NewAssetResourceManager() *AssetResourceManager {
 //
 // WriteDataForAssetResourceToFileOptions blocks until the operation completes or ctx is cancelled.
 func (arm *AssetResourceManager) WriteDataForAssetResourceToFileOptions(ctx context.Context, resource *AssetResource, fileURL string, options *AssetResourceRequestOptions) error {
+	defer runtime.KeepAlive(arm)
+	defer runtime.KeepAlive(resource)
+	defer runtime.KeepAlive(options)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -96,5 +105,6 @@ func (arm *AssetResourceManager) WriteDataForAssetResourceToFileOptions(ctx cont
 
 // CancelDataRequest cancels an asynchronous request.
 func (arm *AssetResourceManager) CancelDataRequest(requestID int32) {
+	defer runtime.KeepAlive(arm)
 	objc.Send[objc.ID](objref.IDOf(arm), objc.RegisterName("cancelDataRequest:"), requestID)
 }

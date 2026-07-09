@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -97,22 +99,26 @@ func (cbn *CNNBatchNormalization) WithLabel(label string) *CNNBatchNormalization
 
 // ReloadGammaAndBetaFromDataSource reinitialize the filter's gamma and beta values using the data source provided at kernel initialization.
 func (cbn *CNNBatchNormalization) ReloadGammaAndBetaFromDataSource() {
+	defer runtime.KeepAlive(cbn)
 	objc.Send[objc.ID](objref.IDOf(cbn), objc.RegisterName("reloadGammaAndBetaFromDataSource"))
 }
 
 // ReloadMeanAndVarianceFromDataSource reinitialize the filter's mean and variance values using the data source provided at kernel initialization.
 func (cbn *CNNBatchNormalization) ReloadMeanAndVarianceFromDataSource() {
+	defer runtime.KeepAlive(cbn)
 	objc.Send[objc.ID](objref.IDOf(cbn), objc.RegisterName("reloadMeanAndVarianceFromDataSource"))
 }
 
 // NumberOfFeatureChannels returns the number of feature channels in an image to be normalized.
 func (cbn *CNNBatchNormalization) NumberOfFeatureChannels() int {
+	defer runtime.KeepAlive(cbn)
 	_r := objc.Send[int](objref.IDOf(cbn), objc.RegisterName("numberOfFeatureChannels"))
 	return _r
 }
 
 // Epsilon returns the epsilon value used in the batch normalization formula to bias the variance when normalizing.
 func (cbn *CNNBatchNormalization) Epsilon() float32 {
+	defer runtime.KeepAlive(cbn)
 	_r := objc.Send[float32](objref.IDOf(cbn), objc.RegisterName("epsilon"))
 	return _r
 }

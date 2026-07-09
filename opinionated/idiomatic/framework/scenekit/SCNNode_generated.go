@@ -5,11 +5,13 @@
 package scenekit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -52,22 +54,27 @@ func nodeAdopt(id objc.ID) *Node {
 
 // Description returns the object's -description text.
 func (n *Node) Description() string {
+	defer runtime.KeepAlive(n)
 	return rt.Description(objref.IDOf(n))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (n *Node) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(n), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (n *Node) IsKind(className string) bool {
+	defer runtime.KeepAlive(n)
 	return rt.IsKind(objref.IDOf(n), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (n *Node) String() string {
+	defer runtime.KeepAlive(n)
 	return rt.Description(objref.IDOf(n))
 }
 
@@ -79,30 +86,35 @@ func (n *Node) WithName(name string) *Node {
 
 // WithLight sets the light attached to the node.
 func (n *Node) WithLight(light *Light) *Node {
+	defer runtime.KeepAlive(light)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setLight:"), objref.IDOf(light))
 	return n
 }
 
 // WithCamera sets the camera attached to the node.
 func (n *Node) WithCamera(camera *Camera) *Node {
+	defer runtime.KeepAlive(camera)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setCamera:"), objref.IDOf(camera))
 	return n
 }
 
 // WithGeometry sets the geometry attached to the node.
 func (n *Node) WithGeometry(geometry GeometryProvider) *Node {
+	defer runtime.KeepAlive(geometry)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setGeometry:"), objref.IDOf(geometry))
 	return n
 }
 
 // WithSkinner sets the skinner object responsible for skeletal animations of node’s contents.
 func (n *Node) WithSkinner(skinner *Skinner) *Node {
+	defer runtime.KeepAlive(skinner)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSkinner:"), objref.IDOf(skinner))
 	return n
 }
 
 // WithMorpher sets the morpher object responsible for blending the node’s geometry.
 func (n *Node) WithMorpher(morpher *Morpher) *Node {
+	defer runtime.KeepAlive(morpher)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setMorpher:"), objref.IDOf(morpher))
 	return n
 }
@@ -157,12 +169,14 @@ func (n *Node) WithMovabilityHint(movabilityHint MovabilityHint) *Node {
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (n *Node) WithPhysicsBody(physicsBody *PhysicsBody) *Node {
+	defer runtime.KeepAlive(physicsBody)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return n
 }
 
 // WithPhysicsField sets the physics field associated with the node.
 func (n *Node) WithPhysicsField(physicsField *PhysicsField) *Node {
+	defer runtime.KeepAlive(physicsField)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setPhysicsField:"), objref.IDOf(physicsField))
 	return n
 }
@@ -187,68 +201,78 @@ func (n *Node) WithPaused(paused bool) *Node {
 	return n
 }
 
+// WithRendererDelegate sets an object responsible for rendering custom contents for the node using Metal or OpenGL.
+func (n *Node) WithRendererDelegate(rendererDelegate NodeRendererDelegate) *Node {
+	_shim := newNodeRendererDelegateShim(rendererDelegate)
+	_sel := objc.RegisterName("setRendererDelegate:")
+	shim.Associate(objref.IDOf(n), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(n), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return n
+}
+
 // WithCategoryBitMask sets a mask that defines which categories the node belongs to.
 func (n *Node) WithCategoryBitMask(categoryBitMask int) *Node {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
 	return n
 }
 
-// WithSimdTransform sets the transform applied to the node relative to its parent. Animatable.
-func (n *Node) WithSimdTransform(simdTransform unsafe.Pointer) *Node {
+// WithSIMDTransform sets the transform applied to the node relative to its parent. Animatable.
+func (n *Node) WithSIMDTransform(simdTransform unsafe.Pointer) *Node {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdTransform:"), simdTransform)
 	return n
 }
 
-// WithSimdPosition sets the translation applied to the node. Animatable.
-func (n *Node) WithSimdPosition(simdPosition unsafe.Pointer) *Node {
+// WithSIMDPosition sets the translation applied to the node. Animatable.
+func (n *Node) WithSIMDPosition(simdPosition unsafe.Pointer) *Node {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdPosition:"), simdPosition)
 	return n
 }
 
-// WithSimdRotation sets the node’s orientation, expressed as a rotation angle about an axis. Animatable.
-func (n *Node) WithSimdRotation(simdRotation unsafe.Pointer) *Node {
+// WithSIMDRotation sets the node’s orientation, expressed as a rotation angle about an axis. Animatable.
+func (n *Node) WithSIMDRotation(simdRotation unsafe.Pointer) *Node {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdRotation:"), simdRotation)
 	return n
 }
 
-// WithSimdOrientation sets the node’s orientation, expressed as a quaternion. Animatable.
-func (n *Node) WithSimdOrientation(simdOrientation unsafe.Pointer) *Node {
+// WithSIMDOrientation sets the node’s orientation, expressed as a quaternion. Animatable.
+func (n *Node) WithSIMDOrientation(simdOrientation unsafe.Pointer) *Node {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdOrientation:"), simdOrientation)
 	return n
 }
 
-// WithSimdEulerAngles sets the node’s orientation, expressed as pitch, yaw, and roll angles in radians. Animatable.
-func (n *Node) WithSimdEulerAngles(simdEulerAngles unsafe.Pointer) *Node {
+// WithSIMDEulerAngles sets the node’s orientation, expressed as pitch, yaw, and roll angles in radians. Animatable.
+func (n *Node) WithSIMDEulerAngles(simdEulerAngles unsafe.Pointer) *Node {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdEulerAngles:"), simdEulerAngles)
 	return n
 }
 
-// WithSimdScale sets the scale factor applied to the node. Animatable.
-func (n *Node) WithSimdScale(simdScale unsafe.Pointer) *Node {
+// WithSIMDScale sets the scale factor applied to the node. Animatable.
+func (n *Node) WithSIMDScale(simdScale unsafe.Pointer) *Node {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdScale:"), simdScale)
 	return n
 }
 
-// WithSimdPivot sets the pivot point for the node’s position, rotation, and scale. Animatable.
-func (n *Node) WithSimdPivot(simdPivot unsafe.Pointer) *Node {
+// WithSIMDPivot sets the pivot point for the node’s position, rotation, and scale. Animatable.
+func (n *Node) WithSIMDPivot(simdPivot unsafe.Pointer) *Node {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdPivot:"), simdPivot)
 	return n
 }
 
-// WithSimdWorldPosition sets the node’s position relative to the scene’s world coordinate space.
-func (n *Node) WithSimdWorldPosition(simdWorldPosition unsafe.Pointer) *Node {
+// WithSIMDWorldPosition sets the node’s position relative to the scene’s world coordinate space.
+func (n *Node) WithSIMDWorldPosition(simdWorldPosition unsafe.Pointer) *Node {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdWorldPosition:"), simdWorldPosition)
 	return n
 }
 
-// WithSimdWorldOrientation sets the node’s orientation relative to the scene’s world coordinate space.
-func (n *Node) WithSimdWorldOrientation(simdWorldOrientation unsafe.Pointer) *Node {
+// WithSIMDWorldOrientation sets the node’s orientation relative to the scene’s world coordinate space.
+func (n *Node) WithSIMDWorldOrientation(simdWorldOrientation unsafe.Pointer) *Node {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdWorldOrientation:"), simdWorldOrientation)
 	return n
 }
 
-// WithSimdWorldTransform sets the world transform applied to the node.
-func (n *Node) WithSimdWorldTransform(simdWorldTransform unsafe.Pointer) *Node {
+// WithSIMDWorldTransform sets the world transform applied to the node.
+func (n *Node) WithSIMDWorldTransform(simdWorldTransform unsafe.Pointer) *Node {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdWorldTransform:"), simdWorldTransform)
 	return n
 }
@@ -261,44 +285,56 @@ func (n *Node) WithFocusBehavior(focusBehavior NodeFocusBehavior) *Node {
 
 // Clone creates a copy of the node and its children.
 func (n *Node) Clone() *Node {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("clone"))
 	return NodeFromID(_r)
 }
 
 // FlattenedClone creates an optimized copy of the node and its children.
 func (n *Node) FlattenedClone() *Node {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("flattenedClone"))
 	return NodeFromID(_r)
 }
 
 // AddChildNode adds a node to the node’s array of children.
 func (n *Node) AddChildNode(child *Node) {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(child)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("addChildNode:"), objref.IDOf(child))
 }
 
 // InsertChildNodeAtIndex adds a node to the node’s array of children at a specified index.
 func (n *Node) InsertChildNodeAtIndex(child *Node, index int) {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(child)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("insertChildNode:atIndex:"), objref.IDOf(child), index)
 }
 
 // RemoveFromParentNode removes the node from its parent’s array of child nodes.
 func (n *Node) RemoveFromParentNode() {
+	defer runtime.KeepAlive(n)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("removeFromParentNode"))
 }
 
 // ReplaceChildNodeWith removes a child from the node’s array of children and inserts another node in its place.
 func (n *Node) ReplaceChildNodeWith(oldChild *Node, newChild *Node) {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(oldChild)
+	defer runtime.KeepAlive(newChild)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("replaceChildNode:with:"), objref.IDOf(oldChild), objref.IDOf(newChild))
 }
 
 // ChildNodeWithNameRecursively returns the first node in the node’s child node subtree with the specified name.
 func (n *Node) ChildNodeWithNameRecursively(name string, recursively bool) *Node {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("childNodeWithName:recursively:"), purego.NSString(name), recursively)
 	return NodeFromID(_r)
 }
 
 // ChildNodesPassingTest returns all nodes in the node’s child node subtree that satisfy the test applied by a block.
 func (n *Node) ChildNodesPassingTest(predicate func(obj.Object, *bool) bool) []*Node {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("childNodesPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), (*bool)(_b1))
 	}))
@@ -307,28 +343,35 @@ func (n *Node) ChildNodesPassingTest(predicate func(obj.Object, *bool) bool) []*
 
 // EnumerateChildNodesUsing executes the specified block for each of the node’s child and descendant nodes.
 func (n *Node) EnumerateChildNodesUsing(block func(obj.Object, *bool)) {
+	defer runtime.KeepAlive(n)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("enumerateChildNodesUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
 // EnumerateHierarchyUsing executes the specified block for each of the node’s child and descendant nodes, as well as for the node itself.
 func (n *Node) EnumerateHierarchyUsing(block func(obj.Object, *bool)) {
+	defer runtime.KeepAlive(n)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("enumerateHierarchyUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
 // ConvertTransformToNode converts a transform from the node’s local coordinate space to that of another node.
 func (n *Node) ConvertTransformToNode(transform quartzcore.CATransform3D, node *Node) quartzcore.CATransform3D {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(node)
 	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(n), objc.RegisterName("convertTransform:toNode:"), transform, objref.IDOf(node))
 	return _r
 }
 
 // ConvertTransformFromNode converts a transform to the node’s local coordinate space from that of another node.
 func (n *Node) ConvertTransformFromNode(transform quartzcore.CATransform3D, node *Node) quartzcore.CATransform3D {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(node)
 	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(n), objc.RegisterName("convertTransform:fromNode:"), transform, objref.IDOf(node))
 	return _r
 }
 
 // Name determines the name of the receiver.
 func (n *Node) Name() string {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -338,84 +381,98 @@ func (n *Node) Name() string {
 
 // Light determines the light attached to the receiver.
 func (n *Node) Light() *Light {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("light"))
 	return LightFromID(_r)
 }
 
 // Camera returns the camera.
 func (n *Node) Camera() *Camera {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("camera"))
 	return CameraFromID(_r)
 }
 
 // Geometry returns the geometry attached to the receiver.
 func (n *Node) Geometry() *Geometry {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("geometry"))
 	return GeometryFromID(_r)
 }
 
 // Skinner returns the skinner attached to the receiver.
 func (n *Node) Skinner() *Skinner {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("skinner"))
 	return SkinnerFromID(_r)
 }
 
 // Morpher returns the morpher attached to the receiver.
 func (n *Node) Morpher() *Morpher {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("morpher"))
 	return MorpherFromID(_r)
 }
 
 // Transform determines the receiver's transform. Animatable. The transform is the combination of the position, rotation and scale defined below. So when the transform is set, the receiver's position, rotation and scale are changed to match the new transform.
 func (n *Node) Transform() quartzcore.CATransform3D {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(n), objc.RegisterName("transform"))
 	return _r
 }
 
 // WorldTransform determines the receiver's transform in world space (relative to the scene's root node). Animatable.
 func (n *Node) WorldTransform() quartzcore.CATransform3D {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(n), objc.RegisterName("worldTransform"))
 	return _r
 }
 
 // Pivot determines the receiver's pivot. Animatable.
 func (n *Node) Pivot() quartzcore.CATransform3D {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(n), objc.RegisterName("pivot"))
 	return _r
 }
 
 // IsHidden reports whether the receiver is displayed. Defaults to false. Animatable.
 func (n *Node) IsHidden() bool {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("isHidden"))
 	return _r
 }
 
 // Opacity determines the opacity of the receiver. Default is 1. Animatable.
 func (n *Node) Opacity() float64 {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[float64](objref.IDOf(n), objc.RegisterName("opacity"))
 	return _r
 }
 
 // RenderingOrder determines the rendering order of the receiver. Nodes with greater rendering orders are rendered last. Defaults to 0.
 func (n *Node) RenderingOrder() int {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("renderingOrder"))
 	return _r
 }
 
 // CastsShadow reports whether determines if the node is rendered in shadow maps. Defaults to true.
 func (n *Node) CastsShadow() bool {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("castsShadow"))
 	return _r
 }
 
 // MovabilityHint returns communicates to SceneKit’s rendering system about how you want to move content in your scene; it does not affect your ability to change the node’s position or add animations or physics to the node. Defaults to SCNMovabilityHintFixed.
 func (n *Node) MovabilityHint() MovabilityHint {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[MovabilityHint](objref.IDOf(n), objc.RegisterName("movabilityHint"))
 	return _r
 }
 
 // ParentNode returns the parent node of the receiver.
 func (n *Node) ParentNode() *Node {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("parentNode"))
 	return NodeFromID(_r)
 }
@@ -424,18 +481,21 @@ func (n *Node) ParentNode() *Node {
 //
 // ChildNodes returns the collection as a Go slice.
 func (n *Node) ChildNodes() []*Node {
+	defer runtime.KeepAlive(n)
 	_arr := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("childNodes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Node { return NodeFromID(_id) })
 }
 
 // PhysicsBody returns the description of the physics body of the receiver. Default is nil.
 func (n *Node) PhysicsBody() *PhysicsBody {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("physicsBody"))
 	return PhysicsBodyFromID(_r)
 }
 
 // PhysicsField returns the description of the physics field of the receiver. Default is nil.
 func (n *Node) PhysicsField() *PhysicsField {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("physicsField"))
 	return PhysicsFieldFromID(_r)
 }
@@ -444,6 +504,7 @@ func (n *Node) PhysicsField() *PhysicsField {
 //
 // Constraints returns the collection as a Go slice.
 func (n *Node) Constraints() []*Constraint {
+	defer runtime.KeepAlive(n)
 	_arr := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("constraints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Constraint { return ConstraintFromID(_id) })
 }
@@ -452,71 +513,86 @@ func (n *Node) Constraints() []*Constraint {
 //
 // Filters returns the collection as a Go slice.
 func (n *Node) Filters() []obj.Object {
+	defer runtime.KeepAlive(n)
 	_arr := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("filters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PresentationNode returns the presentation node. Returns a copy of the node containing all the properties as they were at the start of the current transaction, with any active animations applied. This gives a close approximation to the version of the node that is currently displayed. The effect of attempting to modify the returned node in any way is undefined. The returned node has no parent and no child nodes.
 func (n *Node) PresentationNode() *Node {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("presentationNode"))
 	return NodeFromID(_r)
 }
 
 // IsPaused reports whether controls whether or not the node's actions and animations are updated or paused. Defaults to false.
 func (n *Node) IsPaused() bool {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("isPaused"))
 	return _r
 }
 
 // CategoryBitMask defines what logical 'categories' the receiver belongs too. Defaults to 1. Categories can be used to 1. exclude nodes from the influence of a given light (see SCNLight.categoryBitMask) 2. include/exclude nodes from render passes (see SCNTechnique.h) 3. specify which nodes to use when hit-testing (see SCNHitTestOptionCategoryBitMask)
 func (n *Node) CategoryBitMask() int {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("categoryBitMask"))
 	return _r
 }
 
-// SimdLookAt changes the node’s orientation so that its local forward vector points toward the specified location.
-func (n *Node) SimdLookAt(worldTarget unsafe.Pointer) {
+// SIMDLookAt changes the node’s orientation so that its local forward vector points toward the specified location.
+func (n *Node) SIMDLookAt(worldTarget unsafe.Pointer) {
+	defer runtime.KeepAlive(n)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("simdLookAt:"), worldTarget)
 }
 
-// SimdLookAtUpLocalFront changes the node’s orientation so that the specified forward vector points toward the specified location.
-func (n *Node) SimdLookAtUpLocalFront(worldTarget unsafe.Pointer, worldUp unsafe.Pointer, localFront unsafe.Pointer) {
+// SIMDLookAtUpLocalFront changes the node’s orientation so that the specified forward vector points toward the specified location.
+func (n *Node) SIMDLookAtUpLocalFront(worldTarget unsafe.Pointer, worldUp unsafe.Pointer, localFront unsafe.Pointer) {
+	defer runtime.KeepAlive(n)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("simdLookAt:up:localFront:"), worldTarget, worldUp, localFront)
 }
 
-// SimdLocalTranslateBy changes the node’s position relative to its current position.
-func (n *Node) SimdLocalTranslateBy(translation unsafe.Pointer) {
+// SIMDLocalTranslateBy changes the node’s position relative to its current position.
+func (n *Node) SIMDLocalTranslateBy(translation unsafe.Pointer) {
+	defer runtime.KeepAlive(n)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("simdLocalTranslateBy:"), translation)
 }
 
-// SimdLocalRotateBy changes the node’s orientation relative to its current orientation.
-func (n *Node) SimdLocalRotateBy(rotation unsafe.Pointer) {
+// SIMDLocalRotateBy changes the node’s orientation relative to its current orientation.
+func (n *Node) SIMDLocalRotateBy(rotation unsafe.Pointer) {
+	defer runtime.KeepAlive(n)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("simdLocalRotateBy:"), rotation)
 }
 
-// SimdRotateByAroundTarget changes the node’s position and orientation, relative to its current transform, through a rotation around the specified point in scene space.
-func (n *Node) SimdRotateByAroundTarget(worldRotation unsafe.Pointer, worldTarget unsafe.Pointer) {
+// SIMDRotateByAroundTarget changes the node’s position and orientation, relative to its current transform, through a rotation around the specified point in scene space.
+func (n *Node) SIMDRotateByAroundTarget(worldRotation unsafe.Pointer, worldTarget unsafe.Pointer) {
+	defer runtime.KeepAlive(n)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("simdRotateBy:aroundTarget:"), worldRotation, worldTarget)
 }
 
 // FocusBehavior returns the focus behavior.
 func (n *Node) FocusBehavior() NodeFocusBehavior {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[NodeFocusBehavior](objref.IDOf(n), objc.RegisterName("focusBehavior"))
 	return _r
 }
 
 // AddParticleSystem attaches a particle system to the node.
 func (n *Node) AddParticleSystem(system *ParticleSystem) {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(system)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("addParticleSystem:"), objref.IDOf(system))
 }
 
 // RemoveAllParticleSystems removes any particle systems directly attached to the node.
 func (n *Node) RemoveAllParticleSystems() {
+	defer runtime.KeepAlive(n)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("removeAllParticleSystems"))
 }
 
 // RemoveParticleSystem removes a particle system attached to the node.
 func (n *Node) RemoveParticleSystem(system *ParticleSystem) {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(system)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("removeParticleSystem:"), objref.IDOf(system))
 }
 
@@ -524,22 +600,28 @@ func (n *Node) RemoveParticleSystem(system *ParticleSystem) {
 //
 // ParticleSystems returns the collection as a Go slice.
 func (n *Node) ParticleSystems() []*ParticleSystem {
+	defer runtime.KeepAlive(n)
 	_arr := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("particleSystems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ParticleSystem { return ParticleSystemFromID(_id) })
 }
 
 // AddAudioPlayer adds the specified auto player to the node and begins playback.
 func (n *Node) AddAudioPlayer(player *AudioPlayer) {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(player)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("addAudioPlayer:"), objref.IDOf(player))
 }
 
 // RemoveAllAudioPlayers removes all audio players attached to the node, stopping playback.
 func (n *Node) RemoveAllAudioPlayers() {
+	defer runtime.KeepAlive(n)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("removeAllAudioPlayers"))
 }
 
 // RemoveAudioPlayer removes the specified audio player from the node, stopping playback.
 func (n *Node) RemoveAudioPlayer(player *AudioPlayer) {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(player)
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("removeAudioPlayer:"), objref.IDOf(player))
 }
 
@@ -547,6 +629,7 @@ func (n *Node) RemoveAudioPlayer(player *AudioPlayer) {
 //
 // AudioPlayers returns the collection as a Go slice.
 func (n *Node) AudioPlayers() []*AudioPlayer {
+	defer runtime.KeepAlive(n)
 	_arr := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("audioPlayers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AudioPlayer { return AudioPlayerFromID(_id) })
 }

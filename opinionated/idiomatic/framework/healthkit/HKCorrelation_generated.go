@@ -5,9 +5,11 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,21 +55,27 @@ func NewCorrelation() *Correlation {
 }
 
 // ObjectsForType returns a set containing all the objects of the specified type in the correlation.
-func (c *Correlation) ObjectsForType(objectType *ObjectType) obj.Object {
+// The order of the returned elements is unspecified.
+func (c *Correlation) ObjectsForType(objectType *ObjectType) []*Sample {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(objectType)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("objectsForType:"), objref.IDOf(objectType))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *Sample { return SampleFromID(_id) })
 }
 
 // CorrelationType returns the correlation type.
 func (c *Correlation) CorrelationType() *CorrelationType {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("correlationType"))
 	return CorrelationTypeFromID(_r)
 }
 
 // Objects returns a set of HKSamples containing all of the objects that were saved with the receiver.
-func (c *Correlation) Objects() obj.Object {
+// The order of the returned elements is unspecified.
+func (c *Correlation) Objects() []*Sample {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("objects"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *Sample { return SampleFromID(_id) })
 }
 
 var _ SampleProvider = (*Correlation)(nil)

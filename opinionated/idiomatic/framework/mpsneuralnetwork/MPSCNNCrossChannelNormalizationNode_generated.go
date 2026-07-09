@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,6 +47,7 @@ func cNNCrossChannelNormalizationNodeAdopt(id objc.ID) *CNNCrossChannelNormaliza
 
 // NewCNNCrossChannelNormalizationNodeWithSourceKernelSize creates a new CNNCrossChannelNormalizationNode.
 func NewCNNCrossChannelNormalizationNodeWithSourceKernelSize(sourceNode *NNImageNode, kernelSize int) *CNNCrossChannelNormalizationNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNCrossChannelNormalizationNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:kernelSize:"), objref.IDOf(sourceNode), kernelSize)
 	return cNNCrossChannelNormalizationNodeAdopt(_id)
@@ -52,6 +55,7 @@ func NewCNNCrossChannelNormalizationNodeWithSourceKernelSize(sourceNode *NNImage
 
 // NewCNNCrossChannelNormalizationNodeWithSource creates a new CNNCrossChannelNormalizationNode.
 func NewCNNCrossChannelNormalizationNodeWithSource(sourceNode *NNImageNode) *CNNCrossChannelNormalizationNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNCrossChannelNormalizationNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNCrossChannelNormalizationNodeAdopt(_id)
@@ -89,6 +93,7 @@ func (cccnn *CNNCrossChannelNormalizationNode) WithLabel(label string) *CNNCross
 
 // KernelSizeInFeatureChannels returns the kernel size in feature channels.
 func (cccnn *CNNCrossChannelNormalizationNode) KernelSizeInFeatureChannels() int {
+	defer runtime.KeepAlive(cccnn)
 	_r := objc.Send[int](objref.IDOf(cccnn), objc.RegisterName("kernelSizeInFeatureChannels"))
 	return _r
 }

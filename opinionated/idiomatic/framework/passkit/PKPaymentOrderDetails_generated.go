@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func paymentOrderDetailsAdopt(id objc.ID) *PaymentOrderDetails {
 
 // Description returns the object's -description text.
 func (pod *PaymentOrderDetails) Description() string {
+	defer runtime.KeepAlive(pod)
 	return rt.Description(objref.IDOf(pod))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pod *PaymentOrderDetails) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pod)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pod), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pod *PaymentOrderDetails) IsKind(className string) bool {
+	defer runtime.KeepAlive(pod)
 	return rt.IsKind(objref.IDOf(pod), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pod *PaymentOrderDetails) String() string {
+	defer runtime.KeepAlive(pod)
 	return rt.Description(objref.IDOf(pod))
 }
 
@@ -99,6 +106,7 @@ func (pod *PaymentOrderDetails) WithAuthenticationToken(authenticationToken stri
 
 // OrderTypeIdentifier returns the order type identifier.
 func (pod *PaymentOrderDetails) OrderTypeIdentifier() string {
+	defer runtime.KeepAlive(pod)
 	_r := objc.Send[objc.ID](objref.IDOf(pod), objc.RegisterName("orderTypeIdentifier"))
 	if _r == 0 {
 		return ""
@@ -108,6 +116,7 @@ func (pod *PaymentOrderDetails) OrderTypeIdentifier() string {
 
 // OrderIdentifier returns the order identifier.
 func (pod *PaymentOrderDetails) OrderIdentifier() string {
+	defer runtime.KeepAlive(pod)
 	_r := objc.Send[objc.ID](objref.IDOf(pod), objc.RegisterName("orderIdentifier"))
 	if _r == 0 {
 		return ""
@@ -116,13 +125,15 @@ func (pod *PaymentOrderDetails) OrderIdentifier() string {
 }
 
 // WebServiceURL returns the web service URL.
-func (pod *PaymentOrderDetails) WebServiceURL() obj.Object {
+func (pod *PaymentOrderDetails) WebServiceURL() string {
+	defer runtime.KeepAlive(pod)
 	_r := objc.Send[objc.ID](objref.IDOf(pod), objc.RegisterName("webServiceURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // AuthenticationToken returns the authentication token.
 func (pod *PaymentOrderDetails) AuthenticationToken() string {
+	defer runtime.KeepAlive(pod)
 	_r := objc.Send[objc.ID](objref.IDOf(pod), objc.RegisterName("authenticationToken"))
 	if _r == 0 {
 		return ""

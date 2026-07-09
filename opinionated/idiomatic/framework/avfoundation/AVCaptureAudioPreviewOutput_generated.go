@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -71,6 +73,7 @@ func (capo *CaptureAudioPreviewOutput) WithDeferredStartEnabled(deferredStartEna
 
 // OutputDeviceUniqueID specifies the unique ID of the Core Audio output device being used to play preview audio. The value of this property is an NSString containing the unique ID of the Core Audio device to be used for output, or nil if the default system output should be used.
 func (capo *CaptureAudioPreviewOutput) OutputDeviceUniqueID() string {
+	defer runtime.KeepAlive(capo)
 	_r := objc.Send[objc.ID](objref.IDOf(capo), objc.RegisterName("outputDeviceUniqueID"))
 	if _r == 0 {
 		return ""
@@ -80,6 +83,7 @@ func (capo *CaptureAudioPreviewOutput) OutputDeviceUniqueID() string {
 
 // Volume specifies the preview volume of the output. The value of this property is the preview volume of the receiver, where 1.0 is the maximum volume and 0.0 is muted.
 func (capo *CaptureAudioPreviewOutput) Volume() float32 {
+	defer runtime.KeepAlive(capo)
 	_r := objc.Send[float32](objref.IDOf(capo), objc.RegisterName("volume"))
 	return _r
 }

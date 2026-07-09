@@ -5,6 +5,8 @@
 package coreaudiokit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func cANetworkBrowserWindowControllerAdopt(id objc.ID) *CANetworkBrowserWindowCo
 
 // Description returns the object's -description text.
 func (cnbwc *CANetworkBrowserWindowController) Description() string {
+	defer runtime.KeepAlive(cnbwc)
 	return rt.Description(objref.IDOf(cnbwc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cnbwc *CANetworkBrowserWindowController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cnbwc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cnbwc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cnbwc *CANetworkBrowserWindowController) IsKind(className string) bool {
+	defer runtime.KeepAlive(cnbwc)
 	return rt.IsKind(objref.IDOf(cnbwc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cnbwc *CANetworkBrowserWindowController) String() string {
+	defer runtime.KeepAlive(cnbwc)
 	return rt.Description(objref.IDOf(cnbwc))
 }
 

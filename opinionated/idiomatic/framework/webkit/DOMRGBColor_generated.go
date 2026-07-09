@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,30 +54,35 @@ func NewDOMRGBColor() *DOMRGBColor {
 
 // Red returns the red.
 func (dc *DOMRGBColor) Red() *DOMCSSPrimitiveValue {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("red"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
 // Green returns the green.
 func (dc *DOMRGBColor) Green() *DOMCSSPrimitiveValue {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("green"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
 // Blue returns the blue.
 func (dc *DOMRGBColor) Blue() *DOMCSSPrimitiveValue {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("blue"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
 // Alpha returns the alpha.
 func (dc *DOMRGBColor) Alpha() *DOMCSSPrimitiveValue {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("alpha"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
 // Color returns the color.
 func (dc *DOMRGBColor) Color() obj.Object {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }

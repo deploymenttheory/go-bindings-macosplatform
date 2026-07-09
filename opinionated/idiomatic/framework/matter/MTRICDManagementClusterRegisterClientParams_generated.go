@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRICDManagementClusterRegisterClientParamsAdopt(id objc.ID) *MTRICDManagem
 
 // Description returns the object's -description text.
 func (mmcrcp *MTRICDManagementClusterRegisterClientParams) Description() string {
+	defer runtime.KeepAlive(mmcrcp)
 	return rt.Description(objref.IDOf(mmcrcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmcrcp *MTRICDManagementClusterRegisterClientParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmcrcp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmcrcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmcrcp *MTRICDManagementClusterRegisterClientParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmcrcp)
 	return rt.IsKind(objref.IDOf(mmcrcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmcrcp *MTRICDManagementClusterRegisterClientParams) String() string {
+	defer runtime.KeepAlive(mmcrcp)
 	return rt.Description(objref.IDOf(mmcrcp))
 }
 
@@ -72,84 +80,96 @@ func NewMTRICDManagementClusterRegisterClientParams() *MTRICDManagementClusterRe
 
 // WithCheckInNodeID sets the check in node ID.
 func (mmcrcp *MTRICDManagementClusterRegisterClientParams) WithCheckInNodeID(checkInNodeID obj.Object) *MTRICDManagementClusterRegisterClientParams {
+	defer runtime.KeepAlive(checkInNodeID)
 	objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("setCheckInNodeID:"), objref.IDOf(checkInNodeID))
 	return mmcrcp
 }
 
 // WithMonitoredSubject sets the monitored subject.
 func (mmcrcp *MTRICDManagementClusterRegisterClientParams) WithMonitoredSubject(monitoredSubject obj.Object) *MTRICDManagementClusterRegisterClientParams {
+	defer runtime.KeepAlive(monitoredSubject)
 	objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("setMonitoredSubject:"), objref.IDOf(monitoredSubject))
 	return mmcrcp
 }
 
 // WithKey sets the key.
-func (mmcrcp *MTRICDManagementClusterRegisterClientParams) WithKey(key obj.Object) *MTRICDManagementClusterRegisterClientParams {
-	objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("setKey:"), objref.IDOf(key))
+func (mmcrcp *MTRICDManagementClusterRegisterClientParams) WithKey(key []byte) *MTRICDManagementClusterRegisterClientParams {
+	objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("setKey:"), rt.BytesToNSData(key))
 	return mmcrcp
 }
 
 // WithVerificationKey sets the verification key.
-func (mmcrcp *MTRICDManagementClusterRegisterClientParams) WithVerificationKey(verificationKey obj.Object) *MTRICDManagementClusterRegisterClientParams {
-	objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("setVerificationKey:"), objref.IDOf(verificationKey))
+func (mmcrcp *MTRICDManagementClusterRegisterClientParams) WithVerificationKey(verificationKey []byte) *MTRICDManagementClusterRegisterClientParams {
+	objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("setVerificationKey:"), rt.BytesToNSData(verificationKey))
 	return mmcrcp
 }
 
 // WithClientType sets the client type.
 func (mmcrcp *MTRICDManagementClusterRegisterClientParams) WithClientType(clientType obj.Object) *MTRICDManagementClusterRegisterClientParams {
+	defer runtime.KeepAlive(clientType)
 	objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("setClientType:"), objref.IDOf(clientType))
 	return mmcrcp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mmcrcp *MTRICDManagementClusterRegisterClientParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRICDManagementClusterRegisterClientParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mmcrcp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mmcrcp *MTRICDManagementClusterRegisterClientParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRICDManagementClusterRegisterClientParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mmcrcp
 }
 
 // CheckInNodeID returns the check in node ID.
-func (mmcrcp *MTRICDManagementClusterRegisterClientParams) CheckInNodeID() obj.Object {
+func (mmcrcp *MTRICDManagementClusterRegisterClientParams) CheckInNodeID() *foundation.Number {
+	defer runtime.KeepAlive(mmcrcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("checkInNodeID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MonitoredSubject returns the monitored subject.
-func (mmcrcp *MTRICDManagementClusterRegisterClientParams) MonitoredSubject() obj.Object {
+func (mmcrcp *MTRICDManagementClusterRegisterClientParams) MonitoredSubject() *foundation.Number {
+	defer runtime.KeepAlive(mmcrcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("monitoredSubject"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Key returns the key.
-func (mmcrcp *MTRICDManagementClusterRegisterClientParams) Key() obj.Object {
+func (mmcrcp *MTRICDManagementClusterRegisterClientParams) Key() []byte {
+	defer runtime.KeepAlive(mmcrcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("key"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // VerificationKey returns the verification key.
-func (mmcrcp *MTRICDManagementClusterRegisterClientParams) VerificationKey() obj.Object {
+func (mmcrcp *MTRICDManagementClusterRegisterClientParams) VerificationKey() []byte {
+	defer runtime.KeepAlive(mmcrcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("verificationKey"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ClientType returns the client type.
-func (mmcrcp *MTRICDManagementClusterRegisterClientParams) ClientType() obj.Object {
+func (mmcrcp *MTRICDManagementClusterRegisterClientParams) ClientType() *foundation.Number {
+	defer runtime.KeepAlive(mmcrcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("clientType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mmcrcp *MTRICDManagementClusterRegisterClientParams) TimedInvokeTimeoutMs() obj.Object {
+func (mmcrcp *MTRICDManagementClusterRegisterClientParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mmcrcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mmcrcp *MTRICDManagementClusterRegisterClientParams) ServerSideProcessingTimeout() obj.Object {
+func (mmcrcp *MTRICDManagementClusterRegisterClientParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mmcrcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

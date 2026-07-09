@@ -5,6 +5,8 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewChangeHistoryUpdateContactEvent() *ChangeHistoryUpdateContactEvent {
 
 // Contact returns the contact.
 func (chuce *ChangeHistoryUpdateContactEvent) Contact() *Contact {
+	defer runtime.KeepAlive(chuce)
 	_r := objc.Send[objc.ID](objref.IDOf(chuce), objc.RegisterName("contact"))
 	return ContactFromID(_r)
 }

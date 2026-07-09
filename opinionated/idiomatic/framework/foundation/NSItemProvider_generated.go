@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func itemProviderAdopt(id objc.ID) *ItemProvider {
 
 // Description returns the object's -description text.
 func (ip *ItemProvider) Description() string {
+	defer runtime.KeepAlive(ip)
 	return rt.Description(objref.IDOf(ip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ip *ItemProvider) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ip)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ip *ItemProvider) IsKind(className string) bool {
+	defer runtime.KeepAlive(ip)
 	return rt.IsKind(objref.IDOf(ip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ip *ItemProvider) String() string {
+	defer runtime.KeepAlive(ip)
 	return rt.Description(objref.IDOf(ip))
 }
 
@@ -83,6 +89,7 @@ func NewItemProviderWithContentsOfURL(fileURL string) *ItemProvider {
 
 // WithSuggestedName sets the filename to use when writing the provided data to a file on disk.
 func (ip *ItemProvider) WithSuggestedName(suggestedName StringProvider) *ItemProvider {
+	defer runtime.KeepAlive(suggestedName)
 	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("setSuggestedName:"), objref.IDOf(suggestedName))
 	return ip
 }
@@ -94,31 +101,35 @@ func (ip *ItemProvider) WithObservationInfo(observationInfo unsafe.Pointer) *Ite
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ip *ItemProvider) WithScriptingProperties(scriptingProperties obj.Object) *ItemProvider {
-	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ip *ItemProvider) WithScriptingProperties(scriptingProperties map[string]obj.Object) *ItemProvider {
+	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ip
 }
 
-// RegisteredTypeIdentifiersWithFileOptions returns an array with a subset of type identifiers for the item provider, according to the specified file options, in the same order they were registered.
-func (ip *ItemProvider) RegisteredTypeIdentifiersWithFileOptions(fileOptions ItemProviderFileOptions) []string {
+// RegisteredTypeIdentifiersWithFile returns an array with a subset of type identifiers for the item provider, according to the specified file options, in the same order they were registered.
+func (ip *ItemProvider) RegisteredTypeIdentifiersWithFile(fileOptions ItemProviderFileOptions) []string {
+	defer runtime.KeepAlive(ip)
 	_r := objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("registeredTypeIdentifiersWithFileOptions:"), fileOptions)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // HasItemConformingToTypeIdentifier returns a Boolean value indicating whether an item provider contains a data representation conforming to a specified universal type identifier file options parameter with a value of zero.
 func (ip *ItemProvider) HasItemConformingToTypeIdentifier(typeIdentifier string) bool {
+	defer runtime.KeepAlive(ip)
 	_r := objc.Send[bool](objref.IDOf(ip), objc.RegisterName("hasItemConformingToTypeIdentifier:"), purego.NSString(typeIdentifier))
 	return _r
 }
 
-// HasRepresentationConformingToTypeIdentifierFileOptions returns a Boolean value indicating whether an item provider contains a data representation conforming to a specified universal type identifier and to specified open-in-place behavior.
-func (ip *ItemProvider) HasRepresentationConformingToTypeIdentifierFileOptions(typeIdentifier string, fileOptions ItemProviderFileOptions) bool {
+// HasRepresentationConformingToTypeIdentifierFile returns a Boolean value indicating whether an item provider contains a data representation conforming to a specified universal type identifier and to specified open-in-place behavior.
+func (ip *ItemProvider) HasRepresentationConformingToTypeIdentifierFile(typeIdentifier string, fileOptions ItemProviderFileOptions) bool {
+	defer runtime.KeepAlive(ip)
 	_r := objc.Send[bool](objref.IDOf(ip), objc.RegisterName("hasRepresentationConformingToTypeIdentifier:fileOptions:"), purego.NSString(typeIdentifier), fileOptions)
 	return _r
 }
 
 // CanLoadObjectOfClass returns a Boolean value indicating whether an item provider can load objects of a specified class.
 func (ip *ItemProvider) CanLoadObjectOfClass(aClass unsafe.Pointer) bool {
+	defer runtime.KeepAlive(ip)
 	_r := objc.Send[bool](objref.IDOf(ip), objc.RegisterName("canLoadObjectOfClass:"), aClass)
 	return _r
 }
@@ -127,12 +138,14 @@ func (ip *ItemProvider) CanLoadObjectOfClass(aClass unsafe.Pointer) bool {
 //
 // RegisteredTypeIdentifiers returns the collection as a Go slice.
 func (ip *ItemProvider) RegisteredTypeIdentifiers() []string {
+	defer runtime.KeepAlive(ip)
 	_arr := objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("registeredTypeIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // SuggestedName returns the suggested name.
 func (ip *ItemProvider) SuggestedName() string {
+	defer runtime.KeepAlive(ip)
 	_r := objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("suggestedName"))
 	if _r == 0 {
 		return ""

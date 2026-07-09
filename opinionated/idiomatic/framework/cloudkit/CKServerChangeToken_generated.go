@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func serverChangeTokenAdopt(id objc.ID) *ServerChangeToken {
 
 // Description returns the object's -description text.
 func (sct *ServerChangeToken) Description() string {
+	defer runtime.KeepAlive(sct)
 	return rt.Description(objref.IDOf(sct))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sct *ServerChangeToken) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sct)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sct), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sct *ServerChangeToken) IsKind(className string) bool {
+	defer runtime.KeepAlive(sct)
 	return rt.IsKind(objref.IDOf(sct), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sct *ServerChangeToken) String() string {
+	defer runtime.KeepAlive(sct)
 	return rt.Description(objref.IDOf(sct))
 }
 

@@ -5,6 +5,7 @@
 package virtualization
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -53,27 +54,33 @@ func graphicsDisplayAdopt(id objc.ID) *GraphicsDisplay {
 
 // Description returns the object's -description text.
 func (gd *GraphicsDisplay) Description() string {
+	defer runtime.KeepAlive(gd)
 	return rt.Description(objref.IDOf(gd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gd *GraphicsDisplay) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gd *GraphicsDisplay) IsKind(className string) bool {
+	defer runtime.KeepAlive(gd)
 	return rt.IsKind(objref.IDOf(gd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gd *GraphicsDisplay) String() string {
+	defer runtime.KeepAlive(gd)
 	return rt.Description(objref.IDOf(gd))
 }
 
 // ReconfigureWithSizeInPixels resize this display with the new dimensions you provide.
 func (gd *GraphicsDisplay) ReconfigureWithSizeInPixels(sizeInPixels corefoundation.CGSize) error {
+	defer runtime.KeepAlive(gd)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(gd), objc.RegisterName("reconfigureWithSizeInPixels:error:"), sizeInPixels, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -84,6 +91,8 @@ func (gd *GraphicsDisplay) ReconfigureWithSizeInPixels(sizeInPixels corefoundati
 
 // ReconfigureWithConfiguration reconfigure this display with the new display configuration you provide.
 func (gd *GraphicsDisplay) ReconfigureWithConfiguration(configuration *GraphicsDisplayConfiguration) error {
+	defer runtime.KeepAlive(gd)
+	defer runtime.KeepAlive(configuration)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(gd), objc.RegisterName("reconfigureWithConfiguration:error:"), objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -94,6 +103,7 @@ func (gd *GraphicsDisplay) ReconfigureWithConfiguration(configuration *GraphicsD
 
 // SizeInPixels returns the size of the display, in pixels.
 func (gd *GraphicsDisplay) SizeInPixels() corefoundation.CGSize {
+	defer runtime.KeepAlive(gd)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(gd), objc.RegisterName("sizeInPixels"))
 	return _r
 }

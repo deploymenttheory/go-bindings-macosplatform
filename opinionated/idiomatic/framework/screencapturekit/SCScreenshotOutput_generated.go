@@ -5,6 +5,8 @@
 package screencapturekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func screenshotOutputAdopt(id objc.ID) *ScreenshotOutput {
 
 // Description returns the object's -description text.
 func (so *ScreenshotOutput) Description() string {
+	defer runtime.KeepAlive(so)
 	return rt.Description(objref.IDOf(so))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (so *ScreenshotOutput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(so)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(so), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (so *ScreenshotOutput) IsKind(className string) bool {
+	defer runtime.KeepAlive(so)
 	return rt.IsKind(objref.IDOf(so), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (so *ScreenshotOutput) String() string {
+	defer runtime.KeepAlive(so)
 	return rt.Description(objref.IDOf(so))
 }
 
@@ -74,12 +81,14 @@ func NewScreenshotOutput() *ScreenshotOutput {
 
 // WithSdrImage sets an output property that specifies the standard dynamic range version of the screenshot.
 func (so *ScreenshotOutput) WithSdrImage(sdrImage obj.Object) *ScreenshotOutput {
+	defer runtime.KeepAlive(sdrImage)
 	objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("setSdrImage:"), objref.IDOf(sdrImage))
 	return so
 }
 
 // WithHdrImage sets an output property that specifies the high dynamic range version of the screenshot.
 func (so *ScreenshotOutput) WithHdrImage(hdrImage obj.Object) *ScreenshotOutput {
+	defer runtime.KeepAlive(hdrImage)
 	objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("setHdrImage:"), objref.IDOf(hdrImage))
 	return so
 }
@@ -92,18 +101,21 @@ func (so *ScreenshotOutput) WithFileURL(fileURL string) *ScreenshotOutput {
 
 // SdrImage returns SCScreenshotOutput property that denotes the SDR CGimage.  The output CGImage uses the same color space as the display
 func (so *ScreenshotOutput) SdrImage() obj.Object {
+	defer runtime.KeepAlive(so)
 	_r := objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("sdrImage"))
 	return obj.Wrap(_r)
 }
 
 // HdrImage returns SCScreenshotOutput property that denotes the HDR CGimage.  The output CGImage uses the extended sRGB color space.
 func (so *ScreenshotOutput) HdrImage() obj.Object {
+	defer runtime.KeepAlive(so)
 	_r := objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("hdrImage"))
 	return obj.Wrap(_r)
 }
 
 // FileURL returns SCScreenshotOutput property to specify the location where the image was saved.  If a fileURL in the screenshot configuration was not specified, then the fileURL will be nil
-func (so *ScreenshotOutput) FileURL() obj.Object {
+func (so *ScreenshotOutput) FileURL() string {
+	defer runtime.KeepAlive(so)
 	_r := objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("fileURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

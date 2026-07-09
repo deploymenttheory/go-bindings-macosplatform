@@ -5,10 +5,12 @@
 package osakit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +50,27 @@ func scriptAdopt(id objc.ID) *Script {
 
 // Description returns the object's -description text.
 func (s *Script) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Script) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Script) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Script) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -76,6 +83,7 @@ func NewScriptWithSource(source string) *Script {
 
 // NewScriptWithSourceLanguage creates a new Script.
 func NewScriptWithSourceLanguage(source string, language *Language) *Script {
+	defer runtime.KeepAlive(language)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("OSAScript")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:language:"), purego.NSString(source), objref.IDOf(language))
 	return scriptAdopt(_id)
@@ -83,6 +91,7 @@ func NewScriptWithSourceLanguage(source string, language *Language) *Script {
 
 // NewScriptWithSourceFromURLLanguageInstanceUsingStorageOptions creates a new Script.
 func NewScriptWithSourceFromURLLanguageInstanceUsingStorageOptions(source string, url string, instance *LanguageInstance, storageOptions StorageOptions) *Script {
+	defer runtime.KeepAlive(instance)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("OSAScript")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:fromURL:languageInstance:usingStorageOptions:"), purego.NSString(source), rt.FileURL(url), objref.IDOf(instance), storageOptions)
 	return scriptAdopt(_id)
@@ -90,6 +99,7 @@ func NewScriptWithSourceFromURLLanguageInstanceUsingStorageOptions(source string
 
 // NewScriptWithContentsOfURLError creates a new Script.
 func NewScriptWithContentsOfURLError(url string, errorInfo obj.Object) *Script {
+	defer runtime.KeepAlive(errorInfo)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("OSAScript")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), rt.FileURL(url), objref.IDOf(errorInfo))
 	return scriptAdopt(_id)
@@ -97,13 +107,16 @@ func NewScriptWithContentsOfURLError(url string, errorInfo obj.Object) *Script {
 
 // NewScriptWithContentsOfURLLanguageError creates a new Script.
 func NewScriptWithContentsOfURLLanguageError(url string, language *Language, errorInfo obj.Object) *Script {
+	defer runtime.KeepAlive(language)
+	defer runtime.KeepAlive(errorInfo)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("OSAScript")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:language:error:"), rt.FileURL(url), objref.IDOf(language), objref.IDOf(errorInfo))
 	return scriptAdopt(_id)
 }
 
-// NewScriptWithContentsOfURLLanguageInstanceUsingStorageOptionsError creates a new Script.
-func NewScriptWithContentsOfURLLanguageInstanceUsingStorageOptionsError(url string, instance *LanguageInstance, storageOptions StorageOptions) (result *Script, err error) {
+// NewScriptWithContentsOfURLLanguageInstanceUsingStorageOptions creates a new Script.
+func NewScriptWithContentsOfURLLanguageInstanceUsingStorageOptions(url string, instance *LanguageInstance, storageOptions StorageOptions) (result *Script, err error) {
+	defer runtime.KeepAlive(instance)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("OSAScript")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:languageInstance:usingStorageOptions:error:"), rt.FileURL(url), objref.IDOf(instance), storageOptions, unsafe.Pointer(&_nsErr))
@@ -114,25 +127,28 @@ func NewScriptWithContentsOfURLLanguageInstanceUsingStorageOptionsError(url stri
 }
 
 // NewScriptWithCompiledDataError creates a new Script.
-func NewScriptWithCompiledDataError(data obj.Object, errorInfo obj.Object) *Script {
+func NewScriptWithCompiledDataError(data []byte, errorInfo obj.Object) *Script {
+	defer runtime.KeepAlive(errorInfo)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("OSAScript")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompiledData:error:"), objref.IDOf(data), objref.IDOf(errorInfo))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompiledData:error:"), rt.BytesToNSData(data), objref.IDOf(errorInfo))
 	return scriptAdopt(_id)
 }
 
-// NewScriptWithCompiledDataFromURLUsingStorageOptionsError creates a new Script.
-func NewScriptWithCompiledDataFromURLUsingStorageOptionsError(data obj.Object, url string, storageOptions StorageOptions) (result *Script, err error) {
+// NewScriptWithCompiledDataFromURLUsingStorageOptions creates a new Script.
+func NewScriptWithCompiledDataFromURLUsingStorageOptions(data []byte, url string, storageOptions StorageOptions) (result *Script, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("OSAScript")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompiledData:fromURL:usingStorageOptions:error:"), objref.IDOf(data), rt.FileURL(url), storageOptions, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompiledData:fromURL:usingStorageOptions:error:"), rt.BytesToNSData(data), rt.FileURL(url), storageOptions, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return scriptAdopt(_id), nil
 }
 
-// NewScriptWithScriptDataDescriptorFromURLLanguageInstanceUsingStorageOptionsError creates a new Script.
-func NewScriptWithScriptDataDescriptorFromURLLanguageInstanceUsingStorageOptionsError(data obj.Object, url string, instance *LanguageInstance, storageOptions StorageOptions) (result *Script, err error) {
+// NewScriptWithScriptDataDescriptorFromURLLanguageInstanceUsingStorageOptions creates a new Script.
+func NewScriptWithScriptDataDescriptorFromURLLanguageInstanceUsingStorageOptions(data obj.Object, url string, instance *LanguageInstance, storageOptions StorageOptions) (result *Script, err error) {
+	defer runtime.KeepAlive(data)
+	defer runtime.KeepAlive(instance)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("OSAScript")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScriptDataDescriptor:fromURL:languageInstance:usingStorageOptions:error:"), objref.IDOf(data), rt.FileURL(url), objref.IDOf(instance), storageOptions, unsafe.Pointer(&_nsErr))
@@ -144,6 +160,7 @@ func NewScriptWithScriptDataDescriptorFromURLLanguageInstanceUsingStorageOptions
 
 // WithLanguage sets the language.
 func (s *Script) WithLanguage(language *Language) *Script {
+	defer runtime.KeepAlive(language)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLanguage:"), objref.IDOf(language))
 	return s
 }
@@ -156,60 +173,82 @@ func (s *Script) WithLanguageInstance(languageInstance unsafe.Pointer) *Script {
 
 // CompileAndReturnError wraps the corresponding Objective-C method.
 func (s *Script) CompileAndReturnError(errorInfo obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(errorInfo)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("compileAndReturnError:"), objref.IDOf(errorInfo))
 	return _r
 }
 
 // ExecuteAndReturnError wraps the corresponding Objective-C method.
-func (s *Script) ExecuteAndReturnError(errorInfo obj.Object) obj.Object {
+func (s *Script) ExecuteAndReturnError(errorInfo obj.Object) *foundation.AppleEventDescriptor {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(errorInfo)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("executeAndReturnError:"), objref.IDOf(errorInfo))
-	return obj.Wrap(_r)
+	return foundation.AppleEventDescriptorFromID(_r)
 }
 
 // ExecuteAppleEventError wraps the corresponding Objective-C method.
-func (s *Script) ExecuteAppleEventError(event obj.Object, errorInfo obj.Object) obj.Object {
+func (s *Script) ExecuteAppleEventError(event obj.Object, errorInfo obj.Object) *foundation.AppleEventDescriptor {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(event)
+	defer runtime.KeepAlive(errorInfo)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("executeAppleEvent:error:"), objref.IDOf(event), objref.IDOf(errorInfo))
-	return obj.Wrap(_r)
+	return foundation.AppleEventDescriptorFromID(_r)
 }
 
 // ExecuteAndReturnDisplayValueError wraps the corresponding Objective-C method.
-func (s *Script) ExecuteAndReturnDisplayValueError(displayValue obj.Object, errorInfo obj.Object) obj.Object {
+func (s *Script) ExecuteAndReturnDisplayValueError(displayValue obj.Object, errorInfo obj.Object) *foundation.AppleEventDescriptor {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(displayValue)
+	defer runtime.KeepAlive(errorInfo)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("executeAndReturnDisplayValue:error:"), objref.IDOf(displayValue), objref.IDOf(errorInfo))
-	return obj.Wrap(_r)
+	return foundation.AppleEventDescriptorFromID(_r)
 }
 
 // ExecuteHandlerWithNameArgumentsError wraps the corresponding Objective-C method.
-func (s *Script) ExecuteHandlerWithNameArgumentsError(name string, arguments obj.Object, errorInfo obj.Object) obj.Object {
+func (s *Script) ExecuteHandlerWithNameArgumentsError(name string, arguments obj.Object, errorInfo obj.Object) *foundation.AppleEventDescriptor {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(arguments)
+	defer runtime.KeepAlive(errorInfo)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("executeHandlerWithName:arguments:error:"), purego.NSString(name), objref.IDOf(arguments), objref.IDOf(errorInfo))
-	return obj.Wrap(_r)
+	return foundation.AppleEventDescriptorFromID(_r)
 }
 
 // RichTextFromDescriptor wraps the corresponding Objective-C method.
-func (s *Script) RichTextFromDescriptor(descriptor obj.Object) obj.Object {
+func (s *Script) RichTextFromDescriptor(descriptor obj.Object) *foundation.AttributedString {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("richTextFromDescriptor:"), objref.IDOf(descriptor))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // WriteToURLOfTypeError writes to URL of type error.
 func (s *Script) WriteToURLOfTypeError(url string, type_ string, errorInfo obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(errorInfo)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("writeToURL:ofType:error:"), rt.FileURL(url), purego.NSString(type_), objref.IDOf(errorInfo))
 	return _r
 }
 
 // WriteToURLOfTypeUsingStorageOptionsError writes to URL of type using storage options error.
 func (s *Script) WriteToURLOfTypeUsingStorageOptionsError(url string, type_ string, storageOptions StorageOptions, errorInfo obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(errorInfo)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("writeToURL:ofType:usingStorageOptions:error:"), rt.FileURL(url), purego.NSString(type_), storageOptions, objref.IDOf(errorInfo))
 	return _r
 }
 
 // CompiledDataForTypeUsingStorageOptionsError wraps the corresponding Objective-C method.
-func (s *Script) CompiledDataForTypeUsingStorageOptionsError(type_ string, storageOptions StorageOptions, errorInfo obj.Object) obj.Object {
+func (s *Script) CompiledDataForTypeUsingStorageOptionsError(type_ string, storageOptions StorageOptions, errorInfo obj.Object) []byte {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(errorInfo)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("compiledDataForType:usingStorageOptions:error:"), purego.NSString(type_), storageOptions, objref.IDOf(errorInfo))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Source returns the source.
 func (s *Script) Source() string {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("source"))
 	if _r == 0 {
 		return ""
@@ -218,25 +257,29 @@ func (s *Script) Source() string {
 }
 
 // URL returns the URL.
-func (s *Script) URL() obj.Object {
+func (s *Script) URL() string {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Language returns the language.
 func (s *Script) Language() *Language {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("language"))
 	return LanguageFromID(_r)
 }
 
 // IsCompiled reports whether the object is compiled.
 func (s *Script) IsCompiled() bool {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isCompiled"))
 	return _r
 }
 
 // RichTextSource returns the rich text source.
-func (s *Script) RichTextSource() obj.Object {
+func (s *Script) RichTextSource() *foundation.AttributedString {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("richTextSource"))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }

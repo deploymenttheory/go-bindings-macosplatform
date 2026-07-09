@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,14 @@ func NewMetricPlayerItemVariantSwitchEvent() *MetricPlayerItemVariantSwitchEvent
 
 // FromVariant returns the variant before the switch. If no value is available, returns nil
 func (mpivse *MetricPlayerItemVariantSwitchEvent) FromVariant() *AssetVariant {
+	defer runtime.KeepAlive(mpivse)
 	_r := objc.Send[objc.ID](objref.IDOf(mpivse), objc.RegisterName("fromVariant"))
 	return AssetVariantFromID(_r)
 }
 
 // ToVariant returns the variant after the switch.
 func (mpivse *MetricPlayerItemVariantSwitchEvent) ToVariant() *AssetVariant {
+	defer runtime.KeepAlive(mpivse)
 	_r := objc.Send[objc.ID](objref.IDOf(mpivse), objc.RegisterName("toVariant"))
 	return AssetVariantFromID(_r)
 }
@@ -68,30 +72,35 @@ func (mpivse *MetricPlayerItemVariantSwitchEvent) ToVariant() *AssetVariant {
 //
 // LoadedTimeRanges returns the collection as a Go slice.
 func (mpivse *MetricPlayerItemVariantSwitchEvent) LoadedTimeRanges() []obj.Object {
+	defer runtime.KeepAlive(mpivse)
 	_arr := objc.Send[objc.ID](objref.IDOf(mpivse), objc.RegisterName("loadedTimeRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // VideoRendition represents the currently selected video rendition's identifiers. Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 func (mpivse *MetricPlayerItemVariantSwitchEvent) VideoRendition() *MetricMediaRendition {
+	defer runtime.KeepAlive(mpivse)
 	_r := objc.Send[objc.ID](objref.IDOf(mpivse), objc.RegisterName("videoRendition"))
 	return MetricMediaRenditionFromID(_r)
 }
 
 // AudioRendition represents the currently selected video rendition's identifiers. Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 func (mpivse *MetricPlayerItemVariantSwitchEvent) AudioRendition() *MetricMediaRendition {
+	defer runtime.KeepAlive(mpivse)
 	_r := objc.Send[objc.ID](objref.IDOf(mpivse), objc.RegisterName("audioRendition"))
 	return MetricMediaRenditionFromID(_r)
 }
 
 // SubtitleRendition represents the currently selected audio rendition's identifiers. Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 func (mpivse *MetricPlayerItemVariantSwitchEvent) SubtitleRendition() *MetricMediaRendition {
+	defer runtime.KeepAlive(mpivse)
 	_r := objc.Send[objc.ID](objref.IDOf(mpivse), objc.RegisterName("subtitleRendition"))
 	return MetricMediaRenditionFromID(_r)
 }
 
 // DidSucceed reports whether returns if the switch did succeed.
 func (mpivse *MetricPlayerItemVariantSwitchEvent) DidSucceed() bool {
+	defer runtime.KeepAlive(mpivse)
 	_r := objc.Send[bool](objref.IDOf(mpivse), objc.RegisterName("didSucceed"))
 	return _r
 }

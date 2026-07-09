@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func functionStitchingInputNodeAdopt(id objc.ID) *FunctionStitchingInputNode {
 
 // Description returns the object's -description text.
 func (fsin *FunctionStitchingInputNode) Description() string {
+	defer runtime.KeepAlive(fsin)
 	return rt.Description(objref.IDOf(fsin))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fsin *FunctionStitchingInputNode) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fsin)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fsin), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fsin *FunctionStitchingInputNode) IsKind(className string) bool {
+	defer runtime.KeepAlive(fsin)
 	return rt.IsKind(objref.IDOf(fsin), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fsin *FunctionStitchingInputNode) String() string {
+	defer runtime.KeepAlive(fsin)
 	return rt.Description(objref.IDOf(fsin))
 }
 
@@ -81,6 +88,7 @@ func (fsin *FunctionStitchingInputNode) WithArgumentIndex(argumentIndex int) *Fu
 
 // ArgumentIndex returns the argument index.
 func (fsin *FunctionStitchingInputNode) ArgumentIndex() int {
+	defer runtime.KeepAlive(fsin)
 	_r := objc.Send[int](objref.IDOf(fsin), objc.RegisterName("argumentIndex"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func (mce *MIDIChannelEvent) WithChannel(channel int) *MIDIChannelEvent {
 
 // Channel returns the channel.
 func (mce *MIDIChannelEvent) Channel() int {
+	defer runtime.KeepAlive(mce)
 	_r := objc.Send[int](objref.IDOf(mce), objc.RegisterName("channel"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func virtioSoundDeviceStreamConfigurationAdopt(id objc.ID) *VirtioSoundDeviceStr
 
 // Description returns the object's -description text.
 func (vsdsc *VirtioSoundDeviceStreamConfiguration) Description() string {
+	defer runtime.KeepAlive(vsdsc)
 	return rt.Description(objref.IDOf(vsdsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vsdsc *VirtioSoundDeviceStreamConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vsdsc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vsdsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vsdsc *VirtioSoundDeviceStreamConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(vsdsc)
 	return rt.IsKind(objref.IDOf(vsdsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vsdsc *VirtioSoundDeviceStreamConfiguration) String() string {
+	defer runtime.KeepAlive(vsdsc)
 	return rt.Description(objref.IDOf(vsdsc))
 }
 

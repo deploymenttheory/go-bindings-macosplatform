@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func dictionaryConstraintAdopt(id objc.ID) *DictionaryConstraint {
 
 // Description returns the object's -description text.
 func (dc *DictionaryConstraint) Description() string {
+	defer runtime.KeepAlive(dc)
 	return rt.Description(objref.IDOf(dc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dc *DictionaryConstraint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dc *DictionaryConstraint) IsKind(className string) bool {
+	defer runtime.KeepAlive(dc)
 	return rt.IsKind(objref.IDOf(dc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dc *DictionaryConstraint) String() string {
+	defer runtime.KeepAlive(dc)
 	return rt.Description(objref.IDOf(dc))
 }
 
@@ -74,6 +81,7 @@ func NewDictionaryConstraint() *DictionaryConstraint {
 
 // KeyType returns the key type.
 func (dc *DictionaryConstraint) KeyType() FeatureType {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[FeatureType](objref.IDOf(dc), objc.RegisterName("keyType"))
 	return _r
 }

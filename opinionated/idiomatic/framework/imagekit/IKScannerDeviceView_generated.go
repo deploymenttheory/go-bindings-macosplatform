@@ -5,8 +5,11 @@
 package imagekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -45,22 +48,27 @@ func scannerDeviceViewAdopt(id objc.ID) *ScannerDeviceView {
 
 // Description returns the object's -description text.
 func (sdv *ScannerDeviceView) Description() string {
+	defer runtime.KeepAlive(sdv)
 	return rt.Description(objref.IDOf(sdv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sdv *ScannerDeviceView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sdv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sdv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sdv *ScannerDeviceView) IsKind(className string) bool {
+	defer runtime.KeepAlive(sdv)
 	return rt.IsKind(objref.IDOf(sdv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sdv *ScannerDeviceView) String() string {
+	defer runtime.KeepAlive(sdv)
 	return rt.Description(objref.IDOf(sdv))
 }
 
@@ -76,8 +84,21 @@ func NewScannerDeviceView() *ScannerDeviceView {
 	return _mainthread0
 }
 
+// WithDelegate sets delegate of the IKScannerDeviceView.
+func (sdv *ScannerDeviceView) WithDelegate(delegate ScannerDeviceViewDelegate) *ScannerDeviceView {
+	_shim := newScannerDeviceViewDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(sdv), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdv), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return sdv
+}
+
 // WithScannerDevice sets the scanner device.
 func (sdv *ScannerDeviceView) WithScannerDevice(scannerDevice obj.Object) *ScannerDeviceView {
+	defer runtime.KeepAlive(scannerDevice)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setScannerDevice:"), objref.IDOf(scannerDevice))
 	})
@@ -174,6 +195,7 @@ func (sdv *ScannerDeviceView) WithPostProcessApplication(postProcessApplication 
 
 // ScannerDevice returns the scanner device.
 func (sdv *ScannerDeviceView) ScannerDevice() obj.Object {
+	defer runtime.KeepAlive(sdv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -187,6 +209,7 @@ func (sdv *ScannerDeviceView) ScannerDevice() obj.Object {
 
 // Mode returns current display mode.
 func (sdv *ScannerDeviceView) Mode() ScannerDeviceViewDisplayMode {
+	defer runtime.KeepAlive(sdv)
 	var _mainthread0 ScannerDeviceViewDisplayMode
 	purego.Main(func() {
 		_mainthread0 = func() ScannerDeviceViewDisplayMode {
@@ -200,6 +223,7 @@ func (sdv *ScannerDeviceView) Mode() ScannerDeviceViewDisplayMode {
 
 // HasDisplayModeSimple reports whether support a simple scanning UI.
 func (sdv *ScannerDeviceView) HasDisplayModeSimple() bool {
+	defer runtime.KeepAlive(sdv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -213,6 +237,7 @@ func (sdv *ScannerDeviceView) HasDisplayModeSimple() bool {
 
 // HasDisplayModeAdvanced reports whether support advanced scanning UI.
 func (sdv *ScannerDeviceView) HasDisplayModeAdvanced() bool {
+	defer runtime.KeepAlive(sdv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -226,6 +251,7 @@ func (sdv *ScannerDeviceView) HasDisplayModeAdvanced() bool {
 
 // TransferMode returns transfer mode either file based - or - in memory.
 func (sdv *ScannerDeviceView) TransferMode() ScannerDeviceViewTransferMode {
+	defer runtime.KeepAlive(sdv)
 	var _mainthread0 ScannerDeviceViewTransferMode
 	purego.Main(func() {
 		_mainthread0 = func() ScannerDeviceViewTransferMode {
@@ -239,6 +265,7 @@ func (sdv *ScannerDeviceView) TransferMode() ScannerDeviceViewTransferMode {
 
 // ScanControlLabel returns label for the 'Scan' control.
 func (sdv *ScannerDeviceView) ScanControlLabel() string {
+	defer runtime.KeepAlive(sdv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -255,6 +282,7 @@ func (sdv *ScannerDeviceView) ScanControlLabel() string {
 
 // OverviewControlLabel returns label for the 'Overview' control.
 func (sdv *ScannerDeviceView) OverviewControlLabel() string {
+	defer runtime.KeepAlive(sdv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -271,6 +299,7 @@ func (sdv *ScannerDeviceView) OverviewControlLabel() string {
 
 // DisplaysDownloadsDirectoryControl reports whether show a downloads directory control.
 func (sdv *ScannerDeviceView) DisplaysDownloadsDirectoryControl() bool {
+	defer runtime.KeepAlive(sdv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -283,12 +312,13 @@ func (sdv *ScannerDeviceView) DisplaysDownloadsDirectoryControl() bool {
 }
 
 // DownloadsDirectory returns downloads directory.
-func (sdv *ScannerDeviceView) DownloadsDirectory() obj.Object {
-	var _mainthread0 obj.Object
+func (sdv *ScannerDeviceView) DownloadsDirectory() string {
+	defer runtime.KeepAlive(sdv)
+	var _mainthread0 string
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() string {
 			_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("downloadsDirectory"))
-			return obj.Wrap(_r)
+			return rt.URLString(_r)
 		}()
 	})
 	return _mainthread0
@@ -297,6 +327,7 @@ func (sdv *ScannerDeviceView) DownloadsDirectory() obj.Object {
 
 // DocumentName returns document name.
 func (sdv *ScannerDeviceView) DocumentName() string {
+	defer runtime.KeepAlive(sdv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -313,6 +344,7 @@ func (sdv *ScannerDeviceView) DocumentName() string {
 
 // DisplaysPostProcessApplicationControl reports whether show a postprocessing application control.
 func (sdv *ScannerDeviceView) DisplaysPostProcessApplicationControl() bool {
+	defer runtime.KeepAlive(sdv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -325,12 +357,13 @@ func (sdv *ScannerDeviceView) DisplaysPostProcessApplicationControl() bool {
 }
 
 // PostProcessApplication returns postprocessing application.
-func (sdv *ScannerDeviceView) PostProcessApplication() obj.Object {
-	var _mainthread0 obj.Object
+func (sdv *ScannerDeviceView) PostProcessApplication() string {
+	defer runtime.KeepAlive(sdv)
+	var _mainthread0 string
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() string {
 			_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("postProcessApplication"))
-			return obj.Wrap(_r)
+			return rt.URLString(_r)
 		}()
 	})
 	return _mainthread0

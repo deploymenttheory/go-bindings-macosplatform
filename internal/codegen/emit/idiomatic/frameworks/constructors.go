@@ -4,11 +4,11 @@ package idiofw
 
 import (
 	"fmt"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"io"
 	"maps"
 	"strings"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -92,23 +92,59 @@ func buildConstructorList(
 	// Every class gets a plain +new constructor unless it has a param-init that
 	// already covers the no-arg case.
 	if !hasExplicitParamInit {
-		return append(
+		ctors = append(
 			[]constructorModel{buildNewConstructor(className, goTypeName, rawPkgAlias)},
 			ctors...)
+		repairConstructorNames(ctors)
+		return ctors
 	}
 	// Still provide a plain constructor if there is a class-specific plain init too.
 	for _, method := range class.Methods {
 		if method.IsInit && len(method.Params) == 0 && !method.Availability.IsUnavailable {
-			return append(
+			ctors = append(
 				[]constructorModel{buildNewConstructor(className, goTypeName, rawPkgAlias)},
 				ctors...)
+			break
 		}
 	}
+	repairConstructorNames(ctors)
 	return ctors
 }
 
+// repairConstructorNames drops the trailing error label from an error-returning
+// constructor's name — the (result, err) signature already says it
+// (NewStringWithContentsOfFileEncodingError → NewStringWithContentsOfFileEncoding).
+// Same free-name discipline as repairMethodNames: a strip applies only when the
+// shorter name is a free exported identifier within this class's constructor
+// set, and curated sidecar names are never touched.
+func repairConstructorNames(ctors []constructorModel) {
+	taken := make(map[string]bool, len(ctors))
+	for _, c := range ctors {
+		taken[c.goName] = true
+	}
+	for i := range ctors {
+		if !ctors[i].hasNSError || ctors[i].nameCurated {
+			continue
+		}
+		for _, suffix := range []string{"AndReturnError", "WithError", "Error"} {
+			stripped, ok := strings.CutSuffix(ctors[i].goName, suffix)
+			if !ok {
+				continue
+			}
+			if stripped != "" && stripped[0] >= 'A' && stripped[0] <= 'Z' && !taken[stripped] {
+				taken[stripped] = true
+				ctors[i].goName = stripped
+			}
+			break
+		}
+	}
+}
+
 type constructorModel struct {
-	goName          string
+	goName string
+	// nameCurated marks a goName assigned by the idiomatic.json sidecar; the
+	// error-label repair pass leaves such a name untouched.
+	nameCurated     bool
 	doc             string // Apple/header documentation for the underlying init
 	rawInitGoName   string // "" = use +new
 	rawInitSelector string // ObjC selector, e.g. "initWithURL:readOnly:error:"
@@ -173,11 +209,25 @@ func buildParamConstructor(
 			return nil
 		}
 		maps.Copy(extraImports, imports)
-		params = append(params, constructorParamModel{goName: pName, goType: sig, rawExpression: argExpr})
+		if strings.HasPrefix(argExpr, "objref.IDOf(") {
+			// The wrapper argument's pointer is read before the init send; keep
+			// the wrapper alive across the call (defer runtime.KeepAlive).
+			extraImports["runtime"] = "runtime"
+		}
+		params = append(
+			params,
+			constructorParamModel{goName: pName, goType: sig, rawExpression: argExpr},
+		)
 	}
 
+	goName := applyInitialisms("New" + goTypeName + strings.TrimPrefix(rawInit, "Init"))
+	nameCurated := false
+	if curated, ok := fc.idio.MethodGoName(ctx.ClassName, method.Selector, false); ok {
+		goName, nameCurated = curated, true
+	}
 	return &constructorModel{
-		goName:          applyInitialisms("New" + goTypeName + strings.TrimPrefix(rawInit, "Init")),
+		goName:          goName,
+		nameCurated:     nameCurated,
 		rawInitGoName:   rawInit,
 		rawInitSelector: method.Selector,
 		params:          params,
@@ -219,6 +269,13 @@ func writeConstructor(
 		HasNSError: c.hasNSError,
 		MainThread: c.mainThread,
 	}
+	for _, param := range c.params {
+		// A wrapper argument passed by pointer must outlive the init send
+		// (defer runtime.KeepAlive); collections retain their elements.
+		if strings.HasPrefix(param.rawExpression, "objref.IDOf(") {
+			view.KeepAlive = append(view.KeepAlive, param.goName)
+		}
+	}
 	if !view.IsPlainNew {
 		// alloc + send the init selector directly via objc.Send[objc.ID],
 		// bypassing the raw init method's return type (objc.ID or *T).
@@ -253,6 +310,10 @@ type constructorView struct {
 	HasNSError  bool
 	MainThread  bool   // wrap alloc/init in purego.Main (@MainActor class)
 	SendAllArgs string // alloc-init path: `_alloc, objc.RegisterName("sel"), …`
+	// KeepAlive names wrapper arguments kept alive until the constructor
+	// returns (defer runtime.KeepAlive) so the collector cannot finalize them
+	// mid-send.
+	KeepAlive []string
 }
 
 // ctorParamSendExpr returns the expression for passing a constructor parameter

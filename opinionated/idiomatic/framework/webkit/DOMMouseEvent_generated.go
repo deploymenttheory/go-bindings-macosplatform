@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -57,90 +59,105 @@ func (dme *DOMMouseEvent) WithCancelBubble(cancelBubble bool) *DOMMouseEvent {
 
 // ScreenX returns the screen x.
 func (dme *DOMMouseEvent) ScreenX() int {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("screenX"))
 	return _r
 }
 
 // ScreenY returns the screen y.
 func (dme *DOMMouseEvent) ScreenY() int {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("screenY"))
 	return _r
 }
 
 // ClientX returns the client x.
 func (dme *DOMMouseEvent) ClientX() int {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("clientX"))
 	return _r
 }
 
 // ClientY returns the client y.
 func (dme *DOMMouseEvent) ClientY() int {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("clientY"))
 	return _r
 }
 
 // CtrlKey wraps the corresponding Objective-C method.
 func (dme *DOMMouseEvent) CtrlKey() bool {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[bool](objref.IDOf(dme), objc.RegisterName("ctrlKey"))
 	return _r
 }
 
 // ShiftKey wraps the corresponding Objective-C method.
 func (dme *DOMMouseEvent) ShiftKey() bool {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[bool](objref.IDOf(dme), objc.RegisterName("shiftKey"))
 	return _r
 }
 
 // AltKey wraps the corresponding Objective-C method.
 func (dme *DOMMouseEvent) AltKey() bool {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[bool](objref.IDOf(dme), objc.RegisterName("altKey"))
 	return _r
 }
 
 // MetaKey wraps the corresponding Objective-C method.
 func (dme *DOMMouseEvent) MetaKey() bool {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[bool](objref.IDOf(dme), objc.RegisterName("metaKey"))
 	return _r
 }
 
 // Button returns the button.
 func (dme *DOMMouseEvent) Button() int16 {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[int16](objref.IDOf(dme), objc.RegisterName("button"))
 	return _r
 }
 
 // OffsetX returns the offset x.
 func (dme *DOMMouseEvent) OffsetX() int {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("offsetX"))
 	return _r
 }
 
 // OffsetY returns the offset y.
 func (dme *DOMMouseEvent) OffsetY() int {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("offsetY"))
 	return _r
 }
 
 // X returns the x.
 func (dme *DOMMouseEvent) X() int {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("x"))
 	return _r
 }
 
 // Y returns the y.
 func (dme *DOMMouseEvent) Y() int {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("y"))
 	return _r
 }
 
 // FromElement returns the from element.
 func (dme *DOMMouseEvent) FromElement() *DOMNode {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("fromElement"))
 	return DOMNodeFromID(_r)
 }
 
 // ToElement returns the to element.
 func (dme *DOMMouseEvent) ToElement() *DOMNode {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("toElement"))
 	return DOMNodeFromID(_r)
 }

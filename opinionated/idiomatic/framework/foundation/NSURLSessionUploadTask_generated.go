@@ -6,11 +6,14 @@ package foundation
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,8 +58,19 @@ func NewURLSessionUploadTask() *URLSessionUploadTask {
 	return uRLSessionUploadTaskAdopt(_id)
 }
 
+// WithDelegate sets the delegate.
+func (usut *URLSessionUploadTask) WithDelegate(delegate URLSessionTaskDelegate) *URLSessionUploadTask {
+	_shim := newURLSessionTaskDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(usut), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(usut), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return usut
+}
+
 // WithEarliestBeginDate sets the earliest begin date.
 func (usut *URLSessionUploadTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionUploadTask {
+	defer runtime.KeepAlive(earliestBeginDate)
 	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
 	return usut
 }
@@ -75,6 +89,7 @@ func (usut *URLSessionUploadTask) WithCountOfBytesClientExpectsToReceive(countOf
 
 // WithTaskDescription sets the task description.
 func (usut *URLSessionUploadTask) WithTaskDescription(taskDescription StringProvider) *URLSessionUploadTask {
+	defer runtime.KeepAlive(taskDescription)
 	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
 	return usut
 }
@@ -98,8 +113,8 @@ func (usut *URLSessionUploadTask) WithObservationInfo(observationInfo unsafe.Poi
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (usut *URLSessionUploadTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionUploadTask {
-	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (usut *URLSessionUploadTask) WithScriptingProperties(scriptingProperties map[string]obj.Object) *URLSessionUploadTask {
+	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return usut
 }
 
@@ -107,6 +122,7 @@ func (usut *URLSessionUploadTask) WithScriptingProperties(scriptingProperties ob
 //
 // CancelByProducingResumeData blocks until the operation completes or ctx is cancelled.
 func (usut *URLSessionUploadTask) CancelByProducingResumeData(ctx context.Context) (result *Data, err error) {
+	defer runtime.KeepAlive(usut)
 	type _result struct {
 		val *Data
 		err error

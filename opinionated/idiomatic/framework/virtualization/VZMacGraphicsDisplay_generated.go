@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewMacGraphicsDisplay() *MacGraphicsDisplay {
 
 // PixelsPerInch returns the pixels per inch.
 func (mgd *MacGraphicsDisplay) PixelsPerInch() int {
+	defer runtime.KeepAlive(mgd)
 	_r := objc.Send[int](objref.IDOf(mgd), objc.RegisterName("pixelsPerInch"))
 	return _r
 }

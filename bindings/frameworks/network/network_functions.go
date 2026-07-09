@@ -452,13 +452,13 @@ var (
 )
 
 // C function: nw_advertise_descriptor_copy_txt_record_object
-func NwAdvertiseDescriptorCopyTxtRecordObject(advertise_descriptor *foundation.NSObject) unsafe.Pointer {
-	return _nw_advertise_descriptor_copy_txt_record_object(advertise_descriptor.Ptr())
+func NwAdvertiseDescriptorCopyTxtRecordObject(advertiseDescriptor *foundation.NSObject) unsafe.Pointer {
+	return _nw_advertise_descriptor_copy_txt_record_object(advertiseDescriptor.Ptr())
 }
 
 // C function: nw_advertise_descriptor_create_application_service
-func NwAdvertiseDescriptorCreateApplicationService(application_service_name string) unsafe.Pointer {
-	return _nw_advertise_descriptor_create_application_service(application_service_name)
+func NwAdvertiseDescriptorCreateApplicationService(applicationServiceName string) unsafe.Pointer {
+	return _nw_advertise_descriptor_create_application_service(applicationServiceName)
 }
 
 // C function: nw_advertise_descriptor_create_bonjour_service
@@ -467,33 +467,33 @@ func NwAdvertiseDescriptorCreateBonjourService(name string, type_ string, domain
 }
 
 // C function: nw_advertise_descriptor_get_application_service_name
-func NwAdvertiseDescriptorGetApplicationServiceName(advertise_descriptor *foundation.NSObject) string {
-	return _nw_advertise_descriptor_get_application_service_name(advertise_descriptor.Ptr())
+func NwAdvertiseDescriptorGetApplicationServiceName(advertiseDescriptor *foundation.NSObject) string {
+	return _nw_advertise_descriptor_get_application_service_name(advertiseDescriptor.Ptr())
 }
 
 // C function: nw_advertise_descriptor_get_no_auto_rename
-func NwAdvertiseDescriptorGetNoAutoRename(advertise_descriptor *foundation.NSObject) bool {
-	return _nw_advertise_descriptor_get_no_auto_rename(advertise_descriptor.Ptr())
+func NwAdvertiseDescriptorGetNoAutoRename(advertiseDescriptor *foundation.NSObject) bool {
+	return _nw_advertise_descriptor_get_no_auto_rename(advertiseDescriptor.Ptr())
 }
 
 // C function: nw_advertise_descriptor_set_no_auto_rename
-func NwAdvertiseDescriptorSetNoAutoRename(advertise_descriptor *foundation.NSObject, no_auto_rename bool) {
-	_nw_advertise_descriptor_set_no_auto_rename(advertise_descriptor.Ptr(), no_auto_rename)
+func NwAdvertiseDescriptorSetNoAutoRename(advertiseDescriptor *foundation.NSObject, noAutoRename bool) {
+	_nw_advertise_descriptor_set_no_auto_rename(advertiseDescriptor.Ptr(), noAutoRename)
 }
 
 // C function: nw_advertise_descriptor_set_txt_record
-func NwAdvertiseDescriptorSetTxtRecord(advertise_descriptor *foundation.NSObject, txt_record unsafe.Pointer, txt_length uint) {
-	_nw_advertise_descriptor_set_txt_record(advertise_descriptor.Ptr(), txt_record, txt_length)
+func NwAdvertiseDescriptorSetTxtRecord(advertiseDescriptor *foundation.NSObject, txtRecord unsafe.Pointer, txtLength uint) {
+	_nw_advertise_descriptor_set_txt_record(advertiseDescriptor.Ptr(), txtRecord, txtLength)
 }
 
 // C function: nw_advertise_descriptor_set_txt_record_object
-func NwAdvertiseDescriptorSetTxtRecordObject(advertise_descriptor *foundation.NSObject, txt_record *foundation.NSObject) {
-	_nw_advertise_descriptor_set_txt_record_object(advertise_descriptor.Ptr(), txt_record.Ptr())
+func NwAdvertiseDescriptorSetTxtRecordObject(advertiseDescriptor *foundation.NSObject, txtRecord *foundation.NSObject) {
+	_nw_advertise_descriptor_set_txt_record_object(advertiseDescriptor.Ptr(), txtRecord.Ptr())
 }
 
 // C function: nw_browse_descriptor_create_application_service
-func NwBrowseDescriptorCreateApplicationService(application_service_name string) unsafe.Pointer {
-	return _nw_browse_descriptor_create_application_service(application_service_name)
+func NwBrowseDescriptorCreateApplicationService(applicationServiceName string) unsafe.Pointer {
+	return _nw_browse_descriptor_create_application_service(applicationServiceName)
 }
 
 // C function: nw_browse_descriptor_create_bonjour_service
@@ -522,8 +522,8 @@ func NwBrowseDescriptorGetIncludeTxtRecord(descriptor *foundation.NSObject) bool
 }
 
 // C function: nw_browse_descriptor_set_include_txt_record
-func NwBrowseDescriptorSetIncludeTxtRecord(descriptor *foundation.NSObject, include_txt_record bool) {
-	_nw_browse_descriptor_set_include_txt_record(descriptor.Ptr(), include_txt_record)
+func NwBrowseDescriptorSetIncludeTxtRecord(descriptor *foundation.NSObject, includeTxtRecord bool) {
+	_nw_browse_descriptor_set_include_txt_record(descriptor.Ptr(), includeTxtRecord)
 }
 
 // C function: nw_browse_result_copy_endpoint
@@ -552,8 +552,8 @@ func NwBrowseResultEnumerateInterfaces(result *foundation.NSObject, enumerator f
 }
 
 // C function: nw_browse_result_get_changes
-func NwBrowseResultGetChanges(old_result *foundation.NSObject, new_result *foundation.NSObject) uint64 {
-	return _nw_browse_result_get_changes(old_result.Ptr(), new_result.Ptr())
+func NwBrowseResultGetChanges(oldResult *foundation.NSObject, newResult *foundation.NSObject) uint64 {
+	return _nw_browse_result_get_changes(oldResult.Ptr(), newResult.Ptr())
 }
 
 // C function: nw_browse_result_get_interfaces_count
@@ -605,18 +605,18 @@ func NwBrowserSetQueue(browser *foundation.NSObject, queue *foundation.NSObject)
 }
 
 // C function: nw_browser_set_state_changed_handler
-func NwBrowserSetStateChangedHandler(browser *foundation.NSObject, state_changed_handler func(avrouting.Nw_browser_state_t, *foundation.NSObject)) {
-	var __block_state_changed_handler objc.Block
-	if state_changed_handler != nil {
-		__block_state_changed_handler = objc.NewBlock(func(_ objc.Block, blockParam0 avrouting.Nw_browser_state_t, blockParam1 objc.ID) {
+func NwBrowserSetStateChangedHandler(browser *foundation.NSObject, stateChangedHandler func(avrouting.Nw_browser_state_t, *foundation.NSObject)) {
+	var __block_stateChangedHandler objc.Block
+	if stateChangedHandler != nil {
+		__block_stateChangedHandler = objc.NewBlock(func(_ objc.Block, blockParam0 avrouting.Nw_browser_state_t, blockParam1 objc.ID) {
 			if blockParam1 != 0 {
 				blockParam1.Send(objc.RegisterName("retain"))
 			}
-			state_changed_handler(blockParam0, foundation.NSObjectFromID(blockParam1))
+			stateChangedHandler(blockParam0, foundation.NSObjectFromID(blockParam1))
 		})
-		defer __block_state_changed_handler.Release()
+		defer __block_stateChangedHandler.Release()
 	}
-	_nw_browser_set_state_changed_handler(browser.Ptr(), __block_state_changed_handler)
+	_nw_browser_set_state_changed_handler(browser.Ptr(), __block_stateChangedHandler)
 }
 
 // C function: nw_browser_start
@@ -625,30 +625,30 @@ func NwBrowserStart(browser *foundation.NSObject) {
 }
 
 // C function: nw_connection_access_establishment_report
-func NwConnectionAccessEstablishmentReport(connection *foundation.NSObject, queue *foundation.NSObject, access_block func(*foundation.NSObject)) {
-	var __block_access_block objc.Block
-	if access_block != nil {
-		__block_access_block = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+func NwConnectionAccessEstablishmentReport(connection *foundation.NSObject, queue *foundation.NSObject, accessBlock func(*foundation.NSObject)) {
+	var __block_accessBlock objc.Block
+	if accessBlock != nil {
+		__block_accessBlock = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			access_block(foundation.NSObjectFromID(blockParam0))
+			accessBlock(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_access_block.Release()
+		defer __block_accessBlock.Release()
 	}
-	_nw_connection_access_establishment_report(connection.Ptr(), queue.Ptr(), __block_access_block)
+	_nw_connection_access_establishment_report(connection.Ptr(), queue.Ptr(), __block_accessBlock)
 }
 
 // C function: nw_connection_batch
-func NwConnectionBatch(connection *foundation.NSObject, batch_block func()) {
-	var __block_batch_block objc.Block
-	if batch_block != nil {
-		__block_batch_block = objc.NewBlock(func(_ objc.Block) {
-			batch_block()
+func NwConnectionBatch(connection *foundation.NSObject, batchBlock func()) {
+	var __block_batchBlock objc.Block
+	if batchBlock != nil {
+		__block_batchBlock = objc.NewBlock(func(_ objc.Block) {
+			batchBlock()
 		})
-		defer __block_batch_block.Release()
+		defer __block_batchBlock.Release()
 	}
-	_nw_connection_batch(connection.Ptr(), __block_batch_block)
+	_nw_connection_batch(connection.Ptr(), __block_batchBlock)
 }
 
 // C function: nw_connection_cancel
@@ -755,13 +755,13 @@ func NwConnectionGroupCopyRemoteEndpointForMessage(group *foundation.NSObject, c
 }
 
 // C function: nw_connection_group_create
-func NwConnectionGroupCreate(group_descriptor *foundation.NSObject, parameters *foundation.NSObject) unsafe.Pointer {
-	return _nw_connection_group_create(group_descriptor.Ptr(), parameters.Ptr())
+func NwConnectionGroupCreate(groupDescriptor *foundation.NSObject, parameters *foundation.NSObject) unsafe.Pointer {
+	return _nw_connection_group_create(groupDescriptor.Ptr(), parameters.Ptr())
 }
 
 // C function: nw_connection_group_extract_connection
-func NwConnectionGroupExtractConnection(group *foundation.NSObject, endpoint *foundation.NSObject, protocol_options *foundation.NSObject) unsafe.Pointer {
-	return _nw_connection_group_extract_connection(group.Ptr(), endpoint.Ptr(), protocol_options.Ptr())
+func NwConnectionGroupExtractConnection(group *foundation.NSObject, endpoint *foundation.NSObject, protocolOptions *foundation.NSObject) unsafe.Pointer {
+	return _nw_connection_group_extract_connection(group.Ptr(), endpoint.Ptr(), protocolOptions.Ptr())
 }
 
 // C function: nw_connection_group_extract_connection_for_message
@@ -775,8 +775,8 @@ func NwConnectionGroupReinsertExtractedConnection(group *foundation.NSObject, co
 }
 
 // C function: nw_connection_group_reply
-func NwConnectionGroupReply(group *foundation.NSObject, inbound_message *foundation.NSObject, outbound_message *foundation.NSObject, content *foundation.NSObject) {
-	_nw_connection_group_reply(group.Ptr(), inbound_message.Ptr(), outbound_message.Ptr(), content.Ptr())
+func NwConnectionGroupReply(group *foundation.NSObject, inboundMessage *foundation.NSObject, outboundMessage *foundation.NSObject, content *foundation.NSObject) {
+	_nw_connection_group_reply(group.Ptr(), inboundMessage.Ptr(), outboundMessage.Ptr(), content.Ptr())
 }
 
 // C function: nw_connection_group_send_message
@@ -795,18 +795,18 @@ func NwConnectionGroupSendMessage(group *foundation.NSObject, content *foundatio
 }
 
 // C function: nw_connection_group_set_new_connection_handler
-func NwConnectionGroupSetNewConnectionHandler(group *foundation.NSObject, new_connection_handler func(*foundation.NSObject)) {
-	var __block_new_connection_handler objc.Block
-	if new_connection_handler != nil {
-		__block_new_connection_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+func NwConnectionGroupSetNewConnectionHandler(group *foundation.NSObject, newConnectionHandler func(*foundation.NSObject)) {
+	var __block_newConnectionHandler objc.Block
+	if newConnectionHandler != nil {
+		__block_newConnectionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			new_connection_handler(foundation.NSObjectFromID(blockParam0))
+			newConnectionHandler(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_new_connection_handler.Release()
+		defer __block_newConnectionHandler.Release()
 	}
-	_nw_connection_group_set_new_connection_handler(group.Ptr(), __block_new_connection_handler)
+	_nw_connection_group_set_new_connection_handler(group.Ptr(), __block_newConnectionHandler)
 }
 
 // C function: nw_connection_group_set_queue
@@ -815,36 +815,36 @@ func NwConnectionGroupSetQueue(group *foundation.NSObject, queue *foundation.NSO
 }
 
 // C function: nw_connection_group_set_receive_handler
-func NwConnectionGroupSetReceiveHandler(group *foundation.NSObject, maximum_message_size uint32, reject_oversized_messages bool, receive_handler func(*foundation.NSObject, *foundation.NSObject, bool)) {
-	var __block_receive_handler objc.Block
-	if receive_handler != nil {
-		__block_receive_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID, blockParam2 bool) {
+func NwConnectionGroupSetReceiveHandler(group *foundation.NSObject, maximumMessageSize uint32, rejectOversizedMessages bool, receiveHandler func(*foundation.NSObject, *foundation.NSObject, bool)) {
+	var __block_receiveHandler objc.Block
+	if receiveHandler != nil {
+		__block_receiveHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID, blockParam2 bool) {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
 			if blockParam1 != 0 {
 				blockParam1.Send(objc.RegisterName("retain"))
 			}
-			receive_handler(foundation.NSObjectFromID(blockParam0), foundation.NSObjectFromID(blockParam1), blockParam2)
+			receiveHandler(foundation.NSObjectFromID(blockParam0), foundation.NSObjectFromID(blockParam1), blockParam2)
 		})
-		defer __block_receive_handler.Release()
+		defer __block_receiveHandler.Release()
 	}
-	_nw_connection_group_set_receive_handler(group.Ptr(), maximum_message_size, reject_oversized_messages, __block_receive_handler)
+	_nw_connection_group_set_receive_handler(group.Ptr(), maximumMessageSize, rejectOversizedMessages, __block_receiveHandler)
 }
 
 // C function: nw_connection_group_set_state_changed_handler
-func NwConnectionGroupSetStateChangedHandler(group *foundation.NSObject, state_changed_handler func(avrouting.Nw_connection_group_state_t, *foundation.NSObject)) {
-	var __block_state_changed_handler objc.Block
-	if state_changed_handler != nil {
-		__block_state_changed_handler = objc.NewBlock(func(_ objc.Block, blockParam0 avrouting.Nw_connection_group_state_t, blockParam1 objc.ID) {
+func NwConnectionGroupSetStateChangedHandler(group *foundation.NSObject, stateChangedHandler func(avrouting.Nw_connection_group_state_t, *foundation.NSObject)) {
+	var __block_stateChangedHandler objc.Block
+	if stateChangedHandler != nil {
+		__block_stateChangedHandler = objc.NewBlock(func(_ objc.Block, blockParam0 avrouting.Nw_connection_group_state_t, blockParam1 objc.ID) {
 			if blockParam1 != 0 {
 				blockParam1.Send(objc.RegisterName("retain"))
 			}
-			state_changed_handler(blockParam0, foundation.NSObjectFromID(blockParam1))
+			stateChangedHandler(blockParam0, foundation.NSObjectFromID(blockParam1))
 		})
-		defer __block_state_changed_handler.Release()
+		defer __block_stateChangedHandler.Release()
 	}
-	_nw_connection_group_set_state_changed_handler(group.Ptr(), __block_state_changed_handler)
+	_nw_connection_group_set_state_changed_handler(group.Ptr(), __block_stateChangedHandler)
 }
 
 // C function: nw_connection_group_start
@@ -853,7 +853,7 @@ func NwConnectionGroupStart(group *foundation.NSObject) {
 }
 
 // C function: nw_connection_receive
-func NwConnectionReceive(connection *foundation.NSObject, minimum_incomplete_length uint32, maximum_length uint32, completion func(*foundation.NSObject, *foundation.NSObject, bool, *foundation.NSObject)) {
+func NwConnectionReceive(connection *foundation.NSObject, minimumIncompleteLength uint32, maximumLength uint32, completion func(*foundation.NSObject, *foundation.NSObject, bool, *foundation.NSObject)) {
 	var __block_completion objc.Block
 	if completion != nil {
 		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID, blockParam2 bool, blockParam3 objc.ID) {
@@ -870,7 +870,7 @@ func NwConnectionReceive(connection *foundation.NSObject, minimum_incomplete_len
 		})
 		defer __block_completion.Release()
 	}
-	_nw_connection_receive(connection.Ptr(), minimum_incomplete_length, maximum_length, __block_completion)
+	_nw_connection_receive(connection.Ptr(), minimumIncompleteLength, maximumLength, __block_completion)
 }
 
 // C function: nw_connection_receive_message
@@ -900,7 +900,7 @@ func NwConnectionRestart(connection *foundation.NSObject) {
 }
 
 // C function: nw_connection_send
-func NwConnectionSend(connection *foundation.NSObject, content *foundation.NSObject, context_ *foundation.NSObject, is_complete bool, completion func(*foundation.NSObject)) {
+func NwConnectionSend(connection *foundation.NSObject, content *foundation.NSObject, context_ *foundation.NSObject, isComplete bool, completion func(*foundation.NSObject)) {
 	var __block_completion objc.Block
 	if completion != nil {
 		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
@@ -911,7 +911,7 @@ func NwConnectionSend(connection *foundation.NSObject, content *foundation.NSObj
 		})
 		defer __block_completion.Release()
 	}
-	_nw_connection_send(connection.Ptr(), content.Ptr(), context_.Ptr(), is_complete, __block_completion)
+	_nw_connection_send(connection.Ptr(), content.Ptr(), context_.Ptr(), isComplete, __block_completion)
 }
 
 // C function: nw_connection_set_better_path_available_handler
@@ -989,26 +989,26 @@ func NwContentContextCopyProtocolMetadata(context_ *foundation.NSObject, protoco
 }
 
 // C function: nw_content_context_create
-func NwContentContextCreate(context_identifier string) unsafe.Pointer {
-	return _nw_content_context_create(context_identifier)
+func NwContentContextCreate(contextIdentifier string) unsafe.Pointer {
+	return _nw_content_context_create(contextIdentifier)
 }
 
 // C function: nw_content_context_foreach_protocol_metadata
-func NwContentContextForeachProtocolMetadata(context_ *foundation.NSObject, foreach_block func(*foundation.NSObject, *foundation.NSObject)) {
-	var __block_foreach_block objc.Block
-	if foreach_block != nil {
-		__block_foreach_block = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID) {
+func NwContentContextForeachProtocolMetadata(context_ *foundation.NSObject, foreachBlock func(*foundation.NSObject, *foundation.NSObject)) {
+	var __block_foreachBlock objc.Block
+	if foreachBlock != nil {
+		__block_foreachBlock = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID) {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
 			if blockParam1 != 0 {
 				blockParam1.Send(objc.RegisterName("retain"))
 			}
-			foreach_block(foundation.NSObjectFromID(blockParam0), foundation.NSObjectFromID(blockParam1))
+			foreachBlock(foundation.NSObjectFromID(blockParam0), foundation.NSObjectFromID(blockParam1))
 		})
-		defer __block_foreach_block.Release()
+		defer __block_foreachBlock.Release()
 	}
-	_nw_content_context_foreach_protocol_metadata(context_.Ptr(), __block_foreach_block)
+	_nw_content_context_foreach_protocol_metadata(context_.Ptr(), __block_foreachBlock)
 }
 
 // C function: nw_content_context_get_expiration_milliseconds
@@ -1032,48 +1032,48 @@ func NwContentContextGetRelativePriority(context_ *foundation.NSObject) float64 
 }
 
 // C function: nw_content_context_set_antecedent
-func NwContentContextSetAntecedent(context_ *foundation.NSObject, antecedent_context *foundation.NSObject) {
-	_nw_content_context_set_antecedent(context_.Ptr(), antecedent_context.Ptr())
+func NwContentContextSetAntecedent(context_ *foundation.NSObject, antecedentContext *foundation.NSObject) {
+	_nw_content_context_set_antecedent(context_.Ptr(), antecedentContext.Ptr())
 }
 
 // C function: nw_content_context_set_expiration_milliseconds
-func NwContentContextSetExpirationMilliseconds(context_ *foundation.NSObject, expiration_milliseconds uint64) {
-	_nw_content_context_set_expiration_milliseconds(context_.Ptr(), expiration_milliseconds)
+func NwContentContextSetExpirationMilliseconds(context_ *foundation.NSObject, expirationMilliseconds uint64) {
+	_nw_content_context_set_expiration_milliseconds(context_.Ptr(), expirationMilliseconds)
 }
 
 // C function: nw_content_context_set_is_final
-func NwContentContextSetIsFinal(context_ *foundation.NSObject, is_final bool) {
-	_nw_content_context_set_is_final(context_.Ptr(), is_final)
+func NwContentContextSetIsFinal(context_ *foundation.NSObject, isFinal bool) {
+	_nw_content_context_set_is_final(context_.Ptr(), isFinal)
 }
 
 // C function: nw_content_context_set_metadata_for_protocol
-func NwContentContextSetMetadataForProtocol(context_ *foundation.NSObject, protocol_metadata *foundation.NSObject) {
-	_nw_content_context_set_metadata_for_protocol(context_.Ptr(), protocol_metadata.Ptr())
+func NwContentContextSetMetadataForProtocol(context_ *foundation.NSObject, protocolMetadata *foundation.NSObject) {
+	_nw_content_context_set_metadata_for_protocol(context_.Ptr(), protocolMetadata.Ptr())
 }
 
 // C function: nw_content_context_set_relative_priority
-func NwContentContextSetRelativePriority(context_ *foundation.NSObject, relative_priority float64) {
-	_nw_content_context_set_relative_priority(context_.Ptr(), relative_priority)
+func NwContentContextSetRelativePriority(context_ *foundation.NSObject, relativePriority float64) {
+	_nw_content_context_set_relative_priority(context_.Ptr(), relativePriority)
 }
 
 // C function: nw_data_transfer_report_collect
-func NwDataTransferReportCollect(report *foundation.NSObject, queue *foundation.NSObject, collect_block func(*foundation.NSObject)) {
-	var __block_collect_block objc.Block
-	if collect_block != nil {
-		__block_collect_block = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+func NwDataTransferReportCollect(report *foundation.NSObject, queue *foundation.NSObject, collectBlock func(*foundation.NSObject)) {
+	var __block_collectBlock objc.Block
+	if collectBlock != nil {
+		__block_collectBlock = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			collect_block(foundation.NSObjectFromID(blockParam0))
+			collectBlock(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_collect_block.Release()
+		defer __block_collectBlock.Release()
 	}
-	_nw_data_transfer_report_collect(report.Ptr(), queue.Ptr(), __block_collect_block)
+	_nw_data_transfer_report_collect(report.Ptr(), queue.Ptr(), __block_collectBlock)
 }
 
 // C function: nw_data_transfer_report_copy_path_interface
-func NwDataTransferReportCopyPathInterface(report *foundation.NSObject, path_index uint32) unsafe.Pointer {
-	return _nw_data_transfer_report_copy_path_interface(report.Ptr(), path_index)
+func NwDataTransferReportCopyPathInterface(report *foundation.NSObject, pathIndex uint32) unsafe.Pointer {
+	return _nw_data_transfer_report_copy_path_interface(report.Ptr(), pathIndex)
 }
 
 // C function: nw_data_transfer_report_get_duration_milliseconds
@@ -1087,53 +1087,53 @@ func NwDataTransferReportGetPathCount(report *foundation.NSObject) uint32 {
 }
 
 // C function: nw_data_transfer_report_get_path_radio_type
-func NwDataTransferReportGetPathRadioType(report *foundation.NSObject, path_index uint32) avrouting.Nw_interface_radio_type_t {
-	return _nw_data_transfer_report_get_path_radio_type(report.Ptr(), path_index)
+func NwDataTransferReportGetPathRadioType(report *foundation.NSObject, pathIndex uint32) avrouting.Nw_interface_radio_type_t {
+	return _nw_data_transfer_report_get_path_radio_type(report.Ptr(), pathIndex)
 }
 
 // C function: nw_data_transfer_report_get_received_application_byte_count
-func NwDataTransferReportGetReceivedApplicationByteCount(report *foundation.NSObject, path_index uint32) uint64 {
-	return _nw_data_transfer_report_get_received_application_byte_count(report.Ptr(), path_index)
+func NwDataTransferReportGetReceivedApplicationByteCount(report *foundation.NSObject, pathIndex uint32) uint64 {
+	return _nw_data_transfer_report_get_received_application_byte_count(report.Ptr(), pathIndex)
 }
 
 // C function: nw_data_transfer_report_get_received_ip_packet_count
-func NwDataTransferReportGetReceivedIpPacketCount(report *foundation.NSObject, path_index uint32) uint64 {
-	return _nw_data_transfer_report_get_received_ip_packet_count(report.Ptr(), path_index)
+func NwDataTransferReportGetReceivedIpPacketCount(report *foundation.NSObject, pathIndex uint32) uint64 {
+	return _nw_data_transfer_report_get_received_ip_packet_count(report.Ptr(), pathIndex)
 }
 
 // C function: nw_data_transfer_report_get_received_transport_byte_count
-func NwDataTransferReportGetReceivedTransportByteCount(report *foundation.NSObject, path_index uint32) uint64 {
-	return _nw_data_transfer_report_get_received_transport_byte_count(report.Ptr(), path_index)
+func NwDataTransferReportGetReceivedTransportByteCount(report *foundation.NSObject, pathIndex uint32) uint64 {
+	return _nw_data_transfer_report_get_received_transport_byte_count(report.Ptr(), pathIndex)
 }
 
 // C function: nw_data_transfer_report_get_received_transport_duplicate_byte_count
-func NwDataTransferReportGetReceivedTransportDuplicateByteCount(report *foundation.NSObject, path_index uint32) uint64 {
-	return _nw_data_transfer_report_get_received_transport_duplicate_byte_count(report.Ptr(), path_index)
+func NwDataTransferReportGetReceivedTransportDuplicateByteCount(report *foundation.NSObject, pathIndex uint32) uint64 {
+	return _nw_data_transfer_report_get_received_transport_duplicate_byte_count(report.Ptr(), pathIndex)
 }
 
 // C function: nw_data_transfer_report_get_received_transport_out_of_order_byte_count
-func NwDataTransferReportGetReceivedTransportOutOfOrderByteCount(report *foundation.NSObject, path_index uint32) uint64 {
-	return _nw_data_transfer_report_get_received_transport_out_of_order_byte_count(report.Ptr(), path_index)
+func NwDataTransferReportGetReceivedTransportOutOfOrderByteCount(report *foundation.NSObject, pathIndex uint32) uint64 {
+	return _nw_data_transfer_report_get_received_transport_out_of_order_byte_count(report.Ptr(), pathIndex)
 }
 
 // C function: nw_data_transfer_report_get_sent_application_byte_count
-func NwDataTransferReportGetSentApplicationByteCount(report *foundation.NSObject, path_index uint32) uint64 {
-	return _nw_data_transfer_report_get_sent_application_byte_count(report.Ptr(), path_index)
+func NwDataTransferReportGetSentApplicationByteCount(report *foundation.NSObject, pathIndex uint32) uint64 {
+	return _nw_data_transfer_report_get_sent_application_byte_count(report.Ptr(), pathIndex)
 }
 
 // C function: nw_data_transfer_report_get_sent_ip_packet_count
-func NwDataTransferReportGetSentIpPacketCount(report *foundation.NSObject, path_index uint32) uint64 {
-	return _nw_data_transfer_report_get_sent_ip_packet_count(report.Ptr(), path_index)
+func NwDataTransferReportGetSentIpPacketCount(report *foundation.NSObject, pathIndex uint32) uint64 {
+	return _nw_data_transfer_report_get_sent_ip_packet_count(report.Ptr(), pathIndex)
 }
 
 // C function: nw_data_transfer_report_get_sent_transport_byte_count
-func NwDataTransferReportGetSentTransportByteCount(report *foundation.NSObject, path_index uint32) uint64 {
-	return _nw_data_transfer_report_get_sent_transport_byte_count(report.Ptr(), path_index)
+func NwDataTransferReportGetSentTransportByteCount(report *foundation.NSObject, pathIndex uint32) uint64 {
+	return _nw_data_transfer_report_get_sent_transport_byte_count(report.Ptr(), pathIndex)
 }
 
 // C function: nw_data_transfer_report_get_sent_transport_retransmitted_byte_count
-func NwDataTransferReportGetSentTransportRetransmittedByteCount(report *foundation.NSObject, path_index uint32) uint64 {
-	return _nw_data_transfer_report_get_sent_transport_retransmitted_byte_count(report.Ptr(), path_index)
+func NwDataTransferReportGetSentTransportRetransmittedByteCount(report *foundation.NSObject, pathIndex uint32) uint64 {
+	return _nw_data_transfer_report_get_sent_transport_retransmitted_byte_count(report.Ptr(), pathIndex)
 }
 
 // C function: nw_data_transfer_report_get_state
@@ -1142,18 +1142,18 @@ func NwDataTransferReportGetState(report *foundation.NSObject) avrouting.Nw_data
 }
 
 // C function: nw_data_transfer_report_get_transport_minimum_rtt_milliseconds
-func NwDataTransferReportGetTransportMinimumRttMilliseconds(report *foundation.NSObject, path_index uint32) uint64 {
-	return _nw_data_transfer_report_get_transport_minimum_rtt_milliseconds(report.Ptr(), path_index)
+func NwDataTransferReportGetTransportMinimumRttMilliseconds(report *foundation.NSObject, pathIndex uint32) uint64 {
+	return _nw_data_transfer_report_get_transport_minimum_rtt_milliseconds(report.Ptr(), pathIndex)
 }
 
 // C function: nw_data_transfer_report_get_transport_rtt_variance
-func NwDataTransferReportGetTransportRttVariance(report *foundation.NSObject, path_index uint32) uint64 {
-	return _nw_data_transfer_report_get_transport_rtt_variance(report.Ptr(), path_index)
+func NwDataTransferReportGetTransportRttVariance(report *foundation.NSObject, pathIndex uint32) uint64 {
+	return _nw_data_transfer_report_get_transport_rtt_variance(report.Ptr(), pathIndex)
 }
 
 // C function: nw_data_transfer_report_get_transport_smoothed_rtt_milliseconds
-func NwDataTransferReportGetTransportSmoothedRttMilliseconds(report *foundation.NSObject, path_index uint32) uint64 {
-	return _nw_data_transfer_report_get_transport_smoothed_rtt_milliseconds(report.Ptr(), path_index)
+func NwDataTransferReportGetTransportSmoothedRttMilliseconds(report *foundation.NSObject, pathIndex uint32) uint64 {
+	return _nw_data_transfer_report_get_transport_smoothed_rtt_milliseconds(report.Ptr(), pathIndex)
 }
 
 // C function: nw_endpoint_copy_address_string
@@ -1222,8 +1222,8 @@ func NwEndpointGetPort(endpoint *foundation.NSObject) uint16 {
 }
 
 // C function: nw_endpoint_get_signature
-func NwEndpointGetSignature(endpoint *foundation.NSObject, out_signature_length *uint) unsafe.Pointer {
-	return _nw_endpoint_get_signature(endpoint.Ptr(), out_signature_length)
+func NwEndpointGetSignature(endpoint *foundation.NSObject, outSignatureLength *uint) unsafe.Pointer {
+	return _nw_endpoint_get_signature(endpoint.Ptr(), outSignatureLength)
 }
 
 // C function: nw_endpoint_get_type
@@ -1257,51 +1257,51 @@ func NwEstablishmentReportCopyProxyEndpoint(report *foundation.NSObject) unsafe.
 }
 
 // C function: nw_establishment_report_enumerate_protocols
-func NwEstablishmentReportEnumerateProtocols(report *foundation.NSObject, enumerate_block func(*foundation.NSObject, uint64, uint64) bool) {
-	var __block_enumerate_block objc.Block
-	if enumerate_block != nil {
-		__block_enumerate_block = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 uint64, blockParam2 uint64) bool {
+func NwEstablishmentReportEnumerateProtocols(report *foundation.NSObject, enumerateBlock func(*foundation.NSObject, uint64, uint64) bool) {
+	var __block_enumerateBlock objc.Block
+	if enumerateBlock != nil {
+		__block_enumerateBlock = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 uint64, blockParam2 uint64) bool {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			return enumerate_block(foundation.NSObjectFromID(blockParam0), blockParam1, blockParam2)
+			return enumerateBlock(foundation.NSObjectFromID(blockParam0), blockParam1, blockParam2)
 		})
-		defer __block_enumerate_block.Release()
+		defer __block_enumerateBlock.Release()
 	}
-	_nw_establishment_report_enumerate_protocols(report.Ptr(), __block_enumerate_block)
+	_nw_establishment_report_enumerate_protocols(report.Ptr(), __block_enumerateBlock)
 }
 
 // C function: nw_establishment_report_enumerate_resolution_reports
-func NwEstablishmentReportEnumerateResolutionReports(report *foundation.NSObject, enumerate_block func(*foundation.NSObject) bool) {
-	var __block_enumerate_block objc.Block
-	if enumerate_block != nil {
-		__block_enumerate_block = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
+func NwEstablishmentReportEnumerateResolutionReports(report *foundation.NSObject, enumerateBlock func(*foundation.NSObject) bool) {
+	var __block_enumerateBlock objc.Block
+	if enumerateBlock != nil {
+		__block_enumerateBlock = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			return enumerate_block(foundation.NSObjectFromID(blockParam0))
+			return enumerateBlock(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_enumerate_block.Release()
+		defer __block_enumerateBlock.Release()
 	}
-	_nw_establishment_report_enumerate_resolution_reports(report.Ptr(), __block_enumerate_block)
+	_nw_establishment_report_enumerate_resolution_reports(report.Ptr(), __block_enumerateBlock)
 }
 
 // C function: nw_establishment_report_enumerate_resolutions
-func NwEstablishmentReportEnumerateResolutions(report *foundation.NSObject, enumerate_block func(avrouting.Nw_report_resolution_source_t, uint64, uint32, *foundation.NSObject, *foundation.NSObject) bool) {
-	var __block_enumerate_block objc.Block
-	if enumerate_block != nil {
-		__block_enumerate_block = objc.NewBlock(func(_ objc.Block, blockParam0 avrouting.Nw_report_resolution_source_t, blockParam1 uint64, blockParam2 uint32, blockParam3 objc.ID, blockParam4 objc.ID) bool {
+func NwEstablishmentReportEnumerateResolutions(report *foundation.NSObject, enumerateBlock func(avrouting.Nw_report_resolution_source_t, uint64, uint32, *foundation.NSObject, *foundation.NSObject) bool) {
+	var __block_enumerateBlock objc.Block
+	if enumerateBlock != nil {
+		__block_enumerateBlock = objc.NewBlock(func(_ objc.Block, blockParam0 avrouting.Nw_report_resolution_source_t, blockParam1 uint64, blockParam2 uint32, blockParam3 objc.ID, blockParam4 objc.ID) bool {
 			if blockParam3 != 0 {
 				blockParam3.Send(objc.RegisterName("retain"))
 			}
 			if blockParam4 != 0 {
 				blockParam4.Send(objc.RegisterName("retain"))
 			}
-			return enumerate_block(blockParam0, blockParam1, blockParam2, foundation.NSObjectFromID(blockParam3), foundation.NSObjectFromID(blockParam4))
+			return enumerateBlock(blockParam0, blockParam1, blockParam2, foundation.NSObjectFromID(blockParam3), foundation.NSObjectFromID(blockParam4))
 		})
-		defer __block_enumerate_block.Release()
+		defer __block_enumerateBlock.Release()
 	}
-	_nw_establishment_report_enumerate_resolutions(report.Ptr(), __block_enumerate_block)
+	_nw_establishment_report_enumerate_resolutions(report.Ptr(), __block_enumerateBlock)
 }
 
 // C function: nw_establishment_report_get_attempt_started_after_milliseconds
@@ -1330,27 +1330,27 @@ func NwEstablishmentReportGetUsedProxy(report *foundation.NSObject) bool {
 }
 
 // C function: nw_ethernet_channel_cancel
-func NwEthernetChannelCancel(ethernet_channel *foundation.NSObject) {
-	_nw_ethernet_channel_cancel(ethernet_channel.Ptr())
+func NwEthernetChannelCancel(ethernetChannel *foundation.NSObject) {
+	_nw_ethernet_channel_cancel(ethernetChannel.Ptr())
 }
 
 // C function: nw_ethernet_channel_create
-func NwEthernetChannelCreate(ether_type uint16, interface_ *foundation.NSObject) unsafe.Pointer {
-	return _nw_ethernet_channel_create(ether_type, interface_.Ptr())
+func NwEthernetChannelCreate(etherType uint16, interface_ *foundation.NSObject) unsafe.Pointer {
+	return _nw_ethernet_channel_create(etherType, interface_.Ptr())
 }
 
 // C function: nw_ethernet_channel_create_with_parameters
-func NwEthernetChannelCreateWithParameters(ether_type uint16, interface_ *foundation.NSObject, parameters *foundation.NSObject) unsafe.Pointer {
-	return _nw_ethernet_channel_create_with_parameters(ether_type, interface_.Ptr(), parameters.Ptr())
+func NwEthernetChannelCreateWithParameters(etherType uint16, interface_ *foundation.NSObject, parameters *foundation.NSObject) unsafe.Pointer {
+	return _nw_ethernet_channel_create_with_parameters(etherType, interface_.Ptr(), parameters.Ptr())
 }
 
 // C function: nw_ethernet_channel_get_maximum_payload_size
-func NwEthernetChannelGetMaximumPayloadSize(ethernet_channel *foundation.NSObject) uint32 {
-	return _nw_ethernet_channel_get_maximum_payload_size(ethernet_channel.Ptr())
+func NwEthernetChannelGetMaximumPayloadSize(ethernetChannel *foundation.NSObject) uint32 {
+	return _nw_ethernet_channel_get_maximum_payload_size(ethernetChannel.Ptr())
 }
 
 // C function: nw_ethernet_channel_send
-func NwEthernetChannelSend(ethernet_channel *foundation.NSObject, content *foundation.NSObject, vlan_tag uint16, remote_address *uint8, completion func(*foundation.NSObject)) {
+func NwEthernetChannelSend(ethernetChannel *foundation.NSObject, content *foundation.NSObject, vlanTag uint16, remoteAddress *uint8, completion func(*foundation.NSObject)) {
 	var __block_completion objc.Block
 	if completion != nil {
 		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
@@ -1361,16 +1361,16 @@ func NwEthernetChannelSend(ethernet_channel *foundation.NSObject, content *found
 		})
 		defer __block_completion.Release()
 	}
-	_nw_ethernet_channel_send(ethernet_channel.Ptr(), content.Ptr(), vlan_tag, remote_address, __block_completion)
+	_nw_ethernet_channel_send(ethernetChannel.Ptr(), content.Ptr(), vlanTag, remoteAddress, __block_completion)
 }
 
 // C function: nw_ethernet_channel_set_queue
-func NwEthernetChannelSetQueue(ethernet_channel *foundation.NSObject, queue *foundation.NSObject) {
-	_nw_ethernet_channel_set_queue(ethernet_channel.Ptr(), queue.Ptr())
+func NwEthernetChannelSetQueue(ethernetChannel *foundation.NSObject, queue *foundation.NSObject) {
+	_nw_ethernet_channel_set_queue(ethernetChannel.Ptr(), queue.Ptr())
 }
 
 // C function: nw_ethernet_channel_set_receive_handler
-func NwEthernetChannelSetReceiveHandler(ethernet_channel *foundation.NSObject, handler func(*foundation.NSObject, uint16, *uint8, *uint8)) {
+func NwEthernetChannelSetReceiveHandler(ethernetChannel *foundation.NSObject, handler func(*foundation.NSObject, uint16, *uint8, *uint8)) {
 	var __block_handler objc.Block
 	if handler != nil {
 		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 uint16, blockParam2 *uint8, blockParam3 *uint8) {
@@ -1381,11 +1381,11 @@ func NwEthernetChannelSetReceiveHandler(ethernet_channel *foundation.NSObject, h
 		})
 		defer __block_handler.Release()
 	}
-	_nw_ethernet_channel_set_receive_handler(ethernet_channel.Ptr(), __block_handler)
+	_nw_ethernet_channel_set_receive_handler(ethernetChannel.Ptr(), __block_handler)
 }
 
 // C function: nw_ethernet_channel_set_state_changed_handler
-func NwEthernetChannelSetStateChangedHandler(ethernet_channel *foundation.NSObject, handler func(avrouting.Nw_ethernet_channel_state_t, *foundation.NSObject)) {
+func NwEthernetChannelSetStateChangedHandler(ethernetChannel *foundation.NSObject, handler func(avrouting.Nw_ethernet_channel_state_t, *foundation.NSObject)) {
 	var __block_handler objc.Block
 	if handler != nil {
 		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 avrouting.Nw_ethernet_channel_state_t, blockParam1 objc.ID) {
@@ -1396,24 +1396,24 @@ func NwEthernetChannelSetStateChangedHandler(ethernet_channel *foundation.NSObje
 		})
 		defer __block_handler.Release()
 	}
-	_nw_ethernet_channel_set_state_changed_handler(ethernet_channel.Ptr(), __block_handler)
+	_nw_ethernet_channel_set_state_changed_handler(ethernetChannel.Ptr(), __block_handler)
 }
 
 // C function: nw_ethernet_channel_start
-func NwEthernetChannelStart(ethernet_channel *foundation.NSObject) {
-	_nw_ethernet_channel_start(ethernet_channel.Ptr())
+func NwEthernetChannelStart(ethernetChannel *foundation.NSObject) {
+	_nw_ethernet_channel_start(ethernetChannel.Ptr())
 }
 
 // C function: nw_framer_async
-func NwFramerAsync(framer *foundation.NSObject, async_block func()) {
-	var __block_async_block objc.Block
-	if async_block != nil {
-		__block_async_block = objc.NewBlock(func(_ objc.Block) {
-			async_block()
+func NwFramerAsync(framer *foundation.NSObject, asyncBlock func()) {
+	var __block_asyncBlock objc.Block
+	if asyncBlock != nil {
+		__block_asyncBlock = objc.NewBlock(func(_ objc.Block) {
+			asyncBlock()
 		})
-		defer __block_async_block.Release()
+		defer __block_asyncBlock.Release()
 	}
-	_nw_framer_async(framer.Ptr(), __block_async_block)
+	_nw_framer_async(framer.Ptr(), __block_asyncBlock)
 }
 
 // C function: nw_framer_copy_local_endpoint
@@ -1437,38 +1437,38 @@ func NwFramerCopyRemoteEndpoint(framer *foundation.NSObject) unsafe.Pointer {
 }
 
 // C function: nw_framer_create_definition
-func NwFramerCreateDefinition(identifier string, flags uint32, start_handler func(*foundation.NSObject) avrouting.Nw_framer_start_result_t) unsafe.Pointer {
-	var __block_start_handler objc.Block
-	if start_handler != nil {
-		__block_start_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) avrouting.Nw_framer_start_result_t {
+func NwFramerCreateDefinition(identifier string, flags uint32, startHandler func(*foundation.NSObject) avrouting.Nw_framer_start_result_t) unsafe.Pointer {
+	var __block_startHandler objc.Block
+	if startHandler != nil {
+		__block_startHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) avrouting.Nw_framer_start_result_t {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			return start_handler(foundation.NSObjectFromID(blockParam0))
+			return startHandler(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_start_handler.Release()
+		defer __block_startHandler.Release()
 	}
-	return _nw_framer_create_definition(identifier, flags, __block_start_handler)
+	return _nw_framer_create_definition(identifier, flags, __block_startHandler)
 }
 
 // C function: nw_framer_create_options
-func NwFramerCreateOptions(framer_definition *foundation.NSObject) unsafe.Pointer {
-	return _nw_framer_create_options(framer_definition.Ptr())
+func NwFramerCreateOptions(framerDefinition *foundation.NSObject) unsafe.Pointer {
+	return _nw_framer_create_options(framerDefinition.Ptr())
 }
 
 // C function: nw_framer_deliver_input
-func NwFramerDeliverInput(framer *foundation.NSObject, input_buffer *uint8, input_length uint, message *foundation.NSObject, is_complete bool) {
-	_nw_framer_deliver_input(framer.Ptr(), input_buffer, input_length, message.Ptr(), is_complete)
+func NwFramerDeliverInput(framer *foundation.NSObject, inputBuffer *uint8, inputLength uint, message *foundation.NSObject, isComplete bool) {
+	_nw_framer_deliver_input(framer.Ptr(), inputBuffer, inputLength, message.Ptr(), isComplete)
 }
 
 // C function: nw_framer_deliver_input_no_copy
-func NwFramerDeliverInputNoCopy(framer *foundation.NSObject, input_length uint, message *foundation.NSObject, is_complete bool) bool {
-	return _nw_framer_deliver_input_no_copy(framer.Ptr(), input_length, message.Ptr(), is_complete)
+func NwFramerDeliverInputNoCopy(framer *foundation.NSObject, inputLength uint, message *foundation.NSObject, isComplete bool) bool {
+	return _nw_framer_deliver_input_no_copy(framer.Ptr(), inputLength, message.Ptr(), isComplete)
 }
 
 // C function: nw_framer_mark_failed_with_error
-func NwFramerMarkFailedWithError(framer *foundation.NSObject, error_code int) {
-	_nw_framer_mark_failed_with_error(framer.Ptr(), error_code)
+func NwFramerMarkFailedWithError(framer *foundation.NSObject, errorCode int) {
+	_nw_framer_mark_failed_with_error(framer.Ptr(), errorCode)
 }
 
 // C function: nw_framer_mark_ready
@@ -1477,15 +1477,15 @@ func NwFramerMarkReady(framer *foundation.NSObject) {
 }
 
 // C function: nw_framer_message_access_value
-func NwFramerMessageAccessValue(message *foundation.NSObject, key string, access_value func(unsafe.Pointer) bool) bool {
-	var __block_access_value objc.Block
-	if access_value != nil {
-		__block_access_value = objc.NewBlock(func(_ objc.Block, blockParam0 unsafe.Pointer) bool {
-			return access_value(blockParam0)
+func NwFramerMessageAccessValue(message *foundation.NSObject, key string, accessValue func(unsafe.Pointer) bool) bool {
+	var __block_accessValue objc.Block
+	if accessValue != nil {
+		__block_accessValue = objc.NewBlock(func(_ objc.Block, blockParam0 unsafe.Pointer) bool {
+			return accessValue(blockParam0)
 		})
-		defer __block_access_value.Release()
+		defer __block_accessValue.Release()
 	}
-	return _nw_framer_message_access_value(message.Ptr(), key, __block_access_value)
+	return _nw_framer_message_access_value(message.Ptr(), key, __block_accessValue)
 }
 
 // C function: nw_framer_message_copy_object_value
@@ -1504,15 +1504,15 @@ func NwFramerMessageSetObjectValue(message *foundation.NSObject, key string, val
 }
 
 // C function: nw_framer_message_set_value
-func NwFramerMessageSetValue(message *foundation.NSObject, key string, value unsafe.Pointer, dispose_value func(unsafe.Pointer)) {
-	var __block_dispose_value objc.Block
-	if dispose_value != nil {
-		__block_dispose_value = objc.NewBlock(func(_ objc.Block, blockParam0 unsafe.Pointer) {
-			dispose_value(blockParam0)
+func NwFramerMessageSetValue(message *foundation.NSObject, key string, value unsafe.Pointer, disposeValue func(unsafe.Pointer)) {
+	var __block_disposeValue objc.Block
+	if disposeValue != nil {
+		__block_disposeValue = objc.NewBlock(func(_ objc.Block, blockParam0 unsafe.Pointer) {
+			disposeValue(blockParam0)
 		})
-		defer __block_dispose_value.Release()
+		defer __block_disposeValue.Release()
 	}
-	_nw_framer_message_set_value(message.Ptr(), key, value, __block_dispose_value)
+	_nw_framer_message_set_value(message.Ptr(), key, value, __block_disposeValue)
 }
 
 // C function: nw_framer_options_copy_object_value
@@ -1526,7 +1526,7 @@ func NwFramerOptionsSetObjectValue(options *foundation.NSObject, key string, val
 }
 
 // C function: nw_framer_parse_input
-func NwFramerParseInput(framer *foundation.NSObject, minimum_incomplete_length uint, maximum_length uint, temp_buffer *uint8, parse func(*uint8, uint, bool) uint) bool {
+func NwFramerParseInput(framer *foundation.NSObject, minimumIncompleteLength uint, maximumLength uint, tempBuffer *uint8, parse func(*uint8, uint, bool) uint) bool {
 	var __block_parse objc.Block
 	if parse != nil {
 		__block_parse = objc.NewBlock(func(_ objc.Block, blockParam0 *uint8, blockParam1 uint, blockParam2 bool) uint {
@@ -1534,11 +1534,11 @@ func NwFramerParseInput(framer *foundation.NSObject, minimum_incomplete_length u
 		})
 		defer __block_parse.Release()
 	}
-	return _nw_framer_parse_input(framer.Ptr(), minimum_incomplete_length, maximum_length, temp_buffer, __block_parse)
+	return _nw_framer_parse_input(framer.Ptr(), minimumIncompleteLength, maximumLength, tempBuffer, __block_parse)
 }
 
 // C function: nw_framer_parse_output
-func NwFramerParseOutput(framer *foundation.NSObject, minimum_incomplete_length uint, maximum_length uint, temp_buffer *uint8, parse func(*uint8, uint, bool) uint) bool {
+func NwFramerParseOutput(framer *foundation.NSObject, minimumIncompleteLength uint, maximumLength uint, tempBuffer *uint8, parse func(*uint8, uint, bool) uint) bool {
 	var __block_parse objc.Block
 	if parse != nil {
 		__block_parse = objc.NewBlock(func(_ objc.Block, blockParam0 *uint8, blockParam1 uint, blockParam2 bool) uint {
@@ -1546,7 +1546,7 @@ func NwFramerParseOutput(framer *foundation.NSObject, minimum_incomplete_length 
 		})
 		defer __block_parse.Release()
 	}
-	return _nw_framer_parse_output(framer.Ptr(), minimum_incomplete_length, maximum_length, temp_buffer, __block_parse)
+	return _nw_framer_parse_output(framer.Ptr(), minimumIncompleteLength, maximumLength, tempBuffer, __block_parse)
 }
 
 // C function: nw_framer_pass_through_input
@@ -1560,8 +1560,8 @@ func NwFramerPassThroughOutput(framer *foundation.NSObject) {
 }
 
 // C function: nw_framer_prepend_application_protocol
-func NwFramerPrependApplicationProtocol(framer *foundation.NSObject, protocol_options *foundation.NSObject) bool {
-	return _nw_framer_prepend_application_protocol(framer.Ptr(), protocol_options.Ptr())
+func NwFramerPrependApplicationProtocol(framer *foundation.NSObject, protocolOptions *foundation.NSObject) bool {
+	return _nw_framer_prepend_application_protocol(framer.Ptr(), protocolOptions.Ptr())
 }
 
 // C function: nw_framer_protocol_create_message
@@ -1575,96 +1575,96 @@ func NwFramerScheduleWakeup(framer *foundation.NSObject, milliseconds uint64) {
 }
 
 // C function: nw_framer_set_cleanup_handler
-func NwFramerSetCleanupHandler(framer *foundation.NSObject, cleanup_handler func(*foundation.NSObject)) {
-	var __block_cleanup_handler objc.Block
-	if cleanup_handler != nil {
-		__block_cleanup_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+func NwFramerSetCleanupHandler(framer *foundation.NSObject, cleanupHandler func(*foundation.NSObject)) {
+	var __block_cleanupHandler objc.Block
+	if cleanupHandler != nil {
+		__block_cleanupHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			cleanup_handler(foundation.NSObjectFromID(blockParam0))
+			cleanupHandler(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_cleanup_handler.Release()
+		defer __block_cleanupHandler.Release()
 	}
-	_nw_framer_set_cleanup_handler(framer.Ptr(), __block_cleanup_handler)
+	_nw_framer_set_cleanup_handler(framer.Ptr(), __block_cleanupHandler)
 }
 
 // C function: nw_framer_set_input_handler
-func NwFramerSetInputHandler(framer *foundation.NSObject, input_handler func(*foundation.NSObject) uint) {
-	var __block_input_handler objc.Block
-	if input_handler != nil {
-		__block_input_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) uint {
+func NwFramerSetInputHandler(framer *foundation.NSObject, inputHandler func(*foundation.NSObject) uint) {
+	var __block_inputHandler objc.Block
+	if inputHandler != nil {
+		__block_inputHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) uint {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			return input_handler(foundation.NSObjectFromID(blockParam0))
+			return inputHandler(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_input_handler.Release()
+		defer __block_inputHandler.Release()
 	}
-	_nw_framer_set_input_handler(framer.Ptr(), __block_input_handler)
+	_nw_framer_set_input_handler(framer.Ptr(), __block_inputHandler)
 }
 
 // C function: nw_framer_set_output_handler
-func NwFramerSetOutputHandler(framer *foundation.NSObject, output_handler func(*foundation.NSObject, *foundation.NSObject, uint, bool)) {
-	var __block_output_handler objc.Block
-	if output_handler != nil {
-		__block_output_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID, blockParam2 uint, blockParam3 bool) {
+func NwFramerSetOutputHandler(framer *foundation.NSObject, outputHandler func(*foundation.NSObject, *foundation.NSObject, uint, bool)) {
+	var __block_outputHandler objc.Block
+	if outputHandler != nil {
+		__block_outputHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID, blockParam2 uint, blockParam3 bool) {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
 			if blockParam1 != 0 {
 				blockParam1.Send(objc.RegisterName("retain"))
 			}
-			output_handler(foundation.NSObjectFromID(blockParam0), foundation.NSObjectFromID(blockParam1), blockParam2, blockParam3)
+			outputHandler(foundation.NSObjectFromID(blockParam0), foundation.NSObjectFromID(blockParam1), blockParam2, blockParam3)
 		})
-		defer __block_output_handler.Release()
+		defer __block_outputHandler.Release()
 	}
-	_nw_framer_set_output_handler(framer.Ptr(), __block_output_handler)
+	_nw_framer_set_output_handler(framer.Ptr(), __block_outputHandler)
 }
 
 // C function: nw_framer_set_stop_handler
-func NwFramerSetStopHandler(framer *foundation.NSObject, stop_handler func(*foundation.NSObject) bool) {
-	var __block_stop_handler objc.Block
-	if stop_handler != nil {
-		__block_stop_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
+func NwFramerSetStopHandler(framer *foundation.NSObject, stopHandler func(*foundation.NSObject) bool) {
+	var __block_stopHandler objc.Block
+	if stopHandler != nil {
+		__block_stopHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			return stop_handler(foundation.NSObjectFromID(blockParam0))
+			return stopHandler(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_stop_handler.Release()
+		defer __block_stopHandler.Release()
 	}
-	_nw_framer_set_stop_handler(framer.Ptr(), __block_stop_handler)
+	_nw_framer_set_stop_handler(framer.Ptr(), __block_stopHandler)
 }
 
 // C function: nw_framer_set_wakeup_handler
-func NwFramerSetWakeupHandler(framer *foundation.NSObject, wakeup_handler func(*foundation.NSObject)) {
-	var __block_wakeup_handler objc.Block
-	if wakeup_handler != nil {
-		__block_wakeup_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+func NwFramerSetWakeupHandler(framer *foundation.NSObject, wakeupHandler func(*foundation.NSObject)) {
+	var __block_wakeupHandler objc.Block
+	if wakeupHandler != nil {
+		__block_wakeupHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			wakeup_handler(foundation.NSObjectFromID(blockParam0))
+			wakeupHandler(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_wakeup_handler.Release()
+		defer __block_wakeupHandler.Release()
 	}
-	_nw_framer_set_wakeup_handler(framer.Ptr(), __block_wakeup_handler)
+	_nw_framer_set_wakeup_handler(framer.Ptr(), __block_wakeupHandler)
 }
 
 // C function: nw_framer_write_output
-func NwFramerWriteOutput(framer *foundation.NSObject, output_buffer *uint8, output_length uint) {
-	_nw_framer_write_output(framer.Ptr(), output_buffer, output_length)
+func NwFramerWriteOutput(framer *foundation.NSObject, outputBuffer *uint8, outputLength uint) {
+	_nw_framer_write_output(framer.Ptr(), outputBuffer, outputLength)
 }
 
 // C function: nw_framer_write_output_data
-func NwFramerWriteOutputData(framer *foundation.NSObject, output_data *foundation.NSObject) {
-	_nw_framer_write_output_data(framer.Ptr(), output_data.Ptr())
+func NwFramerWriteOutputData(framer *foundation.NSObject, outputData *foundation.NSObject) {
+	_nw_framer_write_output_data(framer.Ptr(), outputData.Ptr())
 }
 
 // C function: nw_framer_write_output_no_copy
-func NwFramerWriteOutputNoCopy(framer *foundation.NSObject, output_length uint) bool {
-	return _nw_framer_write_output_no_copy(framer.Ptr(), output_length)
+func NwFramerWriteOutputNoCopy(framer *foundation.NSObject, outputLength uint) bool {
+	return _nw_framer_write_output_no_copy(framer.Ptr(), outputLength)
 }
 
 // C function: nw_group_descriptor_add_endpoint
@@ -1673,28 +1673,28 @@ func NwGroupDescriptorAddEndpoint(descriptor *foundation.NSObject, endpoint *fou
 }
 
 // C function: nw_group_descriptor_create_multicast
-func NwGroupDescriptorCreateMulticast(multicast_group *foundation.NSObject) unsafe.Pointer {
-	return _nw_group_descriptor_create_multicast(multicast_group.Ptr())
+func NwGroupDescriptorCreateMulticast(multicastGroup *foundation.NSObject) unsafe.Pointer {
+	return _nw_group_descriptor_create_multicast(multicastGroup.Ptr())
 }
 
 // C function: nw_group_descriptor_create_multiplex
-func NwGroupDescriptorCreateMultiplex(remote_endpoint *foundation.NSObject) unsafe.Pointer {
-	return _nw_group_descriptor_create_multiplex(remote_endpoint.Ptr())
+func NwGroupDescriptorCreateMultiplex(remoteEndpoint *foundation.NSObject) unsafe.Pointer {
+	return _nw_group_descriptor_create_multiplex(remoteEndpoint.Ptr())
 }
 
 // C function: nw_group_descriptor_enumerate_endpoints
-func NwGroupDescriptorEnumerateEndpoints(descriptor *foundation.NSObject, enumerate_block func(*foundation.NSObject) bool) {
-	var __block_enumerate_block objc.Block
-	if enumerate_block != nil {
-		__block_enumerate_block = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
+func NwGroupDescriptorEnumerateEndpoints(descriptor *foundation.NSObject, enumerateBlock func(*foundation.NSObject) bool) {
+	var __block_enumerateBlock objc.Block
+	if enumerateBlock != nil {
+		__block_enumerateBlock = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			return enumerate_block(foundation.NSObjectFromID(blockParam0))
+			return enumerateBlock(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_enumerate_block.Release()
+		defer __block_enumerateBlock.Release()
 	}
-	_nw_group_descriptor_enumerate_endpoints(descriptor.Ptr(), __block_enumerate_block)
+	_nw_group_descriptor_enumerate_endpoints(descriptor.Ptr(), __block_enumerateBlock)
 }
 
 // C function: nw_interface_get_index
@@ -1733,33 +1733,33 @@ func NwIpMetadataGetServiceClass(metadata *foundation.NSObject) avrouting.Nw_ser
 }
 
 // C function: nw_ip_metadata_set_ecn_flag
-func NwIpMetadataSetEcnFlag(metadata *foundation.NSObject, ecn_flag avrouting.Nw_ip_ecn_flag_t) {
-	_nw_ip_metadata_set_ecn_flag(metadata.Ptr(), ecn_flag)
+func NwIpMetadataSetEcnFlag(metadata *foundation.NSObject, ecnFlag avrouting.Nw_ip_ecn_flag_t) {
+	_nw_ip_metadata_set_ecn_flag(metadata.Ptr(), ecnFlag)
 }
 
 // C function: nw_ip_metadata_set_service_class
-func NwIpMetadataSetServiceClass(metadata *foundation.NSObject, service_class avrouting.Nw_service_class_t) {
-	_nw_ip_metadata_set_service_class(metadata.Ptr(), service_class)
+func NwIpMetadataSetServiceClass(metadata *foundation.NSObject, serviceClass avrouting.Nw_service_class_t) {
+	_nw_ip_metadata_set_service_class(metadata.Ptr(), serviceClass)
 }
 
 // C function: nw_ip_options_set_calculate_receive_time
-func NwIpOptionsSetCalculateReceiveTime(options *foundation.NSObject, calculate_receive_time bool) {
-	_nw_ip_options_set_calculate_receive_time(options.Ptr(), calculate_receive_time)
+func NwIpOptionsSetCalculateReceiveTime(options *foundation.NSObject, calculateReceiveTime bool) {
+	_nw_ip_options_set_calculate_receive_time(options.Ptr(), calculateReceiveTime)
 }
 
 // C function: nw_ip_options_set_disable_fragmentation
-func NwIpOptionsSetDisableFragmentation(options *foundation.NSObject, disable_fragmentation bool) {
-	_nw_ip_options_set_disable_fragmentation(options.Ptr(), disable_fragmentation)
+func NwIpOptionsSetDisableFragmentation(options *foundation.NSObject, disableFragmentation bool) {
+	_nw_ip_options_set_disable_fragmentation(options.Ptr(), disableFragmentation)
 }
 
 // C function: nw_ip_options_set_disable_multicast_loopback
-func NwIpOptionsSetDisableMulticastLoopback(options *foundation.NSObject, disable_multicast_loopback bool) {
-	_nw_ip_options_set_disable_multicast_loopback(options.Ptr(), disable_multicast_loopback)
+func NwIpOptionsSetDisableMulticastLoopback(options *foundation.NSObject, disableMulticastLoopback bool) {
+	_nw_ip_options_set_disable_multicast_loopback(options.Ptr(), disableMulticastLoopback)
 }
 
 // C function: nw_ip_options_set_hop_limit
-func NwIpOptionsSetHopLimit(options *foundation.NSObject, hop_limit uint8) {
-	_nw_ip_options_set_hop_limit(options.Ptr(), hop_limit)
+func NwIpOptionsSetHopLimit(options *foundation.NSObject, hopLimit uint8) {
+	_nw_ip_options_set_hop_limit(options.Ptr(), hopLimit)
 }
 
 // C function: nw_ip_options_set_local_address_preference
@@ -1768,8 +1768,8 @@ func NwIpOptionsSetLocalAddressPreference(options *foundation.NSObject, preferen
 }
 
 // C function: nw_ip_options_set_use_minimum_mtu
-func NwIpOptionsSetUseMinimumMtu(options *foundation.NSObject, use_minimum_mtu bool) {
-	_nw_ip_options_set_use_minimum_mtu(options.Ptr(), use_minimum_mtu)
+func NwIpOptionsSetUseMinimumMtu(options *foundation.NSObject, useMinimumMtu bool) {
+	_nw_ip_options_set_use_minimum_mtu(options.Ptr(), useMinimumMtu)
 }
 
 // C function: nw_ip_options_set_version
@@ -1793,8 +1793,8 @@ func NwListenerCreateWithConnection(connection *foundation.NSObject, parameters 
 }
 
 // C function: nw_listener_create_with_launchd_key
-func NwListenerCreateWithLaunchdKey(parameters *foundation.NSObject, launchd_key string) unsafe.Pointer {
-	return _nw_listener_create_with_launchd_key(parameters.Ptr(), launchd_key)
+func NwListenerCreateWithLaunchdKey(parameters *foundation.NSObject, launchdKey string) unsafe.Pointer {
+	return _nw_listener_create_with_launchd_key(parameters.Ptr(), launchdKey)
 }
 
 // C function: nw_listener_create_with_port
@@ -1813,8 +1813,8 @@ func NwListenerGetPort(listener *foundation.NSObject) uint16 {
 }
 
 // C function: nw_listener_set_advertise_descriptor
-func NwListenerSetAdvertiseDescriptor(listener *foundation.NSObject, advertise_descriptor *foundation.NSObject) {
-	_nw_listener_set_advertise_descriptor(listener.Ptr(), advertise_descriptor.Ptr())
+func NwListenerSetAdvertiseDescriptor(listener *foundation.NSObject, advertiseDescriptor *foundation.NSObject) {
+	_nw_listener_set_advertise_descriptor(listener.Ptr(), advertiseDescriptor.Ptr())
 }
 
 // C function: nw_listener_set_advertised_endpoint_changed_handler
@@ -1863,8 +1863,8 @@ func NwListenerSetNewConnectionHandler(listener *foundation.NSObject, handler fu
 }
 
 // C function: nw_listener_set_new_connection_limit
-func NwListenerSetNewConnectionLimit(listener *foundation.NSObject, new_connection_limit uint32) {
-	_nw_listener_set_new_connection_limit(listener.Ptr(), new_connection_limit)
+func NwListenerSetNewConnectionLimit(listener *foundation.NSObject, newConnectionLimit uint32) {
+	_nw_listener_set_new_connection_limit(listener.Ptr(), newConnectionLimit)
 }
 
 // C function: nw_listener_set_queue
@@ -1893,18 +1893,18 @@ func NwListenerStart(listener *foundation.NSObject) {
 }
 
 // C function: nw_multicast_group_descriptor_get_disable_unicast_traffic
-func NwMulticastGroupDescriptorGetDisableUnicastTraffic(multicast_descriptor *foundation.NSObject) bool {
-	return _nw_multicast_group_descriptor_get_disable_unicast_traffic(multicast_descriptor.Ptr())
+func NwMulticastGroupDescriptorGetDisableUnicastTraffic(multicastDescriptor *foundation.NSObject) bool {
+	return _nw_multicast_group_descriptor_get_disable_unicast_traffic(multicastDescriptor.Ptr())
 }
 
 // C function: nw_multicast_group_descriptor_set_disable_unicast_traffic
-func NwMulticastGroupDescriptorSetDisableUnicastTraffic(multicast_descriptor *foundation.NSObject, disable_unicast_traffic bool) {
-	_nw_multicast_group_descriptor_set_disable_unicast_traffic(multicast_descriptor.Ptr(), disable_unicast_traffic)
+func NwMulticastGroupDescriptorSetDisableUnicastTraffic(multicastDescriptor *foundation.NSObject, disableUnicastTraffic bool) {
+	_nw_multicast_group_descriptor_set_disable_unicast_traffic(multicastDescriptor.Ptr(), disableUnicastTraffic)
 }
 
 // C function: nw_multicast_group_descriptor_set_specific_source
-func NwMulticastGroupDescriptorSetSpecificSource(multicast_descriptor *foundation.NSObject, source *foundation.NSObject) {
-	_nw_multicast_group_descriptor_set_specific_source(multicast_descriptor.Ptr(), source.Ptr())
+func NwMulticastGroupDescriptorSetSpecificSource(multicastDescriptor *foundation.NSObject, source *foundation.NSObject) {
+	_nw_multicast_group_descriptor_set_specific_source(multicastDescriptor.Ptr(), source.Ptr())
 }
 
 // C function: nw_parameters_clear_prohibited_interface_types
@@ -1948,83 +1948,83 @@ func NwParametersCreateApplicationService() unsafe.Pointer {
 }
 
 // C function: nw_parameters_create_custom_ip
-func NwParametersCreateCustomIp(custom_ip_protocol_number uint8, configure_ip func(*foundation.NSObject)) unsafe.Pointer {
-	var __block_configure_ip objc.Block
-	if configure_ip != nil {
-		__block_configure_ip = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+func NwParametersCreateCustomIp(customIpProtocolNumber uint8, configureIp func(*foundation.NSObject)) unsafe.Pointer {
+	var __block_configureIp objc.Block
+	if configureIp != nil {
+		__block_configureIp = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			configure_ip(foundation.NSObjectFromID(blockParam0))
+			configureIp(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_configure_ip.Release()
+		defer __block_configureIp.Release()
 	}
-	return _nw_parameters_create_custom_ip(custom_ip_protocol_number, __block_configure_ip)
+	return _nw_parameters_create_custom_ip(customIpProtocolNumber, __block_configureIp)
 }
 
 // C function: nw_parameters_create_quic
-func NwParametersCreateQuic(configure_quic func(*foundation.NSObject)) unsafe.Pointer {
-	var __block_configure_quic objc.Block
-	if configure_quic != nil {
-		__block_configure_quic = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+func NwParametersCreateQuic(configureQuic func(*foundation.NSObject)) unsafe.Pointer {
+	var __block_configureQuic objc.Block
+	if configureQuic != nil {
+		__block_configureQuic = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			configure_quic(foundation.NSObjectFromID(blockParam0))
+			configureQuic(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_configure_quic.Release()
+		defer __block_configureQuic.Release()
 	}
-	return _nw_parameters_create_quic(__block_configure_quic)
+	return _nw_parameters_create_quic(__block_configureQuic)
 }
 
 // C function: nw_parameters_create_secure_tcp
-func NwParametersCreateSecureTcp(configure_tls func(*foundation.NSObject), configure_tcp func(*foundation.NSObject)) unsafe.Pointer {
-	var __block_configure_tls objc.Block
-	if configure_tls != nil {
-		__block_configure_tls = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+func NwParametersCreateSecureTcp(configureTls func(*foundation.NSObject), configureTcp func(*foundation.NSObject)) unsafe.Pointer {
+	var __block_configureTls objc.Block
+	if configureTls != nil {
+		__block_configureTls = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			configure_tls(foundation.NSObjectFromID(blockParam0))
+			configureTls(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_configure_tls.Release()
+		defer __block_configureTls.Release()
 	}
-	var __block_configure_tcp objc.Block
-	if configure_tcp != nil {
-		__block_configure_tcp = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+	var __block_configureTcp objc.Block
+	if configureTcp != nil {
+		__block_configureTcp = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			configure_tcp(foundation.NSObjectFromID(blockParam0))
+			configureTcp(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_configure_tcp.Release()
+		defer __block_configureTcp.Release()
 	}
-	return _nw_parameters_create_secure_tcp(__block_configure_tls, __block_configure_tcp)
+	return _nw_parameters_create_secure_tcp(__block_configureTls, __block_configureTcp)
 }
 
 // C function: nw_parameters_create_secure_udp
-func NwParametersCreateSecureUdp(configure_dtls func(*foundation.NSObject), configure_udp func(*foundation.NSObject)) unsafe.Pointer {
-	var __block_configure_dtls objc.Block
-	if configure_dtls != nil {
-		__block_configure_dtls = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+func NwParametersCreateSecureUdp(configureDtls func(*foundation.NSObject), configureUdp func(*foundation.NSObject)) unsafe.Pointer {
+	var __block_configureDtls objc.Block
+	if configureDtls != nil {
+		__block_configureDtls = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			configure_dtls(foundation.NSObjectFromID(blockParam0))
+			configureDtls(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_configure_dtls.Release()
+		defer __block_configureDtls.Release()
 	}
-	var __block_configure_udp objc.Block
-	if configure_udp != nil {
-		__block_configure_udp = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+	var __block_configureUdp objc.Block
+	if configureUdp != nil {
+		__block_configureUdp = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			configure_udp(foundation.NSObjectFromID(blockParam0))
+			configureUdp(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_configure_udp.Release()
+		defer __block_configureUdp.Release()
 	}
-	return _nw_parameters_create_secure_udp(__block_configure_dtls, __block_configure_udp)
+	return _nw_parameters_create_secure_udp(__block_configureDtls, __block_configureUdp)
 }
 
 // C function: nw_parameters_get_allow_ultra_constrained
@@ -2093,30 +2093,30 @@ func NwParametersGetServiceClass(parameters *foundation.NSObject) avrouting.Nw_s
 }
 
 // C function: nw_parameters_iterate_prohibited_interface_types
-func NwParametersIterateProhibitedInterfaceTypes(parameters *foundation.NSObject, iterate_block func(avrouting.Nw_interface_type_t) bool) {
-	var __block_iterate_block objc.Block
-	if iterate_block != nil {
-		__block_iterate_block = objc.NewBlock(func(_ objc.Block, blockParam0 avrouting.Nw_interface_type_t) bool {
-			return iterate_block(blockParam0)
+func NwParametersIterateProhibitedInterfaceTypes(parameters *foundation.NSObject, iterateBlock func(avrouting.Nw_interface_type_t) bool) {
+	var __block_iterateBlock objc.Block
+	if iterateBlock != nil {
+		__block_iterateBlock = objc.NewBlock(func(_ objc.Block, blockParam0 avrouting.Nw_interface_type_t) bool {
+			return iterateBlock(blockParam0)
 		})
-		defer __block_iterate_block.Release()
+		defer __block_iterateBlock.Release()
 	}
-	_nw_parameters_iterate_prohibited_interface_types(parameters.Ptr(), __block_iterate_block)
+	_nw_parameters_iterate_prohibited_interface_types(parameters.Ptr(), __block_iterateBlock)
 }
 
 // C function: nw_parameters_iterate_prohibited_interfaces
-func NwParametersIterateProhibitedInterfaces(parameters *foundation.NSObject, iterate_block func(*foundation.NSObject) bool) {
-	var __block_iterate_block objc.Block
-	if iterate_block != nil {
-		__block_iterate_block = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
+func NwParametersIterateProhibitedInterfaces(parameters *foundation.NSObject, iterateBlock func(*foundation.NSObject) bool) {
+	var __block_iterateBlock objc.Block
+	if iterateBlock != nil {
+		__block_iterateBlock = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			return iterate_block(foundation.NSObjectFromID(blockParam0))
+			return iterateBlock(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_iterate_block.Release()
+		defer __block_iterateBlock.Release()
 	}
-	_nw_parameters_iterate_prohibited_interfaces(parameters.Ptr(), __block_iterate_block)
+	_nw_parameters_iterate_prohibited_interfaces(parameters.Ptr(), __block_iterateBlock)
 }
 
 // C function: nw_parameters_prohibit_interface
@@ -2125,8 +2125,8 @@ func NwParametersProhibitInterface(parameters *foundation.NSObject, interface_ *
 }
 
 // C function: nw_parameters_prohibit_interface_type
-func NwParametersProhibitInterfaceType(parameters *foundation.NSObject, interface_type avrouting.Nw_interface_type_t) {
-	_nw_parameters_prohibit_interface_type(parameters.Ptr(), interface_type)
+func NwParametersProhibitInterfaceType(parameters *foundation.NSObject, interfaceType avrouting.Nw_interface_type_t) {
+	_nw_parameters_prohibit_interface_type(parameters.Ptr(), interfaceType)
 }
 
 // C function: nw_parameters_require_interface
@@ -2140,8 +2140,8 @@ func NwParametersRequiresDnssecValidation(parameters *foundation.NSObject) bool 
 }
 
 // C function: nw_parameters_set_allow_ultra_constrained
-func NwParametersSetAllowUltraConstrained(parameters *foundation.NSObject, allow_ultra_constrained bool) {
-	_nw_parameters_set_allow_ultra_constrained(parameters.Ptr(), allow_ultra_constrained)
+func NwParametersSetAllowUltraConstrained(parameters *foundation.NSObject, allowUltraConstrained bool) {
+	_nw_parameters_set_allow_ultra_constrained(parameters.Ptr(), allowUltraConstrained)
 }
 
 // C function: nw_parameters_set_attribution
@@ -2150,73 +2150,73 @@ func NwParametersSetAttribution(parameters *foundation.NSObject, attribution Nw_
 }
 
 // C function: nw_parameters_set_expired_dns_behavior
-func NwParametersSetExpiredDnsBehavior(parameters *foundation.NSObject, expired_dns_behavior avrouting.Nw_parameters_expired_dns_behavior_t) {
-	_nw_parameters_set_expired_dns_behavior(parameters.Ptr(), expired_dns_behavior)
+func NwParametersSetExpiredDnsBehavior(parameters *foundation.NSObject, expiredDnsBehavior avrouting.Nw_parameters_expired_dns_behavior_t) {
+	_nw_parameters_set_expired_dns_behavior(parameters.Ptr(), expiredDnsBehavior)
 }
 
 // C function: nw_parameters_set_fast_open_enabled
-func NwParametersSetFastOpenEnabled(parameters *foundation.NSObject, fast_open_enabled bool) {
-	_nw_parameters_set_fast_open_enabled(parameters.Ptr(), fast_open_enabled)
+func NwParametersSetFastOpenEnabled(parameters *foundation.NSObject, fastOpenEnabled bool) {
+	_nw_parameters_set_fast_open_enabled(parameters.Ptr(), fastOpenEnabled)
 }
 
 // C function: nw_parameters_set_include_peer_to_peer
-func NwParametersSetIncludePeerToPeer(parameters *foundation.NSObject, include_peer_to_peer bool) {
-	_nw_parameters_set_include_peer_to_peer(parameters.Ptr(), include_peer_to_peer)
+func NwParametersSetIncludePeerToPeer(parameters *foundation.NSObject, includePeerToPeer bool) {
+	_nw_parameters_set_include_peer_to_peer(parameters.Ptr(), includePeerToPeer)
 }
 
 // C function: nw_parameters_set_local_endpoint
-func NwParametersSetLocalEndpoint(parameters *foundation.NSObject, local_endpoint *foundation.NSObject) {
-	_nw_parameters_set_local_endpoint(parameters.Ptr(), local_endpoint.Ptr())
+func NwParametersSetLocalEndpoint(parameters *foundation.NSObject, localEndpoint *foundation.NSObject) {
+	_nw_parameters_set_local_endpoint(parameters.Ptr(), localEndpoint.Ptr())
 }
 
 // C function: nw_parameters_set_local_only
-func NwParametersSetLocalOnly(parameters *foundation.NSObject, local_only bool) {
-	_nw_parameters_set_local_only(parameters.Ptr(), local_only)
+func NwParametersSetLocalOnly(parameters *foundation.NSObject, localOnly bool) {
+	_nw_parameters_set_local_only(parameters.Ptr(), localOnly)
 }
 
 // C function: nw_parameters_set_multipath_service
-func NwParametersSetMultipathService(parameters *foundation.NSObject, multipath_service avrouting.Nw_multipath_service_t) {
-	_nw_parameters_set_multipath_service(parameters.Ptr(), multipath_service)
+func NwParametersSetMultipathService(parameters *foundation.NSObject, multipathService avrouting.Nw_multipath_service_t) {
+	_nw_parameters_set_multipath_service(parameters.Ptr(), multipathService)
 }
 
 // C function: nw_parameters_set_prefer_no_proxy
-func NwParametersSetPreferNoProxy(parameters *foundation.NSObject, prefer_no_proxy bool) {
-	_nw_parameters_set_prefer_no_proxy(parameters.Ptr(), prefer_no_proxy)
+func NwParametersSetPreferNoProxy(parameters *foundation.NSObject, preferNoProxy bool) {
+	_nw_parameters_set_prefer_no_proxy(parameters.Ptr(), preferNoProxy)
 }
 
 // C function: nw_parameters_set_privacy_context
-func NwParametersSetPrivacyContext(parameters *foundation.NSObject, privacy_context *foundation.NSObject) {
-	_nw_parameters_set_privacy_context(parameters.Ptr(), privacy_context.Ptr())
+func NwParametersSetPrivacyContext(parameters *foundation.NSObject, privacyContext *foundation.NSObject) {
+	_nw_parameters_set_privacy_context(parameters.Ptr(), privacyContext.Ptr())
 }
 
 // C function: nw_parameters_set_prohibit_constrained
-func NwParametersSetProhibitConstrained(parameters *foundation.NSObject, prohibit_constrained bool) {
-	_nw_parameters_set_prohibit_constrained(parameters.Ptr(), prohibit_constrained)
+func NwParametersSetProhibitConstrained(parameters *foundation.NSObject, prohibitConstrained bool) {
+	_nw_parameters_set_prohibit_constrained(parameters.Ptr(), prohibitConstrained)
 }
 
 // C function: nw_parameters_set_prohibit_expensive
-func NwParametersSetProhibitExpensive(parameters *foundation.NSObject, prohibit_expensive bool) {
-	_nw_parameters_set_prohibit_expensive(parameters.Ptr(), prohibit_expensive)
+func NwParametersSetProhibitExpensive(parameters *foundation.NSObject, prohibitExpensive bool) {
+	_nw_parameters_set_prohibit_expensive(parameters.Ptr(), prohibitExpensive)
 }
 
 // C function: nw_parameters_set_required_interface_type
-func NwParametersSetRequiredInterfaceType(parameters *foundation.NSObject, interface_type avrouting.Nw_interface_type_t) {
-	_nw_parameters_set_required_interface_type(parameters.Ptr(), interface_type)
+func NwParametersSetRequiredInterfaceType(parameters *foundation.NSObject, interfaceType avrouting.Nw_interface_type_t) {
+	_nw_parameters_set_required_interface_type(parameters.Ptr(), interfaceType)
 }
 
 // C function: nw_parameters_set_requires_dnssec_validation
-func NwParametersSetRequiresDnssecValidation(parameters *foundation.NSObject, requires_dnssec_validation bool) {
-	_nw_parameters_set_requires_dnssec_validation(parameters.Ptr(), requires_dnssec_validation)
+func NwParametersSetRequiresDnssecValidation(parameters *foundation.NSObject, requiresDnssecValidation bool) {
+	_nw_parameters_set_requires_dnssec_validation(parameters.Ptr(), requiresDnssecValidation)
 }
 
 // C function: nw_parameters_set_reuse_local_address
-func NwParametersSetReuseLocalAddress(parameters *foundation.NSObject, reuse_local_address bool) {
-	_nw_parameters_set_reuse_local_address(parameters.Ptr(), reuse_local_address)
+func NwParametersSetReuseLocalAddress(parameters *foundation.NSObject, reuseLocalAddress bool) {
+	_nw_parameters_set_reuse_local_address(parameters.Ptr(), reuseLocalAddress)
 }
 
 // C function: nw_parameters_set_service_class
-func NwParametersSetServiceClass(parameters *foundation.NSObject, service_class avrouting.Nw_service_class_t) {
-	_nw_parameters_set_service_class(parameters.Ptr(), service_class)
+func NwParametersSetServiceClass(parameters *foundation.NSObject, serviceClass avrouting.Nw_service_class_t) {
+	_nw_parameters_set_service_class(parameters.Ptr(), serviceClass)
 }
 
 // C function: nw_path_copy_effective_local_endpoint
@@ -2230,33 +2230,33 @@ func NwPathCopyEffectiveRemoteEndpoint(path *foundation.NSObject) unsafe.Pointer
 }
 
 // C function: nw_path_enumerate_gateways
-func NwPathEnumerateGateways(path *foundation.NSObject, enumerate_block func(*foundation.NSObject) bool) {
-	var __block_enumerate_block objc.Block
-	if enumerate_block != nil {
-		__block_enumerate_block = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
+func NwPathEnumerateGateways(path *foundation.NSObject, enumerateBlock func(*foundation.NSObject) bool) {
+	var __block_enumerateBlock objc.Block
+	if enumerateBlock != nil {
+		__block_enumerateBlock = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			return enumerate_block(foundation.NSObjectFromID(blockParam0))
+			return enumerateBlock(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_enumerate_block.Release()
+		defer __block_enumerateBlock.Release()
 	}
-	_nw_path_enumerate_gateways(path.Ptr(), __block_enumerate_block)
+	_nw_path_enumerate_gateways(path.Ptr(), __block_enumerateBlock)
 }
 
 // C function: nw_path_enumerate_interfaces
-func NwPathEnumerateInterfaces(path *foundation.NSObject, enumerate_block func(*foundation.NSObject) bool) {
-	var __block_enumerate_block objc.Block
-	if enumerate_block != nil {
-		__block_enumerate_block = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
+func NwPathEnumerateInterfaces(path *foundation.NSObject, enumerateBlock func(*foundation.NSObject) bool) {
+	var __block_enumerateBlock objc.Block
+	if enumerateBlock != nil {
+		__block_enumerateBlock = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			return enumerate_block(foundation.NSObjectFromID(blockParam0))
+			return enumerateBlock(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_enumerate_block.Release()
+		defer __block_enumerateBlock.Release()
 	}
-	_nw_path_enumerate_interfaces(path.Ptr(), __block_enumerate_block)
+	_nw_path_enumerate_interfaces(path.Ptr(), __block_enumerateBlock)
 }
 
 // C function: nw_path_get_link_quality
@@ -2295,8 +2295,8 @@ func NwPathIsConstrained(path *foundation.NSObject) bool {
 }
 
 // C function: nw_path_is_equal
-func NwPathIsEqual(path *foundation.NSObject, other_path *foundation.NSObject) bool {
-	return _nw_path_is_equal(path.Ptr(), other_path.Ptr())
+func NwPathIsEqual(path *foundation.NSObject, otherPath *foundation.NSObject) bool {
+	return _nw_path_is_equal(path.Ptr(), otherPath.Ptr())
 }
 
 // C function: nw_path_is_expensive
@@ -2325,25 +2325,25 @@ func NwPathMonitorCreateForEthernetChannel() unsafe.Pointer {
 }
 
 // C function: nw_path_monitor_create_with_type
-func NwPathMonitorCreateWithType(required_interface_type avrouting.Nw_interface_type_t) unsafe.Pointer {
-	return _nw_path_monitor_create_with_type(required_interface_type)
+func NwPathMonitorCreateWithType(requiredInterfaceType avrouting.Nw_interface_type_t) unsafe.Pointer {
+	return _nw_path_monitor_create_with_type(requiredInterfaceType)
 }
 
 // C function: nw_path_monitor_prohibit_interface_type
-func NwPathMonitorProhibitInterfaceType(monitor *foundation.NSObject, interface_type avrouting.Nw_interface_type_t) {
-	_nw_path_monitor_prohibit_interface_type(monitor.Ptr(), interface_type)
+func NwPathMonitorProhibitInterfaceType(monitor *foundation.NSObject, interfaceType avrouting.Nw_interface_type_t) {
+	_nw_path_monitor_prohibit_interface_type(monitor.Ptr(), interfaceType)
 }
 
 // C function: nw_path_monitor_set_cancel_handler
-func NwPathMonitorSetCancelHandler(monitor *foundation.NSObject, cancel_handler func()) {
-	var __block_cancel_handler objc.Block
-	if cancel_handler != nil {
-		__block_cancel_handler = objc.NewBlock(func(_ objc.Block) {
-			cancel_handler()
+func NwPathMonitorSetCancelHandler(monitor *foundation.NSObject, cancelHandler func()) {
+	var __block_cancelHandler objc.Block
+	if cancelHandler != nil {
+		__block_cancelHandler = objc.NewBlock(func(_ objc.Block) {
+			cancelHandler()
 		})
-		defer __block_cancel_handler.Release()
+		defer __block_cancelHandler.Release()
 	}
-	_nw_path_monitor_set_cancel_handler(monitor.Ptr(), __block_cancel_handler)
+	_nw_path_monitor_set_cancel_handler(monitor.Ptr(), __block_cancelHandler)
 }
 
 // C function: nw_path_monitor_set_queue
@@ -2352,18 +2352,18 @@ func NwPathMonitorSetQueue(monitor *foundation.NSObject, queue *foundation.NSObj
 }
 
 // C function: nw_path_monitor_set_update_handler
-func NwPathMonitorSetUpdateHandler(monitor *foundation.NSObject, update_handler func(*foundation.NSObject)) {
-	var __block_update_handler objc.Block
-	if update_handler != nil {
-		__block_update_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+func NwPathMonitorSetUpdateHandler(monitor *foundation.NSObject, updateHandler func(*foundation.NSObject)) {
+	var __block_updateHandler objc.Block
+	if updateHandler != nil {
+		__block_updateHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			update_handler(foundation.NSObjectFromID(blockParam0))
+			updateHandler(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_update_handler.Release()
+		defer __block_updateHandler.Release()
 	}
-	_nw_path_monitor_set_update_handler(monitor.Ptr(), __block_update_handler)
+	_nw_path_monitor_set_update_handler(monitor.Ptr(), __block_updateHandler)
 }
 
 // C function: nw_path_monitor_start
@@ -2372,18 +2372,18 @@ func NwPathMonitorStart(monitor *foundation.NSObject) {
 }
 
 // C function: nw_path_uses_interface_type
-func NwPathUsesInterfaceType(path *foundation.NSObject, interface_type avrouting.Nw_interface_type_t) bool {
-	return _nw_path_uses_interface_type(path.Ptr(), interface_type)
+func NwPathUsesInterfaceType(path *foundation.NSObject, interfaceType avrouting.Nw_interface_type_t) bool {
+	return _nw_path_uses_interface_type(path.Ptr(), interfaceType)
 }
 
 // C function: nw_privacy_context_add_proxy
-func NwPrivacyContextAddProxy(privacy_context *foundation.NSObject, proxy_config *foundation.NSObject) {
-	_nw_privacy_context_add_proxy(privacy_context.Ptr(), proxy_config.Ptr())
+func NwPrivacyContextAddProxy(privacyContext *foundation.NSObject, proxyConfig *foundation.NSObject) {
+	_nw_privacy_context_add_proxy(privacyContext.Ptr(), proxyConfig.Ptr())
 }
 
 // C function: nw_privacy_context_clear_proxies
-func NwPrivacyContextClearProxies(privacy_context *foundation.NSObject) {
-	_nw_privacy_context_clear_proxies(privacy_context.Ptr())
+func NwPrivacyContextClearProxies(privacyContext *foundation.NSObject) {
+	_nw_privacy_context_clear_proxies(privacyContext.Ptr())
 }
 
 // C function: nw_privacy_context_create
@@ -2392,18 +2392,18 @@ func NwPrivacyContextCreate(description string) unsafe.Pointer {
 }
 
 // C function: nw_privacy_context_disable_logging
-func NwPrivacyContextDisableLogging(privacy_context *foundation.NSObject) {
-	_nw_privacy_context_disable_logging(privacy_context.Ptr())
+func NwPrivacyContextDisableLogging(privacyContext *foundation.NSObject) {
+	_nw_privacy_context_disable_logging(privacyContext.Ptr())
 }
 
 // C function: nw_privacy_context_flush_cache
-func NwPrivacyContextFlushCache(privacy_context *foundation.NSObject) {
-	_nw_privacy_context_flush_cache(privacy_context.Ptr())
+func NwPrivacyContextFlushCache(privacyContext *foundation.NSObject) {
+	_nw_privacy_context_flush_cache(privacyContext.Ptr())
 }
 
 // C function: nw_privacy_context_require_encrypted_name_resolution
-func NwPrivacyContextRequireEncryptedNameResolution(privacy_context *foundation.NSObject, require_encrypted_name_resolution bool, fallback_resolver_config *foundation.NSObject) {
-	_nw_privacy_context_require_encrypted_name_resolution(privacy_context.Ptr(), require_encrypted_name_resolution, fallback_resolver_config.Ptr())
+func NwPrivacyContextRequireEncryptedNameResolution(privacyContext *foundation.NSObject, requireEncryptedNameResolution bool, fallbackResolverConfig *foundation.NSObject) {
+	_nw_privacy_context_require_encrypted_name_resolution(privacyContext.Ptr(), requireEncryptedNameResolution, fallbackResolverConfig.Ptr())
 }
 
 // C function: nw_protocol_copy_ip_definition
@@ -2507,18 +2507,18 @@ func NwProtocolStackCopyTransportProtocol(stack *foundation.NSObject) unsafe.Poi
 }
 
 // C function: nw_protocol_stack_iterate_application_protocols
-func NwProtocolStackIterateApplicationProtocols(stack *foundation.NSObject, iterate_block func(*foundation.NSObject)) {
-	var __block_iterate_block objc.Block
-	if iterate_block != nil {
-		__block_iterate_block = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+func NwProtocolStackIterateApplicationProtocols(stack *foundation.NSObject, iterateBlock func(*foundation.NSObject)) {
+	var __block_iterateBlock objc.Block
+	if iterateBlock != nil {
+		__block_iterateBlock = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			iterate_block(foundation.NSObjectFromID(blockParam0))
+			iterateBlock(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_iterate_block.Release()
+		defer __block_iterateBlock.Release()
 	}
-	_nw_protocol_stack_iterate_application_protocols(stack.Ptr(), __block_iterate_block)
+	_nw_protocol_stack_iterate_application_protocols(stack.Ptr(), __block_iterateBlock)
 }
 
 // C function: nw_protocol_stack_prepend_application_protocol
@@ -2532,13 +2532,13 @@ func NwProtocolStackSetTransportProtocol(stack *foundation.NSObject, protocol *f
 }
 
 // C function: nw_proxy_config_add_excluded_domain
-func NwProxyConfigAddExcludedDomain(config *foundation.NSObject, excluded_domain string) {
-	_nw_proxy_config_add_excluded_domain(config.Ptr(), excluded_domain)
+func NwProxyConfigAddExcludedDomain(config *foundation.NSObject, excludedDomain string) {
+	_nw_proxy_config_add_excluded_domain(config.Ptr(), excludedDomain)
 }
 
 // C function: nw_proxy_config_add_match_domain
-func NwProxyConfigAddMatchDomain(config *foundation.NSObject, match_domain string) {
-	_nw_proxy_config_add_match_domain(config.Ptr(), match_domain)
+func NwProxyConfigAddMatchDomain(config *foundation.NSObject, matchDomain string) {
+	_nw_proxy_config_add_match_domain(config.Ptr(), matchDomain)
 }
 
 // C function: nw_proxy_config_clear_excluded_domains
@@ -2552,23 +2552,23 @@ func NwProxyConfigClearMatchDomains(config *foundation.NSObject) {
 }
 
 // C function: nw_proxy_config_create_http_connect
-func NwProxyConfigCreateHttpConnect(proxy_endpoint *foundation.NSObject, proxy_tls_options *foundation.NSObject) unsafe.Pointer {
-	return _nw_proxy_config_create_http_connect(proxy_endpoint.Ptr(), proxy_tls_options.Ptr())
+func NwProxyConfigCreateHttpConnect(proxyEndpoint *foundation.NSObject, proxyTlsOptions *foundation.NSObject) unsafe.Pointer {
+	return _nw_proxy_config_create_http_connect(proxyEndpoint.Ptr(), proxyTlsOptions.Ptr())
 }
 
 // C function: nw_proxy_config_create_oblivious_http
-func NwProxyConfigCreateObliviousHttp(relay *foundation.NSObject, relay_resource_path string, gateway_key_config *uint8, gateway_key_config_length uint) unsafe.Pointer {
-	return _nw_proxy_config_create_oblivious_http(relay.Ptr(), relay_resource_path, gateway_key_config, gateway_key_config_length)
+func NwProxyConfigCreateObliviousHttp(relay *foundation.NSObject, relayResourcePath string, gatewayKeyConfig *uint8, gatewayKeyConfigLength uint) unsafe.Pointer {
+	return _nw_proxy_config_create_oblivious_http(relay.Ptr(), relayResourcePath, gatewayKeyConfig, gatewayKeyConfigLength)
 }
 
 // C function: nw_proxy_config_create_relay
-func NwProxyConfigCreateRelay(first_hop *foundation.NSObject, second_hop *foundation.NSObject) unsafe.Pointer {
-	return _nw_proxy_config_create_relay(first_hop.Ptr(), second_hop.Ptr())
+func NwProxyConfigCreateRelay(firstHop *foundation.NSObject, secondHop *foundation.NSObject) unsafe.Pointer {
+	return _nw_proxy_config_create_relay(firstHop.Ptr(), secondHop.Ptr())
 }
 
 // C function: nw_proxy_config_create_socksv5
-func NwProxyConfigCreateSocksv5(proxy_endpoint *foundation.NSObject) unsafe.Pointer {
-	return _nw_proxy_config_create_socksv5(proxy_endpoint.Ptr())
+func NwProxyConfigCreateSocksv5(proxyEndpoint *foundation.NSObject) unsafe.Pointer {
+	return _nw_proxy_config_create_socksv5(proxyEndpoint.Ptr())
 }
 
 // C function: nw_proxy_config_enumerate_excluded_domains
@@ -2596,23 +2596,23 @@ func NwProxyConfigEnumerateMatchDomains(config *foundation.NSObject, enumerator 
 }
 
 // C function: nw_proxy_config_get_failover_allowed
-func NwProxyConfigGetFailoverAllowed(proxy_config *foundation.NSObject) bool {
-	return _nw_proxy_config_get_failover_allowed(proxy_config.Ptr())
+func NwProxyConfigGetFailoverAllowed(proxyConfig *foundation.NSObject) bool {
+	return _nw_proxy_config_get_failover_allowed(proxyConfig.Ptr())
 }
 
 // C function: nw_proxy_config_set_failover_allowed
-func NwProxyConfigSetFailoverAllowed(proxy_config *foundation.NSObject, failover_allowed bool) {
-	_nw_proxy_config_set_failover_allowed(proxy_config.Ptr(), failover_allowed)
+func NwProxyConfigSetFailoverAllowed(proxyConfig *foundation.NSObject, failoverAllowed bool) {
+	_nw_proxy_config_set_failover_allowed(proxyConfig.Ptr(), failoverAllowed)
 }
 
 // C function: nw_proxy_config_set_username_and_password
-func NwProxyConfigSetUsernameAndPassword(proxy_config *foundation.NSObject, username string, password string) {
-	_nw_proxy_config_set_username_and_password(proxy_config.Ptr(), username, password)
+func NwProxyConfigSetUsernameAndPassword(proxyConfig *foundation.NSObject, username string, password string) {
+	_nw_proxy_config_set_username_and_password(proxyConfig.Ptr(), username, password)
 }
 
 // C function: nw_quic_add_tls_application_protocol
-func NwQuicAddTlsApplicationProtocol(options *foundation.NSObject, application_protocol string) {
-	_nw_quic_add_tls_application_protocol(options.Ptr(), application_protocol)
+func NwQuicAddTlsApplicationProtocol(options *foundation.NSObject, applicationProtocol string) {
+	_nw_quic_add_tls_application_protocol(options.Ptr(), applicationProtocol)
 }
 
 // C function: nw_quic_copy_sec_protocol_metadata
@@ -2736,8 +2736,8 @@ func NwQuicGetStreamIsUnidirectional(options *foundation.NSObject) bool {
 }
 
 // C function: nw_quic_get_stream_type
-func NwQuicGetStreamType(stream_metadata *foundation.NSObject) uint8 {
-	return _nw_quic_get_stream_type(stream_metadata.Ptr())
+func NwQuicGetStreamType(streamMetadata *foundation.NSObject) uint8 {
+	return _nw_quic_get_stream_type(streamMetadata.Ptr())
 }
 
 // C function: nw_quic_get_stream_usable_datagram_frame_size
@@ -2746,93 +2746,93 @@ func NwQuicGetStreamUsableDatagramFrameSize(metadata *foundation.NSObject) uint1
 }
 
 // C function: nw_quic_set_application_error
-func NwQuicSetApplicationError(metadata *foundation.NSObject, application_error uint64, reason string) {
-	_nw_quic_set_application_error(metadata.Ptr(), application_error, reason)
+func NwQuicSetApplicationError(metadata *foundation.NSObject, applicationError uint64, reason string) {
+	_nw_quic_set_application_error(metadata.Ptr(), applicationError, reason)
 }
 
 // C function: nw_quic_set_idle_timeout
-func NwQuicSetIdleTimeout(options *foundation.NSObject, idle_timeout uint32) {
-	_nw_quic_set_idle_timeout(options.Ptr(), idle_timeout)
+func NwQuicSetIdleTimeout(options *foundation.NSObject, idleTimeout uint32) {
+	_nw_quic_set_idle_timeout(options.Ptr(), idleTimeout)
 }
 
 // C function: nw_quic_set_initial_max_data
-func NwQuicSetInitialMaxData(options *foundation.NSObject, initial_max_data uint64) {
-	_nw_quic_set_initial_max_data(options.Ptr(), initial_max_data)
+func NwQuicSetInitialMaxData(options *foundation.NSObject, initialMaxData uint64) {
+	_nw_quic_set_initial_max_data(options.Ptr(), initialMaxData)
 }
 
 // C function: nw_quic_set_initial_max_stream_data_bidirectional_local
-func NwQuicSetInitialMaxStreamDataBidirectionalLocal(options *foundation.NSObject, initial_max_stream_data_bidirectional_local uint64) {
-	_nw_quic_set_initial_max_stream_data_bidirectional_local(options.Ptr(), initial_max_stream_data_bidirectional_local)
+func NwQuicSetInitialMaxStreamDataBidirectionalLocal(options *foundation.NSObject, initialMaxStreamDataBidirectionalLocal uint64) {
+	_nw_quic_set_initial_max_stream_data_bidirectional_local(options.Ptr(), initialMaxStreamDataBidirectionalLocal)
 }
 
 // C function: nw_quic_set_initial_max_stream_data_bidirectional_remote
-func NwQuicSetInitialMaxStreamDataBidirectionalRemote(options *foundation.NSObject, initial_max_stream_data_bidirectional_remote uint64) {
-	_nw_quic_set_initial_max_stream_data_bidirectional_remote(options.Ptr(), initial_max_stream_data_bidirectional_remote)
+func NwQuicSetInitialMaxStreamDataBidirectionalRemote(options *foundation.NSObject, initialMaxStreamDataBidirectionalRemote uint64) {
+	_nw_quic_set_initial_max_stream_data_bidirectional_remote(options.Ptr(), initialMaxStreamDataBidirectionalRemote)
 }
 
 // C function: nw_quic_set_initial_max_stream_data_unidirectional
-func NwQuicSetInitialMaxStreamDataUnidirectional(options *foundation.NSObject, initial_max_stream_data_unidirectional uint64) {
-	_nw_quic_set_initial_max_stream_data_unidirectional(options.Ptr(), initial_max_stream_data_unidirectional)
+func NwQuicSetInitialMaxStreamDataUnidirectional(options *foundation.NSObject, initialMaxStreamDataUnidirectional uint64) {
+	_nw_quic_set_initial_max_stream_data_unidirectional(options.Ptr(), initialMaxStreamDataUnidirectional)
 }
 
 // C function: nw_quic_set_initial_max_streams_bidirectional
-func NwQuicSetInitialMaxStreamsBidirectional(options *foundation.NSObject, initial_max_streams_bidirectional uint64) {
-	_nw_quic_set_initial_max_streams_bidirectional(options.Ptr(), initial_max_streams_bidirectional)
+func NwQuicSetInitialMaxStreamsBidirectional(options *foundation.NSObject, initialMaxStreamsBidirectional uint64) {
+	_nw_quic_set_initial_max_streams_bidirectional(options.Ptr(), initialMaxStreamsBidirectional)
 }
 
 // C function: nw_quic_set_initial_max_streams_unidirectional
-func NwQuicSetInitialMaxStreamsUnidirectional(options *foundation.NSObject, initial_max_streams_unidirectional uint64) {
-	_nw_quic_set_initial_max_streams_unidirectional(options.Ptr(), initial_max_streams_unidirectional)
+func NwQuicSetInitialMaxStreamsUnidirectional(options *foundation.NSObject, initialMaxStreamsUnidirectional uint64) {
+	_nw_quic_set_initial_max_streams_unidirectional(options.Ptr(), initialMaxStreamsUnidirectional)
 }
 
 // C function: nw_quic_set_keepalive_interval
-func NwQuicSetKeepaliveInterval(metadata *foundation.NSObject, keepalive_interval uint16) {
-	_nw_quic_set_keepalive_interval(metadata.Ptr(), keepalive_interval)
+func NwQuicSetKeepaliveInterval(metadata *foundation.NSObject, keepaliveInterval uint16) {
+	_nw_quic_set_keepalive_interval(metadata.Ptr(), keepaliveInterval)
 }
 
 // C function: nw_quic_set_local_max_streams_bidirectional
-func NwQuicSetLocalMaxStreamsBidirectional(metadata *foundation.NSObject, max_streams_bidirectional uint64) {
-	_nw_quic_set_local_max_streams_bidirectional(metadata.Ptr(), max_streams_bidirectional)
+func NwQuicSetLocalMaxStreamsBidirectional(metadata *foundation.NSObject, maxStreamsBidirectional uint64) {
+	_nw_quic_set_local_max_streams_bidirectional(metadata.Ptr(), maxStreamsBidirectional)
 }
 
 // C function: nw_quic_set_local_max_streams_unidirectional
-func NwQuicSetLocalMaxStreamsUnidirectional(metadata *foundation.NSObject, max_streams_unidirectional uint64) {
-	_nw_quic_set_local_max_streams_unidirectional(metadata.Ptr(), max_streams_unidirectional)
+func NwQuicSetLocalMaxStreamsUnidirectional(metadata *foundation.NSObject, maxStreamsUnidirectional uint64) {
+	_nw_quic_set_local_max_streams_unidirectional(metadata.Ptr(), maxStreamsUnidirectional)
 }
 
 // C function: nw_quic_set_max_datagram_frame_size
-func NwQuicSetMaxDatagramFrameSize(options *foundation.NSObject, max_datagram_frame_size uint16) {
-	_nw_quic_set_max_datagram_frame_size(options.Ptr(), max_datagram_frame_size)
+func NwQuicSetMaxDatagramFrameSize(options *foundation.NSObject, maxDatagramFrameSize uint16) {
+	_nw_quic_set_max_datagram_frame_size(options.Ptr(), maxDatagramFrameSize)
 }
 
 // C function: nw_quic_set_max_udp_payload_size
-func NwQuicSetMaxUdpPayloadSize(options *foundation.NSObject, max_udp_payload_size uint16) {
-	_nw_quic_set_max_udp_payload_size(options.Ptr(), max_udp_payload_size)
+func NwQuicSetMaxUdpPayloadSize(options *foundation.NSObject, maxUdpPayloadSize uint16) {
+	_nw_quic_set_max_udp_payload_size(options.Ptr(), maxUdpPayloadSize)
 }
 
 // C function: nw_quic_set_stream_application_error
-func NwQuicSetStreamApplicationError(metadata *foundation.NSObject, application_error uint64) {
-	_nw_quic_set_stream_application_error(metadata.Ptr(), application_error)
+func NwQuicSetStreamApplicationError(metadata *foundation.NSObject, applicationError uint64) {
+	_nw_quic_set_stream_application_error(metadata.Ptr(), applicationError)
 }
 
 // C function: nw_quic_set_stream_is_datagram
-func NwQuicSetStreamIsDatagram(options *foundation.NSObject, is_datagram bool) {
-	_nw_quic_set_stream_is_datagram(options.Ptr(), is_datagram)
+func NwQuicSetStreamIsDatagram(options *foundation.NSObject, isDatagram bool) {
+	_nw_quic_set_stream_is_datagram(options.Ptr(), isDatagram)
 }
 
 // C function: nw_quic_set_stream_is_unidirectional
-func NwQuicSetStreamIsUnidirectional(options *foundation.NSObject, is_unidirectional bool) {
-	_nw_quic_set_stream_is_unidirectional(options.Ptr(), is_unidirectional)
+func NwQuicSetStreamIsUnidirectional(options *foundation.NSObject, isUnidirectional bool) {
+	_nw_quic_set_stream_is_unidirectional(options.Ptr(), isUnidirectional)
 }
 
 // C function: nw_relay_hop_add_additional_http_header_field
-func NwRelayHopAddAdditionalHttpHeaderField(relay_hop *foundation.NSObject, field_name string, field_value string) {
-	_nw_relay_hop_add_additional_http_header_field(relay_hop.Ptr(), field_name, field_value)
+func NwRelayHopAddAdditionalHttpHeaderField(relayHop *foundation.NSObject, fieldName string, fieldValue string) {
+	_nw_relay_hop_add_additional_http_header_field(relayHop.Ptr(), fieldName, fieldValue)
 }
 
 // C function: nw_relay_hop_create
-func NwRelayHopCreate(http3_relay_endpoint *foundation.NSObject, http2_relay_endpoint *foundation.NSObject, relay_tls_options *foundation.NSObject) unsafe.Pointer {
-	return _nw_relay_hop_create(http3_relay_endpoint.Ptr(), http2_relay_endpoint.Ptr(), relay_tls_options.Ptr())
+func NwRelayHopCreate(http3RelayEndpoint *foundation.NSObject, http2RelayEndpoint *foundation.NSObject, relayTlsOptions *foundation.NSObject) unsafe.Pointer {
+	return _nw_relay_hop_create(http3RelayEndpoint.Ptr(), http2RelayEndpoint.Ptr(), relayTlsOptions.Ptr())
 }
 
 // C function: nw_release
@@ -2841,48 +2841,48 @@ func NwRelease(obj unsafe.Pointer) {
 }
 
 // C function: nw_resolution_report_copy_preferred_endpoint
-func NwResolutionReportCopyPreferredEndpoint(resolution_report *foundation.NSObject) unsafe.Pointer {
-	return _nw_resolution_report_copy_preferred_endpoint(resolution_report.Ptr())
+func NwResolutionReportCopyPreferredEndpoint(resolutionReport *foundation.NSObject) unsafe.Pointer {
+	return _nw_resolution_report_copy_preferred_endpoint(resolutionReport.Ptr())
 }
 
 // C function: nw_resolution_report_copy_successful_endpoint
-func NwResolutionReportCopySuccessfulEndpoint(resolution_report *foundation.NSObject) unsafe.Pointer {
-	return _nw_resolution_report_copy_successful_endpoint(resolution_report.Ptr())
+func NwResolutionReportCopySuccessfulEndpoint(resolutionReport *foundation.NSObject) unsafe.Pointer {
+	return _nw_resolution_report_copy_successful_endpoint(resolutionReport.Ptr())
 }
 
 // C function: nw_resolution_report_get_endpoint_count
-func NwResolutionReportGetEndpointCount(resolution_report *foundation.NSObject) uint32 {
-	return _nw_resolution_report_get_endpoint_count(resolution_report.Ptr())
+func NwResolutionReportGetEndpointCount(resolutionReport *foundation.NSObject) uint32 {
+	return _nw_resolution_report_get_endpoint_count(resolutionReport.Ptr())
 }
 
 // C function: nw_resolution_report_get_milliseconds
-func NwResolutionReportGetMilliseconds(resolution_report *foundation.NSObject) uint64 {
-	return _nw_resolution_report_get_milliseconds(resolution_report.Ptr())
+func NwResolutionReportGetMilliseconds(resolutionReport *foundation.NSObject) uint64 {
+	return _nw_resolution_report_get_milliseconds(resolutionReport.Ptr())
 }
 
 // C function: nw_resolution_report_get_protocol
-func NwResolutionReportGetProtocol(resolution_report *foundation.NSObject) avrouting.Nw_report_resolution_protocol_t {
-	return _nw_resolution_report_get_protocol(resolution_report.Ptr())
+func NwResolutionReportGetProtocol(resolutionReport *foundation.NSObject) avrouting.Nw_report_resolution_protocol_t {
+	return _nw_resolution_report_get_protocol(resolutionReport.Ptr())
 }
 
 // C function: nw_resolution_report_get_source
-func NwResolutionReportGetSource(resolution_report *foundation.NSObject) avrouting.Nw_report_resolution_source_t {
-	return _nw_resolution_report_get_source(resolution_report.Ptr())
+func NwResolutionReportGetSource(resolutionReport *foundation.NSObject) avrouting.Nw_report_resolution_source_t {
+	return _nw_resolution_report_get_source(resolutionReport.Ptr())
 }
 
 // C function: nw_resolver_config_add_server_address
-func NwResolverConfigAddServerAddress(config *foundation.NSObject, server_address *foundation.NSObject) {
-	_nw_resolver_config_add_server_address(config.Ptr(), server_address.Ptr())
+func NwResolverConfigAddServerAddress(config *foundation.NSObject, serverAddress *foundation.NSObject) {
+	_nw_resolver_config_add_server_address(config.Ptr(), serverAddress.Ptr())
 }
 
 // C function: nw_resolver_config_create_https
-func NwResolverConfigCreateHttps(url_endpoint *foundation.NSObject) unsafe.Pointer {
-	return _nw_resolver_config_create_https(url_endpoint.Ptr())
+func NwResolverConfigCreateHttps(urlEndpoint *foundation.NSObject) unsafe.Pointer {
+	return _nw_resolver_config_create_https(urlEndpoint.Ptr())
 }
 
 // C function: nw_resolver_config_create_tls
-func NwResolverConfigCreateTls(server_endpoint *foundation.NSObject) unsafe.Pointer {
-	return _nw_resolver_config_create_tls(server_endpoint.Ptr())
+func NwResolverConfigCreateTls(serverEndpoint *foundation.NSObject) unsafe.Pointer {
+	return _nw_resolver_config_create_tls(serverEndpoint.Ptr())
 }
 
 // C function: nw_retain
@@ -2906,83 +2906,83 @@ func NwTcpGetAvailableSendBuffer(metadata *foundation.NSObject) uint32 {
 }
 
 // C function: nw_tcp_options_set_connection_timeout
-func NwTcpOptionsSetConnectionTimeout(options *foundation.NSObject, connection_timeout uint32) {
-	_nw_tcp_options_set_connection_timeout(options.Ptr(), connection_timeout)
+func NwTcpOptionsSetConnectionTimeout(options *foundation.NSObject, connectionTimeout uint32) {
+	_nw_tcp_options_set_connection_timeout(options.Ptr(), connectionTimeout)
 }
 
 // C function: nw_tcp_options_set_disable_ack_stretching
-func NwTcpOptionsSetDisableAckStretching(options *foundation.NSObject, disable_ack_stretching bool) {
-	_nw_tcp_options_set_disable_ack_stretching(options.Ptr(), disable_ack_stretching)
+func NwTcpOptionsSetDisableAckStretching(options *foundation.NSObject, disableAckStretching bool) {
+	_nw_tcp_options_set_disable_ack_stretching(options.Ptr(), disableAckStretching)
 }
 
 // C function: nw_tcp_options_set_disable_ecn
-func NwTcpOptionsSetDisableEcn(options *foundation.NSObject, disable_ecn bool) {
-	_nw_tcp_options_set_disable_ecn(options.Ptr(), disable_ecn)
+func NwTcpOptionsSetDisableEcn(options *foundation.NSObject, disableEcn bool) {
+	_nw_tcp_options_set_disable_ecn(options.Ptr(), disableEcn)
 }
 
 // C function: nw_tcp_options_set_enable_fast_open
-func NwTcpOptionsSetEnableFastOpen(options *foundation.NSObject, enable_fast_open bool) {
-	_nw_tcp_options_set_enable_fast_open(options.Ptr(), enable_fast_open)
+func NwTcpOptionsSetEnableFastOpen(options *foundation.NSObject, enableFastOpen bool) {
+	_nw_tcp_options_set_enable_fast_open(options.Ptr(), enableFastOpen)
 }
 
 // C function: nw_tcp_options_set_enable_keepalive
-func NwTcpOptionsSetEnableKeepalive(options *foundation.NSObject, enable_keepalive bool) {
-	_nw_tcp_options_set_enable_keepalive(options.Ptr(), enable_keepalive)
+func NwTcpOptionsSetEnableKeepalive(options *foundation.NSObject, enableKeepalive bool) {
+	_nw_tcp_options_set_enable_keepalive(options.Ptr(), enableKeepalive)
 }
 
 // C function: nw_tcp_options_set_keepalive_count
-func NwTcpOptionsSetKeepaliveCount(options *foundation.NSObject, keepalive_count uint32) {
-	_nw_tcp_options_set_keepalive_count(options.Ptr(), keepalive_count)
+func NwTcpOptionsSetKeepaliveCount(options *foundation.NSObject, keepaliveCount uint32) {
+	_nw_tcp_options_set_keepalive_count(options.Ptr(), keepaliveCount)
 }
 
 // C function: nw_tcp_options_set_keepalive_idle_time
-func NwTcpOptionsSetKeepaliveIdleTime(options *foundation.NSObject, keepalive_idle_time uint32) {
-	_nw_tcp_options_set_keepalive_idle_time(options.Ptr(), keepalive_idle_time)
+func NwTcpOptionsSetKeepaliveIdleTime(options *foundation.NSObject, keepaliveIdleTime uint32) {
+	_nw_tcp_options_set_keepalive_idle_time(options.Ptr(), keepaliveIdleTime)
 }
 
 // C function: nw_tcp_options_set_keepalive_interval
-func NwTcpOptionsSetKeepaliveInterval(options *foundation.NSObject, keepalive_interval uint32) {
-	_nw_tcp_options_set_keepalive_interval(options.Ptr(), keepalive_interval)
+func NwTcpOptionsSetKeepaliveInterval(options *foundation.NSObject, keepaliveInterval uint32) {
+	_nw_tcp_options_set_keepalive_interval(options.Ptr(), keepaliveInterval)
 }
 
 // C function: nw_tcp_options_set_maximum_segment_size
-func NwTcpOptionsSetMaximumSegmentSize(options *foundation.NSObject, maximum_segment_size uint32) {
-	_nw_tcp_options_set_maximum_segment_size(options.Ptr(), maximum_segment_size)
+func NwTcpOptionsSetMaximumSegmentSize(options *foundation.NSObject, maximumSegmentSize uint32) {
+	_nw_tcp_options_set_maximum_segment_size(options.Ptr(), maximumSegmentSize)
 }
 
 // C function: nw_tcp_options_set_multipath_force_version
-func NwTcpOptionsSetMultipathForceVersion(options *foundation.NSObject, multipath_force_version avrouting.Nw_multipath_version_t) {
-	_nw_tcp_options_set_multipath_force_version(options.Ptr(), multipath_force_version)
+func NwTcpOptionsSetMultipathForceVersion(options *foundation.NSObject, multipathForceVersion avrouting.Nw_multipath_version_t) {
+	_nw_tcp_options_set_multipath_force_version(options.Ptr(), multipathForceVersion)
 }
 
 // C function: nw_tcp_options_set_no_delay
-func NwTcpOptionsSetNoDelay(options *foundation.NSObject, no_delay bool) {
-	_nw_tcp_options_set_no_delay(options.Ptr(), no_delay)
+func NwTcpOptionsSetNoDelay(options *foundation.NSObject, noDelay bool) {
+	_nw_tcp_options_set_no_delay(options.Ptr(), noDelay)
 }
 
 // C function: nw_tcp_options_set_no_options
-func NwTcpOptionsSetNoOptions(options *foundation.NSObject, no_options bool) {
-	_nw_tcp_options_set_no_options(options.Ptr(), no_options)
+func NwTcpOptionsSetNoOptions(options *foundation.NSObject, noOptions bool) {
+	_nw_tcp_options_set_no_options(options.Ptr(), noOptions)
 }
 
 // C function: nw_tcp_options_set_no_push
-func NwTcpOptionsSetNoPush(options *foundation.NSObject, no_push bool) {
-	_nw_tcp_options_set_no_push(options.Ptr(), no_push)
+func NwTcpOptionsSetNoPush(options *foundation.NSObject, noPush bool) {
+	_nw_tcp_options_set_no_push(options.Ptr(), noPush)
 }
 
 // C function: nw_tcp_options_set_persist_timeout
-func NwTcpOptionsSetPersistTimeout(options *foundation.NSObject, persist_timeout uint32) {
-	_nw_tcp_options_set_persist_timeout(options.Ptr(), persist_timeout)
+func NwTcpOptionsSetPersistTimeout(options *foundation.NSObject, persistTimeout uint32) {
+	_nw_tcp_options_set_persist_timeout(options.Ptr(), persistTimeout)
 }
 
 // C function: nw_tcp_options_set_retransmit_connection_drop_time
-func NwTcpOptionsSetRetransmitConnectionDropTime(options *foundation.NSObject, retransmit_connection_drop_time uint32) {
-	_nw_tcp_options_set_retransmit_connection_drop_time(options.Ptr(), retransmit_connection_drop_time)
+func NwTcpOptionsSetRetransmitConnectionDropTime(options *foundation.NSObject, retransmitConnectionDropTime uint32) {
+	_nw_tcp_options_set_retransmit_connection_drop_time(options.Ptr(), retransmitConnectionDropTime)
 }
 
 // C function: nw_tcp_options_set_retransmit_fin_drop
-func NwTcpOptionsSetRetransmitFinDrop(options *foundation.NSObject, retransmit_fin_drop bool) {
-	_nw_tcp_options_set_retransmit_fin_drop(options.Ptr(), retransmit_fin_drop)
+func NwTcpOptionsSetRetransmitFinDrop(options *foundation.NSObject, retransmitFinDrop bool) {
+	_nw_tcp_options_set_retransmit_fin_drop(options.Ptr(), retransmitFinDrop)
 }
 
 // C function: nw_tls_copy_sec_protocol_metadata
@@ -3001,31 +3001,31 @@ func NwTlsCreateOptions() unsafe.Pointer {
 }
 
 // C function: nw_txt_record_access_bytes
-func NwTxtRecordAccessBytes(txt_record *foundation.NSObject, access_bytes func(*uint8, uint) bool) bool {
-	var __block_access_bytes objc.Block
-	if access_bytes != nil {
-		__block_access_bytes = objc.NewBlock(func(_ objc.Block, blockParam0 *uint8, blockParam1 uint) bool {
-			return access_bytes(blockParam0, blockParam1)
+func NwTxtRecordAccessBytes(txtRecord *foundation.NSObject, accessBytes func(*uint8, uint) bool) bool {
+	var __block_accessBytes objc.Block
+	if accessBytes != nil {
+		__block_accessBytes = objc.NewBlock(func(_ objc.Block, blockParam0 *uint8, blockParam1 uint) bool {
+			return accessBytes(blockParam0, blockParam1)
 		})
-		defer __block_access_bytes.Release()
+		defer __block_accessBytes.Release()
 	}
-	return _nw_txt_record_access_bytes(txt_record.Ptr(), __block_access_bytes)
+	return _nw_txt_record_access_bytes(txtRecord.Ptr(), __block_accessBytes)
 }
 
 // C function: nw_txt_record_access_key
-func NwTxtRecordAccessKey(txt_record *foundation.NSObject, key string, access_value func(string, unsafe.Pointer, *uint8, unsafe.Pointer) bool) bool {
-	var __block_access_value objc.Block
-	if access_value != nil {
-		__block_access_value = objc.NewBlock(func(_ objc.Block, blockParam0 uintptr, blockParam1 unsafe.Pointer, blockParam2 *uint8, blockParam3 unsafe.Pointer) bool {
-			return access_value(purego.GoCString(blockParam0), blockParam1, blockParam2, blockParam3)
+func NwTxtRecordAccessKey(txtRecord *foundation.NSObject, key string, accessValue func(string, unsafe.Pointer, *uint8, unsafe.Pointer) bool) bool {
+	var __block_accessValue objc.Block
+	if accessValue != nil {
+		__block_accessValue = objc.NewBlock(func(_ objc.Block, blockParam0 uintptr, blockParam1 unsafe.Pointer, blockParam2 *uint8, blockParam3 unsafe.Pointer) bool {
+			return accessValue(purego.GoCString(blockParam0), blockParam1, blockParam2, blockParam3)
 		})
-		defer __block_access_value.Release()
+		defer __block_accessValue.Release()
 	}
-	return _nw_txt_record_access_key(txt_record.Ptr(), key, __block_access_value)
+	return _nw_txt_record_access_key(txtRecord.Ptr(), key, __block_accessValue)
 }
 
 // C function: nw_txt_record_apply
-func NwTxtRecordApply(txt_record *foundation.NSObject, applier func(string, unsafe.Pointer, *uint8, unsafe.Pointer) bool) bool {
+func NwTxtRecordApply(txtRecord *foundation.NSObject, applier func(string, unsafe.Pointer, *uint8, unsafe.Pointer) bool) bool {
 	var __block_applier objc.Block
 	if applier != nil {
 		__block_applier = objc.NewBlock(func(_ objc.Block, blockParam0 uintptr, blockParam1 unsafe.Pointer, blockParam2 *uint8, blockParam3 unsafe.Pointer) bool {
@@ -3033,12 +3033,12 @@ func NwTxtRecordApply(txt_record *foundation.NSObject, applier func(string, unsa
 		})
 		defer __block_applier.Release()
 	}
-	return _nw_txt_record_apply(txt_record.Ptr(), __block_applier)
+	return _nw_txt_record_apply(txtRecord.Ptr(), __block_applier)
 }
 
 // C function: nw_txt_record_copy
-func NwTxtRecordCopy(txt_record *foundation.NSObject) unsafe.Pointer {
-	return _nw_txt_record_copy(txt_record.Ptr())
+func NwTxtRecordCopy(txtRecord *foundation.NSObject) unsafe.Pointer {
+	return _nw_txt_record_copy(txtRecord.Ptr())
 }
 
 // C function: nw_txt_record_create_dictionary
@@ -3047,23 +3047,23 @@ func NwTxtRecordCreateDictionary() unsafe.Pointer {
 }
 
 // C function: nw_txt_record_create_with_bytes
-func NwTxtRecordCreateWithBytes(txt_bytes *uint8, txt_len uint) unsafe.Pointer {
-	return _nw_txt_record_create_with_bytes(txt_bytes, txt_len)
+func NwTxtRecordCreateWithBytes(txtBytes *uint8, txtLen uint) unsafe.Pointer {
+	return _nw_txt_record_create_with_bytes(txtBytes, txtLen)
 }
 
 // C function: nw_txt_record_find_key
-func NwTxtRecordFindKey(txt_record *foundation.NSObject, key string) avrouting.Nw_txt_record_find_key_t {
-	return _nw_txt_record_find_key(txt_record.Ptr(), key)
+func NwTxtRecordFindKey(txtRecord *foundation.NSObject, key string) avrouting.Nw_txt_record_find_key_t {
+	return _nw_txt_record_find_key(txtRecord.Ptr(), key)
 }
 
 // C function: nw_txt_record_get_key_count
-func NwTxtRecordGetKeyCount(txt_record *foundation.NSObject) uint {
-	return _nw_txt_record_get_key_count(txt_record.Ptr())
+func NwTxtRecordGetKeyCount(txtRecord *foundation.NSObject) uint {
+	return _nw_txt_record_get_key_count(txtRecord.Ptr())
 }
 
 // C function: nw_txt_record_is_dictionary
-func NwTxtRecordIsDictionary(txt_record *foundation.NSObject) bool {
-	return _nw_txt_record_is_dictionary(txt_record.Ptr())
+func NwTxtRecordIsDictionary(txtRecord *foundation.NSObject) bool {
+	return _nw_txt_record_is_dictionary(txtRecord.Ptr())
 }
 
 // C function: nw_txt_record_is_equal
@@ -3072,13 +3072,13 @@ func NwTxtRecordIsEqual(left *foundation.NSObject, right *foundation.NSObject) b
 }
 
 // C function: nw_txt_record_remove_key
-func NwTxtRecordRemoveKey(txt_record *foundation.NSObject, key string) bool {
-	return _nw_txt_record_remove_key(txt_record.Ptr(), key)
+func NwTxtRecordRemoveKey(txtRecord *foundation.NSObject, key string) bool {
+	return _nw_txt_record_remove_key(txtRecord.Ptr(), key)
 }
 
 // C function: nw_txt_record_set_key
-func NwTxtRecordSetKey(txt_record *foundation.NSObject, key string, value *uint8, value_len uint) bool {
-	return _nw_txt_record_set_key(txt_record.Ptr(), key, value, value_len)
+func NwTxtRecordSetKey(txtRecord *foundation.NSObject, key string, value *uint8, valueLen uint) bool {
+	return _nw_txt_record_set_key(txtRecord.Ptr(), key, value, valueLen)
 }
 
 // C function: nw_udp_create_metadata
@@ -3092,8 +3092,8 @@ func NwUdpCreateOptions() unsafe.Pointer {
 }
 
 // C function: nw_udp_options_set_prefer_no_checksum
-func NwUdpOptionsSetPreferNoChecksum(options *foundation.NSObject, prefer_no_checksum bool) {
-	_nw_udp_options_set_prefer_no_checksum(options.Ptr(), prefer_no_checksum)
+func NwUdpOptionsSetPreferNoChecksum(options *foundation.NSObject, preferNoChecksum bool) {
+	_nw_udp_options_set_prefer_no_checksum(options.Ptr(), preferNoChecksum)
 }
 
 // C function: nw_ws_create_metadata
@@ -3122,23 +3122,23 @@ func NwWsMetadataGetOpcode(metadata *foundation.NSObject) avrouting.Nw_ws_opcode
 }
 
 // C function: nw_ws_metadata_set_close_code
-func NwWsMetadataSetCloseCode(metadata *foundation.NSObject, close_code avrouting.Nw_ws_close_code_t) {
-	_nw_ws_metadata_set_close_code(metadata.Ptr(), close_code)
+func NwWsMetadataSetCloseCode(metadata *foundation.NSObject, closeCode avrouting.Nw_ws_close_code_t) {
+	_nw_ws_metadata_set_close_code(metadata.Ptr(), closeCode)
 }
 
 // C function: nw_ws_metadata_set_pong_handler
-func NwWsMetadataSetPongHandler(metadata *foundation.NSObject, client_queue *foundation.NSObject, pong_handler func(*foundation.NSObject)) {
-	var __block_pong_handler objc.Block
-	if pong_handler != nil {
-		__block_pong_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+func NwWsMetadataSetPongHandler(metadata *foundation.NSObject, clientQueue *foundation.NSObject, pongHandler func(*foundation.NSObject)) {
+	var __block_pongHandler objc.Block
+	if pongHandler != nil {
+		__block_pongHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			pong_handler(foundation.NSObjectFromID(blockParam0))
+			pongHandler(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_pong_handler.Release()
+		defer __block_pongHandler.Release()
 	}
-	_nw_ws_metadata_set_pong_handler(metadata.Ptr(), client_queue.Ptr(), __block_pong_handler)
+	_nw_ws_metadata_set_pong_handler(metadata.Ptr(), clientQueue.Ptr(), __block_pongHandler)
 }
 
 // C function: nw_ws_options_add_additional_header
@@ -3152,23 +3152,23 @@ func NwWsOptionsAddSubprotocol(options *foundation.NSObject, subprotocol string)
 }
 
 // C function: nw_ws_options_set_auto_reply_ping
-func NwWsOptionsSetAutoReplyPing(options *foundation.NSObject, auto_reply_ping bool) {
-	_nw_ws_options_set_auto_reply_ping(options.Ptr(), auto_reply_ping)
+func NwWsOptionsSetAutoReplyPing(options *foundation.NSObject, autoReplyPing bool) {
+	_nw_ws_options_set_auto_reply_ping(options.Ptr(), autoReplyPing)
 }
 
 // C function: nw_ws_options_set_client_request_handler
-func NwWsOptionsSetClientRequestHandler(options *foundation.NSObject, client_queue *foundation.NSObject, handler objc.Block) {
-	_nw_ws_options_set_client_request_handler(options.Ptr(), client_queue.Ptr(), handler)
+func NwWsOptionsSetClientRequestHandler(options *foundation.NSObject, clientQueue *foundation.NSObject, handler objc.Block) {
+	_nw_ws_options_set_client_request_handler(options.Ptr(), clientQueue.Ptr(), handler)
 }
 
 // C function: nw_ws_options_set_maximum_message_size
-func NwWsOptionsSetMaximumMessageSize(options *foundation.NSObject, maximum_message_size uint) {
-	_nw_ws_options_set_maximum_message_size(options.Ptr(), maximum_message_size)
+func NwWsOptionsSetMaximumMessageSize(options *foundation.NSObject, maximumMessageSize uint) {
+	_nw_ws_options_set_maximum_message_size(options.Ptr(), maximumMessageSize)
 }
 
 // C function: nw_ws_options_set_skip_handshake
-func NwWsOptionsSetSkipHandshake(options *foundation.NSObject, skip_handshake bool) {
-	_nw_ws_options_set_skip_handshake(options.Ptr(), skip_handshake)
+func NwWsOptionsSetSkipHandshake(options *foundation.NSObject, skipHandshake bool) {
+	_nw_ws_options_set_skip_handshake(options.Ptr(), skipHandshake)
 }
 
 // C function: nw_ws_request_enumerate_additional_headers
@@ -3201,8 +3201,8 @@ func NwWsResponseAddAdditionalHeader(response *foundation.NSObject, name string,
 }
 
 // C function: nw_ws_response_create
-func NwWsResponseCreate(status avrouting.Nw_ws_response_status_t, selected_subprotocol string) unsafe.Pointer {
-	return _nw_ws_response_create(status, selected_subprotocol)
+func NwWsResponseCreate(status avrouting.Nw_ws_response_status_t, selectedSubprotocol string) unsafe.Pointer {
+	return _nw_ws_response_create(status, selectedSubprotocol)
 }
 
 // C function: nw_ws_response_enumerate_additional_headers

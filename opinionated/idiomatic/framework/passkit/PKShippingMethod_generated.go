@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,6 +68,7 @@ func (sm *ShippingMethod) WithDetail(detail string) *ShippingMethod {
 
 // WithDateComponentsRange sets an expected range of delivery or shipping dates for a package, or the time range when an item is available for pickup.
 func (sm *ShippingMethod) WithDateComponentsRange(dateComponentsRange *DateComponentsRange) *ShippingMethod {
+	defer runtime.KeepAlive(dateComponentsRange)
 	objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("setDateComponentsRange:"), objref.IDOf(dateComponentsRange))
 	return sm
 }
@@ -78,6 +81,7 @@ func (sm *ShippingMethod) WithLabel(label string) *ShippingMethod {
 
 // WithAmount sets the summary item’s amount.
 func (sm *ShippingMethod) WithAmount(amount obj.Object) *ShippingMethod {
+	defer runtime.KeepAlive(amount)
 	objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return sm
 }
@@ -90,6 +94,7 @@ func (sm *ShippingMethod) WithType(type_ PaymentSummaryItemType) *ShippingMethod
 
 // Identifier returns the identifier.
 func (sm *ShippingMethod) Identifier() string {
+	defer runtime.KeepAlive(sm)
 	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -99,6 +104,7 @@ func (sm *ShippingMethod) Identifier() string {
 
 // Detail returns the detail.
 func (sm *ShippingMethod) Detail() string {
+	defer runtime.KeepAlive(sm)
 	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("detail"))
 	if _r == 0 {
 		return ""
@@ -108,6 +114,7 @@ func (sm *ShippingMethod) Detail() string {
 
 // DateComponentsRange returns the date components range.
 func (sm *ShippingMethod) DateComponentsRange() *DateComponentsRange {
+	defer runtime.KeepAlive(sm)
 	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("dateComponentsRange"))
 	return DateComponentsRangeFromID(_r)
 }

@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,14 @@ func NewPersistentCloudKitContainerEventResult() *PersistentCloudKitContainerEve
 
 // Result returns the result.
 func (pckcer *PersistentCloudKitContainerEventResult) Result() obj.Object {
+	defer runtime.KeepAlive(pckcer)
 	_r := objc.Send[objc.ID](objref.IDOf(pckcer), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }
 
 // ResultType returns the result type.
 func (pckcer *PersistentCloudKitContainerEventResult) ResultType() PersistentCloudKitContainerEventResultType {
+	defer runtime.KeepAlive(pckcer)
 	_r := objc.Send[PersistentCloudKitContainerEventResultType](objref.IDOf(pckcer), objc.RegisterName("resultType"))
 	return _r
 }

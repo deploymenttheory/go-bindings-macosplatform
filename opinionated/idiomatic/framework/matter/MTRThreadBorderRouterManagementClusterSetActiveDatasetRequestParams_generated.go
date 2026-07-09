@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParamsAdopt(id
 
 // Description returns the object's -description text.
 func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) Description() string {
+	defer runtime.KeepAlive(mtbrmcsadrp)
 	return rt.Description(objref.IDOf(mtbrmcsadrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtbrmcsadrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtbrmcsadrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtbrmcsadrp)
 	return rt.IsKind(objref.IDOf(mtbrmcsadrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) String() string {
+	defer runtime.KeepAlive(mtbrmcsadrp)
 	return rt.Description(objref.IDOf(mtbrmcsadrp))
 }
 
@@ -71,49 +79,56 @@ func NewMTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams() *M
 }
 
 // WithActiveDataset sets the active dataset.
-func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) WithActiveDataset(activeDataset obj.Object) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams {
-	objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("setActiveDataset:"), objref.IDOf(activeDataset))
+func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) WithActiveDataset(activeDataset []byte) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("setActiveDataset:"), rt.BytesToNSData(activeDataset))
 	return mtbrmcsadrp
 }
 
 // WithBreadcrumb sets the breadcrumb.
 func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) WithBreadcrumb(breadcrumb obj.Object) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams {
+	defer runtime.KeepAlive(breadcrumb)
 	objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 	return mtbrmcsadrp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mtbrmcsadrp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mtbrmcsadrp
 }
 
 // ActiveDataset returns the active dataset.
-func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) ActiveDataset() obj.Object {
+func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) ActiveDataset() []byte {
+	defer runtime.KeepAlive(mtbrmcsadrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("activeDataset"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Breadcrumb returns the breadcrumb.
-func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) Breadcrumb() obj.Object {
+func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) Breadcrumb() *foundation.Number {
+	defer runtime.KeepAlive(mtbrmcsadrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("breadcrumb"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) TimedInvokeTimeoutMs() obj.Object {
+func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mtbrmcsadrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) ServerSideProcessingTimeout() obj.Object {
+func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mtbrmcsadrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

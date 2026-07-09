@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,47 +53,55 @@ func NewDOMNodeIterator() *DOMNodeIterator {
 
 // NextNode returns the next node.
 func (dni *DOMNodeIterator) NextNode() *DOMNode {
+	defer runtime.KeepAlive(dni)
 	_r := objc.Send[objc.ID](objref.IDOf(dni), objc.RegisterName("nextNode"))
 	return DOMNodeFromID(_r)
 }
 
 // PreviousNode returns the previous node.
 func (dni *DOMNodeIterator) PreviousNode() *DOMNode {
+	defer runtime.KeepAlive(dni)
 	_r := objc.Send[objc.ID](objref.IDOf(dni), objc.RegisterName("previousNode"))
 	return DOMNodeFromID(_r)
 }
 
 // Detach wraps the corresponding Objective-C method.
 func (dni *DOMNodeIterator) Detach() {
+	defer runtime.KeepAlive(dni)
 	objc.Send[objc.ID](objref.IDOf(dni), objc.RegisterName("detach"))
 }
 
 // Root returns the root.
 func (dni *DOMNodeIterator) Root() *DOMNode {
+	defer runtime.KeepAlive(dni)
 	_r := objc.Send[objc.ID](objref.IDOf(dni), objc.RegisterName("root"))
 	return DOMNodeFromID(_r)
 }
 
 // WhatToShow returns the what to show.
 func (dni *DOMNodeIterator) WhatToShow() int {
+	defer runtime.KeepAlive(dni)
 	_r := objc.Send[int](objref.IDOf(dni), objc.RegisterName("whatToShow"))
 	return _r
 }
 
 // ExpandEntityReferences wraps the corresponding Objective-C method.
 func (dni *DOMNodeIterator) ExpandEntityReferences() bool {
+	defer runtime.KeepAlive(dni)
 	_r := objc.Send[bool](objref.IDOf(dni), objc.RegisterName("expandEntityReferences"))
 	return _r
 }
 
 // ReferenceNode returns the reference node.
 func (dni *DOMNodeIterator) ReferenceNode() *DOMNode {
+	defer runtime.KeepAlive(dni)
 	_r := objc.Send[objc.ID](objref.IDOf(dni), objc.RegisterName("referenceNode"))
 	return DOMNodeFromID(_r)
 }
 
 // PointerBeforeReferenceNode wraps the corresponding Objective-C method.
 func (dni *DOMNodeIterator) PointerBeforeReferenceNode() bool {
+	defer runtime.KeepAlive(dni)
 	_r := objc.Send[bool](objref.IDOf(dni), objc.RegisterName("pointerBeforeReferenceNode"))
 	return _r
 }

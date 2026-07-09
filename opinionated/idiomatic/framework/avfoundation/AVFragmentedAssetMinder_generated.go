@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func fragmentedAssetMinderAdopt(id objc.ID) *FragmentedAssetMinder {
 
 // Description returns the object's -description text.
 func (fam *FragmentedAssetMinder) Description() string {
+	defer runtime.KeepAlive(fam)
 	return rt.Description(objref.IDOf(fam))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fam *FragmentedAssetMinder) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fam)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fam), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fam *FragmentedAssetMinder) IsKind(className string) bool {
+	defer runtime.KeepAlive(fam)
 	return rt.IsKind(objref.IDOf(fam), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fam *FragmentedAssetMinder) String() string {
+	defer runtime.KeepAlive(fam)
 	return rt.Description(objref.IDOf(fam))
 }
 
 // NewFragmentedAssetMinderWithAssetMindingInterval creates a fragmented asset minder that monitors the specified asset at the indicated minding interval.
 func NewFragmentedAssetMinderWithAssetMindingInterval(asset *Asset, mindingInterval float64) *FragmentedAssetMinder {
+	defer runtime.KeepAlive(asset)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVFragmentedAssetMinder")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:mindingInterval:"), objref.IDOf(asset), mindingInterval)
 	return fragmentedAssetMinderAdopt(_id)
@@ -83,16 +91,21 @@ func (fam *FragmentedAssetMinder) WithMindingInterval(mindingInterval float64) *
 
 // AddFragmentedAsset adds a fragmented asset to the array of minded assets.
 func (fam *FragmentedAssetMinder) AddFragmentedAsset(asset *Asset) {
+	defer runtime.KeepAlive(fam)
+	defer runtime.KeepAlive(asset)
 	objc.Send[objc.ID](objref.IDOf(fam), objc.RegisterName("addFragmentedAsset:"), objref.IDOf(asset))
 }
 
 // RemoveFragmentedAsset removes a fragmented asset from the array of minded assets.
 func (fam *FragmentedAssetMinder) RemoveFragmentedAsset(asset *Asset) {
+	defer runtime.KeepAlive(fam)
+	defer runtime.KeepAlive(asset)
 	objc.Send[objc.ID](objref.IDOf(fam), objc.RegisterName("removeFragmentedAsset:"), objref.IDOf(asset))
 }
 
 // MindingInterval returns an NSTimeInterval indicating how often a check for additional fragments should be performed. The default interval is 10.0. This property throws an excepion if a value is set less than one millisecond (0.001) in duration.
 func (fam *FragmentedAssetMinder) MindingInterval() float64 {
+	defer runtime.KeepAlive(fam)
 	_r := objc.Send[float64](objref.IDOf(fam), objc.RegisterName("mindingInterval"))
 	return _r
 }
@@ -101,6 +114,7 @@ func (fam *FragmentedAssetMinder) MindingInterval() float64 {
 //
 // Assets returns the collection as a Go slice.
 func (fam *FragmentedAssetMinder) Assets() []*Asset {
+	defer runtime.KeepAlive(fam)
 	_arr := objc.Send[objc.ID](objref.IDOf(fam), objc.RegisterName("assets"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Asset { return AssetFromID(_id) })
 }

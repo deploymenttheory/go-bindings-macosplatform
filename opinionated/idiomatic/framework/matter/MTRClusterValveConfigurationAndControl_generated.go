@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,125 +49,170 @@ func mTRClusterValveConfigurationAndControlAdopt(id objc.ID) *MTRClusterValveCon
 
 // NewMTRClusterValveConfigurationAndControlWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterValveConfigurationAndControlWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterValveConfigurationAndControl {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterValveConfigurationAndControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterValveConfigurationAndControlAdopt(_id)
 }
 
 // ReadAttributeOpenDurationWithParams reads attribute open duration with params.
-func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeOpenDurationWithParams(params *MTRReadParams) obj.Object {
+func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeOpenDurationWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("readAttributeOpenDurationWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDefaultOpenDurationWithParams reads attribute default open duration with params.
-func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeDefaultOpenDurationWithParams(params *MTRReadParams) obj.Object {
+func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeDefaultOpenDurationWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("readAttributeDefaultOpenDurationWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeDefaultOpenDurationWithValueExpectedValueInterval writes attribute default open duration with value expected value interval.
-func (mcvcac *MTRClusterValveConfigurationAndControl) WriteAttributeDefaultOpenDurationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("writeAttributeDefaultOpenDurationWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcvcac *MTRClusterValveConfigurationAndControl) WriteAttributeDefaultOpenDurationWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("writeAttributeDefaultOpenDurationWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeDefaultOpenDurationWithValueExpectedValueIntervalParams writes attribute default open duration with value expected value interval params.
-func (mcvcac *MTRClusterValveConfigurationAndControl) WriteAttributeDefaultOpenDurationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("writeAttributeDefaultOpenDurationWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcvcac *MTRClusterValveConfigurationAndControl) WriteAttributeDefaultOpenDurationWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("writeAttributeDefaultOpenDurationWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeAutoCloseTimeWithParams reads attribute auto close time with params.
-func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeAutoCloseTimeWithParams(params *MTRReadParams) obj.Object {
+func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeAutoCloseTimeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("readAttributeAutoCloseTimeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRemainingDurationWithParams reads attribute remaining duration with params.
-func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeRemainingDurationWithParams(params *MTRReadParams) obj.Object {
+func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeRemainingDurationWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("readAttributeRemainingDurationWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCurrentStateWithParams reads attribute current state with params.
-func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeCurrentStateWithParams(params *MTRReadParams) obj.Object {
+func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeCurrentStateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("readAttributeCurrentStateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTargetStateWithParams reads attribute target state with params.
-func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeTargetStateWithParams(params *MTRReadParams) obj.Object {
+func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeTargetStateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("readAttributeTargetStateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCurrentLevelWithParams reads attribute current level with params.
-func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeCurrentLevelWithParams(params *MTRReadParams) obj.Object {
+func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeCurrentLevelWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("readAttributeCurrentLevelWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTargetLevelWithParams reads attribute target level with params.
-func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeTargetLevelWithParams(params *MTRReadParams) obj.Object {
+func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeTargetLevelWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("readAttributeTargetLevelWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDefaultOpenLevelWithParams reads attribute default open level with params.
-func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeDefaultOpenLevelWithParams(params *MTRReadParams) obj.Object {
+func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeDefaultOpenLevelWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("readAttributeDefaultOpenLevelWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeDefaultOpenLevelWithValueExpectedValueInterval writes attribute default open level with value expected value interval.
-func (mcvcac *MTRClusterValveConfigurationAndControl) WriteAttributeDefaultOpenLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("writeAttributeDefaultOpenLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcvcac *MTRClusterValveConfigurationAndControl) WriteAttributeDefaultOpenLevelWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("writeAttributeDefaultOpenLevelWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeDefaultOpenLevelWithValueExpectedValueIntervalParams writes attribute default open level with value expected value interval params.
-func (mcvcac *MTRClusterValveConfigurationAndControl) WriteAttributeDefaultOpenLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("writeAttributeDefaultOpenLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcvcac *MTRClusterValveConfigurationAndControl) WriteAttributeDefaultOpenLevelWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("writeAttributeDefaultOpenLevelWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeValveFaultWithParams reads attribute valve fault with params.
-func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeValveFaultWithParams(params *MTRReadParams) obj.Object {
+func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeValveFaultWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("readAttributeValveFaultWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeLevelStepWithParams reads attribute level step with params.
-func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeLevelStepWithParams(params *MTRReadParams) obj.Object {
+func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeLevelStepWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("readAttributeLevelStepWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcvcac *MTRClusterValveConfigurationAndControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcvcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcvcac), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterValveConfigurationAndControl)(nil)

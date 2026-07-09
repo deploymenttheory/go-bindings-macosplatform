@@ -229,7 +229,7 @@ func (o *NSWorkspace) SetIconForFileOptions(image *NSImage, fullPath *foundation
 }
 
 // Moves the specified URLs to the trash in the same manner as the Finder.
-func (o *NSWorkspace) RecycleURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler func(*foundation.NSDictionary[*foundation.NSURL, *foundation.NSURL], unsafe.Pointer)) {
+func (o *NSWorkspace) RecycleURLsCompletionHandler(urls *foundation.NSArray[*foundation.NSURL], handler func(*foundation.NSDictionary[*foundation.NSURL, *foundation.NSURL], unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
 		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
@@ -240,11 +240,11 @@ func (o *NSWorkspace) RecycleURLsCompletionHandler(uRLs *foundation.NSArray[*fou
 		})
 		defer __block_handler.Release()
 	}
-	o.Ptr().Send(_nSWorkspaceSelRecycleURLsCompletionHandler, uRLs.Ptr(), __block_handler)
+	o.Ptr().Send(_nSWorkspaceSelRecycleURLsCompletionHandler, urls.Ptr(), __block_handler)
 }
 
 // Duplicates the specified URLS asynchronously in the same manner as the Finder.
-func (o *NSWorkspace) DuplicateURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler func(*foundation.NSDictionary[*foundation.NSURL, *foundation.NSURL], unsafe.Pointer)) {
+func (o *NSWorkspace) DuplicateURLsCompletionHandler(urls *foundation.NSArray[*foundation.NSURL], handler func(*foundation.NSDictionary[*foundation.NSURL, *foundation.NSURL], unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
 		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
@@ -255,7 +255,7 @@ func (o *NSWorkspace) DuplicateURLsCompletionHandler(uRLs *foundation.NSArray[*f
 		})
 		defer __block_handler.Release()
 	}
-	o.Ptr().Send(_nSWorkspaceSelDuplicateURLsCompletionHandler, uRLs.Ptr(), __block_handler)
+	o.Ptr().Send(_nSWorkspaceSelDuplicateURLsCompletionHandler, urls.Ptr(), __block_handler)
 }
 
 // Returns information about the file system at the specified path.

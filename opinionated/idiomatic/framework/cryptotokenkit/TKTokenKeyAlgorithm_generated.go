@@ -5,6 +5,7 @@
 package cryptotokenkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func tokenKeyAlgorithmAdopt(id objc.ID) *TokenKeyAlgorithm {
 
 // Description returns the object's -description text.
 func (tka *TokenKeyAlgorithm) Description() string {
+	defer runtime.KeepAlive(tka)
 	return rt.Description(objref.IDOf(tka))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tka *TokenKeyAlgorithm) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tka)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tka), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tka *TokenKeyAlgorithm) IsKind(className string) bool {
+	defer runtime.KeepAlive(tka)
 	return rt.IsKind(objref.IDOf(tka), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tka *TokenKeyAlgorithm) String() string {
+	defer runtime.KeepAlive(tka)
 	return rt.Description(objref.IDOf(tka))
 }
 
@@ -76,12 +82,14 @@ func NewTokenKeyAlgorithm() *TokenKeyAlgorithm {
 
 // IsAlgorithm returns whether the specified algorithm is the target operation algorithm.
 func (tka *TokenKeyAlgorithm) IsAlgorithm(algorithm unsafe.Pointer) bool {
+	defer runtime.KeepAlive(tka)
 	_r := objc.Send[bool](objref.IDOf(tka), objc.RegisterName("isAlgorithm:"), algorithm)
 	return _r
 }
 
 // SupportsAlgorithm whether the specified algorithm is the target operation algorithm, or one of the other algorithms used.
 func (tka *TokenKeyAlgorithm) SupportsAlgorithm(algorithm unsafe.Pointer) bool {
+	defer runtime.KeepAlive(tka)
 	_r := objc.Send[bool](objref.IDOf(tka), objc.RegisterName("supportsAlgorithm:"), algorithm)
 	return _r
 }

@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,27 +53,33 @@ func toolbarItemAdopt(id objc.ID) *ToolbarItem {
 
 // Description returns the object's -description text.
 func (ti *ToolbarItem) Description() string {
+	defer runtime.KeepAlive(ti)
 	return rt.Description(objref.IDOf(ti))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ti *ToolbarItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ti)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ti), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ti *ToolbarItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(ti)
 	return rt.IsKind(objref.IDOf(ti), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ti *ToolbarItem) String() string {
+	defer runtime.KeepAlive(ti)
 	return rt.Description(objref.IDOf(ti))
 }
 
 // NewToolbarItemWithItemIdentifier creates a toolbar item with the specified identifier.
 func NewToolbarItemWithItemIdentifier(itemIdentifier obj.Object) *ToolbarItem {
+	defer runtime.KeepAlive(itemIdentifier)
 	var _mainthread0 *ToolbarItem
 	purego.Main(func() {
 		_mainthread0 = func() *ToolbarItem {
@@ -99,9 +108,9 @@ func (ti *ToolbarItem) WithPaletteLabel(paletteLabel string) *ToolbarItem {
 }
 
 // WithPossibleLabels sets the set of labels that the item might display.
-func (ti *ToolbarItem) WithPossibleLabels(possibleLabels obj.Object) *ToolbarItem {
+func (ti *ToolbarItem) WithPossibleLabels(possibleLabels []string) *ToolbarItem {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setPossibleLabels:"), rt.SliceToNSSet(possibleLabels, func(_v string) objc.ID { return purego.NSString(_v) }))
 	})
 	return ti
 }
@@ -116,6 +125,7 @@ func (ti *ToolbarItem) WithToolTip(toolTip string) *ToolbarItem {
 
 // WithMenuFormRepresentation sets the menu item to use when the toolbar item is in the overflow menu.
 func (ti *ToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *ToolbarItem {
+	defer runtime.KeepAlive(menuFormRepresentation)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
 	})
@@ -132,6 +142,7 @@ func (ti *ToolbarItem) WithTag(tag int) *ToolbarItem {
 
 // WithTarget sets the object that defines the action method the toolbar item calls when clicked.
 func (ti *ToolbarItem) WithTarget(target obj.Object) *ToolbarItem {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -148,6 +159,7 @@ func (ti *ToolbarItem) WithEnabled(enabled bool) *ToolbarItem {
 
 // WithImage sets the image to display for the toolbar item.
 func (ti *ToolbarItem) WithImage(image *Image) *ToolbarItem {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -172,6 +184,7 @@ func (ti *ToolbarItem) WithBordered(bordered bool) *ToolbarItem {
 
 // WithBackgroundTintColor sets the background tint color.
 func (ti *ToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *ToolbarItem {
+	defer runtime.KeepAlive(backgroundTintColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
 	})
@@ -196,6 +209,7 @@ func (ti *ToolbarItem) WithNavigational(navigational bool) *ToolbarItem {
 
 // WithView sets the custom view you use to draw the toolbar item.
 func (ti *ToolbarItem) WithView(view ViewProvider) *ToolbarItem {
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setView:"), objref.IDOf(view))
 	})
@@ -236,6 +250,7 @@ func (ti *ToolbarItem) WithVisibilityPriority(visibilityPriority int) *ToolbarIt
 
 // WithBadge sets a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (ti *ToolbarItem) WithBadge(badge *ItemBadge) *ToolbarItem {
+	defer runtime.KeepAlive(badge)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setBadge:"), objref.IDOf(badge))
 	})
@@ -252,6 +267,7 @@ func (ti *ToolbarItem) WithAutovalidates(autovalidates bool) *ToolbarItem {
 
 // Validate validates the toolbar item’s menu and its ability to perfrom its action.
 func (ti *ToolbarItem) Validate() {
+	defer runtime.KeepAlive(ti)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("validate"))
 	})
@@ -259,12 +275,13 @@ func (ti *ToolbarItem) Validate() {
 }
 
 // ItemIdentifier returns the item identifier.
-func (ti *ToolbarItem) ItemIdentifier() obj.Object {
-	var _mainthread0 obj.Object
+func (ti *ToolbarItem) ItemIdentifier() *foundation.String {
+	defer runtime.KeepAlive(ti)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("itemIdentifier"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -273,6 +290,7 @@ func (ti *ToolbarItem) ItemIdentifier() obj.Object {
 
 // Toolbar returns use this to determine the toolbar in which an item is currently displayed.
 func (ti *ToolbarItem) Toolbar() *Toolbar {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 *Toolbar
 	purego.Main(func() {
 		_mainthread0 = func() *Toolbar {
@@ -286,6 +304,7 @@ func (ti *ToolbarItem) Toolbar() *Toolbar {
 
 // Label returns use this to set the item's label that appears in the toolbar. The label may also be used for the default `menuFormRepresentation` of the item. Also, developers should make sure the length of the label is appropriate and not too long.
 func (ti *ToolbarItem) Label() string {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -302,6 +321,7 @@ func (ti *ToolbarItem) Label() string {
 
 // PaletteLabel returns use this to set the item's label that appears when the item is in the customization palette. All Items must have a palette label, and for most things it is reasonable to set them to the same string as the label used in the toolbar.
 func (ti *ToolbarItem) PaletteLabel() string {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -317,12 +337,14 @@ func (ti *ToolbarItem) PaletteLabel() string {
 }
 
 // PossibleLabels returns an array of all alternate labels this item may display. The item will use the size of the longest label to prevent resizing when the label is changed.
-func (ti *ToolbarItem) PossibleLabels() obj.Object {
-	var _mainthread0 obj.Object
+// The order of the returned elements is unspecified.
+func (ti *ToolbarItem) PossibleLabels() []string {
+	defer runtime.KeepAlive(ti)
+	var _mainthread0 []string
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []string {
 			_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("possibleLabels"))
-			return obj.Wrap(_r)
+			return rt.NSSetToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 		}()
 	})
 	return _mainthread0
@@ -331,6 +353,7 @@ func (ti *ToolbarItem) PossibleLabels() obj.Object {
 
 // ToolTip returns use this to set a tooltip to be used when the item is displayed in the toolbar. (forwards to `-view` if it responds)
 func (ti *ToolbarItem) ToolTip() string {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -347,6 +370,7 @@ func (ti *ToolbarItem) ToolTip() string {
 
 // MenuFormRepresentation returns the menu form of a toolbar item's purpose is twofold. First, when the window is too small to display an item, it will be clipped but remain accessible from a "clipped items" menu containing the menu item returned here. Second, in text only mode, the menu returned will be used to create the displayed items. Singleton menu items will be clickable, while submenu items will be represented as a pull down. For instance, say you want a button that allows you to switch between modes A, B, and C. You could represent this as a menu by: a menu item "mode" with three submenu items "A", "B", and "C". By default, this method returns a singleton menu item with item label as the title. For standard items, the target, action is set.
 func (ti *ToolbarItem) MenuFormRepresentation() *MenuItem {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 *MenuItem
 	purego.Main(func() {
 		_mainthread0 = func() *MenuItem {
@@ -360,6 +384,7 @@ func (ti *ToolbarItem) MenuFormRepresentation() *MenuItem {
 
 // Tag returns tag for your own custom purpose. (forwards to `-view` if it responds)
 func (ti *ToolbarItem) Tag() int {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -373,6 +398,7 @@ func (ti *ToolbarItem) Tag() int {
 
 // Target set and get the action of an item. (forwards to `-view` if it responds)
 func (ti *ToolbarItem) Target() obj.Object {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -386,6 +412,7 @@ func (ti *ToolbarItem) Target() obj.Object {
 
 // IsEnabled reports whether set and get the enabled flag of an item. For custom views, this method will call `-setEnabled:` on the view if it responds. (forwards to `-view` if it responds)
 func (ti *ToolbarItem) IsEnabled() bool {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -399,6 +426,7 @@ func (ti *ToolbarItem) IsEnabled() bool {
 
 // Image returns the image.
 func (ti *ToolbarItem) Image() *Image {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {
@@ -412,6 +440,7 @@ func (ti *ToolbarItem) Image() *Image {
 
 // Title set and get the title of an item. For custom views, this method will call `-setTitle:` on the view if it responds. (forwards to `-view` if it responds)
 func (ti *ToolbarItem) Title() string {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -428,6 +457,7 @@ func (ti *ToolbarItem) Title() string {
 
 // IsBordered reports whether when set on an item without a custom view, the button produced will have a bordered style. Defaults to false.
 func (ti *ToolbarItem) IsBordered() bool {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -441,6 +471,7 @@ func (ti *ToolbarItem) IsBordered() bool {
 
 // BackgroundTintColor returns the background tint color.
 func (ti *ToolbarItem) BackgroundTintColor() *Color {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -454,6 +485,7 @@ func (ti *ToolbarItem) BackgroundTintColor() *Color {
 
 // Style defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items' background.
 func (ti *ToolbarItem) Style() ToolbarItemStyle {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 ToolbarItemStyle
 	purego.Main(func() {
 		_mainthread0 = func() ToolbarItemStyle {
@@ -467,6 +499,7 @@ func (ti *ToolbarItem) Style() ToolbarItemStyle {
 
 // IsNavigational reports whether the item behaves as a navigation item (i.e. back/forward) in the toolbar. Navigation items may be specially positioned by the system outside the normal list of items of the toolbar in the order specified by `-toolbarDefaultItemIdentifiers:`. Defaults to false.
 func (ti *ToolbarItem) IsNavigational() bool {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -480,6 +513,7 @@ func (ti *ToolbarItem) IsNavigational() bool {
 
 // View returns items with automatically generated views will return nil from this getter. Custom views may be provided but not all `NSToolbarItem` subclasses support custom views. Note that, by default, many of the set/get methods will be implemented by calls forwarded to the view you set, if it responds to it.
 func (ti *ToolbarItem) View() *View {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -493,6 +527,7 @@ func (ti *ToolbarItem) View() *View {
 
 // IsVisible reports whether an item is visible if it is present in the NSToolbar and not in the overflow menu. This property is key value observable.
 func (ti *ToolbarItem) IsVisible() bool {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -506,6 +541,7 @@ func (ti *ToolbarItem) IsVisible() bool {
 
 // IsHidden reports whether an item is visible in the toolbar. The item will still be visible in the customization panel. Because hidden items may be visible during user customization, use the `visible` property to determine if an item is currently displayed. Note that even hidden toolbar items are sync'd to other toolbars with a shared identifier, but its `hidden` state can be unique to each instance. Use this property to show a toolbar item in one toolbar instance but not another.
 func (ti *ToolbarItem) IsHidden() bool {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -519,6 +555,7 @@ func (ti *ToolbarItem) IsHidden() bool {
 
 // MinSize returns unless you have already set your own custom view, you should not call these methods. The min size should be small enough to look nice in all display modes. If you do not set a min/max size, the view's size properties will be calculated using constraints. Apps linked before 10.14 will use the view's current size. In general, apps should rely on the automatic measurements and constraints to define min/max sizes rather than setting these properties since this will account for localizations.
 func (ti *ToolbarItem) MinSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -532,6 +569,7 @@ func (ti *ToolbarItem) MinSize() corefoundation.CGSize {
 
 // MaxSize returns the max size.
 func (ti *ToolbarItem) MaxSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -545,6 +583,7 @@ func (ti *ToolbarItem) MaxSize() corefoundation.CGSize {
 
 // VisibilityPriority returns when a toolbar does not have enough space to fit all its items, it must push some into the overflow menu. Items with the highest `visibilityPriority` level are chosen last for the overflow menu. The default `visibilityPriority` value is `NSToolbarItemVisibilityPriorityStandard`. To suggest that an item always remain visible, give it a value greater than `NSToolbarItemVisibilityPriorityStandard`, but less than `NSToolbarItemVisibilityPriorityUser`. In 10.7, users can no longer modify the toolbar item visibility priority.
 func (ti *ToolbarItem) VisibilityPriority() int {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -558,6 +597,7 @@ func (ti *ToolbarItem) VisibilityPriority() int {
 
 // Badge returns a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (ti *ToolbarItem) Badge() *ItemBadge {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 *ItemBadge
 	purego.Main(func() {
 		_mainthread0 = func() *ItemBadge {
@@ -571,6 +611,7 @@ func (ti *ToolbarItem) Badge() *ItemBadge {
 
 // Autovalidates reports whether this property only affects automatic validation performed by NSToolbar. Explicit validation requests, such as the `-[NSToolbar validateVisibleItems]` method, will invoke the `-validate` method even if `autovalidates` is `NO`. Defaults to true.
 func (ti *ToolbarItem) Autovalidates() bool {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -584,6 +625,7 @@ func (ti *ToolbarItem) Autovalidates() bool {
 
 // AllowsDuplicatesInToolbar reports whether duplicate items outside of spaces are not allowed.
 func (ti *ToolbarItem) AllowsDuplicatesInToolbar() bool {
+	defer runtime.KeepAlive(ti)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

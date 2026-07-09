@@ -5,6 +5,7 @@
 package spritekit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func attributeValueAdopt(id objc.ID) *AttributeValue {
 
 // Description returns the object's -description text.
 func (av *AttributeValue) Description() string {
+	defer runtime.KeepAlive(av)
 	return rt.Description(objref.IDOf(av))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (av *AttributeValue) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(av)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(av), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (av *AttributeValue) IsKind(className string) bool {
+	defer runtime.KeepAlive(av)
 	return rt.IsKind(objref.IDOf(av), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (av *AttributeValue) String() string {
+	defer runtime.KeepAlive(av)
 	return rt.Description(objref.IDOf(av))
 }
 
@@ -100,6 +106,7 @@ func (av *AttributeValue) WithVectorFloat4Value(vectorFloat4Value unsafe.Pointer
 
 // FloatValue returns the float value.
 func (av *AttributeValue) FloatValue() float32 {
+	defer runtime.KeepAlive(av)
 	_r := objc.Send[float32](objref.IDOf(av), objc.RegisterName("floatValue"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -177,6 +179,7 @@ func (dme *DOMHTMLMetaElement) WithTextContent(textContent string) *DOMHTMLMetaE
 
 // Content returns the content.
 func (dme *DOMHTMLMetaElement) Content() string {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("content"))
 	if _r == 0 {
 		return ""
@@ -186,6 +189,7 @@ func (dme *DOMHTMLMetaElement) Content() string {
 
 // HTTPEquiv returns the HTTP equiv.
 func (dme *DOMHTMLMetaElement) HTTPEquiv() string {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("httpEquiv"))
 	if _r == 0 {
 		return ""
@@ -195,6 +199,7 @@ func (dme *DOMHTMLMetaElement) HTTPEquiv() string {
 
 // Name returns the name.
 func (dme *DOMHTMLMetaElement) Name() string {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -204,6 +209,7 @@ func (dme *DOMHTMLMetaElement) Name() string {
 
 // Scheme returns the scheme.
 func (dme *DOMHTMLMetaElement) Scheme() string {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("scheme"))
 	if _r == 0 {
 		return ""

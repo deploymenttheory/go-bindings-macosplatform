@@ -5,6 +5,7 @@
 package coreml
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,30 +51,35 @@ func dictionaryFeatureProviderAdopt(id objc.ID) *DictionaryFeatureProvider {
 
 // Description returns the object's -description text.
 func (dfp *DictionaryFeatureProvider) Description() string {
+	defer runtime.KeepAlive(dfp)
 	return rt.Description(objref.IDOf(dfp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dfp *DictionaryFeatureProvider) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dfp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dfp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dfp *DictionaryFeatureProvider) IsKind(className string) bool {
+	defer runtime.KeepAlive(dfp)
 	return rt.IsKind(objref.IDOf(dfp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dfp *DictionaryFeatureProvider) String() string {
+	defer runtime.KeepAlive(dfp)
 	return rt.Description(objref.IDOf(dfp))
 }
 
-// NewDictionaryFeatureProviderWithDictionaryError creates the feature provider based on a dictionary.
-func NewDictionaryFeatureProviderWithDictionaryError(dictionary obj.Object) (result *DictionaryFeatureProvider, err error) {
+// NewDictionaryFeatureProviderWithDictionary creates the feature provider based on a dictionary.
+func NewDictionaryFeatureProviderWithDictionary(dictionary map[string]obj.Object) (result *DictionaryFeatureProvider, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MLDictionaryFeatureProvider")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), objref.IDOf(dictionary), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), rt.MapToDict(dictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -82,12 +88,14 @@ func NewDictionaryFeatureProviderWithDictionaryError(dictionary obj.Object) (res
 
 // ObjectForKeyedSubscript subscript interface for the feature provider to pass through to the dictionary.
 func (dfp *DictionaryFeatureProvider) ObjectForKeyedSubscript(featureName string) *FeatureValue {
+	defer runtime.KeepAlive(dfp)
 	_r := objc.Send[objc.ID](objref.IDOf(dfp), objc.RegisterName("objectForKeyedSubscript:"), purego.NSString(featureName))
 	return FeatureValueFromID(_r)
 }
 
 // Dictionary returns dictionary holding the feature values
-func (dfp *DictionaryFeatureProvider) Dictionary() obj.Object {
+func (dfp *DictionaryFeatureProvider) Dictionary() map[string]*FeatureValue {
+	defer runtime.KeepAlive(dfp)
 	_r := objc.Send[objc.ID](objref.IDOf(dfp), objc.RegisterName("dictionary"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *FeatureValue { return FeatureValueFromID(_id) })
 }

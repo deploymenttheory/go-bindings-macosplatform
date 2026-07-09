@@ -8,23 +8,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrUserDeclined matches the ScreenCaptureKit error SCStreamErrorUserDeclined.
-var ErrUserDeclined = errkit.New("SCStreamErrorDomain", -3801)
-
-// ErrFailedToStart matches the ScreenCaptureKit error SCStreamErrorFailedToStart.
-var ErrFailedToStart = errkit.New("SCStreamErrorDomain", -3802)
-
-// ErrMissingEntitlements matches the ScreenCaptureKit error SCStreamErrorMissingEntitlements.
-var ErrMissingEntitlements = errkit.New("SCStreamErrorDomain", -3803)
-
-// ErrFailedApplicationConnectionInvalid matches the ScreenCaptureKit error SCStreamErrorFailedApplicationConnectionInvalid.
-var ErrFailedApplicationConnectionInvalid = errkit.New("SCStreamErrorDomain", -3804)
-
-// ErrFailedApplicationConnectionInterrupted matches the ScreenCaptureKit error SCStreamErrorFailedApplicationConnectionInterrupted.
-var ErrFailedApplicationConnectionInterrupted = errkit.New("SCStreamErrorDomain", -3805)
-
-// ErrFailedNoMatchingApplicationContext matches the ScreenCaptureKit error SCStreamErrorFailedNoMatchingApplicationContext.
-var ErrFailedNoMatchingApplicationContext = errkit.New("SCStreamErrorDomain", -3806)
+// ErrAttemptToConfigState matches the ScreenCaptureKit error SCStreamErrorAttemptToConfigState.
+var ErrAttemptToConfigState = errkit.New("SCStreamErrorDomain", -3810)
 
 // ErrAttemptToStartStreamState matches the ScreenCaptureKit error SCStreamErrorAttemptToStartStreamState.
 var ErrAttemptToStartStreamState = errkit.New("SCStreamErrorDomain", -3807)
@@ -35,8 +20,26 @@ var ErrAttemptToStopStreamState = errkit.New("SCStreamErrorDomain", -3808)
 // ErrAttemptToUpdateFilterState matches the ScreenCaptureKit error SCStreamErrorAttemptToUpdateFilterState.
 var ErrAttemptToUpdateFilterState = errkit.New("SCStreamErrorDomain", -3809)
 
-// ErrAttemptToConfigState matches the ScreenCaptureKit error SCStreamErrorAttemptToConfigState.
-var ErrAttemptToConfigState = errkit.New("SCStreamErrorDomain", -3810)
+// ErrFailedApplicationConnectionInterrupted matches the ScreenCaptureKit error SCStreamErrorFailedApplicationConnectionInterrupted.
+var ErrFailedApplicationConnectionInterrupted = errkit.New("SCStreamErrorDomain", -3805)
+
+// ErrFailedApplicationConnectionInvalid matches the ScreenCaptureKit error SCStreamErrorFailedApplicationConnectionInvalid.
+var ErrFailedApplicationConnectionInvalid = errkit.New("SCStreamErrorDomain", -3804)
+
+// ErrFailedNoMatchingApplicationContext matches the ScreenCaptureKit error SCStreamErrorFailedNoMatchingApplicationContext.
+var ErrFailedNoMatchingApplicationContext = errkit.New("SCStreamErrorDomain", -3806)
+
+// ErrFailedToStart matches the ScreenCaptureKit error SCStreamErrorFailedToStart.
+var ErrFailedToStart = errkit.New("SCStreamErrorDomain", -3802)
+
+// ErrFailedToStartAudioCapture matches the ScreenCaptureKit error SCStreamErrorFailedToStartAudioCapture.
+var ErrFailedToStartAudioCapture = errkit.New("SCStreamErrorDomain", -3818)
+
+// ErrFailedToStartMicrophoneCapture matches the ScreenCaptureKit error SCStreamErrorFailedToStartMicrophoneCapture.
+var ErrFailedToStartMicrophoneCapture = errkit.New("SCStreamErrorDomain", -3820)
+
+// ErrFailedToStopAudioCapture matches the ScreenCaptureKit error SCStreamErrorFailedToStopAudioCapture.
+var ErrFailedToStopAudioCapture = errkit.New("SCStreamErrorDomain", -3819)
 
 // ErrInternalError matches the ScreenCaptureKit error SCStreamErrorInternalError.
 var ErrInternalError = errkit.New("SCStreamErrorDomain", -3811)
@@ -44,29 +47,26 @@ var ErrInternalError = errkit.New("SCStreamErrorDomain", -3811)
 // ErrInvalidParameter matches the ScreenCaptureKit error SCStreamErrorInvalidParameter.
 var ErrInvalidParameter = errkit.New("SCStreamErrorDomain", -3812)
 
-// ErrNoWindowList matches the ScreenCaptureKit error SCStreamErrorNoWindowList.
-var ErrNoWindowList = errkit.New("SCStreamErrorDomain", -3813)
-
-// ErrNoDisplayList matches the ScreenCaptureKit error SCStreamErrorNoDisplayList.
-var ErrNoDisplayList = errkit.New("SCStreamErrorDomain", -3814)
+// ErrMissingEntitlements matches the ScreenCaptureKit error SCStreamErrorMissingEntitlements.
+var ErrMissingEntitlements = errkit.New("SCStreamErrorDomain", -3803)
 
 // ErrNoCaptureSource matches the ScreenCaptureKit error SCStreamErrorNoCaptureSource.
 var ErrNoCaptureSource = errkit.New("SCStreamErrorDomain", -3815)
 
+// ErrNoDisplayList matches the ScreenCaptureKit error SCStreamErrorNoDisplayList.
+var ErrNoDisplayList = errkit.New("SCStreamErrorDomain", -3814)
+
+// ErrNoWindowList matches the ScreenCaptureKit error SCStreamErrorNoWindowList.
+var ErrNoWindowList = errkit.New("SCStreamErrorDomain", -3813)
+
 // ErrRemovingStream matches the ScreenCaptureKit error SCStreamErrorRemovingStream.
 var ErrRemovingStream = errkit.New("SCStreamErrorDomain", -3816)
 
-// ErrUserStopped matches the ScreenCaptureKit error SCStreamErrorUserStopped.
-var ErrUserStopped = errkit.New("SCStreamErrorDomain", -3817)
-
-// ErrFailedToStartAudioCapture matches the ScreenCaptureKit error SCStreamErrorFailedToStartAudioCapture.
-var ErrFailedToStartAudioCapture = errkit.New("SCStreamErrorDomain", -3818)
-
-// ErrFailedToStopAudioCapture matches the ScreenCaptureKit error SCStreamErrorFailedToStopAudioCapture.
-var ErrFailedToStopAudioCapture = errkit.New("SCStreamErrorDomain", -3819)
-
-// ErrFailedToStartMicrophoneCapture matches the ScreenCaptureKit error SCStreamErrorFailedToStartMicrophoneCapture.
-var ErrFailedToStartMicrophoneCapture = errkit.New("SCStreamErrorDomain", -3820)
-
 // ErrSystemStoppedStream matches the ScreenCaptureKit error SCStreamErrorSystemStoppedStream.
 var ErrSystemStoppedStream = errkit.New("SCStreamErrorDomain", -3821)
+
+// ErrUserDeclined matches the ScreenCaptureKit error SCStreamErrorUserDeclined.
+var ErrUserDeclined = errkit.New("SCStreamErrorDomain", -3801)
+
+// ErrUserStopped matches the ScreenCaptureKit error SCStreamErrorUserStopped.
+var ErrUserStopped = errkit.New("SCStreamErrorDomain", -3817)

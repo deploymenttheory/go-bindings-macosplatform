@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func pressureConfigurationAdopt(id objc.ID) *PressureConfiguration {
 
 // Description returns the object's -description text.
 func (pc *PressureConfiguration) Description() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pc *PressureConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pc *PressureConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(pc)
 	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pc *PressureConfiguration) String() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
@@ -75,11 +82,13 @@ func NewPressureConfigurationWithPressureBehavior(pressureBehavior PressureBehav
 
 // Set changes the pressure configuration of the trackpad to the initialized pressure configuration.
 func (pc *PressureConfiguration) Set() {
+	defer runtime.KeepAlive(pc)
 	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("set"))
 }
 
 // PressureBehavior returns the pressure behavior.
 func (pc *PressureConfiguration) PressureBehavior() PressureBehavior {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[PressureBehavior](objref.IDOf(pc), objc.RegisterName("pressureBehavior"))
 	return _r
 }

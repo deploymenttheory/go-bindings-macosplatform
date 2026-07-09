@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func vertexAttributeAdopt(id objc.ID) *VertexAttribute {
 
 // Description returns the object's -description text.
 func (va *VertexAttribute) Description() string {
+	defer runtime.KeepAlive(va)
 	return rt.Description(objref.IDOf(va))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (va *VertexAttribute) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(va)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(va), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (va *VertexAttribute) IsKind(className string) bool {
+	defer runtime.KeepAlive(va)
 	return rt.IsKind(objref.IDOf(va), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (va *VertexAttribute) String() string {
+	defer runtime.KeepAlive(va)
 	return rt.Description(objref.IDOf(va))
 }
 
@@ -74,6 +81,7 @@ func NewVertexAttribute() *VertexAttribute {
 
 // Name returns the name.
 func (va *VertexAttribute) Name() string {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -83,30 +91,35 @@ func (va *VertexAttribute) Name() string {
 
 // AttributeIndex returns the attribute index.
 func (va *VertexAttribute) AttributeIndex() int {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[int](objref.IDOf(va), objc.RegisterName("attributeIndex"))
 	return _r
 }
 
 // AttributeType returns the attribute type.
 func (va *VertexAttribute) AttributeType() DataType {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[DataType](objref.IDOf(va), objc.RegisterName("attributeType"))
 	return _r
 }
 
 // IsActive reports whether the object is active.
 func (va *VertexAttribute) IsActive() bool {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[bool](objref.IDOf(va), objc.RegisterName("isActive"))
 	return _r
 }
 
 // IsPatchData reports whether the object is patch data.
 func (va *VertexAttribute) IsPatchData() bool {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[bool](objref.IDOf(va), objc.RegisterName("isPatchData"))
 	return _r
 }
 
 // IsPatchControlPointData reports whether the object is patch control point data.
 func (va *VertexAttribute) IsPatchControlPointData() bool {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[bool](objref.IDOf(va), objc.RegisterName("isPatchControlPointData"))
 	return _r
 }

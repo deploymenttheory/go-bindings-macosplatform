@@ -5,8 +5,11 @@
 package gamekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,27 +50,33 @@ func turnBasedMatchmakerViewControllerAdopt(id objc.ID) *TurnBasedMatchmakerView
 
 // Description returns the object's -description text.
 func (tbmvc *TurnBasedMatchmakerViewController) Description() string {
+	defer runtime.KeepAlive(tbmvc)
 	return rt.Description(objref.IDOf(tbmvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tbmvc *TurnBasedMatchmakerViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tbmvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tbmvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tbmvc *TurnBasedMatchmakerViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(tbmvc)
 	return rt.IsKind(objref.IDOf(tbmvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tbmvc *TurnBasedMatchmakerViewController) String() string {
+	defer runtime.KeepAlive(tbmvc)
 	return rt.Description(objref.IDOf(tbmvc))
 }
 
 // NewTurnBasedMatchmakerViewControllerWithMatchRequest creates a matchmaker view controller for the local player to start inviting other players to a turn-based game.
 func NewTurnBasedMatchmakerViewControllerWithMatchRequest(request *MatchRequest) *TurnBasedMatchmakerViewController {
+	defer runtime.KeepAlive(request)
 	var _mainthread0 *TurnBasedMatchmakerViewController
 	purego.Main(func() {
 		_mainthread0 = func() *TurnBasedMatchmakerViewController {
@@ -77,6 +86,18 @@ func NewTurnBasedMatchmakerViewControllerWithMatchRequest(request *MatchRequest)
 		}()
 	})
 	return _mainthread0
+}
+
+// WithTurnBasedMatchmakerDelegate sets the object that handles turn-based matchmaker view controller changes.
+func (tbmvc *TurnBasedMatchmakerViewController) WithTurnBasedMatchmakerDelegate(turnBasedMatchmakerDelegate TurnBasedMatchmakerViewControllerDelegate) *TurnBasedMatchmakerViewController {
+	_shim := newTurnBasedMatchmakerViewControllerDelegateShim(turnBasedMatchmakerDelegate)
+	_sel := objc.RegisterName("setTurnBasedMatchmakerDelegate:")
+	shim.Associate(objref.IDOf(tbmvc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tbmvc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return tbmvc
 }
 
 // WithShowExistingMatches sets a Boolean value that determines whether the view controller shows existing matches.
@@ -97,6 +118,7 @@ func (tbmvc *TurnBasedMatchmakerViewController) WithMatchmakingMode(matchmakingM
 
 // ShowExistingMatches wraps the corresponding Objective-C method.
 func (tbmvc *TurnBasedMatchmakerViewController) ShowExistingMatches() bool {
+	defer runtime.KeepAlive(tbmvc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -110,6 +132,7 @@ func (tbmvc *TurnBasedMatchmakerViewController) ShowExistingMatches() bool {
 
 // MatchmakingMode returns the matchmaking mode.
 func (tbmvc *TurnBasedMatchmakerViewController) MatchmakingMode() MatchmakingMode {
+	defer runtime.KeepAlive(tbmvc)
 	var _mainthread0 MatchmakingMode
 	purego.Main(func() {
 		_mainthread0 = func() MatchmakingMode {

@@ -5,6 +5,9 @@
 package oslog
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +52,33 @@ func logEntryAdopt(id objc.ID) *LogEntry {
 
 // Description returns the object's -description text.
 func (le *LogEntry) Description() string {
+	defer runtime.KeepAlive(le)
 	return rt.Description(objref.IDOf(le))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (le *LogEntry) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(le)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(le), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (le *LogEntry) IsKind(className string) bool {
+	defer runtime.KeepAlive(le)
 	return rt.IsKind(objref.IDOf(le), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (le *LogEntry) String() string {
+	defer runtime.KeepAlive(le)
 	return rt.Description(objref.IDOf(le))
 }
 
 // ComposedMessage returns the fully formatted message for the entry.
 func (le *LogEntry) ComposedMessage() string {
+	defer runtime.KeepAlive(le)
 	_r := objc.Send[objc.ID](objref.IDOf(le), objc.RegisterName("composedMessage"))
 	if _r == 0 {
 		return ""
@@ -78,13 +87,15 @@ func (le *LogEntry) ComposedMessage() string {
 }
 
 // Date returns the timestamp of the entry.
-func (le *LogEntry) Date() obj.Object {
+func (le *LogEntry) Date() time.Time {
+	defer runtime.KeepAlive(le)
 	_r := objc.Send[objc.ID](objref.IDOf(le), objc.RegisterName("date"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // StoreCategory returns this entry's storage tag. See OSLogEntryStoreCategory.
 func (le *LogEntry) StoreCategory() LogEntryStoreCategory {
+	defer runtime.KeepAlive(le)
 	_r := objc.Send[LogEntryStoreCategory](objref.IDOf(le), objc.RegisterName("storeCategory"))
 	return _r
 }

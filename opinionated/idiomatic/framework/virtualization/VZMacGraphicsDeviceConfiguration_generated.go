@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -62,6 +64,7 @@ func (mgdc *MacGraphicsDeviceConfiguration) WithDisplays(items ...*MacGraphicsDi
 //
 // Displays returns the collection as a Go slice.
 func (mgdc *MacGraphicsDeviceConfiguration) Displays() []*MacGraphicsDisplayConfiguration {
+	defer runtime.KeepAlive(mgdc)
 	_arr := objc.Send[objc.ID](objref.IDOf(mgdc), objc.RegisterName("displays"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MacGraphicsDisplayConfiguration { return MacGraphicsDisplayConfigurationFromID(_id) })
 }

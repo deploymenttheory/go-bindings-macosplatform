@@ -5,8 +5,11 @@
 package storekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func storeProductViewControllerAdopt(id objc.ID) *StoreProductViewController {
 
 // Description returns the object's -description text.
 func (spvc *StoreProductViewController) Description() string {
+	defer runtime.KeepAlive(spvc)
 	return rt.Description(objref.IDOf(spvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (spvc *StoreProductViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(spvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(spvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (spvc *StoreProductViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(spvc)
 	return rt.IsKind(objref.IDOf(spvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (spvc *StoreProductViewController) String() string {
+	defer runtime.KeepAlive(spvc)
 	return rt.Description(objref.IDOf(spvc))
 }
 
@@ -76,4 +84,16 @@ func NewStoreProductViewController() *StoreProductViewController {
 		}()
 	})
 	return _mainthread0
+}
+
+// WithDelegate sets the store view controller’s delegate.
+func (spvc *StoreProductViewController) WithDelegate(delegate StoreProductViewControllerDelegate) *StoreProductViewController {
+	_shim := newStoreProductViewControllerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(spvc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(spvc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return spvc
 }

@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTL4RenderPipelineColorAttachmentDescriptorArrayAdopt(id objc.ID) *MTL4Rend
 
 // Description returns the object's -description text.
 func (mrpcada *MTL4RenderPipelineColorAttachmentDescriptorArray) Description() string {
+	defer runtime.KeepAlive(mrpcada)
 	return rt.Description(objref.IDOf(mrpcada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mrpcada *MTL4RenderPipelineColorAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mrpcada)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mrpcada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mrpcada *MTL4RenderPipelineColorAttachmentDescriptorArray) IsKind(className string) bool {
+	defer runtime.KeepAlive(mrpcada)
 	return rt.IsKind(objref.IDOf(mrpcada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mrpcada *MTL4RenderPipelineColorAttachmentDescriptorArray) String() string {
+	defer runtime.KeepAlive(mrpcada)
 	return rt.Description(objref.IDOf(mrpcada))
 }
 
@@ -74,16 +81,20 @@ func NewMTL4RenderPipelineColorAttachmentDescriptorArray() *MTL4RenderPipelineCo
 
 // ObjectAtIndexedSubscript accesses a color attachment at a specific index.
 func (mrpcada *MTL4RenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *MTL4RenderPipelineColorAttachmentDescriptor {
+	defer runtime.KeepAlive(mrpcada)
 	_r := objc.Send[objc.ID](objref.IDOf(mrpcada), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return MTL4RenderPipelineColorAttachmentDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets an attachment at an index.
 func (mrpcada *MTL4RenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *MTL4RenderPipelineColorAttachmentDescriptor, attachmentIndex int) {
+	defer runtime.KeepAlive(mrpcada)
+	defer runtime.KeepAlive(attachment)
 	objc.Send[objc.ID](objref.IDOf(mrpcada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }
 
 // Reset resets the elements of the descriptor array
 func (mrpcada *MTL4RenderPipelineColorAttachmentDescriptorArray) Reset() {
+	defer runtime.KeepAlive(mrpcada)
 	objc.Send[objc.ID](objref.IDOf(mrpcada), objc.RegisterName("reset"))
 }

@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func assetResourceCreationOptionsAdopt(id objc.ID) *AssetResourceCreationOptions
 
 // Description returns the object's -description text.
 func (arco *AssetResourceCreationOptions) Description() string {
+	defer runtime.KeepAlive(arco)
 	return rt.Description(objref.IDOf(arco))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (arco *AssetResourceCreationOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(arco)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(arco), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (arco *AssetResourceCreationOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(arco)
 	return rt.IsKind(objref.IDOf(arco), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (arco *AssetResourceCreationOptions) String() string {
+	defer runtime.KeepAlive(arco)
 	return rt.Description(objref.IDOf(arco))
 }
 
@@ -80,6 +87,7 @@ func (arco *AssetResourceCreationOptions) WithOriginalFilename(originalFilename 
 
 // WithContentType sets the type of data being provided for this asset resource. If not specified, one will be inferred from the PHAssetResourceType or file URL extension (if provided).
 func (arco *AssetResourceCreationOptions) WithContentType(contentType obj.Object) *AssetResourceCreationOptions {
+	defer runtime.KeepAlive(contentType)
 	objc.Send[objc.ID](objref.IDOf(arco), objc.RegisterName("setContentType:"), objref.IDOf(contentType))
 	return arco
 }
@@ -98,6 +106,7 @@ func (arco *AssetResourceCreationOptions) WithShouldMoveFile(shouldMoveFile bool
 
 // OriginalFilename returns the original filename.
 func (arco *AssetResourceCreationOptions) OriginalFilename() string {
+	defer runtime.KeepAlive(arco)
 	_r := objc.Send[objc.ID](objref.IDOf(arco), objc.RegisterName("originalFilename"))
 	if _r == 0 {
 		return ""
@@ -107,12 +116,14 @@ func (arco *AssetResourceCreationOptions) OriginalFilename() string {
 
 // ContentType returns the type of data being provided for this asset resource. If not specified, one will be inferred from the PHAssetResourceType or file URL extension (if provided).
 func (arco *AssetResourceCreationOptions) ContentType() obj.Object {
+	defer runtime.KeepAlive(arco)
 	_r := objc.Send[objc.ID](objref.IDOf(arco), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
 }
 
 // UniformTypeIdentifier returns the uniform type identifier.
 func (arco *AssetResourceCreationOptions) UniformTypeIdentifier() string {
+	defer runtime.KeepAlive(arco)
 	_r := objc.Send[objc.ID](objref.IDOf(arco), objc.RegisterName("uniformTypeIdentifier"))
 	if _r == 0 {
 		return ""
@@ -122,6 +133,7 @@ func (arco *AssetResourceCreationOptions) UniformTypeIdentifier() string {
 
 // ShouldMoveFile wraps the corresponding Objective-C method.
 func (arco *AssetResourceCreationOptions) ShouldMoveFile() bool {
+	defer runtime.KeepAlive(arco)
 	_r := objc.Send[bool](objref.IDOf(arco), objc.RegisterName("shouldMoveFile"))
 	return _r
 }

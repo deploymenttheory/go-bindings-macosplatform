@@ -5,6 +5,8 @@
 package sharedwithyou
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func attributionViewAdopt(id objc.ID) *AttributionView {
 
 // Description returns the object's -description text.
 func (av *AttributionView) Description() string {
+	defer runtime.KeepAlive(av)
 	return rt.Description(objref.IDOf(av))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (av *AttributionView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(av)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(av), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (av *AttributionView) IsKind(className string) bool {
+	defer runtime.KeepAlive(av)
 	return rt.IsKind(objref.IDOf(av), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (av *AttributionView) String() string {
+	defer runtime.KeepAlive(av)
 	return rt.Description(objref.IDOf(av))
 }
 
@@ -80,6 +87,7 @@ func NewAttributionView() *AttributionView {
 
 // WithHighlight sets the highlight you use to display this attribution.
 func (av *AttributionView) WithHighlight(highlight HighlightProvider) *AttributionView {
+	defer runtime.KeepAlive(highlight)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setHighlight:"), objref.IDOf(highlight))
 	})
@@ -128,6 +136,7 @@ func (av *AttributionView) WithMenuTitleForHideAction(menuTitleForHideAction str
 
 // WithSupplementalMenu sets a supplemental menu to augment the attribution view’s existing menu.
 func (av *AttributionView) WithSupplementalMenu(supplementalMenu obj.Object) *AttributionView {
+	defer runtime.KeepAlive(supplementalMenu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setSupplementalMenu:"), objref.IDOf(supplementalMenu))
 	})
@@ -136,6 +145,7 @@ func (av *AttributionView) WithSupplementalMenu(supplementalMenu obj.Object) *At
 
 // Highlight returns the SWHighlight to use for displaying this attribution. When this property is set to a new highlight, the contents of the view will be reloaded.
 func (av *AttributionView) Highlight() *Highlight {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 *Highlight
 	purego.Main(func() {
 		_mainthread0 = func() *Highlight {
@@ -149,6 +159,7 @@ func (av *AttributionView) Highlight() *Highlight {
 
 // DisplayContext returns the context for the content being displayed with this view. Set this prior to adding this view to your view hierarchy.
 func (av *AttributionView) DisplayContext() AttributionViewDisplayContext {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 AttributionViewDisplayContext
 	purego.Main(func() {
 		_mainthread0 = func() AttributionViewDisplayContext {
@@ -162,6 +173,7 @@ func (av *AttributionView) DisplayContext() AttributionViewDisplayContext {
 
 // HorizontalAlignment returns the horizontal alignment of the view. You should specify a value, in case the internal default ever changes. This value specifies the horizontal anchor for the view's contents. This only has an effect when the width of the contents are less than the available width.
 func (av *AttributionView) HorizontalAlignment() AttributionViewHorizontalAlignment {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 AttributionViewHorizontalAlignment
 	purego.Main(func() {
 		_mainthread0 = func() AttributionViewHorizontalAlignment {
@@ -175,6 +187,7 @@ func (av *AttributionView) HorizontalAlignment() AttributionViewHorizontalAlignm
 
 // BackgroundStyle returns the background style of the inner view containing names and avatars. If you do not specify a background style, one will be chosen automatically. In general, .color looks best on monochrome backgrounds, while .material looks better on colored backgrounds.
 func (av *AttributionView) BackgroundStyle() AttributionViewBackgroundStyle {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 AttributionViewBackgroundStyle
 	purego.Main(func() {
 		_mainthread0 = func() AttributionViewBackgroundStyle {
@@ -188,6 +201,7 @@ func (av *AttributionView) BackgroundStyle() AttributionViewBackgroundStyle {
 
 // PreferredMaxLayoutWidth returns for use when embedding this view in a SwiftUI view representable. When using this view in SwiftUI, this view will constrain its contents to this width. If you are not using SwiftUI this property should not be necessary, as SWAttributionView otherwise derives the maximum width from the frame or constraints you set.
 func (av *AttributionView) PreferredMaxLayoutWidth() float64 {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -201,6 +215,7 @@ func (av *AttributionView) PreferredMaxLayoutWidth() float64 {
 
 // HighlightMenu returns the highlight menu.
 func (av *AttributionView) HighlightMenu() obj.Object {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -214,6 +229,7 @@ func (av *AttributionView) HighlightMenu() obj.Object {
 
 // MenuTitleForHideAction returns a custom localized string to be used as the title for the "Hide" menu item title. A nil value will result in the default title. SWAttributionView manages a context menu which includes the option for the user to hide the content for the SWHighlight represented by this view. Set a title to be used as the title for that context menu. An app that displays articles, for example, might set
 func (av *AttributionView) MenuTitleForHideAction() string {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -230,6 +246,7 @@ func (av *AttributionView) MenuTitleForHideAction() string {
 
 // SupplementalMenu returns the supplemental menu.
 func (av *AttributionView) SupplementalMenu() obj.Object {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

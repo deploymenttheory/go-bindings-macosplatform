@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -115,42 +117,49 @@ func (ia *ImageArithmetic) WithLabel(label string) *ImageArithmetic {
 
 // PrimaryScale returns the primary scale.
 func (ia *ImageArithmetic) PrimaryScale() float32 {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[float32](objref.IDOf(ia), objc.RegisterName("primaryScale"))
 	return _r
 }
 
 // SecondaryScale returns the secondary scale.
 func (ia *ImageArithmetic) SecondaryScale() float32 {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[float32](objref.IDOf(ia), objc.RegisterName("secondaryScale"))
 	return _r
 }
 
 // Bias returns the bias.
 func (ia *ImageArithmetic) Bias() float32 {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[float32](objref.IDOf(ia), objc.RegisterName("bias"))
 	return _r
 }
 
 // PrimaryStrideInPixels returns the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
 func (ia *ImageArithmetic) PrimaryStrideInPixels() metal.MTLSize {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[metal.MTLSize](objref.IDOf(ia), objc.RegisterName("primaryStrideInPixels"))
 	return _r
 }
 
 // SecondaryStrideInPixels returns the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
 func (ia *ImageArithmetic) SecondaryStrideInPixels() metal.MTLSize {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[metal.MTLSize](objref.IDOf(ia), objc.RegisterName("secondaryStrideInPixels"))
 	return _r
 }
 
 // MinimumValue returns minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
 func (ia *ImageArithmetic) MinimumValue() float32 {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[float32](objref.IDOf(ia), objc.RegisterName("minimumValue"))
 	return _r
 }
 
 // MaximumValue returns maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
 func (ia *ImageArithmetic) MaximumValue() float32 {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[float32](objref.IDOf(ia), objc.RegisterName("maximumValue"))
 	return _r
 }

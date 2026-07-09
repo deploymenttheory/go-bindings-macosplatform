@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func rentalCarAdopt(id objc.ID) *RentalCar {
 
 // Description returns the object's -description text.
 func (rc *RentalCar) Description() string {
+	defer runtime.KeepAlive(rc)
 	return rt.Description(objref.IDOf(rc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rc *RentalCar) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rc *RentalCar) IsKind(className string) bool {
+	defer runtime.KeepAlive(rc)
 	return rt.IsKind(objref.IDOf(rc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rc *RentalCar) String() string {
+	defer runtime.KeepAlive(rc)
 	return rt.Description(objref.IDOf(rc))
 }
 
@@ -75,6 +82,7 @@ func NewRentalCarWithRentalCompanyNameTypeMakeModelRentalCarDescription(rentalCo
 
 // RentalCompanyName returns the rental company name.
 func (rc *RentalCar) RentalCompanyName() string {
+	defer runtime.KeepAlive(rc)
 	_r := objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("rentalCompanyName"))
 	if _r == 0 {
 		return ""
@@ -84,6 +92,7 @@ func (rc *RentalCar) RentalCompanyName() string {
 
 // Type returns the type.
 func (rc *RentalCar) Type() string {
+	defer runtime.KeepAlive(rc)
 	_r := objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -93,6 +102,7 @@ func (rc *RentalCar) Type() string {
 
 // Make returns the make.
 func (rc *RentalCar) Make() string {
+	defer runtime.KeepAlive(rc)
 	_r := objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("make"))
 	if _r == 0 {
 		return ""
@@ -102,6 +112,7 @@ func (rc *RentalCar) Make() string {
 
 // Model returns the model.
 func (rc *RentalCar) Model() string {
+	defer runtime.KeepAlive(rc)
 	_r := objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("model"))
 	if _r == 0 {
 		return ""
@@ -111,6 +122,7 @@ func (rc *RentalCar) Model() string {
 
 // RentalCarDescription returns the rental car description.
 func (rc *RentalCar) RentalCarDescription() string {
+	defer runtime.KeepAlive(rc)
 	_r := objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("rentalCarDescription"))
 	if _r == 0 {
 		return ""

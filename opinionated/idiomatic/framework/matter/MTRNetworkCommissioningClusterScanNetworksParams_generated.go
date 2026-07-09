@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRNetworkCommissioningClusterScanNetworksParamsAdopt(id objc.ID) *MTRNetwo
 
 // Description returns the object's -description text.
 func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) Description() string {
+	defer runtime.KeepAlive(mnccsnp)
 	return rt.Description(objref.IDOf(mnccsnp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mnccsnp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mnccsnp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mnccsnp)
 	return rt.IsKind(objref.IDOf(mnccsnp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) String() string {
+	defer runtime.KeepAlive(mnccsnp)
 	return rt.Description(objref.IDOf(mnccsnp))
 }
 
@@ -71,49 +79,56 @@ func NewMTRNetworkCommissioningClusterScanNetworksParams() *MTRNetworkCommission
 }
 
 // WithSsid sets the ssid.
-func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) WithSsid(ssid obj.Object) *MTRNetworkCommissioningClusterScanNetworksParams {
-	objc.Send[objc.ID](objref.IDOf(mnccsnp), objc.RegisterName("setSsid:"), objref.IDOf(ssid))
+func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) WithSsid(ssid []byte) *MTRNetworkCommissioningClusterScanNetworksParams {
+	objc.Send[objc.ID](objref.IDOf(mnccsnp), objc.RegisterName("setSsid:"), rt.BytesToNSData(ssid))
 	return mnccsnp
 }
 
 // WithBreadcrumb sets the breadcrumb.
 func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) WithBreadcrumb(breadcrumb obj.Object) *MTRNetworkCommissioningClusterScanNetworksParams {
+	defer runtime.KeepAlive(breadcrumb)
 	objc.Send[objc.ID](objref.IDOf(mnccsnp), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 	return mnccsnp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRNetworkCommissioningClusterScanNetworksParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mnccsnp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mnccsnp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRNetworkCommissioningClusterScanNetworksParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mnccsnp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mnccsnp
 }
 
 // Ssid returns the ssid.
-func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) Ssid() obj.Object {
+func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) Ssid() []byte {
+	defer runtime.KeepAlive(mnccsnp)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccsnp), objc.RegisterName("ssid"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Breadcrumb returns the breadcrumb.
-func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) Breadcrumb() obj.Object {
+func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) Breadcrumb() *foundation.Number {
+	defer runtime.KeepAlive(mnccsnp)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccsnp), objc.RegisterName("breadcrumb"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) TimedInvokeTimeoutMs() obj.Object {
+func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mnccsnp)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccsnp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) ServerSideProcessingTimeout() obj.Object {
+func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mnccsnp)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccsnp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

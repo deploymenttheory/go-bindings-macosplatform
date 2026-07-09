@@ -5,6 +5,8 @@
 package glkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func submeshAdopt(id objc.ID) *Submesh {
 
 // Description returns the object's -description text.
 func (s *Submesh) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Submesh) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Submesh) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Submesh) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -72,36 +79,42 @@ func NewSubmesh() *Submesh {
 
 // Type returns type of data in the elementBuffer (aka indexBuffer) This value should be used for the type parameter of glDrawElements
 func (s *Submesh) Type() uint32 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[uint32](objref.IDOf(s), objc.RegisterName("type"))
 	return _r
 }
 
 // Mode returns primitive type mode value of data in the elementBuffer (aka indexBuffer) This value should be used for the mode parameter in glDrawElements
 func (s *Submesh) Mode() uint32 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[uint32](objref.IDOf(s), objc.RegisterName("mode"))
 	return _r
 }
 
 // ElementCount returns number of elements (aka indicies) in the elementBuffer (aka indexBuffer) This value should be used for the count parameter in glDrawElements
 func (s *Submesh) ElementCount() int32 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int32](objref.IDOf(s), objc.RegisterName("elementCount"))
 	return _r
 }
 
 // ElementBuffer returns name of buffer object with index data The buffer name to be used with DrawElements
 func (s *Submesh) ElementBuffer() *MeshBuffer {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("elementBuffer"))
 	return MeshBufferFromID(_r)
 }
 
 // Mesh returns parent GLKit mesh containing vertex data of this object Buffer of this parent mesh should be set in the encoder before a drawIndexedPrimitives call is made
 func (s *Submesh) Mesh() *Mesh {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("mesh"))
 	return MeshFromID(_r)
 }
 
 // Name returns name from the original MDLSubmesh object. Although not directly used by this object, the application may use this to identify the submesh in it renderer/scene/world.
 func (s *Submesh) Name() string {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

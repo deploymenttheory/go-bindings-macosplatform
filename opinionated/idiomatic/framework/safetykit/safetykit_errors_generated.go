@@ -8,14 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrNotAuthorized matches the SafetyKit error SAErrorNotAuthorized.
-var ErrNotAuthorized = errkit.New("SAErrorDomain", 1)
+// ErrInvalidArgument matches the SafetyKit error SAErrorInvalidArgument.
+var ErrInvalidArgument = errkit.New("SAErrorDomain", 3)
 
 // ErrNotAllowed matches the SafetyKit error SAErrorNotAllowed.
 var ErrNotAllowed = errkit.New("SAErrorDomain", 2)
 
-// ErrInvalidArgument matches the SafetyKit error SAErrorInvalidArgument.
-var ErrInvalidArgument = errkit.New("SAErrorDomain", 3)
+// ErrNotAuthorized matches the SafetyKit error SAErrorNotAuthorized.
+var ErrNotAuthorized = errkit.New("SAErrorDomain", 1)
 
 // ErrOperationFailed matches the SafetyKit error SAErrorOperationFailed.
 var ErrOperationFailed = errkit.New("SAErrorDomain", 4)

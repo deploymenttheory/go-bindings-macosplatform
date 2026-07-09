@@ -5,6 +5,8 @@
 package metalfx
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func spatialScalerDescriptorAdopt(id objc.ID) *SpatialScalerDescriptor {
 
 // Description returns the object's -description text.
 func (ssd *SpatialScalerDescriptor) Description() string {
+	defer runtime.KeepAlive(ssd)
 	return rt.Description(objref.IDOf(ssd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ssd *SpatialScalerDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ssd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ssd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ssd *SpatialScalerDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(ssd)
 	return rt.IsKind(objref.IDOf(ssd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ssd *SpatialScalerDescriptor) String() string {
+	defer runtime.KeepAlive(ssd)
 	return rt.Description(objref.IDOf(ssd))
 }
 
@@ -104,30 +111,35 @@ func (ssd *SpatialScalerDescriptor) WithColorProcessingMode(colorProcessingMode 
 
 // InputWidth returns the width of the input color texture for the spatial scaler you create with this descriptor.
 func (ssd *SpatialScalerDescriptor) InputWidth() int {
+	defer runtime.KeepAlive(ssd)
 	_r := objc.Send[int](objref.IDOf(ssd), objc.RegisterName("inputWidth"))
 	return _r
 }
 
 // InputHeight returns the height of the input color texture for the spatial scaler you create with this descriptor.
 func (ssd *SpatialScalerDescriptor) InputHeight() int {
+	defer runtime.KeepAlive(ssd)
 	_r := objc.Send[int](objref.IDOf(ssd), objc.RegisterName("inputHeight"))
 	return _r
 }
 
 // OutputWidth returns the width of the output color texture for the spatial scaler you create with this descriptor.
 func (ssd *SpatialScalerDescriptor) OutputWidth() int {
+	defer runtime.KeepAlive(ssd)
 	_r := objc.Send[int](objref.IDOf(ssd), objc.RegisterName("outputWidth"))
 	return _r
 }
 
 // OutputHeight returns the height of the output color texture for the spatial scaler you create with this descriptor.
 func (ssd *SpatialScalerDescriptor) OutputHeight() int {
+	defer runtime.KeepAlive(ssd)
 	_r := objc.Send[int](objref.IDOf(ssd), objc.RegisterName("outputHeight"))
 	return _r
 }
 
 // ColorProcessingMode returns the color space of the input color texture for the spatial scaler you create with this descriptor. This property's default value is “MTLFXSpatialScalerColorProcessingMode/MTLFXSpatialScalerColorProcessingModePerceptual“.
 func (ssd *SpatialScalerDescriptor) ColorProcessingMode() SpatialScalerColorProcessingMode {
+	defer runtime.KeepAlive(ssd)
 	_r := objc.Send[SpatialScalerColorProcessingMode](objref.IDOf(ssd), objc.RegisterName("colorProcessingMode"))
 	return _r
 }

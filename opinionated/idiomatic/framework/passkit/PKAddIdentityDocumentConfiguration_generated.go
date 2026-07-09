@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (aidc *AddIdentityDocumentConfiguration) WithLocalizedDescription(localized
 
 // Metadata returns the metadata.
 func (aidc *AddIdentityDocumentConfiguration) Metadata() *IdentityDocumentMetadata {
+	defer runtime.KeepAlive(aidc)
 	_r := objc.Send[objc.ID](objref.IDOf(aidc), objc.RegisterName("metadata"))
 	return IdentityDocumentMetadataFromID(_r)
 }

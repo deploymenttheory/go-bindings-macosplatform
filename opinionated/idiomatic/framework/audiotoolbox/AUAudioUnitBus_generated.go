@@ -5,6 +5,7 @@
 package audiotoolbox
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,27 +51,33 @@ func audioUnitBusAdopt(id objc.ID) *AudioUnitBus {
 
 // Description returns the object's -description text.
 func (aub *AudioUnitBus) Description() string {
+	defer runtime.KeepAlive(aub)
 	return rt.Description(objref.IDOf(aub))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aub *AudioUnitBus) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aub)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aub), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aub *AudioUnitBus) IsKind(className string) bool {
+	defer runtime.KeepAlive(aub)
 	return rt.IsKind(objref.IDOf(aub), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aub *AudioUnitBus) String() string {
+	defer runtime.KeepAlive(aub)
 	return rt.Description(objref.IDOf(aub))
 }
 
-// NewAudioUnitBusWithFormatError initializes a bus object with a specific format.
-func NewAudioUnitBusWithFormatError(format obj.Object) (result *AudioUnitBus, err error) {
+// NewAudioUnitBusWithFormat initializes a bus object with a specific format.
+func NewAudioUnitBusWithFormat(format obj.Object) (result *AudioUnitBus, err error) {
+	defer runtime.KeepAlive(format)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AUAudioUnitBus")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:error:"), objref.IDOf(format), unsafe.Pointer(&_nsErr))
@@ -119,6 +126,8 @@ func (aub *AudioUnitBus) WithMaximumChannelCount(maximumChannelCount uint32) *Au
 
 // SetFormat sets the bus’s audio format.
 func (aub *AudioUnitBus) SetFormat(format obj.Object) error {
+	defer runtime.KeepAlive(aub)
+	defer runtime.KeepAlive(format)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(aub), objc.RegisterName("setFormat:error:"), objref.IDOf(format), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -129,24 +138,28 @@ func (aub *AudioUnitBus) SetFormat(format obj.Object) error {
 
 // Format returns the audio format and channel layout of audio being transferred on the bus. Bridged to the v2 property kAudioUnitProperty_StreamFormat.
 func (aub *AudioUnitBus) Format() obj.Object {
+	defer runtime.KeepAlive(aub)
 	_r := objc.Send[objc.ID](objref.IDOf(aub), objc.RegisterName("format"))
 	return obj.Wrap(_r)
 }
 
 // ShouldAllocateBuffer reports whether controls the audio unit's allocation strategy for a bus. Hosts can set this flag to communicate whether an audio unit should allocate its own buffer. By default this flag is set to true. On the output side, shouldAllocateBuffer=false means the AU can assume that it will be called with non-null output buffers. If shouldAllocateBuffer=true (the default), the AU must be prepared to be called with null pointers and replace them with pointers to its internally allocated buffer. On the input side, shouldAllocateBuffer=false means the AU can pull for input using a buffer list with null buffer pointers, and assume that the pull input block will provide pointers. If shouldAllocateBuffer=true (the default), the AU must pull with non-null pointers while still being prepared for the source to replace them with pointers of its own. Bridged to the v2 property kAudioUnitProperty_ShouldAllocateBuffer.
 func (aub *AudioUnitBus) ShouldAllocateBuffer() bool {
+	defer runtime.KeepAlive(aub)
 	_r := objc.Send[bool](objref.IDOf(aub), objc.RegisterName("shouldAllocateBuffer"))
 	return _r
 }
 
 // IsEnabled reports whether the bus is active. Hosts must enable input busses before using them. The reason for this is to allow a unit such as a mixer to be prepared to render a large number of inputs, but avoid the work of preparing to pull inputs which are not in use. Bridged to the v2 properties kAudioUnitProperty_MakeConnection and kAudioUnitProperty_SetRenderCallback.
 func (aub *AudioUnitBus) IsEnabled() bool {
+	defer runtime.KeepAlive(aub)
 	_r := objc.Send[bool](objref.IDOf(aub), objc.RegisterName("isEnabled"))
 	return _r
 }
 
 // Name returns a name for the bus. Can be set by host.
 func (aub *AudioUnitBus) Name() string {
+	defer runtime.KeepAlive(aub)
 	_r := objc.Send[objc.ID](objref.IDOf(aub), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -156,18 +169,21 @@ func (aub *AudioUnitBus) Name() string {
 
 // Index returns the index of this bus in the containing array.
 func (aub *AudioUnitBus) Index() int {
+	defer runtime.KeepAlive(aub)
 	_r := objc.Send[int](objref.IDOf(aub), objc.RegisterName("index"))
 	return _r
 }
 
 // BusType returns the AUAudioUnitBusType.
 func (aub *AudioUnitBus) BusType() AudioUnitBusType {
+	defer runtime.KeepAlive(aub)
 	_r := objc.Send[AudioUnitBusType](objref.IDOf(aub), objc.RegisterName("busType"))
 	return _r
 }
 
 // OwnerAudioUnit returns the audio unit that owns the bus.
 func (aub *AudioUnitBus) OwnerAudioUnit() *AudioUnit {
+	defer runtime.KeepAlive(aub)
 	_r := objc.Send[objc.ID](objref.IDOf(aub), objc.RegisterName("ownerAudioUnit"))
 	return AudioUnitFromID(_r)
 }
@@ -176,12 +192,14 @@ func (aub *AudioUnitBus) OwnerAudioUnit() *AudioUnit {
 //
 // SupportedChannelLayoutTags returns the collection as a Go slice.
 func (aub *AudioUnitBus) SupportedChannelLayoutTags() []obj.Object {
+	defer runtime.KeepAlive(aub)
 	_arr := objc.Send[objc.ID](objref.IDOf(aub), objc.RegisterName("supportedChannelLayoutTags"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ContextPresentationLatency returns information about latency in the audio unit's processing context. This should not be confused with the audio unit's latency property, where the audio unit describes to the host any processing latency it introduces between its input and its output. A host may set this property to describe to the audio unit the presentation latency of its input and/or output audio data. Latency is described in seconds. A value of zero means either no latency or an unknown latency. A host should set this property on each active bus, since, for example, the audio routing path to each of multiple output busses may differ. For input busses: Describes how long ago the audio arriving on this bus was acquired. For instance, when reading from a file to the first audio unit in a chain, the input presentation latency is zero. For audio input from a device, this initial input latency is the presentation latency of the device itself, i.e. the device's safety offset and latency. A second chained audio unit's input presentation latency will be the input presentation latency of the first unit, plus the processing latency of the first unit. For output busses: Describes how long it will be before the output audio of an audio unit is presented. For instance, when writing to a file, the output presentation latency of the last audio unit in a chain is zero. When the audio from that audio unit is to be played to a device, then that initial presentation latency will be the presentation latency of the device itself, which is the I/O buffer size, plus the device's safety offset and latency A previous chained audio unit's output presentation latency is the last unit's presentation latency plus its processing latency. So, for a given audio unit anywhere within a mixing graph, the input and output presentation latencies describe to that unit how long from the moment of generation it has taken for its input to arrive, and how long it will take for its output to be presented. Bridged to the v2 property kAudioUnitProperty_PresentationLatency.
 func (aub *AudioUnitBus) ContextPresentationLatency() float64 {
+	defer runtime.KeepAlive(aub)
 	_r := objc.Send[float64](objref.IDOf(aub), objc.RegisterName("contextPresentationLatency"))
 	return _r
 }
@@ -190,12 +208,14 @@ func (aub *AudioUnitBus) ContextPresentationLatency() float64 {
 //
 // SupportedChannelCounts returns the collection as a Go slice.
 func (aub *AudioUnitBus) SupportedChannelCounts() []obj.Object {
+	defer runtime.KeepAlive(aub)
 	_arr := objc.Send[objc.ID](objref.IDOf(aub), objc.RegisterName("supportedChannelCounts"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // MaximumChannelCount returns the maximum numbers of channels supported for this bus. If supportedChannelCounts is set, then this value is derived from supportedChannelCounts. If setting maximumChannelCount makes the current format unsupported, then format will be set to nil. The default value is UINT_MAX.
 func (aub *AudioUnitBus) MaximumChannelCount() uint32 {
+	defer runtime.KeepAlive(aub)
 	_r := objc.Send[uint32](objref.IDOf(aub), objc.RegisterName("maximumChannelCount"))
 	return _r
 }

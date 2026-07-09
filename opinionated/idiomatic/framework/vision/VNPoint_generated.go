@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -50,22 +52,27 @@ func pointAdopt(id objc.ID) *Point {
 
 // Description returns the object's -description text.
 func (p *Point) Description() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (p *Point) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (p *Point) IsKind(className string) bool {
+	defer runtime.KeepAlive(p)
 	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (p *Point) String() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
@@ -85,24 +92,29 @@ func NewPointWithLocation(location corefoundation.CGPoint) *Point {
 
 // DistanceToPoint returns the distance to another point.
 func (p *Point) DistanceToPoint(point *Point) float64 {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(point)
 	_r := objc.Send[float64](objref.IDOf(p), objc.RegisterName("distanceToPoint:"), objref.IDOf(point))
 	return _r
 }
 
 // Location returns the X and Y coordinates of the point, as CGPoint type, with respect to the origin of the coordinate system the point is defined in.
 func (p *Point) Location() corefoundation.CGPoint {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(p), objc.RegisterName("location"))
 	return _r
 }
 
 // X returns the X coordinate of the point with respect to the origin of the coordinate system the point is defined in.
 func (p *Point) X() float64 {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[float64](objref.IDOf(p), objc.RegisterName("x"))
 	return _r
 }
 
 // Y returns the Y coordinate of the point with respect to the origin of the coordinate system the point is defined in.
 func (p *Point) Y() float64 {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[float64](objref.IDOf(p), objc.RegisterName("y"))
 	return _r
 }

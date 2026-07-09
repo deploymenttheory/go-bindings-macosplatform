@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRWaterHeaterModeClusterChangeToModeResponseParamsAdopt(id objc.ID) *MTRWa
 
 // Description returns the object's -description text.
 func (mwhmcctmrp *MTRWaterHeaterModeClusterChangeToModeResponseParams) Description() string {
+	defer runtime.KeepAlive(mwhmcctmrp)
 	return rt.Description(objref.IDOf(mwhmcctmrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mwhmcctmrp *MTRWaterHeaterModeClusterChangeToModeResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mwhmcctmrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mwhmcctmrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mwhmcctmrp *MTRWaterHeaterModeClusterChangeToModeResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mwhmcctmrp)
 	return rt.IsKind(objref.IDOf(mwhmcctmrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mwhmcctmrp *MTRWaterHeaterModeClusterChangeToModeResponseParams) String() string {
+	defer runtime.KeepAlive(mwhmcctmrp)
 	return rt.Description(objref.IDOf(mwhmcctmrp))
 }
 
-// NewMTRWaterHeaterModeClusterChangeToModeResponseParamsWithResponseValueError initialize an MTRWaterHeaterModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-func NewMTRWaterHeaterModeClusterChangeToModeResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRWaterHeaterModeClusterChangeToModeResponseParams, err error) {
+// NewMTRWaterHeaterModeClusterChangeToModeResponseParamsWithResponseValue initialize an MTRWaterHeaterModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRWaterHeaterModeClusterChangeToModeResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRWaterHeaterModeClusterChangeToModeResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRWaterHeaterModeClusterChangeToModeResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,6 +87,7 @@ func NewMTRWaterHeaterModeClusterChangeToModeResponseParamsWithResponseValueErro
 
 // WithStatus sets the status.
 func (mwhmcctmrp *MTRWaterHeaterModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTRWaterHeaterModeClusterChangeToModeResponseParams {
+	defer runtime.KeepAlive(status)
 	objc.Send[objc.ID](objref.IDOf(mwhmcctmrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mwhmcctmrp
 }
@@ -91,13 +99,15 @@ func (mwhmcctmrp *MTRWaterHeaterModeClusterChangeToModeResponseParams) WithStatu
 }
 
 // Status returns the status.
-func (mwhmcctmrp *MTRWaterHeaterModeClusterChangeToModeResponseParams) Status() obj.Object {
+func (mwhmcctmrp *MTRWaterHeaterModeClusterChangeToModeResponseParams) Status() *foundation.Number {
+	defer runtime.KeepAlive(mwhmcctmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcctmrp), objc.RegisterName("status"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StatusText returns the status text.
 func (mwhmcctmrp *MTRWaterHeaterModeClusterChangeToModeResponseParams) StatusText() string {
+	defer runtime.KeepAlive(mwhmcctmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcctmrp), objc.RegisterName("statusText"))
 	if _r == 0 {
 		return ""

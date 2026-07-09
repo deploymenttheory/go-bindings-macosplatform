@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func gearShifterElementAdopt(id objc.ID) *GearShifterElement {
 
 // Description returns the object's -description text.
 func (gse *GearShifterElement) Description() string {
+	defer runtime.KeepAlive(gse)
 	return rt.Description(objref.IDOf(gse))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gse *GearShifterElement) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gse)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gse), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gse *GearShifterElement) IsKind(className string) bool {
+	defer runtime.KeepAlive(gse)
 	return rt.IsKind(objref.IDOf(gse), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gse *GearShifterElement) String() string {
+	defer runtime.KeepAlive(gse)
 	return rt.Description(objref.IDOf(gse))
 }
 

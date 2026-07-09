@@ -107,8 +107,8 @@ func (o *CBPeripheral) WriteValueForDescriptor(data *foundation.NSData, descript
 }
 
 // Attempts to open an L2CAP channel to the peripheral using the supplied Protocol/Service Multiplexer (PSM).
-func (o *CBPeripheral) OpenL2CAPChannel(pSM uint16) {
-	o.Ptr().Send(_cBPeripheralSelOpenL2CAPChannel, pSM)
+func (o *CBPeripheral) OpenL2CAPChannel(psm uint16) {
+	o.Ptr().Send(_cBPeripheralSelOpenL2CAPChannel, psm)
 }
 
 // @property delegate @discussion The delegate object that will receive peripheral events.

@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,6 +53,7 @@ func NewCNNConvolutionTransposeGradientState() *CNNConvolutionTransposeGradientS
 
 // ConvolutionTranspose returns the convolutionTranspose filter that produced the state.
 func (cctgs *CNNConvolutionTransposeGradientState) ConvolutionTranspose() *CNNConvolutionTranspose {
+	defer runtime.KeepAlive(cctgs)
 	_r := objc.Send[objc.ID](objref.IDOf(cctgs), objc.RegisterName("convolutionTranspose"))
 	return CNNConvolutionTransposeFromID(_r)
 }

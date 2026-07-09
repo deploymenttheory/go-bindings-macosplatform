@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nNFilterNodeAdopt(id objc.ID) *NNFilterNode {
 
 // Description returns the object's -description text.
 func (nfn *NNFilterNode) Description() string {
+	defer runtime.KeepAlive(nfn)
 	return rt.Description(objref.IDOf(nfn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nfn *NNFilterNode) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nfn)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nfn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nfn *NNFilterNode) IsKind(className string) bool {
+	defer runtime.KeepAlive(nfn)
 	return rt.IsKind(objref.IDOf(nfn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nfn *NNFilterNode) String() string {
+	defer runtime.KeepAlive(nfn)
 	return rt.Description(objref.IDOf(nfn))
 }
 
@@ -74,36 +81,44 @@ func (nfn *NNFilterNode) WithLabel(label string) *NNFilterNode {
 
 // GradientFilterWithSource return the gradient (backwards) version of this filter. The backwards training version of the filter will be returned. The non-gradient image and state arguments for the filter are automatically obtained from the target.
 func (nfn *NNFilterNode) GradientFilterWithSource(gradientImage *NNImageNode) *NNGradientFilterNode {
+	defer runtime.KeepAlive(nfn)
+	defer runtime.KeepAlive(gradientImage)
 	_r := objc.Send[objc.ID](objref.IDOf(nfn), objc.RegisterName("gradientFilterWithSource:"), objref.IDOf(gradientImage))
 	return NNGradientFilterNodeFromID(_r)
 }
 
 // GradientFilterWithSources return the gradient (backwards) version of this filter. The backwards training version of the filter will be returned. The non-gradient image and state arguments for the filter are automatically obtained from the target.
 func (nfn *NNFilterNode) GradientFilterWithSources(gradientImages []*NNImageNode) *NNGradientFilterNode {
+	defer runtime.KeepAlive(nfn)
 	_r := objc.Send[objc.ID](objref.IDOf(nfn), objc.RegisterName("gradientFilterWithSources:"), purego.SliceToNSArray(gradientImages, func(_v *NNImageNode) objc.ID { return objref.IDOf(_v) }))
 	return NNGradientFilterNodeFromID(_r)
 }
 
 // GradientFiltersWithSources return multiple gradient versions of the filter MPSNNFilters that consume multiple inputs generally result in multiple conjugate filters for the gradient computation at the end of training. For example, a single concatenation operation that concatenates multple images will result in an array of slice operators that carve out subsections of the input gradient image.
 func (nfn *NNFilterNode) GradientFiltersWithSources(gradientImages []*NNImageNode) []*NNGradientFilterNode {
+	defer runtime.KeepAlive(nfn)
 	_r := objc.Send[objc.ID](objref.IDOf(nfn), objc.RegisterName("gradientFiltersWithSources:"), purego.SliceToNSArray(gradientImages, func(_v *NNImageNode) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *NNGradientFilterNode { return NNGradientFilterNodeFromID(_id) })
 }
 
 // GradientFiltersWithSource return multiple gradient versions of the filter MPSNNFilters that consume multiple inputs generally result in multiple conjugate filters for the gradient computation at the end of training. For example, a single concatenation operation that concatenates multple images will result in an array of slice operators that carve out subsections of the input gradient image.
 func (nfn *NNFilterNode) GradientFiltersWithSource(gradientImage *NNImageNode) []*NNGradientFilterNode {
+	defer runtime.KeepAlive(nfn)
+	defer runtime.KeepAlive(gradientImage)
 	_r := objc.Send[objc.ID](objref.IDOf(nfn), objc.RegisterName("gradientFiltersWithSource:"), objref.IDOf(gradientImage))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *NNGradientFilterNode { return NNGradientFilterNodeFromID(_id) })
 }
 
 // ResultImage get the node representing the image result of the filter Except where otherwise noted, the precision used for the result image (see format property) is copied from the precision from the first input image node.
 func (nfn *NNFilterNode) ResultImage() *NNImageNode {
+	defer runtime.KeepAlive(nfn)
 	_r := objc.Send[objc.ID](objref.IDOf(nfn), objc.RegisterName("resultImage"))
 	return NNImageNodeFromID(_r)
 }
 
 // ResultState returns convenience method for resultStates[0] If resultStates is nil, returns nil
 func (nfn *NNFilterNode) ResultState() *NNStateNode {
+	defer runtime.KeepAlive(nfn)
 	_r := objc.Send[objc.ID](objref.IDOf(nfn), objc.RegisterName("resultState"))
 	return NNStateNodeFromID(_r)
 }
@@ -112,12 +127,14 @@ func (nfn *NNFilterNode) ResultState() *NNStateNode {
 //
 // ResultStates returns the collection as a Go slice.
 func (nfn *NNFilterNode) ResultStates() []*NNStateNode {
+	defer runtime.KeepAlive(nfn)
 	_arr := objc.Send[objc.ID](objref.IDOf(nfn), objc.RegisterName("resultStates"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NNStateNode { return NNStateNodeFromID(_id) })
 }
 
 // Label returns a string to help identify this object.
 func (nfn *NNFilterNode) Label() string {
+	defer runtime.KeepAlive(nfn)
 	_r := objc.Send[objc.ID](objref.IDOf(nfn), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

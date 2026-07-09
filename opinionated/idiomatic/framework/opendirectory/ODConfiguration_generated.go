@@ -5,6 +5,7 @@
 package opendirectory
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,22 +49,27 @@ func configurationAdopt(id objc.ID) *Configuration {
 
 // Description returns the object's -description text.
 func (c *Configuration) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Configuration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Configuration) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Configuration) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
@@ -87,6 +93,7 @@ func (c *Configuration) WithComment(comment string) *Configuration {
 
 // WithDefaultMappings sets the default mappings.
 func (c *Configuration) WithDefaultMappings(defaultMappings *Mappings) *Configuration {
+	defer runtime.KeepAlive(defaultMappings)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setDefaultMappings:"), objref.IDOf(defaultMappings))
 	return c
 }
@@ -153,6 +160,8 @@ func (c *Configuration) WithConnectionIdleTimeoutInSeconds(connectionIdleTimeout
 
 // SaveUsingAuthorization saves the configuration using the provided authorization. Saves the configuration using the provided authorization.
 func (c *Configuration) SaveUsingAuthorization(authorization obj.Object) error {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(authorization)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(c), objc.RegisterName("saveUsingAuthorization:error:"), objref.IDOf(authorization), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -163,6 +172,7 @@ func (c *Configuration) SaveUsingAuthorization(authorization obj.Object) error {
 
 // AddTrustTypeTrustAccountTrustPasswordUsernamePasswordJoinExisting adds a trust account with the provided name and password using the credentials provided by the user. Adds a trust account with the provided name and password using the credentials provided by the user.  User can request that the trust be forcibly created (replacing existing trust if found in directory).  A trust should be established only after enough configuration is available and the configuration been saved.  If the trust is required, then the configuration can be deleted if necessary upon failure.
 func (c *Configuration) AddTrustTypeTrustAccountTrustPasswordUsernamePasswordJoinExisting(trustType string, account string, accountPassword string, username string, password string, join bool) error {
+	defer runtime.KeepAlive(c)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(c), objc.RegisterName("addTrustType:trustAccount:trustPassword:username:password:joinExisting:error:"), purego.NSString(trustType), purego.NSString(account), purego.NSString(accountPassword), purego.NSString(username), purego.NSString(password), join, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -173,6 +183,7 @@ func (c *Configuration) AddTrustTypeTrustAccountTrustPasswordUsernamePasswordJoi
 
 // RemoveTrustUsingUsernamePasswordDeleteTrustAccount removes trust using the provided username and password. Removes trust using the provided username and password.  The trust account will be removed from the directory only if requested.
 func (c *Configuration) RemoveTrustUsingUsernamePasswordDeleteTrustAccount(username string, password string, deleteAccount bool) error {
+	defer runtime.KeepAlive(c)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(c), objc.RegisterName("removeTrustUsingUsername:password:deleteTrustAccount:error:"), purego.NSString(username), purego.NSString(password), deleteAccount, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -183,6 +194,7 @@ func (c *Configuration) RemoveTrustUsingUsernamePasswordDeleteTrustAccount(usern
 
 // NodeName returns the node name.
 func (c *Configuration) NodeName() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("nodeName"))
 	if _r == 0 {
 		return ""
@@ -192,6 +204,7 @@ func (c *Configuration) NodeName() string {
 
 // Comment returns the comment.
 func (c *Configuration) Comment() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("comment"))
 	if _r == 0 {
 		return ""
@@ -201,12 +214,14 @@ func (c *Configuration) Comment() string {
 
 // DefaultMappings returns the default mappings.
 func (c *Configuration) DefaultMappings() *Mappings {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("defaultMappings"))
 	return MappingsFromID(_r)
 }
 
 // TemplateName returns the template name.
 func (c *Configuration) TemplateName() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("templateName"))
 	if _r == 0 {
 		return ""
@@ -216,23 +231,28 @@ func (c *Configuration) TemplateName() string {
 
 // VirtualSubnodes returns the virtual subnodes.
 func (c *Configuration) VirtualSubnodes() obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("virtualSubnodes"))
 	return obj.Wrap(_r)
 }
 
 // SetVirtualSubnodes wraps the corresponding Objective-C method.
 func (c *Configuration) SetVirtualSubnodes(virtualSubnodes obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(virtualSubnodes)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setVirtualSubnodes:"), objref.IDOf(virtualSubnodes))
 }
 
 // HideRegistration wraps the corresponding Objective-C method.
 func (c *Configuration) HideRegistration() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("hideRegistration"))
 	return _r
 }
 
 // PreferredDestinationHostName returns the preferred destination host name.
 func (c *Configuration) PreferredDestinationHostName() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("preferredDestinationHostName"))
 	if _r == 0 {
 		return ""
@@ -242,12 +262,14 @@ func (c *Configuration) PreferredDestinationHostName() string {
 
 // PreferredDestinationHostPort returns the preferred destination host port.
 func (c *Configuration) PreferredDestinationHostPort() uint16 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[uint16](objref.IDOf(c), objc.RegisterName("preferredDestinationHostPort"))
 	return _r
 }
 
 // TrustAccount returns the trust account.
 func (c *Configuration) TrustAccount() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("trustAccount"))
 	if _r == 0 {
 		return ""
@@ -257,6 +279,7 @@ func (c *Configuration) TrustAccount() string {
 
 // TrustMetaAccount returns the trust meta account.
 func (c *Configuration) TrustMetaAccount() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("trustMetaAccount"))
 	if _r == 0 {
 		return ""
@@ -266,6 +289,7 @@ func (c *Configuration) TrustMetaAccount() string {
 
 // TrustKerberosPrincipal returns the trust kerberos principal.
 func (c *Configuration) TrustKerberosPrincipal() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("trustKerberosPrincipal"))
 	if _r == 0 {
 		return ""
@@ -275,6 +299,7 @@ func (c *Configuration) TrustKerberosPrincipal() string {
 
 // TrustType returns the trust type.
 func (c *Configuration) TrustType() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("trustType"))
 	if _r == 0 {
 		return ""
@@ -284,98 +309,119 @@ func (c *Configuration) TrustType() string {
 
 // TrustUsesMutualAuthentication wraps the corresponding Objective-C method.
 func (c *Configuration) TrustUsesMutualAuthentication() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("trustUsesMutualAuthentication"))
 	return _r
 }
 
 // TrustUsesKerberosKeytab wraps the corresponding Objective-C method.
 func (c *Configuration) TrustUsesKerberosKeytab() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("trustUsesKerberosKeytab"))
 	return _r
 }
 
 // TrustUsesSystemKeychain wraps the corresponding Objective-C method.
 func (c *Configuration) TrustUsesSystemKeychain() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("trustUsesSystemKeychain"))
 	return _r
 }
 
 // PacketSigning returns the packet signing.
 func (c *Configuration) PacketSigning() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("packetSigning"))
 	return _r
 }
 
 // PacketEncryption returns the packet encryption.
 func (c *Configuration) PacketEncryption() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("packetEncryption"))
 	return _r
 }
 
 // ManInTheMiddleProtection wraps the corresponding Objective-C method.
 func (c *Configuration) ManInTheMiddleProtection() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("manInTheMiddleProtection"))
 	return _r
 }
 
 // QueryTimeoutInSeconds returns the query timeout in seconds.
 func (c *Configuration) QueryTimeoutInSeconds() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("queryTimeoutInSeconds"))
 	return _r
 }
 
 // ConnectionSetupTimeoutInSeconds returns the connection setup timeout in seconds.
 func (c *Configuration) ConnectionSetupTimeoutInSeconds() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("connectionSetupTimeoutInSeconds"))
 	return _r
 }
 
 // ConnectionIdleTimeoutInSeconds returns the connection idle timeout in seconds.
 func (c *Configuration) ConnectionIdleTimeoutInSeconds() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("connectionIdleTimeoutInSeconds"))
 	return _r
 }
 
 // DefaultModuleEntries returns the default module entries.
 func (c *Configuration) DefaultModuleEntries() obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("defaultModuleEntries"))
 	return obj.Wrap(_r)
 }
 
 // SetDefaultModuleEntries wraps the corresponding Objective-C method.
 func (c *Configuration) SetDefaultModuleEntries(defaultModuleEntries obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(defaultModuleEntries)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setDefaultModuleEntries:"), objref.IDOf(defaultModuleEntries))
 }
 
 // AuthenticationModuleEntries returns the authentication module entries.
 func (c *Configuration) AuthenticationModuleEntries() obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("authenticationModuleEntries"))
 	return obj.Wrap(_r)
 }
 
 // SetAuthenticationModuleEntries wraps the corresponding Objective-C method.
 func (c *Configuration) SetAuthenticationModuleEntries(authenticationModuleEntries obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(authenticationModuleEntries)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAuthenticationModuleEntries:"), objref.IDOf(authenticationModuleEntries))
 }
 
 // DiscoveryModuleEntries returns the discovery module entries.
 func (c *Configuration) DiscoveryModuleEntries() obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("discoveryModuleEntries"))
 	return obj.Wrap(_r)
 }
 
 // SetDiscoveryModuleEntries wraps the corresponding Objective-C method.
 func (c *Configuration) SetDiscoveryModuleEntries(discoveryModuleEntries obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(discoveryModuleEntries)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setDiscoveryModuleEntries:"), objref.IDOf(discoveryModuleEntries))
 }
 
 // GeneralModuleEntries returns the general module entries.
 func (c *Configuration) GeneralModuleEntries() obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("generalModuleEntries"))
 	return obj.Wrap(_r)
 }
 
 // SetGeneralModuleEntries wraps the corresponding Objective-C method.
 func (c *Configuration) SetGeneralModuleEntries(generalModuleEntries obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(generalModuleEntries)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setGeneralModuleEntries:"), objref.IDOf(generalModuleEntries))
 }

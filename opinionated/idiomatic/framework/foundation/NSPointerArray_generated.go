@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func pointerArrayAdopt(id objc.ID) *PointerArray {
 
 // Description returns the object's -description text.
 func (pa *PointerArray) Description() string {
+	defer runtime.KeepAlive(pa)
 	return rt.Description(objref.IDOf(pa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pa *PointerArray) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pa *PointerArray) IsKind(className string) bool {
+	defer runtime.KeepAlive(pa)
 	return rt.IsKind(objref.IDOf(pa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pa *PointerArray) String() string {
+	defer runtime.KeepAlive(pa)
 	return rt.Description(objref.IDOf(pa))
 }
 
@@ -77,6 +83,7 @@ func NewPointerArrayWithOptions(options PointerFunctionsOptions) *PointerArray {
 
 // NewPointerArrayWithPointerFunctions initializes the receiver to use the given functions.
 func NewPointerArrayWithPointerFunctions(functions *PointerFunctions) *PointerArray {
+	defer runtime.KeepAlive(functions)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPointerArray")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPointerFunctions:"), objref.IDOf(functions))
 	return pointerArrayAdopt(_id)
@@ -95,50 +102,58 @@ func (pa *PointerArray) WithObservationInfo(observationInfo unsafe.Pointer) *Poi
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (pa *PointerArray) WithScriptingProperties(scriptingProperties obj.Object) *PointerArray {
-	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (pa *PointerArray) WithScriptingProperties(scriptingProperties map[string]obj.Object) *PointerArray {
+	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return pa
 }
 
 // AddPointer adds a given pointer to the receiver.
 func (pa *PointerArray) AddPointer(pointer unsafe.Pointer) {
+	defer runtime.KeepAlive(pa)
 	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("addPointer:"), pointer)
 }
 
 // RemovePointerAtIndex removes the pointer at a given index.
 func (pa *PointerArray) RemovePointerAtIndex(index int) {
+	defer runtime.KeepAlive(pa)
 	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("removePointerAtIndex:"), index)
 }
 
 // InsertPointerAtIndex inserts a pointer at a given index.
 func (pa *PointerArray) InsertPointerAtIndex(item unsafe.Pointer, index int) {
+	defer runtime.KeepAlive(pa)
 	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("insertPointer:atIndex:"), item, index)
 }
 
 // ReplacePointerAtIndexWithPointer replaces the pointer at a given index.
 func (pa *PointerArray) ReplacePointerAtIndexWithPointer(index int, item unsafe.Pointer) {
+	defer runtime.KeepAlive(pa)
 	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("replacePointerAtIndex:withPointer:"), index, item)
 }
 
 // Compact removes NULL values from the receiver.
 func (pa *PointerArray) Compact() {
+	defer runtime.KeepAlive(pa)
 	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("compact"))
 }
 
 // PointerFunctions returns the pointer functions.
 func (pa *PointerArray) PointerFunctions() *PointerFunctions {
+	defer runtime.KeepAlive(pa)
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("pointerFunctions"))
 	return PointerFunctionsFromID(_r)
 }
 
 // Count returns the count.
 func (pa *PointerArray) Count() int {
+	defer runtime.KeepAlive(pa)
 	_r := objc.Send[int](objref.IDOf(pa), objc.RegisterName("count"))
 	return _r
 }
 
 // AllObjects returns the all objects.
 func (pa *PointerArray) AllObjects() obj.Object {
+	defer runtime.KeepAlive(pa)
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("allObjects"))
 	return obj.Wrap(_r)
 }

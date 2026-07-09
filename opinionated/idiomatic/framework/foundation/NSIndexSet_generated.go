@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,27 +52,33 @@ func indexSetAdopt(id objc.ID) *IndexSet {
 
 // Description returns the object's -description text.
 func (is *IndexSet) Description() string {
+	defer runtime.KeepAlive(is)
 	return rt.Description(objref.IDOf(is))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (is *IndexSet) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(is)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(is), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (is *IndexSet) IsKind(className string) bool {
+	defer runtime.KeepAlive(is)
 	return rt.IsKind(objref.IDOf(is), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (is *IndexSet) String() string {
+	defer runtime.KeepAlive(is)
 	return rt.Description(objref.IDOf(is))
 }
 
 // NewIndexSetWithIndexSet initializes an allocated NSIndexSet object with an index set.
 func NewIndexSetWithIndexSet(indexSet *IndexSet) *IndexSet {
+	defer runtime.KeepAlive(indexSet)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSIndexSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIndexSet:"), objref.IDOf(indexSet))
 	return indexSetAdopt(_id)
@@ -91,101 +98,119 @@ func (is *IndexSet) WithObservationInfo(observationInfo unsafe.Pointer) *IndexSe
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (is *IndexSet) WithScriptingProperties(scriptingProperties obj.Object) *IndexSet {
-	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (is *IndexSet) WithScriptingProperties(scriptingProperties map[string]obj.Object) *IndexSet {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return is
 }
 
 // IsEqualToIndexSet indicates whether the indexes in the receiving index set are the same indexes contained in another index set.
 func (is *IndexSet) IsEqualToIndexSet(indexSet *IndexSet) bool {
+	defer runtime.KeepAlive(is)
+	defer runtime.KeepAlive(indexSet)
 	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("isEqualToIndexSet:"), objref.IDOf(indexSet))
 	return _r
 }
 
 // IndexGreaterThanIndex returns either the closest index in the index set that is greater than a specific index or the not-found indicator.
 func (is *IndexSet) IndexGreaterThanIndex(value int) int {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("indexGreaterThanIndex:"), value)
 	return _r
 }
 
 // IndexLessThanIndex returns either the closest index in the index set that is less than a specific index or the not-found indicator.
 func (is *IndexSet) IndexLessThanIndex(value int) int {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("indexLessThanIndex:"), value)
 	return _r
 }
 
 // IndexGreaterThanOrEqualToIndex returns either the closest index in the index set that is greater than or equal to a specific index or the not-found indicator.
 func (is *IndexSet) IndexGreaterThanOrEqualToIndex(value int) int {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("indexGreaterThanOrEqualToIndex:"), value)
 	return _r
 }
 
 // IndexLessThanOrEqualToIndex returns either the closest index in the index set that is less than or equal to a specific index or the not-found indicator.
 func (is *IndexSet) IndexLessThanOrEqualToIndex(value int) int {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("indexLessThanOrEqualToIndex:"), value)
 	return _r
 }
 
 // ContainsIndex indicates whether the index set contains a specific index.
 func (is *IndexSet) ContainsIndex(value int) bool {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("containsIndex:"), value)
 	return _r
 }
 
 // ContainsIndexes indicates whether the receiving index set contains a superset of the indexes in another index set.
 func (is *IndexSet) ContainsIndexes(indexSet *IndexSet) bool {
+	defer runtime.KeepAlive(is)
+	defer runtime.KeepAlive(indexSet)
 	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("containsIndexes:"), objref.IDOf(indexSet))
 	return _r
 }
 
 // EnumerateIndexesUsing executes a given Block using each object in the index set.
 func (is *IndexSet) EnumerateIndexesUsing(block func(int, *bool)) {
+	defer runtime.KeepAlive(is)
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("enumerateIndexesUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) { block(_b0, (*bool)(_b1)) }))
 }
 
 // EnumerateIndexesWithOptionsUsing executes a given Block over the index set’s indexes, using the specified enumeration options.
 func (is *IndexSet) EnumerateIndexesWithOptionsUsing(opts EnumerationOptions, block func(int, *bool)) {
+	defer runtime.KeepAlive(is)
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("enumerateIndexesWithOptions:usingBlock:"), opts, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) { block(_b0, (*bool)(_b1)) }))
 }
 
 // IndexPassingTest returns the index of the first object that passes the predicate Block test.
 func (is *IndexSet) IndexPassingTest(predicate func(int, *bool) bool) int {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("indexPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) bool { return predicate(_b0, (*bool)(_b1)) }))
 	return _r
 }
 
 // IndexWithOptionsPassingTest returns the index of the first object that passes the predicate Block test using the specified enumeration options.
 func (is *IndexSet) IndexWithOptionsPassingTest(opts EnumerationOptions, predicate func(int, *bool) bool) int {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("indexWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) bool { return predicate(_b0, (*bool)(_b1)) }))
 	return _r
 }
 
 // IndexesPassingTest returns an NSIndexSet containing the receiving index set’s objects that pass the Block test.
 func (is *IndexSet) IndexesPassingTest(predicate func(int, *bool) bool) *IndexSet {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("indexesPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) bool { return predicate(_b0, (*bool)(_b1)) }))
 	return IndexSetFromID(_r)
 }
 
 // IndexesWithOptionsPassingTest returns an NSIndexSet containing the receiving index set’s objects that pass the Block test using the specified enumeration options.
 func (is *IndexSet) IndexesWithOptionsPassingTest(opts EnumerationOptions, predicate func(int, *bool) bool) *IndexSet {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("indexesWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) bool { return predicate(_b0, (*bool)(_b1)) }))
 	return IndexSetFromID(_r)
 }
 
 // Count returns the count.
 func (is *IndexSet) Count() int {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("count"))
 	return _r
 }
 
 // FirstIndex returns the first index.
 func (is *IndexSet) FirstIndex() int {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("firstIndex"))
 	return _r
 }
 
 // LastIndex returns the last index.
 func (is *IndexSet) LastIndex() int {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("lastIndex"))
 	return _r
 }

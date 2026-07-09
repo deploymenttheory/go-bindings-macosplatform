@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func persistentStoreResultAdopt(id objc.ID) *PersistentStoreResult {
 
 // Description returns the object's -description text.
 func (psr *PersistentStoreResult) Description() string {
+	defer runtime.KeepAlive(psr)
 	return rt.Description(objref.IDOf(psr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (psr *PersistentStoreResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(psr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(psr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (psr *PersistentStoreResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(psr)
 	return rt.IsKind(objref.IDOf(psr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (psr *PersistentStoreResult) String() string {
+	defer runtime.KeepAlive(psr)
 	return rt.Description(objref.IDOf(psr))
 }
 

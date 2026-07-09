@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func captionGroupAdopt(id objc.ID) *CaptionGroup {
 
 // Description returns the object's -description text.
 func (cg *CaptionGroup) Description() string {
+	defer runtime.KeepAlive(cg)
 	return rt.Description(objref.IDOf(cg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cg *CaptionGroup) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cg)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cg *CaptionGroup) IsKind(className string) bool {
+	defer runtime.KeepAlive(cg)
 	return rt.IsKind(objref.IDOf(cg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cg *CaptionGroup) String() string {
+	defer runtime.KeepAlive(cg)
 	return rt.Description(objref.IDOf(cg))
 }
 
@@ -83,6 +90,7 @@ func NewCaptionGroupWithTimeRange(timeRange coremedia.CMTimeRange) *CaptionGroup
 
 // TimeRange returns the time range represented by the caption group. If there are no captions in the group (i.e. the value of the captions property is an empty array), then the value of this property represents the time range of a sequence where no captions are present.
 func (cg *CaptionGroup) TimeRange() coremedia.CMTimeRange {
+	defer runtime.KeepAlive(cg)
 	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(cg), objc.RegisterName("timeRange"))
 	return _r
 }
@@ -91,6 +99,7 @@ func (cg *CaptionGroup) TimeRange() coremedia.CMTimeRange {
 //
 // Captions returns the collection as a Go slice.
 func (cg *CaptionGroup) Captions() []*Caption {
+	defer runtime.KeepAlive(cg)
 	_arr := objc.Send[objc.ID](objref.IDOf(cg), objc.RegisterName("captions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Caption { return CaptionFromID(_id) })
 }

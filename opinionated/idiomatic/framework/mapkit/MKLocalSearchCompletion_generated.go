@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func localSearchCompletionAdopt(id objc.ID) *LocalSearchCompletion {
 
 // Description returns the object's -description text.
 func (lsc *LocalSearchCompletion) Description() string {
+	defer runtime.KeepAlive(lsc)
 	return rt.Description(objref.IDOf(lsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lsc *LocalSearchCompletion) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lsc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lsc *LocalSearchCompletion) IsKind(className string) bool {
+	defer runtime.KeepAlive(lsc)
 	return rt.IsKind(objref.IDOf(lsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lsc *LocalSearchCompletion) String() string {
+	defer runtime.KeepAlive(lsc)
 	return rt.Description(objref.IDOf(lsc))
 }
 
@@ -74,6 +81,7 @@ func NewLocalSearchCompletion() *LocalSearchCompletion {
 
 // Title returns the title.
 func (lsc *LocalSearchCompletion) Title() string {
+	defer runtime.KeepAlive(lsc)
 	_r := objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -85,12 +93,14 @@ func (lsc *LocalSearchCompletion) Title() string {
 //
 // TitleHighlightRanges returns the collection as a Go slice.
 func (lsc *LocalSearchCompletion) TitleHighlightRanges() []obj.Object {
+	defer runtime.KeepAlive(lsc)
 	_arr := objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("titleHighlightRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Subtitle returns the subtitle.
 func (lsc *LocalSearchCompletion) Subtitle() string {
+	defer runtime.KeepAlive(lsc)
 	_r := objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("subtitle"))
 	if _r == 0 {
 		return ""
@@ -102,6 +112,7 @@ func (lsc *LocalSearchCompletion) Subtitle() string {
 //
 // SubtitleHighlightRanges returns the collection as a Go slice.
 func (lsc *LocalSearchCompletion) SubtitleHighlightRanges() []obj.Object {
+	defer runtime.KeepAlive(lsc)
 	_arr := objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("subtitleHighlightRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

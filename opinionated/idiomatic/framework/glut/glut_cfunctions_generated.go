@@ -57,7 +57,7 @@ func BitmapCharacter(font unsafe.Pointer, character int) {
 var _fnBitmapLength func(unsafe.Pointer, unsafe.Pointer) int32
 
 // BitmapLength calls the GLUT framework function glutBitmapLength.
-func BitmapLength(font unsafe.Pointer) (result int, string_ uint8) {
+func BitmapLength(font unsafe.Pointer) (result int, str uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBitmapLength == nil {
 		ebipurego.RegisterLibFunc(&_fnBitmapLength, _lib, "glutBitmapLength")
@@ -312,12 +312,12 @@ func GameModeGet(mode uint32) int {
 var _fnGameModeString func(string)
 
 // GameModeString calls the GLUT framework function glutGameModeString.
-func GameModeString(string_ string) {
+func GameModeString(str string) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGameModeString == nil {
 		ebipurego.RegisterLibFunc(&_fnGameModeString, _lib, "glutGameModeString")
 	}
-	_fnGameModeString(string_)
+	_fnGameModeString(str)
 }
 
 var _fnGet func(uint32) int32
@@ -457,12 +457,12 @@ func InitDisplayMode(mode int) {
 var _fnInitDisplayString func(string)
 
 // InitDisplayString calls the GLUT framework function glutInitDisplayString.
-func InitDisplayString(string_ string) {
+func InitDisplayString(str string) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInitDisplayString == nil {
 		ebipurego.RegisterLibFunc(&_fnInitDisplayString, _lib, "glutInitDisplayString")
 	}
-	_fnInitDisplayString(string_)
+	_fnInitDisplayString(str)
 }
 
 var _fnInitWindowPosition func(int, int)
@@ -1040,7 +1040,7 @@ func StrokeCharacter(font unsafe.Pointer, character int) {
 var _fnStrokeLength func(unsafe.Pointer, unsafe.Pointer) int32
 
 // StrokeLength calls the GLUT framework function glutStrokeLength.
-func StrokeLength(font unsafe.Pointer) (result int, string_ uint8) {
+func StrokeLength(font unsafe.Pointer) (result int, str uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnStrokeLength == nil {
 		ebipurego.RegisterLibFunc(&_fnStrokeLength, _lib, "glutStrokeLength")

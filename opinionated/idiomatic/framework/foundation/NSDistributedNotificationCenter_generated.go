@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -67,23 +69,30 @@ func (dnc *DistributedNotificationCenter) WithObservationInfo(observationInfo un
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (dnc *DistributedNotificationCenter) WithScriptingProperties(scriptingProperties obj.Object) *DistributedNotificationCenter {
-	objc.Send[objc.ID](objref.IDOf(dnc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (dnc *DistributedNotificationCenter) WithScriptingProperties(scriptingProperties map[string]obj.Object) *DistributedNotificationCenter {
+	objc.Send[objc.ID](objref.IDOf(dnc), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return dnc
 }
 
 // PostNotificationNameObjectUserInfoDeliverImmediately posts notification name object user info deliver immediately.
 func (dnc *DistributedNotificationCenter) PostNotificationNameObjectUserInfoDeliverImmediately(name *String, object string, userInfo obj.Object, deliverImmediately bool) {
+	defer runtime.KeepAlive(dnc)
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(userInfo)
 	objc.Send[objc.ID](objref.IDOf(dnc), objc.RegisterName("postNotificationName:object:userInfo:deliverImmediately:"), objref.IDOf(name), purego.NSString(object), objref.IDOf(userInfo), deliverImmediately)
 }
 
-// PostNotificationNameObjectUserInfoOptions posts notification name object user info options.
-func (dnc *DistributedNotificationCenter) PostNotificationNameObjectUserInfoOptions(name *String, object string, userInfo obj.Object, options DistributedNotificationOptions) {
+// PostNotificationNameObjectUserInfo posts notification name object user info.
+func (dnc *DistributedNotificationCenter) PostNotificationNameObjectUserInfo(name *String, object string, userInfo obj.Object, options DistributedNotificationOptions) {
+	defer runtime.KeepAlive(dnc)
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(userInfo)
 	objc.Send[objc.ID](objref.IDOf(dnc), objc.RegisterName("postNotificationName:object:userInfo:options:"), objref.IDOf(name), purego.NSString(object), objref.IDOf(userInfo), options)
 }
 
 // Suspended wraps the corresponding Objective-C method.
 func (dnc *DistributedNotificationCenter) Suspended() bool {
+	defer runtime.KeepAlive(dnc)
 	_r := objc.Send[bool](objref.IDOf(dnc), objc.RegisterName("suspended"))
 	return _r
 }

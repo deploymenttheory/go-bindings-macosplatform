@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (yll *YOLOLossLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *YOLOL
 
 // YoloLossDescriptor returns the YOLO loss descriptor
 func (yll *YOLOLossLayer) YoloLossDescriptor() *YOLOLossDescriptor {
+	defer runtime.KeepAlive(yll)
 	_r := objc.Send[objc.ID](objref.IDOf(yll), objc.RegisterName("yoloLossDescriptor"))
 	return YOLOLossDescriptorFromID(_r)
 }

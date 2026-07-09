@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRChannelClusterSeriesInfoStructAdopt(id objc.ID) *MTRChannelClusterSeries
 
 // Description returns the object's -description text.
 func (mccsis *MTRChannelClusterSeriesInfoStruct) Description() string {
+	defer runtime.KeepAlive(mccsis)
 	return rt.Description(objref.IDOf(mccsis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mccsis *MTRChannelClusterSeriesInfoStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mccsis)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mccsis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mccsis *MTRChannelClusterSeriesInfoStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mccsis)
 	return rt.IsKind(objref.IDOf(mccsis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mccsis *MTRChannelClusterSeriesInfoStruct) String() string {
+	defer runtime.KeepAlive(mccsis)
 	return rt.Description(objref.IDOf(mccsis))
 }
 
@@ -84,6 +91,7 @@ func (mccsis *MTRChannelClusterSeriesInfoStruct) WithEpisode(episode string) *MT
 
 // Season returns the season.
 func (mccsis *MTRChannelClusterSeriesInfoStruct) Season() string {
+	defer runtime.KeepAlive(mccsis)
 	_r := objc.Send[objc.ID](objref.IDOf(mccsis), objc.RegisterName("season"))
 	if _r == 0 {
 		return ""
@@ -93,6 +101,7 @@ func (mccsis *MTRChannelClusterSeriesInfoStruct) Season() string {
 
 // Episode returns the episode.
 func (mccsis *MTRChannelClusterSeriesInfoStruct) Episode() string {
+	defer runtime.KeepAlive(mccsis)
 	_r := objc.Send[objc.ID](objref.IDOf(mccsis), objc.RegisterName("episode"))
 	if _r == 0 {
 		return ""

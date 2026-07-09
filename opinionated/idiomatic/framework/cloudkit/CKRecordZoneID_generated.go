@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func recordZoneIDAdopt(id objc.ID) *RecordZoneID {
 
 // Description returns the object's -description text.
 func (rzi *RecordZoneID) Description() string {
+	defer runtime.KeepAlive(rzi)
 	return rt.Description(objref.IDOf(rzi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rzi *RecordZoneID) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rzi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rzi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rzi *RecordZoneID) IsKind(className string) bool {
+	defer runtime.KeepAlive(rzi)
 	return rt.IsKind(objref.IDOf(rzi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rzi *RecordZoneID) String() string {
+	defer runtime.KeepAlive(rzi)
 	return rt.Description(objref.IDOf(rzi))
 }
 
@@ -75,6 +82,7 @@ func NewRecordZoneIDWithZoneNameOwnerName(zoneName string, ownerName string) *Re
 
 // ZoneName returns the unique name of the record zone.
 func (rzi *RecordZoneID) ZoneName() string {
+	defer runtime.KeepAlive(rzi)
 	_r := objc.Send[objc.ID](objref.IDOf(rzi), objc.RegisterName("zoneName"))
 	if _r == 0 {
 		return ""
@@ -84,6 +92,7 @@ func (rzi *RecordZoneID) ZoneName() string {
 
 // OwnerName returns the ID of the user who owns the record zone.
 func (rzi *RecordZoneID) OwnerName() string {
+	defer runtime.KeepAlive(rzi)
 	_r := objc.Send[objc.ID](objref.IDOf(rzi), objc.RegisterName("ownerName"))
 	if _r == 0 {
 		return ""

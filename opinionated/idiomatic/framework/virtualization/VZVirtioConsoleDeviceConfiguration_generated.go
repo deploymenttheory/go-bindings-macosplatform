@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewVirtioConsoleDeviceConfiguration() *VirtioConsoleDeviceConfiguration {
 
 // Ports returns the ports.
 func (vcdc *VirtioConsoleDeviceConfiguration) Ports() *VirtioConsolePortConfigurationArray {
+	defer runtime.KeepAlive(vcdc)
 	_r := objc.Send[objc.ID](objref.IDOf(vcdc), objc.RegisterName("ports"))
 	return VirtioConsolePortConfigurationArrayFromID(_r)
 }

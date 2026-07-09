@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,18 +55,21 @@ func NewMTL4RenderPipelineDescriptor() *MTL4RenderPipelineDescriptor {
 
 // WithVertexFunctionDescriptor sets assigns the shader function that this pipeline executes for each vertex.
 func (mrpd *MTL4RenderPipelineDescriptor) WithVertexFunctionDescriptor(vertexFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4RenderPipelineDescriptor {
+	defer runtime.KeepAlive(vertexFunctionDescriptor)
 	objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("setVertexFunctionDescriptor:"), objref.IDOf(vertexFunctionDescriptor))
 	return mrpd
 }
 
 // WithFragmentFunctionDescriptor sets assigns the shader function that this pipeline executes for each fragment.
 func (mrpd *MTL4RenderPipelineDescriptor) WithFragmentFunctionDescriptor(fragmentFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4RenderPipelineDescriptor {
+	defer runtime.KeepAlive(fragmentFunctionDescriptor)
 	objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("setFragmentFunctionDescriptor:"), objref.IDOf(fragmentFunctionDescriptor))
 	return mrpd
 }
 
 // WithVertexDescriptor sets configures an optional vertex descriptor for the vertex input.
 func (mrpd *MTL4RenderPipelineDescriptor) WithVertexDescriptor(vertexDescriptor *VertexDescriptor) *MTL4RenderPipelineDescriptor {
+	defer runtime.KeepAlive(vertexDescriptor)
 	objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("setVertexDescriptor:"), objref.IDOf(vertexDescriptor))
 	return mrpd
 }
@@ -107,12 +112,14 @@ func (mrpd *MTL4RenderPipelineDescriptor) WithInputPrimitiveTopology(inputPrimit
 
 // WithVertexStaticLinkingDescriptor sets provides static linking information for the vertex stage of the render pipeline.
 func (mrpd *MTL4RenderPipelineDescriptor) WithVertexStaticLinkingDescriptor(vertexStaticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4RenderPipelineDescriptor {
+	defer runtime.KeepAlive(vertexStaticLinkingDescriptor)
 	objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("setVertexStaticLinkingDescriptor:"), objref.IDOf(vertexStaticLinkingDescriptor))
 	return mrpd
 }
 
 // WithFragmentStaticLinkingDescriptor sets provides static linking information for the fragment stage of the render pipeline.
 func (mrpd *MTL4RenderPipelineDescriptor) WithFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4RenderPipelineDescriptor {
+	defer runtime.KeepAlive(fragmentStaticLinkingDescriptor)
 	objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("setFragmentStaticLinkingDescriptor:"), objref.IDOf(fragmentStaticLinkingDescriptor))
 	return mrpd
 }
@@ -149,107 +156,125 @@ func (mrpd *MTL4RenderPipelineDescriptor) WithLabel(label string) *MTL4RenderPip
 
 // WithOptions sets provides compile-time options when you build the pipeline.
 func (mrpd *MTL4RenderPipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4RenderPipelineDescriptor {
+	defer runtime.KeepAlive(options)
 	objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("setOptions:"), objref.IDOf(options))
 	return mrpd
 }
 
 // Reset resets this descriptor to its default state.
 func (mrpd *MTL4RenderPipelineDescriptor) Reset() {
+	defer runtime.KeepAlive(mrpd)
 	objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("reset"))
 }
 
 // VertexFunctionDescriptor returns assigns the shader function that this pipeline executes for each vertex.
 func (mrpd *MTL4RenderPipelineDescriptor) VertexFunctionDescriptor() *MTL4FunctionDescriptor {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("vertexFunctionDescriptor"))
 	return MTL4FunctionDescriptorFromID(_r)
 }
 
 // FragmentFunctionDescriptor returns assigns the shader function that this pipeline executes for each fragment. When you don't specify a fragment function, you need to disable rasterization by setting property “rasterizationEnabled“ to false.
 func (mrpd *MTL4RenderPipelineDescriptor) FragmentFunctionDescriptor() *MTL4FunctionDescriptor {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("fragmentFunctionDescriptor"))
 	return MTL4FunctionDescriptorFromID(_r)
 }
 
 // VertexDescriptor returns configures an optional vertex descriptor for the vertex input. A vertex descriptor specifies the layout of your vertex data, allowing your vertex shaders to access the content in your vertex arrays via the `[[stage_in]]` attribute in Metal Shading Language.
 func (mrpd *MTL4RenderPipelineDescriptor) VertexDescriptor() *VertexDescriptor {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("vertexDescriptor"))
 	return VertexDescriptorFromID(_r)
 }
 
 // RasterSampleCount returns controls the number of samples this pipeline applies for each fragment.
 func (mrpd *MTL4RenderPipelineDescriptor) RasterSampleCount() int {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[int](objref.IDOf(mrpd), objc.RegisterName("rasterSampleCount"))
 	return _r
 }
 
 // AlphaToCoverageState indicates whether to read and use the alpha channel fragment output of color attachments to compute a sample coverage mask.
 func (mrpd *MTL4RenderPipelineDescriptor) AlphaToCoverageState() MTL4AlphaToCoverageState {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[MTL4AlphaToCoverageState](objref.IDOf(mrpd), objc.RegisterName("alphaToCoverageState"))
 	return _r
 }
 
 // AlphaToOneState indicates whether the pipeline forces alpha channel values of color attachments to the largest representable value.
 func (mrpd *MTL4RenderPipelineDescriptor) AlphaToOneState() MTL4AlphaToOneState {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[MTL4AlphaToOneState](objref.IDOf(mrpd), objc.RegisterName("alphaToOneState"))
 	return _r
 }
 
 // IsRasterizationEnabled reports whether the pipeline rasterizes primitives. By default, this value is <doc://com.apple.documentation/documentation/swift/true>, specifying that this pipeline rasterizes primitives. Set this property to <doc://com.apple.documentation/documentation/swift/false> when you don't provide a fragment shader function via function “fragmentFunctionDescriptor“.
 func (mrpd *MTL4RenderPipelineDescriptor) IsRasterizationEnabled() bool {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[bool](objref.IDOf(mrpd), objc.RegisterName("isRasterizationEnabled"))
 	return _r
 }
 
 // MaxVertexAmplificationCount determines the maximum value that can you can pass as the pipeline's amplification count. This property controls the maximum count you pass to “MTL4RenderCommandEncoder/setVertexAmplificationCount:viewMappings:“ when using vertex amplification with this pipeline.
 func (mrpd *MTL4RenderPipelineDescriptor) MaxVertexAmplificationCount() int {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[int](objref.IDOf(mrpd), objc.RegisterName("maxVertexAmplificationCount"))
 	return _r
 }
 
 // ColorAttachments returns accesses an array containing descriptions of the color attachments this pipeline writes to.
 func (mrpd *MTL4RenderPipelineDescriptor) ColorAttachments() *MTL4RenderPipelineColorAttachmentDescriptorArray {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("colorAttachments"))
 	return MTL4RenderPipelineColorAttachmentDescriptorArrayFromID(_r)
 }
 
 // InputPrimitiveTopology returns assigns type of primitive topology this pipeline renders.
 func (mrpd *MTL4RenderPipelineDescriptor) InputPrimitiveTopology() PrimitiveTopologyClass {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[PrimitiveTopologyClass](objref.IDOf(mrpd), objc.RegisterName("inputPrimitiveTopology"))
 	return _r
 }
 
 // VertexStaticLinkingDescriptor provides static linking information for the vertex stage of the render pipeline. Use this property to link extra shader functions to the vertex stage of the render pipeline.
 func (mrpd *MTL4RenderPipelineDescriptor) VertexStaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("vertexStaticLinkingDescriptor"))
 	return MTL4StaticLinkingDescriptorFromID(_r)
 }
 
 // FragmentStaticLinkingDescriptor provides static linking information for the fragment stage of the render pipeline. Use this property to link extra shader functions to the fragment stage of the render pipeline.
 func (mrpd *MTL4RenderPipelineDescriptor) FragmentStaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("fragmentStaticLinkingDescriptor"))
 	return MTL4StaticLinkingDescriptorFromID(_r)
 }
 
 // SupportVertexBinaryLinking reports whether you can use the render pipeline to create new pipelines by adding binary functions to the vertex shader function’s callable functions list.
 func (mrpd *MTL4RenderPipelineDescriptor) SupportVertexBinaryLinking() bool {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[bool](objref.IDOf(mrpd), objc.RegisterName("supportVertexBinaryLinking"))
 	return _r
 }
 
 // SupportFragmentBinaryLinking reports whether you can use the pipeline to create new pipelines by adding binary functions to the fragment shader function’s callable functions list.
 func (mrpd *MTL4RenderPipelineDescriptor) SupportFragmentBinaryLinking() bool {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[bool](objref.IDOf(mrpd), objc.RegisterName("supportFragmentBinaryLinking"))
 	return _r
 }
 
 // ColorAttachmentMappingState returns configures a logical-to-physical rendering remap state. Use this property to assign how a “MTL4RenderCommandEncoder“ instance maps the output of your fragment shader to physical color attachments.
 func (mrpd *MTL4RenderPipelineDescriptor) ColorAttachmentMappingState() MTL4LogicalToPhysicalColorAttachmentMappingState {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[MTL4LogicalToPhysicalColorAttachmentMappingState](objref.IDOf(mrpd), objc.RegisterName("colorAttachmentMappingState"))
 	return _r
 }
 
 // SupportIndirectCommandBuffers indicates whether the pipeline supports indirect command buffers.
 func (mrpd *MTL4RenderPipelineDescriptor) SupportIndirectCommandBuffers() MTL4IndirectCommandBufferSupportState {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[MTL4IndirectCommandBufferSupportState](objref.IDOf(mrpd), objc.RegisterName("supportIndirectCommandBuffers"))
 	return _r
 }

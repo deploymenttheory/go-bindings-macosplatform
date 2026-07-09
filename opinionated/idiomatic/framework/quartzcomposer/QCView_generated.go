@@ -5,6 +5,8 @@
 package quartzcomposer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func viewAdopt(id objc.ID) *View {
 
 // Description returns the object's -description text.
 func (v_ *View) Description() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (v_ *View) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (v_ *View) IsKind(className string) bool {
+	defer runtime.KeepAlive(v_)
 	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (v_ *View) String() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
@@ -78,6 +85,7 @@ func NewView() *View {
 
 // LoadCompositionFromFile loads composition from file.
 func (v_ *View) LoadCompositionFromFile(path string) bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -91,6 +99,8 @@ func (v_ *View) LoadCompositionFromFile(path string) bool {
 
 // LoadComposition loads composition.
 func (v_ *View) LoadComposition(composition obj.Object) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(composition)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -104,6 +114,7 @@ func (v_ *View) LoadComposition(composition obj.Object) bool {
 
 // LoadedComposition returns the loaded composition.
 func (v_ *View) LoadedComposition() obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -117,6 +128,7 @@ func (v_ *View) LoadedComposition() obj.Object {
 
 // UnloadComposition wraps the corresponding Objective-C method.
 func (v_ *View) UnloadComposition() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("unloadComposition"))
 	})
@@ -125,6 +137,7 @@ func (v_ *View) UnloadComposition() {
 
 // SetAutostartsRendering wraps the corresponding Objective-C method.
 func (v_ *View) SetAutostartsRendering(flag bool) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAutostartsRendering:"), flag)
 	})
@@ -133,6 +146,7 @@ func (v_ *View) SetAutostartsRendering(flag bool) {
 
 // AutostartsRendering wraps the corresponding Objective-C method.
 func (v_ *View) AutostartsRendering() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -146,6 +160,8 @@ func (v_ *View) AutostartsRendering() bool {
 
 // SetEraseColor wraps the corresponding Objective-C method.
 func (v_ *View) SetEraseColor(color obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(color)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setEraseColor:"), objref.IDOf(color))
 	})
@@ -154,6 +170,7 @@ func (v_ *View) SetEraseColor(color obj.Object) {
 
 // EraseColor returns the erase color.
 func (v_ *View) EraseColor() obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -167,6 +184,7 @@ func (v_ *View) EraseColor() obj.Object {
 
 // SetEventForwardingMask wraps the corresponding Objective-C method.
 func (v_ *View) SetEventForwardingMask(mask int) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setEventForwardingMask:"), mask)
 	})
@@ -175,6 +193,7 @@ func (v_ *View) SetEventForwardingMask(mask int) {
 
 // EventForwardingMask returns the event forwarding mask.
 func (v_ *View) EventForwardingMask() int {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -188,6 +207,7 @@ func (v_ *View) EventForwardingMask() int {
 
 // SetMaxRenderingFrameRate wraps the corresponding Objective-C method.
 func (v_ *View) SetMaxRenderingFrameRate(maxFPS float32) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setMaxRenderingFrameRate:"), maxFPS)
 	})
@@ -196,6 +216,7 @@ func (v_ *View) SetMaxRenderingFrameRate(maxFPS float32) {
 
 // MaxRenderingFrameRate returns the max rendering frame rate.
 func (v_ *View) MaxRenderingFrameRate() float32 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -209,6 +230,7 @@ func (v_ *View) MaxRenderingFrameRate() float32 {
 
 // Erase wraps the corresponding Objective-C method.
 func (v_ *View) Erase() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("erase"))
 	})
@@ -217,6 +239,7 @@ func (v_ *View) Erase() {
 
 // StartRendering wraps the corresponding Objective-C method.
 func (v_ *View) StartRendering() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -230,6 +253,8 @@ func (v_ *View) StartRendering() bool {
 
 // RenderAtTimeArguments wraps the corresponding Objective-C method.
 func (v_ *View) RenderAtTimeArguments(time_ float64, arguments obj.Object) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(arguments)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -243,6 +268,7 @@ func (v_ *View) RenderAtTimeArguments(time_ float64, arguments obj.Object) bool 
 
 // PauseRendering pauses rendering.
 func (v_ *View) PauseRendering() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("pauseRendering"))
 	})
@@ -251,6 +277,7 @@ func (v_ *View) PauseRendering() {
 
 // IsPausedRendering reports whether the object is paused rendering.
 func (v_ *View) IsPausedRendering() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -264,6 +291,7 @@ func (v_ *View) IsPausedRendering() bool {
 
 // ResumeRendering resumes rendering.
 func (v_ *View) ResumeRendering() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("resumeRendering"))
 	})
@@ -272,6 +300,7 @@ func (v_ *View) ResumeRendering() {
 
 // StopRendering stops rendering.
 func (v_ *View) StopRendering() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("stopRendering"))
 	})
@@ -280,6 +309,7 @@ func (v_ *View) StopRendering() {
 
 // IsRendering reports whether the object is rendering.
 func (v_ *View) IsRendering() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -293,6 +323,7 @@ func (v_ *View) IsRendering() bool {
 
 // SnapshotImage returns the snapshot image.
 func (v_ *View) SnapshotImage() obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -306,6 +337,7 @@ func (v_ *View) SnapshotImage() obj.Object {
 
 // CreateSnapshotImageOfType creates snapshot image of type.
 func (v_ *View) CreateSnapshotImageOfType(type_ string) obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -319,6 +351,7 @@ func (v_ *View) CreateSnapshotImageOfType(type_ string) obj.Object {
 
 // OpenGLContext returns the open gl context.
 func (v_ *View) OpenGLContext() obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -332,6 +365,7 @@ func (v_ *View) OpenGLContext() obj.Object {
 
 // OpenGLPixelFormat returns the open gl pixel format.
 func (v_ *View) OpenGLPixelFormat() obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -345,6 +379,8 @@ func (v_ *View) OpenGLPixelFormat() obj.Object {
 
 // Start wraps the corresponding Objective-C method.
 func (v_ *View) Start(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("start:"), objref.IDOf(sender))
 	})
@@ -353,6 +389,8 @@ func (v_ *View) Start(sender obj.Object) {
 
 // Stop wraps the corresponding Objective-C method.
 func (v_ *View) Stop(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("stop:"), objref.IDOf(sender))
 	})
@@ -361,6 +399,8 @@ func (v_ *View) Stop(sender obj.Object) {
 
 // Play wraps the corresponding Objective-C method.
 func (v_ *View) Play(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("play:"), objref.IDOf(sender))
 	})

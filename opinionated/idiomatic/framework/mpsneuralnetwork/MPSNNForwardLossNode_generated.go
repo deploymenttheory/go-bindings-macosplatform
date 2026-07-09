@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,10 @@ func nNForwardLossNodeAdopt(id objc.ID) *NNForwardLossNode {
 
 // NewNNForwardLossNodeWithSourceLabelsWeightsLossDescriptor creates a new NNForwardLossNode.
 func NewNNForwardLossNodeWithSourceLabelsWeightsLossDescriptor(source *NNImageNode, labels *NNImageNode, weights *NNImageNode, descriptor *CNNLossDescriptor) *NNForwardLossNode {
+	defer runtime.KeepAlive(source)
+	defer runtime.KeepAlive(labels)
+	defer runtime.KeepAlive(weights)
+	defer runtime.KeepAlive(descriptor)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNForwardLossNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:labels:weights:lossDescriptor:"), objref.IDOf(source), objref.IDOf(labels), objref.IDOf(weights), objref.IDOf(descriptor))
 	return nNForwardLossNodeAdopt(_id)
@@ -54,6 +60,9 @@ func NewNNForwardLossNodeWithSourceLabelsWeightsLossDescriptor(source *NNImageNo
 
 // NewNNForwardLossNodeWithSourceLabelsLossDescriptor creates a new NNForwardLossNode.
 func NewNNForwardLossNodeWithSourceLabelsLossDescriptor(source *NNImageNode, labels *NNImageNode, descriptor *CNNLossDescriptor) *NNForwardLossNode {
+	defer runtime.KeepAlive(source)
+	defer runtime.KeepAlive(labels)
+	defer runtime.KeepAlive(descriptor)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNForwardLossNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:labels:lossDescriptor:"), objref.IDOf(source), objref.IDOf(labels), objref.IDOf(descriptor))
 	return nNForwardLossNodeAdopt(_id)
@@ -61,6 +70,7 @@ func NewNNForwardLossNodeWithSourceLabelsLossDescriptor(source *NNImageNode, lab
 
 // NewNNForwardLossNodeWithSourcesLossDescriptor creates a new NNForwardLossNode.
 func NewNNForwardLossNodeWithSourcesLossDescriptor(sourceNodes []*NNImageNode, descriptor *CNNLossDescriptor) *NNForwardLossNode {
+	defer runtime.KeepAlive(descriptor)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNForwardLossNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSources:lossDescriptor:"), purego.SliceToNSArray(sourceNodes, func(_v *NNImageNode) objc.ID { return objref.IDOf(_v) }), objref.IDOf(descriptor))
 	return nNForwardLossNodeAdopt(_id)
@@ -74,48 +84,56 @@ func (nfln *NNForwardLossNode) WithLabel(label string) *NNForwardLossNode {
 
 // LossType returns the loss type.
 func (nfln *NNForwardLossNode) LossType() CNNLossType {
+	defer runtime.KeepAlive(nfln)
 	_r := objc.Send[CNNLossType](objref.IDOf(nfln), objc.RegisterName("lossType"))
 	return _r
 }
 
 // ReductionType returns the reduction type.
 func (nfln *NNForwardLossNode) ReductionType() CNNReductionType {
+	defer runtime.KeepAlive(nfln)
 	_r := objc.Send[CNNReductionType](objref.IDOf(nfln), objc.RegisterName("reductionType"))
 	return _r
 }
 
 // NumberOfClasses returns the number of classes.
 func (nfln *NNForwardLossNode) NumberOfClasses() int {
+	defer runtime.KeepAlive(nfln)
 	_r := objc.Send[int](objref.IDOf(nfln), objc.RegisterName("numberOfClasses"))
 	return _r
 }
 
 // ReduceAcrossBatch wraps the corresponding Objective-C method.
 func (nfln *NNForwardLossNode) ReduceAcrossBatch() bool {
+	defer runtime.KeepAlive(nfln)
 	_r := objc.Send[bool](objref.IDOf(nfln), objc.RegisterName("reduceAcrossBatch"))
 	return _r
 }
 
 // Weight returns the weight.
 func (nfln *NNForwardLossNode) Weight() float32 {
+	defer runtime.KeepAlive(nfln)
 	_r := objc.Send[float32](objref.IDOf(nfln), objc.RegisterName("weight"))
 	return _r
 }
 
 // LabelSmoothing returns the label smoothing.
 func (nfln *NNForwardLossNode) LabelSmoothing() float32 {
+	defer runtime.KeepAlive(nfln)
 	_r := objc.Send[float32](objref.IDOf(nfln), objc.RegisterName("labelSmoothing"))
 	return _r
 }
 
 // Epsilon returns the epsilon.
 func (nfln *NNForwardLossNode) Epsilon() float32 {
+	defer runtime.KeepAlive(nfln)
 	_r := objc.Send[float32](objref.IDOf(nfln), objc.RegisterName("epsilon"))
 	return _r
 }
 
 // Delta returns the delta.
 func (nfln *NNForwardLossNode) Delta() float32 {
+	defer runtime.KeepAlive(nfln)
 	_r := objc.Send[float32](objref.IDOf(nfln), objc.RegisterName("delta"))
 	return _r
 }

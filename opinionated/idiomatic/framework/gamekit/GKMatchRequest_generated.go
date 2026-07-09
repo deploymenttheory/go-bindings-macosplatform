@@ -5,6 +5,7 @@
 package gamekit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func matchRequestAdopt(id objc.ID) *MatchRequest {
 
 // Description returns the object's -description text.
 func (mr *MatchRequest) Description() string {
+	defer runtime.KeepAlive(mr)
 	return rt.Description(objref.IDOf(mr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mr *MatchRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mr *MatchRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(mr)
 	return rt.IsKind(objref.IDOf(mr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mr *MatchRequest) String() string {
+	defer runtime.KeepAlive(mr)
 	return rt.Description(objref.IDOf(mr))
 }
 
@@ -144,30 +150,35 @@ func (mr *MatchRequest) WithProperties(properties unsafe.Pointer) *MatchRequest 
 
 // WithRecipientProperties sets the criteria for recipients of the match request that Game Center uses to find other players when using matchmaking rules.
 func (mr *MatchRequest) WithRecipientProperties(recipientProperties obj.Object) *MatchRequest {
+	defer runtime.KeepAlive(recipientProperties)
 	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setRecipientProperties:"), objref.IDOf(recipientProperties))
 	return mr
 }
 
 // MinPlayers returns minimum number of players for the match
 func (mr *MatchRequest) MinPlayers() int {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[int](objref.IDOf(mr), objc.RegisterName("minPlayers"))
 	return _r
 }
 
 // MaxPlayers returns maximum number of players for the match
 func (mr *MatchRequest) MaxPlayers() int {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[int](objref.IDOf(mr), objc.RegisterName("maxPlayers"))
 	return _r
 }
 
 // PlayerGroup returns the player group identifier. Matchmaking will only take place between players in the same group.
 func (mr *MatchRequest) PlayerGroup() int {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[int](objref.IDOf(mr), objc.RegisterName("playerGroup"))
 	return _r
 }
 
 // PlayerAttributes returns optional mask that specifies the role that the local player would like to play in the game.  If this value is 0, it will be set to 0xFFFFFFFF (the default), and this property will be ignored. If the value is nonzero, then automatching uses the value as a mask that restricts the role the player can play in the group. Automatching with player attributes matches new players into the game so that the bitwise OR of the masks of all the players in the resulting match equals 0xFFFFFFFF.
 func (mr *MatchRequest) PlayerAttributes() uint32 {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[uint32](objref.IDOf(mr), objc.RegisterName("playerAttributes"))
 	return _r
 }
@@ -176,12 +187,14 @@ func (mr *MatchRequest) PlayerAttributes() uint32 {
 //
 // Recipients returns the collection as a Go slice.
 func (mr *MatchRequest) Recipients() []*Player {
+	defer runtime.KeepAlive(mr)
 	_arr := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("recipients"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Player { return PlayerFromID(_id) })
 }
 
 // InviteMessage returns message sent to invited players, may be modified if using GKMatchmakerViewController Will return nil if the player is underage or restricted.
 func (mr *MatchRequest) InviteMessage() string {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("inviteMessage"))
 	if _r == 0 {
 		return ""
@@ -191,12 +204,14 @@ func (mr *MatchRequest) InviteMessage() string {
 
 // DefaultNumberOfPlayers returns default number of players to use during matchmaking. If not set we will default to the number that the player previously set for this game, or maxPlayers.
 func (mr *MatchRequest) DefaultNumberOfPlayers() int {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[int](objref.IDOf(mr), objc.RegisterName("defaultNumberOfPlayers"))
 	return _r
 }
 
 // RestrictToAutomatch reports whether a match will be created only using automatch. If true, then a player will not be able to invite anyone (including contacts, friends, and nearby players) to the match, but rely on automatching to find players for the match. Default is false.
 func (mr *MatchRequest) RestrictToAutomatch() bool {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[bool](objref.IDOf(mr), objc.RegisterName("restrictToAutomatch"))
 	return _r
 }
@@ -205,12 +220,14 @@ func (mr *MatchRequest) RestrictToAutomatch() bool {
 //
 // PlayersToInvite returns the collection as a Go slice.
 func (mr *MatchRequest) PlayersToInvite() []string {
+	defer runtime.KeepAlive(mr)
 	_arr := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("playersToInvite"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // QueueName returns the name of the queue, if rule-based matchmaking is used.
 func (mr *MatchRequest) QueueName() string {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("queueName"))
 	if _r == 0 {
 		return ""
@@ -220,6 +237,7 @@ func (mr *MatchRequest) QueueName() string {
 
 // RecipientProperties returns the recipient specific match properties, if rule-based matchmaking is used when inviting players.
 func (mr *MatchRequest) RecipientProperties() obj.Object {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("recipientProperties"))
 	return obj.Wrap(_r)
 }

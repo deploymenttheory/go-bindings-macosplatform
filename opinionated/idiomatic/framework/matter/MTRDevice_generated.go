@@ -6,9 +6,12 @@ package matter
 
 import (
 	"context"
+	"runtime"
+	"time"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +51,27 @@ func mTRDeviceAdopt(id objc.ID) *MTRDevice {
 
 // Description returns the object's -description text.
 func (md *MTRDevice) Description() string {
+	defer runtime.KeepAlive(md)
 	return rt.Description(objref.IDOf(md))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (md *MTRDevice) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(md)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(md), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (md *MTRDevice) IsKind(className string) bool {
+	defer runtime.KeepAlive(md)
 	return rt.IsKind(objref.IDOf(md), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (md *MTRDevice) String() string {
+	defer runtime.KeepAlive(md)
 	return rt.Description(objref.IDOf(md))
 }
 
@@ -74,24 +82,38 @@ func NewMTRDevice() *MTRDevice {
 }
 
 // ReadAttributeWithEndpointIDClusterIDAttributeIDParams read attribute in a designated attribute path.  If there is no value available for the attribute, whether because the device does not implement it or because the subscription priming read has not yet gotten to this attribute, nil will be returned. TODO: Need to fully document that this returns "the system's best guess" of attribute values.
-func (md *MTRDevice) ReadAttributeWithEndpointIDClusterIDAttributeIDParams(endpointID obj.Object, clusterID obj.Object, attributeID obj.Object, params *MTRReadParams) obj.Object {
+func (md *MTRDevice) ReadAttributeWithEndpointIDClusterIDAttributeIDParams(endpointID obj.Object, clusterID obj.Object, attributeID obj.Object, params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(md)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(clusterID)
+	defer runtime.KeepAlive(attributeID)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("readAttributeWithEndpointID:clusterID:attributeID:params:"), objref.IDOf(endpointID), objref.IDOf(clusterID), objref.IDOf(attributeID), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout write to attribute in a designated attribute path
 func (md *MTRDevice) WriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout(endpointID obj.Object, clusterID obj.Object, attributeID obj.Object, value obj.Object, expectedValueInterval obj.Object, timeout obj.Object) {
+	defer runtime.KeepAlive(md)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(clusterID)
+	defer runtime.KeepAlive(attributeID)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(expectedValueInterval)
+	defer runtime.KeepAlive(timeout)
 	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("writeAttributeWithEndpointID:clusterID:attributeID:value:expectedValueInterval:timedWriteTimeout:"), objref.IDOf(endpointID), objref.IDOf(clusterID), objref.IDOf(attributeID), objref.IDOf(value), objref.IDOf(expectedValueInterval), objref.IDOf(timeout))
 }
 
 // ReadAttributePaths read the attributes identified by the provided attribute paths. The paths can include wildcards.
 func (md *MTRDevice) ReadAttributePaths(attributePaths []*MTRAttributeRequestPath) []obj.Object {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("readAttributePaths:"), purego.SliceToNSArray(attributePaths, func(_v *MTRAttributeRequestPath) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DescriptorClusters returns read all known attributes from descriptor clusters on all known endpoints.
 func (md *MTRDevice) DescriptorClusters() obj.Object {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("descriptorClusters"))
 	return obj.Wrap(_r)
 }
@@ -100,6 +122,8 @@ func (md *MTRDevice) DescriptorClusters() obj.Object {
 //
 // DownloadLogOfTypeTimeoutQueueCompletion blocks until the operation completes or ctx is cancelled.
 func (md *MTRDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ MTRDiagnosticLogType, timeout float64, queue obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(md)
+	defer runtime.KeepAlive(queue)
 	type _result struct {
 		val obj.Object
 		err error
@@ -123,54 +147,63 @@ func (md *MTRDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context
 
 // State returns the current state of the device. The three states: MTRDeviceStateUnknown Unable to determine the state of the device at the moment. MTRDeviceStateReachable Communication with the device is expected to succeed. MTRDeviceStateUnreachable The device is currently unreachable.
 func (md *MTRDevice) State() MTRDeviceState {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[MTRDeviceState](objref.IDOf(md), objc.RegisterName("state"))
 	return _r
 }
 
 // DeviceCachePrimed reports whether is the device cache primed for this device? This will be true after the deviceCachePrimed: delegate callback has been called, false if not. Please note if you have a storage delegate implemented, the cache is then stored persistently, so the delegate would then only be called once, ever - and this property would basically always be true if a subscription has ever been established at any point in the past.
 func (md *MTRDevice) DeviceCachePrimed() bool {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[bool](objref.IDOf(md), objc.RegisterName("deviceCachePrimed"))
 	return _r
 }
 
 // EstimatedStartTime returns the estimated start time.
-func (md *MTRDevice) EstimatedStartTime() obj.Object {
+func (md *MTRDevice) EstimatedStartTime() time.Time {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("estimatedStartTime"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // DeviceController returns the controller this device was created for.  May return nil if that controller has been shut down.
 func (md *MTRDevice) DeviceController() *MTRDeviceController {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("deviceController"))
 	return MTRDeviceControllerFromID(_r)
 }
 
 // NodeID returns the node ID of the node this device corresponds to.
-func (md *MTRDevice) NodeID() obj.Object {
+func (md *MTRDevice) NodeID() *foundation.Number {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("nodeID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EstimatedSubscriptionLatency returns an estimate of how much time is likely to elapse between setDelegate being called and the current device state (attributes, stored events) being known. nil if no such estimate is available.  Otherwise, the NSNumber stores an NSTimeInterval.
-func (md *MTRDevice) EstimatedSubscriptionLatency() obj.Object {
+func (md *MTRDevice) EstimatedSubscriptionLatency() *foundation.Number {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("estimatedSubscriptionLatency"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // VendorID returns the Vendor Identifier associated with the device. A non-nil value if the vendor identifier has been determined from the device, nil if unknown.
-func (md *MTRDevice) VendorID() obj.Object {
+func (md *MTRDevice) VendorID() *foundation.Number {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("vendorID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ProductID returns the Product Identifier associated with the device. A non-nil value if the product identifier has been determined from the device, nil if unknown.
-func (md *MTRDevice) ProductID() obj.Object {
+func (md *MTRDevice) ProductID() *foundation.Number {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("productID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NetworkCommissioningFeatures returns network commissioning features supported by the device.
 func (md *MTRDevice) NetworkCommissioningFeatures() MTRNetworkCommissioningFeature {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[MTRNetworkCommissioningFeature](objref.IDOf(md), objc.RegisterName("networkCommissioningFeatures"))
 	return _r
 }

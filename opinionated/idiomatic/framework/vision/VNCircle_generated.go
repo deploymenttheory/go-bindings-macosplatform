@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func circleAdopt(id objc.ID) *Circle {
 
 // Description returns the object's -description text.
 func (c *Circle) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Circle) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Circle) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Circle) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // NewCircleWithCenterRadius creates a circle with the specified center and radius.
 func NewCircleWithCenterRadius(center *Point, radius float64) *Circle {
+	defer runtime.KeepAlive(center)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNCircle")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCenter:radius:"), objref.IDOf(center), radius)
 	return circleAdopt(_id)
@@ -75,6 +83,7 @@ func NewCircleWithCenterRadius(center *Point, radius float64) *Circle {
 
 // NewCircleWithCenterDiameter creates a circle with the specified center and diameter.
 func NewCircleWithCenterDiameter(center *Point, diameter float64) *Circle {
+	defer runtime.KeepAlive(center)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNCircle")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCenter:diameter:"), objref.IDOf(center), diameter)
 	return circleAdopt(_id)
@@ -82,30 +91,37 @@ func NewCircleWithCenterDiameter(center *Point, diameter float64) *Circle {
 
 // ContainsPoint determines if this circle, including its boundary, contains the specified point.
 func (c *Circle) ContainsPoint(point *Point) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(point)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("containsPoint:"), objref.IDOf(point))
 	return _r
 }
 
 // ContainsPointInCircumferentialRingOfWidth determines if a ring around this circle’s circumference contains the specified point.
 func (c *Circle) ContainsPointInCircumferentialRingOfWidth(point *Point, ringWidth float64) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(point)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("containsPoint:inCircumferentialRingOfWidth:"), objref.IDOf(point), ringWidth)
 	return _r
 }
 
 // Center returns circle center.
 func (c *Circle) Center() *Point {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("center"))
 	return PointFromID(_r)
 }
 
 // Radius returns circle radius.
 func (c *Circle) Radius() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("radius"))
 	return _r
 }
 
 // Diameter returns circle diameter.
 func (c *Circle) Diameter() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("diameter"))
 	return _r
 }

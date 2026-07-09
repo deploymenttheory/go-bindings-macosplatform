@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -83,24 +85,28 @@ func (ic *ImageCanny) WithClipRect(clipRect metal.MTLRegion) *ImageCanny {
 
 // Sigma returns read-only sigma value used in performing Gaussian blur of the image
 func (ic *ImageCanny) Sigma() float32 {
+	defer runtime.KeepAlive(ic)
 	_r := objc.Send[float32](objref.IDOf(ic), objc.RegisterName("sigma"))
 	return _r
 }
 
 // HighThreshold returns read-write value used to set the high threshold for double thresholding, value is normalized. Default is 0.4
 func (ic *ImageCanny) HighThreshold() float32 {
+	defer runtime.KeepAlive(ic)
 	_r := objc.Send[float32](objref.IDOf(ic), objc.RegisterName("highThreshold"))
 	return _r
 }
 
 // LowThreshold returns read-write value used to set the low threshold for double thresholding, value is normalized. Default is 0.2
 func (ic *ImageCanny) LowThreshold() float32 {
+	defer runtime.KeepAlive(ic)
 	_r := objc.Send[float32](objref.IDOf(ic), objc.RegisterName("lowThreshold"))
 	return _r
 }
 
 // UseFastMode reports whether read-write value used to change algorithm to an approximation of the true Canny Edge detection Algorithm. When true, a limit is placed on how far a single strong edge can extend. The result will be similar to a true output but some edges may terminate early, resulting in minor differences for cases with long, weak edges. The performance for the approximate canny implementation is improved and should provide similar enough results for most cases. Extra tuning of the high and low thresholds as well as sigma may help achieve a more similar output in this mode. Default is true
 func (ic *ImageCanny) UseFastMode() bool {
+	defer runtime.KeepAlive(ic)
 	_r := objc.Send[bool](objref.IDOf(ic), objc.RegisterName("useFastMode"))
 	return _r
 }

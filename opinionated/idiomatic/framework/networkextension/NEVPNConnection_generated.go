@@ -6,10 +6,13 @@ package networkextension
 
 import (
 	"context"
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -53,22 +56,27 @@ func nEVPNConnectionAdopt(id objc.ID) *NEVPNConnection {
 
 // Description returns the object's -description text.
 func (nc *NEVPNConnection) Description() string {
+	defer runtime.KeepAlive(nc)
 	return rt.Description(objref.IDOf(nc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nc *NEVPNConnection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nc *NEVPNConnection) IsKind(className string) bool {
+	defer runtime.KeepAlive(nc)
 	return rt.IsKind(objref.IDOf(nc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nc *NEVPNConnection) String() string {
+	defer runtime.KeepAlive(nc)
 	return rt.Description(objref.IDOf(nc))
 }
 
@@ -76,6 +84,7 @@ func (nc *NEVPNConnection) String() string {
 //
 // StartVPNTunnelAndReturnError returns an error if the operation did not succeed.
 func (nc *NEVPNConnection) StartVPNTunnelAndReturnError() error {
+	defer runtime.KeepAlive(nc)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(nc), objc.RegisterName("startVPNTunnelAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -84,10 +93,11 @@ func (nc *NEVPNConnection) StartVPNTunnelAndReturnError() error {
 	return nil
 }
 
-// StartVPNTunnelWithOptionsAndReturnError start the process of connecting the VPN.
-func (nc *NEVPNConnection) StartVPNTunnelWithOptionsAndReturnError(options obj.Object) error {
+// StartVPNTunnelWithOptions start the process of connecting the VPN.
+func (nc *NEVPNConnection) StartVPNTunnelWithOptions(options map[string]*foundation.Object) error {
+	defer runtime.KeepAlive(nc)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(nc), objc.RegisterName("startVPNTunnelWithOptions:andReturnError:"), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(nc), objc.RegisterName("startVPNTunnelWithOptions:andReturnError:"), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -96,6 +106,7 @@ func (nc *NEVPNConnection) StartVPNTunnelWithOptionsAndReturnError(options obj.O
 
 // StopVPNTunnel start the process of disconnecting the VPN.
 func (nc *NEVPNConnection) StopVPNTunnel() {
+	defer runtime.KeepAlive(nc)
 	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("stopVPNTunnel"))
 }
 
@@ -103,6 +114,7 @@ func (nc *NEVPNConnection) StopVPNTunnel() {
 //
 // FetchLastDisconnectError blocks until the operation completes or ctx is cancelled.
 func (nc *NEVPNConnection) FetchLastDisconnectError(ctx context.Context) error {
+	defer runtime.KeepAlive(nc)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -120,18 +132,21 @@ func (nc *NEVPNConnection) FetchLastDisconnectError(ctx context.Context) error {
 
 // Status returns the current status of the VPN.
 func (nc *NEVPNConnection) Status() NEVPNStatus {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[NEVPNStatus](objref.IDOf(nc), objc.RegisterName("status"))
 	return _r
 }
 
 // ConnectedDate returns the date and time when the connection status changed to NEVPNStatusConnected. This property is nil if the connection is not fully established.
-func (nc *NEVPNConnection) ConnectedDate() obj.Object {
+func (nc *NEVPNConnection) ConnectedDate() time.Time {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("connectedDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Manager returns the NEVPNManager associated with this NEVPNConnection.
 func (nc *NEVPNConnection) Manager() *NEVPNManager {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("manager"))
 	return NEVPNManagerFromID(_r)
 }

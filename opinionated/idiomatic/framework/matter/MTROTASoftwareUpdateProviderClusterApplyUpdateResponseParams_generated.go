@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,30 +52,35 @@ func mTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsAdopt(id objc.I
 
 // Description returns the object's -description text.
 func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) Description() string {
+	defer runtime.KeepAlive(msupcaurp)
 	return rt.Description(objref.IDOf(msupcaurp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msupcaurp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msupcaurp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(msupcaurp)
 	return rt.IsKind(objref.IDOf(msupcaurp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) String() string {
+	defer runtime.KeepAlive(msupcaurp)
 	return rt.Description(objref.IDOf(msupcaurp))
 }
 
-// NewMTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsWithResponseValueError initialize an MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-func NewMTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams, err error) {
+// NewMTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsWithResponseValue initialize an MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -82,38 +89,44 @@ func NewMTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsWithResponse
 
 // WithAction sets the action.
 func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) WithAction(action obj.Object) *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams {
+	defer runtime.KeepAlive(action)
 	objc.Send[objc.ID](objref.IDOf(msupcaurp), objc.RegisterName("setAction:"), objref.IDOf(action))
 	return msupcaurp
 }
 
 // WithDelayedActionTime sets the delayed action time.
 func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) WithDelayedActionTime(delayedActionTime obj.Object) *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams {
+	defer runtime.KeepAlive(delayedActionTime)
 	objc.Send[objc.ID](objref.IDOf(msupcaurp), objc.RegisterName("setDelayedActionTime:"), objref.IDOf(delayedActionTime))
 	return msupcaurp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(msupcaurp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return msupcaurp
 }
 
 // Action returns the action.
-func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) Action() obj.Object {
+func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) Action() *foundation.Number {
+	defer runtime.KeepAlive(msupcaurp)
 	_r := objc.Send[objc.ID](objref.IDOf(msupcaurp), objc.RegisterName("action"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DelayedActionTime returns the delayed action time.
-func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) DelayedActionTime() obj.Object {
+func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) DelayedActionTime() *foundation.Number {
+	defer runtime.KeepAlive(msupcaurp)
 	_r := objc.Send[objc.ID](objref.IDOf(msupcaurp), objc.RegisterName("delayedActionTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) TimedInvokeTimeoutMs() obj.Object {
+func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(msupcaurp)
 	_r := objc.Send[objc.ID](objref.IDOf(msupcaurp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams marks MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams — and, by embedding promotion, its

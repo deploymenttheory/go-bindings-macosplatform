@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func audioRoutingArbiterAdopt(id objc.ID) *AudioRoutingArbiter {
 
 // Description returns the object's -description text.
 func (ara *AudioRoutingArbiter) Description() string {
+	defer runtime.KeepAlive(ara)
 	return rt.Description(objref.IDOf(ara))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ara *AudioRoutingArbiter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ara)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ara), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ara *AudioRoutingArbiter) IsKind(className string) bool {
+	defer runtime.KeepAlive(ara)
 	return rt.IsKind(objref.IDOf(ara), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ara *AudioRoutingArbiter) String() string {
+	defer runtime.KeepAlive(ara)
 	return rt.Description(objref.IDOf(ara))
 }
 
@@ -74,5 +81,6 @@ func NewAudioRoutingArbiter() *AudioRoutingArbiter {
 
 // LeaveArbitration stops an app’s participation in audio routing arbitration.
 func (ara *AudioRoutingArbiter) LeaveArbitration() {
+	defer runtime.KeepAlive(ara)
 	objc.Send[objc.ID](objref.IDOf(ara), objc.RegisterName("leaveArbitration"))
 }

@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,14 @@ func NewCPUMetric() *CPUMetric {
 
 // CumulativeCPUTime returns CPU time aggregated cumulatively. The data here represents the total CPU time an application consumed over the date range of the containing payload. Dimensioned as NSUnitDuration.
 func (cm *CPUMetric) CumulativeCPUTime() obj.Object {
+	defer runtime.KeepAlive(cm)
 	_r := objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("cumulativeCPUTime"))
 	return obj.Wrap(_r)
 }
 
 // CumulativeCPUInstructions returns CPU instructions retired aggregated cumulatively. The data here represents the total number of CPU instructions an application retired over the date range of the containing payload. Dimensionless.
 func (cm *CPUMetric) CumulativeCPUInstructions() obj.Object {
+	defer runtime.KeepAlive(cm)
 	_r := objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("cumulativeCPUInstructions"))
 	return obj.Wrap(_r)
 }

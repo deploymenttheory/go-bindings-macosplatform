@@ -127,8 +127,8 @@ func NSXMLNodeElementWithName(name *NSString) objc.ID {
 }
 
 // @method elementWithName:URI: @abstract Returns an element whose full QName is specified.
-func NSXMLNodeElementWithNameURI(name *NSString, uRI *NSString) objc.ID {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSXMLNode), _nSXMLNodeSelElementWithNameURI, name.Ptr(), uRI.Ptr())
+func NSXMLNodeElementWithNameURI(name *NSString, uri *NSString) objc.ID {
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSXMLNode), _nSXMLNodeSelElementWithNameURI, name.Ptr(), uri.Ptr())
 	return _ret
 }
 
@@ -151,8 +151,8 @@ func NSXMLNodeAttributeWithNameStringValue(name *NSString, stringValue *NSString
 }
 
 // @method attributeWithLocalName:URI:stringValue: @abstract Returns an attribute whose full QName is specified.
-func NSXMLNodeAttributeWithNameURIStringValue(name *NSString, uRI *NSString, stringValue *NSString) objc.ID {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSXMLNode), _nSXMLNodeSelAttributeWithNameURIStringValue, name.Ptr(), uRI.Ptr(), stringValue.Ptr())
+func NSXMLNodeAttributeWithNameURIStringValue(name *NSString, uri *NSString, stringValue *NSString) objc.ID {
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSXMLNode), _nSXMLNodeSelAttributeWithNameURIStringValue, name.Ptr(), uri.Ptr(), stringValue.Ptr())
 	return _ret
 }
 
@@ -447,8 +447,8 @@ func (o *NSXMLNode) URI() *NSString {
 	return NSStringFromID(_ret)
 }
 
-func (o *NSXMLNode) SetURI(uRI *NSString) {
-	o.Ptr().Send(_nSXMLNodeSelSetURI, uRI.Ptr())
+func (o *NSXMLNode) SetURI(uri *NSString) {
+	o.Ptr().Send(_nSXMLNodeSelSetURI, uri.Ptr())
 }
 
 // @abstract The representation of this node as it would appear in an XML document.

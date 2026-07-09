@@ -10,7 +10,7 @@ import (
 // TKSmartCardTokenDriverDelegate wraps the ObjC protocol TKSmartCardTokenDriverDelegate.
 type TKSmartCardTokenDriverDelegate interface {
 	TKTokenDriverDelegate
-	TokenDriverCreateTokenForSmartCardAIDError(driver *TKSmartCardTokenDriver, smartCard *TKSmartCard, aID *foundation.NSData) (*TKSmartCardToken, error)
+	TokenDriverCreateTokenForSmartCardAIDError(driver *TKSmartCardTokenDriver, smartCard *TKSmartCard, aid *foundation.NSData) (*TKSmartCardToken, error)
 }
 
 // TKSmartCardUserInteractionDelegate wraps the ObjC protocol TKSmartCardUserInteractionDelegate.

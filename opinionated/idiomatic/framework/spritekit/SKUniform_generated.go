@@ -5,6 +5,7 @@
 package spritekit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func uniformAdopt(id objc.ID) *Uniform {
 
 // Description returns the object's -description text.
 func (u *Uniform) Description() string {
+	defer runtime.KeepAlive(u)
 	return rt.Description(objref.IDOf(u))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (u *Uniform) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(u)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(u), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (u *Uniform) IsKind(className string) bool {
+	defer runtime.KeepAlive(u)
 	return rt.IsKind(objref.IDOf(u), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (u *Uniform) String() string {
+	defer runtime.KeepAlive(u)
 	return rt.Description(objref.IDOf(u))
 }
 
@@ -77,6 +83,7 @@ func NewUniformWithName(name string) *Uniform {
 
 // NewUniformWithNameTexture initializes a new uniform object that holds a reference to a texture.
 func NewUniformWithNameTexture(name string, texture *Texture) *Uniform {
+	defer runtime.KeepAlive(texture)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:texture:"), purego.NSString(name), objref.IDOf(texture))
 	return uniformAdopt(_id)
@@ -175,6 +182,7 @@ func NewUniformWithNameFloatMatrix4(name string, value unsafe.Pointer) *Uniform 
 
 // WithTextureValue sets the receiver’s value as a SpriteKit texture.
 func (u *Uniform) WithTextureValue(textureValue TextureProvider) *Uniform {
+	defer runtime.KeepAlive(textureValue)
 	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setTextureValue:"), objref.IDOf(textureValue))
 	return u
 }
@@ -259,6 +267,7 @@ func (u *Uniform) WithFloatMatrix4Value(floatMatrix4Value unsafe.Pointer) *Unifo
 
 // Name returns the name.
 func (u *Uniform) Name() string {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -268,18 +277,21 @@ func (u *Uniform) Name() string {
 
 // UniformType returns the uniform type.
 func (u *Uniform) UniformType() UniformType {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[UniformType](objref.IDOf(u), objc.RegisterName("uniformType"))
 	return _r
 }
 
 // TextureValue returns the texture value.
 func (u *Uniform) TextureValue() *Texture {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("textureValue"))
 	return TextureFromID(_r)
 }
 
 // FloatValue returns the float value.
 func (u *Uniform) FloatValue() float32 {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[float32](objref.IDOf(u), objc.RegisterName("floatValue"))
 	return _r
 }

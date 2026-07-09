@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -165,6 +167,7 @@ func (de *DOMHTMLLIElement) WithTextContent(textContent string) *DOMHTMLLIElemen
 
 // Type returns the type.
 func (de *DOMHTMLLIElement) Type() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -174,6 +177,7 @@ func (de *DOMHTMLLIElement) Type() string {
 
 // Value returns the value.
 func (de *DOMHTMLLIElement) Value() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("value"))
 	return _r
 }

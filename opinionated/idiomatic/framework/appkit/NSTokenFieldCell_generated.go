@@ -5,8 +5,12 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -76,14 +80,28 @@ func (tfc *TokenFieldCell) WithCompletionDelay(completionDelay float64) *TokenFi
 
 // WithTokenizingCharacterSet sets the receiver’s tokenizing character set to a given character set.
 func (tfc *TokenFieldCell) WithTokenizingCharacterSet(tokenizingCharacterSet obj.Object) *TokenFieldCell {
+	defer runtime.KeepAlive(tokenizingCharacterSet)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTokenizingCharacterSet:"), objref.IDOf(tokenizingCharacterSet))
 	})
 	return tfc
 }
 
+// WithDelegate sets the receiver’s delegate.
+func (tfc *TokenFieldCell) WithDelegate(delegate TokenFieldCellDelegate) *TokenFieldCell {
+	_shim := newTokenFieldCellDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(tfc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return tfc
+}
+
 // WithBackgroundColor sets the color of the cell’s background.
 func (tfc *TokenFieldCell) WithBackgroundColor(backgroundColor *Color) *TokenFieldCell {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -100,6 +118,7 @@ func (tfc *TokenFieldCell) WithDrawsBackground(drawsBackground bool) *TokenField
 
 // WithTextColor sets the color to use to draw the cell’s text.
 func (tfc *TokenFieldCell) WithTextColor(textColor *Color) *TokenFieldCell {
+	defer runtime.KeepAlive(textColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	})
@@ -124,6 +143,7 @@ func (tfc *TokenFieldCell) WithPlaceholderString(placeholderString string) *Toke
 
 // WithPlaceholderAttributedString sets the placeholder text for the cell, specified as an attributed string.
 func (tfc *TokenFieldCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TokenFieldCell {
+	defer runtime.KeepAlive(placeholderAttributedString)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	})
@@ -141,6 +161,7 @@ func (tfc *TokenFieldCell) WithAllowedInputSourceLocales(items ...obj.Object) *T
 
 // WithControlView sets the view associated with the cell.
 func (tfc *TokenFieldCell) WithControlView(controlView ViewProvider) *TokenFieldCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -165,6 +186,7 @@ func (tfc *TokenFieldCell) WithState(state int) *TokenFieldCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (tfc *TokenFieldCell) WithTarget(target obj.Object) *TokenFieldCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -269,6 +291,7 @@ func (tfc *TokenFieldCell) WithWraps(wraps bool) *TokenFieldCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (tfc *TokenFieldCell) WithFont(font *Font) *TokenFieldCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -277,6 +300,7 @@ func (tfc *TokenFieldCell) WithFont(font *Font) *TokenFieldCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (tfc *TokenFieldCell) WithFormatter(formatter obj.Object) *TokenFieldCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -285,6 +309,7 @@ func (tfc *TokenFieldCell) WithFormatter(formatter obj.Object) *TokenFieldCell {
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (tfc *TokenFieldCell) WithObjectValue(objectValue obj.Object) *TokenFieldCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -333,6 +358,7 @@ func (tfc *TokenFieldCell) WithIntegerValue(integerValue int) *TokenFieldCell {
 
 // WithImage sets the image displayed by the cell, if any.
 func (tfc *TokenFieldCell) WithImage(image *Image) *TokenFieldCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -349,6 +375,7 @@ func (tfc *TokenFieldCell) WithControlSize(controlSize ControlSize) *TokenFieldC
 
 // WithRepresentedObject sets the object represented by the cell.
 func (tfc *TokenFieldCell) WithRepresentedObject(representedObject obj.Object) *TokenFieldCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -357,6 +384,7 @@ func (tfc *TokenFieldCell) WithRepresentedObject(representedObject obj.Object) *
 
 // WithMenu sets the cell’s contextual menu.
 func (tfc *TokenFieldCell) WithMenu(menu *Menu) *TokenFieldCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -445,6 +473,7 @@ func (tfc *TokenFieldCell) WithFocusRingType(focusRingType FocusRingType) *Token
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (tfc *TokenFieldCell) WithAttributedStringValue(attributedStringValue obj.Object) *TokenFieldCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -493,6 +522,7 @@ func (tfc *TokenFieldCell) WithControlTint(controlTint ControlTint) *TokenFieldC
 
 // TokenStyle returns the token style.
 func (tfc *TokenFieldCell) TokenStyle() TokenStyle {
+	defer runtime.KeepAlive(tfc)
 	var _mainthread0 TokenStyle
 	purego.Main(func() {
 		_mainthread0 = func() TokenStyle {
@@ -506,6 +536,7 @@ func (tfc *TokenFieldCell) TokenStyle() TokenStyle {
 
 // CompletionDelay returns the completion delay.
 func (tfc *TokenFieldCell) CompletionDelay() float64 {
+	defer runtime.KeepAlive(tfc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -518,12 +549,13 @@ func (tfc *TokenFieldCell) CompletionDelay() float64 {
 }
 
 // TokenizingCharacterSet returns the tokenizing character set.
-func (tfc *TokenFieldCell) TokenizingCharacterSet() obj.Object {
-	var _mainthread0 obj.Object
+func (tfc *TokenFieldCell) TokenizingCharacterSet() *foundation.CharacterSet {
+	defer runtime.KeepAlive(tfc)
+	var _mainthread0 *foundation.CharacterSet
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.CharacterSet {
 			_r := objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("tokenizingCharacterSet"))
-			return obj.Wrap(_r)
+			return foundation.CharacterSetFromID(_r)
 		}()
 	})
 	return _mainthread0

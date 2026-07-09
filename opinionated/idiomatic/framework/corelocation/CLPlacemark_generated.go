@@ -5,7 +5,10 @@
 package corelocation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func placemarkAdopt(id objc.ID) *Placemark {
 
 // Description returns the object's -description text.
 func (p *Placemark) Description() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (p *Placemark) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (p *Placemark) IsKind(className string) bool {
+	defer runtime.KeepAlive(p)
 	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (p *Placemark) String() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
 // NewPlacemarkWithPlacemark initializes and returns a placemark object from another placemark object.
 func NewPlacemarkWithPlacemark(placemark *Placemark) *Placemark {
+	defer runtime.KeepAlive(placemark)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CLPlacemark")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlacemark:"), objref.IDOf(placemark))
 	return placemarkAdopt(_id)
@@ -75,24 +84,28 @@ func NewPlacemarkWithPlacemark(placemark *Placemark) *Placemark {
 
 // Region returns the region.
 func (p *Placemark) Region() *Region {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("region"))
 	return RegionFromID(_r)
 }
 
 // TimeZone returns the time zone.
-func (p *Placemark) TimeZone() obj.Object {
+func (p *Placemark) TimeZone() *foundation.TimeZone {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("timeZone"))
-	return obj.Wrap(_r)
+	return foundation.TimeZoneFromID(_r)
 }
 
 // AddressDictionary returns the address dictionary.
 func (p *Placemark) AddressDictionary() obj.Object {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("addressDictionary"))
 	return obj.Wrap(_r)
 }
 
 // Name returns the name.
 func (p *Placemark) Name() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -102,6 +115,7 @@ func (p *Placemark) Name() string {
 
 // Thoroughfare returns the thoroughfare.
 func (p *Placemark) Thoroughfare() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("thoroughfare"))
 	if _r == 0 {
 		return ""
@@ -111,6 +125,7 @@ func (p *Placemark) Thoroughfare() string {
 
 // SubThoroughfare returns the sub thoroughfare.
 func (p *Placemark) SubThoroughfare() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("subThoroughfare"))
 	if _r == 0 {
 		return ""
@@ -120,6 +135,7 @@ func (p *Placemark) SubThoroughfare() string {
 
 // Locality returns the locality.
 func (p *Placemark) Locality() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("locality"))
 	if _r == 0 {
 		return ""
@@ -129,6 +145,7 @@ func (p *Placemark) Locality() string {
 
 // SubLocality returns the sub locality.
 func (p *Placemark) SubLocality() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("subLocality"))
 	if _r == 0 {
 		return ""
@@ -138,6 +155,7 @@ func (p *Placemark) SubLocality() string {
 
 // AdministrativeArea returns the administrative area.
 func (p *Placemark) AdministrativeArea() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("administrativeArea"))
 	if _r == 0 {
 		return ""
@@ -147,6 +165,7 @@ func (p *Placemark) AdministrativeArea() string {
 
 // SubAdministrativeArea returns the sub administrative area.
 func (p *Placemark) SubAdministrativeArea() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("subAdministrativeArea"))
 	if _r == 0 {
 		return ""
@@ -156,6 +175,7 @@ func (p *Placemark) SubAdministrativeArea() string {
 
 // PostalCode returns the postal code.
 func (p *Placemark) PostalCode() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("postalCode"))
 	if _r == 0 {
 		return ""
@@ -165,6 +185,7 @@ func (p *Placemark) PostalCode() string {
 
 // ISOcountryCode returns the is ocountry code.
 func (p *Placemark) ISOcountryCode() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("ISOcountryCode"))
 	if _r == 0 {
 		return ""
@@ -174,6 +195,7 @@ func (p *Placemark) ISOcountryCode() string {
 
 // Country returns the country.
 func (p *Placemark) Country() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("country"))
 	if _r == 0 {
 		return ""
@@ -183,6 +205,7 @@ func (p *Placemark) Country() string {
 
 // InlandWater returns the inland water.
 func (p *Placemark) InlandWater() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("inlandWater"))
 	if _r == 0 {
 		return ""
@@ -192,6 +215,7 @@ func (p *Placemark) InlandWater() string {
 
 // Ocean returns the ocean.
 func (p *Placemark) Ocean() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("ocean"))
 	if _r == 0 {
 		return ""
@@ -203,12 +227,14 @@ func (p *Placemark) Ocean() string {
 //
 // AreasOfInterest returns the collection as a Go slice.
 func (p *Placemark) AreasOfInterest() []string {
+	defer runtime.KeepAlive(p)
 	_arr := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("areasOfInterest"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // PostalAddress returns the postal address.
 func (p *Placemark) PostalAddress() obj.Object {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("postalAddress"))
 	return obj.Wrap(_r)
 }

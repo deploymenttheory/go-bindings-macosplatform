@@ -5,6 +5,7 @@
 package mapkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -63,23 +64,28 @@ func (mp *MultiPoint) WithSubtitle(subtitle string) *MultiPoint {
 
 // GetCoordinatesRange retrieves one or more points associated with the shape and converts them to coordinate values.
 func (mp *MultiPoint) GetCoordinatesRange(coords unsafe.Pointer, range_ foundation.NSRange) {
+	defer runtime.KeepAlive(mp)
 	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("getCoordinates:range:"), coords, range_)
 }
 
 // LocationAtPointIndex translates a point index into a unit distance along the shape.
 func (mp *MultiPoint) LocationAtPointIndex(index int) float64 {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[float64](objref.IDOf(mp), objc.RegisterName("locationAtPointIndex:"), index)
 	return _r
 }
 
 // LocationsAtPointIndexes returns a set of unit distance values that correspond to the point indexes along the shape.
-func (mp *MultiPoint) LocationsAtPointIndexes(indexes obj.Object) []obj.Object {
+func (mp *MultiPoint) LocationsAtPointIndexes(indexes obj.Object) []*foundation.Number {
+	defer runtime.KeepAlive(mp)
+	defer runtime.KeepAlive(indexes)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("locationsAtPointIndexes:"), objref.IDOf(indexes))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *foundation.Number { return foundation.NumberFromID(_id) })
 }
 
 // PointCount returns the point count.
 func (mp *MultiPoint) PointCount() int {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[int](objref.IDOf(mp), objc.RegisterName("pointCount"))
 	return _r
 }

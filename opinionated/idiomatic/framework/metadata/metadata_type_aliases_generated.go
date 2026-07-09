@@ -5,10 +5,10 @@
 package metadata
 
 type MDQueryBatchingParams struct {
-	First_max_num    uint
-	First_max_ms     uint
-	Progress_max_num uint
-	Progress_max_ms  uint
-	Update_max_num   uint
-	Update_max_ms    uint
+	FirstMaxNum    uint
+	FirstMaxMs     uint
+	ProgressMaxNum uint
+	ProgressMaxMs  uint
+	UpdateMaxNum   uint
+	UpdateMaxMs    uint
 }

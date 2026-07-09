@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func nullAdopt(id objc.ID) *Null {
 
 // Description returns the object's -description text.
 func (n *Null) Description() string {
+	defer runtime.KeepAlive(n)
 	return rt.Description(objref.IDOf(n))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (n *Null) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(n), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (n *Null) IsKind(className string) bool {
+	defer runtime.KeepAlive(n)
 	return rt.IsKind(objref.IDOf(n), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (n *Null) String() string {
+	defer runtime.KeepAlive(n)
 	return rt.Description(objref.IDOf(n))
 }
 
@@ -81,7 +87,7 @@ func (n *Null) WithObservationInfo(observationInfo unsafe.Pointer) *Null {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (n *Null) WithScriptingProperties(scriptingProperties obj.Object) *Null {
-	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (n *Null) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Null {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return n
 }

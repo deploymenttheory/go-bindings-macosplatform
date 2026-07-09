@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterBridgedDeviceBasicInformationAdopt(id objc.ID) *MTRBaseCluste
 
 // NewMTRBaseClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterBridgedDeviceBasicInformation {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterBridgedDeviceBasicInformation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterBridgedDeviceBasicInformationAdopt(_id)
@@ -58,6 +62,7 @@ func NewMTRBaseClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue(dev
 //
 // ReadAttributeVendorNameWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeVendorNameWithCompletion(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val string
 		err error
@@ -83,6 +88,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeVendorN
 //
 // SubscribeAttributeVendorNameWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeVendorNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -108,6 +115,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeVe
 //
 // ReadAttributeVendorIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeVendorIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val obj.Object
 		err error
@@ -133,6 +141,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeVendorI
 //
 // SubscribeAttributeVendorIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeVendorIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -158,6 +168,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeVe
 //
 // ReadAttributeProductNameWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductNameWithCompletion(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val string
 		err error
@@ -183,6 +194,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProduct
 //
 // SubscribeAttributeProductNameWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -208,6 +221,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributePr
 //
 // ReadAttributeProductIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val obj.Object
 		err error
@@ -233,6 +247,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProduct
 //
 // SubscribeAttributeProductIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -258,6 +274,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributePr
 //
 // ReadAttributeNodeLabelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeNodeLabelWithCompletion(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val string
 		err error
@@ -283,6 +300,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeNodeLab
 //
 // SubscribeAttributeNodeLabelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeNodeLabelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -308,6 +327,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeNo
 //
 // ReadAttributeHardwareVersionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val obj.Object
 		err error
@@ -333,6 +353,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeHardwar
 //
 // SubscribeAttributeHardwareVersionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeHardwareVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -358,6 +380,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeHa
 //
 // ReadAttributeHardwareVersionStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionStringWithCompletion(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val string
 		err error
@@ -383,6 +406,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeHardwar
 //
 // SubscribeAttributeHardwareVersionStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeHardwareVersionStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -408,6 +433,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeHa
 //
 // ReadAttributeSoftwareVersionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val obj.Object
 		err error
@@ -433,6 +459,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSoftwar
 //
 // SubscribeAttributeSoftwareVersionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSoftwareVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -458,6 +486,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSo
 //
 // ReadAttributeSoftwareVersionStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionStringWithCompletion(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val string
 		err error
@@ -483,6 +512,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSoftwar
 //
 // SubscribeAttributeSoftwareVersionStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSoftwareVersionStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -508,6 +539,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSo
 //
 // ReadAttributeManufacturingDateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeManufacturingDateWithCompletion(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val string
 		err error
@@ -533,6 +565,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeManufac
 //
 // SubscribeAttributeManufacturingDateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeManufacturingDateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -558,6 +592,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeMa
 //
 // ReadAttributePartNumberWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributePartNumberWithCompletion(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val string
 		err error
@@ -583,6 +618,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributePartNum
 //
 // SubscribeAttributePartNumberWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributePartNumberWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -608,6 +645,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributePa
 //
 // ReadAttributeProductURLWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductURLWithCompletion(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val string
 		err error
@@ -633,6 +671,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProduct
 //
 // SubscribeAttributeProductURLWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductURLWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -658,6 +698,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributePr
 //
 // ReadAttributeProductLabelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductLabelWithCompletion(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val string
 		err error
@@ -683,6 +724,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProduct
 //
 // SubscribeAttributeProductLabelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductLabelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -708,6 +751,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributePr
 //
 // ReadAttributeSerialNumberWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSerialNumberWithCompletion(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val string
 		err error
@@ -733,6 +777,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSerialN
 //
 // SubscribeAttributeSerialNumberWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSerialNumberWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -758,6 +804,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSe
 //
 // ReadAttributeReachableWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeReachableWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val obj.Object
 		err error
@@ -783,6 +830,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeReachab
 //
 // SubscribeAttributeReachableWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeReachableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -808,6 +857,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeRe
 //
 // ReadAttributeUniqueIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeUniqueIDWithCompletion(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val string
 		err error
@@ -833,6 +883,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeUniqueI
 //
 // SubscribeAttributeUniqueIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeUniqueIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -858,6 +910,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeUn
 //
 // ReadAttributeProductAppearanceWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductAppearanceWithCompletion(ctx context.Context) (result *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct
 		err error
@@ -883,6 +936,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProduct
 //
 // SubscribeAttributeProductAppearanceWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductAppearanceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct
 		err error
@@ -908,6 +963,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributePr
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val obj.Object
 		err error
@@ -933,6 +989,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeGenerat
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -958,6 +1016,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeGe
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val obj.Object
 		err error
@@ -983,6 +1042,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeAccepte
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1008,6 +1069,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeAc
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1033,6 +1095,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeAttribu
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1058,6 +1122,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeAt
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1083,6 +1148,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeFeature
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1108,6 +1175,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeFe
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1133,6 +1201,8 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeCluster
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcbdbi)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

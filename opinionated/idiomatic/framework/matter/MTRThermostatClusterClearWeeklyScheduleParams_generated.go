@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRThermostatClusterClearWeeklyScheduleParamsAdopt(id objc.ID) *MTRThermost
 
 // Description returns the object's -description text.
 func (mtccwsp *MTRThermostatClusterClearWeeklyScheduleParams) Description() string {
+	defer runtime.KeepAlive(mtccwsp)
 	return rt.Description(objref.IDOf(mtccwsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtccwsp *MTRThermostatClusterClearWeeklyScheduleParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtccwsp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtccwsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtccwsp *MTRThermostatClusterClearWeeklyScheduleParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtccwsp)
 	return rt.IsKind(objref.IDOf(mtccwsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtccwsp *MTRThermostatClusterClearWeeklyScheduleParams) String() string {
+	defer runtime.KeepAlive(mtccwsp)
 	return rt.Description(objref.IDOf(mtccwsp))
 }
 
@@ -72,24 +80,28 @@ func NewMTRThermostatClusterClearWeeklyScheduleParams() *MTRThermostatClusterCle
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mtccwsp *MTRThermostatClusterClearWeeklyScheduleParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterClearWeeklyScheduleParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mtccwsp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mtccwsp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mtccwsp *MTRThermostatClusterClearWeeklyScheduleParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThermostatClusterClearWeeklyScheduleParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mtccwsp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mtccwsp
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mtccwsp *MTRThermostatClusterClearWeeklyScheduleParams) TimedInvokeTimeoutMs() obj.Object {
+func (mtccwsp *MTRThermostatClusterClearWeeklyScheduleParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mtccwsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtccwsp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mtccwsp *MTRThermostatClusterClearWeeklyScheduleParams) ServerSideProcessingTimeout() obj.Object {
+func (mtccwsp *MTRThermostatClusterClearWeeklyScheduleParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mtccwsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtccwsp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

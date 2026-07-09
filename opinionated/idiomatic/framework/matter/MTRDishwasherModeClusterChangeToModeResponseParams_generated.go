@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRDishwasherModeClusterChangeToModeResponseParamsAdopt(id objc.ID) *MTRDis
 
 // Description returns the object's -description text.
 func (mdmcctmrp *MTRDishwasherModeClusterChangeToModeResponseParams) Description() string {
+	defer runtime.KeepAlive(mdmcctmrp)
 	return rt.Description(objref.IDOf(mdmcctmrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdmcctmrp *MTRDishwasherModeClusterChangeToModeResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdmcctmrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdmcctmrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdmcctmrp *MTRDishwasherModeClusterChangeToModeResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdmcctmrp)
 	return rt.IsKind(objref.IDOf(mdmcctmrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdmcctmrp *MTRDishwasherModeClusterChangeToModeResponseParams) String() string {
+	defer runtime.KeepAlive(mdmcctmrp)
 	return rt.Description(objref.IDOf(mdmcctmrp))
 }
 
-// NewMTRDishwasherModeClusterChangeToModeResponseParamsWithResponseValueError initialize an MTRDishwasherModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-func NewMTRDishwasherModeClusterChangeToModeResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRDishwasherModeClusterChangeToModeResponseParams, err error) {
+// NewMTRDishwasherModeClusterChangeToModeResponseParamsWithResponseValue initialize an MTRDishwasherModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRDishwasherModeClusterChangeToModeResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRDishwasherModeClusterChangeToModeResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRDishwasherModeClusterChangeToModeResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,6 +87,7 @@ func NewMTRDishwasherModeClusterChangeToModeResponseParamsWithResponseValueError
 
 // WithStatus sets the status.
 func (mdmcctmrp *MTRDishwasherModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTRDishwasherModeClusterChangeToModeResponseParams {
+	defer runtime.KeepAlive(status)
 	objc.Send[objc.ID](objref.IDOf(mdmcctmrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mdmcctmrp
 }
@@ -91,13 +99,15 @@ func (mdmcctmrp *MTRDishwasherModeClusterChangeToModeResponseParams) WithStatusT
 }
 
 // Status returns the status.
-func (mdmcctmrp *MTRDishwasherModeClusterChangeToModeResponseParams) Status() obj.Object {
+func (mdmcctmrp *MTRDishwasherModeClusterChangeToModeResponseParams) Status() *foundation.Number {
+	defer runtime.KeepAlive(mdmcctmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdmcctmrp), objc.RegisterName("status"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StatusText returns the status text.
 func (mdmcctmrp *MTRDishwasherModeClusterChangeToModeResponseParams) StatusText() string {
+	defer runtime.KeepAlive(mdmcctmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdmcctmrp), objc.RegisterName("statusText"))
 	if _r == 0 {
 		return ""

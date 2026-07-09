@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEventAdopt(id 
 
 // Description returns the object's -description text.
 func (meemcceme *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) Description() string {
+	defer runtime.KeepAlive(meemcceme)
 	return rt.Description(objref.IDOf(meemcceme))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (meemcceme *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(meemcceme)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(meemcceme), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (meemcceme *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(meemcceme)
 	return rt.IsKind(objref.IDOf(meemcceme), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (meemcceme *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) String() string {
+	defer runtime.KeepAlive(meemcceme)
 	return rt.Description(objref.IDOf(meemcceme))
 }
 
@@ -72,24 +79,28 @@ func NewMTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent() *MT
 
 // WithEnergyImported sets the energy imported.
 func (meemcceme *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) WithEnergyImported(energyImported *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent {
+	defer runtime.KeepAlive(energyImported)
 	objc.Send[objc.ID](objref.IDOf(meemcceme), objc.RegisterName("setEnergyImported:"), objref.IDOf(energyImported))
 	return meemcceme
 }
 
 // WithEnergyExported sets the energy exported.
 func (meemcceme *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) WithEnergyExported(energyExported *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent {
+	defer runtime.KeepAlive(energyExported)
 	objc.Send[objc.ID](objref.IDOf(meemcceme), objc.RegisterName("setEnergyExported:"), objref.IDOf(energyExported))
 	return meemcceme
 }
 
 // EnergyImported returns the energy imported.
 func (meemcceme *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) EnergyImported() *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
+	defer runtime.KeepAlive(meemcceme)
 	_r := objc.Send[objc.ID](objref.IDOf(meemcceme), objc.RegisterName("energyImported"))
 	return MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructFromID(_r)
 }
 
 // EnergyExported returns the energy exported.
 func (meemcceme *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) EnergyExported() *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
+	defer runtime.KeepAlive(meemcceme)
 	_r := objc.Send[objc.ID](objref.IDOf(meemcceme), objc.RegisterName("energyExported"))
 	return MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructFromID(_r)
 }

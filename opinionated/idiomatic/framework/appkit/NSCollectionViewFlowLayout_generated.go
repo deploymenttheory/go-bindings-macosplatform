@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -141,6 +143,7 @@ func (cvfl *CollectionViewFlowLayout) WithSectionFootersPinToVisibleBounds(secti
 
 // SectionAtIndexIsCollapsed wraps the corresponding Objective-C method.
 func (cvfl *CollectionViewFlowLayout) SectionAtIndexIsCollapsed(sectionIndex int) bool {
+	defer runtime.KeepAlive(cvfl)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -154,6 +157,7 @@ func (cvfl *CollectionViewFlowLayout) SectionAtIndexIsCollapsed(sectionIndex int
 
 // CollapseSectionAtIndex wraps the corresponding Objective-C method.
 func (cvfl *CollectionViewFlowLayout) CollapseSectionAtIndex(sectionIndex int) {
+	defer runtime.KeepAlive(cvfl)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("collapseSectionAtIndex:"), sectionIndex)
 	})
@@ -162,6 +166,7 @@ func (cvfl *CollectionViewFlowLayout) CollapseSectionAtIndex(sectionIndex int) {
 
 // ExpandSectionAtIndex wraps the corresponding Objective-C method.
 func (cvfl *CollectionViewFlowLayout) ExpandSectionAtIndex(sectionIndex int) {
+	defer runtime.KeepAlive(cvfl)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("expandSectionAtIndex:"), sectionIndex)
 	})
@@ -170,6 +175,7 @@ func (cvfl *CollectionViewFlowLayout) ExpandSectionAtIndex(sectionIndex int) {
 
 // MinimumLineSpacing returns the minimum line spacing.
 func (cvfl *CollectionViewFlowLayout) MinimumLineSpacing() float64 {
+	defer runtime.KeepAlive(cvfl)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -183,6 +189,7 @@ func (cvfl *CollectionViewFlowLayout) MinimumLineSpacing() float64 {
 
 // MinimumInteritemSpacing returns the minimum interitem spacing.
 func (cvfl *CollectionViewFlowLayout) MinimumInteritemSpacing() float64 {
+	defer runtime.KeepAlive(cvfl)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -196,6 +203,7 @@ func (cvfl *CollectionViewFlowLayout) MinimumInteritemSpacing() float64 {
 
 // ItemSize returns the item size.
 func (cvfl *CollectionViewFlowLayout) ItemSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(cvfl)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -209,6 +217,7 @@ func (cvfl *CollectionViewFlowLayout) ItemSize() corefoundation.CGSize {
 
 // EstimatedItemSize returns the estimated item size.
 func (cvfl *CollectionViewFlowLayout) EstimatedItemSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(cvfl)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -222,6 +231,7 @@ func (cvfl *CollectionViewFlowLayout) EstimatedItemSize() corefoundation.CGSize 
 
 // ScrollDirection returns the scroll direction.
 func (cvfl *CollectionViewFlowLayout) ScrollDirection() CollectionViewScrollDirection {
+	defer runtime.KeepAlive(cvfl)
 	var _mainthread0 CollectionViewScrollDirection
 	purego.Main(func() {
 		_mainthread0 = func() CollectionViewScrollDirection {
@@ -235,6 +245,7 @@ func (cvfl *CollectionViewFlowLayout) ScrollDirection() CollectionViewScrollDire
 
 // HeaderReferenceSize returns the header reference size.
 func (cvfl *CollectionViewFlowLayout) HeaderReferenceSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(cvfl)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -248,6 +259,7 @@ func (cvfl *CollectionViewFlowLayout) HeaderReferenceSize() corefoundation.CGSiz
 
 // FooterReferenceSize returns the footer reference size.
 func (cvfl *CollectionViewFlowLayout) FooterReferenceSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(cvfl)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -261,6 +273,7 @@ func (cvfl *CollectionViewFlowLayout) FooterReferenceSize() corefoundation.CGSiz
 
 // SectionInset returns the section inset.
 func (cvfl *CollectionViewFlowLayout) SectionInset() foundation.NSEdgeInsets {
+	defer runtime.KeepAlive(cvfl)
 	var _mainthread0 foundation.NSEdgeInsets
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSEdgeInsets {
@@ -274,6 +287,7 @@ func (cvfl *CollectionViewFlowLayout) SectionInset() foundation.NSEdgeInsets {
 
 // SectionHeadersPinToVisibleBounds wraps the corresponding Objective-C method.
 func (cvfl *CollectionViewFlowLayout) SectionHeadersPinToVisibleBounds() bool {
+	defer runtime.KeepAlive(cvfl)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -287,6 +301,7 @@ func (cvfl *CollectionViewFlowLayout) SectionHeadersPinToVisibleBounds() bool {
 
 // SectionFootersPinToVisibleBounds wraps the corresponding Objective-C method.
 func (cvfl *CollectionViewFlowLayout) SectionFootersPinToVisibleBounds() bool {
+	defer runtime.KeepAlive(cvfl)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRMessagesClusterMessageResponseOptionStructAdopt(id objc.ID) *MTRMessages
 
 // Description returns the object's -description text.
 func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) Description() string {
+	defer runtime.KeepAlive(mmcmros)
 	return rt.Description(objref.IDOf(mmcmros))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmcmros)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmcmros), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmcmros)
 	return rt.IsKind(objref.IDOf(mmcmros), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) String() string {
+	defer runtime.KeepAlive(mmcmros)
 	return rt.Description(objref.IDOf(mmcmros))
 }
 
@@ -72,6 +80,7 @@ func NewMTRMessagesClusterMessageResponseOptionStruct() *MTRMessagesClusterMessa
 
 // WithMessageResponseID sets the message response ID.
 func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) WithMessageResponseID(messageResponseID obj.Object) *MTRMessagesClusterMessageResponseOptionStruct {
+	defer runtime.KeepAlive(messageResponseID)
 	objc.Send[objc.ID](objref.IDOf(mmcmros), objc.RegisterName("setMessageResponseID:"), objref.IDOf(messageResponseID))
 	return mmcmros
 }
@@ -83,13 +92,15 @@ func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) WithLabel(label st
 }
 
 // MessageResponseID returns the message response ID.
-func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) MessageResponseID() obj.Object {
+func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) MessageResponseID() *foundation.Number {
+	defer runtime.KeepAlive(mmcmros)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmros), objc.RegisterName("messageResponseID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Label returns the label.
 func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) Label() string {
+	defer runtime.KeepAlive(mmcmros)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmros), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

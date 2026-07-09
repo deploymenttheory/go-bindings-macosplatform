@@ -5,6 +5,7 @@
 package syncservices
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,22 +49,27 @@ func iSyncSessionDriverAdopt(id objc.ID) *ISyncSessionDriver {
 
 // Description returns the object's -description text.
 func (issd *ISyncSessionDriver) Description() string {
+	defer runtime.KeepAlive(issd)
 	return rt.Description(objref.IDOf(issd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (issd *ISyncSessionDriver) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(issd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(issd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (issd *ISyncSessionDriver) IsKind(className string) bool {
+	defer runtime.KeepAlive(issd)
 	return rt.IsKind(objref.IDOf(issd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (issd *ISyncSessionDriver) String() string {
+	defer runtime.KeepAlive(issd)
 	return rt.Description(objref.IDOf(issd))
 }
 
@@ -75,6 +81,7 @@ func NewISyncSessionDriver() *ISyncSessionDriver {
 
 // Sync wraps the corresponding Objective-C method.
 func (issd *ISyncSessionDriver) Sync() bool {
+	defer runtime.KeepAlive(issd)
 	_r := objc.Send[bool](objref.IDOf(issd), objc.RegisterName("sync"))
 	return _r
 }
@@ -83,6 +90,7 @@ func (issd *ISyncSessionDriver) Sync() bool {
 //
 // StartAsynchronousSync returns an error if the operation did not succeed.
 func (issd *ISyncSessionDriver) StartAsynchronousSync() error {
+	defer runtime.KeepAlive(issd)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(issd), objc.RegisterName("startAsynchronousSync:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -93,39 +101,47 @@ func (issd *ISyncSessionDriver) StartAsynchronousSync() error {
 
 // SetDelegate wraps the corresponding Objective-C method.
 func (issd *ISyncSessionDriver) SetDelegate(delegate obj.Object) {
+	defer runtime.KeepAlive(issd)
+	defer runtime.KeepAlive(delegate)
 	objc.Send[objc.ID](objref.IDOf(issd), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
 // Delegate returns the delegate.
 func (issd *ISyncSessionDriver) Delegate() obj.Object {
+	defer runtime.KeepAlive(issd)
 	_r := objc.Send[objc.ID](objref.IDOf(issd), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
 // SetHandlesSyncAlerts wraps the corresponding Objective-C method.
 func (issd *ISyncSessionDriver) SetHandlesSyncAlerts(yesOrNo bool) {
+	defer runtime.KeepAlive(issd)
 	objc.Send[objc.ID](objref.IDOf(issd), objc.RegisterName("setHandlesSyncAlerts:"), yesOrNo)
 }
 
 // HandlesSyncAlerts wraps the corresponding Objective-C method.
 func (issd *ISyncSessionDriver) HandlesSyncAlerts() bool {
+	defer runtime.KeepAlive(issd)
 	_r := objc.Send[bool](objref.IDOf(issd), objc.RegisterName("handlesSyncAlerts"))
 	return _r
 }
 
 // Client returns the client.
 func (issd *ISyncSessionDriver) Client() *ISyncClient {
+	defer runtime.KeepAlive(issd)
 	_r := objc.Send[objc.ID](objref.IDOf(issd), objc.RegisterName("client"))
 	return ISyncClientFromID(_r)
 }
 
 // Session returns the session.
 func (issd *ISyncSessionDriver) Session() *ISyncSession {
+	defer runtime.KeepAlive(issd)
 	_r := objc.Send[objc.ID](objref.IDOf(issd), objc.RegisterName("session"))
 	return ISyncSessionFromID(_r)
 }
 
 // FinishSyncing wraps the corresponding Objective-C method.
 func (issd *ISyncSessionDriver) FinishSyncing() {
+	defer runtime.KeepAlive(issd)
 	objc.Send[objc.ID](objref.IDOf(issd), objc.RegisterName("finishSyncing"))
 }

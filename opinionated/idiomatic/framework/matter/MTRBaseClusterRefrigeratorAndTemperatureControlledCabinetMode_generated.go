@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -51,6 +52,9 @@ func mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeAdopt(id objc.
 
 // NewMTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeAdopt(_id)
@@ -60,6 +64,8 @@ func NewMTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeWithDeviceE
 //
 // ChangeToModeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) ChangeToModeWithParamsCompletion(ctx context.Context, params *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) (result *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams, err error) {
+	defer runtime.KeepAlive(mbcratccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams
 		err error
@@ -85,6 +91,7 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 //
 // ReadAttributeSupportedModesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeSupportedModesWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcratccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -110,6 +117,8 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 //
 // SubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) SubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcratccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -135,6 +144,7 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 //
 // ReadAttributeCurrentModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeCurrentModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcratccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -160,6 +170,8 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 //
 // SubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) SubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcratccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -185,6 +197,7 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcratccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -210,6 +223,8 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcratccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -235,6 +250,7 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcratccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -260,6 +276,8 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcratccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -285,6 +303,7 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcratccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -310,6 +329,8 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcratccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -335,6 +356,7 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcratccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -360,6 +382,8 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcratccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -385,6 +409,7 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcratccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -410,6 +435,8 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcratccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

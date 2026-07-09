@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func volumeSupportedCapabilitiesAdopt(id objc.ID) *VolumeSupportedCapabilities {
 
 // Description returns the object's -description text.
 func (vsc *VolumeSupportedCapabilities) Description() string {
+	defer runtime.KeepAlive(vsc)
 	return rt.Description(objref.IDOf(vsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vsc *VolumeSupportedCapabilities) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vsc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vsc *VolumeSupportedCapabilities) IsKind(className string) bool {
+	defer runtime.KeepAlive(vsc)
 	return rt.IsKind(objref.IDOf(vsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vsc *VolumeSupportedCapabilities) String() string {
+	defer runtime.KeepAlive(vsc)
 	return rt.Description(objref.IDOf(vsc))
 }
 
@@ -192,120 +199,140 @@ func (vsc *VolumeSupportedCapabilities) WithCaseFormat(caseFormat VolumeCaseForm
 
 // SupportsPersistentObjectIDs reports whether a Boolean property that indicates whether the volume supports persistent object identifiers and can look up file system objects by their IDs.
 func (vsc *VolumeSupportedCapabilities) SupportsPersistentObjectIDs() bool {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("supportsPersistentObjectIDs"))
 	return _r
 }
 
 // SupportsSymbolicLinks reports whether a Boolean property that indicates whether the volume supports symbolic links.
 func (vsc *VolumeSupportedCapabilities) SupportsSymbolicLinks() bool {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("supportsSymbolicLinks"))
 	return _r
 }
 
 // SupportsHardLinks reports whether a Boolean property that indicates whether the volume supports hard links.
 func (vsc *VolumeSupportedCapabilities) SupportsHardLinks() bool {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("supportsHardLinks"))
 	return _r
 }
 
 // SupportsJournal reports whether a Boolean property that indicates whether the volume supports a journal used to speed recovery in case of unplanned restart, such as a power outage or crash. This property doesn't necessarily mean the volume is actively using a journal.
 func (vsc *VolumeSupportedCapabilities) SupportsJournal() bool {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("supportsJournal"))
 	return _r
 }
 
 // SupportsActiveJournal reports whether a Boolean property that indicates whether the volume currently uses a journal for speeding recovery after an unplanned shutdown.
 func (vsc *VolumeSupportedCapabilities) SupportsActiveJournal() bool {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("supportsActiveJournal"))
 	return _r
 }
 
 // DoesNotSupportRootTimes reports whether a Boolan property that indicates the volume doesn't store reliable times for the root directory. If this value is `true` (Swift) or `YES` (Objective-C), the volume doesn't store reliable times for the root directory.
 func (vsc *VolumeSupportedCapabilities) DoesNotSupportRootTimes() bool {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("doesNotSupportRootTimes"))
 	return _r
 }
 
 // SupportsSparseFiles reports whether a Boolean property that indicates whether the volume supports sparse files. A sparse file is a file that can have "holes" that the file system has never written to, and as a result don't consume space on disk.
 func (vsc *VolumeSupportedCapabilities) SupportsSparseFiles() bool {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("supportsSparseFiles"))
 	return _r
 }
 
 // SupportsZeroRuns reports whether a Boolean property that indicates whether the volume supports zero runs If this value is true, the volume keeps track of allocated but unwritten runs of a file so that it can substitute zeroes without actually writing zeroes to the media.
 func (vsc *VolumeSupportedCapabilities) SupportsZeroRuns() bool {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("supportsZeroRuns"))
 	return _r
 }
 
 // SupportsFastStatFS reports whether a Boolean property that indicates whether the volume supports fast results when fetching file system statistics. A true value means this volume hints to upper layers to indicate that `statfs(2)` is fast enough that its results need not be cached by the caller.
 func (vsc *VolumeSupportedCapabilities) SupportsFastStatFS() bool {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("supportsFastStatFS"))
 	return _r
 }
 
 // Supports2TBFiles reports whether a Boolean property that indicates whether the volume supports file sizes larger than 4GB, and potentially up to 2TB.
 func (vsc *VolumeSupportedCapabilities) Supports2TBFiles() bool {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("supports2TBFiles"))
 	return _r
 }
 
 // SupportsOpenDenyModes reports whether a Boolean property that indicates whether the volume supports open deny modes. These are modes such as "open for read write, deny write".
 func (vsc *VolumeSupportedCapabilities) SupportsOpenDenyModes() bool {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("supportsOpenDenyModes"))
 	return _r
 }
 
 // SupportsHiddenFiles reports whether a Boolean property that indicates whether the volume supports hidden files. A `true` value means the volume supports the `UF_HIDDEN` file flag.
 func (vsc *VolumeSupportedCapabilities) SupportsHiddenFiles() bool {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("supportsHiddenFiles"))
 	return _r
 }
 
 // DoesNotSupportVolumeSizes reports whether a Boolean property that indicates the volume doesn't support certain volume size reports. A true value means the volume doesn't support determining values for total data blocks, available blocks, or free blocks, as in `f_blocks`, `f_bavail`, and `f_bfree` in the struct `statFS` returned by `statfs(2)`.
 func (vsc *VolumeSupportedCapabilities) DoesNotSupportVolumeSizes() bool {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("doesNotSupportVolumeSizes"))
 	return _r
 }
 
 // Supports64BitObjectIDs reports whether a Boolean property that indicates whether the volume supports 64-bit object IDs.
 func (vsc *VolumeSupportedCapabilities) Supports64BitObjectIDs() bool {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("supports64BitObjectIDs"))
 	return _r
 }
 
 // SupportsDocumentID reports whether a Boolean property that indicates whether the volume supports document IDs for document revisions. A document ID is an identifier that persists across object ID changes.
 func (vsc *VolumeSupportedCapabilities) SupportsDocumentID() bool {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("supportsDocumentID"))
 	return _r
 }
 
 // DoesNotSupportImmutableFiles reports whether a Boolean property that indicates the volume doesn't support immutable files. A `true` value means this volume doesn't support setting the `UF_IMMUTABLE` flag.
 func (vsc *VolumeSupportedCapabilities) DoesNotSupportImmutableFiles() bool {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("doesNotSupportImmutableFiles"))
 	return _r
 }
 
 // DoesNotSupportSettingFilePermissions reports whether a Boolean property that indicates the volume doesn't set file permissions. If this value is `true` (Swift) or `YES` (Objective-C), the volume doesn't support setting file permissions.
 func (vsc *VolumeSupportedCapabilities) DoesNotSupportSettingFilePermissions() bool {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("doesNotSupportSettingFilePermissions"))
 	return _r
 }
 
 // SupportsSharedSpace reports whether a Boolean property that indicates whether the volume supports multiple logical file systems that share space in a single "partition."
 func (vsc *VolumeSupportedCapabilities) SupportsSharedSpace() bool {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("supportsSharedSpace"))
 	return _r
 }
 
 // SupportsVolumeGroups reports whether a Boolean property that indicates whether the volume supports volume groups. Volume groups involve multiple logical file systems that the system can mount and unmount together, and for which the system can present common file system identifier information.
 func (vsc *VolumeSupportedCapabilities) SupportsVolumeGroups() bool {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[bool](objref.IDOf(vsc), objc.RegisterName("supportsVolumeGroups"))
 	return _r
 }
 
 // CaseFormat returns a value that indicates the volume's support for case sensitivity.
 func (vsc *VolumeSupportedCapabilities) CaseFormat() VolumeCaseFormat {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[VolumeCaseFormat](objref.IDOf(vsc), objc.RegisterName("caseFormat"))
 	return _r
 }

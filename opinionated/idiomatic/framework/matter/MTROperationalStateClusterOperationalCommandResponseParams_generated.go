@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,30 +49,35 @@ func mTROperationalStateClusterOperationalCommandResponseParamsAdopt(id objc.ID)
 
 // Description returns the object's -description text.
 func (moscocrp *MTROperationalStateClusterOperationalCommandResponseParams) Description() string {
+	defer runtime.KeepAlive(moscocrp)
 	return rt.Description(objref.IDOf(moscocrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (moscocrp *MTROperationalStateClusterOperationalCommandResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(moscocrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(moscocrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (moscocrp *MTROperationalStateClusterOperationalCommandResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(moscocrp)
 	return rt.IsKind(objref.IDOf(moscocrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (moscocrp *MTROperationalStateClusterOperationalCommandResponseParams) String() string {
+	defer runtime.KeepAlive(moscocrp)
 	return rt.Description(objref.IDOf(moscocrp))
 }
 
-// NewMTROperationalStateClusterOperationalCommandResponseParamsWithResponseValueError initialize an MTROperationalStateClusterOperationalCommandResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-func NewMTROperationalStateClusterOperationalCommandResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
+// NewMTROperationalStateClusterOperationalCommandResponseParamsWithResponseValue initialize an MTROperationalStateClusterOperationalCommandResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTROperationalStateClusterOperationalCommandResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTROperationalStateClusterOperationalCommandResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,12 +86,14 @@ func NewMTROperationalStateClusterOperationalCommandResponseParamsWithResponseVa
 
 // WithCommandResponseState sets the command response state.
 func (moscocrp *MTROperationalStateClusterOperationalCommandResponseParams) WithCommandResponseState(commandResponseState *MTROperationalStateClusterErrorStateStruct) *MTROperationalStateClusterOperationalCommandResponseParams {
+	defer runtime.KeepAlive(commandResponseState)
 	objc.Send[objc.ID](objref.IDOf(moscocrp), objc.RegisterName("setCommandResponseState:"), objref.IDOf(commandResponseState))
 	return moscocrp
 }
 
 // CommandResponseState returns the command response state.
 func (moscocrp *MTROperationalStateClusterOperationalCommandResponseParams) CommandResponseState() *MTROperationalStateClusterErrorStateStruct {
+	defer runtime.KeepAlive(moscocrp)
 	_r := objc.Send[objc.ID](objref.IDOf(moscocrp), objc.RegisterName("commandResponseState"))
 	return MTROperationalStateClusterErrorStateStructFromID(_r)
 }

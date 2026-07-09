@@ -5,9 +5,12 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,8 +56,8 @@ func NewCaptureStillImageOutput() *CaptureStillImageOutput {
 }
 
 // WithOutputSettings sets the compression settings for the output.
-func (csio *CaptureStillImageOutput) WithOutputSettings(outputSettings obj.Object) *CaptureStillImageOutput {
-	objc.Send[objc.ID](objref.IDOf(csio), objc.RegisterName("setOutputSettings:"), objref.IDOf(outputSettings))
+func (csio *CaptureStillImageOutput) WithOutputSettings(outputSettings map[string]obj.Object) *CaptureStillImageOutput {
+	objc.Send[objc.ID](objref.IDOf(csio), objc.RegisterName("setOutputSettings:"), rt.MapToDict(outputSettings, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return csio
 }
 
@@ -71,15 +74,17 @@ func (csio *CaptureStillImageOutput) WithDeferredStartEnabled(deferredStartEnabl
 }
 
 // OutputSettings specifies the options the receiver uses to encode still images before they are delivered. See AVVideoSettings.h for more information on how to construct an output settings dictionary. On iOS, the only currently supported keys are AVVideoCodecKey and kCVPixelBufferPixelFormatTypeKey. Use -availableImageDataCVPixelFormatTypes and -availableImageDataCodecTypes to determine what codec keys and pixel formats are supported. AVVideoQualityKey is supported on iOS 6.0 and later and may only be used when AVVideoCodecKey is set to AVVideoCodecTypeJPEG.
-func (csio *CaptureStillImageOutput) OutputSettings() obj.Object {
+func (csio *CaptureStillImageOutput) OutputSettings() map[string]obj.Object {
+	defer runtime.KeepAlive(csio)
 	_r := objc.Send[objc.ID](objref.IDOf(csio), objc.RegisterName("outputSettings"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AvailableImageDataCVPixelFormatTypes indicates the supported image pixel formats that can be specified in outputSettings. The value of this property is an NSArray of NSNumbers that can be used as values for the kCVPixelBufferPixelFormatTypeKey in the receiver's outputSettings property. The first format in the returned list is the most efficient output format.
 //
 // AvailableImageDataCVPixelFormatTypes returns the collection as a Go slice.
 func (csio *CaptureStillImageOutput) AvailableImageDataCVPixelFormatTypes() []obj.Object {
+	defer runtime.KeepAlive(csio)
 	_arr := objc.Send[objc.ID](objref.IDOf(csio), objc.RegisterName("availableImageDataCVPixelFormatTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -88,18 +93,21 @@ func (csio *CaptureStillImageOutput) AvailableImageDataCVPixelFormatTypes() []ob
 //
 // AvailableImageDataCodecTypes returns the collection as a Go slice.
 func (csio *CaptureStillImageOutput) AvailableImageDataCodecTypes() []obj.Object {
+	defer runtime.KeepAlive(csio)
 	_arr := objc.Send[objc.ID](objref.IDOf(csio), objc.RegisterName("availableImageDataCodecTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // IsHighResolutionStillImageOutputEnabled reports whether the receiver should emit still images at the highest resolution supported by its source AVCaptureDevice's activeFormat. By default, AVCaptureStillImageOutput emits images with the same dimensions as its source AVCaptureDevice's activeFormat.formatDescription. However, if you set this property to true, the receiver emits still images at its source AVCaptureDevice's activeFormat.highResolutionStillImageDimensions. Note that if you enable video stabilization (see AVCaptureConnection's preferredVideoStabilizationMode) for any output, the high resolution still images emitted by AVCaptureStillImageOutput may be smaller by 10 or more percent.
 func (csio *CaptureStillImageOutput) IsHighResolutionStillImageOutputEnabled() bool {
+	defer runtime.KeepAlive(csio)
 	_r := objc.Send[bool](objref.IDOf(csio), objc.RegisterName("isHighResolutionStillImageOutputEnabled"))
 	return _r
 }
 
 // IsCapturingStillImage reports whether a boolean value that becomes true when a still image is being captured. The value of this property is a BOOL that becomes true when a still image is being captured, and false when no still image capture is underway. This property is key-value observable.
 func (csio *CaptureStillImageOutput) IsCapturingStillImage() bool {
+	defer runtime.KeepAlive(csio)
 	_r := objc.Send[bool](objref.IDOf(csio), objc.RegisterName("isCapturingStillImage"))
 	return _r
 }

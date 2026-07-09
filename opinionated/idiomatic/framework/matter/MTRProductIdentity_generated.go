@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,40 +48,49 @@ func mTRProductIdentityAdopt(id objc.ID) *MTRProductIdentity {
 
 // Description returns the object's -description text.
 func (mpi *MTRProductIdentity) Description() string {
+	defer runtime.KeepAlive(mpi)
 	return rt.Description(objref.IDOf(mpi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mpi *MTRProductIdentity) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mpi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mpi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mpi *MTRProductIdentity) IsKind(className string) bool {
+	defer runtime.KeepAlive(mpi)
 	return rt.IsKind(objref.IDOf(mpi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mpi *MTRProductIdentity) String() string {
+	defer runtime.KeepAlive(mpi)
 	return rt.Description(objref.IDOf(mpi))
 }
 
 // NewMTRProductIdentityWithVendorIDProductID creates a new MTRProductIdentity.
 func NewMTRProductIdentityWithVendorIDProductID(vendorID obj.Object, productID obj.Object) *MTRProductIdentity {
+	defer runtime.KeepAlive(vendorID)
+	defer runtime.KeepAlive(productID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRProductIdentity")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVendorID:productID:"), objref.IDOf(vendorID), objref.IDOf(productID))
 	return mTRProductIdentityAdopt(_id)
 }
 
 // VendorID returns the vendor ID.
-func (mpi *MTRProductIdentity) VendorID() obj.Object {
+func (mpi *MTRProductIdentity) VendorID() *foundation.Number {
+	defer runtime.KeepAlive(mpi)
 	_r := objc.Send[objc.ID](objref.IDOf(mpi), objc.RegisterName("vendorID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ProductID returns the product ID.
-func (mpi *MTRProductIdentity) ProductID() obj.Object {
+func (mpi *MTRProductIdentity) ProductID() *foundation.Number {
+	defer runtime.KeepAlive(mpi)
 	_r := objc.Send[objc.ID](objref.IDOf(mpi), objc.RegisterName("productID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

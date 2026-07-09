@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -72,30 +74,35 @@ func (aen *AudioEnvironmentNode) WithListenerHeadTrackingEnabled(listenerHeadTra
 
 // OutputType returns type of output hardware to be used with AVAudio3DMixingRenderingAlgorithmAuto Output hardware cannot be automatically determined in Manual Rendering modes or for wired output. This property can be used to override the output type if the correct type is known. Selecting an output type that does not match the actual hardware can produce unexpected results, especially with AVAudioEnvironmentOutputTypeBuiltInSpeakers. An app choosing a value other than AVAudio3DMixingOutputTypeAuto should listen to route change notifications and update the output type accordingly. Default:    AVAudio3DMixingOutputTypeAuto
 func (aen *AudioEnvironmentNode) OutputType() AudioEnvironmentOutputType {
+	defer runtime.KeepAlive(aen)
 	_r := objc.Send[AudioEnvironmentOutputType](objref.IDOf(aen), objc.RegisterName("outputType"))
 	return _r
 }
 
 // OutputVolume returns the mixer's output volume. This accesses the mixer's output volume (0.0-1.0, inclusive).
 func (aen *AudioEnvironmentNode) OutputVolume() float32 {
+	defer runtime.KeepAlive(aen)
 	_r := objc.Send[float32](objref.IDOf(aen), objc.RegisterName("outputVolume"))
 	return _r
 }
 
 // NextAvailableInputBus returns find an unused input bus This will find and return the first input bus to which no other node is connected.
 func (aen *AudioEnvironmentNode) NextAvailableInputBus() int {
+	defer runtime.KeepAlive(aen)
 	_r := objc.Send[int](objref.IDOf(aen), objc.RegisterName("nextAvailableInputBus"))
 	return _r
 }
 
 // DistanceAttenuationParameters returns the distance attenuation parameters for the environment
 func (aen *AudioEnvironmentNode) DistanceAttenuationParameters() *AudioEnvironmentDistanceAttenuationParameters {
+	defer runtime.KeepAlive(aen)
 	_r := objc.Send[objc.ID](objref.IDOf(aen), objc.RegisterName("distanceAttenuationParameters"))
 	return AudioEnvironmentDistanceAttenuationParametersFromID(_r)
 }
 
 // ReverbParameters returns the reverb parameters for the environment
 func (aen *AudioEnvironmentNode) ReverbParameters() *AudioEnvironmentReverbParameters {
+	defer runtime.KeepAlive(aen)
 	_r := objc.Send[objc.ID](objref.IDOf(aen), objc.RegisterName("reverbParameters"))
 	return AudioEnvironmentReverbParametersFromID(_r)
 }
@@ -104,12 +111,14 @@ func (aen *AudioEnvironmentNode) ReverbParameters() *AudioEnvironmentReverbParam
 //
 // ApplicableRenderingAlgorithms returns the collection as a Go slice.
 func (aen *AudioEnvironmentNode) ApplicableRenderingAlgorithms() []obj.Object {
+	defer runtime.KeepAlive(aen)
 	_arr := objc.Send[objc.ID](objref.IDOf(aen), objc.RegisterName("applicableRenderingAlgorithms"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // IsListenerHeadTrackingEnabled reports whether on capable devices, listener orientation will be automatically rotated based on user's head-orientation if enabled.
 func (aen *AudioEnvironmentNode) IsListenerHeadTrackingEnabled() bool {
+	defer runtime.KeepAlive(aen)
 	_r := objc.Send[bool](objref.IDOf(aen), objc.RegisterName("isListenerHeadTrackingEnabled"))
 	return _r
 }

@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -51,6 +52,9 @@ func mTRBaseClusterThreadBorderRouterManagementAdopt(id objc.ID) *MTRBaseCluster
 
 // NewMTRBaseClusterThreadBorderRouterManagementWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterThreadBorderRouterManagementWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterThreadBorderRouterManagement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterThreadBorderRouterManagement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterThreadBorderRouterManagementAdopt(_id)
@@ -60,6 +64,8 @@ func NewMTRBaseClusterThreadBorderRouterManagementWithDeviceEndpointIDQueue(devi
 //
 // GetActiveDatasetRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) GetActiveDatasetRequestWithParamsCompletion(ctx context.Context, params *MTRThreadBorderRouterManagementClusterGetActiveDatasetRequestParams) (result *MTRThreadBorderRouterManagementClusterDatasetResponseParams, err error) {
+	defer runtime.KeepAlive(mbctbrm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRThreadBorderRouterManagementClusterDatasetResponseParams
 		err error
@@ -85,6 +91,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) GetActiveDatasetReque
 //
 // GetActiveDatasetRequestWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) GetActiveDatasetRequestWithCompletion(ctx context.Context) (result *MTRThreadBorderRouterManagementClusterDatasetResponseParams, err error) {
+	defer runtime.KeepAlive(mbctbrm)
 	type _result struct {
 		val *MTRThreadBorderRouterManagementClusterDatasetResponseParams
 		err error
@@ -110,6 +117,8 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) GetActiveDatasetReque
 //
 // GetPendingDatasetRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) GetPendingDatasetRequestWithParamsCompletion(ctx context.Context, params *MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams) (result *MTRThreadBorderRouterManagementClusterDatasetResponseParams, err error) {
+	defer runtime.KeepAlive(mbctbrm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRThreadBorderRouterManagementClusterDatasetResponseParams
 		err error
@@ -135,6 +144,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) GetPendingDatasetRequ
 //
 // GetPendingDatasetRequestWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) GetPendingDatasetRequestWithCompletion(ctx context.Context) (result *MTRThreadBorderRouterManagementClusterDatasetResponseParams, err error) {
+	defer runtime.KeepAlive(mbctbrm)
 	type _result struct {
 		val *MTRThreadBorderRouterManagementClusterDatasetResponseParams
 		err error
@@ -160,6 +170,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) GetPendingDatasetRequ
 //
 // ReadAttributeBorderRouterNameWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeBorderRouterNameWithCompletion(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbctbrm)
 	type _result struct {
 		val string
 		err error
@@ -185,6 +196,8 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeBorderRo
 //
 // SubscribeAttributeBorderRouterNameWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeBorderRouterNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+	defer runtime.KeepAlive(mbctbrm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -210,6 +223,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeBor
 //
 // ReadAttributeBorderAgentIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeBorderAgentIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -235,6 +249,8 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeBorderAg
 //
 // SubscribeAttributeBorderAgentIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeBorderAgentIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -260,6 +276,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeBor
 //
 // ReadAttributeThreadVersionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeThreadVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -285,6 +302,8 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeThreadVe
 //
 // SubscribeAttributeThreadVersionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeThreadVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -310,6 +329,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeThr
 //
 // ReadAttributeInterfaceEnabledWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeInterfaceEnabledWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -335,6 +355,8 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeInterfac
 //
 // SubscribeAttributeInterfaceEnabledWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeInterfaceEnabledWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -360,6 +382,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeInt
 //
 // ReadAttributeActiveDatasetTimestampWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeActiveDatasetTimestampWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -385,6 +408,8 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeActiveDa
 //
 // SubscribeAttributeActiveDatasetTimestampWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeActiveDatasetTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -410,6 +435,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeAct
 //
 // ReadAttributePendingDatasetTimestampWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributePendingDatasetTimestampWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -435,6 +461,8 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributePendingD
 //
 // SubscribeAttributePendingDatasetTimestampWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributePendingDatasetTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -460,6 +488,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributePen
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -485,6 +514,8 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeGenerate
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -510,6 +541,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeGen
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -535,6 +567,8 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeAccepted
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -560,6 +594,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeAcc
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -585,6 +620,8 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeAttribut
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -610,6 +647,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeAtt
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -635,6 +673,8 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeFeatureM
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -660,6 +700,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeFea
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -685,6 +726,8 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeClusterR
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctbrm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

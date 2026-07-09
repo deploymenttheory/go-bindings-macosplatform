@@ -5,6 +5,7 @@
 package syncservices
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -47,22 +48,27 @@ func iSyncRecordSnapshotAdopt(id objc.ID) *ISyncRecordSnapshot {
 
 // Description returns the object's -description text.
 func (isrs *ISyncRecordSnapshot) Description() string {
+	defer runtime.KeepAlive(isrs)
 	return rt.Description(objref.IDOf(isrs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (isrs *ISyncRecordSnapshot) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(isrs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(isrs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (isrs *ISyncRecordSnapshot) IsKind(className string) bool {
+	defer runtime.KeepAlive(isrs)
 	return rt.IsKind(objref.IDOf(isrs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (isrs *ISyncRecordSnapshot) String() string {
+	defer runtime.KeepAlive(isrs)
 	return rt.Description(objref.IDOf(isrs))
 }
 
@@ -74,30 +80,37 @@ func NewISyncRecordSnapshot() *ISyncRecordSnapshot {
 
 // RecordsWithIdentifiers wraps the corresponding Objective-C method.
 func (isrs *ISyncRecordSnapshot) RecordsWithIdentifiers(recordIds obj.Object) obj.Object {
+	defer runtime.KeepAlive(isrs)
+	defer runtime.KeepAlive(recordIds)
 	_r := objc.Send[objc.ID](objref.IDOf(isrs), objc.RegisterName("recordsWithIdentifiers:"), objref.IDOf(recordIds))
 	return obj.Wrap(_r)
 }
 
 // TargetIdentifiersForRelationshipNameWithSourceIdentifier wraps the corresponding Objective-C method.
 func (isrs *ISyncRecordSnapshot) TargetIdentifiersForRelationshipNameWithSourceIdentifier(relationshipName string, sourceId string) obj.Object {
+	defer runtime.KeepAlive(isrs)
 	_r := objc.Send[objc.ID](objref.IDOf(isrs), objc.RegisterName("targetIdentifiersForRelationshipName:withSourceIdentifier:"), purego.NSString(relationshipName), purego.NSString(sourceId))
 	return obj.Wrap(_r)
 }
 
 // SourceIdentifiersForRelationshipNameWithTargetIdentifier wraps the corresponding Objective-C method.
 func (isrs *ISyncRecordSnapshot) SourceIdentifiersForRelationshipNameWithTargetIdentifier(relationshipName string, sourceId string) obj.Object {
+	defer runtime.KeepAlive(isrs)
 	_r := objc.Send[objc.ID](objref.IDOf(isrs), objc.RegisterName("sourceIdentifiersForRelationshipName:withTargetIdentifier:"), purego.NSString(relationshipName), purego.NSString(sourceId))
 	return obj.Wrap(_r)
 }
 
 // RecordsWithMatchingAttributes wraps the corresponding Objective-C method.
 func (isrs *ISyncRecordSnapshot) RecordsWithMatchingAttributes(attributes obj.Object) obj.Object {
+	defer runtime.KeepAlive(isrs)
+	defer runtime.KeepAlive(attributes)
 	_r := objc.Send[objc.ID](objref.IDOf(isrs), objc.RegisterName("recordsWithMatchingAttributes:"), objref.IDOf(attributes))
 	return obj.Wrap(_r)
 }
 
 // RecordIdentifierForReferenceIsModified wraps the corresponding Objective-C method.
 func (isrs *ISyncRecordSnapshot) RecordIdentifierForReferenceIsModified(reference unsafe.Pointer) (result string, pModified bool) {
+	defer runtime.KeepAlive(isrs)
 	var _out0 bool
 	_r := objc.Send[objc.ID](objref.IDOf(isrs), objc.RegisterName("recordIdentifierForReference:isModified:"), reference, unsafe.Pointer(&_out0))
 	_v := ""

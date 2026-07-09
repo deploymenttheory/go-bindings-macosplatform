@@ -5,6 +5,8 @@
 package coreaudiokit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func aUViewControllerAdopt(id objc.ID) *AUViewController {
 
 // Description returns the object's -description text.
 func (avc *AUViewController) Description() string {
+	defer runtime.KeepAlive(avc)
 	return rt.Description(objref.IDOf(avc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (avc *AUViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(avc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(avc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (avc *AUViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(avc)
 	return rt.IsKind(objref.IDOf(avc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (avc *AUViewController) String() string {
+	defer runtime.KeepAlive(avc)
 	return rt.Description(objref.IDOf(avc))
 }
 

@@ -6,6 +6,7 @@ package securityui
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,27 +50,33 @@ func certificatePresentationAdopt(id objc.ID) *CertificatePresentation {
 
 // Description returns the object's -description text.
 func (cp *CertificatePresentation) Description() string {
+	defer runtime.KeepAlive(cp)
 	return rt.Description(objref.IDOf(cp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cp *CertificatePresentation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cp *CertificatePresentation) IsKind(className string) bool {
+	defer runtime.KeepAlive(cp)
 	return rt.IsKind(objref.IDOf(cp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cp *CertificatePresentation) String() string {
+	defer runtime.KeepAlive(cp)
 	return rt.Description(objref.IDOf(cp))
 }
 
 // NewCertificatePresentationWithTrust initialize the certificate presentation with a certificate trust reference.
 func NewCertificatePresentationWithTrust(trust obj.Object) *CertificatePresentation {
+	defer runtime.KeepAlive(trust)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SFCertificatePresentation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTrust:"), objref.IDOf(trust))
 	return certificatePresentationAdopt(_id)
@@ -97,6 +104,8 @@ func (cp *CertificatePresentation) WithHelpURL(helpURL string) *CertificatePrese
 //
 // PresentSheetInWindowDismissHandler blocks until the operation completes or ctx is cancelled.
 func (cp *CertificatePresentation) PresentSheetInWindowDismissHandler(ctx context.Context, window obj.Object) error {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(window)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -112,17 +121,20 @@ func (cp *CertificatePresentation) PresentSheetInWindowDismissHandler(ctx contex
 
 // DismissSheet dismisses the certificate sheet.
 func (cp *CertificatePresentation) DismissSheet() {
+	defer runtime.KeepAlive(cp)
 	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("dismissSheet"))
 }
 
 // Trust returns a trust reference, previously created with SecTrustCreateWithCertificates (see <Security/SecTrust.h>).
 func (cp *CertificatePresentation) Trust() obj.Object {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("trust"))
 	return obj.Wrap(_r)
 }
 
 // Title returns title string to be displayed. If no title is provided, a default title will be used.
 func (cp *CertificatePresentation) Title() string {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -132,6 +144,7 @@ func (cp *CertificatePresentation) Title() string {
 
 // Message returns message string to be displayed. If no message is provided, a default message will be used.
 func (cp *CertificatePresentation) Message() string {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("message"))
 	if _r == 0 {
 		return ""
@@ -140,7 +153,8 @@ func (cp *CertificatePresentation) Message() string {
 }
 
 // HelpURL returns the URL that will be opened by clicking the "Learn More" button.
-func (cp *CertificatePresentation) HelpURL() obj.Object {
+func (cp *CertificatePresentation) HelpURL() string {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("helpURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

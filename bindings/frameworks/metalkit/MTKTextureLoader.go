@@ -64,7 +64,7 @@ func (o *MTKTextureLoader) InitWithDevice(device metal.MTLDevice) *MTKTextureLoa
 }
 
 // Asynchronously loads image data and creates a new Metal texture from a given URL.
-func (o *MTKTextureLoader) NewTextureWithContentsOfURLOptionsCompletionHandler(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer)) {
+func (o *MTKTextureLoader) NewTextureWithContentsOfURLOptionsCompletionHandler(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
 		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
@@ -72,7 +72,7 @@ func (o *MTKTextureLoader) NewTextureWithContentsOfURLOptionsCompletionHandler(u
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTKTextureLoaderSelNewTextureWithContentsOfURLOptionsCompletionHandler, uRL.Ptr(), options.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTKTextureLoaderSelNewTextureWithContentsOfURLOptionsCompletionHandler, url.Ptr(), options.Ptr(), __block_completionHandler)
 }
 
 // Asynchronously loads image data and creates a Metal texture from the named texture asset in an asset catalog.
@@ -100,7 +100,7 @@ func (o *MTKTextureLoader) NewTextureWithNameScaleFactorDisplayGamutBundleOption
 }
 
 // Asynchronously loads image data and creates new Metal textures from the specified list of URLs.
-func (o *MTKTextureLoader) NewTexturesWithContentsOfURLsOptionsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*foundation.NSArray[metal.MTLTexture], unsafe.Pointer)) {
+func (o *MTKTextureLoader) NewTexturesWithContentsOfURLsOptionsCompletionHandler(urls *foundation.NSArray[*foundation.NSURL], options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*foundation.NSArray[metal.MTLTexture], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
 		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
@@ -111,7 +111,7 @@ func (o *MTKTextureLoader) NewTexturesWithContentsOfURLsOptionsCompletionHandler
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mTKTextureLoaderSelNewTexturesWithContentsOfURLsOptionsCompletionHandler, uRLs.Ptr(), options.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_mTKTextureLoaderSelNewTexturesWithContentsOfURLsOptionsCompletionHandler, urls.Ptr(), options.Ptr(), __block_completionHandler)
 }
 
 // Asynchronously loads image data and creates Metal textures from the specified list of named texture assets in an asset catalog.
@@ -181,9 +181,9 @@ func (o *MTKTextureLoader) NewTextureWithMDLTextureOptionsCompletionHandler(text
 }
 
 // Synchronously loads image data and creates a new Metal texture from a given URL.
-func (o *MTKTextureLoader) NewTextureWithContentsOfURLOptionsError(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error) {
+func (o *MTKTextureLoader) NewTextureWithContentsOfURLOptionsError(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithContentsOfURLOptionsError, uRL.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[metal.MTLTexture](o.Ptr(), _mTKTextureLoaderSelNewTextureWithContentsOfURLOptionsError, url.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -191,9 +191,9 @@ func (o *MTKTextureLoader) NewTextureWithContentsOfURLOptionsError(uRL *foundati
 }
 
 // Synchronously loads image data and creates new Metal textures from the specified list of URLs.
-func (o *MTKTextureLoader) NewTexturesWithContentsOfURLsOptionsError(uRLs *foundation.NSArray[*foundation.NSURL], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSArray[metal.MTLTexture], error) {
+func (o *MTKTextureLoader) NewTexturesWithContentsOfURLsOptionsError(urls *foundation.NSArray[*foundation.NSURL], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSArray[metal.MTLTexture], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _mTKTextureLoaderSelNewTexturesWithContentsOfURLsOptionsError, uRLs.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTKTextureLoaderSelNewTexturesWithContentsOfURLsOptionsError, urls.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

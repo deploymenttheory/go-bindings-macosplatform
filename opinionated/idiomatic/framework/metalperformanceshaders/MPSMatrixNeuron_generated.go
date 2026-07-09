@@ -5,10 +5,12 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -103,41 +105,48 @@ func (mn *MatrixNeuron) WithLabel(label string) *MatrixNeuron {
 
 // NeuronParameterA returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mn *MatrixNeuron) NeuronParameterA() float32 {
+	defer runtime.KeepAlive(mn)
 	_r := objc.Send[float32](objref.IDOf(mn), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
 // NeuronParameterB returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mn *MatrixNeuron) NeuronParameterB() float32 {
+	defer runtime.KeepAlive(mn)
 	_r := objc.Send[float32](objref.IDOf(mn), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
 // NeuronParameterC returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mn *MatrixNeuron) NeuronParameterC() float32 {
+	defer runtime.KeepAlive(mn)
 	_r := objc.Send[float32](objref.IDOf(mn), objc.RegisterName("neuronParameterC"))
 	return _r
 }
 
 // SetNeuronToPReLUWithParametersA add per output value neuron parameters A for PReLu neuron activation functions. This method sets the neuron to PReLU, zeros parameters A and B and sets the per output value neuron parameters A to an array containing a unique value of A for each output value. If the neuron function is f(v,a,b), it will apply resultMatrix(i, j) = f( input(i, j), A[j], B[j] ) where j in [0, sourceInputFeatureChannels] See https://arxiv.org/pdf/1502.01852.pdf for details. All other neuron types, where parameter A and parameter B are shared across output values must be set using -setNeuronType:parameterA:parameterB:
-func (mn *MatrixNeuron) SetNeuronToPReLUWithParametersA(a obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mn), objc.RegisterName("setNeuronToPReLUWithParametersA:"), objref.IDOf(a))
+func (mn *MatrixNeuron) SetNeuronToPReLUWithParametersA(a []byte) {
+	defer runtime.KeepAlive(mn)
+	objc.Send[objc.ID](objref.IDOf(mn), objc.RegisterName("setNeuronToPReLUWithParametersA:"), rt.BytesToNSData(a))
 }
 
 // SourceNumberOfFeatureVectors returns the number of input vectors which make up the input array.  This is equivalent to the number of rows to consider from the primary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available number of inputs is used.  The value of NSUIntegerMax thus indicates that all available input rows (beginning at sourceMatrixOrigin.x) should be considered.
 func (mn *MatrixNeuron) SourceNumberOfFeatureVectors() int {
+	defer runtime.KeepAlive(mn)
 	_r := objc.Send[int](objref.IDOf(mn), objc.RegisterName("sourceNumberOfFeatureVectors"))
 	return _r
 }
 
 // SourceInputFeatureChannels returns the input size to to use in the operation.  This is equivalent to the number of columns in the primary (input array) source matrix to consider and the number of channels to produce for the output matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available input size is used. The value of NSUIntegerMax thus indicates that all available columns in the input array (beginning at sourceMatrixOrigin.y) should be considered. Defines also the number of output feature channels. Note: The value used in the operation will be MIN(inputMatrix.columns - sourceMatrixOrigin.y, sourceInputFeatureChannels)
 func (mn *MatrixNeuron) SourceInputFeatureChannels() int {
+	defer runtime.KeepAlive(mn)
 	_r := objc.Send[int](objref.IDOf(mn), objc.RegisterName("sourceInputFeatureChannels"))
 	return _r
 }
 
 // Alpha returns the scale factor to apply to the input.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (mn *MatrixNeuron) Alpha() float64 {
+	defer runtime.KeepAlive(mn)
 	_r := objc.Send[float64](objref.IDOf(mn), objc.RegisterName("alpha"))
 	return _r
 }

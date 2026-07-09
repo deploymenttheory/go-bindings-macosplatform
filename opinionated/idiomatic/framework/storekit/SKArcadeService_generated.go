@@ -5,6 +5,8 @@
 package storekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func arcadeServiceAdopt(id objc.ID) *ArcadeService {
 
 // Description returns the object's -description text.
 func (as *ArcadeService) Description() string {
+	defer runtime.KeepAlive(as)
 	return rt.Description(objref.IDOf(as))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (as *ArcadeService) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(as), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (as *ArcadeService) IsKind(className string) bool {
+	defer runtime.KeepAlive(as)
 	return rt.IsKind(objref.IDOf(as), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (as *ArcadeService) String() string {
+	defer runtime.KeepAlive(as)
 	return rt.Description(objref.IDOf(as))
 }
 

@@ -6,11 +6,13 @@ package spritekit
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -151,12 +153,14 @@ func Group(actions []*Action) *Action {
 
 // RepeatActionCount creates an action that repeats another action a specified number of times
 func RepeatActionCount(action *Action, count int) *Action {
+	defer runtime.KeepAlive(action)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("repeatAction:count:"), objref.IDOf(action), count)
 	return ActionFromID(_r)
 }
 
 // RepeatActionForever creates an action that repeats forever
 func RepeatActionForever(action *Action) *Action {
+	defer runtime.KeepAlive(action)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("repeatActionForever:"), objref.IDOf(action))
 	return ActionFromID(_r)
 }
@@ -199,24 +203,28 @@ func Unhide() *Action {
 
 // SetTexture creates an action that changes a sprite’s texture
 func SetTexture(texture *Texture) *Action {
+	defer runtime.KeepAlive(texture)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("setTexture:"), objref.IDOf(texture))
 	return ActionFromID(_r)
 }
 
 // SetNormalTexture wraps the corresponding Objective-C method.
 func SetNormalTexture(texture *Texture) *Action {
+	defer runtime.KeepAlive(texture)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("setNormalTexture:"), objref.IDOf(texture))
 	return ActionFromID(_r)
 }
 
 // SetTextureResize creates an action that changes a sprite’s texture, possibly resizing the sprite
 func SetTextureResize(texture *Texture, resize bool) *Action {
+	defer runtime.KeepAlive(texture)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("setTexture:resize:"), objref.IDOf(texture), resize)
 	return ActionFromID(_r)
 }
 
 // SetNormalTextureResize wraps the corresponding Objective-C method.
 func SetNormalTextureResize(texture *Texture, resize bool) *Action {
+	defer runtime.KeepAlive(texture)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("setNormalTexture:resize:"), objref.IDOf(texture), resize)
 	return ActionFromID(_r)
 }
@@ -253,6 +261,7 @@ func PlaySoundFileNamedWaitForCompletion(soundFile string, wait bool) *Action {
 
 // ColorizeWithColorColorBlendFactorDuration creates an animation that animates a sprite’s color and blend factor
 func ColorizeWithColorColorBlendFactorDuration(color obj.Object, colorBlendFactor float64, duration float64) *Action {
+	defer runtime.KeepAlive(color)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("colorizeWithColor:colorBlendFactor:duration:"), objref.IDOf(color), colorBlendFactor, duration)
 	return ActionFromID(_r)
 }
@@ -277,24 +286,28 @@ func FalloffByDuration(falloff float32, duration float64) *Action {
 
 // FollowPathDuration creates an action that moves the node along a relative path, orienting the node to the path
 func FollowPathDuration(path obj.Object, duration float64) *Action {
+	defer runtime.KeepAlive(path)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("followPath:duration:"), objref.IDOf(path), duration)
 	return ActionFromID(_r)
 }
 
 // FollowPathAsOffsetOrientToPathDuration creates an action that moves the node along a path
 func FollowPathAsOffsetOrientToPathDuration(path obj.Object, offset bool, orient bool, duration float64) *Action {
+	defer runtime.KeepAlive(path)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("followPath:asOffset:orientToPath:duration:"), objref.IDOf(path), offset, orient, duration)
 	return ActionFromID(_r)
 }
 
 // FollowPathSpeed creates an action that moves the node along a relative path, orienting the node to the path
 func FollowPathSpeed(path obj.Object, speed float64) *Action {
+	defer runtime.KeepAlive(path)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("followPath:speed:"), objref.IDOf(path), speed)
 	return ActionFromID(_r)
 }
 
 // FollowPathAsOffsetOrientToPathSpeed wraps the corresponding Objective-C method.
 func FollowPathAsOffsetOrientToPathSpeed(path obj.Object, offset bool, orient bool, speed float64) *Action {
+	defer runtime.KeepAlive(path)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("followPath:asOffset:orientToPath:speed:"), objref.IDOf(path), offset, orient, speed)
 	return ActionFromID(_r)
 }
@@ -313,24 +326,30 @@ func SpeedToDuration(speed float64, duration float64) *Action {
 
 // ReachToRootNodeDuration creates an action that performs an inverse kinematic reach. This action must be run on a descendent of the rootNode for animation to occur. Running this action on the rootNode itself will not cause any animation to occur.
 func ReachToRootNodeDuration(position corefoundation.CGPoint, root *Node, duration float64) *Action {
+	defer runtime.KeepAlive(root)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("reachTo:rootNode:duration:"), position, objref.IDOf(root), duration)
 	return ActionFromID(_r)
 }
 
 // ReachToRootNodeVelocity creates an action that performs an inverse kinematic reach. This action must be run on a descendent of the rootNode for animation to occur. Running this action on the rootNode itself will not cause any animation to occur.
 func ReachToRootNodeVelocity(position corefoundation.CGPoint, root *Node, velocity float64) *Action {
+	defer runtime.KeepAlive(root)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("reachTo:rootNode:velocity:"), position, objref.IDOf(root), velocity)
 	return ActionFromID(_r)
 }
 
 // ReachToNodeRootNodeDuration creates an action that performs an inverse kinematic reach. This action must be run on a descendent of the rootNode for animation to occur. Running this action on the rootNode itself will not cause any animation to occur.
 func ReachToNodeRootNodeDuration(node *Node, root *Node, sec float64) *Action {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(root)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("reachToNode:rootNode:duration:"), objref.IDOf(node), objref.IDOf(root), sec)
 	return ActionFromID(_r)
 }
 
 // ReachToNodeRootNodeVelocity creates an action that performs an inverse kinematic reach. This action must be run on a descendent of the rootNode for animation to occur. Running this action on the rootNode itself will not cause any animation to occur.
 func ReachToNodeRootNodeVelocity(node *Node, root *Node, velocity float64) *Action {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(root)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("reachToNode:rootNode:velocity:"), objref.IDOf(node), objref.IDOf(root), velocity)
 	return ActionFromID(_r)
 }
@@ -373,12 +392,14 @@ func RunBlock(block func()) *Action {
 
 // RunBlockQueue creates an action that executes a block
 func RunBlockQueue(block func(), queue obj.Object) *Action {
+	defer runtime.KeepAlive(queue)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("runBlock:queue:"), block, objref.IDOf(queue))
 	return ActionFromID(_r)
 }
 
 // RunActionOnChildWithName creates an action that runs an action on a named child object
 func RunActionOnChildWithName(action *Action, name string) *Action {
+	defer runtime.KeepAlive(action)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("runAction:onChildWithName:"), objref.IDOf(action), purego.NSString(name))
 	return ActionFromID(_r)
 }
@@ -517,19 +538,20 @@ func ChangeVolumeByDuration(v float32, duration float64) *Action {
 
 // WarpToDuration wraps the corresponding Objective-C method.
 func WarpToDuration(warp *WarpGeometry, duration float64) *Action {
+	defer runtime.KeepAlive(warp)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("warpTo:duration:"), objref.IDOf(warp), duration)
 	return ActionFromID(_r)
 }
 
 // AnimateWithWarpsTimes wraps the corresponding Objective-C method.
-func AnimateWithWarpsTimes(warps []*WarpGeometry, times []obj.Object) *Action {
-	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("animateWithWarps:times:"), purego.SliceToNSArray(warps, func(_v *WarpGeometry) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(times, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func AnimateWithWarpsTimes(warps []*WarpGeometry, times []*foundation.Number) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("animateWithWarps:times:"), purego.SliceToNSArray(warps, func(_v *WarpGeometry) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(times, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return ActionFromID(_r)
 }
 
 // AnimateWithWarpsTimesRestore wraps the corresponding Objective-C method.
-func AnimateWithWarpsTimesRestore(warps []*WarpGeometry, times []obj.Object, restore bool) *Action {
-	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("animateWithWarps:times:restore:"), purego.SliceToNSArray(warps, func(_v *WarpGeometry) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(times, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), restore)
+func AnimateWithWarpsTimesRestore(warps []*WarpGeometry, times []*foundation.Number, restore bool) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("animateWithWarps:times:restore:"), purego.SliceToNSArray(warps, func(_v *WarpGeometry) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(times, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), restore)
 	return ActionFromID(_r)
 }
 
@@ -613,60 +635,75 @@ func ValueWithVectorFloat4(value unsafe.Pointer) *AttributeValue {
 
 // PositionX creates a constraint that restricts the x-coordinate of a node’s position.
 func PositionX(range_ *Range) *Constraint {
+	defer runtime.KeepAlive(range_)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("positionX:"), objref.IDOf(range_))
 	return ConstraintFromID(_r)
 }
 
 // PositionY creates a constraint that restricts the y-coordinate of a node’s position.
 func PositionY(range_ *Range) *Constraint {
+	defer runtime.KeepAlive(range_)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("positionY:"), objref.IDOf(range_))
 	return ConstraintFromID(_r)
 }
 
 // PositionXY creates a constraint that restricts both coordinates of a node’s position.
 func PositionXY(xRange *Range, yRange *Range) *Constraint {
+	defer runtime.KeepAlive(xRange)
+	defer runtime.KeepAlive(yRange)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("positionX:Y:"), objref.IDOf(xRange), objref.IDOf(yRange))
 	return ConstraintFromID(_r)
 }
 
 // DistanceToNode creates a constraint that keeps a node within a certain distance of another node.
 func DistanceToNode(range_ *Range, node *Node) *Constraint {
+	defer runtime.KeepAlive(range_)
+	defer runtime.KeepAlive(node)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("distance:toNode:"), objref.IDOf(range_), objref.IDOf(node))
 	return ConstraintFromID(_r)
 }
 
 // DistanceToPoint creates a constraint that keeps a node within a certain distance of a point.
 func DistanceToPoint(range_ *Range, point corefoundation.CGPoint) *Constraint {
+	defer runtime.KeepAlive(range_)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("distance:toPoint:"), objref.IDOf(range_), point)
 	return ConstraintFromID(_r)
 }
 
 // DistanceToPointInNode creates a constraint that keeps a node within a certain distance of a point in another node’s coordinate system.
 func DistanceToPointInNode(range_ *Range, point corefoundation.CGPoint, node *Node) *Constraint {
+	defer runtime.KeepAlive(range_)
+	defer runtime.KeepAlive(node)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("distance:toPoint:inNode:"), objref.IDOf(range_), point, objref.IDOf(node))
 	return ConstraintFromID(_r)
 }
 
 // ZRotation creates a constraint that limits the orientation of a node.
 func ZRotation(zRange *Range) *Constraint {
+	defer runtime.KeepAlive(zRange)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("zRotation:"), objref.IDOf(zRange))
 	return ConstraintFromID(_r)
 }
 
 // OrientToNodeOffset creates a constraint that forces a node to rotate to face another node.
 func OrientToNodeOffset(node *Node, radians *Range) *Constraint {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(radians)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("orientToNode:offset:"), objref.IDOf(node), objref.IDOf(radians))
 	return ConstraintFromID(_r)
 }
 
 // OrientToPointOffset creates a constraint that forces a node to rotate to face a fixed point.
 func OrientToPointOffset(point corefoundation.CGPoint, radians *Range) *Constraint {
+	defer runtime.KeepAlive(radians)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("orientToPoint:offset:"), point, objref.IDOf(radians))
 	return ConstraintFromID(_r)
 }
 
 // OrientToPointInNodeOffset creates a constraint that forces a node to rotate to face a point in another node’s coordinate system.
 func OrientToPointInNodeOffset(point corefoundation.CGPoint, node *Node, radians *Range) *Constraint {
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(radians)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("orientToPoint:inNode:offset:"), point, objref.IDOf(node), objref.IDOf(radians))
 	return ConstraintFromID(_r)
 }
@@ -703,6 +740,7 @@ func VelocityFieldWithVector(direction unsafe.Pointer) *FieldNode {
 
 // VelocityFieldWithTexture creates a field node that sets the velocity of physics bodies that enter the node’s area based on the pixel values of a texture.
 func VelocityFieldWithTexture(velocityTexture *Texture) *FieldNode {
+	defer runtime.KeepAlive(velocityTexture)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKFieldNode")), objc.RegisterName("velocityFieldWithTexture:"), objref.IDOf(velocityTexture))
 	return FieldNodeFromID(_r)
 }
@@ -745,6 +783,7 @@ func LabelNodeWithText(text string) *LabelNode {
 
 // LabelNodeWithAttributedText initializes a new label object with an attributed text string.
 func LabelNodeWithAttributedText(attributedText obj.Object) *LabelNode {
+	defer runtime.KeepAlive(attributedText)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKLabelNode")), objc.RegisterName("labelNodeWithAttributedText:"), objref.IDOf(attributedText))
 	return LabelNodeFromID(_r)
 }
@@ -773,10 +812,10 @@ func NodeWithFileNamed(filename string) *Node {
 	return NodeFromID(_r)
 }
 
-// NodeWithFileNamedSecurelyWithClassesAndError wraps the corresponding Objective-C method.
-func NodeWithFileNamedSecurelyWithClassesAndError(filename string, classes obj.Object) (result *Node, err error) {
+// NodeWithFileNamedSecurelyWithClassesAnd wraps the corresponding Objective-C method.
+func NodeWithFileNamedSecurelyWithClassesAnd(filename string, classes []obj.Object) (result *Node, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("SKNode")), objc.RegisterName("nodeWithFileNamed:securelyWithClasses:andError:"), purego.NSString(filename), objref.IDOf(classes), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("SKNode")), objc.RegisterName("nodeWithFileNamed:securelyWithClasses:andError:"), purego.NSString(filename), rt.SliceToNSSet(classes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -809,6 +848,7 @@ func BodyWithRectangleOfSizeCenter(s corefoundation.CGSize, center corefoundatio
 
 // BodyWithPolygonFromPath creates a polygonal physics body.
 func BodyWithPolygonFromPath(path obj.Object) *PhysicsBody {
+	defer runtime.KeepAlive(path)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithPolygonFromPath:"), objref.IDOf(path))
 	return PhysicsBodyFromID(_r)
 }
@@ -821,12 +861,14 @@ func BodyWithEdgeFromPointToPoint(p1 corefoundation.CGPoint, p2 corefoundation.C
 
 // BodyWithEdgeChainFromPath creates an edge chain from a path.
 func BodyWithEdgeChainFromPath(path obj.Object) *PhysicsBody {
+	defer runtime.KeepAlive(path)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithEdgeChainFromPath:"), objref.IDOf(path))
 	return PhysicsBodyFromID(_r)
 }
 
 // BodyWithEdgeLoopFromPath creates an edge loop from a path.
 func BodyWithEdgeLoopFromPath(path obj.Object) *PhysicsBody {
+	defer runtime.KeepAlive(path)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithEdgeLoopFromPath:"), objref.IDOf(path))
 	return PhysicsBodyFromID(_r)
 }
@@ -839,12 +881,14 @@ func BodyWithEdgeLoopFromRect(rect corefoundation.CGRect) *PhysicsBody {
 
 // BodyWithTextureSize creates a physics body from the contents of a texture.
 func BodyWithTextureSize(texture *Texture, size corefoundation.CGSize) *PhysicsBody {
+	defer runtime.KeepAlive(texture)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithTexture:size:"), objref.IDOf(texture), size)
 	return PhysicsBodyFromID(_r)
 }
 
 // BodyWithTextureAlphaThresholdSize creates a physics body from the contents of a texture, capturing only the texels that exceed a specified transparency value.
 func BodyWithTextureAlphaThresholdSize(texture *Texture, alphaThreshold float32, size corefoundation.CGSize) *PhysicsBody {
+	defer runtime.KeepAlive(texture)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithTexture:alphaThreshold:size:"), objref.IDOf(texture), alphaThreshold, size)
 	return PhysicsBodyFromID(_r)
 }
@@ -857,30 +901,40 @@ func BodyWithBodies(bodies []*PhysicsBody) *PhysicsBody {
 
 // JointWithBodyABodyBAnchor creates a new fixed joint.
 func JointWithBodyABodyBAnchor(bodyA *PhysicsBody, bodyB *PhysicsBody, anchor corefoundation.CGPoint) *PhysicsJointFixed {
+	defer runtime.KeepAlive(bodyA)
+	defer runtime.KeepAlive(bodyB)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsJointFixed")), objc.RegisterName("jointWithBodyA:bodyB:anchor:"), objref.IDOf(bodyA), objref.IDOf(bodyB), anchor)
 	return PhysicsJointFixedFromID(_r)
 }
 
 // JointWithBodyABodyBAnchorAAnchorB creates a new limit joint.
 func JointWithBodyABodyBAnchorAAnchorB(bodyA *PhysicsBody, bodyB *PhysicsBody, anchorA corefoundation.CGPoint, anchorB corefoundation.CGPoint) *PhysicsJointLimit {
+	defer runtime.KeepAlive(bodyA)
+	defer runtime.KeepAlive(bodyB)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsJointLimit")), objc.RegisterName("jointWithBodyA:bodyB:anchorA:anchorB:"), objref.IDOf(bodyA), objref.IDOf(bodyB), anchorA, anchorB)
 	return PhysicsJointLimitFromID(_r)
 }
 
 // SKPhysicsJointPinJointWithBodyABodyBAnchor creates a new pin joint.
 func SKPhysicsJointPinJointWithBodyABodyBAnchor(bodyA *PhysicsBody, bodyB *PhysicsBody, anchor corefoundation.CGPoint) *PhysicsJointPin {
+	defer runtime.KeepAlive(bodyA)
+	defer runtime.KeepAlive(bodyB)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsJointPin")), objc.RegisterName("jointWithBodyA:bodyB:anchor:"), objref.IDOf(bodyA), objref.IDOf(bodyB), anchor)
 	return PhysicsJointPinFromID(_r)
 }
 
 // JointWithBodyABodyBAnchorAxis creates a new sliding joint.
 func JointWithBodyABodyBAnchorAxis(bodyA *PhysicsBody, bodyB *PhysicsBody, anchor corefoundation.CGPoint, axis corefoundation.CGVector) *PhysicsJointSliding {
+	defer runtime.KeepAlive(bodyA)
+	defer runtime.KeepAlive(bodyB)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsJointSliding")), objc.RegisterName("jointWithBodyA:bodyB:anchor:axis:"), objref.IDOf(bodyA), objref.IDOf(bodyB), anchor, axis)
 	return PhysicsJointSlidingFromID(_r)
 }
 
 // SKPhysicsJointSpringJointWithBodyABodyBAnchorAAnchorB creates a new spring joint.
 func SKPhysicsJointSpringJointWithBodyABodyBAnchorAAnchorB(bodyA *PhysicsBody, bodyB *PhysicsBody, anchorA corefoundation.CGPoint, anchorB corefoundation.CGPoint) *PhysicsJointSpring {
+	defer runtime.KeepAlive(bodyA)
+	defer runtime.KeepAlive(bodyB)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsJointSpring")), objc.RegisterName("jointWithBodyA:bodyB:anchorA:anchorB:"), objref.IDOf(bodyA), objref.IDOf(bodyB), anchorA, anchorB)
 	return PhysicsJointSpringFromID(_r)
 }
@@ -971,12 +1025,14 @@ func ShaderWithFileNamed(name string) *Shader {
 
 // ShapeNodeWithPath creates a shape node from a Core Graphics path.
 func ShapeNodeWithPath(path obj.Object) *ShapeNode {
+	defer runtime.KeepAlive(path)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("shapeNodeWithPath:"), objref.IDOf(path))
 	return ShapeNodeFromID(_r)
 }
 
 // ShapeNodeWithPathCentered creates a shape node from a Core Graphics path, centered around its position.
 func ShapeNodeWithPathCentered(path obj.Object, centered bool) *ShapeNode {
+	defer runtime.KeepAlive(path)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("shapeNodeWithPath:centered:"), objref.IDOf(path), centered)
 	return ShapeNodeFromID(_r)
 }
@@ -1025,18 +1081,22 @@ func ShapeNodeWithEllipseOfSize(size corefoundation.CGSize) *ShapeNode {
 
 // SpriteNodeWithTextureSize initializes a textured sprite using an existing texture object but with a specified size.
 func SpriteNodeWithTextureSize(texture *Texture, size corefoundation.CGSize) *SpriteNode {
+	defer runtime.KeepAlive(texture)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("spriteNodeWithTexture:size:"), objref.IDOf(texture), size)
 	return SpriteNodeFromID(_r)
 }
 
 // SpriteNodeWithTexture initializes a textured sprite using an existing texture object.
 func SpriteNodeWithTexture(texture *Texture) *SpriteNode {
+	defer runtime.KeepAlive(texture)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("spriteNodeWithTexture:"), objref.IDOf(texture))
 	return SpriteNodeFromID(_r)
 }
 
 // SpriteNodeWithTextureNormalMap initializes a textured sprite with a normal map to simulate 3D lighting.
 func SpriteNodeWithTextureNormalMap(texture *Texture, normalMap *Texture) *SpriteNode {
+	defer runtime.KeepAlive(texture)
+	defer runtime.KeepAlive(normalMap)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("spriteNodeWithTexture:normalMap:"), objref.IDOf(texture), objref.IDOf(normalMap))
 	return SpriteNodeFromID(_r)
 }
@@ -1055,6 +1115,7 @@ func SpriteNodeWithImageNamedNormalMapped(name string, generateNormalMap bool) *
 
 // SpriteNodeWithColorSize initializes a single-color sprite.
 func SpriteNodeWithColorSize(color obj.Object, size corefoundation.CGSize) *SpriteNode {
+	defer runtime.KeepAlive(color)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("spriteNodeWithColor:size:"), objref.IDOf(color), size)
 	return SpriteNodeFromID(_r)
 }
@@ -1067,6 +1128,7 @@ func TextureWithImageNamed(name string) *Texture {
 
 // TextureWithRectInTexture create a texture that is a subrect of an existing texture. See textureRect property for details.
 func TextureWithRectInTexture(rect corefoundation.CGRect, texture *Texture) *Texture {
+	defer runtime.KeepAlive(texture)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureWithRect:inTexture:"), rect, objref.IDOf(texture))
 	return TextureFromID(_r)
 }
@@ -1085,31 +1147,33 @@ func TextureNoiseWithSmoothnessSizeGrayscale(smoothness float64, size corefounda
 
 // TextureWithCGImage create a texture from a CGImageRef.
 func TextureWithCGImage(image obj.Object) *Texture {
+	defer runtime.KeepAlive(image)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureWithCGImage:"), objref.IDOf(image))
 	return TextureFromID(_r)
 }
 
 // TextureWithImage wraps the corresponding Objective-C method.
 func TextureWithImage(image obj.Object) *Texture {
+	defer runtime.KeepAlive(image)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureWithImage:"), objref.IDOf(image))
 	return TextureFromID(_r)
 }
 
 // TextureWithDataSize create new texture with bitmap RGBA data in unsigned bytes. Data is copied once, additional changes to the data does not affect the texture. All pixel data is assumed to be premultiplied alpha.
-func TextureWithDataSize(pixelData obj.Object, size corefoundation.CGSize) *Texture {
-	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureWithData:size:"), objref.IDOf(pixelData), size)
+func TextureWithDataSize(pixelData []byte, size corefoundation.CGSize) *Texture {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureWithData:size:"), rt.BytesToNSData(pixelData), size)
 	return TextureFromID(_r)
 }
 
 // TextureWithDataSizeFlipped wraps the corresponding Objective-C method.
-func TextureWithDataSizeFlipped(pixelData obj.Object, size corefoundation.CGSize, flipped bool) *Texture {
-	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureWithData:size:flipped:"), objref.IDOf(pixelData), size, flipped)
+func TextureWithDataSizeFlipped(pixelData []byte, size corefoundation.CGSize, flipped bool) *Texture {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureWithData:size:flipped:"), rt.BytesToNSData(pixelData), size, flipped)
 	return TextureFromID(_r)
 }
 
 // TextureWithDataSizeRowLengthAlignment create new texture with bitmap RGBA data in unsigned bytes using a custom row length and row alignment. Data is copied once, additional changes to the data does not affect the texture. All pixel data is assumed to be premultiplied alpha.
-func TextureWithDataSizeRowLengthAlignment(pixelData obj.Object, size corefoundation.CGSize, rowLength int, alignment int) *Texture {
-	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureWithData:size:rowLength:alignment:"), objref.IDOf(pixelData), size, rowLength, alignment)
+func TextureWithDataSizeRowLengthAlignment(pixelData []byte, size corefoundation.CGSize, rowLength int, alignment int) *Texture {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureWithData:size:rowLength:alignment:"), rt.BytesToNSData(pixelData), size, rowLength, alignment)
 	return TextureFromID(_r)
 }
 
@@ -1137,8 +1201,8 @@ func AtlasNamed(name string) *TextureAtlas {
 }
 
 // AtlasWithDictionary creates a texture atlas from a set of image files.
-func AtlasWithDictionary(properties obj.Object) *TextureAtlas {
-	_r := objc.Send[objc.ID](objc.ID(_class("SKTextureAtlas")), objc.RegisterName("atlasWithDictionary:"), objref.IDOf(properties))
+func AtlasWithDictionary(properties map[string]obj.Object) *TextureAtlas {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTextureAtlas")), objc.RegisterName("atlasWithDictionary:"), rt.MapToDict(properties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return TextureAtlasFromID(_r)
 }
 
@@ -1186,18 +1250,22 @@ func PreloadTextureAtlasesNamed(ctx context.Context, atlasNames []string) (resul
 
 // TileDefinitionWithTexture create a tile definition with an SKTexture, and set its size to the SKTexture's width/height.
 func TileDefinitionWithTexture(texture *Texture) *TileDefinition {
+	defer runtime.KeepAlive(texture)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKTileDefinition")), objc.RegisterName("tileDefinitionWithTexture:"), objref.IDOf(texture))
 	return TileDefinitionFromID(_r)
 }
 
 // TileDefinitionWithTextureSize create a tile definition with an SKTexture and the specified size.
 func TileDefinitionWithTextureSize(texture *Texture, size corefoundation.CGSize) *TileDefinition {
+	defer runtime.KeepAlive(texture)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKTileDefinition")), objc.RegisterName("tileDefinitionWithTexture:size:"), objref.IDOf(texture), size)
 	return TileDefinitionFromID(_r)
 }
 
 // TileDefinitionWithTextureNormalTextureSize create a tile definition with an SKTexture and the specified size.
 func TileDefinitionWithTextureNormalTextureSize(texture *Texture, normalTexture *Texture, size corefoundation.CGSize) *TileDefinition {
+	defer runtime.KeepAlive(texture)
+	defer runtime.KeepAlive(normalTexture)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKTileDefinition")), objc.RegisterName("tileDefinitionWithTexture:normalTexture:size:"), objref.IDOf(texture), objref.IDOf(normalTexture), size)
 	return TileDefinitionFromID(_r)
 }
@@ -1216,6 +1284,7 @@ func TileDefinitionWithTexturesNormalTexturesSizeTimePerFrame(textures []*Textur
 
 // TileGroupWithTileDefinition create a simple tile group for a single tile definition. This creates and initializes the SKTileGroupRule necessary to place the provided tile definition in a tile map.
 func TileGroupWithTileDefinition(tileDefinition *TileDefinition) *TileGroup {
+	defer runtime.KeepAlive(tileDefinition)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKTileGroup")), objc.RegisterName("tileGroupWithTileDefinition:"), objref.IDOf(tileDefinition))
 	return TileGroupFromID(_r)
 }
@@ -1240,18 +1309,22 @@ func TileGroupRuleWithAdjacencyTileDefinitions(adjacency TileAdjacencyMask, tile
 
 // TileMapNodeWithTileSetColumnsRowsTileSize create a tile map node with the specified tile set and dimensions. The tiles of the map will be empty, equivalent to the nil tile definition/group.
 func TileMapNodeWithTileSetColumnsRowsTileSize(tileSet *TileSet, columns int, rows int, tileSize corefoundation.CGSize) *TileMapNode {
+	defer runtime.KeepAlive(tileSet)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKTileMapNode")), objc.RegisterName("tileMapNodeWithTileSet:columns:rows:tileSize:"), objref.IDOf(tileSet), columns, rows, tileSize)
 	return TileMapNodeFromID(_r)
 }
 
 // TileMapNodeWithTileSetColumnsRowsTileSizeFillWithTileGroup create a tile map node with the specified tile set and dimensions, and fill it with the specified tile group.
 func TileMapNodeWithTileSetColumnsRowsTileSizeFillWithTileGroup(tileSet *TileSet, columns int, rows int, tileSize corefoundation.CGSize, tileGroup *TileGroup) *TileMapNode {
+	defer runtime.KeepAlive(tileSet)
+	defer runtime.KeepAlive(tileGroup)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKTileMapNode")), objc.RegisterName("tileMapNodeWithTileSet:columns:rows:tileSize:fillWithTileGroup:"), objref.IDOf(tileSet), columns, rows, tileSize, objref.IDOf(tileGroup))
 	return TileMapNodeFromID(_r)
 }
 
 // TileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout create a tile map node with the specified tile set and dimensions, and fill it with a specific layout of tile groups that belong to the provided tile set. The tileGroupLayout array should match the dimensions of the tile map (i.e., the number of elements should be equal to columns * rows). Index 0 of the array maps to column 0, row 0 of the tile map. Index 1 is column 1, row 0, and so on, wrapping around to the next row once the index passes the number of columns in the tile map. If the array has fewer elements than the number of tiles in the map, the remaining tiles are initialized with the nil tile group. If the array has more elements than the number of tiles in the map, the extra tile groups are ignored.
 func TileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout(tileSet *TileSet, columns int, rows int, tileSize corefoundation.CGSize, tileGroupLayout []*TileGroup) *TileMapNode {
+	defer runtime.KeepAlive(tileSet)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKTileMapNode")), objc.RegisterName("tileMapNodeWithTileSet:columns:rows:tileSize:tileGroupLayout:"), objref.IDOf(tileSet), columns, rows, tileSize, purego.SliceToNSArray(tileGroupLayout, func(_v *TileGroup) objc.ID { return objref.IDOf(_v) }))
 	return TileMapNodeFromID(_r)
 }
@@ -1294,6 +1367,7 @@ func FadeWithDuration(sec float64) *Transition {
 
 // FadeWithColorDuration creates a transition that first fades to a constant color and then fades to the new scene.
 func FadeWithColorDuration(color obj.Object, sec float64) *Transition {
+	defer runtime.KeepAlive(color)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKTransition")), objc.RegisterName("fadeWithColor:duration:"), objref.IDOf(color), sec)
 	return TransitionFromID(_r)
 }
@@ -1360,6 +1434,7 @@ func DoorwayWithDuration(sec float64) *Transition {
 
 // TransitionWithCIFilterDuration creates a transition that uses a Core Image filter to perform the transition.
 func TransitionWithCIFilterDuration(filter obj.Object, sec float64) *Transition {
+	defer runtime.KeepAlive(filter)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKTransition")), objc.RegisterName("transitionWithCIFilter:duration:"), objref.IDOf(filter), sec)
 	return TransitionFromID(_r)
 }
@@ -1372,6 +1447,7 @@ func UniformWithName(name string) *Uniform {
 
 // UniformWithNameTexture creates and initializes a new uniform object that holds a reference to a texture.
 func UniformWithNameTexture(name string, texture *Texture) *Uniform {
+	defer runtime.KeepAlive(texture)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("uniformWithName:texture:"), purego.NSString(name), objref.IDOf(texture))
 	return UniformFromID(_r)
 }
@@ -1456,6 +1532,7 @@ func UniformWithNameFloatMatrix4(name string, value unsafe.Pointer) *Uniform {
 
 // VideoNodeWithAVPlayer creates and initializes a video node using an existing video player object.
 func VideoNodeWithAVPlayer(player obj.Object) *VideoNode {
+	defer runtime.KeepAlive(player)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("videoNodeWithAVPlayer:"), objref.IDOf(player))
 	return VideoNodeFromID(_r)
 }

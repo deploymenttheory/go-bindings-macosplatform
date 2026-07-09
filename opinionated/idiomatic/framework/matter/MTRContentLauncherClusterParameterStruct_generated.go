@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func mTRContentLauncherClusterParameterStructAdopt(id objc.ID) *MTRContentLaunch
 
 // Description returns the object's -description text.
 func (mclcps *MTRContentLauncherClusterParameterStruct) Description() string {
+	defer runtime.KeepAlive(mclcps)
 	return rt.Description(objref.IDOf(mclcps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mclcps *MTRContentLauncherClusterParameterStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mclcps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mclcps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mclcps *MTRContentLauncherClusterParameterStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mclcps)
 	return rt.IsKind(objref.IDOf(mclcps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mclcps *MTRContentLauncherClusterParameterStruct) String() string {
+	defer runtime.KeepAlive(mclcps)
 	return rt.Description(objref.IDOf(mclcps))
 }
 
 // WithType sets the type.
 func (mclcps *MTRContentLauncherClusterParameterStruct) WithType(type_ obj.Object) *MTRContentLauncherClusterParameterStruct {
+	defer runtime.KeepAlive(type_)
 	objc.Send[objc.ID](objref.IDOf(mclcps), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return mclcps
 }
@@ -79,13 +88,15 @@ func (mclcps *MTRContentLauncherClusterParameterStruct) WithValue(value string) 
 }
 
 // Type returns the type.
-func (mclcps *MTRContentLauncherClusterParameterStruct) Type() obj.Object {
+func (mclcps *MTRContentLauncherClusterParameterStruct) Type() *foundation.Number {
+	defer runtime.KeepAlive(mclcps)
 	_r := objc.Send[objc.ID](objref.IDOf(mclcps), objc.RegisterName("type"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Value returns the value.
 func (mclcps *MTRContentLauncherClusterParameterStruct) Value() string {
+	defer runtime.KeepAlive(mclcps)
 	_r := objc.Send[objc.ID](objref.IDOf(mclcps), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
@@ -95,12 +106,15 @@ func (mclcps *MTRContentLauncherClusterParameterStruct) Value() string {
 
 // ExternalIDList returns the external ID list.
 func (mclcps *MTRContentLauncherClusterParameterStruct) ExternalIDList() obj.Object {
+	defer runtime.KeepAlive(mclcps)
 	_r := objc.Send[objc.ID](objref.IDOf(mclcps), objc.RegisterName("externalIDList"))
 	return obj.Wrap(_r)
 }
 
 // SetExternalIDList wraps the corresponding Objective-C method.
 func (mclcps *MTRContentLauncherClusterParameterStruct) SetExternalIDList(externalIDList obj.Object) {
+	defer runtime.KeepAlive(mclcps)
+	defer runtime.KeepAlive(externalIDList)
 	objc.Send[objc.ID](objref.IDOf(mclcps), objc.RegisterName("setExternalIDList:"), objref.IDOf(externalIDList))
 }
 

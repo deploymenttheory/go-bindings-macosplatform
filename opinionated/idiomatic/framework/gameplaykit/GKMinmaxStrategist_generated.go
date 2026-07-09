@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func minmaxStrategistAdopt(id objc.ID) *MinmaxStrategist {
 
 // Description returns the object's -description text.
 func (ms *MinmaxStrategist) Description() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ms *MinmaxStrategist) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ms)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ms *MinmaxStrategist) IsKind(className string) bool {
+	defer runtime.KeepAlive(ms)
 	return rt.IsKind(objref.IDOf(ms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ms *MinmaxStrategist) String() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
@@ -80,6 +87,7 @@ func (ms *MinmaxStrategist) WithMaxLookAheadDepth(maxLookAheadDepth int) *Minmax
 
 // MaxLookAheadDepth returns the maximum number of future turns that will be processed when searching for a move.
 func (ms *MinmaxStrategist) MaxLookAheadDepth() int {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("maxLookAheadDepth"))
 	return _r
 }

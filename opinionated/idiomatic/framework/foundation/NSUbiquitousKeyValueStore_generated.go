@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func ubiquitousKeyValueStoreAdopt(id objc.ID) *UbiquitousKeyValueStore {
 
 // Description returns the object's -description text.
 func (ukvs *UbiquitousKeyValueStore) Description() string {
+	defer runtime.KeepAlive(ukvs)
 	return rt.Description(objref.IDOf(ukvs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ukvs *UbiquitousKeyValueStore) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ukvs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ukvs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ukvs *UbiquitousKeyValueStore) IsKind(className string) bool {
+	defer runtime.KeepAlive(ukvs)
 	return rt.IsKind(objref.IDOf(ukvs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ukvs *UbiquitousKeyValueStore) String() string {
+	defer runtime.KeepAlive(ukvs)
 	return rt.Description(objref.IDOf(ukvs))
 }
 
@@ -81,29 +87,34 @@ func (ukvs *UbiquitousKeyValueStore) WithObservationInfo(observationInfo unsafe.
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ukvs *UbiquitousKeyValueStore) WithScriptingProperties(scriptingProperties obj.Object) *UbiquitousKeyValueStore {
-	objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ukvs *UbiquitousKeyValueStore) WithScriptingProperties(scriptingProperties map[string]obj.Object) *UbiquitousKeyValueStore {
+	objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ukvs
 }
 
 // ObjectForKey returns the object associated with the specified key.
 func (ukvs *UbiquitousKeyValueStore) ObjectForKey(aKey string) obj.Object {
+	defer runtime.KeepAlive(ukvs)
 	_r := objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("objectForKey:"), purego.NSString(aKey))
 	return obj.Wrap(_r)
 }
 
 // SetObjectForKey sets the value of the specified key to a property list object.
 func (ukvs *UbiquitousKeyValueStore) SetObjectForKey(anObject obj.Object, aKey string) {
+	defer runtime.KeepAlive(ukvs)
+	defer runtime.KeepAlive(anObject)
 	objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("setObject:forKey:"), objref.IDOf(anObject), purego.NSString(aKey))
 }
 
 // RemoveObjectForKey removes the value for the specified key from the iCloud key-value store.
 func (ukvs *UbiquitousKeyValueStore) RemoveObjectForKey(aKey string) {
+	defer runtime.KeepAlive(ukvs)
 	objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("removeObjectForKey:"), purego.NSString(aKey))
 }
 
 // StringForKey returns the string associated with the specified key.
 func (ukvs *UbiquitousKeyValueStore) StringForKey(aKey string) string {
+	defer runtime.KeepAlive(ukvs)
 	_r := objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("stringForKey:"), purego.NSString(aKey))
 	if _r == 0 {
 		return ""
@@ -113,83 +124,99 @@ func (ukvs *UbiquitousKeyValueStore) StringForKey(aKey string) string {
 
 // ArrayForKey returns the array associated with the specified key.
 func (ukvs *UbiquitousKeyValueStore) ArrayForKey(aKey string) obj.Object {
+	defer runtime.KeepAlive(ukvs)
 	_r := objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("arrayForKey:"), purego.NSString(aKey))
 	return obj.Wrap(_r)
 }
 
 // DictionaryForKey returns the dictionary object associated with the specified key.
-func (ukvs *UbiquitousKeyValueStore) DictionaryForKey(aKey string) obj.Object {
+func (ukvs *UbiquitousKeyValueStore) DictionaryForKey(aKey string) map[string]obj.Object {
+	defer runtime.KeepAlive(ukvs)
 	_r := objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("dictionaryForKey:"), purego.NSString(aKey))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DataForKey returns the data object associated with the specified key.
-func (ukvs *UbiquitousKeyValueStore) DataForKey(aKey string) *Data {
+func (ukvs *UbiquitousKeyValueStore) DataForKey(aKey string) []byte {
+	defer runtime.KeepAlive(ukvs)
 	_r := objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("dataForKey:"), purego.NSString(aKey))
-	return DataFromID(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // LongLongForKey returns the 64-bit integer value associated with the specified key.
 func (ukvs *UbiquitousKeyValueStore) LongLongForKey(aKey string) int64 {
+	defer runtime.KeepAlive(ukvs)
 	_r := objc.Send[int64](objref.IDOf(ukvs), objc.RegisterName("longLongForKey:"), purego.NSString(aKey))
 	return _r
 }
 
 // DoubleForKey returns the double value associated with the specified key.
 func (ukvs *UbiquitousKeyValueStore) DoubleForKey(aKey string) float64 {
+	defer runtime.KeepAlive(ukvs)
 	_r := objc.Send[float64](objref.IDOf(ukvs), objc.RegisterName("doubleForKey:"), purego.NSString(aKey))
 	return _r
 }
 
 // BoolForKey returns the Boolean value associated with the specified key.
 func (ukvs *UbiquitousKeyValueStore) BoolForKey(aKey string) bool {
+	defer runtime.KeepAlive(ukvs)
 	_r := objc.Send[bool](objref.IDOf(ukvs), objc.RegisterName("boolForKey:"), purego.NSString(aKey))
 	return _r
 }
 
 // SetStringForKey sets the value of the specified key to a string value.
 func (ukvs *UbiquitousKeyValueStore) SetStringForKey(aString string, aKey string) {
+	defer runtime.KeepAlive(ukvs)
 	objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("setString:forKey:"), purego.NSString(aString), purego.NSString(aKey))
 }
 
 // SetDataForKey sets the value of the specified key to a data object.
-func (ukvs *UbiquitousKeyValueStore) SetDataForKey(aData *Data, aKey string) {
-	objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("setData:forKey:"), objref.IDOf(aData), purego.NSString(aKey))
+func (ukvs *UbiquitousKeyValueStore) SetDataForKey(aData []byte, aKey string) {
+	defer runtime.KeepAlive(ukvs)
+	objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("setData:forKey:"), rt.BytesToNSData(aData), purego.NSString(aKey))
 }
 
 // SetArrayForKey sets the value of the specified key to an array of property list objects.
 func (ukvs *UbiquitousKeyValueStore) SetArrayForKey(anArray obj.Object, aKey string) {
+	defer runtime.KeepAlive(ukvs)
+	defer runtime.KeepAlive(anArray)
 	objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("setArray:forKey:"), objref.IDOf(anArray), purego.NSString(aKey))
 }
 
 // SetDictionaryForKey sets the value of the specified key to a dictionary of property list objects.
-func (ukvs *UbiquitousKeyValueStore) SetDictionaryForKey(aDictionary obj.Object, aKey string) {
-	objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("setDictionary:forKey:"), objref.IDOf(aDictionary), purego.NSString(aKey))
+func (ukvs *UbiquitousKeyValueStore) SetDictionaryForKey(aDictionary map[string]obj.Object, aKey string) {
+	defer runtime.KeepAlive(ukvs)
+	objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("setDictionary:forKey:"), rt.MapToDict(aDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(aKey))
 }
 
 // SetLongLongForKey sets the value of the specified key to a 64-bit integer value.
 func (ukvs *UbiquitousKeyValueStore) SetLongLongForKey(value int64, aKey string) {
+	defer runtime.KeepAlive(ukvs)
 	objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("setLongLong:forKey:"), value, purego.NSString(aKey))
 }
 
 // SetDoubleForKey sets the value of the specified key to a double value.
 func (ukvs *UbiquitousKeyValueStore) SetDoubleForKey(value float64, aKey string) {
+	defer runtime.KeepAlive(ukvs)
 	objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("setDouble:forKey:"), value, purego.NSString(aKey))
 }
 
 // SetBoolForKey sets the value of the specified key to a Boolean value.
 func (ukvs *UbiquitousKeyValueStore) SetBoolForKey(value bool, aKey string) {
+	defer runtime.KeepAlive(ukvs)
 	objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("setBool:forKey:"), value, purego.NSString(aKey))
 }
 
 // Synchronize reports whether synchronizes the in-memory keys and values with the ones stored in iCloud.
 func (ukvs *UbiquitousKeyValueStore) Synchronize() bool {
+	defer runtime.KeepAlive(ukvs)
 	_r := objc.Send[bool](objref.IDOf(ukvs), objc.RegisterName("synchronize"))
 	return _r
 }
 
 // DictionaryRepresentation returns the dictionary representation.
-func (ukvs *UbiquitousKeyValueStore) DictionaryRepresentation() obj.Object {
+func (ukvs *UbiquitousKeyValueStore) DictionaryRepresentation() map[string]obj.Object {
+	defer runtime.KeepAlive(ukvs)
 	_r := objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("dictionaryRepresentation"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

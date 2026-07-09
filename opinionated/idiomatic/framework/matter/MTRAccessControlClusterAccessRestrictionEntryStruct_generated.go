@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRAccessControlClusterAccessRestrictionEntryStructAdopt(id objc.ID) *MTRAc
 
 // Description returns the object's -description text.
 func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) Description() string {
+	defer runtime.KeepAlive(maccares)
 	return rt.Description(objref.IDOf(maccares))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(maccares)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(maccares), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(maccares)
 	return rt.IsKind(objref.IDOf(maccares), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) String() string {
+	defer runtime.KeepAlive(maccares)
 	return rt.Description(objref.IDOf(maccares))
 }
 
@@ -72,47 +80,56 @@ func NewMTRAccessControlClusterAccessRestrictionEntryStruct() *MTRAccessControlC
 
 // WithEndpoint sets the endpoint.
 func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterAccessRestrictionEntryStruct {
+	defer runtime.KeepAlive(endpoint)
 	objc.Send[objc.ID](objref.IDOf(maccares), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return maccares
 }
 
 // WithCluster sets the cluster.
 func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) WithCluster(cluster obj.Object) *MTRAccessControlClusterAccessRestrictionEntryStruct {
+	defer runtime.KeepAlive(cluster)
 	objc.Send[objc.ID](objref.IDOf(maccares), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
 	return maccares
 }
 
 // WithFabricIndex sets the fabric index.
 func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessRestrictionEntryStruct {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(maccares), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return maccares
 }
 
 // Endpoint returns the endpoint.
-func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) Endpoint() obj.Object {
+func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) Endpoint() *foundation.Number {
+	defer runtime.KeepAlive(maccares)
 	_r := objc.Send[objc.ID](objref.IDOf(maccares), objc.RegisterName("endpoint"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Cluster returns the cluster.
-func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) Cluster() obj.Object {
+func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) Cluster() *foundation.Number {
+	defer runtime.KeepAlive(maccares)
 	_r := objc.Send[objc.ID](objref.IDOf(maccares), objc.RegisterName("cluster"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Restrictions returns the restrictions.
 func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) Restrictions() obj.Object {
+	defer runtime.KeepAlive(maccares)
 	_r := objc.Send[objc.ID](objref.IDOf(maccares), objc.RegisterName("restrictions"))
 	return obj.Wrap(_r)
 }
 
 // SetRestrictions wraps the corresponding Objective-C method.
 func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) SetRestrictions(restrictions obj.Object) {
+	defer runtime.KeepAlive(maccares)
+	defer runtime.KeepAlive(restrictions)
 	objc.Send[objc.ID](objref.IDOf(maccares), objc.RegisterName("setRestrictions:"), objref.IDOf(restrictions))
 }
 
 // FabricIndex returns the fabric index.
-func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) FabricIndex() obj.Object {
+func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) FabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(maccares)
 	_r := objc.Send[objc.ID](objref.IDOf(maccares), objc.RegisterName("fabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

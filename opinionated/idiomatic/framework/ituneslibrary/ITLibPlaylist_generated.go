@@ -5,9 +5,11 @@
 package ituneslibrary
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,6 +56,7 @@ func NewLibPlaylist() *LibPlaylist {
 
 // Name returns the name or title of this playlist.
 func (lp *LibPlaylist) Name() string {
+	defer runtime.KeepAlive(lp)
 	_r := objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -63,24 +66,28 @@ func (lp *LibPlaylist) Name() string {
 
 // IsPrimary reports whether this playlist is the primary playlist.
 func (lp *LibPlaylist) IsPrimary() bool {
+	defer runtime.KeepAlive(lp)
 	_r := objc.Send[bool](objref.IDOf(lp), objc.RegisterName("isPrimary"))
 	return _r
 }
 
 // ParentID returns the unique identifier of this playlist' parent.
-func (lp *LibPlaylist) ParentID() obj.Object {
+func (lp *LibPlaylist) ParentID() *foundation.Number {
+	defer runtime.KeepAlive(lp)
 	_r := objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("parentID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // IsVisible reports whether this playlist is visible.
 func (lp *LibPlaylist) IsVisible() bool {
+	defer runtime.KeepAlive(lp)
 	_r := objc.Send[bool](objref.IDOf(lp), objc.RegisterName("isVisible"))
 	return _r
 }
 
 // IsAllItemsPlaylist reports whether every item in this playlist is exposed via this API. Generally true but not that useful.
 func (lp *LibPlaylist) IsAllItemsPlaylist() bool {
+	defer runtime.KeepAlive(lp)
 	_r := objc.Send[bool](objref.IDOf(lp), objc.RegisterName("isAllItemsPlaylist"))
 	return _r
 }
@@ -89,24 +96,28 @@ func (lp *LibPlaylist) IsAllItemsPlaylist() bool {
 //
 // Items returns the collection as a Go slice.
 func (lp *LibPlaylist) Items() []*LibMediaItem {
+	defer runtime.KeepAlive(lp)
 	_arr := objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("items"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LibMediaItem { return LibMediaItemFromID(_id) })
 }
 
 // DistinguishedKind returns the distinguished kind of this playlist.
 func (lp *LibPlaylist) DistinguishedKind() LibDistinguishedPlaylistKind {
+	defer runtime.KeepAlive(lp)
 	_r := objc.Send[LibDistinguishedPlaylistKind](objref.IDOf(lp), objc.RegisterName("distinguishedKind"))
 	return _r
 }
 
 // Kind returns the kind of this playlist.
 func (lp *LibPlaylist) Kind() LibPlaylistKind {
+	defer runtime.KeepAlive(lp)
 	_r := objc.Send[LibPlaylistKind](objref.IDOf(lp), objc.RegisterName("kind"))
 	return _r
 }
 
 // IsMaster reports whether this playlist is the primary playlist.
 func (lp *LibPlaylist) IsMaster() bool {
+	defer runtime.KeepAlive(lp)
 	_r := objc.Send[bool](objref.IDOf(lp), objc.RegisterName("isMaster"))
 	return _r
 }

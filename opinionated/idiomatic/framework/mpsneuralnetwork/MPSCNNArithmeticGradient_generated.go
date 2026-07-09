@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -167,42 +169,49 @@ func (cag *CNNArithmeticGradient) WithSecondaryStrideInPixelsY(secondaryStrideIn
 
 // PrimaryScale returns the primary scale.
 func (cag *CNNArithmeticGradient) PrimaryScale() float32 {
+	defer runtime.KeepAlive(cag)
 	_r := objc.Send[float32](objref.IDOf(cag), objc.RegisterName("primaryScale"))
 	return _r
 }
 
 // SecondaryScale returns the secondary scale.
 func (cag *CNNArithmeticGradient) SecondaryScale() float32 {
+	defer runtime.KeepAlive(cag)
 	_r := objc.Send[float32](objref.IDOf(cag), objc.RegisterName("secondaryScale"))
 	return _r
 }
 
 // Bias returns the bias.
 func (cag *CNNArithmeticGradient) Bias() float32 {
+	defer runtime.KeepAlive(cag)
 	_r := objc.Send[float32](objref.IDOf(cag), objc.RegisterName("bias"))
 	return _r
 }
 
 // SecondaryStrideInFeatureChannels returns the secondarySource stride in the feature channel dimension. The only supported values are 0 or 1. The default value for each dimension is 1.
 func (cag *CNNArithmeticGradient) SecondaryStrideInFeatureChannels() int {
+	defer runtime.KeepAlive(cag)
 	_r := objc.Send[int](objref.IDOf(cag), objc.RegisterName("secondaryStrideInFeatureChannels"))
 	return _r
 }
 
 // MinimumValue returns minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
 func (cag *CNNArithmeticGradient) MinimumValue() float32 {
+	defer runtime.KeepAlive(cag)
 	_r := objc.Send[float32](objref.IDOf(cag), objc.RegisterName("minimumValue"))
 	return _r
 }
 
 // MaximumValue returns maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
 func (cag *CNNArithmeticGradient) MaximumValue() float32 {
+	defer runtime.KeepAlive(cag)
 	_r := objc.Send[float32](objref.IDOf(cag), objc.RegisterName("maximumValue"))
 	return _r
 }
 
 // IsSecondarySourceFilter reports whether the isSecondarySourceFilter property is used to indicate whether the arithmetic gradient filter is operating on the primary or secondary source image from the forward pass.
 func (cag *CNNArithmeticGradient) IsSecondarySourceFilter() bool {
+	defer runtime.KeepAlive(cag)
 	_r := objc.Send[bool](objref.IDOf(cag), objc.RegisterName("isSecondarySourceFilter"))
 	return _r
 }

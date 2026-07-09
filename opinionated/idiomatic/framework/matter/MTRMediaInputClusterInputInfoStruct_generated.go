@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,33 +50,40 @@ func mTRMediaInputClusterInputInfoStructAdopt(id objc.ID) *MTRMediaInputClusterI
 
 // Description returns the object's -description text.
 func (mmiciis *MTRMediaInputClusterInputInfoStruct) Description() string {
+	defer runtime.KeepAlive(mmiciis)
 	return rt.Description(objref.IDOf(mmiciis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmiciis *MTRMediaInputClusterInputInfoStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmiciis)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmiciis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmiciis *MTRMediaInputClusterInputInfoStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmiciis)
 	return rt.IsKind(objref.IDOf(mmiciis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmiciis *MTRMediaInputClusterInputInfoStruct) String() string {
+	defer runtime.KeepAlive(mmiciis)
 	return rt.Description(objref.IDOf(mmiciis))
 }
 
 // WithIndex sets the index.
 func (mmiciis *MTRMediaInputClusterInputInfoStruct) WithIndex(index obj.Object) *MTRMediaInputClusterInputInfoStruct {
+	defer runtime.KeepAlive(index)
 	objc.Send[objc.ID](objref.IDOf(mmiciis), objc.RegisterName("setIndex:"), objref.IDOf(index))
 	return mmiciis
 }
 
 // WithInputType sets the input type.
 func (mmiciis *MTRMediaInputClusterInputInfoStruct) WithInputType(inputType obj.Object) *MTRMediaInputClusterInputInfoStruct {
+	defer runtime.KeepAlive(inputType)
 	objc.Send[objc.ID](objref.IDOf(mmiciis), objc.RegisterName("setInputType:"), objref.IDOf(inputType))
 	return mmiciis
 }
@@ -91,19 +101,22 @@ func (mmiciis *MTRMediaInputClusterInputInfoStruct) WithDescriptionString(descri
 }
 
 // Index returns the index.
-func (mmiciis *MTRMediaInputClusterInputInfoStruct) Index() obj.Object {
+func (mmiciis *MTRMediaInputClusterInputInfoStruct) Index() *foundation.Number {
+	defer runtime.KeepAlive(mmiciis)
 	_r := objc.Send[objc.ID](objref.IDOf(mmiciis), objc.RegisterName("index"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // InputType returns the input type.
-func (mmiciis *MTRMediaInputClusterInputInfoStruct) InputType() obj.Object {
+func (mmiciis *MTRMediaInputClusterInputInfoStruct) InputType() *foundation.Number {
+	defer runtime.KeepAlive(mmiciis)
 	_r := objc.Send[objc.ID](objref.IDOf(mmiciis), objc.RegisterName("inputType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Name returns the name.
 func (mmiciis *MTRMediaInputClusterInputInfoStruct) Name() string {
+	defer runtime.KeepAlive(mmiciis)
 	_r := objc.Send[objc.ID](objref.IDOf(mmiciis), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -113,6 +126,7 @@ func (mmiciis *MTRMediaInputClusterInputInfoStruct) Name() string {
 
 // DescriptionString returns the description string.
 func (mmiciis *MTRMediaInputClusterInputInfoStruct) DescriptionString() string {
+	defer runtime.KeepAlive(mmiciis)
 	_r := objc.Send[objc.ID](objref.IDOf(mmiciis), objc.RegisterName("descriptionString"))
 	if _r == 0 {
 		return ""

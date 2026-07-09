@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func constraintAdopt(id objc.ID) *Constraint {
 
 // Description returns the object's -description text.
 func (c *Constraint) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Constraint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Constraint) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Constraint) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
@@ -80,18 +87,21 @@ func (c *Constraint) WithEnabled(enabled bool) *Constraint {
 
 // WithReferenceNode sets the node whose coordinate system should be used to apply the constraint.
 func (c *Constraint) WithReferenceNode(referenceNode NodeProvider) *Constraint {
+	defer runtime.KeepAlive(referenceNode)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setReferenceNode:"), objref.IDOf(referenceNode))
 	return c
 }
 
 // Enabled wraps the corresponding Objective-C method.
 func (c *Constraint) Enabled() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("enabled"))
 	return _r
 }
 
 // ReferenceNode returns the reference node.
 func (c *Constraint) ReferenceNode() *Node {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("referenceNode"))
 	return NodeFromID(_r)
 }

@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -213,34 +215,40 @@ func (dtae *DOMHTMLTextAreaElement) WithTextContent(textContent string) *DOMHTML
 
 // Select wraps the corresponding Objective-C method.
 func (dtae *DOMHTMLTextAreaElement) Select() {
+	defer runtime.KeepAlive(dtae)
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("select"))
 }
 
 // SetSelectionRangeEnd wraps the corresponding Objective-C method.
 func (dtae *DOMHTMLTextAreaElement) SetSelectionRangeEnd(start int, end int) {
+	defer runtime.KeepAlive(dtae)
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setSelectionRange:end:"), start, end)
 }
 
 // Autofocus wraps the corresponding Objective-C method.
 func (dtae *DOMHTMLTextAreaElement) Autofocus() bool {
+	defer runtime.KeepAlive(dtae)
 	_r := objc.Send[bool](objref.IDOf(dtae), objc.RegisterName("autofocus"))
 	return _r
 }
 
 // Disabled wraps the corresponding Objective-C method.
 func (dtae *DOMHTMLTextAreaElement) Disabled() bool {
+	defer runtime.KeepAlive(dtae)
 	_r := objc.Send[bool](objref.IDOf(dtae), objc.RegisterName("disabled"))
 	return _r
 }
 
 // Form returns the form.
 func (dtae *DOMHTMLTextAreaElement) Form() *DOMHTMLFormElement {
+	defer runtime.KeepAlive(dtae)
 	_r := objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("form"))
 	return DOMHTMLFormElementFromID(_r)
 }
 
 // Name returns the name.
 func (dtae *DOMHTMLTextAreaElement) Name() string {
+	defer runtime.KeepAlive(dtae)
 	_r := objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -250,24 +258,28 @@ func (dtae *DOMHTMLTextAreaElement) Name() string {
 
 // ReadOnly wraps the corresponding Objective-C method.
 func (dtae *DOMHTMLTextAreaElement) ReadOnly() bool {
+	defer runtime.KeepAlive(dtae)
 	_r := objc.Send[bool](objref.IDOf(dtae), objc.RegisterName("readOnly"))
 	return _r
 }
 
 // Rows returns the rows.
 func (dtae *DOMHTMLTextAreaElement) Rows() int {
+	defer runtime.KeepAlive(dtae)
 	_r := objc.Send[int](objref.IDOf(dtae), objc.RegisterName("rows"))
 	return _r
 }
 
 // Cols returns the cols.
 func (dtae *DOMHTMLTextAreaElement) Cols() int {
+	defer runtime.KeepAlive(dtae)
 	_r := objc.Send[int](objref.IDOf(dtae), objc.RegisterName("cols"))
 	return _r
 }
 
 // Type returns the type.
 func (dtae *DOMHTMLTextAreaElement) Type() string {
+	defer runtime.KeepAlive(dtae)
 	_r := objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -277,6 +289,7 @@ func (dtae *DOMHTMLTextAreaElement) Type() string {
 
 // DefaultValue returns the default value.
 func (dtae *DOMHTMLTextAreaElement) DefaultValue() string {
+	defer runtime.KeepAlive(dtae)
 	_r := objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("defaultValue"))
 	if _r == 0 {
 		return ""
@@ -286,6 +299,7 @@ func (dtae *DOMHTMLTextAreaElement) DefaultValue() string {
 
 // Value returns the value.
 func (dtae *DOMHTMLTextAreaElement) Value() string {
+	defer runtime.KeepAlive(dtae)
 	_r := objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
@@ -295,18 +309,21 @@ func (dtae *DOMHTMLTextAreaElement) Value() string {
 
 // WillValidate wraps the corresponding Objective-C method.
 func (dtae *DOMHTMLTextAreaElement) WillValidate() bool {
+	defer runtime.KeepAlive(dtae)
 	_r := objc.Send[bool](objref.IDOf(dtae), objc.RegisterName("willValidate"))
 	return _r
 }
 
 // SelectionStart returns the selection start.
 func (dtae *DOMHTMLTextAreaElement) SelectionStart() int {
+	defer runtime.KeepAlive(dtae)
 	_r := objc.Send[int](objref.IDOf(dtae), objc.RegisterName("selectionStart"))
 	return _r
 }
 
 // SelectionEnd returns the selection end.
 func (dtae *DOMHTMLTextAreaElement) SelectionEnd() int {
+	defer runtime.KeepAlive(dtae)
 	_r := objc.Send[int](objref.IDOf(dtae), objc.RegisterName("selectionEnd"))
 	return _r
 }

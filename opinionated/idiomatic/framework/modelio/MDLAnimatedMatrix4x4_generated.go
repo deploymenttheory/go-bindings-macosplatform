@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -59,16 +60,19 @@ func (am *AnimatedMatrix4x4) WithInterpolation(interpolation AnimatedValueInterp
 
 // SetFloat4x4AtTime wraps the corresponding Objective-C method.
 func (am *AnimatedMatrix4x4) SetFloat4x4AtTime(value unsafe.Pointer, time_ float64) {
+	defer runtime.KeepAlive(am)
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setFloat4x4:atTime:"), value, time_)
 }
 
 // SetDouble4x4AtTime wraps the corresponding Objective-C method.
 func (am *AnimatedMatrix4x4) SetDouble4x4AtTime(value unsafe.Pointer, time_ float64) {
+	defer runtime.KeepAlive(am)
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setDouble4x4:atTime:"), value, time_)
 }
 
 // ResetWithFloat4x4ArrayAtTimesCount resets with float4x4 array at times count.
 func (am *AnimatedMatrix4x4) ResetWithFloat4x4ArrayAtTimesCount(valuesArray unsafe.Pointer, count int) (timesArray float64) {
+	defer runtime.KeepAlive(am)
 	var _out0 float64
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("resetWithFloat4x4Array:atTimes:count:"), valuesArray, unsafe.Pointer(&_out0), count)
 	return _out0
@@ -76,6 +80,7 @@ func (am *AnimatedMatrix4x4) ResetWithFloat4x4ArrayAtTimesCount(valuesArray unsa
 
 // ResetWithDouble4x4ArrayAtTimesCount resets with double4x4 array at times count.
 func (am *AnimatedMatrix4x4) ResetWithDouble4x4ArrayAtTimesCount(valuesArray unsafe.Pointer, count int) (timesArray float64) {
+	defer runtime.KeepAlive(am)
 	var _out0 float64
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("resetWithDouble4x4Array:atTimes:count:"), valuesArray, unsafe.Pointer(&_out0), count)
 	return _out0
@@ -83,12 +88,14 @@ func (am *AnimatedMatrix4x4) ResetWithDouble4x4ArrayAtTimesCount(valuesArray uns
 
 // GetFloat4x4ArrayMaxCount wraps the corresponding Objective-C method.
 func (am *AnimatedMatrix4x4) GetFloat4x4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount int) int {
+	defer runtime.KeepAlive(am)
 	_r := objc.Send[int](objref.IDOf(am), objc.RegisterName("getFloat4x4Array:maxCount:"), valuesArray, maxCount)
 	return _r
 }
 
 // GetDouble4x4ArrayMaxCount wraps the corresponding Objective-C method.
 func (am *AnimatedMatrix4x4) GetDouble4x4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount int) int {
+	defer runtime.KeepAlive(am)
 	_r := objc.Send[int](objref.IDOf(am), objc.RegisterName("getDouble4x4Array:maxCount:"), valuesArray, maxCount)
 	return _r
 }

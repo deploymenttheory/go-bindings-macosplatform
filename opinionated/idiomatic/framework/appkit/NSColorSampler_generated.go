@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,22 +50,27 @@ func colorSamplerAdopt(id objc.ID) *ColorSampler {
 
 // Description returns the object's -description text.
 func (cs *ColorSampler) Description() string {
+	defer runtime.KeepAlive(cs)
 	return rt.Description(objref.IDOf(cs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cs *ColorSampler) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cs *ColorSampler) IsKind(className string) bool {
+	defer runtime.KeepAlive(cs)
 	return rt.IsKind(objref.IDOf(cs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cs *ColorSampler) String() string {
+	defer runtime.KeepAlive(cs)
 	return rt.Description(objref.IDOf(cs))
 }
 
@@ -78,6 +84,7 @@ func NewColorSampler() *ColorSampler {
 //
 // ShowSamplerWithSelectionHandler blocks until the operation completes or ctx is cancelled.
 func (cs *ColorSampler) ShowSamplerWithSelectionHandler(ctx context.Context) (result *Color, err error) {
+	defer runtime.KeepAlive(cs)
 	type _result struct {
 		val *Color
 		err error

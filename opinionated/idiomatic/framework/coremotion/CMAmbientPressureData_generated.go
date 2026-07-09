@@ -5,6 +5,8 @@
 package coremotion
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,14 @@ func NewAmbientPressureData() *AmbientPressureData {
 
 // Pressure returns discussion: The pressure as measured by the pressure sensor. Pressure is in kPa (kilopascals).
 func (apd *AmbientPressureData) Pressure() obj.Object {
+	defer runtime.KeepAlive(apd)
 	_r := objc.Send[objc.ID](objref.IDOf(apd), objc.RegisterName("pressure"))
 	return obj.Wrap(_r)
 }
 
 // Temperature returns discussion: The temperature as measured by the pressure sensor. Temperature is in C (degrees centrigrade).
 func (apd *AmbientPressureData) Temperature() obj.Object {
+	defer runtime.KeepAlive(apd)
 	_r := objc.Send[objc.ID](objref.IDOf(apd), objc.RegisterName("temperature"))
 	return obj.Wrap(_r)
 }

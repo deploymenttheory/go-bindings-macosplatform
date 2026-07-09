@@ -5,6 +5,8 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func postalAddressAdopt(id objc.ID) *PostalAddress {
 
 // Description returns the object's -description text.
 func (pa *PostalAddress) Description() string {
+	defer runtime.KeepAlive(pa)
 	return rt.Description(objref.IDOf(pa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pa *PostalAddress) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pa *PostalAddress) IsKind(className string) bool {
+	defer runtime.KeepAlive(pa)
 	return rt.IsKind(objref.IDOf(pa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pa *PostalAddress) String() string {
+	defer runtime.KeepAlive(pa)
 	return rt.Description(objref.IDOf(pa))
 }
 
 // Street returns multi-street address is delimited with carriage returns “\n”
 func (pa *PostalAddress) Street() string {
+	defer runtime.KeepAlive(pa)
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("street"))
 	if _r == 0 {
 		return ""
@@ -79,6 +87,7 @@ func (pa *PostalAddress) Street() string {
 
 // SubLocality returns the sub locality.
 func (pa *PostalAddress) SubLocality() string {
+	defer runtime.KeepAlive(pa)
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("subLocality"))
 	if _r == 0 {
 		return ""
@@ -88,6 +97,7 @@ func (pa *PostalAddress) SubLocality() string {
 
 // City returns the city.
 func (pa *PostalAddress) City() string {
+	defer runtime.KeepAlive(pa)
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("city"))
 	if _r == 0 {
 		return ""
@@ -97,6 +107,7 @@ func (pa *PostalAddress) City() string {
 
 // SubAdministrativeArea returns the sub administrative area.
 func (pa *PostalAddress) SubAdministrativeArea() string {
+	defer runtime.KeepAlive(pa)
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("subAdministrativeArea"))
 	if _r == 0 {
 		return ""
@@ -106,6 +117,7 @@ func (pa *PostalAddress) SubAdministrativeArea() string {
 
 // State returns the state.
 func (pa *PostalAddress) State() string {
+	defer runtime.KeepAlive(pa)
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("state"))
 	if _r == 0 {
 		return ""
@@ -115,6 +127,7 @@ func (pa *PostalAddress) State() string {
 
 // PostalCode returns the postal code.
 func (pa *PostalAddress) PostalCode() string {
+	defer runtime.KeepAlive(pa)
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("postalCode"))
 	if _r == 0 {
 		return ""
@@ -124,6 +137,7 @@ func (pa *PostalAddress) PostalCode() string {
 
 // Country returns the country.
 func (pa *PostalAddress) Country() string {
+	defer runtime.KeepAlive(pa)
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("country"))
 	if _r == 0 {
 		return ""
@@ -133,6 +147,7 @@ func (pa *PostalAddress) Country() string {
 
 // ISOCountryCode returns the iso country code.
 func (pa *PostalAddress) ISOCountryCode() string {
+	defer runtime.KeepAlive(pa)
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("ISOCountryCode"))
 	if _r == 0 {
 		return ""

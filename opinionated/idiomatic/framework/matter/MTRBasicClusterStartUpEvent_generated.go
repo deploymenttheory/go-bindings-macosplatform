@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,6 +54,7 @@ func NewMTRBasicClusterStartUpEvent() *MTRBasicClusterStartUpEvent {
 
 // WithSoftwareVersion sets the software version.
 func (mbcsue *MTRBasicClusterStartUpEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTRBasicClusterStartUpEvent {
+	defer runtime.KeepAlive(softwareVersion)
 	objc.Send[objc.ID](objref.IDOf(mbcsue), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return mbcsue
 }

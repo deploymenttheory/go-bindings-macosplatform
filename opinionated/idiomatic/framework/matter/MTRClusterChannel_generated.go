@@ -6,11 +6,13 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,6 +51,9 @@ func mTRClusterChannelAdopt(id objc.ID) *MTRClusterChannel {
 
 // NewMTRClusterChannelWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterChannelWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterChannel {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterChannel")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterChannelAdopt(_id)
@@ -56,6 +61,8 @@ func NewMTRClusterChannelWithDeviceEndpointIDQueue(device *MTRDevice, endpointID
 
 // NewMTRClusterChannelWithDeviceEndpointQueue creates a new MTRClusterChannel.
 func NewMTRClusterChannelWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterChannel {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterChannel")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterChannelAdopt(_id)
@@ -65,6 +72,9 @@ func NewMTRClusterChannelWithDeviceEndpointQueue(device *MTRDevice, endpoint uin
 //
 // ChangeChannelWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcc *MTRClusterChannel) ChangeChannelWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRChannelClusterChangeChannelParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRChannelClusterChangeChannelResponseParams, err error) {
+	defer runtime.KeepAlive(mcc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRChannelClusterChangeChannelResponseParams
 		err error
@@ -90,6 +100,9 @@ func (mcc *MTRClusterChannel) ChangeChannelWithParamsExpectedValuesExpectedValue
 //
 // GetProgramGuideWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcc *MTRClusterChannel) GetProgramGuideWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRChannelClusterGetProgramGuideParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRChannelClusterProgramGuideResponseParams, err error) {
+	defer runtime.KeepAlive(mcc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRChannelClusterProgramGuideResponseParams
 		err error
@@ -115,6 +128,8 @@ func (mcc *MTRClusterChannel) GetProgramGuideWithParamsExpectedValuesExpectedVal
 //
 // GetProgramGuideWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcc *MTRClusterChannel) GetProgramGuideWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRChannelClusterProgramGuideResponseParams, err error) {
+	defer runtime.KeepAlive(mcc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRChannelClusterProgramGuideResponseParams
 		err error
@@ -137,57 +152,76 @@ func (mcc *MTRClusterChannel) GetProgramGuideWithExpectedValuesExpectedValueInte
 }
 
 // ReadAttributeChannelListWithParams reads attribute channel list with params.
-func (mcc *MTRClusterChannel) ReadAttributeChannelListWithParams(params *MTRReadParams) obj.Object {
+func (mcc *MTRClusterChannel) ReadAttributeChannelListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("readAttributeChannelListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeLineupWithParams reads attribute lineup with params.
-func (mcc *MTRClusterChannel) ReadAttributeLineupWithParams(params *MTRReadParams) obj.Object {
+func (mcc *MTRClusterChannel) ReadAttributeLineupWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("readAttributeLineupWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCurrentChannelWithParams reads attribute current channel with params.
-func (mcc *MTRClusterChannel) ReadAttributeCurrentChannelWithParams(params *MTRReadParams) obj.Object {
+func (mcc *MTRClusterChannel) ReadAttributeCurrentChannelWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("readAttributeCurrentChannelWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcc *MTRClusterChannel) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcc *MTRClusterChannel) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcc *MTRClusterChannel) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcc *MTRClusterChannel) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcc *MTRClusterChannel) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcc *MTRClusterChannel) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcc *MTRClusterChannel) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcc *MTRClusterChannel) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcc *MTRClusterChannel) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcc *MTRClusterChannel) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ChangeChannelWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // ChangeChannelWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcc *MTRClusterChannel) ChangeChannelWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRChannelClusterChangeChannelParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRChannelClusterChangeChannelResponseParams, err error) {
+	defer runtime.KeepAlive(mcc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRChannelClusterChangeChannelResponseParams
 		err error

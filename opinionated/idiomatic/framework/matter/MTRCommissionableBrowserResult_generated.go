@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRCommissionableBrowserResultAdopt(id objc.ID) *MTRCommissionableBrowserRe
 
 // Description returns the object's -description text.
 func (mcbr *MTRCommissionableBrowserResult) Description() string {
+	defer runtime.KeepAlive(mcbr)
 	return rt.Description(objref.IDOf(mcbr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcbr *MTRCommissionableBrowserResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcbr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcbr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcbr *MTRCommissionableBrowserResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcbr)
 	return rt.IsKind(objref.IDOf(mcbr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcbr *MTRCommissionableBrowserResult) String() string {
+	defer runtime.KeepAlive(mcbr)
 	return rt.Description(objref.IDOf(mcbr))
 }
 
@@ -72,6 +80,7 @@ func NewMTRCommissionableBrowserResult() *MTRCommissionableBrowserResult {
 
 // InstanceName returns for a node advertising over DNS-SD, the instance name is a dynamic, pseudo-randomly selected, 64-bit temporary unique identifier, expressed as a fixed-length sixteen-character hexadecimal string, encoded as ASCII text using capital letters. For a node advertising over Bluetooth Low Energy, the instance name is always "BLE".
 func (mcbr *MTRCommissionableBrowserResult) InstanceName() string {
+	defer runtime.KeepAlive(mcbr)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbr), objc.RegisterName("instanceName"))
 	if _r == 0 {
 		return ""
@@ -80,25 +89,29 @@ func (mcbr *MTRCommissionableBrowserResult) InstanceName() string {
 }
 
 // VendorID returns a 16-bit unsigned value identifying the device manufacturer.
-func (mcbr *MTRCommissionableBrowserResult) VendorID() obj.Object {
+func (mcbr *MTRCommissionableBrowserResult) VendorID() *foundation.Number {
+	defer runtime.KeepAlive(mcbr)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbr), objc.RegisterName("vendorID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ProductID returns a 16-bit unsigned value identifying the product.
-func (mcbr *MTRCommissionableBrowserResult) ProductID() obj.Object {
+func (mcbr *MTRCommissionableBrowserResult) ProductID() *foundation.Number {
+	defer runtime.KeepAlive(mcbr)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbr), objc.RegisterName("productID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Discriminator returns a 12-bit value matching the field of the same name in MTRSetupPayload.
-func (mcbr *MTRCommissionableBrowserResult) Discriminator() obj.Object {
+func (mcbr *MTRCommissionableBrowserResult) Discriminator() *foundation.Number {
+	defer runtime.KeepAlive(mcbr)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbr), objc.RegisterName("discriminator"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // CommissioningMode reports whether a boolean indicating whether the device has a commissioning window open.
 func (mcbr *MTRCommissionableBrowserResult) CommissioningMode() bool {
+	defer runtime.KeepAlive(mcbr)
 	_r := objc.Send[bool](objref.IDOf(mcbr), objc.RegisterName("commissioningMode"))
 	return _r
 }

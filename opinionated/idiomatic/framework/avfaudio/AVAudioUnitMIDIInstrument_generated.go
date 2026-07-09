@@ -5,9 +5,12 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,6 +51,7 @@ func audioUnitMIDIInstrumentAdopt(id objc.ID) *AudioUnitMIDIInstrument {
 
 // NewAudioUnitMIDIInstrumentWithAudioComponentDescription creates a MIDI instrument audio unit with the component description you specify.
 func NewAudioUnitMIDIInstrumentWithAudioComponentDescription(description obj.Object) *AudioUnitMIDIInstrument {
+	defer runtime.KeepAlive(description)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioUnitMIDIInstrument")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioComponentDescription:"), objref.IDOf(description))
 	return audioUnitMIDIInstrumentAdopt(_id)
@@ -55,57 +59,68 @@ func NewAudioUnitMIDIInstrumentWithAudioComponentDescription(description obj.Obj
 
 // StartNoteWithVelocityOnChannel sends a MIDI Note On event to the instrument.
 func (aumi *AudioUnitMIDIInstrument) StartNoteWithVelocityOnChannel(note uint8, velocity uint8, channel uint8) {
+	defer runtime.KeepAlive(aumi)
 	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("startNote:withVelocity:onChannel:"), note, velocity, channel)
 }
 
 // StopNoteOnChannel sends a MIDI Note Off event to the instrument.
 func (aumi *AudioUnitMIDIInstrument) StopNoteOnChannel(note uint8, channel uint8) {
+	defer runtime.KeepAlive(aumi)
 	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("stopNote:onChannel:"), note, channel)
 }
 
 // SendControllerWithValueOnChannel sends a MIDI controller event to the instrument.
 func (aumi *AudioUnitMIDIInstrument) SendControllerWithValueOnChannel(controller uint8, value uint8, channel uint8) {
+	defer runtime.KeepAlive(aumi)
 	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendController:withValue:onChannel:"), controller, value, channel)
 }
 
 // SendPitchBendOnChannel sends a MIDI Pitch Bend event to the instrument.
 func (aumi *AudioUnitMIDIInstrument) SendPitchBendOnChannel(pitchbend uint16, channel uint8) {
+	defer runtime.KeepAlive(aumi)
 	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendPitchBend:onChannel:"), pitchbend, channel)
 }
 
 // SendPressureOnChannel sends a MIDI channel pressure event to the instrument.
 func (aumi *AudioUnitMIDIInstrument) SendPressureOnChannel(pressure uint8, channel uint8) {
+	defer runtime.KeepAlive(aumi)
 	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendPressure:onChannel:"), pressure, channel)
 }
 
 // SendPressureForKeyWithValueOnChannel sends a MIDI Polyphonic key pressure event to the instrument.
 func (aumi *AudioUnitMIDIInstrument) SendPressureForKeyWithValueOnChannel(key uint8, value uint8, channel uint8) {
+	defer runtime.KeepAlive(aumi)
 	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendPressureForKey:withValue:onChannel:"), key, value, channel)
 }
 
 // SendProgramChangeOnChannel sends MIDI Program Change and Bank Select events to the instrument.
 func (aumi *AudioUnitMIDIInstrument) SendProgramChangeOnChannel(program uint8, channel uint8) {
+	defer runtime.KeepAlive(aumi)
 	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendProgramChange:onChannel:"), program, channel)
 }
 
 // SendProgramChangeBankMSBBankLSBOnChannel sends MIDI Program Change and Bank Select events to the instrument.
 func (aumi *AudioUnitMIDIInstrument) SendProgramChangeBankMSBBankLSBOnChannel(program uint8, bankMSB uint8, bankLSB uint8, channel uint8) {
+	defer runtime.KeepAlive(aumi)
 	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendProgramChange:bankMSB:bankLSB:onChannel:"), program, bankMSB, bankLSB, channel)
 }
 
 // SendMIDIEventData1Data2 sends a MIDI event which contains two data bytes to the instrument.
 func (aumi *AudioUnitMIDIInstrument) SendMIDIEventData1Data2(midiStatus uint8, data1 uint8, data2 uint8) {
+	defer runtime.KeepAlive(aumi)
 	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendMIDIEvent:data1:data2:"), midiStatus, data1, data2)
 }
 
 // SendMIDIEventData1 sends a MIDI event which contains one data byte to the instrument.
 func (aumi *AudioUnitMIDIInstrument) SendMIDIEventData1(midiStatus uint8, data1 uint8) {
+	defer runtime.KeepAlive(aumi)
 	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendMIDIEvent:data1:"), midiStatus, data1)
 }
 
 // SendMIDISysExEvent sends a MIDI System Exclusive event to the instrument.
-func (aumi *AudioUnitMIDIInstrument) SendMIDISysExEvent(midiData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendMIDISysExEvent:"), objref.IDOf(midiData))
+func (aumi *AudioUnitMIDIInstrument) SendMIDISysExEvent(midiData []byte) {
+	defer runtime.KeepAlive(aumi)
+	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendMIDISysExEvent:"), rt.BytesToNSData(midiData))
 }
 
 // isAudioUnitMIDIInstrument marks AudioUnitMIDIInstrument — and, by embedding promotion, its

@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,24 +54,28 @@ func NewMTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent() *MTROtaSoftware
 
 // WithSoftwareVersion sets the software version.
 func (mosurcdee *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
+	defer runtime.KeepAlive(softwareVersion)
 	objc.Send[objc.ID](objref.IDOf(mosurcdee), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return mosurcdee
 }
 
 // WithBytesDownloaded sets the bytes downloaded.
 func (mosurcdee *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithBytesDownloaded(bytesDownloaded obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
+	defer runtime.KeepAlive(bytesDownloaded)
 	objc.Send[objc.ID](objref.IDOf(mosurcdee), objc.RegisterName("setBytesDownloaded:"), objref.IDOf(bytesDownloaded))
 	return mosurcdee
 }
 
 // WithProgressPercent sets the progress percent.
 func (mosurcdee *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithProgressPercent(progressPercent obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
+	defer runtime.KeepAlive(progressPercent)
 	objc.Send[objc.ID](objref.IDOf(mosurcdee), objc.RegisterName("setProgressPercent:"), objref.IDOf(progressPercent))
 	return mosurcdee
 }
 
 // WithPlatformCode sets the platform code.
 func (mosurcdee *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithPlatformCode(platformCode obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
+	defer runtime.KeepAlive(platformCode)
 	objc.Send[objc.ID](objref.IDOf(mosurcdee), objc.RegisterName("setPlatformCode:"), objref.IDOf(platformCode))
 	return mosurcdee
 }

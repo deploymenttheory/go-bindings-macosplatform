@@ -6,10 +6,12 @@ package mapkit
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -51,22 +53,27 @@ func reverseGeocodingRequestAdopt(id objc.ID) *ReverseGeocodingRequest {
 
 // Description returns the object's -description text.
 func (rgr *ReverseGeocodingRequest) Description() string {
+	defer runtime.KeepAlive(rgr)
 	return rt.Description(objref.IDOf(rgr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rgr *ReverseGeocodingRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rgr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rgr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rgr *ReverseGeocodingRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(rgr)
 	return rt.IsKind(objref.IDOf(rgr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rgr *ReverseGeocodingRequest) String() string {
+	defer runtime.KeepAlive(rgr)
 	return rt.Description(objref.IDOf(rgr))
 }
 
@@ -79,6 +86,7 @@ func NewReverseGeocodingRequestWithLocation(location unsafe.Pointer) *ReverseGeo
 
 // WithPreferredLocale sets a value that indicates the preferred locale for the addresses the request returns, or nil if the framework should use the device locale.
 func (rgr *ReverseGeocodingRequest) WithPreferredLocale(preferredLocale obj.Object) *ReverseGeocodingRequest {
+	defer runtime.KeepAlive(preferredLocale)
 	objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("setPreferredLocale:"), objref.IDOf(preferredLocale))
 	return rgr
 }
@@ -87,6 +95,7 @@ func (rgr *ReverseGeocodingRequest) WithPreferredLocale(preferredLocale obj.Obje
 //
 // GetMapItems blocks until the operation completes or ctx is cancelled.
 func (rgr *ReverseGeocodingRequest) GetMapItems(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(rgr)
 	type _result struct {
 		val obj.Object
 		err error
@@ -110,6 +119,7 @@ func (rgr *ReverseGeocodingRequest) GetMapItems(ctx context.Context) (result obj
 
 // Cancel a method you call to cancel a reverse geocoding request that’s in progress.
 func (rgr *ReverseGeocodingRequest) Cancel() {
+	defer runtime.KeepAlive(rgr)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("cancel"))
 	})
@@ -118,18 +128,21 @@ func (rgr *ReverseGeocodingRequest) Cancel() {
 
 // IsCancelled reports whether the object is cancelled.
 func (rgr *ReverseGeocodingRequest) IsCancelled() bool {
+	defer runtime.KeepAlive(rgr)
 	_r := objc.Send[bool](objref.IDOf(rgr), objc.RegisterName("isCancelled"))
 	return _r
 }
 
 // IsLoading reports whether the object is loading.
 func (rgr *ReverseGeocodingRequest) IsLoading() bool {
+	defer runtime.KeepAlive(rgr)
 	_r := objc.Send[bool](objref.IDOf(rgr), objc.RegisterName("isLoading"))
 	return _r
 }
 
 // PreferredLocale returns the preferred locale.
-func (rgr *ReverseGeocodingRequest) PreferredLocale() obj.Object {
+func (rgr *ReverseGeocodingRequest) PreferredLocale() *foundation.Locale {
+	defer runtime.KeepAlive(rgr)
 	_r := objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("preferredLocale"))
-	return obj.Wrap(_r)
+	return foundation.LocaleFromID(_r)
 }

@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func renderedCaptionImageAdopt(id objc.ID) *RenderedCaptionImage {
 
 // Description returns the object's -description text.
 func (rci *RenderedCaptionImage) Description() string {
+	defer runtime.KeepAlive(rci)
 	return rt.Description(objref.IDOf(rci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rci *RenderedCaptionImage) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rci *RenderedCaptionImage) IsKind(className string) bool {
+	defer runtime.KeepAlive(rci)
 	return rt.IsKind(objref.IDOf(rci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rci *RenderedCaptionImage) String() string {
+	defer runtime.KeepAlive(rci)
 	return rt.Description(objref.IDOf(rci))
 }
 
@@ -75,6 +82,7 @@ func NewRenderedCaptionImage() *RenderedCaptionImage {
 
 // Position returns a CGPoint that defines the position (in pixels) of the rendered caption image relative to the video frame To place the caption image correcly, the size of pixel buffer can be extracted from CVPixelBufferGetWidth and CVPixelBufferGetHeight. Origin is assumed at upper-left. So, a caption image is rendered to the right and bottom of the origin point.
 func (rci *RenderedCaptionImage) Position() corefoundation.CGPoint {
+	defer runtime.KeepAlive(rci)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(rci), objc.RegisterName("position"))
 	return _r
 }

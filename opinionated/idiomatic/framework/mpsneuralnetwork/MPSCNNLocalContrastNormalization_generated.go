@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -119,36 +121,42 @@ func (clcn *CNNLocalContrastNormalization) WithSourceFeatureChannelMaxCount(sour
 
 // Alpha returns the value of alpha.  Default is 0.0 The default value 0.0 is not recommended and is preserved for backwards compatibility. With alpha 0, it performs a local mean subtraction. The MPSCNNLocalContrastNormalizationNode used with the MPSNNGraph uses 1.0 as a default.
 func (clcn *CNNLocalContrastNormalization) Alpha() float32 {
+	defer runtime.KeepAlive(clcn)
 	_r := objc.Send[float32](objref.IDOf(clcn), objc.RegisterName("alpha"))
 	return _r
 }
 
 // Beta returns the value of beta.  Default is 0.5
 func (clcn *CNNLocalContrastNormalization) Beta() float32 {
+	defer runtime.KeepAlive(clcn)
 	_r := objc.Send[float32](objref.IDOf(clcn), objc.RegisterName("beta"))
 	return _r
 }
 
 // Delta returns the value of delta.  Default is 1/1024
 func (clcn *CNNLocalContrastNormalization) Delta() float32 {
+	defer runtime.KeepAlive(clcn)
 	_r := objc.Send[float32](objref.IDOf(clcn), objc.RegisterName("delta"))
 	return _r
 }
 
 // P0 returns the value of p0.  Default is 1.0
 func (clcn *CNNLocalContrastNormalization) P0() float32 {
+	defer runtime.KeepAlive(clcn)
 	_r := objc.Send[float32](objref.IDOf(clcn), objc.RegisterName("p0"))
 	return _r
 }
 
 // Pm returns the value of pm.  Default is 0.0
 func (clcn *CNNLocalContrastNormalization) Pm() float32 {
+	defer runtime.KeepAlive(clcn)
 	_r := objc.Send[float32](objref.IDOf(clcn), objc.RegisterName("pm"))
 	return _r
 }
 
 // Ps returns the value of ps.  Default is 1.0
 func (clcn *CNNLocalContrastNormalization) Ps() float32 {
+	defer runtime.KeepAlive(clcn)
 	_r := objc.Send[float32](objref.IDOf(clcn), objc.RegisterName("ps"))
 	return _r
 }

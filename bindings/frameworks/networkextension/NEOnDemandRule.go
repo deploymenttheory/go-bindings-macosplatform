@@ -57,8 +57,8 @@ func (o *NEOnDemandRule) DNSSearchDomainMatch() *foundation.NSArray[*foundation.
 	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-func (o *NEOnDemandRule) SetDNSSearchDomainMatch(dNSSearchDomainMatch *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nEOnDemandRuleSelSetDNSSearchDomainMatch, dNSSearchDomainMatch.Ptr())
+func (o *NEOnDemandRule) SetDNSSearchDomainMatch(dnsSearchDomainMatch *foundation.NSArray[*foundation.NSString]) {
+	o.Ptr().Send(_nEOnDemandRuleSelSetDNSSearchDomainMatch, dnsSearchDomainMatch.Ptr())
 }
 
 // @property DNSServerAddressMatch @discussion An array of DNS server IP addresses represented as NSString objects. If each of the current default DNS servers is equal to one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the default DNS servers do not factor into the rule match.
@@ -70,8 +70,8 @@ func (o *NEOnDemandRule) DNSServerAddressMatch() *foundation.NSArray[*foundation
 	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-func (o *NEOnDemandRule) SetDNSServerAddressMatch(dNSServerAddressMatch *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nEOnDemandRuleSelSetDNSServerAddressMatch, dNSServerAddressMatch.Ptr())
+func (o *NEOnDemandRule) SetDNSServerAddressMatch(dnsServerAddressMatch *foundation.NSArray[*foundation.NSString]) {
+	o.Ptr().Send(_nEOnDemandRuleSelSetDNSServerAddressMatch, dnsServerAddressMatch.Ptr())
 }
 
 // @property interfaceTypeMatch @discussion The type of interface that this rule matches. If the current primary network interface is of this type and all of the other conditions in the rule match, then the rule matches. If this property is 0 (the default), then the current primary interface type does not factor into the rule match.
@@ -93,8 +93,8 @@ func (o *NEOnDemandRule) SSIDMatch() *foundation.NSArray[*foundation.NSString] {
 	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-func (o *NEOnDemandRule) SetSSIDMatch(sSIDMatch *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nEOnDemandRuleSelSetSSIDMatch, sSIDMatch.Ptr())
+func (o *NEOnDemandRule) SetSSIDMatch(ssidMatch *foundation.NSArray[*foundation.NSString]) {
+	o.Ptr().Send(_nEOnDemandRuleSelSetSSIDMatch, ssidMatch.Ptr())
 }
 
 // @property probeURL @discussion An HTTP or HTTPS URL. If a request sent to this URL results in a HTTP 200 OK response and all of the other conditions in the rule match, then then rule matches. If this property is nil (the default), then an HTTP request does not factor into the rule match.

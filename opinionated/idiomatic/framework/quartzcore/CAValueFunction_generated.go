@@ -5,7 +5,10 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func valueFunctionAdopt(id objc.ID) *ValueFunction {
 
 // Description returns the object's -description text.
 func (vf *ValueFunction) Description() string {
+	defer runtime.KeepAlive(vf)
 	return rt.Description(objref.IDOf(vf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vf *ValueFunction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vf *ValueFunction) IsKind(className string) bool {
+	defer runtime.KeepAlive(vf)
 	return rt.IsKind(objref.IDOf(vf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vf *ValueFunction) String() string {
+	defer runtime.KeepAlive(vf)
 	return rt.Description(objref.IDOf(vf))
 }
 
@@ -73,7 +81,8 @@ func NewValueFunction() *ValueFunction {
 }
 
 // Name returns the name.
-func (vf *ValueFunction) Name() obj.Object {
+func (vf *ValueFunction) Name() *foundation.String {
+	defer runtime.KeepAlive(vf)
 	_r := objc.Send[objc.ID](objref.IDOf(vf), objc.RegisterName("name"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }

@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,6 +47,9 @@ func cNNCrossChannelNormalizationGradientNodeAdopt(id objc.ID) *CNNCrossChannelN
 
 // NewCNNCrossChannelNormalizationGradientNodeWithSourceGradientSourceImageGradientStateKernelSize creates a new CNNCrossChannelNormalizationGradientNode.
 func NewCNNCrossChannelNormalizationGradientNodeWithSourceGradientSourceImageGradientStateKernelSize(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode, kernelSize int) *CNNCrossChannelNormalizationGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNCrossChannelNormalizationGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:kernelSize:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), kernelSize)
 	return cNNCrossChannelNormalizationGradientNodeAdopt(_id)
@@ -58,6 +63,7 @@ func (cccngn *CNNCrossChannelNormalizationGradientNode) WithLabel(label string) 
 
 // KernelSize returns the kernel size.
 func (cccngn *CNNCrossChannelNormalizationGradientNode) KernelSize() int {
+	defer runtime.KeepAlive(cccngn)
 	_r := objc.Send[int](objref.IDOf(cccngn), objc.RegisterName("kernelSize"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -114,42 +116,49 @@ func (mfc *MatrixFullyConnected) WithLabel(label string) *MatrixFullyConnected {
 
 // NeuronParameterA returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mfc *MatrixFullyConnected) NeuronParameterA() float32 {
+	defer runtime.KeepAlive(mfc)
 	_r := objc.Send[float32](objref.IDOf(mfc), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
 // NeuronParameterB returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mfc *MatrixFullyConnected) NeuronParameterB() float32 {
+	defer runtime.KeepAlive(mfc)
 	_r := objc.Send[float32](objref.IDOf(mfc), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
 // NeuronParameterC returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mfc *MatrixFullyConnected) NeuronParameterC() float32 {
+	defer runtime.KeepAlive(mfc)
 	_r := objc.Send[float32](objref.IDOf(mfc), objc.RegisterName("neuronParameterC"))
 	return _r
 }
 
 // SourceNumberOfFeatureVectors returns the number of input vectors which make up the input array.  This is equivalent to the number of rows to consider from the primary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available number of inputs is used.  The value of NSUIntegerMax thus indicates that all available input rows (beginning at primarySourceMatrixOrigin.x) should be considered.
 func (mfc *MatrixFullyConnected) SourceNumberOfFeatureVectors() int {
+	defer runtime.KeepAlive(mfc)
 	_r := objc.Send[int](objref.IDOf(mfc), objc.RegisterName("sourceNumberOfFeatureVectors"))
 	return _r
 }
 
 // SourceInputFeatureChannels returns the input size to to use in the operation.  This is equivalent to the number of columns and the number of rows in the primary (input array) and secondary (weight array) source matrices respectively. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available input size is used. The value of NSUIntegerMax thus indicates that all available columns in the input array (beginning at primarySourceMatrixOrigin.y) and all available rows in the weight array (beginning at secondarySourceMatrixOrigin.x) should be considered. Note: The value used in the operation will be MIN(MIN(inputMatrix.columns - primarySourceMatrixOrigin.y, weightMatrix.rows - secondarySourceMatrixOrigin.x), sourceInputFeatureChannels)
 func (mfc *MatrixFullyConnected) SourceInputFeatureChannels() int {
+	defer runtime.KeepAlive(mfc)
 	_r := objc.Send[int](objref.IDOf(mfc), objc.RegisterName("sourceInputFeatureChannels"))
 	return _r
 }
 
 // SourceOutputFeatureChannels returns the output size to to use in the operation.  This is equivalent to the number of columns to consider in the weight array, or the secondary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available output size is used. The value of NSUIntegerMax thus indicates that all available columns in the weight array (beginning at secondarySourceMatrixOrigin.y) should be considered.
 func (mfc *MatrixFullyConnected) SourceOutputFeatureChannels() int {
+	defer runtime.KeepAlive(mfc)
 	_r := objc.Send[int](objref.IDOf(mfc), objc.RegisterName("sourceOutputFeatureChannels"))
 	return _r
 }
 
 // Alpha returns the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (mfc *MatrixFullyConnected) Alpha() float64 {
+	defer runtime.KeepAlive(mfc)
 	_r := objc.Send[float64](objref.IDOf(mfc), objc.RegisterName("alpha"))
 	return _r
 }

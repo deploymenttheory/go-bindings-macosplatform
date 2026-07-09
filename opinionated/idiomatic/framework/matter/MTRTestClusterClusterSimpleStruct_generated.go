@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +55,28 @@ func NewMTRTestClusterClusterSimpleStruct() *MTRTestClusterClusterSimpleStruct {
 
 // WithA sets the a.
 func (mtccss *MTRTestClusterClusterSimpleStruct) WithA(a obj.Object) *MTRTestClusterClusterSimpleStruct {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setA:"), objref.IDOf(a))
 	return mtccss
 }
 
 // WithB sets the b.
 func (mtccss *MTRTestClusterClusterSimpleStruct) WithB(b obj.Object) *MTRTestClusterClusterSimpleStruct {
+	defer runtime.KeepAlive(b)
 	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setB:"), objref.IDOf(b))
 	return mtccss
 }
 
 // WithC sets the c.
 func (mtccss *MTRTestClusterClusterSimpleStruct) WithC(c obj.Object) *MTRTestClusterClusterSimpleStruct {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setC:"), objref.IDOf(c))
 	return mtccss
 }
 
 // WithD sets the d.
-func (mtccss *MTRTestClusterClusterSimpleStruct) WithD(d obj.Object) *MTRTestClusterClusterSimpleStruct {
-	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setD:"), objref.IDOf(d))
+func (mtccss *MTRTestClusterClusterSimpleStruct) WithD(d []byte) *MTRTestClusterClusterSimpleStruct {
+	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setD:"), rt.BytesToNSData(d))
 	return mtccss
 }
 
@@ -82,18 +88,21 @@ func (mtccss *MTRTestClusterClusterSimpleStruct) WithE(e string) *MTRTestCluster
 
 // WithF sets the f.
 func (mtccss *MTRTestClusterClusterSimpleStruct) WithF(f obj.Object) *MTRTestClusterClusterSimpleStruct {
+	defer runtime.KeepAlive(f)
 	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setF:"), objref.IDOf(f))
 	return mtccss
 }
 
 // WithG sets the g.
 func (mtccss *MTRTestClusterClusterSimpleStruct) WithG(g obj.Object) *MTRTestClusterClusterSimpleStruct {
+	defer runtime.KeepAlive(g)
 	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setG:"), objref.IDOf(g))
 	return mtccss
 }
 
 // WithH sets the h.
 func (mtccss *MTRTestClusterClusterSimpleStruct) WithH(h obj.Object) *MTRTestClusterClusterSimpleStruct {
+	defer runtime.KeepAlive(h)
 	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setH:"), objref.IDOf(h))
 	return mtccss
 }

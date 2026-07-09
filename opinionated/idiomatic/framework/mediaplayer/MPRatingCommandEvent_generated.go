@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewRatingCommandEvent() *RatingCommandEvent {
 
 // Rating returns the rating.
 func (rce *RatingCommandEvent) Rating() float32 {
+	defer runtime.KeepAlive(rce)
 	_r := objc.Send[float32](objref.IDOf(rce), objc.RegisterName("rating"))
 	return _r
 }

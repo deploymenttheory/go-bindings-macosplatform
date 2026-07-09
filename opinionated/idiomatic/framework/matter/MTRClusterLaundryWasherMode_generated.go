@@ -6,11 +6,13 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,6 +53,9 @@ func mTRClusterLaundryWasherModeAdopt(id objc.ID) *MTRClusterLaundryWasherMode {
 
 // NewMTRClusterLaundryWasherModeWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterLaundryWasherModeWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterLaundryWasherMode {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterLaundryWasherMode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterLaundryWasherModeAdopt(_id)
@@ -60,6 +65,9 @@ func NewMTRClusterLaundryWasherModeWithDeviceEndpointIDQueue(device *MTRDevice, 
 //
 // ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mclwm *MTRClusterLaundryWasherMode) ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRLaundryWasherModeClusterChangeToModeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRLaundryWasherModeClusterChangeToModeResponseParams, err error) {
+	defer runtime.KeepAlive(mclwm)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRLaundryWasherModeClusterChangeToModeResponseParams
 		err error
@@ -82,45 +90,59 @@ func (mclwm *MTRClusterLaundryWasherMode) ChangeToModeWithParamsExpectedValuesEx
 }
 
 // ReadAttributeSupportedModesWithParams reads attribute supported modes with params.
-func (mclwm *MTRClusterLaundryWasherMode) ReadAttributeSupportedModesWithParams(params *MTRReadParams) obj.Object {
+func (mclwm *MTRClusterLaundryWasherMode) ReadAttributeSupportedModesWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclwm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclwm), objc.RegisterName("readAttributeSupportedModesWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCurrentModeWithParams reads attribute current mode with params.
-func (mclwm *MTRClusterLaundryWasherMode) ReadAttributeCurrentModeWithParams(params *MTRReadParams) obj.Object {
+func (mclwm *MTRClusterLaundryWasherMode) ReadAttributeCurrentModeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclwm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclwm), objc.RegisterName("readAttributeCurrentModeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mclwm *MTRClusterLaundryWasherMode) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mclwm *MTRClusterLaundryWasherMode) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclwm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclwm), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mclwm *MTRClusterLaundryWasherMode) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mclwm *MTRClusterLaundryWasherMode) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclwm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclwm), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mclwm *MTRClusterLaundryWasherMode) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mclwm *MTRClusterLaundryWasherMode) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclwm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclwm), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mclwm *MTRClusterLaundryWasherMode) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mclwm *MTRClusterLaundryWasherMode) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclwm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclwm), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mclwm *MTRClusterLaundryWasherMode) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mclwm *MTRClusterLaundryWasherMode) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclwm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclwm), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterLaundryWasherMode)(nil)

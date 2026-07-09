@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,78 +55,91 @@ func NewFaceLandmarks2D() *FaceLandmarks2D {
 
 // AllPoints returns allPoints the region containing all face landmark points.
 func (fld *FaceLandmarks2D) AllPoints() *FaceLandmarkRegion2D {
+	defer runtime.KeepAlive(fld)
 	_r := objc.Send[objc.ID](objref.IDOf(fld), objc.RegisterName("allPoints"))
 	return FaceLandmarkRegion2DFromID(_r)
 }
 
 // FaceContour returns faceContour the region containing the points that describe the face contour from cheek over chin to cheek.
 func (fld *FaceLandmarks2D) FaceContour() *FaceLandmarkRegion2D {
+	defer runtime.KeepAlive(fld)
 	_r := objc.Send[objc.ID](objref.IDOf(fld), objc.RegisterName("faceContour"))
 	return FaceLandmarkRegion2DFromID(_r)
 }
 
 // LeftEye returns leftEye the region containing the points describing the outline of the left eye.
 func (fld *FaceLandmarks2D) LeftEye() *FaceLandmarkRegion2D {
+	defer runtime.KeepAlive(fld)
 	_r := objc.Send[objc.ID](objref.IDOf(fld), objc.RegisterName("leftEye"))
 	return FaceLandmarkRegion2DFromID(_r)
 }
 
 // RightEye returns rightEye the region containing the points describing the outline of the right eye.
 func (fld *FaceLandmarks2D) RightEye() *FaceLandmarkRegion2D {
+	defer runtime.KeepAlive(fld)
 	_r := objc.Send[objc.ID](objref.IDOf(fld), objc.RegisterName("rightEye"))
 	return FaceLandmarkRegion2DFromID(_r)
 }
 
 // LeftEyebrow returns leftEyebrow the region containing the points describing the trace of the left eyebrow.
 func (fld *FaceLandmarks2D) LeftEyebrow() *FaceLandmarkRegion2D {
+	defer runtime.KeepAlive(fld)
 	_r := objc.Send[objc.ID](objref.IDOf(fld), objc.RegisterName("leftEyebrow"))
 	return FaceLandmarkRegion2DFromID(_r)
 }
 
 // RightEyebrow returns rightEyebrow the region containing the points describing the trace of the right eyebrow.
 func (fld *FaceLandmarks2D) RightEyebrow() *FaceLandmarkRegion2D {
+	defer runtime.KeepAlive(fld)
 	_r := objc.Send[objc.ID](objref.IDOf(fld), objc.RegisterName("rightEyebrow"))
 	return FaceLandmarkRegion2DFromID(_r)
 }
 
 // Nose returns nose the region containing the points describing the outline of the nose.
 func (fld *FaceLandmarks2D) Nose() *FaceLandmarkRegion2D {
+	defer runtime.KeepAlive(fld)
 	_r := objc.Send[objc.ID](objref.IDOf(fld), objc.RegisterName("nose"))
 	return FaceLandmarkRegion2DFromID(_r)
 }
 
 // NoseCrest returns noseCrest the region containing the points describing the trace of the center crest of the nose.
 func (fld *FaceLandmarks2D) NoseCrest() *FaceLandmarkRegion2D {
+	defer runtime.KeepAlive(fld)
 	_r := objc.Send[objc.ID](objref.IDOf(fld), objc.RegisterName("noseCrest"))
 	return FaceLandmarkRegion2DFromID(_r)
 }
 
 // MedianLine returns medianLine the region containing the points describing the trace of the center line of the face.
 func (fld *FaceLandmarks2D) MedianLine() *FaceLandmarkRegion2D {
+	defer runtime.KeepAlive(fld)
 	_r := objc.Send[objc.ID](objref.IDOf(fld), objc.RegisterName("medianLine"))
 	return FaceLandmarkRegion2DFromID(_r)
 }
 
 // OuterLips returns outer lips the region containing the points describing the outline of the outside of the lips.
 func (fld *FaceLandmarks2D) OuterLips() *FaceLandmarkRegion2D {
+	defer runtime.KeepAlive(fld)
 	_r := objc.Send[objc.ID](objref.IDOf(fld), objc.RegisterName("outerLips"))
 	return FaceLandmarkRegion2DFromID(_r)
 }
 
 // InnerLips returns innerLips the region containing the points describing the outline of the space between the of the lips.
 func (fld *FaceLandmarks2D) InnerLips() *FaceLandmarkRegion2D {
+	defer runtime.KeepAlive(fld)
 	_r := objc.Send[objc.ID](objref.IDOf(fld), objc.RegisterName("innerLips"))
 	return FaceLandmarkRegion2DFromID(_r)
 }
 
 // LeftPupil returns leftPupil the region containing the point where the left pupil is located.  This value may be inaccurate if the face isBlinking.
 func (fld *FaceLandmarks2D) LeftPupil() *FaceLandmarkRegion2D {
+	defer runtime.KeepAlive(fld)
 	_r := objc.Send[objc.ID](objref.IDOf(fld), objc.RegisterName("leftPupil"))
 	return FaceLandmarkRegion2DFromID(_r)
 }
 
 // RightPupil returns rightPupil the region containing the point where the right pupil is located.  This value may be inaccurate if the face isBlinking.
 func (fld *FaceLandmarks2D) RightPupil() *FaceLandmarkRegion2D {
+	defer runtime.KeepAlive(fld)
 	_r := objc.Send[objc.ID](objref.IDOf(fld), objc.RegisterName("rightPupil"))
 	return FaceLandmarkRegion2DFromID(_r)
 }

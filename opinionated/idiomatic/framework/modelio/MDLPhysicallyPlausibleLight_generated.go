@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func physicallyPlausibleLightAdopt(id objc.ID) *PhysicallyPlausibleLight {
 
 // WithColor sets the color of the light source.
 func (ppl *PhysicallyPlausibleLight) WithColor(color obj.Object) *PhysicallyPlausibleLight {
+	defer runtime.KeepAlive(color)
 	objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return ppl
 }
@@ -96,12 +99,14 @@ func (ppl *PhysicallyPlausibleLight) WithColorSpace(colorSpace string) *Physical
 
 // WithParent sets the parent object that contains this object.
 func (ppl *PhysicallyPlausibleLight) WithParent(parent ObjectProvider) *PhysicallyPlausibleLight {
+	defer runtime.KeepAlive(parent)
 	objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return ppl
 }
 
 // WithInstance sets the primary object, if applicable, of which this object is an instance.
 func (ppl *PhysicallyPlausibleLight) WithInstance(instance ObjectProvider) *PhysicallyPlausibleLight {
+	defer runtime.KeepAlive(instance)
 	objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return ppl
 }
@@ -114,41 +119,48 @@ func (ppl *PhysicallyPlausibleLight) WithHidden(hidden bool) *PhysicallyPlausibl
 
 // SetColorByTemperature sets the light’s color based on a black-body temperature.
 func (ppl *PhysicallyPlausibleLight) SetColorByTemperature(temperature float32) {
+	defer runtime.KeepAlive(ppl)
 	objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("setColorByTemperature:"), temperature)
 }
 
 // Color returns the color.
 func (ppl *PhysicallyPlausibleLight) Color() obj.Object {
+	defer runtime.KeepAlive(ppl)
 	_r := objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
 // Lumens returns the lumens.
 func (ppl *PhysicallyPlausibleLight) Lumens() float32 {
+	defer runtime.KeepAlive(ppl)
 	_r := objc.Send[float32](objref.IDOf(ppl), objc.RegisterName("lumens"))
 	return _r
 }
 
 // InnerConeAngle returns the inner cone angle.
 func (ppl *PhysicallyPlausibleLight) InnerConeAngle() float32 {
+	defer runtime.KeepAlive(ppl)
 	_r := objc.Send[float32](objref.IDOf(ppl), objc.RegisterName("innerConeAngle"))
 	return _r
 }
 
 // OuterConeAngle returns the outer cone angle.
 func (ppl *PhysicallyPlausibleLight) OuterConeAngle() float32 {
+	defer runtime.KeepAlive(ppl)
 	_r := objc.Send[float32](objref.IDOf(ppl), objc.RegisterName("outerConeAngle"))
 	return _r
 }
 
 // AttenuationStartDistance returns the attenuation start distance.
 func (ppl *PhysicallyPlausibleLight) AttenuationStartDistance() float32 {
+	defer runtime.KeepAlive(ppl)
 	_r := objc.Send[float32](objref.IDOf(ppl), objc.RegisterName("attenuationStartDistance"))
 	return _r
 }
 
 // AttenuationEndDistance returns the attenuation end distance.
 func (ppl *PhysicallyPlausibleLight) AttenuationEndDistance() float32 {
+	defer runtime.KeepAlive(ppl)
 	_r := objc.Send[float32](objref.IDOf(ppl), objc.RegisterName("attenuationEndDistance"))
 	return _r
 }

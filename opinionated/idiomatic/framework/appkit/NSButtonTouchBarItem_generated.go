@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -68,6 +70,7 @@ func (btbi *ButtonTouchBarItem) WithTitle(title string) *ButtonTouchBarItem {
 
 // WithImage sets the image.
 func (btbi *ButtonTouchBarItem) WithImage(image *Image) *ButtonTouchBarItem {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -76,6 +79,7 @@ func (btbi *ButtonTouchBarItem) WithImage(image *Image) *ButtonTouchBarItem {
 
 // WithBezelColor sets the bezel color.
 func (btbi *ButtonTouchBarItem) WithBezelColor(bezelColor *Color) *ButtonTouchBarItem {
+	defer runtime.KeepAlive(bezelColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setBezelColor:"), objref.IDOf(bezelColor))
 	})
@@ -84,6 +88,7 @@ func (btbi *ButtonTouchBarItem) WithBezelColor(bezelColor *Color) *ButtonTouchBa
 
 // WithTarget sets the target.
 func (btbi *ButtonTouchBarItem) WithTarget(target obj.Object) *ButtonTouchBarItem {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -116,6 +121,7 @@ func (btbi *ButtonTouchBarItem) WithVisibilityPriority(visibilityPriority float3
 
 // Title returns the title.
 func (btbi *ButtonTouchBarItem) Title() string {
+	defer runtime.KeepAlive(btbi)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -132,6 +138,7 @@ func (btbi *ButtonTouchBarItem) Title() string {
 
 // Image returns the image.
 func (btbi *ButtonTouchBarItem) Image() *Image {
+	defer runtime.KeepAlive(btbi)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {
@@ -145,6 +152,7 @@ func (btbi *ButtonTouchBarItem) Image() *Image {
 
 // BezelColor returns the bezel color.
 func (btbi *ButtonTouchBarItem) BezelColor() *Color {
+	defer runtime.KeepAlive(btbi)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -158,6 +166,7 @@ func (btbi *ButtonTouchBarItem) BezelColor() *Color {
 
 // Target returns the target.
 func (btbi *ButtonTouchBarItem) Target() obj.Object {
+	defer runtime.KeepAlive(btbi)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -171,6 +180,7 @@ func (btbi *ButtonTouchBarItem) Target() obj.Object {
 
 // IsEnabled reports whether the object is enabled.
 func (btbi *ButtonTouchBarItem) IsEnabled() bool {
+	defer runtime.KeepAlive(btbi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,33 +51,40 @@ func metaParameterAdopt(id objc.ID) *MetaParameter {
 
 // Description returns the object's -description text.
 func (mp *MetaParameter) Description() string {
+	defer runtime.KeepAlive(mp)
 	return rt.Description(objref.IDOf(mp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mp *MetaParameter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mp *MetaParameter) IsKind(className string) bool {
+	defer runtime.KeepAlive(mp)
 	return rt.IsKind(objref.IDOf(mp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mp *MetaParameter) String() string {
+	defer runtime.KeepAlive(mp)
 	return rt.Description(objref.IDOf(mp))
 }
 
 // WithValue sets a value for the metaparameter.
 func (mp *MetaParameter) WithValue(value obj.Object) *MetaParameter {
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mp
 }
 
 // Identifier returns the identifier that uniquely represents this metaparameter.
 func (mp *MetaParameter) Identifier() string {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -85,6 +94,7 @@ func (mp *MetaParameter) Identifier() string {
 
 // Value returns the value of this metaparameter
 func (mp *MetaParameter) Value() obj.Object {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }

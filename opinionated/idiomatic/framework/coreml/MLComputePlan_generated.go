@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func computePlanAdopt(id objc.ID) *ComputePlan {
 
 // Description returns the object's -description text.
 func (cp *ComputePlan) Description() string {
+	defer runtime.KeepAlive(cp)
 	return rt.Description(objref.IDOf(cp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cp *ComputePlan) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cp *ComputePlan) IsKind(className string) bool {
+	defer runtime.KeepAlive(cp)
 	return rt.IsKind(objref.IDOf(cp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cp *ComputePlan) String() string {
+	defer runtime.KeepAlive(cp)
 	return rt.Description(objref.IDOf(cp))
 }
 
@@ -74,24 +81,31 @@ func NewComputePlan() *ComputePlan {
 
 // EstimatedCostOfMLProgramOperation returns the estimated cost of executing an ML Program operation.
 func (cp *ComputePlan) EstimatedCostOfMLProgramOperation(operation *ModelStructureProgramOperation) *ComputePlanCost {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(operation)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("estimatedCostOfMLProgramOperation:"), objref.IDOf(operation))
 	return ComputePlanCostFromID(_r)
 }
 
 // ComputeDeviceUsageForNeuralNetworkLayer returns the anticipated compute devices that would be used for executing a NeuralNetwork layer.
 func (cp *ComputePlan) ComputeDeviceUsageForNeuralNetworkLayer(layer *ModelStructureNeuralNetworkLayer) *ComputePlanDeviceUsage {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(layer)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("computeDeviceUsageForNeuralNetworkLayer:"), objref.IDOf(layer))
 	return ComputePlanDeviceUsageFromID(_r)
 }
 
 // ComputeDeviceUsageForMLProgramOperation returns The anticipated compute devices that would be used for executing an ML Program operation.
 func (cp *ComputePlan) ComputeDeviceUsageForMLProgramOperation(operation *ModelStructureProgramOperation) *ComputePlanDeviceUsage {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(operation)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("computeDeviceUsageForMLProgramOperation:"), objref.IDOf(operation))
 	return ComputePlanDeviceUsageFromID(_r)
 }
 
 // ModelStructure returns the model structure.
 func (cp *ComputePlan) ModelStructure() *ModelStructure {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("modelStructure"))
 	return ModelStructureFromID(_r)
 }

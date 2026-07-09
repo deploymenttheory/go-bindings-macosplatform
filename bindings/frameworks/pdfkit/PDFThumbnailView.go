@@ -62,9 +62,9 @@ func (o *PDFThumbnailView) PDFView() *PDFView {
 	return _mainthread0
 }
 
-func (o *PDFThumbnailView) SetPDFView(pDFView *PDFView) {
+func (o *PDFThumbnailView) SetPDFView(pdfView *PDFView) {
 	purego.Main(func() {
-		o.Ptr().Send(_pDFThumbnailViewSelSetPDFView, pDFView.Ptr())
+		o.Ptr().Send(_pDFThumbnailViewSelSetPDFView, pdfView.Ptr())
 	})
 }
 

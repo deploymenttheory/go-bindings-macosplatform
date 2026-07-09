@@ -5,6 +5,8 @@
 package pencilkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -61,12 +63,14 @@ func NewEraserToolWithEraserTypeWidth(eraserType EraserType, width float64) *Era
 
 // EraserType returns the eraser type.
 func (et *EraserTool) EraserType() EraserType {
+	defer runtime.KeepAlive(et)
 	_r := objc.Send[EraserType](objref.IDOf(et), objc.RegisterName("eraserType"))
 	return _r
 }
 
 // Width returns the width of the eraser.
 func (et *EraserTool) Width() float64 {
+	defer runtime.KeepAlive(et)
 	_r := objc.Send[float64](objref.IDOf(et), objc.RegisterName("width"))
 	return _r
 }

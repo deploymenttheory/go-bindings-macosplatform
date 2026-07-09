@@ -5,6 +5,7 @@
 package glkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -110,6 +111,7 @@ func (rme *ReflectionMapEffect) WithLabel(label string) *ReflectionMapEffect {
 
 // TextureCubeMap returns the texture cube map.
 func (rme *ReflectionMapEffect) TextureCubeMap() *EffectPropertyTexture {
+	defer runtime.KeepAlive(rme)
 	_r := objc.Send[objc.ID](objref.IDOf(rme), objc.RegisterName("textureCubeMap"))
 	return EffectPropertyTextureFromID(_r)
 }

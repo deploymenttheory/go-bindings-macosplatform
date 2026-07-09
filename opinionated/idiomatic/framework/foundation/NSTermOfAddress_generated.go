@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func termOfAddressAdopt(id objc.ID) *TermOfAddress {
 
 // Description returns the object's -description text.
 func (toa *TermOfAddress) Description() string {
+	defer runtime.KeepAlive(toa)
 	return rt.Description(objref.IDOf(toa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (toa *TermOfAddress) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(toa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(toa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (toa *TermOfAddress) IsKind(className string) bool {
+	defer runtime.KeepAlive(toa)
 	return rt.IsKind(objref.IDOf(toa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (toa *TermOfAddress) String() string {
+	defer runtime.KeepAlive(toa)
 	return rt.Description(objref.IDOf(toa))
 }
 
@@ -81,13 +87,14 @@ func (toa *TermOfAddress) WithObservationInfo(observationInfo unsafe.Pointer) *T
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (toa *TermOfAddress) WithScriptingProperties(scriptingProperties obj.Object) *TermOfAddress {
-	objc.Send[objc.ID](objref.IDOf(toa), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (toa *TermOfAddress) WithScriptingProperties(scriptingProperties map[string]obj.Object) *TermOfAddress {
+	objc.Send[objc.ID](objref.IDOf(toa), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return toa
 }
 
 // LanguageIdentifier returns the ISO language code if this is a localized term of address
 func (toa *TermOfAddress) LanguageIdentifier() string {
+	defer runtime.KeepAlive(toa)
 	_r := objc.Send[objc.ID](objref.IDOf(toa), objc.RegisterName("languageIdentifier"))
 	if _r == 0 {
 		return ""
@@ -99,6 +106,7 @@ func (toa *TermOfAddress) LanguageIdentifier() string {
 //
 // Pronouns returns the collection as a Go slice.
 func (toa *TermOfAddress) Pronouns() []*MorphologyPronoun {
+	defer runtime.KeepAlive(toa)
 	_arr := objc.Send[objc.ID](objref.IDOf(toa), objc.RegisterName("pronouns"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MorphologyPronoun { return MorphologyPronounFromID(_id) })
 }

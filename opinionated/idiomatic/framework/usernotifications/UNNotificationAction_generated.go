@@ -5,6 +5,8 @@
 package usernotifications
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func notificationActionAdopt(id objc.ID) *NotificationAction {
 
 // Description returns the object's -description text.
 func (na *NotificationAction) Description() string {
+	defer runtime.KeepAlive(na)
 	return rt.Description(objref.IDOf(na))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (na *NotificationAction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(na)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(na), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (na *NotificationAction) IsKind(className string) bool {
+	defer runtime.KeepAlive(na)
 	return rt.IsKind(objref.IDOf(na), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (na *NotificationAction) String() string {
+	defer runtime.KeepAlive(na)
 	return rt.Description(objref.IDOf(na))
 }
 
 // Identifier returns the identifier.
 func (na *NotificationAction) Identifier() string {
+	defer runtime.KeepAlive(na)
 	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -79,6 +87,7 @@ func (na *NotificationAction) Identifier() string {
 
 // Title returns the title.
 func (na *NotificationAction) Title() string {
+	defer runtime.KeepAlive(na)
 	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -88,12 +97,14 @@ func (na *NotificationAction) Title() string {
 
 // Options returns the options.
 func (na *NotificationAction) Options() NotificationActionOptions {
+	defer runtime.KeepAlive(na)
 	_r := objc.Send[NotificationActionOptions](objref.IDOf(na), objc.RegisterName("options"))
 	return _r
 }
 
 // Icon returns the icon.
 func (na *NotificationAction) Icon() *NotificationActionIcon {
+	defer runtime.KeepAlive(na)
 	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("icon"))
 	return NotificationActionIconFromID(_r)
 }

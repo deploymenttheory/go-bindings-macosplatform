@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,40 +47,46 @@ func barcodeEventSignatureResponseAdopt(id objc.ID) *BarcodeEventSignatureRespon
 
 // Description returns the object's -description text.
 func (besr *BarcodeEventSignatureResponse) Description() string {
+	defer runtime.KeepAlive(besr)
 	return rt.Description(objref.IDOf(besr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (besr *BarcodeEventSignatureResponse) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(besr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(besr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (besr *BarcodeEventSignatureResponse) IsKind(className string) bool {
+	defer runtime.KeepAlive(besr)
 	return rt.IsKind(objref.IDOf(besr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (besr *BarcodeEventSignatureResponse) String() string {
+	defer runtime.KeepAlive(besr)
 	return rt.Description(objref.IDOf(besr))
 }
 
 // NewBarcodeEventSignatureResponseWithSignedData creates a new BarcodeEventSignatureResponse.
-func NewBarcodeEventSignatureResponseWithSignedData(signedData obj.Object) *BarcodeEventSignatureResponse {
+func NewBarcodeEventSignatureResponseWithSignedData(signedData []byte) *BarcodeEventSignatureResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKBarcodeEventSignatureResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSignedData:"), objref.IDOf(signedData))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSignedData:"), rt.BytesToNSData(signedData))
 	return barcodeEventSignatureResponseAdopt(_id)
 }
 
 // WithSignedData sets the signed data.
-func (besr *BarcodeEventSignatureResponse) WithSignedData(signedData obj.Object) *BarcodeEventSignatureResponse {
-	objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("setSignedData:"), objref.IDOf(signedData))
+func (besr *BarcodeEventSignatureResponse) WithSignedData(signedData []byte) *BarcodeEventSignatureResponse {
+	objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("setSignedData:"), rt.BytesToNSData(signedData))
 	return besr
 }
 
 // SignedData returns the signed data.
-func (besr *BarcodeEventSignatureResponse) SignedData() obj.Object {
+func (besr *BarcodeEventSignatureResponse) SignedData() []byte {
+	defer runtime.KeepAlive(besr)
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("signedData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

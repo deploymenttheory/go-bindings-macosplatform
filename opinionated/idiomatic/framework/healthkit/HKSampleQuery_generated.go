@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,6 +56,7 @@ func NewSampleQuery() *SampleQuery {
 
 // Limit returns the maximum number of results the receiver will return upon completion.
 func (sq *SampleQuery) Limit() int {
+	defer runtime.KeepAlive(sq)
 	_r := objc.Send[int](objref.IDOf(sq), objc.RegisterName("limit"))
 	return _r
 }
@@ -62,6 +65,7 @@ func (sq *SampleQuery) Limit() int {
 //
 // SortDescriptors returns the collection as a Go slice.
 func (sq *SampleQuery) SortDescriptors() []obj.Object {
+	defer runtime.KeepAlive(sq)
 	_arr := objc.Send[objc.ID](objref.IDOf(sq), objc.RegisterName("sortDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

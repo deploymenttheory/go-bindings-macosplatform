@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,45 +49,54 @@ func streamNodeAdopt(id objc.ID) *StreamNode {
 
 // Description returns the object's -description text.
 func (sn *StreamNode) Description() string {
+	defer runtime.KeepAlive(sn)
 	return rt.Description(objref.IDOf(sn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sn *StreamNode) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sn)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sn *StreamNode) IsKind(className string) bool {
+	defer runtime.KeepAlive(sn)
 	return rt.IsKind(objref.IDOf(sn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sn *StreamNode) String() string {
+	defer runtime.KeepAlive(sn)
 	return rt.Description(objref.IDOf(sn))
 }
 
 // GainMetaParameter returns if specified during construction, the metaparameter for controlling gain will be available here
 func (sn *StreamNode) GainMetaParameter() *NumberMetaParameter {
+	defer runtime.KeepAlive(sn)
 	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("gainMetaParameter"))
 	return NumberMetaParameterFromID(_r)
 }
 
 // RateMetaParameter returns if specified during construction, the metaparameter for controlling rate/pitch will be available here
 func (sn *StreamNode) RateMetaParameter() *NumberMetaParameter {
+	defer runtime.KeepAlive(sn)
 	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("rateMetaParameter"))
 	return NumberMetaParameterFromID(_r)
 }
 
 // Mixer returns the readonly property that returns the PHASEMixer this stream was created with and assigned to.
 func (sn *StreamNode) Mixer() *Mixer {
+	defer runtime.KeepAlive(sn)
 	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("mixer"))
 	return MixerFromID(_r)
 }
 
 // Format returns the readonly property that returns the AVAudioFormat that this stream was initialized with.
 func (sn *StreamNode) Format() obj.Object {
+	defer runtime.KeepAlive(sn)
 	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("format"))
 	return obj.Wrap(_r)
 }

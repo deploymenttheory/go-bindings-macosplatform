@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewMetricPlayerItemSeekDidCompleteEvent() *MetricPlayerItemSeekDidCompleteE
 
 // DidSeekInBuffer wraps the corresponding Objective-C method.
 func (mpisdce *MetricPlayerItemSeekDidCompleteEvent) DidSeekInBuffer() bool {
+	defer runtime.KeepAlive(mpisdce)
 	_r := objc.Send[bool](objref.IDOf(mpisdce), objc.RegisterName("didSeekInBuffer"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package social
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -14,6 +16,7 @@ import (
 
 // RequestForServiceTypeRequestMethodURLParameters initializes a newly created request object with the specified properties.
 func RequestForServiceTypeRequestMethodURLParameters(serviceType string, requestMethod RequestMethod, url string, parameters obj.Object) *Request {
+	defer runtime.KeepAlive(parameters)
 	_r := objc.Send[objc.ID](objc.ID(_class("SLRequest")), objc.RegisterName("requestForServiceType:requestMethod:URL:parameters:"), purego.NSString(serviceType), requestMethod, rt.FileURL(url), objref.IDOf(parameters))
 	return RequestFromID(_r)
 }

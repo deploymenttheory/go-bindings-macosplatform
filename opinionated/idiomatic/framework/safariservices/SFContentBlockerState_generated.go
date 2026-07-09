@@ -5,6 +5,8 @@
 package safariservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func contentBlockerStateAdopt(id objc.ID) *ContentBlockerState {
 
 // Description returns the object's -description text.
 func (cbs *ContentBlockerState) Description() string {
+	defer runtime.KeepAlive(cbs)
 	return rt.Description(objref.IDOf(cbs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cbs *ContentBlockerState) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cbs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cbs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cbs *ContentBlockerState) IsKind(className string) bool {
+	defer runtime.KeepAlive(cbs)
 	return rt.IsKind(objref.IDOf(cbs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cbs *ContentBlockerState) String() string {
+	defer runtime.KeepAlive(cbs)
 	return rt.Description(objref.IDOf(cbs))
 }
 
@@ -74,6 +81,7 @@ func NewContentBlockerState() *ContentBlockerState {
 
 // IsEnabled reports whether the object is enabled.
 func (cbs *ContentBlockerState) IsEnabled() bool {
+	defer runtime.KeepAlive(cbs)
 	_r := objc.Send[bool](objref.IDOf(cbs), objc.RegisterName("isEnabled"))
 	return _r
 }

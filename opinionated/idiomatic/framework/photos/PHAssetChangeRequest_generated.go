@@ -5,11 +5,13 @@
 package photos
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,8 +51,8 @@ func assetChangeRequestAdopt(id objc.ID) *AssetChangeRequest {
 }
 
 // WithCreationDate sets the date and time at which the asset claims to have been originally created.
-func (acr *AssetChangeRequest) WithCreationDate(creationDate obj.Object) *AssetChangeRequest {
-	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setCreationDate:"), objref.IDOf(creationDate))
+func (acr *AssetChangeRequest) WithCreationDate(creationDate time.Time) *AssetChangeRequest {
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setCreationDate:"), rt.TimeToNSDate(creationDate))
 	return acr
 }
 
@@ -74,41 +76,48 @@ func (acr *AssetChangeRequest) WithHidden(hidden bool) *AssetChangeRequest {
 
 // WithContentEditingOutput sets the output of an asset content editing session.
 func (acr *AssetChangeRequest) WithContentEditingOutput(contentEditingOutput *ContentEditingOutput) *AssetChangeRequest {
+	defer runtime.KeepAlive(contentEditingOutput)
 	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setContentEditingOutput:"), objref.IDOf(contentEditingOutput))
 	return acr
 }
 
 // RevertAssetContentToOriginal request to revert any edits made to the asset’s content.
 func (acr *AssetChangeRequest) RevertAssetContentToOriginal() {
+	defer runtime.KeepAlive(acr)
 	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("revertAssetContentToOriginal"))
 }
 
 // PlaceholderForCreatedAsset returns the placeholder for created asset.
 func (acr *AssetChangeRequest) PlaceholderForCreatedAsset() *ObjectPlaceholder {
+	defer runtime.KeepAlive(acr)
 	_r := objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("placeholderForCreatedAsset"))
 	return ObjectPlaceholderFromID(_r)
 }
 
 // CreationDate returns the creation date.
-func (acr *AssetChangeRequest) CreationDate() obj.Object {
+func (acr *AssetChangeRequest) CreationDate() time.Time {
+	defer runtime.KeepAlive(acr)
 	_r := objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("creationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // IsFavorite reports whether the object is favorite.
 func (acr *AssetChangeRequest) IsFavorite() bool {
+	defer runtime.KeepAlive(acr)
 	_r := objc.Send[bool](objref.IDOf(acr), objc.RegisterName("isFavorite"))
 	return _r
 }
 
 // IsHidden reports whether the object is hidden.
 func (acr *AssetChangeRequest) IsHidden() bool {
+	defer runtime.KeepAlive(acr)
 	_r := objc.Send[bool](objref.IDOf(acr), objc.RegisterName("isHidden"))
 	return _r
 }
 
 // ContentEditingOutput returns the content editing output.
 func (acr *AssetChangeRequest) ContentEditingOutput() *ContentEditingOutput {
+	defer runtime.KeepAlive(acr)
 	_r := objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("contentEditingOutput"))
 	return ContentEditingOutputFromID(_r)
 }

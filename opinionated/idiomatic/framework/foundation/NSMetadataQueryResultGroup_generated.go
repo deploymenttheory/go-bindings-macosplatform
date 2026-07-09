@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func metadataQueryResultGroupAdopt(id objc.ID) *MetadataQueryResultGroup {
 
 // Description returns the object's -description text.
 func (mqrg *MetadataQueryResultGroup) Description() string {
+	defer runtime.KeepAlive(mqrg)
 	return rt.Description(objref.IDOf(mqrg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mqrg *MetadataQueryResultGroup) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mqrg)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mqrg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mqrg *MetadataQueryResultGroup) IsKind(className string) bool {
+	defer runtime.KeepAlive(mqrg)
 	return rt.IsKind(objref.IDOf(mqrg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mqrg *MetadataQueryResultGroup) String() string {
+	defer runtime.KeepAlive(mqrg)
 	return rt.Description(objref.IDOf(mqrg))
 }
 
@@ -81,19 +87,21 @@ func (mqrg *MetadataQueryResultGroup) WithObservationInfo(observationInfo unsafe
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (mqrg *MetadataQueryResultGroup) WithScriptingProperties(scriptingProperties obj.Object) *MetadataQueryResultGroup {
-	objc.Send[objc.ID](objref.IDOf(mqrg), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (mqrg *MetadataQueryResultGroup) WithScriptingProperties(scriptingProperties map[string]obj.Object) *MetadataQueryResultGroup {
+	objc.Send[objc.ID](objref.IDOf(mqrg), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return mqrg
 }
 
 // ResultAtIndex returns the query result at a specific index.
 func (mqrg *MetadataQueryResultGroup) ResultAtIndex(idx int) obj.Object {
+	defer runtime.KeepAlive(mqrg)
 	_r := objc.Send[objc.ID](objref.IDOf(mqrg), objc.RegisterName("resultAtIndex:"), idx)
 	return obj.Wrap(_r)
 }
 
 // Attribute returns the attribute.
 func (mqrg *MetadataQueryResultGroup) Attribute() string {
+	defer runtime.KeepAlive(mqrg)
 	_r := objc.Send[objc.ID](objref.IDOf(mqrg), objc.RegisterName("attribute"))
 	if _r == 0 {
 		return ""
@@ -103,6 +111,7 @@ func (mqrg *MetadataQueryResultGroup) Attribute() string {
 
 // Value returns the value.
 func (mqrg *MetadataQueryResultGroup) Value() obj.Object {
+	defer runtime.KeepAlive(mqrg)
 	_r := objc.Send[objc.ID](objref.IDOf(mqrg), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
@@ -111,18 +120,21 @@ func (mqrg *MetadataQueryResultGroup) Value() obj.Object {
 //
 // Subgroups returns the collection as a Go slice.
 func (mqrg *MetadataQueryResultGroup) Subgroups() []*MetadataQueryResultGroup {
+	defer runtime.KeepAlive(mqrg)
 	_arr := objc.Send[objc.ID](objref.IDOf(mqrg), objc.RegisterName("subgroups"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataQueryResultGroup { return MetadataQueryResultGroupFromID(_id) })
 }
 
 // ResultCount returns the result count.
 func (mqrg *MetadataQueryResultGroup) ResultCount() int {
+	defer runtime.KeepAlive(mqrg)
 	_r := objc.Send[int](objref.IDOf(mqrg), objc.RegisterName("resultCount"))
 	return _r
 }
 
 // Results returns the results.
 func (mqrg *MetadataQueryResultGroup) Results() obj.Object {
+	defer runtime.KeepAlive(mqrg)
 	_r := objc.Send[objc.ID](objref.IDOf(mqrg), objc.RegisterName("results"))
 	return obj.Wrap(_r)
 }

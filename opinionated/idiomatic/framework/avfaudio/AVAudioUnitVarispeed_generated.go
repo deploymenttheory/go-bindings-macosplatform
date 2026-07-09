@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (auv *AudioUnitVarispeed) WithBypass(bypass bool) *AudioUnitVarispeed {
 
 // Rate returns the rate.
 func (auv *AudioUnitVarispeed) Rate() float32 {
+	defer runtime.KeepAlive(auv)
 	_r := objc.Send[float32](objref.IDOf(auv), objc.RegisterName("rate"))
 	return _r
 }

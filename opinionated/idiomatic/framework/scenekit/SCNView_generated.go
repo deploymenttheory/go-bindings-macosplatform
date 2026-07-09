@@ -5,6 +5,7 @@
 package scenekit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,32 +51,37 @@ func viewAdopt(id objc.ID) *View {
 
 // Description returns the object's -description text.
 func (v_ *View) Description() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (v_ *View) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (v_ *View) IsKind(className string) bool {
+	defer runtime.KeepAlive(v_)
 	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (v_ *View) String() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
 // NewViewWithFrameOptions initializes and returns a newly allocated SceneKit view object with the specified frame rectangle and options.
-func NewViewWithFrameOptions(frame corefoundation.CGRect, options obj.Object) *View {
+func NewViewWithFrameOptions(frame corefoundation.CGRect, options map[string]obj.Object) *View {
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
 			_alloc := objc.Send[objc.ID](objc.ID(_class("SCNView")), objc.RegisterName("alloc"))
-			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:options:"), frame, objref.IDOf(options))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:options:"), frame, rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 			return viewAdopt(_id)
 		}()
 	})
@@ -84,6 +90,7 @@ func NewViewWithFrameOptions(frame corefoundation.CGRect, options obj.Object) *V
 
 // WithScene sets the scene to be displayed in the view.
 func (v_ *View) WithScene(scene *Scene) *View {
+	defer runtime.KeepAlive(scene)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setScene:"), objref.IDOf(scene))
 	})
@@ -100,6 +107,7 @@ func (v_ *View) WithRendersContinuously(rendersContinuously bool) *View {
 
 // WithBackgroundColor sets the background color of the view.
 func (v_ *View) WithBackgroundColor(backgroundColor obj.Object) *View {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -156,6 +164,7 @@ func (v_ *View) WithPixelFormat(pixelFormat unsafe.Pointer) *View {
 
 // Snapshot returns renders the view’s scene into a new image object.
 func (v_ *View) Snapshot() obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -169,6 +178,8 @@ func (v_ *View) Snapshot() obj.Object {
 
 // Play resumes playback of the view’s scene.
 func (v_ *View) Play(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("play:"), objref.IDOf(sender))
 	})
@@ -177,6 +188,8 @@ func (v_ *View) Play(sender obj.Object) {
 
 // Pause pauses playback of the view’s scene.
 func (v_ *View) Pause(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("pause:"), objref.IDOf(sender))
 	})
@@ -185,6 +198,8 @@ func (v_ *View) Pause(sender obj.Object) {
 
 // Stop stops playback of the view’s scene and resets the scene time to its start time.
 func (v_ *View) Stop(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("stop:"), objref.IDOf(sender))
 	})
@@ -193,6 +208,7 @@ func (v_ *View) Stop(sender obj.Object) {
 
 // Scene specifies the scene of the receiver
 func (v_ *View) Scene() *Scene {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *Scene
 	purego.Main(func() {
 		_mainthread0 = func() *Scene {
@@ -206,6 +222,7 @@ func (v_ *View) Scene() *Scene {
 
 // RendersContinuously reports whether when set to true, the view continously redraw at the display link frame rate. When set to false the view will only redraw when something change or animates in the receiver's scene. Defaults to false.
 func (v_ *View) RendersContinuously() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -219,6 +236,7 @@ func (v_ *View) RendersContinuously() bool {
 
 // BackgroundColor specifies the background color of the receiver. Defaults to opaque white.
 func (v_ *View) BackgroundColor() obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -232,6 +250,7 @@ func (v_ *View) BackgroundColor() obj.Object {
 
 // AllowsCameraControl reports whether a Boolean value that determines whether the user can manipulate the point of view used to render the scene. When set to true, the user can manipulate the current point of view with the mouse or the trackpad. The scene graph and existing cameras won't be modified by this action. The default value of this property is false. Note that the primary purpose of this property is to aid in debugging your application. You may want to implement your own camera controller suitable for your application. The built-in camera controller let you: - drag the mouse to rotate the camera around the scene - drag+cmd to rotate the camera in local space - drag+shift to rotate using sticky axis - use the scroll wheel or alt+drag the mouse to translate the camera on its local X,Y plan - alt+scroll wheel to move the camera forward/backward - rotate gesture (trackpad only) to roll the camera (rotation around the Z axis) - pinch gesture (trackpad only) move the camera forward/backward - alt + pinch gesture (trackpad only) to zoom-in / zoom-out (change the field of view of the camera)
 func (v_ *View) AllowsCameraControl() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -245,6 +264,7 @@ func (v_ *View) AllowsCameraControl() bool {
 
 // DefaultCameraController returns the default SCNCameraController used to drive the current point of view when allowCameraController is set to YES.
 func (v_ *View) DefaultCameraController() *CameraController {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *CameraController
 	purego.Main(func() {
 		_mainthread0 = func() *CameraController {
@@ -258,6 +278,7 @@ func (v_ *View) DefaultCameraController() *CameraController {
 
 // PreferredFramesPerSecond returns the rate you want the view to redraw its contents. When your application sets its preferred frame rate, the view chooses a frame rate as close to that as possible based on the capabilities of the screen the view is displayed on. The actual frame rate chosen is usually a factor of the maximum refresh rate of the screen to provide a consistent frame rate. For example, if the maximum refresh rate of the screen is 60 frames per second, that is also the highest frame rate the view sets as the actual frame rate. However, if you ask for a lower frame rate, it might choose 30, 20, 15 or some other factor to be the actual frame rate. Your application should choose a frame rate that it can consistently maintain. The default value is 0 which means the display link will fire at the native cadence of the display hardware.
 func (v_ *View) PreferredFramesPerSecond() int {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -271,6 +292,7 @@ func (v_ *View) PreferredFramesPerSecond() int {
 
 // DrawableResizesAsynchronously reports whether the drawable is resized asynchonously during a live resize operation. Defaults to true. If set to true, the actual viewport size during a live resize can be retrieved using currentViewport (see SCNSceneRenderer.h)
 func (v_ *View) DrawableResizesAsynchronously() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -284,6 +306,7 @@ func (v_ *View) DrawableResizesAsynchronously() bool {
 
 // AntialiasingMode returns defaults to SCNAntialiasingModeMultisampling4X on macOS and SCNAntialiasingModeNone on iOS.
 func (v_ *View) AntialiasingMode() AntialiasingMode {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 AntialiasingMode
 	purego.Main(func() {
 		_mainthread0 = func() AntialiasingMode {

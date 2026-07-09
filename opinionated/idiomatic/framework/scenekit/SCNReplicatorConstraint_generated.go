@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,6 +53,7 @@ func NewReplicatorConstraint() *ReplicatorConstraint {
 
 // WithTarget sets defines the target node to replicate
 func (rc *ReplicatorConstraint) WithTarget(target NodeProvider) *ReplicatorConstraint {
+	defer runtime.KeepAlive(target)
 	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return rc
 }
@@ -93,24 +96,28 @@ func (rc *ReplicatorConstraint) WithIncremental(incremental bool) *ReplicatorCon
 
 // Target defines the target node to replicate
 func (rc *ReplicatorConstraint) Target() *Node {
+	defer runtime.KeepAlive(rc)
 	_r := objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("target"))
 	return NodeFromID(_r)
 }
 
 // ReplicatesOrientation reports whether defines whether or not the constraint should replicate the target orientation. Defaults to true.
 func (rc *ReplicatorConstraint) ReplicatesOrientation() bool {
+	defer runtime.KeepAlive(rc)
 	_r := objc.Send[bool](objref.IDOf(rc), objc.RegisterName("replicatesOrientation"))
 	return _r
 }
 
 // ReplicatesPosition reports whether defines whether or not the constraint should replicate the target position. Defaults to true.
 func (rc *ReplicatorConstraint) ReplicatesPosition() bool {
+	defer runtime.KeepAlive(rc)
 	_r := objc.Send[bool](objref.IDOf(rc), objc.RegisterName("replicatesPosition"))
 	return _r
 }
 
 // ReplicatesScale reports whether defines whether or not the constraint should replicate the target scale. Defaults to true.
 func (rc *ReplicatorConstraint) ReplicatesScale() bool {
+	defer runtime.KeepAlive(rc)
 	_r := objc.Send[bool](objref.IDOf(rc), objc.RegisterName("replicatesScale"))
 	return _r
 }

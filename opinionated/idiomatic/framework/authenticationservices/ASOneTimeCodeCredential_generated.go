@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func oneTimeCodeCredentialAdopt(id objc.ID) *OneTimeCodeCredential {
 
 // Description returns the object's -description text.
 func (otcc *OneTimeCodeCredential) Description() string {
+	defer runtime.KeepAlive(otcc)
 	return rt.Description(objref.IDOf(otcc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (otcc *OneTimeCodeCredential) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(otcc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(otcc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (otcc *OneTimeCodeCredential) IsKind(className string) bool {
+	defer runtime.KeepAlive(otcc)
 	return rt.IsKind(objref.IDOf(otcc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (otcc *OneTimeCodeCredential) String() string {
+	defer runtime.KeepAlive(otcc)
 	return rt.Description(objref.IDOf(otcc))
 }
 
@@ -75,6 +82,7 @@ func NewOneTimeCodeCredentialWithCode(code string) *OneTimeCodeCredential {
 
 // Code returns the code.
 func (otcc *OneTimeCodeCredential) Code() string {
+	defer runtime.KeepAlive(otcc)
 	_r := objc.Send[objc.ID](objref.IDOf(otcc), objc.RegisterName("code"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func dockTileAdopt(id objc.ID) *DockTile {
 
 // Description returns the object's -description text.
 func (dt *DockTile) Description() string {
+	defer runtime.KeepAlive(dt)
 	return rt.Description(objref.IDOf(dt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dt *DockTile) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dt *DockTile) IsKind(className string) bool {
+	defer runtime.KeepAlive(dt)
 	return rt.IsKind(objref.IDOf(dt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dt *DockTile) String() string {
+	defer runtime.KeepAlive(dt)
 	return rt.Description(objref.IDOf(dt))
 }
 
@@ -75,6 +82,7 @@ func NewDockTile() *DockTile {
 
 // WithContentView sets the view to use for drawing the dock tile contents.
 func (dt *DockTile) WithContentView(contentView ViewProvider) *DockTile {
+	defer runtime.KeepAlive(contentView)
 	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	return dt
 }
@@ -93,29 +101,34 @@ func (dt *DockTile) WithBadgeLabel(badgeLabel string) *DockTile {
 
 // Display redraws the dock tile’s content.
 func (dt *DockTile) Display() {
+	defer runtime.KeepAlive(dt)
 	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("display"))
 }
 
 // Size returns the size.
 func (dt *DockTile) Size() corefoundation.CGSize {
+	defer runtime.KeepAlive(dt)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(dt), objc.RegisterName("size"))
 	return _r
 }
 
 // ContentView returns the content view.
 func (dt *DockTile) ContentView() *View {
+	defer runtime.KeepAlive(dt)
 	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("contentView"))
 	return ViewFromID(_r)
 }
 
 // ShowsApplicationBadge wraps the corresponding Objective-C method.
 func (dt *DockTile) ShowsApplicationBadge() bool {
+	defer runtime.KeepAlive(dt)
 	_r := objc.Send[bool](objref.IDOf(dt), objc.RegisterName("showsApplicationBadge"))
 	return _r
 }
 
 // BadgeLabel returns the badge label.
 func (dt *DockTile) BadgeLabel() string {
+	defer runtime.KeepAlive(dt)
 	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("badgeLabel"))
 	if _r == 0 {
 		return ""
@@ -125,6 +138,7 @@ func (dt *DockTile) BadgeLabel() string {
 
 // Owner returns the owner.
 func (dt *DockTile) Owner() obj.Object {
+	defer runtime.KeepAlive(dt)
 	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("owner"))
 	return obj.Wrap(_r)
 }

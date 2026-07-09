@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,115 +50,140 @@ func mTRUnitTestingClusterTestStructArrayArgumentRequestParamsAdopt(id objc.ID) 
 
 // Description returns the object's -description text.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Description() string {
+	defer runtime.KeepAlive(mutctsaarp)
 	return rt.Description(objref.IDOf(mutctsaarp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mutctsaarp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mutctsaarp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mutctsaarp)
 	return rt.IsKind(objref.IDOf(mutctsaarp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) String() string {
+	defer runtime.KeepAlive(mutctsaarp)
 	return rt.Description(objref.IDOf(mutctsaarp))
 }
 
 // WithArg5 sets the arg5.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) WithArg5(arg5 obj.Object) *MTRUnitTestingClusterTestStructArrayArgumentRequestParams {
+	defer runtime.KeepAlive(arg5)
 	objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("setArg5:"), objref.IDOf(arg5))
 	return mutctsaarp
 }
 
 // WithArg6 sets the arg6.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) WithArg6(arg6 obj.Object) *MTRUnitTestingClusterTestStructArrayArgumentRequestParams {
+	defer runtime.KeepAlive(arg6)
 	objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("setArg6:"), objref.IDOf(arg6))
 	return mutctsaarp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestStructArrayArgumentRequestParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mutctsaarp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterTestStructArrayArgumentRequestParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mutctsaarp
 }
 
 // Arg1 returns the arg1.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg1() obj.Object {
+	defer runtime.KeepAlive(mutctsaarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("arg1"))
 	return obj.Wrap(_r)
 }
 
 // SetArg1 wraps the corresponding Objective-C method.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetArg1(arg1 obj.Object) {
+	defer runtime.KeepAlive(mutctsaarp)
+	defer runtime.KeepAlive(arg1)
 	objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 }
 
 // Arg2 returns the arg2.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg2() obj.Object {
+	defer runtime.KeepAlive(mutctsaarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("arg2"))
 	return obj.Wrap(_r)
 }
 
 // SetArg2 wraps the corresponding Objective-C method.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetArg2(arg2 obj.Object) {
+	defer runtime.KeepAlive(mutctsaarp)
+	defer runtime.KeepAlive(arg2)
 	objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
 }
 
 // Arg3 returns the arg3.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg3() obj.Object {
+	defer runtime.KeepAlive(mutctsaarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("arg3"))
 	return obj.Wrap(_r)
 }
 
 // SetArg3 wraps the corresponding Objective-C method.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetArg3(arg3 obj.Object) {
+	defer runtime.KeepAlive(mutctsaarp)
+	defer runtime.KeepAlive(arg3)
 	objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("setArg3:"), objref.IDOf(arg3))
 }
 
 // Arg4 returns the arg4.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg4() obj.Object {
+	defer runtime.KeepAlive(mutctsaarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("arg4"))
 	return obj.Wrap(_r)
 }
 
 // SetArg4 wraps the corresponding Objective-C method.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetArg4(arg4 obj.Object) {
+	defer runtime.KeepAlive(mutctsaarp)
+	defer runtime.KeepAlive(arg4)
 	objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("setArg4:"), objref.IDOf(arg4))
 }
 
 // Arg5 returns the arg5.
-func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg5() obj.Object {
+func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg5() *foundation.Number {
+	defer runtime.KeepAlive(mutctsaarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("arg5"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Arg6 returns the arg6.
-func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg6() obj.Object {
+func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg6() *foundation.Number {
+	defer runtime.KeepAlive(mutctsaarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("arg6"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) TimedInvokeTimeoutMs() obj.Object {
+func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mutctsaarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) ServerSideProcessingTimeout() obj.Object {
+func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mutctsaarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRUnitTestingClusterTestStructArrayArgumentRequestParams marks MTRUnitTestingClusterTestStructArrayArgumentRequestParams — and, by embedding promotion, its

@@ -5,6 +5,8 @@
 package corewlan
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func networkAdopt(id objc.ID) *Network {
 
 // Description returns the object's -description text.
 func (n *Network) Description() string {
+	defer runtime.KeepAlive(n)
 	return rt.Description(objref.IDOf(n))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (n *Network) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(n), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (n *Network) IsKind(className string) bool {
+	defer runtime.KeepAlive(n)
 	return rt.IsKind(objref.IDOf(n), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (n *Network) String() string {
+	defer runtime.KeepAlive(n)
 	return rt.Description(objref.IDOf(n))
 }
 
@@ -74,24 +81,29 @@ func NewNetwork() *Network {
 
 // IsEqualToNetwork method for determining CWNetwork object equality.
 func (n *Network) IsEqualToNetwork(network *Network) bool {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(network)
 	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("isEqualToNetwork:"), objref.IDOf(network))
 	return _r
 }
 
 // SupportsSecurity method for determining which security types a network supports.
 func (n *Network) SupportsSecurity(security Security) bool {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("supportsSecurity:"), security)
 	return _r
 }
 
 // SupportsPHYMode method for determining which PHY modes a network supports.
 func (n *Network) SupportsPHYMode(phyMode PHYMode) bool {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("supportsPHYMode:"), phyMode)
 	return _r
 }
 
 // Ssid returns the service set identifier (SSID) for the Wi-Fi network device, encoded as a string. Returns nil if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string.
 func (n *Network) Ssid() string {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("ssid"))
 	if _r == 0 {
 		return ""
@@ -100,13 +112,15 @@ func (n *Network) Ssid() string {
 }
 
 // SsidData returns the service set identifier (SSID) for the Wi-Fi network device, encapsulated in an NSData object. The SSID is defined as 1-32 octets.
-func (n *Network) SsidData() obj.Object {
+func (n *Network) SsidData() []byte {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("ssidData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Bssid returns the basic service set identifier (BSSID) for the Wi-Fi network device, returned as UTF-8 string. Returns a UTF-8 string using hexadecimal characters formatted as XX:XX:XX:XX:XX:XX.
 func (n *Network) Bssid() string {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("bssid"))
 	if _r == 0 {
 		return ""
@@ -116,30 +130,35 @@ func (n *Network) Bssid() string {
 
 // WlanChannel returns the operating channel of the Wi-Fi device.
 func (n *Network) WlanChannel() *Channel {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("wlanChannel"))
 	return ChannelFromID(_r)
 }
 
 // RssiValue returns the received signal strength indication (RSSI) measurement (dBm) for the Wi-Fi device.
 func (n *Network) RssiValue() int {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("rssiValue"))
 	return _r
 }
 
 // NoiseMeasurement returns the noise measurement (dBm) for the Wi-Fi device.
 func (n *Network) NoiseMeasurement() int {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("noiseMeasurement"))
 	return _r
 }
 
 // InformationElementData returns information element data included in beacon or probe response frames.
-func (n *Network) InformationElementData() obj.Object {
+func (n *Network) InformationElementData() []byte {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("informationElementData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // CountryCode returns the advertised country code (ISO/IEC 3166-1:1997) for the Wi-Fi device.
 func (n *Network) CountryCode() string {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("countryCode"))
 	if _r == 0 {
 		return ""
@@ -149,12 +168,14 @@ func (n *Network) CountryCode() string {
 
 // BeaconInterval returns the beacon interval (ms) for the Wi-Fi device.
 func (n *Network) BeaconInterval() int {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("beaconInterval"))
 	return _r
 }
 
 // Ibss reports whether the Wi-Fi device is participating in an independent basic service set (IBSS), or ad-hoc Wi-Fi network.
 func (n *Network) Ibss() bool {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("ibss"))
 	return _r
 }

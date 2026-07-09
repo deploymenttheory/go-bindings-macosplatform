@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRWaterHeaterManagementClusterBoostEndedEventAdopt(id objc.ID) *MTRWaterHe
 
 // Description returns the object's -description text.
 func (mwhmcbee *MTRWaterHeaterManagementClusterBoostEndedEvent) Description() string {
+	defer runtime.KeepAlive(mwhmcbee)
 	return rt.Description(objref.IDOf(mwhmcbee))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mwhmcbee *MTRWaterHeaterManagementClusterBoostEndedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mwhmcbee)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mwhmcbee), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mwhmcbee *MTRWaterHeaterManagementClusterBoostEndedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mwhmcbee)
 	return rt.IsKind(objref.IDOf(mwhmcbee), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mwhmcbee *MTRWaterHeaterManagementClusterBoostEndedEvent) String() string {
+	defer runtime.KeepAlive(mwhmcbee)
 	return rt.Description(objref.IDOf(mwhmcbee))
 }
 

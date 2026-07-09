@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -77,18 +78,21 @@ func (mrzo *ModifyRecordZonesOperation) WithRecordZoneIDsToDelete(items ...*Reco
 
 // WithDatabase sets the database that the operation uses.
 func (mrzo *ModifyRecordZonesOperation) WithDatabase(database *Database) *ModifyRecordZonesOperation {
+	defer runtime.KeepAlive(database)
 	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return mrzo
 }
 
 // WithConfiguration sets the operation’s configuration.
 func (mrzo *ModifyRecordZonesOperation) WithConfiguration(configuration *OperationConfiguration) *ModifyRecordZonesOperation {
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return mrzo
 }
 
 // WithGroup sets the operation’s group.
 func (mrzo *ModifyRecordZonesOperation) WithGroup(group *OperationGroup) *ModifyRecordZonesOperation {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return mrzo
 }
@@ -101,6 +105,7 @@ func (mrzo *ModifyRecordZonesOperation) WithLongLivedOperationWasPersistedBlock(
 
 // WithContainer sets the operation's container.
 func (mrzo *ModifyRecordZonesOperation) WithContainer(container *Container) *ModifyRecordZonesOperation {
+	defer runtime.KeepAlive(container)
 	objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return mrzo
 }
@@ -133,6 +138,7 @@ func (mrzo *ModifyRecordZonesOperation) WithTimeoutIntervalForResource(timeoutIn
 //
 // RecordZonesToSave returns the collection as a Go slice.
 func (mrzo *ModifyRecordZonesOperation) RecordZonesToSave() []*RecordZone {
+	defer runtime.KeepAlive(mrzo)
 	_arr := objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("recordZonesToSave"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZone { return RecordZoneFromID(_id) })
 }
@@ -141,6 +147,7 @@ func (mrzo *ModifyRecordZonesOperation) RecordZonesToSave() []*RecordZone {
 //
 // RecordZoneIDsToDelete returns the collection as a Go slice.
 func (mrzo *ModifyRecordZonesOperation) RecordZoneIDsToDelete() []*RecordZoneID {
+	defer runtime.KeepAlive(mrzo)
 	_arr := objc.Send[objc.ID](objref.IDOf(mrzo), objc.RegisterName("recordZoneIDsToDelete"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }
@@ -149,6 +156,7 @@ func (mrzo *ModifyRecordZonesOperation) RecordZoneIDsToDelete() []*RecordZoneID 
 //
 // SetPerRecordZoneDeleteBlock blocks until the operation completes or ctx is cancelled.
 func (mrzo *ModifyRecordZonesOperation) SetPerRecordZoneDeleteBlock(ctx context.Context) (result *RecordZoneID, err error) {
+	defer runtime.KeepAlive(mrzo)
 	type _result struct {
 		val *RecordZoneID
 		err error

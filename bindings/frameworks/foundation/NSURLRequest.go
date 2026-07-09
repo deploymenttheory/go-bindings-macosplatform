@@ -57,8 +57,8 @@ func NSURLRequestFromID(id objc.ID) *NSURLRequest {
 }
 
 // Creates and returns a URL request for a specified URL.
-func NSURLRequestRequestWithURL(uRL *NSURL) *NSURLRequest {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLRequest), _nSURLRequestSelRequestWithURL, uRL.Ptr())
+func NSURLRequestRequestWithURL(url *NSURL) *NSURLRequest {
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLRequest), _nSURLRequestSelRequestWithURL, url.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -66,8 +66,8 @@ func NSURLRequestRequestWithURL(uRL *NSURL) *NSURLRequest {
 }
 
 // Creates and returns an initialized URL request with specified URL, cache policy, and timeout values.
-func NSURLRequestRequestWithURLCachePolicyTimeoutInterval(uRL *NSURL, cachePolicy NSURLRequestCachePolicy, timeoutInterval float64) *NSURLRequest {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLRequest), _nSURLRequestSelRequestWithURLCachePolicyTimeoutInterval, uRL.Ptr(), cachePolicy, timeoutInterval)
+func NSURLRequestRequestWithURLCachePolicyTimeoutInterval(url *NSURL, cachePolicy NSURLRequestCachePolicy, timeoutInterval float64) *NSURLRequest {
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLRequest), _nSURLRequestSelRequestWithURLCachePolicyTimeoutInterval, url.Ptr(), cachePolicy, timeoutInterval)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -75,8 +75,8 @@ func NSURLRequestRequestWithURLCachePolicyTimeoutInterval(uRL *NSURL, cachePolic
 }
 
 // Creates a URL request for a specified URL.
-func (o *NSURLRequest) InitWithURL(uRL *NSURL) *NSURLRequest {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelInitWithURL, uRL.Ptr())
+func (o *NSURLRequest) InitWithURL(url *NSURL) *NSURLRequest {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelInitWithURL, url.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -84,8 +84,8 @@ func (o *NSURLRequest) InitWithURL(uRL *NSURL) *NSURLRequest {
 }
 
 // Creates a URL request with the specified URL, cache policy, and timeout values.
-func (o *NSURLRequest) InitWithURLCachePolicyTimeoutInterval(uRL *NSURL, cachePolicy NSURLRequestCachePolicy, timeoutInterval float64) *NSURLRequest {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelInitWithURLCachePolicyTimeoutInterval, uRL.Ptr(), cachePolicy, timeoutInterval)
+func (o *NSURLRequest) InitWithURLCachePolicyTimeoutInterval(url *NSURL, cachePolicy NSURLRequestCachePolicy, timeoutInterval float64) *NSURLRequest {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelInitWithURLCachePolicyTimeoutInterval, url.Ptr(), cachePolicy, timeoutInterval)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

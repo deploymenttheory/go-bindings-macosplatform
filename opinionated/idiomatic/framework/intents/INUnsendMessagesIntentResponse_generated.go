@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -46,6 +48,7 @@ func unsendMessagesIntentResponseAdopt(id objc.ID) *UnsendMessagesIntentResponse
 
 // NewUnsendMessagesIntentResponseWithCodeUserActivity creates a new UnsendMessagesIntentResponse.
 func NewUnsendMessagesIntentResponseWithCodeUserActivity(code UnsendMessagesIntentResponseCode, userActivity obj.Object) *UnsendMessagesIntentResponse {
+	defer runtime.KeepAlive(userActivity)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INUnsendMessagesIntentResponse")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, objref.IDOf(userActivity))
 	return unsendMessagesIntentResponseAdopt(_id)
@@ -53,12 +56,14 @@ func NewUnsendMessagesIntentResponseWithCodeUserActivity(code UnsendMessagesInte
 
 // WithUserActivity sets the user activity object to use when launching the app.
 func (umir *UnsendMessagesIntentResponse) WithUserActivity(userActivity obj.Object) *UnsendMessagesIntentResponse {
+	defer runtime.KeepAlive(userActivity)
 	objc.Send[objc.ID](objref.IDOf(umir), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return umir
 }
 
 // Code returns the code.
 func (umir *UnsendMessagesIntentResponse) Code() UnsendMessagesIntentResponseCode {
+	defer runtime.KeepAlive(umir)
 	_r := objc.Send[UnsendMessagesIntentResponseCode](objref.IDOf(umir), objc.RegisterName("code"))
 	return _r
 }

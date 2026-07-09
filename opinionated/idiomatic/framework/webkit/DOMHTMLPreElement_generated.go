@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -165,12 +167,14 @@ func (dpe *DOMHTMLPreElement) WithTextContent(textContent string) *DOMHTMLPreEle
 
 // Width returns the width.
 func (dpe *DOMHTMLPreElement) Width() int {
+	defer runtime.KeepAlive(dpe)
 	_r := objc.Send[int](objref.IDOf(dpe), objc.RegisterName("width"))
 	return _r
 }
 
 // Wrap wraps the corresponding Objective-C method.
 func (dpe *DOMHTMLPreElement) Wrap() bool {
+	defer runtime.KeepAlive(dpe)
 	_r := objc.Send[bool](objref.IDOf(dpe), objc.RegisterName("wrap"))
 	return _r
 }

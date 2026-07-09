@@ -5,6 +5,8 @@
 package screensaver
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func screenSaverDefaultsAdopt(id objc.ID) *ScreenSaverDefaults {
 
 // Description returns the object's -description text.
 func (ssd *ScreenSaverDefaults) Description() string {
+	defer runtime.KeepAlive(ssd)
 	return rt.Description(objref.IDOf(ssd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ssd *ScreenSaverDefaults) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ssd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ssd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ssd *ScreenSaverDefaults) IsKind(className string) bool {
+	defer runtime.KeepAlive(ssd)
 	return rt.IsKind(objref.IDOf(ssd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ssd *ScreenSaverDefaults) String() string {
+	defer runtime.KeepAlive(ssd)
 	return rt.Description(objref.IDOf(ssd))
 }
 

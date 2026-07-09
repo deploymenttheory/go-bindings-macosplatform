@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func controllerAdopt(id objc.ID) *Controller {
 
 // Description returns the object's -description text.
 func (c *Controller) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Controller) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Controller) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Controller) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // NewControllerWithCoder creates a new Controller.
 func NewControllerWithCoder(coder obj.Object) *Controller {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return controllerAdopt(_id)
@@ -77,6 +85,7 @@ func NewControllerWithCoder(coder obj.Object) *Controller {
 
 // DiscardEditing discards any pending changes by registered editors.
 func (c *Controller) DiscardEditing() {
+	defer runtime.KeepAlive(c)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("discardEditing"))
 	})
@@ -85,6 +94,7 @@ func (c *Controller) DiscardEditing() {
 
 // CommitEditing reports whether attempts to commit any pending edits.
 func (c *Controller) CommitEditing() bool {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -98,6 +108,7 @@ func (c *Controller) CommitEditing() bool {
 
 // IsEditing reports whether the object is editing.
 func (c *Controller) IsEditing() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isEditing"))
 	return _r
 }

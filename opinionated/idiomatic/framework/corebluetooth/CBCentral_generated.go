@@ -5,6 +5,8 @@
 package corebluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewCentral() *Central {
 
 // MaximumUpdateValueLength returns the maximum update value length.
 func (c *Central) MaximumUpdateValueLength() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("maximumUpdateValueLength"))
 	return _r
 }

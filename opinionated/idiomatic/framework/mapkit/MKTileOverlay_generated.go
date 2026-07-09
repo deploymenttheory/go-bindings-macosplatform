@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,29 +50,34 @@ func tileOverlayAdopt(id objc.ID) *TileOverlay {
 
 // Description returns the object's -description text.
 func (to *TileOverlay) Description() string {
+	defer runtime.KeepAlive(to)
 	return rt.Description(objref.IDOf(to))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (to *TileOverlay) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(to)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(to), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (to *TileOverlay) IsKind(className string) bool {
+	defer runtime.KeepAlive(to)
 	return rt.IsKind(objref.IDOf(to), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (to *TileOverlay) String() string {
+	defer runtime.KeepAlive(to)
 	return rt.Description(objref.IDOf(to))
 }
 
 // NewTileOverlayWithURLTemplate creates and returns a tile overlay object using the specified tile-access template.
-func NewTileOverlayWithURLTemplate(uRLTemplate string) *TileOverlay {
+func NewTileOverlayWithURLTemplate(urlTemplate string) *TileOverlay {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKTileOverlay")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURLTemplate:"), purego.NSString(uRLTemplate))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURLTemplate:"), purego.NSString(urlTemplate))
 	return tileOverlayAdopt(_id)
 }
 
@@ -106,30 +113,35 @@ func (to *TileOverlay) WithCanReplaceMapContent(canReplaceMapContent bool) *Tile
 
 // TileSize returns the tile size.
 func (to *TileOverlay) TileSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(to)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(to), objc.RegisterName("tileSize"))
 	return _r
 }
 
 // IsGeometryFlipped reports whether the object is geometry flipped.
 func (to *TileOverlay) IsGeometryFlipped() bool {
+	defer runtime.KeepAlive(to)
 	_r := objc.Send[bool](objref.IDOf(to), objc.RegisterName("isGeometryFlipped"))
 	return _r
 }
 
 // MinimumZ returns the minimum z.
 func (to *TileOverlay) MinimumZ() int {
+	defer runtime.KeepAlive(to)
 	_r := objc.Send[int](objref.IDOf(to), objc.RegisterName("minimumZ"))
 	return _r
 }
 
 // MaximumZ returns the maximum z.
 func (to *TileOverlay) MaximumZ() int {
+	defer runtime.KeepAlive(to)
 	_r := objc.Send[int](objref.IDOf(to), objc.RegisterName("maximumZ"))
 	return _r
 }
 
 // URLTemplate returns the URL template.
 func (to *TileOverlay) URLTemplate() string {
+	defer runtime.KeepAlive(to)
 	_r := objc.Send[objc.ID](objref.IDOf(to), objc.RegisterName("URLTemplate"))
 	if _r == 0 {
 		return ""
@@ -139,6 +151,7 @@ func (to *TileOverlay) URLTemplate() string {
 
 // CanReplaceMapContent wraps the corresponding Objective-C method.
 func (to *TileOverlay) CanReplaceMapContent() bool {
+	defer runtime.KeepAlive(to)
 	_r := objc.Send[bool](objref.IDOf(to), objc.RegisterName("canReplaceMapContent"))
 	return _r
 }

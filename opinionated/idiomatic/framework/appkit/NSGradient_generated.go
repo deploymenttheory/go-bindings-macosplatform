@@ -5,6 +5,7 @@
 package appkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,27 +51,34 @@ func gradientAdopt(id objc.ID) *Gradient {
 
 // Description returns the object's -description text.
 func (g *Gradient) Description() string {
+	defer runtime.KeepAlive(g)
 	return rt.Description(objref.IDOf(g))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (g *Gradient) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(g), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (g *Gradient) IsKind(className string) bool {
+	defer runtime.KeepAlive(g)
 	return rt.IsKind(objref.IDOf(g), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (g *Gradient) String() string {
+	defer runtime.KeepAlive(g)
 	return rt.Description(objref.IDOf(g))
 }
 
 // NewGradientWithStartingColorEndingColor initializes a newly allocated gradient object with two colors.
 func NewGradientWithStartingColorEndingColor(startingColor *Color, endingColor *Color) *Gradient {
+	defer runtime.KeepAlive(startingColor)
+	defer runtime.KeepAlive(endingColor)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSGradient")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartingColor:endingColor:"), objref.IDOf(startingColor), objref.IDOf(endingColor))
 	return gradientAdopt(_id)
@@ -85,6 +93,7 @@ func NewGradientWithColors(colorArray []*Color) *Gradient {
 
 // NewGradientWithColorsAndLocations initializes a newly allocated gradient object with a comma-separated list of arguments.
 func NewGradientWithColorsAndLocations(firstColor *Color) *Gradient {
+	defer runtime.KeepAlive(firstColor)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSGradient")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithColorsAndLocations:"), objref.IDOf(firstColor))
 	return gradientAdopt(_id)
@@ -92,43 +101,54 @@ func NewGradientWithColorsAndLocations(firstColor *Color) *Gradient {
 
 // NewGradientWithCoder creates a gradient from data in an unarchiver.
 func NewGradientWithCoder(coder obj.Object) *Gradient {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSGradient")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return gradientAdopt(_id)
 }
 
-// DrawFromPointToPointOptions draws a linear gradient between the specified start and end points.
-func (g *Gradient) DrawFromPointToPointOptions(startingPoint corefoundation.CGPoint, endingPoint corefoundation.CGPoint, options GradientDrawingOptions) {
+// DrawFromPointToPoint draws a linear gradient between the specified start and end points.
+func (g *Gradient) DrawFromPointToPoint(startingPoint corefoundation.CGPoint, endingPoint corefoundation.CGPoint, options GradientDrawingOptions) {
+	defer runtime.KeepAlive(g)
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("drawFromPoint:toPoint:options:"), startingPoint, endingPoint, options)
 }
 
 // DrawInRectAngle fills the specified rectangle with a linear gradient.
 func (g *Gradient) DrawInRectAngle(rect corefoundation.CGRect, angle float64) {
+	defer runtime.KeepAlive(g)
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("drawInRect:angle:"), rect, angle)
 }
 
 // DrawInBezierPathAngle fills the specified path with a linear gradient.
 func (g *Gradient) DrawInBezierPathAngle(path *BezierPath, angle float64) {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(path)
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("drawInBezierPath:angle:"), objref.IDOf(path), angle)
 }
 
-// DrawFromCenterRadiusToCenterRadiusOptions draws a radial gradient between the specified circles.
-func (g *Gradient) DrawFromCenterRadiusToCenterRadiusOptions(startCenter corefoundation.CGPoint, startRadius float64, endCenter corefoundation.CGPoint, endRadius float64, options GradientDrawingOptions) {
+// DrawFromCenterRadiusToCenterRadius draws a radial gradient between the specified circles.
+func (g *Gradient) DrawFromCenterRadiusToCenterRadius(startCenter corefoundation.CGPoint, startRadius float64, endCenter corefoundation.CGPoint, endRadius float64, options GradientDrawingOptions) {
+	defer runtime.KeepAlive(g)
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("drawFromCenter:radius:toCenter:radius:options:"), startCenter, startRadius, endCenter, endRadius, options)
 }
 
 // DrawInRectRelativeCenterPosition draws a radial gradient starting at the center of the specified rectangle.
 func (g *Gradient) DrawInRectRelativeCenterPosition(rect corefoundation.CGRect, relativeCenterPosition corefoundation.CGPoint) {
+	defer runtime.KeepAlive(g)
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("drawInRect:relativeCenterPosition:"), rect, relativeCenterPosition)
 }
 
 // DrawInBezierPathRelativeCenterPosition draws a radial gradient starting at the center point of the specified path.
 func (g *Gradient) DrawInBezierPathRelativeCenterPosition(path *BezierPath, relativeCenterPosition corefoundation.CGPoint) {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(path)
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("drawInBezierPath:relativeCenterPosition:"), objref.IDOf(path), relativeCenterPosition)
 }
 
 // GetColorLocationAtIndex returns information about the color stop at the specified index in the receiver’s color array.
 func (g *Gradient) GetColorLocationAtIndex(color *Color, index int) (location float64) {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(color)
 	var _out0 float64
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("getColor:location:atIndex:"), objref.IDOf(color), unsafe.Pointer(&_out0), index)
 	return _out0
@@ -136,18 +156,21 @@ func (g *Gradient) GetColorLocationAtIndex(color *Color, index int) (location fl
 
 // InterpolatedColorAtLocation returns the color of the rendered gradient at the specified relative location.
 func (g *Gradient) InterpolatedColorAtLocation(location float64) *Color {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("interpolatedColorAtLocation:"), location)
 	return ColorFromID(_r)
 }
 
 // ColorSpace returns the color space.
 func (g *Gradient) ColorSpace() *ColorSpace {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("colorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
 // NumberOfColorStops returns the number of color stops.
 func (g *Gradient) NumberOfColorStops() int {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[int](objref.IDOf(g), objc.RegisterName("numberOfColorStops"))
 	return _r
 }

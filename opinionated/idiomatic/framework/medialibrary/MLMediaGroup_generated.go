@@ -5,6 +5,9 @@
 package medialibrary
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func mediaGroupAdopt(id objc.ID) *MediaGroup {
 
 // Description returns the object's -description text.
 func (mg *MediaGroup) Description() string {
+	defer runtime.KeepAlive(mg)
 	return rt.Description(objref.IDOf(mg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mg *MediaGroup) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mg)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mg *MediaGroup) IsKind(className string) bool {
+	defer runtime.KeepAlive(mg)
 	return rt.IsKind(objref.IDOf(mg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mg *MediaGroup) String() string {
+	defer runtime.KeepAlive(mg)
 	return rt.Description(objref.IDOf(mg))
 }
 
@@ -74,18 +82,21 @@ func NewMediaGroup() *MediaGroup {
 
 // MediaLibrary returns the media library.
 func (mg *MediaGroup) MediaLibrary() *MediaLibrary {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("mediaLibrary"))
 	return MediaLibraryFromID(_r)
 }
 
 // Parent returns the parent.
 func (mg *MediaGroup) Parent() *MediaGroup {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("parent"))
 	return MediaGroupFromID(_r)
 }
 
 // MediaSourceIdentifier returns the media source identifier.
 func (mg *MediaGroup) MediaSourceIdentifier() string {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("mediaSourceIdentifier"))
 	if _r == 0 {
 		return ""
@@ -95,6 +106,7 @@ func (mg *MediaGroup) MediaSourceIdentifier() string {
 
 // Name returns the name.
 func (mg *MediaGroup) Name() string {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -104,6 +116,7 @@ func (mg *MediaGroup) Name() string {
 
 // Identifier returns the identifier.
 func (mg *MediaGroup) Identifier() string {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -113,6 +126,7 @@ func (mg *MediaGroup) Identifier() string {
 
 // TypeIdentifier returns the type identifier.
 func (mg *MediaGroup) TypeIdentifier() string {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("typeIdentifier"))
 	if _r == 0 {
 		return ""
@@ -121,33 +135,38 @@ func (mg *MediaGroup) TypeIdentifier() string {
 }
 
 // Attributes returns the attributes.
-func (mg *MediaGroup) Attributes() obj.Object {
+func (mg *MediaGroup) Attributes() map[string]obj.Object {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("attributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ChildGroups returns the child groups.
 //
 // ChildGroups returns the collection as a Go slice.
 func (mg *MediaGroup) ChildGroups() []*MediaGroup {
+	defer runtime.KeepAlive(mg)
 	_arr := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("childGroups"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaGroup { return MediaGroupFromID(_id) })
 }
 
 // URL returns the URL.
-func (mg *MediaGroup) URL() obj.Object {
+func (mg *MediaGroup) URL() string {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // ModificationDate returns the modification date.
-func (mg *MediaGroup) ModificationDate() obj.Object {
+func (mg *MediaGroup) ModificationDate() time.Time {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("modificationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // IconImage returns the icon image.
 func (mg *MediaGroup) IconImage() obj.Object {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("iconImage"))
 	return obj.Wrap(_r)
 }
@@ -156,6 +175,7 @@ func (mg *MediaGroup) IconImage() obj.Object {
 //
 // MediaObjects returns the collection as a Go slice.
 func (mg *MediaGroup) MediaObjects() []*MediaObject {
+	defer runtime.KeepAlive(mg)
 	_arr := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("mediaObjects"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaObject { return MediaObjectFromID(_id) })
 }

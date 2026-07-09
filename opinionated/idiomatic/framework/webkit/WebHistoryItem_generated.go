@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,29 +49,34 @@ func webHistoryItemAdopt(id objc.ID) *WebHistoryItem {
 
 // Description returns the object's -description text.
 func (whi *WebHistoryItem) Description() string {
+	defer runtime.KeepAlive(whi)
 	return rt.Description(objref.IDOf(whi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (whi *WebHistoryItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(whi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(whi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (whi *WebHistoryItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(whi)
 	return rt.IsKind(objref.IDOf(whi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (whi *WebHistoryItem) String() string {
+	defer runtime.KeepAlive(whi)
 	return rt.Description(objref.IDOf(whi))
 }
 
 // NewWebHistoryItemWithURLStringTitleLastVisitedTimeInterval initializes the receiver with a URL,URLString, a title specified by title and the last time this item was visited specified by time title, and time last visited.
-func NewWebHistoryItemWithURLStringTitleLastVisitedTimeInterval(uRLString string, title string, time_ float64) *WebHistoryItem {
+func NewWebHistoryItemWithURLStringTitleLastVisitedTimeInterval(urlString string, title string, time_ float64) *WebHistoryItem {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("WebHistoryItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURLString:title:lastVisitedTimeInterval:"), purego.NSString(uRLString), purego.NSString(title), time_)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURLString:title:lastVisitedTimeInterval:"), purego.NSString(urlString), purego.NSString(title), time_)
 	return webHistoryItemAdopt(_id)
 }
 
@@ -81,6 +88,7 @@ func (whi *WebHistoryItem) WithAlternateTitle(alternateTitle string) *WebHistory
 
 // OriginalURLString returns the string representation of the initial URL of this item. This value is normally set by the WebKit.
 func (whi *WebHistoryItem) OriginalURLString() string {
+	defer runtime.KeepAlive(whi)
 	_r := objc.Send[objc.ID](objref.IDOf(whi), objc.RegisterName("originalURLString"))
 	if _r == 0 {
 		return ""
@@ -90,6 +98,7 @@ func (whi *WebHistoryItem) OriginalURLString() string {
 
 // URLString returns the string representation of the URL represented by this item. The URLString may be different than the originalURLString if the page redirected to a new location.  This value is normally set by the WebKit.
 func (whi *WebHistoryItem) URLString() string {
+	defer runtime.KeepAlive(whi)
 	_r := objc.Send[objc.ID](objref.IDOf(whi), objc.RegisterName("URLString"))
 	if _r == 0 {
 		return ""
@@ -99,6 +108,7 @@ func (whi *WebHistoryItem) URLString() string {
 
 // Title returns the title of the page represented by this item. This title cannot be changed by the client.  This value is normally set by the WebKit when a page title for the item is received.
 func (whi *WebHistoryItem) Title() string {
+	defer runtime.KeepAlive(whi)
 	_r := objc.Send[objc.ID](objref.IDOf(whi), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -108,12 +118,14 @@ func (whi *WebHistoryItem) Title() string {
 
 // LastVisitedTimeInterval returns the last time the page represented by this item was visited. The interval is since the reference date as determined by NSDate.  This value is normally set by the WebKit.
 func (whi *WebHistoryItem) LastVisitedTimeInterval() float64 {
+	defer runtime.KeepAlive(whi)
 	_r := objc.Send[float64](objref.IDOf(whi), objc.RegisterName("lastVisitedTimeInterval"))
 	return _r
 }
 
 // AlternateTitle returns the alternate title.
 func (whi *WebHistoryItem) AlternateTitle() string {
+	defer runtime.KeepAlive(whi)
 	_r := objc.Send[objc.ID](objref.IDOf(whi), objc.RegisterName("alternateTitle"))
 	if _r == 0 {
 		return ""
@@ -123,6 +135,7 @@ func (whi *WebHistoryItem) AlternateTitle() string {
 
 // Icon returns the favorite icon of the page represented by this item. This icon returned will be determined by the WebKit.
 func (whi *WebHistoryItem) Icon() obj.Object {
+	defer runtime.KeepAlive(whi)
 	_r := objc.Send[objc.ID](objref.IDOf(whi), objc.RegisterName("icon"))
 	return obj.Wrap(_r)
 }

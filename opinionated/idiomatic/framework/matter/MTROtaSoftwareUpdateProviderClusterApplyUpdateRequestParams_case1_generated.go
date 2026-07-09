@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,25 +54,28 @@ func NewMTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams() *MTROtaSof
 }
 
 // WithUpdateToken sets the update token.
-func (mosupcaurp *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithUpdateToken(updateToken obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
-	objc.Send[objc.ID](objref.IDOf(mosupcaurp), objc.RegisterName("setUpdateToken:"), objref.IDOf(updateToken))
+func (mosupcaurp *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithUpdateToken(updateToken []byte) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mosupcaurp), objc.RegisterName("setUpdateToken:"), rt.BytesToNSData(updateToken))
 	return mosupcaurp
 }
 
 // WithNewVersion sets the new version.
 func (mosupcaurp *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithNewVersion(newVersion obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	defer runtime.KeepAlive(newVersion)
 	objc.Send[objc.ID](objref.IDOf(mosupcaurp), objc.RegisterName("setNewVersion:"), objref.IDOf(newVersion))
 	return mosupcaurp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mosupcaurp *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mosupcaurp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mosupcaurp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mosupcaurp *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mosupcaurp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mosupcaurp
 }

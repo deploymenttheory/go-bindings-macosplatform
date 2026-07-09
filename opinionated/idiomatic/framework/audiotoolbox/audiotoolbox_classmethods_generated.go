@@ -5,15 +5,17 @@
 package audiotoolbox
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
 // CreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters creates a single parameter object.
-func CreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters(identifier string, name string, address uint64, min float32, max float32, unit AudioUnitParameterUnit, unitName string, flags AudioUnitParameterOptions, valueStrings []string, dependentParameters []obj.Object) *Parameter {
-	_r := objc.Send[objc.ID](objc.ID(_class("AUParameterTree")), objc.RegisterName("createParameterWithIdentifier:name:address:min:max:unit:unitName:flags:valueStrings:dependentParameters:"), purego.NSString(identifier), purego.NSString(name), address, min, max, unit, purego.NSString(unitName), flags, purego.SliceToNSArray(valueStrings, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(dependentParameters, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func CreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters(identifier string, name string, address uint64, min float32, max float32, unit AudioUnitParameterUnit, unitName string, flags AudioUnitParameterOptions, valueStrings []string, dependentParameters []*foundation.Number) *Parameter {
+	_r := objc.Send[objc.ID](objc.ID(_class("AUParameterTree")), objc.RegisterName("createParameterWithIdentifier:name:address:min:max:unit:unitName:flags:valueStrings:dependentParameters:"), purego.NSString(identifier), purego.NSString(name), address, min, max, unit, purego.NSString(unitName), flags, purego.SliceToNSArray(valueStrings, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(dependentParameters, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return ParameterFromID(_r)
 }
 
@@ -31,6 +33,7 @@ func CreateGroupTemplate(children []*ParameterNode) *ParameterGroup {
 
 // CreateGroupFromTemplateIdentifierNameAddressOffset initializes a group as a copied instance of a template group.
 func CreateGroupFromTemplateIdentifierNameAddressOffset(templateGroup *ParameterGroup, identifier string, name string, addressOffset uint64) *ParameterGroup {
+	defer runtime.KeepAlive(templateGroup)
 	_r := objc.Send[objc.ID](objc.ID(_class("AUParameterTree")), objc.RegisterName("createGroupFromTemplate:identifier:name:addressOffset:"), objref.IDOf(templateGroup), purego.NSString(identifier), purego.NSString(name), addressOffset)
 	return ParameterGroupFromID(_r)
 }

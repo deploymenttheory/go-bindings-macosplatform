@@ -6,6 +6,8 @@ package gamekit
 
 import (
 	"context"
+	"runtime"
+	"time"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +52,27 @@ func turnBasedMatchAdopt(id objc.ID) *TurnBasedMatch {
 
 // Description returns the object's -description text.
 func (tbm *TurnBasedMatch) Description() string {
+	defer runtime.KeepAlive(tbm)
 	return rt.Description(objref.IDOf(tbm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tbm *TurnBasedMatch) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tbm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tbm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tbm *TurnBasedMatch) IsKind(className string) bool {
+	defer runtime.KeepAlive(tbm)
 	return rt.IsKind(objref.IDOf(tbm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tbm *TurnBasedMatch) String() string {
+	defer runtime.KeepAlive(tbm)
 	return rt.Description(objref.IDOf(tbm))
 }
 
@@ -83,6 +90,7 @@ func (tbm *TurnBasedMatch) WithMessage(message string) *TurnBasedMatch {
 
 // SetLocalizableMessageWithKeyArguments sends a localized message from the current participant to all other participants when you end a turn, forfeit a match, or end a match.
 func (tbm *TurnBasedMatch) SetLocalizableMessageWithKeyArguments(key string, arguments []string) {
+	defer runtime.KeepAlive(tbm)
 	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("setLocalizableMessageWithKey:arguments:"), purego.NSString(key), purego.SliceToNSArray(arguments, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
@@ -90,6 +98,7 @@ func (tbm *TurnBasedMatch) SetLocalizableMessageWithKeyArguments(key string, arg
 //
 // Rematch blocks until the operation completes or ctx is cancelled.
 func (tbm *TurnBasedMatch) Rematch(ctx context.Context) (result *TurnBasedMatch, err error) {
+	defer runtime.KeepAlive(tbm)
 	type _result struct {
 		val *TurnBasedMatch
 		err error
@@ -115,6 +124,7 @@ func (tbm *TurnBasedMatch) Rematch(ctx context.Context) (result *TurnBasedMatch,
 //
 // AcceptInvite blocks until the operation completes or ctx is cancelled.
 func (tbm *TurnBasedMatch) AcceptInvite(ctx context.Context) (result *TurnBasedMatch, err error) {
+	defer runtime.KeepAlive(tbm)
 	type _result struct {
 		val *TurnBasedMatch
 		err error
@@ -140,6 +150,7 @@ func (tbm *TurnBasedMatch) AcceptInvite(ctx context.Context) (result *TurnBasedM
 //
 // DeclineInvite blocks until the operation completes or ctx is cancelled.
 func (tbm *TurnBasedMatch) DeclineInvite(ctx context.Context) error {
+	defer runtime.KeepAlive(tbm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -159,6 +170,7 @@ func (tbm *TurnBasedMatch) DeclineInvite(ctx context.Context) error {
 //
 // Remove blocks until the operation completes or ctx is cancelled.
 func (tbm *TurnBasedMatch) Remove(ctx context.Context) error {
+	defer runtime.KeepAlive(tbm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -177,14 +189,15 @@ func (tbm *TurnBasedMatch) Remove(ctx context.Context) error {
 // EndTurnWithNextParticipantsTurnTimeoutMatchData passes the turn from the current participant to the next participant.
 //
 // EndTurnWithNextParticipantsTurnTimeoutMatchData blocks until the operation completes or ctx is cancelled.
-func (tbm *TurnBasedMatch) EndTurnWithNextParticipantsTurnTimeoutMatchData(ctx context.Context, nextParticipants []*TurnBasedParticipant, timeout float64, matchData obj.Object) error {
+func (tbm *TurnBasedMatch) EndTurnWithNextParticipantsTurnTimeoutMatchData(ctx context.Context, nextParticipants []*TurnBasedParticipant, timeout float64, matchData []byte) error {
+	defer runtime.KeepAlive(tbm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("endTurnWithNextParticipants:turnTimeout:matchData:completionHandler:"), purego.SliceToNSArray(nextParticipants, func(_v *TurnBasedParticipant) objc.ID { return objref.IDOf(_v) }), timeout, objref.IDOf(matchData), _block)
+	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("endTurnWithNextParticipants:turnTimeout:matchData:completionHandler:"), purego.SliceToNSArray(nextParticipants, func(_v *TurnBasedParticipant) objc.ID { return objref.IDOf(_v) }), timeout, rt.BytesToNSData(matchData), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -196,14 +209,15 @@ func (tbm *TurnBasedMatch) EndTurnWithNextParticipantsTurnTimeoutMatchData(ctx c
 // ParticipantQuitInTurnWithOutcomeNextParticipantsTurnTimeoutMatchData forfeits the match on behalf of the local player when it’s their turn.
 //
 // ParticipantQuitInTurnWithOutcomeNextParticipantsTurnTimeoutMatchData blocks until the operation completes or ctx is cancelled.
-func (tbm *TurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantsTurnTimeoutMatchData(ctx context.Context, matchOutcome TurnBasedMatchOutcome, nextParticipants []*TurnBasedParticipant, timeout float64, matchData obj.Object) error {
+func (tbm *TurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantsTurnTimeoutMatchData(ctx context.Context, matchOutcome TurnBasedMatchOutcome, nextParticipants []*TurnBasedParticipant, timeout float64, matchData []byte) error {
+	defer runtime.KeepAlive(tbm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("participantQuitInTurnWithOutcome:nextParticipants:turnTimeout:matchData:completionHandler:"), matchOutcome, purego.SliceToNSArray(nextParticipants, func(_v *TurnBasedParticipant) objc.ID { return objref.IDOf(_v) }), timeout, objref.IDOf(matchData), _block)
+	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("participantQuitInTurnWithOutcome:nextParticipants:turnTimeout:matchData:completionHandler:"), matchOutcome, purego.SliceToNSArray(nextParticipants, func(_v *TurnBasedParticipant) objc.ID { return objref.IDOf(_v) }), timeout, rt.BytesToNSData(matchData), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -216,6 +230,7 @@ func (tbm *TurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantsTurnT
 //
 // ParticipantQuitOutOfTurnWithOutcome blocks until the operation completes or ctx is cancelled.
 func (tbm *TurnBasedMatch) ParticipantQuitOutOfTurnWithOutcome(ctx context.Context, matchOutcome TurnBasedMatchOutcome) error {
+	defer runtime.KeepAlive(tbm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -234,14 +249,15 @@ func (tbm *TurnBasedMatch) ParticipantQuitOutOfTurnWithOutcome(ctx context.Conte
 // EndMatchInTurnWithMatchData ends the match.
 //
 // EndMatchInTurnWithMatchData blocks until the operation completes or ctx is cancelled.
-func (tbm *TurnBasedMatch) EndMatchInTurnWithMatchData(ctx context.Context, matchData obj.Object) error {
+func (tbm *TurnBasedMatch) EndMatchInTurnWithMatchData(ctx context.Context, matchData []byte) error {
+	defer runtime.KeepAlive(tbm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("endMatchInTurnWithMatchData:completionHandler:"), objref.IDOf(matchData), _block)
+	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("endMatchInTurnWithMatchData:completionHandler:"), rt.BytesToNSData(matchData), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -253,14 +269,15 @@ func (tbm *TurnBasedMatch) EndMatchInTurnWithMatchData(ctx context.Context, matc
 // EndMatchInTurnWithMatchDataScoresAchievements ends the match while submitting all of the scores and achievements.
 //
 // EndMatchInTurnWithMatchDataScoresAchievements blocks until the operation completes or ctx is cancelled.
-func (tbm *TurnBasedMatch) EndMatchInTurnWithMatchDataScoresAchievements(ctx context.Context, matchData obj.Object, scores []*Score, achievements []*Achievement) error {
+func (tbm *TurnBasedMatch) EndMatchInTurnWithMatchDataScoresAchievements(ctx context.Context, matchData []byte, scores []*Score, achievements []*Achievement) error {
+	defer runtime.KeepAlive(tbm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("endMatchInTurnWithMatchData:scores:achievements:completionHandler:"), objref.IDOf(matchData), purego.SliceToNSArray(scores, func(_v *Score) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(achievements, func(_v *Achievement) objc.ID { return objref.IDOf(_v) }), _block)
+	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("endMatchInTurnWithMatchData:scores:achievements:completionHandler:"), rt.BytesToNSData(matchData), purego.SliceToNSArray(scores, func(_v *Score) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(achievements, func(_v *Achievement) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -272,14 +289,16 @@ func (tbm *TurnBasedMatch) EndMatchInTurnWithMatchDataScoresAchievements(ctx con
 // EndMatchInTurnWithMatchDataLeaderboardScoresAchievements ends the match while submitting scores and achievements for all of the participants.
 //
 // EndMatchInTurnWithMatchDataLeaderboardScoresAchievements blocks until the operation completes or ctx is cancelled.
-func (tbm *TurnBasedMatch) EndMatchInTurnWithMatchDataLeaderboardScoresAchievements(ctx context.Context, matchData obj.Object, scores []*LeaderboardScore, achievements obj.Object) error {
+func (tbm *TurnBasedMatch) EndMatchInTurnWithMatchDataLeaderboardScoresAchievements(ctx context.Context, matchData []byte, scores []*LeaderboardScore, achievements obj.Object) error {
+	defer runtime.KeepAlive(tbm)
+	defer runtime.KeepAlive(achievements)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("endMatchInTurnWithMatchData:leaderboardScores:achievements:completionHandler:"), objref.IDOf(matchData), purego.SliceToNSArray(scores, func(_v *LeaderboardScore) objc.ID { return objref.IDOf(_v) }), objref.IDOf(achievements), _block)
+	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("endMatchInTurnWithMatchData:leaderboardScores:achievements:completionHandler:"), rt.BytesToNSData(matchData), purego.SliceToNSArray(scores, func(_v *LeaderboardScore) objc.ID { return objref.IDOf(_v) }), objref.IDOf(achievements), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -291,14 +310,15 @@ func (tbm *TurnBasedMatch) EndMatchInTurnWithMatchDataLeaderboardScoresAchieveme
 // SaveCurrentTurnWithMatchData saves your match data in Game Center without ending the turn.
 //
 // SaveCurrentTurnWithMatchData blocks until the operation completes or ctx is cancelled.
-func (tbm *TurnBasedMatch) SaveCurrentTurnWithMatchData(ctx context.Context, matchData obj.Object) error {
+func (tbm *TurnBasedMatch) SaveCurrentTurnWithMatchData(ctx context.Context, matchData []byte) error {
+	defer runtime.KeepAlive(tbm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("saveCurrentTurnWithMatchData:completionHandler:"), objref.IDOf(matchData), _block)
+	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("saveCurrentTurnWithMatchData:completionHandler:"), rt.BytesToNSData(matchData), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -310,14 +330,15 @@ func (tbm *TurnBasedMatch) SaveCurrentTurnWithMatchData(ctx context.Context, mat
 // SaveMergedMatchDataWithResolvedExchanges saves match data for completed exchanges without ending the turn.
 //
 // SaveMergedMatchDataWithResolvedExchanges blocks until the operation completes or ctx is cancelled.
-func (tbm *TurnBasedMatch) SaveMergedMatchDataWithResolvedExchanges(ctx context.Context, matchData obj.Object, exchanges []*TurnBasedExchange) error {
+func (tbm *TurnBasedMatch) SaveMergedMatchDataWithResolvedExchanges(ctx context.Context, matchData []byte, exchanges []*TurnBasedExchange) error {
+	defer runtime.KeepAlive(tbm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("saveMergedMatchData:withResolvedExchanges:completionHandler:"), objref.IDOf(matchData), purego.SliceToNSArray(exchanges, func(_v *TurnBasedExchange) objc.ID { return objref.IDOf(_v) }), _block)
+	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("saveMergedMatchData:withResolvedExchanges:completionHandler:"), rt.BytesToNSData(matchData), purego.SliceToNSArray(exchanges, func(_v *TurnBasedExchange) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -329,7 +350,8 @@ func (tbm *TurnBasedMatch) SaveMergedMatchDataWithResolvedExchanges(ctx context.
 // SendExchangeToParticipantsDataLocalizableMessageKeyArgumentsTimeout sends an exchange request that contains your game data to one or more participants.
 //
 // SendExchangeToParticipantsDataLocalizableMessageKeyArgumentsTimeout blocks until the operation completes or ctx is cancelled.
-func (tbm *TurnBasedMatch) SendExchangeToParticipantsDataLocalizableMessageKeyArgumentsTimeout(ctx context.Context, participants []*TurnBasedParticipant, data obj.Object, key string, arguments []string, timeout float64) (result *TurnBasedExchange, err error) {
+func (tbm *TurnBasedMatch) SendExchangeToParticipantsDataLocalizableMessageKeyArgumentsTimeout(ctx context.Context, participants []*TurnBasedParticipant, data []byte, key string, arguments []string, timeout float64) (result *TurnBasedExchange, err error) {
+	defer runtime.KeepAlive(tbm)
 	type _result struct {
 		val *TurnBasedExchange
 		err error
@@ -341,7 +363,7 @@ func (tbm *TurnBasedMatch) SendExchangeToParticipantsDataLocalizableMessageKeyAr
 		_o.val = TurnBasedExchangeFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("sendExchangeToParticipants:data:localizableMessageKey:arguments:timeout:completionHandler:"), purego.SliceToNSArray(participants, func(_v *TurnBasedParticipant) objc.ID { return objref.IDOf(_v) }), objref.IDOf(data), purego.NSString(key), purego.SliceToNSArray(arguments, func(_v string) objc.ID { return purego.NSString(_v) }), timeout, _block)
+	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("sendExchangeToParticipants:data:localizableMessageKey:arguments:timeout:completionHandler:"), purego.SliceToNSArray(participants, func(_v *TurnBasedParticipant) objc.ID { return objref.IDOf(_v) }), rt.BytesToNSData(data), purego.NSString(key), purego.SliceToNSArray(arguments, func(_v string) objc.ID { return purego.NSString(_v) }), timeout, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -355,6 +377,7 @@ func (tbm *TurnBasedMatch) SendExchangeToParticipantsDataLocalizableMessageKeyAr
 //
 // SendReminderToParticipantsLocalizableMessageKeyArguments blocks until the operation completes or ctx is cancelled.
 func (tbm *TurnBasedMatch) SendReminderToParticipantsLocalizableMessageKeyArguments(ctx context.Context, participants []*TurnBasedParticipant, key string, arguments []string) error {
+	defer runtime.KeepAlive(tbm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -373,14 +396,16 @@ func (tbm *TurnBasedMatch) SendReminderToParticipantsLocalizableMessageKeyArgume
 // EndTurnWithNextParticipantMatchData updates the data stored on Game Center for the current match.
 //
 // EndTurnWithNextParticipantMatchData blocks until the operation completes or ctx is cancelled.
-func (tbm *TurnBasedMatch) EndTurnWithNextParticipantMatchData(ctx context.Context, nextParticipant *TurnBasedParticipant, matchData obj.Object) error {
+func (tbm *TurnBasedMatch) EndTurnWithNextParticipantMatchData(ctx context.Context, nextParticipant *TurnBasedParticipant, matchData []byte) error {
+	defer runtime.KeepAlive(tbm)
+	defer runtime.KeepAlive(nextParticipant)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("endTurnWithNextParticipant:matchData:completionHandler:"), objref.IDOf(nextParticipant), objref.IDOf(matchData), _block)
+	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("endTurnWithNextParticipant:matchData:completionHandler:"), objref.IDOf(nextParticipant), rt.BytesToNSData(matchData), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -392,14 +417,16 @@ func (tbm *TurnBasedMatch) EndTurnWithNextParticipantMatchData(ctx context.Conte
 // ParticipantQuitInTurnWithOutcomeNextParticipantMatchData resigns the current player from the match without ending the match.
 //
 // ParticipantQuitInTurnWithOutcomeNextParticipantMatchData blocks until the operation completes or ctx is cancelled.
-func (tbm *TurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantMatchData(ctx context.Context, matchOutcome TurnBasedMatchOutcome, nextParticipant *TurnBasedParticipant, matchData obj.Object) error {
+func (tbm *TurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantMatchData(ctx context.Context, matchOutcome TurnBasedMatchOutcome, nextParticipant *TurnBasedParticipant, matchData []byte) error {
+	defer runtime.KeepAlive(tbm)
+	defer runtime.KeepAlive(nextParticipant)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("participantQuitInTurnWithOutcome:nextParticipant:matchData:completionHandler:"), matchOutcome, objref.IDOf(nextParticipant), objref.IDOf(matchData), _block)
+	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("participantQuitInTurnWithOutcome:nextParticipant:matchData:completionHandler:"), matchOutcome, objref.IDOf(nextParticipant), rt.BytesToNSData(matchData), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -410,6 +437,7 @@ func (tbm *TurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantMatchD
 
 // MatchID returns the match ID.
 func (tbm *TurnBasedMatch) MatchID() string {
+	defer runtime.KeepAlive(tbm)
 	_r := objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("matchID"))
 	if _r == 0 {
 		return ""
@@ -418,39 +446,45 @@ func (tbm *TurnBasedMatch) MatchID() string {
 }
 
 // CreationDate returns the creation date.
-func (tbm *TurnBasedMatch) CreationDate() obj.Object {
+func (tbm *TurnBasedMatch) CreationDate() time.Time {
+	defer runtime.KeepAlive(tbm)
 	_r := objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("creationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Participants returns the participants.
 //
 // Participants returns the collection as a Go slice.
 func (tbm *TurnBasedMatch) Participants() []*TurnBasedParticipant {
+	defer runtime.KeepAlive(tbm)
 	_arr := objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("participants"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TurnBasedParticipant { return TurnBasedParticipantFromID(_id) })
 }
 
 // Status returns the status.
 func (tbm *TurnBasedMatch) Status() TurnBasedMatchStatus {
+	defer runtime.KeepAlive(tbm)
 	_r := objc.Send[TurnBasedMatchStatus](objref.IDOf(tbm), objc.RegisterName("status"))
 	return _r
 }
 
 // CurrentParticipant returns the current participant.
 func (tbm *TurnBasedMatch) CurrentParticipant() *TurnBasedParticipant {
+	defer runtime.KeepAlive(tbm)
 	_r := objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("currentParticipant"))
 	return TurnBasedParticipantFromID(_r)
 }
 
 // MatchData returns the match data.
-func (tbm *TurnBasedMatch) MatchData() obj.Object {
+func (tbm *TurnBasedMatch) MatchData() []byte {
+	defer runtime.KeepAlive(tbm)
 	_r := objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("matchData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Message returns the message.
 func (tbm *TurnBasedMatch) Message() string {
+	defer runtime.KeepAlive(tbm)
 	_r := objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("message"))
 	if _r == 0 {
 		return ""
@@ -460,6 +494,7 @@ func (tbm *TurnBasedMatch) Message() string {
 
 // MatchDataMaximumSize returns the match data maximum size.
 func (tbm *TurnBasedMatch) MatchDataMaximumSize() int {
+	defer runtime.KeepAlive(tbm)
 	_r := objc.Send[int](objref.IDOf(tbm), objc.RegisterName("matchDataMaximumSize"))
 	return _r
 }
@@ -468,6 +503,7 @@ func (tbm *TurnBasedMatch) MatchDataMaximumSize() int {
 //
 // Exchanges returns the collection as a Go slice.
 func (tbm *TurnBasedMatch) Exchanges() []*TurnBasedExchange {
+	defer runtime.KeepAlive(tbm)
 	_arr := objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("exchanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TurnBasedExchange { return TurnBasedExchangeFromID(_id) })
 }
@@ -476,6 +512,7 @@ func (tbm *TurnBasedMatch) Exchanges() []*TurnBasedExchange {
 //
 // ActiveExchanges returns the collection as a Go slice.
 func (tbm *TurnBasedMatch) ActiveExchanges() []*TurnBasedExchange {
+	defer runtime.KeepAlive(tbm)
 	_arr := objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("activeExchanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TurnBasedExchange { return TurnBasedExchangeFromID(_id) })
 }
@@ -484,18 +521,21 @@ func (tbm *TurnBasedMatch) ActiveExchanges() []*TurnBasedExchange {
 //
 // CompletedExchanges returns the collection as a Go slice.
 func (tbm *TurnBasedMatch) CompletedExchanges() []*TurnBasedExchange {
+	defer runtime.KeepAlive(tbm)
 	_arr := objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("completedExchanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TurnBasedExchange { return TurnBasedExchangeFromID(_id) })
 }
 
 // ExchangeDataMaximumSize returns the exchange data maximum size.
 func (tbm *TurnBasedMatch) ExchangeDataMaximumSize() int {
+	defer runtime.KeepAlive(tbm)
 	_r := objc.Send[int](objref.IDOf(tbm), objc.RegisterName("exchangeDataMaximumSize"))
 	return _r
 }
 
 // ExchangeMaxInitiatedExchangesPerPlayer returns the exchange max initiated exchanges per player.
 func (tbm *TurnBasedMatch) ExchangeMaxInitiatedExchangesPerPlayer() int {
+	defer runtime.KeepAlive(tbm)
 	_r := objc.Send[int](objref.IDOf(tbm), objc.RegisterName("exchangeMaxInitiatedExchangesPerPlayer"))
 	return _r
 }

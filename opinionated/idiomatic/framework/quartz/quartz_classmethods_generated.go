@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -21,6 +23,7 @@ func FilterBrowserPanelWithStyleMask(styleMask int) obj.Object {
 
 // ViewWithFrameFilter creates a view that contains controls for the input parameters of a filter.
 func ViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter obj.Object) obj.Object {
+	defer runtime.KeepAlive(inFilter)
 	_r := objc.Send[objc.ID](objc.ID(_class("IKFilterUIView")), objc.RegisterName("viewWithFrame:filter:"), frameRect, objref.IDOf(inFilter))
 	return obj.Wrap(_r)
 }
@@ -51,6 +54,7 @@ func CanExportToApplication(applicationBundleIdentifier string) bool {
 
 // ExportSlideshowItemToApplication exports a slideshow item to the application that has the provided bundle identifier.
 func ExportSlideshowItemToApplication(item obj.Object, applicationBundleIdentifier string) {
+	defer runtime.KeepAlive(item)
 	objc.Send[objc.ID](objc.ID(_class("IKSlideshow")), objc.RegisterName("exportSlideshowItem:toApplication:"), objref.IDOf(item), purego.NSString(applicationBundleIdentifier))
 }
 
@@ -61,8 +65,8 @@ func CompositionWithFile(path string) *QCComposition {
 }
 
 // CompositionWithData returns a composition object initialized with the contents of a Quartz Composer composition file.
-func CompositionWithData(data obj.Object) *QCComposition {
-	_r := objc.Send[objc.ID](objc.ID(_class("QCComposition")), objc.RegisterName("compositionWithData:"), objref.IDOf(data))
+func CompositionWithData(data []byte) *QCComposition {
+	_r := objc.Send[objc.ID](objc.ID(_class("QCComposition")), objc.RegisterName("compositionWithData:"), rt.BytesToNSData(data))
 	return QCCompositionFromID(_r)
 }
 
@@ -74,6 +78,7 @@ func CompositionLayerWithFile(path string) *QCCompositionLayer {
 
 // CompositionLayerWithComposition creates and returns an instance of a composition layer using the provided Quartz Composer composition.
 func CompositionLayerWithComposition(composition *QCComposition) *QCCompositionLayer {
+	defer runtime.KeepAlive(composition)
 	_r := objc.Send[objc.ID](objc.ID(_class("QCCompositionLayer")), objc.RegisterName("compositionLayerWithComposition:"), objref.IDOf(composition))
 	return QCCompositionLayerFromID(_r)
 }
@@ -134,12 +139,14 @@ func QuartzFilterWithURL(aURL string) *QuartzFilter {
 
 // QuartzFilterWithProperties wraps the corresponding Objective-C method.
 func QuartzFilterWithProperties(properties obj.Object) *QuartzFilter {
+	defer runtime.KeepAlive(properties)
 	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilter")), objc.RegisterName("quartzFilterWithProperties:"), objref.IDOf(properties))
 	return QuartzFilterFromID(_r)
 }
 
 // QuartzFilterWithOutputIntents wraps the corresponding Objective-C method.
 func QuartzFilterWithOutputIntents(outputIntents obj.Object) *QuartzFilter {
+	defer runtime.KeepAlive(outputIntents)
 	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilter")), objc.RegisterName("quartzFilterWithOutputIntents:"), objref.IDOf(outputIntents))
 	return QuartzFilterFromID(_r)
 }
@@ -152,6 +159,7 @@ func FilterManager() *QuartzFilterManager {
 
 // FiltersInDomains wraps the corresponding Objective-C method.
 func FiltersInDomains(domains obj.Object) obj.Object {
+	defer runtime.KeepAlive(domains)
 	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilterManager")), objc.RegisterName("filtersInDomains:"), objref.IDOf(domains))
 	return obj.Wrap(_r)
 }

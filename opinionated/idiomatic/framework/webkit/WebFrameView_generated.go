@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func webFrameViewAdopt(id objc.ID) *WebFrameView {
 
 // Description returns the object's -description text.
 func (wfv *WebFrameView) Description() string {
+	defer runtime.KeepAlive(wfv)
 	return rt.Description(objref.IDOf(wfv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wfv *WebFrameView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wfv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wfv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wfv *WebFrameView) IsKind(className string) bool {
+	defer runtime.KeepAlive(wfv)
 	return rt.IsKind(objref.IDOf(wfv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wfv *WebFrameView) String() string {
+	defer runtime.KeepAlive(wfv)
 	return rt.Description(objref.IDOf(wfv))
 }
 
@@ -88,6 +95,8 @@ func (wfv *WebFrameView) WithAllowsScrolling(allowsScrolling bool) *WebFrameView
 
 // PrintOperationWithPrintInfo returns a print operation object to print this frame.
 func (wfv *WebFrameView) PrintOperationWithPrintInfo(printInfo obj.Object) obj.Object {
+	defer runtime.KeepAlive(wfv)
+	defer runtime.KeepAlive(printInfo)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -101,6 +110,7 @@ func (wfv *WebFrameView) PrintOperationWithPrintInfo(printInfo obj.Object) obj.O
 
 // PrintDocumentView prints the receiver.
 func (wfv *WebFrameView) PrintDocumentView() {
+	defer runtime.KeepAlive(wfv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wfv), objc.RegisterName("printDocumentView"))
 	})
@@ -109,6 +119,7 @@ func (wfv *WebFrameView) PrintDocumentView() {
 
 // WebFrame returns the WebFrame associated with this WebFrameView
 func (wfv *WebFrameView) WebFrame() *WebFrame {
+	defer runtime.KeepAlive(wfv)
 	var _mainthread0 *WebFrame
 	purego.Main(func() {
 		_mainthread0 = func() *WebFrame {
@@ -122,6 +133,7 @@ func (wfv *WebFrameView) WebFrame() *WebFrame {
 
 // DocumentView returns the WebFrameView's document subview The subview that renders the WebFrameView's contents
 func (wfv *WebFrameView) DocumentView() obj.Object {
+	defer runtime.KeepAlive(wfv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -135,6 +147,7 @@ func (wfv *WebFrameView) DocumentView() obj.Object {
 
 // AllowsScrolling reports whether the WebFrameView allows its document to be scrolled
 func (wfv *WebFrameView) AllowsScrolling() bool {
+	defer runtime.KeepAlive(wfv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -148,6 +161,7 @@ func (wfv *WebFrameView) AllowsScrolling() bool {
 
 // CanPrintHeadersAndFooters reports whether this frame can print headers and footers
 func (wfv *WebFrameView) CanPrintHeadersAndFooters() bool {
+	defer runtime.KeepAlive(wfv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -161,6 +175,7 @@ func (wfv *WebFrameView) CanPrintHeadersAndFooters() bool {
 
 // DocumentViewShouldHandlePrint reports whether called by the host application before it initializes and runs a print operation. If false is returned, the host application will abort its print operation and call -printDocumentView on the WebFrameView. The document view is then expected to run its own print operation. If true is returned, the host application's print operation will continue as normal.
 func (wfv *WebFrameView) DocumentViewShouldHandlePrint() bool {
+	defer runtime.KeepAlive(wfv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

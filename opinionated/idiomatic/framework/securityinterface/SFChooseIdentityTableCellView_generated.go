@@ -5,6 +5,8 @@
 package securityinterface
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func chooseIdentityTableCellViewAdopt(id objc.ID) *ChooseIdentityTableCellView {
 
 // Description returns the object's -description text.
 func (citcv *ChooseIdentityTableCellView) Description() string {
+	defer runtime.KeepAlive(citcv)
 	return rt.Description(objref.IDOf(citcv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (citcv *ChooseIdentityTableCellView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(citcv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(citcv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (citcv *ChooseIdentityTableCellView) IsKind(className string) bool {
+	defer runtime.KeepAlive(citcv)
 	return rt.IsKind(objref.IDOf(citcv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (citcv *ChooseIdentityTableCellView) String() string {
+	defer runtime.KeepAlive(citcv)
 	return rt.Description(objref.IDOf(citcv))
 }
 
@@ -78,6 +85,7 @@ func NewChooseIdentityTableCellView() *ChooseIdentityTableCellView {
 
 // WithIssuerTextField sets the issuer text field.
 func (citcv *ChooseIdentityTableCellView) WithIssuerTextField(issuerTextField obj.Object) *ChooseIdentityTableCellView {
+	defer runtime.KeepAlive(issuerTextField)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(citcv), objc.RegisterName("setIssuerTextField:"), objref.IDOf(issuerTextField))
 	})
@@ -86,6 +94,7 @@ func (citcv *ChooseIdentityTableCellView) WithIssuerTextField(issuerTextField ob
 
 // IssuerTextField returns the issuer text field.
 func (citcv *ChooseIdentityTableCellView) IssuerTextField() obj.Object {
+	defer runtime.KeepAlive(citcv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

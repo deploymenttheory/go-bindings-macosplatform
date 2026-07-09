@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -49,6 +51,7 @@ func graphOperationAdopt(id objc.ID) *GraphOperation {
 //
 // InputTensors returns the collection as a Go slice.
 func (go_ *GraphOperation) InputTensors() []*GraphTensor {
+	defer runtime.KeepAlive(go_)
 	_arr := objc.Send[objc.ID](objref.IDOf(go_), objc.RegisterName("inputTensors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
@@ -57,6 +60,7 @@ func (go_ *GraphOperation) InputTensors() []*GraphTensor {
 //
 // OutputTensors returns the collection as a Go slice.
 func (go_ *GraphOperation) OutputTensors() []*GraphTensor {
+	defer runtime.KeepAlive(go_)
 	_arr := objc.Send[objc.ID](objref.IDOf(go_), objc.RegisterName("outputTensors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
@@ -65,18 +69,21 @@ func (go_ *GraphOperation) OutputTensors() []*GraphTensor {
 //
 // ControlDependencies returns the collection as a Go slice.
 func (go_ *GraphOperation) ControlDependencies() []*GraphOperation {
+	defer runtime.KeepAlive(go_)
 	_arr := objc.Send[objc.ID](objref.IDOf(go_), objc.RegisterName("controlDependencies"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphOperation { return GraphOperationFromID(_id) })
 }
 
 // Graph returns the graph on which the operation is defined.
 func (go_ *GraphOperation) Graph() *Graph {
+	defer runtime.KeepAlive(go_)
 	_r := objc.Send[objc.ID](objref.IDOf(go_), objc.RegisterName("graph"))
 	return GraphFromID(_r)
 }
 
 // Name returns name of the operation.
 func (go_ *GraphOperation) Name() string {
+	defer runtime.KeepAlive(go_)
 	_r := objc.Send[objc.ID](objref.IDOf(go_), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

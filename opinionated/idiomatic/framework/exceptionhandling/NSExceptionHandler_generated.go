@@ -5,6 +5,8 @@
 package exceptionhandling
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func exceptionHandlerAdopt(id objc.ID) *ExceptionHandler {
 
 // Description returns the object's -description text.
 func (eh *ExceptionHandler) Description() string {
+	defer runtime.KeepAlive(eh)
 	return rt.Description(objref.IDOf(eh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (eh *ExceptionHandler) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(eh)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(eh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (eh *ExceptionHandler) IsKind(className string) bool {
+	defer runtime.KeepAlive(eh)
 	return rt.IsKind(objref.IDOf(eh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (eh *ExceptionHandler) String() string {
+	defer runtime.KeepAlive(eh)
 	return rt.Description(objref.IDOf(eh))
 }
 
@@ -74,33 +81,40 @@ func NewExceptionHandler() *ExceptionHandler {
 
 // SetExceptionHandlingMask sets the bit mask of constants specifying the types of exceptions monitored by the receiver and its handling and logging behavior.
 func (eh *ExceptionHandler) SetExceptionHandlingMask(aMask int) {
+	defer runtime.KeepAlive(eh)
 	objc.Send[objc.ID](objref.IDOf(eh), objc.RegisterName("setExceptionHandlingMask:"), aMask)
 }
 
 // ExceptionHandlingMask returns a bit mask representing the types of exceptions monitored by the receiver and its handling and logging behavior.
 func (eh *ExceptionHandler) ExceptionHandlingMask() int {
+	defer runtime.KeepAlive(eh)
 	_r := objc.Send[int](objref.IDOf(eh), objc.RegisterName("exceptionHandlingMask"))
 	return _r
 }
 
 // SetExceptionHangingMask sets the bit mask of constants specifying the types of exceptions that will halt execution for debugging.
 func (eh *ExceptionHandler) SetExceptionHangingMask(aMask int) {
+	defer runtime.KeepAlive(eh)
 	objc.Send[objc.ID](objref.IDOf(eh), objc.RegisterName("setExceptionHangingMask:"), aMask)
 }
 
 // ExceptionHangingMask returns a bit mask representing the types of exceptions that will halt execution for debugging.
 func (eh *ExceptionHandler) ExceptionHangingMask() int {
+	defer runtime.KeepAlive(eh)
 	_r := objc.Send[int](objref.IDOf(eh), objc.RegisterName("exceptionHangingMask"))
 	return _r
 }
 
 // SetDelegate sets the delegate of the NSExceptionHandler object.
 func (eh *ExceptionHandler) SetDelegate(anObject obj.Object) {
+	defer runtime.KeepAlive(eh)
+	defer runtime.KeepAlive(anObject)
 	objc.Send[objc.ID](objref.IDOf(eh), objc.RegisterName("setDelegate:"), objref.IDOf(anObject))
 }
 
 // Delegate returns the delegate of the NSExceptionHandler object.
 func (eh *ExceptionHandler) Delegate() obj.Object {
+	defer runtime.KeepAlive(eh)
 	_r := objc.Send[objc.ID](objref.IDOf(eh), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }

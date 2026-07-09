@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -177,6 +179,7 @@ func (de *DOMHTMLHRElement) WithTextContent(textContent string) *DOMHTMLHRElemen
 
 // Align returns the align.
 func (de *DOMHTMLHRElement) Align() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""
@@ -186,12 +189,14 @@ func (de *DOMHTMLHRElement) Align() string {
 
 // NoShade wraps the corresponding Objective-C method.
 func (de *DOMHTMLHRElement) NoShade() bool {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[bool](objref.IDOf(de), objc.RegisterName("noShade"))
 	return _r
 }
 
 // Size returns the size.
 func (de *DOMHTMLHRElement) Size() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("size"))
 	if _r == 0 {
 		return ""
@@ -201,6 +206,7 @@ func (de *DOMHTMLHRElement) Size() string {
 
 // Width returns the width.
 func (de *DOMHTMLHRElement) Width() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("width"))
 	if _r == 0 {
 		return ""

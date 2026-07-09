@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -137,6 +139,7 @@ func (nrfcaws *NNReduceFeatureChannelsAndWeightsSum) WithSecondaryStrideInPixels
 
 // DoWeightedSumByNonZeroWeights reports whether a boolean to indicate whether the reduction should perform a weighted sum of feature channels with non-zero weights If false, computes a dot product of the feature channels and weights. If true, computes a dot product of the feature channels and weights divided by the number of non-zero weights
 func (nrfcaws *NNReduceFeatureChannelsAndWeightsSum) DoWeightedSumByNonZeroWeights() bool {
+	defer runtime.KeepAlive(nrfcaws)
 	_r := objc.Send[bool](objref.IDOf(nrfcaws), objc.RegisterName("doWeightedSumByNonZeroWeights"))
 	return _r
 }

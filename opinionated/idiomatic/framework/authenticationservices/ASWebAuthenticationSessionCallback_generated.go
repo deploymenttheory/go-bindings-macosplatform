@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func webAuthenticationSessionCallbackAdopt(id objc.ID) *WebAuthenticationSession
 
 // Description returns the object's -description text.
 func (wasc *WebAuthenticationSessionCallback) Description() string {
+	defer runtime.KeepAlive(wasc)
 	return rt.Description(objref.IDOf(wasc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wasc *WebAuthenticationSessionCallback) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wasc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wasc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wasc *WebAuthenticationSessionCallback) IsKind(className string) bool {
+	defer runtime.KeepAlive(wasc)
 	return rt.IsKind(objref.IDOf(wasc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wasc *WebAuthenticationSessionCallback) String() string {
+	defer runtime.KeepAlive(wasc)
 	return rt.Description(objref.IDOf(wasc))
 }
 
@@ -74,6 +81,7 @@ func NewWebAuthenticationSessionCallback() *WebAuthenticationSessionCallback {
 
 // MatchesURL check whether a given main-frame navigation URL matches the callback expected by the client app. Handles all URL-based callback strategies, including custom schemes and HTTPS navigations. This is mainly meant for web browsers adopting the ASWebAuthenticationWebBrowser API, but may also be useful for other apps for debugging purposes.
 func (wasc *WebAuthenticationSessionCallback) MatchesURL(url string) bool {
+	defer runtime.KeepAlive(wasc)
 	_r := objc.Send[bool](objref.IDOf(wasc), objc.RegisterName("matchesURL:"), rt.FileURL(url))
 	return _r
 }

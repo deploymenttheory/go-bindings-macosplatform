@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func faceLandmarkRegionAdopt(id objc.ID) *FaceLandmarkRegion {
 
 // Description returns the object's -description text.
 func (flr *FaceLandmarkRegion) Description() string {
+	defer runtime.KeepAlive(flr)
 	return rt.Description(objref.IDOf(flr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (flr *FaceLandmarkRegion) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(flr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(flr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (flr *FaceLandmarkRegion) IsKind(className string) bool {
+	defer runtime.KeepAlive(flr)
 	return rt.IsKind(objref.IDOf(flr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (flr *FaceLandmarkRegion) String() string {
+	defer runtime.KeepAlive(flr)
 	return rt.Description(objref.IDOf(flr))
 }
 
 // PointCount returns the point count.
 func (flr *FaceLandmarkRegion) PointCount() int {
+	defer runtime.KeepAlive(flr)
 	_r := objc.Send[int](objref.IDOf(flr), objc.RegisterName("pointCount"))
 	return _r
 }

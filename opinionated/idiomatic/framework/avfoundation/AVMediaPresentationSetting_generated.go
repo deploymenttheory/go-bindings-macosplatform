@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func mediaPresentationSettingAdopt(id objc.ID) *MediaPresentationSetting {
 
 // Description returns the object's -description text.
 func (mps *MediaPresentationSetting) Description() string {
+	defer runtime.KeepAlive(mps)
 	return rt.Description(objref.IDOf(mps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mps *MediaPresentationSetting) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mps *MediaPresentationSetting) IsKind(className string) bool {
+	defer runtime.KeepAlive(mps)
 	return rt.IsKind(objref.IDOf(mps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mps *MediaPresentationSetting) String() string {
+	defer runtime.KeepAlive(mps)
 	return rt.Description(objref.IDOf(mps))
 }
 
@@ -74,6 +82,7 @@ func NewMediaPresentationSetting() *MediaPresentationSetting {
 
 // DisplayNameForLocaleIdentifier returns the display name for the selectable setting that best matches the specified locale identifier.
 func (mps *MediaPresentationSetting) DisplayNameForLocaleIdentifier(localeIdentifier string) string {
+	defer runtime.KeepAlive(mps)
 	_r := objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("displayNameForLocaleIdentifier:"), purego.NSString(localeIdentifier))
 	if _r == 0 {
 		return ""
@@ -82,7 +91,8 @@ func (mps *MediaPresentationSetting) DisplayNameForLocaleIdentifier(localeIdenti
 }
 
 // MediaCharacteristic provides the media characteristic that corresponds to the selectable setting.
-func (mps *MediaPresentationSetting) MediaCharacteristic() obj.Object {
+func (mps *MediaPresentationSetting) MediaCharacteristic() *foundation.String {
+	defer runtime.KeepAlive(mps)
 	_r := objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("mediaCharacteristic"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }

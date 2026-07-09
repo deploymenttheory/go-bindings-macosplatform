@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,8 +57,8 @@ func NewUserAutomatorTask() *UserAutomatorTask {
 }
 
 // WithVariables sets the variables required by the Automator workflow.
-func (uat *UserAutomatorTask) WithVariables(variables obj.Object) *UserAutomatorTask {
-	objc.Send[objc.ID](objref.IDOf(uat), objc.RegisterName("setVariables:"), objref.IDOf(variables))
+func (uat *UserAutomatorTask) WithVariables(variables map[string]obj.Object) *UserAutomatorTask {
+	objc.Send[objc.ID](objref.IDOf(uat), objc.RegisterName("setVariables:"), rt.MapToDict(variables, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return uat
 }
 
@@ -67,15 +69,16 @@ func (uat *UserAutomatorTask) WithObservationInfo(observationInfo unsafe.Pointer
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (uat *UserAutomatorTask) WithScriptingProperties(scriptingProperties obj.Object) *UserAutomatorTask {
-	objc.Send[objc.ID](objref.IDOf(uat), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (uat *UserAutomatorTask) WithScriptingProperties(scriptingProperties map[string]obj.Object) *UserAutomatorTask {
+	objc.Send[objc.ID](objref.IDOf(uat), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return uat
 }
 
 // Variables returns the variables.
-func (uat *UserAutomatorTask) Variables() obj.Object {
+func (uat *UserAutomatorTask) Variables() map[string]obj.Object {
+	defer runtime.KeepAlive(uat)
 	_r := objc.Send[objc.ID](objref.IDOf(uat), objc.RegisterName("variables"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ UserScriptTaskProvider = (*UserAutomatorTask)(nil)

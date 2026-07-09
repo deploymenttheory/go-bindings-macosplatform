@@ -5,6 +5,9 @@
 package gamesave
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +48,27 @@ func syncedDirectoryVersionAdopt(id objc.ID) *SyncedDirectoryVersion {
 
 // Description returns the object's -description text.
 func (sdv *SyncedDirectoryVersion) Description() string {
+	defer runtime.KeepAlive(sdv)
 	return rt.Description(objref.IDOf(sdv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sdv *SyncedDirectoryVersion) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sdv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sdv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sdv *SyncedDirectoryVersion) IsKind(className string) bool {
+	defer runtime.KeepAlive(sdv)
 	return rt.IsKind(objref.IDOf(sdv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sdv *SyncedDirectoryVersion) String() string {
+	defer runtime.KeepAlive(sdv)
 	return rt.Description(objref.IDOf(sdv))
 }
 
@@ -72,12 +80,14 @@ func NewSyncedDirectoryVersion() *SyncedDirectoryVersion {
 
 // IsLocal reports whether `YES` if the directory version is local; otherwise `NO`.
 func (sdv *SyncedDirectoryVersion) IsLocal() bool {
+	defer runtime.KeepAlive(sdv)
 	_r := objc.Send[bool](objref.IDOf(sdv), objc.RegisterName("isLocal"))
 	return _r
 }
 
 // LocalizedNameOfSavingComputer returns the localized name of the device that saved this version.
 func (sdv *SyncedDirectoryVersion) LocalizedNameOfSavingComputer() string {
+	defer runtime.KeepAlive(sdv)
 	_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("localizedNameOfSavingComputer"))
 	if _r == 0 {
 		return ""
@@ -86,13 +96,15 @@ func (sdv *SyncedDirectoryVersion) LocalizedNameOfSavingComputer() string {
 }
 
 // ModifiedDate returns the date that this version was last modified.
-func (sdv *SyncedDirectoryVersion) ModifiedDate() obj.Object {
+func (sdv *SyncedDirectoryVersion) ModifiedDate() time.Time {
+	defer runtime.KeepAlive(sdv)
 	_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("modifiedDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // URL returns the URL of a directory where you read and write game-save data. You define the format and structure of files you write in this directory.
-func (sdv *SyncedDirectoryVersion) URL() obj.Object {
+func (sdv *SyncedDirectoryVersion) URL() string {
+	defer runtime.KeepAlive(sdv)
 	_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

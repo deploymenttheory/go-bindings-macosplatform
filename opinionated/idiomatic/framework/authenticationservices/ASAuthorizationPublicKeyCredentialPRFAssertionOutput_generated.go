@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func authorizationPublicKeyCredentialPRFAssertionOutputAdopt(id objc.ID) *Author
 
 // Description returns the object's -description text.
 func (apkcpao *AuthorizationPublicKeyCredentialPRFAssertionOutput) Description() string {
+	defer runtime.KeepAlive(apkcpao)
 	return rt.Description(objref.IDOf(apkcpao))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apkcpao *AuthorizationPublicKeyCredentialPRFAssertionOutput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apkcpao)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apkcpao), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apkcpao *AuthorizationPublicKeyCredentialPRFAssertionOutput) IsKind(className string) bool {
+	defer runtime.KeepAlive(apkcpao)
 	return rt.IsKind(objref.IDOf(apkcpao), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apkcpao *AuthorizationPublicKeyCredentialPRFAssertionOutput) String() string {
+	defer runtime.KeepAlive(apkcpao)
 	return rt.Description(objref.IDOf(apkcpao))
 }
 
@@ -73,13 +80,15 @@ func NewAuthorizationPublicKeyCredentialPRFAssertionOutput() *AuthorizationPubli
 }
 
 // First returns the first.
-func (apkcpao *AuthorizationPublicKeyCredentialPRFAssertionOutput) First() obj.Object {
+func (apkcpao *AuthorizationPublicKeyCredentialPRFAssertionOutput) First() []byte {
+	defer runtime.KeepAlive(apkcpao)
 	_r := objc.Send[objc.ID](objref.IDOf(apkcpao), objc.RegisterName("first"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Second returns the second.
-func (apkcpao *AuthorizationPublicKeyCredentialPRFAssertionOutput) Second() obj.Object {
+func (apkcpao *AuthorizationPublicKeyCredentialPRFAssertionOutput) Second() []byte {
+	defer runtime.KeepAlive(apkcpao)
 	_r := objc.Send[objc.ID](objref.IDOf(apkcpao), objc.RegisterName("second"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

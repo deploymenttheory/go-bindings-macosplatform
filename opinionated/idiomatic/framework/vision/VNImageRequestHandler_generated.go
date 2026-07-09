@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,27 +51,33 @@ func imageRequestHandlerAdopt(id objc.ID) *ImageRequestHandler {
 
 // Description returns the object's -description text.
 func (irh *ImageRequestHandler) Description() string {
+	defer runtime.KeepAlive(irh)
 	return rt.Description(objref.IDOf(irh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (irh *ImageRequestHandler) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(irh)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(irh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (irh *ImageRequestHandler) IsKind(className string) bool {
+	defer runtime.KeepAlive(irh)
 	return rt.IsKind(objref.IDOf(irh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (irh *ImageRequestHandler) String() string {
+	defer runtime.KeepAlive(irh)
 	return rt.Description(objref.IDOf(irh))
 }
 
 // NewImageRequestHandlerWithCVPixelBufferOptions creates a handler for performing requests on a Core Video pixel buffer.
 func NewImageRequestHandlerWithCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options obj.Object) *ImageRequestHandler {
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNImageRequestHandler")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCVPixelBuffer:options:"), pixelBuffer, objref.IDOf(options))
 	return imageRequestHandlerAdopt(_id)
@@ -78,6 +85,8 @@ func NewImageRequestHandlerWithCVPixelBufferOptions(pixelBuffer unsafe.Pointer, 
 
 // NewImageRequestHandlerWithCGImageOptions creates a handler to be used for performing requests on Core Graphics images.
 func NewImageRequestHandlerWithCGImageOptions(image obj.Object, options obj.Object) *ImageRequestHandler {
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNImageRequestHandler")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:options:"), objref.IDOf(image), objref.IDOf(options))
 	return imageRequestHandlerAdopt(_id)
@@ -85,6 +94,8 @@ func NewImageRequestHandlerWithCGImageOptions(image obj.Object, options obj.Obje
 
 // NewImageRequestHandlerWithCIImageOptions creates a handler to use for performing requests on Core Image image data.
 func NewImageRequestHandlerWithCIImageOptions(image obj.Object, options obj.Object) *ImageRequestHandler {
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNImageRequestHandler")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCIImage:options:"), objref.IDOf(image), objref.IDOf(options))
 	return imageRequestHandlerAdopt(_id)
@@ -92,20 +103,24 @@ func NewImageRequestHandlerWithCIImageOptions(image obj.Object, options obj.Obje
 
 // NewImageRequestHandlerWithURLOptions creates a handler to be used for performing requests on an image at the specified URL.
 func NewImageRequestHandlerWithURLOptions(imageURL string, options obj.Object) *ImageRequestHandler {
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNImageRequestHandler")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), rt.FileURL(imageURL), objref.IDOf(options))
 	return imageRequestHandlerAdopt(_id)
 }
 
 // NewImageRequestHandlerWithDataOptions creates a handler to use for performing requests on an image in a data object.
-func NewImageRequestHandlerWithDataOptions(imageData obj.Object, options obj.Object) *ImageRequestHandler {
+func NewImageRequestHandlerWithDataOptions(imageData []byte, options obj.Object) *ImageRequestHandler {
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNImageRequestHandler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), objref.IDOf(imageData), objref.IDOf(options))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), rt.BytesToNSData(imageData), objref.IDOf(options))
 	return imageRequestHandlerAdopt(_id)
 }
 
 // NewImageRequestHandlerWithCMSampleBufferOptions creates a request handler that performs requests on an image contained within a sample buffer.
 func NewImageRequestHandlerWithCMSampleBufferOptions(sampleBuffer obj.Object, options obj.Object) *ImageRequestHandler {
+	defer runtime.KeepAlive(sampleBuffer)
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNImageRequestHandler")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCMSampleBuffer:options:"), objref.IDOf(sampleBuffer), objref.IDOf(options))
 	return imageRequestHandlerAdopt(_id)
@@ -113,6 +128,7 @@ func NewImageRequestHandlerWithCMSampleBufferOptions(sampleBuffer obj.Object, op
 
 // PerformRequests schedules Vision requests to perform.
 func (irh *ImageRequestHandler) PerformRequests(requests []*Request) error {
+	defer runtime.KeepAlive(irh)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(irh), objc.RegisterName("performRequests:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

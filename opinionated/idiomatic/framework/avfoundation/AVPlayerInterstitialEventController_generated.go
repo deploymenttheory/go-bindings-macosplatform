@@ -5,8 +5,11 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -49,6 +52,7 @@ func playerInterstitialEventControllerAdopt(id objc.ID) *PlayerInterstitialEvent
 
 // NewPlayerInterstitialEventControllerWithPrimaryPlayer creates an event controller with a player item.
 func NewPlayerInterstitialEventControllerWithPrimaryPlayer(primaryPlayer *Player) *PlayerInterstitialEventController {
+	defer runtime.KeepAlive(primaryPlayer)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerInterstitialEventController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPrimaryPlayer:"), objref.IDOf(primaryPlayer))
 	return playerInterstitialEventControllerAdopt(_id)
@@ -63,6 +67,7 @@ func (piec *PlayerInterstitialEventController) WithEvents(items ...*PlayerInters
 
 // WithLocalizedStringsBundle sets the bundle that contains the localized strings to be used by the AVPlayerInterstitialEventController.
 func (piec *PlayerInterstitialEventController) WithLocalizedStringsBundle(localizedStringsBundle obj.Object) *PlayerInterstitialEventController {
+	defer runtime.KeepAlive(localizedStringsBundle)
 	objc.Send[objc.ID](objref.IDOf(piec), objc.RegisterName("setLocalizedStringsBundle:"), objref.IDOf(localizedStringsBundle))
 	return piec
 }
@@ -75,22 +80,26 @@ func (piec *PlayerInterstitialEventController) WithLocalizedStringsTableName(loc
 
 // CancelCurrentEventWithResumptionOffset cancels the playback of all currently playing and scheduled interstitial events, and resumes playback of primary content.
 func (piec *PlayerInterstitialEventController) CancelCurrentEventWithResumptionOffset(resumptionOffset coremedia.CMTime) {
+	defer runtime.KeepAlive(piec)
 	objc.Send[objc.ID](objref.IDOf(piec), objc.RegisterName("cancelCurrentEventWithResumptionOffset:"), resumptionOffset)
 }
 
 // SkipCurrentEvent causes the playback of the currently playing interstital event to be abandoned.
 func (piec *PlayerInterstitialEventController) SkipCurrentEvent() {
+	defer runtime.KeepAlive(piec)
 	objc.Send[objc.ID](objref.IDOf(piec), objc.RegisterName("skipCurrentEvent"))
 }
 
 // LocalizedStringsBundle returns the bundle that contains the localized strings to be used by the AVPlayerInterstitialEventController. If the value of the property is nil, any UI elements triggered by the AVPlayerInterstitialEventController, such as the skip button, may contain a generic label based on the implementation of the UI that's in use. To ensure the best available user experience in various playback configurations, including external playback, set a value for this property that provides localized translations of skip control labels.
-func (piec *PlayerInterstitialEventController) LocalizedStringsBundle() obj.Object {
+func (piec *PlayerInterstitialEventController) LocalizedStringsBundle() *foundation.Bundle {
+	defer runtime.KeepAlive(piec)
 	_r := objc.Send[objc.ID](objref.IDOf(piec), objc.RegisterName("localizedStringsBundle"))
-	return obj.Wrap(_r)
+	return foundation.BundleFromID(_r)
 }
 
 // LocalizedStringsTableName returns the name of the table in the bundle that contains the localized strings to be used by the AVPlayerInterstitialEventController. If the value of the property is nil, it will default to "Localizable"
 func (piec *PlayerInterstitialEventController) LocalizedStringsTableName() string {
+	defer runtime.KeepAlive(piec)
 	_r := objc.Send[objc.ID](objref.IDOf(piec), objc.RegisterName("localizedStringsTableName"))
 	if _r == 0 {
 		return ""

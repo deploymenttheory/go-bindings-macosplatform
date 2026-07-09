@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func tensorAdopt(id objc.ID) *Tensor {
 
 // Description returns the object's -description text.
 func (t *Tensor) Description() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (t *Tensor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (t *Tensor) IsKind(className string) bool {
+	defer runtime.KeepAlive(t)
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (t *Tensor) String() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
@@ -82,78 +88,99 @@ func (t *Tensor) WithLabel(label string) *Tensor {
 
 // SynchronizeData reports whether synchronizes the data in host memory.
 func (t *Tensor) SynchronizeData() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("synchronizeData"))
 	return _r
 }
 
 // SynchronizeOptimizerData reports whether synchronizes the optimizer data in host memory.
 func (t *Tensor) SynchronizeOptimizerData() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("synchronizeOptimizerData"))
 	return _r
 }
 
 // CopyDataFromDeviceMemoryToBytesLengthSynchronizeWithDevice copies tensor data from device memory to user-specified memory.
-func (t *Tensor) CopyDataFromDeviceMemoryToBytesLengthSynchronizeWithDevice(bytes_ unsafe.Pointer, length int, synchronizeWithDevice bool) bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("copyDataFromDeviceMemoryToBytes:length:synchronizeWithDevice:"), bytes_, length, synchronizeWithDevice)
+func (t *Tensor) CopyDataFromDeviceMemoryToBytesLengthSynchronizeWithDevice(data unsafe.Pointer, length int, synchronizeWithDevice bool) bool {
+	defer runtime.KeepAlive(t)
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("copyDataFromDeviceMemoryToBytes:length:synchronizeWithDevice:"), data, length, synchronizeWithDevice)
 	return _r
 }
 
 // BindAndWriteDataToDevice associates the given data to the tensor, and if the device is a GPU, also copies the data to the device memory.
 func (t *Tensor) BindAndWriteDataToDevice(data *TensorData, device *Device) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(data)
+	defer runtime.KeepAlive(device)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("bindAndWriteData:toDevice:"), objref.IDOf(data), objref.IDOf(device))
 	return _r
 }
 
 // BindOptimizerDataDeviceData associates the optimizer and device data buffers you specify to the tensor.
 func (t *Tensor) BindOptimizerDataDeviceData(data []*TensorData, deviceData []*TensorOptimizerDeviceData) bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("bindOptimizerData:deviceData:"), purego.SliceToNSArray(data, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(deviceData, func(_v *TensorOptimizerDeviceData) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // TensorByQuantizingToTypeScaleBias converts a 32-bit floating-point tensor with the scale and bias you specify.
 func (t *Tensor) TensorByQuantizingToTypeScaleBias(type_ DataType, scale float32, bias int) *Tensor {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("tensorByQuantizingToType:scale:bias:"), type_, scale, bias)
 	return TensorFromID(_r)
 }
 
 // TensorByQuantizingToTypeScaleBiasAxis converts a 32-bit floating-point tensor with the scale and bias you specify.
 func (t *Tensor) TensorByQuantizingToTypeScaleBiasAxis(type_ DataType, scale *Tensor, bias *Tensor, axis int) *Tensor {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(scale)
+	defer runtime.KeepAlive(bias)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("tensorByQuantizingToType:scale:bias:axis:"), type_, objref.IDOf(scale), objref.IDOf(bias), axis)
 	return TensorFromID(_r)
 }
 
 // TensorByDequantizingToTypeScaleBias converts a tensor you quantize to a 32-bit floating-point tensor.
 func (t *Tensor) TensorByDequantizingToTypeScaleBias(type_ DataType, scale *Tensor, bias *Tensor) *Tensor {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(scale)
+	defer runtime.KeepAlive(bias)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("tensorByDequantizingToType:scale:bias:"), type_, objref.IDOf(scale), objref.IDOf(bias))
 	return TensorFromID(_r)
 }
 
 // TensorByDequantizingToTypeScaleBiasAxis converts a tensor you quantize to a 32-bit floating-point tensor.
 func (t *Tensor) TensorByDequantizingToTypeScaleBiasAxis(type_ DataType, scale *Tensor, bias *Tensor, axis int) *Tensor {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(scale)
+	defer runtime.KeepAlive(bias)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("tensorByDequantizingToType:scale:bias:axis:"), type_, objref.IDOf(scale), objref.IDOf(bias), axis)
 	return TensorFromID(_r)
 }
 
 // TensorID returns the tensor ID A unique number to identify each tensor.  Assigned when the tensor is created.
 func (t *Tensor) TensorID() int {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("tensorID"))
 	return _r
 }
 
 // Descriptor returns the tensor descriptor
 func (t *Tensor) Descriptor() *TensorDescriptor {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("descriptor"))
 	return TensorDescriptorFromID(_r)
 }
 
 // Data returns the tensor data
-func (t *Tensor) Data() obj.Object {
+func (t *Tensor) Data() []byte {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Label returns a string to help identify this object.
 func (t *Tensor) Label() string {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -163,6 +190,7 @@ func (t *Tensor) Label() string {
 
 // Device returns the device associated with this tensor.
 func (t *Tensor) Device() *Device {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("device"))
 	return DeviceFromID(_r)
 }
@@ -171,6 +199,7 @@ func (t *Tensor) Device() *Device {
 //
 // OptimizerData returns the collection as a Go slice.
 func (t *Tensor) OptimizerData() []*TensorData {
+	defer runtime.KeepAlive(t)
 	_arr := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("optimizerData"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorData { return TensorDataFromID(_id) })
 }
@@ -179,12 +208,14 @@ func (t *Tensor) OptimizerData() []*TensorData {
 //
 // OptimizerDeviceData returns the collection as a Go slice.
 func (t *Tensor) OptimizerDeviceData() []*TensorOptimizerDeviceData {
+	defer runtime.KeepAlive(t)
 	_arr := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("optimizerDeviceData"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorOptimizerDeviceData { return TensorOptimizerDeviceDataFromID(_id) })
 }
 
 // HasValidNumerics reports whether returns a Boolean value indicating whether the underlying data has valid floating-point numerics, i.e. it does not contain NaN or INF floating-point values.
 func (t *Tensor) HasValidNumerics() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("hasValidNumerics"))
 	return _r
 }

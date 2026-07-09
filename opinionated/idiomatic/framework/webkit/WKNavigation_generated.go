@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func wKNavigationAdopt(id objc.ID) *WKNavigation {
 
 // Description returns the object's -description text.
 func (wn *WKNavigation) Description() string {
+	defer runtime.KeepAlive(wn)
 	return rt.Description(objref.IDOf(wn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wn *WKNavigation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wn)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wn *WKNavigation) IsKind(className string) bool {
+	defer runtime.KeepAlive(wn)
 	return rt.IsKind(objref.IDOf(wn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wn *WKNavigation) String() string {
+	defer runtime.KeepAlive(wn)
 	return rt.Description(objref.IDOf(wn))
 }
 
@@ -80,6 +87,7 @@ func NewWKNavigation() *WKNavigation {
 
 // EffectiveContentMode returns the effective content mode.
 func (wn *WKNavigation) EffectiveContentMode() WKContentMode {
+	defer runtime.KeepAlive(wn)
 	var _mainthread0 WKContentMode
 	purego.Main(func() {
 		_mainthread0 = func() WKContentMode {

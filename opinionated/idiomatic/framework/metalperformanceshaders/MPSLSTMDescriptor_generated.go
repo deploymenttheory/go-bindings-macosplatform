@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -101,24 +103,28 @@ func (ld *LSTMDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *LSTMDes
 
 // MemoryWeightsAreDiagonal reports whether if true, then the 'peephole' weight matrices will be diagonal matrices represented as vectors of length the number of features in memory cells, that will be multiplied pointwise with the peephole matrix or image in order to achieve the diagonal (nonmixing) update. Defaults to false.
 func (ld *LSTMDescriptor) MemoryWeightsAreDiagonal() bool {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[bool](objref.IDOf(ld), objc.RegisterName("memoryWeightsAreDiagonal"))
 	return _r
 }
 
 // CellToOutputNeuronParamA returns neuron parameter A for 'gh'. Defaults to 1.0f.
 func (ld *LSTMDescriptor) CellToOutputNeuronParamA() float32 {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[float32](objref.IDOf(ld), objc.RegisterName("cellToOutputNeuronParamA"))
 	return _r
 }
 
 // CellToOutputNeuronParamB returns neuron parameter B for 'gh'. Defaults to 1.0f.
 func (ld *LSTMDescriptor) CellToOutputNeuronParamB() float32 {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[float32](objref.IDOf(ld), objc.RegisterName("cellToOutputNeuronParamB"))
 	return _r
 }
 
 // CellToOutputNeuronParamC returns neuron parameter C for 'gh'. Defaults to 1.0f.
 func (ld *LSTMDescriptor) CellToOutputNeuronParamC() float32 {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[float32](objref.IDOf(ld), objc.RegisterName("cellToOutputNeuronParamC"))
 	return _r
 }

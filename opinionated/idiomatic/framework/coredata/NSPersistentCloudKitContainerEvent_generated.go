@@ -5,7 +5,11 @@
 package coredata
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +51,27 @@ func persistentCloudKitContainerEventAdopt(id objc.ID) *PersistentCloudKitContai
 
 // Description returns the object's -description text.
 func (pckce *PersistentCloudKitContainerEvent) Description() string {
+	defer runtime.KeepAlive(pckce)
 	return rt.Description(objref.IDOf(pckce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pckce *PersistentCloudKitContainerEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pckce)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pckce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pckce *PersistentCloudKitContainerEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(pckce)
 	return rt.IsKind(objref.IDOf(pckce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pckce *PersistentCloudKitContainerEvent) String() string {
+	defer runtime.KeepAlive(pckce)
 	return rt.Description(objref.IDOf(pckce))
 }
 
@@ -73,13 +82,15 @@ func NewPersistentCloudKitContainerEvent() *PersistentCloudKitContainerEvent {
 }
 
 // Identifier returns the identifier.
-func (pckce *PersistentCloudKitContainerEvent) Identifier() obj.Object {
+func (pckce *PersistentCloudKitContainerEvent) Identifier() *foundation.UUID {
+	defer runtime.KeepAlive(pckce)
 	_r := objc.Send[objc.ID](objref.IDOf(pckce), objc.RegisterName("identifier"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // StoreIdentifier returns the store identifier.
 func (pckce *PersistentCloudKitContainerEvent) StoreIdentifier() string {
+	defer runtime.KeepAlive(pckce)
 	_r := objc.Send[objc.ID](objref.IDOf(pckce), objc.RegisterName("storeIdentifier"))
 	if _r == 0 {
 		return ""
@@ -89,24 +100,28 @@ func (pckce *PersistentCloudKitContainerEvent) StoreIdentifier() string {
 
 // Type returns the type.
 func (pckce *PersistentCloudKitContainerEvent) Type() PersistentCloudKitContainerEventType {
+	defer runtime.KeepAlive(pckce)
 	_r := objc.Send[PersistentCloudKitContainerEventType](objref.IDOf(pckce), objc.RegisterName("type"))
 	return _r
 }
 
 // StartDate returns the start date.
-func (pckce *PersistentCloudKitContainerEvent) StartDate() obj.Object {
+func (pckce *PersistentCloudKitContainerEvent) StartDate() time.Time {
+	defer runtime.KeepAlive(pckce)
 	_r := objc.Send[objc.ID](objref.IDOf(pckce), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // EndDate returns the end date.
-func (pckce *PersistentCloudKitContainerEvent) EndDate() obj.Object {
+func (pckce *PersistentCloudKitContainerEvent) EndDate() time.Time {
+	defer runtime.KeepAlive(pckce)
 	_r := objc.Send[objc.ID](objref.IDOf(pckce), objc.RegisterName("endDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Succeeded wraps the corresponding Objective-C method.
 func (pckce *PersistentCloudKitContainerEvent) Succeeded() bool {
+	defer runtime.KeepAlive(pckce)
 	_r := objc.Send[bool](objref.IDOf(pckce), objc.RegisterName("succeeded"))
 	return _r
 }

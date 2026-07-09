@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func externalSyncDeviceDiscoverySessionAdopt(id objc.ID) *ExternalSyncDeviceDisc
 
 // Description returns the object's -description text.
 func (esdds *ExternalSyncDeviceDiscoverySession) Description() string {
+	defer runtime.KeepAlive(esdds)
 	return rt.Description(objref.IDOf(esdds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (esdds *ExternalSyncDeviceDiscoverySession) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(esdds)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(esdds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (esdds *ExternalSyncDeviceDiscoverySession) IsKind(className string) bool {
+	defer runtime.KeepAlive(esdds)
 	return rt.IsKind(objref.IDOf(esdds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (esdds *ExternalSyncDeviceDiscoverySession) String() string {
+	defer runtime.KeepAlive(esdds)
 	return rt.Description(objref.IDOf(esdds))
 }
 
@@ -74,6 +81,7 @@ func NewExternalSyncDeviceDiscoverySession() *ExternalSyncDeviceDiscoverySession
 //
 // Devices returns the collection as a Go slice.
 func (esdds *ExternalSyncDeviceDiscoverySession) Devices() []*ExternalSyncDevice {
+	defer runtime.KeepAlive(esdds)
 	_arr := objc.Send[objc.ID](objref.IDOf(esdds), objc.RegisterName("devices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ExternalSyncDevice { return ExternalSyncDeviceFromID(_id) })
 }

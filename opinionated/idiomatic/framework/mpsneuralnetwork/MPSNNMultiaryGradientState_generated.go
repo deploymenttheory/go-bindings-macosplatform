@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func nNMultiaryGradientStateAdopt(id objc.ID) *NNMultiaryGradientState {
 
 // Description returns the object's -description text.
 func (nmgs *NNMultiaryGradientState) Description() string {
+	defer runtime.KeepAlive(nmgs)
 	return rt.Description(objref.IDOf(nmgs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nmgs *NNMultiaryGradientState) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nmgs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nmgs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nmgs *NNMultiaryGradientState) IsKind(className string) bool {
+	defer runtime.KeepAlive(nmgs)
 	return rt.IsKind(objref.IDOf(nmgs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nmgs *NNMultiaryGradientState) String() string {
+	defer runtime.KeepAlive(nmgs)
 	return rt.Description(objref.IDOf(nmgs))
 }
 

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,45 +50,53 @@ func mTROperationalCredentialsClusterFabricDescriptorStructAdopt(id objc.ID) *MT
 
 // Description returns the object's -description text.
 func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) Description() string {
+	defer runtime.KeepAlive(moccfds)
 	return rt.Description(objref.IDOf(moccfds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(moccfds)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(moccfds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(moccfds)
 	return rt.IsKind(objref.IDOf(moccfds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) String() string {
+	defer runtime.KeepAlive(moccfds)
 	return rt.Description(objref.IDOf(moccfds))
 }
 
 // WithRootPublicKey sets the root public key.
-func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) WithRootPublicKey(rootPublicKey obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct {
-	objc.Send[objc.ID](objref.IDOf(moccfds), objc.RegisterName("setRootPublicKey:"), objref.IDOf(rootPublicKey))
+func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) WithRootPublicKey(rootPublicKey []byte) *MTROperationalCredentialsClusterFabricDescriptorStruct {
+	objc.Send[objc.ID](objref.IDOf(moccfds), objc.RegisterName("setRootPublicKey:"), rt.BytesToNSData(rootPublicKey))
 	return moccfds
 }
 
 // WithVendorID sets the vendor ID.
 func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) WithVendorID(vendorID obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct {
+	defer runtime.KeepAlive(vendorID)
 	objc.Send[objc.ID](objref.IDOf(moccfds), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 	return moccfds
 }
 
 // WithFabricID sets the fabric ID.
 func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) WithFabricID(fabricID obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct {
+	defer runtime.KeepAlive(fabricID)
 	objc.Send[objc.ID](objref.IDOf(moccfds), objc.RegisterName("setFabricID:"), objref.IDOf(fabricID))
 	return moccfds
 }
 
 // WithNodeID sets the node ID.
 func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) WithNodeID(nodeID obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct {
+	defer runtime.KeepAlive(nodeID)
 	objc.Send[objc.ID](objref.IDOf(moccfds), objc.RegisterName("setNodeID:"), objref.IDOf(nodeID))
 	return moccfds
 }
@@ -98,36 +109,42 @@ func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) WithLabel
 
 // WithFabricIndex sets the fabric index.
 func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(moccfds), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return moccfds
 }
 
 // RootPublicKey returns the root public key.
-func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) RootPublicKey() obj.Object {
+func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) RootPublicKey() []byte {
+	defer runtime.KeepAlive(moccfds)
 	_r := objc.Send[objc.ID](objref.IDOf(moccfds), objc.RegisterName("rootPublicKey"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // VendorID returns the vendor ID.
-func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) VendorID() obj.Object {
+func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) VendorID() *foundation.Number {
+	defer runtime.KeepAlive(moccfds)
 	_r := objc.Send[objc.ID](objref.IDOf(moccfds), objc.RegisterName("vendorID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // FabricID returns the fabric ID.
-func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) FabricID() obj.Object {
+func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) FabricID() *foundation.Number {
+	defer runtime.KeepAlive(moccfds)
 	_r := objc.Send[objc.ID](objref.IDOf(moccfds), objc.RegisterName("fabricID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NodeID returns the node ID.
-func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) NodeID() obj.Object {
+func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) NodeID() *foundation.Number {
+	defer runtime.KeepAlive(moccfds)
 	_r := objc.Send[objc.ID](objref.IDOf(moccfds), objc.RegisterName("nodeID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Label returns the label.
 func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) Label() string {
+	defer runtime.KeepAlive(moccfds)
 	_r := objc.Send[objc.ID](objref.IDOf(moccfds), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -136,9 +153,10 @@ func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) Label() s
 }
 
 // FabricIndex returns the fabric index.
-func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) FabricIndex() obj.Object {
+func (moccfds *MTROperationalCredentialsClusterFabricDescriptorStruct) FabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(moccfds)
 	_r := objc.Send[objc.ID](objref.IDOf(moccfds), objc.RegisterName("fabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTROperationalCredentialsClusterFabricDescriptorStruct marks MTROperationalCredentialsClusterFabricDescriptorStruct — and, by embedding promotion, its

@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func uRLSessionTaskMetricsAdopt(id objc.ID) *URLSessionTaskMetrics {
 
 // Description returns the object's -description text.
 func (ustm *URLSessionTaskMetrics) Description() string {
+	defer runtime.KeepAlive(ustm)
 	return rt.Description(objref.IDOf(ustm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ustm *URLSessionTaskMetrics) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ustm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ustm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ustm *URLSessionTaskMetrics) IsKind(className string) bool {
+	defer runtime.KeepAlive(ustm)
 	return rt.IsKind(objref.IDOf(ustm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ustm *URLSessionTaskMetrics) String() string {
+	defer runtime.KeepAlive(ustm)
 	return rt.Description(objref.IDOf(ustm))
 }
 
@@ -81,8 +87,8 @@ func (ustm *URLSessionTaskMetrics) WithObservationInfo(observationInfo unsafe.Po
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ustm *URLSessionTaskMetrics) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionTaskMetrics {
-	objc.Send[objc.ID](objref.IDOf(ustm), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ustm *URLSessionTaskMetrics) WithScriptingProperties(scriptingProperties map[string]obj.Object) *URLSessionTaskMetrics {
+	objc.Send[objc.ID](objref.IDOf(ustm), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ustm
 }
 
@@ -90,6 +96,7 @@ func (ustm *URLSessionTaskMetrics) WithScriptingProperties(scriptingProperties o
 //
 // TransactionMetrics returns the collection as a Go slice.
 func (ustm *URLSessionTaskMetrics) TransactionMetrics() []*URLSessionTaskTransactionMetrics {
+	defer runtime.KeepAlive(ustm)
 	_arr := objc.Send[objc.ID](objref.IDOf(ustm), objc.RegisterName("transactionMetrics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *URLSessionTaskTransactionMetrics {
 		return URLSessionTaskTransactionMetricsFromID(_id)
@@ -98,12 +105,14 @@ func (ustm *URLSessionTaskMetrics) TransactionMetrics() []*URLSessionTaskTransac
 
 // TaskInterval returns the task interval.
 func (ustm *URLSessionTaskMetrics) TaskInterval() *DateInterval {
+	defer runtime.KeepAlive(ustm)
 	_r := objc.Send[objc.ID](objref.IDOf(ustm), objc.RegisterName("taskInterval"))
 	return DateIntervalFromID(_r)
 }
 
 // RedirectCount returns the redirect count.
 func (ustm *URLSessionTaskMetrics) RedirectCount() int {
+	defer runtime.KeepAlive(ustm)
 	_r := objc.Send[int](objref.IDOf(ustm), objc.RegisterName("redirectCount"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func groupPresetSettingAdopt(id objc.ID) *GroupPresetSetting {
 
 // Description returns the object's -description text.
 func (gps *GroupPresetSetting) Description() string {
+	defer runtime.KeepAlive(gps)
 	return rt.Description(objref.IDOf(gps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gps *GroupPresetSetting) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gps *GroupPresetSetting) IsKind(className string) bool {
+	defer runtime.KeepAlive(gps)
 	return rt.IsKind(objref.IDOf(gps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gps *GroupPresetSetting) String() string {
+	defer runtime.KeepAlive(gps)
 	return rt.Description(objref.IDOf(gps))
 }
 
@@ -75,24 +82,28 @@ func NewGroupPresetSettingWithGainRateGainCurveTypeRateCurveType(gain float64, r
 
 // Gain returns linear gain scalar.
 func (gps *GroupPresetSetting) Gain() float64 {
+	defer runtime.KeepAlive(gps)
 	_r := objc.Send[float64](objref.IDOf(gps), objc.RegisterName("gain"))
 	return _r
 }
 
 // Rate returns linear rate scalar.
 func (gps *GroupPresetSetting) Rate() float64 {
+	defer runtime.KeepAlive(gps)
 	_r := objc.Send[float64](objref.IDOf(gps), objc.RegisterName("rate"))
 	return _r
 }
 
 // GainCurveType returns the type of curve to apply to the gain as the preset changes to this new setting.
 func (gps *GroupPresetSetting) GainCurveType() CurveType {
+	defer runtime.KeepAlive(gps)
 	_r := objc.Send[CurveType](objref.IDOf(gps), objc.RegisterName("gainCurveType"))
 	return _r
 }
 
 // RateCurveType returns the type of curve to apply to the rate as the preset changes to this new setting.
 func (gps *GroupPresetSetting) RateCurveType() CurveType {
+	defer runtime.KeepAlive(gps)
 	_r := objc.Send[CurveType](objref.IDOf(gps), objc.RegisterName("rateCurveType"))
 	return _r
 }

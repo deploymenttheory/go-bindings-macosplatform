@@ -5,6 +5,8 @@
 package mailkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func messageActionDecisionAdopt(id objc.ID) *MessageActionDecision {
 
 // Description returns the object's -description text.
 func (mad *MessageActionDecision) Description() string {
+	defer runtime.KeepAlive(mad)
 	return rt.Description(objref.IDOf(mad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mad *MessageActionDecision) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mad *MessageActionDecision) IsKind(className string) bool {
+	defer runtime.KeepAlive(mad)
 	return rt.IsKind(objref.IDOf(mad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mad *MessageActionDecision) String() string {
+	defer runtime.KeepAlive(mad)
 	return rt.Description(objref.IDOf(mad))
 }
 

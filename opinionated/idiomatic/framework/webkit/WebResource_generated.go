@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,46 +49,54 @@ func webResourceAdopt(id objc.ID) *WebResource {
 
 // Description returns the object's -description text.
 func (wr *WebResource) Description() string {
+	defer runtime.KeepAlive(wr)
 	return rt.Description(objref.IDOf(wr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wr *WebResource) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wr *WebResource) IsKind(className string) bool {
+	defer runtime.KeepAlive(wr)
 	return rt.IsKind(objref.IDOf(wr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wr *WebResource) String() string {
+	defer runtime.KeepAlive(wr)
 	return rt.Description(objref.IDOf(wr))
 }
 
 // NewWebResourceWithDataURLMIMETypeTextEncodingNameFrameName initializes and returns a web resource instance.
-func NewWebResourceWithDataURLMIMETypeTextEncodingNameFrameName(data obj.Object, uRL string, mIMEType string, textEncodingName string, frameName string) *WebResource {
+func NewWebResourceWithDataURLMIMETypeTextEncodingNameFrameName(data []byte, url string, mimeType string, textEncodingName string, frameName string) *WebResource {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("WebResource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:URL:MIMEType:textEncodingName:frameName:"), objref.IDOf(data), rt.FileURL(uRL), purego.NSString(mIMEType), purego.NSString(textEncodingName), purego.NSString(frameName))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:URL:MIMEType:textEncodingName:frameName:"), rt.BytesToNSData(data), rt.FileURL(url), purego.NSString(mimeType), purego.NSString(textEncodingName), purego.NSString(frameName))
 	return webResourceAdopt(_id)
 }
 
 // Data returns the data of the resource.
-func (wr *WebResource) Data() obj.Object {
+func (wr *WebResource) Data() []byte {
+	defer runtime.KeepAlive(wr)
 	_r := objc.Send[objc.ID](objref.IDOf(wr), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // URL returns the URL of the resource.
-func (wr *WebResource) URL() obj.Object {
+func (wr *WebResource) URL() string {
+	defer runtime.KeepAlive(wr)
 	_r := objc.Send[objc.ID](objref.IDOf(wr), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // MIMEType returns the MIME type of the resource.
 func (wr *WebResource) MIMEType() string {
+	defer runtime.KeepAlive(wr)
 	_r := objc.Send[objc.ID](objref.IDOf(wr), objc.RegisterName("MIMEType"))
 	if _r == 0 {
 		return ""
@@ -96,6 +106,7 @@ func (wr *WebResource) MIMEType() string {
 
 // TextEncodingName returns the text encoding name of the resource (can be nil).
 func (wr *WebResource) TextEncodingName() string {
+	defer runtime.KeepAlive(wr)
 	_r := objc.Send[objc.ID](objref.IDOf(wr), objc.RegisterName("textEncodingName"))
 	if _r == 0 {
 		return ""
@@ -105,6 +116,7 @@ func (wr *WebResource) TextEncodingName() string {
 
 // FrameName returns the frame name of the resource if the resource represents the contents of an entire HTML frame (can be nil).
 func (wr *WebResource) FrameName() string {
+	defer runtime.KeepAlive(wr)
 	_r := objc.Send[objc.ID](objref.IDOf(wr), objc.RegisterName("frameName"))
 	if _r == 0 {
 		return ""

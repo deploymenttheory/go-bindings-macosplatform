@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -48,22 +49,27 @@ func mTRBaseDeviceAdopt(id objc.ID) *MTRBaseDevice {
 
 // Description returns the object's -description text.
 func (mbd *MTRBaseDevice) Description() string {
+	defer runtime.KeepAlive(mbd)
 	return rt.Description(objref.IDOf(mbd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbd *MTRBaseDevice) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbd *MTRBaseDevice) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbd)
 	return rt.IsKind(objref.IDOf(mbd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbd *MTRBaseDevice) String() string {
+	defer runtime.KeepAlive(mbd)
 	return rt.Description(objref.IDOf(mbd))
 }
 
@@ -75,6 +81,8 @@ func NewMTRBaseDevice() *MTRBaseDevice {
 
 // DeregisterReportHandlersWithQueueCompletion deregister all local report handlers for a remote device This method is applicable only for a remote device. For a local device, the stack has to be shutdown to stop report handlers. There could be multiple clients accessing a node through a remote controller object and hence it is not appropriate for one of those clients to shut down the entire stack to stop receiving reports.
 func (mbd *MTRBaseDevice) DeregisterReportHandlersWithQueueCompletion(queue obj.Object, completion func()) {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(queue)
 	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("deregisterReportHandlersWithQueue:completion:"), objref.IDOf(queue), completion)
 }
 
@@ -82,6 +90,8 @@ func (mbd *MTRBaseDevice) DeregisterReportHandlersWithQueueCompletion(queue obj.
 //
 // DownloadLogOfTypeTimeoutQueueCompletion blocks until the operation completes or ctx is cancelled.
 func (mbd *MTRBaseDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ MTRDiagnosticLogType, timeout float64, queue obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(queue)
 	type _result struct {
 		val obj.Object
 		err error
@@ -105,11 +115,14 @@ func (mbd *MTRBaseDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Co
 
 // SessionTransportType returns the transport used by the current session with this device, or `MTRTransportTypeUndefined` if no session is currently active.
 func (mbd *MTRBaseDevice) SessionTransportType() MTRTransportType {
+	defer runtime.KeepAlive(mbd)
 	_r := objc.Send[MTRTransportType](objref.IDOf(mbd), objc.RegisterName("sessionTransportType"))
 	return _r
 }
 
 // DeregisterReportHandlersWithClientQueueCompletion wraps the corresponding Objective-C method.
 func (mbd *MTRBaseDevice) DeregisterReportHandlersWithClientQueueCompletion(queue obj.Object, completion func()) {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(queue)
 	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("deregisterReportHandlersWithClientQueue:completion:"), objref.IDOf(queue), completion)
 }

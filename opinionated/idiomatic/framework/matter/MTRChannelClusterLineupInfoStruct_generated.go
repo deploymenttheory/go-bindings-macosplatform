@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func mTRChannelClusterLineupInfoStructAdopt(id objc.ID) *MTRChannelClusterLineup
 
 // Description returns the object's -description text.
 func (mcclis *MTRChannelClusterLineupInfoStruct) Description() string {
+	defer runtime.KeepAlive(mcclis)
 	return rt.Description(objref.IDOf(mcclis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcclis *MTRChannelClusterLineupInfoStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcclis)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcclis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcclis *MTRChannelClusterLineupInfoStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcclis)
 	return rt.IsKind(objref.IDOf(mcclis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcclis *MTRChannelClusterLineupInfoStruct) String() string {
+	defer runtime.KeepAlive(mcclis)
 	return rt.Description(objref.IDOf(mcclis))
 }
 
@@ -86,12 +94,14 @@ func (mcclis *MTRChannelClusterLineupInfoStruct) WithPostalCode(postalCode strin
 
 // WithLineupInfoType sets the lineup info type.
 func (mcclis *MTRChannelClusterLineupInfoStruct) WithLineupInfoType(lineupInfoType obj.Object) *MTRChannelClusterLineupInfoStruct {
+	defer runtime.KeepAlive(lineupInfoType)
 	objc.Send[objc.ID](objref.IDOf(mcclis), objc.RegisterName("setLineupInfoType:"), objref.IDOf(lineupInfoType))
 	return mcclis
 }
 
 // OperatorName returns the operator name.
 func (mcclis *MTRChannelClusterLineupInfoStruct) OperatorName() string {
+	defer runtime.KeepAlive(mcclis)
 	_r := objc.Send[objc.ID](objref.IDOf(mcclis), objc.RegisterName("operatorName"))
 	if _r == 0 {
 		return ""
@@ -101,6 +111,7 @@ func (mcclis *MTRChannelClusterLineupInfoStruct) OperatorName() string {
 
 // LineupName returns the lineup name.
 func (mcclis *MTRChannelClusterLineupInfoStruct) LineupName() string {
+	defer runtime.KeepAlive(mcclis)
 	_r := objc.Send[objc.ID](objref.IDOf(mcclis), objc.RegisterName("lineupName"))
 	if _r == 0 {
 		return ""
@@ -110,6 +121,7 @@ func (mcclis *MTRChannelClusterLineupInfoStruct) LineupName() string {
 
 // PostalCode returns the postal code.
 func (mcclis *MTRChannelClusterLineupInfoStruct) PostalCode() string {
+	defer runtime.KeepAlive(mcclis)
 	_r := objc.Send[objc.ID](objref.IDOf(mcclis), objc.RegisterName("postalCode"))
 	if _r == 0 {
 		return ""
@@ -118,9 +130,10 @@ func (mcclis *MTRChannelClusterLineupInfoStruct) PostalCode() string {
 }
 
 // LineupInfoType returns the lineup info type.
-func (mcclis *MTRChannelClusterLineupInfoStruct) LineupInfoType() obj.Object {
+func (mcclis *MTRChannelClusterLineupInfoStruct) LineupInfoType() *foundation.Number {
+	defer runtime.KeepAlive(mcclis)
 	_r := objc.Send[objc.ID](objref.IDOf(mcclis), objc.RegisterName("lineupInfoType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRChannelClusterLineupInfoStruct marks MTRChannelClusterLineupInfoStruct — and, by embedding promotion, its

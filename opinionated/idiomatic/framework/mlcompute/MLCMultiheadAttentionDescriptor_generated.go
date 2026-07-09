@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func multiheadAttentionDescriptorAdopt(id objc.ID) *MultiheadAttentionDescriptor
 
 // Description returns the object's -description text.
 func (mad *MultiheadAttentionDescriptor) Description() string {
+	defer runtime.KeepAlive(mad)
 	return rt.Description(objref.IDOf(mad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mad *MultiheadAttentionDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mad *MultiheadAttentionDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(mad)
 	return rt.IsKind(objref.IDOf(mad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mad *MultiheadAttentionDescriptor) String() string {
+	defer runtime.KeepAlive(mad)
 	return rt.Description(objref.IDOf(mad))
 }
 
@@ -74,48 +81,56 @@ func NewMultiheadAttentionDescriptor() *MultiheadAttentionDescriptor {
 
 // ModelDimension returns model or embedding dimension
 func (mad *MultiheadAttentionDescriptor) ModelDimension() int {
+	defer runtime.KeepAlive(mad)
 	_r := objc.Send[int](objref.IDOf(mad), objc.RegisterName("modelDimension"))
 	return _r
 }
 
 // KeyDimension returns total dimension of key space, Default = modelDimension
 func (mad *MultiheadAttentionDescriptor) KeyDimension() int {
+	defer runtime.KeepAlive(mad)
 	_r := objc.Send[int](objref.IDOf(mad), objc.RegisterName("keyDimension"))
 	return _r
 }
 
 // ValueDimension returns total dimension of value space, Default = modelDimension
 func (mad *MultiheadAttentionDescriptor) ValueDimension() int {
+	defer runtime.KeepAlive(mad)
 	_r := objc.Send[int](objref.IDOf(mad), objc.RegisterName("valueDimension"))
 	return _r
 }
 
 // HeadCount returns number of parallel attention heads
 func (mad *MultiheadAttentionDescriptor) HeadCount() int {
+	defer runtime.KeepAlive(mad)
 	_r := objc.Send[int](objref.IDOf(mad), objc.RegisterName("headCount"))
 	return _r
 }
 
 // Dropout returns a droupout layer applied to the output projection weights. Default = 0.0
 func (mad *MultiheadAttentionDescriptor) Dropout() float32 {
+	defer runtime.KeepAlive(mad)
 	_r := objc.Send[float32](objref.IDOf(mad), objc.RegisterName("dropout"))
 	return _r
 }
 
 // HasBiases reports whether if true, bias is used for query/key/value/output projections. Default = true
 func (mad *MultiheadAttentionDescriptor) HasBiases() bool {
+	defer runtime.KeepAlive(mad)
 	_r := objc.Send[bool](objref.IDOf(mad), objc.RegisterName("hasBiases"))
 	return _r
 }
 
 // HasAttentionBiases reports whether if true, an array of biases is added to key and value respectively. Default = false
 func (mad *MultiheadAttentionDescriptor) HasAttentionBiases() bool {
+	defer runtime.KeepAlive(mad)
 	_r := objc.Send[bool](objref.IDOf(mad), objc.RegisterName("hasAttentionBiases"))
 	return _r
 }
 
 // AddsZeroAttention reports whether if true, a row of zeroes is added to projected key and value. Default = false
 func (mad *MultiheadAttentionDescriptor) AddsZeroAttention() bool {
+	defer runtime.KeepAlive(mad)
 	_r := objc.Send[bool](objref.IDOf(mad), objc.RegisterName("addsZeroAttention"))
 	return _r
 }

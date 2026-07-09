@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,36 +67,42 @@ func (pl *PaddingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Padding
 
 // PaddingType returns the padding type i.e. constant, zero, reflect or symmetric
 func (pl *PaddingLayer) PaddingType() PaddingType {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[PaddingType](objref.IDOf(pl), objc.RegisterName("paddingType"))
 	return _r
 }
 
 // PaddingLeft returns the left padding size
 func (pl *PaddingLayer) PaddingLeft() int {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[int](objref.IDOf(pl), objc.RegisterName("paddingLeft"))
 	return _r
 }
 
 // PaddingRight returns the right padding size
 func (pl *PaddingLayer) PaddingRight() int {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[int](objref.IDOf(pl), objc.RegisterName("paddingRight"))
 	return _r
 }
 
 // PaddingTop returns the top padding size
 func (pl *PaddingLayer) PaddingTop() int {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[int](objref.IDOf(pl), objc.RegisterName("paddingTop"))
 	return _r
 }
 
 // PaddingBottom returns the bottom padding size
 func (pl *PaddingLayer) PaddingBottom() int {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[int](objref.IDOf(pl), objc.RegisterName("paddingBottom"))
 	return _r
 }
 
 // ConstantValue returns the constant value to use if padding type is constant.
 func (pl *PaddingLayer) ConstantValue() float32 {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[float32](objref.IDOf(pl), objc.RegisterName("constantValue"))
 	return _r
 }

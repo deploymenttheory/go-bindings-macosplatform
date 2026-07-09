@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,32 +51,40 @@ func captionRegionAdopt(id objc.ID) *CaptionRegion {
 
 // Description returns the object's -description text.
 func (cr *CaptionRegion) Description() string {
+	defer runtime.KeepAlive(cr)
 	return rt.Description(objref.IDOf(cr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cr *CaptionRegion) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cr *CaptionRegion) IsKind(className string) bool {
+	defer runtime.KeepAlive(cr)
 	return rt.IsKind(objref.IDOf(cr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cr *CaptionRegion) String() string {
+	defer runtime.KeepAlive(cr)
 	return rt.Description(objref.IDOf(cr))
 }
 
 // EncodeWithCoder encodes the region using the specified encoder.
 func (cr *CaptionRegion) EncodeWithCoder(encoder obj.Object) {
+	defer runtime.KeepAlive(cr)
+	defer runtime.KeepAlive(encoder)
 	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("encodeWithCoder:"), objref.IDOf(encoder))
 }
 
 // Identifier returns identifier for the region When regionIdentifier is nil, two regions with the same position and endPosition are considered to be same, that is captions referring these regions belong to the same region when serialized to a format like TTML.  In addition, the AVCaptionRegion cannot be mutably copied. When regionIdentifier is not nil, two regions are same if and only if the region identifier is equal. It is a client's responsibility to ensure these AVCaptionRegion objects have the same properties.
 func (cr *CaptionRegion) Identifier() string {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -84,18 +94,21 @@ func (cr *CaptionRegion) Identifier() string {
 
 // Scroll returns scroll mode for the region See AVCaptionRegionScrollXXX enum for possible values.
 func (cr *CaptionRegion) Scroll() CaptionRegionScroll {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[CaptionRegionScroll](objref.IDOf(cr), objc.RegisterName("scroll"))
 	return _r
 }
 
 // DisplayAlignment returns alignment of lines for the region
 func (cr *CaptionRegion) DisplayAlignment() CaptionRegionDisplayAlignment {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[CaptionRegionDisplayAlignment](objref.IDOf(cr), objc.RegisterName("displayAlignment"))
 	return _r
 }
 
 // WritingMode returns the block and inline progression direction of the region.
 func (cr *CaptionRegion) WritingMode() CaptionRegionWritingMode {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[CaptionRegionWritingMode](objref.IDOf(cr), objc.RegisterName("writingMode"))
 	return _r
 }

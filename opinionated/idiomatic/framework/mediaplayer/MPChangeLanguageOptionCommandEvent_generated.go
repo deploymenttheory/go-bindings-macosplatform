@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewChangeLanguageOptionCommandEvent() *ChangeLanguageOptionCommandEvent {
 
 // LanguageOption returns the requested language option to change. The supplied language option may be the Automatic Legible Language Option which would mean that best legible language option based on user preferences is being requested. See MPNowPlayingInfoLanguageOption isAutomaticLegibleLanguageOption
 func (cloce *ChangeLanguageOptionCommandEvent) LanguageOption() *NowPlayingInfoLanguageOption {
+	defer runtime.KeepAlive(cloce)
 	_r := objc.Send[objc.ID](objref.IDOf(cloce), objc.RegisterName("languageOption"))
 	return NowPlayingInfoLanguageOptionFromID(_r)
 }
 
 // Setting describes the extent of the changed language option
 func (cloce *ChangeLanguageOptionCommandEvent) Setting() ChangeLanguageOptionSetting {
+	defer runtime.KeepAlive(cloce)
 	_r := objc.Send[ChangeLanguageOptionSetting](objref.IDOf(cloce), objc.RegisterName("setting"))
 	return _r
 }

@@ -10,6 +10,9 @@
 {{end}}// {{.GoName}} returns the collection as a Go slice.
 {{if .HasError -}}
 func {{.Recv}}{{.GoName}}() (result []{{.ElemGoType}}, err error) {
+{{- range .KeepAlive}}
+defer runtime.KeepAlive({{.}})
+{{- end}}
 {{- if .MainThread}}
 purego.Main(func() {
 result, err = func() ([]{{.ElemGoType}}, error) {
@@ -22,6 +25,9 @@ return
 }
 {{else -}}
 func {{.Recv}}{{.GoName}}() []{{.ElemGoType}} {
+{{- range .KeepAlive}}
+defer runtime.KeepAlive({{.}})
+{{- end}}
 {{- if .MainThread}}
 var _mainthread0 []{{.ElemGoType}}
 purego.Main(func() {

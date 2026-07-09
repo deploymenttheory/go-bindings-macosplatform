@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -52,27 +54,33 @@ func dictionaryAdopt(id objc.ID) *Dictionary {
 
 // Description returns the object's -description text.
 func (d *Dictionary) Description() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (d *Dictionary) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (d *Dictionary) IsKind(className string) bool {
+	defer runtime.KeepAlive(d)
 	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (d *Dictionary) String() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // NewDictionaryWithCoder creates a dictionary initialized from data in the provided unarchiver.
 func NewDictionaryWithCoder(coder *Coder) *Dictionary {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDictionary")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return dictionaryAdopt(_id)
@@ -94,6 +102,7 @@ func NewDictionaryWithContentsOfURL(url string) *Dictionary {
 
 // NewDictionaryWithObjectsAndKeys initializes a newly allocated dictionary with entries constructed from the specified set of values and keys.
 func NewDictionaryWithObjectsAndKeys(firstObject obj.Object) *Dictionary {
+	defer runtime.KeepAlive(firstObject)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDictionary")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjectsAndKeys:"), objref.IDOf(firstObject))
 	return dictionaryAdopt(_id)
@@ -101,6 +110,7 @@ func NewDictionaryWithObjectsAndKeys(firstObject obj.Object) *Dictionary {
 
 // NewDictionaryWithDictionary initializes a newly allocated dictionary by placing in it the keys and values contained in another given dictionary.
 func NewDictionaryWithDictionary(otherDictionary obj.Object) *Dictionary {
+	defer runtime.KeepAlive(otherDictionary)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDictionary")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), objref.IDOf(otherDictionary))
 	return dictionaryAdopt(_id)
@@ -108,6 +118,7 @@ func NewDictionaryWithDictionary(otherDictionary obj.Object) *Dictionary {
 
 // NewDictionaryWithDictionaryCopyItems initializes a newly allocated dictionary using the objects contained in another given dictionary.
 func NewDictionaryWithDictionaryCopyItems(otherDictionary obj.Object, flag bool) *Dictionary {
+	defer runtime.KeepAlive(otherDictionary)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDictionary")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:copyItems:"), objref.IDOf(otherDictionary), flag)
 	return dictionaryAdopt(_id)
@@ -138,37 +149,45 @@ func (d *Dictionary) WithObservationInfo(observationInfo unsafe.Pointer) *Dictio
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (d *Dictionary) WithScriptingProperties(scriptingProperties obj.Object) *Dictionary {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (d *Dictionary) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Dictionary {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return d
 }
 
 // ObjectForKey returns the value associated with a given key.
 func (d *Dictionary) ObjectForKey(aKey obj.Object) obj.Object {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(aKey)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("objectForKey:"), objref.IDOf(aKey))
 	return obj.Wrap(_r)
 }
 
 // KeyEnumerator provides an enumerator to access the keys in the dictionary.
 func (d *Dictionary) KeyEnumerator() obj.Object {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("keyEnumerator"))
 	return obj.Wrap(_r)
 }
 
 // Count returns the count.
 func (d *Dictionary) Count() int {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("count"))
 	return _r
 }
 
 // AllKeysForObject returns a new array containing the keys corresponding to all occurrences of a given object in the dictionary.
 func (d *Dictionary) AllKeysForObject(anObject obj.Object) []obj.Object {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(anObject)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("allKeysForObject:"), objref.IDOf(anObject))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DescriptionWithLocale returns a string object that represents the contents of the dictionary, formatted as a property list.
 func (d *Dictionary) DescriptionWithLocale(locale obj.Object) string {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(locale)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("descriptionWithLocale:"), objref.IDOf(locale))
 	if _r == 0 {
 		return ""
@@ -178,6 +197,8 @@ func (d *Dictionary) DescriptionWithLocale(locale obj.Object) string {
 
 // DescriptionWithLocaleIndent returns a string object that represents the contents of the dictionary, formatted as a property list.
 func (d *Dictionary) DescriptionWithLocaleIndent(locale obj.Object, level int) string {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(locale)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("descriptionWithLocale:indent:"), objref.IDOf(locale), level)
 	if _r == 0 {
 		return ""
@@ -187,24 +208,30 @@ func (d *Dictionary) DescriptionWithLocaleIndent(locale obj.Object, level int) s
 
 // IsEqualToDictionary returns a Boolean value that indicates whether the contents of the receiving dictionary are equal to the contents of another given dictionary.
 func (d *Dictionary) IsEqualToDictionary(otherDictionary obj.Object) bool {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(otherDictionary)
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isEqualToDictionary:"), objref.IDOf(otherDictionary))
 	return _r
 }
 
 // ObjectEnumerator returns an enumerator object that lets you access each value in the dictionary.
 func (d *Dictionary) ObjectEnumerator() obj.Object {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("objectEnumerator"))
 	return obj.Wrap(_r)
 }
 
 // ObjectsForKeysNotFoundMarker returns as a static array the set of objects from the dictionary that corresponds to the specified keys.
 func (d *Dictionary) ObjectsForKeysNotFoundMarker(keys []obj.Object, marker obj.Object) []obj.Object {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(marker)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("objectsForKeys:notFoundMarker:"), purego.SliceToNSArray(keys, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(marker))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteToURL writes a property list representation of the contents of the dictionary to a given URL.
 func (d *Dictionary) WriteToURL(url string) error {
+	defer runtime.KeepAlive(d)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -215,17 +242,21 @@ func (d *Dictionary) WriteToURL(url string) error {
 
 // GetObjectsAndKeysCount returns by reference C arrays of the keys and values in the dictionary.
 func (d *Dictionary) GetObjectsAndKeysCount(objects unsafe.Pointer, keys unsafe.Pointer, count int) {
+	defer runtime.KeepAlive(d)
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("getObjects:andKeys:count:"), objects, keys, count)
 }
 
 // ObjectForKeyedSubscript returns the value associated with a given key.
 func (d *Dictionary) ObjectForKeyedSubscript(key obj.Object) obj.Object {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(key)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(key))
 	return obj.Wrap(_r)
 }
 
 // EnumerateKeysAndObjectsUsing applies a given block object to the entries of the dictionary.
 func (d *Dictionary) EnumerateKeysAndObjectsUsing(block func(obj.Object, obj.Object, *bool)) {
+	defer runtime.KeepAlive(d)
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("enumerateKeysAndObjectsUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
 		block(obj.Wrap(_b0), obj.Wrap(_b1), (*bool)(_b2))
 	}))
@@ -233,41 +264,49 @@ func (d *Dictionary) EnumerateKeysAndObjectsUsing(block func(obj.Object, obj.Obj
 
 // EnumerateKeysAndObjectsWithOptionsUsing applies a given block object to the entries of the dictionary, with options specifying how the enumeration is performed.
 func (d *Dictionary) EnumerateKeysAndObjectsWithOptionsUsing(opts EnumerationOptions, block func(obj.Object, obj.Object, *bool)) {
+	defer runtime.KeepAlive(d)
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("enumerateKeysAndObjectsWithOptions:usingBlock:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
 		block(obj.Wrap(_b0), obj.Wrap(_b1), (*bool)(_b2))
 	}))
 }
 
 // KeysOfEntriesPassingTest returns the set of keys whose corresponding value satisfies a constraint described by a block object.
-func (d *Dictionary) KeysOfEntriesPassingTest(predicate func(obj.Object, obj.Object, *bool) bool) obj.Object {
+// The order of the returned elements is unspecified.
+func (d *Dictionary) KeysOfEntriesPassingTest(predicate func(obj.Object, obj.Object, *bool) bool) []obj.Object {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("keysOfEntriesPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), obj.Wrap(_b1), (*bool)(_b2))
 	}))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // KeysOfEntriesWithOptionsPassingTest returns the set of keys whose corresponding value satisfies a constraint described by a block object.
-func (d *Dictionary) KeysOfEntriesWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, obj.Object, *bool) bool) obj.Object {
+// The order of the returned elements is unspecified.
+func (d *Dictionary) KeysOfEntriesWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, obj.Object, *bool) bool) []obj.Object {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("keysOfEntriesWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), obj.Wrap(_b1), (*bool)(_b2))
 	}))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AllKeys returns the all keys.
 func (d *Dictionary) AllKeys() []obj.Object {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("allKeys"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AllValues returns the all values.
 func (d *Dictionary) AllValues() []obj.Object {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("allValues"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DescriptionInStringsFileFormat returns the description in strings file format.
 func (d *Dictionary) DescriptionInStringsFileFormat() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("descriptionInStringsFileFormat"))
 	if _r == 0 {
 		return ""
@@ -277,35 +316,41 @@ func (d *Dictionary) DescriptionInStringsFileFormat() string {
 
 // GetObjectsAndKeys returns by reference C arrays of the keys and values in the dictionary.
 func (d *Dictionary) GetObjectsAndKeys(objects unsafe.Pointer, keys unsafe.Pointer) {
+	defer runtime.KeepAlive(d)
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("getObjects:andKeys:"), objects, keys)
 }
 
 // WriteToFileAtomically writes a property list representation of the contents of the dictionary to a given path.
 func (d *Dictionary) WriteToFileAtomically(path string, useAuxiliaryFile bool) bool {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToFile:atomically:"), purego.NSString(path), useAuxiliaryFile)
 	return _r
 }
 
 // WriteToURLAtomically writes a property list representation of the contents of the dictionary to a given URL.
 func (d *Dictionary) WriteToURLAtomically(url string, atomically bool) bool {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToURL:atomically:"), rt.FileURL(url), atomically)
 	return _r
 }
 
 // FileSize returns the file’s size, in bytes.
 func (d *Dictionary) FileSize() uint64 {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[uint64](objref.IDOf(d), objc.RegisterName("fileSize"))
 	return _r
 }
 
 // FileModificationDate returns file’s modification date.
-func (d *Dictionary) FileModificationDate() *Date {
+func (d *Dictionary) FileModificationDate() time.Time {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileModificationDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // FileType returns the file type.
 func (d *Dictionary) FileType() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileType"))
 	if _r == 0 {
 		return ""
@@ -315,12 +360,14 @@ func (d *Dictionary) FileType() string {
 
 // FilePosixPermissions returns the file’s POSIX permissions.
 func (d *Dictionary) FilePosixPermissions() int {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("filePosixPermissions"))
 	return _r
 }
 
 // FileOwnerAccountName returns the file’s owner account name.
 func (d *Dictionary) FileOwnerAccountName() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileOwnerAccountName"))
 	if _r == 0 {
 		return ""
@@ -330,6 +377,7 @@ func (d *Dictionary) FileOwnerAccountName() string {
 
 // FileGroupOwnerAccountName returns the file’s group owner account name.
 func (d *Dictionary) FileGroupOwnerAccountName() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileGroupOwnerAccountName"))
 	if _r == 0 {
 		return ""
@@ -339,60 +387,70 @@ func (d *Dictionary) FileGroupOwnerAccountName() string {
 
 // FileSystemNumber returns the filesystem number.
 func (d *Dictionary) FileSystemNumber() int {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("fileSystemNumber"))
 	return _r
 }
 
 // FileSystemFileNumber returns the filesystem file number.
 func (d *Dictionary) FileSystemFileNumber() int {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("fileSystemFileNumber"))
 	return _r
 }
 
 // FileExtensionHidden reports whether returns a Boolean value indicating whether the file hides its extension.
 func (d *Dictionary) FileExtensionHidden() bool {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("fileExtensionHidden"))
 	return _r
 }
 
 // FileHFSCreatorCode returns the file’s HFS creator code.
 func (d *Dictionary) FileHFSCreatorCode() int {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("fileHFSCreatorCode"))
 	return _r
 }
 
 // FileHFSTypeCode returns file’s HFS type code.
 func (d *Dictionary) FileHFSTypeCode() int {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("fileHFSTypeCode"))
 	return _r
 }
 
 // FileIsImmutable reports whether returns a Boolean value indicating whether the file is immutable.
 func (d *Dictionary) FileIsImmutable() bool {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("fileIsImmutable"))
 	return _r
 }
 
 // FileIsAppendOnly reports whether returns a Boolean value indicating whether the file is append only.
 func (d *Dictionary) FileIsAppendOnly() bool {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("fileIsAppendOnly"))
 	return _r
 }
 
 // FileCreationDate returns the file’s creation date.
-func (d *Dictionary) FileCreationDate() *Date {
+func (d *Dictionary) FileCreationDate() time.Time {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileCreationDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // FileOwnerAccountID returns the file’s owner account ID.
 func (d *Dictionary) FileOwnerAccountID() *Number {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileOwnerAccountID"))
 	return NumberFromID(_r)
 }
 
 // FileGroupOwnerAccountID returns file’s group owner account ID.
 func (d *Dictionary) FileGroupOwnerAccountID() *Number {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileGroupOwnerAccountID"))
 	return NumberFromID(_r)
 }

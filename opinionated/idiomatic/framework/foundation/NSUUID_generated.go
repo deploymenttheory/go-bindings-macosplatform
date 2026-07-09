@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func uUIDAdopt(id objc.ID) *UUID {
 
 // Description returns the object's -description text.
 func (u *UUID) Description() string {
+	defer runtime.KeepAlive(u)
 	return rt.Description(objref.IDOf(u))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (u *UUID) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(u)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(u), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (u *UUID) IsKind(className string) bool {
+	defer runtime.KeepAlive(u)
 	return rt.IsKind(objref.IDOf(u), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (u *UUID) String() string {
+	defer runtime.KeepAlive(u)
 	return rt.Description(objref.IDOf(u))
 }
 
@@ -75,9 +81,9 @@ func NewUUID() *UUID {
 }
 
 // NewUUIDWithUUIDString initializes a new UUID with the formatted string.
-func NewUUIDWithUUIDString(string_ string) *UUID {
+func NewUUIDWithUUIDString(str string) *UUID {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUUID")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUIDString:"), purego.NSString(string_))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUIDString:"), purego.NSString(str))
 	return uUIDAdopt(_id)
 }
 
@@ -88,13 +94,14 @@ func (u *UUID) WithObservationInfo(observationInfo unsafe.Pointer) *UUID {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (u *UUID) WithScriptingProperties(scriptingProperties obj.Object) *UUID {
-	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (u *UUID) WithScriptingProperties(scriptingProperties map[string]obj.Object) *UUID {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return u
 }
 
 // GetUUIDBytes returns the UUID as bytes.
 func (u *UUID) GetUUIDBytes() (uuid uint8) {
+	defer runtime.KeepAlive(u)
 	var _out0 uint8
 	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("getUUIDBytes:"), unsafe.Pointer(&_out0))
 	return _out0
@@ -102,12 +109,15 @@ func (u *UUID) GetUUIDBytes() (uuid uint8) {
 
 // Compare compares the receiver to another NSUUID in constant time.
 func (u *UUID) Compare(otherUUID *UUID) ComparisonResult {
+	defer runtime.KeepAlive(u)
+	defer runtime.KeepAlive(otherUUID)
 	_r := objc.Send[ComparisonResult](objref.IDOf(u), objc.RegisterName("compare:"), objref.IDOf(otherUUID))
 	return _r
 }
 
 // UUIDString returns the UUID string.
 func (u *UUID) UUIDString() string {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("UUIDString"))
 	if _r == 0 {
 		return ""

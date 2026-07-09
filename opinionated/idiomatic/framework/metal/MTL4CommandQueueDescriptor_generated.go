@@ -5,7 +5,10 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func mTL4CommandQueueDescriptorAdopt(id objc.ID) *MTL4CommandQueueDescriptor {
 
 // Description returns the object's -description text.
 func (mcqd *MTL4CommandQueueDescriptor) Description() string {
+	defer runtime.KeepAlive(mcqd)
 	return rt.Description(objref.IDOf(mcqd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcqd *MTL4CommandQueueDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcqd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcqd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcqd *MTL4CommandQueueDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcqd)
 	return rt.IsKind(objref.IDOf(mcqd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcqd *MTL4CommandQueueDescriptor) String() string {
+	defer runtime.KeepAlive(mcqd)
 	return rt.Description(objref.IDOf(mcqd))
 }
 
@@ -80,12 +88,14 @@ func (mcqd *MTL4CommandQueueDescriptor) WithLabel(label string) *MTL4CommandQueu
 
 // WithFeedbackQueue sets assigns a dispatch queue to which Metal submits feedback notification blocks.
 func (mcqd *MTL4CommandQueueDescriptor) WithFeedbackQueue(feedbackQueue obj.Object) *MTL4CommandQueueDescriptor {
+	defer runtime.KeepAlive(feedbackQueue)
 	objc.Send[objc.ID](objref.IDOf(mcqd), objc.RegisterName("setFeedbackQueue:"), objref.IDOf(feedbackQueue))
 	return mcqd
 }
 
 // Label returns assigns an optional label to the command queue instance for debugging purposes.
 func (mcqd *MTL4CommandQueueDescriptor) Label() string {
+	defer runtime.KeepAlive(mcqd)
 	_r := objc.Send[objc.ID](objref.IDOf(mcqd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -94,7 +104,8 @@ func (mcqd *MTL4CommandQueueDescriptor) Label() string {
 }
 
 // FeedbackQueue returns assigns a dispatch queue to which Metal submits feedback notification blocks. When you assign a dispatch queue via this method, Metal requires that the queue parameter you provide is a serial queue. If you set the value of property to `nil`, the default, Metal allocates an internal dispatch queue to service feedback notifications.
-func (mcqd *MTL4CommandQueueDescriptor) FeedbackQueue() obj.Object {
+func (mcqd *MTL4CommandQueueDescriptor) FeedbackQueue() *foundation.Object {
+	defer runtime.KeepAlive(mcqd)
 	_r := objc.Send[objc.ID](objref.IDOf(mcqd), objc.RegisterName("feedbackQueue"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }

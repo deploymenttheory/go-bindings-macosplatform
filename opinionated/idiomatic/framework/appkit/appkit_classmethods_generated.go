@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -26,6 +27,8 @@ func SharedTypesetter() *ATSTypesetter {
 
 // AccessibilityElementWithRoleFrameLabelParent wraps the corresponding Objective-C method.
 func AccessibilityElementWithRoleFrameLabelParent(role obj.Object, frame corefoundation.CGRect, label string, parent obj.Object) obj.Object {
+	defer runtime.KeepAlive(role)
+	defer runtime.KeepAlive(parent)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSAccessibilityElement")), objc.RegisterName("accessibilityElementWithRole:frame:label:parent:"), objref.IDOf(role), frame, purego.NSString(label), objref.IDOf(parent))
 	return obj.Wrap(_r)
 }
@@ -37,8 +40,8 @@ func ContentType() obj.Object {
 }
 
 // AlertWithError returns an alert initialized from information in an error object.
-func AlertWithError(error_ unsafe.Pointer) *Alert {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSAlert")), objc.RegisterName("alertWithError:"), error_)
+func AlertWithError(err unsafe.Pointer) *Alert {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAlert")), objc.RegisterName("alertWithError:"), err)
 	return AlertFromID(_r)
 }
 
@@ -113,6 +116,7 @@ func CurrentContext() *AnimationContext {
 
 // AppearanceNamed creates an appearance object based on the name of one of the standard system appearances.
 func AppearanceNamed(name obj.Object) *Appearance {
+	defer runtime.KeepAlive(name)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSAppearance")), objc.RegisterName("appearanceNamed:"), objref.IDOf(name))
 	return AppearanceFromID(_r)
 }
@@ -125,6 +129,7 @@ func CurrentAppearance() *Appearance {
 
 // SetCurrentAppearance wraps the corresponding Objective-C method.
 func SetCurrentAppearance(currentAppearance *Appearance) {
+	defer runtime.KeepAlive(currentAppearance)
 	objc.Send[objc.ID](objc.ID(_class("NSAppearance")), objc.RegisterName("setCurrentAppearance:"), objref.IDOf(currentAppearance))
 }
 
@@ -166,6 +171,7 @@ func BezierPathWithRoundedRectXRadiusYRadius(rect corefoundation.CGRect, xRadius
 
 // BezierPathWithCGPath wraps the corresponding Objective-C method.
 func BezierPathWithCGPath(cgPath obj.Object) *BezierPath {
+	defer runtime.KeepAlive(cgPath)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBezierPath")), objc.RegisterName("bezierPathWithCGPath:"), objref.IDOf(cgPath))
 	return BezierPathFromID(_r)
 }
@@ -280,27 +286,27 @@ func NotApplicableSelectionMarker() *BindingSelectionMarker {
 }
 
 // ImageRepsWithData creates and returns an array of bitmap image representation objects that correspond to the images in the specified data.
-func ImageRepsWithData(data obj.Object) []*ImageRep {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSBitmapImageRep")), objc.RegisterName("imageRepsWithData:"), objref.IDOf(data))
+func ImageRepsWithData(data []byte) []*ImageRep {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSBitmapImageRep")), objc.RegisterName("imageRepsWithData:"), rt.BytesToNSData(data))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *ImageRep { return ImageRepFromID(_id) })
 }
 
 // ImageRepWithData creates and returns a bitmap image representation with the first image in the specified data.
-func ImageRepWithData(data obj.Object) *BitmapImageRep {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSBitmapImageRep")), objc.RegisterName("imageRepWithData:"), objref.IDOf(data))
+func ImageRepWithData(data []byte) *BitmapImageRep {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSBitmapImageRep")), objc.RegisterName("imageRepWithData:"), rt.BytesToNSData(data))
 	return BitmapImageRepFromID(_r)
 }
 
 // TIFFRepresentationOfImageRepsInArray returns a TIFF representation of the specified images.
-func TIFFRepresentationOfImageRepsInArray(array []*ImageRep) obj.Object {
+func TIFFRepresentationOfImageRepsInArray(array []*ImageRep) []byte {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBitmapImageRep")), objc.RegisterName("TIFFRepresentationOfImageRepsInArray:"), purego.SliceToNSArray(array, func(_v *ImageRep) objc.ID { return objref.IDOf(_v) }))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // TIFFRepresentationOfImageRepsInArrayUsingCompressionFactor returns a TIFF representation of the specified images using the specified compression scheme and factor.
-func TIFFRepresentationOfImageRepsInArrayUsingCompressionFactor(array []*ImageRep, comp TIFFCompression, factor float32) obj.Object {
+func TIFFRepresentationOfImageRepsInArrayUsingCompressionFactor(array []*ImageRep, comp TIFFCompression, factor float32) []byte {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBitmapImageRep")), objc.RegisterName("TIFFRepresentationOfImageRepsInArray:usingCompression:factor:"), purego.SliceToNSArray(array, func(_v *ImageRep) objc.ID { return objref.IDOf(_v) }), comp, factor)
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // GetTIFFCompressionTypesCount returns by indirection an array of all available compression types that can be used when writing a TIFF image.
@@ -321,13 +327,15 @@ func LocalizedNameForTIFFCompressionType(compression TIFFCompression) string {
 }
 
 // RepresentationOfImageRepsInArrayUsingTypeProperties formats the specified bitmap images using the specified storage type and properties and returns them in a data object.
-func RepresentationOfImageRepsInArrayUsingTypeProperties(imageReps []*ImageRep, storageType BitmapImageFileType, properties obj.Object) obj.Object {
+func RepresentationOfImageRepsInArrayUsingTypeProperties(imageReps []*ImageRep, storageType BitmapImageFileType, properties obj.Object) []byte {
+	defer runtime.KeepAlive(properties)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBitmapImageRep")), objc.RegisterName("representationOfImageRepsInArray:usingType:properties:"), purego.SliceToNSArray(imageReps, func(_v *ImageRep) objc.ID { return objref.IDOf(_v) }), storageType, objref.IDOf(properties))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // RemoveSavedColumnsWithAutosaveName removes the column configuration data stored under the given name from the application’s user defaults.
 func RemoveSavedColumnsWithAutosaveName(name obj.Object) {
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objc.ID(_class("NSBrowser")), objc.RegisterName("removeSavedColumnsWithAutosaveName:"), objref.IDOf(name))
 }
 
@@ -345,13 +353,14 @@ func HighlightedBranchImage() *Image {
 
 // ImageRepWithCIImage creates and returns a representation of an image initialized to the specified Core Image instance.
 func ImageRepWithCIImage(image obj.Object) *CIImageRep {
+	defer runtime.KeepAlive(image)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCIImageRep")), objc.RegisterName("imageRepWithCIImage:"), objref.IDOf(image))
 	return CIImageRepFromID(_r)
 }
 
 // NSCell_bulletStringForStringBulletCharacter wraps the corresponding Objective-C method.
-func NSCell_bulletStringForStringBulletCharacter(string_ string, bulletChar uint16) string {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSCell")), objc.RegisterName("_bulletStringForString:bulletCharacter:"), purego.NSString(string_), bulletChar)
+func NSCell_bulletStringForStringBulletCharacter(str string, bulletChar uint16) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCell")), objc.RegisterName("_bulletStringForString:bulletCharacter:"), purego.NSString(str), bulletChar)
 	if _r == 0 {
 		return ""
 	}
@@ -396,12 +405,14 @@ func LayoutAnchorWithEdgesFractionalOffset(edges DirectionalRectEdge, fractional
 
 // BoundarySupplementaryItemWithLayoutSizeElementKindAlignment creates a boundary supplementary item of the specified size and element kind, with an alignment relative to a section or layout.
 func BoundarySupplementaryItemWithLayoutSizeElementKindAlignment(layoutSize *CollectionLayoutSize, elementKind string, alignment RectAlignment) *CollectionLayoutBoundarySupplementaryItem {
+	defer runtime.KeepAlive(layoutSize)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutBoundarySupplementaryItem")), objc.RegisterName("boundarySupplementaryItemWithLayoutSize:elementKind:alignment:"), objref.IDOf(layoutSize), purego.NSString(elementKind), alignment)
 	return CollectionLayoutBoundarySupplementaryItemFromID(_r)
 }
 
 // BoundarySupplementaryItemWithLayoutSizeElementKindAlignmentAbsoluteOffset creates a boundary supplementary item of the specified size and element kind, with an alignment relative to a section or layout at an absolute offset.
 func BoundarySupplementaryItemWithLayoutSizeElementKindAlignmentAbsoluteOffset(layoutSize *CollectionLayoutSize, elementKind string, alignment RectAlignment, absoluteOffset corefoundation.CGPoint) *CollectionLayoutBoundarySupplementaryItem {
+	defer runtime.KeepAlive(layoutSize)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutBoundarySupplementaryItem")), objc.RegisterName("boundarySupplementaryItemWithLayoutSize:elementKind:alignment:absoluteOffset:"), objref.IDOf(layoutSize), purego.NSString(elementKind), alignment, absoluteOffset)
 	return CollectionLayoutBoundarySupplementaryItemFromID(_r)
 }
@@ -438,30 +449,40 @@ func EstimatedDimension(estimatedDimension float64) *CollectionLayoutDimension {
 
 // SpacingForLeadingTopTrailingBottom creates an edge spacing object with the specified leading, top, trailing, and bottom spacing.
 func SpacingForLeadingTopTrailingBottom(leading *CollectionLayoutSpacing, top *CollectionLayoutSpacing, trailing *CollectionLayoutSpacing, bottom *CollectionLayoutSpacing) *CollectionLayoutEdgeSpacing {
+	defer runtime.KeepAlive(leading)
+	defer runtime.KeepAlive(top)
+	defer runtime.KeepAlive(trailing)
+	defer runtime.KeepAlive(bottom)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutEdgeSpacing")), objc.RegisterName("spacingForLeading:top:trailing:bottom:"), objref.IDOf(leading), objref.IDOf(top), objref.IDOf(trailing), objref.IDOf(bottom))
 	return CollectionLayoutEdgeSpacingFromID(_r)
 }
 
 // HorizontalGroupWithLayoutSizeSubitemCount creates a group of the specified size, containing an array of equally sized items arranged in a horizontal line up to the number specified by count.
 func HorizontalGroupWithLayoutSizeSubitemCount(layoutSize *CollectionLayoutSize, subitem *CollectionLayoutItem, count int) *CollectionLayoutGroup {
+	defer runtime.KeepAlive(layoutSize)
+	defer runtime.KeepAlive(subitem)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutGroup")), objc.RegisterName("horizontalGroupWithLayoutSize:subitem:count:"), objref.IDOf(layoutSize), objref.IDOf(subitem), count)
 	return CollectionLayoutGroupFromID(_r)
 }
 
 // HorizontalGroupWithLayoutSizeSubitems creates a group of the specified size, containing an array of items arranged in a horizontal line.
 func HorizontalGroupWithLayoutSizeSubitems(layoutSize *CollectionLayoutSize, subitems []*CollectionLayoutItem) *CollectionLayoutGroup {
+	defer runtime.KeepAlive(layoutSize)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutGroup")), objc.RegisterName("horizontalGroupWithLayoutSize:subitems:"), objref.IDOf(layoutSize), purego.SliceToNSArray(subitems, func(_v *CollectionLayoutItem) objc.ID { return objref.IDOf(_v) }))
 	return CollectionLayoutGroupFromID(_r)
 }
 
 // VerticalGroupWithLayoutSizeSubitemCount creates a group of the specified size, containing an array of equally sized items arranged in a vertical line up to the number specified by count.
 func VerticalGroupWithLayoutSizeSubitemCount(layoutSize *CollectionLayoutSize, subitem *CollectionLayoutItem, count int) *CollectionLayoutGroup {
+	defer runtime.KeepAlive(layoutSize)
+	defer runtime.KeepAlive(subitem)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutGroup")), objc.RegisterName("verticalGroupWithLayoutSize:subitem:count:"), objref.IDOf(layoutSize), objref.IDOf(subitem), count)
 	return CollectionLayoutGroupFromID(_r)
 }
 
 // VerticalGroupWithLayoutSizeSubitems creates a group of the specified size, containing an array of items arranged in a vertical line.
 func VerticalGroupWithLayoutSizeSubitems(layoutSize *CollectionLayoutSize, subitems []*CollectionLayoutItem) *CollectionLayoutGroup {
+	defer runtime.KeepAlive(layoutSize)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutGroup")), objc.RegisterName("verticalGroupWithLayoutSize:subitems:"), objref.IDOf(layoutSize), purego.SliceToNSArray(subitems, func(_v *CollectionLayoutItem) objc.ID { return objref.IDOf(_v) }))
 	return CollectionLayoutGroupFromID(_r)
 }
@@ -480,24 +501,29 @@ func CustomItemWithFrameZIndex(frame corefoundation.CGRect, zIndex int) *Collect
 
 // ItemWithLayoutSize creates an item of the specified size.
 func ItemWithLayoutSize(layoutSize *CollectionLayoutSize) *CollectionLayoutItem {
+	defer runtime.KeepAlive(layoutSize)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutItem")), objc.RegisterName("itemWithLayoutSize:"), objref.IDOf(layoutSize))
 	return CollectionLayoutItemFromID(_r)
 }
 
 // ItemWithLayoutSizeSupplementaryItems creates an item of the specified size with an array of supplementary items to attach to the item.
 func ItemWithLayoutSizeSupplementaryItems(layoutSize *CollectionLayoutSize, supplementaryItems []*CollectionLayoutSupplementaryItem) *CollectionLayoutItem {
+	defer runtime.KeepAlive(layoutSize)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutItem")), objc.RegisterName("itemWithLayoutSize:supplementaryItems:"), objref.IDOf(layoutSize), purego.SliceToNSArray(supplementaryItems, func(_v *CollectionLayoutSupplementaryItem) objc.ID { return objref.IDOf(_v) }))
 	return CollectionLayoutItemFromID(_r)
 }
 
 // SectionWithGroup creates a section containing the specified group.
 func SectionWithGroup(group *CollectionLayoutGroup) *CollectionLayoutSection {
+	defer runtime.KeepAlive(group)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutSection")), objc.RegisterName("sectionWithGroup:"), objref.IDOf(group))
 	return CollectionLayoutSectionFromID(_r)
 }
 
 // SizeWithWidthDimensionHeightDimension creates a size with the specified width and height dimensions.
 func SizeWithWidthDimensionHeightDimension(width *CollectionLayoutDimension, height *CollectionLayoutDimension) *CollectionLayoutSize {
+	defer runtime.KeepAlive(width)
+	defer runtime.KeepAlive(height)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutSize")), objc.RegisterName("sizeWithWidthDimension:heightDimension:"), objref.IDOf(width), objref.IDOf(height))
 	return CollectionLayoutSizeFromID(_r)
 }
@@ -516,42 +542,54 @@ func FixedSpacing(fixedSpacing float64) *CollectionLayoutSpacing {
 
 // SupplementaryItemWithLayoutSizeElementKindContainerAnchor creates a supplementary item of the specified size and element kind, with an anchor relative to a container.
 func SupplementaryItemWithLayoutSizeElementKindContainerAnchor(layoutSize *CollectionLayoutSize, elementKind string, containerAnchor *CollectionLayoutAnchor) *CollectionLayoutSupplementaryItem {
+	defer runtime.KeepAlive(layoutSize)
+	defer runtime.KeepAlive(containerAnchor)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutSupplementaryItem")), objc.RegisterName("supplementaryItemWithLayoutSize:elementKind:containerAnchor:"), objref.IDOf(layoutSize), purego.NSString(elementKind), objref.IDOf(containerAnchor))
 	return CollectionLayoutSupplementaryItemFromID(_r)
 }
 
 // SupplementaryItemWithLayoutSizeElementKindContainerAnchorItemAnchor creates a supplementary item of the specified size and element kind, an anchor relative to a container, and an anchor relative to an item.
 func SupplementaryItemWithLayoutSizeElementKindContainerAnchorItemAnchor(layoutSize *CollectionLayoutSize, elementKind string, containerAnchor *CollectionLayoutAnchor, itemAnchor *CollectionLayoutAnchor) *CollectionLayoutSupplementaryItem {
+	defer runtime.KeepAlive(layoutSize)
+	defer runtime.KeepAlive(containerAnchor)
+	defer runtime.KeepAlive(itemAnchor)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutSupplementaryItem")), objc.RegisterName("supplementaryItemWithLayoutSize:elementKind:containerAnchor:itemAnchor:"), objref.IDOf(layoutSize), purego.NSString(elementKind), objref.IDOf(containerAnchor), objref.IDOf(itemAnchor))
 	return CollectionLayoutSupplementaryItemFromID(_r)
 }
 
 // LayoutAttributesForItemWithIndexPath creates and returns a layout attributes object for the item at the specified index path.
 func LayoutAttributesForItemWithIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes {
+	defer runtime.KeepAlive(indexPath)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewLayoutAttributes")), objc.RegisterName("layoutAttributesForItemWithIndexPath:"), objref.IDOf(indexPath))
 	return CollectionViewLayoutAttributesFromID(_r)
 }
 
 // LayoutAttributesForInterItemGapBeforeIndexPath creates and returns a layout attributes object for an inter-item gap view at the specified index path.
 func LayoutAttributesForInterItemGapBeforeIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes {
+	defer runtime.KeepAlive(indexPath)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewLayoutAttributes")), objc.RegisterName("layoutAttributesForInterItemGapBeforeIndexPath:"), objref.IDOf(indexPath))
 	return CollectionViewLayoutAttributesFromID(_r)
 }
 
 // LayoutAttributesForSupplementaryViewOfKindWithIndexPath creates and returns a layout attributes object for a supplementary view based on the specified information.
 func LayoutAttributesForSupplementaryViewOfKindWithIndexPath(elementKind obj.Object, indexPath obj.Object) *CollectionViewLayoutAttributes {
+	defer runtime.KeepAlive(elementKind)
+	defer runtime.KeepAlive(indexPath)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewLayoutAttributes")), objc.RegisterName("layoutAttributesForSupplementaryViewOfKind:withIndexPath:"), objref.IDOf(elementKind), objref.IDOf(indexPath))
 	return CollectionViewLayoutAttributesFromID(_r)
 }
 
 // LayoutAttributesForDecorationViewOfKindWithIndexPath creates and returns a layout attributes object for a decoration view based on the specified information.
 func LayoutAttributesForDecorationViewOfKindWithIndexPath(decorationViewKind obj.Object, indexPath obj.Object) *CollectionViewLayoutAttributes {
+	defer runtime.KeepAlive(decorationViewKind)
+	defer runtime.KeepAlive(indexPath)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewLayoutAttributes")), objc.RegisterName("layoutAttributesForDecorationViewOfKind:withIndexPath:"), objref.IDOf(decorationViewKind), objref.IDOf(indexPath))
 	return CollectionViewLayoutAttributesFromID(_r)
 }
 
 // ColorWithColorSpaceComponentsCount wraps the corresponding Objective-C method.
 func ColorWithColorSpaceComponentsCount(space *ColorSpace, numberOfComponents int) (result *Color, components float64) {
+	defer runtime.KeepAlive(space)
 	var _out0 float64
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("colorWithColorSpace:components:count:"), objref.IDOf(space), unsafe.Pointer(&_out0), numberOfComponents)
 	_v := ColorFromID(_r)
@@ -596,24 +634,30 @@ func ColorWithHueSaturationBrightnessAlpha(hue float64, saturation float64, brig
 
 // ColorWithColorSpaceHueSaturationBrightnessAlpha wraps the corresponding Objective-C method.
 func ColorWithColorSpaceHueSaturationBrightnessAlpha(space *ColorSpace, hue float64, saturation float64, brightness float64, alpha float64) *Color {
+	defer runtime.KeepAlive(space)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("colorWithColorSpace:hue:saturation:brightness:alpha:"), objref.IDOf(space), hue, saturation, brightness, alpha)
 	return ColorFromID(_r)
 }
 
 // ColorWithCatalogNameColorName wraps the corresponding Objective-C method.
 func ColorWithCatalogNameColorName(listName obj.Object, colorName obj.Object) *Color {
+	defer runtime.KeepAlive(listName)
+	defer runtime.KeepAlive(colorName)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("colorWithCatalogName:colorName:"), objref.IDOf(listName), objref.IDOf(colorName))
 	return ColorFromID(_r)
 }
 
 // ColorNamedBundle wraps the corresponding Objective-C method.
 func ColorNamedBundle(name obj.Object, bundle obj.Object) *Color {
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(bundle)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("colorNamed:bundle:"), objref.IDOf(name), objref.IDOf(bundle))
 	return ColorFromID(_r)
 }
 
 // ColorNamed wraps the corresponding Objective-C method.
 func ColorNamed(name obj.Object) *Color {
+	defer runtime.KeepAlive(name)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("colorNamed:"), objref.IDOf(name))
 	return ColorFromID(_r)
 }
@@ -662,6 +706,7 @@ func ColorWithCalibratedHueSaturationBrightnessAlpha(hue float64, saturation flo
 
 // ColorWithPatternImage wraps the corresponding Objective-C method.
 func ColorWithPatternImage(image *Image) *Color {
+	defer runtime.KeepAlive(image)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("colorWithPatternImage:"), objref.IDOf(image))
 	return ColorFromID(_r)
 }
@@ -686,12 +731,14 @@ func ColorForControlTint(controlTint ControlTint) *Color {
 
 // ColorFromPasteboard creates a color object from color data currently on the pasteboard.
 func ColorFromPasteboard(pasteBoard *Pasteboard) *Color {
+	defer runtime.KeepAlive(pasteBoard)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("colorFromPasteboard:"), objref.IDOf(pasteBoard))
 	return ColorFromID(_r)
 }
 
 // ColorWithCGColor wraps the corresponding Objective-C method.
 func ColorWithCGColor(cgColor obj.Object) *Color {
+	defer runtime.KeepAlive(cgColor)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("colorWithCGColor:"), objref.IDOf(cgColor))
 	return ColorFromID(_r)
 }
@@ -1197,12 +1244,14 @@ func HeaderColor() *Color {
 
 // ColorWithCIColor wraps the corresponding Objective-C method.
 func ColorWithCIColor(color obj.Object) *Color {
+	defer runtime.KeepAlive(color)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("colorWithCIColor:"), objref.IDOf(color))
 	return ColorFromID(_r)
 }
 
 // ColorListNamed searches the available color lists array and returns the color list with the specified name.
 func ColorListNamed(name obj.Object) *ColorList {
+	defer runtime.KeepAlive(name)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColorList")), objc.RegisterName("colorListNamed:"), objref.IDOf(name))
 	return ColorListFromID(_r)
 }
@@ -1217,6 +1266,9 @@ func AvailableColorLists() []*ColorList {
 
 // DragColorWithEventFromView drags a color into a destination view from the specified source view.
 func DragColorWithEventFromView(color *Color, event *Event, sourceView *View) bool {
+	defer runtime.KeepAlive(color)
+	defer runtime.KeepAlive(event)
+	defer runtime.KeepAlive(sourceView)
 	_r := objc.Send[bool](objc.ID(_class("NSColorPanel")), objc.RegisterName("dragColor:withEvent:fromView:"), objref.IDOf(color), objref.IDOf(event), objref.IDOf(sourceView))
 	return _r
 }
@@ -1245,24 +1297,29 @@ func SharedColorPanelExists() bool {
 
 // ColorPickerWithIdentifier creates a bar item with the standard color picker icon.
 func ColorPickerWithIdentifier(identifier obj.Object) *ColorPickerTouchBarItem {
+	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColorPickerTouchBarItem")), objc.RegisterName("colorPickerWithIdentifier:"), objref.IDOf(identifier))
 	return ColorPickerTouchBarItemFromID(_r)
 }
 
 // TextColorPickerWithIdentifier creates a bar item with the standard text color picker icon.
 func TextColorPickerWithIdentifier(identifier obj.Object) *ColorPickerTouchBarItem {
+	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColorPickerTouchBarItem")), objc.RegisterName("textColorPickerWithIdentifier:"), objref.IDOf(identifier))
 	return ColorPickerTouchBarItemFromID(_r)
 }
 
 // StrokeColorPickerWithIdentifier creates a bar item with the standard stroke color picker icon.
 func StrokeColorPickerWithIdentifier(identifier obj.Object) *ColorPickerTouchBarItem {
+	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColorPickerTouchBarItem")), objc.RegisterName("strokeColorPickerWithIdentifier:"), objref.IDOf(identifier))
 	return ColorPickerTouchBarItemFromID(_r)
 }
 
 // ColorPickerWithIdentifierButtonImage creates a color picker bar item using the supplied image as its icon.
 func ColorPickerWithIdentifierButtonImage(identifier obj.Object, image *Image) *ColorPickerTouchBarItem {
+	defer runtime.KeepAlive(identifier)
+	defer runtime.KeepAlive(image)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColorPickerTouchBarItem")), objc.RegisterName("colorPickerWithIdentifier:buttonImage:"), objref.IDOf(identifier), objref.IDOf(image))
 	return ColorPickerTouchBarItemFromID(_r)
 }
@@ -1607,13 +1664,14 @@ func SharedDocumentController() *DocumentController {
 
 // DraggingImageComponentWithKey creates and returns a dragging image component with the specified key.
 func DraggingImageComponentWithKey(key obj.Object) *DraggingImageComponent {
+	defer runtime.KeepAlive(key)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDraggingImageComponent")), objc.RegisterName("draggingImageComponentWithKey:"), objref.IDOf(key))
 	return DraggingImageComponentFromID(_r)
 }
 
 // NSEPSImageRepImageRepWithData creates and returns a representation of an image initialized with the specified EPS data.
-func NSEPSImageRepImageRepWithData(epsData obj.Object) *EPSImageRep {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSEPSImageRep")), objc.RegisterName("imageRepWithData:"), objref.IDOf(epsData))
+func NSEPSImageRepImageRepWithData(epsData []byte) *EPSImageRep {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSEPSImageRep")), objc.RegisterName("imageRepWithData:"), rt.BytesToNSData(epsData))
 	return EPSImageRepFromID(_r)
 }
 
@@ -1625,6 +1683,7 @@ func EventWithEventRef(eventRef unsafe.Pointer) *Event {
 
 // EventWithCGEvent creates and returns an event object for a Core Graphics event.
 func EventWithCGEvent(cgEvent obj.Object) *Event {
+	defer runtime.KeepAlive(cgEvent)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSEvent")), objc.RegisterName("eventWithCGEvent:"), objref.IDOf(cgEvent))
 	return EventFromID(_r)
 }
@@ -1641,24 +1700,28 @@ func StopPeriodicEvents() {
 
 // MouseEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberClickCountPressure creates and returns a new event object that describes a mouse-down, -up, -moved, or -dragged event.
 func MouseEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberClickCountPressure(type_ EventType, location corefoundation.CGPoint, flags EventModifierFlags, time_ float64, wNum int, unusedPassNil *GraphicsContext, eNum int, cNum int, pressure float32) *Event {
+	defer runtime.KeepAlive(unusedPassNil)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSEvent")), objc.RegisterName("mouseEventWithType:location:modifierFlags:timestamp:windowNumber:context:eventNumber:clickCount:pressure:"), type_, location, flags, time_, wNum, objref.IDOf(unusedPassNil), eNum, cNum, pressure)
 	return EventFromID(_r)
 }
 
 // KeyEventWithTypeLocationModifierFlagsTimestampWindowNumberContextCharactersCharactersIgnoringModifiersIsARepeatKeyCode creates and returns a new event object that describes a key event.
 func KeyEventWithTypeLocationModifierFlagsTimestampWindowNumberContextCharactersCharactersIgnoringModifiersIsARepeatKeyCode(type_ EventType, location corefoundation.CGPoint, flags EventModifierFlags, time_ float64, wNum int, unusedPassNil *GraphicsContext, keys string, ukeys string, flag bool, code uint16) *Event {
+	defer runtime.KeepAlive(unusedPassNil)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSEvent")), objc.RegisterName("keyEventWithType:location:modifierFlags:timestamp:windowNumber:context:characters:charactersIgnoringModifiers:isARepeat:keyCode:"), type_, location, flags, time_, wNum, objref.IDOf(unusedPassNil), purego.NSString(keys), purego.NSString(ukeys), flag, code)
 	return EventFromID(_r)
 }
 
 // EnterExitEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberTrackingNumberUserData creates and returns a new event object that describes a tracking-rectangle or cursor-update event.
 func EnterExitEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberTrackingNumberUserData(type_ EventType, location corefoundation.CGPoint, flags EventModifierFlags, time_ float64, wNum int, unusedPassNil *GraphicsContext, eNum int, tNum int, data unsafe.Pointer) *Event {
+	defer runtime.KeepAlive(unusedPassNil)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSEvent")), objc.RegisterName("enterExitEventWithType:location:modifierFlags:timestamp:windowNumber:context:eventNumber:trackingNumber:userData:"), type_, location, flags, time_, wNum, objref.IDOf(unusedPassNil), eNum, tNum, data)
 	return EventFromID(_r)
 }
 
 // OtherEventWithTypeLocationModifierFlagsTimestampWindowNumberContextSubtypeData1Data2 creates and returns a new event object that describes a custom event.
 func OtherEventWithTypeLocationModifierFlagsTimestampWindowNumberContextSubtypeData1Data2(type_ EventType, location corefoundation.CGPoint, flags EventModifierFlags, time_ float64, wNum int, unusedPassNil *GraphicsContext, subtype int16, d1 int, d2 int) *Event {
+	defer runtime.KeepAlive(unusedPassNil)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSEvent")), objc.RegisterName("otherEventWithType:location:modifierFlags:timestamp:windowNumber:context:subtype:data1:data2:"), type_, location, flags, time_, wNum, objref.IDOf(unusedPassNil), subtype, d1, d2)
 	return EventFromID(_r)
 }
@@ -1671,6 +1734,7 @@ func AddGlobalMonitorForEventsMatchingMaskHandler(mask EventMask, block func(obj
 
 // RemoveMonitor removes the specified event monitor.
 func RemoveMonitor(eventMonitor obj.Object) {
+	defer runtime.KeepAlive(eventMonitor)
 	objc.Send[objc.ID](objc.ID(_class("NSEvent")), objc.RegisterName("removeMonitor:"), objref.IDOf(eventMonitor))
 }
 
@@ -1751,12 +1815,15 @@ func FontWithNameMatrix(fontName string) (result *Font, fontMatrix float64) {
 
 // FontWithDescriptorSize returns a font object for the specified font descriptor and font size.
 func FontWithDescriptorSize(fontDescriptor *FontDescriptor, fontSize float64) *Font {
+	defer runtime.KeepAlive(fontDescriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFont")), objc.RegisterName("fontWithDescriptor:size:"), objref.IDOf(fontDescriptor), fontSize)
 	return FontFromID(_r)
 }
 
 // FontWithDescriptorTextTransform returns a font object for the specified font descriptor and text transform.
 func FontWithDescriptorTextTransform(fontDescriptor *FontDescriptor, textTransform obj.Object) *Font {
+	defer runtime.KeepAlive(fontDescriptor)
+	defer runtime.KeepAlive(textTransform)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFont")), objc.RegisterName("fontWithDescriptor:textTransform:"), objref.IDOf(fontDescriptor), objref.IDOf(textTransform))
 	return FontFromID(_r)
 }
@@ -1775,11 +1842,13 @@ func UserFixedPitchFontOfSize(fontSize float64) *Font {
 
 // SetUserFont sets the font used by default for documents and other text under the user’s control to the specified font.
 func SetUserFont(font *Font) {
+	defer runtime.KeepAlive(font)
 	objc.Send[objc.ID](objc.ID(_class("NSFont")), objc.RegisterName("setUserFont:"), objref.IDOf(font))
 }
 
 // SetUserFixedPitchFont sets the font used by default for documents and other text under the user’s control, when that font should be fixed-pitch, to the specified font.
 func SetUserFixedPitchFont(font *Font) {
+	defer runtime.KeepAlive(font)
 	objc.Send[objc.ID](objc.ID(_class("NSFont")), objc.RegisterName("setUserFixedPitchFont:"), objref.IDOf(font))
 }
 
@@ -1893,6 +1962,8 @@ func LabelFontSize() float64 {
 
 // PreferredFontForTextStyleOptions returns the font associated with the text style.
 func PreferredFontForTextStyleOptions(style obj.Object, options obj.Object) *Font {
+	defer runtime.KeepAlive(style)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFont")), objc.RegisterName("preferredFontForTextStyle:options:"), objref.IDOf(style), objref.IDOf(options))
 	return FontFromID(_r)
 }
@@ -1905,12 +1976,15 @@ func FontCollectionWithDescriptors(queryDescriptors []*FontDescriptor) *FontColl
 
 // FontCollectionWithLocale returns a collection of fonts matching the given locale.
 func FontCollectionWithLocale(locale obj.Object) *FontCollection {
+	defer runtime.KeepAlive(locale)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFontCollection")), objc.RegisterName("fontCollectionWithLocale:"), objref.IDOf(locale))
 	return FontCollectionFromID(_r)
 }
 
 // ShowFontCollectionWithNameVisibility make the given font collection visible by giving it a name.
 func ShowFontCollectionWithNameVisibility(collection *FontCollection, name obj.Object, visibility FontCollectionVisibility) error {
+	defer runtime.KeepAlive(collection)
+	defer runtime.KeepAlive(name)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objc.ID(_class("NSFontCollection")), objc.RegisterName("showFontCollection:withName:visibility:error:"), objref.IDOf(collection), objref.IDOf(name), visibility, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -1921,6 +1995,7 @@ func ShowFontCollectionWithNameVisibility(collection *FontCollection, name obj.O
 
 // HideFontCollectionWithNameVisibility remove from view the named font collection with the specified visibility.
 func HideFontCollectionWithNameVisibility(name obj.Object, visibility FontCollectionVisibility) error {
+	defer runtime.KeepAlive(name)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objc.ID(_class("NSFontCollection")), objc.RegisterName("hideFontCollectionWithName:visibility:error:"), objref.IDOf(name), visibility, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -1931,6 +2006,8 @@ func HideFontCollectionWithNameVisibility(name obj.Object, visibility FontCollec
 
 // RenameFontCollectionWithNameVisibilityToName renames the font collection with the specified name and visibility to the second name specified.
 func RenameFontCollectionWithNameVisibilityToName(oldName obj.Object, visibility FontCollectionVisibility, newName obj.Object) error {
+	defer runtime.KeepAlive(oldName)
+	defer runtime.KeepAlive(newName)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objc.ID(_class("NSFontCollection")), objc.RegisterName("renameFontCollectionWithName:visibility:toName:error:"), objref.IDOf(oldName), visibility, objref.IDOf(newName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -1941,12 +2018,14 @@ func RenameFontCollectionWithNameVisibilityToName(oldName obj.Object, visibility
 
 // FontCollectionWithName creates a named font collection object.
 func FontCollectionWithName(name obj.Object) *FontCollection {
+	defer runtime.KeepAlive(name)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFontCollection")), objc.RegisterName("fontCollectionWithName:"), objref.IDOf(name))
 	return FontCollectionFromID(_r)
 }
 
 // FontCollectionWithNameVisibility creates a font collection with the specified name and font visibility.
 func FontCollectionWithNameVisibility(name obj.Object, visibility FontCollectionVisibility) *FontCollection {
+	defer runtime.KeepAlive(name)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFontCollection")), objc.RegisterName("fontCollectionWithName:visibility:"), objref.IDOf(name), visibility)
 	return FontCollectionFromID(_r)
 }
@@ -1967,6 +2046,7 @@ func AllFontCollectionNames() []obj.Object {
 
 // FontDescriptorWithFontAttributes returns a font descriptor with a dictionary of attributes.
 func FontDescriptorWithFontAttributes(attributes obj.Object) *FontDescriptor {
+	defer runtime.KeepAlive(attributes)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFontDescriptor")), objc.RegisterName("fontDescriptorWithFontAttributes:"), objref.IDOf(attributes))
 	return FontDescriptorFromID(_r)
 }
@@ -1979,12 +2059,15 @@ func FontDescriptorWithNameSize(fontName string, size float64) *FontDescriptor {
 
 // FontDescriptorWithNameMatrix returns a font descriptor with the name and matrix attributes set to the given values.
 func FontDescriptorWithNameMatrix(fontName string, matrix obj.Object) *FontDescriptor {
+	defer runtime.KeepAlive(matrix)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFontDescriptor")), objc.RegisterName("fontDescriptorWithName:matrix:"), purego.NSString(fontName), objref.IDOf(matrix))
 	return FontDescriptorFromID(_r)
 }
 
 // PreferredFontDescriptorForTextStyleOptions returns a font descriptor that contains the text style.
 func PreferredFontDescriptorForTextStyleOptions(style obj.Object, options obj.Object) *FontDescriptor {
+	defer runtime.KeepAlive(style)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFontDescriptor")), objc.RegisterName("preferredFontDescriptorForTextStyle:options:"), objref.IDOf(style), objref.IDOf(options))
 	return FontDescriptorFromID(_r)
 }
@@ -2014,43 +2097,49 @@ func SharedGlyphGenerator() *GlyphGenerator {
 }
 
 // GlyphInfoWithCGGlyphForFontBaseString creates a glyph info object from the specified glyph identifier and font informaton.
-func GlyphInfoWithCGGlyphForFontBaseString(glyph uint16, font *Font, string_ string) *GlyphInfo {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSGlyphInfo")), objc.RegisterName("glyphInfoWithCGGlyph:forFont:baseString:"), glyph, objref.IDOf(font), purego.NSString(string_))
+func GlyphInfoWithCGGlyphForFontBaseString(glyph uint16, font *Font, str string) *GlyphInfo {
+	defer runtime.KeepAlive(font)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSGlyphInfo")), objc.RegisterName("glyphInfoWithCGGlyph:forFont:baseString:"), glyph, objref.IDOf(font), purego.NSString(str))
 	return GlyphInfoFromID(_r)
 }
 
 // GlyphInfoWithGlyphNameForFontBaseString wraps the corresponding Objective-C method.
-func GlyphInfoWithGlyphNameForFontBaseString(glyphName string, font *Font, string_ string) *GlyphInfo {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSGlyphInfo")), objc.RegisterName("glyphInfoWithGlyphName:forFont:baseString:"), purego.NSString(glyphName), objref.IDOf(font), purego.NSString(string_))
+func GlyphInfoWithGlyphNameForFontBaseString(glyphName string, font *Font, str string) *GlyphInfo {
+	defer runtime.KeepAlive(font)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSGlyphInfo")), objc.RegisterName("glyphInfoWithGlyphName:forFont:baseString:"), purego.NSString(glyphName), objref.IDOf(font), purego.NSString(str))
 	return GlyphInfoFromID(_r)
 }
 
 // GlyphInfoWithGlyphForFontBaseString wraps the corresponding Objective-C method.
-func GlyphInfoWithGlyphForFontBaseString(glyph int, font *Font, string_ string) *GlyphInfo {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSGlyphInfo")), objc.RegisterName("glyphInfoWithGlyph:forFont:baseString:"), glyph, objref.IDOf(font), purego.NSString(string_))
+func GlyphInfoWithGlyphForFontBaseString(glyph int, font *Font, str string) *GlyphInfo {
+	defer runtime.KeepAlive(font)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSGlyphInfo")), objc.RegisterName("glyphInfoWithGlyph:forFont:baseString:"), glyph, objref.IDOf(font), purego.NSString(str))
 	return GlyphInfoFromID(_r)
 }
 
 // GlyphInfoWithCharacterIdentifierCollectionBaseString instantiates and returns an NSGlyphInfo object using a character identifier and a character collection.
-func GlyphInfoWithCharacterIdentifierCollectionBaseString(cid int, characterCollection CharacterCollection, string_ string) *GlyphInfo {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSGlyphInfo")), objc.RegisterName("glyphInfoWithCharacterIdentifier:collection:baseString:"), cid, characterCollection, purego.NSString(string_))
+func GlyphInfoWithCharacterIdentifierCollectionBaseString(cid int, characterCollection CharacterCollection, str string) *GlyphInfo {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSGlyphInfo")), objc.RegisterName("glyphInfoWithCharacterIdentifier:collection:baseString:"), cid, characterCollection, purego.NSString(str))
 	return GlyphInfoFromID(_r)
 }
 
 // GraphicsContextWithAttributes creates a graphics context using the specified attributes.
 func GraphicsContextWithAttributes(attributes obj.Object) *GraphicsContext {
+	defer runtime.KeepAlive(attributes)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSGraphicsContext")), objc.RegisterName("graphicsContextWithAttributes:"), objref.IDOf(attributes))
 	return GraphicsContextFromID(_r)
 }
 
 // GraphicsContextWithBitmapImageRep creates a new graphics context using the specified bitmap image representation object as the context destination.
 func GraphicsContextWithBitmapImageRep(bitmapRep *BitmapImageRep) *GraphicsContext {
+	defer runtime.KeepAlive(bitmapRep)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSGraphicsContext")), objc.RegisterName("graphicsContextWithBitmapImageRep:"), objref.IDOf(bitmapRep))
 	return GraphicsContextFromID(_r)
 }
 
 // GraphicsContextWithCGContextFlipped creates a new graphics context from the specified Core Graphics context and the initial flipped state.
 func GraphicsContextWithCGContextFlipped(graphicsPort obj.Object, initialFlippedState bool) *GraphicsContext {
+	defer runtime.KeepAlive(graphicsPort)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSGraphicsContext")), objc.RegisterName("graphicsContextWithCGContext:flipped:"), objref.IDOf(graphicsPort), initialFlippedState)
 	return GraphicsContextFromID(_r)
 }
@@ -2079,6 +2168,7 @@ func NSGraphicsContextCurrentContext() *GraphicsContext {
 
 // SetCurrentContext wraps the corresponding Objective-C method.
 func SetCurrentContext(currentContext *GraphicsContext) {
+	defer runtime.KeepAlive(currentContext)
 	objc.Send[objc.ID](objc.ID(_class("NSGraphicsContext")), objc.RegisterName("setCurrentContext:"), objref.IDOf(currentContext))
 }
 
@@ -2095,6 +2185,7 @@ func GraphicsContextWithGraphicsPortFlipped(graphicsPort unsafe.Pointer, initial
 
 // GraphicsContextWithWindow creates a new graphics context for drawing into a window.
 func GraphicsContextWithWindow(window *Window) *GraphicsContext {
+	defer runtime.KeepAlive(window)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSGraphicsContext")), objc.RegisterName("graphicsContextWithWindow:"), objref.IDOf(window))
 	return GraphicsContextFromID(_r)
 }
@@ -2119,18 +2210,22 @@ func GridViewWithViews(rows []obj.Object) *GridView {
 
 // GroupItemWithIdentifierItems initializes and returns a group item whose bar is constructed from the supplied items.
 func GroupItemWithIdentifierItems(identifier obj.Object, items []*TouchBarItem) *GroupTouchBarItem {
+	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSGroupTouchBarItem")), objc.RegisterName("groupItemWithIdentifier:items:"), objref.IDOf(identifier), purego.SliceToNSArray(items, func(_v *TouchBarItem) objc.ID { return objref.IDOf(_v) }))
 	return GroupTouchBarItemFromID(_r)
 }
 
 // GroupItemWithIdentifierItemsAllowedCompressionOptions initializes and returns a group item whose bar is constructed from the supplied items, and with the specified compression options.
 func GroupItemWithIdentifierItemsAllowedCompressionOptions(identifier obj.Object, items []*TouchBarItem, allowedCompressionOptions *UserInterfaceCompressionOptions) *GroupTouchBarItem {
+	defer runtime.KeepAlive(identifier)
+	defer runtime.KeepAlive(allowedCompressionOptions)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSGroupTouchBarItem")), objc.RegisterName("groupItemWithIdentifier:items:allowedCompressionOptions:"), objref.IDOf(identifier), purego.SliceToNSArray(items, func(_v *TouchBarItem) objc.ID { return objref.IDOf(_v) }), objref.IDOf(allowedCompressionOptions))
 	return GroupTouchBarItemFromID(_r)
 }
 
 // AlertStyleGroupItemWithIdentifier initializes and returns a group item configured to match system alerts.
 func AlertStyleGroupItemWithIdentifier(identifier obj.Object) *GroupTouchBarItem {
+	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSGroupTouchBarItem")), objc.RegisterName("alertStyleGroupItemWithIdentifier:"), objref.IDOf(identifier))
 	return GroupTouchBarItemFromID(_r)
 }
@@ -2154,6 +2249,7 @@ func SetContextHelpModeActive(contextHelpModeActive bool) {
 
 // ImageNamed returns the image object associated with the specified name.
 func ImageNamed(name obj.Object) *Image {
+	defer runtime.KeepAlive(name)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSImage")), objc.RegisterName("imageNamed:"), objref.IDOf(name))
 	return ImageFromID(_r)
 }
@@ -2178,12 +2274,14 @@ func ImageWithSymbolNameVariableValue(name string, value float64) *Image {
 
 // ImageWithSymbolNameBundleVariableValue creates a symbol image with the specified symbol name and variable value.
 func ImageWithSymbolNameBundleVariableValue(name string, bundle obj.Object, value float64) *Image {
+	defer runtime.KeepAlive(bundle)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSImage")), objc.RegisterName("imageWithSymbolName:bundle:variableValue:"), purego.NSString(name), objref.IDOf(bundle), value)
 	return ImageFromID(_r)
 }
 
 // CanInitWithPasteboard tests whether the image can create an instance of itself using pasteboard data.
 func CanInitWithPasteboard(pasteboard *Pasteboard) bool {
+	defer runtime.KeepAlive(pasteboard)
 	_r := objc.Send[bool](objc.ID(_class("NSImage")), objc.RegisterName("canInitWithPasteboard:"), objref.IDOf(pasteboard))
 	return _r
 }
@@ -2237,8 +2335,8 @@ func ImagePasteboardTypes() []obj.Object {
 }
 
 // CanInitWithData returns a Boolean value that indicates whether the image representation can initialize itself from the specified data.
-func CanInitWithData(data obj.Object) bool {
-	_r := objc.Send[bool](objc.ID(_class("NSImageRep")), objc.RegisterName("canInitWithData:"), objref.IDOf(data))
+func CanInitWithData(data []byte) bool {
+	_r := objc.Send[bool](objc.ID(_class("NSImageRep")), objc.RegisterName("canInitWithData:"), rt.BytesToNSData(data))
 	return _r
 }
 
@@ -2276,6 +2374,7 @@ func NSImageRepImagePasteboardTypes() []obj.Object {
 
 // NSImageRepCanInitWithPasteboard returns a Boolean value that indicates whether the receiver can initialize itself from the data on the specified pasteboard.
 func NSImageRepCanInitWithPasteboard(pasteboard *Pasteboard) bool {
+	defer runtime.KeepAlive(pasteboard)
 	_r := objc.Send[bool](objc.ID(_class("NSImageRep")), objc.RegisterName("canInitWithPasteboard:"), objref.IDOf(pasteboard))
 	return _r
 }
@@ -2306,12 +2405,14 @@ func ImageRepWithContentsOfURL(url string) *ImageRep {
 
 // ImageRepsWithPasteboard creates and returns an array of image representation objects initialized using the contents of the pasteboard.
 func ImageRepsWithPasteboard(pasteboard *Pasteboard) []*ImageRep {
+	defer runtime.KeepAlive(pasteboard)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSImageRep")), objc.RegisterName("imageRepsWithPasteboard:"), objref.IDOf(pasteboard))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *ImageRep { return ImageRepFromID(_id) })
 }
 
 // ImageRepWithPasteboard creates and returns an image representation object using the contents of the specified pasteboard.
 func ImageRepWithPasteboard(pasteboard *Pasteboard) *ImageRep {
+	defer runtime.KeepAlive(pasteboard)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSImageRep")), objc.RegisterName("imageRepWithPasteboard:"), objref.IDOf(pasteboard))
 	return ImageRepFromID(_r)
 }
@@ -2352,12 +2453,14 @@ func ConfigurationWithPointSizeWeight(pointSize float64, weight float64) *ImageS
 
 // ConfigurationWithTextStyleScale wraps the corresponding Objective-C method.
 func ConfigurationWithTextStyleScale(style obj.Object, scale ImageSymbolScale) *ImageSymbolConfiguration {
+	defer runtime.KeepAlive(style)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSImageSymbolConfiguration")), objc.RegisterName("configurationWithTextStyle:scale:"), objref.IDOf(style), scale)
 	return ImageSymbolConfigurationFromID(_r)
 }
 
 // ConfigurationWithTextStyle wraps the corresponding Objective-C method.
 func ConfigurationWithTextStyle(style obj.Object) *ImageSymbolConfiguration {
+	defer runtime.KeepAlive(style)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSImageSymbolConfiguration")), objc.RegisterName("configurationWithTextStyle:"), objref.IDOf(style))
 	return ImageSymbolConfigurationFromID(_r)
 }
@@ -2382,6 +2485,7 @@ func ConfigurationPreferringHierarchical() *ImageSymbolConfiguration {
 
 // ConfigurationWithHierarchicalColor create a color configuration with a palette derived from one color. A color scheme will be created based on the provided color, deriving secondary and tertiary colors by reducing the intensity of the base color. This is typically (but not only) accomplished by reducing opacity of the primary color. When combined with another configuration creating a palette, the last specified configuration will win, overwriting the other color configuration. If the symbol doesn’t have a palette-based variant, the configuration will have no effect and the result will be a monochrome (templated) symbol.
 func ConfigurationWithHierarchicalColor(hierarchicalColor *Color) *ImageSymbolConfiguration {
+	defer runtime.KeepAlive(hierarchicalColor)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSImageSymbolConfiguration")), objc.RegisterName("configurationWithHierarchicalColor:"), objref.IDOf(hierarchicalColor))
 	return ImageSymbolConfigurationFromID(_r)
 }
@@ -2412,6 +2516,7 @@ func ConfigurationWithColorRenderingMode(mode ImageSymbolColorRenderingMode) *Im
 
 // ImageViewWithImage creates a non-editable image view containing the provided image. The image is scaled proportionally down to fit the view, and is centered within the view.
 func ImageViewWithImage(image *Image) *ImageView {
+	defer runtime.KeepAlive(image)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSImageView")), objc.RegisterName("imageViewWithImage:"), objref.IDOf(image))
 	return ImageViewFromID(_r)
 }
@@ -2435,11 +2540,13 @@ func CurrentInputManager() *InputManager {
 
 // CycleToNextInputLanguage wraps the corresponding Objective-C method.
 func CycleToNextInputLanguage(sender obj.Object) {
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objc.ID(_class("NSInputManager")), objc.RegisterName("cycleToNextInputLanguage:"), objref.IDOf(sender))
 }
 
 // CycleToNextInputServerInLanguage wraps the corresponding Objective-C method.
 func CycleToNextInputServerInLanguage(sender obj.Object) {
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objc.ID(_class("NSInputManager")), objc.RegisterName("cycleToNextInputServerInLanguage:"), objref.IDOf(sender))
 }
 
@@ -2462,13 +2569,15 @@ func IndicatorBadge() *ItemBadge {
 }
 
 // ConstraintsWithVisualFormatOptionsMetricsViews creates constraints described by an ASCII art-like visual format string.
-func ConstraintsWithVisualFormatOptionsMetricsViews(format string, opts LayoutFormatOptions, metrics obj.Object, views obj.Object) []*LayoutConstraint {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSLayoutConstraint")), objc.RegisterName("constraintsWithVisualFormat:options:metrics:views:"), purego.NSString(format), opts, objref.IDOf(metrics), objref.IDOf(views))
+func ConstraintsWithVisualFormatOptionsMetricsViews(format string, opts LayoutFormatOptions, metrics map[string]obj.Object, views map[string]obj.Object) []*LayoutConstraint {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLayoutConstraint")), objc.RegisterName("constraintsWithVisualFormat:options:metrics:views:"), purego.NSString(format), opts, rt.MapToDict(metrics, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(views, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *LayoutConstraint { return LayoutConstraintFromID(_id) })
 }
 
 // ConstraintWithItemAttributeRelatedByToItemAttributeMultiplierConstant creates a constraint that defines the relationship between the specified attributes of the given views.
 func ConstraintWithItemAttributeRelatedByToItemAttributeMultiplierConstant(view1 obj.Object, attr1 LayoutAttribute, relation LayoutRelation, view2 obj.Object, attr2 LayoutAttribute, multiplier float64, c float64) *LayoutConstraint {
+	defer runtime.KeepAlive(view1)
+	defer runtime.KeepAlive(view2)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSLayoutConstraint")), objc.RegisterName("constraintWithItem:attribute:relatedBy:toItem:attribute:multiplier:constant:"), objref.IDOf(view1), attr1, relation, objref.IDOf(view2), attr2, multiplier, c)
 	return LayoutConstraintFromID(_r)
 }
@@ -2491,11 +2600,18 @@ func SharedMediaLibraryBrowserController() *MediaLibraryBrowserController {
 
 // PopUpContextMenuWithEventForView displays a contextual menu over a view for an event.
 func PopUpContextMenuWithEventForView(menu *Menu, event *Event, view *View) {
+	defer runtime.KeepAlive(menu)
+	defer runtime.KeepAlive(event)
+	defer runtime.KeepAlive(view)
 	objc.Send[objc.ID](objc.ID(_class("NSMenu")), objc.RegisterName("popUpContextMenu:withEvent:forView:"), objref.IDOf(menu), objref.IDOf(event), objref.IDOf(view))
 }
 
 // PopUpContextMenuWithEventForViewWithFont displays a contextual menu over a view for an event using a specified font.
 func PopUpContextMenuWithEventForViewWithFont(menu *Menu, event *Event, view *View, font *Font) {
+	defer runtime.KeepAlive(menu)
+	defer runtime.KeepAlive(event)
+	defer runtime.KeepAlive(view)
+	defer runtime.KeepAlive(font)
 	objc.Send[objc.ID](objc.ID(_class("NSMenu")), objc.RegisterName("popUpContextMenu:withEvent:forView:withFont:"), objref.IDOf(menu), objref.IDOf(event), objref.IDOf(view), objref.IDOf(font))
 }
 
@@ -2518,6 +2634,7 @@ func PaletteMenuWithColorsTitlesSelectionHandler(colors []*Color, itemTitles []s
 
 // PaletteMenuWithColorsTitlesTemplateImageSelectionHandler creates a palette style menu displaying user-selectable color tags that tint using the specified array of colors.
 func PaletteMenuWithColorsTitlesTemplateImageSelectionHandler(colors []*Color, itemTitles []string, image *Image, onSelectionChange func(obj.Object)) *Menu {
+	defer runtime.KeepAlive(image)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMenu")), objc.RegisterName("paletteMenuWithColors:titles:templateImage:selectionHandler:"), purego.SliceToNSArray(colors, func(_v *Color) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(itemTitles, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(image), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { onSelectionChange(obj.Wrap(_b0)) }))
 	return MenuFromID(_r)
 }
@@ -2584,18 +2701,21 @@ func NSMutableFontCollectionFontCollectionWithDescriptors(queryDescriptors []*Fo
 
 // NSMutableFontCollectionFontCollectionWithLocale creates a mutable font collection containing fonts suitable for the specified locale.
 func NSMutableFontCollectionFontCollectionWithLocale(locale obj.Object) *MutableFontCollection {
+	defer runtime.KeepAlive(locale)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableFontCollection")), objc.RegisterName("fontCollectionWithLocale:"), objref.IDOf(locale))
 	return MutableFontCollectionFromID(_r)
 }
 
 // NSMutableFontCollectionFontCollectionWithName creates a mutable named font collection object.
 func NSMutableFontCollectionFontCollectionWithName(name obj.Object) *MutableFontCollection {
+	defer runtime.KeepAlive(name)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableFontCollection")), objc.RegisterName("fontCollectionWithName:"), objref.IDOf(name))
 	return MutableFontCollectionFromID(_r)
 }
 
 // NSMutableFontCollectionFontCollectionWithNameVisibility creates a mutable font collection with the specified name and font visibility.
 func NSMutableFontCollectionFontCollectionWithNameVisibility(name obj.Object, visibility FontCollectionVisibility) *MutableFontCollection {
+	defer runtime.KeepAlive(name)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableFontCollection")), objc.RegisterName("fontCollectionWithName:visibility:"), objref.IDOf(name), visibility)
 	return MutableFontCollectionFromID(_r)
 }
@@ -2630,8 +2750,8 @@ func NSOpenPanelOpenPanel() *OpenPanel {
 }
 
 // NSPDFImageRepImageRepWithData creates and returns a representation of an image initialized with the specified PDF data.
-func NSPDFImageRepImageRepWithData(pdfData obj.Object) *PDFImageRep {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSPDFImageRep")), objc.RegisterName("imageRepWithData:"), objref.IDOf(pdfData))
+func NSPDFImageRepImageRepWithData(pdfData []byte) *PDFImageRep {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPDFImageRep")), objc.RegisterName("imageRepWithData:"), rt.BytesToNSData(pdfData))
 	return PDFImageRepFromID(_r)
 }
 
@@ -2642,8 +2762,8 @@ func NSPDFPanelPanel() *PDFPanel {
 }
 
 // NSPICTImageRepImageRepWithData creates and returns a representation of an image from the specified data in the PICT file format.
-func NSPICTImageRepImageRepWithData(pictData obj.Object) *PICTImageRep {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSPICTImageRep")), objc.RegisterName("imageRepWithData:"), objref.IDOf(pictData))
+func NSPICTImageRepImageRepWithData(pictData []byte) *PICTImageRep {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPICTImageRep")), objc.RegisterName("imageRepWithData:"), rt.BytesToNSData(pictData))
 	return PICTImageRepFromID(_r)
 }
 
@@ -2667,6 +2787,7 @@ func DefaultParagraphStyle() *ParagraphStyle {
 
 // PasteboardWithName returns the pasteboard with the specified name.
 func PasteboardWithName(name obj.Object) *Pasteboard {
+	defer runtime.KeepAlive(name)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPasteboard")), objc.RegisterName("pasteboardWithName:"), objref.IDOf(name))
 	return PasteboardFromID(_r)
 }
@@ -2684,9 +2805,10 @@ func GeneralPasteboard() *Pasteboard {
 }
 
 // TypesFilterableTo returns the data types that can be converted to the specified type using the available filter services.
-func TypesFilterableTo(type_ obj.Object) []obj.Object {
+func TypesFilterableTo(type_ obj.Object) []*foundation.String {
+	defer runtime.KeepAlive(type_)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPasteboard")), objc.RegisterName("typesFilterableTo:"), objref.IDOf(type_))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
 }
 
 // PasteboardByFilteringFile creates a new pasteboard object that supplies the specified file in as many types as possible based on the available filter services.
@@ -2696,37 +2818,45 @@ func PasteboardByFilteringFile(filename string) *Pasteboard {
 }
 
 // PasteboardByFilteringDataOfType creates a new pasteboard object that supplies the specified data in as many types as possible based on the available filter services.
-func PasteboardByFilteringDataOfType(data obj.Object, type_ obj.Object) *Pasteboard {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSPasteboard")), objc.RegisterName("pasteboardByFilteringData:ofType:"), objref.IDOf(data), objref.IDOf(type_))
+func PasteboardByFilteringDataOfType(data []byte, type_ obj.Object) *Pasteboard {
+	defer runtime.KeepAlive(type_)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPasteboard")), objc.RegisterName("pasteboardByFilteringData:ofType:"), rt.BytesToNSData(data), objref.IDOf(type_))
 	return PasteboardFromID(_r)
 }
 
 // PasteboardByFilteringTypesInPasteboard wraps the corresponding Objective-C method.
 func PasteboardByFilteringTypesInPasteboard(pboard *Pasteboard) *Pasteboard {
+	defer runtime.KeepAlive(pboard)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPasteboard")), objc.RegisterName("pasteboardByFilteringTypesInPasteboard:"), objref.IDOf(pboard))
 	return PasteboardFromID(_r)
 }
 
 // PullDownButtonWithTitleMenu creates a standard pull-down button with a title and menu.
 func PullDownButtonWithTitleMenu(title string, menu *Menu) *PopUpButton {
+	defer runtime.KeepAlive(menu)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPopUpButton")), objc.RegisterName("pullDownButtonWithTitle:menu:"), purego.NSString(title), objref.IDOf(menu))
 	return PopUpButtonFromID(_r)
 }
 
 // PullDownButtonWithImageMenu creates a standard pull-down button with an image and menu.
 func PullDownButtonWithImageMenu(image *Image, menu *Menu) *PopUpButton {
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(menu)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPopUpButton")), objc.RegisterName("pullDownButtonWithImage:menu:"), objref.IDOf(image), objref.IDOf(menu))
 	return PopUpButtonFromID(_r)
 }
 
 // PullDownButtonWithTitleImageMenu creates a standard pull-down button with a title, image, and menu.
 func PullDownButtonWithTitleImageMenu(title string, image *Image, menu *Menu) *PopUpButton {
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(menu)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPopUpButton")), objc.RegisterName("pullDownButtonWithTitle:image:menu:"), purego.NSString(title), objref.IDOf(image), objref.IDOf(menu))
 	return PopUpButtonFromID(_r)
 }
 
 // TemplatesWithAttributeKeyPathsInEntityDescription returns an array of predicate templates for the given attribute key paths for a given entity.
 func TemplatesWithAttributeKeyPathsInEntityDescription(keyPaths []string, entityDescription obj.Object) []*PredicateEditorRowTemplate {
+	defer runtime.KeepAlive(entityDescription)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPredicateEditorRowTemplate")), objc.RegisterName("templatesWithAttributeKeyPaths:inEntityDescription:"), purego.SliceToNSArray(keyPaths, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(entityDescription))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *PredicateEditorRowTemplate { return PredicateEditorRowTemplateFromID(_id) })
 }
@@ -2739,6 +2869,7 @@ func SharedPrintInfo() *PrintInfo {
 
 // SetSharedPrintInfo wraps the corresponding Objective-C method.
 func SetSharedPrintInfo(sharedPrintInfo *PrintInfo) {
+	defer runtime.KeepAlive(sharedPrintInfo)
 	objc.Send[objc.ID](objc.ID(_class("NSPrintInfo")), objc.RegisterName("setSharedPrintInfo:"), objref.IDOf(sharedPrintInfo))
 }
 
@@ -2750,59 +2881,78 @@ func DefaultPrinter() *Printer {
 
 // SetDefaultPrinter deprecated.
 func SetDefaultPrinter(printer *Printer) {
+	defer runtime.KeepAlive(printer)
 	objc.Send[objc.ID](objc.ID(_class("NSPrintInfo")), objc.RegisterName("setDefaultPrinter:"), objref.IDOf(printer))
 }
 
 // SizeForPaperName deprecated.
 func SizeForPaperName(name obj.Object) corefoundation.CGSize {
+	defer runtime.KeepAlive(name)
 	_r := objc.Send[corefoundation.CGSize](objc.ID(_class("NSPrintInfo")), objc.RegisterName("sizeForPaperName:"), objref.IDOf(name))
 	return _r
 }
 
 // PrintOperationWithViewPrintInfo creates and returns an print operation object ready to control the printing of the specified view using custom print settings.
 func PrintOperationWithViewPrintInfo(view *View, printInfo *PrintInfo) *PrintOperation {
+	defer runtime.KeepAlive(view)
+	defer runtime.KeepAlive(printInfo)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPrintOperation")), objc.RegisterName("printOperationWithView:printInfo:"), objref.IDOf(view), objref.IDOf(printInfo))
 	return PrintOperationFromID(_r)
 }
 
 // PDFOperationWithViewInsideRectToDataPrintInfo creates and returns a new print operation object ready to control the copying of PDF graphics from the specified view using the specified print settings.
 func PDFOperationWithViewInsideRectToDataPrintInfo(view *View, rect corefoundation.CGRect, data obj.Object, printInfo *PrintInfo) *PrintOperation {
+	defer runtime.KeepAlive(view)
+	defer runtime.KeepAlive(data)
+	defer runtime.KeepAlive(printInfo)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPrintOperation")), objc.RegisterName("PDFOperationWithView:insideRect:toData:printInfo:"), objref.IDOf(view), rect, objref.IDOf(data), objref.IDOf(printInfo))
 	return PrintOperationFromID(_r)
 }
 
 // PDFOperationWithViewInsideRectToPathPrintInfo creates and returns a new print operation object ready to control the copying of PDF graphics from the specified view and write the resulting data to the specified file.
 func PDFOperationWithViewInsideRectToPathPrintInfo(view *View, rect corefoundation.CGRect, path string, printInfo *PrintInfo) *PrintOperation {
+	defer runtime.KeepAlive(view)
+	defer runtime.KeepAlive(printInfo)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPrintOperation")), objc.RegisterName("PDFOperationWithView:insideRect:toPath:printInfo:"), objref.IDOf(view), rect, purego.NSString(path), objref.IDOf(printInfo))
 	return PrintOperationFromID(_r)
 }
 
 // EPSOperationWithViewInsideRectToDataPrintInfo creates and returns a new print operation object ready to control the copying of EPS graphics from the specified view using the specified print settings.
 func EPSOperationWithViewInsideRectToDataPrintInfo(view *View, rect corefoundation.CGRect, data obj.Object, printInfo *PrintInfo) *PrintOperation {
+	defer runtime.KeepAlive(view)
+	defer runtime.KeepAlive(data)
+	defer runtime.KeepAlive(printInfo)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPrintOperation")), objc.RegisterName("EPSOperationWithView:insideRect:toData:printInfo:"), objref.IDOf(view), rect, objref.IDOf(data), objref.IDOf(printInfo))
 	return PrintOperationFromID(_r)
 }
 
 // EPSOperationWithViewInsideRectToPathPrintInfo creates and returns a new print operation object ready to control the copying of EPS graphics from the specified view and write the resulting data to the specified file.
 func EPSOperationWithViewInsideRectToPathPrintInfo(view *View, rect corefoundation.CGRect, path string, printInfo *PrintInfo) *PrintOperation {
+	defer runtime.KeepAlive(view)
+	defer runtime.KeepAlive(printInfo)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPrintOperation")), objc.RegisterName("EPSOperationWithView:insideRect:toPath:printInfo:"), objref.IDOf(view), rect, purego.NSString(path), objref.IDOf(printInfo))
 	return PrintOperationFromID(_r)
 }
 
 // PrintOperationWithView creates and returns an print operation object ready to control the printing of the specified view.
 func PrintOperationWithView(view *View) *PrintOperation {
+	defer runtime.KeepAlive(view)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPrintOperation")), objc.RegisterName("printOperationWithView:"), objref.IDOf(view))
 	return PrintOperationFromID(_r)
 }
 
 // PDFOperationWithViewInsideRectToData creates and returns a new print operation object ready to control the copying of PDF graphics from the specified view.
 func PDFOperationWithViewInsideRectToData(view *View, rect corefoundation.CGRect, data obj.Object) *PrintOperation {
+	defer runtime.KeepAlive(view)
+	defer runtime.KeepAlive(data)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPrintOperation")), objc.RegisterName("PDFOperationWithView:insideRect:toData:"), objref.IDOf(view), rect, objref.IDOf(data))
 	return PrintOperationFromID(_r)
 }
 
 // EPSOperationWithViewInsideRectToData creates and returns a new print operation object ready to control the copying of EPS graphics from the specified view.
 func EPSOperationWithViewInsideRectToData(view *View, rect corefoundation.CGRect, data obj.Object) *PrintOperation {
+	defer runtime.KeepAlive(view)
+	defer runtime.KeepAlive(data)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPrintOperation")), objc.RegisterName("EPSOperationWithView:insideRect:toData:"), objref.IDOf(view), rect, objref.IDOf(data))
 	return PrintOperationFromID(_r)
 }
@@ -2815,6 +2965,7 @@ func CurrentOperation() *PrintOperation {
 
 // SetCurrentOperation wraps the corresponding Objective-C method.
 func SetCurrentOperation(currentOperation *PrintOperation) {
+	defer runtime.KeepAlive(currentOperation)
 	objc.Send[objc.ID](objc.ID(_class("NSPrintOperation")), objc.RegisterName("setCurrentOperation:"), objref.IDOf(currentOperation))
 }
 
@@ -2832,6 +2983,7 @@ func PrinterWithName(name string) *Printer {
 
 // PrinterWithType creates and returns a printer object initialized to the first available printer with the specified make and model information.
 func PrinterWithType(type_ obj.Object) *Printer {
+	defer runtime.KeepAlive(type_)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPrinter")), objc.RegisterName("printerWithType:"), objref.IDOf(type_))
 	return PrinterFromID(_r)
 }
@@ -2873,8 +3025,9 @@ func NSResponderRestorableStateKeyPaths() []string {
 }
 
 // RegisterUnitWithNameAbbreviationUnitToPointsConversionFactorStepUpCycleStepDownCycle registers a new unit of measurement with the NSRulerView class, making it available to all instances of NSRulerView.
-func RegisterUnitWithNameAbbreviationUnitToPointsConversionFactorStepUpCycleStepDownCycle(unitName obj.Object, abbreviation string, conversionFactor float64, stepUpCycle []obj.Object, stepDownCycle []obj.Object) {
-	objc.Send[objc.ID](objc.ID(_class("NSRulerView")), objc.RegisterName("registerUnitWithName:abbreviation:unitToPointsConversionFactor:stepUpCycle:stepDownCycle:"), objref.IDOf(unitName), purego.NSString(abbreviation), conversionFactor, purego.SliceToNSArray(stepUpCycle, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(stepDownCycle, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func RegisterUnitWithNameAbbreviationUnitToPointsConversionFactorStepUpCycleStepDownCycle(unitName obj.Object, abbreviation string, conversionFactor float64, stepUpCycle []*foundation.Number, stepDownCycle []*foundation.Number) {
+	defer runtime.KeepAlive(unitName)
+	objc.Send[objc.ID](objc.ID(_class("NSRulerView")), objc.RegisterName("registerUnitWithName:abbreviation:unitToPointsConversionFactor:stepUpCycle:stepDownCycle:"), objref.IDOf(unitName), purego.NSString(abbreviation), conversionFactor, purego.SliceToNSArray(stepUpCycle, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(stepDownCycle, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 }
 
 // RunningApplicationsWithBundleIdentifier returns an array of currently running applications with the specified bundle identifier.
@@ -3012,18 +3165,21 @@ func RoundedBackgroundStyle() *ScrubberSelectionStyle {
 
 // SharingServicesForItems returns a list of sharing services which could share all the provided items together.
 func SharingServicesForItems(items obj.Object) []*SharingService {
+	defer runtime.KeepAlive(items)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSharingService")), objc.RegisterName("sharingServicesForItems:"), objref.IDOf(items))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *SharingService { return SharingServiceFromID(_id) })
 }
 
 // SharingServiceNamed returns a sharing service instance representing the specified service name.
 func SharingServiceNamed(serviceName obj.Object) *SharingService {
+	defer runtime.KeepAlive(serviceName)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSharingService")), objc.RegisterName("sharingServiceNamed:"), objref.IDOf(serviceName))
 	return SharingServiceFromID(_r)
 }
 
 // AccessoryWithImage wraps the corresponding Objective-C method.
 func AccessoryWithImage(image *Image) *SliderAccessory {
+	defer runtime.KeepAlive(image)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSliderAccessory")), objc.RegisterName("accessoryWithImage:"), objref.IDOf(image))
 	return SliderAccessoryFromID(_r)
 }
@@ -3060,12 +3216,14 @@ func NSSliderCellPrefersTrackingUntilMouseUp() bool {
 
 // SoundNamed returns the NSSound instance associated with a given name.
 func SoundNamed(name obj.Object) *Sound {
+	defer runtime.KeepAlive(name)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSound")), objc.RegisterName("soundNamed:"), objref.IDOf(name))
 	return SoundFromID(_r)
 }
 
 // NSSoundCanInitWithPasteboard indicates whether the receiver can create an instance of itself from the data in a pasteboard.
 func NSSoundCanInitWithPasteboard(pasteboard *Pasteboard) bool {
+	defer runtime.KeepAlive(pasteboard)
 	_r := objc.Send[bool](objc.ID(_class("NSSound")), objc.RegisterName("canInitWithPasteboard:"), objref.IDOf(pasteboard))
 	return _r
 }
@@ -3092,6 +3250,7 @@ func SoundUnfilteredPasteboardTypes() obj.Object {
 
 // AttributesForVoice provides the attribute dictionary of a voice.
 func AttributesForVoice(voice obj.Object) obj.Object {
+	defer runtime.KeepAlive(voice)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSpeechSynthesizer")), objc.RegisterName("attributesForVoice:"), objref.IDOf(voice))
 	return obj.Wrap(_r)
 }
@@ -3103,9 +3262,9 @@ func IsAnyApplicationSpeaking() bool {
 }
 
 // DefaultVoice returns the default voice.
-func DefaultVoice() obj.Object {
+func DefaultVoice() *foundation.String {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSpeechSynthesizer")), objc.RegisterName("defaultVoice"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // AvailableVoices returns the available voices.
@@ -3184,24 +3343,28 @@ func IsAutomaticInlinePredictionEnabled() bool {
 
 // SplitViewItemWithViewController creates a split view item that represents the specified view controller.
 func SplitViewItemWithViewController(viewController *ViewController) *SplitViewItem {
+	defer runtime.KeepAlive(viewController)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSplitViewItem")), objc.RegisterName("splitViewItemWithViewController:"), objref.IDOf(viewController))
 	return SplitViewItemFromID(_r)
 }
 
 // SidebarWithViewController creates a split view item that represents a sidebar for the specified view controller.
 func SidebarWithViewController(viewController *ViewController) *SplitViewItem {
+	defer runtime.KeepAlive(viewController)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSplitViewItem")), objc.RegisterName("sidebarWithViewController:"), objref.IDOf(viewController))
 	return SplitViewItemFromID(_r)
 }
 
 // ContentListWithViewController creates a split view item that represents a content list for the specified view controller.
 func ContentListWithViewController(viewController *ViewController) *SplitViewItem {
+	defer runtime.KeepAlive(viewController)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSplitViewItem")), objc.RegisterName("contentListWithViewController:"), objref.IDOf(viewController))
 	return SplitViewItemFromID(_r)
 }
 
 // InspectorWithViewController creates a split view item that represents an inspector for the specified view controller.
 func InspectorWithViewController(viewController *ViewController) *SplitViewItem {
+	defer runtime.KeepAlive(viewController)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSplitViewItem")), objc.RegisterName("inspectorWithViewController:"), objref.IDOf(viewController))
 	return SplitViewItemFromID(_r)
 }
@@ -3220,12 +3383,16 @@ func SystemStatusBar() *StatusBar {
 
 // StepperTouchBarItemWithIdentifierFormatter creates a NSStepperTouchBarItem with a formatter to display the stepper’s value as text.
 func StepperTouchBarItemWithIdentifierFormatter(identifier obj.Object, formatter obj.Object) *StepperTouchBarItem {
+	defer runtime.KeepAlive(identifier)
+	defer runtime.KeepAlive(formatter)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSStepperTouchBarItem")), objc.RegisterName("stepperTouchBarItemWithIdentifier:formatter:"), objref.IDOf(identifier), objref.IDOf(formatter))
 	return StepperTouchBarItemFromID(_r)
 }
 
 // StoryboardWithNameBundle creates a storyboard based on the named storyboard file in the specified bundle.
 func StoryboardWithNameBundle(name obj.Object, storyboardBundleOrNil obj.Object) *Storyboard {
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(storyboardBundleOrNil)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSStoryboard")), objc.RegisterName("storyboardWithName:bundle:"), objref.IDOf(name), objref.IDOf(storyboardBundleOrNil))
 	return StoryboardFromID(_r)
 }
@@ -3238,12 +3405,16 @@ func MainStoryboard() *Storyboard {
 
 // SegueWithIdentifierSourceDestinationPerformHandler creates a storyboard segue and a block used when the segue is performed.
 func SegueWithIdentifierSourceDestinationPerformHandler(identifier obj.Object, sourceController obj.Object, destinationController obj.Object, performHandler func()) *StoryboardSegue {
+	defer runtime.KeepAlive(identifier)
+	defer runtime.KeepAlive(sourceController)
+	defer runtime.KeepAlive(destinationController)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSStoryboardSegue")), objc.RegisterName("segueWithIdentifier:source:destination:performHandler:"), objref.IDOf(identifier), objref.IDOf(sourceController), objref.IDOf(destinationController), objc.NewBlock(func(_ objc.Block) { performHandler() }))
 	return StoryboardSegueFromID(_r)
 }
 
 // TabViewItemWithViewController creates an autoreleased `TabViewItem` that wraps the provided view controller. The view controller is set as the tab view item’s `viewController` property, which sets several of the tab view item’s other properties. \param viewController The view controller to wrap, used to set the `viewController` property
 func TabViewItemWithViewController(viewController *ViewController) *TabViewItem {
+	defer runtime.KeepAlive(viewController)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTabViewItem")), objc.RegisterName("tabViewItemWithViewController:"), objref.IDOf(viewController))
 	return TabViewItemFromID(_r)
 }
@@ -3268,6 +3439,7 @@ func WrappingLabelWithString(stringValue string) *TextField {
 
 // LabelWithAttributedString creates a text field for use as a static label that displays styled text, doesn’t wrap, and doesn’t have selectable text.
 func LabelWithAttributedString(attributedStringValue obj.Object) *TextField {
+	defer runtime.KeepAlive(attributedStringValue)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTextField")), objc.RegisterName("labelWithAttributedString:"), objref.IDOf(attributedStringValue))
 	return TextFieldFromID(_r)
 }
@@ -3285,6 +3457,7 @@ func DrawIncrementalMatchHighlightInRect(rect corefoundation.CGRect) {
 
 // LocalizedNameForInputSource returns the display name for the given text input source identifier.
 func LocalizedNameForInputSource(inputSourceIdentifier obj.Object) string {
+	defer runtime.KeepAlive(inputSourceIdentifier)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTextInputContext")), objc.RegisterName("localizedNameForInputSource:"), objref.IDOf(inputSourceIdentifier))
 	if _r == 0 {
 		return ""
@@ -3312,20 +3485,25 @@ func IncludesTextListMarkers() bool {
 
 // TextListElementWithContentsMarkerAttributesTextListChildElements creates a text list element with the list elements, nesting level, and marker attributes you provide.
 func TextListElementWithContentsMarkerAttributesTextListChildElements(contents obj.Object, markerAttributes obj.Object, textList *TextList, children []*TextListElement) *TextListElement {
+	defer runtime.KeepAlive(contents)
+	defer runtime.KeepAlive(markerAttributes)
+	defer runtime.KeepAlive(textList)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTextListElement")), objc.RegisterName("textListElementWithContents:markerAttributes:textList:childElements:"), objref.IDOf(contents), objref.IDOf(markerAttributes), objref.IDOf(textList), purego.SliceToNSArray(children, func(_v *TextListElement) objc.ID { return objref.IDOf(_v) }))
 	return TextListElementFromID(_r)
 }
 
 // TextListElementWithChildElementsTextListNestingLevel creates a text list element with the list elements and nesting level you provide.
 func TextListElementWithChildElementsTextListNestingLevel(children []*TextListElement, textList *TextList, nestingLevel int) *TextListElement {
+	defer runtime.KeepAlive(textList)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTextListElement")), objc.RegisterName("textListElementWithChildElements:textList:nestingLevel:"), purego.SliceToNSArray(children, func(_v *TextListElement) objc.ID { return objref.IDOf(_v) }), objref.IDOf(textList), nestingLevel)
 	return TextListElementFromID(_r)
 }
 
 // ColumnTerminatorsForLocale returns the column terminators for the specified locale.
-func ColumnTerminatorsForLocale(aLocale obj.Object) obj.Object {
+func ColumnTerminatorsForLocale(aLocale obj.Object) *foundation.CharacterSet {
+	defer runtime.KeepAlive(aLocale)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTextTab")), objc.RegisterName("columnTerminatorsForLocale:"), objref.IDOf(aLocale))
-	return obj.Wrap(_r)
+	return foundation.CharacterSetFromID(_r)
 }
 
 // TextViewUsingTextLayoutManager wraps the corresponding Objective-C method.
@@ -3371,12 +3549,14 @@ func ScrollablePlainDocumentContentTextView() *ScrollView {
 
 // TintConfigurationWithPreferredColor creates a new tint configuration for the system to use when the app’s preferred accent color is in use.
 func TintConfigurationWithPreferredColor(color *Color) *TintConfiguration {
+	defer runtime.KeepAlive(color)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTintConfiguration")), objc.RegisterName("tintConfigurationWithPreferredColor:"), objref.IDOf(color))
 	return TintConfigurationFromID(_r)
 }
 
 // TintConfigurationWithFixedColor creates a new tint configuration using a specific color value.
 func TintConfigurationWithFixedColor(color *Color) *TintConfiguration {
+	defer runtime.KeepAlive(color)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTintConfiguration")), objc.RegisterName("tintConfigurationWithFixedColor:"), objref.IDOf(color))
 	return TintConfigurationFromID(_r)
 }
@@ -3400,9 +3580,9 @@ func DefaultCompletionDelay() float64 {
 }
 
 // DefaultTokenizingCharacterSet returns the default tokenizing character set.
-func DefaultTokenizingCharacterSet() obj.Object {
+func DefaultTokenizingCharacterSet() *foundation.CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTokenField")), objc.RegisterName("defaultTokenizingCharacterSet"))
-	return obj.Wrap(_r)
+	return foundation.CharacterSetFromID(_r)
 }
 
 // NSTokenFieldCellDefaultCompletionDelay returns the ns token field cell default completion delay.
@@ -3412,9 +3592,9 @@ func NSTokenFieldCellDefaultCompletionDelay() float64 {
 }
 
 // NSTokenFieldCellDefaultTokenizingCharacterSet returns the ns token field cell default tokenizing character set.
-func NSTokenFieldCellDefaultTokenizingCharacterSet() obj.Object {
+func NSTokenFieldCellDefaultTokenizingCharacterSet() *foundation.CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTokenFieldCell")), objc.RegisterName("defaultTokenizingCharacterSet"))
-	return obj.Wrap(_r)
+	return foundation.CharacterSetFromID(_r)
 }
 
 // IsAutomaticCustomizeTouchBarMenuItemEnabled reports whether the object is automatic customize touch bar menu item enabled.
@@ -3430,18 +3610,22 @@ func SetAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenu
 
 // TrackingSeparatorToolbarItemWithIdentifierSplitViewDividerIndex creates a new tracking separator toolbar item and configures it to align with the divider of the split view.
 func TrackingSeparatorToolbarItemWithIdentifierSplitViewDividerIndex(identifier obj.Object, splitView *SplitView, dividerIndex int) *TrackingSeparatorToolbarItem {
+	defer runtime.KeepAlive(identifier)
+	defer runtime.KeepAlive(splitView)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTrackingSeparatorToolbarItem")), objc.RegisterName("trackingSeparatorToolbarItemWithIdentifier:splitView:dividerIndex:"), objref.IDOf(identifier), objref.IDOf(splitView), dividerIndex)
 	return TrackingSeparatorToolbarItemFromID(_r)
 }
 
 // TreeNodeWithRepresentedObject creates and returns a tree node that represents the specified object.
 func TreeNodeWithRepresentedObject(modelObject obj.Object) *TreeNode {
+	defer runtime.KeepAlive(modelObject)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTreeNode")), objc.RegisterName("treeNodeWithRepresentedObject:"), objref.IDOf(modelObject))
 	return TreeNodeFromID(_r)
 }
 
 // PrintingAdjustmentInLayoutManagerForNominallySpacedGlyphRangePackedGlyphsCount returns the interglyph spacing in the specified range when sent to a printer.
 func PrintingAdjustmentInLayoutManagerForNominallySpacedGlyphRangePackedGlyphsCount(layoutMgr *LayoutManager, nominallySpacedGlyphsRange foundation.NSRange, packedGlyphsCount int) (result corefoundation.CGSize, packedGlyphs uint8) {
+	defer runtime.KeepAlive(layoutMgr)
 	var _out0 uint8
 	_r := objc.Send[corefoundation.CGSize](objc.ID(_class("NSTypesetter")), objc.RegisterName("printingAdjustmentInLayoutManager:forNominallySpacedGlyphRange:packedGlyphs:count:"), objref.IDOf(layoutMgr), nominallySpacedGlyphsRange, unsafe.Pointer(&_out0), packedGlyphsCount)
 	return _r, _out0
@@ -3563,6 +3747,7 @@ func MinFrameWidthWithTitleStyleMask(title string, style WindowStyleMask) float6
 
 // RemoveFrameUsingName removes the frame data stored under a given name from the application’s user defaults.
 func RemoveFrameUsingName(name obj.Object) {
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objc.ID(_class("NSWindow")), objc.RegisterName("removeFrameUsingName:"), objref.IDOf(name))
 }
 
@@ -3573,9 +3758,9 @@ func StandardWindowButtonForStyleMask(b WindowButton, styleMask WindowStyleMask)
 }
 
 // WindowNumbersWithOptions returns the window numbers for all visible windows satisfying the specified options.
-func WindowNumbersWithOptions(options WindowNumberListOptions) []obj.Object {
+func WindowNumbersWithOptions(options WindowNumberListOptions) []*foundation.Number {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSWindow")), objc.RegisterName("windowNumbersWithOptions:"), options)
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *foundation.Number { return foundation.NumberFromID(_id) })
 }
 
 // WindowNumberAtPointBelowWindowWithWindowNumber returns the number of the frontmost window that would be hit by a mouse-down at the specified screen location.
@@ -3586,6 +3771,7 @@ func WindowNumberAtPointBelowWindowWithWindowNumber(point corefoundation.CGPoint
 
 // WindowWithContentViewController creates a titled window that contains the specified content view controller.
 func WindowWithContentViewController(contentViewController *ViewController) *Window {
+	defer runtime.KeepAlive(contentViewController)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSWindow")), objc.RegisterName("windowWithContentViewController:"), objref.IDOf(contentViewController))
 	return WindowFromID(_r)
 }
@@ -3615,6 +3801,7 @@ func UserTabbingPreferenceClass() WindowUserTabbingPreference {
 
 // MenuChanged wraps the corresponding Objective-C method.
 func MenuChanged(menu *Menu) {
+	defer runtime.KeepAlive(menu)
 	objc.Send[objc.ID](objc.ID(_class("NSWindow")), objc.RegisterName("menuChanged:"), objref.IDOf(menu))
 }
 

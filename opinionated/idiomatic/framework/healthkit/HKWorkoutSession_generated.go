@@ -5,8 +5,12 @@
 package healthkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +51,27 @@ func workoutSessionAdopt(id objc.ID) *WorkoutSession {
 
 // Description returns the object's -description text.
 func (ws *WorkoutSession) Description() string {
+	defer runtime.KeepAlive(ws)
 	return rt.Description(objref.IDOf(ws))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ws *WorkoutSession) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ws)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ws), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ws *WorkoutSession) IsKind(className string) bool {
+	defer runtime.KeepAlive(ws)
 	return rt.IsKind(objref.IDOf(ws), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ws *WorkoutSession) String() string {
+	defer runtime.KeepAlive(ws)
 	return rt.Description(objref.IDOf(ws))
 }
 
@@ -72,90 +81,117 @@ func NewWorkoutSession() *WorkoutSession {
 	return workoutSessionAdopt(_id)
 }
 
+// WithDelegate sets the workout session’s delegate.
+func (ws *WorkoutSession) WithDelegate(delegate WorkoutSessionDelegate) *WorkoutSession {
+	_shim := newWorkoutSessionDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ws), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ws), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return ws
+}
+
 // Prepare prepares the workout session.
 func (ws *WorkoutSession) Prepare() {
+	defer runtime.KeepAlive(ws)
 	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("prepare"))
 }
 
 // StartActivityWithDate starts the workout session activity, and sets the start date.
-func (ws *WorkoutSession) StartActivityWithDate(date obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("startActivityWithDate:"), objref.IDOf(date))
+func (ws *WorkoutSession) StartActivityWithDate(date time.Time) {
+	defer runtime.KeepAlive(ws)
+	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("startActivityWithDate:"), rt.TimeToNSDate(date))
 }
 
 // StopActivityWithDate stops the workout session activity, and sets the end date.
-func (ws *WorkoutSession) StopActivityWithDate(date obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("stopActivityWithDate:"), objref.IDOf(date))
+func (ws *WorkoutSession) StopActivityWithDate(date time.Time) {
+	defer runtime.KeepAlive(ws)
+	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("stopActivityWithDate:"), rt.TimeToNSDate(date))
 }
 
 // End ends the workout session.
 func (ws *WorkoutSession) End() {
+	defer runtime.KeepAlive(ws)
 	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("end"))
 }
 
 // Pause pauses the workout session.
 func (ws *WorkoutSession) Pause() {
+	defer runtime.KeepAlive(ws)
 	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("pause"))
 }
 
 // Resume resumes the workout session.
 func (ws *WorkoutSession) Resume() {
+	defer runtime.KeepAlive(ws)
 	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("resume"))
 }
 
 // BeginNewActivityWithConfigurationDateMetadata begins a new workout activity in the workout session.
-func (ws *WorkoutSession) BeginNewActivityWithConfigurationDateMetadata(workoutConfiguration *WorkoutConfiguration, date obj.Object, metadata obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("beginNewActivityWithConfiguration:date:metadata:"), objref.IDOf(workoutConfiguration), objref.IDOf(date), objref.IDOf(metadata))
+func (ws *WorkoutSession) BeginNewActivityWithConfigurationDateMetadata(workoutConfiguration *WorkoutConfiguration, date time.Time, metadata map[string]obj.Object) {
+	defer runtime.KeepAlive(ws)
+	defer runtime.KeepAlive(workoutConfiguration)
+	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("beginNewActivityWithConfiguration:date:metadata:"), objref.IDOf(workoutConfiguration), rt.TimeToNSDate(date), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // EndCurrentActivityOnDate ends the current workout activity.
-func (ws *WorkoutSession) EndCurrentActivityOnDate(date obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("endCurrentActivityOnDate:"), objref.IDOf(date))
+func (ws *WorkoutSession) EndCurrentActivityOnDate(date time.Time) {
+	defer runtime.KeepAlive(ws)
+	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("endCurrentActivityOnDate:"), rt.TimeToNSDate(date))
 }
 
 // ActivityType indicates the type of workout that will be performed during the session.
 func (ws *WorkoutSession) ActivityType() WorkoutActivityType {
+	defer runtime.KeepAlive(ws)
 	_r := objc.Send[WorkoutActivityType](objref.IDOf(ws), objc.RegisterName("activityType"))
 	return _r
 }
 
 // LocationType indicates the type of location (indoors vs. outdoors) where the workout will take place. Knowing the location type allows for more accurate measurements and better performance.
 func (ws *WorkoutSession) LocationType() WorkoutSessionLocationType {
+	defer runtime.KeepAlive(ws)
 	_r := objc.Send[WorkoutSessionLocationType](objref.IDOf(ws), objc.RegisterName("locationType"))
 	return _r
 }
 
 // WorkoutConfiguration returns the configuration object describing the workout. This returns a copy of the configuration passed when creating the HKWorkoutSession. Changes made to the returned object have no impact on the HKWorkoutSession.
 func (ws *WorkoutSession) WorkoutConfiguration() *WorkoutConfiguration {
+	defer runtime.KeepAlive(ws)
 	_r := objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("workoutConfiguration"))
 	return WorkoutConfigurationFromID(_r)
 }
 
 // State indicates the current state of the workout session. Each time this value is updated, the delegate method workoutSession:didChangeToState:fromState:date: will be called.
 func (ws *WorkoutSession) State() WorkoutSessionState {
+	defer runtime.KeepAlive(ws)
 	_r := objc.Send[WorkoutSessionState](objref.IDOf(ws), objc.RegisterName("state"))
 	return _r
 }
 
 // Type indicates the type of the workout session. A workout session created using an initializer will be primary, while a session retrieved with the `HKHealthStore` `workoutSessionMirroringStartHandler` property will be mirrored.
 func (ws *WorkoutSession) Type() WorkoutSessionType {
+	defer runtime.KeepAlive(ws)
 	_r := objc.Send[WorkoutSessionType](objref.IDOf(ws), objc.RegisterName("type"))
 	return _r
 }
 
 // StartDate indicates the date when the workout session started running. This value is nil when a workout session is initialized. It is set when the workout session state changes to HKWorkoutSessionStateRunning.
-func (ws *WorkoutSession) StartDate() obj.Object {
+func (ws *WorkoutSession) StartDate() time.Time {
+	defer runtime.KeepAlive(ws)
 	_r := objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // EndDate indicates the date when the workout session stopped. This value is nil when a workout session is initialized. It is set when the workout session state changes to HKWorkoutSessionStateStopped.
-func (ws *WorkoutSession) EndDate() obj.Object {
+func (ws *WorkoutSession) EndDate() time.Time {
+	defer runtime.KeepAlive(ws)
 	_r := objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("endDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // CurrentActivity returns the current workout activity. This returns a copy of the session's current workout activity. It will return a copy of the main workout activity if no new activity has begun. Changes made to the returned object have no impact on the HKWorkoutSession.
 func (ws *WorkoutSession) CurrentActivity() *WorkoutActivity {
+	defer runtime.KeepAlive(ws)
 	_r := objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("currentActivity"))
 	return WorkoutActivityFromID(_r)
 }

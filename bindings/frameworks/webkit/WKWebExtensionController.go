@@ -139,11 +139,11 @@ func (o *WKWebExtensionController) ExtensionContextForExtension(extension *WKWeb
 }
 
 // Returns a loaded extension context matching the specified URL.
-func (o *WKWebExtensionController) ExtensionContextForURL(uRL *foundation.NSURL) *WKWebExtensionContext {
+func (o *WKWebExtensionController) ExtensionContextForURL(url *foundation.NSURL) *WKWebExtensionContext {
 	var _mainthread0 *WKWebExtensionContext
 	purego.Main(func() {
 		_mainthread0 = func() *WKWebExtensionContext {
-			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionControllerSelExtensionContextForURL, uRL.Ptr())
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionControllerSelExtensionContextForURL, url.Ptr())
 			if _ret != 0 {
 				_ret.Send(objc.RegisterName("retain"))
 			}

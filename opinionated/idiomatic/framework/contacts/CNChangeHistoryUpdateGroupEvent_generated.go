@@ -5,6 +5,8 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewChangeHistoryUpdateGroupEvent() *ChangeHistoryUpdateGroupEvent {
 
 // Group returns the group.
 func (chuge *ChangeHistoryUpdateGroupEvent) Group() *Group {
+	defer runtime.KeepAlive(chuge)
 	_r := objc.Send[objc.ID](objref.IDOf(chuge), objc.RegisterName("group"))
 	return GroupFromID(_r)
 }

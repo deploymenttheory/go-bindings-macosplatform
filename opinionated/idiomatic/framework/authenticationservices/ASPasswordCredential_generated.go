@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func passwordCredentialAdopt(id objc.ID) *PasswordCredential {
 
 // Description returns the object's -description text.
 func (pc *PasswordCredential) Description() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pc *PasswordCredential) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pc *PasswordCredential) IsKind(className string) bool {
+	defer runtime.KeepAlive(pc)
 	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pc *PasswordCredential) String() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
@@ -75,6 +82,7 @@ func NewPasswordCredentialWithUserPassword(user string, password string) *Passwo
 
 // User returns the user name of this credential.
 func (pc *PasswordCredential) User() string {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("user"))
 	if _r == 0 {
 		return ""
@@ -84,6 +92,7 @@ func (pc *PasswordCredential) User() string {
 
 // Password returns the password of this credential.
 func (pc *PasswordCredential) Password() string {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("password"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func rendererAdopt(id objc.ID) *Renderer {
 
 // Description returns the object's -description text.
 func (r *Renderer) Description() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (r *Renderer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (r *Renderer) IsKind(className string) bool {
+	defer runtime.KeepAlive(r)
 	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (r *Renderer) String() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
@@ -74,6 +81,7 @@ func NewRenderer() *Renderer {
 
 // WithScene sets the scene this renderer will draw into the Metal command buffer.
 func (r *Renderer) WithScene(scene *Scene) *Renderer {
+	defer runtime.KeepAlive(scene)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setScene:"), objref.IDOf(scene))
 	return r
 }
@@ -122,53 +130,62 @@ func (r *Renderer) WithShowsFields(showsFields bool) *Renderer {
 
 // UpdateAtTime update the scene at the specified system time.
 func (r *Renderer) UpdateAtTime(currentTime float64) {
+	defer runtime.KeepAlive(r)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("updateAtTime:"), currentTime)
 }
 
 // Scene returns the currently presented scene, otherwise nil. If in a transition, the 'incoming' scene is returned.
 func (r *Renderer) Scene() *Scene {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("scene"))
 	return SceneFromID(_r)
 }
 
 // IgnoresSiblingOrder reports whether ignores sibling and traversal order to sort the rendered contents of a scene into the most efficient batching possible. This will require zPosition to be used in the scenes to properly guarantee elements are in front or behind each other. This defaults to false, meaning that sibling order overrides efficiency heuristics in the rendering of the scenes in the view. Setting this to true for a complex scene may substantially increase performance, but care must be taken as only zPosition determines render order before the efficiency heuristics are used.
 func (r *Renderer) IgnoresSiblingOrder() bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("ignoresSiblingOrder"))
 	return _r
 }
 
 // ShouldCullNonVisibleNodes reports whether a boolean that indicated whether non-visible nodes should be automatically culled when rendering.
 func (r *Renderer) ShouldCullNonVisibleNodes() bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("shouldCullNonVisibleNodes"))
 	return _r
 }
 
 // ShowsDrawCount reports whether toggles display of performance stats when rendering. All default to false.
 func (r *Renderer) ShowsDrawCount() bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("showsDrawCount"))
 	return _r
 }
 
 // ShowsNodeCount wraps the corresponding Objective-C method.
 func (r *Renderer) ShowsNodeCount() bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("showsNodeCount"))
 	return _r
 }
 
 // ShowsQuadCount wraps the corresponding Objective-C method.
 func (r *Renderer) ShowsQuadCount() bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("showsQuadCount"))
 	return _r
 }
 
 // ShowsPhysics wraps the corresponding Objective-C method.
 func (r *Renderer) ShowsPhysics() bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("showsPhysics"))
 	return _r
 }
 
 // ShowsFields wraps the corresponding Objective-C method.
 func (r *Renderer) ShowsFields() bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("showsFields"))
 	return _r
 }

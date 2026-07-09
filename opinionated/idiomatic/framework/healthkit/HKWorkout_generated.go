@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,15 @@ func NewWorkout() *Workout {
 
 // StatisticsForType returns the workout’s statistics for the provided quantity type.
 func (w *Workout) StatisticsForType(quantityType *QuantityType) *Statistics {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(quantityType)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("statisticsForType:"), objref.IDOf(quantityType))
 	return StatisticsFromID(_r)
 }
 
 // WorkoutActivityType represents the activity that the user was performing during a workout
 func (w *Workout) WorkoutActivityType() WorkoutActivityType {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[WorkoutActivityType](objref.IDOf(w), objc.RegisterName("workoutActivityType"))
 	return _r
 }
@@ -68,6 +73,7 @@ func (w *Workout) WorkoutActivityType() WorkoutActivityType {
 //
 // WorkoutEvents returns the collection as a Go slice.
 func (w *Workout) WorkoutEvents() []*WorkoutEvent {
+	defer runtime.KeepAlive(w)
 	_arr := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("workoutEvents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WorkoutEvent { return WorkoutEventFromID(_id) })
 }
@@ -76,42 +82,49 @@ func (w *Workout) WorkoutEvents() []*WorkoutEvent {
 //
 // WorkoutActivities returns the collection as a Go slice.
 func (w *Workout) WorkoutActivities() []*WorkoutActivity {
+	defer runtime.KeepAlive(w)
 	_arr := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("workoutActivities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WorkoutActivity { return WorkoutActivityFromID(_id) })
 }
 
 // Duration returns the length of time that a workout was recording The duration is derived from the start and end dates of the workout and takes into account periods that the workout was paused. Periods that the workout was paused are based off of the workoutEvents property.
 func (w *Workout) Duration() float64 {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[float64](objref.IDOf(w), objc.RegisterName("duration"))
 	return _r
 }
 
 // TotalEnergyBurned returns the amount of energy that was burned during a workout This metric should represent the total active energy burned during the course of the workout. It should be a quantity with a unit representing energy.
 func (w *Workout) TotalEnergyBurned() *Quantity {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("totalEnergyBurned"))
 	return QuantityFromID(_r)
 }
 
 // TotalDistance returns the total distance that was traveled during a workout This metric should represent the total distance traveled during the course of the workout. It should be a quantity with a unit representing length.
 func (w *Workout) TotalDistance() *Quantity {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("totalDistance"))
 	return QuantityFromID(_r)
 }
 
 // TotalSwimmingStrokeCount returns the total count of swimming strokes that was accumulated during a workout This metric should represent the total count of swimming strokes accumulated during the course of the workout. It should be a quantity with a unit representing count.
 func (w *Workout) TotalSwimmingStrokeCount() *Quantity {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("totalSwimmingStrokeCount"))
 	return QuantityFromID(_r)
 }
 
 // TotalFlightsClimbed returns the total count of flights climbed during a workout This metric should represent the total count of flights accumulated during the course of the workout. It should be a quantity with a unit representing count.
 func (w *Workout) TotalFlightsClimbed() *Quantity {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("totalFlightsClimbed"))
 	return QuantityFromID(_r)
 }
 
 // AllStatistics returns a dictionary of statistics per quantity type during the workout This dictionary will contain HKStatistics objects containing the statistics by quantity sample type for all of the samples that have been added to the workout.
 func (w *Workout) AllStatistics() obj.Object {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("allStatistics"))
 	return obj.Wrap(_r)
 }

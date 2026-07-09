@@ -5,6 +5,8 @@
 package quicklookui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func previewViewAdopt(id objc.ID) *PreviewView {
 
 // Description returns the object's -description text.
 func (pv *PreviewView) Description() string {
+	defer runtime.KeepAlive(pv)
 	return rt.Description(objref.IDOf(pv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pv *PreviewView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pv *PreviewView) IsKind(className string) bool {
+	defer runtime.KeepAlive(pv)
 	return rt.IsKind(objref.IDOf(pv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pv *PreviewView) String() string {
+	defer runtime.KeepAlive(pv)
 	return rt.Description(objref.IDOf(pv))
 }
 
@@ -95,6 +102,7 @@ func NewPreviewViewWithFrame(frame corefoundation.CGRect) *PreviewView {
 
 // WithDisplayState sets the current display state of the previewItem.
 func (pv *PreviewView) WithDisplayState(displayState obj.Object) *PreviewView {
+	defer runtime.KeepAlive(displayState)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("setDisplayState:"), objref.IDOf(displayState))
 	})
@@ -119,6 +127,7 @@ func (pv *PreviewView) WithAutostarts(autostarts bool) *PreviewView {
 
 // RefreshPreviewItem updates the preview to display the currently previewed item.
 func (pv *PreviewView) RefreshPreviewItem() {
+	defer runtime.KeepAlive(pv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("refreshPreviewItem"))
 	})
@@ -127,6 +136,7 @@ func (pv *PreviewView) RefreshPreviewItem() {
 
 // Close closes the view, releasing the current preview item.
 func (pv *PreviewView) Close() {
+	defer runtime.KeepAlive(pv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("close"))
 	})
@@ -135,6 +145,7 @@ func (pv *PreviewView) Close() {
 
 // DisplayState returns the current display state of the <doc://com.apple.documentation/documentation/quicklookui/qlpreviewview/1504747-previewitem>. This property is an opaque object that Quick Look uses to get and set the current display state of the preview. The display state could be, for example, the currently displayed page, the zoom factor on an image, or the position in a movie. You can use this property to get and save the current display state of the preview before switching to another. This saving allows you to restore a preview later on when the user switches back to it.
 func (pv *PreviewView) DisplayState() obj.Object {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -148,6 +159,7 @@ func (pv *PreviewView) DisplayState() obj.Object {
 
 // ShouldCloseWithWindow reports whether a Boolean value that determines whether the preview should close when its window closes. The default value of this property is <doc://com.apple.documentation/documentation/objectivec/yes>, which means that the preview automatically closes when its window closes. If you set this property to <doc://com.apple.documentation/documentation/objectivec/no>, close the preview by calling the “QuickLookUI/QLPreviewView/close“ method when finished with it. Once you close a “QuickLookUI/QLPreviewView“, it won’t accept any more preview items.
 func (pv *PreviewView) ShouldCloseWithWindow() bool {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -161,6 +173,7 @@ func (pv *PreviewView) ShouldCloseWithWindow() bool {
 
 // Autostarts reports whether a Boolean value that determines whether the preview starts automatically. Set this property to allow previews of movie files to start playback automatically when displayed.
 func (pv *PreviewView) Autostarts() bool {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

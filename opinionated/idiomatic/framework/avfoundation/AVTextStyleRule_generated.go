@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,47 +49,54 @@ func textStyleRuleAdopt(id objc.ID) *TextStyleRule {
 
 // Description returns the object's -description text.
 func (tsr *TextStyleRule) Description() string {
+	defer runtime.KeepAlive(tsr)
 	return rt.Description(objref.IDOf(tsr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tsr *TextStyleRule) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tsr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tsr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tsr *TextStyleRule) IsKind(className string) bool {
+	defer runtime.KeepAlive(tsr)
 	return rt.IsKind(objref.IDOf(tsr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tsr *TextStyleRule) String() string {
+	defer runtime.KeepAlive(tsr)
 	return rt.Description(objref.IDOf(tsr))
 }
 
 // NewTextStyleRuleWithTextMarkupAttributes creates a text style rule object with the specified style attributes.
-func NewTextStyleRuleWithTextMarkupAttributes(textMarkupAttributes obj.Object) *TextStyleRule {
+func NewTextStyleRuleWithTextMarkupAttributes(textMarkupAttributes map[string]obj.Object) *TextStyleRule {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVTextStyleRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextMarkupAttributes:"), objref.IDOf(textMarkupAttributes))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextMarkupAttributes:"), rt.MapToDict(textMarkupAttributes, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return textStyleRuleAdopt(_id)
 }
 
 // NewTextStyleRuleWithTextMarkupAttributesTextSelector creates a text style rule object with the specified style attributes and text range information.
-func NewTextStyleRuleWithTextMarkupAttributesTextSelector(textMarkupAttributes obj.Object, textSelector string) *TextStyleRule {
+func NewTextStyleRuleWithTextMarkupAttributesTextSelector(textMarkupAttributes map[string]obj.Object, textSelector string) *TextStyleRule {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVTextStyleRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextMarkupAttributes:textSelector:"), objref.IDOf(textMarkupAttributes), purego.NSString(textSelector))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextMarkupAttributes:textSelector:"), rt.MapToDict(textMarkupAttributes, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(textSelector))
 	return textStyleRuleAdopt(_id)
 }
 
 // TextMarkupAttributes returns an NSDictionary with keys representing text style attributes that are specifiable in text markup. Eligible keys and the expected types of their corresponding values are defined in <CoreMedia/CMTextMarkup.h>.
-func (tsr *TextStyleRule) TextMarkupAttributes() obj.Object {
+func (tsr *TextStyleRule) TextMarkupAttributes() map[string]obj.Object {
+	defer runtime.KeepAlive(tsr)
 	_r := objc.Send[objc.ID](objref.IDOf(tsr), objc.RegisterName("textMarkupAttributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // TextSelector returns a string that identifies the range or ranges of text to which the attributes should be applied. A value of nil indicates that the textMarkupAttributes should be applied as default styles for all text unless overridden by content markup or other applicable text selectors.
 func (tsr *TextStyleRule) TextSelector() string {
+	defer runtime.KeepAlive(tsr)
 	_r := objc.Send[objc.ID](objref.IDOf(tsr), objc.RegisterName("textSelector"))
 	if _r == 0 {
 		return ""

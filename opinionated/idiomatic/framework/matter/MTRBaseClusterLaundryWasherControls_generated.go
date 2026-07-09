@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -51,6 +52,9 @@ func mTRBaseClusterLaundryWasherControlsAdopt(id objc.ID) *MTRBaseClusterLaundry
 
 // NewMTRBaseClusterLaundryWasherControlsWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterLaundryWasherControlsWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterLaundryWasherControls {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterLaundryWasherControls")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterLaundryWasherControlsAdopt(_id)
@@ -60,6 +64,7 @@ func NewMTRBaseClusterLaundryWasherControlsWithDeviceEndpointIDQueue(device *MTR
 //
 // ReadAttributeSpinSpeedsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeSpinSpeedsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -85,6 +90,8 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeSpinSpeedsWithCo
 //
 // SubscribeAttributeSpinSpeedsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeSpinSpeedsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -110,6 +117,7 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeSpinSpeedsW
 //
 // ReadAttributeSpinSpeedCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeSpinSpeedCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -135,6 +143,8 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeSpinSpeedCurrent
 //
 // SubscribeAttributeSpinSpeedCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeSpinSpeedCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -160,6 +170,7 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeSpinSpeedCu
 //
 // ReadAttributeNumberOfRinsesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeNumberOfRinsesWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -185,6 +196,8 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeNumberOfRinsesWi
 //
 // SubscribeAttributeNumberOfRinsesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeNumberOfRinsesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -210,6 +223,7 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeNumberOfRin
 //
 // ReadAttributeSupportedRinsesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeSupportedRinsesWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -235,6 +249,8 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeSupportedRinsesW
 //
 // SubscribeAttributeSupportedRinsesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeSupportedRinsesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -260,6 +276,7 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeSupportedRi
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -285,6 +302,8 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeGeneratedCommand
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -310,6 +329,7 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeGeneratedCo
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -335,6 +355,8 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeAcceptedCommandL
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -360,6 +382,7 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeAcceptedCom
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -385,6 +408,8 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeAttributeListWit
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -410,6 +435,7 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeAttributeLi
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -435,6 +461,8 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeFeatureMapWithCo
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -460,6 +488,7 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeFeatureMapW
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -485,6 +514,8 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeClusterRevisionW
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

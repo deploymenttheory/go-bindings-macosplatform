@@ -5,6 +5,7 @@
 package avfaudio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func audioUnitComponentManagerAdopt(id objc.ID) *AudioUnitComponentManager {
 
 // Description returns the object's -description text.
 func (aucm *AudioUnitComponentManager) Description() string {
+	defer runtime.KeepAlive(aucm)
 	return rt.Description(objref.IDOf(aucm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aucm *AudioUnitComponentManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aucm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aucm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aucm *AudioUnitComponentManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(aucm)
 	return rt.IsKind(objref.IDOf(aucm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aucm *AudioUnitComponentManager) String() string {
+	defer runtime.KeepAlive(aucm)
 	return rt.Description(objref.IDOf(aucm))
 }
 
@@ -76,12 +82,15 @@ func NewAudioUnitComponentManager() *AudioUnitComponentManager {
 
 // ComponentsMatchingPredicate gets an array of audio component objects that match the search predicate.
 func (aucm *AudioUnitComponentManager) ComponentsMatchingPredicate(predicate obj.Object) []*AudioUnitComponent {
+	defer runtime.KeepAlive(aucm)
+	defer runtime.KeepAlive(predicate)
 	_r := objc.Send[objc.ID](objref.IDOf(aucm), objc.RegisterName("componentsMatchingPredicate:"), objref.IDOf(predicate))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *AudioUnitComponent { return AudioUnitComponentFromID(_id) })
 }
 
 // ComponentsPassingTest gets an array of audio components that pass the block method.
 func (aucm *AudioUnitComponentManager) ComponentsPassingTest(testHandler func(obj.Object, *bool) bool) []*AudioUnitComponent {
+	defer runtime.KeepAlive(aucm)
 	_r := objc.Send[objc.ID](objref.IDOf(aucm), objc.RegisterName("componentsPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) bool {
 		return testHandler(obj.Wrap(_b0), (*bool)(_b1))
 	}))
@@ -90,6 +99,8 @@ func (aucm *AudioUnitComponentManager) ComponentsPassingTest(testHandler func(ob
 
 // ComponentsMatchingDescription gets an array of audio component objects that match the description.
 func (aucm *AudioUnitComponentManager) ComponentsMatchingDescription(desc obj.Object) []*AudioUnitComponent {
+	defer runtime.KeepAlive(aucm)
+	defer runtime.KeepAlive(desc)
 	_r := objc.Send[objc.ID](objref.IDOf(aucm), objc.RegisterName("componentsMatchingDescription:"), objref.IDOf(desc))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *AudioUnitComponent { return AudioUnitComponentFromID(_id) })
 }
@@ -98,6 +109,7 @@ func (aucm *AudioUnitComponentManager) ComponentsMatchingDescription(desc obj.Ob
 //
 // TagNames returns the collection as a Go slice.
 func (aucm *AudioUnitComponentManager) TagNames() []string {
+	defer runtime.KeepAlive(aucm)
 	_arr := objc.Send[objc.ID](objref.IDOf(aucm), objc.RegisterName("tagNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -106,6 +118,7 @@ func (aucm *AudioUnitComponentManager) TagNames() []string {
 //
 // StandardLocalizedTagNames returns the collection as a Go slice.
 func (aucm *AudioUnitComponentManager) StandardLocalizedTagNames() []string {
+	defer runtime.KeepAlive(aucm)
 	_arr := objc.Send[objc.ID](objref.IDOf(aucm), objc.RegisterName("standardLocalizedTagNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

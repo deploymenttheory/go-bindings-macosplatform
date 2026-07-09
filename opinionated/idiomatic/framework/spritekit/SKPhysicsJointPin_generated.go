@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -83,42 +85,49 @@ func (pjp *PhysicsJointPin) WithRotationSpeed(rotationSpeed float64) *PhysicsJoi
 
 // WithBodyA sets the first body connected by the joint.
 func (pjp *PhysicsJointPin) WithBodyA(bodyA *PhysicsBody) *PhysicsJointPin {
+	defer runtime.KeepAlive(bodyA)
 	objc.Send[objc.ID](objref.IDOf(pjp), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
 	return pjp
 }
 
 // WithBodyB sets the second body connected by the joint.
 func (pjp *PhysicsJointPin) WithBodyB(bodyB *PhysicsBody) *PhysicsJointPin {
+	defer runtime.KeepAlive(bodyB)
 	objc.Send[objc.ID](objref.IDOf(pjp), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
 	return pjp
 }
 
 // ShouldEnableLimits wraps the corresponding Objective-C method.
 func (pjp *PhysicsJointPin) ShouldEnableLimits() bool {
+	defer runtime.KeepAlive(pjp)
 	_r := objc.Send[bool](objref.IDOf(pjp), objc.RegisterName("shouldEnableLimits"))
 	return _r
 }
 
 // LowerAngleLimit returns the lower angle limit.
 func (pjp *PhysicsJointPin) LowerAngleLimit() float64 {
+	defer runtime.KeepAlive(pjp)
 	_r := objc.Send[float64](objref.IDOf(pjp), objc.RegisterName("lowerAngleLimit"))
 	return _r
 }
 
 // UpperAngleLimit returns the upper angle limit.
 func (pjp *PhysicsJointPin) UpperAngleLimit() float64 {
+	defer runtime.KeepAlive(pjp)
 	_r := objc.Send[float64](objref.IDOf(pjp), objc.RegisterName("upperAngleLimit"))
 	return _r
 }
 
 // FrictionTorque returns the friction torque.
 func (pjp *PhysicsJointPin) FrictionTorque() float64 {
+	defer runtime.KeepAlive(pjp)
 	_r := objc.Send[float64](objref.IDOf(pjp), objc.RegisterName("frictionTorque"))
 	return _r
 }
 
 // RotationSpeed returns the rotation speed.
 func (pjp *PhysicsJointPin) RotationSpeed() float64 {
+	defer runtime.KeepAlive(pjp)
 	_r := objc.Send[float64](objref.IDOf(pjp), objc.RegisterName("rotationSpeed"))
 	return _r
 }

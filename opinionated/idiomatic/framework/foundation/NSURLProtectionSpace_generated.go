@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func uRLProtectionSpaceAdopt(id objc.ID) *URLProtectionSpace {
 
 // Description returns the object's -description text.
 func (ups *URLProtectionSpace) Description() string {
+	defer runtime.KeepAlive(ups)
 	return rt.Description(objref.IDOf(ups))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ups *URLProtectionSpace) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ups)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ups), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ups *URLProtectionSpace) IsKind(className string) bool {
+	defer runtime.KeepAlive(ups)
 	return rt.IsKind(objref.IDOf(ups), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ups *URLProtectionSpace) String() string {
+	defer runtime.KeepAlive(ups)
 	return rt.Description(objref.IDOf(ups))
 }
 
@@ -89,13 +95,14 @@ func (ups *URLProtectionSpace) WithObservationInfo(observationInfo unsafe.Pointe
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ups *URLProtectionSpace) WithScriptingProperties(scriptingProperties obj.Object) *URLProtectionSpace {
-	objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ups *URLProtectionSpace) WithScriptingProperties(scriptingProperties map[string]obj.Object) *URLProtectionSpace {
+	objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ups
 }
 
 // Realm get the authentication realm for which the protection space that needs authentication This is generally only available for http authentication, and may be nil otherwise.
 func (ups *URLProtectionSpace) Realm() string {
+	defer runtime.KeepAlive(ups)
 	_r := objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("realm"))
 	if _r == 0 {
 		return ""
@@ -105,18 +112,21 @@ func (ups *URLProtectionSpace) Realm() string {
 
 // ReceivesCredentialSecurely reports whether determine if the password for this protection space can be sent securely
 func (ups *URLProtectionSpace) ReceivesCredentialSecurely() bool {
+	defer runtime.KeepAlive(ups)
 	_r := objc.Send[bool](objref.IDOf(ups), objc.RegisterName("receivesCredentialSecurely"))
 	return _r
 }
 
 // IsProxy reports whether determine if this authenticating protection space is a proxy server
 func (ups *URLProtectionSpace) IsProxy() bool {
+	defer runtime.KeepAlive(ups)
 	_r := objc.Send[bool](objref.IDOf(ups), objc.RegisterName("isProxy"))
 	return _r
 }
 
 // Host get the proxy host if this is a proxy authentication, or the host from the URL.
 func (ups *URLProtectionSpace) Host() string {
+	defer runtime.KeepAlive(ups)
 	_r := objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("host"))
 	if _r == 0 {
 		return ""
@@ -126,12 +136,14 @@ func (ups *URLProtectionSpace) Host() string {
 
 // Port get the proxy port if this is a proxy authentication, or the port from the URL.
 func (ups *URLProtectionSpace) Port() int {
+	defer runtime.KeepAlive(ups)
 	_r := objc.Send[int](objref.IDOf(ups), objc.RegisterName("port"))
 	return _r
 }
 
 // ProxyType get the type of this protection space, if a proxy
 func (ups *URLProtectionSpace) ProxyType() string {
+	defer runtime.KeepAlive(ups)
 	_r := objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("proxyType"))
 	if _r == 0 {
 		return ""
@@ -141,6 +153,7 @@ func (ups *URLProtectionSpace) ProxyType() string {
 
 // Protocol get the protocol of this protection space, if not a proxy
 func (ups *URLProtectionSpace) Protocol() string {
+	defer runtime.KeepAlive(ups)
 	_r := objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("protocol"))
 	if _r == 0 {
 		return ""
@@ -150,6 +163,7 @@ func (ups *URLProtectionSpace) Protocol() string {
 
 // AuthenticationMethod get the authentication method to be used for this protection space
 func (ups *URLProtectionSpace) AuthenticationMethod() string {
+	defer runtime.KeepAlive(ups)
 	_r := objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("authenticationMethod"))
 	if _r == 0 {
 		return ""
@@ -160,13 +174,15 @@ func (ups *URLProtectionSpace) AuthenticationMethod() string {
 // DistinguishedNames returns the distinguished names.
 //
 // DistinguishedNames returns the collection as a Go slice.
-func (ups *URLProtectionSpace) DistinguishedNames() []*Data {
+func (ups *URLProtectionSpace) DistinguishedNames() [][]byte {
+	defer runtime.KeepAlive(ups)
 	_arr := objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("distinguishedNames"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Data { return DataFromID(_id) })
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) []byte { return rt.NSDataToBytes(_id) })
 }
 
 // ServerTrust returns the server trust.
 func (ups *URLProtectionSpace) ServerTrust() obj.Object {
+	defer runtime.KeepAlive(ups)
 	_r := objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("serverTrust"))
 	return obj.Wrap(_r)
 }

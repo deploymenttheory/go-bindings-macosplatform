@@ -5,6 +5,8 @@
 package multipeerconnectivity
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,56 +49,67 @@ func nearbyServiceAdvertiserAdopt(id objc.ID) *NearbyServiceAdvertiser {
 
 // Description returns the object's -description text.
 func (nsa *NearbyServiceAdvertiser) Description() string {
+	defer runtime.KeepAlive(nsa)
 	return rt.Description(objref.IDOf(nsa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nsa *NearbyServiceAdvertiser) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nsa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nsa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nsa *NearbyServiceAdvertiser) IsKind(className string) bool {
+	defer runtime.KeepAlive(nsa)
 	return rt.IsKind(objref.IDOf(nsa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nsa *NearbyServiceAdvertiser) String() string {
+	defer runtime.KeepAlive(nsa)
 	return rt.Description(objref.IDOf(nsa))
 }
 
 // NewNearbyServiceAdvertiserWithPeerDiscoveryInfoServiceType initializes an advertiser object.
-func NewNearbyServiceAdvertiserWithPeerDiscoveryInfoServiceType(myPeerID *PeerID, info obj.Object, serviceType string) *NearbyServiceAdvertiser {
+func NewNearbyServiceAdvertiserWithPeerDiscoveryInfoServiceType(myPeerID *PeerID, info map[string]string, serviceType string) *NearbyServiceAdvertiser {
+	defer runtime.KeepAlive(myPeerID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MCNearbyServiceAdvertiser")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPeer:discoveryInfo:serviceType:"), objref.IDOf(myPeerID), objref.IDOf(info), purego.NSString(serviceType))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPeer:discoveryInfo:serviceType:"), objref.IDOf(myPeerID), rt.MapToDict(info, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }), purego.NSString(serviceType))
 	return nearbyServiceAdvertiserAdopt(_id)
 }
 
 // StartAdvertisingPeer begins advertising the service provided by a local peer.
 func (nsa *NearbyServiceAdvertiser) StartAdvertisingPeer() {
+	defer runtime.KeepAlive(nsa)
 	objc.Send[objc.ID](objref.IDOf(nsa), objc.RegisterName("startAdvertisingPeer"))
 }
 
 // StopAdvertisingPeer stops advertising the service provided by a local peer.
 func (nsa *NearbyServiceAdvertiser) StopAdvertisingPeer() {
+	defer runtime.KeepAlive(nsa)
 	objc.Send[objc.ID](objref.IDOf(nsa), objc.RegisterName("stopAdvertisingPeer"))
 }
 
 // MyPeerID returns the my peer ID.
 func (nsa *NearbyServiceAdvertiser) MyPeerID() *PeerID {
+	defer runtime.KeepAlive(nsa)
 	_r := objc.Send[objc.ID](objref.IDOf(nsa), objc.RegisterName("myPeerID"))
 	return PeerIDFromID(_r)
 }
 
 // DiscoveryInfo returns the discovery info.
-func (nsa *NearbyServiceAdvertiser) DiscoveryInfo() obj.Object {
+func (nsa *NearbyServiceAdvertiser) DiscoveryInfo() map[string]string {
+	defer runtime.KeepAlive(nsa)
 	_r := objc.Send[objc.ID](objref.IDOf(nsa), objc.RegisterName("discoveryInfo"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ServiceType returns the service type.
 func (nsa *NearbyServiceAdvertiser) ServiceType() string {
+	defer runtime.KeepAlive(nsa)
 	_r := objc.Send[objc.ID](objref.IDOf(nsa), objc.RegisterName("serviceType"))
 	if _r == 0 {
 		return ""

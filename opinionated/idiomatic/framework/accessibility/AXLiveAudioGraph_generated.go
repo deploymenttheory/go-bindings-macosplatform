@@ -5,6 +5,8 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func liveAudioGraphAdopt(id objc.ID) *LiveAudioGraph {
 
 // Description returns the object's -description text.
 func (lag *LiveAudioGraph) Description() string {
+	defer runtime.KeepAlive(lag)
 	return rt.Description(objref.IDOf(lag))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lag *LiveAudioGraph) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lag)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lag), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lag *LiveAudioGraph) IsKind(className string) bool {
+	defer runtime.KeepAlive(lag)
 	return rt.IsKind(objref.IDOf(lag), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lag *LiveAudioGraph) String() string {
+	defer runtime.KeepAlive(lag)
 	return rt.Description(objref.IDOf(lag))
 }
 

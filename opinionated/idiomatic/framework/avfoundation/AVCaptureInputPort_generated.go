@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func captureInputPortAdopt(id objc.ID) *CaptureInputPort {
 
 // Description returns the object's -description text.
 func (cip *CaptureInputPort) Description() string {
+	defer runtime.KeepAlive(cip)
 	return rt.Description(objref.IDOf(cip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cip *CaptureInputPort) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cip)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cip *CaptureInputPort) IsKind(className string) bool {
+	defer runtime.KeepAlive(cip)
 	return rt.IsKind(objref.IDOf(cip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cip *CaptureInputPort) String() string {
+	defer runtime.KeepAlive(cip)
 	return rt.Description(objref.IDOf(cip))
 }
 
@@ -80,30 +88,35 @@ func (cip *CaptureInputPort) WithEnabled(enabled bool) *CaptureInputPort {
 
 // Input returns the input that owns the receiver. The value of this property is an AVCaptureInput instance that owns the receiver.
 func (cip *CaptureInputPort) Input() *CaptureInput {
+	defer runtime.KeepAlive(cip)
 	_r := objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("input"))
 	return CaptureInputFromID(_r)
 }
 
 // MediaType returns the media type of the data provided by the receiver. The value of this property is a constant describing the type of media, such as AVMediaTypeVideo or AVMediaTypeAudio, provided by the receiver. Media type constants are defined in AVMediaFormat.h.
-func (cip *CaptureInputPort) MediaType() obj.Object {
+func (cip *CaptureInputPort) MediaType() *foundation.String {
+	defer runtime.KeepAlive(cip)
 	_r := objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("mediaType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // FormatDescription returns the format of the data provided by the receiver. The value of this property is a CMFormatDescription that describes the format of the media data currently provided by the receiver. Clients can be notified of changes to the format by observing the AVCaptureInputPortFormatDescriptionDidChangeNotification.
 func (cip *CaptureInputPort) FormatDescription() obj.Object {
+	defer runtime.KeepAlive(cip)
 	_r := objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("formatDescription"))
 	return obj.Wrap(_r)
 }
 
 // IsEnabled reports whether the receiver should provide data. The value of this property is a BOOL that determines whether the receiver should provide data to outputs when a session is running. Clients can set this property to fine tune which media streams from a given input will be used during capture. The default value is true.
 func (cip *CaptureInputPort) IsEnabled() bool {
+	defer runtime.KeepAlive(cip)
 	_r := objc.Send[bool](objref.IDOf(cip), objc.RegisterName("isEnabled"))
 	return _r
 }
 
 // Clock provides access to the "native" clock used by the input port. The clock is read-only.
 func (cip *CaptureInputPort) Clock() obj.Object {
+	defer runtime.KeepAlive(cip)
 	_r := objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("clock"))
 	return obj.Wrap(_r)
 }

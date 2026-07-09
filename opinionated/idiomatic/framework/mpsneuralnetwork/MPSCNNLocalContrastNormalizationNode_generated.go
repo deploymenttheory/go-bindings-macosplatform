@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,6 +47,7 @@ func cNNLocalContrastNormalizationNodeAdopt(id objc.ID) *CNNLocalContrastNormali
 
 // NewCNNLocalContrastNormalizationNodeWithSourceKernelSize creates a new CNNLocalContrastNormalizationNode.
 func NewCNNLocalContrastNormalizationNodeWithSourceKernelSize(sourceNode *NNImageNode, kernelSize int) *CNNLocalContrastNormalizationNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNLocalContrastNormalizationNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:kernelSize:"), objref.IDOf(sourceNode), kernelSize)
 	return cNNLocalContrastNormalizationNodeAdopt(_id)
@@ -52,6 +55,7 @@ func NewCNNLocalContrastNormalizationNodeWithSourceKernelSize(sourceNode *NNImag
 
 // NewCNNLocalContrastNormalizationNodeWithSource creates a new CNNLocalContrastNormalizationNode.
 func NewCNNLocalContrastNormalizationNodeWithSource(sourceNode *NNImageNode) *CNNLocalContrastNormalizationNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNLocalContrastNormalizationNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNLocalContrastNormalizationNodeAdopt(_id)
@@ -113,30 +117,35 @@ func (clcnn *CNNLocalContrastNormalizationNode) WithLabel(label string) *CNNLoca
 
 // Pm returns the pm.
 func (clcnn *CNNLocalContrastNormalizationNode) Pm() float32 {
+	defer runtime.KeepAlive(clcnn)
 	_r := objc.Send[float32](objref.IDOf(clcnn), objc.RegisterName("pm"))
 	return _r
 }
 
 // Ps returns the ps.
 func (clcnn *CNNLocalContrastNormalizationNode) Ps() float32 {
+	defer runtime.KeepAlive(clcnn)
 	_r := objc.Send[float32](objref.IDOf(clcnn), objc.RegisterName("ps"))
 	return _r
 }
 
 // P0 returns the p0.
 func (clcnn *CNNLocalContrastNormalizationNode) P0() float32 {
+	defer runtime.KeepAlive(clcnn)
 	_r := objc.Send[float32](objref.IDOf(clcnn), objc.RegisterName("p0"))
 	return _r
 }
 
 // KernelWidth returns the kernel width.
 func (clcnn *CNNLocalContrastNormalizationNode) KernelWidth() int {
+	defer runtime.KeepAlive(clcnn)
 	_r := objc.Send[int](objref.IDOf(clcnn), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
 // KernelHeight returns the kernel height.
 func (clcnn *CNNLocalContrastNormalizationNode) KernelHeight() int {
+	defer runtime.KeepAlive(clcnn)
 	_r := objc.Send[int](objref.IDOf(clcnn), objc.RegisterName("kernelHeight"))
 	return _r
 }

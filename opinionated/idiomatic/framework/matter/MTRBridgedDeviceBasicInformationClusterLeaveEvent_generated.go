@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTRBridgedDeviceBasicInformationClusterLeaveEventAdopt(id objc.ID) *MTRBrid
 
 // Description returns the object's -description text.
 func (mbdbicle *MTRBridgedDeviceBasicInformationClusterLeaveEvent) Description() string {
+	defer runtime.KeepAlive(mbdbicle)
 	return rt.Description(objref.IDOf(mbdbicle))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbdbicle *MTRBridgedDeviceBasicInformationClusterLeaveEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbdbicle)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbdbicle), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbdbicle *MTRBridgedDeviceBasicInformationClusterLeaveEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbdbicle)
 	return rt.IsKind(objref.IDOf(mbdbicle), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbdbicle *MTRBridgedDeviceBasicInformationClusterLeaveEvent) String() string {
+	defer runtime.KeepAlive(mbdbicle)
 	return rt.Description(objref.IDOf(mbdbicle))
 }
 

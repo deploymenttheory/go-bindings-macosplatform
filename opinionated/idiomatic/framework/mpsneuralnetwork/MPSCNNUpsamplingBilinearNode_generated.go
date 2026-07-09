@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func cNNUpsamplingBilinearNodeAdopt(id objc.ID) *CNNUpsamplingBilinearNode {
 
 // NewCNNUpsamplingBilinearNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY init a node representing a MPSCNNUpsamplingBilinear kernel
 func NewCNNUpsamplingBilinearNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY(sourceNode *NNImageNode, integerScaleFactorX int, integerScaleFactorY int) *CNNUpsamplingBilinearNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsamplingBilinearNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:integerScaleFactorX:integerScaleFactorY:"), objref.IDOf(sourceNode), integerScaleFactorX, integerScaleFactorY)
 	return cNNUpsamplingBilinearNodeAdopt(_id)
@@ -54,6 +57,7 @@ func NewCNNUpsamplingBilinearNodeWithSourceIntegerScaleFactorXIntegerScaleFactor
 
 // NewCNNUpsamplingBilinearNodeWithSourceIntegerScaleFactorXIntegerScaleFactorYAlignCorners init a node representing a MPSCNNUpsamplingBilinear kernel
 func NewCNNUpsamplingBilinearNodeWithSourceIntegerScaleFactorXIntegerScaleFactorYAlignCorners(sourceNode *NNImageNode, integerScaleFactorX int, integerScaleFactorY int, alignCorners bool) *CNNUpsamplingBilinearNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsamplingBilinearNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:integerScaleFactorX:integerScaleFactorY:alignCorners:"), objref.IDOf(sourceNode), integerScaleFactorX, integerScaleFactorY, alignCorners)
 	return cNNUpsamplingBilinearNodeAdopt(_id)
@@ -67,18 +71,21 @@ func (cubn *CNNUpsamplingBilinearNode) WithLabel(label string) *CNNUpsamplingBil
 
 // ScaleFactorX returns the scale factor x.
 func (cubn *CNNUpsamplingBilinearNode) ScaleFactorX() float64 {
+	defer runtime.KeepAlive(cubn)
 	_r := objc.Send[float64](objref.IDOf(cubn), objc.RegisterName("scaleFactorX"))
 	return _r
 }
 
 // ScaleFactorY returns the scale factor y.
 func (cubn *CNNUpsamplingBilinearNode) ScaleFactorY() float64 {
+	defer runtime.KeepAlive(cubn)
 	_r := objc.Send[float64](objref.IDOf(cubn), objc.RegisterName("scaleFactorY"))
 	return _r
 }
 
 // AlignCorners wraps the corresponding Objective-C method.
 func (cubn *CNNUpsamplingBilinearNode) AlignCorners() bool {
+	defer runtime.KeepAlive(cubn)
 	_r := objc.Send[bool](objref.IDOf(cubn), objc.RegisterName("alignCorners"))
 	return _r
 }

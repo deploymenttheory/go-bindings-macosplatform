@@ -5,6 +5,8 @@
 package videosubscriberaccount
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func vSAutoSignInTokenAdopt(id objc.ID) *VSAutoSignInToken {
 
 // Description returns the object's -description text.
 func (vasit *VSAutoSignInToken) Description() string {
+	defer runtime.KeepAlive(vasit)
 	return rt.Description(objref.IDOf(vasit))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vasit *VSAutoSignInToken) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vasit)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vasit), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vasit *VSAutoSignInToken) IsKind(className string) bool {
+	defer runtime.KeepAlive(vasit)
 	return rt.IsKind(objref.IDOf(vasit), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vasit *VSAutoSignInToken) String() string {
+	defer runtime.KeepAlive(vasit)
 	return rt.Description(objref.IDOf(vasit))
 }
 
@@ -74,12 +81,14 @@ func NewVSAutoSignInToken() *VSAutoSignInToken {
 
 // Authorization returns the authorization.
 func (vasit *VSAutoSignInToken) Authorization() VSAutoSignInAuthorization {
+	defer runtime.KeepAlive(vasit)
 	_r := objc.Send[VSAutoSignInAuthorization](objref.IDOf(vasit), objc.RegisterName("authorization"))
 	return _r
 }
 
 // Value returns the value.
 func (vasit *VSAutoSignInToken) Value() string {
+	defer runtime.KeepAlive(vasit)
 	_r := objc.Send[objc.ID](objref.IDOf(vasit), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""

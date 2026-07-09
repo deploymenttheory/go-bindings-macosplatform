@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func modelStructureNeuralNetworkAdopt(id objc.ID) *ModelStructureNeuralNetwork {
 
 // Description returns the object's -description text.
 func (msnn *ModelStructureNeuralNetwork) Description() string {
+	defer runtime.KeepAlive(msnn)
 	return rt.Description(objref.IDOf(msnn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msnn *ModelStructureNeuralNetwork) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msnn)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msnn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msnn *ModelStructureNeuralNetwork) IsKind(className string) bool {
+	defer runtime.KeepAlive(msnn)
 	return rt.IsKind(objref.IDOf(msnn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msnn *ModelStructureNeuralNetwork) String() string {
+	defer runtime.KeepAlive(msnn)
 	return rt.Description(objref.IDOf(msnn))
 }
 
@@ -76,6 +83,7 @@ func NewModelStructureNeuralNetwork() *ModelStructureNeuralNetwork {
 //
 // Layers returns the collection as a Go slice.
 func (msnn *ModelStructureNeuralNetwork) Layers() []*ModelStructureNeuralNetworkLayer {
+	defer runtime.KeepAlive(msnn)
 	_arr := objc.Send[objc.ID](objref.IDOf(msnn), objc.RegisterName("layers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructureNeuralNetworkLayer {
 		return ModelStructureNeuralNetworkLayerFromID(_id)

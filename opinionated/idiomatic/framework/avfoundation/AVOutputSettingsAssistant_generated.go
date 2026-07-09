@@ -5,10 +5,12 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func outputSettingsAssistantAdopt(id objc.ID) *OutputSettingsAssistant {
 
 // Description returns the object's -description text.
 func (osa *OutputSettingsAssistant) Description() string {
+	defer runtime.KeepAlive(osa)
 	return rt.Description(objref.IDOf(osa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (osa *OutputSettingsAssistant) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(osa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(osa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (osa *OutputSettingsAssistant) IsKind(className string) bool {
+	defer runtime.KeepAlive(osa)
 	return rt.IsKind(objref.IDOf(osa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (osa *OutputSettingsAssistant) String() string {
+	defer runtime.KeepAlive(osa)
 	return rt.Description(objref.IDOf(osa))
 }
 
@@ -100,31 +107,36 @@ func (osa *OutputSettingsAssistant) WithSourceVideoMinFrameDuration(sourceVideoM
 }
 
 // AudioSettings returns a dictionary of key/value pairs, as specified in AVAudioSettings.h, to be used when e.g. creating an instance of AVAssetWriterInput The value of this property may change as a result of setting a new value for the sourceAudioFormat property.
-func (osa *OutputSettingsAssistant) AudioSettings() obj.Object {
+func (osa *OutputSettingsAssistant) AudioSettings() map[string]obj.Object {
+	defer runtime.KeepAlive(osa)
 	_r := objc.Send[objc.ID](objref.IDOf(osa), objc.RegisterName("audioSettings"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // VideoSettings returns a dictionary of key/value pairs, as specified in AVVideoSettings.h, to be used when e.g. creating an instance of AVAssetWriterInput The value of this property may change as a result of setting a new value for the sourceVideoFormat property.
-func (osa *OutputSettingsAssistant) VideoSettings() obj.Object {
+func (osa *OutputSettingsAssistant) VideoSettings() map[string]obj.Object {
+	defer runtime.KeepAlive(osa)
 	_r := objc.Send[objc.ID](objref.IDOf(osa), objc.RegisterName("videoSettings"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // OutputFileType returns a UTI indicating the type of file to be written, to be used when e.g. creating an instance of AVAssetWriter Use [[UTType typeWithIdentifier:outputFileType] preferredFilenameExtension] to get a suitable file extension for a given file type.
-func (osa *OutputSettingsAssistant) OutputFileType() obj.Object {
+func (osa *OutputSettingsAssistant) OutputFileType() *foundation.String {
+	defer runtime.KeepAlive(osa)
 	_r := objc.Send[objc.ID](objref.IDOf(osa), objc.RegisterName("outputFileType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // SourceVideoAverageFrameDuration returns a CMTime describing the average frame duration (reciprocal of average frame rate) of your video data Setting this property will allow the receiver to make a more informed recommendation for the video settings that should be used.  After setting this property, you should re-query the videoSettings property to get the new recommendation. The default value is 1/30, which means that the receiver is assuming that your source video has an average frame rate of 30fps. It is an error to set this property to a value that is not positive or not numeric.  See CMTIME_IS_NUMERIC.
 func (osa *OutputSettingsAssistant) SourceVideoAverageFrameDuration() coremedia.CMTime {
+	defer runtime.KeepAlive(osa)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(osa), objc.RegisterName("sourceVideoAverageFrameDuration"))
 	return _r
 }
 
 // SourceVideoMinFrameDuration returns a CMTime describing the minimum frame duration (reciprocal of the maximum frame rate) of your video data Setting this property will allow the receiver to make a more informed recommendation for the video settings that should be used.  After setting this property, you should re-query the videoSettings property to get the new recommendation. If your source of video data is an instance of AVAssetReaderOutput, you can discover the minimum frame duration of your source asset using the AVAssetTrack.minFrameDuration property. The default value is 1/30, which means that the receiver is assuming that your source video has a maximum frame rate of 30fps. It is an error to set this property to a value that is not positive or not numeric.  See CMTIME_IS_NUMERIC.
 func (osa *OutputSettingsAssistant) SourceVideoMinFrameDuration() coremedia.CMTime {
+	defer runtime.KeepAlive(osa)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(osa), objc.RegisterName("sourceVideoMinFrameDuration"))
 	return _r
 }

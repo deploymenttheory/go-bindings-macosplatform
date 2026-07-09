@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTL4CompilerDescriptorAdopt(id objc.ID) *MTL4CompilerDescriptor {
 
 // Description returns the object's -description text.
 func (mcd *MTL4CompilerDescriptor) Description() string {
+	defer runtime.KeepAlive(mcd)
 	return rt.Description(objref.IDOf(mcd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcd *MTL4CompilerDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcd *MTL4CompilerDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcd)
 	return rt.IsKind(objref.IDOf(mcd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcd *MTL4CompilerDescriptor) String() string {
+	defer runtime.KeepAlive(mcd)
 	return rt.Description(objref.IDOf(mcd))
 }
 
@@ -80,6 +87,7 @@ func (mcd *MTL4CompilerDescriptor) WithLabel(label string) *MTL4CompilerDescript
 
 // Label returns assigns an optional descriptor label to the compiler for debugging purposes.
 func (mcd *MTL4CompilerDescriptor) Label() string {
+	defer runtime.KeepAlive(mcd)
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

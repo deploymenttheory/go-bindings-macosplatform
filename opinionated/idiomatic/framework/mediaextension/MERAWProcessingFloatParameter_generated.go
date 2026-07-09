@@ -5,6 +5,7 @@
 package mediaextension
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -93,6 +94,7 @@ func (rpfp *RAWProcessingFloatParameter) WithEnabled(enabled bool) *RAWProcessin
 
 // HasNeutralValue return value indicates whether the MERAWProcessingFloatParameter has an optional declared Neutral value. If the return value is YES and outNeutralValue is not nil, the value held by outNeutralValue will be set to the neutral value. If the return value is NO and outNeutralValue is not nil, the value held by outNeutralValue will be set to 0.
 func (rpfp *RAWProcessingFloatParameter) HasNeutralValue() (ok bool, outNeutralValue float32) {
+	defer runtime.KeepAlive(rpfp)
 	var _out0 float32
 	_r := objc.Send[bool](objref.IDOf(rpfp), objc.RegisterName("hasNeutralValue:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -100,6 +102,7 @@ func (rpfp *RAWProcessingFloatParameter) HasNeutralValue() (ok bool, outNeutralV
 
 // HasCameraValue return value indicates whether the MERAWProcessingFloatParameter has an optional declared Camera value. If the return value is YES and outCameraValue is not nil, the value held by outCameraValue will be set to the camera value. If the return value is NO and outCameraValue is not nil, the value held by outCameraValue will be set to 0.
 func (rpfp *RAWProcessingFloatParameter) HasCameraValue() (ok bool, outCameraValue float32) {
+	defer runtime.KeepAlive(rpfp)
 	var _out0 float32
 	_r := objc.Send[bool](objref.IDOf(rpfp), objc.RegisterName("hasCameraValue:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -107,18 +110,21 @@ func (rpfp *RAWProcessingFloatParameter) HasCameraValue() (ok bool, outCameraVal
 
 // MaximumValue returns the maximum value for this parameter.
 func (rpfp *RAWProcessingFloatParameter) MaximumValue() float32 {
+	defer runtime.KeepAlive(rpfp)
 	_r := objc.Send[float32](objref.IDOf(rpfp), objc.RegisterName("maximumValue"))
 	return _r
 }
 
 // MinimumValue returns the minimum value for this parameter.
 func (rpfp *RAWProcessingFloatParameter) MinimumValue() float32 {
+	defer runtime.KeepAlive(rpfp)
 	_r := objc.Send[float32](objref.IDOf(rpfp), objc.RegisterName("minimumValue"))
 	return _r
 }
 
 // CurrentValue get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
 func (rpfp *RAWProcessingFloatParameter) CurrentValue() float32 {
+	defer runtime.KeepAlive(rpfp)
 	_r := objc.Send[float32](objref.IDOf(rpfp), objc.RegisterName("currentValue"))
 	return _r
 }

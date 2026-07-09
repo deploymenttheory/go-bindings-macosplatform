@@ -5,9 +5,13 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,20 +51,22 @@ func assetReaderAudioMixOutputAdopt(id objc.ID) *AssetReaderAudioMixOutput {
 }
 
 // NewAssetReaderAudioMixOutputWithAudioTracksAudioSettings creates an object that reads mixed audio from the specified audio tracks.
-func NewAssetReaderAudioMixOutputWithAudioTracksAudioSettings(audioTracks []*AssetTrack, audioSettings obj.Object) *AssetReaderAudioMixOutput {
+func NewAssetReaderAudioMixOutputWithAudioTracksAudioSettings(audioTracks []*AssetTrack, audioSettings map[string]obj.Object) *AssetReaderAudioMixOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderAudioMixOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioTracks:audioSettings:"), purego.SliceToNSArray(audioTracks, func(_v *AssetTrack) objc.ID { return objref.IDOf(_v) }), objref.IDOf(audioSettings))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioTracks:audioSettings:"), purego.SliceToNSArray(audioTracks, func(_v *AssetTrack) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(audioSettings, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return assetReaderAudioMixOutputAdopt(_id)
 }
 
 // WithAudioMix sets the audio mix to use with this output.
 func (aramo *AssetReaderAudioMixOutput) WithAudioMix(audioMix AudioMixProvider) *AssetReaderAudioMixOutput {
+	defer runtime.KeepAlive(audioMix)
 	objc.Send[objc.ID](objref.IDOf(aramo), objc.RegisterName("setAudioMix:"), objref.IDOf(audioMix))
 	return aramo
 }
 
 // WithAudioTimePitchAlgorithm sets the processing algorithm to use for scaled audio edits.
 func (aramo *AssetReaderAudioMixOutput) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *AssetReaderAudioMixOutput {
+	defer runtime.KeepAlive(audioTimePitchAlgorithm)
 	objc.Send[objc.ID](objref.IDOf(aramo), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
 	return aramo
 }
@@ -81,26 +87,30 @@ func (aramo *AssetReaderAudioMixOutput) WithSupportsRandomAccess(supportsRandomA
 //
 // AudioTracks returns the collection as a Go slice.
 func (aramo *AssetReaderAudioMixOutput) AudioTracks() []*AssetTrack {
+	defer runtime.KeepAlive(aramo)
 	_arr := objc.Send[objc.ID](objref.IDOf(aramo), objc.RegisterName("audioTracks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetTrack { return AssetTrackFromID(_id) })
 }
 
 // AudioSettings returns the audio settings used by the receiver. The value of this property is an NSDictionary that contains values for keys from AVAudioSettings.h (linear PCM only).  A value of nil indicates that the receiver will return audio samples in a convenient uncompressed format, with sample rate and other properties determined according to the properties of the receiver's audio tracks.
-func (aramo *AssetReaderAudioMixOutput) AudioSettings() obj.Object {
+func (aramo *AssetReaderAudioMixOutput) AudioSettings() map[string]obj.Object {
+	defer runtime.KeepAlive(aramo)
 	_r := objc.Send[objc.ID](objref.IDOf(aramo), objc.RegisterName("audioSettings"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AudioMix returns the audio mix used by the receiver. The value of this property is an AVAudioMix that can be used to specify how the volume of audio samples read from each source track will change over the timeline of the source asset. This property throws an exception for any of the following reasons: - an audio mix is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown) - setting an audio mix containing a track that was not used to create the receiver - an audio mix is set containing an invalid audio time pitch algorithm
 func (aramo *AssetReaderAudioMixOutput) AudioMix() *AudioMix {
+	defer runtime.KeepAlive(aramo)
 	_r := objc.Send[objc.ID](objref.IDOf(aramo), objc.RegisterName("audioMix"))
 	return AudioMixFromID(_r)
 }
 
 // AudioTimePitchAlgorithm indicates the processing algorithm used to manage audio pitch for scaled audio edits. Constants for various time pitch algorithms, e.g. AVAudioTimePitchAlgorithmSpectral, are defined in AVAudioProcessingSettings.h.  An NSInvalidArgumentException will be raised if this property is set to a value other than the constants defined in that file. The default value is AVAudioTimePitchAlgorithmSpectral.
-func (aramo *AssetReaderAudioMixOutput) AudioTimePitchAlgorithm() obj.Object {
+func (aramo *AssetReaderAudioMixOutput) AudioTimePitchAlgorithm() *foundation.String {
+	defer runtime.KeepAlive(aramo)
 	_r := objc.Send[objc.ID](objref.IDOf(aramo), objc.RegisterName("audioTimePitchAlgorithm"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 var _ AssetReaderOutputProvider = (*AssetReaderAudioMixOutput)(nil)

@@ -5,7 +5,10 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,34 @@ func queryDescriptorAdopt(id objc.ID) *QueryDescriptor {
 
 // Description returns the object's -description text.
 func (qd *QueryDescriptor) Description() string {
+	defer runtime.KeepAlive(qd)
 	return rt.Description(objref.IDOf(qd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (qd *QueryDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(qd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(qd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (qd *QueryDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(qd)
 	return rt.IsKind(objref.IDOf(qd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (qd *QueryDescriptor) String() string {
+	defer runtime.KeepAlive(qd)
 	return rt.Description(objref.IDOf(qd))
 }
 
 // NewQueryDescriptorWithSampleTypePredicate creates a new descriptor for the data type and predicate you provided.
 func NewQueryDescriptorWithSampleTypePredicate(sampleType *SampleType, predicate obj.Object) *QueryDescriptor {
+	defer runtime.KeepAlive(sampleType)
+	defer runtime.KeepAlive(predicate)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKQueryDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleType:predicate:"), objref.IDOf(sampleType), objref.IDOf(predicate))
 	return queryDescriptorAdopt(_id)
@@ -75,12 +85,14 @@ func NewQueryDescriptorWithSampleTypePredicate(sampleType *SampleType, predicate
 
 // SampleType returns the type of sample to retrieve in an HKQuery.
 func (qd *QueryDescriptor) SampleType() *SampleType {
+	defer runtime.KeepAlive(qd)
 	_r := objc.Send[objc.ID](objref.IDOf(qd), objc.RegisterName("sampleType"))
 	return SampleTypeFromID(_r)
 }
 
 // Predicate returns the predicate which samples should match.
-func (qd *QueryDescriptor) Predicate() obj.Object {
+func (qd *QueryDescriptor) Predicate() *foundation.Predicate {
+	defer runtime.KeepAlive(qd)
 	_r := objc.Send[objc.ID](objref.IDOf(qd), objc.RegisterName("predicate"))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }

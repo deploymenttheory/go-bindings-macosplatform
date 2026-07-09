@@ -5,11 +5,13 @@
 package backgroundassets
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -50,22 +52,27 @@ func downloadManagerAdopt(id objc.ID) *DownloadManager {
 
 // Description returns the object's -description text.
 func (dm *DownloadManager) Description() string {
+	defer runtime.KeepAlive(dm)
 	return rt.Description(objref.IDOf(dm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dm *DownloadManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dm *DownloadManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(dm)
 	return rt.IsKind(objref.IDOf(dm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dm *DownloadManager) String() string {
+	defer runtime.KeepAlive(dm)
 	return rt.Description(objref.IDOf(dm))
 }
 
@@ -75,10 +82,21 @@ func NewDownloadManager() *DownloadManager {
 	return downloadManagerAdopt(_id)
 }
 
+// WithDelegate sets the download manager’s delegate.
+func (dm *DownloadManager) WithDelegate(delegate DownloadManagerDelegate) *DownloadManager {
+	_shim := newDownloadManagerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(dm), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(dm), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return dm
+}
+
 // FetchCurrentDownloads returns fetches current downloads. Fetches the current list of scheduled or in-flight downloads queued by your application or extension.
 //
 // FetchCurrentDownloads returns the collection as a Go slice.
 func (dm *DownloadManager) FetchCurrentDownloads() (result []*Download, err error) {
+	defer runtime.KeepAlive(dm)
 	var _nsErr uintptr
 	_arr := objc.Send[objc.ID](objref.IDOf(dm), objc.RegisterName("fetchCurrentDownloads:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -89,6 +107,8 @@ func (dm *DownloadManager) FetchCurrentDownloads() (result []*Download, err erro
 
 // ScheduleDownload schedules an asset download to execute in the background at a nonspecific time in the future.
 func (dm *DownloadManager) ScheduleDownload(download *Download) error {
+	defer runtime.KeepAlive(dm)
+	defer runtime.KeepAlive(download)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(dm), objc.RegisterName("scheduleDownload:error:"), objref.IDOf(download), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -99,6 +119,8 @@ func (dm *DownloadManager) ScheduleDownload(download *Download) error {
 
 // StartForegroundDownload schedules an asset download that executes immediately in the foreground.
 func (dm *DownloadManager) StartForegroundDownload(download *Download) error {
+	defer runtime.KeepAlive(dm)
+	defer runtime.KeepAlive(download)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(dm), objc.RegisterName("startForegroundDownload:error:"), objref.IDOf(download), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -109,6 +131,8 @@ func (dm *DownloadManager) StartForegroundDownload(download *Download) error {
 
 // CancelDownload cancels an asset download.
 func (dm *DownloadManager) CancelDownload(download *Download) error {
+	defer runtime.KeepAlive(dm)
+	defer runtime.KeepAlive(download)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(dm), objc.RegisterName("cancelDownload:error:"), objref.IDOf(download), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

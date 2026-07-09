@@ -5,6 +5,8 @@
 package datadetection
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewMatchPhoneNumber() *MatchPhoneNumber {
 
 // PhoneNumber returns a string that represents a phone number.
 func (mpn *MatchPhoneNumber) PhoneNumber() string {
+	defer runtime.KeepAlive(mpn)
 	_r := objc.Send[objc.ID](objref.IDOf(mpn), objc.RegisterName("phoneNumber"))
 	if _r == 0 {
 		return ""
@@ -62,6 +65,7 @@ func (mpn *MatchPhoneNumber) PhoneNumber() string {
 
 // Label returns a string that categorizes a phone number, such as Home or Work.
 func (mpn *MatchPhoneNumber) Label() string {
+	defer runtime.KeepAlive(mpn)
 	_r := objc.Send[objc.ID](objref.IDOf(mpn), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

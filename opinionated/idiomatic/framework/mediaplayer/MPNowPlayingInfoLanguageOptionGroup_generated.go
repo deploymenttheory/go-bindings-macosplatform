@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func nowPlayingInfoLanguageOptionGroupAdopt(id objc.ID) *NowPlayingInfoLanguageO
 
 // Description returns the object's -description text.
 func (npilog *NowPlayingInfoLanguageOptionGroup) Description() string {
+	defer runtime.KeepAlive(npilog)
 	return rt.Description(objref.IDOf(npilog))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (npilog *NowPlayingInfoLanguageOptionGroup) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(npilog)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(npilog), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (npilog *NowPlayingInfoLanguageOptionGroup) IsKind(className string) bool {
+	defer runtime.KeepAlive(npilog)
 	return rt.IsKind(objref.IDOf(npilog), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (npilog *NowPlayingInfoLanguageOptionGroup) String() string {
+	defer runtime.KeepAlive(npilog)
 	return rt.Description(objref.IDOf(npilog))
 }
 
 // NewNowPlayingInfoLanguageOptionGroupWithLanguageOptionsDefaultLanguageOptionAllowEmptySelection creates a new language option group with the supplied language options.
 func NewNowPlayingInfoLanguageOptionGroupWithLanguageOptionsDefaultLanguageOptionAllowEmptySelection(languageOptions []*NowPlayingInfoLanguageOption, defaultLanguageOption *NowPlayingInfoLanguageOption, allowEmptySelection bool) *NowPlayingInfoLanguageOptionGroup {
+	defer runtime.KeepAlive(defaultLanguageOption)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPNowPlayingInfoLanguageOptionGroup")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLanguageOptions:defaultLanguageOption:allowEmptySelection:"), purego.SliceToNSArray(languageOptions, func(_v *NowPlayingInfoLanguageOption) objc.ID { return objref.IDOf(_v) }), objref.IDOf(defaultLanguageOption), allowEmptySelection)
 	return nowPlayingInfoLanguageOptionGroupAdopt(_id)
@@ -77,18 +85,21 @@ func NewNowPlayingInfoLanguageOptionGroupWithLanguageOptionsDefaultLanguageOptio
 //
 // LanguageOptions returns the collection as a Go slice.
 func (npilog *NowPlayingInfoLanguageOptionGroup) LanguageOptions() []*NowPlayingInfoLanguageOption {
+	defer runtime.KeepAlive(npilog)
 	_arr := objc.Send[objc.ID](objref.IDOf(npilog), objc.RegisterName("languageOptions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NowPlayingInfoLanguageOption { return NowPlayingInfoLanguageOptionFromID(_id) })
 }
 
 // DefaultLanguageOption returns the default language option, if any, within this group.
 func (npilog *NowPlayingInfoLanguageOptionGroup) DefaultLanguageOption() *NowPlayingInfoLanguageOption {
+	defer runtime.KeepAlive(npilog)
 	_r := objc.Send[objc.ID](objref.IDOf(npilog), objc.RegisterName("defaultLanguageOption"))
 	return NowPlayingInfoLanguageOptionFromID(_r)
 }
 
 // AllowEmptySelection reports whether a selection in this group is required at all times.
 func (npilog *NowPlayingInfoLanguageOptionGroup) AllowEmptySelection() bool {
+	defer runtime.KeepAlive(npilog)
 	_r := objc.Send[bool](objref.IDOf(npilog), objc.RegisterName("allowEmptySelection"))
 	return _r
 }

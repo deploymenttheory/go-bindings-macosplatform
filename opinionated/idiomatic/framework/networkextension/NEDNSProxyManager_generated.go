@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func nEDNSProxyManagerAdopt(id objc.ID) *NEDNSProxyManager {
 
 // Description returns the object's -description text.
 func (npm *NEDNSProxyManager) Description() string {
+	defer runtime.KeepAlive(npm)
 	return rt.Description(objref.IDOf(npm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (npm *NEDNSProxyManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(npm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(npm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (npm *NEDNSProxyManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(npm)
 	return rt.IsKind(objref.IDOf(npm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (npm *NEDNSProxyManager) String() string {
+	defer runtime.KeepAlive(npm)
 	return rt.Description(objref.IDOf(npm))
 }
 
@@ -83,6 +89,7 @@ func (npm *NEDNSProxyManager) WithLocalizedDescription(localizedDescription stri
 
 // WithProviderProtocol sets the provider-specific portion of the DNS proxy configuration.
 func (npm *NEDNSProxyManager) WithProviderProtocol(providerProtocol *NEDNSProxyProviderProtocol) *NEDNSProxyManager {
+	defer runtime.KeepAlive(providerProtocol)
 	objc.Send[objc.ID](objref.IDOf(npm), objc.RegisterName("setProviderProtocol:"), objref.IDOf(providerProtocol))
 	return npm
 }
@@ -97,6 +104,7 @@ func (npm *NEDNSProxyManager) WithEnabled(enabled bool) *NEDNSProxyManager {
 //
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
 func (npm *NEDNSProxyManager) LoadFromPreferences(ctx context.Context) error {
+	defer runtime.KeepAlive(npm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -116,6 +124,7 @@ func (npm *NEDNSProxyManager) LoadFromPreferences(ctx context.Context) error {
 //
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
 func (npm *NEDNSProxyManager) RemoveFromPreferences(ctx context.Context) error {
+	defer runtime.KeepAlive(npm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -135,6 +144,7 @@ func (npm *NEDNSProxyManager) RemoveFromPreferences(ctx context.Context) error {
 //
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
 func (npm *NEDNSProxyManager) SaveToPreferences(ctx context.Context) error {
+	defer runtime.KeepAlive(npm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -152,6 +162,7 @@ func (npm *NEDNSProxyManager) SaveToPreferences(ctx context.Context) error {
 
 // LocalizedDescription returns a string containing a description of the DNS proxy.
 func (npm *NEDNSProxyManager) LocalizedDescription() string {
+	defer runtime.KeepAlive(npm)
 	_r := objc.Send[objc.ID](objref.IDOf(npm), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""
@@ -161,12 +172,14 @@ func (npm *NEDNSProxyManager) LocalizedDescription() string {
 
 // ProviderProtocol returns an NEDNSProxyProviderProtocol object containing the provider-specific portion of the DNS proxy configuration.
 func (npm *NEDNSProxyManager) ProviderProtocol() *NEDNSProxyProviderProtocol {
+	defer runtime.KeepAlive(npm)
 	_r := objc.Send[objc.ID](objref.IDOf(npm), objc.RegisterName("providerProtocol"))
 	return NEDNSProxyProviderProtocolFromID(_r)
 }
 
 // IsEnabled reports whether toggles the enabled status of the DNS proxy. Setting this property will disable DNS proxy configurations of other apps. This property will be set to false when other DNS proxy configurations are enabled.
 func (npm *NEDNSProxyManager) IsEnabled() bool {
+	defer runtime.KeepAlive(npm)
 	_r := objc.Send[bool](objref.IDOf(npm), objc.RegisterName("isEnabled"))
 	return _r
 }

@@ -6,6 +6,7 @@ package quicklookthumbnailing
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func thumbnailProviderAdopt(id objc.ID) *ThumbnailProvider {
 
 // Description returns the object's -description text.
 func (tp *ThumbnailProvider) Description() string {
+	defer runtime.KeepAlive(tp)
 	return rt.Description(objref.IDOf(tp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tp *ThumbnailProvider) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tp *ThumbnailProvider) IsKind(className string) bool {
+	defer runtime.KeepAlive(tp)
 	return rt.IsKind(objref.IDOf(tp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tp *ThumbnailProvider) String() string {
+	defer runtime.KeepAlive(tp)
 	return rt.Description(objref.IDOf(tp))
 }
 
@@ -79,6 +85,8 @@ func NewThumbnailProvider() *ThumbnailProvider {
 //
 // ProvideThumbnailForFileRequest blocks until the operation completes or ctx is cancelled.
 func (tp *ThumbnailProvider) ProvideThumbnailForFileRequest(ctx context.Context, request *FileThumbnailRequest) (result *ThumbnailReply, err error) {
+	defer runtime.KeepAlive(tp)
+	defer runtime.KeepAlive(request)
 	type _result struct {
 		val *ThumbnailReply
 		err error

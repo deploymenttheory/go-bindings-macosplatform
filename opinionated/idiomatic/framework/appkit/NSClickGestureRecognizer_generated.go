@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -84,6 +87,7 @@ func (cgr *ClickGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRe
 
 // WithTarget sets the object that implements the action method.
 func (cgr *ClickGestureRecognizer) WithTarget(target obj.Object) *ClickGestureRecognizer {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -98,6 +102,18 @@ func (cgr *ClickGestureRecognizer) WithState(state GestureRecognizerState) *Clic
 	return cgr
 }
 
+// WithDelegate sets the delegate of the gesture recognizer.
+func (cgr *ClickGestureRecognizer) WithDelegate(delegate GestureRecognizerDelegate) *ClickGestureRecognizer {
+	_shim := newGestureRecognizerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(cgr), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cgr), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return cgr
+}
+
 // WithEnabled sets a Boolean value indicating whether the gesture recognizer is able to handle events.
 func (cgr *ClickGestureRecognizer) WithEnabled(enabled bool) *ClickGestureRecognizer {
 	purego.Main(func() {
@@ -108,6 +124,7 @@ func (cgr *ClickGestureRecognizer) WithEnabled(enabled bool) *ClickGestureRecogn
 
 // WithPressureConfiguration sets configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
 func (cgr *ClickGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ClickGestureRecognizer {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -180,6 +197,7 @@ func (cgr *ClickGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes Touch
 
 // ButtonMask returns the button mask.
 func (cgr *ClickGestureRecognizer) ButtonMask() int {
+	defer runtime.KeepAlive(cgr)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -193,6 +211,7 @@ func (cgr *ClickGestureRecognizer) ButtonMask() int {
 
 // NumberOfClicksRequired returns the number of clicks required.
 func (cgr *ClickGestureRecognizer) NumberOfClicksRequired() int {
+	defer runtime.KeepAlive(cgr)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -206,6 +225,7 @@ func (cgr *ClickGestureRecognizer) NumberOfClicksRequired() int {
 
 // NumberOfTouchesRequired returns the number of touches required.
 func (cgr *ClickGestureRecognizer) NumberOfTouchesRequired() int {
+	defer runtime.KeepAlive(cgr)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {

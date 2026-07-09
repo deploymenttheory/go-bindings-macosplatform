@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func wKWebExtensionTabConfigurationAdopt(id objc.ID) *WKWebExtensionTabConfigura
 
 // Description returns the object's -description text.
 func (wwetc *WKWebExtensionTabConfiguration) Description() string {
+	defer runtime.KeepAlive(wwetc)
 	return rt.Description(objref.IDOf(wwetc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wwetc *WKWebExtensionTabConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wwetc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wwetc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wwetc *WKWebExtensionTabConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(wwetc)
 	return rt.IsKind(objref.IDOf(wwetc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wwetc *WKWebExtensionTabConfiguration) String() string {
+	defer runtime.KeepAlive(wwetc)
 	return rt.Description(objref.IDOf(wwetc))
 }
 
@@ -78,6 +85,7 @@ func NewWKWebExtensionTabConfiguration() *WKWebExtensionTabConfiguration {
 
 // Index indicates the position where the tab should be opened within the window.
 func (wwetc *WKWebExtensionTabConfiguration) Index() int {
+	defer runtime.KeepAlive(wwetc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -90,12 +98,13 @@ func (wwetc *WKWebExtensionTabConfiguration) Index() int {
 }
 
 // URL indicates the initial URL for the tab. If this property is `nil`, the app's default "start page" should appear in the tab.
-func (wwetc *WKWebExtensionTabConfiguration) URL() obj.Object {
-	var _mainthread0 obj.Object
+func (wwetc *WKWebExtensionTabConfiguration) URL() string {
+	defer runtime.KeepAlive(wwetc)
+	var _mainthread0 string
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() string {
 			_r := objc.Send[objc.ID](objref.IDOf(wwetc), objc.RegisterName("url"))
-			return obj.Wrap(_r)
+			return rt.URLString(_r)
 		}()
 	})
 	return _mainthread0
@@ -104,6 +113,7 @@ func (wwetc *WKWebExtensionTabConfiguration) URL() obj.Object {
 
 // ShouldBeActive reports whether the tab should be the active tab. If this property is `YES`, the tab should be made active in the window, ensuring it is the frontmost tab. Being active implies the tab is also selected. If this property is `NO`, the tab shouldn't affect the currently active tab.
 func (wwetc *WKWebExtensionTabConfiguration) ShouldBeActive() bool {
+	defer runtime.KeepAlive(wwetc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -117,6 +127,7 @@ func (wwetc *WKWebExtensionTabConfiguration) ShouldBeActive() bool {
 
 // ShouldAddToSelection reports whether the tab should be added to the current tab selection. If this property is `YES`, the tab should be part of the current selection, but not necessarily become the active tab unless “shouldBeActive“ is also `YES`. If this property is `NO`, the tab shouldn't be part of the current selection.
 func (wwetc *WKWebExtensionTabConfiguration) ShouldAddToSelection() bool {
+	defer runtime.KeepAlive(wwetc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -130,6 +141,7 @@ func (wwetc *WKWebExtensionTabConfiguration) ShouldAddToSelection() bool {
 
 // ShouldBePinned reports whether the tab should be pinned.
 func (wwetc *WKWebExtensionTabConfiguration) ShouldBePinned() bool {
+	defer runtime.KeepAlive(wwetc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -143,6 +155,7 @@ func (wwetc *WKWebExtensionTabConfiguration) ShouldBePinned() bool {
 
 // ShouldBeMuted reports whether the tab should be muted.
 func (wwetc *WKWebExtensionTabConfiguration) ShouldBeMuted() bool {
+	defer runtime.KeepAlive(wwetc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -156,6 +169,7 @@ func (wwetc *WKWebExtensionTabConfiguration) ShouldBeMuted() bool {
 
 // ShouldReaderModeBeActive reports whether reader mode in the tab should be active.
 func (wwetc *WKWebExtensionTabConfiguration) ShouldReaderModeBeActive() bool {
+	defer runtime.KeepAlive(wwetc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

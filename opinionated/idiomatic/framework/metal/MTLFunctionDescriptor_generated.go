@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func functionDescriptorAdopt(id objc.ID) *FunctionDescriptor {
 
 // Description returns the object's -description text.
 func (fd *FunctionDescriptor) Description() string {
+	defer runtime.KeepAlive(fd)
 	return rt.Description(objref.IDOf(fd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fd *FunctionDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fd *FunctionDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(fd)
 	return rt.IsKind(objref.IDOf(fd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fd *FunctionDescriptor) String() string {
+	defer runtime.KeepAlive(fd)
 	return rt.Description(objref.IDOf(fd))
 }
 
@@ -82,6 +89,7 @@ func (fd *FunctionDescriptor) WithSpecializedName(specializedName string) *Funct
 
 // WithConstantValues sets the set of constant values assigned to the function constants.
 func (fd *FunctionDescriptor) WithConstantValues(constantValues *FunctionConstantValues) *FunctionDescriptor {
+	defer runtime.KeepAlive(constantValues)
 	objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("setConstantValues:"), objref.IDOf(constantValues))
 	return fd
 }
@@ -94,6 +102,7 @@ func (fd *FunctionDescriptor) WithOptions(options FunctionOptions) *FunctionDesc
 
 // Name returns the name of the `visible` function to find.
 func (fd *FunctionDescriptor) Name() string {
+	defer runtime.KeepAlive(fd)
 	_r := objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -103,6 +112,7 @@ func (fd *FunctionDescriptor) Name() string {
 
 // SpecializedName returns an optional new name for a `visible` function to allow reuse with different specializations.
 func (fd *FunctionDescriptor) SpecializedName() string {
+	defer runtime.KeepAlive(fd)
 	_r := objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("specializedName"))
 	if _r == 0 {
 		return ""
@@ -112,24 +122,28 @@ func (fd *FunctionDescriptor) SpecializedName() string {
 
 // ConstantValues returns the set of constant values assigned to the function constants. Compilation fails if you do not provide valid constant values for all required function constants.
 func (fd *FunctionDescriptor) ConstantValues() *FunctionConstantValues {
+	defer runtime.KeepAlive(fd)
 	_r := objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("constantValues"))
 	return FunctionConstantValuesFromID(_r)
 }
 
 // Options returns the options to use for this new `MTLFunction`.
 func (fd *FunctionDescriptor) Options() FunctionOptions {
+	defer runtime.KeepAlive(fd)
 	_r := objc.Send[FunctionOptions](objref.IDOf(fd), objc.RegisterName("options"))
 	return _r
 }
 
 // BinaryArchives returns the array of archives to be searched. Binary archives to be searched for precompiled functions during the compilation of this function.
 func (fd *FunctionDescriptor) BinaryArchives() []obj.Object {
+	defer runtime.KeepAlive(fd)
 	_r := objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("binaryArchives"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetBinaryArchives wraps the corresponding Objective-C method.
 func (fd *FunctionDescriptor) SetBinaryArchives(binaryArchives []obj.Object) {
+	defer runtime.KeepAlive(fd)
 	objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("setBinaryArchives:"), purego.SliceToNSArray(binaryArchives, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 

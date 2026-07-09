@@ -5,9 +5,11 @@
 package storekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,9 +25,9 @@ func AuthorizationStatus() CloudServiceAuthorizationStatus {
 }
 
 // ContentURLForProductID returns the local location for the previously downloaded flie.
-func ContentURLForProductID(productID string) obj.Object {
+func ContentURLForProductID(productID string) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKDownload")), objc.RegisterName("contentURLForProductID:"), purego.NSString(productID))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // DeleteContentForProductID deletes the previously downloaded file.
@@ -35,6 +37,7 @@ func DeleteContentForProductID(productID string) {
 
 // PaymentWithProduct returns a new payment for the specified product.
 func PaymentWithProduct(product *Product) *Payment {
+	defer runtime.KeepAlive(product)
 	_r := objc.Send[objc.ID](objc.ID(_class("SKPayment")), objc.RegisterName("paymentWithProduct:"), objref.IDOf(product))
 	return PaymentFromID(_r)
 }

@@ -6,6 +6,7 @@ package coreml
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,22 +50,27 @@ func stateAdopt(id objc.ID) *State {
 
 // Description returns the object's -description text.
 func (s *State) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *State) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *State) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *State) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -78,6 +84,7 @@ func NewState() *State {
 //
 // GetMultiArrayForStateNamedHandler blocks until the operation completes or ctx is cancelled.
 func (s *State) GetMultiArrayForStateNamedHandler(ctx context.Context, stateName string) (result *MultiArray, err error) {
+	defer runtime.KeepAlive(s)
 	type _result struct {
 		val *MultiArray
 		err error

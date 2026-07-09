@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -52,6 +53,7 @@ func targetedImageRequestAdopt(id objc.ID) *TargetedImageRequest {
 
 // NewTargetedImageRequestWithTargetedCVPixelBufferOptions creates a new request targeting an image in a pixel buffer.
 func NewTargetedImageRequestWithTargetedCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options obj.Object) *TargetedImageRequest {
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCVPixelBuffer:options:"), pixelBuffer, objref.IDOf(options))
 	return targetedImageRequestAdopt(_id)
@@ -59,6 +61,8 @@ func NewTargetedImageRequestWithTargetedCVPixelBufferOptions(pixelBuffer unsafe.
 
 // NewTargetedImageRequestWithTargetedCGImageOptions creates a new request targeting a Core Graphics image.
 func NewTargetedImageRequestWithTargetedCGImageOptions(cgImage obj.Object, options obj.Object) *TargetedImageRequest {
+	defer runtime.KeepAlive(cgImage)
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCGImage:options:"), objref.IDOf(cgImage), objref.IDOf(options))
 	return targetedImageRequestAdopt(_id)
@@ -66,6 +70,8 @@ func NewTargetedImageRequestWithTargetedCGImageOptions(cgImage obj.Object, optio
 
 // NewTargetedImageRequestWithTargetedCIImageOptions creates a new request targeting a Core Image image.
 func NewTargetedImageRequestWithTargetedCIImageOptions(ciImage obj.Object, options obj.Object) *TargetedImageRequest {
+	defer runtime.KeepAlive(ciImage)
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCIImage:options:"), objref.IDOf(ciImage), objref.IDOf(options))
 	return targetedImageRequestAdopt(_id)
@@ -73,20 +79,24 @@ func NewTargetedImageRequestWithTargetedCIImageOptions(ciImage obj.Object, optio
 
 // NewTargetedImageRequestWithTargetedImageURLOptions creates a new request targeting an image at the specified URL.
 func NewTargetedImageRequestWithTargetedImageURLOptions(imageURL string, options obj.Object) *TargetedImageRequest {
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageURL:options:"), rt.FileURL(imageURL), objref.IDOf(options))
 	return targetedImageRequestAdopt(_id)
 }
 
 // NewTargetedImageRequestWithTargetedImageDataOptions creates a new request targeting an image as raw data.
-func NewTargetedImageRequestWithTargetedImageDataOptions(imageData obj.Object, options obj.Object) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedImageDataOptions(imageData []byte, options obj.Object) *TargetedImageRequest {
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageData:options:"), objref.IDOf(imageData), objref.IDOf(options))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageData:options:"), rt.BytesToNSData(imageData), objref.IDOf(options))
 	return targetedImageRequestAdopt(_id)
 }
 
 // NewTargetedImageRequestWithTargetedCMSampleBufferOptions creates a new request that targets an image in a sample buffer.
 func NewTargetedImageRequestWithTargetedCMSampleBufferOptions(sampleBuffer obj.Object, options obj.Object) *TargetedImageRequest {
+	defer runtime.KeepAlive(sampleBuffer)
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCMSampleBuffer:options:"), objref.IDOf(sampleBuffer), objref.IDOf(options))
 	return targetedImageRequestAdopt(_id)

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRGeneralCommissioningClusterBasicCommissioningInfoAdopt(id objc.ID) *MTRG
 
 // Description returns the object's -description text.
 func (mgccbci *MTRGeneralCommissioningClusterBasicCommissioningInfo) Description() string {
+	defer runtime.KeepAlive(mgccbci)
 	return rt.Description(objref.IDOf(mgccbci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mgccbci *MTRGeneralCommissioningClusterBasicCommissioningInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mgccbci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mgccbci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mgccbci *MTRGeneralCommissioningClusterBasicCommissioningInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(mgccbci)
 	return rt.IsKind(objref.IDOf(mgccbci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mgccbci *MTRGeneralCommissioningClusterBasicCommissioningInfo) String() string {
+	defer runtime.KeepAlive(mgccbci)
 	return rt.Description(objref.IDOf(mgccbci))
 }
 
@@ -72,24 +80,28 @@ func NewMTRGeneralCommissioningClusterBasicCommissioningInfo() *MTRGeneralCommis
 
 // WithFailSafeExpiryLengthSeconds sets the fail safe expiry length seconds.
 func (mgccbci *MTRGeneralCommissioningClusterBasicCommissioningInfo) WithFailSafeExpiryLengthSeconds(failSafeExpiryLengthSeconds obj.Object) *MTRGeneralCommissioningClusterBasicCommissioningInfo {
+	defer runtime.KeepAlive(failSafeExpiryLengthSeconds)
 	objc.Send[objc.ID](objref.IDOf(mgccbci), objc.RegisterName("setFailSafeExpiryLengthSeconds:"), objref.IDOf(failSafeExpiryLengthSeconds))
 	return mgccbci
 }
 
 // WithMaxCumulativeFailsafeSeconds sets the max cumulative failsafe seconds.
 func (mgccbci *MTRGeneralCommissioningClusterBasicCommissioningInfo) WithMaxCumulativeFailsafeSeconds(maxCumulativeFailsafeSeconds obj.Object) *MTRGeneralCommissioningClusterBasicCommissioningInfo {
+	defer runtime.KeepAlive(maxCumulativeFailsafeSeconds)
 	objc.Send[objc.ID](objref.IDOf(mgccbci), objc.RegisterName("setMaxCumulativeFailsafeSeconds:"), objref.IDOf(maxCumulativeFailsafeSeconds))
 	return mgccbci
 }
 
 // FailSafeExpiryLengthSeconds returns the fail safe expiry length seconds.
-func (mgccbci *MTRGeneralCommissioningClusterBasicCommissioningInfo) FailSafeExpiryLengthSeconds() obj.Object {
+func (mgccbci *MTRGeneralCommissioningClusterBasicCommissioningInfo) FailSafeExpiryLengthSeconds() *foundation.Number {
+	defer runtime.KeepAlive(mgccbci)
 	_r := objc.Send[objc.ID](objref.IDOf(mgccbci), objc.RegisterName("failSafeExpiryLengthSeconds"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MaxCumulativeFailsafeSeconds returns the max cumulative failsafe seconds.
-func (mgccbci *MTRGeneralCommissioningClusterBasicCommissioningInfo) MaxCumulativeFailsafeSeconds() obj.Object {
+func (mgccbci *MTRGeneralCommissioningClusterBasicCommissioningInfo) MaxCumulativeFailsafeSeconds() *foundation.Number {
+	defer runtime.KeepAlive(mgccbci)
 	_r := objc.Send[objc.ID](objref.IDOf(mgccbci), objc.RegisterName("maxCumulativeFailsafeSeconds"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

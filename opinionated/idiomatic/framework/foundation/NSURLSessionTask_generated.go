@@ -5,10 +5,13 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -51,27 +54,43 @@ func uRLSessionTaskAdopt(id objc.ID) *URLSessionTask {
 
 // Description returns the object's -description text.
 func (ust *URLSessionTask) Description() string {
+	defer runtime.KeepAlive(ust)
 	return rt.Description(objref.IDOf(ust))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ust *URLSessionTask) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ust)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ust), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ust *URLSessionTask) IsKind(className string) bool {
+	defer runtime.KeepAlive(ust)
 	return rt.IsKind(objref.IDOf(ust), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ust *URLSessionTask) String() string {
+	defer runtime.KeepAlive(ust)
 	return rt.Description(objref.IDOf(ust))
+}
+
+// WithDelegate sets the delegate.
+func (ust *URLSessionTask) WithDelegate(delegate URLSessionTaskDelegate) *URLSessionTask {
+	_shim := newURLSessionTaskDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ust), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ust), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return ust
 }
 
 // WithEarliestBeginDate sets the earliest begin date.
 func (ust *URLSessionTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionTask {
+	defer runtime.KeepAlive(earliestBeginDate)
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
 	return ust
 }
@@ -90,6 +109,7 @@ func (ust *URLSessionTask) WithCountOfBytesClientExpectsToReceive(countOfBytesCl
 
 // WithTaskDescription sets the task description.
 func (ust *URLSessionTask) WithTaskDescription(taskDescription StringProvider) *URLSessionTask {
+	defer runtime.KeepAlive(taskDescription)
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
 	return ust
 }
@@ -113,100 +133,116 @@ func (ust *URLSessionTask) WithObservationInfo(observationInfo unsafe.Pointer) *
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ust *URLSessionTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionTask {
-	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ust *URLSessionTask) WithScriptingProperties(scriptingProperties map[string]obj.Object) *URLSessionTask {
+	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ust
 }
 
 // Cancel wraps the corresponding Objective-C method.
 func (ust *URLSessionTask) Cancel() {
+	defer runtime.KeepAlive(ust)
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("cancel"))
 }
 
 // Suspend wraps the corresponding Objective-C method.
 func (ust *URLSessionTask) Suspend() {
+	defer runtime.KeepAlive(ust)
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("suspend"))
 }
 
 // Resume wraps the corresponding Objective-C method.
 func (ust *URLSessionTask) Resume() {
+	defer runtime.KeepAlive(ust)
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("resume"))
 }
 
 // TaskIdentifier returns the task identifier.
 func (ust *URLSessionTask) TaskIdentifier() int {
+	defer runtime.KeepAlive(ust)
 	_r := objc.Send[int](objref.IDOf(ust), objc.RegisterName("taskIdentifier"))
 	return _r
 }
 
 // OriginalRequest returns the original request.
 func (ust *URLSessionTask) OriginalRequest() *URLRequest {
+	defer runtime.KeepAlive(ust)
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("originalRequest"))
 	return URLRequestFromID(_r)
 }
 
 // CurrentRequest returns the current request.
 func (ust *URLSessionTask) CurrentRequest() *URLRequest {
+	defer runtime.KeepAlive(ust)
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("currentRequest"))
 	return URLRequestFromID(_r)
 }
 
 // Response returns the response.
 func (ust *URLSessionTask) Response() *URLResponse {
+	defer runtime.KeepAlive(ust)
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("response"))
 	return URLResponseFromID(_r)
 }
 
 // Progress returns the progress.
 func (ust *URLSessionTask) Progress() *Progress {
+	defer runtime.KeepAlive(ust)
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("progress"))
 	return ProgressFromID(_r)
 }
 
 // EarliestBeginDate returns the earliest begin date.
-func (ust *URLSessionTask) EarliestBeginDate() *Date {
+func (ust *URLSessionTask) EarliestBeginDate() time.Time {
+	defer runtime.KeepAlive(ust)
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("earliestBeginDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // CountOfBytesClientExpectsToSend returns the count of bytes client expects to send.
 func (ust *URLSessionTask) CountOfBytesClientExpectsToSend() int64 {
+	defer runtime.KeepAlive(ust)
 	_r := objc.Send[int64](objref.IDOf(ust), objc.RegisterName("countOfBytesClientExpectsToSend"))
 	return _r
 }
 
 // CountOfBytesClientExpectsToReceive returns the count of bytes client expects to receive.
 func (ust *URLSessionTask) CountOfBytesClientExpectsToReceive() int64 {
+	defer runtime.KeepAlive(ust)
 	_r := objc.Send[int64](objref.IDOf(ust), objc.RegisterName("countOfBytesClientExpectsToReceive"))
 	return _r
 }
 
 // CountOfBytesSent returns the count of bytes sent.
 func (ust *URLSessionTask) CountOfBytesSent() int64 {
+	defer runtime.KeepAlive(ust)
 	_r := objc.Send[int64](objref.IDOf(ust), objc.RegisterName("countOfBytesSent"))
 	return _r
 }
 
 // CountOfBytesReceived returns the count of bytes received.
 func (ust *URLSessionTask) CountOfBytesReceived() int64 {
+	defer runtime.KeepAlive(ust)
 	_r := objc.Send[int64](objref.IDOf(ust), objc.RegisterName("countOfBytesReceived"))
 	return _r
 }
 
 // CountOfBytesExpectedToSend returns the count of bytes expected to send.
 func (ust *URLSessionTask) CountOfBytesExpectedToSend() int64 {
+	defer runtime.KeepAlive(ust)
 	_r := objc.Send[int64](objref.IDOf(ust), objc.RegisterName("countOfBytesExpectedToSend"))
 	return _r
 }
 
 // CountOfBytesExpectedToReceive returns the count of bytes expected to receive.
 func (ust *URLSessionTask) CountOfBytesExpectedToReceive() int64 {
+	defer runtime.KeepAlive(ust)
 	_r := objc.Send[int64](objref.IDOf(ust), objc.RegisterName("countOfBytesExpectedToReceive"))
 	return _r
 }
 
 // TaskDescription returns the task description.
 func (ust *URLSessionTask) TaskDescription() string {
+	defer runtime.KeepAlive(ust)
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("taskDescription"))
 	if _r == 0 {
 		return ""
@@ -216,18 +252,21 @@ func (ust *URLSessionTask) TaskDescription() string {
 
 // State returns the state.
 func (ust *URLSessionTask) State() URLSessionTaskState {
+	defer runtime.KeepAlive(ust)
 	_r := objc.Send[URLSessionTaskState](objref.IDOf(ust), objc.RegisterName("state"))
 	return _r
 }
 
 // Priority returns the priority.
 func (ust *URLSessionTask) Priority() float32 {
+	defer runtime.KeepAlive(ust)
 	_r := objc.Send[float32](objref.IDOf(ust), objc.RegisterName("priority"))
 	return _r
 }
 
 // PrefersIncrementalDelivery wraps the corresponding Objective-C method.
 func (ust *URLSessionTask) PrefersIncrementalDelivery() bool {
+	defer runtime.KeepAlive(ust)
 	_r := objc.Send[bool](objref.IDOf(ust), objc.RegisterName("prefersIncrementalDelivery"))
 	return _r
 }

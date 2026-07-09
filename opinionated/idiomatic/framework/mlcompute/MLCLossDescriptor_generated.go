@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func lossDescriptorAdopt(id objc.ID) *LossDescriptor {
 
 // Description returns the object's -description text.
 func (ld *LossDescriptor) Description() string {
+	defer runtime.KeepAlive(ld)
 	return rt.Description(objref.IDOf(ld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ld *LossDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ld)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ld *LossDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(ld)
 	return rt.IsKind(objref.IDOf(ld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ld *LossDescriptor) String() string {
+	defer runtime.KeepAlive(ld)
 	return rt.Description(objref.IDOf(ld))
 }
 
@@ -74,42 +81,49 @@ func NewLossDescriptor() *LossDescriptor {
 
 // LossType specifies the loss function.
 func (ld *LossDescriptor) LossType() LossType {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[LossType](objref.IDOf(ld), objc.RegisterName("lossType"))
 	return _r
 }
 
 // ReductionType returns the reduction operation performed by the loss function.
 func (ld *LossDescriptor) ReductionType() ReductionType {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[ReductionType](objref.IDOf(ld), objc.RegisterName("reductionType"))
 	return _r
 }
 
 // Weight returns the scale factor to apply to each element of a result.  The default value is 1.0.
 func (ld *LossDescriptor) Weight() float32 {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[float32](objref.IDOf(ld), objc.RegisterName("weight"))
 	return _r
 }
 
 // LabelSmoothing returns the label smoothing parameter. The default value is 0.0. This parameter is valid only for the loss functions of the following type(s): MLCLossTypeSoftmaxCrossEntropy and MLCLossTypeSigmoidCrossEntropy.
 func (ld *LossDescriptor) LabelSmoothing() float32 {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[float32](objref.IDOf(ld), objc.RegisterName("labelSmoothing"))
 	return _r
 }
 
 // ClassCount returns the number of classes parameter. The default value is 1. This parameter is valid only for the loss function MLCLossTypeSoftmaxCrossEntropy.
 func (ld *LossDescriptor) ClassCount() int {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[int](objref.IDOf(ld), objc.RegisterName("classCount"))
 	return _r
 }
 
 // Epsilon returns the epsilon parameter. The default value is 1e-7. This parameter is valid only for the loss function MLCLossTypeLog.
 func (ld *LossDescriptor) Epsilon() float32 {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[float32](objref.IDOf(ld), objc.RegisterName("epsilon"))
 	return _r
 }
 
 // Delta returns the delta parameter. The default value is 1.0f. This parameter is valid only for the loss function MLCLossTypeHuber.
 func (ld *LossDescriptor) Delta() float32 {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[float32](objref.IDOf(ld), objc.RegisterName("delta"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func operationGroupAdopt(id objc.ID) *OperationGroup {
 
 // Description returns the object's -description text.
 func (og *OperationGroup) Description() string {
+	defer runtime.KeepAlive(og)
 	return rt.Description(objref.IDOf(og))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (og *OperationGroup) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(og)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(og), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (og *OperationGroup) IsKind(className string) bool {
+	defer runtime.KeepAlive(og)
 	return rt.IsKind(objref.IDOf(og), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (og *OperationGroup) String() string {
+	defer runtime.KeepAlive(og)
 	return rt.Description(objref.IDOf(og))
 }
 
@@ -74,6 +81,7 @@ func NewOperationGroup() *OperationGroup {
 
 // NewOperationGroupWithCoder creates an operation group from a serialized instance.
 func NewOperationGroupWithCoder(aDecoder obj.Object) *OperationGroup {
+	defer runtime.KeepAlive(aDecoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKOperationGroup")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return operationGroupAdopt(_id)
@@ -81,6 +89,7 @@ func NewOperationGroupWithCoder(aDecoder obj.Object) *OperationGroup {
 
 // WithDefaultConfiguration sets the default configuration for operations in the group.
 func (og *OperationGroup) WithDefaultConfiguration(defaultConfiguration *OperationConfiguration) *OperationGroup {
+	defer runtime.KeepAlive(defaultConfiguration)
 	objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("setDefaultConfiguration:"), objref.IDOf(defaultConfiguration))
 	return og
 }
@@ -111,6 +120,7 @@ func (og *OperationGroup) WithExpectedReceiveSize(expectedReceiveSize OperationG
 
 // OperationGroupID returns the operation group's unique identifier. The framework generates this value and it's unique to this operation group. The system sends this identifier to CloudKit, which can use it to identify server-side logs for “CKOperationGroup“.
 func (og *OperationGroup) OperationGroupID() string {
+	defer runtime.KeepAlive(og)
 	_r := objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("operationGroupID"))
 	if _r == 0 {
 		return ""
@@ -120,12 +130,14 @@ func (og *OperationGroup) OperationGroupID() string {
 
 // DefaultConfiguration returns the default configuration for operations in the group. If an operation in the group has its own configuration, that configuration's values override the default configuration's values. For more information, see “CKOperation/Configuration“.
 func (og *OperationGroup) DefaultConfiguration() *OperationConfiguration {
+	defer runtime.KeepAlive(og)
 	_r := objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("defaultConfiguration"))
 	return OperationConfigurationFromID(_r)
 }
 
 // Name returns the operation group's name. The system sends the name of the operation group to CloudKit to provide aggregate reporting for “CKOperationGroup“. The name must not include any personal data.
 func (og *OperationGroup) Name() string {
+	defer runtime.KeepAlive(og)
 	_r := objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -135,18 +147,21 @@ func (og *OperationGroup) Name() string {
 
 // Quantity returns the number of operations in the operation group. This property shows the number of operations that you expect to be in this operation group. It's the developer's responsibility to set this value.
 func (og *OperationGroup) Quantity() int {
+	defer runtime.KeepAlive(og)
 	_r := objc.Send[int](objref.IDOf(og), objc.RegisterName("quantity"))
 	return _r
 }
 
 // ExpectedSendSize returns the estimated size of traffic to upload to CloudKit. This property informs the system about the amount of data your app can transfer. An order-of-magnitude estimate is better than no estimate, and accuracy helps performance. The system checks this value when it schedules discretionary network requests.
 func (og *OperationGroup) ExpectedSendSize() OperationGroupTransferSize {
+	defer runtime.KeepAlive(og)
 	_r := objc.Send[OperationGroupTransferSize](objref.IDOf(og), objc.RegisterName("expectedSendSize"))
 	return _r
 }
 
 // ExpectedReceiveSize returns the estimated size of traffic to download from CloudKit. This property informs the system about the amount of data your app can transfer. An order-of-magnitude estimate is better than no estimate, and accuracy helps performance. The system checks this value when it schedules discretionary network requests.
 func (og *OperationGroup) ExpectedReceiveSize() OperationGroupTransferSize {
+	defer runtime.KeepAlive(og)
 	_r := objc.Send[OperationGroupTransferSize](objref.IDOf(og), objc.RegisterName("expectedReceiveSize"))
 	return _r
 }

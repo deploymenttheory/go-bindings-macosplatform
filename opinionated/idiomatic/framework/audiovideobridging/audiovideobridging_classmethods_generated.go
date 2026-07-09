@@ -5,6 +5,8 @@
 package audiovideobridging
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -12,6 +14,7 @@ import (
 
 // ACMPInterfaceWithInterface creates an autoreleased instance of AVB17221ACMPInterface for the specified AVBInterface
 func ACMPInterfaceWithInterface(anInterface *Interface) *AVB17221ACMPInterface {
+	defer runtime.KeepAlive(anInterface)
 	_r := objc.Send[objc.ID](objc.ID(_class("AVB17221ACMPInterface")), objc.RegisterName("ACMPInterfaceWithInterface:"), objref.IDOf(anInterface))
 	return AVB17221ACMPInterfaceFromID(_r)
 }
@@ -36,6 +39,7 @@ func ResponseMessage() *AVB17221AECPAEMMessage {
 
 // ResponseMessageFromCommandMessage this method returns an AVB17221AECPAEMMessage instance setup as an AEM response with the appropriate info copied from the supplied command message.
 func ResponseMessageFromCommandMessage(commandMessage *AVB17221AECPAEMMessage) *AVB17221AECPAEMMessage {
+	defer runtime.KeepAlive(commandMessage)
 	_r := objc.Send[objc.ID](objc.ID(_class("AVB17221AECPAEMMessage")), objc.RegisterName("responseMessageFromCommandMessage:"), objref.IDOf(commandMessage))
 	return AVB17221AECPAEMMessageFromID(_r)
 }
@@ -54,6 +58,7 @@ func AVB17221AECPAddressAccessMessageResponseMessage() *AVB17221AECPAddressAcces
 
 // AECPInterfaceWithInterface creates an autoreleased instance of AVB17221AECPInterface for the specified AVBInterface
 func AECPInterfaceWithInterface(anInterface *Interface) *AVB17221AECPInterface {
+	defer runtime.KeepAlive(anInterface)
 	_r := objc.Send[objc.ID](objc.ID(_class("AVB17221AECPInterface")), objc.RegisterName("AECPInterfaceWithInterface:"), objref.IDOf(anInterface))
 	return AVB17221AECPInterfaceFromID(_r)
 }

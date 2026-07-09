@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func captureAudioChannelAdopt(id objc.ID) *CaptureAudioChannel {
 
 // Description returns the object's -description text.
 func (cac *CaptureAudioChannel) Description() string {
+	defer runtime.KeepAlive(cac)
 	return rt.Description(objref.IDOf(cac))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cac *CaptureAudioChannel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cac)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cac), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cac *CaptureAudioChannel) IsKind(className string) bool {
+	defer runtime.KeepAlive(cac)
 	return rt.IsKind(objref.IDOf(cac), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cac *CaptureAudioChannel) String() string {
+	defer runtime.KeepAlive(cac)
 	return rt.Description(objref.IDOf(cac))
 }
 
@@ -86,24 +93,28 @@ func (cac *CaptureAudioChannel) WithEnabled(enabled bool) *CaptureAudioChannel {
 
 // AveragePowerLevel returns a measurement of the instantaneous average power level of the audio flowing through the receiver. A client may poll an AVCaptureAudioChannel object for its current averagePowerLevel to get its instantaneous average power level in decibels. This property is not key-value observable.
 func (cac *CaptureAudioChannel) AveragePowerLevel() float32 {
+	defer runtime.KeepAlive(cac)
 	_r := objc.Send[float32](objref.IDOf(cac), objc.RegisterName("averagePowerLevel"))
 	return _r
 }
 
 // PeakHoldLevel returns a measurement of the peak/hold level of the audio flowing through the receiver. A client may poll an AVCaptureAudioChannel object for its current peakHoldLevel to get its most recent peak hold level in decibels. This property is not key-value observable.
 func (cac *CaptureAudioChannel) PeakHoldLevel() float32 {
+	defer runtime.KeepAlive(cac)
 	_r := objc.Send[float32](objref.IDOf(cac), objc.RegisterName("peakHoldLevel"))
 	return _r
 }
 
 // Volume returns a property indicating the current volume (gain) of the receiver. The volume property indicates the current volume or gain of the receiver as a floating point value between 0.0 -> 1.0. If you desire to boost the gain in software, you may specify a a value greater than 1.0.
 func (cac *CaptureAudioChannel) Volume() float32 {
+	defer runtime.KeepAlive(cac)
 	_r := objc.Send[float32](objref.IDOf(cac), objc.RegisterName("volume"))
 	return _r
 }
 
 // IsEnabled reports whether a property indicating whether the receiver is currently enabled for data capture. By default, all AVCaptureAudioChannel objects exposed by a connection are enabled. You may set enabled to false to stop the flow of data for a particular AVCaptureAudioChannel.
 func (cac *CaptureAudioChannel) IsEnabled() bool {
+	defer runtime.KeepAlive(cac)
 	_r := objc.Send[bool](objref.IDOf(cac), objc.RegisterName("isEnabled"))
 	return _r
 }

@@ -5,6 +5,7 @@
 package iobluetooth
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,73 +52,87 @@ func oBEXSessionAdopt(id objc.ID) *OBEXSession {
 
 // Description returns the object's -description text.
 func (os *OBEXSession) Description() string {
+	defer runtime.KeepAlive(os)
 	return rt.Description(objref.IDOf(os))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (os *OBEXSession) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(os), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (os *OBEXSession) IsKind(className string) bool {
+	defer runtime.KeepAlive(os)
 	return rt.IsKind(objref.IDOf(os), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (os *OBEXSession) String() string {
+	defer runtime.KeepAlive(os)
 	return rt.Description(objref.IDOf(os))
 }
 
 // GetAvailableCommandPayloadLength determine the maximum amount of data you can send in a particular command as an OBEX client session.
 func (os *OBEXSession) GetAvailableCommandPayloadLength(inOpCode uint8) uint16 {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[uint16](objref.IDOf(os), objc.RegisterName("getAvailableCommandPayloadLength:"), inOpCode)
 	return _r
 }
 
 // GetAvailableCommandResponsePayloadLength determine the maximum amount of data you can send in a particular command response as an OBEX server session.
 func (os *OBEXSession) GetAvailableCommandResponsePayloadLength(inOpCode uint8) uint16 {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[uint16](objref.IDOf(os), objc.RegisterName("getAvailableCommandResponsePayloadLength:"), inOpCode)
 	return _r
 }
 
 // MaxPacketLength gets current max packet length.
 func (os *OBEXSession) MaxPacketLength() uint16 {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[uint16](objref.IDOf(os), objc.RegisterName("getMaxPacketLength"))
 	return _r
 }
 
 // HasOpenOBEXConnection reports whether has a successful connect packet been sent and received? This API tells you so.
 func (os *OBEXSession) HasOpenOBEXConnection() bool {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[bool](objref.IDOf(os), objc.RegisterName("hasOpenOBEXConnection"))
 	return _r
 }
 
 // SetEventCallback sets the C-API callback used when the session recieves data.
 func (os *OBEXSession) SetEventCallback(inEventCallback unsafe.Pointer) {
+	defer runtime.KeepAlive(os)
 	objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("setEventCallback:"), inEventCallback)
 }
 
 // SetEventRefCon sets the C-API callback refCon used when the session recieves data.
 func (os *OBEXSession) SetEventRefCon(inRefCon unsafe.Pointer) {
+	defer runtime.KeepAlive(os)
 	objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("setEventRefCon:"), inRefCon)
 }
 
 // SendDataToTransportDataLength you must override this to send data over your transport. This does nothing by default, it will return a kOBEXUnsupportedError.
 func (os *OBEXSession) SendDataToTransportDataLength(inDataToSend unsafe.Pointer, inDataLength int) int32 {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[int32](objref.IDOf(os), objc.RegisterName("sendDataToTransport:dataLength:"), inDataToSend, inDataLength)
 	return _r
 }
 
 // HasOpenTransportConnection returns you must override this - it will be called periodically to determine if a transport connection is open or not.
 func (os *OBEXSession) HasOpenTransportConnection() uint8 {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[uint8](objref.IDOf(os), objc.RegisterName("hasOpenTransportConnection"))
 	return _r
 }
 
 // CloseTransportConnection returns you must override this - it will be called when the transport connection should be shutdown.
 func (os *OBEXSession) CloseTransportConnection() int32 {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[int32](objref.IDOf(os), objc.RegisterName("closeTransportConnection"))
 	return _r
 }

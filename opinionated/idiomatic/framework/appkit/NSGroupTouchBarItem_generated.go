@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,6 +61,7 @@ func NewGroupTouchBarItem() *GroupTouchBarItem {
 
 // WithGroupTouchBar sets a bar that holds this group’s items.
 func (gtbi *GroupTouchBarItem) WithGroupTouchBar(groupTouchBar *TouchBar) *GroupTouchBarItem {
+	defer runtime.KeepAlive(groupTouchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("setGroupTouchBar:"), objref.IDOf(groupTouchBar))
 	})
@@ -116,6 +119,7 @@ func (gtbi *GroupTouchBarItem) WithVisibilityPriority(visibilityPriority float32
 
 // GroupTouchBar returns the group touch bar.
 func (gtbi *GroupTouchBarItem) GroupTouchBar() *TouchBar {
+	defer runtime.KeepAlive(gtbi)
 	var _mainthread0 *TouchBar
 	purego.Main(func() {
 		_mainthread0 = func() *TouchBar {
@@ -129,6 +133,7 @@ func (gtbi *GroupTouchBarItem) GroupTouchBar() *TouchBar {
 
 // GroupUserInterfaceLayoutDirection returns the group user interface layout direction.
 func (gtbi *GroupTouchBarItem) GroupUserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
+	defer runtime.KeepAlive(gtbi)
 	var _mainthread0 UserInterfaceLayoutDirection
 	purego.Main(func() {
 		_mainthread0 = func() UserInterfaceLayoutDirection {
@@ -142,6 +147,7 @@ func (gtbi *GroupTouchBarItem) GroupUserInterfaceLayoutDirection() UserInterface
 
 // PrefersEqualWidths wraps the corresponding Objective-C method.
 func (gtbi *GroupTouchBarItem) PrefersEqualWidths() bool {
+	defer runtime.KeepAlive(gtbi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -155,6 +161,7 @@ func (gtbi *GroupTouchBarItem) PrefersEqualWidths() bool {
 
 // PreferredItemWidth returns the preferred item width.
 func (gtbi *GroupTouchBarItem) PreferredItemWidth() float64 {
+	defer runtime.KeepAlive(gtbi)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -168,6 +175,7 @@ func (gtbi *GroupTouchBarItem) PreferredItemWidth() float64 {
 
 // EffectiveCompressionOptions returns the effective compression options.
 func (gtbi *GroupTouchBarItem) EffectiveCompressionOptions() *UserInterfaceCompressionOptions {
+	defer runtime.KeepAlive(gtbi)
 	var _mainthread0 *UserInterfaceCompressionOptions
 	purego.Main(func() {
 		_mainthread0 = func() *UserInterfaceCompressionOptions {
@@ -183,6 +191,7 @@ func (gtbi *GroupTouchBarItem) EffectiveCompressionOptions() *UserInterfaceCompr
 //
 // PrioritizedCompressionOptions returns the collection as a Go slice.
 func (gtbi *GroupTouchBarItem) PrioritizedCompressionOptions() []*UserInterfaceCompressionOptions {
+	defer runtime.KeepAlive(gtbi)
 	var _mainthread0 []*UserInterfaceCompressionOptions
 	purego.Main(func() {
 		_mainthread0 = func() []*UserInterfaceCompressionOptions {

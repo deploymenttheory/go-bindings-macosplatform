@@ -5,6 +5,8 @@
 package corelocation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func locationUpdaterAdopt(id objc.ID) *LocationUpdater {
 
 // Description returns the object's -description text.
 func (lu *LocationUpdater) Description() string {
+	defer runtime.KeepAlive(lu)
 	return rt.Description(objref.IDOf(lu))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lu *LocationUpdater) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lu)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lu), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lu *LocationUpdater) IsKind(className string) bool {
+	defer runtime.KeepAlive(lu)
 	return rt.IsKind(objref.IDOf(lu), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lu *LocationUpdater) String() string {
+	defer runtime.KeepAlive(lu)
 	return rt.Description(objref.IDOf(lu))
 }
 
@@ -74,15 +81,18 @@ func NewLocationUpdater() *LocationUpdater {
 
 // Resume resumes the updater.
 func (lu *LocationUpdater) Resume() {
+	defer runtime.KeepAlive(lu)
 	objc.Send[objc.ID](objref.IDOf(lu), objc.RegisterName("resume"))
 }
 
 // Pause pauses the updater.
 func (lu *LocationUpdater) Pause() {
+	defer runtime.KeepAlive(lu)
 	objc.Send[objc.ID](objref.IDOf(lu), objc.RegisterName("pause"))
 }
 
 // Invalidate invalidates the updater.
 func (lu *LocationUpdater) Invalidate() {
+	defer runtime.KeepAlive(lu)
 	objc.Send[objc.ID](objref.IDOf(lu), objc.RegisterName("invalidate"))
 }

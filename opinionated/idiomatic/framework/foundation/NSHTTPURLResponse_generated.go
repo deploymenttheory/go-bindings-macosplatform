@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,9 +51,9 @@ func hTTPURLResponseAdopt(id objc.ID) *HTTPURLResponse {
 }
 
 // NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields initializer for NSHTTPURLResponse objects. This API was introduced in Mac OS X 10.7.2 and iOS 5.0 and is not available prior to those releases.
-func NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields(url string, statusCode int, hTTPVersion string, headerFields obj.Object) *HTTPURLResponse {
+func NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields(url string, statusCode int, httpVersion string, headerFields map[string]string) *HTTPURLResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSHTTPURLResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:statusCode:HTTPVersion:headerFields:"), rt.FileURL(url), statusCode, purego.NSString(hTTPVersion), objref.IDOf(headerFields))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:statusCode:HTTPVersion:headerFields:"), rt.FileURL(url), statusCode, purego.NSString(httpVersion), rt.MapToDict(headerFields, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return hTTPURLResponseAdopt(_id)
 }
 
@@ -63,13 +64,14 @@ func (hr *HTTPURLResponse) WithObservationInfo(observationInfo unsafe.Pointer) *
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (hr *HTTPURLResponse) WithScriptingProperties(scriptingProperties obj.Object) *HTTPURLResponse {
-	objc.Send[objc.ID](objref.IDOf(hr), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (hr *HTTPURLResponse) WithScriptingProperties(scriptingProperties map[string]obj.Object) *HTTPURLResponse {
+	objc.Send[objc.ID](objref.IDOf(hr), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return hr
 }
 
 // ValueForHTTPHeaderField returns the value which corresponds to the given header field. Note that, in keeping with the HTTP RFC, HTTP header field names are case-insensitive.
 func (hr *HTTPURLResponse) ValueForHTTPHeaderField(field string) string {
+	defer runtime.KeepAlive(hr)
 	_r := objc.Send[objc.ID](objref.IDOf(hr), objc.RegisterName("valueForHTTPHeaderField:"), purego.NSString(field))
 	if _r == 0 {
 		return ""
@@ -79,12 +81,14 @@ func (hr *HTTPURLResponse) ValueForHTTPHeaderField(field string) string {
 
 // StatusCode returns the HTTP status code of the receiver.
 func (hr *HTTPURLResponse) StatusCode() int {
+	defer runtime.KeepAlive(hr)
 	_r := objc.Send[int](objref.IDOf(hr), objc.RegisterName("statusCode"))
 	return _r
 }
 
 // AllHeaderFields returns a dictionary containing all the HTTP header fields of the receiver. By examining this header dictionary, clients can see the "raw" header information which was reported to the protocol implementation by the HTTP server. This may be of use to sophisticated or special-purpose HTTP clients.
 func (hr *HTTPURLResponse) AllHeaderFields() obj.Object {
+	defer runtime.KeepAlive(hr)
 	_r := objc.Send[objc.ID](objref.IDOf(hr), objc.RegisterName("allHeaderFields"))
 	return obj.Wrap(_r)
 }

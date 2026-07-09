@@ -5,6 +5,7 @@
 package spritekit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,6 +51,7 @@ func warpGeometryGridAdopt(id objc.ID) *WarpGeometryGrid {
 
 // NewWarpGeometryGridWithCoder tells you when to intialize a grid that was loaded from an archive.
 func NewWarpGeometryGridWithCoder(aDecoder obj.Object) *WarpGeometryGrid {
+	defer runtime.KeepAlive(aDecoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKWarpGeometryGrid")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return warpGeometryGridAdopt(_id)
@@ -64,30 +66,35 @@ func NewWarpGeometryGridWithColumnsRowsSourcePositionsDestPositions(cols int, ro
 
 // GridByReplacingSourcePositions returns a copy of the receiver with the source positions replaced by a specified array.
 func (wgg *WarpGeometryGrid) GridByReplacingSourcePositions(sourcePositions unsafe.Pointer) *WarpGeometryGrid {
+	defer runtime.KeepAlive(wgg)
 	_r := objc.Send[objc.ID](objref.IDOf(wgg), objc.RegisterName("gridByReplacingSourcePositions:"), sourcePositions)
 	return WarpGeometryGridFromID(_r)
 }
 
 // GridByReplacingDestPositions returns a copy of the receiver with the destination positions replaced by a specified array.
 func (wgg *WarpGeometryGrid) GridByReplacingDestPositions(destPositions unsafe.Pointer) *WarpGeometryGrid {
+	defer runtime.KeepAlive(wgg)
 	_r := objc.Send[objc.ID](objref.IDOf(wgg), objc.RegisterName("gridByReplacingDestPositions:"), destPositions)
 	return WarpGeometryGridFromID(_r)
 }
 
 // NumberOfColumns returns the number of columns.
 func (wgg *WarpGeometryGrid) NumberOfColumns() int {
+	defer runtime.KeepAlive(wgg)
 	_r := objc.Send[int](objref.IDOf(wgg), objc.RegisterName("numberOfColumns"))
 	return _r
 }
 
 // NumberOfRows returns the number of rows.
 func (wgg *WarpGeometryGrid) NumberOfRows() int {
+	defer runtime.KeepAlive(wgg)
 	_r := objc.Send[int](objref.IDOf(wgg), objc.RegisterName("numberOfRows"))
 	return _r
 }
 
 // VertexCount returns the vertex count.
 func (wgg *WarpGeometryGrid) VertexCount() int {
+	defer runtime.KeepAlive(wgg)
 	_r := objc.Send[int](objref.IDOf(wgg), objc.RegisterName("vertexCount"))
 	return _r
 }

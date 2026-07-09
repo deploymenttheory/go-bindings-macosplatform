@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,14 @@ func NewPersistentHistoryResult() *PersistentHistoryResult {
 
 // Result returns the result.
 func (phr *PersistentHistoryResult) Result() obj.Object {
+	defer runtime.KeepAlive(phr)
 	_r := objc.Send[objc.ID](objref.IDOf(phr), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }
 
 // ResultType returns the result type.
 func (phr *PersistentHistoryResult) ResultType() PersistentHistoryResultType {
+	defer runtime.KeepAlive(phr)
 	_r := objc.Send[PersistentHistoryResultType](objref.IDOf(phr), objc.RegisterName("resultType"))
 	return _r
 }

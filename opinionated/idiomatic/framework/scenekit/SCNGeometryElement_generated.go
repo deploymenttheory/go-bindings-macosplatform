@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func geometryElementAdopt(id objc.ID) *GeometryElement {
 
 // Description returns the object's -description text.
 func (ge *GeometryElement) Description() string {
+	defer runtime.KeepAlive(ge)
 	return rt.Description(objref.IDOf(ge))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ge *GeometryElement) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ge)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ge), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ge *GeometryElement) IsKind(className string) bool {
+	defer runtime.KeepAlive(ge)
 	return rt.IsKind(objref.IDOf(ge), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ge *GeometryElement) String() string {
+	defer runtime.KeepAlive(ge)
 	return rt.Description(objref.IDOf(ge))
 }
 
@@ -98,61 +105,71 @@ func (ge *GeometryElement) WithMaximumPointScreenSpaceRadius(maximumPointScreenS
 }
 
 // Data returns the data for the geometry element
-func (ge *GeometryElement) Data() obj.Object {
+func (ge *GeometryElement) Data() []byte {
+	defer runtime.KeepAlive(ge)
 	_r := objc.Send[objc.ID](objref.IDOf(ge), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // PrimitiveType returns the type of the geometry element. Possible values are listed in the SCNGeometryPrimitiveType enumeration.
 func (ge *GeometryElement) PrimitiveType() GeometryPrimitiveType {
+	defer runtime.KeepAlive(ge)
 	_r := objc.Send[GeometryPrimitiveType](objref.IDOf(ge), objc.RegisterName("primitiveType"))
 	return _r
 }
 
 // PrimitiveCount returns the number of primitives in the data.
 func (ge *GeometryElement) PrimitiveCount() int {
+	defer runtime.KeepAlive(ge)
 	_r := objc.Send[int](objref.IDOf(ge), objc.RegisterName("primitiveCount"))
 	return _r
 }
 
 // HasInterleavedIndicesChannels reports whether the channels are interleaved.
 func (ge *GeometryElement) HasInterleavedIndicesChannels() bool {
+	defer runtime.KeepAlive(ge)
 	_r := objc.Send[bool](objref.IDOf(ge), objc.RegisterName("hasInterleavedIndicesChannels"))
 	return _r
 }
 
 // IndicesChannelCount returns the number of channels in the geometry element.
 func (ge *GeometryElement) IndicesChannelCount() int {
+	defer runtime.KeepAlive(ge)
 	_r := objc.Send[int](objref.IDOf(ge), objc.RegisterName("indicesChannelCount"))
 	return _r
 }
 
 // BytesPerIndex returns the number of bytes that represent an index value
 func (ge *GeometryElement) BytesPerIndex() int {
+	defer runtime.KeepAlive(ge)
 	_r := objc.Send[int](objref.IDOf(ge), objc.RegisterName("bytesPerIndex"))
 	return _r
 }
 
 // PrimitiveRange specifies the subrange of primitives to render within NSMakeRange(0, primitiveCount). Defaults to NSMakeRange(NSNotFound, 0). When the location of the range is set to NSNotFound, the entire geometry element is rendered.
 func (ge *GeometryElement) PrimitiveRange() foundation.NSRange {
+	defer runtime.KeepAlive(ge)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(ge), objc.RegisterName("primitiveRange"))
 	return _r
 }
 
 // PointSize specifies the size of the point in local space. Defaults to 1
 func (ge *GeometryElement) PointSize() float64 {
+	defer runtime.KeepAlive(ge)
 	_r := objc.Send[float64](objref.IDOf(ge), objc.RegisterName("pointSize"))
 	return _r
 }
 
 // MinimumPointScreenSpaceRadius specifies the minimum size in screen-space (in pixel). Defaults to 1
 func (ge *GeometryElement) MinimumPointScreenSpaceRadius() float64 {
+	defer runtime.KeepAlive(ge)
 	_r := objc.Send[float64](objref.IDOf(ge), objc.RegisterName("minimumPointScreenSpaceRadius"))
 	return _r
 }
 
 // MaximumPointScreenSpaceRadius specifies the maximum size in screen-space (in pixel). Defaults to 1
 func (ge *GeometryElement) MaximumPointScreenSpaceRadius() float64 {
+	defer runtime.KeepAlive(ge)
 	_r := objc.Send[float64](objref.IDOf(ge), objc.RegisterName("maximumPointScreenSpaceRadius"))
 	return _r
 }

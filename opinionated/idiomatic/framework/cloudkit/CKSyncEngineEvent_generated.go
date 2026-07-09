@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,99 +51,117 @@ func syncEngineEventAdopt(id objc.ID) *SyncEngineEvent {
 
 // Description returns the object's -description text.
 func (see *SyncEngineEvent) Description() string {
+	defer runtime.KeepAlive(see)
 	return rt.Description(objref.IDOf(see))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (see *SyncEngineEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(see)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(see), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (see *SyncEngineEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(see)
 	return rt.IsKind(objref.IDOf(see), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (see *SyncEngineEvent) String() string {
+	defer runtime.KeepAlive(see)
 	return rt.Description(objref.IDOf(see))
 }
 
 // Type returns the type of event.
 func (see *SyncEngineEvent) Type() SyncEngineEventType {
+	defer runtime.KeepAlive(see)
 	_r := objc.Send[SyncEngineEventType](objref.IDOf(see), objc.RegisterName("type"))
 	return _r
 }
 
 // StateUpdateEvent returns the event downcast to the subclass that represents an update to the sync engine's state.
 func (see *SyncEngineEvent) StateUpdateEvent() *SyncEngineStateUpdateEvent {
+	defer runtime.KeepAlive(see)
 	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("stateUpdateEvent"))
 	return SyncEngineStateUpdateEventFromID(_r)
 }
 
 // AccountChangeEvent returns the event downcast to the subclass that represents a change to the device's iCloud account.
 func (see *SyncEngineEvent) AccountChangeEvent() *SyncEngineAccountChangeEvent {
+	defer runtime.KeepAlive(see)
 	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("accountChangeEvent"))
 	return SyncEngineAccountChangeEventFromID(_r)
 }
 
 // WillFetchChangesEvent returns the event downcast to the subclass that represents an imminent database fetch.
 func (see *SyncEngineEvent) WillFetchChangesEvent() *SyncEngineWillFetchChangesEvent {
+	defer runtime.KeepAlive(see)
 	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("willFetchChangesEvent"))
 	return SyncEngineWillFetchChangesEventFromID(_r)
 }
 
 // FetchedDatabaseChangesEvent returns the event downcast to the subclass that represents a set of fetched database changes to process.
 func (see *SyncEngineEvent) FetchedDatabaseChangesEvent() *SyncEngineFetchedDatabaseChangesEvent {
+	defer runtime.KeepAlive(see)
 	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("fetchedDatabaseChangesEvent"))
 	return SyncEngineFetchedDatabaseChangesEventFromID(_r)
 }
 
 // DidFetchChangesEvent returns the event downcast to the subclass that represents a completed database fetch.
 func (see *SyncEngineEvent) DidFetchChangesEvent() *SyncEngineDidFetchChangesEvent {
+	defer runtime.KeepAlive(see)
 	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("didFetchChangesEvent"))
 	return SyncEngineDidFetchChangesEventFromID(_r)
 }
 
 // WillFetchRecordZoneChangesEvent returns the event downcast to the subclass that represents an imminent fetch of record zone changes.
 func (see *SyncEngineEvent) WillFetchRecordZoneChangesEvent() *SyncEngineWillFetchRecordZoneChangesEvent {
+	defer runtime.KeepAlive(see)
 	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("willFetchRecordZoneChangesEvent"))
 	return SyncEngineWillFetchRecordZoneChangesEventFromID(_r)
 }
 
 // FetchedRecordZoneChangesEvent returns the event downcast to the subclass that represents a set of fetched record zone changes to process.
 func (see *SyncEngineEvent) FetchedRecordZoneChangesEvent() *SyncEngineFetchedRecordZoneChangesEvent {
+	defer runtime.KeepAlive(see)
 	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("fetchedRecordZoneChangesEvent"))
 	return SyncEngineFetchedRecordZoneChangesEventFromID(_r)
 }
 
 // DidFetchRecordZoneChangesEvent returns the event downcast to the subclass that represents a completed record zone fetch.
 func (see *SyncEngineEvent) DidFetchRecordZoneChangesEvent() *SyncEngineDidFetchRecordZoneChangesEvent {
+	defer runtime.KeepAlive(see)
 	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("didFetchRecordZoneChangesEvent"))
 	return SyncEngineDidFetchRecordZoneChangesEventFromID(_r)
 }
 
 // WillSendChangesEvent returns the event downcast to the subclass that represents an imminent send operation.
 func (see *SyncEngineEvent) WillSendChangesEvent() *SyncEngineWillSendChangesEvent {
+	defer runtime.KeepAlive(see)
 	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("willSendChangesEvent"))
 	return SyncEngineWillSendChangesEventFromID(_r)
 }
 
 // SentDatabaseChangesEvent returns the event downcast to the subclass that represents a sent batch of database changes.
 func (see *SyncEngineEvent) SentDatabaseChangesEvent() *SyncEngineSentDatabaseChangesEvent {
+	defer runtime.KeepAlive(see)
 	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("sentDatabaseChangesEvent"))
 	return SyncEngineSentDatabaseChangesEventFromID(_r)
 }
 
 // SentRecordZoneChangesEvent returns the event downcast to the subclass that represents a sent batch of record zone changes.
 func (see *SyncEngineEvent) SentRecordZoneChangesEvent() *SyncEngineSentRecordZoneChangesEvent {
+	defer runtime.KeepAlive(see)
 	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("sentRecordZoneChangesEvent"))
 	return SyncEngineSentRecordZoneChangesEventFromID(_r)
 }
 
 // DidSendChangesEvent returns the event downcast to the subclass that represents a completed send operation.
 func (see *SyncEngineEvent) DidSendChangesEvent() *SyncEngineDidSendChangesEvent {
+	defer runtime.KeepAlive(see)
 	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("didSendChangesEvent"))
 	return SyncEngineDidSendChangesEventFromID(_r)
 }

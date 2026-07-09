@@ -5,11 +5,13 @@
 package appkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -120,6 +122,7 @@ func (op *OpenPanel) WithAccessoryViewDisclosed(accessoryViewDisclosed bool) *Op
 
 // WithIdentifier sets sets and returns the identifier.
 func (op *OpenPanel) WithIdentifier(identifier obj.Object) *OpenPanel {
+	defer runtime.KeepAlive(identifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 	})
@@ -153,6 +156,7 @@ func (op *OpenPanel) WithAllowsOtherFileTypes(allowsOtherFileTypes bool) *OpenPa
 
 // WithCurrentContentType sets NSSavePanel:The current type. If set to nil, resets to the first allowed content type. Returns nil if allowedContentTypes is empty. NSOpenPanel: Not used.
 func (op *OpenPanel) WithCurrentContentType(currentContentType obj.Object) *OpenPanel {
+	defer runtime.KeepAlive(currentContentType)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setCurrentContentType:"), objref.IDOf(currentContentType))
 	})
@@ -161,6 +165,7 @@ func (op *OpenPanel) WithCurrentContentType(currentContentType obj.Object) *Open
 
 // WithAccessoryView sets the custom accessory view for the current app.
 func (op *OpenPanel) WithAccessoryView(accessoryView ViewProvider) *OpenPanel {
+	defer runtime.KeepAlive(accessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 	})
@@ -372,9 +377,22 @@ func (op *OpenPanel) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *
 
 // WithContentView sets the window’s content view, the highest accessible view object in the window’s view hierarchy.
 func (op *OpenPanel) WithContentView(contentView ViewProvider) *OpenPanel {
+	defer runtime.KeepAlive(contentView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	})
+	return op
+}
+
+// WithDelegate sets the window’s delegate.
+func (op *OpenPanel) WithDelegate(delegate WindowDelegate) *OpenPanel {
+	_shim := newWindowDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(op), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(op), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return op
 }
 
@@ -444,6 +462,7 @@ func (op *OpenPanel) WithReleasedWhenClosed(releasedWhenClosed bool) *OpenPanel 
 
 // WithBackgroundColor sets the color of the window’s background.
 func (op *OpenPanel) WithBackgroundColor(backgroundColor *Color) *OpenPanel {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -484,6 +503,7 @@ func (op *OpenPanel) WithCanHide(canHide bool) *OpenPanel {
 
 // WithMiniwindowImage sets the custom miniaturized window image of the window.
 func (op *OpenPanel) WithMiniwindowImage(miniwindowImage *Image) *OpenPanel {
+	defer runtime.KeepAlive(miniwindowImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setMiniwindowImage:"), objref.IDOf(miniwindowImage))
 	})
@@ -620,6 +640,7 @@ func (op *OpenPanel) WithAnimationBehavior(animationBehavior WindowAnimationBeha
 
 // WithFrameAutosaveName sets the name used to automatically save the window’s frame rectangle data in the defaults system.
 func (op *OpenPanel) WithFrameAutosaveName(frameAutosaveName obj.Object) *OpenPanel {
+	defer runtime.KeepAlive(frameAutosaveName)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setFrameAutosaveName:"), objref.IDOf(frameAutosaveName))
 	})
@@ -676,6 +697,7 @@ func (op *OpenPanel) WithMaxFullScreenContentSize(maxFullScreenContentSize coref
 
 // WithWindowController sets the window’s window controller.
 func (op *OpenPanel) WithWindowController(windowController *WindowController) *OpenPanel {
+	defer runtime.KeepAlive(windowController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setWindowController:"), objref.IDOf(windowController))
 	})
@@ -684,6 +706,7 @@ func (op *OpenPanel) WithWindowController(windowController *WindowController) *O
 
 // WithParentWindow sets the parent window to which the window is attached as a child.
 func (op *OpenPanel) WithParentWindow(parentWindow WindowProvider) *OpenPanel {
+	defer runtime.KeepAlive(parentWindow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
 	})
@@ -692,6 +715,7 @@ func (op *OpenPanel) WithParentWindow(parentWindow WindowProvider) *OpenPanel {
 
 // WithAppearanceSource sets an object that the window inherits its appearance from.
 func (op *OpenPanel) WithAppearanceSource(appearanceSource obj.Object) *OpenPanel {
+	defer runtime.KeepAlive(appearanceSource)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setAppearanceSource:"), objref.IDOf(appearanceSource))
 	})
@@ -700,6 +724,7 @@ func (op *OpenPanel) WithAppearanceSource(appearanceSource obj.Object) *OpenPane
 
 // WithColorSpace sets the window’s color space.
 func (op *OpenPanel) WithColorSpace(colorSpace *ColorSpace) *OpenPanel {
+	defer runtime.KeepAlive(colorSpace)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
 	})
@@ -716,6 +741,7 @@ func (op *OpenPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle TitlebarS
 
 // WithContentViewController sets the main content view controller for the window.
 func (op *OpenPanel) WithContentViewController(contentViewController ViewControllerProvider) *OpenPanel {
+	defer runtime.KeepAlive(contentViewController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
 	})
@@ -724,6 +750,7 @@ func (op *OpenPanel) WithContentViewController(contentViewController ViewControl
 
 // WithInitialFirstResponder sets the view that’s made first responder (also called the key view) the first time the window is placed onscreen.
 func (op *OpenPanel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *OpenPanel {
+	defer runtime.KeepAlive(initialFirstResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setInitialFirstResponder:"), objref.IDOf(initialFirstResponder))
 	})
@@ -732,6 +759,7 @@ func (op *OpenPanel) WithInitialFirstResponder(initialFirstResponder ViewProvide
 
 // WithDefaultButtonCell sets the button cell that performs as if clicked when the window receives a Return (or Enter) key event.
 func (op *OpenPanel) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *OpenPanel {
+	defer runtime.KeepAlive(defaultButtonCell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setDefaultButtonCell:"), objref.IDOf(defaultButtonCell))
 	})
@@ -748,6 +776,7 @@ func (op *OpenPanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop
 
 // WithToolbar sets the window’s toolbar.
 func (op *OpenPanel) WithToolbar(toolbar *Toolbar) *OpenPanel {
+	defer runtime.KeepAlive(toolbar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setToolbar:"), objref.IDOf(toolbar))
 	})
@@ -772,6 +801,7 @@ func (op *OpenPanel) WithTabbingMode(tabbingMode WindowTabbingMode) *OpenPanel {
 
 // WithTabbingIdentifier sets a value that allows a group of related windows.
 func (op *OpenPanel) WithTabbingIdentifier(tabbingIdentifier obj.Object) *OpenPanel {
+	defer runtime.KeepAlive(tabbingIdentifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setTabbingIdentifier:"), objref.IDOf(tabbingIdentifier))
 	})
@@ -852,6 +882,7 @@ func (op *OpenPanel) WithRestorationClass(restorationClass unsafe.Pointer) *Open
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (op *OpenPanel) WithNextResponder(nextResponder ResponderProvider) *OpenPanel {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -860,6 +891,7 @@ func (op *OpenPanel) WithNextResponder(nextResponder ResponderProvider) *OpenPan
 
 // WithMenu sets returns the responder’s menu.
 func (op *OpenPanel) WithMenu(menu *Menu) *OpenPanel {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -868,6 +900,7 @@ func (op *OpenPanel) WithMenu(menu *Menu) *OpenPanel {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (op *OpenPanel) WithUserActivity(userActivity obj.Object) *OpenPanel {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -876,6 +909,7 @@ func (op *OpenPanel) WithUserActivity(userActivity obj.Object) *OpenPanel {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (op *OpenPanel) WithTouchBar(touchBar *TouchBar) *OpenPanel {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -885,12 +919,13 @@ func (op *OpenPanel) WithTouchBar(touchBar *TouchBar) *OpenPanel {
 // URLs returns the ur ls.
 //
 // URLs returns the collection as a Go slice.
-func (op *OpenPanel) URLs() []obj.Object {
-	var _mainthread0 []obj.Object
+func (op *OpenPanel) URLs() []string {
+	defer runtime.KeepAlive(op)
+	var _mainthread0 []string
 	purego.Main(func() {
-		_mainthread0 = func() []obj.Object {
+		_mainthread0 = func() []string {
 			_arr := objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("URLs"))
-			return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return rt.URLString(_id) })
 		}()
 	})
 	return _mainthread0
@@ -898,6 +933,7 @@ func (op *OpenPanel) URLs() []obj.Object {
 
 // ResolvesAliases wraps the corresponding Objective-C method.
 func (op *OpenPanel) ResolvesAliases() bool {
+	defer runtime.KeepAlive(op)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -911,6 +947,7 @@ func (op *OpenPanel) ResolvesAliases() bool {
 
 // CanChooseDirectories wraps the corresponding Objective-C method.
 func (op *OpenPanel) CanChooseDirectories() bool {
+	defer runtime.KeepAlive(op)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -924,6 +961,7 @@ func (op *OpenPanel) CanChooseDirectories() bool {
 
 // AllowsMultipleSelection wraps the corresponding Objective-C method.
 func (op *OpenPanel) AllowsMultipleSelection() bool {
+	defer runtime.KeepAlive(op)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -937,6 +975,7 @@ func (op *OpenPanel) AllowsMultipleSelection() bool {
 
 // CanChooseFiles wraps the corresponding Objective-C method.
 func (op *OpenPanel) CanChooseFiles() bool {
+	defer runtime.KeepAlive(op)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -950,6 +989,7 @@ func (op *OpenPanel) CanChooseFiles() bool {
 
 // CanResolveUbiquitousConflicts wraps the corresponding Objective-C method.
 func (op *OpenPanel) CanResolveUbiquitousConflicts() bool {
+	defer runtime.KeepAlive(op)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -963,6 +1003,7 @@ func (op *OpenPanel) CanResolveUbiquitousConflicts() bool {
 
 // CanDownloadUbiquitousContents wraps the corresponding Objective-C method.
 func (op *OpenPanel) CanDownloadUbiquitousContents() bool {
+	defer runtime.KeepAlive(op)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -976,6 +1017,7 @@ func (op *OpenPanel) CanDownloadUbiquitousContents() bool {
 
 // IsAccessoryViewDisclosed reports whether the object is accessory view disclosed.
 func (op *OpenPanel) IsAccessoryViewDisclosed() bool {
+	defer runtime.KeepAlive(op)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -989,6 +1031,7 @@ func (op *OpenPanel) IsAccessoryViewDisclosed() bool {
 
 // Filenames returns the filenames.
 func (op *OpenPanel) Filenames() obj.Object {
+	defer runtime.KeepAlive(op)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -1002,6 +1045,8 @@ func (op *OpenPanel) Filenames() obj.Object {
 
 // RunModalForDirectoryFileTypes runs modal for directory file types.
 func (op *OpenPanel) RunModalForDirectoryFileTypes(path string, name string, fileTypes obj.Object) int {
+	defer runtime.KeepAlive(op)
+	defer runtime.KeepAlive(fileTypes)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1015,6 +1060,8 @@ func (op *OpenPanel) RunModalForDirectoryFileTypes(path string, name string, fil
 
 // RunModalForTypes runs modal for types.
 func (op *OpenPanel) RunModalForTypes(fileTypes obj.Object) int {
+	defer runtime.KeepAlive(op)
+	defer runtime.KeepAlive(fileTypes)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {

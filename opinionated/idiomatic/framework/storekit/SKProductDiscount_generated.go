@@ -5,7 +5,10 @@
 package storekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func productDiscountAdopt(id objc.ID) *ProductDiscount {
 
 // Description returns the object's -description text.
 func (pd *ProductDiscount) Description() string {
+	defer runtime.KeepAlive(pd)
 	return rt.Description(objref.IDOf(pd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pd *ProductDiscount) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pd *ProductDiscount) IsKind(className string) bool {
+	defer runtime.KeepAlive(pd)
 	return rt.IsKind(objref.IDOf(pd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pd *ProductDiscount) String() string {
+	defer runtime.KeepAlive(pd)
 	return rt.Description(objref.IDOf(pd))
 }
 
@@ -73,19 +81,22 @@ func NewProductDiscount() *ProductDiscount {
 }
 
 // Price returns the price.
-func (pd *ProductDiscount) Price() obj.Object {
+func (pd *ProductDiscount) Price() *foundation.DecimalNumber {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("price"))
-	return obj.Wrap(_r)
+	return foundation.DecimalNumberFromID(_r)
 }
 
 // PriceLocale returns the price locale.
-func (pd *ProductDiscount) PriceLocale() obj.Object {
+func (pd *ProductDiscount) PriceLocale() *foundation.Locale {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("priceLocale"))
-	return obj.Wrap(_r)
+	return foundation.LocaleFromID(_r)
 }
 
 // Identifier returns the identifier.
 func (pd *ProductDiscount) Identifier() string {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -95,24 +106,28 @@ func (pd *ProductDiscount) Identifier() string {
 
 // SubscriptionPeriod returns the subscription period.
 func (pd *ProductDiscount) SubscriptionPeriod() *ProductSubscriptionPeriod {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("subscriptionPeriod"))
 	return ProductSubscriptionPeriodFromID(_r)
 }
 
 // NumberOfPeriods returns the number of periods.
 func (pd *ProductDiscount) NumberOfPeriods() int {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[int](objref.IDOf(pd), objc.RegisterName("numberOfPeriods"))
 	return _r
 }
 
 // PaymentMode returns the payment mode.
 func (pd *ProductDiscount) PaymentMode() ProductDiscountPaymentMode {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[ProductDiscountPaymentMode](objref.IDOf(pd), objc.RegisterName("paymentMode"))
 	return _r
 }
 
 // Type returns the type.
 func (pd *ProductDiscount) Type() ProductDiscountType {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[ProductDiscountType](objref.IDOf(pd), objc.RegisterName("type"))
 	return _r
 }

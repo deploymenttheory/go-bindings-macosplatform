@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func audioMixingDestinationAdopt(id objc.ID) *AudioMixingDestination {
 
 // Description returns the object's -description text.
 func (amd *AudioMixingDestination) Description() string {
+	defer runtime.KeepAlive(amd)
 	return rt.Description(objref.IDOf(amd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (amd *AudioMixingDestination) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(amd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(amd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (amd *AudioMixingDestination) IsKind(className string) bool {
+	defer runtime.KeepAlive(amd)
 	return rt.IsKind(objref.IDOf(amd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (amd *AudioMixingDestination) String() string {
+	defer runtime.KeepAlive(amd)
 	return rt.Description(objref.IDOf(amd))
 }
 
@@ -74,6 +81,7 @@ func NewAudioMixingDestination() *AudioMixingDestination {
 
 // ConnectionPoint returns the connection point.
 func (amd *AudioMixingDestination) ConnectionPoint() *AudioConnectionPoint {
+	defer runtime.KeepAlive(amd)
 	_r := objc.Send[objc.ID](objref.IDOf(amd), objc.RegisterName("connectionPoint"))
 	return AudioConnectionPointFromID(_r)
 }

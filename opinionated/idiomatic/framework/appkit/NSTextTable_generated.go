@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -85,47 +87,62 @@ func (tt *TextTable) WithVerticalAlignment(verticalAlignment TextBlockVerticalAl
 
 // WithBackgroundColor sets the background color of the text block.
 func (tt *TextTable) WithBackgroundColor(backgroundColor *Color) *TextTable {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return tt
 }
 
 // RectForBlockLayoutAtPointInRectTextContainerCharacterRange returns the rectangle within which glyphs should be laid out for a text table block.
 func (tt *TextTable) RectForBlockLayoutAtPointInRectTextContainerCharacterRange(block *TextTableBlock, startingPoint corefoundation.CGPoint, rect corefoundation.CGRect, textContainer *TextContainer, charRange foundation.NSRange) corefoundation.CGRect {
+	defer runtime.KeepAlive(tt)
+	defer runtime.KeepAlive(block)
+	defer runtime.KeepAlive(textContainer)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tt), objc.RegisterName("rectForBlock:layoutAtPoint:inRect:textContainer:characterRange:"), objref.IDOf(block), startingPoint, rect, objref.IDOf(textContainer), charRange)
 	return _r
 }
 
 // BoundsRectForBlockContentRectInRectTextContainerCharacterRange returns the rectangle the text table block actually occupies, including padding, borders, and margins.
 func (tt *TextTable) BoundsRectForBlockContentRectInRectTextContainerCharacterRange(block *TextTableBlock, contentRect corefoundation.CGRect, rect corefoundation.CGRect, textContainer *TextContainer, charRange foundation.NSRange) corefoundation.CGRect {
+	defer runtime.KeepAlive(tt)
+	defer runtime.KeepAlive(block)
+	defer runtime.KeepAlive(textContainer)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tt), objc.RegisterName("boundsRectForBlock:contentRect:inRect:textContainer:characterRange:"), objref.IDOf(block), contentRect, rect, objref.IDOf(textContainer), charRange)
 	return _r
 }
 
 // DrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager draws any colors and other decorations for a text table block.
 func (tt *TextTable) DrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager(block *TextTableBlock, frameRect corefoundation.CGRect, controlView *View, charRange foundation.NSRange, layoutManager *LayoutManager) {
+	defer runtime.KeepAlive(tt)
+	defer runtime.KeepAlive(block)
+	defer runtime.KeepAlive(controlView)
+	defer runtime.KeepAlive(layoutManager)
 	objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("drawBackgroundForBlock:withFrame:inView:characterRange:layoutManager:"), objref.IDOf(block), frameRect, objref.IDOf(controlView), charRange, objref.IDOf(layoutManager))
 }
 
 // NumberOfColumns returns the number of columns.
 func (tt *TextTable) NumberOfColumns() int {
+	defer runtime.KeepAlive(tt)
 	_r := objc.Send[int](objref.IDOf(tt), objc.RegisterName("numberOfColumns"))
 	return _r
 }
 
 // LayoutAlgorithm returns the layout algorithm.
 func (tt *TextTable) LayoutAlgorithm() TextTableLayoutAlgorithm {
+	defer runtime.KeepAlive(tt)
 	_r := objc.Send[TextTableLayoutAlgorithm](objref.IDOf(tt), objc.RegisterName("layoutAlgorithm"))
 	return _r
 }
 
 // CollapsesBorders wraps the corresponding Objective-C method.
 func (tt *TextTable) CollapsesBorders() bool {
+	defer runtime.KeepAlive(tt)
 	_r := objc.Send[bool](objref.IDOf(tt), objc.RegisterName("collapsesBorders"))
 	return _r
 }
 
 // HidesEmptyCells wraps the corresponding Objective-C method.
 func (tt *TextTable) HidesEmptyCells() bool {
+	defer runtime.KeepAlive(tt)
 	_r := objc.Send[bool](objref.IDOf(tt), objc.RegisterName("hidesEmptyCells"))
 	return _r
 }

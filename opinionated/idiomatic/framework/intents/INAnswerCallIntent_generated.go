@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -58,18 +60,21 @@ func (aci *AnswerCallIntent) WithSuggestedInvocationPhrase(suggestedInvocationPh
 
 // WithDonationMetadata sets the donation metadata.
 func (aci *AnswerCallIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *AnswerCallIntent {
+	defer runtime.KeepAlive(donationMetadata)
 	objc.Send[objc.ID](objref.IDOf(aci), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return aci
 }
 
 // AudioRoute returns the audio route.
 func (aci *AnswerCallIntent) AudioRoute() CallAudioRoute {
+	defer runtime.KeepAlive(aci)
 	_r := objc.Send[CallAudioRoute](objref.IDOf(aci), objc.RegisterName("audioRoute"))
 	return _r
 }
 
 // CallIdentifier returns the call identifier.
 func (aci *AnswerCallIntent) CallIdentifier() string {
+	defer runtime.KeepAlive(aci)
 	_r := objc.Send[objc.ID](objref.IDOf(aci), objc.RegisterName("callIdentifier"))
 	if _r == 0 {
 		return ""

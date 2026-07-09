@@ -8,7 +8,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
 )
@@ -118,10 +118,24 @@ func idiomaticArg(
 	case isNSURLType(norm):
 		imports["rt"] = rtImportPath
 		return "string", "rt.FileURL(" + pName + ")", imports, true
+	case isNSDateType(norm):
+		imports["rt"] = rtImportPath
+		imports["time"] = "time"
+		return "time.Time", "rt.TimeToNSDate(" + pName + ")", imports, true
+	case isNSDataType(norm):
+		imports["rt"] = rtImportPath
+		return "[]byte", "rt.BytesToNSData(" + pName + ")", imports, true
 	}
 	// A block parameter becomes a Go function.
 	if strings.Contains(objcType, "(^") {
-		sig, adapter, bimps, bok := idiomaticBlockParam(pName, objcType, ctx, mapper, fc, rawPkgAlias)
+		sig, adapter, bimps, bok := idiomaticBlockParam(
+			pName,
+			objcType,
+			ctx,
+			mapper,
+			fc,
+			rawPkgAlias,
+		)
 		if !bok {
 			return "", "", imports, false
 		}
@@ -132,10 +146,66 @@ func idiomaticArg(
 	// Objective-C array.
 	if looksLikeNSArray(objcType) {
 		if elemObjC := extractNSArrayElem(objcType); elemObjC != "" {
-			elemGo, _, toID, eimps := arrayElemConv(elemObjC, ctx, mapper, fc, rawPkgAlias, trialNames)
+			elemGo, _, toID, eimps := arrayElemConv(
+				elemObjC,
+				ctx,
+				mapper,
+				fc,
+				rawPkgAlias,
+				trialNames,
+			)
 			maps.Copy(imports, eimps)
+			imports["purego"] = pureobjcImportPath // purego.SliceToNSArray
 			conv := "func(_v " + elemGo + ") objc.ID { return " + fmt.Sprintf(toID, "_v") + " }"
 			return "[]" + elemGo, "purego.SliceToNSArray(" + pName + ", " + conv + ")", imports, true
+		}
+	}
+	// A string-keyed generic dictionary parameter is accepted as a Go map and
+	// converted to an Objective-C dictionary. Non-string keys and ungenericized
+	// dictionaries keep today's obj.Object shape (a Go map key conversion for an
+	// arbitrary object key would silently misdecode).
+	if looksLikeNSDictionary(objcType) {
+		if keyObjC, valueObjC, kvOK := extractDictKV(
+			objcType,
+		); kvOK &&
+			isNSStringType(normaliseObjC(keyObjC)) {
+			valueGo, _, valueToID, vimps := arrayElemConv(
+				valueObjC,
+				ctx,
+				mapper,
+				fc,
+				rawPkgAlias,
+				trialNames,
+			)
+			maps.Copy(imports, vimps)
+			imports["rt"] = rtImportPath
+			imports["purego"] = pureobjcImportPath // purego.NSString in the key conversion
+			keyConv := "func(_k string) objc.ID { return purego.NSString(_k) }"
+			valueConv := "func(_v " + valueGo + ") objc.ID { return " + fmt.Sprintf(
+				valueToID,
+				"_v",
+			) + " }"
+			return "map[string]" + valueGo,
+				"rt.MapToDict(" + pName + ", " + keyConv + ", " + valueConv + ")",
+				imports, true
+		}
+	}
+	// A set parameter is accepted as a Go slice and converted to an
+	// Objective-C set.
+	if looksLikeNSSet(objcType) {
+		if elemObjC := extractNSArrayElem(objcType); elemObjC != "" {
+			elemGo, _, toID, eimps := arrayElemConv(
+				elemObjC,
+				ctx,
+				mapper,
+				fc,
+				rawPkgAlias,
+				trialNames,
+			)
+			maps.Copy(imports, eimps)
+			imports["rt"] = rtImportPath
+			conv := "func(_v " + elemGo + ") objc.ID { return " + fmt.Sprintf(toID, "_v") + " }"
+			return "[]" + elemGo, "rt.SliceToNSSet(" + pName + ", " + conv + ")", imports, true
 		}
 	}
 	impSet := make(typemap.ImportSet)
@@ -312,17 +382,89 @@ func idiomaticRet(
 		imports["purego"] = pureobjcImportPath
 		return "string", kindString, "", "objc.ID", imports, true
 	}
+	// A URL return is surfaced as a Go string: the filesystem path for a file
+	// URL (round-tripping with the rt.FileURL parameter conversion), the
+	// absolute URL string otherwise.
+	if isNSURLType(normaliseObjC(objcType)) {
+		imports["rt"] = rtImportPath
+		return "string", kindObject, "rt.URLString(%s)", "objc.ID", imports, true
+	}
+	// A date return is surfaced as a Go time.Time (the zero time.Time for nil).
+	if isNSDateType(normaliseObjC(objcType)) {
+		imports["rt"] = rtImportPath
+		imports["time"] = "time"
+		return "time.Time", kindObject, "rt.NSDateToTime(%s)", "objc.ID", imports, true
+	}
+	// A data return is surfaced as a Go byte slice (copied; nil for nil data).
+	if isNSDataType(normaliseObjC(objcType)) {
+		imports["rt"] = rtImportPath
+		return "[]byte", kindObject, "rt.NSDataToBytes(%s)", "objc.ID", imports, true
+	}
 	// An array return is surfaced as a Go slice.
 	if looksLikeNSArray(objcType) {
 		if elemObjC := extractNSArrayElem(objcType); elemObjC != "" {
-			elemGo, fromID, _, eimps := arrayElemConv(elemObjC, ctx, mapper, fc, rawPkgAlias, trialNames)
+			elemGo, fromID, _, eimps := arrayElemConv(
+				elemObjC,
+				ctx,
+				mapper,
+				fc,
+				rawPkgAlias,
+				trialNames,
+			)
 			// Only the element fromID conversion (obj.Wrap / <T>FromID /
 			// purego.GoString) runs on a return; objref.IDOf belongs to the
 			// parameter (toID) direction, so it is not imported here.
 			delete(eimps, "objref")
 			maps.Copy(imports, eimps)
+			imports["purego"] = pureobjcImportPath // purego.NSArrayToSlice
 			conv := "func(_id objc.ID) " + elemGo + " { return " + fmt.Sprintf(fromID, "_id") + " }"
 			wrap := "purego.NSArrayToSlice(%s, " + conv + ")"
+			return "[]" + elemGo, kindArray, wrap, "objc.ID", imports, true
+		}
+	}
+	// A string-keyed generic dictionary return is surfaced as a Go map.
+	if looksLikeNSDictionary(objcType) {
+		if keyObjC, valueObjC, kvOK := extractDictKV(
+			objcType,
+		); kvOK &&
+			isNSStringType(normaliseObjC(keyObjC)) {
+			valueGo, valueFromID, _, vimps := arrayElemConv(
+				valueObjC,
+				ctx,
+				mapper,
+				fc,
+				rawPkgAlias,
+				trialNames,
+			)
+			delete(vimps, "objref")
+			maps.Copy(imports, vimps)
+			imports["rt"] = rtImportPath
+			imports["purego"] = pureobjcImportPath // purego.GoString in the key conversion
+			keyConv := "func(_id objc.ID) string { return purego.GoString(_id) }"
+			valueConv := "func(_id objc.ID) " + valueGo + " { return " + fmt.Sprintf(
+				valueFromID,
+				"_id",
+			) + " }"
+			wrap := "rt.DictToMap(%s, " + keyConv + ", " + valueConv + ")"
+			return "map[string]" + valueGo, kindObject, wrap, "objc.ID", imports, true
+		}
+	}
+	// A set return is surfaced as a Go slice (order unspecified).
+	if looksLikeNSSet(objcType) {
+		if elemObjC := extractNSArrayElem(objcType); elemObjC != "" {
+			elemGo, fromID, _, eimps := arrayElemConv(
+				elemObjC,
+				ctx,
+				mapper,
+				fc,
+				rawPkgAlias,
+				trialNames,
+			)
+			delete(eimps, "objref")
+			maps.Copy(imports, eimps)
+			imports["rt"] = rtImportPath
+			conv := "func(_id objc.ID) " + elemGo + " { return " + fmt.Sprintf(fromID, "_id") + " }"
+			wrap := "rt.NSSetToSlice(%s, " + conv + ")"
 			return "[]" + elemGo, kindArray, wrap, "objc.ID", imports, true
 		}
 	}
@@ -330,7 +472,12 @@ func idiomaticRet(
 		return "", kindVoid, "", "", imports, false
 	}
 	impSet := make(typemap.ImportSet)
-	goRet := qualifyRaw(mapper.GoReturnType(objcType, ctx, impSet), fc, rawPkgAlias, ctx.GenericParams)
+	goRet := qualifyRaw(
+		mapper.GoReturnType(objcType, ctx, impSet),
+		fc,
+		rawPkgAlias,
+		ctx.GenericParams,
+	)
 	if goRet == "" {
 		return "", kindVoid, "", "", imports, false
 	}
@@ -358,6 +505,11 @@ func idiomaticRet(
 			imports["objref"] = objrefImportPath
 			return "*" + tt, kindObject, tt + "FromID(%s)", "objc.ID", imports, true
 		}
+	}
+	if ref, refImports, isCross := crossFrameworkWrapClass(goRet, fc, mapper); isCross {
+		maps.Copy(imports, refImports)
+		return "*" + ref.Package + "." + ref.TypeName, kindObject,
+			ref.Package + "." + ref.TypeName + "FromID(%s)", "objc.ID", imports, true
 	}
 	if isObjectGoType(goRet, mapper) {
 		imports["obj"] = objImportPath
@@ -443,9 +595,26 @@ func arrayElemConv(
 	rawPkgAlias string,
 	trialNames trialNameMap,
 ) (elemGoType, fromID, toID string, imports map[string]string) {
-	imports = map[string]string{"purego": pureobjcImportPath, "objc": objcImportPath}
-	if isNSStringType(normaliseObjC(elemObjC)) {
+	// The conversion closures are typed func(...) objc.ID, so objc is always
+	// referenced; every other import is contributed only by the branch whose
+	// conversion actually names it (a blanket purego here would leave an unused
+	// import in a file whose collections hold only rt-converted elements).
+	imports = map[string]string{"objc": objcImportPath}
+	normElem := normaliseObjC(elemObjC)
+	switch {
+	case isNSStringType(normElem):
+		imports["purego"] = pureobjcImportPath
 		return "string", "purego.GoString(%s)", "purego.NSString(%s)", imports
+	case isNSURLType(normElem):
+		imports["rt"] = rtImportPath
+		return "string", "rt.URLString(%s)", "rt.FileURL(%s)", imports
+	case isNSDateType(normElem):
+		imports["rt"] = rtImportPath
+		imports["time"] = "time"
+		return "time.Time", "rt.NSDateToTime(%s)", "rt.TimeToNSDate(%s)", imports
+	case isNSDataType(normElem):
+		imports["rt"] = rtImportPath
+		return "[]byte", "rt.NSDataToBytes(%s)", "rt.BytesToNSData(%s)", imports
 	}
 	impSet := make(typemap.ImportSet)
 	goElem := qualifyRaw(mapper.GoType(elemObjC, ctx, impSet), fc, rawPkgAlias, ctx.GenericParams)
@@ -455,9 +624,62 @@ func arrayElemConv(
 			return "*" + tt, tt + "FromID(%s)", "objref.IDOf(%s)", imports
 		}
 	}
+	if ref, refImports, isCross := crossFrameworkWrapClass(goElem, fc, mapper); isCross {
+		maps.Copy(imports, refImports)
+		imports["objref"] = objrefImportPath
+		qualified := ref.Package + "." + ref.TypeName
+		return "*" + qualified, qualified + "FromID(%s)", "objref.IDOf(%s)", imports
+	}
 	imports["obj"] = objImportPath
 	imports["objref"] = objrefImportPath
 	return "obj.Object", "obj.Wrap(%s)", "objref.IDOf(%s)", imports
+}
+
+// idiomaticCrossTargets are the idiomatic packages another package's returns
+// may reference by typed wrapper. Restricting the targets to the foundational
+// tier — packages that themselves never gain cross-package wrapper references
+// — keeps the generated import graph trivially acyclic.
+var idiomaticCrossTargets = map[string]bool{
+	"foundation":     true,
+	"corefoundation": true,
+	"coregraphics":   true,
+}
+
+// crossFrameworkWrapClass recognises a resolved return (or collection element)
+// type that is a single pointer to a class another idiomatic package wraps
+// ("*foundation.NSProgress") and resolves it to that package's wrapper
+// ({foundation, Progress}), so the caller emits *foundation.Progress via
+// foundation.ProgressFromID instead of a generic obj.Object. Only the
+// foundational allowlisted packages may be referenced (see
+// idiomaticCrossTargets) and never from within one of them, which keeps the
+// import graph acyclic by construction.
+func crossFrameworkWrapClass(
+	goType string,
+	fc *frameworkContext,
+	mapper *typemap.Mapper,
+) (typemap.IdiomaticClassRef, map[string]string, bool) {
+	currentPackage := strings.ToLower(fc.framework.Framework)
+	if idiomaticCrossTargets[currentPackage] {
+		return typemap.IdiomaticClassRef{}, nil, false
+	}
+	if !strings.HasPrefix(goType, "*") {
+		return typemap.IdiomaticClassRef{}, nil, false
+	}
+	// base must be exactly pkg.Class — one dot, no generics or extra pointers.
+	base := goType[1:]
+	dot := strings.IndexByte(base, '.')
+	if dot <= 0 || strings.ContainsAny(base, "[]* ") || strings.IndexByte(base[dot+1:], '.') >= 0 {
+		return typemap.IdiomaticClassRef{}, nil, false
+	}
+	packageName, className := base[:dot], base[dot+1:]
+	if !idiomaticCrossTargets[packageName] || packageName == currentPackage {
+		return typemap.IdiomaticClassRef{}, nil, false
+	}
+	ref, known := mapper.IdiomaticClassIndex[className]
+	if !known || ref.Package != packageName {
+		return typemap.IdiomaticClassRef{}, nil, false
+	}
+	return ref, map[string]string{ref.Package: idiomaticFrameworkPrefix + ref.Package}, true
 }
 
 // isCFObjectType reports whether an Objective-C type is a CoreFoundation opaque
@@ -631,6 +853,123 @@ func isNSURLType(objcType string) bool {
 	return t == "NSURL *" || strings.HasPrefix(t, "NSURL *") || t == "NSURL"
 }
 
+// isExactClassPointer reports whether objcType is a single pointer to exactly
+// the named class: the identifier must end at a type boundary (so NSData does
+// not match NSDataDetector) and a double pointer (an out-parameter, with or
+// without nullability annotations between the asterisks) or a
+// block/function-pointer type never matches.
+func isExactClassPointer(objcType, className string) bool {
+	if strings.Contains(objcType, "(^") || strings.Contains(objcType, "(*") {
+		return false
+	}
+	t := normaliseObjC(objcType)
+	rest, ok := strings.CutPrefix(t, className)
+	if !ok {
+		return false
+	}
+	if rest != "" && isIdentByte(rest[0], false) {
+		return false
+	}
+	return pointerDepthOutsideGenerics(t) == 1
+}
+
+// pointerDepthOutsideGenerics counts the asterisks outside any <…> generic
+// argument section, which is the type's own pointer depth: one for a value
+// ("NSDictionary<NSString *, NSNumber *> *"), two for an out-parameter
+// ("NSData * _Nullable *").
+func pointerDepthOutsideGenerics(objcType string) int {
+	depth, stars := 0, 0
+	for i := 0; i < len(objcType); i++ {
+		switch objcType[i] {
+		case '<':
+			depth++
+		case '>':
+			depth--
+		case '*':
+			if depth == 0 {
+				stars++
+			}
+		}
+	}
+	return stars
+}
+
+// isNSDateType reports whether objcType is an NSDate pointer. Exact-boundary
+// matching keeps NSDateComponents, NSDateFormatter, and NSDateInterval — whose
+// values are not points in time — out of the time.Time conversion.
+func isNSDateType(objcType string) bool {
+	return isExactClassPointer(objcType, "NSDate")
+}
+
+// isNSDataType reports whether objcType is an NSData pointer. NSMutableData is
+// deliberately not matched: converting it to []byte would hide its in-place
+// mutation semantics, so it keeps its wrapper type.
+func isNSDataType(objcType string) bool {
+	return isExactClassPointer(objcType, "NSData")
+}
+
+// looksLikeNSDictionary reports whether objcType is an NSDictionary pointer
+// (generic or not). NSMutableDictionary is deliberately not matched: a Go map
+// copy would hide its in-place mutation semantics, so it keeps its wrapper
+// type and the Set/Get augment.
+func looksLikeNSDictionary(objcType string) bool {
+	if strings.Contains(objcType, "(^") || strings.Contains(objcType, "(*") {
+		return false
+	}
+	t := normaliseObjC(objcType)
+	rest, ok := strings.CutPrefix(t, "NSDictionary")
+	if !ok {
+		return false
+	}
+	if rest != "" && isIdentByte(rest[0], false) {
+		return false
+	}
+	return pointerDepthOutsideGenerics(t) == 1
+}
+
+// looksLikeNSSet reports whether objcType is an NSSet pointer (generic or
+// not). NSMutableSet, NSCountedSet, and NSOrderedSet are deliberately not
+// matched — the first two for mutation semantics, the last because its order
+// is significant and a Go slice conversion via allObjects is already what
+// NSArray handling provides.
+func looksLikeNSSet(objcType string) bool {
+	return isExactClassPointer(objcType, "NSSet")
+}
+
+// extractDictKV splits a generic dictionary's type arguments into the key and
+// value Objective-C types ("NSDictionary<NSString *, NSNumber *> *"). ok is
+// false for an ungenericized dictionary.
+func extractDictKV(objcType string) (keyObjC, valueObjC string, ok bool) {
+	_, after, found := strings.Cut(objcType, "<")
+	if !found {
+		return "", "", false
+	}
+	end := strings.LastIndex(after, ">")
+	if end < 0 {
+		return "", "", false
+	}
+	inner := after[:end]
+	depth := 0
+	for i := 0; i < len(inner); i++ {
+		switch inner[i] {
+		case '<':
+			depth++
+		case '>':
+			depth--
+		case ',':
+			if depth == 0 {
+				key := strings.TrimSpace(inner[:i])
+				value := strings.TrimSpace(inner[i+1:])
+				if key == "" || value == "" {
+					return "", "", false
+				}
+				return key, value, true
+			}
+		}
+	}
+	return "", "", false
+}
+
 func isNSStringType(objcType string) bool {
 	if strings.Contains(objcType, "(^") || strings.Contains(objcType, "(*") {
 		return false // block or C function pointer returning NSString, not an NSString value
@@ -755,5 +1094,5 @@ func localizeEnumType(
 		return qualified, "", false
 	}
 	fc.referenced[name] = true
-	return deprefixEnumName(name, fc.prefix), qualified, true
+	return fc.localEnumTypeName(name), qualified, true
 }

@@ -5,10 +5,14 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -78,6 +82,16 @@ func (cmfo *CaptureMovieFileOutput) WithSpatialVideoCaptureEnabled(spatialVideoC
 	return cmfo
 }
 
+// WithDelegate sets the delegate object for the capture file output.
+func (cmfo *CaptureMovieFileOutput) WithDelegate(delegate CaptureFileOutputDelegate) *CaptureMovieFileOutput {
+	_shim := newCaptureFileOutputDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(cmfo), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(cmfo), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return cmfo
+}
+
 // WithMaxRecordedDuration sets the longest duration allowed for the recording.
 func (cmfo *CaptureMovieFileOutput) WithMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) *CaptureMovieFileOutput {
 	objc.Send[objc.ID](objref.IDOf(cmfo), objc.RegisterName("setMaxRecordedDuration:"), maxRecordedDuration)
@@ -103,23 +117,29 @@ func (cmfo *CaptureMovieFileOutput) WithDeferredStartEnabled(deferredStartEnable
 }
 
 // OutputSettingsForConnection returns the settings the output uses to encode media from the specified connection.
-func (cmfo *CaptureMovieFileOutput) OutputSettingsForConnection(connection *CaptureConnection) obj.Object {
+func (cmfo *CaptureMovieFileOutput) OutputSettingsForConnection(connection *CaptureConnection) map[string]obj.Object {
+	defer runtime.KeepAlive(cmfo)
+	defer runtime.KeepAlive(connection)
 	_r := objc.Send[objc.ID](objref.IDOf(cmfo), objc.RegisterName("outputSettingsForConnection:"), objref.IDOf(connection))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetOutputSettingsForConnection sets the options the output uses to encode media from the given connection while recording.
-func (cmfo *CaptureMovieFileOutput) SetOutputSettingsForConnection(outputSettings obj.Object, connection *CaptureConnection) {
-	objc.Send[objc.ID](objref.IDOf(cmfo), objc.RegisterName("setOutputSettings:forConnection:"), objref.IDOf(outputSettings), objref.IDOf(connection))
+func (cmfo *CaptureMovieFileOutput) SetOutputSettingsForConnection(outputSettings map[string]obj.Object, connection *CaptureConnection) {
+	defer runtime.KeepAlive(cmfo)
+	defer runtime.KeepAlive(connection)
+	objc.Send[objc.ID](objref.IDOf(cmfo), objc.RegisterName("setOutputSettings:forConnection:"), rt.MapToDict(outputSettings, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(connection))
 }
 
 // SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions sets the camera switching behavior to use during recording.
 func (cmfo *CaptureMovieFileOutput) SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions(switchingBehavior CapturePrimaryConstituentDeviceSwitchingBehavior, restrictedSwitchingBehaviorConditions CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) {
+	defer runtime.KeepAlive(cmfo)
 	objc.Send[objc.ID](objref.IDOf(cmfo), objc.RegisterName("setPrimaryConstituentDeviceSwitchingBehaviorForRecording:restrictedSwitchingBehaviorConditions:"), switchingBehavior, restrictedSwitchingBehaviorConditions)
 }
 
 // MovieFragmentInterval specifies the frequency with which movie fragments should be written. When movie fragments are used, a partially written QuickTime movie file whose writing is unexpectedly interrupted can be successfully opened and played up to multiples of the specified time interval. A value of kCMTimeInvalid indicates that movie fragments should not be used, but that only a movie atom describing all of the media in the file should be written. The default value of this property is ten seconds. Changing the value of this property will not affect the movie fragment interval of the file currently being written, if there is one. For best writing performance on external storage devices, set the movieFragmentInterval to 10 seconds or greater. If the size of a movie fragment is greater than or equal to 2GB, an interval is added at 2GB mark.
 func (cmfo *CaptureMovieFileOutput) MovieFragmentInterval() coremedia.CMTime {
+	defer runtime.KeepAlive(cmfo)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(cmfo), objc.RegisterName("movieFragmentInterval"))
 	return _r
 }
@@ -128,36 +148,42 @@ func (cmfo *CaptureMovieFileOutput) MovieFragmentInterval() coremedia.CMTime {
 //
 // Metadata returns the collection as a Go slice.
 func (cmfo *CaptureMovieFileOutput) Metadata() []*MetadataItem {
+	defer runtime.KeepAlive(cmfo)
 	_arr := objc.Send[objc.ID](objref.IDOf(cmfo), objc.RegisterName("metadata"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
 // IsPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled reports whether enable or disable a constituent device selection behavior when recording. This property enables a camera selection behavior to be applied when recording a movie. Once recording starts, the specified behavior and conditions take effect. Once recording stops the camera selection will change back to the primaryConstituentDeviceSwitchingBehavior specified by the AVCaptureDevice. By default, this property is set to true when connected to an AVCaptureDevice that supports constituent device switching.
 func (cmfo *CaptureMovieFileOutput) IsPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled() bool {
+	defer runtime.KeepAlive(cmfo)
 	_r := objc.Send[bool](objref.IDOf(cmfo), objc.RegisterName("isPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled"))
 	return _r
 }
 
 // PrimaryConstituentDeviceSwitchingBehaviorForRecording returns the primaryConstituentDeviceSwitchingBehavior as set by -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehaviorForRecording:restrictedSwitchingBehaviorConditions:]. By default, this property is set to AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted. This property is key-value observable.
 func (cmfo *CaptureMovieFileOutput) PrimaryConstituentDeviceSwitchingBehaviorForRecording() CapturePrimaryConstituentDeviceSwitchingBehavior {
+	defer runtime.KeepAlive(cmfo)
 	_r := objc.Send[CapturePrimaryConstituentDeviceSwitchingBehavior](objref.IDOf(cmfo), objc.RegisterName("primaryConstituentDeviceSwitchingBehaviorForRecording"))
 	return _r
 }
 
 // PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording returns the primaryConstituentDeviceRestrictedSwitchingBehaviorConditions as set by -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehaviorForRecording:restrictedSwitchingBehaviorConditions:]. By default, this property is set to AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorCondition{VideoZoomChanged | FocusModeChanged | ExposureModeChanged}. This property is key-value observable.
 func (cmfo *CaptureMovieFileOutput) PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording() CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions {
+	defer runtime.KeepAlive(cmfo)
 	_r := objc.Send[CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions](objref.IDOf(cmfo), objc.RegisterName("primaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording"))
 	return _r
 }
 
 // IsSpatialVideoCaptureSupported reports whether capturing spatial video to a file is supported. Note that in order to be supported, two conditions must be met. (1) The source AVCaptureDevice's activeFormat.spatialVideoCaptureSupported property must return true. (2) The video AVCaptureConnection's activeVideoStabilizationMode property must return AVCaptureVideoStabilizationModeCinematic, AVCaptureVideoStabilizationModeCinematicExtended, or AVCaptureVideoStabilizationModeCinematicExtendedEnhanced.
 func (cmfo *CaptureMovieFileOutput) IsSpatialVideoCaptureSupported() bool {
+	defer runtime.KeepAlive(cmfo)
 	_r := objc.Send[bool](objref.IDOf(cmfo), objc.RegisterName("isSpatialVideoCaptureSupported"))
 	return _r
 }
 
 // IsSpatialVideoCaptureEnabled reports whether enable or disable capturing spatial video to a file. This property enables capturing spatial video to a file. By default, this property is set to false. Check spatialVideoCaptureSupported before setting this property, as setting to true will throw an exception if the feature is not supported. On iOS, enabling spatial video will overwrite the connected AVCaptureDevice's `videoZoomFactor`, `minAvailableVideoZoomFactor`, and `maxAvailableVideoZoomFactor` to the field of view of the narrower camera in the pair. When spatialVideoCaptureEnabled is true, setting -[AVCaptureDeviceInput activeVideoMinFrameDuration] or -[AVCaptureDeviceInput activeVideoMaxFrameDuration] throws an NSInvalidArgumentException. Enabling this property throws an NSInvalidArgumentException if -[AVCaptureDevice isVideoFrameDurationLocked] or -[AVCaptureDevice isFollowingExternalSyncDevice] is true.
 func (cmfo *CaptureMovieFileOutput) IsSpatialVideoCaptureEnabled() bool {
+	defer runtime.KeepAlive(cmfo)
 	_r := objc.Send[bool](objref.IDOf(cmfo), objc.RegisterName("isSpatialVideoCaptureEnabled"))
 	return _r
 }

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRMediaInputClusterRenameInputParamsAdopt(id objc.ID) *MTRMediaInputCluste
 
 // Description returns the object's -description text.
 func (mmicrip *MTRMediaInputClusterRenameInputParams) Description() string {
+	defer runtime.KeepAlive(mmicrip)
 	return rt.Description(objref.IDOf(mmicrip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmicrip *MTRMediaInputClusterRenameInputParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmicrip)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmicrip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmicrip *MTRMediaInputClusterRenameInputParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmicrip)
 	return rt.IsKind(objref.IDOf(mmicrip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmicrip *MTRMediaInputClusterRenameInputParams) String() string {
+	defer runtime.KeepAlive(mmicrip)
 	return rt.Description(objref.IDOf(mmicrip))
 }
 
@@ -72,6 +80,7 @@ func NewMTRMediaInputClusterRenameInputParams() *MTRMediaInputClusterRenameInput
 
 // WithIndex sets the index.
 func (mmicrip *MTRMediaInputClusterRenameInputParams) WithIndex(index obj.Object) *MTRMediaInputClusterRenameInputParams {
+	defer runtime.KeepAlive(index)
 	objc.Send[objc.ID](objref.IDOf(mmicrip), objc.RegisterName("setIndex:"), objref.IDOf(index))
 	return mmicrip
 }
@@ -84,24 +93,28 @@ func (mmicrip *MTRMediaInputClusterRenameInputParams) WithName(name string) *MTR
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mmicrip *MTRMediaInputClusterRenameInputParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMediaInputClusterRenameInputParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mmicrip), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mmicrip
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mmicrip *MTRMediaInputClusterRenameInputParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMediaInputClusterRenameInputParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mmicrip), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mmicrip
 }
 
 // Index returns the index.
-func (mmicrip *MTRMediaInputClusterRenameInputParams) Index() obj.Object {
+func (mmicrip *MTRMediaInputClusterRenameInputParams) Index() *foundation.Number {
+	defer runtime.KeepAlive(mmicrip)
 	_r := objc.Send[objc.ID](objref.IDOf(mmicrip), objc.RegisterName("index"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Name returns the name.
 func (mmicrip *MTRMediaInputClusterRenameInputParams) Name() string {
+	defer runtime.KeepAlive(mmicrip)
 	_r := objc.Send[objc.ID](objref.IDOf(mmicrip), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -110,13 +123,15 @@ func (mmicrip *MTRMediaInputClusterRenameInputParams) Name() string {
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mmicrip *MTRMediaInputClusterRenameInputParams) TimedInvokeTimeoutMs() obj.Object {
+func (mmicrip *MTRMediaInputClusterRenameInputParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mmicrip)
 	_r := objc.Send[objc.ID](objref.IDOf(mmicrip), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mmicrip *MTRMediaInputClusterRenameInputParams) ServerSideProcessingTimeout() obj.Object {
+func (mmicrip *MTRMediaInputClusterRenameInputParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mmicrip)
 	_r := objc.Send[objc.ID](objref.IDOf(mmicrip), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

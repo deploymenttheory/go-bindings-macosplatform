@@ -5,9 +5,13 @@
 package healthkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,12 +60,14 @@ func NewVerifiableClinicalRecord() *VerifiableClinicalRecord {
 //
 // RecordTypes returns the collection as a Go slice.
 func (vcr *VerifiableClinicalRecord) RecordTypes() []string {
+	defer runtime.KeepAlive(vcr)
 	_arr := objc.Send[objc.ID](objref.IDOf(vcr), objc.RegisterName("recordTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // IssuerIdentifier returns the identifier for the issuer of this record.
 func (vcr *VerifiableClinicalRecord) IssuerIdentifier() string {
+	defer runtime.KeepAlive(vcr)
 	_r := objc.Send[objc.ID](objref.IDOf(vcr), objc.RegisterName("issuerIdentifier"))
 	if _r == 0 {
 		return ""
@@ -71,46 +77,53 @@ func (vcr *VerifiableClinicalRecord) IssuerIdentifier() string {
 
 // Subject returns the subject of this record.
 func (vcr *VerifiableClinicalRecord) Subject() *VerifiableClinicalRecordSubject {
+	defer runtime.KeepAlive(vcr)
 	_r := objc.Send[objc.ID](objref.IDOf(vcr), objc.RegisterName("subject"))
 	return VerifiableClinicalRecordSubjectFromID(_r)
 }
 
 // IssuedDate returns the date this record was issued.
-func (vcr *VerifiableClinicalRecord) IssuedDate() obj.Object {
+func (vcr *VerifiableClinicalRecord) IssuedDate() time.Time {
+	defer runtime.KeepAlive(vcr)
 	_r := objc.Send[objc.ID](objref.IDOf(vcr), objc.RegisterName("issuedDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // RelevantDate returns a date most relevant to this record, like when a vaccine was administered or a test was performed.
-func (vcr *VerifiableClinicalRecord) RelevantDate() obj.Object {
+func (vcr *VerifiableClinicalRecord) RelevantDate() time.Time {
+	defer runtime.KeepAlive(vcr)
 	_r := objc.Send[objc.ID](objref.IDOf(vcr), objc.RegisterName("relevantDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ExpirationDate returns the date this record expires.
-func (vcr *VerifiableClinicalRecord) ExpirationDate() obj.Object {
+func (vcr *VerifiableClinicalRecord) ExpirationDate() time.Time {
+	defer runtime.KeepAlive(vcr)
 	_r := objc.Send[objc.ID](objref.IDOf(vcr), objc.RegisterName("expirationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ItemNames returns a list of display names for each item contained in this record.
 //
 // ItemNames returns the collection as a Go slice.
 func (vcr *VerifiableClinicalRecord) ItemNames() []string {
+	defer runtime.KeepAlive(vcr)
 	_arr := objc.Send[objc.ID](objref.IDOf(vcr), objc.RegisterName("itemNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // SourceType returns the type of the source leading to this verifiable record.
-func (vcr *VerifiableClinicalRecord) SourceType() obj.Object {
+func (vcr *VerifiableClinicalRecord) SourceType() *foundation.String {
+	defer runtime.KeepAlive(vcr)
 	_r := objc.Send[objc.ID](objref.IDOf(vcr), objc.RegisterName("sourceType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // DataRepresentation returns the record's data representation, determined by source type.
-func (vcr *VerifiableClinicalRecord) DataRepresentation() obj.Object {
+func (vcr *VerifiableClinicalRecord) DataRepresentation() []byte {
+	defer runtime.KeepAlive(vcr)
 	_r := objc.Send[objc.ID](objref.IDOf(vcr), objc.RegisterName("dataRepresentation"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ SampleProvider = (*VerifiableClinicalRecord)(nil)

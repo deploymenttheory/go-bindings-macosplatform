@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,127 +49,171 @@ func mTRClusterSmokeCOAlarmAdopt(id objc.ID) *MTRClusterSmokeCOAlarm {
 
 // NewMTRClusterSmokeCOAlarmWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterSmokeCOAlarmWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterSmokeCOAlarm {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterSmokeCOAlarm")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterSmokeCOAlarmAdopt(_id)
 }
 
 // ReadAttributeExpressedStateWithParams reads attribute expressed state with params.
-func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeExpressedStateWithParams(params *MTRReadParams) obj.Object {
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeExpressedStateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeExpressedStateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSmokeStateWithParams reads attribute smoke state with params.
-func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeSmokeStateWithParams(params *MTRReadParams) obj.Object {
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeSmokeStateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeSmokeStateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCOStateWithParams reads attribute co state with params.
-func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeCOStateWithParams(params *MTRReadParams) obj.Object {
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeCOStateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeCOStateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBatteryAlertWithParams reads attribute battery alert with params.
-func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeBatteryAlertWithParams(params *MTRReadParams) obj.Object {
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeBatteryAlertWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeBatteryAlertWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDeviceMutedWithParams reads attribute device muted with params.
-func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeDeviceMutedWithParams(params *MTRReadParams) obj.Object {
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeDeviceMutedWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeDeviceMutedWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTestInProgressWithParams reads attribute test in progress with params.
-func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeTestInProgressWithParams(params *MTRReadParams) obj.Object {
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeTestInProgressWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeTestInProgressWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeHardwareFaultAlertWithParams reads attribute hardware fault alert with params.
-func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeHardwareFaultAlertWithParams(params *MTRReadParams) obj.Object {
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeHardwareFaultAlertWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeHardwareFaultAlertWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeEndOfServiceAlertWithParams reads attribute end of service alert with params.
-func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeEndOfServiceAlertWithParams(params *MTRReadParams) obj.Object {
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeEndOfServiceAlertWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeEndOfServiceAlertWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeInterconnectSmokeAlarmWithParams reads attribute interconnect smoke alarm with params.
-func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeInterconnectSmokeAlarmWithParams(params *MTRReadParams) obj.Object {
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeInterconnectSmokeAlarmWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeInterconnectSmokeAlarmWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeInterconnectCOAlarmWithParams reads attribute interconnect co alarm with params.
-func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeInterconnectCOAlarmWithParams(params *MTRReadParams) obj.Object {
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeInterconnectCOAlarmWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeInterconnectCOAlarmWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeContaminationStateWithParams reads attribute contamination state with params.
-func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeContaminationStateWithParams(params *MTRReadParams) obj.Object {
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeContaminationStateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeContaminationStateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSmokeSensitivityLevelWithParams reads attribute smoke sensitivity level with params.
-func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeSmokeSensitivityLevelWithParams(params *MTRReadParams) obj.Object {
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeSmokeSensitivityLevelWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeSmokeSensitivityLevelWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeSmokeSensitivityLevelWithValueExpectedValueInterval writes attribute smoke sensitivity level with value expected value interval.
-func (mcsca *MTRClusterSmokeCOAlarm) WriteAttributeSmokeSensitivityLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("writeAttributeSmokeSensitivityLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcsca *MTRClusterSmokeCOAlarm) WriteAttributeSmokeSensitivityLevelWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("writeAttributeSmokeSensitivityLevelWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeSmokeSensitivityLevelWithValueExpectedValueIntervalParams writes attribute smoke sensitivity level with value expected value interval params.
-func (mcsca *MTRClusterSmokeCOAlarm) WriteAttributeSmokeSensitivityLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("writeAttributeSmokeSensitivityLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) WriteAttributeSmokeSensitivityLevelWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("writeAttributeSmokeSensitivityLevelWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeExpiryDateWithParams reads attribute expiry date with params.
-func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeExpiryDateWithParams(params *MTRReadParams) obj.Object {
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeExpiryDateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeExpiryDateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsca)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterSmokeCOAlarm)(nil)

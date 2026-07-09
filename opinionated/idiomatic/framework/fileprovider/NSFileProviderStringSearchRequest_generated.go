@@ -5,6 +5,8 @@
 package fileprovider
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func fileProviderStringSearchRequestAdopt(id objc.ID) *FileProviderStringSearchR
 
 // Description returns the object's -description text.
 func (fpssr *FileProviderStringSearchRequest) Description() string {
+	defer runtime.KeepAlive(fpssr)
 	return rt.Description(objref.IDOf(fpssr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fpssr *FileProviderStringSearchRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fpssr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fpssr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fpssr *FileProviderStringSearchRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(fpssr)
 	return rt.IsKind(objref.IDOf(fpssr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fpssr *FileProviderStringSearchRequest) String() string {
+	defer runtime.KeepAlive(fpssr)
 	return rt.Description(objref.IDOf(fpssr))
 }
 
@@ -74,6 +81,7 @@ func NewFileProviderStringSearchRequest() *FileProviderStringSearchRequest {
 
 // Query returns a plaintext string, representing the query the user entered into the system search UI.
 func (fpssr *FileProviderStringSearchRequest) Query() string {
+	defer runtime.KeepAlive(fpssr)
 	_r := objc.Send[objc.ID](objref.IDOf(fpssr), objc.RegisterName("query"))
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (fpssr *FileProviderStringSearchRequest) Query() string {
 
 // DesiredNumberOfResults returns how many results the system is requesting. This is a hint to the extension, to help avoid unnecessary work. The extension may return more results than this.
 func (fpssr *FileProviderStringSearchRequest) DesiredNumberOfResults() int {
+	defer runtime.KeepAlive(fpssr)
 	_r := objc.Send[int](objref.IDOf(fpssr), objc.RegisterName("desiredNumberOfResults"))
 	return _r
 }

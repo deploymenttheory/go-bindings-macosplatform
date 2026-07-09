@@ -6678,8 +6678,8 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avasynchronousvideocompositionrequest/sourcereadysamplebuffer(bytrackid:)"
       },
       "sourceSampleDataTrackIDs": {
-        "doc": "The identifiers of tracks that contain source metadata.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avasynchronousvideocompositionrequest/sourcesampledatatrackids-9vxz5"
+        "doc": "The identifiers of tracks that contain source sample data.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avasynchronousvideocompositionrequest/sourcesampledatatrackids-3yiab"
       },
       "sourceTaggedDynamicBuffers(byTrackID:)": {
         "doc": "Returns the source tagged dynamic buffers for the given track ID. Returns nil if the video track does not contain tagged buffers, or if the track does not contain video. This function should only be called when supportsSourceTaggedBuffers is YES.",
@@ -7873,7 +7873,7 @@
       },
       "availableRawPhotoPixelFormatTypes": {
         "doc": "The pixel formats the capture output supports for RAW photo capture.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avcapturephotooutput/availablerawphotopixelformattypes-5fatm"
+        "url": "https://developer.apple.com/documentation/avfoundation/avcapturephotooutput/availablerawphotopixelformattypes-9t9k5"
       },
       "availableSemanticSegmentationMatteTypes": {
         "doc": "An array of semantic segmentation matte types that may be captured and delivered along with the primary photo.",
@@ -9598,8 +9598,8 @@
     },
     "AVMetadataMachineReadableCodeObject": {
       "corners": {
-        "doc": "The points defining the (x, y) locations of the corners.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avmetadatamachinereadablecodeobject/corners-8f6bv"
+        "doc": "A Swift array of corner points.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avmetadatamachinereadablecodeobject/corners-58qbe"
       },
       "descriptor": {
         "doc": "A barcode description for use in Core Image.",
@@ -10340,8 +10340,8 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avmutablevideocomposition/rendersize"
       },
       "sourceSampleDataTrackIDs": {
-        "doc": "The identifiers of source sample data tracks in the composition that the object requires to compose frames.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avmutablevideocomposition/sourcesampledatatrackids-7i02t"
+        "doc": "The identifiers of source sample data tracks in the composition that the compositor requires to compose frames.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avmutablevideocomposition/sourcesampledatatrackids-21o6b"
       },
       "sourceTrackIDForFrameTiming": {
         "doc": "An identifier of the source track from which the video composition derives frame timing.",
@@ -11437,7 +11437,7 @@
       },
       "loadedTimeRanges": {
         "doc": "The time ranges for the segment that have media data is readily available.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsegment/loadedtimeranges-2p0fl"
+        "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemsegment/loadedtimeranges-879hc"
       },
       "segmentType": {
         "doc": "The type content this segment represents.",
@@ -11784,8 +11784,8 @@
         "url": "https://developer.apple.com/documentation/avfoundation/avsamplebuffervideorenderer/error"
       },
       "recommendedPixelBufferAttributes": {
-        "doc": "Recommended pixel buffer attributes for optimal performance when using CMSampleBuffers containing CVPixelBuffers.",
-        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebuffervideorenderer/recommendedpixelbufferattributes-6326f"
+        "doc": "Recommended pixel buffer attributes for optimal performance when using CMSampleBuffers containing CVPixelbuffers.",
+        "url": "https://developer.apple.com/documentation/avfoundation/avsamplebuffervideorenderer/recommendedpixelbufferattributes-6zrqb"
       },
       "requiresFlushToResumeDecoding": {
         "doc": "A Boolean value that Indicates whether the renderer requires flushing to continue decoding frames.",

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDistinguishedNameInfoAdopt(id objc.ID) *MTRDistinguishedNameInfo {
 
 // Description returns the object's -description text.
 func (mdni *MTRDistinguishedNameInfo) Description() string {
+	defer runtime.KeepAlive(mdni)
 	return rt.Description(objref.IDOf(mdni))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdni *MTRDistinguishedNameInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdni)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdni), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdni *MTRDistinguishedNameInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdni)
 	return rt.IsKind(objref.IDOf(mdni), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdni *MTRDistinguishedNameInfo) String() string {
+	defer runtime.KeepAlive(mdni)
 	return rt.Description(objref.IDOf(mdni))
 }
 
@@ -71,31 +79,37 @@ func NewMTRDistinguishedNameInfo() *MTRDistinguishedNameInfo {
 }
 
 // NodeID returns the Node ID contained in the DN, if any.  Will be non-nil for the subject of a valid node operational certificate.
-func (mdni *MTRDistinguishedNameInfo) NodeID() obj.Object {
+func (mdni *MTRDistinguishedNameInfo) NodeID() *foundation.Number {
+	defer runtime.KeepAlive(mdni)
 	_r := objc.Send[objc.ID](objref.IDOf(mdni), objc.RegisterName("nodeID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // FabricID returns the Fabric ID contained in the DN, if any.  Will be non-nil for the subject of a valid node operational certificate, and may be non-nil for the subject of a valid intermediate or root certificate.
-func (mdni *MTRDistinguishedNameInfo) FabricID() obj.Object {
+func (mdni *MTRDistinguishedNameInfo) FabricID() *foundation.Number {
+	defer runtime.KeepAlive(mdni)
 	_r := objc.Send[objc.ID](objref.IDOf(mdni), objc.RegisterName("fabricID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // RootCACertificateID returns the `RCAC` ID contained in the DN, if any.  Will be non-nil for the subject of a valid root certificate.
-func (mdni *MTRDistinguishedNameInfo) RootCACertificateID() obj.Object {
+func (mdni *MTRDistinguishedNameInfo) RootCACertificateID() *foundation.Number {
+	defer runtime.KeepAlive(mdni)
 	_r := objc.Send[objc.ID](objref.IDOf(mdni), objc.RegisterName("rootCACertificateID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // IntermediateCACertificateID returns the `ICAC` ID contained in the DN, if any.  Will be non-nil for the subject of a valid intermediate certificate.
-func (mdni *MTRDistinguishedNameInfo) IntermediateCACertificateID() obj.Object {
+func (mdni *MTRDistinguishedNameInfo) IntermediateCACertificateID() *foundation.Number {
+	defer runtime.KeepAlive(mdni)
 	_r := objc.Send[objc.ID](objref.IDOf(mdni), objc.RegisterName("intermediateCACertificateID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // CaseAuthenticatedTags returns the set of CASE Authenticated Tags contained in the DN.  Maybe be non-empty for the subject of a valid node operational certificate.
-func (mdni *MTRDistinguishedNameInfo) CaseAuthenticatedTags() obj.Object {
+// The order of the returned elements is unspecified.
+func (mdni *MTRDistinguishedNameInfo) CaseAuthenticatedTags() []*foundation.Number {
+	defer runtime.KeepAlive(mdni)
 	_r := objc.Send[objc.ID](objref.IDOf(mdni), objc.RegisterName("caseAuthenticatedTags"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.Number { return foundation.NumberFromID(_id) })
 }

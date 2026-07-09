@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func commandQueueDescriptorAdopt(id objc.ID) *CommandQueueDescriptor {
 
 // Description returns the object's -description text.
 func (cqd *CommandQueueDescriptor) Description() string {
+	defer runtime.KeepAlive(cqd)
 	return rt.Description(objref.IDOf(cqd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cqd *CommandQueueDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cqd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cqd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cqd *CommandQueueDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(cqd)
 	return rt.IsKind(objref.IDOf(cqd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cqd *CommandQueueDescriptor) String() string {
+	defer runtime.KeepAlive(cqd)
 	return rt.Description(objref.IDOf(cqd))
 }
 
@@ -80,6 +87,7 @@ func (cqd *CommandQueueDescriptor) WithMaxCommandBufferCount(maxCommandBufferCou
 
 // MaxCommandBufferCount returns the max command buffer count.
 func (cqd *CommandQueueDescriptor) MaxCommandBufferCount() int {
+	defer runtime.KeepAlive(cqd)
 	_r := objc.Send[int](objref.IDOf(cqd), objc.RegisterName("maxCommandBufferCount"))
 	return _r
 }

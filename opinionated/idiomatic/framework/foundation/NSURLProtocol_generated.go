@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func uRLProtocolAdopt(id objc.ID) *URLProtocol {
 
 // Description returns the object's -description text.
 func (up *URLProtocol) Description() string {
+	defer runtime.KeepAlive(up)
 	return rt.Description(objref.IDOf(up))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (up *URLProtocol) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(up)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(up), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (up *URLProtocol) IsKind(className string) bool {
+	defer runtime.KeepAlive(up)
 	return rt.IsKind(objref.IDOf(up), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (up *URLProtocol) String() string {
+	defer runtime.KeepAlive(up)
 	return rt.Description(objref.IDOf(up))
 }
 
@@ -81,35 +87,40 @@ func (up *URLProtocol) WithObservationInfo(observationInfo unsafe.Pointer) *URLP
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (up *URLProtocol) WithScriptingProperties(scriptingProperties obj.Object) *URLProtocol {
-	objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (up *URLProtocol) WithScriptingProperties(scriptingProperties map[string]obj.Object) *URLProtocol {
+	objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return up
 }
 
 // StartLoading starts protocol-specific loading of a request. When this method is called, the protocol implementation should start loading a request.
 func (up *URLProtocol) StartLoading() {
+	defer runtime.KeepAlive(up)
 	objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("startLoading"))
 }
 
 // StopLoading stops protocol-specific loading of a request. When this method is called, the protocol implementation should end the work of loading a request. This could be in response to a cancel operation, so protocol implementations must be able to handle this call while a load is in progress.
 func (up *URLProtocol) StopLoading() {
+	defer runtime.KeepAlive(up)
 	objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("stopLoading"))
 }
 
 // Request returns the NSURLRequest of the receiver.
 func (up *URLProtocol) Request() *URLRequest {
+	defer runtime.KeepAlive(up)
 	_r := objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("request"))
 	return URLRequestFromID(_r)
 }
 
 // CachedResponse returns the NSCachedURLResponse of the receiver.
 func (up *URLProtocol) CachedResponse() *CachedURLResponse {
+	defer runtime.KeepAlive(up)
 	_r := objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("cachedResponse"))
 	return CachedURLResponseFromID(_r)
 }
 
 // Task returns the task.
 func (up *URLProtocol) Task() *URLSessionTask {
+	defer runtime.KeepAlive(up)
 	_r := objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("task"))
 	return URLSessionTaskFromID(_r)
 }

@@ -5,9 +5,11 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,9 +56,10 @@ func NewPlayerItemMetadataCollectorWithIdentifiersClassifyingLabels(identifiers 
 }
 
 // DelegateQueue returns the dispatch queue on which messages are sent to the delegate. This property is not key-value observable.
-func (pimc *PlayerItemMetadataCollector) DelegateQueue() obj.Object {
+func (pimc *PlayerItemMetadataCollector) DelegateQueue() *foundation.Object {
+	defer runtime.KeepAlive(pimc)
 	_r := objc.Send[objc.ID](objref.IDOf(pimc), objc.RegisterName("delegateQueue"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 var _ PlayerItemMediaDataCollectorProvider = (*PlayerItemMetadataCollector)(nil)

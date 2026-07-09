@@ -5,9 +5,11 @@
 package fileproviderui
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,22 +51,27 @@ func actionExtensionViewControllerAdopt(id objc.ID) *ActionExtensionViewControll
 
 // Description returns the object's -description text.
 func (aevc *ActionExtensionViewController) Description() string {
+	defer runtime.KeepAlive(aevc)
 	return rt.Description(objref.IDOf(aevc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aevc *ActionExtensionViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aevc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aevc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aevc *ActionExtensionViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(aevc)
 	return rt.IsKind(objref.IDOf(aevc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aevc *ActionExtensionViewController) String() string {
+	defer runtime.KeepAlive(aevc)
 	return rt.Description(objref.IDOf(aevc))
 }
 
@@ -81,17 +88,19 @@ func NewActionExtensionViewController() *ActionExtensionViewController {
 }
 
 // PrepareForError performs any necessary setup or configuration when an authentication error occurs.
-func (aevc *ActionExtensionViewController) PrepareForError(error_ unsafe.Pointer) {
+func (aevc *ActionExtensionViewController) PrepareForError(err unsafe.Pointer) {
+	defer runtime.KeepAlive(aevc)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(aevc), objc.RegisterName("prepareForError:"), error_)
+		objc.Send[objc.ID](objref.IDOf(aevc), objc.RegisterName("prepareForError:"), err)
 	})
 
 }
 
 // PrepareForActionWithIdentifierItemIdentifiers performs any necessary setup or configuration for the specified action.
-func (aevc *ActionExtensionViewController) PrepareForActionWithIdentifierItemIdentifiers(actionIdentifier string, itemIdentifiers []obj.Object) {
+func (aevc *ActionExtensionViewController) PrepareForActionWithIdentifierItemIdentifiers(actionIdentifier string, itemIdentifiers []*foundation.String) {
+	defer runtime.KeepAlive(aevc)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(aevc), objc.RegisterName("prepareForActionWithIdentifier:itemIdentifiers:"), purego.NSString(actionIdentifier), purego.SliceToNSArray(itemIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+		objc.Send[objc.ID](objref.IDOf(aevc), objc.RegisterName("prepareForActionWithIdentifier:itemIdentifiers:"), purego.NSString(actionIdentifier), purego.SliceToNSArray(itemIdentifiers, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
 	})
 
 }

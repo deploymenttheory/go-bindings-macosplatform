@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRGroupsClusterRemoveGroupResponseParamsAdopt(id objc.ID) *MTRGroupsCluste
 
 // Description returns the object's -description text.
 func (mgcrgrp *MTRGroupsClusterRemoveGroupResponseParams) Description() string {
+	defer runtime.KeepAlive(mgcrgrp)
 	return rt.Description(objref.IDOf(mgcrgrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mgcrgrp *MTRGroupsClusterRemoveGroupResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mgcrgrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mgcrgrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mgcrgrp *MTRGroupsClusterRemoveGroupResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mgcrgrp)
 	return rt.IsKind(objref.IDOf(mgcrgrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mgcrgrp *MTRGroupsClusterRemoveGroupResponseParams) String() string {
+	defer runtime.KeepAlive(mgcrgrp)
 	return rt.Description(objref.IDOf(mgcrgrp))
 }
 
-// NewMTRGroupsClusterRemoveGroupResponseParamsWithResponseValueError initialize an MTRGroupsClusterRemoveGroupResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-func NewMTRGroupsClusterRemoveGroupResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRGroupsClusterRemoveGroupResponseParams, err error) {
+// NewMTRGroupsClusterRemoveGroupResponseParamsWithResponseValue initialize an MTRGroupsClusterRemoveGroupResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRGroupsClusterRemoveGroupResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRGroupsClusterRemoveGroupResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRGroupsClusterRemoveGroupResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,36 +87,42 @@ func NewMTRGroupsClusterRemoveGroupResponseParamsWithResponseValueError(response
 
 // WithStatus sets the status.
 func (mgcrgrp *MTRGroupsClusterRemoveGroupResponseParams) WithStatus(status obj.Object) *MTRGroupsClusterRemoveGroupResponseParams {
+	defer runtime.KeepAlive(status)
 	objc.Send[objc.ID](objref.IDOf(mgcrgrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mgcrgrp
 }
 
 // WithGroupID sets the group ID.
 func (mgcrgrp *MTRGroupsClusterRemoveGroupResponseParams) WithGroupID(groupID obj.Object) *MTRGroupsClusterRemoveGroupResponseParams {
+	defer runtime.KeepAlive(groupID)
 	objc.Send[objc.ID](objref.IDOf(mgcrgrp), objc.RegisterName("setGroupID:"), objref.IDOf(groupID))
 	return mgcrgrp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mgcrgrp *MTRGroupsClusterRemoveGroupResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupsClusterRemoveGroupResponseParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mgcrgrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mgcrgrp
 }
 
 // Status returns the status.
-func (mgcrgrp *MTRGroupsClusterRemoveGroupResponseParams) Status() obj.Object {
+func (mgcrgrp *MTRGroupsClusterRemoveGroupResponseParams) Status() *foundation.Number {
+	defer runtime.KeepAlive(mgcrgrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgcrgrp), objc.RegisterName("status"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // GroupID returns the group ID.
-func (mgcrgrp *MTRGroupsClusterRemoveGroupResponseParams) GroupID() obj.Object {
+func (mgcrgrp *MTRGroupsClusterRemoveGroupResponseParams) GroupID() *foundation.Number {
+	defer runtime.KeepAlive(mgcrgrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgcrgrp), objc.RegisterName("groupID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mgcrgrp *MTRGroupsClusterRemoveGroupResponseParams) TimedInvokeTimeoutMs() obj.Object {
+func (mgcrgrp *MTRGroupsClusterRemoveGroupResponseParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mgcrgrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgcrgrp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

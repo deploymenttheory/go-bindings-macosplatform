@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -131,12 +133,14 @@ func (cgk *CNNGradientKernel) WithSecondaryStrideInPixelsY(secondaryStrideInPixe
 
 // KernelOffsetX returns offset in the kernel reference frame to position the kernel in the X dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
 func (cgk *CNNGradientKernel) KernelOffsetX() int {
+	defer runtime.KeepAlive(cgk)
 	_r := objc.Send[int](objref.IDOf(cgk), objc.RegisterName("kernelOffsetX"))
 	return _r
 }
 
 // KernelOffsetY returns offset in the kernel reference frame to position the kernel in the Y dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
 func (cgk *CNNGradientKernel) KernelOffsetY() int {
+	defer runtime.KeepAlive(cgk)
 	_r := objc.Send[int](objref.IDOf(cgk), objc.RegisterName("kernelOffsetY"))
 	return _r
 }

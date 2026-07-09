@@ -5,9 +5,12 @@
 package photos
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,26 +57,30 @@ func NewCollectionList() *CollectionList {
 
 // CollectionListSubtype returns the collection list subtype.
 func (cl *CollectionList) CollectionListSubtype() CollectionListSubtype {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[CollectionListSubtype](objref.IDOf(cl), objc.RegisterName("collectionListSubtype"))
 	return _r
 }
 
 // StartDate returns the start date.
-func (cl *CollectionList) StartDate() obj.Object {
+func (cl *CollectionList) StartDate() time.Time {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // EndDate returns the end date.
-func (cl *CollectionList) EndDate() obj.Object {
+func (cl *CollectionList) EndDate() time.Time {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("endDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // LocalizedLocationNames returns the localized location names.
 //
 // LocalizedLocationNames returns the collection as a Go slice.
 func (cl *CollectionList) LocalizedLocationNames() []string {
+	defer runtime.KeepAlive(cl)
 	_arr := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("localizedLocationNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

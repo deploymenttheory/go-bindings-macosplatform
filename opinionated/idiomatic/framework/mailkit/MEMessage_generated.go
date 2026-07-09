@@ -5,6 +5,9 @@
 package mailkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func messageAdopt(id objc.ID) *Message {
 
 // Description returns the object's -description text.
 func (m *Message) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Message) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Message) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Message) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
@@ -74,18 +82,21 @@ func NewMessage() *Message {
 
 // State returns the state of the mail message.
 func (m *Message) State() MessageState {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[MessageState](objref.IDOf(m), objc.RegisterName("state"))
 	return _r
 }
 
 // EncryptionState returns the encryption state of the mail message.
 func (m *Message) EncryptionState() MessageEncryptionState {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[MessageEncryptionState](objref.IDOf(m), objc.RegisterName("encryptionState"))
 	return _r
 }
 
 // Subject returns the subject of the mail message.
 func (m *Message) Subject() string {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("subject"))
 	if _r == 0 {
 		return ""
@@ -95,6 +106,7 @@ func (m *Message) Subject() string {
 
 // FromAddress returns message sender's email address.
 func (m *Message) FromAddress() *EmailAddress {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("fromAddress"))
 	return EmailAddressFromID(_r)
 }
@@ -103,6 +115,7 @@ func (m *Message) FromAddress() *EmailAddress {
 //
 // ToAddresses returns the collection as a Go slice.
 func (m *Message) ToAddresses() []*EmailAddress {
+	defer runtime.KeepAlive(m)
 	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("toAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
@@ -111,6 +124,7 @@ func (m *Message) ToAddresses() []*EmailAddress {
 //
 // CcAddresses returns the collection as a Go slice.
 func (m *Message) CcAddresses() []*EmailAddress {
+	defer runtime.KeepAlive(m)
 	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("ccAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
@@ -119,6 +133,7 @@ func (m *Message) CcAddresses() []*EmailAddress {
 //
 // BccAddresses returns the collection as a Go slice.
 func (m *Message) BccAddresses() []*EmailAddress {
+	defer runtime.KeepAlive(m)
 	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("bccAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
@@ -127,6 +142,7 @@ func (m *Message) BccAddresses() []*EmailAddress {
 //
 // ReplyToAddresses returns the collection as a Go slice.
 func (m *Message) ReplyToAddresses() []*EmailAddress {
+	defer runtime.KeepAlive(m)
 	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("replyToAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
@@ -135,30 +151,35 @@ func (m *Message) ReplyToAddresses() []*EmailAddress {
 //
 // AllRecipientAddresses returns the collection as a Go slice.
 func (m *Message) AllRecipientAddresses() []*EmailAddress {
+	defer runtime.KeepAlive(m)
 	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("allRecipientAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
 // DateSent returns the date the mail message was sent. Optionally set by the by the sender.
-func (m *Message) DateSent() obj.Object {
+func (m *Message) DateSent() time.Time {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("dateSent"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // DateReceived returns the date the mail message was received. Only present if the message has been received.
-func (m *Message) DateReceived() obj.Object {
+func (m *Message) DateReceived() time.Time {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("dateReceived"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Headers returns the headers for the message. Might only be a subset if the full body has not been downloaded.
-func (m *Message) Headers() obj.Object {
+func (m *Message) Headers() map[string]obj.Object {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("headers"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // RawData returns the full raw RFC822 message data if it has been downloaded and the extension has permissions to access.
-func (m *Message) RawData() obj.Object {
+func (m *Message) RawData() []byte {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("rawData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

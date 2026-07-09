@@ -5,6 +5,8 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func metalDisplayLinkUpdateAdopt(id objc.ID) *MetalDisplayLinkUpdate {
 
 // Description returns the object's -description text.
 func (mdlu *MetalDisplayLinkUpdate) Description() string {
+	defer runtime.KeepAlive(mdlu)
 	return rt.Description(objref.IDOf(mdlu))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdlu *MetalDisplayLinkUpdate) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdlu)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdlu), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdlu *MetalDisplayLinkUpdate) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdlu)
 	return rt.IsKind(objref.IDOf(mdlu), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdlu *MetalDisplayLinkUpdate) String() string {
+	defer runtime.KeepAlive(mdlu)
 	return rt.Description(objref.IDOf(mdlu))
 }
 
@@ -74,12 +81,14 @@ func NewMetalDisplayLinkUpdate() *MetalDisplayLinkUpdate {
 
 // TargetTimestamp returns the target timestamp.
 func (mdlu *MetalDisplayLinkUpdate) TargetTimestamp() float64 {
+	defer runtime.KeepAlive(mdlu)
 	_r := objc.Send[float64](objref.IDOf(mdlu), objc.RegisterName("targetTimestamp"))
 	return _r
 }
 
 // TargetPresentationTimestamp returns the target presentation timestamp.
 func (mdlu *MetalDisplayLinkUpdate) TargetPresentationTimestamp() float64 {
+	defer runtime.KeepAlive(mdlu)
 	_r := objc.Send[float64](objref.IDOf(mdlu), objc.RegisterName("targetPresentationTimestamp"))
 	return _r
 }

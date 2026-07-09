@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,30 +55,35 @@ func NewElectrocardiogram() *Electrocardiogram {
 
 // NumberOfVoltageMeasurements returns the number of voltage measurements in the electrocardiogram.
 func (e *Electrocardiogram) NumberOfVoltageMeasurements() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("numberOfVoltageMeasurements"))
 	return _r
 }
 
 // SamplingFrequency returns the frequency at which the data was sampled. This is reported in [HKUnit hertzUnit].
 func (e *Electrocardiogram) SamplingFrequency() *Quantity {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("samplingFrequency"))
 	return QuantityFromID(_r)
 }
 
 // Classification returns the classification of this electrocardiogram sample.
 func (e *Electrocardiogram) Classification() ElectrocardiogramClassification {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[ElectrocardiogramClassification](objref.IDOf(e), objc.RegisterName("classification"))
 	return _r
 }
 
 // AverageHeartRate returns the average heart rate of the user while the electrocardiogram was recorded.
 func (e *Electrocardiogram) AverageHeartRate() *Quantity {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("averageHeartRate"))
 	return QuantityFromID(_r)
 }
 
 // SymptomsStatus returns whether the user experienced symptoms during this electrocardiogram.
 func (e *Electrocardiogram) SymptomsStatus() ElectrocardiogramSymptomsStatus {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[ElectrocardiogramSymptomsStatus](objref.IDOf(e), objc.RegisterName("symptomsStatus"))
 	return _r
 }

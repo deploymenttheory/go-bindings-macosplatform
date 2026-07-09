@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParamsAd
 
 // Description returns the object's -description text.
 func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) Description() string {
+	defer runtime.KeepAlive(memcgmprcp)
 	return rt.Description(objref.IDOf(memcgmprcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(memcgmprcp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(memcgmprcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(memcgmprcp)
 	return rt.IsKind(objref.IDOf(memcgmprcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) String() string {
+	defer runtime.KeepAlive(memcgmprcp)
 	return rt.Description(objref.IDOf(memcgmprcp))
 }
 
-// NewMTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParamsWithResponseValueError initialize an MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-func NewMTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParamsWithResponseValueError(responseValue obj.Object) (result *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams, err error) {
+// NewMTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParamsWithResponseValue initialize an MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,83 +87,98 @@ func NewMTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParam
 
 // WithStartTime sets the start time.
 func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) WithStartTime(startTime obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams {
+	defer runtime.KeepAlive(startTime)
 	objc.Send[objc.ID](objref.IDOf(memcgmprcp), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return memcgmprcp
 }
 
 // WithStatus sets the status.
 func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) WithStatus(status obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams {
+	defer runtime.KeepAlive(status)
 	objc.Send[objc.ID](objref.IDOf(memcgmprcp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return memcgmprcp
 }
 
 // WithProfileIntervalPeriod sets the profile interval period.
 func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) WithProfileIntervalPeriod(profileIntervalPeriod obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams {
+	defer runtime.KeepAlive(profileIntervalPeriod)
 	objc.Send[objc.ID](objref.IDOf(memcgmprcp), objc.RegisterName("setProfileIntervalPeriod:"), objref.IDOf(profileIntervalPeriod))
 	return memcgmprcp
 }
 
 // WithNumberOfIntervalsDelivered sets the number of intervals delivered.
 func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) WithNumberOfIntervalsDelivered(numberOfIntervalsDelivered obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams {
+	defer runtime.KeepAlive(numberOfIntervalsDelivered)
 	objc.Send[objc.ID](objref.IDOf(memcgmprcp), objc.RegisterName("setNumberOfIntervalsDelivered:"), objref.IDOf(numberOfIntervalsDelivered))
 	return memcgmprcp
 }
 
 // WithAttributeID sets the attribute ID.
 func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) WithAttributeID(attributeId obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams {
+	defer runtime.KeepAlive(attributeId)
 	objc.Send[objc.ID](objref.IDOf(memcgmprcp), objc.RegisterName("setAttributeId:"), objref.IDOf(attributeId))
 	return memcgmprcp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(memcgmprcp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return memcgmprcp
 }
 
 // StartTime returns the start time.
-func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) StartTime() obj.Object {
+func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) StartTime() *foundation.Number {
+	defer runtime.KeepAlive(memcgmprcp)
 	_r := objc.Send[objc.ID](objref.IDOf(memcgmprcp), objc.RegisterName("startTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Status returns the status.
-func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) Status() obj.Object {
+func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) Status() *foundation.Number {
+	defer runtime.KeepAlive(memcgmprcp)
 	_r := objc.Send[objc.ID](objref.IDOf(memcgmprcp), objc.RegisterName("status"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ProfileIntervalPeriod returns the profile interval period.
-func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) ProfileIntervalPeriod() obj.Object {
+func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) ProfileIntervalPeriod() *foundation.Number {
+	defer runtime.KeepAlive(memcgmprcp)
 	_r := objc.Send[objc.ID](objref.IDOf(memcgmprcp), objc.RegisterName("profileIntervalPeriod"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NumberOfIntervalsDelivered returns the number of intervals delivered.
-func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) NumberOfIntervalsDelivered() obj.Object {
+func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) NumberOfIntervalsDelivered() *foundation.Number {
+	defer runtime.KeepAlive(memcgmprcp)
 	_r := objc.Send[objc.ID](objref.IDOf(memcgmprcp), objc.RegisterName("numberOfIntervalsDelivered"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // AttributeID returns the attribute ID.
-func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) AttributeID() obj.Object {
+func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) AttributeID() *foundation.Number {
+	defer runtime.KeepAlive(memcgmprcp)
 	_r := objc.Send[objc.ID](objref.IDOf(memcgmprcp), objc.RegisterName("attributeId"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Intervals returns the intervals.
 func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) Intervals() obj.Object {
+	defer runtime.KeepAlive(memcgmprcp)
 	_r := objc.Send[objc.ID](objref.IDOf(memcgmprcp), objc.RegisterName("intervals"))
 	return obj.Wrap(_r)
 }
 
 // SetIntervals wraps the corresponding Objective-C method.
 func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) SetIntervals(intervals obj.Object) {
+	defer runtime.KeepAlive(memcgmprcp)
+	defer runtime.KeepAlive(intervals)
 	objc.Send[objc.ID](objref.IDOf(memcgmprcp), objc.RegisterName("setIntervals:"), objref.IDOf(intervals))
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) TimedInvokeTimeoutMs() obj.Object {
+func (memcgmprcp *MTRElectricalMeasurementClusterGetMeasurementProfileResponseCommandParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(memcgmprcp)
 	_r := objc.Send[objc.ID](objref.IDOf(memcgmprcp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

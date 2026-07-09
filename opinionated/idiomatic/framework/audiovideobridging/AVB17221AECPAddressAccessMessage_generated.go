@@ -5,6 +5,8 @@
 package audiovideobridging
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -88,6 +90,7 @@ func (aaaam *AVB17221AECPAddressAccessMessage) WithSequenceID(sequenceID uint16)
 
 // WithSourceMAC sets the source_mac field of the AECP message.
 func (aaaam *AVB17221AECPAddressAccessMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAddressAccessMessage {
+	defer runtime.KeepAlive(sourceMAC)
 	objc.Send[objc.ID](objref.IDOf(aaaam), objc.RegisterName("setSourceMAC:"), objref.IDOf(sourceMAC))
 	return aaaam
 }
@@ -96,6 +99,7 @@ func (aaaam *AVB17221AECPAddressAccessMessage) WithSourceMAC(sourceMAC *MACAddre
 //
 // Tlvs returns the collection as a Go slice.
 func (aaaam *AVB17221AECPAddressAccessMessage) Tlvs() []*AVB17221AECPAddressAccessTLV {
+	defer runtime.KeepAlive(aaaam)
 	_arr := objc.Send[objc.ID](objref.IDOf(aaaam), objc.RegisterName("tlvs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AVB17221AECPAddressAccessTLV { return AVB17221AECPAddressAccessTLVFromID(_id) })
 }

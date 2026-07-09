@@ -5,6 +5,8 @@
 package mailkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,29 +49,34 @@ func messageSignerAdopt(id objc.ID) *MessageSigner {
 
 // Description returns the object's -description text.
 func (ms *MessageSigner) Description() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ms *MessageSigner) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ms)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ms *MessageSigner) IsKind(className string) bool {
+	defer runtime.KeepAlive(ms)
 	return rt.IsKind(objref.IDOf(ms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ms *MessageSigner) String() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
 // NewMessageSignerWithEmailAddressesSignatureLabelContext creates a new message signer object that contains the email addresses of the signers, a label, and context data.
-func NewMessageSignerWithEmailAddressesSignatureLabelContext(emailAddresses []*EmailAddress, label string, context_ obj.Object) *MessageSigner {
+func NewMessageSignerWithEmailAddressesSignatureLabelContext(emailAddresses []*EmailAddress, label string, context_ []byte) *MessageSigner {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MEMessageSigner")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEmailAddresses:signatureLabel:context:"), purego.SliceToNSArray(emailAddresses, func(_v *EmailAddress) objc.ID { return objref.IDOf(_v) }), purego.NSString(label), objref.IDOf(context_))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEmailAddresses:signatureLabel:context:"), purego.SliceToNSArray(emailAddresses, func(_v *EmailAddress) objc.ID { return objref.IDOf(_v) }), purego.NSString(label), rt.BytesToNSData(context_))
 	return messageSignerAdopt(_id)
 }
 
@@ -77,12 +84,14 @@ func NewMessageSignerWithEmailAddressesSignatureLabelContext(emailAddresses []*E
 //
 // EmailAddresses returns the collection as a Go slice.
 func (ms *MessageSigner) EmailAddresses() []*EmailAddress {
+	defer runtime.KeepAlive(ms)
 	_arr := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("emailAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
 // Label returns the message signers label. Shown in the message header view. For instance, "John Smith".
 func (ms *MessageSigner) Label() string {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -91,7 +100,8 @@ func (ms *MessageSigner) Label() string {
 }
 
 // Context returns the context for the message signature. This might include the signing certificate. This will be passed back to the extension for either verifying the signature or if the user wishes to view signature information.
-func (ms *MessageSigner) Context() obj.Object {
+func (ms *MessageSigner) Context() []byte {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("context"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

@@ -7,6 +7,7 @@ package cryptotokenkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,6 +50,16 @@ func smartCardTokenDriverAdopt(id objc.ID) *SmartCardTokenDriver {
 func NewSmartCardTokenDriver() *SmartCardTokenDriver {
 	_id := objc.Send[objc.ID](objc.ID(_class("TKSmartCardTokenDriver")), objc.RegisterName("new"))
 	return smartCardTokenDriverAdopt(_id)
+}
+
+// WithDelegate sets the token driver delegate.
+func (sctd *SmartCardTokenDriver) WithDelegate(delegate TokenDriverDelegate) *SmartCardTokenDriver {
+	_shim := newTokenDriverDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(sctd), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(sctd), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return sctd
 }
 
 var _ TokenDriverProvider = (*SmartCardTokenDriver)(nil)

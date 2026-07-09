@@ -5,6 +5,7 @@
 package phase
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,27 +51,34 @@ func soundEventAdopt(id objc.ID) *SoundEvent {
 
 // Description returns the object's -description text.
 func (se *SoundEvent) Description() string {
+	defer runtime.KeepAlive(se)
 	return rt.Description(objref.IDOf(se))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (se *SoundEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(se)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(se), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (se *SoundEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(se)
 	return rt.IsKind(objref.IDOf(se), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (se *SoundEvent) String() string {
+	defer runtime.KeepAlive(se)
 	return rt.Description(objref.IDOf(se))
 }
 
-// NewSoundEventWithEngineAssetIdentifierMixerParametersError creates a sound event node with the given asset and mixer parameters.
-func NewSoundEventWithEngineAssetIdentifierMixerParametersError(engine *Engine, assetIdentifier string, mixerParameters *MixerParameters) (result *SoundEvent, err error) {
+// NewSoundEventWithEngineAssetIdentifierMixerParameters creates a sound event node with the given asset and mixer parameters.
+func NewSoundEventWithEngineAssetIdentifierMixerParameters(engine *Engine, assetIdentifier string, mixerParameters *MixerParameters) (result *SoundEvent, err error) {
+	defer runtime.KeepAlive(engine)
+	defer runtime.KeepAlive(mixerParameters)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESoundEvent")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:assetIdentifier:mixerParameters:error:"), objref.IDOf(engine), purego.NSString(assetIdentifier), objref.IDOf(mixerParameters), unsafe.Pointer(&_nsErr))
@@ -80,8 +88,9 @@ func NewSoundEventWithEngineAssetIdentifierMixerParametersError(engine *Engine, 
 	return soundEventAdopt(_id), nil
 }
 
-// NewSoundEventWithEngineAssetIdentifierError creates a sound event node with the given asset.
-func NewSoundEventWithEngineAssetIdentifierError(engine *Engine, assetIdentifier string) (result *SoundEvent, err error) {
+// NewSoundEventWithEngineAssetIdentifier creates a sound event node with the given asset.
+func NewSoundEventWithEngineAssetIdentifier(engine *Engine, assetIdentifier string) (result *SoundEvent, err error) {
+	defer runtime.KeepAlive(engine)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESoundEvent")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:assetIdentifier:error:"), objref.IDOf(engine), purego.NSString(assetIdentifier), unsafe.Pointer(&_nsErr))
@@ -93,62 +102,74 @@ func NewSoundEventWithEngineAssetIdentifierError(engine *Engine, assetIdentifier
 
 // Pause pauses the sound event.
 func (se *SoundEvent) Pause() {
+	defer runtime.KeepAlive(se)
 	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("pause"))
 }
 
 // Resume resumes the sound event.
 func (se *SoundEvent) Resume() {
+	defer runtime.KeepAlive(se)
 	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("resume"))
 }
 
 // ResumeAtTime resume the sound event at a specific time A nil time parameter will resume immediately. The device time is not scaled by UnitsPerSecond and is in seconds.
 func (se *SoundEvent) ResumeAtTime(time_ obj.Object) {
+	defer runtime.KeepAlive(se)
+	defer runtime.KeepAlive(time_)
 	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("resumeAtTime:"), objref.IDOf(time_))
 }
 
 // StopAndInvalidate stops a sound event and prevents it from resuming.
 func (se *SoundEvent) StopAndInvalidate() {
+	defer runtime.KeepAlive(se)
 	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("stopAndInvalidate"))
 }
 
 // RenderingState returns sound Event's current rendering state
 func (se *SoundEvent) RenderingState() RenderingState {
+	defer runtime.KeepAlive(se)
 	_r := objc.Send[RenderingState](objref.IDOf(se), objc.RegisterName("renderingState"))
 	return _r
 }
 
 // PrepareState returns sound Event's current preparation state
 func (se *SoundEvent) PrepareState() SoundEventPrepareState {
+	defer runtime.KeepAlive(se)
 	_r := objc.Send[SoundEventPrepareState](objref.IDOf(se), objc.RegisterName("prepareState"))
 	return _r
 }
 
 // MetaParameters returns a Dictionary containing the MetaParameters associated with this sound event
-func (se *SoundEvent) MetaParameters() obj.Object {
+func (se *SoundEvent) MetaParameters() map[string]*MetaParameter {
+	defer runtime.KeepAlive(se)
 	_r := objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("metaParameters"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *MetaParameter { return MetaParameterFromID(_id) })
 }
 
 // Mixers returns a Dictionary containing the mix nodes associated with this sound event
-func (se *SoundEvent) Mixers() obj.Object {
+func (se *SoundEvent) Mixers() map[string]*Mixer {
+	defer runtime.KeepAlive(se)
 	_r := objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("mixers"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *Mixer { return MixerFromID(_id) })
 }
 
 // PushStreamNodes returns a Dictionary containing the push stream nodes associated with this sound event, for pushing buffers to.
-func (se *SoundEvent) PushStreamNodes() obj.Object {
+func (se *SoundEvent) PushStreamNodes() map[string]*PushStreamNode {
+	defer runtime.KeepAlive(se)
 	_r := objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("pushStreamNodes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *PushStreamNode { return PushStreamNodeFromID(_id) })
 }
 
 // PullStreamNodes returns a Dictionary containing the pull stream nodes associated with this sound event, for setting renderBlocks on.
-func (se *SoundEvent) PullStreamNodes() obj.Object {
+func (se *SoundEvent) PullStreamNodes() map[string]*PullStreamNode {
+	defer runtime.KeepAlive(se)
 	_r := objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("pullStreamNodes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *PullStreamNode { return PullStreamNodeFromID(_id) })
 }
 
 // IsIndefinite reports whether a boolean that tell if this sound event will run indefinitely, or finish executing on its own
 func (se *SoundEvent) IsIndefinite() bool {
+	defer runtime.KeepAlive(se)
 	_r := objc.Send[bool](objref.IDOf(se), objc.RegisterName("isIndefinite"))
 	return _r
 }

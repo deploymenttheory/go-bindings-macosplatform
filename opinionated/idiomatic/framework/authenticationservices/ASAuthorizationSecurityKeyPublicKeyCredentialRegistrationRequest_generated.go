@@ -5,7 +5,10 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -68,12 +71,14 @@ func (askpkcrr *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) 
 
 // WithResidentKeyPreference sets the preference that indicates where the resident key resides.
 func (askpkcrr *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithResidentKeyPreference(residentKeyPreference obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
+	defer runtime.KeepAlive(residentKeyPreference)
 	objc.Send[objc.ID](objref.IDOf(askpkcrr), objc.RegisterName("setResidentKeyPreference:"), objref.IDOf(residentKeyPreference))
 	return askpkcrr
 }
 
 // WithPrf sets the prf.
 func (askpkcrr *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithPrf(prf *AuthorizationPublicKeyCredentialPRFRegistrationInput) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
+	defer runtime.KeepAlive(prf)
 	objc.Send[objc.ID](objref.IDOf(askpkcrr), objc.RegisterName("setPrf:"), objref.IDOf(prf))
 	return askpkcrr
 }
@@ -82,6 +87,7 @@ func (askpkcrr *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) 
 //
 // CredentialParameters returns the collection as a Go slice.
 func (askpkcrr *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) CredentialParameters() []*AuthorizationPublicKeyCredentialParameters {
+	defer runtime.KeepAlive(askpkcrr)
 	_arr := objc.Send[objc.ID](objref.IDOf(askpkcrr), objc.RegisterName("credentialParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AuthorizationPublicKeyCredentialParameters {
 		return AuthorizationPublicKeyCredentialParametersFromID(_id)
@@ -92,6 +98,7 @@ func (askpkcrr *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) 
 //
 // ExcludedCredentials returns the collection as a Go slice.
 func (askpkcrr *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) ExcludedCredentials() []*AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
+	defer runtime.KeepAlive(askpkcrr)
 	_arr := objc.Send[objc.ID](objref.IDOf(askpkcrr), objc.RegisterName("excludedCredentials"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
 		return AuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(_id)
@@ -99,13 +106,15 @@ func (askpkcrr *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) 
 }
 
 // ResidentKeyPreference returns a preference whether the authenticator should store the private key of the newly created credential.
-func (askpkcrr *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) ResidentKeyPreference() obj.Object {
+func (askpkcrr *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) ResidentKeyPreference() *foundation.String {
+	defer runtime.KeepAlive(askpkcrr)
 	_r := objc.Send[objc.ID](objref.IDOf(askpkcrr), objc.RegisterName("residentKeyPreference"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Prf returns the prf.
 func (askpkcrr *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationInput {
+	defer runtime.KeepAlive(askpkcrr)
 	_r := objc.Send[objc.ID](objref.IDOf(askpkcrr), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFRegistrationInputFromID(_r)
 }

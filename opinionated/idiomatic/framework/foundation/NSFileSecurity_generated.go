@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,27 +50,33 @@ func fileSecurityAdopt(id objc.ID) *FileSecurity {
 
 // Description returns the object's -description text.
 func (fs *FileSecurity) Description() string {
+	defer runtime.KeepAlive(fs)
 	return rt.Description(objref.IDOf(fs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fs *FileSecurity) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fs *FileSecurity) IsKind(className string) bool {
+	defer runtime.KeepAlive(fs)
 	return rt.IsKind(objref.IDOf(fs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fs *FileSecurity) String() string {
+	defer runtime.KeepAlive(fs)
 	return rt.Description(objref.IDOf(fs))
 }
 
 // NewFileSecurityWithCoder creates a new FileSecurity.
 func NewFileSecurityWithCoder(coder *Coder) *FileSecurity {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileSecurity")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return fileSecurityAdopt(_id)
@@ -82,7 +89,7 @@ func (fs *FileSecurity) WithObservationInfo(observationInfo unsafe.Pointer) *Fil
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (fs *FileSecurity) WithScriptingProperties(scriptingProperties obj.Object) *FileSecurity {
-	objc.Send[objc.ID](objref.IDOf(fs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (fs *FileSecurity) WithScriptingProperties(scriptingProperties map[string]obj.Object) *FileSecurity {
+	objc.Send[objc.ID](objref.IDOf(fs), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return fs
 }

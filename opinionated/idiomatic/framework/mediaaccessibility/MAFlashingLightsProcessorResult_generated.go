@@ -5,6 +5,8 @@
 package mediaaccessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func flashingLightsProcessorResultAdopt(id objc.ID) *FlashingLightsProcessorResu
 
 // Description returns the object's -description text.
 func (flpr *FlashingLightsProcessorResult) Description() string {
+	defer runtime.KeepAlive(flpr)
 	return rt.Description(objref.IDOf(flpr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (flpr *FlashingLightsProcessorResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(flpr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(flpr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (flpr *FlashingLightsProcessorResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(flpr)
 	return rt.IsKind(objref.IDOf(flpr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (flpr *FlashingLightsProcessorResult) String() string {
+	defer runtime.KeepAlive(flpr)
 	return rt.Description(objref.IDOf(flpr))
 }
 
@@ -74,18 +81,21 @@ func NewFlashingLightsProcessorResult() *FlashingLightsProcessorResult {
 
 // SurfaceProcessed wraps the corresponding Objective-C method.
 func (flpr *FlashingLightsProcessorResult) SurfaceProcessed() bool {
+	defer runtime.KeepAlive(flpr)
 	_r := objc.Send[bool](objref.IDOf(flpr), objc.RegisterName("surfaceProcessed"))
 	return _r
 }
 
 // MitigationLevel returns the mitigation level.
 func (flpr *FlashingLightsProcessorResult) MitigationLevel() float32 {
+	defer runtime.KeepAlive(flpr)
 	_r := objc.Send[float32](objref.IDOf(flpr), objc.RegisterName("mitigationLevel"))
 	return _r
 }
 
 // IntensityLevel returns the intensity level.
 func (flpr *FlashingLightsProcessorResult) IntensityLevel() float32 {
+	defer runtime.KeepAlive(flpr)
 	_r := objc.Send[float32](objref.IDOf(flpr), objc.RegisterName("intensityLevel"))
 	return _r
 }

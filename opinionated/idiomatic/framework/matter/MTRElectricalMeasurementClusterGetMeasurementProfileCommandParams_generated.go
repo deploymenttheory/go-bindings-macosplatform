@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsAdopt(id o
 
 // Description returns the object's -description text.
 func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) Description() string {
+	defer runtime.KeepAlive(memcgmpcp)
 	return rt.Description(objref.IDOf(memcgmpcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(memcgmpcp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(memcgmpcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(memcgmpcp)
 	return rt.IsKind(objref.IDOf(memcgmpcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) String() string {
+	defer runtime.KeepAlive(memcgmpcp)
 	return rt.Description(objref.IDOf(memcgmpcp))
 }
 
@@ -72,60 +80,70 @@ func NewMTRElectricalMeasurementClusterGetMeasurementProfileCommandParams() *MTR
 
 // WithAttributeID sets the attribute ID.
 func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) WithAttributeID(attributeId obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
+	defer runtime.KeepAlive(attributeId)
 	objc.Send[objc.ID](objref.IDOf(memcgmpcp), objc.RegisterName("setAttributeId:"), objref.IDOf(attributeId))
 	return memcgmpcp
 }
 
 // WithStartTime sets the start time.
 func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) WithStartTime(startTime obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
+	defer runtime.KeepAlive(startTime)
 	objc.Send[objc.ID](objref.IDOf(memcgmpcp), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return memcgmpcp
 }
 
 // WithNumberOfIntervals sets the number of intervals.
 func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) WithNumberOfIntervals(numberOfIntervals obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
+	defer runtime.KeepAlive(numberOfIntervals)
 	objc.Send[objc.ID](objref.IDOf(memcgmpcp), objc.RegisterName("setNumberOfIntervals:"), objref.IDOf(numberOfIntervals))
 	return memcgmpcp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(memcgmpcp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return memcgmpcp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(memcgmpcp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return memcgmpcp
 }
 
 // AttributeID returns the attribute ID.
-func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) AttributeID() obj.Object {
+func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) AttributeID() *foundation.Number {
+	defer runtime.KeepAlive(memcgmpcp)
 	_r := objc.Send[objc.ID](objref.IDOf(memcgmpcp), objc.RegisterName("attributeId"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StartTime returns the start time.
-func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) StartTime() obj.Object {
+func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) StartTime() *foundation.Number {
+	defer runtime.KeepAlive(memcgmpcp)
 	_r := objc.Send[objc.ID](objref.IDOf(memcgmpcp), objc.RegisterName("startTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NumberOfIntervals returns the number of intervals.
-func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) NumberOfIntervals() obj.Object {
+func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) NumberOfIntervals() *foundation.Number {
+	defer runtime.KeepAlive(memcgmpcp)
 	_r := objc.Send[objc.ID](objref.IDOf(memcgmpcp), objc.RegisterName("numberOfIntervals"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) TimedInvokeTimeoutMs() obj.Object {
+func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(memcgmpcp)
 	_r := objc.Send[objc.ID](objref.IDOf(memcgmpcp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) ServerSideProcessingTimeout() obj.Object {
+func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(memcgmpcp)
 	_r := objc.Send[objc.ID](objref.IDOf(memcgmpcp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

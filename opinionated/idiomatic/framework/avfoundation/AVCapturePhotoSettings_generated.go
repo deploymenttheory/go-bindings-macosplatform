@@ -5,8 +5,11 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +51,27 @@ func capturePhotoSettingsAdopt(id objc.ID) *CapturePhotoSettings {
 
 // Description returns the object's -description text.
 func (cps *CapturePhotoSettings) Description() string {
+	defer runtime.KeepAlive(cps)
 	return rt.Description(objref.IDOf(cps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cps *CapturePhotoSettings) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cps *CapturePhotoSettings) IsKind(className string) bool {
+	defer runtime.KeepAlive(cps)
 	return rt.IsKind(objref.IDOf(cps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cps *CapturePhotoSettings) String() string {
+	defer runtime.KeepAlive(cps)
 	return rt.Description(objref.IDOf(cps))
 }
 
@@ -117,60 +125,70 @@ func (cps *CapturePhotoSettings) WithShutterSoundSuppressionEnabled(shutterSound
 
 // UniqueID returns a 64-bit number that uniquely identifies this instance. When you create an instance of AVCapturePhotoSettings, a uniqueID is generated automatically. This uniqueID is guaranteed to be unique for the life time of your process.
 func (cps *CapturePhotoSettings) UniqueID() int64 {
+	defer runtime.KeepAlive(cps)
 	_r := objc.Send[int64](objref.IDOf(cps), objc.RegisterName("uniqueID"))
 	return _r
 }
 
 // Format returns a dictionary of Core Video pixel buffer attributes or AVVideoSettings, analogous to AVCaptureStillImageOutput's outputSettings property. The format dictionary you passed to one of the creation methods. May be nil if you've specified RAW-only capture.
-func (cps *CapturePhotoSettings) Format() obj.Object {
+func (cps *CapturePhotoSettings) Format() map[string]obj.Object {
+	defer runtime.KeepAlive(cps)
 	_r := objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("format"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ProcessedFileType returns the file container for which the processed photo is formatted to be stored. The formatting of data within a photo buffer is often dependent on the file format intended for storage. For instance, a JPEG encoded photo buffer intended for storage in a JPEG (JPEG File Interchange Format) file differs from JPEG to be stored in HEIF. The HEIF-containerized JPEG buffer is tiled for readback efficiency and partitioned into the box structure dictated by the HEIF file format. Some codecs are only supported by AVCapturePhotoOutput if containerized. For instance, the AVVideoCodecTypeHEVC is only supported with AVFileTypeHEIF and AVFileTypeHEIC formatting. To discover which photo pixel format types and video codecs are supported for a given file type, you may query AVCapturePhotoOutput's -supportedPhotoPixelFormatTypesForFileType:, or -supportedPhotoCodecTypesForFileType: respectively.
-func (cps *CapturePhotoSettings) ProcessedFileType() obj.Object {
+func (cps *CapturePhotoSettings) ProcessedFileType() *foundation.String {
+	defer runtime.KeepAlive(cps)
 	_r := objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("processedFileType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // FlashMode specifies whether the flash should be on, off, or chosen automatically by AVCapturePhotoOutput. flashMode takes the place of the deprecated AVCaptureDevice -flashMode API. Setting AVCaptureDevice.flashMode has no effect on AVCapturePhotoOutput, which only pays attention to the flashMode specified in your AVCapturePhotoSettings. The default value is AVCaptureFlashModeOff. Flash modes are defined in AVCaptureDevice.h. If you specify a flashMode of AVCaptureFlashModeOn, it wins over autoStillImageStabilizationEnabled=YES. When the device becomes very hot, the flash becomes temporarily unavailable until the device cools down (see AVCaptureDevice's -flashAvailable). While the flash is unavailable, AVCapturePhotoOutput's -supportedFlashModes property still reports AVCaptureFlashModeOn and AVCaptureFlashModeAuto as being available, thus allowing you to specify a flashMode of AVCaptureModeOn. You should always check the AVCaptureResolvedPhotoSettings provided to you in the AVCapturePhotoCaptureDelegate callbacks, as the resolved flashEnabled property will tell you definitively if the flash is being used.
 func (cps *CapturePhotoSettings) FlashMode() CaptureFlashMode {
+	defer runtime.KeepAlive(cps)
 	_r := objc.Send[CaptureFlashMode](objref.IDOf(cps), objc.RegisterName("flashMode"))
 	return _r
 }
 
 // PhotoQualityPrioritization indicates how photo quality should be prioritized against speed of photo delivery. Default value is AVCapturePhotoQualityPrioritizationBalanced. The AVCapturePhotoOutput is capable of applying a variety of techniques to improve photo quality (reduce noise, preserve detail in low light, freeze motion, etc), depending on the source device's activeFormat. Some of these techniques can take significant processing time before the photo is returned to your delegate callback. The photoQualityPrioritization property allows you to specify your preferred quality vs speed of delivery. By default, speed and quality are considered to be of equal importance. When you specify AVCapturePhotoQualityPrioritizationSpeed, you indicate that speed should be prioritized at the expense of quality. Likewise, when you choose AVCapturePhotoQualityPrioritizationQuality, you signal your willingness to prioritize the very best quality at the expense of speed, and your readiness to wait (perhaps significantly) longer for the photo to be returned to your delegate.
 func (cps *CapturePhotoSettings) PhotoQualityPrioritization() CapturePhotoQualityPrioritization {
+	defer runtime.KeepAlive(cps)
 	_r := objc.Send[CapturePhotoQualityPrioritization](objref.IDOf(cps), objc.RegisterName("photoQualityPrioritization"))
 	return _r
 }
 
 // IsHighResolutionPhotoEnabled reports whether photos should be captured at the highest resolution supported by the source AVCaptureDevice's activeFormat. Default is false. By default, AVCapturePhotoOutput emits images with the same dimensions as its source AVCaptureDevice's activeFormat.formatDescription. However, if you set this property to true, the AVCapturePhotoOutput emits images at its source AVCaptureDevice's activeFormat.highResolutionStillImageDimensions. Note that if you enable video stabilization (see AVCaptureConnection's preferredVideoStabilizationMode) for any output, the high resolution photos emitted by AVCapturePhotoOutput may be smaller by 10 or more percent. You may inspect your AVCaptureResolvedPhotoSettings in the delegate callbacks to discover the exact dimensions of the capture photo(s). Starting in iOS 14.5 if you disable geometric distortion correction, the high resolution photo emitted by AVCapturePhotoOutput may be is smaller depending on the format.
 func (cps *CapturePhotoSettings) IsHighResolutionPhotoEnabled() bool {
+	defer runtime.KeepAlive(cps)
 	_r := objc.Send[bool](objref.IDOf(cps), objc.RegisterName("isHighResolutionPhotoEnabled"))
 	return _r
 }
 
 // MaxPhotoDimensions indicates the maximum resolution photo that will be captured. By setting this property you are requesting an image that may be up to as large as the specified dimensions, but no larger. The dimensions set must match one of the dimensions returned by AVCaptureDeviceFormat.supportedMaxPhotoDimensions for the currently configured format and be equal to or smaller than the value of AVCapturePhotoOutput.maxPhotoDimensions. This property defaults to the smallest dimensions returned by AVCaptureDeviceFormat.supportedMaxPhotoDimensions.
 func (cps *CapturePhotoSettings) MaxPhotoDimensions() coremedia.CMVideoDimensions {
+	defer runtime.KeepAlive(cps)
 	_r := objc.Send[coremedia.CMVideoDimensions](objref.IDOf(cps), objc.RegisterName("maxPhotoDimensions"))
 	return _r
 }
 
 // IsConstantColorEnabled reports whether the photo will be captured with constant color. Default is false. Set to true if you wish to capture a constant color photo. Throws an exception if -[AVCapturePhotoOutput constantColorEnabled] is not set to true.
 func (cps *CapturePhotoSettings) IsConstantColorEnabled() bool {
+	defer runtime.KeepAlive(cps)
 	_r := objc.Send[bool](objref.IDOf(cps), objc.RegisterName("isConstantColorEnabled"))
 	return _r
 }
 
 // IsConstantColorFallbackPhotoDeliveryEnabled reports whether a fallback photo is delivered when taking a constant color capture. Default is false. Set to true if you wish to receive a fallback photo that can be used in case the main constant color photo's confidence level is too low for your use case.
 func (cps *CapturePhotoSettings) IsConstantColorFallbackPhotoDeliveryEnabled() bool {
+	defer runtime.KeepAlive(cps)
 	_r := objc.Send[bool](objref.IDOf(cps), objc.RegisterName("isConstantColorFallbackPhotoDeliveryEnabled"))
 	return _r
 }
 
 // IsShutterSoundSuppressionEnabled reports whether the built-in shutter sound should be suppressed when capturing a photo with these settings. Default is false. Set to true if you wish to suppress AVCapturePhotoOutput's built-in shutter sound for this request. AVCapturePhotoOutput throws an NSInvalidArgumentException in `-capturePhotoWithSettings:` if its `shutterSoundSuppressionSupported` property returns false.
 func (cps *CapturePhotoSettings) IsShutterSoundSuppressionEnabled() bool {
+	defer runtime.KeepAlive(cps)
 	_r := objc.Send[bool](objref.IDOf(cps), objc.RegisterName("isShutterSoundSuppressionEnabled"))
 	return _r
 }

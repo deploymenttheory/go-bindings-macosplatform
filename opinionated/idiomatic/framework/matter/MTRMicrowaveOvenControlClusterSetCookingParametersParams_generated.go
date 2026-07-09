@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRMicrowaveOvenControlClusterSetCookingParametersParamsAdopt(id objc.ID) *
 
 // Description returns the object's -description text.
 func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) Description() string {
+	defer runtime.KeepAlive(mmoccscpp)
 	return rt.Description(objref.IDOf(mmoccscpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmoccscpp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmoccscpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmoccscpp)
 	return rt.IsKind(objref.IDOf(mmoccscpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) String() string {
+	defer runtime.KeepAlive(mmoccscpp)
 	return rt.Description(objref.IDOf(mmoccscpp))
 }
 
@@ -72,72 +80,84 @@ func NewMTRMicrowaveOvenControlClusterSetCookingParametersParams() *MTRMicrowave
 
 // WithCookMode sets the cook mode.
 func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithCookMode(cookMode obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
+	defer runtime.KeepAlive(cookMode)
 	objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("setCookMode:"), objref.IDOf(cookMode))
 	return mmoccscpp
 }
 
 // WithCookTime sets the cook time.
 func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithCookTime(cookTime obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
+	defer runtime.KeepAlive(cookTime)
 	objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("setCookTime:"), objref.IDOf(cookTime))
 	return mmoccscpp
 }
 
 // WithPowerSetting sets the power setting.
 func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithPowerSetting(powerSetting obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
+	defer runtime.KeepAlive(powerSetting)
 	objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("setPowerSetting:"), objref.IDOf(powerSetting))
 	return mmoccscpp
 }
 
 // WithStartAfterSetting sets the start after setting.
 func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithStartAfterSetting(startAfterSetting obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
+	defer runtime.KeepAlive(startAfterSetting)
 	objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("setStartAfterSetting:"), objref.IDOf(startAfterSetting))
 	return mmoccscpp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mmoccscpp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mmoccscpp
 }
 
 // CookMode returns the cook mode.
-func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) CookMode() obj.Object {
+func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) CookMode() *foundation.Number {
+	defer runtime.KeepAlive(mmoccscpp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("cookMode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // CookTime returns the cook time.
-func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) CookTime() obj.Object {
+func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) CookTime() *foundation.Number {
+	defer runtime.KeepAlive(mmoccscpp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("cookTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // PowerSetting returns the power setting.
-func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) PowerSetting() obj.Object {
+func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) PowerSetting() *foundation.Number {
+	defer runtime.KeepAlive(mmoccscpp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("powerSetting"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StartAfterSetting returns the start after setting.
-func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) StartAfterSetting() obj.Object {
+func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) StartAfterSetting() *foundation.Number {
+	defer runtime.KeepAlive(mmoccscpp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("startAfterSetting"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) TimedInvokeTimeoutMs() obj.Object {
+func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mmoccscpp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) ServerSideProcessingTimeout() obj.Object {
+func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mmoccscpp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

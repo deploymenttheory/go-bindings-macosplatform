@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func tileSetAdopt(id objc.ID) *TileSet {
 
 // Description returns the object's -description text.
 func (ts *TileSet) Description() string {
+	defer runtime.KeepAlive(ts)
 	return rt.Description(objref.IDOf(ts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ts *TileSet) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ts *TileSet) IsKind(className string) bool {
+	defer runtime.KeepAlive(ts)
 	return rt.IsKind(objref.IDOf(ts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ts *TileSet) String() string {
+	defer runtime.KeepAlive(ts)
 	return rt.Description(objref.IDOf(ts))
 }
 
@@ -102,6 +109,7 @@ func (ts *TileSet) WithType(type_ TileSetType) *TileSet {
 
 // WithDefaultTileGroup sets the tile set’s default tile group.
 func (ts *TileSet) WithDefaultTileGroup(defaultTileGroup *TileGroup) *TileSet {
+	defer runtime.KeepAlive(defaultTileGroup)
 	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setDefaultTileGroup:"), objref.IDOf(defaultTileGroup))
 	return ts
 }
@@ -116,12 +124,14 @@ func (ts *TileSet) WithDefaultTileSize(defaultTileSize corefoundation.CGSize) *T
 //
 // TileGroups returns the collection as a Go slice.
 func (ts *TileSet) TileGroups() []*TileGroup {
+	defer runtime.KeepAlive(ts)
 	_arr := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("tileGroups"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TileGroup { return TileGroupFromID(_id) })
 }
 
 // Name returns client-assignable name for the tile set. Defaults to nil.
 func (ts *TileSet) Name() string {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -131,18 +141,21 @@ func (ts *TileSet) Name() string {
 
 // Type returns the tile set type specifies how the tiles in the set will be arranged when placed in a tile map. Defaults to SKTileSetTypeGrid.
 func (ts *TileSet) Type() TileSetType {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[TileSetType](objref.IDOf(ts), objc.RegisterName("type"))
 	return _r
 }
 
 // DefaultTileGroup returns the default tile group.
 func (ts *TileSet) DefaultTileGroup() *TileGroup {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("defaultTileGroup"))
 	return TileGroupFromID(_r)
 }
 
 // DefaultTileSize returns the default tile size is the value an SKTileMapNode will use for it's tiles when the tile set is assigned to it.
 func (ts *TileSet) DefaultTileSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ts), objc.RegisterName("defaultTileSize"))
 	return _r
 }

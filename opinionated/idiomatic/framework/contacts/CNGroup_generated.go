@@ -5,6 +5,8 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func groupAdopt(id objc.ID) *Group {
 
 // Description returns the object's -description text.
 func (g *Group) Description() string {
+	defer runtime.KeepAlive(g)
 	return rt.Description(objref.IDOf(g))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (g *Group) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(g), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (g *Group) IsKind(className string) bool {
+	defer runtime.KeepAlive(g)
 	return rt.IsKind(objref.IDOf(g), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (g *Group) String() string {
+	defer runtime.KeepAlive(g)
 	return rt.Description(objref.IDOf(g))
 }
 
 // Identifier returns the identifier is unique among groups on the device. It can be saved and used for fetching groups next application launch.
 func (g *Group) Identifier() string {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -79,6 +87,7 @@ func (g *Group) Identifier() string {
 
 // Name returns the name.
 func (g *Group) Name() string {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,13 +54,14 @@ func NewMTRNetworkCommissioningClusterNetworkInfo() *MTRNetworkCommissioningClus
 }
 
 // WithNetworkID sets the network ID.
-func (mnccni *MTRNetworkCommissioningClusterNetworkInfo) WithNetworkID(networkID obj.Object) *MTRNetworkCommissioningClusterNetworkInfo {
-	objc.Send[objc.ID](objref.IDOf(mnccni), objc.RegisterName("setNetworkID:"), objref.IDOf(networkID))
+func (mnccni *MTRNetworkCommissioningClusterNetworkInfo) WithNetworkID(networkID []byte) *MTRNetworkCommissioningClusterNetworkInfo {
+	objc.Send[objc.ID](objref.IDOf(mnccni), objc.RegisterName("setNetworkID:"), rt.BytesToNSData(networkID))
 	return mnccni
 }
 
 // WithConnected sets the connected.
 func (mnccni *MTRNetworkCommissioningClusterNetworkInfo) WithConnected(connected obj.Object) *MTRNetworkCommissioningClusterNetworkInfo {
+	defer runtime.KeepAlive(connected)
 	objc.Send[objc.ID](objref.IDOf(mnccni), objc.RegisterName("setConnected:"), objref.IDOf(connected))
 	return mnccni
 }

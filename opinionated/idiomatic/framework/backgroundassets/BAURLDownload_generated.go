@@ -5,6 +5,8 @@
 package backgroundassets
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func uRLDownloadAdopt(id objc.ID) *URLDownload {
 
 // NewURLDownloadWithIdentifierRequestFileSizeApplicationGroupIdentifier constructs a download object to represent the download of a asset located inside of the provided
 func NewURLDownloadWithIdentifierRequestFileSizeApplicationGroupIdentifier(identifier string, request obj.Object, fileSize int, applicationGroupIdentifier string) *URLDownload {
+	defer runtime.KeepAlive(request)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("BAURLDownload")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:request:fileSize:applicationGroupIdentifier:"), purego.NSString(identifier), objref.IDOf(request), fileSize, purego.NSString(applicationGroupIdentifier))
 	return uRLDownloadAdopt(_id)
@@ -55,6 +58,7 @@ func NewURLDownloadWithIdentifierRequestFileSizeApplicationGroupIdentifier(ident
 
 // NewURLDownloadWithIdentifierRequestEssentialFileSizeApplicationGroupIdentifierPriority constructs a download object to represent the download of a asset located inside of the provided
 func NewURLDownloadWithIdentifierRequestEssentialFileSizeApplicationGroupIdentifierPriority(identifier string, request obj.Object, essential bool, fileSize int, applicationGroupIdentifier string, priority int) *URLDownload {
+	defer runtime.KeepAlive(request)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("BAURLDownload")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:request:essential:fileSize:applicationGroupIdentifier:priority:"), purego.NSString(identifier), objref.IDOf(request), essential, fileSize, purego.NSString(applicationGroupIdentifier), priority)
 	return uRLDownloadAdopt(_id)
@@ -62,6 +66,7 @@ func NewURLDownloadWithIdentifierRequestEssentialFileSizeApplicationGroupIdentif
 
 // NewURLDownloadWithIdentifierRequestApplicationGroupIdentifier creates a download that uses the specified identifier and App Group.
 func NewURLDownloadWithIdentifierRequestApplicationGroupIdentifier(identifier string, request obj.Object, applicationGroupIdentifier string) *URLDownload {
+	defer runtime.KeepAlive(request)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("BAURLDownload")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:request:applicationGroupIdentifier:"), purego.NSString(identifier), objref.IDOf(request), purego.NSString(applicationGroupIdentifier))
 	return uRLDownloadAdopt(_id)
@@ -69,6 +74,7 @@ func NewURLDownloadWithIdentifierRequestApplicationGroupIdentifier(identifier st
 
 // NewURLDownloadWithIdentifierRequestApplicationGroupIdentifierPriority creates a prioritized download that uses the specified identifier and App Group.
 func NewURLDownloadWithIdentifierRequestApplicationGroupIdentifierPriority(identifier string, request obj.Object, applicationGroupIdentifier string, priority int) *URLDownload {
+	defer runtime.KeepAlive(request)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("BAURLDownload")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:request:applicationGroupIdentifier:priority:"), purego.NSString(identifier), objref.IDOf(request), purego.NSString(applicationGroupIdentifier), priority)
 	return uRLDownloadAdopt(_id)

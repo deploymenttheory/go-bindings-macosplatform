@@ -5,6 +5,8 @@
 package securityinterface
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func chooseIdentityPanelAdopt(id objc.ID) *ChooseIdentityPanel {
 
 // Description returns the object's -description text.
 func (cip *ChooseIdentityPanel) Description() string {
+	defer runtime.KeepAlive(cip)
 	return rt.Description(objref.IDOf(cip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cip *ChooseIdentityPanel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cip)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cip *ChooseIdentityPanel) IsKind(className string) bool {
+	defer runtime.KeepAlive(cip)
 	return rt.IsKind(objref.IDOf(cip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cip *ChooseIdentityPanel) String() string {
+	defer runtime.KeepAlive(cip)
 	return rt.Description(objref.IDOf(cip))
 }
 
@@ -80,6 +87,8 @@ func NewChooseIdentityPanel() *ChooseIdentityPanel {
 
 // RunModalForIdentitiesMessage displays a list of identities in a modal panel.
 func (cip *ChooseIdentityPanel) RunModalForIdentitiesMessage(identities obj.Object, message string) int {
+	defer runtime.KeepAlive(cip)
+	defer runtime.KeepAlive(identities)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -93,6 +102,7 @@ func (cip *ChooseIdentityPanel) RunModalForIdentitiesMessage(identities obj.Obje
 
 // Identity returns the identity that the user chose in the panel or sheet.
 func (cip *ChooseIdentityPanel) Identity() obj.Object {
+	defer runtime.KeepAlive(cip)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -106,6 +116,8 @@ func (cip *ChooseIdentityPanel) Identity() obj.Object {
 
 // SetPolicies specifies one or more policies that apply to the displayed certificates.
 func (cip *ChooseIdentityPanel) SetPolicies(policies obj.Object) {
+	defer runtime.KeepAlive(cip)
+	defer runtime.KeepAlive(policies)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setPolicies:"), objref.IDOf(policies))
 	})
@@ -114,6 +126,7 @@ func (cip *ChooseIdentityPanel) SetPolicies(policies obj.Object) {
 
 // Policies returns an array of policies used to evaluate the status of the displayed certificates.
 func (cip *ChooseIdentityPanel) Policies() obj.Object {
+	defer runtime.KeepAlive(cip)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -127,6 +140,7 @@ func (cip *ChooseIdentityPanel) Policies() obj.Object {
 
 // SetDefaultButtonTitle customizes the title of the default button.
 func (cip *ChooseIdentityPanel) SetDefaultButtonTitle(title string) {
+	defer runtime.KeepAlive(cip)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setDefaultButtonTitle:"), purego.NSString(title))
 	})
@@ -135,6 +149,7 @@ func (cip *ChooseIdentityPanel) SetDefaultButtonTitle(title string) {
 
 // SetAlternateButtonTitle customizes the title of the alternate button.
 func (cip *ChooseIdentityPanel) SetAlternateButtonTitle(title string) {
+	defer runtime.KeepAlive(cip)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setAlternateButtonTitle:"), purego.NSString(title))
 	})
@@ -143,6 +158,7 @@ func (cip *ChooseIdentityPanel) SetAlternateButtonTitle(title string) {
 
 // SetShowsHelp displays a Help button in the sheet or panel.
 func (cip *ChooseIdentityPanel) SetShowsHelp(showsHelp bool) {
+	defer runtime.KeepAlive(cip)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setShowsHelp:"), showsHelp)
 	})
@@ -151,6 +167,7 @@ func (cip *ChooseIdentityPanel) SetShowsHelp(showsHelp bool) {
 
 // ShowsHelp reports whether the help button is currently set to be displayed.
 func (cip *ChooseIdentityPanel) ShowsHelp() bool {
+	defer runtime.KeepAlive(cip)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -164,6 +181,7 @@ func (cip *ChooseIdentityPanel) ShowsHelp() bool {
 
 // SetHelpAnchor sets the help anchor string for the sheet or modal panel.
 func (cip *ChooseIdentityPanel) SetHelpAnchor(anchor string) {
+	defer runtime.KeepAlive(cip)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setHelpAnchor:"), purego.NSString(anchor))
 	})
@@ -172,6 +190,7 @@ func (cip *ChooseIdentityPanel) SetHelpAnchor(anchor string) {
 
 // HelpAnchor returns the current help anchor string for the sheet or panel.
 func (cip *ChooseIdentityPanel) HelpAnchor() string {
+	defer runtime.KeepAlive(cip)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -188,6 +207,7 @@ func (cip *ChooseIdentityPanel) HelpAnchor() string {
 
 // SetInformativeText sets the optional informative text displayed in the panel.
 func (cip *ChooseIdentityPanel) SetInformativeText(informativeText string) {
+	defer runtime.KeepAlive(cip)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setInformativeText:"), purego.NSString(informativeText))
 	})
@@ -196,6 +216,7 @@ func (cip *ChooseIdentityPanel) SetInformativeText(informativeText string) {
 
 // InformativeText returns the informative text currently displayed in the panel.
 func (cip *ChooseIdentityPanel) InformativeText() string {
+	defer runtime.KeepAlive(cip)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -212,6 +233,7 @@ func (cip *ChooseIdentityPanel) InformativeText() string {
 
 // SetDomain sets an optional domain in which the identity is to be used.
 func (cip *ChooseIdentityPanel) SetDomain(domainString string) {
+	defer runtime.KeepAlive(cip)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setDomain:"), purego.NSString(domainString))
 	})
@@ -220,6 +242,7 @@ func (cip *ChooseIdentityPanel) SetDomain(domainString string) {
 
 // Domain returns the domain that will be associated with the chosen identity.
 func (cip *ChooseIdentityPanel) Domain() string {
+	defer runtime.KeepAlive(cip)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

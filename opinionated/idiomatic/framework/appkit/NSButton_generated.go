@@ -5,6 +5,7 @@
 package appkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -60,6 +61,7 @@ func (b *Button) WithTitle(title string) *Button {
 
 // WithAttributedTitle sets the title that the button displays in an off state, as an attributed string.
 func (b *Button) WithAttributedTitle(attributedTitle obj.Object) *Button {
+	defer runtime.KeepAlive(attributedTitle)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	})
@@ -76,6 +78,7 @@ func (b *Button) WithAlternateTitle(alternateTitle string) *Button {
 
 // WithAttributedAlternateTitle sets the title that the button displays as an attributed string when the button is in an on state.
 func (b *Button) WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *Button {
+	defer runtime.KeepAlive(attributedAlternateTitle)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAttributedAlternateTitle:"), objref.IDOf(attributedAlternateTitle))
 	})
@@ -92,6 +95,7 @@ func (b *Button) WithHasDestructiveAction(hasDestructiveAction bool) *Button {
 
 // WithSound sets the sound that plays when the user clicks the button.
 func (b *Button) WithSound(sound *Sound) *Button {
+	defer runtime.KeepAlive(sound)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setSound:"), objref.IDOf(sound))
 	})
@@ -148,6 +152,7 @@ func (b *Button) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseIn
 
 // WithBezelColor sets the color of the button’s bezel, in appearances that support it.
 func (b *Button) WithBezelColor(bezelColor *Color) *Button {
+	defer runtime.KeepAlive(bezelColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBezelColor:"), objref.IDOf(bezelColor))
 	})
@@ -156,6 +161,7 @@ func (b *Button) WithBezelColor(bezelColor *Color) *Button {
 
 // WithContentTintColor sets a tint color to use for the template image and text content.
 func (b *Button) WithContentTintColor(contentTintColor *Color) *Button {
+	defer runtime.KeepAlive(contentTintColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setContentTintColor:"), objref.IDOf(contentTintColor))
 	})
@@ -172,6 +178,7 @@ func (b *Button) WithTintProminence(tintProminence TintProminence) *Button {
 
 // WithImage sets the image that appears on the button when it’s in an off state, or nil if there is no such image.
 func (b *Button) WithImage(image *Image) *Button {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -180,6 +187,7 @@ func (b *Button) WithImage(image *Image) *Button {
 
 // WithAlternateImage sets an alternate image that appears on the button when the button is in an on state.
 func (b *Button) WithAlternateImage(alternateImage *Image) *Button {
+	defer runtime.KeepAlive(alternateImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
 	})
@@ -212,6 +220,7 @@ func (b *Button) WithImageHugsTitle(imageHugsTitle bool) *Button {
 
 // WithSymbolConfiguration sets the combination of point size, weight, and scale to use when sizing and displaying symbol images.
 func (b *Button) WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *Button {
+	defer runtime.KeepAlive(symbolConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setSymbolConfiguration:"), objref.IDOf(symbolConfiguration))
 	})
@@ -260,6 +269,7 @@ func (b *Button) WithBorderShape(borderShape ControlBorderShape) *Button {
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (b *Button) WithTarget(target obj.Object) *Button {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -324,6 +334,7 @@ func (b *Button) WithControlSize(controlSize ControlSize) *Button {
 
 // WithFormatter sets the receiver’s formatter.
 func (b *Button) WithFormatter(formatter obj.Object) *Button {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -332,6 +343,7 @@ func (b *Button) WithFormatter(formatter obj.Object) *Button {
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (b *Button) WithObjectValue(objectValue obj.Object) *Button {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -348,6 +360,7 @@ func (b *Button) WithStringValue(stringValue string) *Button {
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (b *Button) WithAttributedStringValue(attributedStringValue obj.Object) *Button {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -388,6 +401,7 @@ func (b *Button) WithDoubleValue(doubleValue float64) *Button {
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (b *Button) WithFont(font *Font) *Button {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -436,6 +450,7 @@ func (b *Button) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Butt
 
 // WithCell sets the cell.
 func (b *Button) WithCell(cell CellProvider) *Button {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -581,6 +596,7 @@ func (b *Button) WithWantsLayer(wantsLayer bool) *Button {
 
 // WithLayer sets the layer.
 func (b *Button) WithLayer(layer obj.Object) *Button {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -630,6 +646,7 @@ func (b *Button) WithBackgroundFilters(items ...obj.Object) *Button {
 
 // WithCompositingFilter sets the compositing filter.
 func (b *Button) WithCompositingFilter(compositingFilter obj.Object) *Button {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -647,6 +664,7 @@ func (b *Button) WithContentFilters(items ...obj.Object) *Button {
 
 // WithShadow sets the shadow.
 func (b *Button) WithShadow(shadow *Shadow) *Button {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -695,6 +713,7 @@ func (b *Button) WithPreparedContentRect(preparedContentRect corefoundation.CGRe
 
 // WithNextKeyView sets the next key view.
 func (b *Button) WithNextKeyView(nextKeyView ViewProvider) *Button {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -744,6 +763,7 @@ func (b *Button) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeM
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (b *Button) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Button {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -800,6 +820,7 @@ func (b *Button) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamic
 
 // WithPressureConfiguration sets the pressure configuration.
 func (b *Button) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Button {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -808,6 +829,7 @@ func (b *Button) WithPressureConfiguration(pressureConfiguration *PressureConfig
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (b *Button) WithNextResponder(nextResponder ResponderProvider) *Button {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -816,6 +838,7 @@ func (b *Button) WithNextResponder(nextResponder ResponderProvider) *Button {
 
 // WithMenu sets returns the responder’s menu.
 func (b *Button) WithMenu(menu *Menu) *Button {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -824,6 +847,7 @@ func (b *Button) WithMenu(menu *Menu) *Button {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (b *Button) WithUserActivity(userActivity obj.Object) *Button {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -832,6 +856,7 @@ func (b *Button) WithUserActivity(userActivity obj.Object) *Button {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (b *Button) WithTouchBar(touchBar *TouchBar) *Button {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -840,6 +865,7 @@ func (b *Button) WithTouchBar(touchBar *TouchBar) *Button {
 
 // SetButtonType sets the button’s type, which affects its user interface and behavior when clicked.
 func (b *Button) SetButtonType(type_ ButtonType) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setButtonType:"), type_)
 	})
@@ -848,6 +874,7 @@ func (b *Button) SetButtonType(type_ ButtonType) {
 
 // SetPeriodicDelayInterval sets the message delay and interval periods for a continuous button.
 func (b *Button) SetPeriodicDelayInterval(delay float32, interval float32) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPeriodicDelay:interval:"), delay, interval)
 	})
@@ -856,6 +883,7 @@ func (b *Button) SetPeriodicDelayInterval(delay float32, interval float32) {
 
 // GetPeriodicDelayInterval returns by reference the delay and interval periods for a continuous button.
 func (b *Button) GetPeriodicDelayInterval() (delay float32, interval float32) {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 float32
 	var _mainthread1 float32
 	purego.Main(func() {
@@ -872,6 +900,7 @@ func (b *Button) GetPeriodicDelayInterval() (delay float32, interval float32) {
 
 // SetNextState sets the button to its next state.
 func (b *Button) SetNextState() {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNextState"))
 	})
@@ -880,22 +909,25 @@ func (b *Button) SetNextState() {
 
 // Highlight highlights (or unhighlights) the button.
 func (b *Button) Highlight(flag bool) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("highlight:"), flag)
 	})
 
 }
 
-// CompressWithPrioritizedCompressionOptions sets the priority compression options for this button.
-func (b *Button) CompressWithPrioritizedCompressionOptions(prioritizedOptions []*UserInterfaceCompressionOptions) {
+// CompressWithPrioritizedCompression sets the priority compression options for this button.
+func (b *Button) CompressWithPrioritizedCompression(prioritizedOptions []*UserInterfaceCompressionOptions) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("compressWithPrioritizedCompressionOptions:"), purego.SliceToNSArray(prioritizedOptions, func(_v *UserInterfaceCompressionOptions) objc.ID { return objref.IDOf(_v) }))
 	})
 
 }
 
-// MinimumSizeWithPrioritizedCompressionOptions returns the minimum size of the button by using the compression options.
-func (b *Button) MinimumSizeWithPrioritizedCompressionOptions(prioritizedOptions []*UserInterfaceCompressionOptions) corefoundation.CGSize {
+// MinimumSizeWithPrioritizedCompression returns the minimum size of the button by using the compression options.
+func (b *Button) MinimumSizeWithPrioritizedCompression(prioritizedOptions []*UserInterfaceCompressionOptions) corefoundation.CGSize {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -909,6 +941,7 @@ func (b *Button) MinimumSizeWithPrioritizedCompressionOptions(prioritizedOptions
 
 // Title returns the title displayed on the button when it’s in an off state, or an empty string if the button does not display a title. By default, a button's title is "Button".
 func (b *Button) Title() string {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -924,12 +957,13 @@ func (b *Button) Title() string {
 }
 
 // AttributedTitle returns the button's title, expressed as an attributed string.
-func (b *Button) AttributedTitle() obj.Object {
-	var _mainthread0 obj.Object
+func (b *Button) AttributedTitle() *foundation.AttributedString {
+	defer runtime.KeepAlive(b)
+	var _mainthread0 *foundation.AttributedString
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.AttributedString {
 			_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("attributedTitle"))
-			return obj.Wrap(_r)
+			return foundation.AttributedStringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -938,6 +972,7 @@ func (b *Button) AttributedTitle() obj.Object {
 
 // AlternateTitle returns the title that the button displays when the button is in an on state, or an empty string if there is no such title. Note that some button types do not display an alternate title.
 func (b *Button) AlternateTitle() string {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -953,12 +988,13 @@ func (b *Button) AlternateTitle() string {
 }
 
 // AttributedAlternateTitle returns the alternate title, expressed as an attributed string.
-func (b *Button) AttributedAlternateTitle() obj.Object {
-	var _mainthread0 obj.Object
+func (b *Button) AttributedAlternateTitle() *foundation.AttributedString {
+	defer runtime.KeepAlive(b)
+	var _mainthread0 *foundation.AttributedString
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.AttributedString {
 			_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("attributedAlternateTitle"))
-			return obj.Wrap(_r)
+			return foundation.AttributedStringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -967,6 +1003,7 @@ func (b *Button) AttributedAlternateTitle() obj.Object {
 
 // HasDestructiveAction reports whether the button's action has a destructive effect on user data. AppKit may guard a destructive-actioned button against accidental presses, and may give the button a special appearance in certain contexts to caution against unintentional use. Defaults to false.
 func (b *Button) HasDestructiveAction() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -980,6 +1017,7 @@ func (b *Button) HasDestructiveAction() bool {
 
 // Sound returns the sound that plays when the user clicks the button, or nil if the button should not play a sound. The default value is nil.
 func (b *Button) Sound() *Sound {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 *Sound
 	purego.Main(func() {
 		_mainthread0 = func() *Sound {
@@ -993,6 +1031,7 @@ func (b *Button) Sound() *Sound {
 
 // IsSpringLoaded reports whether sends action on deep-press or extended hover while dragging. Defaults to false.
 func (b *Button) IsSpringLoaded() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1006,6 +1045,7 @@ func (b *Button) IsSpringLoaded() bool {
 
 // MaxAcceleratorLevel returns configures the maximum allowed level for an NSMultiLevelAcceleratorButton, allowed values range from [1,5]. Defaults to 2.
 func (b *Button) MaxAcceleratorLevel() int {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1019,6 +1059,7 @@ func (b *Button) MaxAcceleratorLevel() int {
 
 // BezelStyle returns the bezel style of the button, which provides a set of bezel artwork, layout metrics, and content styling from a set of system-provided styles. See the NSBezelStyle enumeration for a list of available styles. The bezel style is not used if the `bordered` property is set to `NO`.
 func (b *Button) BezelStyle() BezelStyle {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 BezelStyle
 	purego.Main(func() {
 		_mainthread0 = func() BezelStyle {
@@ -1032,6 +1073,7 @@ func (b *Button) BezelStyle() BezelStyle {
 
 // IsBordered reports whether a Boolean value that determines whether the button draws a border.
 func (b *Button) IsBordered() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1045,6 +1087,7 @@ func (b *Button) IsBordered() bool {
 
 // IsTransparent reports whether the button is transparent. A transparent button never draws itself, but it receives mouse events, sends its action, and tracks the mouse properly.
 func (b *Button) IsTransparent() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1058,6 +1101,7 @@ func (b *Button) IsTransparent() bool {
 
 // ShowsBorderOnlyWhileMouseInside wraps the corresponding Objective-C method.
 func (b *Button) ShowsBorderOnlyWhileMouseInside() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1071,6 +1115,7 @@ func (b *Button) ShowsBorderOnlyWhileMouseInside() bool {
 
 // BezelColor returns applies a custom color to the button's bezel, in appearances that support it. A nil value indicates an unmodified button appearance. The default value is nil.
 func (b *Button) BezelColor() *Color {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -1084,6 +1129,7 @@ func (b *Button) BezelColor() *Color {
 
 // ContentTintColor returns applies a tint color to template image and text content, in combination with other theme-appropriate effects. Only applicable to borderless buttons. A nil value indicates the standard set of effects without color modification. The default value is nil. Non-template images and attributed string values are not affected by the contentTintColor.
 func (b *Button) ContentTintColor() *Color {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -1097,6 +1143,7 @@ func (b *Button) ContentTintColor() *Color {
 
 // TintProminence returns the tint prominence of the button. Use tint prominence to gently suggest a hierarchy when multiple buttons perform similar actions. A button with primary tint prominence suggests the most preferred option, while secondary prominence indicates a reasonable alternative. See “NSTintProminence“ for a list of possible values.
 func (b *Button) TintProminence() TintProminence {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 TintProminence
 	purego.Main(func() {
 		_mainthread0 = func() TintProminence {
@@ -1110,6 +1157,7 @@ func (b *Button) TintProminence() TintProminence {
 
 // Image returns the image that appears on the button when it’s in an off state, or nil if there is no such image.
 func (b *Button) Image() *Image {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {
@@ -1123,6 +1171,7 @@ func (b *Button) Image() *Image {
 
 // AlternateImage returns an alternate image that appears on the button when the button is in an on state, or nil if there is no such image. Note that some button types do not display an alternate image.
 func (b *Button) AlternateImage() *Image {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {
@@ -1136,6 +1185,7 @@ func (b *Button) AlternateImage() *Image {
 
 // ImagePosition returns the position of the button's image relative to its title. See the NSCellImagePosition enumeration for possible values.
 func (b *Button) ImagePosition() CellImagePosition {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 CellImagePosition
 	purego.Main(func() {
 		_mainthread0 = func() CellImagePosition {
@@ -1149,6 +1199,7 @@ func (b *Button) ImagePosition() CellImagePosition {
 
 // ImageScaling returns the scaling mode applied to make the button's image fit within its bounds.
 func (b *Button) ImageScaling() ImageScaling {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 ImageScaling
 	purego.Main(func() {
 		_mainthread0 = func() ImageScaling {
@@ -1162,6 +1213,7 @@ func (b *Button) ImageScaling() ImageScaling {
 
 // ImageHugsTitle reports whether a Boolean value that determines how the button's image and title are positioned together within the button bezel. If false, the image is positioned according to the imagePosition property at the edge of the button bezel, and the title is positioned within the remaining space. If true, the button’s image is positioned directly adjacent to the title based on the imagePosition property, and the image and title are positioned within the button bezel as a single unit.
 func (b *Button) ImageHugsTitle() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1175,6 +1227,7 @@ func (b *Button) ImageHugsTitle() bool {
 
 // SymbolConfiguration specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the symbol is matched to the button's `font` property. The default value is nil.
 func (b *Button) SymbolConfiguration() *ImageSymbolConfiguration {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 *ImageSymbolConfiguration
 	purego.Main(func() {
 		_mainthread0 = func() *ImageSymbolConfiguration {
@@ -1188,6 +1241,7 @@ func (b *Button) SymbolConfiguration() *ImageSymbolConfiguration {
 
 // State returns the button's state. Buttons support the off and on states, and an additional mixed state depending on the value of the `allowsMixedState` property.
 func (b *Button) State() int {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1201,6 +1255,7 @@ func (b *Button) State() int {
 
 // AllowsMixedState reports whether the button allows a mixed state. If false, the button has two states (on and off), and if true, the button has three states (on, off, and mixed). The mixed state is commonly used with checkboxes and radio buttons to indicate a value which is partially on.
 func (b *Button) AllowsMixedState() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1214,6 +1269,7 @@ func (b *Button) AllowsMixedState() bool {
 
 // KeyEquivalent returns this property contains the button's key equivalent, or the empty string if no equivalent has been defined. Buttons don’t have a default key equivalent. Setting the key equivalent to the Return character causes it to act as the default button for its window.
 func (b *Button) KeyEquivalent() string {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -1230,6 +1286,7 @@ func (b *Button) KeyEquivalent() string {
 
 // KeyEquivalentModifierMask returns a bitmask specifying the modifier keys that are applied to the button's key equivalent. Mask bits are defined by the NSEventModifierFlags option set. The only mask bits relevant in button key-equivalent modifier masks are NSEventModifierFlagControl, NSEventModifierFlagOption, and NSEventModifierFlagCommand.
 func (b *Button) KeyEquivalentModifierMask() EventModifierFlags {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 EventModifierFlags
 	purego.Main(func() {
 		_mainthread0 = func() EventModifierFlags {
@@ -1243,6 +1300,7 @@ func (b *Button) KeyEquivalentModifierMask() EventModifierFlags {
 
 // ActiveCompressionOptions returns the active compression options.
 func (b *Button) ActiveCompressionOptions() *UserInterfaceCompressionOptions {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 *UserInterfaceCompressionOptions
 	purego.Main(func() {
 		_mainthread0 = func() *UserInterfaceCompressionOptions {
@@ -1256,6 +1314,7 @@ func (b *Button) ActiveCompressionOptions() *UserInterfaceCompressionOptions {
 
 // BorderShape returns the border shape.
 func (b *Button) BorderShape() ControlBorderShape {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 ControlBorderShape
 	purego.Main(func() {
 		_mainthread0 = func() ControlBorderShape {
@@ -1269,6 +1328,7 @@ func (b *Button) BorderShape() ControlBorderShape {
 
 // SetTitleWithMnemonic sets the title of a button with a character denoting an access key.
 func (b *Button) SetTitleWithMnemonic(stringWithAmpersand string) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
 	})

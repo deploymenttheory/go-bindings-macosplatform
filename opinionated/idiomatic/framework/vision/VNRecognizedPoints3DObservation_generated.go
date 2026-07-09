@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,8 +50,10 @@ func recognizedPoints3DObservationAdopt(id objc.ID) *RecognizedPoints3DObservati
 	return x
 }
 
-// RecognizedPointForKeyError returns a point for a key you specify.
-func (rpdo *RecognizedPoints3DObservation) RecognizedPointForKeyError(pointKey obj.Object) (result *RecognizedPoint3D, err error) {
+// RecognizedPointForKey returns a point for a key you specify.
+func (rpdo *RecognizedPoints3DObservation) RecognizedPointForKey(pointKey obj.Object) (result *RecognizedPoint3D, err error) {
+	defer runtime.KeepAlive(rpdo)
+	defer runtime.KeepAlive(pointKey)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(rpdo), objc.RegisterName("recognizedPointForKey:error:"), objref.IDOf(pointKey), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -59,8 +62,10 @@ func (rpdo *RecognizedPoints3DObservation) RecognizedPointForKeyError(pointKey o
 	return RecognizedPoint3DFromID(_r), nil
 }
 
-// RecognizedPointsForGroupKeyError returns a point for a group key you specify.
-func (rpdo *RecognizedPoints3DObservation) RecognizedPointsForGroupKeyError(groupKey obj.Object) (result obj.Object, err error) {
+// RecognizedPointsForGroupKey returns a point for a group key you specify.
+func (rpdo *RecognizedPoints3DObservation) RecognizedPointsForGroupKey(groupKey obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(rpdo)
+	defer runtime.KeepAlive(groupKey)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(rpdo), objc.RegisterName("recognizedPointsForGroupKey:error:"), objref.IDOf(groupKey), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -73,6 +78,7 @@ func (rpdo *RecognizedPoints3DObservation) RecognizedPointsForGroupKeyError(grou
 //
 // AvailableKeys returns the collection as a Go slice.
 func (rpdo *RecognizedPoints3DObservation) AvailableKeys() []obj.Object {
+	defer runtime.KeepAlive(rpdo)
 	_arr := objc.Send[objc.ID](objref.IDOf(rpdo), objc.RegisterName("availableKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -81,6 +87,7 @@ func (rpdo *RecognizedPoints3DObservation) AvailableKeys() []obj.Object {
 //
 // AvailableGroupKeys returns the collection as a Go slice.
 func (rpdo *RecognizedPoints3DObservation) AvailableGroupKeys() []obj.Object {
+	defer runtime.KeepAlive(rpdo)
 	_arr := objc.Send[objc.ID](objref.IDOf(rpdo), objc.RegisterName("availableGroupKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

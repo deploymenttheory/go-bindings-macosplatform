@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,27 +50,33 @@ func protocolCheckerAdopt(id objc.ID) *ProtocolChecker {
 
 // Description returns the object's -description text.
 func (pc *ProtocolChecker) Description() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pc *ProtocolChecker) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pc *ProtocolChecker) IsKind(className string) bool {
+	defer runtime.KeepAlive(pc)
 	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pc *ProtocolChecker) String() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
 // NewProtocolCheckerWithTargetProtocol initializes a newly allocated NSProtocolChecker instance that will forward any messages in aProtocol to anObject, the protocol checker’s target.
 func NewProtocolCheckerWithTargetProtocol(anObject *Object, aProtocol unsafe.Pointer) *ProtocolChecker {
+	defer runtime.KeepAlive(anObject)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSProtocolChecker")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTarget:protocol:"), objref.IDOf(anObject), aProtocol)
 	return protocolCheckerAdopt(_id)
@@ -77,6 +84,7 @@ func NewProtocolCheckerWithTargetProtocol(anObject *Object, aProtocol unsafe.Poi
 
 // Target returns the target.
 func (pc *ProtocolChecker) Target() *Object {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("target"))
 	return ObjectFromID(_r)
 }

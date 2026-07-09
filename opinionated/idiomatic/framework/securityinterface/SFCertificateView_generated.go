@@ -5,6 +5,8 @@
 package securityinterface
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func certificateViewAdopt(id objc.ID) *CertificateView {
 
 // Description returns the object's -description text.
 func (cv *CertificateView) Description() string {
+	defer runtime.KeepAlive(cv)
 	return rt.Description(objref.IDOf(cv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cv *CertificateView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cv *CertificateView) IsKind(className string) bool {
+	defer runtime.KeepAlive(cv)
 	return rt.IsKind(objref.IDOf(cv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cv *CertificateView) String() string {
+	defer runtime.KeepAlive(cv)
 	return rt.Description(objref.IDOf(cv))
 }
 
@@ -80,6 +87,8 @@ func NewCertificateView() *CertificateView {
 
 // SetCertificate specifies the certificate that’s displayed in the view.
 func (cv *CertificateView) SetCertificate(certificate obj.Object) {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(certificate)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCertificate:"), objref.IDOf(certificate))
 	})
@@ -88,6 +97,7 @@ func (cv *CertificateView) SetCertificate(certificate obj.Object) {
 
 // Certificate returns the certificate currently displayed in the view.
 func (cv *CertificateView) Certificate() obj.Object {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -101,6 +111,8 @@ func (cv *CertificateView) Certificate() obj.Object {
 
 // SetPolicies specifies the policies to use when evaluating this certificate’s status.
 func (cv *CertificateView) SetPolicies(policies obj.Object) {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(policies)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPolicies:"), objref.IDOf(policies))
 	})
@@ -109,6 +121,7 @@ func (cv *CertificateView) SetPolicies(policies obj.Object) {
 
 // Policies returns an array of policies used to evaluate the status of the displayed certificate.
 func (cv *CertificateView) Policies() obj.Object {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -122,6 +135,7 @@ func (cv *CertificateView) Policies() obj.Object {
 
 // SetEditableTrust specifies whether the user can edit the certificate’s trust settings.
 func (cv *CertificateView) SetEditableTrust(editable bool) {
+	defer runtime.KeepAlive(cv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setEditableTrust:"), editable)
 	})
@@ -130,6 +144,7 @@ func (cv *CertificateView) SetEditableTrust(editable bool) {
 
 // IsEditable reports whether indicates if the view allows the user to edit the certificate’s trust.
 func (cv *CertificateView) IsEditable() bool {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -143,6 +158,7 @@ func (cv *CertificateView) IsEditable() bool {
 
 // SetDisplayTrust specifies whether the user can see the certificate’s trust settings.
 func (cv *CertificateView) SetDisplayTrust(display bool) {
+	defer runtime.KeepAlive(cv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDisplayTrust:"), display)
 	})
@@ -151,6 +167,7 @@ func (cv *CertificateView) SetDisplayTrust(display bool) {
 
 // IsTrustDisplayed reports whether indicates if the view currently shows the certificate’s trust settings.
 func (cv *CertificateView) IsTrustDisplayed() bool {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -164,6 +181,7 @@ func (cv *CertificateView) IsTrustDisplayed() bool {
 
 // SaveTrustSettings saves the user’s current trust settings for the displayed certificate.
 func (cv *CertificateView) SaveTrustSettings() {
+	defer runtime.KeepAlive(cv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("saveTrustSettings"))
 	})
@@ -172,6 +190,7 @@ func (cv *CertificateView) SaveTrustSettings() {
 
 // SetDisplayDetails specifies whether the user can see the certificate details.
 func (cv *CertificateView) SetDisplayDetails(display bool) {
+	defer runtime.KeepAlive(cv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDisplayDetails:"), display)
 	})
@@ -180,6 +199,7 @@ func (cv *CertificateView) SetDisplayDetails(display bool) {
 
 // DetailsDisplayed reports whether indicates if the view currently shows the certificate’s details.
 func (cv *CertificateView) DetailsDisplayed() bool {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -193,6 +213,7 @@ func (cv *CertificateView) DetailsDisplayed() bool {
 
 // SetDetailsDisclosed sets whether the certificate details subview is disclosed.
 func (cv *CertificateView) SetDetailsDisclosed(disclosed bool) {
+	defer runtime.KeepAlive(cv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDetailsDisclosed:"), disclosed)
 	})
@@ -201,6 +222,7 @@ func (cv *CertificateView) SetDetailsDisclosed(disclosed bool) {
 
 // DetailsDisclosed reports whether the view currently shows the certificate’s details.
 func (cv *CertificateView) DetailsDisclosed() bool {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -214,6 +236,7 @@ func (cv *CertificateView) DetailsDisclosed() bool {
 
 // SetPoliciesDisclosed specifies whether the trust policy settings subview is disclosed.
 func (cv *CertificateView) SetPoliciesDisclosed(disclosed bool) {
+	defer runtime.KeepAlive(cv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPoliciesDisclosed:"), disclosed)
 	})
@@ -222,6 +245,7 @@ func (cv *CertificateView) SetPoliciesDisclosed(disclosed bool) {
 
 // PoliciesDisclosed reports whether the trust policy subview is disclosed.
 func (cv *CertificateView) PoliciesDisclosed() bool {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -67,18 +69,21 @@ func (frzo *FetchRecordZonesOperation) WithRecordZoneIDs(items ...*RecordZoneID)
 
 // WithDatabase sets the database that the operation uses.
 func (frzo *FetchRecordZonesOperation) WithDatabase(database *Database) *FetchRecordZonesOperation {
+	defer runtime.KeepAlive(database)
 	objc.Send[objc.ID](objref.IDOf(frzo), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return frzo
 }
 
 // WithConfiguration sets the operation’s configuration.
 func (frzo *FetchRecordZonesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchRecordZonesOperation {
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(frzo), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return frzo
 }
 
 // WithGroup sets the operation’s group.
 func (frzo *FetchRecordZonesOperation) WithGroup(group *OperationGroup) *FetchRecordZonesOperation {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(frzo), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return frzo
 }
@@ -91,6 +96,7 @@ func (frzo *FetchRecordZonesOperation) WithLongLivedOperationWasPersistedBlock(l
 
 // WithContainer sets the operation's container.
 func (frzo *FetchRecordZonesOperation) WithContainer(container *Container) *FetchRecordZonesOperation {
+	defer runtime.KeepAlive(container)
 	objc.Send[objc.ID](objref.IDOf(frzo), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return frzo
 }
@@ -123,6 +129,7 @@ func (frzo *FetchRecordZonesOperation) WithTimeoutIntervalForResource(timeoutInt
 //
 // RecordZoneIDs returns the collection as a Go slice.
 func (frzo *FetchRecordZonesOperation) RecordZoneIDs() []*RecordZoneID {
+	defer runtime.KeepAlive(frzo)
 	_arr := objc.Send[objc.ID](objref.IDOf(frzo), objc.RegisterName("recordZoneIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }

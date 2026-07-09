@@ -5,7 +5,10 @@
 package ituneslibrary
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func libAlbumAdopt(id objc.ID) *LibAlbum {
 
 // Description returns the object's -description text.
 func (la *LibAlbum) Description() string {
+	defer runtime.KeepAlive(la)
 	return rt.Description(objref.IDOf(la))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (la *LibAlbum) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(la)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(la), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (la *LibAlbum) IsKind(className string) bool {
+	defer runtime.KeepAlive(la)
 	return rt.IsKind(objref.IDOf(la), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (la *LibAlbum) String() string {
+	defer runtime.KeepAlive(la)
 	return rt.Description(objref.IDOf(la))
 }
 
@@ -74,6 +82,7 @@ func NewLibAlbum() *LibAlbum {
 
 // Title returns the name of this album.
 func (la *LibAlbum) Title() string {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -83,6 +92,7 @@ func (la *LibAlbum) Title() string {
 
 // SortTitle returns the name of this that should be used for sorting purposes.
 func (la *LibAlbum) SortTitle() string {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("sortTitle"))
 	if _r == 0 {
 		return ""
@@ -92,48 +102,56 @@ func (la *LibAlbum) SortTitle() string {
 
 // IsCompilation reports whether this album is a compilation.
 func (la *LibAlbum) IsCompilation() bool {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[bool](objref.IDOf(la), objc.RegisterName("isCompilation"))
 	return _r
 }
 
 // DiscCount returns the number of discs in this album.
 func (la *LibAlbum) DiscCount() int {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[int](objref.IDOf(la), objc.RegisterName("discCount"))
 	return _r
 }
 
 // DiscNumber returns the index (i.e. 1, 2, 3, etc.) of the disc this album refers to within a compilation.
 func (la *LibAlbum) DiscNumber() int {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[int](objref.IDOf(la), objc.RegisterName("discNumber"))
 	return _r
 }
 
 // Rating returns the rating of this track's album.
 func (la *LibAlbum) Rating() int {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[int](objref.IDOf(la), objc.RegisterName("rating"))
 	return _r
 }
 
 // IsRatingComputed reports whether the rating of this track's album.
 func (la *LibAlbum) IsRatingComputed() bool {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[bool](objref.IDOf(la), objc.RegisterName("isRatingComputed"))
 	return _r
 }
 
 // IsGapless reports whether this track's album is gapless.
 func (la *LibAlbum) IsGapless() bool {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[bool](objref.IDOf(la), objc.RegisterName("isGapless"))
 	return _r
 }
 
 // TrackCount returns number of tracks in this album.
 func (la *LibAlbum) TrackCount() int {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[int](objref.IDOf(la), objc.RegisterName("trackCount"))
 	return _r
 }
 
 // AlbumArtist returns the artist associated with this album.
 func (la *LibAlbum) AlbumArtist() string {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("albumArtist"))
 	if _r == 0 {
 		return ""
@@ -143,6 +161,7 @@ func (la *LibAlbum) AlbumArtist() string {
 
 // SortAlbumArtist returns the artist associated with this album. This field should be used when sorting.
 func (la *LibAlbum) SortAlbumArtist() string {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("sortAlbumArtist"))
 	if _r == 0 {
 		return ""
@@ -151,7 +170,8 @@ func (la *LibAlbum) SortAlbumArtist() string {
 }
 
 // PersistentID returns the unique identifier of this album.
-func (la *LibAlbum) PersistentID() obj.Object {
+func (la *LibAlbum) PersistentID() *foundation.Number {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("persistentID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

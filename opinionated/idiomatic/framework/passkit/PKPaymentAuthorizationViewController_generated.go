@@ -5,8 +5,11 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,27 +50,33 @@ func paymentAuthorizationViewControllerAdopt(id objc.ID) *PaymentAuthorizationVi
 
 // Description returns the object's -description text.
 func (pavc *PaymentAuthorizationViewController) Description() string {
+	defer runtime.KeepAlive(pavc)
 	return rt.Description(objref.IDOf(pavc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pavc *PaymentAuthorizationViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pavc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pavc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pavc *PaymentAuthorizationViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(pavc)
 	return rt.IsKind(objref.IDOf(pavc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pavc *PaymentAuthorizationViewController) String() string {
+	defer runtime.KeepAlive(pavc)
 	return rt.Description(objref.IDOf(pavc))
 }
 
 // NewPaymentAuthorizationViewControllerWithPaymentRequest initializes and returns a payment authorization view controller.
 func NewPaymentAuthorizationViewControllerWithPaymentRequest(request *PaymentRequest) *PaymentAuthorizationViewController {
+	defer runtime.KeepAlive(request)
 	var _mainthread0 *PaymentAuthorizationViewController
 	purego.Main(func() {
 		_mainthread0 = func() *PaymentAuthorizationViewController {
@@ -81,6 +90,7 @@ func NewPaymentAuthorizationViewControllerWithPaymentRequest(request *PaymentReq
 
 // NewPaymentAuthorizationViewControllerWithDisbursementRequest initializes and returns a new payment authorization view controller with the provided disbursement request.
 func NewPaymentAuthorizationViewControllerWithDisbursementRequest(request *DisbursementRequest) *PaymentAuthorizationViewController {
+	defer runtime.KeepAlive(request)
 	var _mainthread0 *PaymentAuthorizationViewController
 	purego.Main(func() {
 		_mainthread0 = func() *PaymentAuthorizationViewController {
@@ -90,4 +100,16 @@ func NewPaymentAuthorizationViewControllerWithDisbursementRequest(request *Disbu
 		}()
 	})
 	return _mainthread0
+}
+
+// WithDelegate sets the view controller’s delegate.
+func (pavc *PaymentAuthorizationViewController) WithDelegate(delegate PaymentAuthorizationViewControllerDelegate) *PaymentAuthorizationViewController {
+	_shim := newPaymentAuthorizationViewControllerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(pavc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pavc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return pavc
 }

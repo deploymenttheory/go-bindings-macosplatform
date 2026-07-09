@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +51,27 @@ func userNotificationAdopt(id objc.ID) *UserNotification {
 
 // Description returns the object's -description text.
 func (un *UserNotification) Description() string {
+	defer runtime.KeepAlive(un)
 	return rt.Description(objref.IDOf(un))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (un *UserNotification) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(un)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(un), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (un *UserNotification) IsKind(className string) bool {
+	defer runtime.KeepAlive(un)
 	return rt.IsKind(objref.IDOf(un), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (un *UserNotification) String() string {
+	defer runtime.KeepAlive(un)
 	return rt.Description(objref.IDOf(un))
 }
 
@@ -76,54 +83,62 @@ func NewUserNotification() *UserNotification {
 
 // WithTitle sets specifies the title of the notification.
 func (un *UserNotification) WithTitle(title StringProvider) *UserNotification {
+	defer runtime.KeepAlive(title)
 	objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("setTitle:"), objref.IDOf(title))
 	return un
 }
 
 // WithSubtitle sets specifies the subtitle of the notification.
 func (un *UserNotification) WithSubtitle(subtitle StringProvider) *UserNotification {
+	defer runtime.KeepAlive(subtitle)
 	objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("setSubtitle:"), objref.IDOf(subtitle))
 	return un
 }
 
 // WithInformativeText sets the body text of the notification.
 func (un *UserNotification) WithInformativeText(informativeText StringProvider) *UserNotification {
+	defer runtime.KeepAlive(informativeText)
 	objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("setInformativeText:"), objref.IDOf(informativeText))
 	return un
 }
 
 // WithActionButtonTitle sets specifies the title of the action button displayed in the notification.
 func (un *UserNotification) WithActionButtonTitle(actionButtonTitle StringProvider) *UserNotification {
+	defer runtime.KeepAlive(actionButtonTitle)
 	objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("setActionButtonTitle:"), objref.IDOf(actionButtonTitle))
 	return un
 }
 
 // WithUserInfo sets application-specific user info that can be attached to the notification.
-func (un *UserNotification) WithUserInfo(userInfo obj.Object) *UserNotification {
-	objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
+func (un *UserNotification) WithUserInfo(userInfo map[string]obj.Object) *UserNotification {
+	objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("setUserInfo:"), rt.MapToDict(userInfo, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return un
 }
 
 // WithDeliveryDate sets specifies when the notification should be delivered.
 func (un *UserNotification) WithDeliveryDate(deliveryDate DateProvider) *UserNotification {
+	defer runtime.KeepAlive(deliveryDate)
 	objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("setDeliveryDate:"), objref.IDOf(deliveryDate))
 	return un
 }
 
 // WithDeliveryTimeZone sets specify the time zone to interpret the delivery date in.
 func (un *UserNotification) WithDeliveryTimeZone(deliveryTimeZone *TimeZone) *UserNotification {
+	defer runtime.KeepAlive(deliveryTimeZone)
 	objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("setDeliveryTimeZone:"), objref.IDOf(deliveryTimeZone))
 	return un
 }
 
 // WithDeliveryRepeatInterval sets specifies the date components that control how often a user notification is repeated.
 func (un *UserNotification) WithDeliveryRepeatInterval(deliveryRepeatInterval *DateComponents) *UserNotification {
+	defer runtime.KeepAlive(deliveryRepeatInterval)
 	objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("setDeliveryRepeatInterval:"), objref.IDOf(deliveryRepeatInterval))
 	return un
 }
 
 // WithSoundName sets specifies the name of the sound to play when the notification is delivered.
 func (un *UserNotification) WithSoundName(soundName StringProvider) *UserNotification {
+	defer runtime.KeepAlive(soundName)
 	objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("setSoundName:"), objref.IDOf(soundName))
 	return un
 }
@@ -136,18 +151,21 @@ func (un *UserNotification) WithHasActionButton(hasActionButton bool) *UserNotif
 
 // WithOtherButtonTitle sets specifies a custom title for the close button in an alert-style notification.
 func (un *UserNotification) WithOtherButtonTitle(otherButtonTitle StringProvider) *UserNotification {
+	defer runtime.KeepAlive(otherButtonTitle)
 	objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("setOtherButtonTitle:"), objref.IDOf(otherButtonTitle))
 	return un
 }
 
 // WithIdentifier sets a string that uniquely identifies a notification.
 func (un *UserNotification) WithIdentifier(identifier StringProvider) *UserNotification {
+	defer runtime.KeepAlive(identifier)
 	objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 	return un
 }
 
 // WithContentImage sets image shown in the content of the notification.
 func (un *UserNotification) WithContentImage(contentImage obj.Object) *UserNotification {
+	defer runtime.KeepAlive(contentImage)
 	objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("setContentImage:"), objref.IDOf(contentImage))
 	return un
 }
@@ -160,6 +178,7 @@ func (un *UserNotification) WithHasReplyButton(hasReplyButton bool) *UserNotific
 
 // WithResponsePlaceholder sets optional placeholder string for inline reply field.
 func (un *UserNotification) WithResponsePlaceholder(responsePlaceholder StringProvider) *UserNotification {
+	defer runtime.KeepAlive(responsePlaceholder)
 	objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("setResponsePlaceholder:"), objref.IDOf(responsePlaceholder))
 	return un
 }
@@ -178,13 +197,14 @@ func (un *UserNotification) WithObservationInfo(observationInfo unsafe.Pointer) 
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (un *UserNotification) WithScriptingProperties(scriptingProperties obj.Object) *UserNotification {
-	objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (un *UserNotification) WithScriptingProperties(scriptingProperties map[string]obj.Object) *UserNotification {
+	objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return un
 }
 
 // Title returns the title.
 func (un *UserNotification) Title() string {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -194,6 +214,7 @@ func (un *UserNotification) Title() string {
 
 // Subtitle returns the subtitle.
 func (un *UserNotification) Subtitle() string {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("subtitle"))
 	if _r == 0 {
 		return ""
@@ -203,6 +224,7 @@ func (un *UserNotification) Subtitle() string {
 
 // InformativeText returns the informative text.
 func (un *UserNotification) InformativeText() string {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("informativeText"))
 	if _r == 0 {
 		return ""
@@ -212,6 +234,7 @@ func (un *UserNotification) InformativeText() string {
 
 // ActionButtonTitle returns the action button title.
 func (un *UserNotification) ActionButtonTitle() string {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("actionButtonTitle"))
 	if _r == 0 {
 		return ""
@@ -220,49 +243,57 @@ func (un *UserNotification) ActionButtonTitle() string {
 }
 
 // UserInfo returns the user info.
-func (un *UserNotification) UserInfo() obj.Object {
+func (un *UserNotification) UserInfo() map[string]obj.Object {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("userInfo"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DeliveryDate returns the delivery date.
-func (un *UserNotification) DeliveryDate() *Date {
+func (un *UserNotification) DeliveryDate() time.Time {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("deliveryDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // DeliveryTimeZone returns the delivery time zone.
 func (un *UserNotification) DeliveryTimeZone() *TimeZone {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("deliveryTimeZone"))
 	return TimeZoneFromID(_r)
 }
 
 // DeliveryRepeatInterval returns the delivery repeat interval.
 func (un *UserNotification) DeliveryRepeatInterval() *DateComponents {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("deliveryRepeatInterval"))
 	return DateComponentsFromID(_r)
 }
 
 // ActualDeliveryDate returns the actual delivery date.
-func (un *UserNotification) ActualDeliveryDate() *Date {
+func (un *UserNotification) ActualDeliveryDate() time.Time {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("actualDeliveryDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // IsPresented reports whether the object is presented.
 func (un *UserNotification) IsPresented() bool {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[bool](objref.IDOf(un), objc.RegisterName("isPresented"))
 	return _r
 }
 
 // IsRemote reports whether the object is remote.
 func (un *UserNotification) IsRemote() bool {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[bool](objref.IDOf(un), objc.RegisterName("isRemote"))
 	return _r
 }
 
 // SoundName returns the sound name.
 func (un *UserNotification) SoundName() string {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("soundName"))
 	if _r == 0 {
 		return ""
@@ -272,18 +303,21 @@ func (un *UserNotification) SoundName() string {
 
 // HasActionButton reports whether the object has action button.
 func (un *UserNotification) HasActionButton() bool {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[bool](objref.IDOf(un), objc.RegisterName("hasActionButton"))
 	return _r
 }
 
 // ActivationType returns the activation type.
 func (un *UserNotification) ActivationType() UserNotificationActivationType {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[UserNotificationActivationType](objref.IDOf(un), objc.RegisterName("activationType"))
 	return _r
 }
 
 // OtherButtonTitle returns the other button title.
 func (un *UserNotification) OtherButtonTitle() string {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("otherButtonTitle"))
 	if _r == 0 {
 		return ""
@@ -293,6 +327,7 @@ func (un *UserNotification) OtherButtonTitle() string {
 
 // Identifier returns the identifier.
 func (un *UserNotification) Identifier() string {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -302,18 +337,21 @@ func (un *UserNotification) Identifier() string {
 
 // ContentImage returns the content image.
 func (un *UserNotification) ContentImage() obj.Object {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("contentImage"))
 	return obj.Wrap(_r)
 }
 
 // HasReplyButton reports whether the object has reply button.
 func (un *UserNotification) HasReplyButton() bool {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[bool](objref.IDOf(un), objc.RegisterName("hasReplyButton"))
 	return _r
 }
 
 // ResponsePlaceholder returns the response placeholder.
 func (un *UserNotification) ResponsePlaceholder() string {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("responsePlaceholder"))
 	if _r == 0 {
 		return ""
@@ -323,6 +361,7 @@ func (un *UserNotification) ResponsePlaceholder() string {
 
 // Response returns the response.
 func (un *UserNotification) Response() *AttributedString {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("response"))
 	return AttributedStringFromID(_r)
 }
@@ -331,12 +370,14 @@ func (un *UserNotification) Response() *AttributedString {
 //
 // AdditionalActions returns the collection as a Go slice.
 func (un *UserNotification) AdditionalActions() []*UserNotificationAction {
+	defer runtime.KeepAlive(un)
 	_arr := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("additionalActions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UserNotificationAction { return UserNotificationActionFromID(_id) })
 }
 
 // AdditionalActivationAction returns the additional activation action.
 func (un *UserNotification) AdditionalActivationAction() *UserNotificationAction {
+	defer runtime.KeepAlive(un)
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("additionalActivationAction"))
 	return UserNotificationActionFromID(_r)
 }

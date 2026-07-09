@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func scriptCoercionHandlerAdopt(id objc.ID) *ScriptCoercionHandler {
 
 // Description returns the object's -description text.
 func (sch *ScriptCoercionHandler) Description() string {
+	defer runtime.KeepAlive(sch)
 	return rt.Description(objref.IDOf(sch))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sch *ScriptCoercionHandler) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sch)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sch), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sch *ScriptCoercionHandler) IsKind(className string) bool {
+	defer runtime.KeepAlive(sch)
 	return rt.IsKind(objref.IDOf(sch), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sch *ScriptCoercionHandler) String() string {
+	defer runtime.KeepAlive(sch)
 	return rt.Description(objref.IDOf(sch))
 }
 
@@ -81,7 +87,7 @@ func (sch *ScriptCoercionHandler) WithObservationInfo(observationInfo unsafe.Poi
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (sch *ScriptCoercionHandler) WithScriptingProperties(scriptingProperties obj.Object) *ScriptCoercionHandler {
-	objc.Send[objc.ID](objref.IDOf(sch), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (sch *ScriptCoercionHandler) WithScriptingProperties(scriptingProperties map[string]obj.Object) *ScriptCoercionHandler {
+	objc.Send[objc.ID](objref.IDOf(sch), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return sch
 }

@@ -5,6 +5,8 @@
 package eventkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,34 +49,40 @@ func virtualConferenceDescriptorAdopt(id objc.ID) *VirtualConferenceDescriptor {
 
 // Description returns the object's -description text.
 func (vcd *VirtualConferenceDescriptor) Description() string {
+	defer runtime.KeepAlive(vcd)
 	return rt.Description(objref.IDOf(vcd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vcd *VirtualConferenceDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vcd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vcd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vcd *VirtualConferenceDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(vcd)
 	return rt.IsKind(objref.IDOf(vcd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vcd *VirtualConferenceDescriptor) String() string {
+	defer runtime.KeepAlive(vcd)
 	return rt.Description(objref.IDOf(vcd))
 }
 
 // NewVirtualConferenceDescriptorWithTitleURLDescriptorsConferenceDetails creates an object that describes a virtual conference, including a name and URL to join the conference.
-func NewVirtualConferenceDescriptorWithTitleURLDescriptorsConferenceDetails(title string, uRLDescriptors []*VirtualConferenceURLDescriptor, conferenceDetails string) *VirtualConferenceDescriptor {
+func NewVirtualConferenceDescriptorWithTitleURLDescriptorsConferenceDetails(title string, urlDescriptors []*VirtualConferenceURLDescriptor, conferenceDetails string) *VirtualConferenceDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("EKVirtualConferenceDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:URLDescriptors:conferenceDetails:"), purego.NSString(title), purego.SliceToNSArray(uRLDescriptors, func(_v *VirtualConferenceURLDescriptor) objc.ID { return objref.IDOf(_v) }), purego.NSString(conferenceDetails))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:URLDescriptors:conferenceDetails:"), purego.NSString(title), purego.SliceToNSArray(urlDescriptors, func(_v *VirtualConferenceURLDescriptor) objc.ID { return objref.IDOf(_v) }), purego.NSString(conferenceDetails))
 	return virtualConferenceDescriptorAdopt(_id)
 }
 
 // Title returns the title.
 func (vcd *VirtualConferenceDescriptor) Title() string {
+	defer runtime.KeepAlive(vcd)
 	_r := objc.Send[objc.ID](objref.IDOf(vcd), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -86,12 +94,14 @@ func (vcd *VirtualConferenceDescriptor) Title() string {
 //
 // URLDescriptors returns the collection as a Go slice.
 func (vcd *VirtualConferenceDescriptor) URLDescriptors() []*VirtualConferenceURLDescriptor {
+	defer runtime.KeepAlive(vcd)
 	_arr := objc.Send[objc.ID](objref.IDOf(vcd), objc.RegisterName("URLDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *VirtualConferenceURLDescriptor { return VirtualConferenceURLDescriptorFromID(_id) })
 }
 
 // ConferenceDetails returns the conference details.
 func (vcd *VirtualConferenceDescriptor) ConferenceDetails() string {
+	defer runtime.KeepAlive(vcd)
 	_r := objc.Send[objc.ID](objref.IDOf(vcd), objc.RegisterName("conferenceDetails"))
 	if _r == 0 {
 		return ""

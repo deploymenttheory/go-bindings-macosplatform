@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func colorAdopt(id objc.ID) *Color {
 
 // Description returns the object's -description text.
 func (c *Color) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Color) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Color) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Color) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // NewColorWithCGColor create a Core Image color object with a Core Graphics color object.
 func NewColorWithCGColor(color obj.Object) *Color {
+	defer runtime.KeepAlive(color)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGColor:"), objref.IDOf(color))
 	return colorAdopt(_id)
@@ -89,6 +97,7 @@ func NewColorWithRedGreenBlue(red float64, green float64, blue float64) *Color {
 
 // NewColorWithRedGreenBlueAlphaColorSpace initialize a Core Image color object with the specified red, green, and blue component values as measured in the specified color space.
 func NewColorWithRedGreenBlueAlphaColorSpace(red float64, green float64, blue float64, alpha float64, colorSpace obj.Object) *Color {
+	defer runtime.KeepAlive(colorSpace)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRed:green:blue:alpha:colorSpace:"), red, green, blue, alpha, objref.IDOf(colorSpace))
 	return colorAdopt(_id)
@@ -96,6 +105,7 @@ func NewColorWithRedGreenBlueAlphaColorSpace(red float64, green float64, blue fl
 
 // NewColorWithRedGreenBlueColorSpace initialize a Core Image color object with the specified red, green, and blue component values as measured in the specified color space.
 func NewColorWithRedGreenBlueColorSpace(red float64, green float64, blue float64, colorSpace obj.Object) *Color {
+	defer runtime.KeepAlive(colorSpace)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRed:green:blue:colorSpace:"), red, green, blue, objref.IDOf(colorSpace))
 	return colorAdopt(_id)
@@ -103,42 +113,49 @@ func NewColorWithRedGreenBlueColorSpace(red float64, green float64, blue float64
 
 // NumberOfComponents returns the color components of the color including alpha. This number includes the alpha component if the color contains one. Typically this number will be `4` for red, green, blue, and alpha. If the “CIColor“ was initialized with a `CGColor` then the number will be the same as calling `CGColorGetNumberOfComponents()`
 func (c *Color) NumberOfComponents() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("numberOfComponents"))
 	return _r
 }
 
 // Alpha returns the alpha value of the color.
 func (c *Color) Alpha() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("alpha"))
 	return _r
 }
 
 // ColorSpace returns the `CGColorSpace` associated with the color
 func (c *Color) ColorSpace() obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorSpace"))
 	return obj.Wrap(_r)
 }
 
 // Red returns the unpremultiplied red component of the color. If the “CIColor“ was initialized with a `CGColor` in a non-RGB `CGColorSpace` then it will be converted to sRGB to get the red component.
 func (c *Color) Red() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("red"))
 	return _r
 }
 
 // Green returns the unpremultiplied green component of the color. If the “CIColor“ was initialized with a `CGColor` in a non-RGB `CGColorSpace` then it will be converted to sRGB to get the green component.
 func (c *Color) Green() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("green"))
 	return _r
 }
 
 // Blue returns the unpremultiplied blue component of the color. If the “CIColor“ was initialized with a `CGColor` in a non-RGB `CGColorSpace` then it will be converted to sRGB to get the green component.
 func (c *Color) Blue() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("blue"))
 	return _r
 }
 
 // StringRepresentation returns a formatted string with the unpremultiplied color and alpha components of the color. The string representation always has four components: red, green, blue, and alpha. Some example string representations of colors: `CIColor`                                       | `stringRepresentation` ----------------------------------------------- | -------------- `[CIColor colorWithRed:0.2 green:0.4 blue:0.6]` | `"0.2 0.4 0.6 1.0"` “/CIColor/yellowColor“                        | `"1.0 1.0 0.0 1.0"` To create a “CIColor“ instance from a string representation, use the “colorWithString:“ method. If the “CIColor“ was initialized with a `CGColor` in a non-RGB `CGColorSpace` then it will be converted to sRGB to get the red, green, and blue components. This property is not KVO-safe because it returns a new `NSString` instance each time. The value of the `NSString` will be the same each time it is called.
 func (c *Color) StringRepresentation() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("stringRepresentation"))
 	if _r == 0 {
 		return ""

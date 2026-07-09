@@ -5,7 +5,10 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,82 +50,95 @@ func authorizationProviderExtensionAuthorizationResultAdopt(id objc.ID) *Authori
 
 // Description returns the object's -description text.
 func (apear *AuthorizationProviderExtensionAuthorizationResult) Description() string {
+	defer runtime.KeepAlive(apear)
 	return rt.Description(objref.IDOf(apear))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apear *AuthorizationProviderExtensionAuthorizationResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apear)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apear), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apear *AuthorizationProviderExtensionAuthorizationResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(apear)
 	return rt.IsKind(objref.IDOf(apear), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apear *AuthorizationProviderExtensionAuthorizationResult) String() string {
+	defer runtime.KeepAlive(apear)
 	return rt.Description(objref.IDOf(apear))
 }
 
 // NewAuthorizationProviderExtensionAuthorizationResultWithHTTPAuthorizationHeaders initializes an authorization with tokens stored in HTTP headers.
-func NewAuthorizationProviderExtensionAuthorizationResultWithHTTPAuthorizationHeaders(httpAuthorizationHeaders obj.Object) *AuthorizationProviderExtensionAuthorizationResult {
+func NewAuthorizationProviderExtensionAuthorizationResultWithHTTPAuthorizationHeaders(httpAuthorizationHeaders map[string]string) *AuthorizationProviderExtensionAuthorizationResult {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationProviderExtensionAuthorizationResult")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHTTPAuthorizationHeaders:"), objref.IDOf(httpAuthorizationHeaders))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHTTPAuthorizationHeaders:"), rt.MapToDict(httpAuthorizationHeaders, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return authorizationProviderExtensionAuthorizationResultAdopt(_id)
 }
 
 // NewAuthorizationProviderExtensionAuthorizationResultWithHTTPResponseHTTPBody initializes an authorization with a HTTP response and body.
-func NewAuthorizationProviderExtensionAuthorizationResultWithHTTPResponseHTTPBody(httpResponse obj.Object, httpBody obj.Object) *AuthorizationProviderExtensionAuthorizationResult {
+func NewAuthorizationProviderExtensionAuthorizationResultWithHTTPResponseHTTPBody(httpResponse obj.Object, httpBody []byte) *AuthorizationProviderExtensionAuthorizationResult {
+	defer runtime.KeepAlive(httpResponse)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationProviderExtensionAuthorizationResult")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHTTPResponse:httpBody:"), objref.IDOf(httpResponse), objref.IDOf(httpBody))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHTTPResponse:httpBody:"), objref.IDOf(httpResponse), rt.BytesToNSData(httpBody))
 	return authorizationProviderExtensionAuthorizationResultAdopt(_id)
 }
 
 // WithHTTPAuthorizationHeaders sets a dictionary of authorization HTTP headers.
-func (apear *AuthorizationProviderExtensionAuthorizationResult) WithHTTPAuthorizationHeaders(httpAuthorizationHeaders obj.Object) *AuthorizationProviderExtensionAuthorizationResult {
-	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("setHttpAuthorizationHeaders:"), objref.IDOf(httpAuthorizationHeaders))
+func (apear *AuthorizationProviderExtensionAuthorizationResult) WithHTTPAuthorizationHeaders(httpAuthorizationHeaders map[string]string) *AuthorizationProviderExtensionAuthorizationResult {
+	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("setHttpAuthorizationHeaders:"), rt.MapToDict(httpAuthorizationHeaders, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return apear
 }
 
 // WithHTTPResponse sets the HTTP response for authentications.
 func (apear *AuthorizationProviderExtensionAuthorizationResult) WithHTTPResponse(httpResponse obj.Object) *AuthorizationProviderExtensionAuthorizationResult {
+	defer runtime.KeepAlive(httpResponse)
 	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("setHttpResponse:"), objref.IDOf(httpResponse))
 	return apear
 }
 
 // WithHTTPBody sets the HTTP response body.
-func (apear *AuthorizationProviderExtensionAuthorizationResult) WithHTTPBody(httpBody obj.Object) *AuthorizationProviderExtensionAuthorizationResult {
-	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("setHttpBody:"), objref.IDOf(httpBody))
+func (apear *AuthorizationProviderExtensionAuthorizationResult) WithHTTPBody(httpBody []byte) *AuthorizationProviderExtensionAuthorizationResult {
+	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("setHttpBody:"), rt.BytesToNSData(httpBody))
 	return apear
 }
 
 // HTTPAuthorizationHeaders returns HTTP extra headers for addition with credentials.
-func (apear *AuthorizationProviderExtensionAuthorizationResult) HTTPAuthorizationHeaders() obj.Object {
+func (apear *AuthorizationProviderExtensionAuthorizationResult) HTTPAuthorizationHeaders() map[string]string {
+	defer runtime.KeepAlive(apear)
 	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("httpAuthorizationHeaders"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // HTTPResponse returns HTTP response for OAUth and SAML based authentications.
-func (apear *AuthorizationProviderExtensionAuthorizationResult) HTTPResponse() obj.Object {
+func (apear *AuthorizationProviderExtensionAuthorizationResult) HTTPResponse() *foundation.HTTPURLResponse {
+	defer runtime.KeepAlive(apear)
 	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("httpResponse"))
-	return obj.Wrap(_r)
+	return foundation.HTTPURLResponseFromID(_r)
 }
 
 // HTTPBody returns HTTP response body for OAUth and SAML based authentications.
-func (apear *AuthorizationProviderExtensionAuthorizationResult) HTTPBody() obj.Object {
+func (apear *AuthorizationProviderExtensionAuthorizationResult) HTTPBody() []byte {
+	defer runtime.KeepAlive(apear)
 	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("httpBody"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // PrivateKeys returns private SecKeys.
 func (apear *AuthorizationProviderExtensionAuthorizationResult) PrivateKeys() obj.Object {
+	defer runtime.KeepAlive(apear)
 	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("privateKeys"))
 	return obj.Wrap(_r)
 }
 
 // SetPrivateKeys wraps the corresponding Objective-C method.
 func (apear *AuthorizationProviderExtensionAuthorizationResult) SetPrivateKeys(privateKeys obj.Object) {
+	defer runtime.KeepAlive(apear)
+	defer runtime.KeepAlive(privateKeys)
 	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("setPrivateKeys:"), objref.IDOf(privateKeys))
 }

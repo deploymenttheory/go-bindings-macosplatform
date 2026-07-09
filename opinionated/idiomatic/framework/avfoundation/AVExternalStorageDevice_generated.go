@@ -5,10 +5,12 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func externalStorageDeviceAdopt(id objc.ID) *ExternalStorageDevice {
 
 // Description returns the object's -description text.
 func (esd *ExternalStorageDevice) Description() string {
+	defer runtime.KeepAlive(esd)
 	return rt.Description(objref.IDOf(esd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (esd *ExternalStorageDevice) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(esd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(esd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (esd *ExternalStorageDevice) IsKind(className string) bool {
+	defer runtime.KeepAlive(esd)
 	return rt.IsKind(objref.IDOf(esd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (esd *ExternalStorageDevice) String() string {
+	defer runtime.KeepAlive(esd)
 	return rt.Description(objref.IDOf(esd))
 }
 
@@ -75,18 +82,20 @@ func NewExternalStorageDevice() *ExternalStorageDevice {
 	return externalStorageDeviceAdopt(_id)
 }
 
-// NextAvailableURLsWithPathExtensionsError generates an array of security scoped URLs that are compliant for digital camera formats, where each element has a different path extension.
-func (esd *ExternalStorageDevice) NextAvailableURLsWithPathExtensionsError(extensionArray []string) (result []obj.Object, err error) {
+// NextAvailableURLsWithPathExtensions generates an array of security scoped URLs that are compliant for digital camera formats, where each element has a different path extension.
+func (esd *ExternalStorageDevice) NextAvailableURLsWithPathExtensions(extensionArray []string) (result []string, err error) {
+	defer runtime.KeepAlive(esd)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(esd), objc.RegisterName("nextAvailableURLsWithPathExtensions:error:"), purego.SliceToNSArray(extensionArray, func(_v string) objc.ID { return purego.NSString(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return rt.URLString(_id) }), nil
 }
 
 // DisplayName returns display name of the external storage device. This property can be used for displaying the name of an external storage device in a user interface. Will return nil if we fail to extract information from external storage device.
 func (esd *ExternalStorageDevice) DisplayName() string {
+	defer runtime.KeepAlive(esd)
 	_r := objc.Send[objc.ID](objref.IDOf(esd), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
@@ -96,30 +105,35 @@ func (esd *ExternalStorageDevice) DisplayName() string {
 
 // FreeSize returns current free size in bytes. This property represents the free size available on the external storage device. Will return -1 if we fail to extract information from external storage device.
 func (esd *ExternalStorageDevice) FreeSize() int {
+	defer runtime.KeepAlive(esd)
 	_r := objc.Send[int](objref.IDOf(esd), objc.RegisterName("freeSize"))
 	return _r
 }
 
 // TotalSize returns total storage size in bytes. This property represents the total storage size available on the external storage device. Will return -1 if we fail to extract information from external storage device.
 func (esd *ExternalStorageDevice) TotalSize() int {
+	defer runtime.KeepAlive(esd)
 	_r := objc.Send[int](objref.IDOf(esd), objc.RegisterName("totalSize"))
 	return _r
 }
 
 // IsConnected reports whether the external storage device is connected and available to the system. The property gives the current connection status of the external storage device.
 func (esd *ExternalStorageDevice) IsConnected() bool {
+	defer runtime.KeepAlive(esd)
 	_r := objc.Send[bool](objref.IDOf(esd), objc.RegisterName("isConnected"))
 	return _r
 }
 
 // UUID returns a unique identifier for external storage device. This property can be used to select a specific external storage device with ImageCapture framework APIs to read media assets. Will return nil if we fail to extract information from external storage device. For example the string value of this property will match the value from [ICDevice UUIDString].
-func (esd *ExternalStorageDevice) UUID() obj.Object {
+func (esd *ExternalStorageDevice) UUID() *foundation.UUID {
+	defer runtime.KeepAlive(esd)
 	_r := objc.Send[objc.ID](objref.IDOf(esd), objc.RegisterName("uuid"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // IsNotRecommendedForCaptureUse reports whether the external storage device is not recommended for capture use. This property is used to let the client know if the external storage device is not suitable for camera capture.
 func (esd *ExternalStorageDevice) IsNotRecommendedForCaptureUse() bool {
+	defer runtime.KeepAlive(esd)
 	_r := objc.Send[bool](objref.IDOf(esd), objc.RegisterName("isNotRecommendedForCaptureUse"))
 	return _r
 }

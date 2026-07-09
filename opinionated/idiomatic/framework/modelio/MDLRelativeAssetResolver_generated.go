@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,27 +47,33 @@ func relativeAssetResolverAdopt(id objc.ID) *RelativeAssetResolver {
 
 // Description returns the object's -description text.
 func (rar *RelativeAssetResolver) Description() string {
+	defer runtime.KeepAlive(rar)
 	return rt.Description(objref.IDOf(rar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rar *RelativeAssetResolver) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rar)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rar *RelativeAssetResolver) IsKind(className string) bool {
+	defer runtime.KeepAlive(rar)
 	return rt.IsKind(objref.IDOf(rar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rar *RelativeAssetResolver) String() string {
+	defer runtime.KeepAlive(rar)
 	return rt.Description(objref.IDOf(rar))
 }
 
 // NewRelativeAssetResolverWithAsset creates a new RelativeAssetResolver.
 func NewRelativeAssetResolverWithAsset(asset *Asset) *RelativeAssetResolver {
+	defer runtime.KeepAlive(asset)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLRelativeAssetResolver")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:"), objref.IDOf(asset))
 	return relativeAssetResolverAdopt(_id)
@@ -73,12 +81,14 @@ func NewRelativeAssetResolverWithAsset(asset *Asset) *RelativeAssetResolver {
 
 // WithAsset sets the asset.
 func (rar *RelativeAssetResolver) WithAsset(asset *Asset) *RelativeAssetResolver {
+	defer runtime.KeepAlive(asset)
 	objc.Send[objc.ID](objref.IDOf(rar), objc.RegisterName("setAsset:"), objref.IDOf(asset))
 	return rar
 }
 
 // Asset returns the asset.
 func (rar *RelativeAssetResolver) Asset() *Asset {
+	defer runtime.KeepAlive(rar)
 	_r := objc.Send[objc.ID](objref.IDOf(rar), objc.RegisterName("asset"))
 	return AssetFromID(_r)
 }

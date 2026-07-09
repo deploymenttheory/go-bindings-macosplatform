@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func sharedEventHandleAdopt(id objc.ID) *SharedEventHandle {
 
 // Description returns the object's -description text.
 func (seh *SharedEventHandle) Description() string {
+	defer runtime.KeepAlive(seh)
 	return rt.Description(objref.IDOf(seh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (seh *SharedEventHandle) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(seh)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(seh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (seh *SharedEventHandle) IsKind(className string) bool {
+	defer runtime.KeepAlive(seh)
 	return rt.IsKind(objref.IDOf(seh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (seh *SharedEventHandle) String() string {
+	defer runtime.KeepAlive(seh)
 	return rt.Description(objref.IDOf(seh))
 }
 
@@ -74,6 +81,7 @@ func NewSharedEventHandle() *SharedEventHandle {
 
 // Label returns the label.
 func (seh *SharedEventHandle) Label() string {
+	defer runtime.KeepAlive(seh)
 	_r := objc.Send[objc.ID](objref.IDOf(seh), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

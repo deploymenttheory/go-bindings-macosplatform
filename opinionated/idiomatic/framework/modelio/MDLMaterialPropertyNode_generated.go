@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func materialPropertyNodeAdopt(id objc.ID) *MaterialPropertyNode {
 
 // Description returns the object's -description text.
 func (mpn *MaterialPropertyNode) Description() string {
+	defer runtime.KeepAlive(mpn)
 	return rt.Description(objref.IDOf(mpn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mpn *MaterialPropertyNode) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mpn)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mpn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mpn *MaterialPropertyNode) IsKind(className string) bool {
+	defer runtime.KeepAlive(mpn)
 	return rt.IsKind(objref.IDOf(mpn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mpn *MaterialPropertyNode) String() string {
+	defer runtime.KeepAlive(mpn)
 	return rt.Description(objref.IDOf(mpn))
 }
 
@@ -83,6 +90,7 @@ func (mpn *MaterialPropertyNode) WithEvaluationFunction(evaluationFunction func(
 //
 // Inputs returns the collection as a Go slice.
 func (mpn *MaterialPropertyNode) Inputs() []*MaterialProperty {
+	defer runtime.KeepAlive(mpn)
 	_arr := objc.Send[objc.ID](objref.IDOf(mpn), objc.RegisterName("inputs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MaterialProperty { return MaterialPropertyFromID(_id) })
 }
@@ -91,6 +99,7 @@ func (mpn *MaterialPropertyNode) Inputs() []*MaterialProperty {
 //
 // Outputs returns the collection as a Go slice.
 func (mpn *MaterialPropertyNode) Outputs() []*MaterialProperty {
+	defer runtime.KeepAlive(mpn)
 	_arr := objc.Send[objc.ID](objref.IDOf(mpn), objc.RegisterName("outputs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MaterialProperty { return MaterialPropertyFromID(_id) })
 }

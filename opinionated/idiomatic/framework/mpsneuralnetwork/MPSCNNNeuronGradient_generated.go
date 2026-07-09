@@ -5,11 +5,13 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -138,32 +140,37 @@ func (cng *CNNNeuronGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixe
 
 // NeuronType returns the neuron type.
 func (cng *CNNNeuronGradient) NeuronType() CNNNeuronType {
+	defer runtime.KeepAlive(cng)
 	_r := objc.Send[CNNNeuronType](objref.IDOf(cng), objc.RegisterName("neuronType"))
 	return _r
 }
 
 // A returns the a.
 func (cng *CNNNeuronGradient) A() float32 {
+	defer runtime.KeepAlive(cng)
 	_r := objc.Send[float32](objref.IDOf(cng), objc.RegisterName("a"))
 	return _r
 }
 
 // B returns the b.
 func (cng *CNNNeuronGradient) B() float32 {
+	defer runtime.KeepAlive(cng)
 	_r := objc.Send[float32](objref.IDOf(cng), objc.RegisterName("b"))
 	return _r
 }
 
 // C returns the c.
 func (cng *CNNNeuronGradient) C() float32 {
+	defer runtime.KeepAlive(cng)
 	_r := objc.Send[float32](objref.IDOf(cng), objc.RegisterName("c"))
 	return _r
 }
 
 // Data returns the data.
-func (cng *CNNNeuronGradient) Data() obj.Object {
+func (cng *CNNNeuronGradient) Data() []byte {
+	defer runtime.KeepAlive(cng)
 	_r := objc.Send[objc.ID](objref.IDOf(cng), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ CNNGradientKernelProvider = (*CNNNeuronGradient)(nil)

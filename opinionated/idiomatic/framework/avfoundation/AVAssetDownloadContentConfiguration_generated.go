@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func assetDownloadContentConfigurationAdopt(id objc.ID) *AssetDownloadContentCon
 
 // Description returns the object's -description text.
 func (adcc *AssetDownloadContentConfiguration) Description() string {
+	defer runtime.KeepAlive(adcc)
 	return rt.Description(objref.IDOf(adcc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (adcc *AssetDownloadContentConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(adcc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(adcc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (adcc *AssetDownloadContentConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(adcc)
 	return rt.IsKind(objref.IDOf(adcc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (adcc *AssetDownloadContentConfiguration) String() string {
+	defer runtime.KeepAlive(adcc)
 	return rt.Description(objref.IDOf(adcc))
 }
 
@@ -90,6 +97,7 @@ func (adcc *AssetDownloadContentConfiguration) WithMediaSelections(items ...Medi
 //
 // VariantQualifiers returns the collection as a Go slice.
 func (adcc *AssetDownloadContentConfiguration) VariantQualifiers() []*AssetVariantQualifier {
+	defer runtime.KeepAlive(adcc)
 	_arr := objc.Send[objc.ID](objref.IDOf(adcc), objc.RegisterName("variantQualifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetVariantQualifier { return AssetVariantQualifierFromID(_id) })
 }
@@ -98,6 +106,7 @@ func (adcc *AssetDownloadContentConfiguration) VariantQualifiers() []*AssetVaria
 //
 // MediaSelections returns the collection as a Go slice.
 func (adcc *AssetDownloadContentConfiguration) MediaSelections() []*MediaSelection {
+	defer runtime.KeepAlive(adcc)
 	_arr := objc.Send[objc.ID](objref.IDOf(adcc), objc.RegisterName("mediaSelections"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaSelection { return MediaSelectionFromID(_id) })
 }

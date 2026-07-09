@@ -5,10 +5,13 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,6 +64,7 @@ func NewShapeNode() *ShapeNode {
 
 // WithPath sets the path that defines the shape.
 func (sn *ShapeNode) WithPath(path obj.Object) *ShapeNode {
+	defer runtime.KeepAlive(path)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPath:"), objref.IDOf(path))
 	})
@@ -69,6 +73,7 @@ func (sn *ShapeNode) WithPath(path obj.Object) *ShapeNode {
 
 // WithStrokeColor sets the color used to stroke the shape.
 func (sn *ShapeNode) WithStrokeColor(strokeColor obj.Object) *ShapeNode {
+	defer runtime.KeepAlive(strokeColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 	})
@@ -77,6 +82,7 @@ func (sn *ShapeNode) WithStrokeColor(strokeColor obj.Object) *ShapeNode {
 
 // WithFillColor sets the color used to fill the shape.
 func (sn *ShapeNode) WithFillColor(fillColor obj.Object) *ShapeNode {
+	defer runtime.KeepAlive(fillColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 	})
@@ -125,6 +131,7 @@ func (sn *ShapeNode) WithMiterLimit(miterLimit float64) *ShapeNode {
 
 // WithFillTexture sets the texture used to fill the shape.
 func (sn *ShapeNode) WithFillTexture(fillTexture TextureProvider) *ShapeNode {
+	defer runtime.KeepAlive(fillTexture)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setFillTexture:"), objref.IDOf(fillTexture))
 	})
@@ -133,6 +140,7 @@ func (sn *ShapeNode) WithFillTexture(fillTexture TextureProvider) *ShapeNode {
 
 // WithFillShader sets a custom shader used to determine the color of the filled portion of the shape node.
 func (sn *ShapeNode) WithFillShader(fillShader *Shader) *ShapeNode {
+	defer runtime.KeepAlive(fillShader)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setFillShader:"), objref.IDOf(fillShader))
 	})
@@ -141,6 +149,7 @@ func (sn *ShapeNode) WithFillShader(fillShader *Shader) *ShapeNode {
 
 // WithStrokeTexture sets the texture used to stroke the shape.
 func (sn *ShapeNode) WithStrokeTexture(strokeTexture TextureProvider) *ShapeNode {
+	defer runtime.KeepAlive(strokeTexture)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setStrokeTexture:"), objref.IDOf(strokeTexture))
 	})
@@ -149,6 +158,7 @@ func (sn *ShapeNode) WithStrokeTexture(strokeTexture TextureProvider) *ShapeNode
 
 // WithStrokeShader sets a custom shader used to determine the color of the stroked portion of the shape node.
 func (sn *ShapeNode) WithStrokeShader(strokeShader *Shader) *ShapeNode {
+	defer runtime.KeepAlive(strokeShader)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setStrokeShader:"), objref.IDOf(strokeShader))
 	})
@@ -245,6 +255,7 @@ func (sn *ShapeNode) WithName(name string) *ShapeNode {
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (sn *ShapeNode) WithPhysicsBody(physicsBody *PhysicsBody) *ShapeNode {
+	defer runtime.KeepAlive(physicsBody)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	})
@@ -253,6 +264,7 @@ func (sn *ShapeNode) WithPhysicsBody(physicsBody *PhysicsBody) *ShapeNode {
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (sn *ShapeNode) WithUserData(userData obj.Object) *ShapeNode {
+	defer runtime.KeepAlive(userData)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	})
@@ -261,6 +273,7 @@ func (sn *ShapeNode) WithUserData(userData obj.Object) *ShapeNode {
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (sn *ShapeNode) WithReachConstraints(reachConstraints *ReachConstraints) *ShapeNode {
+	defer runtime.KeepAlive(reachConstraints)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	})
@@ -277,9 +290,9 @@ func (sn *ShapeNode) WithConstraints(items ...*Constraint) *ShapeNode {
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
-func (sn *ShapeNode) WithAttributeValues(attributeValues obj.Object) *ShapeNode {
+func (sn *ShapeNode) WithAttributeValues(attributeValues map[string]*AttributeValue) *ShapeNode {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAttributeValues:"), rt.MapToDict(attributeValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *AttributeValue) objc.ID { return objref.IDOf(_v) }))
 	})
 	return sn
 }
@@ -326,6 +339,7 @@ func (sn *ShapeNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CG
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (sn *ShapeNode) WithAccessibilityParent(accessibilityParent obj.Object) *ShapeNode {
+	defer runtime.KeepAlive(accessibilityParent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	})
@@ -358,6 +372,7 @@ func (sn *ShapeNode) WithAccessibilityEnabled(accessibilityEnabled bool) *ShapeN
 
 // Path returns the CGPath to be drawn (in the Node's coordinate space)
 func (sn *ShapeNode) Path() obj.Object {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -371,6 +386,7 @@ func (sn *ShapeNode) Path() obj.Object {
 
 // StrokeColor returns the color to draw the path with. (for no stroke use [SKColor clearColor]). Defaults to [SKColor whiteColor].
 func (sn *ShapeNode) StrokeColor() obj.Object {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -384,6 +400,7 @@ func (sn *ShapeNode) StrokeColor() obj.Object {
 
 // FillColor returns the color to fill the path with. Defaults to [SKColor clearColor] (no fill).
 func (sn *ShapeNode) FillColor() obj.Object {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -397,6 +414,7 @@ func (sn *ShapeNode) FillColor() obj.Object {
 
 // BlendMode sets the blend mode to use when composing the shape with the final framebuffer.
 func (sn *ShapeNode) BlendMode() BlendMode {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 BlendMode
 	purego.Main(func() {
 		_mainthread0 = func() BlendMode {
@@ -410,6 +428,7 @@ func (sn *ShapeNode) BlendMode() BlendMode {
 
 // IsAntialiased reports whether if set to true, the path stroke edges and caps is smoothed (antialiased) when drawn.
 func (sn *ShapeNode) IsAntialiased() bool {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -423,6 +442,7 @@ func (sn *ShapeNode) IsAntialiased() bool {
 
 // LineWidth returns the width used to stroke the path. Widths larger than 2.0 may result in artifacts. Defaults to 1.0.
 func (sn *ShapeNode) LineWidth() float64 {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -436,6 +456,7 @@ func (sn *ShapeNode) LineWidth() float64 {
 
 // GlowWidth returns add a glow to the path stroke of the specified width. Defaults to 0.0 (no glow)
 func (sn *ShapeNode) GlowWidth() float64 {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -449,6 +470,7 @@ func (sn *ShapeNode) GlowWidth() float64 {
 
 // MiterLimit returns when a miter join is used, the maximum ratio of miter length to line with to be used
 func (sn *ShapeNode) MiterLimit() float64 {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -462,6 +484,7 @@ func (sn *ShapeNode) MiterLimit() float64 {
 
 // LineLength returns the length of the node's path if it were to be stroked
 func (sn *ShapeNode) LineLength() float64 {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -475,6 +498,7 @@ func (sn *ShapeNode) LineLength() float64 {
 
 // FillTexture returns the fill texture.
 func (sn *ShapeNode) FillTexture() *Texture {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 *Texture
 	purego.Main(func() {
 		_mainthread0 = func() *Texture {
@@ -488,6 +512,7 @@ func (sn *ShapeNode) FillTexture() *Texture {
 
 // FillShader returns the fill shader.
 func (sn *ShapeNode) FillShader() *Shader {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 *Shader
 	purego.Main(func() {
 		_mainthread0 = func() *Shader {
@@ -501,6 +526,7 @@ func (sn *ShapeNode) FillShader() *Shader {
 
 // StrokeTexture returns the stroke texture.
 func (sn *ShapeNode) StrokeTexture() *Texture {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 *Texture
 	purego.Main(func() {
 		_mainthread0 = func() *Texture {
@@ -514,6 +540,7 @@ func (sn *ShapeNode) StrokeTexture() *Texture {
 
 // StrokeShader returns the stroke shader.
 func (sn *ShapeNode) StrokeShader() *Shader {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 *Shader
 	purego.Main(func() {
 		_mainthread0 = func() *Shader {

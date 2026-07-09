@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -50,6 +52,7 @@ func rulerViewAdopt(id objc.ID) *RulerView {
 
 // NewRulerViewWithCoder creates a new RulerView.
 func NewRulerViewWithCoder(coder obj.Object) *RulerView {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *RulerView
 	purego.Main(func() {
 		_mainthread0 = func() *RulerView {
@@ -63,6 +66,7 @@ func NewRulerViewWithCoder(coder obj.Object) *RulerView {
 
 // NewRulerViewWithScrollViewOrientation initializes a newly allocated NSRulerView to have orientation (NSHorizontalRuler or NSVerticalRuler) within aScrollView.
 func NewRulerViewWithScrollViewOrientation(scrollView *ScrollView, orientation RulerOrientation) *RulerView {
+	defer runtime.KeepAlive(scrollView)
 	var _mainthread0 *RulerView
 	purego.Main(func() {
 		_mainthread0 = func() *RulerView {
@@ -76,6 +80,7 @@ func NewRulerViewWithScrollViewOrientation(scrollView *ScrollView, orientation R
 
 // WithScrollView sets the NSScrollView that owns the receiver to scrollView, without retaining it.
 func (rv *RulerView) WithScrollView(scrollView *ScrollView) *RulerView {
+	defer runtime.KeepAlive(scrollView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setScrollView:"), objref.IDOf(scrollView))
 	})
@@ -116,6 +121,7 @@ func (rv *RulerView) WithReservedThicknessForAccessoryView(reservedThicknessForA
 
 // WithMeasurementUnits sets the measurement units used by the ruler to unitName.
 func (rv *RulerView) WithMeasurementUnits(measurementUnits obj.Object) *RulerView {
+	defer runtime.KeepAlive(measurementUnits)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setMeasurementUnits:"), objref.IDOf(measurementUnits))
 	})
@@ -132,6 +138,7 @@ func (rv *RulerView) WithOriginOffset(originOffset float64) *RulerView {
 
 // WithClientView sets the receiver’s client view, if it has one.
 func (rv *RulerView) WithClientView(clientView ViewProvider) *RulerView {
+	defer runtime.KeepAlive(clientView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setClientView:"), objref.IDOf(clientView))
 	})
@@ -149,6 +156,7 @@ func (rv *RulerView) WithMarkers(items ...*RulerMarker) *RulerView {
 
 // WithAccessoryView sets the receiver’s accessory view to aView.
 func (rv *RulerView) WithAccessoryView(accessoryView ViewProvider) *RulerView {
+	defer runtime.KeepAlive(accessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 	})
@@ -294,6 +302,7 @@ func (rv *RulerView) WithWantsLayer(wantsLayer bool) *RulerView {
 
 // WithLayer sets the layer.
 func (rv *RulerView) WithLayer(layer obj.Object) *RulerView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -343,6 +352,7 @@ func (rv *RulerView) WithBackgroundFilters(items ...obj.Object) *RulerView {
 
 // WithCompositingFilter sets the compositing filter.
 func (rv *RulerView) WithCompositingFilter(compositingFilter obj.Object) *RulerView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -360,6 +370,7 @@ func (rv *RulerView) WithContentFilters(items ...obj.Object) *RulerView {
 
 // WithShadow sets the shadow.
 func (rv *RulerView) WithShadow(shadow *Shadow) *RulerView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -408,6 +419,7 @@ func (rv *RulerView) WithPreparedContentRect(preparedContentRect corefoundation.
 
 // WithNextKeyView sets the next key view.
 func (rv *RulerView) WithNextKeyView(nextKeyView ViewProvider) *RulerView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -457,6 +469,7 @@ func (rv *RulerView) WithPrefersCompactControlSizeMetrics(prefersCompactControlS
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (rv *RulerView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *RulerView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -513,6 +526,7 @@ func (rv *RulerView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyn
 
 // WithPressureConfiguration sets the pressure configuration.
 func (rv *RulerView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *RulerView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -521,6 +535,7 @@ func (rv *RulerView) WithPressureConfiguration(pressureConfiguration *PressureCo
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (rv *RulerView) WithNextResponder(nextResponder ResponderProvider) *RulerView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -529,6 +544,7 @@ func (rv *RulerView) WithNextResponder(nextResponder ResponderProvider) *RulerVi
 
 // WithMenu sets returns the responder’s menu.
 func (rv *RulerView) WithMenu(menu *Menu) *RulerView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -537,6 +553,7 @@ func (rv *RulerView) WithMenu(menu *Menu) *RulerView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (rv *RulerView) WithUserActivity(userActivity obj.Object) *RulerView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -545,6 +562,7 @@ func (rv *RulerView) WithUserActivity(userActivity obj.Object) *RulerView {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (rv *RulerView) WithTouchBar(touchBar *TouchBar) *RulerView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -553,6 +571,8 @@ func (rv *RulerView) WithTouchBar(touchBar *TouchBar) *RulerView {
 
 // AddMarker adds aMarker to the receiver, without consulting the client view for approval.
 func (rv *RulerView) AddMarker(marker *RulerMarker) {
+	defer runtime.KeepAlive(rv)
+	defer runtime.KeepAlive(marker)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("addMarker:"), objref.IDOf(marker))
 	})
@@ -561,6 +581,8 @@ func (rv *RulerView) AddMarker(marker *RulerMarker) {
 
 // RemoveMarker removes aMarker from the receiver, without consulting the client view for approval.
 func (rv *RulerView) RemoveMarker(marker *RulerMarker) {
+	defer runtime.KeepAlive(rv)
+	defer runtime.KeepAlive(marker)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("removeMarker:"), objref.IDOf(marker))
 	})
@@ -569,6 +591,9 @@ func (rv *RulerView) RemoveMarker(marker *RulerMarker) {
 
 // TrackMarkerWithMouseEvent tracks the mouse to add aMarker based on the initial mouse-down or mouse-dragged event theEvent.
 func (rv *RulerView) TrackMarkerWithMouseEvent(marker *RulerMarker, event *Event) bool {
+	defer runtime.KeepAlive(rv)
+	defer runtime.KeepAlive(marker)
+	defer runtime.KeepAlive(event)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -582,6 +607,7 @@ func (rv *RulerView) TrackMarkerWithMouseEvent(marker *RulerMarker, event *Event
 
 // MoveRulerlineFromLocationToLocation draws temporary lines in the ruler area.
 func (rv *RulerView) MoveRulerlineFromLocationToLocation(oldLocation float64, newLocation float64) {
+	defer runtime.KeepAlive(rv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("moveRulerlineFromLocation:toLocation:"), oldLocation, newLocation)
 	})
@@ -590,6 +616,7 @@ func (rv *RulerView) MoveRulerlineFromLocationToLocation(oldLocation float64, ne
 
 // InvalidateHashMarks forces recalculation of the hash mark spacing for the next time the receiver is displayed.
 func (rv *RulerView) InvalidateHashMarks() {
+	defer runtime.KeepAlive(rv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("invalidateHashMarks"))
 	})
@@ -598,6 +625,7 @@ func (rv *RulerView) InvalidateHashMarks() {
 
 // DrawHashMarksAndLabelsInRect draws the receiver’s hash marks and labels in aRect, which is expressed in the receiver’s coordinate system.
 func (rv *RulerView) DrawHashMarksAndLabelsInRect(rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(rv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("drawHashMarksAndLabelsInRect:"), rect)
 	})
@@ -606,6 +634,7 @@ func (rv *RulerView) DrawHashMarksAndLabelsInRect(rect corefoundation.CGRect) {
 
 // DrawMarkersInRect draws the receiver’s markers in aRect, which is expressed in the receiver’s coordinate system.
 func (rv *RulerView) DrawMarkersInRect(rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(rv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("drawMarkersInRect:"), rect)
 	})
@@ -614,6 +643,7 @@ func (rv *RulerView) DrawMarkersInRect(rect corefoundation.CGRect) {
 
 // ScrollView returns the scroll view.
 func (rv *RulerView) ScrollView() *ScrollView {
+	defer runtime.KeepAlive(rv)
 	var _mainthread0 *ScrollView
 	purego.Main(func() {
 		_mainthread0 = func() *ScrollView {
@@ -627,6 +657,7 @@ func (rv *RulerView) ScrollView() *ScrollView {
 
 // Orientation returns the orientation.
 func (rv *RulerView) Orientation() RulerOrientation {
+	defer runtime.KeepAlive(rv)
 	var _mainthread0 RulerOrientation
 	purego.Main(func() {
 		_mainthread0 = func() RulerOrientation {
@@ -640,6 +671,7 @@ func (rv *RulerView) Orientation() RulerOrientation {
 
 // BaselineLocation returns the baseline location.
 func (rv *RulerView) BaselineLocation() float64 {
+	defer runtime.KeepAlive(rv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -653,6 +685,7 @@ func (rv *RulerView) BaselineLocation() float64 {
 
 // RequiredThickness returns the required thickness.
 func (rv *RulerView) RequiredThickness() float64 {
+	defer runtime.KeepAlive(rv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -666,6 +699,7 @@ func (rv *RulerView) RequiredThickness() float64 {
 
 // RuleThickness returns the rule thickness.
 func (rv *RulerView) RuleThickness() float64 {
+	defer runtime.KeepAlive(rv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -679,6 +713,7 @@ func (rv *RulerView) RuleThickness() float64 {
 
 // ReservedThicknessForMarkers returns the reserved thickness for markers.
 func (rv *RulerView) ReservedThicknessForMarkers() float64 {
+	defer runtime.KeepAlive(rv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -692,6 +727,7 @@ func (rv *RulerView) ReservedThicknessForMarkers() float64 {
 
 // ReservedThicknessForAccessoryView returns the reserved thickness for accessory view.
 func (rv *RulerView) ReservedThicknessForAccessoryView() float64 {
+	defer runtime.KeepAlive(rv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -704,12 +740,13 @@ func (rv *RulerView) ReservedThicknessForAccessoryView() float64 {
 }
 
 // MeasurementUnits returns the measurement units.
-func (rv *RulerView) MeasurementUnits() obj.Object {
-	var _mainthread0 obj.Object
+func (rv *RulerView) MeasurementUnits() *foundation.String {
+	defer runtime.KeepAlive(rv)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("measurementUnits"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -718,6 +755,7 @@ func (rv *RulerView) MeasurementUnits() obj.Object {
 
 // OriginOffset returns the origin offset.
 func (rv *RulerView) OriginOffset() float64 {
+	defer runtime.KeepAlive(rv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -731,6 +769,7 @@ func (rv *RulerView) OriginOffset() float64 {
 
 // ClientView returns the client view.
 func (rv *RulerView) ClientView() *View {
+	defer runtime.KeepAlive(rv)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -746,6 +785,7 @@ func (rv *RulerView) ClientView() *View {
 //
 // Markers returns the collection as a Go slice.
 func (rv *RulerView) Markers() []*RulerMarker {
+	defer runtime.KeepAlive(rv)
 	var _mainthread0 []*RulerMarker
 	purego.Main(func() {
 		_mainthread0 = func() []*RulerMarker {
@@ -758,6 +798,7 @@ func (rv *RulerView) Markers() []*RulerMarker {
 
 // AccessoryView returns the accessory view.
 func (rv *RulerView) AccessoryView() *View {
+	defer runtime.KeepAlive(rv)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {

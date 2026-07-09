@@ -5,7 +5,10 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func fetchIndexDescriptionAdopt(id objc.ID) *FetchIndexDescription {
 
 // Description returns the object's -description text.
 func (fid *FetchIndexDescription) Description() string {
+	defer runtime.KeepAlive(fid)
 	return rt.Description(objref.IDOf(fid))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fid *FetchIndexDescription) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fid)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fid), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fid *FetchIndexDescription) IsKind(className string) bool {
+	defer runtime.KeepAlive(fid)
 	return rt.IsKind(objref.IDOf(fid), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fid *FetchIndexDescription) String() string {
+	defer runtime.KeepAlive(fid)
 	return rt.Description(objref.IDOf(fid))
 }
 
@@ -88,12 +96,14 @@ func (fid *FetchIndexDescription) WithElements(items ...*FetchIndexElementDescri
 
 // WithPartialIndexPredicate sets a predicate that selects rows for indexing, if the index is a partial index.
 func (fid *FetchIndexDescription) WithPartialIndexPredicate(partialIndexPredicate obj.Object) *FetchIndexDescription {
+	defer runtime.KeepAlive(partialIndexPredicate)
 	objc.Send[objc.ID](objref.IDOf(fid), objc.RegisterName("setPartialIndexPredicate:"), objref.IDOf(partialIndexPredicate))
 	return fid
 }
 
 // Name returns the name.
 func (fid *FetchIndexDescription) Name() string {
+	defer runtime.KeepAlive(fid)
 	_r := objc.Send[objc.ID](objref.IDOf(fid), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -105,18 +115,21 @@ func (fid *FetchIndexDescription) Name() string {
 //
 // Elements returns the collection as a Go slice.
 func (fid *FetchIndexDescription) Elements() []*FetchIndexElementDescription {
+	defer runtime.KeepAlive(fid)
 	_arr := objc.Send[objc.ID](objref.IDOf(fid), objc.RegisterName("elements"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FetchIndexElementDescription { return FetchIndexElementDescriptionFromID(_id) })
 }
 
 // Entity returns the entity.
 func (fid *FetchIndexDescription) Entity() *EntityDescription {
+	defer runtime.KeepAlive(fid)
 	_r := objc.Send[objc.ID](objref.IDOf(fid), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
 // PartialIndexPredicate returns the partial index predicate.
-func (fid *FetchIndexDescription) PartialIndexPredicate() obj.Object {
+func (fid *FetchIndexDescription) PartialIndexPredicate() *foundation.Predicate {
+	defer runtime.KeepAlive(fid)
 	_r := objc.Send[objc.ID](objref.IDOf(fid), objc.RegisterName("partialIndexPredicate"))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }

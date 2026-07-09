@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func colorAdopt(id objc.ID) *Color {
 
 // Description returns the object's -description text.
 func (c *Color) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Color) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Color) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Color) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
@@ -75,18 +82,21 @@ func NewColorWithRedGreenBlue(red float32, green float32, blue float32) *Color {
 
 // Red returns the red.
 func (c *Color) Red() float32 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("red"))
 	return _r
 }
 
 // Green returns the green.
 func (c *Color) Green() float32 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("green"))
 	return _r
 }
 
 // Blue returns the blue.
 func (c *Color) Blue() float32 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("blue"))
 	return _r
 }

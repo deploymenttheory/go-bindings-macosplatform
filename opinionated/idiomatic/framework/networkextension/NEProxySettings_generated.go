@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nEProxySettingsAdopt(id objc.ID) *NEProxySettings {
 
 // Description returns the object's -description text.
 func (nps *NEProxySettings) Description() string {
+	defer runtime.KeepAlive(nps)
 	return rt.Description(objref.IDOf(nps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nps *NEProxySettings) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nps *NEProxySettings) IsKind(className string) bool {
+	defer runtime.KeepAlive(nps)
 	return rt.IsKind(objref.IDOf(nps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nps *NEProxySettings) String() string {
+	defer runtime.KeepAlive(nps)
 	return rt.Description(objref.IDOf(nps))
 }
 
@@ -91,26 +98,28 @@ func (nps *NEProxySettings) WithProxyAutoConfigurationJavaScript(proxyAutoConfig
 }
 
 // WithHTTPEnabled sets a Boolean indicating if a static HTTP proxy will be used.
-func (nps *NEProxySettings) WithHTTPEnabled(hTTPEnabled bool) *NEProxySettings {
-	objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("setHTTPEnabled:"), hTTPEnabled)
+func (nps *NEProxySettings) WithHTTPEnabled(httpEnabled bool) *NEProxySettings {
+	objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("setHTTPEnabled:"), httpEnabled)
 	return nps
 }
 
 // WithHTTPServer sets an NEProxyServer object containing the static HTTP proxy server settings.
-func (nps *NEProxySettings) WithHTTPServer(hTTPServer *NEProxyServer) *NEProxySettings {
-	objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("setHTTPServer:"), objref.IDOf(hTTPServer))
+func (nps *NEProxySettings) WithHTTPServer(httpServer *NEProxyServer) *NEProxySettings {
+	defer runtime.KeepAlive(httpServer)
+	objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("setHTTPServer:"), objref.IDOf(httpServer))
 	return nps
 }
 
 // WithHTTPSEnabled sets a Boolean indicating if a static HTTPS proxy will be used.
-func (nps *NEProxySettings) WithHTTPSEnabled(hTTPSEnabled bool) *NEProxySettings {
-	objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("setHTTPSEnabled:"), hTTPSEnabled)
+func (nps *NEProxySettings) WithHTTPSEnabled(httpsEnabled bool) *NEProxySettings {
+	objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("setHTTPSEnabled:"), httpsEnabled)
 	return nps
 }
 
 // WithHTTPSServer sets an NEProxyServer object containing the static HTTPS proxy server settings.
-func (nps *NEProxySettings) WithHTTPSServer(hTTPSServer *NEProxyServer) *NEProxySettings {
-	objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("setHTTPSServer:"), objref.IDOf(hTTPSServer))
+func (nps *NEProxySettings) WithHTTPSServer(httpsServer *NEProxyServer) *NEProxySettings {
+	defer runtime.KeepAlive(httpsServer)
+	objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("setHTTPSServer:"), objref.IDOf(httpsServer))
 	return nps
 }
 
@@ -136,18 +145,21 @@ func (nps *NEProxySettings) WithMatchDomains(items ...obj.Object) *NEProxySettin
 
 // AutoProxyConfigurationEnabled reports whether a boolean indicating if proxy auto-configuration is enabled.
 func (nps *NEProxySettings) AutoProxyConfigurationEnabled() bool {
+	defer runtime.KeepAlive(nps)
 	_r := objc.Send[bool](objref.IDOf(nps), objc.RegisterName("autoProxyConfigurationEnabled"))
 	return _r
 }
 
 // ProxyAutoConfigurationURL returns a URL specifying where the PAC script is located.
-func (nps *NEProxySettings) ProxyAutoConfigurationURL() obj.Object {
+func (nps *NEProxySettings) ProxyAutoConfigurationURL() string {
+	defer runtime.KeepAlive(nps)
 	_r := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("proxyAutoConfigurationURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // ProxyAutoConfigurationJavaScript returns a string containing the PAC JavaScript source code.
 func (nps *NEProxySettings) ProxyAutoConfigurationJavaScript() string {
+	defer runtime.KeepAlive(nps)
 	_r := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("proxyAutoConfigurationJavaScript"))
 	if _r == 0 {
 		return ""
@@ -157,30 +169,35 @@ func (nps *NEProxySettings) ProxyAutoConfigurationJavaScript() string {
 
 // HTTPEnabled reports whether a boolean indicating if the static HTTP proxy is enabled.
 func (nps *NEProxySettings) HTTPEnabled() bool {
+	defer runtime.KeepAlive(nps)
 	_r := objc.Send[bool](objref.IDOf(nps), objc.RegisterName("HTTPEnabled"))
 	return _r
 }
 
 // HTTPServer returns a NEProxyServer object containing the HTTP proxy server settings.
 func (nps *NEProxySettings) HTTPServer() *NEProxyServer {
+	defer runtime.KeepAlive(nps)
 	_r := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("HTTPServer"))
 	return NEProxyServerFromID(_r)
 }
 
 // HTTPSEnabled reports whether a boolean indicating if the static HTTPS proxy is enabled.
 func (nps *NEProxySettings) HTTPSEnabled() bool {
+	defer runtime.KeepAlive(nps)
 	_r := objc.Send[bool](objref.IDOf(nps), objc.RegisterName("HTTPSEnabled"))
 	return _r
 }
 
 // HTTPSServer returns a NEProxyServer object containing the HTTPS proxy server settings.
 func (nps *NEProxySettings) HTTPSServer() *NEProxyServer {
+	defer runtime.KeepAlive(nps)
 	_r := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("HTTPSServer"))
 	return NEProxyServerFromID(_r)
 }
 
 // ExcludeSimpleHostnames reports whether a flag indicating if the proxy settings should not be used for network destinations specified using single-label host names.
 func (nps *NEProxySettings) ExcludeSimpleHostnames() bool {
+	defer runtime.KeepAlive(nps)
 	_r := objc.Send[bool](objref.IDOf(nps), objc.RegisterName("excludeSimpleHostnames"))
 	return _r
 }
@@ -189,6 +206,7 @@ func (nps *NEProxySettings) ExcludeSimpleHostnames() bool {
 //
 // ExceptionList returns the collection as a Go slice.
 func (nps *NEProxySettings) ExceptionList() []string {
+	defer runtime.KeepAlive(nps)
 	_arr := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("exceptionList"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -197,6 +215,7 @@ func (nps *NEProxySettings) ExceptionList() []string {
 //
 // MatchDomains returns the collection as a Go slice.
 func (nps *NEProxySettings) MatchDomains() []string {
+	defer runtime.KeepAlive(nps)
 	_arr := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("matchDomains"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

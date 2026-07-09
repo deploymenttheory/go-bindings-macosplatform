@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -159,6 +161,7 @@ func (de *DOMHTMLBRElement) WithTextContent(textContent string) *DOMHTMLBRElemen
 
 // Clear returns the clear.
 func (de *DOMHTMLBRElement) Clear() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("clear"))
 	if _r == 0 {
 		return ""

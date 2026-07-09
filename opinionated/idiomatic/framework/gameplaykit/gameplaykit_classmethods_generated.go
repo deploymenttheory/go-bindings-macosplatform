@@ -5,9 +5,11 @@
 package gameplaykit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -15,6 +17,7 @@ import (
 
 // BehaviorWithGoalWeight creates a behavior with a single goal.
 func BehaviorWithGoalWeight(goal *Goal, weight float32) *Behavior {
+	defer runtime.KeepAlive(goal)
 	_r := objc.Send[objc.ID](objc.ID(_class("GKBehavior")), objc.RegisterName("behaviorWithGoal:weight:"), objref.IDOf(goal), weight)
 	return BehaviorFromID(_r)
 }
@@ -26,13 +29,14 @@ func BehaviorWithGoals(goals []*Goal) *Behavior {
 }
 
 // BehaviorWithGoalsAndWeights creates a behavior with the specified goals and weights.
-func BehaviorWithGoalsAndWeights(goals []*Goal, weights []obj.Object) *Behavior {
-	_r := objc.Send[objc.ID](objc.ID(_class("GKBehavior")), objc.RegisterName("behaviorWithGoals:andWeights:"), purego.SliceToNSArray(goals, func(_v *Goal) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(weights, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func BehaviorWithGoalsAndWeights(goals []*Goal, weights []*foundation.Number) *Behavior {
+	_r := objc.Send[objc.ID](objc.ID(_class("GKBehavior")), objc.RegisterName("behaviorWithGoals:andWeights:"), purego.SliceToNSArray(goals, func(_v *Goal) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(weights, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return BehaviorFromID(_r)
 }
 
 // BehaviorWithWeightedGoals creates a behavior with the specified mapping of goals to their weights.
 func BehaviorWithWeightedGoals(weightedGoals obj.Object) *Behavior {
+	defer runtime.KeepAlive(weightedGoals)
 	_r := objc.Send[objc.ID](objc.ID(_class("GKBehavior")), objc.RegisterName("behaviorWithWeightedGoals:"), objref.IDOf(weightedGoals))
 	return BehaviorFromID(_r)
 }
@@ -62,8 +66,8 @@ func BehaviorWithBehaviors(behaviors []*Behavior) *CompositeBehavior {
 }
 
 // BehaviorWithBehaviorsAndWeights creates a behavior with the specified behaviors and weights.
-func BehaviorWithBehaviorsAndWeights(behaviors []*Behavior, weights []obj.Object) *CompositeBehavior {
-	_r := objc.Send[objc.ID](objc.ID(_class("GKCompositeBehavior")), objc.RegisterName("behaviorWithBehaviors:andWeights:"), purego.SliceToNSArray(behaviors, func(_v *Behavior) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(weights, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func BehaviorWithBehaviorsAndWeights(behaviors []*Behavior, weights []*foundation.Number) *CompositeBehavior {
+	_r := objc.Send[objc.ID](objc.ID(_class("GKCompositeBehavior")), objc.RegisterName("behaviorWithBehaviors:andWeights:"), purego.SliceToNSArray(behaviors, func(_v *Behavior) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(weights, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return CompositeBehaviorFromID(_r)
 }
 
@@ -87,12 +91,14 @@ func GKEntityEntity() *Entity {
 
 // GoalToSeekAgent creates a goal whose effect is to move an agent toward the current position of the specified other agent.
 func GoalToSeekAgent(agent *Agent) *Goal {
+	defer runtime.KeepAlive(agent)
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGoal")), objc.RegisterName("goalToSeekAgent:"), objref.IDOf(agent))
 	return GoalFromID(_r)
 }
 
 // GoalToFleeAgent creates a goal whose effect is to move an agent away from the current position of the specified other agent.
 func GoalToFleeAgent(agent *Agent) *Goal {
+	defer runtime.KeepAlive(agent)
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGoal")), objc.RegisterName("goalToFleeAgent:"), objref.IDOf(agent))
 	return GoalFromID(_r)
 }
@@ -141,18 +147,21 @@ func GoalToWander(speed float32) *Goal {
 
 // GoalToInterceptAgentMaxPredictionTime creates a goal whose effect is to make an agent pursue the specified other agent, taking into account the target’s movement.
 func GoalToInterceptAgentMaxPredictionTime(target *Agent, maxPredictionTime float64) *Goal {
+	defer runtime.KeepAlive(target)
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGoal")), objc.RegisterName("goalToInterceptAgent:maxPredictionTime:"), objref.IDOf(target), maxPredictionTime)
 	return GoalFromID(_r)
 }
 
 // GoalToFollowPathMaxPredictionTimeForward creates a goal whose effect is to both maintain position on and traverse the specified path.
 func GoalToFollowPathMaxPredictionTimeForward(path *Path, maxPredictionTime float64, forward bool) *Goal {
+	defer runtime.KeepAlive(path)
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGoal")), objc.RegisterName("goalToFollowPath:maxPredictionTime:forward:"), objref.IDOf(path), maxPredictionTime, forward)
 	return GoalFromID(_r)
 }
 
 // GoalToStayOnPathMaxPredictionTime creates a goal whose effect is to maintain an agent’s position within the specified path.
 func GoalToStayOnPathMaxPredictionTime(path *Path, maxPredictionTime float64) *Goal {
+	defer runtime.KeepAlive(path)
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGoal")), objc.RegisterName("goalToStayOnPath:maxPredictionTime:"), objref.IDOf(path), maxPredictionTime)
 	return GoalFromID(_r)
 }
@@ -195,36 +204,43 @@ func GraphWithBufferRadiusMinCoordinateMaxCoordinate(bufferRadius float32, min u
 
 // NoiseWithNoiseSource creates a noise object with the specified noise source.
 func NoiseWithNoiseSource(noiseSource *NoiseSource) *Noise {
+	defer runtime.KeepAlive(noiseSource)
 	_r := objc.Send[objc.ID](objc.ID(_class("GKNoise")), objc.RegisterName("noiseWithNoiseSource:"), objref.IDOf(noiseSource))
 	return NoiseFromID(_r)
 }
 
 // NoiseWithNoiseSourceGradientColors creates a noise object with the specified noise source, with colors for later use in generating noise textures.
 func NoiseWithNoiseSourceGradientColors(noiseSource *NoiseSource, gradientColors obj.Object) *Noise {
+	defer runtime.KeepAlive(noiseSource)
+	defer runtime.KeepAlive(gradientColors)
 	_r := objc.Send[objc.ID](objc.ID(_class("GKNoise")), objc.RegisterName("noiseWithNoiseSource:gradientColors:"), objref.IDOf(noiseSource), objref.IDOf(gradientColors))
 	return NoiseFromID(_r)
 }
 
 // NoiseWithComponentNoisesSelectionNoise creates a noise object by combining the specified noise objects, using another noise object to select which regions of the output correspond to which input noise.
 func NoiseWithComponentNoisesSelectionNoise(noises []*Noise, selectionNoise *Noise) *Noise {
+	defer runtime.KeepAlive(selectionNoise)
 	_r := objc.Send[objc.ID](objc.ID(_class("GKNoise")), objc.RegisterName("noiseWithComponentNoises:selectionNoise:"), purego.SliceToNSArray(noises, func(_v *Noise) objc.ID { return objref.IDOf(_v) }), objref.IDOf(selectionNoise))
 	return NoiseFromID(_r)
 }
 
 // NoiseWithComponentNoisesSelectionNoiseComponentBoundariesBoundaryBlendDistances creates a noise object by combining the specified noise objects, using another noise object and the specified boundaries to select which regions of the output correspond to which input noise.
-func NoiseWithComponentNoisesSelectionNoiseComponentBoundariesBoundaryBlendDistances(noises []*Noise, selectionNoise *Noise, componentBoundaries []obj.Object, blendDistances []obj.Object) *Noise {
-	_r := objc.Send[objc.ID](objc.ID(_class("GKNoise")), objc.RegisterName("noiseWithComponentNoises:selectionNoise:componentBoundaries:boundaryBlendDistances:"), purego.SliceToNSArray(noises, func(_v *Noise) objc.ID { return objref.IDOf(_v) }), objref.IDOf(selectionNoise), purego.SliceToNSArray(componentBoundaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(blendDistances, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func NoiseWithComponentNoisesSelectionNoiseComponentBoundariesBoundaryBlendDistances(noises []*Noise, selectionNoise *Noise, componentBoundaries []*foundation.Number, blendDistances []*foundation.Number) *Noise {
+	defer runtime.KeepAlive(selectionNoise)
+	_r := objc.Send[objc.ID](objc.ID(_class("GKNoise")), objc.RegisterName("noiseWithComponentNoises:selectionNoise:componentBoundaries:boundaryBlendDistances:"), purego.SliceToNSArray(noises, func(_v *Noise) objc.ID { return objref.IDOf(_v) }), objref.IDOf(selectionNoise), purego.SliceToNSArray(componentBoundaries, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(blendDistances, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return NoiseFromID(_r)
 }
 
 // NoiseMapWithNoise creates a noise map by sampling from the specified noise object.
 func NoiseMapWithNoise(noise *Noise) *NoiseMap {
+	defer runtime.KeepAlive(noise)
 	_r := objc.Send[objc.ID](objc.ID(_class("GKNoiseMap")), objc.RegisterName("noiseMapWithNoise:"), objref.IDOf(noise))
 	return NoiseMapFromID(_r)
 }
 
 // NoiseMapWithNoiseSizeOriginSampleCountSeamless creates a noise map by sampling from the specified noise object.
 func NoiseMapWithNoiseSizeOriginSampleCountSeamless(noise *Noise, size unsafe.Pointer, origin unsafe.Pointer, sampleCount unsafe.Pointer, seamless bool) *NoiseMap {
+	defer runtime.KeepAlive(noise)
 	_r := objc.Send[objc.ID](objc.ID(_class("GKNoiseMap")), objc.RegisterName("noiseMapWithNoise:size:origin:sampleCount:seamless:"), objref.IDOf(noise), size, origin, sampleCount, seamless)
 	return NoiseMapFromID(_r)
 }
@@ -315,12 +331,14 @@ func RuleWithBlockPredicateAction(predicate func(obj.Object) bool, action func(o
 
 // ComponentWithNode creates a component that encapsulate the given SceneKit node. When the component is added to an entity, the SCNNode's entity property will be set.
 func ComponentWithNode(node obj.Object) *SCNNodeComponent {
+	defer runtime.KeepAlive(node)
 	_r := objc.Send[objc.ID](objc.ID(_class("GKSCNNodeComponent")), objc.RegisterName("componentWithNode:"), objref.IDOf(node))
 	return SCNNodeComponentFromID(_r)
 }
 
 // GKSKNodeComponentComponentWithNode creates a component to manage the specified SpriteKit node.
 func GKSKNodeComponentComponentWithNode(node obj.Object) *SKNodeComponent {
+	defer runtime.KeepAlive(node)
 	_r := objc.Send[objc.ID](objc.ID(_class("GKSKNodeComponent")), objc.RegisterName("componentWithNode:"), objref.IDOf(node))
 	return SKNodeComponentFromID(_r)
 }

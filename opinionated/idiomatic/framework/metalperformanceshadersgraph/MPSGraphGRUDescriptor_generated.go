@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -107,54 +109,63 @@ func (ggd *GraphGRUDescriptor) WithOutputGateActivation(outputGateActivation Gra
 
 // Reverse reports whether a parameter that defines the time direction of the input sequence. If set to `YES` then the input sequence is passed in reverse time order to the layer. Note: Ignored when `bidirectional = YES`. Default value: `NO`.
 func (ggd *GraphGRUDescriptor) Reverse() bool {
+	defer runtime.KeepAlive(ggd)
 	_r := objc.Send[bool](objref.IDOf(ggd), objc.RegisterName("reverse"))
 	return _r
 }
 
 // Bidirectional reports whether a parameter that defines a bidirectional GRU layer. If set to `YES` then the input sequence is traversed in both directions and the two results are concatenated together on the channel-axis. Default value: `NO`.
 func (ggd *GraphGRUDescriptor) Bidirectional() bool {
+	defer runtime.KeepAlive(ggd)
 	_r := objc.Send[bool](objref.IDOf(ggd), objc.RegisterName("bidirectional"))
 	return _r
 }
 
 // Training reports whether a parameter that enables the GRU layer to support training. If set to `YES` then the layer will produce training state tensor as a secondary output. Default value: `NO`.
 func (ggd *GraphGRUDescriptor) Training() bool {
+	defer runtime.KeepAlive(ggd)
 	_r := objc.Send[bool](objref.IDOf(ggd), objc.RegisterName("training"))
 	return _r
 }
 
 // ResetGateFirst reports whether a parameter that controls the internal order of the GRU gates. If set to `YES` then the layer will use the gate-ordering `[ r, z, o ]` instead of default `[ z, r, o ]`. Default value: `NO`.
 func (ggd *GraphGRUDescriptor) ResetGateFirst() bool {
+	defer runtime.KeepAlive(ggd)
 	_r := objc.Send[bool](objref.IDOf(ggd), objc.RegisterName("resetGateFirst"))
 	return _r
 }
 
 // ResetAfter reports whether a parameter that chooses between two variants for the reset gate computation. If set to `YES` then the layer will compute the intermediate value as `c[t] = ( b + (h[t-1] m ) R^T) r[t]`. Otherwise it's computed as `c[t] = (h[t-1] r[t] m) R^T`. Default value: `NO`.
 func (ggd *GraphGRUDescriptor) ResetAfter() bool {
+	defer runtime.KeepAlive(ggd)
 	_r := objc.Send[bool](objref.IDOf(ggd), objc.RegisterName("resetAfter"))
 	return _r
 }
 
 // FlipZ reports whether a parameter that chooses between two variants for the final output computation. If set to `YES` then the layer will compute the final value as `h[t] = z[t] h[t-1] + (1-z[t]) o[t]`. Otherwise it's computed as `h[t] = (1-z[t]) h[t-1] + z[t] o[t]`. Default value: `NO`.
 func (ggd *GraphGRUDescriptor) FlipZ() bool {
+	defer runtime.KeepAlive(ggd)
 	_r := objc.Send[bool](objref.IDOf(ggd), objc.RegisterName("flipZ"))
 	return _r
 }
 
 // UpdateGateActivation returns a parameter that defines the activation function to use with the update-gate of the GRU operation. Default value: `MPSGraphRNNActivationSigmoid`.
 func (ggd *GraphGRUDescriptor) UpdateGateActivation() GraphRNNActivation {
+	defer runtime.KeepAlive(ggd)
 	_r := objc.Send[GraphRNNActivation](objref.IDOf(ggd), objc.RegisterName("updateGateActivation"))
 	return _r
 }
 
 // ResetGateActivation returns a parameter that defines the activation function to use with the reset-gate of the GRU operation. Default value: `MPSGraphRNNActivationSigmoid`.
 func (ggd *GraphGRUDescriptor) ResetGateActivation() GraphRNNActivation {
+	defer runtime.KeepAlive(ggd)
 	_r := objc.Send[GraphRNNActivation](objref.IDOf(ggd), objc.RegisterName("resetGateActivation"))
 	return _r
 }
 
 // OutputGateActivation returns a parameter that defines the activation function to use with the output-gate of the GRU operation. Default value: `MPSGraphRNNActivationTanh`.
 func (ggd *GraphGRUDescriptor) OutputGateActivation() GraphRNNActivation {
+	defer runtime.KeepAlive(ggd)
 	_r := objc.Send[GraphRNNActivation](objref.IDOf(ggd), objc.RegisterName("outputGateActivation"))
 	return _r
 }

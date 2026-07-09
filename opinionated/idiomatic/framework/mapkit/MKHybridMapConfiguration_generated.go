@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -60,6 +62,7 @@ func NewHybridMapConfigurationWithElevationStyle(elevationStyle MapElevationStyl
 
 // WithPointOfInterestFilter sets the filter the framework uses to determine the points of interest to show on the map.
 func (hmc *HybridMapConfiguration) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *HybridMapConfiguration {
+	defer runtime.KeepAlive(pointOfInterestFilter)
 	objc.Send[objc.ID](objref.IDOf(hmc), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 	return hmc
 }
@@ -78,12 +81,14 @@ func (hmc *HybridMapConfiguration) WithElevationStyle(elevationStyle MapElevatio
 
 // PointOfInterestFilter returns the point of interest filter.
 func (hmc *HybridMapConfiguration) PointOfInterestFilter() *PointOfInterestFilter {
+	defer runtime.KeepAlive(hmc)
 	_r := objc.Send[objc.ID](objref.IDOf(hmc), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
 // ShowsTraffic wraps the corresponding Objective-C method.
 func (hmc *HybridMapConfiguration) ShowsTraffic() bool {
+	defer runtime.KeepAlive(hmc)
 	_r := objc.Send[bool](objref.IDOf(hmc), objc.RegisterName("showsTraffic"))
 	return _r
 }

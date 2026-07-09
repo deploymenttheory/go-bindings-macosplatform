@@ -5,8 +5,11 @@
 package gamekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -49,22 +52,27 @@ func gameCenterViewControllerAdopt(id objc.ID) *GameCenterViewController {
 
 // Description returns the object's -description text.
 func (gcvc *GameCenterViewController) Description() string {
+	defer runtime.KeepAlive(gcvc)
 	return rt.Description(objref.IDOf(gcvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gcvc *GameCenterViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gcvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gcvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gcvc *GameCenterViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(gcvc)
 	return rt.IsKind(objref.IDOf(gcvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gcvc *GameCenterViewController) String() string {
+	defer runtime.KeepAlive(gcvc)
 	return rt.Description(objref.IDOf(gcvc))
 }
 
@@ -96,6 +104,7 @@ func NewGameCenterViewControllerWithLeaderboardIDPlayerScopeTimeScope(leaderboar
 
 // NewGameCenterViewControllerWithLeaderboardPlayerScope creates a view controller that presents a leaderboard with data for the specified players.
 func NewGameCenterViewControllerWithLeaderboardPlayerScope(leaderboard *Leaderboard, playerScope LeaderboardPlayerScope) *GameCenterViewController {
+	defer runtime.KeepAlive(leaderboard)
 	var _mainthread0 *GameCenterViewController
 	purego.Main(func() {
 		_mainthread0 = func() *GameCenterViewController {
@@ -135,6 +144,7 @@ func NewGameCenterViewControllerWithAchievementID(achievementID string) *GameCen
 
 // NewGameCenterViewControllerWithPlayer creates a view controller that presents a player’s Game Center profile.
 func NewGameCenterViewControllerWithPlayer(player *Player) *GameCenterViewController {
+	defer runtime.KeepAlive(player)
 	var _mainthread0 *GameCenterViewController
 	purego.Main(func() {
 		_mainthread0 = func() *GameCenterViewController {
@@ -144,6 +154,18 @@ func NewGameCenterViewControllerWithPlayer(player *Player) *GameCenterViewContro
 		}()
 	})
 	return _mainthread0
+}
+
+// WithGameCenterDelegate sets the view controller’s delegate.
+func (gcvc *GameCenterViewController) WithGameCenterDelegate(gameCenterDelegate GameCenterControllerDelegate) *GameCenterViewController {
+	_shim := newGameCenterControllerDelegateShim(gameCenterDelegate)
+	_sel := objc.RegisterName("setGameCenterDelegate:")
+	shim.Associate(objref.IDOf(gcvc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gcvc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return gcvc
 }
 
 // WithViewState sets the view state.
@@ -180,6 +202,7 @@ func (gcvc *GameCenterViewController) WithLeaderboardCategory(leaderboardCategor
 
 // ViewState returns the view state.
 func (gcvc *GameCenterViewController) ViewState() GameCenterViewControllerState {
+	defer runtime.KeepAlive(gcvc)
 	var _mainthread0 GameCenterViewControllerState
 	purego.Main(func() {
 		_mainthread0 = func() GameCenterViewControllerState {
@@ -193,6 +216,7 @@ func (gcvc *GameCenterViewController) ViewState() GameCenterViewControllerState 
 
 // LeaderboardTimeScope returns the leaderboard time scope.
 func (gcvc *GameCenterViewController) LeaderboardTimeScope() LeaderboardTimeScope {
+	defer runtime.KeepAlive(gcvc)
 	var _mainthread0 LeaderboardTimeScope
 	purego.Main(func() {
 		_mainthread0 = func() LeaderboardTimeScope {
@@ -206,6 +230,7 @@ func (gcvc *GameCenterViewController) LeaderboardTimeScope() LeaderboardTimeScop
 
 // LeaderboardIdentifier returns the leaderboard identifier.
 func (gcvc *GameCenterViewController) LeaderboardIdentifier() string {
+	defer runtime.KeepAlive(gcvc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -222,6 +247,7 @@ func (gcvc *GameCenterViewController) LeaderboardIdentifier() string {
 
 // LeaderboardCategory returns the leaderboard category.
 func (gcvc *GameCenterViewController) LeaderboardCategory() string {
+	defer runtime.KeepAlive(gcvc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

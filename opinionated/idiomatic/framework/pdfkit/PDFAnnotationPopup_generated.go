@@ -5,6 +5,7 @@
 package pdfkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -58,6 +59,7 @@ func NewAnnotationPopup() *AnnotationPopup {
 
 // WithPage sets returns the page that the annotation is associated with.
 func (ap *AnnotationPopup) WithPage(page *Page) *AnnotationPopup {
+	defer runtime.KeepAlive(page)
 	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setPage:"), objref.IDOf(page))
 	return ap
 }
@@ -142,18 +144,21 @@ func (ap *AnnotationPopup) WithMouseUpAction(mouseUpAction unsafe.Pointer) *Anno
 
 // WithFont sets the font the annotation uses to display text.
 func (ap *AnnotationPopup) WithFont(font obj.Object) *AnnotationPopup {
+	defer runtime.KeepAlive(font)
 	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return ap
 }
 
 // WithFontColor sets the font color the annotation uses to display text.
 func (ap *AnnotationPopup) WithFontColor(fontColor obj.Object) *AnnotationPopup {
+	defer runtime.KeepAlive(fontColor)
 	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
 	return ap
 }
 
 // WithInteriorColor sets the fill color for drawing a circle, line, or square annotation.
 func (ap *AnnotationPopup) WithInteriorColor(interiorColor obj.Object) *AnnotationPopup {
+	defer runtime.KeepAlive(interiorColor)
 	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setInteriorColor:"), objref.IDOf(interiorColor))
 	return ap
 }
@@ -203,6 +208,7 @@ func (ap *AnnotationPopup) WithMarkupType(markupType MarkupType) *AnnotationPopu
 
 // WithWidgetFieldType sets the type of widget annotation, such as button, choice, or text.
 func (ap *AnnotationPopup) WithWidgetFieldType(widgetFieldType obj.Object) *AnnotationPopup {
+	defer runtime.KeepAlive(widgetFieldType)
 	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setWidgetFieldType:"), objref.IDOf(widgetFieldType))
 	return ap
 }
@@ -301,13 +307,14 @@ func (ap *AnnotationPopup) WithOpen(open bool) *AnnotationPopup {
 
 // WithDestination sets the destination for a link annotation.
 func (ap *AnnotationPopup) WithDestination(destination *Destination) *AnnotationPopup {
+	defer runtime.KeepAlive(destination)
 	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return ap
 }
 
 // WithURL sets a URL for a link annotation.
-func (ap *AnnotationPopup) WithURL(uRL string) *AnnotationPopup {
-	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (ap *AnnotationPopup) WithURL(url string) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return ap
 }
 
@@ -325,6 +332,7 @@ func (ap *AnnotationPopup) WithCaption(caption string) *AnnotationPopup {
 
 // WithBackgroundColor sets the color of the widget’s background.
 func (ap *AnnotationPopup) WithBackgroundColor(backgroundColor obj.Object) *AnnotationPopup {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return ap
 }
@@ -337,6 +345,7 @@ func (ap *AnnotationPopup) WithStampName(stampName string) *AnnotationPopup {
 
 // SetIsOpen sets the open state of the pop-up menu.
 func (ap *AnnotationPopup) SetIsOpen(isOpen bool) {
+	defer runtime.KeepAlive(ap)
 	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setIsOpen:"), isOpen)
 }
 

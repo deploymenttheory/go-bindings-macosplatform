@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mapItemDetailSelectionAccessoryPresentationStyleAdopt(id objc.ID) *MapItemD
 
 // Description returns the object's -description text.
 func (midsaps *MapItemDetailSelectionAccessoryPresentationStyle) Description() string {
+	defer runtime.KeepAlive(midsaps)
 	return rt.Description(objref.IDOf(midsaps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (midsaps *MapItemDetailSelectionAccessoryPresentationStyle) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(midsaps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(midsaps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (midsaps *MapItemDetailSelectionAccessoryPresentationStyle) IsKind(className string) bool {
+	defer runtime.KeepAlive(midsaps)
 	return rt.IsKind(objref.IDOf(midsaps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (midsaps *MapItemDetailSelectionAccessoryPresentationStyle) String() string {
+	defer runtime.KeepAlive(midsaps)
 	return rt.Description(objref.IDOf(midsaps))
 }
 

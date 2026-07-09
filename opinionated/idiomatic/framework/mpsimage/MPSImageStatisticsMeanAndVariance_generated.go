@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -71,6 +73,7 @@ func (ismav *ImageStatisticsMeanAndVariance) WithClipRect(clipRect metal.MTLRegi
 
 // ClipRectSource returns the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the mean value is written.
 func (ismav *ImageStatisticsMeanAndVariance) ClipRectSource() metal.MTLRegion {
+	defer runtime.KeepAlive(ismav)
 	_r := objc.Send[metal.MTLRegion](objref.IDOf(ismav), objc.RegisterName("clipRectSource"))
 	return _r
 }

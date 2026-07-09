@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -68,6 +71,7 @@ func (mgr *MagnificationGestureRecognizer) WithMagnification(magnification float
 
 // WithTarget sets the object that implements the action method.
 func (mgr *MagnificationGestureRecognizer) WithTarget(target obj.Object) *MagnificationGestureRecognizer {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -82,6 +86,18 @@ func (mgr *MagnificationGestureRecognizer) WithState(state GestureRecognizerStat
 	return mgr
 }
 
+// WithDelegate sets the delegate of the gesture recognizer.
+func (mgr *MagnificationGestureRecognizer) WithDelegate(delegate GestureRecognizerDelegate) *MagnificationGestureRecognizer {
+	_shim := newGestureRecognizerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(mgr), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mgr), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return mgr
+}
+
 // WithEnabled sets a Boolean value indicating whether the gesture recognizer is able to handle events.
 func (mgr *MagnificationGestureRecognizer) WithEnabled(enabled bool) *MagnificationGestureRecognizer {
 	purego.Main(func() {
@@ -92,6 +108,7 @@ func (mgr *MagnificationGestureRecognizer) WithEnabled(enabled bool) *Magnificat
 
 // WithPressureConfiguration sets configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
 func (mgr *MagnificationGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *MagnificationGestureRecognizer {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -164,6 +181,7 @@ func (mgr *MagnificationGestureRecognizer) WithAllowedTouchTypes(allowedTouchTyp
 
 // Magnification returns the magnification.
 func (mgr *MagnificationGestureRecognizer) Magnification() float64 {
+	defer runtime.KeepAlive(mgr)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {

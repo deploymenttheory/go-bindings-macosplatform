@@ -9,91 +9,91 @@ import (
 )
 
 // Interface event types.
-type Interface_event_t int64
+type InterfaceEvent int64
 
 const (
-	VMNET_INTERFACE_PACKETS_AVAILABLE Interface_event_t = 1
+	InterfaceEventAvailable InterfaceEvent = 1
 )
 
-// String returns the Interface_event_t constant's name, or its numeric form when the
+// String returns the InterfaceEvent constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Interface_event_t) String() string {
+func (e InterfaceEvent) String() string {
 	switch e {
-	case VMNET_INTERFACE_PACKETS_AVAILABLE:
-		return "VMNET_INTERFACE_PACKETS_AVAILABLE"
+	case InterfaceEventAvailable:
+		return "InterfaceEventAvailable"
 	default:
-		return fmt.Sprintf("Interface_event_t(%d)", int64(e))
+		return fmt.Sprintf("InterfaceEvent(%d)", int64(e))
 	}
 }
 
 // The operating modes for an interface.
-type Operating_modes_t int64
+type OperatingModes int64
 
 const (
-	VMNET_HOST_MODE    Operating_modes_t = 1000
-	VMNET_SHARED_MODE  Operating_modes_t = 1001
-	VMNET_BRIDGED_MODE Operating_modes_t = 1002
+	OperatingModesHostMode    OperatingModes = 1000
+	OperatingModesSharedMode  OperatingModes = 1001
+	OperatingModesBridgedMode OperatingModes = 1002
 )
 
-// String returns the Operating_modes_t constant's name, or its numeric form when the
+// String returns the OperatingModes constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Operating_modes_t) String() string {
+func (e OperatingModes) String() string {
 	switch e {
-	case VMNET_HOST_MODE:
-		return "VMNET_HOST_MODE"
-	case VMNET_SHARED_MODE:
-		return "VMNET_SHARED_MODE"
-	case VMNET_BRIDGED_MODE:
-		return "VMNET_BRIDGED_MODE"
+	case OperatingModesHostMode:
+		return "OperatingModesHostMode"
+	case OperatingModesSharedMode:
+		return "OperatingModesSharedMode"
+	case OperatingModesBridgedMode:
+		return "OperatingModesBridgedMode"
 	default:
-		return fmt.Sprintf("Operating_modes_t(%d)", int64(e))
+		return fmt.Sprintf("OperatingModes(%d)", int64(e))
 	}
 }
 
 // Values returned by functions in the vmnet Framework.
-type Vmnet_return_t int64
+type VmnetReturn int64
 
 const (
-	VMNET_SUCCESS              Vmnet_return_t = 1000
-	VMNET_FAILURE              Vmnet_return_t = 1001
-	VMNET_MEM_FAILURE          Vmnet_return_t = 1002
-	VMNET_INVALID_ARGUMENT     Vmnet_return_t = 1003
-	VMNET_SETUP_INCOMPLETE     Vmnet_return_t = 1004
-	VMNET_INVALID_ACCESS       Vmnet_return_t = 1005
-	VMNET_PACKET_TOO_BIG       Vmnet_return_t = 1006
-	VMNET_BUFFER_EXHAUSTED     Vmnet_return_t = 1007
-	VMNET_TOO_MANY_PACKETS     Vmnet_return_t = 1008
-	VMNET_SHARING_SERVICE_BUSY Vmnet_return_t = 1009
-	VMNET_NOT_AUTHORIZED       Vmnet_return_t = 1010
+	VmnetReturnSuccess            VmnetReturn = 1000
+	VmnetReturnFailure            VmnetReturn = 1001
+	VmnetReturnMemFailure         VmnetReturn = 1002
+	VmnetReturnInvalidArgument    VmnetReturn = 1003
+	VmnetReturnSetupIncomplete    VmnetReturn = 1004
+	VmnetReturnInvalidAccess      VmnetReturn = 1005
+	VmnetReturnPacketTooBig       VmnetReturn = 1006
+	VmnetReturnBufferExhausted    VmnetReturn = 1007
+	VmnetReturnTooManyPackets     VmnetReturn = 1008
+	VmnetReturnSharingServiceBusy VmnetReturn = 1009
+	VmnetReturnNotAuthorized      VmnetReturn = 1010
 )
 
-// String returns the Vmnet_return_t constant's name, or its numeric form when the
+// String returns the VmnetReturn constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Vmnet_return_t) String() string {
+func (e VmnetReturn) String() string {
 	switch e {
-	case VMNET_SUCCESS:
-		return "VMNET_SUCCESS"
-	case VMNET_FAILURE:
-		return "VMNET_FAILURE"
-	case VMNET_MEM_FAILURE:
-		return "VMNET_MEM_FAILURE"
-	case VMNET_INVALID_ARGUMENT:
-		return "VMNET_INVALID_ARGUMENT"
-	case VMNET_SETUP_INCOMPLETE:
-		return "VMNET_SETUP_INCOMPLETE"
-	case VMNET_INVALID_ACCESS:
-		return "VMNET_INVALID_ACCESS"
-	case VMNET_PACKET_TOO_BIG:
-		return "VMNET_PACKET_TOO_BIG"
-	case VMNET_BUFFER_EXHAUSTED:
-		return "VMNET_BUFFER_EXHAUSTED"
-	case VMNET_TOO_MANY_PACKETS:
-		return "VMNET_TOO_MANY_PACKETS"
-	case VMNET_SHARING_SERVICE_BUSY:
-		return "VMNET_SHARING_SERVICE_BUSY"
-	case VMNET_NOT_AUTHORIZED:
-		return "VMNET_NOT_AUTHORIZED"
+	case VmnetReturnSuccess:
+		return "VmnetReturnSuccess"
+	case VmnetReturnFailure:
+		return "VmnetReturnFailure"
+	case VmnetReturnMemFailure:
+		return "VmnetReturnMemFailure"
+	case VmnetReturnInvalidArgument:
+		return "VmnetReturnInvalidArgument"
+	case VmnetReturnSetupIncomplete:
+		return "VmnetReturnSetupIncomplete"
+	case VmnetReturnInvalidAccess:
+		return "VmnetReturnInvalidAccess"
+	case VmnetReturnPacketTooBig:
+		return "VmnetReturnPacketTooBig"
+	case VmnetReturnBufferExhausted:
+		return "VmnetReturnBufferExhausted"
+	case VmnetReturnTooManyPackets:
+		return "VmnetReturnTooManyPackets"
+	case VmnetReturnSharingServiceBusy:
+		return "VmnetReturnSharingServiceBusy"
+	case VmnetReturnNotAuthorized:
+		return "VmnetReturnNotAuthorized"
 	default:
-		return fmt.Sprintf("Vmnet_return_t(%d)", int64(e))
+		return fmt.Sprintf("VmnetReturn(%d)", int64(e))
 	}
 }

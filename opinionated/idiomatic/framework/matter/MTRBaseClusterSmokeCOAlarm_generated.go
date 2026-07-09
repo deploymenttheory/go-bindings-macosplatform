@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterSmokeCOAlarmAdopt(id objc.ID) *MTRBaseClusterSmokeCOAlarm {
 
 // NewMTRBaseClusterSmokeCOAlarmWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterSmokeCOAlarmWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterSmokeCOAlarm {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterSmokeCOAlarm")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterSmokeCOAlarmAdopt(_id)
@@ -58,6 +62,7 @@ func NewMTRBaseClusterSmokeCOAlarmWithDeviceEndpointIDQueue(device *MTRBaseDevic
 //
 // ReadAttributeExpressedStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeExpressedStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
 	type _result struct {
 		val obj.Object
 		err error
@@ -83,6 +88,8 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeExpressedStateWithComplet
 //
 // SubscribeAttributeExpressedStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeExpressedStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -108,6 +115,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeExpressedStateWithPa
 //
 // ReadAttributeSmokeStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeSmokeStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
 	type _result struct {
 		val obj.Object
 		err error
@@ -133,6 +141,8 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeSmokeStateWithCompletion(
 //
 // SubscribeAttributeSmokeStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeSmokeStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -158,6 +168,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeSmokeStateWithParams
 //
 // ReadAttributeCOStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeCOStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
 	type _result struct {
 		val obj.Object
 		err error
@@ -183,6 +194,8 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeCOStateWithCompletion(ctx
 //
 // SubscribeAttributeCOStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeCOStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -208,6 +221,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeCOStateWithParamsSub
 //
 // ReadAttributeBatteryAlertWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeBatteryAlertWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
 	type _result struct {
 		val obj.Object
 		err error
@@ -233,6 +247,8 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeBatteryAlertWithCompletio
 //
 // SubscribeAttributeBatteryAlertWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeBatteryAlertWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -258,6 +274,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeBatteryAlertWithPara
 //
 // ReadAttributeDeviceMutedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeDeviceMutedWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
 	type _result struct {
 		val obj.Object
 		err error
@@ -283,6 +300,8 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeDeviceMutedWithCompletion
 //
 // SubscribeAttributeDeviceMutedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeDeviceMutedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -308,6 +327,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeDeviceMutedWithParam
 //
 // ReadAttributeTestInProgressWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeTestInProgressWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
 	type _result struct {
 		val obj.Object
 		err error
@@ -333,6 +353,8 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeTestInProgressWithComplet
 //
 // SubscribeAttributeTestInProgressWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeTestInProgressWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -358,6 +380,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeTestInProgressWithPa
 //
 // ReadAttributeHardwareFaultAlertWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeHardwareFaultAlertWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
 	type _result struct {
 		val obj.Object
 		err error
@@ -383,6 +406,8 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeHardwareFaultAlertWithCom
 //
 // SubscribeAttributeHardwareFaultAlertWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeHardwareFaultAlertWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -408,6 +433,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeHardwareFaultAlertWi
 //
 // ReadAttributeEndOfServiceAlertWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeEndOfServiceAlertWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
 	type _result struct {
 		val obj.Object
 		err error
@@ -433,6 +459,8 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeEndOfServiceAlertWithComp
 //
 // SubscribeAttributeEndOfServiceAlertWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeEndOfServiceAlertWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -458,6 +486,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeEndOfServiceAlertWit
 //
 // ReadAttributeInterconnectSmokeAlarmWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeInterconnectSmokeAlarmWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
 	type _result struct {
 		val obj.Object
 		err error
@@ -483,6 +512,8 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeInterconnectSmokeAlarmWit
 //
 // SubscribeAttributeInterconnectSmokeAlarmWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeInterconnectSmokeAlarmWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -508,6 +539,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeInterconnectSmokeAla
 //
 // ReadAttributeInterconnectCOAlarmWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeInterconnectCOAlarmWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
 	type _result struct {
 		val obj.Object
 		err error
@@ -533,6 +565,8 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeInterconnectCOAlarmWithCo
 //
 // SubscribeAttributeInterconnectCOAlarmWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeInterconnectCOAlarmWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -558,6 +592,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeInterconnectCOAlarmW
 //
 // ReadAttributeContaminationStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeContaminationStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
 	type _result struct {
 		val obj.Object
 		err error
@@ -583,6 +618,8 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeContaminationStateWithCom
 //
 // SubscribeAttributeContaminationStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeContaminationStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -608,6 +645,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeContaminationStateWi
 //
 // ReadAttributeSmokeSensitivityLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeSmokeSensitivityLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
 	type _result struct {
 		val obj.Object
 		err error
@@ -633,6 +671,8 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeSmokeSensitivityLevelWith
 //
 // SubscribeAttributeSmokeSensitivityLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeSmokeSensitivityLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -658,6 +698,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeSmokeSensitivityLeve
 //
 // ReadAttributeExpiryDateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeExpiryDateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
 	type _result struct {
 		val obj.Object
 		err error
@@ -683,6 +724,8 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeExpiryDateWithCompletion(
 //
 // SubscribeAttributeExpiryDateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeExpiryDateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -708,6 +751,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeExpiryDateWithParams
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
 	type _result struct {
 		val obj.Object
 		err error
@@ -733,6 +777,8 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeGeneratedCommandListWithC
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -758,6 +804,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeGeneratedCommandList
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
 	type _result struct {
 		val obj.Object
 		err error
@@ -783,6 +830,8 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeAcceptedCommandListWithCo
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -808,6 +857,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeAcceptedCommandListW
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
 	type _result struct {
 		val obj.Object
 		err error
@@ -833,6 +883,8 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeAttributeListWithCompleti
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -858,6 +910,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeAttributeListWithPar
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
 	type _result struct {
 		val obj.Object
 		err error
@@ -883,6 +936,8 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeFeatureMapWithCompletion(
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -908,6 +963,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeFeatureMapWithParams
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
 	type _result struct {
 		val obj.Object
 		err error
@@ -933,6 +989,8 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeClusterRevisionWithComple
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsca)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

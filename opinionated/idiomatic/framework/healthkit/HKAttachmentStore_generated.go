@@ -6,6 +6,7 @@ package healthkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,27 +51,33 @@ func attachmentStoreAdopt(id objc.ID) *AttachmentStore {
 
 // Description returns the object's -description text.
 func (as *AttachmentStore) Description() string {
+	defer runtime.KeepAlive(as)
 	return rt.Description(objref.IDOf(as))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (as *AttachmentStore) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(as), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (as *AttachmentStore) IsKind(className string) bool {
+	defer runtime.KeepAlive(as)
 	return rt.IsKind(objref.IDOf(as), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (as *AttachmentStore) String() string {
+	defer runtime.KeepAlive(as)
 	return rt.Description(objref.IDOf(as))
 }
 
 // NewAttachmentStoreWithHealthStore creates an attachment store for the provided HealthKit store.
 func NewAttachmentStoreWithHealthStore(healthStore *HealthStore) *AttachmentStore {
+	defer runtime.KeepAlive(healthStore)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKAttachmentStore")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:"), objref.IDOf(healthStore))
 	return attachmentStoreAdopt(_id)
@@ -79,7 +86,10 @@ func NewAttachmentStoreWithHealthStore(healthStore *HealthStore) *AttachmentStor
 // AddAttachmentToObjectNameContentTypeURLMetadataCompletion adds an attachment to the specified object.
 //
 // AddAttachmentToObjectNameContentTypeURLMetadataCompletion blocks until the operation completes or ctx is cancelled.
-func (as *AttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataCompletion(ctx context.Context, object *Object, name string, contentType obj.Object, uRL string, metadata obj.Object) (result *Attachment, err error) {
+func (as *AttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataCompletion(ctx context.Context, object *Object, name string, contentType obj.Object, url string, metadata map[string]obj.Object) (result *Attachment, err error) {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(object)
+	defer runtime.KeepAlive(contentType)
 	type _result struct {
 		val *Attachment
 		err error
@@ -91,7 +101,7 @@ func (as *AttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataComple
 		_o.val = AttachmentFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("addAttachmentToObject:name:contentType:URL:metadata:completion:"), objref.IDOf(object), purego.NSString(name), objref.IDOf(contentType), rt.FileURL(uRL), objref.IDOf(metadata), _block)
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("addAttachmentToObject:name:contentType:URL:metadata:completion:"), objref.IDOf(object), purego.NSString(name), objref.IDOf(contentType), rt.FileURL(url), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -105,6 +115,8 @@ func (as *AttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataComple
 //
 // GetAttachmentsForObjectCompletion blocks until the operation completes or ctx is cancelled.
 func (as *AttachmentStore) GetAttachmentsForObjectCompletion(ctx context.Context, object *Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(object)
 	type _result struct {
 		val obj.Object
 		err error

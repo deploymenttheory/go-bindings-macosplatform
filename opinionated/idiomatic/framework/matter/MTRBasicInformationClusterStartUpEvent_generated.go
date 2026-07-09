@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,35 +50,42 @@ func mTRBasicInformationClusterStartUpEventAdopt(id objc.ID) *MTRBasicInformatio
 
 // Description returns the object's -description text.
 func (mbicsue *MTRBasicInformationClusterStartUpEvent) Description() string {
+	defer runtime.KeepAlive(mbicsue)
 	return rt.Description(objref.IDOf(mbicsue))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbicsue *MTRBasicInformationClusterStartUpEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbicsue)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbicsue), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbicsue *MTRBasicInformationClusterStartUpEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbicsue)
 	return rt.IsKind(objref.IDOf(mbicsue), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbicsue *MTRBasicInformationClusterStartUpEvent) String() string {
+	defer runtime.KeepAlive(mbicsue)
 	return rt.Description(objref.IDOf(mbicsue))
 }
 
 // WithSoftwareVersion sets the software version.
 func (mbicsue *MTRBasicInformationClusterStartUpEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTRBasicInformationClusterStartUpEvent {
+	defer runtime.KeepAlive(softwareVersion)
 	objc.Send[objc.ID](objref.IDOf(mbicsue), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return mbicsue
 }
 
 // SoftwareVersion returns the software version.
-func (mbicsue *MTRBasicInformationClusterStartUpEvent) SoftwareVersion() obj.Object {
+func (mbicsue *MTRBasicInformationClusterStartUpEvent) SoftwareVersion() *foundation.Number {
+	defer runtime.KeepAlive(mbicsue)
 	_r := objc.Send[objc.ID](objref.IDOf(mbicsue), objc.RegisterName("softwareVersion"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRBasicInformationClusterStartUpEvent marks MTRBasicInformationClusterStartUpEvent — and, by embedding promotion, its

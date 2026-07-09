@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func sCNNodeComponentAdopt(id objc.ID) *SCNNodeComponent {
 
 // NewSCNNodeComponentWithNode initializes component to encapsulate the given SceneKit node. When the component is added to an entity, the SCNNode's entity property will be set.
 func NewSCNNodeComponentWithNode(node obj.Object) *SCNNodeComponent {
+	defer runtime.KeepAlive(node)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKSCNNodeComponent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNode:"), objref.IDOf(node))
 	return sCNNodeComponentAdopt(_id)
@@ -55,6 +58,7 @@ func NewSCNNodeComponentWithNode(node obj.Object) *SCNNodeComponent {
 
 // Node returns the node.
 func (snc *SCNNodeComponent) Node() obj.Object {
+	defer runtime.KeepAlive(snc)
 	_r := objc.Send[objc.ID](objref.IDOf(snc), objc.RegisterName("node"))
 	return obj.Wrap(_r)
 }

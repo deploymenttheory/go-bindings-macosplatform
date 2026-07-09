@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -159,6 +161,7 @@ func (dhe *DOMHTMLHeadElement) WithTextContent(textContent string) *DOMHTMLHeadE
 
 // Profile returns the profile.
 func (dhe *DOMHTMLHeadElement) Profile() string {
+	defer runtime.KeepAlive(dhe)
 	_r := objc.Send[objc.ID](objref.IDOf(dhe), objc.RegisterName("profile"))
 	if _r == 0 {
 		return ""

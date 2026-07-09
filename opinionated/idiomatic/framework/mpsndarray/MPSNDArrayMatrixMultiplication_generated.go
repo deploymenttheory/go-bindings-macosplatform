@@ -5,6 +5,8 @@
 package mpsndarray
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -57,12 +59,14 @@ func (amm *ArrayMatrixMultiplication) WithBeta(beta float64) *ArrayMatrixMultipl
 
 // Alpha returns the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (amm *ArrayMatrixMultiplication) Alpha() float64 {
+	defer runtime.KeepAlive(amm)
 	_r := objc.Send[float64](objref.IDOf(amm), objc.RegisterName("alpha"))
 	return _r
 }
 
 // Beta returns the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (amm *ArrayMatrixMultiplication) Beta() float64 {
+	defer runtime.KeepAlive(amm)
 	_r := objc.Send[float64](objref.IDOf(amm), objc.RegisterName("beta"))
 	return _r
 }

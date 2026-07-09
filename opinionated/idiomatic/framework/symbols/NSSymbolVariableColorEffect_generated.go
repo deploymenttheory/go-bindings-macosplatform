@@ -5,6 +5,8 @@
 package symbols
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,36 +55,42 @@ func NewSymbolVariableColorEffect() *SymbolVariableColorEffect {
 
 // EffectWithIterative returns an effect that momentarily enables each layer of a symbol-based image in sequence.
 func (svce *SymbolVariableColorEffect) EffectWithIterative() *SymbolVariableColorEffect {
+	defer runtime.KeepAlive(svce)
 	_r := objc.Send[objc.ID](objref.IDOf(svce), objc.RegisterName("effectWithIterative"))
 	return SymbolVariableColorEffectFromID(_r)
 }
 
 // EffectWithCumulative returns an effect that enables each layer of a symbol-based image in sequence.
 func (svce *SymbolVariableColorEffect) EffectWithCumulative() *SymbolVariableColorEffect {
+	defer runtime.KeepAlive(svce)
 	_r := objc.Send[objc.ID](objref.IDOf(svce), objc.RegisterName("effectWithCumulative"))
 	return SymbolVariableColorEffectFromID(_r)
 }
 
 // EffectWithReversing returns an effect that reverses each time it repeats.
 func (svce *SymbolVariableColorEffect) EffectWithReversing() *SymbolVariableColorEffect {
+	defer runtime.KeepAlive(svce)
 	_r := objc.Send[objc.ID](objref.IDOf(svce), objc.RegisterName("effectWithReversing"))
 	return SymbolVariableColorEffectFromID(_r)
 }
 
 // EffectWithNonReversing returns an effect that doesn’t reverse each time it repeats.
 func (svce *SymbolVariableColorEffect) EffectWithNonReversing() *SymbolVariableColorEffect {
+	defer runtime.KeepAlive(svce)
 	_r := objc.Send[objc.ID](objref.IDOf(svce), objc.RegisterName("effectWithNonReversing"))
 	return SymbolVariableColorEffectFromID(_r)
 }
 
 // EffectWithHideInactiveLayers returns an effect that hides inactive layers in a symbol-based image.
 func (svce *SymbolVariableColorEffect) EffectWithHideInactiveLayers() *SymbolVariableColorEffect {
+	defer runtime.KeepAlive(svce)
 	_r := objc.Send[objc.ID](objref.IDOf(svce), objc.RegisterName("effectWithHideInactiveLayers"))
 	return SymbolVariableColorEffectFromID(_r)
 }
 
 // EffectWithDimInactiveLayers returns an effect that dims inactive layers in a symbol-based image.
 func (svce *SymbolVariableColorEffect) EffectWithDimInactiveLayers() *SymbolVariableColorEffect {
+	defer runtime.KeepAlive(svce)
 	_r := objc.Send[objc.ID](objref.IDOf(svce), objc.RegisterName("effectWithDimInactiveLayers"))
 	return SymbolVariableColorEffectFromID(_r)
 }

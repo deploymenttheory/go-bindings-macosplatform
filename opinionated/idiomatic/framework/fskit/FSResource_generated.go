@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,38 +51,46 @@ func resourceAdopt(id objc.ID) *Resource {
 
 // Description returns the object's -description text.
 func (r *Resource) Description() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (r *Resource) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (r *Resource) IsKind(className string) bool {
+	defer runtime.KeepAlive(r)
 	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (r *Resource) String() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // MakeProxy creates a proxy object of this resource.
 func (r *Resource) MakeProxy() *Resource {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("makeProxy"))
 	return ResourceFromID(_r)
 }
 
 // Revoke revokes the resource.
 func (r *Resource) Revoke() {
+	defer runtime.KeepAlive(r)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("revoke"))
 }
 
 // IsRevoked reports whether the resource is revoked. If this is a proxy resource, the value of this property is always `true` (Swift) or `YES` (Objective-C).
 func (r *Resource) IsRevoked() bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("isRevoked"))
 	return _r
 }

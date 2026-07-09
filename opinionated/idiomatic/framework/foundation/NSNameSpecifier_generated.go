@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,6 +52,7 @@ func nameSpecifierAdopt(id objc.ID) *NameSpecifier {
 
 // NewNameSpecifierWithCoder creates a new NameSpecifier.
 func NewNameSpecifierWithCoder(inCoder *Coder) *NameSpecifier {
+	defer runtime.KeepAlive(inCoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNameSpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(inCoder))
 	return nameSpecifierAdopt(_id)
@@ -57,6 +60,8 @@ func NewNameSpecifierWithCoder(inCoder *Coder) *NameSpecifier {
 
 // NewNameSpecifierWithContainerClassDescriptionContainerSpecifierKeyName invokes the super class’s initWithContainerClassDescription:containerSpecifier:key: method and then sets the name instance variable to name.
 func NewNameSpecifierWithContainerClassDescriptionContainerSpecifierKeyName(classDesc *ScriptClassDescription, container *ScriptObjectSpecifier, property string, name string) *NameSpecifier {
+	defer runtime.KeepAlive(classDesc)
+	defer runtime.KeepAlive(container)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNameSpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:name:"), objref.IDOf(classDesc), objref.IDOf(container), purego.NSString(property), purego.NSString(name))
 	return nameSpecifierAdopt(_id)
@@ -64,18 +69,21 @@ func NewNameSpecifierWithContainerClassDescriptionContainerSpecifierKeyName(clas
 
 // WithName sets sets the name encapsulated with the receiver for the specified object in the container.
 func (ns *NameSpecifier) WithName(name StringProvider) *NameSpecifier {
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setName:"), objref.IDOf(name))
 	return ns
 }
 
 // WithChildSpecifier sets sets the receiver’s child reference.
 func (ns *NameSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *NameSpecifier {
+	defer runtime.KeepAlive(childSpecifier)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setChildSpecifier:"), objref.IDOf(childSpecifier))
 	return ns
 }
 
 // WithContainerSpecifier sets sets the container specifier of the receiver.
 func (ns *NameSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *NameSpecifier {
+	defer runtime.KeepAlive(containerSpecifier)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setContainerSpecifier:"), objref.IDOf(containerSpecifier))
 	return ns
 }
@@ -94,12 +102,14 @@ func (ns *NameSpecifier) WithContainerIsRangeContainerObject(containerIsRangeCon
 
 // WithKey sets sets the key of the receiver.
 func (ns *NameSpecifier) WithKey(key StringProvider) *NameSpecifier {
+	defer runtime.KeepAlive(key)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return ns
 }
 
 // WithContainerClassDescription sets sets the class description of the receiver’s container specifier to a given specifier.
 func (ns *NameSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *NameSpecifier {
+	defer runtime.KeepAlive(containerClassDescription)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setContainerClassDescription:"), objref.IDOf(containerClassDescription))
 	return ns
 }
@@ -117,13 +127,14 @@ func (ns *NameSpecifier) WithObservationInfo(observationInfo unsafe.Pointer) *Na
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ns *NameSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *NameSpecifier {
-	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ns *NameSpecifier) WithScriptingProperties(scriptingProperties map[string]obj.Object) *NameSpecifier {
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ns
 }
 
 // Name returns the name.
 func (ns *NameSpecifier) Name() string {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

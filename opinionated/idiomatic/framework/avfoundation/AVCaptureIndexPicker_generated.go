@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -80,17 +82,21 @@ func (cip *CaptureIndexPicker) WithEnabled(enabled bool) *CaptureIndexPicker {
 
 // SetActionQueueAction sets the action to perform on the specified dispatch queue when the control’s value changes.
 func (cip *CaptureIndexPicker) SetActionQueueAction(actionQueue obj.Object, action func(int)) {
+	defer runtime.KeepAlive(cip)
+	defer runtime.KeepAlive(actionQueue)
 	objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("setActionQueue:action:"), objref.IDOf(actionQueue), objc.NewBlock(func(_ objc.Block, _b0 int) { action(_b0) }))
 }
 
 // SelectedIndex returns the currently selected index. Because the camera system may be independent from the main thread or `
 func (cip *CaptureIndexPicker) SelectedIndex() int {
+	defer runtime.KeepAlive(cip)
 	_r := objc.Send[int](objref.IDOf(cip), objc.RegisterName("selectedIndex"))
 	return _r
 }
 
 // LocalizedTitle returns a localized string that describes the picker's `action`.
 func (cip *CaptureIndexPicker) LocalizedTitle() string {
+	defer runtime.KeepAlive(cip)
 	_r := objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("localizedTitle"))
 	if _r == 0 {
 		return ""
@@ -100,6 +106,7 @@ func (cip *CaptureIndexPicker) LocalizedTitle() string {
 
 // SymbolName returns the name of a symbol to represent the picker.
 func (cip *CaptureIndexPicker) SymbolName() string {
+	defer runtime.KeepAlive(cip)
 	_r := objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("symbolName"))
 	if _r == 0 {
 		return ""
@@ -109,6 +116,7 @@ func (cip *CaptureIndexPicker) SymbolName() string {
 
 // NumberOfIndexes returns the number of indexes to pick between.
 func (cip *CaptureIndexPicker) NumberOfIndexes() int {
+	defer runtime.KeepAlive(cip)
 	_r := objc.Send[int](objref.IDOf(cip), objc.RegisterName("numberOfIndexes"))
 	return _r
 }
@@ -117,12 +125,14 @@ func (cip *CaptureIndexPicker) NumberOfIndexes() int {
 //
 // LocalizedIndexTitles returns the collection as a Go slice.
 func (cip *CaptureIndexPicker) LocalizedIndexTitles() []string {
+	defer runtime.KeepAlive(cip)
 	_arr := objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("localizedIndexTitles"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // AccessibilityIdentifier returns a string that identifies the picker.
 func (cip *CaptureIndexPicker) AccessibilityIdentifier() string {
+	defer runtime.KeepAlive(cip)
 	_r := objc.Send[objc.ID](objref.IDOf(cip), objc.RegisterName("accessibilityIdentifier"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func pDFPanelAdopt(id objc.ID) *PDFPanel {
 
 // Description returns the object's -description text.
 func (pp *PDFPanel) Description() string {
+	defer runtime.KeepAlive(pp)
 	return rt.Description(objref.IDOf(pp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pp *PDFPanel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pp *PDFPanel) IsKind(className string) bool {
+	defer runtime.KeepAlive(pp)
 	return rt.IsKind(objref.IDOf(pp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pp *PDFPanel) String() string {
+	defer runtime.KeepAlive(pp)
 	return rt.Description(objref.IDOf(pp))
 }
 
@@ -80,6 +87,7 @@ func NewPDFPanel() *PDFPanel {
 
 // WithAccessoryController sets a view controller for the accessory view that the panel can present.
 func (pp *PDFPanel) WithAccessoryController(accessoryController ViewControllerProvider) *PDFPanel {
+	defer runtime.KeepAlive(accessoryController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setAccessoryController:"), objref.IDOf(accessoryController))
 	})
@@ -104,6 +112,9 @@ func (pp *PDFPanel) WithDefaultFileName(defaultFileName string) *PDFPanel {
 
 // BeginSheetWithPDFInfoModalForWindowCompletionHandler presents a document-modal PDF panel.
 func (pp *PDFPanel) BeginSheetWithPDFInfoModalForWindowCompletionHandler(pdfInfo *PDFInfo, docWindow *Window, completionHandler func(int)) {
+	defer runtime.KeepAlive(pp)
+	defer runtime.KeepAlive(pdfInfo)
+	defer runtime.KeepAlive(docWindow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("beginSheetWithPDFInfo:modalForWindow:completionHandler:"), objref.IDOf(pdfInfo), objref.IDOf(docWindow), objc.NewBlock(func(_ objc.Block, _b0 int) { completionHandler(_b0) }))
 	})
@@ -112,6 +123,7 @@ func (pp *PDFPanel) BeginSheetWithPDFInfoModalForWindowCompletionHandler(pdfInfo
 
 // AccessoryController returns the accessory controller.
 func (pp *PDFPanel) AccessoryController() *ViewController {
+	defer runtime.KeepAlive(pp)
 	var _mainthread0 *ViewController
 	purego.Main(func() {
 		_mainthread0 = func() *ViewController {
@@ -125,6 +137,7 @@ func (pp *PDFPanel) AccessoryController() *ViewController {
 
 // Options returns the options.
 func (pp *PDFPanel) Options() PDFPanelOptions {
+	defer runtime.KeepAlive(pp)
 	var _mainthread0 PDFPanelOptions
 	purego.Main(func() {
 		_mainthread0 = func() PDFPanelOptions {
@@ -138,6 +151,7 @@ func (pp *PDFPanel) Options() PDFPanelOptions {
 
 // DefaultFileName returns the default file name.
 func (pp *PDFPanel) DefaultFileName() string {
+	defer runtime.KeepAlive(pp)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

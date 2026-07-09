@@ -5,6 +5,7 @@
 package iousbhost
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -56,6 +57,7 @@ func NewHostDevice() *HostDevice {
 
 // ConfigureWithValueMatchInterfaces selects a new configuration for the device.
 func (hd *HostDevice) ConfigureWithValueMatchInterfaces(value int, matchInterfaces bool) error {
+	defer runtime.KeepAlive(hd)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(hd), objc.RegisterName("configureWithValue:matchInterfaces:error:"), value, matchInterfaces, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -66,6 +68,7 @@ func (hd *HostDevice) ConfigureWithValueMatchInterfaces(value int, matchInterfac
 
 // ConfigureWithValue selects a new configuration for the device and registers the interfaces for matching.
 func (hd *HostDevice) ConfigureWithValue(value int) error {
+	defer runtime.KeepAlive(hd)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(hd), objc.RegisterName("configureWithValue:error:"), value, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -78,6 +81,7 @@ func (hd *HostDevice) ConfigureWithValue(value int) error {
 //
 // Reset returns an error if the operation did not succeed.
 func (hd *HostDevice) Reset() error {
+	defer runtime.KeepAlive(hd)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(hd), objc.RegisterName("resetWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

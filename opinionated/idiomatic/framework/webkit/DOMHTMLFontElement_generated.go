@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -171,6 +173,7 @@ func (dfe *DOMHTMLFontElement) WithTextContent(textContent string) *DOMHTMLFontE
 
 // Color returns the color.
 func (dfe *DOMHTMLFontElement) Color() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("color"))
 	if _r == 0 {
 		return ""
@@ -180,6 +183,7 @@ func (dfe *DOMHTMLFontElement) Color() string {
 
 // Face returns the face.
 func (dfe *DOMHTMLFontElement) Face() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("face"))
 	if _r == 0 {
 		return ""
@@ -189,6 +193,7 @@ func (dfe *DOMHTMLFontElement) Face() string {
 
 // Size returns the size.
 func (dfe *DOMHTMLFontElement) Size() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("size"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,18 +49,21 @@ func databaseOperationAdopt(id objc.ID) *DatabaseOperation {
 
 // WithDatabase sets the database that the operation uses.
 func (do *DatabaseOperation) WithDatabase(database *Database) *DatabaseOperation {
+	defer runtime.KeepAlive(database)
 	objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return do
 }
 
 // WithConfiguration sets the operation’s configuration.
 func (do *DatabaseOperation) WithConfiguration(configuration *OperationConfiguration) *DatabaseOperation {
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return do
 }
 
 // WithGroup sets the operation’s group.
 func (do *DatabaseOperation) WithGroup(group *OperationGroup) *DatabaseOperation {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return do
 }
@@ -71,6 +76,7 @@ func (do *DatabaseOperation) WithLongLivedOperationWasPersistedBlock(longLivedOp
 
 // WithContainer sets the operation's container.
 func (do *DatabaseOperation) WithContainer(container *Container) *DatabaseOperation {
+	defer runtime.KeepAlive(container)
 	objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return do
 }
@@ -101,6 +107,7 @@ func (do *DatabaseOperation) WithTimeoutIntervalForResource(timeoutIntervalForRe
 
 // Database returns the database.
 func (do *DatabaseOperation) Database() *Database {
+	defer runtime.KeepAlive(do)
 	_r := objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("database"))
 	return DatabaseFromID(_r)
 }

@@ -5,6 +5,8 @@
 package classkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -66,12 +68,14 @@ func (bi *BinaryItem) WithTitle(title string) *BinaryItem {
 
 // Value reports whether true or false value.
 func (bi *BinaryItem) Value() bool {
+	defer runtime.KeepAlive(bi)
 	_r := objc.Send[bool](objref.IDOf(bi), objc.RegisterName("value"))
 	return _r
 }
 
 // ValueType returns value type of this CLSBinaryItem. The type that best describes this CLSBinaryItem value.
 func (bi *BinaryItem) ValueType() BinaryValueType {
+	defer runtime.KeepAlive(bi)
 	_r := objc.Send[BinaryValueType](objref.IDOf(bi), objc.RegisterName("valueType"))
 	return _r
 }

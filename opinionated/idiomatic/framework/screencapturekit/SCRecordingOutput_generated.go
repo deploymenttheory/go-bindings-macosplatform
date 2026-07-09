@@ -5,6 +5,8 @@
 package screencapturekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -46,22 +48,27 @@ func recordingOutputAdopt(id objc.ID) *RecordingOutput {
 
 // Description returns the object's -description text.
 func (ro *RecordingOutput) Description() string {
+	defer runtime.KeepAlive(ro)
 	return rt.Description(objref.IDOf(ro))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ro *RecordingOutput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ro)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ro), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ro *RecordingOutput) IsKind(className string) bool {
+	defer runtime.KeepAlive(ro)
 	return rt.IsKind(objref.IDOf(ro), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ro *RecordingOutput) String() string {
+	defer runtime.KeepAlive(ro)
 	return rt.Description(objref.IDOf(ro))
 }
 
@@ -73,12 +80,14 @@ func NewRecordingOutput() *RecordingOutput {
 
 // RecordedDuration indicates current duration of recording to the output file.
 func (ro *RecordingOutput) RecordedDuration() coremedia.CMTime {
+	defer runtime.KeepAlive(ro)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(ro), objc.RegisterName("recordedDuration"))
 	return _r
 }
 
 // RecordedFileSize indicates current size, in bytes, of the data recorded to the output file.
 func (ro *RecordingOutput) RecordedFileSize() int {
+	defer runtime.KeepAlive(ro)
 	_r := objc.Send[int](objref.IDOf(ro), objc.RegisterName("recordedFileSize"))
 	return _r
 }

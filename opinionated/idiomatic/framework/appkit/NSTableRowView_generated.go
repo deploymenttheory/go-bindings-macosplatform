@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -142,6 +144,7 @@ func (trv *TableRowView) WithIndentationForDropOperation(indentationForDropOpera
 
 // WithBackgroundColor sets the background color of the row.
 func (trv *TableRowView) WithBackgroundColor(backgroundColor *Color) *TableRowView {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -287,6 +290,7 @@ func (trv *TableRowView) WithWantsLayer(wantsLayer bool) *TableRowView {
 
 // WithLayer sets the layer.
 func (trv *TableRowView) WithLayer(layer obj.Object) *TableRowView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -336,6 +340,7 @@ func (trv *TableRowView) WithBackgroundFilters(items ...obj.Object) *TableRowVie
 
 // WithCompositingFilter sets the compositing filter.
 func (trv *TableRowView) WithCompositingFilter(compositingFilter obj.Object) *TableRowView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -353,6 +358,7 @@ func (trv *TableRowView) WithContentFilters(items ...obj.Object) *TableRowView {
 
 // WithShadow sets the shadow.
 func (trv *TableRowView) WithShadow(shadow *Shadow) *TableRowView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -401,6 +407,7 @@ func (trv *TableRowView) WithPreparedContentRect(preparedContentRect corefoundat
 
 // WithNextKeyView sets the next key view.
 func (trv *TableRowView) WithNextKeyView(nextKeyView ViewProvider) *TableRowView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -450,6 +457,7 @@ func (trv *TableRowView) WithPrefersCompactControlSizeMetrics(prefersCompactCont
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (trv *TableRowView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableRowView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -506,6 +514,7 @@ func (trv *TableRowView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtende
 
 // WithPressureConfiguration sets the pressure configuration.
 func (trv *TableRowView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TableRowView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -514,6 +523,7 @@ func (trv *TableRowView) WithPressureConfiguration(pressureConfiguration *Pressu
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (trv *TableRowView) WithNextResponder(nextResponder ResponderProvider) *TableRowView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -522,6 +532,7 @@ func (trv *TableRowView) WithNextResponder(nextResponder ResponderProvider) *Tab
 
 // WithMenu sets returns the responder’s menu.
 func (trv *TableRowView) WithMenu(menu *Menu) *TableRowView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -530,6 +541,7 @@ func (trv *TableRowView) WithMenu(menu *Menu) *TableRowView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (trv *TableRowView) WithUserActivity(userActivity obj.Object) *TableRowView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -538,6 +550,7 @@ func (trv *TableRowView) WithUserActivity(userActivity obj.Object) *TableRowView
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (trv *TableRowView) WithTouchBar(touchBar *TouchBar) *TableRowView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -546,6 +559,7 @@ func (trv *TableRowView) WithTouchBar(touchBar *TouchBar) *TableRowView {
 
 // DrawBackgroundInRect draws the background of the row in the rectangle.
 func (trv *TableRowView) DrawBackgroundInRect(dirtyRect corefoundation.CGRect) {
+	defer runtime.KeepAlive(trv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("drawBackgroundInRect:"), dirtyRect)
 	})
@@ -554,6 +568,7 @@ func (trv *TableRowView) DrawBackgroundInRect(dirtyRect corefoundation.CGRect) {
 
 // DrawSelectionInRect draws the selected row.
 func (trv *TableRowView) DrawSelectionInRect(dirtyRect corefoundation.CGRect) {
+	defer runtime.KeepAlive(trv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("drawSelectionInRect:"), dirtyRect)
 	})
@@ -562,6 +577,7 @@ func (trv *TableRowView) DrawSelectionInRect(dirtyRect corefoundation.CGRect) {
 
 // DrawSeparatorInRect draws the horizontal separator between table rows.
 func (trv *TableRowView) DrawSeparatorInRect(dirtyRect corefoundation.CGRect) {
+	defer runtime.KeepAlive(trv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("drawSeparatorInRect:"), dirtyRect)
 	})
@@ -570,6 +586,7 @@ func (trv *TableRowView) DrawSeparatorInRect(dirtyRect corefoundation.CGRect) {
 
 // DrawDraggingDestinationFeedbackInRect draws the row’s dragging destination feedback when the entire row is a drop target.
 func (trv *TableRowView) DrawDraggingDestinationFeedbackInRect(dirtyRect corefoundation.CGRect) {
+	defer runtime.KeepAlive(trv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("drawDraggingDestinationFeedbackInRect:"), dirtyRect)
 	})
@@ -578,6 +595,7 @@ func (trv *TableRowView) DrawDraggingDestinationFeedbackInRect(dirtyRect corefou
 
 // ViewAtColumn provides access to the given view at a particular column.
 func (trv *TableRowView) ViewAtColumn(column int) obj.Object {
+	defer runtime.KeepAlive(trv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -591,6 +609,7 @@ func (trv *TableRowView) ViewAtColumn(column int) obj.Object {
 
 // SelectionHighlightStyle returns the selection highlight style.
 func (trv *TableRowView) SelectionHighlightStyle() TableViewSelectionHighlightStyle {
+	defer runtime.KeepAlive(trv)
 	var _mainthread0 TableViewSelectionHighlightStyle
 	purego.Main(func() {
 		_mainthread0 = func() TableViewSelectionHighlightStyle {
@@ -604,6 +623,7 @@ func (trv *TableRowView) SelectionHighlightStyle() TableViewSelectionHighlightSt
 
 // IsEmphasized reports whether the object is emphasized.
 func (trv *TableRowView) IsEmphasized() bool {
+	defer runtime.KeepAlive(trv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -617,6 +637,7 @@ func (trv *TableRowView) IsEmphasized() bool {
 
 // IsGroupRowStyle reports whether the object is group row style.
 func (trv *TableRowView) IsGroupRowStyle() bool {
+	defer runtime.KeepAlive(trv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -630,6 +651,7 @@ func (trv *TableRowView) IsGroupRowStyle() bool {
 
 // IsSelected reports whether the object is selected.
 func (trv *TableRowView) IsSelected() bool {
+	defer runtime.KeepAlive(trv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -643,6 +665,7 @@ func (trv *TableRowView) IsSelected() bool {
 
 // IsPreviousRowSelected reports whether the object is previous row selected.
 func (trv *TableRowView) IsPreviousRowSelected() bool {
+	defer runtime.KeepAlive(trv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -656,6 +679,7 @@ func (trv *TableRowView) IsPreviousRowSelected() bool {
 
 // IsNextRowSelected reports whether the object is next row selected.
 func (trv *TableRowView) IsNextRowSelected() bool {
+	defer runtime.KeepAlive(trv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -669,6 +693,7 @@ func (trv *TableRowView) IsNextRowSelected() bool {
 
 // IsFloating reports whether the object is floating.
 func (trv *TableRowView) IsFloating() bool {
+	defer runtime.KeepAlive(trv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -682,6 +707,7 @@ func (trv *TableRowView) IsFloating() bool {
 
 // IsTargetForDropOperation reports whether the object is target for drop operation.
 func (trv *TableRowView) IsTargetForDropOperation() bool {
+	defer runtime.KeepAlive(trv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -695,6 +721,7 @@ func (trv *TableRowView) IsTargetForDropOperation() bool {
 
 // DraggingDestinationFeedbackStyle returns the dragging destination feedback style.
 func (trv *TableRowView) DraggingDestinationFeedbackStyle() TableViewDraggingDestinationFeedbackStyle {
+	defer runtime.KeepAlive(trv)
 	var _mainthread0 TableViewDraggingDestinationFeedbackStyle
 	purego.Main(func() {
 		_mainthread0 = func() TableViewDraggingDestinationFeedbackStyle {
@@ -708,6 +735,7 @@ func (trv *TableRowView) DraggingDestinationFeedbackStyle() TableViewDraggingDes
 
 // IndentationForDropOperation returns the indentation for drop operation.
 func (trv *TableRowView) IndentationForDropOperation() float64 {
+	defer runtime.KeepAlive(trv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -721,6 +749,7 @@ func (trv *TableRowView) IndentationForDropOperation() float64 {
 
 // InteriorBackgroundStyle returns the interior background style.
 func (trv *TableRowView) InteriorBackgroundStyle() BackgroundStyle {
+	defer runtime.KeepAlive(trv)
 	var _mainthread0 BackgroundStyle
 	purego.Main(func() {
 		_mainthread0 = func() BackgroundStyle {
@@ -734,6 +763,7 @@ func (trv *TableRowView) InteriorBackgroundStyle() BackgroundStyle {
 
 // BackgroundColor returns the background color.
 func (trv *TableRowView) BackgroundColor() *Color {
+	defer runtime.KeepAlive(trv)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -747,6 +777,7 @@ func (trv *TableRowView) BackgroundColor() *Color {
 
 // NumberOfColumns returns the number of columns.
 func (trv *TableRowView) NumberOfColumns() int {
+	defer runtime.KeepAlive(trv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {

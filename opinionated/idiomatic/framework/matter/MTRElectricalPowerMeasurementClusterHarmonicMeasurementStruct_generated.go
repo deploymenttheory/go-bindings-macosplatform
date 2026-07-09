@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRElectricalPowerMeasurementClusterHarmonicMeasurementStructAdopt(id objc.
 
 // Description returns the object's -description text.
 func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) Description() string {
+	defer runtime.KeepAlive(mepmchms)
 	return rt.Description(objref.IDOf(mepmchms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mepmchms)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mepmchms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mepmchms)
 	return rt.IsKind(objref.IDOf(mepmchms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) String() string {
+	defer runtime.KeepAlive(mepmchms)
 	return rt.Description(objref.IDOf(mepmchms))
 }
 
@@ -72,24 +80,28 @@ func NewMTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct() *MTRElec
 
 // WithOrder sets the order.
 func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) WithOrder(order obj.Object) *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct {
+	defer runtime.KeepAlive(order)
 	objc.Send[objc.ID](objref.IDOf(mepmchms), objc.RegisterName("setOrder:"), objref.IDOf(order))
 	return mepmchms
 }
 
 // WithMeasurement sets the measurement.
 func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) WithMeasurement(measurement obj.Object) *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct {
+	defer runtime.KeepAlive(measurement)
 	objc.Send[objc.ID](objref.IDOf(mepmchms), objc.RegisterName("setMeasurement:"), objref.IDOf(measurement))
 	return mepmchms
 }
 
 // Order returns the order.
-func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) Order() obj.Object {
+func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) Order() *foundation.Number {
+	defer runtime.KeepAlive(mepmchms)
 	_r := objc.Send[objc.ID](objref.IDOf(mepmchms), objc.RegisterName("order"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Measurement returns the measurement.
-func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) Measurement() obj.Object {
+func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) Measurement() *foundation.Number {
+	defer runtime.KeepAlive(mepmchms)
 	_r := objc.Send[objc.ID](objref.IDOf(mepmchms), objc.RegisterName("measurement"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

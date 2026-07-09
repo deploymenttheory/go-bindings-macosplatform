@@ -5,6 +5,8 @@
 package devicediscoveryextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func dDDiscoverySessionAdopt(id objc.ID) *DDDiscoverySession {
 
 // Description returns the object's -description text.
 func (dds *DDDiscoverySession) Description() string {
+	defer runtime.KeepAlive(dds)
 	return rt.Description(objref.IDOf(dds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dds *DDDiscoverySession) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dds)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dds *DDDiscoverySession) IsKind(className string) bool {
+	defer runtime.KeepAlive(dds)
 	return rt.IsKind(objref.IDOf(dds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dds *DDDiscoverySession) String() string {
+	defer runtime.KeepAlive(dds)
 	return rt.Description(objref.IDOf(dds))
 }
 
@@ -74,5 +81,7 @@ func NewDDDiscoverySession() *DDDiscoverySession {
 
 // ReportEvent reports an event to the system.
 func (dds *DDDiscoverySession) ReportEvent(inEvent *DDDeviceEvent) {
+	defer runtime.KeepAlive(dds)
+	defer runtime.KeepAlive(inEvent)
 	objc.Send[objc.ID](objref.IDOf(dds), objc.RegisterName("reportEvent:"), objref.IDOf(inEvent))
 }

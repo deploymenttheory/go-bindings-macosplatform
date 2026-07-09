@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDataTypeAtomicAttributeStatusStructAdopt(id objc.ID) *MTRDataTypeAtomicA
 
 // Description returns the object's -description text.
 func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) Description() string {
+	defer runtime.KeepAlive(mdtaass)
 	return rt.Description(objref.IDOf(mdtaass))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdtaass)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdtaass), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdtaass)
 	return rt.IsKind(objref.IDOf(mdtaass), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) String() string {
+	defer runtime.KeepAlive(mdtaass)
 	return rt.Description(objref.IDOf(mdtaass))
 }
 
@@ -72,24 +80,28 @@ func NewMTRDataTypeAtomicAttributeStatusStruct() *MTRDataTypeAtomicAttributeStat
 
 // WithAttributeID sets the attribute ID.
 func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) WithAttributeID(attributeID obj.Object) *MTRDataTypeAtomicAttributeStatusStruct {
+	defer runtime.KeepAlive(attributeID)
 	objc.Send[objc.ID](objref.IDOf(mdtaass), objc.RegisterName("setAttributeID:"), objref.IDOf(attributeID))
 	return mdtaass
 }
 
 // WithStatusCode sets the status code.
 func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) WithStatusCode(statusCode obj.Object) *MTRDataTypeAtomicAttributeStatusStruct {
+	defer runtime.KeepAlive(statusCode)
 	objc.Send[objc.ID](objref.IDOf(mdtaass), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
 	return mdtaass
 }
 
 // AttributeID returns the attribute ID.
-func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) AttributeID() obj.Object {
+func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) AttributeID() *foundation.Number {
+	defer runtime.KeepAlive(mdtaass)
 	_r := objc.Send[objc.ID](objref.IDOf(mdtaass), objc.RegisterName("attributeID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StatusCode returns the status code.
-func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) StatusCode() obj.Object {
+func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) StatusCode() *foundation.Number {
+	defer runtime.KeepAlive(mdtaass)
 	_r := objc.Send[objc.ID](objref.IDOf(mdtaass), objc.RegisterName("statusCode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

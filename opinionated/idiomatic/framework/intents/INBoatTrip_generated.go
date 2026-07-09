@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,35 @@ func boatTripAdopt(id objc.ID) *BoatTrip {
 
 // Description returns the object's -description text.
 func (bt *BoatTrip) Description() string {
+	defer runtime.KeepAlive(bt)
 	return rt.Description(objref.IDOf(bt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bt *BoatTrip) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bt *BoatTrip) IsKind(className string) bool {
+	defer runtime.KeepAlive(bt)
 	return rt.IsKind(objref.IDOf(bt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bt *BoatTrip) String() string {
+	defer runtime.KeepAlive(bt)
 	return rt.Description(objref.IDOf(bt))
 }
 
 // NewBoatTripWithProviderBoatNameBoatNumberTripDurationDepartureBoatTerminalLocationArrivalBoatTerminalLocation creates a boat trip with the specified contents and attributes.
 func NewBoatTripWithProviderBoatNameBoatNumberTripDurationDepartureBoatTerminalLocationArrivalBoatTerminalLocation(provider string, boatName string, boatNumber string, tripDuration *DateComponentsRange, departureBoatTerminalLocation obj.Object, arrivalBoatTerminalLocation obj.Object) *BoatTrip {
+	defer runtime.KeepAlive(tripDuration)
+	defer runtime.KeepAlive(departureBoatTerminalLocation)
+	defer runtime.KeepAlive(arrivalBoatTerminalLocation)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INBoatTrip")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvider:boatName:boatNumber:tripDuration:departureBoatTerminalLocation:arrivalBoatTerminalLocation:"), purego.NSString(provider), purego.NSString(boatName), purego.NSString(boatNumber), objref.IDOf(tripDuration), objref.IDOf(departureBoatTerminalLocation), objref.IDOf(arrivalBoatTerminalLocation))
 	return boatTripAdopt(_id)
@@ -75,6 +85,7 @@ func NewBoatTripWithProviderBoatNameBoatNumberTripDurationDepartureBoatTerminalL
 
 // Provider returns the provider.
 func (bt *BoatTrip) Provider() string {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("provider"))
 	if _r == 0 {
 		return ""
@@ -84,6 +95,7 @@ func (bt *BoatTrip) Provider() string {
 
 // BoatName returns the boat name.
 func (bt *BoatTrip) BoatName() string {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("boatName"))
 	if _r == 0 {
 		return ""
@@ -93,6 +105,7 @@ func (bt *BoatTrip) BoatName() string {
 
 // BoatNumber returns the boat number.
 func (bt *BoatTrip) BoatNumber() string {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("boatNumber"))
 	if _r == 0 {
 		return ""
@@ -102,18 +115,21 @@ func (bt *BoatTrip) BoatNumber() string {
 
 // TripDuration returns the trip duration.
 func (bt *BoatTrip) TripDuration() *DateComponentsRange {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("tripDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
 // DepartureBoatTerminalLocation returns the departure boat terminal location.
 func (bt *BoatTrip) DepartureBoatTerminalLocation() obj.Object {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("departureBoatTerminalLocation"))
 	return obj.Wrap(_r)
 }
 
 // ArrivalBoatTerminalLocation returns the arrival boat terminal location.
 func (bt *BoatTrip) ArrivalBoatTerminalLocation() obj.Object {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("arrivalBoatTerminalLocation"))
 	return obj.Wrap(_r)
 }

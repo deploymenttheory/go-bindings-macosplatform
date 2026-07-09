@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,12 +53,14 @@ func NewDOMCSSRuleList() *DOMCSSRuleList {
 
 // Item wraps the corresponding Objective-C method.
 func (drl *DOMCSSRuleList) Item(index int) *DOMCSSRule {
+	defer runtime.KeepAlive(drl)
 	_r := objc.Send[objc.ID](objref.IDOf(drl), objc.RegisterName("item:"), index)
 	return DOMCSSRuleFromID(_r)
 }
 
 // Length returns the length.
 func (drl *DOMCSSRuleList) Length() int {
+	defer runtime.KeepAlive(drl)
 	_r := objc.Send[int](objref.IDOf(drl), objc.RegisterName("length"))
 	return _r
 }

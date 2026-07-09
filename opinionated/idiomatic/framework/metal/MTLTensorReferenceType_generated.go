@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,24 +55,28 @@ func NewTensorReferenceType() *TensorReferenceType {
 
 // TensorDataType returns the underlying data format of the tensor.
 func (trt *TensorReferenceType) TensorDataType() TensorDataType {
+	defer runtime.KeepAlive(trt)
 	_r := objc.Send[TensorDataType](objref.IDOf(trt), objc.RegisterName("tensorDataType"))
 	return _r
 }
 
 // IndexType returns the data format you use for indexing into the tensor.
 func (trt *TensorReferenceType) IndexType() DataType {
+	defer runtime.KeepAlive(trt)
 	_r := objc.Send[DataType](objref.IDOf(trt), objc.RegisterName("indexType"))
 	return _r
 }
 
 // Dimensions returns the array of sizes, in elements, one for each dimension of this tensor. Because shader-bound tensors have dynamic extents, the “MTLTensorExtents/rank“ of `dimensions` corresponds to the rank the shader function specifies, and “MTLTensorExtents/extentsAtDimensionIndex:“ always returns a value of -1.
 func (trt *TensorReferenceType) Dimensions() *TensorExtents {
+	defer runtime.KeepAlive(trt)
 	_r := objc.Send[objc.ID](objref.IDOf(trt), objc.RegisterName("dimensions"))
 	return TensorExtentsFromID(_r)
 }
 
 // Access returns a value that represents the read/write permissions of the tensor.
 func (trt *TensorReferenceType) Access() BindingAccess {
+	defer runtime.KeepAlive(trt)
 	_r := objc.Send[BindingAccess](objref.IDOf(trt), objc.RegisterName("access"))
 	return _r
 }

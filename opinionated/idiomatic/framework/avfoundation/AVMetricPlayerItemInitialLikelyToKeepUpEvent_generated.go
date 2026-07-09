@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -55,6 +57,7 @@ func NewMetricPlayerItemInitialLikelyToKeepUpEvent() *MetricPlayerItemInitialLik
 //
 // PlaylistRequestEvents returns the collection as a Go slice.
 func (mpiiltkue *MetricPlayerItemInitialLikelyToKeepUpEvent) PlaylistRequestEvents() []*MetricHLSPlaylistRequestEvent {
+	defer runtime.KeepAlive(mpiiltkue)
 	_arr := objc.Send[objc.ID](objref.IDOf(mpiiltkue), objc.RegisterName("playlistRequestEvents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetricHLSPlaylistRequestEvent { return MetricHLSPlaylistRequestEventFromID(_id) })
 }
@@ -63,6 +66,7 @@ func (mpiiltkue *MetricPlayerItemInitialLikelyToKeepUpEvent) PlaylistRequestEven
 //
 // MediaSegmentRequestEvents returns the collection as a Go slice.
 func (mpiiltkue *MetricPlayerItemInitialLikelyToKeepUpEvent) MediaSegmentRequestEvents() []*MetricHLSMediaSegmentRequestEvent {
+	defer runtime.KeepAlive(mpiiltkue)
 	_arr := objc.Send[objc.ID](objref.IDOf(mpiiltkue), objc.RegisterName("mediaSegmentRequestEvents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetricHLSMediaSegmentRequestEvent {
 		return MetricHLSMediaSegmentRequestEventFromID(_id)
@@ -73,6 +77,7 @@ func (mpiiltkue *MetricPlayerItemInitialLikelyToKeepUpEvent) MediaSegmentRequest
 //
 // ContentKeyRequestEvents returns the collection as a Go slice.
 func (mpiiltkue *MetricPlayerItemInitialLikelyToKeepUpEvent) ContentKeyRequestEvents() []*MetricContentKeyRequestEvent {
+	defer runtime.KeepAlive(mpiiltkue)
 	_arr := objc.Send[objc.ID](objref.IDOf(mpiiltkue), objc.RegisterName("contentKeyRequestEvents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetricContentKeyRequestEvent { return MetricContentKeyRequestEventFromID(_id) })
 }

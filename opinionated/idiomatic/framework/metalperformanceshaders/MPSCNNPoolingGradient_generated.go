@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -145,6 +147,7 @@ func (cpg *CNNPoolingGradient) WithLabel(label string) *CNNPoolingGradient {
 
 // SourceSize returns an optional source size which defines together with primaryOffset, the set of input gradient pixels to take into account in the gradient computations. A MTLSize that together with primaryOffset indicates which part of the source gradient to consider. If the area does not lie completely within the primary source image, the intersection between source area rectangle and primary source bounds is used. Default: A size where every component is NSUIntegerMax indicating the entire rest of the image, starting from an offset (see primaryOffset).
 func (cpg *CNNPoolingGradient) SourceSize() metal.MTLSize {
+	defer runtime.KeepAlive(cpg)
 	_r := objc.Send[metal.MTLSize](objref.IDOf(cpg), objc.RegisterName("sourceSize"))
 	return _r
 }

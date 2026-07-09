@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func wKUserContentControllerAdopt(id objc.ID) *WKUserContentController {
 
 // Description returns the object's -description text.
 func (wucc *WKUserContentController) Description() string {
+	defer runtime.KeepAlive(wucc)
 	return rt.Description(objref.IDOf(wucc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wucc *WKUserContentController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wucc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wucc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wucc *WKUserContentController) IsKind(className string) bool {
+	defer runtime.KeepAlive(wucc)
 	return rt.IsKind(objref.IDOf(wucc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wucc *WKUserContentController) String() string {
+	defer runtime.KeepAlive(wucc)
 	return rt.Description(objref.IDOf(wucc))
 }
 
@@ -80,6 +87,8 @@ func NewWKUserContentController() *WKUserContentController {
 
 // AddUserScript injects the specified script into the webpage’s content.
 func (wucc *WKUserContentController) AddUserScript(userScript *WKUserScript) {
+	defer runtime.KeepAlive(wucc)
+	defer runtime.KeepAlive(userScript)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("addUserScript:"), objref.IDOf(userScript))
 	})
@@ -88,6 +97,7 @@ func (wucc *WKUserContentController) AddUserScript(userScript *WKUserScript) {
 
 // RemoveAllUserScripts removes all user scripts from the web view.
 func (wucc *WKUserContentController) RemoveAllUserScripts() {
+	defer runtime.KeepAlive(wucc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeAllUserScripts"))
 	})
@@ -96,6 +106,8 @@ func (wucc *WKUserContentController) RemoveAllUserScripts() {
 
 // RemoveScriptMessageHandlerForNameContentWorld uninstalls a custom message handler from the specified content world in your JavaScript code.
 func (wucc *WKUserContentController) RemoveScriptMessageHandlerForNameContentWorld(name string, contentWorld *WKContentWorld) {
+	defer runtime.KeepAlive(wucc)
+	defer runtime.KeepAlive(contentWorld)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeScriptMessageHandlerForName:contentWorld:"), purego.NSString(name), objref.IDOf(contentWorld))
 	})
@@ -104,6 +116,7 @@ func (wucc *WKUserContentController) RemoveScriptMessageHandlerForNameContentWor
 
 // RemoveScriptMessageHandlerForName uninstalls the custom message handler with the specified name from your JavaScript code.
 func (wucc *WKUserContentController) RemoveScriptMessageHandlerForName(name string) {
+	defer runtime.KeepAlive(wucc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeScriptMessageHandlerForName:"), purego.NSString(name))
 	})
@@ -112,6 +125,8 @@ func (wucc *WKUserContentController) RemoveScriptMessageHandlerForName(name stri
 
 // RemoveAllScriptMessageHandlersFromContentWorld uninstalls all custom message handlers from the specified content world in your JavaScript code.
 func (wucc *WKUserContentController) RemoveAllScriptMessageHandlersFromContentWorld(contentWorld *WKContentWorld) {
+	defer runtime.KeepAlive(wucc)
+	defer runtime.KeepAlive(contentWorld)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeAllScriptMessageHandlersFromContentWorld:"), objref.IDOf(contentWorld))
 	})
@@ -120,6 +135,7 @@ func (wucc *WKUserContentController) RemoveAllScriptMessageHandlersFromContentWo
 
 // RemoveAllScriptMessageHandlers uninstalls all custom message handlers associated with the user content controller.
 func (wucc *WKUserContentController) RemoveAllScriptMessageHandlers() {
+	defer runtime.KeepAlive(wucc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeAllScriptMessageHandlers"))
 	})
@@ -128,6 +144,8 @@ func (wucc *WKUserContentController) RemoveAllScriptMessageHandlers() {
 
 // AddContentRuleList adds the specified content rule list to the content controller object.
 func (wucc *WKUserContentController) AddContentRuleList(contentRuleList *WKContentRuleList) {
+	defer runtime.KeepAlive(wucc)
+	defer runtime.KeepAlive(contentRuleList)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("addContentRuleList:"), objref.IDOf(contentRuleList))
 	})
@@ -136,6 +154,8 @@ func (wucc *WKUserContentController) AddContentRuleList(contentRuleList *WKConte
 
 // RemoveContentRuleList removes the specified rule list from the content controller object.
 func (wucc *WKUserContentController) RemoveContentRuleList(contentRuleList *WKContentRuleList) {
+	defer runtime.KeepAlive(wucc)
+	defer runtime.KeepAlive(contentRuleList)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeContentRuleList:"), objref.IDOf(contentRuleList))
 	})
@@ -144,6 +164,7 @@ func (wucc *WKUserContentController) RemoveContentRuleList(contentRuleList *WKCo
 
 // RemoveAllContentRuleLists removes all rules lists from the content controller.
 func (wucc *WKUserContentController) RemoveAllContentRuleLists() {
+	defer runtime.KeepAlive(wucc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeAllContentRuleLists"))
 	})
@@ -154,6 +175,7 @@ func (wucc *WKUserContentController) RemoveAllContentRuleLists() {
 //
 // UserScripts returns the collection as a Go slice.
 func (wucc *WKUserContentController) UserScripts() []*WKUserScript {
+	defer runtime.KeepAlive(wucc)
 	var _mainthread0 []*WKUserScript
 	purego.Main(func() {
 		_mainthread0 = func() []*WKUserScript {

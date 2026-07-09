@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,24 +61,28 @@ func (mc *MatrixCopy) WithLabel(label string) *MatrixCopy {
 
 // CopyRows returns the number of rows to copy for each copy operation
 func (mc *MatrixCopy) CopyRows() int {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[int](objref.IDOf(mc), objc.RegisterName("copyRows"))
 	return _r
 }
 
 // CopyColumns returns the number of columns to copy for each copy operation
 func (mc *MatrixCopy) CopyColumns() int {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[int](objref.IDOf(mc), objc.RegisterName("copyColumns"))
 	return _r
 }
 
 // SourcesAreTransposed reports whether if true, the sources are in row major storage order
 func (mc *MatrixCopy) SourcesAreTransposed() bool {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[bool](objref.IDOf(mc), objc.RegisterName("sourcesAreTransposed"))
 	return _r
 }
 
 // DestinationsAreTransposed reports whether if true, the destinations are in row major storage order
 func (mc *MatrixCopy) DestinationsAreTransposed() bool {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[bool](objref.IDOf(mc), objc.RegisterName("destinationsAreTransposed"))
 	return _r
 }

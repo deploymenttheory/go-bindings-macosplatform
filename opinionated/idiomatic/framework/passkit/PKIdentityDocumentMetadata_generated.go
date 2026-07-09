@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func identityDocumentMetadataAdopt(id objc.ID) *IdentityDocumentMetadata {
 
 // Description returns the object's -description text.
 func (idm *IdentityDocumentMetadata) Description() string {
+	defer runtime.KeepAlive(idm)
 	return rt.Description(objref.IDOf(idm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (idm *IdentityDocumentMetadata) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(idm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(idm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (idm *IdentityDocumentMetadata) IsKind(className string) bool {
+	defer runtime.KeepAlive(idm)
 	return rt.IsKind(objref.IDOf(idm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (idm *IdentityDocumentMetadata) String() string {
+	defer runtime.KeepAlive(idm)
 	return rt.Description(objref.IDOf(idm))
 }
 
@@ -76,6 +83,7 @@ func (idm *IdentityDocumentMetadata) WithServerEnvironmentIdentifier(serverEnvir
 
 // CredentialIdentifier returns credentialIdentifier: A unique identifier for provisioning credential data.
 func (idm *IdentityDocumentMetadata) CredentialIdentifier() string {
+	defer runtime.KeepAlive(idm)
 	_r := objc.Send[objc.ID](objref.IDOf(idm), objc.RegisterName("credentialIdentifier"))
 	if _r == 0 {
 		return ""
@@ -85,6 +93,7 @@ func (idm *IdentityDocumentMetadata) CredentialIdentifier() string {
 
 // SharingInstanceIdentifier returns sharingInstanceIdentifier: A unique identifier that refers to an instance of sharing of credentials to a user's device initiated from another user, device, or web.
 func (idm *IdentityDocumentMetadata) SharingInstanceIdentifier() string {
+	defer runtime.KeepAlive(idm)
 	_r := objc.Send[objc.ID](objref.IDOf(idm), objc.RegisterName("sharingInstanceIdentifier"))
 	if _r == 0 {
 		return ""
@@ -94,6 +103,7 @@ func (idm *IdentityDocumentMetadata) SharingInstanceIdentifier() string {
 
 // CardTemplateIdentifier returns cardTemplateIdentifier: Identifier referencing a card template registered by developers in web portal - identifies a combination of cardProfileIdentifier, cardConfigurationIdentifier, and cardArtBundleName. Returns empty string if no identifier is set.
 func (idm *IdentityDocumentMetadata) CardTemplateIdentifier() string {
+	defer runtime.KeepAlive(idm)
 	_r := objc.Send[objc.ID](objref.IDOf(idm), objc.RegisterName("cardTemplateIdentifier"))
 	if _r == 0 {
 		return ""
@@ -103,6 +113,7 @@ func (idm *IdentityDocumentMetadata) CardTemplateIdentifier() string {
 
 // CardConfigurationIdentifier returns cardConfigurationIdentifier: Identifier referencing a card configuration registered by developers. Returns empty string if no identifier is set.
 func (idm *IdentityDocumentMetadata) CardConfigurationIdentifier() string {
+	defer runtime.KeepAlive(idm)
 	_r := objc.Send[objc.ID](objref.IDOf(idm), objc.RegisterName("cardConfigurationIdentifier"))
 	if _r == 0 {
 		return ""
@@ -112,6 +123,7 @@ func (idm *IdentityDocumentMetadata) CardConfigurationIdentifier() string {
 
 // ServerEnvironmentIdentifier returns serverEnvironmentIdentifier: Identifier referencing the target server environment Apple Pay servers should reach out to to provision this pass. If not present, the default Apply Pay server environment will be used and an empty string will be returned.
 func (idm *IdentityDocumentMetadata) ServerEnvironmentIdentifier() string {
+	defer runtime.KeepAlive(idm)
 	_r := objc.Send[objc.ID](objref.IDOf(idm), objc.RegisterName("serverEnvironmentIdentifier"))
 	if _r == 0 {
 		return ""
@@ -121,6 +133,7 @@ func (idm *IdentityDocumentMetadata) ServerEnvironmentIdentifier() string {
 
 // IssuingCountryCode returns issuingCountryCode: identifies the issuing country of the identity document
 func (idm *IdentityDocumentMetadata) IssuingCountryCode() string {
+	defer runtime.KeepAlive(idm)
 	_r := objc.Send[objc.ID](objref.IDOf(idm), objc.RegisterName("issuingCountryCode"))
 	if _r == 0 {
 		return ""
@@ -130,6 +143,7 @@ func (idm *IdentityDocumentMetadata) IssuingCountryCode() string {
 
 // DocumentType returns identityDocumentType: identifies the type of the identity document
 func (idm *IdentityDocumentMetadata) DocumentType() AddIdentityDocumentType {
+	defer runtime.KeepAlive(idm)
 	_r := objc.Send[AddIdentityDocumentType](objref.IDOf(idm), objc.RegisterName("documentType"))
 	return _r
 }

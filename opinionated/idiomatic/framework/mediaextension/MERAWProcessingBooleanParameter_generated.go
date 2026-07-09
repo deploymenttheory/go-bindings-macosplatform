@@ -5,6 +5,7 @@
 package mediaextension
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -93,6 +94,7 @@ func (rpbp *RAWProcessingBooleanParameter) WithEnabled(enabled bool) *RAWProcess
 
 // HasNeutralValue return value indicates whether the MERAWProcessingBooleanParameter has an optional declared Neutral value. If the return value is YES and outNeutralValue is not nil, the value held by outNeutralValue will be set to the neutral value. If the return value is NO and outNeutralValue is not nil, the value held by outNeutralValue will be set to NO.
 func (rpbp *RAWProcessingBooleanParameter) HasNeutralValue() (ok bool, outNeutralValue bool) {
+	defer runtime.KeepAlive(rpbp)
 	var _out0 bool
 	_r := objc.Send[bool](objref.IDOf(rpbp), objc.RegisterName("hasNeutralValue:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -100,6 +102,7 @@ func (rpbp *RAWProcessingBooleanParameter) HasNeutralValue() (ok bool, outNeutra
 
 // HasCameraValue return value indicates whether the MERAWProcessingBooleanParameter has an optional declared Camera value. If the return value is YES and outCameraValue is not nil, the value held by outCameraValue will be set to the camera value. If the return value is NO and outCameraValue is not nil, the value held by outCameraValue will be set to NO.
 func (rpbp *RAWProcessingBooleanParameter) HasCameraValue() (ok bool, outCameraValue bool) {
+	defer runtime.KeepAlive(rpbp)
 	var _out0 bool
 	_r := objc.Send[bool](objref.IDOf(rpbp), objc.RegisterName("hasCameraValue:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -107,6 +110,7 @@ func (rpbp *RAWProcessingBooleanParameter) HasCameraValue() (ok bool, outCameraV
 
 // CurrentValue reports whether get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
 func (rpbp *RAWProcessingBooleanParameter) CurrentValue() bool {
+	defer runtime.KeepAlive(rpbp)
 	_r := objc.Send[bool](objref.IDOf(rpbp), objc.RegisterName("currentValue"))
 	return _r
 }

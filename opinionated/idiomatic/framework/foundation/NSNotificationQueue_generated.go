@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,27 +50,33 @@ func notificationQueueAdopt(id objc.ID) *NotificationQueue {
 
 // Description returns the object's -description text.
 func (nq *NotificationQueue) Description() string {
+	defer runtime.KeepAlive(nq)
 	return rt.Description(objref.IDOf(nq))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nq *NotificationQueue) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nq)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nq), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nq *NotificationQueue) IsKind(className string) bool {
+	defer runtime.KeepAlive(nq)
 	return rt.IsKind(objref.IDOf(nq), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nq *NotificationQueue) String() string {
+	defer runtime.KeepAlive(nq)
 	return rt.Description(objref.IDOf(nq))
 }
 
 // NewNotificationQueueWithNotificationCenter creates a new NotificationQueue.
 func NewNotificationQueueWithNotificationCenter(notificationCenter *NotificationCenter) *NotificationQueue {
+	defer runtime.KeepAlive(notificationCenter)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNotificationQueue")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNotificationCenter:"), objref.IDOf(notificationCenter))
 	return notificationQueueAdopt(_id)
@@ -82,22 +89,28 @@ func (nq *NotificationQueue) WithObservationInfo(observationInfo unsafe.Pointer)
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (nq *NotificationQueue) WithScriptingProperties(scriptingProperties obj.Object) *NotificationQueue {
-	objc.Send[objc.ID](objref.IDOf(nq), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (nq *NotificationQueue) WithScriptingProperties(scriptingProperties map[string]obj.Object) *NotificationQueue {
+	objc.Send[objc.ID](objref.IDOf(nq), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nq
 }
 
 // EnqueueNotificationPostingStyle wraps the corresponding Objective-C method.
 func (nq *NotificationQueue) EnqueueNotificationPostingStyle(notification *Notification, postingStyle PostingStyle) {
+	defer runtime.KeepAlive(nq)
+	defer runtime.KeepAlive(notification)
 	objc.Send[objc.ID](objref.IDOf(nq), objc.RegisterName("enqueueNotification:postingStyle:"), objref.IDOf(notification), postingStyle)
 }
 
 // EnqueueNotificationPostingStyleCoalesceMaskForModes wraps the corresponding Objective-C method.
 func (nq *NotificationQueue) EnqueueNotificationPostingStyleCoalesceMaskForModes(notification *Notification, postingStyle PostingStyle, coalesceMask NotificationCoalescing, modes []*String) {
+	defer runtime.KeepAlive(nq)
+	defer runtime.KeepAlive(notification)
 	objc.Send[objc.ID](objref.IDOf(nq), objc.RegisterName("enqueueNotification:postingStyle:coalesceMask:forModes:"), objref.IDOf(notification), postingStyle, coalesceMask, purego.SliceToNSArray(modes, func(_v *String) objc.ID { return objref.IDOf(_v) }))
 }
 
 // DequeueNotificationsMatchingCoalesceMask wraps the corresponding Objective-C method.
 func (nq *NotificationQueue) DequeueNotificationsMatchingCoalesceMask(notification *Notification, coalesceMask int) {
+	defer runtime.KeepAlive(nq)
+	defer runtime.KeepAlive(notification)
 	objc.Send[objc.ID](objref.IDOf(nq), objc.RegisterName("dequeueNotificationsMatching:coalesceMask:"), objref.IDOf(notification), coalesceMask)
 }

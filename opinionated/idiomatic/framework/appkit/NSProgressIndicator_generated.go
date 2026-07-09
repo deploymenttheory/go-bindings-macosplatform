@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -102,6 +104,7 @@ func (pi *ProgressIndicator) WithMaxValue(maxValue float64) *ProgressIndicator {
 
 // WithObservedProgress sets the progress object to use for updating the progress view.
 func (pi *ProgressIndicator) WithObservedProgress(observedProgress obj.Object) *ProgressIndicator {
+	defer runtime.KeepAlive(observedProgress)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setObservedProgress:"), objref.IDOf(observedProgress))
 	})
@@ -287,6 +290,7 @@ func (pi *ProgressIndicator) WithWantsLayer(wantsLayer bool) *ProgressIndicator 
 
 // WithLayer sets the layer.
 func (pi *ProgressIndicator) WithLayer(layer obj.Object) *ProgressIndicator {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -336,6 +340,7 @@ func (pi *ProgressIndicator) WithBackgroundFilters(items ...obj.Object) *Progres
 
 // WithCompositingFilter sets the compositing filter.
 func (pi *ProgressIndicator) WithCompositingFilter(compositingFilter obj.Object) *ProgressIndicator {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -353,6 +358,7 @@ func (pi *ProgressIndicator) WithContentFilters(items ...obj.Object) *ProgressIn
 
 // WithShadow sets the shadow.
 func (pi *ProgressIndicator) WithShadow(shadow *Shadow) *ProgressIndicator {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -401,6 +407,7 @@ func (pi *ProgressIndicator) WithPreparedContentRect(preparedContentRect corefou
 
 // WithNextKeyView sets the next key view.
 func (pi *ProgressIndicator) WithNextKeyView(nextKeyView ViewProvider) *ProgressIndicator {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -450,6 +457,7 @@ func (pi *ProgressIndicator) WithPrefersCompactControlSizeMetrics(prefersCompact
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (pi *ProgressIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ProgressIndicator {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -506,6 +514,7 @@ func (pi *ProgressIndicator) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExt
 
 // WithPressureConfiguration sets the pressure configuration.
 func (pi *ProgressIndicator) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ProgressIndicator {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -514,6 +523,7 @@ func (pi *ProgressIndicator) WithPressureConfiguration(pressureConfiguration *Pr
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (pi *ProgressIndicator) WithNextResponder(nextResponder ResponderProvider) *ProgressIndicator {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -522,6 +532,7 @@ func (pi *ProgressIndicator) WithNextResponder(nextResponder ResponderProvider) 
 
 // WithMenu sets returns the responder’s menu.
 func (pi *ProgressIndicator) WithMenu(menu *Menu) *ProgressIndicator {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -530,6 +541,7 @@ func (pi *ProgressIndicator) WithMenu(menu *Menu) *ProgressIndicator {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (pi *ProgressIndicator) WithUserActivity(userActivity obj.Object) *ProgressIndicator {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -538,6 +550,7 @@ func (pi *ProgressIndicator) WithUserActivity(userActivity obj.Object) *Progress
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (pi *ProgressIndicator) WithTouchBar(touchBar *TouchBar) *ProgressIndicator {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -546,6 +559,7 @@ func (pi *ProgressIndicator) WithTouchBar(touchBar *TouchBar) *ProgressIndicator
 
 // IncrementBy advances the progress bar of a determinate progress indicator by the specified amount.
 func (pi *ProgressIndicator) IncrementBy(delta float64) {
+	defer runtime.KeepAlive(pi)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("incrementBy:"), delta)
 	})
@@ -554,6 +568,8 @@ func (pi *ProgressIndicator) IncrementBy(delta float64) {
 
 // StartAnimation starts the animation of an indeterminate progress indicator.
 func (pi *ProgressIndicator) StartAnimation(sender obj.Object) {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("startAnimation:"), objref.IDOf(sender))
 	})
@@ -562,6 +578,8 @@ func (pi *ProgressIndicator) StartAnimation(sender obj.Object) {
 
 // StopAnimation stops the animation of an indeterminate progress indicator.
 func (pi *ProgressIndicator) StopAnimation(sender obj.Object) {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("stopAnimation:"), objref.IDOf(sender))
 	})
@@ -570,6 +588,7 @@ func (pi *ProgressIndicator) StopAnimation(sender obj.Object) {
 
 // SizeToFit this action method resizes the progress indicator to an appropriate size depending on the value of style.
 func (pi *ProgressIndicator) SizeToFit() {
+	defer runtime.KeepAlive(pi)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("sizeToFit"))
 	})
@@ -578,6 +597,7 @@ func (pi *ProgressIndicator) SizeToFit() {
 
 // IsIndeterminate reports whether the object is indeterminate.
 func (pi *ProgressIndicator) IsIndeterminate() bool {
+	defer runtime.KeepAlive(pi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -591,6 +611,7 @@ func (pi *ProgressIndicator) IsIndeterminate() bool {
 
 // ControlSize returns the control size.
 func (pi *ProgressIndicator) ControlSize() ControlSize {
+	defer runtime.KeepAlive(pi)
 	var _mainthread0 ControlSize
 	purego.Main(func() {
 		_mainthread0 = func() ControlSize {
@@ -604,6 +625,7 @@ func (pi *ProgressIndicator) ControlSize() ControlSize {
 
 // DoubleValue returns the double value.
 func (pi *ProgressIndicator) DoubleValue() float64 {
+	defer runtime.KeepAlive(pi)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -617,6 +639,7 @@ func (pi *ProgressIndicator) DoubleValue() float64 {
 
 // MinValue returns the min value.
 func (pi *ProgressIndicator) MinValue() float64 {
+	defer runtime.KeepAlive(pi)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -630,6 +653,7 @@ func (pi *ProgressIndicator) MinValue() float64 {
 
 // MaxValue returns the max value.
 func (pi *ProgressIndicator) MaxValue() float64 {
+	defer runtime.KeepAlive(pi)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -642,12 +666,13 @@ func (pi *ProgressIndicator) MaxValue() float64 {
 }
 
 // ObservedProgress returns the observed progress.
-func (pi *ProgressIndicator) ObservedProgress() obj.Object {
-	var _mainthread0 obj.Object
+func (pi *ProgressIndicator) ObservedProgress() *foundation.Progress {
+	defer runtime.KeepAlive(pi)
+	var _mainthread0 *foundation.Progress
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.Progress {
 			_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("observedProgress"))
-			return obj.Wrap(_r)
+			return foundation.ProgressFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -656,6 +681,7 @@ func (pi *ProgressIndicator) ObservedProgress() obj.Object {
 
 // UsesThreadedAnimation wraps the corresponding Objective-C method.
 func (pi *ProgressIndicator) UsesThreadedAnimation() bool {
+	defer runtime.KeepAlive(pi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -669,6 +695,7 @@ func (pi *ProgressIndicator) UsesThreadedAnimation() bool {
 
 // Style returns the style.
 func (pi *ProgressIndicator) Style() ProgressIndicatorStyle {
+	defer runtime.KeepAlive(pi)
 	var _mainthread0 ProgressIndicatorStyle
 	purego.Main(func() {
 		_mainthread0 = func() ProgressIndicatorStyle {
@@ -682,6 +709,7 @@ func (pi *ProgressIndicator) Style() ProgressIndicatorStyle {
 
 // IsDisplayedWhenStopped reports whether the object is displayed when stopped.
 func (pi *ProgressIndicator) IsDisplayedWhenStopped() bool {
+	defer runtime.KeepAlive(pi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -695,6 +723,7 @@ func (pi *ProgressIndicator) IsDisplayedWhenStopped() bool {
 
 // AnimationDelay returns the delay, in seconds, between animation steps for an indeterminate progress indicator.
 func (pi *ProgressIndicator) AnimationDelay() float64 {
+	defer runtime.KeepAlive(pi)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -708,6 +737,7 @@ func (pi *ProgressIndicator) AnimationDelay() float64 {
 
 // SetAnimationDelay sets the delay, in seconds, between animation steps for an indeterminate progress indicator.
 func (pi *ProgressIndicator) SetAnimationDelay(delay float64) {
+	defer runtime.KeepAlive(pi)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAnimationDelay:"), delay)
 	})
@@ -716,6 +746,8 @@ func (pi *ProgressIndicator) SetAnimationDelay(delay float64) {
 
 // Animate this action method advances the progress animation of an indeterminate progress animator by one step.
 func (pi *ProgressIndicator) Animate(sender obj.Object) {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("animate:"), objref.IDOf(sender))
 	})
@@ -724,6 +756,7 @@ func (pi *ProgressIndicator) Animate(sender obj.Object) {
 
 // IsBezeled reports whether the object is bezeled.
 func (pi *ProgressIndicator) IsBezeled() bool {
+	defer runtime.KeepAlive(pi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -737,6 +770,7 @@ func (pi *ProgressIndicator) IsBezeled() bool {
 
 // ControlTint returns the control tint.
 func (pi *ProgressIndicator) ControlTint() ControlTint {
+	defer runtime.KeepAlive(pi)
 	var _mainthread0 ControlTint
 	purego.Main(func() {
 		_mainthread0 = func() ControlTint {

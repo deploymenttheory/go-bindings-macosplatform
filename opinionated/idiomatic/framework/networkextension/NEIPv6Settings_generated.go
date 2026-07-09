@@ -5,7 +5,10 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,29 +50,34 @@ func nEIPv6SettingsAdopt(id objc.ID) *NEIPv6Settings {
 
 // Description returns the object's -description text.
 func (nps *NEIPv6Settings) Description() string {
+	defer runtime.KeepAlive(nps)
 	return rt.Description(objref.IDOf(nps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nps *NEIPv6Settings) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nps *NEIPv6Settings) IsKind(className string) bool {
+	defer runtime.KeepAlive(nps)
 	return rt.IsKind(objref.IDOf(nps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nps *NEIPv6Settings) String() string {
+	defer runtime.KeepAlive(nps)
 	return rt.Description(objref.IDOf(nps))
 }
 
 // NewNEIPv6SettingsWithAddressesNetworkPrefixLengths initializes the IPv6 settings object.
-func NewNEIPv6SettingsWithAddressesNetworkPrefixLengths(addresses []string, networkPrefixLengths []obj.Object) *NEIPv6Settings {
+func NewNEIPv6SettingsWithAddressesNetworkPrefixLengths(addresses []string, networkPrefixLengths []*foundation.Number) *NEIPv6Settings {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NEIPv6Settings")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAddresses:networkPrefixLengths:"), purego.SliceToNSArray(addresses, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(networkPrefixLengths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAddresses:networkPrefixLengths:"), purego.SliceToNSArray(addresses, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(networkPrefixLengths, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return nEIPv6SettingsAdopt(_id)
 }
 
@@ -91,6 +99,7 @@ func (nps *NEIPv6Settings) WithExcludedRoutes(items ...*NEIPv6Route) *NEIPv6Sett
 //
 // Addresses returns the collection as a Go slice.
 func (nps *NEIPv6Settings) Addresses() []string {
+	defer runtime.KeepAlive(nps)
 	_arr := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("addresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -99,6 +108,7 @@ func (nps *NEIPv6Settings) Addresses() []string {
 //
 // NetworkPrefixLengths returns the collection as a Go slice.
 func (nps *NEIPv6Settings) NetworkPrefixLengths() []obj.Object {
+	defer runtime.KeepAlive(nps)
 	_arr := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("networkPrefixLengths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -107,6 +117,7 @@ func (nps *NEIPv6Settings) NetworkPrefixLengths() []obj.Object {
 //
 // IncludedRoutes returns the collection as a Go slice.
 func (nps *NEIPv6Settings) IncludedRoutes() []*NEIPv6Route {
+	defer runtime.KeepAlive(nps)
 	_arr := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("includedRoutes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEIPv6Route { return NEIPv6RouteFromID(_id) })
 }
@@ -115,6 +126,7 @@ func (nps *NEIPv6Settings) IncludedRoutes() []*NEIPv6Route {
 //
 // ExcludedRoutes returns the collection as a Go slice.
 func (nps *NEIPv6Settings) ExcludedRoutes() []*NEIPv6Route {
+	defer runtime.KeepAlive(nps)
 	_arr := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("excludedRoutes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEIPv6Route { return NEIPv6RouteFromID(_id) })
 }

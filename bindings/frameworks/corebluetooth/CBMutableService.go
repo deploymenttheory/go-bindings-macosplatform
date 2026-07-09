@@ -35,8 +35,8 @@ func CBMutableServiceFromID(id objc.ID) *CBMutableService {
 }
 
 // Creates a newly initialized mutable service specified by UUID and service type.
-func (o *CBMutableService) InitWithTypePrimary(uUID *CBUUID, isPrimary bool) *CBMutableService {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cBMutableServiceSelInitWithTypePrimary, uUID.Ptr(), isPrimary)
+func (o *CBMutableService) InitWithTypePrimary(uuid *CBUUID, isPrimary bool) *CBMutableService {
+	_ret := objc.Send[objc.ID](o.Ptr(), _cBMutableServiceSelInitWithTypePrimary, uuid.Ptr(), isPrimary)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

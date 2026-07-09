@@ -5,11 +5,14 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -78,9 +81,9 @@ func (pe *PredicateEditor) WithFormattingStringsFilename(formattingStringsFilena
 }
 
 // WithFormattingDictionary sets the formatting dictionary for the rule editor.
-func (pe *PredicateEditor) WithFormattingDictionary(formattingDictionary obj.Object) *PredicateEditor {
+func (pe *PredicateEditor) WithFormattingDictionary(formattingDictionary map[string]string) *PredicateEditor {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFormattingDictionary:"), objref.IDOf(formattingDictionary))
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFormattingDictionary:"), rt.MapToDict(formattingDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
 	})
 	return pe
 }
@@ -151,6 +154,7 @@ func (pe *PredicateEditor) WithDisplayValuesKeyPath(displayValuesKeyPath string)
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (pe *PredicateEditor) WithTarget(target obj.Object) *PredicateEditor {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -215,6 +219,7 @@ func (pe *PredicateEditor) WithControlSize(controlSize ControlSize) *PredicateEd
 
 // WithFormatter sets the receiver’s formatter.
 func (pe *PredicateEditor) WithFormatter(formatter obj.Object) *PredicateEditor {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -223,6 +228,7 @@ func (pe *PredicateEditor) WithFormatter(formatter obj.Object) *PredicateEditor 
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (pe *PredicateEditor) WithObjectValue(objectValue obj.Object) *PredicateEditor {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -239,6 +245,7 @@ func (pe *PredicateEditor) WithStringValue(stringValue string) *PredicateEditor 
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (pe *PredicateEditor) WithAttributedStringValue(attributedStringValue obj.Object) *PredicateEditor {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -279,6 +286,7 @@ func (pe *PredicateEditor) WithDoubleValue(doubleValue float64) *PredicateEditor
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (pe *PredicateEditor) WithFont(font *Font) *PredicateEditor {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -327,6 +335,7 @@ func (pe *PredicateEditor) WithAllowsExpansionToolTips(allowsExpansionToolTips b
 
 // WithCell sets the cell.
 func (pe *PredicateEditor) WithCell(cell CellProvider) *PredicateEditor {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -472,6 +481,7 @@ func (pe *PredicateEditor) WithWantsLayer(wantsLayer bool) *PredicateEditor {
 
 // WithLayer sets the layer.
 func (pe *PredicateEditor) WithLayer(layer obj.Object) *PredicateEditor {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -521,6 +531,7 @@ func (pe *PredicateEditor) WithBackgroundFilters(items ...obj.Object) *Predicate
 
 // WithCompositingFilter sets the compositing filter.
 func (pe *PredicateEditor) WithCompositingFilter(compositingFilter obj.Object) *PredicateEditor {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -538,6 +549,7 @@ func (pe *PredicateEditor) WithContentFilters(items ...obj.Object) *PredicateEdi
 
 // WithShadow sets the shadow.
 func (pe *PredicateEditor) WithShadow(shadow *Shadow) *PredicateEditor {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -586,6 +598,7 @@ func (pe *PredicateEditor) WithPreparedContentRect(preparedContentRect corefound
 
 // WithNextKeyView sets the next key view.
 func (pe *PredicateEditor) WithNextKeyView(nextKeyView ViewProvider) *PredicateEditor {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -635,6 +648,7 @@ func (pe *PredicateEditor) WithPrefersCompactControlSizeMetrics(prefersCompactCo
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (pe *PredicateEditor) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PredicateEditor {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -691,6 +705,7 @@ func (pe *PredicateEditor) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExten
 
 // WithPressureConfiguration sets the pressure configuration.
 func (pe *PredicateEditor) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PredicateEditor {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -699,6 +714,7 @@ func (pe *PredicateEditor) WithPressureConfiguration(pressureConfiguration *Pres
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (pe *PredicateEditor) WithNextResponder(nextResponder ResponderProvider) *PredicateEditor {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -707,6 +723,7 @@ func (pe *PredicateEditor) WithNextResponder(nextResponder ResponderProvider) *P
 
 // WithMenu sets returns the responder’s menu.
 func (pe *PredicateEditor) WithMenu(menu *Menu) *PredicateEditor {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -715,6 +732,7 @@ func (pe *PredicateEditor) WithMenu(menu *Menu) *PredicateEditor {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (pe *PredicateEditor) WithUserActivity(userActivity obj.Object) *PredicateEditor {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -723,6 +741,7 @@ func (pe *PredicateEditor) WithUserActivity(userActivity obj.Object) *PredicateE
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (pe *PredicateEditor) WithTouchBar(touchBar *TouchBar) *PredicateEditor {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -733,6 +752,7 @@ func (pe *PredicateEditor) WithTouchBar(touchBar *TouchBar) *PredicateEditor {
 //
 // RowTemplates returns the collection as a Go slice.
 func (pe *PredicateEditor) RowTemplates() []*PredicateEditorRowTemplate {
+	defer runtime.KeepAlive(pe)
 	var _mainthread0 []*PredicateEditorRowTemplate
 	purego.Main(func() {
 		_mainthread0 = func() []*PredicateEditorRowTemplate {

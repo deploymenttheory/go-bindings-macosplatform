@@ -5,7 +5,10 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,29 +50,34 @@ func disbursementRequestAdopt(id objc.ID) *DisbursementRequest {
 
 // Description returns the object's -description text.
 func (dr *DisbursementRequest) Description() string {
+	defer runtime.KeepAlive(dr)
 	return rt.Description(objref.IDOf(dr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dr *DisbursementRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dr *DisbursementRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(dr)
 	return rt.IsKind(objref.IDOf(dr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dr *DisbursementRequest) String() string {
+	defer runtime.KeepAlive(dr)
 	return rt.Description(objref.IDOf(dr))
 }
 
 // NewDisbursementRequestWithMerchantIdentifierCurrencyCodeRegionCodeSupportedNetworksMerchantCapabilitiesSummaryItems creates a new instance of a disbursement request with the merchant identifier, currency and region codes, and other parameters you specify.
-func NewDisbursementRequestWithMerchantIdentifierCurrencyCodeRegionCodeSupportedNetworksMerchantCapabilitiesSummaryItems(merchantIdentifier string, currencyCode string, regionCode string, supportedNetworks []obj.Object, merchantCapabilities MerchantCapability, summaryItems []*PaymentSummaryItem) *DisbursementRequest {
+func NewDisbursementRequestWithMerchantIdentifierCurrencyCodeRegionCodeSupportedNetworksMerchantCapabilitiesSummaryItems(merchantIdentifier string, currencyCode string, regionCode string, supportedNetworks []*foundation.String, merchantCapabilities MerchantCapability, summaryItems []*PaymentSummaryItem) *DisbursementRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKDisbursementRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMerchantIdentifier:currencyCode:regionCode:supportedNetworks:merchantCapabilities:summaryItems:"), purego.NSString(merchantIdentifier), purego.NSString(currencyCode), purego.NSString(regionCode), purego.SliceToNSArray(supportedNetworks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), merchantCapabilities, purego.SliceToNSArray(summaryItems, func(_v *PaymentSummaryItem) objc.ID { return objref.IDOf(_v) }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMerchantIdentifier:currencyCode:regionCode:supportedNetworks:merchantCapabilities:summaryItems:"), purego.NSString(merchantIdentifier), purego.NSString(currencyCode), purego.NSString(regionCode), purego.SliceToNSArray(supportedNetworks, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }), merchantCapabilities, purego.SliceToNSArray(summaryItems, func(_v *PaymentSummaryItem) objc.ID { return objref.IDOf(_v) }))
 	return disbursementRequestAdopt(_id)
 }
 
@@ -120,11 +128,12 @@ func (dr *DisbursementRequest) WithRequiredRecipientContactFields(items ...obj.O
 
 // WithRecipientContact sets a contact object that describes the recipient.
 func (dr *DisbursementRequest) WithRecipientContact(recipientContact *Contact) *DisbursementRequest {
+	defer runtime.KeepAlive(recipientContact)
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setRecipientContact:"), objref.IDOf(recipientContact))
 	return dr
 }
 
-// WithSupportedRegions sets an array of regions that describe the locations to support.
+// WithSupportedRegions sets an array of two-letter region codes that describes the regions to support.
 func (dr *DisbursementRequest) WithSupportedRegions(items ...obj.Object) *DisbursementRequest {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setSupportedRegions:"), _arr)
@@ -132,8 +141,8 @@ func (dr *DisbursementRequest) WithSupportedRegions(items ...obj.Object) *Disbur
 }
 
 // WithApplicationData sets optional merchant-supplied information about the disbursement request.
-func (dr *DisbursementRequest) WithApplicationData(applicationData obj.Object) *DisbursementRequest {
-	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setApplicationData:"), objref.IDOf(applicationData))
+func (dr *DisbursementRequest) WithApplicationData(applicationData []byte) *DisbursementRequest {
+	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setApplicationData:"), rt.BytesToNSData(applicationData))
 	return dr
 }
 
@@ -145,6 +154,7 @@ func (dr *DisbursementRequest) WithIsDelegatedRequest(isDelegatedRequest bool) *
 
 // MerchantIdentifier returns the merchant identifier.
 func (dr *DisbursementRequest) MerchantIdentifier() string {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("merchantIdentifier"))
 	if _r == 0 {
 		return ""
@@ -154,6 +164,7 @@ func (dr *DisbursementRequest) MerchantIdentifier() string {
 
 // RegionCode returns the region code.
 func (dr *DisbursementRequest) RegionCode() string {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("regionCode"))
 	if _r == 0 {
 		return ""
@@ -165,12 +176,14 @@ func (dr *DisbursementRequest) RegionCode() string {
 //
 // SupportedNetworks returns the collection as a Go slice.
 func (dr *DisbursementRequest) SupportedNetworks() []obj.Object {
+	defer runtime.KeepAlive(dr)
 	_arr := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("supportedNetworks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // MerchantCapabilities returns the merchant capabilities.
 func (dr *DisbursementRequest) MerchantCapabilities() MerchantCapability {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[MerchantCapability](objref.IDOf(dr), objc.RegisterName("merchantCapabilities"))
 	return _r
 }
@@ -179,12 +192,14 @@ func (dr *DisbursementRequest) MerchantCapabilities() MerchantCapability {
 //
 // SummaryItems returns the collection as a Go slice.
 func (dr *DisbursementRequest) SummaryItems() []*PaymentSummaryItem {
+	defer runtime.KeepAlive(dr)
 	_arr := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("summaryItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PaymentSummaryItem { return PaymentSummaryItemFromID(_id) })
 }
 
 // CurrencyCode returns the currency code.
 func (dr *DisbursementRequest) CurrencyCode() string {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("currencyCode"))
 	if _r == 0 {
 		return ""
@@ -196,12 +211,14 @@ func (dr *DisbursementRequest) CurrencyCode() string {
 //
 // RequiredRecipientContactFields returns the collection as a Go slice.
 func (dr *DisbursementRequest) RequiredRecipientContactFields() []obj.Object {
+	defer runtime.KeepAlive(dr)
 	_arr := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("requiredRecipientContactFields"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // RecipientContact returns the recipient contact.
 func (dr *DisbursementRequest) RecipientContact() *Contact {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("recipientContact"))
 	return ContactFromID(_r)
 }
@@ -210,18 +227,21 @@ func (dr *DisbursementRequest) RecipientContact() *Contact {
 //
 // SupportedRegions returns the collection as a Go slice.
 func (dr *DisbursementRequest) SupportedRegions() []string {
+	defer runtime.KeepAlive(dr)
 	_arr := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("supportedRegions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ApplicationData returns the application data.
-func (dr *DisbursementRequest) ApplicationData() obj.Object {
+func (dr *DisbursementRequest) ApplicationData() []byte {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("applicationData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // IsDelegatedRequest reports whether this disbursement request is being made by a delegated entity on behalf of a merchant. Set this property to true when your application is acting as an Apple Pay delegate and presenting the payment sheet on behalf of another merchant. The default value is false.
 func (dr *DisbursementRequest) IsDelegatedRequest() bool {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[bool](objref.IDOf(dr), objc.RegisterName("isDelegatedRequest"))
 	return _r
 }

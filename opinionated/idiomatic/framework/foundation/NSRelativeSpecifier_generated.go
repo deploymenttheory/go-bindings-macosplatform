@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,6 +52,7 @@ func relativeSpecifierAdopt(id objc.ID) *RelativeSpecifier {
 
 // NewRelativeSpecifierWithCoder creates a new RelativeSpecifier.
 func NewRelativeSpecifierWithCoder(inCoder *Coder) *RelativeSpecifier {
+	defer runtime.KeepAlive(inCoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSRelativeSpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(inCoder))
 	return relativeSpecifierAdopt(_id)
@@ -57,6 +60,9 @@ func NewRelativeSpecifierWithCoder(inCoder *Coder) *RelativeSpecifier {
 
 // NewRelativeSpecifierWithContainerClassDescriptionContainerSpecifierKeyRelativePositionBaseSpecifier invokes the super class’s initWithContainerClassDescription:containerSpecifier:key: method and initializes the relative position and base specifier to relPos and baseSpecifier.
 func NewRelativeSpecifierWithContainerClassDescriptionContainerSpecifierKeyRelativePositionBaseSpecifier(classDesc *ScriptClassDescription, container *ScriptObjectSpecifier, property string, relPos RelativePosition, baseSpecifier *ScriptObjectSpecifier) *RelativeSpecifier {
+	defer runtime.KeepAlive(classDesc)
+	defer runtime.KeepAlive(container)
+	defer runtime.KeepAlive(baseSpecifier)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSRelativeSpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:relativePosition:baseSpecifier:"), objref.IDOf(classDesc), objref.IDOf(container), purego.NSString(property), relPos, objref.IDOf(baseSpecifier))
 	return relativeSpecifierAdopt(_id)
@@ -70,18 +76,21 @@ func (rs *RelativeSpecifier) WithRelativePosition(relativePosition RelativePosit
 
 // WithBaseSpecifier sets sets the specifier for the base object.
 func (rs *RelativeSpecifier) WithBaseSpecifier(baseSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier {
+	defer runtime.KeepAlive(baseSpecifier)
 	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("setBaseSpecifier:"), objref.IDOf(baseSpecifier))
 	return rs
 }
 
 // WithChildSpecifier sets sets the receiver’s child reference.
 func (rs *RelativeSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier {
+	defer runtime.KeepAlive(childSpecifier)
 	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("setChildSpecifier:"), objref.IDOf(childSpecifier))
 	return rs
 }
 
 // WithContainerSpecifier sets sets the container specifier of the receiver.
 func (rs *RelativeSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier {
+	defer runtime.KeepAlive(containerSpecifier)
 	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("setContainerSpecifier:"), objref.IDOf(containerSpecifier))
 	return rs
 }
@@ -100,12 +109,14 @@ func (rs *RelativeSpecifier) WithContainerIsRangeContainerObject(containerIsRang
 
 // WithKey sets sets the key of the receiver.
 func (rs *RelativeSpecifier) WithKey(key StringProvider) *RelativeSpecifier {
+	defer runtime.KeepAlive(key)
 	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return rs
 }
 
 // WithContainerClassDescription sets sets the class description of the receiver’s container specifier to a given specifier.
 func (rs *RelativeSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *RelativeSpecifier {
+	defer runtime.KeepAlive(containerClassDescription)
 	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("setContainerClassDescription:"), objref.IDOf(containerClassDescription))
 	return rs
 }
@@ -123,19 +134,21 @@ func (rs *RelativeSpecifier) WithObservationInfo(observationInfo unsafe.Pointer)
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (rs *RelativeSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *RelativeSpecifier {
-	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (rs *RelativeSpecifier) WithScriptingProperties(scriptingProperties map[string]obj.Object) *RelativeSpecifier {
+	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return rs
 }
 
 // RelativePosition returns the relative position.
 func (rs *RelativeSpecifier) RelativePosition() RelativePosition {
+	defer runtime.KeepAlive(rs)
 	_r := objc.Send[RelativePosition](objref.IDOf(rs), objc.RegisterName("relativePosition"))
 	return _r
 }
 
 // BaseSpecifier returns the base specifier.
 func (rs *RelativeSpecifier) BaseSpecifier() *ScriptObjectSpecifier {
+	defer runtime.KeepAlive(rs)
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("baseSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }

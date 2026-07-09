@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,6 +56,7 @@ func NewAppResponsivenessMetric() *AppResponsivenessMetric {
 
 // HistogrammedApplicationHangTime returns the histogrammed application hang time.
 func (arm *AppResponsivenessMetric) HistogrammedApplicationHangTime() obj.Object {
+	defer runtime.KeepAlive(arm)
 	_r := objc.Send[objc.ID](objref.IDOf(arm), objc.RegisterName("histogrammedApplicationHangTime"))
 	return obj.Wrap(_r)
 }

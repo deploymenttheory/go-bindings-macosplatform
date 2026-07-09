@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func distantObjectRequestAdopt(id objc.ID) *DistantObjectRequest {
 
 // Description returns the object's -description text.
 func (dor *DistantObjectRequest) Description() string {
+	defer runtime.KeepAlive(dor)
 	return rt.Description(objref.IDOf(dor))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dor *DistantObjectRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dor)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dor), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dor *DistantObjectRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(dor)
 	return rt.IsKind(objref.IDOf(dor), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dor *DistantObjectRequest) String() string {
+	defer runtime.KeepAlive(dor)
 	return rt.Description(objref.IDOf(dor))
 }
 
@@ -81,30 +87,35 @@ func (dor *DistantObjectRequest) WithObservationInfo(observationInfo unsafe.Poin
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (dor *DistantObjectRequest) WithScriptingProperties(scriptingProperties obj.Object) *DistantObjectRequest {
-	objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (dor *DistantObjectRequest) WithScriptingProperties(scriptingProperties map[string]obj.Object) *DistantObjectRequest {
+	objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return dor
 }
 
-// ReplyWithException sends a reply back to the remote object making the distant object request.
-func (dor *DistantObjectRequest) ReplyWithException(exception *Exception) {
+// Reply sends a reply back to the remote object making the distant object request.
+func (dor *DistantObjectRequest) Reply(exception *Exception) {
+	defer runtime.KeepAlive(dor)
+	defer runtime.KeepAlive(exception)
 	objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("replyWithException:"), objref.IDOf(exception))
 }
 
 // Invocation returns the invocation.
 func (dor *DistantObjectRequest) Invocation() *Invocation {
+	defer runtime.KeepAlive(dor)
 	_r := objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("invocation"))
 	return InvocationFromID(_r)
 }
 
 // Connection returns the connection.
 func (dor *DistantObjectRequest) Connection() *Connection {
+	defer runtime.KeepAlive(dor)
 	_r := objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("connection"))
 	return ConnectionFromID(_r)
 }
 
 // Conversation returns the conversation.
 func (dor *DistantObjectRequest) Conversation() obj.Object {
+	defer runtime.KeepAlive(dor)
 	_r := objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("conversation"))
 	return obj.Wrap(_r)
 }

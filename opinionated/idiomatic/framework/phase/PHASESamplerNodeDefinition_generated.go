@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func samplerNodeDefinitionAdopt(id objc.ID) *SamplerNodeDefinition {
 
 // NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinitionIdentifier creates a named sampler node with the given sound asset and mixer.
 func NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinitionIdentifier(soundAssetIdentifier string, mixerDefinition *MixerDefinition, identifier string) *SamplerNodeDefinition {
+	defer runtime.KeepAlive(mixerDefinition)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESamplerNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSoundAssetIdentifier:mixerDefinition:identifier:"), purego.NSString(soundAssetIdentifier), objref.IDOf(mixerDefinition), purego.NSString(identifier))
 	return samplerNodeDefinitionAdopt(_id)
@@ -54,6 +57,7 @@ func NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinitionIdentifier(s
 
 // NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinition creates a sampler node with the given sound asset and mixer.
 func NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinition(soundAssetIdentifier string, mixerDefinition *MixerDefinition) *SamplerNodeDefinition {
+	defer runtime.KeepAlive(mixerDefinition)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESamplerNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSoundAssetIdentifier:mixerDefinition:"), purego.NSString(soundAssetIdentifier), objref.IDOf(mixerDefinition))
 	return samplerNodeDefinitionAdopt(_id)
@@ -79,24 +83,28 @@ func (snd *SamplerNodeDefinition) WithRate(rate float64) *SamplerNodeDefinition 
 
 // WithGroup sets a group this node conforms to for gain and rate control.
 func (snd *SamplerNodeDefinition) WithGroup(group *Group) *SamplerNodeDefinition {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(snd), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return snd
 }
 
 // WithGainMetaParameterDefinition sets a meta parameter that dynamically changes the audio’s loudness.
 func (snd *SamplerNodeDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SamplerNodeDefinition {
+	defer runtime.KeepAlive(gainMetaParameterDefinition)
 	objc.Send[objc.ID](objref.IDOf(snd), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
 	return snd
 }
 
 // WithRateMetaParameterDefinition sets a meta parameter that dynamically changes the audio’s rate.
 func (snd *SamplerNodeDefinition) WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SamplerNodeDefinition {
+	defer runtime.KeepAlive(rateMetaParameterDefinition)
 	objc.Send[objc.ID](objref.IDOf(snd), objc.RegisterName("setRateMetaParameterDefinition:"), objref.IDOf(rateMetaParameterDefinition))
 	return snd
 }
 
 // AssetIdentifier returns the identifier that uniquely represents the registered sound asset this sampler will play.
 func (snd *SamplerNodeDefinition) AssetIdentifier() string {
+	defer runtime.KeepAlive(snd)
 	_r := objc.Send[objc.ID](objref.IDOf(snd), objc.RegisterName("assetIdentifier"))
 	if _r == 0 {
 		return ""
@@ -106,12 +114,14 @@ func (snd *SamplerNodeDefinition) AssetIdentifier() string {
 
 // CullOption returns the cull option for the sampler. The default value is PHASECullOptionTerminate.
 func (snd *SamplerNodeDefinition) CullOption() CullOption {
+	defer runtime.KeepAlive(snd)
 	_r := objc.Send[CullOption](objref.IDOf(snd), objc.RegisterName("cullOption"))
 	return _r
 }
 
 // PlaybackMode returns the playback mode for the sampler. If the playback mode is set to PHASEPlaybackModeOneShot, you need to make sure the the audio data in the registered sound asset associated with this sampler begins and ends at zero crossings. Otherwise, you'll hear a click when beginning playback and / or ending playback. If the playback mode is set to PHASEPlaybackModeLooping, you need to make sure the audio data in the registered sound asset associated with this sampler loops smoothly from the end sample to the start sample. Please verify this during authoring. Failing to do so will result in audible clicks at loop boundaries. The default value is PHASEPlaybackModeOneShot.
 func (snd *SamplerNodeDefinition) PlaybackMode() PlaybackMode {
+	defer runtime.KeepAlive(snd)
 	_r := objc.Send[PlaybackMode](objref.IDOf(snd), objc.RegisterName("playbackMode"))
 	return _r
 }

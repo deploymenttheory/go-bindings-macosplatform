@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,6 +51,7 @@ func graphExecutableAdopt(id objc.ID) *GraphExecutable {
 
 // NewGraphExecutableWithMPSGraphPackageAtURLCompilationDescriptor initialize the executable with the Metal Performance Shaders Graph package at the provided URL.
 func NewGraphExecutableWithMPSGraphPackageAtURLCompilationDescriptor(mpsgraphPackageURL string, compilationDescriptor *GraphCompilationDescriptor) *GraphExecutable {
+	defer runtime.KeepAlive(compilationDescriptor)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSGraphExecutable")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMPSGraphPackageAtURL:compilationDescriptor:"), rt.FileURL(mpsgraphPackageURL), objref.IDOf(compilationDescriptor))
 	return graphExecutableAdopt(_id)
@@ -56,6 +59,7 @@ func NewGraphExecutableWithMPSGraphPackageAtURLCompilationDescriptor(mpsgraphPac
 
 // NewGraphExecutableWithCoreMLPackageAtURLCompilationDescriptor initialize the executable with the Core ML model package at the provided URL.
 func NewGraphExecutableWithCoreMLPackageAtURLCompilationDescriptor(coreMLPackageURL string, compilationDescriptor *GraphCompilationDescriptor) *GraphExecutable {
+	defer runtime.KeepAlive(compilationDescriptor)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSGraphExecutable")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoreMLPackageAtURL:compilationDescriptor:"), rt.FileURL(coreMLPackageURL), objref.IDOf(compilationDescriptor))
 	return graphExecutableAdopt(_id)
@@ -69,28 +73,40 @@ func (ge *GraphExecutable) WithOptions(options GraphOptions) *GraphExecutable {
 
 // SpecializeWithDeviceInputTypesCompilationDescriptor specialize the executable and optimize it.
 func (ge *GraphExecutable) SpecializeWithDeviceInputTypesCompilationDescriptor(device *GraphDevice, inputTypes []*GraphType, compilationDescriptor *GraphCompilationDescriptor) {
+	defer runtime.KeepAlive(ge)
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(compilationDescriptor)
 	objc.Send[objc.ID](objref.IDOf(ge), objc.RegisterName("specializeWithDevice:inputTypes:compilationDescriptor:"), objref.IDOf(device), purego.SliceToNSArray(inputTypes, func(_v *GraphType) objc.ID { return objref.IDOf(_v) }), objref.IDOf(compilationDescriptor))
 }
 
 // GetOutputTypesWithDeviceInputTypesCompilationDescriptor get output shapes for a specialized executable.
 func (ge *GraphExecutable) GetOutputTypesWithDeviceInputTypesCompilationDescriptor(device *GraphDevice, inputTypes []*GraphType, compilationDescriptor *GraphCompilationDescriptor) []*GraphShapedType {
+	defer runtime.KeepAlive(ge)
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(compilationDescriptor)
 	_r := objc.Send[objc.ID](objref.IDOf(ge), objc.RegisterName("getOutputTypesWithDevice:inputTypes:compilationDescriptor:"), objref.IDOf(device), purego.SliceToNSArray(inputTypes, func(_v *GraphType) objc.ID { return objref.IDOf(_v) }), objref.IDOf(compilationDescriptor))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphShapedType { return GraphShapedTypeFromID(_id) })
 }
 
 // EncodeToCommandBufferInputsArrayResultsArrayExecutionDescriptor runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed. This call is asynchronous and will return immediately after finishing encoding.
 func (ge *GraphExecutable) EncodeToCommandBufferInputsArrayResultsArrayExecutionDescriptor(commandBuffer obj.Object, inputsArray []*GraphTensorData, resultsArray []*GraphTensorData, executionDescriptor *GraphExecutableExecutionDescriptor) []*GraphTensorData {
+	defer runtime.KeepAlive(ge)
+	defer runtime.KeepAlive(commandBuffer)
+	defer runtime.KeepAlive(executionDescriptor)
 	_r := objc.Send[objc.ID](objref.IDOf(ge), objc.RegisterName("encodeToCommandBuffer:inputsArray:resultsArray:executionDescriptor:"), objref.IDOf(commandBuffer), purego.SliceToNSArray(inputsArray, func(_v *GraphTensorData) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(resultsArray, func(_v *GraphTensorData) objc.ID { return objref.IDOf(_v) }), objref.IDOf(executionDescriptor))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensorData { return GraphTensorDataFromID(_id) })
 }
 
 // SerializeToMPSGraphPackageAtURLDescriptor serialize the MPSGraph executable at the provided url.
 func (ge *GraphExecutable) SerializeToMPSGraphPackageAtURLDescriptor(url string, descriptor *GraphExecutableSerializationDescriptor) {
+	defer runtime.KeepAlive(ge)
+	defer runtime.KeepAlive(descriptor)
 	objc.Send[objc.ID](objref.IDOf(ge), objc.RegisterName("serializeToMPSGraphPackageAtURL:descriptor:"), rt.FileURL(url), objref.IDOf(descriptor))
 }
 
 // Options returns options for the graph executable. Default value is `MPSGraphOptionsDefault`.
 func (ge *GraphExecutable) Options() GraphOptions {
+	defer runtime.KeepAlive(ge)
 	_r := objc.Send[GraphOptions](objref.IDOf(ge), objc.RegisterName("options"))
 	return _r
 }
@@ -99,6 +115,7 @@ func (ge *GraphExecutable) Options() GraphOptions {
 //
 // FeedTensors returns the collection as a Go slice.
 func (ge *GraphExecutable) FeedTensors() []*GraphTensor {
+	defer runtime.KeepAlive(ge)
 	_arr := objc.Send[objc.ID](objref.IDOf(ge), objc.RegisterName("feedTensors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
@@ -107,6 +124,7 @@ func (ge *GraphExecutable) FeedTensors() []*GraphTensor {
 //
 // TargetTensors returns the collection as a Go slice.
 func (ge *GraphExecutable) TargetTensors() []*GraphTensor {
+	defer runtime.KeepAlive(ge)
 	_arr := objc.Send[objc.ID](objref.IDOf(ge), objc.RegisterName("targetTensors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }

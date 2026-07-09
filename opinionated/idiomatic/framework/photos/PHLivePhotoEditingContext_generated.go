@@ -6,6 +6,7 @@ package photos
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -52,27 +53,33 @@ func livePhotoEditingContextAdopt(id objc.ID) *LivePhotoEditingContext {
 
 // Description returns the object's -description text.
 func (lpec *LivePhotoEditingContext) Description() string {
+	defer runtime.KeepAlive(lpec)
 	return rt.Description(objref.IDOf(lpec))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lpec *LivePhotoEditingContext) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lpec)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lpec), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lpec *LivePhotoEditingContext) IsKind(className string) bool {
+	defer runtime.KeepAlive(lpec)
 	return rt.IsKind(objref.IDOf(lpec), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lpec *LivePhotoEditingContext) String() string {
+	defer runtime.KeepAlive(lpec)
 	return rt.Description(objref.IDOf(lpec))
 }
 
 // NewLivePhotoEditingContextWithLivePhotoEditingInput creates a Live Photo editing context for the specified editing input.
 func NewLivePhotoEditingContextWithLivePhotoEditingInput(livePhotoInput *ContentEditingInput) *LivePhotoEditingContext {
+	defer runtime.KeepAlive(livePhotoInput)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHLivePhotoEditingContext")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLivePhotoEditingInput:"), objref.IDOf(livePhotoInput))
 	return livePhotoEditingContextAdopt(_id)
@@ -87,7 +94,8 @@ func (lpec *LivePhotoEditingContext) WithAudioVolume(audioVolume float32) *LiveP
 // PrepareLivePhotoForPlaybackWithTargetSizeOptions processes a Live Photo with your edits for viewing.
 //
 // PrepareLivePhotoForPlaybackWithTargetSizeOptions blocks until the operation completes or ctx is cancelled.
-func (lpec *LivePhotoEditingContext) PrepareLivePhotoForPlaybackWithTargetSizeOptions(ctx context.Context, targetSize corefoundation.CGSize, options obj.Object) (result *LivePhoto, err error) {
+func (lpec *LivePhotoEditingContext) PrepareLivePhotoForPlaybackWithTargetSizeOptions(ctx context.Context, targetSize corefoundation.CGSize, options map[string]obj.Object) (result *LivePhoto, err error) {
+	defer runtime.KeepAlive(lpec)
 	type _result struct {
 		val *LivePhoto
 		err error
@@ -99,7 +107,7 @@ func (lpec *LivePhotoEditingContext) PrepareLivePhotoForPlaybackWithTargetSizeOp
 		_o.val = LivePhotoFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(lpec), objc.RegisterName("prepareLivePhotoForPlaybackWithTargetSize:options:completionHandler:"), targetSize, objref.IDOf(options), _block)
+	objc.Send[objc.ID](objref.IDOf(lpec), objc.RegisterName("prepareLivePhotoForPlaybackWithTargetSize:options:completionHandler:"), targetSize, rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -111,29 +119,34 @@ func (lpec *LivePhotoEditingContext) PrepareLivePhotoForPlaybackWithTargetSizeOp
 
 // Cancel aborts any Live Photo processing in progress.
 func (lpec *LivePhotoEditingContext) Cancel() {
+	defer runtime.KeepAlive(lpec)
 	objc.Send[objc.ID](objref.IDOf(lpec), objc.RegisterName("cancel"))
 }
 
 // FullSizeImage returns the original full-size image from the input live photo
 func (lpec *LivePhotoEditingContext) FullSizeImage() obj.Object {
+	defer runtime.KeepAlive(lpec)
 	_r := objc.Send[objc.ID](objref.IDOf(lpec), objc.RegisterName("fullSizeImage"))
 	return obj.Wrap(_r)
 }
 
 // Duration returns the duration of the live photo
 func (lpec *LivePhotoEditingContext) Duration() coremedia.CMTime {
+	defer runtime.KeepAlive(lpec)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(lpec), objc.RegisterName("duration"))
 	return _r
 }
 
 // PhotoTime returns the time of the still image within the live photo
 func (lpec *LivePhotoEditingContext) PhotoTime() coremedia.CMTime {
+	defer runtime.KeepAlive(lpec)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(lpec), objc.RegisterName("photoTime"))
 	return _r
 }
 
 // AudioVolume specify the audio volume of the edited live photo Must be between 0.0 and 1.0 Default to 1.0
 func (lpec *LivePhotoEditingContext) AudioVolume() float32 {
+	defer runtime.KeepAlive(lpec)
 	_r := objc.Send[float32](objref.IDOf(lpec), objc.RegisterName("audioVolume"))
 	return _r
 }

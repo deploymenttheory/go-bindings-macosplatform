@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,9 @@ func NewMutableMediaSelection() *MutableMediaSelection {
 
 // SelectMediaOptionInMediaSelectionGroup selects the media option in the specified media selection group.
 func (mms *MutableMediaSelection) SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *MediaSelectionOption, mediaSelectionGroup *MediaSelectionGroup) {
+	defer runtime.KeepAlive(mms)
+	defer runtime.KeepAlive(mediaSelectionOption)
+	defer runtime.KeepAlive(mediaSelectionGroup)
 	objc.Send[objc.ID](objref.IDOf(mms), objc.RegisterName("selectMediaOption:inMediaSelectionGroup:"), objref.IDOf(mediaSelectionOption), objref.IDOf(mediaSelectionGroup))
 }
 

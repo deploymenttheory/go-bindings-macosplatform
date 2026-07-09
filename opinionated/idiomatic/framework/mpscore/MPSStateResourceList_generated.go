@@ -5,6 +5,8 @@
 package mpscore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func stateResourceListAdopt(id objc.ID) *StateResourceList {
 
 // Description returns the object's -description text.
 func (srl *StateResourceList) Description() string {
+	defer runtime.KeepAlive(srl)
 	return rt.Description(objref.IDOf(srl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (srl *StateResourceList) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(srl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(srl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (srl *StateResourceList) IsKind(className string) bool {
+	defer runtime.KeepAlive(srl)
 	return rt.IsKind(objref.IDOf(srl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (srl *StateResourceList) String() string {
+	defer runtime.KeepAlive(srl)
 	return rt.Description(objref.IDOf(srl))
 }
 
@@ -72,10 +79,13 @@ func NewStateResourceList() *StateResourceList {
 
 // AppendTexture append a texture to the resource list
 func (srl *StateResourceList) AppendTexture(descriptor obj.Object) {
+	defer runtime.KeepAlive(srl)
+	defer runtime.KeepAlive(descriptor)
 	objc.Send[objc.ID](objref.IDOf(srl), objc.RegisterName("appendTexture:"), objref.IDOf(descriptor))
 }
 
 // AppendBuffer append a buffer to the resource list
 func (srl *StateResourceList) AppendBuffer(size int) {
+	defer runtime.KeepAlive(srl)
 	objc.Send[objc.ID](objref.IDOf(srl), objc.RegisterName("appendBuffer:"), size)
 }

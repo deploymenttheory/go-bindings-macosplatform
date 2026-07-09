@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,11 +67,13 @@ func (aur *AudioUnitReverb) WithBypass(bypass bool) *AudioUnitReverb {
 
 // LoadFactoryPreset configures the audio unit as a reverb preset.
 func (aur *AudioUnitReverb) LoadFactoryPreset(preset AudioUnitReverbPreset) {
+	defer runtime.KeepAlive(aur)
 	objc.Send[objc.ID](objref.IDOf(aur), objc.RegisterName("loadFactoryPreset:"), preset)
 }
 
 // WetDryMix returns the wet dry mix.
 func (aur *AudioUnitReverb) WetDryMix() float32 {
+	defer runtime.KeepAlive(aur)
 	_r := objc.Send[float32](objref.IDOf(aur), objc.RegisterName("wetDryMix"))
 	return _r
 }

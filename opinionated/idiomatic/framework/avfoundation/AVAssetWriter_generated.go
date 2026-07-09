@@ -5,12 +5,15 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -51,22 +54,27 @@ func assetWriterAdopt(id objc.ID) *AssetWriter {
 
 // Description returns the object's -description text.
 func (aw *AssetWriter) Description() string {
+	defer runtime.KeepAlive(aw)
 	return rt.Description(objref.IDOf(aw))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aw *AssetWriter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aw)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aw), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aw *AssetWriter) IsKind(className string) bool {
+	defer runtime.KeepAlive(aw)
 	return rt.IsKind(objref.IDOf(aw), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aw *AssetWriter) String() string {
+	defer runtime.KeepAlive(aw)
 	return rt.Description(objref.IDOf(aw))
 }
 
@@ -76,8 +84,9 @@ func NewAssetWriter() *AssetWriter {
 	return assetWriterAdopt(_id)
 }
 
-// NewAssetWriterWithURLFileTypeError creates an object that writes media data to a container file at the output URL.
-func NewAssetWriterWithURLFileTypeError(outputURL string, outputFileType obj.Object) (result *AssetWriter, err error) {
+// NewAssetWriterWithURLFileType creates an object that writes media data to a container file at the output URL.
+func NewAssetWriterWithURLFileType(outputURL string, outputFileType obj.Object) (result *AssetWriter, err error) {
+	defer runtime.KeepAlive(outputFileType)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetWriter")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:fileType:error:"), rt.FileURL(outputURL), objref.IDOf(outputFileType), unsafe.Pointer(&_nsErr))
@@ -89,6 +98,7 @@ func NewAssetWriterWithURLFileTypeError(outputURL string, outputFileType obj.Obj
 
 // NewAssetWriterWithContentType creates an object that outputs segment data in a specified container format.
 func NewAssetWriterWithContentType(outputContentType obj.Object) *AssetWriter {
+	defer runtime.KeepAlive(outputContentType)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetWriter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentType:"), objref.IDOf(outputContentType))
 	return assetWriterAdopt(_id)
@@ -163,76 +173,102 @@ func (aw *AssetWriter) WithInitialSegmentStartTime(initialSegmentStartTime corem
 
 // WithOutputFileTypeProfile sets a profile for the output file type.
 func (aw *AssetWriter) WithOutputFileTypeProfile(outputFileTypeProfile obj.Object) *AssetWriter {
+	defer runtime.KeepAlive(outputFileTypeProfile)
 	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("setOutputFileTypeProfile:"), objref.IDOf(outputFileTypeProfile))
 	return aw
 }
 
+// WithDelegate sets a delegate object that responds to asset-writing events.
+func (aw *AssetWriter) WithDelegate(delegate AssetWriterDelegate) *AssetWriter {
+	_shim := newAssetWriterDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(aw), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(aw), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return aw
+}
+
 // CanApplyOutputSettingsForMediaType determines whether the output file format supports the output settings for a specific media type.
-func (aw *AssetWriter) CanApplyOutputSettingsForMediaType(outputSettings obj.Object, mediaType obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(aw), objc.RegisterName("canApplyOutputSettings:forMediaType:"), objref.IDOf(outputSettings), objref.IDOf(mediaType))
+func (aw *AssetWriter) CanApplyOutputSettingsForMediaType(outputSettings map[string]obj.Object, mediaType obj.Object) bool {
+	defer runtime.KeepAlive(aw)
+	defer runtime.KeepAlive(mediaType)
+	_r := objc.Send[bool](objref.IDOf(aw), objc.RegisterName("canApplyOutputSettings:forMediaType:"), rt.MapToDict(outputSettings, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(mediaType))
 	return _r
 }
 
 // CanAddInput determines whether the asset writer supports adding the input.
 func (aw *AssetWriter) CanAddInput(input *AssetWriterInput) bool {
+	defer runtime.KeepAlive(aw)
+	defer runtime.KeepAlive(input)
 	_r := objc.Send[bool](objref.IDOf(aw), objc.RegisterName("canAddInput:"), objref.IDOf(input))
 	return _r
 }
 
 // AddInput adds an input to an asset writer.
 func (aw *AssetWriter) AddInput(input *AssetWriterInput) {
+	defer runtime.KeepAlive(aw)
+	defer runtime.KeepAlive(input)
 	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("addInput:"), objref.IDOf(input))
 }
 
 // StartWriting reports whether tells the writer to start writing its output.
 func (aw *AssetWriter) StartWriting() bool {
+	defer runtime.KeepAlive(aw)
 	_r := objc.Send[bool](objref.IDOf(aw), objc.RegisterName("startWriting"))
 	return _r
 }
 
 // StartSessionAtSourceTime starts an asset-writing session.
 func (aw *AssetWriter) StartSessionAtSourceTime(startTime coremedia.CMTime) {
+	defer runtime.KeepAlive(aw)
 	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("startSessionAtSourceTime:"), startTime)
 }
 
 // EndSessionAtSourceTime finishes an asset-writing session.
 func (aw *AssetWriter) EndSessionAtSourceTime(endTime coremedia.CMTime) {
+	defer runtime.KeepAlive(aw)
 	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("endSessionAtSourceTime:"), endTime)
 }
 
 // CancelWriting cancels the creation of the output file.
 func (aw *AssetWriter) CancelWriting() {
+	defer runtime.KeepAlive(aw)
 	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("cancelWriting"))
 }
 
 // FinishWriting reports whether completes the writing of the output file.
 func (aw *AssetWriter) FinishWriting() bool {
+	defer runtime.KeepAlive(aw)
 	_r := objc.Send[bool](objref.IDOf(aw), objc.RegisterName("finishWriting"))
 	return _r
 }
 
 // OutputURL returns the location of the file for which the instance of AVAssetWriter was initialized for writing. You may use [[UTType typeWithIdentifier:outputFileType] preferredFilenameExtension] to obtain an appropriate path extension for the outputFileType you have specified. For more information, see <UniformTypeIdentifiers/UTType.h>.
-func (aw *AssetWriter) OutputURL() obj.Object {
+func (aw *AssetWriter) OutputURL() string {
+	defer runtime.KeepAlive(aw)
 	_r := objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("outputURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // OutputFileType returns the UTI of the file format of the file for which the instance of AVAssetWriter was initialized for writing.
-func (aw *AssetWriter) OutputFileType() obj.Object {
+func (aw *AssetWriter) OutputFileType() *foundation.String {
+	defer runtime.KeepAlive(aw)
 	_r := objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("outputFileType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // AvailableMediaTypes returns the media types for which inputs can be added to the receiver. Some media types may not be accepted within the file format with which an AVAssetWriter was initialized.
 //
 // AvailableMediaTypes returns the collection as a Go slice.
 func (aw *AssetWriter) AvailableMediaTypes() []obj.Object {
+	defer runtime.KeepAlive(aw)
 	_arr := objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("availableMediaTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Status returns the status of writing samples to the receiver's output file. The value of this property is an AVAssetWriterStatus that indicates whether writing is in progress, has completed successfully, has been canceled, or has failed. Clients of AVAssetWriterInput objects should check the value of this property after appending samples fails to determine why no more samples could be written. This property is thread safe.
 func (aw *AssetWriter) Status() AssetWriterStatus {
+	defer runtime.KeepAlive(aw)
 	_r := objc.Send[AssetWriterStatus](objref.IDOf(aw), objc.RegisterName("status"))
 	return _r
 }
@@ -241,62 +277,74 @@ func (aw *AssetWriter) Status() AssetWriterStatus {
 //
 // Metadata returns the collection as a Go slice.
 func (aw *AssetWriter) Metadata() []*MetadataItem {
+	defer runtime.KeepAlive(aw)
 	_arr := objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("metadata"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
 // ShouldOptimizeForNetworkUse reports whether the output file should be written in way that makes it more suitable for playback over a network When the value of this property is true, the output file will be written in such a way that playback can start after only a small amount of the file is downloaded. This property cannot be set after writing has started.
 func (aw *AssetWriter) ShouldOptimizeForNetworkUse() bool {
+	defer runtime.KeepAlive(aw)
 	_r := objc.Send[bool](objref.IDOf(aw), objc.RegisterName("shouldOptimizeForNetworkUse"))
 	return _r
 }
 
 // DirectoryForTemporaryFiles specifies a directory that is suitable for containing temporary files generated during the process of writing an asset. AVAssetWriter may need to write temporary files when configured in certain ways, such as when performsMultiPassEncodingIfSupported is set to YES on one or more of its inputs.  This property can be used to control where in the filesystem those temporary files are created.  All temporary files will be deleted when asset writing is completed, is canceled, or fails. When the value of this property is nil, the asset writer will choose a suitable location when writing temporary files.  The default value is nil. This property cannot be set after writing has started.  The asset writer will fail if a file cannot be created in this directory (for example, due to insufficient permissions).
-func (aw *AssetWriter) DirectoryForTemporaryFiles() obj.Object {
+func (aw *AssetWriter) DirectoryForTemporaryFiles() string {
+	defer runtime.KeepAlive(aw)
 	_r := objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("directoryForTemporaryFiles"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Inputs returns the inputs from which the asset writer receives media data. The value of this property is an NSArray containing concrete instances of AVAssetWriterInput. Inputs can be added to the receiver using the addInput: method.
 //
 // Inputs returns the collection as a Go slice.
 func (aw *AssetWriter) Inputs() []*AssetWriterInput {
+	defer runtime.KeepAlive(aw)
 	_arr := objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("inputs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetWriterInput { return AssetWriterInputFromID(_id) })
 }
 
 // MovieFragmentInterval returns for file types that support movie fragments, specifies the frequency at which movie fragments should be written. When movie fragments are used, a partially written asset whose writing is unexpectedly interrupted can be successfully opened and played up to multiples of the specified time interval. The default value of this property is kCMTimeInvalid, which indicates that movie fragments should not be used. When using movie fragments, for best writing performance to external storage devices, set the movieFragmentInterval to 10 seconds or greater. This property cannot be set after writing has started.
 func (aw *AssetWriter) MovieFragmentInterval() coremedia.CMTime {
+	defer runtime.KeepAlive(aw)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(aw), objc.RegisterName("movieFragmentInterval"))
 	return _r
 }
 
 // ProducesCombinableFragments reports whether for file types that support fragmented MPEG-4, specifies whether the movie fragments should be produced in way that makes them suitable for combining with movie fragments produced by one or more other instances of AVAssetWriter into a single fragment stream of uniform encoding. The default value is false. When multiple instances of AVAssetWriter are used to produce distinct streams that complement each other, for example to create HLS encoding or bitrate variants, it’s not necessary to set this property to true. This property cannot be set after writing has started.
 func (aw *AssetWriter) ProducesCombinableFragments() bool {
+	defer runtime.KeepAlive(aw)
 	_r := objc.Send[bool](objref.IDOf(aw), objc.RegisterName("producesCombinableFragments"))
 	return _r
 }
 
 // OverallDurationHint returns for file types that support movie fragments, provides a hint of the final duration of the file to be written The value of this property must be a nonnegative, numeric CMTime.  Alternatively, if the value of this property is an invalid CMTime (e.g. kCMTimeInvalid), no overall duration hint will be written to the file.  The default value is kCMTimeInvalid. This property is currently ignored if movie fragments are not being written.  Use the movieFragmentInterval property to enable movie fragments. This property cannot be set after writing has started.
 func (aw *AssetWriter) OverallDurationHint() coremedia.CMTime {
+	defer runtime.KeepAlive(aw)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(aw), objc.RegisterName("overallDurationHint"))
 	return _r
 }
 
 // MovieTimeScale returns for file types that contain a 'moov' atom, such as QuickTime Movie files, specifies the asset-level time scale to be used. The default value is 0, which indicates that the receiver should choose a convenient value, if applicable. This property cannot be set after writing has started.
 func (aw *AssetWriter) MovieTimeScale() int32 {
+	defer runtime.KeepAlive(aw)
 	_r := objc.Send[int32](objref.IDOf(aw), objc.RegisterName("movieTimeScale"))
 	return _r
 }
 
 // CanAddInputGroup determines whether the asset writer supports adding the input group.
 func (aw *AssetWriter) CanAddInputGroup(inputGroup *AssetWriterInputGroup) bool {
+	defer runtime.KeepAlive(aw)
+	defer runtime.KeepAlive(inputGroup)
 	_r := objc.Send[bool](objref.IDOf(aw), objc.RegisterName("canAddInputGroup:"), objref.IDOf(inputGroup))
 	return _r
 }
 
 // AddInputGroup adds an input group to an asset writer.
 func (aw *AssetWriter) AddInputGroup(inputGroup *AssetWriterInputGroup) {
+	defer runtime.KeepAlive(aw)
+	defer runtime.KeepAlive(inputGroup)
 	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("addInputGroup:"), objref.IDOf(inputGroup))
 }
 
@@ -304,23 +352,27 @@ func (aw *AssetWriter) AddInputGroup(inputGroup *AssetWriterInputGroup) {
 //
 // InputGroups returns the collection as a Go slice.
 func (aw *AssetWriter) InputGroups() []*AssetWriterInputGroup {
+	defer runtime.KeepAlive(aw)
 	_arr := objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("inputGroups"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetWriterInputGroup { return AssetWriterInputGroupFromID(_id) })
 }
 
 // FlushSegment closes the current segment and outputs it to a delegate method.
 func (aw *AssetWriter) FlushSegment() {
+	defer runtime.KeepAlive(aw)
 	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("flushSegment"))
 }
 
 // PreferredOutputSegmentInterval specifies preferred segment interval. The default value is kCMTimeInvalid, which means that the receiver will choose an appropriate default value. The value can be set to positive numeric or kCMTimeIndefinite. If the value is kCMTimeIndefinite, every time a client calls -flushSegment the receiver outputs a segment data. This property cannot be set after writing has started.
 func (aw *AssetWriter) PreferredOutputSegmentInterval() coremedia.CMTime {
+	defer runtime.KeepAlive(aw)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(aw), objc.RegisterName("preferredOutputSegmentInterval"))
 	return _r
 }
 
 // OutputFileTypeProfile returns the output file type profile.
-func (aw *AssetWriter) OutputFileTypeProfile() obj.Object {
+func (aw *AssetWriter) OutputFileTypeProfile() *foundation.String {
+	defer runtime.KeepAlive(aw)
 	_r := objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("outputFileTypeProfile"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }

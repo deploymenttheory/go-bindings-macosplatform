@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func objectAdopt(id objc.ID) *Object {
 
 // Description returns the object's -description text.
 func (o *Object) Description() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (o *Object) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (o *Object) IsKind(className string) bool {
+	defer runtime.KeepAlive(o)
 	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (o *Object) String() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
@@ -82,6 +89,7 @@ func NewObjectWithIdentifierDisplayString(identifier string, displayString strin
 
 // NewObjectWithIdentifierDisplayStringSubtitleStringDisplayImage creates a custom intent object with full display information.
 func NewObjectWithIdentifierDisplayStringSubtitleStringDisplayImage(identifier string, displayString string, subtitleString string, displayImage *Image) *Object {
+	defer runtime.KeepAlive(displayImage)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:displayString:subtitleString:displayImage:"), purego.NSString(identifier), purego.NSString(displayString), purego.NSString(subtitleString), objref.IDOf(displayImage))
 	return objectAdopt(_id)
@@ -89,6 +97,7 @@ func NewObjectWithIdentifierDisplayStringSubtitleStringDisplayImage(identifier s
 
 // NewObjectWithIdentifierDisplayStringPronunciationHintSubtitleStringDisplayImage creates a custom intent object with the specified attributes.
 func NewObjectWithIdentifierDisplayStringPronunciationHintSubtitleStringDisplayImage(identifier string, displayString string, pronunciationHint string, subtitleString string, displayImage *Image) *Object {
+	defer runtime.KeepAlive(displayImage)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:displayString:pronunciationHint:subtitleString:displayImage:"), purego.NSString(identifier), purego.NSString(displayString), purego.NSString(pronunciationHint), purego.NSString(subtitleString), objref.IDOf(displayImage))
 	return objectAdopt(_id)
@@ -102,6 +111,7 @@ func (o *Object) WithSubtitleString(subtitleString string) *Object {
 
 // WithDisplayImage sets an image to display alongside the custom intent object’s text.
 func (o *Object) WithDisplayImage(displayImage *Image) *Object {
+	defer runtime.KeepAlive(displayImage)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setDisplayImage:"), objref.IDOf(displayImage))
 	return o
 }
@@ -115,6 +125,7 @@ func (o *Object) WithAlternativeSpeakableMatches(items ...*SpeakableString) *Obj
 
 // Identifier returns the identifier.
 func (o *Object) Identifier() string {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -124,6 +135,7 @@ func (o *Object) Identifier() string {
 
 // DisplayString returns the display string.
 func (o *Object) DisplayString() string {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("displayString"))
 	if _r == 0 {
 		return ""
@@ -133,6 +145,7 @@ func (o *Object) DisplayString() string {
 
 // PronunciationHint returns the pronunciation hint.
 func (o *Object) PronunciationHint() string {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("pronunciationHint"))
 	if _r == 0 {
 		return ""
@@ -142,6 +155,7 @@ func (o *Object) PronunciationHint() string {
 
 // SubtitleString returns the subtitle string.
 func (o *Object) SubtitleString() string {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("subtitleString"))
 	if _r == 0 {
 		return ""
@@ -151,6 +165,7 @@ func (o *Object) SubtitleString() string {
 
 // DisplayImage returns the display image.
 func (o *Object) DisplayImage() *Image {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("displayImage"))
 	return ImageFromID(_r)
 }
@@ -159,6 +174,7 @@ func (o *Object) DisplayImage() *Image {
 //
 // AlternativeSpeakableMatches returns the collection as a Go slice.
 func (o *Object) AlternativeSpeakableMatches() []*SpeakableString {
+	defer runtime.KeepAlive(o)
 	_arr := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("alternativeSpeakableMatches"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SpeakableString { return SpeakableStringFromID(_id) })
 }

@@ -1889,8 +1889,8 @@ func CFCopyDescription(cf unsafe.Pointer) unsafe.Pointer {
 	return _fnCFCopyDescription(cf)
 }
 
-func CFCopyTypeIDDescription(type_id uint) unsafe.Pointer {
-	return _fnCFCopyTypeIDDescription(type_id)
+func CFCopyTypeIDDescription(typeId uint) unsafe.Pointer {
+	return _fnCFCopyTypeIDDescription(typeId)
 }
 
 func CFDataAppendBytes(theData unsafe.Pointer, bytes_ *uint8, length int) {
@@ -4075,8 +4075,8 @@ func CFURLCreateStringByReplacingPercentEscapesUsingEncoding(allocator unsafe.Po
 	return _fnCFURLCreateStringByReplacingPercentEscapesUsingEncoding(allocator, origString, charsToLeaveEscaped, encoding)
 }
 
-func CFURLCreateWithBytes(allocator unsafe.Pointer, uRLBytes *uint8, length int, encoding uint, baseURL unsafe.Pointer) unsafe.Pointer {
-	return _fnCFURLCreateWithBytes(allocator, uRLBytes, length, encoding, baseURL)
+func CFURLCreateWithBytes(allocator unsafe.Pointer, urlBytes *uint8, length int, encoding uint, baseURL unsafe.Pointer) unsafe.Pointer {
+	return _fnCFURLCreateWithBytes(allocator, urlBytes, length, encoding, baseURL)
 }
 
 func CFURLCreateWithFileSystemPath(allocator unsafe.Pointer, filePath unsafe.Pointer, pathStyle CFURLPathStyle, isDirectory uint8) unsafe.Pointer {
@@ -4087,8 +4087,8 @@ func CFURLCreateWithFileSystemPathRelativeToBase(allocator unsafe.Pointer, fileP
 	return _fnCFURLCreateWithFileSystemPathRelativeToBase(allocator, filePath, pathStyle, isDirectory, baseURL)
 }
 
-func CFURLCreateWithString(allocator unsafe.Pointer, uRLString unsafe.Pointer, baseURL unsafe.Pointer) unsafe.Pointer {
-	return _fnCFURLCreateWithString(allocator, uRLString, baseURL)
+func CFURLCreateWithString(allocator unsafe.Pointer, urlString unsafe.Pointer, baseURL unsafe.Pointer) unsafe.Pointer {
+	return _fnCFURLCreateWithString(allocator, urlString, baseURL)
 }
 
 // Deprecated: Use CFURLGetFileSystemRepresentation and removefile(3) instead.

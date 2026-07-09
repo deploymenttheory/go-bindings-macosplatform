@@ -5,6 +5,8 @@
 package automaticassessmentconfiguration
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func assessmentParticipantConfigurationAdopt(id objc.ID) *AssessmentParticipantC
 
 // Description returns the object's -description text.
 func (apc *AssessmentParticipantConfiguration) Description() string {
+	defer runtime.KeepAlive(apc)
 	return rt.Description(objref.IDOf(apc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apc *AssessmentParticipantConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apc *AssessmentParticipantConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(apc)
 	return rt.IsKind(objref.IDOf(apc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apc *AssessmentParticipantConfiguration) String() string {
+	defer runtime.KeepAlive(apc)
 	return rt.Description(objref.IDOf(apc))
 }
 
@@ -85,25 +92,28 @@ func (apc *AssessmentParticipantConfiguration) WithRequired(required bool) *Asse
 }
 
 // WithConfigurationInfo sets the configuration info.
-func (apc *AssessmentParticipantConfiguration) WithConfigurationInfo(configurationInfo obj.Object) *AssessmentParticipantConfiguration {
-	objc.Send[objc.ID](objref.IDOf(apc), objc.RegisterName("setConfigurationInfo:"), objref.IDOf(configurationInfo))
+func (apc *AssessmentParticipantConfiguration) WithConfigurationInfo(configurationInfo map[string]obj.Object) *AssessmentParticipantConfiguration {
+	objc.Send[objc.ID](objref.IDOf(apc), objc.RegisterName("setConfigurationInfo:"), rt.MapToDict(configurationInfo, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return apc
 }
 
 // AllowsNetworkAccess wraps the corresponding Objective-C method.
 func (apc *AssessmentParticipantConfiguration) AllowsNetworkAccess() bool {
+	defer runtime.KeepAlive(apc)
 	_r := objc.Send[bool](objref.IDOf(apc), objc.RegisterName("allowsNetworkAccess"))
 	return _r
 }
 
 // IsRequired reports whether the object is required.
 func (apc *AssessmentParticipantConfiguration) IsRequired() bool {
+	defer runtime.KeepAlive(apc)
 	_r := objc.Send[bool](objref.IDOf(apc), objc.RegisterName("isRequired"))
 	return _r
 }
 
 // ConfigurationInfo returns the configuration info.
-func (apc *AssessmentParticipantConfiguration) ConfigurationInfo() obj.Object {
+func (apc *AssessmentParticipantConfiguration) ConfigurationInfo() map[string]obj.Object {
+	defer runtime.KeepAlive(apc)
 	_r := objc.Send[objc.ID](objref.IDOf(apc), objc.RegisterName("configurationInfo"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

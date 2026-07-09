@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDoorLockClusterLockDoorParamsAdopt(id objc.ID) *MTRDoorLockClusterLockDo
 
 // Description returns the object's -description text.
 func (mdlcldp *MTRDoorLockClusterLockDoorParams) Description() string {
+	defer runtime.KeepAlive(mdlcldp)
 	return rt.Description(objref.IDOf(mdlcldp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdlcldp *MTRDoorLockClusterLockDoorParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdlcldp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdlcldp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdlcldp *MTRDoorLockClusterLockDoorParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdlcldp)
 	return rt.IsKind(objref.IDOf(mdlcldp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdlcldp *MTRDoorLockClusterLockDoorParams) String() string {
+	defer runtime.KeepAlive(mdlcldp)
 	return rt.Description(objref.IDOf(mdlcldp))
 }
 
@@ -71,37 +79,42 @@ func NewMTRDoorLockClusterLockDoorParams() *MTRDoorLockClusterLockDoorParams {
 }
 
 // WithPinCode sets the pin code.
-func (mdlcldp *MTRDoorLockClusterLockDoorParams) WithPinCode(pinCode obj.Object) *MTRDoorLockClusterLockDoorParams {
-	objc.Send[objc.ID](objref.IDOf(mdlcldp), objc.RegisterName("setPinCode:"), objref.IDOf(pinCode))
+func (mdlcldp *MTRDoorLockClusterLockDoorParams) WithPinCode(pinCode []byte) *MTRDoorLockClusterLockDoorParams {
+	objc.Send[objc.ID](objref.IDOf(mdlcldp), objc.RegisterName("setPinCode:"), rt.BytesToNSData(pinCode))
 	return mdlcldp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mdlcldp *MTRDoorLockClusterLockDoorParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterLockDoorParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mdlcldp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mdlcldp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mdlcldp *MTRDoorLockClusterLockDoorParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterLockDoorParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mdlcldp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mdlcldp
 }
 
 // PinCode returns the pin code.
-func (mdlcldp *MTRDoorLockClusterLockDoorParams) PinCode() obj.Object {
+func (mdlcldp *MTRDoorLockClusterLockDoorParams) PinCode() []byte {
+	defer runtime.KeepAlive(mdlcldp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcldp), objc.RegisterName("pinCode"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mdlcldp *MTRDoorLockClusterLockDoorParams) TimedInvokeTimeoutMs() obj.Object {
+func (mdlcldp *MTRDoorLockClusterLockDoorParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mdlcldp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcldp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mdlcldp *MTRDoorLockClusterLockDoorParams) ServerSideProcessingTimeout() obj.Object {
+func (mdlcldp *MTRDoorLockClusterLockDoorParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mdlcldp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcldp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

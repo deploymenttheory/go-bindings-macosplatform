@@ -47,8 +47,8 @@ func (o *NSPathComponentCell) URL() *foundation.NSURL {
 	return _mainthread0
 }
 
-func (o *NSPathComponentCell) SetURL(uRL *foundation.NSURL) {
+func (o *NSPathComponentCell) SetURL(url *foundation.NSURL) {
 	purego.Main(func() {
-		o.Ptr().Send(_nSPathComponentCellSelSetURL, uRL.Ptr())
+		o.Ptr().Send(_nSPathComponentCellSelSetURL, url.Ptr())
 	})
 }

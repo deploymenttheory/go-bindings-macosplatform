@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRICDManagementClusterRegisterClientResponseParamsAdopt(id objc.ID) *MTRIC
 
 // Description returns the object's -description text.
 func (mmcrcrp *MTRICDManagementClusterRegisterClientResponseParams) Description() string {
+	defer runtime.KeepAlive(mmcrcrp)
 	return rt.Description(objref.IDOf(mmcrcrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmcrcrp *MTRICDManagementClusterRegisterClientResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmcrcrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmcrcrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmcrcrp *MTRICDManagementClusterRegisterClientResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmcrcrp)
 	return rt.IsKind(objref.IDOf(mmcrcrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmcrcrp *MTRICDManagementClusterRegisterClientResponseParams) String() string {
+	defer runtime.KeepAlive(mmcrcrp)
 	return rt.Description(objref.IDOf(mmcrcrp))
 }
 
-// NewMTRICDManagementClusterRegisterClientResponseParamsWithResponseValueError initialize an MTRICDManagementClusterRegisterClientResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-func NewMTRICDManagementClusterRegisterClientResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRICDManagementClusterRegisterClientResponseParams, err error) {
+// NewMTRICDManagementClusterRegisterClientResponseParamsWithResponseValue initialize an MTRICDManagementClusterRegisterClientResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRICDManagementClusterRegisterClientResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRICDManagementClusterRegisterClientResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRICDManagementClusterRegisterClientResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,12 +87,14 @@ func NewMTRICDManagementClusterRegisterClientResponseParamsWithResponseValueErro
 
 // WithIcdCounter sets the icd counter.
 func (mmcrcrp *MTRICDManagementClusterRegisterClientResponseParams) WithIcdCounter(icdCounter obj.Object) *MTRICDManagementClusterRegisterClientResponseParams {
+	defer runtime.KeepAlive(icdCounter)
 	objc.Send[objc.ID](objref.IDOf(mmcrcrp), objc.RegisterName("setIcdCounter:"), objref.IDOf(icdCounter))
 	return mmcrcrp
 }
 
 // IcdCounter returns the icd counter.
-func (mmcrcrp *MTRICDManagementClusterRegisterClientResponseParams) IcdCounter() obj.Object {
+func (mmcrcrp *MTRICDManagementClusterRegisterClientResponseParams) IcdCounter() *foundation.Number {
+	defer runtime.KeepAlive(mmcrcrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcrcrp), objc.RegisterName("icdCounter"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

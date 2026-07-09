@@ -5,9 +5,12 @@
 package healthkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,24 +51,28 @@ func sampleAdopt(id objc.ID) *Sample {
 
 // SampleType returns the sample type.
 func (s *Sample) SampleType() *SampleType {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("sampleType"))
 	return SampleTypeFromID(_r)
 }
 
 // StartDate returns the start date.
-func (s *Sample) StartDate() obj.Object {
+func (s *Sample) StartDate() time.Time {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // EndDate returns the end date.
-func (s *Sample) EndDate() obj.Object {
+func (s *Sample) EndDate() time.Time {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("endDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // HasUndeterminedDuration reports whether a sample has an undetermined duration. Computed based on the endDate of a sample.
 func (s *Sample) HasUndeterminedDuration() bool {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("hasUndeterminedDuration"))
 	return _r
 }

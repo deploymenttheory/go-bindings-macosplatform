@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
@@ -50,22 +51,27 @@ func accessPointAdopt(id objc.ID) *AccessPoint {
 
 // Description returns the object's -description text.
 func (ap *AccessPoint) Description() string {
+	defer runtime.KeepAlive(ap)
 	return rt.Description(objref.IDOf(ap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ap *AccessPoint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ap)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ap *AccessPoint) IsKind(className string) bool {
+	defer runtime.KeepAlive(ap)
 	return rt.IsKind(objref.IDOf(ap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ap *AccessPoint) String() string {
+	defer runtime.KeepAlive(ap)
 	return rt.Description(objref.IDOf(ap))
 }
 
@@ -95,6 +101,7 @@ func (ap *AccessPoint) WithLocation(location AccessPointLocation) *AccessPoint {
 
 // WithParentWindow sets the window that contains the access point.
 func (ap *AccessPoint) WithParentWindow(parentWindow obj.Object) *AccessPoint {
+	defer runtime.KeepAlive(parentWindow)
 	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
 	return ap
 }
@@ -103,6 +110,7 @@ func (ap *AccessPoint) WithParentWindow(parentWindow obj.Object) *AccessPoint {
 //
 // TriggerAccessPointWithHandler blocks until the operation completes or ctx is cancelled.
 func (ap *AccessPoint) TriggerAccessPointWithHandler(ctx context.Context) error {
+	defer runtime.KeepAlive(ap)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -120,6 +128,7 @@ func (ap *AccessPoint) TriggerAccessPointWithHandler(ctx context.Context) error 
 //
 // TriggerAccessPointWithStateHandler blocks until the operation completes or ctx is cancelled.
 func (ap *AccessPoint) TriggerAccessPointWithStateHandler(ctx context.Context, state GameCenterViewControllerState) error {
+	defer runtime.KeepAlive(ap)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -137,6 +146,7 @@ func (ap *AccessPoint) TriggerAccessPointWithStateHandler(ctx context.Context, s
 //
 // TriggerAccessPointWithAchievementIDHandler blocks until the operation completes or ctx is cancelled.
 func (ap *AccessPoint) TriggerAccessPointWithAchievementIDHandler(ctx context.Context, achievementID string) error {
+	defer runtime.KeepAlive(ap)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -154,6 +164,7 @@ func (ap *AccessPoint) TriggerAccessPointWithAchievementIDHandler(ctx context.Co
 //
 // TriggerAccessPointWithLeaderboardSetIDHandler blocks until the operation completes or ctx is cancelled.
 func (ap *AccessPoint) TriggerAccessPointWithLeaderboardSetIDHandler(ctx context.Context, leaderboardSetID string) error {
+	defer runtime.KeepAlive(ap)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -171,6 +182,7 @@ func (ap *AccessPoint) TriggerAccessPointWithLeaderboardSetIDHandler(ctx context
 //
 // TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler blocks until the operation completes or ctx is cancelled.
 func (ap *AccessPoint) TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler(ctx context.Context, leaderboardID string, playerScope LeaderboardPlayerScope, timeScope LeaderboardTimeScope) error {
+	defer runtime.KeepAlive(ap)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -188,6 +200,8 @@ func (ap *AccessPoint) TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHa
 //
 // TriggerAccessPointWithPlayerHandler blocks until the operation completes or ctx is cancelled.
 func (ap *AccessPoint) TriggerAccessPointWithPlayerHandler(ctx context.Context, player *Player) error {
+	defer runtime.KeepAlive(ap)
+	defer runtime.KeepAlive(player)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -205,6 +219,7 @@ func (ap *AccessPoint) TriggerAccessPointWithPlayerHandler(ctx context.Context, 
 //
 // TriggerAccessPointForPlayTogetherWithHandler blocks until the operation completes or ctx is cancelled.
 func (ap *AccessPoint) TriggerAccessPointForPlayTogetherWithHandler(ctx context.Context) error {
+	defer runtime.KeepAlive(ap)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -222,6 +237,7 @@ func (ap *AccessPoint) TriggerAccessPointForPlayTogetherWithHandler(ctx context.
 //
 // TriggerAccessPointForChallengesWithHandler blocks until the operation completes or ctx is cancelled.
 func (ap *AccessPoint) TriggerAccessPointForChallengesWithHandler(ctx context.Context) error {
+	defer runtime.KeepAlive(ap)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -239,6 +255,7 @@ func (ap *AccessPoint) TriggerAccessPointForChallengesWithHandler(ctx context.Co
 //
 // TriggerAccessPointWithChallengeDefinitionIDHandler blocks until the operation completes or ctx is cancelled.
 func (ap *AccessPoint) TriggerAccessPointWithChallengeDefinitionIDHandler(ctx context.Context, challengeDefinitionID string) error {
+	defer runtime.KeepAlive(ap)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -256,6 +273,7 @@ func (ap *AccessPoint) TriggerAccessPointWithChallengeDefinitionIDHandler(ctx co
 //
 // TriggerAccessPointWithGameActivityDefinitionIDHandler blocks until the operation completes or ctx is cancelled.
 func (ap *AccessPoint) TriggerAccessPointWithGameActivityDefinitionIDHandler(ctx context.Context, gameActivityDefinitionID string) error {
+	defer runtime.KeepAlive(ap)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -273,6 +291,8 @@ func (ap *AccessPoint) TriggerAccessPointWithGameActivityDefinitionIDHandler(ctx
 //
 // TriggerAccessPointWithGameActivityHandler blocks until the operation completes or ctx is cancelled.
 func (ap *AccessPoint) TriggerAccessPointWithGameActivityHandler(ctx context.Context, gameActivity *GameActivity) error {
+	defer runtime.KeepAlive(ap)
+	defer runtime.KeepAlive(gameActivity)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -290,6 +310,7 @@ func (ap *AccessPoint) TriggerAccessPointWithGameActivityHandler(ctx context.Con
 //
 // TriggerAccessPointForFriendingWithHandler blocks until the operation completes or ctx is cancelled.
 func (ap *AccessPoint) TriggerAccessPointForFriendingWithHandler(ctx context.Context) error {
+	defer runtime.KeepAlive(ap)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -307,6 +328,7 @@ func (ap *AccessPoint) TriggerAccessPointForFriendingWithHandler(ctx context.Con
 //
 // TriggerAccessPointForArcadeWithHandler blocks until the operation completes or ctx is cancelled.
 func (ap *AccessPoint) TriggerAccessPointForArcadeWithHandler(ctx context.Context) error {
+	defer runtime.KeepAlive(ap)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -322,30 +344,35 @@ func (ap *AccessPoint) TriggerAccessPointForArcadeWithHandler(ctx context.Contex
 
 // IsActive reports whether set this true to enable access point in your app. Setting this will cause the access point to appear after the notification banner is presented. If it already was presented it will appear immediately
 func (ap *AccessPoint) IsActive() bool {
+	defer runtime.KeepAlive(ap)
 	_r := objc.Send[bool](objref.IDOf(ap), objc.RegisterName("isActive"))
 	return _r
 }
 
 // ShowHighlights reports whether set this property to true if you wish to show the highlights for most recent achievement, current rank on default leaderboard, etc
 func (ap *AccessPoint) ShowHighlights() bool {
+	defer runtime.KeepAlive(ap)
 	_r := objc.Send[bool](objref.IDOf(ap), objc.RegisterName("showHighlights"))
 	return _r
 }
 
 // Location returns these properties control the placement of the widget
 func (ap *AccessPoint) Location() AccessPointLocation {
+	defer runtime.KeepAlive(ap)
 	_r := objc.Send[AccessPointLocation](objref.IDOf(ap), objc.RegisterName("location"))
 	return _r
 }
 
 // FrameInScreenCoordinates returns observable property that contains the current frame needed to display the widget
 func (ap *AccessPoint) FrameInScreenCoordinates() corefoundation.CGRect {
+	defer runtime.KeepAlive(ap)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(ap), objc.RegisterName("frameInScreenCoordinates"))
 	return _r
 }
 
 // ParentWindow returns the following is a platform specific window that you wish to have the access point in.  If not set then a best attempt will be made to choose the main window of the app.
 func (ap *AccessPoint) ParentWindow() obj.Object {
+	defer runtime.KeepAlive(ap)
 	_r := objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("parentWindow"))
 	return obj.Wrap(_r)
 }

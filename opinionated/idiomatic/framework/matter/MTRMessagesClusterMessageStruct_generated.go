@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRMessagesClusterMessageStructAdopt(id objc.ID) *MTRMessagesClusterMessage
 
 // Description returns the object's -description text.
 func (mmcms *MTRMessagesClusterMessageStruct) Description() string {
+	defer runtime.KeepAlive(mmcms)
 	return rt.Description(objref.IDOf(mmcms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmcms *MTRMessagesClusterMessageStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmcms)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmcms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmcms *MTRMessagesClusterMessageStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmcms)
 	return rt.IsKind(objref.IDOf(mmcms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmcms *MTRMessagesClusterMessageStruct) String() string {
+	defer runtime.KeepAlive(mmcms)
 	return rt.Description(objref.IDOf(mmcms))
 }
 
@@ -71,31 +79,35 @@ func NewMTRMessagesClusterMessageStruct() *MTRMessagesClusterMessageStruct {
 }
 
 // WithMessageID sets the message ID.
-func (mmcms *MTRMessagesClusterMessageStruct) WithMessageID(messageID obj.Object) *MTRMessagesClusterMessageStruct {
-	objc.Send[objc.ID](objref.IDOf(mmcms), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
+func (mmcms *MTRMessagesClusterMessageStruct) WithMessageID(messageID []byte) *MTRMessagesClusterMessageStruct {
+	objc.Send[objc.ID](objref.IDOf(mmcms), objc.RegisterName("setMessageID:"), rt.BytesToNSData(messageID))
 	return mmcms
 }
 
 // WithPriority sets the priority.
 func (mmcms *MTRMessagesClusterMessageStruct) WithPriority(priority obj.Object) *MTRMessagesClusterMessageStruct {
+	defer runtime.KeepAlive(priority)
 	objc.Send[objc.ID](objref.IDOf(mmcms), objc.RegisterName("setPriority:"), objref.IDOf(priority))
 	return mmcms
 }
 
 // WithMessageControl sets the message control.
 func (mmcms *MTRMessagesClusterMessageStruct) WithMessageControl(messageControl obj.Object) *MTRMessagesClusterMessageStruct {
+	defer runtime.KeepAlive(messageControl)
 	objc.Send[objc.ID](objref.IDOf(mmcms), objc.RegisterName("setMessageControl:"), objref.IDOf(messageControl))
 	return mmcms
 }
 
 // WithStartTime sets the start time.
 func (mmcms *MTRMessagesClusterMessageStruct) WithStartTime(startTime obj.Object) *MTRMessagesClusterMessageStruct {
+	defer runtime.KeepAlive(startTime)
 	objc.Send[objc.ID](objref.IDOf(mmcms), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return mmcms
 }
 
 // WithDuration sets the duration.
 func (mmcms *MTRMessagesClusterMessageStruct) WithDuration(duration obj.Object) *MTRMessagesClusterMessageStruct {
+	defer runtime.KeepAlive(duration)
 	objc.Send[objc.ID](objref.IDOf(mmcms), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return mmcms
 }
@@ -107,37 +119,43 @@ func (mmcms *MTRMessagesClusterMessageStruct) WithMessageText(messageText string
 }
 
 // MessageID returns the message ID.
-func (mmcms *MTRMessagesClusterMessageStruct) MessageID() obj.Object {
+func (mmcms *MTRMessagesClusterMessageStruct) MessageID() []byte {
+	defer runtime.KeepAlive(mmcms)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcms), objc.RegisterName("messageID"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Priority returns the priority.
-func (mmcms *MTRMessagesClusterMessageStruct) Priority() obj.Object {
+func (mmcms *MTRMessagesClusterMessageStruct) Priority() *foundation.Number {
+	defer runtime.KeepAlive(mmcms)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcms), objc.RegisterName("priority"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MessageControl returns the message control.
-func (mmcms *MTRMessagesClusterMessageStruct) MessageControl() obj.Object {
+func (mmcms *MTRMessagesClusterMessageStruct) MessageControl() *foundation.Number {
+	defer runtime.KeepAlive(mmcms)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcms), objc.RegisterName("messageControl"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StartTime returns the start time.
-func (mmcms *MTRMessagesClusterMessageStruct) StartTime() obj.Object {
+func (mmcms *MTRMessagesClusterMessageStruct) StartTime() *foundation.Number {
+	defer runtime.KeepAlive(mmcms)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcms), objc.RegisterName("startTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Duration returns the duration.
-func (mmcms *MTRMessagesClusterMessageStruct) Duration() obj.Object {
+func (mmcms *MTRMessagesClusterMessageStruct) Duration() *foundation.Number {
+	defer runtime.KeepAlive(mmcms)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcms), objc.RegisterName("duration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MessageText returns the message text.
 func (mmcms *MTRMessagesClusterMessageStruct) MessageText() string {
+	defer runtime.KeepAlive(mmcms)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcms), objc.RegisterName("messageText"))
 	if _r == 0 {
 		return ""
@@ -147,11 +165,14 @@ func (mmcms *MTRMessagesClusterMessageStruct) MessageText() string {
 
 // Responses returns the responses.
 func (mmcms *MTRMessagesClusterMessageStruct) Responses() obj.Object {
+	defer runtime.KeepAlive(mmcms)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcms), objc.RegisterName("responses"))
 	return obj.Wrap(_r)
 }
 
 // SetResponses wraps the corresponding Objective-C method.
 func (mmcms *MTRMessagesClusterMessageStruct) SetResponses(responses obj.Object) {
+	defer runtime.KeepAlive(mmcms)
+	defer runtime.KeepAlive(responses)
 	objc.Send[objc.ID](objref.IDOf(mmcms), objc.RegisterName("setResponses:"), objref.IDOf(responses))
 }

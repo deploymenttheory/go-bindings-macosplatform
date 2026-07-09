@@ -419,7 +419,7 @@
       },
       "interpolationPhase": {
         "doc": "An array of floating-point values that indicate which intervals to insert a frame between the current and next frame.",
-        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionparameters/interpolationphase-6wdns"
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionparameters/interpolationphase-2jky5"
       },
       "nextFrame": {
         "doc": "The next source frame in presentation time order.",
@@ -560,8 +560,8 @@
         "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/frameheight"
       },
       "frameSupportedPixelFormats": {
-        "doc": "A list of source frame supported pixel formats for the current configuration.",
-        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/framesupportedpixelformats-1n4uq"
+        "doc": "Available supported pixel formats for source frames for current configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/framesupportedpixelformats-5a1iv"
       },
       "frameWidth": {
         "doc": "The width of a source frame in pixels.",
@@ -656,8 +656,8 @@
         "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/frameheight"
       },
       "frameSupportedPixelFormats": {
-        "doc": "A list of source frame supported pixel formats for the current configuration.",
-        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/framesupportedpixelformats-gm6u"
+        "doc": "Supported pixel formats for source frames for current configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/framesupportedpixelformats-85kob"
       },
       "frameWidth": {
         "doc": "The width of a source frame in pixels.",

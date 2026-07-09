@@ -5,7 +5,10 @@
 package fileproviderui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func actionExtensionContextAdopt(id objc.ID) *ActionExtensionContext {
 
 // Description returns the object's -description text.
 func (aec *ActionExtensionContext) Description() string {
+	defer runtime.KeepAlive(aec)
 	return rt.Description(objref.IDOf(aec))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aec *ActionExtensionContext) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aec)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aec), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aec *ActionExtensionContext) IsKind(className string) bool {
+	defer runtime.KeepAlive(aec)
 	return rt.IsKind(objref.IDOf(aec), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aec *ActionExtensionContext) String() string {
+	defer runtime.KeepAlive(aec)
 	return rt.Description(objref.IDOf(aec))
 }
 
@@ -74,11 +82,13 @@ func NewActionExtensionContext() *ActionExtensionContext {
 
 // CompleteRequest marks the action as complete.
 func (aec *ActionExtensionContext) CompleteRequest() {
+	defer runtime.KeepAlive(aec)
 	objc.Send[objc.ID](objref.IDOf(aec), objc.RegisterName("completeRequest"))
 }
 
 // DomainIdentifier returns the identifier for the domain managed by the current file provider.
-func (aec *ActionExtensionContext) DomainIdentifier() obj.Object {
+func (aec *ActionExtensionContext) DomainIdentifier() *foundation.String {
+	defer runtime.KeepAlive(aec)
 	_r := objc.Send[objc.ID](objref.IDOf(aec), objc.RegisterName("domainIdentifier"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }

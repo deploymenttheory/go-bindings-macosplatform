@@ -5,6 +5,8 @@
 package quartzcomposer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -46,27 +48,34 @@ func rendererAdopt(id objc.ID) *Renderer {
 
 // Description returns the object's -description text.
 func (r *Renderer) Description() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (r *Renderer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (r *Renderer) IsKind(className string) bool {
+	defer runtime.KeepAlive(r)
 	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (r *Renderer) String() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // NewRendererWithCompositionColorSpace creates a new Renderer.
 func NewRendererWithCompositionColorSpace(composition obj.Object, colorSpace obj.Object) *Renderer {
+	defer runtime.KeepAlive(composition)
+	defer runtime.KeepAlive(colorSpace)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QCRenderer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComposition:colorSpace:"), objref.IDOf(composition), objref.IDOf(colorSpace))
 	return rendererAdopt(_id)
@@ -74,6 +83,10 @@ func NewRendererWithCompositionColorSpace(composition obj.Object, colorSpace obj
 
 // NewRendererWithCGLContextPixelFormatColorSpaceComposition creates a new Renderer.
 func NewRendererWithCGLContextPixelFormatColorSpaceComposition(context_ obj.Object, format obj.Object, colorSpace obj.Object, composition obj.Object) *Renderer {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(format)
+	defer runtime.KeepAlive(colorSpace)
+	defer runtime.KeepAlive(composition)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QCRenderer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLContext:pixelFormat:colorSpace:composition:"), objref.IDOf(context_), objref.IDOf(format), objref.IDOf(colorSpace), objref.IDOf(composition))
 	return rendererAdopt(_id)
@@ -81,6 +94,8 @@ func NewRendererWithCGLContextPixelFormatColorSpaceComposition(context_ obj.Obje
 
 // NewRendererOffScreenWithSizeColorSpaceComposition creates a new Renderer.
 func NewRendererOffScreenWithSizeColorSpaceComposition(size corefoundation.CGSize, colorSpace obj.Object, composition obj.Object) *Renderer {
+	defer runtime.KeepAlive(colorSpace)
+	defer runtime.KeepAlive(composition)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QCRenderer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initOffScreenWithSize:colorSpace:composition:"), size, objref.IDOf(colorSpace), objref.IDOf(composition))
 	return rendererAdopt(_id)
@@ -88,6 +103,8 @@ func NewRendererOffScreenWithSizeColorSpaceComposition(size corefoundation.CGSiz
 
 // NewRendererWithOpenGLContextPixelFormatFile creates a new Renderer.
 func NewRendererWithOpenGLContextPixelFormatFile(context_ obj.Object, format obj.Object, path string) *Renderer {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(format)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QCRenderer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOpenGLContext:pixelFormat:file:"), objref.IDOf(context_), objref.IDOf(format), purego.NSString(path))
 	return rendererAdopt(_id)
@@ -95,30 +112,37 @@ func NewRendererWithOpenGLContextPixelFormatFile(context_ obj.Object, format obj
 
 // RenderAtTimeArguments wraps the corresponding Objective-C method.
 func (r *Renderer) RenderAtTimeArguments(time_ float64, arguments obj.Object) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(arguments)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("renderAtTime:arguments:"), time_, objref.IDOf(arguments))
 	return _r
 }
 
 // RenderingTimeForTimeArguments wraps the corresponding Objective-C method.
 func (r *Renderer) RenderingTimeForTimeArguments(time_ float64, arguments obj.Object) float64 {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(arguments)
 	_r := objc.Send[float64](objref.IDOf(r), objc.RegisterName("renderingTimeForTime:arguments:"), time_, objref.IDOf(arguments))
 	return _r
 }
 
 // Composition returns the composition.
 func (r *Renderer) Composition() obj.Object {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("composition"))
 	return obj.Wrap(_r)
 }
 
 // SnapshotImage returns the snapshot image.
 func (r *Renderer) SnapshotImage() obj.Object {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("snapshotImage"))
 	return obj.Wrap(_r)
 }
 
 // CreateSnapshotImageOfType creates snapshot image of type.
 func (r *Renderer) CreateSnapshotImageOfType(type_ string) obj.Object {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("createSnapshotImageOfType:"), purego.NSString(type_))
 	return obj.Wrap(_r)
 }

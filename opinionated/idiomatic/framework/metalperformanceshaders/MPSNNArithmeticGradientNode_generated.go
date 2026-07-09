@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,9 @@ func nNArithmeticGradientNodeAdopt(id objc.ID) *NNArithmeticGradientNode {
 
 // NewNNArithmeticGradientNodeWithSourceGradientSourceImageGradientStateIsSecondarySourceFilter create a new arithmetic gradient node See also -[MPSCNNNeuronNode gradientFilterNodesWithSources:] for an easier way to do this.
 func NewNNArithmeticGradientNodeWithSourceGradientSourceImageGradientStateIsSecondarySourceFilter(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object, isSecondarySourceFilter bool) *NNArithmeticGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNArithmeticGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:isSecondarySourceFilter:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), isSecondarySourceFilter)
 	return nNArithmeticGradientNodeAdopt(_id)
@@ -55,6 +60,7 @@ func NewNNArithmeticGradientNodeWithSourceGradientSourceImageGradientStateIsSeco
 
 // NewNNArithmeticGradientNodeWithGradientImagesForwardFilterIsSecondarySourceFilter create a new arithmetic gradient node See also -[MPSCNNNeuronNode gradientFilterNodesWithSources:] for an easier way to do this.
 func NewNNArithmeticGradientNodeWithGradientImagesForwardFilterIsSecondarySourceFilter(gradientImages []obj.Object, filter obj.Object, isSecondarySourceFilter bool) *NNArithmeticGradientNode {
+	defer runtime.KeepAlive(filter)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNArithmeticGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGradientImages:forwardFilter:isSecondarySourceFilter:"), purego.SliceToNSArray(gradientImages, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(filter), isSecondarySourceFilter)
 	return nNArithmeticGradientNodeAdopt(_id)
@@ -116,54 +122,63 @@ func (nagn *NNArithmeticGradientNode) WithLabel(label string) *NNArithmeticGradi
 
 // PrimaryScale returns the primary scale.
 func (nagn *NNArithmeticGradientNode) PrimaryScale() float32 {
+	defer runtime.KeepAlive(nagn)
 	_r := objc.Send[float32](objref.IDOf(nagn), objc.RegisterName("primaryScale"))
 	return _r
 }
 
 // SecondaryScale returns the secondary scale.
 func (nagn *NNArithmeticGradientNode) SecondaryScale() float32 {
+	defer runtime.KeepAlive(nagn)
 	_r := objc.Send[float32](objref.IDOf(nagn), objc.RegisterName("secondaryScale"))
 	return _r
 }
 
 // Bias returns the bias.
 func (nagn *NNArithmeticGradientNode) Bias() float32 {
+	defer runtime.KeepAlive(nagn)
 	_r := objc.Send[float32](objref.IDOf(nagn), objc.RegisterName("bias"))
 	return _r
 }
 
 // SecondaryStrideInPixelsX returns the secondary stride in pixels x.
 func (nagn *NNArithmeticGradientNode) SecondaryStrideInPixelsX() int {
+	defer runtime.KeepAlive(nagn)
 	_r := objc.Send[int](objref.IDOf(nagn), objc.RegisterName("secondaryStrideInPixelsX"))
 	return _r
 }
 
 // SecondaryStrideInPixelsY returns the secondary stride in pixels y.
 func (nagn *NNArithmeticGradientNode) SecondaryStrideInPixelsY() int {
+	defer runtime.KeepAlive(nagn)
 	_r := objc.Send[int](objref.IDOf(nagn), objc.RegisterName("secondaryStrideInPixelsY"))
 	return _r
 }
 
 // SecondaryStrideInFeatureChannels returns the secondary stride in feature channels.
 func (nagn *NNArithmeticGradientNode) SecondaryStrideInFeatureChannels() int {
+	defer runtime.KeepAlive(nagn)
 	_r := objc.Send[int](objref.IDOf(nagn), objc.RegisterName("secondaryStrideInFeatureChannels"))
 	return _r
 }
 
 // MinimumValue returns the minimum value.
 func (nagn *NNArithmeticGradientNode) MinimumValue() float32 {
+	defer runtime.KeepAlive(nagn)
 	_r := objc.Send[float32](objref.IDOf(nagn), objc.RegisterName("minimumValue"))
 	return _r
 }
 
 // MaximumValue returns the maximum value.
 func (nagn *NNArithmeticGradientNode) MaximumValue() float32 {
+	defer runtime.KeepAlive(nagn)
 	_r := objc.Send[float32](objref.IDOf(nagn), objc.RegisterName("maximumValue"))
 	return _r
 }
 
 // IsSecondarySourceFilter reports whether the object is secondary source filter.
 func (nagn *NNArithmeticGradientNode) IsSecondarySourceFilter() bool {
+	defer runtime.KeepAlive(nagn)
 	_r := objc.Send[bool](objref.IDOf(nagn), objc.RegisterName("isSecondarySourceFilter"))
 	return _r
 }

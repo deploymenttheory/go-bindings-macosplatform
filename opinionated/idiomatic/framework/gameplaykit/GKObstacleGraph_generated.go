@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -55,52 +57,72 @@ func NewObstacleGraphWithObstaclesBufferRadius(obstacles []*PolygonObstacle, buf
 
 // ConnectNodeUsingObstacles adds the specified node to the graph, connecting it to its nearest neighbors without creating connections that pass through obstacles or their buffer regions.
 func (og *ObstacleGraph) ConnectNodeUsingObstacles(node obj.Object) {
+	defer runtime.KeepAlive(og)
+	defer runtime.KeepAlive(node)
 	objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("connectNodeUsingObstacles:"), objref.IDOf(node))
 }
 
 // ConnectNodeUsingObstaclesIgnoringObstacles adds the specified node to the graph, connecting it to its nearest neighbors while ignoring the area occupied by the specified obstacles.
 func (og *ObstacleGraph) ConnectNodeUsingObstaclesIgnoringObstacles(node obj.Object, obstaclesToIgnore []*PolygonObstacle) {
+	defer runtime.KeepAlive(og)
+	defer runtime.KeepAlive(node)
 	objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("connectNodeUsingObstacles:ignoringObstacles:"), objref.IDOf(node), purego.SliceToNSArray(obstaclesToIgnore, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles adds the specified node to the graph, connecting it to its nearest neighbors while ignoring the buffer regions around the specified obstacles.
 func (og *ObstacleGraph) ConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles(node obj.Object, obstaclesBufferRadiusToIgnore []*PolygonObstacle) {
+	defer runtime.KeepAlive(og)
+	defer runtime.KeepAlive(node)
 	objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("connectNodeUsingObstacles:ignoringBufferRadiusOfObstacles:"), objref.IDOf(node), purego.SliceToNSArray(obstaclesBufferRadiusToIgnore, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }))
 }
 
 // AddObstacles adds new obstacles to the graph.
 func (og *ObstacleGraph) AddObstacles(obstacles []*PolygonObstacle) {
+	defer runtime.KeepAlive(og)
 	objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("addObstacles:"), purego.SliceToNSArray(obstacles, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }))
 }
 
 // RemoveObstacles removes the specified obstacle from the graph.
 func (og *ObstacleGraph) RemoveObstacles(obstacles []*PolygonObstacle) {
+	defer runtime.KeepAlive(og)
 	objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("removeObstacles:"), purego.SliceToNSArray(obstacles, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }))
 }
 
 // RemoveAllObstacles removes all obstacles from the graph.
 func (og *ObstacleGraph) RemoveAllObstacles() {
+	defer runtime.KeepAlive(og)
 	objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("removeAllObstacles"))
 }
 
 // NodesForObstacle returns the group of nodes corresponding to an obstacle in the graph.
 func (og *ObstacleGraph) NodesForObstacle(obstacle *PolygonObstacle) []obj.Object {
+	defer runtime.KeepAlive(og)
+	defer runtime.KeepAlive(obstacle)
 	_r := objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("nodesForObstacle:"), objref.IDOf(obstacle))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // LockConnectionFromNodeToNode prevents the specified nodes from being disconnected due to the addition of obstacles.
 func (og *ObstacleGraph) LockConnectionFromNodeToNode(startNode obj.Object, endNode obj.Object) {
+	defer runtime.KeepAlive(og)
+	defer runtime.KeepAlive(startNode)
+	defer runtime.KeepAlive(endNode)
 	objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("lockConnectionFromNode:toNode:"), objref.IDOf(startNode), objref.IDOf(endNode))
 }
 
 // UnlockConnectionFromNodeToNode allows the specified nodes to be disconnected due to the addition of obstacles.
 func (og *ObstacleGraph) UnlockConnectionFromNodeToNode(startNode obj.Object, endNode obj.Object) {
+	defer runtime.KeepAlive(og)
+	defer runtime.KeepAlive(startNode)
+	defer runtime.KeepAlive(endNode)
 	objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("unlockConnectionFromNode:toNode:"), objref.IDOf(startNode), objref.IDOf(endNode))
 }
 
 // IsConnectionLockedFromNodeToNode returns a Boolean value indicating whether the specified nodes are protected from disconnection due to the addition of obstacles.
 func (og *ObstacleGraph) IsConnectionLockedFromNodeToNode(startNode obj.Object, endNode obj.Object) bool {
+	defer runtime.KeepAlive(og)
+	defer runtime.KeepAlive(startNode)
+	defer runtime.KeepAlive(endNode)
 	_r := objc.Send[bool](objref.IDOf(og), objc.RegisterName("isConnectionLockedFromNode:toNode:"), objref.IDOf(startNode), objref.IDOf(endNode))
 	return _r
 }
@@ -109,12 +131,14 @@ func (og *ObstacleGraph) IsConnectionLockedFromNodeToNode(startNode obj.Object, 
 //
 // Obstacles returns the collection as a Go slice.
 func (og *ObstacleGraph) Obstacles() []*PolygonObstacle {
+	defer runtime.KeepAlive(og)
 	_arr := objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("obstacles"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PolygonObstacle { return PolygonObstacleFromID(_id) })
 }
 
 // BufferRadius returns the buffer radius.
 func (og *ObstacleGraph) BufferRadius() float32 {
+	defer runtime.KeepAlive(og)
 	_r := objc.Send[float32](objref.IDOf(og), objc.RegisterName("bufferRadius"))
 	return _r
 }

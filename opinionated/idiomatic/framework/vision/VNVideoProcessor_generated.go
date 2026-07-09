@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func videoProcessorAdopt(id objc.ID) *VideoProcessor {
 
 // Description returns the object's -description text.
 func (vp *VideoProcessor) Description() string {
+	defer runtime.KeepAlive(vp)
 	return rt.Description(objref.IDOf(vp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vp *VideoProcessor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vp *VideoProcessor) IsKind(className string) bool {
+	defer runtime.KeepAlive(vp)
 	return rt.IsKind(objref.IDOf(vp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vp *VideoProcessor) String() string {
+	defer runtime.KeepAlive(vp)
 	return rt.Description(objref.IDOf(vp))
 }
 
@@ -77,8 +83,11 @@ func NewVideoProcessorWithURL(videoURL string) *VideoProcessor {
 	return videoProcessorAdopt(_id)
 }
 
-// AddRequestProcessingOptions adds a request with processing options to the video processor.
-func (vp *VideoProcessor) AddRequestProcessingOptions(request *Request, processingOptions *VideoProcessorRequestProcessingOptions) error {
+// AddRequestProcessing adds a request with processing options to the video processor.
+func (vp *VideoProcessor) AddRequestProcessing(request *Request, processingOptions *VideoProcessorRequestProcessingOptions) error {
+	defer runtime.KeepAlive(vp)
+	defer runtime.KeepAlive(request)
+	defer runtime.KeepAlive(processingOptions)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(vp), objc.RegisterName("addRequest:processingOptions:error:"), objref.IDOf(request), objref.IDOf(processingOptions), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -89,6 +98,9 @@ func (vp *VideoProcessor) AddRequestProcessingOptions(request *Request, processi
 
 // AddRequestWithProcessingOptions adds a Vision request to perform with the specified configuration.
 func (vp *VideoProcessor) AddRequestWithProcessingOptions(request *Request, processingOptions obj.Object) error {
+	defer runtime.KeepAlive(vp)
+	defer runtime.KeepAlive(request)
+	defer runtime.KeepAlive(processingOptions)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(vp), objc.RegisterName("addRequest:withProcessingOptions:error:"), objref.IDOf(request), objref.IDOf(processingOptions), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -99,6 +111,8 @@ func (vp *VideoProcessor) AddRequestWithProcessingOptions(request *Request, proc
 
 // RemoveRequest removes a Vision request from the video processor’s request queue.
 func (vp *VideoProcessor) RemoveRequest(request *Request) error {
+	defer runtime.KeepAlive(vp)
+	defer runtime.KeepAlive(request)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(vp), objc.RegisterName("removeRequest:error:"), objref.IDOf(request), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -109,6 +123,7 @@ func (vp *VideoProcessor) RemoveRequest(request *Request) error {
 
 // AnalyzeTimeRange analyzes a time range of video content.
 func (vp *VideoProcessor) AnalyzeTimeRange(timeRange coremedia.CMTimeRange) error {
+	defer runtime.KeepAlive(vp)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(vp), objc.RegisterName("analyzeTimeRange:error:"), timeRange, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -119,6 +134,7 @@ func (vp *VideoProcessor) AnalyzeTimeRange(timeRange coremedia.CMTimeRange) erro
 
 // AnalyzeWithTimeRange analyzes the specifed time range of the video content.
 func (vp *VideoProcessor) AnalyzeWithTimeRange(timeRange coremedia.CMTimeRange) error {
+	defer runtime.KeepAlive(vp)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(vp), objc.RegisterName("analyzeWithTimeRange:error:"), timeRange, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -129,5 +145,6 @@ func (vp *VideoProcessor) AnalyzeWithTimeRange(timeRange coremedia.CMTimeRange) 
 
 // Cancel cancels the video processing.
 func (vp *VideoProcessor) Cancel() {
+	defer runtime.KeepAlive(vp)
 	objc.Send[objc.ID](objref.IDOf(vp), objc.RegisterName("cancel"))
 }

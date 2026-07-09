@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -84,6 +85,7 @@ func (rar *RecognizeAnimalsRequest) WithRevision(revision int) *RecognizeAnimals
 //
 // SupportedIdentifiers returns the collection as a Go slice.
 func (rar *RecognizeAnimalsRequest) SupportedIdentifiers() (result []obj.Object, err error) {
+	defer runtime.KeepAlive(rar)
 	var _nsErr uintptr
 	_arr := objc.Send[objc.ID](objref.IDOf(rar), objc.RegisterName("supportedIdentifiersAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

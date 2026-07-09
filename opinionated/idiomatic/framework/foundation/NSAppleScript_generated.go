@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,27 +50,33 @@ func appleScriptAdopt(id objc.ID) *AppleScript {
 
 // Description returns the object's -description text.
 func (as *AppleScript) Description() string {
+	defer runtime.KeepAlive(as)
 	return rt.Description(objref.IDOf(as))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (as *AppleScript) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(as), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (as *AppleScript) IsKind(className string) bool {
+	defer runtime.KeepAlive(as)
 	return rt.IsKind(objref.IDOf(as), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (as *AppleScript) String() string {
+	defer runtime.KeepAlive(as)
 	return rt.Description(objref.IDOf(as))
 }
 
 // NewAppleScriptWithContentsOfURLError initializes a newly allocated script instance from the source identified by the passed URL.
 func NewAppleScriptWithContentsOfURLError(url string, errorInfo obj.Object) *AppleScript {
+	defer runtime.KeepAlive(errorInfo)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAppleScript")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), rt.FileURL(url), objref.IDOf(errorInfo))
 	return appleScriptAdopt(_id)
@@ -89,31 +96,39 @@ func (as *AppleScript) WithObservationInfo(observationInfo unsafe.Pointer) *Appl
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (as *AppleScript) WithScriptingProperties(scriptingProperties obj.Object) *AppleScript {
-	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (as *AppleScript) WithScriptingProperties(scriptingProperties map[string]obj.Object) *AppleScript {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return as
 }
 
 // CompileAndReturnError compiles the receiver, if it is not already compiled.
 func (as *AppleScript) CompileAndReturnError(errorInfo obj.Object) bool {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(errorInfo)
 	_r := objc.Send[bool](objref.IDOf(as), objc.RegisterName("compileAndReturnError:"), objref.IDOf(errorInfo))
 	return _r
 }
 
 // ExecuteAndReturnError executes the receiver, compiling it first if it is not already compiled.
 func (as *AppleScript) ExecuteAndReturnError(errorInfo obj.Object) *AppleEventDescriptor {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(errorInfo)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("executeAndReturnError:"), objref.IDOf(errorInfo))
 	return AppleEventDescriptorFromID(_r)
 }
 
 // ExecuteAppleEventError executes an Apple event in the context of the receiver, as a means of allowing the application to invoke a handler in the script.
 func (as *AppleScript) ExecuteAppleEventError(event *AppleEventDescriptor, errorInfo obj.Object) *AppleEventDescriptor {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(event)
+	defer runtime.KeepAlive(errorInfo)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("executeAppleEvent:error:"), objref.IDOf(event), objref.IDOf(errorInfo))
 	return AppleEventDescriptorFromID(_r)
 }
 
 // Source returns the source.
 func (as *AppleScript) Source() string {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("source"))
 	if _r == 0 {
 		return ""
@@ -123,6 +138,7 @@ func (as *AppleScript) Source() string {
 
 // IsCompiled reports whether the object is compiled.
 func (as *AppleScript) IsCompiled() bool {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[bool](objref.IDOf(as), objc.RegisterName("isCompiled"))
 	return _r
 }

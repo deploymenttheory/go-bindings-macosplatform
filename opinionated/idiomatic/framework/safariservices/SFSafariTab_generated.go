@@ -6,6 +6,7 @@ package safariservices
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,22 +50,27 @@ func safariTabAdopt(id objc.ID) *SafariTab {
 
 // Description returns the object's -description text.
 func (st *SafariTab) Description() string {
+	defer runtime.KeepAlive(st)
 	return rt.Description(objref.IDOf(st))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (st *SafariTab) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(st)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(st), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (st *SafariTab) IsKind(className string) bool {
+	defer runtime.KeepAlive(st)
 	return rt.IsKind(objref.IDOf(st), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (st *SafariTab) String() string {
+	defer runtime.KeepAlive(st)
 	return rt.Description(objref.IDOf(st))
 }
 
@@ -78,6 +84,7 @@ func NewSafariTab() *SafariTab {
 //
 // GetActivePage blocks until the operation completes or ctx is cancelled.
 func (st *SafariTab) GetActivePage(ctx context.Context) (result *SafariPage, err error) {
+	defer runtime.KeepAlive(st)
 	type _result struct {
 		val *SafariPage
 		err error
@@ -102,6 +109,7 @@ func (st *SafariTab) GetActivePage(ctx context.Context) (result *SafariPage, err
 //
 // GetPages blocks until the operation completes or ctx is cancelled.
 func (st *SafariTab) GetPages(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(st)
 	type _result struct {
 		val obj.Object
 		err error
@@ -126,6 +134,7 @@ func (st *SafariTab) GetPages(ctx context.Context) (result obj.Object, err error
 //
 // GetContainingWindow blocks until the operation completes or ctx is cancelled.
 func (st *SafariTab) GetContainingWindow(ctx context.Context) (result *SafariWindow, err error) {
+	defer runtime.KeepAlive(st)
 	type _result struct {
 		val *SafariWindow
 		err error
@@ -150,6 +159,7 @@ func (st *SafariTab) GetContainingWindow(ctx context.Context) (result *SafariWin
 //
 // Activate blocks until the operation completes or ctx is cancelled.
 func (st *SafariTab) Activate(ctx context.Context) error {
+	defer runtime.KeepAlive(st)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -165,10 +175,12 @@ func (st *SafariTab) Activate(ctx context.Context) error {
 
 // NavigateToURL navigates this tab to the given URL. The extension doesn't need permission to access the URL to navigate to it.
 func (st *SafariTab) NavigateToURL(url string) {
+	defer runtime.KeepAlive(st)
 	objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("navigateToURL:"), rt.FileURL(url))
 }
 
 // Close closes this tab. If this is the last tab in its window, the window is also closed.
 func (st *SafariTab) Close() {
+	defer runtime.KeepAlive(st)
 	objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("close"))
 }

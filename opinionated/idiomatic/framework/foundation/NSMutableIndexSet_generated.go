@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,38 +63,46 @@ func (mis *MutableIndexSet) WithObservationInfo(observationInfo unsafe.Pointer) 
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (mis *MutableIndexSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableIndexSet {
-	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (mis *MutableIndexSet) WithScriptingProperties(scriptingProperties map[string]obj.Object) *MutableIndexSet {
+	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return mis
 }
 
 // AddIndexes adds the indexes in an index set to the receiver.
 func (mis *MutableIndexSet) AddIndexes(indexSet *IndexSet) {
+	defer runtime.KeepAlive(mis)
+	defer runtime.KeepAlive(indexSet)
 	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("addIndexes:"), objref.IDOf(indexSet))
 }
 
 // RemoveIndexes removes the indexes in an index set from the receiver.
 func (mis *MutableIndexSet) RemoveIndexes(indexSet *IndexSet) {
+	defer runtime.KeepAlive(mis)
+	defer runtime.KeepAlive(indexSet)
 	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("removeIndexes:"), objref.IDOf(indexSet))
 }
 
 // RemoveAllIndexes removes the receiver’s indexes.
 func (mis *MutableIndexSet) RemoveAllIndexes() {
+	defer runtime.KeepAlive(mis)
 	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("removeAllIndexes"))
 }
 
 // AddIndex adds an index to the receiver.
 func (mis *MutableIndexSet) AddIndex(value int) {
+	defer runtime.KeepAlive(mis)
 	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("addIndex:"), value)
 }
 
 // RemoveIndex removes an index from the receiver.
 func (mis *MutableIndexSet) RemoveIndex(value int) {
+	defer runtime.KeepAlive(mis)
 	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("removeIndex:"), value)
 }
 
 // ShiftIndexesStartingAtIndexBy shifts a group of indexes to the left or the right within the receiver.
 func (mis *MutableIndexSet) ShiftIndexesStartingAtIndexBy(index int, delta int) {
+	defer runtime.KeepAlive(mis)
 	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("shiftIndexesStartingAtIndex:by:"), index, delta)
 }
 

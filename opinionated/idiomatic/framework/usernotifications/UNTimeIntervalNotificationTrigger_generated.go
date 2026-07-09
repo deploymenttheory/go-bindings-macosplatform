@@ -5,9 +5,12 @@
 package usernotifications
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,13 +56,15 @@ func NewTimeIntervalNotificationTrigger() *TimeIntervalNotificationTrigger {
 }
 
 // NextTriggerDate returns the next date at which the trigger conditions are met.
-func (tint *TimeIntervalNotificationTrigger) NextTriggerDate() obj.Object {
+func (tint *TimeIntervalNotificationTrigger) NextTriggerDate() time.Time {
+	defer runtime.KeepAlive(tint)
 	_r := objc.Send[objc.ID](objref.IDOf(tint), objc.RegisterName("nextTriggerDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // TimeInterval returns the time interval.
 func (tint *TimeIntervalNotificationTrigger) TimeInterval() float64 {
+	defer runtime.KeepAlive(tint)
 	_r := objc.Send[float64](objref.IDOf(tint), objc.RegisterName("timeInterval"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func iKSaveOptionsAdopt(id objc.ID) *IKSaveOptions {
 
 // Description returns the object's -description text.
 func (iso *IKSaveOptions) Description() string {
+	defer runtime.KeepAlive(iso)
 	return rt.Description(objref.IDOf(iso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (iso *IKSaveOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(iso)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(iso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (iso *IKSaveOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(iso)
 	return rt.IsKind(objref.IDOf(iso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (iso *IKSaveOptions) String() string {
+	defer runtime.KeepAlive(iso)
 	return rt.Description(objref.IDOf(iso))
 }
 
 // NewIKSaveOptionsWithImagePropertiesImageUTType initializes a save options accessory pane for the provided image properties and uniform type identifier.
 func NewIKSaveOptionsWithImagePropertiesImageUTType(imageProperties obj.Object, imageUTType string) *IKSaveOptions {
+	defer runtime.KeepAlive(imageProperties)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IKSaveOptions")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageProperties:imageUTType:"), objref.IDOf(imageProperties), purego.NSString(imageUTType))
 	return iKSaveOptionsAdopt(_id)
@@ -75,6 +83,7 @@ func NewIKSaveOptionsWithImagePropertiesImageUTType(imageProperties obj.Object, 
 
 // WithDelegate sets specifies the delegate object.
 func (iso *IKSaveOptions) WithDelegate(delegate obj.Object) *IKSaveOptions {
+	defer runtime.KeepAlive(delegate)
 	objc.Send[objc.ID](objref.IDOf(iso), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return iso
 }
@@ -87,28 +96,35 @@ func (iso *IKSaveOptions) WithRememberLastSetting(rememberLastSetting bool) *IKS
 
 // AddSaveOptionsAccessoryViewToSavePanel adds IKSaveOptions accessory view to a NSSavePanel.
 func (iso *IKSaveOptions) AddSaveOptionsAccessoryViewToSavePanel(savePanel obj.Object) {
+	defer runtime.KeepAlive(iso)
+	defer runtime.KeepAlive(savePanel)
 	objc.Send[objc.ID](objref.IDOf(iso), objc.RegisterName("addSaveOptionsAccessoryViewToSavePanel:"), objref.IDOf(savePanel))
 }
 
 // AddSaveOptionsToView adds IKSaveOptions UI to a NSView.
 func (iso *IKSaveOptions) AddSaveOptionsToView(view obj.Object) {
+	defer runtime.KeepAlive(iso)
+	defer runtime.KeepAlive(view)
 	objc.Send[objc.ID](objref.IDOf(iso), objc.RegisterName("addSaveOptionsToView:"), objref.IDOf(view))
 }
 
 // Delegate returns delegate of the IKSaveOptions.
 func (iso *IKSaveOptions) Delegate() obj.Object {
+	defer runtime.KeepAlive(iso)
 	_r := objc.Send[objc.ID](objref.IDOf(iso), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
 // ImageProperties returns current imageProperties (respecting user UI selection).
 func (iso *IKSaveOptions) ImageProperties() obj.Object {
+	defer runtime.KeepAlive(iso)
 	_r := objc.Send[objc.ID](objref.IDOf(iso), objc.RegisterName("imageProperties"))
 	return obj.Wrap(_r)
 }
 
 // ImageUTType returns current imageUTType (respecting user UI selection).
 func (iso *IKSaveOptions) ImageUTType() string {
+	defer runtime.KeepAlive(iso)
 	_r := objc.Send[objc.ID](objref.IDOf(iso), objc.RegisterName("imageUTType"))
 	if _r == 0 {
 		return ""
@@ -118,12 +134,14 @@ func (iso *IKSaveOptions) ImageUTType() string {
 
 // UserSelection returns information about the UI settings.
 func (iso *IKSaveOptions) UserSelection() obj.Object {
+	defer runtime.KeepAlive(iso)
 	_r := objc.Send[objc.ID](objref.IDOf(iso), objc.RegisterName("userSelection"))
 	return obj.Wrap(_r)
 }
 
 // RememberLastSetting reports whether if set, the last used UI choices are preserved for the next time IKSaveOptions is used. [default is YES]
 func (iso *IKSaveOptions) RememberLastSetting() bool {
+	defer runtime.KeepAlive(iso)
 	_r := objc.Send[bool](objref.IDOf(iso), objc.RegisterName("rememberLastSetting"))
 	return _r
 }

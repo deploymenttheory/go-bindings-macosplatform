@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -102,6 +104,7 @@ func (p *Pyramid) WithMaterials(items ...*Material) *Pyramid {
 
 // WithFirstMaterial sets the first material attached to the geometry.
 func (p *Pyramid) WithFirstMaterial(firstMaterial *Material) *Pyramid {
+	defer runtime.KeepAlive(firstMaterial)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return p
 }
@@ -115,6 +118,7 @@ func (p *Pyramid) WithLevelsOfDetail(items ...*LevelOfDetail) *Pyramid {
 
 // WithTessellator sets the tessellator.
 func (p *Pyramid) WithTessellator(tessellator *GeometryTessellator) *Pyramid {
+	defer runtime.KeepAlive(tessellator)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return p
 }
@@ -133,48 +137,56 @@ func (p *Pyramid) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *P
 
 // WithEdgeCreasesElement sets the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 func (p *Pyramid) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Pyramid {
+	defer runtime.KeepAlive(edgeCreasesElement)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return p
 }
 
 // WithEdgeCreasesSource sets the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 func (p *Pyramid) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Pyramid {
+	defer runtime.KeepAlive(edgeCreasesSource)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return p
 }
 
 // Width returns the width of the pyramid base. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (p *Pyramid) Width() float64 {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[float64](objref.IDOf(p), objc.RegisterName("width"))
 	return _r
 }
 
 // Height returns the height of the pyramid. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (p *Pyramid) Height() float64 {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[float64](objref.IDOf(p), objc.RegisterName("height"))
 	return _r
 }
 
 // Length returns the length of the pyramid base. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (p *Pyramid) Length() float64 {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[float64](objref.IDOf(p), objc.RegisterName("length"))
 	return _r
 }
 
 // WidthSegmentCount returns the number of subdivisions along the X axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (p *Pyramid) WidthSegmentCount() int {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("widthSegmentCount"))
 	return _r
 }
 
 // HeightSegmentCount returns the number of subdivisions along the Y axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (p *Pyramid) HeightSegmentCount() int {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("heightSegmentCount"))
 	return _r
 }
 
 // LengthSegmentCount returns the number of subdivisions along the Z axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (p *Pyramid) LengthSegmentCount() int {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("lengthSegmentCount"))
 	return _r
 }

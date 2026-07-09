@@ -167,11 +167,11 @@ func WebViewFromID(id objc.ID) *WebView {
 }
 
 // @method canShowMIMEType: @abstract Checks if the WebKit can show content of a certain MIME type. @param MIMEType The MIME type to check. @result YES if the WebKit can show content with MIMEtype.
-func WebViewCanShowMIMEType(mIMEType *foundation.NSString) bool {
+func WebViewCanShowMIMEType(mimeType *foundation.NSString) bool {
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
-			_ret := objc.Send[bool](objc.ID(_clsWebView), _webViewSelCanShowMIMEType, mIMEType.Ptr())
+			_ret := objc.Send[bool](objc.ID(_clsWebView), _webViewSelCanShowMIMEType, mimeType.Ptr())
 			return _ret
 		}()
 	})
@@ -179,11 +179,11 @@ func WebViewCanShowMIMEType(mIMEType *foundation.NSString) bool {
 }
 
 // @method canShowMIMETypeAsHTML: @abstract Checks if the MIME type is a type that the WebKit will interpret as HTML. @param MIMEType The MIME type to check. @result YES if the MIMEtype in an HTML type.
-func WebViewCanShowMIMETypeAsHTML(mIMEType *foundation.NSString) bool {
+func WebViewCanShowMIMETypeAsHTML(mimeType *foundation.NSString) bool {
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
-			_ret := objc.Send[bool](objc.ID(_clsWebView), _webViewSelCanShowMIMETypeAsHTML, mIMEType.Ptr())
+			_ret := objc.Send[bool](objc.ID(_clsWebView), _webViewSelCanShowMIMETypeAsHTML, mimeType.Ptr())
 			return _ret
 		}()
 	})
@@ -206,9 +206,9 @@ func WebViewMIMETypesShownAsHTML() *foundation.NSArray[objc.ID] {
 }
 
 // @method setMIMETypesShownAsHTML: @discussion Sets the array of NSString MIME types that WebKit will attempt to render as HTML.  Typically you will retrieve the built-in array using MIMETypesShownAsHTML and add additional MIME types to that array.
-func WebViewSetMIMETypesShownAsHTML(mIMETypes *foundation.NSArray[objc.ID]) {
+func WebViewSetMIMETypesShownAsHTML(mimeTypes *foundation.NSArray[objc.ID]) {
 	purego.Main(func() {
-		objc.ID(_clsWebView).Send(_webViewSelSetMIMETypesShownAsHTML, mIMETypes.Ptr())
+		objc.ID(_clsWebView).Send(_webViewSelSetMIMETypesShownAsHTML, mimeTypes.Ptr())
 	})
 }
 
@@ -315,11 +315,11 @@ func (o *WebView) GoToBackForwardItem(item *WebHistoryItem) bool {
 }
 
 // @method userAgentForURL: @abstract Get the appropriate user-agent string for a particular URL. @param URL The URL. @result The user-agent string for the supplied URL.
-func (o *WebView) UserAgentForURL(uRL *foundation.NSURL) *foundation.NSString {
+func (o *WebView) UserAgentForURL(url *foundation.NSURL) *foundation.NSString {
 	var _mainthread0 *foundation.NSString
 	purego.Main(func() {
 		_mainthread0 = func() *foundation.NSString {
-			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelUserAgentForURL, uRL.Ptr())
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelUserAgentForURL, url.Ptr())
 			if _ret != 0 {
 				_ret.Send(objc.RegisterName("retain"))
 			}
@@ -357,9 +357,9 @@ func (o *WebView) SearchForDirectionCaseSensitiveWrap(string_ *foundation.NSStri
 }
 
 // @method registerViewClass:representationClass:forMIMEType: @discussion Register classes that implement WebDocumentView and WebDocumentRepresentation respectively. A document class may register for a primary MIME type by excluding a subtype, i.e. "video/" will match the document class with all video types.  More specific matching takes precedence over general matching. @param viewClass The WebDocumentView class to use to render data for a given MIME type. @param representationClass The WebDocumentRepresentation class to use to represent data of the given MIME type. @param MIMEType The MIME type to represent with an object of the given class.
-func WebViewRegisterViewClassRepresentationClassForMIMEType(viewClass objc.Class, representationClass objc.Class, mIMEType *foundation.NSString) {
+func WebViewRegisterViewClassRepresentationClassForMIMEType(viewClass objc.Class, representationClass objc.Class, mimeType *foundation.NSString) {
 	purego.Main(func() {
-		objc.ID(_clsWebView).Send(_webViewSelRegisterViewClassRepresentationClassForMIMEType, viewClass, representationClass, mIMEType.Ptr())
+		objc.ID(_clsWebView).Send(_webViewSelRegisterViewClassRepresentationClassForMIMEType, viewClass, representationClass, mimeType.Ptr())
 	})
 }
 
@@ -451,9 +451,9 @@ func (o *WebView) UIDelegate() WebUIDelegate {
 	return _mainthread0
 }
 
-func (o *WebView) SetUIDelegate(uIDelegate WebUIDelegate) {
+func (o *WebView) SetUIDelegate(uiDelegate WebUIDelegate) {
 	purego.Main(func() {
-		o.Ptr().Send(_webViewSelSetUIDelegate, uIDelegate)
+		o.Ptr().Send(_webViewSelSetUIDelegate, uiDelegate)
 	})
 }
 

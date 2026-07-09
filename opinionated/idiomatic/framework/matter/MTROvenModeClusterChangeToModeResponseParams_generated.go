@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTROvenModeClusterChangeToModeResponseParamsAdopt(id objc.ID) *MTROvenModeC
 
 // Description returns the object's -description text.
 func (momcctmrp *MTROvenModeClusterChangeToModeResponseParams) Description() string {
+	defer runtime.KeepAlive(momcctmrp)
 	return rt.Description(objref.IDOf(momcctmrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (momcctmrp *MTROvenModeClusterChangeToModeResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(momcctmrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(momcctmrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (momcctmrp *MTROvenModeClusterChangeToModeResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(momcctmrp)
 	return rt.IsKind(objref.IDOf(momcctmrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (momcctmrp *MTROvenModeClusterChangeToModeResponseParams) String() string {
+	defer runtime.KeepAlive(momcctmrp)
 	return rt.Description(objref.IDOf(momcctmrp))
 }
 
-// NewMTROvenModeClusterChangeToModeResponseParamsWithResponseValueError initialize an MTROvenModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-func NewMTROvenModeClusterChangeToModeResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTROvenModeClusterChangeToModeResponseParams, err error) {
+// NewMTROvenModeClusterChangeToModeResponseParamsWithResponseValue initialize an MTROvenModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTROvenModeClusterChangeToModeResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTROvenModeClusterChangeToModeResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTROvenModeClusterChangeToModeResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,6 +87,7 @@ func NewMTROvenModeClusterChangeToModeResponseParamsWithResponseValueError(respo
 
 // WithStatus sets the status.
 func (momcctmrp *MTROvenModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTROvenModeClusterChangeToModeResponseParams {
+	defer runtime.KeepAlive(status)
 	objc.Send[objc.ID](objref.IDOf(momcctmrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return momcctmrp
 }
@@ -91,13 +99,15 @@ func (momcctmrp *MTROvenModeClusterChangeToModeResponseParams) WithStatusText(st
 }
 
 // Status returns the status.
-func (momcctmrp *MTROvenModeClusterChangeToModeResponseParams) Status() obj.Object {
+func (momcctmrp *MTROvenModeClusterChangeToModeResponseParams) Status() *foundation.Number {
+	defer runtime.KeepAlive(momcctmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(momcctmrp), objc.RegisterName("status"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StatusText returns the status text.
 func (momcctmrp *MTROvenModeClusterChangeToModeResponseParams) StatusText() string {
+	defer runtime.KeepAlive(momcctmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(momcctmrp), objc.RegisterName("statusText"))
 	if _r == 0 {
 		return ""

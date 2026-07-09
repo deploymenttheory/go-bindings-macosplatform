@@ -5,8 +5,11 @@
 package replaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func previewViewControllerAdopt(id objc.ID) *PreviewViewController {
 
 // Description returns the object's -description text.
 func (pvc *PreviewViewController) Description() string {
+	defer runtime.KeepAlive(pvc)
 	return rt.Description(objref.IDOf(pvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pvc *PreviewViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pvc *PreviewViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(pvc)
 	return rt.IsKind(objref.IDOf(pvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pvc *PreviewViewController) String() string {
+	defer runtime.KeepAlive(pvc)
 	return rt.Description(objref.IDOf(pvc))
 }
 
@@ -76,4 +84,16 @@ func NewPreviewViewController() *PreviewViewController {
 		}()
 	})
 	return _mainthread0
+}
+
+// WithPreviewControllerDelegate sets the preview view controller’s delegate.
+func (pvc *PreviewViewController) WithPreviewControllerDelegate(previewControllerDelegate PreviewViewControllerDelegate) *PreviewViewController {
+	_shim := newPreviewViewControllerDelegateShim(previewControllerDelegate)
+	_sel := objc.RegisterName("setPreviewControllerDelegate:")
+	shim.Associate(objref.IDOf(pvc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pvc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return pvc
 }

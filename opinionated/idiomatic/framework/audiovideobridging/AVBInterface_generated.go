@@ -5,6 +5,8 @@
 package audiovideobridging
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func interfaceAdopt(id objc.ID) *Interface {
 
 // Description returns the object's -description text.
 func (i *Interface) Description() string {
+	defer runtime.KeepAlive(i)
 	return rt.Description(objref.IDOf(i))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (i *Interface) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(i)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(i), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (i *Interface) IsKind(className string) bool {
+	defer runtime.KeepAlive(i)
 	return rt.IsKind(objref.IDOf(i), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (i *Interface) String() string {
+	defer runtime.KeepAlive(i)
 	return rt.Description(objref.IDOf(i))
 }
 
@@ -75,6 +82,7 @@ func NewInterfaceWithInterfaceName(anInterfaceName string) *Interface {
 
 // InterfaceName returns the BSD interface name.
 func (i *Interface) InterfaceName() string {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("interfaceName"))
 	if _r == 0 {
 		return ""
@@ -84,18 +92,21 @@ func (i *Interface) InterfaceName() string {
 
 // EntityDiscovery returns the IEEE Std 1722.1™-2013 entity discovery for the interface.
 func (i *Interface) EntityDiscovery() *AVB17221EntityDiscovery {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("entityDiscovery"))
 	return AVB17221EntityDiscoveryFromID(_r)
 }
 
 // Aecp returns the IEEE Std 1722.1™-2013 AECP interface for the interface.
 func (i *Interface) Aecp() *AVB17221AECPInterface {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("aecp"))
 	return AVB17221AECPInterfaceFromID(_r)
 }
 
 // Acmp returns the IEEE Std 1722.1™-2013 ACMP interface for the interface.
 func (i *Interface) Acmp() *AVB17221ACMPInterface {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("acmp"))
 	return AVB17221ACMPInterfaceFromID(_r)
 }

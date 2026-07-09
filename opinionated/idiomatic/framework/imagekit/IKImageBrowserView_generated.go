@@ -5,8 +5,11 @@
 package imagekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -46,22 +49,27 @@ func imageBrowserViewAdopt(id objc.ID) *ImageBrowserView {
 
 // Description returns the object's -description text.
 func (ibv *ImageBrowserView) Description() string {
+	defer runtime.KeepAlive(ibv)
 	return rt.Description(objref.IDOf(ibv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ibv *ImageBrowserView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ibv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ibv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ibv *ImageBrowserView) IsKind(className string) bool {
+	defer runtime.KeepAlive(ibv)
 	return rt.IsKind(objref.IDOf(ibv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ibv *ImageBrowserView) String() string {
+	defer runtime.KeepAlive(ibv)
 	return rt.Description(objref.IDOf(ibv))
 }
 
@@ -80,6 +88,7 @@ func NewImageBrowserViewWithFrame(frame corefoundation.CGRect) *ImageBrowserView
 
 // WithDataSource sets the receiver's data source. the data source is not retained by the receiver.
 func (ibv *ImageBrowserView) WithDataSource(dataSource obj.Object) *ImageBrowserView {
+	defer runtime.KeepAlive(dataSource)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("setDataSource:"), objref.IDOf(dataSource))
 	})
@@ -88,6 +97,7 @@ func (ibv *ImageBrowserView) WithDataSource(dataSource obj.Object) *ImageBrowser
 
 // WithDelegate sets the receiver's delegate. aDelegate is expected to implement the IKImageBrowserDelegate informal protocol.
 func (ibv *ImageBrowserView) WithDelegate(delegate obj.Object) *ImageBrowserView {
+	defer runtime.KeepAlive(delegate)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	})
@@ -96,6 +106,7 @@ func (ibv *ImageBrowserView) WithDelegate(delegate obj.Object) *ImageBrowserView
 
 // ReloadData marks the receiver as needing redisplay, so it will reload the data and draw the new values.
 func (ibv *ImageBrowserView) ReloadData() {
+	defer runtime.KeepAlive(ibv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("reloadData"))
 	})
@@ -104,6 +115,7 @@ func (ibv *ImageBrowserView) ReloadData() {
 
 // DataSource returns the receiver's data source. the data source is not retained by the receiver.
 func (ibv *ImageBrowserView) DataSource() obj.Object {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -117,6 +129,7 @@ func (ibv *ImageBrowserView) DataSource() obj.Object {
 
 // Delegate returns the receiver's delegate. aDelegate is expected to implement the IKImageBrowserDelegate informal protocol.
 func (ibv *ImageBrowserView) Delegate() obj.Object {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -130,6 +143,7 @@ func (ibv *ImageBrowserView) Delegate() obj.Object {
 
 // SetCellsStyleMask defines the cells appearance style. mask can be specified by combining any of the options below using the C bitwise OR operator
 func (ibv *ImageBrowserView) SetCellsStyleMask(mask int) {
+	defer runtime.KeepAlive(ibv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("setCellsStyleMask:"), mask)
 	})
@@ -138,6 +152,7 @@ func (ibv *ImageBrowserView) SetCellsStyleMask(mask int) {
 
 // CellsStyleMask returns the cells appearance style mask.
 func (ibv *ImageBrowserView) CellsStyleMask() int {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -151,6 +166,7 @@ func (ibv *ImageBrowserView) CellsStyleMask() int {
 
 // SetConstrainsToOriginalSize sets whether the receiver constraints the cells's image to their original size. Default is NO.
 func (ibv *ImageBrowserView) SetConstrainsToOriginalSize(flag bool) {
+	defer runtime.KeepAlive(ibv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("setConstrainsToOriginalSize:"), flag)
 	})
@@ -159,6 +175,7 @@ func (ibv *ImageBrowserView) SetConstrainsToOriginalSize(flag bool) {
 
 // ConstrainsToOriginalSize reports whether the receiver constraints the cells's image to their original size.
 func (ibv *ImageBrowserView) ConstrainsToOriginalSize() bool {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -172,6 +189,8 @@ func (ibv *ImageBrowserView) ConstrainsToOriginalSize() bool {
 
 // SetBackgroundLayer specifies the receiver�s background layer.
 func (ibv *ImageBrowserView) SetBackgroundLayer(aLayer obj.Object) {
+	defer runtime.KeepAlive(ibv)
+	defer runtime.KeepAlive(aLayer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("setBackgroundLayer:"), objref.IDOf(aLayer))
 	})
@@ -180,6 +199,7 @@ func (ibv *ImageBrowserView) SetBackgroundLayer(aLayer obj.Object) {
 
 // BackgroundLayer provides the receiver�s background layer.
 func (ibv *ImageBrowserView) BackgroundLayer() obj.Object {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -193,6 +213,8 @@ func (ibv *ImageBrowserView) BackgroundLayer() obj.Object {
 
 // SetForegroundLayer specifies the receiver�s foreground layer.
 func (ibv *ImageBrowserView) SetForegroundLayer(aLayer obj.Object) {
+	defer runtime.KeepAlive(ibv)
+	defer runtime.KeepAlive(aLayer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("setForegroundLayer:"), objref.IDOf(aLayer))
 	})
@@ -201,6 +223,7 @@ func (ibv *ImageBrowserView) SetForegroundLayer(aLayer obj.Object) {
 
 // ForegroundLayer provides the receiver�s foreground layer.
 func (ibv *ImageBrowserView) ForegroundLayer() obj.Object {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -214,6 +237,8 @@ func (ibv *ImageBrowserView) ForegroundLayer() obj.Object {
 
 // NewCellForRepresentedItem returns the cell to use for the specified item. The returned cell should not be autoreleased. Subclasses can override this method to customize the appearance of the cell that will represent "anItem".
 func (ibv *ImageBrowserView) NewCellForRepresentedItem(anItem obj.Object) *ImageBrowserCell {
+	defer runtime.KeepAlive(ibv)
+	defer runtime.KeepAlive(anItem)
 	var _mainthread0 *ImageBrowserCell
 	purego.Main(func() {
 		_mainthread0 = func() *ImageBrowserCell {
@@ -227,6 +252,7 @@ func (ibv *ImageBrowserView) NewCellForRepresentedItem(anItem obj.Object) *Image
 
 // CellForItemAtIndex returns the cell at the specified index. Subclasses must not override this method.
 func (ibv *ImageBrowserView) CellForItemAtIndex(index int) *ImageBrowserCell {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 *ImageBrowserCell
 	purego.Main(func() {
 		_mainthread0 = func() *ImageBrowserCell {
@@ -240,6 +266,7 @@ func (ibv *ImageBrowserView) CellForItemAtIndex(index int) *ImageBrowserCell {
 
 // SetZoomValue sets the zoom value to <i>aValue</i>. This value should be greater or equal to zero and less or equal than one. A zoom value of zero corresponds to the minimum size (40x40 pixels), A zoom value of one means images fit the browser bounds. Other values are interpolated.
 func (ibv *ImageBrowserView) SetZoomValue(aValue float32) {
+	defer runtime.KeepAlive(ibv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("setZoomValue:"), aValue)
 	})
@@ -248,6 +275,7 @@ func (ibv *ImageBrowserView) SetZoomValue(aValue float32) {
 
 // ZoomValue returns the current zoom value.
 func (ibv *ImageBrowserView) ZoomValue() float32 {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -261,6 +289,7 @@ func (ibv *ImageBrowserView) ZoomValue() float32 {
 
 // SetContentResizingMask mask can be specified by combining any of the following options using the C bitwise OR operator:NSViewWidthSizable NSViewHeightSizable, other values are ignored.
 func (ibv *ImageBrowserView) SetContentResizingMask(mask int) {
+	defer runtime.KeepAlive(ibv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("setContentResizingMask:"), mask)
 	})
@@ -269,6 +298,7 @@ func (ibv *ImageBrowserView) SetContentResizingMask(mask int) {
 
 // ContentResizingMask returns the content resizing mask.
 func (ibv *ImageBrowserView) ContentResizingMask() int {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -282,6 +312,7 @@ func (ibv *ImageBrowserView) ContentResizingMask() int {
 
 // ScrollIndexToVisible scrolls the receiver so the item at the specified index is visible.
 func (ibv *ImageBrowserView) ScrollIndexToVisible(index int) {
+	defer runtime.KeepAlive(ibv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("scrollIndexToVisible:"), index)
 	})
@@ -290,6 +321,7 @@ func (ibv *ImageBrowserView) ScrollIndexToVisible(index int) {
 
 // SetCellSize sets the size of the cells to size
 func (ibv *ImageBrowserView) SetCellSize(size corefoundation.CGSize) {
+	defer runtime.KeepAlive(ibv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("setCellSize:"), size)
 	})
@@ -298,6 +330,7 @@ func (ibv *ImageBrowserView) SetCellSize(size corefoundation.CGSize) {
 
 // CellSize returns the size of the cells
 func (ibv *ImageBrowserView) CellSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -311,6 +344,7 @@ func (ibv *ImageBrowserView) CellSize() corefoundation.CGSize {
 
 // IntercellSpacing returns the spacing between cells in the image browser.
 func (ibv *ImageBrowserView) IntercellSpacing() corefoundation.CGSize {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -324,6 +358,7 @@ func (ibv *ImageBrowserView) IntercellSpacing() corefoundation.CGSize {
 
 // SetIntercellSpacing sets the spacing between cells in the matrix.
 func (ibv *ImageBrowserView) SetIntercellSpacing(aSize corefoundation.CGSize) {
+	defer runtime.KeepAlive(ibv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("setIntercellSpacing:"), aSize)
 	})
@@ -332,6 +367,7 @@ func (ibv *ImageBrowserView) SetIntercellSpacing(aSize corefoundation.CGSize) {
 
 // IndexOfItemAtPoint returns the item at the specified location or NSNotFound if no item at this location.
 func (ibv *ImageBrowserView) IndexOfItemAtPoint(point corefoundation.CGPoint) int {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -345,6 +381,7 @@ func (ibv *ImageBrowserView) IndexOfItemAtPoint(point corefoundation.CGPoint) in
 
 // ItemFrameAtIndex returns the frame rectangle of the item that would be drawn at the specified location.
 func (ibv *ImageBrowserView) ItemFrameAtIndex(index int) corefoundation.CGRect {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -357,12 +394,13 @@ func (ibv *ImageBrowserView) ItemFrameAtIndex(index int) corefoundation.CGRect {
 }
 
 // VisibleItemIndexes returns indexes of the receiver�s currently visible items.
-func (ibv *ImageBrowserView) VisibleItemIndexes() obj.Object {
-	var _mainthread0 obj.Object
+func (ibv *ImageBrowserView) VisibleItemIndexes() *foundation.IndexSet {
+	defer runtime.KeepAlive(ibv)
+	var _mainthread0 *foundation.IndexSet
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexSet {
 			_r := objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("visibleItemIndexes"))
-			return obj.Wrap(_r)
+			return foundation.IndexSetFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -370,12 +408,13 @@ func (ibv *ImageBrowserView) VisibleItemIndexes() obj.Object {
 }
 
 // RowIndexesInRect returns the indexes of the receiver�s rows that intersect the specified rectangle.
-func (ibv *ImageBrowserView) RowIndexesInRect(rect corefoundation.CGRect) obj.Object {
-	var _mainthread0 obj.Object
+func (ibv *ImageBrowserView) RowIndexesInRect(rect corefoundation.CGRect) *foundation.IndexSet {
+	defer runtime.KeepAlive(ibv)
+	var _mainthread0 *foundation.IndexSet
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexSet {
 			_r := objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("rowIndexesInRect:"), rect)
-			return obj.Wrap(_r)
+			return foundation.IndexSetFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -383,12 +422,13 @@ func (ibv *ImageBrowserView) RowIndexesInRect(rect corefoundation.CGRect) obj.Ob
 }
 
 // ColumnIndexesInRect returns the indexes of the receiver�s columns that intersect the specified rectangle.
-func (ibv *ImageBrowserView) ColumnIndexesInRect(rect corefoundation.CGRect) obj.Object {
-	var _mainthread0 obj.Object
+func (ibv *ImageBrowserView) ColumnIndexesInRect(rect corefoundation.CGRect) *foundation.IndexSet {
+	defer runtime.KeepAlive(ibv)
+	var _mainthread0 *foundation.IndexSet
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexSet {
 			_r := objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("columnIndexesInRect:"), rect)
-			return obj.Wrap(_r)
+			return foundation.IndexSetFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -397,6 +437,7 @@ func (ibv *ImageBrowserView) ColumnIndexesInRect(rect corefoundation.CGRect) obj
 
 // RectOfColumn returns the rectangle containing the column at a given index.
 func (ibv *ImageBrowserView) RectOfColumn(columnIndex int) corefoundation.CGRect {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -410,6 +451,7 @@ func (ibv *ImageBrowserView) RectOfColumn(columnIndex int) corefoundation.CGRect
 
 // RectOfRow returns the rectangle containing the row at a given index.
 func (ibv *ImageBrowserView) RectOfRow(rowIndex int) corefoundation.CGRect {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -423,6 +465,7 @@ func (ibv *ImageBrowserView) RectOfRow(rowIndex int) corefoundation.CGRect {
 
 // NumberOfRows returns the number of rows in the receiver.
 func (ibv *ImageBrowserView) NumberOfRows() int {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -436,6 +479,7 @@ func (ibv *ImageBrowserView) NumberOfRows() int {
 
 // NumberOfColumns returns the number of columns in the receiver.
 func (ibv *ImageBrowserView) NumberOfColumns() int {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -449,6 +493,7 @@ func (ibv *ImageBrowserView) NumberOfColumns() int {
 
 // SetCanControlQuickLookPanel sets whether the receiver can automatically take control of the Quick Look panel. default value is NO. IKImageBrowserView's datasource items should provide file paths or URLs as their representation (see IKImageBrowserItem protocol).
 func (ibv *ImageBrowserView) SetCanControlQuickLookPanel(flag bool) {
+	defer runtime.KeepAlive(ibv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("setCanControlQuickLookPanel:"), flag)
 	})
@@ -457,6 +502,7 @@ func (ibv *ImageBrowserView) SetCanControlQuickLookPanel(flag bool) {
 
 // CanControlQuickLookPanel reports whether returns a Boolean value that indicates whether the receiver can automatically take control of the Quick Look panel.
 func (ibv *ImageBrowserView) CanControlQuickLookPanel() bool {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -469,12 +515,13 @@ func (ibv *ImageBrowserView) CanControlQuickLookPanel() bool {
 }
 
 // SelectionIndexes returns the indexes of the selected cells
-func (ibv *ImageBrowserView) SelectionIndexes() obj.Object {
-	var _mainthread0 obj.Object
+func (ibv *ImageBrowserView) SelectionIndexes() *foundation.IndexSet {
+	defer runtime.KeepAlive(ibv)
+	var _mainthread0 *foundation.IndexSet
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexSet {
 			_r := objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("selectionIndexes"))
-			return obj.Wrap(_r)
+			return foundation.IndexSetFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -483,6 +530,8 @@ func (ibv *ImageBrowserView) SelectionIndexes() obj.Object {
 
 // SetSelectionIndexesByExtendingSelection selects cells at indexes <i>indexes</i>. If <i>extendSelection</i> is YES it extends the current selection, otherwise it replaces the current selection.
 func (ibv *ImageBrowserView) SetSelectionIndexesByExtendingSelection(indexes obj.Object, extendSelection bool) {
+	defer runtime.KeepAlive(ibv)
+	defer runtime.KeepAlive(indexes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("setSelectionIndexes:byExtendingSelection:"), objref.IDOf(indexes), extendSelection)
 	})
@@ -491,6 +540,7 @@ func (ibv *ImageBrowserView) SetSelectionIndexesByExtendingSelection(indexes obj
 
 // SetAllowsMultipleSelection controls whether the user can select more than one cell at a time.
 func (ibv *ImageBrowserView) SetAllowsMultipleSelection(flag bool) {
+	defer runtime.KeepAlive(ibv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("setAllowsMultipleSelection:"), flag)
 	})
@@ -499,6 +549,7 @@ func (ibv *ImageBrowserView) SetAllowsMultipleSelection(flag bool) {
 
 // AllowsMultipleSelection reports whether the receiver allows the user to select more than one cell at a time.
 func (ibv *ImageBrowserView) AllowsMultipleSelection() bool {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -512,6 +563,7 @@ func (ibv *ImageBrowserView) AllowsMultipleSelection() bool {
 
 // SetAllowsEmptySelection controls whether the receiver allows zero cell to be selected.
 func (ibv *ImageBrowserView) SetAllowsEmptySelection(flag bool) {
+	defer runtime.KeepAlive(ibv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("setAllowsEmptySelection:"), flag)
 	})
@@ -520,6 +572,7 @@ func (ibv *ImageBrowserView) SetAllowsEmptySelection(flag bool) {
 
 // AllowsEmptySelection reports whether the receiver allows the user to select zero cell.
 func (ibv *ImageBrowserView) AllowsEmptySelection() bool {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -533,6 +586,7 @@ func (ibv *ImageBrowserView) AllowsEmptySelection() bool {
 
 // SetAllowsReordering controls whether the user can reorder items.
 func (ibv *ImageBrowserView) SetAllowsReordering(flag bool) {
+	defer runtime.KeepAlive(ibv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("setAllowsReordering:"), flag)
 	})
@@ -541,6 +595,7 @@ func (ibv *ImageBrowserView) SetAllowsReordering(flag bool) {
 
 // AllowsReordering reports whether the receiver allows the user to reorder items.
 func (ibv *ImageBrowserView) AllowsReordering() bool {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -554,6 +609,7 @@ func (ibv *ImageBrowserView) AllowsReordering() bool {
 
 // SetAnimates controls whether the receiver animate reordering and changes of the data source.
 func (ibv *ImageBrowserView) SetAnimates(flag bool) {
+	defer runtime.KeepAlive(ibv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("setAnimates:"), flag)
 	})
@@ -562,6 +618,7 @@ func (ibv *ImageBrowserView) SetAnimates(flag bool) {
 
 // Animates reports whether the receiver animate changes of the data source.
 func (ibv *ImageBrowserView) Animates() bool {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -575,6 +632,7 @@ func (ibv *ImageBrowserView) Animates() bool {
 
 // ExpandGroupAtIndex expands group at index 'index' if it is not already expanded; otherwise, does nothing.
 func (ibv *ImageBrowserView) ExpandGroupAtIndex(index int) {
+	defer runtime.KeepAlive(ibv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("expandGroupAtIndex:"), index)
 	})
@@ -583,6 +641,7 @@ func (ibv *ImageBrowserView) ExpandGroupAtIndex(index int) {
 
 // CollapseGroupAtIndex collapse group at index 'index' if it is expanded; otherwise, does nothing.
 func (ibv *ImageBrowserView) CollapseGroupAtIndex(index int) {
+	defer runtime.KeepAlive(ibv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("collapseGroupAtIndex:"), index)
 	})
@@ -591,6 +650,7 @@ func (ibv *ImageBrowserView) CollapseGroupAtIndex(index int) {
 
 // IsGroupExpandedAtIndex returns YES if the group at index 'index' is expanded.
 func (ibv *ImageBrowserView) IsGroupExpandedAtIndex(index int) bool {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -604,6 +664,8 @@ func (ibv *ImageBrowserView) IsGroupExpandedAtIndex(index int) bool {
 
 // SetDraggingDestinationDelegate sets the receiver's dragging destination delegate to <i>delegate</i>.
 func (ibv *ImageBrowserView) SetDraggingDestinationDelegate(delegate obj.Object) {
+	defer runtime.KeepAlive(ibv)
+	defer runtime.KeepAlive(delegate)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("setDraggingDestinationDelegate:"), objref.IDOf(delegate))
 	})
@@ -612,6 +674,7 @@ func (ibv *ImageBrowserView) SetDraggingDestinationDelegate(delegate obj.Object)
 
 // DraggingDestinationDelegate returns the receiver's dragging destination delegate.
 func (ibv *ImageBrowserView) DraggingDestinationDelegate() obj.Object {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -625,6 +688,7 @@ func (ibv *ImageBrowserView) DraggingDestinationDelegate() obj.Object {
 
 // IndexAtLocationOfDroppedItem returns the index of the cell where the drop operation occured. This index is valid when a drop occurred and until next drop.
 func (ibv *ImageBrowserView) IndexAtLocationOfDroppedItem() int {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -638,6 +702,7 @@ func (ibv *ImageBrowserView) IndexAtLocationOfDroppedItem() int {
 
 // SetAllowsDroppingOnItems controls whether the user can drop on items. Default is NO.
 func (ibv *ImageBrowserView) SetAllowsDroppingOnItems(flag bool) {
+	defer runtime.KeepAlive(ibv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("setAllowsDroppingOnItems:"), flag)
 	})
@@ -646,6 +711,7 @@ func (ibv *ImageBrowserView) SetAllowsDroppingOnItems(flag bool) {
 
 // AllowsDroppingOnItems reports whether the receiver allows the user to drop on items.
 func (ibv *ImageBrowserView) AllowsDroppingOnItems() bool {
+	defer runtime.KeepAlive(ibv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

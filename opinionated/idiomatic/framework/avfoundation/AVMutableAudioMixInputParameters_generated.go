@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -61,23 +63,27 @@ func (mamip *MutableAudioMixInputParameters) WithTrackID(trackID int32) *Mutable
 
 // WithAudioTimePitchAlgorithm sets the processing algorithm used to manage audio pitch for scaled audio edits.
 func (mamip *MutableAudioMixInputParameters) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *MutableAudioMixInputParameters {
+	defer runtime.KeepAlive(audioTimePitchAlgorithm)
 	objc.Send[objc.ID](objref.IDOf(mamip), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
 	return mamip
 }
 
 // WithAudioTapProcessor sets the audio processing tap associated with the track.
 func (mamip *MutableAudioMixInputParameters) WithAudioTapProcessor(audioTapProcessor obj.Object) *MutableAudioMixInputParameters {
+	defer runtime.KeepAlive(audioTapProcessor)
 	objc.Send[objc.ID](objref.IDOf(mamip), objc.RegisterName("setAudioTapProcessor:"), objref.IDOf(audioTapProcessor))
 	return mamip
 }
 
 // SetVolumeRampFromStartVolumeToEndVolumeTimeRange sets a volume ramp to apply during a specified time range.
 func (mamip *MutableAudioMixInputParameters) SetVolumeRampFromStartVolumeToEndVolumeTimeRange(startVolume float32, endVolume float32, timeRange coremedia.CMTimeRange) {
+	defer runtime.KeepAlive(mamip)
 	objc.Send[objc.ID](objref.IDOf(mamip), objc.RegisterName("setVolumeRampFromStartVolume:toEndVolume:timeRange:"), startVolume, endVolume, timeRange)
 }
 
 // SetVolumeAtTime sets the value of the audio volume starting at the specified time.
 func (mamip *MutableAudioMixInputParameters) SetVolumeAtTime(volume float32, time_ coremedia.CMTime) {
+	defer runtime.KeepAlive(mamip)
 	objc.Send[objc.ID](objref.IDOf(mamip), objc.RegisterName("setVolume:atTime:"), volume, time_)
 }
 

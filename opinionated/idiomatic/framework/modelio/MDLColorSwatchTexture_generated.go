@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -57,6 +58,8 @@ func NewColorSwatchTextureWithColorTemperatureGradientFromToColorTemperatureName
 
 // NewColorSwatchTextureWithColorGradientFromToColorNameTextureDimensions initializes a texture that creates a vertical gradient between two colors.
 func NewColorSwatchTextureWithColorGradientFromToColorNameTextureDimensions(color1 obj.Object, color2 obj.Object, name string, textureDimensions unsafe.Pointer) *ColorSwatchTexture {
+	defer runtime.KeepAlive(color1)
+	defer runtime.KeepAlive(color2)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLColorSwatchTexture")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithColorGradientFrom:toColor:name:textureDimensions:"), objref.IDOf(color1), objref.IDOf(color2), purego.NSString(name), textureDimensions)
 	return colorSwatchTextureAdopt(_id)

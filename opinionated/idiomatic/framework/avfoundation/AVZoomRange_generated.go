@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func zoomRangeAdopt(id objc.ID) *ZoomRange {
 
 // Description returns the object's -description text.
 func (zr *ZoomRange) Description() string {
+	defer runtime.KeepAlive(zr)
 	return rt.Description(objref.IDOf(zr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (zr *ZoomRange) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(zr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(zr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (zr *ZoomRange) IsKind(className string) bool {
+	defer runtime.KeepAlive(zr)
 	return rt.IsKind(objref.IDOf(zr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (zr *ZoomRange) String() string {
+	defer runtime.KeepAlive(zr)
 	return rt.Description(objref.IDOf(zr))
 }
 
@@ -74,18 +81,21 @@ func NewZoomRange() *ZoomRange {
 
 // ContainsZoomFactor returns a Boolean value that indicates whether the specified zoom factor exists in the range.
 func (zr *ZoomRange) ContainsZoomFactor(zoomFactor float64) bool {
+	defer runtime.KeepAlive(zr)
 	_r := objc.Send[bool](objref.IDOf(zr), objc.RegisterName("containsZoomFactor:"), zoomFactor)
 	return _r
 }
 
 // MinZoomFactor returns a CGFloat indicating the minimum zoom factor supported by this range.
 func (zr *ZoomRange) MinZoomFactor() float64 {
+	defer runtime.KeepAlive(zr)
 	_r := objc.Send[float64](objref.IDOf(zr), objc.RegisterName("minZoomFactor"))
 	return _r
 }
 
 // MaxZoomFactor returns a CGFloat indicating the maximum zoom factor supported by this range.
 func (zr *ZoomRange) MaxZoomFactor() float64 {
+	defer runtime.KeepAlive(zr)
 	_r := objc.Send[float64](objref.IDOf(zr), objc.RegisterName("maxZoomFactor"))
 	return _r
 }

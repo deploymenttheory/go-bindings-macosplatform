@@ -41,12 +41,16 @@ type Func struct {
 	// each, passes &local to the call, and returns the function's own result (per
 	// Kind) followed by each out value; RetSig is then the parenthesised tuple.
 	Outs []DispatchOut
-	// FailRet is the error-path return list for FuncOSStatus.
+	// FailRet is the error-path return list for FuncOSStatus and FuncStatusCode.
 	FailRet string
-	// OkRet is the success return list for FuncOSStatus.
+	// OkRet is the success return list for FuncOSStatus and FuncStatusCode.
 	OkRet string
 	// Fail is the failure condition for FuncCFErrorBool (for example "!_ok").
 	Fail string
+	// ErrExpr converts the bound call's status-code result (_rc) into a Go
+	// error for FuncStatusCode (for example
+	// errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0)).
+	ErrExpr string
 }
 
 // FuncKind selects how a Func wrapper turns its bound call into a Go result.
@@ -68,4 +72,9 @@ const (
 	// FuncCFErrorPtr turns a pointer return + CFErrorRef out-parameter into
 	// (obj.Object, error).
 	FuncCFErrorPtr
+	// FuncStatusCode turns a registered status-code typedef return (for example
+	// hv_return_t) into a Go error via ErrExpr, returning any lifted
+	// out-parameters on success. Registered through the idiomatic.json sidecar's
+	// error_typedefs.
+	FuncStatusCode
 )

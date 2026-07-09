@@ -6,7 +6,7 @@ package authenticationservices
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -14,11 +14,11 @@ import (
 var _fnASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports func() objc.ID
 
 // ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports calls the AuthenticationServices framework function ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports.
-func ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports() []obj.Object {
+func ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports() []*foundation.String {
 	_loadOnce.Do(_loadLibrary)
 	if _fnASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports == nil {
 		ebipurego.RegisterLibFunc(&_fnASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports, _lib, "ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports")
 	}
 	_ret := _fnASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports()
-	return purego.NSArrayToSlice(_ret, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_ret, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
 }

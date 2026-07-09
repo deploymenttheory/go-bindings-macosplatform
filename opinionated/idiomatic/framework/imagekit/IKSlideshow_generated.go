@@ -5,6 +5,8 @@
 package imagekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func slideshowAdopt(id objc.ID) *Slideshow {
 
 // Description returns the object's -description text.
 func (s *Slideshow) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Slideshow) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Slideshow) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Slideshow) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -80,27 +87,33 @@ func (s *Slideshow) WithAutoPlayDelay(autoPlayDelay float64) *Slideshow {
 
 // StopSlideshow stop the slideshow.
 func (s *Slideshow) StopSlideshow(sender obj.Object) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stopSlideshow:"), objref.IDOf(sender))
 }
 
 // ReloadData reloadData.
 func (s *Slideshow) ReloadData() {
+	defer runtime.KeepAlive(s)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("reloadData"))
 }
 
 // ReloadSlideshowItemAtIndex reloadSlideshowItemAtIndex.
 func (s *Slideshow) ReloadSlideshowItemAtIndex(index int) {
+	defer runtime.KeepAlive(s)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("reloadSlideshowItemAtIndex:"), index)
 }
 
 // IndexOfCurrentSlideshowItem returns index of current slideshow item.
 func (s *Slideshow) IndexOfCurrentSlideshowItem() int {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("indexOfCurrentSlideshowItem"))
 	return _r
 }
 
 // AutoPlayDelay returns array of filters reflecting the current user adjustments in the adjust or effects tab.
 func (s *Slideshow) AutoPlayDelay() float64 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("autoPlayDelay"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -79,6 +81,7 @@ func (ism *ImageStatisticsMean) WithLabel(label string) *ImageStatisticsMean {
 
 // ClipRectSource returns the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the mean value is written.
 func (ism *ImageStatisticsMean) ClipRectSource() metal.MTLRegion {
+	defer runtime.KeepAlive(ism)
 	_r := objc.Send[metal.MTLRegion](objref.IDOf(ism), objc.RegisterName("clipRectSource"))
 	return _r
 }

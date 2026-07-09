@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStructAdopt(id ob
 
 // Description returns the object's -description text.
 func (mtscfsttss *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) Description() string {
+	defer runtime.KeepAlive(mtscfsttss)
 	return rt.Description(objref.IDOf(mtscfsttss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtscfsttss *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtscfsttss)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtscfsttss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtscfsttss *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtscfsttss)
 	return rt.IsKind(objref.IDOf(mtscfsttss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtscfsttss *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) String() string {
+	defer runtime.KeepAlive(mtscfsttss)
 	return rt.Description(objref.IDOf(mtscfsttss))
 }
 
@@ -72,24 +80,28 @@ func NewMTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct() *MTRT
 
 // WithNodeID sets the node ID.
 func (mtscfsttss *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) WithNodeID(nodeID obj.Object) *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct {
+	defer runtime.KeepAlive(nodeID)
 	objc.Send[objc.ID](objref.IDOf(mtscfsttss), objc.RegisterName("setNodeID:"), objref.IDOf(nodeID))
 	return mtscfsttss
 }
 
 // WithEndpoint sets the endpoint.
 func (mtscfsttss *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) WithEndpoint(endpoint obj.Object) *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct {
+	defer runtime.KeepAlive(endpoint)
 	objc.Send[objc.ID](objref.IDOf(mtscfsttss), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return mtscfsttss
 }
 
 // NodeID returns the node ID.
-func (mtscfsttss *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) NodeID() obj.Object {
+func (mtscfsttss *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) NodeID() *foundation.Number {
+	defer runtime.KeepAlive(mtscfsttss)
 	_r := objc.Send[objc.ID](objref.IDOf(mtscfsttss), objc.RegisterName("nodeID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Endpoint returns the endpoint.
-func (mtscfsttss *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) Endpoint() obj.Object {
+func (mtscfsttss *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) Endpoint() *foundation.Number {
+	defer runtime.KeepAlive(mtscfsttss)
 	_r := objc.Send[objc.ID](objref.IDOf(mtscfsttss), objc.RegisterName("endpoint"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

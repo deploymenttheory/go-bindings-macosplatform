@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,27 +51,35 @@ func portMessageAdopt(id objc.ID) *PortMessage {
 
 // Description returns the object's -description text.
 func (pm *PortMessage) Description() string {
+	defer runtime.KeepAlive(pm)
 	return rt.Description(objref.IDOf(pm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pm *PortMessage) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pm *PortMessage) IsKind(className string) bool {
+	defer runtime.KeepAlive(pm)
 	return rt.IsKind(objref.IDOf(pm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pm *PortMessage) String() string {
+	defer runtime.KeepAlive(pm)
 	return rt.Description(objref.IDOf(pm))
 }
 
 // NewPortMessageWithSendPortReceivePortComponents creates a new PortMessage.
 func NewPortMessageWithSendPortReceivePortComponents(sendPort *Port, replyPort *Port, components obj.Object) *PortMessage {
+	defer runtime.KeepAlive(sendPort)
+	defer runtime.KeepAlive(replyPort)
+	defer runtime.KeepAlive(components)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPortMessage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSendPort:receivePort:components:"), objref.IDOf(sendPort), objref.IDOf(replyPort), objref.IDOf(components))
 	return portMessageAdopt(_id)
@@ -88,37 +98,42 @@ func (pm *PortMessage) WithObservationInfo(observationInfo unsafe.Pointer) *Port
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (pm *PortMessage) WithScriptingProperties(scriptingProperties obj.Object) *PortMessage {
-	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (pm *PortMessage) WithScriptingProperties(scriptingProperties map[string]obj.Object) *PortMessage {
+	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return pm
 }
 
 // SendBeforeDate sends before date.
-func (pm *PortMessage) SendBeforeDate(date *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(pm), objc.RegisterName("sendBeforeDate:"), objref.IDOf(date))
+func (pm *PortMessage) SendBeforeDate(date time.Time) bool {
+	defer runtime.KeepAlive(pm)
+	_r := objc.Send[bool](objref.IDOf(pm), objc.RegisterName("sendBeforeDate:"), rt.TimeToNSDate(date))
 	return _r
 }
 
 // Components returns the components.
 func (pm *PortMessage) Components() obj.Object {
+	defer runtime.KeepAlive(pm)
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("components"))
 	return obj.Wrap(_r)
 }
 
 // ReceivePort returns the receive port.
 func (pm *PortMessage) ReceivePort() *Port {
+	defer runtime.KeepAlive(pm)
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("receivePort"))
 	return PortFromID(_r)
 }
 
 // SendPort returns the send port.
 func (pm *PortMessage) SendPort() *Port {
+	defer runtime.KeepAlive(pm)
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("sendPort"))
 	return PortFromID(_r)
 }
 
 // Msgid returns the msgid.
 func (pm *PortMessage) Msgid() uint32 {
+	defer runtime.KeepAlive(pm)
 	_r := objc.Send[uint32](objref.IDOf(pm), objc.RegisterName("msgid"))
 	return _r
 }

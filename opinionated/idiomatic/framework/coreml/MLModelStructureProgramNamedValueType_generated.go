@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func modelStructureProgramNamedValueTypeAdopt(id objc.ID) *ModelStructureProgram
 
 // Description returns the object's -description text.
 func (mspnvt *ModelStructureProgramNamedValueType) Description() string {
+	defer runtime.KeepAlive(mspnvt)
 	return rt.Description(objref.IDOf(mspnvt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mspnvt *ModelStructureProgramNamedValueType) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mspnvt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mspnvt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mspnvt *ModelStructureProgramNamedValueType) IsKind(className string) bool {
+	defer runtime.KeepAlive(mspnvt)
 	return rt.IsKind(objref.IDOf(mspnvt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mspnvt *ModelStructureProgramNamedValueType) String() string {
+	defer runtime.KeepAlive(mspnvt)
 	return rt.Description(objref.IDOf(mspnvt))
 }
 
@@ -74,6 +81,7 @@ func NewModelStructureProgramNamedValueType() *ModelStructureProgramNamedValueTy
 
 // Name returns the name of the parameter.
 func (mspnvt *ModelStructureProgramNamedValueType) Name() string {
+	defer runtime.KeepAlive(mspnvt)
 	_r := objc.Send[objc.ID](objref.IDOf(mspnvt), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (mspnvt *ModelStructureProgramNamedValueType) Name() string {
 
 // Type returns the type of the parameter.
 func (mspnvt *ModelStructureProgramNamedValueType) Type() *ModelStructureProgramValueType {
+	defer runtime.KeepAlive(mspnvt)
 	_r := objc.Send[objc.ID](objref.IDOf(mspnvt), objc.RegisterName("type"))
 	return ModelStructureProgramValueTypeFromID(_r)
 }

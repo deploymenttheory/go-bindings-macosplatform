@@ -5,6 +5,8 @@
 package cryptotokenkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,6 +61,7 @@ func (tpao *TokenPasswordAuthOperation) WithPassword(password string) *TokenPass
 
 // Password returns the password.
 func (tpao *TokenPasswordAuthOperation) Password() string {
+	defer runtime.KeepAlive(tpao)
 	_r := objc.Send[objc.ID](objref.IDOf(tpao), objc.RegisterName("password"))
 	if _r == 0 {
 		return ""

@@ -5,14 +5,19 @@
 package syncservices
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // ChangeWithTypeRecordIdentifierChanges wraps the corresponding Objective-C method.
 func ChangeWithTypeRecordIdentifierChanges(type_ int, recordIdentifier string, changes obj.Object) obj.Object {
+	defer runtime.KeepAlive(changes)
 	_r := objc.Send[objc.ID](objc.ID(_class("ISyncChange")), objc.RegisterName("changeWithType:recordIdentifier:changes:"), type_, purego.NSString(recordIdentifier), objref.IDOf(changes))
 	return obj.Wrap(_r)
 }
@@ -24,18 +29,24 @@ func SharedManager() *ISyncManager {
 }
 
 // BeginSessionWithClientEntityNamesBeforeDate begins session with client entity names before date.
-func BeginSessionWithClientEntityNamesBeforeDate(client *ISyncClient, entityNames obj.Object, date obj.Object) *ISyncSession {
-	_r := objc.Send[objc.ID](objc.ID(_class("ISyncSession")), objc.RegisterName("beginSessionWithClient:entityNames:beforeDate:"), objref.IDOf(client), objref.IDOf(entityNames), objref.IDOf(date))
+func BeginSessionWithClientEntityNamesBeforeDate(client *ISyncClient, entityNames obj.Object, date time.Time) *ISyncSession {
+	defer runtime.KeepAlive(client)
+	defer runtime.KeepAlive(entityNames)
+	_r := objc.Send[objc.ID](objc.ID(_class("ISyncSession")), objc.RegisterName("beginSessionWithClient:entityNames:beforeDate:"), objref.IDOf(client), objref.IDOf(entityNames), rt.TimeToNSDate(date))
 	return ISyncSessionFromID(_r)
 }
 
 // CancelPreviousBeginSessionWithClient cancels previous begin session with client.
 func CancelPreviousBeginSessionWithClient(client *ISyncClient) {
+	defer runtime.KeepAlive(client)
 	objc.Send[objc.ID](objc.ID(_class("ISyncSession")), objc.RegisterName("cancelPreviousBeginSessionWithClient:"), objref.IDOf(client))
 }
 
 // BeginSessionWithClientEntityNamesBeforeDateLastAnchors begins session with client entity names before date last anchors.
-func BeginSessionWithClientEntityNamesBeforeDateLastAnchors(client *ISyncClient, entityNames obj.Object, date obj.Object, anchors obj.Object) *ISyncSession {
-	_r := objc.Send[objc.ID](objc.ID(_class("ISyncSession")), objc.RegisterName("beginSessionWithClient:entityNames:beforeDate:lastAnchors:"), objref.IDOf(client), objref.IDOf(entityNames), objref.IDOf(date), objref.IDOf(anchors))
+func BeginSessionWithClientEntityNamesBeforeDateLastAnchors(client *ISyncClient, entityNames obj.Object, date time.Time, anchors obj.Object) *ISyncSession {
+	defer runtime.KeepAlive(client)
+	defer runtime.KeepAlive(entityNames)
+	defer runtime.KeepAlive(anchors)
+	_r := objc.Send[objc.ID](objc.ID(_class("ISyncSession")), objc.RegisterName("beginSessionWithClient:entityNames:beforeDate:lastAnchors:"), objref.IDOf(client), objref.IDOf(entityNames), rt.TimeToNSDate(date), objref.IDOf(anchors))
 	return ISyncSessionFromID(_r)
 }

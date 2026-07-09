@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -211,12 +212,14 @@ func (sc *StereoscopicCamera) WithExposure(exposure unsafe.Pointer) *Stereoscopi
 
 // WithParent sets the parent object that contains this object.
 func (sc *StereoscopicCamera) WithParent(parent ObjectProvider) *StereoscopicCamera {
+	defer runtime.KeepAlive(parent)
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return sc
 }
 
 // WithInstance sets the primary object, if applicable, of which this object is an instance.
 func (sc *StereoscopicCamera) WithInstance(instance ObjectProvider) *StereoscopicCamera {
+	defer runtime.KeepAlive(instance)
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return sc
 }
@@ -229,24 +232,28 @@ func (sc *StereoscopicCamera) WithHidden(hidden bool) *StereoscopicCamera {
 
 // InterPupillaryDistance returns inter-pupillary distance in mm. Default is 63mm.
 func (sc *StereoscopicCamera) InterPupillaryDistance() float32 {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[float32](objref.IDOf(sc), objc.RegisterName("interPupillaryDistance"))
 	return _r
 }
 
 // LeftVergence returns the left vergence.
 func (sc *StereoscopicCamera) LeftVergence() float32 {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[float32](objref.IDOf(sc), objc.RegisterName("leftVergence"))
 	return _r
 }
 
 // RightVergence returns the right vergence.
 func (sc *StereoscopicCamera) RightVergence() float32 {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[float32](objref.IDOf(sc), objc.RegisterName("rightVergence"))
 	return _r
 }
 
 // Overlap returns the amount, as a percentage of image width to offset an image towards the other camera. This value is used in a stereo grade to enhance or reduce the intensity of the stereoscopic effect
 func (sc *StereoscopicCamera) Overlap() float32 {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[float32](objref.IDOf(sc), objc.RegisterName("overlap"))
 	return _r
 }

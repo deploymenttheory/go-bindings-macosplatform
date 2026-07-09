@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTROperationalCredentialsClusterNOCStructAdopt(id objc.ID) *MTROperationalC
 
 // Description returns the object's -description text.
 func (moccns *MTROperationalCredentialsClusterNOCStruct) Description() string {
+	defer runtime.KeepAlive(moccns)
 	return rt.Description(objref.IDOf(moccns))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (moccns *MTROperationalCredentialsClusterNOCStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(moccns)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(moccns), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (moccns *MTROperationalCredentialsClusterNOCStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(moccns)
 	return rt.IsKind(objref.IDOf(moccns), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (moccns *MTROperationalCredentialsClusterNOCStruct) String() string {
+	defer runtime.KeepAlive(moccns)
 	return rt.Description(objref.IDOf(moccns))
 }
 
@@ -71,37 +79,41 @@ func NewMTROperationalCredentialsClusterNOCStruct() *MTROperationalCredentialsCl
 }
 
 // WithNoc sets the noc.
-func (moccns *MTROperationalCredentialsClusterNOCStruct) WithNoc(noc obj.Object) *MTROperationalCredentialsClusterNOCStruct {
-	objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("setNoc:"), objref.IDOf(noc))
+func (moccns *MTROperationalCredentialsClusterNOCStruct) WithNoc(noc []byte) *MTROperationalCredentialsClusterNOCStruct {
+	objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("setNoc:"), rt.BytesToNSData(noc))
 	return moccns
 }
 
 // WithIcac sets the icac.
-func (moccns *MTROperationalCredentialsClusterNOCStruct) WithIcac(icac obj.Object) *MTROperationalCredentialsClusterNOCStruct {
-	objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("setIcac:"), objref.IDOf(icac))
+func (moccns *MTROperationalCredentialsClusterNOCStruct) WithIcac(icac []byte) *MTROperationalCredentialsClusterNOCStruct {
+	objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("setIcac:"), rt.BytesToNSData(icac))
 	return moccns
 }
 
 // WithFabricIndex sets the fabric index.
 func (moccns *MTROperationalCredentialsClusterNOCStruct) WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterNOCStruct {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return moccns
 }
 
 // Noc returns the noc.
-func (moccns *MTROperationalCredentialsClusterNOCStruct) Noc() obj.Object {
+func (moccns *MTROperationalCredentialsClusterNOCStruct) Noc() []byte {
+	defer runtime.KeepAlive(moccns)
 	_r := objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("noc"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Icac returns the icac.
-func (moccns *MTROperationalCredentialsClusterNOCStruct) Icac() obj.Object {
+func (moccns *MTROperationalCredentialsClusterNOCStruct) Icac() []byte {
+	defer runtime.KeepAlive(moccns)
 	_r := objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("icac"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // FabricIndex returns the fabric index.
-func (moccns *MTROperationalCredentialsClusterNOCStruct) FabricIndex() obj.Object {
+func (moccns *MTROperationalCredentialsClusterNOCStruct) FabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(moccns)
 	_r := objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("fabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

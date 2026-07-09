@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRActionsClusterStartActionParamsAdopt(id objc.ID) *MTRActionsClusterStart
 
 // Description returns the object's -description text.
 func (macsap *MTRActionsClusterStartActionParams) Description() string {
+	defer runtime.KeepAlive(macsap)
 	return rt.Description(objref.IDOf(macsap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (macsap *MTRActionsClusterStartActionParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(macsap)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(macsap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (macsap *MTRActionsClusterStartActionParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(macsap)
 	return rt.IsKind(objref.IDOf(macsap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (macsap *MTRActionsClusterStartActionParams) String() string {
+	defer runtime.KeepAlive(macsap)
 	return rt.Description(objref.IDOf(macsap))
 }
 
@@ -72,48 +80,56 @@ func NewMTRActionsClusterStartActionParams() *MTRActionsClusterStartActionParams
 
 // WithActionID sets the action ID.
 func (macsap *MTRActionsClusterStartActionParams) WithActionID(actionID obj.Object) *MTRActionsClusterStartActionParams {
+	defer runtime.KeepAlive(actionID)
 	objc.Send[objc.ID](objref.IDOf(macsap), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 	return macsap
 }
 
 // WithInvokeID sets the invoke ID.
 func (macsap *MTRActionsClusterStartActionParams) WithInvokeID(invokeID obj.Object) *MTRActionsClusterStartActionParams {
+	defer runtime.KeepAlive(invokeID)
 	objc.Send[objc.ID](objref.IDOf(macsap), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 	return macsap
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (macsap *MTRActionsClusterStartActionParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRActionsClusterStartActionParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(macsap), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return macsap
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (macsap *MTRActionsClusterStartActionParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRActionsClusterStartActionParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(macsap), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return macsap
 }
 
 // ActionID returns the action ID.
-func (macsap *MTRActionsClusterStartActionParams) ActionID() obj.Object {
+func (macsap *MTRActionsClusterStartActionParams) ActionID() *foundation.Number {
+	defer runtime.KeepAlive(macsap)
 	_r := objc.Send[objc.ID](objref.IDOf(macsap), objc.RegisterName("actionID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // InvokeID returns the invoke ID.
-func (macsap *MTRActionsClusterStartActionParams) InvokeID() obj.Object {
+func (macsap *MTRActionsClusterStartActionParams) InvokeID() *foundation.Number {
+	defer runtime.KeepAlive(macsap)
 	_r := objc.Send[objc.ID](objref.IDOf(macsap), objc.RegisterName("invokeID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (macsap *MTRActionsClusterStartActionParams) TimedInvokeTimeoutMs() obj.Object {
+func (macsap *MTRActionsClusterStartActionParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(macsap)
 	_r := objc.Send[objc.ID](objref.IDOf(macsap), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (macsap *MTRActionsClusterStartActionParams) ServerSideProcessingTimeout() obj.Object {
+func (macsap *MTRActionsClusterStartActionParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(macsap)
 	_r := objc.Send[objc.ID](objref.IDOf(macsap), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

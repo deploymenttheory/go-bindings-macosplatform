@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -51,6 +52,9 @@ func mTRBaseClusterEnergyEVSEAdopt(id objc.ID) *MTRBaseClusterEnergyEVSE {
 
 // NewMTRBaseClusterEnergyEVSEWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterEnergyEVSEWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterEnergyEVSE {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterEnergyEVSE")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterEnergyEVSEAdopt(_id)
@@ -60,6 +64,8 @@ func NewMTRBaseClusterEnergyEVSEWithDeviceEndpointIDQueue(device *MTRBaseDevice,
 //
 // GetTargetsWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) GetTargetsWithParamsCompletion(ctx context.Context, params *MTREnergyEVSEClusterGetTargetsParams) (result *MTREnergyEVSEClusterGetTargetsResponseParams, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTREnergyEVSEClusterGetTargetsResponseParams
 		err error
@@ -85,6 +91,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) GetTargetsWithParamsCompletion(ctx contex
 //
 // GetTargetsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) GetTargetsWithCompletion(ctx context.Context) (result *MTREnergyEVSEClusterGetTargetsResponseParams, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val *MTREnergyEVSEClusterGetTargetsResponseParams
 		err error
@@ -110,6 +117,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) GetTargetsWithCompletion(ctx context.Cont
 //
 // ReadAttributeStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -135,6 +143,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeStateWithCompletion(ctx cont
 //
 // SubscribeAttributeStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -160,6 +170,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeStateWithParamsSubscrip
 //
 // ReadAttributeSupplyStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeSupplyStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -185,6 +196,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeSupplyStateWithCompletion(ct
 //
 // SubscribeAttributeSupplyStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeSupplyStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -210,6 +223,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeSupplyStateWithParamsSu
 //
 // ReadAttributeFaultStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeFaultStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -235,6 +249,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeFaultStateWithCompletion(ctx
 //
 // SubscribeAttributeFaultStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeFaultStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -260,6 +276,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeFaultStateWithParamsSub
 //
 // ReadAttributeChargingEnabledUntilWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeChargingEnabledUntilWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -285,6 +302,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeChargingEnabledUntilWithComp
 //
 // SubscribeAttributeChargingEnabledUntilWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeChargingEnabledUntilWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -310,6 +329,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeChargingEnabledUntilWit
 //
 // ReadAttributeCircuitCapacityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeCircuitCapacityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -335,6 +355,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeCircuitCapacityWithCompletio
 //
 // SubscribeAttributeCircuitCapacityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeCircuitCapacityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -360,6 +382,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeCircuitCapacityWithPara
 //
 // ReadAttributeMinimumChargeCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeMinimumChargeCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -385,6 +408,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeMinimumChargeCurrentWithComp
 //
 // SubscribeAttributeMinimumChargeCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeMinimumChargeCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -410,6 +435,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeMinimumChargeCurrentWit
 //
 // ReadAttributeMaximumChargeCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeMaximumChargeCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -435,6 +461,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeMaximumChargeCurrentWithComp
 //
 // SubscribeAttributeMaximumChargeCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeMaximumChargeCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -460,6 +488,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeMaximumChargeCurrentWit
 //
 // ReadAttributeUserMaximumChargeCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeUserMaximumChargeCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -485,6 +514,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeUserMaximumChargeCurrentWith
 //
 // SubscribeAttributeUserMaximumChargeCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeUserMaximumChargeCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -510,6 +541,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeUserMaximumChargeCurren
 //
 // ReadAttributeRandomizationDelayWindowWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeRandomizationDelayWindowWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -535,6 +567,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeRandomizationDelayWindowWith
 //
 // SubscribeAttributeRandomizationDelayWindowWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeRandomizationDelayWindowWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -560,6 +594,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeRandomizationDelayWindo
 //
 // ReadAttributeNextChargeStartTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeNextChargeStartTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -585,6 +620,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeNextChargeStartTimeWithCompl
 //
 // SubscribeAttributeNextChargeStartTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeNextChargeStartTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -610,6 +647,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeNextChargeStartTimeWith
 //
 // ReadAttributeNextChargeTargetTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeNextChargeTargetTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -635,6 +673,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeNextChargeTargetTimeWithComp
 //
 // SubscribeAttributeNextChargeTargetTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeNextChargeTargetTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -660,6 +700,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeNextChargeTargetTimeWit
 //
 // ReadAttributeNextChargeRequiredEnergyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeNextChargeRequiredEnergyWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -685,6 +726,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeNextChargeRequiredEnergyWith
 //
 // SubscribeAttributeNextChargeRequiredEnergyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeNextChargeRequiredEnergyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -710,6 +753,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeNextChargeRequiredEnerg
 //
 // ReadAttributeNextChargeTargetSoCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeNextChargeTargetSoCWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -735,6 +779,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeNextChargeTargetSoCWithCompl
 //
 // SubscribeAttributeNextChargeTargetSoCWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeNextChargeTargetSoCWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -760,6 +806,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeNextChargeTargetSoCWith
 //
 // ReadAttributeApproximateEVEfficiencyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeApproximateEVEfficiencyWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -785,6 +832,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeApproximateEVEfficiencyWithC
 //
 // SubscribeAttributeApproximateEVEfficiencyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeApproximateEVEfficiencyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -810,6 +859,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeApproximateEVEfficiency
 //
 // ReadAttributeSessionIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeSessionIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -835,6 +885,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeSessionIDWithCompletion(ctx 
 //
 // SubscribeAttributeSessionIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeSessionIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -860,6 +912,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeSessionIDWithParamsSubs
 //
 // ReadAttributeSessionDurationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeSessionDurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -885,6 +938,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeSessionDurationWithCompletio
 //
 // SubscribeAttributeSessionDurationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeSessionDurationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -910,6 +965,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeSessionDurationWithPara
 //
 // ReadAttributeSessionEnergyChargedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeSessionEnergyChargedWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -935,6 +991,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeSessionEnergyChargedWithComp
 //
 // SubscribeAttributeSessionEnergyChargedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeSessionEnergyChargedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -960,6 +1018,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeSessionEnergyChargedWit
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -985,6 +1044,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeGeneratedCommandListWithComp
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1010,6 +1071,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeGeneratedCommandListWit
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1035,6 +1097,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeAcceptedCommandListWithCompl
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1060,6 +1124,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeAcceptedCommandListWith
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1085,6 +1150,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeAttributeListWithCompletion(
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1110,6 +1177,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeAttributeListWithParams
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1135,6 +1203,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeFeatureMapWithCompletion(ctx
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1160,6 +1230,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeFeatureMapWithParamsSub
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1185,6 +1256,8 @@ func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeClusterRevisionWithCompletio
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcee)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

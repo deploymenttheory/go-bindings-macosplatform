@@ -932,16 +932,16 @@ func CGCaptureAllDisplaysWithOptions(options CGCaptureOptions) CGError {
 	return _fnCGCaptureAllDisplaysWithOptions(options)
 }
 
-func CGColorConversionInfoConvertData(info unsafe.Pointer, width uint, height uint, dst_data unsafe.Pointer, dst_format CGColorBufferFormat, src_data unsafe.Pointer, src_format CGColorBufferFormat, options unsafe.Pointer) bool {
-	return _fnCGColorConversionInfoConvertData(info, width, height, dst_data, dst_format, src_data, src_format, options)
+func CGColorConversionInfoConvertData(info unsafe.Pointer, width uint, height uint, dstData unsafe.Pointer, dstFormat CGColorBufferFormat, srcData unsafe.Pointer, srcFormat CGColorBufferFormat, options unsafe.Pointer) bool {
+	return _fnCGColorConversionInfoConvertData(info, width, height, dstData, dstFormat, srcData, srcFormat, options)
 }
 
 func CGColorConversionInfoCreate(src unsafe.Pointer, dst unsafe.Pointer) unsafe.Pointer {
 	return _fnCGColorConversionInfoCreate(src, dst)
 }
 
-func CGColorConversionInfoCreateForToneMapping(from unsafe.Pointer, source_headroom float32, to unsafe.Pointer, target_headroom float32, method CGToneMapping, options unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return _fnCGColorConversionInfoCreateForToneMapping(from, source_headroom, to, target_headroom, method, options, error_)
+func CGColorConversionInfoCreateForToneMapping(from unsafe.Pointer, sourceHeadroom float32, to unsafe.Pointer, targetHeadroom float32, method CGToneMapping, options unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
+	return _fnCGColorConversionInfoCreateForToneMapping(from, sourceHeadroom, to, targetHeadroom, method, options, error_)
 }
 
 func CGColorConversionInfoCreateFromListWithArguments(options unsafe.Pointer, arg unsafe.Pointer, arg2 CGColorConversionInfoTransformType, arg3 CGColorRenderingIntent, arg4 string) unsafe.Pointer {
@@ -1759,8 +1759,8 @@ func CGContextTranslateCTM(c unsafe.Pointer, tx float64, ty float64) {
 	_fnCGContextTranslateCTM(c, tx, ty)
 }
 
-func CGConvertColorDataWithFormat(width uint, height uint, dst_data unsafe.Pointer, dst_format CGColorDataFormat, src_data unsafe.Pointer, src_format CGColorDataFormat, options unsafe.Pointer) bool {
-	return _fnCGConvertColorDataWithFormat(width, height, dst_data, dst_format, src_data, src_format, options)
+func CGConvertColorDataWithFormat(width uint, height uint, dstData unsafe.Pointer, dstFormat CGColorDataFormat, srcData unsafe.Pointer, srcFormat CGColorDataFormat, options unsafe.Pointer) bool {
+	return _fnCGConvertColorDataWithFormat(width, height, dstData, dstFormat, srcData, srcFormat, options)
 }
 
 // Deprecated: No longer supported
@@ -2820,8 +2820,8 @@ func CGPDFContextSetDestinationForRect(context_ unsafe.Pointer, name unsafe.Poin
 	_fnCGPDFContextSetDestinationForRect(context_, name, rect)
 }
 
-func CGPDFContextSetIDTree(context_ unsafe.Pointer, iDTreeDictionary unsafe.Pointer) {
-	_fnCGPDFContextSetIDTree(context_, iDTreeDictionary)
+func CGPDFContextSetIDTree(context_ unsafe.Pointer, idTreeDictionary unsafe.Pointer) {
+	_fnCGPDFContextSetIDTree(context_, idTreeDictionary)
 }
 
 func CGPDFContextSetOutline(context_ unsafe.Pointer, outline unsafe.Pointer) {

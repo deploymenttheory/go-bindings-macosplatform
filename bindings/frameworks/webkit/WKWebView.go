@@ -169,11 +169,11 @@ func (o *WKWebView) LoadRequest(request *foundation.NSURLRequest) *WKNavigation 
 }
 
 // Loads the web content from the specified file and navigates to it.
-func (o *WKWebView) LoadFileURLAllowingReadAccessToURL(uRL *foundation.NSURL, readAccessURL *foundation.NSURL) *WKNavigation {
+func (o *WKWebView) LoadFileURLAllowingReadAccessToURL(url *foundation.NSURL, readAccessURL *foundation.NSURL) *WKNavigation {
 	var _mainthread0 *WKNavigation
 	purego.Main(func() {
 		_mainthread0 = func() *WKNavigation {
-			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadFileURLAllowingReadAccessToURL, uRL.Ptr(), readAccessURL.Ptr())
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadFileURLAllowingReadAccessToURL, url.Ptr(), readAccessURL.Ptr())
 			if _ret != 0 {
 				_ret.Send(objc.RegisterName("retain"))
 			}
@@ -199,11 +199,11 @@ func (o *WKWebView) LoadHTMLStringBaseURL(string_ *foundation.NSString, baseURL 
 }
 
 // Loads the content of the specified data object and navigates to it.
-func (o *WKWebView) LoadDataMIMETypeCharacterEncodingNameBaseURL(data *foundation.NSData, mIMEType *foundation.NSString, characterEncodingName *foundation.NSString, baseURL *foundation.NSURL) *WKNavigation {
+func (o *WKWebView) LoadDataMIMETypeCharacterEncodingNameBaseURL(data *foundation.NSData, mimeType *foundation.NSString, characterEncodingName *foundation.NSString, baseURL *foundation.NSURL) *WKNavigation {
 	var _mainthread0 *WKNavigation
 	purego.Main(func() {
 		_mainthread0 = func() *WKNavigation {
-			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadDataMIMETypeCharacterEncodingNameBaseURL, data.Ptr(), mIMEType.Ptr(), characterEncodingName.Ptr(), baseURL.Ptr())
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewSelLoadDataMIMETypeCharacterEncodingNameBaseURL, data.Ptr(), mimeType.Ptr(), characterEncodingName.Ptr(), baseURL.Ptr())
 			if _ret != 0 {
 				_ret.Send(objc.RegisterName("retain"))
 			}
@@ -779,9 +779,9 @@ func (o *WKWebView) UIDelegate() WKUIDelegate {
 	return _mainthread0
 }
 
-func (o *WKWebView) SetUIDelegate(uIDelegate WKUIDelegate) {
+func (o *WKWebView) SetUIDelegate(uiDelegate WKUIDelegate) {
 	purego.Main(func() {
-		o.Ptr().Send(_wKWebViewSelSetUIDelegate, uIDelegate)
+		o.Ptr().Send(_wKWebViewSelSetUIDelegate, uiDelegate)
 	})
 }
 

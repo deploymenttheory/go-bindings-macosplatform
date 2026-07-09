@@ -8,11 +8,11 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrCodeNetworkError matches the AdServices error AAAttributionErrorCodeNetworkError.
-var ErrCodeNetworkError = errkit.New("AAAttributionErrorDomain", 1)
-
 // ErrCodeInternalError matches the AdServices error AAAttributionErrorCodeInternalError.
 var ErrCodeInternalError = errkit.New("AAAttributionErrorDomain", 2)
+
+// ErrCodeNetworkError matches the AdServices error AAAttributionErrorCodeNetworkError.
+var ErrCodeNetworkError = errkit.New("AAAttributionErrorDomain", 1)
 
 // ErrCodePlatformNotSupported matches the AdServices error AAAttributionErrorCodePlatformNotSupported.
 var ErrCodePlatformNotSupported = errkit.New("AAAttributionErrorDomain", 3)

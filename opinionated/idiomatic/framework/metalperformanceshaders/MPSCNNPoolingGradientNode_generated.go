@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,24 +55,28 @@ func (cpgn *CNNPoolingGradientNode) WithLabel(label string) *CNNPoolingGradientN
 
 // KernelWidth returns the kernel width.
 func (cpgn *CNNPoolingGradientNode) KernelWidth() int {
+	defer runtime.KeepAlive(cpgn)
 	_r := objc.Send[int](objref.IDOf(cpgn), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
 // KernelHeight returns the kernel height.
 func (cpgn *CNNPoolingGradientNode) KernelHeight() int {
+	defer runtime.KeepAlive(cpgn)
 	_r := objc.Send[int](objref.IDOf(cpgn), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
 // StrideInPixelsX returns the stride in pixels x.
 func (cpgn *CNNPoolingGradientNode) StrideInPixelsX() int {
+	defer runtime.KeepAlive(cpgn)
 	_r := objc.Send[int](objref.IDOf(cpgn), objc.RegisterName("strideInPixelsX"))
 	return _r
 }
 
 // StrideInPixelsY returns the stride in pixels y.
 func (cpgn *CNNPoolingGradientNode) StrideInPixelsY() int {
+	defer runtime.KeepAlive(cpgn)
 	_r := objc.Send[int](objref.IDOf(cpgn), objc.RegisterName("strideInPixelsY"))
 	return _r
 }

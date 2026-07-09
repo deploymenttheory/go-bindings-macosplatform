@@ -5,10 +5,13 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -49,22 +52,27 @@ func userActivityAdopt(id objc.ID) *UserActivity {
 
 // Description returns the object's -description text.
 func (ua *UserActivity) Description() string {
+	defer runtime.KeepAlive(ua)
 	return rt.Description(objref.IDOf(ua))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ua *UserActivity) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ua)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ua), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ua *UserActivity) IsKind(className string) bool {
+	defer runtime.KeepAlive(ua)
 	return rt.IsKind(objref.IDOf(ua), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ua *UserActivity) String() string {
+	defer runtime.KeepAlive(ua)
 	return rt.Description(objref.IDOf(ua))
 }
 
@@ -83,19 +91,21 @@ func NewUserActivityWithActivityType(activityType string) *UserActivity {
 
 // WithTitle sets an optional, user-visible title for this activity, such as a document name or web page title.
 func (ua *UserActivity) WithTitle(title StringProvider) *UserActivity {
+	defer runtime.KeepAlive(title)
 	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setTitle:"), objref.IDOf(title))
 	return ua
 }
 
 // WithUserInfo sets a dictionary containing app-specific state information needed to continue an activity on another device.
 func (ua *UserActivity) WithUserInfo(userInfo obj.Object) *UserActivity {
+	defer runtime.KeepAlive(userInfo)
 	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return ua
 }
 
 // WithRequiredUserInfoKeys sets a set of keys that represent the minimal information about the activity that should be stored for later restoration.
-func (ua *UserActivity) WithRequiredUserInfoKeys(requiredUserInfoKeys obj.Object) *UserActivity {
-	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setRequiredUserInfoKeys:"), objref.IDOf(requiredUserInfoKeys))
+func (ua *UserActivity) WithRequiredUserInfoKeys(requiredUserInfoKeys []string) *UserActivity {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setRequiredUserInfoKeys:"), rt.SliceToNSSet(requiredUserInfoKeys, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return ua
 }
 
@@ -119,13 +129,14 @@ func (ua *UserActivity) WithReferrerURL(referrerURL string) *UserActivity {
 
 // WithExpirationDate sets the date after which the activity is no longer eligible for Handoff or indexing.
 func (ua *UserActivity) WithExpirationDate(expirationDate DateProvider) *UserActivity {
+	defer runtime.KeepAlive(expirationDate)
 	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
 	return ua
 }
 
 // WithKeywords sets a set of localized keywords that can help users find the activity in search results.
-func (ua *UserActivity) WithKeywords(keywords obj.Object) *UserActivity {
-	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setKeywords:"), objref.IDOf(keywords))
+func (ua *UserActivity) WithKeywords(keywords []string) *UserActivity {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setKeywords:"), rt.SliceToNSSet(keywords, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return ua
 }
 
@@ -135,8 +146,19 @@ func (ua *UserActivity) WithSupportsContinuationStreams(supportsContinuationStre
 	return ua
 }
 
+// WithDelegate sets the user activity object’s delegate.
+func (ua *UserActivity) WithDelegate(delegate UserActivityDelegate) *UserActivity {
+	_shim := newUserActivityDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ua), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ua), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return ua
+}
+
 // WithTargetContentIdentifier sets a string that identifies the user activity’s content.
 func (ua *UserActivity) WithTargetContentIdentifier(targetContentIdentifier StringProvider) *UserActivity {
+	defer runtime.KeepAlive(targetContentIdentifier)
 	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setTargetContentIdentifier:"), objref.IDOf(targetContentIdentifier))
 	return ua
 }
@@ -161,6 +183,7 @@ func (ua *UserActivity) WithEligibleForPublicIndexing(eligibleForPublicIndexing 
 
 // WithPersistentIdentifier sets a unique and persistent value you use to identify the activity.
 func (ua *UserActivity) WithPersistentIdentifier(persistentIdentifier StringProvider) *UserActivity {
+	defer runtime.KeepAlive(persistentIdentifier)
 	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setPersistentIdentifier:"), objref.IDOf(persistentIdentifier))
 	return ua
 }
@@ -172,33 +195,39 @@ func (ua *UserActivity) WithObservationInfo(observationInfo unsafe.Pointer) *Use
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ua *UserActivity) WithScriptingProperties(scriptingProperties obj.Object) *UserActivity {
-	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ua *UserActivity) WithScriptingProperties(scriptingProperties map[string]obj.Object) *UserActivity {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ua
 }
 
 // AddUserInfoEntriesFromDictionary adds the contents of the specified dictionary to the user info dictionary.
 func (ua *UserActivity) AddUserInfoEntriesFromDictionary(otherDictionary obj.Object) {
+	defer runtime.KeepAlive(ua)
+	defer runtime.KeepAlive(otherDictionary)
 	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("addUserInfoEntriesFromDictionary:"), objref.IDOf(otherDictionary))
 }
 
 // BecomeCurrent marks the activity as currently in use by the user.
 func (ua *UserActivity) BecomeCurrent() {
+	defer runtime.KeepAlive(ua)
 	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("becomeCurrent"))
 }
 
 // ResignCurrent marks this activity object as inactive without invalidating it.
 func (ua *UserActivity) ResignCurrent() {
+	defer runtime.KeepAlive(ua)
 	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("resignCurrent"))
 }
 
 // Invalidate invalidates an activity and marks it as no longer eligible for continuation.
 func (ua *UserActivity) Invalidate() {
+	defer runtime.KeepAlive(ua)
 	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("invalidate"))
 }
 
 // ActivityType returns the activity type.
 func (ua *UserActivity) ActivityType() string {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("activityType"))
 	if _r == 0 {
 		return ""
@@ -208,6 +237,7 @@ func (ua *UserActivity) ActivityType() string {
 
 // Title returns the title.
 func (ua *UserActivity) Title() string {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -217,54 +247,63 @@ func (ua *UserActivity) Title() string {
 
 // UserInfo returns the user info.
 func (ua *UserActivity) UserInfo() obj.Object {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
-// RequiredUserInfoKeys returns the required user info keys.
-func (ua *UserActivity) RequiredUserInfoKeys() obj.Object {
+// RequiredUserInfoKeys returns the order of the returned elements is unspecified.
+func (ua *UserActivity) RequiredUserInfoKeys() []string {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("requiredUserInfoKeys"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // NeedsSave wraps the corresponding Objective-C method.
 func (ua *UserActivity) NeedsSave() bool {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("needsSave"))
 	return _r
 }
 
 // WebpageURL returns the webpage URL.
-func (ua *UserActivity) WebpageURL() *URL {
+func (ua *UserActivity) WebpageURL() string {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("webpageURL"))
-	return URLFromID(_r)
+	return rt.URLString(_r)
 }
 
 // ReferrerURL returns the referrer URL.
-func (ua *UserActivity) ReferrerURL() *URL {
+func (ua *UserActivity) ReferrerURL() string {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("referrerURL"))
-	return URLFromID(_r)
+	return rt.URLString(_r)
 }
 
 // ExpirationDate returns the expiration date.
-func (ua *UserActivity) ExpirationDate() *Date {
+func (ua *UserActivity) ExpirationDate() time.Time {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("expirationDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
-// Keywords returns the keywords.
-func (ua *UserActivity) Keywords() obj.Object {
+// Keywords returns the order of the returned elements is unspecified.
+func (ua *UserActivity) Keywords() []string {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("keywords"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // SupportsContinuationStreams wraps the corresponding Objective-C method.
 func (ua *UserActivity) SupportsContinuationStreams() bool {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("supportsContinuationStreams"))
 	return _r
 }
 
 // TargetContentIdentifier returns the target content identifier.
 func (ua *UserActivity) TargetContentIdentifier() string {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("targetContentIdentifier"))
 	if _r == 0 {
 		return ""
@@ -274,24 +313,28 @@ func (ua *UserActivity) TargetContentIdentifier() string {
 
 // IsEligibleForHandoff reports whether the object is eligible for handoff.
 func (ua *UserActivity) IsEligibleForHandoff() bool {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("isEligibleForHandoff"))
 	return _r
 }
 
 // IsEligibleForSearch reports whether the object is eligible for search.
 func (ua *UserActivity) IsEligibleForSearch() bool {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("isEligibleForSearch"))
 	return _r
 }
 
 // IsEligibleForPublicIndexing reports whether the object is eligible for public indexing.
 func (ua *UserActivity) IsEligibleForPublicIndexing() bool {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("isEligibleForPublicIndexing"))
 	return _r
 }
 
 // PersistentIdentifier returns the persistent identifier.
 func (ua *UserActivity) PersistentIdentifier() *String {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("persistentIdentifier"))
 	return StringFromID(_r)
 }

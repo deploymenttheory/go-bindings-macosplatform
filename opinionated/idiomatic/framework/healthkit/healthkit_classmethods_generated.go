@@ -5,29 +5,37 @@
 package healthkit
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // AudiogramSampleWithSensitivityPointsStartDateEndDateMetadata creates a new audiogram sample.
-func AudiogramSampleWithSensitivityPointsStartDateEndDateMetadata(sensitivityPoints []*AudiogramSensitivityPoint, startDate obj.Object, endDate obj.Object, metadata obj.Object) *AudiogramSample {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSample")), objc.RegisterName("audiogramSampleWithSensitivityPoints:startDate:endDate:metadata:"), purego.SliceToNSArray(sensitivityPoints, func(_v *AudiogramSensitivityPoint) objc.ID { return objref.IDOf(_v) }), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(metadata))
+func AudiogramSampleWithSensitivityPointsStartDateEndDateMetadata(sensitivityPoints []*AudiogramSensitivityPoint, startDate time.Time, endDate time.Time, metadata map[string]obj.Object) *AudiogramSample {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSample")), objc.RegisterName("audiogramSampleWithSensitivityPoints:startDate:endDate:metadata:"), purego.SliceToNSArray(sensitivityPoints, func(_v *AudiogramSensitivityPoint) objc.ID { return objref.IDOf(_v) }), rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return AudiogramSampleFromID(_r)
 }
 
 // AudiogramSampleWithSensitivityPointsStartDateEndDateDeviceMetadata creates a new audiogram sample with the specified attributes.
-func AudiogramSampleWithSensitivityPointsStartDateEndDateDeviceMetadata(sensitivityPoints []*AudiogramSensitivityPoint, startDate obj.Object, endDate obj.Object, device *Device, metadata obj.Object) *AudiogramSample {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSample")), objc.RegisterName("audiogramSampleWithSensitivityPoints:startDate:endDate:device:metadata:"), purego.SliceToNSArray(sensitivityPoints, func(_v *AudiogramSensitivityPoint) objc.ID { return objref.IDOf(_v) }), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(device), objref.IDOf(metadata))
+func AudiogramSampleWithSensitivityPointsStartDateEndDateDeviceMetadata(sensitivityPoints []*AudiogramSensitivityPoint, startDate time.Time, endDate time.Time, device *Device, metadata map[string]obj.Object) *AudiogramSample {
+	defer runtime.KeepAlive(device)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSample")), objc.RegisterName("audiogramSampleWithSensitivityPoints:startDate:endDate:device:metadata:"), purego.SliceToNSArray(sensitivityPoints, func(_v *AudiogramSensitivityPoint) objc.ID { return objref.IDOf(_v) }), rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), objref.IDOf(device), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return AudiogramSampleFromID(_r)
 }
 
-// SensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivityError creates a new sensitivity point.
-func SensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivityError(frequency *Quantity, leftEarSensitivity *Quantity, rightEarSensitivity *Quantity) (result *AudiogramSensitivityPoint, err error) {
+// SensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivity creates a new sensitivity point.
+func SensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivity(frequency *Quantity, leftEarSensitivity *Quantity, rightEarSensitivity *Quantity) (result *AudiogramSensitivityPoint, err error) {
+	defer runtime.KeepAlive(frequency)
+	defer runtime.KeepAlive(leftEarSensitivity)
+	defer runtime.KeepAlive(rightEarSensitivity)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSensitivityPoint")), objc.RegisterName("sensitivityPointWithFrequency:leftEarSensitivity:rightEarSensitivity:error:"), objref.IDOf(frequency), objref.IDOf(leftEarSensitivity), objref.IDOf(rightEarSensitivity), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -36,8 +44,9 @@ func SensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivityError(fre
 	return AudiogramSensitivityPointFromID(_r), nil
 }
 
-// SensitivityPointWithFrequencyTestsError creates a point that can be included in a audiogram.
-func SensitivityPointWithFrequencyTestsError(frequency *Quantity, tests []*AudiogramSensitivityTest) (result *AudiogramSensitivityPoint, err error) {
+// SensitivityPointWithFrequencyTests creates a point that can be included in a audiogram.
+func SensitivityPointWithFrequencyTests(frequency *Quantity, tests []*AudiogramSensitivityTest) (result *AudiogramSensitivityPoint, err error) {
+	defer runtime.KeepAlive(frequency)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSensitivityPoint")), objc.RegisterName("sensitivityPointWithFrequency:tests:error:"), objref.IDOf(frequency), purego.SliceToNSArray(tests, func(_v *AudiogramSensitivityTest) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -46,8 +55,10 @@ func SensitivityPointWithFrequencyTestsError(frequency *Quantity, tests []*Audio
 	return AudiogramSensitivityPointFromID(_r), nil
 }
 
-// ClampingRangeWithLowerBoundUpperBoundError creates a clamping range from a given lower and upper bound. At least one bound must be specified. If both bounds are provided, the lower bound must be less than the upper bound.
-func ClampingRangeWithLowerBoundUpperBoundError(lowerBound obj.Object, upperBound obj.Object) (result *AudiogramSensitivityPointClampingRange, err error) {
+// ClampingRangeWithLowerBoundUpperBound creates a clamping range from a given lower and upper bound. At least one bound must be specified. If both bounds are provided, the lower bound must be less than the upper bound.
+func ClampingRangeWithLowerBoundUpperBound(lowerBound obj.Object, upperBound obj.Object) (result *AudiogramSensitivityPointClampingRange, err error) {
+	defer runtime.KeepAlive(lowerBound)
+	defer runtime.KeepAlive(upperBound)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSensitivityPointClampingRange")), objc.RegisterName("clampingRangeWithLowerBound:upperBound:error:"), objref.IDOf(lowerBound), objref.IDOf(upperBound), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -56,10 +67,10 @@ func ClampingRangeWithLowerBoundUpperBoundError(lowerBound obj.Object, upperBoun
 	return AudiogramSensitivityPointClampingRangeFromID(_r), nil
 }
 
-// CDADocumentSampleWithDataStartDateEndDateMetadataValidationError returns a CDA document sample containing the provided XML document and metadata.
-func CDADocumentSampleWithDataStartDateEndDateMetadataValidationError(documentData obj.Object, startDate obj.Object, endDate obj.Object, metadata obj.Object) (result *CDADocumentSample, err error) {
+// CDADocumentSampleWithDataStartDateEndDateMetadataValidation returns a CDA document sample containing the provided XML document and metadata.
+func CDADocumentSampleWithDataStartDateEndDateMetadataValidation(documentData []byte, startDate time.Time, endDate time.Time, metadata map[string]obj.Object) (result *CDADocumentSample, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("HKCDADocumentSample")), objc.RegisterName("CDADocumentSampleWithData:startDate:endDate:metadata:validationError:"), objref.IDOf(documentData), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(metadata), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("HKCDADocumentSample")), objc.RegisterName("CDADocumentSampleWithData:startDate:endDate:metadata:validationError:"), rt.BytesToNSData(documentData), rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -67,44 +78,55 @@ func CDADocumentSampleWithDataStartDateEndDateMetadataValidationError(documentDa
 }
 
 // CategorySampleWithTypeValueStartDateEndDateMetadata creates a newly instantiated category sample with the provided metadata.
-func CategorySampleWithTypeValueStartDateEndDateMetadata(type_ *CategoryType, value int, startDate obj.Object, endDate obj.Object, metadata obj.Object) *CategorySample {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKCategorySample")), objc.RegisterName("categorySampleWithType:value:startDate:endDate:metadata:"), objref.IDOf(type_), value, objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(metadata))
+func CategorySampleWithTypeValueStartDateEndDateMetadata(type_ *CategoryType, value int, startDate time.Time, endDate time.Time, metadata map[string]obj.Object) *CategorySample {
+	defer runtime.KeepAlive(type_)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKCategorySample")), objc.RegisterName("categorySampleWithType:value:startDate:endDate:metadata:"), objref.IDOf(type_), value, rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return CategorySampleFromID(_r)
 }
 
 // CategorySampleWithTypeValueStartDateEndDate creates a newly instantiated category sample.
-func CategorySampleWithTypeValueStartDateEndDate(type_ *CategoryType, value int, startDate obj.Object, endDate obj.Object) *CategorySample {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKCategorySample")), objc.RegisterName("categorySampleWithType:value:startDate:endDate:"), objref.IDOf(type_), value, objref.IDOf(startDate), objref.IDOf(endDate))
+func CategorySampleWithTypeValueStartDateEndDate(type_ *CategoryType, value int, startDate time.Time, endDate time.Time) *CategorySample {
+	defer runtime.KeepAlive(type_)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKCategorySample")), objc.RegisterName("categorySampleWithType:value:startDate:endDate:"), objref.IDOf(type_), value, rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate))
 	return CategorySampleFromID(_r)
 }
 
 // CategorySampleWithTypeValueStartDateEndDateDeviceMetadata creates a newly instantiated category sample including the provided device and metadata.
-func CategorySampleWithTypeValueStartDateEndDateDeviceMetadata(type_ *CategoryType, value int, startDate obj.Object, endDate obj.Object, device *Device, metadata obj.Object) *CategorySample {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKCategorySample")), objc.RegisterName("categorySampleWithType:value:startDate:endDate:device:metadata:"), objref.IDOf(type_), value, objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(device), objref.IDOf(metadata))
+func CategorySampleWithTypeValueStartDateEndDateDeviceMetadata(type_ *CategoryType, value int, startDate time.Time, endDate time.Time, device *Device, metadata map[string]obj.Object) *CategorySample {
+	defer runtime.KeepAlive(type_)
+	defer runtime.KeepAlive(device)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKCategorySample")), objc.RegisterName("categorySampleWithType:value:startDate:endDate:device:metadata:"), objref.IDOf(type_), value, rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), objref.IDOf(device), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return CategorySampleFromID(_r)
 }
 
 // PrescriptionWithRightEyeSpecificationLeftEyeSpecificationBrandDateIssuedExpirationDateDeviceMetadata creates a new glasses prescription sample.
-func PrescriptionWithRightEyeSpecificationLeftEyeSpecificationBrandDateIssuedExpirationDateDeviceMetadata(rightEyeSpecification *ContactsLensSpecification, leftEyeSpecification *ContactsLensSpecification, brand string, dateIssued obj.Object, expirationDate obj.Object, device *Device, metadata obj.Object) *ContactsPrescription {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKContactsPrescription")), objc.RegisterName("prescriptionWithRightEyeSpecification:leftEyeSpecification:brand:dateIssued:expirationDate:device:metadata:"), objref.IDOf(rightEyeSpecification), objref.IDOf(leftEyeSpecification), purego.NSString(brand), objref.IDOf(dateIssued), objref.IDOf(expirationDate), objref.IDOf(device), objref.IDOf(metadata))
+func PrescriptionWithRightEyeSpecificationLeftEyeSpecificationBrandDateIssuedExpirationDateDeviceMetadata(rightEyeSpecification *ContactsLensSpecification, leftEyeSpecification *ContactsLensSpecification, brand string, dateIssued time.Time, expirationDate time.Time, device *Device, metadata map[string]obj.Object) *ContactsPrescription {
+	defer runtime.KeepAlive(rightEyeSpecification)
+	defer runtime.KeepAlive(leftEyeSpecification)
+	defer runtime.KeepAlive(device)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKContactsPrescription")), objc.RegisterName("prescriptionWithRightEyeSpecification:leftEyeSpecification:brand:dateIssued:expirationDate:device:metadata:"), objref.IDOf(rightEyeSpecification), objref.IDOf(leftEyeSpecification), purego.NSString(brand), rt.TimeToNSDate(dateIssued), rt.TimeToNSDate(expirationDate), objref.IDOf(device), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ContactsPrescriptionFromID(_r)
 }
 
 // CorrelationWithTypeStartDateEndDateObjects instantiates and returns a new correlation instance.
-func CorrelationWithTypeStartDateEndDateObjects(correlationType *CorrelationType, startDate obj.Object, endDate obj.Object, objects obj.Object) *Correlation {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKCorrelation")), objc.RegisterName("correlationWithType:startDate:endDate:objects:"), objref.IDOf(correlationType), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(objects))
+func CorrelationWithTypeStartDateEndDateObjects(correlationType *CorrelationType, startDate time.Time, endDate time.Time, objects []*Sample) *Correlation {
+	defer runtime.KeepAlive(correlationType)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKCorrelation")), objc.RegisterName("correlationWithType:startDate:endDate:objects:"), objref.IDOf(correlationType), rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), rt.SliceToNSSet(objects, func(_v *Sample) objc.ID { return objref.IDOf(_v) }))
 	return CorrelationFromID(_r)
 }
 
 // CorrelationWithTypeStartDateEndDateObjectsMetadata instantiates and returns a new correlation instance with the provided metadata.
-func CorrelationWithTypeStartDateEndDateObjectsMetadata(correlationType *CorrelationType, startDate obj.Object, endDate obj.Object, objects obj.Object, metadata obj.Object) *Correlation {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKCorrelation")), objc.RegisterName("correlationWithType:startDate:endDate:objects:metadata:"), objref.IDOf(correlationType), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(objects), objref.IDOf(metadata))
+func CorrelationWithTypeStartDateEndDateObjectsMetadata(correlationType *CorrelationType, startDate time.Time, endDate time.Time, objects []*Sample, metadata map[string]obj.Object) *Correlation {
+	defer runtime.KeepAlive(correlationType)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKCorrelation")), objc.RegisterName("correlationWithType:startDate:endDate:objects:metadata:"), objref.IDOf(correlationType), rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), rt.SliceToNSSet(objects, func(_v *Sample) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return CorrelationFromID(_r)
 }
 
 // CorrelationWithTypeStartDateEndDateObjectsDeviceMetadata instantiates and returns a new correlation instance with the provided device and metadata.
-func CorrelationWithTypeStartDateEndDateObjectsDeviceMetadata(correlationType *CorrelationType, startDate obj.Object, endDate obj.Object, objects obj.Object, device *Device, metadata obj.Object) *Correlation {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKCorrelation")), objc.RegisterName("correlationWithType:startDate:endDate:objects:device:metadata:"), objref.IDOf(correlationType), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(objects), objref.IDOf(device), objref.IDOf(metadata))
+func CorrelationWithTypeStartDateEndDateObjectsDeviceMetadata(correlationType *CorrelationType, startDate time.Time, endDate time.Time, objects []*Sample, device *Device, metadata map[string]obj.Object) *Correlation {
+	defer runtime.KeepAlive(correlationType)
+	defer runtime.KeepAlive(device)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKCorrelation")), objc.RegisterName("correlationWithType:startDate:endDate:objects:device:metadata:"), objref.IDOf(correlationType), rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), rt.SliceToNSSet(objects, func(_v *Sample) objc.ID { return objref.IDOf(_v) }), objref.IDOf(device), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return CorrelationFromID(_r)
 }
 
@@ -114,8 +136,8 @@ func LocalDevice() *Device {
 	return DeviceFromID(_r)
 }
 
-// VersionFromVersionStringError creates an FHIR version object from a string representation of the version.
-func VersionFromVersionStringError(versionString string) (result *FHIRVersion, err error) {
+// VersionFromVersionString creates an FHIR version object from a string representation of the version.
+func VersionFromVersionString(versionString string) (result *FHIRVersion, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("HKFHIRVersion")), objc.RegisterName("versionFromVersionString:error:"), purego.NSString(versionString), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -137,20 +159,23 @@ func PrimaryR4Version() *FHIRVersion {
 }
 
 // AssessmentWithDateAnswers creates a new GAD-7 sample. There must be exactly 7 elements in answers, each answer must be of type `HKGAD7AssessmentAnswer`.
-func AssessmentWithDateAnswers(date obj.Object, answers []obj.Object) *GAD7Assessment {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKGAD7Assessment")), objc.RegisterName("assessmentWithDate:answers:"), objref.IDOf(date), purego.SliceToNSArray(answers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func AssessmentWithDateAnswers(date time.Time, answers []*foundation.Number) *GAD7Assessment {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKGAD7Assessment")), objc.RegisterName("assessmentWithDate:answers:"), rt.TimeToNSDate(date), purego.SliceToNSArray(answers, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return GAD7AssessmentFromID(_r)
 }
 
 // AssessmentWithDateAnswersMetadata creates a new GAD-7 sample. There must be exactly 7 elements in answers, each answer must be of type `HKGAD7AssessmentAnswer`.
-func AssessmentWithDateAnswersMetadata(date obj.Object, answers []obj.Object, metadata obj.Object) *GAD7Assessment {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKGAD7Assessment")), objc.RegisterName("assessmentWithDate:answers:metadata:"), objref.IDOf(date), purego.SliceToNSArray(answers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(metadata))
+func AssessmentWithDateAnswersMetadata(date time.Time, answers []*foundation.Number, metadata map[string]obj.Object) *GAD7Assessment {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKGAD7Assessment")), objc.RegisterName("assessmentWithDate:answers:metadata:"), rt.TimeToNSDate(date), purego.SliceToNSArray(answers, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return GAD7AssessmentFromID(_r)
 }
 
 // PrescriptionWithRightEyeSpecificationLeftEyeSpecificationDateIssuedExpirationDateDeviceMetadata creates a new glasses prescription sample.
-func PrescriptionWithRightEyeSpecificationLeftEyeSpecificationDateIssuedExpirationDateDeviceMetadata(rightEyeSpecification *GlassesLensSpecification, leftEyeSpecification *GlassesLensSpecification, dateIssued obj.Object, expirationDate obj.Object, device *Device, metadata obj.Object) *GlassesPrescription {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKGlassesPrescription")), objc.RegisterName("prescriptionWithRightEyeSpecification:leftEyeSpecification:dateIssued:expirationDate:device:metadata:"), objref.IDOf(rightEyeSpecification), objref.IDOf(leftEyeSpecification), objref.IDOf(dateIssued), objref.IDOf(expirationDate), objref.IDOf(device), objref.IDOf(metadata))
+func PrescriptionWithRightEyeSpecificationLeftEyeSpecificationDateIssuedExpirationDateDeviceMetadata(rightEyeSpecification *GlassesLensSpecification, leftEyeSpecification *GlassesLensSpecification, dateIssued time.Time, expirationDate time.Time, device *Device, metadata map[string]obj.Object) *GlassesPrescription {
+	defer runtime.KeepAlive(rightEyeSpecification)
+	defer runtime.KeepAlive(leftEyeSpecification)
+	defer runtime.KeepAlive(device)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKGlassesPrescription")), objc.RegisterName("prescriptionWithRightEyeSpecification:leftEyeSpecification:dateIssued:expirationDate:device:metadata:"), objref.IDOf(rightEyeSpecification), objref.IDOf(leftEyeSpecification), rt.TimeToNSDate(dateIssued), rt.TimeToNSDate(expirationDate), objref.IDOf(device), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return GlassesPrescriptionFromID(_r)
 }
 
@@ -168,36 +193,42 @@ func MaximumCount() int {
 
 // QuantityTypeForIdentifier returns the shared quantity type for the provided identifier.
 func QuantityTypeForIdentifier(identifier obj.Object) *QuantityType {
+	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("quantityTypeForIdentifier:"), objref.IDOf(identifier))
 	return QuantityTypeFromID(_r)
 }
 
 // CategoryTypeForIdentifier returns the shared category type for the provided identifier.
 func CategoryTypeForIdentifier(identifier obj.Object) *CategoryType {
+	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("categoryTypeForIdentifier:"), objref.IDOf(identifier))
 	return CategoryTypeFromID(_r)
 }
 
 // CharacteristicTypeForIdentifier returns the shared characteristic type for the provided identifier.
 func CharacteristicTypeForIdentifier(identifier obj.Object) *CharacteristicType {
+	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("characteristicTypeForIdentifier:"), objref.IDOf(identifier))
 	return CharacteristicTypeFromID(_r)
 }
 
 // CorrelationTypeForIdentifier returns the shared correlation type for the provided identifier.
 func CorrelationTypeForIdentifier(identifier obj.Object) *CorrelationType {
+	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("correlationTypeForIdentifier:"), objref.IDOf(identifier))
 	return CorrelationTypeFromID(_r)
 }
 
 // DocumentTypeForIdentifier returns the shared document type for the provided identifier.
 func DocumentTypeForIdentifier(identifier obj.Object) *DocumentType {
+	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("documentTypeForIdentifier:"), objref.IDOf(identifier))
 	return DocumentTypeFromID(_r)
 }
 
 // ScoredAssessmentTypeForIdentifier wraps the corresponding Objective-C method.
 func ScoredAssessmentTypeForIdentifier(identifier obj.Object) *ScoredAssessmentType {
+	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("scoredAssessmentTypeForIdentifier:"), objref.IDOf(identifier))
 	return ScoredAssessmentTypeFromID(_r)
 }
@@ -258,272 +289,297 @@ func HKObjectTypeUserAnnotatedMedicationType() *UserAnnotatedMedicationType {
 
 // ClinicalTypeForIdentifier returns the shared clinical type for the provided identifier.
 func ClinicalTypeForIdentifier(identifier obj.Object) *ClinicalType {
+	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("clinicalTypeForIdentifier:"), objref.IDOf(identifier))
 	return ClinicalTypeFromID(_r)
 }
 
 // HKPHQ9AssessmentAssessmentWithDateAnswers creates a new PHQ-9 sample. There must be exactly 9 elements in answers, each answer must be of type `HKPHQ9AssessmentAnswer`. Question #9 is considered optional. If the user does not answer #9, use `HKPHQ9AssessmentAnswerPreferNotToAnswer`
-func HKPHQ9AssessmentAssessmentWithDateAnswers(date obj.Object, answers []obj.Object) *PHQ9Assessment {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKPHQ9Assessment")), objc.RegisterName("assessmentWithDate:answers:"), objref.IDOf(date), purego.SliceToNSArray(answers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func HKPHQ9AssessmentAssessmentWithDateAnswers(date time.Time, answers []*foundation.Number) *PHQ9Assessment {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKPHQ9Assessment")), objc.RegisterName("assessmentWithDate:answers:"), rt.TimeToNSDate(date), purego.SliceToNSArray(answers, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return PHQ9AssessmentFromID(_r)
 }
 
 // HKPHQ9AssessmentAssessmentWithDateAnswersMetadata creates a new PHQ-9 sample. There must be exactly 9 elements in answers, each answer must be of type `HKPHQ9AssessmentAnswer`. Question #9 is considered optional. If the user does not answer #9, use `HKPHQ9AssessmentAnswerPreferNotToAnswer`
-func HKPHQ9AssessmentAssessmentWithDateAnswersMetadata(date obj.Object, answers []obj.Object, metadata obj.Object) *PHQ9Assessment {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKPHQ9Assessment")), objc.RegisterName("assessmentWithDate:answers:metadata:"), objref.IDOf(date), purego.SliceToNSArray(answers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(metadata))
+func HKPHQ9AssessmentAssessmentWithDateAnswersMetadata(date time.Time, answers []*foundation.Number, metadata map[string]obj.Object) *PHQ9Assessment {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKPHQ9Assessment")), objc.RegisterName("assessmentWithDate:answers:metadata:"), rt.TimeToNSDate(date), purego.SliceToNSArray(answers, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return PHQ9AssessmentFromID(_r)
 }
 
 // QuantityWithUnitDoubleValue instantiates and returns a new quantity object.
 func QuantityWithUnitDoubleValue(unit *Unit, value float64) *Quantity {
+	defer runtime.KeepAlive(unit)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuantity")), objc.RegisterName("quantityWithUnit:doubleValue:"), objref.IDOf(unit), value)
 	return QuantityFromID(_r)
 }
 
 // QuantitySampleWithTypeQuantityStartDateEndDate returns a sample containing a numeric measurement.
-func QuantitySampleWithTypeQuantityStartDateEndDate(quantityType *QuantityType, quantity *Quantity, startDate obj.Object, endDate obj.Object) *QuantitySample {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKQuantitySample")), objc.RegisterName("quantitySampleWithType:quantity:startDate:endDate:"), objref.IDOf(quantityType), objref.IDOf(quantity), objref.IDOf(startDate), objref.IDOf(endDate))
+func QuantitySampleWithTypeQuantityStartDateEndDate(quantityType *QuantityType, quantity *Quantity, startDate time.Time, endDate time.Time) *QuantitySample {
+	defer runtime.KeepAlive(quantityType)
+	defer runtime.KeepAlive(quantity)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuantitySample")), objc.RegisterName("quantitySampleWithType:quantity:startDate:endDate:"), objref.IDOf(quantityType), objref.IDOf(quantity), rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate))
 	return QuantitySampleFromID(_r)
 }
 
 // QuantitySampleWithTypeQuantityStartDateEndDateMetadata returns a sample containing a numeric measurement with the provided metadata.
-func QuantitySampleWithTypeQuantityStartDateEndDateMetadata(quantityType *QuantityType, quantity *Quantity, startDate obj.Object, endDate obj.Object, metadata obj.Object) *QuantitySample {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKQuantitySample")), objc.RegisterName("quantitySampleWithType:quantity:startDate:endDate:metadata:"), objref.IDOf(quantityType), objref.IDOf(quantity), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(metadata))
+func QuantitySampleWithTypeQuantityStartDateEndDateMetadata(quantityType *QuantityType, quantity *Quantity, startDate time.Time, endDate time.Time, metadata map[string]obj.Object) *QuantitySample {
+	defer runtime.KeepAlive(quantityType)
+	defer runtime.KeepAlive(quantity)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuantitySample")), objc.RegisterName("quantitySampleWithType:quantity:startDate:endDate:metadata:"), objref.IDOf(quantityType), objref.IDOf(quantity), rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return QuantitySampleFromID(_r)
 }
 
 // QuantitySampleWithTypeQuantityStartDateEndDateDeviceMetadata returns a sample containing a numeric measurement with the provided device and metadata.
-func QuantitySampleWithTypeQuantityStartDateEndDateDeviceMetadata(quantityType *QuantityType, quantity *Quantity, startDate obj.Object, endDate obj.Object, device *Device, metadata obj.Object) *QuantitySample {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKQuantitySample")), objc.RegisterName("quantitySampleWithType:quantity:startDate:endDate:device:metadata:"), objref.IDOf(quantityType), objref.IDOf(quantity), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(device), objref.IDOf(metadata))
+func QuantitySampleWithTypeQuantityStartDateEndDateDeviceMetadata(quantityType *QuantityType, quantity *Quantity, startDate time.Time, endDate time.Time, device *Device, metadata map[string]obj.Object) *QuantitySample {
+	defer runtime.KeepAlive(quantityType)
+	defer runtime.KeepAlive(quantity)
+	defer runtime.KeepAlive(device)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuantitySample")), objc.RegisterName("quantitySampleWithType:quantity:startDate:endDate:device:metadata:"), objref.IDOf(quantityType), objref.IDOf(quantity), rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), objref.IDOf(device), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return QuantitySampleFromID(_r)
 }
 
 // PredicateForObjectsWithMetadataKey returns a predicate that matches any object whose metadata contains the provided key.
-func PredicateForObjectsWithMetadataKey(key string) obj.Object {
+func PredicateForObjectsWithMetadataKey(key string) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsWithMetadataKey:"), purego.NSString(key))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForObjectsWithMetadataKeyAllowedValues returns a predicate that matches objects based on the provided metadata key and an array of target values.
-func PredicateForObjectsWithMetadataKeyAllowedValues(key string, allowedValues obj.Object) obj.Object {
+func PredicateForObjectsWithMetadataKeyAllowedValues(key string, allowedValues obj.Object) *foundation.Predicate {
+	defer runtime.KeepAlive(allowedValues)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsWithMetadataKey:allowedValues:"), purego.NSString(key), objref.IDOf(allowedValues))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForObjectsFromSource returns a predicate that matches all the objects that were created by the provided source.
-func PredicateForObjectsFromSource(source *Source) obj.Object {
+func PredicateForObjectsFromSource(source *Source) *foundation.Predicate {
+	defer runtime.KeepAlive(source)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsFromSource:"), objref.IDOf(source))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForObjectsFromSources returns a predicate that matches all the objects that were created by any of the provided sources.
-func PredicateForObjectsFromSources(sources obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsFromSources:"), objref.IDOf(sources))
-	return obj.Wrap(_r)
+func PredicateForObjectsFromSources(sources []*Source) *foundation.Predicate {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsFromSources:"), rt.SliceToNSSet(sources, func(_v *Source) objc.ID { return objref.IDOf(_v) }))
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForObjectsFromSourceRevisions returns a predicate that matches all the objects that were created by any of the provided source revisions.
-func PredicateForObjectsFromSourceRevisions(sourceRevisions obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsFromSourceRevisions:"), objref.IDOf(sourceRevisions))
-	return obj.Wrap(_r)
+func PredicateForObjectsFromSourceRevisions(sourceRevisions []*SourceRevision) *foundation.Predicate {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsFromSourceRevisions:"), rt.SliceToNSSet(sourceRevisions, func(_v *SourceRevision) objc.ID { return objref.IDOf(_v) }))
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForObjectsFromDevices returns a predicate that matches all the objects that were created by any of the provided devices.
-func PredicateForObjectsFromDevices(devices obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsFromDevices:"), objref.IDOf(devices))
-	return obj.Wrap(_r)
+func PredicateForObjectsFromDevices(devices []*Device) *foundation.Predicate {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsFromDevices:"), rt.SliceToNSSet(devices, func(_v *Device) objc.ID { return objref.IDOf(_v) }))
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForObjectsWithDevicePropertyAllowedValues returns a predicate that matches all objects created by devices with the specified properties.
-func PredicateForObjectsWithDevicePropertyAllowedValues(key string, allowedValues obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsWithDeviceProperty:allowedValues:"), purego.NSString(key), objref.IDOf(allowedValues))
-	return obj.Wrap(_r)
+func PredicateForObjectsWithDevicePropertyAllowedValues(key string, allowedValues []string) *foundation.Predicate {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsWithDeviceProperty:allowedValues:"), purego.NSString(key), rt.SliceToNSSet(allowedValues, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForObjectWithUUID returns a predicate that matches an object with the specified universally unique identifier (UUID).
-func PredicateForObjectWithUUID(uUID obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectWithUUID:"), objref.IDOf(uUID))
-	return obj.Wrap(_r)
+func PredicateForObjectWithUUID(uuid obj.Object) *foundation.Predicate {
+	defer runtime.KeepAlive(uuid)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectWithUUID:"), objref.IDOf(uuid))
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForObjectsWithUUIDs returns a predicate that matches the objects with the specified universally unique identifiers (UUIDs).
-func PredicateForObjectsWithUUIDs(uUIDs obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsWithUUIDs:"), objref.IDOf(uUIDs))
-	return obj.Wrap(_r)
+func PredicateForObjectsWithUUIDs(uuids []*foundation.UUID) *foundation.Predicate {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsWithUUIDs:"), rt.SliceToNSSet(uuids, func(_v *foundation.UUID) objc.ID { return objref.IDOf(_v) }))
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForObjectsWithNoCorrelation returns a predicate that matches all objects that are not associated with a HealthKit correlation.
-func PredicateForObjectsWithNoCorrelation() obj.Object {
+func PredicateForObjectsWithNoCorrelation() *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsWithNoCorrelation"))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForObjectsFromWorkout returns a predicate that matches any objects that have been associated with the provided workout.
-func PredicateForObjectsFromWorkout(workout *Workout) obj.Object {
+func PredicateForObjectsFromWorkout(workout *Workout) *foundation.Predicate {
+	defer runtime.KeepAlive(workout)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsFromWorkout:"), objref.IDOf(workout))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForObjectsAssociatedWithElectrocardiogram returns a predicate that matches symptom samples associated with the specified electrocardiogram.
-func PredicateForObjectsAssociatedWithElectrocardiogram(electrocardiogram *Electrocardiogram) obj.Object {
+func PredicateForObjectsAssociatedWithElectrocardiogram(electrocardiogram *Electrocardiogram) *foundation.Predicate {
+	defer runtime.KeepAlive(electrocardiogram)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsAssociatedWithElectrocardiogram:"), objref.IDOf(electrocardiogram))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForWorkoutEffortSamplesRelatedToWorkoutActivity creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches Workout Effort samples that have been related to the given workout
-func PredicateForWorkoutEffortSamplesRelatedToWorkoutActivity(workout *Workout, activity *WorkoutActivity) obj.Object {
+func PredicateForWorkoutEffortSamplesRelatedToWorkoutActivity(workout *Workout, activity *WorkoutActivity) *foundation.Predicate {
+	defer runtime.KeepAlive(workout)
+	defer runtime.KeepAlive(activity)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForWorkoutEffortSamplesRelatedToWorkout:activity:"), objref.IDOf(workout), objref.IDOf(activity))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForSamplesWithStartDateEndDateOptions returns a predicate for samples whose start and end dates fall within the specified time interval.
-func PredicateForSamplesWithStartDateEndDateOptions(startDate obj.Object, endDate obj.Object, options QueryOptions) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForSamplesWithStartDate:endDate:options:"), objref.IDOf(startDate), objref.IDOf(endDate), options)
-	return obj.Wrap(_r)
+func PredicateForSamplesWithStartDateEndDateOptions(startDate time.Time, endDate time.Time, options QueryOptions) *foundation.Predicate {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForSamplesWithStartDate:endDate:options:"), rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), options)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForCategorySamplesEqualToValues a predicate that returns category samples with a matching value.
-func PredicateForCategorySamplesEqualToValues(values obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForCategorySamplesEqualToValues:"), objref.IDOf(values))
-	return obj.Wrap(_r)
+func PredicateForCategorySamplesEqualToValues(values []*foundation.Number) *foundation.Predicate {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForCategorySamplesEqualToValues:"), rt.SliceToNSSet(values, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForWorkoutsWithWorkoutActivityType returns a predicate for matching workouts based on the type of activity.
-func PredicateForWorkoutsWithWorkoutActivityType(workoutActivityType WorkoutActivityType) obj.Object {
+func PredicateForWorkoutsWithWorkoutActivityType(workoutActivityType WorkoutActivityType) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForWorkoutsWithWorkoutActivityType:"), workoutActivityType)
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForWorkoutActivitiesWithWorkoutActivityType returns a predicate for workout activities based on the type of activity performed.
-func PredicateForWorkoutActivitiesWithWorkoutActivityType(workoutActivityType WorkoutActivityType) obj.Object {
+func PredicateForWorkoutActivitiesWithWorkoutActivityType(workoutActivityType WorkoutActivityType) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForWorkoutActivitiesWithWorkoutActivityType:"), workoutActivityType)
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForWorkoutActivitiesWithStartDateEndDateOptions returns a predicate for workout activities that occur between the start and end date.
-func PredicateForWorkoutActivitiesWithStartDateEndDateOptions(startDate obj.Object, endDate obj.Object, options QueryOptions) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForWorkoutActivitiesWithStartDate:endDate:options:"), objref.IDOf(startDate), objref.IDOf(endDate), options)
-	return obj.Wrap(_r)
+func PredicateForWorkoutActivitiesWithStartDateEndDateOptions(startDate time.Time, endDate time.Time, options QueryOptions) *foundation.Predicate {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForWorkoutActivitiesWithStartDate:endDate:options:"), rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), options)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForWorkoutsWithActivityPredicate returns a predicate for matching workouts based on the associated workout activities.
-func PredicateForWorkoutsWithActivityPredicate(activityPredicate obj.Object) obj.Object {
+func PredicateForWorkoutsWithActivityPredicate(activityPredicate obj.Object) *foundation.Predicate {
+	defer runtime.KeepAlive(activityPredicate)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForWorkoutsWithActivityPredicate:"), objref.IDOf(activityPredicate))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForActivitySummaryWithDateComponents returns a predicate that matches the activity summary for the specified day.
-func PredicateForActivitySummaryWithDateComponents(dateComponents obj.Object) obj.Object {
+func PredicateForActivitySummaryWithDateComponents(dateComponents obj.Object) *foundation.Predicate {
+	defer runtime.KeepAlive(dateComponents)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForActivitySummaryWithDateComponents:"), objref.IDOf(dateComponents))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForActivitySummariesBetweenStartDateComponentsEndDateComponents returns a predicate for matching all the activity summaries that fall between the days identified by the start and end date components.
-func PredicateForActivitySummariesBetweenStartDateComponentsEndDateComponents(startDateComponents obj.Object, endDateComponents obj.Object) obj.Object {
+func PredicateForActivitySummariesBetweenStartDateComponentsEndDateComponents(startDateComponents obj.Object, endDateComponents obj.Object) *foundation.Predicate {
+	defer runtime.KeepAlive(startDateComponents)
+	defer runtime.KeepAlive(endDateComponents)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForActivitySummariesBetweenStartDateComponents:endDateComponents:"), objref.IDOf(startDateComponents), objref.IDOf(endDateComponents))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForClinicalRecordsWithFHIRResourceType returns a predicate for a specific FHIR type.
-func PredicateForClinicalRecordsWithFHIRResourceType(resourceType obj.Object) obj.Object {
+func PredicateForClinicalRecordsWithFHIRResourceType(resourceType obj.Object) *foundation.Predicate {
+	defer runtime.KeepAlive(resourceType)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForClinicalRecordsWithFHIRResourceType:"), objref.IDOf(resourceType))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForClinicalRecordsFromSourceFHIRResourceTypeIdentifier returns a predicate for a specific FHIR resource.
-func PredicateForClinicalRecordsFromSourceFHIRResourceTypeIdentifier(source *Source, resourceType obj.Object, identifier string) obj.Object {
+func PredicateForClinicalRecordsFromSourceFHIRResourceTypeIdentifier(source *Source, resourceType obj.Object, identifier string) *foundation.Predicate {
+	defer runtime.KeepAlive(source)
+	defer runtime.KeepAlive(resourceType)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForClinicalRecordsFromSource:FHIRResourceType:identifier:"), objref.IDOf(source), objref.IDOf(resourceType), purego.NSString(identifier))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForElectrocardiogramsWithClassification returns a predicate that matches electrocardiogram samples with the specified classification.
-func PredicateForElectrocardiogramsWithClassification(classification ElectrocardiogramClassification) obj.Object {
+func PredicateForElectrocardiogramsWithClassification(classification ElectrocardiogramClassification) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForElectrocardiogramsWithClassification:"), classification)
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForElectrocardiogramsWithSymptomsStatus returns a predicate that matches electrocardiogram samples with the specified symptom status.
-func PredicateForElectrocardiogramsWithSymptomsStatus(symptomsStatus ElectrocardiogramSymptomsStatus) obj.Object {
+func PredicateForElectrocardiogramsWithSymptomsStatus(symptomsStatus ElectrocardiogramSymptomsStatus) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForElectrocardiogramsWithSymptomsStatus:"), symptomsStatus)
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval returns a predicate that finds verifiable health records with a relevant date within the specified range.
-func PredicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval(dateInterval obj.Object) obj.Object {
+func PredicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval(dateInterval obj.Object) *foundation.Predicate {
+	defer runtime.KeepAlive(dateInterval)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval:"), objref.IDOf(dateInterval))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForStatesOfMindWithKind creates a predicate for use with HKStateOfMind Creates a query predicate that matches HKStateOfMind samples that have the specified kind of feeling type.
-func PredicateForStatesOfMindWithKind(kind StateOfMindKind) obj.Object {
+func PredicateForStatesOfMindWithKind(kind StateOfMindKind) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForStatesOfMindWithKind:"), kind)
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForStatesOfMindWithLabel creates a predicate for use with HKStateOfMind Creates a query predicate that matches HKStateOfMind samples that have the specified label.
-func PredicateForStatesOfMindWithLabel(label StateOfMindLabel) obj.Object {
+func PredicateForStatesOfMindWithLabel(label StateOfMindLabel) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForStatesOfMindWithLabel:"), label)
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForStatesOfMindWithAssociation creates a predicate for use with HKStateOfMind Creates a query predicate that matches HKStateOfMind samples that have the specified association.
-func PredicateForStatesOfMindWithAssociation(association StateOfMindAssociation) obj.Object {
+func PredicateForStatesOfMindWithAssociation(association StateOfMindAssociation) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForStatesOfMindWithAssociation:"), association)
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForMedicationDoseEventWithStatus creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have the status specified.
-func PredicateForMedicationDoseEventWithStatus(status MedicationDoseEventLogStatus) obj.Object {
+func PredicateForMedicationDoseEventWithStatus(status MedicationDoseEventLogStatus) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithStatus:"), status)
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForMedicationDoseEventWithStatuses creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have any of the statuses specified.
-func PredicateForMedicationDoseEventWithStatuses(statuses obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithStatuses:"), objref.IDOf(statuses))
-	return obj.Wrap(_r)
+func PredicateForMedicationDoseEventWithStatuses(statuses []*foundation.Number) *foundation.Predicate {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithStatuses:"), rt.SliceToNSSet(statuses, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForMedicationDoseEventWithScheduledDate creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have the exact scheduled date specified.
-func PredicateForMedicationDoseEventWithScheduledDate(scheduledDate obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithScheduledDate:"), objref.IDOf(scheduledDate))
-	return obj.Wrap(_r)
+func PredicateForMedicationDoseEventWithScheduledDate(scheduledDate time.Time) *foundation.Predicate {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithScheduledDate:"), rt.TimeToNSDate(scheduledDate))
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForMedicationDoseEventWithScheduledDates creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have any of the exact scheduled dates specified.
-func PredicateForMedicationDoseEventWithScheduledDates(scheduledDates obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithScheduledDates:"), objref.IDOf(scheduledDates))
-	return obj.Wrap(_r)
+func PredicateForMedicationDoseEventWithScheduledDates(scheduledDates []time.Time) *foundation.Predicate {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithScheduledDates:"), rt.SliceToNSSet(scheduledDates, func(_v time.Time) objc.ID { return rt.TimeToNSDate(_v) }))
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForMedicationDoseEventWithScheduledStartDateEndDate creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have a scheduled date within a window of scheduled times. If nil is provided to either parameter, the respective side of the window is unbound.
-func PredicateForMedicationDoseEventWithScheduledStartDateEndDate(startDate obj.Object, endDate obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithScheduledStartDate:endDate:"), objref.IDOf(startDate), objref.IDOf(endDate))
-	return obj.Wrap(_r)
+func PredicateForMedicationDoseEventWithScheduledStartDateEndDate(startDate time.Time, endDate time.Time) *foundation.Predicate {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithScheduledStartDate:endDate:"), rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate))
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForMedicationDoseEventWithMedicationConceptIdentifier creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that match a medication's concept identifier.
-func PredicateForMedicationDoseEventWithMedicationConceptIdentifier(medicationConceptIdentifier *HealthConceptIdentifier) obj.Object {
+func PredicateForMedicationDoseEventWithMedicationConceptIdentifier(medicationConceptIdentifier *HealthConceptIdentifier) *foundation.Predicate {
+	defer runtime.KeepAlive(medicationConceptIdentifier)
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithMedicationConceptIdentifier:"), objref.IDOf(medicationConceptIdentifier))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForMedicationDoseEventWithMedicationConceptIdentifiers creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples generated by any medication in a set of medication concept identifiers.
-func PredicateForMedicationDoseEventWithMedicationConceptIdentifiers(medicationConceptIdentifiers obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithMedicationConceptIdentifiers:"), objref.IDOf(medicationConceptIdentifiers))
-	return obj.Wrap(_r)
+func PredicateForMedicationDoseEventWithMedicationConceptIdentifiers(medicationConceptIdentifiers []*HealthConceptIdentifier) *foundation.Predicate {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithMedicationConceptIdentifiers:"), rt.SliceToNSSet(medicationConceptIdentifiers, func(_v *HealthConceptIdentifier) objc.ID { return objref.IDOf(_v) }))
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForUserAnnotatedMedicationsWithIsArchived creates a predicate for use with HKUserAnnotatedMedicationQuery. Creates a query predicate that matches HKUserAnnotatedMedication objects that have the archived status specified.
-func PredicateForUserAnnotatedMedicationsWithIsArchived(isArchived bool) obj.Object {
+func PredicateForUserAnnotatedMedicationsWithIsArchived(isArchived bool) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForUserAnnotatedMedicationsWithIsArchived:"), isArchived)
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForUserAnnotatedMedicationsWithHasSchedule creates a predicate for use with HKUserAnnotatedMedicationQuery. Creates a query predicate that matches HKUserAnnotatedMedication objects that match the schedule status specified.
-func PredicateForUserAnnotatedMedicationsWithHasSchedule(hasSchedule bool) obj.Object {
+func PredicateForUserAnnotatedMedicationsWithHasSchedule(hasSchedule bool) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForUserAnnotatedMedicationsWithHasSchedule:"), hasSchedule)
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // AnchorFromValue returns an anchor object from the provided anchor value.
@@ -551,20 +607,20 @@ func DefaultSource() *Source {
 }
 
 // StateOfMindWithDateKindValenceLabelsAssociations creates a new log describing an experienced emotion at a moment in time.
-func StateOfMindWithDateKindValenceLabelsAssociations(date obj.Object, kind StateOfMindKind, valence float64, labels []obj.Object, associations []obj.Object) *StateOfMind {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKStateOfMind")), objc.RegisterName("stateOfMindWithDate:kind:valence:labels:associations:"), objref.IDOf(date), kind, valence, purego.SliceToNSArray(labels, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(associations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func StateOfMindWithDateKindValenceLabelsAssociations(date time.Time, kind StateOfMindKind, valence float64, labels []*foundation.Number, associations []*foundation.Number) *StateOfMind {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKStateOfMind")), objc.RegisterName("stateOfMindWithDate:kind:valence:labels:associations:"), rt.TimeToNSDate(date), kind, valence, purego.SliceToNSArray(labels, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(associations, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return StateOfMindFromID(_r)
 }
 
 // StateOfMindWithDateKindValenceLabelsAssociationsMetadata creates a new log describing an experienced emotion at a moment in time.
-func StateOfMindWithDateKindValenceLabelsAssociationsMetadata(date obj.Object, kind StateOfMindKind, valence float64, labels []obj.Object, associations []obj.Object, metadata obj.Object) *StateOfMind {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKStateOfMind")), objc.RegisterName("stateOfMindWithDate:kind:valence:labels:associations:metadata:"), objref.IDOf(date), kind, valence, purego.SliceToNSArray(labels, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(associations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(metadata))
+func StateOfMindWithDateKindValenceLabelsAssociationsMetadata(date time.Time, kind StateOfMindKind, valence float64, labels []*foundation.Number, associations []*foundation.Number, metadata map[string]obj.Object) *StateOfMind {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKStateOfMind")), objc.RegisterName("stateOfMindWithDate:kind:valence:labels:associations:metadata:"), rt.TimeToNSDate(date), kind, valence, purego.SliceToNSArray(labels, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(associations, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return StateOfMindFromID(_r)
 }
 
 // UnitFromString returns the unit instance described by the provided string.
-func UnitFromString(string_ string) *Unit {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("unitFromString:"), purego.NSString(string_))
+func UnitFromString(str string) *Unit {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("unitFromString:"), purego.NSString(str))
 	return UnitFromID(_r)
 }
 
@@ -941,67 +997,87 @@ func AppleEffortScoreUnit() *Unit {
 }
 
 // PrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata creates a new vision prescription sample.
-func PrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata(type_ VisionPrescriptionType, dateIssued obj.Object, expirationDate obj.Object, device *Device, metadata obj.Object) *VisionPrescription {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKVisionPrescription")), objc.RegisterName("prescriptionWithType:dateIssued:expirationDate:device:metadata:"), type_, objref.IDOf(dateIssued), objref.IDOf(expirationDate), objref.IDOf(device), objref.IDOf(metadata))
+func PrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata(type_ VisionPrescriptionType, dateIssued time.Time, expirationDate time.Time, device *Device, metadata map[string]obj.Object) *VisionPrescription {
+	defer runtime.KeepAlive(device)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKVisionPrescription")), objc.RegisterName("prescriptionWithType:dateIssued:expirationDate:device:metadata:"), type_, rt.TimeToNSDate(dateIssued), rt.TimeToNSDate(expirationDate), objref.IDOf(device), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return VisionPrescriptionFromID(_r)
 }
 
 // WorkoutWithActivityTypeStartDateEndDate instantiates a new workout.
-func WorkoutWithActivityTypeStartDateEndDate(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object) *Workout {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate))
+func WorkoutWithActivityTypeStartDateEndDate(workoutActivityType WorkoutActivityType, startDate time.Time, endDate time.Time) *Workout {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:"), workoutActivityType, rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate))
 	return WorkoutFromID(_r)
 }
 
 // WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata instantiates a new workout whose duration is calculated based on the start and end dates and the provided workout events.
-func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object, workoutEvents []*WorkoutEvent, totalEnergyBurned *Quantity, totalDistance *Quantity, metadata obj.Object) *Workout {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:metadata:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate), purego.SliceToNSArray(workoutEvents, func(_v *WorkoutEvent) objc.ID { return objref.IDOf(_v) }), objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(metadata))
+func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata(workoutActivityType WorkoutActivityType, startDate time.Time, endDate time.Time, workoutEvents []*WorkoutEvent, totalEnergyBurned *Quantity, totalDistance *Quantity, metadata map[string]obj.Object) *Workout {
+	defer runtime.KeepAlive(totalEnergyBurned)
+	defer runtime.KeepAlive(totalDistance)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:metadata:"), workoutActivityType, rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), purego.SliceToNSArray(workoutEvents, func(_v *WorkoutEvent) objc.ID { return objref.IDOf(_v) }), objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return WorkoutFromID(_r)
 }
 
 // WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata instantiates a workout that includes both workout events and the device that produced the sample data.
-func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object, workoutEvents []*WorkoutEvent, totalEnergyBurned *Quantity, totalDistance *Quantity, device *Device, metadata obj.Object) *Workout {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:device:metadata:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate), purego.SliceToNSArray(workoutEvents, func(_v *WorkoutEvent) objc.ID { return objref.IDOf(_v) }), objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(device), objref.IDOf(metadata))
+func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata(workoutActivityType WorkoutActivityType, startDate time.Time, endDate time.Time, workoutEvents []*WorkoutEvent, totalEnergyBurned *Quantity, totalDistance *Quantity, device *Device, metadata map[string]obj.Object) *Workout {
+	defer runtime.KeepAlive(totalEnergyBurned)
+	defer runtime.KeepAlive(totalDistance)
+	defer runtime.KeepAlive(device)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:device:metadata:"), workoutActivityType, rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), purego.SliceToNSArray(workoutEvents, func(_v *WorkoutEvent) objc.ID { return objref.IDOf(_v) }), objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(device), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return WorkoutFromID(_r)
 }
 
 // WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata instantiates a new workout that includes the energy burned, distance, and metadata for the workout.
-func WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object, duration float64, totalEnergyBurned *Quantity, totalDistance *Quantity, metadata obj.Object) *Workout {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:duration:totalEnergyBurned:totalDistance:metadata:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate), duration, objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(metadata))
+func WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata(workoutActivityType WorkoutActivityType, startDate time.Time, endDate time.Time, duration float64, totalEnergyBurned *Quantity, totalDistance *Quantity, metadata map[string]obj.Object) *Workout {
+	defer runtime.KeepAlive(totalEnergyBurned)
+	defer runtime.KeepAlive(totalDistance)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:duration:totalEnergyBurned:totalDistance:metadata:"), workoutActivityType, rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), duration, objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return WorkoutFromID(_r)
 }
 
 // WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata instantiates a new workout activity that includes the device that produced the sample data.
-func WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object, duration float64, totalEnergyBurned *Quantity, totalDistance *Quantity, device *Device, metadata obj.Object) *Workout {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:duration:totalEnergyBurned:totalDistance:device:metadata:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate), duration, objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(device), objref.IDOf(metadata))
+func WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata(workoutActivityType WorkoutActivityType, startDate time.Time, endDate time.Time, duration float64, totalEnergyBurned *Quantity, totalDistance *Quantity, device *Device, metadata map[string]obj.Object) *Workout {
+	defer runtime.KeepAlive(totalEnergyBurned)
+	defer runtime.KeepAlive(totalDistance)
+	defer runtime.KeepAlive(device)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:duration:totalEnergyBurned:totalDistance:device:metadata:"), workoutActivityType, rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), duration, objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(device), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return WorkoutFromID(_r)
 }
 
 // WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata instantiates a workout using a variety of data, including the number of strokes while swimming.
-func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object, workoutEvents []*WorkoutEvent, totalEnergyBurned *Quantity, totalDistance *Quantity, totalSwimmingStrokeCount *Quantity, device *Device, metadata obj.Object) *Workout {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:totalSwimmingStrokeCount:device:metadata:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate), purego.SliceToNSArray(workoutEvents, func(_v *WorkoutEvent) objc.ID { return objref.IDOf(_v) }), objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(totalSwimmingStrokeCount), objref.IDOf(device), objref.IDOf(metadata))
+func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata(workoutActivityType WorkoutActivityType, startDate time.Time, endDate time.Time, workoutEvents []*WorkoutEvent, totalEnergyBurned *Quantity, totalDistance *Quantity, totalSwimmingStrokeCount *Quantity, device *Device, metadata map[string]obj.Object) *Workout {
+	defer runtime.KeepAlive(totalEnergyBurned)
+	defer runtime.KeepAlive(totalDistance)
+	defer runtime.KeepAlive(totalSwimmingStrokeCount)
+	defer runtime.KeepAlive(device)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:totalSwimmingStrokeCount:device:metadata:"), workoutActivityType, rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), purego.SliceToNSArray(workoutEvents, func(_v *WorkoutEvent) objc.ID { return objref.IDOf(_v) }), objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(totalSwimmingStrokeCount), objref.IDOf(device), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return WorkoutFromID(_r)
 }
 
 // WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata instantiates a workout using a variety of data, including the number of flights of stairs climbed.
-func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object, workoutEvents []*WorkoutEvent, totalEnergyBurned *Quantity, totalDistance *Quantity, totalFlightsClimbed *Quantity, device *Device, metadata obj.Object) *Workout {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:totalFlightsClimbed:device:metadata:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate), purego.SliceToNSArray(workoutEvents, func(_v *WorkoutEvent) objc.ID { return objref.IDOf(_v) }), objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(totalFlightsClimbed), objref.IDOf(device), objref.IDOf(metadata))
+func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata(workoutActivityType WorkoutActivityType, startDate time.Time, endDate time.Time, workoutEvents []*WorkoutEvent, totalEnergyBurned *Quantity, totalDistance *Quantity, totalFlightsClimbed *Quantity, device *Device, metadata map[string]obj.Object) *Workout {
+	defer runtime.KeepAlive(totalEnergyBurned)
+	defer runtime.KeepAlive(totalDistance)
+	defer runtime.KeepAlive(totalFlightsClimbed)
+	defer runtime.KeepAlive(device)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:totalFlightsClimbed:device:metadata:"), workoutActivityType, rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), purego.SliceToNSArray(workoutEvents, func(_v *WorkoutEvent) objc.ID { return objref.IDOf(_v) }), objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(totalFlightsClimbed), objref.IDOf(device), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return WorkoutFromID(_r)
 }
 
 // WorkoutEventWithTypeDate instantiates and returns a new workout event with the specified type and date.
-func WorkoutEventWithTypeDate(type_ WorkoutEventType, date obj.Object) *WorkoutEvent {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkoutEvent")), objc.RegisterName("workoutEventWithType:date:"), type_, objref.IDOf(date))
+func WorkoutEventWithTypeDate(type_ WorkoutEventType, date time.Time) *WorkoutEvent {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkoutEvent")), objc.RegisterName("workoutEventWithType:date:"), type_, rt.TimeToNSDate(date))
 	return WorkoutEventFromID(_r)
 }
 
 // WorkoutEventWithTypeDateMetadata instantiates and returns a new workout event with the specified type, date, and metadata.
-func WorkoutEventWithTypeDateMetadata(type_ WorkoutEventType, date obj.Object, metadata obj.Object) *WorkoutEvent {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkoutEvent")), objc.RegisterName("workoutEventWithType:date:metadata:"), type_, objref.IDOf(date), objref.IDOf(metadata))
+func WorkoutEventWithTypeDateMetadata(type_ WorkoutEventType, date time.Time, metadata map[string]obj.Object) *WorkoutEvent {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkoutEvent")), objc.RegisterName("workoutEventWithType:date:metadata:"), type_, rt.TimeToNSDate(date), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return WorkoutEventFromID(_r)
 }
 
 // WorkoutEventWithTypeDateIntervalMetadata instantiates and returns a new workout event with the specified type, date interval, and metadata.
-func WorkoutEventWithTypeDateIntervalMetadata(type_ WorkoutEventType, dateInterval obj.Object, metadata obj.Object) *WorkoutEvent {
-	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkoutEvent")), objc.RegisterName("workoutEventWithType:dateInterval:metadata:"), type_, objref.IDOf(dateInterval), objref.IDOf(metadata))
+func WorkoutEventWithTypeDateIntervalMetadata(type_ WorkoutEventType, dateInterval obj.Object, metadata map[string]obj.Object) *WorkoutEvent {
+	defer runtime.KeepAlive(dateInterval)
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkoutEvent")), objc.RegisterName("workoutEventWithType:dateInterval:metadata:"), type_, objref.IDOf(dateInterval), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return WorkoutEventFromID(_r)
 }

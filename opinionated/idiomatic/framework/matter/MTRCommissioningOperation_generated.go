@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRCommissioningOperationAdopt(id objc.ID) *MTRCommissioningOperation {
 
 // Description returns the object's -description text.
 func (mco *MTRCommissioningOperation) Description() string {
+	defer runtime.KeepAlive(mco)
 	return rt.Description(objref.IDOf(mco))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mco *MTRCommissioningOperation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mco)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mco), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mco *MTRCommissioningOperation) IsKind(className string) bool {
+	defer runtime.KeepAlive(mco)
 	return rt.IsKind(objref.IDOf(mco), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mco *MTRCommissioningOperation) String() string {
+	defer runtime.KeepAlive(mco)
 	return rt.Description(objref.IDOf(mco))
 }
 
@@ -72,17 +79,21 @@ func NewMTRCommissioningOperation() *MTRCommissioningOperation {
 
 // StartWithController start commissioning with the given controller (which identifies the fabric the commissionee should be commissioned into). The delegate will be notified if there are any failures.
 func (mco *MTRCommissioningOperation) StartWithController(controller *MTRDeviceController) {
+	defer runtime.KeepAlive(mco)
+	defer runtime.KeepAlive(controller)
 	objc.Send[objc.ID](objref.IDOf(mco), objc.RegisterName("startWithController:"), objref.IDOf(controller))
 }
 
 // Stop reports whether stop commissioning. This will typically result in commissioning:failedWithError: callbacks to delegates.
 func (mco *MTRCommissioningOperation) Stop() bool {
+	defer runtime.KeepAlive(mco)
 	_r := objc.Send[bool](objref.IDOf(mco), objc.RegisterName("stop"))
 	return _r
 }
 
 // MatchedPayload returns the matched payload.
 func (mco *MTRCommissioningOperation) MatchedPayload() *MTRSetupPayload {
+	defer runtime.KeepAlive(mco)
 	_r := objc.Send[objc.ID](objref.IDOf(mco), objc.RegisterName("matchedPayload"))
 	return MTRSetupPayloadFromID(_r)
 }

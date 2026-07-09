@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -67,11 +69,13 @@ func (mfc *MutableFontCollection) WithExclusionDescriptors(items ...*FontDescrip
 
 // AddQueryForDescriptors edits the query and exclusion arrays by adding the specified font descriptors.
 func (mfc *MutableFontCollection) AddQueryForDescriptors(descriptors []*FontDescriptor) {
+	defer runtime.KeepAlive(mfc)
 	objc.Send[objc.ID](objref.IDOf(mfc), objc.RegisterName("addQueryForDescriptors:"), purego.SliceToNSArray(descriptors, func(_v *FontDescriptor) objc.ID { return objref.IDOf(_v) }))
 }
 
 // RemoveQueryForDescriptors edits the query and exclusion arrays by removing the specified font descriptors.
 func (mfc *MutableFontCollection) RemoveQueryForDescriptors(descriptors []*FontDescriptor) {
+	defer runtime.KeepAlive(mfc)
 	objc.Send[objc.ID](objref.IDOf(mfc), objc.RegisterName("removeQueryForDescriptors:"), purego.SliceToNSArray(descriptors, func(_v *FontDescriptor) objc.ID { return objref.IDOf(_v) }))
 }
 

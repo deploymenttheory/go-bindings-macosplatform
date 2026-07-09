@@ -5,6 +5,8 @@
 package usernotifications
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func notificationCategoryAdopt(id objc.ID) *NotificationCategory {
 
 // Description returns the object's -description text.
 func (nc *NotificationCategory) Description() string {
+	defer runtime.KeepAlive(nc)
 	return rt.Description(objref.IDOf(nc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nc *NotificationCategory) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nc *NotificationCategory) IsKind(className string) bool {
+	defer runtime.KeepAlive(nc)
 	return rt.IsKind(objref.IDOf(nc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nc *NotificationCategory) String() string {
+	defer runtime.KeepAlive(nc)
 	return rt.Description(objref.IDOf(nc))
 }
 
@@ -74,6 +81,7 @@ func NewNotificationCategory() *NotificationCategory {
 
 // Identifier returns the identifier.
 func (nc *NotificationCategory) Identifier() string {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -85,6 +93,7 @@ func (nc *NotificationCategory) Identifier() string {
 //
 // Actions returns the collection as a Go slice.
 func (nc *NotificationCategory) Actions() []*NotificationAction {
+	defer runtime.KeepAlive(nc)
 	_arr := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("actions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NotificationAction { return NotificationActionFromID(_id) })
 }
@@ -93,18 +102,21 @@ func (nc *NotificationCategory) Actions() []*NotificationAction {
 //
 // IntentIdentifiers returns the collection as a Go slice.
 func (nc *NotificationCategory) IntentIdentifiers() []string {
+	defer runtime.KeepAlive(nc)
 	_arr := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("intentIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Options returns the options.
 func (nc *NotificationCategory) Options() NotificationCategoryOptions {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[NotificationCategoryOptions](objref.IDOf(nc), objc.RegisterName("options"))
 	return _r
 }
 
 // HiddenPreviewsBodyPlaceholder returns the hidden previews body placeholder.
 func (nc *NotificationCategory) HiddenPreviewsBodyPlaceholder() string {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("hiddenPreviewsBodyPlaceholder"))
 	if _r == 0 {
 		return ""
@@ -114,6 +126,7 @@ func (nc *NotificationCategory) HiddenPreviewsBodyPlaceholder() string {
 
 // CategorySummaryFormat returns a format string for a summary description when notifications from this category are grouped together. It should contain descriptive text and format arguments that will be replaced with the information from the notifications that have been grouped together. The arguments are replaced with the number of notifications and the list created by joining the argument in each grouped notification. For example: "%u new messages from %
 func (nc *NotificationCategory) CategorySummaryFormat() string {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("categorySummaryFormat"))
 	if _r == 0 {
 		return ""

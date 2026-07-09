@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -52,22 +53,27 @@ func orderedSetAdopt(id objc.ID) *OrderedSet {
 
 // Description returns the object's -description text.
 func (os *OrderedSet) Description() string {
+	defer runtime.KeepAlive(os)
 	return rt.Description(objref.IDOf(os))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (os *OrderedSet) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(os), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (os *OrderedSet) IsKind(className string) bool {
+	defer runtime.KeepAlive(os)
 	return rt.IsKind(objref.IDOf(os), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (os *OrderedSet) String() string {
+	defer runtime.KeepAlive(os)
 	return rt.Description(objref.IDOf(os))
 }
 
@@ -80,6 +86,7 @@ func NewOrderedSetWithObjectsCount(objects unsafe.Pointer, cnt int) *OrderedSet 
 
 // NewOrderedSetWithCoder creates a new OrderedSet.
 func NewOrderedSetWithCoder(coder *Coder) *OrderedSet {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return orderedSetAdopt(_id)
@@ -87,6 +94,7 @@ func NewOrderedSetWithCoder(coder *Coder) *OrderedSet {
 
 // NewOrderedSetWithObject initializes a new ordered set with the object.
 func NewOrderedSetWithObject(object obj.Object) *OrderedSet {
+	defer runtime.KeepAlive(object)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObject:"), objref.IDOf(object))
 	return orderedSetAdopt(_id)
@@ -94,6 +102,7 @@ func NewOrderedSetWithObject(object obj.Object) *OrderedSet {
 
 // NewOrderedSetWithObjects initializes a newly allocated set with members taken from the specified list of objects.
 func NewOrderedSetWithObjects(firstObj obj.Object) *OrderedSet {
+	defer runtime.KeepAlive(firstObj)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjects:"), objref.IDOf(firstObj))
 	return orderedSetAdopt(_id)
@@ -101,6 +110,7 @@ func NewOrderedSetWithObjects(firstObj obj.Object) *OrderedSet {
 
 // NewOrderedSetWithOrderedSet initializes a new ordered set with the contents of a set.
 func NewOrderedSetWithOrderedSet(set obj.Object) *OrderedSet {
+	defer runtime.KeepAlive(set)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOrderedSet:"), objref.IDOf(set))
 	return orderedSetAdopt(_id)
@@ -108,6 +118,7 @@ func NewOrderedSetWithOrderedSet(set obj.Object) *OrderedSet {
 
 // NewOrderedSetWithOrderedSetCopyItems initializes a new ordered set with the contents of a set, optionally copying the items.
 func NewOrderedSetWithOrderedSetCopyItems(set obj.Object, flag bool) *OrderedSet {
+	defer runtime.KeepAlive(set)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOrderedSet:copyItems:"), objref.IDOf(set), flag)
 	return orderedSetAdopt(_id)
@@ -128,16 +139,16 @@ func NewOrderedSetWithArrayCopyItems(set []obj.Object, flag bool) *OrderedSet {
 }
 
 // NewOrderedSetWithSet initializes a new ordered set with the contents of a set.
-func NewOrderedSetWithSet(set obj.Object) *OrderedSet {
+func NewOrderedSetWithSet(set []obj.Object) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSet:"), objref.IDOf(set))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSet:"), rt.SliceToNSSet(set, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return orderedSetAdopt(_id)
 }
 
 // NewOrderedSetWithSetCopyItems initializes a new ordered set with the contents of a set, optionally copying the objects in the set.
-func NewOrderedSetWithSetCopyItems(set obj.Object, flag bool) *OrderedSet {
+func NewOrderedSetWithSetCopyItems(set []obj.Object, flag bool) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSet:copyItems:"), objref.IDOf(set), flag)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSet:copyItems:"), rt.SliceToNSSet(set, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), flag)
 	return orderedSetAdopt(_id)
 }
 
@@ -148,13 +159,14 @@ func (os *OrderedSet) WithObservationInfo(observationInfo unsafe.Pointer) *Order
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (os *OrderedSet) WithScriptingProperties(scriptingProperties obj.Object) *OrderedSet {
-	objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (os *OrderedSet) WithScriptingProperties(scriptingProperties map[string]obj.Object) *OrderedSet {
+	objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return os
 }
 
 // ObjectAtIndex returns the object at the specified index of the set.
 func (os *OrderedSet) ObjectAtIndex(idx int) obj.Object {
+	defer runtime.KeepAlive(os)
 	errkit.CheckIndex(idx, os.Count())
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("objectAtIndex:"), idx)
 	return obj.Wrap(_r)
@@ -162,60 +174,76 @@ func (os *OrderedSet) ObjectAtIndex(idx int) obj.Object {
 
 // IndexOfObject returns the index of the specified object.
 func (os *OrderedSet) IndexOfObject(object obj.Object) int {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[int](objref.IDOf(os), objc.RegisterName("indexOfObject:"), objref.IDOf(object))
 	return _r
 }
 
 // Count returns the count.
 func (os *OrderedSet) Count() int {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[int](objref.IDOf(os), objc.RegisterName("count"))
 	return _r
 }
 
 // ObjectsAtIndexes returns the objects in the ordered set at the specified indexes.
 func (os *OrderedSet) ObjectsAtIndexes(indexes *IndexSet) []obj.Object {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(indexes)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("objectsAtIndexes:"), objref.IDOf(indexes))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // IsEqualToOrderedSet compares the receiving ordered set to another ordered set.
 func (os *OrderedSet) IsEqualToOrderedSet(other obj.Object) bool {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(other)
 	_r := objc.Send[bool](objref.IDOf(os), objc.RegisterName("isEqualToOrderedSet:"), objref.IDOf(other))
 	return _r
 }
 
 // ContainsObject returns a Boolean value that indicates whether a given object is present in the ordered set.
 func (os *OrderedSet) ContainsObject(object obj.Object) bool {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[bool](objref.IDOf(os), objc.RegisterName("containsObject:"), objref.IDOf(object))
 	return _r
 }
 
 // IntersectsOrderedSet returns a Boolean value that indicates whether at least one object in the receiving ordered set is also present in another given ordered set.
 func (os *OrderedSet) IntersectsOrderedSet(other obj.Object) bool {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(other)
 	_r := objc.Send[bool](objref.IDOf(os), objc.RegisterName("intersectsOrderedSet:"), objref.IDOf(other))
 	return _r
 }
 
 // IntersectsSet returns a Boolean value that indicates whether at least one object in the receiving ordered set is also present in another given set.
-func (os *OrderedSet) IntersectsSet(set obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(os), objc.RegisterName("intersectsSet:"), objref.IDOf(set))
+func (os *OrderedSet) IntersectsSet(set []obj.Object) bool {
+	defer runtime.KeepAlive(os)
+	_r := objc.Send[bool](objref.IDOf(os), objc.RegisterName("intersectsSet:"), rt.SliceToNSSet(set, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // IsSubsetOfOrderedSet returns a Boolean value that indicates whether every object in the receiving ordered set is also present in another given ordered set.
 func (os *OrderedSet) IsSubsetOfOrderedSet(other obj.Object) bool {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(other)
 	_r := objc.Send[bool](objref.IDOf(os), objc.RegisterName("isSubsetOfOrderedSet:"), objref.IDOf(other))
 	return _r
 }
 
 // IsSubsetOfSet returns a Boolean value that indicates whether every object in the receiving ordered set is also present in another given set.
-func (os *OrderedSet) IsSubsetOfSet(set obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(os), objc.RegisterName("isSubsetOfSet:"), objref.IDOf(set))
+func (os *OrderedSet) IsSubsetOfSet(set []obj.Object) bool {
+	defer runtime.KeepAlive(os)
+	_r := objc.Send[bool](objref.IDOf(os), objc.RegisterName("isSubsetOfSet:"), rt.SliceToNSSet(set, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // ObjectAtIndexedSubscript returns the object at the specified index of the set.
 func (os *OrderedSet) ObjectAtIndexedSubscript(idx int) obj.Object {
+	defer runtime.KeepAlive(os)
 	errkit.CheckIndex(idx, os.Count())
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("objectAtIndexedSubscript:"), idx)
 	return obj.Wrap(_r)
@@ -223,33 +251,40 @@ func (os *OrderedSet) ObjectAtIndexedSubscript(idx int) obj.Object {
 
 // ObjectEnumerator returns an enumerator object that lets you access each object in the ordered set.
 func (os *OrderedSet) ObjectEnumerator() obj.Object {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("objectEnumerator"))
 	return obj.Wrap(_r)
 }
 
 // ReverseObjectEnumerator returns an enumerator object that lets you access each object in the ordered set.
 func (os *OrderedSet) ReverseObjectEnumerator() obj.Object {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("reverseObjectEnumerator"))
 	return obj.Wrap(_r)
 }
 
 // EnumerateObjectsUsing executes a given block using each object in the ordered set.
 func (os *OrderedSet) EnumerateObjectsUsing(block func(obj.Object, int, *bool)) {
+	defer runtime.KeepAlive(os)
 	objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("enumerateObjectsUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
 }
 
 // EnumerateObjectsWithOptionsUsing executes a given block using each object in the set, using the specified enumeration options.
 func (os *OrderedSet) EnumerateObjectsWithOptionsUsing(opts EnumerationOptions, block func(obj.Object, int, *bool)) {
+	defer runtime.KeepAlive(os)
 	objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("enumerateObjectsWithOptions:usingBlock:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
 }
 
 // EnumerateObjectsAtIndexesOptionsUsing executes a given block using the objects in the ordered set at the specified indexes.
 func (os *OrderedSet) EnumerateObjectsAtIndexesOptionsUsing(s *IndexSet, opts EnumerationOptions, block func(obj.Object, int, *bool)) {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(s)
 	objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("enumerateObjectsAtIndexes:options:usingBlock:"), objref.IDOf(s), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
 }
 
 // IndexOfObjectPassingTest returns the index of the object in the ordered set that passes a test in a given block.
 func (os *OrderedSet) IndexOfObjectPassingTest(predicate func(obj.Object, int, *bool) bool) int {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[int](objref.IDOf(os), objc.RegisterName("indexOfObjectPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
 	}))
@@ -258,6 +293,7 @@ func (os *OrderedSet) IndexOfObjectPassingTest(predicate func(obj.Object, int, *
 
 // IndexOfObjectWithOptionsPassingTest returns the index of an object in the ordered set that passes a test in a given block for a given set of enumeration options.
 func (os *OrderedSet) IndexOfObjectWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) int {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[int](objref.IDOf(os), objc.RegisterName("indexOfObjectWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
 	}))
@@ -266,6 +302,8 @@ func (os *OrderedSet) IndexOfObjectWithOptionsPassingTest(opts EnumerationOption
 
 // IndexOfObjectAtIndexesOptionsPassingTest returns the index, from a given set of indexes, of the object in the ordered set that passes a test in a given block for a given set of enumeration options.
 func (os *OrderedSet) IndexOfObjectAtIndexesOptionsPassingTest(s *IndexSet, opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) int {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(os), objc.RegisterName("indexOfObjectAtIndexes:options:passingTest:"), objref.IDOf(s), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
 	}))
@@ -274,6 +312,7 @@ func (os *OrderedSet) IndexOfObjectAtIndexesOptionsPassingTest(s *IndexSet, opts
 
 // IndexesOfObjectsPassingTest returns the index of the object in the ordered set that passes a test in a given block.
 func (os *OrderedSet) IndexesOfObjectsPassingTest(predicate func(obj.Object, int, *bool) bool) *IndexSet {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("indexesOfObjectsPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
 	}))
@@ -282,6 +321,7 @@ func (os *OrderedSet) IndexesOfObjectsPassingTest(predicate func(obj.Object, int
 
 // IndexesOfObjectsWithOptionsPassingTest returns the index of an object in the ordered set that passes a test in a given block for a given set of enumeration options.
 func (os *OrderedSet) IndexesOfObjectsWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) *IndexSet {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("indexesOfObjectsWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
 	}))
@@ -290,6 +330,8 @@ func (os *OrderedSet) IndexesOfObjectsWithOptionsPassingTest(opts EnumerationOpt
 
 // IndexesOfObjectsAtIndexesOptionsPassingTest returns the index, from a given set of indexes, of the object in the ordered set that passes a test in a given block for a given set of enumeration options.
 func (os *OrderedSet) IndexesOfObjectsAtIndexesOptionsPassingTest(s *IndexSet, opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) *IndexSet {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("indexesOfObjectsAtIndexes:options:passingTest:"), objref.IDOf(s), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
 	}))
@@ -298,6 +340,8 @@ func (os *OrderedSet) IndexesOfObjectsAtIndexesOptionsPassingTest(s *IndexSet, o
 
 // DescriptionWithLocale returns a string that represents the contents of the ordered set, formatted as a property list.
 func (os *OrderedSet) DescriptionWithLocale(locale obj.Object) string {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(locale)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("descriptionWithLocale:"), objref.IDOf(locale))
 	if _r == 0 {
 		return ""
@@ -307,6 +351,8 @@ func (os *OrderedSet) DescriptionWithLocale(locale obj.Object) string {
 
 // DescriptionWithLocaleIndent returns a string that represents the contents of the ordered set, formatted as a property list.
 func (os *OrderedSet) DescriptionWithLocaleIndent(locale obj.Object, level int) string {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(locale)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("descriptionWithLocale:indent:"), objref.IDOf(locale), level)
 	if _r == 0 {
 		return ""
@@ -316,66 +362,82 @@ func (os *OrderedSet) DescriptionWithLocaleIndent(locale obj.Object, level int) 
 
 // FirstObject returns the first object.
 func (os *OrderedSet) FirstObject() obj.Object {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("firstObject"))
 	return obj.Wrap(_r)
 }
 
 // LastObject returns the last object.
 func (os *OrderedSet) LastObject() obj.Object {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("lastObject"))
 	return obj.Wrap(_r)
 }
 
 // ReversedOrderedSet returns the reversed ordered set.
 func (os *OrderedSet) ReversedOrderedSet() obj.Object {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("reversedOrderedSet"))
 	return obj.Wrap(_r)
 }
 
 // Array returns the array.
 func (os *OrderedSet) Array() []obj.Object {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("array"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Set returns the set.
-func (os *OrderedSet) Set() obj.Object {
+// Set returns the order of the returned elements is unspecified.
+func (os *OrderedSet) Set() []obj.Object {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("set"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DifferenceFromOrderedSetWithOptionsUsingEquivalenceTest compares two ordered sets, using the provided block and with options, to create a difference object that represents the changes between them.
 func (os *OrderedSet) DifferenceFromOrderedSetWithOptionsUsingEquivalenceTest(other obj.Object, options OrderedCollectionDifferenceCalculationOptions, block func(obj.Object, obj.Object) bool) obj.Object {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(other)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("differenceFromOrderedSet:withOptions:usingEquivalenceTest:"), objref.IDOf(other), options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) bool { return block(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return obj.Wrap(_r)
 }
 
-// DifferenceFromOrderedSetWithOptions compares two ordered sets, with options, to create a difference object that represents the changes between them.
-func (os *OrderedSet) DifferenceFromOrderedSetWithOptions(other obj.Object, options OrderedCollectionDifferenceCalculationOptions) obj.Object {
+// DifferenceFromOrderedSetWith compares two ordered sets, with options, to create a difference object that represents the changes between them.
+func (os *OrderedSet) DifferenceFromOrderedSetWith(other obj.Object, options OrderedCollectionDifferenceCalculationOptions) obj.Object {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(other)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("differenceFromOrderedSet:withOptions:"), objref.IDOf(other), options)
 	return obj.Wrap(_r)
 }
 
 // DifferenceFromOrderedSet compares two ordered sets to create a difference object that represents the changes between them.
 func (os *OrderedSet) DifferenceFromOrderedSet(other obj.Object) obj.Object {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(other)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("differenceFromOrderedSet:"), objref.IDOf(other))
 	return obj.Wrap(_r)
 }
 
 // OrderedSetByApplyingDifference creates a new ordered set by applying a difference object to an existing ordered set.
 func (os *OrderedSet) OrderedSetByApplyingDifference(difference obj.Object) obj.Object {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(difference)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("orderedSetByApplyingDifference:"), objref.IDOf(difference))
 	return obj.Wrap(_r)
 }
 
 // SortedArrayUsingDescriptors returns an array of the ordered set’s elements sorted as specified by a given array of sort descriptors.
 func (os *OrderedSet) SortedArrayUsingDescriptors(sortDescriptors []*SortDescriptor) []obj.Object {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("sortedArrayUsingDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v *SortDescriptor) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // FilteredOrderedSetUsingPredicate evaluates a given predicate against each object in the receiving ordered set and returns a new ordered set containing the objects for which the predicate returns true.
 func (os *OrderedSet) FilteredOrderedSetUsingPredicate(p *Predicate) obj.Object {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("filteredOrderedSetUsingPredicate:"), objref.IDOf(p))
 	return obj.Wrap(_r)
 }

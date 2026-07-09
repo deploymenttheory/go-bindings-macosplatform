@@ -5,6 +5,8 @@
 package corehaptics
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func hapticParameterCurveControlPointAdopt(id objc.ID) *HapticParameterCurveCont
 
 // Description returns the object's -description text.
 func (hpccp *HapticParameterCurveControlPoint) Description() string {
+	defer runtime.KeepAlive(hpccp)
 	return rt.Description(objref.IDOf(hpccp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hpccp *HapticParameterCurveControlPoint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hpccp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hpccp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hpccp *HapticParameterCurveControlPoint) IsKind(className string) bool {
+	defer runtime.KeepAlive(hpccp)
 	return rt.IsKind(objref.IDOf(hpccp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hpccp *HapticParameterCurveControlPoint) String() string {
+	defer runtime.KeepAlive(hpccp)
 	return rt.Description(objref.IDOf(hpccp))
 }
 
@@ -87,12 +94,14 @@ func (hpccp *HapticParameterCurveControlPoint) WithValue(value float32) *HapticP
 
 // RelativeTime returns the relative time.
 func (hpccp *HapticParameterCurveControlPoint) RelativeTime() float64 {
+	defer runtime.KeepAlive(hpccp)
 	_r := objc.Send[float64](objref.IDOf(hpccp), objc.RegisterName("relativeTime"))
 	return _r
 }
 
 // Value returns the value.
 func (hpccp *HapticParameterCurveControlPoint) Value() float32 {
+	defer runtime.KeepAlive(hpccp)
 	_r := objc.Send[float32](objref.IDOf(hpccp), objc.RegisterName("value"))
 	return _r
 }

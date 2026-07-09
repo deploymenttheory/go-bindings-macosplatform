@@ -5,10 +5,14 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -79,13 +83,15 @@ func (ml *MetalLayer) WithPresentsWithTransaction(presentsWithTransaction bool) 
 
 // WithColorspace sets the color space of the rendered content.
 func (ml *MetalLayer) WithColorspace(colorspace obj.Object) *MetalLayer {
+	defer runtime.KeepAlive(colorspace)
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setColorspace:"), objref.IDOf(colorspace))
 	return ml
 }
 
 // WithEDRMetadata sets metadata describing the tone mapping to apply to the extended dynamic range (EDR) values in the layer.
-func (ml *MetalLayer) WithEDRMetadata(eDRMetadata *EDRMetadata) *MetalLayer {
-	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setEDRMetadata:"), objref.IDOf(eDRMetadata))
+func (ml *MetalLayer) WithEDRMetadata(edrMetadata *EDRMetadata) *MetalLayer {
+	defer runtime.KeepAlive(edrMetadata)
+	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setEDRMetadata:"), objref.IDOf(edrMetadata))
 	return ml
 }
 
@@ -103,6 +109,7 @@ func (ml *MetalLayer) WithAllowsNextDrawableTimeout(allowsNextDrawableTimeout bo
 
 // WithDeveloperHUDProperties sets the properties of the Metal performance heads-up display.
 func (ml *MetalLayer) WithDeveloperHUDProperties(developerHUDProperties obj.Object) *MetalLayer {
+	defer runtime.KeepAlive(developerHUDProperties)
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setDeveloperHUDProperties:"), objref.IDOf(developerHUDProperties))
 	return ml
 }
@@ -170,6 +177,7 @@ func (ml *MetalLayer) WithSublayers(items ...LayerProvider) *MetalLayer {
 
 // WithMask sets an optional layer whose alpha channel is used to mask the layer’s content.
 func (ml *MetalLayer) WithMask(mask LayerProvider) *MetalLayer {
+	defer runtime.KeepAlive(mask)
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setMask:"), objref.IDOf(mask))
 	return ml
 }
@@ -182,6 +190,7 @@ func (ml *MetalLayer) WithMasksToBounds(masksToBounds bool) *MetalLayer {
 
 // WithContents sets an object that provides the contents of the layer. Animatable.
 func (ml *MetalLayer) WithContents(contents obj.Object) *MetalLayer {
+	defer runtime.KeepAlive(contents)
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setContents:"), objref.IDOf(contents))
 	return ml
 }
@@ -194,6 +203,7 @@ func (ml *MetalLayer) WithContentsRect(contentsRect corefoundation.CGRect) *Meta
 
 // WithContentsGravity sets a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
 func (ml *MetalLayer) WithContentsGravity(contentsGravity obj.Object) *MetalLayer {
+	defer runtime.KeepAlive(contentsGravity)
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
 	return ml
 }
@@ -212,6 +222,7 @@ func (ml *MetalLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *
 
 // WithContentsFormat sets a hint for the desired storage format of the layer contents.
 func (ml *MetalLayer) WithContentsFormat(contentsFormat obj.Object) *MetalLayer {
+	defer runtime.KeepAlive(contentsFormat)
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
 	return ml
 }
@@ -224,12 +235,14 @@ func (ml *MetalLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicR
 
 // WithToneMapMode sets the tone map mode.
 func (ml *MetalLayer) WithToneMapMode(toneMapMode obj.Object) *MetalLayer {
+	defer runtime.KeepAlive(toneMapMode)
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return ml
 }
 
 // WithPreferredDynamicRange sets the preferred dynamic range.
 func (ml *MetalLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *MetalLayer {
+	defer runtime.KeepAlive(preferredDynamicRange)
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return ml
 }
@@ -242,12 +255,14 @@ func (ml *MetalLayer) WithContentsHeadroom(contentsHeadroom float64) *MetalLayer
 
 // WithMinificationFilter sets the filter used when reducing the size of the content.
 func (ml *MetalLayer) WithMinificationFilter(minificationFilter obj.Object) *MetalLayer {
+	defer runtime.KeepAlive(minificationFilter)
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
 	return ml
 }
 
 // WithMagnificationFilter sets the filter used when increasing the size of the content.
 func (ml *MetalLayer) WithMagnificationFilter(magnificationFilter obj.Object) *MetalLayer {
+	defer runtime.KeepAlive(magnificationFilter)
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
 	return ml
 }
@@ -290,6 +305,7 @@ func (ml *MetalLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *M
 
 // WithBackgroundColor sets the background color of the receiver. Animatable.
 func (ml *MetalLayer) WithBackgroundColor(backgroundColor obj.Object) *MetalLayer {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return ml
 }
@@ -308,6 +324,7 @@ func (ml *MetalLayer) WithMaskedCorners(maskedCorners CornerMask) *MetalLayer {
 
 // WithCornerCurve sets the corner curve.
 func (ml *MetalLayer) WithCornerCurve(cornerCurve obj.Object) *MetalLayer {
+	defer runtime.KeepAlive(cornerCurve)
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return ml
 }
@@ -320,6 +337,7 @@ func (ml *MetalLayer) WithBorderWidth(borderWidth float64) *MetalLayer {
 
 // WithBorderColor sets the color of the layer’s border. Animatable.
 func (ml *MetalLayer) WithBorderColor(borderColor obj.Object) *MetalLayer {
+	defer runtime.KeepAlive(borderColor)
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 	return ml
 }
@@ -338,6 +356,7 @@ func (ml *MetalLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *MetalLaye
 
 // WithCompositingFilter sets a CoreImage filter used to composite the layer and the content behind it. Animatable.
 func (ml *MetalLayer) WithCompositingFilter(compositingFilter obj.Object) *MetalLayer {
+	defer runtime.KeepAlive(compositingFilter)
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return ml
 }
@@ -356,6 +375,7 @@ func (ml *MetalLayer) WithRasterizationScale(rasterizationScale float64) *MetalL
 
 // WithShadowColor sets the color of the layer’s shadow. Animatable.
 func (ml *MetalLayer) WithShadowColor(shadowColor obj.Object) *MetalLayer {
+	defer runtime.KeepAlive(shadowColor)
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 	return ml
 }
@@ -380,6 +400,7 @@ func (ml *MetalLayer) WithShadowRadius(shadowRadius float64) *MetalLayer {
 
 // WithShadowPath sets the shape of the layer’s shadow. Animatable.
 func (ml *MetalLayer) WithShadowPath(shadowPath obj.Object) *MetalLayer {
+	defer runtime.KeepAlive(shadowPath)
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
 	return ml
 }
@@ -391,8 +412,8 @@ func (ml *MetalLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *M
 }
 
 // WithActions sets a dictionary containing layer actions.
-func (ml *MetalLayer) WithActions(actions obj.Object) *MetalLayer {
-	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setActions:"), objref.IDOf(actions))
+func (ml *MetalLayer) WithActions(actions map[string]obj.Object) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setActions:"), rt.MapToDict(actions, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ml
 }
 
@@ -402,8 +423,19 @@ func (ml *MetalLayer) WithName(name string) *MetalLayer {
 	return ml
 }
 
+// WithDelegate sets the layer’s delegate object.
+func (ml *MetalLayer) WithDelegate(delegate LayerDelegate) *MetalLayer {
+	_shim := newLayerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ml), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ml), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return ml
+}
+
 // WithStyle sets an optional dictionary used to store property values that aren’t explicitly defined by the layer.
 func (ml *MetalLayer) WithStyle(style obj.Object) *MetalLayer {
+	defer runtime.KeepAlive(style)
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setStyle:"), objref.IDOf(style))
 	return ml
 }
@@ -417,54 +449,63 @@ func (ml *MetalLayer) WithConstraints(items ...*Constraint) *MetalLayer {
 
 // FramebufferOnly wraps the corresponding Objective-C method.
 func (ml *MetalLayer) FramebufferOnly() bool {
+	defer runtime.KeepAlive(ml)
 	_r := objc.Send[bool](objref.IDOf(ml), objc.RegisterName("framebufferOnly"))
 	return _r
 }
 
 // DrawableSize returns the drawable size.
 func (ml *MetalLayer) DrawableSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(ml)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ml), objc.RegisterName("drawableSize"))
 	return _r
 }
 
 // MaximumDrawableCount returns the maximum drawable count.
 func (ml *MetalLayer) MaximumDrawableCount() int {
+	defer runtime.KeepAlive(ml)
 	_r := objc.Send[int](objref.IDOf(ml), objc.RegisterName("maximumDrawableCount"))
 	return _r
 }
 
 // PresentsWithTransaction wraps the corresponding Objective-C method.
 func (ml *MetalLayer) PresentsWithTransaction() bool {
+	defer runtime.KeepAlive(ml)
 	_r := objc.Send[bool](objref.IDOf(ml), objc.RegisterName("presentsWithTransaction"))
 	return _r
 }
 
 // Colorspace returns the colorspace.
 func (ml *MetalLayer) Colorspace() obj.Object {
+	defer runtime.KeepAlive(ml)
 	_r := objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("colorspace"))
 	return obj.Wrap(_r)
 }
 
 // EDRMetadata returns the edr metadata.
 func (ml *MetalLayer) EDRMetadata() *EDRMetadata {
+	defer runtime.KeepAlive(ml)
 	_r := objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("EDRMetadata"))
 	return EDRMetadataFromID(_r)
 }
 
 // DisplaySyncEnabled wraps the corresponding Objective-C method.
 func (ml *MetalLayer) DisplaySyncEnabled() bool {
+	defer runtime.KeepAlive(ml)
 	_r := objc.Send[bool](objref.IDOf(ml), objc.RegisterName("displaySyncEnabled"))
 	return _r
 }
 
 // AllowsNextDrawableTimeout wraps the corresponding Objective-C method.
 func (ml *MetalLayer) AllowsNextDrawableTimeout() bool {
+	defer runtime.KeepAlive(ml)
 	_r := objc.Send[bool](objref.IDOf(ml), objc.RegisterName("allowsNextDrawableTimeout"))
 	return _r
 }
 
 // DeveloperHUDProperties returns the developer hud properties.
 func (ml *MetalLayer) DeveloperHUDProperties() obj.Object {
+	defer runtime.KeepAlive(ml)
 	_r := objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("developerHUDProperties"))
 	return obj.Wrap(_r)
 }

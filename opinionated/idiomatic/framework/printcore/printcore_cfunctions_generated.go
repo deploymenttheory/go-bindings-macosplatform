@@ -198,13 +198,13 @@ func PMGetUnadjustedPaperRect(pageFormat obj.Object) (result int, paperRect PMRe
 var _fnPMPaperCreateCustom func(objc.ID, objc.ID, objc.ID, float64, float64, unsafe.Pointer, unsafe.Pointer) int32
 
 // PMPaperCreateCustom calls the PrintCore framework function PMPaperCreateCustom.
-func PMPaperCreateCustom(printer obj.Object, id_ obj.Object, name obj.Object, width float64, height float64, paperP unsafe.Pointer) (result int, margins PMRect) {
+func PMPaperCreateCustom(printer obj.Object, identifier obj.Object, name obj.Object, width float64, height float64, paperP unsafe.Pointer) (result int, margins PMRect) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMPaperCreateCustom == nil {
 		ebipurego.RegisterLibFunc(&_fnPMPaperCreateCustom, _lib, "PMPaperCreateCustom")
 	}
 	var _out0 PMRect
-	_ret := int(_fnPMPaperCreateCustom(objref.IDOf(printer), objref.IDOf(id_), objref.IDOf(name), width, height, unsafe.Pointer(&_out0), paperP))
+	_ret := int(_fnPMPaperCreateCustom(objref.IDOf(printer), objref.IDOf(identifier), objref.IDOf(name), width, height, unsafe.Pointer(&_out0), paperP))
 	return _ret, _out0
 }
 

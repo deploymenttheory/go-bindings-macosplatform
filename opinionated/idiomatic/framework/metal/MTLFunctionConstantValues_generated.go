@@ -5,6 +5,7 @@
 package metal
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func functionConstantValuesAdopt(id objc.ID) *FunctionConstantValues {
 
 // Description returns the object's -description text.
 func (fcv *FunctionConstantValues) Description() string {
+	defer runtime.KeepAlive(fcv)
 	return rt.Description(objref.IDOf(fcv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fcv *FunctionConstantValues) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fcv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fcv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fcv *FunctionConstantValues) IsKind(className string) bool {
+	defer runtime.KeepAlive(fcv)
 	return rt.IsKind(objref.IDOf(fcv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fcv *FunctionConstantValues) String() string {
+	defer runtime.KeepAlive(fcv)
 	return rt.Description(objref.IDOf(fcv))
 }
 
@@ -77,20 +83,24 @@ func NewFunctionConstantValues() *FunctionConstantValues {
 
 // SetConstantValueTypeAtIndex sets a value for a function constant at a specific index.
 func (fcv *FunctionConstantValues) SetConstantValueTypeAtIndex(value unsafe.Pointer, type_ DataType, index int) {
+	defer runtime.KeepAlive(fcv)
 	objc.Send[objc.ID](objref.IDOf(fcv), objc.RegisterName("setConstantValue:type:atIndex:"), value, type_, index)
 }
 
 // SetConstantValuesTypeWithRange sets values for a group of function constants within a specific index range.
 func (fcv *FunctionConstantValues) SetConstantValuesTypeWithRange(values unsafe.Pointer, type_ DataType, range_ foundation.NSRange) {
+	defer runtime.KeepAlive(fcv)
 	objc.Send[objc.ID](objref.IDOf(fcv), objc.RegisterName("setConstantValues:type:withRange:"), values, type_, range_)
 }
 
 // SetConstantValueTypeWithName sets a value for a function constant with a specific name.
 func (fcv *FunctionConstantValues) SetConstantValueTypeWithName(value unsafe.Pointer, type_ DataType, name string) {
+	defer runtime.KeepAlive(fcv)
 	objc.Send[objc.ID](objref.IDOf(fcv), objc.RegisterName("setConstantValue:type:withName:"), value, type_, purego.NSString(name))
 }
 
 // Reset deletes all previously set constant values.
 func (fcv *FunctionConstantValues) Reset() {
+	defer runtime.KeepAlive(fcv)
 	objc.Send[objc.ID](objref.IDOf(fcv), objc.RegisterName("reset"))
 }

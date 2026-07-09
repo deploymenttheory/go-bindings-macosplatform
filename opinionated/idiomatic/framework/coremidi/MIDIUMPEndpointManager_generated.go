@@ -5,6 +5,8 @@
 package coremidi
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func uMPEndpointManagerAdopt(id objc.ID) *UMPEndpointManager {
 
 // Description returns the object's -description text.
 func (uem *UMPEndpointManager) Description() string {
+	defer runtime.KeepAlive(uem)
 	return rt.Description(objref.IDOf(uem))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (uem *UMPEndpointManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(uem)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(uem), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (uem *UMPEndpointManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(uem)
 	return rt.IsKind(objref.IDOf(uem), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (uem *UMPEndpointManager) String() string {
+	defer runtime.KeepAlive(uem)
 	return rt.Description(objref.IDOf(uem))
 }
 
@@ -74,6 +81,7 @@ func NewUMPEndpointManager() *UMPEndpointManager {
 //
 // UMPEndpoints returns the collection as a Go slice.
 func (uem *UMPEndpointManager) UMPEndpoints() []*UMPEndpoint {
+	defer runtime.KeepAlive(uem)
 	_arr := objc.Send[objc.ID](objref.IDOf(uem), objc.RegisterName("UMPEndpoints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UMPEndpoint { return UMPEndpointFromID(_id) })
 }

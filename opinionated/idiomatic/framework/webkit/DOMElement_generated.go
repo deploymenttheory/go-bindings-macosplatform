@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -94,6 +96,7 @@ func (de *DOMElement) WithTextContent(textContent string) *DOMElement {
 
 // GetAttribute wraps the corresponding Objective-C method.
 func (de *DOMElement) GetAttribute(name string) string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("getAttribute:"), purego.NSString(name))
 	if _r == 0 {
 		return ""
@@ -103,40 +106,49 @@ func (de *DOMElement) GetAttribute(name string) string {
 
 // SetAttributeValue wraps the corresponding Objective-C method.
 func (de *DOMElement) SetAttributeValue(name string, value string) {
+	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setAttribute:value:"), purego.NSString(name), purego.NSString(value))
 }
 
 // RemoveAttribute removes attribute.
 func (de *DOMElement) RemoveAttribute(name string) {
+	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("removeAttribute:"), purego.NSString(name))
 }
 
 // GetAttributeNode wraps the corresponding Objective-C method.
 func (de *DOMElement) GetAttributeNode(name string) *DOMAttr {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("getAttributeNode:"), purego.NSString(name))
 	return DOMAttrFromID(_r)
 }
 
 // SetAttributeNode wraps the corresponding Objective-C method.
 func (de *DOMElement) SetAttributeNode(newAttr *DOMAttr) *DOMAttr {
+	defer runtime.KeepAlive(de)
+	defer runtime.KeepAlive(newAttr)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setAttributeNode:"), objref.IDOf(newAttr))
 	return DOMAttrFromID(_r)
 }
 
 // RemoveAttributeNode removes attribute node.
 func (de *DOMElement) RemoveAttributeNode(oldAttr *DOMAttr) *DOMAttr {
+	defer runtime.KeepAlive(de)
+	defer runtime.KeepAlive(oldAttr)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("removeAttributeNode:"), objref.IDOf(oldAttr))
 	return DOMAttrFromID(_r)
 }
 
 // GetElementsByTagName wraps the corresponding Objective-C method.
 func (de *DOMElement) GetElementsByTagName(name string) *DOMNodeList {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("getElementsByTagName:"), purego.NSString(name))
 	return DOMNodeListFromID(_r)
 }
 
 // GetAttributeNSLocalName wraps the corresponding Objective-C method.
 func (de *DOMElement) GetAttributeNSLocalName(namespaceURI string, localName string) string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("getAttributeNS:localName:"), purego.NSString(namespaceURI), purego.NSString(localName))
 	if _r == 0 {
 		return ""
@@ -146,89 +158,106 @@ func (de *DOMElement) GetAttributeNSLocalName(namespaceURI string, localName str
 
 // SetAttributeNSQualifiedNameValue wraps the corresponding Objective-C method.
 func (de *DOMElement) SetAttributeNSQualifiedNameValue(namespaceURI string, qualifiedName string, value string) {
+	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setAttributeNS:qualifiedName:value:"), purego.NSString(namespaceURI), purego.NSString(qualifiedName), purego.NSString(value))
 }
 
 // RemoveAttributeNSLocalName removes attribute ns local name.
 func (de *DOMElement) RemoveAttributeNSLocalName(namespaceURI string, localName string) {
+	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("removeAttributeNS:localName:"), purego.NSString(namespaceURI), purego.NSString(localName))
 }
 
 // GetElementsByTagNameNSLocalName wraps the corresponding Objective-C method.
 func (de *DOMElement) GetElementsByTagNameNSLocalName(namespaceURI string, localName string) *DOMNodeList {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("getElementsByTagNameNS:localName:"), purego.NSString(namespaceURI), purego.NSString(localName))
 	return DOMNodeListFromID(_r)
 }
 
 // GetAttributeNodeNSLocalName wraps the corresponding Objective-C method.
 func (de *DOMElement) GetAttributeNodeNSLocalName(namespaceURI string, localName string) *DOMAttr {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("getAttributeNodeNS:localName:"), purego.NSString(namespaceURI), purego.NSString(localName))
 	return DOMAttrFromID(_r)
 }
 
 // SetAttributeNodeNS wraps the corresponding Objective-C method.
 func (de *DOMElement) SetAttributeNodeNS(newAttr *DOMAttr) *DOMAttr {
+	defer runtime.KeepAlive(de)
+	defer runtime.KeepAlive(newAttr)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setAttributeNodeNS:"), objref.IDOf(newAttr))
 	return DOMAttrFromID(_r)
 }
 
 // HasAttribute wraps the corresponding Objective-C method.
 func (de *DOMElement) HasAttribute(name string) bool {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[bool](objref.IDOf(de), objc.RegisterName("hasAttribute:"), purego.NSString(name))
 	return _r
 }
 
 // HasAttributeNSLocalName wraps the corresponding Objective-C method.
 func (de *DOMElement) HasAttributeNSLocalName(namespaceURI string, localName string) bool {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[bool](objref.IDOf(de), objc.RegisterName("hasAttributeNS:localName:"), purego.NSString(namespaceURI), purego.NSString(localName))
 	return _r
 }
 
 // Focus wraps the corresponding Objective-C method.
 func (de *DOMElement) Focus() {
+	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("focus"))
 }
 
 // Blur wraps the corresponding Objective-C method.
 func (de *DOMElement) Blur() {
+	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("blur"))
 }
 
 // ScrollIntoView scrolls into view.
 func (de *DOMElement) ScrollIntoView(alignWithTop bool) {
+	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("scrollIntoView:"), alignWithTop)
 }
 
 // ScrollIntoViewIfNeeded scrolls into view if needed.
 func (de *DOMElement) ScrollIntoViewIfNeeded(centerIfNeeded bool) {
+	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("scrollIntoViewIfNeeded:"), centerIfNeeded)
 }
 
 // GetElementsByClassName wraps the corresponding Objective-C method.
 func (de *DOMElement) GetElementsByClassName(name string) *DOMNodeList {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("getElementsByClassName:"), purego.NSString(name))
 	return DOMNodeListFromID(_r)
 }
 
 // WebkitRequestFullScreen wraps the corresponding Objective-C method.
 func (de *DOMElement) WebkitRequestFullScreen(flags uint16) {
+	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("webkitRequestFullScreen:"), flags)
 }
 
 // QuerySelector wraps the corresponding Objective-C method.
 func (de *DOMElement) QuerySelector(selectors string) *DOMElement {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("querySelector:"), purego.NSString(selectors))
 	return DOMElementFromID(_r)
 }
 
 // QuerySelectorAll wraps the corresponding Objective-C method.
 func (de *DOMElement) QuerySelectorAll(selectors string) *DOMNodeList {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("querySelectorAll:"), purego.NSString(selectors))
 	return DOMNodeListFromID(_r)
 }
 
 // TagName returns the tag name.
 func (de *DOMElement) TagName() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("tagName"))
 	if _r == 0 {
 		return ""
@@ -238,90 +267,105 @@ func (de *DOMElement) TagName() string {
 
 // Style returns the style.
 func (de *DOMElement) Style() *DOMCSSStyleDeclaration {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("style"))
 	return DOMCSSStyleDeclarationFromID(_r)
 }
 
 // OffsetLeft returns the offset left.
 func (de *DOMElement) OffsetLeft() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("offsetLeft"))
 	return _r
 }
 
 // OffsetTop returns the offset top.
 func (de *DOMElement) OffsetTop() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("offsetTop"))
 	return _r
 }
 
 // OffsetWidth returns the offset width.
 func (de *DOMElement) OffsetWidth() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("offsetWidth"))
 	return _r
 }
 
 // OffsetHeight returns the offset height.
 func (de *DOMElement) OffsetHeight() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("offsetHeight"))
 	return _r
 }
 
 // ClientLeft returns the client left.
 func (de *DOMElement) ClientLeft() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("clientLeft"))
 	return _r
 }
 
 // ClientTop returns the client top.
 func (de *DOMElement) ClientTop() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("clientTop"))
 	return _r
 }
 
 // ClientWidth returns the client width.
 func (de *DOMElement) ClientWidth() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("clientWidth"))
 	return _r
 }
 
 // ClientHeight returns the client height.
 func (de *DOMElement) ClientHeight() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("clientHeight"))
 	return _r
 }
 
 // ScrollLeft returns the scroll left.
 func (de *DOMElement) ScrollLeft() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("scrollLeft"))
 	return _r
 }
 
 // ScrollTop returns the scroll top.
 func (de *DOMElement) ScrollTop() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("scrollTop"))
 	return _r
 }
 
 // ScrollWidth returns the scroll width.
 func (de *DOMElement) ScrollWidth() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("scrollWidth"))
 	return _r
 }
 
 // ScrollHeight returns the scroll height.
 func (de *DOMElement) ScrollHeight() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("scrollHeight"))
 	return _r
 }
 
 // OffsetParent returns the offset parent.
 func (de *DOMElement) OffsetParent() *DOMElement {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("offsetParent"))
 	return DOMElementFromID(_r)
 }
 
 // InnerHTML returns the inner HTML.
 func (de *DOMElement) InnerHTML() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("innerHTML"))
 	if _r == 0 {
 		return ""
@@ -331,6 +375,7 @@ func (de *DOMElement) InnerHTML() string {
 
 // OuterHTML returns the outer HTML.
 func (de *DOMElement) OuterHTML() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("outerHTML"))
 	if _r == 0 {
 		return ""
@@ -340,6 +385,7 @@ func (de *DOMElement) OuterHTML() string {
 
 // InnerText returns the inner text.
 func (de *DOMElement) InnerText() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("innerText"))
 	if _r == 0 {
 		return ""
@@ -349,41 +395,48 @@ func (de *DOMElement) InnerText() string {
 
 // PreviousElementSibling returns the previous element sibling.
 func (de *DOMElement) PreviousElementSibling() *DOMElement {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("previousElementSibling"))
 	return DOMElementFromID(_r)
 }
 
 // NextElementSibling returns the next element sibling.
 func (de *DOMElement) NextElementSibling() *DOMElement {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("nextElementSibling"))
 	return DOMElementFromID(_r)
 }
 
 // FirstElementChild returns the first element child.
 func (de *DOMElement) FirstElementChild() *DOMElement {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("firstElementChild"))
 	return DOMElementFromID(_r)
 }
 
 // LastElementChild returns the last element child.
 func (de *DOMElement) LastElementChild() *DOMElement {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("lastElementChild"))
 	return DOMElementFromID(_r)
 }
 
 // ChildElementCount returns the child element count.
 func (de *DOMElement) ChildElementCount() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("childElementCount"))
 	return _r
 }
 
 // SetAttribute wraps the corresponding Objective-C method.
 func (de *DOMElement) SetAttribute(name string, value string) {
+	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setAttribute::"), purego.NSString(name), purego.NSString(value))
 }
 
 // GetAttributeNS wraps the corresponding Objective-C method.
 func (de *DOMElement) GetAttributeNS(namespaceURI string, localName string) string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("getAttributeNS::"), purego.NSString(namespaceURI), purego.NSString(localName))
 	if _r == 0 {
 		return ""
@@ -393,44 +446,52 @@ func (de *DOMElement) GetAttributeNS(namespaceURI string, localName string) stri
 
 // SetAttributeNS wraps the corresponding Objective-C method.
 func (de *DOMElement) SetAttributeNS(namespaceURI string, qualifiedName string, value string) {
+	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setAttributeNS:::"), purego.NSString(namespaceURI), purego.NSString(qualifiedName), purego.NSString(value))
 }
 
 // RemoveAttributeNS removes attribute ns.
 func (de *DOMElement) RemoveAttributeNS(namespaceURI string, localName string) {
+	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("removeAttributeNS::"), purego.NSString(namespaceURI), purego.NSString(localName))
 }
 
 // GetElementsByTagNameNS wraps the corresponding Objective-C method.
 func (de *DOMElement) GetElementsByTagNameNS(namespaceURI string, localName string) *DOMNodeList {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("getElementsByTagNameNS::"), purego.NSString(namespaceURI), purego.NSString(localName))
 	return DOMNodeListFromID(_r)
 }
 
 // GetAttributeNodeNS wraps the corresponding Objective-C method.
 func (de *DOMElement) GetAttributeNodeNS(namespaceURI string, localName string) *DOMAttr {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("getAttributeNodeNS::"), purego.NSString(namespaceURI), purego.NSString(localName))
 	return DOMAttrFromID(_r)
 }
 
 // HasAttributeNS wraps the corresponding Objective-C method.
 func (de *DOMElement) HasAttributeNS(namespaceURI string, localName string) bool {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[bool](objref.IDOf(de), objc.RegisterName("hasAttributeNS::"), purego.NSString(namespaceURI), purego.NSString(localName))
 	return _r
 }
 
 // ScrollByLines scrolls by lines.
 func (de *DOMElement) ScrollByLines(lines int) {
+	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("scrollByLines:"), lines)
 }
 
 // ScrollByPages scrolls by pages.
 func (de *DOMElement) ScrollByPages(pages int) {
+	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("scrollByPages:"), pages)
 }
 
 // Image returns an image associated with the receiver.
 func (de *DOMElement) Image() obj.Object {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("image"))
 	return obj.Wrap(_r)
 }

@@ -5,6 +5,8 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -52,6 +54,7 @@ func NewMathExpressionTextWithContent(content string) *MathExpressionText {
 
 // Content returns the content.
 func (met *MathExpressionText) Content() string {
+	defer runtime.KeepAlive(met)
 	_r := objc.Send[objc.ID](objref.IDOf(met), objc.RegisterName("content"))
 	if _r == 0 {
 		return ""

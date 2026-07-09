@@ -5,6 +5,7 @@
 package phase
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func envelopeAdopt(id objc.ID) *Envelope {
 
 // Description returns the object's -description text.
 func (e *Envelope) Description() string {
+	defer runtime.KeepAlive(e)
 	return rt.Description(objref.IDOf(e))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (e *Envelope) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(e)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(e), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (e *Envelope) IsKind(className string) bool {
+	defer runtime.KeepAlive(e)
 	return rt.IsKind(objref.IDOf(e), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (e *Envelope) String() string {
+	defer runtime.KeepAlive(e)
 	return rt.Description(objref.IDOf(e))
 }
 
@@ -77,6 +83,7 @@ func NewEnvelopeWithStartPointSegments(startPoint unsafe.Pointer, segments []*En
 
 // EvaluateForValue provides the height of the envelope for an input value.
 func (e *Envelope) EvaluateForValue(x_ float64) float64 {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("evaluateForValue:"), x_)
 	return _r
 }
@@ -85,18 +92,21 @@ func (e *Envelope) EvaluateForValue(x_ float64) float64 {
 //
 // Segments returns the collection as a Go slice.
 func (e *Envelope) Segments() []*EnvelopeSegment {
+	defer runtime.KeepAlive(e)
 	_arr := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("segments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EnvelopeSegment { return EnvelopeSegmentFromID(_id) })
 }
 
 // Domain returns the domain (along the x-axis). The first value in the pair is the minimum value of the domain. The second value in the pair is the maximum value of the domain.
 func (e *Envelope) Domain() *NumericPair {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("domain"))
 	return NumericPairFromID(_r)
 }
 
 // Range returns the range (along the y-axis). The first value in the pair is the minimum value of the range. The second value in the pair is the maximum value of the range.
 func (e *Envelope) Range() *NumericPair {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("range"))
 	return NumericPairFromID(_r)
 }

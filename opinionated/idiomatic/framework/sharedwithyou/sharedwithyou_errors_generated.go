@@ -8,8 +8,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrCodeNoError matches the SharedWithYou error SWHighlightCenterErrorCodeNoError.
-var ErrCodeNoError = errkit.New("SWHighlightCenterErrorDomain", 0)
+// ErrCodeAccessDenied matches the SharedWithYou error SWHighlightCenterErrorCodeAccessDenied.
+var ErrCodeAccessDenied = errkit.New("SWHighlightCenterErrorDomain", 3)
 
 // ErrCodeInternalError matches the SharedWithYou error SWHighlightCenterErrorCodeInternalError.
 var ErrCodeInternalError = errkit.New("SWHighlightCenterErrorDomain", 1)
@@ -17,5 +17,5 @@ var ErrCodeInternalError = errkit.New("SWHighlightCenterErrorDomain", 1)
 // ErrCodeInvalidURL matches the SharedWithYou error SWHighlightCenterErrorCodeInvalidURL.
 var ErrCodeInvalidURL = errkit.New("SWHighlightCenterErrorDomain", 2)
 
-// ErrCodeAccessDenied matches the SharedWithYou error SWHighlightCenterErrorCodeAccessDenied.
-var ErrCodeAccessDenied = errkit.New("SWHighlightCenterErrorDomain", 3)
+// ErrCodeNoError matches the SharedWithYou error SWHighlightCenterErrorCodeNoError.
+var ErrCodeNoError = errkit.New("SWHighlightCenterErrorDomain", 0)

@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func paymentButtonAdopt(id objc.ID) *PaymentButton {
 
 // Description returns the object's -description text.
 func (pb *PaymentButton) Description() string {
+	defer runtime.KeepAlive(pb)
 	return rt.Description(objref.IDOf(pb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pb *PaymentButton) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pb *PaymentButton) IsKind(className string) bool {
+	defer runtime.KeepAlive(pb)
 	return rt.IsKind(objref.IDOf(pb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pb *PaymentButton) String() string {
+	defer runtime.KeepAlive(pb)
 	return rt.Description(objref.IDOf(pb))
 }
 
@@ -89,6 +96,7 @@ func (pb *PaymentButton) WithCornerRadius(cornerRadius float64) *PaymentButton {
 
 // CornerRadius returns the corner radius.
 func (pb *PaymentButton) CornerRadius() float64 {
+	defer runtime.KeepAlive(pb)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {

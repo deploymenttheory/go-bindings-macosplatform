@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func sharedTextureHandleAdopt(id objc.ID) *SharedTextureHandle {
 
 // Description returns the object's -description text.
 func (sth *SharedTextureHandle) Description() string {
+	defer runtime.KeepAlive(sth)
 	return rt.Description(objref.IDOf(sth))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sth *SharedTextureHandle) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sth)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sth), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sth *SharedTextureHandle) IsKind(className string) bool {
+	defer runtime.KeepAlive(sth)
 	return rt.IsKind(objref.IDOf(sth), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sth *SharedTextureHandle) String() string {
+	defer runtime.KeepAlive(sth)
 	return rt.Description(objref.IDOf(sth))
 }
 
@@ -74,6 +81,7 @@ func NewSharedTextureHandle() *SharedTextureHandle {
 
 // Label returns a copy of the original texture's label property, if any
 func (sth *SharedTextureHandle) Label() string {
+	defer runtime.KeepAlive(sth)
 	_r := objc.Send[objc.ID](objref.IDOf(sth), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

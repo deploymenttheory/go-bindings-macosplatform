@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,12 +49,12 @@ func browserCellAdopt(id objc.ID) *BrowserCell {
 }
 
 // NewBrowserCellTextCell creates a new BrowserCell.
-func NewBrowserCellTextCell(string_ string) *BrowserCell {
+func NewBrowserCellTextCell(str string) *BrowserCell {
 	var _mainthread0 *BrowserCell
 	purego.Main(func() {
 		_mainthread0 = func() *BrowserCell {
 			_alloc := objc.Send[objc.ID](objc.ID(_class("NSBrowserCell")), objc.RegisterName("alloc"))
-			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(str))
 			return browserCellAdopt(_id)
 		}()
 	})
@@ -61,6 +63,7 @@ func NewBrowserCellTextCell(string_ string) *BrowserCell {
 
 // NewBrowserCellImageCell creates a new BrowserCell.
 func NewBrowserCellImageCell(image *Image) *BrowserCell {
+	defer runtime.KeepAlive(image)
 	var _mainthread0 *BrowserCell
 	purego.Main(func() {
 		_mainthread0 = func() *BrowserCell {
@@ -74,6 +77,7 @@ func NewBrowserCellImageCell(image *Image) *BrowserCell {
 
 // NewBrowserCellWithCoder creates a new BrowserCell.
 func NewBrowserCellWithCoder(coder obj.Object) *BrowserCell {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *BrowserCell
 	purego.Main(func() {
 		_mainthread0 = func() *BrowserCell {
@@ -103,6 +107,7 @@ func (bc *BrowserCell) WithLoaded(loaded bool) *BrowserCell {
 
 // WithAlternateImage sets the browser cell’s image for the highlighted state.
 func (bc *BrowserCell) WithAlternateImage(alternateImage *Image) *BrowserCell {
+	defer runtime.KeepAlive(alternateImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
 	})
@@ -111,6 +116,7 @@ func (bc *BrowserCell) WithAlternateImage(alternateImage *Image) *BrowserCell {
 
 // WithControlView sets the view associated with the cell.
 func (bc *BrowserCell) WithControlView(controlView ViewProvider) *BrowserCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -135,6 +141,7 @@ func (bc *BrowserCell) WithState(state int) *BrowserCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (bc *BrowserCell) WithTarget(target obj.Object) *BrowserCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -239,6 +246,7 @@ func (bc *BrowserCell) WithWraps(wraps bool) *BrowserCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (bc *BrowserCell) WithFont(font *Font) *BrowserCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -247,6 +255,7 @@ func (bc *BrowserCell) WithFont(font *Font) *BrowserCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (bc *BrowserCell) WithFormatter(formatter obj.Object) *BrowserCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -255,6 +264,7 @@ func (bc *BrowserCell) WithFormatter(formatter obj.Object) *BrowserCell {
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (bc *BrowserCell) WithObjectValue(objectValue obj.Object) *BrowserCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -303,6 +313,7 @@ func (bc *BrowserCell) WithIntegerValue(integerValue int) *BrowserCell {
 
 // WithImage sets the image displayed by the cell, if any.
 func (bc *BrowserCell) WithImage(image *Image) *BrowserCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -319,6 +330,7 @@ func (bc *BrowserCell) WithControlSize(controlSize ControlSize) *BrowserCell {
 
 // WithRepresentedObject sets the object represented by the cell.
 func (bc *BrowserCell) WithRepresentedObject(representedObject obj.Object) *BrowserCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -327,6 +339,7 @@ func (bc *BrowserCell) WithRepresentedObject(representedObject obj.Object) *Brow
 
 // WithMenu sets the cell’s contextual menu.
 func (bc *BrowserCell) WithMenu(menu *Menu) *BrowserCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -415,6 +428,7 @@ func (bc *BrowserCell) WithFocusRingType(focusRingType FocusRingType) *BrowserCe
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (bc *BrowserCell) WithAttributedStringValue(attributedStringValue obj.Object) *BrowserCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -463,6 +477,8 @@ func (bc *BrowserCell) WithControlTint(controlTint ControlTint) *BrowserCell {
 
 // HighlightColorInView returns the highlight color that the receiver wants to display.
 func (bc *BrowserCell) HighlightColorInView(controlView *View) *Color {
+	defer runtime.KeepAlive(bc)
+	defer runtime.KeepAlive(controlView)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -476,6 +492,7 @@ func (bc *BrowserCell) HighlightColorInView(controlView *View) *Color {
 
 // Reset unhighlights the receiver and unsets its state.
 func (bc *BrowserCell) Reset() {
+	defer runtime.KeepAlive(bc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("reset"))
 	})
@@ -484,6 +501,7 @@ func (bc *BrowserCell) Reset() {
 
 // Set highlights the receiver and sets its state.
 func (bc *BrowserCell) Set() {
+	defer runtime.KeepAlive(bc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("set"))
 	})
@@ -492,6 +510,7 @@ func (bc *BrowserCell) Set() {
 
 // IsLeaf reports whether the object is leaf.
 func (bc *BrowserCell) IsLeaf() bool {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -505,6 +524,7 @@ func (bc *BrowserCell) IsLeaf() bool {
 
 // IsLoaded reports whether the object is loaded.
 func (bc *BrowserCell) IsLoaded() bool {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -518,6 +538,7 @@ func (bc *BrowserCell) IsLoaded() bool {
 
 // AlternateImage returns the alternate image.
 func (bc *BrowserCell) AlternateImage() *Image {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {

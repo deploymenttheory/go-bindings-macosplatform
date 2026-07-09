@@ -5,6 +5,9 @@
 package safetykit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func crashDetectionEventAdopt(id objc.ID) *CrashDetectionEvent {
 
 // Description returns the object's -description text.
 func (cde *CrashDetectionEvent) Description() string {
+	defer runtime.KeepAlive(cde)
 	return rt.Description(objref.IDOf(cde))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cde *CrashDetectionEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cde)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cde), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cde *CrashDetectionEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(cde)
 	return rt.IsKind(objref.IDOf(cde), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cde *CrashDetectionEvent) String() string {
+	defer runtime.KeepAlive(cde)
 	return rt.Description(objref.IDOf(cde))
 }
 
@@ -73,13 +81,15 @@ func NewCrashDetectionEvent() *CrashDetectionEvent {
 }
 
 // Date returns date The time a crash was detected
-func (cde *CrashDetectionEvent) Date() obj.Object {
+func (cde *CrashDetectionEvent) Date() time.Time {
+	defer runtime.KeepAlive(cde)
 	_r := objc.Send[objc.ID](objref.IDOf(cde), objc.RegisterName("date"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Response returns response enum value representing the emergency response to the Crash Detection event
 func (cde *CrashDetectionEvent) Response() CrashDetectionEventResponse {
+	defer runtime.KeepAlive(cde)
 	_r := objc.Send[CrashDetectionEventResponse](objref.IDOf(cde), objc.RegisterName("response"))
 	return _r
 }

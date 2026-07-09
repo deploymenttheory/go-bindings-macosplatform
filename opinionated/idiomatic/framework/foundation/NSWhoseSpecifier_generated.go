@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,6 +52,7 @@ func whoseSpecifierAdopt(id objc.ID) *WhoseSpecifier {
 
 // NewWhoseSpecifierWithCoder creates a new WhoseSpecifier.
 func NewWhoseSpecifierWithCoder(inCoder *Coder) *WhoseSpecifier {
+	defer runtime.KeepAlive(inCoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSWhoseSpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(inCoder))
 	return whoseSpecifierAdopt(_id)
@@ -57,6 +60,9 @@ func NewWhoseSpecifierWithCoder(inCoder *Coder) *WhoseSpecifier {
 
 // NewWhoseSpecifierWithContainerClassDescriptionContainerSpecifierKeyTest returns an NSWhoseSpecifier object initialized with the given attributes.
 func NewWhoseSpecifierWithContainerClassDescriptionContainerSpecifierKeyTest(classDesc *ScriptClassDescription, container *ScriptObjectSpecifier, property string, test *ScriptWhoseTest) *WhoseSpecifier {
+	defer runtime.KeepAlive(classDesc)
+	defer runtime.KeepAlive(container)
+	defer runtime.KeepAlive(test)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSWhoseSpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:test:"), objref.IDOf(classDesc), objref.IDOf(container), purego.NSString(property), objref.IDOf(test))
 	return whoseSpecifierAdopt(_id)
@@ -64,6 +70,7 @@ func NewWhoseSpecifierWithContainerClassDescriptionContainerSpecifierKeyTest(cla
 
 // WithTest sets returns the test object encapsulated by the receiver.
 func (ws *WhoseSpecifier) WithTest(test ScriptWhoseTestProvider) *WhoseSpecifier {
+	defer runtime.KeepAlive(test)
 	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("setTest:"), objref.IDOf(test))
 	return ws
 }
@@ -94,12 +101,14 @@ func (ws *WhoseSpecifier) WithEndSubelementIndex(endSubelementIndex int) *WhoseS
 
 // WithChildSpecifier sets sets the receiver’s child reference.
 func (ws *WhoseSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *WhoseSpecifier {
+	defer runtime.KeepAlive(childSpecifier)
 	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("setChildSpecifier:"), objref.IDOf(childSpecifier))
 	return ws
 }
 
 // WithContainerSpecifier sets sets the container specifier of the receiver.
 func (ws *WhoseSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *WhoseSpecifier {
+	defer runtime.KeepAlive(containerSpecifier)
 	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("setContainerSpecifier:"), objref.IDOf(containerSpecifier))
 	return ws
 }
@@ -118,12 +127,14 @@ func (ws *WhoseSpecifier) WithContainerIsRangeContainerObject(containerIsRangeCo
 
 // WithKey sets sets the key of the receiver.
 func (ws *WhoseSpecifier) WithKey(key StringProvider) *WhoseSpecifier {
+	defer runtime.KeepAlive(key)
 	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return ws
 }
 
 // WithContainerClassDescription sets sets the class description of the receiver’s container specifier to a given specifier.
 func (ws *WhoseSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *WhoseSpecifier {
+	defer runtime.KeepAlive(containerClassDescription)
 	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("setContainerClassDescription:"), objref.IDOf(containerClassDescription))
 	return ws
 }
@@ -141,37 +152,42 @@ func (ws *WhoseSpecifier) WithObservationInfo(observationInfo unsafe.Pointer) *W
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ws *WhoseSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *WhoseSpecifier {
-	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ws *WhoseSpecifier) WithScriptingProperties(scriptingProperties map[string]obj.Object) *WhoseSpecifier {
+	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ws
 }
 
 // Test returns the test.
 func (ws *WhoseSpecifier) Test() *ScriptWhoseTest {
+	defer runtime.KeepAlive(ws)
 	_r := objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("test"))
 	return ScriptWhoseTestFromID(_r)
 }
 
 // StartSubelementIdentifier returns the start subelement identifier.
 func (ws *WhoseSpecifier) StartSubelementIdentifier() WhoseSubelementIdentifier {
+	defer runtime.KeepAlive(ws)
 	_r := objc.Send[WhoseSubelementIdentifier](objref.IDOf(ws), objc.RegisterName("startSubelementIdentifier"))
 	return _r
 }
 
 // StartSubelementIndex returns the start subelement index.
 func (ws *WhoseSpecifier) StartSubelementIndex() int {
+	defer runtime.KeepAlive(ws)
 	_r := objc.Send[int](objref.IDOf(ws), objc.RegisterName("startSubelementIndex"))
 	return _r
 }
 
 // EndSubelementIdentifier returns the end subelement identifier.
 func (ws *WhoseSpecifier) EndSubelementIdentifier() WhoseSubelementIdentifier {
+	defer runtime.KeepAlive(ws)
 	_r := objc.Send[WhoseSubelementIdentifier](objref.IDOf(ws), objc.RegisterName("endSubelementIdentifier"))
 	return _r
 }
 
 // EndSubelementIndex returns the end subelement index.
 func (ws *WhoseSpecifier) EndSubelementIndex() int {
+	defer runtime.KeepAlive(ws)
 	_r := objc.Send[int](objref.IDOf(ws), objc.RegisterName("endSubelementIndex"))
 	return _r
 }

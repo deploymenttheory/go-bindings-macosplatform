@@ -5,6 +5,7 @@
 package corelocation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func regionAdopt(id objc.ID) *Region {
 
 // Description returns the object's -description text.
 func (r *Region) Description() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (r *Region) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (r *Region) IsKind(className string) bool {
+	defer runtime.KeepAlive(r)
 	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (r *Region) String() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
@@ -91,12 +97,14 @@ func (r *Region) WithNotifyOnExit(notifyOnExit bool) *Region {
 
 // ContainsCoordinate returns a Boolean value indicating whether the region contains the specified coordinate.
 func (r *Region) ContainsCoordinate(coordinate unsafe.Pointer) bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("containsCoordinate:"), coordinate)
 	return _r
 }
 
 // Identifier returns the identifier.
 func (r *Region) Identifier() string {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -106,12 +114,14 @@ func (r *Region) Identifier() string {
 
 // NotifyOnEntry wraps the corresponding Objective-C method.
 func (r *Region) NotifyOnEntry() bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("notifyOnEntry"))
 	return _r
 }
 
 // NotifyOnExit wraps the corresponding Objective-C method.
 func (r *Region) NotifyOnExit() bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("notifyOnExit"))
 	return _r
 }

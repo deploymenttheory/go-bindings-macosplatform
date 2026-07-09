@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewMTL4StitchedFunctionDescriptor() *MTL4StitchedFunctionDescriptor {
 
 // WithFunctionGraph sets sets the graph representing how to stitch functions together.
 func (msfd *MTL4StitchedFunctionDescriptor) WithFunctionGraph(functionGraph *FunctionStitchingGraph) *MTL4StitchedFunctionDescriptor {
+	defer runtime.KeepAlive(functionGraph)
 	objc.Send[objc.ID](objref.IDOf(msfd), objc.RegisterName("setFunctionGraph:"), objref.IDOf(functionGraph))
 	return msfd
 }
@@ -66,6 +69,7 @@ func (msfd *MTL4StitchedFunctionDescriptor) WithFunctionDescriptors(items ...MTL
 
 // FunctionGraph sets the graph representing how to stitch functions together.
 func (msfd *MTL4StitchedFunctionDescriptor) FunctionGraph() *FunctionStitchingGraph {
+	defer runtime.KeepAlive(msfd)
 	_r := objc.Send[objc.ID](objref.IDOf(msfd), objc.RegisterName("functionGraph"))
 	return FunctionStitchingGraphFromID(_r)
 }
@@ -74,6 +78,7 @@ func (msfd *MTL4StitchedFunctionDescriptor) FunctionGraph() *FunctionStitchingGr
 //
 // FunctionDescriptors returns the collection as a Go slice.
 func (msfd *MTL4StitchedFunctionDescriptor) FunctionDescriptors() []*MTL4FunctionDescriptor {
+	defer runtime.KeepAlive(msfd)
 	_arr := objc.Send[objc.ID](objref.IDOf(msfd), objc.RegisterName("functionDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTL4FunctionDescriptor { return MTL4FunctionDescriptorFromID(_id) })
 }

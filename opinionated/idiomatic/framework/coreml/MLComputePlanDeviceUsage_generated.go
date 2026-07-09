@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func computePlanDeviceUsageAdopt(id objc.ID) *ComputePlanDeviceUsage {
 
 // Description returns the object's -description text.
 func (cpdu *ComputePlanDeviceUsage) Description() string {
+	defer runtime.KeepAlive(cpdu)
 	return rt.Description(objref.IDOf(cpdu))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cpdu *ComputePlanDeviceUsage) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cpdu)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cpdu), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cpdu *ComputePlanDeviceUsage) IsKind(className string) bool {
+	defer runtime.KeepAlive(cpdu)
 	return rt.IsKind(objref.IDOf(cpdu), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cpdu *ComputePlanDeviceUsage) String() string {
+	defer runtime.KeepAlive(cpdu)
 	return rt.Description(objref.IDOf(cpdu))
 }
 
@@ -74,6 +81,7 @@ func NewComputePlanDeviceUsage() *ComputePlanDeviceUsage {
 
 // SupportedComputeDevices returns the compute devices that can execute the layer/operation.
 func (cpdu *ComputePlanDeviceUsage) SupportedComputeDevices() []obj.Object {
+	defer runtime.KeepAlive(cpdu)
 	_r := objc.Send[objc.ID](objref.IDOf(cpdu), objc.RegisterName("supportedComputeDevices"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

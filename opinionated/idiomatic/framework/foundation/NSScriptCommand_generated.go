@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,27 +52,33 @@ func scriptCommandAdopt(id objc.ID) *ScriptCommand {
 
 // Description returns the object's -description text.
 func (sc *ScriptCommand) Description() string {
+	defer runtime.KeepAlive(sc)
 	return rt.Description(objref.IDOf(sc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sc *ScriptCommand) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sc *ScriptCommand) IsKind(className string) bool {
+	defer runtime.KeepAlive(sc)
 	return rt.IsKind(objref.IDOf(sc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sc *ScriptCommand) String() string {
+	defer runtime.KeepAlive(sc)
 	return rt.Description(objref.IDOf(sc))
 }
 
 // NewScriptCommandWithCommandDescription returns an a script command object initialized from the passed command description.
 func NewScriptCommandWithCommandDescription(commandDef *ScriptCommandDescription) *ScriptCommand {
+	defer runtime.KeepAlive(commandDef)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScriptCommand")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCommandDescription:"), objref.IDOf(commandDef))
 	return scriptCommandAdopt(_id)
@@ -79,6 +86,7 @@ func NewScriptCommandWithCommandDescription(commandDef *ScriptCommandDescription
 
 // NewScriptCommandWithCoder creates a new ScriptCommand.
 func NewScriptCommandWithCoder(inCoder *Coder) *ScriptCommand {
+	defer runtime.KeepAlive(inCoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScriptCommand")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(inCoder))
 	return scriptCommandAdopt(_id)
@@ -86,19 +94,21 @@ func NewScriptCommandWithCoder(inCoder *Coder) *ScriptCommand {
 
 // WithDirectParameter sets sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
 func (sc *ScriptCommand) WithDirectParameter(directParameter obj.Object) *ScriptCommand {
+	defer runtime.KeepAlive(directParameter)
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
 	return sc
 }
 
 // WithReceiversSpecifier sets sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
 func (sc *ScriptCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *ScriptCommand {
+	defer runtime.KeepAlive(receiversSpecifier)
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
 	return sc
 }
 
 // WithArguments sets sets the arguments of the command to args.
-func (sc *ScriptCommand) WithArguments(arguments obj.Object) *ScriptCommand {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
+func (sc *ScriptCommand) WithArguments(arguments map[string]obj.Object) *ScriptCommand {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setArguments:"), rt.MapToDict(arguments, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return sc
 }
 
@@ -110,18 +120,21 @@ func (sc *ScriptCommand) WithScriptErrorNumber(scriptErrorNumber int) *ScriptCom
 
 // WithScriptErrorOffendingObjectDescriptor sets sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 func (sc *ScriptCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *ScriptCommand {
+	defer runtime.KeepAlive(scriptErrorOffendingObjectDescriptor)
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
 	return sc
 }
 
 // WithScriptErrorExpectedTypeDescriptor sets sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 func (sc *ScriptCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *ScriptCommand {
+	defer runtime.KeepAlive(scriptErrorExpectedTypeDescriptor)
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
 	return sc
 }
 
 // WithScriptErrorString sets sets a script error string that is associated with execution of the command.
 func (sc *ScriptCommand) WithScriptErrorString(scriptErrorString StringProvider) *ScriptCommand {
+	defer runtime.KeepAlive(scriptErrorString)
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
 	return sc
 }
@@ -133,95 +146,111 @@ func (sc *ScriptCommand) WithObservationInfo(observationInfo unsafe.Pointer) *Sc
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (sc *ScriptCommand) WithScriptingProperties(scriptingProperties obj.Object) *ScriptCommand {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (sc *ScriptCommand) WithScriptingProperties(scriptingProperties map[string]obj.Object) *ScriptCommand {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return sc
 }
 
 // PerformDefaultImplementation returns overridden by subclasses to provide a default implementation for the command represented by the receiver.
 func (sc *ScriptCommand) PerformDefaultImplementation() obj.Object {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("performDefaultImplementation"))
 	return obj.Wrap(_r)
 }
 
 // ExecuteCommand returns executes the command if it is valid and returns the result, if any.
 func (sc *ScriptCommand) ExecuteCommand() obj.Object {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("executeCommand"))
 	return obj.Wrap(_r)
 }
 
 // SuspendExecution suspends the execution of the receiver.
 func (sc *ScriptCommand) SuspendExecution() {
+	defer runtime.KeepAlive(sc)
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("suspendExecution"))
 }
 
 // ResumeExecutionWithResult if a successful, unmatched, invocation of suspendExecution has been made, resume the execution of the command.
 func (sc *ScriptCommand) ResumeExecutionWithResult(result obj.Object) {
+	defer runtime.KeepAlive(sc)
+	defer runtime.KeepAlive(result)
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("resumeExecutionWithResult:"), objref.IDOf(result))
 }
 
 // CommandDescription returns the command description.
 func (sc *ScriptCommand) CommandDescription() *ScriptCommandDescription {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("commandDescription"))
 	return ScriptCommandDescriptionFromID(_r)
 }
 
 // DirectParameter returns the direct parameter.
 func (sc *ScriptCommand) DirectParameter() obj.Object {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("directParameter"))
 	return obj.Wrap(_r)
 }
 
 // ReceiversSpecifier returns the receivers specifier.
 func (sc *ScriptCommand) ReceiversSpecifier() *ScriptObjectSpecifier {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("receiversSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
 
 // EvaluatedReceivers returns the evaluated receivers.
 func (sc *ScriptCommand) EvaluatedReceivers() obj.Object {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("evaluatedReceivers"))
 	return obj.Wrap(_r)
 }
 
 // Arguments returns the arguments.
-func (sc *ScriptCommand) Arguments() obj.Object {
+func (sc *ScriptCommand) Arguments() map[string]obj.Object {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("arguments"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // EvaluatedArguments returns the evaluated arguments.
-func (sc *ScriptCommand) EvaluatedArguments() obj.Object {
+func (sc *ScriptCommand) EvaluatedArguments() map[string]obj.Object {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("evaluatedArguments"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // IsWellFormed reports whether the object is well formed.
 func (sc *ScriptCommand) IsWellFormed() bool {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("isWellFormed"))
 	return _r
 }
 
 // ScriptErrorNumber returns the script error number.
 func (sc *ScriptCommand) ScriptErrorNumber() int {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("scriptErrorNumber"))
 	return _r
 }
 
 // ScriptErrorOffendingObjectDescriptor returns the script error offending object descriptor.
 func (sc *ScriptCommand) ScriptErrorOffendingObjectDescriptor() *AppleEventDescriptor {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("scriptErrorOffendingObjectDescriptor"))
 	return AppleEventDescriptorFromID(_r)
 }
 
 // ScriptErrorExpectedTypeDescriptor returns the script error expected type descriptor.
 func (sc *ScriptCommand) ScriptErrorExpectedTypeDescriptor() *AppleEventDescriptor {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("scriptErrorExpectedTypeDescriptor"))
 	return AppleEventDescriptorFromID(_r)
 }
 
 // ScriptErrorString returns the script error string.
 func (sc *ScriptCommand) ScriptErrorString() string {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("scriptErrorString"))
 	if _r == 0 {
 		return ""
@@ -231,6 +260,7 @@ func (sc *ScriptCommand) ScriptErrorString() string {
 
 // AppleEvent returns the apple event.
 func (sc *ScriptCommand) AppleEvent() *AppleEventDescriptor {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("appleEvent"))
 	return AppleEventDescriptorFromID(_r)
 }

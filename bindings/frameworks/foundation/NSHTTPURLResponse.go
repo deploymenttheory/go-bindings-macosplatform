@@ -36,8 +36,8 @@ func NSHTTPURLResponseFromID(id objc.ID) *NSHTTPURLResponse {
 }
 
 // @method	initWithURL:statusCode:HTTPVersion:headerFields: @abstract initializer for NSHTTPURLResponse objects. @param 	url the URL from which the response was generated. @param	statusCode an HTTP status code. @param	HTTPVersion The version of the HTTP response as represented by the server.  This is typically represented as "HTTP/1.1". @param 	headerFields A dictionary representing the header keys and values of the server response. @result 	the instance of the object, or NULL if an error occurred during initialization. @discussion This API was introduced in Mac OS X 10.7.2 and iOS 5.0 and is not available prior to those releases.
-func (o *NSHTTPURLResponse) InitWithURLStatusCodeHTTPVersionHeaderFields(url *NSURL, statusCode int, hTTPVersion *NSString, headerFields *NSDictionary[*NSString, *NSString]) *NSHTTPURLResponse {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSHTTPURLResponseSelInitWithURLStatusCodeHTTPVersionHeaderFields, url.Ptr(), statusCode, hTTPVersion.Ptr(), headerFields.Ptr())
+func (o *NSHTTPURLResponse) InitWithURLStatusCodeHTTPVersionHeaderFields(url *NSURL, statusCode int, httpVersion *NSString, headerFields *NSDictionary[*NSString, *NSString]) *NSHTTPURLResponse {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSHTTPURLResponseSelInitWithURLStatusCodeHTTPVersionHeaderFields, url.Ptr(), statusCode, httpVersion.Ptr(), headerFields.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

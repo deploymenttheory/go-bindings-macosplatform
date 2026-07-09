@@ -344,9 +344,9 @@ func (o *NSFileManager) LinkItemAtURLToURLError(srcURL *NSURL, dstURL *NSURL) (b
 	return _ret, nil
 }
 
-func (o *NSFileManager) RemoveItemAtURLError(uRL *NSURL) (bool, error) {
+func (o *NSFileManager) RemoveItemAtURLError(url *NSURL) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelRemoveItemAtURLError, uRL.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelRemoveItemAtURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}

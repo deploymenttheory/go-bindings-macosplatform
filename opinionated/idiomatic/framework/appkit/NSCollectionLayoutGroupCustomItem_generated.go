@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func collectionLayoutGroupCustomItemAdopt(id objc.ID) *CollectionLayoutGroupCust
 
 // Description returns the object's -description text.
 func (clgci *CollectionLayoutGroupCustomItem) Description() string {
+	defer runtime.KeepAlive(clgci)
 	return rt.Description(objref.IDOf(clgci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (clgci *CollectionLayoutGroupCustomItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(clgci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(clgci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (clgci *CollectionLayoutGroupCustomItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(clgci)
 	return rt.IsKind(objref.IDOf(clgci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (clgci *CollectionLayoutGroupCustomItem) String() string {
+	defer runtime.KeepAlive(clgci)
 	return rt.Description(objref.IDOf(clgci))
 }
 
@@ -81,6 +88,7 @@ func NewCollectionLayoutGroupCustomItem() *CollectionLayoutGroupCustomItem {
 
 // Frame returns the frame.
 func (clgci *CollectionLayoutGroupCustomItem) Frame() corefoundation.CGRect {
+	defer runtime.KeepAlive(clgci)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -94,6 +102,7 @@ func (clgci *CollectionLayoutGroupCustomItem) Frame() corefoundation.CGRect {
 
 // ZIndex returns the z index.
 func (clgci *CollectionLayoutGroupCustomItem) ZIndex() int {
+	defer runtime.KeepAlive(clgci)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {

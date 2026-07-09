@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/appledocs"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/idioconf"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/mainactor"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/overrides"
@@ -43,6 +44,11 @@ type Registry struct {
 	UnavailableEnumBaseTypes map[string]string
 	// BlockedImports[src][dst]=true means src must not import dst (cycle break).
 	BlockedImports map[string]map[string]bool
+	// IdiomaticConfigIndex maps framework name → its parsed idiomatic.json
+	// sidecar (curated renames, delegate selection, error typedefs). Frameworks
+	// without a sidecar are absent; lookups yield nil, which every idioconf
+	// helper accepts.
+	IdiomaticConfigIndex map[string]*idioconf.File
 	// ModulePrefix is the Go module path prefix for framework packages.
 	// e.g. "github.com/deploymenttheory/go-bindings-macosplatform/purego-frameworks"
 	ModulePrefix string
@@ -70,6 +76,7 @@ func LoadAll(paths []string, modulePrefix, libraryModulePrefix string) (*Registr
 		UnavailableClasses:       make(map[string]bool),
 		UnavailableEnumBaseTypes: make(map[string]string),
 		BlockedImports:           make(map[string]map[string]bool),
+		IdiomaticConfigIndex:     make(map[string]*idioconf.File),
 		ModulePrefix:             modulePrefix,
 		LibraryModulePrefix:      libraryModulePrefix,
 	}
@@ -111,6 +118,20 @@ func LoadAll(paths []string, modulePrefix, libraryModulePrefix string) (*Registr
 		// cross-framework hierarchy propagation runs once after all load.
 		if err := mainactor.ApplyAdjacent(p, framework); err != nil {
 			return nil, fmt.Errorf("load %s: %w", p, err)
+		}
+		// Load the adjacent idiomatic.json sidecar (curated renames, delegate
+		// selection, error typedefs). Unlike overrides it does not mutate the
+		// metadata — the idiomatic emitter consults it during emission — so it
+		// is only validated here, with the same stale-entry warnings.
+		idioFile, idioFound, err := idioconf.LoadAdjacent(p)
+		if err != nil {
+			return nil, fmt.Errorf("load %s: %w", p, err)
+		}
+		if idioFound {
+			for _, warning := range idioconf.Validate(idioFile, framework) {
+				fmt.Fprintf(os.Stderr, "warning: %s\n", warning)
+			}
+			reg.IdiomaticConfigIndex[framework.Framework] = idioFile
 		}
 		all = append(all, fmWithPath{framework, p})
 	}
@@ -172,7 +193,10 @@ func LoadAll(paths []string, modulePrefix, libraryModulePrefix string) (*Registr
 	for _, framework := range frameworks {
 		for name, class := range framework.Classes {
 			score := len(class.Methods) + len(class.Properties)
-			allEntries[name] = append(allEntries[name], classEntry{framework.Framework, score, class})
+			allEntries[name] = append(
+				allEntries[name],
+				classEntry{framework.Framework, score, class},
+			)
 		}
 	}
 
@@ -561,7 +585,7 @@ func isMethodBridgeable(method meta.Method) bool {
 
 // isSelectorFormatVariadic returns true when the selector contains "format".
 func isSelectorFormatVariadic(selector string) bool {
-	for _, part := range strings.Split(selector, ":") {
+	for part := range strings.SplitSeq(selector, ":") {
 		if strings.Contains(strings.ToLower(part), "format") {
 			return true
 		}
@@ -656,7 +680,8 @@ func buildAllImportEdges(reg *Registry) map[string]map[string]int {
 				continue // only canonical owner emits the protocol
 			}
 			for _, parentProto := range proto.InheritedProtocols {
-				if ownerDst, ok2 := reg.ProtocolIndex[parentProto]; ok2 && ownerDst != frameworkName {
+				if ownerDst, ok2 := reg.ProtocolIndex[parentProto]; ok2 &&
+					ownerDst != frameworkName {
 					add(frameworkName, ownerDst)
 				}
 			}

@@ -5,6 +5,8 @@
 package localauthentication
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func domainStateBiometryAdopt(id objc.ID) *DomainStateBiometry {
 
 // Description returns the object's -description text.
 func (dsb *DomainStateBiometry) Description() string {
+	defer runtime.KeepAlive(dsb)
 	return rt.Description(objref.IDOf(dsb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dsb *DomainStateBiometry) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dsb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dsb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dsb *DomainStateBiometry) IsKind(className string) bool {
+	defer runtime.KeepAlive(dsb)
 	return rt.IsKind(objref.IDOf(dsb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dsb *DomainStateBiometry) String() string {
+	defer runtime.KeepAlive(dsb)
 	return rt.Description(objref.IDOf(dsb))
 }
 
@@ -72,12 +79,14 @@ func NewDomainStateBiometry() *DomainStateBiometry {
 
 // BiometryType indicates biometry type available on the device.
 func (dsb *DomainStateBiometry) BiometryType() BiometryType {
+	defer runtime.KeepAlive(dsb)
 	_r := objc.Send[BiometryType](objref.IDOf(dsb), objc.RegisterName("biometryType"))
 	return _r
 }
 
 // StateHash contains state hash data for the available biometry type. Returns `nil` if no biometry entities are enrolled. If biometric database was modified (fingers, faces were removed or added), `stateHash` data will change. Nature of such database changes cannot be determined but comparing data of `stateHash` after different evaluatePolicy calls will reveal the fact database was changed between the calls.
-func (dsb *DomainStateBiometry) StateHash() obj.Object {
+func (dsb *DomainStateBiometry) StateHash() []byte {
+	defer runtime.KeepAlive(dsb)
 	_r := objc.Send[objc.ID](objref.IDOf(dsb), objc.RegisterName("stateHash"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

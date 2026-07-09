@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -56,12 +58,14 @@ func NewFaceLandmarkRegion2D() *FaceLandmarkRegion2D {
 //
 // PrecisionEstimatesPerPoint returns the collection as a Go slice.
 func (flrd *FaceLandmarkRegion2D) PrecisionEstimatesPerPoint() []obj.Object {
+	defer runtime.KeepAlive(flrd)
 	_arr := objc.Send[objc.ID](objref.IDOf(flrd), objc.RegisterName("precisionEstimatesPerPoint"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PointsClassification describes how to interpret the points provided by the region.
 func (flrd *FaceLandmarkRegion2D) PointsClassification() PointsClassification {
+	defer runtime.KeepAlive(flrd)
 	_r := objc.Send[PointsClassification](objref.IDOf(flrd), objc.RegisterName("pointsClassification"))
 	return _r
 }

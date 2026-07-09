@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTL4CommandAllocatorDescriptorAdopt(id objc.ID) *MTL4CommandAllocatorDescri
 
 // Description returns the object's -description text.
 func (mcad *MTL4CommandAllocatorDescriptor) Description() string {
+	defer runtime.KeepAlive(mcad)
 	return rt.Description(objref.IDOf(mcad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcad *MTL4CommandAllocatorDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcad *MTL4CommandAllocatorDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcad)
 	return rt.IsKind(objref.IDOf(mcad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcad *MTL4CommandAllocatorDescriptor) String() string {
+	defer runtime.KeepAlive(mcad)
 	return rt.Description(objref.IDOf(mcad))
 }
 
@@ -80,6 +87,7 @@ func (mcad *MTL4CommandAllocatorDescriptor) WithLabel(label string) *MTL4Command
 
 // Label returns the label.
 func (mcad *MTL4CommandAllocatorDescriptor) Label() string {
+	defer runtime.KeepAlive(mcad)
 	_r := objc.Send[objc.ID](objref.IDOf(mcad), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

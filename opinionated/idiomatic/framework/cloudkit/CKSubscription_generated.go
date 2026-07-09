@@ -5,7 +5,10 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,45 +52,54 @@ func subscriptionAdopt(id objc.ID) *Subscription {
 
 // Description returns the object's -description text.
 func (s *Subscription) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Subscription) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Subscription) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Subscription) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // WithNotificationInfo sets the configuration for a subscription’s push notifications.
 func (s *Subscription) WithNotificationInfo(notificationInfo *NotificationInfo) *Subscription {
+	defer runtime.KeepAlive(notificationInfo)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNotificationInfo:"), objref.IDOf(notificationInfo))
 	return s
 }
 
 // SubscriptionID returns the subscription's unique identifier. This property's value is the subscription ID that you provide to the `initWithRecordType:predicate:subscriptionID:options:` or `initWithZoneID:subscriptionID:options:` methods when you create the subscription. If you use a different method to create the subscription, CloudKit automatically assigns a UUID as the subscription ID.
-func (s *Subscription) SubscriptionID() obj.Object {
+func (s *Subscription) SubscriptionID() *foundation.String {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("subscriptionID"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // SubscriptionType returns the behavior that a subscription provides.
 func (s *Subscription) SubscriptionType() SubscriptionType {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[SubscriptionType](objref.IDOf(s), objc.RegisterName("subscriptionType"))
 	return _r
 }
 
 // NotificationInfo returns the configuration for a subscription's push notifications. If you want the system to display your subscription's push notifications, assign a value to this property. The server uses the configuration you provide to determine the delivery options for notifications. For example, you can specify the text to display to the user, and the sound to play. You can also specify which fields of the record to include in the notification's payload. If you don't assign a value to this property, CloudKit still sends push notifications, but the system doesn't display them to the user. The default value of this property is `nil`.
 func (s *Subscription) NotificationInfo() *NotificationInfo {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("notificationInfo"))
 	return NotificationInfoFromID(_r)
 }

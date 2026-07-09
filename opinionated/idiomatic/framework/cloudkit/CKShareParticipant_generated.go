@@ -5,6 +5,9 @@
 package cloudkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func shareParticipantAdopt(id objc.ID) *ShareParticipant {
 
 // Description returns the object's -description text.
 func (sp *ShareParticipant) Description() string {
+	defer runtime.KeepAlive(sp)
 	return rt.Description(objref.IDOf(sp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sp *ShareParticipant) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sp *ShareParticipant) IsKind(className string) bool {
+	defer runtime.KeepAlive(sp)
 	return rt.IsKind(objref.IDOf(sp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sp *ShareParticipant) String() string {
+	defer runtime.KeepAlive(sp)
 	return rt.Description(objref.IDOf(sp))
 }
 
@@ -86,30 +94,35 @@ func (sp *ShareParticipant) WithPermission(permission ShareParticipantPermission
 
 // UserIdentity returns the identity of the participant. This property contains a reference to the user identity for the share participant.
 func (sp *ShareParticipant) UserIdentity() *UserIdentity {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("userIdentity"))
 	return UserIdentityFromID(_r)
 }
 
 // Role returns the participant's role for the share.
 func (sp *ShareParticipant) Role() ShareParticipantRole {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[ShareParticipantRole](objref.IDOf(sp), objc.RegisterName("role"))
 	return _r
 }
 
 // AcceptanceStatus returns the current state of the user's acceptance of the share. This property contains the current state of the participant's acceptance of the share. For a list of possible values, see “CKShare/ParticipantAcceptanceStatus“.
 func (sp *ShareParticipant) AcceptanceStatus() ShareParticipantAcceptanceStatus {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[ShareParticipantAcceptanceStatus](objref.IDOf(sp), objc.RegisterName("acceptanceStatus"))
 	return _r
 }
 
 // Permission returns the participant's permission level for the share. This property controls the permissions that the participant has for the share. For a list of possible values, see “CKShare/ParticipantPermission“.
 func (sp *ShareParticipant) Permission() ShareParticipantPermission {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[ShareParticipantPermission](objref.IDOf(sp), objc.RegisterName("permission"))
 	return _r
 }
 
 // ParticipantID returns a unique identifier for this participant.
 func (sp *ShareParticipant) ParticipantID() string {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("participantID"))
 	if _r == 0 {
 		return ""
@@ -119,12 +132,14 @@ func (sp *ShareParticipant) ParticipantID() string {
 
 // IsApprovedRequester reports whether the participant was originally a requester that an originator or administrator approved to join the share.
 func (sp *ShareParticipant) IsApprovedRequester() bool {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[bool](objref.IDOf(sp), objc.RegisterName("isApprovedRequester"))
 	return _r
 }
 
 // DateAddedToShare returns the date and time when an originator or administrator added this participant to the share. CloudKit sets this timestamp when the share is successfully saved to the server.
-func (sp *ShareParticipant) DateAddedToShare() obj.Object {
+func (sp *ShareParticipant) DateAddedToShare() time.Time {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("dateAddedToShare"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }

@@ -5,6 +5,7 @@
 package mailkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func messageSecurityInformationAdopt(id objc.ID) *MessageSecurityInformation {
 
 // Description returns the object's -description text.
 func (msi *MessageSecurityInformation) Description() string {
+	defer runtime.KeepAlive(msi)
 	return rt.Description(objref.IDOf(msi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msi *MessageSecurityInformation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msi *MessageSecurityInformation) IsKind(className string) bool {
+	defer runtime.KeepAlive(msi)
 	return rt.IsKind(objref.IDOf(msi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msi *MessageSecurityInformation) String() string {
+	defer runtime.KeepAlive(msi)
 	return rt.Description(objref.IDOf(msi))
 }
 
@@ -86,24 +92,28 @@ func NewMessageSecurityInformationWithSignersIsEncryptedSigningErrorEncryptionEr
 //
 // Signers returns the collection as a Go slice.
 func (msi *MessageSecurityInformation) Signers() []*MessageSigner {
+	defer runtime.KeepAlive(msi)
 	_arr := objc.Send[objc.ID](objref.IDOf(msi), objc.RegisterName("signers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MessageSigner { return MessageSignerFromID(_id) })
 }
 
 // IsEncrypted reports whether the message was encrypted.
 func (msi *MessageSecurityInformation) IsEncrypted() bool {
+	defer runtime.KeepAlive(msi)
 	_r := objc.Send[bool](objref.IDOf(msi), objc.RegisterName("isEncrypted"))
 	return _r
 }
 
 // ShouldBlockRemoteContent reports whether mail should block loading remote content for the message by default. The user will have the option to load remote content manually.
 func (msi *MessageSecurityInformation) ShouldBlockRemoteContent() bool {
+	defer runtime.KeepAlive(msi)
 	_r := objc.Send[bool](objref.IDOf(msi), objc.RegisterName("shouldBlockRemoteContent"))
 	return _r
 }
 
 // LocalizedRemoteContentBlockingReason returns a localized string containing the reason for blocking remote content.
 func (msi *MessageSecurityInformation) LocalizedRemoteContentBlockingReason() string {
+	defer runtime.KeepAlive(msi)
 	_r := objc.Send[objc.ID](objref.IDOf(msi), objc.RegisterName("localizedRemoteContentBlockingReason"))
 	if _r == 0 {
 		return ""

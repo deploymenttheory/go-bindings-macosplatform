@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func animationAdopt(id objc.ID) *Animation {
 
 // Description returns the object's -description text.
 func (a *Animation) Description() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (a *Animation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (a *Animation) IsKind(className string) bool {
+	defer runtime.KeepAlive(a)
 	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (a *Animation) String() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
@@ -84,6 +91,7 @@ func (a *Animation) WithKeyPath(keyPath string) *Animation {
 
 // WithTimingFunction sets a timing function defining the pacing of the animation. Defaults to nil indicating linear pacing.
 func (a *Animation) WithTimingFunction(timingFunction *TimingFunction) *Animation {
+	defer runtime.KeepAlive(timingFunction)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
 	return a
 }
@@ -175,12 +183,14 @@ func (a *Animation) WithCumulative(cumulative bool) *Animation {
 
 // Duration returns the duration of the animation in seconds. Defaults to 0.
 func (a *Animation) Duration() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("duration"))
 	return _r
 }
 
 // KeyPath returns the key-path describing the property to be animated for single-property animations, nil for animations targetting multiple nodes. defaults to nil. The key-path uses the KVC syntax. It's also possible to target a specific sub-node with the following syntax: /<node-name>.property1.property2.field    (field is optional, <node-name> is the name of the targeted node).
 func (a *Animation) KeyPath() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("keyPath"))
 	if _r == 0 {
 		return ""
@@ -190,72 +200,84 @@ func (a *Animation) KeyPath() string {
 
 // TimingFunction returns a timing function defining the pacing of the animation. Defaults to nil indicating linear pacing.
 func (a *Animation) TimingFunction() *TimingFunction {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("timingFunction"))
 	return TimingFunctionFromID(_r)
 }
 
 // BlendInDuration determines the receiver's blend-in duration. When the blendInDuration is greater than zero, the effect of the animation progressively increase from 0% to 100% during the specified duration.
 func (a *Animation) BlendInDuration() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("blendInDuration"))
 	return _r
 }
 
 // BlendOutDuration determines the receiver's blend-out duration. When the blendOutDuration is greater than zero, the effect of the animation progressively decrease from 100% to 0% at the end of the animation duration.
 func (a *Animation) BlendOutDuration() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("blendOutDuration"))
 	return _r
 }
 
 // IsRemovedOnCompletion reports whether when true, the animation is removed from the render tree once its active duration has passed. Defaults to true.
 func (a *Animation) IsRemovedOnCompletion() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isRemovedOnCompletion"))
 	return _r
 }
 
 // IsAppliedOnCompletion reports whether when true, the animation is applied to the model tree once its active duration has passed. Defaults to false.
 func (a *Animation) IsAppliedOnCompletion() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isAppliedOnCompletion"))
 	return _r
 }
 
 // RepeatCount returns the repeat count of the object. May be fractional. Defaults to 0.
 func (a *Animation) RepeatCount() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("repeatCount"))
 	return _r
 }
 
 // Autoreverses reports whether when true, the object plays backwards after playing forwards. Defaults to false.
 func (a *Animation) Autoreverses() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("autoreverses"))
 	return _r
 }
 
 // StartDelay returns the relative delay to start the animation, in relation to its parent animation if applicable. Defaults to 0. This property is bridged with CoreAnimations's beginTime. However, for top level animations, startDelay is relative to the current time (unlike CAAnimation's beginTime that is absolute). So if a CAAnimation has a non-zero beginTime, startDelay is initialized as caAnimation.beginTime - CACurrentMediaTime().
 func (a *Animation) StartDelay() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("startDelay"))
 	return _r
 }
 
 // TimeOffset returns additional offset in active local time. i.e. to convert from parent time tp to active local time t: t = (tp - begin) * speed + offset. Defaults to 0.
 func (a *Animation) TimeOffset() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("timeOffset"))
 	return _r
 }
 
 // FillsForward reports whether when true, the animation remains active after its active duration and evaluates to its end value. Defaults to false.
 func (a *Animation) FillsForward() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("fillsForward"))
 	return _r
 }
 
 // FillsBackward reports whether when true, the animation is active before its active duration and evaluates to its start value. Defaults to false.
 func (a *Animation) FillsBackward() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("fillsBackward"))
 	return _r
 }
 
 // UsesSceneTimeBase reports whether the receiver is evaluated using the scene time or the system time. Defaults to false. A scene-time based animation is evaluated using the "sceneTime" value of the renderer that renders the scene. The "sceneTime" base is typically used by players or editors that need to preview, edit and being able to change the evaluation time.
 func (a *Animation) UsesSceneTimeBase() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("usesSceneTimeBase"))
 	return _r
 }
@@ -264,18 +286,21 @@ func (a *Animation) UsesSceneTimeBase() bool {
 //
 // AnimationEvents returns the collection as a Go slice.
 func (a *Animation) AnimationEvents() []*AnimationEvent {
+	defer runtime.KeepAlive(a)
 	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("animationEvents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AnimationEvent { return AnimationEventFromID(_id) })
 }
 
 // IsAdditive reports whether when true the value specified by the animation will be "added" to the current presentation value of the property to produce the new presentation value. The addition function is type-dependent, e.g. for affine transforms the two matrices are concatenated. Defaults to false.
 func (a *Animation) IsAdditive() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isAdditive"))
 	return _r
 }
 
 // IsCumulative reports whether the `cumulative' property affects how repeating animations produce their result. If true then the current value of the animation is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle. If false, the value is simply the value calculated for the current repeat cycle. Defaults to false.
 func (a *Animation) IsCumulative() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isCumulative"))
 	return _r
 }

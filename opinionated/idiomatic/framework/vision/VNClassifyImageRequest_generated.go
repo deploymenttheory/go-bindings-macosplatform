@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -83,6 +84,7 @@ func (cir *ClassifyImageRequest) WithRevision(revision int) *ClassifyImageReques
 //
 // SupportedIdentifiers returns the collection as a Go slice.
 func (cir *ClassifyImageRequest) SupportedIdentifiers() (result []string, err error) {
+	defer runtime.KeepAlive(cir)
 	var _nsErr uintptr
 	_arr := objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("supportedIdentifiersAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

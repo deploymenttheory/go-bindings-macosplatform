@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func authorizationSecurityKeyPublicKeyCredentialProviderAdopt(id objc.ID) *Autho
 
 // Description returns the object's -description text.
 func (askpkcp *AuthorizationSecurityKeyPublicKeyCredentialProvider) Description() string {
+	defer runtime.KeepAlive(askpkcp)
 	return rt.Description(objref.IDOf(askpkcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (askpkcp *AuthorizationSecurityKeyPublicKeyCredentialProvider) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(askpkcp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(askpkcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (askpkcp *AuthorizationSecurityKeyPublicKeyCredentialProvider) IsKind(className string) bool {
+	defer runtime.KeepAlive(askpkcp)
 	return rt.IsKind(objref.IDOf(askpkcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (askpkcp *AuthorizationSecurityKeyPublicKeyCredentialProvider) String() string {
+	defer runtime.KeepAlive(askpkcp)
 	return rt.Description(objref.IDOf(askpkcp))
 }
 
@@ -74,19 +81,22 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialProviderWithRelyingPartyIdent
 }
 
 // CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID creates a registration request with a challenge, display name, and user ID.
-func (askpkcp *AuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID(challenge obj.Object, displayName string, name string, userID obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
-	_r := objc.Send[objc.ID](objref.IDOf(askpkcp), objc.RegisterName("createCredentialRegistrationRequestWithChallenge:displayName:name:userID:"), objref.IDOf(challenge), purego.NSString(displayName), purego.NSString(name), objref.IDOf(userID))
+func (askpkcp *AuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID(challenge []byte, displayName string, name string, userID []byte) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
+	defer runtime.KeepAlive(askpkcp)
+	_r := objc.Send[objc.ID](objref.IDOf(askpkcp), objc.RegisterName("createCredentialRegistrationRequestWithChallenge:displayName:name:userID:"), rt.BytesToNSData(challenge), purego.NSString(displayName), purego.NSString(name), rt.BytesToNSData(userID))
 	return AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestFromID(_r)
 }
 
 // CreateCredentialAssertionRequestWithChallenge creates an assertion request with a challenge.
-func (askpkcp *AuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialAssertionRequestWithChallenge(challenge obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
-	_r := objc.Send[objc.ID](objref.IDOf(askpkcp), objc.RegisterName("createCredentialAssertionRequestWithChallenge:"), objref.IDOf(challenge))
+func (askpkcp *AuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialAssertionRequestWithChallenge(challenge []byte) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
+	defer runtime.KeepAlive(askpkcp)
+	_r := objc.Send[objc.ID](objref.IDOf(askpkcp), objc.RegisterName("createCredentialAssertionRequestWithChallenge:"), rt.BytesToNSData(challenge))
 	return AuthorizationSecurityKeyPublicKeyCredentialAssertionRequestFromID(_r)
 }
 
 // RelyingPartyIdentifier returns the Relying Party identifier used for all requests created by this object.
 func (askpkcp *AuthorizationSecurityKeyPublicKeyCredentialProvider) RelyingPartyIdentifier() string {
+	defer runtime.KeepAlive(askpkcp)
 	_r := objc.Send[objc.ID](objref.IDOf(askpkcp), objc.RegisterName("relyingPartyIdentifier"))
 	if _r == 0 {
 		return ""

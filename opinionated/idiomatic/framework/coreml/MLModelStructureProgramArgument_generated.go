@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func modelStructureProgramArgumentAdopt(id objc.ID) *ModelStructureProgramArgume
 
 // Description returns the object's -description text.
 func (mspa *ModelStructureProgramArgument) Description() string {
+	defer runtime.KeepAlive(mspa)
 	return rt.Description(objref.IDOf(mspa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mspa *ModelStructureProgramArgument) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mspa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mspa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mspa *ModelStructureProgramArgument) IsKind(className string) bool {
+	defer runtime.KeepAlive(mspa)
 	return rt.IsKind(objref.IDOf(mspa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mspa *ModelStructureProgramArgument) String() string {
+	defer runtime.KeepAlive(mspa)
 	return rt.Description(objref.IDOf(mspa))
 }
 
@@ -76,6 +83,7 @@ func NewModelStructureProgramArgument() *ModelStructureProgramArgument {
 //
 // Bindings returns the collection as a Go slice.
 func (mspa *ModelStructureProgramArgument) Bindings() []*ModelStructureProgramBinding {
+	defer runtime.KeepAlive(mspa)
 	_arr := objc.Send[objc.ID](objref.IDOf(mspa), objc.RegisterName("bindings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructureProgramBinding { return ModelStructureProgramBindingFromID(_id) })
 }

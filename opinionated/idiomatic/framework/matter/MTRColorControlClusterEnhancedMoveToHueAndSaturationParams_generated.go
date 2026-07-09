@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRColorControlClusterEnhancedMoveToHueAndSaturationParamsAdopt(id objc.ID)
 
 // Description returns the object's -description text.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) Description() string {
+	defer runtime.KeepAlive(mcccemthasp)
 	return rt.Description(objref.IDOf(mcccemthasp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcccemthasp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcccemthasp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcccemthasp)
 	return rt.IsKind(objref.IDOf(mcccemthasp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) String() string {
+	defer runtime.KeepAlive(mcccemthasp)
 	return rt.Description(objref.IDOf(mcccemthasp))
 }
 
@@ -72,84 +80,98 @@ func NewMTRColorControlClusterEnhancedMoveToHueAndSaturationParams() *MTRColorCo
 
 // WithEnhancedHue sets the enhanced hue.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithEnhancedHue(enhancedHue obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
+	defer runtime.KeepAlive(enhancedHue)
 	objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("setEnhancedHue:"), objref.IDOf(enhancedHue))
 	return mcccemthasp
 }
 
 // WithSaturation sets the saturation.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithSaturation(saturation obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
+	defer runtime.KeepAlive(saturation)
 	objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("setSaturation:"), objref.IDOf(saturation))
 	return mcccemthasp
 }
 
 // WithTransitionTime sets the transition time.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
+	defer runtime.KeepAlive(transitionTime)
 	objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return mcccemthasp
 }
 
 // WithOptionsMask sets the options mask.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
+	defer runtime.KeepAlive(optionsMask)
 	objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mcccemthasp
 }
 
 // WithOptionsOverride sets the options override.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
+	defer runtime.KeepAlive(optionsOverride)
 	objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mcccemthasp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mcccemthasp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mcccemthasp
 }
 
 // EnhancedHue returns the enhanced hue.
-func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) EnhancedHue() obj.Object {
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) EnhancedHue() *foundation.Number {
+	defer runtime.KeepAlive(mcccemthasp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("enhancedHue"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Saturation returns the saturation.
-func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) Saturation() obj.Object {
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) Saturation() *foundation.Number {
+	defer runtime.KeepAlive(mcccemthasp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("saturation"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TransitionTime returns the transition time.
-func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) TransitionTime() obj.Object {
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) TransitionTime() *foundation.Number {
+	defer runtime.KeepAlive(mcccemthasp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("transitionTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // OptionsMask returns the options mask.
-func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) OptionsMask() obj.Object {
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) OptionsMask() *foundation.Number {
+	defer runtime.KeepAlive(mcccemthasp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("optionsMask"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // OptionsOverride returns the options override.
-func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) OptionsOverride() obj.Object {
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) OptionsOverride() *foundation.Number {
+	defer runtime.KeepAlive(mcccemthasp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("optionsOverride"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) TimedInvokeTimeoutMs() obj.Object {
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mcccemthasp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) ServerSideProcessingTimeout() obj.Object {
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mcccemthasp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

@@ -7,14 +7,15 @@ package videotoolbox
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
 // SupportedRevisions provides the collection of currently supported algorithms or configuration revisions for the class of configuration. A property you use to introspect at runtime which revisions are available for each configuration.
-func SupportedRevisions() obj.Object {
+func SupportedRevisions() *foundation.IndexSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("VTFrameRateConversionConfiguration")), objc.RegisterName("supportedRevisions"))
-	return obj.Wrap(_r)
+	return foundation.IndexSetFromID(_r)
 }
 
 // DefaultRevision provides the default revision of a specific algorithm or configuration.
@@ -42,9 +43,9 @@ func VTLowLatencyFrameInterpolationConfigurationIsSupported() bool {
 }
 
 // SupportedScaleFactorsForFrameWidthFrameHeight returns an array of supported scale factors values, or an empty list if the processor doesn’t support the dimensions.
-func SupportedScaleFactorsForFrameWidthFrameHeight(frameWidth int, frameHeight int) []obj.Object {
+func SupportedScaleFactorsForFrameWidthFrameHeight(frameWidth int, frameHeight int) []*foundation.Number {
 	_r := objc.Send[objc.ID](objc.ID(_class("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("supportedScaleFactorsForFrameWidth:frameHeight:"), frameWidth, frameHeight)
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *foundation.Number { return foundation.NumberFromID(_id) })
 }
 
 // MaximumDimensions returns maximum dimensions for a source frame for the processor.
@@ -66,9 +67,9 @@ func VTLowLatencySuperResolutionScalerConfigurationIsSupported() bool {
 }
 
 // VTMotionBlurConfigurationSupportedRevisions provides the collection of currently supported algorithms or configuration revisions for the class of configuration. A property you use to introspect at runtime which revisions are available for each configuration.
-func VTMotionBlurConfigurationSupportedRevisions() obj.Object {
+func VTMotionBlurConfigurationSupportedRevisions() *foundation.IndexSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("VTMotionBlurConfiguration")), objc.RegisterName("supportedRevisions"))
-	return obj.Wrap(_r)
+	return foundation.IndexSetFromID(_r)
 }
 
 // VTMotionBlurConfigurationDefaultRevision provides the default revision of a specific algorithm or configuration.
@@ -90,9 +91,9 @@ func VTMotionBlurConfigurationProcessorSupported() uint8 {
 }
 
 // VTOpticalFlowConfigurationSupportedRevisions provides the collection of currently supported algorithms or configuration revisions for the class of configuration. A property you use to introspect at runtime which revisions are available for each configuration.
-func VTOpticalFlowConfigurationSupportedRevisions() obj.Object {
+func VTOpticalFlowConfigurationSupportedRevisions() *foundation.IndexSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("VTOpticalFlowConfiguration")), objc.RegisterName("supportedRevisions"))
-	return obj.Wrap(_r)
+	return foundation.IndexSetFromID(_r)
 }
 
 // VTOpticalFlowConfigurationDefaultRevision provides the default revision of a specific algorithm or configuration.
@@ -114,9 +115,9 @@ func VTOpticalFlowConfigurationProcessorSupported() uint8 {
 }
 
 // VTSuperResolutionScalerConfigurationSupportedRevisions provides the collection of currently supported algorithms or configuration revisions for the class of configuration. A property you use to introspect at runtime which revisions are available for each configuration.
-func VTSuperResolutionScalerConfigurationSupportedRevisions() obj.Object {
+func VTSuperResolutionScalerConfigurationSupportedRevisions() *foundation.IndexSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("VTSuperResolutionScalerConfiguration")), objc.RegisterName("supportedRevisions"))
-	return obj.Wrap(_r)
+	return foundation.IndexSetFromID(_r)
 }
 
 // VTSuperResolutionScalerConfigurationDefaultRevision provides the default revision of a specific algorithm or configuration.

@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -68,18 +70,21 @@ func (ul *UpsampleLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Upsamp
 //
 // Shape returns the collection as a Go slice.
 func (ul *UpsampleLayer) Shape() []obj.Object {
+	defer runtime.KeepAlive(ul)
 	_arr := objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("shape"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SampleMode returns the sampling mode to use when performing the upsample.
 func (ul *UpsampleLayer) SampleMode() SampleMode {
+	defer runtime.KeepAlive(ul)
 	_r := objc.Send[SampleMode](objref.IDOf(ul), objc.RegisterName("sampleMode"))
 	return _r
 }
 
 // AlignsCorners reports whether a boolean that specifies whether the corner pixels of the source and result tensors are aligned. If True, the corner pixels of the source and result tensors are aligned, and thus preserving the values at those pixels. This only has effect when mode is 'bilinear'. Default is false.
 func (ul *UpsampleLayer) AlignsCorners() bool {
+	defer runtime.KeepAlive(ul)
 	_r := objc.Send[bool](objref.IDOf(ul), objc.RegisterName("alignsCorners"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -64,11 +66,14 @@ func (ta *TemporalAA) WithLabel(label string) *TemporalAA {
 
 // EncodeWithCoder encodes with coder.
 func (ta *TemporalAA) EncodeWithCoder(coder obj.Object) {
+	defer runtime.KeepAlive(ta)
+	defer runtime.KeepAlive(coder)
 	objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }
 
 // BlendFactor returns how much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
 func (ta *TemporalAA) BlendFactor() float32 {
+	defer runtime.KeepAlive(ta)
 	_r := objc.Send[float32](objref.IDOf(ta), objc.RegisterName("blendFactor"))
 	return _r
 }

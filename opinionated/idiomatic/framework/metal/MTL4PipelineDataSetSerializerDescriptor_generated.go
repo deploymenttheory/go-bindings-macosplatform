@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTL4PipelineDataSetSerializerDescriptorAdopt(id objc.ID) *MTL4PipelineDataS
 
 // Description returns the object's -description text.
 func (mpdssd *MTL4PipelineDataSetSerializerDescriptor) Description() string {
+	defer runtime.KeepAlive(mpdssd)
 	return rt.Description(objref.IDOf(mpdssd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mpdssd *MTL4PipelineDataSetSerializerDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mpdssd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mpdssd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mpdssd *MTL4PipelineDataSetSerializerDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(mpdssd)
 	return rt.IsKind(objref.IDOf(mpdssd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mpdssd *MTL4PipelineDataSetSerializerDescriptor) String() string {
+	defer runtime.KeepAlive(mpdssd)
 	return rt.Description(objref.IDOf(mpdssd))
 }
 
@@ -80,6 +87,7 @@ func (mpdssd *MTL4PipelineDataSetSerializerDescriptor) WithConfiguration(configu
 
 // Configuration returns the configuration.
 func (mpdssd *MTL4PipelineDataSetSerializerDescriptor) Configuration() MTL4PipelineDataSetSerializerConfiguration {
+	defer runtime.KeepAlive(mpdssd)
 	_r := objc.Send[MTL4PipelineDataSetSerializerConfiguration](objref.IDOf(mpdssd), objc.RegisterName("configuration"))
 	return _r
 }

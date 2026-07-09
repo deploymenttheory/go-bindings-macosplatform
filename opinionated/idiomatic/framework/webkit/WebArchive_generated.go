@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,59 +49,71 @@ func webArchiveAdopt(id objc.ID) *WebArchive {
 
 // Description returns the object's -description text.
 func (wa *WebArchive) Description() string {
+	defer runtime.KeepAlive(wa)
 	return rt.Description(objref.IDOf(wa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wa *WebArchive) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wa *WebArchive) IsKind(className string) bool {
+	defer runtime.KeepAlive(wa)
 	return rt.IsKind(objref.IDOf(wa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wa *WebArchive) String() string {
+	defer runtime.KeepAlive(wa)
 	return rt.Description(objref.IDOf(wa))
 }
 
 // NewWebArchiveWithMainResourceSubresourcesSubframeArchives initializes the receiver with a resource and optional subresources and subframe archives..
 func NewWebArchiveWithMainResourceSubresourcesSubframeArchives(mainResource *WebResource, subresources obj.Object, subframeArchives obj.Object) *WebArchive {
+	defer runtime.KeepAlive(mainResource)
+	defer runtime.KeepAlive(subresources)
+	defer runtime.KeepAlive(subframeArchives)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("WebArchive")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMainResource:subresources:subframeArchives:"), objref.IDOf(mainResource), objref.IDOf(subresources), objref.IDOf(subframeArchives))
 	return webArchiveAdopt(_id)
 }
 
 // NewWebArchiveWithData initializes and returns the receiver, specifying the initial content data.
-func NewWebArchiveWithData(data obj.Object) *WebArchive {
+func NewWebArchiveWithData(data []byte) *WebArchive {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("WebArchive")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), rt.BytesToNSData(data))
 	return webArchiveAdopt(_id)
 }
 
 // MainResource returns the main resource of the archive.
 func (wa *WebArchive) MainResource() *WebResource {
+	defer runtime.KeepAlive(wa)
 	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("mainResource"))
 	return WebResourceFromID(_r)
 }
 
 // Subresources returns the subresource of the archive (can be nil).
 func (wa *WebArchive) Subresources() obj.Object {
+	defer runtime.KeepAlive(wa)
 	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("subresources"))
 	return obj.Wrap(_r)
 }
 
 // SubframeArchives returns the archives representing the subframes of the archive (can be nil).
 func (wa *WebArchive) SubframeArchives() obj.Object {
+	defer runtime.KeepAlive(wa)
 	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("subframeArchives"))
 	return obj.Wrap(_r)
 }
 
 // Data returns the data representation of the archive. The data returned by this method can be used to save a web archive to a file or to place a web archive on the pasteboard using WebArchivePboardType. To create a WebArchive using the returned data, call initWithData:.
-func (wa *WebArchive) Data() obj.Object {
+func (wa *WebArchive) Data() []byte {
+	defer runtime.KeepAlive(wa)
 	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func wKPDFConfigurationAdopt(id objc.ID) *WKPDFConfiguration {
 
 // Description returns the object's -description text.
 func (wc *WKPDFConfiguration) Description() string {
+	defer runtime.KeepAlive(wc)
 	return rt.Description(objref.IDOf(wc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wc *WKPDFConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wc *WKPDFConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(wc)
 	return rt.IsKind(objref.IDOf(wc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wc *WKPDFConfiguration) String() string {
+	defer runtime.KeepAlive(wc)
 	return rt.Description(objref.IDOf(wc))
 }
 
@@ -97,6 +104,7 @@ func (wc *WKPDFConfiguration) WithAllowTransparentBackground(allowTransparentBac
 
 // Rect returns the rect to capture in web page coordinates If the rect is set to the null rect, the bounds of the currently displayed web page will be used. The initial value is the null rect.
 func (wc *WKPDFConfiguration) Rect() corefoundation.CGRect {
+	defer runtime.KeepAlive(wc)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -110,6 +118,7 @@ func (wc *WKPDFConfiguration) Rect() corefoundation.CGRect {
 
 // AllowTransparentBackground reports whether the PDF should allow transparent backgrounds. The default value is `NO`.
 func (wc *WKPDFConfiguration) AllowTransparentBackground() bool {
+	defer runtime.KeepAlive(wc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRCommissionerControlClusterCommissioningRequestResultEventAdopt(id objc.I
 
 // Description returns the object's -description text.
 func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) Description() string {
+	defer runtime.KeepAlive(mccccrre)
 	return rt.Description(objref.IDOf(mccccrre))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mccccrre)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mccccrre), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mccccrre)
 	return rt.IsKind(objref.IDOf(mccccrre), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) String() string {
+	defer runtime.KeepAlive(mccccrre)
 	return rt.Description(objref.IDOf(mccccrre))
 }
 
@@ -72,48 +80,56 @@ func NewMTRCommissionerControlClusterCommissioningRequestResultEvent() *MTRCommi
 
 // WithRequestID sets the request ID.
 func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) WithRequestID(requestID obj.Object) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
+	defer runtime.KeepAlive(requestID)
 	objc.Send[objc.ID](objref.IDOf(mccccrre), objc.RegisterName("setRequestID:"), objref.IDOf(requestID))
 	return mccccrre
 }
 
 // WithClientNodeID sets the client node ID.
 func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) WithClientNodeID(clientNodeID obj.Object) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
+	defer runtime.KeepAlive(clientNodeID)
 	objc.Send[objc.ID](objref.IDOf(mccccrre), objc.RegisterName("setClientNodeID:"), objref.IDOf(clientNodeID))
 	return mccccrre
 }
 
 // WithStatusCode sets the status code.
 func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) WithStatusCode(statusCode obj.Object) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
+	defer runtime.KeepAlive(statusCode)
 	objc.Send[objc.ID](objref.IDOf(mccccrre), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
 	return mccccrre
 }
 
 // WithFabricIndex sets the fabric index.
 func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) WithFabricIndex(fabricIndex obj.Object) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(mccccrre), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mccccrre
 }
 
 // RequestID returns the request ID.
-func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) RequestID() obj.Object {
+func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) RequestID() *foundation.Number {
+	defer runtime.KeepAlive(mccccrre)
 	_r := objc.Send[objc.ID](objref.IDOf(mccccrre), objc.RegisterName("requestID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ClientNodeID returns the client node ID.
-func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) ClientNodeID() obj.Object {
+func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) ClientNodeID() *foundation.Number {
+	defer runtime.KeepAlive(mccccrre)
 	_r := objc.Send[objc.ID](objref.IDOf(mccccrre), objc.RegisterName("clientNodeID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StatusCode returns the status code.
-func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) StatusCode() obj.Object {
+func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) StatusCode() *foundation.Number {
+	defer runtime.KeepAlive(mccccrre)
 	_r := objc.Send[objc.ID](objref.IDOf(mccccrre), objc.RegisterName("statusCode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // FabricIndex returns the fabric index.
-func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) FabricIndex() obj.Object {
+func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) FabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(mccccrre)
 	_r := objc.Send[objc.ID](objref.IDOf(mccccrre), objc.RegisterName("fabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

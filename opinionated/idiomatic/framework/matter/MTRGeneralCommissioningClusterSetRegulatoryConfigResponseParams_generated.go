@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsAdopt(id obj
 
 // Description returns the object's -description text.
 func (mgccsrcrp *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) Description() string {
+	defer runtime.KeepAlive(mgccsrcrp)
 	return rt.Description(objref.IDOf(mgccsrcrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mgccsrcrp *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mgccsrcrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mgccsrcrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mgccsrcrp *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mgccsrcrp)
 	return rt.IsKind(objref.IDOf(mgccsrcrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mgccsrcrp *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) String() string {
+	defer runtime.KeepAlive(mgccsrcrp)
 	return rt.Description(objref.IDOf(mgccsrcrp))
 }
 
-// NewMTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsWithResponseValueError initialize an MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-func NewMTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, err error) {
+// NewMTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsWithResponseValue initialize an MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,6 +87,7 @@ func NewMTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsWithRespo
 
 // WithErrorCode sets the error code.
 func (mgccsrcrp *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) WithErrorCode(errorCode obj.Object) *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams {
+	defer runtime.KeepAlive(errorCode)
 	objc.Send[objc.ID](objref.IDOf(mgccsrcrp), objc.RegisterName("setErrorCode:"), objref.IDOf(errorCode))
 	return mgccsrcrp
 }
@@ -92,18 +100,21 @@ func (mgccsrcrp *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mgccsrcrp *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mgccsrcrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mgccsrcrp
 }
 
 // ErrorCode returns the error code.
-func (mgccsrcrp *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) ErrorCode() obj.Object {
+func (mgccsrcrp *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) ErrorCode() *foundation.Number {
+	defer runtime.KeepAlive(mgccsrcrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgccsrcrp), objc.RegisterName("errorCode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DebugText returns the debug text.
 func (mgccsrcrp *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) DebugText() string {
+	defer runtime.KeepAlive(mgccsrcrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgccsrcrp), objc.RegisterName("debugText"))
 	if _r == 0 {
 		return ""
@@ -112,7 +123,8 @@ func (mgccsrcrp *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mgccsrcrp *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) TimedInvokeTimeoutMs() obj.Object {
+func (mgccsrcrp *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mgccsrcrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgccsrcrp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

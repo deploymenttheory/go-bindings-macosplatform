@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func resourceViewPoolDescriptorAdopt(id objc.ID) *ResourceViewPoolDescriptor {
 
 // Description returns the object's -description text.
 func (rvpd *ResourceViewPoolDescriptor) Description() string {
+	defer runtime.KeepAlive(rvpd)
 	return rt.Description(objref.IDOf(rvpd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rvpd *ResourceViewPoolDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rvpd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rvpd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rvpd *ResourceViewPoolDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(rvpd)
 	return rt.IsKind(objref.IDOf(rvpd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rvpd *ResourceViewPoolDescriptor) String() string {
+	defer runtime.KeepAlive(rvpd)
 	return rt.Description(objref.IDOf(rvpd))
 }
 
@@ -86,12 +93,14 @@ func (rvpd *ResourceViewPoolDescriptor) WithLabel(label string) *ResourceViewPoo
 
 // ResourceViewCount returns configures the number of resource views with which Metal creates the resource view pool.
 func (rvpd *ResourceViewPoolDescriptor) ResourceViewCount() int {
+	defer runtime.KeepAlive(rvpd)
 	_r := objc.Send[int](objref.IDOf(rvpd), objc.RegisterName("resourceViewCount"))
 	return _r
 }
 
 // Label returns assigns an optional label you to the resource view pool for debugging purposes.
 func (rvpd *ResourceViewPoolDescriptor) Label() string {
+	defer runtime.KeepAlive(rvpd)
 	_r := objc.Send[objc.ID](objref.IDOf(rvpd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

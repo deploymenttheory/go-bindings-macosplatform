@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,27 +47,34 @@ func materialPropertyConnectionAdopt(id objc.ID) *MaterialPropertyConnection {
 
 // Description returns the object's -description text.
 func (mpc *MaterialPropertyConnection) Description() string {
+	defer runtime.KeepAlive(mpc)
 	return rt.Description(objref.IDOf(mpc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mpc *MaterialPropertyConnection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mpc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mpc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mpc *MaterialPropertyConnection) IsKind(className string) bool {
+	defer runtime.KeepAlive(mpc)
 	return rt.IsKind(objref.IDOf(mpc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mpc *MaterialPropertyConnection) String() string {
+	defer runtime.KeepAlive(mpc)
 	return rt.Description(objref.IDOf(mpc))
 }
 
 // NewMaterialPropertyConnectionWithOutputInput connects the output to the input
 func NewMaterialPropertyConnectionWithOutputInput(output *MaterialProperty, input *MaterialProperty) *MaterialPropertyConnection {
+	defer runtime.KeepAlive(output)
+	defer runtime.KeepAlive(input)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialPropertyConnection")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOutput:input:"), objref.IDOf(output), objref.IDOf(input))
 	return materialPropertyConnectionAdopt(_id)
@@ -73,12 +82,14 @@ func NewMaterialPropertyConnectionWithOutputInput(output *MaterialProperty, inpu
 
 // Output returns the output.
 func (mpc *MaterialPropertyConnection) Output() *MaterialProperty {
+	defer runtime.KeepAlive(mpc)
 	_r := objc.Send[objc.ID](objref.IDOf(mpc), objc.RegisterName("output"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Input returns the input.
 func (mpc *MaterialPropertyConnection) Input() *MaterialProperty {
+	defer runtime.KeepAlive(mpc)
 	_r := objc.Send[objc.ID](objref.IDOf(mpc), objc.RegisterName("input"))
 	return MaterialPropertyFromID(_r)
 }

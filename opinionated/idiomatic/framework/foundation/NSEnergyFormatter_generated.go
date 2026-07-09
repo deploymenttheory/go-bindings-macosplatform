@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,6 +58,7 @@ func NewEnergyFormatter() *EnergyFormatter {
 
 // WithNumberFormatter sets the number formatter.
 func (ef *EnergyFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *EnergyFormatter {
+	defer runtime.KeepAlive(numberFormatter)
 	objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 	return ef
 }
@@ -79,13 +82,14 @@ func (ef *EnergyFormatter) WithObservationInfo(observationInfo unsafe.Pointer) *
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ef *EnergyFormatter) WithScriptingProperties(scriptingProperties obj.Object) *EnergyFormatter {
-	objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ef *EnergyFormatter) WithScriptingProperties(scriptingProperties map[string]obj.Object) *EnergyFormatter {
+	objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ef
 }
 
 // StringFromValueUnit wraps the corresponding Objective-C method.
 func (ef *EnergyFormatter) StringFromValueUnit(value float64, unit EnergyFormatterUnit) string {
+	defer runtime.KeepAlive(ef)
 	_r := objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("stringFromValue:unit:"), value, unit)
 	if _r == 0 {
 		return ""
@@ -95,6 +99,7 @@ func (ef *EnergyFormatter) StringFromValueUnit(value float64, unit EnergyFormatt
 
 // StringFromJoules wraps the corresponding Objective-C method.
 func (ef *EnergyFormatter) StringFromJoules(numberInJoules float64) string {
+	defer runtime.KeepAlive(ef)
 	_r := objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("stringFromJoules:"), numberInJoules)
 	if _r == 0 {
 		return ""
@@ -104,6 +109,7 @@ func (ef *EnergyFormatter) StringFromJoules(numberInJoules float64) string {
 
 // UnitStringFromValueUnit wraps the corresponding Objective-C method.
 func (ef *EnergyFormatter) UnitStringFromValueUnit(value float64, unit EnergyFormatterUnit) string {
+	defer runtime.KeepAlive(ef)
 	_r := objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("unitStringFromValue:unit:"), value, unit)
 	if _r == 0 {
 		return ""
@@ -113,6 +119,7 @@ func (ef *EnergyFormatter) UnitStringFromValueUnit(value float64, unit EnergyFor
 
 // UnitStringFromJoulesUsedUnit wraps the corresponding Objective-C method.
 func (ef *EnergyFormatter) UnitStringFromJoulesUsedUnit(numberInJoules float64) (result string, unitp EnergyFormatterUnit) {
+	defer runtime.KeepAlive(ef)
 	var _out0 EnergyFormatterUnit
 	_r := objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("unitStringFromJoules:usedUnit:"), numberInJoules, unsafe.Pointer(&_out0))
 	_v := ""
@@ -124,18 +131,21 @@ func (ef *EnergyFormatter) UnitStringFromJoulesUsedUnit(numberInJoules float64) 
 
 // NumberFormatter returns the number formatter.
 func (ef *EnergyFormatter) NumberFormatter() *NumberFormatter {
+	defer runtime.KeepAlive(ef)
 	_r := objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("numberFormatter"))
 	return NumberFormatterFromID(_r)
 }
 
 // UnitStyle returns the unit style.
 func (ef *EnergyFormatter) UnitStyle() FormattingUnitStyle {
+	defer runtime.KeepAlive(ef)
 	_r := objc.Send[FormattingUnitStyle](objref.IDOf(ef), objc.RegisterName("unitStyle"))
 	return _r
 }
 
 // IsForFoodEnergyUse reports whether the object is for food energy use.
 func (ef *EnergyFormatter) IsForFoodEnergyUse() bool {
+	defer runtime.KeepAlive(ef)
 	_r := objc.Send[bool](objref.IDOf(ef), objc.RegisterName("isForFoodEnergyUse"))
 	return _r
 }

@@ -5,10 +5,13 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -62,6 +65,7 @@ func NewSK3DNodeWithViewportSize(viewportSize corefoundation.CGSize) *SK3DNode {
 
 // NewSK3DNodeWithCoder tells you when to initialize a 3D node that has been unarchived.
 func NewSK3DNodeWithCoder(aDecoder obj.Object) *SK3DNode {
+	defer runtime.KeepAlive(aDecoder)
 	var _mainthread0 *SK3DNode
 	purego.Main(func() {
 		_mainthread0 = func() *SK3DNode {
@@ -83,6 +87,7 @@ func (sdn *SK3DNode) WithViewportSize(viewportSize corefoundation.CGSize) *SK3DN
 
 // WithScnScene sets the SceneKit scene to render.
 func (sdn *SK3DNode) WithScnScene(scnScene obj.Object) *SK3DNode {
+	defer runtime.KeepAlive(scnScene)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setScnScene:"), objref.IDOf(scnScene))
 	})
@@ -115,6 +120,7 @@ func (sdn *SK3DNode) WithLoops(loops bool) *SK3DNode {
 
 // WithPointOfView sets the Scene Kit node from which the scene’s contents are viewed when rendered.
 func (sdn *SK3DNode) WithPointOfView(pointOfView obj.Object) *SK3DNode {
+	defer runtime.KeepAlive(pointOfView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setPointOfView:"), objref.IDOf(pointOfView))
 	})
@@ -219,6 +225,7 @@ func (sdn *SK3DNode) WithName(name string) *SK3DNode {
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (sdn *SK3DNode) WithPhysicsBody(physicsBody *PhysicsBody) *SK3DNode {
+	defer runtime.KeepAlive(physicsBody)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	})
@@ -227,6 +234,7 @@ func (sdn *SK3DNode) WithPhysicsBody(physicsBody *PhysicsBody) *SK3DNode {
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (sdn *SK3DNode) WithUserData(userData obj.Object) *SK3DNode {
+	defer runtime.KeepAlive(userData)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	})
@@ -235,6 +243,7 @@ func (sdn *SK3DNode) WithUserData(userData obj.Object) *SK3DNode {
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (sdn *SK3DNode) WithReachConstraints(reachConstraints *ReachConstraints) *SK3DNode {
+	defer runtime.KeepAlive(reachConstraints)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	})
@@ -251,9 +260,9 @@ func (sdn *SK3DNode) WithConstraints(items ...*Constraint) *SK3DNode {
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
-func (sdn *SK3DNode) WithAttributeValues(attributeValues obj.Object) *SK3DNode {
+func (sdn *SK3DNode) WithAttributeValues(attributeValues map[string]*AttributeValue) *SK3DNode {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAttributeValues:"), rt.MapToDict(attributeValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *AttributeValue) objc.ID { return objref.IDOf(_v) }))
 	})
 	return sdn
 }
@@ -300,6 +309,7 @@ func (sdn *SK3DNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CG
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (sdn *SK3DNode) WithAccessibilityParent(accessibilityParent obj.Object) *SK3DNode {
+	defer runtime.KeepAlive(accessibilityParent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	})
@@ -331,11 +341,12 @@ func (sdn *SK3DNode) WithAccessibilityEnabled(accessibilityEnabled bool) *SK3DNo
 }
 
 // HitTestOptions searches the Scene Kit scene for objects corresponding to a point in the rendered image.
-func (sdn *SK3DNode) HitTestOptions(point corefoundation.CGPoint, options obj.Object) []obj.Object {
+func (sdn *SK3DNode) HitTestOptions(point corefoundation.CGPoint, options map[string]obj.Object) []obj.Object {
+	defer runtime.KeepAlive(sdn)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
-			_r := objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("hitTest:options:"), point, objref.IDOf(options))
+			_r := objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("hitTest:options:"), point, rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 			return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 		}()
 	})
@@ -345,6 +356,7 @@ func (sdn *SK3DNode) HitTestOptions(point corefoundation.CGPoint, options obj.Ob
 
 // ViewportSize returns the viewport size that the 3D content will be rendered with
 func (sdn *SK3DNode) ViewportSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(sdn)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -358,6 +370,7 @@ func (sdn *SK3DNode) ViewportSize() corefoundation.CGSize {
 
 // ScnScene returns a SceneKit scene
 func (sdn *SK3DNode) ScnScene() obj.Object {
+	defer runtime.KeepAlive(sdn)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -371,6 +384,7 @@ func (sdn *SK3DNode) ScnScene() obj.Object {
 
 // SceneTime specifies the current time to display the scene.
 func (sdn *SK3DNode) SceneTime() float64 {
+	defer runtime.KeepAlive(sdn)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -384,6 +398,7 @@ func (sdn *SK3DNode) SceneTime() float64 {
 
 // IsPlaying reports whether the scene is playing.
 func (sdn *SK3DNode) IsPlaying() bool {
+	defer runtime.KeepAlive(sdn)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -397,6 +412,7 @@ func (sdn *SK3DNode) IsPlaying() bool {
 
 // Loops reports whether the receiver restarts playback when it reaches the end of its content. Default: true. true when the receiver restarts playback when it finishes.
 func (sdn *SK3DNode) Loops() bool {
+	defer runtime.KeepAlive(sdn)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -410,6 +426,7 @@ func (sdn *SK3DNode) Loops() bool {
 
 // PointOfView specifies the point of view used to render the scene. A point of view must have either a camera or a spot light attached.
 func (sdn *SK3DNode) PointOfView() obj.Object {
+	defer runtime.KeepAlive(sdn)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -423,6 +440,7 @@ func (sdn *SK3DNode) PointOfView() obj.Object {
 
 // AutoenablesDefaultLighting reports whether the receiver should automatically light up scenes that have no light source. The default is false. When enabled, a diffuse light is automatically added and placed while rendering scenes that have no light or only ambient lights.
 func (sdn *SK3DNode) AutoenablesDefaultLighting() bool {
+	defer runtime.KeepAlive(sdn)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

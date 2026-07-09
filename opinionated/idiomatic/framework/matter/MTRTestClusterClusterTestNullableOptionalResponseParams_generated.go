@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,30 +54,35 @@ func NewMTRTestClusterClusterTestNullableOptionalResponseParams() *MTRTestCluste
 
 // WithWasPresent sets the was present.
 func (mtcctnorp *MTRTestClusterClusterTestNullableOptionalResponseParams) WithWasPresent(wasPresent obj.Object) *MTRTestClusterClusterTestNullableOptionalResponseParams {
+	defer runtime.KeepAlive(wasPresent)
 	objc.Send[objc.ID](objref.IDOf(mtcctnorp), objc.RegisterName("setWasPresent:"), objref.IDOf(wasPresent))
 	return mtcctnorp
 }
 
 // WithWasNull sets the was null.
 func (mtcctnorp *MTRTestClusterClusterTestNullableOptionalResponseParams) WithWasNull(wasNull obj.Object) *MTRTestClusterClusterTestNullableOptionalResponseParams {
+	defer runtime.KeepAlive(wasNull)
 	objc.Send[objc.ID](objref.IDOf(mtcctnorp), objc.RegisterName("setWasNull:"), objref.IDOf(wasNull))
 	return mtcctnorp
 }
 
 // WithValue sets the value.
 func (mtcctnorp *MTRTestClusterClusterTestNullableOptionalResponseParams) WithValue(value obj.Object) *MTRTestClusterClusterTestNullableOptionalResponseParams {
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(mtcctnorp), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mtcctnorp
 }
 
 // WithOriginalValue sets the original value.
 func (mtcctnorp *MTRTestClusterClusterTestNullableOptionalResponseParams) WithOriginalValue(originalValue obj.Object) *MTRTestClusterClusterTestNullableOptionalResponseParams {
+	defer runtime.KeepAlive(originalValue)
 	objc.Send[objc.ID](objref.IDOf(mtcctnorp), objc.RegisterName("setOriginalValue:"), objref.IDOf(originalValue))
 	return mtcctnorp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mtcctnorp *MTRTestClusterClusterTestNullableOptionalResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestNullableOptionalResponseParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mtcctnorp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mtcctnorp
 }

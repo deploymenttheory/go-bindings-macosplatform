@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,35 @@ func trainTripAdopt(id objc.ID) *TrainTrip {
 
 // Description returns the object's -description text.
 func (tt *TrainTrip) Description() string {
+	defer runtime.KeepAlive(tt)
 	return rt.Description(objref.IDOf(tt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tt *TrainTrip) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tt *TrainTrip) IsKind(className string) bool {
+	defer runtime.KeepAlive(tt)
 	return rt.IsKind(objref.IDOf(tt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tt *TrainTrip) String() string {
+	defer runtime.KeepAlive(tt)
 	return rt.Description(objref.IDOf(tt))
 }
 
 // NewTrainTripWithProviderTrainNameTrainNumberTripDurationDepartureStationLocationDeparturePlatformArrivalStationLocationArrivalPlatform creates a new train trip with the specified contents and attributes.
 func NewTrainTripWithProviderTrainNameTrainNumberTripDurationDepartureStationLocationDeparturePlatformArrivalStationLocationArrivalPlatform(provider string, trainName string, trainNumber string, tripDuration *DateComponentsRange, departureStationLocation obj.Object, departurePlatform string, arrivalStationLocation obj.Object, arrivalPlatform string) *TrainTrip {
+	defer runtime.KeepAlive(tripDuration)
+	defer runtime.KeepAlive(departureStationLocation)
+	defer runtime.KeepAlive(arrivalStationLocation)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INTrainTrip")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvider:trainName:trainNumber:tripDuration:departureStationLocation:departurePlatform:arrivalStationLocation:arrivalPlatform:"), purego.NSString(provider), purego.NSString(trainName), purego.NSString(trainNumber), objref.IDOf(tripDuration), objref.IDOf(departureStationLocation), purego.NSString(departurePlatform), objref.IDOf(arrivalStationLocation), purego.NSString(arrivalPlatform))
 	return trainTripAdopt(_id)
@@ -75,6 +85,7 @@ func NewTrainTripWithProviderTrainNameTrainNumberTripDurationDepartureStationLoc
 
 // Provider returns the provider.
 func (tt *TrainTrip) Provider() string {
+	defer runtime.KeepAlive(tt)
 	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("provider"))
 	if _r == 0 {
 		return ""
@@ -84,6 +95,7 @@ func (tt *TrainTrip) Provider() string {
 
 // TrainName returns the train name.
 func (tt *TrainTrip) TrainName() string {
+	defer runtime.KeepAlive(tt)
 	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("trainName"))
 	if _r == 0 {
 		return ""
@@ -93,6 +105,7 @@ func (tt *TrainTrip) TrainName() string {
 
 // TrainNumber returns the train number.
 func (tt *TrainTrip) TrainNumber() string {
+	defer runtime.KeepAlive(tt)
 	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("trainNumber"))
 	if _r == 0 {
 		return ""
@@ -102,18 +115,21 @@ func (tt *TrainTrip) TrainNumber() string {
 
 // TripDuration returns the trip duration.
 func (tt *TrainTrip) TripDuration() *DateComponentsRange {
+	defer runtime.KeepAlive(tt)
 	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("tripDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
 // DepartureStationLocation returns the departure station location.
 func (tt *TrainTrip) DepartureStationLocation() obj.Object {
+	defer runtime.KeepAlive(tt)
 	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("departureStationLocation"))
 	return obj.Wrap(_r)
 }
 
 // DeparturePlatform returns the departure platform.
 func (tt *TrainTrip) DeparturePlatform() string {
+	defer runtime.KeepAlive(tt)
 	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("departurePlatform"))
 	if _r == 0 {
 		return ""
@@ -123,12 +139,14 @@ func (tt *TrainTrip) DeparturePlatform() string {
 
 // ArrivalStationLocation returns the arrival station location.
 func (tt *TrainTrip) ArrivalStationLocation() obj.Object {
+	defer runtime.KeepAlive(tt)
 	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("arrivalStationLocation"))
 	return obj.Wrap(_r)
 }
 
 // ArrivalPlatform returns the arrival platform.
 func (tt *TrainTrip) ArrivalPlatform() string {
+	defer runtime.KeepAlive(tt)
 	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("arrivalPlatform"))
 	if _r == 0 {
 		return ""

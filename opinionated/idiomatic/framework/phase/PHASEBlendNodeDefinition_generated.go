@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func blendNodeDefinitionAdopt(id objc.ID) *BlendNodeDefinition {
 
 // NewBlendNodeDefinitionWithBlendMetaParameterDefinitionIdentifier creates a named blend node with a maxiumum blend range value.
 func NewBlendNodeDefinitionWithBlendMetaParameterDefinitionIdentifier(blendMetaParameterDefinition *NumberMetaParameterDefinition, identifier string) *BlendNodeDefinition {
+	defer runtime.KeepAlive(blendMetaParameterDefinition)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEBlendNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBlendMetaParameterDefinition:identifier:"), objref.IDOf(blendMetaParameterDefinition), purego.NSString(identifier))
 	return blendNodeDefinitionAdopt(_id)
@@ -54,6 +57,7 @@ func NewBlendNodeDefinitionWithBlendMetaParameterDefinitionIdentifier(blendMetaP
 
 // NewBlendNodeDefinitionWithBlendMetaParameterDefinition creates a blend node with a maxiumum blend range value.
 func NewBlendNodeDefinitionWithBlendMetaParameterDefinition(blendMetaParameterDefinition *NumberMetaParameterDefinition) *BlendNodeDefinition {
+	defer runtime.KeepAlive(blendMetaParameterDefinition)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEBlendNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBlendMetaParameterDefinition:"), objref.IDOf(blendMetaParameterDefinition))
 	return blendNodeDefinitionAdopt(_id)
@@ -61,6 +65,7 @@ func NewBlendNodeDefinitionWithBlendMetaParameterDefinition(blendMetaParameterDe
 
 // NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinitionIdentifier creates a named blend node for spatial audio output.
 func NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinitionIdentifier(spatialMixerDefinition *SpatialMixerDefinition, identifier string) *BlendNodeDefinition {
+	defer runtime.KeepAlive(spatialMixerDefinition)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEBlendNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initDistanceBlendWithSpatialMixerDefinition:identifier:"), objref.IDOf(spatialMixerDefinition), purego.NSString(identifier))
 	return blendNodeDefinitionAdopt(_id)
@@ -68,6 +73,7 @@ func NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinitionIdentifier(spa
 
 // NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinition creates a blend node for spatial audio output.
 func NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinition(spatialMixerDefinition *SpatialMixerDefinition) *BlendNodeDefinition {
+	defer runtime.KeepAlive(spatialMixerDefinition)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEBlendNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initDistanceBlendWithSpatialMixerDefinition:"), objref.IDOf(spatialMixerDefinition))
 	return blendNodeDefinitionAdopt(_id)
@@ -75,32 +81,43 @@ func NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinition(spatialMixerD
 
 // AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree adds a child node that blends below a given value.
 func (bnd *BlendNodeDefinition) AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType CurveType, subtree *SoundEventNodeDefinition) {
+	defer runtime.KeepAlive(bnd)
+	defer runtime.KeepAlive(subtree)
 	objc.Send[objc.ID](objref.IDOf(bnd), objc.RegisterName("addRangeForInputValuesBelow:fullGainAtValue:fadeCurveType:subtree:"), value, fullGainAtValue, fadeCurveType, objref.IDOf(subtree))
 }
 
 // AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree adds a child node that blends between a given high and low value.
 func (bnd *BlendNodeDefinition) AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree(lowValue float64, highValue float64, fullGainAtLowValue float64, fullGainAtHighValue float64, lowFadeCurveType CurveType, highFadeCurveType CurveType, subtree *SoundEventNodeDefinition) {
+	defer runtime.KeepAlive(bnd)
+	defer runtime.KeepAlive(subtree)
 	objc.Send[objc.ID](objref.IDOf(bnd), objc.RegisterName("addRangeForInputValuesBetween:highValue:fullGainAtLowValue:fullGainAtHighValue:lowFadeCurveType:highFadeCurveType:subtree:"), lowValue, highValue, fullGainAtLowValue, fullGainAtHighValue, lowFadeCurveType, highFadeCurveType, objref.IDOf(subtree))
 }
 
 // AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree adds a child node that blends above a given value.
 func (bnd *BlendNodeDefinition) AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType CurveType, subtree *SoundEventNodeDefinition) {
+	defer runtime.KeepAlive(bnd)
+	defer runtime.KeepAlive(subtree)
 	objc.Send[objc.ID](objref.IDOf(bnd), objc.RegisterName("addRangeForInputValuesAbove:fullGainAtValue:fadeCurveType:subtree:"), value, fullGainAtValue, fadeCurveType, objref.IDOf(subtree))
 }
 
 // AddRangeWithEnvelopeSubtree adds a child node with an envelope.
 func (bnd *BlendNodeDefinition) AddRangeWithEnvelopeSubtree(envelope *Envelope, subtree *SoundEventNodeDefinition) {
+	defer runtime.KeepAlive(bnd)
+	defer runtime.KeepAlive(envelope)
+	defer runtime.KeepAlive(subtree)
 	objc.Send[objc.ID](objref.IDOf(bnd), objc.RegisterName("addRangeWithEnvelope:subtree:"), objref.IDOf(envelope), objref.IDOf(subtree))
 }
 
 // BlendParameterDefinition returns the blend parameter definition.
 func (bnd *BlendNodeDefinition) BlendParameterDefinition() *NumberMetaParameterDefinition {
+	defer runtime.KeepAlive(bnd)
 	_r := objc.Send[objc.ID](objref.IDOf(bnd), objc.RegisterName("blendParameterDefinition"))
 	return NumberMetaParameterDefinitionFromID(_r)
 }
 
 // SpatialMixerDefinitionForDistance returns the spatial mixer definition for distance.
 func (bnd *BlendNodeDefinition) SpatialMixerDefinitionForDistance() *SpatialMixerDefinition {
+	defer runtime.KeepAlive(bnd)
 	_r := objc.Send[objc.ID](objref.IDOf(bnd), objc.RegisterName("spatialMixerDefinitionForDistance"))
 	return SpatialMixerDefinitionFromID(_r)
 }

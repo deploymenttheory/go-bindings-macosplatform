@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,13 +46,13 @@ func MTRClusterNameForID(clusterID MTRClusterIDType) string {
 var _fnMTRDeviceControllerStorageClasses func() objc.ID
 
 // MTRDeviceControllerStorageClasses calls the Matter framework function MTRDeviceControllerStorageClasses.
-func MTRDeviceControllerStorageClasses() obj.Object {
+func MTRDeviceControllerStorageClasses() []obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTRDeviceControllerStorageClasses == nil {
 		ebipurego.RegisterLibFunc(&_fnMTRDeviceControllerStorageClasses, _lib, "MTRDeviceControllerStorageClasses")
 	}
 	_ret := _fnMTRDeviceControllerStorageClasses()
-	return obj.Wrap(_ret)
+	return rt.NSSetToSlice(_ret, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _fnMTREventNameForID func(MTRClusterIDType, MTREventIDType) objc.ID

@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -84,6 +86,7 @@ func (pns *PerlinNoiseSource) WithSeed(seed int32) *PerlinNoiseSource {
 
 // Persistence returns the persistence.
 func (pns *PerlinNoiseSource) Persistence() float64 {
+	defer runtime.KeepAlive(pns)
 	_r := objc.Send[float64](objref.IDOf(pns), objc.RegisterName("persistence"))
 	return _r
 }

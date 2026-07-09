@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func authorizationPublicKeyCredentialLargeBlobAssertionOutputAdopt(id objc.ID) *
 
 // Description returns the object's -description text.
 func (apkclbao *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) Description() string {
+	defer runtime.KeepAlive(apkclbao)
 	return rt.Description(objref.IDOf(apkclbao))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apkclbao *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apkclbao)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apkclbao), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apkclbao *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) IsKind(className string) bool {
+	defer runtime.KeepAlive(apkclbao)
 	return rt.IsKind(objref.IDOf(apkclbao), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apkclbao *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) String() string {
+	defer runtime.KeepAlive(apkclbao)
 	return rt.Description(objref.IDOf(apkclbao))
 }
 
@@ -73,13 +80,15 @@ func NewAuthorizationPublicKeyCredentialLargeBlobAssertionOutput() *Authorizatio
 }
 
 // ReadData returns the read data.
-func (apkclbao *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) ReadData() obj.Object {
+func (apkclbao *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) ReadData() []byte {
+	defer runtime.KeepAlive(apkclbao)
 	_r := objc.Send[objc.ID](objref.IDOf(apkclbao), objc.RegisterName("readData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // DidWrite wraps the corresponding Objective-C method.
 func (apkclbao *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) DidWrite() bool {
+	defer runtime.KeepAlive(apkclbao)
 	_r := objc.Send[bool](objref.IDOf(apkclbao), objc.RegisterName("didWrite"))
 	return _r
 }

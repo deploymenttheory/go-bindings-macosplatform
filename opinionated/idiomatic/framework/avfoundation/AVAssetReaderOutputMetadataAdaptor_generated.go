@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func assetReaderOutputMetadataAdaptorAdopt(id objc.ID) *AssetReaderOutputMetadat
 
 // Description returns the object's -description text.
 func (aroma *AssetReaderOutputMetadataAdaptor) Description() string {
+	defer runtime.KeepAlive(aroma)
 	return rt.Description(objref.IDOf(aroma))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aroma *AssetReaderOutputMetadataAdaptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aroma)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aroma), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aroma *AssetReaderOutputMetadataAdaptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(aroma)
 	return rt.IsKind(objref.IDOf(aroma), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aroma *AssetReaderOutputMetadataAdaptor) String() string {
+	defer runtime.KeepAlive(aroma)
 	return rt.Description(objref.IDOf(aroma))
 }
 
 // NewAssetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput creates an object that reads timed metadata groups from an asset reader output.
 func NewAssetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput(trackOutput *AssetReaderTrackOutput) *AssetReaderOutputMetadataAdaptor {
+	defer runtime.KeepAlive(trackOutput)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderOutputMetadataAdaptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetReaderTrackOutput:"), objref.IDOf(trackOutput))
 	return assetReaderOutputMetadataAdaptorAdopt(_id)
@@ -75,12 +83,14 @@ func NewAssetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput(trackOutput *
 
 // NextTimedMetadataGroup returns the next timed metadata group for the asset reader output.
 func (aroma *AssetReaderOutputMetadataAdaptor) NextTimedMetadataGroup() *TimedMetadataGroup {
+	defer runtime.KeepAlive(aroma)
 	_r := objc.Send[objc.ID](objref.IDOf(aroma), objc.RegisterName("nextTimedMetadataGroup"))
 	return TimedMetadataGroupFromID(_r)
 }
 
 // AssetReaderTrackOutput returns the asset reader track output from which the receiver pulls timed metadata groups.
 func (aroma *AssetReaderOutputMetadataAdaptor) AssetReaderTrackOutput() *AssetReaderTrackOutput {
+	defer runtime.KeepAlive(aroma)
 	_r := objc.Send[objc.ID](objref.IDOf(aroma), objc.RegisterName("assetReaderTrackOutput"))
 	return AssetReaderTrackOutputFromID(_r)
 }

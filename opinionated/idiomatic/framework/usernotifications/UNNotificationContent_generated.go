@@ -5,7 +5,10 @@
 package usernotifications
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,22 +52,27 @@ func notificationContentAdopt(id objc.ID) *NotificationContent {
 
 // Description returns the object's -description text.
 func (nc *NotificationContent) Description() string {
+	defer runtime.KeepAlive(nc)
 	return rt.Description(objref.IDOf(nc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nc *NotificationContent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nc *NotificationContent) IsKind(className string) bool {
+	defer runtime.KeepAlive(nc)
 	return rt.IsKind(objref.IDOf(nc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nc *NotificationContent) String() string {
+	defer runtime.KeepAlive(nc)
 	return rt.Description(objref.IDOf(nc))
 }
 
@@ -72,18 +80,21 @@ func (nc *NotificationContent) String() string {
 //
 // Attachments returns the collection as a Go slice.
 func (nc *NotificationContent) Attachments() []*NotificationAttachment {
+	defer runtime.KeepAlive(nc)
 	_arr := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("attachments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NotificationAttachment { return NotificationAttachmentFromID(_id) })
 }
 
 // Badge returns the badge.
-func (nc *NotificationContent) Badge() obj.Object {
+func (nc *NotificationContent) Badge() *foundation.Number {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("badge"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Body returns the body.
 func (nc *NotificationContent) Body() string {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("body"))
 	if _r == 0 {
 		return ""
@@ -93,6 +104,7 @@ func (nc *NotificationContent) Body() string {
 
 // CategoryIdentifier returns the category identifier.
 func (nc *NotificationContent) CategoryIdentifier() string {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("categoryIdentifier"))
 	if _r == 0 {
 		return ""
@@ -102,6 +114,7 @@ func (nc *NotificationContent) CategoryIdentifier() string {
 
 // Subtitle returns the subtitle.
 func (nc *NotificationContent) Subtitle() string {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("subtitle"))
 	if _r == 0 {
 		return ""
@@ -111,6 +124,7 @@ func (nc *NotificationContent) Subtitle() string {
 
 // ThreadIdentifier returns the thread identifier.
 func (nc *NotificationContent) ThreadIdentifier() string {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("threadIdentifier"))
 	if _r == 0 {
 		return ""
@@ -120,6 +134,7 @@ func (nc *NotificationContent) ThreadIdentifier() string {
 
 // Title returns the title.
 func (nc *NotificationContent) Title() string {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -129,12 +144,14 @@ func (nc *NotificationContent) Title() string {
 
 // UserInfo returns the user info.
 func (nc *NotificationContent) UserInfo() obj.Object {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
 // SummaryArgument returns the argument to be inserted in the summary for this notification.
 func (nc *NotificationContent) SummaryArgument() string {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("summaryArgument"))
 	if _r == 0 {
 		return ""
@@ -144,12 +161,14 @@ func (nc *NotificationContent) SummaryArgument() string {
 
 // SummaryArgumentCount returns a number that indicates how many items in the summary are represented in the summary. For example if a podcast app sends one notification for 3 new episodes in a show, the argument should be the name of the show and the count should be 3. Default is 1 and cannot be 0.
 func (nc *NotificationContent) SummaryArgumentCount() int {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[int](objref.IDOf(nc), objc.RegisterName("summaryArgumentCount"))
 	return _r
 }
 
 // TargetContentIdentifier returns the target content identifier.
 func (nc *NotificationContent) TargetContentIdentifier() string {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("targetContentIdentifier"))
 	if _r == 0 {
 		return ""
@@ -159,18 +178,21 @@ func (nc *NotificationContent) TargetContentIdentifier() string {
 
 // InterruptionLevel returns the interruption level.
 func (nc *NotificationContent) InterruptionLevel() NotificationInterruptionLevel {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[NotificationInterruptionLevel](objref.IDOf(nc), objc.RegisterName("interruptionLevel"))
 	return _r
 }
 
 // RelevanceScore returns the relevance score.
 func (nc *NotificationContent) RelevanceScore() float64 {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[float64](objref.IDOf(nc), objc.RegisterName("relevanceScore"))
 	return _r
 }
 
 // FilterCriteria returns the filter criteria.
 func (nc *NotificationContent) FilterCriteria() string {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("filterCriteria"))
 	if _r == 0 {
 		return ""

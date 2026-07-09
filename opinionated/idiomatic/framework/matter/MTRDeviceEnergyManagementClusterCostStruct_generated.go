@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDeviceEnergyManagementClusterCostStructAdopt(id objc.ID) *MTRDeviceEnerg
 
 // Description returns the object's -description text.
 func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) Description() string {
+	defer runtime.KeepAlive(mdemccs)
 	return rt.Description(objref.IDOf(mdemccs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdemccs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdemccs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdemccs)
 	return rt.IsKind(objref.IDOf(mdemccs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) String() string {
+	defer runtime.KeepAlive(mdemccs)
 	return rt.Description(objref.IDOf(mdemccs))
 }
 
@@ -72,48 +80,56 @@ func NewMTRDeviceEnergyManagementClusterCostStruct() *MTRDeviceEnergyManagementC
 
 // WithCostType sets the cost type.
 func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) WithCostType(costType obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
+	defer runtime.KeepAlive(costType)
 	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setCostType:"), objref.IDOf(costType))
 	return mdemccs
 }
 
 // WithValue sets the value.
 func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) WithValue(value obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mdemccs
 }
 
 // WithDecimalPoints sets the decimal points.
 func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) WithDecimalPoints(decimalPoints obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
+	defer runtime.KeepAlive(decimalPoints)
 	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setDecimalPoints:"), objref.IDOf(decimalPoints))
 	return mdemccs
 }
 
 // WithCurrency sets the currency.
 func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) WithCurrency(currency obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
+	defer runtime.KeepAlive(currency)
 	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setCurrency:"), objref.IDOf(currency))
 	return mdemccs
 }
 
 // CostType returns the cost type.
-func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) CostType() obj.Object {
+func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) CostType() *foundation.Number {
+	defer runtime.KeepAlive(mdemccs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("costType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Value returns the value.
-func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) Value() obj.Object {
+func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) Value() *foundation.Number {
+	defer runtime.KeepAlive(mdemccs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("value"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DecimalPoints returns the decimal points.
-func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) DecimalPoints() obj.Object {
+func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) DecimalPoints() *foundation.Number {
+	defer runtime.KeepAlive(mdemccs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("decimalPoints"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Currency returns the currency.
-func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) Currency() obj.Object {
+func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) Currency() *foundation.Number {
+	defer runtime.KeepAlive(mdemccs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("currency"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

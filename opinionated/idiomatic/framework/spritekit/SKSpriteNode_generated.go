@@ -5,10 +5,13 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,6 +52,8 @@ func spriteNodeAdopt(id objc.ID) *SpriteNode {
 
 // NewSpriteNodeWithTextureColorSize initializes a textured sprite in color using an existing texture object.
 func NewSpriteNodeWithTextureColorSize(texture *Texture, color obj.Object, size corefoundation.CGSize) *SpriteNode {
+	defer runtime.KeepAlive(texture)
+	defer runtime.KeepAlive(color)
 	var _mainthread0 *SpriteNode
 	purego.Main(func() {
 		_mainthread0 = func() *SpriteNode {
@@ -62,6 +67,7 @@ func NewSpriteNodeWithTextureColorSize(texture *Texture, color obj.Object, size 
 
 // NewSpriteNodeWithTexture initializes a textured sprite using an existing texture object.
 func NewSpriteNodeWithTexture(texture *Texture) *SpriteNode {
+	defer runtime.KeepAlive(texture)
 	var _mainthread0 *SpriteNode
 	purego.Main(func() {
 		_mainthread0 = func() *SpriteNode {
@@ -88,6 +94,7 @@ func NewSpriteNodeWithImageNamed(name string) *SpriteNode {
 
 // NewSpriteNodeWithColorSize initializes a single-color sprite node.
 func NewSpriteNodeWithColorSize(color obj.Object, size corefoundation.CGSize) *SpriteNode {
+	defer runtime.KeepAlive(color)
 	var _mainthread0 *SpriteNode
 	purego.Main(func() {
 		_mainthread0 = func() *SpriteNode {
@@ -101,6 +108,7 @@ func NewSpriteNodeWithColorSize(color obj.Object, size corefoundation.CGSize) *S
 
 // NewSpriteNodeWithCoder tells you when to initialize a sprite from an archive.
 func NewSpriteNodeWithCoder(aDecoder obj.Object) *SpriteNode {
+	defer runtime.KeepAlive(aDecoder)
 	var _mainthread0 *SpriteNode
 	purego.Main(func() {
 		_mainthread0 = func() *SpriteNode {
@@ -114,6 +122,7 @@ func NewSpriteNodeWithCoder(aDecoder obj.Object) *SpriteNode {
 
 // WithTexture sets the texture used to draw the sprite.
 func (sn *SpriteNode) WithTexture(texture TextureProvider) *SpriteNode {
+	defer runtime.KeepAlive(texture)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setTexture:"), objref.IDOf(texture))
 	})
@@ -122,6 +131,7 @@ func (sn *SpriteNode) WithTexture(texture TextureProvider) *SpriteNode {
 
 // WithNormalTexture sets a texture that specifies the normal map for the sprite.
 func (sn *SpriteNode) WithNormalTexture(normalTexture TextureProvider) *SpriteNode {
+	defer runtime.KeepAlive(normalTexture)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setNormalTexture:"), objref.IDOf(normalTexture))
 	})
@@ -170,6 +180,7 @@ func (sn *SpriteNode) WithColorBlendFactor(colorBlendFactor float64) *SpriteNode
 
 // WithColor sets the sprite’s color.
 func (sn *SpriteNode) WithColor(color obj.Object) *SpriteNode {
+	defer runtime.KeepAlive(color)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setColor:"), objref.IDOf(color))
 	})
@@ -202,6 +213,7 @@ func (sn *SpriteNode) WithSize(size corefoundation.CGSize) *SpriteNode {
 
 // WithShader sets a text file that defines code that does custom per-pixel drawing or colorization.
 func (sn *SpriteNode) WithShader(shader *Shader) *SpriteNode {
+	defer runtime.KeepAlive(shader)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setShader:"), objref.IDOf(shader))
 	})
@@ -298,6 +310,7 @@ func (sn *SpriteNode) WithName(name string) *SpriteNode {
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (sn *SpriteNode) WithPhysicsBody(physicsBody *PhysicsBody) *SpriteNode {
+	defer runtime.KeepAlive(physicsBody)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	})
@@ -306,6 +319,7 @@ func (sn *SpriteNode) WithPhysicsBody(physicsBody *PhysicsBody) *SpriteNode {
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (sn *SpriteNode) WithUserData(userData obj.Object) *SpriteNode {
+	defer runtime.KeepAlive(userData)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	})
@@ -314,6 +328,7 @@ func (sn *SpriteNode) WithUserData(userData obj.Object) *SpriteNode {
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (sn *SpriteNode) WithReachConstraints(reachConstraints *ReachConstraints) *SpriteNode {
+	defer runtime.KeepAlive(reachConstraints)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	})
@@ -330,9 +345,9 @@ func (sn *SpriteNode) WithConstraints(items ...*Constraint) *SpriteNode {
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
-func (sn *SpriteNode) WithAttributeValues(attributeValues obj.Object) *SpriteNode {
+func (sn *SpriteNode) WithAttributeValues(attributeValues map[string]*AttributeValue) *SpriteNode {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAttributeValues:"), rt.MapToDict(attributeValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *AttributeValue) objc.ID { return objref.IDOf(_v) }))
 	})
 	return sn
 }
@@ -379,6 +394,7 @@ func (sn *SpriteNode) WithAccessibilityFrame(accessibilityFrame corefoundation.C
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (sn *SpriteNode) WithAccessibilityParent(accessibilityParent obj.Object) *SpriteNode {
+	defer runtime.KeepAlive(accessibilityParent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	})
@@ -411,6 +427,7 @@ func (sn *SpriteNode) WithAccessibilityEnabled(accessibilityEnabled bool) *Sprit
 
 // ScaleToSize scales the sprite node to a specified size.
 func (sn *SpriteNode) ScaleToSize(size corefoundation.CGSize) {
+	defer runtime.KeepAlive(sn)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("scaleToSize:"), size)
 	})
@@ -419,6 +436,7 @@ func (sn *SpriteNode) ScaleToSize(size corefoundation.CGSize) {
 
 // Texture returns texture to be drawn (is stretched to fill the sprite)
 func (sn *SpriteNode) Texture() *Texture {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 *Texture
 	purego.Main(func() {
 		_mainthread0 = func() *Texture {
@@ -432,6 +450,7 @@ func (sn *SpriteNode) Texture() *Texture {
 
 // NormalTexture returns texture to use for generating normals that lights use to light this sprite. This will only be used if the sprite is lit by at least one light.
 func (sn *SpriteNode) NormalTexture() *Texture {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 *Texture
 	purego.Main(func() {
 		_mainthread0 = func() *Texture {
@@ -445,6 +464,7 @@ func (sn *SpriteNode) NormalTexture() *Texture {
 
 // LightingBitMask returns bitmask to indicate being lit by a set of lights using overlapping lighting categories. A light whose category is set to a value that masks to non-zero using this mask will apply light to this sprite. When used together with a normal texture, complex lighting effects can be used.
 func (sn *SpriteNode) LightingBitMask() uint32 {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 uint32
 	purego.Main(func() {
 		_mainthread0 = func() uint32 {
@@ -458,6 +478,7 @@ func (sn *SpriteNode) LightingBitMask() uint32 {
 
 // ShadowCastBitMask returns the shadow cast bit mask.
 func (sn *SpriteNode) ShadowCastBitMask() uint32 {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 uint32
 	purego.Main(func() {
 		_mainthread0 = func() uint32 {
@@ -471,6 +492,7 @@ func (sn *SpriteNode) ShadowCastBitMask() uint32 {
 
 // ShadowedBitMask returns the shadowed bit mask.
 func (sn *SpriteNode) ShadowedBitMask() uint32 {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 uint32
 	purego.Main(func() {
 		_mainthread0 = func() uint32 {
@@ -484,6 +506,7 @@ func (sn *SpriteNode) ShadowedBitMask() uint32 {
 
 // CenterRect returns controls how the texture is stretched to fill the SKSpriteNode. Stretching is performed via a 9-part algorithm where the upper & lower middle parts are scaled horizontally, the left and right middle parts are scaled vertically, the center is scaled in both directions, and the corners are preserved. The centerRect defines the center region in a (0.0 - 1.0) coordinate space. Defaults to {(0,0) (1,1)} (the entire texture is stretched).
 func (sn *SpriteNode) CenterRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -497,6 +520,7 @@ func (sn *SpriteNode) CenterRect() corefoundation.CGRect {
 
 // ColorBlendFactor returns controls the blending between the texture and the sprite's color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
 func (sn *SpriteNode) ColorBlendFactor() float64 {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -510,6 +534,7 @@ func (sn *SpriteNode) ColorBlendFactor() float64 {
 
 // Color returns base color for the sprite (If no texture is present, the color still is drawn)
 func (sn *SpriteNode) Color() obj.Object {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -523,6 +548,7 @@ func (sn *SpriteNode) Color() obj.Object {
 
 // BlendMode sets the blend mode to use when composing the sprite with the final framebuffer.
 func (sn *SpriteNode) BlendMode() BlendMode {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 BlendMode
 	purego.Main(func() {
 		_mainthread0 = func() BlendMode {
@@ -536,6 +562,7 @@ func (sn *SpriteNode) BlendMode() BlendMode {
 
 // AnchorPoint returns used to choose the location in the sprite that maps to its 'position' in the parent's coordinate space. The valid interval for each input is from 0.0 up to and including 1.0.
 func (sn *SpriteNode) AnchorPoint() corefoundation.CGPoint {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -549,6 +576,7 @@ func (sn *SpriteNode) AnchorPoint() corefoundation.CGPoint {
 
 // Size set the size of the sprite (in parent's coordinate space)
 func (sn *SpriteNode) Size() corefoundation.CGSize {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -562,6 +590,7 @@ func (sn *SpriteNode) Size() corefoundation.CGSize {
 
 // Shader returns the shader.
 func (sn *SpriteNode) Shader() *Shader {
+	defer runtime.KeepAlive(sn)
 	var _mainthread0 *Shader
 	purego.Main(func() {
 		_mainthread0 = func() *Shader {

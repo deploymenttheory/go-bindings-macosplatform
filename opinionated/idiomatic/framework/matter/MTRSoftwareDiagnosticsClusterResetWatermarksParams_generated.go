@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRSoftwareDiagnosticsClusterResetWatermarksParamsAdopt(id objc.ID) *MTRSof
 
 // Description returns the object's -description text.
 func (msdcrwp *MTRSoftwareDiagnosticsClusterResetWatermarksParams) Description() string {
+	defer runtime.KeepAlive(msdcrwp)
 	return rt.Description(objref.IDOf(msdcrwp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msdcrwp *MTRSoftwareDiagnosticsClusterResetWatermarksParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msdcrwp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msdcrwp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msdcrwp *MTRSoftwareDiagnosticsClusterResetWatermarksParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(msdcrwp)
 	return rt.IsKind(objref.IDOf(msdcrwp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msdcrwp *MTRSoftwareDiagnosticsClusterResetWatermarksParams) String() string {
+	defer runtime.KeepAlive(msdcrwp)
 	return rt.Description(objref.IDOf(msdcrwp))
 }
 
@@ -72,24 +80,28 @@ func NewMTRSoftwareDiagnosticsClusterResetWatermarksParams() *MTRSoftwareDiagnos
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (msdcrwp *MTRSoftwareDiagnosticsClusterResetWatermarksParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRSoftwareDiagnosticsClusterResetWatermarksParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(msdcrwp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return msdcrwp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (msdcrwp *MTRSoftwareDiagnosticsClusterResetWatermarksParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRSoftwareDiagnosticsClusterResetWatermarksParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(msdcrwp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return msdcrwp
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (msdcrwp *MTRSoftwareDiagnosticsClusterResetWatermarksParams) TimedInvokeTimeoutMs() obj.Object {
+func (msdcrwp *MTRSoftwareDiagnosticsClusterResetWatermarksParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(msdcrwp)
 	_r := objc.Send[objc.ID](objref.IDOf(msdcrwp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (msdcrwp *MTRSoftwareDiagnosticsClusterResetWatermarksParams) ServerSideProcessingTimeout() obj.Object {
+func (msdcrwp *MTRSoftwareDiagnosticsClusterResetWatermarksParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(msdcrwp)
 	_r := objc.Send[objc.ID](objref.IDOf(msdcrwp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

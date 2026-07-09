@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,14 @@ func NewCorrelationQuery() *CorrelationQuery {
 
 // CorrelationType returns the correlation type.
 func (cq *CorrelationQuery) CorrelationType() *CorrelationType {
+	defer runtime.KeepAlive(cq)
 	_r := objc.Send[objc.ID](objref.IDOf(cq), objc.RegisterName("correlationType"))
 	return CorrelationTypeFromID(_r)
 }
 
 // SamplePredicates returns a dictionary of predicates for the HKCorrelation's objects samplePredicates maps HKSampleTypes to NSPredicates. The predicate value will apply to objects of the key type.
 func (cq *CorrelationQuery) SamplePredicates() obj.Object {
+	defer runtime.KeepAlive(cq)
 	_r := objc.Send[objc.ID](objref.IDOf(cq), objc.RegisterName("samplePredicates"))
 	return obj.Wrap(_r)
 }

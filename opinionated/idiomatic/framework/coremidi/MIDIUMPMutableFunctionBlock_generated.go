@@ -5,6 +5,7 @@
 package coremidi
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -47,14 +48,15 @@ func uMPMutableFunctionBlockAdopt(id objc.ID) *UMPMutableFunctionBlock {
 }
 
 // NewUMPMutableFunctionBlockWithNameDirectionFirstGroupTotalGroupsSpannedMaxSysEx8StreamsMIDI1InfoUIHintIsEnabled the initializer for constructing a Function Block. This operation will fail if virtual MIDI endpoint creation is not allowed (for example, on iOS, if your app doesn't list 'audio' in UIBackgroundModes).
-func NewUMPMutableFunctionBlockWithNameDirectionFirstGroupTotalGroupsSpannedMaxSysEx8StreamsMIDI1InfoUIHintIsEnabled(name string, direction UMPFunctionBlockDirection, firstGroup uint8, totalGroupsSpanned uint8, maxSysEx8Streams uint8, mIDI1Info UMPFunctionBlockMIDI1Info, uIHint UMPFunctionBlockUIHint, isEnabled bool) *UMPMutableFunctionBlock {
+func NewUMPMutableFunctionBlockWithNameDirectionFirstGroupTotalGroupsSpannedMaxSysEx8StreamsMIDI1InfoUIHintIsEnabled(name string, direction UMPFunctionBlockDirection, firstGroup uint8, totalGroupsSpanned uint8, maxSysEx8Streams uint8, midi1Info UMPFunctionBlockMIDI1Info, uiHint UMPFunctionBlockUIHint, isEnabled bool) *UMPMutableFunctionBlock {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MIDIUMPMutableFunctionBlock")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:direction:firstGroup:totalGroupsSpanned:maxSysEx8Streams:MIDI1Info:UIHint:isEnabled:"), purego.NSString(name), direction, firstGroup, totalGroupsSpanned, maxSysEx8Streams, mIDI1Info, uIHint, isEnabled)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:direction:firstGroup:totalGroupsSpanned:maxSysEx8Streams:MIDI1Info:UIHint:isEnabled:"), purego.NSString(name), direction, firstGroup, totalGroupsSpanned, maxSysEx8Streams, midi1Info, uiHint, isEnabled)
 	return uMPMutableFunctionBlockAdopt(_id)
 }
 
 // SetEnabled set whether this Function Block is enabled or disabled. If a Function Block is registered to UMP Endpoint as part of a static configuration, the state must always be enabled and may not change. If registered to a UMP Endpoint, changes to the Function Block state are propagated to the system-wide cache.
 func (umfb *UMPMutableFunctionBlock) SetEnabled(isEnabled bool) error {
+	defer runtime.KeepAlive(umfb)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(umfb), objc.RegisterName("setEnabled:error:"), isEnabled, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -65,6 +67,7 @@ func (umfb *UMPMutableFunctionBlock) SetEnabled(isEnabled bool) error {
 
 // SetName set the function block name. The Function Block name string. Updating the name of a Function Block will cause the updated name to be propagated to all local copies of the system-wide cache.
 func (umfb *UMPMutableFunctionBlock) SetName(name string) error {
+	defer runtime.KeepAlive(umfb)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(umfb), objc.RegisterName("setName:error:"), purego.NSString(name), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -74,9 +77,10 @@ func (umfb *UMPMutableFunctionBlock) SetName(name string) error {
 }
 
 // ReconfigureWithFirstGroupDirectionMIDI1InfoUIHint reconfigure a Function Block. If a mutable Function Block has not been registered to a CI device or was registered in a non-static Function Block configuration, the first Group can be changed if the final Group spanned by the Function Block is valid after the Function Block has been relocated. Returns YES if the first Group of the Function Block was changed.
-func (umfb *UMPMutableFunctionBlock) ReconfigureWithFirstGroupDirectionMIDI1InfoUIHint(firstGroup uint8, direction UMPFunctionBlockDirection, mIDI1Info UMPFunctionBlockMIDI1Info, uIHint UMPFunctionBlockUIHint) error {
+func (umfb *UMPMutableFunctionBlock) ReconfigureWithFirstGroupDirectionMIDI1InfoUIHint(firstGroup uint8, direction UMPFunctionBlockDirection, midi1Info UMPFunctionBlockMIDI1Info, uiHint UMPFunctionBlockUIHint) error {
+	defer runtime.KeepAlive(umfb)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(umfb), objc.RegisterName("reconfigureWithFirstGroup:direction:MIDI1Info:UIHint:error:"), firstGroup, direction, mIDI1Info, uIHint, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(umfb), objc.RegisterName("reconfigureWithFirstGroup:direction:MIDI1Info:UIHint:error:"), firstGroup, direction, midi1Info, uiHint, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}

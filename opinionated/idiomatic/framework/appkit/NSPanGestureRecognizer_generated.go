@@ -5,9 +5,12 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -77,6 +80,7 @@ func (pgr *PanGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequ
 
 // WithTarget sets the object that implements the action method.
 func (pgr *PanGestureRecognizer) WithTarget(target obj.Object) *PanGestureRecognizer {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -91,6 +95,18 @@ func (pgr *PanGestureRecognizer) WithState(state GestureRecognizerState) *PanGes
 	return pgr
 }
 
+// WithDelegate sets the delegate of the gesture recognizer.
+func (pgr *PanGestureRecognizer) WithDelegate(delegate GestureRecognizerDelegate) *PanGestureRecognizer {
+	_shim := newGestureRecognizerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(pgr), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return pgr
+}
+
 // WithEnabled sets a Boolean value indicating whether the gesture recognizer is able to handle events.
 func (pgr *PanGestureRecognizer) WithEnabled(enabled bool) *PanGestureRecognizer {
 	purego.Main(func() {
@@ -101,6 +117,7 @@ func (pgr *PanGestureRecognizer) WithEnabled(enabled bool) *PanGestureRecognizer
 
 // WithPressureConfiguration sets configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
 func (pgr *PanGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PanGestureRecognizer {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -173,6 +190,8 @@ func (pgr *PanGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTy
 
 // TranslationInView the distance traveled by the mouse during the gesture.
 func (pgr *PanGestureRecognizer) TranslationInView(view *View) corefoundation.CGPoint {
+	defer runtime.KeepAlive(pgr)
+	defer runtime.KeepAlive(view)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -186,6 +205,8 @@ func (pgr *PanGestureRecognizer) TranslationInView(view *View) corefoundation.CG
 
 // SetTranslationInView changes the current translation value of the gesture recognizer.
 func (pgr *PanGestureRecognizer) SetTranslationInView(translation corefoundation.CGPoint, view *View) {
+	defer runtime.KeepAlive(pgr)
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setTranslation:inView:"), translation, objref.IDOf(view))
 	})
@@ -194,6 +215,8 @@ func (pgr *PanGestureRecognizer) SetTranslationInView(translation corefoundation
 
 // VelocityInView the velocity of the pan, measured in points per second.
 func (pgr *PanGestureRecognizer) VelocityInView(view *View) corefoundation.CGPoint {
+	defer runtime.KeepAlive(pgr)
+	defer runtime.KeepAlive(view)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -207,6 +230,7 @@ func (pgr *PanGestureRecognizer) VelocityInView(view *View) corefoundation.CGPoi
 
 // ButtonMask returns the button mask.
 func (pgr *PanGestureRecognizer) ButtonMask() int {
+	defer runtime.KeepAlive(pgr)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -220,6 +244,7 @@ func (pgr *PanGestureRecognizer) ButtonMask() int {
 
 // NumberOfTouchesRequired returns the number of touches required.
 func (pgr *PanGestureRecognizer) NumberOfTouchesRequired() int {
+	defer runtime.KeepAlive(pgr)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {

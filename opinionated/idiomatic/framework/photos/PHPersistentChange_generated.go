@@ -5,6 +5,7 @@
 package photos
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func persistentChangeAdopt(id objc.ID) *PersistentChange {
 
 // Description returns the object's -description text.
 func (pc *PersistentChange) Description() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pc *PersistentChange) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pc *PersistentChange) IsKind(className string) bool {
+	defer runtime.KeepAlive(pc)
 	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pc *PersistentChange) String() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
@@ -75,8 +81,9 @@ func NewPersistentChange() *PersistentChange {
 	return persistentChangeAdopt(_id)
 }
 
-// ChangeDetailsForObjectTypeError returns the change history that contains the local identifiers for object inserts, updates, and deletes.
-func (pc *PersistentChange) ChangeDetailsForObjectTypeError(objectType ObjectType) (result *PersistentObjectChangeDetails, err error) {
+// ChangeDetailsForObjectType returns the change history that contains the local identifiers for object inserts, updates, and deletes.
+func (pc *PersistentChange) ChangeDetailsForObjectType(objectType ObjectType) (result *PersistentObjectChangeDetails, err error) {
+	defer runtime.KeepAlive(pc)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("changeDetailsForObjectType:error:"), objectType, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -87,6 +94,7 @@ func (pc *PersistentChange) ChangeDetailsForObjectTypeError(objectType ObjectTyp
 
 // ChangeToken returns the change token.
 func (pc *PersistentChange) ChangeToken() *PersistentChangeToken {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("changeToken"))
 	return PersistentChangeTokenFromID(_r)
 }

@@ -5,9 +5,11 @@
 package coreimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,32 +49,36 @@ func dataMatrixCodeDescriptorAdopt(id objc.ID) *DataMatrixCodeDescriptor {
 }
 
 // NewDataMatrixCodeDescriptorWithPayloadRowCountColumnCountEccVersion initializes a Data Matrix code descriptor for the given payload and parameters.
-func NewDataMatrixCodeDescriptorWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload obj.Object, rowCount int, columnCount int, eccVersion DataMatrixCodeECCVersion) *DataMatrixCodeDescriptor {
+func NewDataMatrixCodeDescriptorWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload []byte, rowCount int, columnCount int, eccVersion DataMatrixCodeECCVersion) *DataMatrixCodeDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIDataMatrixCodeDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPayload:rowCount:columnCount:eccVersion:"), objref.IDOf(errorCorrectedPayload), rowCount, columnCount, eccVersion)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPayload:rowCount:columnCount:eccVersion:"), rt.BytesToNSData(errorCorrectedPayload), rowCount, columnCount, eccVersion)
 	return dataMatrixCodeDescriptorAdopt(_id)
 }
 
 // ErrorCorrectedPayload returns the error-corrected payload containing the data encoded in the Data Matrix code symbol. DataMatrix symbols are specified bn ISO/IEC 16022:2006(E). ECC 200-type symbols will always have an even number of rows and columns. For ECC 200-type symbols, the phases of encoding data into a symbol are described in section 5.1 -- Encode procedure overview. The error corrected payload comprises the de-interleaved bits of the message described at the end of Step 1: Data encodation.
-func (dmcd *DataMatrixCodeDescriptor) ErrorCorrectedPayload() obj.Object {
+func (dmcd *DataMatrixCodeDescriptor) ErrorCorrectedPayload() []byte {
+	defer runtime.KeepAlive(dmcd)
 	_r := objc.Send[objc.ID](objref.IDOf(dmcd), objc.RegisterName("errorCorrectedPayload"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // RowCount returns the number of rows in the Data Matrix code symbol. Refer to ISO/IEC 16022:2006(E) for valid module row and column count combinations.
 func (dmcd *DataMatrixCodeDescriptor) RowCount() int {
+	defer runtime.KeepAlive(dmcd)
 	_r := objc.Send[int](objref.IDOf(dmcd), objc.RegisterName("rowCount"))
 	return _r
 }
 
 // ColumnCount returns the number of columns in the Data Matrix code symbol. Refer to ISO/IEC 16022:2006(E) for valid module row and column count combinations.
 func (dmcd *DataMatrixCodeDescriptor) ColumnCount() int {
+	defer runtime.KeepAlive(dmcd)
 	_r := objc.Send[int](objref.IDOf(dmcd), objc.RegisterName("columnCount"))
 	return _r
 }
 
 // EccVersion returns the error correction version of the Data Matrix code symbol. The possible error correction version are enumerated in “CIDataMatrixCodeECCVersion“. Any symbol with an even number of rows and columns will be ECC 200.
 func (dmcd *DataMatrixCodeDescriptor) EccVersion() DataMatrixCodeECCVersion {
+	defer runtime.KeepAlive(dmcd)
 	_r := objc.Send[DataMatrixCodeECCVersion](objref.IDOf(dmcd), objc.RegisterName("eccVersion"))
 	return _r
 }

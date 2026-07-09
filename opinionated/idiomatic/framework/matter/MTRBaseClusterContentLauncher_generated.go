@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterContentLauncherAdopt(id objc.ID) *MTRBaseClusterContentLaunch
 
 // NewMTRBaseClusterContentLauncherWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterContentLauncherWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterContentLauncher {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterContentLauncher")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterContentLauncherAdopt(_id)
@@ -56,6 +60,8 @@ func NewMTRBaseClusterContentLauncherWithDeviceEndpointIDQueue(device *MTRBaseDe
 
 // NewMTRBaseClusterContentLauncherWithDeviceEndpointQueue creates a new MTRBaseClusterContentLauncher.
 func NewMTRBaseClusterContentLauncherWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterContentLauncher {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterContentLauncher")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRBaseClusterContentLauncherAdopt(_id)
@@ -65,6 +71,8 @@ func NewMTRBaseClusterContentLauncherWithDeviceEndpointQueue(device *MTRBaseDevi
 //
 // LaunchContentWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) LaunchContentWithParamsCompletion(ctx context.Context, params *MTRContentLauncherClusterLaunchContentParams) (result *MTRContentLauncherClusterLauncherResponseParams, err error) {
+	defer runtime.KeepAlive(mbccl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRContentLauncherClusterLauncherResponseParams
 		err error
@@ -90,6 +98,8 @@ func (mbccl *MTRBaseClusterContentLauncher) LaunchContentWithParamsCompletion(ct
 //
 // LaunchURLWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) LaunchURLWithParamsCompletion(ctx context.Context, params *MTRContentLauncherClusterLaunchURLParams) (result *MTRContentLauncherClusterLauncherResponseParams, err error) {
+	defer runtime.KeepAlive(mbccl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRContentLauncherClusterLauncherResponseParams
 		err error
@@ -115,6 +125,7 @@ func (mbccl *MTRBaseClusterContentLauncher) LaunchURLWithParamsCompletion(ctx co
 //
 // ReadAttributeAcceptHeaderWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeAcceptHeaderWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -140,6 +151,8 @@ func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeAcceptHeaderWithComplet
 //
 // SubscribeAttributeAcceptHeaderWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeAcceptHeaderWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -165,6 +178,7 @@ func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeAcceptHeaderWithPa
 //
 // ReadAttributeSupportedStreamingProtocolsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeSupportedStreamingProtocolsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -190,6 +204,8 @@ func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeSupportedStreamingProto
 //
 // SubscribeAttributeSupportedStreamingProtocolsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeSupportedStreamingProtocolsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -215,6 +231,7 @@ func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeSupportedStreaming
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -240,6 +257,8 @@ func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeGeneratedCommandListWit
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -265,6 +284,7 @@ func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeGeneratedCommandLi
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -290,6 +310,8 @@ func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeAcceptedCommandListWith
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -315,6 +337,7 @@ func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeAcceptedCommandLis
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -340,6 +363,8 @@ func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeAttributeListWithComple
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -365,6 +390,7 @@ func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeAttributeListWithP
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -390,6 +416,8 @@ func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeFeatureMapWithCompletio
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -415,6 +443,7 @@ func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeFeatureMapWithPara
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -440,6 +469,8 @@ func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeClusterRevisionWithComp
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,6 +496,8 @@ func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeClusterRevisionWit
 //
 // LaunchContentWithParams blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) LaunchContentWithParams(ctx context.Context, params *MTRContentLauncherClusterLaunchContentParams) (result *MTRContentLauncherClusterLaunchResponseParams, err error) {
+	defer runtime.KeepAlive(mbccl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRContentLauncherClusterLaunchResponseParams
 		err error
@@ -490,6 +523,8 @@ func (mbccl *MTRBaseClusterContentLauncher) LaunchContentWithParams(ctx context.
 //
 // LaunchURLWithParams blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) LaunchURLWithParams(ctx context.Context, params *MTRContentLauncherClusterLaunchURLParams) (result *MTRContentLauncherClusterLaunchResponseParams, err error) {
+	defer runtime.KeepAlive(mbccl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRContentLauncherClusterLaunchResponseParams
 		err error
@@ -515,6 +550,7 @@ func (mbccl *MTRBaseClusterContentLauncher) LaunchURLWithParams(ctx context.Cont
 //
 // ReadAttributeAcceptHeader blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeAcceptHeader(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -540,6 +576,10 @@ func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeAcceptHeader(ctx contex
 //
 // SubscribeAttributeAcceptHeaderWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeAcceptHeaderWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -565,6 +605,7 @@ func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeAcceptHeaderWithMi
 //
 // ReadAttributeSupportedStreamingProtocols blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeSupportedStreamingProtocols(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -590,6 +631,10 @@ func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeSupportedStreamingProto
 //
 // SubscribeAttributeSupportedStreamingProtocolsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeSupportedStreamingProtocolsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -615,6 +660,7 @@ func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeSupportedStreaming
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -640,6 +686,10 @@ func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeGeneratedCommandList(ct
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -665,6 +715,7 @@ func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeGeneratedCommandLi
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -690,6 +741,10 @@ func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeAcceptedCommandList(ctx
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -715,6 +770,7 @@ func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeAcceptedCommandLis
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -740,6 +796,10 @@ func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeAttributeList(ctx conte
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -765,6 +825,7 @@ func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeAttributeListWithM
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -790,6 +851,10 @@ func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeFeatureMap(ctx context.
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -815,6 +880,7 @@ func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeFeatureMapWithMinI
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -840,6 +906,10 @@ func (mbccl *MTRBaseClusterContentLauncher) ReadAttributeClusterRevision(ctx con
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccl *MTRBaseClusterContentLauncher) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

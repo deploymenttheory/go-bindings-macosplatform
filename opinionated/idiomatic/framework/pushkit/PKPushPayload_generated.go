@@ -5,7 +5,10 @@
 package pushkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func pushPayloadAdopt(id objc.ID) *PushPayload {
 
 // Description returns the object's -description text.
 func (pp *PushPayload) Description() string {
+	defer runtime.KeepAlive(pp)
 	return rt.Description(objref.IDOf(pp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pp *PushPayload) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pp *PushPayload) IsKind(className string) bool {
+	defer runtime.KeepAlive(pp)
 	return rt.IsKind(objref.IDOf(pp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pp *PushPayload) String() string {
+	defer runtime.KeepAlive(pp)
 	return rt.Description(objref.IDOf(pp))
 }
 
@@ -73,13 +81,15 @@ func NewPushPayload() *PushPayload {
 }
 
 // Type returns the type value indicating how to interpret the payload. For possible values, see “PushKit/PKPushType“.
-func (pp *PushPayload) Type() obj.Object {
+func (pp *PushPayload) Type() *foundation.String {
+	defer runtime.KeepAlive(pp)
 	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("type"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // DictionaryPayload returns the contents of the received payload. For VoIP pushes, the sender is free to specify any fields for the contained data as long as it is provided in a text-encodable JSON format.
 func (pp *PushPayload) DictionaryPayload() obj.Object {
+	defer runtime.KeepAlive(pp)
 	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("dictionaryPayload"))
 	return obj.Wrap(_r)
 }

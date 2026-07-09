@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -55,6 +57,7 @@ func FetchAllSubscriptionsOperation() *FetchSubscriptionsOperation {
 
 // NotificationFromRemoteNotificationDictionary creates a new notification using the specified payload data.
 func NotificationFromRemoteNotificationDictionary(notificationDictionary obj.Object) *Notification {
+	defer runtime.KeepAlive(notificationDictionary)
 	_r := objc.Send[objc.ID](objc.ID(_class("CKNotification")), objc.RegisterName("notificationFromRemoteNotificationDictionary:"), objref.IDOf(notificationDictionary))
 	return NotificationFromID(_r)
 }

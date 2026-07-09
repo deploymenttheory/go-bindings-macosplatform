@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func clusterAnnotationAdopt(id objc.ID) *ClusterAnnotation {
 
 // Description returns the object's -description text.
 func (ca *ClusterAnnotation) Description() string {
+	defer runtime.KeepAlive(ca)
 	return rt.Description(objref.IDOf(ca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ca *ClusterAnnotation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ca)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ca *ClusterAnnotation) IsKind(className string) bool {
+	defer runtime.KeepAlive(ca)
 	return rt.IsKind(objref.IDOf(ca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ca *ClusterAnnotation) String() string {
+	defer runtime.KeepAlive(ca)
 	return rt.Description(objref.IDOf(ca))
 }
 
@@ -87,6 +94,7 @@ func (ca *ClusterAnnotation) WithSubtitle(subtitle string) *ClusterAnnotation {
 
 // Title returns the title.
 func (ca *ClusterAnnotation) Title() string {
+	defer runtime.KeepAlive(ca)
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -96,6 +104,7 @@ func (ca *ClusterAnnotation) Title() string {
 
 // Subtitle returns the subtitle.
 func (ca *ClusterAnnotation) Subtitle() string {
+	defer runtime.KeepAlive(ca)
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("subtitle"))
 	if _r == 0 {
 		return ""
@@ -105,6 +114,7 @@ func (ca *ClusterAnnotation) Subtitle() string {
 
 // MemberAnnotations returns the member annotations.
 func (ca *ClusterAnnotation) MemberAnnotations() []obj.Object {
+	defer runtime.KeepAlive(ca)
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("memberAnnotations"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

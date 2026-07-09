@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,39 +52,47 @@ func audioMixInputParametersAdopt(id objc.ID) *AudioMixInputParameters {
 
 // Description returns the object's -description text.
 func (amip *AudioMixInputParameters) Description() string {
+	defer runtime.KeepAlive(amip)
 	return rt.Description(objref.IDOf(amip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (amip *AudioMixInputParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(amip)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(amip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (amip *AudioMixInputParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(amip)
 	return rt.IsKind(objref.IDOf(amip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (amip *AudioMixInputParameters) String() string {
+	defer runtime.KeepAlive(amip)
 	return rt.Description(objref.IDOf(amip))
 }
 
 // TrackID indicates the trackID of the audio track to which the parameters should be applied.
 func (amip *AudioMixInputParameters) TrackID() int32 {
+	defer runtime.KeepAlive(amip)
 	_r := objc.Send[int32](objref.IDOf(amip), objc.RegisterName("trackID"))
 	return _r
 }
 
 // AudioTimePitchAlgorithm indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits. Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
-func (amip *AudioMixInputParameters) AudioTimePitchAlgorithm() obj.Object {
+func (amip *AudioMixInputParameters) AudioTimePitchAlgorithm() *foundation.String {
+	defer runtime.KeepAlive(amip)
 	_r := objc.Send[objc.ID](objref.IDOf(amip), objc.RegisterName("audioTimePitchAlgorithm"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // AudioTapProcessor indicates the audio processing tap that will be used for the audio track.
 func (amip *AudioMixInputParameters) AudioTapProcessor() obj.Object {
+	defer runtime.KeepAlive(amip)
 	_r := objc.Send[objc.ID](objref.IDOf(amip), objc.RegisterName("audioTapProcessor"))
 	return obj.Wrap(_r)
 }

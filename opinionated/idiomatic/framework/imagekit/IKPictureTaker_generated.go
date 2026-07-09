@@ -5,6 +5,8 @@
 package imagekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func pictureTakerAdopt(id objc.ID) *PictureTaker {
 
 // Description returns the object's -description text.
 func (pt *PictureTaker) Description() string {
+	defer runtime.KeepAlive(pt)
 	return rt.Description(objref.IDOf(pt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pt *PictureTaker) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pt *PictureTaker) IsKind(className string) bool {
+	defer runtime.KeepAlive(pt)
 	return rt.IsKind(objref.IDOf(pt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pt *PictureTaker) String() string {
+	defer runtime.KeepAlive(pt)
 	return rt.Description(objref.IDOf(pt))
 }
 
@@ -78,6 +85,7 @@ func NewPictureTaker() *PictureTaker {
 
 // RunModal returns launches a modal PictureTaker session.
 func (pt *PictureTaker) RunModal() int {
+	defer runtime.KeepAlive(pt)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -91,6 +99,8 @@ func (pt *PictureTaker) RunModal() int {
 
 // SetInputImage set the image input for the PictureTaker. The input image is never modified by the PictureTaker.
 func (pt *PictureTaker) SetInputImage(image obj.Object) {
+	defer runtime.KeepAlive(pt)
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("setInputImage:"), objref.IDOf(image))
 	})
@@ -99,6 +109,7 @@ func (pt *PictureTaker) SetInputImage(image obj.Object) {
 
 // InputImage returns the original PictureTaker's input-image. The input image is never modified by the PictureTaker.
 func (pt *PictureTaker) InputImage() obj.Object {
+	defer runtime.KeepAlive(pt)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -112,6 +123,7 @@ func (pt *PictureTaker) InputImage() obj.Object {
 
 // OutputImage returns the edited image.
 func (pt *PictureTaker) OutputImage() obj.Object {
+	defer runtime.KeepAlive(pt)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -125,6 +137,7 @@ func (pt *PictureTaker) OutputImage() obj.Object {
 
 // SetMirroring controls whether the receiver enable/disable video mirroring durring snapshots (default is YES).
 func (pt *PictureTaker) SetMirroring(b bool) {
+	defer runtime.KeepAlive(pt)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("setMirroring:"), b)
 	})
@@ -133,6 +146,7 @@ func (pt *PictureTaker) SetMirroring(b bool) {
 
 // Mirroring reports whether video mirroring is enabled.
 func (pt *PictureTaker) Mirroring() bool {
+	defer runtime.KeepAlive(pt)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

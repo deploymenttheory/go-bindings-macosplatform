@@ -5,6 +5,8 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewChangeHistoryAddSubgroupToGroupEvent() *ChangeHistoryAddSubgroupToGroupE
 
 // Subgroup returns the subgroup.
 func (chastge *ChangeHistoryAddSubgroupToGroupEvent) Subgroup() *Group {
+	defer runtime.KeepAlive(chastge)
 	_r := objc.Send[objc.ID](objref.IDOf(chastge), objc.RegisterName("subgroup"))
 	return GroupFromID(_r)
 }
 
 // Group returns the group.
 func (chastge *ChangeHistoryAddSubgroupToGroupEvent) Group() *Group {
+	defer runtime.KeepAlive(chastge)
 	_r := objc.Send[objc.ID](objref.IDOf(chastge), objc.RegisterName("group"))
 	return GroupFromID(_r)
 }

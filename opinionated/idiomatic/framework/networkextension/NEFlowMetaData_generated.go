@@ -5,7 +5,10 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func nEFlowMetaDataAdopt(id objc.ID) *NEFlowMetaData {
 
 // Description returns the object's -description text.
 func (nfmd *NEFlowMetaData) Description() string {
+	defer runtime.KeepAlive(nfmd)
 	return rt.Description(objref.IDOf(nfmd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nfmd *NEFlowMetaData) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nfmd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nfmd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nfmd *NEFlowMetaData) IsKind(className string) bool {
+	defer runtime.KeepAlive(nfmd)
 	return rt.IsKind(objref.IDOf(nfmd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nfmd *NEFlowMetaData) String() string {
+	defer runtime.KeepAlive(nfmd)
 	return rt.Description(objref.IDOf(nfmd))
 }
 
@@ -73,13 +81,15 @@ func NewNEFlowMetaData() *NEFlowMetaData {
 }
 
 // SourceAppUniqueIdentifier returns a byte string that uniquely identifies the binary for each build of the source application of the flow. The data object may be empty in cases where the flow originates from a system process.
-func (nfmd *NEFlowMetaData) SourceAppUniqueIdentifier() obj.Object {
+func (nfmd *NEFlowMetaData) SourceAppUniqueIdentifier() []byte {
+	defer runtime.KeepAlive(nfmd)
 	_r := objc.Send[objc.ID](objref.IDOf(nfmd), objc.RegisterName("sourceAppUniqueIdentifier"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // SourceAppSigningIdentifier returns a string containing the signing identifier (almost always equivalent to the bundle identifier) of the source app of the flow. The string may be empty in cases where the flow originates from a system process.
 func (nfmd *NEFlowMetaData) SourceAppSigningIdentifier() string {
+	defer runtime.KeepAlive(nfmd)
 	_r := objc.Send[objc.ID](objref.IDOf(nfmd), objc.RegisterName("sourceAppSigningIdentifier"))
 	if _r == 0 {
 		return ""
@@ -88,13 +98,15 @@ func (nfmd *NEFlowMetaData) SourceAppSigningIdentifier() string {
 }
 
 // SourceAppAuditToken returns audit token of the source application of the flow.
-func (nfmd *NEFlowMetaData) SourceAppAuditToken() obj.Object {
+func (nfmd *NEFlowMetaData) SourceAppAuditToken() []byte {
+	defer runtime.KeepAlive(nfmd)
 	_r := objc.Send[objc.ID](objref.IDOf(nfmd), objc.RegisterName("sourceAppAuditToken"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // FilterFlowIdentifier returns the identifier of the content filter flow corresponding to this flow.
-func (nfmd *NEFlowMetaData) FilterFlowIdentifier() obj.Object {
+func (nfmd *NEFlowMetaData) FilterFlowIdentifier() *foundation.UUID {
+	defer runtime.KeepAlive(nfmd)
 	_r := objc.Send[objc.ID](objref.IDOf(nfmd), objc.RegisterName("filterFlowIdentifier"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }

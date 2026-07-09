@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func morpherAdopt(id objc.ID) *Morpher {
 
 // Description returns the object's -description text.
 func (m *Morpher) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Morpher) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Morpher) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Morpher) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
@@ -100,22 +107,26 @@ func (m *Morpher) WithUnifiesNormals(unifiesNormals bool) *Morpher {
 
 // SetWeightForTargetAtIndex specifies a weight value at a specified target index.
 func (m *Morpher) SetWeightForTargetAtIndex(weight float64, targetIndex int) {
+	defer runtime.KeepAlive(m)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setWeight:forTargetAtIndex:"), weight, targetIndex)
 }
 
 // WeightForTargetAtIndex returns the weight value for the specified target index.
 func (m *Morpher) WeightForTargetAtIndex(targetIndex int) float64 {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[float64](objref.IDOf(m), objc.RegisterName("weightForTargetAtIndex:"), targetIndex)
 	return _r
 }
 
 // SetWeightForTargetNamed sets the weight for the target with the specified name (targetName is the name of the target geometry).
 func (m *Morpher) SetWeightForTargetNamed(weight float64, targetName string) {
+	defer runtime.KeepAlive(m)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setWeight:forTargetNamed:"), weight, purego.NSString(targetName))
 }
 
 // WeightForTargetNamed retrieves the weight for the target with the specified name (targetName is the name of the target geometry).
 func (m *Morpher) WeightForTargetNamed(targetName string) float64 {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[float64](objref.IDOf(m), objc.RegisterName("weightForTargetNamed:"), purego.NSString(targetName))
 	return _r
 }
@@ -124,6 +135,7 @@ func (m *Morpher) WeightForTargetNamed(targetName string) float64 {
 //
 // Targets returns the collection as a Go slice.
 func (m *Morpher) Targets() []*Geometry {
+	defer runtime.KeepAlive(m)
 	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("targets"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Geometry { return GeometryFromID(_id) })
 }
@@ -132,18 +144,21 @@ func (m *Morpher) Targets() []*Geometry {
 //
 // Weights returns the collection as a Go slice.
 func (m *Morpher) Weights() []obj.Object {
+	defer runtime.KeepAlive(m)
 	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("weights"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // CalculationMode specifies how the morph result is calculated by the receiver. Defaults to SCNMorpherCalculationModeNormalized.
 func (m *Morpher) CalculationMode() MorpherCalculationMode {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[MorpherCalculationMode](objref.IDOf(m), objc.RegisterName("calculationMode"))
 	return _r
 }
 
 // UnifiesNormals reports whether when set to true the normals are not morphed but are recomputed after morphing the vertex instead. When set to false, the morpher will morph the normals if the geometry targets have normals. Defaults to false.
 func (m *Morpher) UnifiesNormals() bool {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("unifiesNormals"))
 	return _r
 }

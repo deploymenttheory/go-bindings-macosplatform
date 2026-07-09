@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func channelMixerDefinitionAdopt(id objc.ID) *ChannelMixerDefinition {
 
 // NewChannelMixerDefinitionWithChannelLayoutIdentifier creates a named channel mixer with the given channel layout.
 func NewChannelMixerDefinitionWithChannelLayoutIdentifier(layout obj.Object, identifier string) *ChannelMixerDefinition {
+	defer runtime.KeepAlive(layout)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEChannelMixerDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannelLayout:identifier:"), objref.IDOf(layout), purego.NSString(identifier))
 	return channelMixerDefinitionAdopt(_id)
@@ -55,6 +58,7 @@ func NewChannelMixerDefinitionWithChannelLayoutIdentifier(layout obj.Object, ide
 
 // NewChannelMixerDefinitionWithChannelLayout creates a channel mixer with the given channel layout.
 func NewChannelMixerDefinitionWithChannelLayout(layout obj.Object) *ChannelMixerDefinition {
+	defer runtime.KeepAlive(layout)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEChannelMixerDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannelLayout:"), objref.IDOf(layout))
 	return channelMixerDefinitionAdopt(_id)
@@ -68,12 +72,14 @@ func (cmd *ChannelMixerDefinition) WithGain(gain float64) *ChannelMixerDefinitio
 
 // WithGainMetaParameterDefinition sets a template for a parameter that changes the mixer’s volume gradually over a period of time.
 func (cmd *ChannelMixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *ChannelMixerDefinition {
+	defer runtime.KeepAlive(gainMetaParameterDefinition)
 	objc.Send[objc.ID](objref.IDOf(cmd), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
 	return cmd
 }
 
 // InputChannelLayout returns the input channel layout.
 func (cmd *ChannelMixerDefinition) InputChannelLayout() obj.Object {
+	defer runtime.KeepAlive(cmd)
 	_r := objc.Send[objc.ID](objref.IDOf(cmd), objc.RegisterName("inputChannelLayout"))
 	return obj.Wrap(_r)
 }

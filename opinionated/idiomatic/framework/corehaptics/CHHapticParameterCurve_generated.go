@@ -5,7 +5,10 @@
 package corehaptics
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func hapticParameterCurveAdopt(id objc.ID) *HapticParameterCurve {
 
 // Description returns the object's -description text.
 func (hpc *HapticParameterCurve) Description() string {
+	defer runtime.KeepAlive(hpc)
 	return rt.Description(objref.IDOf(hpc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hpc *HapticParameterCurve) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hpc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hpc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hpc *HapticParameterCurve) IsKind(className string) bool {
+	defer runtime.KeepAlive(hpc)
 	return rt.IsKind(objref.IDOf(hpc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hpc *HapticParameterCurve) String() string {
+	defer runtime.KeepAlive(hpc)
 	return rt.Description(objref.IDOf(hpc))
 }
 
 // NewHapticParameterCurveWithParameterIDControlPointsRelativeTime creates a parameter curve from its parameter ID, control points, and start time.
 func NewHapticParameterCurveWithParameterIDControlPointsRelativeTime(parameterID obj.Object, controlPoints []*HapticParameterCurveControlPoint, relativeTime float64) *HapticParameterCurve {
+	defer runtime.KeepAlive(parameterID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticParameterCurve")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParameterID:controlPoints:relativeTime:"), objref.IDOf(parameterID), purego.SliceToNSArray(controlPoints, func(_v *HapticParameterCurveControlPoint) objc.ID { return objref.IDOf(_v) }), relativeTime)
 	return hapticParameterCurveAdopt(_id)
@@ -80,13 +89,15 @@ func (hpc *HapticParameterCurve) WithRelativeTime(relativeTime float64) *HapticP
 }
 
 // ParameterID returns the parameter ID.
-func (hpc *HapticParameterCurve) ParameterID() obj.Object {
+func (hpc *HapticParameterCurve) ParameterID() *foundation.String {
+	defer runtime.KeepAlive(hpc)
 	_r := objc.Send[objc.ID](objref.IDOf(hpc), objc.RegisterName("parameterID"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // RelativeTime returns the relative time.
 func (hpc *HapticParameterCurve) RelativeTime() float64 {
+	defer runtime.KeepAlive(hpc)
 	_r := objc.Send[float64](objref.IDOf(hpc), objc.RegisterName("relativeTime"))
 	return _r
 }
@@ -95,6 +106,7 @@ func (hpc *HapticParameterCurve) RelativeTime() float64 {
 //
 // ControlPoints returns the collection as a Go slice.
 func (hpc *HapticParameterCurve) ControlPoints() []*HapticParameterCurveControlPoint {
+	defer runtime.KeepAlive(hpc)
 	_arr := objc.Send[objc.ID](objref.IDOf(hpc), objc.RegisterName("controlPoints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *HapticParameterCurveControlPoint {
 		return HapticParameterCurveControlPointFromID(_id)

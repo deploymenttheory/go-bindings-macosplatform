@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func operationQueueAdopt(id objc.ID) *OperationQueue {
 
 // Description returns the object's -description text.
 func (oq *OperationQueue) Description() string {
+	defer runtime.KeepAlive(oq)
 	return rt.Description(objref.IDOf(oq))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (oq *OperationQueue) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(oq)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(oq), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (oq *OperationQueue) IsKind(className string) bool {
+	defer runtime.KeepAlive(oq)
 	return rt.IsKind(objref.IDOf(oq), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (oq *OperationQueue) String() string {
+	defer runtime.KeepAlive(oq)
 	return rt.Description(objref.IDOf(oq))
 }
 
@@ -89,6 +95,7 @@ func (oq *OperationQueue) WithSuspended(suspended bool) *OperationQueue {
 
 // WithName sets the name.
 func (oq *OperationQueue) WithName(name StringProvider) *OperationQueue {
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("setName:"), objref.IDOf(name))
 	return oq
 }
@@ -101,6 +108,7 @@ func (oq *OperationQueue) WithQualityOfService(qualityOfService QualityOfService
 
 // WithUnderlyingQueue sets the underlying queue.
 func (oq *OperationQueue) WithUnderlyingQueue(underlyingQueue ObjectProvider) *OperationQueue {
+	defer runtime.KeepAlive(underlyingQueue)
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("setUnderlyingQueue:"), objref.IDOf(underlyingQueue))
 	return oq
 }
@@ -112,18 +120,21 @@ func (oq *OperationQueue) WithObservationInfo(observationInfo unsafe.Pointer) *O
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (oq *OperationQueue) WithScriptingProperties(scriptingProperties obj.Object) *OperationQueue {
-	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (oq *OperationQueue) WithScriptingProperties(scriptingProperties map[string]obj.Object) *OperationQueue {
+	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return oq
 }
 
 // AddOperation adds operation.
 func (oq *OperationQueue) AddOperation(op *Operation) {
+	defer runtime.KeepAlive(oq)
+	defer runtime.KeepAlive(op)
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("addOperation:"), objref.IDOf(op))
 }
 
 // AddOperationsWaitUntilFinished adds operations wait until finished.
 func (oq *OperationQueue) AddOperationsWaitUntilFinished(ops []*Operation, wait bool) {
+	defer runtime.KeepAlive(oq)
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("addOperations:waitUntilFinished:"), purego.SliceToNSArray(ops, func(_v *Operation) objc.ID { return objref.IDOf(_v) }), wait)
 }
 
@@ -131,6 +142,7 @@ func (oq *OperationQueue) AddOperationsWaitUntilFinished(ops []*Operation, wait 
 //
 // AddOperationWith blocks until the operation completes or ctx is cancelled.
 func (oq *OperationQueue) AddOperationWith(ctx context.Context) error {
+	defer runtime.KeepAlive(oq)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -148,6 +160,7 @@ func (oq *OperationQueue) AddOperationWith(ctx context.Context) error {
 //
 // AddBarrierBlock blocks until the operation completes or ctx is cancelled.
 func (oq *OperationQueue) AddBarrierBlock(ctx context.Context) error {
+	defer runtime.KeepAlive(oq)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -163,34 +176,40 @@ func (oq *OperationQueue) AddBarrierBlock(ctx context.Context) error {
 
 // CancelAllOperations cancels all operations.
 func (oq *OperationQueue) CancelAllOperations() {
+	defer runtime.KeepAlive(oq)
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("cancelAllOperations"))
 }
 
 // WaitUntilAllOperationsAreFinished wraps the corresponding Objective-C method.
 func (oq *OperationQueue) WaitUntilAllOperationsAreFinished() {
+	defer runtime.KeepAlive(oq)
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("waitUntilAllOperationsAreFinished"))
 }
 
 // Progress returns the `progress` property represents a total progress of the operations executed in the queue. By default NSOperationQueue does not report progress until the `totalUnitCount` of the progress is set. When the `totalUnitCount` property of the progress is set the queue then opts into participating in progress reporting. When enabled, each operation will contribute 1 unit of completion to the overall progress of the queue for operations that are finished by the end of main (operations that override start and do not invoke super will not contribute to progress). Special attention to race conditions should be made when updating the `totalUnitCount` of the progress as well as care should be taken to avoid 'backwards progress'. For example; when a NSOperationQueue's progress is 5/10, representing 50% completed, and there are 90 more operations about to be added and the `totalUnitCount` that would then make the progress report as 5/100 which represents 5%. In this example it would mean that any progress bar would jump from displaying 50% back to 5%, which might not be desirable. In the cases where the `totalUnitCount` needs to be adjusted it is suggested to do this for thread-safety in a barrier by using the `addBarrierBlock:` API. This ensures that no un-expected execution state occurs adjusting into a potentially backwards moving progress scenario.
 func (oq *OperationQueue) Progress() *Progress {
+	defer runtime.KeepAlive(oq)
 	_r := objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("progress"))
 	return ProgressFromID(_r)
 }
 
 // MaxConcurrentOperationCount returns the max concurrent operation count.
 func (oq *OperationQueue) MaxConcurrentOperationCount() int {
+	defer runtime.KeepAlive(oq)
 	_r := objc.Send[int](objref.IDOf(oq), objc.RegisterName("maxConcurrentOperationCount"))
 	return _r
 }
 
 // IsSuspended reports whether the object is suspended.
 func (oq *OperationQueue) IsSuspended() bool {
+	defer runtime.KeepAlive(oq)
 	_r := objc.Send[bool](objref.IDOf(oq), objc.RegisterName("isSuspended"))
 	return _r
 }
 
 // Name returns the name.
 func (oq *OperationQueue) Name() string {
+	defer runtime.KeepAlive(oq)
 	_r := objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -200,12 +219,14 @@ func (oq *OperationQueue) Name() string {
 
 // QualityOfService returns the quality of service.
 func (oq *OperationQueue) QualityOfService() QualityOfService {
+	defer runtime.KeepAlive(oq)
 	_r := objc.Send[QualityOfService](objref.IDOf(oq), objc.RegisterName("qualityOfService"))
 	return _r
 }
 
 // UnderlyingQueue returns the underlying queue.
 func (oq *OperationQueue) UnderlyingQueue() *Object {
+	defer runtime.KeepAlive(oq)
 	_r := objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("underlyingQueue"))
 	return ObjectFromID(_r)
 }
@@ -214,12 +235,14 @@ func (oq *OperationQueue) UnderlyingQueue() *Object {
 //
 // Operations returns the collection as a Go slice.
 func (oq *OperationQueue) Operations() []*Operation {
+	defer runtime.KeepAlive(oq)
 	_arr := objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("operations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Operation { return OperationFromID(_id) })
 }
 
 // OperationCount returns the operation count.
 func (oq *OperationQueue) OperationCount() int {
+	defer runtime.KeepAlive(oq)
 	_r := objc.Send[int](objref.IDOf(oq), objc.RegisterName("operationCount"))
 	return _r
 }

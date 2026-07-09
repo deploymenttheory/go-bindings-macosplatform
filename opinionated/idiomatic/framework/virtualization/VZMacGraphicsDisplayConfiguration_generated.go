@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -56,6 +58,7 @@ func NewMACGraphicsDisplayConfigurationWithWidthInPixelsHeightInPixelsPixelsPerI
 
 // NewMACGraphicsDisplayConfigurationForScreenSizeInPoints create a display configuration suitable for showing on the specified screen.
 func NewMACGraphicsDisplayConfigurationForScreenSizeInPoints(screen obj.Object, sizeInPoints corefoundation.CGSize) *MacGraphicsDisplayConfiguration {
+	defer runtime.KeepAlive(screen)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacGraphicsDisplayConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForScreen:sizeInPoints:"), objref.IDOf(screen), sizeInPoints)
 	return macGraphicsDisplayConfigurationAdopt(_id)
@@ -81,18 +84,21 @@ func (mgdc *MacGraphicsDisplayConfiguration) WithPixelsPerInch(pixelsPerInch int
 
 // WidthInPixels returns the width of the display, in pixels.
 func (mgdc *MacGraphicsDisplayConfiguration) WidthInPixels() int {
+	defer runtime.KeepAlive(mgdc)
 	_r := objc.Send[int](objref.IDOf(mgdc), objc.RegisterName("widthInPixels"))
 	return _r
 }
 
 // HeightInPixels returns the height of the display, in pixels.
 func (mgdc *MacGraphicsDisplayConfiguration) HeightInPixels() int {
+	defer runtime.KeepAlive(mgdc)
 	_r := objc.Send[int](objref.IDOf(mgdc), objc.RegisterName("heightInPixels"))
 	return _r
 }
 
 // PixelsPerInch returns the pixel density as a number of pixels per inch.
 func (mgdc *MacGraphicsDisplayConfiguration) PixelsPerInch() int {
+	defer runtime.KeepAlive(mgdc)
 	_r := objc.Send[int](objref.IDOf(mgdc), objc.RegisterName("pixelsPerInch"))
 	return _r
 }

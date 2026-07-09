@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTREnergyEVSEModeClusterChangeToModeParamsAdopt(id objc.ID) *MTREnergyEVSEM
 
 // Description returns the object's -description text.
 func (meemcctmp *MTREnergyEVSEModeClusterChangeToModeParams) Description() string {
+	defer runtime.KeepAlive(meemcctmp)
 	return rt.Description(objref.IDOf(meemcctmp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (meemcctmp *MTREnergyEVSEModeClusterChangeToModeParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(meemcctmp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(meemcctmp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (meemcctmp *MTREnergyEVSEModeClusterChangeToModeParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(meemcctmp)
 	return rt.IsKind(objref.IDOf(meemcctmp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (meemcctmp *MTREnergyEVSEModeClusterChangeToModeParams) String() string {
+	defer runtime.KeepAlive(meemcctmp)
 	return rt.Description(objref.IDOf(meemcctmp))
 }
 
@@ -72,36 +80,42 @@ func NewMTREnergyEVSEModeClusterChangeToModeParams() *MTREnergyEVSEModeClusterCh
 
 // WithNewMode sets the new mode.
 func (meemcctmp *MTREnergyEVSEModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTREnergyEVSEModeClusterChangeToModeParams {
+	defer runtime.KeepAlive(newMode)
 	objc.Send[objc.ID](objref.IDOf(meemcctmp), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
 	return meemcctmp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (meemcctmp *MTREnergyEVSEModeClusterChangeToModeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTREnergyEVSEModeClusterChangeToModeParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(meemcctmp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return meemcctmp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (meemcctmp *MTREnergyEVSEModeClusterChangeToModeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTREnergyEVSEModeClusterChangeToModeParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(meemcctmp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return meemcctmp
 }
 
 // NewMode returns the new mode.
-func (meemcctmp *MTREnergyEVSEModeClusterChangeToModeParams) NewMode() obj.Object {
+func (meemcctmp *MTREnergyEVSEModeClusterChangeToModeParams) NewMode() *foundation.Number {
+	defer runtime.KeepAlive(meemcctmp)
 	_r := objc.Send[objc.ID](objref.IDOf(meemcctmp), objc.RegisterName("getNewMode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (meemcctmp *MTREnergyEVSEModeClusterChangeToModeParams) TimedInvokeTimeoutMs() obj.Object {
+func (meemcctmp *MTREnergyEVSEModeClusterChangeToModeParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(meemcctmp)
 	_r := objc.Send[objc.ID](objref.IDOf(meemcctmp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (meemcctmp *MTREnergyEVSEModeClusterChangeToModeParams) ServerSideProcessingTimeout() obj.Object {
+func (meemcctmp *MTREnergyEVSEModeClusterChangeToModeParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(meemcctmp)
 	_r := objc.Send[objc.ID](objref.IDOf(meemcctmp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

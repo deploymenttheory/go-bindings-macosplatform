@@ -5,10 +5,12 @@
 package pdfkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -58,6 +60,7 @@ func NewAnnotationTextWidget() *AnnotationTextWidget {
 
 // WithPage sets returns the page that the annotation is associated with.
 func (atw *AnnotationTextWidget) WithPage(page *Page) *AnnotationTextWidget {
+	defer runtime.KeepAlive(page)
 	objc.Send[objc.ID](objref.IDOf(atw), objc.RegisterName("setPage:"), objref.IDOf(page))
 	return atw
 }
@@ -142,18 +145,21 @@ func (atw *AnnotationTextWidget) WithMouseUpAction(mouseUpAction unsafe.Pointer)
 
 // WithFont sets the font the annotation uses to display text.
 func (atw *AnnotationTextWidget) WithFont(font obj.Object) *AnnotationTextWidget {
+	defer runtime.KeepAlive(font)
 	objc.Send[objc.ID](objref.IDOf(atw), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return atw
 }
 
 // WithFontColor sets the font color the annotation uses to display text.
 func (atw *AnnotationTextWidget) WithFontColor(fontColor obj.Object) *AnnotationTextWidget {
+	defer runtime.KeepAlive(fontColor)
 	objc.Send[objc.ID](objref.IDOf(atw), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
 	return atw
 }
 
 // WithInteriorColor sets the fill color for drawing a circle, line, or square annotation.
 func (atw *AnnotationTextWidget) WithInteriorColor(interiorColor obj.Object) *AnnotationTextWidget {
+	defer runtime.KeepAlive(interiorColor)
 	objc.Send[objc.ID](objref.IDOf(atw), objc.RegisterName("setInteriorColor:"), objref.IDOf(interiorColor))
 	return atw
 }
@@ -203,6 +209,7 @@ func (atw *AnnotationTextWidget) WithMarkupType(markupType MarkupType) *Annotati
 
 // WithWidgetFieldType sets the type of widget annotation, such as button, choice, or text.
 func (atw *AnnotationTextWidget) WithWidgetFieldType(widgetFieldType obj.Object) *AnnotationTextWidget {
+	defer runtime.KeepAlive(widgetFieldType)
 	objc.Send[objc.ID](objref.IDOf(atw), objc.RegisterName("setWidgetFieldType:"), objref.IDOf(widgetFieldType))
 	return atw
 }
@@ -301,13 +308,14 @@ func (atw *AnnotationTextWidget) WithOpen(open bool) *AnnotationTextWidget {
 
 // WithDestination sets the destination for a link annotation.
 func (atw *AnnotationTextWidget) WithDestination(destination *Destination) *AnnotationTextWidget {
+	defer runtime.KeepAlive(destination)
 	objc.Send[objc.ID](objref.IDOf(atw), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return atw
 }
 
 // WithURL sets a URL for a link annotation.
-func (atw *AnnotationTextWidget) WithURL(uRL string) *AnnotationTextWidget {
-	objc.Send[objc.ID](objref.IDOf(atw), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (atw *AnnotationTextWidget) WithURL(url string) *AnnotationTextWidget {
+	objc.Send[objc.ID](objref.IDOf(atw), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return atw
 }
 
@@ -325,6 +333,7 @@ func (atw *AnnotationTextWidget) WithCaption(caption string) *AnnotationTextWidg
 
 // WithBackgroundColor sets the color of the widget’s background.
 func (atw *AnnotationTextWidget) WithBackgroundColor(backgroundColor obj.Object) *AnnotationTextWidget {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(atw), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return atw
 }
@@ -337,6 +346,7 @@ func (atw *AnnotationTextWidget) WithStampName(stampName string) *AnnotationText
 
 // StringValue returns the string assigned to the annotation.
 func (atw *AnnotationTextWidget) StringValue() string {
+	defer runtime.KeepAlive(atw)
 	_r := objc.Send[objc.ID](objref.IDOf(atw), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""
@@ -346,33 +356,40 @@ func (atw *AnnotationTextWidget) StringValue() string {
 
 // SetStringValue sets the string for the annotation.
 func (atw *AnnotationTextWidget) SetStringValue(value string) {
+	defer runtime.KeepAlive(atw)
 	objc.Send[objc.ID](objref.IDOf(atw), objc.RegisterName("setStringValue:"), purego.NSString(value))
 }
 
 // AttributedStringValue returns the attributed string value.
-func (atw *AnnotationTextWidget) AttributedStringValue() obj.Object {
+func (atw *AnnotationTextWidget) AttributedStringValue() *foundation.AttributedString {
+	defer runtime.KeepAlive(atw)
 	_r := objc.Send[objc.ID](objref.IDOf(atw), objc.RegisterName("attributedStringValue"))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // SetAttributedStringValue wraps the corresponding Objective-C method.
 func (atw *AnnotationTextWidget) SetAttributedStringValue(value obj.Object) {
+	defer runtime.KeepAlive(atw)
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(atw), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(value))
 }
 
 // Rotation returns the rotation angle of the annotation text field in degrees.
 func (atw *AnnotationTextWidget) Rotation() int {
+	defer runtime.KeepAlive(atw)
 	_r := objc.Send[int](objref.IDOf(atw), objc.RegisterName("rotation"))
 	return _r
 }
 
 // SetRotation sets the rotation angle of the annotation text field in degrees.
 func (atw *AnnotationTextWidget) SetRotation(rotation int) {
+	defer runtime.KeepAlive(atw)
 	objc.Send[objc.ID](objref.IDOf(atw), objc.RegisterName("setRotation:"), rotation)
 }
 
 // SetIsMultiline wraps the corresponding Objective-C method.
 func (atw *AnnotationTextWidget) SetIsMultiline(multiline bool) {
+	defer runtime.KeepAlive(atw)
 	objc.Send[objc.ID](objref.IDOf(atw), objc.RegisterName("setIsMultiline:"), multiline)
 }
 

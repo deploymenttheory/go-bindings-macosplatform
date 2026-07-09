@@ -1617,8 +1617,8 @@
         "url": "https://developer.apple.com/documentation/cloudkit/ckdatabase/records(matching:inzonewith:desiredkeys:resultslimit:)"
       },
       "save(_:)": {
-        "doc": "Saves a specific record.",
-        "url": "https://developer.apple.com/documentation/cloudkit/ckdatabase/save(_:)-1j6fq"
+        "doc": "Saves a specific subscription.",
+        "url": "https://developer.apple.com/documentation/cloudkit/ckdatabase/save(_:)-69wq8"
       },
       "subscription(for:)": {
         "doc": "Fetches a specific subscription and returns it to an awaiting caller.",
@@ -1648,7 +1648,7 @@
       },
       "recordType": {
         "doc": "The type of record that the subscription queries.",
-        "url": "https://developer.apple.com/documentation/cloudkit/ckdatabasesubscription/recordtype-46v7a"
+        "url": "https://developer.apple.com/documentation/cloudkit/ckdatabasesubscription/recordtype-1y7dv"
       }
     },
     "CKDiscoverAllUserIdentitiesOperation": {
@@ -1796,11 +1796,11 @@
       },
       "recordWasChangedBlock": {
         "doc": "The closure to execute with the results of retrieving a record change.",
-        "url": "https://developer.apple.com/documentation/cloudkit/ckfetchrecordzonechangesoperation/recordwaschangedblock-90bon"
+        "url": "https://developer.apple.com/documentation/cloudkit/ckfetchrecordzonechangesoperation/recordwaschangedblock-x5bw"
       },
       "recordWithIDWasDeletedBlock": {
-        "doc": "The block to execute when a record no longer exists.",
-        "url": "https://developer.apple.com/documentation/cloudkit/ckfetchrecordzonechangesoperation/recordwithidwasdeletedblock-912xy"
+        "doc": "The closure to execute when a record no longer exists.",
+        "url": "https://developer.apple.com/documentation/cloudkit/ckfetchrecordzonechangesoperation/recordwithidwasdeletedblock-3z14c"
       },
       "recordZoneChangeTokensUpdatedBlock": {
         "doc": "The closure to execute when the change token updates.",
@@ -1844,7 +1844,7 @@
     "CKFetchRecordsOperation": {
       "desiredKeys": {
         "doc": "The fields of the records to fetch.",
-        "url": "https://developer.apple.com/documentation/cloudkit/ckfetchrecordsoperation/desiredkeys-31bbq"
+        "url": "https://developer.apple.com/documentation/cloudkit/ckfetchrecordsoperation/desiredkeys-34l1l"
       },
       "fetchRecordsCompletionBlock": {
         "doc": "The closure to execute after CloudKit retrieves all of the records.",
@@ -1890,7 +1890,7 @@
       },
       "rootRecordDesiredKeys": {
         "doc": "The fields to return when fetching the root record.",
-        "url": "https://developer.apple.com/documentation/cloudkit/ckfetchsharemetadataoperation/rootrecorddesiredkeys-7gvr5"
+        "url": "https://developer.apple.com/documentation/cloudkit/ckfetchsharemetadataoperation/rootrecorddesiredkeys-3xrex"
       },
       "shareURLs": {
         "doc": "The URLs of the shares to fetch.",
@@ -1929,8 +1929,8 @@
     },
     "CKFetchSubscriptionsOperation": {
       "fetchSubscriptionCompletionBlock": {
-        "doc": "The block to execute with the fetch results.",
-        "url": "https://developer.apple.com/documentation/cloudkit/ckfetchsubscriptionsoperation/fetchsubscriptioncompletionblock-6hhpi"
+        "doc": "The block to execute after the operation fetches the subscriptions.",
+        "url": "https://developer.apple.com/documentation/cloudkit/ckfetchsubscriptionsoperation/fetchsubscriptioncompletionblock-207ep"
       },
       "fetchSubscriptionsResultBlock": {
         "doc": "The closure to execute after CloudKit retrieves all of the subscriptions.",
@@ -1992,7 +1992,7 @@
       },
       "perRecordZoneSaveBlock": {
         "doc": "The closure to execute when CloudKit saves a record zone.",
-        "url": "https://developer.apple.com/documentation/cloudkit/ckmodifyrecordzonesoperation/perrecordzonesaveblock-3txst"
+        "url": "https://developer.apple.com/documentation/cloudkit/ckmodifyrecordzonesoperation/perrecordzonesaveblock-1m45y"
       },
       "recordZoneIDsToDelete": {
         "doc": "The IDs of the record zones to delete permanently from the database.",
@@ -2034,7 +2034,7 @@
       },
       "perRecordDeleteBlock": {
         "doc": "The closure to execute when CloudKit deletes a record.",
-        "url": "https://developer.apple.com/documentation/cloudkit/ckmodifyrecordsoperation/perrecorddeleteblock-7gaqj"
+        "url": "https://developer.apple.com/documentation/cloudkit/ckmodifyrecordsoperation/perrecorddeleteblock-9czoo"
       },
       "perRecordProgressBlock": {
         "doc": "The closure to execute with progress information for individual records.",
@@ -2072,7 +2072,7 @@
       },
       "perSubscriptionDeleteBlock": {
         "doc": "The closure to execute when CloudKit deletes a subscription.",
-        "url": "https://developer.apple.com/documentation/cloudkit/ckmodifysubscriptionsoperation/persubscriptiondeleteblock-5ke2l"
+        "url": "https://developer.apple.com/documentation/cloudkit/ckmodifysubscriptionsoperation/persubscriptiondeleteblock-55p5p"
       },
       "perSubscriptionSaveBlock": {
         "doc": "The closure to execute when CloudKit saves a subscription.",
@@ -2266,7 +2266,7 @@
       },
       "recordType": {
         "doc": "The record type to search.",
-        "url": "https://developer.apple.com/documentation/cloudkit/ckquery/recordtype-3clp"
+        "url": "https://developer.apple.com/documentation/cloudkit/ckquery/recordtype-6ajii"
       },
       "sortDescriptors": {
         "doc": "The sort descriptors for organizing the query’s results.",
@@ -2330,7 +2330,7 @@
       },
       "recordMatchedBlock": {
         "doc": "The closure to execute when a record match is available.",
-        "url": "https://developer.apple.com/documentation/cloudkit/ckqueryoperation/recordmatchedblock-7kek0"
+        "url": "https://developer.apple.com/documentation/cloudkit/ckqueryoperation/recordmatchedblock-2qze7"
       },
       "resultsLimit": {
         "doc": "The maximum number of records to return at one time.",
@@ -2450,7 +2450,7 @@
       },
       "recordType": {
         "doc": "The value that your app defines to identify the type of record.",
-        "url": "https://developer.apple.com/documentation/cloudkit/ckrecord/recordtype-6v7au"
+        "url": "https://developer.apple.com/documentation/cloudkit/ckrecord/recordtype-9s09b"
       },
       "setObject(_:forKey:)": {
         "doc": "Stores an object in the record using the specified key.",
@@ -2508,7 +2508,7 @@
       },
       "recordType": {
         "doc": "The type of record that the subscription queries.",
-        "url": "https://developer.apple.com/documentation/cloudkit/ckrecordzonesubscription/recordtype-1kt07"
+        "url": "https://developer.apple.com/documentation/cloudkit/ckrecordzonesubscription/recordtype-1fuqo"
       },
       "zoneID": {
         "doc": "The ID of the record zone that the subscription queries.",
@@ -2618,7 +2618,7 @@
       },
       "subscriptionID": {
         "doc": "The subscription’s unique identifier.",
-        "url": "https://developer.apple.com/documentation/cloudkit/cksubscription/subscriptionid-12vxy"
+        "url": "https://developer.apple.com/documentation/cloudkit/cksubscription/subscriptionid-6fp3j"
       },
       "subscriptionType": {
         "doc": "The behavior that a subscription provides.",
@@ -2974,7 +2974,7 @@
     "CKSystemSharingUIObserver": {
       "systemSharingUIDidSaveShareBlock": {
         "doc": "A callback block the system invokes after the success or failure of a share save by the system sharing UI.",
-        "url": "https://developer.apple.com/documentation/cloudkit/cksystemsharinguiobserver/systemsharinguididsaveshareblock-39zlv"
+        "url": "https://developer.apple.com/documentation/cloudkit/cksystemsharinguiobserver/systemsharinguididsaveshareblock-8c9vi"
       },
       "systemSharingUIDidStopSharingBlock": {
         "doc": "A callback block the system invokes after the success or failure of a share delete by the system sharing UI.",

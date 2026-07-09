@@ -229,13 +229,13 @@ func MIDIGetSerialPortOwner(portName obj.Object) (obj.Object, error) {
 var _fnMIDIObjectGetDataProperty func(int, objc.ID, unsafe.Pointer) int32
 
 // MIDIObjectGetDataProperty reports an error if the CoreMIDI framework function MIDIObjectGetDataProperty fails.
-func MIDIObjectGetDataProperty(obj_ int, propertyID obj.Object) (obj.Object, error) {
+func MIDIObjectGetDataProperty(object int, propertyID obj.Object) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIObjectGetDataProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectGetDataProperty, _lib, "MIDIObjectGetDataProperty")
 	}
 	var _out0 uintptr
-	_rc := _fnMIDIObjectGetDataProperty(obj_, objref.IDOf(propertyID), unsafe.Pointer(&_out0))
+	_rc := _fnMIDIObjectGetDataProperty(object, objref.IDOf(propertyID), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -245,13 +245,13 @@ func MIDIObjectGetDataProperty(obj_ int, propertyID obj.Object) (obj.Object, err
 var _fnMIDIObjectGetDictionaryProperty func(int, objc.ID, unsafe.Pointer) int32
 
 // MIDIObjectGetDictionaryProperty reports an error if the CoreMIDI framework function MIDIObjectGetDictionaryProperty fails.
-func MIDIObjectGetDictionaryProperty(obj_ int, propertyID obj.Object) (obj.Object, error) {
+func MIDIObjectGetDictionaryProperty(object int, propertyID obj.Object) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIObjectGetDictionaryProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectGetDictionaryProperty, _lib, "MIDIObjectGetDictionaryProperty")
 	}
 	var _out0 uintptr
-	_rc := _fnMIDIObjectGetDictionaryProperty(obj_, objref.IDOf(propertyID), unsafe.Pointer(&_out0))
+	_rc := _fnMIDIObjectGetDictionaryProperty(object, objref.IDOf(propertyID), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -261,13 +261,13 @@ func MIDIObjectGetDictionaryProperty(obj_ int, propertyID obj.Object) (obj.Objec
 var _fnMIDIObjectGetProperties func(int, unsafe.Pointer, uint8) int32
 
 // MIDIObjectGetProperties reports an error if the CoreMIDI framework function MIDIObjectGetProperties fails.
-func MIDIObjectGetProperties(obj_ int, deep uint8) (obj.Object, error) {
+func MIDIObjectGetProperties(object int, deep uint8) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIObjectGetProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectGetProperties, _lib, "MIDIObjectGetProperties")
 	}
 	var _out0 uintptr
-	_rc := _fnMIDIObjectGetProperties(obj_, unsafe.Pointer(&_out0), deep)
+	_rc := _fnMIDIObjectGetProperties(object, unsafe.Pointer(&_out0), deep)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -277,13 +277,13 @@ func MIDIObjectGetProperties(obj_ int, deep uint8) (obj.Object, error) {
 var _fnMIDIObjectGetStringProperty func(int, objc.ID, unsafe.Pointer) int32
 
 // MIDIObjectGetStringProperty reports an error if the CoreMIDI framework function MIDIObjectGetStringProperty fails.
-func MIDIObjectGetStringProperty(obj_ int, propertyID obj.Object) (obj.Object, error) {
+func MIDIObjectGetStringProperty(object int, propertyID obj.Object) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIObjectGetStringProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectGetStringProperty, _lib, "MIDIObjectGetStringProperty")
 	}
 	var _out0 uintptr
-	_rc := _fnMIDIObjectGetStringProperty(obj_, objref.IDOf(propertyID), unsafe.Pointer(&_out0))
+	_rc := _fnMIDIObjectGetStringProperty(object, objref.IDOf(propertyID), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -293,12 +293,12 @@ func MIDIObjectGetStringProperty(obj_ int, propertyID obj.Object) (obj.Object, e
 var _fnMIDIObjectRemoveProperty func(int, objc.ID) int32
 
 // MIDIObjectRemoveProperty reports an error if the CoreMIDI framework function MIDIObjectRemoveProperty fails.
-func MIDIObjectRemoveProperty(obj_ int, propertyID obj.Object) error {
+func MIDIObjectRemoveProperty(object int, propertyID obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIObjectRemoveProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectRemoveProperty, _lib, "MIDIObjectRemoveProperty")
 	}
-	_rc := _fnMIDIObjectRemoveProperty(obj_, objref.IDOf(propertyID))
+	_rc := _fnMIDIObjectRemoveProperty(object, objref.IDOf(propertyID))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -308,12 +308,12 @@ func MIDIObjectRemoveProperty(obj_ int, propertyID obj.Object) error {
 var _fnMIDIObjectSetDataProperty func(int, objc.ID, objc.ID) int32
 
 // MIDIObjectSetDataProperty reports an error if the CoreMIDI framework function MIDIObjectSetDataProperty fails.
-func MIDIObjectSetDataProperty(obj_ int, propertyID obj.Object, data obj.Object) error {
+func MIDIObjectSetDataProperty(object int, propertyID obj.Object, data obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIObjectSetDataProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectSetDataProperty, _lib, "MIDIObjectSetDataProperty")
 	}
-	_rc := _fnMIDIObjectSetDataProperty(obj_, objref.IDOf(propertyID), objref.IDOf(data))
+	_rc := _fnMIDIObjectSetDataProperty(object, objref.IDOf(propertyID), objref.IDOf(data))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -323,12 +323,12 @@ func MIDIObjectSetDataProperty(obj_ int, propertyID obj.Object, data obj.Object)
 var _fnMIDIObjectSetDictionaryProperty func(int, objc.ID, objc.ID) int32
 
 // MIDIObjectSetDictionaryProperty reports an error if the CoreMIDI framework function MIDIObjectSetDictionaryProperty fails.
-func MIDIObjectSetDictionaryProperty(obj_ int, propertyID obj.Object, dict obj.Object) error {
+func MIDIObjectSetDictionaryProperty(object int, propertyID obj.Object, dict obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIObjectSetDictionaryProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectSetDictionaryProperty, _lib, "MIDIObjectSetDictionaryProperty")
 	}
-	_rc := _fnMIDIObjectSetDictionaryProperty(obj_, objref.IDOf(propertyID), objref.IDOf(dict))
+	_rc := _fnMIDIObjectSetDictionaryProperty(object, objref.IDOf(propertyID), objref.IDOf(dict))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -338,12 +338,12 @@ func MIDIObjectSetDictionaryProperty(obj_ int, propertyID obj.Object, dict obj.O
 var _fnMIDIObjectSetIntegerProperty func(int, objc.ID, int) int32
 
 // MIDIObjectSetIntegerProperty reports an error if the CoreMIDI framework function MIDIObjectSetIntegerProperty fails.
-func MIDIObjectSetIntegerProperty(obj_ int, propertyID obj.Object, value int) error {
+func MIDIObjectSetIntegerProperty(object int, propertyID obj.Object, value int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIObjectSetIntegerProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectSetIntegerProperty, _lib, "MIDIObjectSetIntegerProperty")
 	}
-	_rc := _fnMIDIObjectSetIntegerProperty(obj_, objref.IDOf(propertyID), value)
+	_rc := _fnMIDIObjectSetIntegerProperty(object, objref.IDOf(propertyID), value)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -353,12 +353,12 @@ func MIDIObjectSetIntegerProperty(obj_ int, propertyID obj.Object, value int) er
 var _fnMIDIObjectSetStringProperty func(int, objc.ID, objc.ID) int32
 
 // MIDIObjectSetStringProperty reports an error if the CoreMIDI framework function MIDIObjectSetStringProperty fails.
-func MIDIObjectSetStringProperty(obj_ int, propertyID obj.Object, str obj.Object) error {
+func MIDIObjectSetStringProperty(object int, propertyID obj.Object, str obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIObjectSetStringProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectSetStringProperty, _lib, "MIDIObjectSetStringProperty")
 	}
-	_rc := _fnMIDIObjectSetStringProperty(obj_, objref.IDOf(propertyID), objref.IDOf(str))
+	_rc := _fnMIDIObjectSetStringProperty(object, objref.IDOf(propertyID), objref.IDOf(str))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

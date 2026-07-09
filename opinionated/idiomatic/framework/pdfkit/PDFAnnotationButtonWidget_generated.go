@@ -5,6 +5,7 @@
 package pdfkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -58,6 +59,7 @@ func NewAnnotationButtonWidget() *AnnotationButtonWidget {
 
 // WithPage sets returns the page that the annotation is associated with.
 func (abw *AnnotationButtonWidget) WithPage(page *Page) *AnnotationButtonWidget {
+	defer runtime.KeepAlive(page)
 	objc.Send[objc.ID](objref.IDOf(abw), objc.RegisterName("setPage:"), objref.IDOf(page))
 	return abw
 }
@@ -142,18 +144,21 @@ func (abw *AnnotationButtonWidget) WithMouseUpAction(mouseUpAction unsafe.Pointe
 
 // WithFont sets the font the annotation uses to display text.
 func (abw *AnnotationButtonWidget) WithFont(font obj.Object) *AnnotationButtonWidget {
+	defer runtime.KeepAlive(font)
 	objc.Send[objc.ID](objref.IDOf(abw), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return abw
 }
 
 // WithFontColor sets the font color the annotation uses to display text.
 func (abw *AnnotationButtonWidget) WithFontColor(fontColor obj.Object) *AnnotationButtonWidget {
+	defer runtime.KeepAlive(fontColor)
 	objc.Send[objc.ID](objref.IDOf(abw), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
 	return abw
 }
 
 // WithInteriorColor sets the fill color for drawing a circle, line, or square annotation.
 func (abw *AnnotationButtonWidget) WithInteriorColor(interiorColor obj.Object) *AnnotationButtonWidget {
+	defer runtime.KeepAlive(interiorColor)
 	objc.Send[objc.ID](objref.IDOf(abw), objc.RegisterName("setInteriorColor:"), objref.IDOf(interiorColor))
 	return abw
 }
@@ -203,6 +208,7 @@ func (abw *AnnotationButtonWidget) WithMarkupType(markupType MarkupType) *Annota
 
 // WithWidgetFieldType sets the type of widget annotation, such as button, choice, or text.
 func (abw *AnnotationButtonWidget) WithWidgetFieldType(widgetFieldType obj.Object) *AnnotationButtonWidget {
+	defer runtime.KeepAlive(widgetFieldType)
 	objc.Send[objc.ID](objref.IDOf(abw), objc.RegisterName("setWidgetFieldType:"), objref.IDOf(widgetFieldType))
 	return abw
 }
@@ -301,13 +307,14 @@ func (abw *AnnotationButtonWidget) WithOpen(open bool) *AnnotationButtonWidget {
 
 // WithDestination sets the destination for a link annotation.
 func (abw *AnnotationButtonWidget) WithDestination(destination *Destination) *AnnotationButtonWidget {
+	defer runtime.KeepAlive(destination)
 	objc.Send[objc.ID](objref.IDOf(abw), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return abw
 }
 
 // WithURL sets a URL for a link annotation.
-func (abw *AnnotationButtonWidget) WithURL(uRL string) *AnnotationButtonWidget {
-	objc.Send[objc.ID](objref.IDOf(abw), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (abw *AnnotationButtonWidget) WithURL(url string) *AnnotationButtonWidget {
+	objc.Send[objc.ID](objref.IDOf(abw), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return abw
 }
 
@@ -325,6 +332,7 @@ func (abw *AnnotationButtonWidget) WithCaption(caption string) *AnnotationButton
 
 // WithBackgroundColor sets the color of the widget’s background.
 func (abw *AnnotationButtonWidget) WithBackgroundColor(backgroundColor obj.Object) *AnnotationButtonWidget {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(abw), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return abw
 }
@@ -337,28 +345,33 @@ func (abw *AnnotationButtonWidget) WithStampName(stampName string) *AnnotationBu
 
 // ControlType returns the type of the control.
 func (abw *AnnotationButtonWidget) ControlType() WidgetControlType {
+	defer runtime.KeepAlive(abw)
 	_r := objc.Send[WidgetControlType](objref.IDOf(abw), objc.RegisterName("controlType"))
 	return _r
 }
 
 // SetControlType sets the type of the control.
 func (abw *AnnotationButtonWidget) SetControlType(type_ WidgetControlType) {
+	defer runtime.KeepAlive(abw)
 	objc.Send[objc.ID](objref.IDOf(abw), objc.RegisterName("setControlType:"), type_)
 }
 
 // State returns the state of the control.
 func (abw *AnnotationButtonWidget) State() int {
+	defer runtime.KeepAlive(abw)
 	_r := objc.Send[int](objref.IDOf(abw), objc.RegisterName("state"))
 	return _r
 }
 
 // SetState sets the state of the control.
 func (abw *AnnotationButtonWidget) SetState(value int) {
+	defer runtime.KeepAlive(abw)
 	objc.Send[objc.ID](objref.IDOf(abw), objc.RegisterName("setState:"), value)
 }
 
 // OnStateValue returns the string associated with the on state of a radio button or checkbox control.
 func (abw *AnnotationButtonWidget) OnStateValue() string {
+	defer runtime.KeepAlive(abw)
 	_r := objc.Send[objc.ID](objref.IDOf(abw), objc.RegisterName("onStateValue"))
 	if _r == 0 {
 		return ""
@@ -368,6 +381,7 @@ func (abw *AnnotationButtonWidget) OnStateValue() string {
 
 // SetOnStateValue sets the string that is associated with the on state of a radio button or checkbox control.
 func (abw *AnnotationButtonWidget) SetOnStateValue(name string) {
+	defer runtime.KeepAlive(abw)
 	objc.Send[objc.ID](objref.IDOf(abw), objc.RegisterName("setOnStateValue:"), purego.NSString(name))
 }
 

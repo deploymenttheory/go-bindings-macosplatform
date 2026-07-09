@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func wKContentWorldAdopt(id objc.ID) *WKContentWorld {
 
 // Description returns the object's -description text.
 func (wcw *WKContentWorld) Description() string {
+	defer runtime.KeepAlive(wcw)
 	return rt.Description(objref.IDOf(wcw))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wcw *WKContentWorld) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wcw)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wcw), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wcw *WKContentWorld) IsKind(className string) bool {
+	defer runtime.KeepAlive(wcw)
 	return rt.IsKind(objref.IDOf(wcw), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wcw *WKContentWorld) String() string {
+	defer runtime.KeepAlive(wcw)
 	return rt.Description(objref.IDOf(wcw))
 }
 
@@ -80,6 +87,7 @@ func NewWKContentWorld() *WKContentWorld {
 
 // Name returns the name of the WKContentWorld The pageWorld and defaultClientWorld instances will have a nil name. All other instances will have the non-nil name they were accessed by.
 func (wcw *WKContentWorld) Name() string {
+	defer runtime.KeepAlive(wcw)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

@@ -1,0 +1,5 @@
+{
+  "error_typedefs": [
+    {"typedef": "hv_return_t", "success_value": 0, "domain": "HypervisorReturnDomain"}
+  ]
+}

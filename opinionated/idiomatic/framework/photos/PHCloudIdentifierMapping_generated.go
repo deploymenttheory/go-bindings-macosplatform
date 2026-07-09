@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func cloudIdentifierMappingAdopt(id objc.ID) *CloudIdentifierMapping {
 
 // Description returns the object's -description text.
 func (cim *CloudIdentifierMapping) Description() string {
+	defer runtime.KeepAlive(cim)
 	return rt.Description(objref.IDOf(cim))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cim *CloudIdentifierMapping) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cim)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cim), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cim *CloudIdentifierMapping) IsKind(className string) bool {
+	defer runtime.KeepAlive(cim)
 	return rt.IsKind(objref.IDOf(cim), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cim *CloudIdentifierMapping) String() string {
+	defer runtime.KeepAlive(cim)
 	return rt.Description(objref.IDOf(cim))
 }
 
@@ -74,6 +81,7 @@ func NewCloudIdentifierMapping() *CloudIdentifierMapping {
 
 // CloudIdentifier returns the cloud identifier of the resource found for this local identifier
 func (cim *CloudIdentifierMapping) CloudIdentifier() *CloudIdentifier {
+	defer runtime.KeepAlive(cim)
 	_r := objc.Send[objc.ID](objref.IDOf(cim), objc.RegisterName("cloudIdentifier"))
 	return CloudIdentifierFromID(_r)
 }

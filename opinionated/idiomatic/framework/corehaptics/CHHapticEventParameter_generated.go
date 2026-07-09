@@ -5,7 +5,10 @@
 package corehaptics
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func hapticEventParameterAdopt(id objc.ID) *HapticEventParameter {
 
 // Description returns the object's -description text.
 func (hep *HapticEventParameter) Description() string {
+	defer runtime.KeepAlive(hep)
 	return rt.Description(objref.IDOf(hep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hep *HapticEventParameter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hep)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hep *HapticEventParameter) IsKind(className string) bool {
+	defer runtime.KeepAlive(hep)
 	return rt.IsKind(objref.IDOf(hep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hep *HapticEventParameter) String() string {
+	defer runtime.KeepAlive(hep)
 	return rt.Description(objref.IDOf(hep))
 }
 
 // NewHapticEventParameterWithParameterIDValue creates a haptic event parameter from its ID and value.
 func NewHapticEventParameterWithParameterIDValue(parameterID obj.Object, value float32) *HapticEventParameter {
+	defer runtime.KeepAlive(parameterID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticEventParameter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParameterID:value:"), objref.IDOf(parameterID), value)
 	return hapticEventParameterAdopt(_id)
@@ -80,13 +89,15 @@ func (hep *HapticEventParameter) WithValue(value float32) *HapticEventParameter 
 }
 
 // ParameterID returns the parameter ID.
-func (hep *HapticEventParameter) ParameterID() obj.Object {
+func (hep *HapticEventParameter) ParameterID() *foundation.String {
+	defer runtime.KeepAlive(hep)
 	_r := objc.Send[objc.ID](objref.IDOf(hep), objc.RegisterName("parameterID"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Value returns the value.
 func (hep *HapticEventParameter) Value() float32 {
+	defer runtime.KeepAlive(hep)
 	_r := objc.Send[float32](objref.IDOf(hep), objc.RegisterName("value"))
 	return _r
 }

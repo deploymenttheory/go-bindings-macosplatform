@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,19 +58,21 @@ func NewQuitCommand() *QuitCommand {
 
 // WithDirectParameter sets sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
 func (qc *QuitCommand) WithDirectParameter(directParameter obj.Object) *QuitCommand {
+	defer runtime.KeepAlive(directParameter)
 	objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
 	return qc
 }
 
 // WithReceiversSpecifier sets sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
 func (qc *QuitCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *QuitCommand {
+	defer runtime.KeepAlive(receiversSpecifier)
 	objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
 	return qc
 }
 
 // WithArguments sets sets the arguments of the command to args.
-func (qc *QuitCommand) WithArguments(arguments obj.Object) *QuitCommand {
-	objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
+func (qc *QuitCommand) WithArguments(arguments map[string]obj.Object) *QuitCommand {
+	objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("setArguments:"), rt.MapToDict(arguments, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return qc
 }
 
@@ -80,18 +84,21 @@ func (qc *QuitCommand) WithScriptErrorNumber(scriptErrorNumber int) *QuitCommand
 
 // WithScriptErrorOffendingObjectDescriptor sets sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 func (qc *QuitCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *QuitCommand {
+	defer runtime.KeepAlive(scriptErrorOffendingObjectDescriptor)
 	objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
 	return qc
 }
 
 // WithScriptErrorExpectedTypeDescriptor sets sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 func (qc *QuitCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *QuitCommand {
+	defer runtime.KeepAlive(scriptErrorExpectedTypeDescriptor)
 	objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
 	return qc
 }
 
 // WithScriptErrorString sets sets a script error string that is associated with execution of the command.
 func (qc *QuitCommand) WithScriptErrorString(scriptErrorString StringProvider) *QuitCommand {
+	defer runtime.KeepAlive(scriptErrorString)
 	objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
 	return qc
 }
@@ -103,13 +110,14 @@ func (qc *QuitCommand) WithObservationInfo(observationInfo unsafe.Pointer) *Quit
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (qc *QuitCommand) WithScriptingProperties(scriptingProperties obj.Object) *QuitCommand {
-	objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (qc *QuitCommand) WithScriptingProperties(scriptingProperties map[string]obj.Object) *QuitCommand {
+	objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return qc
 }
 
 // SaveOptions returns the save options.
 func (qc *QuitCommand) SaveOptions() SaveOptions {
+	defer runtime.KeepAlive(qc)
 	_r := objc.Send[SaveOptions](objref.IDOf(qc), objc.RegisterName("saveOptions"))
 	return _r
 }

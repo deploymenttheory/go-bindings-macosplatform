@@ -5,6 +5,7 @@
 package cinematic
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -57,6 +58,8 @@ func NewCompositionInfo() *CompositionInfo {
 
 // InsertTimeRangeOfCinematicAssetInfoAtTime inserts a timeRange of a cinematic source asset into the corresponding tracks of a composition - Parameters: - timeRange: time range of the cinematic asset to be inserted - assetInfo: identifies the tracks of the cinematic asset to be inserted - atTime: the time at which the inserted tracks are to be presented by the composition; `kCMTimeInvalid` may be used to append at the end. - error: AVError if it fails, as with `-[AVMutableCompositionTrack insertTimeRange:ofTrack:atTime:error:]` - Returns: whether the insertion was successful
 func (ci *CompositionInfo) InsertTimeRangeOfCinematicAssetInfoAtTime(timeRange coremedia.CMTimeRange, assetInfo *AssetInfo, startTime coremedia.CMTime) error {
+	defer runtime.KeepAlive(ci)
+	defer runtime.KeepAlive(assetInfo)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ci), objc.RegisterName("insertTimeRange:ofCinematicAssetInfo:atTime:error:"), timeRange, objref.IDOf(assetInfo), startTime, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

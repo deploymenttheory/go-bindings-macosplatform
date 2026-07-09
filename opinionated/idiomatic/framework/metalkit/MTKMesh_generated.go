@@ -5,6 +5,8 @@
 package metalkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func meshAdopt(id objc.ID) *Mesh {
 
 // Description returns the object's -description text.
 func (m *Mesh) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Mesh) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Mesh) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Mesh) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
@@ -82,12 +89,14 @@ func (m *Mesh) WithName(name string) *Mesh {
 //
 // VertexBuffers returns the collection as a Go slice.
 func (m *Mesh) VertexBuffers() []*MeshBuffer {
+	defer runtime.KeepAlive(m)
 	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("vertexBuffers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MeshBuffer { return MeshBufferFromID(_id) })
 }
 
 // VertexDescriptor returns model I/O vertex descriptor specifying the layout of data in vertexBuffers. This is not directly used by this object, but the application can use this information to determine rendering state or create a Metal vertex descriptor to build a RenderPipelineState object capable of interpreting data in 'vertexBuffers'.  Changing propties in the object will not result in the relayout data in vertex descriptor and thus will make the vertex descriptor no loger describe the layout of vertes data and verticies. (i.e. don't change properties in this vertexDescriptor)
 func (m *Mesh) VertexDescriptor() obj.Object {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("vertexDescriptor"))
 	return obj.Wrap(_r)
 }
@@ -96,18 +105,21 @@ func (m *Mesh) VertexDescriptor() obj.Object {
 //
 // Submeshes returns the collection as a Go slice.
 func (m *Mesh) Submeshes() []*Submesh {
+	defer runtime.KeepAlive(m)
 	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("submeshes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Submesh { return SubmeshFromID(_id) })
 }
 
 // VertexCount returns number of vertices in the vertexBuffers.
 func (m *Mesh) VertexCount() int {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("vertexCount"))
 	return _r
 }
 
 // Name returns name of the mesh copies from the originating Model I/O mesh. Can be used by the app to identify the mesh in its scene/world/renderer etc.
 func (m *Mesh) Name() string {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,7 @@
 package iousbhost
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -57,6 +58,7 @@ func NewHostPipe() *HostPipe {
 
 // SetIdleTimeout sets the desired idle suspend timeout for the interface.
 func (hp *HostPipe) SetIdleTimeout(idleTimeout float64) error {
+	defer runtime.KeepAlive(hp)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(hp), objc.RegisterName("setIdleTimeout:error:"), idleTimeout, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -69,6 +71,7 @@ func (hp *HostPipe) SetIdleTimeout(idleTimeout float64) error {
 //
 // ClearStall returns an error if the operation did not succeed.
 func (hp *HostPipe) ClearStall() error {
+	defer runtime.KeepAlive(hp)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(hp), objc.RegisterName("clearStallWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -79,6 +82,8 @@ func (hp *HostPipe) ClearStall() error {
 
 // SendControlRequestDataBytesTransferredCompletionTimeout sends a request on a control endpoint.
 func (hp *HostPipe) SendControlRequestDataBytesTransferredCompletionTimeout(request unsafe.Pointer, data obj.Object, completionTimeout float64) (bytesTransferred int, err error) {
+	defer runtime.KeepAlive(hp)
+	defer runtime.KeepAlive(data)
 	var _out0 int
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(hp), objc.RegisterName("sendControlRequest:data:bytesTransferred:completionTimeout:error:"), request, objref.IDOf(data), unsafe.Pointer(&_out0), completionTimeout, unsafe.Pointer(&_nsErr))
@@ -90,6 +95,8 @@ func (hp *HostPipe) SendControlRequestDataBytesTransferredCompletionTimeout(requ
 
 // SendControlRequestDataBytesTransferred sends a request on a control endpoint with a default timeout.
 func (hp *HostPipe) SendControlRequestDataBytesTransferred(request unsafe.Pointer, data obj.Object) (bytesTransferred int, err error) {
+	defer runtime.KeepAlive(hp)
+	defer runtime.KeepAlive(data)
 	var _out0 int
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(hp), objc.RegisterName("sendControlRequest:data:bytesTransferred:error:"), request, objref.IDOf(data), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
@@ -101,6 +108,7 @@ func (hp *HostPipe) SendControlRequestDataBytesTransferred(request unsafe.Pointe
 
 // SendControlRequest sends a request on a control endpoint without a data phase and a default completion timeout.
 func (hp *HostPipe) SendControlRequest(request unsafe.Pointer) error {
+	defer runtime.KeepAlive(hp)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(hp), objc.RegisterName("sendControlRequest:error:"), request, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -110,25 +118,31 @@ func (hp *HostPipe) SendControlRequest(request unsafe.Pointer) error {
 }
 
 // EnqueueControlRequestDataCompletionTimeoutErrorCompletionHandler enqueues a request on a control endpoint.
-func (hp *HostPipe) EnqueueControlRequestDataCompletionTimeoutErrorCompletionHandler(request unsafe.Pointer, data obj.Object, completionTimeout float64, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
-	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueControlRequest:data:completionTimeout:error:completionHandler:"), request, objref.IDOf(data), completionTimeout, error_, completionHandler)
+func (hp *HostPipe) EnqueueControlRequestDataCompletionTimeoutErrorCompletionHandler(request unsafe.Pointer, data obj.Object, completionTimeout float64, err unsafe.Pointer, completionHandler func(int, uint)) bool {
+	defer runtime.KeepAlive(hp)
+	defer runtime.KeepAlive(data)
+	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueControlRequest:data:completionTimeout:error:completionHandler:"), request, objref.IDOf(data), completionTimeout, err, completionHandler)
 	return _r
 }
 
 // EnqueueControlRequestDataErrorCompletionHandler enqueues a request on a control endpoint with a default completion timeout.
-func (hp *HostPipe) EnqueueControlRequestDataErrorCompletionHandler(request unsafe.Pointer, data obj.Object, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
-	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueControlRequest:data:error:completionHandler:"), request, objref.IDOf(data), error_, completionHandler)
+func (hp *HostPipe) EnqueueControlRequestDataErrorCompletionHandler(request unsafe.Pointer, data obj.Object, err unsafe.Pointer, completionHandler func(int, uint)) bool {
+	defer runtime.KeepAlive(hp)
+	defer runtime.KeepAlive(data)
+	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueControlRequest:data:error:completionHandler:"), request, objref.IDOf(data), err, completionHandler)
 	return _r
 }
 
 // EnqueueControlRequestErrorCompletionHandler enqueues a request on a control endpoint without a data phase and a default completion timeout.
-func (hp *HostPipe) EnqueueControlRequestErrorCompletionHandler(request unsafe.Pointer, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
-	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueControlRequest:error:completionHandler:"), request, error_, completionHandler)
+func (hp *HostPipe) EnqueueControlRequestErrorCompletionHandler(request unsafe.Pointer, err unsafe.Pointer, completionHandler func(int, uint)) bool {
+	defer runtime.KeepAlive(hp)
+	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueControlRequest:error:completionHandler:"), request, err, completionHandler)
 	return _r
 }
 
 // AbortWithOption aborts pending input/output requests.
 func (hp *HostPipe) AbortWithOption(option HostAbortOption) error {
+	defer runtime.KeepAlive(hp)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(hp), objc.RegisterName("abortWithOption:error:"), option, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -141,6 +155,7 @@ func (hp *HostPipe) AbortWithOption(option HostAbortOption) error {
 //
 // Abort returns an error if the operation did not succeed.
 func (hp *HostPipe) Abort() error {
+	defer runtime.KeepAlive(hp)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(hp), objc.RegisterName("abortWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -151,6 +166,8 @@ func (hp *HostPipe) Abort() error {
 
 // SendIORequestWithDataBytesTransferredCompletionTimeout sends an input/output request on the pipe.
 func (hp *HostPipe) SendIORequestWithDataBytesTransferredCompletionTimeout(data obj.Object, completionTimeout float64) (bytesTransferred int, err error) {
+	defer runtime.KeepAlive(hp)
+	defer runtime.KeepAlive(data)
 	var _out0 int
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(hp), objc.RegisterName("sendIORequestWithData:bytesTransferred:completionTimeout:error:"), objref.IDOf(data), unsafe.Pointer(&_out0), completionTimeout, unsafe.Pointer(&_nsErr))
@@ -161,8 +178,10 @@ func (hp *HostPipe) SendIORequestWithDataBytesTransferredCompletionTimeout(data 
 }
 
 // EnqueueIORequestWithDataCompletionTimeoutErrorCompletionHandler enqueues an input/output request on the pipe.
-func (hp *HostPipe) EnqueueIORequestWithDataCompletionTimeoutErrorCompletionHandler(data obj.Object, completionTimeout float64, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
-	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueIORequestWithData:completionTimeout:error:completionHandler:"), objref.IDOf(data), completionTimeout, error_, completionHandler)
+func (hp *HostPipe) EnqueueIORequestWithDataCompletionTimeoutErrorCompletionHandler(data obj.Object, completionTimeout float64, err unsafe.Pointer, completionHandler func(int, uint)) bool {
+	defer runtime.KeepAlive(hp)
+	defer runtime.KeepAlive(data)
+	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueIORequestWithData:completionTimeout:error:completionHandler:"), objref.IDOf(data), completionTimeout, err, completionHandler)
 	return _r
 }
 
@@ -170,6 +189,7 @@ func (hp *HostPipe) EnqueueIORequestWithDataCompletionTimeoutErrorCompletionHand
 //
 // EnableStreams returns an error if the operation did not succeed.
 func (hp *HostPipe) EnableStreams() error {
+	defer runtime.KeepAlive(hp)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enableStreamsWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -182,6 +202,7 @@ func (hp *HostPipe) EnableStreams() error {
 //
 // DisableStreams returns an error if the operation did not succeed.
 func (hp *HostPipe) DisableStreams() error {
+	defer runtime.KeepAlive(hp)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(hp), objc.RegisterName("disableStreamsWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -190,8 +211,9 @@ func (hp *HostPipe) DisableStreams() error {
 	return nil
 }
 
-// CopyStreamWithStreamIDError returns the stream for a stream ID.
-func (hp *HostPipe) CopyStreamWithStreamIDError(streamID int) (result *HostStream, err error) {
+// CopyStreamWithStreamID returns the stream for a stream ID.
+func (hp *HostPipe) CopyStreamWithStreamID(streamID int) (result *HostStream, err error) {
+	defer runtime.KeepAlive(hp)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(hp), objc.RegisterName("copyStreamWithStreamID:error:"), streamID, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -202,6 +224,7 @@ func (hp *HostPipe) CopyStreamWithStreamIDError(streamID int) (result *HostStrea
 
 // IdleTimeout returns retrieve the current idle suspend timeout. See
 func (hp *HostPipe) IdleTimeout() float64 {
+	defer runtime.KeepAlive(hp)
 	_r := objc.Send[float64](objref.IDOf(hp), objc.RegisterName("idleTimeout"))
 	return _r
 }

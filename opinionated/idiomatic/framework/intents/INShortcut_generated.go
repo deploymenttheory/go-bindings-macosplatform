@@ -5,7 +5,10 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,27 +48,33 @@ func shortcutAdopt(id objc.ID) *Shortcut {
 
 // Description returns the object's -description text.
 func (s *Shortcut) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Shortcut) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Shortcut) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Shortcut) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // NewShortcutWithIntent creates a shortcut with the given intent.
 func NewShortcutWithIntent(intent *Intent) *Shortcut {
+	defer runtime.KeepAlive(intent)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INShortcut")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIntent:"), objref.IDOf(intent))
 	return shortcutAdopt(_id)
@@ -73,6 +82,7 @@ func NewShortcutWithIntent(intent *Intent) *Shortcut {
 
 // NewShortcutWithUserActivity creates a shortcut with the given user activity.
 func NewShortcutWithUserActivity(userActivity obj.Object) *Shortcut {
+	defer runtime.KeepAlive(userActivity)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INShortcut")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUserActivity:"), objref.IDOf(userActivity))
 	return shortcutAdopt(_id)
@@ -80,12 +90,14 @@ func NewShortcutWithUserActivity(userActivity obj.Object) *Shortcut {
 
 // Intent returns the intent that will be performed when this shortcut is invoked. Is
 func (s *Shortcut) Intent() *Intent {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("intent"))
 	return IntentFromID(_r)
 }
 
 // UserActivity returns the user activity that will be performed when this shortcut is invoked. Is
-func (s *Shortcut) UserActivity() obj.Object {
+func (s *Shortcut) UserActivity() *foundation.UserActivity {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("userActivity"))
-	return obj.Wrap(_r)
+	return foundation.UserActivityFromID(_r)
 }

@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func electrocardiogramVoltageMeasurementAdopt(id objc.ID) *ElectrocardiogramVolt
 
 // Description returns the object's -description text.
 func (evm *ElectrocardiogramVoltageMeasurement) Description() string {
+	defer runtime.KeepAlive(evm)
 	return rt.Description(objref.IDOf(evm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (evm *ElectrocardiogramVoltageMeasurement) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(evm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(evm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (evm *ElectrocardiogramVoltageMeasurement) IsKind(className string) bool {
+	defer runtime.KeepAlive(evm)
 	return rt.IsKind(objref.IDOf(evm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (evm *ElectrocardiogramVoltageMeasurement) String() string {
+	defer runtime.KeepAlive(evm)
 	return rt.Description(objref.IDOf(evm))
 }
 
@@ -74,12 +81,14 @@ func NewElectrocardiogramVoltageMeasurement() *ElectrocardiogramVoltageMeasureme
 
 // QuantityForLead returns an HKQuantity for the specified lead with a unit compatible with [HKUnit voltUnit].
 func (evm *ElectrocardiogramVoltageMeasurement) QuantityForLead(lead ElectrocardiogramLead) *Quantity {
+	defer runtime.KeepAlive(evm)
 	_r := objc.Send[objc.ID](objref.IDOf(evm), objc.RegisterName("quantityForLead:"), lead)
 	return QuantityFromID(_r)
 }
 
 // TimeSinceSampleStart returns the time interval between this voltage measurement and the start of the sample.
 func (evm *ElectrocardiogramVoltageMeasurement) TimeSinceSampleStart() float64 {
+	defer runtime.KeepAlive(evm)
 	_r := objc.Send[float64](objref.IDOf(evm), objc.RegisterName("timeSinceSampleStart"))
 	return _r
 }

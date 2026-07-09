@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func imageGuidedFilterAdopt(id objc.ID) *ImageGuidedFilter {
 
 // Description returns the object's -description text.
 func (igf *ImageGuidedFilter) Description() string {
+	defer runtime.KeepAlive(igf)
 	return rt.Description(objref.IDOf(igf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (igf *ImageGuidedFilter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(igf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(igf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (igf *ImageGuidedFilter) IsKind(className string) bool {
+	defer runtime.KeepAlive(igf)
 	return rt.IsKind(objref.IDOf(igf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (igf *ImageGuidedFilter) String() string {
+	defer runtime.KeepAlive(igf)
 	return rt.Description(objref.IDOf(igf))
 }
 
@@ -90,24 +97,28 @@ func (igf *ImageGuidedFilter) WithReconstructOffset(reconstructOffset float32) *
 
 // KernelDiameter returns the local window size The local window size.
 func (igf *ImageGuidedFilter) KernelDiameter() int {
+	defer runtime.KeepAlive(igf)
 	_r := objc.Send[int](objref.IDOf(igf), objc.RegisterName("kernelDiameter"))
 	return _r
 }
 
 // Epsilon returns the regularization parameter The parameter used when computing the linear coefficients a and b.
 func (igf *ImageGuidedFilter) Epsilon() float32 {
+	defer runtime.KeepAlive(igf)
 	_r := objc.Send[float32](objref.IDOf(igf), objc.RegisterName("epsilon"))
 	return _r
 }
 
 // ReconstructScale returns the scale parameter The parameter used to scale the result of the reconstruction operation. The default value is 1.0f.
 func (igf *ImageGuidedFilter) ReconstructScale() float32 {
+	defer runtime.KeepAlive(igf)
 	_r := objc.Send[float32](objref.IDOf(igf), objc.RegisterName("reconstructScale"))
 	return _r
 }
 
 // ReconstructOffset returns the offset parameter The offset parameter added to the result of the scaled reconstructed value. The default value is 0.0f.
 func (igf *ImageGuidedFilter) ReconstructOffset() float32 {
+	defer runtime.KeepAlive(igf)
 	_r := objc.Send[float32](objref.IDOf(igf), objc.RegisterName("reconstructOffset"))
 	return _r
 }

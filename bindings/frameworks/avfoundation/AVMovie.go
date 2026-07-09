@@ -56,8 +56,8 @@ func AVMovieMovieTypes() *foundation.NSArray[*foundation.NSString] {
 }
 
 // Returns a new movie object from a movie header stored in a QuickTime movie file of ISO base media file.
-func AVMovieMovieWithURLOptions(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVMovie {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVMovie), _aVMovieSelMovieWithURLOptions, uRL.Ptr(), options.Ptr())
+func AVMovieMovieWithURLOptions(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVMovie {
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVMovie), _aVMovieSelMovieWithURLOptions, url.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -65,8 +65,8 @@ func AVMovieMovieWithURLOptions(uRL *foundation.NSURL, options *foundation.NSDic
 }
 
 // Creates a movie object from a movie header stored in a QuickTime movie file of ISO base media file.
-func (o *AVMovie) InitWithURLOptions(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVMovie {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVMovieSelInitWithURLOptions, uRL.Ptr(), options.Ptr())
+func (o *AVMovie) InitWithURLOptions(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVMovie {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVMovieSelInitWithURLOptions, url.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -144,9 +144,9 @@ func (o *AVMovie) MovieHeaderWithFileTypeError(fileType *foundation.NSString) (*
 }
 
 // Writes the movie header to the specified URL.
-func (o *AVMovie) WriteMovieHeaderToURLFileTypeOptionsError(uRL *foundation.NSURL, fileType *foundation.NSString, options AVMovieWritingOptions) (bool, error) {
+func (o *AVMovie) WriteMovieHeaderToURLFileTypeOptionsError(url *foundation.NSURL, fileType *foundation.NSString, options AVMovieWritingOptions) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _aVMovieSelWriteMovieHeaderToURLFileTypeOptionsError, uRL.Ptr(), fileType.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _aVMovieSelWriteMovieHeaderToURLFileTypeOptionsError, url.Ptr(), fileType.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}

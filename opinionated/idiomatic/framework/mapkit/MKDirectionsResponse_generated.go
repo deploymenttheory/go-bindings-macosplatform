@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func directionsResponseAdopt(id objc.ID) *DirectionsResponse {
 
 // Description returns the object's -description text.
 func (dr *DirectionsResponse) Description() string {
+	defer runtime.KeepAlive(dr)
 	return rt.Description(objref.IDOf(dr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dr *DirectionsResponse) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dr *DirectionsResponse) IsKind(className string) bool {
+	defer runtime.KeepAlive(dr)
 	return rt.IsKind(objref.IDOf(dr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dr *DirectionsResponse) String() string {
+	defer runtime.KeepAlive(dr)
 	return rt.Description(objref.IDOf(dr))
 }
 
@@ -74,12 +81,14 @@ func NewDirectionsResponse() *DirectionsResponse {
 
 // Source returns the source.
 func (dr *DirectionsResponse) Source() *MapItem {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("source"))
 	return MapItemFromID(_r)
 }
 
 // Destination returns the destination.
 func (dr *DirectionsResponse) Destination() *MapItem {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("destination"))
 	return MapItemFromID(_r)
 }
@@ -88,6 +97,7 @@ func (dr *DirectionsResponse) Destination() *MapItem {
 //
 // Routes returns the collection as a Go slice.
 func (dr *DirectionsResponse) Routes() []*Route {
+	defer runtime.KeepAlive(dr)
 	_arr := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("routes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Route { return RouteFromID(_id) })
 }

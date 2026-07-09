@@ -5,7 +5,10 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -55,6 +58,7 @@ func NewBatchUpdateRequestWithEntityName(entityName string) *BatchUpdateRequest 
 
 // NewBatchUpdateRequestWithEntity creates a batch-update request for a managed entity.
 func NewBatchUpdateRequestWithEntity(entity *EntityDescription) *BatchUpdateRequest {
+	defer runtime.KeepAlive(entity)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBatchUpdateRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntity:"), objref.IDOf(entity))
 	return batchUpdateRequestAdopt(_id)
@@ -62,6 +66,7 @@ func NewBatchUpdateRequestWithEntity(entity *EntityDescription) *BatchUpdateRequ
 
 // WithPredicate sets a predicate that identifies the objects to update.
 func (bur *BatchUpdateRequest) WithPredicate(predicate obj.Object) *BatchUpdateRequest {
+	defer runtime.KeepAlive(predicate)
 	objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
 	return bur
 }
@@ -80,6 +85,7 @@ func (bur *BatchUpdateRequest) WithResultType(resultType BatchUpdateRequestResul
 
 // WithPropertiesToUpdate sets a dictionary of property description pairs that describe the updates.
 func (bur *BatchUpdateRequest) WithPropertiesToUpdate(propertiesToUpdate obj.Object) *BatchUpdateRequest {
+	defer runtime.KeepAlive(propertiesToUpdate)
 	objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("setPropertiesToUpdate:"), objref.IDOf(propertiesToUpdate))
 	return bur
 }
@@ -93,6 +99,7 @@ func (bur *BatchUpdateRequest) WithAffectedStores(items ...PersistentStoreProvid
 
 // EntityName returns the entity name.
 func (bur *BatchUpdateRequest) EntityName() string {
+	defer runtime.KeepAlive(bur)
 	_r := objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("entityName"))
 	if _r == 0 {
 		return ""
@@ -102,30 +109,35 @@ func (bur *BatchUpdateRequest) EntityName() string {
 
 // Entity returns the entity.
 func (bur *BatchUpdateRequest) Entity() *EntityDescription {
+	defer runtime.KeepAlive(bur)
 	_r := objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
 // Predicate returns the predicate.
-func (bur *BatchUpdateRequest) Predicate() obj.Object {
+func (bur *BatchUpdateRequest) Predicate() *foundation.Predicate {
+	defer runtime.KeepAlive(bur)
 	_r := objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("predicate"))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // IncludesSubentities wraps the corresponding Objective-C method.
 func (bur *BatchUpdateRequest) IncludesSubentities() bool {
+	defer runtime.KeepAlive(bur)
 	_r := objc.Send[bool](objref.IDOf(bur), objc.RegisterName("includesSubentities"))
 	return _r
 }
 
 // ResultType returns the result type.
 func (bur *BatchUpdateRequest) ResultType() BatchUpdateRequestResultType {
+	defer runtime.KeepAlive(bur)
 	_r := objc.Send[BatchUpdateRequestResultType](objref.IDOf(bur), objc.RegisterName("resultType"))
 	return _r
 }
 
 // PropertiesToUpdate returns the properties to update.
 func (bur *BatchUpdateRequest) PropertiesToUpdate() obj.Object {
+	defer runtime.KeepAlive(bur)
 	_r := objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("propertiesToUpdate"))
 	return obj.Wrap(_r)
 }

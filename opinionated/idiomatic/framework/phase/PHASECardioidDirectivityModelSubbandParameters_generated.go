@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func cardioidDirectivityModelSubbandParametersAdopt(id objc.ID) *CardioidDirecti
 
 // Description returns the object's -description text.
 func (cdmsp *CardioidDirectivityModelSubbandParameters) Description() string {
+	defer runtime.KeepAlive(cdmsp)
 	return rt.Description(objref.IDOf(cdmsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cdmsp *CardioidDirectivityModelSubbandParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cdmsp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cdmsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cdmsp *CardioidDirectivityModelSubbandParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(cdmsp)
 	return rt.IsKind(objref.IDOf(cdmsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cdmsp *CardioidDirectivityModelSubbandParameters) String() string {
+	defer runtime.KeepAlive(cdmsp)
 	return rt.Description(objref.IDOf(cdmsp))
 }
 
@@ -92,18 +99,21 @@ func (cdmsp *CardioidDirectivityModelSubbandParameters) WithSharpness(sharpness 
 
 // Frequency returns the frequency of the subband, in hertz.
 func (cdmsp *CardioidDirectivityModelSubbandParameters) Frequency() float64 {
+	defer runtime.KeepAlive(cdmsp)
 	_r := objc.Send[float64](objref.IDOf(cdmsp), objc.RegisterName("frequency"))
 	return _r
 }
 
 // Pattern returns the directivity pattern.
 func (cdmsp *CardioidDirectivityModelSubbandParameters) Pattern() float64 {
+	defer runtime.KeepAlive(cdmsp)
 	_r := objc.Send[float64](objref.IDOf(cdmsp), objc.RegisterName("pattern"))
 	return _r
 }
 
 // Sharpness returns the sharpness of the directivity pattern.
 func (cdmsp *CardioidDirectivityModelSubbandParameters) Sharpness() float64 {
+	defer runtime.KeepAlive(cdmsp)
 	_r := objc.Send[float64](objref.IDOf(cdmsp), objc.RegisterName("sharpness"))
 	return _r
 }

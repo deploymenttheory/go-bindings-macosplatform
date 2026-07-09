@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func optimizationHintsAdopt(id objc.ID) *OptimizationHints {
 
 // Description returns the object's -description text.
 func (oh *OptimizationHints) Description() string {
+	defer runtime.KeepAlive(oh)
 	return rt.Description(objref.IDOf(oh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (oh *OptimizationHints) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(oh)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(oh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (oh *OptimizationHints) IsKind(className string) bool {
+	defer runtime.KeepAlive(oh)
 	return rt.IsKind(objref.IDOf(oh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (oh *OptimizationHints) String() string {
+	defer runtime.KeepAlive(oh)
 	return rt.Description(objref.IDOf(oh))
 }
 
@@ -84,12 +91,14 @@ func (oh *OptimizationHints) WithSpecializationStrategy(specializationStrategy S
 
 // ReshapeFrequency returns the anticipated reshape frequency CoreML framework needs to reshape the model with new shapes for models with flexible input. Specify the anticipated reshape frequency (frequent or infrequent), so that the framework can optimize for fast shape switching or fast prediction on seen shapes. The default value is frequent, which means CoreML tries to switch to new shapes as fast as possible
 func (oh *OptimizationHints) ReshapeFrequency() ReshapeFrequencyHint {
+	defer runtime.KeepAlive(oh)
 	_r := objc.Send[ReshapeFrequencyHint](objref.IDOf(oh), objc.RegisterName("reshapeFrequency"))
 	return _r
 }
 
 // SpecializationStrategy returns optimization strategy for the model specialization. Core ML segments the model's compute graph and optimizes each segment for the target compute device. This process can affect the model loading time and the prediction latency. Use this option to tailor the specialization strategy for your application.
 func (oh *OptimizationHints) SpecializationStrategy() SpecializationStrategy {
+	defer runtime.KeepAlive(oh)
 	_r := objc.Send[SpecializationStrategy](objref.IDOf(oh), objc.RegisterName("specializationStrategy"))
 	return _r
 }

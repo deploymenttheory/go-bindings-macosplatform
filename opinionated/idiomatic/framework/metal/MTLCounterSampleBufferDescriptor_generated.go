@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func counterSampleBufferDescriptorAdopt(id objc.ID) *CounterSampleBufferDescript
 
 // Description returns the object's -description text.
 func (csbd *CounterSampleBufferDescriptor) Description() string {
+	defer runtime.KeepAlive(csbd)
 	return rt.Description(objref.IDOf(csbd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (csbd *CounterSampleBufferDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(csbd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(csbd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (csbd *CounterSampleBufferDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(csbd)
 	return rt.IsKind(objref.IDOf(csbd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (csbd *CounterSampleBufferDescriptor) String() string {
+	defer runtime.KeepAlive(csbd)
 	return rt.Description(objref.IDOf(csbd))
 }
 
@@ -92,6 +99,7 @@ func (csbd *CounterSampleBufferDescriptor) WithSampleCount(sampleCount int) *Cou
 
 // Label returns the label.
 func (csbd *CounterSampleBufferDescriptor) Label() string {
+	defer runtime.KeepAlive(csbd)
 	_r := objc.Send[objc.ID](objref.IDOf(csbd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -101,12 +109,14 @@ func (csbd *CounterSampleBufferDescriptor) Label() string {
 
 // StorageMode returns the storage mode.
 func (csbd *CounterSampleBufferDescriptor) StorageMode() StorageMode {
+	defer runtime.KeepAlive(csbd)
 	_r := objc.Send[StorageMode](objref.IDOf(csbd), objc.RegisterName("storageMode"))
 	return _r
 }
 
 // SampleCount returns the sample count.
 func (csbd *CounterSampleBufferDescriptor) SampleCount() int {
+	defer runtime.KeepAlive(csbd)
 	_r := objc.Send[int](objref.IDOf(csbd), objc.RegisterName("sampleCount"))
 	return _r
 }

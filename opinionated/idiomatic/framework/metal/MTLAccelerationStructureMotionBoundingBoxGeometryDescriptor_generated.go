@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -116,18 +118,21 @@ func (asmbbgd *AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithPri
 //
 // BoundingBoxBuffers returns the collection as a Go slice.
 func (asmbbgd *AccelerationStructureMotionBoundingBoxGeometryDescriptor) BoundingBoxBuffers() []*MotionKeyframeData {
+	defer runtime.KeepAlive(asmbbgd)
 	_arr := objc.Send[objc.ID](objref.IDOf(asmbbgd), objc.RegisterName("boundingBoxBuffers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MotionKeyframeData { return MotionKeyframeDataFromID(_id) })
 }
 
 // BoundingBoxStride returns stride, in bytes, between bounding boxes in the bounding box buffer. Must be at least 24 bytes and must be a multiple of 4 bytes. Defaults to 24 bytes.
 func (asmbbgd *AccelerationStructureMotionBoundingBoxGeometryDescriptor) BoundingBoxStride() int {
+	defer runtime.KeepAlive(asmbbgd)
 	_r := objc.Send[int](objref.IDOf(asmbbgd), objc.RegisterName("boundingBoxStride"))
 	return _r
 }
 
 // BoundingBoxCount returns number of bounding boxes
 func (asmbbgd *AccelerationStructureMotionBoundingBoxGeometryDescriptor) BoundingBoxCount() int {
+	defer runtime.KeepAlive(asmbbgd)
 	_r := objc.Send[int](objref.IDOf(asmbbgd), objc.RegisterName("boundingBoxCount"))
 	return _r
 }

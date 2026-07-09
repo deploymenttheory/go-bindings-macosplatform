@@ -5,6 +5,8 @@
 package coreaudiokit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func aUGenericViewAdopt(id objc.ID) *AUGenericView {
 
 // Description returns the object's -description text.
 func (agv *AUGenericView) Description() string {
+	defer runtime.KeepAlive(agv)
 	return rt.Description(objref.IDOf(agv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (agv *AUGenericView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(agv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(agv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (agv *AUGenericView) IsKind(className string) bool {
+	defer runtime.KeepAlive(agv)
 	return rt.IsKind(objref.IDOf(agv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (agv *AUGenericView) String() string {
+	defer runtime.KeepAlive(agv)
 	return rt.Description(objref.IDOf(agv))
 }
 
@@ -88,6 +95,7 @@ func (agv *AUGenericView) WithShowsExpertParameters(showsExpertParameters bool) 
 
 // ShowsExpertParameters wraps the corresponding Objective-C method.
 func (agv *AUGenericView) ShowsExpertParameters() bool {
+	defer runtime.KeepAlive(agv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

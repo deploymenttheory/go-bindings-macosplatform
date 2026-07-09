@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func speechSynthesisProviderVoiceAdopt(id objc.ID) *SpeechSynthesisProviderVoice
 
 // Description returns the object's -description text.
 func (sspv *SpeechSynthesisProviderVoice) Description() string {
+	defer runtime.KeepAlive(sspv)
 	return rt.Description(objref.IDOf(sspv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sspv *SpeechSynthesisProviderVoice) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sspv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sspv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sspv *SpeechSynthesisProviderVoice) IsKind(className string) bool {
+	defer runtime.KeepAlive(sspv)
 	return rt.IsKind(objref.IDOf(sspv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sspv *SpeechSynthesisProviderVoice) String() string {
+	defer runtime.KeepAlive(sspv)
 	return rt.Description(objref.IDOf(sspv))
 }
 
@@ -93,6 +100,7 @@ func (sspv *SpeechSynthesisProviderVoice) WithAge(age int) *SpeechSynthesisProvi
 
 // Name returns the localized name of the voice
 func (sspv *SpeechSynthesisProviderVoice) Name() string {
+	defer runtime.KeepAlive(sspv)
 	_r := objc.Send[objc.ID](objref.IDOf(sspv), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -102,6 +110,7 @@ func (sspv *SpeechSynthesisProviderVoice) Name() string {
 
 // Identifier returns a unique identifier for the voice The recommended format is reverse domain notation. Behavior is undefined if identifiers are not unique for all voices within a given extension.
 func (sspv *SpeechSynthesisProviderVoice) Identifier() string {
+	defer runtime.KeepAlive(sspv)
 	_r := objc.Send[objc.ID](objref.IDOf(sspv), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -113,6 +122,7 @@ func (sspv *SpeechSynthesisProviderVoice) Identifier() string {
 //
 // PrimaryLanguages returns the collection as a Go slice.
 func (sspv *SpeechSynthesisProviderVoice) PrimaryLanguages() []string {
+	defer runtime.KeepAlive(sspv)
 	_arr := objc.Send[objc.ID](objref.IDOf(sspv), objc.RegisterName("primaryLanguages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -121,24 +131,28 @@ func (sspv *SpeechSynthesisProviderVoice) PrimaryLanguages() []string {
 //
 // SupportedLanguages returns the collection as a Go slice.
 func (sspv *SpeechSynthesisProviderVoice) SupportedLanguages() []string {
+	defer runtime.KeepAlive(sspv)
 	_arr := objc.Send[objc.ID](objref.IDOf(sspv), objc.RegisterName("supportedLanguages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // VoiceSize returns the size of the voice (optional) This reported size of the voice package on disk, in bytes. Defaults to 0.
 func (sspv *SpeechSynthesisProviderVoice) VoiceSize() int64 {
+	defer runtime.KeepAlive(sspv)
 	_r := objc.Send[int64](objref.IDOf(sspv), objc.RegisterName("voiceSize"))
 	return _r
 }
 
 // Gender returns the gender of the voice (optional)
 func (sspv *SpeechSynthesisProviderVoice) Gender() SpeechSynthesisVoiceGender {
+	defer runtime.KeepAlive(sspv)
 	_r := objc.Send[SpeechSynthesisVoiceGender](objref.IDOf(sspv), objc.RegisterName("gender"))
 	return _r
 }
 
 // Age returns the age of the voice in years (optional) This is an optional property that indicates the age of this voice, to be treated as a personality trait. Defaults to 0.
 func (sspv *SpeechSynthesisProviderVoice) Age() int {
+	defer runtime.KeepAlive(sspv)
 	_r := objc.Send[int](objref.IDOf(sspv), objc.RegisterName("age"))
 	return _r
 }

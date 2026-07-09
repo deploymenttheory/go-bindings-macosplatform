@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func constraintAdopt(id objc.ID) *Constraint {
 
 // Description returns the object's -description text.
 func (c *Constraint) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Constraint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Constraint) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Constraint) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
@@ -88,18 +95,21 @@ func (c *Constraint) WithIncremental(incremental bool) *Constraint {
 
 // IsEnabled reports whether the constraint is enabled or not. Defaults to true.
 func (c *Constraint) IsEnabled() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isEnabled"))
 	return _r
 }
 
 // InfluenceFactor specifies the inflence factor of the receiver. Defaults to 1. Animatable
 func (c *Constraint) InfluenceFactor() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("influenceFactor"))
 	return _r
 }
 
 // IsIncremental reports whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to true starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to false in previous versions.
 func (c *Constraint) IsIncremental() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isIncremental"))
 	return _r
 }

@@ -5,9 +5,12 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,8 +56,8 @@ func NewNETunnelProviderProtocol() *NETunnelProviderProtocol {
 }
 
 // WithProviderConfiguration sets a dictionary containing keys and values defined by the Tunnel Provider developer.
-func (ntpp *NETunnelProviderProtocol) WithProviderConfiguration(providerConfiguration obj.Object) *NETunnelProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(ntpp), objc.RegisterName("setProviderConfiguration:"), objref.IDOf(providerConfiguration))
+func (ntpp *NETunnelProviderProtocol) WithProviderConfiguration(providerConfiguration map[string]obj.Object) *NETunnelProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(ntpp), objc.RegisterName("setProviderConfiguration:"), rt.MapToDict(providerConfiguration, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ntpp
 }
 
@@ -77,20 +80,20 @@ func (ntpp *NETunnelProviderProtocol) WithUsername(username string) *NETunnelPro
 }
 
 // WithPasswordReference sets a persistent keychain reference to a keychain item containing the password component of the tunneling protocol authentication credential.
-func (ntpp *NETunnelProviderProtocol) WithPasswordReference(passwordReference obj.Object) *NETunnelProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(ntpp), objc.RegisterName("setPasswordReference:"), objref.IDOf(passwordReference))
+func (ntpp *NETunnelProviderProtocol) WithPasswordReference(passwordReference []byte) *NETunnelProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(ntpp), objc.RegisterName("setPasswordReference:"), rt.BytesToNSData(passwordReference))
 	return ntpp
 }
 
 // WithIdentityReference sets a persistent keychain reference to a keychain item containing the certificate and private key components of the tunneling protocol authentication credential.
-func (ntpp *NETunnelProviderProtocol) WithIdentityReference(identityReference obj.Object) *NETunnelProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(ntpp), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
+func (ntpp *NETunnelProviderProtocol) WithIdentityReference(identityReference []byte) *NETunnelProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(ntpp), objc.RegisterName("setIdentityReference:"), rt.BytesToNSData(identityReference))
 	return ntpp
 }
 
 // WithIdentityData sets the certificate and private key components of the tunneling protocol authentication credential, in PKCS12 format.
-func (ntpp *NETunnelProviderProtocol) WithIdentityData(identityData obj.Object) *NETunnelProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(ntpp), objc.RegisterName("setIdentityData:"), objref.IDOf(identityData))
+func (ntpp *NETunnelProviderProtocol) WithIdentityData(identityData []byte) *NETunnelProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(ntpp), objc.RegisterName("setIdentityData:"), rt.BytesToNSData(identityData))
 	return ntpp
 }
 
@@ -108,6 +111,7 @@ func (ntpp *NETunnelProviderProtocol) WithDisconnectOnSleep(disconnectOnSleep bo
 
 // WithProxySettings sets the proxy settings to use for HTTP and HTTPS connections that route through the VPN.
 func (ntpp *NETunnelProviderProtocol) WithProxySettings(proxySettings *NEProxySettings) *NETunnelProviderProtocol {
+	defer runtime.KeepAlive(proxySettings)
 	objc.Send[objc.ID](objref.IDOf(ntpp), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
 	return ntpp
 }
@@ -149,13 +153,15 @@ func (ntpp *NETunnelProviderProtocol) WithEnforceRoutes(enforceRoutes bool) *NET
 }
 
 // ProviderConfiguration returns a dictionary containing NETunnelProvider vendor-specific configuration parameters. This dictionary is passed as-is to NETunnelProviders when a tunnel is started.
-func (ntpp *NETunnelProviderProtocol) ProviderConfiguration() obj.Object {
+func (ntpp *NETunnelProviderProtocol) ProviderConfiguration() map[string]obj.Object {
+	defer runtime.KeepAlive(ntpp)
 	_r := objc.Send[objc.ID](objref.IDOf(ntpp), objc.RegisterName("providerConfiguration"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ProviderBundleIdentifier returns a string containing the bundle identifier of the NETunnelProvider to be used by this configuration.
 func (ntpp *NETunnelProviderProtocol) ProviderBundleIdentifier() string {
+	defer runtime.KeepAlive(ntpp)
 	_r := objc.Send[objc.ID](objref.IDOf(ntpp), objc.RegisterName("providerBundleIdentifier"))
 	if _r == 0 {
 		return ""

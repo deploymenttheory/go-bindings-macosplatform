@@ -5,6 +5,8 @@
 package cinematic
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -56,6 +58,7 @@ func NewCustomDetectionTrackWithDetectionsSmooth(detections []*Detection, applyS
 //
 // AllDetections returns the collection as a Go slice.
 func (cdt *CustomDetectionTrack) AllDetections() []*Detection {
+	defer runtime.KeepAlive(cdt)
 	_arr := objc.Send[objc.ID](objref.IDOf(cdt), objc.RegisterName("allDetections"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Detection { return DetectionFromID(_id) })
 }

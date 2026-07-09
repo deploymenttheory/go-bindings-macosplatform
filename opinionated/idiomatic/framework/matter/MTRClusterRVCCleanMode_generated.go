@@ -6,11 +6,13 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,6 +51,9 @@ func mTRClusterRVCCleanModeAdopt(id objc.ID) *MTRClusterRVCCleanMode {
 
 // NewMTRClusterRVCCleanModeWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterRVCCleanModeWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterRVCCleanMode {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterRVCCleanMode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterRVCCleanModeAdopt(_id)
@@ -58,6 +63,9 @@ func NewMTRClusterRVCCleanModeWithDeviceEndpointIDQueue(device *MTRDevice, endpo
 //
 // ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcrcm *MTRClusterRVCCleanMode) ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRRVCCleanModeClusterChangeToModeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRRVCCleanModeClusterChangeToModeResponseParams, err error) {
+	defer runtime.KeepAlive(mcrcm)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRRVCCleanModeClusterChangeToModeResponseParams
 		err error
@@ -80,45 +88,59 @@ func (mcrcm *MTRClusterRVCCleanMode) ChangeToModeWithParamsExpectedValuesExpecte
 }
 
 // ReadAttributeSupportedModesWithParams reads attribute supported modes with params.
-func (mcrcm *MTRClusterRVCCleanMode) ReadAttributeSupportedModesWithParams(params *MTRReadParams) obj.Object {
+func (mcrcm *MTRClusterRVCCleanMode) ReadAttributeSupportedModesWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcrcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcrcm), objc.RegisterName("readAttributeSupportedModesWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCurrentModeWithParams reads attribute current mode with params.
-func (mcrcm *MTRClusterRVCCleanMode) ReadAttributeCurrentModeWithParams(params *MTRReadParams) obj.Object {
+func (mcrcm *MTRClusterRVCCleanMode) ReadAttributeCurrentModeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcrcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcrcm), objc.RegisterName("readAttributeCurrentModeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcrcm *MTRClusterRVCCleanMode) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcrcm *MTRClusterRVCCleanMode) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcrcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcrcm), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcrcm *MTRClusterRVCCleanMode) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcrcm *MTRClusterRVCCleanMode) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcrcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcrcm), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcrcm *MTRClusterRVCCleanMode) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcrcm *MTRClusterRVCCleanMode) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcrcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcrcm), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcrcm *MTRClusterRVCCleanMode) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcrcm *MTRClusterRVCCleanMode) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcrcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcrcm), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcrcm *MTRClusterRVCCleanMode) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcrcm *MTRClusterRVCCleanMode) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcrcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcrcm), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterRVCCleanMode)(nil)

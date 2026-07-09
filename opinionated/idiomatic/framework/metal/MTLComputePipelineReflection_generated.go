@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func computePipelineReflectionAdopt(id objc.ID) *ComputePipelineReflection {
 
 // Description returns the object's -description text.
 func (cpr *ComputePipelineReflection) Description() string {
+	defer runtime.KeepAlive(cpr)
 	return rt.Description(objref.IDOf(cpr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cpr *ComputePipelineReflection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cpr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cpr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cpr *ComputePipelineReflection) IsKind(className string) bool {
+	defer runtime.KeepAlive(cpr)
 	return rt.IsKind(objref.IDOf(cpr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cpr *ComputePipelineReflection) String() string {
+	defer runtime.KeepAlive(cpr)
 	return rt.Description(objref.IDOf(cpr))
 }
 
@@ -74,6 +81,7 @@ func NewComputePipelineReflection() *ComputePipelineReflection {
 
 // Bindings returns the bindings.
 func (cpr *ComputePipelineReflection) Bindings() []obj.Object {
+	defer runtime.KeepAlive(cpr)
 	_r := objc.Send[objc.ID](objref.IDOf(cpr), objc.RegisterName("bindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -82,6 +90,7 @@ func (cpr *ComputePipelineReflection) Bindings() []obj.Object {
 //
 // Arguments returns the collection as a Go slice.
 func (cpr *ComputePipelineReflection) Arguments() []*Argument {
+	defer runtime.KeepAlive(cpr)
 	_arr := objc.Send[objc.ID](objref.IDOf(cpr), objc.RegisterName("arguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Argument { return ArgumentFromID(_id) })
 }

@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -93,6 +95,7 @@ func (tavc *TitlebarAccessoryViewController) WithAutomaticallyAdjustsSize(automa
 
 // WithPreferredScrollEdgeEffectStyle sets the titlebar accessory’s preferred effect for content scrolling behind it.
 func (tavc *TitlebarAccessoryViewController) WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *ScrollEdgeEffectStyle) *TitlebarAccessoryViewController {
+	defer runtime.KeepAlive(preferredScrollEdgeEffectStyle)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setPreferredScrollEdgeEffectStyle:"), objref.IDOf(preferredScrollEdgeEffectStyle))
 	})
@@ -101,6 +104,7 @@ func (tavc *TitlebarAccessoryViewController) WithPreferredScrollEdgeEffectStyle(
 
 // WithRepresentedObject sets the object whose value is presented in the receiver’s primary view.
 func (tavc *TitlebarAccessoryViewController) WithRepresentedObject(representedObject obj.Object) *TitlebarAccessoryViewController {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -117,6 +121,7 @@ func (tavc *TitlebarAccessoryViewController) WithTitle(title string) *TitlebarAc
 
 // WithView sets the view controller’s primary view.
 func (tavc *TitlebarAccessoryViewController) WithView(view ViewProvider) *TitlebarAccessoryViewController {
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setView:"), objref.IDOf(view))
 	})
@@ -142,6 +147,7 @@ func (tavc *TitlebarAccessoryViewController) WithChildViewControllers(items ...V
 
 // WithSourceItemView sets the source item view.
 func (tavc *TitlebarAccessoryViewController) WithSourceItemView(sourceItemView ViewProvider) *TitlebarAccessoryViewController {
+	defer runtime.KeepAlive(sourceItemView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
 	})
@@ -158,6 +164,7 @@ func (tavc *TitlebarAccessoryViewController) WithPreferredScreenOrigin(preferred
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (tavc *TitlebarAccessoryViewController) WithNextResponder(nextResponder ResponderProvider) *TitlebarAccessoryViewController {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -166,6 +173,7 @@ func (tavc *TitlebarAccessoryViewController) WithNextResponder(nextResponder Res
 
 // WithMenu sets returns the responder’s menu.
 func (tavc *TitlebarAccessoryViewController) WithMenu(menu *Menu) *TitlebarAccessoryViewController {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -174,6 +182,7 @@ func (tavc *TitlebarAccessoryViewController) WithMenu(menu *Menu) *TitlebarAcces
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (tavc *TitlebarAccessoryViewController) WithUserActivity(userActivity obj.Object) *TitlebarAccessoryViewController {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -182,6 +191,7 @@ func (tavc *TitlebarAccessoryViewController) WithUserActivity(userActivity obj.O
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (tavc *TitlebarAccessoryViewController) WithTouchBar(touchBar *TouchBar) *TitlebarAccessoryViewController {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -190,6 +200,7 @@ func (tavc *TitlebarAccessoryViewController) WithTouchBar(touchBar *TouchBar) *T
 
 // LayoutAttribute returns the layout attribute.
 func (tavc *TitlebarAccessoryViewController) LayoutAttribute() LayoutAttribute {
+	defer runtime.KeepAlive(tavc)
 	var _mainthread0 LayoutAttribute
 	purego.Main(func() {
 		_mainthread0 = func() LayoutAttribute {
@@ -203,6 +214,7 @@ func (tavc *TitlebarAccessoryViewController) LayoutAttribute() LayoutAttribute {
 
 // FullScreenMinHeight returns the full screen min height.
 func (tavc *TitlebarAccessoryViewController) FullScreenMinHeight() float64 {
+	defer runtime.KeepAlive(tavc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -216,6 +228,7 @@ func (tavc *TitlebarAccessoryViewController) FullScreenMinHeight() float64 {
 
 // IsHidden reports whether the object is hidden.
 func (tavc *TitlebarAccessoryViewController) IsHidden() bool {
+	defer runtime.KeepAlive(tavc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -229,6 +242,7 @@ func (tavc *TitlebarAccessoryViewController) IsHidden() bool {
 
 // AutomaticallyAdjustsSize wraps the corresponding Objective-C method.
 func (tavc *TitlebarAccessoryViewController) AutomaticallyAdjustsSize() bool {
+	defer runtime.KeepAlive(tavc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -242,6 +256,7 @@ func (tavc *TitlebarAccessoryViewController) AutomaticallyAdjustsSize() bool {
 
 // PreferredScrollEdgeEffectStyle returns the titlebar accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the bottom edge of a titlebar accessory: titlebarAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
 func (tavc *TitlebarAccessoryViewController) PreferredScrollEdgeEffectStyle() *ScrollEdgeEffectStyle {
+	defer runtime.KeepAlive(tavc)
 	var _mainthread0 *ScrollEdgeEffectStyle
 	purego.Main(func() {
 		_mainthread0 = func() *ScrollEdgeEffectStyle {

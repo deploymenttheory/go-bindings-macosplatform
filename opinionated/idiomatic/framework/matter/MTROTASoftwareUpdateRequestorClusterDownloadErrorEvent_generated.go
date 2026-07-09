@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,71 +50,84 @@ func mTROTASoftwareUpdateRequestorClusterDownloadErrorEventAdopt(id objc.ID) *MT
 
 // Description returns the object's -description text.
 func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) Description() string {
+	defer runtime.KeepAlive(msurcdee)
 	return rt.Description(objref.IDOf(msurcdee))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msurcdee)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msurcdee), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(msurcdee)
 	return rt.IsKind(objref.IDOf(msurcdee), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) String() string {
+	defer runtime.KeepAlive(msurcdee)
 	return rt.Description(objref.IDOf(msurcdee))
 }
 
 // WithSoftwareVersion sets the software version.
 func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent {
+	defer runtime.KeepAlive(softwareVersion)
 	objc.Send[objc.ID](objref.IDOf(msurcdee), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return msurcdee
 }
 
 // WithBytesDownloaded sets the bytes downloaded.
 func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) WithBytesDownloaded(bytesDownloaded obj.Object) *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent {
+	defer runtime.KeepAlive(bytesDownloaded)
 	objc.Send[objc.ID](objref.IDOf(msurcdee), objc.RegisterName("setBytesDownloaded:"), objref.IDOf(bytesDownloaded))
 	return msurcdee
 }
 
 // WithProgressPercent sets the progress percent.
 func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) WithProgressPercent(progressPercent obj.Object) *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent {
+	defer runtime.KeepAlive(progressPercent)
 	objc.Send[objc.ID](objref.IDOf(msurcdee), objc.RegisterName("setProgressPercent:"), objref.IDOf(progressPercent))
 	return msurcdee
 }
 
 // WithPlatformCode sets the platform code.
 func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) WithPlatformCode(platformCode obj.Object) *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent {
+	defer runtime.KeepAlive(platformCode)
 	objc.Send[objc.ID](objref.IDOf(msurcdee), objc.RegisterName("setPlatformCode:"), objref.IDOf(platformCode))
 	return msurcdee
 }
 
 // SoftwareVersion returns the software version.
-func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) SoftwareVersion() obj.Object {
+func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) SoftwareVersion() *foundation.Number {
+	defer runtime.KeepAlive(msurcdee)
 	_r := objc.Send[objc.ID](objref.IDOf(msurcdee), objc.RegisterName("softwareVersion"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // BytesDownloaded returns the bytes downloaded.
-func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) BytesDownloaded() obj.Object {
+func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) BytesDownloaded() *foundation.Number {
+	defer runtime.KeepAlive(msurcdee)
 	_r := objc.Send[objc.ID](objref.IDOf(msurcdee), objc.RegisterName("bytesDownloaded"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ProgressPercent returns the progress percent.
-func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) ProgressPercent() obj.Object {
+func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) ProgressPercent() *foundation.Number {
+	defer runtime.KeepAlive(msurcdee)
 	_r := objc.Send[objc.ID](objref.IDOf(msurcdee), objc.RegisterName("progressPercent"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // PlatformCode returns the platform code.
-func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) PlatformCode() obj.Object {
+func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) PlatformCode() *foundation.Number {
+	defer runtime.KeepAlive(msurcdee)
 	_r := objc.Send[objc.ID](objref.IDOf(msurcdee), objc.RegisterName("platformCode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTROTASoftwareUpdateRequestorClusterDownloadErrorEvent marks MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent — and, by embedding promotion, its

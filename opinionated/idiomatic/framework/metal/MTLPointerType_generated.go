@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,42 +55,49 @@ func NewPointerType() *PointerType {
 
 // ElementStructType provides a description of the underlying struct when the pointer points to a struct.
 func (pt *PointerType) ElementStructType() *StructType {
+	defer runtime.KeepAlive(pt)
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("elementStructType"))
 	return StructTypeFromID(_r)
 }
 
 // ElementArrayType provides a description of the underlying array when the pointer points to an array.
 func (pt *PointerType) ElementArrayType() *ArrayType {
+	defer runtime.KeepAlive(pt)
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("elementArrayType"))
 	return ArrayTypeFromID(_r)
 }
 
 // ElementType returns the element type.
 func (pt *PointerType) ElementType() DataType {
+	defer runtime.KeepAlive(pt)
 	_r := objc.Send[DataType](objref.IDOf(pt), objc.RegisterName("elementType"))
 	return _r
 }
 
 // Access returns the access.
 func (pt *PointerType) Access() BindingAccess {
+	defer runtime.KeepAlive(pt)
 	_r := objc.Send[BindingAccess](objref.IDOf(pt), objc.RegisterName("access"))
 	return _r
 }
 
 // Alignment returns the alignment.
 func (pt *PointerType) Alignment() int {
+	defer runtime.KeepAlive(pt)
 	_r := objc.Send[int](objref.IDOf(pt), objc.RegisterName("alignment"))
 	return _r
 }
 
 // DataSize returns the data size.
 func (pt *PointerType) DataSize() int {
+	defer runtime.KeepAlive(pt)
 	_r := objc.Send[int](objref.IDOf(pt), objc.RegisterName("dataSize"))
 	return _r
 }
 
 // ElementIsArgumentBuffer wraps the corresponding Objective-C method.
 func (pt *PointerType) ElementIsArgumentBuffer() bool {
+	defer runtime.KeepAlive(pt)
 	_r := objc.Send[bool](objref.IDOf(pt), objc.RegisterName("elementIsArgumentBuffer"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -69,12 +71,14 @@ func (cbnn *CNNBatchNormalizationNode) WithLabel(label string) *CNNBatchNormaliz
 
 // Flags returns options controlling how batch normalization is calculated Default: MPSCNNBatchNormalizationFlagsDefault
 func (cbnn *CNNBatchNormalizationNode) Flags() CNNBatchNormalizationFlags {
+	defer runtime.KeepAlive(cbnn)
 	_r := objc.Send[CNNBatchNormalizationFlags](objref.IDOf(cbnn), objc.RegisterName("flags"))
 	return _r
 }
 
 // TrainingStyle returns the training style of the forward node will be propagated to gradient nodes made from it
 func (cbnn *CNNBatchNormalizationNode) TrainingStyle() NNTrainingStyle {
+	defer runtime.KeepAlive(cbnn)
 	_r := objc.Send[NNTrainingStyle](objref.IDOf(cbnn), objc.RegisterName("trainingStyle"))
 	return _r
 }

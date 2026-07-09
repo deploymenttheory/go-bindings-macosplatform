@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func memoryBalloonDeviceAdopt(id objc.ID) *MemoryBalloonDevice {
 
 // Description returns the object's -description text.
 func (mbd *MemoryBalloonDevice) Description() string {
+	defer runtime.KeepAlive(mbd)
 	return rt.Description(objref.IDOf(mbd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbd *MemoryBalloonDevice) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbd *MemoryBalloonDevice) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbd)
 	return rt.IsKind(objref.IDOf(mbd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbd *MemoryBalloonDevice) String() string {
+	defer runtime.KeepAlive(mbd)
 	return rt.Description(objref.IDOf(mbd))
 }
 

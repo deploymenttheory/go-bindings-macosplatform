@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,18 +54,21 @@ func NewMTRAccessControlClusterTarget() *MTRAccessControlClusterTarget {
 
 // WithCluster sets the cluster.
 func (macct *MTRAccessControlClusterTarget) WithCluster(cluster obj.Object) *MTRAccessControlClusterTarget {
+	defer runtime.KeepAlive(cluster)
 	objc.Send[objc.ID](objref.IDOf(macct), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
 	return macct
 }
 
 // WithEndpoint sets the endpoint.
 func (macct *MTRAccessControlClusterTarget) WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterTarget {
+	defer runtime.KeepAlive(endpoint)
 	objc.Send[objc.ID](objref.IDOf(macct), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return macct
 }
 
 // WithDeviceType sets the device type.
 func (macct *MTRAccessControlClusterTarget) WithDeviceType(deviceType obj.Object) *MTRAccessControlClusterTarget {
+	defer runtime.KeepAlive(deviceType)
 	objc.Send[objc.ID](objref.IDOf(macct), objc.RegisterName("setDeviceType:"), objref.IDOf(deviceType))
 	return macct
 }

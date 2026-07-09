@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func physicalInputProfileAdopt(id objc.ID) *PhysicalInputProfile {
 
 // Description returns the object's -description text.
 func (pip *PhysicalInputProfile) Description() string {
+	defer runtime.KeepAlive(pip)
 	return rt.Description(objref.IDOf(pip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pip *PhysicalInputProfile) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pip)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pip *PhysicalInputProfile) IsKind(className string) bool {
+	defer runtime.KeepAlive(pip)
 	return rt.IsKind(objref.IDOf(pip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pip *PhysicalInputProfile) String() string {
+	defer runtime.KeepAlive(pip)
 	return rt.Description(objref.IDOf(pip))
 }
 
@@ -76,23 +83,28 @@ func (pip *PhysicalInputProfile) WithValueDidChangeHandler(valueDidChangeHandler
 
 // ObjectForKeyedSubscript returns the element that the key specifies.
 func (pip *PhysicalInputProfile) ObjectForKeyedSubscript(key string) *ControllerElement {
+	defer runtime.KeepAlive(pip)
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("objectForKeyedSubscript:"), purego.NSString(key))
 	return ControllerElementFromID(_r)
 }
 
 // Capture returns a snapshot of the profile with its current element values.
 func (pip *PhysicalInputProfile) Capture() *PhysicalInputProfile {
+	defer runtime.KeepAlive(pip)
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("capture"))
 	return PhysicalInputProfileFromID(_r)
 }
 
 // SetStateFromPhysicalInput copies the input values from a specified physical input profile to a snapshot of the profile.
 func (pip *PhysicalInputProfile) SetStateFromPhysicalInput(physicalInput *PhysicalInputProfile) {
+	defer runtime.KeepAlive(pip)
+	defer runtime.KeepAlive(physicalInput)
 	objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("setStateFromPhysicalInput:"), objref.IDOf(physicalInput))
 }
 
 // MappedElementAliasForPhysicalInputName returns the name of the input element to which the user remaps the given physical element.
 func (pip *PhysicalInputProfile) MappedElementAliasForPhysicalInputName(inputName string) string {
+	defer runtime.KeepAlive(pip)
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("mappedElementAliasForPhysicalInputName:"), purego.NSString(inputName))
 	if _r == 0 {
 		return ""
@@ -101,81 +113,96 @@ func (pip *PhysicalInputProfile) MappedElementAliasForPhysicalInputName(inputNam
 }
 
 // MappedPhysicalInputNamesForElementAlias returns the physical input elements to which the user remaps the given input element.
-func (pip *PhysicalInputProfile) MappedPhysicalInputNamesForElementAlias(elementAlias string) obj.Object {
+// The order of the returned elements is unspecified.
+func (pip *PhysicalInputProfile) MappedPhysicalInputNamesForElementAlias(elementAlias string) []string {
+	defer runtime.KeepAlive(pip)
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("mappedPhysicalInputNamesForElementAlias:"), purego.NSString(elementAlias))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // LastEventTimestamp returns the last time elements of this profile were updated.
 func (pip *PhysicalInputProfile) LastEventTimestamp() float64 {
+	defer runtime.KeepAlive(pip)
 	_r := objc.Send[float64](objref.IDOf(pip), objc.RegisterName("lastEventTimestamp"))
 	return _r
 }
 
 // HasRemappedElements reports whether the user has remapped their physical input controls for this profile at the system level. On iOS and tvOS, users can remap their game controller inputs in Settings.
 func (pip *PhysicalInputProfile) HasRemappedElements() bool {
+	defer runtime.KeepAlive(pip)
 	_r := objc.Send[bool](objref.IDOf(pip), objc.RegisterName("hasRemappedElements"))
 	return _r
 }
 
 // Elements returns the following properties allow for runtime lookup of any input element on a profile, when provided with a valid alias.
-func (pip *PhysicalInputProfile) Elements() obj.Object {
+func (pip *PhysicalInputProfile) Elements() map[string]*ControllerElement {
+	defer runtime.KeepAlive(pip)
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("elements"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *ControllerElement { return ControllerElementFromID(_id) })
 }
 
 // Buttons returns the buttons.
-func (pip *PhysicalInputProfile) Buttons() obj.Object {
+func (pip *PhysicalInputProfile) Buttons() map[string]*ControllerButtonInput {
+	defer runtime.KeepAlive(pip)
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("buttons"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *ControllerButtonInput { return ControllerButtonInputFromID(_id) })
 }
 
 // Axes returns the axes.
-func (pip *PhysicalInputProfile) Axes() obj.Object {
+func (pip *PhysicalInputProfile) Axes() map[string]*ControllerAxisInput {
+	defer runtime.KeepAlive(pip)
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("axes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *ControllerAxisInput { return ControllerAxisInputFromID(_id) })
 }
 
 // Dpads returns the dpads.
-func (pip *PhysicalInputProfile) Dpads() obj.Object {
+func (pip *PhysicalInputProfile) Dpads() map[string]*ControllerDirectionPad {
+	defer runtime.KeepAlive(pip)
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("dpads"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *ControllerDirectionPad { return ControllerDirectionPadFromID(_id) })
 }
 
 // Touchpads returns the touchpads.
-func (pip *PhysicalInputProfile) Touchpads() obj.Object {
+func (pip *PhysicalInputProfile) Touchpads() map[string]*ControllerTouchpad {
+	defer runtime.KeepAlive(pip)
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("touchpads"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *ControllerTouchpad { return ControllerTouchpadFromID(_id) })
 }
 
 // AllElements returns the following properties allow for dynamic querying of the input elements available on a profile.
-func (pip *PhysicalInputProfile) AllElements() obj.Object {
+// The order of the returned elements is unspecified.
+func (pip *PhysicalInputProfile) AllElements() []*ControllerElement {
+	defer runtime.KeepAlive(pip)
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("allElements"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *ControllerElement { return ControllerElementFromID(_id) })
 }
 
-// AllButtons returns the all buttons.
-func (pip *PhysicalInputProfile) AllButtons() obj.Object {
+// AllButtons returns the order of the returned elements is unspecified.
+func (pip *PhysicalInputProfile) AllButtons() []*ControllerButtonInput {
+	defer runtime.KeepAlive(pip)
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("allButtons"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *ControllerButtonInput { return ControllerButtonInputFromID(_id) })
 }
 
-// AllAxes returns the all axes.
-func (pip *PhysicalInputProfile) AllAxes() obj.Object {
+// AllAxes returns the order of the returned elements is unspecified.
+func (pip *PhysicalInputProfile) AllAxes() []*ControllerAxisInput {
+	defer runtime.KeepAlive(pip)
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("allAxes"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *ControllerAxisInput { return ControllerAxisInputFromID(_id) })
 }
 
-// AllDpads returns the all dpads.
-func (pip *PhysicalInputProfile) AllDpads() obj.Object {
+// AllDpads returns the order of the returned elements is unspecified.
+func (pip *PhysicalInputProfile) AllDpads() []*ControllerDirectionPad {
+	defer runtime.KeepAlive(pip)
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("allDpads"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *ControllerDirectionPad { return ControllerDirectionPadFromID(_id) })
 }
 
-// AllTouchpads returns the all touchpads.
-func (pip *PhysicalInputProfile) AllTouchpads() obj.Object {
+// AllTouchpads returns the order of the returned elements is unspecified.
+func (pip *PhysicalInputProfile) AllTouchpads() []*ControllerTouchpad {
+	defer runtime.KeepAlive(pip)
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("allTouchpads"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *ControllerTouchpad { return ControllerTouchpadFromID(_id) })
 }
 
 // isPhysicalInputProfile marks PhysicalInputProfile — and, by embedding promotion, its

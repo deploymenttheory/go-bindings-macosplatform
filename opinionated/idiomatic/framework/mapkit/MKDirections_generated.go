@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func directionsAdopt(id objc.ID) *Directions {
 
 // Description returns the object's -description text.
 func (d *Directions) Description() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (d *Directions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (d *Directions) IsKind(className string) bool {
+	defer runtime.KeepAlive(d)
 	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (d *Directions) String() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // NewDirectionsWithRequest creates and returns a directions object using the specified request.
 func NewDirectionsWithRequest(request *DirectionsRequest) *Directions {
+	defer runtime.KeepAlive(request)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKDirections")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:"), objref.IDOf(request))
 	return directionsAdopt(_id)
@@ -75,11 +83,13 @@ func NewDirectionsWithRequest(request *DirectionsRequest) *Directions {
 
 // Cancel cancels a pending request.
 func (d *Directions) Cancel() {
+	defer runtime.KeepAlive(d)
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("cancel"))
 }
 
 // IsCalculating reports whether the object is calculating.
 func (d *Directions) IsCalculating() bool {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isCalculating"))
 	return _r
 }

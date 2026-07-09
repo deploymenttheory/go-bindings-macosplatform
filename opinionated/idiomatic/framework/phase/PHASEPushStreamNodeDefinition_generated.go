@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,8 @@ func pushStreamNodeDefinitionAdopt(id objc.ID) *PushStreamNodeDefinition {
 
 // NewPushStreamNodeDefinitionWithMixerDefinitionFormatIdentifier creates a named node definition for audio streams.
 func NewPushStreamNodeDefinitionWithMixerDefinitionFormatIdentifier(mixerDefinition *MixerDefinition, format obj.Object, identifier string) *PushStreamNodeDefinition {
+	defer runtime.KeepAlive(mixerDefinition)
+	defer runtime.KeepAlive(format)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEPushStreamNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMixerDefinition:format:identifier:"), objref.IDOf(mixerDefinition), objref.IDOf(format), purego.NSString(identifier))
 	return pushStreamNodeDefinitionAdopt(_id)
@@ -55,6 +59,8 @@ func NewPushStreamNodeDefinitionWithMixerDefinitionFormatIdentifier(mixerDefinit
 
 // NewPushStreamNodeDefinitionWithMixerDefinitionFormat creates a node definition for audio streams.
 func NewPushStreamNodeDefinitionWithMixerDefinitionFormat(mixerDefinition *MixerDefinition, format obj.Object) *PushStreamNodeDefinition {
+	defer runtime.KeepAlive(mixerDefinition)
+	defer runtime.KeepAlive(format)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEPushStreamNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMixerDefinition:format:"), objref.IDOf(mixerDefinition), objref.IDOf(format))
 	return pushStreamNodeDefinitionAdopt(_id)
@@ -74,30 +80,35 @@ func (psnd *PushStreamNodeDefinition) WithRate(rate float64) *PushStreamNodeDefi
 
 // WithGroup sets a group this node conforms to for gain and rate control.
 func (psnd *PushStreamNodeDefinition) WithGroup(group *Group) *PushStreamNodeDefinition {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(psnd), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return psnd
 }
 
 // WithGainMetaParameterDefinition sets a meta parameter that dynamically changes the audio’s loudness.
 func (psnd *PushStreamNodeDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition {
+	defer runtime.KeepAlive(gainMetaParameterDefinition)
 	objc.Send[objc.ID](objref.IDOf(psnd), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
 	return psnd
 }
 
 // WithRateMetaParameterDefinition sets a meta parameter that dynamically changes the audio’s rate.
 func (psnd *PushStreamNodeDefinition) WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition {
+	defer runtime.KeepAlive(rateMetaParameterDefinition)
 	objc.Send[objc.ID](objref.IDOf(psnd), objc.RegisterName("setRateMetaParameterDefinition:"), objref.IDOf(rateMetaParameterDefinition))
 	return psnd
 }
 
 // Format returns the readonly property that returns the AVAudioFormat that this stream was initialized with
 func (psnd *PushStreamNodeDefinition) Format() obj.Object {
+	defer runtime.KeepAlive(psnd)
 	_r := objc.Send[objc.ID](objref.IDOf(psnd), objc.RegisterName("format"))
 	return obj.Wrap(_r)
 }
 
 // Normalize reports whether or not the engine should normalize the stream. The default value is false. In general, clients are advised to normalize the input. Normalization is required to properly calibrate the output level. If you set this value to false, it's advised that you do custom normalization of the audio data prior to passing the buffers to PHASE.
 func (psnd *PushStreamNodeDefinition) Normalize() bool {
+	defer runtime.KeepAlive(psnd)
 	_r := objc.Send[bool](objref.IDOf(psnd), objc.RegisterName("normalize"))
 	return _r
 }

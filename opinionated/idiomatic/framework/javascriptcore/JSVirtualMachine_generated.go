@@ -5,6 +5,8 @@
 package javascriptcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func virtualMachineAdopt(id objc.ID) *VirtualMachine {
 
 // Description returns the object's -description text.
 func (vm *VirtualMachine) Description() string {
+	defer runtime.KeepAlive(vm)
 	return rt.Description(objref.IDOf(vm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vm *VirtualMachine) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vm *VirtualMachine) IsKind(className string) bool {
+	defer runtime.KeepAlive(vm)
 	return rt.IsKind(objref.IDOf(vm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vm *VirtualMachine) String() string {
+	defer runtime.KeepAlive(vm)
 	return rt.Description(objref.IDOf(vm))
 }
 
@@ -74,10 +81,16 @@ func NewVirtualMachine() *VirtualMachine {
 
 // AddManagedReferenceWithOwner notifies the JavaScriptCore virtual machine of an external object relationship.
 func (vm *VirtualMachine) AddManagedReferenceWithOwner(object obj.Object, owner obj.Object) {
+	defer runtime.KeepAlive(vm)
+	defer runtime.KeepAlive(object)
+	defer runtime.KeepAlive(owner)
 	objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("addManagedReference:withOwner:"), objref.IDOf(object), objref.IDOf(owner))
 }
 
 // RemoveManagedReferenceWithOwner notifies the JavaScriptCore virtual machine that a previously registered object relationship no longer exists.
 func (vm *VirtualMachine) RemoveManagedReferenceWithOwner(object obj.Object, owner obj.Object) {
+	defer runtime.KeepAlive(vm)
+	defer runtime.KeepAlive(object)
+	defer runtime.KeepAlive(owner)
 	objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("removeManagedReference:withOwner:"), objref.IDOf(object), objref.IDOf(owner))
 }

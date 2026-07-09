@@ -5,6 +5,8 @@
 package corebluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,33 +51,40 @@ func managerAdopt(id objc.ID) *Manager {
 
 // Description returns the object's -description text.
 func (m *Manager) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Manager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Manager) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Manager) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // State returns the current state of the manager, initially set to <code>CBManagerStateUnknown</code>. Updates are provided by required delegate method {
 func (m *Manager) State() ManagerState {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[ManagerState](objref.IDOf(m), objc.RegisterName("state"))
 	return _r
 }
 
 // Authorization returns the current authorization of the manager, initially set to <code>CBManagerAuthorizationNotDetermined</code>. Updates are provided by required delegate method {
 func (m *Manager) Authorization() ManagerAuthorization {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[ManagerAuthorization](objref.IDOf(m), objc.RegisterName("authorization"))
 	return _r
 }

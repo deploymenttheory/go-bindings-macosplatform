@@ -23,7 +23,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/idioconf"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -41,17 +42,21 @@ const (
 	objImportPath    = "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	rtImportPath     = "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	errkitImportPath = "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	shimImportPath   = "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	// idiomaticFrameworkPrefix is the import-path prefix of the generated
 	// idiomatic framework packages, used to import another framework's value
 	// struct (e.g. corefoundation.CGRect) by name.
 	idiomaticFrameworkPrefix = "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/"
 )
 
-// EmitFrameworkWrappers generates one *_generated.go file per ObjC class in framework.
+// EmitFrameworkWrappers generates one *_generated.go file per ObjC class in
+// framework. idio is the framework's parsed idiomatic.json sidecar (curated
+// renames, delegate selection, error typedefs); nil when the framework has none.
 func EmitFrameworkWrappers(
 	outDir, pkgName, rawPkgAlias, rawPkgPath string,
 	framework *meta.FrameworkMeta,
 	mapper *typemap.Mapper,
+	idio *idioconf.File,
 ) error {
 	if err := os.MkdirAll(outDir, 0o755); err != nil {
 		return fmt.Errorf("mkdir %s: %w", outDir, err)
@@ -59,7 +64,7 @@ func EmitFrameworkWrappers(
 
 	// Per-framework derived data lives here for this call only, replacing the
 	// former package-level caches (P6: no shared mutable state).
-	fc := newFrameworkContext(framework)
+	fc := newFrameworkContext(framework, idio)
 	prefix := fc.prefix
 	// Build the set of trial type names so we can use them in params.
 	trialNames := buildTrialNameMap(framework, prefix)
@@ -72,6 +77,15 @@ func EmitFrameworkWrappers(
 	handMethods, handFuncs, err := scanHandAuthored(outDir)
 	if err != nil {
 		return fmt.Errorf("scan hand-authored files: %w", err)
+	}
+
+	// Resolve the framework's delegate protocols before class emission so
+	// delegate-typed property setters can accept the Go interface; the files
+	// themselves are written after the class loop.
+	delegates := buildDelegates(fc, mapper, rawPkgAlias, trialNames)
+	fc.delegates = make(map[string]string, len(delegates))
+	for _, delegate := range delegates {
+		fc.delegates[delegate.protocolName] = delegate.view.IfaceName
 	}
 
 	// Clear previously generated files so a regeneration never leaves stale
@@ -134,6 +148,9 @@ func EmitFrameworkWrappers(
 	); err != nil {
 		return fmt.Errorf("emit providers: %w", err)
 	}
+	if err := emitDelegateFiles(outDir, pkgName, delegates); err != nil {
+		return fmt.Errorf("emit delegates: %w", err)
+	}
 	cfErrorWrapperNames, err := emitFunctionWrappers(
 		outDir,
 		pkgName,
@@ -156,7 +173,15 @@ func EmitFrameworkWrappers(
 		}
 		goType := naming.GoTypeName(key)
 		if isExportedGoIdent(goType) {
-			takenNames[deprefixEnumName(goType, fc.prefix)] = true
+			takenNames[fc.localEnumTypeName(goType)] = true
+		}
+	}
+	// Reserve the delegate interface names so a package-level function never
+	// claims one.
+	for _, delegate := range delegates {
+		takenNames[delegate.view.IfaceName] = true
+		for _, optional := range delegate.view.Optional {
+			takenNames[optional.OptIfaceName] = true
 		}
 	}
 	if err := emitClassMethodFunctions(
@@ -174,7 +199,15 @@ func EmitFrameworkWrappers(
 		return fmt.Errorf("emit class method functions: %w", err)
 	}
 	if err := emitConstants(
-		outDir, pkgName, rawPkgAlias, rawPkgPath, framework, mapper, handFuncs, takenNames, trialNames,
+		outDir,
+		pkgName,
+		rawPkgAlias,
+		rawPkgPath,
+		framework,
+		mapper,
+		handFuncs,
+		takenNames,
+		trialNames,
 	); err != nil {
 		return fmt.Errorf("emit constants: %w", err)
 	}
@@ -210,7 +243,7 @@ func EmitFrameworkWrappers(
 	}
 	// Named error values for errors.Is, derived from the framework's error-code
 	// enum and matching error domain.
-	if err := emitErrorSentinels(outDir, pkgName, framework, takenNames); err != nil {
+	if err := emitErrorSentinels(outDir, pkgName, fc, takenNames); err != nil {
 		return fmt.Errorf("emit error sentinels: %w", err)
 	}
 	if err := emitDocGo(outDir, pkgName, fc, abstractBases, prefix); err != nil {

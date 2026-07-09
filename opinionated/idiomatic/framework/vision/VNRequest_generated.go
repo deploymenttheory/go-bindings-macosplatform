@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -52,22 +53,27 @@ func requestAdopt(id objc.ID) *Request {
 
 // Description returns the object's -description text.
 func (r *Request) Description() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (r *Request) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (r *Request) IsKind(className string) bool {
+	defer runtime.KeepAlive(r)
 	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (r *Request) String() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
@@ -91,17 +97,20 @@ func (r *Request) WithRevision(revision int) *Request {
 
 // Cancel cancels the request before it can finish executing.
 func (r *Request) Cancel() {
+	defer runtime.KeepAlive(r)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("cancel"))
 }
 
 // PreferBackgroundProcessing reports whether a hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
 func (r *Request) PreferBackgroundProcessing() bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("preferBackgroundProcessing"))
 	return _r
 }
 
 // UsesCPUOnly reports whether this property, if set to true, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is false, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
 func (r *Request) UsesCPUOnly() bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("usesCPUOnly"))
 	return _r
 }
@@ -110,18 +119,21 @@ func (r *Request) UsesCPUOnly() bool {
 //
 // Results returns the collection as a Go slice.
 func (r *Request) Results() []*Observation {
+	defer runtime.KeepAlive(r)
 	_arr := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("results"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Observation { return ObservationFromID(_id) })
 }
 
 // Revision returns the specific algorithm or implementation revision that is to be used to perform the request.
 func (r *Request) Revision() int {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[int](objref.IDOf(r), objc.RegisterName("revision"))
 	return _r
 }
 
-// SupportedComputeStageDevicesAndReturnError the collection of compute devices per stage that a request supports.
-func (r *Request) SupportedComputeStageDevicesAndReturnError() (result obj.Object, err error) {
+// SupportedComputeStageDevices the collection of compute devices per stage that a request supports.
+func (r *Request) SupportedComputeStageDevices() (result obj.Object, err error) {
+	defer runtime.KeepAlive(r)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("supportedComputeStageDevicesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

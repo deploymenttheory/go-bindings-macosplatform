@@ -8,8 +8,8 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -58,8 +58,8 @@ func DescriptorWithDataTypeDimensionCountDimensionSizes(dataType DataType, numbe
 }
 
 // DescriptorWithDataTypeShape a convenience function to create an MPSNDArrayDescriptor object for a given size of dimensions. Sample code:
-func DescriptorWithDataTypeShape(dataType DataType, shape []obj.Object) *NDArrayDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayDescriptor")), objc.RegisterName("descriptorWithDataType:shape:"), dataType, purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func DescriptorWithDataTypeShape(dataType DataType, shape []*foundation.Number) *NDArrayDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayDescriptor")), objc.RegisterName("descriptorWithDataType:shape:"), dataType, purego.SliceToNSArray(shape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return NDArrayDescriptorFromID(_r)
 }
 

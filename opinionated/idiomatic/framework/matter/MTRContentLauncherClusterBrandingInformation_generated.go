@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -57,30 +59,35 @@ func (mclcbi *MTRContentLauncherClusterBrandingInformation) WithProviderName(pro
 
 // WithBackground sets the background.
 func (mclcbi *MTRContentLauncherClusterBrandingInformation) WithBackground(background MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
+	defer runtime.KeepAlive(background)
 	objc.Send[objc.ID](objref.IDOf(mclcbi), objc.RegisterName("setBackground:"), objref.IDOf(background))
 	return mclcbi
 }
 
 // WithLogo sets the logo.
 func (mclcbi *MTRContentLauncherClusterBrandingInformation) WithLogo(logo MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
+	defer runtime.KeepAlive(logo)
 	objc.Send[objc.ID](objref.IDOf(mclcbi), objc.RegisterName("setLogo:"), objref.IDOf(logo))
 	return mclcbi
 }
 
 // WithProgressBar sets the progress bar.
 func (mclcbi *MTRContentLauncherClusterBrandingInformation) WithProgressBar(progressBar MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
+	defer runtime.KeepAlive(progressBar)
 	objc.Send[objc.ID](objref.IDOf(mclcbi), objc.RegisterName("setProgressBar:"), objref.IDOf(progressBar))
 	return mclcbi
 }
 
 // WithSplash sets the splash.
 func (mclcbi *MTRContentLauncherClusterBrandingInformation) WithSplash(splash MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
+	defer runtime.KeepAlive(splash)
 	objc.Send[objc.ID](objref.IDOf(mclcbi), objc.RegisterName("setSplash:"), objref.IDOf(splash))
 	return mclcbi
 }
 
 // WithWaterMark sets the water mark.
 func (mclcbi *MTRContentLauncherClusterBrandingInformation) WithWaterMark(waterMark MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
+	defer runtime.KeepAlive(waterMark)
 	objc.Send[objc.ID](objref.IDOf(mclcbi), objc.RegisterName("setWaterMark:"), objref.IDOf(waterMark))
 	return mclcbi
 }

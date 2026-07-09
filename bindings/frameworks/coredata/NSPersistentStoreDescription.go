@@ -56,8 +56,8 @@ func NSPersistentStoreDescriptionFromID(id objc.ID) *NSPersistentStoreDescriptio
 }
 
 // Initializes and returns a persistent store description with the given URL.
-func NSPersistentStoreDescriptionPersistentStoreDescriptionWithURL(uRL *foundation.NSURL) *NSPersistentStoreDescription {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentStoreDescription), _nSPersistentStoreDescriptionSelPersistentStoreDescriptionWithURL, uRL.Ptr())
+func NSPersistentStoreDescriptionPersistentStoreDescriptionWithURL(url *foundation.NSURL) *NSPersistentStoreDescription {
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentStoreDescription), _nSPersistentStoreDescriptionSelPersistentStoreDescriptionWithURL, url.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -115,8 +115,8 @@ func (o *NSPersistentStoreDescription) URL() *foundation.NSURL {
 	return foundation.NSURLFromID(_ret)
 }
 
-func (o *NSPersistentStoreDescription) SetURL(uRL *foundation.NSURL) {
-	o.Ptr().Send(_nSPersistentStoreDescriptionSelSetURL, uRL.Ptr())
+func (o *NSPersistentStoreDescription) SetURL(url *foundation.NSURL) {
+	o.Ptr().Send(_nSPersistentStoreDescriptionSelSetURL, url.Ptr())
 }
 
 func (o *NSPersistentStoreDescription) Options() *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject] {

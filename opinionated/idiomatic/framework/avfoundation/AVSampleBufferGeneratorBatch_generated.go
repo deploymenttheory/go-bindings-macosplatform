@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func sampleBufferGeneratorBatchAdopt(id objc.ID) *SampleBufferGeneratorBatch {
 
 // Description returns the object's -description text.
 func (sbgb *SampleBufferGeneratorBatch) Description() string {
+	defer runtime.KeepAlive(sbgb)
 	return rt.Description(objref.IDOf(sbgb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sbgb *SampleBufferGeneratorBatch) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sbgb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sbgb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sbgb *SampleBufferGeneratorBatch) IsKind(className string) bool {
+	defer runtime.KeepAlive(sbgb)
 	return rt.IsKind(objref.IDOf(sbgb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sbgb *SampleBufferGeneratorBatch) String() string {
+	defer runtime.KeepAlive(sbgb)
 	return rt.Description(objref.IDOf(sbgb))
 }
 
@@ -79,6 +85,7 @@ func NewSampleBufferGeneratorBatch() *SampleBufferGeneratorBatch {
 //
 // MakeDataReady blocks until the operation completes or ctx is cancelled.
 func (sbgb *SampleBufferGeneratorBatch) MakeDataReady(ctx context.Context) error {
+	defer runtime.KeepAlive(sbgb)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -96,5 +103,6 @@ func (sbgb *SampleBufferGeneratorBatch) MakeDataReady(ctx context.Context) error
 
 // Cancel cancels any I/O for this batch.
 func (sbgb *SampleBufferGeneratorBatch) Cancel() {
+	defer runtime.KeepAlive(sbgb)
 	objc.Send[objc.ID](objref.IDOf(sbgb), objc.RegisterName("cancel"))
 }

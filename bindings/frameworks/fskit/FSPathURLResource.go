@@ -35,8 +35,8 @@ func FSPathURLResourceFromID(id objc.ID) *FSPathURLResource {
 }
 
 // Creates a path URL resource.
-func (o *FSPathURLResource) InitWithURLWritable(uRL *foundation.NSURL, writable bool) *FSPathURLResource {
-	_ret := objc.Send[objc.ID](o.Ptr(), _fSPathURLResourceSelInitWithURLWritable, uRL.Ptr(), writable)
+func (o *FSPathURLResource) InitWithURLWritable(url *foundation.NSURL, writable bool) *FSPathURLResource {
+	_ret := objc.Send[objc.ID](o.Ptr(), _fSPathURLResourceSelInitWithURLWritable, url.Ptr(), writable)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

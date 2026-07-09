@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,75 +49,100 @@ func mTRClusterElectricalEnergyMeasurementAdopt(id objc.ID) *MTRClusterElectrica
 
 // NewMTRClusterElectricalEnergyMeasurementWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func NewMTRClusterElectricalEnergyMeasurementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterElectricalEnergyMeasurement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterElectricalEnergyMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterElectricalEnergyMeasurementAdopt(_id)
 }
 
 // ReadAttributeAccuracyWithParams reads attribute accuracy with params.
-func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeAccuracyWithParams(params *MTRReadParams) obj.Object {
+func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeAccuracyWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mceem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributeAccuracyWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCumulativeEnergyImportedWithParams reads attribute cumulative energy imported with params.
-func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyImportedWithParams(params *MTRReadParams) obj.Object {
+func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyImportedWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mceem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributeCumulativeEnergyImportedWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCumulativeEnergyExportedWithParams reads attribute cumulative energy exported with params.
-func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyExportedWithParams(params *MTRReadParams) obj.Object {
+func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyExportedWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mceem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributeCumulativeEnergyExportedWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePeriodicEnergyImportedWithParams reads attribute periodic energy imported with params.
-func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyImportedWithParams(params *MTRReadParams) obj.Object {
+func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyImportedWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mceem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributePeriodicEnergyImportedWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePeriodicEnergyExportedWithParams reads attribute periodic energy exported with params.
-func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyExportedWithParams(params *MTRReadParams) obj.Object {
+func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyExportedWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mceem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributePeriodicEnergyExportedWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCumulativeEnergyResetWithParams reads attribute cumulative energy reset with params.
-func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyResetWithParams(params *MTRReadParams) obj.Object {
+func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyResetWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mceem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributeCumulativeEnergyResetWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mceem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mceem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mceem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mceem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mceem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterElectricalEnergyMeasurement)(nil)

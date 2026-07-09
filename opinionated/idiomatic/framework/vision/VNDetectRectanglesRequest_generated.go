@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -114,36 +116,42 @@ func (drr *DetectRectanglesRequest) WithRevision(revision int) *DetectRectangles
 
 // MinimumAspectRatio specifies the minimum aspect ratio of the rectangle(s) to look for, range [0.0, 1.0], default 0.5
 func (drr *DetectRectanglesRequest) MinimumAspectRatio() float32 {
+	defer runtime.KeepAlive(drr)
 	_r := objc.Send[float32](objref.IDOf(drr), objc.RegisterName("minimumAspectRatio"))
 	return _r
 }
 
 // MaximumAspectRatio specifies the maximum aspect ratio of the rectangle(s) to look for, range [0.0, 1.0], default 1.0
 func (drr *DetectRectanglesRequest) MaximumAspectRatio() float32 {
+	defer runtime.KeepAlive(drr)
 	_r := objc.Send[float32](objref.IDOf(drr), objc.RegisterName("maximumAspectRatio"))
 	return _r
 }
 
 // QuadratureTolerance specifies the maximum number of degrees a rectangle corner angle can deviate from 90 degrees, range [0,45], default 30
 func (drr *DetectRectanglesRequest) QuadratureTolerance() float32 {
+	defer runtime.KeepAlive(drr)
 	_r := objc.Send[float32](objref.IDOf(drr), objc.RegisterName("quadratureTolerance"))
 	return _r
 }
 
 // MinimumSize specifies the minimum size of the rectangle to be detected, as a proportion of the smallest dimension, range [0.0, 1.0], default .2. Any smaller rectangles that may have been detected will not be returned.
 func (drr *DetectRectanglesRequest) MinimumSize() float32 {
+	defer runtime.KeepAlive(drr)
 	_r := objc.Send[float32](objref.IDOf(drr), objc.RegisterName("minimumSize"))
 	return _r
 }
 
 // MinimumConfidence specifies a minimum confidence score, range [0.0, 1.0], default 0.0. Any rectangles with a lower confidence score will not be returned.
 func (drr *DetectRectanglesRequest) MinimumConfidence() float32 {
+	defer runtime.KeepAlive(drr)
 	_r := objc.Send[float32](objref.IDOf(drr), objc.RegisterName("minimumConfidence"))
 	return _r
 }
 
 // MaximumObservations specifies the maximum number of rectangles to be returned.  The default is 1.  Setting this property to 0 will allow an unlimited number of observations to be returned.
 func (drr *DetectRectanglesRequest) MaximumObservations() int {
+	defer runtime.KeepAlive(drr)
 	_r := objc.Send[int](objref.IDOf(drr), objc.RegisterName("maximumObservations"))
 	return _r
 }

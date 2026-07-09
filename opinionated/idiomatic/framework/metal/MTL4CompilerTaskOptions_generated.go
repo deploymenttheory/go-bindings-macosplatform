@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTL4CompilerTaskOptionsAdopt(id objc.ID) *MTL4CompilerTaskOptions {
 
 // Description returns the object's -description text.
 func (mcto *MTL4CompilerTaskOptions) Description() string {
+	defer runtime.KeepAlive(mcto)
 	return rt.Description(objref.IDOf(mcto))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcto *MTL4CompilerTaskOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcto)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcto), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcto *MTL4CompilerTaskOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcto)
 	return rt.IsKind(objref.IDOf(mcto), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcto *MTL4CompilerTaskOptions) String() string {
+	defer runtime.KeepAlive(mcto)
 	return rt.Description(objref.IDOf(mcto))
 }
 
@@ -74,11 +81,13 @@ func NewMTL4CompilerTaskOptions() *MTL4CompilerTaskOptions {
 
 // LookupArchives returns the lookup archives.
 func (mcto *MTL4CompilerTaskOptions) LookupArchives() []obj.Object {
+	defer runtime.KeepAlive(mcto)
 	_r := objc.Send[objc.ID](objref.IDOf(mcto), objc.RegisterName("lookupArchives"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetLookupArchives wraps the corresponding Objective-C method.
 func (mcto *MTL4CompilerTaskOptions) SetLookupArchives(lookupArchives []obj.Object) {
+	defer runtime.KeepAlive(mcto)
 	objc.Send[objc.ID](objref.IDOf(mcto), objc.RegisterName("setLookupArchives:"), purego.SliceToNSArray(lookupArchives, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }

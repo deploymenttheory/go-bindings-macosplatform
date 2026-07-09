@@ -6,11 +6,14 @@ package virtualization
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -51,27 +54,33 @@ func virtualMachineAdopt(id objc.ID) *VirtualMachine {
 
 // Description returns the object's -description text.
 func (vm *VirtualMachine) Description() string {
+	defer runtime.KeepAlive(vm)
 	return rt.Description(objref.IDOf(vm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vm *VirtualMachine) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vm *VirtualMachine) IsKind(className string) bool {
+	defer runtime.KeepAlive(vm)
 	return rt.IsKind(objref.IDOf(vm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vm *VirtualMachine) String() string {
+	defer runtime.KeepAlive(vm)
 	return rt.Description(objref.IDOf(vm))
 }
 
 // NewVirtualMachineWithConfiguration creates the VM and configures it with the specified data.
 func NewVirtualMachineWithConfiguration(configuration *VirtualMachineConfiguration) *VirtualMachine {
+	defer runtime.KeepAlive(configuration)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZVirtualMachine")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
 	return virtualMachineAdopt(_id)
@@ -79,15 +88,28 @@ func NewVirtualMachineWithConfiguration(configuration *VirtualMachineConfigurati
 
 // NewVirtualMachineWithConfigurationQueue creates and configures the VM with the specified data and dispatch queue.
 func NewVirtualMachineWithConfigurationQueue(configuration *VirtualMachineConfiguration, queue obj.Object) *VirtualMachine {
+	defer runtime.KeepAlive(configuration)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZVirtualMachine")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:queue:"), objref.IDOf(configuration), objref.IDOf(queue))
 	return virtualMachineAdopt(_id)
+}
+
+// WithDelegate sets a custom object you use to determine when the VM stops.
+func (vm *VirtualMachine) WithDelegate(delegate VirtualMachineDelegate) *VirtualMachine {
+	_shim := newVirtualMachineDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(vm), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(vm), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return vm
 }
 
 // Start starts the VM and notifies the specified completion handler if startup was successful.
 //
 // Start blocks until the operation completes or ctx is cancelled.
 func (vm *VirtualMachine) Start(ctx context.Context) error {
+	defer runtime.KeepAlive(vm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -107,6 +129,8 @@ func (vm *VirtualMachine) Start(ctx context.Context) error {
 //
 // StartWithOptions blocks until the operation completes or ctx is cancelled.
 func (vm *VirtualMachine) StartWithOptions(ctx context.Context, options *VirtualMachineStartOptions) error {
+	defer runtime.KeepAlive(vm)
+	defer runtime.KeepAlive(options)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -126,6 +150,7 @@ func (vm *VirtualMachine) StartWithOptions(ctx context.Context, options *Virtual
 //
 // Stop blocks until the operation completes or ctx is cancelled.
 func (vm *VirtualMachine) Stop(ctx context.Context) error {
+	defer runtime.KeepAlive(vm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -145,6 +170,7 @@ func (vm *VirtualMachine) Stop(ctx context.Context) error {
 //
 // Pause blocks until the operation completes or ctx is cancelled.
 func (vm *VirtualMachine) Pause(ctx context.Context) error {
+	defer runtime.KeepAlive(vm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -164,6 +190,7 @@ func (vm *VirtualMachine) Pause(ctx context.Context) error {
 //
 // Resume blocks until the operation completes or ctx is cancelled.
 func (vm *VirtualMachine) Resume(ctx context.Context) error {
+	defer runtime.KeepAlive(vm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -183,6 +210,7 @@ func (vm *VirtualMachine) Resume(ctx context.Context) error {
 //
 // RestoreMachineStateFromURL blocks until the operation completes or ctx is cancelled.
 func (vm *VirtualMachine) RestoreMachineStateFromURL(ctx context.Context, saveFileURL string) error {
+	defer runtime.KeepAlive(vm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -202,6 +230,7 @@ func (vm *VirtualMachine) RestoreMachineStateFromURL(ctx context.Context, saveFi
 //
 // SaveMachineStateToURL blocks until the operation completes or ctx is cancelled.
 func (vm *VirtualMachine) SaveMachineStateToURL(ctx context.Context, saveFileURL string) error {
+	defer runtime.KeepAlive(vm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -221,6 +250,7 @@ func (vm *VirtualMachine) SaveMachineStateToURL(ctx context.Context, saveFileURL
 //
 // RequestStop returns an error if the operation did not succeed.
 func (vm *VirtualMachine) RequestStop() error {
+	defer runtime.KeepAlive(vm)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(vm), objc.RegisterName("requestStopWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -230,43 +260,50 @@ func (vm *VirtualMachine) RequestStop() error {
 }
 
 // Queue returns the queue associated with this virtual machine. This property is a reference to the queue used to create the virtual machine. If no queue was passed, the default queue is the main queue. The property can be accessed from any queue or actor. Other properties or function calls on the VZVirtualMachine must happen on this queue. The completion handlers from the asynchronous functions are also invoked on this queue.
-func (vm *VirtualMachine) Queue() obj.Object {
+func (vm *VirtualMachine) Queue() *foundation.Object {
+	defer runtime.KeepAlive(vm)
 	_r := objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("queue"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 // State returns execution state of the virtual machine.
 func (vm *VirtualMachine) State() VirtualMachineState {
+	defer runtime.KeepAlive(vm)
 	_r := objc.Send[VirtualMachineState](objref.IDOf(vm), objc.RegisterName("state"))
 	return _r
 }
 
 // CanStart reports whether the machine is in a state that can be started.
 func (vm *VirtualMachine) CanStart() bool {
+	defer runtime.KeepAlive(vm)
 	_r := objc.Send[bool](objref.IDOf(vm), objc.RegisterName("canStart"))
 	return _r
 }
 
 // CanStop reports whether the machine is in a state that can be stopped.
 func (vm *VirtualMachine) CanStop() bool {
+	defer runtime.KeepAlive(vm)
 	_r := objc.Send[bool](objref.IDOf(vm), objc.RegisterName("canStop"))
 	return _r
 }
 
 // CanPause reports whether the machine is in a state that can be paused.
 func (vm *VirtualMachine) CanPause() bool {
+	defer runtime.KeepAlive(vm)
 	_r := objc.Send[bool](objref.IDOf(vm), objc.RegisterName("canPause"))
 	return _r
 }
 
 // CanResume reports whether the machine is in a state that can be resumed.
 func (vm *VirtualMachine) CanResume() bool {
+	defer runtime.KeepAlive(vm)
 	_r := objc.Send[bool](objref.IDOf(vm), objc.RegisterName("canResume"))
 	return _r
 }
 
 // CanRequestStop reports whether the machine is in a state where the guest can be asked to stop.
 func (vm *VirtualMachine) CanRequestStop() bool {
+	defer runtime.KeepAlive(vm)
 	_r := objc.Send[bool](objref.IDOf(vm), objc.RegisterName("canRequestStop"))
 	return _r
 }
@@ -275,6 +312,7 @@ func (vm *VirtualMachine) CanRequestStop() bool {
 //
 // ConsoleDevices returns the collection as a Go slice.
 func (vm *VirtualMachine) ConsoleDevices() []*ConsoleDevice {
+	defer runtime.KeepAlive(vm)
 	_arr := objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("consoleDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ConsoleDevice { return ConsoleDeviceFromID(_id) })
 }
@@ -283,6 +321,7 @@ func (vm *VirtualMachine) ConsoleDevices() []*ConsoleDevice {
 //
 // DirectorySharingDevices returns the collection as a Go slice.
 func (vm *VirtualMachine) DirectorySharingDevices() []*DirectorySharingDevice {
+	defer runtime.KeepAlive(vm)
 	_arr := objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("directorySharingDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DirectorySharingDevice { return DirectorySharingDeviceFromID(_id) })
 }
@@ -291,6 +330,7 @@ func (vm *VirtualMachine) DirectorySharingDevices() []*DirectorySharingDevice {
 //
 // GraphicsDevices returns the collection as a Go slice.
 func (vm *VirtualMachine) GraphicsDevices() []*GraphicsDevice {
+	defer runtime.KeepAlive(vm)
 	_arr := objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("graphicsDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphicsDevice { return GraphicsDeviceFromID(_id) })
 }
@@ -299,6 +339,7 @@ func (vm *VirtualMachine) GraphicsDevices() []*GraphicsDevice {
 //
 // MemoryBalloonDevices returns the collection as a Go slice.
 func (vm *VirtualMachine) MemoryBalloonDevices() []*MemoryBalloonDevice {
+	defer runtime.KeepAlive(vm)
 	_arr := objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("memoryBalloonDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MemoryBalloonDevice { return MemoryBalloonDeviceFromID(_id) })
 }
@@ -307,6 +348,7 @@ func (vm *VirtualMachine) MemoryBalloonDevices() []*MemoryBalloonDevice {
 //
 // NetworkDevices returns the collection as a Go slice.
 func (vm *VirtualMachine) NetworkDevices() []*NetworkDevice {
+	defer runtime.KeepAlive(vm)
 	_arr := objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("networkDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NetworkDevice { return NetworkDeviceFromID(_id) })
 }
@@ -315,6 +357,7 @@ func (vm *VirtualMachine) NetworkDevices() []*NetworkDevice {
 //
 // SocketDevices returns the collection as a Go slice.
 func (vm *VirtualMachine) SocketDevices() []*SocketDevice {
+	defer runtime.KeepAlive(vm)
 	_arr := objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("socketDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SocketDevice { return SocketDeviceFromID(_id) })
 }
@@ -323,6 +366,7 @@ func (vm *VirtualMachine) SocketDevices() []*SocketDevice {
 //
 // USBControllers returns the collection as a Go slice.
 func (vm *VirtualMachine) USBControllers() []*USBController {
+	defer runtime.KeepAlive(vm)
 	_arr := objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("usbControllers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *USBController { return USBControllerFromID(_id) })
 }

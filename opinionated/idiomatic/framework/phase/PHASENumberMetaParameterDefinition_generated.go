@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -75,12 +77,14 @@ func NewNumberMetaParameterDefinitionWithValueMinimumMaximum(value float64, mini
 
 // Minimum returns the readonly minimum that this metaparameter definition was initialized with
 func (nmpd *NumberMetaParameterDefinition) Minimum() float64 {
+	defer runtime.KeepAlive(nmpd)
 	_r := objc.Send[float64](objref.IDOf(nmpd), objc.RegisterName("minimum"))
 	return _r
 }
 
 // Maximum returns the readonly maximum that this metaparameter definition was initialized with
 func (nmpd *NumberMetaParameterDefinition) Maximum() float64 {
+	defer runtime.KeepAlive(nmpd)
 	_r := objc.Send[float64](objref.IDOf(nmpd), objc.RegisterName("maximum"))
 	return _r
 }

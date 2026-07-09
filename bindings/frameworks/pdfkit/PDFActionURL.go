@@ -51,6 +51,6 @@ func (o *PDFActionURL) URL() *foundation.NSURL {
 	return foundation.NSURLFromID(_ret)
 }
 
-func (o *PDFActionURL) SetURL(uRL *foundation.NSURL) {
-	o.Ptr().Send(_pDFActionURLSelSetURL, uRL.Ptr())
+func (o *PDFActionURL) SetURL(url *foundation.NSURL) {
+	o.Ptr().Send(_pDFActionURLSelSetURL, url.Ptr())
 }

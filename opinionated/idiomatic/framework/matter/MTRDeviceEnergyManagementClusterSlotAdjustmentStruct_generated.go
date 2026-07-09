@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDeviceEnergyManagementClusterSlotAdjustmentStructAdopt(id objc.ID) *MTRD
 
 // Description returns the object's -description text.
 func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) Description() string {
+	defer runtime.KeepAlive(mdemcsas)
 	return rt.Description(objref.IDOf(mdemcsas))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdemcsas)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdemcsas), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdemcsas)
 	return rt.IsKind(objref.IDOf(mdemcsas), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) String() string {
+	defer runtime.KeepAlive(mdemcsas)
 	return rt.Description(objref.IDOf(mdemcsas))
 }
 
@@ -72,36 +80,42 @@ func NewMTRDeviceEnergyManagementClusterSlotAdjustmentStruct() *MTRDeviceEnergyM
 
 // WithSlotIndex sets the slot index.
 func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithSlotIndex(slotIndex obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
+	defer runtime.KeepAlive(slotIndex)
 	objc.Send[objc.ID](objref.IDOf(mdemcsas), objc.RegisterName("setSlotIndex:"), objref.IDOf(slotIndex))
 	return mdemcsas
 }
 
 // WithNominalPower sets the nominal power.
 func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithNominalPower(nominalPower obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
+	defer runtime.KeepAlive(nominalPower)
 	objc.Send[objc.ID](objref.IDOf(mdemcsas), objc.RegisterName("setNominalPower:"), objref.IDOf(nominalPower))
 	return mdemcsas
 }
 
 // WithDuration sets the duration.
 func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
+	defer runtime.KeepAlive(duration)
 	objc.Send[objc.ID](objref.IDOf(mdemcsas), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return mdemcsas
 }
 
 // SlotIndex returns the slot index.
-func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SlotIndex() obj.Object {
+func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SlotIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdemcsas)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcsas), objc.RegisterName("slotIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NominalPower returns the nominal power.
-func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) NominalPower() obj.Object {
+func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) NominalPower() *foundation.Number {
+	defer runtime.KeepAlive(mdemcsas)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcsas), objc.RegisterName("nominalPower"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Duration returns the duration.
-func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) Duration() obj.Object {
+func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) Duration() *foundation.Number {
+	defer runtime.KeepAlive(mdemcsas)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcsas), objc.RegisterName("duration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

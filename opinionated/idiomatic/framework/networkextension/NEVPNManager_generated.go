@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -52,22 +53,27 @@ func nEVPNManagerAdopt(id objc.ID) *NEVPNManager {
 
 // Description returns the object's -description text.
 func (nm *NEVPNManager) Description() string {
+	defer runtime.KeepAlive(nm)
 	return rt.Description(objref.IDOf(nm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nm *NEVPNManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nm *NEVPNManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(nm)
 	return rt.IsKind(objref.IDOf(nm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nm *NEVPNManager) String() string {
+	defer runtime.KeepAlive(nm)
 	return rt.Description(objref.IDOf(nm))
 }
 
@@ -92,12 +98,14 @@ func (nm *NEVPNManager) WithLocalizedDescription(localizedDescription string) *N
 
 // WithProtocol sets an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 func (nm *NEVPNManager) WithProtocol(protocol NEVPNProtocolProvider) *NEVPNManager {
+	defer runtime.KeepAlive(protocol)
 	objc.Send[objc.ID](objref.IDOf(nm), objc.RegisterName("setProtocol:"), objref.IDOf(protocol))
 	return nm
 }
 
 // WithProtocolConfiguration sets an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 func (nm *NEVPNManager) WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NEVPNManager {
+	defer runtime.KeepAlive(protocolConfiguration)
 	objc.Send[objc.ID](objref.IDOf(nm), objc.RegisterName("setProtocolConfiguration:"), objref.IDOf(protocolConfiguration))
 	return nm
 }
@@ -112,6 +120,7 @@ func (nm *NEVPNManager) WithEnabled(enabled bool) *NEVPNManager {
 //
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
 func (nm *NEVPNManager) LoadFromPreferences(ctx context.Context) error {
+	defer runtime.KeepAlive(nm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -131,6 +140,7 @@ func (nm *NEVPNManager) LoadFromPreferences(ctx context.Context) error {
 //
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
 func (nm *NEVPNManager) RemoveFromPreferences(ctx context.Context) error {
+	defer runtime.KeepAlive(nm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -150,6 +160,7 @@ func (nm *NEVPNManager) RemoveFromPreferences(ctx context.Context) error {
 //
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
 func (nm *NEVPNManager) SaveToPreferences(ctx context.Context) error {
+	defer runtime.KeepAlive(nm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -167,6 +178,8 @@ func (nm *NEVPNManager) SaveToPreferences(ctx context.Context) error {
 
 // SetAuthorization this function sets an authorization object that can be used to obtain the authorization rights necessary to modify the system VPN configuration.
 func (nm *NEVPNManager) SetAuthorization(authorization obj.Object) {
+	defer runtime.KeepAlive(nm)
+	defer runtime.KeepAlive(authorization)
 	objc.Send[objc.ID](objref.IDOf(nm), objc.RegisterName("setAuthorization:"), objref.IDOf(authorization))
 }
 
@@ -174,18 +187,21 @@ func (nm *NEVPNManager) SetAuthorization(authorization obj.Object) {
 //
 // OnDemandRules returns the collection as a Go slice.
 func (nm *NEVPNManager) OnDemandRules() []*NEOnDemandRule {
+	defer runtime.KeepAlive(nm)
 	_arr := objc.Send[objc.ID](objref.IDOf(nm), objc.RegisterName("onDemandRules"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEOnDemandRule { return NEOnDemandRuleFromID(_id) })
 }
 
 // IsOnDemandEnabled reports whether toggles VPN On Demand.
 func (nm *NEVPNManager) IsOnDemandEnabled() bool {
+	defer runtime.KeepAlive(nm)
 	_r := objc.Send[bool](objref.IDOf(nm), objc.RegisterName("isOnDemandEnabled"))
 	return _r
 }
 
 // LocalizedDescription returns a string containing a description of the VPN.
 func (nm *NEVPNManager) LocalizedDescription() string {
+	defer runtime.KeepAlive(nm)
 	_r := objc.Send[objc.ID](objref.IDOf(nm), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""
@@ -195,24 +211,28 @@ func (nm *NEVPNManager) LocalizedDescription() string {
 
 // Protocol returns an NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
 func (nm *NEVPNManager) Protocol() *NEVPNProtocol {
+	defer runtime.KeepAlive(nm)
 	_r := objc.Send[objc.ID](objref.IDOf(nm), objc.RegisterName("protocol"))
 	return NEVPNProtocolFromID(_r)
 }
 
 // ProtocolConfiguration returns an NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
 func (nm *NEVPNManager) ProtocolConfiguration() *NEVPNProtocol {
+	defer runtime.KeepAlive(nm)
 	_r := objc.Send[objc.ID](objref.IDOf(nm), objc.RegisterName("protocolConfiguration"))
 	return NEVPNProtocolFromID(_r)
 }
 
 // Connection returns the NEVPNConnection object used for controlling the VPN tunnel.
 func (nm *NEVPNManager) Connection() *NEVPNConnection {
+	defer runtime.KeepAlive(nm)
 	_r := objc.Send[objc.ID](objref.IDOf(nm), objc.RegisterName("connection"))
 	return NEVPNConnectionFromID(_r)
 }
 
 // IsEnabled reports whether toggles the enabled status of the VPN. Setting this property will disable VPN configurations of other apps. This property will be set to false when other VPN configurations are enabled.
 func (nm *NEVPNManager) IsEnabled() bool {
+	defer runtime.KeepAlive(nm)
 	_r := objc.Send[bool](objref.IDOf(nm), objc.RegisterName("isEnabled"))
 	return _r
 }

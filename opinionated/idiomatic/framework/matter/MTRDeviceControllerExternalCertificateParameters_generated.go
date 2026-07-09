@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -78,6 +81,7 @@ func (mdcecp *MTRDeviceControllerExternalCertificateParameters) WithConcurrentSu
 
 // WithStorageBehaviorConfiguration sets sets the storage behavior configuration - see MTRDeviceStorageBehaviorConfiguration.h for details
 func (mdcecp *MTRDeviceControllerExternalCertificateParameters) WithStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerExternalCertificateParameters {
+	defer runtime.KeepAlive(storageBehaviorConfiguration)
 	objc.Send[objc.ID](objref.IDOf(mdcecp), objc.RegisterName("setStorageBehaviorConfiguration:"), objref.IDOf(storageBehaviorConfiguration))
 	return mdcecp
 }
@@ -89,9 +93,10 @@ func (mdcecp *MTRDeviceControllerExternalCertificateParameters) WithStartSuspend
 }
 
 // RootCertificate returns the root certificate.
-func (mdcecp *MTRDeviceControllerExternalCertificateParameters) RootCertificate() obj.Object {
+func (mdcecp *MTRDeviceControllerExternalCertificateParameters) RootCertificate() *foundation.Data {
+	defer runtime.KeepAlive(mdcecp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdcecp), objc.RegisterName("rootCertificate"))
-	return obj.Wrap(_r)
+	return foundation.DataFromID(_r)
 }
 
 var _ MTRDeviceControllerParametersProvider = (*MTRDeviceControllerExternalCertificateParameters)(nil)

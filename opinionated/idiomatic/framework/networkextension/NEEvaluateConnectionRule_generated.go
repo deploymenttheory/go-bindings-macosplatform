@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nEEvaluateConnectionRuleAdopt(id objc.ID) *NEEvaluateConnectionRule {
 
 // Description returns the object's -description text.
 func (necr *NEEvaluateConnectionRule) Description() string {
+	defer runtime.KeepAlive(necr)
 	return rt.Description(objref.IDOf(necr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (necr *NEEvaluateConnectionRule) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(necr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(necr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (necr *NEEvaluateConnectionRule) IsKind(className string) bool {
+	defer runtime.KeepAlive(necr)
 	return rt.IsKind(objref.IDOf(necr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (necr *NEEvaluateConnectionRule) String() string {
+	defer runtime.KeepAlive(necr)
 	return rt.Description(objref.IDOf(necr))
 }
 
@@ -88,6 +95,7 @@ func (necr *NEEvaluateConnectionRule) WithProbeURL(probeURL string) *NEEvaluateC
 
 // Action returns the action to take if the properties of the network connection being established match the rule.
 func (necr *NEEvaluateConnectionRule) Action() NEEvaluateConnectionRuleAction {
+	defer runtime.KeepAlive(necr)
 	_r := objc.Send[NEEvaluateConnectionRuleAction](objref.IDOf(necr), objc.RegisterName("action"))
 	return _r
 }
@@ -96,6 +104,7 @@ func (necr *NEEvaluateConnectionRule) Action() NEEvaluateConnectionRuleAction {
 //
 // MatchDomains returns the collection as a Go slice.
 func (necr *NEEvaluateConnectionRule) MatchDomains() []string {
+	defer runtime.KeepAlive(necr)
 	_arr := objc.Send[objc.ID](objref.IDOf(necr), objc.RegisterName("matchDomains"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -104,12 +113,14 @@ func (necr *NEEvaluateConnectionRule) MatchDomains() []string {
 //
 // UseDNSServers returns the collection as a Go slice.
 func (necr *NEEvaluateConnectionRule) UseDNSServers() []string {
+	defer runtime.KeepAlive(necr)
 	_arr := objc.Send[objc.ID](objref.IDOf(necr), objc.RegisterName("useDNSServers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ProbeURL returns an HTTP or HTTPS URL. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded and a request sent to this URL results in a response with an HTTP response code other than 200, then the VPN is started.
-func (necr *NEEvaluateConnectionRule) ProbeURL() obj.Object {
+func (necr *NEEvaluateConnectionRule) ProbeURL() string {
+	defer runtime.KeepAlive(necr)
 	_r := objc.Send[objc.ID](objref.IDOf(necr), objc.RegisterName("probeURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

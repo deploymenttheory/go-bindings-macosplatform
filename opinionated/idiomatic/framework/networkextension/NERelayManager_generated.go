@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func nERelayManagerAdopt(id objc.ID) *NERelayManager {
 
 // Description returns the object's -description text.
 func (nrm *NERelayManager) Description() string {
+	defer runtime.KeepAlive(nrm)
 	return rt.Description(objref.IDOf(nrm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nrm *NERelayManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nrm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nrm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nrm *NERelayManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(nrm)
 	return rt.IsKind(objref.IDOf(nrm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nrm *NERelayManager) String() string {
+	defer runtime.KeepAlive(nrm)
 	return rt.Description(objref.IDOf(nrm))
 }
 
@@ -88,8 +94,8 @@ func (nrm *NERelayManager) WithEnabled(enabled bool) *NERelayManager {
 }
 
 // WithUIToggleEnabled sets determines if the user will have the ability to enable and disable the relay
-func (nrm *NERelayManager) WithUIToggleEnabled(uIToggleEnabled bool) *NERelayManager {
-	objc.Send[objc.ID](objref.IDOf(nrm), objc.RegisterName("setUIToggleEnabled:"), uIToggleEnabled)
+func (nrm *NERelayManager) WithUIToggleEnabled(uiToggleEnabled bool) *NERelayManager {
+	objc.Send[objc.ID](objref.IDOf(nrm), objc.RegisterName("setUIToggleEnabled:"), uiToggleEnabled)
 	return nrm
 }
 
@@ -145,6 +151,7 @@ func (nrm *NERelayManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *N
 //
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
 func (nrm *NERelayManager) LoadFromPreferences(ctx context.Context) error {
+	defer runtime.KeepAlive(nrm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -164,6 +171,7 @@ func (nrm *NERelayManager) LoadFromPreferences(ctx context.Context) error {
 //
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
 func (nrm *NERelayManager) RemoveFromPreferences(ctx context.Context) error {
+	defer runtime.KeepAlive(nrm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -183,6 +191,7 @@ func (nrm *NERelayManager) RemoveFromPreferences(ctx context.Context) error {
 //
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
 func (nrm *NERelayManager) SaveToPreferences(ctx context.Context) error {
+	defer runtime.KeepAlive(nrm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -202,6 +211,7 @@ func (nrm *NERelayManager) SaveToPreferences(ctx context.Context) error {
 //
 // GetLastClientErrors blocks until the operation completes or ctx is cancelled.
 func (nrm *NERelayManager) GetLastClientErrors(ctx context.Context, seconds float64) (result obj.Object, err error) {
+	defer runtime.KeepAlive(nrm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -224,6 +234,7 @@ func (nrm *NERelayManager) GetLastClientErrors(ctx context.Context, seconds floa
 
 // LocalizedDescription returns a string containing a description of the relay.
 func (nrm *NERelayManager) LocalizedDescription() string {
+	defer runtime.KeepAlive(nrm)
 	_r := objc.Send[objc.ID](objref.IDOf(nrm), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""
@@ -233,18 +244,21 @@ func (nrm *NERelayManager) LocalizedDescription() string {
 
 // IsEnabled reports whether toggles the enabled status of the relay.
 func (nrm *NERelayManager) IsEnabled() bool {
+	defer runtime.KeepAlive(nrm)
 	_r := objc.Send[bool](objref.IDOf(nrm), objc.RegisterName("isEnabled"))
 	return _r
 }
 
 // IsUIToggleEnabled reports whether determines if the user will have the ability to enable and disable the relay
 func (nrm *NERelayManager) IsUIToggleEnabled() bool {
+	defer runtime.KeepAlive(nrm)
 	_r := objc.Send[bool](objref.IDOf(nrm), objc.RegisterName("isUIToggleEnabled"))
 	return _r
 }
 
 // IsDNSFailoverAllowed reports whether determines if DNS queries that fail over relay can fallback to default DNS
 func (nrm *NERelayManager) IsDNSFailoverAllowed() bool {
+	defer runtime.KeepAlive(nrm)
 	_r := objc.Send[bool](objref.IDOf(nrm), objc.RegisterName("isDNSFailoverAllowed"))
 	return _r
 }
@@ -253,6 +267,7 @@ func (nrm *NERelayManager) IsDNSFailoverAllowed() bool {
 //
 // Relays returns the collection as a Go slice.
 func (nrm *NERelayManager) Relays() []*NERelay {
+	defer runtime.KeepAlive(nrm)
 	_arr := objc.Send[objc.ID](objref.IDOf(nrm), objc.RegisterName("relays"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NERelay { return NERelayFromID(_id) })
 }
@@ -261,6 +276,7 @@ func (nrm *NERelayManager) Relays() []*NERelay {
 //
 // MatchDomains returns the collection as a Go slice.
 func (nrm *NERelayManager) MatchDomains() []string {
+	defer runtime.KeepAlive(nrm)
 	_arr := objc.Send[objc.ID](objref.IDOf(nrm), objc.RegisterName("matchDomains"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -269,6 +285,7 @@ func (nrm *NERelayManager) MatchDomains() []string {
 //
 // MatchFQDNs returns the collection as a Go slice.
 func (nrm *NERelayManager) MatchFQDNs() []string {
+	defer runtime.KeepAlive(nrm)
 	_arr := objc.Send[objc.ID](objref.IDOf(nrm), objc.RegisterName("matchFQDNs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -277,6 +294,7 @@ func (nrm *NERelayManager) MatchFQDNs() []string {
 //
 // ExcludedDomains returns the collection as a Go slice.
 func (nrm *NERelayManager) ExcludedDomains() []string {
+	defer runtime.KeepAlive(nrm)
 	_arr := objc.Send[objc.ID](objref.IDOf(nrm), objc.RegisterName("excludedDomains"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -285,6 +303,7 @@ func (nrm *NERelayManager) ExcludedDomains() []string {
 //
 // ExcludedFQDNs returns the collection as a Go slice.
 func (nrm *NERelayManager) ExcludedFQDNs() []string {
+	defer runtime.KeepAlive(nrm)
 	_arr := objc.Send[objc.ID](objref.IDOf(nrm), objc.RegisterName("excludedFQDNs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -293,6 +312,7 @@ func (nrm *NERelayManager) ExcludedFQDNs() []string {
 //
 // OnDemandRules returns the collection as a Go slice.
 func (nrm *NERelayManager) OnDemandRules() []*NEOnDemandRule {
+	defer runtime.KeepAlive(nrm)
 	_arr := objc.Send[objc.ID](objref.IDOf(nrm), objc.RegisterName("onDemandRules"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEOnDemandRule { return NEOnDemandRuleFromID(_id) })
 }

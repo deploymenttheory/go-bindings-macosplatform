@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -70,12 +71,14 @@ func (aso *AcceptSharesOperation) WithShareMetadatas(items ...*ShareMetadata) *A
 
 // WithConfiguration sets the operation’s configuration.
 func (aso *AcceptSharesOperation) WithConfiguration(configuration *OperationConfiguration) *AcceptSharesOperation {
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(aso), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return aso
 }
 
 // WithGroup sets the operation’s group.
 func (aso *AcceptSharesOperation) WithGroup(group *OperationGroup) *AcceptSharesOperation {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(aso), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return aso
 }
@@ -88,6 +91,7 @@ func (aso *AcceptSharesOperation) WithLongLivedOperationWasPersistedBlock(longLi
 
 // WithContainer sets the operation's container.
 func (aso *AcceptSharesOperation) WithContainer(container *Container) *AcceptSharesOperation {
+	defer runtime.KeepAlive(container)
 	objc.Send[objc.ID](objref.IDOf(aso), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return aso
 }
@@ -120,6 +124,7 @@ func (aso *AcceptSharesOperation) WithTimeoutIntervalForResource(timeoutInterval
 //
 // ShareMetadatas returns the collection as a Go slice.
 func (aso *AcceptSharesOperation) ShareMetadatas() []*ShareMetadata {
+	defer runtime.KeepAlive(aso)
 	_arr := objc.Send[objc.ID](objref.IDOf(aso), objc.RegisterName("shareMetadatas"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ShareMetadata { return ShareMetadataFromID(_id) })
 }
@@ -128,6 +133,7 @@ func (aso *AcceptSharesOperation) ShareMetadatas() []*ShareMetadata {
 //
 // SetAcceptSharesCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (aso *AcceptSharesOperation) SetAcceptSharesCompletionBlock(ctx context.Context) error {
+	defer runtime.KeepAlive(aso)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error

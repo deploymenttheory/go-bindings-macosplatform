@@ -55,8 +55,8 @@ var (
 )
 
 // C function: ar_anchor_get_identifier
-func ArAnchorGetIdentifier(anchor *foundation.NSObject, out_identifier *uint8) {
-	_ar_anchor_get_identifier(anchor.Ptr(), out_identifier)
+func ArAnchorGetIdentifier(anchor *foundation.NSObject, outIdentifier *uint8) {
+	_ar_anchor_get_identifier(anchor.Ptr(), outIdentifier)
 }
 
 // C function: ar_anchor_get_origin_from_anchor_transform
@@ -70,58 +70,58 @@ func ArAnchorGetTimestamp(anchor *foundation.NSObject) float64 {
 }
 
 // C function: ar_authorization_result_get_authorization_type
-func ArAuthorizationResultGetAuthorizationType(authorization_result *foundation.NSObject) Ar_authorization_type_t {
-	return _ar_authorization_result_get_authorization_type(authorization_result.Ptr())
+func ArAuthorizationResultGetAuthorizationType(authorizationResult *foundation.NSObject) Ar_authorization_type_t {
+	return _ar_authorization_result_get_authorization_type(authorizationResult.Ptr())
 }
 
 // C function: ar_authorization_result_get_status
-func ArAuthorizationResultGetStatus(authorization_result *foundation.NSObject) Ar_authorization_status_t {
-	return _ar_authorization_result_get_status(authorization_result.Ptr())
+func ArAuthorizationResultGetStatus(authorizationResult *foundation.NSObject) Ar_authorization_status_t {
+	return _ar_authorization_result_get_status(authorizationResult.Ptr())
 }
 
 // C function: ar_authorization_results_enumerate_results
-func ArAuthorizationResultsEnumerateResults(authorization_results *foundation.NSObject, authorization_results_enumerator func(*foundation.NSObject) bool) {
-	var __block_authorization_results_enumerator objc.Block
-	if authorization_results_enumerator != nil {
-		__block_authorization_results_enumerator = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
+func ArAuthorizationResultsEnumerateResults(authorizationResults *foundation.NSObject, authorizationResultsEnumerator func(*foundation.NSObject) bool) {
+	var __block_authorizationResultsEnumerator objc.Block
+	if authorizationResultsEnumerator != nil {
+		__block_authorizationResultsEnumerator = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			return authorization_results_enumerator(foundation.NSObjectFromID(blockParam0))
+			return authorizationResultsEnumerator(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_authorization_results_enumerator.Release()
+		defer __block_authorizationResultsEnumerator.Release()
 	}
-	_ar_authorization_results_enumerate_results(authorization_results.Ptr(), __block_authorization_results_enumerator)
+	_ar_authorization_results_enumerate_results(authorizationResults.Ptr(), __block_authorizationResultsEnumerator)
 }
 
 // C function: ar_authorization_results_enumerate_results_f
-func ArAuthorizationResultsEnumerateResultsF(authorization_results *foundation.NSObject, context_ unsafe.Pointer, authorization_results_enumerator_function unsafe.Pointer) {
-	_ar_authorization_results_enumerate_results_f(authorization_results.Ptr(), context_, authorization_results_enumerator_function)
+func ArAuthorizationResultsEnumerateResultsF(authorizationResults *foundation.NSObject, context_ unsafe.Pointer, authorizationResultsEnumeratorFunction unsafe.Pointer) {
+	_ar_authorization_results_enumerate_results_f(authorizationResults.Ptr(), context_, authorizationResultsEnumeratorFunction)
 }
 
 // C function: ar_authorization_results_get_count
-func ArAuthorizationResultsGetCount(authorization_results *foundation.NSObject) uint {
-	return _ar_authorization_results_get_count(authorization_results.Ptr())
+func ArAuthorizationResultsGetCount(authorizationResults *foundation.NSObject) uint {
+	return _ar_authorization_results_get_count(authorizationResults.Ptr())
 }
 
 // C function: ar_data_provider_get_required_authorization_type
-func ArDataProviderGetRequiredAuthorizationType(data_provider *foundation.NSObject) Ar_authorization_type_t {
-	return _ar_data_provider_get_required_authorization_type(data_provider.Ptr())
+func ArDataProviderGetRequiredAuthorizationType(dataProvider *foundation.NSObject) Ar_authorization_type_t {
+	return _ar_data_provider_get_required_authorization_type(dataProvider.Ptr())
 }
 
 // C function: ar_data_provider_get_state
-func ArDataProviderGetState(data_provider *foundation.NSObject) Ar_data_provider_state_t {
-	return _ar_data_provider_get_state(data_provider.Ptr())
+func ArDataProviderGetState(dataProvider *foundation.NSObject) Ar_data_provider_state_t {
+	return _ar_data_provider_get_state(dataProvider.Ptr())
 }
 
 // C function: ar_data_providers_add_data_provider
-func ArDataProvidersAddDataProvider(data_providers *foundation.NSObject, data_provider_to_add *foundation.NSObject) {
-	_ar_data_providers_add_data_provider(data_providers.Ptr(), data_provider_to_add.Ptr())
+func ArDataProvidersAddDataProvider(dataProviders *foundation.NSObject, dataProviderToAdd *foundation.NSObject) {
+	_ar_data_providers_add_data_provider(dataProviders.Ptr(), dataProviderToAdd.Ptr())
 }
 
 // C function: ar_data_providers_add_data_providers
-func ArDataProvidersAddDataProviders(data_providers *foundation.NSObject, data_providers_to_add *foundation.NSObject) {
-	_ar_data_providers_add_data_providers(data_providers.Ptr(), data_providers_to_add.Ptr())
+func ArDataProvidersAddDataProviders(dataProviders *foundation.NSObject, dataProvidersToAdd *foundation.NSObject) {
+	_ar_data_providers_add_data_providers(dataProviders.Ptr(), dataProvidersToAdd.Ptr())
 }
 
 // C function: ar_data_providers_create
@@ -130,38 +130,38 @@ func ArDataProvidersCreate() unsafe.Pointer {
 }
 
 // C function: ar_data_providers_enumerate_data_providers
-func ArDataProvidersEnumerateDataProviders(data_providers *foundation.NSObject, data_providers_enumerator func(*foundation.NSObject) bool) {
-	var __block_data_providers_enumerator objc.Block
-	if data_providers_enumerator != nil {
-		__block_data_providers_enumerator = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
+func ArDataProvidersEnumerateDataProviders(dataProviders *foundation.NSObject, dataProvidersEnumerator func(*foundation.NSObject) bool) {
+	var __block_dataProvidersEnumerator objc.Block
+	if dataProvidersEnumerator != nil {
+		__block_dataProvidersEnumerator = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) bool {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
-			return data_providers_enumerator(foundation.NSObjectFromID(blockParam0))
+			return dataProvidersEnumerator(foundation.NSObjectFromID(blockParam0))
 		})
-		defer __block_data_providers_enumerator.Release()
+		defer __block_dataProvidersEnumerator.Release()
 	}
-	_ar_data_providers_enumerate_data_providers(data_providers.Ptr(), __block_data_providers_enumerator)
+	_ar_data_providers_enumerate_data_providers(dataProviders.Ptr(), __block_dataProvidersEnumerator)
 }
 
 // C function: ar_data_providers_enumerate_data_providers_f
-func ArDataProvidersEnumerateDataProvidersF(data_providers *foundation.NSObject, context_ unsafe.Pointer, data_providers_enumerator_function unsafe.Pointer) {
-	_ar_data_providers_enumerate_data_providers_f(data_providers.Ptr(), context_, data_providers_enumerator_function)
+func ArDataProvidersEnumerateDataProvidersF(dataProviders *foundation.NSObject, context_ unsafe.Pointer, dataProvidersEnumeratorFunction unsafe.Pointer) {
+	_ar_data_providers_enumerate_data_providers_f(dataProviders.Ptr(), context_, dataProvidersEnumeratorFunction)
 }
 
 // C function: ar_data_providers_get_count
-func ArDataProvidersGetCount(data_providers *foundation.NSObject) uint {
-	return _ar_data_providers_get_count(data_providers.Ptr())
+func ArDataProvidersGetCount(dataProviders *foundation.NSObject) uint {
+	return _ar_data_providers_get_count(dataProviders.Ptr())
 }
 
 // C function: ar_data_providers_remove_data_provider
-func ArDataProvidersRemoveDataProvider(data_providers *foundation.NSObject, data_provider_to_remove *foundation.NSObject) {
-	_ar_data_providers_remove_data_provider(data_providers.Ptr(), data_provider_to_remove.Ptr())
+func ArDataProvidersRemoveDataProvider(dataProviders *foundation.NSObject, dataProviderToRemove *foundation.NSObject) {
+	_ar_data_providers_remove_data_provider(dataProviders.Ptr(), dataProviderToRemove.Ptr())
 }
 
 // C function: ar_data_providers_remove_data_providers
-func ArDataProvidersRemoveDataProviders(data_providers *foundation.NSObject, data_providers_to_remove *foundation.NSObject) {
-	_ar_data_providers_remove_data_providers(data_providers.Ptr(), data_providers_to_remove.Ptr())
+func ArDataProvidersRemoveDataProviders(dataProviders *foundation.NSObject, dataProvidersToRemove *foundation.NSObject) {
+	_ar_data_providers_remove_data_providers(dataProviders.Ptr(), dataProvidersToRemove.Ptr())
 }
 
 // C function: ar_device_anchor_create
@@ -170,8 +170,8 @@ func ArDeviceAnchorCreate() unsafe.Pointer {
 }
 
 // C function: ar_device_anchor_get_identifier
-func ArDeviceAnchorGetIdentifier(anchor *foundation.NSObject, out_identifier *uint8) {
-	_ar_device_anchor_get_identifier(anchor.Ptr(), out_identifier)
+func ArDeviceAnchorGetIdentifier(anchor *foundation.NSObject, outIdentifier *uint8) {
+	_ar_device_anchor_get_identifier(anchor.Ptr(), outIdentifier)
 }
 
 // C function: ar_device_anchor_get_origin_from_anchor_transform
@@ -229,15 +229,15 @@ func ArSessionCreateWithDevice(device *foundation.NSObject) *foundation.NSObject
 }
 
 // C function: ar_session_run
-func ArSessionRun(session *foundation.NSObject, data_providers *foundation.NSObject) {
-	_ar_session_run(session.Ptr(), data_providers.Ptr())
+func ArSessionRun(session *foundation.NSObject, dataProviders *foundation.NSObject) {
+	_ar_session_run(session.Ptr(), dataProviders.Ptr())
 }
 
 // C function: ar_session_set_data_provider_state_change_handler
-func ArSessionSetDataProviderStateChangeHandler(session *foundation.NSObject, queue *foundation.NSObject, data_provider_state_change_handler func(*foundation.NSObject, Ar_data_provider_state_t, *foundation.NSObject, *foundation.NSObject)) {
-	var __block_data_provider_state_change_handler objc.Block
-	if data_provider_state_change_handler != nil {
-		__block_data_provider_state_change_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 Ar_data_provider_state_t, blockParam2 objc.ID, blockParam3 objc.ID) {
+func ArSessionSetDataProviderStateChangeHandler(session *foundation.NSObject, queue *foundation.NSObject, dataProviderStateChangeHandler func(*foundation.NSObject, Ar_data_provider_state_t, *foundation.NSObject, *foundation.NSObject)) {
+	var __block_dataProviderStateChangeHandler objc.Block
+	if dataProviderStateChangeHandler != nil {
+		__block_dataProviderStateChangeHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 Ar_data_provider_state_t, blockParam2 objc.ID, blockParam3 objc.ID) {
 			if blockParam0 != 0 {
 				blockParam0.Send(objc.RegisterName("retain"))
 			}
@@ -247,16 +247,16 @@ func ArSessionSetDataProviderStateChangeHandler(session *foundation.NSObject, qu
 			if blockParam3 != 0 {
 				blockParam3.Send(objc.RegisterName("retain"))
 			}
-			data_provider_state_change_handler(foundation.NSObjectFromID(blockParam0), blockParam1, foundation.NSObjectFromID(blockParam2), foundation.NSObjectFromID(blockParam3))
+			dataProviderStateChangeHandler(foundation.NSObjectFromID(blockParam0), blockParam1, foundation.NSObjectFromID(blockParam2), foundation.NSObjectFromID(blockParam3))
 		})
-		defer __block_data_provider_state_change_handler.Release()
+		defer __block_dataProviderStateChangeHandler.Release()
 	}
-	_ar_session_set_data_provider_state_change_handler(session.Ptr(), queue.Ptr(), __block_data_provider_state_change_handler)
+	_ar_session_set_data_provider_state_change_handler(session.Ptr(), queue.Ptr(), __block_dataProviderStateChangeHandler)
 }
 
 // C function: ar_session_set_data_provider_state_change_handler_f
-func ArSessionSetDataProviderStateChangeHandlerF(session *foundation.NSObject, queue *foundation.NSObject, context_ unsafe.Pointer, data_provider_state_change_handler_function unsafe.Pointer) {
-	_ar_session_set_data_provider_state_change_handler_f(session.Ptr(), queue.Ptr(), context_, data_provider_state_change_handler_function)
+func ArSessionSetDataProviderStateChangeHandlerF(session *foundation.NSObject, queue *foundation.NSObject, context_ unsafe.Pointer, dataProviderStateChangeHandlerFunction unsafe.Pointer) {
+	_ar_session_set_data_provider_state_change_handler_f(session.Ptr(), queue.Ptr(), context_, dataProviderStateChangeHandlerFunction)
 }
 
 // C function: ar_session_stop
@@ -275,8 +275,8 @@ func ArWorldTrackingConfigurationCreate() unsafe.Pointer {
 }
 
 // C function: ar_world_tracking_provider_create
-func ArWorldTrackingProviderCreate(world_tracking_configuration *foundation.NSObject) unsafe.Pointer {
-	return _ar_world_tracking_provider_create(world_tracking_configuration.Ptr())
+func ArWorldTrackingProviderCreate(worldTrackingConfiguration *foundation.NSObject) unsafe.Pointer {
+	return _ar_world_tracking_provider_create(worldTrackingConfiguration.Ptr())
 }
 
 // C function: ar_world_tracking_provider_get_required_authorization_type
@@ -290,6 +290,6 @@ func ArWorldTrackingProviderIsSupported() bool {
 }
 
 // C function: ar_world_tracking_provider_query_device_anchor_at_timestamp
-func ArWorldTrackingProviderQueryDeviceAnchorAtTimestamp(world_tracking_provider *foundation.NSObject, timestamp float64, device_anchor *foundation.NSObject) Ar_device_anchor_query_status_t {
-	return _ar_world_tracking_provider_query_device_anchor_at_timestamp(world_tracking_provider.Ptr(), timestamp, device_anchor.Ptr())
+func ArWorldTrackingProviderQueryDeviceAnchorAtTimestamp(worldTrackingProvider *foundation.NSObject, timestamp float64, deviceAnchor *foundation.NSObject) Ar_device_anchor_query_status_t {
+	return _ar_world_tracking_provider_query_device_anchor_at_timestamp(worldTrackingProvider.Ptr(), timestamp, deviceAnchor.Ptr())
 }

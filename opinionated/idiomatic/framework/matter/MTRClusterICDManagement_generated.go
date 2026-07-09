@@ -6,11 +6,13 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,6 +53,9 @@ func mTRClusterICDManagementAdopt(id objc.ID) *MTRClusterICDManagement {
 
 // NewMTRClusterICDManagementWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterICDManagementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterICDManagement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterICDManagement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterICDManagementAdopt(_id)
@@ -60,6 +65,9 @@ func NewMTRClusterICDManagementWithDeviceEndpointIDQueue(device *MTRDevice, endp
 //
 // RegisterClientWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcim *MTRClusterICDManagement) RegisterClientWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRICDManagementClusterRegisterClientParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRICDManagementClusterRegisterClientResponseParams, err error) {
+	defer runtime.KeepAlive(mcim)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRICDManagementClusterRegisterClientResponseParams
 		err error
@@ -85,6 +93,9 @@ func (mcim *MTRClusterICDManagement) RegisterClientWithParamsExpectedValuesExpec
 //
 // StayActiveRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcim *MTRClusterICDManagement) StayActiveRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRICDManagementClusterStayActiveRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRICDManagementClusterStayActiveResponseParams, err error) {
+	defer runtime.KeepAlive(mcim)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRICDManagementClusterStayActiveResponseParams
 		err error
@@ -107,93 +118,123 @@ func (mcim *MTRClusterICDManagement) StayActiveRequestWithParamsExpectedValuesEx
 }
 
 // ReadAttributeIdleModeDurationWithParams reads attribute idle mode duration with params.
-func (mcim *MTRClusterICDManagement) ReadAttributeIdleModeDurationWithParams(params *MTRReadParams) obj.Object {
+func (mcim *MTRClusterICDManagement) ReadAttributeIdleModeDurationWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcim)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeIdleModeDurationWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActiveModeDurationWithParams reads attribute active mode duration with params.
-func (mcim *MTRClusterICDManagement) ReadAttributeActiveModeDurationWithParams(params *MTRReadParams) obj.Object {
+func (mcim *MTRClusterICDManagement) ReadAttributeActiveModeDurationWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcim)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeActiveModeDurationWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActiveModeThresholdWithParams reads attribute active mode threshold with params.
-func (mcim *MTRClusterICDManagement) ReadAttributeActiveModeThresholdWithParams(params *MTRReadParams) obj.Object {
+func (mcim *MTRClusterICDManagement) ReadAttributeActiveModeThresholdWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcim)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeActiveModeThresholdWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRegisteredClientsWithParams reads attribute registered clients with params.
-func (mcim *MTRClusterICDManagement) ReadAttributeRegisteredClientsWithParams(params *MTRReadParams) obj.Object {
+func (mcim *MTRClusterICDManagement) ReadAttributeRegisteredClientsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcim)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeRegisteredClientsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeICDCounterWithParams reads attribute icd counter with params.
-func (mcim *MTRClusterICDManagement) ReadAttributeICDCounterWithParams(params *MTRReadParams) obj.Object {
+func (mcim *MTRClusterICDManagement) ReadAttributeICDCounterWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcim)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeICDCounterWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClientsSupportedPerFabricWithParams reads attribute clients supported per fabric with params.
-func (mcim *MTRClusterICDManagement) ReadAttributeClientsSupportedPerFabricWithParams(params *MTRReadParams) obj.Object {
+func (mcim *MTRClusterICDManagement) ReadAttributeClientsSupportedPerFabricWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcim)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeClientsSupportedPerFabricWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeUserActiveModeTriggerHintWithParams reads attribute user active mode trigger hint with params.
-func (mcim *MTRClusterICDManagement) ReadAttributeUserActiveModeTriggerHintWithParams(params *MTRReadParams) obj.Object {
+func (mcim *MTRClusterICDManagement) ReadAttributeUserActiveModeTriggerHintWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcim)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeUserActiveModeTriggerHintWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeUserActiveModeTriggerInstructionWithParams reads attribute user active mode trigger instruction with params.
-func (mcim *MTRClusterICDManagement) ReadAttributeUserActiveModeTriggerInstructionWithParams(params *MTRReadParams) obj.Object {
+func (mcim *MTRClusterICDManagement) ReadAttributeUserActiveModeTriggerInstructionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcim)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeUserActiveModeTriggerInstructionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeOperatingModeWithParams reads attribute operating mode with params.
-func (mcim *MTRClusterICDManagement) ReadAttributeOperatingModeWithParams(params *MTRReadParams) obj.Object {
+func (mcim *MTRClusterICDManagement) ReadAttributeOperatingModeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcim)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeOperatingModeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMaximumCheckInBackOffWithParams reads attribute maximum check in back off with params.
-func (mcim *MTRClusterICDManagement) ReadAttributeMaximumCheckInBackOffWithParams(params *MTRReadParams) obj.Object {
+func (mcim *MTRClusterICDManagement) ReadAttributeMaximumCheckInBackOffWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcim)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeMaximumCheckInBackOffWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcim *MTRClusterICDManagement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcim *MTRClusterICDManagement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcim)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcim *MTRClusterICDManagement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcim *MTRClusterICDManagement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcim)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcim *MTRClusterICDManagement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcim *MTRClusterICDManagement) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcim)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcim *MTRClusterICDManagement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcim *MTRClusterICDManagement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcim)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcim *MTRClusterICDManagement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcim *MTRClusterICDManagement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcim)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterICDManagement)(nil)

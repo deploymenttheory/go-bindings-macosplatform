@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTROnOffClusterOffWithEffectParamsAdopt(id objc.ID) *MTROnOffClusterOffWith
 
 // Description returns the object's -description text.
 func (moocowep *MTROnOffClusterOffWithEffectParams) Description() string {
+	defer runtime.KeepAlive(moocowep)
 	return rt.Description(objref.IDOf(moocowep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (moocowep *MTROnOffClusterOffWithEffectParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(moocowep)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(moocowep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (moocowep *MTROnOffClusterOffWithEffectParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(moocowep)
 	return rt.IsKind(objref.IDOf(moocowep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (moocowep *MTROnOffClusterOffWithEffectParams) String() string {
+	defer runtime.KeepAlive(moocowep)
 	return rt.Description(objref.IDOf(moocowep))
 }
 
@@ -72,60 +80,70 @@ func NewMTROnOffClusterOffWithEffectParams() *MTROnOffClusterOffWithEffectParams
 
 // WithEffectIdentifier sets the effect identifier.
 func (moocowep *MTROnOffClusterOffWithEffectParams) WithEffectIdentifier(effectIdentifier obj.Object) *MTROnOffClusterOffWithEffectParams {
+	defer runtime.KeepAlive(effectIdentifier)
 	objc.Send[objc.ID](objref.IDOf(moocowep), objc.RegisterName("setEffectIdentifier:"), objref.IDOf(effectIdentifier))
 	return moocowep
 }
 
 // WithEffectVariant sets the effect variant.
 func (moocowep *MTROnOffClusterOffWithEffectParams) WithEffectVariant(effectVariant obj.Object) *MTROnOffClusterOffWithEffectParams {
+	defer runtime.KeepAlive(effectVariant)
 	objc.Send[objc.ID](objref.IDOf(moocowep), objc.RegisterName("setEffectVariant:"), objref.IDOf(effectVariant))
 	return moocowep
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (moocowep *MTROnOffClusterOffWithEffectParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROnOffClusterOffWithEffectParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(moocowep), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return moocowep
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (moocowep *MTROnOffClusterOffWithEffectParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROnOffClusterOffWithEffectParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(moocowep), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return moocowep
 }
 
 // WithEffectID sets the effect ID.
 func (moocowep *MTROnOffClusterOffWithEffectParams) WithEffectID(effectId obj.Object) *MTROnOffClusterOffWithEffectParams {
+	defer runtime.KeepAlive(effectId)
 	objc.Send[objc.ID](objref.IDOf(moocowep), objc.RegisterName("setEffectId:"), objref.IDOf(effectId))
 	return moocowep
 }
 
 // EffectIdentifier returns the effect identifier.
-func (moocowep *MTROnOffClusterOffWithEffectParams) EffectIdentifier() obj.Object {
+func (moocowep *MTROnOffClusterOffWithEffectParams) EffectIdentifier() *foundation.Number {
+	defer runtime.KeepAlive(moocowep)
 	_r := objc.Send[objc.ID](objref.IDOf(moocowep), objc.RegisterName("effectIdentifier"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EffectVariant returns the effect variant.
-func (moocowep *MTROnOffClusterOffWithEffectParams) EffectVariant() obj.Object {
+func (moocowep *MTROnOffClusterOffWithEffectParams) EffectVariant() *foundation.Number {
+	defer runtime.KeepAlive(moocowep)
 	_r := objc.Send[objc.ID](objref.IDOf(moocowep), objc.RegisterName("effectVariant"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (moocowep *MTROnOffClusterOffWithEffectParams) TimedInvokeTimeoutMs() obj.Object {
+func (moocowep *MTROnOffClusterOffWithEffectParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(moocowep)
 	_r := objc.Send[objc.ID](objref.IDOf(moocowep), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (moocowep *MTROnOffClusterOffWithEffectParams) ServerSideProcessingTimeout() obj.Object {
+func (moocowep *MTROnOffClusterOffWithEffectParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(moocowep)
 	_r := objc.Send[objc.ID](objref.IDOf(moocowep), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EffectID returns the effect ID.
-func (moocowep *MTROnOffClusterOffWithEffectParams) EffectID() obj.Object {
+func (moocowep *MTROnOffClusterOffWithEffectParams) EffectID() *foundation.Number {
+	defer runtime.KeepAlive(moocowep)
 	_r := objc.Send[objc.ID](objref.IDOf(moocowep), objc.RegisterName("effectId"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

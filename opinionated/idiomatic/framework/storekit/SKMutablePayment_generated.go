@@ -5,9 +5,11 @@
 package storekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,6 +62,7 @@ func (mp *MutablePayment) WithApplicationUsername(applicationUsername string) *M
 
 // WithPaymentDiscount sets the details of the discount offer to apply to the payment.
 func (mp *MutablePayment) WithPaymentDiscount(paymentDiscount *PaymentDiscount) *MutablePayment {
+	defer runtime.KeepAlive(paymentDiscount)
 	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setPaymentDiscount:"), objref.IDOf(paymentDiscount))
 	return mp
 }
@@ -77,8 +80,8 @@ func (mp *MutablePayment) WithQuantity(quantity int) *MutablePayment {
 }
 
 // WithRequestData sets reserved for future use.
-func (mp *MutablePayment) WithRequestData(requestData obj.Object) *MutablePayment {
-	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setRequestData:"), objref.IDOf(requestData))
+func (mp *MutablePayment) WithRequestData(requestData []byte) *MutablePayment {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setRequestData:"), rt.BytesToNSData(requestData))
 	return mp
 }
 
@@ -90,6 +93,7 @@ func (mp *MutablePayment) WithSimulatesAskToBuyInSandbox(simulatesAskToBuyInSand
 
 // ProductIdentifier returns the product identifier.
 func (mp *MutablePayment) ProductIdentifier() string {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("productIdentifier"))
 	if _r == 0 {
 		return ""

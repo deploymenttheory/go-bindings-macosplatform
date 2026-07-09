@@ -5,6 +5,8 @@
 package glkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func effectPropertyAdopt(id objc.ID) *EffectProperty {
 
 // Description returns the object's -description text.
 func (ep *EffectProperty) Description() string {
+	defer runtime.KeepAlive(ep)
 	return rt.Description(objref.IDOf(ep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ep *EffectProperty) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ep)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ep *EffectProperty) IsKind(className string) bool {
+	defer runtime.KeepAlive(ep)
 	return rt.IsKind(objref.IDOf(ep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ep *EffectProperty) String() string {
+	defer runtime.KeepAlive(ep)
 	return rt.Description(objref.IDOf(ep))
 }
 

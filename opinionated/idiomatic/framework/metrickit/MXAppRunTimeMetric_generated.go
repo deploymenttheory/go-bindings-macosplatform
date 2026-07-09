@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,24 +56,28 @@ func NewAppRunTimeMetric() *AppRunTimeMetric {
 
 // CumulativeForegroundTime returns cumulative application foreground time. Time spent on screen and visible to the user. Dimensioned as NSUnitDuration.
 func (artm *AppRunTimeMetric) CumulativeForegroundTime() obj.Object {
+	defer runtime.KeepAlive(artm)
 	_r := objc.Send[objc.ID](objref.IDOf(artm), objc.RegisterName("cumulativeForegroundTime"))
 	return obj.Wrap(_r)
 }
 
 // CumulativeBackgroundTime returns cumulative application background time. Time spent off screen and in the background, invisible to the user. Dimensioned as NSUnitDuration.
 func (artm *AppRunTimeMetric) CumulativeBackgroundTime() obj.Object {
+	defer runtime.KeepAlive(artm)
 	_r := objc.Send[objc.ID](objref.IDOf(artm), objc.RegisterName("cumulativeBackgroundTime"))
 	return obj.Wrap(_r)
 }
 
 // CumulativeBackgroundAudioTime returns cumulative time the application spent running in the background to play audio Dimensioned as NSUnitDuration.
 func (artm *AppRunTimeMetric) CumulativeBackgroundAudioTime() obj.Object {
+	defer runtime.KeepAlive(artm)
 	_r := objc.Send[objc.ID](objref.IDOf(artm), objc.RegisterName("cumulativeBackgroundAudioTime"))
 	return obj.Wrap(_r)
 }
 
 // CumulativeBackgroundLocationTime returns cumulative time the application spent running in the background to acquire or process location. Dimensioned as NSUnitDuration.
 func (artm *AppRunTimeMetric) CumulativeBackgroundLocationTime() obj.Object {
+	defer runtime.KeepAlive(artm)
 	_r := objc.Send[objc.ID](objref.IDOf(artm), objc.RegisterName("cumulativeBackgroundLocationTime"))
 	return obj.Wrap(_r)
 }

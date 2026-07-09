@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,12 +54,14 @@ func NewMTRChannelClusterChannelInfo() *MTRChannelClusterChannelInfo {
 
 // WithMajorNumber sets the major number.
 func (mccci *MTRChannelClusterChannelInfo) WithMajorNumber(majorNumber obj.Object) *MTRChannelClusterChannelInfo {
+	defer runtime.KeepAlive(majorNumber)
 	objc.Send[objc.ID](objref.IDOf(mccci), objc.RegisterName("setMajorNumber:"), objref.IDOf(majorNumber))
 	return mccci
 }
 
 // WithMinorNumber sets the minor number.
 func (mccci *MTRChannelClusterChannelInfo) WithMinorNumber(minorNumber obj.Object) *MTRChannelClusterChannelInfo {
+	defer runtime.KeepAlive(minorNumber)
 	objc.Send[objc.ID](objref.IDOf(mccci), objc.RegisterName("setMinorNumber:"), objref.IDOf(minorNumber))
 	return mccci
 }
@@ -88,6 +92,7 @@ func (mccci *MTRChannelClusterChannelInfo) WithIdentifier(identifier string) *MT
 
 // WithType sets the type.
 func (mccci *MTRChannelClusterChannelInfo) WithType(type_ obj.Object) *MTRChannelClusterChannelInfo {
+	defer runtime.KeepAlive(type_)
 	objc.Send[objc.ID](objref.IDOf(mccci), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return mccci
 }

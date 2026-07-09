@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,25 +54,28 @@ func NewMTROperationalCredentialsClusterFabricDescriptor() *MTROperationalCreden
 }
 
 // WithRootPublicKey sets the root public key.
-func (moccfd *MTROperationalCredentialsClusterFabricDescriptor) WithRootPublicKey(rootPublicKey obj.Object) *MTROperationalCredentialsClusterFabricDescriptor {
-	objc.Send[objc.ID](objref.IDOf(moccfd), objc.RegisterName("setRootPublicKey:"), objref.IDOf(rootPublicKey))
+func (moccfd *MTROperationalCredentialsClusterFabricDescriptor) WithRootPublicKey(rootPublicKey []byte) *MTROperationalCredentialsClusterFabricDescriptor {
+	objc.Send[objc.ID](objref.IDOf(moccfd), objc.RegisterName("setRootPublicKey:"), rt.BytesToNSData(rootPublicKey))
 	return moccfd
 }
 
 // WithVendorID sets the vendor ID.
 func (moccfd *MTROperationalCredentialsClusterFabricDescriptor) WithVendorID(vendorID obj.Object) *MTROperationalCredentialsClusterFabricDescriptor {
+	defer runtime.KeepAlive(vendorID)
 	objc.Send[objc.ID](objref.IDOf(moccfd), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 	return moccfd
 }
 
 // WithFabricID sets the fabric ID.
 func (moccfd *MTROperationalCredentialsClusterFabricDescriptor) WithFabricID(fabricID obj.Object) *MTROperationalCredentialsClusterFabricDescriptor {
+	defer runtime.KeepAlive(fabricID)
 	objc.Send[objc.ID](objref.IDOf(moccfd), objc.RegisterName("setFabricID:"), objref.IDOf(fabricID))
 	return moccfd
 }
 
 // WithNodeID sets the node ID.
 func (moccfd *MTROperationalCredentialsClusterFabricDescriptor) WithNodeID(nodeID obj.Object) *MTROperationalCredentialsClusterFabricDescriptor {
+	defer runtime.KeepAlive(nodeID)
 	objc.Send[objc.ID](objref.IDOf(moccfd), objc.RegisterName("setNodeID:"), objref.IDOf(nodeID))
 	return moccfd
 }
@@ -82,6 +88,7 @@ func (moccfd *MTROperationalCredentialsClusterFabricDescriptor) WithLabel(label 
 
 // WithFabricIndex sets the fabric index.
 func (moccfd *MTROperationalCredentialsClusterFabricDescriptor) WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterFabricDescriptor {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(moccfd), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return moccfd
 }

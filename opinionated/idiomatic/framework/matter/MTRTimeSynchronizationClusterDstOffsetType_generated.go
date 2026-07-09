@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,18 +54,21 @@ func NewMTRTimeSynchronizationClusterDstOffsetType() *MTRTimeSynchronizationClus
 
 // WithOffset sets the offset.
 func (mtscdot *MTRTimeSynchronizationClusterDstOffsetType) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterDstOffsetType {
+	defer runtime.KeepAlive(offset)
 	objc.Send[objc.ID](objref.IDOf(mtscdot), objc.RegisterName("setOffset:"), objref.IDOf(offset))
 	return mtscdot
 }
 
 // WithValidStarting sets the valid starting.
 func (mtscdot *MTRTimeSynchronizationClusterDstOffsetType) WithValidStarting(validStarting obj.Object) *MTRTimeSynchronizationClusterDstOffsetType {
+	defer runtime.KeepAlive(validStarting)
 	objc.Send[objc.ID](objref.IDOf(mtscdot), objc.RegisterName("setValidStarting:"), objref.IDOf(validStarting))
 	return mtscdot
 }
 
 // WithValidUntil sets the valid until.
 func (mtscdot *MTRTimeSynchronizationClusterDstOffsetType) WithValidUntil(validUntil obj.Object) *MTRTimeSynchronizationClusterDstOffsetType {
+	defer runtime.KeepAlive(validUntil)
 	objc.Send[objc.ID](objref.IDOf(mtscdot), objc.RegisterName("setValidUntil:"), objref.IDOf(validUntil))
 	return mtscdot
 }

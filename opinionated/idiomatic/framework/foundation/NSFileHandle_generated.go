@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func fileHandleAdopt(id objc.ID) *FileHandle {
 
 // Description returns the object's -description text.
 func (fh *FileHandle) Description() string {
+	defer runtime.KeepAlive(fh)
 	return rt.Description(objref.IDOf(fh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fh *FileHandle) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fh)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fh *FileHandle) IsKind(className string) bool {
+	defer runtime.KeepAlive(fh)
 	return rt.IsKind(objref.IDOf(fh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fh *FileHandle) String() string {
+	defer runtime.KeepAlive(fh)
 	return rt.Description(objref.IDOf(fh))
 }
 
@@ -78,6 +84,7 @@ func NewFileHandleWithFileDescriptorCloseOnDealloc(fd int, closeopt bool) *FileH
 
 // NewFileHandleWithCoder creates a new FileHandle.
 func NewFileHandleWithCoder(coder *Coder) *FileHandle {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return fileHandleAdopt(_id)
@@ -109,35 +116,38 @@ func (fh *FileHandle) WithObservationInfo(observationInfo unsafe.Pointer) *FileH
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (fh *FileHandle) WithScriptingProperties(scriptingProperties obj.Object) *FileHandle {
-	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (fh *FileHandle) WithScriptingProperties(scriptingProperties map[string]obj.Object) *FileHandle {
+	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return fh
 }
 
 // ReadDataToEndOfFileAndReturnError reads the available data synchronously up to the end of file or maximum number of bytes.
-func (fh *FileHandle) ReadDataToEndOfFileAndReturnError() (result *Data, err error) {
+func (fh *FileHandle) ReadDataToEndOfFileAndReturnError() (result []byte, err error) {
+	defer runtime.KeepAlive(fh)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readDataToEndOfFileAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return DataFromID(_r), nil
+	return rt.NSDataToBytes(_r), nil
 }
 
-// ReadDataUpToLengthError reads data synchronously up to the specified number of bytes.
-func (fh *FileHandle) ReadDataUpToLengthError(length int) (result *Data, err error) {
+// ReadDataUpToLength reads data synchronously up to the specified number of bytes.
+func (fh *FileHandle) ReadDataUpToLength(length int) (result []byte, err error) {
+	defer runtime.KeepAlive(fh)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readDataUpToLength:error:"), length, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return DataFromID(_r), nil
+	return rt.NSDataToBytes(_r), nil
 }
 
 // WriteData writes the specified data synchronously to the file handle.
-func (fh *FileHandle) WriteData(data *Data) error {
+func (fh *FileHandle) WriteData(data []byte) error {
+	defer runtime.KeepAlive(fh)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(fh), objc.RegisterName("writeData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(fh), objc.RegisterName("writeData:error:"), rt.BytesToNSData(data), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -146,6 +156,7 @@ func (fh *FileHandle) WriteData(data *Data) error {
 
 // GetOffset get the current position of the file pointer within the file.
 func (fh *FileHandle) GetOffset() (offsetInFile uint64, err error) {
+	defer runtime.KeepAlive(fh)
 	var _out0 uint64
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(fh), objc.RegisterName("getOffset:error:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
@@ -157,6 +168,7 @@ func (fh *FileHandle) GetOffset() (offsetInFile uint64, err error) {
 
 // SeekToEndReturningOffset places the file pointer at the end of the file referenced by the file handle and returns the new file offset.
 func (fh *FileHandle) SeekToEndReturningOffset() (offsetInFile uint64, err error) {
+	defer runtime.KeepAlive(fh)
 	var _out0 uint64
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(fh), objc.RegisterName("seekToEndReturningOffset:error:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
@@ -168,6 +180,7 @@ func (fh *FileHandle) SeekToEndReturningOffset() (offsetInFile uint64, err error
 
 // SeekToOffset wraps the corresponding Objective-C method.
 func (fh *FileHandle) SeekToOffset(offset uint64) error {
+	defer runtime.KeepAlive(fh)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(fh), objc.RegisterName("seekToOffset:error:"), offset, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -178,6 +191,7 @@ func (fh *FileHandle) SeekToOffset(offset uint64) error {
 
 // TruncateAtOffset wraps the corresponding Objective-C method.
 func (fh *FileHandle) TruncateAtOffset(offset uint64) error {
+	defer runtime.KeepAlive(fh)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(fh), objc.RegisterName("truncateAtOffset:error:"), offset, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -190,6 +204,7 @@ func (fh *FileHandle) TruncateAtOffset(offset uint64) error {
 //
 // SynchronizeAndReturnError returns an error if the operation did not succeed.
 func (fh *FileHandle) SynchronizeAndReturnError() error {
+	defer runtime.KeepAlive(fh)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(fh), objc.RegisterName("synchronizeAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -202,6 +217,7 @@ func (fh *FileHandle) SynchronizeAndReturnError() error {
 //
 // CloseAndReturnError returns an error if the operation did not succeed.
 func (fh *FileHandle) CloseAndReturnError() error {
+	defer runtime.KeepAlive(fh)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(fh), objc.RegisterName("closeAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -211,97 +227,115 @@ func (fh *FileHandle) CloseAndReturnError() error {
 }
 
 // AvailableData returns the available data.
-func (fh *FileHandle) AvailableData() *Data {
+func (fh *FileHandle) AvailableData() []byte {
+	defer runtime.KeepAlive(fh)
 	_r := objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("availableData"))
-	return DataFromID(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ReadInBackgroundAndNotifyForModes reads in background and notify for modes.
 func (fh *FileHandle) ReadInBackgroundAndNotifyForModes(modes []*String) {
+	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readInBackgroundAndNotifyForModes:"), purego.SliceToNSArray(modes, func(_v *String) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ReadInBackgroundAndNotify reads in background and notify.
 func (fh *FileHandle) ReadInBackgroundAndNotify() {
+	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readInBackgroundAndNotify"))
 }
 
 // ReadToEndOfFileInBackgroundAndNotifyForModes reads to end of file in background and notify for modes.
 func (fh *FileHandle) ReadToEndOfFileInBackgroundAndNotifyForModes(modes []*String) {
+	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readToEndOfFileInBackgroundAndNotifyForModes:"), purego.SliceToNSArray(modes, func(_v *String) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ReadToEndOfFileInBackgroundAndNotify reads to end of file in background and notify.
 func (fh *FileHandle) ReadToEndOfFileInBackgroundAndNotify() {
+	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readToEndOfFileInBackgroundAndNotify"))
 }
 
 // AcceptConnectionInBackgroundAndNotifyForModes wraps the corresponding Objective-C method.
 func (fh *FileHandle) AcceptConnectionInBackgroundAndNotifyForModes(modes []*String) {
+	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("acceptConnectionInBackgroundAndNotifyForModes:"), purego.SliceToNSArray(modes, func(_v *String) objc.ID { return objref.IDOf(_v) }))
 }
 
 // AcceptConnectionInBackgroundAndNotify wraps the corresponding Objective-C method.
 func (fh *FileHandle) AcceptConnectionInBackgroundAndNotify() {
+	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("acceptConnectionInBackgroundAndNotify"))
 }
 
 // WaitForDataInBackgroundAndNotifyForModes wraps the corresponding Objective-C method.
 func (fh *FileHandle) WaitForDataInBackgroundAndNotifyForModes(modes []*String) {
+	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("waitForDataInBackgroundAndNotifyForModes:"), purego.SliceToNSArray(modes, func(_v *String) objc.ID { return objref.IDOf(_v) }))
 }
 
 // WaitForDataInBackgroundAndNotify wraps the corresponding Objective-C method.
 func (fh *FileHandle) WaitForDataInBackgroundAndNotify() {
+	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("waitForDataInBackgroundAndNotify"))
 }
 
 // FileDescriptor returns the file descriptor.
 func (fh *FileHandle) FileDescriptor() int {
+	defer runtime.KeepAlive(fh)
 	_r := objc.Send[int](objref.IDOf(fh), objc.RegisterName("fileDescriptor"))
 	return _r
 }
 
 // ReadDataToEndOfFile returns the read data to end of file.
-func (fh *FileHandle) ReadDataToEndOfFile() *Data {
+func (fh *FileHandle) ReadDataToEndOfFile() []byte {
+	defer runtime.KeepAlive(fh)
 	_r := objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readDataToEndOfFile"))
-	return DataFromID(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ReadDataOfLength reads data of length.
-func (fh *FileHandle) ReadDataOfLength(length int) *Data {
+func (fh *FileHandle) ReadDataOfLength(length int) []byte {
+	defer runtime.KeepAlive(fh)
 	_r := objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readDataOfLength:"), length)
-	return DataFromID(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // OffsetInFile returns the offset in file.
 func (fh *FileHandle) OffsetInFile() uint64 {
+	defer runtime.KeepAlive(fh)
 	_r := objc.Send[uint64](objref.IDOf(fh), objc.RegisterName("offsetInFile"))
 	return _r
 }
 
 // SeekToEndOfFile returns the seek to end of file.
 func (fh *FileHandle) SeekToEndOfFile() uint64 {
+	defer runtime.KeepAlive(fh)
 	_r := objc.Send[uint64](objref.IDOf(fh), objc.RegisterName("seekToEndOfFile"))
 	return _r
 }
 
 // SeekToFileOffset wraps the corresponding Objective-C method.
 func (fh *FileHandle) SeekToFileOffset(offset uint64) {
+	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("seekToFileOffset:"), offset)
 }
 
 // TruncateFileAtOffset wraps the corresponding Objective-C method.
 func (fh *FileHandle) TruncateFileAtOffset(offset uint64) {
+	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("truncateFileAtOffset:"), offset)
 }
 
 // SynchronizeFile synchronizes file.
 func (fh *FileHandle) SynchronizeFile() {
+	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("synchronizeFile"))
 }
 
 // CloseFile closes file.
 func (fh *FileHandle) CloseFile() {
+	defer runtime.KeepAlive(fh)
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("closeFile"))
 }

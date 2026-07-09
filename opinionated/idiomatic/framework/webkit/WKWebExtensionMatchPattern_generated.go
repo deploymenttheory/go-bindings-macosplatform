@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,26 +49,30 @@ func wKWebExtensionMatchPatternAdopt(id objc.ID) *WKWebExtensionMatchPattern {
 
 // Description returns the object's -description text.
 func (wwemp *WKWebExtensionMatchPattern) Description() string {
+	defer runtime.KeepAlive(wwemp)
 	return rt.Description(objref.IDOf(wwemp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wwemp *WKWebExtensionMatchPattern) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wwemp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wwemp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wwemp *WKWebExtensionMatchPattern) IsKind(className string) bool {
+	defer runtime.KeepAlive(wwemp)
 	return rt.IsKind(objref.IDOf(wwemp), className)
 }
 
-// NewWKWebExtensionMatchPatternWithStringError returns a pattern object for the specified pattern string.
-func NewWKWebExtensionMatchPatternWithStringError(string_ string) (result *WKWebExtensionMatchPattern, err error) {
+// NewWKWebExtensionMatchPatternWithString returns a pattern object for the specified pattern string.
+func NewWKWebExtensionMatchPatternWithString(str string) (result *WKWebExtensionMatchPattern, err error) {
 	purego.Main(func() {
 		result, err = func() (*WKWebExtensionMatchPattern, error) {
 			_alloc := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMatchPattern")), objc.RegisterName("alloc"))
 			var _nsErr uintptr
-			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:error:"), purego.NSString(string_), unsafe.Pointer(&_nsErr))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:error:"), purego.NSString(str), unsafe.Pointer(&_nsErr))
 			if _nsErr != 0 {
 				return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 			}
@@ -77,8 +82,8 @@ func NewWKWebExtensionMatchPatternWithStringError(string_ string) (result *WKWeb
 	return
 }
 
-// NewWKWebExtensionMatchPatternWithSchemeHostPathError returns a pattern object for the specified scheme, host, and path strings.
-func NewWKWebExtensionMatchPatternWithSchemeHostPathError(scheme string, host string, path string) (result *WKWebExtensionMatchPattern, err error) {
+// NewWKWebExtensionMatchPatternWithSchemeHostPath returns a pattern object for the specified scheme, host, and path strings.
+func NewWKWebExtensionMatchPatternWithSchemeHostPath(scheme string, host string, path string) (result *WKWebExtensionMatchPattern, err error) {
 	purego.Main(func() {
 		result, err = func() (*WKWebExtensionMatchPattern, error) {
 			_alloc := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMatchPattern")), objc.RegisterName("alloc"))
@@ -95,6 +100,7 @@ func NewWKWebExtensionMatchPatternWithSchemeHostPathError(scheme string, host st
 
 // MatchesURL matches the reciever pattern against the specified URL.
 func (wwemp *WKWebExtensionMatchPattern) MatchesURL(url string) bool {
+	defer runtime.KeepAlive(wwemp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -108,6 +114,7 @@ func (wwemp *WKWebExtensionMatchPattern) MatchesURL(url string) bool {
 
 // MatchesURLOptions matches the reciever pattern against the specified URL with options.
 func (wwemp *WKWebExtensionMatchPattern) MatchesURLOptions(url string, options WKWebExtensionMatchPatternOptions) bool {
+	defer runtime.KeepAlive(wwemp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -121,6 +128,8 @@ func (wwemp *WKWebExtensionMatchPattern) MatchesURLOptions(url string, options W
 
 // MatchesPattern matches the receiver pattern against the specified pattern.
 func (wwemp *WKWebExtensionMatchPattern) MatchesPattern(pattern *WKWebExtensionMatchPattern) bool {
+	defer runtime.KeepAlive(wwemp)
+	defer runtime.KeepAlive(pattern)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -134,6 +143,8 @@ func (wwemp *WKWebExtensionMatchPattern) MatchesPattern(pattern *WKWebExtensionM
 
 // MatchesPatternOptions matches the receiver pattern against the specified pattern with options.
 func (wwemp *WKWebExtensionMatchPattern) MatchesPatternOptions(pattern *WKWebExtensionMatchPattern, options WKWebExtensionMatchPatternOptions) bool {
+	defer runtime.KeepAlive(wwemp)
+	defer runtime.KeepAlive(pattern)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -147,6 +158,7 @@ func (wwemp *WKWebExtensionMatchPattern) MatchesPatternOptions(pattern *WKWebExt
 
 // String returns the original pattern string.
 func (wwemp *WKWebExtensionMatchPattern) String() string {
+	defer runtime.KeepAlive(wwemp)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -163,6 +175,7 @@ func (wwemp *WKWebExtensionMatchPattern) String() string {
 
 // Scheme returns the scheme part of the pattern string, unless “matchesAllURLs“ is `YES`.
 func (wwemp *WKWebExtensionMatchPattern) Scheme() string {
+	defer runtime.KeepAlive(wwemp)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -179,6 +192,7 @@ func (wwemp *WKWebExtensionMatchPattern) Scheme() string {
 
 // Host returns the host part of the pattern string, unless “matchesAllURLs“ is `YES`.
 func (wwemp *WKWebExtensionMatchPattern) Host() string {
+	defer runtime.KeepAlive(wwemp)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -195,6 +209,7 @@ func (wwemp *WKWebExtensionMatchPattern) Host() string {
 
 // Path returns the path part of the pattern string, unless “matchesAllURLs“ is `YES`.
 func (wwemp *WKWebExtensionMatchPattern) Path() string {
+	defer runtime.KeepAlive(wwemp)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -211,6 +226,7 @@ func (wwemp *WKWebExtensionMatchPattern) Path() string {
 
 // MatchesAllURLs reports whether if the pattern is `<all_urls>`.
 func (wwemp *WKWebExtensionMatchPattern) MatchesAllURLs() bool {
+	defer runtime.KeepAlive(wwemp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -224,6 +240,7 @@ func (wwemp *WKWebExtensionMatchPattern) MatchesAllURLs() bool {
 
 // MatchesAllHosts reports whether if the pattern is `<all_urls>` or has `*` as the host.
 func (wwemp *WKWebExtensionMatchPattern) MatchesAllHosts() bool {
+	defer runtime.KeepAlive(wwemp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

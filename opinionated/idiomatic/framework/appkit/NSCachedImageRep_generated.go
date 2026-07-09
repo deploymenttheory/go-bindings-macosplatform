@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,6 +51,7 @@ func cachedImageRepAdopt(id objc.ID) *CachedImageRep {
 
 // NewCachedImageRepWithWindowRect returns a cached image representation initialized for drawing in the specified window.
 func NewCachedImageRepWithWindowRect(win *Window, rect corefoundation.CGRect) *CachedImageRep {
+	defer runtime.KeepAlive(win)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCachedImageRep")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWindow:rect:"), objref.IDOf(win), rect)
 	return cachedImageRepAdopt(_id)
@@ -81,6 +84,7 @@ func (cir *CachedImageRep) WithOpaque(opaque bool) *CachedImageRep {
 
 // WithColorSpaceName sets the name of the color space used by the image data.
 func (cir *CachedImageRep) WithColorSpaceName(colorSpaceName obj.Object) *CachedImageRep {
+	defer runtime.KeepAlive(colorSpaceName)
 	objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
 	return cir
 }
@@ -111,12 +115,14 @@ func (cir *CachedImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirect
 
 // Window returns the window where the representation is cached.
 func (cir *CachedImageRep) Window() *Window {
+	defer runtime.KeepAlive(cir)
 	_r := objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("window"))
 	return WindowFromID(_r)
 }
 
 // Rect returns the rectangle where the representation is cached.
 func (cir *CachedImageRep) Rect() corefoundation.CGRect {
+	defer runtime.KeepAlive(cir)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cir), objc.RegisterName("rect"))
 	return _r
 }

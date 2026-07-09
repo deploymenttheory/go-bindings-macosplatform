@@ -5,7 +5,10 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,27 +52,33 @@ func entityIdentifierAdopt(id objc.ID) *EntityIdentifier {
 
 // Description returns the object's -description text.
 func (ei *EntityIdentifier) Description() string {
+	defer runtime.KeepAlive(ei)
 	return rt.Description(objref.IDOf(ei))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ei *EntityIdentifier) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ei)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ei), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ei *EntityIdentifier) IsKind(className string) bool {
+	defer runtime.KeepAlive(ei)
 	return rt.IsKind(objref.IDOf(ei), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ei *EntityIdentifier) String() string {
+	defer runtime.KeepAlive(ei)
 	return rt.Description(objref.IDOf(ei))
 }
 
 // NewEntityIdentifierWithUUID creates an entity identifier with the given UUID.
 func NewEntityIdentifierWithUUID(uuid obj.Object) *EntityIdentifier {
+	defer runtime.KeepAlive(uuid)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("FSEntityIdentifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:"), objref.IDOf(uuid))
 	return entityIdentifierAdopt(_id)
@@ -77,40 +86,45 @@ func NewEntityIdentifierWithUUID(uuid obj.Object) *EntityIdentifier {
 
 // NewEntityIdentifierWithUUIDQualifier creates an entity identifier with the given UUID and qualifier data as a 64-bit unsigned integer.
 func NewEntityIdentifierWithUUIDQualifier(uuid obj.Object, qualifier uint64) *EntityIdentifier {
+	defer runtime.KeepAlive(uuid)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("FSEntityIdentifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:qualifier:"), objref.IDOf(uuid), qualifier)
 	return entityIdentifierAdopt(_id)
 }
 
 // NewEntityIdentifierWithUUIDData creates an entity identifier with the given UUID and qualifier data.
-func NewEntityIdentifierWithUUIDData(uuid obj.Object, qualifierData obj.Object) *EntityIdentifier {
+func NewEntityIdentifierWithUUIDData(uuid obj.Object, qualifierData []byte) *EntityIdentifier {
+	defer runtime.KeepAlive(uuid)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("FSEntityIdentifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:data:"), objref.IDOf(uuid), objref.IDOf(qualifierData))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:data:"), objref.IDOf(uuid), rt.BytesToNSData(qualifierData))
 	return entityIdentifierAdopt(_id)
 }
 
 // WithUUID sets a UUID to uniquely identify this entity.
 func (ei *EntityIdentifier) WithUUID(uuid obj.Object) *EntityIdentifier {
+	defer runtime.KeepAlive(uuid)
 	objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("setUuid:"), objref.IDOf(uuid))
 	return ei
 }
 
 // WithQualifier sets an optional piece of data to distinguish entities that otherwise share the same UUID.
-func (ei *EntityIdentifier) WithQualifier(qualifier obj.Object) *EntityIdentifier {
-	objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("setQualifier:"), objref.IDOf(qualifier))
+func (ei *EntityIdentifier) WithQualifier(qualifier []byte) *EntityIdentifier {
+	objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("setQualifier:"), rt.BytesToNSData(qualifier))
 	return ei
 }
 
 // UUID returns a UUID to uniquely identify this entity.
-func (ei *EntityIdentifier) UUID() obj.Object {
+func (ei *EntityIdentifier) UUID() *foundation.UUID {
+	defer runtime.KeepAlive(ei)
 	_r := objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("uuid"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // Qualifier returns an optional piece of data to distinguish entities that otherwise share the same UUID.
-func (ei *EntityIdentifier) Qualifier() obj.Object {
+func (ei *EntityIdentifier) Qualifier() []byte {
+	defer runtime.KeepAlive(ei)
 	_r := objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("qualifier"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // isEntityIdentifier marks EntityIdentifier — and, by embedding promotion, its

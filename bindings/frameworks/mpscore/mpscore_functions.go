@@ -55,18 +55,18 @@ func MPSGetCustomKernelBatchedDestinationIndex(c MPSCustomKernelArgumentCount) u
 }
 
 // @abstract  The index of the ith batched source texture argument
-func MPSGetCustomKernelBatchedSourceIndex(c MPSCustomKernelArgumentCount, sourceIndex uint, mPSMaxTextures uint) uint {
-	return _fnMPSGetCustomKernelBatchedSourceIndex(c, sourceIndex, mPSMaxTextures)
+func MPSGetCustomKernelBatchedSourceIndex(c MPSCustomKernelArgumentCount, sourceIndex uint, mpsMaxTextures uint) uint {
+	return _fnMPSGetCustomKernelBatchedSourceIndex(c, sourceIndex, mpsMaxTextures)
 }
 
 // @abstract The index of the ith non-batched source texture argument. @discussion  A non-batched source is one that is shared for all items in a batch
-func MPSGetCustomKernelBroadcastSourceIndex(c MPSCustomKernelArgumentCount, sourceIndex uint, mPSMaxTextures uint) uint {
-	return _fnMPSGetCustomKernelBroadcastSourceIndex(c, sourceIndex, mPSMaxTextures)
+func MPSGetCustomKernelBroadcastSourceIndex(c MPSCustomKernelArgumentCount, sourceIndex uint, mpsMaxTextures uint) uint {
+	return _fnMPSGetCustomKernelBroadcastSourceIndex(c, sourceIndex, mpsMaxTextures)
 }
 
 // @abstract  maximum allowed batch size
-func MPSGetCustomKernelMaxBatchSize(c MPSCustomKernelArgumentCount, mPSMaxTextures uint) uint {
-	return _fnMPSGetCustomKernelMaxBatchSize(c, mPSMaxTextures)
+func MPSGetCustomKernelMaxBatchSize(c MPSCustomKernelArgumentCount, mpsMaxTextures uint) uint {
+	return _fnMPSGetCustomKernelMaxBatchSize(c, mpsMaxTextures)
 }
 
 func MPSGetImageType(image *MPSImage) objc.ID {

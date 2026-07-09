@@ -5,6 +5,8 @@
 package mediaextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func videoDecoderPixelBufferManagerAdopt(id objc.ID) *VideoDecoderPixelBufferMan
 
 // Description returns the object's -description text.
 func (vdpbm *VideoDecoderPixelBufferManager) Description() string {
+	defer runtime.KeepAlive(vdpbm)
 	return rt.Description(objref.IDOf(vdpbm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vdpbm *VideoDecoderPixelBufferManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vdpbm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vdpbm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vdpbm *VideoDecoderPixelBufferManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(vdpbm)
 	return rt.IsKind(objref.IDOf(vdpbm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vdpbm *VideoDecoderPixelBufferManager) String() string {
+	defer runtime.KeepAlive(vdpbm)
 	return rt.Description(objref.IDOf(vdpbm))
 }
 
@@ -73,18 +80,20 @@ func NewVideoDecoderPixelBufferManager() *VideoDecoderPixelBufferManager {
 }
 
 // WithPixelBufferAttributes sets a dictionary that contains the attributes Video Toolbox uses to create a pixel buffer for the decoder.
-func (vdpbm *VideoDecoderPixelBufferManager) WithPixelBufferAttributes(pixelBufferAttributes obj.Object) *VideoDecoderPixelBufferManager {
-	objc.Send[objc.ID](objref.IDOf(vdpbm), objc.RegisterName("setPixelBufferAttributes:"), objref.IDOf(pixelBufferAttributes))
+func (vdpbm *VideoDecoderPixelBufferManager) WithPixelBufferAttributes(pixelBufferAttributes map[string]obj.Object) *VideoDecoderPixelBufferManager {
+	objc.Send[objc.ID](objref.IDOf(vdpbm), objc.RegisterName("setPixelBufferAttributes:"), rt.MapToDict(pixelBufferAttributes, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return vdpbm
 }
 
 // RegisterCustomPixelFormat videoToolbox will register the described pixelFormat in both the Extension process and the client process. This property is appropriate for decoders which produce output in a custom pixel format.  This will generally only be used by decoders which produce RAW output, where the decoder's output buffers will only be consumed by an MERAWProcessor extension which registers the same pixel format. MERAWProcessor needs to manually register the custom pixel format using CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType().
-func (vdpbm *VideoDecoderPixelBufferManager) RegisterCustomPixelFormat(customPixelFormat obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(vdpbm), objc.RegisterName("registerCustomPixelFormat:"), objref.IDOf(customPixelFormat))
+func (vdpbm *VideoDecoderPixelBufferManager) RegisterCustomPixelFormat(customPixelFormat map[string]obj.Object) {
+	defer runtime.KeepAlive(vdpbm)
+	objc.Send[objc.ID](objref.IDOf(vdpbm), objc.RegisterName("registerCustomPixelFormat:"), rt.MapToDict(customPixelFormat, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // PixelBufferAttributes returns videoToolbox will use these attributes when creating a PixelBuffer for the decoder. This can be updated by the decoder before requesting a new pixelBuffer.
-func (vdpbm *VideoDecoderPixelBufferManager) PixelBufferAttributes() obj.Object {
+func (vdpbm *VideoDecoderPixelBufferManager) PixelBufferAttributes() map[string]obj.Object {
+	defer runtime.KeepAlive(vdpbm)
 	_r := objc.Send[objc.ID](objref.IDOf(vdpbm), objc.RegisterName("pixelBufferAttributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

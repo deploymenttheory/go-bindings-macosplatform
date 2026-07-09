@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -84,6 +86,7 @@ func (dtrr *DetectTextRectanglesRequest) WithRevision(revision int) *DetectTextR
 
 // ReportCharacterBoxes reports whether specify whether or not the bounding boxes of individual characters should also be returned in the resultant VNTextObservations. Default is false.
 func (dtrr *DetectTextRectanglesRequest) ReportCharacterBoxes() bool {
+	defer runtime.KeepAlive(dtrr)
 	_r := objc.Send[bool](objref.IDOf(dtrr), objc.RegisterName("reportCharacterBoxes"))
 	return _r
 }

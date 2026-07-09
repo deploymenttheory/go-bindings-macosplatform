@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRGroupKeyManagementClusterGroupInfoMapStructAdopt(id objc.ID) *MTRGroupKe
 
 // Description returns the object's -description text.
 func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) Description() string {
+	defer runtime.KeepAlive(mgkmcgims)
 	return rt.Description(objref.IDOf(mgkmcgims))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mgkmcgims)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mgkmcgims), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mgkmcgims)
 	return rt.IsKind(objref.IDOf(mgkmcgims), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) String() string {
+	defer runtime.KeepAlive(mgkmcgims)
 	return rt.Description(objref.IDOf(mgkmcgims))
 }
 
@@ -72,6 +80,7 @@ func NewMTRGroupKeyManagementClusterGroupInfoMapStruct() *MTRGroupKeyManagementC
 
 // WithGroupID sets the group ID.
 func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) WithGroupID(groupId obj.Object) *MTRGroupKeyManagementClusterGroupInfoMapStruct {
+	defer runtime.KeepAlive(groupId)
 	objc.Send[objc.ID](objref.IDOf(mgkmcgims), objc.RegisterName("setGroupId:"), objref.IDOf(groupId))
 	return mgkmcgims
 }
@@ -84,29 +93,35 @@ func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) WithGroupName(g
 
 // WithFabricIndex sets the fabric index.
 func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) WithFabricIndex(fabricIndex obj.Object) *MTRGroupKeyManagementClusterGroupInfoMapStruct {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(mgkmcgims), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mgkmcgims
 }
 
 // GroupID returns the group ID.
-func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) GroupID() obj.Object {
+func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) GroupID() *foundation.Number {
+	defer runtime.KeepAlive(mgkmcgims)
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgims), objc.RegisterName("groupId"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Endpoints returns the endpoints.
 func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) Endpoints() obj.Object {
+	defer runtime.KeepAlive(mgkmcgims)
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgims), objc.RegisterName("endpoints"))
 	return obj.Wrap(_r)
 }
 
 // SetEndpoints wraps the corresponding Objective-C method.
 func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetEndpoints(endpoints obj.Object) {
+	defer runtime.KeepAlive(mgkmcgims)
+	defer runtime.KeepAlive(endpoints)
 	objc.Send[objc.ID](objref.IDOf(mgkmcgims), objc.RegisterName("setEndpoints:"), objref.IDOf(endpoints))
 }
 
 // GroupName returns the group name.
 func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) GroupName() string {
+	defer runtime.KeepAlive(mgkmcgims)
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgims), objc.RegisterName("groupName"))
 	if _r == 0 {
 		return ""
@@ -115,7 +130,8 @@ func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) GroupName() str
 }
 
 // FabricIndex returns the fabric index.
-func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) FabricIndex() obj.Object {
+func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) FabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(mgkmcgims)
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgims), objc.RegisterName("fabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

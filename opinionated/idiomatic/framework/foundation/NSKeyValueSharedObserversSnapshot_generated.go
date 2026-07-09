@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func keyValueSharedObserversSnapshotAdopt(id objc.ID) *KeyValueSharedObserversSn
 
 // Description returns the object's -description text.
 func (kvsos *KeyValueSharedObserversSnapshot) Description() string {
+	defer runtime.KeepAlive(kvsos)
 	return rt.Description(objref.IDOf(kvsos))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (kvsos *KeyValueSharedObserversSnapshot) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(kvsos)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(kvsos), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (kvsos *KeyValueSharedObserversSnapshot) IsKind(className string) bool {
+	defer runtime.KeepAlive(kvsos)
 	return rt.IsKind(objref.IDOf(kvsos), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (kvsos *KeyValueSharedObserversSnapshot) String() string {
+	defer runtime.KeepAlive(kvsos)
 	return rt.Description(objref.IDOf(kvsos))
 }
 
@@ -81,7 +87,7 @@ func (kvsos *KeyValueSharedObserversSnapshot) WithObservationInfo(observationInf
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (kvsos *KeyValueSharedObserversSnapshot) WithScriptingProperties(scriptingProperties obj.Object) *KeyValueSharedObserversSnapshot {
-	objc.Send[objc.ID](objref.IDOf(kvsos), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (kvsos *KeyValueSharedObserversSnapshot) WithScriptingProperties(scriptingProperties map[string]obj.Object) *KeyValueSharedObserversSnapshot {
+	objc.Send[objc.ID](objref.IDOf(kvsos), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return kvsos
 }

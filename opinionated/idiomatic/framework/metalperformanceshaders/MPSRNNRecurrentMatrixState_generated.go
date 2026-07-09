@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,12 +68,14 @@ func (rrms *RNNRecurrentMatrixState) WithLabel(label string) *RNNRecurrentMatrix
 
 // GetRecurrentOutputMatrixForLayerIndex access the stored recurrent matrix data.
 func (rrms *RNNRecurrentMatrixState) GetRecurrentOutputMatrixForLayerIndex(layerIndex int) obj.Object {
+	defer runtime.KeepAlive(rrms)
 	_r := objc.Send[objc.ID](objref.IDOf(rrms), objc.RegisterName("getRecurrentOutputMatrixForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)
 }
 
 // GetMemoryCellMatrixForLayerIndex access the stored memory cell matrix data (if present).
 func (rrms *RNNRecurrentMatrixState) GetMemoryCellMatrixForLayerIndex(layerIndex int) obj.Object {
+	defer runtime.KeepAlive(rrms)
 	_r := objc.Send[objc.ID](objref.IDOf(rrms), objc.RegisterName("getMemoryCellMatrixForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)
 }

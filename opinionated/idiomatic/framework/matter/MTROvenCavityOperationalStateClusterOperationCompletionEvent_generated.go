@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTROvenCavityOperationalStateClusterOperationCompletionEventAdopt(id objc.I
 
 // Description returns the object's -description text.
 func (mocoscoce *MTROvenCavityOperationalStateClusterOperationCompletionEvent) Description() string {
+	defer runtime.KeepAlive(mocoscoce)
 	return rt.Description(objref.IDOf(mocoscoce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mocoscoce *MTROvenCavityOperationalStateClusterOperationCompletionEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mocoscoce)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mocoscoce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mocoscoce *MTROvenCavityOperationalStateClusterOperationCompletionEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mocoscoce)
 	return rt.IsKind(objref.IDOf(mocoscoce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mocoscoce *MTROvenCavityOperationalStateClusterOperationCompletionEvent) String() string {
+	defer runtime.KeepAlive(mocoscoce)
 	return rt.Description(objref.IDOf(mocoscoce))
 }
 
@@ -72,36 +80,42 @@ func NewMTROvenCavityOperationalStateClusterOperationCompletionEvent() *MTROvenC
 
 // WithCompletionErrorCode sets the completion error code.
 func (mocoscoce *MTROvenCavityOperationalStateClusterOperationCompletionEvent) WithCompletionErrorCode(completionErrorCode obj.Object) *MTROvenCavityOperationalStateClusterOperationCompletionEvent {
+	defer runtime.KeepAlive(completionErrorCode)
 	objc.Send[objc.ID](objref.IDOf(mocoscoce), objc.RegisterName("setCompletionErrorCode:"), objref.IDOf(completionErrorCode))
 	return mocoscoce
 }
 
 // WithTotalOperationalTime sets the total operational time.
 func (mocoscoce *MTROvenCavityOperationalStateClusterOperationCompletionEvent) WithTotalOperationalTime(totalOperationalTime obj.Object) *MTROvenCavityOperationalStateClusterOperationCompletionEvent {
+	defer runtime.KeepAlive(totalOperationalTime)
 	objc.Send[objc.ID](objref.IDOf(mocoscoce), objc.RegisterName("setTotalOperationalTime:"), objref.IDOf(totalOperationalTime))
 	return mocoscoce
 }
 
 // WithPausedTime sets the paused time.
 func (mocoscoce *MTROvenCavityOperationalStateClusterOperationCompletionEvent) WithPausedTime(pausedTime obj.Object) *MTROvenCavityOperationalStateClusterOperationCompletionEvent {
+	defer runtime.KeepAlive(pausedTime)
 	objc.Send[objc.ID](objref.IDOf(mocoscoce), objc.RegisterName("setPausedTime:"), objref.IDOf(pausedTime))
 	return mocoscoce
 }
 
 // CompletionErrorCode returns the completion error code.
-func (mocoscoce *MTROvenCavityOperationalStateClusterOperationCompletionEvent) CompletionErrorCode() obj.Object {
+func (mocoscoce *MTROvenCavityOperationalStateClusterOperationCompletionEvent) CompletionErrorCode() *foundation.Number {
+	defer runtime.KeepAlive(mocoscoce)
 	_r := objc.Send[objc.ID](objref.IDOf(mocoscoce), objc.RegisterName("completionErrorCode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TotalOperationalTime returns the total operational time.
-func (mocoscoce *MTROvenCavityOperationalStateClusterOperationCompletionEvent) TotalOperationalTime() obj.Object {
+func (mocoscoce *MTROvenCavityOperationalStateClusterOperationCompletionEvent) TotalOperationalTime() *foundation.Number {
+	defer runtime.KeepAlive(mocoscoce)
 	_r := objc.Send[objc.ID](objref.IDOf(mocoscoce), objc.RegisterName("totalOperationalTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // PausedTime returns the paused time.
-func (mocoscoce *MTROvenCavityOperationalStateClusterOperationCompletionEvent) PausedTime() obj.Object {
+func (mocoscoce *MTROvenCavityOperationalStateClusterOperationCompletionEvent) PausedTime() *foundation.Number {
+	defer runtime.KeepAlive(mocoscoce)
 	_r := objc.Send[objc.ID](objref.IDOf(mocoscoce), objc.RegisterName("pausedTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func randomSourceAdopt(id objc.ID) *RandomSource {
 
 // Description returns the object's -description text.
 func (rs *RandomSource) Description() string {
+	defer runtime.KeepAlive(rs)
 	return rt.Description(objref.IDOf(rs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rs *RandomSource) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rs *RandomSource) IsKind(className string) bool {
+	defer runtime.KeepAlive(rs)
 	return rt.IsKind(objref.IDOf(rs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rs *RandomSource) String() string {
+	defer runtime.KeepAlive(rs)
 	return rt.Description(objref.IDOf(rs))
 }
 
 // NewRandomSourceWithCoder deserializes a random source from an NSCoder. All random sources support coding for serializing and deserializing the state of the random source. Each subclass has its own contract for what parts of the state is preserved when serialized but the general contract is that a serialized source must generate the same sequence of values as the original source would from the instant it was serialized. Note that the sharedRandom instance is an exception as it is explicitly seedless and a shared singleton instance. When serialized and deserialized it will return the current sharedRandom instance instead.
 func NewRandomSourceWithCoder(aDecoder obj.Object) *RandomSource {
+	defer runtime.KeepAlive(aDecoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKRandomSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return randomSourceAdopt(_id)
@@ -77,6 +85,8 @@ func NewRandomSourceWithCoder(aDecoder obj.Object) *RandomSource {
 
 // ArrayByShufflingObjectsInArray returns an array whose contents are the same as those of the specified array, but in a random order determined by the random source.
 func (rs *RandomSource) ArrayByShufflingObjectsInArray(array obj.Object) obj.Object {
+	defer runtime.KeepAlive(rs)
+	defer runtime.KeepAlive(array)
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("arrayByShufflingObjectsInArray:"), objref.IDOf(array))
 	return obj.Wrap(_r)
 }

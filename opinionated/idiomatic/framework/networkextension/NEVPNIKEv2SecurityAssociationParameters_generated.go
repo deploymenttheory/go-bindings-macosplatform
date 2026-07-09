@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nEVPNIKEv2SecurityAssociationParametersAdopt(id objc.ID) *NEVPNIKEv2Securit
 
 // Description returns the object's -description text.
 func (nesap *NEVPNIKEv2SecurityAssociationParameters) Description() string {
+	defer runtime.KeepAlive(nesap)
 	return rt.Description(objref.IDOf(nesap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nesap *NEVPNIKEv2SecurityAssociationParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nesap)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nesap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nesap *NEVPNIKEv2SecurityAssociationParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(nesap)
 	return rt.IsKind(objref.IDOf(nesap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nesap *NEVPNIKEv2SecurityAssociationParameters) String() string {
+	defer runtime.KeepAlive(nesap)
 	return rt.Description(objref.IDOf(nesap))
 }
 
@@ -105,18 +112,21 @@ func (nesap *NEVPNIKEv2SecurityAssociationParameters) WithLifetimeMinutes(lifeti
 
 // EncryptionAlgorithm returns the algorithm used by the Security Association to encrypt and decrypt data. On macOS and iOS, the default is NEVPNIKEv2EncryptionAlgorithmAES256 starting in macOS 11 and iOS 14. Prior to that the default was NEVPNIKEv2EncryptionAlgorithm3DES. On tvOS, the default is NEVPNIKEv2EncryptionAlgorithmAES256GCM.
 func (nesap *NEVPNIKEv2SecurityAssociationParameters) EncryptionAlgorithm() NEVPNIKEv2EncryptionAlgorithm {
+	defer runtime.KeepAlive(nesap)
 	_r := objc.Send[NEVPNIKEv2EncryptionAlgorithm](objref.IDOf(nesap), objc.RegisterName("encryptionAlgorithm"))
 	return _r
 }
 
 // IntegrityAlgorithm returns the algorithm used by the Security Association to verify the integrity of data.  The IKE psedo-random function algorithm will be inferred based on the integrity algorithm. Default is NEVPNIKEv2IntegrityAlgorithmSHA256 starting in macOS 11, iOS 14, and tvOS 17.  Prior to that the default was NEVPNIKEv2IntegrityAlgorithmSHA96.
 func (nesap *NEVPNIKEv2SecurityAssociationParameters) IntegrityAlgorithm() NEVPNIKEv2IntegrityAlgorithm {
+	defer runtime.KeepAlive(nesap)
 	_r := objc.Send[NEVPNIKEv2IntegrityAlgorithm](objref.IDOf(nesap), objc.RegisterName("integrityAlgorithm"))
 	return _r
 }
 
 // DiffieHellmanGroup returns the Diffie Hellman group used by the Security Association. Default is NEVPNIKEv2DiffieHellmanGroup14 starting in macOS 11, iOS 14, and tvOS 17. Prior to that the default was NEVPNIKEv2DiffieHellmanGroup2.
 func (nesap *NEVPNIKEv2SecurityAssociationParameters) DiffieHellmanGroup() NEVPNIKEv2DiffieHellmanGroup {
+	defer runtime.KeepAlive(nesap)
 	_r := objc.Send[NEVPNIKEv2DiffieHellmanGroup](objref.IDOf(nesap), objc.RegisterName("diffieHellmanGroup"))
 	return _r
 }
@@ -125,12 +135,14 @@ func (nesap *NEVPNIKEv2SecurityAssociationParameters) DiffieHellmanGroup() NEVPN
 //
 // PostQuantumKeyExchangeMethods returns the collection as a Go slice.
 func (nesap *NEVPNIKEv2SecurityAssociationParameters) PostQuantumKeyExchangeMethods() []obj.Object {
+	defer runtime.KeepAlive(nesap)
 	_arr := objc.Send[objc.ID](objref.IDOf(nesap), objc.RegisterName("postQuantumKeyExchangeMethods"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // LifetimeMinutes returns the life time of the Security Association, in minutes. Default is 60 for IKE Security Associations, and 30 for Child Security Associations. Before the lifetime is reached, IKEv2 will attempt to rekey the Security Association to maintain the connection.
 func (nesap *NEVPNIKEv2SecurityAssociationParameters) LifetimeMinutes() int32 {
+	defer runtime.KeepAlive(nesap)
 	_r := objc.Send[int32](objref.IDOf(nesap), objc.RegisterName("lifetimeMinutes"))
 	return _r
 }

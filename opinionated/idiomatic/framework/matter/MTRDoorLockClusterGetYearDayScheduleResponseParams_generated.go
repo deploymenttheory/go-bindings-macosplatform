@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRDoorLockClusterGetYearDayScheduleResponseParamsAdopt(id objc.ID) *MTRDoo
 
 // Description returns the object's -description text.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) Description() string {
+	defer runtime.KeepAlive(mdlcgydsrp)
 	return rt.Description(objref.IDOf(mdlcgydsrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdlcgydsrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdlcgydsrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdlcgydsrp)
 	return rt.IsKind(objref.IDOf(mdlcgydsrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) String() string {
+	defer runtime.KeepAlive(mdlcgydsrp)
 	return rt.Description(objref.IDOf(mdlcgydsrp))
 }
 
-// NewMTRDoorLockClusterGetYearDayScheduleResponseParamsWithResponseValueError initialize an MTRDoorLockClusterGetYearDayScheduleResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-func NewMTRDoorLockClusterGetYearDayScheduleResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRDoorLockClusterGetYearDayScheduleResponseParams, err error) {
+// NewMTRDoorLockClusterGetYearDayScheduleResponseParamsWithResponseValue initialize an MTRDoorLockClusterGetYearDayScheduleResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRDoorLockClusterGetYearDayScheduleResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRDoorLockClusterGetYearDayScheduleResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRDoorLockClusterGetYearDayScheduleResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,72 +87,84 @@ func NewMTRDoorLockClusterGetYearDayScheduleResponseParamsWithResponseValueError
 
 // WithYearDayIndex sets the year day index.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) WithYearDayIndex(yearDayIndex obj.Object) *MTRDoorLockClusterGetYearDayScheduleResponseParams {
+	defer runtime.KeepAlive(yearDayIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("setYearDayIndex:"), objref.IDOf(yearDayIndex))
 	return mdlcgydsrp
 }
 
 // WithUserIndex sets the user index.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterGetYearDayScheduleResponseParams {
+	defer runtime.KeepAlive(userIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlcgydsrp
 }
 
 // WithStatus sets the status.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) WithStatus(status obj.Object) *MTRDoorLockClusterGetYearDayScheduleResponseParams {
+	defer runtime.KeepAlive(status)
 	objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mdlcgydsrp
 }
 
 // WithLocalStartTime sets the local start time.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) WithLocalStartTime(localStartTime obj.Object) *MTRDoorLockClusterGetYearDayScheduleResponseParams {
+	defer runtime.KeepAlive(localStartTime)
 	objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("setLocalStartTime:"), objref.IDOf(localStartTime))
 	return mdlcgydsrp
 }
 
 // WithLocalEndTime sets the local end time.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) WithLocalEndTime(localEndTime obj.Object) *MTRDoorLockClusterGetYearDayScheduleResponseParams {
+	defer runtime.KeepAlive(localEndTime)
 	objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("setLocalEndTime:"), objref.IDOf(localEndTime))
 	return mdlcgydsrp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterGetYearDayScheduleResponseParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mdlcgydsrp
 }
 
 // YearDayIndex returns the year day index.
-func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) YearDayIndex() obj.Object {
+func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) YearDayIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgydsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("yearDayIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // UserIndex returns the user index.
-func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) UserIndex() obj.Object {
+func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) UserIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgydsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("userIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Status returns the status.
-func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) Status() obj.Object {
+func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) Status() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgydsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("status"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // LocalStartTime returns the local start time.
-func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) LocalStartTime() obj.Object {
+func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) LocalStartTime() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgydsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("localStartTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // LocalEndTime returns the local end time.
-func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) LocalEndTime() obj.Object {
+func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) LocalEndTime() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgydsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("localEndTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) TimedInvokeTimeoutMs() obj.Object {
+func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgydsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

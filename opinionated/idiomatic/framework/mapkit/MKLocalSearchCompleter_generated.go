@@ -5,8 +5,11 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func localSearchCompleterAdopt(id objc.ID) *LocalSearchCompleter {
 
 // Description returns the object's -description text.
 func (lsc *LocalSearchCompleter) Description() string {
+	defer runtime.KeepAlive(lsc)
 	return rt.Description(objref.IDOf(lsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lsc *LocalSearchCompleter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lsc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lsc *LocalSearchCompleter) IsKind(className string) bool {
+	defer runtime.KeepAlive(lsc)
 	return rt.IsKind(objref.IDOf(lsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lsc *LocalSearchCompleter) String() string {
+	defer runtime.KeepAlive(lsc)
 	return rt.Description(objref.IDOf(lsc))
 }
 
@@ -98,23 +106,37 @@ func (lsc *LocalSearchCompleter) WithResultTypes(resultTypes LocalSearchComplete
 
 // WithPointOfInterestFilter sets a filter that lists point of interest categories to include or exclude in the search.
 func (lsc *LocalSearchCompleter) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalSearchCompleter {
+	defer runtime.KeepAlive(pointOfInterestFilter)
 	objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 	return lsc
 }
 
 // WithAddressFilter sets a filter that lists which address options to include or exclude in search results.
 func (lsc *LocalSearchCompleter) WithAddressFilter(addressFilter *AddressFilter) *LocalSearchCompleter {
+	defer runtime.KeepAlive(addressFilter)
 	objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("setAddressFilter:"), objref.IDOf(addressFilter))
+	return lsc
+}
+
+// WithDelegate sets the object that receives the completion results.
+func (lsc *LocalSearchCompleter) WithDelegate(delegate LocalSearchCompleterDelegate) *LocalSearchCompleter {
+	_shim := newLocalSearchCompleterDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(lsc), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(lsc), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
 	return lsc
 }
 
 // Cancel cancels an in-progress search operation.
 func (lsc *LocalSearchCompleter) Cancel() {
+	defer runtime.KeepAlive(lsc)
 	objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("cancel"))
 }
 
 // QueryFragment returns the query fragment.
 func (lsc *LocalSearchCompleter) QueryFragment() string {
+	defer runtime.KeepAlive(lsc)
 	_r := objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("queryFragment"))
 	if _r == 0 {
 		return ""
@@ -124,30 +146,35 @@ func (lsc *LocalSearchCompleter) QueryFragment() string {
 
 // RegionPriority returns the region priority.
 func (lsc *LocalSearchCompleter) RegionPriority() LocalSearchRegionPriority {
+	defer runtime.KeepAlive(lsc)
 	_r := objc.Send[LocalSearchRegionPriority](objref.IDOf(lsc), objc.RegisterName("regionPriority"))
 	return _r
 }
 
 // FilterType returns the filter type.
 func (lsc *LocalSearchCompleter) FilterType() SearchCompletionFilterType {
+	defer runtime.KeepAlive(lsc)
 	_r := objc.Send[SearchCompletionFilterType](objref.IDOf(lsc), objc.RegisterName("filterType"))
 	return _r
 }
 
 // ResultTypes returns the result types.
 func (lsc *LocalSearchCompleter) ResultTypes() LocalSearchCompleterResultType {
+	defer runtime.KeepAlive(lsc)
 	_r := objc.Send[LocalSearchCompleterResultType](objref.IDOf(lsc), objc.RegisterName("resultTypes"))
 	return _r
 }
 
 // PointOfInterestFilter returns the point of interest filter.
 func (lsc *LocalSearchCompleter) PointOfInterestFilter() *PointOfInterestFilter {
+	defer runtime.KeepAlive(lsc)
 	_r := objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
 // AddressFilter returns the address filter.
 func (lsc *LocalSearchCompleter) AddressFilter() *AddressFilter {
+	defer runtime.KeepAlive(lsc)
 	_r := objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("addressFilter"))
 	return AddressFilterFromID(_r)
 }
@@ -156,12 +183,14 @@ func (lsc *LocalSearchCompleter) AddressFilter() *AddressFilter {
 //
 // Results returns the collection as a Go slice.
 func (lsc *LocalSearchCompleter) Results() []*LocalSearchCompletion {
+	defer runtime.KeepAlive(lsc)
 	_arr := objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("results"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LocalSearchCompletion { return LocalSearchCompletionFromID(_id) })
 }
 
 // IsSearching reports whether the object is searching.
 func (lsc *LocalSearchCompleter) IsSearching() bool {
+	defer runtime.KeepAlive(lsc)
 	_r := objc.Send[bool](objref.IDOf(lsc), objc.RegisterName("isSearching"))
 	return _r
 }

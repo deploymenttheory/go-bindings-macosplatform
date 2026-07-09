@@ -5,6 +5,8 @@
 package quartzfilters
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func quartzFilterManagerAdopt(id objc.ID) *QuartzFilterManager {
 
 // Description returns the object's -description text.
 func (qfm *QuartzFilterManager) Description() string {
+	defer runtime.KeepAlive(qfm)
 	return rt.Description(objref.IDOf(qfm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (qfm *QuartzFilterManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(qfm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(qfm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (qfm *QuartzFilterManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(qfm)
 	return rt.IsKind(objref.IDOf(qfm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (qfm *QuartzFilterManager) String() string {
+	defer runtime.KeepAlive(qfm)
 	return rt.Description(objref.IDOf(qfm))
 }
 
@@ -72,41 +79,51 @@ func NewQuartzFilterManager() *QuartzFilterManager {
 
 // FilterPanel returns the filter panel.
 func (qfm *QuartzFilterManager) FilterPanel() obj.Object {
+	defer runtime.KeepAlive(qfm)
 	_r := objc.Send[objc.ID](objref.IDOf(qfm), objc.RegisterName("filterPanel"))
 	return obj.Wrap(_r)
 }
 
 // FilterView returns the filter view.
 func (qfm *QuartzFilterManager) FilterView() obj.Object {
+	defer runtime.KeepAlive(qfm)
 	_r := objc.Send[objc.ID](objref.IDOf(qfm), objc.RegisterName("filterView"))
 	return obj.Wrap(_r)
 }
 
 // SelectedFilter returns the selected filter.
 func (qfm *QuartzFilterManager) SelectedFilter() obj.Object {
+	defer runtime.KeepAlive(qfm)
 	_r := objc.Send[objc.ID](objref.IDOf(qfm), objc.RegisterName("selectedFilter"))
 	return obj.Wrap(_r)
 }
 
 // SelectFilter selects filter.
 func (qfm *QuartzFilterManager) SelectFilter(filter obj.Object) bool {
+	defer runtime.KeepAlive(qfm)
+	defer runtime.KeepAlive(filter)
 	_r := objc.Send[bool](objref.IDOf(qfm), objc.RegisterName("selectFilter:"), objref.IDOf(filter))
 	return _r
 }
 
 // SetDelegate wraps the corresponding Objective-C method.
 func (qfm *QuartzFilterManager) SetDelegate(aDelegate obj.Object) {
+	defer runtime.KeepAlive(qfm)
+	defer runtime.KeepAlive(aDelegate)
 	objc.Send[objc.ID](objref.IDOf(qfm), objc.RegisterName("setDelegate:"), objref.IDOf(aDelegate))
 }
 
 // Delegate returns the delegate.
 func (qfm *QuartzFilterManager) Delegate() obj.Object {
+	defer runtime.KeepAlive(qfm)
 	_r := objc.Send[objc.ID](objref.IDOf(qfm), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
 // ImportFilter wraps the corresponding Objective-C method.
 func (qfm *QuartzFilterManager) ImportFilter(filterProperties obj.Object) obj.Object {
+	defer runtime.KeepAlive(qfm)
+	defer runtime.KeepAlive(filterProperties)
 	_r := objc.Send[objc.ID](objref.IDOf(qfm), objc.RegisterName("importFilter:"), objref.IDOf(filterProperties))
 	return obj.Wrap(_r)
 }

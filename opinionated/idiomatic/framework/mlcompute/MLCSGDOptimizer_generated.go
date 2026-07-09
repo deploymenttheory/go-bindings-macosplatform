@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,12 +67,14 @@ func (so *SGDOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool
 
 // MomentumScale returns the momentum factor.  A hyper-parameter. The default is 0.0.
 func (so *SGDOptimizer) MomentumScale() float32 {
+	defer runtime.KeepAlive(so)
 	_r := objc.Send[float32](objref.IDOf(so), objc.RegisterName("momentumScale"))
 	return _r
 }
 
 // UsesNesterovMomentum reports whether a boolean that specifies whether to apply nesterov momentum or not. The default is false.
 func (so *SGDOptimizer) UsesNesterovMomentum() bool {
+	defer runtime.KeepAlive(so)
 	_r := objc.Send[bool](objref.IDOf(so), objc.RegisterName("usesNesterovMomentum"))
 	return _r
 }

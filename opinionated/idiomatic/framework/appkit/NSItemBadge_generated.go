@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func itemBadgeAdopt(id objc.ID) *ItemBadge {
 
 // Description returns the object's -description text.
 func (ib *ItemBadge) Description() string {
+	defer runtime.KeepAlive(ib)
 	return rt.Description(objref.IDOf(ib))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ib *ItemBadge) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ib)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ib), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ib *ItemBadge) IsKind(className string) bool {
+	defer runtime.KeepAlive(ib)
 	return rt.IsKind(objref.IDOf(ib), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ib *ItemBadge) String() string {
+	defer runtime.KeepAlive(ib)
 	return rt.Description(objref.IDOf(ib))
 }
 
@@ -72,6 +79,7 @@ func NewItemBadge() *ItemBadge {
 
 // Text returns the text.
 func (ib *ItemBadge) Text() string {
+	defer runtime.KeepAlive(ib)
 	_r := objc.Send[objc.ID](objref.IDOf(ib), objc.RegisterName("text"))
 	if _r == 0 {
 		return ""

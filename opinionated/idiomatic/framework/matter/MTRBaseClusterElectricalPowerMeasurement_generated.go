@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterElectricalPowerMeasurementAdopt(id objc.ID) *MTRBaseClusterEl
 
 // NewMTRBaseClusterElectricalPowerMeasurementWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterElectricalPowerMeasurementWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterElectricalPowerMeasurement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterElectricalPowerMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterElectricalPowerMeasurementAdopt(_id)
@@ -58,6 +62,7 @@ func NewMTRBaseClusterElectricalPowerMeasurementWithDeviceEndpointIDQueue(device
 //
 // ReadAttributePowerModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributePowerModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -83,6 +88,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributePowerModeWi
 //
 // SubscribeAttributePowerModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributePowerModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -108,6 +115,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributePowerM
 //
 // ReadAttributeNumberOfMeasurementTypesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeNumberOfMeasurementTypesWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -133,6 +141,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeNumberOfMea
 //
 // SubscribeAttributeNumberOfMeasurementTypesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeNumberOfMeasurementTypesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -158,6 +168,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeNumber
 //
 // ReadAttributeAccuracyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeAccuracyWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -183,6 +194,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeAccuracyWit
 //
 // SubscribeAttributeAccuracyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeAccuracyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -208,6 +221,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeAccura
 //
 // ReadAttributeRangesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeRangesWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -233,6 +247,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeRangesWithC
 //
 // SubscribeAttributeRangesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeRangesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -258,6 +274,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeRanges
 //
 // ReadAttributeVoltageWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeVoltageWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -283,6 +300,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeVoltageWith
 //
 // SubscribeAttributeVoltageWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeVoltageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -308,6 +327,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeVoltag
 //
 // ReadAttributeActiveCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeActiveCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -333,6 +353,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeActiveCurre
 //
 // SubscribeAttributeActiveCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeActiveCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -358,6 +380,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeActive
 //
 // ReadAttributeReactiveCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeReactiveCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -383,6 +406,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeReactiveCur
 //
 // SubscribeAttributeReactiveCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeReactiveCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -408,6 +433,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeReacti
 //
 // ReadAttributeApparentCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeApparentCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -433,6 +459,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeApparentCur
 //
 // SubscribeAttributeApparentCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeApparentCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -458,6 +486,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeAppare
 //
 // ReadAttributeActivePowerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeActivePowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -483,6 +512,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeActivePower
 //
 // SubscribeAttributeActivePowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeActivePowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -508,6 +539,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeActive
 //
 // ReadAttributeReactivePowerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeReactivePowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -533,6 +565,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeReactivePow
 //
 // SubscribeAttributeReactivePowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeReactivePowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -558,6 +592,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeReacti
 //
 // ReadAttributeApparentPowerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeApparentPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -583,6 +618,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeApparentPow
 //
 // SubscribeAttributeApparentPowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeApparentPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -608,6 +645,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeAppare
 //
 // ReadAttributeRMSVoltageWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeRMSVoltageWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -633,6 +671,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeRMSVoltageW
 //
 // SubscribeAttributeRMSVoltageWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeRMSVoltageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -658,6 +698,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeRMSVol
 //
 // ReadAttributeRMSCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeRMSCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -683,6 +724,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeRMSCurrentW
 //
 // SubscribeAttributeRMSCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeRMSCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -708,6 +751,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeRMSCur
 //
 // ReadAttributeRMSPowerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeRMSPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -733,6 +777,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeRMSPowerWit
 //
 // SubscribeAttributeRMSPowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeRMSPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -758,6 +804,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeRMSPow
 //
 // ReadAttributeFrequencyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeFrequencyWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -783,6 +830,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeFrequencyWi
 //
 // SubscribeAttributeFrequencyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeFrequencyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -808,6 +857,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeFreque
 //
 // ReadAttributeHarmonicCurrentsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeHarmonicCurrentsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -833,6 +883,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeHarmonicCur
 //
 // SubscribeAttributeHarmonicCurrentsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeHarmonicCurrentsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -858,6 +910,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeHarmon
 //
 // ReadAttributeHarmonicPhasesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeHarmonicPhasesWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -883,6 +936,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeHarmonicPha
 //
 // SubscribeAttributeHarmonicPhasesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeHarmonicPhasesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -908,6 +963,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeHarmon
 //
 // ReadAttributePowerFactorWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributePowerFactorWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -933,6 +989,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributePowerFactor
 //
 // SubscribeAttributePowerFactorWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributePowerFactorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -958,6 +1016,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributePowerF
 //
 // ReadAttributeNeutralCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeNeutralCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -983,6 +1042,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeNeutralCurr
 //
 // SubscribeAttributeNeutralCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeNeutralCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1008,6 +1069,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeNeutra
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1033,6 +1095,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeGeneratedCo
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1058,6 +1122,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeGenera
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1083,6 +1148,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeAcceptedCom
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1108,6 +1175,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeAccept
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1133,6 +1201,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeAttributeLi
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1158,6 +1228,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeAttrib
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1183,6 +1254,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeFeatureMapW
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1208,6 +1281,7 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeFeatur
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1233,6 +1307,8 @@ func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) ReadAttributeClusterRevi
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcepm *MTRBaseClusterElectricalPowerMeasurement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcepm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

@@ -5,10 +5,12 @@
 package addressbook
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +50,27 @@ func addressBookAdopt(id objc.ID) *AddressBook {
 
 // Description returns the object's -description text.
 func (ab *AddressBook) Description() string {
+	defer runtime.KeepAlive(ab)
 	return rt.Description(objref.IDOf(ab))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ab *AddressBook) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ab)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ab), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ab *AddressBook) IsKind(className string) bool {
+	defer runtime.KeepAlive(ab)
 	return rt.IsKind(objref.IDOf(ab), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ab *AddressBook) String() string {
+	defer runtime.KeepAlive(ab)
 	return rt.Description(objref.IDOf(ab))
 }
 
@@ -75,12 +82,15 @@ func NewAddressBook() *AddressBook {
 
 // RecordsMatchingSearchElement wraps the corresponding Objective-C method.
 func (ab *AddressBook) RecordsMatchingSearchElement(search *SearchElement) obj.Object {
+	defer runtime.KeepAlive(ab)
+	defer runtime.KeepAlive(search)
 	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("recordsMatchingSearchElement:"), objref.IDOf(search))
 	return obj.Wrap(_r)
 }
 
 // Save wraps the corresponding Objective-C method.
 func (ab *AddressBook) Save() bool {
+	defer runtime.KeepAlive(ab)
 	_r := objc.Send[bool](objref.IDOf(ab), objc.RegisterName("save"))
 	return _r
 }
@@ -89,6 +99,7 @@ func (ab *AddressBook) Save() bool {
 //
 // SaveAndReturnError returns an error if the operation did not succeed.
 func (ab *AddressBook) SaveAndReturnError() error {
+	defer runtime.KeepAlive(ab)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(ab), objc.RegisterName("saveAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -99,29 +110,36 @@ func (ab *AddressBook) SaveAndReturnError() error {
 
 // HasUnsavedChanges reports whether the object has unsaved changes.
 func (ab *AddressBook) HasUnsavedChanges() bool {
+	defer runtime.KeepAlive(ab)
 	_r := objc.Send[bool](objref.IDOf(ab), objc.RegisterName("hasUnsavedChanges"))
 	return _r
 }
 
 // Me returns the me.
 func (ab *AddressBook) Me() *Person {
+	defer runtime.KeepAlive(ab)
 	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("me"))
 	return PersonFromID(_r)
 }
 
 // SetMe wraps the corresponding Objective-C method.
 func (ab *AddressBook) SetMe(moi *Person) {
+	defer runtime.KeepAlive(ab)
+	defer runtime.KeepAlive(moi)
 	objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("setMe:"), objref.IDOf(moi))
 }
 
 // RecordForUniqueID wraps the corresponding Objective-C method.
 func (ab *AddressBook) RecordForUniqueID(uniqueId string) *Record {
+	defer runtime.KeepAlive(ab)
 	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("recordForUniqueId:"), purego.NSString(uniqueId))
 	return RecordFromID(_r)
 }
 
 // AddRecord adds record.
 func (ab *AddressBook) AddRecord(record *Record) error {
+	defer runtime.KeepAlive(ab)
+	defer runtime.KeepAlive(record)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ab), objc.RegisterName("addRecord:error:"), objref.IDOf(record), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -132,6 +150,8 @@ func (ab *AddressBook) AddRecord(record *Record) error {
 
 // RemoveRecord removes record.
 func (ab *AddressBook) RemoveRecord(record *Record) error {
+	defer runtime.KeepAlive(ab)
+	defer runtime.KeepAlive(record)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ab), objc.RegisterName("removeRecord:error:"), objref.IDOf(record), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -142,18 +162,21 @@ func (ab *AddressBook) RemoveRecord(record *Record) error {
 
 // People returns the people.
 func (ab *AddressBook) People() obj.Object {
+	defer runtime.KeepAlive(ab)
 	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("people"))
 	return obj.Wrap(_r)
 }
 
 // Groups returns the groups.
 func (ab *AddressBook) Groups() obj.Object {
+	defer runtime.KeepAlive(ab)
 	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("groups"))
 	return obj.Wrap(_r)
 }
 
 // RecordClassFromUniqueID wraps the corresponding Objective-C method.
 func (ab *AddressBook) RecordClassFromUniqueID(uniqueId string) string {
+	defer runtime.KeepAlive(ab)
 	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("recordClassFromUniqueId:"), purego.NSString(uniqueId))
 	if _r == 0 {
 		return ""
@@ -162,13 +185,16 @@ func (ab *AddressBook) RecordClassFromUniqueID(uniqueId string) string {
 }
 
 // FormattedAddressFromDictionary wraps the corresponding Objective-C method.
-func (ab *AddressBook) FormattedAddressFromDictionary(address obj.Object) obj.Object {
+func (ab *AddressBook) FormattedAddressFromDictionary(address obj.Object) *foundation.AttributedString {
+	defer runtime.KeepAlive(ab)
+	defer runtime.KeepAlive(address)
 	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("formattedAddressFromDictionary:"), objref.IDOf(address))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // DefaultCountryCode returns the default country code.
 func (ab *AddressBook) DefaultCountryCode() string {
+	defer runtime.KeepAlive(ab)
 	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("defaultCountryCode"))
 	if _r == 0 {
 		return ""
@@ -178,6 +204,7 @@ func (ab *AddressBook) DefaultCountryCode() string {
 
 // DefaultNameOrdering returns the default name ordering.
 func (ab *AddressBook) DefaultNameOrdering() int {
+	defer runtime.KeepAlive(ab)
 	_r := objc.Send[int](objref.IDOf(ab), objc.RegisterName("defaultNameOrdering"))
 	return _r
 }

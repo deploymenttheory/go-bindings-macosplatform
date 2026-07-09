@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func assetWriterInputGroupAdopt(id objc.ID) *AssetWriterInputGroup {
 
 // NewAssetWriterInputGroupWithInputsDefaultInput creates a group for the asset writer inputs.
 func NewAssetWriterInputGroupWithInputsDefaultInput(inputs []*AssetWriterInput, defaultInput *AssetWriterInput) *AssetWriterInputGroup {
+	defer runtime.KeepAlive(defaultInput)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputGroup")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputs:defaultInput:"), purego.SliceToNSArray(inputs, func(_v *AssetWriterInput) objc.ID { return objref.IDOf(_v) }), objref.IDOf(defaultInput))
 	return assetWriterInputGroupAdopt(_id)
@@ -56,12 +59,14 @@ func NewAssetWriterInputGroupWithInputsDefaultInput(inputs []*AssetWriterInput, 
 //
 // Inputs returns the collection as a Go slice.
 func (awig *AssetWriterInputGroup) Inputs() []*AssetWriterInput {
+	defer runtime.KeepAlive(awig)
 	_arr := objc.Send[objc.ID](objref.IDOf(awig), objc.RegisterName("inputs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetWriterInput { return AssetWriterInputFromID(_id) })
 }
 
 // DefaultInput returns the input designated at the defaultInput of the receiver. The value of this property is a concrete instance of AVAssetWriterInput.
 func (awig *AssetWriterInputGroup) DefaultInput() *AssetWriterInput {
+	defer runtime.KeepAlive(awig)
 	_r := objc.Send[objc.ID](objref.IDOf(awig), objc.RegisterName("defaultInput"))
 	return AssetWriterInputFromID(_r)
 }

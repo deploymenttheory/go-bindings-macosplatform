@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -181,36 +183,42 @@ func (clcng *CNNLocalContrastNormalizationGradient) WithLabel(label string) *CNN
 
 // Alpha returns the value of alpha.  Default is 0.0 The default value 0.0 is not recommended and is preserved for backwards compatibility. With alpha 0, it performs a local mean subtraction. The MPSCNNLocalContrastNormalizationNode used with the MPSNNGraph uses 1.0 as a default.
 func (clcng *CNNLocalContrastNormalizationGradient) Alpha() float32 {
+	defer runtime.KeepAlive(clcng)
 	_r := objc.Send[float32](objref.IDOf(clcng), objc.RegisterName("alpha"))
 	return _r
 }
 
 // Beta returns the value of beta.  Default is 0.5
 func (clcng *CNNLocalContrastNormalizationGradient) Beta() float32 {
+	defer runtime.KeepAlive(clcng)
 	_r := objc.Send[float32](objref.IDOf(clcng), objc.RegisterName("beta"))
 	return _r
 }
 
 // Delta returns the value of delta.  Default is 1/1024
 func (clcng *CNNLocalContrastNormalizationGradient) Delta() float32 {
+	defer runtime.KeepAlive(clcng)
 	_r := objc.Send[float32](objref.IDOf(clcng), objc.RegisterName("delta"))
 	return _r
 }
 
 // P0 returns the value of p0.  Default is 1.0
 func (clcng *CNNLocalContrastNormalizationGradient) P0() float32 {
+	defer runtime.KeepAlive(clcng)
 	_r := objc.Send[float32](objref.IDOf(clcng), objc.RegisterName("p0"))
 	return _r
 }
 
 // Pm returns the value of pm.  Default is 0.0
 func (clcng *CNNLocalContrastNormalizationGradient) Pm() float32 {
+	defer runtime.KeepAlive(clcng)
 	_r := objc.Send[float32](objref.IDOf(clcng), objc.RegisterName("pm"))
 	return _r
 }
 
 // Ps returns the value of ps.  Default is 1.0
 func (clcng *CNNLocalContrastNormalizationGradient) Ps() float32 {
+	defer runtime.KeepAlive(clcng)
 	_r := objc.Send[float32](objref.IDOf(clcng), objc.RegisterName("ps"))
 	return _r
 }

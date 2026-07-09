@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func assetReaderOutputCaptionAdaptorAdopt(id objc.ID) *AssetReaderOutputCaptionA
 
 // Description returns the object's -description text.
 func (aroca *AssetReaderOutputCaptionAdaptor) Description() string {
+	defer runtime.KeepAlive(aroca)
 	return rt.Description(objref.IDOf(aroca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aroca *AssetReaderOutputCaptionAdaptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aroca)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aroca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aroca *AssetReaderOutputCaptionAdaptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(aroca)
 	return rt.IsKind(objref.IDOf(aroca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aroca *AssetReaderOutputCaptionAdaptor) String() string {
+	defer runtime.KeepAlive(aroca)
 	return rt.Description(objref.IDOf(aroca))
 }
 
 // NewAssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput creates a caption adaptor that reads from a track output.
 func NewAssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput(trackOutput *AssetReaderTrackOutput) *AssetReaderOutputCaptionAdaptor {
+	defer runtime.KeepAlive(trackOutput)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderOutputCaptionAdaptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetReaderTrackOutput:"), objref.IDOf(trackOutput))
 	return assetReaderOutputCaptionAdaptorAdopt(_id)
@@ -75,18 +83,22 @@ func NewAssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput(trackOutput *A
 
 // NextCaptionGroup returns the next caption group.
 func (aroca *AssetReaderOutputCaptionAdaptor) NextCaptionGroup() *CaptionGroup {
+	defer runtime.KeepAlive(aroca)
 	_r := objc.Send[objc.ID](objref.IDOf(aroca), objc.RegisterName("nextCaptionGroup"))
 	return CaptionGroupFromID(_r)
 }
 
 // CaptionsNotPresentInPreviousGroupsInCaptionGroup returns the set of captions in the caption group that weren’t vended by the adaptor.
 func (aroca *AssetReaderOutputCaptionAdaptor) CaptionsNotPresentInPreviousGroupsInCaptionGroup(captionGroup *CaptionGroup) []*Caption {
+	defer runtime.KeepAlive(aroca)
+	defer runtime.KeepAlive(captionGroup)
 	_r := objc.Send[objc.ID](objref.IDOf(aroca), objc.RegisterName("captionsNotPresentInPreviousGroupsInCaptionGroup:"), objref.IDOf(captionGroup))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Caption { return CaptionFromID(_id) })
 }
 
 // AssetReaderTrackOutput returns the track output used to create the receiver.
 func (aroca *AssetReaderOutputCaptionAdaptor) AssetReaderTrackOutput() *AssetReaderTrackOutput {
+	defer runtime.KeepAlive(aroca)
 	_r := objc.Send[objc.ID](objref.IDOf(aroca), objc.RegisterName("assetReaderTrackOutput"))
 	return AssetReaderTrackOutputFromID(_r)
 }

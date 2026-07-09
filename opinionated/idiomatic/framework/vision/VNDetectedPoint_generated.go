@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func detectedPointAdopt(id objc.ID) *DetectedPoint {
 
 // Confidence returns the confidence.
 func (dp *DetectedPoint) Confidence() float32 {
+	defer runtime.KeepAlive(dp)
 	_r := objc.Send[float32](objref.IDOf(dp), objc.RegisterName("confidence"))
 	return _r
 }

@@ -221,8 +221,8 @@ func (o *MTRCommissioningParameters) CSRNonce() *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
-func (o *MTRCommissioningParameters) SetCSRNonce(cSRNonce *foundation.NSData) {
-	o.Ptr().Send(_mTRCommissioningParametersSelSetCSRNonce, cSRNonce.Ptr())
+func (o *MTRCommissioningParameters) SetCSRNonce(csrNonce *foundation.NSData) {
+	o.Ptr().Send(_mTRCommissioningParametersSelSetCSRNonce, csrNonce.Ptr())
 }
 
 func (o *MTRCommissioningParameters) FailSafeExpiryTimeoutSecs() *foundation.NSNumber {

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,35 +50,42 @@ func mTRBasicInformationClusterLeaveEventAdopt(id objc.ID) *MTRBasicInformationC
 
 // Description returns the object's -description text.
 func (mbicle *MTRBasicInformationClusterLeaveEvent) Description() string {
+	defer runtime.KeepAlive(mbicle)
 	return rt.Description(objref.IDOf(mbicle))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbicle *MTRBasicInformationClusterLeaveEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbicle)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbicle), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbicle *MTRBasicInformationClusterLeaveEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbicle)
 	return rt.IsKind(objref.IDOf(mbicle), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbicle *MTRBasicInformationClusterLeaveEvent) String() string {
+	defer runtime.KeepAlive(mbicle)
 	return rt.Description(objref.IDOf(mbicle))
 }
 
 // WithFabricIndex sets the fabric index.
 func (mbicle *MTRBasicInformationClusterLeaveEvent) WithFabricIndex(fabricIndex obj.Object) *MTRBasicInformationClusterLeaveEvent {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(mbicle), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mbicle
 }
 
 // FabricIndex returns the fabric index.
-func (mbicle *MTRBasicInformationClusterLeaveEvent) FabricIndex() obj.Object {
+func (mbicle *MTRBasicInformationClusterLeaveEvent) FabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(mbicle)
 	_r := objc.Send[objc.ID](objref.IDOf(mbicle), objc.RegisterName("fabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRBasicInformationClusterLeaveEvent marks MTRBasicInformationClusterLeaveEvent — and, by embedding promotion, its

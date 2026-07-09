@@ -49,8 +49,8 @@ func MKTileOverlayFromID(id objc.ID) *MKTileOverlay {
 }
 
 // Creates and returns a tile overlay object using the specified tile-access template.
-func (o *MKTileOverlay) InitWithURLTemplate(uRLTemplate *foundation.NSString) *MKTileOverlay {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKTileOverlaySelInitWithURLTemplate, uRLTemplate.Ptr())
+func (o *MKTileOverlay) InitWithURLTemplate(urlTemplate *foundation.NSString) *MKTileOverlay {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mKTileOverlaySelInitWithURLTemplate, urlTemplate.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,6 +56,7 @@ func NewDiskIOMetric() *DiskIOMetric {
 
 // CumulativeLogicalWrites returns the cumulative logical writes.
 func (dim *DiskIOMetric) CumulativeLogicalWrites() obj.Object {
+	defer runtime.KeepAlive(dim)
 	_r := objc.Send[objc.ID](objref.IDOf(dim), objc.RegisterName("cumulativeLogicalWrites"))
 	return obj.Wrap(_r)
 }

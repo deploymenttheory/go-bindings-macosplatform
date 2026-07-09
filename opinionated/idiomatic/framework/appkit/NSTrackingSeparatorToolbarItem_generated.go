@@ -5,10 +5,13 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,6 +64,7 @@ func NewTrackingSeparatorToolbarItem() *TrackingSeparatorToolbarItem {
 
 // WithSplitView sets the vertical split view to align with the toolbar separator.
 func (tsti *TrackingSeparatorToolbarItem) WithSplitView(splitView *SplitView) *TrackingSeparatorToolbarItem {
+	defer runtime.KeepAlive(splitView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setSplitView:"), objref.IDOf(splitView))
 	})
@@ -92,9 +96,9 @@ func (tsti *TrackingSeparatorToolbarItem) WithPaletteLabel(paletteLabel string) 
 }
 
 // WithPossibleLabels sets the set of labels that the item might display.
-func (tsti *TrackingSeparatorToolbarItem) WithPossibleLabels(possibleLabels obj.Object) *TrackingSeparatorToolbarItem {
+func (tsti *TrackingSeparatorToolbarItem) WithPossibleLabels(possibleLabels []string) *TrackingSeparatorToolbarItem {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setPossibleLabels:"), rt.SliceToNSSet(possibleLabels, func(_v string) objc.ID { return purego.NSString(_v) }))
 	})
 	return tsti
 }
@@ -109,6 +113,7 @@ func (tsti *TrackingSeparatorToolbarItem) WithToolTip(toolTip string) *TrackingS
 
 // WithMenuFormRepresentation sets the menu item to use when the toolbar item is in the overflow menu.
 func (tsti *TrackingSeparatorToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *TrackingSeparatorToolbarItem {
+	defer runtime.KeepAlive(menuFormRepresentation)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
 	})
@@ -125,6 +130,7 @@ func (tsti *TrackingSeparatorToolbarItem) WithTag(tag int) *TrackingSeparatorToo
 
 // WithTarget sets the object that defines the action method the toolbar item calls when clicked.
 func (tsti *TrackingSeparatorToolbarItem) WithTarget(target obj.Object) *TrackingSeparatorToolbarItem {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -141,6 +147,7 @@ func (tsti *TrackingSeparatorToolbarItem) WithEnabled(enabled bool) *TrackingSep
 
 // WithImage sets the image to display for the toolbar item.
 func (tsti *TrackingSeparatorToolbarItem) WithImage(image *Image) *TrackingSeparatorToolbarItem {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -165,6 +172,7 @@ func (tsti *TrackingSeparatorToolbarItem) WithBordered(bordered bool) *TrackingS
 
 // WithBackgroundTintColor sets the background tint color.
 func (tsti *TrackingSeparatorToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *TrackingSeparatorToolbarItem {
+	defer runtime.KeepAlive(backgroundTintColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
 	})
@@ -189,6 +197,7 @@ func (tsti *TrackingSeparatorToolbarItem) WithNavigational(navigational bool) *T
 
 // WithView sets the custom view you use to draw the toolbar item.
 func (tsti *TrackingSeparatorToolbarItem) WithView(view ViewProvider) *TrackingSeparatorToolbarItem {
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setView:"), objref.IDOf(view))
 	})
@@ -229,6 +238,7 @@ func (tsti *TrackingSeparatorToolbarItem) WithVisibilityPriority(visibilityPrior
 
 // WithBadge sets a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (tsti *TrackingSeparatorToolbarItem) WithBadge(badge *ItemBadge) *TrackingSeparatorToolbarItem {
+	defer runtime.KeepAlive(badge)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setBadge:"), objref.IDOf(badge))
 	})
@@ -245,6 +255,7 @@ func (tsti *TrackingSeparatorToolbarItem) WithAutovalidates(autovalidates bool) 
 
 // SplitView returns the `splitView` must be in the same window as the toolbar containing this item by the time the toolbar is shown. Only vertical `splitViews` are supported.
 func (tsti *TrackingSeparatorToolbarItem) SplitView() *SplitView {
+	defer runtime.KeepAlive(tsti)
 	var _mainthread0 *SplitView
 	purego.Main(func() {
 		_mainthread0 = func() *SplitView {
@@ -258,6 +269,7 @@ func (tsti *TrackingSeparatorToolbarItem) SplitView() *SplitView {
 
 // DividerIndex returns the specific divider of the `splitView` which will be tracked.
 func (tsti *TrackingSeparatorToolbarItem) DividerIndex() int {
+	defer runtime.KeepAlive(tsti)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {

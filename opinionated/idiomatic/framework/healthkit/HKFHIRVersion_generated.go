@@ -5,7 +5,10 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func fHIRVersionAdopt(id objc.ID) *FHIRVersion {
 
 // Description returns the object's -description text.
 func (fv *FHIRVersion) Description() string {
+	defer runtime.KeepAlive(fv)
 	return rt.Description(objref.IDOf(fv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fv *FHIRVersion) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fv *FHIRVersion) IsKind(className string) bool {
+	defer runtime.KeepAlive(fv)
 	return rt.IsKind(objref.IDOf(fv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fv *FHIRVersion) String() string {
+	defer runtime.KeepAlive(fv)
 	return rt.Description(objref.IDOf(fv))
 }
 
@@ -74,30 +82,35 @@ func NewFHIRVersion() *FHIRVersion {
 
 // MajorVersion returns the major version.
 func (fv *FHIRVersion) MajorVersion() int {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[int](objref.IDOf(fv), objc.RegisterName("majorVersion"))
 	return _r
 }
 
 // MinorVersion returns the minor version.
 func (fv *FHIRVersion) MinorVersion() int {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[int](objref.IDOf(fv), objc.RegisterName("minorVersion"))
 	return _r
 }
 
 // PatchVersion returns the patch version.
 func (fv *FHIRVersion) PatchVersion() int {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[int](objref.IDOf(fv), objc.RegisterName("patchVersion"))
 	return _r
 }
 
 // FHIRRelease returns the fhir release.
-func (fv *FHIRVersion) FHIRRelease() obj.Object {
+func (fv *FHIRVersion) FHIRRelease() *foundation.String {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("FHIRRelease"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // StringRepresentation returns a string representation in the format "{major}.{minor}.{patch}".
 func (fv *FHIRVersion) StringRepresentation() string {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("stringRepresentation"))
 	if _r == 0 {
 		return ""

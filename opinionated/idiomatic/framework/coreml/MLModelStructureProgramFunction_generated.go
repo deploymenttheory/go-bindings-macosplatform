@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func modelStructureProgramFunctionAdopt(id objc.ID) *ModelStructureProgramFuncti
 
 // Description returns the object's -description text.
 func (mspf *ModelStructureProgramFunction) Description() string {
+	defer runtime.KeepAlive(mspf)
 	return rt.Description(objref.IDOf(mspf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mspf *ModelStructureProgramFunction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mspf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mspf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mspf *ModelStructureProgramFunction) IsKind(className string) bool {
+	defer runtime.KeepAlive(mspf)
 	return rt.IsKind(objref.IDOf(mspf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mspf *ModelStructureProgramFunction) String() string {
+	defer runtime.KeepAlive(mspf)
 	return rt.Description(objref.IDOf(mspf))
 }
 
@@ -76,6 +83,7 @@ func NewModelStructureProgramFunction() *ModelStructureProgramFunction {
 //
 // Inputs returns the collection as a Go slice.
 func (mspf *ModelStructureProgramFunction) Inputs() []*ModelStructureProgramNamedValueType {
+	defer runtime.KeepAlive(mspf)
 	_arr := objc.Send[objc.ID](objref.IDOf(mspf), objc.RegisterName("inputs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructureProgramNamedValueType {
 		return ModelStructureProgramNamedValueTypeFromID(_id)
@@ -84,6 +92,7 @@ func (mspf *ModelStructureProgramFunction) Inputs() []*ModelStructureProgramName
 
 // Block returns the active block in the function.
 func (mspf *ModelStructureProgramFunction) Block() *ModelStructureProgramBlock {
+	defer runtime.KeepAlive(mspf)
 	_r := objc.Send[objc.ID](objref.IDOf(mspf), objc.RegisterName("block"))
 	return ModelStructureProgramBlockFromID(_r)
 }

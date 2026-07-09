@@ -5,9 +5,11 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,43 +55,52 @@ func NewInferenceGraph() *InferenceGraph {
 }
 
 // AddInputs adds the inputs you specify to the inference graph.
-func (ig *InferenceGraph) AddInputs(inputs obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("addInputs:"), objref.IDOf(inputs))
+func (ig *InferenceGraph) AddInputs(inputs map[string]*Tensor) bool {
+	defer runtime.KeepAlive(ig)
+	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("addInputs:"), rt.MapToDict(inputs, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // AddInputsLossLabelsLossLabelWeights adds the inputs, loss labels, and loss label weights that you specify to the inference graph.
-func (ig *InferenceGraph) AddInputsLossLabelsLossLabelWeights(inputs obj.Object, lossLabels obj.Object, lossLabelWeights obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("addInputs:lossLabels:lossLabelWeights:"), objref.IDOf(inputs), objref.IDOf(lossLabels), objref.IDOf(lossLabelWeights))
+func (ig *InferenceGraph) AddInputsLossLabelsLossLabelWeights(inputs map[string]*Tensor, lossLabels map[string]*Tensor, lossLabelWeights map[string]*Tensor) bool {
+	defer runtime.KeepAlive(ig)
+	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("addInputs:lossLabels:lossLabelWeights:"), rt.MapToDict(inputs, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(lossLabels, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(lossLabelWeights, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // AddOutputs adds the outputs you specify to the inference graph.
-func (ig *InferenceGraph) AddOutputs(outputs obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("addOutputs:"), objref.IDOf(outputs))
+func (ig *InferenceGraph) AddOutputs(outputs map[string]*Tensor) bool {
+	defer runtime.KeepAlive(ig)
+	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("addOutputs:"), rt.MapToDict(outputs, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // CompileWithOptionsDevice compiles the inference graph for the options and device you specify.
 func (ig *InferenceGraph) CompileWithOptionsDevice(options GraphCompilationOptions, device *Device) bool {
+	defer runtime.KeepAlive(ig)
+	defer runtime.KeepAlive(device)
 	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("compileWithOptions:device:"), options, objref.IDOf(device))
 	return _r
 }
 
 // CompileWithOptionsDeviceInputTensorsInputTensorsData compiles the inference graph for the options, device, and input tensors you specify.
-func (ig *InferenceGraph) CompileWithOptionsDeviceInputTensorsInputTensorsData(options GraphCompilationOptions, device *Device, inputTensors obj.Object, inputTensorsData obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("compileWithOptions:device:inputTensors:inputTensorsData:"), options, objref.IDOf(device), objref.IDOf(inputTensors), objref.IDOf(inputTensorsData))
+func (ig *InferenceGraph) CompileWithOptionsDeviceInputTensorsInputTensorsData(options GraphCompilationOptions, device *Device, inputTensors map[string]*Tensor, inputTensorsData map[string]*TensorData) bool {
+	defer runtime.KeepAlive(ig)
+	defer runtime.KeepAlive(device)
+	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("compileWithOptions:device:inputTensors:inputTensorsData:"), options, objref.IDOf(device), rt.MapToDict(inputTensors, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(inputTensorsData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // LinkWithGraphs links the inference graphs you specify.
 func (ig *InferenceGraph) LinkWithGraphs(graphs []*InferenceGraph) bool {
+	defer runtime.KeepAlive(ig)
 	_r := objc.Send[bool](objref.IDOf(ig), objc.RegisterName("linkWithGraphs:"), purego.SliceToNSArray(graphs, func(_v *InferenceGraph) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // DeviceMemorySize returns the total size in bytes of device memory used by all intermediate tensors in the inference graph
 func (ig *InferenceGraph) DeviceMemorySize() int {
+	defer runtime.KeepAlive(ig)
 	_r := objc.Send[int](objref.IDOf(ig), objc.RegisterName("deviceMemorySize"))
 	return _r
 }

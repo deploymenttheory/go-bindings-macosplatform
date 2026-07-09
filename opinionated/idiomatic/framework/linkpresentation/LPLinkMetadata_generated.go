@@ -5,7 +5,10 @@
 package linkpresentation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func linkMetadataAdopt(id objc.ID) *LinkMetadata {
 
 // Description returns the object's -description text.
 func (lm *LinkMetadata) Description() string {
+	defer runtime.KeepAlive(lm)
 	return rt.Description(objref.IDOf(lm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lm *LinkMetadata) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lm *LinkMetadata) IsKind(className string) bool {
+	defer runtime.KeepAlive(lm)
 	return rt.IsKind(objref.IDOf(lm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lm *LinkMetadata) String() string {
+	defer runtime.KeepAlive(lm)
 	return rt.Description(objref.IDOf(lm))
 }
 
@@ -79,8 +87,8 @@ func (lm *LinkMetadata) WithOriginalURL(originalURL string) *LinkMetadata {
 }
 
 // WithURL sets the URL that returned the metadata, taking server-side redirects into account.
-func (lm *LinkMetadata) WithURL(uRL string) *LinkMetadata {
-	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (lm *LinkMetadata) WithURL(url string) *LinkMetadata {
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return lm
 }
 
@@ -92,18 +100,21 @@ func (lm *LinkMetadata) WithTitle(title string) *LinkMetadata {
 
 // WithIconProvider sets an object that retrieves data corresponding to a representative icon for the URL.
 func (lm *LinkMetadata) WithIconProvider(iconProvider obj.Object) *LinkMetadata {
+	defer runtime.KeepAlive(iconProvider)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setIconProvider:"), objref.IDOf(iconProvider))
 	return lm
 }
 
 // WithImageProvider sets an object that retrieves data corresponding to a representative image for the URL.
 func (lm *LinkMetadata) WithImageProvider(imageProvider obj.Object) *LinkMetadata {
+	defer runtime.KeepAlive(imageProvider)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setImageProvider:"), objref.IDOf(imageProvider))
 	return lm
 }
 
 // WithVideoProvider sets an object that retrieves data corresponding to a representative video for the URL.
 func (lm *LinkMetadata) WithVideoProvider(videoProvider obj.Object) *LinkMetadata {
+	defer runtime.KeepAlive(videoProvider)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setVideoProvider:"), objref.IDOf(videoProvider))
 	return lm
 }
@@ -115,19 +126,22 @@ func (lm *LinkMetadata) WithRemoteVideoURL(remoteVideoURL string) *LinkMetadata 
 }
 
 // OriginalURL returns the original URL of the metadata request.
-func (lm *LinkMetadata) OriginalURL() obj.Object {
+func (lm *LinkMetadata) OriginalURL() string {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("originalURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // URL returns the URL that returned the metadata, taking server-side redirects into account. The URL that returns the metadata may differ from the “LPLinkMetadata/originalURL“ to which you sent the metadata request. This can happen if the server redirects the request, for example, when a resource has moved, or when the original URL is a domain alias.
-func (lm *LinkMetadata) URL() obj.Object {
+func (lm *LinkMetadata) URL() string {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Title returns a representative title for the URL.
 func (lm *LinkMetadata) Title() string {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -136,25 +150,29 @@ func (lm *LinkMetadata) Title() string {
 }
 
 // IconProvider returns an object that retrieves data corresponding to a representative icon for the URL.
-func (lm *LinkMetadata) IconProvider() obj.Object {
+func (lm *LinkMetadata) IconProvider() *foundation.ItemProvider {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("iconProvider"))
-	return obj.Wrap(_r)
+	return foundation.ItemProviderFromID(_r)
 }
 
 // ImageProvider returns an object that retrieves data corresponding to a representative image for the URL.
-func (lm *LinkMetadata) ImageProvider() obj.Object {
+func (lm *LinkMetadata) ImageProvider() *foundation.ItemProvider {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("imageProvider"))
-	return obj.Wrap(_r)
+	return foundation.ItemProviderFromID(_r)
 }
 
 // VideoProvider returns an object that retrieves data corresponding to a representative video for the URL. The item provider returns a video that <doc://com.apple.documentation/documentation/avfoundation> can play.
-func (lm *LinkMetadata) VideoProvider() obj.Object {
+func (lm *LinkMetadata) VideoProvider() *foundation.ItemProvider {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("videoProvider"))
-	return obj.Wrap(_r)
+	return foundation.ItemProviderFromID(_r)
 }
 
 // RemoteVideoURL returns a remote URL corresponding to a representative video for the URL. This may reference a remote video file that <doc://com.apple.documentation/documentation/avfoundation> can stream.
-func (lm *LinkMetadata) RemoteVideoURL() obj.Object {
+func (lm *LinkMetadata) RemoteVideoURL() string {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("remoteVideoURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

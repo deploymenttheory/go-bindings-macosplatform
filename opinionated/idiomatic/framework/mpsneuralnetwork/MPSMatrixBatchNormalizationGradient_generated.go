@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func matrixBatchNormalizationGradientAdopt(id objc.ID) *MatrixBatchNormalization
 
 // Description returns the object's -description text.
 func (mbng *MatrixBatchNormalizationGradient) Description() string {
+	defer runtime.KeepAlive(mbng)
 	return rt.Description(objref.IDOf(mbng))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbng *MatrixBatchNormalizationGradient) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbng)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbng), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbng *MatrixBatchNormalizationGradient) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbng)
 	return rt.IsKind(objref.IDOf(mbng), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbng *MatrixBatchNormalizationGradient) String() string {
+	defer runtime.KeepAlive(mbng)
 	return rt.Description(objref.IDOf(mbng))
 }
 
@@ -90,47 +97,55 @@ func (mbng *MatrixBatchNormalizationGradient) WithEpsilon(epsilon float32) *Matr
 
 // SetNeuronTypeParameterAParameterBParameterC specifies a neuron activation function to be used. This method can be used to add a neuron activation funtion of given type with associated scalar parameters A, B, and C that are shared across all output values. Note that this method can only be used to specify neurons which are specified by three (or fewer) parameters shared across all output values (or channels, in CNN nomenclature). It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. An MPSMatrixBatchNormalizationGradient kernel is initialized with a default neuron function of MPSCNNNeuronTypeNone.
 func (mbng *MatrixBatchNormalizationGradient) SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
+	defer runtime.KeepAlive(mbng)
 	objc.Send[objc.ID](objref.IDOf(mbng), objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:"), neuronType, parameterA, parameterB, parameterC)
 }
 
 // NeuronType returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mbng *MatrixBatchNormalizationGradient) NeuronType() CNNNeuronType {
+	defer runtime.KeepAlive(mbng)
 	_r := objc.Send[CNNNeuronType](objref.IDOf(mbng), objc.RegisterName("neuronType"))
 	return _r
 }
 
 // NeuronParameterA returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mbng *MatrixBatchNormalizationGradient) NeuronParameterA() float32 {
+	defer runtime.KeepAlive(mbng)
 	_r := objc.Send[float32](objref.IDOf(mbng), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
 // NeuronParameterB returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mbng *MatrixBatchNormalizationGradient) NeuronParameterB() float32 {
+	defer runtime.KeepAlive(mbng)
 	_r := objc.Send[float32](objref.IDOf(mbng), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
 // NeuronParameterC returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mbng *MatrixBatchNormalizationGradient) NeuronParameterC() float32 {
+	defer runtime.KeepAlive(mbng)
 	_r := objc.Send[float32](objref.IDOf(mbng), objc.RegisterName("neuronParameterC"))
 	return _r
 }
 
 // SourceNumberOfFeatureVectors returns the number of input vectors which make up the input array.
 func (mbng *MatrixBatchNormalizationGradient) SourceNumberOfFeatureVectors() int {
+	defer runtime.KeepAlive(mbng)
 	_r := objc.Send[int](objref.IDOf(mbng), objc.RegisterName("sourceNumberOfFeatureVectors"))
 	return _r
 }
 
 // SourceInputFeatureChannels returns the number of feature channels in the input vectors.
 func (mbng *MatrixBatchNormalizationGradient) SourceInputFeatureChannels() int {
+	defer runtime.KeepAlive(mbng)
 	_r := objc.Send[int](objref.IDOf(mbng), objc.RegisterName("sourceInputFeatureChannels"))
 	return _r
 }
 
 // Epsilon returns a small term added to the variance when normalizing the input.
 func (mbng *MatrixBatchNormalizationGradient) Epsilon() float32 {
+	defer runtime.KeepAlive(mbng)
 	_r := objc.Send[float32](objref.IDOf(mbng), objc.RegisterName("epsilon"))
 	return _r
 }

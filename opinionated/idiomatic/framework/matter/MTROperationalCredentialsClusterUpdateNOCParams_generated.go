@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTROperationalCredentialsClusterUpdateNOCParamsAdopt(id objc.ID) *MTROperat
 
 // Description returns the object's -description text.
 func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) Description() string {
+	defer runtime.KeepAlive(moccunp)
 	return rt.Description(objref.IDOf(moccunp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(moccunp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(moccunp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(moccunp)
 	return rt.IsKind(objref.IDOf(moccunp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) String() string {
+	defer runtime.KeepAlive(moccunp)
 	return rt.Description(objref.IDOf(moccunp))
 }
 
@@ -71,49 +79,55 @@ func NewMTROperationalCredentialsClusterUpdateNOCParams() *MTROperationalCredent
 }
 
 // WithNocValue sets the noc value.
-func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) WithNocValue(nocValue obj.Object) *MTROperationalCredentialsClusterUpdateNOCParams {
-	objc.Send[objc.ID](objref.IDOf(moccunp), objc.RegisterName("setNocValue:"), objref.IDOf(nocValue))
+func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) WithNocValue(nocValue []byte) *MTROperationalCredentialsClusterUpdateNOCParams {
+	objc.Send[objc.ID](objref.IDOf(moccunp), objc.RegisterName("setNocValue:"), rt.BytesToNSData(nocValue))
 	return moccunp
 }
 
 // WithIcacValue sets the icac value.
-func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) WithIcacValue(icacValue obj.Object) *MTROperationalCredentialsClusterUpdateNOCParams {
-	objc.Send[objc.ID](objref.IDOf(moccunp), objc.RegisterName("setIcacValue:"), objref.IDOf(icacValue))
+func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) WithIcacValue(icacValue []byte) *MTROperationalCredentialsClusterUpdateNOCParams {
+	objc.Send[objc.ID](objref.IDOf(moccunp), objc.RegisterName("setIcacValue:"), rt.BytesToNSData(icacValue))
 	return moccunp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterUpdateNOCParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(moccunp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return moccunp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterUpdateNOCParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(moccunp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return moccunp
 }
 
 // NocValue returns the noc value.
-func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) NocValue() obj.Object {
+func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) NocValue() []byte {
+	defer runtime.KeepAlive(moccunp)
 	_r := objc.Send[objc.ID](objref.IDOf(moccunp), objc.RegisterName("nocValue"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // IcacValue returns the icac value.
-func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) IcacValue() obj.Object {
+func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) IcacValue() []byte {
+	defer runtime.KeepAlive(moccunp)
 	_r := objc.Send[objc.ID](objref.IDOf(moccunp), objc.RegisterName("icacValue"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) TimedInvokeTimeoutMs() obj.Object {
+func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(moccunp)
 	_r := objc.Send[objc.ID](objref.IDOf(moccunp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) ServerSideProcessingTimeout() obj.Object {
+func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(moccunp)
 	_r := objc.Send[objc.ID](objref.IDOf(moccunp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

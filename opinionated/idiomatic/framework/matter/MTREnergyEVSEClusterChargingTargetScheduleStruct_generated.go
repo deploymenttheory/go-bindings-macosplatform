@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTREnergyEVSEClusterChargingTargetScheduleStructAdopt(id objc.ID) *MTREnerg
 
 // Description returns the object's -description text.
 func (meecctss *MTREnergyEVSEClusterChargingTargetScheduleStruct) Description() string {
+	defer runtime.KeepAlive(meecctss)
 	return rt.Description(objref.IDOf(meecctss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (meecctss *MTREnergyEVSEClusterChargingTargetScheduleStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(meecctss)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(meecctss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (meecctss *MTREnergyEVSEClusterChargingTargetScheduleStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(meecctss)
 	return rt.IsKind(objref.IDOf(meecctss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (meecctss *MTREnergyEVSEClusterChargingTargetScheduleStruct) String() string {
+	defer runtime.KeepAlive(meecctss)
 	return rt.Description(objref.IDOf(meecctss))
 }
 
@@ -72,23 +80,28 @@ func NewMTREnergyEVSEClusterChargingTargetScheduleStruct() *MTREnergyEVSECluster
 
 // WithDayOfWeekForSequence sets the day of week for sequence.
 func (meecctss *MTREnergyEVSEClusterChargingTargetScheduleStruct) WithDayOfWeekForSequence(dayOfWeekForSequence obj.Object) *MTREnergyEVSEClusterChargingTargetScheduleStruct {
+	defer runtime.KeepAlive(dayOfWeekForSequence)
 	objc.Send[objc.ID](objref.IDOf(meecctss), objc.RegisterName("setDayOfWeekForSequence:"), objref.IDOf(dayOfWeekForSequence))
 	return meecctss
 }
 
 // DayOfWeekForSequence returns the day of week for sequence.
-func (meecctss *MTREnergyEVSEClusterChargingTargetScheduleStruct) DayOfWeekForSequence() obj.Object {
+func (meecctss *MTREnergyEVSEClusterChargingTargetScheduleStruct) DayOfWeekForSequence() *foundation.Number {
+	defer runtime.KeepAlive(meecctss)
 	_r := objc.Send[objc.ID](objref.IDOf(meecctss), objc.RegisterName("dayOfWeekForSequence"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ChargingTargets returns the charging targets.
 func (meecctss *MTREnergyEVSEClusterChargingTargetScheduleStruct) ChargingTargets() obj.Object {
+	defer runtime.KeepAlive(meecctss)
 	_r := objc.Send[objc.ID](objref.IDOf(meecctss), objc.RegisterName("chargingTargets"))
 	return obj.Wrap(_r)
 }
 
 // SetChargingTargets wraps the corresponding Objective-C method.
 func (meecctss *MTREnergyEVSEClusterChargingTargetScheduleStruct) SetChargingTargets(chargingTargets obj.Object) {
+	defer runtime.KeepAlive(meecctss)
+	defer runtime.KeepAlive(chargingTargets)
 	objc.Send[objc.ID](objref.IDOf(meecctss), objc.RegisterName("setChargingTargets:"), objref.IDOf(chargingTargets))
 }

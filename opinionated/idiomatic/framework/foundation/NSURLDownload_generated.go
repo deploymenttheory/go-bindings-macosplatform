@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func uRLDownloadAdopt(id objc.ID) *URLDownload {
 
 // Description returns the object's -description text.
 func (ud *URLDownload) Description() string {
+	defer runtime.KeepAlive(ud)
 	return rt.Description(objref.IDOf(ud))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ud *URLDownload) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ud)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ud), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ud *URLDownload) IsKind(className string) bool {
+	defer runtime.KeepAlive(ud)
 	return rt.IsKind(objref.IDOf(ud), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ud *URLDownload) String() string {
+	defer runtime.KeepAlive(ud)
 	return rt.Description(objref.IDOf(ud))
 }
 
@@ -87,35 +93,40 @@ func (ud *URLDownload) WithObservationInfo(observationInfo unsafe.Pointer) *URLD
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ud *URLDownload) WithScriptingProperties(scriptingProperties obj.Object) *URLDownload {
-	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ud *URLDownload) WithScriptingProperties(scriptingProperties map[string]obj.Object) *URLDownload {
+	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ud
 }
 
 // Cancel cancels the receiver’s download and deletes the downloaded file.
 func (ud *URLDownload) Cancel() {
+	defer runtime.KeepAlive(ud)
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("cancel"))
 }
 
 // SetDestinationAllowOverwrite sets the destination path of the downloaded file.
 func (ud *URLDownload) SetDestinationAllowOverwrite(path string, allowOverwrite bool) {
+	defer runtime.KeepAlive(ud)
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setDestination:allowOverwrite:"), purego.NSString(path), allowOverwrite)
 }
 
 // Request returns the request of the download.
 func (ud *URLDownload) Request() *URLRequest {
+	defer runtime.KeepAlive(ud)
 	_r := objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("request"))
 	return URLRequestFromID(_r)
 }
 
 // ResumeData returns the resume data of a download that is incomplete.
-func (ud *URLDownload) ResumeData() *Data {
+func (ud *URLDownload) ResumeData() []byte {
+	defer runtime.KeepAlive(ud)
 	_r := objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("resumeData"))
-	return DataFromID(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // DeletesFileUponFailure reports whether sets whether or not the downloaded file should be deleted upon failure. 1
 func (ud *URLDownload) DeletesFileUponFailure() bool {
+	defer runtime.KeepAlive(ud)
 	_r := objc.Send[bool](objref.IDOf(ud), objc.RegisterName("deletesFileUponFailure"))
 	return _r
 }

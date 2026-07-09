@@ -5,9 +5,11 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,14 +49,15 @@ func mIDISysexEventAdopt(id objc.ID) *MIDISysexEvent {
 }
 
 // NewMIDISysexEventWithData creates a system event with the data you specify.
-func NewMIDISysexEventWithData(data obj.Object) *MIDISysexEvent {
+func NewMIDISysexEventWithData(data []byte) *MIDISysexEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMIDISysexEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), rt.BytesToNSData(data))
 	return mIDISysexEventAdopt(_id)
 }
 
 // SizeInBytes returns the size in bytes.
 func (mse *MIDISysexEvent) SizeInBytes() int {
+	defer runtime.KeepAlive(mse)
 	_r := objc.Send[int](objref.IDOf(mse), objc.RegisterName("sizeInBytes"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func openGLPixelBufferAdopt(id objc.ID) *OpenGLPixelBuffer {
 
 // Description returns the object's -description text.
 func (ogpb *OpenGLPixelBuffer) Description() string {
+	defer runtime.KeepAlive(ogpb)
 	return rt.Description(objref.IDOf(ogpb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ogpb *OpenGLPixelBuffer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ogpb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ogpb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ogpb *OpenGLPixelBuffer) IsKind(className string) bool {
+	defer runtime.KeepAlive(ogpb)
 	return rt.IsKind(objref.IDOf(ogpb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ogpb *OpenGLPixelBuffer) String() string {
+	defer runtime.KeepAlive(ogpb)
 	return rt.Description(objref.IDOf(ogpb))
 }
 
@@ -75,6 +82,7 @@ func NewOpenGLPixelBufferWithTextureTargetTextureInternalFormatTextureMaxMipMapL
 
 // NewOpenGLPixelBufferWithCGLPBufferObj initializes and returns an OpenGL pixel buffer object that encapsulates an existing CGL pixel buffer object.
 func NewOpenGLPixelBufferWithCGLPBufferObj(pbuffer obj.Object) *OpenGLPixelBuffer {
+	defer runtime.KeepAlive(pbuffer)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOpenGLPixelBuffer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLPBufferObj:"), objref.IDOf(pbuffer))
 	return openGLPixelBufferAdopt(_id)
@@ -82,36 +90,42 @@ func NewOpenGLPixelBufferWithCGLPBufferObj(pbuffer obj.Object) *OpenGLPixelBuffe
 
 // CGLPBufferObj returns the cglp buffer obj.
 func (ogpb *OpenGLPixelBuffer) CGLPBufferObj() obj.Object {
+	defer runtime.KeepAlive(ogpb)
 	_r := objc.Send[objc.ID](objref.IDOf(ogpb), objc.RegisterName("CGLPBufferObj"))
 	return obj.Wrap(_r)
 }
 
 // PixelsWide returns the pixels wide.
 func (ogpb *OpenGLPixelBuffer) PixelsWide() int32 {
+	defer runtime.KeepAlive(ogpb)
 	_r := objc.Send[int32](objref.IDOf(ogpb), objc.RegisterName("pixelsWide"))
 	return _r
 }
 
 // PixelsHigh returns the pixels high.
 func (ogpb *OpenGLPixelBuffer) PixelsHigh() int32 {
+	defer runtime.KeepAlive(ogpb)
 	_r := objc.Send[int32](objref.IDOf(ogpb), objc.RegisterName("pixelsHigh"))
 	return _r
 }
 
 // TextureTarget returns the texture target.
 func (ogpb *OpenGLPixelBuffer) TextureTarget() uint32 {
+	defer runtime.KeepAlive(ogpb)
 	_r := objc.Send[uint32](objref.IDOf(ogpb), objc.RegisterName("textureTarget"))
 	return _r
 }
 
 // TextureInternalFormat returns the texture internal format.
 func (ogpb *OpenGLPixelBuffer) TextureInternalFormat() uint32 {
+	defer runtime.KeepAlive(ogpb)
 	_r := objc.Send[uint32](objref.IDOf(ogpb), objc.RegisterName("textureInternalFormat"))
 	return _r
 }
 
 // TextureMaxMipMapLevel returns the texture max mip map level.
 func (ogpb *OpenGLPixelBuffer) TextureMaxMipMapLevel() int32 {
+	defer runtime.KeepAlive(ogpb)
 	_r := objc.Send[int32](objref.IDOf(ogpb), objc.RegisterName("textureMaxMipMapLevel"))
 	return _r
 }

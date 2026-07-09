@@ -5,9 +5,13 @@
 package cryptotokenkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,14 +57,14 @@ func NewSmartCardUserInteractionForSecurePINChange() *SmartCardUserInteractionFo
 }
 
 // WithPINConfirmation sets the way PIN confirmation is requested. TKSmartCardPINConfirmationNone by default.
-func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithPINConfirmation(pINConfirmation SmartCardPINConfirmation) *SmartCardUserInteractionForSecurePINChange {
-	objc.Send[objc.ID](objref.IDOf(scuifspc), objc.RegisterName("setPINConfirmation:"), pINConfirmation)
+func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithPINConfirmation(pinConfirmation SmartCardPINConfirmation) *SmartCardUserInteractionForSecurePINChange {
+	objc.Send[objc.ID](objref.IDOf(scuifspc), objc.RegisterName("setPINConfirmation:"), pinConfirmation)
 	return scuifspc
 }
 
 // WithPINCompletion sets the conditions under which PIN entry should be considered complete.
-func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithPINCompletion(pINCompletion SmartCardPINCompletion) *SmartCardUserInteractionForSecurePINChange {
-	objc.Send[objc.ID](objref.IDOf(scuifspc), objc.RegisterName("setPINCompletion:"), pINCompletion)
+func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithPINCompletion(pinCompletion SmartCardPINCompletion) *SmartCardUserInteractionForSecurePINChange {
+	objc.Send[objc.ID](objref.IDOf(scuifspc), objc.RegisterName("setPINCompletion:"), pinCompletion)
 	return scuifspc
 }
 
@@ -73,6 +77,7 @@ func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithPINMessageIndice
 
 // WithLocale sets the locale for the displayed messages. If nil, the user’s current locale is used. By default, this value is the current locale of the system.
 func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithLocale(locale obj.Object) *SmartCardUserInteractionForSecurePINChange {
+	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(scuifspc), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return scuifspc
 }
@@ -84,8 +89,18 @@ func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithResultSW(resultS
 }
 
 // WithResultData sets the returned data without SW1-SW2 bytes, if any.
-func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithResultData(resultData obj.Object) *SmartCardUserInteractionForSecurePINChange {
-	objc.Send[objc.ID](objref.IDOf(scuifspc), objc.RegisterName("setResultData:"), objref.IDOf(resultData))
+func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithResultData(resultData []byte) *SmartCardUserInteractionForSecurePINChange {
+	objc.Send[objc.ID](objref.IDOf(scuifspc), objc.RegisterName("setResultData:"), rt.BytesToNSData(resultData))
+	return scuifspc
+}
+
+// WithDelegate sets the delegate for observing events that occur during the user interaction.
+func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithDelegate(delegate SmartCardUserInteractionDelegate) *SmartCardUserInteractionForSecurePINChange {
+	_shim := newSmartCardUserInteractionDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(scuifspc), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(scuifspc), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
 	return scuifspc
 }
 
@@ -103,6 +118,7 @@ func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithInteractionTimeo
 
 // PINConfirmation returns the pin confirmation.
 func (scuifspc *SmartCardUserInteractionForSecurePINChange) PINConfirmation() SmartCardPINConfirmation {
+	defer runtime.KeepAlive(scuifspc)
 	_r := objc.Send[SmartCardPINConfirmation](objref.IDOf(scuifspc), objc.RegisterName("PINConfirmation"))
 	return _r
 }

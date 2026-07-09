@@ -44,8 +44,8 @@ func (o *VZNetworkDeviceConfiguration) MACAddress() *VZMACAddress {
 	return VZMACAddressFromID(_ret)
 }
 
-func (o *VZNetworkDeviceConfiguration) SetMACAddress(mACAddress *VZMACAddress) {
-	o.Ptr().Send(_vZNetworkDeviceConfigurationSelSetMACAddress, mACAddress.Ptr())
+func (o *VZNetworkDeviceConfiguration) SetMACAddress(macAddress *VZMACAddress) {
+	o.Ptr().Send(_vZNetworkDeviceConfigurationSelSetMACAddress, macAddress.Ptr())
 }
 
 // @abstract Network device attachment. Defines how the virtual device interfaces with the host system. The default is nil. @see VZBridgedNetworkDeviceAttachment @see VZFileHandleNetworkDeviceAttachment @see VZNATNetworkDeviceAttachment

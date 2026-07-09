@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -75,6 +77,7 @@ func (dpi *DOMProcessingInstruction) WithTextContent(textContent string) *DOMPro
 
 // Target returns the target.
 func (dpi *DOMProcessingInstruction) Target() string {
+	defer runtime.KeepAlive(dpi)
 	_r := objc.Send[objc.ID](objref.IDOf(dpi), objc.RegisterName("target"))
 	if _r == 0 {
 		return ""

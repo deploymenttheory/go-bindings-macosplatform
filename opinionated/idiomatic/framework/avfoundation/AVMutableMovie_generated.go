@@ -5,6 +5,7 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -52,33 +53,34 @@ func mutableMovieAdopt(id objc.ID) *MutableMovie {
 	return x
 }
 
-// NewMutableMovieWithURLOptionsError creates a mutable movie object from a movie header stored in a QuickTime movie file of ISO base media file.
-func NewMutableMovieWithURLOptionsError(uRL string, options obj.Object) (result *MutableMovie, err error) {
+// NewMutableMovieWithURLOptions creates a mutable movie object from a movie header stored in a QuickTime movie file of ISO base media file.
+func NewMutableMovieWithURLOptions(url string, options map[string]obj.Object) (result *MutableMovie, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMutableMovie")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:error:"), rt.FileURL(uRL), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:error:"), rt.FileURL(url), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return mutableMovieAdopt(_id), nil
 }
 
-// NewMutableMovieWithDataOptionsError creates a mutable movie object from a movie stored in a data object.
-func NewMutableMovieWithDataOptionsError(data obj.Object, options obj.Object) (result *MutableMovie, err error) {
+// NewMutableMovieWithDataOptions creates a mutable movie object from a movie stored in a data object.
+func NewMutableMovieWithDataOptions(data []byte, options map[string]obj.Object) (result *MutableMovie, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMutableMovie")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:error:"), objref.IDOf(data), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:error:"), rt.BytesToNSData(data), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return mutableMovieAdopt(_id), nil
 }
 
-// NewMutableMovieWithSettingsFromMovieOptionsError creates a mutable movie object without tracks.
-func NewMutableMovieWithSettingsFromMovieOptionsError(movie *Movie, options obj.Object) (result *MutableMovie, err error) {
+// NewMutableMovieWithSettingsFromMovieOptions creates a mutable movie object without tracks.
+func NewMutableMovieWithSettingsFromMovieOptions(movie *Movie, options map[string]obj.Object) (result *MutableMovie, err error) {
+	defer runtime.KeepAlive(movie)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMutableMovie")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSettingsFromMovie:options:error:"), objref.IDOf(movie), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSettingsFromMovie:options:error:"), objref.IDOf(movie), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -117,6 +119,7 @@ func (mm *MutableMovie) WithModified(modified bool) *MutableMovie {
 
 // WithDefaultMediaDataStorage sets the default storage container for media data that you add to a movie.
 func (mm *MutableMovie) WithDefaultMediaDataStorage(defaultMediaDataStorage *MediaDataStorage) *MutableMovie {
+	defer runtime.KeepAlive(defaultMediaDataStorage)
 	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("setDefaultMediaDataStorage:"), objref.IDOf(defaultMediaDataStorage))
 	return mm
 }
@@ -136,12 +139,15 @@ func (mm *MutableMovie) WithMetadata(items ...MetadataItemProvider) *MutableMovi
 
 // Timescale returns for file types that contain a 'moov' atom, such as QuickTime Movie files, specifies the time scale of the movie. The default movie time scale is 600. In certain cases, you may want to set this to a different value. For instance, a movie that contains a single audio track should typically have the movie time scale set to the media time scale of that track. This property should be set on a new empty movie before any edits are performed on the movie.
 func (mm *MutableMovie) Timescale() int32 {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[int32](objref.IDOf(mm), objc.RegisterName("timescale"))
 	return _r
 }
 
 // InsertTimeRangeOfAssetAtTimeCopySampleData inserts all of the tracks in a specified time range of an asset into a movie.
 func (mm *MutableMovie) InsertTimeRangeOfAssetAtTimeCopySampleData(timeRange coremedia.CMTimeRange, asset *Asset, startTime coremedia.CMTime, copySampleData bool) error {
+	defer runtime.KeepAlive(mm)
+	defer runtime.KeepAlive(asset)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(mm), objc.RegisterName("insertTimeRange:ofAsset:atTime:copySampleData:error:"), timeRange, objref.IDOf(asset), startTime, copySampleData, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -152,51 +158,64 @@ func (mm *MutableMovie) InsertTimeRangeOfAssetAtTimeCopySampleData(timeRange cor
 
 // InsertEmptyTimeRange adds an empty time range to a movie.
 func (mm *MutableMovie) InsertEmptyTimeRange(timeRange coremedia.CMTimeRange) {
+	defer runtime.KeepAlive(mm)
 	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("insertEmptyTimeRange:"), timeRange)
 }
 
 // RemoveTimeRange removes the specified time range from a movie.
 func (mm *MutableMovie) RemoveTimeRange(timeRange coremedia.CMTimeRange) {
+	defer runtime.KeepAlive(mm)
 	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("removeTimeRange:"), timeRange)
 }
 
 // ScaleTimeRangeToDuration changes the duration of a time range in a movie.
 func (mm *MutableMovie) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime) {
+	defer runtime.KeepAlive(mm)
 	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("scaleTimeRange:toDuration:"), timeRange, duration)
 }
 
 // IsModified reports whether a movie has been modified. The value of this property is a BOOL that indicates whether the AVMutableMovie object has been modified since it was created, was last written, or had its modified state cleared via a call to setModified:NO.
 func (mm *MutableMovie) IsModified() bool {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[bool](objref.IDOf(mm), objc.RegisterName("isModified"))
 	return _r
 }
 
 // InterleavingPeriod returns a CMTime that indicates the duration for interleaving runs of samples of each track. The default interleaving period is 0.5 seconds.
 func (mm *MutableMovie) InterleavingPeriod() coremedia.CMTime {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(mm), objc.RegisterName("interleavingPeriod"))
 	return _r
 }
 
 // MutableTrackCompatibleWithTrack provides a reference to a track from a mutable movie into which you can insert any time range.
 func (mm *MutableMovie) MutableTrackCompatibleWithTrack(track *AssetTrack) *MutableMovieTrack {
+	defer runtime.KeepAlive(mm)
+	defer runtime.KeepAlive(track)
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("mutableTrackCompatibleWithTrack:"), objref.IDOf(track))
 	return MutableMovieTrackFromID(_r)
 }
 
 // AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions adds an empty track to the target movie.
-func (mm *MutableMovie) AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions(mediaType obj.Object, track *AssetTrack, options obj.Object) *MutableMovieTrack {
-	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("addMutableTrackWithMediaType:copySettingsFromTrack:options:"), objref.IDOf(mediaType), objref.IDOf(track), objref.IDOf(options))
+func (mm *MutableMovie) AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions(mediaType obj.Object, track *AssetTrack, options map[string]obj.Object) *MutableMovieTrack {
+	defer runtime.KeepAlive(mm)
+	defer runtime.KeepAlive(mediaType)
+	defer runtime.KeepAlive(track)
+	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("addMutableTrackWithMediaType:copySettingsFromTrack:options:"), objref.IDOf(mediaType), objref.IDOf(track), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return MutableMovieTrackFromID(_r)
 }
 
 // AddMutableTracksCopyingSettingsFromTracksOptions adds one or more empty tracks to the target movie and copies the track settings from the source tracks.
-func (mm *MutableMovie) AddMutableTracksCopyingSettingsFromTracksOptions(existingTracks []*AssetTrack, options obj.Object) []*MutableMovieTrack {
-	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("addMutableTracksCopyingSettingsFromTracks:options:"), purego.SliceToNSArray(existingTracks, func(_v *AssetTrack) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options))
+func (mm *MutableMovie) AddMutableTracksCopyingSettingsFromTracksOptions(existingTracks []*AssetTrack, options map[string]obj.Object) []*MutableMovieTrack {
+	defer runtime.KeepAlive(mm)
+	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("addMutableTracksCopyingSettingsFromTracks:options:"), purego.SliceToNSArray(existingTracks, func(_v *AssetTrack) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MutableMovieTrack { return MutableMovieTrackFromID(_id) })
 }
 
 // RemoveTrack removes the specified track from the target movie.
 func (mm *MutableMovie) RemoveTrack(track *MovieTrack) {
+	defer runtime.KeepAlive(mm)
+	defer runtime.KeepAlive(track)
 	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("removeTrack:"), objref.IDOf(track))
 }
 

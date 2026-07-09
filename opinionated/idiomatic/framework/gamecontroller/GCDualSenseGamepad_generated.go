@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,18 +62,21 @@ func (dsg *DualSenseGamepad) WithValueDidChangeHandler(valueDidChangeHandler fun
 
 // TouchpadButton returns dualSense controllers have a touchpad with a button and two-finger tracking.
 func (dsg *DualSenseGamepad) TouchpadButton() *ControllerButtonInput {
+	defer runtime.KeepAlive(dsg)
 	_r := objc.Send[objc.ID](objref.IDOf(dsg), objc.RegisterName("touchpadButton"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // TouchpadPrimary returns the touchpad primary.
 func (dsg *DualSenseGamepad) TouchpadPrimary() *ControllerDirectionPad {
+	defer runtime.KeepAlive(dsg)
 	_r := objc.Send[objc.ID](objref.IDOf(dsg), objc.RegisterName("touchpadPrimary"))
 	return ControllerDirectionPadFromID(_r)
 }
 
 // TouchpadSecondary returns the touchpad secondary.
 func (dsg *DualSenseGamepad) TouchpadSecondary() *ControllerDirectionPad {
+	defer runtime.KeepAlive(dsg)
 	_r := objc.Send[objc.ID](objref.IDOf(dsg), objc.RegisterName("touchpadSecondary"))
 	return ControllerDirectionPadFromID(_r)
 }

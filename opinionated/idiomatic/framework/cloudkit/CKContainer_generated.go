@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func containerAdopt(id objc.ID) *Container {
 
 // Description returns the object's -description text.
 func (c *Container) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Container) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Container) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Container) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
@@ -77,11 +83,14 @@ func NewContainer() *Container {
 
 // AddOperation adds an operation to the container’s queue.
 func (c *Container) AddOperation(operation *Operation) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(operation)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("addOperation:"), objref.IDOf(operation))
 }
 
 // ContainerIdentifier returns the container's unique identifier. Use this property's value to distinguish different containers in your app.
 func (c *Container) ContainerIdentifier() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("containerIdentifier"))
 	if _r == 0 {
 		return ""
@@ -89,26 +98,30 @@ func (c *Container) ContainerIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// DatabaseWithDatabaseScope returns the database with the specified scope.
-func (c *Container) DatabaseWithDatabaseScope(databaseScope DatabaseScope) *Database {
+// Database returns the database with the specified scope.
+func (c *Container) Database(databaseScope DatabaseScope) *Database {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("databaseWithDatabaseScope:"), databaseScope)
 	return DatabaseFromID(_r)
 }
 
 // PrivateCloudDatabase returns the user's private database. The user's private database is only available if the device has an iCloud account. Only the user can access their private database, by default. They own all of the database's content and can view and modify that content. Data in the private database isn't visible in the developer portal. Data in the private database counts toward the user's iCloud storage quota. If there isn't an iCloud account on the user's device, this property still returns a database, but any attempt to use it results in an error. To determine if there is an iCloud account on the device, use the “CKContainer/accountStatus(completionHandler:)“ method.
 func (c *Container) PrivateCloudDatabase() *Database {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("privateCloudDatabase"))
 	return DatabaseFromID(_r)
 }
 
 // PublicCloudDatabase returns the app's public database. This database is available regardless of whether the user's device has an iCloud account. The contents of the public database are readable by all users of the app, and users have write access to the records, and other objects, they create. The public database's contents are visible in the developer portal, where you can assign roles to users and restrict access as necessary. Data in the public database counts toward your app's iCloud storage quota.
 func (c *Container) PublicCloudDatabase() *Database {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("publicCloudDatabase"))
 	return DatabaseFromID(_r)
 }
 
 // SharedCloudDatabase returns the database that contains shared data. This database is only available if the device has an iCloud account. Permissions on the database are available only to the user according to the permissions of the enclosing “CKShare“ instance, which represents the shared record. The current user doesn't own the content in the shared database, and can view and modify that content only if the necessary permissions exist. Data in the shared database isn't visible in the developer portal or to any user who doesn't have access. Data in the shared database counts toward your app's iCloud storage quota. If there isn't an iCloud account on the user's device, this property still returns a database, but any attempt to use it results in an error. To determine if there is an iCloud account on the device, use the “CKContainer/accountStatus(completionHandler:)“ method.
 func (c *Container) SharedCloudDatabase() *Database {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("sharedCloudDatabase"))
 	return DatabaseFromID(_r)
 }
@@ -117,6 +130,7 @@ func (c *Container) SharedCloudDatabase() *Database {
 //
 // FetchUserRecordID blocks until the operation completes or ctx is cancelled.
 func (c *Container) FetchUserRecordID(ctx context.Context) (result *RecordID, err error) {
+	defer runtime.KeepAlive(c)
 	type _result struct {
 		val *RecordID
 		err error
@@ -142,6 +156,7 @@ func (c *Container) FetchUserRecordID(ctx context.Context) (result *RecordID, er
 //
 // DiscoverAllIdentities blocks until the operation completes or ctx is cancelled.
 func (c *Container) DiscoverAllIdentities(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(c)
 	type _result struct {
 		val obj.Object
 		err error
@@ -167,6 +182,7 @@ func (c *Container) DiscoverAllIdentities(ctx context.Context) (result obj.Objec
 //
 // FetchShareParticipantWithEmailAddress blocks until the operation completes or ctx is cancelled.
 func (c *Container) FetchShareParticipantWithEmailAddress(ctx context.Context, emailAddress string) (result *ShareParticipant, err error) {
+	defer runtime.KeepAlive(c)
 	type _result struct {
 		val *ShareParticipant
 		err error
@@ -192,6 +208,7 @@ func (c *Container) FetchShareParticipantWithEmailAddress(ctx context.Context, e
 //
 // FetchShareParticipantWithPhoneNumber blocks until the operation completes or ctx is cancelled.
 func (c *Container) FetchShareParticipantWithPhoneNumber(ctx context.Context, phoneNumber string) (result *ShareParticipant, err error) {
+	defer runtime.KeepAlive(c)
 	type _result struct {
 		val *ShareParticipant
 		err error
@@ -217,6 +234,8 @@ func (c *Container) FetchShareParticipantWithPhoneNumber(ctx context.Context, ph
 //
 // FetchShareParticipantWithUserRecordID blocks until the operation completes or ctx is cancelled.
 func (c *Container) FetchShareParticipantWithUserRecordID(ctx context.Context, userRecordID *RecordID) (result *ShareParticipant, err error) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(userRecordID)
 	type _result struct {
 		val *ShareParticipant
 		err error
@@ -242,6 +261,7 @@ func (c *Container) FetchShareParticipantWithUserRecordID(ctx context.Context, u
 //
 // FetchShareMetadataWithURL blocks until the operation completes or ctx is cancelled.
 func (c *Container) FetchShareMetadataWithURL(ctx context.Context, url string) (result *ShareMetadata, err error) {
+	defer runtime.KeepAlive(c)
 	type _result struct {
 		val *ShareMetadata
 		err error
@@ -267,6 +287,8 @@ func (c *Container) FetchShareMetadataWithURL(ctx context.Context, url string) (
 //
 // AcceptShareMetadata blocks until the operation completes or ctx is cancelled.
 func (c *Container) AcceptShareMetadata(ctx context.Context, metadata *ShareMetadata) (result *Share, err error) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(metadata)
 	type _result struct {
 		val *Share
 		err error
@@ -292,6 +314,7 @@ func (c *Container) AcceptShareMetadata(ctx context.Context, metadata *ShareMeta
 //
 // FetchAllLongLivedOperationIDs blocks until the operation completes or ctx is cancelled.
 func (c *Container) FetchAllLongLivedOperationIDs(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(c)
 	type _result struct {
 		val obj.Object
 		err error

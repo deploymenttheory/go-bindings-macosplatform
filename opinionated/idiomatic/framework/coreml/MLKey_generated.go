@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func keyAdopt(id objc.ID) *Key {
 
 // Description returns the object's -description text.
 func (k *Key) Description() string {
+	defer runtime.KeepAlive(k)
 	return rt.Description(objref.IDOf(k))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (k *Key) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(k)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(k), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (k *Key) IsKind(className string) bool {
+	defer runtime.KeepAlive(k)
 	return rt.IsKind(objref.IDOf(k), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (k *Key) String() string {
+	defer runtime.KeepAlive(k)
 	return rt.Description(objref.IDOf(k))
 }
 
 // Name returns the name.
 func (k *Key) Name() string {
+	defer runtime.KeepAlive(k)
 	_r := objc.Send[objc.ID](objref.IDOf(k), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -79,6 +87,7 @@ func (k *Key) Name() string {
 
 // Scope returns the scope.
 func (k *Key) Scope() string {
+	defer runtime.KeepAlive(k)
 	_r := objc.Send[objc.ID](objref.IDOf(k), objc.RegisterName("scope"))
 	if _r == 0 {
 		return ""

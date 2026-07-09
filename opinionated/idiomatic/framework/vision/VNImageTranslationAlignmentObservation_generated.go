@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -54,6 +56,7 @@ func NewImageTranslationAlignmentObservation() *ImageTranslationAlignmentObserva
 
 // AlignmentTransform returns the alignment transform.
 func (itao *ImageTranslationAlignmentObservation) AlignmentTransform() corefoundation.CGAffineTransform {
+	defer runtime.KeepAlive(itao)
 	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(itao), objc.RegisterName("alignmentTransform"))
 	return _r
 }

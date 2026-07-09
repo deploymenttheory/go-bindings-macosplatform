@@ -5,7 +5,10 @@
 package videotoolbox
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,40 +50,49 @@ func lowLatencyFrameInterpolationParametersAdopt(id objc.ID) *LowLatencyFrameInt
 
 // Description returns the object's -description text.
 func (llfip *LowLatencyFrameInterpolationParameters) Description() string {
+	defer runtime.KeepAlive(llfip)
 	return rt.Description(objref.IDOf(llfip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (llfip *LowLatencyFrameInterpolationParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(llfip)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(llfip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (llfip *LowLatencyFrameInterpolationParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(llfip)
 	return rt.IsKind(objref.IDOf(llfip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (llfip *LowLatencyFrameInterpolationParameters) String() string {
+	defer runtime.KeepAlive(llfip)
 	return rt.Description(objref.IDOf(llfip))
 }
 
 // NewLowLatencyFrameInterpolationParametersWithSourceFramePreviousFrameInterpolationPhaseDestinationFrames creates a new low-latency frame interpolation parameters object.
-func NewLowLatencyFrameInterpolationParametersWithSourceFramePreviousFrameInterpolationPhaseDestinationFrames(sourceFrame *FrameProcessorFrame, previousFrame *FrameProcessorFrame, interpolationPhase []obj.Object, destinationFrames []*FrameProcessorFrame) *LowLatencyFrameInterpolationParameters {
+func NewLowLatencyFrameInterpolationParametersWithSourceFramePreviousFrameInterpolationPhaseDestinationFrames(sourceFrame *FrameProcessorFrame, previousFrame *FrameProcessorFrame, interpolationPhase []*foundation.Number, destinationFrames []*FrameProcessorFrame) *LowLatencyFrameInterpolationParameters {
+	defer runtime.KeepAlive(sourceFrame)
+	defer runtime.KeepAlive(previousFrame)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VTLowLatencyFrameInterpolationParameters")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:previousFrame:interpolationPhase:destinationFrames:"), objref.IDOf(sourceFrame), objref.IDOf(previousFrame), purego.SliceToNSArray(interpolationPhase, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(destinationFrames, func(_v *FrameProcessorFrame) objc.ID { return objref.IDOf(_v) }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:previousFrame:interpolationPhase:destinationFrames:"), objref.IDOf(sourceFrame), objref.IDOf(previousFrame), purego.SliceToNSArray(interpolationPhase, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(destinationFrames, func(_v *FrameProcessorFrame) objc.ID { return objref.IDOf(_v) }))
 	return lowLatencyFrameInterpolationParametersAdopt(_id)
 }
 
 // SourceFrame returns source frame that you provided when creating the low-latency frame interpolation parameters object.
 func (llfip *LowLatencyFrameInterpolationParameters) SourceFrame() *FrameProcessorFrame {
+	defer runtime.KeepAlive(llfip)
 	_r := objc.Send[objc.ID](objref.IDOf(llfip), objc.RegisterName("sourceFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
 // PreviousFrame returns previous frame that you provided when creating the low-latency frame interpolation parameters object.
 func (llfip *LowLatencyFrameInterpolationParameters) PreviousFrame() *FrameProcessorFrame {
+	defer runtime.KeepAlive(llfip)
 	_r := objc.Send[objc.ID](objref.IDOf(llfip), objc.RegisterName("previousFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
@@ -89,6 +101,7 @@ func (llfip *LowLatencyFrameInterpolationParameters) PreviousFrame() *FrameProce
 //
 // InterpolationPhase returns the collection as a Go slice.
 func (llfip *LowLatencyFrameInterpolationParameters) InterpolationPhase() []obj.Object {
+	defer runtime.KeepAlive(llfip)
 	_arr := objc.Send[objc.ID](objref.IDOf(llfip), objc.RegisterName("interpolationPhase"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -97,6 +110,7 @@ func (llfip *LowLatencyFrameInterpolationParameters) InterpolationPhase() []obj.
 //
 // DestinationFrames returns the collection as a Go slice.
 func (llfip *LowLatencyFrameInterpolationParameters) DestinationFrames() []*FrameProcessorFrame {
+	defer runtime.KeepAlive(llfip)
 	_arr := objc.Send[objc.ID](objref.IDOf(llfip), objc.RegisterName("destinationFrames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FrameProcessorFrame { return FrameProcessorFrameFromID(_id) })
 }

@@ -5,9 +5,11 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,9 +49,9 @@ func saveChangesRequestAdopt(id objc.ID) *SaveChangesRequest {
 }
 
 // NewSaveChangesRequestWithInsertedObjectsUpdatedObjectsDeletedObjectsLockedObjects initializes a save changes request with collections of given changes.
-func NewSaveChangesRequestWithInsertedObjectsUpdatedObjectsDeletedObjectsLockedObjects(insertedObjects obj.Object, updatedObjects obj.Object, deletedObjects obj.Object, lockedObjects obj.Object) *SaveChangesRequest {
+func NewSaveChangesRequestWithInsertedObjectsUpdatedObjectsDeletedObjectsLockedObjects(insertedObjects []*ManagedObject, updatedObjects []*ManagedObject, deletedObjects []*ManagedObject, lockedObjects []*ManagedObject) *SaveChangesRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSaveChangesRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInsertedObjects:updatedObjects:deletedObjects:lockedObjects:"), objref.IDOf(insertedObjects), objref.IDOf(updatedObjects), objref.IDOf(deletedObjects), objref.IDOf(lockedObjects))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInsertedObjects:updatedObjects:deletedObjects:lockedObjects:"), rt.SliceToNSSet(insertedObjects, func(_v *ManagedObject) objc.ID { return objref.IDOf(_v) }), rt.SliceToNSSet(updatedObjects, func(_v *ManagedObject) objc.ID { return objref.IDOf(_v) }), rt.SliceToNSSet(deletedObjects, func(_v *ManagedObject) objc.ID { return objref.IDOf(_v) }), rt.SliceToNSSet(lockedObjects, func(_v *ManagedObject) objc.ID { return objref.IDOf(_v) }))
 	return saveChangesRequestAdopt(_id)
 }
 
@@ -60,28 +62,32 @@ func (scr *SaveChangesRequest) WithAffectedStores(items ...PersistentStoreProvid
 	return scr
 }
 
-// InsertedObjects returns the inserted objects.
-func (scr *SaveChangesRequest) InsertedObjects() obj.Object {
+// InsertedObjects returns the order of the returned elements is unspecified.
+func (scr *SaveChangesRequest) InsertedObjects() []*ManagedObject {
+	defer runtime.KeepAlive(scr)
 	_r := objc.Send[objc.ID](objref.IDOf(scr), objc.RegisterName("insertedObjects"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *ManagedObject { return ManagedObjectFromID(_id) })
 }
 
-// UpdatedObjects returns the updated objects.
-func (scr *SaveChangesRequest) UpdatedObjects() obj.Object {
+// UpdatedObjects returns the order of the returned elements is unspecified.
+func (scr *SaveChangesRequest) UpdatedObjects() []*ManagedObject {
+	defer runtime.KeepAlive(scr)
 	_r := objc.Send[objc.ID](objref.IDOf(scr), objc.RegisterName("updatedObjects"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *ManagedObject { return ManagedObjectFromID(_id) })
 }
 
-// DeletedObjects returns the deleted objects.
-func (scr *SaveChangesRequest) DeletedObjects() obj.Object {
+// DeletedObjects returns the order of the returned elements is unspecified.
+func (scr *SaveChangesRequest) DeletedObjects() []*ManagedObject {
+	defer runtime.KeepAlive(scr)
 	_r := objc.Send[objc.ID](objref.IDOf(scr), objc.RegisterName("deletedObjects"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *ManagedObject { return ManagedObjectFromID(_id) })
 }
 
-// LockedObjects returns the locked objects.
-func (scr *SaveChangesRequest) LockedObjects() obj.Object {
+// LockedObjects returns the order of the returned elements is unspecified.
+func (scr *SaveChangesRequest) LockedObjects() []*ManagedObject {
+	defer runtime.KeepAlive(scr)
 	_r := objc.Send[objc.ID](objref.IDOf(scr), objc.RegisterName("lockedObjects"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *ManagedObject { return ManagedObjectFromID(_id) })
 }
 
 var _ PersistentStoreRequestProvider = (*SaveChangesRequest)(nil)

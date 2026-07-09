@@ -5,6 +5,8 @@
 package corelocation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func monitorAdopt(id objc.ID) *Monitor {
 
 // Description returns the object's -description text.
 func (m *Monitor) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Monitor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Monitor) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Monitor) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
@@ -74,27 +81,34 @@ func NewMonitor() *Monitor {
 
 // AddConditionForMonitoringIdentifier adds condition for monitoring identifier.
 func (m *Monitor) AddConditionForMonitoringIdentifier(condition *Condition, identifier string) {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(condition)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("addConditionForMonitoring:identifier:"), objref.IDOf(condition), purego.NSString(identifier))
 }
 
 // AddConditionForMonitoringIdentifierAssumedState adds condition for monitoring identifier assumed state.
 func (m *Monitor) AddConditionForMonitoringIdentifierAssumedState(condition *Condition, identifier string, state MonitoringState) {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(condition)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("addConditionForMonitoring:identifier:assumedState:"), objref.IDOf(condition), purego.NSString(identifier), state)
 }
 
 // RemoveConditionFromMonitoringWithIdentifier removes condition from monitoring with identifier.
 func (m *Monitor) RemoveConditionFromMonitoringWithIdentifier(identifier string) {
+	defer runtime.KeepAlive(m)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("removeConditionFromMonitoringWithIdentifier:"), purego.NSString(identifier))
 }
 
 // MonitoringRecordForIdentifier wraps the corresponding Objective-C method.
 func (m *Monitor) MonitoringRecordForIdentifier(identifier string) *MonitoringRecord {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("monitoringRecordForIdentifier:"), purego.NSString(identifier))
 	return MonitoringRecordFromID(_r)
 }
 
 // Name returns the name.
 func (m *Monitor) Name() string {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -106,6 +120,7 @@ func (m *Monitor) Name() string {
 //
 // MonitoredIdentifiers returns the collection as a Go slice.
 func (m *Monitor) MonitoredIdentifiers() []string {
+	defer runtime.KeepAlive(m)
 	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("monitoredIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

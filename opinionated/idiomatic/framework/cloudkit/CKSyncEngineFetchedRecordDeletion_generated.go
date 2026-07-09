@@ -5,7 +5,10 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func syncEngineFetchedRecordDeletionAdopt(id objc.ID) *SyncEngineFetchedRecordDe
 
 // Description returns the object's -description text.
 func (sefrd *SyncEngineFetchedRecordDeletion) Description() string {
+	defer runtime.KeepAlive(sefrd)
 	return rt.Description(objref.IDOf(sefrd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sefrd *SyncEngineFetchedRecordDeletion) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sefrd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sefrd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sefrd *SyncEngineFetchedRecordDeletion) IsKind(className string) bool {
+	defer runtime.KeepAlive(sefrd)
 	return rt.IsKind(objref.IDOf(sefrd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sefrd *SyncEngineFetchedRecordDeletion) String() string {
+	defer runtime.KeepAlive(sefrd)
 	return rt.Description(objref.IDOf(sefrd))
 }
 
@@ -74,12 +82,14 @@ func NewSyncEngineFetchedRecordDeletion() *SyncEngineFetchedRecordDeletion {
 
 // RecordID returns the deleted record's unique identifier.
 func (sefrd *SyncEngineFetchedRecordDeletion) RecordID() *RecordID {
+	defer runtime.KeepAlive(sefrd)
 	_r := objc.Send[objc.ID](objref.IDOf(sefrd), objc.RegisterName("recordID"))
 	return RecordIDFromID(_r)
 }
 
 // RecordType returns the record type of the deleted record.
-func (sefrd *SyncEngineFetchedRecordDeletion) RecordType() obj.Object {
+func (sefrd *SyncEngineFetchedRecordDeletion) RecordType() *foundation.String {
+	defer runtime.KeepAlive(sefrd)
 	_r := objc.Send[objc.ID](objref.IDOf(sefrd), objc.RegisterName("recordType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }

@@ -1059,8 +1059,8 @@ func (o *CALayer) SetConstraints(constraints *foundation.NSArray[*CAConstraint])
 }
 
 // Initializes a layer with a remote client ID.
-func CALayerLayerWithRemoteClientId(client_id uint32) *CALayer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCALayer), _cALayerSelLayerWithRemoteClientId, client_id)
+func CALayerLayerWithRemoteClientId(clientId uint32) *CALayer {
+	_ret := objc.Send[objc.ID](objc.ID(_clsCALayer), _cALayerSelLayerWithRemoteClientId, clientId)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

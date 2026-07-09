@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func persistentStoreRequestAdopt(id objc.ID) *PersistentStoreRequest {
 
 // Description returns the object's -description text.
 func (psr *PersistentStoreRequest) Description() string {
+	defer runtime.KeepAlive(psr)
 	return rt.Description(objref.IDOf(psr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (psr *PersistentStoreRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(psr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(psr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (psr *PersistentStoreRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(psr)
 	return rt.IsKind(objref.IDOf(psr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (psr *PersistentStoreRequest) String() string {
+	defer runtime.KeepAlive(psr)
 	return rt.Description(objref.IDOf(psr))
 }
 
@@ -79,12 +86,14 @@ func (psr *PersistentStoreRequest) WithAffectedStores(items ...PersistentStorePr
 //
 // AffectedStores returns the collection as a Go slice.
 func (psr *PersistentStoreRequest) AffectedStores() []*PersistentStore {
+	defer runtime.KeepAlive(psr)
 	_arr := objc.Send[objc.ID](objref.IDOf(psr), objc.RegisterName("affectedStores"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersistentStore { return PersistentStoreFromID(_id) })
 }
 
 // RequestType returns the request type.
 func (psr *PersistentStoreRequest) RequestType() PersistentStoreRequestType {
+	defer runtime.KeepAlive(psr)
 	_r := objc.Send[PersistentStoreRequestType](objref.IDOf(psr), objc.RegisterName("requestType"))
 	return _r
 }

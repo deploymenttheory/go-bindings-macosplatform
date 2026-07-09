@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func speechSynthesisVoiceAdopt(id objc.ID) *SpeechSynthesisVoice {
 
 // Description returns the object's -description text.
 func (ssv *SpeechSynthesisVoice) Description() string {
+	defer runtime.KeepAlive(ssv)
 	return rt.Description(objref.IDOf(ssv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ssv *SpeechSynthesisVoice) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ssv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ssv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ssv *SpeechSynthesisVoice) IsKind(className string) bool {
+	defer runtime.KeepAlive(ssv)
 	return rt.IsKind(objref.IDOf(ssv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ssv *SpeechSynthesisVoice) String() string {
+	defer runtime.KeepAlive(ssv)
 	return rt.Description(objref.IDOf(ssv))
 }
 
@@ -74,6 +81,7 @@ func NewSpeechSynthesisVoice() *SpeechSynthesisVoice {
 
 // Language returns the language.
 func (ssv *SpeechSynthesisVoice) Language() string {
+	defer runtime.KeepAlive(ssv)
 	_r := objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("language"))
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (ssv *SpeechSynthesisVoice) Language() string {
 
 // Identifier returns the identifier.
 func (ssv *SpeechSynthesisVoice) Identifier() string {
+	defer runtime.KeepAlive(ssv)
 	_r := objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -92,6 +101,7 @@ func (ssv *SpeechSynthesisVoice) Identifier() string {
 
 // Name returns the name.
 func (ssv *SpeechSynthesisVoice) Name() string {
+	defer runtime.KeepAlive(ssv)
 	_r := objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -101,24 +111,28 @@ func (ssv *SpeechSynthesisVoice) Name() string {
 
 // Quality returns the quality.
 func (ssv *SpeechSynthesisVoice) Quality() SpeechSynthesisVoiceQuality {
+	defer runtime.KeepAlive(ssv)
 	_r := objc.Send[SpeechSynthesisVoiceQuality](objref.IDOf(ssv), objc.RegisterName("quality"))
 	return _r
 }
 
 // Gender returns the gender.
 func (ssv *SpeechSynthesisVoice) Gender() SpeechSynthesisVoiceGender {
+	defer runtime.KeepAlive(ssv)
 	_r := objc.Send[SpeechSynthesisVoiceGender](objref.IDOf(ssv), objc.RegisterName("gender"))
 	return _r
 }
 
 // AudioFileSettings returns the audio file settings.
-func (ssv *SpeechSynthesisVoice) AudioFileSettings() obj.Object {
+func (ssv *SpeechSynthesisVoice) AudioFileSettings() map[string]obj.Object {
+	defer runtime.KeepAlive(ssv)
 	_r := objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("audioFileSettings"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // VoiceTraits returns the voice traits.
 func (ssv *SpeechSynthesisVoice) VoiceTraits() SpeechSynthesisVoiceTraits {
+	defer runtime.KeepAlive(ssv)
 	_r := objc.Send[SpeechSynthesisVoiceTraits](objref.IDOf(ssv), objc.RegisterName("voiceTraits"))
 	return _r
 }

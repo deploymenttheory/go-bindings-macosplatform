@@ -5,6 +5,7 @@
 package phase
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func assetRegistryAdopt(id objc.ID) *AssetRegistry {
 
 // Description returns the object's -description text.
 func (ar *AssetRegistry) Description() string {
+	defer runtime.KeepAlive(ar)
 	return rt.Description(objref.IDOf(ar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ar *AssetRegistry) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ar)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ar *AssetRegistry) IsKind(className string) bool {
+	defer runtime.KeepAlive(ar)
 	return rt.IsKind(objref.IDOf(ar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ar *AssetRegistry) String() string {
+	defer runtime.KeepAlive(ar)
 	return rt.Description(objref.IDOf(ar))
 }
 
@@ -75,8 +81,10 @@ func NewAssetRegistry() *AssetRegistry {
 	return assetRegistryAdopt(_id)
 }
 
-// RegisterGlobalMetaParameterError registers a global metaparameter with the asset registry.
-func (ar *AssetRegistry) RegisterGlobalMetaParameterError(metaParameterDefinition *MetaParameterDefinition) (result *GlobalMetaParameterAsset, err error) {
+// RegisterGlobalMetaParameter registers a global metaparameter with the asset registry.
+func (ar *AssetRegistry) RegisterGlobalMetaParameter(metaParameterDefinition *MetaParameterDefinition) (result *GlobalMetaParameterAsset, err error) {
+	defer runtime.KeepAlive(ar)
+	defer runtime.KeepAlive(metaParameterDefinition)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("registerGlobalMetaParameter:error:"), objref.IDOf(metaParameterDefinition), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -85,8 +93,10 @@ func (ar *AssetRegistry) RegisterGlobalMetaParameterError(metaParameterDefinitio
 	return GlobalMetaParameterAssetFromID(_r), nil
 }
 
-// RegisterSoundEventAssetWithRootNodeIdentifierError registers the root node of the sound event asset.
-func (ar *AssetRegistry) RegisterSoundEventAssetWithRootNodeIdentifierError(rootNode *SoundEventNodeDefinition, identifier string) (result *SoundEventNodeAsset, err error) {
+// RegisterSoundEventAssetWithRootNodeIdentifier registers the root node of the sound event asset.
+func (ar *AssetRegistry) RegisterSoundEventAssetWithRootNodeIdentifier(rootNode *SoundEventNodeDefinition, identifier string) (result *SoundEventNodeAsset, err error) {
+	defer runtime.KeepAlive(ar)
+	defer runtime.KeepAlive(rootNode)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("registerSoundEventAssetWithRootNode:identifier:error:"), objref.IDOf(rootNode), purego.NSString(identifier), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -95,8 +105,10 @@ func (ar *AssetRegistry) RegisterSoundEventAssetWithRootNodeIdentifierError(root
 	return SoundEventNodeAssetFromID(_r), nil
 }
 
-// RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError loads a sound asset from the argument URL and adds it to the engine’s list of registered assets.
-func (ar *AssetRegistry) RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError(url string, identifier string, assetType AssetType, channelLayout obj.Object, normalizationMode NormalizationMode) (result *SoundAsset, err error) {
+// RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationMode loads a sound asset from the argument URL and adds it to the engine’s list of registered assets.
+func (ar *AssetRegistry) RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationMode(url string, identifier string, assetType AssetType, channelLayout obj.Object, normalizationMode NormalizationMode) (result *SoundAsset, err error) {
+	defer runtime.KeepAlive(ar)
+	defer runtime.KeepAlive(channelLayout)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("registerSoundAssetAtURL:identifier:assetType:channelLayout:normalizationMode:error:"), rt.FileURL(url), purego.NSString(identifier), assetType, objref.IDOf(channelLayout), normalizationMode, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -105,10 +117,12 @@ func (ar *AssetRegistry) RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayout
 	return SoundAssetFromID(_r), nil
 }
 
-// RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError loads a sound asset from memory and adds it to the engine’s list of registered assets.
-func (ar *AssetRegistry) RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError(data obj.Object, identifier string, format obj.Object, normalizationMode NormalizationMode) (result *SoundAsset, err error) {
+// RegisterSoundAssetWithDataIdentifierFormatNormalizationMode loads a sound asset from memory and adds it to the engine’s list of registered assets.
+func (ar *AssetRegistry) RegisterSoundAssetWithDataIdentifierFormatNormalizationMode(data []byte, identifier string, format obj.Object, normalizationMode NormalizationMode) (result *SoundAsset, err error) {
+	defer runtime.KeepAlive(ar)
+	defer runtime.KeepAlive(format)
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("registerSoundAssetWithData:identifier:format:normalizationMode:error:"), objref.IDOf(data), purego.NSString(identifier), objref.IDOf(format), normalizationMode, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("registerSoundAssetWithData:identifier:format:normalizationMode:error:"), rt.BytesToNSData(data), purego.NSString(identifier), objref.IDOf(format), normalizationMode, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -117,17 +131,20 @@ func (ar *AssetRegistry) RegisterSoundAssetWithDataIdentifierFormatNormalization
 
 // UnregisterAssetWithIdentifierCompletion deallocates system memory for a given asset and removes it from the engine’s list of registered assets.
 func (ar *AssetRegistry) UnregisterAssetWithIdentifierCompletion(identifier string, handler func(bool)) {
+	defer runtime.KeepAlive(ar)
 	objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("unregisterAssetWithIdentifier:completion:"), purego.NSString(identifier), objc.NewBlock(func(_ objc.Block, _b0 bool) { handler(_b0) }))
 }
 
 // AssetForIdentifier provides the asset named with the designated identifier.
 func (ar *AssetRegistry) AssetForIdentifier(identifier string) *Asset {
+	defer runtime.KeepAlive(ar)
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("assetForIdentifier:"), purego.NSString(identifier))
 	return AssetFromID(_r)
 }
 
 // GlobalMetaParameters returns the global meta parameters.
-func (ar *AssetRegistry) GlobalMetaParameters() obj.Object {
+func (ar *AssetRegistry) GlobalMetaParameters() map[string]*MetaParameter {
+	defer runtime.KeepAlive(ar)
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("globalMetaParameters"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *MetaParameter { return MetaParameterFromID(_id) })
 }

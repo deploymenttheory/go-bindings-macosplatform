@@ -6,12 +6,15 @@ package networkextension
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,14 +62,15 @@ func (nptp *NEPacketTunnelProvider) WithReasserting(reasserting bool) *NEPacketT
 // StartTunnelWithOptions start the network tunnel.
 //
 // StartTunnelWithOptions blocks until the operation completes or ctx is cancelled.
-func (nptp *NEPacketTunnelProvider) StartTunnelWithOptions(ctx context.Context, options obj.Object) error {
+func (nptp *NEPacketTunnelProvider) StartTunnelWithOptions(ctx context.Context, options map[string]*foundation.Object) error {
+	defer runtime.KeepAlive(nptp)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(nptp), objc.RegisterName("startTunnelWithOptions:completionHandler:"), objref.IDOf(options), _block)
+	objc.Send[objc.ID](objref.IDOf(nptp), objc.RegisterName("startTunnelWithOptions:completionHandler:"), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Object) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -79,6 +83,7 @@ func (nptp *NEPacketTunnelProvider) StartTunnelWithOptions(ctx context.Context, 
 //
 // StopTunnelWithReason blocks until the operation completes or ctx is cancelled.
 func (nptp *NEPacketTunnelProvider) StopTunnelWithReason(ctx context.Context, reason NEProviderStopReason) error {
+	defer runtime.KeepAlive(nptp)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -93,32 +98,40 @@ func (nptp *NEPacketTunnelProvider) StopTunnelWithReason(ctx context.Context, re
 }
 
 // CancelTunnelWithError stop the network tunnel from the Packet Tunnel Provider.
-func (nptp *NEPacketTunnelProvider) CancelTunnelWithError(error_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(nptp), objc.RegisterName("cancelTunnelWithError:"), error_)
+func (nptp *NEPacketTunnelProvider) CancelTunnelWithError(err unsafe.Pointer) {
+	defer runtime.KeepAlive(nptp)
+	objc.Send[objc.ID](objref.IDOf(nptp), objc.RegisterName("cancelTunnelWithError:"), err)
 }
 
 // CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate create a TCP connection through the current tunnel.
-func (nptp *NEPacketTunnelProvider) CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *NWTLSParameters, delegate obj.Object) *NWTCPConnection {
-	_r := objc.Send[objc.ID](objref.IDOf(nptp), objc.RegisterName("createTCPConnectionThroughTunnelToEndpoint:enableTLS:TLSParameters:delegate:"), remoteEndpoint, enableTLS, objref.IDOf(tLSParameters), objref.IDOf(delegate))
+func (nptp *NEPacketTunnelProvider) CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tlsParameters *NWTLSParameters, delegate obj.Object) *NWTCPConnection {
+	defer runtime.KeepAlive(nptp)
+	defer runtime.KeepAlive(tlsParameters)
+	defer runtime.KeepAlive(delegate)
+	_r := objc.Send[objc.ID](objref.IDOf(nptp), objc.RegisterName("createTCPConnectionThroughTunnelToEndpoint:enableTLS:TLSParameters:delegate:"), remoteEndpoint, enableTLS, objref.IDOf(tlsParameters), objref.IDOf(delegate))
 	return NWTCPConnectionFromID(_r)
 }
 
 // CreateUDPSessionThroughTunnelToEndpointFromEndpoint creates a UDP session through the current tunnel.
 func (nptp *NEPacketTunnelProvider) CreateUDPSessionThroughTunnelToEndpointFromEndpoint(remoteEndpoint unsafe.Pointer, localEndpoint *NWHostEndpoint) *NWUDPSession {
+	defer runtime.KeepAlive(nptp)
+	defer runtime.KeepAlive(localEndpoint)
 	_r := objc.Send[objc.ID](objref.IDOf(nptp), objc.RegisterName("createUDPSessionThroughTunnelToEndpoint:fromEndpoint:"), remoteEndpoint, objref.IDOf(localEndpoint))
 	return NWUDPSessionFromID(_r)
 }
 
 // PacketFlow returns an NEPacketFlow object that the tunnel provider implementation should use to receive packets from the network stack and inject packets into the network stack. Every time the tunnel is started the packet flow object is in an initialized state and must be explicitly opened before any packets can be received or injected.
 func (nptp *NEPacketTunnelProvider) PacketFlow() *NEPacketTunnelFlow {
+	defer runtime.KeepAlive(nptp)
 	_r := objc.Send[objc.ID](objref.IDOf(nptp), objc.RegisterName("packetFlow"))
 	return NEPacketTunnelFlowFromID(_r)
 }
 
 // VirtualInterface returns the virtual network interface used to route packets to the packet tunnel provider. For NEPacketTunnelProvider sub-classes, this property will be non-nil when `-[NEPacketTunnelProvider startTunnelWithOptions:completionHandler:]` is called. For NEEthernetTunnelProvider sub-classes, this property will be non-nil when the completion handler passed to `-[NETunnelProvider setTunnelNetworkSettings:completionHandler:]` is executed. To create a connection through the tunnel, pass this interface to `nw_parameters_require_interface`.
-func (nptp *NEPacketTunnelProvider) VirtualInterface() obj.Object {
+func (nptp *NEPacketTunnelProvider) VirtualInterface() *foundation.Object {
+	defer runtime.KeepAlive(nptp)
 	_r := objc.Send[objc.ID](objref.IDOf(nptp), objc.RegisterName("virtualInterface"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 // isNEPacketTunnelProvider marks NEPacketTunnelProvider — and, by embedding promotion, its

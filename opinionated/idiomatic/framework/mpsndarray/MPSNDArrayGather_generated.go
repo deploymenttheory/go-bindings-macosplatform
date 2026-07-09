@@ -5,6 +5,8 @@
 package mpsndarray
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -57,6 +59,7 @@ func (ag *ArrayGather) WithAxis(axis int) *ArrayGather {
 
 // Axis returns the axis along which to apply the gather operation. Defaults to zero.
 func (ag *ArrayGather) Axis() int {
+	defer runtime.KeepAlive(ag)
 	_r := objc.Send[int](objref.IDOf(ag), objc.RegisterName("axis"))
 	return _r
 }

@@ -35,8 +35,8 @@ func MDLURLTextureFromID(id objc.ID) *MDLURLTexture {
 }
 
 // Initializes a texture that loads its texel data from a file at the specified URL.
-func (o *MDLURLTexture) InitWithURLName(uRL *foundation.NSURL, name *foundation.NSString) *MDLURLTexture {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mDLURLTextureSelInitWithURLName, uRL.Ptr(), name.Ptr())
+func (o *MDLURLTexture) InitWithURLName(url *foundation.NSURL, name *foundation.NSString) *MDLURLTexture {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mDLURLTextureSelInitWithURLName, url.Ptr(), name.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -51,6 +51,6 @@ func (o *MDLURLTexture) URL() *foundation.NSURL {
 	return foundation.NSURLFromID(_ret)
 }
 
-func (o *MDLURLTexture) SetURL(uRL *foundation.NSURL) {
-	o.Ptr().Send(_mDLURLTextureSelSetURL, uRL.Ptr())
+func (o *MDLURLTexture) SetURL(url *foundation.NSURL) {
+	o.Ptr().Send(_mDLURLTextureSelSetURL, url.Ptr())
 }

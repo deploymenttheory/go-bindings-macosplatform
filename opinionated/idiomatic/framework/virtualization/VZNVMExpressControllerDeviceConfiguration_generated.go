@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func nVMExpressControllerDeviceConfigurationAdopt(id objc.ID) *NVMExpressControl
 
 // NewNVMExpressControllerDeviceConfigurationWithAttachment creates a new NVM Express controller configuration with the storage device attachment you provide.
 func NewNVMExpressControllerDeviceConfigurationWithAttachment(attachment *StorageDeviceAttachment) *NVMExpressControllerDeviceConfiguration {
+	defer runtime.KeepAlive(attachment)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZNVMExpressControllerDeviceConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttachment:"), objref.IDOf(attachment))
 	return nVMExpressControllerDeviceConfigurationAdopt(_id)

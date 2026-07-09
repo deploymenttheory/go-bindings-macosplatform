@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -107,18 +109,21 @@ func (np *NNPad) WithLabel(label string) *NNPad {
 
 // PaddingSizeBefore returns this property is used for automatically sizing the destination image for the function
 func (np *NNPad) PaddingSizeBefore() mpscore.MPSImageCoordinate {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[mpscore.MPSImageCoordinate](objref.IDOf(np), objc.RegisterName("paddingSizeBefore"))
 	return _r
 }
 
 // PaddingSizeAfter returns this property is used for automatically sizing the destination image for the function
 func (np *NNPad) PaddingSizeAfter() mpscore.MPSImageCoordinate {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[mpscore.MPSImageCoordinate](objref.IDOf(np), objc.RegisterName("paddingSizeAfter"))
 	return _r
 }
 
 // FillValue determines the constant value to apply when using
 func (np *NNPad) FillValue() float32 {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[float32](objref.IDOf(np), objc.RegisterName("fillValue"))
 	return _r
 }

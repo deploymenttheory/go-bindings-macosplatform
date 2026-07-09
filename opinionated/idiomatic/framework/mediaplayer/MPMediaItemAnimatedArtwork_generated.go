@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mediaItemAnimatedArtworkAdopt(id objc.ID) *MediaItemAnimatedArtwork {
 
 // Description returns the object's -description text.
 func (miaa *MediaItemAnimatedArtwork) Description() string {
+	defer runtime.KeepAlive(miaa)
 	return rt.Description(objref.IDOf(miaa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (miaa *MediaItemAnimatedArtwork) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(miaa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(miaa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (miaa *MediaItemAnimatedArtwork) IsKind(className string) bool {
+	defer runtime.KeepAlive(miaa)
 	return rt.IsKind(objref.IDOf(miaa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (miaa *MediaItemAnimatedArtwork) String() string {
+	defer runtime.KeepAlive(miaa)
 	return rt.Description(objref.IDOf(miaa))
 }
 

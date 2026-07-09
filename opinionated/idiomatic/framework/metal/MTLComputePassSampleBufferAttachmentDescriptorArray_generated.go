@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func computePassSampleBufferAttachmentDescriptorArrayAdopt(id objc.ID) *ComputeP
 
 // Description returns the object's -description text.
 func (cpsbada *ComputePassSampleBufferAttachmentDescriptorArray) Description() string {
+	defer runtime.KeepAlive(cpsbada)
 	return rt.Description(objref.IDOf(cpsbada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cpsbada *ComputePassSampleBufferAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cpsbada)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cpsbada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cpsbada *ComputePassSampleBufferAttachmentDescriptorArray) IsKind(className string) bool {
+	defer runtime.KeepAlive(cpsbada)
 	return rt.IsKind(objref.IDOf(cpsbada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cpsbada *ComputePassSampleBufferAttachmentDescriptorArray) String() string {
+	defer runtime.KeepAlive(cpsbada)
 	return rt.Description(objref.IDOf(cpsbada))
 }
 
@@ -74,11 +81,14 @@ func NewComputePassSampleBufferAttachmentDescriptorArray() *ComputePassSampleBuf
 
 // ObjectAtIndexedSubscript returns the descriptor object for the specified sample buffer attachment.
 func (cpsbada *ComputePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *ComputePassSampleBufferAttachmentDescriptor {
+	defer runtime.KeepAlive(cpsbada)
 	_r := objc.Send[objc.ID](objref.IDOf(cpsbada), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return ComputePassSampleBufferAttachmentDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets the descriptor object for the specified sample buffer attachment.
 func (cpsbada *ComputePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *ComputePassSampleBufferAttachmentDescriptor, attachmentIndex int) {
+	defer runtime.KeepAlive(cpsbada)
+	defer runtime.KeepAlive(attachment)
 	objc.Send[objc.ID](objref.IDOf(cpsbada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }

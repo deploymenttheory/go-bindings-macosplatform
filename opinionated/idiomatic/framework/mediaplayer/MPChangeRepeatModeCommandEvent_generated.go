@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewChangeRepeatModeCommandEvent() *ChangeRepeatModeCommandEvent {
 
 // RepeatType returns the desired repeat type to use when fulfilling the request.
 func (crmce *ChangeRepeatModeCommandEvent) RepeatType() RepeatType {
+	defer runtime.KeepAlive(crmce)
 	_r := objc.Send[RepeatType](objref.IDOf(crmce), objc.RegisterName("repeatType"))
 	return _r
 }
 
 // PreservesRepeatMode reports whether the selection should be preserved between playback sessions
 func (crmce *ChangeRepeatModeCommandEvent) PreservesRepeatMode() bool {
+	defer runtime.KeepAlive(crmce)
 	_r := objc.Send[bool](objref.IDOf(crmce), objc.RegisterName("preservesRepeatMode"))
 	return _r
 }

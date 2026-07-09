@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTL4CounterHeapDescriptorAdopt(id objc.ID) *MTL4CounterHeapDescriptor {
 
 // Description returns the object's -description text.
 func (mchd *MTL4CounterHeapDescriptor) Description() string {
+	defer runtime.KeepAlive(mchd)
 	return rt.Description(objref.IDOf(mchd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mchd *MTL4CounterHeapDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mchd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mchd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mchd *MTL4CounterHeapDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(mchd)
 	return rt.IsKind(objref.IDOf(mchd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mchd *MTL4CounterHeapDescriptor) String() string {
+	defer runtime.KeepAlive(mchd)
 	return rt.Description(objref.IDOf(mchd))
 }
 
@@ -86,12 +93,14 @@ func (mchd *MTL4CounterHeapDescriptor) WithCount(count int) *MTL4CounterHeapDesc
 
 // Type returns assigns the type of data that the heap contains.
 func (mchd *MTL4CounterHeapDescriptor) Type() MTL4CounterHeapType {
+	defer runtime.KeepAlive(mchd)
 	_r := objc.Send[MTL4CounterHeapType](objref.IDOf(mchd), objc.RegisterName("type"))
 	return _r
 }
 
 // Count returns assigns the number of entries in the heap. Each entry represents one item in the heap. The size of the individual entries depends on the heap type.
 func (mchd *MTL4CounterHeapDescriptor) Count() int {
+	defer runtime.KeepAlive(mchd)
 	_r := objc.Send[int](objref.IDOf(mchd), objc.RegisterName("count"))
 	return _r
 }

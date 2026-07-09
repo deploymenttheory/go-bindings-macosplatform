@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +50,27 @@ func mTRSetupPayloadAdopt(id objc.ID) *MTRSetupPayload {
 
 // Description returns the object's -description text.
 func (msp *MTRSetupPayload) Description() string {
+	defer runtime.KeepAlive(msp)
 	return rt.Description(objref.IDOf(msp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msp *MTRSetupPayload) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msp *MTRSetupPayload) IsKind(className string) bool {
+	defer runtime.KeepAlive(msp)
 	return rt.IsKind(objref.IDOf(msp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msp *MTRSetupPayload) String() string {
+	defer runtime.KeepAlive(msp)
 	return rt.Description(objref.IDOf(msp))
 }
 
@@ -82,6 +89,8 @@ func NewMTRSetupPayloadWithPayload(payload string) *MTRSetupPayload {
 
 // NewMTRSetupPayloadWithSetupPasscodeDiscriminator initialize an MTRSetupPayload with the given passcode and discriminator. This will pre-set version, product id, and vendor id to 0.
 func NewMTRSetupPayloadWithSetupPasscodeDiscriminator(setupPasscode obj.Object, discriminator obj.Object) *MTRSetupPayload {
+	defer runtime.KeepAlive(setupPasscode)
+	defer runtime.KeepAlive(discriminator)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRSetupPayload")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSetupPasscode:discriminator:"), objref.IDOf(setupPasscode), objref.IDOf(discriminator))
 	return mTRSetupPayloadAdopt(_id)
@@ -96,12 +105,14 @@ func (msp *MTRSetupPayload) WithSubPayloads(items ...*MTRSetupPayload) *MTRSetup
 
 // WithVendorID sets the vendor ID.
 func (msp *MTRSetupPayload) WithVendorID(vendorID obj.Object) *MTRSetupPayload {
+	defer runtime.KeepAlive(vendorID)
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 	return msp
 }
 
 // WithProductID sets the product ID.
 func (msp *MTRSetupPayload) WithProductID(productID obj.Object) *MTRSetupPayload {
+	defer runtime.KeepAlive(productID)
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setProductID:"), objref.IDOf(productID))
 	return msp
 }
@@ -120,6 +131,7 @@ func (msp *MTRSetupPayload) WithDiscoveryCapabilities(discoveryCapabilities MTRD
 
 // WithDiscriminator sets the discriminator.
 func (msp *MTRSetupPayload) WithDiscriminator(discriminator obj.Object) *MTRSetupPayload {
+	defer runtime.KeepAlive(discriminator)
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setDiscriminator:"), objref.IDOf(discriminator))
 	return msp
 }
@@ -132,6 +144,7 @@ func (msp *MTRSetupPayload) WithHasShortDiscriminator(hasShortDiscriminator bool
 
 // WithSetupPasscode sets the setup passcode.
 func (msp *MTRSetupPayload) WithSetupPasscode(setupPasscode obj.Object) *MTRSetupPayload {
+	defer runtime.KeepAlive(setupPasscode)
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setSetupPasscode:"), objref.IDOf(setupPasscode))
 	return msp
 }
@@ -144,34 +157,43 @@ func (msp *MTRSetupPayload) WithSerialNumber(serialNumber string) *MTRSetupPaylo
 
 // WithRendezvousInformation sets the rendezvous information.
 func (msp *MTRSetupPayload) WithRendezvousInformation(rendezvousInformation obj.Object) *MTRSetupPayload {
+	defer runtime.KeepAlive(rendezvousInformation)
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setRendezvousInformation:"), objref.IDOf(rendezvousInformation))
 	return msp
 }
 
 // WithSetUpPINCode sets the set up pin code.
 func (msp *MTRSetupPayload) WithSetUpPINCode(setUpPINCode obj.Object) *MTRSetupPayload {
+	defer runtime.KeepAlive(setUpPINCode)
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setSetUpPINCode:"), objref.IDOf(setUpPINCode))
 	return msp
 }
 
 // VendorElementWithTag returns the Manufacturer-specific extension element with the specified tag, if any. The tag must be in the range 0x80 - 0xFF.
 func (msp *MTRSetupPayload) VendorElementWithTag(tag obj.Object) *MTROptionalQRCodeInfo {
+	defer runtime.KeepAlive(msp)
+	defer runtime.KeepAlive(tag)
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("vendorElementWithTag:"), objref.IDOf(tag))
 	return MTROptionalQRCodeInfoFromID(_r)
 }
 
 // RemoveVendorElementWithTag removes the extension element with the specified tag, if any. The tag must be in the range 0x80 - 0xFF.
 func (msp *MTRSetupPayload) RemoveVendorElementWithTag(tag obj.Object) {
+	defer runtime.KeepAlive(msp)
+	defer runtime.KeepAlive(tag)
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("removeVendorElementWithTag:"), objref.IDOf(tag))
 }
 
 // AddOrReplaceVendorElement adds or replaces a Manufacturer-specific extension element.
 func (msp *MTRSetupPayload) AddOrReplaceVendorElement(element *MTROptionalQRCodeInfo) {
+	defer runtime.KeepAlive(msp)
+	defer runtime.KeepAlive(element)
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("addOrReplaceVendorElement:"), objref.IDOf(element))
 }
 
 // ManualEntryCode creates a Manual Pairing Code from this setup payload. Returns nil if this payload cannot be represented as a valid Manual Pairing Code. The following properties must be populated for a valid Manual Pairing Code: - setupPasscode - discriminator (short or long) In most cases the pairing code will be 11 digits long. If the payload indicates a `commissioningFlow` other than `MTRCommissioningFlowStandard`, a 21 digit code will be produced that includes the vendorID and productID values.
 func (msp *MTRSetupPayload) ManualEntryCode() string {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("manualEntryCode"))
 	if _r == 0 {
 		return ""
@@ -181,6 +203,7 @@ func (msp *MTRSetupPayload) ManualEntryCode() string {
 
 // QrCodeString creates a QR Code payload from this setup payload. Returns nil if this payload cannot be represented as a valid QR Code. The following properties must be populated for a valid QR Code: - setupPasscode - discriminator (must be long) - discoveryCapabilities (not MTRDiscoveryCapabilitiesUnknown) If this object represents a `concatenated` payload, then this property will include the QR Code strings of all the underlying `subPayloads.`
 func (msp *MTRSetupPayload) QrCodeString() string {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("qrCodeString"))
 	if _r == 0 {
 		return ""
@@ -190,6 +213,7 @@ func (msp *MTRSetupPayload) QrCodeString() string {
 
 // IsConcatenated reports whether this object represents a concatenated QR Code payload consisting of two or more underlying payloads. If true, then: - The constituent payloads are exposed in the `subPayloads` property. - Properties other than `subPayloads` and `qrCodeString` (e.g. `vendorID`, `discriminator`) are not relevant to a concatenated payload and should not be used. If accessed, they will act as if the payload was not in fact concatenated, and return the relevant value associated with the first sub-payload. Mutating such a property will discard the additional sub-payloads.
 func (msp *MTRSetupPayload) IsConcatenated() bool {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[bool](objref.IDOf(msp), objc.RegisterName("isConcatenated"))
 	return _r
 }
@@ -198,54 +222,63 @@ func (msp *MTRSetupPayload) IsConcatenated() bool {
 //
 // SubPayloads returns the collection as a Go slice.
 func (msp *MTRSetupPayload) SubPayloads() []*MTRSetupPayload {
+	defer runtime.KeepAlive(msp)
 	_arr := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("subPayloads"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRSetupPayload { return MTRSetupPayloadFromID(_id) })
 }
 
 // VendorID returns the vendor ID.
-func (msp *MTRSetupPayload) VendorID() obj.Object {
+func (msp *MTRSetupPayload) VendorID() *foundation.Number {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("vendorID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ProductID returns the product ID.
-func (msp *MTRSetupPayload) ProductID() obj.Object {
+func (msp *MTRSetupPayload) ProductID() *foundation.Number {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("productID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // CommissioningFlow returns the commissioning flow.
 func (msp *MTRSetupPayload) CommissioningFlow() MTRCommissioningFlow {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[MTRCommissioningFlow](objref.IDOf(msp), objc.RegisterName("commissioningFlow"))
 	return _r
 }
 
 // DiscoveryCapabilities returns the discovery capabilities.
 func (msp *MTRSetupPayload) DiscoveryCapabilities() MTRDiscoveryCapabilities {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[MTRDiscoveryCapabilities](objref.IDOf(msp), objc.RegisterName("discoveryCapabilities"))
 	return _r
 }
 
 // Discriminator returns the discriminator.
-func (msp *MTRSetupPayload) Discriminator() obj.Object {
+func (msp *MTRSetupPayload) Discriminator() *foundation.Number {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("discriminator"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // HasShortDiscriminator reports whether if hasShortDiscriminator is true, the discriminator value contains just the high 4 bits of the full discriminator. For example, if hasShortDiscriminator is true and discriminator is 0xA, then the full discriminator can be anything in the range 0xA00 to 0xAFF.
 func (msp *MTRSetupPayload) HasShortDiscriminator() bool {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[bool](objref.IDOf(msp), objc.RegisterName("hasShortDiscriminator"))
 	return _r
 }
 
 // SetupPasscode returns the setup passcode.
-func (msp *MTRSetupPayload) SetupPasscode() obj.Object {
+func (msp *MTRSetupPayload) SetupPasscode() *foundation.Number {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setupPasscode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // SerialNumber returns the value of the Serial Number extension element, if any.
 func (msp *MTRSetupPayload) SerialNumber() string {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("serialNumber"))
 	if _r == 0 {
 		return ""
@@ -257,12 +290,14 @@ func (msp *MTRSetupPayload) SerialNumber() string {
 //
 // VendorElements returns the collection as a Go slice.
 func (msp *MTRSetupPayload) VendorElements() []*MTROptionalQRCodeInfo {
+	defer runtime.KeepAlive(msp)
 	_arr := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("vendorElements"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTROptionalQRCodeInfo { return MTROptionalQRCodeInfoFromID(_id) })
 }
 
 // QrCodeString2 wraps the corresponding Objective-C method.
 func (msp *MTRSetupPayload) QrCodeString2() (result string, err error) {
+	defer runtime.KeepAlive(msp)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("qrCodeString:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -278,6 +313,7 @@ func (msp *MTRSetupPayload) QrCodeString2() (result string, err error) {
 //
 // GetAllOptionalVendorData returns the collection as a Go slice.
 func (msp *MTRSetupPayload) GetAllOptionalVendorData() (result []*MTROptionalQRCodeInfo, err error) {
+	defer runtime.KeepAlive(msp)
 	var _nsErr uintptr
 	_arr := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("getAllOptionalVendorData:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -287,13 +323,15 @@ func (msp *MTRSetupPayload) GetAllOptionalVendorData() (result []*MTROptionalQRC
 }
 
 // RendezvousInformation returns the rendezvous information.
-func (msp *MTRSetupPayload) RendezvousInformation() obj.Object {
+func (msp *MTRSetupPayload) RendezvousInformation() *foundation.Number {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("rendezvousInformation"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // SetUpPINCode returns the set up pin code.
-func (msp *MTRSetupPayload) SetUpPINCode() obj.Object {
+func (msp *MTRSetupPayload) SetUpPINCode() *foundation.Number {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setUpPINCode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

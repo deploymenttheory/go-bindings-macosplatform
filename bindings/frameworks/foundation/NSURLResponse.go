@@ -37,8 +37,8 @@ func NSURLResponseFromID(id objc.ID) *NSURLResponse {
 }
 
 // @method initWithURL:MIMEType:expectedContentLength:textEncodingName: @abstract Initialize an NSURLResponse with the provided values. @param URL the URL @param MIMEType the MIME content type of the response @param length the expected content length of the associated data @param name the name of the text encoding for the associated data, if applicable, else nil @result The initialized NSURLResponse. @discussion This is the designated initializer for NSURLResponse.
-func (o *NSURLResponse) InitWithURLMIMETypeExpectedContentLengthTextEncodingName(uRL *NSURL, mIMEType *NSString, length int, name *NSString) *NSURLResponse {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLResponseSelInitWithURLMIMETypeExpectedContentLengthTextEncodingName, uRL.Ptr(), mIMEType.Ptr(), length, name.Ptr())
+func (o *NSURLResponse) InitWithURLMIMETypeExpectedContentLengthTextEncodingName(url *NSURL, mimeType *NSString, length int, name *NSString) *NSURLResponse {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLResponseSelInitWithURLMIMETypeExpectedContentLengthTextEncodingName, url.Ptr(), mimeType.Ptr(), length, name.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

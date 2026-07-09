@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func bridgedNetworkDeviceAttachmentAdopt(id objc.ID) *BridgedNetworkDeviceAttach
 
 // NewBridgedNetworkDeviceAttachmentWithInterface creates the attachment from a bridged network interface object.
 func NewBridgedNetworkDeviceAttachmentWithInterface(interface_ *BridgedNetworkInterface) *BridgedNetworkDeviceAttachment {
+	defer runtime.KeepAlive(interface_)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZBridgedNetworkDeviceAttachment")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterface:"), objref.IDOf(interface_))
 	return bridgedNetworkDeviceAttachmentAdopt(_id)
@@ -54,6 +57,7 @@ func NewBridgedNetworkDeviceAttachmentWithInterface(interface_ *BridgedNetworkIn
 
 // Interface returns the interface.
 func (bnda *BridgedNetworkDeviceAttachment) Interface() *BridgedNetworkInterface {
+	defer runtime.KeepAlive(bnda)
 	_r := objc.Send[objc.ID](objref.IDOf(bnda), objc.RegisterName("interface"))
 	return BridgedNetworkInterfaceFromID(_r)
 }

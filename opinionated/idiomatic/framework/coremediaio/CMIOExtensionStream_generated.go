@@ -5,7 +5,10 @@
 package coremediaio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func extensionStreamAdopt(id objc.ID) *ExtensionStream {
 
 // Description returns the object's -description text.
 func (es *ExtensionStream) Description() string {
+	defer runtime.KeepAlive(es)
 	return rt.Description(objref.IDOf(es))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (es *ExtensionStream) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(es)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(es), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (es *ExtensionStream) IsKind(className string) bool {
+	defer runtime.KeepAlive(es)
 	return rt.IsKind(objref.IDOf(es), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (es *ExtensionStream) String() string {
+	defer runtime.KeepAlive(es)
 	return rt.Description(objref.IDOf(es))
 }
 
@@ -74,21 +82,28 @@ func NewExtensionStream() *ExtensionStream {
 
 // NotifyPropertiesChanged notifies clients about stream property changes.
 func (es *ExtensionStream) NotifyPropertiesChanged(propertyStates obj.Object) {
+	defer runtime.KeepAlive(es)
+	defer runtime.KeepAlive(propertyStates)
 	objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("notifyPropertiesChanged:"), objref.IDOf(propertyStates))
 }
 
 // SendSampleBufferDiscontinuityHostTimeInNanoseconds sends a media sample to stream client.
 func (es *ExtensionStream) SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer obj.Object, discontinuity ExtensionStreamDiscontinuityFlags, hostTimeInNanoseconds uint64) {
+	defer runtime.KeepAlive(es)
+	defer runtime.KeepAlive(sampleBuffer)
 	objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("sendSampleBuffer:discontinuity:hostTimeInNanoseconds:"), objref.IDOf(sampleBuffer), discontinuity, hostTimeInNanoseconds)
 }
 
 // NotifyScheduledOutputChanged notifies clients when a particular buffer is output.
 func (es *ExtensionStream) NotifyScheduledOutputChanged(scheduledOutput *ExtensionScheduledOutput) {
+	defer runtime.KeepAlive(es)
+	defer runtime.KeepAlive(scheduledOutput)
 	objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("notifyScheduledOutputChanged:"), objref.IDOf(scheduledOutput))
 }
 
 // LocalizedName returns the localized name of the stream.
 func (es *ExtensionStream) LocalizedName() string {
+	defer runtime.KeepAlive(es)
 	_r := objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
@@ -97,25 +112,29 @@ func (es *ExtensionStream) LocalizedName() string {
 }
 
 // StreamID returns the stream identifier.
-func (es *ExtensionStream) StreamID() obj.Object {
+func (es *ExtensionStream) StreamID() *foundation.UUID {
+	defer runtime.KeepAlive(es)
 	_r := objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("streamID"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // Direction returns the stream direction.
 func (es *ExtensionStream) Direction() ExtensionStreamDirection {
+	defer runtime.KeepAlive(es)
 	_r := objc.Send[ExtensionStreamDirection](objref.IDOf(es), objc.RegisterName("direction"))
 	return _r
 }
 
 // ClockType returns the stream clock type. If the stream was specified with a custom clock configuration, the returned value will be CMIOExtensionStreamClockTypeCustom.
 func (es *ExtensionStream) ClockType() ExtensionStreamClockType {
+	defer runtime.KeepAlive(es)
 	_r := objc.Send[ExtensionStreamClockType](objref.IDOf(es), objc.RegisterName("clockType"))
 	return _r
 }
 
 // CustomClockConfiguration returns custom clock configuration. If the stream was specified using a clockType, the returned value will be nil.
 func (es *ExtensionStream) CustomClockConfiguration() *ExtensionStreamCustomClockConfiguration {
+	defer runtime.KeepAlive(es)
 	_r := objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("customClockConfiguration"))
 	return ExtensionStreamCustomClockConfigurationFromID(_r)
 }
@@ -124,6 +143,7 @@ func (es *ExtensionStream) CustomClockConfiguration() *ExtensionStreamCustomCloc
 //
 // StreamingClients returns the collection as a Go slice.
 func (es *ExtensionStream) StreamingClients() []*ExtensionClient {
+	defer runtime.KeepAlive(es)
 	_arr := objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("streamingClients"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ExtensionClient { return ExtensionClientFromID(_id) })
 }

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRChannelClusterChangeChannelByNumberParamsAdopt(id objc.ID) *MTRChannelCl
 
 // Description returns the object's -description text.
 func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) Description() string {
+	defer runtime.KeepAlive(mccccbnp)
 	return rt.Description(objref.IDOf(mccccbnp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mccccbnp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mccccbnp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mccccbnp)
 	return rt.IsKind(objref.IDOf(mccccbnp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) String() string {
+	defer runtime.KeepAlive(mccccbnp)
 	return rt.Description(objref.IDOf(mccccbnp))
 }
 
@@ -72,48 +80,56 @@ func NewMTRChannelClusterChangeChannelByNumberParams() *MTRChannelClusterChangeC
 
 // WithMajorNumber sets the major number.
 func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) WithMajorNumber(majorNumber obj.Object) *MTRChannelClusterChangeChannelByNumberParams {
+	defer runtime.KeepAlive(majorNumber)
 	objc.Send[objc.ID](objref.IDOf(mccccbnp), objc.RegisterName("setMajorNumber:"), objref.IDOf(majorNumber))
 	return mccccbnp
 }
 
 // WithMinorNumber sets the minor number.
 func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) WithMinorNumber(minorNumber obj.Object) *MTRChannelClusterChangeChannelByNumberParams {
+	defer runtime.KeepAlive(minorNumber)
 	objc.Send[objc.ID](objref.IDOf(mccccbnp), objc.RegisterName("setMinorNumber:"), objref.IDOf(minorNumber))
 	return mccccbnp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterChangeChannelByNumberParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mccccbnp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mccccbnp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRChannelClusterChangeChannelByNumberParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mccccbnp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mccccbnp
 }
 
 // MajorNumber returns the major number.
-func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) MajorNumber() obj.Object {
+func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) MajorNumber() *foundation.Number {
+	defer runtime.KeepAlive(mccccbnp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccccbnp), objc.RegisterName("majorNumber"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MinorNumber returns the minor number.
-func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) MinorNumber() obj.Object {
+func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) MinorNumber() *foundation.Number {
+	defer runtime.KeepAlive(mccccbnp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccccbnp), objc.RegisterName("minorNumber"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) TimedInvokeTimeoutMs() obj.Object {
+func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mccccbnp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccccbnp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) ServerSideProcessingTimeout() obj.Object {
+func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mccccbnp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccccbnp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

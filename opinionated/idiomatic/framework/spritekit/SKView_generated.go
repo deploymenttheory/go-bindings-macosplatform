@@ -5,8 +5,11 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +51,27 @@ func viewAdopt(id objc.ID) *View {
 
 // Description returns the object's -description text.
 func (v_ *View) Description() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (v_ *View) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (v_ *View) IsKind(className string) bool {
+	defer runtime.KeepAlive(v_)
 	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (v_ *View) String() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
@@ -185,6 +193,7 @@ func (v_ *View) WithDisableDepthStencilBuffer(disableDepthStencilBuffer bool) *V
 
 // WithDelegate sets a delegate that allows dynamic control of the view’s render rate.
 func (v_ *View) WithDelegate(delegate obj.Object) *View {
+	defer runtime.KeepAlive(delegate)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	})
@@ -209,6 +218,8 @@ func (v_ *View) WithPreferredFrameRate(preferredFrameRate float32) *View {
 
 // PresentScene presents a scene.
 func (v_ *View) PresentScene(scene *Scene) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(scene)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("presentScene:"), objref.IDOf(scene))
 	})
@@ -217,6 +228,9 @@ func (v_ *View) PresentScene(scene *Scene) {
 
 // PresentSceneTransition transitions from the current scene to a new scene.
 func (v_ *View) PresentSceneTransition(scene *Scene, transition *Transition) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(scene)
+	defer runtime.KeepAlive(transition)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("presentScene:transition:"), objref.IDOf(scene), objref.IDOf(transition))
 	})
@@ -225,6 +239,8 @@ func (v_ *View) PresentSceneTransition(scene *Scene, transition *Transition) {
 
 // TextureFromNode renders the contents of a node tree and returns the rendered image as a texture.
 func (v_ *View) TextureFromNode(node *Node) *Texture {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(node)
 	var _mainthread0 *Texture
 	purego.Main(func() {
 		_mainthread0 = func() *Texture {
@@ -238,6 +254,8 @@ func (v_ *View) TextureFromNode(node *Node) *Texture {
 
 // TextureFromNodeCrop renders a portion of a node’s contents and returns the rendered image as a texture.
 func (v_ *View) TextureFromNodeCrop(node *Node, crop corefoundation.CGRect) *Texture {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(node)
 	var _mainthread0 *Texture
 	purego.Main(func() {
 		_mainthread0 = func() *Texture {
@@ -251,6 +269,8 @@ func (v_ *View) TextureFromNodeCrop(node *Node, crop corefoundation.CGRect) *Tex
 
 // ConvertPointToScene converts a point from view coordinates to scene coordinates.
 func (v_ *View) ConvertPointToScene(point corefoundation.CGPoint, scene *Scene) corefoundation.CGPoint {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(scene)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -264,6 +284,8 @@ func (v_ *View) ConvertPointToScene(point corefoundation.CGPoint, scene *Scene) 
 
 // ConvertPointFromScene converts a point from scene coordinates to view coordinates.
 func (v_ *View) ConvertPointFromScene(point corefoundation.CGPoint, scene *Scene) corefoundation.CGPoint {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(scene)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -277,6 +299,7 @@ func (v_ *View) ConvertPointFromScene(point corefoundation.CGPoint, scene *Scene
 
 // IsPaused reports whether pause the entire view
 func (v_ *View) IsPaused() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -290,6 +313,7 @@ func (v_ *View) IsPaused() bool {
 
 // ShowsFPS reports whether toggles display of performance stats in the view. All default to false.
 func (v_ *View) ShowsFPS() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -303,6 +327,7 @@ func (v_ *View) ShowsFPS() bool {
 
 // ShowsDrawCount wraps the corresponding Objective-C method.
 func (v_ *View) ShowsDrawCount() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -316,6 +341,7 @@ func (v_ *View) ShowsDrawCount() bool {
 
 // ShowsNodeCount wraps the corresponding Objective-C method.
 func (v_ *View) ShowsNodeCount() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -329,6 +355,7 @@ func (v_ *View) ShowsNodeCount() bool {
 
 // ShowsQuadCount wraps the corresponding Objective-C method.
 func (v_ *View) ShowsQuadCount() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -342,6 +369,7 @@ func (v_ *View) ShowsQuadCount() bool {
 
 // ShowsPhysics wraps the corresponding Objective-C method.
 func (v_ *View) ShowsPhysics() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -355,6 +383,7 @@ func (v_ *View) ShowsPhysics() bool {
 
 // ShowsFields wraps the corresponding Objective-C method.
 func (v_ *View) ShowsFields() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -368,6 +397,7 @@ func (v_ *View) ShowsFields() bool {
 
 // IsAsynchronous reports whether toggles whether the view updates is rendered asynchronously or aligned with Core Animation updates. Defaults to true.
 func (v_ *View) IsAsynchronous() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -381,6 +411,7 @@ func (v_ *View) IsAsynchronous() bool {
 
 // AllowsTransparency reports whether toggles whether the view allows transparent rendering. This allows content under the view to show through if a non-opaque backgroundColor is set on the scene. Defaults to false.
 func (v_ *View) AllowsTransparency() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -394,6 +425,7 @@ func (v_ *View) AllowsTransparency() bool {
 
 // IgnoresSiblingOrder reports whether ignores sibling and traversal order to sort the rendered contents of a scene into the most efficient batching possible. This will require zPosition to be used in the scenes to properly guarantee elements are in front or behind each other. This defaults to false, meaning that sibling order overrides efficiency heuristics in the rendering of the scenes in the view. Setting this to true for a complex scene may substantially increase performance, but care must be taken as only zPosition determines render order before the efficiency heuristics are used.
 func (v_ *View) IgnoresSiblingOrder() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -407,6 +439,7 @@ func (v_ *View) IgnoresSiblingOrder() bool {
 
 // ShouldCullNonVisibleNodes wraps the corresponding Objective-C method.
 func (v_ *View) ShouldCullNonVisibleNodes() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -420,6 +453,7 @@ func (v_ *View) ShouldCullNonVisibleNodes() bool {
 
 // PreferredFramesPerSecond returns the preferred frames per second.
 func (v_ *View) PreferredFramesPerSecond() int {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -433,6 +467,7 @@ func (v_ *View) PreferredFramesPerSecond() int {
 
 // DisableDepthStencilBuffer wraps the corresponding Objective-C method.
 func (v_ *View) DisableDepthStencilBuffer() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -445,12 +480,13 @@ func (v_ *View) DisableDepthStencilBuffer() bool {
 }
 
 // Delegate returns optional view delegate, see SKViewDelegate.
-func (v_ *View) Delegate() obj.Object {
-	var _mainthread0 obj.Object
+func (v_ *View) Delegate() *foundation.Object {
+	defer runtime.KeepAlive(v_)
+	var _mainthread0 *foundation.Object
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.Object {
 			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("delegate"))
-			return obj.Wrap(_r)
+			return foundation.ObjectFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -459,6 +495,7 @@ func (v_ *View) Delegate() obj.Object {
 
 // FrameInterval returns the frame interval.
 func (v_ *View) FrameInterval() int {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -472,6 +509,7 @@ func (v_ *View) FrameInterval() int {
 
 // PreferredFrameRate returns the preferred frame rate.
 func (v_ *View) PreferredFrameRate() float32 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -485,6 +523,7 @@ func (v_ *View) PreferredFrameRate() float32 {
 
 // Scene returns the currently presented scene, otherwise nil. If in a transition, the 'incoming' scene is returned.
 func (v_ *View) Scene() *Scene {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *Scene
 	purego.Main(func() {
 		_mainthread0 = func() *Scene {

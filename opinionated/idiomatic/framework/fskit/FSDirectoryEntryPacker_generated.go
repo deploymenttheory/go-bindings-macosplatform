@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func directoryEntryPackerAdopt(id objc.ID) *DirectoryEntryPacker {
 
 // Description returns the object's -description text.
 func (dep *DirectoryEntryPacker) Description() string {
+	defer runtime.KeepAlive(dep)
 	return rt.Description(objref.IDOf(dep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dep *DirectoryEntryPacker) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dep)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dep *DirectoryEntryPacker) IsKind(className string) bool {
+	defer runtime.KeepAlive(dep)
 	return rt.IsKind(objref.IDOf(dep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dep *DirectoryEntryPacker) String() string {
+	defer runtime.KeepAlive(dep)
 	return rt.Description(objref.IDOf(dep))
 }
 
@@ -74,6 +81,9 @@ func NewDirectoryEntryPacker() *DirectoryEntryPacker {
 
 // PackEntryWithNameItemTypeItemIDNextCookieAttributes provides a directory entry during enumeration.
 func (dep *DirectoryEntryPacker) PackEntryWithNameItemTypeItemIDNextCookieAttributes(name *FileName, itemType ItemType, itemID ItemID, nextCookie uint64, attributes *ItemAttributes) bool {
+	defer runtime.KeepAlive(dep)
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(attributes)
 	_r := objc.Send[bool](objref.IDOf(dep), objc.RegisterName("packEntryWithName:itemType:itemID:nextCookie:attributes:"), objref.IDOf(name), itemType, itemID, nextCookie, objref.IDOf(attributes))
 	return _r
 }

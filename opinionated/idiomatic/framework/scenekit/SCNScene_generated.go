@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func sceneAdopt(id objc.ID) *Scene {
 
 // Description returns the object's -description text.
 func (s *Scene) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Scene) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Scene) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Scene) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -93,6 +100,7 @@ func (s *Scene) WithFogDensityExponent(fogDensityExponent float64) *Scene {
 
 // WithFogColor sets the color of the fog effect to be rendered with the scene. Animatable.
 func (s *Scene) WithFogColor(fogColor obj.Object) *Scene {
+	defer runtime.KeepAlive(fogColor)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFogColor:"), objref.IDOf(fogColor))
 	return s
 }
@@ -129,105 +137,126 @@ func (s *Scene) WithPaused(paused bool) *Scene {
 
 // AttributeForKey returns the scene attribute for the specified key.
 func (s *Scene) AttributeForKey(key string) obj.Object {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("attributeForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // SetAttributeForKey sets a scene attribute for the specified key.
 func (s *Scene) SetAttributeForKey(attribute obj.Object, key string) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(attribute)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAttribute:forKey:"), objref.IDOf(attribute), purego.NSString(key))
 }
 
 // RootNode specifies the root node of the node hierarchy. Note that we have only one root node, whereas some file formats might have many nodes at the root of their hierarchies. The root node(s) of the imported files will therefore be children of the SCNScene's root node.
 func (s *Scene) RootNode() *Node {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("rootNode"))
 	return NodeFromID(_r)
 }
 
 // PhysicsWorld specifies the physics world of the receiver. Every scene automatically creates a physics world object to simulate physics on nodes in the scene. You use this property to access the scene’s global physics properties, such as gravity. To add physics to a particular node, see physicsBody.
 func (s *Scene) PhysicsWorld() *PhysicsWorld {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("physicsWorld"))
 	return PhysicsWorldFromID(_r)
 }
 
 // Background specifies the background of the receiver. The background is rendered before the rest of the scene. The background can be rendered as a skybox by setting a cube map as described in SCNMaterialProperty.h Colors are supported starting in macOS 10.12 and iOS 10. Prior to that you can use SCNView.backgroundColor. MDLSkyCubeTexture is supported starting in macOS 10.13 and iOS 11.
 func (s *Scene) Background() *MaterialProperty {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("background"))
 	return MaterialPropertyFromID(_r)
 }
 
 // LightingEnvironment specifies the receiver's environment for image-based lighting (IBL). The environment can be - a cube map (as described in SCNMaterialProperty.h) - an instance of `MDLSkyCubeTexture` (supported since macOS 10.13 and iOS 11) - an object returned by `+[SCNMaterialProperty precomputedLightingEnvironmentContentsWithURL:error:]` or `+[SCNMaterialProperty precomputedLightingEnvironmentContentsWithData:error:]`
 func (s *Scene) LightingEnvironment() *MaterialProperty {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("lightingEnvironment"))
 	return MaterialPropertyFromID(_r)
 }
 
 // FogStartDistance specifies the receiver's fog start distance. Animatable. Defaults to 0.
 func (s *Scene) FogStartDistance() float64 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("fogStartDistance"))
 	return _r
 }
 
 // FogEndDistance specifies the receiver's fog end distance. Animatable. Defaults to 0.
 func (s *Scene) FogEndDistance() float64 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("fogEndDistance"))
 	return _r
 }
 
 // FogDensityExponent specifies the receiver's fog power exponent. Animatable. Defaults to 1. Controls the attenuation between the start and end fog distances. 0 means a constant fog, 1 a linear fog and 2 a quadratic fog, but any positive value will work.
 func (s *Scene) FogDensityExponent() float64 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("fogDensityExponent"))
 	return _r
 }
 
 // FogColor specifies the receiver's fog color (NSColor or CGColorRef). Animatable. Defaults to white. The initial value is a NSColor.
 func (s *Scene) FogColor() obj.Object {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("fogColor"))
 	return obj.Wrap(_r)
 }
 
 // WantsScreenSpaceReflection reports whether determines if the scene use screen space reflection. Defaults to false.
 func (s *Scene) WantsScreenSpaceReflection() bool {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("wantsScreenSpaceReflection"))
 	return _r
 }
 
 // ScreenSpaceReflectionSampleCount determines the sample count of the screen space reflection. Defaults to 64.
 func (s *Scene) ScreenSpaceReflectionSampleCount() int {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("screenSpaceReflectionSampleCount"))
 	return _r
 }
 
 // ScreenSpaceReflectionMaximumDistance determines the maximum distance in world units. Defaults to 1000.
 func (s *Scene) ScreenSpaceReflectionMaximumDistance() float64 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("screenSpaceReflectionMaximumDistance"))
 	return _r
 }
 
 // ScreenSpaceReflectionStride returns raytracing step size in pixel. The lower the better, the higher the faster. Defaults to 8.
 func (s *Scene) ScreenSpaceReflectionStride() float64 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("screenSpaceReflectionStride"))
 	return _r
 }
 
 // IsPaused reports whether controls whether or not the scene is paused. Defaults to false. Pausing a scene will pause animations, actions, particles and physics.
 func (s *Scene) IsPaused() bool {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isPaused"))
 	return _r
 }
 
 // AddParticleSystemWithTransform attaches a particle system to the scene, using the specified transform.
 func (s *Scene) AddParticleSystemWithTransform(system *ParticleSystem, transform quartzcore.CATransform3D) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(system)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("addParticleSystem:withTransform:"), objref.IDOf(system), transform)
 }
 
 // RemoveAllParticleSystems removes any particle systems directly attached to the scene.
 func (s *Scene) RemoveAllParticleSystems() {
+	defer runtime.KeepAlive(s)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("removeAllParticleSystems"))
 }
 
 // RemoveParticleSystem removes a particle system attached to the scene.
 func (s *Scene) RemoveParticleSystem(system *ParticleSystem) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(system)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("removeParticleSystem:"), objref.IDOf(system))
 }
 
@@ -235,6 +264,7 @@ func (s *Scene) RemoveParticleSystem(system *ParticleSystem) {
 //
 // ParticleSystems returns the collection as a Go slice.
 func (s *Scene) ParticleSystems() []*ParticleSystem {
+	defer runtime.KeepAlive(s)
 	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("particleSystems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ParticleSystem { return ParticleSystemFromID(_id) })
 }

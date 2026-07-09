@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func documentControllerAdopt(id objc.ID) *DocumentController {
 
 // Description returns the object's -description text.
 func (dc *DocumentController) Description() string {
+	defer runtime.KeepAlive(dc)
 	return rt.Description(objref.IDOf(dc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dc *DocumentController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dc *DocumentController) IsKind(className string) bool {
+	defer runtime.KeepAlive(dc)
 	return rt.IsKind(objref.IDOf(dc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dc *DocumentController) String() string {
+	defer runtime.KeepAlive(dc)
 	return rt.Description(objref.IDOf(dc))
 }
 
@@ -84,6 +90,7 @@ func NewDocumentController() *DocumentController {
 
 // NewDocumentControllerWithCoder this method initializes a new NSDocumentController from the coder.
 func NewDocumentControllerWithCoder(coder obj.Object) *DocumentController {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *DocumentController
 	purego.Main(func() {
 		_mainthread0 = func() *DocumentController {
@@ -105,6 +112,7 @@ func (dc *DocumentController) WithAutosavingDelay(autosavingDelay float64) *Docu
 
 // DocumentForURL returns, for a given URL, the open document whose file or file package is located by the URL, or nil if there is no such open document.
 func (dc *DocumentController) DocumentForURL(url string) *Document {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 *Document
 	purego.Main(func() {
 		_mainthread0 = func() *Document {
@@ -118,6 +126,8 @@ func (dc *DocumentController) DocumentForURL(url string) *Document {
 
 // DocumentForWindow returns the document object whose window controller owns a specified window.
 func (dc *DocumentController) DocumentForWindow(window *Window) *Document {
+	defer runtime.KeepAlive(dc)
+	defer runtime.KeepAlive(window)
 	var _mainthread0 *Document
 	purego.Main(func() {
 		_mainthread0 = func() *Document {
@@ -131,6 +141,8 @@ func (dc *DocumentController) DocumentForWindow(window *Window) *Document {
 
 // AddDocument adds the given document to the list of open documents.
 func (dc *DocumentController) AddDocument(document *Document) {
+	defer runtime.KeepAlive(dc)
+	defer runtime.KeepAlive(document)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("addDocument:"), objref.IDOf(document))
 	})
@@ -139,6 +151,8 @@ func (dc *DocumentController) AddDocument(document *Document) {
 
 // RemoveDocument removes the given document from the list of open documents.
 func (dc *DocumentController) RemoveDocument(document *Document) {
+	defer runtime.KeepAlive(dc)
+	defer runtime.KeepAlive(document)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("removeDocument:"), objref.IDOf(document))
 	})
@@ -147,14 +161,17 @@ func (dc *DocumentController) RemoveDocument(document *Document) {
 
 // NewDocument an action method called by the New menu command, this method creates a new NSDocument object and adds it to the list of such objects managed by the document controller.
 func (dc *DocumentController) NewDocument(sender obj.Object) {
+	defer runtime.KeepAlive(dc)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("newDocument:"), objref.IDOf(sender))
 	})
 
 }
 
-// OpenUntitledDocumentAndDisplayError creates a new untitled document, presents its user interface if displayDocument is true, and returns the document if successful.
-func (dc *DocumentController) OpenUntitledDocumentAndDisplayError(displayDocument bool) (result *Document, err error) {
+// OpenUntitledDocumentAndDisplay creates a new untitled document, presents its user interface if displayDocument is true, and returns the document if successful.
+func (dc *DocumentController) OpenUntitledDocumentAndDisplay(displayDocument bool) (result *Document, err error) {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 *Document
 	var _mainthread1 error
 	purego.Main(func() {
@@ -173,6 +190,7 @@ func (dc *DocumentController) OpenUntitledDocumentAndDisplayError(displayDocumen
 
 // MakeUntitledDocumentOfTypeError instantiates a new untitled document of the specified type and returns it if successful.
 func (dc *DocumentController) MakeUntitledDocumentOfTypeError(typeName string) (result *Document, err error) {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 *Document
 	var _mainthread1 error
 	purego.Main(func() {
@@ -191,6 +209,8 @@ func (dc *DocumentController) MakeUntitledDocumentOfTypeError(typeName string) (
 
 // OpenDocument an action method called by the Open menu command, it runs the modal Open panel and, based on the selected filenames, creates one or more NSDocument objects from the contents of the files.
 func (dc *DocumentController) OpenDocument(sender obj.Object) {
+	defer runtime.KeepAlive(dc)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("openDocument:"), objref.IDOf(sender))
 	})
@@ -200,12 +220,13 @@ func (dc *DocumentController) OpenDocument(sender obj.Object) {
 // URLsFromRunningOpenPanel returns an array of URLs that correspond to the selected files in a running Open dialog.
 //
 // URLsFromRunningOpenPanel returns the collection as a Go slice.
-func (dc *DocumentController) URLsFromRunningOpenPanel() []obj.Object {
-	var _mainthread0 []obj.Object
+func (dc *DocumentController) URLsFromRunningOpenPanel() []string {
+	defer runtime.KeepAlive(dc)
+	var _mainthread0 []string
 	purego.Main(func() {
-		_mainthread0 = func() []obj.Object {
+		_mainthread0 = func() []string {
 			_arr := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("URLsFromRunningOpenPanel"))
-			return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return rt.URLString(_id) })
 		}()
 	})
 	return _mainthread0
@@ -213,6 +234,8 @@ func (dc *DocumentController) URLsFromRunningOpenPanel() []obj.Object {
 
 // RunModalOpenPanelForTypes presents a modal Open dialog and limits selection to specific file types.
 func (dc *DocumentController) RunModalOpenPanelForTypes(openPanel *OpenPanel, types []string) int {
+	defer runtime.KeepAlive(dc)
+	defer runtime.KeepAlive(openPanel)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -228,6 +251,7 @@ func (dc *DocumentController) RunModalOpenPanelForTypes(openPanel *OpenPanel, ty
 //
 // BeginOpenPanel blocks until the operation completes or ctx is cancelled.
 func (dc *DocumentController) BeginOpenPanel(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(dc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -250,6 +274,8 @@ func (dc *DocumentController) BeginOpenPanel(ctx context.Context) (result obj.Ob
 
 // BeginOpenPanelForTypesCompletionHandler presents a nonmodal Open dialog that displays files you can open from a list of UTIs.
 func (dc *DocumentController) BeginOpenPanelForTypesCompletionHandler(openPanel *OpenPanel, inTypes []string, completionHandler func(int)) {
+	defer runtime.KeepAlive(dc)
+	defer runtime.KeepAlive(openPanel)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("beginOpenPanel:forTypes:completionHandler:"), objref.IDOf(openPanel), purego.SliceToNSArray(inTypes, func(_v string) objc.ID { return purego.NSString(_v) }), objc.NewBlock(func(_ objc.Block, _b0 int) { completionHandler(_b0) }))
 	})
@@ -258,6 +284,7 @@ func (dc *DocumentController) BeginOpenPanelForTypesCompletionHandler(openPanel 
 
 // MakeDocumentWithContentsOfURLOfTypeError instantiates a document located by a URL, of a specified type, and returns it if successful.
 func (dc *DocumentController) MakeDocumentWithContentsOfURLOfTypeError(url string, typeName string) (result *Document, err error) {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 *Document
 	var _mainthread1 error
 	purego.Main(func() {
@@ -274,8 +301,9 @@ func (dc *DocumentController) MakeDocumentWithContentsOfURLOfTypeError(url strin
 
 }
 
-// MakeDocumentForURLWithContentsOfURLOfTypeError instantiates a document located by a URL, of a specified type, but by reading the contents for the document from another URL, and returns it if successful.
-func (dc *DocumentController) MakeDocumentForURLWithContentsOfURLOfTypeError(urlOrNil string, contentsURL string, typeName string) (result *Document, err error) {
+// MakeDocumentForURLWithContentsOfURLOfType instantiates a document located by a URL, of a specified type, but by reading the contents for the document from another URL, and returns it if successful.
+func (dc *DocumentController) MakeDocumentForURLWithContentsOfURLOfType(urlOrNil string, contentsURL string, typeName string) (result *Document, err error) {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 *Document
 	var _mainthread1 error
 	purego.Main(func() {
@@ -294,14 +322,17 @@ func (dc *DocumentController) MakeDocumentForURLWithContentsOfURLOfTypeError(url
 
 // SaveAllDocuments as the action method called by the Save All command, saves all open documents of the application that need to be saved.
 func (dc *DocumentController) SaveAllDocuments(sender obj.Object) {
+	defer runtime.KeepAlive(dc)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("saveAllDocuments:"), objref.IDOf(sender))
 	})
 
 }
 
-// DuplicateDocumentWithContentsOfURLCopyingDisplayNameError creates a new document by reading the contents for the document from another URL, presents its user interface, and returns the document if successful.
-func (dc *DocumentController) DuplicateDocumentWithContentsOfURLCopyingDisplayNameError(url string, duplicateByCopying bool, displayNameOrNil string) (result *Document, err error) {
+// DuplicateDocumentWithContentsOfURLCopyingDisplayName creates a new document by reading the contents for the document from another URL, presents its user interface, and returns the document if successful.
+func (dc *DocumentController) DuplicateDocumentWithContentsOfURLCopyingDisplayName(url string, duplicateByCopying bool, displayNameOrNil string) (result *Document, err error) {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 *Document
 	var _mainthread1 error
 	purego.Main(func() {
@@ -320,6 +351,7 @@ func (dc *DocumentController) DuplicateDocumentWithContentsOfURLCopyingDisplayNa
 
 // StandardShareMenuItem returns a menu item that your app uses for sharing the current document.
 func (dc *DocumentController) StandardShareMenuItem() *MenuItem {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 *MenuItem
 	purego.Main(func() {
 		_mainthread0 = func() *MenuItem {
@@ -332,11 +364,12 @@ func (dc *DocumentController) StandardShareMenuItem() *MenuItem {
 }
 
 // PresentError presents an error alert to the user as a modal panel.
-func (dc *DocumentController) PresentError(error_ unsafe.Pointer) bool {
+func (dc *DocumentController) PresentError(err unsafe.Pointer) bool {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
-			_r := objc.Send[bool](objref.IDOf(dc), objc.RegisterName("presentError:"), error_)
+			_r := objc.Send[bool](objref.IDOf(dc), objc.RegisterName("presentError:"), err)
 			return _r
 		}()
 	})
@@ -346,6 +379,8 @@ func (dc *DocumentController) PresentError(error_ unsafe.Pointer) bool {
 
 // ClearRecentDocuments empties the recent documents list for the application.
 func (dc *DocumentController) ClearRecentDocuments(sender obj.Object) {
+	defer runtime.KeepAlive(dc)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("clearRecentDocuments:"), objref.IDOf(sender))
 	})
@@ -354,6 +389,8 @@ func (dc *DocumentController) ClearRecentDocuments(sender obj.Object) {
 
 // NoteNewRecentDocument adds or replaces an Open Recent menu item corresponding to the document.
 func (dc *DocumentController) NoteNewRecentDocument(document *Document) {
+	defer runtime.KeepAlive(dc)
+	defer runtime.KeepAlive(document)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("noteNewRecentDocument:"), objref.IDOf(document))
 	})
@@ -362,14 +399,16 @@ func (dc *DocumentController) NoteNewRecentDocument(document *Document) {
 
 // NoteNewRecentDocumentURL adds or replaces an Open Recent menu item corresponding to the data located by the URL.
 func (dc *DocumentController) NoteNewRecentDocumentURL(url string) {
+	defer runtime.KeepAlive(dc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("noteNewRecentDocumentURL:"), rt.FileURL(url))
 	})
 
 }
 
-// TypeForContentsOfURLError returns, for a specified URL, the document type identifier to use when opening the document at that location, if successful.
-func (dc *DocumentController) TypeForContentsOfURLError(url string) (result string, err error) {
+// TypeForContentsOfURL returns, for a specified URL, the document type identifier to use when opening the document at that location, if successful.
+func (dc *DocumentController) TypeForContentsOfURL(url string) (result string, err error) {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 string
 	var _mainthread1 error
 	purego.Main(func() {
@@ -391,6 +430,7 @@ func (dc *DocumentController) TypeForContentsOfURLError(url string) (result stri
 
 // DisplayNameForType returns the descriptive name for the specified document type, which is used in the File Format pop-up menu of the Save As dialog.
 func (dc *DocumentController) DisplayNameForType(typeName string) string {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -409,6 +449,7 @@ func (dc *DocumentController) DisplayNameForType(typeName string) string {
 //
 // Documents returns the collection as a Go slice.
 func (dc *DocumentController) Documents() []*Document {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 []*Document
 	purego.Main(func() {
 		_mainthread0 = func() []*Document {
@@ -421,6 +462,7 @@ func (dc *DocumentController) Documents() []*Document {
 
 // CurrentDocument returns the current document.
 func (dc *DocumentController) CurrentDocument() *Document {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 *Document
 	purego.Main(func() {
 		_mainthread0 = func() *Document {
@@ -434,6 +476,7 @@ func (dc *DocumentController) CurrentDocument() *Document {
 
 // CurrentDirectory returns the current directory.
 func (dc *DocumentController) CurrentDirectory() string {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -450,6 +493,7 @@ func (dc *DocumentController) CurrentDirectory() string {
 
 // AutosavingDelay returns the autosaving delay.
 func (dc *DocumentController) AutosavingDelay() float64 {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -463,6 +507,7 @@ func (dc *DocumentController) AutosavingDelay() float64 {
 
 // HasEditedDocuments reports whether the object has edited documents.
 func (dc *DocumentController) HasEditedDocuments() bool {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -476,6 +521,7 @@ func (dc *DocumentController) HasEditedDocuments() bool {
 
 // AllowsAutomaticShareMenu wraps the corresponding Objective-C method.
 func (dc *DocumentController) AllowsAutomaticShareMenu() bool {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -489,6 +535,7 @@ func (dc *DocumentController) AllowsAutomaticShareMenu() bool {
 
 // MaximumRecentDocumentCount returns the maximum recent document count.
 func (dc *DocumentController) MaximumRecentDocumentCount() int {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -503,12 +550,13 @@ func (dc *DocumentController) MaximumRecentDocumentCount() int {
 // RecentDocumentURLs returns the recent document ur ls.
 //
 // RecentDocumentURLs returns the collection as a Go slice.
-func (dc *DocumentController) RecentDocumentURLs() []obj.Object {
-	var _mainthread0 []obj.Object
+func (dc *DocumentController) RecentDocumentURLs() []string {
+	defer runtime.KeepAlive(dc)
+	var _mainthread0 []string
 	purego.Main(func() {
-		_mainthread0 = func() []obj.Object {
+		_mainthread0 = func() []string {
 			_arr := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("recentDocumentURLs"))
-			return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return rt.URLString(_id) })
 		}()
 	})
 	return _mainthread0
@@ -516,6 +564,7 @@ func (dc *DocumentController) RecentDocumentURLs() []obj.Object {
 
 // DefaultType returns the default type.
 func (dc *DocumentController) DefaultType() string {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -534,6 +583,7 @@ func (dc *DocumentController) DefaultType() string {
 //
 // DocumentClassNames returns the collection as a Go slice.
 func (dc *DocumentController) DocumentClassNames() []string {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 []string
 	purego.Main(func() {
 		_mainthread0 = func() []string {
@@ -546,6 +596,7 @@ func (dc *DocumentController) DocumentClassNames() []string {
 
 // OpenDocumentWithContentsOfURLDisplayError opens a document located by the given URL presents its user interface if requested, and returns the document if successful.
 func (dc *DocumentController) OpenDocumentWithContentsOfURLDisplayError(url string, displayDocument bool) (result obj.Object, err error) {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 obj.Object
 	var _mainthread1 error
 	purego.Main(func() {
@@ -564,6 +615,7 @@ func (dc *DocumentController) OpenDocumentWithContentsOfURLDisplayError(url stri
 
 // ReopenDocumentForURLWithContentsOfURL reopens an autosaved document located by a URL, by reading the contents for the document from another URL, presents its user interface, and returns true if successful.
 func (dc *DocumentController) ReopenDocumentForURLWithContentsOfURL(url string, contentsURL string) error {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 error
 	purego.Main(func() {
 		_mainthread0 = func() error {
@@ -581,6 +633,7 @@ func (dc *DocumentController) ReopenDocumentForURLWithContentsOfURL(url string, 
 
 // FileExtensionsFromType returns the allowable file extensions for the given document type.
 func (dc *DocumentController) FileExtensionsFromType(typeName string) obj.Object {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -594,6 +647,7 @@ func (dc *DocumentController) FileExtensionsFromType(typeName string) obj.Object
 
 // TypeFromFileExtension returns the document type associated with files having extension fileExtensionOrHFSFileType.
 func (dc *DocumentController) TypeFromFileExtension(fileNameExtensionOrHFSFileType string) string {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -610,6 +664,7 @@ func (dc *DocumentController) TypeFromFileExtension(fileNameExtensionOrHFSFileTy
 
 // DocumentForFileName returns the document object for the file in which the document data is stored.
 func (dc *DocumentController) DocumentForFileName(fileName string) obj.Object {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -623,6 +678,7 @@ func (dc *DocumentController) DocumentForFileName(fileName string) obj.Object {
 
 // FileNamesFromRunningOpenPanel returns a selection of files chosen by the user in the Open panel.
 func (dc *DocumentController) FileNamesFromRunningOpenPanel() obj.Object {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -636,6 +692,7 @@ func (dc *DocumentController) FileNamesFromRunningOpenPanel() obj.Object {
 
 // MakeDocumentWithContentsOfFileOfType creates and returns a document object of a given document type from the contents of a file.
 func (dc *DocumentController) MakeDocumentWithContentsOfFileOfType(fileName string, type_ string) obj.Object {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -649,6 +706,7 @@ func (dc *DocumentController) MakeDocumentWithContentsOfFileOfType(fileName stri
 
 // MakeDocumentWithContentsOfURLOfType creates and returns a document object for the given document type from the contents of a given URL.
 func (dc *DocumentController) MakeDocumentWithContentsOfURLOfType(url string, type_ string) obj.Object {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -662,6 +720,7 @@ func (dc *DocumentController) MakeDocumentWithContentsOfURLOfType(url string, ty
 
 // MakeUntitledDocumentOfType creates and returns a document object for document type.
 func (dc *DocumentController) MakeUntitledDocumentOfType(type_ string) obj.Object {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -675,6 +734,7 @@ func (dc *DocumentController) MakeUntitledDocumentOfType(type_ string) obj.Objec
 
 // OpenDocumentWithContentsOfFileDisplay returns a document object created from the contents of a given file and optionally displays it.
 func (dc *DocumentController) OpenDocumentWithContentsOfFileDisplay(fileName string, display bool) obj.Object {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -688,6 +748,7 @@ func (dc *DocumentController) OpenDocumentWithContentsOfFileDisplay(fileName str
 
 // OpenDocumentWithContentsOfURLDisplay returns a document object created from the contents of a given URL and optionally displays it.
 func (dc *DocumentController) OpenDocumentWithContentsOfURLDisplay(url string, display bool) obj.Object {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -701,6 +762,7 @@ func (dc *DocumentController) OpenDocumentWithContentsOfURLDisplay(url string, d
 
 // OpenUntitledDocumentOfTypeDisplay returns a document object instantiated from the subclass of the given document type and optionally displays it.
 func (dc *DocumentController) OpenUntitledDocumentOfTypeDisplay(type_ string, display bool) obj.Object {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -714,6 +776,7 @@ func (dc *DocumentController) OpenUntitledDocumentOfTypeDisplay(type_ string, di
 
 // SetShouldCreateUI sets whether the window controllers of a document should be created when the document is created.
 func (dc *DocumentController) SetShouldCreateUI(flag bool) {
+	defer runtime.KeepAlive(dc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setShouldCreateUI:"), flag)
 	})
@@ -722,6 +785,7 @@ func (dc *DocumentController) SetShouldCreateUI(flag bool) {
 
 // ShouldCreateUI reports whether returns a Boolean value that indicates whether the window controllers of a document should be created when the document is created.
 func (dc *DocumentController) ShouldCreateUI() bool {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

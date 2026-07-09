@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func audioCompressedBufferAdopt(id objc.ID) *AudioCompressedBuffer {
 
 // NewAudioCompressedBufferWithFormatPacketCapacityMaximumPacketSize creates a buffer that contains audio data in a compressed state.
 func NewAudioCompressedBufferWithFormatPacketCapacityMaximumPacketSize(format *AudioFormat, packetCapacity uint32, maximumPacketSize int) *AudioCompressedBuffer {
+	defer runtime.KeepAlive(format)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioCompressedBuffer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:packetCapacity:maximumPacketSize:"), objref.IDOf(format), packetCapacity, maximumPacketSize)
 	return audioCompressedBufferAdopt(_id)
@@ -54,6 +57,7 @@ func NewAudioCompressedBufferWithFormatPacketCapacityMaximumPacketSize(format *A
 
 // NewAudioCompressedBufferWithFormatPacketCapacity creates a buffer that contains constant bytes per packet of audio data in a compressed state.
 func NewAudioCompressedBufferWithFormatPacketCapacity(format *AudioFormat, packetCapacity uint32) *AudioCompressedBuffer {
+	defer runtime.KeepAlive(format)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioCompressedBuffer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:packetCapacity:"), objref.IDOf(format), packetCapacity)
 	return audioCompressedBufferAdopt(_id)
@@ -73,30 +77,35 @@ func (acb *AudioCompressedBuffer) WithByteLength(byteLength uint32) *AudioCompre
 
 // PacketCapacity returns the number of compressed packets the buffer can contain.
 func (acb *AudioCompressedBuffer) PacketCapacity() uint32 {
+	defer runtime.KeepAlive(acb)
 	_r := objc.Send[uint32](objref.IDOf(acb), objc.RegisterName("packetCapacity"))
 	return _r
 }
 
 // PacketCount returns the current number of compressed packets in the buffer. You may modify the packetCount as part of an operation that modifies its contents. The packetCount must be less than or equal to the packetCapacity.
 func (acb *AudioCompressedBuffer) PacketCount() uint32 {
+	defer runtime.KeepAlive(acb)
 	_r := objc.Send[uint32](objref.IDOf(acb), objc.RegisterName("packetCount"))
 	return _r
 }
 
 // MaximumPacketSize returns the maximum size of a compressed packet in bytes.
 func (acb *AudioCompressedBuffer) MaximumPacketSize() int {
+	defer runtime.KeepAlive(acb)
 	_r := objc.Send[int](objref.IDOf(acb), objc.RegisterName("maximumPacketSize"))
 	return _r
 }
 
 // ByteCapacity returns the buffer's capacity in bytes
 func (acb *AudioCompressedBuffer) ByteCapacity() uint32 {
+	defer runtime.KeepAlive(acb)
 	_r := objc.Send[uint32](objref.IDOf(acb), objc.RegisterName("byteCapacity"))
 	return _r
 }
 
 // ByteLength returns the current number of valid bytes in the buffer. Can be changed as part of an operation that modifies the contents.
 func (acb *AudioCompressedBuffer) ByteLength() uint32 {
+	defer runtime.KeepAlive(acb)
 	_r := objc.Send[uint32](objref.IDOf(acb), objc.RegisterName("byteLength"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package localauthentication
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,33 +49,40 @@ func environmentMechanismAdopt(id objc.ID) *EnvironmentMechanism {
 
 // Description returns the object's -description text.
 func (em *EnvironmentMechanism) Description() string {
+	defer runtime.KeepAlive(em)
 	return rt.Description(objref.IDOf(em))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (em *EnvironmentMechanism) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(em)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(em), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (em *EnvironmentMechanism) IsKind(className string) bool {
+	defer runtime.KeepAlive(em)
 	return rt.IsKind(objref.IDOf(em), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (em *EnvironmentMechanism) String() string {
+	defer runtime.KeepAlive(em)
 	return rt.Description(objref.IDOf(em))
 }
 
 // IsUsable reports whether the mechanism is available for use, i.e. whether the relevant preflight call of
 func (em *EnvironmentMechanism) IsUsable() bool {
+	defer runtime.KeepAlive(em)
 	_r := objc.Send[bool](objref.IDOf(em), objc.RegisterName("isUsable"))
 	return _r
 }
 
 // LocalizedName returns the localized name of the authentication mechanism, e.g. "Touch ID", "Face ID" etc.
 func (em *EnvironmentMechanism) LocalizedName() string {
+	defer runtime.KeepAlive(em)
 	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
@@ -83,6 +92,7 @@ func (em *EnvironmentMechanism) LocalizedName() string {
 
 // IconSystemName returns name of the SF Symbol representing this authentication mechanism.
 func (em *EnvironmentMechanism) IconSystemName() string {
+	defer runtime.KeepAlive(em)
 	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("iconSystemName"))
 	if _r == 0 {
 		return ""

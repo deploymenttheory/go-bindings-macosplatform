@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,33 +49,41 @@ func mTRContentLauncherClusterContentSearchStructAdopt(id objc.ID) *MTRContentLa
 
 // Description returns the object's -description text.
 func (mclccss *MTRContentLauncherClusterContentSearchStruct) Description() string {
+	defer runtime.KeepAlive(mclccss)
 	return rt.Description(objref.IDOf(mclccss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mclccss *MTRContentLauncherClusterContentSearchStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mclccss)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mclccss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mclccss *MTRContentLauncherClusterContentSearchStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mclccss)
 	return rt.IsKind(objref.IDOf(mclccss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mclccss *MTRContentLauncherClusterContentSearchStruct) String() string {
+	defer runtime.KeepAlive(mclccss)
 	return rt.Description(objref.IDOf(mclccss))
 }
 
 // ParameterList returns the parameter list.
 func (mclccss *MTRContentLauncherClusterContentSearchStruct) ParameterList() obj.Object {
+	defer runtime.KeepAlive(mclccss)
 	_r := objc.Send[objc.ID](objref.IDOf(mclccss), objc.RegisterName("parameterList"))
 	return obj.Wrap(_r)
 }
 
 // SetParameterList wraps the corresponding Objective-C method.
 func (mclccss *MTRContentLauncherClusterContentSearchStruct) SetParameterList(parameterList obj.Object) {
+	defer runtime.KeepAlive(mclccss)
+	defer runtime.KeepAlive(parameterList)
 	objc.Send[objc.ID](objref.IDOf(mclccss), objc.RegisterName("setParameterList:"), objref.IDOf(parameterList))
 }
 

@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -167,24 +169,28 @@ func (nlc *NNLocalCorrelation) WithLabel(label string) *NNLocalCorrelation {
 
 // WindowInX specifies a symmetric window around 0 for offsetting the secondary source in the x dimension. The default value for windowInX is 0.
 func (nlc *NNLocalCorrelation) WindowInX() int {
+	defer runtime.KeepAlive(nlc)
 	_r := objc.Send[int](objref.IDOf(nlc), objc.RegisterName("windowInX"))
 	return _r
 }
 
 // WindowInY specifies a symmetric window around 0 for offsetting the secondary source in the y dimension. The default value for windowInY is 0.
 func (nlc *NNLocalCorrelation) WindowInY() int {
+	defer runtime.KeepAlive(nlc)
 	_r := objc.Send[int](objref.IDOf(nlc), objc.RegisterName("windowInY"))
 	return _r
 }
 
 // StrideInX specifies the stride for the offset in the x dimension. strideInX must be > 0. The default value for strideInX is 1.
 func (nlc *NNLocalCorrelation) StrideInX() int {
+	defer runtime.KeepAlive(nlc)
 	_r := objc.Send[int](objref.IDOf(nlc), objc.RegisterName("strideInX"))
 	return _r
 }
 
 // StrideInY specifies the stride for the offset in the y dimension. strideInY must be > 0. The default value for strideInY is 1.
 func (nlc *NNLocalCorrelation) StrideInY() int {
+	defer runtime.KeepAlive(nlc)
 	_r := objc.Send[int](objref.IDOf(nlc), objc.RegisterName("strideInY"))
 	return _r
 }

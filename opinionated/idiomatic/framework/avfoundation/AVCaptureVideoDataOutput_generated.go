@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -54,8 +57,8 @@ func NewCaptureVideoDataOutput() *CaptureVideoDataOutput {
 }
 
 // WithVideoSettings sets a dictionary that contains the compression settings for the output.
-func (cvdo *CaptureVideoDataOutput) WithVideoSettings(videoSettings obj.Object) *CaptureVideoDataOutput {
-	objc.Send[objc.ID](objref.IDOf(cvdo), objc.RegisterName("setVideoSettings:"), objref.IDOf(videoSettings))
+func (cvdo *CaptureVideoDataOutput) WithVideoSettings(videoSettings map[string]obj.Object) *CaptureVideoDataOutput {
+	objc.Send[objc.ID](objref.IDOf(cvdo), objc.RegisterName("setVideoSettings:"), rt.MapToDict(videoSettings, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return cvdo
 }
 
@@ -78,49 +81,65 @@ func (cvdo *CaptureVideoDataOutput) WithDeferredStartEnabled(deferredStartEnable
 }
 
 // RecommendedVideoSettingsForAssetWriterWithOutputFileType specifies the recommended settings for use with an AVAssetWriterInput.
-func (cvdo *CaptureVideoDataOutput) RecommendedVideoSettingsForAssetWriterWithOutputFileType(outputFileType obj.Object) obj.Object {
+func (cvdo *CaptureVideoDataOutput) RecommendedVideoSettingsForAssetWriterWithOutputFileType(outputFileType obj.Object) map[string]obj.Object {
+	defer runtime.KeepAlive(cvdo)
+	defer runtime.KeepAlive(outputFileType)
 	_r := objc.Send[objc.ID](objref.IDOf(cvdo), objc.RegisterName("recommendedVideoSettingsForAssetWriterWithOutputFileType:"), objref.IDOf(outputFileType))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AvailableVideoCodecTypesForAssetWriterWithOutputFileType the video codecs that the output supports for writing video to the output file.
-func (cvdo *CaptureVideoDataOutput) AvailableVideoCodecTypesForAssetWriterWithOutputFileType(outputFileType obj.Object) []obj.Object {
+func (cvdo *CaptureVideoDataOutput) AvailableVideoCodecTypesForAssetWriterWithOutputFileType(outputFileType obj.Object) []*foundation.String {
+	defer runtime.KeepAlive(cvdo)
+	defer runtime.KeepAlive(outputFileType)
 	_r := objc.Send[objc.ID](objref.IDOf(cvdo), objc.RegisterName("availableVideoCodecTypesForAssetWriterWithOutputFileType:"), objref.IDOf(outputFileType))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
 }
 
 // RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileType returns a video settings dictionary appropriate for capturing video to a file with the specified codec and type.
-func (cvdo *CaptureVideoDataOutput) RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileType(videoCodecType obj.Object, outputFileType obj.Object) obj.Object {
+func (cvdo *CaptureVideoDataOutput) RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileType(videoCodecType obj.Object, outputFileType obj.Object) map[string]obj.Object {
+	defer runtime.KeepAlive(cvdo)
+	defer runtime.KeepAlive(videoCodecType)
+	defer runtime.KeepAlive(outputFileType)
 	_r := objc.Send[objc.ID](objref.IDOf(cvdo), objc.RegisterName("recommendedVideoSettingsForVideoCodecType:assetWriterOutputFileType:"), objref.IDOf(videoCodecType), objref.IDOf(outputFileType))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileTypeOutputFileURL returns a dictionary of recommended output settings for writing the specified code, file type, and output URL.
-func (cvdo *CaptureVideoDataOutput) RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileTypeOutputFileURL(videoCodecType obj.Object, outputFileType obj.Object, outputFileURL string) obj.Object {
+func (cvdo *CaptureVideoDataOutput) RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileTypeOutputFileURL(videoCodecType obj.Object, outputFileType obj.Object, outputFileURL string) map[string]obj.Object {
+	defer runtime.KeepAlive(cvdo)
+	defer runtime.KeepAlive(videoCodecType)
+	defer runtime.KeepAlive(outputFileType)
 	_r := objc.Send[objc.ID](objref.IDOf(cvdo), objc.RegisterName("recommendedVideoSettingsForVideoCodecType:assetWriterOutputFileType:outputFileURL:"), objref.IDOf(videoCodecType), objref.IDOf(outputFileType), rt.FileURL(outputFileURL))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // RecommendedMovieMetadataForVideoCodecTypeAssetWriterOutputFileType recommends movie-level metadata for a particular video codec type and output file type, to be used with an asset writer input.
 func (cvdo *CaptureVideoDataOutput) RecommendedMovieMetadataForVideoCodecTypeAssetWriterOutputFileType(videoCodecType obj.Object, outputFileType obj.Object) []*MetadataItem {
+	defer runtime.KeepAlive(cvdo)
+	defer runtime.KeepAlive(videoCodecType)
+	defer runtime.KeepAlive(outputFileType)
 	_r := objc.Send[objc.ID](objref.IDOf(cvdo), objc.RegisterName("recommendedMovieMetadataForVideoCodecType:assetWriterOutputFileType:"), objref.IDOf(videoCodecType), objref.IDOf(outputFileType))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
 // SampleBufferCallbackQueue returns the dispatch queue on which all sample buffer delegate methods will be called. The value of this property is a dispatch_queue_t. The queue is set using the setSampleBufferDelegate:queue: method.
-func (cvdo *CaptureVideoDataOutput) SampleBufferCallbackQueue() obj.Object {
+func (cvdo *CaptureVideoDataOutput) SampleBufferCallbackQueue() *foundation.Object {
+	defer runtime.KeepAlive(cvdo)
 	_r := objc.Send[objc.ID](objref.IDOf(cvdo), objc.RegisterName("sampleBufferCallbackQueue"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 // VideoSettings specifies the settings used to decode or re-encode video before it is output by the receiver. See AVVideoSettings.h for more information on how to construct a video settings dictionary. To receive samples in their device native format, set this property to an empty dictionary (i.e. [NSDictionary dictionary]). To receive samples in a default uncompressed format, set this property to nil. Note that after this property is set to nil, subsequent querying of this property will yield a non-nil dictionary reflecting the settings used by the AVCaptureSession's current sessionPreset. On iOS versions prior to iOS 16.0, the only supported key is kCVPixelBufferPixelFormatTypeKey. Use -availableVideoCVPixelFormatTypes for the list of supported pixel formats. For apps linked on or after iOS 16.0, kCVPixelBufferPixelFormatTypeKey, kCVPixelBufferWidthKey, and kCVPixelBufferHeightKey are supported. The width and height must match the videoOrientation specified on the output's AVCaptureConnection or an NSInvalidArgumentException is thrown. The aspect ratio of width and height must match the aspect ratio of the source's activeFormat (corrected for the connection's videoOrientation) or an NSInvalidArgumentException is thrown. If width or height exceeds the source's activeFormat's width or height, an NSInvalidArgumentException is thrown. Changing width and height when deliversPreviewSizedOutputBuffers is set to YES is not supported and throws an NSInvalidArgumentException.
-func (cvdo *CaptureVideoDataOutput) VideoSettings() obj.Object {
+func (cvdo *CaptureVideoDataOutput) VideoSettings() map[string]obj.Object {
+	defer runtime.KeepAlive(cvdo)
 	_r := objc.Send[objc.ID](objref.IDOf(cvdo), objc.RegisterName("videoSettings"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // RecommendedMediaTimeScaleForAssetWriter indicates the recommended media timescale for the video track. - Returns: The recommended media timescale based on the active capture session's inputs. It is never less than 600. It may or may not be a multiple of 600.
 func (cvdo *CaptureVideoDataOutput) RecommendedMediaTimeScaleForAssetWriter() int32 {
+	defer runtime.KeepAlive(cvdo)
 	_r := objc.Send[int32](objref.IDOf(cvdo), objc.RegisterName("recommendedMediaTimeScaleForAssetWriter"))
 	return _r
 }
@@ -129,6 +148,7 @@ func (cvdo *CaptureVideoDataOutput) RecommendedMediaTimeScaleForAssetWriter() in
 //
 // AvailableVideoCVPixelFormatTypes returns the collection as a Go slice.
 func (cvdo *CaptureVideoDataOutput) AvailableVideoCVPixelFormatTypes() []obj.Object {
+	defer runtime.KeepAlive(cvdo)
 	_arr := objc.Send[objc.ID](objref.IDOf(cvdo), objc.RegisterName("availableVideoCVPixelFormatTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -137,18 +157,21 @@ func (cvdo *CaptureVideoDataOutput) AvailableVideoCVPixelFormatTypes() []obj.Obj
 //
 // AvailableVideoCodecTypes returns the collection as a Go slice.
 func (cvdo *CaptureVideoDataOutput) AvailableVideoCodecTypes() []obj.Object {
+	defer runtime.KeepAlive(cvdo)
 	_arr := objc.Send[objc.ID](objref.IDOf(cvdo), objc.RegisterName("availableVideoCodecTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AlwaysDiscardsLateVideoFrames reports whether the receiver should always discard any video frame that is not processed before the next frame is captured. When the value of this property is true, the receiver will immediately discard frames that are captured while the dispatch queue handling existing frames is blocked in the captureOutput:didOutputSampleBuffer:fromConnection: delegate method. When the value of this property is false, delegates will be allowed more time to process old frames before new frames are discarded, but application memory usage may increase significantly as a result. The default value is true.
 func (cvdo *CaptureVideoDataOutput) AlwaysDiscardsLateVideoFrames() bool {
+	defer runtime.KeepAlive(cvdo)
 	_r := objc.Send[bool](objref.IDOf(cvdo), objc.RegisterName("alwaysDiscardsLateVideoFrames"))
 	return _r
 }
 
 // PreservesDynamicHDRMetadata reports whether the receiver should preserve dynamic HDR metadata as an attachment on the output sample buffer's underlying pixel buffer. Set this property to `true` if you wish to use “AVCaptureVideoDataOutput“ with “AVAssetWriter“ to record HDR movies. You must also set “kVTCompressionPropertyKey_PreserveDynamicHDRMetadata“ to `true` in the compression settings you pass to your “AVAssetWriterInput“. These compression settings are represented under the “AVVideoCompressionPropertiesKey“ sub-dictionary of your top-level AVVideoSettings (see <doc://com.apple.documentation/documentation/avfoundation/video-settings>). When you set this key to `true`, performance improves, as the encoder is able to skip HDR metadata calculation for every frame. The default value is `false`.
 func (cvdo *CaptureVideoDataOutput) PreservesDynamicHDRMetadata() bool {
+	defer runtime.KeepAlive(cvdo)
 	_r := objc.Send[bool](objref.IDOf(cvdo), objc.RegisterName("preservesDynamicHDRMetadata"))
 	return _r
 }

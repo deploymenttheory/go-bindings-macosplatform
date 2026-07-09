@@ -6,6 +6,7 @@ package devicecheck
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func deviceAdopt(id objc.ID) *Device {
 
 // Description returns the object's -description text.
 func (d *Device) Description() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (d *Device) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (d *Device) IsKind(className string) bool {
+	defer runtime.KeepAlive(d)
 	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (d *Device) String() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
@@ -79,6 +85,7 @@ func NewDevice() *Device {
 //
 // GenerateToken blocks until the operation completes or ctx is cancelled.
 func (d *Device) GenerateToken(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(d)
 	type _result struct {
 		val obj.Object
 		err error
@@ -102,6 +109,7 @@ func (d *Device) GenerateToken(ctx context.Context) (result obj.Object, err erro
 
 // IsSupported reports whether the device supports the DeviceCheck API.
 func (d *Device) IsSupported() bool {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isSupported"))
 	return _r
 }

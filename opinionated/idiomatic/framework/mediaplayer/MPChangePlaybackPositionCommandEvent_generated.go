@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewChangePlaybackPositionCommandEvent() *ChangePlaybackPositionCommandEvent
 
 // PositionTime returns the position time.
 func (cppce *ChangePlaybackPositionCommandEvent) PositionTime() float64 {
+	defer runtime.KeepAlive(cppce)
 	_r := objc.Send[float64](objref.IDOf(cppce), objc.RegisterName("positionTime"))
 	return _r
 }

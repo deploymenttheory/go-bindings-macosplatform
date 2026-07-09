@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -52,13 +54,15 @@ func NewVirtioNetworkDeviceConfiguration() *VirtioNetworkDeviceConfiguration {
 }
 
 // WithMACAddress sets the media access control (MAC) address to assign to the network device.
-func (vndc *VirtioNetworkDeviceConfiguration) WithMACAddress(mACAddress *MACAddress) *VirtioNetworkDeviceConfiguration {
-	objc.Send[objc.ID](objref.IDOf(vndc), objc.RegisterName("setMACAddress:"), objref.IDOf(mACAddress))
+func (vndc *VirtioNetworkDeviceConfiguration) WithMACAddress(macAddress *MACAddress) *VirtioNetworkDeviceConfiguration {
+	defer runtime.KeepAlive(macAddress)
+	objc.Send[objc.ID](objref.IDOf(vndc), objc.RegisterName("setMACAddress:"), objref.IDOf(macAddress))
 	return vndc
 }
 
 // WithAttachment sets the object that defines how the virtual network device communicates with the host system.
 func (vndc *VirtioNetworkDeviceConfiguration) WithAttachment(attachment NetworkDeviceAttachmentProvider) *VirtioNetworkDeviceConfiguration {
+	defer runtime.KeepAlive(attachment)
 	objc.Send[objc.ID](objref.IDOf(vndc), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 	return vndc
 }

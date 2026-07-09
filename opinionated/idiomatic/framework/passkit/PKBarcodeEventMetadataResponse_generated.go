@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,40 +47,46 @@ func barcodeEventMetadataResponseAdopt(id objc.ID) *BarcodeEventMetadataResponse
 
 // Description returns the object's -description text.
 func (bemr *BarcodeEventMetadataResponse) Description() string {
+	defer runtime.KeepAlive(bemr)
 	return rt.Description(objref.IDOf(bemr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bemr *BarcodeEventMetadataResponse) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bemr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bemr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bemr *BarcodeEventMetadataResponse) IsKind(className string) bool {
+	defer runtime.KeepAlive(bemr)
 	return rt.IsKind(objref.IDOf(bemr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bemr *BarcodeEventMetadataResponse) String() string {
+	defer runtime.KeepAlive(bemr)
 	return rt.Description(objref.IDOf(bemr))
 }
 
 // NewBarcodeEventMetadataResponseWithPaymentInformation creates a new BarcodeEventMetadataResponse.
-func NewBarcodeEventMetadataResponseWithPaymentInformation(paymentInformation obj.Object) *BarcodeEventMetadataResponse {
+func NewBarcodeEventMetadataResponseWithPaymentInformation(paymentInformation []byte) *BarcodeEventMetadataResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKBarcodeEventMetadataResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentInformation:"), objref.IDOf(paymentInformation))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentInformation:"), rt.BytesToNSData(paymentInformation))
 	return barcodeEventMetadataResponseAdopt(_id)
 }
 
 // WithPaymentInformation sets the payment information.
-func (bemr *BarcodeEventMetadataResponse) WithPaymentInformation(paymentInformation obj.Object) *BarcodeEventMetadataResponse {
-	objc.Send[objc.ID](objref.IDOf(bemr), objc.RegisterName("setPaymentInformation:"), objref.IDOf(paymentInformation))
+func (bemr *BarcodeEventMetadataResponse) WithPaymentInformation(paymentInformation []byte) *BarcodeEventMetadataResponse {
+	objc.Send[objc.ID](objref.IDOf(bemr), objc.RegisterName("setPaymentInformation:"), rt.BytesToNSData(paymentInformation))
 	return bemr
 }
 
 // PaymentInformation returns the payment information.
-func (bemr *BarcodeEventMetadataResponse) PaymentInformation() obj.Object {
+func (bemr *BarcodeEventMetadataResponse) PaymentInformation() []byte {
+	defer runtime.KeepAlive(bemr)
 	_r := objc.Send[objc.ID](objref.IDOf(bemr), objc.RegisterName("paymentInformation"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func assetResourceLoadingDataRequestAdopt(id objc.ID) *AssetResourceLoadingDataR
 
 // Description returns the object's -description text.
 func (arldr *AssetResourceLoadingDataRequest) Description() string {
+	defer runtime.KeepAlive(arldr)
 	return rt.Description(objref.IDOf(arldr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (arldr *AssetResourceLoadingDataRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(arldr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(arldr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (arldr *AssetResourceLoadingDataRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(arldr)
 	return rt.IsKind(objref.IDOf(arldr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (arldr *AssetResourceLoadingDataRequest) String() string {
+	defer runtime.KeepAlive(arldr)
 	return rt.Description(objref.IDOf(arldr))
 }
 
@@ -73,30 +80,35 @@ func NewAssetResourceLoadingDataRequest() *AssetResourceLoadingDataRequest {
 }
 
 // RespondWithData provides data to the loading request.
-func (arldr *AssetResourceLoadingDataRequest) RespondWithData(data obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(arldr), objc.RegisterName("respondWithData:"), objref.IDOf(data))
+func (arldr *AssetResourceLoadingDataRequest) RespondWithData(data []byte) {
+	defer runtime.KeepAlive(arldr)
+	objc.Send[objc.ID](objref.IDOf(arldr), objc.RegisterName("respondWithData:"), rt.BytesToNSData(data))
 }
 
 // RequestedOffset returns the position within the resource of the first byte requested.
 func (arldr *AssetResourceLoadingDataRequest) RequestedOffset() int64 {
+	defer runtime.KeepAlive(arldr)
 	_r := objc.Send[int64](objref.IDOf(arldr), objc.RegisterName("requestedOffset"))
 	return _r
 }
 
 // RequestedLength returns the length of the data requested. Note that requestsAllDataToEndOfResource will be set to YES when the entire remaining length of the resource is being requested from requestedOffset to the end of the resource. This can occur even when the content length has not yet been reported by you via a prior finished loading request. When requestsAllDataToEndOfResource has a value of YES, you should disregard the value of requestedLength and incrementally provide as much data starting from the requestedOffset as the resource contains, until you have provided all of the available data successfully and invoked -finishLoading, until you have encountered a failure and invoked -finishLoadingWithError:, or until you have received -resourceLoader:didCancelLoadingRequest: for the AVAssetResourceLoadingRequest from which the AVAssetResourceLoadingDataRequest was obtained. When requestsAllDataToEndOfResource is YES and the content length has not yet been provided by you via a prior finished loading request, the value of requestedLength is set to NSIntegerMax. Starting in macOS 10.11 and iOS 9.0, in 32-bit applications requestedLength is also set to NSIntegerMax when all of the remaining resource data is being requested and the known length of the remaining data exceeds NSIntegerMax.
 func (arldr *AssetResourceLoadingDataRequest) RequestedLength() int {
+	defer runtime.KeepAlive(arldr)
 	_r := objc.Send[int](objref.IDOf(arldr), objc.RegisterName("requestedLength"))
 	return _r
 }
 
 // RequestsAllDataToEndOfResource reports whether specifies that the entire remaining length of the resource from requestedOffset to the end of the resource is being requested. When requestsAllDataToEndOfResource has a value of true, you should disregard the value of requestedLength and incrementally provide as much data starting from the requestedOffset as the resource contains, until you have provided all of the available data successfully and invoked -finishLoading, until you have encountered a failure and invoked -finishLoadingWithError:, or until you have received -resourceLoader:didCancelLoadingRequest: for the AVAssetResourceLoadingRequest from which the AVAssetResourceLoadingDataRequest was obtained.
 func (arldr *AssetResourceLoadingDataRequest) RequestsAllDataToEndOfResource() bool {
+	defer runtime.KeepAlive(arldr)
 	_r := objc.Send[bool](objref.IDOf(arldr), objc.RegisterName("requestsAllDataToEndOfResource"))
 	return _r
 }
 
 // CurrentOffset returns the position within the resource of the next byte within the resource following the bytes that have already been provided via prior invocations of -respondWithData.
 func (arldr *AssetResourceLoadingDataRequest) CurrentOffset() int64 {
+	defer runtime.KeepAlive(arldr)
 	_r := objc.Send[int64](objref.IDOf(arldr), objc.RegisterName("currentOffset"))
 	return _r
 }

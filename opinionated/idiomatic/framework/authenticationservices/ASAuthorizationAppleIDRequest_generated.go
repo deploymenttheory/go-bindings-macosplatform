@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -79,12 +81,14 @@ func (aair *AuthorizationAppleIDRequest) WithNonce(nonce string) *AuthorizationA
 
 // WithRequestedOperation sets the OpenID authentication operation you want this request to perform.
 func (aair *AuthorizationAppleIDRequest) WithRequestedOperation(requestedOperation obj.Object) *AuthorizationAppleIDRequest {
+	defer runtime.KeepAlive(requestedOperation)
 	objc.Send[objc.ID](objref.IDOf(aair), objc.RegisterName("setRequestedOperation:"), objref.IDOf(requestedOperation))
 	return aair
 }
 
 // User returns the user.
 func (aair *AuthorizationAppleIDRequest) User() string {
+	defer runtime.KeepAlive(aair)
 	_r := objc.Send[objc.ID](objref.IDOf(aair), objc.RegisterName("user"))
 	if _r == 0 {
 		return ""

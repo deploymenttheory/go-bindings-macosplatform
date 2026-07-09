@@ -5,6 +5,8 @@
 package coremidi
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func cIDeviceManagerAdopt(id objc.ID) *CIDeviceManager {
 
 // Description returns the object's -description text.
 func (cdm *CIDeviceManager) Description() string {
+	defer runtime.KeepAlive(cdm)
 	return rt.Description(objref.IDOf(cdm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cdm *CIDeviceManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cdm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cdm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cdm *CIDeviceManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(cdm)
 	return rt.IsKind(objref.IDOf(cdm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cdm *CIDeviceManager) String() string {
+	defer runtime.KeepAlive(cdm)
 	return rt.Description(objref.IDOf(cdm))
 }
 
@@ -74,6 +81,7 @@ func NewCIDeviceManager() *CIDeviceManager {
 //
 // DiscoveredCIDevices returns the collection as a Go slice.
 func (cdm *CIDeviceManager) DiscoveredCIDevices() []*CIDevice {
+	defer runtime.KeepAlive(cdm)
 	_arr := objc.Send[objc.ID](objref.IDOf(cdm), objc.RegisterName("discoveredCIDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CIDevice { return CIDeviceFromID(_id) })
 }

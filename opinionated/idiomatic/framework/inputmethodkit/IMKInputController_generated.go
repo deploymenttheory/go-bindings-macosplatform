@@ -5,6 +5,8 @@
 package inputmethodkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,27 +50,35 @@ func inputControllerAdopt(id objc.ID) *InputController {
 
 // Description returns the object's -description text.
 func (ic *InputController) Description() string {
+	defer runtime.KeepAlive(ic)
 	return rt.Description(objref.IDOf(ic))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ic *InputController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ic)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ic), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ic *InputController) IsKind(className string) bool {
+	defer runtime.KeepAlive(ic)
 	return rt.IsKind(objref.IDOf(ic), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ic *InputController) String() string {
+	defer runtime.KeepAlive(ic)
 	return rt.Description(objref.IDOf(ic))
 }
 
 // NewInputControllerWithServerDelegateClient initializes the input control by setting the delegate.
 func NewInputControllerWithServerDelegateClient(server *Server, delegate obj.Object, inputClient obj.Object) *InputController {
+	defer runtime.KeepAlive(server)
+	defer runtime.KeepAlive(delegate)
+	defer runtime.KeepAlive(inputClient)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IMKInputController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServer:delegate:client:"), objref.IDOf(server), objref.IDOf(delegate), objref.IDOf(inputClient))
 	return inputControllerAdopt(_id)
@@ -76,88 +86,109 @@ func NewInputControllerWithServerDelegateClient(server *Server, delegate obj.Obj
 
 // UpdateComposition informs the input controller that the composition has changed.
 func (ic *InputController) UpdateComposition() {
+	defer runtime.KeepAlive(ic)
 	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("updateComposition"))
 }
 
 // CancelComposition stops the current composition and replaces marked text with the original text.
 func (ic *InputController) CancelComposition() {
+	defer runtime.KeepAlive(ic)
 	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("cancelComposition"))
 }
 
 // CompositionAttributesAtRange returns a dictionary of text attributes.
 func (ic *InputController) CompositionAttributesAtRange(range_ foundation.NSRange) obj.Object {
+	defer runtime.KeepAlive(ic)
 	_r := objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("compositionAttributesAtRange:"), range_)
 	return obj.Wrap(_r)
 }
 
 // SelectionRange returns where the range of the selection that should be placed inside marked text.
 func (ic *InputController) SelectionRange() foundation.NSRange {
+	defer runtime.KeepAlive(ic)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(ic), objc.RegisterName("selectionRange"))
 	return _r
 }
 
 // ReplacementRange returns the range in the client document that the text should replace.
 func (ic *InputController) ReplacementRange() foundation.NSRange {
+	defer runtime.KeepAlive(ic)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(ic), objc.RegisterName("replacementRange"))
 	return _r
 }
 
 // MarkForStyleAtRange returns a dictionary of text attributes that can mark a range of an attributed string to send to a client.
 func (ic *InputController) MarkForStyleAtRange(style int, range_ foundation.NSRange) obj.Object {
+	defer runtime.KeepAlive(ic)
 	_r := objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("markForStyle:atRange:"), style, range_)
 	return obj.Wrap(_r)
 }
 
 // HidePalettes informs an input method that it should close any visible user interface.
 func (ic *InputController) HidePalettes() {
+	defer runtime.KeepAlive(ic)
 	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("hidePalettes"))
 }
 
 // Menu returns a menu of commands that are specific to an input method.
 func (ic *InputController) Menu() obj.Object {
+	defer runtime.KeepAlive(ic)
 	_r := objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("menu"))
 	return obj.Wrap(_r)
 }
 
 // Delegate returns the delegate for input controller object.
 func (ic *InputController) Delegate() obj.Object {
+	defer runtime.KeepAlive(ic)
 	_r := objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
 // SetDelegate sets the delegate for input controller object.
 func (ic *InputController) SetDelegate(newDelegate obj.Object) {
+	defer runtime.KeepAlive(ic)
+	defer runtime.KeepAlive(newDelegate)
 	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setDelegate:"), objref.IDOf(newDelegate))
 }
 
 // Server returns the server object that manages the input controller.
 func (ic *InputController) Server() *Server {
+	defer runtime.KeepAlive(ic)
 	_r := objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("server"))
 	return ServerFromID(_r)
 }
 
 // Client returns the client object associated with the input controller.
 func (ic *InputController) Client() obj.Object {
+	defer runtime.KeepAlive(ic)
 	_r := objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("client"))
 	return obj.Wrap(_r)
 }
 
 // InputControllerWillClose called to notify an input controller that it is about to be closed.
 func (ic *InputController) InputControllerWillClose() {
+	defer runtime.KeepAlive(ic)
 	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("inputControllerWillClose"))
 }
 
 // AnnotationSelectedForCandidate sends the selected candidate string and annotation string to the input controller.
 func (ic *InputController) AnnotationSelectedForCandidate(annotationString obj.Object, candidateString obj.Object) {
+	defer runtime.KeepAlive(ic)
+	defer runtime.KeepAlive(annotationString)
+	defer runtime.KeepAlive(candidateString)
 	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("annotationSelected:forCandidate:"), objref.IDOf(annotationString), objref.IDOf(candidateString))
 }
 
 // CandidateSelectionChanged informs an input controller that the current candidate selection in the candidate window has changed.
 func (ic *InputController) CandidateSelectionChanged(candidateString obj.Object) {
+	defer runtime.KeepAlive(ic)
+	defer runtime.KeepAlive(candidateString)
 	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("candidateSelectionChanged:"), objref.IDOf(candidateString))
 }
 
 // CandidateSelected informs an input controller that a new candidate is selected.
 func (ic *InputController) CandidateSelected(candidateString obj.Object) {
+	defer runtime.KeepAlive(ic)
+	defer runtime.KeepAlive(candidateString)
 	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("candidateSelected:"), objref.IDOf(candidateString))
 }

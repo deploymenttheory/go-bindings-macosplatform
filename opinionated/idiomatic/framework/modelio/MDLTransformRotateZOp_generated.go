@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func transformRotateZOpAdopt(id objc.ID) *TransformRotateZOp {
 
 // Description returns the object's -description text.
 func (trzo *TransformRotateZOp) Description() string {
+	defer runtime.KeepAlive(trzo)
 	return rt.Description(objref.IDOf(trzo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (trzo *TransformRotateZOp) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(trzo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(trzo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (trzo *TransformRotateZOp) IsKind(className string) bool {
+	defer runtime.KeepAlive(trzo)
 	return rt.IsKind(objref.IDOf(trzo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (trzo *TransformRotateZOp) String() string {
+	defer runtime.KeepAlive(trzo)
 	return rt.Description(objref.IDOf(trzo))
 }
 
@@ -72,6 +79,7 @@ func NewTransformRotateZOp() *TransformRotateZOp {
 
 // Name returns the name.
 func (trzo *TransformRotateZOp) Name() string {
+	defer runtime.KeepAlive(trzo)
 	_r := objc.Send[objc.ID](objref.IDOf(trzo), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -81,6 +89,7 @@ func (trzo *TransformRotateZOp) Name() string {
 
 // AnimatedValue returns the animated value.
 func (trzo *TransformRotateZOp) AnimatedValue() *AnimatedScalar {
+	defer runtime.KeepAlive(trzo)
 	_r := objc.Send[objc.ID](objref.IDOf(trzo), objc.RegisterName("animatedValue"))
 	return AnimatedScalarFromID(_r)
 }

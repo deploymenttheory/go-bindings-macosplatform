@@ -34,8 +34,8 @@ func AVMediaDataStorageFromID(id objc.ID) *AVMediaDataStorage {
 }
 
 // Creates a media data storage object associated with a file URL.
-func (o *AVMediaDataStorage) InitWithURLOptions(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVMediaDataStorage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaDataStorageSelInitWithURLOptions, uRL.Ptr(), options.Ptr())
+func (o *AVMediaDataStorage) InitWithURLOptions(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVMediaDataStorage {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaDataStorageSelInitWithURLOptions, url.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

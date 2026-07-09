@@ -5,6 +5,7 @@
 package cinematic
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func objectTrackerAdopt(id objc.ID) *ObjectTracker {
 
 // Description returns the object's -description text.
 func (ot *ObjectTracker) Description() string {
+	defer runtime.KeepAlive(ot)
 	return rt.Description(objref.IDOf(ot))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ot *ObjectTracker) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ot)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ot), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ot *ObjectTracker) IsKind(className string) bool {
+	defer runtime.KeepAlive(ot)
 	return rt.IsKind(objref.IDOf(ot), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ot *ObjectTracker) String() string {
+	defer runtime.KeepAlive(ot)
 	return rt.Description(objref.IDOf(ot))
 }
 
@@ -78,29 +84,34 @@ func NewObjectTracker() *ObjectTracker {
 
 // FindObjectAtPointSourceImage find the bounds of an object at the given point. Can be used to convert a normalized point in an image to a rectangle that can be used to start tracking. - Parameters: - point: location of object in image in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right - sourceImage: pixel buffer containing the image - Returns: A prediction, which includes bounds that can be used to start tracking, or `nil` if no discernible object is detected.
 func (ot *ObjectTracker) FindObjectAtPointSourceImage(point corefoundation.CGPoint, sourceImage unsafe.Pointer) *BoundsPrediction {
+	defer runtime.KeepAlive(ot)
 	_r := objc.Send[objc.ID](objref.IDOf(ot), objc.RegisterName("findObjectAtPoint:sourceImage:"), point, sourceImage)
 	return BoundsPredictionFromID(_r)
 }
 
 // StartTrackingAtWithinSourceImageSourceDisparity start creating a detection track to track an object within the given bounds. - Parameters: - time: the presentation time of the first frame in the detection track - normalizedBounds: the bounds of the object to track in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right - sourceImage: image buffer containing the image - sourceDisparity: disparity buffer containing depth information - Returns: whether the object can be tracked - Note: if the object can be tracked, a detection is added to the detection track being built
 func (ot *ObjectTracker) StartTrackingAtWithinSourceImageSourceDisparity(time_ coremedia.CMTime, normalizedBounds corefoundation.CGRect, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer) bool {
+	defer runtime.KeepAlive(ot)
 	_r := objc.Send[bool](objref.IDOf(ot), objc.RegisterName("startTrackingAt:within:sourceImage:sourceDisparity:"), time_, normalizedBounds, sourceImage, sourceDisparity)
 	return _r
 }
 
 // ContinueTrackingAtSourceImageSourceDisparity continue tracking an object for which tracking has started, and add a new detection to the detection track being built. - Parameters: - time: the presentation time of the frame to be added to the detection track - Returns: a prediction of where the object is in the source image
 func (ot *ObjectTracker) ContinueTrackingAtSourceImageSourceDisparity(time_ coremedia.CMTime, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer) *BoundsPrediction {
+	defer runtime.KeepAlive(ot)
 	_r := objc.Send[objc.ID](objref.IDOf(ot), objc.RegisterName("continueTrackingAt:sourceImage:sourceDisparity:"), time_, sourceImage, sourceDisparity)
 	return BoundsPredictionFromID(_r)
 }
 
 // FinishDetectionTrack returns finish constructing the detection track and return it. - Returns: a detection track which tracks the object
 func (ot *ObjectTracker) FinishDetectionTrack() *DetectionTrack {
+	defer runtime.KeepAlive(ot)
 	_r := objc.Send[objc.ID](objref.IDOf(ot), objc.RegisterName("finishDetectionTrack"))
 	return DetectionTrackFromID(_r)
 }
 
 // ResetDetectionTrack reset the builder to construct a new detection track.
 func (ot *ObjectTracker) ResetDetectionTrack() {
+	defer runtime.KeepAlive(ot)
 	objc.Send[objc.ID](objref.IDOf(ot), objc.RegisterName("resetDetectionTrack"))
 }

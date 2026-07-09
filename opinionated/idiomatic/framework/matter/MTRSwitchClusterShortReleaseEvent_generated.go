@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRSwitchClusterShortReleaseEventAdopt(id objc.ID) *MTRSwitchClusterShortRe
 
 // Description returns the object's -description text.
 func (mscsre *MTRSwitchClusterShortReleaseEvent) Description() string {
+	defer runtime.KeepAlive(mscsre)
 	return rt.Description(objref.IDOf(mscsre))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mscsre *MTRSwitchClusterShortReleaseEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mscsre)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mscsre), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mscsre *MTRSwitchClusterShortReleaseEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mscsre)
 	return rt.IsKind(objref.IDOf(mscsre), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mscsre *MTRSwitchClusterShortReleaseEvent) String() string {
+	defer runtime.KeepAlive(mscsre)
 	return rt.Description(objref.IDOf(mscsre))
 }
 
@@ -72,12 +80,14 @@ func NewMTRSwitchClusterShortReleaseEvent() *MTRSwitchClusterShortReleaseEvent {
 
 // WithPreviousPosition sets the previous position.
 func (mscsre *MTRSwitchClusterShortReleaseEvent) WithPreviousPosition(previousPosition obj.Object) *MTRSwitchClusterShortReleaseEvent {
+	defer runtime.KeepAlive(previousPosition)
 	objc.Send[objc.ID](objref.IDOf(mscsre), objc.RegisterName("setPreviousPosition:"), objref.IDOf(previousPosition))
 	return mscsre
 }
 
 // PreviousPosition returns the previous position.
-func (mscsre *MTRSwitchClusterShortReleaseEvent) PreviousPosition() obj.Object {
+func (mscsre *MTRSwitchClusterShortReleaseEvent) PreviousPosition() *foundation.Number {
+	defer runtime.KeepAlive(mscsre)
 	_r := objc.Send[objc.ID](objref.IDOf(mscsre), objc.RegisterName("previousPosition"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

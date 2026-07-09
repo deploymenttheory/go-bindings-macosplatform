@@ -5,8 +5,11 @@
 package avkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -45,27 +48,33 @@ func legibleMediaOptionsMenuControllerAdopt(id objc.ID) *LegibleMediaOptionsMenu
 
 // Description returns the object's -description text.
 func (lmomc *LegibleMediaOptionsMenuController) Description() string {
+	defer runtime.KeepAlive(lmomc)
 	return rt.Description(objref.IDOf(lmomc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lmomc *LegibleMediaOptionsMenuController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lmomc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lmomc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lmomc *LegibleMediaOptionsMenuController) IsKind(className string) bool {
+	defer runtime.KeepAlive(lmomc)
 	return rt.IsKind(objref.IDOf(lmomc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lmomc *LegibleMediaOptionsMenuController) String() string {
+	defer runtime.KeepAlive(lmomc)
 	return rt.Description(objref.IDOf(lmomc))
 }
 
 // NewLegibleMediaOptionsMenuControllerWithPlayer creates an AVLegibleMediaOptionsMenuController with an optional player When player is non-nil, both media tracks and caption appearance options will be included, otherwise, only caption appearance options.
 func NewLegibleMediaOptionsMenuControllerWithPlayer(player obj.Object) *LegibleMediaOptionsMenuController {
+	defer runtime.KeepAlive(player)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVLegibleMediaOptionsMenuController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayer:"), objref.IDOf(player))
 	return legibleMediaOptionsMenuControllerAdopt(_id)
@@ -73,18 +82,31 @@ func NewLegibleMediaOptionsMenuControllerWithPlayer(player obj.Object) *LegibleM
 
 // WithPlayer sets the player associated with the menu controller.
 func (lmomc *LegibleMediaOptionsMenuController) WithPlayer(player obj.Object) *LegibleMediaOptionsMenuController {
+	defer runtime.KeepAlive(player)
 	objc.Send[objc.ID](objref.IDOf(lmomc), objc.RegisterName("setPlayer:"), objref.IDOf(player))
+	return lmomc
+}
+
+// WithDelegate sets the delegate for receiving caption preview and state change notifications.
+func (lmomc *LegibleMediaOptionsMenuController) WithDelegate(delegate LegibleMediaOptionsMenuControllerDelegate) *LegibleMediaOptionsMenuController {
+	_shim := newLegibleMediaOptionsMenuControllerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(lmomc), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(lmomc), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
 	return lmomc
 }
 
 // MenuWithContents builds a legible options menu using the specified contents. Returns nil if the requested menu type cannot be built due to missing content (e.g., requesting track selection without a player).
 func (lmomc *LegibleMediaOptionsMenuController) MenuWithContents(contents LegibleMediaOptionsMenuContents) obj.Object {
+	defer runtime.KeepAlive(lmomc)
 	_r := objc.Send[objc.ID](objref.IDOf(lmomc), objc.RegisterName("menuWithContents:"), contents)
 	return obj.Wrap(_r)
 }
 
 // Player returns the player associated with the menu controller.
 func (lmomc *LegibleMediaOptionsMenuController) Player() obj.Object {
+	defer runtime.KeepAlive(lmomc)
 	_r := objc.Send[objc.ID](objref.IDOf(lmomc), objc.RegisterName("player"))
 	return obj.Wrap(_r)
 }

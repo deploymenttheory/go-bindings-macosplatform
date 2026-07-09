@@ -5,6 +5,8 @@
 package sharedwithyou
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func highlightMentionEventAdopt(id objc.ID) *HighlightMentionEvent {
 
 // Description returns the object's -description text.
 func (hme *HighlightMentionEvent) Description() string {
+	defer runtime.KeepAlive(hme)
 	return rt.Description(objref.IDOf(hme))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hme *HighlightMentionEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hme)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hme), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hme *HighlightMentionEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(hme)
 	return rt.IsKind(objref.IDOf(hme), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hme *HighlightMentionEvent) String() string {
+	defer runtime.KeepAlive(hme)
 	return rt.Description(objref.IDOf(hme))
 }
 
 // NewHighlightMentionEventWithHighlightMentionedPersonCloudKitShareHandle creates and initializes a mention event.
 func NewHighlightMentionEventWithHighlightMentionedPersonCloudKitShareHandle(highlight *Highlight, handle string) *HighlightMentionEvent {
+	defer runtime.KeepAlive(highlight)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWHighlightMentionEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:mentionedPersonCloudKitShareHandle:"), objref.IDOf(highlight), purego.NSString(handle))
 	return highlightMentionEventAdopt(_id)
@@ -75,6 +83,8 @@ func NewHighlightMentionEventWithHighlightMentionedPersonCloudKitShareHandle(hig
 
 // NewHighlightMentionEventWithHighlightMentionedPersonIdentity creates and initializes a mention event.
 func NewHighlightMentionEventWithHighlightMentionedPersonIdentity(highlight *Highlight, identity obj.Object) *HighlightMentionEvent {
+	defer runtime.KeepAlive(highlight)
+	defer runtime.KeepAlive(identity)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWHighlightMentionEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:mentionedPersonIdentity:"), objref.IDOf(highlight), objref.IDOf(identity))
 	return highlightMentionEventAdopt(_id)
@@ -82,6 +92,7 @@ func NewHighlightMentionEventWithHighlightMentionedPersonIdentity(highlight *Hig
 
 // MentionedPersonHandle returns the person being mentioned by the sender.
 func (hme *HighlightMentionEvent) MentionedPersonHandle() string {
+	defer runtime.KeepAlive(hme)
 	_r := objc.Send[objc.ID](objref.IDOf(hme), objc.RegisterName("mentionedPersonHandle"))
 	if _r == 0 {
 		return ""

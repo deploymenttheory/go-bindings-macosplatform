@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func sortDescriptorAdopt(id objc.ID) *SortDescriptor {
 
 // Description returns the object's -description text.
 func (sd *SortDescriptor) Description() string {
+	defer runtime.KeepAlive(sd)
 	return rt.Description(objref.IDOf(sd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sd *SortDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sd *SortDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(sd)
 	return rt.IsKind(objref.IDOf(sd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sd *SortDescriptor) String() string {
+	defer runtime.KeepAlive(sd)
 	return rt.Description(objref.IDOf(sd))
 }
 
@@ -77,6 +83,7 @@ func NewSortDescriptorWithKeyAscending(key string, ascending bool) *SortDescript
 
 // NewSortDescriptorWithCoder creates a sort descriptor by decoding from the coder you specify.
 func NewSortDescriptorWithCoder(coder *Coder) *SortDescriptor {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSortDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return sortDescriptorAdopt(_id)
@@ -89,24 +96,29 @@ func (sd *SortDescriptor) WithObservationInfo(observationInfo unsafe.Pointer) *S
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (sd *SortDescriptor) WithScriptingProperties(scriptingProperties obj.Object) *SortDescriptor {
-	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (sd *SortDescriptor) WithScriptingProperties(scriptingProperties map[string]obj.Object) *SortDescriptor {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return sd
 }
 
 // AllowEvaluation forces a securely decoded sort descriptor to allow evaluation.
 func (sd *SortDescriptor) AllowEvaluation() {
+	defer runtime.KeepAlive(sd)
 	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("allowEvaluation"))
 }
 
 // CompareObjectToObject returns a comparison result value that indicates the sort order of two objects.
 func (sd *SortDescriptor) CompareObjectToObject(object1 obj.Object, object2 obj.Object) ComparisonResult {
+	defer runtime.KeepAlive(sd)
+	defer runtime.KeepAlive(object1)
+	defer runtime.KeepAlive(object2)
 	_r := objc.Send[ComparisonResult](objref.IDOf(sd), objc.RegisterName("compareObject:toObject:"), objref.IDOf(object1), objref.IDOf(object2))
 	return _r
 }
 
 // Key returns the key.
 func (sd *SortDescriptor) Key() string {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("key"))
 	if _r == 0 {
 		return ""
@@ -116,12 +128,14 @@ func (sd *SortDescriptor) Key() string {
 
 // Ascending wraps the corresponding Objective-C method.
 func (sd *SortDescriptor) Ascending() bool {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[bool](objref.IDOf(sd), objc.RegisterName("ascending"))
 	return _r
 }
 
 // ReversedSortDescriptor returns the reversed sort descriptor.
 func (sd *SortDescriptor) ReversedSortDescriptor() obj.Object {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("reversedSortDescriptor"))
 	return obj.Wrap(_r)
 }

@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -98,6 +100,7 @@ func (mpasd *MTL4PrimitiveAccelerationStructureDescriptor) WithUsage(usage Accel
 //
 // GeometryDescriptors returns the collection as a Go slice.
 func (mpasd *MTL4PrimitiveAccelerationStructureDescriptor) GeometryDescriptors() []*MTL4AccelerationStructureGeometryDescriptor {
+	defer runtime.KeepAlive(mpasd)
 	_arr := objc.Send[objc.ID](objref.IDOf(mpasd), objc.RegisterName("geometryDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTL4AccelerationStructureGeometryDescriptor {
 		return MTL4AccelerationStructureGeometryDescriptorFromID(_id)
@@ -106,30 +109,35 @@ func (mpasd *MTL4PrimitiveAccelerationStructureDescriptor) GeometryDescriptors()
 
 // MotionStartBorderMode returns configures the behavior when the ray-tracing system samples the acceleration structure before the motion start time. Use this property to control the behavior when the ray-tracing system samples the acceleration structure at a time prior to the one you set for “motionStartTime“. The default value of this property is `MTLMotionBorderModeClamp`.
 func (mpasd *MTL4PrimitiveAccelerationStructureDescriptor) MotionStartBorderMode() MotionBorderMode {
+	defer runtime.KeepAlive(mpasd)
 	_r := objc.Send[MotionBorderMode](objref.IDOf(mpasd), objc.RegisterName("motionStartBorderMode"))
 	return _r
 }
 
 // MotionEndBorderMode returns configures the motion border mode. This property controls what happens if Metal samples the acceleration structure after “motionEndTime“. Its default value is `MTLMotionBorderModeClamp`.
 func (mpasd *MTL4PrimitiveAccelerationStructureDescriptor) MotionEndBorderMode() MotionBorderMode {
+	defer runtime.KeepAlive(mpasd)
 	_r := objc.Send[MotionBorderMode](objref.IDOf(mpasd), objc.RegisterName("motionEndBorderMode"))
 	return _r
 }
 
 // MotionStartTime returns configures the motion start time for this geometry. The default value of this property is `0.0f`.
 func (mpasd *MTL4PrimitiveAccelerationStructureDescriptor) MotionStartTime() float32 {
+	defer runtime.KeepAlive(mpasd)
 	_r := objc.Send[float32](objref.IDOf(mpasd), objc.RegisterName("motionStartTime"))
 	return _r
 }
 
 // MotionEndTime returns configures the motion end time for this geometry. The default value of this property is `1.0f`.
 func (mpasd *MTL4PrimitiveAccelerationStructureDescriptor) MotionEndTime() float32 {
+	defer runtime.KeepAlive(mpasd)
 	_r := objc.Send[float32](objref.IDOf(mpasd), objc.RegisterName("motionEndTime"))
 	return _r
 }
 
 // MotionKeyframeCount sets the motion keyframe count. This property's default is `1`, indicating no motion.
 func (mpasd *MTL4PrimitiveAccelerationStructureDescriptor) MotionKeyframeCount() int {
+	defer runtime.KeepAlive(mpasd)
 	_r := objc.Send[int](objref.IDOf(mpasd), objc.RegisterName("motionKeyframeCount"))
 	return _r
 }

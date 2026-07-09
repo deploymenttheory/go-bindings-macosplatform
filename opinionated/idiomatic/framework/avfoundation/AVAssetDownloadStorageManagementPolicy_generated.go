@@ -5,7 +5,11 @@
 package avfoundation
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,35 +53,42 @@ func assetDownloadStorageManagementPolicyAdopt(id objc.ID) *AssetDownloadStorage
 
 // Description returns the object's -description text.
 func (adsmp *AssetDownloadStorageManagementPolicy) Description() string {
+	defer runtime.KeepAlive(adsmp)
 	return rt.Description(objref.IDOf(adsmp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (adsmp *AssetDownloadStorageManagementPolicy) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(adsmp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(adsmp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (adsmp *AssetDownloadStorageManagementPolicy) IsKind(className string) bool {
+	defer runtime.KeepAlive(adsmp)
 	return rt.IsKind(objref.IDOf(adsmp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (adsmp *AssetDownloadStorageManagementPolicy) String() string {
+	defer runtime.KeepAlive(adsmp)
 	return rt.Description(objref.IDOf(adsmp))
 }
 
 // Priority indicates the eviction priority of downloaded asset. Assets with default priority will be purged first before assets with higher priorities. In case this is not set, default priority is used.
-func (adsmp *AssetDownloadStorageManagementPolicy) Priority() obj.Object {
+func (adsmp *AssetDownloadStorageManagementPolicy) Priority() *foundation.String {
+	defer runtime.KeepAlive(adsmp)
 	_r := objc.Send[objc.ID](objref.IDOf(adsmp), objc.RegisterName("priority"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // ExpirationDate returns the expiration date of asset.
-func (adsmp *AssetDownloadStorageManagementPolicy) ExpirationDate() obj.Object {
+func (adsmp *AssetDownloadStorageManagementPolicy) ExpirationDate() time.Time {
+	defer runtime.KeepAlive(adsmp)
 	_r := objc.Send[objc.ID](objref.IDOf(adsmp), objc.RegisterName("expirationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // isAssetDownloadStorageManagementPolicy marks AssetDownloadStorageManagementPolicy — and, by embedding promotion, its

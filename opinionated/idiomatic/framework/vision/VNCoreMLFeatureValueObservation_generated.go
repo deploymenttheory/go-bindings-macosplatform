@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,14 @@ func NewCoreMLFeatureValueObservation() *CoreMLFeatureValueObservation {
 
 // FeatureValue returns the result VNCoreMLRequest where the model produces an MLFeatureValue that is neither a classification or image. Refer to the Core ML documentation and the model itself for the handling of the content of the featureValue.
 func (cmfvo *CoreMLFeatureValueObservation) FeatureValue() obj.Object {
+	defer runtime.KeepAlive(cmfvo)
 	_r := objc.Send[objc.ID](objref.IDOf(cmfvo), objc.RegisterName("featureValue"))
 	return obj.Wrap(_r)
 }
 
 // FeatureName returns the name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model.
 func (cmfvo *CoreMLFeatureValueObservation) FeatureName() string {
+	defer runtime.KeepAlive(cmfvo)
 	_r := objc.Send[objc.ID](objref.IDOf(cmfvo), objc.RegisterName("featureName"))
 	if _r == 0 {
 		return ""

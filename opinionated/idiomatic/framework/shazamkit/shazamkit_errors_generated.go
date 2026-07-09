@@ -8,20 +8,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrCodeInvalidAudioFormat matches the ShazamKit error SHErrorCodeInvalidAudioFormat.
-var ErrCodeInvalidAudioFormat = errkit.New("SHErrorDomain", 100)
-
 // ErrCodeAudioDiscontinuity matches the ShazamKit error SHErrorCodeAudioDiscontinuity.
 var ErrCodeAudioDiscontinuity = errkit.New("SHErrorDomain", 101)
-
-// ErrCodeSignatureInvalid matches the ShazamKit error SHErrorCodeSignatureInvalid.
-var ErrCodeSignatureInvalid = errkit.New("SHErrorDomain", 200)
-
-// ErrCodeSignatureDurationInvalid matches the ShazamKit error SHErrorCodeSignatureDurationInvalid.
-var ErrCodeSignatureDurationInvalid = errkit.New("SHErrorDomain", 201)
-
-// ErrCodeMatchAttemptFailed matches the ShazamKit error SHErrorCodeMatchAttemptFailed.
-var ErrCodeMatchAttemptFailed = errkit.New("SHErrorDomain", 202)
 
 // ErrCodeCustomCatalogInvalid matches the ShazamKit error SHErrorCodeCustomCatalogInvalid.
 var ErrCodeCustomCatalogInvalid = errkit.New("SHErrorDomain", 300)
@@ -29,11 +17,23 @@ var ErrCodeCustomCatalogInvalid = errkit.New("SHErrorDomain", 300)
 // ErrCodeCustomCatalogInvalidURL matches the ShazamKit error SHErrorCodeCustomCatalogInvalidURL.
 var ErrCodeCustomCatalogInvalidURL = errkit.New("SHErrorDomain", 301)
 
-// ErrCodeMediaLibrarySyncFailed matches the ShazamKit error SHErrorCodeMediaLibrarySyncFailed.
-var ErrCodeMediaLibrarySyncFailed = errkit.New("SHErrorDomain", 400)
-
 // ErrCodeInternalError matches the ShazamKit error SHErrorCodeInternalError.
 var ErrCodeInternalError = errkit.New("SHErrorDomain", 500)
 
+// ErrCodeInvalidAudioFormat matches the ShazamKit error SHErrorCodeInvalidAudioFormat.
+var ErrCodeInvalidAudioFormat = errkit.New("SHErrorDomain", 100)
+
+// ErrCodeMatchAttemptFailed matches the ShazamKit error SHErrorCodeMatchAttemptFailed.
+var ErrCodeMatchAttemptFailed = errkit.New("SHErrorDomain", 202)
+
 // ErrCodeMediaItemFetchFailed matches the ShazamKit error SHErrorCodeMediaItemFetchFailed.
 var ErrCodeMediaItemFetchFailed = errkit.New("SHErrorDomain", 600)
+
+// ErrCodeMediaLibrarySyncFailed matches the ShazamKit error SHErrorCodeMediaLibrarySyncFailed.
+var ErrCodeMediaLibrarySyncFailed = errkit.New("SHErrorDomain", 400)
+
+// ErrCodeSignatureDurationInvalid matches the ShazamKit error SHErrorCodeSignatureDurationInvalid.
+var ErrCodeSignatureDurationInvalid = errkit.New("SHErrorDomain", 201)
+
+// ErrCodeSignatureInvalid matches the ShazamKit error SHErrorCodeSignatureInvalid.
+var ErrCodeSignatureInvalid = errkit.New("SHErrorDomain", 200)

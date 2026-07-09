@@ -42,8 +42,8 @@ func HKDeviceFromID(id objc.ID) *HKDevice {
 }
 
 // Initializes a new device object.
-func (o *HKDevice) InitWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier(name *foundation.NSString, manufacturer *foundation.NSString, model *foundation.NSString, hardwareVersion *foundation.NSString, firmwareVersion *foundation.NSString, softwareVersion *foundation.NSString, localIdentifier *foundation.NSString, uDIDeviceIdentifier *foundation.NSString) *HKDevice {
-	_ret := objc.Send[objc.ID](o.Ptr(), _hKDeviceSelInitWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier, name.Ptr(), manufacturer.Ptr(), model.Ptr(), hardwareVersion.Ptr(), firmwareVersion.Ptr(), softwareVersion.Ptr(), localIdentifier.Ptr(), uDIDeviceIdentifier.Ptr())
+func (o *HKDevice) InitWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier(name *foundation.NSString, manufacturer *foundation.NSString, model *foundation.NSString, hardwareVersion *foundation.NSString, firmwareVersion *foundation.NSString, softwareVersion *foundation.NSString, localIdentifier *foundation.NSString, udiDeviceIdentifier *foundation.NSString) *HKDevice {
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKDeviceSelInitWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier, name.Ptr(), manufacturer.Ptr(), model.Ptr(), hardwareVersion.Ptr(), firmwareVersion.Ptr(), softwareVersion.Ptr(), localIdentifier.Ptr(), udiDeviceIdentifier.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

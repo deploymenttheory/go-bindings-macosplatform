@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,18 +54,21 @@ func NewMTRContentLauncherClusterDimension() *MTRContentLauncherClusterDimension
 
 // WithWidth sets the width.
 func (mclcd *MTRContentLauncherClusterDimension) WithWidth(width obj.Object) *MTRContentLauncherClusterDimension {
+	defer runtime.KeepAlive(width)
 	objc.Send[objc.ID](objref.IDOf(mclcd), objc.RegisterName("setWidth:"), objref.IDOf(width))
 	return mclcd
 }
 
 // WithHeight sets the height.
 func (mclcd *MTRContentLauncherClusterDimension) WithHeight(height obj.Object) *MTRContentLauncherClusterDimension {
+	defer runtime.KeepAlive(height)
 	objc.Send[objc.ID](objref.IDOf(mclcd), objc.RegisterName("setHeight:"), objref.IDOf(height))
 	return mclcd
 }
 
 // WithMetric sets the metric.
 func (mclcd *MTRContentLauncherClusterDimension) WithMetric(metric obj.Object) *MTRContentLauncherClusterDimension {
+	defer runtime.KeepAlive(metric)
 	objc.Send[objc.ID](objref.IDOf(mclcd), objc.RegisterName("setMetric:"), objref.IDOf(metric))
 	return mclcd
 }

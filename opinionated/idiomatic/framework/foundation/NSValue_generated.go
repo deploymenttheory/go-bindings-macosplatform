@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -52,22 +53,27 @@ func valueAdopt(id objc.ID) *Value {
 
 // Description returns the object's -description text.
 func (v_ *Value) Description() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (v_ *Value) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (v_ *Value) IsKind(className string) bool {
+	defer runtime.KeepAlive(v_)
 	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (v_ *Value) String() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
@@ -80,6 +86,7 @@ func NewValueWithBytesObjCType(value unsafe.Pointer, type_ string) *Value {
 
 // NewValueWithCoder creates a new Value.
 func NewValueWithCoder(coder *Coder) *Value {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSValue")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return valueAdopt(_id)
@@ -92,47 +99,55 @@ func (v_ *Value) WithObservationInfo(observationInfo unsafe.Pointer) *Value {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (v_ *Value) WithScriptingProperties(scriptingProperties obj.Object) *Value {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (v_ *Value) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Value {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return v_
 }
 
 // GetValueSize copies the value into the specified buffer.
 func (v_ *Value) GetValueSize(value unsafe.Pointer, size int) {
+	defer runtime.KeepAlive(v_)
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("getValue:size:"), value, size)
 }
 
 // IsEqualToValue returns a Boolean value that indicates whether the value object and another value object are equal.
 func (v_ *Value) IsEqualToValue(value *Value) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(value)
 	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isEqualToValue:"), objref.IDOf(value))
 	return _r
 }
 
 // NonretainedObjectValue returns the nonretained object value.
 func (v_ *Value) NonretainedObjectValue() obj.Object {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("nonretainedObjectValue"))
 	return obj.Wrap(_r)
 }
 
 // GetValue copies the value into the specified buffer.
 func (v_ *Value) GetValue(value unsafe.Pointer) {
+	defer runtime.KeepAlive(v_)
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("getValue:"), value)
 }
 
 // PointValue returns the point value.
 func (v_ *Value) PointValue() corefoundation.CGPoint {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("pointValue"))
 	return _r
 }
 
 // SizeValue returns the size value.
 func (v_ *Value) SizeValue() corefoundation.CGSize {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(v_), objc.RegisterName("sizeValue"))
 	return _r
 }
 
 // RectValue returns the rect value.
 func (v_ *Value) RectValue() corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("rectValue"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package mpsmatrix
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func matrixCopyAdopt(id objc.ID) *MatrixCopy {
 
 // Description returns the object's -description text.
 func (mc *MatrixCopy) Description() string {
+	defer runtime.KeepAlive(mc)
 	return rt.Description(objref.IDOf(mc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mc *MatrixCopy) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mc *MatrixCopy) IsKind(className string) bool {
+	defer runtime.KeepAlive(mc)
 	return rt.IsKind(objref.IDOf(mc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mc *MatrixCopy) String() string {
+	defer runtime.KeepAlive(mc)
 	return rt.Description(objref.IDOf(mc))
 }
 
@@ -72,24 +79,28 @@ func NewMatrixCopy() *MatrixCopy {
 
 // CopyRows returns the number of rows to copy for each copy operation
 func (mc *MatrixCopy) CopyRows() int {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[int](objref.IDOf(mc), objc.RegisterName("copyRows"))
 	return _r
 }
 
 // CopyColumns returns the number of columns to copy for each copy operation
 func (mc *MatrixCopy) CopyColumns() int {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[int](objref.IDOf(mc), objc.RegisterName("copyColumns"))
 	return _r
 }
 
 // SourcesAreTransposed reports whether if true, the sources are in row major storage order
 func (mc *MatrixCopy) SourcesAreTransposed() bool {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[bool](objref.IDOf(mc), objc.RegisterName("sourcesAreTransposed"))
 	return _r
 }
 
 // DestinationsAreTransposed reports whether if true, the destinations are in row major storage order
 func (mc *MatrixCopy) DestinationsAreTransposed() bool {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[bool](objref.IDOf(mc), objc.RegisterName("destinationsAreTransposed"))
 	return _r
 }

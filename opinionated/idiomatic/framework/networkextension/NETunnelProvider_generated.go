@@ -6,11 +6,13 @@ package networkextension
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -58,7 +60,8 @@ func (ntp *NETunnelProvider) WithReasserting(reasserting bool) *NETunnelProvider
 // HandleAppMessage handle messages sent by the tunnel provider extension’s containing app.
 //
 // HandleAppMessage blocks until the operation completes or ctx is cancelled.
-func (ntp *NETunnelProvider) HandleAppMessage(ctx context.Context, messageData obj.Object) (result obj.Object, err error) {
+func (ntp *NETunnelProvider) HandleAppMessage(ctx context.Context, messageData []byte) (result obj.Object, err error) {
+	defer runtime.KeepAlive(ntp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -69,7 +72,7 @@ func (ntp *NETunnelProvider) HandleAppMessage(ctx context.Context, messageData o
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(ntp), objc.RegisterName("handleAppMessage:completionHandler:"), objref.IDOf(messageData), _block)
+	objc.Send[objc.ID](objref.IDOf(ntp), objc.RegisterName("handleAppMessage:completionHandler:"), rt.BytesToNSData(messageData), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -83,6 +86,8 @@ func (ntp *NETunnelProvider) HandleAppMessage(ctx context.Context, messageData o
 //
 // SetTunnelNetworkSettings blocks until the operation completes or ctx is cancelled.
 func (ntp *NETunnelProvider) SetTunnelNetworkSettings(ctx context.Context, tunnelNetworkSettings *NETunnelNetworkSettings) error {
+	defer runtime.KeepAlive(ntp)
+	defer runtime.KeepAlive(tunnelNetworkSettings)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -100,6 +105,7 @@ func (ntp *NETunnelProvider) SetTunnelNetworkSettings(ctx context.Context, tunne
 
 // ProtocolConfiguration returns an NEVPNProtocol object containing the provider's current configuration. The value of this property may change during the lifetime of the tunnel provided by this NETunnelProvider, KVO can be used to detect when changes occur.  For different protocol types, this property will contain the corresponding subclass.   For NEVPNProtocolTypePlugin protocol type, this property will contain the NETunnelProviderProtocol subclass.  For NEVPNProtocolTypeIKEv2 protocol type, this property will contain the NEVPNProtocolIKEv2 subclass.
 func (ntp *NETunnelProvider) ProtocolConfiguration() *NEVPNProtocol {
+	defer runtime.KeepAlive(ntp)
 	_r := objc.Send[objc.ID](objref.IDOf(ntp), objc.RegisterName("protocolConfiguration"))
 	return NEVPNProtocolFromID(_r)
 }
@@ -108,18 +114,21 @@ func (ntp *NETunnelProvider) ProtocolConfiguration() *NEVPNProtocol {
 //
 // AppRules returns the collection as a Go slice.
 func (ntp *NETunnelProvider) AppRules() []*NEAppRule {
+	defer runtime.KeepAlive(ntp)
 	_arr := objc.Send[objc.ID](objref.IDOf(ntp), objc.RegisterName("appRules"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEAppRule { return NEAppRuleFromID(_id) })
 }
 
 // RoutingMethod returns the method by which network traffic is routed to the tunnel. The default is NETunnelProviderRoutingMethodDestinationIP.
 func (ntp *NETunnelProvider) RoutingMethod() NETunnelProviderRoutingMethod {
+	defer runtime.KeepAlive(ntp)
 	_r := objc.Send[NETunnelProviderRoutingMethod](objref.IDOf(ntp), objc.RegisterName("routingMethod"))
 	return _r
 }
 
 // Reasserting reports whether a flag that indicates to the framework if this NETunnelProvider is currently re-establishing the tunnel. Setting this flag will cause the session status visible to the user to change to "Reasserting". Clearing this flag will change the user-visible status of the session back to "Connected". Setting and clearing this flag only has an effect if the session is in the "Connected" state.
 func (ntp *NETunnelProvider) Reasserting() bool {
+	defer runtime.KeepAlive(ntp)
 	_r := objc.Send[bool](objref.IDOf(ntp), objc.RegisterName("reasserting"))
 	return _r
 }

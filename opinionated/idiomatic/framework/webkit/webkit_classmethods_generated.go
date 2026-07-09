@@ -6,9 +6,11 @@ package webkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,6 +51,7 @@ func DefaultClientWorld() *WKContentWorld {
 //
 // ExtensionWithAppExtensionBundle blocks until the operation completes or ctx is cancelled.
 func ExtensionWithAppExtensionBundle(ctx context.Context, appExtensionBundle obj.Object) (result *WKWebExtension, err error) {
+	defer runtime.KeepAlive(appExtensionBundle)
 	type _result struct {
 		val *WKWebExtension
 		err error
@@ -97,14 +100,15 @@ func ExtensionWithResourceBaseURL(ctx context.Context, resourceBaseURL string) (
 
 // ContextForExtension returns a web extension context initialized with the specified extension.
 func ContextForExtension(extension *WKWebExtension) *WKWebExtensionContext {
+	defer runtime.KeepAlive(extension)
 	_r := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionContext")), objc.RegisterName("contextForExtension:"), objref.IDOf(extension))
 	return WKWebExtensionContextFromID(_r)
 }
 
 // AllExtensionDataTypes returns a set of all available extension data types.
-func AllExtensionDataTypes() obj.Object {
+func AllExtensionDataTypes() []*foundation.String {
 	_r := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionController")), objc.RegisterName("allExtensionDataTypes"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
 }
 
 // DefaultConfiguration returns a new default configuration that is persistent and not unique. If a “WKWebExtensionController“ is associated with a persistent configuration, data will be written to the file system in a common location. When using multiple extension controllers, each controller should use a unique configuration to avoid conflicts.
@@ -121,6 +125,7 @@ func NonPersistentConfiguration() *WKWebExtensionControllerConfiguration {
 
 // ConfigurationWithIdentifier returns a new configuration that is persistent and unique for the specified identifier. If a “WKWebExtensionController“ is associated with a unique persistent configuration, data will be written to the file system in a unique location based on the specified identifier.
 func ConfigurationWithIdentifier(identifier obj.Object) *WKWebExtensionControllerConfiguration {
+	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionControllerConfiguration")), objc.RegisterName("configurationWithIdentifier:"), objref.IDOf(identifier))
 	return WKWebExtensionControllerConfigurationFromID(_r)
 }
@@ -143,8 +148,8 @@ func AllHostsAndSchemesMatchPattern() *WKWebExtensionMatchPattern {
 }
 
 // MatchPatternWithString returns a pattern object for the specified pattern string.
-func MatchPatternWithString(string_ string) *WKWebExtensionMatchPattern {
-	_r := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMatchPattern")), objc.RegisterName("matchPatternWithString:"), purego.NSString(string_))
+func MatchPatternWithString(str string) *WKWebExtensionMatchPattern {
+	_r := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMatchPattern")), objc.RegisterName("matchPatternWithString:"), purego.NSString(str))
 	return WKWebExtensionMatchPatternFromID(_r)
 }
 
@@ -173,13 +178,14 @@ func NonPersistentDataStore() *WKWebsiteDataStore {
 }
 
 // AllWebsiteDataTypes returns the set of all the available data types.
-func AllWebsiteDataTypes() obj.Object {
+func AllWebsiteDataTypes() []string {
 	_r := objc.Send[objc.ID](objc.ID(_class("WKWebsiteDataStore")), objc.RegisterName("allWebsiteDataTypes"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // DataStoreForIdentifier returns the persistent data store with the unique identifier you provide.
 func DataStoreForIdentifier(identifier obj.Object) *WKWebsiteDataStore {
+	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[objc.ID](objc.ID(_class("WKWebsiteDataStore")), objc.RegisterName("dataStoreForIdentifier:"), objref.IDOf(identifier))
 	return WKWebsiteDataStoreFromID(_r)
 }
@@ -197,6 +203,7 @@ func OptionalSharedHistory() *WebHistory {
 
 // SetOptionalSharedHistory sets the web history object to share.
 func SetOptionalSharedHistory(history *WebHistory) {
+	defer runtime.KeepAlive(history)
 	objc.Send[objc.ID](objc.ID(_class("WebHistory")), objc.RegisterName("setOptionalSharedHistory:"), objref.IDOf(history))
 }
 
@@ -219,14 +226,14 @@ func Undefined() *WebUndefined {
 }
 
 // CanShowMIMEType checks if the WebKit can show content of a certain MIME type.
-func CanShowMIMEType(mIMEType string) bool {
-	_r := objc.Send[bool](objc.ID(_class("WebView")), objc.RegisterName("canShowMIMEType:"), purego.NSString(mIMEType))
+func CanShowMIMEType(mimeType string) bool {
+	_r := objc.Send[bool](objc.ID(_class("WebView")), objc.RegisterName("canShowMIMEType:"), purego.NSString(mimeType))
 	return _r
 }
 
 // CanShowMIMETypeAsHTML checks if the MIME type is a type that the WebKit will interpret as HTML.
-func CanShowMIMETypeAsHTML(mIMEType string) bool {
-	_r := objc.Send[bool](objc.ID(_class("WebView")), objc.RegisterName("canShowMIMETypeAsHTML:"), purego.NSString(mIMEType))
+func CanShowMIMETypeAsHTML(mimeType string) bool {
+	_r := objc.Send[bool](objc.ID(_class("WebView")), objc.RegisterName("canShowMIMETypeAsHTML:"), purego.NSString(mimeType))
 	return _r
 }
 
@@ -237,18 +244,21 @@ func MIMETypesShownAsHTML() obj.Object {
 }
 
 // SetMIMETypesShownAsHTML sets the array of NSString MIME types that WebKit will attempt to render as HTML.  Typically you will retrieve the built-in array using MIMETypesShownAsHTML and add additional MIME types to that array.
-func SetMIMETypesShownAsHTML(mIMETypes obj.Object) {
-	objc.Send[objc.ID](objc.ID(_class("WebView")), objc.RegisterName("setMIMETypesShownAsHTML:"), objref.IDOf(mIMETypes))
+func SetMIMETypesShownAsHTML(mimeTypes obj.Object) {
+	defer runtime.KeepAlive(mimeTypes)
+	objc.Send[objc.ID](objc.ID(_class("WebView")), objc.RegisterName("setMIMETypesShownAsHTML:"), objref.IDOf(mimeTypes))
 }
 
 // URLFromPasteboard returns a URL from a pasteboard This method differs than NSURL's URLFromPasteboard method in that it tries multiple pasteboard types including NSURLPboardType to find a URL on the pasteboard.
-func URLFromPasteboard(pasteboard obj.Object) obj.Object {
+func URLFromPasteboard(pasteboard obj.Object) string {
+	defer runtime.KeepAlive(pasteboard)
 	_r := objc.Send[objc.ID](objc.ID(_class("WebView")), objc.RegisterName("URLFromPasteboard:"), objref.IDOf(pasteboard))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // URLTitleFromPasteboard returns a URL title from a pasteboard This method returns a title that refers a URL on the pasteboard. An example of this is the link label which is the text inside the anchor tag.
 func URLTitleFromPasteboard(pasteboard obj.Object) string {
+	defer runtime.KeepAlive(pasteboard)
 	_r := objc.Send[objc.ID](objc.ID(_class("WebView")), objc.RegisterName("URLTitleFromPasteboard:"), objref.IDOf(pasteboard))
 	if _r == 0 {
 		return ""

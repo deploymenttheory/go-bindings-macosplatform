@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,27 +50,33 @@ func iKFilterUIViewAdopt(id objc.ID) *IKFilterUIView {
 
 // Description returns the object's -description text.
 func (ifuv *IKFilterUIView) Description() string {
+	defer runtime.KeepAlive(ifuv)
 	return rt.Description(objref.IDOf(ifuv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ifuv *IKFilterUIView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ifuv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ifuv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ifuv *IKFilterUIView) IsKind(className string) bool {
+	defer runtime.KeepAlive(ifuv)
 	return rt.IsKind(objref.IDOf(ifuv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ifuv *IKFilterUIView) String() string {
+	defer runtime.KeepAlive(ifuv)
 	return rt.Description(objref.IDOf(ifuv))
 }
 
 // NewIKFilterUIViewWithFrameFilter initializes a view that contains controls for the input parameters of a filter.
 func NewIKFilterUIViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter obj.Object) *IKFilterUIView {
+	defer runtime.KeepAlive(inFilter)
 	var _mainthread0 *IKFilterUIView
 	purego.Main(func() {
 		_mainthread0 = func() *IKFilterUIView {
@@ -82,6 +90,7 @@ func NewIKFilterUIViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter 
 
 // Filter returns the Core Image filter associated with the view.
 func (ifuv *IKFilterUIView) Filter() obj.Object {
+	defer runtime.KeepAlive(ifuv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -95,6 +104,7 @@ func (ifuv *IKFilterUIView) Filter() obj.Object {
 
 // ObjectController returns the object controller for the bindings between the filter and its view.
 func (ifuv *IKFilterUIView) ObjectController() obj.Object {
+	defer runtime.KeepAlive(ifuv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRTimeSynchronizationClusterTrustedTimeSourceStructAdopt(id objc.ID) *MTRT
 
 // Description returns the object's -description text.
 func (mtscttss *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) Description() string {
+	defer runtime.KeepAlive(mtscttss)
 	return rt.Description(objref.IDOf(mtscttss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtscttss *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtscttss)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtscttss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtscttss *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtscttss)
 	return rt.IsKind(objref.IDOf(mtscttss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtscttss *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) String() string {
+	defer runtime.KeepAlive(mtscttss)
 	return rt.Description(objref.IDOf(mtscttss))
 }
 
@@ -72,36 +80,42 @@ func NewMTRTimeSynchronizationClusterTrustedTimeSourceStruct() *MTRTimeSynchroni
 
 // WithFabricIndex sets the fabric index.
 func (mtscttss *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) WithFabricIndex(fabricIndex obj.Object) *MTRTimeSynchronizationClusterTrustedTimeSourceStruct {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(mtscttss), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mtscttss
 }
 
 // WithNodeID sets the node ID.
 func (mtscttss *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) WithNodeID(nodeID obj.Object) *MTRTimeSynchronizationClusterTrustedTimeSourceStruct {
+	defer runtime.KeepAlive(nodeID)
 	objc.Send[objc.ID](objref.IDOf(mtscttss), objc.RegisterName("setNodeID:"), objref.IDOf(nodeID))
 	return mtscttss
 }
 
 // WithEndpoint sets the endpoint.
 func (mtscttss *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) WithEndpoint(endpoint obj.Object) *MTRTimeSynchronizationClusterTrustedTimeSourceStruct {
+	defer runtime.KeepAlive(endpoint)
 	objc.Send[objc.ID](objref.IDOf(mtscttss), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return mtscttss
 }
 
 // FabricIndex returns the fabric index.
-func (mtscttss *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) FabricIndex() obj.Object {
+func (mtscttss *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) FabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(mtscttss)
 	_r := objc.Send[objc.ID](objref.IDOf(mtscttss), objc.RegisterName("fabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NodeID returns the node ID.
-func (mtscttss *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) NodeID() obj.Object {
+func (mtscttss *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) NodeID() *foundation.Number {
+	defer runtime.KeepAlive(mtscttss)
 	_r := objc.Send[objc.ID](objref.IDOf(mtscttss), objc.RegisterName("nodeID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Endpoint returns the endpoint.
-func (mtscttss *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) Endpoint() obj.Object {
+func (mtscttss *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) Endpoint() *foundation.Number {
+	defer runtime.KeepAlive(mtscttss)
 	_r := objc.Send[objc.ID](objref.IDOf(mtscttss), objc.RegisterName("endpoint"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,41 +63,47 @@ func (de *DirectoryEnumerator) WithObservationInfo(observationInfo unsafe.Pointe
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (de *DirectoryEnumerator) WithScriptingProperties(scriptingProperties obj.Object) *DirectoryEnumerator {
-	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (de *DirectoryEnumerator) WithScriptingProperties(scriptingProperties map[string]obj.Object) *DirectoryEnumerator {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return de
 }
 
 // SkipDescendents wraps the corresponding Objective-C method.
 func (de *DirectoryEnumerator) SkipDescendents() {
+	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("skipDescendents"))
 }
 
 // SkipDescendants wraps the corresponding Objective-C method.
 func (de *DirectoryEnumerator) SkipDescendants() {
+	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("skipDescendants"))
 }
 
 // FileAttributes returns the file attributes.
 func (de *DirectoryEnumerator) FileAttributes() obj.Object {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("fileAttributes"))
 	return obj.Wrap(_r)
 }
 
 // DirectoryAttributes returns the directory attributes.
 func (de *DirectoryEnumerator) DirectoryAttributes() obj.Object {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("directoryAttributes"))
 	return obj.Wrap(_r)
 }
 
 // IsEnumeratingDirectoryPostOrder reports whether the object is enumerating directory post order.
 func (de *DirectoryEnumerator) IsEnumeratingDirectoryPostOrder() bool {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[bool](objref.IDOf(de), objc.RegisterName("isEnumeratingDirectoryPostOrder"))
 	return _r
 }
 
 // Level returns the level.
 func (de *DirectoryEnumerator) Level() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("level"))
 	return _r
 }

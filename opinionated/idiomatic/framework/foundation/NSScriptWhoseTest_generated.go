@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,27 +52,33 @@ func scriptWhoseTestAdopt(id objc.ID) *ScriptWhoseTest {
 
 // Description returns the object's -description text.
 func (swt *ScriptWhoseTest) Description() string {
+	defer runtime.KeepAlive(swt)
 	return rt.Description(objref.IDOf(swt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (swt *ScriptWhoseTest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(swt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(swt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (swt *ScriptWhoseTest) IsKind(className string) bool {
+	defer runtime.KeepAlive(swt)
 	return rt.IsKind(objref.IDOf(swt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (swt *ScriptWhoseTest) String() string {
+	defer runtime.KeepAlive(swt)
 	return rt.Description(objref.IDOf(swt))
 }
 
 // NewScriptWhoseTestWithCoder creates a new ScriptWhoseTest.
 func NewScriptWhoseTestWithCoder(inCoder *Coder) *ScriptWhoseTest {
+	defer runtime.KeepAlive(inCoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScriptWhoseTest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(inCoder))
 	return scriptWhoseTestAdopt(_id)
@@ -84,13 +91,14 @@ func (swt *ScriptWhoseTest) WithObservationInfo(observationInfo unsafe.Pointer) 
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (swt *ScriptWhoseTest) WithScriptingProperties(scriptingProperties obj.Object) *ScriptWhoseTest {
-	objc.Send[objc.ID](objref.IDOf(swt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (swt *ScriptWhoseTest) WithScriptingProperties(scriptingProperties map[string]obj.Object) *ScriptWhoseTest {
+	objc.Send[objc.ID](objref.IDOf(swt), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return swt
 }
 
 // IsTrue reports whether returns a Boolean value that indicates whether the test represented by the receiver evaluates to true.
 func (swt *ScriptWhoseTest) IsTrue() bool {
+	defer runtime.KeepAlive(swt)
 	_r := objc.Send[bool](objref.IDOf(swt), objc.RegisterName("isTrue"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func tensorOptimizerDeviceDataAdopt(id objc.ID) *TensorOptimizerDeviceData {
 
 // Description returns the object's -description text.
 func (todd *TensorOptimizerDeviceData) Description() string {
+	defer runtime.KeepAlive(todd)
 	return rt.Description(objref.IDOf(todd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (todd *TensorOptimizerDeviceData) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(todd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(todd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (todd *TensorOptimizerDeviceData) IsKind(className string) bool {
+	defer runtime.KeepAlive(todd)
 	return rt.IsKind(objref.IDOf(todd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (todd *TensorOptimizerDeviceData) String() string {
+	defer runtime.KeepAlive(todd)
 	return rt.Description(objref.IDOf(todd))
 }
 

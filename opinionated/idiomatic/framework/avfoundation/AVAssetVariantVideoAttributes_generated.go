@@ -5,8 +5,11 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +51,27 @@ func assetVariantVideoAttributesAdopt(id objc.ID) *AssetVariantVideoAttributes {
 
 // Description returns the object's -description text.
 func (avva *AssetVariantVideoAttributes) Description() string {
+	defer runtime.KeepAlive(avva)
 	return rt.Description(objref.IDOf(avva))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (avva *AssetVariantVideoAttributes) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(avva)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(avva), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (avva *AssetVariantVideoAttributes) IsKind(className string) bool {
+	defer runtime.KeepAlive(avva)
 	return rt.IsKind(objref.IDOf(avva), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (avva *AssetVariantVideoAttributes) String() string {
+	defer runtime.KeepAlive(avva)
 	return rt.Description(objref.IDOf(avva))
 }
 
@@ -74,27 +82,31 @@ func NewAssetVariantVideoAttributes() *AssetVariantVideoAttributes {
 }
 
 // VideoRange provides the video range of the variant. If it is not declared, it will be AVVideoRangeSDR.
-func (avva *AssetVariantVideoAttributes) VideoRange() obj.Object {
+func (avva *AssetVariantVideoAttributes) VideoRange() *foundation.String {
+	defer runtime.KeepAlive(avva)
 	_r := objc.Send[objc.ID](objref.IDOf(avva), objc.RegisterName("videoRange"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // CodecTypes provides an array of video sample codec types present in the variant's renditions if any are declared. Each value in the array is a NSNumber representation of CMVideoCodecType.
 //
 // CodecTypes returns the collection as a Go slice.
 func (avva *AssetVariantVideoAttributes) CodecTypes() []obj.Object {
+	defer runtime.KeepAlive(avva)
 	_arr := objc.Send[objc.ID](objref.IDOf(avva), objc.RegisterName("codecTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PresentationSize returns if it is not declared, it will be CGSizeZero.
 func (avva *AssetVariantVideoAttributes) PresentationSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(avva)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(avva), objc.RegisterName("presentationSize"))
 	return _r
 }
 
 // NominalFrameRate returns if it is not declared, the value will be negative.
 func (avva *AssetVariantVideoAttributes) NominalFrameRate() float64 {
+	defer runtime.KeepAlive(avva)
 	_r := objc.Send[float64](objref.IDOf(avva), objc.RegisterName("nominalFrameRate"))
 	return _r
 }
@@ -103,6 +115,7 @@ func (avva *AssetVariantVideoAttributes) NominalFrameRate() float64 {
 //
 // VideoLayoutAttributes returns the collection as a Go slice.
 func (avva *AssetVariantVideoAttributes) VideoLayoutAttributes() []*AssetVariantVideoLayoutAttributes {
+	defer runtime.KeepAlive(avva)
 	_arr := objc.Send[objc.ID](objref.IDOf(avva), objc.RegisterName("videoLayoutAttributes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetVariantVideoLayoutAttributes {
 		return AssetVariantVideoLayoutAttributesFromID(_id)

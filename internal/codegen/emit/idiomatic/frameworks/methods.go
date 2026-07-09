@@ -8,9 +8,9 @@ import (
 	"maps"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
+	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -30,6 +30,16 @@ func buildMethods(
 	abstractBases abstractBaseIndex,
 ) []methodModel {
 	rawNames := instanceRawMethodNames(class)
+	// Names the idiomatic.json sidecar assigns to this class's instance methods
+	// are reserved up front, so a mechanically-derived name can never occupy a
+	// curated one (the generated member is dropped instead — the curator owns
+	// that name).
+	curatedNames := map[string]bool{}
+	for _, method := range class.Methods {
+		if goName, ok := fc.idio.MethodGoName(ctx.ClassName, method.Selector, false); ok {
+			curatedNames[goName] = true
+		}
+	}
 	var methods []methodModel
 	seenMethod := map[string]bool{}
 	for _, method := range class.Methods {
@@ -40,9 +50,23 @@ func buildMethods(
 		if rawGoName == "" {
 			rawGoName = naming.MethodName(method.Selector)
 		}
-		built := buildMethod(method, rawGoName, class, fc, ctx, mapper, rawPkgAlias, trialNames, abstractBases)
+		built := buildMethod(
+			method,
+			rawGoName,
+			class,
+			fc,
+			ctx,
+			mapper,
+			rawPkgAlias,
+			trialNames,
+			abstractBases,
+		)
 		if built == nil {
 			continue
+		}
+		if goName, ok := fc.idio.MethodGoName(ctx.ClassName, method.Selector, false); ok {
+			built.goName = goName
+			built.nameCurated = true
 		}
 		// A call is main-thread-bound when its class (or an ancestor) is
 		// @MainActor or the selector itself is, unless it is explicitly
@@ -52,20 +76,160 @@ func buildMethods(
 		if built.mainThread {
 			built.extraImports["purego"] = pureobjcImportPath
 		}
+		// Every instance method keeps its receiver alive across the send
+		// (defer runtime.KeepAlive) — without it the collector could finalize
+		// the wrapper, releasing the object, while the call is executing.
+		built.extraImports["runtime"] = "runtime"
 		// Re-case recognised initialisms in the exported name (UsbControllers →
 		// USBControllers). Done before the dedup check so collisions are detected
 		// on the final name. The bridge dispatches by selector, so this is a
-		// Go-facing rename only.
-		built.goName = applyInitialisms(built.goName)
+		// Go-facing rename only. A curated name is used verbatim.
+		if !built.nameCurated {
+			built.goName = applyInitialisms(built.goName)
+			if curatedNames[built.goName] {
+				continue // the name belongs to a curated rename
+			}
+		}
 		if seenMethod[built.goName] || isReservedMemberName(built.goName) {
 			continue
 		}
 		built.doc = method.Doc
+		// An NSSet return converted to a Go slice has no defined element order;
+		// say so where a caller reads the signature.
+		if built.kind == kindPlain && strings.HasPrefix(built.plainRetType, "[]") &&
+			looksLikeNSSet(method.Return.ObjCType) {
+			built.doc = strings.TrimSpace(
+				built.doc + "\nThe order of the returned elements is unspecified.",
+			)
+		}
 		seenMethod[built.goName] = true
 		methods = append(methods, *built)
 	}
 	stripGetterPrefixes(methods)
+	repairMethodNames(methods)
 	return methods
+}
+
+// repairMethodNames applies conservative, deterministic second-pass renames
+// that remove Objective-C naming artifacts the selector translation leaves
+// behind. Like stripGetterPrefixes it runs over the fully de-duplicated method
+// set, so a strip is applied only when the shorter name is a free exported
+// identifier — a rename never collides with or displaces another method.
+// Curated sidecar names are never touched. The bridge dispatches by selector,
+// so every rename is Go-facing only.
+//
+//  1. An error-returning method drops a trailing AndReturnError / WithError /
+//     Error label — the error in the Go signature already says it
+//     (DataWithContentsOfFileOptionsError → DataWithContentsOfFileOptions).
+//  2. A method whose last parameter is an options bitmask drops a trailing
+//     Options label (CommonPrefixWithStringOptions → CommonPrefixWithString).
+//  3. A one-parameter method drops a trailing With<X> when <X> merely echoes
+//     that parameter's Go type (CommonPrefixWithString(str string) →
+//     CommonPrefix).
+//
+// The rules run in that order and may chain on one method.
+func repairMethodNames(methods []methodModel) {
+	taken := make(map[string]bool, len(methods))
+	for _, method := range methods {
+		taken[method.goName] = true
+	}
+	rename := func(i int, stripped string) {
+		if stripped == "" || stripped == methods[i].goName ||
+			stripped[0] < 'A' || stripped[0] > 'Z' ||
+			taken[stripped] || isReservedMemberName(stripped) {
+			return
+		}
+		taken[stripped] = true
+		methods[i].goName = stripped
+	}
+	for i := range methods {
+		if methods[i].nameCurated {
+			continue
+		}
+		if methodReturnsError(methods[i]) {
+			for _, suffix := range []string{"AndReturnError", "WithError", "Error"} {
+				if stripped, ok := strings.CutSuffix(methods[i].goName, suffix); ok {
+					rename(i, stripped)
+					break
+				}
+			}
+		}
+		if lastParamIsOptions(methods[i]) {
+			if stripped, ok := strings.CutSuffix(methods[i].goName, "Options"); ok {
+				rename(i, stripped)
+			}
+		}
+		if stripped, ok := stripWithTypeEcho(methods[i]); ok {
+			rename(i, stripped)
+		}
+	}
+}
+
+// methodReturnsError reports whether the generated method carries a trailing
+// Go error return whose presence makes an Error name label redundant. Async
+// and BoolNSError methods already strip their labels at name derivation.
+func methodReturnsError(method methodModel) bool {
+	return (method.kind == kindPlain && method.plainHasError) ||
+		(method.kind == kindSlice && method.sliceHasError)
+}
+
+// lastParamIsOptions reports whether the method's final signature parameter is
+// an options bitmask (its Go type ends in Options), which makes a trailing
+// Options label in the method name redundant.
+func lastParamIsOptions(method methodModel) bool {
+	if method.kind != kindPlain {
+		return false
+	}
+	last := ""
+	for _, p := range method.plainParams {
+		if !p.isOut {
+			last = p.goType
+		}
+	}
+	return strings.HasSuffix(last, "Options")
+}
+
+// stripWithTypeEcho returns the method name without its trailing With<X>
+// segment when the method takes exactly one parameter and <X> names that
+// parameter's Go type — the signature already states the type, so the label
+// adds nothing (CommonPrefixWithString(str string) → CommonPrefix).
+func stripWithTypeEcho(method methodModel) (string, bool) {
+	if method.kind != kindPlain {
+		return "", false
+	}
+	var soleType string
+	count := 0
+	for _, p := range method.plainParams {
+		if !p.isOut {
+			soleType = p.goType
+			count++
+		}
+	}
+	if count != 1 {
+		return "", false
+	}
+	idx := strings.LastIndex(method.goName, "With")
+	if idx <= 0 {
+		return "", false
+	}
+	echo := method.goName[idx+len("With"):]
+	if echo == "" || !typeEchoes(echo, soleType) {
+		return "", false
+	}
+	return method.goName[:idx], true
+}
+
+// typeEchoes reports whether a name fragment names the parameter's Go type:
+// the type's base name (slice/pointer/package qualifiers stripped) matches
+// case-insensitively, so "String" echoes the Go string type and "Data" echoes
+// *Data.
+func typeEchoes(echo, goType string) bool {
+	base := strings.TrimPrefix(goType, "[]")
+	base = strings.TrimPrefix(base, "*")
+	if i := strings.LastIndexByte(base, '.'); i >= 0 {
+		base = base[i+1:]
+	}
+	return strings.EqualFold(echo, base)
 }
 
 // stripGetterPrefixes renames pure accessors so they drop a leading "Get",
@@ -84,6 +248,9 @@ func stripGetterPrefixes(methods []methodModel) {
 		taken[method.goName] = true
 	}
 	for i := range methods {
+		if methods[i].nameCurated {
+			continue
+		}
 		stripped, ok := strippedGetterName(methods[i])
 		if !ok || taken[stripped] || isReservedMemberName(stripped) {
 			continue
@@ -199,6 +366,11 @@ type methodModel struct {
 	doc          string // Apple/header documentation for the underlying method
 	extraImports map[string]string
 
+	// nameCurated marks a goName assigned by the idiomatic.json sidecar; the
+	// second-pass renamers (getter strip, error/Options/With<X> repairs) leave
+	// such a name untouched.
+	nameCurated bool
+
 	// mainThread is set when the underlying selector is isolated to Swift's
 	// @MainActor (the class, an ancestor, or the method itself), so the emitted
 	// body must run on the main thread. The writers wrap the call in purego.Main.
@@ -275,7 +447,13 @@ func buildAsyncMethod(
 	// generated closure matches the raw method's parameter type. Degraded
 	// blocks come back as objc.Block and are rejected below.
 	blockImpSet := make(typemap.ImportSet)
-	blockGoType := rawfw.BlockGoFuncType(lastParam.ObjCType, ctx, mapper, blockImpSet, mapper.OwnerIndex)
+	blockGoType := rawfw.BlockGoFuncType(
+		lastParam.ObjCType,
+		ctx,
+		mapper,
+		blockImpSet,
+		mapper.OwnerIndex,
+	)
 	if !strings.HasPrefix(blockGoType, "func(") || !strings.HasSuffix(blockGoType, ")") {
 		return nil
 	}
@@ -414,7 +592,15 @@ func buildMethod(
 	// Async completion → (ctx) error. Fall through to a plain wrapper when the
 	// block shape can't be expressed idiomatically (non-NSError result params).
 	if isAsyncCompletion(method) {
-		if built := buildAsyncMethod(method, rawGoName, fc, ctx, mapper, rawPkgAlias, trialNames); built != nil {
+		if built := buildAsyncMethod(
+			method,
+			rawGoName,
+			fc,
+			ctx,
+			mapper,
+			rawPkgAlias,
+			trialNames,
+		); built != nil {
 			return built
 		}
 	}
@@ -440,14 +626,31 @@ func buildMethod(
 	// NSArray → slice (no params, getter only). Fall through to a plain wrapper
 	// when the element type can't be resolved.
 	if looksLikeNSArray(method.Return.ObjCType) && len(method.Params) == 0 {
-		if built := buildSliceMethod(method, rawGoName, fc, ctx, mapper, rawPkgAlias, trialNames); built != nil {
+		if built := buildSliceMethod(
+			method,
+			rawGoName,
+			fc,
+			ctx,
+			mapper,
+			rawPkgAlias,
+			trialNames,
+		); built != nil {
 			return built
 		}
 	}
 
 	// Everything else: a plain pass-through wrapper so the method is callable on
 	// the idiomatic type without dropping to .Unwrap().
-	built := buildPlainMethod(method, rawGoName, fc, ctx, mapper, rawPkgAlias, trialNames, abstractBases)
+	built := buildPlainMethod(
+		method,
+		rawGoName,
+		fc,
+		ctx,
+		mapper,
+		rawPkgAlias,
+		trialNames,
+		abstractBases,
+	)
 	if built != nil {
 		if size := indexGuardSizeFor(method, class); size != "" && len(built.plainParams) == 1 {
 			built.indexGuardSize = size
@@ -506,9 +709,25 @@ func buildSliceMethod(
 	case isNSStringType(normaliseObjC(elemObjC)):
 		// Each element is a string.
 		elemGoType, convFmt = "string", "purego.GoString(%s)"
+	case isNSURLType(normaliseObjC(elemObjC)):
+		// Each element is a URL, surfaced as a Go string.
+		elemGoType, convFmt = "string", "rt.URLString(%s)"
+		extraImports["rt"] = rtImportPath
+	case isNSDateType(normaliseObjC(elemObjC)):
+		elemGoType, convFmt = "time.Time", "rt.NSDateToTime(%s)"
+		extraImports["rt"] = rtImportPath
+		extraImports["time"] = "time"
+	case isNSDataType(normaliseObjC(elemObjC)):
+		elemGoType, convFmt = "[]byte", "rt.NSDataToBytes(%s)"
+		extraImports["rt"] = rtImportPath
 	default:
 		impSet := make(typemap.ImportSet)
-		goElem := qualifyRaw(mapper.GoType(elemObjC, ctx, impSet), fc, rawPkgAlias, ctx.GenericParams)
+		goElem := qualifyRaw(
+			mapper.GoType(elemObjC, ctx, impSet),
+			fc,
+			rawPkgAlias,
+			ctx.GenericParams,
+		)
 		if !isObjectPointerType(goElem, mapper) {
 			// Only object elements are converted; anything else falls through to a
 			// plain method.
@@ -661,7 +880,47 @@ func buildPlainMethod(
 
 func writeMethod(w io.Writer, typeName string, method methodModel) {
 	recvVar := uniqueReceiver(typeName, methodParamNames(method))
-	writeMethodAs(w, fmt.Sprintf("(%s *%s) ", recvVar, typeName), "objref.IDOf("+recvVar+")", method)
+	writeMethodAs(
+		w,
+		fmt.Sprintf("(%s *%s) ", recvVar, typeName),
+		"objref.IDOf("+recvVar+")",
+		method,
+	)
+}
+
+// recvVarOf extracts the receiver variable from a receiver clause
+// ("(rv *Type) " → "rv"), or "" for a package-level function.
+func recvVarOf(recv string) string {
+	fields := strings.Fields(recv)
+	if len(fields) == 0 {
+		return ""
+	}
+	return strings.TrimPrefix(fields[0], "(")
+}
+
+// keepAliveNames lists what a method body must keep alive until its
+// Objective-C call returns: the receiver (when there is one) and every
+// parameter whose argument expression reads a wrapper's pointer directly
+// (objref.IDOf(p)). Without the keep-alive the collector could finalize the
+// wrapper — releasing the object — while the send is still executing.
+// Collection parameters are excluded: the Objective-C collection built from
+// them retains its elements.
+func keepAliveNames(recvVar string, method methodModel) []string {
+	var names []string
+	if recvVar != "" {
+		names = append(names, recvVar)
+	}
+	for _, p := range method.plainParams {
+		if !p.isOut && strings.HasPrefix(p.rawExpression, "objref.IDOf(") {
+			names = append(names, p.goName)
+		}
+	}
+	for _, p := range method.asyncNonBlockParams {
+		if strings.HasPrefix(p.rawExpression, "objref.IDOf(") {
+			names = append(names, p.goName)
+		}
+	}
+	return names
 }
 
 // methodParamNames returns the Go signature parameter names of a method entry —
@@ -729,15 +988,16 @@ func writePlainMethod(w io.Writer, recv, recvExpr string, method methodModel) {
 	}
 	// objc.Send[...](...) is an expression (the marshaled call), not a Go
 	// declaration; the body statements around it are rendered by the template.
-	call := fmt.Sprintf("objc.Send[%s](%s)", method.plainMessageSendType, strings.Join(sendArgs, ", "))
+	call := fmt.Sprintf(
+		"objc.Send[%s](%s)",
+		method.plainMessageSendType,
+		strings.Join(sendArgs, ", "),
+	)
 
 	// recv is "(rv *Type) " for an instance method (empty for a package-level
 	// class function); the receiver variable is the identifier after the opening
 	// paren.
-	recvVar := ""
-	if fields := strings.Fields(recv); len(fields) > 0 {
-		recvVar = strings.TrimPrefix(fields[0], "(")
-	}
+	recvVar := recvVarOf(recv)
 
 	var guards []string
 	if method.indexGuardSize != "" && len(method.plainParams) == 1 && recvVar != "" {
@@ -779,6 +1039,7 @@ func writePlainMethod(w io.Writer, recv, recvExpr string, method methodModel) {
 		MainThread: method.mainThread,
 		RetVars:    retVars,
 		RetTypes:   retTypes,
+		KeepAlive:  keepAliveNames(recvVar, method),
 	})
 	if err != nil {
 		panic(err)
@@ -935,6 +1196,8 @@ func writeAsyncMethod(w io.Writer, recv, recvExpr string, method methodModel) {
 		", ",
 	) + ")"
 
+	keepAlive := keepAliveNames(recvVarOf(recv), method)
+
 	// Error-only completion: returns plain error.
 	if method.asyncResultGoType == "" {
 		out, err := render.AsyncMethod(view.AsyncMethod{
@@ -950,6 +1213,7 @@ func writeAsyncMethod(w io.Writer, recv, recvExpr string, method methodModel) {
 			ClosureParams: closureParams,
 			SendCall:      sendCall,
 			ErrConvExpr:   errConvExpr,
+			KeepAlive:     keepAlive,
 		})
 		if err != nil {
 			panic(err)
@@ -980,6 +1244,7 @@ func writeAsyncMethod(w io.Writer, recv, recvExpr string, method methodModel) {
 		SendCall:       sendCall,
 		ErrConvExpr:    errConvExpr,
 		ResultConvExpr: resultConvExpr,
+		KeepAlive:      keepAlive,
 	})
 	if err != nil {
 		panic(err)
@@ -995,6 +1260,7 @@ func writeBoolNSErrorMethod(w io.Writer, recv, recvExpr string, method methodMod
 		RecvExpr:   recvExpr,
 		Selector:   method.selector,
 		MainThread: method.mainThread,
+		KeepAlive:  keepAliveNames(recvVarOf(recv), method),
 	})
 	if err != nil {
 		panic(err)
@@ -1008,7 +1274,12 @@ func writeSliceMethod(w io.Writer, recv, recvExpr string, method methodModel) {
 	conv := fmt.Sprintf(method.sliceElementConversionFormat, "_id")
 	convClosure := fmt.Sprintf("func(_id objc.ID) %s { return %s }", method.sliceElemGoType, conv)
 	out, err := render.SliceMethod(view.SliceMethod{
-		DocComment:  docLeadKind(method.goName, method.doc, synthFallback(method.goName, docGetter), docGetter),
+		DocComment: docLeadKind(
+			method.goName,
+			method.doc,
+			synthFallback(method.goName, docGetter),
+			docGetter,
+		),
 		Recv:        recv,
 		GoName:      method.goName,
 		RecvExpr:    recvExpr,
@@ -1017,6 +1288,7 @@ func writeSliceMethod(w io.Writer, recv, recvExpr string, method methodModel) {
 		HasError:    method.sliceHasError,
 		ConvClosure: convClosure,
 		MainThread:  method.mainThread,
+		KeepAlive:   keepAliveNames(recvVarOf(recv), method),
 	})
 	if err != nil {
 		panic(err)

@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func issuerProvisioningExtensionStatusAdopt(id objc.ID) *IssuerProvisioningExten
 
 // Description returns the object's -description text.
 func (ipes *IssuerProvisioningExtensionStatus) Description() string {
+	defer runtime.KeepAlive(ipes)
 	return rt.Description(objref.IDOf(ipes))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ipes *IssuerProvisioningExtensionStatus) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ipes)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ipes), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ipes *IssuerProvisioningExtensionStatus) IsKind(className string) bool {
+	defer runtime.KeepAlive(ipes)
 	return rt.IsKind(objref.IDOf(ipes), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ipes *IssuerProvisioningExtensionStatus) String() string {
+	defer runtime.KeepAlive(ipes)
 	return rt.Description(objref.IDOf(ipes))
 }
 
@@ -92,18 +99,21 @@ func (ipes *IssuerProvisioningExtensionStatus) WithRemotePassEntriesAvailable(re
 
 // RequiresAuthentication wraps the corresponding Objective-C method.
 func (ipes *IssuerProvisioningExtensionStatus) RequiresAuthentication() bool {
+	defer runtime.KeepAlive(ipes)
 	_r := objc.Send[bool](objref.IDOf(ipes), objc.RegisterName("requiresAuthentication"))
 	return _r
 }
 
 // PassEntriesAvailable wraps the corresponding Objective-C method.
 func (ipes *IssuerProvisioningExtensionStatus) PassEntriesAvailable() bool {
+	defer runtime.KeepAlive(ipes)
 	_r := objc.Send[bool](objref.IDOf(ipes), objc.RegisterName("passEntriesAvailable"))
 	return _r
 }
 
 // RemotePassEntriesAvailable wraps the corresponding Objective-C method.
 func (ipes *IssuerProvisioningExtensionStatus) RemotePassEntriesAvailable() bool {
+	defer runtime.KeepAlive(ipes)
 	_r := objc.Send[bool](objref.IDOf(ipes), objc.RegisterName("remotePassEntriesAvailable"))
 	return _r
 }

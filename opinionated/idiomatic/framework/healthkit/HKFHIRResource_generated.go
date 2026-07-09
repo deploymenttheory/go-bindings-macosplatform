@@ -5,7 +5,10 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func fHIRResourceAdopt(id objc.ID) *FHIRResource {
 
 // Description returns the object's -description text.
 func (fr *FHIRResource) Description() string {
+	defer runtime.KeepAlive(fr)
 	return rt.Description(objref.IDOf(fr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fr *FHIRResource) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fr *FHIRResource) IsKind(className string) bool {
+	defer runtime.KeepAlive(fr)
 	return rt.IsKind(objref.IDOf(fr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fr *FHIRResource) String() string {
+	defer runtime.KeepAlive(fr)
 	return rt.Description(objref.IDOf(fr))
 }
 
@@ -74,18 +82,21 @@ func NewFHIRResource() *FHIRResource {
 
 // FHIRVersion returns the FHIR version of the resource data.
 func (fr *FHIRResource) FHIRVersion() *FHIRVersion {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("FHIRVersion"))
 	return FHIRVersionFromID(_r)
 }
 
 // ResourceType returns the resource type, corresponding to the 'resourceType' field in the resource's JSON representation. May be one of 8 FHIR resource types supported within HealthKit: AllergyIntolerance, Condition, Immunization, MedicationDispense, MedicationOrder, MedicationStatement, Observation, and Procedure.
-func (fr *FHIRResource) ResourceType() obj.Object {
+func (fr *FHIRResource) ResourceType() *foundation.String {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("resourceType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Identifier returns the identifier of the resource, corresponding to the 'id' field in the resource's JSON representation. Unique within a given resource type and FHIR end-point, as represented by an HKSource.
 func (fr *FHIRResource) Identifier() string {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -94,13 +105,15 @@ func (fr *FHIRResource) Identifier() string {
 }
 
 // Data returns the JSON representation of the FHIR resource. Conforms to the HL7 Argonaut Project resource type definitions.
-func (fr *FHIRResource) Data() obj.Object {
+func (fr *FHIRResource) Data() []byte {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // SourceURL returns the fully specified source URL of the FHIR resource. This URL can be used to help determine the provenance of the resource. Direct access is protected by OAuth: querying without suitable authorization will result in an authorization error.
-func (fr *FHIRResource) SourceURL() obj.Object {
+func (fr *FHIRResource) SourceURL() string {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("sourceURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

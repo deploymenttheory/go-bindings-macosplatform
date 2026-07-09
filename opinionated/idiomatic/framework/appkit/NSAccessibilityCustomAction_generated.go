@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func accessibilityCustomActionAdopt(id objc.ID) *AccessibilityCustomAction {
 
 // Description returns the object's -description text.
 func (aca *AccessibilityCustomAction) Description() string {
+	defer runtime.KeepAlive(aca)
 	return rt.Description(objref.IDOf(aca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aca *AccessibilityCustomAction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aca)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aca *AccessibilityCustomAction) IsKind(className string) bool {
+	defer runtime.KeepAlive(aca)
 	return rt.IsKind(objref.IDOf(aca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aca *AccessibilityCustomAction) String() string {
+	defer runtime.KeepAlive(aca)
 	return rt.Description(objref.IDOf(aca))
 }
 
@@ -87,6 +94,7 @@ func (aca *AccessibilityCustomAction) WithHandler(handler func() bool) *Accessib
 
 // Name returns the name.
 func (aca *AccessibilityCustomAction) Name() string {
+	defer runtime.KeepAlive(aca)
 	_r := objc.Send[objc.ID](objref.IDOf(aca), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,18 +55,21 @@ func (md *MixerDefinition) WithGain(gain float64) *MixerDefinition {
 
 // WithGainMetaParameterDefinition sets a template for a parameter that changes the mixer’s volume gradually over a period of time.
 func (md *MixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *MixerDefinition {
+	defer runtime.KeepAlive(gainMetaParameterDefinition)
 	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
 	return md
 }
 
 // Gain returns linear gain scalar.
 func (md *MixerDefinition) Gain() float64 {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[float64](objref.IDOf(md), objc.RegisterName("gain"))
 	return _r
 }
 
 // GainMetaParameterDefinition returns optionally attach a metaparameter definition here to enable real-time control of the gain during playback.
 func (md *MixerDefinition) GainMetaParameterDefinition() *NumberMetaParameterDefinition {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("gainMetaParameterDefinition"))
 	return NumberMetaParameterDefinitionFromID(_r)
 }

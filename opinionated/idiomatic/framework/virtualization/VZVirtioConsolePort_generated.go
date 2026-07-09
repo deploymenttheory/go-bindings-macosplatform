@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func virtioConsolePortAdopt(id objc.ID) *VirtioConsolePort {
 
 // Description returns the object's -description text.
 func (vcp *VirtioConsolePort) Description() string {
+	defer runtime.KeepAlive(vcp)
 	return rt.Description(objref.IDOf(vcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vcp *VirtioConsolePort) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vcp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vcp *VirtioConsolePort) IsKind(className string) bool {
+	defer runtime.KeepAlive(vcp)
 	return rt.IsKind(objref.IDOf(vcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vcp *VirtioConsolePort) String() string {
+	defer runtime.KeepAlive(vcp)
 	return rt.Description(objref.IDOf(vcp))
 }
 
@@ -74,12 +81,14 @@ func NewVirtioConsolePort() *VirtioConsolePort {
 
 // WithAttachment sets an array of serial port attachments.
 func (vcp *VirtioConsolePort) WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsolePort {
+	defer runtime.KeepAlive(attachment)
 	objc.Send[objc.ID](objref.IDOf(vcp), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 	return vcp
 }
 
 // Name returns the console port name currently being used by this port. This property may not change while the VM is running. A null value indicates no name has been set.
 func (vcp *VirtioConsolePort) Name() string {
+	defer runtime.KeepAlive(vcp)
 	_r := objc.Send[objc.ID](objref.IDOf(vcp), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -89,6 +98,7 @@ func (vcp *VirtioConsolePort) Name() string {
 
 // Attachment returns the console port attachment that's currently connected to this console port. This property may change at any time while the VM is running.
 func (vcp *VirtioConsolePort) Attachment() *SerialPortAttachment {
+	defer runtime.KeepAlive(vcp)
 	_r := objc.Send[objc.ID](objref.IDOf(vcp), objc.RegisterName("attachment"))
 	return SerialPortAttachmentFromID(_r)
 }

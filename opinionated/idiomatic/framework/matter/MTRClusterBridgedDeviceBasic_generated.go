@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -46,6 +48,8 @@ func mTRClusterBridgedDeviceBasicAdopt(id objc.ID) *MTRClusterBridgedDeviceBasic
 
 // NewMTRClusterBridgedDeviceBasicWithDeviceEndpointQueue creates a new MTRClusterBridgedDeviceBasic.
 func NewMTRClusterBridgedDeviceBasicWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterBridgedDeviceBasic {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBridgedDeviceBasic")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterBridgedDeviceBasicAdopt(_id)

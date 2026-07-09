@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func assetDownloadURLSessionAdopt(id objc.ID) *AssetDownloadURLSession {
 
 // Description returns the object's -description text.
 func (adus *AssetDownloadURLSession) Description() string {
+	defer runtime.KeepAlive(adus)
 	return rt.Description(objref.IDOf(adus))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (adus *AssetDownloadURLSession) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(adus)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(adus), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (adus *AssetDownloadURLSession) IsKind(className string) bool {
+	defer runtime.KeepAlive(adus)
 	return rt.IsKind(objref.IDOf(adus), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (adus *AssetDownloadURLSession) String() string {
+	defer runtime.KeepAlive(adus)
 	return rt.Description(objref.IDOf(adus))
 }
 
@@ -73,19 +80,25 @@ func NewAssetDownloadURLSession() *AssetDownloadURLSession {
 }
 
 // AssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions creates a download task to download the asset.
-func (adus *AssetDownloadURLSession) AssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions(uRLAsset *URLAsset, title string, artworkData obj.Object, options obj.Object) *AssetDownloadTask {
-	_r := objc.Send[objc.ID](objref.IDOf(adus), objc.RegisterName("assetDownloadTaskWithURLAsset:assetTitle:assetArtworkData:options:"), objref.IDOf(uRLAsset), purego.NSString(title), objref.IDOf(artworkData), objref.IDOf(options))
+func (adus *AssetDownloadURLSession) AssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions(urlAsset *URLAsset, title string, artworkData []byte, options map[string]obj.Object) *AssetDownloadTask {
+	defer runtime.KeepAlive(adus)
+	defer runtime.KeepAlive(urlAsset)
+	_r := objc.Send[objc.ID](objref.IDOf(adus), objc.RegisterName("assetDownloadTaskWithURLAsset:assetTitle:assetArtworkData:options:"), objref.IDOf(urlAsset), purego.NSString(title), rt.BytesToNSData(artworkData), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return AssetDownloadTaskFromID(_r)
 }
 
 // AggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions creates a download task to download the asset and media selections.
-func (adus *AssetDownloadURLSession) AggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions(uRLAsset *URLAsset, mediaSelections []*MediaSelection, title string, artworkData obj.Object, options obj.Object) *AggregateAssetDownloadTask {
-	_r := objc.Send[objc.ID](objref.IDOf(adus), objc.RegisterName("aggregateAssetDownloadTaskWithURLAsset:mediaSelections:assetTitle:assetArtworkData:options:"), objref.IDOf(uRLAsset), purego.SliceToNSArray(mediaSelections, func(_v *MediaSelection) objc.ID { return objref.IDOf(_v) }), purego.NSString(title), objref.IDOf(artworkData), objref.IDOf(options))
+func (adus *AssetDownloadURLSession) AggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions(urlAsset *URLAsset, mediaSelections []*MediaSelection, title string, artworkData []byte, options map[string]obj.Object) *AggregateAssetDownloadTask {
+	defer runtime.KeepAlive(adus)
+	defer runtime.KeepAlive(urlAsset)
+	_r := objc.Send[objc.ID](objref.IDOf(adus), objc.RegisterName("aggregateAssetDownloadTaskWithURLAsset:mediaSelections:assetTitle:assetArtworkData:options:"), objref.IDOf(urlAsset), purego.SliceToNSArray(mediaSelections, func(_v *MediaSelection) objc.ID { return objref.IDOf(_v) }), purego.NSString(title), rt.BytesToNSData(artworkData), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return AggregateAssetDownloadTaskFromID(_r)
 }
 
 // AssetDownloadTaskWithConfiguration creates a download task that uses the specified configuration.
 func (adus *AssetDownloadURLSession) AssetDownloadTaskWithConfiguration(downloadConfiguration *AssetDownloadConfiguration) *AssetDownloadTask {
+	defer runtime.KeepAlive(adus)
+	defer runtime.KeepAlive(downloadConfiguration)
 	_r := objc.Send[objc.ID](objref.IDOf(adus), objc.RegisterName("assetDownloadTaskWithConfiguration:"), objref.IDOf(downloadConfiguration))
 	return AssetDownloadTaskFromID(_r)
 }

@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterGroupKeyManagementAdopt(id objc.ID) *MTRBaseClusterGroupKeyMa
 
 // NewMTRBaseClusterGroupKeyManagementWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterGroupKeyManagementWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterGroupKeyManagement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterGroupKeyManagement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterGroupKeyManagementAdopt(_id)
@@ -56,6 +60,8 @@ func NewMTRBaseClusterGroupKeyManagementWithDeviceEndpointIDQueue(device *MTRBas
 
 // NewMTRBaseClusterGroupKeyManagementWithDeviceEndpointQueue creates a new MTRBaseClusterGroupKeyManagement.
 func NewMTRBaseClusterGroupKeyManagementWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterGroupKeyManagement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterGroupKeyManagement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRBaseClusterGroupKeyManagementAdopt(_id)
@@ -65,6 +71,8 @@ func NewMTRBaseClusterGroupKeyManagementWithDeviceEndpointQueue(device *MTRBaseD
 //
 // KeySetReadWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetReadWithParamsCompletion(ctx context.Context, params *MTRGroupKeyManagementClusterKeySetReadParams) (result *MTRGroupKeyManagementClusterKeySetReadResponseParams, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRGroupKeyManagementClusterKeySetReadResponseParams
 		err error
@@ -90,6 +98,8 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetReadWithParamsCompletion(c
 //
 // KeySetReadAllIndicesWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetReadAllIndicesWithParamsCompletion(ctx context.Context, params *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) (result *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams
 		err error
@@ -115,6 +125,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetReadAllIndicesWithParamsCo
 //
 // KeySetReadAllIndicesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetReadAllIndicesWithCompletion(ctx context.Context) (result *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, err error) {
+	defer runtime.KeepAlive(mbcgkm)
 	type _result struct {
 		val *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams
 		err error
@@ -140,6 +151,8 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetReadAllIndicesWithCompleti
 //
 // ReadAttributeGroupKeyMapWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGroupKeyMapWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -165,6 +178,8 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGroupKeyMapWithPara
 //
 // SubscribeAttributeGroupKeyMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGroupKeyMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -190,6 +205,8 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGroupKeyMapWit
 //
 // ReadAttributeGroupTableWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGroupTableWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -215,6 +232,8 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGroupTableWithParam
 //
 // SubscribeAttributeGroupTableWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGroupTableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -240,6 +259,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGroupTableWith
 //
 // ReadAttributeMaxGroupsPerFabricWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeMaxGroupsPerFabricWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -265,6 +285,8 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeMaxGroupsPerFabricW
 //
 // SubscribeAttributeMaxGroupsPerFabricWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeMaxGroupsPerFabricWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -290,6 +312,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeMaxGroupsPerFa
 //
 // ReadAttributeMaxGroupKeysPerFabricWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeMaxGroupKeysPerFabricWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -315,6 +338,8 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeMaxGroupKeysPerFabr
 //
 // SubscribeAttributeMaxGroupKeysPerFabricWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeMaxGroupKeysPerFabricWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -340,6 +365,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeMaxGroupKeysPe
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -365,6 +391,8 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGeneratedCommandLis
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -390,6 +418,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGeneratedComma
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -415,6 +444,8 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeAcceptedCommandList
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -440,6 +471,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeAcceptedComman
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,6 +497,8 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeAttributeListWithCo
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -490,6 +524,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeAttributeListW
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -515,6 +550,8 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeFeatureMapWithCompl
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -540,6 +577,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeFeatureMapWith
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -565,6 +603,8 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeClusterRevisionWith
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -590,6 +630,8 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeClusterRevisio
 //
 // KeySetReadWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetReadWithParams(ctx context.Context, params *MTRGroupKeyManagementClusterKeySetReadParams) (result *MTRGroupKeyManagementClusterKeySetReadResponseParams, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRGroupKeyManagementClusterKeySetReadResponseParams
 		err error
@@ -615,6 +657,8 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetReadWithParams(ctx context
 //
 // KeySetReadAllIndicesWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetReadAllIndicesWithParams(ctx context.Context, params *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) (result *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams
 		err error
@@ -640,6 +684,8 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetReadAllIndicesWithParams(c
 //
 // ReadAttributeGroupKeyMapWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGroupKeyMapWithParams(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -665,6 +711,10 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGroupKeyMapWithPara
 //
 // SubscribeAttributeGroupKeyMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGroupKeyMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -690,6 +740,8 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGroupKeyMapWit
 //
 // ReadAttributeGroupTableWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGroupTableWithParams(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -715,6 +767,10 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGroupTableWithParam
 //
 // SubscribeAttributeGroupTableWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGroupTableWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -740,6 +796,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGroupTableWith
 //
 // ReadAttributeMaxGroupsPerFabric blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeMaxGroupsPerFabric(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -765,6 +822,10 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeMaxGroupsPerFabric(
 //
 // SubscribeAttributeMaxGroupsPerFabricWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeMaxGroupsPerFabricWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -790,6 +851,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeMaxGroupsPerFa
 //
 // ReadAttributeMaxGroupKeysPerFabric blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeMaxGroupKeysPerFabric(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -815,6 +877,10 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeMaxGroupKeysPerFabr
 //
 // SubscribeAttributeMaxGroupKeysPerFabricWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeMaxGroupKeysPerFabricWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -840,6 +906,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeMaxGroupKeysPe
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -865,6 +932,10 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGeneratedCommandLis
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -890,6 +961,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGeneratedComma
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -915,6 +987,10 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeAcceptedCommandList
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -940,6 +1016,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeAcceptedComman
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -965,6 +1042,10 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeAttributeList(ctx c
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -990,6 +1071,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeAttributeListW
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1015,6 +1097,10 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeFeatureMap(ctx cont
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,6 +1126,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeFeatureMapWith
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1065,6 +1152,10 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeClusterRevision(ctx
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcgkm)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

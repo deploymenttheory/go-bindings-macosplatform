@@ -5,6 +5,8 @@
 package collaboration
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,14 @@ func NewGroupIdentity() *GroupIdentity {
 
 // PosixGID returns the POSIX GID of the identity. The POSIX GID is an integer that can identify a group within an identity authority. GIDs are not guaranteed to be unique within an identity authority. - Returns: The POSIX GID of the group identity.
 func (gi *GroupIdentity) PosixGID() int {
+	defer runtime.KeepAlive(gi)
 	_r := objc.Send[int](objref.IDOf(gi), objc.RegisterName("posixGID"))
 	return _r
 }
 
 // Members returns the members of the group. This method only returns direct members of a group, it does not return members of members. Both user and group identities can be members of a group, but a group cannot be a member of itself. You also cannot have “circular” membership, i.e. a group be a member of another group that is a member of the first group. - Returns: An array of `CBIdentity` objects each representing a member of the group identity.
 func (gi *GroupIdentity) Members() obj.Object {
+	defer runtime.KeepAlive(gi)
 	_r := objc.Send[objc.ID](objref.IDOf(gi), objc.RegisterName("members"))
 	return obj.Wrap(_r)
 }
@@ -68,6 +72,7 @@ func (gi *GroupIdentity) Members() obj.Object {
 //
 // MemberIdentities returns the collection as a Go slice.
 func (gi *GroupIdentity) MemberIdentities() []*Identity {
+	defer runtime.KeepAlive(gi)
 	_arr := objc.Send[objc.ID](objref.IDOf(gi), objc.RegisterName("memberIdentities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Identity { return IdentityFromID(_id) })
 }

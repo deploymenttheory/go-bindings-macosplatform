@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,6 +51,7 @@ func cIImageRepAdopt(id objc.ID) *CIImageRep {
 
 // NewCIImageRepWithCIImage returns a representation of an image initialized to the specified Core Image instance.
 func NewCIImageRepWithCIImage(image obj.Object) *CIImageRep {
+	defer runtime.KeepAlive(image)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCIImageRep")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCIImage:"), objref.IDOf(image))
 	return cIImageRepAdopt(_id)
@@ -74,6 +77,7 @@ func (cir *CIImageRep) WithOpaque(opaque bool) *CIImageRep {
 
 // WithColorSpaceName sets the name of the color space used by the image data.
 func (cir *CIImageRep) WithColorSpaceName(colorSpaceName obj.Object) *CIImageRep {
+	defer runtime.KeepAlive(colorSpaceName)
 	objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
 	return cir
 }
@@ -104,6 +108,7 @@ func (cir *CIImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection)
 
 // CIImage returns the ci image.
 func (cir *CIImageRep) CIImage() obj.Object {
+	defer runtime.KeepAlive(cir)
 	_r := objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("CIImage"))
 	return obj.Wrap(_r)
 }

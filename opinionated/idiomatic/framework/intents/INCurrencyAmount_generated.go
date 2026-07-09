@@ -5,7 +5,10 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,40 +50,48 @@ func currencyAmountAdopt(id objc.ID) *CurrencyAmount {
 
 // Description returns the object's -description text.
 func (ca *CurrencyAmount) Description() string {
+	defer runtime.KeepAlive(ca)
 	return rt.Description(objref.IDOf(ca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ca *CurrencyAmount) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ca)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ca *CurrencyAmount) IsKind(className string) bool {
+	defer runtime.KeepAlive(ca)
 	return rt.IsKind(objref.IDOf(ca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ca *CurrencyAmount) String() string {
+	defer runtime.KeepAlive(ca)
 	return rt.Description(objref.IDOf(ca))
 }
 
 // NewCurrencyAmountWithAmountCurrencyCode initializes a currency amount object with the specified values.
 func NewCurrencyAmountWithAmountCurrencyCode(amount obj.Object, currencyCode string) *CurrencyAmount {
+	defer runtime.KeepAlive(amount)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INCurrencyAmount")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAmount:currencyCode:"), objref.IDOf(amount), purego.NSString(currencyCode))
 	return currencyAmountAdopt(_id)
 }
 
 // Amount returns the amount.
-func (ca *CurrencyAmount) Amount() obj.Object {
+func (ca *CurrencyAmount) Amount() *foundation.DecimalNumber {
+	defer runtime.KeepAlive(ca)
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("amount"))
-	return obj.Wrap(_r)
+	return foundation.DecimalNumberFromID(_r)
 }
 
 // CurrencyCode returns the currency code.
 func (ca *CurrencyAmount) CurrencyCode() string {
+	defer runtime.KeepAlive(ca)
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("currencyCode"))
 	if _r == 0 {
 		return ""

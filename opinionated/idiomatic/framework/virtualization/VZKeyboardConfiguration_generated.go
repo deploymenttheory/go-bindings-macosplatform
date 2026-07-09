@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func keyboardConfigurationAdopt(id objc.ID) *KeyboardConfiguration {
 
 // Description returns the object's -description text.
 func (kc *KeyboardConfiguration) Description() string {
+	defer runtime.KeepAlive(kc)
 	return rt.Description(objref.IDOf(kc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (kc *KeyboardConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(kc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(kc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (kc *KeyboardConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(kc)
 	return rt.IsKind(objref.IDOf(kc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (kc *KeyboardConfiguration) String() string {
+	defer runtime.KeepAlive(kc)
 	return rt.Description(objref.IDOf(kc))
 }
 

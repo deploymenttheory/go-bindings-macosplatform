@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func collectionLayoutSpacingAdopt(id objc.ID) *CollectionLayoutSpacing {
 
 // Description returns the object's -description text.
 func (cls *CollectionLayoutSpacing) Description() string {
+	defer runtime.KeepAlive(cls)
 	return rt.Description(objref.IDOf(cls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cls *CollectionLayoutSpacing) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cls)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cls *CollectionLayoutSpacing) IsKind(className string) bool {
+	defer runtime.KeepAlive(cls)
 	return rt.IsKind(objref.IDOf(cls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cls *CollectionLayoutSpacing) String() string {
+	defer runtime.KeepAlive(cls)
 	return rt.Description(objref.IDOf(cls))
 }
 
@@ -80,6 +87,7 @@ func NewCollectionLayoutSpacing() *CollectionLayoutSpacing {
 
 // Spacing returns the spacing.
 func (cls *CollectionLayoutSpacing) Spacing() float64 {
+	defer runtime.KeepAlive(cls)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -93,6 +101,7 @@ func (cls *CollectionLayoutSpacing) Spacing() float64 {
 
 // IsFlexibleSpacing reports whether the object is flexible spacing.
 func (cls *CollectionLayoutSpacing) IsFlexibleSpacing() bool {
+	defer runtime.KeepAlive(cls)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -106,6 +115,7 @@ func (cls *CollectionLayoutSpacing) IsFlexibleSpacing() bool {
 
 // IsFixedSpacing reports whether the object is fixed spacing.
 func (cls *CollectionLayoutSpacing) IsFixedSpacing() bool {
+	defer runtime.KeepAlive(cls)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

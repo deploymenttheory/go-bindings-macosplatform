@@ -5,6 +5,8 @@
 package quartzcomposer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -46,22 +48,27 @@ func compositionPickerViewAdopt(id objc.ID) *CompositionPickerView {
 
 // Description returns the object's -description text.
 func (cpv *CompositionPickerView) Description() string {
+	defer runtime.KeepAlive(cpv)
 	return rt.Description(objref.IDOf(cpv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cpv *CompositionPickerView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cpv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cpv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cpv *CompositionPickerView) IsKind(className string) bool {
+	defer runtime.KeepAlive(cpv)
 	return rt.IsKind(objref.IDOf(cpv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cpv *CompositionPickerView) String() string {
+	defer runtime.KeepAlive(cpv)
 	return rt.Description(objref.IDOf(cpv))
 }
 
@@ -79,6 +86,8 @@ func NewCompositionPickerView() *CompositionPickerView {
 
 // SetCompositionsFromRepositoryWithProtocolAndAttributes wraps the corresponding Objective-C method.
 func (cpv *CompositionPickerView) SetCompositionsFromRepositoryWithProtocolAndAttributes(protocol string, attributes obj.Object) {
+	defer runtime.KeepAlive(cpv)
+	defer runtime.KeepAlive(attributes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setCompositionsFromRepositoryWithProtocol:andAttributes:"), purego.NSString(protocol), objref.IDOf(attributes))
 	})
@@ -87,6 +96,7 @@ func (cpv *CompositionPickerView) SetCompositionsFromRepositoryWithProtocolAndAt
 
 // Compositions returns the compositions.
 func (cpv *CompositionPickerView) Compositions() obj.Object {
+	defer runtime.KeepAlive(cpv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -100,6 +110,8 @@ func (cpv *CompositionPickerView) Compositions() obj.Object {
 
 // SetDelegate wraps the corresponding Objective-C method.
 func (cpv *CompositionPickerView) SetDelegate(delegate obj.Object) {
+	defer runtime.KeepAlive(cpv)
+	defer runtime.KeepAlive(delegate)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	})
@@ -108,6 +120,7 @@ func (cpv *CompositionPickerView) SetDelegate(delegate obj.Object) {
 
 // Delegate returns the delegate.
 func (cpv *CompositionPickerView) Delegate() obj.Object {
+	defer runtime.KeepAlive(cpv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -121,6 +134,7 @@ func (cpv *CompositionPickerView) Delegate() obj.Object {
 
 // SetShowsCompositionNames wraps the corresponding Objective-C method.
 func (cpv *CompositionPickerView) SetShowsCompositionNames(flag bool) {
+	defer runtime.KeepAlive(cpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setShowsCompositionNames:"), flag)
 	})
@@ -129,6 +143,7 @@ func (cpv *CompositionPickerView) SetShowsCompositionNames(flag bool) {
 
 // ShowsCompositionNames wraps the corresponding Objective-C method.
 func (cpv *CompositionPickerView) ShowsCompositionNames() bool {
+	defer runtime.KeepAlive(cpv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -142,6 +157,7 @@ func (cpv *CompositionPickerView) ShowsCompositionNames() bool {
 
 // SetAllowsEmptySelection wraps the corresponding Objective-C method.
 func (cpv *CompositionPickerView) SetAllowsEmptySelection(flag bool) {
+	defer runtime.KeepAlive(cpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setAllowsEmptySelection:"), flag)
 	})
@@ -150,6 +166,7 @@ func (cpv *CompositionPickerView) SetAllowsEmptySelection(flag bool) {
 
 // AllowsEmptySelection wraps the corresponding Objective-C method.
 func (cpv *CompositionPickerView) AllowsEmptySelection() bool {
+	defer runtime.KeepAlive(cpv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -163,6 +180,7 @@ func (cpv *CompositionPickerView) AllowsEmptySelection() bool {
 
 // SetCompositionAspectRatio wraps the corresponding Objective-C method.
 func (cpv *CompositionPickerView) SetCompositionAspectRatio(ratio corefoundation.CGSize) {
+	defer runtime.KeepAlive(cpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setCompositionAspectRatio:"), ratio)
 	})
@@ -171,6 +189,7 @@ func (cpv *CompositionPickerView) SetCompositionAspectRatio(ratio corefoundation
 
 // CompositionAspectRatio returns the composition aspect ratio.
 func (cpv *CompositionPickerView) CompositionAspectRatio() corefoundation.CGSize {
+	defer runtime.KeepAlive(cpv)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -184,6 +203,8 @@ func (cpv *CompositionPickerView) CompositionAspectRatio() corefoundation.CGSize
 
 // SetDefaultValueForInputKey wraps the corresponding Objective-C method.
 func (cpv *CompositionPickerView) SetDefaultValueForInputKey(value obj.Object, key string) {
+	defer runtime.KeepAlive(cpv)
+	defer runtime.KeepAlive(value)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setDefaultValue:forInputKey:"), objref.IDOf(value), purego.NSString(key))
 	})
@@ -192,6 +213,7 @@ func (cpv *CompositionPickerView) SetDefaultValueForInputKey(value obj.Object, k
 
 // ResetDefaultInputValues resets default input values.
 func (cpv *CompositionPickerView) ResetDefaultInputValues() {
+	defer runtime.KeepAlive(cpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("resetDefaultInputValues"))
 	})
@@ -200,6 +222,8 @@ func (cpv *CompositionPickerView) ResetDefaultInputValues() {
 
 // SetSelectedComposition wraps the corresponding Objective-C method.
 func (cpv *CompositionPickerView) SetSelectedComposition(composition obj.Object) {
+	defer runtime.KeepAlive(cpv)
+	defer runtime.KeepAlive(composition)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setSelectedComposition:"), objref.IDOf(composition))
 	})
@@ -208,6 +232,7 @@ func (cpv *CompositionPickerView) SetSelectedComposition(composition obj.Object)
 
 // SelectedComposition returns the selected composition.
 func (cpv *CompositionPickerView) SelectedComposition() obj.Object {
+	defer runtime.KeepAlive(cpv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -221,6 +246,8 @@ func (cpv *CompositionPickerView) SelectedComposition() obj.Object {
 
 // StartAnimation starts animation.
 func (cpv *CompositionPickerView) StartAnimation(sender obj.Object) {
+	defer runtime.KeepAlive(cpv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("startAnimation:"), objref.IDOf(sender))
 	})
@@ -229,6 +256,8 @@ func (cpv *CompositionPickerView) StartAnimation(sender obj.Object) {
 
 // StopAnimation stops animation.
 func (cpv *CompositionPickerView) StopAnimation(sender obj.Object) {
+	defer runtime.KeepAlive(cpv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("stopAnimation:"), objref.IDOf(sender))
 	})
@@ -237,6 +266,7 @@ func (cpv *CompositionPickerView) StopAnimation(sender obj.Object) {
 
 // IsAnimating reports whether the object is animating.
 func (cpv *CompositionPickerView) IsAnimating() bool {
+	defer runtime.KeepAlive(cpv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -250,6 +280,7 @@ func (cpv *CompositionPickerView) IsAnimating() bool {
 
 // SetMaxAnimationFrameRate wraps the corresponding Objective-C method.
 func (cpv *CompositionPickerView) SetMaxAnimationFrameRate(maxFPS float32) {
+	defer runtime.KeepAlive(cpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setMaxAnimationFrameRate:"), maxFPS)
 	})
@@ -258,6 +289,7 @@ func (cpv *CompositionPickerView) SetMaxAnimationFrameRate(maxFPS float32) {
 
 // MaxAnimationFrameRate returns the max animation frame rate.
 func (cpv *CompositionPickerView) MaxAnimationFrameRate() float32 {
+	defer runtime.KeepAlive(cpv)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -271,6 +303,8 @@ func (cpv *CompositionPickerView) MaxAnimationFrameRate() float32 {
 
 // SetBackgroundColor wraps the corresponding Objective-C method.
 func (cpv *CompositionPickerView) SetBackgroundColor(color obj.Object) {
+	defer runtime.KeepAlive(cpv)
+	defer runtime.KeepAlive(color)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(color))
 	})
@@ -279,6 +313,7 @@ func (cpv *CompositionPickerView) SetBackgroundColor(color obj.Object) {
 
 // BackgroundColor returns the background color.
 func (cpv *CompositionPickerView) BackgroundColor() obj.Object {
+	defer runtime.KeepAlive(cpv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -292,6 +327,7 @@ func (cpv *CompositionPickerView) BackgroundColor() obj.Object {
 
 // SetDrawsBackground wraps the corresponding Objective-C method.
 func (cpv *CompositionPickerView) SetDrawsBackground(flag bool) {
+	defer runtime.KeepAlive(cpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setDrawsBackground:"), flag)
 	})
@@ -300,6 +336,7 @@ func (cpv *CompositionPickerView) SetDrawsBackground(flag bool) {
 
 // DrawsBackground wraps the corresponding Objective-C method.
 func (cpv *CompositionPickerView) DrawsBackground() bool {
+	defer runtime.KeepAlive(cpv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -313,6 +350,7 @@ func (cpv *CompositionPickerView) DrawsBackground() bool {
 
 // NumberOfColumns returns the number of columns.
 func (cpv *CompositionPickerView) NumberOfColumns() int {
+	defer runtime.KeepAlive(cpv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -326,6 +364,7 @@ func (cpv *CompositionPickerView) NumberOfColumns() int {
 
 // SetNumberOfColumns wraps the corresponding Objective-C method.
 func (cpv *CompositionPickerView) SetNumberOfColumns(columns int) {
+	defer runtime.KeepAlive(cpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setNumberOfColumns:"), columns)
 	})
@@ -334,6 +373,7 @@ func (cpv *CompositionPickerView) SetNumberOfColumns(columns int) {
 
 // NumberOfRows returns the number of rows.
 func (cpv *CompositionPickerView) NumberOfRows() int {
+	defer runtime.KeepAlive(cpv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -347,6 +387,7 @@ func (cpv *CompositionPickerView) NumberOfRows() int {
 
 // SetNumberOfRows wraps the corresponding Objective-C method.
 func (cpv *CompositionPickerView) SetNumberOfRows(rows int) {
+	defer runtime.KeepAlive(cpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setNumberOfRows:"), rows)
 	})

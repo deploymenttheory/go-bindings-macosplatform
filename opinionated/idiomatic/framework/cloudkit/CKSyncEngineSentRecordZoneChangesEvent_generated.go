@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -56,6 +58,7 @@ func NewSyncEngineSentRecordZoneChangesEvent() *SyncEngineSentRecordZoneChangesE
 //
 // SavedRecords returns the collection as a Go slice.
 func (sesrzce *SyncEngineSentRecordZoneChangesEvent) SavedRecords() []*Record {
+	defer runtime.KeepAlive(sesrzce)
 	_arr := objc.Send[objc.ID](objref.IDOf(sesrzce), objc.RegisterName("savedRecords"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Record { return RecordFromID(_id) })
 }
@@ -64,6 +67,7 @@ func (sesrzce *SyncEngineSentRecordZoneChangesEvent) SavedRecords() []*Record {
 //
 // FailedRecordSaves returns the collection as a Go slice.
 func (sesrzce *SyncEngineSentRecordZoneChangesEvent) FailedRecordSaves() []*SyncEngineFailedRecordSave {
+	defer runtime.KeepAlive(sesrzce)
 	_arr := objc.Send[objc.ID](objref.IDOf(sesrzce), objc.RegisterName("failedRecordSaves"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SyncEngineFailedRecordSave { return SyncEngineFailedRecordSaveFromID(_id) })
 }
@@ -72,12 +76,14 @@ func (sesrzce *SyncEngineSentRecordZoneChangesEvent) FailedRecordSaves() []*Sync
 //
 // DeletedRecordIDs returns the collection as a Go slice.
 func (sesrzce *SyncEngineSentRecordZoneChangesEvent) DeletedRecordIDs() []*RecordID {
+	defer runtime.KeepAlive(sesrzce)
 	_arr := objc.Send[objc.ID](objref.IDOf(sesrzce), objc.RegisterName("deletedRecordIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordID { return RecordIDFromID(_id) })
 }
 
 // FailedRecordDeletes returns the unique identifiers of the records CloudKit is unable to delete, and the reasons why.
 func (sesrzce *SyncEngineSentRecordZoneChangesEvent) FailedRecordDeletes() obj.Object {
+	defer runtime.KeepAlive(sesrzce)
 	_r := objc.Send[objc.ID](objref.IDOf(sesrzce), objc.RegisterName("failedRecordDeletes"))
 	return obj.Wrap(_r)
 }

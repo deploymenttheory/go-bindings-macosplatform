@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func pathControlItemAdopt(id objc.ID) *PathControlItem {
 
 // Description returns the object's -description text.
 func (pci *PathControlItem) Description() string {
+	defer runtime.KeepAlive(pci)
 	return rt.Description(objref.IDOf(pci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pci *PathControlItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pci *PathControlItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(pci)
 	return rt.IsKind(objref.IDOf(pci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pci *PathControlItem) String() string {
+	defer runtime.KeepAlive(pci)
 	return rt.Description(objref.IDOf(pci))
 }
 
@@ -78,18 +86,21 @@ func (pci *PathControlItem) WithTitle(title string) *PathControlItem {
 
 // WithAttributedTitle sets the attributed title.
 func (pci *PathControlItem) WithAttributedTitle(attributedTitle obj.Object) *PathControlItem {
+	defer runtime.KeepAlive(attributedTitle)
 	objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	return pci
 }
 
 // WithImage sets the image.
 func (pci *PathControlItem) WithImage(image *Image) *PathControlItem {
+	defer runtime.KeepAlive(image)
 	objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return pci
 }
 
 // Title returns the title.
 func (pci *PathControlItem) Title() string {
+	defer runtime.KeepAlive(pci)
 	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -98,19 +109,22 @@ func (pci *PathControlItem) Title() string {
 }
 
 // AttributedTitle returns the attributed title.
-func (pci *PathControlItem) AttributedTitle() obj.Object {
+func (pci *PathControlItem) AttributedTitle() *foundation.AttributedString {
+	defer runtime.KeepAlive(pci)
 	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("attributedTitle"))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // Image returns the image.
 func (pci *PathControlItem) Image() *Image {
+	defer runtime.KeepAlive(pci)
 	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
 // URL returns the URL.
-func (pci *PathControlItem) URL() obj.Object {
+func (pci *PathControlItem) URL() string {
+	defer runtime.KeepAlive(pci)
 	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

@@ -5,6 +5,7 @@
 package audiovideobridging
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -54,16 +55,21 @@ func NewAVB17221AECPInterface() *AVB17221AECPInterface {
 
 // RemoveCommandHandlerForEntityID removed a handler for command messages to or from a specified EntityID.
 func (aai *AVB17221AECPInterface) RemoveCommandHandlerForEntityID(targetEntityID uint64) {
+	defer runtime.KeepAlive(aai)
 	objc.Send[objc.ID](objref.IDOf(aai), objc.RegisterName("removeCommandHandlerForEntityID:"), targetEntityID)
 }
 
 // RemoveResponseHandlerForControllerEntityID removed a handler for response messages to or from a specified EntityID.
 func (aai *AVB17221AECPInterface) RemoveResponseHandlerForControllerEntityID(controllerEntityID uint64) {
+	defer runtime.KeepAlive(aai)
 	objc.Send[objc.ID](objref.IDOf(aai), objc.RegisterName("removeResponseHandlerForControllerEntityID:"), controllerEntityID)
 }
 
 // SendResponseToMACAddress send an AECP response. This method synchronizes access to the kernel service providing transport for the message. This method is safe to call from any thread.
 func (aai *AVB17221AECPInterface) SendResponseToMACAddress(message *AVB17221AECPMessage, destMAC *MACAddress) error {
+	defer runtime.KeepAlive(aai)
+	defer runtime.KeepAlive(message)
+	defer runtime.KeepAlive(destMAC)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(aai), objc.RegisterName("sendResponse:toMACAddress:error:"), objref.IDOf(message), objref.IDOf(destMAC), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

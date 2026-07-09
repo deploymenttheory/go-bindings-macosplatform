@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,8 @@ func issuerProvisioningExtensionPaymentPassEntryAdopt(id objc.ID) *IssuerProvisi
 
 // NewIssuerProvisioningExtensionPaymentPassEntryWithIdentifierTitleArtAddRequestConfiguration creates a new entry for a payment pass that a user adds to Wallet.
 func NewIssuerProvisioningExtensionPaymentPassEntryWithIdentifierTitleArtAddRequestConfiguration(identifier string, title string, art obj.Object, configuration *AddPaymentPassRequestConfiguration) *IssuerProvisioningExtensionPaymentPassEntry {
+	defer runtime.KeepAlive(art)
+	defer runtime.KeepAlive(configuration)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKIssuerProvisioningExtensionPaymentPassEntry")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:title:art:addRequestConfiguration:"), purego.NSString(identifier), purego.NSString(title), objref.IDOf(art), objref.IDOf(configuration))
 	return issuerProvisioningExtensionPaymentPassEntryAdopt(_id)
@@ -55,6 +59,7 @@ func NewIssuerProvisioningExtensionPaymentPassEntryWithIdentifierTitleArtAddRequ
 
 // AddRequestConfiguration returns the add request configuration.
 func (ipeppe *IssuerProvisioningExtensionPaymentPassEntry) AddRequestConfiguration() *AddPaymentPassRequestConfiguration {
+	defer runtime.KeepAlive(ipeppe)
 	_r := objc.Send[objc.ID](objref.IDOf(ipeppe), objc.RegisterName("addRequestConfiguration"))
 	return AddPaymentPassRequestConfigurationFromID(_r)
 }

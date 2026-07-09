@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corevideo"
@@ -51,22 +53,27 @@ func playerItemOutputAdopt(id objc.ID) *PlayerItemOutput {
 
 // Description returns the object's -description text.
 func (pio *PlayerItemOutput) Description() string {
+	defer runtime.KeepAlive(pio)
 	return rt.Description(objref.IDOf(pio))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pio *PlayerItemOutput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pio)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pio), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pio *PlayerItemOutput) IsKind(className string) bool {
+	defer runtime.KeepAlive(pio)
 	return rt.IsKind(objref.IDOf(pio), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pio *PlayerItemOutput) String() string {
+	defer runtime.KeepAlive(pio)
 	return rt.Description(objref.IDOf(pio))
 }
 
@@ -78,24 +85,28 @@ func (pio *PlayerItemOutput) WithSuppressesPlayerRendering(suppressesPlayerRende
 
 // ItemTimeForHostTime converts a host time, specified in seconds, to the item’s timebase.
 func (pio *PlayerItemOutput) ItemTimeForHostTime(hostTimeInSeconds float64) coremedia.CMTime {
+	defer runtime.KeepAlive(pio)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(pio), objc.RegisterName("itemTimeForHostTime:"), hostTimeInSeconds)
 	return _r
 }
 
 // ItemTimeForMachAbsoluteTime converts a Mach host time to the item’s timebase.
 func (pio *PlayerItemOutput) ItemTimeForMachAbsoluteTime(machAbsoluteTime int64) coremedia.CMTime {
+	defer runtime.KeepAlive(pio)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(pio), objc.RegisterName("itemTimeForMachAbsoluteTime:"), machAbsoluteTime)
 	return _r
 }
 
 // ItemTimeForCVTimeStamp converts a Core Video timestamp to the item’s timebase.
 func (pio *PlayerItemOutput) ItemTimeForCVTimeStamp(timestamp corevideo.CVTimeStamp) coremedia.CMTime {
+	defer runtime.KeepAlive(pio)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(pio), objc.RegisterName("itemTimeForCVTimeStamp:"), timestamp)
 	return _r
 }
 
 // SuppressesPlayerRendering wraps the corresponding Objective-C method.
 func (pio *PlayerItemOutput) SuppressesPlayerRendering() bool {
+	defer runtime.KeepAlive(pio)
 	_r := objc.Send[bool](objref.IDOf(pio), objc.RegisterName("suppressesPlayerRendering"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (ifd *IntersectionFunctionDescriptor) WithSpecializedName(specializedName s
 
 // WithConstantValues sets the set of constant values assigned to the function constants.
 func (ifd *IntersectionFunctionDescriptor) WithConstantValues(constantValues *FunctionConstantValues) *IntersectionFunctionDescriptor {
+	defer runtime.KeepAlive(constantValues)
 	objc.Send[objc.ID](objref.IDOf(ifd), objc.RegisterName("setConstantValues:"), objref.IDOf(constantValues))
 	return ifd
 }

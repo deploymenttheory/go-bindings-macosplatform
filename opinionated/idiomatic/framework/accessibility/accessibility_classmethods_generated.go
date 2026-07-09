@@ -5,34 +5,40 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // SupportedLocales returns all locales supported by existing tables.
-func SupportedLocales() obj.Object {
+func SupportedLocales() []*foundation.Locale {
 	_r := objc.Send[objc.ID](objc.ID(_class("AXBrailleTable")), objc.RegisterName("supportedLocales"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.Locale { return foundation.LocaleFromID(_id) })
 }
 
 // DefaultTableForLocale the default table that provides translations for the given locale’s language. Returns nil if there is none.
 func DefaultTableForLocale(locale obj.Object) *BrailleTable {
+	defer runtime.KeepAlive(locale)
 	_r := objc.Send[objc.ID](objc.ID(_class("AXBrailleTable")), objc.RegisterName("defaultTableForLocale:"), objref.IDOf(locale))
 	return BrailleTableFromID(_r)
 }
 
 // TablesForLocale all tables that provide translations for the given locale’s language.
-func TablesForLocale(locale obj.Object) obj.Object {
+func TablesForLocale(locale obj.Object) []*BrailleTable {
+	defer runtime.KeepAlive(locale)
 	_r := objc.Send[objc.ID](objc.ID(_class("AXBrailleTable")), objc.RegisterName("tablesForLocale:"), objref.IDOf(locale))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *BrailleTable { return BrailleTableFromID(_id) })
 }
 
 // LanguageAgnosticTables returns all tables that are not specific to any language.
-func LanguageAgnosticTables() obj.Object {
+func LanguageAgnosticTables() []*BrailleTable {
 	_r := objc.Send[objc.ID](objc.ID(_class("AXBrailleTable")), objc.RegisterName("languageAgnosticTables"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *BrailleTable { return BrailleTableFromID(_id) })
 }
 
 // CustomContentWithLabelValue creates new custom content with a label and value.
@@ -43,6 +49,8 @@ func CustomContentWithLabelValue(label string, value string) *CustomContent {
 
 // CustomContentWithAttributedLabelAttributedValue creates new custom content with an attributed string and attributed value.
 func CustomContentWithAttributedLabelAttributedValue(label obj.Object, value obj.Object) *CustomContent {
+	defer runtime.KeepAlive(label)
+	defer runtime.KeepAlive(value)
 	_r := objc.Send[objc.ID](objc.ID(_class("AXCustomContent")), objc.RegisterName("customContentWithAttributedLabel:attributedValue:"), objref.IDOf(label), objref.IDOf(value))
 	return CustomContentFromID(_r)
 }

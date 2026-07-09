@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func intentDonationMetadataAdopt(id objc.ID) *IntentDonationMetadata {
 
 // Description returns the object's -description text.
 func (idm *IntentDonationMetadata) Description() string {
+	defer runtime.KeepAlive(idm)
 	return rt.Description(objref.IDOf(idm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (idm *IntentDonationMetadata) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(idm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(idm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (idm *IntentDonationMetadata) IsKind(className string) bool {
+	defer runtime.KeepAlive(idm)
 	return rt.IsKind(objref.IDOf(idm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (idm *IntentDonationMetadata) String() string {
+	defer runtime.KeepAlive(idm)
 	return rt.Description(objref.IDOf(idm))
 }
 

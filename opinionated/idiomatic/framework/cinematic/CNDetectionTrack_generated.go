@@ -5,6 +5,8 @@
 package cinematic
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -50,69 +52,82 @@ func detectionTrackAdopt(id objc.ID) *DetectionTrack {
 
 // Description returns the object's -description text.
 func (dt *DetectionTrack) Description() string {
+	defer runtime.KeepAlive(dt)
 	return rt.Description(objref.IDOf(dt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dt *DetectionTrack) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dt *DetectionTrack) IsKind(className string) bool {
+	defer runtime.KeepAlive(dt)
 	return rt.IsKind(objref.IDOf(dt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dt *DetectionTrack) String() string {
+	defer runtime.KeepAlive(dt)
 	return rt.Description(objref.IDOf(dt))
 }
 
 // DetectionAtOrBeforeTime wraps the corresponding Objective-C method.
 func (dt *DetectionTrack) DetectionAtOrBeforeTime(time_ coremedia.CMTime) *Detection {
+	defer runtime.KeepAlive(dt)
 	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("detectionAtOrBeforeTime:"), time_)
 	return DetectionFromID(_r)
 }
 
 // DetectionNearestTime wraps the corresponding Objective-C method.
 func (dt *DetectionTrack) DetectionNearestTime(time_ coremedia.CMTime) *Detection {
+	defer runtime.KeepAlive(dt)
 	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("detectionNearestTime:"), time_)
 	return DetectionFromID(_r)
 }
 
 // DetectionsInTimeRange gets the array of detections in the detection track within the given time range. Makes sense for discrete detection tracks only.
 func (dt *DetectionTrack) DetectionsInTimeRange(timeRange coremedia.CMTimeRange) []*Detection {
+	defer runtime.KeepAlive(dt)
 	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("detectionsInTimeRange:"), timeRange)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Detection { return DetectionFromID(_id) })
 }
 
 // DetectionType returns the type of subject detected by this detection track.
 func (dt *DetectionTrack) DetectionType() DetectionType {
+	defer runtime.KeepAlive(dt)
 	_r := objc.Send[DetectionType](objref.IDOf(dt), objc.RegisterName("detectionType"))
 	return _r
 }
 
 // DetectionID returns the detectionID of the subject detected during this track; unique within a cinematic script.
 func (dt *DetectionTrack) DetectionID() int64 {
+	defer runtime.KeepAlive(dt)
 	_r := objc.Send[int64](objref.IDOf(dt), objc.RegisterName("detectionID"))
 	return _r
 }
 
 // DetectionGroupID returns the detectionGroupID of the subject detected by the track. The detectionGroupID can be used to associate related detections such as the face and torso of the same person.
 func (dt *DetectionTrack) DetectionGroupID() int64 {
+	defer runtime.KeepAlive(dt)
 	_r := objc.Send[int64](objref.IDOf(dt), objc.RegisterName("detectionGroupID"))
 	return _r
 }
 
 // IsUserCreated reports whether this detection track was created by the client.
 func (dt *DetectionTrack) IsUserCreated() bool {
+	defer runtime.KeepAlive(dt)
 	_r := objc.Send[bool](objref.IDOf(dt), objc.RegisterName("isUserCreated"))
 	return _r
 }
 
 // IsDiscrete reports whether this detection track has discrete detections (otherwise continuous). A discrete detection track will return detections only at the specific times a detection occurs. A continuous detection track will return a detection for any requested time and an empty array for time ranges.
 func (dt *DetectionTrack) IsDiscrete() bool {
+	defer runtime.KeepAlive(dt)
 	_r := objc.Send[bool](objref.IDOf(dt), objc.RegisterName("isDiscrete"))
 	return _r
 }

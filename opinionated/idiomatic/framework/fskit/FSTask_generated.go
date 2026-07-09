@@ -5,6 +5,7 @@
 package fskit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func taskAdopt(id objc.ID) *Task {
 
 // Description returns the object's -description text.
 func (t *Task) Description() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (t *Task) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (t *Task) IsKind(className string) bool {
+	defer runtime.KeepAlive(t)
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (t *Task) String() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
@@ -76,10 +82,12 @@ func NewTask() *Task {
 
 // LogMessage logs the given string to the initiating client.
 func (t *Task) LogMessage(str string) {
+	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("logMessage:"), purego.NSString(str))
 }
 
 // DidCompleteWithError informs the client that the task completed.
-func (t *Task) DidCompleteWithError(error_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("didCompleteWithError:"), error_)
+func (t *Task) DidCompleteWithError(err unsafe.Pointer) {
+	defer runtime.KeepAlive(t)
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("didCompleteWithError:"), err)
 }

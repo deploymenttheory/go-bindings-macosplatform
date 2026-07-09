@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func sharedDirectoryAdopt(id objc.ID) *SharedDirectory {
 
 // Description returns the object's -description text.
 func (sd *SharedDirectory) Description() string {
+	defer runtime.KeepAlive(sd)
 	return rt.Description(objref.IDOf(sd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sd *SharedDirectory) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sd *SharedDirectory) IsKind(className string) bool {
+	defer runtime.KeepAlive(sd)
 	return rt.IsKind(objref.IDOf(sd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sd *SharedDirectory) String() string {
+	defer runtime.KeepAlive(sd)
 	return rt.Description(objref.IDOf(sd))
 }
 
@@ -74,13 +81,15 @@ func NewSharedDirectoryWithURLReadOnly(url string, readOnly bool) *SharedDirecto
 }
 
 // URL returns file URL to a directory on the host to expose to the guest. The URL must point to an existing directory path in the host file system.
-func (sd *SharedDirectory) URL() obj.Object {
+func (sd *SharedDirectory) URL() string {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // IsReadOnly reports whether the directory will be exposed as read-only to the guest.
 func (sd *SharedDirectory) IsReadOnly() bool {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[bool](objref.IDOf(sd), objc.RegisterName("isReadOnly"))
 	return _r
 }

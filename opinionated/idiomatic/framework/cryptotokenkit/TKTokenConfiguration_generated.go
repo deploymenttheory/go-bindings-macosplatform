@@ -5,10 +5,12 @@
 package cryptotokenkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func tokenConfigurationAdopt(id objc.ID) *TokenConfiguration {
 
 // Description returns the object's -description text.
 func (tc *TokenConfiguration) Description() string {
+	defer runtime.KeepAlive(tc)
 	return rt.Description(objref.IDOf(tc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tc *TokenConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tc *TokenConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(tc)
 	return rt.IsKind(objref.IDOf(tc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tc *TokenConfiguration) String() string {
+	defer runtime.KeepAlive(tc)
 	return rt.Description(objref.IDOf(tc))
 }
 
@@ -76,8 +83,8 @@ func NewTokenConfiguration() *TokenConfiguration {
 }
 
 // WithConfigurationData sets additional configuration available for token instance. Token implementation and its hosting application can use this data for specifying any additional configuration for the token. System does not interpret this data in any way. For example, network-based HSM can store here (using Codable or other serialization mechanisms) target network address, access credentials and the list of identities accessible in the HSM.
-func (tc *TokenConfiguration) WithConfigurationData(configurationData obj.Object) *TokenConfiguration {
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setConfigurationData:"), objref.IDOf(configurationData))
+func (tc *TokenConfiguration) WithConfigurationData(configurationData []byte) *TokenConfiguration {
+	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setConfigurationData:"), rt.BytesToNSData(configurationData))
 	return tc
 }
 
@@ -88,8 +95,10 @@ func (tc *TokenConfiguration) WithKeychainItems(items ...TokenKeychainItemProvid
 	return tc
 }
 
-// KeyForObjectIDError returns keychain item key with specified objectID.  Fills error with TKTokenErrorCodeObjectNotFound if no such key exists.
-func (tc *TokenConfiguration) KeyForObjectIDError(objectID obj.Object) (result *TokenKeychainKey, err error) {
+// KeyForObjectID returns keychain item key with specified objectID.  Fills error with TKTokenErrorCodeObjectNotFound if no such key exists.
+func (tc *TokenConfiguration) KeyForObjectID(objectID obj.Object) (result *TokenKeychainKey, err error) {
+	defer runtime.KeepAlive(tc)
+	defer runtime.KeepAlive(objectID)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("keyForObjectID:error:"), objref.IDOf(objectID), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -98,8 +107,10 @@ func (tc *TokenConfiguration) KeyForObjectIDError(objectID obj.Object) (result *
 	return TokenKeychainKeyFromID(_r), nil
 }
 
-// CertificateForObjectIDError returns certificate with specified objectID.  Fills error with TKTokenErrorCodeObjectNotFound if no such certificate exists.
-func (tc *TokenConfiguration) CertificateForObjectIDError(objectID obj.Object) (result *TokenKeychainCertificate, err error) {
+// CertificateForObjectID returns certificate with specified objectID.  Fills error with TKTokenErrorCodeObjectNotFound if no such certificate exists.
+func (tc *TokenConfiguration) CertificateForObjectID(objectID obj.Object) (result *TokenKeychainCertificate, err error) {
+	defer runtime.KeepAlive(tc)
+	defer runtime.KeepAlive(objectID)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("certificateForObjectID:error:"), objref.IDOf(objectID), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -109,21 +120,24 @@ func (tc *TokenConfiguration) CertificateForObjectIDError(objectID obj.Object) (
 }
 
 // InstanceID returns unique, persistent identifier of this token, always created by specific token implementation. Typically implemented by some kind of serial number of the target hardware, for example SmartCard serial number.
-func (tc *TokenConfiguration) InstanceID() obj.Object {
+func (tc *TokenConfiguration) InstanceID() *foundation.String {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("instanceID"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // ConfigurationData returns additional configuration available for token instance. Token implementation and its hosting application can use this data for specifying any additional configuration for the token. System does not interpret this data in any way. For example, network-based HSM can store here (using Codable or other serialization mechanisms) target network address, access credentials and the list of identities accessible in the HSM.
-func (tc *TokenConfiguration) ConfigurationData() obj.Object {
+func (tc *TokenConfiguration) ConfigurationData() []byte {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("configurationData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // KeychainItems returns all keychain items of this token.
 //
 // KeychainItems returns the collection as a Go slice.
 func (tc *TokenConfiguration) KeychainItems() []*TokenKeychainItem {
+	defer runtime.KeepAlive(tc)
 	_arr := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("keychainItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TokenKeychainItem { return TokenKeychainItemFromID(_id) })
 }

@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -48,12 +51,12 @@ func buttonCellAdopt(id objc.ID) *ButtonCell {
 }
 
 // NewButtonCellTextCell creates a new ButtonCell.
-func NewButtonCellTextCell(string_ string) *ButtonCell {
+func NewButtonCellTextCell(str string) *ButtonCell {
 	var _mainthread0 *ButtonCell
 	purego.Main(func() {
 		_mainthread0 = func() *ButtonCell {
 			_alloc := objc.Send[objc.ID](objc.ID(_class("NSButtonCell")), objc.RegisterName("alloc"))
-			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(str))
 			return buttonCellAdopt(_id)
 		}()
 	})
@@ -62,6 +65,7 @@ func NewButtonCellTextCell(string_ string) *ButtonCell {
 
 // NewButtonCellImageCell creates a new ButtonCell.
 func NewButtonCellImageCell(image *Image) *ButtonCell {
+	defer runtime.KeepAlive(image)
 	var _mainthread0 *ButtonCell
 	purego.Main(func() {
 		_mainthread0 = func() *ButtonCell {
@@ -75,6 +79,7 @@ func NewButtonCellImageCell(image *Image) *ButtonCell {
 
 // NewButtonCellWithCoder creates a new ButtonCell.
 func NewButtonCellWithCoder(coder obj.Object) *ButtonCell {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *ButtonCell
 	purego.Main(func() {
 		_mainthread0 = func() *ButtonCell {
@@ -112,6 +117,7 @@ func (bc *ButtonCell) WithShowsStateBy(showsStateBy CellStyleMask) *ButtonCell {
 
 // WithAttributedTitle sets the title displayed by the button when it’s in its normal state as an attributed string.
 func (bc *ButtonCell) WithAttributedTitle(attributedTitle obj.Object) *ButtonCell {
+	defer runtime.KeepAlive(attributedTitle)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	})
@@ -128,6 +134,7 @@ func (bc *ButtonCell) WithAlternateTitle(alternateTitle string) *ButtonCell {
 
 // WithAttributedAlternateTitle sets the title displayed by the button when it’s in its alternate state, as an attributed string.
 func (bc *ButtonCell) WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *ButtonCell {
+	defer runtime.KeepAlive(attributedAlternateTitle)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAttributedAlternateTitle:"), objref.IDOf(attributedAlternateTitle))
 	})
@@ -136,6 +143,7 @@ func (bc *ButtonCell) WithAttributedAlternateTitle(attributedAlternateTitle obj.
 
 // WithAlternateImage sets the image the button displays in its alternate state.
 func (bc *ButtonCell) WithAlternateImage(alternateImage *Image) *ButtonCell {
+	defer runtime.KeepAlive(alternateImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
 	})
@@ -200,6 +208,7 @@ func (bc *ButtonCell) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMo
 
 // WithSound sets the sound that’s played when the user presses the button (that is during a mouse-down event).
 func (bc *ButtonCell) WithSound(sound *Sound) *ButtonCell {
+	defer runtime.KeepAlive(sound)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setSound:"), objref.IDOf(sound))
 	})
@@ -208,6 +217,7 @@ func (bc *ButtonCell) WithSound(sound *Sound) *ButtonCell {
 
 // WithBackgroundColor sets the background color of the button.
 func (bc *ButtonCell) WithBackgroundColor(backgroundColor *Color) *ButtonCell {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -224,6 +234,7 @@ func (bc *ButtonCell) WithGradientType(gradientType GradientType) *ButtonCell {
 
 // WithKeyEquivalentFont sets the font used to draw the button’s key equivalent.
 func (bc *ButtonCell) WithKeyEquivalentFont(keyEquivalentFont *Font) *ButtonCell {
+	defer runtime.KeepAlive(keyEquivalentFont)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setKeyEquivalentFont:"), objref.IDOf(keyEquivalentFont))
 	})
@@ -232,6 +243,7 @@ func (bc *ButtonCell) WithKeyEquivalentFont(keyEquivalentFont *Font) *ButtonCell
 
 // WithControlView sets the view associated with the cell.
 func (bc *ButtonCell) WithControlView(controlView ViewProvider) *ButtonCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -256,6 +268,7 @@ func (bc *ButtonCell) WithState(state int) *ButtonCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (bc *ButtonCell) WithTarget(target obj.Object) *ButtonCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -360,6 +373,7 @@ func (bc *ButtonCell) WithWraps(wraps bool) *ButtonCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (bc *ButtonCell) WithFont(font *Font) *ButtonCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -368,6 +382,7 @@ func (bc *ButtonCell) WithFont(font *Font) *ButtonCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (bc *ButtonCell) WithFormatter(formatter obj.Object) *ButtonCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -376,6 +391,7 @@ func (bc *ButtonCell) WithFormatter(formatter obj.Object) *ButtonCell {
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (bc *ButtonCell) WithObjectValue(objectValue obj.Object) *ButtonCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -424,6 +440,7 @@ func (bc *ButtonCell) WithIntegerValue(integerValue int) *ButtonCell {
 
 // WithImage sets the image displayed by the cell, if any.
 func (bc *ButtonCell) WithImage(image *Image) *ButtonCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -440,6 +457,7 @@ func (bc *ButtonCell) WithControlSize(controlSize ControlSize) *ButtonCell {
 
 // WithRepresentedObject sets the object represented by the cell.
 func (bc *ButtonCell) WithRepresentedObject(representedObject obj.Object) *ButtonCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -448,6 +466,7 @@ func (bc *ButtonCell) WithRepresentedObject(representedObject obj.Object) *Butto
 
 // WithMenu sets the cell’s contextual menu.
 func (bc *ButtonCell) WithMenu(menu *Menu) *ButtonCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -536,6 +555,7 @@ func (bc *ButtonCell) WithFocusRingType(focusRingType FocusRingType) *ButtonCell
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (bc *ButtonCell) WithAttributedStringValue(attributedStringValue obj.Object) *ButtonCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -584,6 +604,7 @@ func (bc *ButtonCell) WithControlTint(controlTint ControlTint) *ButtonCell {
 
 // SetButtonType sets how the button highlights while pressed and how it shows its state.
 func (bc *ButtonCell) SetButtonType(type_ ButtonType) {
+	defer runtime.KeepAlive(bc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setButtonType:"), type_)
 	})
@@ -592,6 +613,7 @@ func (bc *ButtonCell) SetButtonType(type_ ButtonType) {
 
 // SetPeriodicDelayInterval sets the message delay and interval for the button.
 func (bc *ButtonCell) SetPeriodicDelayInterval(delay float32, interval float32) {
+	defer runtime.KeepAlive(bc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setPeriodicDelay:interval:"), delay, interval)
 	})
@@ -600,6 +622,8 @@ func (bc *ButtonCell) SetPeriodicDelayInterval(delay float32, interval float32) 
 
 // MouseEntered draws the button’s border.
 func (bc *ButtonCell) MouseEntered(event *Event) {
+	defer runtime.KeepAlive(bc)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("mouseEntered:"), objref.IDOf(event))
 	})
@@ -608,6 +632,8 @@ func (bc *ButtonCell) MouseEntered(event *Event) {
 
 // MouseExited erases the button’s border.
 func (bc *ButtonCell) MouseExited(event *Event) {
+	defer runtime.KeepAlive(bc)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("mouseExited:"), objref.IDOf(event))
 	})
@@ -616,6 +642,8 @@ func (bc *ButtonCell) MouseExited(event *Event) {
 
 // DrawBezelWithFrameInView draws the border of the button using the current bezel style.
 func (bc *ButtonCell) DrawBezelWithFrameInView(frame corefoundation.CGRect, controlView *View) {
+	defer runtime.KeepAlive(bc)
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("drawBezelWithFrame:inView:"), frame, objref.IDOf(controlView))
 	})
@@ -624,6 +652,9 @@ func (bc *ButtonCell) DrawBezelWithFrameInView(frame corefoundation.CGRect, cont
 
 // DrawImageWithFrameInView draws the image associated with the button’s current state.
 func (bc *ButtonCell) DrawImageWithFrameInView(image *Image, frame corefoundation.CGRect, controlView *View) {
+	defer runtime.KeepAlive(bc)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("drawImage:withFrame:inView:"), objref.IDOf(image), frame, objref.IDOf(controlView))
 	})
@@ -632,6 +663,9 @@ func (bc *ButtonCell) DrawImageWithFrameInView(image *Image, frame corefoundatio
 
 // DrawTitleWithFrameInView draws the button’s title centered vertically in a specified rectangle.
 func (bc *ButtonCell) DrawTitleWithFrameInView(title obj.Object, frame corefoundation.CGRect, controlView *View) corefoundation.CGRect {
+	defer runtime.KeepAlive(bc)
+	defer runtime.KeepAlive(title)
+	defer runtime.KeepAlive(controlView)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -645,6 +679,7 @@ func (bc *ButtonCell) DrawTitleWithFrameInView(title obj.Object, frame corefound
 
 // BezelStyle returns the bezel style.
 func (bc *ButtonCell) BezelStyle() BezelStyle {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 BezelStyle
 	purego.Main(func() {
 		_mainthread0 = func() BezelStyle {
@@ -658,6 +693,7 @@ func (bc *ButtonCell) BezelStyle() BezelStyle {
 
 // HighlightsBy returns the highlights by.
 func (bc *ButtonCell) HighlightsBy() CellStyleMask {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 CellStyleMask
 	purego.Main(func() {
 		_mainthread0 = func() CellStyleMask {
@@ -671,6 +707,7 @@ func (bc *ButtonCell) HighlightsBy() CellStyleMask {
 
 // ShowsStateBy returns the shows state by.
 func (bc *ButtonCell) ShowsStateBy() CellStyleMask {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 CellStyleMask
 	purego.Main(func() {
 		_mainthread0 = func() CellStyleMask {
@@ -683,12 +720,13 @@ func (bc *ButtonCell) ShowsStateBy() CellStyleMask {
 }
 
 // AttributedTitle returns the attributed title.
-func (bc *ButtonCell) AttributedTitle() obj.Object {
-	var _mainthread0 obj.Object
+func (bc *ButtonCell) AttributedTitle() *foundation.AttributedString {
+	defer runtime.KeepAlive(bc)
+	var _mainthread0 *foundation.AttributedString
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.AttributedString {
 			_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("attributedTitle"))
-			return obj.Wrap(_r)
+			return foundation.AttributedStringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -697,6 +735,7 @@ func (bc *ButtonCell) AttributedTitle() obj.Object {
 
 // AlternateTitle returns the alternate title.
 func (bc *ButtonCell) AlternateTitle() string {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -712,12 +751,13 @@ func (bc *ButtonCell) AlternateTitle() string {
 }
 
 // AttributedAlternateTitle returns the attributed alternate title.
-func (bc *ButtonCell) AttributedAlternateTitle() obj.Object {
-	var _mainthread0 obj.Object
+func (bc *ButtonCell) AttributedAlternateTitle() *foundation.AttributedString {
+	defer runtime.KeepAlive(bc)
+	var _mainthread0 *foundation.AttributedString
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.AttributedString {
 			_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("attributedAlternateTitle"))
-			return obj.Wrap(_r)
+			return foundation.AttributedStringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -726,6 +766,7 @@ func (bc *ButtonCell) AttributedAlternateTitle() obj.Object {
 
 // AlternateImage returns the alternate image.
 func (bc *ButtonCell) AlternateImage() *Image {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {
@@ -739,6 +780,7 @@ func (bc *ButtonCell) AlternateImage() *Image {
 
 // ImagePosition returns the image position.
 func (bc *ButtonCell) ImagePosition() CellImagePosition {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 CellImagePosition
 	purego.Main(func() {
 		_mainthread0 = func() CellImagePosition {
@@ -752,6 +794,7 @@ func (bc *ButtonCell) ImagePosition() CellImagePosition {
 
 // ImageScaling returns the image scaling.
 func (bc *ButtonCell) ImageScaling() ImageScaling {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 ImageScaling
 	purego.Main(func() {
 		_mainthread0 = func() ImageScaling {
@@ -765,6 +808,7 @@ func (bc *ButtonCell) ImageScaling() ImageScaling {
 
 // KeyEquivalentModifierMask returns the key equivalent modifier mask.
 func (bc *ButtonCell) KeyEquivalentModifierMask() EventModifierFlags {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 EventModifierFlags
 	purego.Main(func() {
 		_mainthread0 = func() EventModifierFlags {
@@ -778,6 +822,7 @@ func (bc *ButtonCell) KeyEquivalentModifierMask() EventModifierFlags {
 
 // IsTransparent reports whether the object is transparent.
 func (bc *ButtonCell) IsTransparent() bool {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -791,6 +836,7 @@ func (bc *ButtonCell) IsTransparent() bool {
 
 // ImageDimsWhenDisabled wraps the corresponding Objective-C method.
 func (bc *ButtonCell) ImageDimsWhenDisabled() bool {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -804,6 +850,7 @@ func (bc *ButtonCell) ImageDimsWhenDisabled() bool {
 
 // ShowsBorderOnlyWhileMouseInside wraps the corresponding Objective-C method.
 func (bc *ButtonCell) ShowsBorderOnlyWhileMouseInside() bool {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -817,6 +864,7 @@ func (bc *ButtonCell) ShowsBorderOnlyWhileMouseInside() bool {
 
 // Sound returns the sound.
 func (bc *ButtonCell) Sound() *Sound {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 *Sound
 	purego.Main(func() {
 		_mainthread0 = func() *Sound {
@@ -830,6 +878,7 @@ func (bc *ButtonCell) Sound() *Sound {
 
 // BackgroundColor returns the background color.
 func (bc *ButtonCell) BackgroundColor() *Color {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -843,6 +892,7 @@ func (bc *ButtonCell) BackgroundColor() *Color {
 
 // SetAlternateTitleWithMnemonic sets the title the button displays when it’s in its alternate state to the given string with an embedded mnemonic.
 func (bc *ButtonCell) SetAlternateTitleWithMnemonic(stringWithAmpersand string) {
+	defer runtime.KeepAlive(bc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlternateTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
 	})
@@ -851,6 +901,7 @@ func (bc *ButtonCell) SetAlternateTitleWithMnemonic(stringWithAmpersand string) 
 
 // SetAlternateMnemonicLocation sets the character in the alternate title that should be the “keyboard mnemonic.”
 func (bc *ButtonCell) SetAlternateMnemonicLocation(location int) {
+	defer runtime.KeepAlive(bc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlternateMnemonicLocation:"), location)
 	})
@@ -859,6 +910,7 @@ func (bc *ButtonCell) SetAlternateMnemonicLocation(location int) {
 
 // AlternateMnemonicLocation returns an unsigned integer indicating the character in the alternate title that’s marked as the “keyboard mnemonic.”
 func (bc *ButtonCell) AlternateMnemonicLocation() int {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -872,6 +924,7 @@ func (bc *ButtonCell) AlternateMnemonicLocation() int {
 
 // AlternateMnemonic returns the character in the alternate title that’s marked as the “keyboard mnemonic.”
 func (bc *ButtonCell) AlternateMnemonic() string {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -888,6 +941,7 @@ func (bc *ButtonCell) AlternateMnemonic() string {
 
 // SetKeyEquivalentFontSize sets by name and size of the font used to draw the key equivalent.
 func (bc *ButtonCell) SetKeyEquivalentFontSize(fontName string, fontSize float64) {
+	defer runtime.KeepAlive(bc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setKeyEquivalentFont:size:"), purego.NSString(fontName), fontSize)
 	})
@@ -896,6 +950,7 @@ func (bc *ButtonCell) SetKeyEquivalentFontSize(fontName string, fontSize float64
 
 // GradientType returns the gradient type.
 func (bc *ButtonCell) GradientType() GradientType {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 GradientType
 	purego.Main(func() {
 		_mainthread0 = func() GradientType {
@@ -909,6 +964,7 @@ func (bc *ButtonCell) GradientType() GradientType {
 
 // KeyEquivalentFont returns the key equivalent font.
 func (bc *ButtonCell) KeyEquivalentFont() *Font {
+	defer runtime.KeepAlive(bc)
 	var _mainthread0 *Font
 	purego.Main(func() {
 		_mainthread0 = func() *Font {

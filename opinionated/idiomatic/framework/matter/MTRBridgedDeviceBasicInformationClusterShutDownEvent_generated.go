@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTRBridgedDeviceBasicInformationClusterShutDownEventAdopt(id objc.ID) *MTRB
 
 // Description returns the object's -description text.
 func (mbdbicsde *MTRBridgedDeviceBasicInformationClusterShutDownEvent) Description() string {
+	defer runtime.KeepAlive(mbdbicsde)
 	return rt.Description(objref.IDOf(mbdbicsde))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbdbicsde *MTRBridgedDeviceBasicInformationClusterShutDownEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbdbicsde)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbdbicsde), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbdbicsde *MTRBridgedDeviceBasicInformationClusterShutDownEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbdbicsde)
 	return rt.IsKind(objref.IDOf(mbdbicsde), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbdbicsde *MTRBridgedDeviceBasicInformationClusterShutDownEvent) String() string {
+	defer runtime.KeepAlive(mbdbicsde)
 	return rt.Description(objref.IDOf(mbdbicsde))
 }
 

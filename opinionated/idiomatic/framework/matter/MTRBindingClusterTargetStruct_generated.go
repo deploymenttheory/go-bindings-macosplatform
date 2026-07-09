@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRBindingClusterTargetStructAdopt(id objc.ID) *MTRBindingClusterTargetStru
 
 // Description returns the object's -description text.
 func (mbcts *MTRBindingClusterTargetStruct) Description() string {
+	defer runtime.KeepAlive(mbcts)
 	return rt.Description(objref.IDOf(mbcts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbcts *MTRBindingClusterTargetStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbcts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbcts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbcts *MTRBindingClusterTargetStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbcts)
 	return rt.IsKind(objref.IDOf(mbcts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbcts *MTRBindingClusterTargetStruct) String() string {
+	defer runtime.KeepAlive(mbcts)
 	return rt.Description(objref.IDOf(mbcts))
 }
 
@@ -72,60 +80,70 @@ func NewMTRBindingClusterTargetStruct() *MTRBindingClusterTargetStruct {
 
 // WithNode sets the node.
 func (mbcts *MTRBindingClusterTargetStruct) WithNode(node obj.Object) *MTRBindingClusterTargetStruct {
+	defer runtime.KeepAlive(node)
 	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("setNode:"), objref.IDOf(node))
 	return mbcts
 }
 
 // WithGroup sets the group.
 func (mbcts *MTRBindingClusterTargetStruct) WithGroup(group obj.Object) *MTRBindingClusterTargetStruct {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return mbcts
 }
 
 // WithEndpoint sets the endpoint.
 func (mbcts *MTRBindingClusterTargetStruct) WithEndpoint(endpoint obj.Object) *MTRBindingClusterTargetStruct {
+	defer runtime.KeepAlive(endpoint)
 	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return mbcts
 }
 
 // WithCluster sets the cluster.
 func (mbcts *MTRBindingClusterTargetStruct) WithCluster(cluster obj.Object) *MTRBindingClusterTargetStruct {
+	defer runtime.KeepAlive(cluster)
 	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
 	return mbcts
 }
 
 // WithFabricIndex sets the fabric index.
 func (mbcts *MTRBindingClusterTargetStruct) WithFabricIndex(fabricIndex obj.Object) *MTRBindingClusterTargetStruct {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mbcts
 }
 
 // Node returns the node.
-func (mbcts *MTRBindingClusterTargetStruct) Node() obj.Object {
+func (mbcts *MTRBindingClusterTargetStruct) Node() *foundation.Number {
+	defer runtime.KeepAlive(mbcts)
 	_r := objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("node"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Group returns the group.
-func (mbcts *MTRBindingClusterTargetStruct) Group() obj.Object {
+func (mbcts *MTRBindingClusterTargetStruct) Group() *foundation.Number {
+	defer runtime.KeepAlive(mbcts)
 	_r := objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("group"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Endpoint returns the endpoint.
-func (mbcts *MTRBindingClusterTargetStruct) Endpoint() obj.Object {
+func (mbcts *MTRBindingClusterTargetStruct) Endpoint() *foundation.Number {
+	defer runtime.KeepAlive(mbcts)
 	_r := objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("endpoint"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Cluster returns the cluster.
-func (mbcts *MTRBindingClusterTargetStruct) Cluster() obj.Object {
+func (mbcts *MTRBindingClusterTargetStruct) Cluster() *foundation.Number {
+	defer runtime.KeepAlive(mbcts)
 	_r := objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("cluster"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // FabricIndex returns the fabric index.
-func (mbcts *MTRBindingClusterTargetStruct) FabricIndex() obj.Object {
+func (mbcts *MTRBindingClusterTargetStruct) FabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(mbcts)
 	_r := objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("fabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

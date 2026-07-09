@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,12 +67,14 @@ func (ccwabs *CNNConvolutionWeightsAndBiasesState) WithLabel(label string) *CNNC
 
 // WeightsOffset returns offset at which weights start in weights buffer Default value is 0.
 func (ccwabs *CNNConvolutionWeightsAndBiasesState) WeightsOffset() int {
+	defer runtime.KeepAlive(ccwabs)
 	_r := objc.Send[int](objref.IDOf(ccwabs), objc.RegisterName("weightsOffset"))
 	return _r
 }
 
 // BiasesOffset returns offset at which weights start in biases buffer Default value is 0.
 func (ccwabs *CNNConvolutionWeightsAndBiasesState) BiasesOffset() int {
+	defer runtime.KeepAlive(ccwabs)
 	_r := objc.Send[int](objref.IDOf(ccwabs), objc.RegisterName("biasesOffset"))
 	return _r
 }

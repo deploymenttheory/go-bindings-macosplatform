@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (cl *ConcatenationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *C
 
 // Dimension returns the dimension (or axis) along which to concatenate tensors The default value is 1 (which typically represents features channels)
 func (cl *ConcatenationLayer) Dimension() int {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[int](objref.IDOf(cl), objc.RegisterName("dimension"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func tileRenderPipelineDescriptorAdopt(id objc.ID) *TileRenderPipelineDescriptor
 
 // Description returns the object's -description text.
 func (trpd *TileRenderPipelineDescriptor) Description() string {
+	defer runtime.KeepAlive(trpd)
 	return rt.Description(objref.IDOf(trpd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (trpd *TileRenderPipelineDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(trpd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(trpd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (trpd *TileRenderPipelineDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(trpd)
 	return rt.IsKind(objref.IDOf(trpd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (trpd *TileRenderPipelineDescriptor) String() string {
+	defer runtime.KeepAlive(trpd)
 	return rt.Description(objref.IDOf(trpd))
 }
 
@@ -98,6 +105,7 @@ func (trpd *TileRenderPipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(maxT
 
 // WithLinkedFunctions sets functions that you can specify as function arguments for the tile shader when encoding commands that use the pipeline.
 func (trpd *TileRenderPipelineDescriptor) WithLinkedFunctions(linkedFunctions *LinkedFunctions) *TileRenderPipelineDescriptor {
+	defer runtime.KeepAlive(linkedFunctions)
 	objc.Send[objc.ID](objref.IDOf(trpd), objc.RegisterName("setLinkedFunctions:"), objref.IDOf(linkedFunctions))
 	return trpd
 }
@@ -122,11 +130,13 @@ func (trpd *TileRenderPipelineDescriptor) WithShaderValidation(shaderValidation 
 
 // Reset specifies the default rendering pipeline state values for the descriptor.
 func (trpd *TileRenderPipelineDescriptor) Reset() {
+	defer runtime.KeepAlive(trpd)
 	objc.Send[objc.ID](objref.IDOf(trpd), objc.RegisterName("reset"))
 }
 
 // Label returns the descriptor label.
 func (trpd *TileRenderPipelineDescriptor) Label() string {
+	defer runtime.KeepAlive(trpd)
 	_r := objc.Send[objc.ID](objref.IDOf(trpd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -136,76 +146,89 @@ func (trpd *TileRenderPipelineDescriptor) Label() string {
 
 // RasterSampleCount returns the raster sample count.
 func (trpd *TileRenderPipelineDescriptor) RasterSampleCount() int {
+	defer runtime.KeepAlive(trpd)
 	_r := objc.Send[int](objref.IDOf(trpd), objc.RegisterName("rasterSampleCount"))
 	return _r
 }
 
 // ColorAttachments returns the color attachments.
 func (trpd *TileRenderPipelineDescriptor) ColorAttachments() *TileRenderPipelineColorAttachmentDescriptorArray {
+	defer runtime.KeepAlive(trpd)
 	_r := objc.Send[objc.ID](objref.IDOf(trpd), objc.RegisterName("colorAttachments"))
 	return TileRenderPipelineColorAttachmentDescriptorArrayFromID(_r)
 }
 
 // ThreadgroupSizeMatchesTileSize reports whether all threadgroups associated with this pipeline will cover tiles entirely. Metal can optimize code generation for this case.
 func (trpd *TileRenderPipelineDescriptor) ThreadgroupSizeMatchesTileSize() bool {
+	defer runtime.KeepAlive(trpd)
 	_r := objc.Send[bool](objref.IDOf(trpd), objc.RegisterName("threadgroupSizeMatchesTileSize"))
 	return _r
 }
 
 // TileBuffers returns the tile buffers.
 func (trpd *TileRenderPipelineDescriptor) TileBuffers() *PipelineBufferDescriptorArray {
+	defer runtime.KeepAlive(trpd)
 	_r := objc.Send[objc.ID](objref.IDOf(trpd), objc.RegisterName("tileBuffers"))
 	return PipelineBufferDescriptorArrayFromID(_r)
 }
 
 // MaxTotalThreadsPerThreadgroup returns optional property. Set the maxTotalThreadsPerThreadgroup. If it is not set, returns zero.
 func (trpd *TileRenderPipelineDescriptor) MaxTotalThreadsPerThreadgroup() int {
+	defer runtime.KeepAlive(trpd)
 	_r := objc.Send[int](objref.IDOf(trpd), objc.RegisterName("maxTotalThreadsPerThreadgroup"))
 	return _r
 }
 
 // BinaryArchives returns the set of MTLBinaryArchive to search for compiled code when creating the pipeline state. Accelerate pipeline state creation by providing archives of compiled code such that no compilation needs to happen on the fast path.
 func (trpd *TileRenderPipelineDescriptor) BinaryArchives() []obj.Object {
+	defer runtime.KeepAlive(trpd)
 	_r := objc.Send[objc.ID](objref.IDOf(trpd), objc.RegisterName("binaryArchives"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetBinaryArchives wraps the corresponding Objective-C method.
 func (trpd *TileRenderPipelineDescriptor) SetBinaryArchives(binaryArchives []obj.Object) {
+	defer runtime.KeepAlive(trpd)
 	objc.Send[objc.ID](objref.IDOf(trpd), objc.RegisterName("setBinaryArchives:"), purego.SliceToNSArray(binaryArchives, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // PreloadedLibraries returns the set of MTLDynamicLibrary to use to resolve external symbols before considering symbols from dependent MTLDynamicLibrary. Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use preloadedLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system.
 func (trpd *TileRenderPipelineDescriptor) PreloadedLibraries() []obj.Object {
+	defer runtime.KeepAlive(trpd)
 	_r := objc.Send[objc.ID](objref.IDOf(trpd), objc.RegisterName("preloadedLibraries"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetPreloadedLibraries wraps the corresponding Objective-C method.
 func (trpd *TileRenderPipelineDescriptor) SetPreloadedLibraries(preloadedLibraries []obj.Object) {
+	defer runtime.KeepAlive(trpd)
 	objc.Send[objc.ID](objref.IDOf(trpd), objc.RegisterName("setPreloadedLibraries:"), purego.SliceToNSArray(preloadedLibraries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // LinkedFunctions returns the set of functions to be linked with the pipeline state and accessed from the tile function.
 func (trpd *TileRenderPipelineDescriptor) LinkedFunctions() *LinkedFunctions {
+	defer runtime.KeepAlive(trpd)
 	_r := objc.Send[objc.ID](objref.IDOf(trpd), objc.RegisterName("linkedFunctions"))
 	return LinkedFunctionsFromID(_r)
 }
 
 // SupportAddingBinaryFunctions reports whether this flag makes this pipeline support creating a new pipeline by adding binary functions.
 func (trpd *TileRenderPipelineDescriptor) SupportAddingBinaryFunctions() bool {
+	defer runtime.KeepAlive(trpd)
 	_r := objc.Send[bool](objref.IDOf(trpd), objc.RegisterName("supportAddingBinaryFunctions"))
 	return _r
 }
 
 // MaxCallStackDepth returns the maximum depth of the call stack in stack frames from the tile function. Defaults to 1 additional stack frame.
 func (trpd *TileRenderPipelineDescriptor) MaxCallStackDepth() int {
+	defer runtime.KeepAlive(trpd)
 	_r := objc.Send[int](objref.IDOf(trpd), objc.RegisterName("maxCallStackDepth"))
 	return _r
 }
 
 // ShaderValidation returns toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
 func (trpd *TileRenderPipelineDescriptor) ShaderValidation() ShaderValidation {
+	defer runtime.KeepAlive(trpd)
 	_r := objc.Send[ShaderValidation](objref.IDOf(trpd), objc.RegisterName("shaderValidation"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -101,24 +103,28 @@ func (cccn *CNNCrossChannelNormalization) WithSourceFeatureChannelMaxCount(sourc
 
 // Alpha returns the value of alpha.  Default is 1.0. Must be non-negative.
 func (cccn *CNNCrossChannelNormalization) Alpha() float32 {
+	defer runtime.KeepAlive(cccn)
 	_r := objc.Send[float32](objref.IDOf(cccn), objc.RegisterName("alpha"))
 	return _r
 }
 
 // Beta returns the value of beta.  Default is 5.0
 func (cccn *CNNCrossChannelNormalization) Beta() float32 {
+	defer runtime.KeepAlive(cccn)
 	_r := objc.Send[float32](objref.IDOf(cccn), objc.RegisterName("beta"))
 	return _r
 }
 
 // Delta returns the value of delta.  Default is 1.0
 func (cccn *CNNCrossChannelNormalization) Delta() float32 {
+	defer runtime.KeepAlive(cccn)
 	_r := objc.Send[float32](objref.IDOf(cccn), objc.RegisterName("delta"))
 	return _r
 }
 
 // KernelSize returns the size of the square filter window.  Default is 5
 func (cccn *CNNCrossChannelNormalization) KernelSize() int {
+	defer runtime.KeepAlive(cccn)
 	_r := objc.Send[int](objref.IDOf(cccn), objc.RegisterName("kernelSize"))
 	return _r
 }

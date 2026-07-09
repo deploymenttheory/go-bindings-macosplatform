@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func shaderAdopt(id objc.ID) *Shader {
 
 // Description returns the object's -description text.
 func (s *Shader) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Shader) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Shader) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Shader) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -102,22 +109,27 @@ func (s *Shader) WithAttributes(items ...*Attribute) *Shader {
 
 // AddUniform adds a uniform to the shader.
 func (s *Shader) AddUniform(uniform *Uniform) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(uniform)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("addUniform:"), objref.IDOf(uniform))
 }
 
 // UniformNamed returns the uniform object corresponding to a particular uniform variable.
 func (s *Shader) UniformNamed(name string) *Uniform {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("uniformNamed:"), purego.NSString(name))
 	return UniformFromID(_r)
 }
 
 // RemoveUniformNamed removes a uniform from the shader.
 func (s *Shader) RemoveUniformNamed(name string) {
+	defer runtime.KeepAlive(s)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("removeUniformNamed:"), purego.NSString(name))
 }
 
 // Source returns the source.
 func (s *Shader) Source() string {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("source"))
 	if _r == 0 {
 		return ""
@@ -129,6 +141,7 @@ func (s *Shader) Source() string {
 //
 // Uniforms returns the collection as a Go slice.
 func (s *Shader) Uniforms() []*Uniform {
+	defer runtime.KeepAlive(s)
 	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("uniforms"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Uniform { return UniformFromID(_id) })
 }
@@ -137,6 +150,7 @@ func (s *Shader) Uniforms() []*Uniform {
 //
 // Attributes returns the collection as a Go slice.
 func (s *Shader) Attributes() []*Attribute {
+	defer runtime.KeepAlive(s)
 	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("attributes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Attribute { return AttributeFromID(_id) })
 }

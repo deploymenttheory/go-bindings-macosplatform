@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func averageAdopt(id objc.ID) *Average {
 
 // Description returns the object's -description text.
 func (a *Average) Description() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (a *Average) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (a *Average) IsKind(className string) bool {
+	defer runtime.KeepAlive(a)
 	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (a *Average) String() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
@@ -74,18 +81,21 @@ func NewAverage() *Average {
 
 // AverageMeasurement returns an NSMeasurement that contains the average measurement.
 func (a *Average) AverageMeasurement() obj.Object {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("averageMeasurement"))
 	return obj.Wrap(_r)
 }
 
 // SampleCount returns an NSInteger representation of the number of samples in the distribution used to formulate the average. This value is negative if an unknown number of samples was used to compute the average.
 func (a *Average) SampleCount() int {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("sampleCount"))
 	return _r
 }
 
 // StandardDeviation returns an double representation of the standard deviation of the distribution. This value is negative an unknown number of samples was used to compute the standard deviation.
 func (a *Average) StandardDeviation() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("standardDeviation"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func virtioConsolePortArrayAdopt(id objc.ID) *VirtioConsolePortArray {
 
 // Description returns the object's -description text.
 func (vcpa *VirtioConsolePortArray) Description() string {
+	defer runtime.KeepAlive(vcpa)
 	return rt.Description(objref.IDOf(vcpa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vcpa *VirtioConsolePortArray) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vcpa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vcpa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vcpa *VirtioConsolePortArray) IsKind(className string) bool {
+	defer runtime.KeepAlive(vcpa)
 	return rt.IsKind(objref.IDOf(vcpa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vcpa *VirtioConsolePortArray) String() string {
+	defer runtime.KeepAlive(vcpa)
 	return rt.Description(objref.IDOf(vcpa))
 }
 
@@ -74,12 +81,14 @@ func NewVirtioConsolePortArray() *VirtioConsolePortArray {
 
 // ObjectAtIndexedSubscript returns the Virtio console port at the specified index.
 func (vcpa *VirtioConsolePortArray) ObjectAtIndexedSubscript(portIndex int) *VirtioConsolePort {
+	defer runtime.KeepAlive(vcpa)
 	_r := objc.Send[objc.ID](objref.IDOf(vcpa), objc.RegisterName("objectAtIndexedSubscript:"), portIndex)
 	return VirtioConsolePortFromID(_r)
 }
 
 // MaximumPortCount returns the maximum port count.
 func (vcpa *VirtioConsolePortArray) MaximumPortCount() uint32 {
+	defer runtime.KeepAlive(vcpa)
 	_r := objc.Send[uint32](objref.IDOf(vcpa), objc.RegisterName("maximumPortCount"))
 	return _r
 }

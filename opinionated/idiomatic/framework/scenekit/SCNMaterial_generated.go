@@ -5,7 +5,10 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func materialAdopt(id objc.ID) *Material {
 
 // Description returns the object's -description text.
 func (m *Material) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Material) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Material) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Material) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
@@ -92,6 +100,7 @@ func (m *Material) WithTransparency(transparency float64) *Material {
 
 // WithLightingModelName sets the lighting formula that SceneKit uses to render the material.
 func (m *Material) WithLightingModelName(lightingModelName obj.Object) *Material {
+	defer runtime.KeepAlive(lightingModelName)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setLightingModelName:"), objref.IDOf(lightingModelName))
 	return m
 }
@@ -164,6 +173,7 @@ func (m *Material) WithBlendMode(blendMode BlendMode) *Material {
 
 // Name determines the name of the receiver.
 func (m *Material) Name() string {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -173,180 +183,210 @@ func (m *Material) Name() string {
 
 // Diffuse specifies the receiver's diffuse property. The diffuse property specifies the amount of light diffusely reflected from the surface. The diffuse light is reflected equally in all directions and is therefore independent of the point of view.
 func (m *Material) Diffuse() *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("diffuse"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Ambient specifies the receiver's ambient property. The ambient property specifies the amount of ambient light to reflect. This property has no visual impact on scenes that have no ambient light. Setting the ambient has no effect if locksAmbientWithDiffuse is set to YES.
 func (m *Material) Ambient() *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("ambient"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Specular specifies the receiver's specular property. The specular property specifies the amount of light to reflect in a mirror-like manner. The specular intensity increases when the point of view lines up with the direction of the reflected light.
 func (m *Material) Specular() *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("specular"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Emission returns the emission property specifies the amount of light the material emits. This emission does not light up other surfaces in the scene.
 func (m *Material) Emission() *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("emission"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Transparent returns the transparent property specifies the transparent areas of the material.
 func (m *Material) Transparent() *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("transparent"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Reflective returns the reflective property specifies the reflectivity of the surface. The surface will not actually reflect other objects in the scene. This property may be used as a sphere mapping to reflect a precomputed environment.
 func (m *Material) Reflective() *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("reflective"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Multiply returns the multiply property specifies a color or an image used to multiply the output fragments with. The computed fragments are multiplied with the multiply value to produce the final fragments. This property may be used for shadow maps, to fade out or tint 3d objects.
 func (m *Material) Multiply() *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("multiply"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Normal returns the normal property specifies the surface orientation. When an image is set on the normal property the material is automatically lit per pixel. Setting a color has no effect.
 func (m *Material) Normal() *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("normal"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Displacement returns the displacement property specifies how vertex are translated in tangent space. Pass a grayscale image for a simple 'elevation' or rgb image for a vector displacement.
 func (m *Material) Displacement() *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("displacement"))
 	return MaterialPropertyFromID(_r)
 }
 
 // AmbientOcclusion returns the ambientOcclusion property specifies the ambient occlusion of the surface. The ambient occlusion is multiplied with the ambient light, then the result is added to the lighting contribution. This property has no visual impact on scenes that have no ambient light. When an ambient occlusion map is set, the ambient property is ignored.
 func (m *Material) AmbientOcclusion() *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("ambientOcclusion"))
 	return MaterialPropertyFromID(_r)
 }
 
 // SelfIllumination returns the selfIllumination property specifies a texture or a color that is added to the lighting contribution of the surface. When a selfIllumination is set, the emission property is ignored.
 func (m *Material) SelfIllumination() *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("selfIllumination"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Metalness returns the metalness property specifies how metallic the material's surface appears. Lower values (darker colors) cause the material to appear more like a dielectric surface. Higher values (brighter colors) cause the surface to appear more metallic. This property is only used when 'lightingModelName' is 'SCNLightingModelPhysicallyBased'.
 func (m *Material) Metalness() *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("metalness"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Roughness returns the roughness property specifies the apparent smoothness of the surface. Lower values (darker colors) cause the material to appear shiny, with well-defined specular highlights. Higher values (brighter colors) cause specular highlights to spread out and the diffuse property of the material to become more retroreflective. This property is only used when 'lightingModelName' is 'SCNLightingModelPhysicallyBased'.
 func (m *Material) Roughness() *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("roughness"))
 	return MaterialPropertyFromID(_r)
 }
 
 // ClearCoat returns the clearCoat property specifies color and intensity of the coat layer.
 func (m *Material) ClearCoat() *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("clearCoat"))
 	return MaterialPropertyFromID(_r)
 }
 
 // ClearCoatRoughness returns the clearCoat property specifies color and intensity of the coat roughness.
 func (m *Material) ClearCoatRoughness() *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("clearCoatRoughness"))
 	return MaterialPropertyFromID(_r)
 }
 
 // ClearCoatNormal returns the clearCoatNormal property specifies color and intensity of the optional coat normal map.
 func (m *Material) ClearCoatNormal() *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("clearCoatNormal"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Shininess specifies the receiver's shininess value. Defaults to 1.0. Animatable.
 func (m *Material) Shininess() float64 {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[float64](objref.IDOf(m), objc.RegisterName("shininess"))
 	return _r
 }
 
 // Transparency specifies the receiver's transparency value. Defaults to 1.0. Animatable. The color of the transparent property is multiplied by this property. The result is then used to produce the final transparency according to the rule defined by the transparencyMode property.
 func (m *Material) Transparency() float64 {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[float64](objref.IDOf(m), objc.RegisterName("transparency"))
 	return _r
 }
 
 // LightingModelName determines the receiver's lighting model. See above for the list of lighting models. Defaults to SCNLightingModelBlinn.
-func (m *Material) LightingModelName() obj.Object {
+func (m *Material) LightingModelName() *foundation.String {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("lightingModelName"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // IsLitPerPixel reports whether the receiver is lit per pixel. Defaults to true. Animatable.
 func (m *Material) IsLitPerPixel() bool {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("isLitPerPixel"))
 	return _r
 }
 
 // IsDoubleSided reports whether the receiver is double sided. Defaults to false. Animatable.
 func (m *Material) IsDoubleSided() bool {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("isDoubleSided"))
 	return _r
 }
 
 // FillMode determines of to how to rasterize the receiver's primitives. Defaults to SCNFillModeFill.
 func (m *Material) FillMode() FillMode {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[FillMode](objref.IDOf(m), objc.RegisterName("fillMode"))
 	return _r
 }
 
 // CullMode determines the culling mode of the receiver. Defaults to SCNCullModeBack. Animatable.
 func (m *Material) CullMode() CullMode {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[CullMode](objref.IDOf(m), objc.RegisterName("cullMode"))
 	return _r
 }
 
 // TransparencyMode determines the transparency mode of the receiver. See above for the transparency modes. Defaults to SCNTransparencyModeDefault.
 func (m *Material) TransparencyMode() TransparencyMode {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[TransparencyMode](objref.IDOf(m), objc.RegisterName("transparencyMode"))
 	return _r
 }
 
 // LocksAmbientWithDiffuse reports whether makes the ambient property automatically match the diffuse property. Defaults to false on 10.9 and before, defaults to true otherwise. Animatable.
 func (m *Material) LocksAmbientWithDiffuse() bool {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("locksAmbientWithDiffuse"))
 	return _r
 }
 
 // WritesToDepthBuffer reports whether the receiver writes to the depth buffer when rendered. Defaults to true.
 func (m *Material) WritesToDepthBuffer() bool {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("writesToDepthBuffer"))
 	return _r
 }
 
 // ColorBufferWriteMask determines whether the receiver writes to the color buffer when rendered. Defaults to SCNColorMaskAll.
 func (m *Material) ColorBufferWriteMask() ColorMask {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[ColorMask](objref.IDOf(m), objc.RegisterName("colorBufferWriteMask"))
 	return _r
 }
 
 // ReadsFromDepthBuffer reports whether the receiver reads from the depth buffer when rendered. Defaults to true.
 func (m *Material) ReadsFromDepthBuffer() bool {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("readsFromDepthBuffer"))
 	return _r
 }
 
 // FresnelExponent specifies the receiver's fresnel exponent value. Defaults to 0.0. Animatable. The effect of the reflectivity property is modulated by this property. The fresnelExponent changes the exponent of the reflectance. The bigger the exponent, the more concentrated the reflection is around the edges.
 func (m *Material) FresnelExponent() float64 {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[float64](objref.IDOf(m), objc.RegisterName("fresnelExponent"))
 	return _r
 }
 
 // BlendMode specifies the receiver's blend mode. Defaults to SCNBlendModeAlpha.
 func (m *Material) BlendMode() BlendMode {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[BlendMode](objref.IDOf(m), objc.RegisterName("blendMode"))
 	return _r
 }

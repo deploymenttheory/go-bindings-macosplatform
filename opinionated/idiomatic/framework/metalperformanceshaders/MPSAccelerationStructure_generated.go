@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,6 +51,7 @@ func accelerationStructureAdopt(id objc.ID) *AccelerationStructure {
 
 // NewAccelerationStructureWithGroup initialize the acceleration structure with an acceleration structure group, if the acceleration structure will be used in an instance hierarchy. The Metal device is determined from the acceleration structure group. All acceleration structures in the instance hierarchy must share the same group.
 func NewAccelerationStructureWithGroup(group obj.Object) *AccelerationStructure {
+	defer runtime.KeepAlive(group)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSAccelerationStructure")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGroup:"), objref.IDOf(group))
 	return accelerationStructureAdopt(_id)
@@ -57,6 +59,8 @@ func NewAccelerationStructureWithGroup(group obj.Object) *AccelerationStructure 
 
 // NewAccelerationStructureWithCoderGroup initialize the acceleration structure with an NSCoder and an acceleration structure group, if the acceleration structure will be used in an instance hierarchy. All acceleration structures in the instance hierarchy must share the same group. Buffer properties such as the vertex buffer, instance buffer, etc. are set to nil. Encode and decode these buffers along with the acceleration structure instead.
 func NewAccelerationStructureWithCoderGroup(aDecoder obj.Object, group obj.Object) *AccelerationStructure {
+	defer runtime.KeepAlive(aDecoder)
+	defer runtime.KeepAlive(group)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSAccelerationStructure")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:group:"), objref.IDOf(aDecoder), objref.IDOf(group))
 	return accelerationStructureAdopt(_id)
@@ -70,22 +74,28 @@ func (as *AccelerationStructure) WithLabel(label string) *AccelerationStructure 
 
 // Rebuild rebuild the acceleration structure This method must be called before any intersection tests can be scheduled with this acceleration structure. Before calling this method, fill out the properties of the acceleration structure such as vertex buffer, instance buffer, etc. The acceleration structure should be rebuilt when its contents (e.g. vertices in a triangle acceleration structure) have been modified significantly and must be rebuilt when properties such as triangle count, vertex stride, etc. have changed. When the contents of the acceleration structure have only been modified slightly, it may be cheaper to refit the acceleration structure instead. This method blocks until the acceleration structure has been rebuilt. Until the rebuild has completed, the acceleration structure cannot be copied, encoded with NSSecureCoding, rebuilt, or refit. Before this method can be called, any pending GPU writes to the vertex buffer, index buffer, etc. must be completed (and, for managed buffers, synchronized). Any prior intersection tests must also be completed before the acceleration structure can be rebuilt.
 func (as *AccelerationStructure) Rebuild() {
+	defer runtime.KeepAlive(as)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("rebuild"))
 }
 
 // CopyWithZoneGroup create a a copy of this acceleration structure The acceleration structure may be copied with a different acceleration structure group. Buffer properties of the acceleration structure such as the vertex buffer, instance buffer, etc. are set to nil. Copy these buffers with the new Metal device and assign them to the new acceleration structure instead. Do not copy the acceleration structure until any prior refit or rebuild operations have completed.
 func (as *AccelerationStructure) CopyWithZoneGroup(zone unsafe.Pointer, group obj.Object) *AccelerationStructure {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(group)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("copyWithZone:group:"), zone, objref.IDOf(group))
 	return AccelerationStructureFromID(_r)
 }
 
 // EncodeWithCoder encode the acceleration structure with an NSCoder Buffer properties such as the vertex buffer, index buffer, etc. are not be encoded. Encode and decode these buffers along with the acceleration structure instead. Do not encode the acceleration structure until any prior refit or rebuild operations have completed.
 func (as *AccelerationStructure) EncodeWithCoder(coder obj.Object) {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(coder)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }
 
 // Group returns the group this acceleration structure was created with
 func (as *AccelerationStructure) Group() obj.Object {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("group"))
 	return obj.Wrap(_r)
 }

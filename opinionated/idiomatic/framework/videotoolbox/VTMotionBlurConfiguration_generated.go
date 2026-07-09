@@ -5,6 +5,8 @@
 package videotoolbox
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func motionBlurConfigurationAdopt(id objc.ID) *MotionBlurConfiguration {
 
 // Description returns the object's -description text.
 func (mbc *MotionBlurConfiguration) Description() string {
+	defer runtime.KeepAlive(mbc)
 	return rt.Description(objref.IDOf(mbc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbc *MotionBlurConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbc *MotionBlurConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbc)
 	return rt.IsKind(objref.IDOf(mbc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbc *MotionBlurConfiguration) String() string {
+	defer runtime.KeepAlive(mbc)
 	return rt.Description(objref.IDOf(mbc))
 }
 
@@ -75,30 +82,35 @@ func NewMotionBlurConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualit
 
 // FrameWidth returns width of source frame in pixels.
 func (mbc *MotionBlurConfiguration) FrameWidth() int {
+	defer runtime.KeepAlive(mbc)
 	_r := objc.Send[int](objref.IDOf(mbc), objc.RegisterName("frameWidth"))
 	return _r
 }
 
 // FrameHeight returns height of source frame in pixels.
 func (mbc *MotionBlurConfiguration) FrameHeight() int {
+	defer runtime.KeepAlive(mbc)
 	_r := objc.Send[int](objref.IDOf(mbc), objc.RegisterName("frameHeight"))
 	return _r
 }
 
 // UsePrecomputedFlow reports whether indicates that you provide optical flow.
 func (mbc *MotionBlurConfiguration) UsePrecomputedFlow() bool {
+	defer runtime.KeepAlive(mbc)
 	_r := objc.Send[bool](objref.IDOf(mbc), objc.RegisterName("usePrecomputedFlow"))
 	return _r
 }
 
 // QualityPrioritization returns a parameter you use to control quality and performance levels. For more information about supported levels, see “VTMotionBlurConfigurationQualityPrioritization“.
 func (mbc *MotionBlurConfiguration) QualityPrioritization() MotionBlurConfigurationQualityPrioritization {
+	defer runtime.KeepAlive(mbc)
 	_r := objc.Send[MotionBlurConfigurationQualityPrioritization](objref.IDOf(mbc), objc.RegisterName("qualityPrioritization"))
 	return _r
 }
 
 // Revision returns the specific algorithm or configuration revision you use to perform the request.
 func (mbc *MotionBlurConfiguration) Revision() MotionBlurConfigurationRevision {
+	defer runtime.KeepAlive(mbc)
 	_r := objc.Send[MotionBlurConfigurationRevision](objref.IDOf(mbc), objc.RegisterName("revision"))
 	return _r
 }
@@ -107,18 +119,21 @@ func (mbc *MotionBlurConfiguration) Revision() MotionBlurConfigurationRevision {
 //
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (mbc *MotionBlurConfiguration) FrameSupportedPixelFormats() []obj.Object {
+	defer runtime.KeepAlive(mbc)
 	_arr := objc.Send[objc.ID](objref.IDOf(mbc), objc.RegisterName("frameSupportedPixelFormats"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SourcePixelBufferAttributes returns pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-func (mbc *MotionBlurConfiguration) SourcePixelBufferAttributes() obj.Object {
+func (mbc *MotionBlurConfiguration) SourcePixelBufferAttributes() map[string]obj.Object {
+	defer runtime.KeepAlive(mbc)
 	_r := objc.Send[objc.ID](objref.IDOf(mbc), objc.RegisterName("sourcePixelBufferAttributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DestinationPixelBufferAttributes returns pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-func (mbc *MotionBlurConfiguration) DestinationPixelBufferAttributes() obj.Object {
+func (mbc *MotionBlurConfiguration) DestinationPixelBufferAttributes() map[string]obj.Object {
+	defer runtime.KeepAlive(mbc)
 	_r := objc.Send[objc.ID](objref.IDOf(mbc), objc.RegisterName("destinationPixelBufferAttributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

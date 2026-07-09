@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,54 +55,63 @@ func NewArrayType() *ArrayType {
 
 // ElementStructType provides a description of the underlying struct type when an array holds structs as its elements.
 func (at *ArrayType) ElementStructType() *StructType {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("elementStructType"))
 	return StructTypeFromID(_r)
 }
 
 // ElementArrayType provides a description of the underlying type when an array holds other arrays as its elements.
 func (at *ArrayType) ElementArrayType() *ArrayType {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("elementArrayType"))
 	return ArrayTypeFromID(_r)
 }
 
 // ElementTextureReferenceType provides a description of the underlying texture type when an array holds textures as its elements.
 func (at *ArrayType) ElementTextureReferenceType() *TextureReferenceType {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("elementTextureReferenceType"))
 	return TextureReferenceTypeFromID(_r)
 }
 
 // ElementPointerType provides a description of the underlying pointer type when an array holds pointers as its elements.
 func (at *ArrayType) ElementPointerType() *PointerType {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("elementPointerType"))
 	return PointerTypeFromID(_r)
 }
 
 // ElementTensorReferenceType provides a description of the underlying tensor type when this array holds tensors as its elements.
 func (at *ArrayType) ElementTensorReferenceType() *TensorReferenceType {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("elementTensorReferenceType"))
 	return TensorReferenceTypeFromID(_r)
 }
 
 // ElementType returns the element type.
 func (at *ArrayType) ElementType() DataType {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[DataType](objref.IDOf(at), objc.RegisterName("elementType"))
 	return _r
 }
 
 // ArrayLength returns the array length.
 func (at *ArrayType) ArrayLength() int {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[int](objref.IDOf(at), objc.RegisterName("arrayLength"))
 	return _r
 }
 
 // Stride returns the stride.
 func (at *ArrayType) Stride() int {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[int](objref.IDOf(at), objc.RegisterName("stride"))
 	return _r
 }
 
 // ArgumentIndexStride returns the argument index stride.
 func (at *ArrayType) ArgumentIndexStride() int {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[int](objref.IDOf(at), objc.RegisterName("argumentIndexStride"))
 	return _r
 }

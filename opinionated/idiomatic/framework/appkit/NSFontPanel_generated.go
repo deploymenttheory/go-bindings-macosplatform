@@ -5,11 +5,13 @@
 package appkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -64,6 +66,7 @@ func NewFontPanel() *FontPanel {
 
 // WithAccessoryView sets the specified view as the receiver’s accessory view, allowing you to add custom controls to your application’s Font panel without having to create a subclass.
 func (fp *FontPanel) WithAccessoryView(accessoryView ViewProvider) *FontPanel {
+	defer runtime.KeepAlive(accessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 	})
@@ -177,9 +180,22 @@ func (fp *FontPanel) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *
 
 // WithContentView sets the window’s content view, the highest accessible view object in the window’s view hierarchy.
 func (fp *FontPanel) WithContentView(contentView ViewProvider) *FontPanel {
+	defer runtime.KeepAlive(contentView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	})
+	return fp
+}
+
+// WithDelegate sets the window’s delegate.
+func (fp *FontPanel) WithDelegate(delegate WindowDelegate) *FontPanel {
+	_shim := newWindowDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(fp), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return fp
 }
 
@@ -249,6 +265,7 @@ func (fp *FontPanel) WithReleasedWhenClosed(releasedWhenClosed bool) *FontPanel 
 
 // WithBackgroundColor sets the color of the window’s background.
 func (fp *FontPanel) WithBackgroundColor(backgroundColor *Color) *FontPanel {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -289,6 +306,7 @@ func (fp *FontPanel) WithCanHide(canHide bool) *FontPanel {
 
 // WithMiniwindowImage sets the custom miniaturized window image of the window.
 func (fp *FontPanel) WithMiniwindowImage(miniwindowImage *Image) *FontPanel {
+	defer runtime.KeepAlive(miniwindowImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMiniwindowImage:"), objref.IDOf(miniwindowImage))
 	})
@@ -425,6 +443,7 @@ func (fp *FontPanel) WithAnimationBehavior(animationBehavior WindowAnimationBeha
 
 // WithFrameAutosaveName sets the name used to automatically save the window’s frame rectangle data in the defaults system.
 func (fp *FontPanel) WithFrameAutosaveName(frameAutosaveName obj.Object) *FontPanel {
+	defer runtime.KeepAlive(frameAutosaveName)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setFrameAutosaveName:"), objref.IDOf(frameAutosaveName))
 	})
@@ -481,6 +500,7 @@ func (fp *FontPanel) WithMaxFullScreenContentSize(maxFullScreenContentSize coref
 
 // WithWindowController sets the window’s window controller.
 func (fp *FontPanel) WithWindowController(windowController *WindowController) *FontPanel {
+	defer runtime.KeepAlive(windowController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setWindowController:"), objref.IDOf(windowController))
 	})
@@ -489,6 +509,7 @@ func (fp *FontPanel) WithWindowController(windowController *WindowController) *F
 
 // WithParentWindow sets the parent window to which the window is attached as a child.
 func (fp *FontPanel) WithParentWindow(parentWindow WindowProvider) *FontPanel {
+	defer runtime.KeepAlive(parentWindow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
 	})
@@ -497,6 +518,7 @@ func (fp *FontPanel) WithParentWindow(parentWindow WindowProvider) *FontPanel {
 
 // WithAppearanceSource sets an object that the window inherits its appearance from.
 func (fp *FontPanel) WithAppearanceSource(appearanceSource obj.Object) *FontPanel {
+	defer runtime.KeepAlive(appearanceSource)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAppearanceSource:"), objref.IDOf(appearanceSource))
 	})
@@ -505,6 +527,7 @@ func (fp *FontPanel) WithAppearanceSource(appearanceSource obj.Object) *FontPane
 
 // WithColorSpace sets the window’s color space.
 func (fp *FontPanel) WithColorSpace(colorSpace *ColorSpace) *FontPanel {
+	defer runtime.KeepAlive(colorSpace)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
 	})
@@ -521,6 +544,7 @@ func (fp *FontPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle TitlebarS
 
 // WithContentViewController sets the main content view controller for the window.
 func (fp *FontPanel) WithContentViewController(contentViewController ViewControllerProvider) *FontPanel {
+	defer runtime.KeepAlive(contentViewController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
 	})
@@ -529,6 +553,7 @@ func (fp *FontPanel) WithContentViewController(contentViewController ViewControl
 
 // WithInitialFirstResponder sets the view that’s made first responder (also called the key view) the first time the window is placed onscreen.
 func (fp *FontPanel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *FontPanel {
+	defer runtime.KeepAlive(initialFirstResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setInitialFirstResponder:"), objref.IDOf(initialFirstResponder))
 	})
@@ -537,6 +562,7 @@ func (fp *FontPanel) WithInitialFirstResponder(initialFirstResponder ViewProvide
 
 // WithDefaultButtonCell sets the button cell that performs as if clicked when the window receives a Return (or Enter) key event.
 func (fp *FontPanel) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *FontPanel {
+	defer runtime.KeepAlive(defaultButtonCell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setDefaultButtonCell:"), objref.IDOf(defaultButtonCell))
 	})
@@ -553,6 +579,7 @@ func (fp *FontPanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop
 
 // WithToolbar sets the window’s toolbar.
 func (fp *FontPanel) WithToolbar(toolbar *Toolbar) *FontPanel {
+	defer runtime.KeepAlive(toolbar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setToolbar:"), objref.IDOf(toolbar))
 	})
@@ -577,6 +604,7 @@ func (fp *FontPanel) WithTabbingMode(tabbingMode WindowTabbingMode) *FontPanel {
 
 // WithTabbingIdentifier sets a value that allows a group of related windows.
 func (fp *FontPanel) WithTabbingIdentifier(tabbingIdentifier obj.Object) *FontPanel {
+	defer runtime.KeepAlive(tabbingIdentifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTabbingIdentifier:"), objref.IDOf(tabbingIdentifier))
 	})
@@ -657,6 +685,7 @@ func (fp *FontPanel) WithRestorationClass(restorationClass unsafe.Pointer) *Font
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (fp *FontPanel) WithNextResponder(nextResponder ResponderProvider) *FontPanel {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -665,6 +694,7 @@ func (fp *FontPanel) WithNextResponder(nextResponder ResponderProvider) *FontPan
 
 // WithMenu sets returns the responder’s menu.
 func (fp *FontPanel) WithMenu(menu *Menu) *FontPanel {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -673,6 +703,7 @@ func (fp *FontPanel) WithMenu(menu *Menu) *FontPanel {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (fp *FontPanel) WithUserActivity(userActivity obj.Object) *FontPanel {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -681,6 +712,7 @@ func (fp *FontPanel) WithUserActivity(userActivity obj.Object) *FontPanel {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (fp *FontPanel) WithTouchBar(touchBar *TouchBar) *FontPanel {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -689,6 +721,8 @@ func (fp *FontPanel) WithTouchBar(touchBar *TouchBar) *FontPanel {
 
 // SetPanelFontIsMultiple sets the selected font in the receiver to the specified font.
 func (fp *FontPanel) SetPanelFontIsMultiple(fontObj *Font, flag bool) {
+	defer runtime.KeepAlive(fp)
+	defer runtime.KeepAlive(fontObj)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setPanelFont:isMultiple:"), objref.IDOf(fontObj), flag)
 	})
@@ -697,6 +731,8 @@ func (fp *FontPanel) SetPanelFontIsMultiple(fontObj *Font, flag bool) {
 
 // PanelConvertFont converts the specified font using the settings in the receiver, with the aid of the shared NSFontManager if necessary.
 func (fp *FontPanel) PanelConvertFont(fontObj *Font) *Font {
+	defer runtime.KeepAlive(fp)
+	defer runtime.KeepAlive(fontObj)
 	var _mainthread0 *Font
 	purego.Main(func() {
 		_mainthread0 = func() *Font {
@@ -710,6 +746,7 @@ func (fp *FontPanel) PanelConvertFont(fontObj *Font) *Font {
 
 // ReloadDefaultFontFamilies triggers a reload to the default state, so that the delegate is called.
 func (fp *FontPanel) ReloadDefaultFontFamilies() {
+	defer runtime.KeepAlive(fp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("reloadDefaultFontFamilies"))
 	})
@@ -718,6 +755,7 @@ func (fp *FontPanel) ReloadDefaultFontFamilies() {
 
 // AccessoryView returns the accessory view.
 func (fp *FontPanel) AccessoryView() *View {
+	defer runtime.KeepAlive(fp)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -731,6 +769,7 @@ func (fp *FontPanel) AccessoryView() *View {
 
 // IsEnabled reports whether the object is enabled.
 func (fp *FontPanel) IsEnabled() bool {
+	defer runtime.KeepAlive(fp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

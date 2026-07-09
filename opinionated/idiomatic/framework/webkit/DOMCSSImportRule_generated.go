@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -57,6 +59,7 @@ func (dir *DOMCSSImportRule) WithCSSText(cssText string) *DOMCSSImportRule {
 
 // Href returns the href.
 func (dir *DOMCSSImportRule) Href() string {
+	defer runtime.KeepAlive(dir)
 	_r := objc.Send[objc.ID](objref.IDOf(dir), objc.RegisterName("href"))
 	if _r == 0 {
 		return ""
@@ -66,12 +69,14 @@ func (dir *DOMCSSImportRule) Href() string {
 
 // Media returns the media.
 func (dir *DOMCSSImportRule) Media() *DOMMediaList {
+	defer runtime.KeepAlive(dir)
 	_r := objc.Send[objc.ID](objref.IDOf(dir), objc.RegisterName("media"))
 	return DOMMediaListFromID(_r)
 }
 
 // StyleSheet returns the style sheet.
 func (dir *DOMCSSImportRule) StyleSheet() *DOMCSSStyleSheet {
+	defer runtime.KeepAlive(dir)
 	_r := objc.Send[objc.ID](objref.IDOf(dir), objc.RegisterName("styleSheet"))
 	return DOMCSSStyleSheetFromID(_r)
 }

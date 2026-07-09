@@ -5,9 +5,12 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -61,9 +64,22 @@ func NewCandidateListTouchBarItem() *CandidateListTouchBarItem {
 
 // WithClient sets the client object for the candidate list item.
 func (cltbi *CandidateListTouchBarItem) WithClient(client ViewProvider) *CandidateListTouchBarItem {
+	defer runtime.KeepAlive(client)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("setClient:"), objref.IDOf(client))
 	})
+	return cltbi
+}
+
+// WithDelegate sets the delegate of the candidate list item.
+func (cltbi *CandidateListTouchBarItem) WithDelegate(delegate CandidateListTouchBarItemDelegate) *CandidateListTouchBarItem {
+	_shim := newCandidateListTouchBarItemDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(cltbi), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cltbi), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return cltbi
 }
 
@@ -109,6 +125,7 @@ func (cltbi *CandidateListTouchBarItem) WithVisibilityPriority(visibilityPriorit
 
 // UpdateWithInsertionPointVisibility updates the candidate list visibility configuration based on the client’s insertion point state.
 func (cltbi *CandidateListTouchBarItem) UpdateWithInsertionPointVisibility(isVisible bool) {
+	defer runtime.KeepAlive(cltbi)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("updateWithInsertionPointVisibility:"), isVisible)
 	})
@@ -117,6 +134,7 @@ func (cltbi *CandidateListTouchBarItem) UpdateWithInsertionPointVisibility(isVis
 
 // SetCandidatesForSelectedRangeInString sets an array of candidate objects to be displayed in the candidate list bar item.
 func (cltbi *CandidateListTouchBarItem) SetCandidatesForSelectedRangeInString(candidates []obj.Object, selectedRange foundation.NSRange, originalString string) {
+	defer runtime.KeepAlive(cltbi)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("setCandidates:forSelectedRange:inString:"), purego.SliceToNSArray(candidates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), selectedRange, purego.NSString(originalString))
 	})
@@ -125,6 +143,7 @@ func (cltbi *CandidateListTouchBarItem) SetCandidatesForSelectedRangeInString(ca
 
 // Client returns the client.
 func (cltbi *CandidateListTouchBarItem) Client() *View {
+	defer runtime.KeepAlive(cltbi)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -138,6 +157,7 @@ func (cltbi *CandidateListTouchBarItem) Client() *View {
 
 // IsCollapsed reports whether the object is collapsed.
 func (cltbi *CandidateListTouchBarItem) IsCollapsed() bool {
+	defer runtime.KeepAlive(cltbi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -151,6 +171,7 @@ func (cltbi *CandidateListTouchBarItem) IsCollapsed() bool {
 
 // AllowsCollapsing wraps the corresponding Objective-C method.
 func (cltbi *CandidateListTouchBarItem) AllowsCollapsing() bool {
+	defer runtime.KeepAlive(cltbi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -164,6 +185,7 @@ func (cltbi *CandidateListTouchBarItem) AllowsCollapsing() bool {
 
 // IsCandidateListVisible reports whether the object is candidate list visible.
 func (cltbi *CandidateListTouchBarItem) IsCandidateListVisible() bool {
+	defer runtime.KeepAlive(cltbi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -177,6 +199,7 @@ func (cltbi *CandidateListTouchBarItem) IsCandidateListVisible() bool {
 
 // AllowsTextInputContextCandidates wraps the corresponding Objective-C method.
 func (cltbi *CandidateListTouchBarItem) AllowsTextInputContextCandidates() bool {
+	defer runtime.KeepAlive(cltbi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -190,6 +213,7 @@ func (cltbi *CandidateListTouchBarItem) AllowsTextInputContextCandidates() bool 
 
 // Candidates returns the candidates.
 func (cltbi *CandidateListTouchBarItem) Candidates() []obj.Object {
+	defer runtime.KeepAlive(cltbi)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {

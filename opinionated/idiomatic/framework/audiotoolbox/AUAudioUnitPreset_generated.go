@@ -5,6 +5,8 @@
 package audiotoolbox
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func audioUnitPresetAdopt(id objc.ID) *AudioUnitPreset {
 
 // Description returns the object's -description text.
 func (aup *AudioUnitPreset) Description() string {
+	defer runtime.KeepAlive(aup)
 	return rt.Description(objref.IDOf(aup))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aup *AudioUnitPreset) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aup)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aup), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aup *AudioUnitPreset) IsKind(className string) bool {
+	defer runtime.KeepAlive(aup)
 	return rt.IsKind(objref.IDOf(aup), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aup *AudioUnitPreset) String() string {
+	defer runtime.KeepAlive(aup)
 	return rt.Description(objref.IDOf(aup))
 }
 
@@ -86,12 +93,14 @@ func (aup *AudioUnitPreset) WithName(name string) *AudioUnitPreset {
 
 // Number returns the preset's unique numeric identifier.
 func (aup *AudioUnitPreset) Number() int {
+	defer runtime.KeepAlive(aup)
 	_r := objc.Send[int](objref.IDOf(aup), objc.RegisterName("number"))
 	return _r
 }
 
 // Name returns the preset's name.
 func (aup *AudioUnitPreset) Name() string {
+	defer runtime.KeepAlive(aup)
 	_r := objc.Send[objc.ID](objref.IDOf(aup), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

@@ -6,6 +6,7 @@ package coredata
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,27 +51,34 @@ func coreDataCoreSpotlightDelegateAdopt(id objc.ID) *CoreDataCoreSpotlightDelega
 
 // Description returns the object's -description text.
 func (cdcsd *CoreDataCoreSpotlightDelegate) Description() string {
+	defer runtime.KeepAlive(cdcsd)
 	return rt.Description(objref.IDOf(cdcsd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cdcsd *CoreDataCoreSpotlightDelegate) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cdcsd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cdcsd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cdcsd *CoreDataCoreSpotlightDelegate) IsKind(className string) bool {
+	defer runtime.KeepAlive(cdcsd)
 	return rt.IsKind(objref.IDOf(cdcsd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cdcsd *CoreDataCoreSpotlightDelegate) String() string {
+	defer runtime.KeepAlive(cdcsd)
 	return rt.Description(objref.IDOf(cdcsd))
 }
 
 // NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionCoordinator creates a Core Spotlight delegate with the specified store description and coordinator.
 func NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionCoordinator(description *PersistentStoreDescription, psc *PersistentStoreCoordinator) *CoreDataCoreSpotlightDelegate {
+	defer runtime.KeepAlive(description)
+	defer runtime.KeepAlive(psc)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCoreDataCoreSpotlightDelegate")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForStoreWithDescription:coordinator:"), objref.IDOf(description), objref.IDOf(psc))
 	return coreDataCoreSpotlightDelegateAdopt(_id)
@@ -78,6 +86,8 @@ func NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionCoordinator(descript
 
 // NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionModel creates a Core Spotlight delegate with the specified store description and managed object model.
 func NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionModel(description *PersistentStoreDescription, model *ManagedObjectModel) *CoreDataCoreSpotlightDelegate {
+	defer runtime.KeepAlive(description)
+	defer runtime.KeepAlive(model)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCoreDataCoreSpotlightDelegate")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForStoreWithDescription:model:"), objref.IDOf(description), objref.IDOf(model))
 	return coreDataCoreSpotlightDelegateAdopt(_id)
@@ -85,6 +95,7 @@ func NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionModel(description *P
 
 // DomainIdentifier returns the domain identifier.
 func (cdcsd *CoreDataCoreSpotlightDelegate) DomainIdentifier() string {
+	defer runtime.KeepAlive(cdcsd)
 	_r := objc.Send[objc.ID](objref.IDOf(cdcsd), objc.RegisterName("domainIdentifier"))
 	if _r == 0 {
 		return ""
@@ -94,6 +105,7 @@ func (cdcsd *CoreDataCoreSpotlightDelegate) DomainIdentifier() string {
 
 // IndexName returns the index’s name.
 func (cdcsd *CoreDataCoreSpotlightDelegate) IndexName() string {
+	defer runtime.KeepAlive(cdcsd)
 	_r := objc.Send[objc.ID](objref.IDOf(cdcsd), objc.RegisterName("indexName"))
 	if _r == 0 {
 		return ""
@@ -103,11 +115,13 @@ func (cdcsd *CoreDataCoreSpotlightDelegate) IndexName() string {
 
 // StartSpotlightIndexing starts the indexing of the store’s entities.
 func (cdcsd *CoreDataCoreSpotlightDelegate) StartSpotlightIndexing() {
+	defer runtime.KeepAlive(cdcsd)
 	objc.Send[objc.ID](objref.IDOf(cdcsd), objc.RegisterName("startSpotlightIndexing"))
 }
 
 // StopSpotlightIndexing stops the indexing of the store’s entities.
 func (cdcsd *CoreDataCoreSpotlightDelegate) StopSpotlightIndexing() {
+	defer runtime.KeepAlive(cdcsd)
 	objc.Send[objc.ID](objref.IDOf(cdcsd), objc.RegisterName("stopSpotlightIndexing"))
 }
 
@@ -115,6 +129,7 @@ func (cdcsd *CoreDataCoreSpotlightDelegate) StopSpotlightIndexing() {
 //
 // DeleteSpotlightIndex blocks until the operation completes or ctx is cancelled.
 func (cdcsd *CoreDataCoreSpotlightDelegate) DeleteSpotlightIndex(ctx context.Context) error {
+	defer runtime.KeepAlive(cdcsd)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -132,6 +147,8 @@ func (cdcsd *CoreDataCoreSpotlightDelegate) DeleteSpotlightIndex(ctx context.Con
 
 // AttributeSetForObject returns the searchable attributes for the specified managed object.
 func (cdcsd *CoreDataCoreSpotlightDelegate) AttributeSetForObject(object *ManagedObject) obj.Object {
+	defer runtime.KeepAlive(cdcsd)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[objc.ID](objref.IDOf(cdcsd), objc.RegisterName("attributeSetForObject:"), objref.IDOf(object))
 	return obj.Wrap(_r)
 }
@@ -140,6 +157,8 @@ func (cdcsd *CoreDataCoreSpotlightDelegate) AttributeSetForObject(object *Manage
 //
 // SearchableIndexReindexAllSearchableItemsWithAcknowledgementHandler blocks until the operation completes or ctx is cancelled.
 func (cdcsd *CoreDataCoreSpotlightDelegate) SearchableIndexReindexAllSearchableItemsWithAcknowledgementHandler(ctx context.Context, searchableIndex obj.Object) error {
+	defer runtime.KeepAlive(cdcsd)
+	defer runtime.KeepAlive(searchableIndex)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -157,6 +176,8 @@ func (cdcsd *CoreDataCoreSpotlightDelegate) SearchableIndexReindexAllSearchableI
 //
 // SearchableIndexReindexSearchableItemsWithIdentifiersAcknowledgementHandler blocks until the operation completes or ctx is cancelled.
 func (cdcsd *CoreDataCoreSpotlightDelegate) SearchableIndexReindexSearchableItemsWithIdentifiersAcknowledgementHandler(ctx context.Context, searchableIndex obj.Object, identifiers []string) error {
+	defer runtime.KeepAlive(cdcsd)
+	defer runtime.KeepAlive(searchableIndex)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -172,6 +193,7 @@ func (cdcsd *CoreDataCoreSpotlightDelegate) SearchableIndexReindexSearchableItem
 
 // IsIndexingEnabled reports whether the object is indexing enabled.
 func (cdcsd *CoreDataCoreSpotlightDelegate) IsIndexingEnabled() bool {
+	defer runtime.KeepAlive(cdcsd)
 	_r := objc.Send[bool](objref.IDOf(cdcsd), objc.RegisterName("isIndexingEnabled"))
 	return _r
 }

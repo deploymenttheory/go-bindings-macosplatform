@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func dataAssetAdopt(id objc.ID) *DataAsset {
 
 // Description returns the object's -description text.
 func (da *DataAsset) Description() string {
+	defer runtime.KeepAlive(da)
 	return rt.Description(objref.IDOf(da))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (da *DataAsset) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(da)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(da), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (da *DataAsset) IsKind(className string) bool {
+	defer runtime.KeepAlive(da)
 	return rt.IsKind(objref.IDOf(da), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (da *DataAsset) String() string {
+	defer runtime.KeepAlive(da)
 	return rt.Description(objref.IDOf(da))
 }
 
 // NewDataAssetWithName initializes and returns an object with a reference to the named data asset in an asset catalog.
 func NewDataAssetWithName(name obj.Object) *DataAsset {
+	defer runtime.KeepAlive(name)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDataAsset")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), objref.IDOf(name))
 	return dataAssetAdopt(_id)
@@ -75,25 +84,30 @@ func NewDataAssetWithName(name obj.Object) *DataAsset {
 
 // NewDataAssetWithNameBundle initializes and returns an object with a reference to the named data asset that’s in an asset catalog in the specified bundle.
 func NewDataAssetWithNameBundle(name obj.Object, bundle obj.Object) *DataAsset {
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(bundle)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDataAsset")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:bundle:"), objref.IDOf(name), objref.IDOf(bundle))
 	return dataAssetAdopt(_id)
 }
 
 // Name returns the name used to reference the data asset
-func (da *DataAsset) Name() obj.Object {
+func (da *DataAsset) Name() *foundation.String {
+	defer runtime.KeepAlive(da)
 	_r := objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("name"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Data returns the data for this asset, as stored in the asset catalog
-func (da *DataAsset) Data() obj.Object {
+func (da *DataAsset) Data() []byte {
+	defer runtime.KeepAlive(da)
 	_r := objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // TypeIdentifier returns the Uniform Type Identifier for this data object.
 func (da *DataAsset) TypeIdentifier() string {
+	defer runtime.KeepAlive(da)
 	_r := objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("typeIdentifier"))
 	if _r == 0 {
 		return ""

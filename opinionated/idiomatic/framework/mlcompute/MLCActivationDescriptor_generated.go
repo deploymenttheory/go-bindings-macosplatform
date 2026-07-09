@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func activationDescriptorAdopt(id objc.ID) *ActivationDescriptor {
 
 // Description returns the object's -description text.
 func (ad *ActivationDescriptor) Description() string {
+	defer runtime.KeepAlive(ad)
 	return rt.Description(objref.IDOf(ad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ad *ActivationDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ad *ActivationDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(ad)
 	return rt.IsKind(objref.IDOf(ad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ad *ActivationDescriptor) String() string {
+	defer runtime.KeepAlive(ad)
 	return rt.Description(objref.IDOf(ad))
 }
 
@@ -74,24 +81,28 @@ func NewActivationDescriptor() *ActivationDescriptor {
 
 // ActivationType returns the type of activation function
 func (ad *ActivationDescriptor) ActivationType() ActivationType {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[ActivationType](objref.IDOf(ad), objc.RegisterName("activationType"))
 	return _r
 }
 
 // A returns parameter to the activation function
 func (ad *ActivationDescriptor) A() float32 {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[float32](objref.IDOf(ad), objc.RegisterName("a"))
 	return _r
 }
 
 // B returns parameter to the activation function
 func (ad *ActivationDescriptor) B() float32 {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[float32](objref.IDOf(ad), objc.RegisterName("b"))
 	return _r
 }
 
 // C returns parameter to the activation function
 func (ad *ActivationDescriptor) C() float32 {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[float32](objref.IDOf(ad), objc.RegisterName("c"))
 	return _r
 }

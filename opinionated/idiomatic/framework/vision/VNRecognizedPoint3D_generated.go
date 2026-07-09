@@ -5,9 +5,11 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,9 +49,10 @@ func recognizedPoint3DAdopt(id objc.ID) *RecognizedPoint3D {
 }
 
 // Identifier returns the identifier.
-func (rpd *RecognizedPoint3D) Identifier() obj.Object {
+func (rpd *RecognizedPoint3D) Identifier() *foundation.String {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("identifier"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // isRecognizedPoint3D marks RecognizedPoint3D — and, by embedding promotion, its

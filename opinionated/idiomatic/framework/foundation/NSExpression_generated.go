@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func expressionAdopt(id objc.ID) *Expression {
 
 // Description returns the object's -description text.
 func (e *Expression) Description() string {
+	defer runtime.KeepAlive(e)
 	return rt.Description(objref.IDOf(e))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (e *Expression) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(e)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(e), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (e *Expression) IsKind(className string) bool {
+	defer runtime.KeepAlive(e)
 	return rt.IsKind(objref.IDOf(e), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (e *Expression) String() string {
+	defer runtime.KeepAlive(e)
 	return rt.Description(objref.IDOf(e))
 }
 
@@ -77,6 +83,7 @@ func NewExpressionWithExpressionType(type_ ExpressionType) *Expression {
 
 // NewExpressionWithCoder creates an expression by decoding from the coder you specify.
 func NewExpressionWithCoder(coder *Coder) *Expression {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return expressionAdopt(_id)
@@ -89,36 +96,43 @@ func (e *Expression) WithObservationInfo(observationInfo unsafe.Pointer) *Expres
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (e *Expression) WithScriptingProperties(scriptingProperties obj.Object) *Expression {
-	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (e *Expression) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Expression {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return e
 }
 
 // ExpressionValueWithObjectContext evaluates an expression using a specified object and context.
 func (e *Expression) ExpressionValueWithObjectContext(object obj.Object, context_ obj.Object) obj.Object {
+	defer runtime.KeepAlive(e)
+	defer runtime.KeepAlive(object)
+	defer runtime.KeepAlive(context_)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("expressionValueWithObject:context:"), objref.IDOf(object), objref.IDOf(context_))
 	return obj.Wrap(_r)
 }
 
 // AllowEvaluation forces a securely decoded expression to allow evaluation.
 func (e *Expression) AllowEvaluation() {
+	defer runtime.KeepAlive(e)
 	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("allowEvaluation"))
 }
 
 // ExpressionType returns the expression type.
 func (e *Expression) ExpressionType() ExpressionType {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[ExpressionType](objref.IDOf(e), objc.RegisterName("expressionType"))
 	return _r
 }
 
 // ConstantValue returns the constant value.
 func (e *Expression) ConstantValue() obj.Object {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("constantValue"))
 	return obj.Wrap(_r)
 }
 
 // KeyPath returns the key path.
 func (e *Expression) KeyPath() string {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("keyPath"))
 	if _r == 0 {
 		return ""
@@ -128,6 +142,7 @@ func (e *Expression) KeyPath() string {
 
 // Function returns the function.
 func (e *Expression) Function() string {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("function"))
 	if _r == 0 {
 		return ""
@@ -137,6 +152,7 @@ func (e *Expression) Function() string {
 
 // Variable returns the variable.
 func (e *Expression) Variable() string {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("variable"))
 	if _r == 0 {
 		return ""
@@ -146,6 +162,7 @@ func (e *Expression) Variable() string {
 
 // Operand returns the operand.
 func (e *Expression) Operand() *Expression {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("operand"))
 	return ExpressionFromID(_r)
 }
@@ -154,42 +171,49 @@ func (e *Expression) Operand() *Expression {
 //
 // Arguments returns the collection as a Go slice.
 func (e *Expression) Arguments() []*Expression {
+	defer runtime.KeepAlive(e)
 	_arr := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("arguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Expression { return ExpressionFromID(_id) })
 }
 
 // Collection returns the collection.
 func (e *Expression) Collection() obj.Object {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("collection"))
 	return obj.Wrap(_r)
 }
 
 // Predicate returns the predicate.
 func (e *Expression) Predicate() *Predicate {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("predicate"))
 	return PredicateFromID(_r)
 }
 
 // LeftExpression returns the left expression.
 func (e *Expression) LeftExpression() *Expression {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("leftExpression"))
 	return ExpressionFromID(_r)
 }
 
 // RightExpression returns the right expression.
 func (e *Expression) RightExpression() *Expression {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("rightExpression"))
 	return ExpressionFromID(_r)
 }
 
 // TrueExpression returns the true expression.
 func (e *Expression) TrueExpression() *Expression {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("trueExpression"))
 	return ExpressionFromID(_r)
 }
 
 // FalseExpression returns the false expression.
 func (e *Expression) FalseExpression() *Expression {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("falseExpression"))
 	return ExpressionFromID(_r)
 }

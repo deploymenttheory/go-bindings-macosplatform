@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -71,18 +73,21 @@ func (nosgd *NNOptimizerStochasticGradientDescent) WithLabel(label string) *NNOp
 
 // MomentumScale returns the momentumScale at which we update momentum for values array Default value is 0.0
 func (nosgd *NNOptimizerStochasticGradientDescent) MomentumScale() float32 {
+	defer runtime.KeepAlive(nosgd)
 	_r := objc.Send[float32](objref.IDOf(nosgd), objc.RegisterName("momentumScale"))
 	return _r
 }
 
 // UseNesterovMomentum reports whether nesterov momentum is considered an improvement on the usual momentum update Default value is false
 func (nosgd *NNOptimizerStochasticGradientDescent) UseNesterovMomentum() bool {
+	defer runtime.KeepAlive(nosgd)
 	_r := objc.Send[bool](objref.IDOf(nosgd), objc.RegisterName("useNesterovMomentum"))
 	return _r
 }
 
 // UseNestrovMomentum wraps the corresponding Objective-C method.
 func (nosgd *NNOptimizerStochasticGradientDescent) UseNestrovMomentum() bool {
+	defer runtime.KeepAlive(nosgd)
 	_r := objc.Send[bool](objref.IDOf(nosgd), objc.RegisterName("useNestrovMomentum"))
 	return _r
 }

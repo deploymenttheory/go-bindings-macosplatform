@@ -5,12 +5,14 @@
 package networkextension
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,10 +57,11 @@ func NewNETunnelProviderSession() *NETunnelProviderSession {
 	return nETunnelProviderSessionAdopt(_id)
 }
 
-// StartTunnelWithOptionsAndReturnError start the process of connecting the tunnel.
-func (ntps *NETunnelProviderSession) StartTunnelWithOptionsAndReturnError(options obj.Object) error {
+// StartTunnelWithOptions start the process of connecting the tunnel.
+func (ntps *NETunnelProviderSession) StartTunnelWithOptions(options map[string]obj.Object) error {
+	defer runtime.KeepAlive(ntps)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(ntps), objc.RegisterName("startTunnelWithOptions:andReturnError:"), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(ntps), objc.RegisterName("startTunnelWithOptions:andReturnError:"), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -67,12 +70,14 @@ func (ntps *NETunnelProviderSession) StartTunnelWithOptionsAndReturnError(option
 
 // StopTunnel start the process of disconnecting the tunnel.
 func (ntps *NETunnelProviderSession) StopTunnel() {
+	defer runtime.KeepAlive(ntps)
 	objc.Send[objc.ID](objref.IDOf(ntps), objc.RegisterName("stopTunnel"))
 }
 
 // SendProviderMessageReturnErrorResponseHandler send a message to the Tunnel Provider extension. If the extension is not running, it should be launched to handle the message. If this method can’t start sending the message it reports an error in the returnError parameter. If an error occurs while sending the message or returning the result, nil should be sent to the response handler as notification.
-func (ntps *NETunnelProviderSession) SendProviderMessageReturnErrorResponseHandler(messageData obj.Object, error_ unsafe.Pointer, responseHandler func(obj.Object)) bool {
-	_r := objc.Send[bool](objref.IDOf(ntps), objc.RegisterName("sendProviderMessage:returnError:responseHandler:"), objref.IDOf(messageData), error_, objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { responseHandler(obj.Wrap(_b0)) }))
+func (ntps *NETunnelProviderSession) SendProviderMessageReturnErrorResponseHandler(messageData []byte, err unsafe.Pointer, responseHandler func(obj.Object)) bool {
+	defer runtime.KeepAlive(ntps)
+	_r := objc.Send[bool](objref.IDOf(ntps), objc.RegisterName("sendProviderMessage:returnError:responseHandler:"), rt.BytesToNSData(messageData), err, objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { responseHandler(obj.Wrap(_b0)) }))
 	return _r
 }
 

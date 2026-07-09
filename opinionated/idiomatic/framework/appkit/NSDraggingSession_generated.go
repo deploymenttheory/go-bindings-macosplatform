@@ -5,6 +5,7 @@
 package appkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func draggingSessionAdopt(id objc.ID) *DraggingSession {
 
 // Description returns the object's -description text.
 func (ds *DraggingSession) Description() string {
+	defer runtime.KeepAlive(ds)
 	return rt.Description(objref.IDOf(ds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ds *DraggingSession) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ds)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ds *DraggingSession) IsKind(className string) bool {
+	defer runtime.KeepAlive(ds)
 	return rt.IsKind(objref.IDOf(ds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ds *DraggingSession) String() string {
+	defer runtime.KeepAlive(ds)
 	return rt.Description(objref.IDOf(ds))
 }
 
@@ -95,41 +101,50 @@ func (ds *DraggingSession) WithDraggingLeaderIndex(draggingLeaderIndex int) *Dra
 
 // EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing enumerates through each dragging item.
 func (ds *DraggingSession) EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing(enumOpts DraggingItemEnumerationOptions, view *View, classArray []obj.Object, searchOptions obj.Object, block func(obj.Object, int, *bool)) {
+	defer runtime.KeepAlive(ds)
+	defer runtime.KeepAlive(view)
+	defer runtime.KeepAlive(searchOptions)
 	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("enumerateDraggingItemsWithOptions:forView:classes:searchOptions:usingBlock:"), enumOpts, objref.IDOf(view), purego.SliceToNSArray(classArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(searchOptions), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
 }
 
 // DraggingFormation returns the dragging formation.
 func (ds *DraggingSession) DraggingFormation() DraggingFormation {
+	defer runtime.KeepAlive(ds)
 	_r := objc.Send[DraggingFormation](objref.IDOf(ds), objc.RegisterName("draggingFormation"))
 	return _r
 }
 
 // AnimatesToStartingPositionsOnCancelOrFail wraps the corresponding Objective-C method.
 func (ds *DraggingSession) AnimatesToStartingPositionsOnCancelOrFail() bool {
+	defer runtime.KeepAlive(ds)
 	_r := objc.Send[bool](objref.IDOf(ds), objc.RegisterName("animatesToStartingPositionsOnCancelOrFail"))
 	return _r
 }
 
 // DraggingLeaderIndex returns the dragging leader index.
 func (ds *DraggingSession) DraggingLeaderIndex() int {
+	defer runtime.KeepAlive(ds)
 	_r := objc.Send[int](objref.IDOf(ds), objc.RegisterName("draggingLeaderIndex"))
 	return _r
 }
 
 // DraggingPasteboard returns the dragging pasteboard.
 func (ds *DraggingSession) DraggingPasteboard() *Pasteboard {
+	defer runtime.KeepAlive(ds)
 	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("draggingPasteboard"))
 	return PasteboardFromID(_r)
 }
 
 // DraggingSequenceNumber returns the dragging sequence number.
 func (ds *DraggingSession) DraggingSequenceNumber() int {
+	defer runtime.KeepAlive(ds)
 	_r := objc.Send[int](objref.IDOf(ds), objc.RegisterName("draggingSequenceNumber"))
 	return _r
 }
 
 // DraggingLocation returns the dragging location.
 func (ds *DraggingSession) DraggingLocation() corefoundation.CGPoint {
+	defer runtime.KeepAlive(ds)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(ds), objc.RegisterName("draggingLocation"))
 	return _r
 }

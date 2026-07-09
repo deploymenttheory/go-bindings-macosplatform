@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -78,29 +80,35 @@ func (ri *RayIntersector) WithLabel(label string) *RayIntersector {
 
 // RecommendedMinimumRayBatchSizeForRayCount get the recommended minimum number of rays to submit for intersection in one batch In order to keep the system responsive, and to limit the amount of memory allocated to ray and intersection buffers, it may be desirable to divide the rays to be intersected against an acceleration structure into smaller batches. However, submitting too few rays in a batch reduces GPU utilization and performance. This method provides a recommended minimum number of rays to submit in any given batch. For example, for a 1920x1080 image, this method may recommend that the image be divided into 512x512 tiles. The actual recommendation varies per device and total ray count.
 func (ri *RayIntersector) RecommendedMinimumRayBatchSizeForRayCount(rayCount int) int {
+	defer runtime.KeepAlive(ri)
 	_r := objc.Send[int](objref.IDOf(ri), objc.RegisterName("recommendedMinimumRayBatchSizeForRayCount:"), rayCount)
 	return _r
 }
 
 // EncodeWithCoder encodes with coder.
 func (ri *RayIntersector) EncodeWithCoder(coder obj.Object) {
+	defer runtime.KeepAlive(ri)
+	defer runtime.KeepAlive(coder)
 	objc.Send[objc.ID](objref.IDOf(ri), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }
 
 // RayStride returns offset, in bytes, between consecutive rays in the ray buffer. Defaults to 0, indicating that the rays are packed according to their natural aligned size. This can be used to skip past any additional per-ray data that may be stored alongside the MPSRay struct such as the current radiance along the ray or the source pixel coordinates. Must be aligned to the alignment of the ray data type.
 func (ri *RayIntersector) RayStride() int {
+	defer runtime.KeepAlive(ri)
 	_r := objc.Send[int](objref.IDOf(ri), objc.RegisterName("rayStride"))
 	return _r
 }
 
 // IntersectionStride returns offset, in bytes, between consecutive intersections in the intersection buffer. Defaults to 0, indicating that the intersections are packed according to their natural aligned size. This can be used to skip past any additional per-intersection that which may be stored alongside the MPSRayIntersection struct such as the surface normal at the point of intersection. Must be aligned to the alignment of the intersection data type.
 func (ri *RayIntersector) IntersectionStride() int {
+	defer runtime.KeepAlive(ri)
 	_r := objc.Send[int](objref.IDOf(ri), objc.RegisterName("intersectionStride"))
 	return _r
 }
 
 // RayMask returns global ray mask. Defaults to 0xFFFFFFFF. This value will be logically AND-ed with the per-ray mask if the ray data type contains a mask.
 func (ri *RayIntersector) RayMask() int {
+	defer runtime.KeepAlive(ri)
 	_r := objc.Send[int](objref.IDOf(ri), objc.RegisterName("rayMask"))
 	return _r
 }

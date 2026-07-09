@@ -5,6 +5,8 @@
 package videotoolbox
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,35 @@ func opticalFlowParametersAdopt(id objc.ID) *OpticalFlowParameters {
 
 // Description returns the object's -description text.
 func (ofp *OpticalFlowParameters) Description() string {
+	defer runtime.KeepAlive(ofp)
 	return rt.Description(objref.IDOf(ofp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ofp *OpticalFlowParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ofp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ofp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ofp *OpticalFlowParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(ofp)
 	return rt.IsKind(objref.IDOf(ofp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ofp *OpticalFlowParameters) String() string {
+	defer runtime.KeepAlive(ofp)
 	return rt.Description(objref.IDOf(ofp))
 }
 
 // NewOpticalFlowParametersWithSourceFrameNextFrameSubmissionModeDestinationOpticalFlow creates a new optical flow parameters object. Returns `nil` if `sourceFrame` or `nextFrame` is `nil`, or if `sourceFrame` and `nextFrame` have different pixel formats. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrame: Next source frame in presentation time order. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presentation sequence. For more information about supported modes see “VTOpticalFlowParametersSubmissionMode“. - destinationOpticalFlow: User allocated `VTFrameProcessorOpticalFlow` that receives the results.
 func NewOpticalFlowParametersWithSourceFrameNextFrameSubmissionModeDestinationOpticalFlow(sourceFrame *FrameProcessorFrame, nextFrame *FrameProcessorFrame, submissionMode OpticalFlowParametersSubmissionMode, destinationOpticalFlow *FrameProcessorOpticalFlow) *OpticalFlowParameters {
+	defer runtime.KeepAlive(sourceFrame)
+	defer runtime.KeepAlive(nextFrame)
+	defer runtime.KeepAlive(destinationOpticalFlow)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VTOpticalFlowParameters")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:nextFrame:submissionMode:destinationOpticalFlow:"), objref.IDOf(sourceFrame), objref.IDOf(nextFrame), submissionMode, objref.IDOf(destinationOpticalFlow))
 	return opticalFlowParametersAdopt(_id)
@@ -75,24 +85,28 @@ func NewOpticalFlowParametersWithSourceFrameNextFrameSubmissionModeDestinationOp
 
 // SourceFrame returns current source frame, which must be non `nil`.
 func (ofp *OpticalFlowParameters) SourceFrame() *FrameProcessorFrame {
+	defer runtime.KeepAlive(ofp)
 	_r := objc.Send[objc.ID](objref.IDOf(ofp), objc.RegisterName("sourceFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
 // NextFrame returns the next source frame in presentation time order.
 func (ofp *OpticalFlowParameters) NextFrame() *FrameProcessorFrame {
+	defer runtime.KeepAlive(ofp)
 	_r := objc.Send[objc.ID](objref.IDOf(ofp), objc.RegisterName("nextFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
 // SubmissionMode returns ordering of the input frames in this submission relative to the previous submission.
 func (ofp *OpticalFlowParameters) SubmissionMode() OpticalFlowParametersSubmissionMode {
+	defer runtime.KeepAlive(ofp)
 	_r := objc.Send[OpticalFlowParametersSubmissionMode](objref.IDOf(ofp), objc.RegisterName("submissionMode"))
 	return _r
 }
 
 // DestinationOpticalFlow returns output optical flow calculated by the processor.
 func (ofp *OpticalFlowParameters) DestinationOpticalFlow() *FrameProcessorOpticalFlow {
+	defer runtime.KeepAlive(ofp)
 	_r := objc.Send[objc.ID](objref.IDOf(ofp), objc.RegisterName("destinationOpticalFlow"))
 	return FrameProcessorOpticalFlowFromID(_r)
 }

@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func personNameComponentsAdopt(id objc.ID) *PersonNameComponents {
 
 // Description returns the object's -description text.
 func (pnc *PersonNameComponents) Description() string {
+	defer runtime.KeepAlive(pnc)
 	return rt.Description(objref.IDOf(pnc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pnc *PersonNameComponents) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pnc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pnc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pnc *PersonNameComponents) IsKind(className string) bool {
+	defer runtime.KeepAlive(pnc)
 	return rt.IsKind(objref.IDOf(pnc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pnc *PersonNameComponents) String() string {
+	defer runtime.KeepAlive(pnc)
 	return rt.Description(objref.IDOf(pnc))
 }
 
@@ -76,42 +82,49 @@ func NewPersonNameComponents() *PersonNameComponents {
 
 // WithNamePrefix sets the portion of a name’s full form of address that precedes the name itself (for example, “Dr.,” “Mr.,” “Ms.”).
 func (pnc *PersonNameComponents) WithNamePrefix(namePrefix StringProvider) *PersonNameComponents {
+	defer runtime.KeepAlive(namePrefix)
 	objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("setNamePrefix:"), objref.IDOf(namePrefix))
 	return pnc
 }
 
 // WithGivenName sets name bestowed upon an individual to differentiate them from other members of a group that share a family name (for example, “Johnathan”).
 func (pnc *PersonNameComponents) WithGivenName(givenName StringProvider) *PersonNameComponents {
+	defer runtime.KeepAlive(givenName)
 	objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("setGivenName:"), objref.IDOf(givenName))
 	return pnc
 }
 
 // WithMiddleName sets secondary name bestowed upon an individual to differentiate them from others that have the same given name (for example, “Maple”).
 func (pnc *PersonNameComponents) WithMiddleName(middleName StringProvider) *PersonNameComponents {
+	defer runtime.KeepAlive(middleName)
 	objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("setMiddleName:"), objref.IDOf(middleName))
 	return pnc
 }
 
 // WithFamilyName sets name bestowed upon an individual to denote membership in a group or family. (for example, “Appleseed”).
 func (pnc *PersonNameComponents) WithFamilyName(familyName StringProvider) *PersonNameComponents {
+	defer runtime.KeepAlive(familyName)
 	objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("setFamilyName:"), objref.IDOf(familyName))
 	return pnc
 }
 
 // WithNameSuffix sets the portion of a name’s full form of address that follows the name itself (for example, “Esq.,” “Jr.,” “Ph.D.”).
 func (pnc *PersonNameComponents) WithNameSuffix(nameSuffix StringProvider) *PersonNameComponents {
+	defer runtime.KeepAlive(nameSuffix)
 	objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("setNameSuffix:"), objref.IDOf(nameSuffix))
 	return pnc
 }
 
 // WithNickname sets name substituted for the purposes of familiarity (for example, “Johnny”).
 func (pnc *PersonNameComponents) WithNickname(nickname StringProvider) *PersonNameComponents {
+	defer runtime.KeepAlive(nickname)
 	objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("setNickname:"), objref.IDOf(nickname))
 	return pnc
 }
 
 // WithPhoneticRepresentation sets the phonetic representation name components of the receiver.
 func (pnc *PersonNameComponents) WithPhoneticRepresentation(phoneticRepresentation *PersonNameComponents) *PersonNameComponents {
+	defer runtime.KeepAlive(phoneticRepresentation)
 	objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("setPhoneticRepresentation:"), objref.IDOf(phoneticRepresentation))
 	return pnc
 }
@@ -123,13 +136,14 @@ func (pnc *PersonNameComponents) WithObservationInfo(observationInfo unsafe.Poin
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (pnc *PersonNameComponents) WithScriptingProperties(scriptingProperties obj.Object) *PersonNameComponents {
-	objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (pnc *PersonNameComponents) WithScriptingProperties(scriptingProperties map[string]obj.Object) *PersonNameComponents {
+	objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return pnc
 }
 
 // NamePrefix returns the name prefix.
 func (pnc *PersonNameComponents) NamePrefix() string {
+	defer runtime.KeepAlive(pnc)
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("namePrefix"))
 	if _r == 0 {
 		return ""
@@ -139,6 +153,7 @@ func (pnc *PersonNameComponents) NamePrefix() string {
 
 // GivenName returns the given name.
 func (pnc *PersonNameComponents) GivenName() string {
+	defer runtime.KeepAlive(pnc)
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("givenName"))
 	if _r == 0 {
 		return ""
@@ -148,6 +163,7 @@ func (pnc *PersonNameComponents) GivenName() string {
 
 // MiddleName returns the middle name.
 func (pnc *PersonNameComponents) MiddleName() string {
+	defer runtime.KeepAlive(pnc)
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("middleName"))
 	if _r == 0 {
 		return ""
@@ -157,6 +173,7 @@ func (pnc *PersonNameComponents) MiddleName() string {
 
 // FamilyName returns the family name.
 func (pnc *PersonNameComponents) FamilyName() string {
+	defer runtime.KeepAlive(pnc)
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("familyName"))
 	if _r == 0 {
 		return ""
@@ -166,6 +183,7 @@ func (pnc *PersonNameComponents) FamilyName() string {
 
 // NameSuffix returns the name suffix.
 func (pnc *PersonNameComponents) NameSuffix() string {
+	defer runtime.KeepAlive(pnc)
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("nameSuffix"))
 	if _r == 0 {
 		return ""
@@ -175,6 +193,7 @@ func (pnc *PersonNameComponents) NameSuffix() string {
 
 // Nickname returns the nickname.
 func (pnc *PersonNameComponents) Nickname() string {
+	defer runtime.KeepAlive(pnc)
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("nickname"))
 	if _r == 0 {
 		return ""
@@ -184,6 +203,7 @@ func (pnc *PersonNameComponents) Nickname() string {
 
 // PhoneticRepresentation returns the phonetic representation.
 func (pnc *PersonNameComponents) PhoneticRepresentation() *PersonNameComponents {
+	defer runtime.KeepAlive(pnc)
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("phoneticRepresentation"))
 	return PersonNameComponentsFromID(_r)
 }

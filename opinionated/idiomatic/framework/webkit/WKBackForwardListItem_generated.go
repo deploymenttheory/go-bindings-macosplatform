@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func wKBackForwardListItemAdopt(id objc.ID) *WKBackForwardListItem {
 
 // Description returns the object's -description text.
 func (wbfli *WKBackForwardListItem) Description() string {
+	defer runtime.KeepAlive(wbfli)
 	return rt.Description(objref.IDOf(wbfli))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wbfli *WKBackForwardListItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wbfli)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wbfli), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wbfli *WKBackForwardListItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(wbfli)
 	return rt.IsKind(objref.IDOf(wbfli), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wbfli *WKBackForwardListItem) String() string {
+	defer runtime.KeepAlive(wbfli)
 	return rt.Description(objref.IDOf(wbfli))
 }
 
@@ -79,12 +86,13 @@ func NewWKBackForwardListItem() *WKBackForwardListItem {
 }
 
 // URL returns the URL of the webpage represented by this item.
-func (wbfli *WKBackForwardListItem) URL() obj.Object {
-	var _mainthread0 obj.Object
+func (wbfli *WKBackForwardListItem) URL() string {
+	defer runtime.KeepAlive(wbfli)
+	var _mainthread0 string
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() string {
 			_r := objc.Send[objc.ID](objref.IDOf(wbfli), objc.RegisterName("URL"))
-			return obj.Wrap(_r)
+			return rt.URLString(_r)
 		}()
 	})
 	return _mainthread0
@@ -93,6 +101,7 @@ func (wbfli *WKBackForwardListItem) URL() obj.Object {
 
 // Title returns the title of the webpage represented by this item.
 func (wbfli *WKBackForwardListItem) Title() string {
+	defer runtime.KeepAlive(wbfli)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

@@ -5,10 +5,13 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,9 +51,9 @@ func ePSImageRepAdopt(id objc.ID) *EPSImageRep {
 }
 
 // NewEPSImageRepWithData returns a representation of an image initialized with the specified EPS data.
-func NewEPSImageRepWithData(epsData obj.Object) *EPSImageRep {
+func NewEPSImageRepWithData(epsData []byte) *EPSImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSEPSImageRep")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(epsData))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), rt.BytesToNSData(epsData))
 	return ePSImageRepAdopt(_id)
 }
 
@@ -74,6 +77,7 @@ func (eir *EPSImageRep) WithOpaque(opaque bool) *EPSImageRep {
 
 // WithColorSpaceName sets the name of the color space used by the image data.
 func (eir *EPSImageRep) WithColorSpaceName(colorSpaceName obj.Object) *EPSImageRep {
+	defer runtime.KeepAlive(colorSpaceName)
 	objc.Send[objc.ID](objref.IDOf(eir), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
 	return eir
 }
@@ -104,19 +108,22 @@ func (eir *EPSImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection
 
 // PrepareGState implemented by subclasses to configure the graphics state prior to drawing.
 func (eir *EPSImageRep) PrepareGState() {
+	defer runtime.KeepAlive(eir)
 	objc.Send[objc.ID](objref.IDOf(eir), objc.RegisterName("prepareGState"))
 }
 
 // BoundingBox returns the rectangle that bounds the image representation.
 func (eir *EPSImageRep) BoundingBox() corefoundation.CGRect {
+	defer runtime.KeepAlive(eir)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(eir), objc.RegisterName("boundingBox"))
 	return _r
 }
 
 // EPSRepresentation returns the EPS representation of the image representation.
-func (eir *EPSImageRep) EPSRepresentation() obj.Object {
+func (eir *EPSImageRep) EPSRepresentation() []byte {
+	defer runtime.KeepAlive(eir)
 	_r := objc.Send[objc.ID](objref.IDOf(eir), objc.RegisterName("EPSRepresentation"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ ImageRepProvider = (*EPSImageRep)(nil)

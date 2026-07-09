@@ -34,8 +34,8 @@ func SFSpeechURLRecognitionRequestFromID(id objc.ID) *SFSpeechURLRecognitionRequ
 }
 
 // Creates a speech recognition request, initialized with the specified URL.
-func (o *SFSpeechURLRecognitionRequest) InitWithURL(uRL *foundation.NSURL) *SFSpeechURLRecognitionRequest {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechURLRecognitionRequestSelInitWithURL, uRL.Ptr())
+func (o *SFSpeechURLRecognitionRequest) InitWithURL(url *foundation.NSURL) *SFSpeechURLRecognitionRequest {
+	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechURLRecognitionRequestSelInitWithURL, url.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

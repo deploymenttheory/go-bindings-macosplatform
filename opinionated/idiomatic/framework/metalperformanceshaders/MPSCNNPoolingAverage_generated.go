@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -103,12 +105,14 @@ func (cpa *CNNPoolingAverage) WithLabel(label string) *CNNPoolingAverage {
 
 // ZeroPadSizeX returns how much zero padding to apply to both left and right borders of the input image for average pooling, when using
 func (cpa *CNNPoolingAverage) ZeroPadSizeX() int {
+	defer runtime.KeepAlive(cpa)
 	_r := objc.Send[int](objref.IDOf(cpa), objc.RegisterName("zeroPadSizeX"))
 	return _r
 }
 
 // ZeroPadSizeY returns how much zero padding to apply to both top and bottom borders of the input image for average pooling, when using
 func (cpa *CNNPoolingAverage) ZeroPadSizeY() int {
+	defer runtime.KeepAlive(cpa)
 	_r := objc.Send[int](objref.IDOf(cpa), objc.RegisterName("zeroPadSizeY"))
 	return _r
 }

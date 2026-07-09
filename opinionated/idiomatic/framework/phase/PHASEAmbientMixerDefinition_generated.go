@@ -5,6 +5,7 @@
 package phase
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,6 +51,7 @@ func ambientMixerDefinitionAdopt(id objc.ID) *AmbientMixerDefinition {
 
 // NewAmbientMixerDefinitionWithChannelLayoutOrientationIdentifier creates a named ambient mixer with the given channel layout and orientation.
 func NewAmbientMixerDefinitionWithChannelLayoutOrientationIdentifier(layout obj.Object, orientation unsafe.Pointer, identifier string) *AmbientMixerDefinition {
+	defer runtime.KeepAlive(layout)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEAmbientMixerDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannelLayout:orientation:identifier:"), objref.IDOf(layout), orientation, purego.NSString(identifier))
 	return ambientMixerDefinitionAdopt(_id)
@@ -57,6 +59,7 @@ func NewAmbientMixerDefinitionWithChannelLayoutOrientationIdentifier(layout obj.
 
 // NewAmbientMixerDefinitionWithChannelLayoutOrientation creates an ambient mixer with the given channel layout and orientation.
 func NewAmbientMixerDefinitionWithChannelLayoutOrientation(layout obj.Object, orientation unsafe.Pointer) *AmbientMixerDefinition {
+	defer runtime.KeepAlive(layout)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEAmbientMixerDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannelLayout:orientation:"), objref.IDOf(layout), orientation)
 	return ambientMixerDefinitionAdopt(_id)
@@ -70,12 +73,14 @@ func (amd *AmbientMixerDefinition) WithGain(gain float64) *AmbientMixerDefinitio
 
 // WithGainMetaParameterDefinition sets a template for a parameter that changes the mixer’s volume gradually over a period of time.
 func (amd *AmbientMixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *AmbientMixerDefinition {
+	defer runtime.KeepAlive(gainMetaParameterDefinition)
 	objc.Send[objc.ID](objref.IDOf(amd), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
 	return amd
 }
 
 // InputChannelLayout returns a readonly value of the input channel layout this mixer was initialized with.
 func (amd *AmbientMixerDefinition) InputChannelLayout() obj.Object {
+	defer runtime.KeepAlive(amd)
 	_r := objc.Send[objc.ID](objref.IDOf(amd), objc.RegisterName("inputChannelLayout"))
 	return obj.Wrap(_r)
 }

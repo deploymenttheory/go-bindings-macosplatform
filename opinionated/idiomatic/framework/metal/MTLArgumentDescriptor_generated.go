@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func argumentDescriptorAdopt(id objc.ID) *ArgumentDescriptor {
 
 // Description returns the object's -description text.
 func (ad *ArgumentDescriptor) Description() string {
+	defer runtime.KeepAlive(ad)
 	return rt.Description(objref.IDOf(ad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ad *ArgumentDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ad *ArgumentDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(ad)
 	return rt.IsKind(objref.IDOf(ad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ad *ArgumentDescriptor) String() string {
+	defer runtime.KeepAlive(ad)
 	return rt.Description(objref.IDOf(ad))
 }
 
@@ -110,36 +117,42 @@ func (ad *ArgumentDescriptor) WithConstantBlockAlignment(constantBlockAlignment 
 
 // DataType returns for constants, the data type. Otherwise, MTLDataTypeTexture, MTLDataTypeSampler, or MTLDataTypePointer.
 func (ad *ArgumentDescriptor) DataType() DataType {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[DataType](objref.IDOf(ad), objc.RegisterName("dataType"))
 	return _r
 }
 
 // Index returns the binding point index of the argument
 func (ad *ArgumentDescriptor) Index() int {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[int](objref.IDOf(ad), objc.RegisterName("index"))
 	return _r
 }
 
 // ArrayLength returns the length of an array of constants, textures, or samplers, or 0 for non-array arguments
 func (ad *ArgumentDescriptor) ArrayLength() int {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[int](objref.IDOf(ad), objc.RegisterName("arrayLength"))
 	return _r
 }
 
 // Access returns access flags for the argument
 func (ad *ArgumentDescriptor) Access() BindingAccess {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[BindingAccess](objref.IDOf(ad), objc.RegisterName("access"))
 	return _r
 }
 
 // TextureType returns for texture arguments, the texture type
 func (ad *ArgumentDescriptor) TextureType() TextureType {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[TextureType](objref.IDOf(ad), objc.RegisterName("textureType"))
 	return _r
 }
 
 // ConstantBlockAlignment returns if set forces the constant block to be aligned to the given alignment Should only be set on the first constant of the block and is only valid if a corresponding explicit "alignas" is applied to the constant in the metal shader language.
 func (ad *ArgumentDescriptor) ConstantBlockAlignment() int {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[int](objref.IDOf(ad), objc.RegisterName("constantBlockAlignment"))
 	return _r
 }

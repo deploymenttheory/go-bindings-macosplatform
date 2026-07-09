@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -114,65 +116,76 @@ func (iasd *InstanceAccelerationStructureDescriptor) WithUsage(usage Acceleratio
 
 // InstanceDescriptorBufferOffset returns offset into the instance descriptor buffer. Must be a multiple of 64 bytes and must be aligned to the platform's buffer offset alignment.
 func (iasd *InstanceAccelerationStructureDescriptor) InstanceDescriptorBufferOffset() int {
+	defer runtime.KeepAlive(iasd)
 	_r := objc.Send[int](objref.IDOf(iasd), objc.RegisterName("instanceDescriptorBufferOffset"))
 	return _r
 }
 
 // InstanceDescriptorStride returns stride, in bytes, between instance descriptors in the instance descriptor buffer. Must be at least the size of the instance descriptor type and must be a multiple of 4 bytes. Defaults to the size of the instance descriptor type.
 func (iasd *InstanceAccelerationStructureDescriptor) InstanceDescriptorStride() int {
+	defer runtime.KeepAlive(iasd)
 	_r := objc.Send[int](objref.IDOf(iasd), objc.RegisterName("instanceDescriptorStride"))
 	return _r
 }
 
 // InstanceCount returns number of instance descriptors
 func (iasd *InstanceAccelerationStructureDescriptor) InstanceCount() int {
+	defer runtime.KeepAlive(iasd)
 	_r := objc.Send[int](objref.IDOf(iasd), objc.RegisterName("instanceCount"))
 	return _r
 }
 
 // InstancedAccelerationStructures returns acceleration structures to be instanced
 func (iasd *InstanceAccelerationStructureDescriptor) InstancedAccelerationStructures() []obj.Object {
+	defer runtime.KeepAlive(iasd)
 	_r := objc.Send[objc.ID](objref.IDOf(iasd), objc.RegisterName("instancedAccelerationStructures"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetInstancedAccelerationStructures wraps the corresponding Objective-C method.
 func (iasd *InstanceAccelerationStructureDescriptor) SetInstancedAccelerationStructures(instancedAccelerationStructures []obj.Object) {
+	defer runtime.KeepAlive(iasd)
 	objc.Send[objc.ID](objref.IDOf(iasd), objc.RegisterName("setInstancedAccelerationStructures:"), purego.SliceToNSArray(instancedAccelerationStructures, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // InstanceDescriptorType returns type of instance descriptor in the instance descriptor buffer. Defaults to MTLAccelerationStructureInstanceDescriptorTypeDefault.
 func (iasd *InstanceAccelerationStructureDescriptor) InstanceDescriptorType() AccelerationStructureInstanceDescriptorType {
+	defer runtime.KeepAlive(iasd)
 	_r := objc.Send[AccelerationStructureInstanceDescriptorType](objref.IDOf(iasd), objc.RegisterName("instanceDescriptorType"))
 	return _r
 }
 
 // MotionTransformBufferOffset returns offset into the instance motion descriptor buffer. Must be a multiple of 64 bytes and must be aligned to the platform's buffer offset alignment.
 func (iasd *InstanceAccelerationStructureDescriptor) MotionTransformBufferOffset() int {
+	defer runtime.KeepAlive(iasd)
 	_r := objc.Send[int](objref.IDOf(iasd), objc.RegisterName("motionTransformBufferOffset"))
 	return _r
 }
 
 // MotionTransformCount returns number of motion transforms
 func (iasd *InstanceAccelerationStructureDescriptor) MotionTransformCount() int {
+	defer runtime.KeepAlive(iasd)
 	_r := objc.Send[int](objref.IDOf(iasd), objc.RegisterName("motionTransformCount"))
 	return _r
 }
 
 // InstanceTransformationMatrixLayout returns matrix layout of the transformation matrices in the instance descriptors in the instance descriptor buffer and the transformation matrices in the transformation matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
 func (iasd *InstanceAccelerationStructureDescriptor) InstanceTransformationMatrixLayout() MatrixLayout {
+	defer runtime.KeepAlive(iasd)
 	_r := objc.Send[MatrixLayout](objref.IDOf(iasd), objc.RegisterName("instanceTransformationMatrixLayout"))
 	return _r
 }
 
 // MotionTransformType returns type of motion transforms. Defaults to MTLTransformTypePackedFloat4x3.
 func (iasd *InstanceAccelerationStructureDescriptor) MotionTransformType() TransformType {
+	defer runtime.KeepAlive(iasd)
 	_r := objc.Send[TransformType](objref.IDOf(iasd), objc.RegisterName("motionTransformType"))
 	return _r
 }
 
 // MotionTransformStride returns motion transform stride. Defaults to 0, indicating that transforms are tightly packed according to the motion transform type.
 func (iasd *InstanceAccelerationStructureDescriptor) MotionTransformStride() int {
+	defer runtime.KeepAlive(iasd)
 	_r := objc.Send[int](objref.IDOf(iasd), objc.RegisterName("motionTransformStride"))
 	return _r
 }

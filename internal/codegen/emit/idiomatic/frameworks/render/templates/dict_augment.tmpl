@@ -6,6 +6,8 @@
 {{define "dict_augment"}}// Set stores value under key (an object) and returns the receiver so calls can
 // be chained.
 func ({{.RecvVar}} *{{.GoTypeName}}) Set(key, value obj.Object) *{{.GoTypeName}} {
+defer runtime.KeepAlive(key)
+defer runtime.KeepAlive(value)
 objc.Send[objc.ID](objref.IDOf({{.RecvVar}}), objc.RegisterName("setObject:forKey:"), objref.IDOf(value), objref.IDOf(key))
 return {{.RecvVar}}
 }
@@ -13,6 +15,7 @@ return {{.RecvVar}}
 // SetString stores value under the given string key and returns the receiver so
 // calls can be chained.
 func ({{.RecvVar}} *{{.GoTypeName}}) SetString(key string, value obj.Object) *{{.GoTypeName}} {
+defer runtime.KeepAlive(value)
 objc.Send[objc.ID](objref.IDOf({{.RecvVar}}), objc.RegisterName("setObject:forKey:"), objref.IDOf(value), purego.NSString(key))
 return {{.RecvVar}}
 }
@@ -20,6 +23,7 @@ return {{.RecvVar}}
 // Get returns the value stored under the given string key, or nil when there is
 // none.
 func ({{.RecvVar}} *{{.GoTypeName}}) Get(key string) obj.Object {
+defer runtime.KeepAlive({{.RecvVar}})
 return obj.Wrap(objc.Send[objc.ID](objref.IDOf({{.RecvVar}}), objc.RegisterName("objectForKey:"), purego.NSString(key)))
 }
 

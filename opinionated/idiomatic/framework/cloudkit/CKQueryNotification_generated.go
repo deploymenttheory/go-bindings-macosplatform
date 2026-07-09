@@ -5,9 +5,12 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,24 +57,28 @@ func NewQueryNotification() *QueryNotification {
 
 // QueryNotificationReason returns the event that triggers the push notification. Subscription notifications result from the creation, deletion, or updating of a single record. The record in question must match the subscription's predicate for an event to trigger.
 func (qn *QueryNotification) QueryNotificationReason() QueryNotificationReason {
+	defer runtime.KeepAlive(qn)
 	_r := objc.Send[QueryNotificationReason](objref.IDOf(qn), objc.RegisterName("queryNotificationReason"))
 	return _r
 }
 
 // RecordFields returns a dictionary of fields that have changes. For record updates and creations, this property contains the subscription's desired keys. When you configure the notification info of a subscription, you specify the names of one or more fields in the “CKSubscription/NotificationInfo/desiredKeys“ property. When a push notification triggers, CloudKit retrieves the values for each of those keys from the record and includes them in the notification's payload. For query notifications that you fetch from a container, all keys and values are present. For query notifications that you create from push notifications, one or more keys and values may be missing. Push notification payloads have a size limit, and CloudKit can exclude record fields when a payload exceeds that limit. For information about the order, see the overview of this class.
-func (qn *QueryNotification) RecordFields() obj.Object {
+func (qn *QueryNotification) RecordFields() map[string]obj.Object {
+	defer runtime.KeepAlive(qn)
 	_r := objc.Send[objc.ID](objref.IDOf(qn), objc.RegisterName("recordFields"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // RecordID returns the ID of the record that CloudKit creates, updates, or deletes. Use this value to fetch the record.
 func (qn *QueryNotification) RecordID() *RecordID {
+	defer runtime.KeepAlive(qn)
 	_r := objc.Send[objc.ID](objref.IDOf(qn), objc.RegisterName("recordID"))
 	return RecordIDFromID(_r)
 }
 
 // DatabaseScope returns the type of database for the record zone. This property's value is one of the constants that “CKDatabase/Scope“ defines.
 func (qn *QueryNotification) DatabaseScope() DatabaseScope {
+	defer runtime.KeepAlive(qn)
 	_r := objc.Send[DatabaseScope](objref.IDOf(qn), objc.RegisterName("databaseScope"))
 	return _r
 }

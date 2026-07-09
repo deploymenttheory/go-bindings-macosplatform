@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func uRLCredentialAdopt(id objc.ID) *URLCredential {
 
 // Description returns the object's -description text.
 func (uc *URLCredential) Description() string {
+	defer runtime.KeepAlive(uc)
 	return rt.Description(objref.IDOf(uc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (uc *URLCredential) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(uc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(uc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (uc *URLCredential) IsKind(className string) bool {
+	defer runtime.KeepAlive(uc)
 	return rt.IsKind(objref.IDOf(uc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (uc *URLCredential) String() string {
+	defer runtime.KeepAlive(uc)
 	return rt.Description(objref.IDOf(uc))
 }
 
@@ -77,6 +83,8 @@ func NewURLCredentialWithUserPasswordPersistence(user string, password string, p
 
 // NewURLCredentialWithIdentityCertificatesPersistence initialize an NSURLCredential with an identity and array of at least 1 client certificates (SecCertificateRef)
 func NewURLCredentialWithIdentityCertificatesPersistence(identity obj.Object, certArray obj.Object, persistence URLCredentialPersistence) *URLCredential {
+	defer runtime.KeepAlive(identity)
+	defer runtime.KeepAlive(certArray)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLCredential")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentity:certificates:persistence:"), objref.IDOf(identity), objref.IDOf(certArray), persistence)
 	return uRLCredentialAdopt(_id)
@@ -84,6 +92,7 @@ func NewURLCredentialWithIdentityCertificatesPersistence(identity obj.Object, ce
 
 // NewURLCredentialWithTrust initialize a new NSURLCredential which specifies that the specified trust has been accepted.
 func NewURLCredentialWithTrust(trust obj.Object) *URLCredential {
+	defer runtime.KeepAlive(trust)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLCredential")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTrust:"), objref.IDOf(trust))
 	return uRLCredentialAdopt(_id)
@@ -96,19 +105,21 @@ func (uc *URLCredential) WithObservationInfo(observationInfo unsafe.Pointer) *UR
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (uc *URLCredential) WithScriptingProperties(scriptingProperties obj.Object) *URLCredential {
-	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (uc *URLCredential) WithScriptingProperties(scriptingProperties map[string]obj.Object) *URLCredential {
+	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return uc
 }
 
 // Persistence returns the persistence.
 func (uc *URLCredential) Persistence() URLCredentialPersistence {
+	defer runtime.KeepAlive(uc)
 	_r := objc.Send[URLCredentialPersistence](objref.IDOf(uc), objc.RegisterName("persistence"))
 	return _r
 }
 
 // User get the username
 func (uc *URLCredential) User() string {
+	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("user"))
 	if _r == 0 {
 		return ""
@@ -118,6 +129,7 @@ func (uc *URLCredential) User() string {
 
 // Password get the password This method might actually attempt to retrieve the password from an external store, possible resulting in prompting, so do not call it unless needed.
 func (uc *URLCredential) Password() string {
+	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("password"))
 	if _r == 0 {
 		return ""
@@ -127,18 +139,21 @@ func (uc *URLCredential) Password() string {
 
 // HasPassword reports whether find out if this credential has a password, without trying to get it If this credential's password is actually kept in an external store, the password method may return nil even if this method returns true, since getting the password may fail, or the user may refuse access.
 func (uc *URLCredential) HasPassword() bool {
+	defer runtime.KeepAlive(uc)
 	_r := objc.Send[bool](objref.IDOf(uc), objc.RegisterName("hasPassword"))
 	return _r
 }
 
 // Identity returns the SecIdentityRef of this credential, if it was created with a certificate and identity
 func (uc *URLCredential) Identity() obj.Object {
+	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("identity"))
 	return obj.Wrap(_r)
 }
 
 // Certificates returns an NSArray of SecCertificateRef objects representing the client certificate for this credential, if this credential was created with an identity and certificate.
 func (uc *URLCredential) Certificates() obj.Object {
+	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("certificates"))
 	return obj.Wrap(_r)
 }

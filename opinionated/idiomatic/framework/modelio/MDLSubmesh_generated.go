@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func submeshAdopt(id objc.ID) *Submesh {
 
 // Description returns the object's -description text.
 func (s *Submesh) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Submesh) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Submesh) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Submesh) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // NewSubmeshWithMDLSubmeshIndexTypeGeometryType initializes a submesh by copying or converting another submesh.
 func NewSubmeshWithMDLSubmeshIndexTypeGeometryType(submesh *Submesh, indexType IndexBitDepth, geometryType GeometryType) *Submesh {
+	defer runtime.KeepAlive(submesh)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLSubmesh")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMDLSubmesh:indexType:geometryType:"), objref.IDOf(submesh), indexType, geometryType)
 	return submeshAdopt(_id)
@@ -75,12 +83,14 @@ func NewSubmeshWithMDLSubmeshIndexTypeGeometryType(submesh *Submesh, indexType I
 
 // WithMaterial sets an object that describes the intended surface appearance of the submesh for rendering.
 func (s *Submesh) WithMaterial(material *Material) *Submesh {
+	defer runtime.KeepAlive(material)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setMaterial:"), objref.IDOf(material))
 	return s
 }
 
 // WithTopology sets a description of how the non-uniform layout of the submesh’s index buffer defines the shape of the mesh.
 func (s *Submesh) WithTopology(topology *SubmeshTopology) *Submesh {
+	defer runtime.KeepAlive(topology)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTopology:"), objref.IDOf(topology))
 	return s
 }
@@ -93,36 +103,42 @@ func (s *Submesh) WithName(name string) *Submesh {
 
 // IndexCount returns number of indices in the indexBuffer
 func (s *Submesh) IndexCount() int {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("indexCount"))
 	return _r
 }
 
 // IndexType returns data type of indices in indexBuffer Support 8, 16, and 32 bit unsigned integer values
 func (s *Submesh) IndexType() IndexBitDepth {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[IndexBitDepth](objref.IDOf(s), objc.RegisterName("indexType"))
 	return _r
 }
 
 // GeometryType returns type of primitive that vertices referenced by the indexBuffer are assembled into
 func (s *Submesh) GeometryType() GeometryType {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[GeometryType](objref.IDOf(s), objc.RegisterName("geometryType"))
 	return _r
 }
 
 // Material returns material to apply when rendering this object
 func (s *Submesh) Material() *Material {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("material"))
 	return MaterialFromID(_r)
 }
 
 // Topology returns topology data structure for use with MDLGeometryTypeVariableTopology ignored for geometry types other than MDLGeometryTypeVariableTopology. A submesh of type MDLGeometryTypeVariableTopology with no topology data is an empty submesh.
 func (s *Submesh) Topology() *SubmeshTopology {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("topology"))
 	return SubmeshTopologyFromID(_r)
 }
 
 // Name returns identifying name for this object
 func (s *Submesh) Name() string {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package browserenginekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func accessibilityTextMarkerAdopt(id objc.ID) *AccessibilityTextMarker {
 
 // Description returns the object's -description text.
 func (atm *AccessibilityTextMarker) Description() string {
+	defer runtime.KeepAlive(atm)
 	return rt.Description(objref.IDOf(atm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (atm *AccessibilityTextMarker) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(atm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(atm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (atm *AccessibilityTextMarker) IsKind(className string) bool {
+	defer runtime.KeepAlive(atm)
 	return rt.IsKind(objref.IDOf(atm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (atm *AccessibilityTextMarker) String() string {
+	defer runtime.KeepAlive(atm)
 	return rt.Description(objref.IDOf(atm))
 }
 

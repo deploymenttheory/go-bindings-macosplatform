@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func textInputContextAdopt(id objc.ID) *TextInputContext {
 
 // Description returns the object's -description text.
 func (tic *TextInputContext) Description() string {
+	defer runtime.KeepAlive(tic)
 	return rt.Description(objref.IDOf(tic))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tic *TextInputContext) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tic)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tic), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tic *TextInputContext) IsKind(className string) bool {
+	defer runtime.KeepAlive(tic)
 	return rt.IsKind(objref.IDOf(tic), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tic *TextInputContext) String() string {
+	defer runtime.KeepAlive(tic)
 	return rt.Description(objref.IDOf(tic))
 }
 
@@ -87,58 +95,70 @@ func (tic *TextInputContext) WithAllowedInputSourceLocales(items ...obj.Object) 
 
 // WithSelectedKeyboardInputSource sets the identifier string for the selected keyboard text input source.
 func (tic *TextInputContext) WithSelectedKeyboardInputSource(selectedKeyboardInputSource obj.Object) *TextInputContext {
+	defer runtime.KeepAlive(selectedKeyboardInputSource)
 	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("setSelectedKeyboardInputSource:"), objref.IDOf(selectedKeyboardInputSource))
 	return tic
 }
 
 // Activate activates the receiver.
 func (tic *TextInputContext) Activate() {
+	defer runtime.KeepAlive(tic)
 	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("activate"))
 }
 
 // Deactivate deactivates the receiver.
 func (tic *TextInputContext) Deactivate() {
+	defer runtime.KeepAlive(tic)
 	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("deactivate"))
 }
 
 // HandleEvent tells the Cocoa text input system to handle mouse or key events.
 func (tic *TextInputContext) HandleEvent(event *Event) bool {
+	defer runtime.KeepAlive(tic)
+	defer runtime.KeepAlive(event)
 	_r := objc.Send[bool](objref.IDOf(tic), objc.RegisterName("handleEvent:"), objref.IDOf(event))
 	return _r
 }
 
 // DiscardMarkedText tells the Cocoa text input system to discard the current conversion session.
 func (tic *TextInputContext) DiscardMarkedText() {
+	defer runtime.KeepAlive(tic)
 	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("discardMarkedText"))
 }
 
 // InvalidateCharacterCoordinates notifies the Cocoa text input system that the position information previously queried via methods like firstRectForCharacterRange:actualRange: needs to be updated.
 func (tic *TextInputContext) InvalidateCharacterCoordinates() {
+	defer runtime.KeepAlive(tic)
 	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("invalidateCharacterCoordinates"))
 }
 
 // TextInputClientWillStartScrollingOrZooming wraps the corresponding Objective-C method.
 func (tic *TextInputContext) TextInputClientWillStartScrollingOrZooming() {
+	defer runtime.KeepAlive(tic)
 	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("textInputClientWillStartScrollingOrZooming"))
 }
 
 // TextInputClientDidEndScrollingOrZooming wraps the corresponding Objective-C method.
 func (tic *TextInputContext) TextInputClientDidEndScrollingOrZooming() {
+	defer runtime.KeepAlive(tic)
 	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("textInputClientDidEndScrollingOrZooming"))
 }
 
 // TextInputClientDidUpdateSelection wraps the corresponding Objective-C method.
 func (tic *TextInputContext) TextInputClientDidUpdateSelection() {
+	defer runtime.KeepAlive(tic)
 	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("textInputClientDidUpdateSelection"))
 }
 
 // TextInputClientDidScroll wraps the corresponding Objective-C method.
 func (tic *TextInputContext) TextInputClientDidScroll() {
+	defer runtime.KeepAlive(tic)
 	objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("textInputClientDidScroll"))
 }
 
 // AcceptsGlyphInfo wraps the corresponding Objective-C method.
 func (tic *TextInputContext) AcceptsGlyphInfo() bool {
+	defer runtime.KeepAlive(tic)
 	_r := objc.Send[bool](objref.IDOf(tic), objc.RegisterName("acceptsGlyphInfo"))
 	return _r
 }
@@ -147,6 +167,7 @@ func (tic *TextInputContext) AcceptsGlyphInfo() bool {
 //
 // AllowedInputSourceLocales returns the collection as a Go slice.
 func (tic *TextInputContext) AllowedInputSourceLocales() []string {
+	defer runtime.KeepAlive(tic)
 	_arr := objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("allowedInputSourceLocales"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -155,12 +176,14 @@ func (tic *TextInputContext) AllowedInputSourceLocales() []string {
 //
 // KeyboardInputSources returns the collection as a Go slice.
 func (tic *TextInputContext) KeyboardInputSources() []obj.Object {
+	defer runtime.KeepAlive(tic)
 	_arr := objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("keyboardInputSources"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SelectedKeyboardInputSource returns the selected keyboard input source.
-func (tic *TextInputContext) SelectedKeyboardInputSource() obj.Object {
+func (tic *TextInputContext) SelectedKeyboardInputSource() *foundation.String {
+	defer runtime.KeepAlive(tic)
 	_r := objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("selectedKeyboardInputSource"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }

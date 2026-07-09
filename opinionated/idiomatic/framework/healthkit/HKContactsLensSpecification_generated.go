@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,12 @@ func contactsLensSpecificationAdopt(id objc.ID) *ContactsLensSpecification {
 
 // NewContactsLensSpecificationWithSphereCylinderAxisAddPowerBaseCurveDiameter creates a new contact lens specification, containing the prescription data for one eye.
 func NewContactsLensSpecificationWithSphereCylinderAxisAddPowerBaseCurveDiameter(sphere *Quantity, cylinder *Quantity, axis *Quantity, addPower *Quantity, baseCurve *Quantity, diameter *Quantity) *ContactsLensSpecification {
+	defer runtime.KeepAlive(sphere)
+	defer runtime.KeepAlive(cylinder)
+	defer runtime.KeepAlive(axis)
+	defer runtime.KeepAlive(addPower)
+	defer runtime.KeepAlive(baseCurve)
+	defer runtime.KeepAlive(diameter)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKContactsLensSpecification")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSphere:cylinder:axis:addPower:baseCurve:diameter:"), objref.IDOf(sphere), objref.IDOf(cylinder), objref.IDOf(axis), objref.IDOf(addPower), objref.IDOf(baseCurve), objref.IDOf(diameter))
 	return contactsLensSpecificationAdopt(_id)
@@ -54,12 +62,14 @@ func NewContactsLensSpecificationWithSphereCylinderAxisAddPowerBaseCurveDiameter
 
 // BaseCurve returns the curvature of the back surface of the lens (measured in mm)
 func (cls *ContactsLensSpecification) BaseCurve() *Quantity {
+	defer runtime.KeepAlive(cls)
 	_r := objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("baseCurve"))
 	return QuantityFromID(_r)
 }
 
 // Diameter returns the width of the lens from edge to edge (measured in mm)
 func (cls *ContactsLensSpecification) Diameter() *Quantity {
+	defer runtime.KeepAlive(cls)
 	_r := objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("diameter"))
 	return QuantityFromID(_r)
 }

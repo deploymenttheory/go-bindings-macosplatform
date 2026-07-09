@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func transformScaleOpAdopt(id objc.ID) *TransformScaleOp {
 
 // Description returns the object's -description text.
 func (tso *TransformScaleOp) Description() string {
+	defer runtime.KeepAlive(tso)
 	return rt.Description(objref.IDOf(tso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tso *TransformScaleOp) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tso)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tso *TransformScaleOp) IsKind(className string) bool {
+	defer runtime.KeepAlive(tso)
 	return rt.IsKind(objref.IDOf(tso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tso *TransformScaleOp) String() string {
+	defer runtime.KeepAlive(tso)
 	return rt.Description(objref.IDOf(tso))
 }
 
@@ -72,6 +79,7 @@ func NewTransformScaleOp() *TransformScaleOp {
 
 // Name returns the name.
 func (tso *TransformScaleOp) Name() string {
+	defer runtime.KeepAlive(tso)
 	_r := objc.Send[objc.ID](objref.IDOf(tso), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -81,6 +89,7 @@ func (tso *TransformScaleOp) Name() string {
 
 // AnimatedValue returns the animated value.
 func (tso *TransformScaleOp) AnimatedValue() *AnimatedVector3 {
+	defer runtime.KeepAlive(tso)
 	_r := objc.Send[objc.ID](objref.IDOf(tso), objc.RegisterName("animatedValue"))
 	return AnimatedVector3FromID(_r)
 }

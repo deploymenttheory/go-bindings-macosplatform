@@ -5,6 +5,8 @@
 package symbols
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewSymbolReplaceContentTransition() *SymbolReplaceContentTransition {
 
 // TransitionWithByLayer returns an effect that replaces each layer separately.
 func (srct *SymbolReplaceContentTransition) TransitionWithByLayer() *SymbolReplaceContentTransition {
+	defer runtime.KeepAlive(srct)
 	_r := objc.Send[objc.ID](objref.IDOf(srct), objc.RegisterName("transitionWithByLayer"))
 	return SymbolReplaceContentTransitionFromID(_r)
 }
 
 // TransitionWithWholeSymbol returns an effect that replaces all layers simultaneously.
 func (srct *SymbolReplaceContentTransition) TransitionWithWholeSymbol() *SymbolReplaceContentTransition {
+	defer runtime.KeepAlive(srct)
 	_r := objc.Send[objc.ID](objref.IDOf(srct), objc.RegisterName("transitionWithWholeSymbol"))
 	return SymbolReplaceContentTransitionFromID(_r)
 }

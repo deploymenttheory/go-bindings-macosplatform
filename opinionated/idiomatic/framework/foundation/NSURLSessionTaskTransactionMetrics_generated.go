@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +51,27 @@ func uRLSessionTaskTransactionMetricsAdopt(id objc.ID) *URLSessionTaskTransactio
 
 // Description returns the object's -description text.
 func (usttm *URLSessionTaskTransactionMetrics) Description() string {
+	defer runtime.KeepAlive(usttm)
 	return rt.Description(objref.IDOf(usttm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (usttm *URLSessionTaskTransactionMetrics) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(usttm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(usttm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (usttm *URLSessionTaskTransactionMetrics) IsKind(className string) bool {
+	defer runtime.KeepAlive(usttm)
 	return rt.IsKind(objref.IDOf(usttm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (usttm *URLSessionTaskTransactionMetrics) String() string {
+	defer runtime.KeepAlive(usttm)
 	return rt.Description(objref.IDOf(usttm))
 }
 
@@ -81,91 +88,105 @@ func (usttm *URLSessionTaskTransactionMetrics) WithObservationInfo(observationIn
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (usttm *URLSessionTaskTransactionMetrics) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionTaskTransactionMetrics {
-	objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (usttm *URLSessionTaskTransactionMetrics) WithScriptingProperties(scriptingProperties map[string]obj.Object) *URLSessionTaskTransactionMetrics {
+	objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return usttm
 }
 
 // Request returns the request.
 func (usttm *URLSessionTaskTransactionMetrics) Request() *URLRequest {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("request"))
 	return URLRequestFromID(_r)
 }
 
 // Response returns the response.
 func (usttm *URLSessionTaskTransactionMetrics) Response() *URLResponse {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("response"))
 	return URLResponseFromID(_r)
 }
 
 // FetchStartDate returns the fetch start date.
-func (usttm *URLSessionTaskTransactionMetrics) FetchStartDate() *Date {
+func (usttm *URLSessionTaskTransactionMetrics) FetchStartDate() time.Time {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("fetchStartDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // DomainLookupStartDate returns the domain lookup start date.
-func (usttm *URLSessionTaskTransactionMetrics) DomainLookupStartDate() *Date {
+func (usttm *URLSessionTaskTransactionMetrics) DomainLookupStartDate() time.Time {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("domainLookupStartDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // DomainLookupEndDate returns the domain lookup end date.
-func (usttm *URLSessionTaskTransactionMetrics) DomainLookupEndDate() *Date {
+func (usttm *URLSessionTaskTransactionMetrics) DomainLookupEndDate() time.Time {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("domainLookupEndDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ConnectStartDate returns the connect start date.
-func (usttm *URLSessionTaskTransactionMetrics) ConnectStartDate() *Date {
+func (usttm *URLSessionTaskTransactionMetrics) ConnectStartDate() time.Time {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("connectStartDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // SecureConnectionStartDate returns the secure connection start date.
-func (usttm *URLSessionTaskTransactionMetrics) SecureConnectionStartDate() *Date {
+func (usttm *URLSessionTaskTransactionMetrics) SecureConnectionStartDate() time.Time {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("secureConnectionStartDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // SecureConnectionEndDate returns the secure connection end date.
-func (usttm *URLSessionTaskTransactionMetrics) SecureConnectionEndDate() *Date {
+func (usttm *URLSessionTaskTransactionMetrics) SecureConnectionEndDate() time.Time {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("secureConnectionEndDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ConnectEndDate returns the connect end date.
-func (usttm *URLSessionTaskTransactionMetrics) ConnectEndDate() *Date {
+func (usttm *URLSessionTaskTransactionMetrics) ConnectEndDate() time.Time {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("connectEndDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // RequestStartDate returns the request start date.
-func (usttm *URLSessionTaskTransactionMetrics) RequestStartDate() *Date {
+func (usttm *URLSessionTaskTransactionMetrics) RequestStartDate() time.Time {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("requestStartDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // RequestEndDate returns the request end date.
-func (usttm *URLSessionTaskTransactionMetrics) RequestEndDate() *Date {
+func (usttm *URLSessionTaskTransactionMetrics) RequestEndDate() time.Time {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("requestEndDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ResponseStartDate returns the response start date.
-func (usttm *URLSessionTaskTransactionMetrics) ResponseStartDate() *Date {
+func (usttm *URLSessionTaskTransactionMetrics) ResponseStartDate() time.Time {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("responseStartDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ResponseEndDate returns the response end date.
-func (usttm *URLSessionTaskTransactionMetrics) ResponseEndDate() *Date {
+func (usttm *URLSessionTaskTransactionMetrics) ResponseEndDate() time.Time {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("responseEndDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // NetworkProtocolName returns the network protocol name.
 func (usttm *URLSessionTaskTransactionMetrics) NetworkProtocolName() string {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("networkProtocolName"))
 	if _r == 0 {
 		return ""
@@ -175,60 +196,70 @@ func (usttm *URLSessionTaskTransactionMetrics) NetworkProtocolName() string {
 
 // IsProxyConnection reports whether the object is proxy connection.
 func (usttm *URLSessionTaskTransactionMetrics) IsProxyConnection() bool {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[bool](objref.IDOf(usttm), objc.RegisterName("isProxyConnection"))
 	return _r
 }
 
 // IsReusedConnection reports whether the object is reused connection.
 func (usttm *URLSessionTaskTransactionMetrics) IsReusedConnection() bool {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[bool](objref.IDOf(usttm), objc.RegisterName("isReusedConnection"))
 	return _r
 }
 
 // ResourceFetchType returns the resource fetch type.
 func (usttm *URLSessionTaskTransactionMetrics) ResourceFetchType() URLSessionTaskMetricsResourceFetchType {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[URLSessionTaskMetricsResourceFetchType](objref.IDOf(usttm), objc.RegisterName("resourceFetchType"))
 	return _r
 }
 
 // CountOfRequestHeaderBytesSent returns the count of request header bytes sent.
 func (usttm *URLSessionTaskTransactionMetrics) CountOfRequestHeaderBytesSent() int64 {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[int64](objref.IDOf(usttm), objc.RegisterName("countOfRequestHeaderBytesSent"))
 	return _r
 }
 
 // CountOfRequestBodyBytesSent returns the count of request body bytes sent.
 func (usttm *URLSessionTaskTransactionMetrics) CountOfRequestBodyBytesSent() int64 {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[int64](objref.IDOf(usttm), objc.RegisterName("countOfRequestBodyBytesSent"))
 	return _r
 }
 
 // CountOfRequestBodyBytesBeforeEncoding returns the count of request body bytes before encoding.
 func (usttm *URLSessionTaskTransactionMetrics) CountOfRequestBodyBytesBeforeEncoding() int64 {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[int64](objref.IDOf(usttm), objc.RegisterName("countOfRequestBodyBytesBeforeEncoding"))
 	return _r
 }
 
 // CountOfResponseHeaderBytesReceived returns the count of response header bytes received.
 func (usttm *URLSessionTaskTransactionMetrics) CountOfResponseHeaderBytesReceived() int64 {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[int64](objref.IDOf(usttm), objc.RegisterName("countOfResponseHeaderBytesReceived"))
 	return _r
 }
 
 // CountOfResponseBodyBytesReceived returns the count of response body bytes received.
 func (usttm *URLSessionTaskTransactionMetrics) CountOfResponseBodyBytesReceived() int64 {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[int64](objref.IDOf(usttm), objc.RegisterName("countOfResponseBodyBytesReceived"))
 	return _r
 }
 
 // CountOfResponseBodyBytesAfterDecoding returns the count of response body bytes after decoding.
 func (usttm *URLSessionTaskTransactionMetrics) CountOfResponseBodyBytesAfterDecoding() int64 {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[int64](objref.IDOf(usttm), objc.RegisterName("countOfResponseBodyBytesAfterDecoding"))
 	return _r
 }
 
 // LocalAddress returns the local address.
 func (usttm *URLSessionTaskTransactionMetrics) LocalAddress() string {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("localAddress"))
 	if _r == 0 {
 		return ""
@@ -238,12 +269,14 @@ func (usttm *URLSessionTaskTransactionMetrics) LocalAddress() string {
 
 // LocalPort returns the local port.
 func (usttm *URLSessionTaskTransactionMetrics) LocalPort() *Number {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("localPort"))
 	return NumberFromID(_r)
 }
 
 // RemoteAddress returns the remote address.
 func (usttm *URLSessionTaskTransactionMetrics) RemoteAddress() string {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("remoteAddress"))
 	if _r == 0 {
 		return ""
@@ -253,48 +286,56 @@ func (usttm *URLSessionTaskTransactionMetrics) RemoteAddress() string {
 
 // RemotePort returns the remote port.
 func (usttm *URLSessionTaskTransactionMetrics) RemotePort() *Number {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("remotePort"))
 	return NumberFromID(_r)
 }
 
 // NegotiatedTLSProtocolVersion returns the negotiated TLS protocol version.
 func (usttm *URLSessionTaskTransactionMetrics) NegotiatedTLSProtocolVersion() *Number {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("negotiatedTLSProtocolVersion"))
 	return NumberFromID(_r)
 }
 
 // NegotiatedTLSCipherSuite returns the negotiated TLS cipher suite.
 func (usttm *URLSessionTaskTransactionMetrics) NegotiatedTLSCipherSuite() *Number {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("negotiatedTLSCipherSuite"))
 	return NumberFromID(_r)
 }
 
 // IsCellular reports whether the object is cellular.
 func (usttm *URLSessionTaskTransactionMetrics) IsCellular() bool {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[bool](objref.IDOf(usttm), objc.RegisterName("isCellular"))
 	return _r
 }
 
 // IsExpensive reports whether the object is expensive.
 func (usttm *URLSessionTaskTransactionMetrics) IsExpensive() bool {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[bool](objref.IDOf(usttm), objc.RegisterName("isExpensive"))
 	return _r
 }
 
 // IsConstrained reports whether the object is constrained.
 func (usttm *URLSessionTaskTransactionMetrics) IsConstrained() bool {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[bool](objref.IDOf(usttm), objc.RegisterName("isConstrained"))
 	return _r
 }
 
 // IsMultipath reports whether the object is multipath.
 func (usttm *URLSessionTaskTransactionMetrics) IsMultipath() bool {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[bool](objref.IDOf(usttm), objc.RegisterName("isMultipath"))
 	return _r
 }
 
 // DomainResolutionProtocol returns the domain resolution protocol.
 func (usttm *URLSessionTaskTransactionMetrics) DomainResolutionProtocol() URLSessionTaskMetricsDomainResolutionProtocol {
+	defer runtime.KeepAlive(usttm)
 	_r := objc.Send[URLSessionTaskMetricsDomainResolutionProtocol](objref.IDOf(usttm), objc.RegisterName("domainResolutionProtocol"))
 	return _r
 }

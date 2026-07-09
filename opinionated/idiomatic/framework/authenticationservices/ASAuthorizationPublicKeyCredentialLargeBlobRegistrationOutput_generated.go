@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func authorizationPublicKeyCredentialLargeBlobRegistrationOutputAdopt(id objc.ID
 
 // Description returns the object's -description text.
 func (apkclbro *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) Description() string {
+	defer runtime.KeepAlive(apkclbro)
 	return rt.Description(objref.IDOf(apkclbro))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apkclbro *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apkclbro)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apkclbro), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apkclbro *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) IsKind(className string) bool {
+	defer runtime.KeepAlive(apkclbro)
 	return rt.IsKind(objref.IDOf(apkclbro), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apkclbro *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) String() string {
+	defer runtime.KeepAlive(apkclbro)
 	return rt.Description(objref.IDOf(apkclbro))
 }
 
@@ -74,6 +81,7 @@ func NewAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput() *Authoriza
 
 // IsSupported reports whether the object is supported.
 func (apkclbro *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) IsSupported() bool {
+	defer runtime.KeepAlive(apkclbro)
 	_r := objc.Send[bool](objref.IDOf(apkclbro), objc.RegisterName("isSupported"))
 	return _r
 }

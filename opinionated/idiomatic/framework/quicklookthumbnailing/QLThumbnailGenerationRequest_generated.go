@@ -5,6 +5,8 @@
 package quicklookthumbnailing
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func thumbnailGenerationRequestAdopt(id objc.ID) *ThumbnailGenerationRequest {
 
 // Description returns the object's -description text.
 func (tgr *ThumbnailGenerationRequest) Description() string {
+	defer runtime.KeepAlive(tgr)
 	return rt.Description(objref.IDOf(tgr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tgr *ThumbnailGenerationRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tgr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tgr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tgr *ThumbnailGenerationRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(tgr)
 	return rt.IsKind(objref.IDOf(tgr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tgr *ThumbnailGenerationRequest) String() string {
+	defer runtime.KeepAlive(tgr)
 	return rt.Description(objref.IDOf(tgr))
 }
 
@@ -76,6 +83,7 @@ func NewThumbnailGenerationRequestWithFileAtURLSizeScaleRepresentationTypes(url 
 
 // WithContentType sets the content type of the file being thumbnailed is used to determine the provider of the thumbnail and the icon styles applied if iconMode is requested. By default the content type is derived from the file extension. Setting this property will override the derived content type. This is useful for files that don't have meaningful extensions but for which you may already know the content type.
 func (tgr *ThumbnailGenerationRequest) WithContentType(contentType obj.Object) *ThumbnailGenerationRequest {
+	defer runtime.KeepAlive(contentType)
 	objc.Send[objc.ID](objref.IDOf(tgr), objc.RegisterName("setContentType:"), objref.IDOf(contentType))
 	return tgr
 }
@@ -94,36 +102,42 @@ func (tgr *ThumbnailGenerationRequest) WithIconMode(iconMode bool) *ThumbnailGen
 
 // ContentType returns the content type of the file being thumbnailed is used to determine the provider of the thumbnail and the icon styles applied if iconMode is requested. By default the content type is derived from the file extension. Setting this property will override the derived content type. This is useful for files that don't have meaningful extensions but for which you may already know the content type.
 func (tgr *ThumbnailGenerationRequest) ContentType() obj.Object {
+	defer runtime.KeepAlive(tgr)
 	_r := objc.Send[objc.ID](objref.IDOf(tgr), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
 }
 
 // MinimumDimension returns defaults to 0. If set, the thumbnail will have a width and height greater or equal to minimumDimension * scale. If set and it is not possible to generate thumbnails of minimumDimension for any of the requested QLThumbnailGenerationRequestRepresentationTypes, no thumbnail will be provided.
 func (tgr *ThumbnailGenerationRequest) MinimumDimension() float64 {
+	defer runtime.KeepAlive(tgr)
 	_r := objc.Send[float64](objref.IDOf(tgr), objc.RegisterName("minimumDimension"))
 	return _r
 }
 
 // IconMode reports whether if set to true, this will generate something appropriate for display as a file icon, meaning that the thumbnail might be embedded in a frame, show a curled corner, draw a background and/or a drop shadow, as appropriate for the platform. If set to false, this will generate a raw undecorated thumbnail. Defaults to false.
 func (tgr *ThumbnailGenerationRequest) IconMode() bool {
+	defer runtime.KeepAlive(tgr)
 	_r := objc.Send[bool](objref.IDOf(tgr), objc.RegisterName("iconMode"))
 	return _r
 }
 
 // Size returns the size.
 func (tgr *ThumbnailGenerationRequest) Size() corefoundation.CGSize {
+	defer runtime.KeepAlive(tgr)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(tgr), objc.RegisterName("size"))
 	return _r
 }
 
 // Scale returns the scale.
 func (tgr *ThumbnailGenerationRequest) Scale() float64 {
+	defer runtime.KeepAlive(tgr)
 	_r := objc.Send[float64](objref.IDOf(tgr), objc.RegisterName("scale"))
 	return _r
 }
 
 // RepresentationTypes returns the representation types.
 func (tgr *ThumbnailGenerationRequest) RepresentationTypes() ThumbnailGenerationRequestRepresentationTypes {
+	defer runtime.KeepAlive(tgr)
 	_r := objc.Send[ThumbnailGenerationRequestRepresentationTypes](objref.IDOf(tgr), objc.RegisterName("representationTypes"))
 	return _r
 }

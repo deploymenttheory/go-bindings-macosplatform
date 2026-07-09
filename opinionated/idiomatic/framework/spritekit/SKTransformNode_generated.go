@@ -5,12 +5,14 @@
 package spritekit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -167,6 +169,7 @@ func (tn *TransformNode) WithName(name string) *TransformNode {
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (tn *TransformNode) WithPhysicsBody(physicsBody *PhysicsBody) *TransformNode {
+	defer runtime.KeepAlive(physicsBody)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	})
@@ -175,6 +178,7 @@ func (tn *TransformNode) WithPhysicsBody(physicsBody *PhysicsBody) *TransformNod
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (tn *TransformNode) WithUserData(userData obj.Object) *TransformNode {
+	defer runtime.KeepAlive(userData)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	})
@@ -183,6 +187,7 @@ func (tn *TransformNode) WithUserData(userData obj.Object) *TransformNode {
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (tn *TransformNode) WithReachConstraints(reachConstraints *ReachConstraints) *TransformNode {
+	defer runtime.KeepAlive(reachConstraints)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	})
@@ -199,9 +204,9 @@ func (tn *TransformNode) WithConstraints(items ...*Constraint) *TransformNode {
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
-func (tn *TransformNode) WithAttributeValues(attributeValues obj.Object) *TransformNode {
+func (tn *TransformNode) WithAttributeValues(attributeValues map[string]*AttributeValue) *TransformNode {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAttributeValues:"), rt.MapToDict(attributeValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *AttributeValue) objc.ID { return objref.IDOf(_v) }))
 	})
 	return tn
 }
@@ -248,6 +253,7 @@ func (tn *TransformNode) WithAccessibilityFrame(accessibilityFrame corefoundatio
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (tn *TransformNode) WithAccessibilityParent(accessibilityParent obj.Object) *TransformNode {
+	defer runtime.KeepAlive(accessibilityParent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	})
@@ -280,6 +286,7 @@ func (tn *TransformNode) WithAccessibilityEnabled(accessibilityEnabled bool) *Tr
 
 // SetEulerAngles wraps the corresponding Objective-C method.
 func (tn *TransformNode) SetEulerAngles(euler unsafe.Pointer) {
+	defer runtime.KeepAlive(tn)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setEulerAngles:"), euler)
 	})
@@ -288,6 +295,7 @@ func (tn *TransformNode) SetEulerAngles(euler unsafe.Pointer) {
 
 // SetRotationMatrix wraps the corresponding Objective-C method.
 func (tn *TransformNode) SetRotationMatrix(rotationMatrix unsafe.Pointer) {
+	defer runtime.KeepAlive(tn)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setRotationMatrix:"), rotationMatrix)
 	})
@@ -296,6 +304,7 @@ func (tn *TransformNode) SetRotationMatrix(rotationMatrix unsafe.Pointer) {
 
 // SetQuaternion wraps the corresponding Objective-C method.
 func (tn *TransformNode) SetQuaternion(quaternion unsafe.Pointer) {
+	defer runtime.KeepAlive(tn)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setQuaternion:"), quaternion)
 	})
@@ -304,6 +313,7 @@ func (tn *TransformNode) SetQuaternion(quaternion unsafe.Pointer) {
 
 // XRotation returns the x rotation.
 func (tn *TransformNode) XRotation() float64 {
+	defer runtime.KeepAlive(tn)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -317,6 +327,7 @@ func (tn *TransformNode) XRotation() float64 {
 
 // YRotation returns the y rotation.
 func (tn *TransformNode) YRotation() float64 {
+	defer runtime.KeepAlive(tn)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {

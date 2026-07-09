@@ -5,6 +5,7 @@
 package gameplaykit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func decisionTreeAdopt(id objc.ID) *DecisionTree {
 
 // Description returns the object's -description text.
 func (dt *DecisionTree) Description() string {
+	defer runtime.KeepAlive(dt)
 	return rt.Description(objref.IDOf(dt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dt *DecisionTree) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dt *DecisionTree) IsKind(className string) bool {
+	defer runtime.KeepAlive(dt)
 	return rt.IsKind(objref.IDOf(dt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dt *DecisionTree) String() string {
+	defer runtime.KeepAlive(dt)
 	return rt.Description(objref.IDOf(dt))
 }
 
@@ -76,32 +82,36 @@ func NewDecisionTreeWithExamplesActionsAttributes(examples []obj.Object, actions
 }
 
 // NewDecisionTreeWithURLError initializes a decision tree from the contents of a file
-func NewDecisionTreeWithURLError(url string, error_ unsafe.Pointer) *DecisionTree {
+func NewDecisionTreeWithURLError(url string, err unsafe.Pointer) *DecisionTree {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKDecisionTree")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:error:"), rt.FileURL(url), error_)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:error:"), rt.FileURL(url), err)
 	return decisionTreeAdopt(_id)
 }
 
 // WithRandomSource sets the randomizer to be used when evaluating parts of the tree that branch randomly.
 func (dt *DecisionTree) WithRandomSource(randomSource RandomSourceProvider) *DecisionTree {
+	defer runtime.KeepAlive(randomSource)
 	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("setRandomSource:"), objref.IDOf(randomSource))
 	return dt
 }
 
 // ExportToURLError exports a decision tree to the given URL
-func (dt *DecisionTree) ExportToURLError(url string, error_ unsafe.Pointer) bool {
-	_r := objc.Send[bool](objref.IDOf(dt), objc.RegisterName("exportToURL:error:"), rt.FileURL(url), error_)
+func (dt *DecisionTree) ExportToURLError(url string, err unsafe.Pointer) bool {
+	defer runtime.KeepAlive(dt)
+	_r := objc.Send[bool](objref.IDOf(dt), objc.RegisterName("exportToURL:error:"), rt.FileURL(url), err)
 	return _r
 }
 
 // RootNode returns the node for the decision tree that all other nodes descend from
 func (dt *DecisionTree) RootNode() *DecisionNode {
+	defer runtime.KeepAlive(dt)
 	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("rootNode"))
 	return DecisionNodeFromID(_r)
 }
 
 // RandomSource returns the random source used by the decision tree when descending on a random branch This must be set before creating any weighted branches
 func (dt *DecisionTree) RandomSource() *RandomSource {
+	defer runtime.KeepAlive(dt)
 	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("randomSource"))
 	return RandomSourceFromID(_r)
 }

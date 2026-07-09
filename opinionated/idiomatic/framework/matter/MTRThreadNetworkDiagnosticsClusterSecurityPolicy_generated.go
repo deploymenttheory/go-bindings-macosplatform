@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRThreadNetworkDiagnosticsClusterSecurityPolicyAdopt(id objc.ID) *MTRThrea
 
 // Description returns the object's -description text.
 func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) Description() string {
+	defer runtime.KeepAlive(mtndcsp)
 	return rt.Description(objref.IDOf(mtndcsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtndcsp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtndcsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtndcsp)
 	return rt.IsKind(objref.IDOf(mtndcsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) String() string {
+	defer runtime.KeepAlive(mtndcsp)
 	return rt.Description(objref.IDOf(mtndcsp))
 }
 
@@ -72,24 +80,28 @@ func NewMTRThreadNetworkDiagnosticsClusterSecurityPolicy() *MTRThreadNetworkDiag
 
 // WithRotationTime sets the rotation time.
 func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) WithRotationTime(rotationTime obj.Object) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
+	defer runtime.KeepAlive(rotationTime)
 	objc.Send[objc.ID](objref.IDOf(mtndcsp), objc.RegisterName("setRotationTime:"), objref.IDOf(rotationTime))
 	return mtndcsp
 }
 
 // WithFlags sets the flags.
 func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) WithFlags(flags obj.Object) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
+	defer runtime.KeepAlive(flags)
 	objc.Send[objc.ID](objref.IDOf(mtndcsp), objc.RegisterName("setFlags:"), objref.IDOf(flags))
 	return mtndcsp
 }
 
 // RotationTime returns the rotation time.
-func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) RotationTime() obj.Object {
+func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) RotationTime() *foundation.Number {
+	defer runtime.KeepAlive(mtndcsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcsp), objc.RegisterName("rotationTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Flags returns the flags.
-func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) Flags() obj.Object {
+func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) Flags() *foundation.Number {
+	defer runtime.KeepAlive(mtndcsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcsp), objc.RegisterName("flags"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

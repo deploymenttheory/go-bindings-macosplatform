@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,6 +52,9 @@ func portCoderAdopt(id objc.ID) *PortCoder {
 
 // NewPortCoderWithReceivePortSendPortComponents initializes and returns an NSPortCoder object.
 func NewPortCoderWithReceivePortSendPortComponents(rcvPort *Port, sndPort *Port, comps obj.Object) *PortCoder {
+	defer runtime.KeepAlive(rcvPort)
+	defer runtime.KeepAlive(sndPort)
+	defer runtime.KeepAlive(comps)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPortCoder")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReceivePort:sendPort:components:"), objref.IDOf(rcvPort), objref.IDOf(sndPort), objref.IDOf(comps))
 	return portCoderAdopt(_id)
@@ -62,42 +67,49 @@ func (pc *PortCoder) WithObservationInfo(observationInfo unsafe.Pointer) *PortCo
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (pc *PortCoder) WithScriptingProperties(scriptingProperties obj.Object) *PortCoder {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (pc *PortCoder) WithScriptingProperties(scriptingProperties map[string]obj.Object) *PortCoder {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return pc
 }
 
 // IsBycopy reports whether returns a Boolean value that indicates whether the receiver is encoding an object by copying it.
 func (pc *PortCoder) IsBycopy() bool {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[bool](objref.IDOf(pc), objc.RegisterName("isBycopy"))
 	return _r
 }
 
 // IsByref reports whether returns a Boolean value that indicates whether the receiver is encoding an object by reference.
 func (pc *PortCoder) IsByref() bool {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[bool](objref.IDOf(pc), objc.RegisterName("isByref"))
 	return _r
 }
 
 // EncodePortObject encodes a given port so it can be properly reconstituted in the receiving process or thread.
 func (pc *PortCoder) EncodePortObject(aport *Port) {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(aport)
 	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("encodePortObject:"), objref.IDOf(aport))
 }
 
 // DecodePortObject returns decodes and returns an NSPort object that was previously encoded with any of the general encode...Object: messages.
 func (pc *PortCoder) DecodePortObject() *Port {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("decodePortObject"))
 	return PortFromID(_r)
 }
 
 // Connection returns the NSConnection object that uses the receiver.
 func (pc *PortCoder) Connection() *Connection {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("connection"))
 	return ConnectionFromID(_r)
 }
 
 // Dispatch processes and acts upon the distributed object message with which the receiver was initialized.
 func (pc *PortCoder) Dispatch() {
+	defer runtime.KeepAlive(pc)
 	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("dispatch"))
 }
 

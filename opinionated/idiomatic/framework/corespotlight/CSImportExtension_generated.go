@@ -5,6 +5,7 @@
 package corespotlight
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func importExtensionAdopt(id objc.ID) *ImportExtension {
 
 // Description returns the object's -description text.
 func (ie *ImportExtension) Description() string {
+	defer runtime.KeepAlive(ie)
 	return rt.Description(objref.IDOf(ie))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ie *ImportExtension) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ie)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ie), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ie *ImportExtension) IsKind(className string) bool {
+	defer runtime.KeepAlive(ie)
 	return rt.IsKind(objref.IDOf(ie), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ie *ImportExtension) String() string {
+	defer runtime.KeepAlive(ie)
 	return rt.Description(objref.IDOf(ie))
 }
 
@@ -77,6 +83,8 @@ func NewImportExtension() *ImportExtension {
 
 // UpdateAttributesForFileAtURL provides searchable attributes for a file at the specified URL.
 func (ie *ImportExtension) UpdateAttributesForFileAtURL(attributes *SearchableItemAttributeSet, contentURL string) error {
+	defer runtime.KeepAlive(ie)
+	defer runtime.KeepAlive(attributes)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ie), objc.RegisterName("updateAttributes:forFileAtURL:error:"), objref.IDOf(attributes), rt.FileURL(contentURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

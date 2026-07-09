@@ -5,6 +5,7 @@
 package coreimage
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func renderDestinationAdopt(id objc.ID) *RenderDestination {
 
 // Description returns the object's -description text.
 func (rd *RenderDestination) Description() string {
+	defer runtime.KeepAlive(rd)
 	return rt.Description(objref.IDOf(rd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rd *RenderDestination) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rd *RenderDestination) IsKind(className string) bool {
+	defer runtime.KeepAlive(rd)
 	return rt.IsKind(objref.IDOf(rd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rd *RenderDestination) String() string {
+	defer runtime.KeepAlive(rd)
 	return rt.Description(objref.IDOf(rd))
 }
 
@@ -122,12 +128,14 @@ func (rd *RenderDestination) WithClamped(clamped bool) *RenderDestination {
 
 // WithColorSpace sets the destination’s color space.
 func (rd *RenderDestination) WithColorSpace(colorSpace obj.Object) *RenderDestination {
+	defer runtime.KeepAlive(colorSpace)
 	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
 	return rd
 }
 
 // WithBlendKernel sets the destination’s blend kernel.
 func (rd *RenderDestination) WithBlendKernel(blendKernel *BlendKernel) *RenderDestination {
+	defer runtime.KeepAlive(blendKernel)
 	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setBlendKernel:"), objref.IDOf(blendKernel))
 	return rd
 }
@@ -146,60 +154,70 @@ func (rd *RenderDestination) WithCaptureTraceURL(captureTraceURL string) *Render
 
 // Width returns the width.
 func (rd *RenderDestination) Width() int {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[int](objref.IDOf(rd), objc.RegisterName("width"))
 	return _r
 }
 
 // Height returns the height.
 func (rd *RenderDestination) Height() int {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[int](objref.IDOf(rd), objc.RegisterName("height"))
 	return _r
 }
 
 // AlphaMode returns the alpha mode.
 func (rd *RenderDestination) AlphaMode() RenderDestinationAlphaMode {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[RenderDestinationAlphaMode](objref.IDOf(rd), objc.RegisterName("alphaMode"))
 	return _r
 }
 
 // IsFlipped reports whether the object is flipped.
 func (rd *RenderDestination) IsFlipped() bool {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("isFlipped"))
 	return _r
 }
 
 // IsDithered reports whether the object is dithered.
 func (rd *RenderDestination) IsDithered() bool {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("isDithered"))
 	return _r
 }
 
 // IsClamped reports whether the object is clamped.
 func (rd *RenderDestination) IsClamped() bool {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("isClamped"))
 	return _r
 }
 
 // ColorSpace returns the color space.
 func (rd *RenderDestination) ColorSpace() obj.Object {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("colorSpace"))
 	return obj.Wrap(_r)
 }
 
 // BlendKernel returns the blend kernel.
 func (rd *RenderDestination) BlendKernel() *BlendKernel {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("blendKernel"))
 	return BlendKernelFromID(_r)
 }
 
 // BlendsInDestinationColorSpace wraps the corresponding Objective-C method.
 func (rd *RenderDestination) BlendsInDestinationColorSpace() bool {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("blendsInDestinationColorSpace"))
 	return _r
 }
 
 // CaptureTraceURL returns tell the next render using this destination to capture a Metal trace. If this property is set to a file-based URL, then the next render using this destination will capture a Metal trace, deleting any existing file if present. This property is nil by default.
-func (rd *RenderDestination) CaptureTraceURL() obj.Object {
+func (rd *RenderDestination) CaptureTraceURL() string {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("captureTraceURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

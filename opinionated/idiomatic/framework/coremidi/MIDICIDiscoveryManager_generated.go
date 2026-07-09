@@ -5,6 +5,8 @@
 package coremidi
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func cIDiscoveryManagerAdopt(id objc.ID) *CIDiscoveryManager {
 
 // Description returns the object's -description text.
 func (cdm *CIDiscoveryManager) Description() string {
+	defer runtime.KeepAlive(cdm)
 	return rt.Description(objref.IDOf(cdm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cdm *CIDiscoveryManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cdm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cdm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cdm *CIDiscoveryManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(cdm)
 	return rt.IsKind(objref.IDOf(cdm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cdm *CIDiscoveryManager) String() string {
+	defer runtime.KeepAlive(cdm)
 	return rt.Description(objref.IDOf(cdm))
 }
 

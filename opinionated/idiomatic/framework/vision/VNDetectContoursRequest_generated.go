@@ -5,8 +5,11 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -61,6 +64,7 @@ func (dcr *DetectContoursRequest) WithContrastAdjustment(contrastAdjustment floa
 
 // WithContrastPivot sets the pixel value to use as a pivot for the contrast.
 func (dcr *DetectContoursRequest) WithContrastPivot(contrastPivot obj.Object) *DetectContoursRequest {
+	defer runtime.KeepAlive(contrastPivot)
 	objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("setContrastPivot:"), objref.IDOf(contrastPivot))
 	return dcr
 }
@@ -109,30 +113,35 @@ func (dcr *DetectContoursRequest) WithRevision(revision int) *DetectContoursRequ
 
 // ContrastAdjustment returns the amount to adjust the image's contrast by. A value of +1.0 means that the contrast is not adjusted. The default value is +2.0. Contour detection works best with high contrast images. The default value of 2 doubles the image's contrast to aid in detection. If the image already has a high contrast then this value should be set to 1.
 func (dcr *DetectContoursRequest) ContrastAdjustment() float32 {
+	defer runtime.KeepAlive(dcr)
 	_r := objc.Send[float32](objref.IDOf(dcr), objc.RegisterName("contrastAdjustment"))
 	return _r
 }
 
 // ContrastPivot returns the pixel value to use as a pivot for the contrast. Valid values are from [0.0 ... +1.0], or nil to auto-detect based on image intensity. The default value is +0.5 (i.e. pixel center).
-func (dcr *DetectContoursRequest) ContrastPivot() obj.Object {
+func (dcr *DetectContoursRequest) ContrastPivot() *foundation.Number {
+	defer runtime.KeepAlive(dcr)
 	_r := objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("contrastPivot"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DetectsDarkOnLight reports whether identifies to the request if detecting a dark object on a light background, or vice versa, to aid in detection. The default value is true.
 func (dcr *DetectContoursRequest) DetectsDarkOnLight() bool {
+	defer runtime.KeepAlive(dcr)
 	_r := objc.Send[bool](objref.IDOf(dcr), objc.RegisterName("detectsDarkOnLight"))
 	return _r
 }
 
 // DetectDarkOnLight wraps the corresponding Objective-C method.
 func (dcr *DetectContoursRequest) DetectDarkOnLight() bool {
+	defer runtime.KeepAlive(dcr)
 	_r := objc.Send[bool](objref.IDOf(dcr), objc.RegisterName("detectDarkOnLight"))
 	return _r
 }
 
 // MaximumImageDimension returns the limit on the maximum dimension of the image to be used for contour detection. Valid range of values is [64 ... NSUIntegerMax]. The default value is 512. As the contour request is compute intensive, the input image is scaled down maintaining aspect ratio (if needed), such that its maximum dimension is the value of this property. The image never gets scaled up, so specifying the maximum value ensures that the image gets processed in its original size and not downscaled.
 func (dcr *DetectContoursRequest) MaximumImageDimension() int {
+	defer runtime.KeepAlive(dcr)
 	_r := objc.Send[int](objref.IDOf(dcr), objc.RegisterName("maximumImageDimension"))
 	return _r
 }

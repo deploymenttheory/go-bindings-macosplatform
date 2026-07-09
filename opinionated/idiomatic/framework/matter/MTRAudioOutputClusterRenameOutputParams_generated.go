@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRAudioOutputClusterRenameOutputParamsAdopt(id objc.ID) *MTRAudioOutputClu
 
 // Description returns the object's -description text.
 func (maocrop *MTRAudioOutputClusterRenameOutputParams) Description() string {
+	defer runtime.KeepAlive(maocrop)
 	return rt.Description(objref.IDOf(maocrop))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (maocrop *MTRAudioOutputClusterRenameOutputParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(maocrop)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(maocrop), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (maocrop *MTRAudioOutputClusterRenameOutputParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(maocrop)
 	return rt.IsKind(objref.IDOf(maocrop), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (maocrop *MTRAudioOutputClusterRenameOutputParams) String() string {
+	defer runtime.KeepAlive(maocrop)
 	return rt.Description(objref.IDOf(maocrop))
 }
 
@@ -72,6 +80,7 @@ func NewMTRAudioOutputClusterRenameOutputParams() *MTRAudioOutputClusterRenameOu
 
 // WithIndex sets the index.
 func (maocrop *MTRAudioOutputClusterRenameOutputParams) WithIndex(index obj.Object) *MTRAudioOutputClusterRenameOutputParams {
+	defer runtime.KeepAlive(index)
 	objc.Send[objc.ID](objref.IDOf(maocrop), objc.RegisterName("setIndex:"), objref.IDOf(index))
 	return maocrop
 }
@@ -84,24 +93,28 @@ func (maocrop *MTRAudioOutputClusterRenameOutputParams) WithName(name string) *M
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (maocrop *MTRAudioOutputClusterRenameOutputParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAudioOutputClusterRenameOutputParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(maocrop), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return maocrop
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (maocrop *MTRAudioOutputClusterRenameOutputParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAudioOutputClusterRenameOutputParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(maocrop), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return maocrop
 }
 
 // Index returns the index.
-func (maocrop *MTRAudioOutputClusterRenameOutputParams) Index() obj.Object {
+func (maocrop *MTRAudioOutputClusterRenameOutputParams) Index() *foundation.Number {
+	defer runtime.KeepAlive(maocrop)
 	_r := objc.Send[objc.ID](objref.IDOf(maocrop), objc.RegisterName("index"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Name returns the name.
 func (maocrop *MTRAudioOutputClusterRenameOutputParams) Name() string {
+	defer runtime.KeepAlive(maocrop)
 	_r := objc.Send[objc.ID](objref.IDOf(maocrop), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -110,13 +123,15 @@ func (maocrop *MTRAudioOutputClusterRenameOutputParams) Name() string {
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (maocrop *MTRAudioOutputClusterRenameOutputParams) TimedInvokeTimeoutMs() obj.Object {
+func (maocrop *MTRAudioOutputClusterRenameOutputParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(maocrop)
 	_r := objc.Send[objc.ID](objref.IDOf(maocrop), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (maocrop *MTRAudioOutputClusterRenameOutputParams) ServerSideProcessingTimeout() obj.Object {
+func (maocrop *MTRAudioOutputClusterRenameOutputParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(maocrop)
 	_r := objc.Send[objc.ID](objref.IDOf(maocrop), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

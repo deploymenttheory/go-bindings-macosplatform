@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -47,22 +48,27 @@ func animationBindComponentAdopt(id objc.ID) *AnimationBindComponent {
 
 // Description returns the object's -description text.
 func (abc *AnimationBindComponent) Description() string {
+	defer runtime.KeepAlive(abc)
 	return rt.Description(objref.IDOf(abc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (abc *AnimationBindComponent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(abc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(abc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (abc *AnimationBindComponent) IsKind(className string) bool {
+	defer runtime.KeepAlive(abc)
 	return rt.IsKind(objref.IDOf(abc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (abc *AnimationBindComponent) String() string {
+	defer runtime.KeepAlive(abc)
 	return rt.Description(objref.IDOf(abc))
 }
 
@@ -74,6 +80,7 @@ func NewAnimationBindComponent() *AnimationBindComponent {
 
 // WithSkeleton sets the skeleton.
 func (abc *AnimationBindComponent) WithSkeleton(skeleton *Skeleton) *AnimationBindComponent {
+	defer runtime.KeepAlive(skeleton)
 	objc.Send[objc.ID](objref.IDOf(abc), objc.RegisterName("setSkeleton:"), objref.IDOf(skeleton))
 	return abc
 }
@@ -93,6 +100,7 @@ func (abc *AnimationBindComponent) WithGeometryBindTransform(geometryBindTransfo
 
 // Skeleton returns the skeleton.
 func (abc *AnimationBindComponent) Skeleton() *Skeleton {
+	defer runtime.KeepAlive(abc)
 	_r := objc.Send[objc.ID](objref.IDOf(abc), objc.RegisterName("skeleton"))
 	return SkeletonFromID(_r)
 }
@@ -101,6 +109,7 @@ func (abc *AnimationBindComponent) Skeleton() *Skeleton {
 //
 // JointPaths returns the collection as a Go slice.
 func (abc *AnimationBindComponent) JointPaths() []string {
+	defer runtime.KeepAlive(abc)
 	_arr := objc.Send[objc.ID](objref.IDOf(abc), objc.RegisterName("jointPaths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

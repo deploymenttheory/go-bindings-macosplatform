@@ -5,6 +5,8 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func contactPropertyAdopt(id objc.ID) *ContactProperty {
 
 // Description returns the object's -description text.
 func (cp *ContactProperty) Description() string {
+	defer runtime.KeepAlive(cp)
 	return rt.Description(objref.IDOf(cp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cp *ContactProperty) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cp *ContactProperty) IsKind(className string) bool {
+	defer runtime.KeepAlive(cp)
 	return rt.IsKind(objref.IDOf(cp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cp *ContactProperty) String() string {
+	defer runtime.KeepAlive(cp)
 	return rt.Description(objref.IDOf(cp))
 }
 
@@ -74,12 +81,14 @@ func NewContactProperty() *ContactProperty {
 
 // Contact returns the contact.
 func (cp *ContactProperty) Contact() *Contact {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("contact"))
 	return ContactFromID(_r)
 }
 
 // Key returns the key of the contact property, as defined in CNContact.h.
 func (cp *ContactProperty) Key() string {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("key"))
 	if _r == 0 {
 		return ""
@@ -89,12 +98,14 @@ func (cp *ContactProperty) Key() string {
 
 // Value returns the value of the property.
 func (cp *ContactProperty) Value() obj.Object {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
 // Identifier returns the identifier of the labeled value if the property is an array of labeled values, otherwise is nil.
 func (cp *ContactProperty) Identifier() string {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -104,6 +115,7 @@ func (cp *ContactProperty) Identifier() string {
 
 // Label returns the label of the labeled value if the property is an array of labeled values, otherwise is nil.
 func (cp *ContactProperty) Label() string {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

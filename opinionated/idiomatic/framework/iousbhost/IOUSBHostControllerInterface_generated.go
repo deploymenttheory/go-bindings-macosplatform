@@ -5,10 +5,12 @@
 package iousbhost
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +50,27 @@ func hostControllerInterfaceAdopt(id objc.ID) *HostControllerInterface {
 
 // Description returns the object's -description text.
 func (hci *HostControllerInterface) Description() string {
+	defer runtime.KeepAlive(hci)
 	return rt.Description(objref.IDOf(hci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hci *HostControllerInterface) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hci *HostControllerInterface) IsKind(className string) bool {
+	defer runtime.KeepAlive(hci)
 	return rt.IsKind(objref.IDOf(hci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hci *HostControllerInterface) String() string {
+	defer runtime.KeepAlive(hci)
 	return rt.Description(objref.IDOf(hci))
 }
 
@@ -81,11 +88,13 @@ func (hci *HostControllerInterface) WithInterruptRateHz(interruptRateHz int) *Ho
 
 // Destroy removes underlying allocations of the IOUSBHostControllerInterface object along with user client When the IOUSBHostControllerInterface is no longer needed, destroy must be called. This will destroy the connection with the user client and de-register interest on the service. If the object is freed, destroy will be called automatically. Calling destroy multiple times has no effect.
 func (hci *HostControllerInterface) Destroy() {
+	defer runtime.KeepAlive(hci)
 	objc.Send[objc.ID](objref.IDOf(hci), objc.RegisterName("destroy"))
 }
 
-// GetPortStateMachineForPortError wraps the corresponding Objective-C method.
-func (hci *HostControllerInterface) GetPortStateMachineForPortError(port int) (result *HostCIPortStateMachine, err error) {
+// GetPortStateMachineForPort wraps the corresponding Objective-C method.
+func (hci *HostControllerInterface) GetPortStateMachineForPort(port int) (result *HostCIPortStateMachine, err error) {
+	defer runtime.KeepAlive(hci)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(hci), objc.RegisterName("getPortStateMachineForPort:error:"), port, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -95,25 +104,29 @@ func (hci *HostControllerInterface) GetPortStateMachineForPortError(port int) (r
 }
 
 // Queue returns the dispatch queue for asynchronous operations.
-func (hci *HostControllerInterface) Queue() obj.Object {
+func (hci *HostControllerInterface) Queue() *foundation.Object {
+	defer runtime.KeepAlive(hci)
 	_r := objc.Send[objc.ID](objref.IDOf(hci), objc.RegisterName("queue"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 // InterruptRateHz returns the interrupt moderation rate for sending interrupt messages to the kernel driver interruptRateHz will cause submitted interrupt messages to be batched together and submitted to the kernel at the specified rate.  A value ot 0 will deliver all interrupts to the kernel driver as soon as possible.
 func (hci *HostControllerInterface) InterruptRateHz() int {
+	defer runtime.KeepAlive(hci)
 	_r := objc.Send[int](objref.IDOf(hci), objc.RegisterName("interruptRateHz"))
 	return _r
 }
 
 // ControllerStateMachine returns the controller state machine.
 func (hci *HostControllerInterface) ControllerStateMachine() *HostCIControllerStateMachine {
+	defer runtime.KeepAlive(hci)
 	_r := objc.Send[objc.ID](objref.IDOf(hci), objc.RegisterName("controllerStateMachine"))
 	return HostCIControllerStateMachineFromID(_r)
 }
 
 // UUID returns a UUID used to identify the host controller interface in this process and the kernel
-func (hci *HostControllerInterface) UUID() obj.Object {
+func (hci *HostControllerInterface) UUID() *foundation.UUID {
+	defer runtime.KeepAlive(hci)
 	_r := objc.Send[objc.ID](objref.IDOf(hci), objc.RegisterName("uuid"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }

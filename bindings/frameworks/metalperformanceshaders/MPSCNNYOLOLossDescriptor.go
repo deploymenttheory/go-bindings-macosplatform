@@ -66,8 +66,8 @@ func MPSCNNYOLOLossDescriptorFromID(id objc.ID) *MPSCNNYOLOLossDescriptor {
 }
 
 // @abstract   Make a descriptor for a MPSCNNYOLOLoss object. @param      XYLossType                  The type of spatial position loss filter. @param      WHLossType                  The type of spatial size loss filter. @param      confidenceLossType          The type of confidence filter. @param      classesLossType             The type of classes filter. @param      reductionType               The type of a reduction operation to apply. @param      anchorBoxes                 This is an NSData which has an array of anchorBoxes defined as a struct{ float width; float height; }; @return     A valid MPSCNNYOLOLossDescriptor object or nil, if failure.
-func MPSCNNYOLOLossDescriptorCnnLossDescriptorWithXYLossTypeWHLossTypeConfidenceLossTypeClassesLossTypeReductionTypeAnchorBoxesNumberOfAnchorBoxes(xYLossType mpsneuralnetwork.MPSCNNLossType, wHLossType mpsneuralnetwork.MPSCNNLossType, confidenceLossType mpsneuralnetwork.MPSCNNLossType, classesLossType mpsneuralnetwork.MPSCNNLossType, reductionType mpsneuralnetwork.MPSCNNReductionType, anchorBoxes *foundation.NSData, numberOfAnchorBoxes uint) *mpsneuralnetwork.MPSCNNYOLOLossDescriptor {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNYOLOLossDescriptor), _mPSCNNYOLOLossDescriptorSelCnnLossDescriptorWithXYLossTypeWHLossTypeConfidenceLossTypeClassesLossTypeReductionTypeAnchorBoxesNumberOfAnchorBoxes, xYLossType, wHLossType, confidenceLossType, classesLossType, reductionType, anchorBoxes.Ptr(), numberOfAnchorBoxes)
+func MPSCNNYOLOLossDescriptorCnnLossDescriptorWithXYLossTypeWHLossTypeConfidenceLossTypeClassesLossTypeReductionTypeAnchorBoxesNumberOfAnchorBoxes(xyLossType mpsneuralnetwork.MPSCNNLossType, whLossType mpsneuralnetwork.MPSCNNLossType, confidenceLossType mpsneuralnetwork.MPSCNNLossType, classesLossType mpsneuralnetwork.MPSCNNLossType, reductionType mpsneuralnetwork.MPSCNNReductionType, anchorBoxes *foundation.NSData, numberOfAnchorBoxes uint) *mpsneuralnetwork.MPSCNNYOLOLossDescriptor {
+	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNYOLOLossDescriptor), _mPSCNNYOLOLossDescriptorSelCnnLossDescriptorWithXYLossTypeWHLossTypeConfidenceLossTypeClassesLossTypeReductionTypeAnchorBoxesNumberOfAnchorBoxes, xyLossType, whLossType, confidenceLossType, classesLossType, reductionType, anchorBoxes.Ptr(), numberOfAnchorBoxes)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -83,8 +83,8 @@ func (o *MPSCNNYOLOLossDescriptor) XYLossDescriptor() *mpsneuralnetwork.MPSCNNLo
 	return mpsneuralnetwork.MPSCNNLossDescriptorFromID(_ret)
 }
 
-func (o *MPSCNNYOLOLossDescriptor) SetXYLossDescriptor(xYLossDescriptor *mpsneuralnetwork.MPSCNNLossDescriptor) {
-	o.Ptr().Send(_mPSCNNYOLOLossDescriptorSelSetXYLossDescriptor, xYLossDescriptor.Ptr())
+func (o *MPSCNNYOLOLossDescriptor) SetXYLossDescriptor(xyLossDescriptor *mpsneuralnetwork.MPSCNNLossDescriptor) {
+	o.Ptr().Send(_mPSCNNYOLOLossDescriptorSelSetXYLossDescriptor, xyLossDescriptor.Ptr())
 }
 
 // @property   WHLossDescriptor @abstract   The type of a loss filter. @discussion This parameter specifies the type of a loss filter.
@@ -96,8 +96,8 @@ func (o *MPSCNNYOLOLossDescriptor) WHLossDescriptor() *mpsneuralnetwork.MPSCNNLo
 	return mpsneuralnetwork.MPSCNNLossDescriptorFromID(_ret)
 }
 
-func (o *MPSCNNYOLOLossDescriptor) SetWHLossDescriptor(wHLossDescriptor *mpsneuralnetwork.MPSCNNLossDescriptor) {
-	o.Ptr().Send(_mPSCNNYOLOLossDescriptorSelSetWHLossDescriptor, wHLossDescriptor.Ptr())
+func (o *MPSCNNYOLOLossDescriptor) SetWHLossDescriptor(whLossDescriptor *mpsneuralnetwork.MPSCNNLossDescriptor) {
+	o.Ptr().Send(_mPSCNNYOLOLossDescriptorSelSetWHLossDescriptor, whLossDescriptor.Ptr())
 }
 
 // @property   confidenceLossDescriptor @abstract   The type of a loss filter. @discussion This parameter specifies the type of a loss filter.

@@ -5,6 +5,8 @@
 package eventkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,34 +49,40 @@ func virtualConferenceURLDescriptorAdopt(id objc.ID) *VirtualConferenceURLDescri
 
 // Description returns the object's -description text.
 func (vcud *VirtualConferenceURLDescriptor) Description() string {
+	defer runtime.KeepAlive(vcud)
 	return rt.Description(objref.IDOf(vcud))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vcud *VirtualConferenceURLDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vcud)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vcud), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vcud *VirtualConferenceURLDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(vcud)
 	return rt.IsKind(objref.IDOf(vcud), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vcud *VirtualConferenceURLDescriptor) String() string {
+	defer runtime.KeepAlive(vcud)
 	return rt.Description(objref.IDOf(vcud))
 }
 
 // NewVirtualConferenceURLDescriptorWithTitleURL creates a URL descriptor with the given title and URL.
-func NewVirtualConferenceURLDescriptorWithTitleURL(title string, uRL string) *VirtualConferenceURLDescriptor {
+func NewVirtualConferenceURLDescriptorWithTitleURL(title string, url string) *VirtualConferenceURLDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("EKVirtualConferenceURLDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:URL:"), purego.NSString(title), rt.FileURL(uRL))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:URL:"), purego.NSString(title), rt.FileURL(url))
 	return virtualConferenceURLDescriptorAdopt(_id)
 }
 
 // Title returns the title.
 func (vcud *VirtualConferenceURLDescriptor) Title() string {
+	defer runtime.KeepAlive(vcud)
 	_r := objc.Send[objc.ID](objref.IDOf(vcud), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -83,7 +91,8 @@ func (vcud *VirtualConferenceURLDescriptor) Title() string {
 }
 
 // URL returns the URL.
-func (vcud *VirtualConferenceURLDescriptor) URL() obj.Object {
+func (vcud *VirtualConferenceURLDescriptor) URL() string {
+	defer runtime.KeepAlive(vcud)
 	_r := objc.Send[objc.ID](objref.IDOf(vcud), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

@@ -5,12 +5,14 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -57,24 +59,24 @@ func NewXMLElementWithName(name string) *XMLElement {
 }
 
 // NewXMLElementWithNameURI returns an element whose full QName is specified.
-func NewXMLElementWithNameURI(name string, uRI string) *XMLElement {
+func NewXMLElementWithNameURI(name string, uri string) *XMLElement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLElement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:URI:"), purego.NSString(name), purego.NSString(uRI))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:URI:"), purego.NSString(name), purego.NSString(uri))
 	return xMLElementAdopt(_id)
 }
 
 // NewXMLElementWithNameStringValue returns an element with a single text node child <tt>&lt;name>string&lt;/name></tt>.
-func NewXMLElementWithNameStringValue(name string, string_ string) *XMLElement {
+func NewXMLElementWithNameStringValue(name string, str string) *XMLElement {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLElement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:stringValue:"), purego.NSString(name), purego.NSString(string_))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:stringValue:"), purego.NSString(name), purego.NSString(str))
 	return xMLElementAdopt(_id)
 }
 
-// NewXMLElementWithXMLStringError returns an element created from a string. Parse errors are collected in <tt>error</tt>.
-func NewXMLElementWithXMLStringError(string_ string) (result *XMLElement, err error) {
+// NewXMLElementWithXMLString returns an element created from a string. Parse errors are collected in <tt>error</tt>.
+func NewXMLElementWithXMLString(str string) (result *XMLElement, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLElement")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithXMLString:error:"), purego.NSString(string_), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithXMLString:error:"), purego.NSString(str), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -104,25 +106,29 @@ func (xe *XMLElement) WithNamespaces(items ...XMLNodeProvider) *XMLElement {
 
 // WithName sets sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
 func (xe *XMLElement) WithName(name StringProvider) *XMLElement {
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("setName:"), objref.IDOf(name))
 	return xe
 }
 
 // WithObjectValue sets sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
 func (xe *XMLElement) WithObjectValue(objectValue obj.Object) *XMLElement {
+	defer runtime.KeepAlive(objectValue)
 	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return xe
 }
 
 // WithStringValue sets sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
 func (xe *XMLElement) WithStringValue(stringValue StringProvider) *XMLElement {
+	defer runtime.KeepAlive(stringValue)
 	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("setStringValue:"), objref.IDOf(stringValue))
 	return xe
 }
 
 // WithURI sets set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
-func (xe *XMLElement) WithURI(uRI StringProvider) *XMLElement {
-	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("setURI:"), objref.IDOf(uRI))
+func (xe *XMLElement) WithURI(uri StringProvider) *XMLElement {
+	defer runtime.KeepAlive(uri)
+	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("setURI:"), objref.IDOf(uri))
 	return xe
 }
 
@@ -133,74 +139,88 @@ func (xe *XMLElement) WithObservationInfo(observationInfo unsafe.Pointer) *XMLEl
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (xe *XMLElement) WithScriptingProperties(scriptingProperties obj.Object) *XMLElement {
-	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (xe *XMLElement) WithScriptingProperties(scriptingProperties map[string]obj.Object) *XMLElement {
+	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return xe
 }
 
 // ElementsForName returns all of the child elements that match this name.
 func (xe *XMLElement) ElementsForName(name string) []*XMLElement {
+	defer runtime.KeepAlive(xe)
 	_r := objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("elementsForName:"), purego.NSString(name))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *XMLElement { return XMLElementFromID(_id) })
 }
 
 // ElementsForLocalNameURI returns all of the child elements that match this localname URI pair.
-func (xe *XMLElement) ElementsForLocalNameURI(localName string, uRI string) []*XMLElement {
-	_r := objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("elementsForLocalName:URI:"), purego.NSString(localName), purego.NSString(uRI))
+func (xe *XMLElement) ElementsForLocalNameURI(localName string, uri string) []*XMLElement {
+	defer runtime.KeepAlive(xe)
+	_r := objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("elementsForLocalName:URI:"), purego.NSString(localName), purego.NSString(uri))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *XMLElement { return XMLElementFromID(_id) })
 }
 
 // AddAttribute adds an attribute. Attributes with duplicate names are not added.
 func (xe *XMLElement) AddAttribute(attribute *XMLNode) {
+	defer runtime.KeepAlive(xe)
+	defer runtime.KeepAlive(attribute)
 	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("addAttribute:"), objref.IDOf(attribute))
 }
 
 // RemoveAttributeForName removes an attribute based on its name.
 func (xe *XMLElement) RemoveAttributeForName(name string) {
+	defer runtime.KeepAlive(xe)
 	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("removeAttributeForName:"), purego.NSString(name))
 }
 
 // SetAttributesWithDictionary set the attributes based on a name-value dictionary.
-func (xe *XMLElement) SetAttributesWithDictionary(attributes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("setAttributesWithDictionary:"), objref.IDOf(attributes))
+func (xe *XMLElement) SetAttributesWithDictionary(attributes map[string]string) {
+	defer runtime.KeepAlive(xe)
+	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("setAttributesWithDictionary:"), rt.MapToDict(attributes, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // AttributeForName returns an attribute matching this name.
 func (xe *XMLElement) AttributeForName(name string) *XMLNode {
+	defer runtime.KeepAlive(xe)
 	_r := objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("attributeForName:"), purego.NSString(name))
 	return XMLNodeFromID(_r)
 }
 
 // AttributeForLocalNameURI returns an attribute matching this localname URI pair.
-func (xe *XMLElement) AttributeForLocalNameURI(localName string, uRI string) *XMLNode {
-	_r := objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("attributeForLocalName:URI:"), purego.NSString(localName), purego.NSString(uRI))
+func (xe *XMLElement) AttributeForLocalNameURI(localName string, uri string) *XMLNode {
+	defer runtime.KeepAlive(xe)
+	_r := objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("attributeForLocalName:URI:"), purego.NSString(localName), purego.NSString(uri))
 	return XMLNodeFromID(_r)
 }
 
 // AddNamespace adds a namespace. Namespaces with duplicate names are not added.
 func (xe *XMLElement) AddNamespace(aNamespace *XMLNode) {
+	defer runtime.KeepAlive(xe)
+	defer runtime.KeepAlive(aNamespace)
 	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("addNamespace:"), objref.IDOf(aNamespace))
 }
 
 // RemoveNamespaceForPrefix removes a namespace with a particular name.
 func (xe *XMLElement) RemoveNamespaceForPrefix(name string) {
+	defer runtime.KeepAlive(xe)
 	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("removeNamespaceForPrefix:"), purego.NSString(name))
 }
 
 // NamespaceForPrefix returns the namespace matching this prefix.
 func (xe *XMLElement) NamespaceForPrefix(name string) *XMLNode {
+	defer runtime.KeepAlive(xe)
 	_r := objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("namespaceForPrefix:"), purego.NSString(name))
 	return XMLNodeFromID(_r)
 }
 
 // ResolveNamespaceForName returns the namespace who matches the prefix of the name given. Looks in the entire namespace chain.
 func (xe *XMLElement) ResolveNamespaceForName(name string) *XMLNode {
+	defer runtime.KeepAlive(xe)
 	_r := objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("resolveNamespaceForName:"), purego.NSString(name))
 	return XMLNodeFromID(_r)
 }
 
 // ResolvePrefixForNamespaceURI returns the URI of this prefix. Looks in the entire namespace chain.
 func (xe *XMLElement) ResolvePrefixForNamespaceURI(namespaceURI string) string {
+	defer runtime.KeepAlive(xe)
 	_r := objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("resolvePrefixForNamespaceURI:"), purego.NSString(namespaceURI))
 	if _r == 0 {
 		return ""
@@ -210,36 +230,46 @@ func (xe *XMLElement) ResolvePrefixForNamespaceURI(namespaceURI string) string {
 
 // InsertChildAtIndex inserts a child at a particular index.
 func (xe *XMLElement) InsertChildAtIndex(child *XMLNode, index int) {
+	defer runtime.KeepAlive(xe)
+	defer runtime.KeepAlive(child)
 	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("insertChild:atIndex:"), objref.IDOf(child), index)
 }
 
 // InsertChildrenAtIndex insert several children at a particular index.
 func (xe *XMLElement) InsertChildrenAtIndex(children []*XMLNode, index int) {
+	defer runtime.KeepAlive(xe)
 	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("insertChildren:atIndex:"), purego.SliceToNSArray(children, func(_v *XMLNode) objc.ID { return objref.IDOf(_v) }), index)
 }
 
 // RemoveChildAtIndex removes a child at a particular index.
 func (xe *XMLElement) RemoveChildAtIndex(index int) {
+	defer runtime.KeepAlive(xe)
 	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("removeChildAtIndex:"), index)
 }
 
 // SetChildren removes all existing children and replaces them with the new children. Set children to nil to simply remove all children.
 func (xe *XMLElement) SetChildren(children []*XMLNode) {
+	defer runtime.KeepAlive(xe)
 	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("setChildren:"), purego.SliceToNSArray(children, func(_v *XMLNode) objc.ID { return objref.IDOf(_v) }))
 }
 
 // AddChild adds a child to the end of the existing children.
 func (xe *XMLElement) AddChild(child *XMLNode) {
+	defer runtime.KeepAlive(xe)
+	defer runtime.KeepAlive(child)
 	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("addChild:"), objref.IDOf(child))
 }
 
 // ReplaceChildAtIndexWithNode replaces a child at a particular index with another child.
 func (xe *XMLElement) ReplaceChildAtIndexWithNode(index int, node *XMLNode) {
+	defer runtime.KeepAlive(xe)
+	defer runtime.KeepAlive(node)
 	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("replaceChildAtIndex:withNode:"), index, objref.IDOf(node))
 }
 
 // NormalizeAdjacentTextNodesPreservingCDATA adjacent text nodes are coalesced. If the node's value is the empty string, it is removed. This should be called with a value of NO before using XQuery or XPath.
 func (xe *XMLElement) NormalizeAdjacentTextNodesPreservingCDATA(preserve bool) {
+	defer runtime.KeepAlive(xe)
 	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("normalizeAdjacentTextNodesPreservingCDATA:"), preserve)
 }
 
@@ -247,6 +277,7 @@ func (xe *XMLElement) NormalizeAdjacentTextNodesPreservingCDATA(preserve bool) {
 //
 // Attributes returns the collection as a Go slice.
 func (xe *XMLElement) Attributes() []*XMLNode {
+	defer runtime.KeepAlive(xe)
 	_arr := objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("attributes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *XMLNode { return XMLNodeFromID(_id) })
 }
@@ -255,12 +286,15 @@ func (xe *XMLElement) Attributes() []*XMLNode {
 //
 // Namespaces returns the collection as a Go slice.
 func (xe *XMLElement) Namespaces() []*XMLNode {
+	defer runtime.KeepAlive(xe)
 	_arr := objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("namespaces"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *XMLNode { return XMLNodeFromID(_id) })
 }
 
 // SetAttributesAsDictionary set the attributes base on a name-value dictionary. This method is deprecated and does not function correctly. Use -setAttributesWithDictionary: instead.
 func (xe *XMLElement) SetAttributesAsDictionary(attributes obj.Object) {
+	defer runtime.KeepAlive(xe)
+	defer runtime.KeepAlive(attributes)
 	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("setAttributesAsDictionary:"), objref.IDOf(attributes))
 }
 

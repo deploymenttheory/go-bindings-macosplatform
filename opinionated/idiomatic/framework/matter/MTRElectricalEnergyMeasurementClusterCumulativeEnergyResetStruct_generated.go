@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructAdopt(id ob
 
 // Description returns the object's -description text.
 func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) Description() string {
+	defer runtime.KeepAlive(meemccers)
 	return rt.Description(objref.IDOf(meemccers))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(meemccers)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(meemccers), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(meemccers)
 	return rt.IsKind(objref.IDOf(meemccers), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) String() string {
+	defer runtime.KeepAlive(meemccers)
 	return rt.Description(objref.IDOf(meemccers))
 }
 
@@ -72,48 +80,56 @@ func NewMTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct() *MTRE
 
 // WithImportedResetTimestamp sets the imported reset timestamp.
 func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) WithImportedResetTimestamp(importedResetTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct {
+	defer runtime.KeepAlive(importedResetTimestamp)
 	objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("setImportedResetTimestamp:"), objref.IDOf(importedResetTimestamp))
 	return meemccers
 }
 
 // WithExportedResetTimestamp sets the exported reset timestamp.
 func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) WithExportedResetTimestamp(exportedResetTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct {
+	defer runtime.KeepAlive(exportedResetTimestamp)
 	objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("setExportedResetTimestamp:"), objref.IDOf(exportedResetTimestamp))
 	return meemccers
 }
 
 // WithImportedResetSystime sets the imported reset systime.
 func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) WithImportedResetSystime(importedResetSystime obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct {
+	defer runtime.KeepAlive(importedResetSystime)
 	objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("setImportedResetSystime:"), objref.IDOf(importedResetSystime))
 	return meemccers
 }
 
 // WithExportedResetSystime sets the exported reset systime.
 func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) WithExportedResetSystime(exportedResetSystime obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct {
+	defer runtime.KeepAlive(exportedResetSystime)
 	objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("setExportedResetSystime:"), objref.IDOf(exportedResetSystime))
 	return meemccers
 }
 
 // ImportedResetTimestamp returns the imported reset timestamp.
-func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ImportedResetTimestamp() obj.Object {
+func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ImportedResetTimestamp() *foundation.Number {
+	defer runtime.KeepAlive(meemccers)
 	_r := objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("importedResetTimestamp"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ExportedResetTimestamp returns the exported reset timestamp.
-func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ExportedResetTimestamp() obj.Object {
+func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ExportedResetTimestamp() *foundation.Number {
+	defer runtime.KeepAlive(meemccers)
 	_r := objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("exportedResetTimestamp"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ImportedResetSystime returns the imported reset systime.
-func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ImportedResetSystime() obj.Object {
+func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ImportedResetSystime() *foundation.Number {
+	defer runtime.KeepAlive(meemccers)
 	_r := objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("importedResetSystime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ExportedResetSystime returns the exported reset systime.
-func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ExportedResetSystime() obj.Object {
+func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ExportedResetSystime() *foundation.Number {
+	defer runtime.KeepAlive(meemccers)
 	_r := objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("exportedResetSystime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

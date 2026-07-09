@@ -6,6 +6,7 @@ package intents
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func voiceShortcutCenterAdopt(id objc.ID) *VoiceShortcutCenter {
 
 // Description returns the object's -description text.
 func (vsc *VoiceShortcutCenter) Description() string {
+	defer runtime.KeepAlive(vsc)
 	return rt.Description(objref.IDOf(vsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vsc *VoiceShortcutCenter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vsc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vsc *VoiceShortcutCenter) IsKind(className string) bool {
+	defer runtime.KeepAlive(vsc)
 	return rt.IsKind(objref.IDOf(vsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vsc *VoiceShortcutCenter) String() string {
+	defer runtime.KeepAlive(vsc)
 	return rt.Description(objref.IDOf(vsc))
 }
 
@@ -79,6 +85,7 @@ func NewVoiceShortcutCenter() *VoiceShortcutCenter {
 //
 // GetAllVoiceShortcutsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (vsc *VoiceShortcutCenter) GetAllVoiceShortcutsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(vsc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -104,6 +111,8 @@ func (vsc *VoiceShortcutCenter) GetAllVoiceShortcutsWithCompletion(ctx context.C
 //
 // GetVoiceShortcutWithIdentifierCompletion blocks until the operation completes or ctx is cancelled.
 func (vsc *VoiceShortcutCenter) GetVoiceShortcutWithIdentifierCompletion(ctx context.Context, identifier obj.Object) (result *VoiceShortcut, err error) {
+	defer runtime.KeepAlive(vsc)
+	defer runtime.KeepAlive(identifier)
 	type _result struct {
 		val *VoiceShortcut
 		err error
@@ -127,5 +136,6 @@ func (vsc *VoiceShortcutCenter) GetVoiceShortcutWithIdentifierCompletion(ctx con
 
 // SetShortcutSuggestions suggests shortcuts the user may want to add to Siri.
 func (vsc *VoiceShortcutCenter) SetShortcutSuggestions(suggestions []*Shortcut) {
+	defer runtime.KeepAlive(vsc)
 	objc.Send[objc.ID](objref.IDOf(vsc), objc.RegisterName("setShortcutSuggestions:"), purego.SliceToNSArray(suggestions, func(_v *Shortcut) objc.ID { return objref.IDOf(_v) }))
 }

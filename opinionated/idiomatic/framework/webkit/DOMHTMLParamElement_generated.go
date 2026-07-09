@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -177,6 +179,7 @@ func (dpe *DOMHTMLParamElement) WithTextContent(textContent string) *DOMHTMLPara
 
 // Name returns the name.
 func (dpe *DOMHTMLParamElement) Name() string {
+	defer runtime.KeepAlive(dpe)
 	_r := objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -186,6 +189,7 @@ func (dpe *DOMHTMLParamElement) Name() string {
 
 // Type returns the type.
 func (dpe *DOMHTMLParamElement) Type() string {
+	defer runtime.KeepAlive(dpe)
 	_r := objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -195,6 +199,7 @@ func (dpe *DOMHTMLParamElement) Type() string {
 
 // Value returns the value.
 func (dpe *DOMHTMLParamElement) Value() string {
+	defer runtime.KeepAlive(dpe)
 	_r := objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
@@ -204,6 +209,7 @@ func (dpe *DOMHTMLParamElement) Value() string {
 
 // ValueType returns the value type.
 func (dpe *DOMHTMLParamElement) ValueType() string {
+	defer runtime.KeepAlive(dpe)
 	_r := objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("valueType"))
 	if _r == 0 {
 		return ""

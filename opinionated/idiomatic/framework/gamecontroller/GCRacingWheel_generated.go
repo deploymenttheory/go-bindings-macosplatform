@@ -5,6 +5,7 @@
 package gamecontroller
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func racingWheelAdopt(id objc.ID) *RacingWheel {
 
 // Description returns the object's -description text.
 func (rw *RacingWheel) Description() string {
+	defer runtime.KeepAlive(rw)
 	return rt.Description(objref.IDOf(rw))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rw *RacingWheel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rw)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rw), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rw *RacingWheel) IsKind(className string) bool {
+	defer runtime.KeepAlive(rw)
 	return rt.IsKind(objref.IDOf(rw), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rw *RacingWheel) String() string {
+	defer runtime.KeepAlive(rw)
 	return rt.Description(objref.IDOf(rw))
 }
 
@@ -79,6 +85,7 @@ func NewRacingWheel() *RacingWheel {
 //
 // AcquireDevice returns an error if the operation did not succeed.
 func (rw *RacingWheel) AcquireDevice() error {
+	defer runtime.KeepAlive(rw)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(rw), objc.RegisterName("acquireDeviceWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -89,29 +96,34 @@ func (rw *RacingWheel) AcquireDevice() error {
 
 // RelinquishDevice stops receiving events from the racing wheel.
 func (rw *RacingWheel) RelinquishDevice() {
+	defer runtime.KeepAlive(rw)
 	objc.Send[objc.ID](objref.IDOf(rw), objc.RegisterName("relinquishDevice"))
 }
 
 // Capture returns a snapshot of the racing wheel with its current element values.
 func (rw *RacingWheel) Capture() *RacingWheel {
+	defer runtime.KeepAlive(rw)
 	_r := objc.Send[objc.ID](objref.IDOf(rw), objc.RegisterName("capture"))
 	return RacingWheelFromID(_r)
 }
 
 // IsAcquired reports whether checks if the racing wheel has been acquired by the application. This property is observable.
 func (rw *RacingWheel) IsAcquired() bool {
+	defer runtime.KeepAlive(rw)
 	_r := objc.Send[bool](objref.IDOf(rw), objc.RegisterName("isAcquired"))
 	return _r
 }
 
 // WheelInput get the physical input profile for the racing wheel.
 func (rw *RacingWheel) WheelInput() *RacingWheelInput {
+	defer runtime.KeepAlive(rw)
 	_r := objc.Send[objc.ID](objref.IDOf(rw), objc.RegisterName("wheelInput"))
 	return RacingWheelInputFromID(_r)
 }
 
 // IsSnapshot reports whether a GCRacingWheel may represent a real device managed by the operating system, or a snapshot created by the developer.
 func (rw *RacingWheel) IsSnapshot() bool {
+	defer runtime.KeepAlive(rw)
 	_r := objc.Send[bool](objref.IDOf(rw), objc.RegisterName("isSnapshot"))
 	return _r
 }

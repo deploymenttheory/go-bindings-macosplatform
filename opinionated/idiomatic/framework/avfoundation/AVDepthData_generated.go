@@ -5,6 +5,7 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func depthDataAdopt(id objc.ID) *DepthData {
 
 // Description returns the object's -description text.
 func (dd *DepthData) Description() string {
+	defer runtime.KeepAlive(dd)
 	return rt.Description(objref.IDOf(dd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dd *DepthData) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dd *DepthData) IsKind(className string) bool {
+	defer runtime.KeepAlive(dd)
 	return rt.IsKind(objref.IDOf(dd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dd *DepthData) String() string {
+	defer runtime.KeepAlive(dd)
 	return rt.Description(objref.IDOf(dd))
 }
 
@@ -77,12 +83,14 @@ func NewDepthData() *DepthData {
 
 // DepthDataByConvertingToDepthDataType returns a derivative depth data object by converting the depth data map to the specified data type.
 func (dd *DepthData) DepthDataByConvertingToDepthDataType(depthDataType int) *DepthData {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("depthDataByConvertingToDepthDataType:"), depthDataType)
 	return DepthDataFromID(_r)
 }
 
-// DepthDataByReplacingDepthDataMapWithPixelBufferError returns a derivative depth data object by replacing the depth data map.
-func (dd *DepthData) DepthDataByReplacingDepthDataMapWithPixelBufferError(pixelBuffer unsafe.Pointer) (result *DepthData, err error) {
+// DepthDataByReplacingDepthDataMapWithPixelBuffer returns a derivative depth data object by replacing the depth data map.
+func (dd *DepthData) DepthDataByReplacingDepthDataMapWithPixelBuffer(pixelBuffer unsafe.Pointer) (result *DepthData, err error) {
+	defer runtime.KeepAlive(dd)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("depthDataByReplacingDepthDataMapWithPixelBuffer:error:"), pixelBuffer, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -93,6 +101,7 @@ func (dd *DepthData) DepthDataByReplacingDepthDataMapWithPixelBufferError(pixelB
 
 // DictionaryRepresentationForAuxiliaryDataType returns a dictionary representation of the depth data suitable for writing into an image file.
 func (dd *DepthData) DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) obj.Object {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("dictionaryRepresentationForAuxiliaryDataType:"), purego.NSString(outAuxDataType))
 	return obj.Wrap(_r)
 }
@@ -101,36 +110,42 @@ func (dd *DepthData) DictionaryRepresentationForAuxiliaryDataType(outAuxDataType
 //
 // AvailableDepthDataTypes returns the collection as a Go slice.
 func (dd *DepthData) AvailableDepthDataTypes() []obj.Object {
+	defer runtime.KeepAlive(dd)
 	_arr := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("availableDepthDataTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DepthDataType specifies the pixel format type of this depth data object's internal map. One of kCVPixelFormatType_DisparityFloat16, kCVPixelFormatType_DisparityFloat32, kCVPixelFormatType_DepthFloat16, or kCVPixelFormatType_DepthFloat32.
 func (dd *DepthData) DepthDataType() int {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[int](objref.IDOf(dd), objc.RegisterName("depthDataType"))
 	return _r
 }
 
 // DepthDataQuality specifies the overall quality of the depth data map's values. See AVDepthDataQuality documentation for more information.
 func (dd *DepthData) DepthDataQuality() DepthDataQuality {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[DepthDataQuality](objref.IDOf(dd), objc.RegisterName("depthDataQuality"))
 	return _r
 }
 
 // IsDepthDataFiltered reports whether the depth data pixel buffer map contains filtered (hole-filled) data. By setting either AVCaptureDepthDataOutput's filteringEnabled property or AVCapturePhotoSettings' depthDataFiltered property to true, the resulting depth data are filtered to remove invalid pixel values that may be present due to a variety of factors including low light and lens occlusion. If you've requested depth data filtering, all depth data holes are filled. Note that filtering the depth data makes it more usable for applying effects, but alters the data such that it may no longer be suitable for computer vision tasks. Unfiltered depth maps present missing data as NaN.
 func (dd *DepthData) IsDepthDataFiltered() bool {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[bool](objref.IDOf(dd), objc.RegisterName("isDepthDataFiltered"))
 	return _r
 }
 
 // DepthDataAccuracy specifies the accuracy of the units in the depth data map's values. See AVDepthDataAccuracy documentation for more information.
 func (dd *DepthData) DepthDataAccuracy() DepthDataAccuracy {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[DepthDataAccuracy](objref.IDOf(dd), objc.RegisterName("depthDataAccuracy"))
 	return _r
 }
 
 // CameraCalibrationData returns the calibration data of the camera with which AVDepthData map's values are aligned. See AVCameraCalibrationData for more information. This property may return nil if no camera calibration data is available for the depth data.
 func (dd *DepthData) CameraCalibrationData() *CameraCalibrationData {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("cameraCalibrationData"))
 	return CameraCalibrationDataFromID(_r)
 }

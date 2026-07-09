@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,6 +51,7 @@ func nNScaleNodeAdopt(id objc.ID) *NNScaleNode {
 
 // NewNNScaleNodeWithSourceOutputSize init a node to convert a MPSImage to the desired size
 func NewNNScaleNodeWithSourceOutputSize(sourceNode obj.Object, size metal.MTLSize) *NNScaleNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNScaleNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:outputSize:"), objref.IDOf(sourceNode), size)
 	return nNScaleNodeAdopt(_id)

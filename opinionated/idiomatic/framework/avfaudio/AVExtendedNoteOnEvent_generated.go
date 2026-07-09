@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -91,30 +93,35 @@ func (enoe *ExtendedNoteOnEvent) WithDuration(duration float64) *ExtendedNoteOnE
 
 // MidiNote returns the midi note.
 func (enoe *ExtendedNoteOnEvent) MidiNote() float32 {
+	defer runtime.KeepAlive(enoe)
 	_r := objc.Send[float32](objref.IDOf(enoe), objc.RegisterName("midiNote"))
 	return _r
 }
 
 // Velocity returns the velocity.
 func (enoe *ExtendedNoteOnEvent) Velocity() float32 {
+	defer runtime.KeepAlive(enoe)
 	_r := objc.Send[float32](objref.IDOf(enoe), objc.RegisterName("velocity"))
 	return _r
 }
 
 // InstrumentID returns the instrument ID.
 func (enoe *ExtendedNoteOnEvent) InstrumentID() int {
+	defer runtime.KeepAlive(enoe)
 	_r := objc.Send[int](objref.IDOf(enoe), objc.RegisterName("instrumentID"))
 	return _r
 }
 
 // GroupID returns the group ID.
 func (enoe *ExtendedNoteOnEvent) GroupID() int {
+	defer runtime.KeepAlive(enoe)
 	_r := objc.Send[int](objref.IDOf(enoe), objc.RegisterName("groupID"))
 	return _r
 }
 
 // Duration returns the duration.
 func (enoe *ExtendedNoteOnEvent) Duration() float64 {
+	defer runtime.KeepAlive(enoe)
 	_r := objc.Send[float64](objref.IDOf(enoe), objc.RegisterName("duration"))
 	return _r
 }

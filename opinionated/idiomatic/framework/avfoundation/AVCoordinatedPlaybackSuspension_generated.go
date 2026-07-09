@@ -5,8 +5,12 @@
 package avfoundation
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +52,27 @@ func coordinatedPlaybackSuspensionAdopt(id objc.ID) *CoordinatedPlaybackSuspensi
 
 // Description returns the object's -description text.
 func (cps *CoordinatedPlaybackSuspension) Description() string {
+	defer runtime.KeepAlive(cps)
 	return rt.Description(objref.IDOf(cps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cps *CoordinatedPlaybackSuspension) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cps *CoordinatedPlaybackSuspension) IsKind(className string) bool {
+	defer runtime.KeepAlive(cps)
 	return rt.IsKind(objref.IDOf(cps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cps *CoordinatedPlaybackSuspension) String() string {
+	defer runtime.KeepAlive(cps)
 	return rt.Description(objref.IDOf(cps))
 }
 
@@ -75,22 +84,26 @@ func NewCoordinatedPlaybackSuspension() *CoordinatedPlaybackSuspension {
 
 // End ends a suspension.
 func (cps *CoordinatedPlaybackSuspension) End() {
+	defer runtime.KeepAlive(cps)
 	objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("end"))
 }
 
 // EndProposingNewTime ends a suspension and proposes a new playback time to the group.
 func (cps *CoordinatedPlaybackSuspension) EndProposingNewTime(time_ coremedia.CMTime) {
+	defer runtime.KeepAlive(cps)
 	objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("endProposingNewTime:"), time_)
 }
 
 // Reason returns the reason for the suspension. This will be communicated to other participants while coordination is suspended.
-func (cps *CoordinatedPlaybackSuspension) Reason() obj.Object {
+func (cps *CoordinatedPlaybackSuspension) Reason() *foundation.String {
+	defer runtime.KeepAlive(cps)
 	_r := objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("reason"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // BeginDate returns the begin time of the suspension.
-func (cps *CoordinatedPlaybackSuspension) BeginDate() obj.Object {
+func (cps *CoordinatedPlaybackSuspension) BeginDate() time.Time {
+	defer runtime.KeepAlive(cps)
 	_r := objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("beginDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }

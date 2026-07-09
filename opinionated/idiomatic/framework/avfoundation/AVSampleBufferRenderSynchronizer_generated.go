@@ -5,10 +5,12 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func sampleBufferRenderSynchronizerAdopt(id objc.ID) *SampleBufferRenderSynchron
 
 // Description returns the object's -description text.
 func (sbrs *SampleBufferRenderSynchronizer) Description() string {
+	defer runtime.KeepAlive(sbrs)
 	return rt.Description(objref.IDOf(sbrs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sbrs *SampleBufferRenderSynchronizer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sbrs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sbrs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sbrs *SampleBufferRenderSynchronizer) IsKind(className string) bool {
+	defer runtime.KeepAlive(sbrs)
 	return rt.IsKind(objref.IDOf(sbrs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sbrs *SampleBufferRenderSynchronizer) String() string {
+	defer runtime.KeepAlive(sbrs)
 	return rt.Description(objref.IDOf(sbrs))
 }
 
@@ -95,51 +102,62 @@ func (sbrs *SampleBufferRenderSynchronizer) WithIntendedSpatialAudioExperience(i
 
 // CurrentTime returns the current time of the synchronizer.
 func (sbrs *SampleBufferRenderSynchronizer) CurrentTime() coremedia.CMTime {
+	defer runtime.KeepAlive(sbrs)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(sbrs), objc.RegisterName("currentTime"))
 	return _r
 }
 
 // SetRateTime sets the renderer’s time and rate.
 func (sbrs *SampleBufferRenderSynchronizer) SetRateTime(rate float32, time_ coremedia.CMTime) {
+	defer runtime.KeepAlive(sbrs)
 	objc.Send[objc.ID](objref.IDOf(sbrs), objc.RegisterName("setRate:time:"), rate, time_)
 }
 
 // SetRateTimeAtHostTime sets the playback rate and the relationship between the current time and host time.
 func (sbrs *SampleBufferRenderSynchronizer) SetRateTimeAtHostTime(rate float32, time_ coremedia.CMTime, hostTime coremedia.CMTime) {
+	defer runtime.KeepAlive(sbrs)
 	objc.Send[objc.ID](objref.IDOf(sbrs), objc.RegisterName("setRate:time:atHostTime:"), rate, time_, hostTime)
 }
 
 // Timebase returns the synchronizer's rendering timebase, which governs how time stamps are interpreted. By default, this timebase will be driven by the clock of an added AVSampleBufferAudioRenderer. If no AVSampleBufferAudioRenderer has been added, the source clock will be the host time clock (mach_absolute_time with the appropriate timescale conversion; this is the same as Core Animation's CACurrentMediaTime). The timebase is a read-only timebase. Use the rate property and corresponding methods to adjust the timebase.
 func (sbrs *SampleBufferRenderSynchronizer) Timebase() obj.Object {
+	defer runtime.KeepAlive(sbrs)
 	_r := objc.Send[objc.ID](objref.IDOf(sbrs), objc.RegisterName("timebase"))
 	return obj.Wrap(_r)
 }
 
 // Rate returns playback rate. Indicates the current rate of rendering. A value of 0.0 means "stopped"; a value of 1.0 means "play at the natural rate of the media". Must be greater than or equal to 0.0.
 func (sbrs *SampleBufferRenderSynchronizer) Rate() float32 {
+	defer runtime.KeepAlive(sbrs)
 	_r := objc.Send[float32](objref.IDOf(sbrs), objc.RegisterName("rate"))
 	return _r
 }
 
 // DelaysRateChangeUntilHasSufficientMediaData reports whether the playback should be started immediately on rate change request. If set to true, playback will be delayed if the value of hasSufficientMediaDataForReliablePlaybackStart of any added renderer is false. If set to false, playback will attempt to start immediately regardless of the value of hasSufficientMediaDataForReliablePlaybackStart of added renderers. Default is true.
 func (sbrs *SampleBufferRenderSynchronizer) DelaysRateChangeUntilHasSufficientMediaData() bool {
+	defer runtime.KeepAlive(sbrs)
 	_r := objc.Send[bool](objref.IDOf(sbrs), objc.RegisterName("delaysRateChangeUntilHasSufficientMediaData"))
 	return _r
 }
 
 // Renderers returns array of id<AVQueuedSampleBufferRendering> currently attached to the synchronizer. A list of renderers added to and not removed from the synchronizer. The list also includes renderers that have been scheduled to be removed but have not yet been removed. This property is not KVO observable.
 func (sbrs *SampleBufferRenderSynchronizer) Renderers() []obj.Object {
+	defer runtime.KeepAlive(sbrs)
 	_r := objc.Send[objc.ID](objref.IDOf(sbrs), objc.RegisterName("renderers"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AddBoundaryTimeObserverForTimesQueueUsing requests invocation of a block when specified times are traversed during normal rendering.
-func (sbrs *SampleBufferRenderSynchronizer) AddBoundaryTimeObserverForTimesQueueUsing(times []obj.Object, queue obj.Object, block func()) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(sbrs), objc.RegisterName("addBoundaryTimeObserverForTimes:queue:usingBlock:"), purego.SliceToNSArray(times, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block) { block() }))
+func (sbrs *SampleBufferRenderSynchronizer) AddBoundaryTimeObserverForTimesQueueUsing(times []*foundation.Value, queue obj.Object, block func()) obj.Object {
+	defer runtime.KeepAlive(sbrs)
+	defer runtime.KeepAlive(queue)
+	_r := objc.Send[objc.ID](objref.IDOf(sbrs), objc.RegisterName("addBoundaryTimeObserverForTimes:queue:usingBlock:"), purego.SliceToNSArray(times, func(_v *foundation.Value) objc.ID { return objref.IDOf(_v) }), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block) { block() }))
 	return obj.Wrap(_r)
 }
 
 // RemoveTimeObserver cancels the specified time observer.
 func (sbrs *SampleBufferRenderSynchronizer) RemoveTimeObserver(observer obj.Object) {
+	defer runtime.KeepAlive(sbrs)
+	defer runtime.KeepAlive(observer)
 	objc.Send[objc.ID](objref.IDOf(sbrs), objc.RegisterName("removeTimeObserver:"), objref.IDOf(observer))
 }

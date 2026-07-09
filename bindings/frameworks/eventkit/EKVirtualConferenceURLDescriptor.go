@@ -35,8 +35,8 @@ func EKVirtualConferenceURLDescriptorFromID(id objc.ID) *EKVirtualConferenceURLD
 }
 
 // Creates a URL descriptor with the given title and URL.
-func (o *EKVirtualConferenceURLDescriptor) InitWithTitleURL(title *foundation.NSString, uRL *foundation.NSURL) *EKVirtualConferenceURLDescriptor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _eKVirtualConferenceURLDescriptorSelInitWithTitleURL, title.Ptr(), uRL.Ptr())
+func (o *EKVirtualConferenceURLDescriptor) InitWithTitleURL(title *foundation.NSString, url *foundation.NSURL) *EKVirtualConferenceURLDescriptor {
+	_ret := objc.Send[objc.ID](o.Ptr(), _eKVirtualConferenceURLDescriptorSelInitWithTitleURL, title.Ptr(), url.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

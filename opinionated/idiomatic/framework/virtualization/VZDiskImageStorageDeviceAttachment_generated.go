@@ -5,12 +5,12 @@
 package virtualization
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -50,8 +50,8 @@ func diskImageStorageDeviceAttachmentAdopt(id objc.ID) *DiskImageStorageDeviceAt
 	return x
 }
 
-// NewDiskImageStorageDeviceAttachmentWithURLReadOnlyError creates the attachment object from the specified disk image.
-func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyError(url string, readOnly bool) (result *DiskImageStorageDeviceAttachment, err error) {
+// NewDiskImageStorageDeviceAttachmentWithURLReadOnly creates the attachment object from the specified disk image.
+func NewDiskImageStorageDeviceAttachmentWithURLReadOnly(url string, readOnly bool) (result *DiskImageStorageDeviceAttachment, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZDiskImageStorageDeviceAttachment")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:readOnly:error:"), rt.FileURL(url), readOnly, unsafe.Pointer(&_nsErr))
@@ -61,8 +61,8 @@ func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyError(url string, readOnl
 	return diskImageStorageDeviceAttachmentAdopt(_id), nil
 }
 
-// NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizationModeError initialize the attachment from a local file URL.
-func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizationModeError(url string, readOnly bool, cachingMode DiskImageCachingMode, synchronizationMode DiskImageSynchronizationMode) (result *DiskImageStorageDeviceAttachment, err error) {
+// NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizationMode initialize the attachment from a local file URL.
+func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizationMode(url string, readOnly bool, cachingMode DiskImageCachingMode, synchronizationMode DiskImageSynchronizationMode) (result *DiskImageStorageDeviceAttachment, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZDiskImageStorageDeviceAttachment")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:readOnly:cachingMode:synchronizationMode:error:"), rt.FileURL(url), readOnly, cachingMode, synchronizationMode, unsafe.Pointer(&_nsErr))
@@ -73,25 +73,29 @@ func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizatio
 }
 
 // URL returns URL of the underlying disk image.
-func (disda *DiskImageStorageDeviceAttachment) URL() obj.Object {
+func (disda *DiskImageStorageDeviceAttachment) URL() string {
+	defer runtime.KeepAlive(disda)
 	_r := objc.Send[objc.ID](objref.IDOf(disda), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // IsReadOnly reports whether the underlying disk image is read-only.
 func (disda *DiskImageStorageDeviceAttachment) IsReadOnly() bool {
+	defer runtime.KeepAlive(disda)
 	_r := objc.Send[bool](objref.IDOf(disda), objc.RegisterName("isReadOnly"))
 	return _r
 }
 
 // CachingMode returns how disk image data is cached by the host.
 func (disda *DiskImageStorageDeviceAttachment) CachingMode() DiskImageCachingMode {
+	defer runtime.KeepAlive(disda)
 	_r := objc.Send[DiskImageCachingMode](objref.IDOf(disda), objc.RegisterName("cachingMode"))
 	return _r
 }
 
 // SynchronizationMode returns the mode in which the disk image synchronizes data with the underlying storage device.
 func (disda *DiskImageStorageDeviceAttachment) SynchronizationMode() DiskImageSynchronizationMode {
+	defer runtime.KeepAlive(disda)
 	_r := objc.Send[DiskImageSynchronizationMode](objref.IDOf(disda), objc.RegisterName("synchronizationMode"))
 	return _r
 }

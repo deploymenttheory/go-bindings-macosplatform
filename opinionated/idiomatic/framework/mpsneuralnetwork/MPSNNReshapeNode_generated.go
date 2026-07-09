@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func nNReshapeNodeAdopt(id objc.ID) *NNReshapeNode {
 
 // NewNNReshapeNodeWithSourceResultWidthResultHeightResultFeatureChannels init a node representing a MPSNNReshape kernel
 func NewNNReshapeNodeWithSourceResultWidthResultHeightResultFeatureChannels(source *NNImageNode, resultWidth int, resultHeight int, resultFeatureChannels int) *NNReshapeNode {
+	defer runtime.KeepAlive(source)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNReshapeNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:resultWidth:resultHeight:resultFeatureChannels:"), objref.IDOf(source), resultWidth, resultHeight, resultFeatureChannels)
 	return nNReshapeNodeAdopt(_id)

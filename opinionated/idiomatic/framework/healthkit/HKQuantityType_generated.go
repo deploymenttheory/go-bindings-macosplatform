@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,14 +53,17 @@ func NewQuantityType() *QuantityType {
 	return quantityTypeAdopt(_id)
 }
 
-// IsCompatibleWithUnit returns a Boolean value that indicates whether the quantity type is compatible with the given unit.
-func (qt *QuantityType) IsCompatibleWithUnit(unit *Unit) bool {
+// IsCompatible returns a Boolean value that indicates whether the quantity type is compatible with the given unit.
+func (qt *QuantityType) IsCompatible(unit *Unit) bool {
+	defer runtime.KeepAlive(qt)
+	defer runtime.KeepAlive(unit)
 	_r := objc.Send[bool](objref.IDOf(qt), objc.RegisterName("isCompatibleWithUnit:"), objref.IDOf(unit))
 	return _r
 }
 
 // AggregationStyle returns the aggregation style.
 func (qt *QuantityType) AggregationStyle() QuantityAggregationStyle {
+	defer runtime.KeepAlive(qt)
 	_r := objc.Send[QuantityAggregationStyle](objref.IDOf(qt), objc.RegisterName("aggregationStyle"))
 	return _r
 }

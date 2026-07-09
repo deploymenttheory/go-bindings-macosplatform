@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func uRLAuthenticationChallengeAdopt(id objc.ID) *URLAuthenticationChallenge {
 
 // Description returns the object's -description text.
 func (uac *URLAuthenticationChallenge) Description() string {
+	defer runtime.KeepAlive(uac)
 	return rt.Description(objref.IDOf(uac))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (uac *URLAuthenticationChallenge) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(uac)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(uac), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (uac *URLAuthenticationChallenge) IsKind(className string) bool {
+	defer runtime.KeepAlive(uac)
 	return rt.IsKind(objref.IDOf(uac), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (uac *URLAuthenticationChallenge) String() string {
+	defer runtime.KeepAlive(uac)
 	return rt.Description(objref.IDOf(uac))
 }
 
@@ -81,31 +87,35 @@ func (uac *URLAuthenticationChallenge) WithObservationInfo(observationInfo unsaf
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (uac *URLAuthenticationChallenge) WithScriptingProperties(scriptingProperties obj.Object) *URLAuthenticationChallenge {
-	objc.Send[objc.ID](objref.IDOf(uac), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (uac *URLAuthenticationChallenge) WithScriptingProperties(scriptingProperties map[string]obj.Object) *URLAuthenticationChallenge {
+	objc.Send[objc.ID](objref.IDOf(uac), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return uac
 }
 
 // ProtectionSpace get a description of the protection space that requires authentication
 func (uac *URLAuthenticationChallenge) ProtectionSpace() *URLProtectionSpace {
+	defer runtime.KeepAlive(uac)
 	_r := objc.Send[objc.ID](objref.IDOf(uac), objc.RegisterName("protectionSpace"))
 	return URLProtectionSpaceFromID(_r)
 }
 
 // ProposedCredential get the proposed credential for this challenge proposedCredential may be nil, if there is no default credential to use for this challenge (either stored or in the URL). If the credential is not nil and returns YES for hasPassword, this means the NSURLConnection thinks the credential is ready to use as-is. If it returns NO for hasPassword, then the credential is not ready to use as-is, but provides a default username the client could use when prompting.
 func (uac *URLAuthenticationChallenge) ProposedCredential() *URLCredential {
+	defer runtime.KeepAlive(uac)
 	_r := objc.Send[objc.ID](objref.IDOf(uac), objc.RegisterName("proposedCredential"))
 	return URLCredentialFromID(_r)
 }
 
 // PreviousFailureCount get count of previous failed authentication attempts
 func (uac *URLAuthenticationChallenge) PreviousFailureCount() int {
+	defer runtime.KeepAlive(uac)
 	_r := objc.Send[int](objref.IDOf(uac), objc.RegisterName("previousFailureCount"))
 	return _r
 }
 
 // FailureResponse get the response representing authentication failure. If there was a previous authentication failure, and this protocol uses responses to indicate authentication failure, then this method will return the response. Otherwise it will return nil.
 func (uac *URLAuthenticationChallenge) FailureResponse() *URLResponse {
+	defer runtime.KeepAlive(uac)
 	_r := objc.Send[objc.ID](objref.IDOf(uac), objc.RegisterName("failureResponse"))
 	return URLResponseFromID(_r)
 }

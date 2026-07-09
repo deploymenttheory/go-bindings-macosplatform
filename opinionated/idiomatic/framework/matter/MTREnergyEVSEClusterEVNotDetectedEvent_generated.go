@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTREnergyEVSEClusterEVNotDetectedEventAdopt(id objc.ID) *MTREnergyEVSEClust
 
 // Description returns the object's -description text.
 func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) Description() string {
+	defer runtime.KeepAlive(meecende)
 	return rt.Description(objref.IDOf(meecende))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(meecende)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(meecende), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(meecende)
 	return rt.IsKind(objref.IDOf(meecende), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) String() string {
+	defer runtime.KeepAlive(meecende)
 	return rt.Description(objref.IDOf(meecende))
 }
 
@@ -72,48 +80,56 @@ func NewMTREnergyEVSEClusterEVNotDetectedEvent() *MTREnergyEVSEClusterEVNotDetec
 
 // WithSessionID sets the session ID.
 func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent {
+	defer runtime.KeepAlive(sessionID)
 	objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 	return meecende
 }
 
 // WithState sets the state.
 func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) WithState(state obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent {
+	defer runtime.KeepAlive(state)
 	objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("setState:"), objref.IDOf(state))
 	return meecende
 }
 
 // WithSessionDuration sets the session duration.
 func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) WithSessionDuration(sessionDuration obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent {
+	defer runtime.KeepAlive(sessionDuration)
 	objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("setSessionDuration:"), objref.IDOf(sessionDuration))
 	return meecende
 }
 
 // WithSessionEnergyCharged sets the session energy charged.
 func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) WithSessionEnergyCharged(sessionEnergyCharged obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent {
+	defer runtime.KeepAlive(sessionEnergyCharged)
 	objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("setSessionEnergyCharged:"), objref.IDOf(sessionEnergyCharged))
 	return meecende
 }
 
 // SessionID returns the session ID.
-func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) SessionID() obj.Object {
+func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) SessionID() *foundation.Number {
+	defer runtime.KeepAlive(meecende)
 	_r := objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("sessionID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // State returns the state.
-func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) State() obj.Object {
+func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) State() *foundation.Number {
+	defer runtime.KeepAlive(meecende)
 	_r := objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("state"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // SessionDuration returns the session duration.
-func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) SessionDuration() obj.Object {
+func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) SessionDuration() *foundation.Number {
+	defer runtime.KeepAlive(meecende)
 	_r := objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("sessionDuration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // SessionEnergyCharged returns the session energy charged.
-func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) SessionEnergyCharged() obj.Object {
+func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) SessionEnergyCharged() *foundation.Number {
+	defer runtime.KeepAlive(meecende)
 	_r := objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("sessionEnergyCharged"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

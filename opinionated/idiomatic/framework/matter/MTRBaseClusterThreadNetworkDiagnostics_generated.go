@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterThreadNetworkDiagnosticsAdopt(id objc.ID) *MTRBaseClusterThre
 
 // NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterThreadNetworkDiagnostics {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterThreadNetworkDiagnostics")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterThreadNetworkDiagnosticsAdopt(_id)
@@ -56,6 +60,8 @@ func NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue(device *
 
 // NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointQueue creates a new MTRBaseClusterThreadNetworkDiagnostics.
 func NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterThreadNetworkDiagnostics {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterThreadNetworkDiagnostics")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRBaseClusterThreadNetworkDiagnosticsAdopt(_id)
@@ -65,6 +71,7 @@ func NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointQueue(device *MT
 //
 // ReadAttributeChannelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -90,6 +97,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelWithCo
 //
 // SubscribeAttributeChannelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -115,6 +124,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelW
 //
 // ReadAttributeRoutingRoleWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRoutingRoleWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -140,6 +150,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRoutingRoleWi
 //
 // SubscribeAttributeRoutingRoleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingRoleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -165,6 +177,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingR
 //
 // ReadAttributeNetworkNameWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNetworkNameWithCompletion(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val string
 		err error
@@ -190,6 +203,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNetworkNameWi
 //
 // SubscribeAttributeNetworkNameWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -215,6 +230,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkN
 //
 // ReadAttributePanIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePanIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -240,6 +256,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePanIDWithComp
 //
 // SubscribeAttributePanIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -265,6 +283,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIDWit
 //
 // ReadAttributeExtendedPanIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -290,6 +309,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanID
 //
 // SubscribeAttributeExtendedPanIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtendedPanIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -315,6 +336,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtended
 //
 // ReadAttributeMeshLocalPrefixWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefixWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -340,6 +362,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPref
 //
 // SubscribeAttributeMeshLocalPrefixWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLocalPrefixWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -365,6 +389,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLoca
 //
 // ReadAttributeOverrunCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOverrunCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -390,6 +415,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOverrunCountW
 //
 // SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -415,6 +442,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunC
 //
 // ReadAttributeNeighborTableWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -440,6 +468,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNeighborTable
 //
 // SubscribeAttributeNeighborTableWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighborTableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,6 +495,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighbor
 //
 // ReadAttributeRouteTableWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouteTableWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -490,6 +521,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouteTableWit
 //
 // SubscribeAttributeRouteTableWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -515,6 +548,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTab
 //
 // ReadAttributePartitionIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -540,6 +574,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIDWi
 //
 // SubscribeAttributePartitionIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -565,6 +601,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitio
 //
 // ReadAttributeWeightingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeWeightingWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -590,6 +627,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeWeightingWith
 //
 // SubscribeAttributeWeightingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -615,6 +654,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightin
 //
 // ReadAttributeDataVersionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDataVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -640,6 +680,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDataVersionWi
 //
 // SubscribeAttributeDataVersionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -665,6 +707,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVers
 //
 // ReadAttributeStableDataVersionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -690,6 +733,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeStableDataVer
 //
 // SubscribeAttributeStableDataVersionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDataVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -715,6 +760,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDa
 //
 // ReadAttributeLeaderRouterIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -740,6 +786,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterI
 //
 // SubscribeAttributeLeaderRouterIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRouterIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -765,6 +813,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRo
 //
 // ReadAttributeDetachedRoleCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -790,6 +839,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleC
 //
 // SubscribeAttributeDetachedRoleCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetachedRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -815,6 +866,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetached
 //
 // ReadAttributeChildRoleCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -840,6 +892,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCoun
 //
 // SubscribeAttributeChildRoleCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -865,6 +919,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRol
 //
 // ReadAttributeRouterRoleCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -890,6 +945,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCou
 //
 // SubscribeAttributeRouterRoleCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -915,6 +972,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRo
 //
 // ReadAttributeLeaderRoleCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -940,6 +998,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCou
 //
 // SubscribeAttributeLeaderRoleCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -965,6 +1025,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRo
 //
 // ReadAttributeAttachAttemptCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -990,6 +1051,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttachAttempt
 //
 // SubscribeAttributeAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1015,6 +1078,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAt
 //
 // ReadAttributePartitionIDChangeCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIDChangeCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,6 +1104,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIDCh
 //
 // SubscribeAttributePartitionIDChangeCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIDChangeCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1065,6 +1131,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitio
 //
 // ReadAttributeBetterPartitionAttachAttemptCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAttachAttemptCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1090,6 +1157,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeBetterPartiti
 //
 // SubscribeAttributeBetterPartitionAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPartitionAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1115,6 +1184,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPa
 //
 // ReadAttributeParentChangeCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1140,6 +1210,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeParentChangeC
 //
 // SubscribeAttributeParentChangeCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentChangeCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1165,6 +1237,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentCh
 //
 // ReadAttributeTxTotalCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1190,6 +1263,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCountW
 //
 // SubscribeAttributeTxTotalCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1215,6 +1290,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalC
 //
 // ReadAttributeTxUnicastCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1240,6 +1316,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCoun
 //
 // SubscribeAttributeTxUnicastCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1265,6 +1343,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicas
 //
 // ReadAttributeTxBroadcastCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1290,6 +1369,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCo
 //
 // SubscribeAttributeTxBroadcastCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadcastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1315,6 +1396,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadc
 //
 // ReadAttributeTxAckRequestedCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1340,6 +1422,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequeste
 //
 // SubscribeAttributeTxAckRequestedCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckRequestedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1365,6 +1449,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckReq
 //
 // ReadAttributeTxAckedCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1390,6 +1475,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCountW
 //
 // SubscribeAttributeTxAckedCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1415,6 +1502,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedC
 //
 // ReadAttributeTxNoAckRequestedCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1440,6 +1528,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckReques
 //
 // SubscribeAttributeTxNoAckRequestedCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckRequestedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1465,6 +1555,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckR
 //
 // ReadAttributeTxDataCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1490,6 +1581,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataCountWi
 //
 // SubscribeAttributeTxDataCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1515,6 +1608,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCo
 //
 // ReadAttributeTxDataPollCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1540,6 +1634,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCou
 //
 // SubscribeAttributeTxDataPollCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPollCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1565,6 +1661,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPo
 //
 // ReadAttributeTxBeaconCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1590,6 +1687,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCount
 //
 // SubscribeAttributeTxBeaconCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1615,6 +1714,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeacon
 //
 // ReadAttributeTxBeaconRequestCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1640,6 +1740,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconReque
 //
 // SubscribeAttributeTxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1665,6 +1767,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeacon
 //
 // ReadAttributeTxOtherCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1690,6 +1793,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCountW
 //
 // SubscribeAttributeTxOtherCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1715,6 +1820,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherC
 //
 // ReadAttributeTxRetryCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1740,6 +1846,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCountW
 //
 // SubscribeAttributeTxRetryCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1765,6 +1873,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryC
 //
 // ReadAttributeTxDirectMaxRetryExpiryCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryExpiryCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1790,6 +1899,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRe
 //
 // SubscribeAttributeTxDirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1815,6 +1926,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirect
 //
 // ReadAttributeTxIndirectMaxRetryExpiryCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetryExpiryCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1840,6 +1952,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMax
 //
 // SubscribeAttributeTxIndirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1865,6 +1979,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndire
 //
 // ReadAttributeTxErrCcaCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1890,6 +2005,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCount
 //
 // SubscribeAttributeTxErrCcaCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCcaCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1915,6 +2032,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCca
 //
 // ReadAttributeTxErrAbortCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1940,6 +2058,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCou
 //
 // SubscribeAttributeTxErrAbortCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbortCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1965,6 +2085,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbo
 //
 // ReadAttributeTxErrBusyChannelCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1990,6 +2111,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChan
 //
 // SubscribeAttributeTxErrBusyChannelCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBusyChannelCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2015,6 +2138,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBus
 //
 // ReadAttributeRxTotalCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2040,6 +2164,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCountW
 //
 // SubscribeAttributeRxTotalCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2065,6 +2191,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalC
 //
 // ReadAttributeRxUnicastCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2090,6 +2217,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCoun
 //
 // SubscribeAttributeRxUnicastCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2115,6 +2244,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicas
 //
 // ReadAttributeRxBroadcastCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2140,6 +2270,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCo
 //
 // SubscribeAttributeRxBroadcastCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadcastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2165,6 +2297,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadc
 //
 // ReadAttributeRxDataCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2190,6 +2323,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataCountWi
 //
 // SubscribeAttributeRxDataCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2215,6 +2350,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCo
 //
 // ReadAttributeRxDataPollCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2240,6 +2376,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCou
 //
 // SubscribeAttributeRxDataPollCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPollCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2265,6 +2403,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPo
 //
 // ReadAttributeRxBeaconCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2290,6 +2429,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCount
 //
 // SubscribeAttributeRxBeaconCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2315,6 +2456,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeacon
 //
 // ReadAttributeRxBeaconRequestCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2340,6 +2482,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconReque
 //
 // SubscribeAttributeRxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2365,6 +2509,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeacon
 //
 // ReadAttributeRxOtherCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2390,6 +2535,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCountW
 //
 // SubscribeAttributeRxOtherCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2415,6 +2562,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherC
 //
 // ReadAttributeRxAddressFilteredCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2440,6 +2588,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilt
 //
 // SubscribeAttributeRxAddressFilteredCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddressFilteredCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2465,6 +2615,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddres
 //
 // ReadAttributeRxDestAddrFilteredCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFilteredCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2490,6 +2641,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFil
 //
 // SubscribeAttributeRxDestAddrFilteredCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAddrFilteredCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2515,6 +2668,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAd
 //
 // ReadAttributeRxDuplicatedCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2540,6 +2694,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedC
 //
 // SubscribeAttributeRxDuplicatedCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplicatedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2565,6 +2721,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplic
 //
 // ReadAttributeRxErrNoFrameCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2590,6 +2747,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameC
 //
 // SubscribeAttributeRxErrNoFrameCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoFrameCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2615,6 +2774,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoF
 //
 // ReadAttributeRxErrUnknownNeighborCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighborCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2640,6 +2800,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownN
 //
 // SubscribeAttributeRxErrUnknownNeighborCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnknownNeighborCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2665,6 +2827,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnk
 //
 // ReadAttributeRxErrInvalidSrcAddrCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAddrCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2690,6 +2853,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidS
 //
 // SubscribeAttributeRxErrInvalidSrcAddrCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInvalidSrcAddrCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2715,6 +2880,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInv
 //
 // ReadAttributeRxErrSecCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2740,6 +2906,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCount
 //
 // SubscribeAttributeRxErrSecCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSecCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2765,6 +2933,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSec
 //
 // ReadAttributeRxErrFcsCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2790,6 +2959,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCount
 //
 // SubscribeAttributeRxErrFcsCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcsCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2815,6 +2986,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcs
 //
 // ReadAttributeRxErrOtherCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2840,6 +3012,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCou
 //
 // SubscribeAttributeRxErrOtherCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2865,6 +3039,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOth
 //
 // ReadAttributeActiveTimestampWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestampWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2890,6 +3065,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveTimesta
 //
 // SubscribeAttributeActiveTimestampWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2915,6 +3092,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTi
 //
 // ReadAttributePendingTimestampWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePendingTimestampWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2940,6 +3118,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePendingTimest
 //
 // SubscribeAttributePendingTimestampWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2965,6 +3145,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingT
 //
 // ReadAttributeDelayWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2990,6 +3171,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDelayWithComp
 //
 // SubscribeAttributeDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3015,6 +3198,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWit
 //
 // ReadAttributeSecurityPolicyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicyWithCompletion(ctx context.Context) (result *MTRThreadNetworkDiagnosticsClusterSecurityPolicy, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterSecurityPolicy
 		err error
@@ -3040,6 +3224,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolic
 //
 // SubscribeAttributeSecurityPolicyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurityPolicyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRThreadNetworkDiagnosticsClusterSecurityPolicy, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterSecurityPolicy
 		err error
@@ -3065,6 +3251,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurity
 //
 // ReadAttributeChannelPage0MaskWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0MaskWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3090,6 +3277,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0M
 //
 // SubscribeAttributeChannelPage0MaskWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelPage0MaskWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3115,6 +3304,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelP
 //
 // ReadAttributeOperationalDatasetComponentsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOperationalDatasetComponentsWithCompletion(ctx context.Context) (result *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents
 		err error
@@ -3140,6 +3330,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOperationalDa
 //
 // SubscribeAttributeOperationalDatasetComponentsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperationalDatasetComponentsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents
 		err error
@@ -3165,6 +3357,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperatio
 //
 // ReadAttributeActiveNetworkFaultsListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFaultsListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3190,6 +3383,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveNetwork
 //
 // SubscribeAttributeActiveNetworkFaultsListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNetworkFaultsListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3215,6 +3410,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNe
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3240,6 +3436,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeGeneratedComm
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3265,6 +3463,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGenerate
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3290,6 +3489,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAcceptedComma
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3315,6 +3516,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAccepted
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3340,6 +3542,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttributeList
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3365,6 +3569,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttribut
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3390,6 +3595,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeFeatureMapWit
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3415,6 +3622,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureM
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3440,6 +3648,8 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeClusterRevisi
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3465,6 +3675,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeClusterR
 //
 // ReadAttributeChannel blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannel(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3490,6 +3701,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannel(ctx c
 //
 // SubscribeAttributeChannelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3515,6 +3730,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelW
 //
 // ReadAttributeRoutingRole blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRoutingRole(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3540,6 +3756,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRoutingRole(c
 //
 // SubscribeAttributeRoutingRoleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingRoleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3565,6 +3785,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingR
 //
 // ReadAttributeNetworkName blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNetworkName(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val string
 		err error
@@ -3590,6 +3811,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNetworkName(c
 //
 // SubscribeAttributeNetworkNameWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkNameWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result string, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -3615,6 +3840,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkN
 //
 // ReadAttributePanID blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePanID(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3640,6 +3866,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePanID(ctx con
 //
 // SubscribeAttributePanIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3665,6 +3895,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIDWit
 //
 // ReadAttributeExtendedPanID blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanID(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3690,6 +3921,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanID
 //
 // SubscribeAttributeExtendedPanIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtendedPanIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3715,6 +3950,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtended
 //
 // ReadAttributeMeshLocalPrefix blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefix(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3740,6 +3976,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPref
 //
 // SubscribeAttributeMeshLocalPrefixWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLocalPrefixWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3765,6 +4005,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLoca
 //
 // ReadAttributeOverrunCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOverrunCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3790,6 +4031,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOverrunCount(
 //
 // SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3815,6 +4060,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunC
 //
 // ReadAttributeNeighborTableList blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3840,6 +4086,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNeighborTable
 //
 // SubscribeAttributeNeighborTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighborTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3865,6 +4115,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighbor
 //
 // ReadAttributeRouteTableList blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouteTableList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3890,6 +4141,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouteTableLis
 //
 // SubscribeAttributeRouteTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3915,6 +4170,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTab
 //
 // ReadAttributePartitionID blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionID(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3940,6 +4196,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionID(c
 //
 // SubscribeAttributePartitionIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3965,6 +4225,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitio
 //
 // ReadAttributeWeighting blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeWeighting(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3990,6 +4251,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeWeighting(ctx
 //
 // SubscribeAttributeWeightingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4015,6 +4280,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightin
 //
 // ReadAttributeDataVersion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDataVersion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4040,6 +4306,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDataVersion(c
 //
 // SubscribeAttributeDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4065,6 +4335,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVers
 //
 // ReadAttributeStableDataVersion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4090,6 +4361,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeStableDataVer
 //
 // SubscribeAttributeStableDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4115,6 +4390,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDa
 //
 // ReadAttributeLeaderRouterID blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterID(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4140,6 +4416,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterI
 //
 // SubscribeAttributeLeaderRouterIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRouterIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4165,6 +4445,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRo
 //
 // ReadAttributeDetachedRoleCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4190,6 +4471,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleC
 //
 // SubscribeAttributeDetachedRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetachedRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4215,6 +4500,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetached
 //
 // ReadAttributeChildRoleCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4240,6 +4526,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCoun
 //
 // SubscribeAttributeChildRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4265,6 +4555,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRol
 //
 // ReadAttributeRouterRoleCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4290,6 +4581,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCou
 //
 // SubscribeAttributeRouterRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4315,6 +4610,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRo
 //
 // ReadAttributeLeaderRoleCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4340,6 +4636,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCou
 //
 // SubscribeAttributeLeaderRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4365,6 +4665,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRo
 //
 // ReadAttributeAttachAttemptCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4390,6 +4691,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttachAttempt
 //
 // SubscribeAttributeAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4415,6 +4720,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAt
 //
 // ReadAttributePartitionIDChangeCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIDChangeCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4440,6 +4746,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIDCh
 //
 // SubscribeAttributePartitionIDChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIDChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4465,6 +4775,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitio
 //
 // ReadAttributeBetterPartitionAttachAttemptCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAttachAttemptCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4490,6 +4801,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeBetterPartiti
 //
 // SubscribeAttributeBetterPartitionAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPartitionAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4515,6 +4830,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPa
 //
 // ReadAttributeParentChangeCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4540,6 +4856,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeParentChangeC
 //
 // SubscribeAttributeParentChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4565,6 +4885,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentCh
 //
 // ReadAttributeTxTotalCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4590,6 +4911,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCount(
 //
 // SubscribeAttributeTxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4615,6 +4940,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalC
 //
 // ReadAttributeTxUnicastCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4640,6 +4966,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCoun
 //
 // SubscribeAttributeTxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4665,6 +4995,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicas
 //
 // ReadAttributeTxBroadcastCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4690,6 +5021,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCo
 //
 // SubscribeAttributeTxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4715,6 +5050,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadc
 //
 // ReadAttributeTxAckRequestedCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4740,6 +5076,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequeste
 //
 // SubscribeAttributeTxAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4765,6 +5105,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckReq
 //
 // ReadAttributeTxAckedCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4790,6 +5131,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCount(
 //
 // SubscribeAttributeTxAckedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4815,6 +5160,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedC
 //
 // ReadAttributeTxNoAckRequestedCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4840,6 +5186,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckReques
 //
 // SubscribeAttributeTxNoAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4865,6 +5215,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckR
 //
 // ReadAttributeTxDataCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4890,6 +5241,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataCount(c
 //
 // SubscribeAttributeTxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4915,6 +5270,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCo
 //
 // ReadAttributeTxDataPollCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4940,6 +5296,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCou
 //
 // SubscribeAttributeTxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4965,6 +5325,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPo
 //
 // ReadAttributeTxBeaconCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4990,6 +5351,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCount
 //
 // SubscribeAttributeTxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5015,6 +5380,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeacon
 //
 // ReadAttributeTxBeaconRequestCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5040,6 +5406,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconReque
 //
 // SubscribeAttributeTxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5065,6 +5435,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeacon
 //
 // ReadAttributeTxOtherCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5090,6 +5461,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCount(
 //
 // SubscribeAttributeTxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5115,6 +5490,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherC
 //
 // ReadAttributeTxRetryCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5140,6 +5516,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCount(
 //
 // SubscribeAttributeTxRetryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5165,6 +5545,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryC
 //
 // ReadAttributeTxDirectMaxRetryExpiryCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryExpiryCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5190,6 +5571,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRe
 //
 // SubscribeAttributeTxDirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5215,6 +5600,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirect
 //
 // ReadAttributeTxIndirectMaxRetryExpiryCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetryExpiryCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5240,6 +5626,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMax
 //
 // SubscribeAttributeTxIndirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5265,6 +5655,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndire
 //
 // ReadAttributeTxErrCcaCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5290,6 +5681,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCount
 //
 // SubscribeAttributeTxErrCcaCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCcaCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5315,6 +5710,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCca
 //
 // ReadAttributeTxErrAbortCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5340,6 +5736,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCou
 //
 // SubscribeAttributeTxErrAbortCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbortCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5365,6 +5765,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbo
 //
 // ReadAttributeTxErrBusyChannelCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5390,6 +5791,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChan
 //
 // SubscribeAttributeTxErrBusyChannelCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBusyChannelCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5415,6 +5820,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBus
 //
 // ReadAttributeRxTotalCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5440,6 +5846,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCount(
 //
 // SubscribeAttributeRxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5465,6 +5875,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalC
 //
 // ReadAttributeRxUnicastCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5490,6 +5901,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCoun
 //
 // SubscribeAttributeRxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5515,6 +5930,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicas
 //
 // ReadAttributeRxBroadcastCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5540,6 +5956,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCo
 //
 // SubscribeAttributeRxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5565,6 +5985,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadc
 //
 // ReadAttributeRxDataCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5590,6 +6011,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataCount(c
 //
 // SubscribeAttributeRxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5615,6 +6040,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCo
 //
 // ReadAttributeRxDataPollCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5640,6 +6066,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCou
 //
 // SubscribeAttributeRxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5665,6 +6095,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPo
 //
 // ReadAttributeRxBeaconCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5690,6 +6121,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCount
 //
 // SubscribeAttributeRxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5715,6 +6150,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeacon
 //
 // ReadAttributeRxBeaconRequestCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5740,6 +6176,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconReque
 //
 // SubscribeAttributeRxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5765,6 +6205,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeacon
 //
 // ReadAttributeRxOtherCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5790,6 +6231,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCount(
 //
 // SubscribeAttributeRxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5815,6 +6260,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherC
 //
 // ReadAttributeRxAddressFilteredCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5840,6 +6286,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilt
 //
 // SubscribeAttributeRxAddressFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddressFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5865,6 +6315,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddres
 //
 // ReadAttributeRxDestAddrFilteredCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFilteredCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5890,6 +6341,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFil
 //
 // SubscribeAttributeRxDestAddrFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAddrFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5915,6 +6370,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAd
 //
 // ReadAttributeRxDuplicatedCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5940,6 +6396,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedC
 //
 // SubscribeAttributeRxDuplicatedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplicatedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5965,6 +6425,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplic
 //
 // ReadAttributeRxErrNoFrameCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5990,6 +6451,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameC
 //
 // SubscribeAttributeRxErrNoFrameCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoFrameCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6015,6 +6480,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoF
 //
 // ReadAttributeRxErrUnknownNeighborCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighborCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6040,6 +6506,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownN
 //
 // SubscribeAttributeRxErrUnknownNeighborCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnknownNeighborCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6065,6 +6535,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnk
 //
 // ReadAttributeRxErrInvalidSrcAddrCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAddrCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6090,6 +6561,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidS
 //
 // SubscribeAttributeRxErrInvalidSrcAddrCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInvalidSrcAddrCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6115,6 +6590,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInv
 //
 // ReadAttributeRxErrSecCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6140,6 +6616,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCount
 //
 // SubscribeAttributeRxErrSecCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSecCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6165,6 +6645,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSec
 //
 // ReadAttributeRxErrFcsCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6190,6 +6671,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCount
 //
 // SubscribeAttributeRxErrFcsCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcsCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6215,6 +6700,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcs
 //
 // ReadAttributeRxErrOtherCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCount(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6240,6 +6726,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCou
 //
 // SubscribeAttributeRxErrOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6265,6 +6755,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOth
 //
 // ReadAttributeActiveTimestamp blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestamp(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6290,6 +6781,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveTimesta
 //
 // SubscribeAttributeActiveTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6315,6 +6810,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTi
 //
 // ReadAttributePendingTimestamp blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePendingTimestamp(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6340,6 +6836,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePendingTimest
 //
 // SubscribeAttributePendingTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6365,6 +6865,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingT
 //
 // ReadAttributeDelay blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDelay(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6390,6 +6891,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDelay(ctx con
 //
 // SubscribeAttributeDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6415,6 +6920,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWit
 //
 // ReadAttributeSecurityPolicy blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicy(ctx context.Context) (result *MTRThreadNetworkDiagnosticsClusterSecurityPolicy, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterSecurityPolicy
 		err error
@@ -6440,6 +6946,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolic
 //
 // SubscribeAttributeSecurityPolicyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurityPolicyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result *MTRThreadNetworkDiagnosticsClusterSecurityPolicy, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterSecurityPolicy
 		err error
@@ -6465,6 +6975,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurity
 //
 // ReadAttributeChannelPage0Mask blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0Mask(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6490,6 +7001,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0M
 //
 // SubscribeAttributeChannelPage0MaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelPage0MaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6515,6 +7030,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelP
 //
 // ReadAttributeOperationalDatasetComponents blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOperationalDatasetComponents(ctx context.Context) (result *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents
 		err error
@@ -6540,6 +7056,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOperationalDa
 //
 // SubscribeAttributeOperationalDatasetComponentsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperationalDatasetComponentsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents
 		err error
@@ -6565,6 +7085,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperatio
 //
 // ReadAttributeActiveNetworkFaultsList blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFaultsList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6590,6 +7111,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveNetwork
 //
 // SubscribeAttributeActiveNetworkFaultsListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNetworkFaultsListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6615,6 +7140,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNe
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6640,6 +7166,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeGeneratedComm
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6665,6 +7195,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGenerate
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6690,6 +7221,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAcceptedComma
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6715,6 +7250,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAccepted
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6740,6 +7276,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttributeList
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6765,6 +7305,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttribut
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6790,6 +7331,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeFeatureMap(ct
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6815,6 +7360,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureM
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
 	type _result struct {
 		val obj.Object
 		err error
@@ -6840,6 +7386,10 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeClusterRevisi
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctnd)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

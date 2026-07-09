@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func barcodeDescriptorAdopt(id objc.ID) *BarcodeDescriptor {
 
 // Description returns the object's -description text.
 func (bd *BarcodeDescriptor) Description() string {
+	defer runtime.KeepAlive(bd)
 	return rt.Description(objref.IDOf(bd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bd *BarcodeDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bd *BarcodeDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(bd)
 	return rt.IsKind(objref.IDOf(bd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bd *BarcodeDescriptor) String() string {
+	defer runtime.KeepAlive(bd)
 	return rt.Description(objref.IDOf(bd))
 }
 

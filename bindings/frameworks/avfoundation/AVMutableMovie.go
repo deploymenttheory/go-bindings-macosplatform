@@ -61,9 +61,9 @@ func AVMutableMovieFromID(id objc.ID) *AVMutableMovie {
 }
 
 // Returns a new mutable movie object from a movie header stored in a QuickTime movie file of ISO base media file.
-func AVMutableMovieMovieWithURLOptionsError(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVMutableMovie, error) {
+func AVMutableMovieMovieWithURLOptionsError(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVMutableMovie, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableMovie), _aVMutableMovieSelMovieWithURLOptionsError, uRL.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableMovie), _aVMutableMovieSelMovieWithURLOptionsError, url.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -74,9 +74,9 @@ func AVMutableMovieMovieWithURLOptionsError(uRL *foundation.NSURL, options *foun
 }
 
 // Creates a mutable movie object from a movie header stored in a QuickTime movie file of ISO base media file.
-func (o *AVMutableMovie) InitWithURLOptionsError(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVMutableMovie, error) {
+func (o *AVMutableMovie) InitWithURLOptionsError(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVMutableMovie, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelInitWithURLOptionsError, uRL.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelInitWithURLOptionsError, url.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

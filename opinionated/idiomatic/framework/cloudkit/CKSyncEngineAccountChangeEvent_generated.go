@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,18 +55,21 @@ func NewSyncEngineAccountChangeEvent() *SyncEngineAccountChangeEvent {
 
 // ChangeType returns the iCloud account's change type.
 func (seace *SyncEngineAccountChangeEvent) ChangeType() SyncEngineAccountChangeType {
+	defer runtime.KeepAlive(seace)
 	_r := objc.Send[SyncEngineAccountChangeType](objref.IDOf(seace), objc.RegisterName("changeType"))
 	return _r
 }
 
 // PreviousUser returns the previous iCloud account's record identifier. If the user just signed in, this is `nil`. If the user signed out or switched accounts, this is the old account's user record ID.
 func (seace *SyncEngineAccountChangeEvent) PreviousUser() *RecordID {
+	defer runtime.KeepAlive(seace)
 	_r := objc.Send[objc.ID](objref.IDOf(seace), objc.RegisterName("previousUser"))
 	return RecordIDFromID(_r)
 }
 
 // CurrentUser returns the current iCloud account's record identifier. If the user just signed in or switched accounts, this is the new user record ID. If the user signed out, this is `nil`.
 func (seace *SyncEngineAccountChangeEvent) CurrentUser() *RecordID {
+	defer runtime.KeepAlive(seace)
 	_r := objc.Send[objc.ID](objref.IDOf(seace), objc.RegisterName("currentUser"))
 	return RecordIDFromID(_r)
 }

@@ -5,7 +5,11 @@
 package eventkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -55,12 +59,14 @@ func NewReminder() *Reminder {
 
 // WithStartDateComponents sets the start date of the task.
 func (r *Reminder) WithStartDateComponents(startDateComponents obj.Object) *Reminder {
+	defer runtime.KeepAlive(startDateComponents)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setStartDateComponents:"), objref.IDOf(startDateComponents))
 	return r
 }
 
 // WithDueDateComponents sets the date by which the reminder should be completed.
 func (r *Reminder) WithDueDateComponents(dueDateComponents obj.Object) *Reminder {
+	defer runtime.KeepAlive(dueDateComponents)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setDueDateComponents:"), objref.IDOf(dueDateComponents))
 	return r
 }
@@ -72,8 +78,8 @@ func (r *Reminder) WithCompleted(completed bool) *Reminder {
 }
 
 // WithCompletionDate sets the date on which the reminder was completed.
-func (r *Reminder) WithCompletionDate(completionDate obj.Object) *Reminder {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setCompletionDate:"), objref.IDOf(completionDate))
+func (r *Reminder) WithCompletionDate(completionDate time.Time) *Reminder {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setCompletionDate:"), rt.TimeToNSDate(completionDate))
 	return r
 }
 
@@ -85,6 +91,7 @@ func (r *Reminder) WithPriority(priority int) *Reminder {
 
 // WithCalendar sets the calendar for the calendar item.
 func (r *Reminder) WithCalendar(calendar *Calendar) *Reminder {
+	defer runtime.KeepAlive(calendar)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return r
 }
@@ -108,13 +115,14 @@ func (r *Reminder) WithNotes(notes string) *Reminder {
 }
 
 // WithURL sets the URL for the calendar item.
-func (r *Reminder) WithURL(uRL string) *Reminder {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (r *Reminder) WithURL(url string) *Reminder {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return r
 }
 
 // WithTimeZone sets the time zone for the calendar item.
 func (r *Reminder) WithTimeZone(timeZone obj.Object) *Reminder {
+	defer runtime.KeepAlive(timeZone)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return r
 }
@@ -134,31 +142,36 @@ func (r *Reminder) WithRecurrenceRules(items ...*RecurrenceRule) *Reminder {
 }
 
 // StartDateComponents returns the start date of the task, as date components. The use of date components allows the start date and its time zone to be represented in a single property. A nil time zone represents a floating date.  Setting a date component without a hour, minute and second component will set allDay to YES. If you set this property, the calendar must be set to NSCalendarIdentifierGregorian. An exception is raised otherwise.
-func (r *Reminder) StartDateComponents() obj.Object {
+func (r *Reminder) StartDateComponents() *foundation.DateComponents {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("startDateComponents"))
-	return obj.Wrap(_r)
+	return foundation.DateComponentsFromID(_r)
 }
 
 // DueDateComponents returns the date by which this reminder should be completed. The use of date components allows the due date and its time zone to be represented in a single property. A nil time zone represents a floating date.  Setting a date component without a hour, minute and second component will set allDay to YES. If you set this property, the calendar must be set to NSCalendarIdentifierGregorian. An exception is raised otherwise. On iOS, if you set the due date for a reminder, you must also set a start date, otherwise you will receive an error (EKErrorNoStartDate) when attempting to save this reminder. This is not a requirement on OS X.
-func (r *Reminder) DueDateComponents() obj.Object {
+func (r *Reminder) DueDateComponents() *foundation.DateComponents {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("dueDateComponents"))
-	return obj.Wrap(_r)
+	return foundation.DateComponentsFromID(_r)
 }
 
 // IsCompleted reports whether the reminder is completed. Setting it to true will set the completed date to the current date. Setting it to false will set the completed date to nil.
 func (r *Reminder) IsCompleted() bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("isCompleted"))
 	return _r
 }
 
 // CompletionDate returns the date on which this reminder was completed.
-func (r *Reminder) CompletionDate() obj.Object {
+func (r *Reminder) CompletionDate() time.Time {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("completionDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Priority returns the priority of the reminder. Priorities run from 1 (highest) to 9 (lowest).  A priority of 0 means no priority. Saving a reminder with any other priority will fail. Per RFC 5545, priorities of 1-4 are considered "high," a priority of 5 is "medium," and priorities of 6-9 are "low."
 func (r *Reminder) Priority() int {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[int](objref.IDOf(r), objc.RegisterName("priority"))
 	return _r
 }

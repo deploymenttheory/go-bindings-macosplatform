@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func webDownloadAdopt(id objc.ID) *WebDownload {
 
 // Description returns the object's -description text.
 func (wd *WebDownload) Description() string {
+	defer runtime.KeepAlive(wd)
 	return rt.Description(objref.IDOf(wd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wd *WebDownload) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wd *WebDownload) IsKind(className string) bool {
+	defer runtime.KeepAlive(wd)
 	return rt.IsKind(objref.IDOf(wd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wd *WebDownload) String() string {
+	defer runtime.KeepAlive(wd)
 	return rt.Description(objref.IDOf(wd))
 }
 

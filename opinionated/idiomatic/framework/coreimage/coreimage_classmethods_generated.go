@@ -5,6 +5,7 @@
 package coreimage
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -17,14 +18,14 @@ import (
 )
 
 // DescriptorWithPayloadIsCompactLayerCountDataCodewordCount creates an Aztec code descriptor for the given payload and parameters.
-func DescriptorWithPayloadIsCompactLayerCountDataCodewordCount(errorCorrectedPayload obj.Object, isCompact bool, layerCount int, dataCodewordCount int) *AztecCodeDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("CIAztecCodeDescriptor")), objc.RegisterName("descriptorWithPayload:isCompact:layerCount:dataCodewordCount:"), objref.IDOf(errorCorrectedPayload), isCompact, layerCount, dataCodewordCount)
+func DescriptorWithPayloadIsCompactLayerCountDataCodewordCount(errorCorrectedPayload []byte, isCompact bool, layerCount int, dataCodewordCount int) *AztecCodeDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIAztecCodeDescriptor")), objc.RegisterName("descriptorWithPayload:isCompact:layerCount:dataCodewordCount:"), rt.BytesToNSData(errorCorrectedPayload), isCompact, layerCount, dataCodewordCount)
 	return AztecCodeDescriptorFromID(_r)
 }
 
 // KernelWithString creates a custom blend kernel from a program string.
-func KernelWithString(string_ string) *BlendKernel {
-	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("kernelWithString:"), purego.NSString(string_))
+func KernelWithString(str string) *BlendKernel {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("kernelWithString:"), purego.NSString(str))
 	return BlendKernelFromID(_r)
 }
 
@@ -276,6 +277,7 @@ func LighterColor() *BlendKernel {
 
 // ColorWithCGColor create a Core Image color object with a Core Graphics color object.
 func ColorWithCGColor(color obj.Object) *Color {
+	defer runtime.KeepAlive(color)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("colorWithCGColor:"), objref.IDOf(color))
 	return ColorFromID(_r)
 }
@@ -294,12 +296,14 @@ func ColorWithRedGreenBlue(red float64, green float64, blue float64) *Color {
 
 // ColorWithRedGreenBlueAlphaColorSpace create a Core Image color object with the specified red, green, blue, and alpha component values as measured in the specified color space.
 func ColorWithRedGreenBlueAlphaColorSpace(red float64, green float64, blue float64, alpha float64, colorSpace obj.Object) *Color {
+	defer runtime.KeepAlive(colorSpace)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("colorWithRed:green:blue:alpha:colorSpace:"), red, green, blue, alpha, objref.IDOf(colorSpace))
 	return ColorFromID(_r)
 }
 
 // ColorWithRedGreenBlueColorSpace create a Core Image color object with the specified red, green, and blue component values as measured in the specified color space.
 func ColorWithRedGreenBlueColorSpace(red float64, green float64, blue float64, colorSpace obj.Object) *Color {
+	defer runtime.KeepAlive(colorSpace)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("colorWithRed:green:blue:colorSpace:"), red, green, blue, objref.IDOf(colorSpace))
 	return ColorFromID(_r)
 }
@@ -371,31 +375,41 @@ func ClearColor() *Color {
 }
 
 // CIColorKernelKernelWithString creates a color kernel object from the specified kernel source code.
-func CIColorKernelKernelWithString(string_ string) *ColorKernel {
-	_r := objc.Send[objc.ID](objc.ID(_class("CIColorKernel")), objc.RegisterName("kernelWithString:"), purego.NSString(string_))
+func CIColorKernelKernelWithString(str string) *ColorKernel {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColorKernel")), objc.RegisterName("kernelWithString:"), purego.NSString(str))
 	return ColorKernelFromID(_r)
 }
 
 // ContextWithCGLContextPixelFormatColorSpaceOptions creates a Core Image context from a CGL context, using the specified options, color space, and pixel format object.
 func ContextWithCGLContextPixelFormatColorSpaceOptions(cglctx obj.Object, pixelFormat obj.Object, colorSpace obj.Object, options obj.Object) *Context {
+	defer runtime.KeepAlive(cglctx)
+	defer runtime.KeepAlive(pixelFormat)
+	defer runtime.KeepAlive(colorSpace)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIContext")), objc.RegisterName("contextWithCGLContext:pixelFormat:colorSpace:options:"), objref.IDOf(cglctx), objref.IDOf(pixelFormat), objref.IDOf(colorSpace), objref.IDOf(options))
 	return ContextFromID(_r)
 }
 
 // ContextWithCGLContextPixelFormatOptions creates a Core Image context from a CGL context, using the specified options and pixel format object.
 func ContextWithCGLContextPixelFormatOptions(cglctx obj.Object, pixelFormat obj.Object, options obj.Object) *Context {
+	defer runtime.KeepAlive(cglctx)
+	defer runtime.KeepAlive(pixelFormat)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIContext")), objc.RegisterName("contextWithCGLContext:pixelFormat:options:"), objref.IDOf(cglctx), objref.IDOf(pixelFormat), objref.IDOf(options))
 	return ContextFromID(_r)
 }
 
 // ContextWithCGContextOptions creates a Core Image context from a Quartz context, using the specified options.
 func ContextWithCGContextOptions(cgctx obj.Object, options obj.Object) *Context {
+	defer runtime.KeepAlive(cgctx)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIContext")), objc.RegisterName("contextWithCGContext:options:"), objref.IDOf(cgctx), objref.IDOf(options))
 	return ContextFromID(_r)
 }
 
 // ContextWithOptions initializes a context without a specific rendering destination, using the specified options.
 func ContextWithOptions(options obj.Object) *Context {
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIContext")), objc.RegisterName("contextWithOptions:"), objref.IDOf(options))
 	return ContextFromID(_r)
 }
@@ -420,19 +434,23 @@ func ContextForOfflineGPUAtIndex(index int) *Context {
 
 // ContextForOfflineGPUAtIndexColorSpaceOptionsSharedContext wraps the corresponding Objective-C method.
 func ContextForOfflineGPUAtIndexColorSpaceOptionsSharedContext(index int, colorSpace obj.Object, options obj.Object, sharedContext obj.Object) *Context {
+	defer runtime.KeepAlive(colorSpace)
+	defer runtime.KeepAlive(options)
+	defer runtime.KeepAlive(sharedContext)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIContext")), objc.RegisterName("contextForOfflineGPUAtIndex:colorSpace:options:sharedContext:"), index, objref.IDOf(colorSpace), objref.IDOf(options), objref.IDOf(sharedContext))
 	return ContextFromID(_r)
 }
 
 // DescriptorWithPayloadRowCountColumnCountEccVersion creates a Data Matrix code descriptor for the given payload and parameters.
-func DescriptorWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload obj.Object, rowCount int, columnCount int, eccVersion DataMatrixCodeECCVersion) *DataMatrixCodeDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("CIDataMatrixCodeDescriptor")), objc.RegisterName("descriptorWithPayload:rowCount:columnCount:eccVersion:"), objref.IDOf(errorCorrectedPayload), rowCount, columnCount, eccVersion)
+func DescriptorWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload []byte, rowCount int, columnCount int, eccVersion DataMatrixCodeECCVersion) *DataMatrixCodeDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIDataMatrixCodeDescriptor")), objc.RegisterName("descriptorWithPayload:rowCount:columnCount:eccVersion:"), rt.BytesToNSData(errorCorrectedPayload), rowCount, columnCount, eccVersion)
 	return DataMatrixCodeDescriptorFromID(_r)
 }
 
 // DetectorOfTypeContextOptions creates and returns a configured detector.
-func DetectorOfTypeContextOptions(type_ string, context_ *Context, options obj.Object) *Detector {
-	_r := objc.Send[objc.ID](objc.ID(_class("CIDetector")), objc.RegisterName("detectorOfType:context:options:"), purego.NSString(type_), objref.IDOf(context_), objref.IDOf(options))
+func DetectorOfTypeContextOptions(type_ string, context_ *Context, options map[string]obj.Object) *Detector {
+	defer runtime.KeepAlive(context_)
+	_r := objc.Send[objc.ID](objc.ID(_class("CIDetector")), objc.RegisterName("detectorOfType:context:options:"), purego.NSString(type_), objref.IDOf(context_), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return DetectorFromID(_r)
 }
 
@@ -443,8 +461,8 @@ func FilterWithName(name string) *Filter {
 }
 
 // FilterWithNameWithInputParameters creates a new filter of type 'name'. The filter's input parameters are set from the dictionary of key-value pairs. On OSX, any of the filter input parameters not specified in the dictionary will be undefined. On iOS, any of the filter input parameters not specified in the dictionary will be set to default values.
-func FilterWithNameWithInputParameters(name string, params obj.Object) *Filter {
-	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("filterWithName:withInputParameters:"), purego.NSString(name), objref.IDOf(params))
+func FilterWithNameWithInputParameters(name string, params map[string]obj.Object) *Filter {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("filterWithName:withInputParameters:"), purego.NSString(name), rt.MapToDict(params, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return FilterFromID(_r)
 }
 
@@ -488,21 +506,21 @@ func LocalizedDescriptionForFilterName(filterName string) string {
 }
 
 // LocalizedReferenceDocumentationForFilterName returns the URL to the localized reference documentation describing the filter. The URL can be a local file or a remote document on a webserver. It is possible, that this method returns nil (like filters that predate this feature). A client of this API has to handle this case gracefully.
-func LocalizedReferenceDocumentationForFilterName(filterName string) obj.Object {
+func LocalizedReferenceDocumentationForFilterName(filterName string) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("localizedReferenceDocumentationForFilterName:"), purego.NSString(filterName))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // SerializedXMPFromFiltersInputImageExtent wraps the corresponding Objective-C method.
-func SerializedXMPFromFiltersInputImageExtent(filters []*Filter, extent corefoundation.CGRect) obj.Object {
+func SerializedXMPFromFiltersInputImageExtent(filters []*Filter, extent corefoundation.CGRect) []byte {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("serializedXMPFromFilters:inputImageExtent:"), purego.SliceToNSArray(filters, func(_v *Filter) objc.ID { return objref.IDOf(_v) }), extent)
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
-// FilterArrayFromSerializedXMPInputImageExtentError wraps the corresponding Objective-C method.
-func FilterArrayFromSerializedXMPInputImageExtentError(xmpData obj.Object, extent corefoundation.CGRect) (result []*Filter, err error) {
+// FilterArrayFromSerializedXMPInputImageExtent wraps the corresponding Objective-C method.
+func FilterArrayFromSerializedXMPInputImageExtent(xmpData []byte, extent corefoundation.CGRect) (result []*Filter, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("filterArrayFromSerializedXMP:inputImageExtent:error:"), objref.IDOf(xmpData), extent, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("filterArrayFromSerializedXMP:inputImageExtent:error:"), rt.BytesToNSData(xmpData), extent, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -511,18 +529,22 @@ func FilterArrayFromSerializedXMPInputImageExtentError(xmpData obj.Object, exten
 
 // FilterWithImageURLOptions returns a CIFilter that will in turn return a properly processed CIImage as "outputImage".
 func FilterWithImageURLOptions(url string, options obj.Object) *Filter {
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("filterWithImageURL:options:"), rt.FileURL(url), objref.IDOf(options))
 	return FilterFromID(_r)
 }
 
 // FilterWithImageDataOptions returns a CIFilter that will in turn return a properly processed CIImage as "outputImage". Note that when using this initializer, you should pass in a source type identifier hint (kCGImageSourceTypeIdentifierHint) key/value pair in order to help the decoder determine the file type, as otherwise confusion and incorrect results are possible.
-func FilterWithImageDataOptions(data obj.Object, options obj.Object) *Filter {
-	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("filterWithImageData:options:"), objref.IDOf(data), objref.IDOf(options))
+func FilterWithImageDataOptions(data []byte, options obj.Object) *Filter {
+	defer runtime.KeepAlive(options)
+	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("filterWithImageData:options:"), rt.BytesToNSData(data), objref.IDOf(options))
 	return FilterFromID(_r)
 }
 
 // FilterWithCVPixelBufferPropertiesOptions returns a CIFilter that will in turn return a properly processed CIImage as "outputImage". Note that when using this initializer, you should pass in a CVPixelBufferRef with one of the following Raw pixel format types kCVPixelFormatType_14Bayer_GRBG, kCVPixelFormatType_14Bayer_RGGB, kCVPixelFormatType_14Bayer_BGGR, kCVPixelFormatType_14Bayer_GBRG as well as the root properties attachment from the CMSampleBufferRef.
 func FilterWithCVPixelBufferPropertiesOptions(pixelBuffer unsafe.Pointer, properties obj.Object, options obj.Object) *Filter {
+	defer runtime.KeepAlive(properties)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("filterWithCVPixelBuffer:properties:options:"), pixelBuffer, objref.IDOf(properties), objref.IDOf(options))
 	return FilterFromID(_r)
 }
@@ -555,48 +577,59 @@ func ShapeWithRect(r corefoundation.CGRect) *FilterShape {
 
 // ImageWithCGImage creates and returns an image object from a Quartz 2D image.
 func ImageWithCGImage(image obj.Object) *Image {
+	defer runtime.KeepAlive(image)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGImage:"), objref.IDOf(image))
 	return ImageFromID(_r)
 }
 
 // ImageWithCGImageOptions creates and returns an image object from a Quartz 2D image using the specified options.
 func ImageWithCGImageOptions(image obj.Object, options obj.Object) *Image {
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGImage:options:"), objref.IDOf(image), objref.IDOf(options))
 	return ImageFromID(_r)
 }
 
 // ImageWithCGImageSourceIndexOptions wraps the corresponding Objective-C method.
 func ImageWithCGImageSourceIndexOptions(source obj.Object, index int, dict obj.Object) *Image {
+	defer runtime.KeepAlive(source)
+	defer runtime.KeepAlive(dict)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGImageSource:index:options:"), objref.IDOf(source), index, objref.IDOf(dict))
 	return ImageFromID(_r)
 }
 
 // ImageWithCGLayer creates and returns an image object from the contents supplied by a CGLayer object.
 func ImageWithCGLayer(layer obj.Object) *Image {
+	defer runtime.KeepAlive(layer)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGLayer:"), objref.IDOf(layer))
 	return ImageFromID(_r)
 }
 
 // ImageWithCGLayerOptions creates and returns an image object from the contents supplied by a CGLayer object, using the specified options.
 func ImageWithCGLayerOptions(layer obj.Object, options obj.Object) *Image {
+	defer runtime.KeepAlive(layer)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGLayer:options:"), objref.IDOf(layer), objref.IDOf(options))
 	return ImageFromID(_r)
 }
 
 // ImageWithBitmapDataBytesPerRowSizeFormatColorSpace creates and returns an image object from bitmap data.
-func ImageWithBitmapDataBytesPerRowSizeFormatColorSpace(data obj.Object, bytesPerRow int, size corefoundation.CGSize, format int, colorSpace obj.Object) *Image {
-	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithBitmapData:bytesPerRow:size:format:colorSpace:"), objref.IDOf(data), bytesPerRow, size, format, objref.IDOf(colorSpace))
+func ImageWithBitmapDataBytesPerRowSizeFormatColorSpace(data []byte, bytesPerRow int, size corefoundation.CGSize, format int, colorSpace obj.Object) *Image {
+	defer runtime.KeepAlive(colorSpace)
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithBitmapData:bytesPerRow:size:format:colorSpace:"), rt.BytesToNSData(data), bytesPerRow, size, format, objref.IDOf(colorSpace))
 	return ImageFromID(_r)
 }
 
 // ImageWithTextureSizeFlippedColorSpace creates and returns an image object initialized with data supplied by an OpenGL texture.
 func ImageWithTextureSizeFlippedColorSpace(name int, size corefoundation.CGSize, flipped bool, colorSpace obj.Object) *Image {
+	defer runtime.KeepAlive(colorSpace)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithTexture:size:flipped:colorSpace:"), name, size, flipped, objref.IDOf(colorSpace))
 	return ImageFromID(_r)
 }
 
 // ImageWithTextureSizeFlippedOptions creates and returns an image object initialized with data supplied by an OpenGL texture.
 func ImageWithTextureSizeFlippedOptions(name int, size corefoundation.CGSize, flipped bool, options obj.Object) *Image {
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithTexture:size:flipped:options:"), name, size, flipped, objref.IDOf(options))
 	return ImageFromID(_r)
 }
@@ -609,19 +642,21 @@ func ImageWithContentsOfURL(url string) *Image {
 
 // ImageWithContentsOfURLOptions creates and returns an image object from the contents of a file, using the specified options.
 func ImageWithContentsOfURLOptions(url string, options obj.Object) *Image {
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithContentsOfURL:options:"), rt.FileURL(url), objref.IDOf(options))
 	return ImageFromID(_r)
 }
 
 // ImageWithData creates and returns an image object initialized with the supplied image data.
-func ImageWithData(data obj.Object) *Image {
-	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithData:"), objref.IDOf(data))
+func ImageWithData(data []byte) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithData:"), rt.BytesToNSData(data))
 	return ImageFromID(_r)
 }
 
 // ImageWithDataOptions creates and returns an image object initialized with the supplied image data, using the specified options.
-func ImageWithDataOptions(data obj.Object, options obj.Object) *Image {
-	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithData:options:"), objref.IDOf(data), objref.IDOf(options))
+func ImageWithDataOptions(data []byte, options obj.Object) *Image {
+	defer runtime.KeepAlive(options)
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithData:options:"), rt.BytesToNSData(data), objref.IDOf(options))
 	return ImageFromID(_r)
 }
 
@@ -633,6 +668,7 @@ func ImageWithCVImageBuffer(imageBuffer unsafe.Pointer) *Image {
 
 // ImageWithCVImageBufferOptions creates and returns an image object from the contents of CVImageBuffer object, using the specified options.
 func ImageWithCVImageBufferOptions(imageBuffer unsafe.Pointer, options obj.Object) *Image {
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCVImageBuffer:options:"), imageBuffer, objref.IDOf(options))
 	return ImageFromID(_r)
 }
@@ -645,24 +681,29 @@ func ImageWithCVPixelBuffer(pixelBuffer unsafe.Pointer) *Image {
 
 // ImageWithCVPixelBufferOptions creates and returns an image object from the contents of CVPixelBuffer object, using the specified options.
 func ImageWithCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options obj.Object) *Image {
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCVPixelBuffer:options:"), pixelBuffer, objref.IDOf(options))
 	return ImageFromID(_r)
 }
 
 // ImageWithIOSurface creates and returns an image from the contents of an IOSurface.
 func ImageWithIOSurface(surface obj.Object) *Image {
+	defer runtime.KeepAlive(surface)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithIOSurface:"), objref.IDOf(surface))
 	return ImageFromID(_r)
 }
 
 // ImageWithIOSurfaceOptions creates, using the specified options, and returns an image from the contents of an IOSurface.
 func ImageWithIOSurfaceOptions(surface obj.Object, options obj.Object) *Image {
+	defer runtime.KeepAlive(surface)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithIOSurface:options:"), objref.IDOf(surface), objref.IDOf(options))
 	return ImageFromID(_r)
 }
 
 // ImageWithColor creates and returns an image of infinite extent whose entire content is the specified color.
 func ImageWithColor(color *Color) *Image {
+	defer runtime.KeepAlive(color)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithColor:"), objref.IDOf(color))
 	return ImageFromID(_r)
 }
@@ -734,43 +775,54 @@ func ClearImage() *Image {
 }
 
 // ImageWithDepthDataOptions wraps the corresponding Objective-C method.
-func ImageWithDepthDataOptions(data obj.Object, options obj.Object) *Image {
-	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithDepthData:options:"), objref.IDOf(data), objref.IDOf(options))
+func ImageWithDepthDataOptions(data obj.Object, options map[string]obj.Object) *Image {
+	defer runtime.KeepAlive(data)
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithDepthData:options:"), objref.IDOf(data), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ImageFromID(_r)
 }
 
 // ImageWithDepthData wraps the corresponding Objective-C method.
 func ImageWithDepthData(data obj.Object) *Image {
+	defer runtime.KeepAlive(data)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithDepthData:"), objref.IDOf(data))
 	return ImageFromID(_r)
 }
 
 // ImageWithPortaitEffectsMatteOptions wraps the corresponding Objective-C method.
 func ImageWithPortaitEffectsMatteOptions(matte obj.Object, options obj.Object) *Image {
+	defer runtime.KeepAlive(matte)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithPortaitEffectsMatte:options:"), objref.IDOf(matte), objref.IDOf(options))
 	return ImageFromID(_r)
 }
 
 // ImageWithPortaitEffectsMatte wraps the corresponding Objective-C method.
 func ImageWithPortaitEffectsMatte(matte obj.Object) *Image {
+	defer runtime.KeepAlive(matte)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithPortaitEffectsMatte:"), objref.IDOf(matte))
 	return ImageFromID(_r)
 }
 
 // ImageWithSemanticSegmentationMatteOptions wraps the corresponding Objective-C method.
 func ImageWithSemanticSegmentationMatteOptions(matte obj.Object, options obj.Object) *Image {
+	defer runtime.KeepAlive(matte)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithSemanticSegmentationMatte:options:"), objref.IDOf(matte), objref.IDOf(options))
 	return ImageFromID(_r)
 }
 
 // ImageWithSemanticSegmentationMatte wraps the corresponding Objective-C method.
 func ImageWithSemanticSegmentationMatte(matte obj.Object) *Image {
+	defer runtime.KeepAlive(matte)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithSemanticSegmentationMatte:"), objref.IDOf(matte))
 	return ImageFromID(_r)
 }
 
 // ImageWithImageProviderSizeFormatColorSpaceOptions create an image object based on pixels from an image provider object.
 func ImageWithImageProviderSizeFormatColorSpaceOptions(provider obj.Object, width int, height int, format int, colorSpace obj.Object, options obj.Object) *Image {
+	defer runtime.KeepAlive(provider)
+	defer runtime.KeepAlive(colorSpace)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithImageProvider:size::format:colorSpace:options:"), objref.IDOf(provider), width, height, format, objref.IDOf(colorSpace), objref.IDOf(options))
 	return ImageFromID(_r)
 }
@@ -783,19 +835,20 @@ func ImageAccumulatorWithExtentFormat(extent corefoundation.CGRect, format int) 
 
 // ImageAccumulatorWithExtentFormatColorSpace creates an image accumulator with the specified extent, pixel format, and color space.
 func ImageAccumulatorWithExtentFormatColorSpace(extent corefoundation.CGRect, format int, colorSpace obj.Object) *ImageAccumulator {
+	defer runtime.KeepAlive(colorSpace)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImageAccumulator")), objc.RegisterName("imageAccumulatorWithExtent:format:colorSpace:"), extent, format, objref.IDOf(colorSpace))
 	return ImageAccumulatorFromID(_r)
 }
 
 // RoiForInputArgumentsOutputRect override this class method to implement your processor’s ROI callback.
-func RoiForInputArgumentsOutputRect(inputIndex int, arguments obj.Object, outputRect corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("roiForInput:arguments:outputRect:"), inputIndex, objref.IDOf(arguments), outputRect)
+func RoiForInputArgumentsOutputRect(inputIndex int, arguments map[string]obj.Object, outputRect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("roiForInput:arguments:outputRect:"), inputIndex, rt.MapToDict(arguments, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), outputRect)
 	return _r
 }
 
 // RoiTileArrayForInputArgumentsOutputRect override this class method to implement your processor’s tiled ROI callback.
-func RoiTileArrayForInputArgumentsOutputRect(inputIndex int, arguments obj.Object, outputRect corefoundation.CGRect) []*Vector {
-	_r := objc.Send[objc.ID](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("roiTileArrayForInput:arguments:outputRect:"), inputIndex, objref.IDOf(arguments), outputRect)
+func RoiTileArrayForInputArgumentsOutputRect(inputIndex int, arguments map[string]obj.Object, outputRect corefoundation.CGRect) []*Vector {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("roiTileArrayForInput:arguments:outputRect:"), inputIndex, rt.MapToDict(arguments, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), outputRect)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Vector { return VectorFromID(_id) })
 }
 
@@ -805,10 +858,10 @@ func FormatForInputAtIndex(inputIndex int) int {
 	return _r
 }
 
-// ApplyWithExtentInputsArgumentsError call this method on your Core Image Processor Kernel subclass to create a new image of the specified extent.
-func ApplyWithExtentInputsArgumentsError(extent corefoundation.CGRect, inputs []*Image, arguments obj.Object) (result *Image, err error) {
+// ApplyWithExtentInputsArguments call this method on your Core Image Processor Kernel subclass to create a new image of the specified extent.
+func ApplyWithExtentInputsArguments(extent corefoundation.CGRect, inputs []*Image, arguments map[string]obj.Object) (result *Image, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("applyWithExtent:inputs:arguments:error:"), extent, purego.SliceToNSArray(inputs, func(_v *Image) objc.ID { return objref.IDOf(_v) }), objref.IDOf(arguments), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("applyWithExtent:inputs:arguments:error:"), extent, purego.SliceToNSArray(inputs, func(_v *Image) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(arguments, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -834,9 +887,9 @@ func SynchronizeInputs() bool {
 }
 
 // ProcessWithInputsArgumentsOutputs override this class method of your Core Image Processor Kernel subclass if it needs to produce multiple outputs.
-func ProcessWithInputsArgumentsOutputs(inputs []obj.Object, arguments obj.Object, outputs []obj.Object) error {
+func ProcessWithInputsArgumentsOutputs(inputs []obj.Object, arguments map[string]obj.Object, outputs []obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("processWithInputs:arguments:outputs:error:"), purego.SliceToNSArray(inputs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(arguments), purego.SliceToNSArray(outputs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("processWithInputs:arguments:outputs:error:"), purego.SliceToNSArray(inputs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(arguments, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(outputs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -844,15 +897,15 @@ func ProcessWithInputsArgumentsOutputs(inputs []obj.Object, arguments obj.Object
 }
 
 // OutputFormatAtIndexArguments override this class method if your processor has more than one output and you want your processor’s output to be in a specific supported CIPixelFormat.
-func OutputFormatAtIndexArguments(outputIndex int, arguments obj.Object) int {
-	_r := objc.Send[int](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("outputFormatAtIndex:arguments:"), outputIndex, objref.IDOf(arguments))
+func OutputFormatAtIndexArguments(outputIndex int, arguments map[string]obj.Object) int {
+	_r := objc.Send[int](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("outputFormatAtIndex:arguments:"), outputIndex, rt.MapToDict(arguments, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
-// ApplyWithExtentsInputsArgumentsError call this method on your multiple-output Core Image Processor Kernel subclass to create an array of new image objects given the specified array of extents.
-func ApplyWithExtentsInputsArgumentsError(extents []*Vector, inputs []*Image, arguments obj.Object) (result []*Image, err error) {
+// ApplyWithExtentsInputsArguments call this method on your multiple-output Core Image Processor Kernel subclass to create an array of new image objects given the specified array of extents.
+func ApplyWithExtentsInputsArguments(extents []*Vector, inputs []*Image, arguments map[string]obj.Object) (result []*Image, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("applyWithExtents:inputs:arguments:error:"), purego.SliceToNSArray(extents, func(_v *Vector) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(inputs, func(_v *Image) objc.ID { return objref.IDOf(_v) }), objref.IDOf(arguments), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("applyWithExtents:inputs:arguments:error:"), purego.SliceToNSArray(extents, func(_v *Vector) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(inputs, func(_v *Image) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(arguments, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -860,13 +913,13 @@ func ApplyWithExtentsInputsArgumentsError(extents []*Vector, inputs []*Image, ar
 }
 
 // KernelsWithString creates and returns and array of CIKernel objects.
-func KernelsWithString(string_ string) []*Kernel {
-	_r := objc.Send[objc.ID](objc.ID(_class("CIKernel")), objc.RegisterName("kernelsWithString:"), purego.NSString(string_))
+func KernelsWithString(str string) []*Kernel {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIKernel")), objc.RegisterName("kernelsWithString:"), purego.NSString(str))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Kernel { return KernelFromID(_id) })
 }
 
-// KernelsWithMetalStringError load kernels from a Metal language string.
-func KernelsWithMetalStringError(source string) (result []*Kernel, err error) {
+// KernelsWithMetalString load kernels from a Metal language string.
+func KernelsWithMetalString(source string) (result []*Kernel, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("CIKernel")), objc.RegisterName("kernelsWithMetalString:error:"), purego.NSString(source), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -876,25 +929,25 @@ func KernelsWithMetalStringError(source string) (result []*Kernel, err error) {
 }
 
 // CIKernelKernelWithString creates a single kernel object.
-func CIKernelKernelWithString(string_ string) *Kernel {
-	_r := objc.Send[objc.ID](objc.ID(_class("CIKernel")), objc.RegisterName("kernelWithString:"), purego.NSString(string_))
+func CIKernelKernelWithString(str string) *Kernel {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIKernel")), objc.RegisterName("kernelWithString:"), purego.NSString(str))
 	return KernelFromID(_r)
 }
 
-// KernelWithFunctionNameFromMetalLibraryDataError creates a single kernel object using a Metal Shading Language (MSL) kernel function.
-func KernelWithFunctionNameFromMetalLibraryDataError(name string, data obj.Object) (result *Kernel, err error) {
+// KernelWithFunctionNameFromMetalLibraryData creates a single kernel object using a Metal Shading Language (MSL) kernel function.
+func KernelWithFunctionNameFromMetalLibraryData(name string, data []byte) (result *Kernel, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("CIKernel")), objc.RegisterName("kernelWithFunctionName:fromMetalLibraryData:error:"), purego.NSString(name), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIKernel")), objc.RegisterName("kernelWithFunctionName:fromMetalLibraryData:error:"), purego.NSString(name), rt.BytesToNSData(data), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return KernelFromID(_r), nil
 }
 
-// KernelWithFunctionNameFromMetalLibraryDataOutputPixelFormatError creates a single kernel object using a Metal Shading Language kernel function with optional pixel format.
-func KernelWithFunctionNameFromMetalLibraryDataOutputPixelFormatError(name string, data obj.Object, format int) (result *Kernel, err error) {
+// KernelWithFunctionNameFromMetalLibraryDataOutputPixelFormat creates a single kernel object using a Metal Shading Language kernel function with optional pixel format.
+func KernelWithFunctionNameFromMetalLibraryDataOutputPixelFormat(name string, data []byte, format int) (result *Kernel, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("CIKernel")), objc.RegisterName("kernelWithFunctionName:fromMetalLibraryData:outputPixelFormat:error:"), purego.NSString(name), objref.IDOf(data), format, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIKernel")), objc.RegisterName("kernelWithFunctionName:fromMetalLibraryData:outputPixelFormat:error:"), purego.NSString(name), rt.BytesToNSData(data), format, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -902,14 +955,14 @@ func KernelWithFunctionNameFromMetalLibraryDataOutputPixelFormatError(name strin
 }
 
 // KernelNamesFromMetalLibraryData return an array of strings containing the names of all of the kernels contained in the Metal library.
-func KernelNamesFromMetalLibraryData(data obj.Object) []string {
-	_r := objc.Send[objc.ID](objc.ID(_class("CIKernel")), objc.RegisterName("kernelNamesFromMetalLibraryData:"), objref.IDOf(data))
+func KernelNamesFromMetalLibraryData(data []byte) []string {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIKernel")), objc.RegisterName("kernelNamesFromMetalLibraryData:"), rt.BytesToNSData(data))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // DescriptorWithPayloadIsCompactRowCountColumnCount creates an PDF417 code descriptor for the given payload and parameters.
-func DescriptorWithPayloadIsCompactRowCountColumnCount(errorCorrectedPayload obj.Object, isCompact bool, rowCount int, columnCount int) *PDF417CodeDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("CIPDF417CodeDescriptor")), objc.RegisterName("descriptorWithPayload:isCompact:rowCount:columnCount:"), objref.IDOf(errorCorrectedPayload), isCompact, rowCount, columnCount)
+func DescriptorWithPayloadIsCompactRowCountColumnCount(errorCorrectedPayload []byte, isCompact bool, rowCount int, columnCount int) *PDF417CodeDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIPDF417CodeDescriptor")), objc.RegisterName("descriptorWithPayload:isCompact:rowCount:columnCount:"), rt.BytesToNSData(errorCorrectedPayload), isCompact, rowCount, columnCount)
 	return PDF417CodeDescriptorFromID(_r)
 }
 
@@ -939,8 +992,8 @@ func LoadNonExecutablePlugIn(url string) {
 }
 
 // DescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel creates a QR code descriptor for the given payload and parameters.
-func DescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload obj.Object, symbolVersion int, maskPattern uint8, errorCorrectionLevel QRCodeErrorCorrectionLevel) *QRCodeDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("CIQRCodeDescriptor")), objc.RegisterName("descriptorWithPayload:symbolVersion:maskPattern:errorCorrectionLevel:"), objref.IDOf(errorCorrectedPayload), symbolVersion, maskPattern, errorCorrectionLevel)
+func DescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload []byte, symbolVersion int, maskPattern uint8, errorCorrectionLevel QRCodeErrorCorrectionLevel) *QRCodeDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIQRCodeDescriptor")), objc.RegisterName("descriptorWithPayload:symbolVersion:maskPattern:errorCorrectionLevel:"), rt.BytesToNSData(errorCorrectedPayload), symbolVersion, maskPattern, errorCorrectionLevel)
 	return QRCodeDescriptorFromID(_r)
 }
 
@@ -951,13 +1004,14 @@ func FilterWithImageURL(url string) *RAWFilter {
 }
 
 // FilterWithImageDataIdentifierHint creates a RAW filter from the image data and type hint that you specify.
-func FilterWithImageDataIdentifierHint(data obj.Object, identifierHint string) *RAWFilter {
-	_r := objc.Send[objc.ID](objc.ID(_class("CIRAWFilter")), objc.RegisterName("filterWithImageData:identifierHint:"), objref.IDOf(data), purego.NSString(identifierHint))
+func FilterWithImageDataIdentifierHint(data []byte, identifierHint string) *RAWFilter {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIRAWFilter")), objc.RegisterName("filterWithImageData:identifierHint:"), rt.BytesToNSData(data), purego.NSString(identifierHint))
 	return RAWFilterFromID(_r)
 }
 
 // FilterWithCVPixelBufferProperties creates a RAW filter from the pixel buffer and its properties that you specify.
 func FilterWithCVPixelBufferProperties(buffer unsafe.Pointer, properties obj.Object) *RAWFilter {
+	defer runtime.KeepAlive(properties)
 	_r := objc.Send[objc.ID](objc.ID(_class("CIRAWFilter")), objc.RegisterName("filterWithCVPixelBuffer:properties:"), buffer, objref.IDOf(properties))
 	return RAWFilterFromID(_r)
 }
@@ -972,12 +1026,15 @@ func SupportedCameraModels() []string {
 
 // SamplerWithImage creates and returns a sampler that references an image.
 func SamplerWithImage(im *Image) *Sampler {
+	defer runtime.KeepAlive(im)
 	_r := objc.Send[objc.ID](objc.ID(_class("CISampler")), objc.RegisterName("samplerWithImage:"), objref.IDOf(im))
 	return SamplerFromID(_r)
 }
 
 // SamplerWithImageOptions creates and returns a sampler that references an image using options specified in a dictionary.
 func SamplerWithImageOptions(im *Image, dict obj.Object) *Sampler {
+	defer runtime.KeepAlive(im)
+	defer runtime.KeepAlive(dict)
 	_r := objc.Send[objc.ID](objc.ID(_class("CISampler")), objc.RegisterName("samplerWithImage:options:"), objref.IDOf(im), objref.IDOf(dict))
 	return SamplerFromID(_r)
 }
@@ -1039,7 +1096,7 @@ func VectorWithString(representation string) *Vector {
 }
 
 // CIWarpKernelKernelWithString creates a warp kernel object from the specified kernel source code.
-func CIWarpKernelKernelWithString(string_ string) *WarpKernel {
-	_r := objc.Send[objc.ID](objc.ID(_class("CIWarpKernel")), objc.RegisterName("kernelWithString:"), purego.NSString(string_))
+func CIWarpKernelKernelWithString(str string) *WarpKernel {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIWarpKernel")), objc.RegisterName("kernelWithString:"), purego.NSString(str))
 	return WarpKernelFromID(_r)
 }

@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func imageAccumulatorAdopt(id objc.ID) *ImageAccumulator {
 
 // Description returns the object's -description text.
 func (ia *ImageAccumulator) Description() string {
+	defer runtime.KeepAlive(ia)
 	return rt.Description(objref.IDOf(ia))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ia *ImageAccumulator) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ia)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ia), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ia *ImageAccumulator) IsKind(className string) bool {
+	defer runtime.KeepAlive(ia)
 	return rt.IsKind(objref.IDOf(ia), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ia *ImageAccumulator) String() string {
+	defer runtime.KeepAlive(ia)
 	return rt.Description(objref.IDOf(ia))
 }
 
@@ -76,6 +83,7 @@ func NewImageAccumulatorWithExtentFormat(extent corefoundation.CGRect, format in
 
 // NewImageAccumulatorWithExtentFormatColorSpace initializes an image accumulator with the specified extent, pixel format, and color space.
 func NewImageAccumulatorWithExtentFormatColorSpace(extent corefoundation.CGRect, format int, colorSpace obj.Object) *ImageAccumulator {
+	defer runtime.KeepAlive(colorSpace)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImageAccumulator")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExtent:format:colorSpace:"), extent, format, objref.IDOf(colorSpace))
 	return imageAccumulatorAdopt(_id)
@@ -83,33 +91,41 @@ func NewImageAccumulatorWithExtentFormatColorSpace(extent corefoundation.CGRect,
 
 // Image returns the current contents of the image accumulator.
 func (ia *ImageAccumulator) Image() *Image {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
 // SetImage sets the contents of the image accumulator to the contents of the specified image object.
 func (ia *ImageAccumulator) SetImage(image *Image) {
+	defer runtime.KeepAlive(ia)
+	defer runtime.KeepAlive(image)
 	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setImage:"), objref.IDOf(image))
 }
 
 // SetImageDirtyRect updates an image accumulator with a subregion of an image object.
 func (ia *ImageAccumulator) SetImageDirtyRect(image *Image, dirtyRect corefoundation.CGRect) {
+	defer runtime.KeepAlive(ia)
+	defer runtime.KeepAlive(image)
 	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setImage:dirtyRect:"), objref.IDOf(image), dirtyRect)
 }
 
 // Clear resets the accumulator, discarding any pending updates and the current content.
 func (ia *ImageAccumulator) Clear() {
+	defer runtime.KeepAlive(ia)
 	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("clear"))
 }
 
 // Extent returns the extent.
 func (ia *ImageAccumulator) Extent() corefoundation.CGRect {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(ia), objc.RegisterName("extent"))
 	return _r
 }
 
 // Format returns the format.
 func (ia *ImageAccumulator) Format() int {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[int](objref.IDOf(ia), objc.RegisterName("format"))
 	return _r
 }

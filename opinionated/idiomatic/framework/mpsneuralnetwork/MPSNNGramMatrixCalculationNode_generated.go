@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func nNGramMatrixCalculationNodeAdopt(id objc.ID) *NNGramMatrixCalculationNode {
 
 // NewNNGramMatrixCalculationNodeWithSource init a node representing a MPSNNGramMatrixCalculationNode kernel.
 func NewNNGramMatrixCalculationNodeWithSource(sourceNode *NNImageNode) *NNGramMatrixCalculationNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculationNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return nNGramMatrixCalculationNodeAdopt(_id)
@@ -54,6 +57,7 @@ func NewNNGramMatrixCalculationNodeWithSource(sourceNode *NNImageNode) *NNGramMa
 
 // NewNNGramMatrixCalculationNodeWithSourceAlpha init a node representing a MPSNNGramMatrixCalculationNode kernel.
 func NewNNGramMatrixCalculationNodeWithSourceAlpha(sourceNode *NNImageNode, alpha float32) *NNGramMatrixCalculationNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculationNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:alpha:"), objref.IDOf(sourceNode), alpha)
 	return nNGramMatrixCalculationNodeAdopt(_id)
@@ -67,6 +71,7 @@ func (ngmcn *NNGramMatrixCalculationNode) WithLabel(label string) *NNGramMatrixC
 
 // Alpha returns scaling factor for the output. Default: 1.0f.
 func (ngmcn *NNGramMatrixCalculationNode) Alpha() float32 {
+	defer runtime.KeepAlive(ngmcn)
 	_r := objc.Send[float32](objref.IDOf(ngmcn), objc.RegisterName("alpha"))
 	return _r
 }

@@ -6,6 +6,7 @@ package storekit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func productStorePromotionControllerAdopt(id objc.ID) *ProductStorePromotionCont
 
 // Description returns the object's -description text.
 func (pspc *ProductStorePromotionController) Description() string {
+	defer runtime.KeepAlive(pspc)
 	return rt.Description(objref.IDOf(pspc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pspc *ProductStorePromotionController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pspc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pspc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pspc *ProductStorePromotionController) IsKind(className string) bool {
+	defer runtime.KeepAlive(pspc)
 	return rt.IsKind(objref.IDOf(pspc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pspc *ProductStorePromotionController) String() string {
+	defer runtime.KeepAlive(pspc)
 	return rt.Description(objref.IDOf(pspc))
 }
 
@@ -79,6 +85,8 @@ func NewProductStorePromotionController() *ProductStorePromotionController {
 //
 // UpdateStorePromotionVisibilityForProduct blocks until the operation completes or ctx is cancelled.
 func (pspc *ProductStorePromotionController) UpdateStorePromotionVisibilityForProduct(ctx context.Context, promotionVisibility ProductStorePromotionVisibility, product *Product) error {
+	defer runtime.KeepAlive(pspc)
+	defer runtime.KeepAlive(product)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -98,6 +106,7 @@ func (pspc *ProductStorePromotionController) UpdateStorePromotionVisibilityForPr
 //
 // FetchStorePromotionOrder blocks until the operation completes or ctx is cancelled.
 func (pspc *ProductStorePromotionController) FetchStorePromotionOrder(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(pspc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -123,6 +132,7 @@ func (pspc *ProductStorePromotionController) FetchStorePromotionOrder(ctx contex
 //
 // UpdateStorePromotionOrder blocks until the operation completes or ctx is cancelled.
 func (pspc *ProductStorePromotionController) UpdateStorePromotionOrder(ctx context.Context, promotionOrder []*Product) error {
+	defer runtime.KeepAlive(pspc)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error

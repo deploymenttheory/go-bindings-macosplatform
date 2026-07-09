@@ -5,7 +5,10 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,34 @@ func dataPointAdopt(id objc.ID) *DataPoint {
 
 // Description returns the object's -description text.
 func (dp *DataPoint) Description() string {
+	defer runtime.KeepAlive(dp)
 	return rt.Description(objref.IDOf(dp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dp *DataPoint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dp *DataPoint) IsKind(className string) bool {
+	defer runtime.KeepAlive(dp)
 	return rt.IsKind(objref.IDOf(dp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dp *DataPoint) String() string {
+	defer runtime.KeepAlive(dp)
 	return rt.Description(objref.IDOf(dp))
 }
 
 // NewDataPointWithXY creates a data point with the specified x- and y-values.
 func NewDataPointWithXY(xValue *DataPointValue, yValue *DataPointValue) *DataPoint {
+	defer runtime.KeepAlive(xValue)
+	defer runtime.KeepAlive(yValue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AXDataPoint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithX:y:"), objref.IDOf(xValue), objref.IDOf(yValue))
 	return dataPointAdopt(_id)
@@ -75,6 +85,8 @@ func NewDataPointWithXY(xValue *DataPointValue, yValue *DataPointValue) *DataPoi
 
 // NewDataPointWithXYAdditionalValues creates a data point with the specified x-value, y-value, and additional values.
 func NewDataPointWithXYAdditionalValues(xValue *DataPointValue, yValue *DataPointValue, additionalValues []*DataPointValue) *DataPoint {
+	defer runtime.KeepAlive(xValue)
+	defer runtime.KeepAlive(yValue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AXDataPoint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithX:y:additionalValues:"), objref.IDOf(xValue), objref.IDOf(yValue), purego.SliceToNSArray(additionalValues, func(_v *DataPointValue) objc.ID { return objref.IDOf(_v) }))
 	return dataPointAdopt(_id)
@@ -82,6 +94,8 @@ func NewDataPointWithXYAdditionalValues(xValue *DataPointValue, yValue *DataPoin
 
 // NewDataPointWithXYAdditionalValuesLabel creates a data point with the specified x-value, y-value, additional values, and label.
 func NewDataPointWithXYAdditionalValuesLabel(xValue *DataPointValue, yValue *DataPointValue, additionalValues []*DataPointValue, label string) *DataPoint {
+	defer runtime.KeepAlive(xValue)
+	defer runtime.KeepAlive(yValue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AXDataPoint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithX:y:additionalValues:label:"), objref.IDOf(xValue), objref.IDOf(yValue), purego.SliceToNSArray(additionalValues, func(_v *DataPointValue) objc.ID { return objref.IDOf(_v) }), purego.NSString(label))
 	return dataPointAdopt(_id)
@@ -89,12 +103,14 @@ func NewDataPointWithXYAdditionalValuesLabel(xValue *DataPointValue, yValue *Dat
 
 // WithXValue sets the value of the x-axis for the data point.
 func (dp *DataPoint) WithXValue(xValue *DataPointValue) *DataPoint {
+	defer runtime.KeepAlive(xValue)
 	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setXValue:"), objref.IDOf(xValue))
 	return dp
 }
 
 // WithYValue sets the value of the y-axis for the data point.
 func (dp *DataPoint) WithYValue(yValue *DataPointValue) *DataPoint {
+	defer runtime.KeepAlive(yValue)
 	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setYValue:"), objref.IDOf(yValue))
 	return dp
 }
@@ -114,18 +130,21 @@ func (dp *DataPoint) WithLabel(label string) *DataPoint {
 
 // WithAttributedLabel sets an attributed version of the label for the data point.
 func (dp *DataPoint) WithAttributedLabel(attributedLabel obj.Object) *DataPoint {
+	defer runtime.KeepAlive(attributedLabel)
 	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAttributedLabel:"), objref.IDOf(attributedLabel))
 	return dp
 }
 
 // XValue returns the x-axis value for this data point. Should be a Double for a numeric x-axis or a String for a categorical x-axis.
 func (dp *DataPoint) XValue() *DataPointValue {
+	defer runtime.KeepAlive(dp)
 	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("xValue"))
 	return DataPointValueFromID(_r)
 }
 
 // YValue returns the y-axis value for this data point.
 func (dp *DataPoint) YValue() *DataPointValue {
+	defer runtime.KeepAlive(dp)
 	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("yValue"))
 	return DataPointValueFromID(_r)
 }
@@ -134,12 +153,14 @@ func (dp *DataPoint) YValue() *DataPointValue {
 //
 // AdditionalValues returns the collection as a Go slice.
 func (dp *DataPoint) AdditionalValues() []*DataPointValue {
+	defer runtime.KeepAlive(dp)
 	_arr := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("additionalValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DataPointValue { return DataPointValueFromID(_id) })
 }
 
 // Label returns a name or label for this data point.
 func (dp *DataPoint) Label() string {
+	defer runtime.KeepAlive(dp)
 	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -148,7 +169,8 @@ func (dp *DataPoint) Label() string {
 }
 
 // AttributedLabel returns an attributed version of the name or label for this data point.
-func (dp *DataPoint) AttributedLabel() obj.Object {
+func (dp *DataPoint) AttributedLabel() *foundation.AttributedString {
+	defer runtime.KeepAlive(dp)
 	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("attributedLabel"))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }

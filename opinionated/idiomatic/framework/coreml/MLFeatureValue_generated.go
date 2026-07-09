@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func featureValueAdopt(id objc.ID) *FeatureValue {
 
 // Description returns the object's -description text.
 func (fv *FeatureValue) Description() string {
+	defer runtime.KeepAlive(fv)
 	return rt.Description(objref.IDOf(fv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fv *FeatureValue) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fv *FeatureValue) IsKind(className string) bool {
+	defer runtime.KeepAlive(fv)
 	return rt.IsKind(objref.IDOf(fv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fv *FeatureValue) String() string {
+	defer runtime.KeepAlive(fv)
 	return rt.Description(objref.IDOf(fv))
 }
 
@@ -74,36 +81,43 @@ func NewFeatureValue() *FeatureValue {
 
 // IsEqualToFeatureValue returns a Boolean value that indicates whether a feature value is equal to another.
 func (fv *FeatureValue) IsEqualToFeatureValue(value *FeatureValue) bool {
+	defer runtime.KeepAlive(fv)
+	defer runtime.KeepAlive(value)
 	_r := objc.Send[bool](objref.IDOf(fv), objc.RegisterName("isEqualToFeatureValue:"), objref.IDOf(value))
 	return _r
 }
 
 // Type returns type of the value for which the corresponding property below is held
 func (fv *FeatureValue) Type() FeatureType {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[FeatureType](objref.IDOf(fv), objc.RegisterName("type"))
 	return _r
 }
 
 // IsUndefined reports whether the value represents a missing or undefined value
 func (fv *FeatureValue) IsUndefined() bool {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[bool](objref.IDOf(fv), objc.RegisterName("isUndefined"))
 	return _r
 }
 
 // Int64Value returns populated value if the type is MLFeatureTypeInt64
 func (fv *FeatureValue) Int64Value() int64 {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[int64](objref.IDOf(fv), objc.RegisterName("int64Value"))
 	return _r
 }
 
 // DoubleValue returns populated value if the type is MLFeatureTypeDouble
 func (fv *FeatureValue) DoubleValue() float64 {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[float64](objref.IDOf(fv), objc.RegisterName("doubleValue"))
 	return _r
 }
 
 // StringValue returns populated value if the type is MLFeatureTypeString
 func (fv *FeatureValue) StringValue() string {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""
@@ -113,18 +127,21 @@ func (fv *FeatureValue) StringValue() string {
 
 // MultiArrayValue returns populated value if the type is MLFeatureTypeMultiArray
 func (fv *FeatureValue) MultiArrayValue() *MultiArray {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("multiArrayValue"))
 	return MultiArrayFromID(_r)
 }
 
 // DictionaryValue returns populated value if the type is MLFeatureTypeDictionary
 func (fv *FeatureValue) DictionaryValue() obj.Object {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("dictionaryValue"))
 	return obj.Wrap(_r)
 }
 
 // SequenceValue returns populated value if the type is MLFeatureTypeSequence
 func (fv *FeatureValue) SequenceValue() *Sequence {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("sequenceValue"))
 	return SequenceFromID(_r)
 }

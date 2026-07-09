@@ -5,6 +5,8 @@
 package syncservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func iSyncFilterAdopt(id objc.ID) *ISyncFilter {
 
 // Description returns the object's -description text.
 func (isf *ISyncFilter) Description() string {
+	defer runtime.KeepAlive(isf)
 	return rt.Description(objref.IDOf(isf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (isf *ISyncFilter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(isf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(isf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (isf *ISyncFilter) IsKind(className string) bool {
+	defer runtime.KeepAlive(isf)
 	return rt.IsKind(objref.IDOf(isf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (isf *ISyncFilter) String() string {
+	defer runtime.KeepAlive(isf)
 	return rt.Description(objref.IDOf(isf))
 }
 

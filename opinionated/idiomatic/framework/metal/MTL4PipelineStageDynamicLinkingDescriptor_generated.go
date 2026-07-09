@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTL4PipelineStageDynamicLinkingDescriptorAdopt(id objc.ID) *MTL4PipelineSta
 
 // Description returns the object's -description text.
 func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) Description() string {
+	defer runtime.KeepAlive(mpsdld)
 	return rt.Description(objref.IDOf(mpsdld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mpsdld)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mpsdld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(mpsdld)
 	return rt.IsKind(objref.IDOf(mpsdld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) String() string {
+	defer runtime.KeepAlive(mpsdld)
 	return rt.Description(objref.IDOf(mpsdld))
 }
 
@@ -80,28 +87,33 @@ func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) WithMaxCallStackDepth(m
 
 // MaxCallStackDepth returns limits the maximum depth of the call stack for indirect function calls in the pipeline stage function.
 func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) MaxCallStackDepth() int {
+	defer runtime.KeepAlive(mpsdld)
 	_r := objc.Send[int](objref.IDOf(mpsdld), objc.RegisterName("maxCallStackDepth"))
 	return _r
 }
 
 // BinaryLinkedFunctions provides the array of binary functions to link. Binary functions are shader functions that you compile from Metal IR to machine code ahead of time using instances of “MTL4Compiler“.
 func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) BinaryLinkedFunctions() []obj.Object {
+	defer runtime.KeepAlive(mpsdld)
 	_r := objc.Send[objc.ID](objref.IDOf(mpsdld), objc.RegisterName("binaryLinkedFunctions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetBinaryLinkedFunctions wraps the corresponding Objective-C method.
 func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) SetBinaryLinkedFunctions(binaryLinkedFunctions []obj.Object) {
+	defer runtime.KeepAlive(mpsdld)
 	objc.Send[objc.ID](objref.IDOf(mpsdld), objc.RegisterName("setBinaryLinkedFunctions:"), purego.SliceToNSArray(binaryLinkedFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // PreloadedLibraries provides an array of dynamic libraries the compiler loads when it builds the pipeline.
 func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) PreloadedLibraries() []obj.Object {
+	defer runtime.KeepAlive(mpsdld)
 	_r := objc.Send[objc.ID](objref.IDOf(mpsdld), objc.RegisterName("preloadedLibraries"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetPreloadedLibraries wraps the corresponding Objective-C method.
 func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) SetPreloadedLibraries(preloadedLibraries []obj.Object) {
+	defer runtime.KeepAlive(mpsdld)
 	objc.Send[objc.ID](objref.IDOf(mpsdld), objc.RegisterName("setPreloadedLibraries:"), purego.SliceToNSArray(preloadedLibraries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }

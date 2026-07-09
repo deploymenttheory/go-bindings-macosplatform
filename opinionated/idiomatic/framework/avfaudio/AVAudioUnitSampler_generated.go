@@ -5,12 +5,12 @@
 package avfaudio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -82,6 +82,7 @@ func (aus *AudioUnitSampler) WithGlobalTuning(globalTuning float32) *AudioUnitSa
 
 // LoadSoundBankInstrumentAtURLProgramBankMSBBankLSB loads a specific instrument from the specified soundbank.
 func (aus *AudioUnitSampler) LoadSoundBankInstrumentAtURLProgramBankMSBBankLSB(bankURL string, program uint8, bankMSB uint8, bankLSB uint8) error {
+	defer runtime.KeepAlive(aus)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(aus), objc.RegisterName("loadSoundBankInstrumentAtURL:program:bankMSB:bankLSB:error:"), rt.FileURL(bankURL), program, bankMSB, bankLSB, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -92,6 +93,7 @@ func (aus *AudioUnitSampler) LoadSoundBankInstrumentAtURLProgramBankMSBBankLSB(b
 
 // LoadInstrumentAtURL configures the sampler with the specified instrument file.
 func (aus *AudioUnitSampler) LoadInstrumentAtURL(instrumentURL string) error {
+	defer runtime.KeepAlive(aus)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(aus), objc.RegisterName("loadInstrumentAtURL:error:"), rt.FileURL(instrumentURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -101,9 +103,10 @@ func (aus *AudioUnitSampler) LoadInstrumentAtURL(instrumentURL string) error {
 }
 
 // LoadAudioFilesAtURLs configures the sampler by loading the specified audio files.
-func (aus *AudioUnitSampler) LoadAudioFilesAtURLs(audioFiles []obj.Object) error {
+func (aus *AudioUnitSampler) LoadAudioFilesAtURLs(audioFiles []string) error {
+	defer runtime.KeepAlive(aus)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(aus), objc.RegisterName("loadAudioFilesAtURLs:error:"), purego.SliceToNSArray(audioFiles, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(aus), objc.RegisterName("loadAudioFilesAtURLs:error:"), purego.SliceToNSArray(audioFiles, func(_v string) objc.ID { return rt.FileURL(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -112,24 +115,28 @@ func (aus *AudioUnitSampler) LoadAudioFilesAtURLs(audioFiles []obj.Object) error
 
 // StereoPan returns adjusts the pan for all the notes played. Range:     -100 -> +100 Default:   0
 func (aus *AudioUnitSampler) StereoPan() float32 {
+	defer runtime.KeepAlive(aus)
 	_r := objc.Send[float32](objref.IDOf(aus), objc.RegisterName("stereoPan"))
 	return _r
 }
 
 // OverallGain returns adjusts the gain of all the notes played Range:     -90.0 -> +12 db Default: 0 db
 func (aus *AudioUnitSampler) OverallGain() float32 {
+	defer runtime.KeepAlive(aus)
 	_r := objc.Send[float32](objref.IDOf(aus), objc.RegisterName("overallGain"))
 	return _r
 }
 
 // MasterGain returns adjusts the gain of all the notes played Range:     -90.0 -> +12 db Default: 0 db
 func (aus *AudioUnitSampler) MasterGain() float32 {
+	defer runtime.KeepAlive(aus)
 	_r := objc.Send[float32](objref.IDOf(aus), objc.RegisterName("masterGain"))
 	return _r
 }
 
 // GlobalTuning returns adjusts the tuning of all the notes played. Range:     -2400 -> +2400 cents Default:   0
 func (aus *AudioUnitSampler) GlobalTuning() float32 {
+	defer runtime.KeepAlive(aus)
 	_r := objc.Send[float32](objref.IDOf(aus), objc.RegisterName("globalTuning"))
 	return _r
 }

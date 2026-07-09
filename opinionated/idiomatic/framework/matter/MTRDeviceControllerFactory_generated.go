@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,22 +49,27 @@ func mTRDeviceControllerFactoryAdopt(id objc.ID) *MTRDeviceControllerFactory {
 
 // Description returns the object's -description text.
 func (mdcf *MTRDeviceControllerFactory) Description() string {
+	defer runtime.KeepAlive(mdcf)
 	return rt.Description(objref.IDOf(mdcf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdcf *MTRDeviceControllerFactory) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdcf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdcf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdcf *MTRDeviceControllerFactory) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdcf)
 	return rt.IsKind(objref.IDOf(mdcf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdcf *MTRDeviceControllerFactory) String() string {
+	defer runtime.KeepAlive(mdcf)
 	return rt.Description(objref.IDOf(mdcf))
 }
 
@@ -75,6 +81,8 @@ func NewMTRDeviceControllerFactory() *MTRDeviceControllerFactory {
 
 // StartControllerFactory start the controller factory. Repeated calls to startControllerFactory without calls to stopControllerFactory in between are NO-OPs. Use the isRunning property to check whether the controller factory needs to be started up.
 func (mdcf *MTRDeviceControllerFactory) StartControllerFactory(startupParams *MTRDeviceControllerFactoryParams) error {
+	defer runtime.KeepAlive(mdcf)
+	defer runtime.KeepAlive(startupParams)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(mdcf), objc.RegisterName("startControllerFactory:error:"), objref.IDOf(startupParams), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -85,11 +93,14 @@ func (mdcf *MTRDeviceControllerFactory) StartControllerFactory(startupParams *MT
 
 // StopControllerFactory stop the controller factory. This will shut down any outstanding controllers as part of the factory stopping. Repeated calls to stopControllerFactory without calls to startControllerFactory in between are NO-OPs.
 func (mdcf *MTRDeviceControllerFactory) StopControllerFactory() {
+	defer runtime.KeepAlive(mdcf)
 	objc.Send[objc.ID](objref.IDOf(mdcf), objc.RegisterName("stopControllerFactory"))
 }
 
-// CreateControllerOnExistingFabricError create a MTRDeviceController on an existing fabric.  Returns nil on failure. This method will fail if there is no such fabric or if there is already a controller started for that fabric. The fabric is identified by the root public key and fabric id in the startupParams. This method can only be used if the factory was initialized with storage. When using per-controller storage, use [MTRDeviceController initWithParameters:error:].
-func (mdcf *MTRDeviceControllerFactory) CreateControllerOnExistingFabricError(startupParams *MTRDeviceControllerStartupParams) (result *MTRDeviceController, err error) {
+// CreateControllerOnExistingFabric create a MTRDeviceController on an existing fabric.  Returns nil on failure. This method will fail if there is no such fabric or if there is already a controller started for that fabric. The fabric is identified by the root public key and fabric id in the startupParams. This method can only be used if the factory was initialized with storage. When using per-controller storage, use [MTRDeviceController initWithParameters:error:].
+func (mdcf *MTRDeviceControllerFactory) CreateControllerOnExistingFabric(startupParams *MTRDeviceControllerStartupParams) (result *MTRDeviceController, err error) {
+	defer runtime.KeepAlive(mdcf)
+	defer runtime.KeepAlive(startupParams)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(mdcf), objc.RegisterName("createControllerOnExistingFabric:error:"), objref.IDOf(startupParams), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -98,8 +109,10 @@ func (mdcf *MTRDeviceControllerFactory) CreateControllerOnExistingFabricError(st
 	return MTRDeviceControllerFromID(_r), nil
 }
 
-// CreateControllerOnNewFabricError create a MTRDeviceController on a new fabric.  Returns nil on failure. This method will fail if the given fabric already exists. The fabric is identified by the root public key and fabric id in the startupParams. This method can only be used if the factory was initialized with storage. When using per-controller storage, use [MTRDeviceController initWithParameters:error:].
-func (mdcf *MTRDeviceControllerFactory) CreateControllerOnNewFabricError(startupParams *MTRDeviceControllerStartupParams) (result *MTRDeviceController, err error) {
+// CreateControllerOnNewFabric create a MTRDeviceController on a new fabric.  Returns nil on failure. This method will fail if the given fabric already exists. The fabric is identified by the root public key and fabric id in the startupParams. This method can only be used if the factory was initialized with storage. When using per-controller storage, use [MTRDeviceController initWithParameters:error:].
+func (mdcf *MTRDeviceControllerFactory) CreateControllerOnNewFabric(startupParams *MTRDeviceControllerStartupParams) (result *MTRDeviceController, err error) {
+	defer runtime.KeepAlive(mdcf)
+	defer runtime.KeepAlive(startupParams)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(mdcf), objc.RegisterName("createControllerOnNewFabric:error:"), objref.IDOf(startupParams), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -110,11 +123,13 @@ func (mdcf *MTRDeviceControllerFactory) CreateControllerOnNewFabricError(startup
 
 // PreWarmCommissioningSession if possible, pre-warm the Matter stack for setting up a commissioning session. This may be called before -[MTRDeviceController setupCommissioningSessionWithPayload:] if it is known that a commissioning attempt will soon take place, but the commissioning payload is not known yet. The controller factory must be running for pre-warming to take place.  Pre-warming can take place before any controllers are started.
 func (mdcf *MTRDeviceControllerFactory) PreWarmCommissioningSession() {
+	defer runtime.KeepAlive(mdcf)
 	objc.Send[objc.ID](objref.IDOf(mdcf), objc.RegisterName("preWarmCommissioningSession"))
 }
 
 // IsRunning reports whether if true, the factory is in a state where it can create controllers: startControllerFactory has been called, but stopControllerFactory has not been called since then.
 func (mdcf *MTRDeviceControllerFactory) IsRunning() bool {
+	defer runtime.KeepAlive(mdcf)
 	_r := objc.Send[bool](objref.IDOf(mdcf), objc.RegisterName("isRunning"))
 	return _r
 }
@@ -123,6 +138,7 @@ func (mdcf *MTRDeviceControllerFactory) IsRunning() bool {
 //
 // KnownFabrics returns the collection as a Go slice.
 func (mdcf *MTRDeviceControllerFactory) KnownFabrics() []*MTRFabricInfo {
+	defer runtime.KeepAlive(mdcf)
 	_arr := objc.Send[objc.ID](objref.IDOf(mdcf), objc.RegisterName("knownFabrics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRFabricInfo { return MTRFabricInfoFromID(_id) })
 }

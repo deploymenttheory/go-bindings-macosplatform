@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRThermostatClusterScheduleTypeStructAdopt(id objc.ID) *MTRThermostatClust
 
 // Description returns the object's -description text.
 func (mtcsts *MTRThermostatClusterScheduleTypeStruct) Description() string {
+	defer runtime.KeepAlive(mtcsts)
 	return rt.Description(objref.IDOf(mtcsts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtcsts *MTRThermostatClusterScheduleTypeStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtcsts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtcsts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtcsts *MTRThermostatClusterScheduleTypeStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtcsts)
 	return rt.IsKind(objref.IDOf(mtcsts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtcsts *MTRThermostatClusterScheduleTypeStruct) String() string {
+	defer runtime.KeepAlive(mtcsts)
 	return rt.Description(objref.IDOf(mtcsts))
 }
 
@@ -72,36 +80,42 @@ func NewMTRThermostatClusterScheduleTypeStruct() *MTRThermostatClusterScheduleTy
 
 // WithSystemMode sets the system mode.
 func (mtcsts *MTRThermostatClusterScheduleTypeStruct) WithSystemMode(systemMode obj.Object) *MTRThermostatClusterScheduleTypeStruct {
+	defer runtime.KeepAlive(systemMode)
 	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setSystemMode:"), objref.IDOf(systemMode))
 	return mtcsts
 }
 
 // WithNumberOfSchedules sets the number of schedules.
 func (mtcsts *MTRThermostatClusterScheduleTypeStruct) WithNumberOfSchedules(numberOfSchedules obj.Object) *MTRThermostatClusterScheduleTypeStruct {
+	defer runtime.KeepAlive(numberOfSchedules)
 	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setNumberOfSchedules:"), objref.IDOf(numberOfSchedules))
 	return mtcsts
 }
 
 // WithScheduleTypeFeatures sets the schedule type features.
 func (mtcsts *MTRThermostatClusterScheduleTypeStruct) WithScheduleTypeFeatures(scheduleTypeFeatures obj.Object) *MTRThermostatClusterScheduleTypeStruct {
+	defer runtime.KeepAlive(scheduleTypeFeatures)
 	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setScheduleTypeFeatures:"), objref.IDOf(scheduleTypeFeatures))
 	return mtcsts
 }
 
 // SystemMode returns the system mode.
-func (mtcsts *MTRThermostatClusterScheduleTypeStruct) SystemMode() obj.Object {
+func (mtcsts *MTRThermostatClusterScheduleTypeStruct) SystemMode() *foundation.Number {
+	defer runtime.KeepAlive(mtcsts)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("systemMode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NumberOfSchedules returns the number of schedules.
-func (mtcsts *MTRThermostatClusterScheduleTypeStruct) NumberOfSchedules() obj.Object {
+func (mtcsts *MTRThermostatClusterScheduleTypeStruct) NumberOfSchedules() *foundation.Number {
+	defer runtime.KeepAlive(mtcsts)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("numberOfSchedules"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ScheduleTypeFeatures returns the schedule type features.
-func (mtcsts *MTRThermostatClusterScheduleTypeStruct) ScheduleTypeFeatures() obj.Object {
+func (mtcsts *MTRThermostatClusterScheduleTypeStruct) ScheduleTypeFeatures() *foundation.Number {
+	defer runtime.KeepAlive(mtcsts)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("scheduleTypeFeatures"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

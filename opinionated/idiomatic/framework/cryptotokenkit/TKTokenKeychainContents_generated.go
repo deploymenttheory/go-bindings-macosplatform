@@ -5,6 +5,7 @@
 package cryptotokenkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func tokenKeychainContentsAdopt(id objc.ID) *TokenKeychainContents {
 
 // Description returns the object's -description text.
 func (tkc *TokenKeychainContents) Description() string {
+	defer runtime.KeepAlive(tkc)
 	return rt.Description(objref.IDOf(tkc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tkc *TokenKeychainContents) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tkc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tkc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tkc *TokenKeychainContents) IsKind(className string) bool {
+	defer runtime.KeepAlive(tkc)
 	return rt.IsKind(objref.IDOf(tkc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tkc *TokenKeychainContents) String() string {
+	defer runtime.KeepAlive(tkc)
 	return rt.Description(objref.IDOf(tkc))
 }
 
@@ -77,11 +83,14 @@ func NewTokenKeychainContents() *TokenKeychainContents {
 
 // FillWithItems fills the keychain with the specified items.
 func (tkc *TokenKeychainContents) FillWithItems(items []*TokenKeychainItem) {
+	defer runtime.KeepAlive(tkc)
 	objc.Send[objc.ID](objref.IDOf(tkc), objc.RegisterName("fillWithItems:"), purego.SliceToNSArray(items, func(_v *TokenKeychainItem) objc.ID { return objref.IDOf(_v) }))
 }
 
-// KeyForObjectIDError returns the key for a specified object identifier.
-func (tkc *TokenKeychainContents) KeyForObjectIDError(objectID obj.Object) (result *TokenKeychainKey, err error) {
+// KeyForObjectID returns the key for a specified object identifier.
+func (tkc *TokenKeychainContents) KeyForObjectID(objectID obj.Object) (result *TokenKeychainKey, err error) {
+	defer runtime.KeepAlive(tkc)
+	defer runtime.KeepAlive(objectID)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(tkc), objc.RegisterName("keyForObjectID:error:"), objref.IDOf(objectID), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -90,8 +99,10 @@ func (tkc *TokenKeychainContents) KeyForObjectIDError(objectID obj.Object) (resu
 	return TokenKeychainKeyFromID(_r), nil
 }
 
-// CertificateForObjectIDError returns the key for a specified object identifier.
-func (tkc *TokenKeychainContents) CertificateForObjectIDError(objectID obj.Object) (result *TokenKeychainCertificate, err error) {
+// CertificateForObjectID returns the key for a specified object identifier.
+func (tkc *TokenKeychainContents) CertificateForObjectID(objectID obj.Object) (result *TokenKeychainCertificate, err error) {
+	defer runtime.KeepAlive(tkc)
+	defer runtime.KeepAlive(objectID)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(tkc), objc.RegisterName("certificateForObjectID:error:"), objref.IDOf(objectID), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -104,6 +115,7 @@ func (tkc *TokenKeychainContents) CertificateForObjectIDError(objectID obj.Objec
 //
 // Items returns the collection as a Go slice.
 func (tkc *TokenKeychainContents) Items() []*TokenKeychainItem {
+	defer runtime.KeepAlive(tkc)
 	_arr := objc.Send[objc.ID](objref.IDOf(tkc), objc.RegisterName("items"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TokenKeychainItem { return TokenKeychainItemFromID(_id) })
 }

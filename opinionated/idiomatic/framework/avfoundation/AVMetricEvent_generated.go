@@ -5,6 +5,9 @@
 package avfoundation
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -50,39 +53,47 @@ func metricEventAdopt(id objc.ID) *MetricEvent {
 
 // Description returns the object's -description text.
 func (me *MetricEvent) Description() string {
+	defer runtime.KeepAlive(me)
 	return rt.Description(objref.IDOf(me))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (me *MetricEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(me)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(me), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (me *MetricEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(me)
 	return rt.IsKind(objref.IDOf(me), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (me *MetricEvent) String() string {
+	defer runtime.KeepAlive(me)
 	return rt.Description(objref.IDOf(me))
 }
 
 // Date returns the date when the event occurred.
-func (me *MetricEvent) Date() obj.Object {
+func (me *MetricEvent) Date() time.Time {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("date"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // MediaTime returns the time in the media timeline when the event occured.
 func (me *MetricEvent) MediaTime() coremedia.CMTime {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(me), objc.RegisterName("mediaTime"))
 	return _r
 }
 
 // SessionID returns a GUID that identifies the media session. If not available, value is nil.
 func (me *MetricEvent) SessionID() string {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("sessionID"))
 	if _r == 0 {
 		return ""

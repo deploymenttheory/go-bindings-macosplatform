@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -143,95 +145,111 @@ func (gpdod *GraphPooling2DOpDescriptor) WithIncludeZeroPadToAverage(includeZero
 
 // SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom sets the explicit padding values and sets padding style to explicit.
 func (gpdod *GraphPooling2DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft int, paddingRight int, paddingTop int, paddingBottom int) {
+	defer runtime.KeepAlive(gpdod)
 	objc.Send[objc.ID](objref.IDOf(gpdod), objc.RegisterName("setExplicitPaddingWithPaddingLeft:paddingRight:paddingTop:paddingBottom:"), paddingLeft, paddingRight, paddingTop, paddingBottom)
 }
 
 // KernelWidth defines the pooling window size for the width dimension.
 func (gpdod *GraphPooling2DOpDescriptor) KernelWidth() int {
+	defer runtime.KeepAlive(gpdod)
 	_r := objc.Send[int](objref.IDOf(gpdod), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
 // KernelHeight defines the pooling window size for the height dimension.
 func (gpdod *GraphPooling2DOpDescriptor) KernelHeight() int {
+	defer runtime.KeepAlive(gpdod)
 	_r := objc.Send[int](objref.IDOf(gpdod), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
 // StrideInX defines the stride for the width dimension. Default value: 1.
 func (gpdod *GraphPooling2DOpDescriptor) StrideInX() int {
+	defer runtime.KeepAlive(gpdod)
 	_r := objc.Send[int](objref.IDOf(gpdod), objc.RegisterName("strideInX"))
 	return _r
 }
 
 // StrideInY defines the stride for the height dimension. Default value: 1.
 func (gpdod *GraphPooling2DOpDescriptor) StrideInY() int {
+	defer runtime.KeepAlive(gpdod)
 	_r := objc.Send[int](objref.IDOf(gpdod), objc.RegisterName("strideInY"))
 	return _r
 }
 
 // DilationRateInX defines the dilation rate for the width dimension. Default value: 1.
 func (gpdod *GraphPooling2DOpDescriptor) DilationRateInX() int {
+	defer runtime.KeepAlive(gpdod)
 	_r := objc.Send[int](objref.IDOf(gpdod), objc.RegisterName("dilationRateInX"))
 	return _r
 }
 
 // DilationRateInY defines the dilation rate for the height dimension. Default value: 1.
 func (gpdod *GraphPooling2DOpDescriptor) DilationRateInY() int {
+	defer runtime.KeepAlive(gpdod)
 	_r := objc.Send[int](objref.IDOf(gpdod), objc.RegisterName("dilationRateInY"))
 	return _r
 }
 
 // PaddingLeft defines the explicit padding value for the width dimension to add before the data. Default value: 0.
 func (gpdod *GraphPooling2DOpDescriptor) PaddingLeft() int {
+	defer runtime.KeepAlive(gpdod)
 	_r := objc.Send[int](objref.IDOf(gpdod), objc.RegisterName("paddingLeft"))
 	return _r
 }
 
 // PaddingRight defines the explicit padding value for the width dimension to add after the data. Default value: 0.
 func (gpdod *GraphPooling2DOpDescriptor) PaddingRight() int {
+	defer runtime.KeepAlive(gpdod)
 	_r := objc.Send[int](objref.IDOf(gpdod), objc.RegisterName("paddingRight"))
 	return _r
 }
 
 // PaddingTop defines the explicit padding value for the height dimension to add before the data. Default value: 0.
 func (gpdod *GraphPooling2DOpDescriptor) PaddingTop() int {
+	defer runtime.KeepAlive(gpdod)
 	_r := objc.Send[int](objref.IDOf(gpdod), objc.RegisterName("paddingTop"))
 	return _r
 }
 
 // PaddingBottom defines the explicit padding value for the height dimension to add after the data. Default value: 0.
 func (gpdod *GraphPooling2DOpDescriptor) PaddingBottom() int {
+	defer runtime.KeepAlive(gpdod)
 	_r := objc.Send[int](objref.IDOf(gpdod), objc.RegisterName("paddingBottom"))
 	return _r
 }
 
 // PaddingStyle defines what kind of padding graph applies to the operation. Default value: `MPSGraphPaddingStyleExplicit`.
 func (gpdod *GraphPooling2DOpDescriptor) PaddingStyle() GraphPaddingStyle {
+	defer runtime.KeepAlive(gpdod)
 	_r := objc.Send[GraphPaddingStyle](objref.IDOf(gpdod), objc.RegisterName("paddingStyle"))
 	return _r
 }
 
 // DataLayout defines the data layout of the input data in the forward pass. See: “MPSGraphTensorNamedDataLayout“.
 func (gpdod *GraphPooling2DOpDescriptor) DataLayout() GraphTensorNamedDataLayout {
+	defer runtime.KeepAlive(gpdod)
 	_r := objc.Send[GraphTensorNamedDataLayout](objref.IDOf(gpdod), objc.RegisterName("dataLayout"))
 	return _r
 }
 
 // ReturnIndicesMode defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
 func (gpdod *GraphPooling2DOpDescriptor) ReturnIndicesMode() GraphPoolingReturnIndicesMode {
+	defer runtime.KeepAlive(gpdod)
 	_r := objc.Send[GraphPoolingReturnIndicesMode](objref.IDOf(gpdod), objc.RegisterName("returnIndicesMode"))
 	return _r
 }
 
 // CeilMode reports whether affects how the graph computes the output size. if set to `YES` then output size is computed by rounding up instead of down when dividing input size by stride. Default value: `NO`.
 func (gpdod *GraphPooling2DOpDescriptor) CeilMode() bool {
+	defer runtime.KeepAlive(gpdod)
 	_r := objc.Send[bool](objref.IDOf(gpdod), objc.RegisterName("ceilMode"))
 	return _r
 }
 
 // IncludeZeroPadToAverage reports whether defines a mode for average pooling, where samples outside the input tensor count as zeroes in the average computation. Otherwise the result is sum over samples divided by number of samples that didn't come from padding. Default value: `NO`.
 func (gpdod *GraphPooling2DOpDescriptor) IncludeZeroPadToAverage() bool {
+	defer runtime.KeepAlive(gpdod)
 	_r := objc.Send[bool](objref.IDOf(gpdod), objc.RegisterName("includeZeroPadToAverage"))
 	return _r
 }

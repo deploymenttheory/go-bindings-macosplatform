@@ -5,9 +5,11 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,9 +55,10 @@ func NewRecognizedPoint() *RecognizedPoint {
 }
 
 // Identifier returns the identifier.
-func (rp *RecognizedPoint) Identifier() obj.Object {
+func (rp *RecognizedPoint) Identifier() *foundation.String {
+	defer runtime.KeepAlive(rp)
 	_r := objc.Send[objc.ID](objref.IDOf(rp), objc.RegisterName("identifier"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 var _ DetectedPointProvider = (*RecognizedPoint)(nil)

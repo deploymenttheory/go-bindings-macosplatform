@@ -56,7 +56,7 @@ func VmnetCopySharedInterfaceList() unsafe.Pointer {
 }
 
 // C function: vmnet_interface_add_ip_port_forwarding_rule
-func VmnetInterfaceAddIpPortForwardingRule(interface_ unsafe.Pointer, protocol uint8, external_port uint16, address_family uint8, internal_address unsafe.Pointer, internal_port uint16, handler func(Vmnet_return_t)) Vmnet_return_t {
+func VmnetInterfaceAddIpPortForwardingRule(interface_ unsafe.Pointer, protocol uint8, externalPort uint16, addressFamily uint8, internalAddress unsafe.Pointer, internalPort uint16, handler func(Vmnet_return_t)) Vmnet_return_t {
 	var __block_handler objc.Block
 	if handler != nil {
 		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 Vmnet_return_t) {
@@ -64,12 +64,12 @@ func VmnetInterfaceAddIpPortForwardingRule(interface_ unsafe.Pointer, protocol u
 		})
 		defer __block_handler.Release()
 	}
-	return _vmnet_interface_add_ip_port_forwarding_rule(interface_, protocol, external_port, address_family, internal_address, internal_port, __block_handler)
+	return _vmnet_interface_add_ip_port_forwarding_rule(interface_, protocol, externalPort, addressFamily, internalAddress, internalPort, __block_handler)
 }
 
 // C function: vmnet_interface_add_port_forwarding_rule
 // Deprecated: replaced by vmnet_interface_add_ip_port_forwarding_rule
-func VmnetInterfaceAddPortForwardingRule(interface_ unsafe.Pointer, protocol uint8, external_port uint16, internal_address unsafe.Pointer, internal_port uint16, handler func(Vmnet_return_t)) Vmnet_return_t {
+func VmnetInterfaceAddPortForwardingRule(interface_ unsafe.Pointer, protocol uint8, externalPort uint16, internalAddress unsafe.Pointer, internalPort uint16, handler func(Vmnet_return_t)) Vmnet_return_t {
 	var __block_handler objc.Block
 	if handler != nil {
 		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 Vmnet_return_t) {
@@ -77,11 +77,11 @@ func VmnetInterfaceAddPortForwardingRule(interface_ unsafe.Pointer, protocol uin
 		})
 		defer __block_handler.Release()
 	}
-	return _vmnet_interface_add_port_forwarding_rule(interface_, protocol, external_port, internal_address, internal_port, __block_handler)
+	return _vmnet_interface_add_port_forwarding_rule(interface_, protocol, externalPort, internalAddress, internalPort, __block_handler)
 }
 
 // C function: vmnet_interface_get_ip_port_forwarding_rules
-func VmnetInterfaceGetIpPortForwardingRules(interface_ unsafe.Pointer, address_family uint8, handler func(*foundation.NSObject)) Vmnet_return_t {
+func VmnetInterfaceGetIpPortForwardingRules(interface_ unsafe.Pointer, addressFamily uint8, handler func(*foundation.NSObject)) Vmnet_return_t {
 	var __block_handler objc.Block
 	if handler != nil {
 		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
@@ -92,7 +92,7 @@ func VmnetInterfaceGetIpPortForwardingRules(interface_ unsafe.Pointer, address_f
 		})
 		defer __block_handler.Release()
 	}
-	return _vmnet_interface_get_ip_port_forwarding_rules(interface_, address_family, __block_handler)
+	return _vmnet_interface_get_ip_port_forwarding_rules(interface_, addressFamily, __block_handler)
 }
 
 // C function: vmnet_interface_get_port_forwarding_rules
@@ -112,7 +112,7 @@ func VmnetInterfaceGetPortForwardingRules(interface_ unsafe.Pointer, handler fun
 }
 
 // C function: vmnet_interface_remove_ip_port_forwarding_rule
-func VmnetInterfaceRemoveIpPortForwardingRule(interface_ unsafe.Pointer, protocol uint8, external_port uint16, address_family uint8, handler func(Vmnet_return_t)) Vmnet_return_t {
+func VmnetInterfaceRemoveIpPortForwardingRule(interface_ unsafe.Pointer, protocol uint8, externalPort uint16, addressFamily uint8, handler func(Vmnet_return_t)) Vmnet_return_t {
 	var __block_handler objc.Block
 	if handler != nil {
 		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 Vmnet_return_t) {
@@ -120,12 +120,12 @@ func VmnetInterfaceRemoveIpPortForwardingRule(interface_ unsafe.Pointer, protoco
 		})
 		defer __block_handler.Release()
 	}
-	return _vmnet_interface_remove_ip_port_forwarding_rule(interface_, protocol, external_port, address_family, __block_handler)
+	return _vmnet_interface_remove_ip_port_forwarding_rule(interface_, protocol, externalPort, addressFamily, __block_handler)
 }
 
 // C function: vmnet_interface_remove_port_forwarding_rule
 // Deprecated: replaced by vmnet_interface_remove_ip_port_forwarding_rule
-func VmnetInterfaceRemovePortForwardingRule(interface_ unsafe.Pointer, protocol uint8, external_port uint16, handler func(Vmnet_return_t)) Vmnet_return_t {
+func VmnetInterfaceRemovePortForwardingRule(interface_ unsafe.Pointer, protocol uint8, externalPort uint16, handler func(Vmnet_return_t)) Vmnet_return_t {
 	var __block_handler objc.Block
 	if handler != nil {
 		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 Vmnet_return_t) {
@@ -133,11 +133,11 @@ func VmnetInterfaceRemovePortForwardingRule(interface_ unsafe.Pointer, protocol 
 		})
 		defer __block_handler.Release()
 	}
-	return _vmnet_interface_remove_port_forwarding_rule(interface_, protocol, external_port, __block_handler)
+	return _vmnet_interface_remove_port_forwarding_rule(interface_, protocol, externalPort, __block_handler)
 }
 
 // C function: vmnet_interface_set_event_callback
-func VmnetInterfaceSetEventCallback(interface_ unsafe.Pointer, event_mask Interface_event_t, queue *foundation.NSObject, callback func(Interface_event_t, *foundation.NSObject)) Vmnet_return_t {
+func VmnetInterfaceSetEventCallback(interface_ unsafe.Pointer, eventMask Interface_event_t, queue *foundation.NSObject, callback func(Interface_event_t, *foundation.NSObject)) Vmnet_return_t {
 	var __block_callback objc.Block
 	if callback != nil {
 		__block_callback = objc.NewBlock(func(_ objc.Block, blockParam0 Interface_event_t, blockParam1 objc.ID) {
@@ -148,27 +148,27 @@ func VmnetInterfaceSetEventCallback(interface_ unsafe.Pointer, event_mask Interf
 		})
 		defer __block_callback.Release()
 	}
-	return _vmnet_interface_set_event_callback(interface_, event_mask, queue.Ptr(), __block_callback)
+	return _vmnet_interface_set_event_callback(interface_, eventMask, queue.Ptr(), __block_callback)
 }
 
 // C function: vmnet_interface_start_with_network
-func VmnetInterfaceStartWithNetwork(network unsafe.Pointer, interface_desc *foundation.NSObject, queue *foundation.NSObject, start_block func(Vmnet_return_t, *foundation.NSObject)) unsafe.Pointer {
-	var __block_start_block objc.Block
-	if start_block != nil {
-		__block_start_block = objc.NewBlock(func(_ objc.Block, blockParam0 Vmnet_return_t, blockParam1 objc.ID) {
+func VmnetInterfaceStartWithNetwork(network unsafe.Pointer, interfaceDesc *foundation.NSObject, queue *foundation.NSObject, startBlock func(Vmnet_return_t, *foundation.NSObject)) unsafe.Pointer {
+	var __block_startBlock objc.Block
+	if startBlock != nil {
+		__block_startBlock = objc.NewBlock(func(_ objc.Block, blockParam0 Vmnet_return_t, blockParam1 objc.ID) {
 			if blockParam1 != 0 {
 				blockParam1.Send(objc.RegisterName("retain"))
 			}
-			start_block(blockParam0, foundation.NSObjectFromID(blockParam1))
+			startBlock(blockParam0, foundation.NSObjectFromID(blockParam1))
 		})
-		defer __block_start_block.Release()
+		defer __block_startBlock.Release()
 	}
-	return _vmnet_interface_start_with_network(network, interface_desc.Ptr(), queue.Ptr(), __block_start_block)
+	return _vmnet_interface_start_with_network(network, interfaceDesc.Ptr(), queue.Ptr(), __block_startBlock)
 }
 
 // C function: vmnet_ip_port_forwarding_rule_get_details
-func VmnetIpPortForwardingRuleGetDetails(rule *foundation.NSObject, protocol *uint8, external_port *uint16, address_family uint8, internal_address unsafe.Pointer, internal_port *uint16) Vmnet_return_t {
-	return _vmnet_ip_port_forwarding_rule_get_details(rule.Ptr(), protocol, external_port, address_family, internal_address, internal_port)
+func VmnetIpPortForwardingRuleGetDetails(rule *foundation.NSObject, protocol *uint8, externalPort *uint16, addressFamily uint8, internalAddress unsafe.Pointer, internalPort *uint16) Vmnet_return_t {
+	return _vmnet_ip_port_forwarding_rule_get_details(rule.Ptr(), protocol, externalPort, addressFamily, internalAddress, internalPort)
 }
 
 // C function: vmnet_network_configuration_add_dhcp_reservation
@@ -177,8 +177,8 @@ func VmnetNetworkConfigurationAddDhcpReservation(config unsafe.Pointer, client u
 }
 
 // C function: vmnet_network_configuration_add_port_forwarding_rule
-func VmnetNetworkConfigurationAddPortForwardingRule(config unsafe.Pointer, protocol uint8, address_family uint8, internal_port uint16, external_port uint16, internal_address unsafe.Pointer) Vmnet_return_t {
-	return _vmnet_network_configuration_add_port_forwarding_rule(config, protocol, address_family, internal_port, external_port, internal_address)
+func VmnetNetworkConfigurationAddPortForwardingRule(config unsafe.Pointer, protocol uint8, addressFamily uint8, internalPort uint16, externalPort uint16, internalAddress unsafe.Pointer) Vmnet_return_t {
+	return _vmnet_network_configuration_add_port_forwarding_rule(config, protocol, addressFamily, internalPort, externalPort, internalAddress)
 }
 
 // C function: vmnet_network_configuration_create
@@ -212,13 +212,13 @@ func VmnetNetworkConfigurationDisableRouterAdvertisement(config unsafe.Pointer) 
 }
 
 // C function: vmnet_network_configuration_set_external_interface
-func VmnetNetworkConfigurationSetExternalInterface(config unsafe.Pointer, interface_name string) Vmnet_return_t {
-	return _vmnet_network_configuration_set_external_interface(config, interface_name)
+func VmnetNetworkConfigurationSetExternalInterface(config unsafe.Pointer, interfaceName string) Vmnet_return_t {
+	return _vmnet_network_configuration_set_external_interface(config, interfaceName)
 }
 
 // C function: vmnet_network_configuration_set_ipv4_subnet
-func VmnetNetworkConfigurationSetIpv4Subnet(config unsafe.Pointer, subnet_addr unsafe.Pointer, subnet_mask unsafe.Pointer) Vmnet_return_t {
-	return _vmnet_network_configuration_set_ipv4_subnet(config, subnet_addr, subnet_mask)
+func VmnetNetworkConfigurationSetIpv4Subnet(config unsafe.Pointer, subnetAddr unsafe.Pointer, subnetMask unsafe.Pointer) Vmnet_return_t {
+	return _vmnet_network_configuration_set_ipv4_subnet(config, subnetAddr, subnetMask)
 }
 
 // C function: vmnet_network_configuration_set_ipv6_prefix
@@ -252,14 +252,14 @@ func VmnetNetworkGetIpv4Subnet(network unsafe.Pointer, subnet unsafe.Pointer, ma
 }
 
 // C function: vmnet_network_get_ipv6_prefix
-func VmnetNetworkGetIpv6Prefix(network unsafe.Pointer, prefix unsafe.Pointer, prefix_len *uint8) {
-	_vmnet_network_get_ipv6_prefix(network, prefix, prefix_len)
+func VmnetNetworkGetIpv6Prefix(network unsafe.Pointer, prefix unsafe.Pointer, prefixLen *uint8) {
+	_vmnet_network_get_ipv6_prefix(network, prefix, prefixLen)
 }
 
 // C function: vmnet_port_forwarding_rule_get_details
 // Deprecated: replaced by vmnet_ip_port_forwarding_rule_get_details
-func VmnetPortForwardingRuleGetDetails(rule *foundation.NSObject, protocol *uint8, external_port *uint16, internal_address unsafe.Pointer, internal_port *uint16) Vmnet_return_t {
-	return _vmnet_port_forwarding_rule_get_details(rule.Ptr(), protocol, external_port, internal_address, internal_port)
+func VmnetPortForwardingRuleGetDetails(rule *foundation.NSObject, protocol *uint8, externalPort *uint16, internalAddress unsafe.Pointer, internalPort *uint16) Vmnet_return_t {
+	return _vmnet_port_forwarding_rule_get_details(rule.Ptr(), protocol, externalPort, internalAddress, internalPort)
 }
 
 // C function: vmnet_read
@@ -268,7 +268,7 @@ func VmnetRead(interface_ unsafe.Pointer, packets *Vmpktdesc, pktcnt *int32) Vmn
 }
 
 // C function: vmnet_start_interface
-func VmnetStartInterface(interface_desc *foundation.NSObject, queue *foundation.NSObject, handler func(Vmnet_return_t, *foundation.NSObject)) unsafe.Pointer {
+func VmnetStartInterface(interfaceDesc *foundation.NSObject, queue *foundation.NSObject, handler func(Vmnet_return_t, *foundation.NSObject)) unsafe.Pointer {
 	var __block_handler objc.Block
 	if handler != nil {
 		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 Vmnet_return_t, blockParam1 objc.ID) {
@@ -279,7 +279,7 @@ func VmnetStartInterface(interface_desc *foundation.NSObject, queue *foundation.
 		})
 		defer __block_handler.Release()
 	}
-	return _vmnet_start_interface(interface_desc.Ptr(), queue.Ptr(), __block_handler)
+	return _vmnet_start_interface(interfaceDesc.Ptr(), queue.Ptr(), __block_handler)
 }
 
 // C function: vmnet_stop_interface

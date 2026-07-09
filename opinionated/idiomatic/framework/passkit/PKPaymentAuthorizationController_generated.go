@@ -6,6 +6,7 @@ package passkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,27 +50,33 @@ func paymentAuthorizationControllerAdopt(id objc.ID) *PaymentAuthorizationContro
 
 // Description returns the object's -description text.
 func (pac *PaymentAuthorizationController) Description() string {
+	defer runtime.KeepAlive(pac)
 	return rt.Description(objref.IDOf(pac))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pac *PaymentAuthorizationController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pac)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pac), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pac *PaymentAuthorizationController) IsKind(className string) bool {
+	defer runtime.KeepAlive(pac)
 	return rt.IsKind(objref.IDOf(pac), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pac *PaymentAuthorizationController) String() string {
+	defer runtime.KeepAlive(pac)
 	return rt.Description(objref.IDOf(pac))
 }
 
 // NewPaymentAuthorizationControllerWithPaymentRequest initializes and returns a payment authorization controller.
 func NewPaymentAuthorizationControllerWithPaymentRequest(request *PaymentRequest) *PaymentAuthorizationController {
+	defer runtime.KeepAlive(request)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentRequest:"), objref.IDOf(request))
 	return paymentAuthorizationControllerAdopt(_id)
@@ -77,6 +84,7 @@ func NewPaymentAuthorizationControllerWithPaymentRequest(request *PaymentRequest
 
 // NewPaymentAuthorizationControllerWithDisbursementRequest creates a new payment authorization controller with the disbursement request you provide.
 func NewPaymentAuthorizationControllerWithDisbursementRequest(request *DisbursementRequest) *PaymentAuthorizationController {
+	defer runtime.KeepAlive(request)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisbursementRequest:"), objref.IDOf(request))
 	return paymentAuthorizationControllerAdopt(_id)
@@ -84,6 +92,7 @@ func NewPaymentAuthorizationControllerWithDisbursementRequest(request *Disbursem
 
 // PresentWithCompletion presents the payment sheet modally over your app.
 func (pac *PaymentAuthorizationController) PresentWithCompletion(completion func(bool)) {
+	defer runtime.KeepAlive(pac)
 	objc.Send[objc.ID](objref.IDOf(pac), objc.RegisterName("presentWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }
 
@@ -91,6 +100,7 @@ func (pac *PaymentAuthorizationController) PresentWithCompletion(completion func
 //
 // DismissWithCompletion blocks until the operation completes or ctx is cancelled.
 func (pac *PaymentAuthorizationController) DismissWithCompletion(ctx context.Context) error {
+	defer runtime.KeepAlive(pac)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil

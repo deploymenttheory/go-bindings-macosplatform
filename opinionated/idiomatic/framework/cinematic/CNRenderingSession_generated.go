@@ -5,6 +5,8 @@
 package cinematic
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func renderingSessionAdopt(id objc.ID) *RenderingSession {
 
 // Description returns the object's -description text.
 func (rs *RenderingSession) Description() string {
+	defer runtime.KeepAlive(rs)
 	return rt.Description(objref.IDOf(rs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rs *RenderingSession) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rs *RenderingSession) IsKind(className string) bool {
+	defer runtime.KeepAlive(rs)
 	return rt.IsKind(objref.IDOf(rs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rs *RenderingSession) String() string {
+	defer runtime.KeepAlive(rs)
 	return rt.Description(objref.IDOf(rs))
 }
 
@@ -75,18 +82,21 @@ func NewRenderingSession() *RenderingSession {
 
 // SessionAttributes returns the session attributes.
 func (rs *RenderingSession) SessionAttributes() *RenderingSessionAttributes {
+	defer runtime.KeepAlive(rs)
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("sessionAttributes"))
 	return RenderingSessionAttributesFromID(_r)
 }
 
 // PreferredTransform returns the preferred transform.
 func (rs *RenderingSession) PreferredTransform() corefoundation.CGAffineTransform {
+	defer runtime.KeepAlive(rs)
 	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(rs), objc.RegisterName("preferredTransform"))
 	return _r
 }
 
 // Quality returns the quality.
 func (rs *RenderingSession) Quality() RenderingQuality {
+	defer runtime.KeepAlive(rs)
 	_r := objc.Send[RenderingQuality](objref.IDOf(rs), objc.RegisterName("quality"))
 	return _r
 }

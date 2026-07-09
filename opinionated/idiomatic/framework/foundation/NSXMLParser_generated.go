@@ -5,10 +5,12 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -49,22 +51,27 @@ func xMLParserAdopt(id objc.ID) *XMLParser {
 
 // Description returns the object's -description text.
 func (xp *XMLParser) Description() string {
+	defer runtime.KeepAlive(xp)
 	return rt.Description(objref.IDOf(xp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (xp *XMLParser) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(xp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(xp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (xp *XMLParser) IsKind(className string) bool {
+	defer runtime.KeepAlive(xp)
 	return rt.IsKind(objref.IDOf(xp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (xp *XMLParser) String() string {
+	defer runtime.KeepAlive(xp)
 	return rt.Description(objref.IDOf(xp))
 }
 
@@ -76,17 +83,28 @@ func NewXMLParserWithContentsOfURL(url string) *XMLParser {
 }
 
 // NewXMLParserWithData creates a new XMLParser.
-func NewXMLParserWithData(data *Data) *XMLParser {
+func NewXMLParserWithData(data []byte) *XMLParser {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLParser")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), rt.BytesToNSData(data))
 	return xMLParserAdopt(_id)
 }
 
 // NewXMLParserWithStream creates a new XMLParser.
 func NewXMLParserWithStream(stream *InputStream) *XMLParser {
+	defer runtime.KeepAlive(stream)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLParser")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStream:"), objref.IDOf(stream))
 	return xMLParserAdopt(_id)
+}
+
+// WithDelegate sets the delegate.
+func (xp *XMLParser) WithDelegate(delegate XMLParserDelegate) *XMLParser {
+	_shim := newXMLParserDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(xp), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(xp), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return xp
 }
 
 // WithShouldProcessNamespaces sets the should process namespaces.
@@ -108,8 +126,8 @@ func (xp *XMLParser) WithExternalEntityResolvingPolicy(externalEntityResolvingPo
 }
 
 // WithAllowedExternalEntityURLs sets the allowed external entity ur ls.
-func (xp *XMLParser) WithAllowedExternalEntityURLs(allowedExternalEntityURLs obj.Object) *XMLParser {
-	objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("setAllowedExternalEntityURLs:"), objref.IDOf(allowedExternalEntityURLs))
+func (xp *XMLParser) WithAllowedExternalEntityURLs(allowedExternalEntityURLs []string) *XMLParser {
+	objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("setAllowedExternalEntityURLs:"), rt.SliceToNSSet(allowedExternalEntityURLs, func(_v string) objc.ID { return rt.FileURL(_v) }))
 	return xp
 }
 
@@ -126,54 +144,62 @@ func (xp *XMLParser) WithObservationInfo(observationInfo unsafe.Pointer) *XMLPar
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (xp *XMLParser) WithScriptingProperties(scriptingProperties obj.Object) *XMLParser {
-	objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (xp *XMLParser) WithScriptingProperties(scriptingProperties map[string]obj.Object) *XMLParser {
+	objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return xp
 }
 
 // Parse wraps the corresponding Objective-C method.
 func (xp *XMLParser) Parse() bool {
+	defer runtime.KeepAlive(xp)
 	_r := objc.Send[bool](objref.IDOf(xp), objc.RegisterName("parse"))
 	return _r
 }
 
 // AbortParsing wraps the corresponding Objective-C method.
 func (xp *XMLParser) AbortParsing() {
+	defer runtime.KeepAlive(xp)
 	objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("abortParsing"))
 }
 
 // ShouldProcessNamespaces wraps the corresponding Objective-C method.
 func (xp *XMLParser) ShouldProcessNamespaces() bool {
+	defer runtime.KeepAlive(xp)
 	_r := objc.Send[bool](objref.IDOf(xp), objc.RegisterName("shouldProcessNamespaces"))
 	return _r
 }
 
 // ShouldReportNamespacePrefixes wraps the corresponding Objective-C method.
 func (xp *XMLParser) ShouldReportNamespacePrefixes() bool {
+	defer runtime.KeepAlive(xp)
 	_r := objc.Send[bool](objref.IDOf(xp), objc.RegisterName("shouldReportNamespacePrefixes"))
 	return _r
 }
 
 // ExternalEntityResolvingPolicy returns the external entity resolving policy.
 func (xp *XMLParser) ExternalEntityResolvingPolicy() XMLParserExternalEntityResolvingPolicy {
+	defer runtime.KeepAlive(xp)
 	_r := objc.Send[XMLParserExternalEntityResolvingPolicy](objref.IDOf(xp), objc.RegisterName("externalEntityResolvingPolicy"))
 	return _r
 }
 
-// AllowedExternalEntityURLs returns the allowed external entity ur ls.
-func (xp *XMLParser) AllowedExternalEntityURLs() obj.Object {
+// AllowedExternalEntityURLs returns the order of the returned elements is unspecified.
+func (xp *XMLParser) AllowedExternalEntityURLs() []string {
+	defer runtime.KeepAlive(xp)
 	_r := objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("allowedExternalEntityURLs"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) string { return rt.URLString(_id) })
 }
 
 // ShouldResolveExternalEntities wraps the corresponding Objective-C method.
 func (xp *XMLParser) ShouldResolveExternalEntities() bool {
+	defer runtime.KeepAlive(xp)
 	_r := objc.Send[bool](objref.IDOf(xp), objc.RegisterName("shouldResolveExternalEntities"))
 	return _r
 }
 
 // PublicID returns the public ID.
 func (xp *XMLParser) PublicID() string {
+	defer runtime.KeepAlive(xp)
 	_r := objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("publicID"))
 	if _r == 0 {
 		return ""
@@ -183,6 +209,7 @@ func (xp *XMLParser) PublicID() string {
 
 // SystemID returns the system ID.
 func (xp *XMLParser) SystemID() string {
+	defer runtime.KeepAlive(xp)
 	_r := objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("systemID"))
 	if _r == 0 {
 		return ""
@@ -192,12 +219,14 @@ func (xp *XMLParser) SystemID() string {
 
 // LineNumber returns the line number.
 func (xp *XMLParser) LineNumber() int {
+	defer runtime.KeepAlive(xp)
 	_r := objc.Send[int](objref.IDOf(xp), objc.RegisterName("lineNumber"))
 	return _r
 }
 
 // ColumnNumber returns the column number.
 func (xp *XMLParser) ColumnNumber() int {
+	defer runtime.KeepAlive(xp)
 	_r := objc.Send[int](objref.IDOf(xp), objc.RegisterName("columnNumber"))
 	return _r
 }

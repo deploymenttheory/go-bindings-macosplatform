@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,19 +58,21 @@ func NewDeleteCommand() *DeleteCommand {
 
 // WithDirectParameter sets sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
 func (dc *DeleteCommand) WithDirectParameter(directParameter obj.Object) *DeleteCommand {
+	defer runtime.KeepAlive(directParameter)
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
 	return dc
 }
 
 // WithReceiversSpecifier sets sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
 func (dc *DeleteCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *DeleteCommand {
+	defer runtime.KeepAlive(receiversSpecifier)
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
 	return dc
 }
 
 // WithArguments sets sets the arguments of the command to args.
-func (dc *DeleteCommand) WithArguments(arguments obj.Object) *DeleteCommand {
-	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
+func (dc *DeleteCommand) WithArguments(arguments map[string]obj.Object) *DeleteCommand {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setArguments:"), rt.MapToDict(arguments, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return dc
 }
 
@@ -80,18 +84,21 @@ func (dc *DeleteCommand) WithScriptErrorNumber(scriptErrorNumber int) *DeleteCom
 
 // WithScriptErrorOffendingObjectDescriptor sets sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 func (dc *DeleteCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *DeleteCommand {
+	defer runtime.KeepAlive(scriptErrorOffendingObjectDescriptor)
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
 	return dc
 }
 
 // WithScriptErrorExpectedTypeDescriptor sets sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 func (dc *DeleteCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *DeleteCommand {
+	defer runtime.KeepAlive(scriptErrorExpectedTypeDescriptor)
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
 	return dc
 }
 
 // WithScriptErrorString sets sets a script error string that is associated with execution of the command.
 func (dc *DeleteCommand) WithScriptErrorString(scriptErrorString StringProvider) *DeleteCommand {
+	defer runtime.KeepAlive(scriptErrorString)
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
 	return dc
 }
@@ -103,13 +110,14 @@ func (dc *DeleteCommand) WithObservationInfo(observationInfo unsafe.Pointer) *De
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (dc *DeleteCommand) WithScriptingProperties(scriptingProperties obj.Object) *DeleteCommand {
-	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (dc *DeleteCommand) WithScriptingProperties(scriptingProperties map[string]obj.Object) *DeleteCommand {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return dc
 }
 
 // KeySpecifier returns the key specifier.
 func (dc *DeleteCommand) KeySpecifier() *ScriptObjectSpecifier {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("keySpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }

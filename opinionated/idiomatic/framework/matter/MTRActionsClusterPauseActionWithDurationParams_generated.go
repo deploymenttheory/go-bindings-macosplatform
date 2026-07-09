@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRActionsClusterPauseActionWithDurationParamsAdopt(id objc.ID) *MTRActions
 
 // Description returns the object's -description text.
 func (macpawdp *MTRActionsClusterPauseActionWithDurationParams) Description() string {
+	defer runtime.KeepAlive(macpawdp)
 	return rt.Description(objref.IDOf(macpawdp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (macpawdp *MTRActionsClusterPauseActionWithDurationParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(macpawdp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(macpawdp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (macpawdp *MTRActionsClusterPauseActionWithDurationParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(macpawdp)
 	return rt.IsKind(objref.IDOf(macpawdp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (macpawdp *MTRActionsClusterPauseActionWithDurationParams) String() string {
+	defer runtime.KeepAlive(macpawdp)
 	return rt.Description(objref.IDOf(macpawdp))
 }
 
@@ -72,60 +80,70 @@ func NewMTRActionsClusterPauseActionWithDurationParams() *MTRActionsClusterPause
 
 // WithActionID sets the action ID.
 func (macpawdp *MTRActionsClusterPauseActionWithDurationParams) WithActionID(actionID obj.Object) *MTRActionsClusterPauseActionWithDurationParams {
+	defer runtime.KeepAlive(actionID)
 	objc.Send[objc.ID](objref.IDOf(macpawdp), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 	return macpawdp
 }
 
 // WithInvokeID sets the invoke ID.
 func (macpawdp *MTRActionsClusterPauseActionWithDurationParams) WithInvokeID(invokeID obj.Object) *MTRActionsClusterPauseActionWithDurationParams {
+	defer runtime.KeepAlive(invokeID)
 	objc.Send[objc.ID](objref.IDOf(macpawdp), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 	return macpawdp
 }
 
 // WithDuration sets the duration.
 func (macpawdp *MTRActionsClusterPauseActionWithDurationParams) WithDuration(duration obj.Object) *MTRActionsClusterPauseActionWithDurationParams {
+	defer runtime.KeepAlive(duration)
 	objc.Send[objc.ID](objref.IDOf(macpawdp), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return macpawdp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (macpawdp *MTRActionsClusterPauseActionWithDurationParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRActionsClusterPauseActionWithDurationParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(macpawdp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return macpawdp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (macpawdp *MTRActionsClusterPauseActionWithDurationParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRActionsClusterPauseActionWithDurationParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(macpawdp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return macpawdp
 }
 
 // ActionID returns the action ID.
-func (macpawdp *MTRActionsClusterPauseActionWithDurationParams) ActionID() obj.Object {
+func (macpawdp *MTRActionsClusterPauseActionWithDurationParams) ActionID() *foundation.Number {
+	defer runtime.KeepAlive(macpawdp)
 	_r := objc.Send[objc.ID](objref.IDOf(macpawdp), objc.RegisterName("actionID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // InvokeID returns the invoke ID.
-func (macpawdp *MTRActionsClusterPauseActionWithDurationParams) InvokeID() obj.Object {
+func (macpawdp *MTRActionsClusterPauseActionWithDurationParams) InvokeID() *foundation.Number {
+	defer runtime.KeepAlive(macpawdp)
 	_r := objc.Send[objc.ID](objref.IDOf(macpawdp), objc.RegisterName("invokeID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Duration returns the duration.
-func (macpawdp *MTRActionsClusterPauseActionWithDurationParams) Duration() obj.Object {
+func (macpawdp *MTRActionsClusterPauseActionWithDurationParams) Duration() *foundation.Number {
+	defer runtime.KeepAlive(macpawdp)
 	_r := objc.Send[objc.ID](objref.IDOf(macpawdp), objc.RegisterName("duration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (macpawdp *MTRActionsClusterPauseActionWithDurationParams) TimedInvokeTimeoutMs() obj.Object {
+func (macpawdp *MTRActionsClusterPauseActionWithDurationParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(macpawdp)
 	_r := objc.Send[objc.ID](objref.IDOf(macpawdp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (macpawdp *MTRActionsClusterPauseActionWithDurationParams) ServerSideProcessingTimeout() obj.Object {
+func (macpawdp *MTRActionsClusterPauseActionWithDurationParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(macpawdp)
 	_r := objc.Send[objc.ID](objref.IDOf(macpawdp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

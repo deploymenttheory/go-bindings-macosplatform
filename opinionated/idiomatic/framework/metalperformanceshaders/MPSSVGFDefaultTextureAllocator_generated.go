@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func sVGFDefaultTextureAllocatorAdopt(id objc.ID) *SVGFDefaultTextureAllocator {
 
 // Description returns the object's -description text.
 func (sdta *SVGFDefaultTextureAllocator) Description() string {
+	defer runtime.KeepAlive(sdta)
 	return rt.Description(objref.IDOf(sdta))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sdta *SVGFDefaultTextureAllocator) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sdta)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sdta), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sdta *SVGFDefaultTextureAllocator) IsKind(className string) bool {
+	defer runtime.KeepAlive(sdta)
 	return rt.IsKind(objref.IDOf(sdta), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sdta *SVGFDefaultTextureAllocator) String() string {
+	defer runtime.KeepAlive(sdta)
 	return rt.Description(objref.IDOf(sdta))
 }
 
@@ -72,11 +79,13 @@ func NewSVGFDefaultTextureAllocator() *SVGFDefaultTextureAllocator {
 
 // Reset remove all textures from the cache
 func (sdta *SVGFDefaultTextureAllocator) Reset() {
+	defer runtime.KeepAlive(sdta)
 	objc.Send[objc.ID](objref.IDOf(sdta), objc.RegisterName("reset"))
 }
 
 // AllocatedTextureCount returns the number of textures which have been allocated from this allocator
 func (sdta *SVGFDefaultTextureAllocator) AllocatedTextureCount() int {
+	defer runtime.KeepAlive(sdta)
 	_r := objc.Send[int](objref.IDOf(sdta), objc.RegisterName("allocatedTextureCount"))
 	return _r
 }

@@ -6,6 +6,8 @@ package gamekit
 
 import (
 	"context"
+	"runtime"
+	"time"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +52,27 @@ func turnBasedExchangeAdopt(id objc.ID) *TurnBasedExchange {
 
 // Description returns the object's -description text.
 func (tbe *TurnBasedExchange) Description() string {
+	defer runtime.KeepAlive(tbe)
 	return rt.Description(objref.IDOf(tbe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tbe *TurnBasedExchange) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tbe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tbe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tbe *TurnBasedExchange) IsKind(className string) bool {
+	defer runtime.KeepAlive(tbe)
 	return rt.IsKind(objref.IDOf(tbe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tbe *TurnBasedExchange) String() string {
+	defer runtime.KeepAlive(tbe)
 	return rt.Description(objref.IDOf(tbe))
 }
 
@@ -79,6 +86,7 @@ func NewTurnBasedExchange() *TurnBasedExchange {
 //
 // CancelWithLocalizableMessageKeyArguments blocks until the operation completes or ctx is cancelled.
 func (tbe *TurnBasedExchange) CancelWithLocalizableMessageKeyArguments(ctx context.Context, key string, arguments []string) error {
+	defer runtime.KeepAlive(tbe)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -97,14 +105,15 @@ func (tbe *TurnBasedExchange) CancelWithLocalizableMessageKeyArguments(ctx conte
 // ReplyWithLocalizableMessageKeyArgumentsData replies to an exchange request on behalf of a recipient.
 //
 // ReplyWithLocalizableMessageKeyArgumentsData blocks until the operation completes or ctx is cancelled.
-func (tbe *TurnBasedExchange) ReplyWithLocalizableMessageKeyArgumentsData(ctx context.Context, key string, arguments []string, data obj.Object) error {
+func (tbe *TurnBasedExchange) ReplyWithLocalizableMessageKeyArgumentsData(ctx context.Context, key string, arguments []string, data []byte) error {
+	defer runtime.KeepAlive(tbe)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(tbe), objc.RegisterName("replyWithLocalizableMessageKey:arguments:data:completionHandler:"), purego.NSString(key), purego.SliceToNSArray(arguments, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(data), _block)
+	objc.Send[objc.ID](objref.IDOf(tbe), objc.RegisterName("replyWithLocalizableMessageKey:arguments:data:completionHandler:"), purego.NSString(key), purego.SliceToNSArray(arguments, func(_v string) objc.ID { return purego.NSString(_v) }), rt.BytesToNSData(data), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -115,6 +124,7 @@ func (tbe *TurnBasedExchange) ReplyWithLocalizableMessageKeyArgumentsData(ctx co
 
 // ExchangeID returns the exchange ID.
 func (tbe *TurnBasedExchange) ExchangeID() string {
+	defer runtime.KeepAlive(tbe)
 	_r := objc.Send[objc.ID](objref.IDOf(tbe), objc.RegisterName("exchangeID"))
 	if _r == 0 {
 		return ""
@@ -124,6 +134,7 @@ func (tbe *TurnBasedExchange) ExchangeID() string {
 
 // Sender returns the sender.
 func (tbe *TurnBasedExchange) Sender() *TurnBasedParticipant {
+	defer runtime.KeepAlive(tbe)
 	_r := objc.Send[objc.ID](objref.IDOf(tbe), objc.RegisterName("sender"))
 	return TurnBasedParticipantFromID(_r)
 }
@@ -132,18 +143,21 @@ func (tbe *TurnBasedExchange) Sender() *TurnBasedParticipant {
 //
 // Recipients returns the collection as a Go slice.
 func (tbe *TurnBasedExchange) Recipients() []*TurnBasedParticipant {
+	defer runtime.KeepAlive(tbe)
 	_arr := objc.Send[objc.ID](objref.IDOf(tbe), objc.RegisterName("recipients"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TurnBasedParticipant { return TurnBasedParticipantFromID(_id) })
 }
 
 // Status returns the status.
 func (tbe *TurnBasedExchange) Status() TurnBasedExchangeStatus {
+	defer runtime.KeepAlive(tbe)
 	_r := objc.Send[TurnBasedExchangeStatus](objref.IDOf(tbe), objc.RegisterName("status"))
 	return _r
 }
 
 // Message returns the message.
 func (tbe *TurnBasedExchange) Message() string {
+	defer runtime.KeepAlive(tbe)
 	_r := objc.Send[objc.ID](objref.IDOf(tbe), objc.RegisterName("message"))
 	if _r == 0 {
 		return ""
@@ -152,33 +166,38 @@ func (tbe *TurnBasedExchange) Message() string {
 }
 
 // Data returns the data.
-func (tbe *TurnBasedExchange) Data() obj.Object {
+func (tbe *TurnBasedExchange) Data() []byte {
+	defer runtime.KeepAlive(tbe)
 	_r := objc.Send[objc.ID](objref.IDOf(tbe), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // SendDate returns the send date.
-func (tbe *TurnBasedExchange) SendDate() obj.Object {
+func (tbe *TurnBasedExchange) SendDate() time.Time {
+	defer runtime.KeepAlive(tbe)
 	_r := objc.Send[objc.ID](objref.IDOf(tbe), objc.RegisterName("sendDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // TimeoutDate returns the timeout date.
-func (tbe *TurnBasedExchange) TimeoutDate() obj.Object {
+func (tbe *TurnBasedExchange) TimeoutDate() time.Time {
+	defer runtime.KeepAlive(tbe)
 	_r := objc.Send[objc.ID](objref.IDOf(tbe), objc.RegisterName("timeoutDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // CompletionDate returns the completion date.
-func (tbe *TurnBasedExchange) CompletionDate() obj.Object {
+func (tbe *TurnBasedExchange) CompletionDate() time.Time {
+	defer runtime.KeepAlive(tbe)
 	_r := objc.Send[objc.ID](objref.IDOf(tbe), objc.RegisterName("completionDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Replies returns the replies.
 //
 // Replies returns the collection as a Go slice.
 func (tbe *TurnBasedExchange) Replies() []*TurnBasedExchangeReply {
+	defer runtime.KeepAlive(tbe)
 	_arr := objc.Send[objc.ID](objref.IDOf(tbe), objc.RegisterName("replies"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TurnBasedExchangeReply { return TurnBasedExchangeReplyFromID(_id) })
 }

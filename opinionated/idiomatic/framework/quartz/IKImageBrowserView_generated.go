@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func iKImageBrowserViewAdopt(id objc.ID) *IKImageBrowserView {
 
 // Description returns the object's -description text.
 func (iibv *IKImageBrowserView) Description() string {
+	defer runtime.KeepAlive(iibv)
 	return rt.Description(objref.IDOf(iibv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (iibv *IKImageBrowserView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(iibv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(iibv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (iibv *IKImageBrowserView) IsKind(className string) bool {
+	defer runtime.KeepAlive(iibv)
 	return rt.IsKind(objref.IDOf(iibv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (iibv *IKImageBrowserView) String() string {
+	defer runtime.KeepAlive(iibv)
 	return rt.Description(objref.IDOf(iibv))
 }
 

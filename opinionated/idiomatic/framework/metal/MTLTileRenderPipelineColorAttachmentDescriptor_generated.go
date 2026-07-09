@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func tileRenderPipelineColorAttachmentDescriptorAdopt(id objc.ID) *TileRenderPip
 
 // Description returns the object's -description text.
 func (trpcad *TileRenderPipelineColorAttachmentDescriptor) Description() string {
+	defer runtime.KeepAlive(trpcad)
 	return rt.Description(objref.IDOf(trpcad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (trpcad *TileRenderPipelineColorAttachmentDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(trpcad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(trpcad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (trpcad *TileRenderPipelineColorAttachmentDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(trpcad)
 	return rt.IsKind(objref.IDOf(trpcad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (trpcad *TileRenderPipelineColorAttachmentDescriptor) String() string {
+	defer runtime.KeepAlive(trpcad)
 	return rt.Description(objref.IDOf(trpcad))
 }
 
@@ -80,6 +87,7 @@ func (trpcad *TileRenderPipelineColorAttachmentDescriptor) WithPixelFormat(pixel
 
 // PixelFormat returns the pixel format.
 func (trpcad *TileRenderPipelineColorAttachmentDescriptor) PixelFormat() PixelFormat {
+	defer runtime.KeepAlive(trpcad)
 	_r := objc.Send[PixelFormat](objref.IDOf(trpcad), objc.RegisterName("pixelFormat"))
 	return _r
 }

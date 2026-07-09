@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -52,12 +54,14 @@ func NewSkeletonWithNameJointPaths(name string, jointPaths []string) *Skeleton {
 
 // WithParent sets the parent object that contains this object.
 func (s *Skeleton) WithParent(parent ObjectProvider) *Skeleton {
+	defer runtime.KeepAlive(parent)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return s
 }
 
 // WithInstance sets the primary object, if applicable, of which this object is an instance.
 func (s *Skeleton) WithInstance(instance ObjectProvider) *Skeleton {
+	defer runtime.KeepAlive(instance)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return s
 }
@@ -72,18 +76,21 @@ func (s *Skeleton) WithHidden(hidden bool) *Skeleton {
 //
 // JointPaths returns the collection as a Go slice.
 func (s *Skeleton) JointPaths() []string {
+	defer runtime.KeepAlive(s)
 	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("jointPaths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // JointBindTransforms returns the joint bind transforms.
 func (s *Skeleton) JointBindTransforms() *Matrix4x4Array {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("jointBindTransforms"))
 	return Matrix4x4ArrayFromID(_r)
 }
 
 // JointRestTransforms returns the joint rest transforms.
 func (s *Skeleton) JointRestTransforms() *Matrix4x4Array {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("jointRestTransforms"))
 	return Matrix4x4ArrayFromID(_r)
 }

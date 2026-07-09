@@ -5,6 +5,8 @@
 package iobluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func iOBluetoothHostControllerAdopt(id objc.ID) *IOBluetoothHostController {
 
 // Description returns the object's -description text.
 func (ibhc *IOBluetoothHostController) Description() string {
+	defer runtime.KeepAlive(ibhc)
 	return rt.Description(objref.IDOf(ibhc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ibhc *IOBluetoothHostController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ibhc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ibhc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ibhc *IOBluetoothHostController) IsKind(className string) bool {
+	defer runtime.KeepAlive(ibhc)
 	return rt.IsKind(objref.IDOf(ibhc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ibhc *IOBluetoothHostController) String() string {
+	defer runtime.KeepAlive(ibhc)
 	return rt.Description(objref.IDOf(ibhc))
 }
 
@@ -74,24 +81,28 @@ func NewIOBluetoothHostController() *IOBluetoothHostController {
 
 // WithDelegate sets the delegate.
 func (ibhc *IOBluetoothHostController) WithDelegate(delegate obj.Object) *IOBluetoothHostController {
+	defer runtime.KeepAlive(delegate)
 	objc.Send[objc.ID](objref.IDOf(ibhc), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return ibhc
 }
 
 // ClassOfDevice gets the current class of device value.
 func (ibhc *IOBluetoothHostController) ClassOfDevice() uint32 {
+	defer runtime.KeepAlive(ibhc)
 	_r := objc.Send[uint32](objref.IDOf(ibhc), objc.RegisterName("classOfDevice"))
 	return _r
 }
 
 // SetClassOfDeviceForTimeInterval sets the current class of device value, for the specified amount of time. Note that the time interval must be set and valid. The range of acceptable values is 30-120 seconds. Anything above or below will be rounded up, or down, as appropriate.
 func (ibhc *IOBluetoothHostController) SetClassOfDeviceForTimeInterval(classOfDevice uint32, seconds float64) int {
+	defer runtime.KeepAlive(ibhc)
 	_r := objc.Send[int](objref.IDOf(ibhc), objc.RegisterName("setClassOfDevice:forTimeInterval:"), classOfDevice, seconds)
 	return _r
 }
 
 // AddressAsString returns convience routine to get the HCI controller’s Bluetooth address as an NSString object.
 func (ibhc *IOBluetoothHostController) AddressAsString() string {
+	defer runtime.KeepAlive(ibhc)
 	_r := objc.Send[objc.ID](objref.IDOf(ibhc), objc.RegisterName("addressAsString"))
 	if _r == 0 {
 		return ""
@@ -101,6 +112,7 @@ func (ibhc *IOBluetoothHostController) AddressAsString() string {
 
 // NameAsString gets the “friendly” name of HCI controller.
 func (ibhc *IOBluetoothHostController) NameAsString() string {
+	defer runtime.KeepAlive(ibhc)
 	_r := objc.Send[objc.ID](objref.IDOf(ibhc), objc.RegisterName("nameAsString"))
 	if _r == 0 {
 		return ""
@@ -110,6 +122,7 @@ func (ibhc *IOBluetoothHostController) NameAsString() string {
 
 // Delegate returns the delegate.
 func (ibhc *IOBluetoothHostController) Delegate() obj.Object {
+	defer runtime.KeepAlive(ibhc)
 	_r := objc.Send[objc.ID](objref.IDOf(ibhc), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }

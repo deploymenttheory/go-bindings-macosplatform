@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRChannelClusterProgramStructAdopt(id objc.ID) *MTRChannelClusterProgramSt
 
 // Description returns the object's -description text.
 func (mccps *MTRChannelClusterProgramStruct) Description() string {
+	defer runtime.KeepAlive(mccps)
 	return rt.Description(objref.IDOf(mccps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mccps *MTRChannelClusterProgramStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mccps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mccps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mccps *MTRChannelClusterProgramStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mccps)
 	return rt.IsKind(objref.IDOf(mccps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mccps *MTRChannelClusterProgramStruct) String() string {
+	defer runtime.KeepAlive(mccps)
 	return rt.Description(objref.IDOf(mccps))
 }
 
@@ -78,18 +86,21 @@ func (mccps *MTRChannelClusterProgramStruct) WithIdentifier(identifier string) *
 
 // WithChannel sets the channel.
 func (mccps *MTRChannelClusterProgramStruct) WithChannel(channel MTRChannelClusterChannelInfoStructProvider) *MTRChannelClusterProgramStruct {
+	defer runtime.KeepAlive(channel)
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 	return mccps
 }
 
 // WithStartTime sets the start time.
 func (mccps *MTRChannelClusterProgramStruct) WithStartTime(startTime obj.Object) *MTRChannelClusterProgramStruct {
+	defer runtime.KeepAlive(startTime)
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return mccps
 }
 
 // WithEndTime sets the end time.
 func (mccps *MTRChannelClusterProgramStruct) WithEndTime(endTime obj.Object) *MTRChannelClusterProgramStruct {
+	defer runtime.KeepAlive(endTime)
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setEndTime:"), objref.IDOf(endTime))
 	return mccps
 }
@@ -126,18 +137,21 @@ func (mccps *MTRChannelClusterProgramStruct) WithParentalGuidanceText(parentalGu
 
 // WithRecordingFlag sets the recording flag.
 func (mccps *MTRChannelClusterProgramStruct) WithRecordingFlag(recordingFlag obj.Object) *MTRChannelClusterProgramStruct {
+	defer runtime.KeepAlive(recordingFlag)
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setRecordingFlag:"), objref.IDOf(recordingFlag))
 	return mccps
 }
 
 // WithSeriesInfo sets the series info.
 func (mccps *MTRChannelClusterProgramStruct) WithSeriesInfo(seriesInfo *MTRChannelClusterSeriesInfoStruct) *MTRChannelClusterProgramStruct {
+	defer runtime.KeepAlive(seriesInfo)
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setSeriesInfo:"), objref.IDOf(seriesInfo))
 	return mccps
 }
 
 // Identifier returns the identifier.
 func (mccps *MTRChannelClusterProgramStruct) Identifier() string {
+	defer runtime.KeepAlive(mccps)
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -147,24 +161,28 @@ func (mccps *MTRChannelClusterProgramStruct) Identifier() string {
 
 // Channel returns the channel.
 func (mccps *MTRChannelClusterProgramStruct) Channel() *MTRChannelClusterChannelInfoStruct {
+	defer runtime.KeepAlive(mccps)
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("channel"))
 	return MTRChannelClusterChannelInfoStructFromID(_r)
 }
 
 // StartTime returns the start time.
-func (mccps *MTRChannelClusterProgramStruct) StartTime() obj.Object {
+func (mccps *MTRChannelClusterProgramStruct) StartTime() *foundation.Number {
+	defer runtime.KeepAlive(mccps)
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("startTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EndTime returns the end time.
-func (mccps *MTRChannelClusterProgramStruct) EndTime() obj.Object {
+func (mccps *MTRChannelClusterProgramStruct) EndTime() *foundation.Number {
+	defer runtime.KeepAlive(mccps)
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("endTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Title returns the title.
 func (mccps *MTRChannelClusterProgramStruct) Title() string {
+	defer runtime.KeepAlive(mccps)
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -174,6 +192,7 @@ func (mccps *MTRChannelClusterProgramStruct) Title() string {
 
 // Subtitle returns the subtitle.
 func (mccps *MTRChannelClusterProgramStruct) Subtitle() string {
+	defer runtime.KeepAlive(mccps)
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("subtitle"))
 	if _r == 0 {
 		return ""
@@ -183,6 +202,7 @@ func (mccps *MTRChannelClusterProgramStruct) Subtitle() string {
 
 // DescriptionString returns the description string.
 func (mccps *MTRChannelClusterProgramStruct) DescriptionString() string {
+	defer runtime.KeepAlive(mccps)
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("descriptionString"))
 	if _r == 0 {
 		return ""
@@ -192,28 +212,35 @@ func (mccps *MTRChannelClusterProgramStruct) DescriptionString() string {
 
 // AudioLanguages returns the audio languages.
 func (mccps *MTRChannelClusterProgramStruct) AudioLanguages() obj.Object {
+	defer runtime.KeepAlive(mccps)
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("audioLanguages"))
 	return obj.Wrap(_r)
 }
 
 // SetAudioLanguages wraps the corresponding Objective-C method.
 func (mccps *MTRChannelClusterProgramStruct) SetAudioLanguages(audioLanguages obj.Object) {
+	defer runtime.KeepAlive(mccps)
+	defer runtime.KeepAlive(audioLanguages)
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setAudioLanguages:"), objref.IDOf(audioLanguages))
 }
 
 // Ratings returns the ratings.
 func (mccps *MTRChannelClusterProgramStruct) Ratings() obj.Object {
+	defer runtime.KeepAlive(mccps)
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("ratings"))
 	return obj.Wrap(_r)
 }
 
 // SetRatings wraps the corresponding Objective-C method.
 func (mccps *MTRChannelClusterProgramStruct) SetRatings(ratings obj.Object) {
+	defer runtime.KeepAlive(mccps)
+	defer runtime.KeepAlive(ratings)
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setRatings:"), objref.IDOf(ratings))
 }
 
 // ReleaseDate returns the release date.
 func (mccps *MTRChannelClusterProgramStruct) ReleaseDate() string {
+	defer runtime.KeepAlive(mccps)
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("releaseDate"))
 	if _r == 0 {
 		return ""
@@ -223,6 +250,7 @@ func (mccps *MTRChannelClusterProgramStruct) ReleaseDate() string {
 
 // ParentalGuidanceText returns the parental guidance text.
 func (mccps *MTRChannelClusterProgramStruct) ParentalGuidanceText() string {
+	defer runtime.KeepAlive(mccps)
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("parentalGuidanceText"))
 	if _r == 0 {
 		return ""
@@ -231,35 +259,43 @@ func (mccps *MTRChannelClusterProgramStruct) ParentalGuidanceText() string {
 }
 
 // RecordingFlag returns the recording flag.
-func (mccps *MTRChannelClusterProgramStruct) RecordingFlag() obj.Object {
+func (mccps *MTRChannelClusterProgramStruct) RecordingFlag() *foundation.Number {
+	defer runtime.KeepAlive(mccps)
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("recordingFlag"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // SeriesInfo returns the series info.
 func (mccps *MTRChannelClusterProgramStruct) SeriesInfo() *MTRChannelClusterSeriesInfoStruct {
+	defer runtime.KeepAlive(mccps)
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("seriesInfo"))
 	return MTRChannelClusterSeriesInfoStructFromID(_r)
 }
 
 // CategoryList returns the category list.
 func (mccps *MTRChannelClusterProgramStruct) CategoryList() obj.Object {
+	defer runtime.KeepAlive(mccps)
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("categoryList"))
 	return obj.Wrap(_r)
 }
 
 // SetCategoryList wraps the corresponding Objective-C method.
 func (mccps *MTRChannelClusterProgramStruct) SetCategoryList(categoryList obj.Object) {
+	defer runtime.KeepAlive(mccps)
+	defer runtime.KeepAlive(categoryList)
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setCategoryList:"), objref.IDOf(categoryList))
 }
 
 // CastList returns the cast list.
 func (mccps *MTRChannelClusterProgramStruct) CastList() obj.Object {
+	defer runtime.KeepAlive(mccps)
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("castList"))
 	return obj.Wrap(_r)
 }
 
 // SetCastList wraps the corresponding Objective-C method.
 func (mccps *MTRChannelClusterProgramStruct) SetCastList(castList obj.Object) {
+	defer runtime.KeepAlive(mccps)
+	defer runtime.KeepAlive(castList)
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setCastList:"), objref.IDOf(castList))
 }

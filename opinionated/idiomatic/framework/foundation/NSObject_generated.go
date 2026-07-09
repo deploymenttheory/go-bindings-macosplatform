@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func objectAdopt(id objc.ID) *Object {
 
 // Description returns the object's -description text.
 func (o *Object) Description() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (o *Object) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (o *Object) IsKind(className string) bool {
+	defer runtime.KeepAlive(o)
 	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (o *Object) String() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
@@ -75,301 +81,383 @@ func (o *Object) WithObservationInfo(observationInfo unsafe.Pointer) *Object {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (o *Object) WithScriptingProperties(scriptingProperties obj.Object) *Object {
-	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (o *Object) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Object {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return o
 }
 
 // Dealloc wraps the corresponding Objective-C method.
 func (o *Object) Dealloc() {
+	defer runtime.KeepAlive(o)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("dealloc"))
 }
 
 // Finalize wraps the corresponding Objective-C method.
 func (o *Object) Finalize() {
+	defer runtime.KeepAlive(o)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("finalize"))
 }
 
 // Copy returns the copy.
 func (o *Object) Copy() obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("copy"))
 	return obj.Wrap(_r)
 }
 
 // MutableCopy returns the mutable copy.
 func (o *Object) MutableCopy() obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("mutableCopy"))
 	return obj.Wrap(_r)
 }
 
 // ForwardInvocation wraps the corresponding Objective-C method.
 func (o *Object) ForwardInvocation(anInvocation *Invocation) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(anInvocation)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("forwardInvocation:"), objref.IDOf(anInvocation))
 }
 
 // ReplacementObjectForCoder wraps the corresponding Objective-C method.
 func (o *Object) ReplacementObjectForCoder(coder *Coder) obj.Object {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(coder)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("replacementObjectForCoder:"), objref.IDOf(coder))
 	return obj.Wrap(_r)
 }
 
 // AwakeAfterUsingCoder wraps the corresponding Objective-C method.
 func (o *Object) AwakeAfterUsingCoder(coder *Coder) obj.Object {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(coder)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("awakeAfterUsingCoder:"), objref.IDOf(coder))
 	return obj.Wrap(_r)
 }
 
 // AutoContentAccessingProxy returns the auto content accessing proxy.
 func (o *Object) AutoContentAccessingProxy() obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("autoContentAccessingProxy"))
 	return obj.Wrap(_r)
 }
 
 // AttemptRecoveryFromErrorOptionIndex wraps the corresponding Objective-C method.
-func (o *Object) AttemptRecoveryFromErrorOptionIndex(error_ unsafe.Pointer, recoveryOptionIndex int) bool {
-	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("attemptRecoveryFromError:optionIndex:"), error_, recoveryOptionIndex)
+func (o *Object) AttemptRecoveryFromErrorOptionIndex(err unsafe.Pointer, recoveryOptionIndex int) bool {
+	defer runtime.KeepAlive(o)
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("attemptRecoveryFromError:optionIndex:"), err, recoveryOptionIndex)
 	return _r
 }
 
 // URLResourceDataDidBecomeAvailable wraps the corresponding Objective-C method.
-func (o *Object) URLResourceDataDidBecomeAvailable(sender string, newBytes *Data) {
-	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("URL:resourceDataDidBecomeAvailable:"), rt.FileURL(sender), objref.IDOf(newBytes))
+func (o *Object) URLResourceDataDidBecomeAvailable(sender string, newBytes []byte) {
+	defer runtime.KeepAlive(o)
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("URL:resourceDataDidBecomeAvailable:"), rt.FileURL(sender), rt.BytesToNSData(newBytes))
 }
 
 // URLResourceDidFinishLoading wraps the corresponding Objective-C method.
 func (o *Object) URLResourceDidFinishLoading(sender string) {
+	defer runtime.KeepAlive(o)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("URLResourceDidFinishLoading:"), rt.FileURL(sender))
 }
 
 // URLResourceDidCancelLoading wraps the corresponding Objective-C method.
 func (o *Object) URLResourceDidCancelLoading(sender string) {
+	defer runtime.KeepAlive(o)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("URLResourceDidCancelLoading:"), rt.FileURL(sender))
 }
 
 // URLResourceDidFailLoadingWithReason wraps the corresponding Objective-C method.
 func (o *Object) URLResourceDidFailLoadingWithReason(sender string, reason string) {
+	defer runtime.KeepAlive(o)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("URL:resourceDidFailLoadingWithReason:"), rt.FileURL(sender), purego.NSString(reason))
 }
 
 // FileManagerShouldProceedAfterError wraps the corresponding Objective-C method.
 func (o *Object) FileManagerShouldProceedAfterError(fm *FileManager, errorInfo obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(fm)
+	defer runtime.KeepAlive(errorInfo)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("fileManager:shouldProceedAfterError:"), objref.IDOf(fm), objref.IDOf(errorInfo))
 	return _r
 }
 
 // FileManagerWillProcessPath wraps the corresponding Objective-C method.
 func (o *Object) FileManagerWillProcessPath(fm *FileManager, path string) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(fm)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("fileManager:willProcessPath:"), objref.IDOf(fm), purego.NSString(path))
 }
 
 // ValueForKey wraps the corresponding Objective-C method.
 func (o *Object) ValueForKey(key string) obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("valueForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // SetValueForKey wraps the corresponding Objective-C method.
 func (o *Object) SetValueForKey(value obj.Object, key string) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setValue:forKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
 // MutableArrayValueForKey wraps the corresponding Objective-C method.
 func (o *Object) MutableArrayValueForKey(key string) obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("mutableArrayValueForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // MutableOrderedSetValueForKey wraps the corresponding Objective-C method.
 func (o *Object) MutableOrderedSetValueForKey(key string) obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("mutableOrderedSetValueForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // MutableSetValueForKey wraps the corresponding Objective-C method.
 func (o *Object) MutableSetValueForKey(key string) obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("mutableSetValueForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // ValueForKeyPath wraps the corresponding Objective-C method.
 func (o *Object) ValueForKeyPath(keyPath string) obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("valueForKeyPath:"), purego.NSString(keyPath))
 	return obj.Wrap(_r)
 }
 
 // SetValueForKeyPath wraps the corresponding Objective-C method.
 func (o *Object) SetValueForKeyPath(value obj.Object, keyPath string) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setValue:forKeyPath:"), objref.IDOf(value), purego.NSString(keyPath))
 }
 
 // MutableArrayValueForKeyPath wraps the corresponding Objective-C method.
 func (o *Object) MutableArrayValueForKeyPath(keyPath string) obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("mutableArrayValueForKeyPath:"), purego.NSString(keyPath))
 	return obj.Wrap(_r)
 }
 
 // MutableOrderedSetValueForKeyPath wraps the corresponding Objective-C method.
 func (o *Object) MutableOrderedSetValueForKeyPath(keyPath string) obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("mutableOrderedSetValueForKeyPath:"), purego.NSString(keyPath))
 	return obj.Wrap(_r)
 }
 
 // MutableSetValueForKeyPath wraps the corresponding Objective-C method.
 func (o *Object) MutableSetValueForKeyPath(keyPath string) obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("mutableSetValueForKeyPath:"), purego.NSString(keyPath))
 	return obj.Wrap(_r)
 }
 
 // ValueForUndefinedKey wraps the corresponding Objective-C method.
 func (o *Object) ValueForUndefinedKey(key string) obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("valueForUndefinedKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // SetValueForUndefinedKey wraps the corresponding Objective-C method.
 func (o *Object) SetValueForUndefinedKey(value obj.Object, key string) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setValue:forUndefinedKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
 // SetNilValueForKey wraps the corresponding Objective-C method.
 func (o *Object) SetNilValueForKey(key string) {
+	defer runtime.KeepAlive(o)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setNilValueForKey:"), purego.NSString(key))
 }
 
 // DictionaryWithValuesForKeys wraps the corresponding Objective-C method.
-func (o *Object) DictionaryWithValuesForKeys(keys []string) obj.Object {
+func (o *Object) DictionaryWithValuesForKeys(keys []string) map[string]obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("dictionaryWithValuesForKeys:"), purego.SliceToNSArray(keys, func(_v string) objc.ID { return purego.NSString(_v) }))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetValuesForKeysWithDictionary wraps the corresponding Objective-C method.
-func (o *Object) SetValuesForKeysWithDictionary(keyedValues obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setValuesForKeysWithDictionary:"), objref.IDOf(keyedValues))
+func (o *Object) SetValuesForKeysWithDictionary(keyedValues map[string]obj.Object) {
+	defer runtime.KeepAlive(o)
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setValuesForKeysWithDictionary:"), rt.MapToDict(keyedValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // StoredValueForKey wraps the corresponding Objective-C method.
 func (o *Object) StoredValueForKey(key string) obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("storedValueForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // TakeStoredValueForKey wraps the corresponding Objective-C method.
 func (o *Object) TakeStoredValueForKey(value obj.Object, key string) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("takeStoredValue:forKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
 // TakeValueForKey wraps the corresponding Objective-C method.
 func (o *Object) TakeValueForKey(value obj.Object, key string) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("takeValue:forKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
 // TakeValueForKeyPath wraps the corresponding Objective-C method.
 func (o *Object) TakeValueForKeyPath(value obj.Object, keyPath string) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("takeValue:forKeyPath:"), objref.IDOf(value), purego.NSString(keyPath))
 }
 
 // HandleQueryWithUnboundKey wraps the corresponding Objective-C method.
 func (o *Object) HandleQueryWithUnboundKey(key string) obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("handleQueryWithUnboundKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // HandleTakeValueForUnboundKey wraps the corresponding Objective-C method.
 func (o *Object) HandleTakeValueForUnboundKey(value obj.Object, key string) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("handleTakeValue:forUnboundKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
 // UnableToSetNilForKey wraps the corresponding Objective-C method.
 func (o *Object) UnableToSetNilForKey(key string) {
+	defer runtime.KeepAlive(o)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("unableToSetNilForKey:"), purego.NSString(key))
 }
 
 // ValuesForKeys wraps the corresponding Objective-C method.
 func (o *Object) ValuesForKeys(keys obj.Object) obj.Object {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(keys)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("valuesForKeys:"), objref.IDOf(keys))
 	return obj.Wrap(_r)
 }
 
 // TakeValuesFromDictionary wraps the corresponding Objective-C method.
 func (o *Object) TakeValuesFromDictionary(properties obj.Object) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(properties)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("takeValuesFromDictionary:"), objref.IDOf(properties))
 }
 
 // ObserveValueForKeyPathOfObjectChangeContext wraps the corresponding Objective-C method.
 func (o *Object) ObserveValueForKeyPathOfObjectChangeContext(keyPath string, object obj.Object, change obj.Object, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(object)
+	defer runtime.KeepAlive(change)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("observeValueForKeyPath:ofObject:change:context:"), purego.NSString(keyPath), objref.IDOf(object), objref.IDOf(change), context_)
 }
 
 // AddObserverForKeyPathOptionsContext adds observer for key path options context.
 func (o *Object) AddObserverForKeyPathOptionsContext(observer *Object, keyPath string, options KeyValueObservingOptions, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(observer)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("addObserver:forKeyPath:options:context:"), objref.IDOf(observer), purego.NSString(keyPath), options, context_)
 }
 
 // RemoveObserverForKeyPathContext removes observer for key path context.
 func (o *Object) RemoveObserverForKeyPathContext(observer *Object, keyPath string, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(observer)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("removeObserver:forKeyPath:context:"), objref.IDOf(observer), purego.NSString(keyPath), context_)
 }
 
 // RemoveObserverForKeyPath removes observer for key path.
 func (o *Object) RemoveObserverForKeyPath(observer *Object, keyPath string) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(observer)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("removeObserver:forKeyPath:"), objref.IDOf(observer), purego.NSString(keyPath))
 }
 
 // WillChangeValueForKey wraps the corresponding Objective-C method.
 func (o *Object) WillChangeValueForKey(key string) {
+	defer runtime.KeepAlive(o)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("willChangeValueForKey:"), purego.NSString(key))
 }
 
 // DidChangeValueForKey wraps the corresponding Objective-C method.
 func (o *Object) DidChangeValueForKey(key string) {
+	defer runtime.KeepAlive(o)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("didChangeValueForKey:"), purego.NSString(key))
 }
 
 // WillChangeValuesAtIndexesForKey wraps the corresponding Objective-C method.
 func (o *Object) WillChangeValuesAtIndexesForKey(changeKind KeyValueChange, indexes *IndexSet, key string) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(indexes)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("willChange:valuesAtIndexes:forKey:"), changeKind, objref.IDOf(indexes), purego.NSString(key))
 }
 
 // DidChangeValuesAtIndexesForKey wraps the corresponding Objective-C method.
 func (o *Object) DidChangeValuesAtIndexesForKey(changeKind KeyValueChange, indexes *IndexSet, key string) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(indexes)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("didChange:valuesAtIndexes:forKey:"), changeKind, objref.IDOf(indexes), purego.NSString(key))
 }
 
 // WillChangeValueForKeyWithSetMutationUsingObjects wraps the corresponding Objective-C method.
 func (o *Object) WillChangeValueForKeyWithSetMutationUsingObjects(key string, mutationKind KeyValueSetMutationKind, objects obj.Object) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(objects)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("willChangeValueForKey:withSetMutation:usingObjects:"), purego.NSString(key), mutationKind, objref.IDOf(objects))
 }
 
 // DidChangeValueForKeyWithSetMutationUsingObjects wraps the corresponding Objective-C method.
 func (o *Object) DidChangeValueForKeyWithSetMutationUsingObjects(key string, mutationKind KeyValueSetMutationKind, objects obj.Object) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(objects)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("didChangeValueForKey:withSetMutation:usingObjects:"), purego.NSString(key), mutationKind, objref.IDOf(objects))
 }
 
 // SetSharedObservers register shared observations. A shared observation collection might be shared between multiple observables to minimise registration work. Shared observers remain registered throughout the object's lifetime and do not need to be removed using `removeObserver:`. An observable may only have one set of shared observations. Subsequent calls to this method will replace existing shared observations. - Parameter sharedObservers: shared observer collection that was initialized with the class of this object - Invariant: `sharedObserers` was initialized with the class of this object - Throws: Exception if the class of the receiving observable object does not match the class with which `sharedObserers` was initialized.
 func (o *Object) SetSharedObservers(sharedObservers *KeyValueSharedObserversSnapshot) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(sharedObservers)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setSharedObservers:"), objref.IDOf(sharedObservers))
 }
 
 // ReplacementObjectForKeyedArchiver wraps the corresponding Objective-C method.
 func (o *Object) ReplacementObjectForKeyedArchiver(archiver *KeyedArchiver) obj.Object {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(archiver)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("replacementObjectForKeyedArchiver:"), objref.IDOf(archiver))
 	return obj.Wrap(_r)
 }
 
 // ReplacementObjectForArchiver wraps the corresponding Objective-C method.
 func (o *Object) ReplacementObjectForArchiver(archiver *Archiver) obj.Object {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(archiver)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("replacementObjectForArchiver:"), objref.IDOf(archiver))
 	return obj.Wrap(_r)
 }
 
 // ReplacementObjectForPortCoder wraps the corresponding Objective-C method.
 func (o *Object) ReplacementObjectForPortCoder(coder *PortCoder) obj.Object {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(coder)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("replacementObjectForPortCoder:"), objref.IDOf(coder))
 	return obj.Wrap(_r)
 }
 
 // InverseForRelationshipKey wraps the corresponding Objective-C method.
 func (o *Object) InverseForRelationshipKey(relationshipKey string) string {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("inverseForRelationshipKey:"), purego.NSString(relationshipKey))
 	if _r == 0 {
 		return ""
@@ -379,6 +467,7 @@ func (o *Object) InverseForRelationshipKey(relationshipKey string) string {
 
 // ClassDescription returns the class description.
 func (o *Object) ClassDescription() *ClassDescription {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("classDescription"))
 	return ClassDescriptionFromID(_r)
 }
@@ -387,6 +476,7 @@ func (o *Object) ClassDescription() *ClassDescription {
 //
 // AttributeKeys returns the collection as a Go slice.
 func (o *Object) AttributeKeys() []string {
+	defer runtime.KeepAlive(o)
 	_arr := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("attributeKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -395,6 +485,7 @@ func (o *Object) AttributeKeys() []string {
 //
 // ToOneRelationshipKeys returns the collection as a Go slice.
 func (o *Object) ToOneRelationshipKeys() []string {
+	defer runtime.KeepAlive(o)
 	_arr := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("toOneRelationshipKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -403,36 +494,44 @@ func (o *Object) ToOneRelationshipKeys() []string {
 //
 // ToManyRelationshipKeys returns the collection as a Go slice.
 func (o *Object) ToManyRelationshipKeys() []string {
+	defer runtime.KeepAlive(o)
 	_arr := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("toManyRelationshipKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ScriptingValueForSpecifier wraps the corresponding Objective-C method.
 func (o *Object) ScriptingValueForSpecifier(objectSpecifier *ScriptObjectSpecifier) obj.Object {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(objectSpecifier)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("scriptingValueForSpecifier:"), objref.IDOf(objectSpecifier))
 	return obj.Wrap(_r)
 }
 
 // CopyScriptingValueForKeyWithProperties copies scripting value for key with properties.
-func (o *Object) CopyScriptingValueForKeyWithProperties(value obj.Object, key string, properties obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("copyScriptingValue:forKey:withProperties:"), objref.IDOf(value), purego.NSString(key), objref.IDOf(properties))
+func (o *Object) CopyScriptingValueForKeyWithProperties(value obj.Object, key string, properties map[string]obj.Object) obj.Object {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(value)
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("copyScriptingValue:forKey:withProperties:"), objref.IDOf(value), purego.NSString(key), rt.MapToDict(properties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
 // ScriptingProperties returns the scripting properties.
-func (o *Object) ScriptingProperties() obj.Object {
+func (o *Object) ScriptingProperties() map[string]obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("scriptingProperties"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ClassCode returns the class code.
 func (o *Object) ClassCode() int {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[int](objref.IDOf(o), objc.RegisterName("classCode"))
 	return _r
 }
 
 // ClassName returns the class name.
 func (o *Object) ClassName() string {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("className"))
 	if _r == 0 {
 		return ""
@@ -442,158 +541,206 @@ func (o *Object) ClassName() string {
 
 // ValueAtIndexInPropertyWithKey wraps the corresponding Objective-C method.
 func (o *Object) ValueAtIndexInPropertyWithKey(index int, key string) obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("valueAtIndex:inPropertyWithKey:"), index, purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // ValueWithNameInPropertyWithKey wraps the corresponding Objective-C method.
 func (o *Object) ValueWithNameInPropertyWithKey(name string, key string) obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("valueWithName:inPropertyWithKey:"), purego.NSString(name), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // ValueWithUniqueIDInPropertyWithKey wraps the corresponding Objective-C method.
 func (o *Object) ValueWithUniqueIDInPropertyWithKey(uniqueID obj.Object, key string) obj.Object {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(uniqueID)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("valueWithUniqueID:inPropertyWithKey:"), objref.IDOf(uniqueID), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // InsertValueAtIndexInPropertyWithKey inserts value at index in property with key.
 func (o *Object) InsertValueAtIndexInPropertyWithKey(value obj.Object, index int, key string) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("insertValue:atIndex:inPropertyWithKey:"), objref.IDOf(value), index, purego.NSString(key))
 }
 
 // RemoveValueAtIndexFromPropertyWithKey removes value at index from property with key.
 func (o *Object) RemoveValueAtIndexFromPropertyWithKey(index int, key string) {
+	defer runtime.KeepAlive(o)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("removeValueAtIndex:fromPropertyWithKey:"), index, purego.NSString(key))
 }
 
 // ReplaceValueAtIndexInPropertyWithKeyWithValue replaces value at index in property with key with value.
 func (o *Object) ReplaceValueAtIndexInPropertyWithKeyWithValue(index int, key string, value obj.Object) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("replaceValueAtIndex:inPropertyWithKey:withValue:"), index, purego.NSString(key), objref.IDOf(value))
 }
 
 // InsertValueInPropertyWithKey inserts value in property with key.
 func (o *Object) InsertValueInPropertyWithKey(value obj.Object, key string) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("insertValue:inPropertyWithKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
 // CoerceValueForKey wraps the corresponding Objective-C method.
 func (o *Object) CoerceValueForKey(value obj.Object, key string) obj.Object {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(value)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("coerceValue:forKey:"), objref.IDOf(value), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // IndicesOfObjectsByEvaluatingObjectSpecifier wraps the corresponding Objective-C method.
 func (o *Object) IndicesOfObjectsByEvaluatingObjectSpecifier(specifier *ScriptObjectSpecifier) []*Number {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(specifier)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("indicesOfObjectsByEvaluatingObjectSpecifier:"), objref.IDOf(specifier))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Number { return NumberFromID(_id) })
 }
 
 // ObjectSpecifier returns the object specifier.
 func (o *Object) ObjectSpecifier() *ScriptObjectSpecifier {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("objectSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
 
 // IsEqualTo wraps the corresponding Objective-C method.
 func (o *Object) IsEqualTo(object obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isEqualTo:"), objref.IDOf(object))
 	return _r
 }
 
 // IsLessThanOrEqualTo wraps the corresponding Objective-C method.
 func (o *Object) IsLessThanOrEqualTo(object obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isLessThanOrEqualTo:"), objref.IDOf(object))
 	return _r
 }
 
 // IsLessThan wraps the corresponding Objective-C method.
 func (o *Object) IsLessThan(object obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isLessThan:"), objref.IDOf(object))
 	return _r
 }
 
 // IsGreaterThanOrEqualTo wraps the corresponding Objective-C method.
 func (o *Object) IsGreaterThanOrEqualTo(object obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isGreaterThanOrEqualTo:"), objref.IDOf(object))
 	return _r
 }
 
 // IsGreaterThan wraps the corresponding Objective-C method.
 func (o *Object) IsGreaterThan(object obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isGreaterThan:"), objref.IDOf(object))
 	return _r
 }
 
 // IsNotEqualTo wraps the corresponding Objective-C method.
 func (o *Object) IsNotEqualTo(object obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isNotEqualTo:"), objref.IDOf(object))
 	return _r
 }
 
 // DoesContain wraps the corresponding Objective-C method.
 func (o *Object) DoesContain(object obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("doesContain:"), objref.IDOf(object))
 	return _r
 }
 
 // IsLike wraps the corresponding Objective-C method.
 func (o *Object) IsLike(object string) bool {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isLike:"), purego.NSString(object))
 	return _r
 }
 
 // IsCaseInsensitiveLike wraps the corresponding Objective-C method.
 func (o *Object) IsCaseInsensitiveLike(object string) bool {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isCaseInsensitiveLike:"), purego.NSString(object))
 	return _r
 }
 
 // ScriptingIsEqualTo wraps the corresponding Objective-C method.
 func (o *Object) ScriptingIsEqualTo(object obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("scriptingIsEqualTo:"), objref.IDOf(object))
 	return _r
 }
 
 // ScriptingIsLessThanOrEqualTo wraps the corresponding Objective-C method.
 func (o *Object) ScriptingIsLessThanOrEqualTo(object obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("scriptingIsLessThanOrEqualTo:"), objref.IDOf(object))
 	return _r
 }
 
 // ScriptingIsLessThan wraps the corresponding Objective-C method.
 func (o *Object) ScriptingIsLessThan(object obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("scriptingIsLessThan:"), objref.IDOf(object))
 	return _r
 }
 
 // ScriptingIsGreaterThanOrEqualTo wraps the corresponding Objective-C method.
 func (o *Object) ScriptingIsGreaterThanOrEqualTo(object obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("scriptingIsGreaterThanOrEqualTo:"), objref.IDOf(object))
 	return _r
 }
 
 // ScriptingIsGreaterThan wraps the corresponding Objective-C method.
 func (o *Object) ScriptingIsGreaterThan(object obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("scriptingIsGreaterThan:"), objref.IDOf(object))
 	return _r
 }
 
 // ScriptingBeginsWith wraps the corresponding Objective-C method.
 func (o *Object) ScriptingBeginsWith(object obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("scriptingBeginsWith:"), objref.IDOf(object))
 	return _r
 }
 
 // ScriptingEndsWith wraps the corresponding Objective-C method.
 func (o *Object) ScriptingEndsWith(object obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("scriptingEndsWith:"), objref.IDOf(object))
 	return _r
 }
 
 // ScriptingContains wraps the corresponding Objective-C method.
 func (o *Object) ScriptingContains(object obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("scriptingContains:"), objref.IDOf(object))
 	return _r
 }

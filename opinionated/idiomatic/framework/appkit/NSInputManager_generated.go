@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -46,22 +48,27 @@ func inputManagerAdopt(id objc.ID) *InputManager {
 
 // Description returns the object's -description text.
 func (im *InputManager) Description() string {
+	defer runtime.KeepAlive(im)
 	return rt.Description(objref.IDOf(im))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (im *InputManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(im)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(im), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (im *InputManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(im)
 	return rt.IsKind(objref.IDOf(im), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (im *InputManager) String() string {
+	defer runtime.KeepAlive(im)
 	return rt.Description(objref.IDOf(im))
 }
 
@@ -74,6 +81,7 @@ func NewInputManagerWithNameHost(inputServerName string, hostName string) *Input
 
 // LocalizedInputManagerName returns the localized input manager name.
 func (im *InputManager) LocalizedInputManagerName() string {
+	defer runtime.KeepAlive(im)
 	_r := objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("localizedInputManagerName"))
 	if _r == 0 {
 		return ""
@@ -83,22 +91,28 @@ func (im *InputManager) LocalizedInputManagerName() string {
 
 // MarkedTextAbandoned wraps the corresponding Objective-C method.
 func (im *InputManager) MarkedTextAbandoned(cli obj.Object) {
+	defer runtime.KeepAlive(im)
+	defer runtime.KeepAlive(cli)
 	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("markedTextAbandoned:"), objref.IDOf(cli))
 }
 
 // MarkedTextSelectionChangedClient wraps the corresponding Objective-C method.
 func (im *InputManager) MarkedTextSelectionChangedClient(newSel foundation.NSRange, cli obj.Object) {
+	defer runtime.KeepAlive(im)
+	defer runtime.KeepAlive(cli)
 	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("markedTextSelectionChanged:client:"), newSel, objref.IDOf(cli))
 }
 
 // WantsToInterpretAllKeystrokes wraps the corresponding Objective-C method.
 func (im *InputManager) WantsToInterpretAllKeystrokes() bool {
+	defer runtime.KeepAlive(im)
 	_r := objc.Send[bool](objref.IDOf(im), objc.RegisterName("wantsToInterpretAllKeystrokes"))
 	return _r
 }
 
 // Language returns the language.
 func (im *InputManager) Language() string {
+	defer runtime.KeepAlive(im)
 	_r := objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("language"))
 	if _r == 0 {
 		return ""
@@ -108,30 +122,36 @@ func (im *InputManager) Language() string {
 
 // Image returns the image.
 func (im *InputManager) Image() *Image {
+	defer runtime.KeepAlive(im)
 	_r := objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
 // Server returns the server.
 func (im *InputManager) Server() *InputServer {
+	defer runtime.KeepAlive(im)
 	_r := objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("server"))
 	return InputServerFromID(_r)
 }
 
 // WantsToHandleMouseEvents wraps the corresponding Objective-C method.
 func (im *InputManager) WantsToHandleMouseEvents() bool {
+	defer runtime.KeepAlive(im)
 	_r := objc.Send[bool](objref.IDOf(im), objc.RegisterName("wantsToHandleMouseEvents"))
 	return _r
 }
 
 // HandleMouseEvent wraps the corresponding Objective-C method.
 func (im *InputManager) HandleMouseEvent(mouseEvent *Event) bool {
+	defer runtime.KeepAlive(im)
+	defer runtime.KeepAlive(mouseEvent)
 	_r := objc.Send[bool](objref.IDOf(im), objc.RegisterName("handleMouseEvent:"), objref.IDOf(mouseEvent))
 	return _r
 }
 
 // WantsToDelayTextChangeNotifications wraps the corresponding Objective-C method.
 func (im *InputManager) WantsToDelayTextChangeNotifications() bool {
+	defer runtime.KeepAlive(im)
 	_r := objc.Send[bool](objref.IDOf(im), objc.RegisterName("wantsToDelayTextChangeNotifications"))
 	return _r
 }

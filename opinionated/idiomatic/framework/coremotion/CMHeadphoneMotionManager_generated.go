@@ -5,8 +5,11 @@
 package coremotion
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func headphoneMotionManagerAdopt(id objc.ID) *HeadphoneMotionManager {
 
 // Description returns the object's -description text.
 func (hmm *HeadphoneMotionManager) Description() string {
+	defer runtime.KeepAlive(hmm)
 	return rt.Description(objref.IDOf(hmm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hmm *HeadphoneMotionManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hmm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hmm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hmm *HeadphoneMotionManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(hmm)
 	return rt.IsKind(objref.IDOf(hmm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hmm *HeadphoneMotionManager) String() string {
+	defer runtime.KeepAlive(hmm)
 	return rt.Description(objref.IDOf(hmm))
 }
 
@@ -72,46 +80,64 @@ func NewHeadphoneMotionManager() *HeadphoneMotionManager {
 	return headphoneMotionManagerAdopt(_id)
 }
 
+// WithDelegate sets the object that receives headphone motion manager events.
+func (hmm *HeadphoneMotionManager) WithDelegate(delegate HeadphoneMotionManagerDelegate) *HeadphoneMotionManager {
+	_shim := newHeadphoneMotionManagerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(hmm), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(hmm), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return hmm
+}
+
 // StartDeviceMotionUpdates starts device-motion updates.
 func (hmm *HeadphoneMotionManager) StartDeviceMotionUpdates() {
+	defer runtime.KeepAlive(hmm)
 	objc.Send[objc.ID](objref.IDOf(hmm), objc.RegisterName("startDeviceMotionUpdates"))
 }
 
 // StopDeviceMotionUpdates stops device-motion updates.
 func (hmm *HeadphoneMotionManager) StopDeviceMotionUpdates() {
+	defer runtime.KeepAlive(hmm)
 	objc.Send[objc.ID](objref.IDOf(hmm), objc.RegisterName("stopDeviceMotionUpdates"))
 }
 
 // StartConnectionStatusUpdates starts connection status updates.
 func (hmm *HeadphoneMotionManager) StartConnectionStatusUpdates() {
+	defer runtime.KeepAlive(hmm)
 	objc.Send[objc.ID](objref.IDOf(hmm), objc.RegisterName("startConnectionStatusUpdates"))
 }
 
 // StopConnectionStatusUpdates stops connection status updates.
 func (hmm *HeadphoneMotionManager) StopConnectionStatusUpdates() {
+	defer runtime.KeepAlive(hmm)
 	objc.Send[objc.ID](objref.IDOf(hmm), objc.RegisterName("stopConnectionStatusUpdates"))
 }
 
 // IsConnectionStatusActive reports whether the object is connection status active.
 func (hmm *HeadphoneMotionManager) IsConnectionStatusActive() bool {
+	defer runtime.KeepAlive(hmm)
 	_r := objc.Send[bool](objref.IDOf(hmm), objc.RegisterName("isConnectionStatusActive"))
 	return _r
 }
 
 // IsDeviceMotionAvailable reports whether the object is device motion available.
 func (hmm *HeadphoneMotionManager) IsDeviceMotionAvailable() bool {
+	defer runtime.KeepAlive(hmm)
 	_r := objc.Send[bool](objref.IDOf(hmm), objc.RegisterName("isDeviceMotionAvailable"))
 	return _r
 }
 
 // IsDeviceMotionActive reports whether the object is device motion active.
 func (hmm *HeadphoneMotionManager) IsDeviceMotionActive() bool {
+	defer runtime.KeepAlive(hmm)
 	_r := objc.Send[bool](objref.IDOf(hmm), objc.RegisterName("isDeviceMotionActive"))
 	return _r
 }
 
 // DeviceMotion returns the device motion.
 func (hmm *HeadphoneMotionManager) DeviceMotion() *DeviceMotion {
+	defer runtime.KeepAlive(hmm)
 	_r := objc.Send[objc.ID](objref.IDOf(hmm), objc.RegisterName("deviceMotion"))
 	return DeviceMotionFromID(_r)
 }

@@ -224,12 +224,12 @@ func DRCopyDeviceArray() obj.Object {
 var _fnDRCopyLocalizedStringForAdditionalSense func(uint8, uint8) objc.ID
 
 // DRCopyLocalizedStringForAdditionalSense calls the DiscRecording framework function DRCopyLocalizedStringForAdditionalSense.
-func DRCopyLocalizedStringForAdditionalSense(aSC uint8, aSCQ uint8) obj.Object {
+func DRCopyLocalizedStringForAdditionalSense(asc uint8, ascq uint8) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRCopyLocalizedStringForAdditionalSense == nil {
 		ebipurego.RegisterLibFunc(&_fnDRCopyLocalizedStringForAdditionalSense, _lib, "DRCopyLocalizedStringForAdditionalSense")
 	}
-	_ret := _fnDRCopyLocalizedStringForAdditionalSense(aSC, aSCQ)
+	_ret := _fnDRCopyLocalizedStringForAdditionalSense(asc, ascq)
 	return obj.Wrap(_ret)
 }
 

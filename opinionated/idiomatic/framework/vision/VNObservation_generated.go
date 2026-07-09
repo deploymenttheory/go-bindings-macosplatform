@@ -5,8 +5,11 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,39 +53,47 @@ func observationAdopt(id objc.ID) *Observation {
 
 // Description returns the object's -description text.
 func (o *Observation) Description() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (o *Observation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (o *Observation) IsKind(className string) bool {
+	defer runtime.KeepAlive(o)
 	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (o *Observation) String() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
 // UUID returns the unique identifier assigned to an observation.
-func (o *Observation) UUID() obj.Object {
+func (o *Observation) UUID() *foundation.UUID {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("uuid"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // Confidence returns the level of confidence normalized to [0, 1] where 1 is most confident. The only exception is results coming from VNCoreMLRequest, where confidence values are forwarded as is from relevant CoreML models Confidence can always be returned as 1.0 if confidence is not supported or has no meaning
 func (o *Observation) Confidence() float32 {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[float32](objref.IDOf(o), objc.RegisterName("confidence"))
 	return _r
 }
 
 // TimeRange returns the duration of the observation reporting when first detected and how long it is valid. The duration of the observation when used with a sequence of buffers. If a request does not support a timeRange or the timeRange is not known, the start time and duration will be set to 0.
 func (o *Observation) TimeRange() coremedia.CMTimeRange {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(o), objc.RegisterName("timeRange"))
 	return _r
 }

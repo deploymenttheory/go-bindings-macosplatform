@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -55,30 +57,35 @@ func NewTextFeature() *TextFeature {
 
 // TopLeft returns the image coordinate of the upper-left corner of the detected text.
 func (tf *TextFeature) TopLeft() corefoundation.CGPoint {
+	defer runtime.KeepAlive(tf)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(tf), objc.RegisterName("topLeft"))
 	return _r
 }
 
 // TopRight returns the image coordinate of the upper-right corner of the detected text.
 func (tf *TextFeature) TopRight() corefoundation.CGPoint {
+	defer runtime.KeepAlive(tf)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(tf), objc.RegisterName("topRight"))
 	return _r
 }
 
 // BottomLeft returns the image coordinate of the lower-left corner of the detected text.
 func (tf *TextFeature) BottomLeft() corefoundation.CGPoint {
+	defer runtime.KeepAlive(tf)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(tf), objc.RegisterName("bottomLeft"))
 	return _r
 }
 
 // BottomRight returns the image coordinate of the lower-right corner of the detected text.
 func (tf *TextFeature) BottomRight() corefoundation.CGPoint {
+	defer runtime.KeepAlive(tf)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(tf), objc.RegisterName("bottomRight"))
 	return _r
 }
 
 // SubFeatures returns an array containing additional features detected within the feature. A text detector can identify both a major region that is likely to contain text as well as the areas within that region that likely to contain individual text features. Such features might be single characters, groups of closely-packed characters, or entire words. To detect sub-features, “/CIDetector/featuresInImage:options:“ needs to be called with the “CIDetectorReturnSubFeatures“ option set to true.
 func (tf *TextFeature) SubFeatures() obj.Object {
+	defer runtime.KeepAlive(tf)
 	_r := objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("subFeatures"))
 	return obj.Wrap(_r)
 }

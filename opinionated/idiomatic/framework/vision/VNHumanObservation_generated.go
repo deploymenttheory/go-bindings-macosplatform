@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewHumanObservation() *HumanObservation {
 
 // UpperBodyOnly wraps the corresponding Objective-C method.
 func (ho *HumanObservation) UpperBodyOnly() bool {
+	defer runtime.KeepAlive(ho)
 	_r := objc.Send[bool](objref.IDOf(ho), objc.RegisterName("upperBodyOnly"))
 	return _r
 }

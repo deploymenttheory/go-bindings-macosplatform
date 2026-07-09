@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func metadataGroupAdopt(id objc.ID) *MetadataGroup {
 
 // Description returns the object's -description text.
 func (mg *MetadataGroup) Description() string {
+	defer runtime.KeepAlive(mg)
 	return rt.Description(objref.IDOf(mg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mg *MetadataGroup) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mg)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mg *MetadataGroup) IsKind(className string) bool {
+	defer runtime.KeepAlive(mg)
 	return rt.IsKind(objref.IDOf(mg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mg *MetadataGroup) String() string {
+	defer runtime.KeepAlive(mg)
 	return rt.Description(objref.IDOf(mg))
 }
 
@@ -72,12 +79,14 @@ func (mg *MetadataGroup) String() string {
 //
 // Items returns the collection as a Go slice.
 func (mg *MetadataGroup) Items() []*MetadataItem {
+	defer runtime.KeepAlive(mg)
 	_arr := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("items"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
 // ClassifyingLabel returns the classifying label.
 func (mg *MetadataGroup) ClassifyingLabel() string {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("classifyingLabel"))
 	if _r == 0 {
 		return ""
@@ -87,6 +96,7 @@ func (mg *MetadataGroup) ClassifyingLabel() string {
 
 // UniqueID returns the unique ID.
 func (mg *MetadataGroup) UniqueID() string {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("uniqueID"))
 	if _r == 0 {
 		return ""

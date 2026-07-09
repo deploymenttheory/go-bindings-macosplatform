@@ -69,8 +69,8 @@ func (o *CalCalendarStore) Calendars() *foundation.NSArray[objc.ID] {
 }
 
 // Deprecated: since macOS 10.8.
-func (o *CalCalendarStore) CalendarWithUID(uID *foundation.NSString) *CalCalendar {
-	_ret := objc.Send[objc.ID](o.Ptr(), _calCalendarStoreSelCalendarWithUID, uID.Ptr())
+func (o *CalCalendarStore) CalendarWithUID(uid *foundation.NSString) *CalCalendar {
+	_ret := objc.Send[objc.ID](o.Ptr(), _calCalendarStoreSelCalendarWithUID, uid.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -183,8 +183,8 @@ func CalCalendarStoreEventPredicateWithStartDateEndDateCalendars(startDate *foun
 }
 
 // Deprecated: since macOS 10.8.
-func CalCalendarStoreEventPredicateWithStartDateEndDateUIDCalendars(startDate *foundation.NSDate, endDate *foundation.NSDate, uID *foundation.NSString, calendars *foundation.NSArray[objc.ID]) *foundation.NSPredicate {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCalCalendarStore), _calCalendarStoreSelEventPredicateWithStartDateEndDateUIDCalendars, startDate.Ptr(), endDate.Ptr(), uID.Ptr(), calendars.Ptr())
+func CalCalendarStoreEventPredicateWithStartDateEndDateUIDCalendars(startDate *foundation.NSDate, endDate *foundation.NSDate, uid *foundation.NSString, calendars *foundation.NSArray[objc.ID]) *foundation.NSPredicate {
+	_ret := objc.Send[objc.ID](objc.ID(_clsCalCalendarStore), _calCalendarStoreSelEventPredicateWithStartDateEndDateUIDCalendars, startDate.Ptr(), endDate.Ptr(), uid.Ptr(), calendars.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

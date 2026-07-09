@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRColorControlClusterStopMoveStepParamsAdopt(id objc.ID) *MTRColorControlC
 
 // Description returns the object's -description text.
 func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) Description() string {
+	defer runtime.KeepAlive(mcccsmsp)
 	return rt.Description(objref.IDOf(mcccsmsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcccsmsp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcccsmsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcccsmsp)
 	return rt.IsKind(objref.IDOf(mcccsmsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) String() string {
+	defer runtime.KeepAlive(mcccsmsp)
 	return rt.Description(objref.IDOf(mcccsmsp))
 }
 
@@ -72,48 +80,56 @@ func NewMTRColorControlClusterStopMoveStepParams() *MTRColorControlClusterStopMo
 
 // WithOptionsMask sets the options mask.
 func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterStopMoveStepParams {
+	defer runtime.KeepAlive(optionsMask)
 	objc.Send[objc.ID](objref.IDOf(mcccsmsp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mcccsmsp
 }
 
 // WithOptionsOverride sets the options override.
 func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterStopMoveStepParams {
+	defer runtime.KeepAlive(optionsOverride)
 	objc.Send[objc.ID](objref.IDOf(mcccsmsp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mcccsmsp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterStopMoveStepParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mcccsmsp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mcccsmsp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterStopMoveStepParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mcccsmsp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mcccsmsp
 }
 
 // OptionsMask returns the options mask.
-func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) OptionsMask() obj.Object {
+func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) OptionsMask() *foundation.Number {
+	defer runtime.KeepAlive(mcccsmsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccsmsp), objc.RegisterName("optionsMask"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // OptionsOverride returns the options override.
-func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) OptionsOverride() obj.Object {
+func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) OptionsOverride() *foundation.Number {
+	defer runtime.KeepAlive(mcccsmsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccsmsp), objc.RegisterName("optionsOverride"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) TimedInvokeTimeoutMs() obj.Object {
+func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mcccsmsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccsmsp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) ServerSideProcessingTimeout() obj.Object {
+func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mcccsmsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccsmsp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

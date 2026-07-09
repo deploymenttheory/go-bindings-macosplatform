@@ -51,10 +51,10 @@ func NetFSMountURLProbe(hostname obj.Object) obj.Object {
 var _fnNetFSMountURLSync func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) int32
 
 // NetFSMountURLSync calls the NetFS framework function NetFSMountURLSync.
-func NetFSMountURLSync(url obj.Object, mountpath obj.Object, user obj.Object, passwd obj.Object, open_options obj.Object, mount_options obj.Object, mountpoints unsafe.Pointer) int {
+func NetFSMountURLSync(url obj.Object, mountpath obj.Object, user obj.Object, passwd obj.Object, openOptions obj.Object, mountOptions obj.Object, mountpoints unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetFSMountURLSync == nil {
 		ebipurego.RegisterLibFunc(&_fnNetFSMountURLSync, _lib, "NetFSMountURLSync")
 	}
-	return int(_fnNetFSMountURLSync(objref.IDOf(url), objref.IDOf(mountpath), objref.IDOf(user), objref.IDOf(passwd), objref.IDOf(open_options), objref.IDOf(mount_options), mountpoints))
+	return int(_fnNetFSMountURLSync(objref.IDOf(url), objref.IDOf(mountpath), objref.IDOf(user), objref.IDOf(passwd), objref.IDOf(openOptions), objref.IDOf(mountOptions), mountpoints))
 }

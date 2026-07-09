@@ -5,6 +5,9 @@
 package passkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,47 +52,56 @@ func storedValuePassPropertiesAdopt(id objc.ID) *StoredValuePassProperties {
 
 // Description returns the object's -description text.
 func (svpp *StoredValuePassProperties) Description() string {
+	defer runtime.KeepAlive(svpp)
 	return rt.Description(objref.IDOf(svpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (svpp *StoredValuePassProperties) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(svpp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(svpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (svpp *StoredValuePassProperties) IsKind(className string) bool {
+	defer runtime.KeepAlive(svpp)
 	return rt.IsKind(objref.IDOf(svpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (svpp *StoredValuePassProperties) String() string {
+	defer runtime.KeepAlive(svpp)
 	return rt.Description(objref.IDOf(svpp))
 }
 
 // IsBlacklisted reports whether the object is blacklisted.
 func (svpp *StoredValuePassProperties) IsBlacklisted() bool {
+	defer runtime.KeepAlive(svpp)
 	_r := objc.Send[bool](objref.IDOf(svpp), objc.RegisterName("isBlacklisted"))
 	return _r
 }
 
 // IsBlocked reports whether the object is blocked.
 func (svpp *StoredValuePassProperties) IsBlocked() bool {
+	defer runtime.KeepAlive(svpp)
 	_r := objc.Send[bool](objref.IDOf(svpp), objc.RegisterName("isBlocked"))
 	return _r
 }
 
 // ExpirationDate returns the expiration date.
-func (svpp *StoredValuePassProperties) ExpirationDate() obj.Object {
+func (svpp *StoredValuePassProperties) ExpirationDate() time.Time {
+	defer runtime.KeepAlive(svpp)
 	_r := objc.Send[objc.ID](objref.IDOf(svpp), objc.RegisterName("expirationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Balances returns the balances.
 //
 // Balances returns the collection as a Go slice.
 func (svpp *StoredValuePassProperties) Balances() []*StoredValuePassBalance {
+	defer runtime.KeepAlive(svpp)
 	_arr := objc.Send[objc.ID](objref.IDOf(svpp), objc.RegisterName("balances"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *StoredValuePassBalance { return StoredValuePassBalanceFromID(_id) })
 }

@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func structMemberAdopt(id objc.ID) *StructMember {
 
 // Description returns the object's -description text.
 func (sm *StructMember) Description() string {
+	defer runtime.KeepAlive(sm)
 	return rt.Description(objref.IDOf(sm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sm *StructMember) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sm *StructMember) IsKind(className string) bool {
+	defer runtime.KeepAlive(sm)
 	return rt.IsKind(objref.IDOf(sm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sm *StructMember) String() string {
+	defer runtime.KeepAlive(sm)
 	return rt.Description(objref.IDOf(sm))
 }
 
@@ -74,36 +81,42 @@ func NewStructMember() *StructMember {
 
 // StructType provides a description of the underlying struct when the struct member holds a struct.
 func (sm *StructMember) StructType() *StructType {
+	defer runtime.KeepAlive(sm)
 	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("structType"))
 	return StructTypeFromID(_r)
 }
 
 // ArrayType provides a description of the underlying array when the struct member holds an array.
 func (sm *StructMember) ArrayType() *ArrayType {
+	defer runtime.KeepAlive(sm)
 	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("arrayType"))
 	return ArrayTypeFromID(_r)
 }
 
 // TextureReferenceType provides a description of the underlying texture when the struct member holds a texture.
 func (sm *StructMember) TextureReferenceType() *TextureReferenceType {
+	defer runtime.KeepAlive(sm)
 	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("textureReferenceType"))
 	return TextureReferenceTypeFromID(_r)
 }
 
 // PointerType provides a description of the underlying pointer when the struct member holds a pointer.
 func (sm *StructMember) PointerType() *PointerType {
+	defer runtime.KeepAlive(sm)
 	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("pointerType"))
 	return PointerTypeFromID(_r)
 }
 
 // TensorReferenceType provides a description of the underlying tensor type when this struct member holds a tensor.
 func (sm *StructMember) TensorReferenceType() *TensorReferenceType {
+	defer runtime.KeepAlive(sm)
 	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("tensorReferenceType"))
 	return TensorReferenceTypeFromID(_r)
 }
 
 // Name returns the name.
 func (sm *StructMember) Name() string {
+	defer runtime.KeepAlive(sm)
 	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -113,18 +126,21 @@ func (sm *StructMember) Name() string {
 
 // Offset returns the offset.
 func (sm *StructMember) Offset() int {
+	defer runtime.KeepAlive(sm)
 	_r := objc.Send[int](objref.IDOf(sm), objc.RegisterName("offset"))
 	return _r
 }
 
 // DataType returns the data type.
 func (sm *StructMember) DataType() DataType {
+	defer runtime.KeepAlive(sm)
 	_r := objc.Send[DataType](objref.IDOf(sm), objc.RegisterName("dataType"))
 	return _r
 }
 
 // ArgumentIndex returns the argument index.
 func (sm *StructMember) ArgumentIndex() int {
+	defer runtime.KeepAlive(sm)
 	_r := objc.Send[int](objref.IDOf(sm), objc.RegisterName("argumentIndex"))
 	return _r
 }

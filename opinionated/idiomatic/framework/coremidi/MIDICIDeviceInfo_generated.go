@@ -5,6 +5,8 @@
 package coremidi
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,58 +49,68 @@ func cIDeviceInfoAdopt(id objc.ID) *CIDeviceInfo {
 
 // Description returns the object's -description text.
 func (cdi *CIDeviceInfo) Description() string {
+	defer runtime.KeepAlive(cdi)
 	return rt.Description(objref.IDOf(cdi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cdi *CIDeviceInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cdi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cdi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cdi *CIDeviceInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(cdi)
 	return rt.IsKind(objref.IDOf(cdi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cdi *CIDeviceInfo) String() string {
+	defer runtime.KeepAlive(cdi)
 	return rt.Description(objref.IDOf(cdi))
 }
 
 // NewCIDeviceInfoWithDestinationManufacturerFamilyModelRevision creates a new device information instance.
-func NewCIDeviceInfoWithDestinationManufacturerFamilyModelRevision(midiDestination int, manufacturer obj.Object, family obj.Object, modelNumber obj.Object, revisionLevel obj.Object) *CIDeviceInfo {
+func NewCIDeviceInfoWithDestinationManufacturerFamilyModelRevision(midiDestination int, manufacturer []byte, family []byte, modelNumber []byte, revisionLevel []byte) *CIDeviceInfo {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MIDICIDeviceInfo")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestination:manufacturer:family:model:revision:"), midiDestination, objref.IDOf(manufacturer), objref.IDOf(family), objref.IDOf(modelNumber), objref.IDOf(revisionLevel))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestination:manufacturer:family:model:revision:"), midiDestination, rt.BytesToNSData(manufacturer), rt.BytesToNSData(family), rt.BytesToNSData(modelNumber), rt.BytesToNSData(revisionLevel))
 	return cIDeviceInfoAdopt(_id)
 }
 
 // ManufacturerID returns the manufacturer ID.
-func (cdi *CIDeviceInfo) ManufacturerID() obj.Object {
+func (cdi *CIDeviceInfo) ManufacturerID() []byte {
+	defer runtime.KeepAlive(cdi)
 	_r := objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("manufacturerID"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Family returns the family.
-func (cdi *CIDeviceInfo) Family() obj.Object {
+func (cdi *CIDeviceInfo) Family() []byte {
+	defer runtime.KeepAlive(cdi)
 	_r := objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("family"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ModelNumber returns the model number.
-func (cdi *CIDeviceInfo) ModelNumber() obj.Object {
+func (cdi *CIDeviceInfo) ModelNumber() []byte {
+	defer runtime.KeepAlive(cdi)
 	_r := objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("modelNumber"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // RevisionLevel returns the revision level.
-func (cdi *CIDeviceInfo) RevisionLevel() obj.Object {
+func (cdi *CIDeviceInfo) RevisionLevel() []byte {
+	defer runtime.KeepAlive(cdi)
 	_r := objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("revisionLevel"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // MidiDestination returns the midi destination.
 func (cdi *CIDeviceInfo) MidiDestination() int {
+	defer runtime.KeepAlive(cdi)
 	_r := objc.Send[int](objref.IDOf(cdi), objc.RegisterName("midiDestination"))
 	return _r
 }

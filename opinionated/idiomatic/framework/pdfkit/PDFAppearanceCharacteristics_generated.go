@@ -5,6 +5,8 @@
 package pdfkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func appearanceCharacteristicsAdopt(id objc.ID) *AppearanceCharacteristics {
 
 // Description returns the object's -description text.
 func (ac *AppearanceCharacteristics) Description() string {
+	defer runtime.KeepAlive(ac)
 	return rt.Description(objref.IDOf(ac))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ac *AppearanceCharacteristics) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ac)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ac), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ac *AppearanceCharacteristics) IsKind(className string) bool {
+	defer runtime.KeepAlive(ac)
 	return rt.IsKind(objref.IDOf(ac), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ac *AppearanceCharacteristics) String() string {
+	defer runtime.KeepAlive(ac)
 	return rt.Description(objref.IDOf(ac))
 }
 
@@ -80,12 +87,14 @@ func (ac *AppearanceCharacteristics) WithControlType(controlType WidgetControlTy
 
 // WithBackgroundColor sets the background color of the widget annotation.
 func (ac *AppearanceCharacteristics) WithBackgroundColor(backgroundColor obj.Object) *AppearanceCharacteristics {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return ac
 }
 
 // WithBorderColor sets the border color of the widget annotation.
 func (ac *AppearanceCharacteristics) WithBorderColor(borderColor obj.Object) *AppearanceCharacteristics {
+	defer runtime.KeepAlive(borderColor)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 	return ac
 }
@@ -116,30 +125,35 @@ func (ac *AppearanceCharacteristics) WithDownCaption(downCaption string) *Appear
 
 // ControlType returns the control type.
 func (ac *AppearanceCharacteristics) ControlType() WidgetControlType {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[WidgetControlType](objref.IDOf(ac), objc.RegisterName("controlType"))
 	return _r
 }
 
 // BackgroundColor returns the background color.
 func (ac *AppearanceCharacteristics) BackgroundColor() obj.Object {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
 }
 
 // BorderColor returns the border color.
 func (ac *AppearanceCharacteristics) BorderColor() obj.Object {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("borderColor"))
 	return obj.Wrap(_r)
 }
 
 // Rotation returns the rotation.
 func (ac *AppearanceCharacteristics) Rotation() int {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[int](objref.IDOf(ac), objc.RegisterName("rotation"))
 	return _r
 }
 
 // Caption returns the caption.
 func (ac *AppearanceCharacteristics) Caption() string {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("caption"))
 	if _r == 0 {
 		return ""
@@ -149,6 +163,7 @@ func (ac *AppearanceCharacteristics) Caption() string {
 
 // RolloverCaption returns the rollover caption.
 func (ac *AppearanceCharacteristics) RolloverCaption() string {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("rolloverCaption"))
 	if _r == 0 {
 		return ""
@@ -158,6 +173,7 @@ func (ac *AppearanceCharacteristics) RolloverCaption() string {
 
 // DownCaption returns the down caption.
 func (ac *AppearanceCharacteristics) DownCaption() string {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("downCaption"))
 	if _r == 0 {
 		return ""
@@ -167,6 +183,7 @@ func (ac *AppearanceCharacteristics) DownCaption() string {
 
 // AppearanceCharacteristicsKeyValues returns the appearance characteristics key values.
 func (ac *AppearanceCharacteristics) AppearanceCharacteristicsKeyValues() obj.Object {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("appearanceCharacteristicsKeyValues"))
 	return obj.Wrap(_r)
 }

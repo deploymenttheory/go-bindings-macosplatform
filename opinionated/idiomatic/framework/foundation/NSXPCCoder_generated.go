@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,24 +63,29 @@ func (xc *XPCCoder) WithObservationInfo(observationInfo unsafe.Pointer) *XPCCode
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (xc *XPCCoder) WithScriptingProperties(scriptingProperties obj.Object) *XPCCoder {
-	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (xc *XPCCoder) WithScriptingProperties(scriptingProperties map[string]obj.Object) *XPCCoder {
+	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return xc
 }
 
 // EncodeXPCObjectForKey encodes an object to send over an XPC connection.
 func (xc *XPCCoder) EncodeXPCObjectForKey(xpcObject *Object, key string) {
+	defer runtime.KeepAlive(xc)
+	defer runtime.KeepAlive(xpcObject)
 	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("encodeXPCObject:forKey:"), objref.IDOf(xpcObject), purego.NSString(key))
 }
 
 // DecodeXPCObjectOfTypeForKey decodes an object and validates that its type matches the type a service provides over XPC.
 func (xc *XPCCoder) DecodeXPCObjectOfTypeForKey(type_ obj.Object, key string) *Object {
+	defer runtime.KeepAlive(xc)
+	defer runtime.KeepAlive(type_)
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("decodeXPCObjectOfType:forKey:"), objref.IDOf(type_), purego.NSString(key))
 	return ObjectFromID(_r)
 }
 
 // Connection returns the connection.
 func (xc *XPCCoder) Connection() *XPCConnection {
+	defer runtime.KeepAlive(xc)
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("connection"))
 	return XPCConnectionFromID(_r)
 }

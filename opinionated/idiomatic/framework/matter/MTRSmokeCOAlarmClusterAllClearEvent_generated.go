@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRSmokeCOAlarmClusterAllClearEventAdopt(id objc.ID) *MTRSmokeCOAlarmCluste
 
 // Description returns the object's -description text.
 func (mscacace *MTRSmokeCOAlarmClusterAllClearEvent) Description() string {
+	defer runtime.KeepAlive(mscacace)
 	return rt.Description(objref.IDOf(mscacace))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mscacace *MTRSmokeCOAlarmClusterAllClearEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mscacace)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mscacace), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mscacace *MTRSmokeCOAlarmClusterAllClearEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mscacace)
 	return rt.IsKind(objref.IDOf(mscacace), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mscacace *MTRSmokeCOAlarmClusterAllClearEvent) String() string {
+	defer runtime.KeepAlive(mscacace)
 	return rt.Description(objref.IDOf(mscacace))
 }
 

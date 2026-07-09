@@ -5,6 +5,8 @@
 package mediaextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,27 +50,33 @@ func trackInfoAdopt(id objc.ID) *TrackInfo {
 
 // Description returns the object's -description text.
 func (ti *TrackInfo) Description() string {
+	defer runtime.KeepAlive(ti)
 	return rt.Description(objref.IDOf(ti))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ti *TrackInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ti)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ti), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ti *TrackInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(ti)
 	return rt.IsKind(objref.IDOf(ti), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ti *TrackInfo) String() string {
+	defer runtime.KeepAlive(ti)
 	return rt.Description(objref.IDOf(ti))
 }
 
 // NewTrackInfoWithMediaTypeTrackIDFormatDescriptions creates a new track info object with the media type, track ID, and format descriptions that you specify.
 func NewTrackInfoWithMediaTypeTrackIDFormatDescriptions(mediaType int, trackID int32, formatDescriptions obj.Object) *TrackInfo {
+	defer runtime.KeepAlive(formatDescriptions)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("METrackInfo")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMediaType:trackID:formatDescriptions:"), mediaType, trackID, objref.IDOf(formatDescriptions))
 	return trackInfoAdopt(_id)
@@ -125,30 +133,35 @@ func (ti *TrackInfo) WithRequiresFrameReordering(requiresFrameReordering bool) *
 
 // MediaType returns the media type of the track. This value is set through the class initializer.
 func (ti *TrackInfo) MediaType() int {
+	defer runtime.KeepAlive(ti)
 	_r := objc.Send[int](objref.IDOf(ti), objc.RegisterName("mediaType"))
 	return _r
 }
 
 // TrackID returns an integer identifying the track within the media asset. The track ID is used to uniquely identify the track within the MEFormatReader. Track IDs must be unique within a media asset but do not need to be unique across assets. If a media format does not have a native concept of track IDs, track IDs may be assigned starting from 1. The track ID value of 0 is reserved to indicate an invalid track ID. This value is set through the class initializer.
 func (ti *TrackInfo) TrackID() int32 {
+	defer runtime.KeepAlive(ti)
 	_r := objc.Send[int32](objref.IDOf(ti), objc.RegisterName("trackID"))
 	return _r
 }
 
 // IsEnabled reports whether a BOOL value indicating whether the track is enabled by default.
 func (ti *TrackInfo) IsEnabled() bool {
+	defer runtime.KeepAlive(ti)
 	_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("isEnabled"))
 	return _r
 }
 
 // FormatDescriptions returns the format descriptions for the track, as an NSArray. This value is set through the class initializer.
 func (ti *TrackInfo) FormatDescriptions() obj.Object {
+	defer runtime.KeepAlive(ti)
 	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("formatDescriptions"))
 	return obj.Wrap(_r)
 }
 
 // NaturalTimescale returns the natural timescale of the track, as a CMTimeScale value.
 func (ti *TrackInfo) NaturalTimescale() int32 {
+	defer runtime.KeepAlive(ti)
 	_r := objc.Send[int32](objref.IDOf(ti), objc.RegisterName("naturalTimescale"))
 	return _r
 }
@@ -157,12 +170,14 @@ func (ti *TrackInfo) NaturalTimescale() int32 {
 //
 // TrackEdits returns the collection as a Go slice.
 func (ti *TrackInfo) TrackEdits() []obj.Object {
+	defer runtime.KeepAlive(ti)
 	_arr := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("trackEdits"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ExtendedLanguageTag returns the extended language tag.
 func (ti *TrackInfo) ExtendedLanguageTag() string {
+	defer runtime.KeepAlive(ti)
 	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("extendedLanguageTag"))
 	if _r == 0 {
 		return ""
@@ -172,24 +187,28 @@ func (ti *TrackInfo) ExtendedLanguageTag() string {
 
 // NaturalSize indicates the natural dimensions of the media data referenced by the track as a CGSize. This property is only valid for tracks with visual media types and should return CGSizeZero if implemented for other track types.
 func (ti *TrackInfo) NaturalSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(ti)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ti), objc.RegisterName("naturalSize"))
 	return _r
 }
 
 // PreferredTransform indicates the preferred affine display transform of the track media for visual display. Returns an CGAffineTransform representing the preferred affine transform of the track for visual display. This property is only valid for tracks with visual media types and should return CGAffineTransformIdentity if implemented for other track types.
 func (ti *TrackInfo) PreferredTransform() corefoundation.CGAffineTransform {
+	defer runtime.KeepAlive(ti)
 	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(ti), objc.RegisterName("preferredTransform"))
 	return _r
 }
 
 // NominalFrameRate returns the frame rate of the track, in frames per second, as a 32-bit floating point number. For field-based video tracks that carry one field per media sample, the value of this property is the field rate, not the frame rate. This information from this property may be used by the MediaToolbox to calculate the maximum playback speed.
 func (ti *TrackInfo) NominalFrameRate() float32 {
+	defer runtime.KeepAlive(ti)
 	_r := objc.Send[float32](objref.IDOf(ti), objc.RegisterName("nominalFrameRate"))
 	return _r
 }
 
 // RequiresFrameReordering reports whether frame reordering occurs in the track. The value is true if frame reordering occurs, false otherwise. This property is only valid for tracks with video media type and should return false for if implemented for other track types.
 func (ti *TrackInfo) RequiresFrameReordering() bool {
+	defer runtime.KeepAlive(ti)
 	_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("requiresFrameReordering"))
 	return _r
 }

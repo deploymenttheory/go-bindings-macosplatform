@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterLevelControlAdopt(id objc.ID) *MTRBaseClusterLevelControl {
 
 // NewMTRBaseClusterLevelControlWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterLevelControlWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterLevelControl {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterLevelControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterLevelControlAdopt(_id)
@@ -56,6 +60,8 @@ func NewMTRBaseClusterLevelControlWithDeviceEndpointIDQueue(device *MTRBaseDevic
 
 // NewMTRBaseClusterLevelControlWithDeviceEndpointQueue creates a new MTRBaseClusterLevelControl.
 func NewMTRBaseClusterLevelControlWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterLevelControl {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterLevelControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRBaseClusterLevelControlAdopt(_id)
@@ -65,6 +71,7 @@ func NewMTRBaseClusterLevelControlWithDeviceEndpointQueue(device *MTRBaseDevice,
 //
 // ReadAttributeCurrentLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeCurrentLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -90,6 +97,8 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeCurrentLevelWithCompletion
 //
 // SubscribeAttributeCurrentLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeCurrentLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -115,6 +124,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeCurrentLevelWithParam
 //
 // ReadAttributeRemainingTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeRemainingTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -140,6 +150,8 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeRemainingTimeWithCompletio
 //
 // SubscribeAttributeRemainingTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeRemainingTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -165,6 +177,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeRemainingTimeWithPara
 //
 // ReadAttributeMinLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMinLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -190,6 +203,8 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMinLevelWithCompletion(ctx
 //
 // SubscribeAttributeMinLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMinLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -215,6 +230,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMinLevelWithParamsSub
 //
 // ReadAttributeMaxLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMaxLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -240,6 +256,8 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMaxLevelWithCompletion(ctx
 //
 // SubscribeAttributeMaxLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMaxLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -265,6 +283,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMaxLevelWithParamsSub
 //
 // ReadAttributeCurrentFrequencyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeCurrentFrequencyWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -290,6 +309,8 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeCurrentFrequencyWithComple
 //
 // SubscribeAttributeCurrentFrequencyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeCurrentFrequencyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -315,6 +336,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeCurrentFrequencyWithP
 //
 // ReadAttributeMinFrequencyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMinFrequencyWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -340,6 +362,8 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMinFrequencyWithCompletion
 //
 // SubscribeAttributeMinFrequencyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMinFrequencyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -365,6 +389,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMinFrequencyWithParam
 //
 // ReadAttributeMaxFrequencyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMaxFrequencyWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -390,6 +415,8 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMaxFrequencyWithCompletion
 //
 // SubscribeAttributeMaxFrequencyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMaxFrequencyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -415,6 +442,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMaxFrequencyWithParam
 //
 // ReadAttributeOptionsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOptionsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -440,6 +468,8 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOptionsWithCompletion(ctx 
 //
 // SubscribeAttributeOptionsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOptionsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,6 +495,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOptionsWithParamsSubs
 //
 // ReadAttributeOnOffTransitionTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOnOffTransitionTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -490,6 +521,8 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOnOffTransitionTimeWithCom
 //
 // SubscribeAttributeOnOffTransitionTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOnOffTransitionTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -515,6 +548,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOnOffTransitionTimeWi
 //
 // ReadAttributeOnLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOnLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -540,6 +574,8 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOnLevelWithCompletion(ctx 
 //
 // SubscribeAttributeOnLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOnLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -565,6 +601,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOnLevelWithParamsSubs
 //
 // ReadAttributeOnTransitionTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOnTransitionTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -590,6 +627,8 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOnTransitionTimeWithComple
 //
 // SubscribeAttributeOnTransitionTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOnTransitionTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -615,6 +654,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOnTransitionTimeWithP
 //
 // ReadAttributeOffTransitionTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOffTransitionTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -640,6 +680,8 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOffTransitionTimeWithCompl
 //
 // SubscribeAttributeOffTransitionTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOffTransitionTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -665,6 +707,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOffTransitionTimeWith
 //
 // ReadAttributeDefaultMoveRateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeDefaultMoveRateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -690,6 +733,8 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeDefaultMoveRateWithComplet
 //
 // SubscribeAttributeDefaultMoveRateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeDefaultMoveRateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -715,6 +760,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeDefaultMoveRateWithPa
 //
 // ReadAttributeStartUpCurrentLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeStartUpCurrentLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -740,6 +786,8 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeStartUpCurrentLevelWithCom
 //
 // SubscribeAttributeStartUpCurrentLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeStartUpCurrentLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -765,6 +813,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeStartUpCurrentLevelWi
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -790,6 +839,8 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeGeneratedCommandListWithCo
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -815,6 +866,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeGeneratedCommandListW
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -840,6 +892,8 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeAcceptedCommandListWithCom
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -865,6 +919,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeAcceptedCommandListWi
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -890,6 +945,8 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeAttributeListWithCompletio
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -915,6 +972,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeAttributeListWithPara
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -940,6 +998,8 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeFeatureMapWithCompletion(c
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -965,6 +1025,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeFeatureMapWithParamsS
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -990,6 +1051,8 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeClusterRevisionWithComplet
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1015,6 +1078,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeClusterRevisionWithPa
 //
 // ReadAttributeCurrentLevel blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeCurrentLevel(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,6 +1104,10 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeCurrentLevel(ctx context.C
 //
 // SubscribeAttributeCurrentLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeCurrentLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1065,6 +1133,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeCurrentLevelWithMinIn
 //
 // ReadAttributeRemainingTime blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeRemainingTime(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1090,6 +1159,10 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeRemainingTime(ctx context.
 //
 // SubscribeAttributeRemainingTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeRemainingTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1115,6 +1188,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeRemainingTimeWithMinI
 //
 // ReadAttributeMinLevel blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMinLevel(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1140,6 +1214,10 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMinLevel(ctx context.Conte
 //
 // SubscribeAttributeMinLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMinLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1165,6 +1243,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMinLevelWithMinInterv
 //
 // ReadAttributeMaxLevel blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMaxLevel(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1190,6 +1269,10 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMaxLevel(ctx context.Conte
 //
 // SubscribeAttributeMaxLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMaxLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1215,6 +1298,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMaxLevelWithMinInterv
 //
 // ReadAttributeCurrentFrequency blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeCurrentFrequency(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1240,6 +1324,10 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeCurrentFrequency(ctx conte
 //
 // SubscribeAttributeCurrentFrequencyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeCurrentFrequencyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1265,6 +1353,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeCurrentFrequencyWithM
 //
 // ReadAttributeMinFrequency blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMinFrequency(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1290,6 +1379,10 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMinFrequency(ctx context.C
 //
 // SubscribeAttributeMinFrequencyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMinFrequencyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1315,6 +1408,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMinFrequencyWithMinIn
 //
 // ReadAttributeMaxFrequency blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMaxFrequency(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1340,6 +1434,10 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMaxFrequency(ctx context.C
 //
 // SubscribeAttributeMaxFrequencyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMaxFrequencyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1365,6 +1463,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMaxFrequencyWithMinIn
 //
 // ReadAttributeOptions blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOptions(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1390,6 +1489,10 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOptions(ctx context.Contex
 //
 // SubscribeAttributeOptionsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOptionsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1415,6 +1518,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOptionsWithMinInterva
 //
 // ReadAttributeOnOffTransitionTime blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOnOffTransitionTime(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1440,6 +1544,10 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOnOffTransitionTime(ctx co
 //
 // SubscribeAttributeOnOffTransitionTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOnOffTransitionTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1465,6 +1573,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOnOffTransitionTimeWi
 //
 // ReadAttributeOnLevel blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOnLevel(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1490,6 +1599,10 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOnLevel(ctx context.Contex
 //
 // SubscribeAttributeOnLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOnLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1515,6 +1628,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOnLevelWithMinInterva
 //
 // ReadAttributeOnTransitionTime blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOnTransitionTime(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1540,6 +1654,10 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOnTransitionTime(ctx conte
 //
 // SubscribeAttributeOnTransitionTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOnTransitionTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1565,6 +1683,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOnTransitionTimeWithM
 //
 // ReadAttributeOffTransitionTime blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOffTransitionTime(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1590,6 +1709,10 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOffTransitionTime(ctx cont
 //
 // SubscribeAttributeOffTransitionTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOffTransitionTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1615,6 +1738,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOffTransitionTimeWith
 //
 // ReadAttributeDefaultMoveRate blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeDefaultMoveRate(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1640,6 +1764,10 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeDefaultMoveRate(ctx contex
 //
 // SubscribeAttributeDefaultMoveRateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeDefaultMoveRateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1665,6 +1793,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeDefaultMoveRateWithMi
 //
 // ReadAttributeStartUpCurrentLevel blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeStartUpCurrentLevel(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1690,6 +1819,10 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeStartUpCurrentLevel(ctx co
 //
 // SubscribeAttributeStartUpCurrentLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeStartUpCurrentLevelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1715,6 +1848,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeStartUpCurrentLevelWi
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1740,6 +1874,10 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeGeneratedCommandList(ctx c
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1765,6 +1903,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeGeneratedCommandListW
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1790,6 +1929,10 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeAcceptedCommandList(ctx co
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1815,6 +1958,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeAcceptedCommandListWi
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1840,6 +1984,10 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeAttributeList(ctx context.
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1865,6 +2013,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeAttributeListWithMinI
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1890,6 +2039,10 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeFeatureMap(ctx context.Con
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1915,6 +2068,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeFeatureMapWithMinInte
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1940,6 +2094,10 @@ func (mbclc *MTRBaseClusterLevelControl) ReadAttributeClusterRevision(ctx contex
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbclc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

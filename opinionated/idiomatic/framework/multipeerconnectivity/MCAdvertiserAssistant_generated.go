@@ -5,8 +5,11 @@
 package multipeerconnectivity
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,56 +50,77 @@ func advertiserAssistantAdopt(id objc.ID) *AdvertiserAssistant {
 
 // Description returns the object's -description text.
 func (aa *AdvertiserAssistant) Description() string {
+	defer runtime.KeepAlive(aa)
 	return rt.Description(objref.IDOf(aa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aa *AdvertiserAssistant) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aa *AdvertiserAssistant) IsKind(className string) bool {
+	defer runtime.KeepAlive(aa)
 	return rt.IsKind(objref.IDOf(aa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aa *AdvertiserAssistant) String() string {
+	defer runtime.KeepAlive(aa)
 	return rt.Description(objref.IDOf(aa))
 }
 
 // NewAdvertiserAssistantWithServiceTypeDiscoveryInfoSession initializes an advertiser assistant object.
-func NewAdvertiserAssistantWithServiceTypeDiscoveryInfoSession(serviceType string, info obj.Object, session *Session) *AdvertiserAssistant {
+func NewAdvertiserAssistantWithServiceTypeDiscoveryInfoSession(serviceType string, info map[string]string, session *Session) *AdvertiserAssistant {
+	defer runtime.KeepAlive(session)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MCAdvertiserAssistant")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceType:discoveryInfo:session:"), purego.NSString(serviceType), objref.IDOf(info), objref.IDOf(session))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceType:discoveryInfo:session:"), purego.NSString(serviceType), rt.MapToDict(info, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(session))
 	return advertiserAssistantAdopt(_id)
+}
+
+// WithDelegate sets the delegate object that handles advertising-assistant-related events.
+func (aa *AdvertiserAssistant) WithDelegate(delegate AdvertiserAssistantDelegate) *AdvertiserAssistant {
+	_shim := newAdvertiserAssistantDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(aa), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(aa), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return aa
 }
 
 // Start begins advertising the service provided by a local peer and starts the assistant.
 func (aa *AdvertiserAssistant) Start() {
+	defer runtime.KeepAlive(aa)
 	objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("start"))
 }
 
 // Stop stops advertising the service provided by a local peer and stops the assistant.
 func (aa *AdvertiserAssistant) Stop() {
+	defer runtime.KeepAlive(aa)
 	objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("stop"))
 }
 
 // Session returns the session.
 func (aa *AdvertiserAssistant) Session() *Session {
+	defer runtime.KeepAlive(aa)
 	_r := objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("session"))
 	return SessionFromID(_r)
 }
 
 // DiscoveryInfo returns the discovery info.
-func (aa *AdvertiserAssistant) DiscoveryInfo() obj.Object {
+func (aa *AdvertiserAssistant) DiscoveryInfo() map[string]string {
+	defer runtime.KeepAlive(aa)
 	_r := objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("discoveryInfo"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ServiceType returns the service type.
 func (aa *AdvertiserAssistant) ServiceType() string {
+	defer runtime.KeepAlive(aa)
 	_r := objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("serviceType"))
 	if _r == 0 {
 		return ""

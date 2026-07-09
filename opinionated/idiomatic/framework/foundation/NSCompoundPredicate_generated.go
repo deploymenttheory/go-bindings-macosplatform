@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -57,6 +59,7 @@ func NewCompoundPredicateWithTypeSubpredicates(type_ CompoundPredicateType, subp
 
 // NewCompoundPredicateWithCoder creates a predicate by decoding from the coder you specify.
 func NewCompoundPredicateWithCoder(coder *Coder) *CompoundPredicate {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCompoundPredicate")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return compoundPredicateAdopt(_id)
@@ -69,19 +72,21 @@ func (cp *CompoundPredicate) WithObservationInfo(observationInfo unsafe.Pointer)
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (cp *CompoundPredicate) WithScriptingProperties(scriptingProperties obj.Object) *CompoundPredicate {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (cp *CompoundPredicate) WithScriptingProperties(scriptingProperties map[string]obj.Object) *CompoundPredicate {
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return cp
 }
 
 // CompoundPredicateType returns the compound predicate type.
 func (cp *CompoundPredicate) CompoundPredicateType() CompoundPredicateType {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[CompoundPredicateType](objref.IDOf(cp), objc.RegisterName("compoundPredicateType"))
 	return _r
 }
 
 // Subpredicates returns the subpredicates.
 func (cp *CompoundPredicate) Subpredicates() obj.Object {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("subpredicates"))
 	return obj.Wrap(_r)
 }

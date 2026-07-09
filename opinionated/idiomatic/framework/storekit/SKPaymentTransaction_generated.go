@@ -5,6 +5,9 @@
 package storekit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func paymentTransactionAdopt(id objc.ID) *PaymentTransaction {
 
 // Description returns the object's -description text.
 func (pt *PaymentTransaction) Description() string {
+	defer runtime.KeepAlive(pt)
 	return rt.Description(objref.IDOf(pt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pt *PaymentTransaction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pt *PaymentTransaction) IsKind(className string) bool {
+	defer runtime.KeepAlive(pt)
 	return rt.IsKind(objref.IDOf(pt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pt *PaymentTransaction) String() string {
+	defer runtime.KeepAlive(pt)
 	return rt.Description(objref.IDOf(pt))
 }
 
@@ -74,12 +82,14 @@ func NewPaymentTransaction() *PaymentTransaction {
 
 // OriginalTransaction returns the original transaction.
 func (pt *PaymentTransaction) OriginalTransaction() *PaymentTransaction {
+	defer runtime.KeepAlive(pt)
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("originalTransaction"))
 	return PaymentTransactionFromID(_r)
 }
 
 // Payment returns the payment.
 func (pt *PaymentTransaction) Payment() *Payment {
+	defer runtime.KeepAlive(pt)
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("payment"))
 	return PaymentFromID(_r)
 }
@@ -88,18 +98,21 @@ func (pt *PaymentTransaction) Payment() *Payment {
 //
 // Downloads returns the collection as a Go slice.
 func (pt *PaymentTransaction) Downloads() []*Download {
+	defer runtime.KeepAlive(pt)
 	_arr := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("downloads"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Download { return DownloadFromID(_id) })
 }
 
 // TransactionDate returns the transaction date.
-func (pt *PaymentTransaction) TransactionDate() obj.Object {
+func (pt *PaymentTransaction) TransactionDate() time.Time {
+	defer runtime.KeepAlive(pt)
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("transactionDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // TransactionIdentifier returns the transaction identifier.
 func (pt *PaymentTransaction) TransactionIdentifier() string {
+	defer runtime.KeepAlive(pt)
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("transactionIdentifier"))
 	if _r == 0 {
 		return ""

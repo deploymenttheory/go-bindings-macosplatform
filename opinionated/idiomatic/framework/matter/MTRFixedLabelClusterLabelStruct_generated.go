@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRFixedLabelClusterLabelStructAdopt(id objc.ID) *MTRFixedLabelClusterLabel
 
 // Description returns the object's -description text.
 func (mflcls *MTRFixedLabelClusterLabelStruct) Description() string {
+	defer runtime.KeepAlive(mflcls)
 	return rt.Description(objref.IDOf(mflcls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mflcls *MTRFixedLabelClusterLabelStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mflcls)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mflcls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mflcls *MTRFixedLabelClusterLabelStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mflcls)
 	return rt.IsKind(objref.IDOf(mflcls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mflcls *MTRFixedLabelClusterLabelStruct) String() string {
+	defer runtime.KeepAlive(mflcls)
 	return rt.Description(objref.IDOf(mflcls))
 }
 
@@ -84,6 +91,7 @@ func (mflcls *MTRFixedLabelClusterLabelStruct) WithValue(value string) *MTRFixed
 
 // Label returns the label.
 func (mflcls *MTRFixedLabelClusterLabelStruct) Label() string {
+	defer runtime.KeepAlive(mflcls)
 	_r := objc.Send[objc.ID](objref.IDOf(mflcls), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -93,6 +101,7 @@ func (mflcls *MTRFixedLabelClusterLabelStruct) Label() string {
 
 // Value returns the value.
 func (mflcls *MTRFixedLabelClusterLabelStruct) Value() string {
+	defer runtime.KeepAlive(mflcls)
 	_r := objc.Send[objc.ID](objref.IDOf(mflcls), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""

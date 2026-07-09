@@ -125,7 +125,7 @@ func (o *HKWorkoutBuilder) AddWorkoutActivityCompletion(workoutActivity *HKWorko
 }
 
 // Sets the end date for a workout activity that you’ve already added to the workout builder.
-func (o *HKWorkoutBuilder) UpdateActivityWithUUIDEndDateCompletion(uUID *foundation.NSUUID, endDate *foundation.NSDate, completion func(bool, unsafe.Pointer)) {
+func (o *HKWorkoutBuilder) UpdateActivityWithUUIDEndDateCompletion(uuid *foundation.NSUUID, endDate *foundation.NSDate, completion func(bool, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
 		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 bool, blockParam1 unsafe.Pointer) {
@@ -133,11 +133,11 @@ func (o *HKWorkoutBuilder) UpdateActivityWithUUIDEndDateCompletion(uUID *foundat
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_hKWorkoutBuilderSelUpdateActivityWithUUIDEndDateCompletion, uUID.Ptr(), endDate.Ptr(), __block_completion)
+	o.Ptr().Send(_hKWorkoutBuilderSelUpdateActivityWithUUIDEndDateCompletion, uuid.Ptr(), endDate.Ptr(), __block_completion)
 }
 
 // Adds metadata to a workout activity that you’ve already added to the workout builder.
-func (o *HKWorkoutBuilder) UpdateActivityWithUUIDAddMedatataCompletion(uUID *foundation.NSUUID, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer)) {
+func (o *HKWorkoutBuilder) UpdateActivityWithUUIDAddMedatataCompletion(uuid *foundation.NSUUID, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
 		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 bool, blockParam1 unsafe.Pointer) {
@@ -145,7 +145,7 @@ func (o *HKWorkoutBuilder) UpdateActivityWithUUIDAddMedatataCompletion(uUID *fou
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_hKWorkoutBuilderSelUpdateActivityWithUUIDAddMedatataCompletion, uUID.Ptr(), metadata.Ptr(), __block_completion)
+	o.Ptr().Send(_hKWorkoutBuilderSelUpdateActivityWithUUIDAddMedatataCompletion, uuid.Ptr(), metadata.Ptr(), __block_completion)
 }
 
 // Stops the collection of data, sets the workout’s end date, and deactivates the workout builder.

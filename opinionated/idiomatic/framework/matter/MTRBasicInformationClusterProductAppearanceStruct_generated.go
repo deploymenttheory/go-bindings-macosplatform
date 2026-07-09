@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRBasicInformationClusterProductAppearanceStructAdopt(id objc.ID) *MTRBasi
 
 // Description returns the object's -description text.
 func (mbicpas *MTRBasicInformationClusterProductAppearanceStruct) Description() string {
+	defer runtime.KeepAlive(mbicpas)
 	return rt.Description(objref.IDOf(mbicpas))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbicpas *MTRBasicInformationClusterProductAppearanceStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbicpas)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbicpas), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbicpas *MTRBasicInformationClusterProductAppearanceStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbicpas)
 	return rt.IsKind(objref.IDOf(mbicpas), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbicpas *MTRBasicInformationClusterProductAppearanceStruct) String() string {
+	defer runtime.KeepAlive(mbicpas)
 	return rt.Description(objref.IDOf(mbicpas))
 }
 
@@ -72,24 +80,28 @@ func NewMTRBasicInformationClusterProductAppearanceStruct() *MTRBasicInformation
 
 // WithFinish sets the finish.
 func (mbicpas *MTRBasicInformationClusterProductAppearanceStruct) WithFinish(finish obj.Object) *MTRBasicInformationClusterProductAppearanceStruct {
+	defer runtime.KeepAlive(finish)
 	objc.Send[objc.ID](objref.IDOf(mbicpas), objc.RegisterName("setFinish:"), objref.IDOf(finish))
 	return mbicpas
 }
 
 // WithPrimaryColor sets the primary color.
 func (mbicpas *MTRBasicInformationClusterProductAppearanceStruct) WithPrimaryColor(primaryColor obj.Object) *MTRBasicInformationClusterProductAppearanceStruct {
+	defer runtime.KeepAlive(primaryColor)
 	objc.Send[objc.ID](objref.IDOf(mbicpas), objc.RegisterName("setPrimaryColor:"), objref.IDOf(primaryColor))
 	return mbicpas
 }
 
 // Finish returns the finish.
-func (mbicpas *MTRBasicInformationClusterProductAppearanceStruct) Finish() obj.Object {
+func (mbicpas *MTRBasicInformationClusterProductAppearanceStruct) Finish() *foundation.Number {
+	defer runtime.KeepAlive(mbicpas)
 	_r := objc.Send[objc.ID](objref.IDOf(mbicpas), objc.RegisterName("finish"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // PrimaryColor returns the primary color.
-func (mbicpas *MTRBasicInformationClusterProductAppearanceStruct) PrimaryColor() obj.Object {
+func (mbicpas *MTRBasicInformationClusterProductAppearanceStruct) PrimaryColor() *foundation.Number {
+	defer runtime.KeepAlive(mbicpas)
 	_r := objc.Send[objc.ID](objref.IDOf(mbicpas), objc.RegisterName("primaryColor"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

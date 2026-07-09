@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func graphObjectAdopt(id objc.ID) *GraphObject {
 
 // Description returns the object's -description text.
 func (go_ *GraphObject) Description() string {
+	defer runtime.KeepAlive(go_)
 	return rt.Description(objref.IDOf(go_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (go_ *GraphObject) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(go_)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(go_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (go_ *GraphObject) IsKind(className string) bool {
+	defer runtime.KeepAlive(go_)
 	return rt.IsKind(objref.IDOf(go_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (go_ *GraphObject) String() string {
+	defer runtime.KeepAlive(go_)
 	return rt.Description(objref.IDOf(go_))
 }
 

@@ -257,8 +257,8 @@ func (o *NSXMLDocument) MIMEType() *NSString {
 	return NSStringFromID(_ret)
 }
 
-func (o *NSXMLDocument) SetMIMEType(mIMEType *NSString) {
-	o.Ptr().Send(_nSXMLDocumentSelSetMIMEType, mIMEType.Ptr())
+func (o *NSXMLDocument) SetMIMEType(mimeType *NSString) {
+	o.Ptr().Send(_nSXMLDocumentSelSetMIMEType, mimeType.Ptr())
 }
 
 // @abstract Set the associated DTD. This DTD will be output with the document.
@@ -270,8 +270,8 @@ func (o *NSXMLDocument) DTD() *NSXMLDTD {
 	return NSXMLDTDFromID(_ret)
 }
 
-func (o *NSXMLDocument) SetDTD(dTD *NSXMLDTD) {
-	o.Ptr().Send(_nSXMLDocumentSelSetDTD, dTD.Ptr())
+func (o *NSXMLDocument) SetDTD(dtd *NSXMLDTD) {
+	o.Ptr().Send(_nSXMLDocumentSelSetDTD, dtd.Ptr())
 }
 
 // @abstract Invokes XMLDataWithOptions with NSXMLNodeOptionsNone.

@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +51,27 @@ func statusItemAdopt(id objc.ID) *StatusItem {
 
 // Description returns the object's -description text.
 func (si *StatusItem) Description() string {
+	defer runtime.KeepAlive(si)
 	return rt.Description(objref.IDOf(si))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (si *StatusItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(si)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(si), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (si *StatusItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(si)
 	return rt.IsKind(objref.IDOf(si), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (si *StatusItem) String() string {
+	defer runtime.KeepAlive(si)
 	return rt.Description(objref.IDOf(si))
 }
 
@@ -81,6 +89,7 @@ func (si *StatusItem) WithLength(length float64) *StatusItem {
 
 // WithMenu sets the pull-down menu displayed when the user clicks the status item.
 func (si *StatusItem) WithMenu(menu *Menu) *StatusItem {
+	defer runtime.KeepAlive(menu)
 	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return si
 }
@@ -99,12 +108,14 @@ func (si *StatusItem) WithVisible(visible bool) *StatusItem {
 
 // WithAutosaveName sets a unique name for saving and restoring information about a status item.
 func (si *StatusItem) WithAutosaveName(autosaveName obj.Object) *StatusItem {
+	defer runtime.KeepAlive(autosaveName)
 	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setAutosaveName:"), objref.IDOf(autosaveName))
 	return si
 }
 
 // WithTarget sets the object that receives the status item’s action message when someone clicks the status item.
 func (si *StatusItem) WithTarget(target obj.Object) *StatusItem {
+	defer runtime.KeepAlive(target)
 	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return si
 }
@@ -117,18 +128,21 @@ func (si *StatusItem) WithTitle(title string) *StatusItem {
 
 // WithAttributedTitle sets the attributed string that is displayed at the status item’s position in the status bar.
 func (si *StatusItem) WithAttributedTitle(attributedTitle obj.Object) *StatusItem {
+	defer runtime.KeepAlive(attributedTitle)
 	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	return si
 }
 
 // WithImage sets the image that is displayed at the status item’s position in the status bar.
 func (si *StatusItem) WithImage(image *Image) *StatusItem {
+	defer runtime.KeepAlive(image)
 	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return si
 }
 
 // WithAlternateImage sets the alternate image to be displayed when a status bar item is highlighted.
 func (si *StatusItem) WithAlternateImage(alternateImage *Image) *StatusItem {
+	defer runtime.KeepAlive(alternateImage)
 	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
 	return si
 }
@@ -153,76 +167,90 @@ func (si *StatusItem) WithToolTip(toolTip string) *StatusItem {
 
 // WithView sets the custom view the status item displays at its position in the status bar.
 func (si *StatusItem) WithView(view ViewProvider) *StatusItem {
+	defer runtime.KeepAlive(view)
 	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setView:"), objref.IDOf(view))
 	return si
 }
 
 // StatusBar returns the status bar.
 func (si *StatusItem) StatusBar() *StatusBar {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("statusBar"))
 	return StatusBarFromID(_r)
 }
 
 // Length returns the length.
 func (si *StatusItem) Length() float64 {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[float64](objref.IDOf(si), objc.RegisterName("length"))
 	return _r
 }
 
 // Menu returns the menu.
 func (si *StatusItem) Menu() *Menu {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("menu"))
 	return MenuFromID(_r)
 }
 
 // Button returns the button.
 func (si *StatusItem) Button() *StatusBarButton {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("button"))
 	return StatusBarButtonFromID(_r)
 }
 
 // Behavior returns the behavior.
 func (si *StatusItem) Behavior() StatusItemBehavior {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[StatusItemBehavior](objref.IDOf(si), objc.RegisterName("behavior"))
 	return _r
 }
 
 // IsVisible reports whether the object is visible.
 func (si *StatusItem) IsVisible() bool {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[bool](objref.IDOf(si), objc.RegisterName("isVisible"))
 	return _r
 }
 
 // AutosaveName returns the autosave name.
-func (si *StatusItem) AutosaveName() obj.Object {
+func (si *StatusItem) AutosaveName() *foundation.String {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("autosaveName"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // SendActionOn sets the conditions on which the status item sends action messages to its target.
 func (si *StatusItem) SendActionOn(mask EventMask) int {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[int](objref.IDOf(si), objc.RegisterName("sendActionOn:"), mask)
 	return _r
 }
 
 // DrawStatusBarBackgroundInRectWithHighlight draws the menu background pattern for a custom status-bar item in regular or highlight pattern.
 func (si *StatusItem) DrawStatusBarBackgroundInRectWithHighlight(rect corefoundation.CGRect, highlight bool) {
+	defer runtime.KeepAlive(si)
 	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("drawStatusBarBackgroundInRect:withHighlight:"), rect, highlight)
 }
 
 // PopUpStatusItemMenu displays a menu under a custom status bar item.
 func (si *StatusItem) PopUpStatusItemMenu(menu *Menu) {
+	defer runtime.KeepAlive(si)
+	defer runtime.KeepAlive(menu)
 	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("popUpStatusItemMenu:"), objref.IDOf(menu))
 }
 
 // Target returns the target.
 func (si *StatusItem) Target() obj.Object {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("target"))
 	return obj.Wrap(_r)
 }
 
 // Title returns the title.
 func (si *StatusItem) Title() string {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -231,37 +259,43 @@ func (si *StatusItem) Title() string {
 }
 
 // AttributedTitle returns the attributed title.
-func (si *StatusItem) AttributedTitle() obj.Object {
+func (si *StatusItem) AttributedTitle() *foundation.AttributedString {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("attributedTitle"))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // Image returns the image.
 func (si *StatusItem) Image() *Image {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
 // AlternateImage returns the alternate image.
 func (si *StatusItem) AlternateImage() *Image {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("alternateImage"))
 	return ImageFromID(_r)
 }
 
 // IsEnabled reports whether the object is enabled.
 func (si *StatusItem) IsEnabled() bool {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[bool](objref.IDOf(si), objc.RegisterName("isEnabled"))
 	return _r
 }
 
 // HighlightMode wraps the corresponding Objective-C method.
 func (si *StatusItem) HighlightMode() bool {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[bool](objref.IDOf(si), objc.RegisterName("highlightMode"))
 	return _r
 }
 
 // ToolTip returns the tool tip.
 func (si *StatusItem) ToolTip() string {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("toolTip"))
 	if _r == 0 {
 		return ""
@@ -271,6 +305,7 @@ func (si *StatusItem) ToolTip() string {
 
 // View returns the view.
 func (si *StatusItem) View() *View {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }

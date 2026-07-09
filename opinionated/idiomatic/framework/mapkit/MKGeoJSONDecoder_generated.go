@@ -5,6 +5,7 @@
 package mapkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func geoJSONDecoderAdopt(id objc.ID) *GeoJSONDecoder {
 
 // Description returns the object's -description text.
 func (gjd *GeoJSONDecoder) Description() string {
+	defer runtime.KeepAlive(gjd)
 	return rt.Description(objref.IDOf(gjd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gjd *GeoJSONDecoder) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gjd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gjd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gjd *GeoJSONDecoder) IsKind(className string) bool {
+	defer runtime.KeepAlive(gjd)
 	return rt.IsKind(objref.IDOf(gjd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gjd *GeoJSONDecoder) String() string {
+	defer runtime.KeepAlive(gjd)
 	return rt.Description(objref.IDOf(gjd))
 }
 
@@ -75,10 +81,11 @@ func NewGeoJSONDecoder() *GeoJSONDecoder {
 	return geoJSONDecoderAdopt(_id)
 }
 
-// GeoJSONObjectsWithDataError decodes the provided data into native MapKit types that a map can display.
-func (gjd *GeoJSONDecoder) GeoJSONObjectsWithDataError(data obj.Object) (result []obj.Object, err error) {
+// GeoJSONObjectsWithData decodes the provided data into native MapKit types that a map can display.
+func (gjd *GeoJSONDecoder) GeoJSONObjectsWithData(data []byte) (result []obj.Object, err error) {
+	defer runtime.KeepAlive(gjd)
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(gjd), objc.RegisterName("geoJSONObjectsWithData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(gjd), objc.RegisterName("geoJSONObjectsWithData:error:"), rt.BytesToNSData(data), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}

@@ -5,10 +5,12 @@
 package imagecapturecore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -138,55 +140,64 @@ func (sfudf *ScannerFunctionalUnitDocumentFeeder) WithOverviewResolution(overvie
 }
 
 // SupportedDocumentTypes returns ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
-func (sfudf *ScannerFunctionalUnitDocumentFeeder) SupportedDocumentTypes() obj.Object {
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) SupportedDocumentTypes() *foundation.IndexSet {
+	defer runtime.KeepAlive(sfudf)
 	_r := objc.Send[objc.ID](objref.IDOf(sfudf), objc.RegisterName("supportedDocumentTypes"))
-	return obj.Wrap(_r)
+	return foundation.IndexSetFromID(_r)
 }
 
 // DocumentType returns ￼Current document type. This will always be one of the supported document types.
 func (sfudf *ScannerFunctionalUnitDocumentFeeder) DocumentType() ScannerDocumentType {
+	defer runtime.KeepAlive(sfudf)
 	_r := objc.Send[ScannerDocumentType](objref.IDOf(sfudf), objc.RegisterName("documentType"))
 	return _r
 }
 
 // DocumentSize returns ￼Document size of the current document type expressed in current measurement unit.
 func (sfudf *ScannerFunctionalUnitDocumentFeeder) DocumentSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(sfudf)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(sfudf), objc.RegisterName("documentSize"))
 	return _r
 }
 
 // SupportsDuplexScanning reports whether ￼Indicates whether duplex scanning is supported.
 func (sfudf *ScannerFunctionalUnitDocumentFeeder) SupportsDuplexScanning() bool {
+	defer runtime.KeepAlive(sfudf)
 	_r := objc.Send[bool](objref.IDOf(sfudf), objc.RegisterName("supportsDuplexScanning"))
 	return _r
 }
 
 // DuplexScanningEnabled reports whether ￼Indicates whether duplex scanning is enabled.
 func (sfudf *ScannerFunctionalUnitDocumentFeeder) DuplexScanningEnabled() bool {
+	defer runtime.KeepAlive(sfudf)
 	_r := objc.Send[bool](objref.IDOf(sfudf), objc.RegisterName("duplexScanningEnabled"))
 	return _r
 }
 
 // DocumentLoaded reports whether ￼Indicates whether the feeder has documents to scan. This value will change when the document is loaded or removed from the feeder, if the scanner module has the capability to detect this state.
 func (sfudf *ScannerFunctionalUnitDocumentFeeder) DocumentLoaded() bool {
+	defer runtime.KeepAlive(sfudf)
 	_r := objc.Send[bool](objref.IDOf(sfudf), objc.RegisterName("documentLoaded"))
 	return _r
 }
 
 // OddPageOrientation returns ￼Desired orientation of the odd pages of the scanned document. This property is set to ICEXIFOrientation1 initially.
 func (sfudf *ScannerFunctionalUnitDocumentFeeder) OddPageOrientation() EXIFOrientationType {
+	defer runtime.KeepAlive(sfudf)
 	_r := objc.Send[EXIFOrientationType](objref.IDOf(sfudf), objc.RegisterName("oddPageOrientation"))
 	return _r
 }
 
 // EvenPageOrientation returns ￼Desired orientation of the even pages of the scanned document. This property is set to ICEXIFOrientation1 initially.
 func (sfudf *ScannerFunctionalUnitDocumentFeeder) EvenPageOrientation() EXIFOrientationType {
+	defer runtime.KeepAlive(sfudf)
 	_r := objc.Send[EXIFOrientationType](objref.IDOf(sfudf), objc.RegisterName("evenPageOrientation"))
 	return _r
 }
 
 // ReverseFeederPageOrder reports whether ￼Indicates whether the document feeder reads pages from back to front.
 func (sfudf *ScannerFunctionalUnitDocumentFeeder) ReverseFeederPageOrder() bool {
+	defer runtime.KeepAlive(sfudf)
 	_r := objc.Send[bool](objref.IDOf(sfudf), objc.RegisterName("reverseFeederPageOrder"))
 	return _r
 }

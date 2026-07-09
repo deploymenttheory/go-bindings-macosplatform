@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,33 +50,40 @@ func mTRAudioOutputClusterOutputInfoStructAdopt(id objc.ID) *MTRAudioOutputClust
 
 // Description returns the object's -description text.
 func (maocois *MTRAudioOutputClusterOutputInfoStruct) Description() string {
+	defer runtime.KeepAlive(maocois)
 	return rt.Description(objref.IDOf(maocois))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (maocois *MTRAudioOutputClusterOutputInfoStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(maocois)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(maocois), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (maocois *MTRAudioOutputClusterOutputInfoStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(maocois)
 	return rt.IsKind(objref.IDOf(maocois), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (maocois *MTRAudioOutputClusterOutputInfoStruct) String() string {
+	defer runtime.KeepAlive(maocois)
 	return rt.Description(objref.IDOf(maocois))
 }
 
 // WithIndex sets the index.
 func (maocois *MTRAudioOutputClusterOutputInfoStruct) WithIndex(index obj.Object) *MTRAudioOutputClusterOutputInfoStruct {
+	defer runtime.KeepAlive(index)
 	objc.Send[objc.ID](objref.IDOf(maocois), objc.RegisterName("setIndex:"), objref.IDOf(index))
 	return maocois
 }
 
 // WithOutputType sets the output type.
 func (maocois *MTRAudioOutputClusterOutputInfoStruct) WithOutputType(outputType obj.Object) *MTRAudioOutputClusterOutputInfoStruct {
+	defer runtime.KeepAlive(outputType)
 	objc.Send[objc.ID](objref.IDOf(maocois), objc.RegisterName("setOutputType:"), objref.IDOf(outputType))
 	return maocois
 }
@@ -85,19 +95,22 @@ func (maocois *MTRAudioOutputClusterOutputInfoStruct) WithName(name string) *MTR
 }
 
 // Index returns the index.
-func (maocois *MTRAudioOutputClusterOutputInfoStruct) Index() obj.Object {
+func (maocois *MTRAudioOutputClusterOutputInfoStruct) Index() *foundation.Number {
+	defer runtime.KeepAlive(maocois)
 	_r := objc.Send[objc.ID](objref.IDOf(maocois), objc.RegisterName("index"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // OutputType returns the output type.
-func (maocois *MTRAudioOutputClusterOutputInfoStruct) OutputType() obj.Object {
+func (maocois *MTRAudioOutputClusterOutputInfoStruct) OutputType() *foundation.Number {
+	defer runtime.KeepAlive(maocois)
 	_r := objc.Send[objc.ID](objref.IDOf(maocois), objc.RegisterName("outputType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Name returns the name.
 func (maocois *MTRAudioOutputClusterOutputInfoStruct) Name() string {
+	defer runtime.KeepAlive(maocois)
 	_r := objc.Send[objc.ID](objref.IDOf(maocois), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

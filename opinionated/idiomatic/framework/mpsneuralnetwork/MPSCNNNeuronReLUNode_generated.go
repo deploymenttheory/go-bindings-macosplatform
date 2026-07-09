@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func cNNNeuronReLUNodeAdopt(id objc.ID) *CNNNeuronReLUNode {
 
 // NewCNNNeuronReLUNodeWithSource init a node with default values for parameters a & b
 func NewCNNNeuronReLUNodeWithSource(sourceNode *NNImageNode) *CNNNeuronReLUNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronReLUNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNNeuronReLUNodeAdopt(_id)
@@ -54,6 +57,7 @@ func NewCNNNeuronReLUNodeWithSource(sourceNode *NNImageNode) *CNNNeuronReLUNode 
 
 // NewCNNNeuronReLUNodeWithSourceA init a node with default values for parameters a & b
 func NewCNNNeuronReLUNodeWithSourceA(sourceNode *NNImageNode, a float32) *CNNNeuronReLUNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronReLUNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:a:"), objref.IDOf(sourceNode), a)
 	return cNNNeuronReLUNodeAdopt(_id)

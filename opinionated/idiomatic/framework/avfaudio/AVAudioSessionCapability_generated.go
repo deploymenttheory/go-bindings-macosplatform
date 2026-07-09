@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func audioSessionCapabilityAdopt(id objc.ID) *AudioSessionCapability {
 
 // Description returns the object's -description text.
 func (asc *AudioSessionCapability) Description() string {
+	defer runtime.KeepAlive(asc)
 	return rt.Description(objref.IDOf(asc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (asc *AudioSessionCapability) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(asc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(asc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (asc *AudioSessionCapability) IsKind(className string) bool {
+	defer runtime.KeepAlive(asc)
 	return rt.IsKind(objref.IDOf(asc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (asc *AudioSessionCapability) String() string {
+	defer runtime.KeepAlive(asc)
 	return rt.Description(objref.IDOf(asc))
 }
 
@@ -74,12 +81,14 @@ func NewAudioSessionCapability() *AudioSessionCapability {
 
 // IsSupported reports whether the capability is supported.
 func (asc *AudioSessionCapability) IsSupported() bool {
+	defer runtime.KeepAlive(asc)
 	_r := objc.Send[bool](objref.IDOf(asc), objc.RegisterName("isSupported"))
 	return _r
 }
 
 // IsEnabled reports whether the capability is enabled.
 func (asc *AudioSessionCapability) IsEnabled() bool {
+	defer runtime.KeepAlive(asc)
 	_r := objc.Send[bool](objref.IDOf(asc), objc.RegisterName("isEnabled"))
 	return _r
 }

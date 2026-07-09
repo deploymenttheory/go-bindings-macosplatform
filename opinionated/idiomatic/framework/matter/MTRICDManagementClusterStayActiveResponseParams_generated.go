@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRICDManagementClusterStayActiveResponseParamsAdopt(id objc.ID) *MTRICDMan
 
 // Description returns the object's -description text.
 func (mmcsarp *MTRICDManagementClusterStayActiveResponseParams) Description() string {
+	defer runtime.KeepAlive(mmcsarp)
 	return rt.Description(objref.IDOf(mmcsarp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmcsarp *MTRICDManagementClusterStayActiveResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmcsarp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmcsarp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmcsarp *MTRICDManagementClusterStayActiveResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmcsarp)
 	return rt.IsKind(objref.IDOf(mmcsarp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmcsarp *MTRICDManagementClusterStayActiveResponseParams) String() string {
+	defer runtime.KeepAlive(mmcsarp)
 	return rt.Description(objref.IDOf(mmcsarp))
 }
 
-// NewMTRICDManagementClusterStayActiveResponseParamsWithResponseValueError initialize an MTRICDManagementClusterStayActiveResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-func NewMTRICDManagementClusterStayActiveResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRICDManagementClusterStayActiveResponseParams, err error) {
+// NewMTRICDManagementClusterStayActiveResponseParamsWithResponseValue initialize an MTRICDManagementClusterStayActiveResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRICDManagementClusterStayActiveResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRICDManagementClusterStayActiveResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRICDManagementClusterStayActiveResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,12 +87,14 @@ func NewMTRICDManagementClusterStayActiveResponseParamsWithResponseValueError(re
 
 // WithPromisedActiveDuration sets the promised active duration.
 func (mmcsarp *MTRICDManagementClusterStayActiveResponseParams) WithPromisedActiveDuration(promisedActiveDuration obj.Object) *MTRICDManagementClusterStayActiveResponseParams {
+	defer runtime.KeepAlive(promisedActiveDuration)
 	objc.Send[objc.ID](objref.IDOf(mmcsarp), objc.RegisterName("setPromisedActiveDuration:"), objref.IDOf(promisedActiveDuration))
 	return mmcsarp
 }
 
 // PromisedActiveDuration returns the promised active duration.
-func (mmcsarp *MTRICDManagementClusterStayActiveResponseParams) PromisedActiveDuration() obj.Object {
+func (mmcsarp *MTRICDManagementClusterStayActiveResponseParams) PromisedActiveDuration() *foundation.Number {
+	defer runtime.KeepAlive(mmcsarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcsarp), objc.RegisterName("promisedActiveDuration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

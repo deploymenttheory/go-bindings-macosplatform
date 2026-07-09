@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -72,6 +74,7 @@ func (mdcp *MTRDeviceControllerParameters) WithConcurrentSubscriptionEstablishme
 
 // WithStorageBehaviorConfiguration sets sets the storage behavior configuration - see MTRDeviceStorageBehaviorConfiguration.h for details
 func (mdcp *MTRDeviceControllerParameters) WithStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerParameters {
+	defer runtime.KeepAlive(storageBehaviorConfiguration)
 	objc.Send[objc.ID](objref.IDOf(mdcp), objc.RegisterName("setStorageBehaviorConfiguration:"), objref.IDOf(storageBehaviorConfiguration))
 	return mdcp
 }
@@ -86,6 +89,7 @@ func (mdcp *MTRDeviceControllerParameters) WithStartSuspended(startSuspended boo
 //
 // ProductAttestationAuthorityCertificates returns the collection as a Go slice.
 func (mdcp *MTRDeviceControllerParameters) ProductAttestationAuthorityCertificates() []obj.Object {
+	defer runtime.KeepAlive(mdcp)
 	_arr := objc.Send[objc.ID](objref.IDOf(mdcp), objc.RegisterName("productAttestationAuthorityCertificates"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -94,24 +98,28 @@ func (mdcp *MTRDeviceControllerParameters) ProductAttestationAuthorityCertificat
 //
 // CertificationDeclarationCertificates returns the collection as a Go slice.
 func (mdcp *MTRDeviceControllerParameters) CertificationDeclarationCertificates() []obj.Object {
+	defer runtime.KeepAlive(mdcp)
 	_arr := objc.Send[objc.ID](objref.IDOf(mdcp), objc.RegisterName("certificationDeclarationCertificates"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ShouldAdvertiseOperational reports whether the controller should advertise its operational identity. Defaults to false.
 func (mdcp *MTRDeviceControllerParameters) ShouldAdvertiseOperational() bool {
+	defer runtime.KeepAlive(mdcp)
 	_r := objc.Send[bool](objref.IDOf(mdcp), objc.RegisterName("shouldAdvertiseOperational"))
 	return _r
 }
 
 // ConcurrentSubscriptionEstablishmentsAllowedOnThread sets the maximum simultaneous subscription establishments that can be happening at one time for devices on Thread. This defaults to a large number. If this value is 0, the maximum subscription establishments allowed at a time will be set to 1.
 func (mdcp *MTRDeviceControllerParameters) ConcurrentSubscriptionEstablishmentsAllowedOnThread() int {
+	defer runtime.KeepAlive(mdcp)
 	_r := objc.Send[int](objref.IDOf(mdcp), objc.RegisterName("concurrentSubscriptionEstablishmentsAllowedOnThread"))
 	return _r
 }
 
 // StorageBehaviorConfiguration sets the storage behavior configuration - see MTRDeviceStorageBehaviorConfiguration.h for details If this value is nil, a default storage behavior configuration will be used.
 func (mdcp *MTRDeviceControllerParameters) StorageBehaviorConfiguration() *MTRDeviceStorageBehaviorConfiguration {
+	defer runtime.KeepAlive(mdcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdcp), objc.RegisterName("storageBehaviorConfiguration"))
 	return MTRDeviceStorageBehaviorConfigurationFromID(_r)
 }

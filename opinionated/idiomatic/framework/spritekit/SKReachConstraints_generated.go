@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func reachConstraintsAdopt(id objc.ID) *ReachConstraints {
 
 // Description returns the object's -description text.
 func (rc *ReachConstraints) Description() string {
+	defer runtime.KeepAlive(rc)
 	return rt.Description(objref.IDOf(rc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rc *ReachConstraints) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rc *ReachConstraints) IsKind(className string) bool {
+	defer runtime.KeepAlive(rc)
 	return rt.IsKind(objref.IDOf(rc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rc *ReachConstraints) String() string {
+	defer runtime.KeepAlive(rc)
 	return rt.Description(objref.IDOf(rc))
 }
 
@@ -87,12 +94,14 @@ func (rc *ReachConstraints) WithUpperAngleLimit(upperAngleLimit float64) *ReachC
 
 // LowerAngleLimit returns lower angle limit in radians
 func (rc *ReachConstraints) LowerAngleLimit() float64 {
+	defer runtime.KeepAlive(rc)
 	_r := objc.Send[float64](objref.IDOf(rc), objc.RegisterName("lowerAngleLimit"))
 	return _r
 }
 
 // UpperAngleLimit returns upper angle limit in radians
 func (rc *ReachConstraints) UpperAngleLimit() float64 {
+	defer runtime.KeepAlive(rc)
 	_r := objc.Send[float64](objref.IDOf(rc), objc.RegisterName("upperAngleLimit"))
 	return _r
 }

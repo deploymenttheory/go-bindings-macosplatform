@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,18 +54,21 @@ func NewMTRTestClusterClusterNullablesAndOptionalsStruct() *MTRTestClusterCluste
 
 // WithNullableInt sets the nullable int.
 func (mtccnaos *MTRTestClusterClusterNullablesAndOptionalsStruct) WithNullableInt(nullableInt obj.Object) *MTRTestClusterClusterNullablesAndOptionalsStruct {
+	defer runtime.KeepAlive(nullableInt)
 	objc.Send[objc.ID](objref.IDOf(mtccnaos), objc.RegisterName("setNullableInt:"), objref.IDOf(nullableInt))
 	return mtccnaos
 }
 
 // WithOptionalInt sets the optional int.
 func (mtccnaos *MTRTestClusterClusterNullablesAndOptionalsStruct) WithOptionalInt(optionalInt obj.Object) *MTRTestClusterClusterNullablesAndOptionalsStruct {
+	defer runtime.KeepAlive(optionalInt)
 	objc.Send[objc.ID](objref.IDOf(mtccnaos), objc.RegisterName("setOptionalInt:"), objref.IDOf(optionalInt))
 	return mtccnaos
 }
 
 // WithNullableOptionalInt sets the nullable optional int.
 func (mtccnaos *MTRTestClusterClusterNullablesAndOptionalsStruct) WithNullableOptionalInt(nullableOptionalInt obj.Object) *MTRTestClusterClusterNullablesAndOptionalsStruct {
+	defer runtime.KeepAlive(nullableOptionalInt)
 	objc.Send[objc.ID](objref.IDOf(mtccnaos), objc.RegisterName("setNullableOptionalInt:"), objref.IDOf(nullableOptionalInt))
 	return mtccnaos
 }
@@ -88,18 +93,21 @@ func (mtccnaos *MTRTestClusterClusterNullablesAndOptionalsStruct) WithNullableOp
 
 // WithNullableStruct sets the nullable struct.
 func (mtccnaos *MTRTestClusterClusterNullablesAndOptionalsStruct) WithNullableStruct(nullableStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterNullablesAndOptionalsStruct {
+	defer runtime.KeepAlive(nullableStruct)
 	objc.Send[objc.ID](objref.IDOf(mtccnaos), objc.RegisterName("setNullableStruct:"), objref.IDOf(nullableStruct))
 	return mtccnaos
 }
 
 // WithOptionalStruct sets the optional struct.
 func (mtccnaos *MTRTestClusterClusterNullablesAndOptionalsStruct) WithOptionalStruct(optionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterNullablesAndOptionalsStruct {
+	defer runtime.KeepAlive(optionalStruct)
 	objc.Send[objc.ID](objref.IDOf(mtccnaos), objc.RegisterName("setOptionalStruct:"), objref.IDOf(optionalStruct))
 	return mtccnaos
 }
 
 // WithNullableOptionalStruct sets the nullable optional struct.
 func (mtccnaos *MTRTestClusterClusterNullablesAndOptionalsStruct) WithNullableOptionalStruct(nullableOptionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterNullablesAndOptionalsStruct {
+	defer runtime.KeepAlive(nullableOptionalStruct)
 	objc.Send[objc.ID](objref.IDOf(mtccnaos), objc.RegisterName("setNullableOptionalStruct:"), objref.IDOf(nullableOptionalStruct))
 	return mtccnaos
 }

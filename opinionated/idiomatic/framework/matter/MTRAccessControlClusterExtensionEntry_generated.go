@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,13 +54,14 @@ func NewMTRAccessControlClusterExtensionEntry() *MTRAccessControlClusterExtensio
 }
 
 // WithData sets the data.
-func (maccee *MTRAccessControlClusterExtensionEntry) WithData(data obj.Object) *MTRAccessControlClusterExtensionEntry {
-	objc.Send[objc.ID](objref.IDOf(maccee), objc.RegisterName("setData:"), objref.IDOf(data))
+func (maccee *MTRAccessControlClusterExtensionEntry) WithData(data []byte) *MTRAccessControlClusterExtensionEntry {
+	objc.Send[objc.ID](objref.IDOf(maccee), objc.RegisterName("setData:"), rt.BytesToNSData(data))
 	return maccee
 }
 
 // WithFabricIndex sets the fabric index.
 func (maccee *MTRAccessControlClusterExtensionEntry) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterExtensionEntry {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(maccee), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return maccee
 }

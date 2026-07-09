@@ -5,10 +5,13 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,9 +51,9 @@ func pICTImageRepAdopt(id objc.ID) *PICTImageRep {
 }
 
 // NewPICTImageRepWithData returns a representation of an image from the specified data in the PICT file format.
-func NewPICTImageRepWithData(pictData obj.Object) *PICTImageRep {
+func NewPICTImageRepWithData(pictData []byte) *PICTImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPICTImageRep")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(pictData))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), rt.BytesToNSData(pictData))
 	return pICTImageRepAdopt(_id)
 }
 
@@ -74,6 +77,7 @@ func (pir *PICTImageRep) WithOpaque(opaque bool) *PICTImageRep {
 
 // WithColorSpaceName sets the name of the color space used by the image data.
 func (pir *PICTImageRep) WithColorSpaceName(colorSpaceName obj.Object) *PICTImageRep {
+	defer runtime.KeepAlive(colorSpaceName)
 	objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
 	return pir
 }
@@ -103,13 +107,15 @@ func (pir *PICTImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirectio
 }
 
 // PICTRepresentation returns the pict representation.
-func (pir *PICTImageRep) PICTRepresentation() obj.Object {
+func (pir *PICTImageRep) PICTRepresentation() []byte {
+	defer runtime.KeepAlive(pir)
 	_r := objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("PICTRepresentation"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // BoundingBox returns the bounding box.
 func (pir *PICTImageRep) BoundingBox() corefoundation.CGRect {
+	defer runtime.KeepAlive(pir)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(pir), objc.RegisterName("boundingBox"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewAppExitMetric() *AppExitMetric {
 
 // ForegroundExitData returns cumulative foreground exit data. This includes application exit data when the application was on screen and visible to the user.
 func (aem *AppExitMetric) ForegroundExitData() *ForegroundExitData {
+	defer runtime.KeepAlive(aem)
 	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("foregroundExitData"))
 	return ForegroundExitDataFromID(_r)
 }
 
 // BackgroundExitData returns cumulative background exit data. This includes application exit data when the application was off screen and not visible to the user.
 func (aem *AppExitMetric) BackgroundExitData() *BackgroundExitData {
+	defer runtime.KeepAlive(aem)
 	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("backgroundExitData"))
 	return BackgroundExitDataFromID(_r)
 }

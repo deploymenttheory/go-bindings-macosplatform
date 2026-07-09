@@ -5,6 +5,7 @@
 package pdfkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,21 +52,26 @@ func selectionAdopt(id objc.ID) *Selection {
 
 // Description returns the object's -description text.
 func (s *Selection) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Selection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Selection) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // NewSelectionWithDocument returns an empty PDFSelection object.
 func NewSelectionWithDocument(document *Document) *Selection {
+	defer runtime.KeepAlive(document)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFSelection")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDocument:"), objref.IDOf(document))
 	return selectionAdopt(_id)
@@ -79,18 +85,24 @@ func (s *Selection) WithColor(color unsafe.Pointer) *Selection {
 
 // BoundsForPage returns the bounds of the selection on the specified page.
 func (s *Selection) BoundsForPage(page *Page) corefoundation.CGRect {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(page)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(s), objc.RegisterName("boundsForPage:"), objref.IDOf(page))
 	return _r
 }
 
 // NumberOfTextRangesOnPage wraps the corresponding Objective-C method.
 func (s *Selection) NumberOfTextRangesOnPage(page *Page) int {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(page)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("numberOfTextRangesOnPage:"), objref.IDOf(page))
 	return _r
 }
 
 // RangeAtIndexOnPage wraps the corresponding Objective-C method.
 func (s *Selection) RangeAtIndexOnPage(index int, page *Page) foundation.NSRange {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(page)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(s), objc.RegisterName("rangeAtIndex:onPage:"), index, objref.IDOf(page))
 	return _r
 }
@@ -99,42 +111,53 @@ func (s *Selection) RangeAtIndexOnPage(index int, page *Page) foundation.NSRange
 //
 // SelectionsByLine returns the collection as a Go slice.
 func (s *Selection) SelectionsByLine() []*Selection {
+	defer runtime.KeepAlive(s)
 	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("selectionsByLine"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Selection { return SelectionFromID(_id) })
 }
 
 // AddSelection adds the specified selection to the receiving selection.
 func (s *Selection) AddSelection(selection *Selection) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(selection)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("addSelection:"), objref.IDOf(selection))
 }
 
 // AddSelections adds the specified array of selections to the receiving selection.
 func (s *Selection) AddSelections(selections []*Selection) {
+	defer runtime.KeepAlive(s)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("addSelections:"), purego.SliceToNSArray(selections, func(_v *Selection) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ExtendSelectionAtEnd extends the selection from its end toward the end of the document.
 func (s *Selection) ExtendSelectionAtEnd(succeed int) {
+	defer runtime.KeepAlive(s)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("extendSelectionAtEnd:"), succeed)
 }
 
 // ExtendSelectionAtStart extends the selection from its start toward the beginning of the document.
 func (s *Selection) ExtendSelectionAtStart(precede int) {
+	defer runtime.KeepAlive(s)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("extendSelectionAtStart:"), precede)
 }
 
 // ExtendSelectionForLineBoundaries wraps the corresponding Objective-C method.
 func (s *Selection) ExtendSelectionForLineBoundaries() {
+	defer runtime.KeepAlive(s)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("extendSelectionForLineBoundaries"))
 }
 
 // DrawForPageActive calls drawForPage:withBox:active: with a default value for box parameter.
 func (s *Selection) DrawForPageActive(page *Page, active bool) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(page)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawForPage:active:"), objref.IDOf(page), active)
 }
 
 // DrawForPageWithBoxActive draws the selection relative to the origin of the specified box in page space.
 func (s *Selection) DrawForPageWithBoxActive(page *Page, box DisplayBox, active bool) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(page)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawForPage:withBox:active:"), objref.IDOf(page), box, active)
 }
 
@@ -142,12 +165,14 @@ func (s *Selection) DrawForPageWithBoxActive(page *Page, box DisplayBox, active 
 //
 // Pages returns the collection as a Go slice.
 func (s *Selection) Pages() []*Page {
+	defer runtime.KeepAlive(s)
 	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("pages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Page { return PageFromID(_id) })
 }
 
 // String returns the string.
 func (s *Selection) String() string {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("string"))
 	if _r == 0 {
 		return ""
@@ -156,7 +181,8 @@ func (s *Selection) String() string {
 }
 
 // AttributedString returns the attributed string.
-func (s *Selection) AttributedString() obj.Object {
+func (s *Selection) AttributedString() *foundation.AttributedString {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("attributedString"))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }

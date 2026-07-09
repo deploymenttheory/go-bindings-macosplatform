@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,6 +56,7 @@ func NewDocumentQuery() *DocumentQuery {
 
 // Limit returns the maximum number of documents the receiver will return upon completion.
 func (dq *DocumentQuery) Limit() int {
+	defer runtime.KeepAlive(dq)
 	_r := objc.Send[int](objref.IDOf(dq), objc.RegisterName("limit"))
 	return _r
 }
@@ -62,12 +65,14 @@ func (dq *DocumentQuery) Limit() int {
 //
 // SortDescriptors returns the collection as a Go slice.
 func (dq *DocumentQuery) SortDescriptors() []obj.Object {
+	defer runtime.KeepAlive(dq)
 	_arr := objc.Send[objc.ID](objref.IDOf(dq), objc.RegisterName("sortDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // IncludeDocumentData reports whether the XML content for documents may be large. This property can be used to control whether the query returns the XML content for each record.
 func (dq *DocumentQuery) IncludeDocumentData() bool {
+	defer runtime.KeepAlive(dq)
 	_r := objc.Send[bool](objref.IDOf(dq), objc.RegisterName("includeDocumentData"))
 	return _r
 }

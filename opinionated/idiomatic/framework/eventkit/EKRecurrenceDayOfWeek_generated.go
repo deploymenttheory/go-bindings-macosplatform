@@ -5,6 +5,8 @@
 package eventkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func recurrenceDayOfWeekAdopt(id objc.ID) *RecurrenceDayOfWeek {
 
 // Description returns the object's -description text.
 func (rdow *RecurrenceDayOfWeek) Description() string {
+	defer runtime.KeepAlive(rdow)
 	return rt.Description(objref.IDOf(rdow))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rdow *RecurrenceDayOfWeek) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rdow)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rdow), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rdow *RecurrenceDayOfWeek) IsKind(className string) bool {
+	defer runtime.KeepAlive(rdow)
 	return rt.IsKind(objref.IDOf(rdow), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rdow *RecurrenceDayOfWeek) String() string {
+	defer runtime.KeepAlive(rdow)
 	return rt.Description(objref.IDOf(rdow))
 }
 
@@ -75,12 +82,14 @@ func NewRecurrenceDayOfWeekWithDayOfTheWeekWeekNumber(dayOfTheWeek Weekday, week
 
 // DayOfTheWeek returns the day of the week.
 func (rdow *RecurrenceDayOfWeek) DayOfTheWeek() Weekday {
+	defer runtime.KeepAlive(rdow)
 	_r := objc.Send[Weekday](objref.IDOf(rdow), objc.RegisterName("dayOfTheWeek"))
 	return _r
 }
 
 // WeekNumber returns the week number.
 func (rdow *RecurrenceDayOfWeek) WeekNumber() int {
+	defer runtime.KeepAlive(rdow)
 	_r := objc.Send[int](objref.IDOf(rdow), objc.RegisterName("weekNumber"))
 	return _r
 }

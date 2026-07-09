@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func workspaceOpenConfigurationAdopt(id objc.ID) *WorkspaceOpenConfiguration {
 
 // Description returns the object's -description text.
 func (woc *WorkspaceOpenConfiguration) Description() string {
+	defer runtime.KeepAlive(woc)
 	return rt.Description(objref.IDOf(woc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (woc *WorkspaceOpenConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(woc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(woc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (woc *WorkspaceOpenConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(woc)
 	return rt.IsKind(objref.IDOf(woc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (woc *WorkspaceOpenConfiguration) String() string {
+	defer runtime.KeepAlive(woc)
 	return rt.Description(objref.IDOf(woc))
 }
 
@@ -128,13 +136,14 @@ func (woc *WorkspaceOpenConfiguration) WithArguments(items ...obj.Object) *Works
 }
 
 // WithEnvironment sets the environment.
-func (woc *WorkspaceOpenConfiguration) WithEnvironment(environment obj.Object) *WorkspaceOpenConfiguration {
-	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setEnvironment:"), objref.IDOf(environment))
+func (woc *WorkspaceOpenConfiguration) WithEnvironment(environment map[string]string) *WorkspaceOpenConfiguration {
+	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setEnvironment:"), rt.MapToDict(environment, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return woc
 }
 
 // WithAppleEvent sets the apple event.
 func (woc *WorkspaceOpenConfiguration) WithAppleEvent(appleEvent obj.Object) *WorkspaceOpenConfiguration {
+	defer runtime.KeepAlive(appleEvent)
 	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setAppleEvent:"), objref.IDOf(appleEvent))
 	return woc
 }
@@ -153,48 +162,56 @@ func (woc *WorkspaceOpenConfiguration) WithRequiresUniversalLinks(requiresUniver
 
 // PromptsUserIfNeeded wraps the corresponding Objective-C method.
 func (woc *WorkspaceOpenConfiguration) PromptsUserIfNeeded() bool {
+	defer runtime.KeepAlive(woc)
 	_r := objc.Send[bool](objref.IDOf(woc), objc.RegisterName("promptsUserIfNeeded"))
 	return _r
 }
 
 // AddsToRecentItems wraps the corresponding Objective-C method.
 func (woc *WorkspaceOpenConfiguration) AddsToRecentItems() bool {
+	defer runtime.KeepAlive(woc)
 	_r := objc.Send[bool](objref.IDOf(woc), objc.RegisterName("addsToRecentItems"))
 	return _r
 }
 
 // Activates wraps the corresponding Objective-C method.
 func (woc *WorkspaceOpenConfiguration) Activates() bool {
+	defer runtime.KeepAlive(woc)
 	_r := objc.Send[bool](objref.IDOf(woc), objc.RegisterName("activates"))
 	return _r
 }
 
 // Hides wraps the corresponding Objective-C method.
 func (woc *WorkspaceOpenConfiguration) Hides() bool {
+	defer runtime.KeepAlive(woc)
 	_r := objc.Send[bool](objref.IDOf(woc), objc.RegisterName("hides"))
 	return _r
 }
 
 // HidesOthers wraps the corresponding Objective-C method.
 func (woc *WorkspaceOpenConfiguration) HidesOthers() bool {
+	defer runtime.KeepAlive(woc)
 	_r := objc.Send[bool](objref.IDOf(woc), objc.RegisterName("hidesOthers"))
 	return _r
 }
 
 // IsForPrinting reports whether the object is for printing.
 func (woc *WorkspaceOpenConfiguration) IsForPrinting() bool {
+	defer runtime.KeepAlive(woc)
 	_r := objc.Send[bool](objref.IDOf(woc), objc.RegisterName("isForPrinting"))
 	return _r
 }
 
 // CreatesNewApplicationInstance wraps the corresponding Objective-C method.
 func (woc *WorkspaceOpenConfiguration) CreatesNewApplicationInstance() bool {
+	defer runtime.KeepAlive(woc)
 	_r := objc.Send[bool](objref.IDOf(woc), objc.RegisterName("createsNewApplicationInstance"))
 	return _r
 }
 
 // AllowsRunningApplicationSubstitution wraps the corresponding Objective-C method.
 func (woc *WorkspaceOpenConfiguration) AllowsRunningApplicationSubstitution() bool {
+	defer runtime.KeepAlive(woc)
 	_r := objc.Send[bool](objref.IDOf(woc), objc.RegisterName("allowsRunningApplicationSubstitution"))
 	return _r
 }
@@ -203,30 +220,35 @@ func (woc *WorkspaceOpenConfiguration) AllowsRunningApplicationSubstitution() bo
 //
 // Arguments returns the collection as a Go slice.
 func (woc *WorkspaceOpenConfiguration) Arguments() []string {
+	defer runtime.KeepAlive(woc)
 	_arr := objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("arguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Environment returns the environment.
-func (woc *WorkspaceOpenConfiguration) Environment() obj.Object {
+func (woc *WorkspaceOpenConfiguration) Environment() map[string]string {
+	defer runtime.KeepAlive(woc)
 	_r := objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("environment"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // AppleEvent returns the apple event.
-func (woc *WorkspaceOpenConfiguration) AppleEvent() obj.Object {
+func (woc *WorkspaceOpenConfiguration) AppleEvent() *foundation.AppleEventDescriptor {
+	defer runtime.KeepAlive(woc)
 	_r := objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("appleEvent"))
-	return obj.Wrap(_r)
+	return foundation.AppleEventDescriptorFromID(_r)
 }
 
 // Architecture returns the architecture.
 func (woc *WorkspaceOpenConfiguration) Architecture() int {
+	defer runtime.KeepAlive(woc)
 	_r := objc.Send[int](objref.IDOf(woc), objc.RegisterName("architecture"))
 	return _r
 }
 
 // RequiresUniversalLinks wraps the corresponding Objective-C method.
 func (woc *WorkspaceOpenConfiguration) RequiresUniversalLinks() bool {
+	defer runtime.KeepAlive(woc)
 	_r := objc.Send[bool](objref.IDOf(woc), objc.RegisterName("requiresUniversalLinks"))
 	return _r
 }

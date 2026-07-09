@@ -835,10 +835,10 @@ func Tcl_GetNameOfExecutable() string {
 	return _fnTcl_GetNameOfExecutable()
 }
 
-var _fnTcl_GetPathType func(string) Tcl_PathType
+var _fnTcl_GetPathType func(string) Pathtype
 
 // Tcl_GetPathType calls the Tcl framework function Tcl_GetPathType.
-func Tcl_GetPathType(path string) Tcl_PathType {
+func Tcl_GetPathType(path string) Pathtype {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_GetPathType == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_GetPathType, _lib, "Tcl_GetPathType")
@@ -1566,12 +1566,12 @@ func Tcl_TruncateChannel(chan_ obj.Object, length int) int {
 var _fnTcl_Ungets func(objc.ID, unsafe.Pointer, int, int) int32
 
 // Tcl_Ungets calls the Tcl framework function Tcl_Ungets.
-func Tcl_Ungets(chan_ obj.Object, str unsafe.Pointer, len_ int, atHead int) int {
+func Tcl_Ungets(chan_ obj.Object, str unsafe.Pointer, length int, atHead int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_Ungets == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_Ungets, _lib, "Tcl_Ungets")
 	}
-	return int(_fnTcl_Ungets(objref.IDOf(chan_), str, len_, atHead))
+	return int(_fnTcl_Ungets(objref.IDOf(chan_), str, length, atHead))
 }
 
 var _fnTcl_UniCharAtIndex func(string, int) uint16

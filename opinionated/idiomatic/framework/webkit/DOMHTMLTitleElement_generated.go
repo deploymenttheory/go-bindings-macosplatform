@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -159,6 +161,7 @@ func (dte *DOMHTMLTitleElement) WithTextContent(textContent string) *DOMHTMLTitl
 
 // Text returns the text.
 func (dte *DOMHTMLTitleElement) Text() string {
+	defer runtime.KeepAlive(dte)
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("text"))
 	if _r == 0 {
 		return ""

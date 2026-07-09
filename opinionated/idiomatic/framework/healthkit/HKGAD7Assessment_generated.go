@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,14 @@ func NewGAD7Assessment() *GAD7Assessment {
 //
 // Answers returns the collection as a Go slice.
 func (ga *GAD7Assessment) Answers() []obj.Object {
+	defer runtime.KeepAlive(ga)
 	_arr := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("answers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Risk returns the risk determined by the score on a GAD-7 assessment.
 func (ga *GAD7Assessment) Risk() GAD7AssessmentRisk {
+	defer runtime.KeepAlive(ga)
 	_r := objc.Send[GAD7AssessmentRisk](objref.IDOf(ga), objc.RegisterName("risk"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package symbols
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewSymbolWiggleEffect() *SymbolWiggleEffect {
 
 // EffectWithByLayer returns a copy of the effect that animates incrementally, by layer.
 func (swe *SymbolWiggleEffect) EffectWithByLayer() *SymbolWiggleEffect {
+	defer runtime.KeepAlive(swe)
 	_r := objc.Send[objc.ID](objref.IDOf(swe), objc.RegisterName("effectWithByLayer"))
 	return SymbolWiggleEffectFromID(_r)
 }
 
 // EffectWithWholeSymbol returns a copy of the effect that animates all layers of the symbol simultaneously.
 func (swe *SymbolWiggleEffect) EffectWithWholeSymbol() *SymbolWiggleEffect {
+	defer runtime.KeepAlive(swe)
 	_r := objc.Send[objc.ID](objref.IDOf(swe), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolWiggleEffectFromID(_r)
 }

@@ -5,6 +5,8 @@
 package videosubscriberaccount
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func vSAccountMetadataRequestAdopt(id objc.ID) *VSAccountMetadataRequest {
 
 // Description returns the object's -description text.
 func (vamr *VSAccountMetadataRequest) Description() string {
+	defer runtime.KeepAlive(vamr)
 	return rt.Description(objref.IDOf(vamr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vamr *VSAccountMetadataRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vamr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vamr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vamr *VSAccountMetadataRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(vamr)
 	return rt.IsKind(objref.IDOf(vamr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vamr *VSAccountMetadataRequest) String() string {
+	defer runtime.KeepAlive(vamr)
 	return rt.Description(objref.IDOf(vamr))
 }
 
@@ -157,6 +164,7 @@ func (vamr *VSAccountMetadataRequest) WithApplicationAccountProviders(items ...*
 
 // ChannelIdentifier returns identifies who is making the request. For use by applications using the SAML authentication scheme only.
 func (vamr *VSAccountMetadataRequest) ChannelIdentifier() string {
+	defer runtime.KeepAlive(vamr)
 	_r := objc.Send[objc.ID](objref.IDOf(vamr), objc.RegisterName("channelIdentifier"))
 	if _r == 0 {
 		return ""
@@ -168,6 +176,7 @@ func (vamr *VSAccountMetadataRequest) ChannelIdentifier() string {
 //
 // SupportedAccountProviderIdentifiers returns the collection as a Go slice.
 func (vamr *VSAccountMetadataRequest) SupportedAccountProviderIdentifiers() []string {
+	defer runtime.KeepAlive(vamr)
 	_arr := objc.Send[objc.ID](objref.IDOf(vamr), objc.RegisterName("supportedAccountProviderIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -176,12 +185,14 @@ func (vamr *VSAccountMetadataRequest) SupportedAccountProviderIdentifiers() []st
 //
 // FeaturedAccountProviderIdentifiers returns the collection as a Go slice.
 func (vamr *VSAccountMetadataRequest) FeaturedAccountProviderIdentifiers() []string {
+	defer runtime.KeepAlive(vamr)
 	_arr := objc.Send[objc.ID](objref.IDOf(vamr), objc.RegisterName("featuredAccountProviderIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // VerificationToken returns a value that the account provider may use to verify the identity of the requesting app.
 func (vamr *VSAccountMetadataRequest) VerificationToken() string {
+	defer runtime.KeepAlive(vamr)
 	_r := objc.Send[objc.ID](objref.IDOf(vamr), objc.RegisterName("verificationToken"))
 	if _r == 0 {
 		return ""
@@ -191,18 +202,21 @@ func (vamr *VSAccountMetadataRequest) VerificationToken() string {
 
 // IncludeAccountProviderIdentifier reports whether to request information that identifies the account provider.
 func (vamr *VSAccountMetadataRequest) IncludeAccountProviderIdentifier() bool {
+	defer runtime.KeepAlive(vamr)
 	_r := objc.Send[bool](objref.IDOf(vamr), objc.RegisterName("includeAccountProviderIdentifier"))
 	return _r
 }
 
 // IncludeAuthenticationExpirationDate reports whether to request the expiration date of the subscriber's current authentication.
 func (vamr *VSAccountMetadataRequest) IncludeAuthenticationExpirationDate() bool {
+	defer runtime.KeepAlive(vamr)
 	_r := objc.Send[bool](objref.IDOf(vamr), objc.RegisterName("includeAuthenticationExpirationDate"))
 	return _r
 }
 
 // LocalizedVideoTitle returns a brief, user-presentable name for the video that the app will play if it receives a successful response. For example, "What's New in Swift" or "Office Space" Do not provide a value if the request will not be used to play a specific video.
 func (vamr *VSAccountMetadataRequest) LocalizedVideoTitle() string {
+	defer runtime.KeepAlive(vamr)
 	_r := objc.Send[objc.ID](objref.IDOf(vamr), objc.RegisterName("localizedVideoTitle"))
 	if _r == 0 {
 		return ""
@@ -212,12 +226,14 @@ func (vamr *VSAccountMetadataRequest) LocalizedVideoTitle() string {
 
 // IsInterruptionAllowed reports whether the user might expect to be prompted to authenticate in order to complete this request.
 func (vamr *VSAccountMetadataRequest) IsInterruptionAllowed() bool {
+	defer runtime.KeepAlive(vamr)
 	_r := objc.Send[bool](objref.IDOf(vamr), objc.RegisterName("isInterruptionAllowed"))
 	return _r
 }
 
 // ForceAuthentication reports whether requests that the TV Provider reauthenticate the user if they are already authenticated.
 func (vamr *VSAccountMetadataRequest) ForceAuthentication() bool {
+	defer runtime.KeepAlive(vamr)
 	_r := objc.Send[bool](objref.IDOf(vamr), objc.RegisterName("forceAuthentication"))
 	return _r
 }
@@ -226,6 +242,7 @@ func (vamr *VSAccountMetadataRequest) ForceAuthentication() bool {
 //
 // AttributeNames returns the collection as a Go slice.
 func (vamr *VSAccountMetadataRequest) AttributeNames() []string {
+	defer runtime.KeepAlive(vamr)
 	_arr := objc.Send[objc.ID](objref.IDOf(vamr), objc.RegisterName("attributeNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -234,12 +251,14 @@ func (vamr *VSAccountMetadataRequest) AttributeNames() []string {
 //
 // SupportedAuthenticationSchemes returns the collection as a Go slice.
 func (vamr *VSAccountMetadataRequest) SupportedAuthenticationSchemes() []obj.Object {
+	defer runtime.KeepAlive(vamr)
 	_arr := objc.Send[objc.ID](objref.IDOf(vamr), objc.RegisterName("supportedAuthenticationSchemes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AccountProviderAuthenticationToken returns a value that an account provider application may set to pass an existing authentication session. For use by TV Provider applications only.
 func (vamr *VSAccountMetadataRequest) AccountProviderAuthenticationToken() string {
+	defer runtime.KeepAlive(vamr)
 	_r := objc.Send[objc.ID](objref.IDOf(vamr), objc.RegisterName("accountProviderAuthenticationToken"))
 	if _r == 0 {
 		return ""
@@ -251,6 +270,7 @@ func (vamr *VSAccountMetadataRequest) AccountProviderAuthenticationToken() strin
 //
 // ApplicationAccountProviders returns the collection as a Go slice.
 func (vamr *VSAccountMetadataRequest) ApplicationAccountProviders() []*VSAccountApplicationProvider {
+	defer runtime.KeepAlive(vamr)
 	_arr := objc.Send[objc.ID](objref.IDOf(vamr), objc.RegisterName("applicationAccountProviders"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *VSAccountApplicationProvider { return VSAccountApplicationProviderFromID(_id) })
 }

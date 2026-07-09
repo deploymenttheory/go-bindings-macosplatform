@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func switchNodeDefinitionAdopt(id objc.ID) *SwitchNodeDefinition {
 
 // NewSwitchNodeDefinitionWithSwitchMetaParameterDefinitionIdentifier creates a named node that invokes a child node based on the value of the given parameter.
 func NewSwitchNodeDefinitionWithSwitchMetaParameterDefinitionIdentifier(switchMetaParameterDefinition *StringMetaParameterDefinition, identifier string) *SwitchNodeDefinition {
+	defer runtime.KeepAlive(switchMetaParameterDefinition)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESwitchNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSwitchMetaParameterDefinition:identifier:"), objref.IDOf(switchMetaParameterDefinition), purego.NSString(identifier))
 	return switchNodeDefinitionAdopt(_id)
@@ -54,6 +57,7 @@ func NewSwitchNodeDefinitionWithSwitchMetaParameterDefinitionIdentifier(switchMe
 
 // NewSwitchNodeDefinitionWithSwitchMetaParameterDefinition creates a node that invokes a child node based on the value of the given parameter.
 func NewSwitchNodeDefinitionWithSwitchMetaParameterDefinition(switchMetaParameterDefinition *StringMetaParameterDefinition) *SwitchNodeDefinition {
+	defer runtime.KeepAlive(switchMetaParameterDefinition)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESwitchNodeDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSwitchMetaParameterDefinition:"), objref.IDOf(switchMetaParameterDefinition))
 	return switchNodeDefinitionAdopt(_id)
@@ -61,11 +65,14 @@ func NewSwitchNodeDefinitionWithSwitchMetaParameterDefinition(switchMetaParamete
 
 // AddSubtreeSwitchValue adds a child node with the given switch value.
 func (snd *SwitchNodeDefinition) AddSubtreeSwitchValue(subtree *SoundEventNodeDefinition, switchValue string) {
+	defer runtime.KeepAlive(snd)
+	defer runtime.KeepAlive(subtree)
 	objc.Send[objc.ID](objref.IDOf(snd), objc.RegisterName("addSubtree:switchValue:"), objref.IDOf(subtree), purego.NSString(switchValue))
 }
 
 // SwitchMetaParameterDefinition returns the switch meta parameter definition.
 func (snd *SwitchNodeDefinition) SwitchMetaParameterDefinition() *StringMetaParameterDefinition {
+	defer runtime.KeepAlive(snd)
 	_r := objc.Send[objc.ID](objref.IDOf(snd), objc.RegisterName("switchMetaParameterDefinition"))
 	return StringMetaParameterDefinitionFromID(_r)
 }

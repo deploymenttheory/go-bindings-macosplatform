@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func steeringWheelElementAdopt(id objc.ID) *SteeringWheelElement {
 
 // Description returns the object's -description text.
 func (swe *SteeringWheelElement) Description() string {
+	defer runtime.KeepAlive(swe)
 	return rt.Description(objref.IDOf(swe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (swe *SteeringWheelElement) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(swe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(swe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (swe *SteeringWheelElement) IsKind(className string) bool {
+	defer runtime.KeepAlive(swe)
 	return rt.IsKind(objref.IDOf(swe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (swe *SteeringWheelElement) String() string {
+	defer runtime.KeepAlive(swe)
 	return rt.Description(objref.IDOf(swe))
 }
 
@@ -74,6 +81,7 @@ func NewSteeringWheelElement() *SteeringWheelElement {
 
 // MaximumDegreesOfRotation returns the maximum degrees of rotation.
 func (swe *SteeringWheelElement) MaximumDegreesOfRotation() float32 {
+	defer runtime.KeepAlive(swe)
 	_r := objc.Send[float32](objref.IDOf(swe), objc.RegisterName("maximumDegreesOfRotation"))
 	return _r
 }

@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,30 +49,35 @@ func mTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsAdopt(id objc
 
 // Description returns the object's -description text.
 func (mwfnmcnprp *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) Description() string {
+	defer runtime.KeepAlive(mwfnmcnprp)
 	return rt.Description(objref.IDOf(mwfnmcnprp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mwfnmcnprp *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mwfnmcnprp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mwfnmcnprp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mwfnmcnprp *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mwfnmcnprp)
 	return rt.IsKind(objref.IDOf(mwfnmcnprp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mwfnmcnprp *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) String() string {
+	defer runtime.KeepAlive(mwfnmcnprp)
 	return rt.Description(objref.IDOf(mwfnmcnprp))
 }
 
-// NewMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsWithResponseValueError initialize an MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-func NewMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams, err error) {
+// NewMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsWithResponseValue initialize an MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -79,13 +85,14 @@ func NewMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsWithRespon
 }
 
 // WithPassphrase sets the passphrase.
-func (mwfnmcnprp *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) WithPassphrase(passphrase obj.Object) *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams {
-	objc.Send[objc.ID](objref.IDOf(mwfnmcnprp), objc.RegisterName("setPassphrase:"), objref.IDOf(passphrase))
+func (mwfnmcnprp *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) WithPassphrase(passphrase []byte) *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mwfnmcnprp), objc.RegisterName("setPassphrase:"), rt.BytesToNSData(passphrase))
 	return mwfnmcnprp
 }
 
 // Passphrase returns the passphrase.
-func (mwfnmcnprp *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) Passphrase() obj.Object {
+func (mwfnmcnprp *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) Passphrase() []byte {
+	defer runtime.KeepAlive(mwfnmcnprp)
 	_r := objc.Send[objc.ID](objref.IDOf(mwfnmcnprp), objc.RegisterName("passphrase"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

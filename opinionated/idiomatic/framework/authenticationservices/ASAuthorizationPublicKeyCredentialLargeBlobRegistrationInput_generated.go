@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func authorizationPublicKeyCredentialLargeBlobRegistrationInputAdopt(id objc.ID)
 
 // Description returns the object's -description text.
 func (apkclbri *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) Description() string {
+	defer runtime.KeepAlive(apkclbri)
 	return rt.Description(objref.IDOf(apkclbri))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apkclbri *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apkclbri)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apkclbri), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apkclbri *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) IsKind(className string) bool {
+	defer runtime.KeepAlive(apkclbri)
 	return rt.IsKind(objref.IDOf(apkclbri), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apkclbri *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) String() string {
+	defer runtime.KeepAlive(apkclbri)
 	return rt.Description(objref.IDOf(apkclbri))
 }
 
@@ -81,6 +88,7 @@ func (apkclbri *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) With
 
 // SupportRequirement returns the support requirement.
 func (apkclbri *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) SupportRequirement() AuthorizationPublicKeyCredentialLargeBlobSupportRequirement {
+	defer runtime.KeepAlive(apkclbri)
 	_r := objc.Send[AuthorizationPublicKeyCredentialLargeBlobSupportRequirement](objref.IDOf(apkclbri), objc.RegisterName("supportRequirement"))
 	return _r
 }

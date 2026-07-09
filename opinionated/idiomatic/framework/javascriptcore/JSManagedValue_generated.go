@@ -5,6 +5,8 @@
 package javascriptcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func managedValueAdopt(id objc.ID) *ManagedValue {
 
 // Description returns the object's -description text.
 func (mv *ManagedValue) Description() string {
+	defer runtime.KeepAlive(mv)
 	return rt.Description(objref.IDOf(mv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mv *ManagedValue) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mv *ManagedValue) IsKind(className string) bool {
+	defer runtime.KeepAlive(mv)
 	return rt.IsKind(objref.IDOf(mv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mv *ManagedValue) String() string {
+	defer runtime.KeepAlive(mv)
 	return rt.Description(objref.IDOf(mv))
 }
 
 // NewManagedValueWithValue initializes a managed value with the specified JavaScript value.
 func NewManagedValueWithValue(value *Value) *ManagedValue {
+	defer runtime.KeepAlive(value)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("JSManagedValue")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:"), objref.IDOf(value))
 	return managedValueAdopt(_id)
@@ -75,6 +83,7 @@ func NewManagedValueWithValue(value *Value) *ManagedValue {
 
 // Value returns the value.
 func (mv *ManagedValue) Value() *Value {
+	defer runtime.KeepAlive(mv)
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("value"))
 	return ValueFromID(_r)
 }

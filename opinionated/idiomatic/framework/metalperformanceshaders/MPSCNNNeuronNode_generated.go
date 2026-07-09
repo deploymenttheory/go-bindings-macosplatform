@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,18 +55,21 @@ func (cnn *CNNNeuronNode) WithLabel(label string) *CNNNeuronNode {
 
 // A returns filter parameter a
 func (cnn *CNNNeuronNode) A() float32 {
+	defer runtime.KeepAlive(cnn)
 	_r := objc.Send[float32](objref.IDOf(cnn), objc.RegisterName("a"))
 	return _r
 }
 
 // B returns filter parameter b
 func (cnn *CNNNeuronNode) B() float32 {
+	defer runtime.KeepAlive(cnn)
 	_r := objc.Send[float32](objref.IDOf(cnn), objc.RegisterName("b"))
 	return _r
 }
 
 // C returns filter parameter c
 func (cnn *CNNNeuronNode) C() float32 {
+	defer runtime.KeepAlive(cnn)
 	_r := objc.Send[float32](objref.IDOf(cnn), objc.RegisterName("c"))
 	return _r
 }

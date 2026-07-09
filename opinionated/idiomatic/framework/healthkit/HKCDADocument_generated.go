@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func cDADocumentAdopt(id objc.ID) *CDADocument {
 
 // Description returns the object's -description text.
 func (cd *CDADocument) Description() string {
+	defer runtime.KeepAlive(cd)
 	return rt.Description(objref.IDOf(cd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cd *CDADocument) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cd *CDADocument) IsKind(className string) bool {
+	defer runtime.KeepAlive(cd)
 	return rt.IsKind(objref.IDOf(cd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cd *CDADocument) String() string {
+	defer runtime.KeepAlive(cd)
 	return rt.Description(objref.IDOf(cd))
 }
 
@@ -73,13 +80,15 @@ func NewCDADocument() *CDADocument {
 }
 
 // DocumentData returns the CDA document content in XML format as specified in the CDA standard. This may be nil if the includeDocumentData option in HKDocumentQuery is specified as NO.
-func (cd *CDADocument) DocumentData() obj.Object {
+func (cd *CDADocument) DocumentData() []byte {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("documentData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Title returns the title of the document. This property is extracted automatically from the document.
 func (cd *CDADocument) Title() string {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -89,6 +98,7 @@ func (cd *CDADocument) Title() string {
 
 // PatientName returns the name of the patient receiving treatment. This property is extracted automatically from the document.
 func (cd *CDADocument) PatientName() string {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("patientName"))
 	if _r == 0 {
 		return ""
@@ -98,6 +108,7 @@ func (cd *CDADocument) PatientName() string {
 
 // AuthorName returns the person responsible for authoring the document.  Usually, this is the treating physician. This property is extracted automatically from the document.
 func (cd *CDADocument) AuthorName() string {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("authorName"))
 	if _r == 0 {
 		return ""
@@ -107,6 +118,7 @@ func (cd *CDADocument) AuthorName() string {
 
 // CustodianName returns the organization responsible for the document.  This is usually the treating institution name. This property is extracted automatically from the document.
 func (cd *CDADocument) CustodianName() string {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("custodianName"))
 	if _r == 0 {
 		return ""

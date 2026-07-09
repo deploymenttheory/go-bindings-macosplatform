@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,18 +54,21 @@ func NewMTRDescriptorClusterDeviceType() *MTRDescriptorClusterDeviceType {
 
 // WithDeviceType sets the device type.
 func (mdcdt *MTRDescriptorClusterDeviceType) WithDeviceType(deviceType obj.Object) *MTRDescriptorClusterDeviceType {
+	defer runtime.KeepAlive(deviceType)
 	objc.Send[objc.ID](objref.IDOf(mdcdt), objc.RegisterName("setDeviceType:"), objref.IDOf(deviceType))
 	return mdcdt
 }
 
 // WithType sets the type.
 func (mdcdt *MTRDescriptorClusterDeviceType) WithType(type_ obj.Object) *MTRDescriptorClusterDeviceType {
+	defer runtime.KeepAlive(type_)
 	objc.Send[objc.ID](objref.IDOf(mdcdt), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return mdcdt
 }
 
 // WithRevision sets the revision.
 func (mdcdt *MTRDescriptorClusterDeviceType) WithRevision(revision obj.Object) *MTRDescriptorClusterDeviceType {
+	defer runtime.KeepAlive(revision)
 	objc.Send[objc.ID](objref.IDOf(mdcdt), objc.RegisterName("setRevision:"), objref.IDOf(revision))
 	return mdcdt
 }

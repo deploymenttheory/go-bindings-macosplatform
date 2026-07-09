@@ -6,6 +6,7 @@ package cryptotokenkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,22 +50,27 @@ func smartCardSlotManagerAdopt(id objc.ID) *SmartCardSlotManager {
 
 // Description returns the object's -description text.
 func (scsm *SmartCardSlotManager) Description() string {
+	defer runtime.KeepAlive(scsm)
 	return rt.Description(objref.IDOf(scsm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (scsm *SmartCardSlotManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(scsm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(scsm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (scsm *SmartCardSlotManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(scsm)
 	return rt.IsKind(objref.IDOf(scsm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (scsm *SmartCardSlotManager) String() string {
+	defer runtime.KeepAlive(scsm)
 	return rt.Description(objref.IDOf(scsm))
 }
 
@@ -78,6 +84,7 @@ func NewSmartCardSlotManager() *SmartCardSlotManager {
 //
 // GetSlotWithNameReply blocks until the operation completes or ctx is cancelled.
 func (scsm *SmartCardSlotManager) GetSlotWithNameReply(ctx context.Context, name string) (result *SmartCardSlot, err error) {
+	defer runtime.KeepAlive(scsm)
 	type _result struct {
 		val *SmartCardSlot
 		err error
@@ -100,6 +107,7 @@ func (scsm *SmartCardSlotManager) GetSlotWithNameReply(ctx context.Context, name
 
 // SlotNamed returns the Smart Card slot with a given name.
 func (scsm *SmartCardSlotManager) SlotNamed(name string) *SmartCardSlot {
+	defer runtime.KeepAlive(scsm)
 	_r := objc.Send[objc.ID](objref.IDOf(scsm), objc.RegisterName("slotNamed:"), purego.NSString(name))
 	return SmartCardSlotFromID(_r)
 }
@@ -108,6 +116,7 @@ func (scsm *SmartCardSlotManager) SlotNamed(name string) *SmartCardSlot {
 //
 // SlotNames returns the collection as a Go slice.
 func (scsm *SmartCardSlotManager) SlotNames() []string {
+	defer runtime.KeepAlive(scsm)
 	_arr := objc.Send[objc.ID](objref.IDOf(scsm), objc.RegisterName("slotNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

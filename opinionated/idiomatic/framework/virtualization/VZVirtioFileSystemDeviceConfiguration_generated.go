@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -60,12 +62,14 @@ func (vfsdc *VirtioFileSystemDeviceConfiguration) WithTag(tag string) *VirtioFil
 
 // WithShare sets a value that defines how the host exposes resources to the guest virtual machine.
 func (vfsdc *VirtioFileSystemDeviceConfiguration) WithShare(share DirectoryShareProvider) *VirtioFileSystemDeviceConfiguration {
+	defer runtime.KeepAlive(share)
 	objc.Send[objc.ID](objref.IDOf(vfsdc), objc.RegisterName("setShare:"), objref.IDOf(share))
 	return vfsdc
 }
 
 // Tag returns the tag is a string identifying the device. The tag is presented as a label in the guest identifying this device for mounting. The tag must be valid, which can be checked with +[VZVirtioFileSystemDeviceConfiguration validateTag:error:].
 func (vfsdc *VirtioFileSystemDeviceConfiguration) Tag() string {
+	defer runtime.KeepAlive(vfsdc)
 	_r := objc.Send[objc.ID](objref.IDOf(vfsdc), objc.RegisterName("tag"))
 	if _r == 0 {
 		return ""
@@ -75,6 +79,7 @@ func (vfsdc *VirtioFileSystemDeviceConfiguration) Tag() string {
 
 // Share returns directory share. Defines how host resources are exposed to the guest virtual machine.
 func (vfsdc *VirtioFileSystemDeviceConfiguration) Share() *DirectoryShare {
+	defer runtime.KeepAlive(vfsdc)
 	_r := objc.Send[objc.ID](objref.IDOf(vfsdc), objc.RegisterName("share"))
 	return DirectoryShareFromID(_r)
 }

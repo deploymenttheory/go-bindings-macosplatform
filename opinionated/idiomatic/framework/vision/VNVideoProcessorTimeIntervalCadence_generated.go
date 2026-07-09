@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -54,6 +56,7 @@ func NewVideoProcessorTimeIntervalCadenceWithTimeInterval(timeInterval float64) 
 
 // TimeInterval returns the time interval.
 func (vptic *VideoProcessorTimeIntervalCadence) TimeInterval() float64 {
+	defer runtime.KeepAlive(vptic)
 	_r := objc.Send[float64](objref.IDOf(vptic), objc.RegisterName("timeInterval"))
 	return _r
 }

@@ -56,8 +56,8 @@ func AVMutableCompositionComposition() *AVMutableComposition {
 }
 
 // Creates a mutable composition that uses the specified initialization options.
-func AVMutableCompositionCompositionWithURLAssetInitializationOptions(uRLAssetInitializationOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVMutableComposition {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableComposition), _aVMutableCompositionSelCompositionWithURLAssetInitializationOptions, uRLAssetInitializationOptions.Ptr())
+func AVMutableCompositionCompositionWithURLAssetInitializationOptions(urlAssetInitializationOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVMutableComposition {
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableComposition), _aVMutableCompositionSelCompositionWithURLAssetInitializationOptions, urlAssetInitializationOptions.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func collectionLayoutEdgeSpacingAdopt(id objc.ID) *CollectionLayoutEdgeSpacing {
 
 // Description returns the object's -description text.
 func (cles *CollectionLayoutEdgeSpacing) Description() string {
+	defer runtime.KeepAlive(cles)
 	return rt.Description(objref.IDOf(cles))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cles *CollectionLayoutEdgeSpacing) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cles)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cles), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cles *CollectionLayoutEdgeSpacing) IsKind(className string) bool {
+	defer runtime.KeepAlive(cles)
 	return rt.IsKind(objref.IDOf(cles), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cles *CollectionLayoutEdgeSpacing) String() string {
+	defer runtime.KeepAlive(cles)
 	return rt.Description(objref.IDOf(cles))
 }
 
@@ -80,6 +87,7 @@ func NewCollectionLayoutEdgeSpacing() *CollectionLayoutEdgeSpacing {
 
 // Leading returns the leading.
 func (cles *CollectionLayoutEdgeSpacing) Leading() *CollectionLayoutSpacing {
+	defer runtime.KeepAlive(cles)
 	var _mainthread0 *CollectionLayoutSpacing
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionLayoutSpacing {
@@ -93,6 +101,7 @@ func (cles *CollectionLayoutEdgeSpacing) Leading() *CollectionLayoutSpacing {
 
 // Top returns the top.
 func (cles *CollectionLayoutEdgeSpacing) Top() *CollectionLayoutSpacing {
+	defer runtime.KeepAlive(cles)
 	var _mainthread0 *CollectionLayoutSpacing
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionLayoutSpacing {
@@ -106,6 +115,7 @@ func (cles *CollectionLayoutEdgeSpacing) Top() *CollectionLayoutSpacing {
 
 // Trailing returns the trailing.
 func (cles *CollectionLayoutEdgeSpacing) Trailing() *CollectionLayoutSpacing {
+	defer runtime.KeepAlive(cles)
 	var _mainthread0 *CollectionLayoutSpacing
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionLayoutSpacing {
@@ -119,6 +129,7 @@ func (cles *CollectionLayoutEdgeSpacing) Trailing() *CollectionLayoutSpacing {
 
 // Bottom returns the bottom.
 func (cles *CollectionLayoutEdgeSpacing) Bottom() *CollectionLayoutSpacing {
+	defer runtime.KeepAlive(cles)
 	var _mainthread0 *CollectionLayoutSpacing
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionLayoutSpacing {

@@ -5,6 +5,8 @@
 package videosubscriberaccount
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func vSAccountApplicationProviderAdopt(id objc.ID) *VSAccountApplicationProvider
 
 // Description returns the object's -description text.
 func (vaap *VSAccountApplicationProvider) Description() string {
+	defer runtime.KeepAlive(vaap)
 	return rt.Description(objref.IDOf(vaap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vaap *VSAccountApplicationProvider) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vaap)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vaap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vaap *VSAccountApplicationProvider) IsKind(className string) bool {
+	defer runtime.KeepAlive(vaap)
 	return rt.IsKind(objref.IDOf(vaap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vaap *VSAccountApplicationProvider) String() string {
+	defer runtime.KeepAlive(vaap)
 	return rt.Description(objref.IDOf(vaap))
 }
 
@@ -75,6 +82,7 @@ func NewVSAccountApplicationProviderWithLocalizedDisplayNameIdentifier(localized
 
 // LocalizedDisplayName returns the display name of the provider as it will appear in the list of providers.
 func (vaap *VSAccountApplicationProvider) LocalizedDisplayName() string {
+	defer runtime.KeepAlive(vaap)
 	_r := objc.Send[objc.ID](objref.IDOf(vaap), objc.RegisterName("localizedDisplayName"))
 	if _r == 0 {
 		return ""
@@ -84,6 +92,7 @@ func (vaap *VSAccountApplicationProvider) LocalizedDisplayName() string {
 
 // Identifier returns the identifier of the provider. If selected, this value is returned to your application.
 func (vaap *VSAccountApplicationProvider) Identifier() string {
+	defer runtime.KeepAlive(vaap)
 	_r := objc.Send[objc.ID](objref.IDOf(vaap), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""

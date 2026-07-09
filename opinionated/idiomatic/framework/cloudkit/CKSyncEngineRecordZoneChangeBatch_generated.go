@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func syncEngineRecordZoneChangeBatchAdopt(id objc.ID) *SyncEngineRecordZoneChang
 
 // Description returns the object's -description text.
 func (serzcb *SyncEngineRecordZoneChangeBatch) Description() string {
+	defer runtime.KeepAlive(serzcb)
 	return rt.Description(objref.IDOf(serzcb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (serzcb *SyncEngineRecordZoneChangeBatch) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(serzcb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(serzcb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (serzcb *SyncEngineRecordZoneChangeBatch) IsKind(className string) bool {
+	defer runtime.KeepAlive(serzcb)
 	return rt.IsKind(objref.IDOf(serzcb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (serzcb *SyncEngineRecordZoneChangeBatch) String() string {
+	defer runtime.KeepAlive(serzcb)
 	return rt.Description(objref.IDOf(serzcb))
 }
 
@@ -83,6 +90,7 @@ func (serzcb *SyncEngineRecordZoneChangeBatch) WithAtomicByZone(atomicByZone boo
 //
 // RecordsToSave returns the collection as a Go slice.
 func (serzcb *SyncEngineRecordZoneChangeBatch) RecordsToSave() []*Record {
+	defer runtime.KeepAlive(serzcb)
 	_arr := objc.Send[objc.ID](objref.IDOf(serzcb), objc.RegisterName("recordsToSave"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Record { return RecordFromID(_id) })
 }
@@ -91,12 +99,14 @@ func (serzcb *SyncEngineRecordZoneChangeBatch) RecordsToSave() []*Record {
 //
 // RecordIDsToDelete returns the collection as a Go slice.
 func (serzcb *SyncEngineRecordZoneChangeBatch) RecordIDsToDelete() []*RecordID {
+	defer runtime.KeepAlive(serzcb)
 	_arr := objc.Send[objc.ID](objref.IDOf(serzcb), objc.RegisterName("recordIDsToDelete"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordID { return RecordIDFromID(_id) })
 }
 
 // AtomicByZone reports whether a Boolean value that determines whether CloudKit modifies records atomically by record zone. When <doc://com.apple.documentation/documentation/swift/true>, CloudKit processes record changes atomically by record zone, and if any individual change fails, all other changes in that record's record zone fail and return an error of type “CKError/Code/batchRequestFailed“. The default value is <doc://com.apple.documentation/documentation/swift/false>.
 func (serzcb *SyncEngineRecordZoneChangeBatch) AtomicByZone() bool {
+	defer runtime.KeepAlive(serzcb)
 	_r := objc.Send[bool](objref.IDOf(serzcb), objc.RegisterName("atomicByZone"))
 	return _r
 }

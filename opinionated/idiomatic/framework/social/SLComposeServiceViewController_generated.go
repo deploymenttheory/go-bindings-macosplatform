@@ -5,7 +5,10 @@
 package social
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func composeServiceViewControllerAdopt(id objc.ID) *ComposeServiceViewController
 
 // Description returns the object's -description text.
 func (csvc *ComposeServiceViewController) Description() string {
+	defer runtime.KeepAlive(csvc)
 	return rt.Description(objref.IDOf(csvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (csvc *ComposeServiceViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(csvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(csvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (csvc *ComposeServiceViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(csvc)
 	return rt.IsKind(objref.IDOf(csvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (csvc *ComposeServiceViewController) String() string {
+	defer runtime.KeepAlive(csvc)
 	return rt.Description(objref.IDOf(csvc))
 }
 
@@ -88,6 +96,7 @@ func (csvc *ComposeServiceViewController) WithPlaceholder(placeholder string) *C
 
 // WithCharactersRemaining sets the number of characters remaining in a custom character limit.
 func (csvc *ComposeServiceViewController) WithCharactersRemaining(charactersRemaining obj.Object) *ComposeServiceViewController {
+	defer runtime.KeepAlive(charactersRemaining)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("setCharactersRemaining:"), objref.IDOf(charactersRemaining))
 	})
@@ -96,6 +105,7 @@ func (csvc *ComposeServiceViewController) WithCharactersRemaining(charactersRema
 
 // PresentationAnimationDidFinish tells the compose view controller that the presentation animation is finished.
 func (csvc *ComposeServiceViewController) PresentationAnimationDidFinish() {
+	defer runtime.KeepAlive(csvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("presentationAnimationDidFinish"))
 	})
@@ -104,6 +114,7 @@ func (csvc *ComposeServiceViewController) PresentationAnimationDidFinish() {
 
 // DidSelectPost sent to the compose view after the post animation finishes.
 func (csvc *ComposeServiceViewController) DidSelectPost() {
+	defer runtime.KeepAlive(csvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("didSelectPost"))
 	})
@@ -112,6 +123,7 @@ func (csvc *ComposeServiceViewController) DidSelectPost() {
 
 // DidSelectCancel sent to the compose view after the cancel animation finishes.
 func (csvc *ComposeServiceViewController) DidSelectCancel() {
+	defer runtime.KeepAlive(csvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("didSelectCancel"))
 	})
@@ -120,6 +132,7 @@ func (csvc *ComposeServiceViewController) DidSelectCancel() {
 
 // Cancel starts the animated dismissal of the compose view.
 func (csvc *ComposeServiceViewController) Cancel() {
+	defer runtime.KeepAlive(csvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("cancel"))
 	})
@@ -128,6 +141,7 @@ func (csvc *ComposeServiceViewController) Cancel() {
 
 // IsContentValid reports whether the current content and attachments are valid.
 func (csvc *ComposeServiceViewController) IsContentValid() bool {
+	defer runtime.KeepAlive(csvc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -141,6 +155,7 @@ func (csvc *ComposeServiceViewController) IsContentValid() bool {
 
 // ValidateContent performs validation of the current content and updates the state of the Post button, if appropriate.
 func (csvc *ComposeServiceViewController) ValidateContent() {
+	defer runtime.KeepAlive(csvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("validateContent"))
 	})
@@ -149,6 +164,7 @@ func (csvc *ComposeServiceViewController) ValidateContent() {
 
 // TextView returns the text view.
 func (csvc *ComposeServiceViewController) TextView() obj.Object {
+	defer runtime.KeepAlive(csvc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -162,6 +178,7 @@ func (csvc *ComposeServiceViewController) TextView() obj.Object {
 
 // ContentText returns the content text.
 func (csvc *ComposeServiceViewController) ContentText() string {
+	defer runtime.KeepAlive(csvc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -178,6 +195,7 @@ func (csvc *ComposeServiceViewController) ContentText() string {
 
 // Placeholder returns the placeholder.
 func (csvc *ComposeServiceViewController) Placeholder() string {
+	defer runtime.KeepAlive(csvc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -193,12 +211,13 @@ func (csvc *ComposeServiceViewController) Placeholder() string {
 }
 
 // CharactersRemaining returns the characters remaining.
-func (csvc *ComposeServiceViewController) CharactersRemaining() obj.Object {
-	var _mainthread0 obj.Object
+func (csvc *ComposeServiceViewController) CharactersRemaining() *foundation.Number {
+	defer runtime.KeepAlive(csvc)
+	var _mainthread0 *foundation.Number
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.Number {
 			_r := objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("charactersRemaining"))
-			return obj.Wrap(_r)
+			return foundation.NumberFromID(_r)
 		}()
 	})
 	return _mainthread0

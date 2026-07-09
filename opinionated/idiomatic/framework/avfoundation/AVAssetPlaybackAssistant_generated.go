@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,22 +50,27 @@ func assetPlaybackAssistantAdopt(id objc.ID) *AssetPlaybackAssistant {
 
 // Description returns the object's -description text.
 func (apa *AssetPlaybackAssistant) Description() string {
+	defer runtime.KeepAlive(apa)
 	return rt.Description(objref.IDOf(apa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apa *AssetPlaybackAssistant) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apa *AssetPlaybackAssistant) IsKind(className string) bool {
+	defer runtime.KeepAlive(apa)
 	return rt.IsKind(objref.IDOf(apa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apa *AssetPlaybackAssistant) String() string {
+	defer runtime.KeepAlive(apa)
 	return rt.Description(objref.IDOf(apa))
 }
 
@@ -78,6 +84,7 @@ func NewAssetPlaybackAssistant() *AssetPlaybackAssistant {
 //
 // LoadPlaybackConfigurationOptions blocks until the operation completes or ctx is cancelled.
 func (apa *AssetPlaybackAssistant) LoadPlaybackConfigurationOptions(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(apa)
 	type _result struct {
 		val obj.Object
 		err error

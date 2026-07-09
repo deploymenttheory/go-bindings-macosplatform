@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -101,42 +103,49 @@ func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) WithUsage(usa
 
 // InstanceDescriptorStride sets the stride, in bytes, between instance descriptors in the instance descriptor buffer. You are responsible for ensuring this stride is at least the size of the structure type corresponding to the instance descriptor type and a multiple of 4 bytes. Defaults to `0`, indicating the instance descriptors are tightly packed.
 func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) InstanceDescriptorStride() int {
+	defer runtime.KeepAlive(miiasd)
 	_r := objc.Send[int](objref.IDOf(miiasd), objc.RegisterName("instanceDescriptorStride"))
 	return _r
 }
 
 // MaxInstanceCount returns controls the maximum number of instance descriptors the instance descriptor buffer can reference. You are responsible for ensuring that the final number of instances at build time, which you provide indirectly via a buffer reference in “instanceCountBuffer“, is less than or equal to this number.
 func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) MaxInstanceCount() int {
+	defer runtime.KeepAlive(miiasd)
 	_r := objc.Send[int](objref.IDOf(miiasd), objc.RegisterName("maxInstanceCount"))
 	return _r
 }
 
 // InstanceDescriptorType returns controls the type of instance descriptor that the instance descriptor buffer references. This value determines the layout Metal expects for the structs the instance descriptor buffer contains. Defaults to `MTLAccelerationStructureInstanceDescriptorTypeIndirect`. Valid values for this property are `MTLAccelerationStructureInstanceDescriptorTypeIndirect` or `MTLAccelerationStructureInstanceDescriptorTypeIndirectMotion`.
 func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) InstanceDescriptorType() AccelerationStructureInstanceDescriptorType {
+	defer runtime.KeepAlive(miiasd)
 	_r := objc.Send[AccelerationStructureInstanceDescriptorType](objref.IDOf(miiasd), objc.RegisterName("instanceDescriptorType"))
 	return _r
 }
 
 // MaxMotionTransformCount returns controls the maximum number of motion transforms in the motion transform buffer. You are responsible for ensuring that final number of motion transforms at build time that the buffer “motionTransformCountBuffer“ references is less than or equal to this number.
 func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) MaxMotionTransformCount() int {
+	defer runtime.KeepAlive(miiasd)
 	_r := objc.Send[int](objref.IDOf(miiasd), objc.RegisterName("maxMotionTransformCount"))
 	return _r
 }
 
 // InstanceTransformationMatrixLayout specifies the layout for the transformation matrices in the instance descriptor buffer and the motion transformation matrix buffer. Metal interprets the value of this property as the layout for the buffers that both “instanceDescriptorBuffer“ and “motionTransformBuffer“ reference. Defaults to `MTLMatrixLayoutColumnMajor`.
 func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) InstanceTransformationMatrixLayout() MatrixLayout {
+	defer runtime.KeepAlive(miiasd)
 	_r := objc.Send[MatrixLayout](objref.IDOf(miiasd), objc.RegisterName("instanceTransformationMatrixLayout"))
 	return _r
 }
 
 // MotionTransformType sets the type of motion transforms, either as a matrix or individual components. Defaults to `MTLTransformTypePackedFloat4x3`. Using a `MTLTransformTypeComponent` allows you to represent the rotation by a quaternion (instead as of part of the matrix), allowing for correct motion interpolation.
 func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) MotionTransformType() TransformType {
+	defer runtime.KeepAlive(miiasd)
 	_r := objc.Send[TransformType](objref.IDOf(miiasd), objc.RegisterName("motionTransformType"))
 	return _r
 }
 
 // MotionTransformStride sets the stride for motion transform. Defaults to `0`, indicating that transforms are tightly packed according to the motion transform type.
 func (miiasd *MTL4IndirectInstanceAccelerationStructureDescriptor) MotionTransformStride() int {
+	defer runtime.KeepAlive(miiasd)
 	_r := objc.Send[int](objref.IDOf(miiasd), objc.RegisterName("motionTransformStride"))
 	return _r
 }

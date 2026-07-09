@@ -5,6 +5,7 @@
 package glkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -121,48 +122,56 @@ func (epl *EffectPropertyLight) WithQuadraticAttenuation(quadraticAttenuation fl
 
 // WithTransform sets a transform applied to the light’s position and direction before calculating the contribution of the light.
 func (epl *EffectPropertyLight) WithTransform(transform *EffectPropertyTransform) *EffectPropertyLight {
+	defer runtime.KeepAlive(transform)
 	objc.Send[objc.ID](objref.IDOf(epl), objc.RegisterName("setTransform:"), objref.IDOf(transform))
 	return epl
 }
 
 // Enabled returns the enabled.
 func (epl *EffectPropertyLight) Enabled() uint8 {
+	defer runtime.KeepAlive(epl)
 	_r := objc.Send[uint8](objref.IDOf(epl), objc.RegisterName("enabled"))
 	return _r
 }
 
 // SpotExponent returns the spot exponent.
 func (epl *EffectPropertyLight) SpotExponent() float32 {
+	defer runtime.KeepAlive(epl)
 	_r := objc.Send[float32](objref.IDOf(epl), objc.RegisterName("spotExponent"))
 	return _r
 }
 
 // SpotCutoff returns the spot cutoff.
 func (epl *EffectPropertyLight) SpotCutoff() float32 {
+	defer runtime.KeepAlive(epl)
 	_r := objc.Send[float32](objref.IDOf(epl), objc.RegisterName("spotCutoff"))
 	return _r
 }
 
 // ConstantAttenuation returns the constant attenuation.
 func (epl *EffectPropertyLight) ConstantAttenuation() float32 {
+	defer runtime.KeepAlive(epl)
 	_r := objc.Send[float32](objref.IDOf(epl), objc.RegisterName("constantAttenuation"))
 	return _r
 }
 
 // LinearAttenuation returns the linear attenuation.
 func (epl *EffectPropertyLight) LinearAttenuation() float32 {
+	defer runtime.KeepAlive(epl)
 	_r := objc.Send[float32](objref.IDOf(epl), objc.RegisterName("linearAttenuation"))
 	return _r
 }
 
 // QuadraticAttenuation returns the quadratic attenuation.
 func (epl *EffectPropertyLight) QuadraticAttenuation() float32 {
+	defer runtime.KeepAlive(epl)
 	_r := objc.Send[float32](objref.IDOf(epl), objc.RegisterName("quadraticAttenuation"))
 	return _r
 }
 
 // Transform returns the transform.
 func (epl *EffectPropertyLight) Transform() *EffectPropertyTransform {
+	defer runtime.KeepAlive(epl)
 	_r := objc.Send[objc.ID](objref.IDOf(epl), objc.RegisterName("transform"))
 	return EffectPropertyTransformFromID(_r)
 }

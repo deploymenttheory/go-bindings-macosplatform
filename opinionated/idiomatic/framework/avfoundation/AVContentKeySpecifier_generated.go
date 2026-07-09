@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,46 +50,56 @@ func contentKeySpecifierAdopt(id objc.ID) *ContentKeySpecifier {
 
 // Description returns the object's -description text.
 func (cks *ContentKeySpecifier) Description() string {
+	defer runtime.KeepAlive(cks)
 	return rt.Description(objref.IDOf(cks))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cks *ContentKeySpecifier) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cks)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cks), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cks *ContentKeySpecifier) IsKind(className string) bool {
+	defer runtime.KeepAlive(cks)
 	return rt.IsKind(objref.IDOf(cks), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cks *ContentKeySpecifier) String() string {
+	defer runtime.KeepAlive(cks)
 	return rt.Description(objref.IDOf(cks))
 }
 
 // NewContentKeySpecifierForKeySystemIdentifierOptions creates a content key specifier.
-func NewContentKeySpecifierForKeySystemIdentifierOptions(keySystem obj.Object, contentKeyIdentifier obj.Object, options obj.Object) *ContentKeySpecifier {
+func NewContentKeySpecifierForKeySystemIdentifierOptions(keySystem obj.Object, contentKeyIdentifier obj.Object, options map[string]obj.Object) *ContentKeySpecifier {
+	defer runtime.KeepAlive(keySystem)
+	defer runtime.KeepAlive(contentKeyIdentifier)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVContentKeySpecifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForKeySystem:identifier:options:"), objref.IDOf(keySystem), objref.IDOf(contentKeyIdentifier), objref.IDOf(options))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForKeySystem:identifier:options:"), objref.IDOf(keySystem), objref.IDOf(contentKeyIdentifier), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return contentKeySpecifierAdopt(_id)
 }
 
 // KeySystem returns a valid key system for content keys.
-func (cks *ContentKeySpecifier) KeySystem() obj.Object {
+func (cks *ContentKeySpecifier) KeySystem() *foundation.String {
+	defer runtime.KeepAlive(cks)
 	_r := objc.Send[objc.ID](objref.IDOf(cks), objc.RegisterName("keySystem"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Identifier returns container and protocol-specific key identifier.
 func (cks *ContentKeySpecifier) Identifier() obj.Object {
+	defer runtime.KeepAlive(cks)
 	_r := objc.Send[objc.ID](objref.IDOf(cks), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
 // Options returns additional information necessary to obtain the key, can be empty if none needed.
-func (cks *ContentKeySpecifier) Options() obj.Object {
+func (cks *ContentKeySpecifier) Options() map[string]obj.Object {
+	defer runtime.KeepAlive(cks)
 	_r := objc.Send[objc.ID](objref.IDOf(cks), objc.RegisterName("options"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

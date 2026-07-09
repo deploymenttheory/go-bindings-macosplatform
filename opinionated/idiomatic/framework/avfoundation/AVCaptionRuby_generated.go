@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func captionRubyAdopt(id objc.ID) *CaptionRuby {
 
 // Description returns the object's -description text.
 func (cr *CaptionRuby) Description() string {
+	defer runtime.KeepAlive(cr)
 	return rt.Description(objref.IDOf(cr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cr *CaptionRuby) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cr *CaptionRuby) IsKind(className string) bool {
+	defer runtime.KeepAlive(cr)
 	return rt.IsKind(objref.IDOf(cr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cr *CaptionRuby) String() string {
+	defer runtime.KeepAlive(cr)
 	return rt.Description(objref.IDOf(cr))
 }
 
@@ -82,6 +89,7 @@ func NewCaptionRubyWithTextPositionAlignment(text string, position CaptionRubyPo
 
 // Text returns the ruby text
 func (cr *CaptionRuby) Text() string {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("text"))
 	if _r == 0 {
 		return ""
@@ -91,12 +99,14 @@ func (cr *CaptionRuby) Text() string {
 
 // Position returns the position of ruby text with respect to the ruby base.
 func (cr *CaptionRuby) Position() CaptionRubyPosition {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[CaptionRubyPosition](objref.IDOf(cr), objc.RegisterName("position"))
 	return _r
 }
 
 // Alignment returns the alignment of ruby text.
 func (cr *CaptionRuby) Alignment() CaptionRubyAlignment {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[CaptionRubyAlignment](objref.IDOf(cr), objc.RegisterName("alignment"))
 	return _r
 }

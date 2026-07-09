@@ -6,11 +6,13 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,6 +53,9 @@ func mTRClusterServiceAreaAdopt(id objc.ID) *MTRClusterServiceArea {
 
 // NewMTRClusterServiceAreaWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterServiceAreaWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterServiceArea {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterServiceArea")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterServiceAreaAdopt(_id)
@@ -60,6 +65,9 @@ func NewMTRClusterServiceAreaWithDeviceEndpointIDQueue(device *MTRDevice, endpoi
 //
 // SelectAreasWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcsa *MTRClusterServiceArea) SelectAreasWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRServiceAreaClusterSelectAreasParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRServiceAreaClusterSelectAreasResponseParams, err error) {
+	defer runtime.KeepAlive(mcsa)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRServiceAreaClusterSelectAreasResponseParams
 		err error
@@ -85,6 +93,9 @@ func (mcsa *MTRClusterServiceArea) SelectAreasWithParamsExpectedValuesExpectedVa
 //
 // SkipAreaWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcsa *MTRClusterServiceArea) SkipAreaWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRServiceAreaClusterSkipAreaParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRServiceAreaClusterSkipAreaResponseParams, err error) {
+	defer runtime.KeepAlive(mcsa)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRServiceAreaClusterSkipAreaResponseParams
 		err error
@@ -107,69 +118,91 @@ func (mcsa *MTRClusterServiceArea) SkipAreaWithParamsExpectedValuesExpectedValue
 }
 
 // ReadAttributeSupportedAreasWithParams reads attribute supported areas with params.
-func (mcsa *MTRClusterServiceArea) ReadAttributeSupportedAreasWithParams(params *MTRReadParams) obj.Object {
+func (mcsa *MTRClusterServiceArea) ReadAttributeSupportedAreasWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsa)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeSupportedAreasWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSupportedMapsWithParams reads attribute supported maps with params.
-func (mcsa *MTRClusterServiceArea) ReadAttributeSupportedMapsWithParams(params *MTRReadParams) obj.Object {
+func (mcsa *MTRClusterServiceArea) ReadAttributeSupportedMapsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsa)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeSupportedMapsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSelectedAreasWithParams reads attribute selected areas with params.
-func (mcsa *MTRClusterServiceArea) ReadAttributeSelectedAreasWithParams(params *MTRReadParams) obj.Object {
+func (mcsa *MTRClusterServiceArea) ReadAttributeSelectedAreasWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsa)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeSelectedAreasWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCurrentAreaWithParams reads attribute current area with params.
-func (mcsa *MTRClusterServiceArea) ReadAttributeCurrentAreaWithParams(params *MTRReadParams) obj.Object {
+func (mcsa *MTRClusterServiceArea) ReadAttributeCurrentAreaWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsa)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeCurrentAreaWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeEstimatedEndTimeWithParams reads attribute estimated end time with params.
-func (mcsa *MTRClusterServiceArea) ReadAttributeEstimatedEndTimeWithParams(params *MTRReadParams) obj.Object {
+func (mcsa *MTRClusterServiceArea) ReadAttributeEstimatedEndTimeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsa)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeEstimatedEndTimeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeProgressWithParams reads attribute progress with params.
-func (mcsa *MTRClusterServiceArea) ReadAttributeProgressWithParams(params *MTRReadParams) obj.Object {
+func (mcsa *MTRClusterServiceArea) ReadAttributeProgressWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsa)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeProgressWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcsa *MTRClusterServiceArea) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcsa *MTRClusterServiceArea) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsa)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcsa *MTRClusterServiceArea) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcsa *MTRClusterServiceArea) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsa)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcsa *MTRClusterServiceArea) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcsa *MTRClusterServiceArea) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsa)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcsa *MTRClusterServiceArea) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcsa *MTRClusterServiceArea) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsa)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcsa *MTRClusterServiceArea) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcsa *MTRClusterServiceArea) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsa)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterServiceArea)(nil)

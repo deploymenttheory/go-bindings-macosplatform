@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func captureSystemExposureBiasSliderAdopt(id objc.ID) *CaptureSystemExposureBias
 
 // NewCaptureSystemExposureBiasSliderWithDevice creates a slider to control the exposure bias of the specified capture device.
 func NewCaptureSystemExposureBiasSliderWithDevice(device *CaptureDevice) *CaptureSystemExposureBiasSlider {
+	defer runtime.KeepAlive(device)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureSystemExposureBiasSlider")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), objref.IDOf(device))
 	return captureSystemExposureBiasSliderAdopt(_id)
@@ -54,6 +57,7 @@ func NewCaptureSystemExposureBiasSliderWithDevice(device *CaptureDevice) *Captur
 
 // NewCaptureSystemExposureBiasSliderWithDeviceAction creates a slider to control the exposure bias of the specified capture device with an action to respond to exposure bias changes.
 func NewCaptureSystemExposureBiasSliderWithDeviceAction(device *CaptureDevice, action func(float32)) *CaptureSystemExposureBiasSlider {
+	defer runtime.KeepAlive(device)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureSystemExposureBiasSlider")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:action:"), objref.IDOf(device), objc.NewBlock(func(_ objc.Block, _b0 float32) { action(_b0) }))
 	return captureSystemExposureBiasSliderAdopt(_id)

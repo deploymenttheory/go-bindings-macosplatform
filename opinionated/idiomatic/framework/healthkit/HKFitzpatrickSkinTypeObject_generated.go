@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func fitzpatrickSkinTypeObjectAdopt(id objc.ID) *FitzpatrickSkinTypeObject {
 
 // Description returns the object's -description text.
 func (fsto *FitzpatrickSkinTypeObject) Description() string {
+	defer runtime.KeepAlive(fsto)
 	return rt.Description(objref.IDOf(fsto))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fsto *FitzpatrickSkinTypeObject) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fsto)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fsto), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fsto *FitzpatrickSkinTypeObject) IsKind(className string) bool {
+	defer runtime.KeepAlive(fsto)
 	return rt.IsKind(objref.IDOf(fsto), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fsto *FitzpatrickSkinTypeObject) String() string {
+	defer runtime.KeepAlive(fsto)
 	return rt.Description(objref.IDOf(fsto))
 }
 
@@ -74,6 +81,7 @@ func NewFitzpatrickSkinTypeObject() *FitzpatrickSkinTypeObject {
 
 // SkinType returns the skin type.
 func (fsto *FitzpatrickSkinTypeObject) SkinType() FitzpatrickSkinType {
+	defer runtime.KeepAlive(fsto)
 	_r := objc.Send[FitzpatrickSkinType](objref.IDOf(fsto), objc.RegisterName("skinType"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func messageReactionAdopt(id objc.ID) *MessageReaction {
 
 // Description returns the object's -description text.
 func (mr *MessageReaction) Description() string {
+	defer runtime.KeepAlive(mr)
 	return rt.Description(objref.IDOf(mr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mr *MessageReaction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mr *MessageReaction) IsKind(className string) bool {
+	defer runtime.KeepAlive(mr)
 	return rt.IsKind(objref.IDOf(mr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mr *MessageReaction) String() string {
+	defer runtime.KeepAlive(mr)
 	return rt.Description(objref.IDOf(mr))
 }
 
@@ -73,12 +80,14 @@ func NewMessageReactionWithReactionTypeReactionDescriptionEmoji(reactionType Mes
 
 // ReactionType returns the reaction type.
 func (mr *MessageReaction) ReactionType() MessageReactionType {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[MessageReactionType](objref.IDOf(mr), objc.RegisterName("reactionType"))
 	return _r
 }
 
 // ReactionDescription returns the reaction description.
 func (mr *MessageReaction) ReactionDescription() string {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("reactionDescription"))
 	if _r == 0 {
 		return ""
@@ -88,6 +97,7 @@ func (mr *MessageReaction) ReactionDescription() string {
 
 // Emoji returns the emoji.
 func (mr *MessageReaction) Emoji() string {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("emoji"))
 	if _r == 0 {
 		return ""

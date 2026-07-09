@@ -5,8 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,23 +51,38 @@ func mTRDeviceControllerFactoryParamsAdopt(id objc.ID) *MTRDeviceControllerFacto
 
 // Description returns the object's -description text.
 func (mdcfp *MTRDeviceControllerFactoryParams) Description() string {
+	defer runtime.KeepAlive(mdcfp)
 	return rt.Description(objref.IDOf(mdcfp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdcfp *MTRDeviceControllerFactoryParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdcfp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdcfp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdcfp *MTRDeviceControllerFactoryParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdcfp)
 	return rt.IsKind(objref.IDOf(mdcfp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdcfp *MTRDeviceControllerFactoryParams) String() string {
+	defer runtime.KeepAlive(mdcfp)
 	return rt.Description(objref.IDOf(mdcfp))
+}
+
+// WithOtaProviderDelegate sets the ota provider delegate.
+func (mdcfp *MTRDeviceControllerFactoryParams) WithOtaProviderDelegate(otaProviderDelegate MTROTAProviderDelegate) *MTRDeviceControllerFactoryParams {
+	_shim := newMTROTAProviderDelegateShim(otaProviderDelegate)
+	_sel := objc.RegisterName("setOtaProviderDelegate:")
+	shim.Associate(objref.IDOf(mdcfp), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(mdcfp), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return mdcfp
 }
 
 // WithProductAttestationAuthorityCertificates sets the product attestation authority certificates.
@@ -82,6 +101,7 @@ func (mdcfp *MTRDeviceControllerFactoryParams) WithCertificationDeclarationCerti
 
 // WithPort sets the port.
 func (mdcfp *MTRDeviceControllerFactoryParams) WithPort(port obj.Object) *MTRDeviceControllerFactoryParams {
+	defer runtime.KeepAlive(port)
 	objc.Send[objc.ID](objref.IDOf(mdcfp), objc.RegisterName("setPort:"), objref.IDOf(port))
 	return mdcfp
 }
@@ -96,6 +116,7 @@ func (mdcfp *MTRDeviceControllerFactoryParams) WithShouldStartServer(shouldStart
 //
 // ProductAttestationAuthorityCertificates returns the collection as a Go slice.
 func (mdcfp *MTRDeviceControllerFactoryParams) ProductAttestationAuthorityCertificates() []obj.Object {
+	defer runtime.KeepAlive(mdcfp)
 	_arr := objc.Send[objc.ID](objref.IDOf(mdcfp), objc.RegisterName("productAttestationAuthorityCertificates"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -104,18 +125,21 @@ func (mdcfp *MTRDeviceControllerFactoryParams) ProductAttestationAuthorityCertif
 //
 // CertificationDeclarationCertificates returns the collection as a Go slice.
 func (mdcfp *MTRDeviceControllerFactoryParams) CertificationDeclarationCertificates() []obj.Object {
+	defer runtime.KeepAlive(mdcfp)
 	_arr := objc.Send[objc.ID](objref.IDOf(mdcfp), objc.RegisterName("certificationDeclarationCertificates"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Port returns the port.
-func (mdcfp *MTRDeviceControllerFactoryParams) Port() obj.Object {
+func (mdcfp *MTRDeviceControllerFactoryParams) Port() *foundation.Number {
+	defer runtime.KeepAlive(mdcfp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdcfp), objc.RegisterName("port"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ShouldStartServer wraps the corresponding Objective-C method.
 func (mdcfp *MTRDeviceControllerFactoryParams) ShouldStartServer() bool {
+	defer runtime.KeepAlive(mdcfp)
 	_r := objc.Send[bool](objref.IDOf(mdcfp), objc.RegisterName("shouldStartServer"))
 	return _r
 }

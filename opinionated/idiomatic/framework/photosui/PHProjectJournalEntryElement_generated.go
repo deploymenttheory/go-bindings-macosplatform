@@ -5,9 +5,12 @@
 package photosui
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,19 +56,22 @@ func NewProjectJournalEntryElement() *ProjectJournalEntryElement {
 }
 
 // Date returns date to which the provided asset and/or text pertain
-func (pjee *ProjectJournalEntryElement) Date() obj.Object {
+func (pjee *ProjectJournalEntryElement) Date() time.Time {
+	defer runtime.KeepAlive(pjee)
 	_r := objc.Send[objc.ID](objref.IDOf(pjee), objc.RegisterName("date"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // AssetElement returns representative asset, if any, for that date.
 func (pjee *ProjectJournalEntryElement) AssetElement() *ProjectAssetElement {
+	defer runtime.KeepAlive(pjee)
 	_r := objc.Send[objc.ID](objref.IDOf(pjee), objc.RegisterName("assetElement"))
 	return ProjectAssetElementFromID(_r)
 }
 
 // TextElement returns descriptive text (e.g., "Mom's Birthday") for that date.
 func (pjee *ProjectJournalEntryElement) TextElement() *ProjectTextElement {
+	defer runtime.KeepAlive(pjee)
 	_r := objc.Send[objc.ID](objref.IDOf(pjee), objc.RegisterName("textElement"))
 	return ProjectTextElementFromID(_r)
 }

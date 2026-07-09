@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -52,6 +55,8 @@ func NewMTRSubscribeParams() *MTRSubscribeParams {
 
 // NewMTRSubscribeParamsWithMinIntervalMaxInterval initialize an MTRSubscribeParams.  Must provide a minInterval and maxInterval; there are no default values for those.
 func NewMTRSubscribeParamsWithMinIntervalMaxInterval(minInterval obj.Object, maxInterval obj.Object) *MTRSubscribeParams {
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRSubscribeParams")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMinInterval:maxInterval:"), objref.IDOf(minInterval), objref.IDOf(maxInterval))
 	return mTRSubscribeParamsAdopt(_id)
@@ -71,12 +76,14 @@ func (msp *MTRSubscribeParams) WithResubscribeAutomatically(resubscribeAutomatic
 
 // WithMinInterval sets the minimum time, in seconds, between consecutive reports a server will send for this subscription.  This can be used to rate-limit the subscription traffic.  Any non-negative value is allowed, including 0.
 func (msp *MTRSubscribeParams) WithMinInterval(minInterval obj.Object) *MTRSubscribeParams {
+	defer runtime.KeepAlive(minInterval)
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setMinInterval:"), objref.IDOf(minInterval))
 	return msp
 }
 
 // WithMaxInterval sets the suggested maximum time, in seconds, during which the server is allowed to send no reports at all for this subscription.  Must be at least as large as minInterval.  The server is allowed to use a larger time than this as the maxInterval it selects if it needs to (e.g. to meet its power budget).
 func (msp *MTRSubscribeParams) WithMaxInterval(maxInterval obj.Object) *MTRSubscribeParams {
+	defer runtime.KeepAlive(maxInterval)
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setMaxInterval:"), objref.IDOf(maxInterval))
 	return msp
 }
@@ -89,12 +96,14 @@ func (msp *MTRSubscribeParams) WithReportEventsUrgently(reportEventsUrgently boo
 
 // WithKeepPreviousSubscriptions sets the keep previous subscriptions.
 func (msp *MTRSubscribeParams) WithKeepPreviousSubscriptions(keepPreviousSubscriptions obj.Object) *MTRSubscribeParams {
+	defer runtime.KeepAlive(keepPreviousSubscriptions)
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setKeepPreviousSubscriptions:"), objref.IDOf(keepPreviousSubscriptions))
 	return msp
 }
 
 // WithAutoResubscribe sets the auto resubscribe.
 func (msp *MTRSubscribeParams) WithAutoResubscribe(autoResubscribe obj.Object) *MTRSubscribeParams {
+	defer runtime.KeepAlive(autoResubscribe)
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setAutoResubscribe:"), objref.IDOf(autoResubscribe))
 	return msp
 }
@@ -107,6 +116,7 @@ func (msp *MTRSubscribeParams) WithFilterByFabric(filterByFabric bool) *MTRSubsc
 
 // WithMinEventNumber sets sets a filter for which events will be reported in the read/subscribe interaction. If nil (the default value), all of the queued events will be reported from lowest to highest event number. If not nil, queued events with an event number smaller than minEventNumber will not be reported.
 func (msp *MTRSubscribeParams) WithMinEventNumber(minEventNumber obj.Object) *MTRSubscribeParams {
+	defer runtime.KeepAlive(minEventNumber)
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setMinEventNumber:"), objref.IDOf(minEventNumber))
 	return msp
 }
@@ -119,50 +129,58 @@ func (msp *MTRSubscribeParams) WithAssumeUnknownAttributesReportable(assumeUnkno
 
 // WithFabricFiltered sets the fabric filtered.
 func (msp *MTRSubscribeParams) WithFabricFiltered(fabricFiltered obj.Object) *MTRSubscribeParams {
+	defer runtime.KeepAlive(fabricFiltered)
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setFabricFiltered:"), objref.IDOf(fabricFiltered))
 	return msp
 }
 
 // ShouldReplaceExistingSubscriptions wraps the corresponding Objective-C method.
 func (msp *MTRSubscribeParams) ShouldReplaceExistingSubscriptions() bool {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[bool](objref.IDOf(msp), objc.RegisterName("shouldReplaceExistingSubscriptions"))
 	return _r
 }
 
 // ShouldResubscribeAutomatically wraps the corresponding Objective-C method.
 func (msp *MTRSubscribeParams) ShouldResubscribeAutomatically() bool {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[bool](objref.IDOf(msp), objc.RegisterName("shouldResubscribeAutomatically"))
 	return _r
 }
 
 // MinInterval returns the minimum time, in seconds, between consecutive reports a server will send for this subscription.  This can be used to rate-limit the subscription traffic.  Any non-negative value is allowed, including 0.
-func (msp *MTRSubscribeParams) MinInterval() obj.Object {
+func (msp *MTRSubscribeParams) MinInterval() *foundation.Number {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("minInterval"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MaxInterval returns the suggested maximum time, in seconds, during which the server is allowed to send no reports at all for this subscription.  Must be at least as large as minInterval.  The server is allowed to use a larger time than this as the maxInterval it selects if it needs to (e.g. to meet its power budget).
-func (msp *MTRSubscribeParams) MaxInterval() obj.Object {
+func (msp *MTRSubscribeParams) MaxInterval() *foundation.Number {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("maxInterval"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ShouldReportEventsUrgently wraps the corresponding Objective-C method.
 func (msp *MTRSubscribeParams) ShouldReportEventsUrgently() bool {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[bool](objref.IDOf(msp), objc.RegisterName("shouldReportEventsUrgently"))
 	return _r
 }
 
 // KeepPreviousSubscriptions returns the keep previous subscriptions.
-func (msp *MTRSubscribeParams) KeepPreviousSubscriptions() obj.Object {
+func (msp *MTRSubscribeParams) KeepPreviousSubscriptions() *foundation.Number {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("keepPreviousSubscriptions"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // AutoResubscribe returns the auto resubscribe.
-func (msp *MTRSubscribeParams) AutoResubscribe() obj.Object {
+func (msp *MTRSubscribeParams) AutoResubscribe() *foundation.Number {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("autoResubscribe"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 var _ MTRReadParamsProvider = (*MTRSubscribeParams)(nil)

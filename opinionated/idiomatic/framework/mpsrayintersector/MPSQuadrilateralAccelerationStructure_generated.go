@@ -5,6 +5,8 @@
 package mpsrayintersector
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -106,6 +108,7 @@ func (qas *QuadrilateralAccelerationStructure) WithUsage(usage AccelerationStruc
 
 // QuadrilateralCount returns number of quads. Changes to this property require rebuilding the acceleration structure. This is an alias for the polygonCount property.
 func (qas *QuadrilateralAccelerationStructure) QuadrilateralCount() int {
+	defer runtime.KeepAlive(qas)
 	_r := objc.Send[int](objref.IDOf(qas), objc.RegisterName("quadrilateralCount"))
 	return _r
 }

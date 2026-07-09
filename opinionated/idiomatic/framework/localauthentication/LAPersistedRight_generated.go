@@ -5,6 +5,8 @@
 package localauthentication
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,12 +61,14 @@ func (pr *PersistedRight) WithTag(tag int) *PersistedRight {
 
 // Key returns managed private key
 func (pr *PersistedRight) Key() *PrivateKey {
+	defer runtime.KeepAlive(pr)
 	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("key"))
 	return PrivateKeyFromID(_r)
 }
 
 // Secret returns generic secret This is the generic secret that would have been stored along with the right
 func (pr *PersistedRight) Secret() *Secret {
+	defer runtime.KeepAlive(pr)
 	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("secret"))
 	return SecretFromID(_r)
 }

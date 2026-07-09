@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,8 @@ func customMigrationStageAdopt(id objc.ID) *CustomMigrationStage {
 
 // NewCustomMigrationStageWithCurrentModelReferenceNextModelReference creates a custom migration stage with the specified source and destination model references.
 func NewCustomMigrationStageWithCurrentModelReferenceNextModelReference(currentModel *ManagedObjectModelReference, nextModel *ManagedObjectModelReference) *CustomMigrationStage {
+	defer runtime.KeepAlive(currentModel)
+	defer runtime.KeepAlive(nextModel)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCustomMigrationStage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCurrentModelReference:nextModelReference:"), objref.IDOf(currentModel), objref.IDOf(nextModel))
 	return customMigrationStageAdopt(_id)
@@ -60,12 +64,14 @@ func (cms *CustomMigrationStage) WithLabel(label string) *CustomMigrationStage {
 
 // CurrentModel returns the current model.
 func (cms *CustomMigrationStage) CurrentModel() *ManagedObjectModelReference {
+	defer runtime.KeepAlive(cms)
 	_r := objc.Send[objc.ID](objref.IDOf(cms), objc.RegisterName("currentModel"))
 	return ManagedObjectModelReferenceFromID(_r)
 }
 
 // NextModel returns the next model.
 func (cms *CustomMigrationStage) NextModel() *ManagedObjectModelReference {
+	defer runtime.KeepAlive(cms)
 	_r := objc.Send[objc.ID](objref.IDOf(cms), objc.RegisterName("nextModel"))
 	return ManagedObjectModelReferenceFromID(_r)
 }

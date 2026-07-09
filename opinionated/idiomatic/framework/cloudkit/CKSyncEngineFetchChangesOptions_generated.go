@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func syncEngineFetchChangesOptionsAdopt(id objc.ID) *SyncEngineFetchChangesOptio
 
 // Description returns the object's -description text.
 func (sefco *SyncEngineFetchChangesOptions) Description() string {
+	defer runtime.KeepAlive(sefco)
 	return rt.Description(objref.IDOf(sefco))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sefco *SyncEngineFetchChangesOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sefco)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sefco), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sefco *SyncEngineFetchChangesOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(sefco)
 	return rt.IsKind(objref.IDOf(sefco), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sefco *SyncEngineFetchChangesOptions) String() string {
+	defer runtime.KeepAlive(sefco)
 	return rt.Description(objref.IDOf(sefco))
 }
 
 // NewSyncEngineFetchChangesOptionsWithScope initializes a set of options with the specific scope.
 func NewSyncEngineFetchChangesOptionsWithScope(scope *SyncEngineFetchChangesScope) *SyncEngineFetchChangesOptions {
+	defer runtime.KeepAlive(scope)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFetchChangesOptions")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScope:"), objref.IDOf(scope))
 	return syncEngineFetchChangesOptionsAdopt(_id)
@@ -75,12 +83,14 @@ func NewSyncEngineFetchChangesOptionsWithScope(scope *SyncEngineFetchChangesScop
 
 // WithScope sets the scope in which to fetch changes from the server.
 func (sefco *SyncEngineFetchChangesOptions) WithScope(scope *SyncEngineFetchChangesScope) *SyncEngineFetchChangesOptions {
+	defer runtime.KeepAlive(scope)
 	objc.Send[objc.ID](objref.IDOf(sefco), objc.RegisterName("setScope:"), objref.IDOf(scope))
 	return sefco
 }
 
 // WithOperationGroup sets the operation group to use for the underlying CloudKit operations.
 func (sefco *SyncEngineFetchChangesOptions) WithOperationGroup(operationGroup *OperationGroup) *SyncEngineFetchChangesOptions {
+	defer runtime.KeepAlive(operationGroup)
 	objc.Send[objc.ID](objref.IDOf(sefco), objc.RegisterName("setOperationGroup:"), objref.IDOf(operationGroup))
 	return sefco
 }
@@ -94,12 +104,14 @@ func (sefco *SyncEngineFetchChangesOptions) WithPrioritizedZoneIDs(items ...*Rec
 
 // Scope returns the scope in which to fetch changes from the server.
 func (sefco *SyncEngineFetchChangesOptions) Scope() *SyncEngineFetchChangesScope {
+	defer runtime.KeepAlive(sefco)
 	_r := objc.Send[objc.ID](objref.IDOf(sefco), objc.RegisterName("scope"))
 	return SyncEngineFetchChangesScopeFromID(_r)
 }
 
 // OperationGroup returns the operation group to use for the underlying CloudKit operations. - Tip: Providing a specific operation group helps you to identify and analyze the telemetry of fetch operations in CloudKit Console. The default value is `nil`.
 func (sefco *SyncEngineFetchChangesOptions) OperationGroup() *OperationGroup {
+	defer runtime.KeepAlive(sefco)
 	_r := objc.Send[objc.ID](objref.IDOf(sefco), objc.RegisterName("operationGroup"))
 	return OperationGroupFromID(_r)
 }
@@ -108,6 +120,7 @@ func (sefco *SyncEngineFetchChangesOptions) OperationGroup() *OperationGroup {
 //
 // PrioritizedZoneIDs returns the collection as a Go slice.
 func (sefco *SyncEngineFetchChangesOptions) PrioritizedZoneIDs() []*RecordZoneID {
+	defer runtime.KeepAlive(sefco)
 	_arr := objc.Send[objc.ID](objref.IDOf(sefco), objc.RegisterName("prioritizedZoneIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }

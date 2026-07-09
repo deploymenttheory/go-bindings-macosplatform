@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +51,27 @@ func statisticsCollectionAdopt(id objc.ID) *StatisticsCollection {
 
 // Description returns the object's -description text.
 func (sc *StatisticsCollection) Description() string {
+	defer runtime.KeepAlive(sc)
 	return rt.Description(objref.IDOf(sc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sc *StatisticsCollection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sc *StatisticsCollection) IsKind(className string) bool {
+	defer runtime.KeepAlive(sc)
 	return rt.IsKind(objref.IDOf(sc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sc *StatisticsCollection) String() string {
+	defer runtime.KeepAlive(sc)
 	return rt.Description(objref.IDOf(sc))
 }
 
@@ -75,26 +82,31 @@ func NewStatisticsCollection() *StatisticsCollection {
 }
 
 // StatisticsForDate returns the statistics object for the time interval that contains the provided date.
-func (sc *StatisticsCollection) StatisticsForDate(date obj.Object) *Statistics {
-	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("statisticsForDate:"), objref.IDOf(date))
+func (sc *StatisticsCollection) StatisticsForDate(date time.Time) *Statistics {
+	defer runtime.KeepAlive(sc)
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("statisticsForDate:"), rt.TimeToNSDate(date))
 	return StatisticsFromID(_r)
 }
 
 // EnumerateStatisticsFromDateToDateWith enumerates the statistics objects for all the time intervals from the start date until the end date.
-func (sc *StatisticsCollection) EnumerateStatisticsFromDateToDateWith(startDate obj.Object, endDate obj.Object, block func(obj.Object, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("enumerateStatisticsFromDate:toDate:withBlock:"), objref.IDOf(startDate), objref.IDOf(endDate), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
+func (sc *StatisticsCollection) EnumerateStatisticsFromDateToDateWith(startDate time.Time, endDate time.Time, block func(obj.Object, *bool)) {
+	defer runtime.KeepAlive(sc)
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("enumerateStatisticsFromDate:toDate:withBlock:"), rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
 // Statistics returns an array of statistics objects representing the populated time intervals covered by the statistics collection query.
 //
 // Statistics returns the collection as a Go slice.
 func (sc *StatisticsCollection) Statistics() []*Statistics {
+	defer runtime.KeepAlive(sc)
 	_arr := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("statistics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Statistics { return StatisticsFromID(_id) })
 }
 
 // Sources returns a set containing all the sources that had samples matched by the statistics collection query.
-func (sc *StatisticsCollection) Sources() obj.Object {
+// The order of the returned elements is unspecified.
+func (sc *StatisticsCollection) Sources() []*Source {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("sources"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *Source { return SourceFromID(_id) })
 }

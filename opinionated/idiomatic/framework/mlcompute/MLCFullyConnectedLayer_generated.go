@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,30 +67,35 @@ func (fcl *FullyConnectedLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) 
 
 // Descriptor returns the convolution descriptor
 func (fcl *FullyConnectedLayer) Descriptor() *ConvolutionDescriptor {
+	defer runtime.KeepAlive(fcl)
 	_r := objc.Send[objc.ID](objref.IDOf(fcl), objc.RegisterName("descriptor"))
 	return ConvolutionDescriptorFromID(_r)
 }
 
 // Weights returns the weights tensor used by the convolution layer
 func (fcl *FullyConnectedLayer) Weights() *Tensor {
+	defer runtime.KeepAlive(fcl)
 	_r := objc.Send[objc.ID](objref.IDOf(fcl), objc.RegisterName("weights"))
 	return TensorFromID(_r)
 }
 
 // Biases returns the bias tensor used by the convolution layer
 func (fcl *FullyConnectedLayer) Biases() *Tensor {
+	defer runtime.KeepAlive(fcl)
 	_r := objc.Send[objc.ID](objref.IDOf(fcl), objc.RegisterName("biases"))
 	return TensorFromID(_r)
 }
 
 // WeightsParameter returns the weights tensor parameter used for optimizer update
 func (fcl *FullyConnectedLayer) WeightsParameter() *TensorParameter {
+	defer runtime.KeepAlive(fcl)
 	_r := objc.Send[objc.ID](objref.IDOf(fcl), objc.RegisterName("weightsParameter"))
 	return TensorParameterFromID(_r)
 }
 
 // BiasesParameter returns the bias tensor parameter used for optimizer update
 func (fcl *FullyConnectedLayer) BiasesParameter() *TensorParameter {
+	defer runtime.KeepAlive(fcl)
 	_r := objc.Send[objc.ID](objref.IDOf(fcl), objc.RegisterName("biasesParameter"))
 	return TensorParameterFromID(_r)
 }

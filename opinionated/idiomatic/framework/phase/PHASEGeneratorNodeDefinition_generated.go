@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,65 +55,76 @@ func (gnd *GeneratorNodeDefinition) WithRate(rate float64) *GeneratorNodeDefinit
 
 // WithGroup sets a group this node conforms to for gain and rate control.
 func (gnd *GeneratorNodeDefinition) WithGroup(group *Group) *GeneratorNodeDefinition {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(gnd), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return gnd
 }
 
 // WithGainMetaParameterDefinition sets a meta parameter that dynamically changes the audio’s loudness.
 func (gnd *GeneratorNodeDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *GeneratorNodeDefinition {
+	defer runtime.KeepAlive(gainMetaParameterDefinition)
 	objc.Send[objc.ID](objref.IDOf(gnd), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
 	return gnd
 }
 
 // WithRateMetaParameterDefinition sets a meta parameter that dynamically changes the audio’s rate.
 func (gnd *GeneratorNodeDefinition) WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *GeneratorNodeDefinition {
+	defer runtime.KeepAlive(rateMetaParameterDefinition)
 	objc.Send[objc.ID](objref.IDOf(gnd), objc.RegisterName("setRateMetaParameterDefinition:"), objref.IDOf(rateMetaParameterDefinition))
 	return gnd
 }
 
 // SetCalibrationModeLevel selects a loudness correction strategy and reference level.
 func (gnd *GeneratorNodeDefinition) SetCalibrationModeLevel(calibrationMode CalibrationMode, level float64) {
+	defer runtime.KeepAlive(gnd)
 	objc.Send[objc.ID](objref.IDOf(gnd), objc.RegisterName("setCalibrationMode:level:"), calibrationMode, level)
 }
 
 // CalibrationMode returns the generator's calibration mode. The default value is PHASECalibrationModeNone.
 func (gnd *GeneratorNodeDefinition) CalibrationMode() CalibrationMode {
+	defer runtime.KeepAlive(gnd)
 	_r := objc.Send[CalibrationMode](objref.IDOf(gnd), objc.RegisterName("calibrationMode"))
 	return _r
 }
 
 // Level returns the generator's level. The default value is 1.
 func (gnd *GeneratorNodeDefinition) Level() float64 {
+	defer runtime.KeepAlive(gnd)
 	_r := objc.Send[float64](objref.IDOf(gnd), objc.RegisterName("level"))
 	return _r
 }
 
 // Rate returns linear rate scalar.
 func (gnd *GeneratorNodeDefinition) Rate() float64 {
+	defer runtime.KeepAlive(gnd)
 	_r := objc.Send[float64](objref.IDOf(gnd), objc.RegisterName("rate"))
 	return _r
 }
 
 // Group returns the PHASEGroup object this generator should be associated with for gain and rate control.
 func (gnd *GeneratorNodeDefinition) Group() *Group {
+	defer runtime.KeepAlive(gnd)
 	_r := objc.Send[objc.ID](objref.IDOf(gnd), objc.RegisterName("group"))
 	return GroupFromID(_r)
 }
 
 // GainMetaParameterDefinition returns optionally attach a metaparameter definition here to enable dynamic control of the gain during playback.
 func (gnd *GeneratorNodeDefinition) GainMetaParameterDefinition() *NumberMetaParameterDefinition {
+	defer runtime.KeepAlive(gnd)
 	_r := objc.Send[objc.ID](objref.IDOf(gnd), objc.RegisterName("gainMetaParameterDefinition"))
 	return NumberMetaParameterDefinitionFromID(_r)
 }
 
 // RateMetaParameterDefinition returns optionally attach a metaparameter definition here to enable dynamic control of the rate during playback.
 func (gnd *GeneratorNodeDefinition) RateMetaParameterDefinition() *NumberMetaParameterDefinition {
+	defer runtime.KeepAlive(gnd)
 	_r := objc.Send[objc.ID](objref.IDOf(gnd), objc.RegisterName("rateMetaParameterDefinition"))
 	return NumberMetaParameterDefinitionFromID(_r)
 }
 
 // MixerDefinition returns the readonly property that returns the PHASEMixerDefinition this generator was created with and assigned to.
 func (gnd *GeneratorNodeDefinition) MixerDefinition() *MixerDefinition {
+	defer runtime.KeepAlive(gnd)
 	_r := objc.Send[objc.ID](objref.IDOf(gnd), objc.RegisterName("mixerDefinition"))
 	return MixerDefinitionFromID(_r)
 }

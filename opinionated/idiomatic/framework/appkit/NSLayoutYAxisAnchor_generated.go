@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,24 +55,32 @@ func NewLayoutYAxisAnchor() *LayoutYAxisAnchor {
 
 // AnchorWithOffsetToAnchor creates a layout dimension object from two anchors.
 func (lyaa *LayoutYAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *LayoutYAxisAnchor) *LayoutDimension {
+	defer runtime.KeepAlive(lyaa)
+	defer runtime.KeepAlive(otherAnchor)
 	_r := objc.Send[objc.ID](objref.IDOf(lyaa), objc.RegisterName("anchorWithOffsetToAnchor:"), objref.IDOf(otherAnchor))
 	return LayoutDimensionFromID(_r)
 }
 
 // ConstraintEqualToSystemSpacingBelowAnchorMultiplier returns a constraint that defines the specific distance at which the current anchor is positioned below the specified anchor.
 func (lyaa *LayoutYAxisAnchor) ConstraintEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
+	defer runtime.KeepAlive(lyaa)
+	defer runtime.KeepAlive(anchor)
 	_r := objc.Send[objc.ID](objref.IDOf(lyaa), objc.RegisterName("constraintEqualToSystemSpacingBelowAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier returns a constraint that defines the minimum distance by which the current anchor is positioned below the specified anchor.
 func (lyaa *LayoutYAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
+	defer runtime.KeepAlive(lyaa)
+	defer runtime.KeepAlive(anchor)
 	_r := objc.Send[objc.ID](objref.IDOf(lyaa), objc.RegisterName("constraintGreaterThanOrEqualToSystemSpacingBelowAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier returns a constraint that defines the maximum distance by which the current anchor is positioned below the specified anchor.
 func (lyaa *LayoutYAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
+	defer runtime.KeepAlive(lyaa)
+	defer runtime.KeepAlive(anchor)
 	_r := objc.Send[objc.ID](objref.IDOf(lyaa), objc.RegisterName("constraintLessThanOrEqualToSystemSpacingBelowAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
 	return LayoutConstraintFromID(_r)
 }

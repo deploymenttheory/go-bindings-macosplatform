@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -71,12 +73,14 @@ func (norp *NNOptimizerRMSProp) WithLabel(label string) *NNOptimizerRMSProp {
 
 // Decay returns the decay at which we update sumOfSquares Default value is 0.9
 func (norp *NNOptimizerRMSProp) Decay() float64 {
+	defer runtime.KeepAlive(norp)
 	_r := objc.Send[float64](objref.IDOf(norp), objc.RegisterName("decay"))
 	return _r
 }
 
 // Epsilon returns the epsilon at which we update values This value is usually used to ensure to avoid divide by 0, default value is 1e-8
 func (norp *NNOptimizerRMSProp) Epsilon() float32 {
+	defer runtime.KeepAlive(norp)
 	_r := objc.Send[float32](objref.IDOf(norp), objc.RegisterName("epsilon"))
 	return _r
 }

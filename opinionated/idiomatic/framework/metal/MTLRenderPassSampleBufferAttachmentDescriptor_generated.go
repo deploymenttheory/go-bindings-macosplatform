@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func renderPassSampleBufferAttachmentDescriptorAdopt(id objc.ID) *RenderPassSamp
 
 // Description returns the object's -description text.
 func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) Description() string {
+	defer runtime.KeepAlive(rpsbad)
 	return rt.Description(objref.IDOf(rpsbad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rpsbad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rpsbad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(rpsbad)
 	return rt.IsKind(objref.IDOf(rpsbad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) String() string {
+	defer runtime.KeepAlive(rpsbad)
 	return rt.Description(objref.IDOf(rpsbad))
 }
 
@@ -98,24 +105,28 @@ func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) WithEndOfFragmentSampl
 
 // StartOfVertexSampleIndex returns the sample index to use to store the sample taken at the start of vertex processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
 func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) StartOfVertexSampleIndex() int {
+	defer runtime.KeepAlive(rpsbad)
 	_r := objc.Send[int](objref.IDOf(rpsbad), objc.RegisterName("startOfVertexSampleIndex"))
 	return _r
 }
 
 // EndOfVertexSampleIndex returns the sample index to use to store the sample taken at the end of vertex processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
 func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) EndOfVertexSampleIndex() int {
+	defer runtime.KeepAlive(rpsbad)
 	_r := objc.Send[int](objref.IDOf(rpsbad), objc.RegisterName("endOfVertexSampleIndex"))
 	return _r
 }
 
 // StartOfFragmentSampleIndex returns the sample index to use to store the sample taken at the start of fragment processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
 func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) StartOfFragmentSampleIndex() int {
+	defer runtime.KeepAlive(rpsbad)
 	_r := objc.Send[int](objref.IDOf(rpsbad), objc.RegisterName("startOfFragmentSampleIndex"))
 	return _r
 }
 
 // EndOfFragmentSampleIndex returns the sample index to use to store the sample taken at the end of fragment processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
 func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) EndOfFragmentSampleIndex() int {
+	defer runtime.KeepAlive(rpsbad)
 	_r := objc.Send[int](objref.IDOf(rpsbad), objc.RegisterName("endOfFragmentSampleIndex"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func geometryAdopt(id objc.ID) *Geometry {
 
 // Description returns the object's -description text.
 func (g *Geometry) Description() string {
+	defer runtime.KeepAlive(g)
 	return rt.Description(objref.IDOf(g))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (g *Geometry) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(g), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (g *Geometry) IsKind(className string) bool {
+	defer runtime.KeepAlive(g)
 	return rt.IsKind(objref.IDOf(g), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (g *Geometry) String() string {
+	defer runtime.KeepAlive(g)
 	return rt.Description(objref.IDOf(g))
 }
 
@@ -83,6 +90,7 @@ func (g *Geometry) WithMaterials(items ...*Material) *Geometry {
 
 // WithFirstMaterial sets the first material attached to the geometry.
 func (g *Geometry) WithFirstMaterial(firstMaterial *Material) *Geometry {
+	defer runtime.KeepAlive(firstMaterial)
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return g
 }
@@ -96,6 +104,7 @@ func (g *Geometry) WithLevelsOfDetail(items ...*LevelOfDetail) *Geometry {
 
 // WithTessellator sets the tessellator.
 func (g *Geometry) WithTessellator(tessellator *GeometryTessellator) *Geometry {
+	defer runtime.KeepAlive(tessellator)
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return g
 }
@@ -114,51 +123,63 @@ func (g *Geometry) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *
 
 // WithEdgeCreasesElement sets the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 func (g *Geometry) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Geometry {
+	defer runtime.KeepAlive(edgeCreasesElement)
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return g
 }
 
 // WithEdgeCreasesSource sets the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 func (g *Geometry) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Geometry {
+	defer runtime.KeepAlive(edgeCreasesSource)
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return g
 }
 
 // InsertMaterialAtIndex attaches a material to the geometry at the specified index.
 func (g *Geometry) InsertMaterialAtIndex(material *Material, index int) {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(material)
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("insertMaterial:atIndex:"), objref.IDOf(material), index)
 }
 
 // RemoveMaterialAtIndex removes a material attached to the geometry.
 func (g *Geometry) RemoveMaterialAtIndex(index int) {
+	defer runtime.KeepAlive(g)
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("removeMaterialAtIndex:"), index)
 }
 
 // ReplaceMaterialAtIndexWithMaterial replaces a material attached to the geometry with another.
 func (g *Geometry) ReplaceMaterialAtIndexWithMaterial(index int, material *Material) {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(material)
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("replaceMaterialAtIndex:withMaterial:"), index, objref.IDOf(material))
 }
 
 // MaterialWithName returns the first material attached to the geometry with the specified name.
 func (g *Geometry) MaterialWithName(name string) *Material {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("materialWithName:"), purego.NSString(name))
 	return MaterialFromID(_r)
 }
 
 // GeometrySourcesForSemantic returns the geometry sources for a specified semantic.
 func (g *Geometry) GeometrySourcesForSemantic(semantic obj.Object) []*GeometrySource {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(semantic)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("geometrySourcesForSemantic:"), objref.IDOf(semantic))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GeometrySource { return GeometrySourceFromID(_id) })
 }
 
 // GeometryElementAtIndex returns the geometry element at a specified index.
 func (g *Geometry) GeometryElementAtIndex(elementIndex int) *GeometryElement {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("geometryElementAtIndex:"), elementIndex)
 	return GeometryElementFromID(_r)
 }
 
 // Name determines the name of the receiver.
 func (g *Geometry) Name() string {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -170,12 +191,14 @@ func (g *Geometry) Name() string {
 //
 // Materials returns the collection as a Go slice.
 func (g *Geometry) Materials() []*Material {
+	defer runtime.KeepAlive(g)
 	_arr := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("materials"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Material { return MaterialFromID(_id) })
 }
 
 // FirstMaterial determines the first material of the geometry. Returns nil if the geometry has no material. This method is here for convenience. It is equivalent to the first object in the "materials" array above.
 func (g *Geometry) FirstMaterial() *Material {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("firstMaterial"))
 	return MaterialFromID(_r)
 }
@@ -184,6 +207,7 @@ func (g *Geometry) FirstMaterial() *Material {
 //
 // GeometrySources returns the collection as a Go slice.
 func (g *Geometry) GeometrySources() []*GeometrySource {
+	defer runtime.KeepAlive(g)
 	_arr := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("geometrySources"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GeometrySource { return GeometrySourceFromID(_id) })
 }
@@ -192,12 +216,14 @@ func (g *Geometry) GeometrySources() []*GeometrySource {
 //
 // GeometryElements returns the collection as a Go slice.
 func (g *Geometry) GeometryElements() []*GeometryElement {
+	defer runtime.KeepAlive(g)
 	_arr := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("geometryElements"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GeometryElement { return GeometryElementFromID(_id) })
 }
 
 // GeometryElementCount returns the number of geometry elements owned by the geometry.
 func (g *Geometry) GeometryElementCount() int {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[int](objref.IDOf(g), objc.RegisterName("geometryElementCount"))
 	return _r
 }
@@ -206,6 +232,7 @@ func (g *Geometry) GeometryElementCount() int {
 //
 // GeometrySourceChannels returns the collection as a Go slice.
 func (g *Geometry) GeometrySourceChannels() []obj.Object {
+	defer runtime.KeepAlive(g)
 	_arr := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("geometrySourceChannels"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -214,36 +241,42 @@ func (g *Geometry) GeometrySourceChannels() []obj.Object {
 //
 // LevelsOfDetail returns the collection as a Go slice.
 func (g *Geometry) LevelsOfDetail() []*LevelOfDetail {
+	defer runtime.KeepAlive(g)
 	_arr := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("levelsOfDetail"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LevelOfDetail { return LevelOfDetailFromID(_id) })
 }
 
 // Tessellator returns the tessellator.
 func (g *Geometry) Tessellator() *GeometryTessellator {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("tessellator"))
 	return GeometryTessellatorFromID(_r)
 }
 
 // SubdivisionLevel specifies the subdivision level of the receiver. Defaults to 0. A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
 func (g *Geometry) SubdivisionLevel() int {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[int](objref.IDOf(g), objc.RegisterName("subdivisionLevel"))
 	return _r
 }
 
 // WantsAdaptiveSubdivision reports whether specifies if the subdivision is adaptive or uniform. Defaults to true. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
 func (g *Geometry) WantsAdaptiveSubdivision() bool {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[bool](objref.IDOf(g), objc.RegisterName("wantsAdaptiveSubdivision"))
 	return _r
 }
 
 // EdgeCreasesElement specifies the edges creases that control the subdivision. Defaults to nil. The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
 func (g *Geometry) EdgeCreasesElement() *GeometryElement {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("edgeCreasesElement"))
 	return GeometryElementFromID(_r)
 }
 
 // EdgeCreasesSource specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
 func (g *Geometry) EdgeCreasesSource() *GeometrySource {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("edgeCreasesSource"))
 	return GeometrySourceFromID(_r)
 }

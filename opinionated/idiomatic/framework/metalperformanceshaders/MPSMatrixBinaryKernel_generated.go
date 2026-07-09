@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -84,30 +86,35 @@ func (mbk *MatrixBinaryKernel) WithLabel(label string) *MatrixBinaryKernel {
 
 // PrimarySourceMatrixOrigin returns the origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (mbk *MatrixBinaryKernel) PrimarySourceMatrixOrigin() metal.MTLOrigin {
+	defer runtime.KeepAlive(mbk)
 	_r := objc.Send[metal.MTLOrigin](objref.IDOf(mbk), objc.RegisterName("primarySourceMatrixOrigin"))
 	return _r
 }
 
 // SecondarySourceMatrixOrigin returns the origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (mbk *MatrixBinaryKernel) SecondarySourceMatrixOrigin() metal.MTLOrigin {
+	defer runtime.KeepAlive(mbk)
 	_r := objc.Send[metal.MTLOrigin](objref.IDOf(mbk), objc.RegisterName("secondarySourceMatrixOrigin"))
 	return _r
 }
 
 // ResultMatrixOrigin returns the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (mbk *MatrixBinaryKernel) ResultMatrixOrigin() metal.MTLOrigin {
+	defer runtime.KeepAlive(mbk)
 	_r := objc.Send[metal.MTLOrigin](objref.IDOf(mbk), objc.RegisterName("resultMatrixOrigin"))
 	return _r
 }
 
 // BatchStart returns the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
 func (mbk *MatrixBinaryKernel) BatchStart() int {
+	defer runtime.KeepAlive(mbk)
 	_r := objc.Send[int](objref.IDOf(mbk), objc.RegisterName("batchStart"))
 	return _r
 }
 
 // BatchSize returns the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
 func (mbk *MatrixBinaryKernel) BatchSize() int {
+	defer runtime.KeepAlive(mbk)
 	_r := objc.Send[int](objref.IDOf(mbk), objc.RegisterName("batchSize"))
 	return _r
 }

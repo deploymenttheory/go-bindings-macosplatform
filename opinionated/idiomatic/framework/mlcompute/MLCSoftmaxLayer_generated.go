@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,12 +67,14 @@ func (sl *SoftmaxLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Softmax
 
 // Operation returns the softmax operation.  Supported values are softmax and log softmax.
 func (sl *SoftmaxLayer) Operation() SoftmaxOperation {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[SoftmaxOperation](objref.IDOf(sl), objc.RegisterName("operation"))
 	return _r
 }
 
 // Dimension returns the  dimension over which softmax operation should be performed
 func (sl *SoftmaxLayer) Dimension() int {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[int](objref.IDOf(sl), objc.RegisterName("dimension"))
 	return _r
 }

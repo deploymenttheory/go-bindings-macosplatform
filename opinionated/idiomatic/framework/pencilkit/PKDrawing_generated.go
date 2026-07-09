@@ -5,6 +5,7 @@
 package pencilkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func drawingAdopt(id objc.ID) *Drawing {
 
 // Description returns the object's -description text.
 func (d *Drawing) Description() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (d *Drawing) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (d *Drawing) IsKind(className string) bool {
+	defer runtime.KeepAlive(d)
 	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (d *Drawing) String() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
@@ -83,11 +89,11 @@ func NewDrawingWithStrokes(strokes []*Stroke) *Drawing {
 	return drawingAdopt(_id)
 }
 
-// NewDrawingWithDataError initializes and returns the drawing with the specified data.
-func NewDrawingWithDataError(data obj.Object) (result *Drawing, err error) {
+// NewDrawingWithData initializes and returns the drawing with the specified data.
+func NewDrawingWithData(data []byte) (result *Drawing, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKDrawing")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:error:"), rt.BytesToNSData(data), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -95,31 +101,37 @@ func NewDrawingWithDataError(data obj.Object) (result *Drawing, err error) {
 }
 
 // DataRepresentation returns generate a data representation of the drawing.
-func (d *Drawing) DataRepresentation() obj.Object {
+func (d *Drawing) DataRepresentation() []byte {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("dataRepresentation"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ImageFromRectScale wraps the corresponding Objective-C method.
 func (d *Drawing) ImageFromRectScale(rect corefoundation.CGRect, scale float64) obj.Object {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("imageFromRect:scale:"), rect, scale)
 	return obj.Wrap(_r)
 }
 
 // DrawingByApplyingTransform returns a new drawing with `transform` applied.
 func (d *Drawing) DrawingByApplyingTransform(transform corefoundation.CGAffineTransform) *Drawing {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("drawingByApplyingTransform:"), transform)
 	return DrawingFromID(_r)
 }
 
 // DrawingByAppendingDrawing returns a new drawing by appending the contents of `drawing` on top of the receiver’s contents.
 func (d *Drawing) DrawingByAppendingDrawing(drawing *Drawing) *Drawing {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(drawing)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("drawingByAppendingDrawing:"), objref.IDOf(drawing))
 	return DrawingFromID(_r)
 }
 
 // DrawingByAppendingStrokes create a new drawing by appending an array of strokes to this drawing. This is a convenience method, to quickly add strokes to a drawing.
 func (d *Drawing) DrawingByAppendingStrokes(strokes []*Stroke) *Drawing {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("drawingByAppendingStrokes:"), purego.SliceToNSArray(strokes, func(_v *Stroke) objc.ID { return objref.IDOf(_v) }))
 	return DrawingFromID(_r)
 }
@@ -128,18 +140,21 @@ func (d *Drawing) DrawingByAppendingStrokes(strokes []*Stroke) *Drawing {
 //
 // Strokes returns the collection as a Go slice.
 func (d *Drawing) Strokes() []*Stroke {
+	defer runtime.KeepAlive(d)
 	_arr := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("strokes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Stroke { return StrokeFromID(_id) })
 }
 
 // Bounds returns the bounds of the drawing's contents, taking into account the rendered width of all content. If these bounds are used to render an image with `imageFromRect:scale:`, no contents will be cropped.
 func (d *Drawing) Bounds() corefoundation.CGRect {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(d), objc.RegisterName("bounds"))
 	return _r
 }
 
 // RequiredContentVersion returns the PencilKit version required to use this drawing.
 func (d *Drawing) RequiredContentVersion() ContentVersion {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[ContentVersion](objref.IDOf(d), objc.RegisterName("requiredContentVersion"))
 	return _r
 }

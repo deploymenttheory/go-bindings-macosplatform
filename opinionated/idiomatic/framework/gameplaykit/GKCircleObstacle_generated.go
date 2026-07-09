@@ -5,6 +5,7 @@
 package gameplaykit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -68,6 +69,7 @@ func (co *CircleObstacle) WithPosition(position unsafe.Pointer) *CircleObstacle 
 
 // Radius returns radius of the impassible circle
 func (co *CircleObstacle) Radius() float32 {
+	defer runtime.KeepAlive(co)
 	_r := objc.Send[float32](objref.IDOf(co), objc.RegisterName("radius"))
 	return _r
 }

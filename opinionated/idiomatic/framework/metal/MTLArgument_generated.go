@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func argumentAdopt(id objc.ID) *Argument {
 
 // Description returns the object's -description text.
 func (a *Argument) Description() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (a *Argument) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (a *Argument) IsKind(className string) bool {
+	defer runtime.KeepAlive(a)
 	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (a *Argument) String() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
@@ -74,6 +81,7 @@ func NewArgument() *Argument {
 
 // Name returns the name.
 func (a *Argument) Name() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -83,90 +91,105 @@ func (a *Argument) Name() string {
 
 // Type returns the type.
 func (a *Argument) Type() ArgumentType {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[ArgumentType](objref.IDOf(a), objc.RegisterName("type"))
 	return _r
 }
 
 // Access returns the access.
 func (a *Argument) Access() BindingAccess {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[BindingAccess](objref.IDOf(a), objc.RegisterName("access"))
 	return _r
 }
 
 // Index returns the index.
 func (a *Argument) Index() int {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("index"))
 	return _r
 }
 
 // IsActive reports whether the object is active.
 func (a *Argument) IsActive() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isActive"))
 	return _r
 }
 
 // BufferAlignment returns the buffer alignment.
 func (a *Argument) BufferAlignment() int {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("bufferAlignment"))
 	return _r
 }
 
 // BufferDataSize returns the buffer data size.
 func (a *Argument) BufferDataSize() int {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("bufferDataSize"))
 	return _r
 }
 
 // BufferDataType returns the buffer data type.
 func (a *Argument) BufferDataType() DataType {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[DataType](objref.IDOf(a), objc.RegisterName("bufferDataType"))
 	return _r
 }
 
 // BufferStructType returns the buffer struct type.
 func (a *Argument) BufferStructType() *StructType {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("bufferStructType"))
 	return StructTypeFromID(_r)
 }
 
 // BufferPointerType returns the buffer pointer type.
 func (a *Argument) BufferPointerType() *PointerType {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("bufferPointerType"))
 	return PointerTypeFromID(_r)
 }
 
 // ThreadgroupMemoryAlignment returns the threadgroup memory alignment.
 func (a *Argument) ThreadgroupMemoryAlignment() int {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("threadgroupMemoryAlignment"))
 	return _r
 }
 
 // ThreadgroupMemoryDataSize returns the threadgroup memory data size.
 func (a *Argument) ThreadgroupMemoryDataSize() int {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("threadgroupMemoryDataSize"))
 	return _r
 }
 
 // TextureType returns the texture type.
 func (a *Argument) TextureType() TextureType {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[TextureType](objref.IDOf(a), objc.RegisterName("textureType"))
 	return _r
 }
 
 // TextureDataType returns the texture data type.
 func (a *Argument) TextureDataType() DataType {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[DataType](objref.IDOf(a), objc.RegisterName("textureDataType"))
 	return _r
 }
 
 // IsDepthTexture reports whether the object is depth texture.
 func (a *Argument) IsDepthTexture() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isDepthTexture"))
 	return _r
 }
 
 // ArrayLength returns the array length.
 func (a *Argument) ArrayLength() int {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("arrayLength"))
 	return _r
 }

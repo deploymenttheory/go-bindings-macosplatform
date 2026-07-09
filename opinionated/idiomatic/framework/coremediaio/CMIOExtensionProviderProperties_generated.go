@@ -5,6 +5,8 @@
 package coremediaio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func extensionProviderPropertiesAdopt(id objc.ID) *ExtensionProviderProperties {
 
 // Description returns the object's -description text.
 func (epp *ExtensionProviderProperties) Description() string {
+	defer runtime.KeepAlive(epp)
 	return rt.Description(objref.IDOf(epp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (epp *ExtensionProviderProperties) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(epp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(epp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (epp *ExtensionProviderProperties) IsKind(className string) bool {
+	defer runtime.KeepAlive(epp)
 	return rt.IsKind(objref.IDOf(epp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (epp *ExtensionProviderProperties) String() string {
+	defer runtime.KeepAlive(epp)
 	return rt.Description(objref.IDOf(epp))
 }
 
 // NewExtensionProviderPropertiesWithDictionary creates a provider properties object with the specified properties.
 func NewExtensionProviderPropertiesWithDictionary(propertiesDictionary obj.Object) *ExtensionProviderProperties {
+	defer runtime.KeepAlive(propertiesDictionary)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionProviderProperties")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), objref.IDOf(propertiesDictionary))
 	return extensionProviderPropertiesAdopt(_id)
@@ -87,17 +95,22 @@ func (epp *ExtensionProviderProperties) WithManufacturer(manufacturer string) *E
 
 // WithPropertiesDictionary sets a dictionary of properties for a provider.
 func (epp *ExtensionProviderProperties) WithPropertiesDictionary(propertiesDictionary obj.Object) *ExtensionProviderProperties {
+	defer runtime.KeepAlive(propertiesDictionary)
 	objc.Send[objc.ID](objref.IDOf(epp), objc.RegisterName("setPropertiesDictionary:"), objref.IDOf(propertiesDictionary))
 	return epp
 }
 
 // SetPropertyStateForProperty sets a state value for the specified property.
 func (epp *ExtensionProviderProperties) SetPropertyStateForProperty(propertyState obj.Object, property obj.Object) {
+	defer runtime.KeepAlive(epp)
+	defer runtime.KeepAlive(propertyState)
+	defer runtime.KeepAlive(property)
 	objc.Send[objc.ID](objref.IDOf(epp), objc.RegisterName("setPropertyState:forProperty:"), objref.IDOf(propertyState), objref.IDOf(property))
 }
 
 // Name returns the provider name. The property key is CMIOExtensionPropertyProviderName.
 func (epp *ExtensionProviderProperties) Name() string {
+	defer runtime.KeepAlive(epp)
 	_r := objc.Send[objc.ID](objref.IDOf(epp), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -107,6 +120,7 @@ func (epp *ExtensionProviderProperties) Name() string {
 
 // Manufacturer returns the provider manufacturer. The property key is CMIOExtensionPropertyProviderManufacturer.
 func (epp *ExtensionProviderProperties) Manufacturer() string {
+	defer runtime.KeepAlive(epp)
 	_r := objc.Send[objc.ID](objref.IDOf(epp), objc.RegisterName("manufacturer"))
 	if _r == 0 {
 		return ""
@@ -116,6 +130,7 @@ func (epp *ExtensionProviderProperties) Manufacturer() string {
 
 // PropertiesDictionary returns the dictionary of properties. The dictionary containing all keys and values.
 func (epp *ExtensionProviderProperties) PropertiesDictionary() obj.Object {
+	defer runtime.KeepAlive(epp)
 	_r := objc.Send[objc.ID](objref.IDOf(epp), objc.RegisterName("propertiesDictionary"))
 	return obj.Wrap(_r)
 }

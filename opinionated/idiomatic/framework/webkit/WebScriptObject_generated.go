@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,50 +51,61 @@ func webScriptObjectAdopt(id objc.ID) *WebScriptObject {
 
 // Description returns the object's -description text.
 func (wso *WebScriptObject) Description() string {
+	defer runtime.KeepAlive(wso)
 	return rt.Description(objref.IDOf(wso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wso *WebScriptObject) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wso)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wso *WebScriptObject) IsKind(className string) bool {
+	defer runtime.KeepAlive(wso)
 	return rt.IsKind(objref.IDOf(wso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wso *WebScriptObject) String() string {
+	defer runtime.KeepAlive(wso)
 	return rt.Description(objref.IDOf(wso))
 }
 
 // JSObject returns the JavaScript object corresponding to the receiver.
 func (wso *WebScriptObject) JSObject() obj.Object {
+	defer runtime.KeepAlive(wso)
 	_r := objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("JSObject"))
 	return obj.Wrap(_r)
 }
 
 // CallWebScriptMethodWithArguments returns the result of executing a method in the scripting environment.
 func (wso *WebScriptObject) CallWebScriptMethodWithArguments(name string, arguments obj.Object) obj.Object {
+	defer runtime.KeepAlive(wso)
+	defer runtime.KeepAlive(arguments)
 	_r := objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("callWebScriptMethod:withArguments:"), purego.NSString(name), objref.IDOf(arguments))
 	return obj.Wrap(_r)
 }
 
 // EvaluateWebScript returns the result of evaluating a script in the scripting environment.
 func (wso *WebScriptObject) EvaluateWebScript(script string) obj.Object {
+	defer runtime.KeepAlive(wso)
 	_r := objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("evaluateWebScript:"), purego.NSString(script))
 	return obj.Wrap(_r)
 }
 
 // RemoveWebScriptKey removes a property from a scripting environment.
 func (wso *WebScriptObject) RemoveWebScriptKey(name string) {
+	defer runtime.KeepAlive(wso)
 	objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("removeWebScriptKey:"), purego.NSString(name))
 }
 
 // StringRepresentation returns a string representation of the receiver.
 func (wso *WebScriptObject) StringRepresentation() string {
+	defer runtime.KeepAlive(wso)
 	_r := objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("stringRepresentation"))
 	if _r == 0 {
 		return ""
@@ -102,22 +115,27 @@ func (wso *WebScriptObject) StringRepresentation() string {
 
 // WebScriptValueAtIndex returns the value of a property at the specified index.
 func (wso *WebScriptObject) WebScriptValueAtIndex(index int) obj.Object {
+	defer runtime.KeepAlive(wso)
 	_r := objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("webScriptValueAtIndex:"), index)
 	return obj.Wrap(_r)
 }
 
 // SetWebScriptValueAtIndexValue sets the value of a property at the specified index.
 func (wso *WebScriptObject) SetWebScriptValueAtIndexValue(index int, value obj.Object) {
+	defer runtime.KeepAlive(wso)
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("setWebScriptValueAtIndex:value:"), index, objref.IDOf(value))
 }
 
 // SetException raises a scripting environment exception in the context of the current object.
 func (wso *WebScriptObject) SetException(description string) {
+	defer runtime.KeepAlive(wso)
 	objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("setException:"), purego.NSString(description))
 }
 
 // JSValue returns use this method to bridge between the WebScriptObject and JavaScriptCore Objective-C APIs.
 func (wso *WebScriptObject) JSValue() obj.Object {
+	defer runtime.KeepAlive(wso)
 	_r := objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("JSValue"))
 	return obj.Wrap(_r)
 }

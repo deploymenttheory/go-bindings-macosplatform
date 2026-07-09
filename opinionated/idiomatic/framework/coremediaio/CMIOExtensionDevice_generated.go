@@ -5,10 +5,12 @@
 package coremediaio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func extensionDeviceAdopt(id objc.ID) *ExtensionDevice {
 
 // Description returns the object's -description text.
 func (ed *ExtensionDevice) Description() string {
+	defer runtime.KeepAlive(ed)
 	return rt.Description(objref.IDOf(ed))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ed *ExtensionDevice) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ed)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ed), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ed *ExtensionDevice) IsKind(className string) bool {
+	defer runtime.KeepAlive(ed)
 	return rt.IsKind(objref.IDOf(ed), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ed *ExtensionDevice) String() string {
+	defer runtime.KeepAlive(ed)
 	return rt.Description(objref.IDOf(ed))
 }
 
@@ -77,6 +84,8 @@ func NewExtensionDevice() *ExtensionDevice {
 
 // AddStream adds a stream to a device.
 func (ed *ExtensionDevice) AddStream(stream *ExtensionStream) error {
+	defer runtime.KeepAlive(ed)
+	defer runtime.KeepAlive(stream)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ed), objc.RegisterName("addStream:error:"), objref.IDOf(stream), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -87,6 +96,8 @@ func (ed *ExtensionDevice) AddStream(stream *ExtensionStream) error {
 
 // RemoveStream removes a stream from the device.
 func (ed *ExtensionDevice) RemoveStream(stream *ExtensionStream) error {
+	defer runtime.KeepAlive(ed)
+	defer runtime.KeepAlive(stream)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ed), objc.RegisterName("removeStream:error:"), objref.IDOf(stream), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -97,11 +108,14 @@ func (ed *ExtensionDevice) RemoveStream(stream *ExtensionStream) error {
 
 // NotifyPropertiesChanged notifies clients of property changes.
 func (ed *ExtensionDevice) NotifyPropertiesChanged(propertyStates obj.Object) {
+	defer runtime.KeepAlive(ed)
+	defer runtime.KeepAlive(propertyStates)
 	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("notifyPropertiesChanged:"), objref.IDOf(propertyStates))
 }
 
 // LocalizedName returns the localized name of the device.
 func (ed *ExtensionDevice) LocalizedName() string {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
@@ -110,13 +124,15 @@ func (ed *ExtensionDevice) LocalizedName() string {
 }
 
 // DeviceID returns the device identifier as UUID.
-func (ed *ExtensionDevice) DeviceID() obj.Object {
+func (ed *ExtensionDevice) DeviceID() *foundation.UUID {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("deviceID"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // LegacyDeviceID returns the device identifier as a string (for backward compatibility with AVCaptureDevice.uniqueIdentifier)
 func (ed *ExtensionDevice) LegacyDeviceID() string {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("legacyDeviceID"))
 	if _r == 0 {
 		return ""
@@ -128,6 +144,7 @@ func (ed *ExtensionDevice) LegacyDeviceID() string {
 //
 // Streams returns the collection as a Go slice.
 func (ed *ExtensionDevice) Streams() []*ExtensionStream {
+	defer runtime.KeepAlive(ed)
 	_arr := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("streams"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ExtensionStream { return ExtensionStreamFromID(_id) })
 }

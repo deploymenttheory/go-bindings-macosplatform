@@ -81,8 +81,8 @@ func (o *NSPersistentStoreCoordinator) InitWithManagedObjectModel(model *NSManag
 }
 
 // Returns the persistent store for the specified file URL.
-func (o *NSPersistentStoreCoordinator) PersistentStoreForURL(uRL *foundation.NSURL) *NSPersistentStore {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelPersistentStoreForURL, uRL.Ptr())
+func (o *NSPersistentStoreCoordinator) PersistentStoreForURL(url *foundation.NSURL) *NSPersistentStore {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelPersistentStoreForURL, url.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -239,9 +239,9 @@ func (o *NSPersistentStoreCoordinator) ImportStoreWithIdentifierFromExternalReco
 
 // Changes the location and, if necessary, the store type of the specified persistent store.
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.
-func (o *NSPersistentStoreCoordinator) MigratePersistentStoreToURLOptionsWithTypeError(store *NSPersistentStore, uRL *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID], storeType *foundation.NSString) (*NSPersistentStore, error) {
+func (o *NSPersistentStoreCoordinator) MigratePersistentStoreToURLOptionsWithTypeError(store *NSPersistentStore, url *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID], storeType *foundation.NSString) (*NSPersistentStore, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelMigratePersistentStoreToURLOptionsWithTypeError, store.Ptr(), uRL.Ptr(), options.Ptr(), storeType.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelMigratePersistentStoreToURLOptionsWithTypeError, store.Ptr(), url.Ptr(), options.Ptr(), storeType.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDishwasherAlarmClusterResetParamsAdopt(id objc.ID) *MTRDishwasherAlarmCl
 
 // Description returns the object's -description text.
 func (mdacrp *MTRDishwasherAlarmClusterResetParams) Description() string {
+	defer runtime.KeepAlive(mdacrp)
 	return rt.Description(objref.IDOf(mdacrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdacrp *MTRDishwasherAlarmClusterResetParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdacrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdacrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdacrp *MTRDishwasherAlarmClusterResetParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdacrp)
 	return rt.IsKind(objref.IDOf(mdacrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdacrp *MTRDishwasherAlarmClusterResetParams) String() string {
+	defer runtime.KeepAlive(mdacrp)
 	return rt.Description(objref.IDOf(mdacrp))
 }
 
@@ -72,36 +80,42 @@ func NewMTRDishwasherAlarmClusterResetParams() *MTRDishwasherAlarmClusterResetPa
 
 // WithAlarms sets the alarms.
 func (mdacrp *MTRDishwasherAlarmClusterResetParams) WithAlarms(alarms obj.Object) *MTRDishwasherAlarmClusterResetParams {
+	defer runtime.KeepAlive(alarms)
 	objc.Send[objc.ID](objref.IDOf(mdacrp), objc.RegisterName("setAlarms:"), objref.IDOf(alarms))
 	return mdacrp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mdacrp *MTRDishwasherAlarmClusterResetParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDishwasherAlarmClusterResetParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mdacrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mdacrp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mdacrp *MTRDishwasherAlarmClusterResetParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDishwasherAlarmClusterResetParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mdacrp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mdacrp
 }
 
 // Alarms returns the alarms.
-func (mdacrp *MTRDishwasherAlarmClusterResetParams) Alarms() obj.Object {
+func (mdacrp *MTRDishwasherAlarmClusterResetParams) Alarms() *foundation.Number {
+	defer runtime.KeepAlive(mdacrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdacrp), objc.RegisterName("alarms"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mdacrp *MTRDishwasherAlarmClusterResetParams) TimedInvokeTimeoutMs() obj.Object {
+func (mdacrp *MTRDishwasherAlarmClusterResetParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mdacrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdacrp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mdacrp *MTRDishwasherAlarmClusterResetParams) ServerSideProcessingTimeout() obj.Object {
+func (mdacrp *MTRDishwasherAlarmClusterResetParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mdacrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdacrp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

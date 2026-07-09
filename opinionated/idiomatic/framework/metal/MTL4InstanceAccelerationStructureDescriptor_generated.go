@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -101,42 +103,49 @@ func (miasd *MTL4InstanceAccelerationStructureDescriptor) WithUsage(usage Accele
 
 // InstanceDescriptorStride sets the stride, in bytes, between instance descriptors the instance descriptor buffer references. You are responsible for ensuring this stride is at least the size of the structure type corresponding to the instance descriptor type and a multiple of 4 bytes. Defaults to `0`, indicating the instance descriptors are tightly packed.
 func (miasd *MTL4InstanceAccelerationStructureDescriptor) InstanceDescriptorStride() int {
+	defer runtime.KeepAlive(miasd)
 	_r := objc.Send[int](objref.IDOf(miasd), objc.RegisterName("instanceDescriptorStride"))
 	return _r
 }
 
 // InstanceCount returns controls the number of instance descriptors in the instance descriptor buffer references.
 func (miasd *MTL4InstanceAccelerationStructureDescriptor) InstanceCount() int {
+	defer runtime.KeepAlive(miasd)
 	_r := objc.Send[int](objref.IDOf(miasd), objc.RegisterName("instanceCount"))
 	return _r
 }
 
 // InstanceDescriptorType sets the type of instance descriptor that the instance descriptor buffer references. This value determines the layout Metal expects for the structs the instance descriptor buffer contains. Defaults to `MTLAccelerationStructureInstanceDescriptorTypeIndirect`. Valid values for this property are `MTLAccelerationStructureInstanceDescriptorTypeIndirect` or `MTLAccelerationStructureInstanceDescriptorTypeIndirectMotion`.
 func (miasd *MTL4InstanceAccelerationStructureDescriptor) InstanceDescriptorType() AccelerationStructureInstanceDescriptorType {
+	defer runtime.KeepAlive(miasd)
 	_r := objc.Send[AccelerationStructureInstanceDescriptorType](objref.IDOf(miasd), objc.RegisterName("instanceDescriptorType"))
 	return _r
 }
 
 // MotionTransformCount returns controls the total number of motion transforms in the motion transform buffer.
 func (miasd *MTL4InstanceAccelerationStructureDescriptor) MotionTransformCount() int {
+	defer runtime.KeepAlive(miasd)
 	_r := objc.Send[int](objref.IDOf(miasd), objc.RegisterName("motionTransformCount"))
 	return _r
 }
 
 // InstanceTransformationMatrixLayout specifies the layout for the transformation matrices in the instance descriptor buffer and the motion transformation matrix buffer. Metal interprets the value of this property as the layout for the buffers that both “instanceDescriptorBuffer“ and “motionTransformBuffer“ reference. Defaults to `MTLMatrixLayoutColumnMajor`.
 func (miasd *MTL4InstanceAccelerationStructureDescriptor) InstanceTransformationMatrixLayout() MatrixLayout {
+	defer runtime.KeepAlive(miasd)
 	_r := objc.Send[MatrixLayout](objref.IDOf(miasd), objc.RegisterName("instanceTransformationMatrixLayout"))
 	return _r
 }
 
 // MotionTransformType returns controls the type of motion transforms, either as a matrix or individual components. Defaults to `MTLTransformTypePackedFloat4x3`. Using a `MTLTransformTypeComponent` allows you to represent the rotation by a quaternion (instead as of part of the matrix), allowing for correct motion interpolation.
 func (miasd *MTL4InstanceAccelerationStructureDescriptor) MotionTransformType() TransformType {
+	defer runtime.KeepAlive(miasd)
 	_r := objc.Send[TransformType](objref.IDOf(miasd), objc.RegisterName("motionTransformType"))
 	return _r
 }
 
 // MotionTransformStride specify the stride for motion transform. Defaults to `0`, indicating that transforms are tightly packed according to the motion transform type.
 func (miasd *MTL4InstanceAccelerationStructureDescriptor) MotionTransformStride() int {
+	defer runtime.KeepAlive(miasd)
 	_r := objc.Send[int](objref.IDOf(miasd), objc.RegisterName("motionTransformStride"))
 	return _r
 }

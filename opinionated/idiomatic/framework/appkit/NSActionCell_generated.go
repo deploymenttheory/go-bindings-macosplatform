@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func actionCellAdopt(id objc.ID) *ActionCell {
 
 // WithControlView sets the view associated with the cell.
 func (ac *ActionCell) WithControlView(controlView ViewProvider) *ActionCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -72,6 +75,7 @@ func (ac *ActionCell) WithState(state int) *ActionCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (ac *ActionCell) WithTarget(target obj.Object) *ActionCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -176,6 +180,7 @@ func (ac *ActionCell) WithWraps(wraps bool) *ActionCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (ac *ActionCell) WithFont(font *Font) *ActionCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -184,6 +189,7 @@ func (ac *ActionCell) WithFont(font *Font) *ActionCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (ac *ActionCell) WithFormatter(formatter obj.Object) *ActionCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -192,6 +198,7 @@ func (ac *ActionCell) WithFormatter(formatter obj.Object) *ActionCell {
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (ac *ActionCell) WithObjectValue(objectValue obj.Object) *ActionCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -240,6 +247,7 @@ func (ac *ActionCell) WithIntegerValue(integerValue int) *ActionCell {
 
 // WithImage sets the image displayed by the cell, if any.
 func (ac *ActionCell) WithImage(image *Image) *ActionCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -256,6 +264,7 @@ func (ac *ActionCell) WithControlSize(controlSize ControlSize) *ActionCell {
 
 // WithRepresentedObject sets the object represented by the cell.
 func (ac *ActionCell) WithRepresentedObject(representedObject obj.Object) *ActionCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -264,6 +273,7 @@ func (ac *ActionCell) WithRepresentedObject(representedObject obj.Object) *Actio
 
 // WithMenu sets the cell’s contextual menu.
 func (ac *ActionCell) WithMenu(menu *Menu) *ActionCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -352,6 +362,7 @@ func (ac *ActionCell) WithFocusRingType(focusRingType FocusRingType) *ActionCell
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (ac *ActionCell) WithAttributedStringValue(attributedStringValue obj.Object) *ActionCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})

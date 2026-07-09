@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func touchAdopt(id objc.ID) *Touch {
 
 // Description returns the object's -description text.
 func (t *Touch) Description() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (t *Touch) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (t *Touch) IsKind(className string) bool {
+	defer runtime.KeepAlive(t)
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (t *Touch) String() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
@@ -75,54 +82,65 @@ func NewTouch() *Touch {
 
 // Identity returns the identity.
 func (t *Touch) Identity() obj.Object {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("identity"))
 	return obj.Wrap(_r)
 }
 
 // Phase returns the phase.
 func (t *Touch) Phase() TouchPhase {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[TouchPhase](objref.IDOf(t), objc.RegisterName("phase"))
 	return _r
 }
 
 // NormalizedPosition returns the normalized position.
 func (t *Touch) NormalizedPosition() corefoundation.CGPoint {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(t), objc.RegisterName("normalizedPosition"))
 	return _r
 }
 
 // IsResting reports whether the object is resting.
 func (t *Touch) IsResting() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isResting"))
 	return _r
 }
 
 // Device returns the device.
 func (t *Touch) Device() obj.Object {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("device"))
 	return obj.Wrap(_r)
 }
 
 // DeviceSize returns the device size.
 func (t *Touch) DeviceSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(t), objc.RegisterName("deviceSize"))
 	return _r
 }
 
 // LocationInView indicates the location of the touch in the view’s coordinates.
 func (t *Touch) LocationInView(view *View) corefoundation.CGPoint {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(view)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(t), objc.RegisterName("locationInView:"), objref.IDOf(view))
 	return _r
 }
 
 // PreviousLocationInView indicates the previous location of the touch in the view’s coordinates.
 func (t *Touch) PreviousLocationInView(view *View) corefoundation.CGPoint {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(view)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(t), objc.RegisterName("previousLocationInView:"), objref.IDOf(view))
 	return _r
 }
 
 // Type returns the type.
 func (t *Touch) Type() TouchType {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[TouchType](objref.IDOf(t), objc.RegisterName("type"))
 	return _r
 }

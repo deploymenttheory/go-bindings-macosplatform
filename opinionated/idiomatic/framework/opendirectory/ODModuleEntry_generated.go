@@ -5,6 +5,8 @@
 package opendirectory
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func moduleEntryAdopt(id objc.ID) *ModuleEntry {
 
 // Description returns the object's -description text.
 func (me *ModuleEntry) Description() string {
+	defer runtime.KeepAlive(me)
 	return rt.Description(objref.IDOf(me))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (me *ModuleEntry) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(me)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(me), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (me *ModuleEntry) IsKind(className string) bool {
+	defer runtime.KeepAlive(me)
 	return rt.IsKind(objref.IDOf(me), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (me *ModuleEntry) String() string {
+	defer runtime.KeepAlive(me)
 	return rt.Description(objref.IDOf(me))
 }
 
@@ -72,6 +79,7 @@ func NewModuleEntry() *ModuleEntry {
 
 // WithMappings sets the mappings.
 func (me *ModuleEntry) WithMappings(mappings *Mappings) *ModuleEntry {
+	defer runtime.KeepAlive(mappings)
 	objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("setMappings:"), objref.IDOf(mappings))
 	return me
 }
@@ -96,29 +104,35 @@ func (me *ModuleEntry) WithUUIDString(uuidString string) *ModuleEntry {
 
 // SetOptionValue assigns a particular option for this module. Options are dictated by the module and can be queried via [module supportedOptions].
 func (me *ModuleEntry) SetOptionValue(optionName string, value obj.Object) {
+	defer runtime.KeepAlive(me)
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("setOption:value:"), purego.NSString(optionName), objref.IDOf(value))
 }
 
 // Option fetches the current setting for the requested option. Fetches the current setting for the requested option.
 func (me *ModuleEntry) Option(optionName string) obj.Object {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("option:"), purego.NSString(optionName))
 	return obj.Wrap(_r)
 }
 
 // Mappings returns the mappings.
 func (me *ModuleEntry) Mappings() *Mappings {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("mappings"))
 	return MappingsFromID(_r)
 }
 
 // SupportedOptions returns the supported options.
 func (me *ModuleEntry) SupportedOptions() obj.Object {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("supportedOptions"))
 	return obj.Wrap(_r)
 }
 
 // Name returns the name.
 func (me *ModuleEntry) Name() string {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -128,6 +142,7 @@ func (me *ModuleEntry) Name() string {
 
 // XpcServiceName returns the xpc service name.
 func (me *ModuleEntry) XpcServiceName() string {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("xpcServiceName"))
 	if _r == 0 {
 		return ""
@@ -137,6 +152,7 @@ func (me *ModuleEntry) XpcServiceName() string {
 
 // UUIDString returns the UUID string.
 func (me *ModuleEntry) UUIDString() string {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("uuidString"))
 	if _r == 0 {
 		return ""

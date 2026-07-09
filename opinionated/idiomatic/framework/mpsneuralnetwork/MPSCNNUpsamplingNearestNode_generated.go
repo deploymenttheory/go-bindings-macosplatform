@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func cNNUpsamplingNearestNodeAdopt(id objc.ID) *CNNUpsamplingNearestNode {
 
 // NewCNNUpsamplingNearestNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY init a node representing a MPSCNNUpsamplingNearest kernel
 func NewCNNUpsamplingNearestNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY(sourceNode *NNImageNode, integerScaleFactorX int, integerScaleFactorY int) *CNNUpsamplingNearestNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsamplingNearestNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:integerScaleFactorX:integerScaleFactorY:"), objref.IDOf(sourceNode), integerScaleFactorX, integerScaleFactorY)
 	return cNNUpsamplingNearestNodeAdopt(_id)
@@ -60,12 +63,14 @@ func (cunn *CNNUpsamplingNearestNode) WithLabel(label string) *CNNUpsamplingNear
 
 // ScaleFactorX returns the scale factor x.
 func (cunn *CNNUpsamplingNearestNode) ScaleFactorX() float64 {
+	defer runtime.KeepAlive(cunn)
 	_r := objc.Send[float64](objref.IDOf(cunn), objc.RegisterName("scaleFactorX"))
 	return _r
 }
 
 // ScaleFactorY returns the scale factor y.
 func (cunn *CNNUpsamplingNearestNode) ScaleFactorY() float64 {
+	defer runtime.KeepAlive(cunn)
 	_r := objc.Send[float64](objref.IDOf(cunn), objc.RegisterName("scaleFactorY"))
 	return _r
 }

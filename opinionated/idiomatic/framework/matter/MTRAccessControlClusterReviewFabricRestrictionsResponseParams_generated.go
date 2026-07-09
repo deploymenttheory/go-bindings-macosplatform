@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRAccessControlClusterReviewFabricRestrictionsResponseParamsAdopt(id objc.
 
 // Description returns the object's -description text.
 func (maccrfrrp *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) Description() string {
+	defer runtime.KeepAlive(maccrfrrp)
 	return rt.Description(objref.IDOf(maccrfrrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (maccrfrrp *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(maccrfrrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(maccrfrrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (maccrfrrp *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(maccrfrrp)
 	return rt.IsKind(objref.IDOf(maccrfrrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (maccrfrrp *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) String() string {
+	defer runtime.KeepAlive(maccrfrrp)
 	return rt.Description(objref.IDOf(maccrfrrp))
 }
 
-// NewMTRAccessControlClusterReviewFabricRestrictionsResponseParamsWithResponseValueError initialize an MTRAccessControlClusterReviewFabricRestrictionsResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-func NewMTRAccessControlClusterReviewFabricRestrictionsResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRAccessControlClusterReviewFabricRestrictionsResponseParams, err error) {
+// NewMTRAccessControlClusterReviewFabricRestrictionsResponseParamsWithResponseValue initialize an MTRAccessControlClusterReviewFabricRestrictionsResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRAccessControlClusterReviewFabricRestrictionsResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRAccessControlClusterReviewFabricRestrictionsResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRAccessControlClusterReviewFabricRestrictionsResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,12 +87,14 @@ func NewMTRAccessControlClusterReviewFabricRestrictionsResponseParamsWithRespons
 
 // WithToken sets the token.
 func (maccrfrrp *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) WithToken(token obj.Object) *MTRAccessControlClusterReviewFabricRestrictionsResponseParams {
+	defer runtime.KeepAlive(token)
 	objc.Send[objc.ID](objref.IDOf(maccrfrrp), objc.RegisterName("setToken:"), objref.IDOf(token))
 	return maccrfrrp
 }
 
 // Token returns the token.
-func (maccrfrrp *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) Token() obj.Object {
+func (maccrfrrp *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) Token() *foundation.Number {
+	defer runtime.KeepAlive(maccrfrrp)
 	_r := objc.Send[objc.ID](objref.IDOf(maccrfrrp), objc.RegisterName("token"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

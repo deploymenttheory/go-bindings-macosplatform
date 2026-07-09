@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -78,6 +80,7 @@ func (sbb *StatusBarButton) WithTitle(title string) *StatusBarButton {
 
 // WithAttributedTitle sets the title that the button displays in an off state, as an attributed string.
 func (sbb *StatusBarButton) WithAttributedTitle(attributedTitle obj.Object) *StatusBarButton {
+	defer runtime.KeepAlive(attributedTitle)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	})
@@ -94,6 +97,7 @@ func (sbb *StatusBarButton) WithAlternateTitle(alternateTitle string) *StatusBar
 
 // WithAttributedAlternateTitle sets the title that the button displays as an attributed string when the button is in an on state.
 func (sbb *StatusBarButton) WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *StatusBarButton {
+	defer runtime.KeepAlive(attributedAlternateTitle)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setAttributedAlternateTitle:"), objref.IDOf(attributedAlternateTitle))
 	})
@@ -110,6 +114,7 @@ func (sbb *StatusBarButton) WithHasDestructiveAction(hasDestructiveAction bool) 
 
 // WithSound sets the sound that plays when the user clicks the button.
 func (sbb *StatusBarButton) WithSound(sound *Sound) *StatusBarButton {
+	defer runtime.KeepAlive(sound)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setSound:"), objref.IDOf(sound))
 	})
@@ -166,6 +171,7 @@ func (sbb *StatusBarButton) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyW
 
 // WithBezelColor sets the color of the button’s bezel, in appearances that support it.
 func (sbb *StatusBarButton) WithBezelColor(bezelColor *Color) *StatusBarButton {
+	defer runtime.KeepAlive(bezelColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setBezelColor:"), objref.IDOf(bezelColor))
 	})
@@ -174,6 +180,7 @@ func (sbb *StatusBarButton) WithBezelColor(bezelColor *Color) *StatusBarButton {
 
 // WithContentTintColor sets a tint color to use for the template image and text content.
 func (sbb *StatusBarButton) WithContentTintColor(contentTintColor *Color) *StatusBarButton {
+	defer runtime.KeepAlive(contentTintColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setContentTintColor:"), objref.IDOf(contentTintColor))
 	})
@@ -190,6 +197,7 @@ func (sbb *StatusBarButton) WithTintProminence(tintProminence TintProminence) *S
 
 // WithImage sets the image that appears on the button when it’s in an off state, or nil if there is no such image.
 func (sbb *StatusBarButton) WithImage(image *Image) *StatusBarButton {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -198,6 +206,7 @@ func (sbb *StatusBarButton) WithImage(image *Image) *StatusBarButton {
 
 // WithAlternateImage sets an alternate image that appears on the button when the button is in an on state.
 func (sbb *StatusBarButton) WithAlternateImage(alternateImage *Image) *StatusBarButton {
+	defer runtime.KeepAlive(alternateImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
 	})
@@ -230,6 +239,7 @@ func (sbb *StatusBarButton) WithImageHugsTitle(imageHugsTitle bool) *StatusBarBu
 
 // WithSymbolConfiguration sets the combination of point size, weight, and scale to use when sizing and displaying symbol images.
 func (sbb *StatusBarButton) WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *StatusBarButton {
+	defer runtime.KeepAlive(symbolConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setSymbolConfiguration:"), objref.IDOf(symbolConfiguration))
 	})
@@ -278,6 +288,7 @@ func (sbb *StatusBarButton) WithBorderShape(borderShape ControlBorderShape) *Sta
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (sbb *StatusBarButton) WithTarget(target obj.Object) *StatusBarButton {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -342,6 +353,7 @@ func (sbb *StatusBarButton) WithControlSize(controlSize ControlSize) *StatusBarB
 
 // WithFormatter sets the receiver’s formatter.
 func (sbb *StatusBarButton) WithFormatter(formatter obj.Object) *StatusBarButton {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -350,6 +362,7 @@ func (sbb *StatusBarButton) WithFormatter(formatter obj.Object) *StatusBarButton
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (sbb *StatusBarButton) WithObjectValue(objectValue obj.Object) *StatusBarButton {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -366,6 +379,7 @@ func (sbb *StatusBarButton) WithStringValue(stringValue string) *StatusBarButton
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (sbb *StatusBarButton) WithAttributedStringValue(attributedStringValue obj.Object) *StatusBarButton {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -406,6 +420,7 @@ func (sbb *StatusBarButton) WithDoubleValue(doubleValue float64) *StatusBarButto
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (sbb *StatusBarButton) WithFont(font *Font) *StatusBarButton {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -454,6 +469,7 @@ func (sbb *StatusBarButton) WithAllowsExpansionToolTips(allowsExpansionToolTips 
 
 // WithCell sets the cell.
 func (sbb *StatusBarButton) WithCell(cell CellProvider) *StatusBarButton {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -599,6 +615,7 @@ func (sbb *StatusBarButton) WithWantsLayer(wantsLayer bool) *StatusBarButton {
 
 // WithLayer sets the layer.
 func (sbb *StatusBarButton) WithLayer(layer obj.Object) *StatusBarButton {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -648,6 +665,7 @@ func (sbb *StatusBarButton) WithBackgroundFilters(items ...obj.Object) *StatusBa
 
 // WithCompositingFilter sets the compositing filter.
 func (sbb *StatusBarButton) WithCompositingFilter(compositingFilter obj.Object) *StatusBarButton {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -665,6 +683,7 @@ func (sbb *StatusBarButton) WithContentFilters(items ...obj.Object) *StatusBarBu
 
 // WithShadow sets the shadow.
 func (sbb *StatusBarButton) WithShadow(shadow *Shadow) *StatusBarButton {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -713,6 +732,7 @@ func (sbb *StatusBarButton) WithPreparedContentRect(preparedContentRect corefoun
 
 // WithNextKeyView sets the next key view.
 func (sbb *StatusBarButton) WithNextKeyView(nextKeyView ViewProvider) *StatusBarButton {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -762,6 +782,7 @@ func (sbb *StatusBarButton) WithPrefersCompactControlSizeMetrics(prefersCompactC
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (sbb *StatusBarButton) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *StatusBarButton {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -818,6 +839,7 @@ func (sbb *StatusBarButton) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExte
 
 // WithPressureConfiguration sets the pressure configuration.
 func (sbb *StatusBarButton) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *StatusBarButton {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -826,6 +848,7 @@ func (sbb *StatusBarButton) WithPressureConfiguration(pressureConfiguration *Pre
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (sbb *StatusBarButton) WithNextResponder(nextResponder ResponderProvider) *StatusBarButton {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -834,6 +857,7 @@ func (sbb *StatusBarButton) WithNextResponder(nextResponder ResponderProvider) *
 
 // WithMenu sets returns the responder’s menu.
 func (sbb *StatusBarButton) WithMenu(menu *Menu) *StatusBarButton {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -842,6 +866,7 @@ func (sbb *StatusBarButton) WithMenu(menu *Menu) *StatusBarButton {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (sbb *StatusBarButton) WithUserActivity(userActivity obj.Object) *StatusBarButton {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -850,6 +875,7 @@ func (sbb *StatusBarButton) WithUserActivity(userActivity obj.Object) *StatusBar
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (sbb *StatusBarButton) WithTouchBar(touchBar *TouchBar) *StatusBarButton {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sbb), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -858,6 +884,7 @@ func (sbb *StatusBarButton) WithTouchBar(touchBar *TouchBar) *StatusBarButton {
 
 // AppearsDisabled reports whether the status bar icon has a disabled/off appearance while still being functional, such as allowing selection and actions. The default value is `false`.
 func (sbb *StatusBarButton) AppearsDisabled() bool {
+	defer runtime.KeepAlive(sbb)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

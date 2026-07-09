@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,18 +53,21 @@ func NewDOMHTMLTableElement() *DOMHTMLTableElement {
 
 // WithCaption sets the caption.
 func (dte *DOMHTMLTableElement) WithCaption(caption *DOMHTMLTableCaptionElement) *DOMHTMLTableElement {
+	defer runtime.KeepAlive(caption)
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setCaption:"), objref.IDOf(caption))
 	return dte
 }
 
 // WithTHead sets the t head.
 func (dte *DOMHTMLTableElement) WithTHead(tHead *DOMHTMLTableSectionElement) *DOMHTMLTableElement {
+	defer runtime.KeepAlive(tHead)
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setTHead:"), objref.IDOf(tHead))
 	return dte
 }
 
 // WithTFoot sets the t foot.
 func (dte *DOMHTMLTableElement) WithTFoot(tFoot *DOMHTMLTableSectionElement) *DOMHTMLTableElement {
+	defer runtime.KeepAlive(tFoot)
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setTFoot:"), objref.IDOf(tFoot))
 	return dte
 }
@@ -225,80 +230,94 @@ func (dte *DOMHTMLTableElement) WithTextContent(textContent string) *DOMHTMLTabl
 
 // CreateTHead returns the create t head.
 func (dte *DOMHTMLTableElement) CreateTHead() *DOMHTMLElement {
+	defer runtime.KeepAlive(dte)
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("createTHead"))
 	return DOMHTMLElementFromID(_r)
 }
 
 // DeleteTHead deletes t head.
 func (dte *DOMHTMLTableElement) DeleteTHead() {
+	defer runtime.KeepAlive(dte)
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("deleteTHead"))
 }
 
 // CreateTFoot returns the create t foot.
 func (dte *DOMHTMLTableElement) CreateTFoot() *DOMHTMLElement {
+	defer runtime.KeepAlive(dte)
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("createTFoot"))
 	return DOMHTMLElementFromID(_r)
 }
 
 // DeleteTFoot deletes t foot.
 func (dte *DOMHTMLTableElement) DeleteTFoot() {
+	defer runtime.KeepAlive(dte)
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("deleteTFoot"))
 }
 
 // CreateCaption returns the create caption.
 func (dte *DOMHTMLTableElement) CreateCaption() *DOMHTMLElement {
+	defer runtime.KeepAlive(dte)
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("createCaption"))
 	return DOMHTMLElementFromID(_r)
 }
 
 // DeleteCaption deletes caption.
 func (dte *DOMHTMLTableElement) DeleteCaption() {
+	defer runtime.KeepAlive(dte)
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("deleteCaption"))
 }
 
 // InsertRow inserts row.
 func (dte *DOMHTMLTableElement) InsertRow(index int) *DOMHTMLElement {
+	defer runtime.KeepAlive(dte)
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("insertRow:"), index)
 	return DOMHTMLElementFromID(_r)
 }
 
 // DeleteRow deletes row.
 func (dte *DOMHTMLTableElement) DeleteRow(index int) {
+	defer runtime.KeepAlive(dte)
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("deleteRow:"), index)
 }
 
 // Caption returns the caption.
 func (dte *DOMHTMLTableElement) Caption() *DOMHTMLTableCaptionElement {
+	defer runtime.KeepAlive(dte)
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("caption"))
 	return DOMHTMLTableCaptionElementFromID(_r)
 }
 
 // THead returns the t head.
 func (dte *DOMHTMLTableElement) THead() *DOMHTMLTableSectionElement {
+	defer runtime.KeepAlive(dte)
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("tHead"))
 	return DOMHTMLTableSectionElementFromID(_r)
 }
 
 // TFoot returns the t foot.
 func (dte *DOMHTMLTableElement) TFoot() *DOMHTMLTableSectionElement {
+	defer runtime.KeepAlive(dte)
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("tFoot"))
 	return DOMHTMLTableSectionElementFromID(_r)
 }
 
 // Rows returns the rows.
 func (dte *DOMHTMLTableElement) Rows() *DOMHTMLCollection {
+	defer runtime.KeepAlive(dte)
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("rows"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
 // TBodies returns the t bodies.
 func (dte *DOMHTMLTableElement) TBodies() *DOMHTMLCollection {
+	defer runtime.KeepAlive(dte)
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("tBodies"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
 // Align returns the align.
 func (dte *DOMHTMLTableElement) Align() string {
+	defer runtime.KeepAlive(dte)
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""
@@ -308,6 +327,7 @@ func (dte *DOMHTMLTableElement) Align() string {
 
 // BgColor returns the bg color.
 func (dte *DOMHTMLTableElement) BgColor() string {
+	defer runtime.KeepAlive(dte)
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("bgColor"))
 	if _r == 0 {
 		return ""
@@ -317,6 +337,7 @@ func (dte *DOMHTMLTableElement) BgColor() string {
 
 // Border returns the border.
 func (dte *DOMHTMLTableElement) Border() string {
+	defer runtime.KeepAlive(dte)
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("border"))
 	if _r == 0 {
 		return ""
@@ -326,6 +347,7 @@ func (dte *DOMHTMLTableElement) Border() string {
 
 // CellPadding returns the cell padding.
 func (dte *DOMHTMLTableElement) CellPadding() string {
+	defer runtime.KeepAlive(dte)
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("cellPadding"))
 	if _r == 0 {
 		return ""
@@ -335,6 +357,7 @@ func (dte *DOMHTMLTableElement) CellPadding() string {
 
 // CellSpacing returns the cell spacing.
 func (dte *DOMHTMLTableElement) CellSpacing() string {
+	defer runtime.KeepAlive(dte)
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("cellSpacing"))
 	if _r == 0 {
 		return ""
@@ -344,6 +367,7 @@ func (dte *DOMHTMLTableElement) CellSpacing() string {
 
 // FrameBorders returns the frame borders.
 func (dte *DOMHTMLTableElement) FrameBorders() string {
+	defer runtime.KeepAlive(dte)
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("frameBorders"))
 	if _r == 0 {
 		return ""
@@ -353,6 +377,7 @@ func (dte *DOMHTMLTableElement) FrameBorders() string {
 
 // Rules returns the rules.
 func (dte *DOMHTMLTableElement) Rules() string {
+	defer runtime.KeepAlive(dte)
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("rules"))
 	if _r == 0 {
 		return ""
@@ -362,6 +387,7 @@ func (dte *DOMHTMLTableElement) Rules() string {
 
 // Summary returns the summary.
 func (dte *DOMHTMLTableElement) Summary() string {
+	defer runtime.KeepAlive(dte)
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("summary"))
 	if _r == 0 {
 		return ""
@@ -371,6 +397,7 @@ func (dte *DOMHTMLTableElement) Summary() string {
 
 // Width returns the width.
 func (dte *DOMHTMLTableElement) Width() string {
+	defer runtime.KeepAlive(dte)
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("width"))
 	if _r == 0 {
 		return ""

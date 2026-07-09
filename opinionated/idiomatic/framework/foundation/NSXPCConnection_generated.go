@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func xPCConnectionAdopt(id objc.ID) *XPCConnection {
 
 // Description returns the object's -description text.
 func (xc *XPCConnection) Description() string {
+	defer runtime.KeepAlive(xc)
 	return rt.Description(objref.IDOf(xc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (xc *XPCConnection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(xc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(xc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (xc *XPCConnection) IsKind(className string) bool {
+	defer runtime.KeepAlive(xc)
 	return rt.IsKind(objref.IDOf(xc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (xc *XPCConnection) String() string {
+	defer runtime.KeepAlive(xc)
 	return rt.Description(objref.IDOf(xc))
 }
 
@@ -85,6 +91,7 @@ func NewXPCConnectionWithMachServiceNameOptions(name string, options XPCConnecti
 
 // NewXPCConnectionWithListenerEndpoint initializes an NSXPCConnection object to connect to an NSXPCListener object in another process, identified by an NSXPCListenerEndpoint object.
 func NewXPCConnectionWithListenerEndpoint(endpoint *XPCListenerEndpoint) *XPCConnection {
+	defer runtime.KeepAlive(endpoint)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXPCConnection")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithListenerEndpoint:"), objref.IDOf(endpoint))
 	return xPCConnectionAdopt(_id)
@@ -92,18 +99,21 @@ func NewXPCConnectionWithListenerEndpoint(endpoint *XPCListenerEndpoint) *XPCCon
 
 // WithExportedInterface sets the NSXPCInterface object that describes the protocol for the exported object on this connection.
 func (xc *XPCConnection) WithExportedInterface(exportedInterface *XPCInterface) *XPCConnection {
+	defer runtime.KeepAlive(exportedInterface)
 	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("setExportedInterface:"), objref.IDOf(exportedInterface))
 	return xc
 }
 
 // WithExportedObject sets an exported object for the connection.
 func (xc *XPCConnection) WithExportedObject(exportedObject obj.Object) *XPCConnection {
+	defer runtime.KeepAlive(exportedObject)
 	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("setExportedObject:"), objref.IDOf(exportedObject))
 	return xc
 }
 
 // WithRemoteObjectInterface sets defines the NSXPCInterface object that describes the protocol for the object represented by the remoteObjectProxy.
 func (xc *XPCConnection) WithRemoteObjectInterface(remoteObjectInterface *XPCInterface) *XPCConnection {
+	defer runtime.KeepAlive(remoteObjectInterface)
 	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("setRemoteObjectInterface:"), objref.IDOf(remoteObjectInterface))
 	return xc
 }
@@ -127,28 +137,32 @@ func (xc *XPCConnection) WithObservationInfo(observationInfo unsafe.Pointer) *XP
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (xc *XPCConnection) WithScriptingProperties(scriptingProperties obj.Object) *XPCConnection {
-	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (xc *XPCConnection) WithScriptingProperties(scriptingProperties map[string]obj.Object) *XPCConnection {
+	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return xc
 }
 
 // Resume starts or resumes handling of messages on a connection.
 func (xc *XPCConnection) Resume() {
+	defer runtime.KeepAlive(xc)
 	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("resume"))
 }
 
 // Suspend suspends the connection.
 func (xc *XPCConnection) Suspend() {
+	defer runtime.KeepAlive(xc)
 	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("suspend"))
 }
 
 // Activate activates the connection.
 func (xc *XPCConnection) Activate() {
+	defer runtime.KeepAlive(xc)
 	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("activate"))
 }
 
 // Invalidate invalidates the connection.
 func (xc *XPCConnection) Invalidate() {
+	defer runtime.KeepAlive(xc)
 	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("invalidate"))
 }
 
@@ -156,6 +170,7 @@ func (xc *XPCConnection) Invalidate() {
 //
 // ScheduleSendBarrierBlock blocks until the operation completes or ctx is cancelled.
 func (xc *XPCConnection) ScheduleSendBarrierBlock(ctx context.Context) error {
+	defer runtime.KeepAlive(xc)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -171,11 +186,13 @@ func (xc *XPCConnection) ScheduleSendBarrierBlock(ctx context.Context) error {
 
 // SetCodeSigningRequirement sets the code signing requirement for this connection.
 func (xc *XPCConnection) SetCodeSigningRequirement(requirement string) {
+	defer runtime.KeepAlive(xc)
 	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("setCodeSigningRequirement:"), purego.NSString(requirement))
 }
 
 // ServiceName returns the service name.
 func (xc *XPCConnection) ServiceName() string {
+	defer runtime.KeepAlive(xc)
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("serviceName"))
 	if _r == 0 {
 		return ""
@@ -185,54 +202,63 @@ func (xc *XPCConnection) ServiceName() string {
 
 // Endpoint returns the endpoint.
 func (xc *XPCConnection) Endpoint() *XPCListenerEndpoint {
+	defer runtime.KeepAlive(xc)
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("endpoint"))
 	return XPCListenerEndpointFromID(_r)
 }
 
 // ExportedInterface returns the exported interface.
 func (xc *XPCConnection) ExportedInterface() *XPCInterface {
+	defer runtime.KeepAlive(xc)
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("exportedInterface"))
 	return XPCInterfaceFromID(_r)
 }
 
 // ExportedObject returns the exported object.
 func (xc *XPCConnection) ExportedObject() obj.Object {
+	defer runtime.KeepAlive(xc)
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("exportedObject"))
 	return obj.Wrap(_r)
 }
 
 // RemoteObjectInterface returns the remote object interface.
 func (xc *XPCConnection) RemoteObjectInterface() *XPCInterface {
+	defer runtime.KeepAlive(xc)
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("remoteObjectInterface"))
 	return XPCInterfaceFromID(_r)
 }
 
 // RemoteObjectProxy returns the remote object proxy.
 func (xc *XPCConnection) RemoteObjectProxy() obj.Object {
+	defer runtime.KeepAlive(xc)
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("remoteObjectProxy"))
 	return obj.Wrap(_r)
 }
 
 // AuditSessionIdentifier returns the audit session identifier.
 func (xc *XPCConnection) AuditSessionIdentifier() int {
+	defer runtime.KeepAlive(xc)
 	_r := objc.Send[int](objref.IDOf(xc), objc.RegisterName("auditSessionIdentifier"))
 	return _r
 }
 
 // ProcessIdentifier returns the process identifier.
 func (xc *XPCConnection) ProcessIdentifier() int {
+	defer runtime.KeepAlive(xc)
 	_r := objc.Send[int](objref.IDOf(xc), objc.RegisterName("processIdentifier"))
 	return _r
 }
 
 // EffectiveUserIdentifier returns the effective user identifier.
 func (xc *XPCConnection) EffectiveUserIdentifier() int {
+	defer runtime.KeepAlive(xc)
 	_r := objc.Send[int](objref.IDOf(xc), objc.RegisterName("effectiveUserIdentifier"))
 	return _r
 }
 
 // EffectiveGroupIdentifier returns the effective group identifier.
 func (xc *XPCConnection) EffectiveGroupIdentifier() int {
+	defer runtime.KeepAlive(xc)
 	_r := objc.Send[int](objref.IDOf(xc), objc.RegisterName("effectiveGroupIdentifier"))
 	return _r
 }

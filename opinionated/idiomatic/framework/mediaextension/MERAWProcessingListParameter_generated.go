@@ -5,6 +5,7 @@
 package mediaextension
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -93,6 +94,7 @@ func (rplp *RAWProcessingListParameter) WithEnabled(enabled bool) *RAWProcessing
 
 // HasNeutralValue return value indicates whether the MERAWProcessingListParameter has an optional declared Neutral value. If the return value is YES and outNeutralValue is not nil, the value held by outNeutralValue will be set to the neutral value. If the return value is NO and outNeutralValue is not nil, the value held by outNeutralValue will be set to 0.
 func (rplp *RAWProcessingListParameter) HasNeutralValue() (ok bool, outNeutralValue int64) {
+	defer runtime.KeepAlive(rplp)
 	var _out0 int64
 	_r := objc.Send[bool](objref.IDOf(rplp), objc.RegisterName("hasNeutralValue:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -100,6 +102,7 @@ func (rplp *RAWProcessingListParameter) HasNeutralValue() (ok bool, outNeutralVa
 
 // HasCameraValue return value indicates whether the MERAWProcessingListParameter has an optional declared Camera value. If the return value is YES and outCameraValue is not nil, the value held by outCameraValue will be set to the camera value. If the return value is NO and outCameraValue is not nil, the value held by outCameraValue will be set to 0.
 func (rplp *RAWProcessingListParameter) HasCameraValue() (ok bool, outCameraValue int64) {
+	defer runtime.KeepAlive(rplp)
 	var _out0 int64
 	_r := objc.Send[bool](objref.IDOf(rplp), objc.RegisterName("hasCameraValue:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -109,6 +112,7 @@ func (rplp *RAWProcessingListParameter) HasCameraValue() (ok bool, outCameraValu
 //
 // ListElements returns the collection as a Go slice.
 func (rplp *RAWProcessingListParameter) ListElements() []*RAWProcessingListElementParameter {
+	defer runtime.KeepAlive(rplp)
 	_arr := objc.Send[objc.ID](objref.IDOf(rplp), objc.RegisterName("listElements"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RAWProcessingListElementParameter {
 		return RAWProcessingListElementParameterFromID(_id)
@@ -117,6 +121,7 @@ func (rplp *RAWProcessingListParameter) ListElements() []*RAWProcessingListEleme
 
 // CurrentValue get or set the current value for this parameter. The value is the listElementID value of the selected MERAWProcessingListElementParameter.   This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
 func (rplp *RAWProcessingListParameter) CurrentValue() int {
+	defer runtime.KeepAlive(rplp)
 	_r := objc.Send[int](objref.IDOf(rplp), objc.RegisterName("currentValue"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package corelocation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func monitoringRecordAdopt(id objc.ID) *MonitoringRecord {
 
 // Description returns the object's -description text.
 func (mr *MonitoringRecord) Description() string {
+	defer runtime.KeepAlive(mr)
 	return rt.Description(objref.IDOf(mr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mr *MonitoringRecord) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mr *MonitoringRecord) IsKind(className string) bool {
+	defer runtime.KeepAlive(mr)
 	return rt.IsKind(objref.IDOf(mr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mr *MonitoringRecord) String() string {
+	defer runtime.KeepAlive(mr)
 	return rt.Description(objref.IDOf(mr))
 }
 
@@ -74,12 +81,14 @@ func NewMonitoringRecord() *MonitoringRecord {
 
 // Condition returns the condition.
 func (mr *MonitoringRecord) Condition() *Condition {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("condition"))
 	return ConditionFromID(_r)
 }
 
 // LastEvent returns the last event.
 func (mr *MonitoringRecord) LastEvent() *MonitoringEvent {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("lastEvent"))
 	return MonitoringEventFromID(_r)
 }

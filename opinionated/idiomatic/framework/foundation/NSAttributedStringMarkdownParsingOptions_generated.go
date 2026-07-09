@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func attributedStringMarkdownParsingOptionsAdopt(id objc.ID) *AttributedStringMa
 
 // Description returns the object's -description text.
 func (asmpo *AttributedStringMarkdownParsingOptions) Description() string {
+	defer runtime.KeepAlive(asmpo)
 	return rt.Description(objref.IDOf(asmpo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (asmpo *AttributedStringMarkdownParsingOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(asmpo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(asmpo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (asmpo *AttributedStringMarkdownParsingOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(asmpo)
 	return rt.IsKind(objref.IDOf(asmpo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (asmpo *AttributedStringMarkdownParsingOptions) String() string {
+	defer runtime.KeepAlive(asmpo)
 	return rt.Description(objref.IDOf(asmpo))
 }
 
@@ -94,6 +100,7 @@ func (asmpo *AttributedStringMarkdownParsingOptions) WithFailurePolicy(failurePo
 
 // WithLanguageCode sets the BCP-47 language code for this document.
 func (asmpo *AttributedStringMarkdownParsingOptions) WithLanguageCode(languageCode StringProvider) *AttributedStringMarkdownParsingOptions {
+	defer runtime.KeepAlive(languageCode)
 	objc.Send[objc.ID](objref.IDOf(asmpo), objc.RegisterName("setLanguageCode:"), objref.IDOf(languageCode))
 	return asmpo
 }
@@ -111,31 +118,35 @@ func (asmpo *AttributedStringMarkdownParsingOptions) WithObservationInfo(observa
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (asmpo *AttributedStringMarkdownParsingOptions) WithScriptingProperties(scriptingProperties obj.Object) *AttributedStringMarkdownParsingOptions {
-	objc.Send[objc.ID](objref.IDOf(asmpo), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (asmpo *AttributedStringMarkdownParsingOptions) WithScriptingProperties(scriptingProperties map[string]obj.Object) *AttributedStringMarkdownParsingOptions {
+	objc.Send[objc.ID](objref.IDOf(asmpo), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return asmpo
 }
 
 // AllowsExtendedAttributes wraps the corresponding Objective-C method.
 func (asmpo *AttributedStringMarkdownParsingOptions) AllowsExtendedAttributes() bool {
+	defer runtime.KeepAlive(asmpo)
 	_r := objc.Send[bool](objref.IDOf(asmpo), objc.RegisterName("allowsExtendedAttributes"))
 	return _r
 }
 
 // InterpretedSyntax returns the interpreted syntax.
 func (asmpo *AttributedStringMarkdownParsingOptions) InterpretedSyntax() AttributedStringMarkdownInterpretedSyntax {
+	defer runtime.KeepAlive(asmpo)
 	_r := objc.Send[AttributedStringMarkdownInterpretedSyntax](objref.IDOf(asmpo), objc.RegisterName("interpretedSyntax"))
 	return _r
 }
 
 // FailurePolicy returns the failure policy.
 func (asmpo *AttributedStringMarkdownParsingOptions) FailurePolicy() AttributedStringMarkdownParsingFailurePolicy {
+	defer runtime.KeepAlive(asmpo)
 	_r := objc.Send[AttributedStringMarkdownParsingFailurePolicy](objref.IDOf(asmpo), objc.RegisterName("failurePolicy"))
 	return _r
 }
 
 // LanguageCode returns the language code.
 func (asmpo *AttributedStringMarkdownParsingOptions) LanguageCode() string {
+	defer runtime.KeepAlive(asmpo)
 	_r := objc.Send[objc.ID](objref.IDOf(asmpo), objc.RegisterName("languageCode"))
 	if _r == 0 {
 		return ""
@@ -145,6 +156,7 @@ func (asmpo *AttributedStringMarkdownParsingOptions) LanguageCode() string {
 
 // AppliesSourcePositionAttributes wraps the corresponding Objective-C method.
 func (asmpo *AttributedStringMarkdownParsingOptions) AppliesSourcePositionAttributes() bool {
+	defer runtime.KeepAlive(asmpo)
 	_r := objc.Send[bool](objref.IDOf(asmpo), objc.RegisterName("appliesSourcePositionAttributes"))
 	return _r
 }

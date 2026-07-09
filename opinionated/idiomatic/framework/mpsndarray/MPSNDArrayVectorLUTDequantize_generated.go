@@ -5,6 +5,8 @@
 package mpsndarray
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -57,6 +59,7 @@ func (avld *ArrayVectorLUTDequantize) WithVectorAxis(vectorAxis int) *ArrayVecto
 
 // VectorAxis returns which axis in the destination will receive the vector component, must be less than 4.
 func (avld *ArrayVectorLUTDequantize) VectorAxis() int {
+	defer runtime.KeepAlive(avld)
 	_r := objc.Send[int](objref.IDOf(avld), objc.RegisterName("vectorAxis"))
 	return _r
 }

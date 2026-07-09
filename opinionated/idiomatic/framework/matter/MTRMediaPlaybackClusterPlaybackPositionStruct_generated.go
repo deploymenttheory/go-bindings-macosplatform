@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,47 +50,56 @@ func mTRMediaPlaybackClusterPlaybackPositionStructAdopt(id objc.ID) *MTRMediaPla
 
 // Description returns the object's -description text.
 func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) Description() string {
+	defer runtime.KeepAlive(mmpcpps)
 	return rt.Description(objref.IDOf(mmpcpps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmpcpps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmpcpps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmpcpps)
 	return rt.IsKind(objref.IDOf(mmpcpps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) String() string {
+	defer runtime.KeepAlive(mmpcpps)
 	return rt.Description(objref.IDOf(mmpcpps))
 }
 
 // WithUpdatedAt sets the updated at.
 func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) WithUpdatedAt(updatedAt obj.Object) *MTRMediaPlaybackClusterPlaybackPositionStruct {
+	defer runtime.KeepAlive(updatedAt)
 	objc.Send[objc.ID](objref.IDOf(mmpcpps), objc.RegisterName("setUpdatedAt:"), objref.IDOf(updatedAt))
 	return mmpcpps
 }
 
 // WithPosition sets the position.
 func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) WithPosition(position obj.Object) *MTRMediaPlaybackClusterPlaybackPositionStruct {
+	defer runtime.KeepAlive(position)
 	objc.Send[objc.ID](objref.IDOf(mmpcpps), objc.RegisterName("setPosition:"), objref.IDOf(position))
 	return mmpcpps
 }
 
 // UpdatedAt returns the updated at.
-func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) UpdatedAt() obj.Object {
+func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) UpdatedAt() *foundation.Number {
+	defer runtime.KeepAlive(mmpcpps)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcpps), objc.RegisterName("updatedAt"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Position returns the position.
-func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) Position() obj.Object {
+func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) Position() *foundation.Number {
+	defer runtime.KeepAlive(mmpcpps)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcpps), objc.RegisterName("position"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRMediaPlaybackClusterPlaybackPositionStruct marks MTRMediaPlaybackClusterPlaybackPositionStruct — and, by embedding promotion, its

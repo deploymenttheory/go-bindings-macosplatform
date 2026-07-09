@@ -5,6 +5,7 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func portraitEffectsMatteAdopt(id objc.ID) *PortraitEffectsMatte {
 
 // Description returns the object's -description text.
 func (pem *PortraitEffectsMatte) Description() string {
+	defer runtime.KeepAlive(pem)
 	return rt.Description(objref.IDOf(pem))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pem *PortraitEffectsMatte) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pem)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pem), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pem *PortraitEffectsMatte) IsKind(className string) bool {
+	defer runtime.KeepAlive(pem)
 	return rt.IsKind(objref.IDOf(pem), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pem *PortraitEffectsMatte) String() string {
+	defer runtime.KeepAlive(pem)
 	return rt.Description(objref.IDOf(pem))
 }
 
@@ -75,8 +81,9 @@ func NewPortraitEffectsMatte() *PortraitEffectsMatte {
 	return portraitEffectsMatteAdopt(_id)
 }
 
-// PortraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBufferError returns a portrait effects matte by wrapping the replacement pixel buffer.
-func (pem *PortraitEffectsMatte) PortraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBufferError(pixelBuffer unsafe.Pointer) (result *PortraitEffectsMatte, err error) {
+// PortraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBuffer returns a portrait effects matte by wrapping the replacement pixel buffer.
+func (pem *PortraitEffectsMatte) PortraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBuffer(pixelBuffer unsafe.Pointer) (result *PortraitEffectsMatte, err error) {
+	defer runtime.KeepAlive(pem)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(pem), objc.RegisterName("portraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBuffer:error:"), pixelBuffer, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -87,12 +94,14 @@ func (pem *PortraitEffectsMatte) PortraitEffectsMatteByReplacingPortraitEffectsM
 
 // DictionaryRepresentationForAuxiliaryDataType a dictionary of primitive map information used for writing an image file with a portrait effects matte.
 func (pem *PortraitEffectsMatte) DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) obj.Object {
+	defer runtime.KeepAlive(pem)
 	_r := objc.Send[objc.ID](objref.IDOf(pem), objc.RegisterName("dictionaryRepresentationForAuxiliaryDataType:"), purego.NSString(outAuxDataType))
 	return obj.Wrap(_r)
 }
 
 // PixelFormatType specifies the pixel format type of this object's internal matting image. Currently the only supported CV pixel format type for the matting image is kCVPixelFormatType_OneComponent8.
 func (pem *PortraitEffectsMatte) PixelFormatType() int {
+	defer runtime.KeepAlive(pem)
 	_r := objc.Send[int](objref.IDOf(pem), objc.RegisterName("pixelFormatType"))
 	return _r
 }

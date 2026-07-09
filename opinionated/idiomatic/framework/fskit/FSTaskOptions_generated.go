@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func taskOptionsAdopt(id objc.ID) *TaskOptions {
 
 // Description returns the object's -description text.
 func (to *TaskOptions) Description() string {
+	defer runtime.KeepAlive(to)
 	return rt.Description(objref.IDOf(to))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (to *TaskOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(to)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(to), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (to *TaskOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(to)
 	return rt.IsKind(objref.IDOf(to), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (to *TaskOptions) String() string {
+	defer runtime.KeepAlive(to)
 	return rt.Description(objref.IDOf(to))
 }
 
@@ -73,15 +80,17 @@ func NewTaskOptions() *TaskOptions {
 }
 
 // URLForOption retrieves a URL for a given option.
-func (to *TaskOptions) URLForOption(option string) obj.Object {
+func (to *TaskOptions) URLForOption(option string) string {
+	defer runtime.KeepAlive(to)
 	_r := objc.Send[objc.ID](objref.IDOf(to), objc.RegisterName("urlForOption:"), purego.NSString(option))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // TaskOptions returns an array of strings that represent command-line options for the task. This property is equivalent to the `argv` array of C strings passed to a command-line tool.
 //
 // TaskOptions returns the collection as a Go slice.
 func (to *TaskOptions) TaskOptions() []string {
+	defer runtime.KeepAlive(to)
 	_arr := objc.Send[objc.ID](objref.IDOf(to), objc.RegisterName("taskOptions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

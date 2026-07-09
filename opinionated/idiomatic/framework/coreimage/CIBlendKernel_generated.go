@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,19 @@ func NewBlendKernel() *BlendKernel {
 
 // ApplyWithForegroundBackground creates a new image using the blend kernel and specified foreground and background images.
 func (bk *BlendKernel) ApplyWithForegroundBackground(foreground *Image, background *Image) *Image {
+	defer runtime.KeepAlive(bk)
+	defer runtime.KeepAlive(foreground)
+	defer runtime.KeepAlive(background)
 	_r := objc.Send[objc.ID](objref.IDOf(bk), objc.RegisterName("applyWithForeground:background:"), objref.IDOf(foreground), objref.IDOf(background))
 	return ImageFromID(_r)
 }
 
 // ApplyWithForegroundBackgroundColorSpace applies with foreground background color space.
 func (bk *BlendKernel) ApplyWithForegroundBackgroundColorSpace(foreground *Image, background *Image, colorSpace obj.Object) *Image {
+	defer runtime.KeepAlive(bk)
+	defer runtime.KeepAlive(foreground)
+	defer runtime.KeepAlive(background)
+	defer runtime.KeepAlive(colorSpace)
 	_r := objc.Send[objc.ID](objref.IDOf(bk), objc.RegisterName("applyWithForeground:background:colorSpace:"), objref.IDOf(foreground), objref.IDOf(background), objref.IDOf(colorSpace))
 	return ImageFromID(_r)
 }

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,35 +50,42 @@ func mTRBasicInformationClusterReachableChangedEventAdopt(id objc.ID) *MTRBasicI
 
 // Description returns the object's -description text.
 func (mbicrce *MTRBasicInformationClusterReachableChangedEvent) Description() string {
+	defer runtime.KeepAlive(mbicrce)
 	return rt.Description(objref.IDOf(mbicrce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbicrce *MTRBasicInformationClusterReachableChangedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbicrce)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbicrce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbicrce *MTRBasicInformationClusterReachableChangedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbicrce)
 	return rt.IsKind(objref.IDOf(mbicrce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbicrce *MTRBasicInformationClusterReachableChangedEvent) String() string {
+	defer runtime.KeepAlive(mbicrce)
 	return rt.Description(objref.IDOf(mbicrce))
 }
 
 // WithReachableNewValue sets the reachable new value.
 func (mbicrce *MTRBasicInformationClusterReachableChangedEvent) WithReachableNewValue(reachableNewValue obj.Object) *MTRBasicInformationClusterReachableChangedEvent {
+	defer runtime.KeepAlive(reachableNewValue)
 	objc.Send[objc.ID](objref.IDOf(mbicrce), objc.RegisterName("setReachableNewValue:"), objref.IDOf(reachableNewValue))
 	return mbicrce
 }
 
 // ReachableNewValue returns the reachable new value.
-func (mbicrce *MTRBasicInformationClusterReachableChangedEvent) ReachableNewValue() obj.Object {
+func (mbicrce *MTRBasicInformationClusterReachableChangedEvent) ReachableNewValue() *foundation.Number {
+	defer runtime.KeepAlive(mbicrce)
 	_r := objc.Send[objc.ID](objref.IDOf(mbicrce), objc.RegisterName("reachableNewValue"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRBasicInformationClusterReachableChangedEvent marks MTRBasicInformationClusterReachableChangedEvent — and, by embedding promotion, its

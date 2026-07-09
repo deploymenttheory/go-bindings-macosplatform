@@ -5,6 +5,7 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,27 +51,34 @@ func sampleBufferGeneratorAdopt(id objc.ID) *SampleBufferGenerator {
 
 // Description returns the object's -description text.
 func (sbg *SampleBufferGenerator) Description() string {
+	defer runtime.KeepAlive(sbg)
 	return rt.Description(objref.IDOf(sbg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sbg *SampleBufferGenerator) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sbg)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sbg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sbg *SampleBufferGenerator) IsKind(className string) bool {
+	defer runtime.KeepAlive(sbg)
 	return rt.IsKind(objref.IDOf(sbg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sbg *SampleBufferGenerator) String() string {
+	defer runtime.KeepAlive(sbg)
 	return rt.Description(objref.IDOf(sbg))
 }
 
 // NewSampleBufferGeneratorWithAssetTimebase creates a new sample buffer generator.
 func NewSampleBufferGeneratorWithAssetTimebase(asset *Asset, timebase obj.Object) *SampleBufferGenerator {
+	defer runtime.KeepAlive(asset)
+	defer runtime.KeepAlive(timebase)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVSampleBufferGenerator")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:timebase:"), objref.IDOf(asset), objref.IDOf(timebase))
 	return sampleBufferGeneratorAdopt(_id)
@@ -78,6 +86,8 @@ func NewSampleBufferGeneratorWithAssetTimebase(asset *Asset, timebase obj.Object
 
 // CreateSampleBufferForRequestError creates a sample buffer, and attempts to load its data asynchronously if requested.
 func (sbg *SampleBufferGenerator) CreateSampleBufferForRequestError(request *SampleBufferRequest) (result obj.Object, err error) {
+	defer runtime.KeepAlive(sbg)
+	defer runtime.KeepAlive(request)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(sbg), objc.RegisterName("createSampleBufferForRequest:error:"), objref.IDOf(request), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -88,18 +98,24 @@ func (sbg *SampleBufferGenerator) CreateSampleBufferForRequestError(request *Sam
 
 // CreateSampleBufferForRequest creates a new sample buffer reference for the specified buffer request.
 func (sbg *SampleBufferGenerator) CreateSampleBufferForRequest(request *SampleBufferRequest) obj.Object {
+	defer runtime.KeepAlive(sbg)
+	defer runtime.KeepAlive(request)
 	_r := objc.Send[objc.ID](objref.IDOf(sbg), objc.RegisterName("createSampleBufferForRequest:"), objref.IDOf(request))
 	return obj.Wrap(_r)
 }
 
 // MakeBatch creates a batch object to handle generating multiple sample buffers.
 func (sbg *SampleBufferGenerator) MakeBatch() *SampleBufferGeneratorBatch {
+	defer runtime.KeepAlive(sbg)
 	_r := objc.Send[objc.ID](objref.IDOf(sbg), objc.RegisterName("makeBatch"))
 	return SampleBufferGeneratorBatchFromID(_r)
 }
 
-// CreateSampleBufferForRequestAddingToBatchError creates a sample buffer and attempts to defer I/O for its data.
-func (sbg *SampleBufferGenerator) CreateSampleBufferForRequestAddingToBatchError(request *SampleBufferRequest, batch *SampleBufferGeneratorBatch) (result obj.Object, err error) {
+// CreateSampleBufferForRequestAddingToBatch creates a sample buffer and attempts to defer I/O for its data.
+func (sbg *SampleBufferGenerator) CreateSampleBufferForRequestAddingToBatch(request *SampleBufferRequest, batch *SampleBufferGeneratorBatch) (result obj.Object, err error) {
+	defer runtime.KeepAlive(sbg)
+	defer runtime.KeepAlive(request)
+	defer runtime.KeepAlive(batch)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(sbg), objc.RegisterName("createSampleBufferForRequest:addingToBatch:error:"), objref.IDOf(request), objref.IDOf(batch), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

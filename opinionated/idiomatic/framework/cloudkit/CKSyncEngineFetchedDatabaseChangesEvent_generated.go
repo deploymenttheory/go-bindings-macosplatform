@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -55,6 +57,7 @@ func NewSyncEngineFetchedDatabaseChangesEvent() *SyncEngineFetchedDatabaseChange
 //
 // Modifications returns the collection as a Go slice.
 func (sefdce *SyncEngineFetchedDatabaseChangesEvent) Modifications() []*RecordZone {
+	defer runtime.KeepAlive(sefdce)
 	_arr := objc.Send[objc.ID](objref.IDOf(sefdce), objc.RegisterName("modifications"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZone { return RecordZoneFromID(_id) })
 }
@@ -63,6 +66,7 @@ func (sefdce *SyncEngineFetchedDatabaseChangesEvent) Modifications() []*RecordZo
 //
 // Deletions returns the collection as a Go slice.
 func (sefdce *SyncEngineFetchedDatabaseChangesEvent) Deletions() []*SyncEngineFetchedZoneDeletion {
+	defer runtime.KeepAlive(sefdce)
 	_arr := objc.Send[objc.ID](objref.IDOf(sefdce), objc.RegisterName("deletions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SyncEngineFetchedZoneDeletion { return SyncEngineFetchedZoneDeletionFromID(_id) })
 }

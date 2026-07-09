@@ -5,12 +5,14 @@
 package spritekit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -63,6 +65,7 @@ func NewFieldNode() *FieldNode {
 
 // WithRegion sets the area (relative to the node’s origin) that the field affects.
 func (fn *FieldNode) WithRegion(region *Region) *FieldNode {
+	defer runtime.KeepAlive(region)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setRegion:"), objref.IDOf(region))
 	})
@@ -143,6 +146,7 @@ func (fn *FieldNode) WithAnimationSpeed(animationSpeed float32) *FieldNode {
 
 // WithTexture sets a normal texture that specifies the velocities at different points in a velocity field node.
 func (fn *FieldNode) WithTexture(texture TextureProvider) *FieldNode {
+	defer runtime.KeepAlive(texture)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setTexture:"), objref.IDOf(texture))
 	})
@@ -239,6 +243,7 @@ func (fn *FieldNode) WithName(name string) *FieldNode {
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (fn *FieldNode) WithPhysicsBody(physicsBody *PhysicsBody) *FieldNode {
+	defer runtime.KeepAlive(physicsBody)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	})
@@ -247,6 +252,7 @@ func (fn *FieldNode) WithPhysicsBody(physicsBody *PhysicsBody) *FieldNode {
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (fn *FieldNode) WithUserData(userData obj.Object) *FieldNode {
+	defer runtime.KeepAlive(userData)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	})
@@ -255,6 +261,7 @@ func (fn *FieldNode) WithUserData(userData obj.Object) *FieldNode {
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (fn *FieldNode) WithReachConstraints(reachConstraints *ReachConstraints) *FieldNode {
+	defer runtime.KeepAlive(reachConstraints)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	})
@@ -271,9 +278,9 @@ func (fn *FieldNode) WithConstraints(items ...*Constraint) *FieldNode {
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
-func (fn *FieldNode) WithAttributeValues(attributeValues obj.Object) *FieldNode {
+func (fn *FieldNode) WithAttributeValues(attributeValues map[string]*AttributeValue) *FieldNode {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAttributeValues:"), rt.MapToDict(attributeValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *AttributeValue) objc.ID { return objref.IDOf(_v) }))
 	})
 	return fn
 }
@@ -320,6 +327,7 @@ func (fn *FieldNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CG
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (fn *FieldNode) WithAccessibilityParent(accessibilityParent obj.Object) *FieldNode {
+	defer runtime.KeepAlive(accessibilityParent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	})
@@ -352,6 +360,7 @@ func (fn *FieldNode) WithAccessibilityEnabled(accessibilityEnabled bool) *FieldN
 
 // Region returns the region property is the domain of the field's effect. No force is applied to objects outside the region.
 func (fn *FieldNode) Region() *Region {
+	defer runtime.KeepAlive(fn)
 	var _mainthread0 *Region
 	purego.Main(func() {
 		_mainthread0 = func() *Region {
@@ -365,6 +374,7 @@ func (fn *FieldNode) Region() *Region {
 
 // Strength returns strength scaling value. default 1.0
 func (fn *FieldNode) Strength() float32 {
+	defer runtime.KeepAlive(fn)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -378,6 +388,7 @@ func (fn *FieldNode) Strength() float32 {
 
 // Falloff returns the falloff exponent used to calculate field strength at a distance. Falloff starts at the minimum radius. The default exponent is zero, which results in a uniform field with no falloff.
 func (fn *FieldNode) Falloff() float32 {
+	defer runtime.KeepAlive(fn)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -391,6 +402,7 @@ func (fn *FieldNode) Falloff() float32 {
 
 // MinimumRadius returns minimum radius of effect. Default is very small.
 func (fn *FieldNode) MinimumRadius() float32 {
+	defer runtime.KeepAlive(fn)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -404,6 +416,7 @@ func (fn *FieldNode) MinimumRadius() float32 {
 
 // IsEnabled reports whether if enabled, a field has an effect. default true
 func (fn *FieldNode) IsEnabled() bool {
+	defer runtime.KeepAlive(fn)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -417,6 +430,7 @@ func (fn *FieldNode) IsEnabled() bool {
 
 // IsExclusive reports whether if a field is exclusive, it suppresses any other field in its region of effect. If two or more exclusive fields overlap, it is undefined which one of them will take effect
 func (fn *FieldNode) IsExclusive() bool {
+	defer runtime.KeepAlive(fn)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -430,6 +444,7 @@ func (fn *FieldNode) IsExclusive() bool {
 
 // CategoryBitMask returns logical categories the field belongs to. Default is all categories. These categories correspond to fieldBitMasks, and can be used to enforce that a particular field applies to a particular category of objects.
 func (fn *FieldNode) CategoryBitMask() uint32 {
+	defer runtime.KeepAlive(fn)
 	var _mainthread0 uint32
 	purego.Main(func() {
 		_mainthread0 = func() uint32 {
@@ -443,6 +458,7 @@ func (fn *FieldNode) CategoryBitMask() uint32 {
 
 // Smoothness returns fields without a smoothness component will return 0
 func (fn *FieldNode) Smoothness() float32 {
+	defer runtime.KeepAlive(fn)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -456,6 +472,7 @@ func (fn *FieldNode) Smoothness() float32 {
 
 // AnimationSpeed returns fields that can be animated can have non zero values. A value of 2 will animated twice as fast as a value of 1.
 func (fn *FieldNode) AnimationSpeed() float32 {
+	defer runtime.KeepAlive(fn)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -469,6 +486,7 @@ func (fn *FieldNode) AnimationSpeed() float32 {
 
 // Texture returns fields constructed with a texture can be uppdated by assigning a new texture
 func (fn *FieldNode) Texture() *Texture {
+	defer runtime.KeepAlive(fn)
 	var _mainthread0 *Texture
 	purego.Main(func() {
 		_mainthread0 = func() *Texture {

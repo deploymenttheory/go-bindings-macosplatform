@@ -130,8 +130,8 @@ func (o *CBPeripheralManager) PublishL2CAPChannelWithEncryption(encryptionRequir
 }
 
 // Removes a published service from the local system.
-func (o *CBPeripheralManager) UnpublishL2CAPChannel(pSM uint16) {
-	o.Ptr().Send(_cBPeripheralManagerSelUnpublishL2CAPChannel, pSM)
+func (o *CBPeripheralManager) UnpublishL2CAPChannel(psm uint16) {
+	o.Ptr().Send(_cBPeripheralManagerSelUnpublishL2CAPChannel, psm)
 }
 
 // @property delegate @discussion The delegate object that will receive peripheral events.

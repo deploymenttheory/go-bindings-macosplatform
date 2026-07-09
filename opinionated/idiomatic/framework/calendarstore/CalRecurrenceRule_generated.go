@@ -5,6 +5,8 @@
 package calendarstore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,27 +47,33 @@ func calRecurrenceRuleAdopt(id objc.ID) *CalRecurrenceRule {
 
 // Description returns the object's -description text.
 func (crr *CalRecurrenceRule) Description() string {
+	defer runtime.KeepAlive(crr)
 	return rt.Description(objref.IDOf(crr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (crr *CalRecurrenceRule) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(crr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(crr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (crr *CalRecurrenceRule) IsKind(className string) bool {
+	defer runtime.KeepAlive(crr)
 	return rt.IsKind(objref.IDOf(crr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (crr *CalRecurrenceRule) String() string {
+	defer runtime.KeepAlive(crr)
 	return rt.Description(objref.IDOf(crr))
 }
 
 // NewCalRecurrenceRuleDailyRecurrenceWithIntervalEnd creates a new CalRecurrenceRule.
 func NewCalRecurrenceRuleDailyRecurrenceWithIntervalEnd(interval int, end *CalRecurrenceEnd) *CalRecurrenceRule {
+	defer runtime.KeepAlive(end)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CalRecurrenceRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initDailyRecurrenceWithInterval:end:"), interval, objref.IDOf(end))
 	return calRecurrenceRuleAdopt(_id)
@@ -73,6 +81,7 @@ func NewCalRecurrenceRuleDailyRecurrenceWithIntervalEnd(interval int, end *CalRe
 
 // NewCalRecurrenceRuleWeeklyRecurrenceWithIntervalEnd creates a new CalRecurrenceRule.
 func NewCalRecurrenceRuleWeeklyRecurrenceWithIntervalEnd(interval int, end *CalRecurrenceEnd) *CalRecurrenceRule {
+	defer runtime.KeepAlive(end)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CalRecurrenceRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWeeklyRecurrenceWithInterval:end:"), interval, objref.IDOf(end))
 	return calRecurrenceRuleAdopt(_id)
@@ -80,6 +89,8 @@ func NewCalRecurrenceRuleWeeklyRecurrenceWithIntervalEnd(interval int, end *CalR
 
 // NewCalRecurrenceRuleWeeklyRecurrenceWithIntervalForDaysOfTheWeekEnd creates a new CalRecurrenceRule.
 func NewCalRecurrenceRuleWeeklyRecurrenceWithIntervalForDaysOfTheWeekEnd(interval int, days obj.Object, end *CalRecurrenceEnd) *CalRecurrenceRule {
+	defer runtime.KeepAlive(days)
+	defer runtime.KeepAlive(end)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CalRecurrenceRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWeeklyRecurrenceWithInterval:forDaysOfTheWeek:end:"), interval, objref.IDOf(days), objref.IDOf(end))
 	return calRecurrenceRuleAdopt(_id)
@@ -87,6 +98,7 @@ func NewCalRecurrenceRuleWeeklyRecurrenceWithIntervalForDaysOfTheWeekEnd(interva
 
 // NewCalRecurrenceRuleMonthlyRecurrenceWithIntervalEnd creates a new CalRecurrenceRule.
 func NewCalRecurrenceRuleMonthlyRecurrenceWithIntervalEnd(interval int, end *CalRecurrenceEnd) *CalRecurrenceRule {
+	defer runtime.KeepAlive(end)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CalRecurrenceRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initMonthlyRecurrenceWithInterval:end:"), interval, objref.IDOf(end))
 	return calRecurrenceRuleAdopt(_id)
@@ -94,6 +106,8 @@ func NewCalRecurrenceRuleMonthlyRecurrenceWithIntervalEnd(interval int, end *Cal
 
 // NewCalRecurrenceRuleMonthlyRecurrenceWithIntervalForDaysOfTheMonthEnd creates a new CalRecurrenceRule.
 func NewCalRecurrenceRuleMonthlyRecurrenceWithIntervalForDaysOfTheMonthEnd(interval int, monthDays obj.Object, end *CalRecurrenceEnd) *CalRecurrenceRule {
+	defer runtime.KeepAlive(monthDays)
+	defer runtime.KeepAlive(end)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CalRecurrenceRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initMonthlyRecurrenceWithInterval:forDaysOfTheMonth:end:"), interval, objref.IDOf(monthDays), objref.IDOf(end))
 	return calRecurrenceRuleAdopt(_id)
@@ -101,6 +115,7 @@ func NewCalRecurrenceRuleMonthlyRecurrenceWithIntervalForDaysOfTheMonthEnd(inter
 
 // NewCalRecurrenceRuleMonthlyRecurrenceWithIntervalForDayOfTheWeekForWeekOfTheMonthEnd creates a new CalRecurrenceRule.
 func NewCalRecurrenceRuleMonthlyRecurrenceWithIntervalForDayOfTheWeekForWeekOfTheMonthEnd(interval int, weekDay int, monthWeek int, end *CalRecurrenceEnd) *CalRecurrenceRule {
+	defer runtime.KeepAlive(end)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CalRecurrenceRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initMonthlyRecurrenceWithInterval:forDayOfTheWeek:forWeekOfTheMonth:end:"), interval, weekDay, monthWeek, objref.IDOf(end))
 	return calRecurrenceRuleAdopt(_id)
@@ -108,6 +123,7 @@ func NewCalRecurrenceRuleMonthlyRecurrenceWithIntervalForDayOfTheWeekForWeekOfTh
 
 // NewCalRecurrenceRuleYearlyRecurrenceWithIntervalEnd creates a new CalRecurrenceRule.
 func NewCalRecurrenceRuleYearlyRecurrenceWithIntervalEnd(interval int, end *CalRecurrenceEnd) *CalRecurrenceRule {
+	defer runtime.KeepAlive(end)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CalRecurrenceRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initYearlyRecurrenceWithInterval:end:"), interval, objref.IDOf(end))
 	return calRecurrenceRuleAdopt(_id)
@@ -115,6 +131,8 @@ func NewCalRecurrenceRuleYearlyRecurrenceWithIntervalEnd(interval int, end *CalR
 
 // NewCalRecurrenceRuleYearlyRecurrenceWithIntervalForMonthsOfTheYearEnd creates a new CalRecurrenceRule.
 func NewCalRecurrenceRuleYearlyRecurrenceWithIntervalForMonthsOfTheYearEnd(interval int, months obj.Object, end *CalRecurrenceEnd) *CalRecurrenceRule {
+	defer runtime.KeepAlive(months)
+	defer runtime.KeepAlive(end)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CalRecurrenceRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initYearlyRecurrenceWithInterval:forMonthsOfTheYear:end:"), interval, objref.IDOf(months), objref.IDOf(end))
 	return calRecurrenceRuleAdopt(_id)
@@ -122,6 +140,8 @@ func NewCalRecurrenceRuleYearlyRecurrenceWithIntervalForMonthsOfTheYearEnd(inter
 
 // NewCalRecurrenceRuleYearlyRecurrenceWithIntervalForDayOfTheWeekForWeekOfTheMonthForMonthsOfTheYearEnd creates a new CalRecurrenceRule.
 func NewCalRecurrenceRuleYearlyRecurrenceWithIntervalForDayOfTheWeekForWeekOfTheMonthForMonthsOfTheYearEnd(interval int, weekDay int, monthWeek int, months obj.Object, end *CalRecurrenceEnd) *CalRecurrenceRule {
+	defer runtime.KeepAlive(months)
+	defer runtime.KeepAlive(end)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CalRecurrenceRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initYearlyRecurrenceWithInterval:forDayOfTheWeek:forWeekOfTheMonth:forMonthsOfTheYear:end:"), interval, weekDay, monthWeek, objref.IDOf(months), objref.IDOf(end))
 	return calRecurrenceRuleAdopt(_id)
@@ -129,48 +149,56 @@ func NewCalRecurrenceRuleYearlyRecurrenceWithIntervalForDayOfTheWeekForWeekOfThe
 
 // RecurrenceEnd returns the recurrence end.
 func (crr *CalRecurrenceRule) RecurrenceEnd() *CalRecurrenceEnd {
+	defer runtime.KeepAlive(crr)
 	_r := objc.Send[objc.ID](objref.IDOf(crr), objc.RegisterName("recurrenceEnd"))
 	return CalRecurrenceEndFromID(_r)
 }
 
 // RecurrenceType returns the recurrence type.
 func (crr *CalRecurrenceRule) RecurrenceType() CalRecurrenceType {
+	defer runtime.KeepAlive(crr)
 	_r := objc.Send[CalRecurrenceType](objref.IDOf(crr), objc.RegisterName("recurrenceType"))
 	return _r
 }
 
 // RecurrenceInterval returns the recurrence interval.
 func (crr *CalRecurrenceRule) RecurrenceInterval() int {
+	defer runtime.KeepAlive(crr)
 	_r := objc.Send[int](objref.IDOf(crr), objc.RegisterName("recurrenceInterval"))
 	return _r
 }
 
 // FirstDayOfTheWeek returns the first day of the week.
 func (crr *CalRecurrenceRule) FirstDayOfTheWeek() int {
+	defer runtime.KeepAlive(crr)
 	_r := objc.Send[int](objref.IDOf(crr), objc.RegisterName("firstDayOfTheWeek"))
 	return _r
 }
 
 // DaysOfTheWeek returns the days of the week.
 func (crr *CalRecurrenceRule) DaysOfTheWeek() obj.Object {
+	defer runtime.KeepAlive(crr)
 	_r := objc.Send[objc.ID](objref.IDOf(crr), objc.RegisterName("daysOfTheWeek"))
 	return obj.Wrap(_r)
 }
 
 // DaysOfTheMonth returns the days of the month.
 func (crr *CalRecurrenceRule) DaysOfTheMonth() obj.Object {
+	defer runtime.KeepAlive(crr)
 	_r := objc.Send[objc.ID](objref.IDOf(crr), objc.RegisterName("daysOfTheMonth"))
 	return obj.Wrap(_r)
 }
 
 // NthWeekDaysOfTheMonth returns the nth week days of the month.
 func (crr *CalRecurrenceRule) NthWeekDaysOfTheMonth() obj.Object {
+	defer runtime.KeepAlive(crr)
 	_r := objc.Send[objc.ID](objref.IDOf(crr), objc.RegisterName("nthWeekDaysOfTheMonth"))
 	return obj.Wrap(_r)
 }
 
 // MonthsOfTheYear returns the months of the year.
 func (crr *CalRecurrenceRule) MonthsOfTheYear() obj.Object {
+	defer runtime.KeepAlive(crr)
 	_r := objc.Send[objc.ID](objref.IDOf(crr), objc.RegisterName("monthsOfTheYear"))
 	return obj.Wrap(_r)
 }

@@ -8,22 +8,22 @@ import (
 	"fmt"
 )
 
-type Rb_io_wait_readwrite int64
+type RbIOWaitReadwrite int64
 
 const (
-	RB_IO_WAIT_READABLE Rb_io_wait_readwrite = 0
-	RB_IO_WAIT_WRITABLE Rb_io_wait_readwrite = 1
+	RbIOWaitReadwriteReadable RbIOWaitReadwrite = 0
+	RbIOWaitReadwriteWritable RbIOWaitReadwrite = 1
 )
 
-// String returns the Rb_io_wait_readwrite constant's name, or its numeric form when the
+// String returns the RbIOWaitReadwrite constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Rb_io_wait_readwrite) String() string {
+func (e RbIOWaitReadwrite) String() string {
 	switch e {
-	case RB_IO_WAIT_READABLE:
-		return "RB_IO_WAIT_READABLE"
-	case RB_IO_WAIT_WRITABLE:
-		return "RB_IO_WAIT_WRITABLE"
+	case RbIOWaitReadwriteReadable:
+		return "RbIOWaitReadwriteReadable"
+	case RbIOWaitReadwriteWritable:
+		return "RbIOWaitReadwriteWritable"
 	default:
-		return fmt.Sprintf("Rb_io_wait_readwrite(%d)", int64(e))
+		return fmt.Sprintf("RbIOWaitReadwrite(%d)", int64(e))
 	}
 }

@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -195,16 +197,19 @@ func (dfe *DOMHTMLFormElement) WithTextContent(textContent string) *DOMHTMLFormE
 
 // Submit wraps the corresponding Objective-C method.
 func (dfe *DOMHTMLFormElement) Submit() {
+	defer runtime.KeepAlive(dfe)
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("submit"))
 }
 
 // Reset wraps the corresponding Objective-C method.
 func (dfe *DOMHTMLFormElement) Reset() {
+	defer runtime.KeepAlive(dfe)
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("reset"))
 }
 
 // AcceptCharset returns the accept charset.
 func (dfe *DOMHTMLFormElement) AcceptCharset() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("acceptCharset"))
 	if _r == 0 {
 		return ""
@@ -214,6 +219,7 @@ func (dfe *DOMHTMLFormElement) AcceptCharset() string {
 
 // Action returns the action.
 func (dfe *DOMHTMLFormElement) Action() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("action"))
 	if _r == 0 {
 		return ""
@@ -223,6 +229,7 @@ func (dfe *DOMHTMLFormElement) Action() string {
 
 // Enctype returns the enctype.
 func (dfe *DOMHTMLFormElement) Enctype() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("enctype"))
 	if _r == 0 {
 		return ""
@@ -232,6 +239,7 @@ func (dfe *DOMHTMLFormElement) Enctype() string {
 
 // Encoding returns the encoding.
 func (dfe *DOMHTMLFormElement) Encoding() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("encoding"))
 	if _r == 0 {
 		return ""
@@ -241,6 +249,7 @@ func (dfe *DOMHTMLFormElement) Encoding() string {
 
 // Method returns the method.
 func (dfe *DOMHTMLFormElement) Method() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("method"))
 	if _r == 0 {
 		return ""
@@ -250,6 +259,7 @@ func (dfe *DOMHTMLFormElement) Method() string {
 
 // Name returns the name.
 func (dfe *DOMHTMLFormElement) Name() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -259,6 +269,7 @@ func (dfe *DOMHTMLFormElement) Name() string {
 
 // Target returns the target.
 func (dfe *DOMHTMLFormElement) Target() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("target"))
 	if _r == 0 {
 		return ""
@@ -268,12 +279,14 @@ func (dfe *DOMHTMLFormElement) Target() string {
 
 // Elements returns the elements.
 func (dfe *DOMHTMLFormElement) Elements() *DOMHTMLCollection {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("elements"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
 // Length returns the length.
 func (dfe *DOMHTMLFormElement) Length() int {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[int](objref.IDOf(dfe), objc.RegisterName("length"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package glkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -77,24 +79,28 @@ func (ept *EffectPropertyTexture) WithEnvMode(envMode TextureEnvMode) *EffectPro
 
 // Enabled returns the enabled.
 func (ept *EffectPropertyTexture) Enabled() uint8 {
+	defer runtime.KeepAlive(ept)
 	_r := objc.Send[uint8](objref.IDOf(ept), objc.RegisterName("enabled"))
 	return _r
 }
 
 // Name returns the name.
 func (ept *EffectPropertyTexture) Name() uint32 {
+	defer runtime.KeepAlive(ept)
 	_r := objc.Send[uint32](objref.IDOf(ept), objc.RegisterName("name"))
 	return _r
 }
 
 // Target returns the target.
 func (ept *EffectPropertyTexture) Target() TextureTarget {
+	defer runtime.KeepAlive(ept)
 	_r := objc.Send[TextureTarget](objref.IDOf(ept), objc.RegisterName("target"))
 	return _r
 }
 
 // EnvMode returns the env mode.
 func (ept *EffectPropertyTexture) EnvMode() TextureEnvMode {
+	defer runtime.KeepAlive(ept)
 	_r := objc.Send[TextureEnvMode](objref.IDOf(ept), objc.RegisterName("envMode"))
 	return _r
 }

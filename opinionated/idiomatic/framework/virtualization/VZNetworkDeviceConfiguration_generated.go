@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,45 +51,54 @@ func networkDeviceConfigurationAdopt(id objc.ID) *NetworkDeviceConfiguration {
 
 // Description returns the object's -description text.
 func (ndc *NetworkDeviceConfiguration) Description() string {
+	defer runtime.KeepAlive(ndc)
 	return rt.Description(objref.IDOf(ndc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ndc *NetworkDeviceConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ndc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ndc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ndc *NetworkDeviceConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(ndc)
 	return rt.IsKind(objref.IDOf(ndc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ndc *NetworkDeviceConfiguration) String() string {
+	defer runtime.KeepAlive(ndc)
 	return rt.Description(objref.IDOf(ndc))
 }
 
 // WithMACAddress sets the media access control (MAC) address to assign to the network device.
-func (ndc *NetworkDeviceConfiguration) WithMACAddress(mACAddress *MACAddress) *NetworkDeviceConfiguration {
-	objc.Send[objc.ID](objref.IDOf(ndc), objc.RegisterName("setMACAddress:"), objref.IDOf(mACAddress))
+func (ndc *NetworkDeviceConfiguration) WithMACAddress(macAddress *MACAddress) *NetworkDeviceConfiguration {
+	defer runtime.KeepAlive(macAddress)
+	objc.Send[objc.ID](objref.IDOf(ndc), objc.RegisterName("setMACAddress:"), objref.IDOf(macAddress))
 	return ndc
 }
 
 // WithAttachment sets the object that defines how the virtual network device communicates with the host system.
 func (ndc *NetworkDeviceConfiguration) WithAttachment(attachment NetworkDeviceAttachmentProvider) *NetworkDeviceConfiguration {
+	defer runtime.KeepAlive(attachment)
 	objc.Send[objc.ID](objref.IDOf(ndc), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 	return ndc
 }
 
 // MACAddress returns the media access control address of the device. The default is a random, locally administered, unicast address.
 func (ndc *NetworkDeviceConfiguration) MACAddress() *MACAddress {
+	defer runtime.KeepAlive(ndc)
 	_r := objc.Send[objc.ID](objref.IDOf(ndc), objc.RegisterName("MACAddress"))
 	return MACAddressFromID(_r)
 }
 
 // Attachment returns network device attachment. Defines how the virtual device interfaces with the host system. The default is nil.
 func (ndc *NetworkDeviceConfiguration) Attachment() *NetworkDeviceAttachment {
+	defer runtime.KeepAlive(ndc)
 	_r := objc.Send[objc.ID](objref.IDOf(ndc), objc.RegisterName("attachment"))
 	return NetworkDeviceAttachmentFromID(_r)
 }

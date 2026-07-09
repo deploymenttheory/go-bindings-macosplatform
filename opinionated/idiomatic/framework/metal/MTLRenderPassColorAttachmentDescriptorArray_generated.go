@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func renderPassColorAttachmentDescriptorArrayAdopt(id objc.ID) *RenderPassColorA
 
 // Description returns the object's -description text.
 func (rpcada *RenderPassColorAttachmentDescriptorArray) Description() string {
+	defer runtime.KeepAlive(rpcada)
 	return rt.Description(objref.IDOf(rpcada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rpcada *RenderPassColorAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rpcada)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rpcada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rpcada *RenderPassColorAttachmentDescriptorArray) IsKind(className string) bool {
+	defer runtime.KeepAlive(rpcada)
 	return rt.IsKind(objref.IDOf(rpcada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rpcada *RenderPassColorAttachmentDescriptorArray) String() string {
+	defer runtime.KeepAlive(rpcada)
 	return rt.Description(objref.IDOf(rpcada))
 }
 
@@ -74,11 +81,14 @@ func NewRenderPassColorAttachmentDescriptorArray() *RenderPassColorAttachmentDes
 
 // ObjectAtIndexedSubscript returns the descriptor object for the specified color attachment.
 func (rpcada *RenderPassColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *RenderPassColorAttachmentDescriptor {
+	defer runtime.KeepAlive(rpcada)
 	_r := objc.Send[objc.ID](objref.IDOf(rpcada), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return RenderPassColorAttachmentDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets the descriptor for the specified color attachment.
 func (rpcada *RenderPassColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *RenderPassColorAttachmentDescriptor, attachmentIndex int) {
+	defer runtime.KeepAlive(rpcada)
+	defer runtime.KeepAlive(attachment)
 	objc.Send[objc.ID](objref.IDOf(rpcada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }

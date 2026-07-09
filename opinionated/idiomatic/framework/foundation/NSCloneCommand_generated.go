@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,19 +58,21 @@ func NewCloneCommand() *CloneCommand {
 
 // WithDirectParameter sets sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
 func (cc *CloneCommand) WithDirectParameter(directParameter obj.Object) *CloneCommand {
+	defer runtime.KeepAlive(directParameter)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
 	return cc
 }
 
 // WithReceiversSpecifier sets sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
 func (cc *CloneCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *CloneCommand {
+	defer runtime.KeepAlive(receiversSpecifier)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
 	return cc
 }
 
 // WithArguments sets sets the arguments of the command to args.
-func (cc *CloneCommand) WithArguments(arguments obj.Object) *CloneCommand {
-	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
+func (cc *CloneCommand) WithArguments(arguments map[string]obj.Object) *CloneCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setArguments:"), rt.MapToDict(arguments, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return cc
 }
 
@@ -80,18 +84,21 @@ func (cc *CloneCommand) WithScriptErrorNumber(scriptErrorNumber int) *CloneComma
 
 // WithScriptErrorOffendingObjectDescriptor sets sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 func (cc *CloneCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *CloneCommand {
+	defer runtime.KeepAlive(scriptErrorOffendingObjectDescriptor)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
 	return cc
 }
 
 // WithScriptErrorExpectedTypeDescriptor sets sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 func (cc *CloneCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *CloneCommand {
+	defer runtime.KeepAlive(scriptErrorExpectedTypeDescriptor)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
 	return cc
 }
 
 // WithScriptErrorString sets sets a script error string that is associated with execution of the command.
 func (cc *CloneCommand) WithScriptErrorString(scriptErrorString StringProvider) *CloneCommand {
+	defer runtime.KeepAlive(scriptErrorString)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
 	return cc
 }
@@ -103,13 +110,14 @@ func (cc *CloneCommand) WithObservationInfo(observationInfo unsafe.Pointer) *Clo
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (cc *CloneCommand) WithScriptingProperties(scriptingProperties obj.Object) *CloneCommand {
-	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (cc *CloneCommand) WithScriptingProperties(scriptingProperties map[string]obj.Object) *CloneCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return cc
 }
 
 // KeySpecifier returns the key specifier.
 func (cc *CloneCommand) KeySpecifier() *ScriptObjectSpecifier {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("keySpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }

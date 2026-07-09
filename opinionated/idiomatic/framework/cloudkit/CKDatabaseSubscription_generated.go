@@ -5,7 +5,10 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -54,6 +57,7 @@ func NewDatabaseSubscription() *DatabaseSubscription {
 
 // NewDatabaseSubscriptionWithSubscriptionID creates a named subscription for all records in a database.
 func NewDatabaseSubscriptionWithSubscriptionID(subscriptionID obj.Object) *DatabaseSubscription {
+	defer runtime.KeepAlive(subscriptionID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKDatabaseSubscription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubscriptionID:"), objref.IDOf(subscriptionID))
 	return databaseSubscriptionAdopt(_id)
@@ -61,6 +65,7 @@ func NewDatabaseSubscriptionWithSubscriptionID(subscriptionID obj.Object) *Datab
 
 // NewDatabaseSubscriptionWithCoder creates a database subscription from a serialized instance.
 func NewDatabaseSubscriptionWithCoder(aDecoder obj.Object) *DatabaseSubscription {
+	defer runtime.KeepAlive(aDecoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKDatabaseSubscription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return databaseSubscriptionAdopt(_id)
@@ -68,20 +73,23 @@ func NewDatabaseSubscriptionWithCoder(aDecoder obj.Object) *DatabaseSubscription
 
 // WithRecordType sets the type of record that the subscription queries.
 func (ds *DatabaseSubscription) WithRecordType(recordType obj.Object) *DatabaseSubscription {
+	defer runtime.KeepAlive(recordType)
 	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("setRecordType:"), objref.IDOf(recordType))
 	return ds
 }
 
 // WithNotificationInfo sets the configuration for a subscription’s push notifications.
 func (ds *DatabaseSubscription) WithNotificationInfo(notificationInfo *NotificationInfo) *DatabaseSubscription {
+	defer runtime.KeepAlive(notificationInfo)
 	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("setNotificationInfo:"), objref.IDOf(notificationInfo))
 	return ds
 }
 
 // RecordType returns the record type.
-func (ds *DatabaseSubscription) RecordType() obj.Object {
+func (ds *DatabaseSubscription) RecordType() *foundation.String {
+	defer runtime.KeepAlive(ds)
 	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("recordType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 var _ SubscriptionProvider = (*DatabaseSubscription)(nil)

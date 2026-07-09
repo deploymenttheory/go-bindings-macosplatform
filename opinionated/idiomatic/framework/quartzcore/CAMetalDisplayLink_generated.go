@@ -5,8 +5,11 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,30 +50,46 @@ func metalDisplayLinkAdopt(id objc.ID) *MetalDisplayLink {
 
 // Description returns the object's -description text.
 func (mdl *MetalDisplayLink) Description() string {
+	defer runtime.KeepAlive(mdl)
 	return rt.Description(objref.IDOf(mdl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdl *MetalDisplayLink) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdl *MetalDisplayLink) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdl)
 	return rt.IsKind(objref.IDOf(mdl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdl *MetalDisplayLink) String() string {
+	defer runtime.KeepAlive(mdl)
 	return rt.Description(objref.IDOf(mdl))
 }
 
 // NewMetalDisplayLinkWithMetalLayer creates a display link for Metal from a Core Animation layer.
 func NewMetalDisplayLinkWithMetalLayer(layer *MetalLayer) *MetalDisplayLink {
+	defer runtime.KeepAlive(layer)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CAMetalDisplayLink")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMetalLayer:"), objref.IDOf(layer))
 	return metalDisplayLinkAdopt(_id)
+}
+
+// WithDelegate sets an instance of a type your app implements that responds to the system’s callbacks.
+func (mdl *MetalDisplayLink) WithDelegate(delegate MetalDisplayLinkDelegate) *MetalDisplayLink {
+	_shim := newMetalDisplayLinkDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(mdl), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(mdl), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return mdl
 }
 
 // WithPreferredFrameLatency sets the amount of time, in frames, your app requests to render a frame.
@@ -87,27 +106,36 @@ func (mdl *MetalDisplayLink) WithPaused(paused bool) *MetalDisplayLink {
 
 // AddToRunLoopForMode registers the display link with a run loop.
 func (mdl *MetalDisplayLink) AddToRunLoopForMode(runloop obj.Object, mode obj.Object) {
+	defer runtime.KeepAlive(mdl)
+	defer runtime.KeepAlive(runloop)
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(mdl), objc.RegisterName("addToRunLoop:forMode:"), objref.IDOf(runloop), objref.IDOf(mode))
 }
 
 // RemoveFromRunLoopForMode removes a mode’s display link from a run loop.
 func (mdl *MetalDisplayLink) RemoveFromRunLoopForMode(runloop obj.Object, mode obj.Object) {
+	defer runtime.KeepAlive(mdl)
+	defer runtime.KeepAlive(runloop)
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(mdl), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(runloop), objref.IDOf(mode))
 }
 
 // Invalidate removes the display link from all run loops for all modes.
 func (mdl *MetalDisplayLink) Invalidate() {
+	defer runtime.KeepAlive(mdl)
 	objc.Send[objc.ID](objref.IDOf(mdl), objc.RegisterName("invalidate"))
 }
 
 // PreferredFrameLatency returns the preferred frame latency.
 func (mdl *MetalDisplayLink) PreferredFrameLatency() float32 {
+	defer runtime.KeepAlive(mdl)
 	_r := objc.Send[float32](objref.IDOf(mdl), objc.RegisterName("preferredFrameLatency"))
 	return _r
 }
 
 // IsPaused reports whether the object is paused.
 func (mdl *MetalDisplayLink) IsPaused() bool {
+	defer runtime.KeepAlive(mdl)
 	_r := objc.Send[bool](objref.IDOf(mdl), objc.RegisterName("isPaused"))
 	return _r
 }

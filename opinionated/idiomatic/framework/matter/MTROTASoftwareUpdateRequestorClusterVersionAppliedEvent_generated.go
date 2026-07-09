@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,47 +50,56 @@ func mTROTASoftwareUpdateRequestorClusterVersionAppliedEventAdopt(id objc.ID) *M
 
 // Description returns the object's -description text.
 func (msurcvae *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) Description() string {
+	defer runtime.KeepAlive(msurcvae)
 	return rt.Description(objref.IDOf(msurcvae))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msurcvae *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msurcvae)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msurcvae), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msurcvae *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(msurcvae)
 	return rt.IsKind(objref.IDOf(msurcvae), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msurcvae *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) String() string {
+	defer runtime.KeepAlive(msurcvae)
 	return rt.Description(objref.IDOf(msurcvae))
 }
 
 // WithSoftwareVersion sets the software version.
 func (msurcvae *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent {
+	defer runtime.KeepAlive(softwareVersion)
 	objc.Send[objc.ID](objref.IDOf(msurcvae), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return msurcvae
 }
 
 // WithProductID sets the product ID.
 func (msurcvae *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) WithProductID(productID obj.Object) *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent {
+	defer runtime.KeepAlive(productID)
 	objc.Send[objc.ID](objref.IDOf(msurcvae), objc.RegisterName("setProductID:"), objref.IDOf(productID))
 	return msurcvae
 }
 
 // SoftwareVersion returns the software version.
-func (msurcvae *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) SoftwareVersion() obj.Object {
+func (msurcvae *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) SoftwareVersion() *foundation.Number {
+	defer runtime.KeepAlive(msurcvae)
 	_r := objc.Send[objc.ID](objref.IDOf(msurcvae), objc.RegisterName("softwareVersion"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ProductID returns the product ID.
-func (msurcvae *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) ProductID() obj.Object {
+func (msurcvae *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) ProductID() *foundation.Number {
+	defer runtime.KeepAlive(msurcvae)
 	_r := objc.Send[objc.ID](objref.IDOf(msurcvae), objc.RegisterName("productID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTROTASoftwareUpdateRequestorClusterVersionAppliedEvent marks MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent — and, by embedding promotion, its

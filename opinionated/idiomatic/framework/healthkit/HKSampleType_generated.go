@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,30 +49,35 @@ func sampleTypeAdopt(id objc.ID) *SampleType {
 
 // IsMaximumDurationRestricted reports whether the start and end date for samples of this type are restricted by a maximum duration.
 func (st *SampleType) IsMaximumDurationRestricted() bool {
+	defer runtime.KeepAlive(st)
 	_r := objc.Send[bool](objref.IDOf(st), objc.RegisterName("isMaximumDurationRestricted"))
 	return _r
 }
 
 // MaximumAllowedDuration returns when the duration is restricted for samples of this type, returns the maximum duration allowed, calculated as the difference between end and start dates. Throws an exception if there is no maximum restriction on duration for samples of this type.
 func (st *SampleType) MaximumAllowedDuration() float64 {
+	defer runtime.KeepAlive(st)
 	_r := objc.Send[float64](objref.IDOf(st), objc.RegisterName("maximumAllowedDuration"))
 	return _r
 }
 
 // IsMinimumDurationRestricted reports whether the start and end date for samples of this type are restricted by a minimum duration.
 func (st *SampleType) IsMinimumDurationRestricted() bool {
+	defer runtime.KeepAlive(st)
 	_r := objc.Send[bool](objref.IDOf(st), objc.RegisterName("isMinimumDurationRestricted"))
 	return _r
 }
 
 // MinimumAllowedDuration returns when the duration is restricted for samples of this type, returns the minimum duration allowed, calculated as the difference between end and start dates. Throws an exception if there is no minimum restriction on duration for samples of this type.
 func (st *SampleType) MinimumAllowedDuration() float64 {
+	defer runtime.KeepAlive(st)
 	_r := objc.Send[float64](objref.IDOf(st), objc.RegisterName("minimumAllowedDuration"))
 	return _r
 }
 
 // AllowsRecalibrationForEstimates reports whether first-party samples of this type are produced using a prediction algorithm, and that algorithm supports recalibration. To recalibrate the estimates for a sample type, see -[HKHealthStore recalibrateEstimatesForSampleType:atDate:completion:]
 func (st *SampleType) AllowsRecalibrationForEstimates() bool {
+	defer runtime.KeepAlive(st)
 	_r := objc.Send[bool](objref.IDOf(st), objc.RegisterName("allowsRecalibrationForEstimates"))
 	return _r
 }

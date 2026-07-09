@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -61,9 +64,9 @@ func NewCaptureSliderWithLocalizedTitleSymbolNameMinValueMaxValueStep(localizedT
 }
 
 // NewCaptureSliderWithLocalizedTitleSymbolNameValues creates a discrete slider control that selects a value from a list.
-func NewCaptureSliderWithLocalizedTitleSymbolNameValues(localizedTitle string, symbolName string, values []obj.Object) *CaptureSlider {
+func NewCaptureSliderWithLocalizedTitleSymbolNameValues(localizedTitle string, symbolName string, values []*foundation.Number) *CaptureSlider {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureSlider")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedTitle:symbolName:values:"), purego.NSString(localizedTitle), purego.NSString(symbolName), purego.SliceToNSArray(values, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedTitle:symbolName:values:"), purego.NSString(localizedTitle), purego.NSString(symbolName), purego.SliceToNSArray(values, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return captureSliderAdopt(_id)
 }
 
@@ -100,17 +103,21 @@ func (cs *CaptureSlider) WithEnabled(enabled bool) *CaptureSlider {
 
 // SetActionQueueAction sets the action to perform on the specified dispatch queue when the slider’s value changes.
 func (cs *CaptureSlider) SetActionQueueAction(actionQueue obj.Object, action func(float32)) {
+	defer runtime.KeepAlive(cs)
+	defer runtime.KeepAlive(actionQueue)
 	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setActionQueue:action:"), objref.IDOf(actionQueue), objc.NewBlock(func(_ objc.Block, _b0 float32) { action(_b0) }))
 }
 
 // Value returns the current value of the slider. Because the camera system may be independent from the main thread or `
 func (cs *CaptureSlider) Value() float32 {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[float32](objref.IDOf(cs), objc.RegisterName("value"))
 	return _r
 }
 
 // LocalizedValueFormat returns a localized string defining the presentation of the slider's value. To modify the presentation of the slider's value, set `localizedValueFormat` to a format string to display the slider's value with any annotation. The format string may only contain `%
 func (cs *CaptureSlider) LocalizedValueFormat() string {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("localizedValueFormat"))
 	if _r == 0 {
 		return ""
@@ -122,12 +129,14 @@ func (cs *CaptureSlider) LocalizedValueFormat() string {
 //
 // ProminentValues returns the collection as a Go slice.
 func (cs *CaptureSlider) ProminentValues() []obj.Object {
+	defer runtime.KeepAlive(cs)
 	_arr := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("prominentValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // LocalizedTitle returns a localized string that describes the slider's `action`.
 func (cs *CaptureSlider) LocalizedTitle() string {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("localizedTitle"))
 	if _r == 0 {
 		return ""
@@ -137,6 +146,7 @@ func (cs *CaptureSlider) LocalizedTitle() string {
 
 // SymbolName returns the name of a symbol to represent the slider.
 func (cs *CaptureSlider) SymbolName() string {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("symbolName"))
 	if _r == 0 {
 		return ""
@@ -146,6 +156,7 @@ func (cs *CaptureSlider) SymbolName() string {
 
 // AccessibilityIdentifier returns a string that identifies the slider.
 func (cs *CaptureSlider) AccessibilityIdentifier() string {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("accessibilityIdentifier"))
 	if _r == 0 {
 		return ""

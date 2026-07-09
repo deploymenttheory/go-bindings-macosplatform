@@ -5,12 +5,14 @@
 package pdfkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -51,22 +53,27 @@ func viewAdopt(id objc.ID) *View {
 
 // Description returns the object's -description text.
 func (v_ *View) Description() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (v_ *View) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (v_ *View) IsKind(className string) bool {
+	defer runtime.KeepAlive(v_)
 	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (v_ *View) String() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
@@ -84,6 +91,7 @@ func NewView() *View {
 
 // WithDocument sets returns the document associated with a PDFView object.
 func (v_ *View) WithDocument(document *Document) *View {
+	defer runtime.KeepAlive(document)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setDocument:"), objref.IDOf(document))
 	})
@@ -148,6 +156,7 @@ func (v_ *View) WithDisplaysRTL(displaysRTL bool) *View {
 
 // WithBackgroundColor sets the background color.
 func (v_ *View) WithBackgroundColor(backgroundColor obj.Object) *View {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -167,6 +176,18 @@ func (v_ *View) WithPageShadowsEnabled(pageShadowsEnabled bool) *View {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("enablePageShadows:"), pageShadowsEnabled)
 	})
+	return v_
+}
+
+// WithDelegate sets returns the view’s delegate.
+func (v_ *View) WithDelegate(delegate ViewDelegate) *View {
+	_shim := newViewDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(v_), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return v_
 }
 
@@ -212,6 +233,7 @@ func (v_ *View) WithAutoScales(autoScales bool) *View {
 
 // WithCurrentSelection sets the current selection.
 func (v_ *View) WithCurrentSelection(currentSelection *Selection) *View {
+	defer runtime.KeepAlive(currentSelection)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setCurrentSelection:"), objref.IDOf(currentSelection))
 	})
@@ -276,6 +298,8 @@ func (v_ *View) WithAllowsDragging(allowsDragging bool) *View {
 
 // GoToFirstPage wraps the corresponding Objective-C method.
 func (v_ *View) GoToFirstPage(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("goToFirstPage:"), objref.IDOf(sender))
 	})
@@ -284,6 +308,8 @@ func (v_ *View) GoToFirstPage(sender obj.Object) {
 
 // GoToLastPage wraps the corresponding Objective-C method.
 func (v_ *View) GoToLastPage(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("goToLastPage:"), objref.IDOf(sender))
 	})
@@ -292,6 +318,8 @@ func (v_ *View) GoToLastPage(sender obj.Object) {
 
 // GoToNextPage wraps the corresponding Objective-C method.
 func (v_ *View) GoToNextPage(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("goToNextPage:"), objref.IDOf(sender))
 	})
@@ -300,6 +328,8 @@ func (v_ *View) GoToNextPage(sender obj.Object) {
 
 // GoToPreviousPage wraps the corresponding Objective-C method.
 func (v_ *View) GoToPreviousPage(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("goToPreviousPage:"), objref.IDOf(sender))
 	})
@@ -308,6 +338,8 @@ func (v_ *View) GoToPreviousPage(sender obj.Object) {
 
 // GoBack wraps the corresponding Objective-C method.
 func (v_ *View) GoBack(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("goBack:"), objref.IDOf(sender))
 	})
@@ -316,6 +348,8 @@ func (v_ *View) GoBack(sender obj.Object) {
 
 // GoForward wraps the corresponding Objective-C method.
 func (v_ *View) GoForward(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("goForward:"), objref.IDOf(sender))
 	})
@@ -324,6 +358,8 @@ func (v_ *View) GoForward(sender obj.Object) {
 
 // GoToPage wraps the corresponding Objective-C method.
 func (v_ *View) GoToPage(page *Page) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(page)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("goToPage:"), objref.IDOf(page))
 	})
@@ -332,6 +368,8 @@ func (v_ *View) GoToPage(page *Page) {
 
 // GoToDestination wraps the corresponding Objective-C method.
 func (v_ *View) GoToDestination(destination *Destination) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(destination)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("goToDestination:"), objref.IDOf(destination))
 	})
@@ -340,6 +378,8 @@ func (v_ *View) GoToDestination(destination *Destination) {
 
 // GoToSelection wraps the corresponding Objective-C method.
 func (v_ *View) GoToSelection(selection *Selection) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(selection)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("goToSelection:"), objref.IDOf(selection))
 	})
@@ -348,6 +388,8 @@ func (v_ *View) GoToSelection(selection *Selection) {
 
 // GoToRectOnPage wraps the corresponding Objective-C method.
 func (v_ *View) GoToRectOnPage(rect corefoundation.CGRect, page *Page) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(page)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("goToRect:onPage:"), rect, objref.IDOf(page))
 	})
@@ -356,6 +398,8 @@ func (v_ *View) GoToRectOnPage(rect corefoundation.CGRect, page *Page) {
 
 // ZoomIn wraps the corresponding Objective-C method.
 func (v_ *View) ZoomIn(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("zoomIn:"), objref.IDOf(sender))
 	})
@@ -364,6 +408,8 @@ func (v_ *View) ZoomIn(sender obj.Object) {
 
 // ZoomOut wraps the corresponding Objective-C method.
 func (v_ *View) ZoomOut(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("zoomOut:"), objref.IDOf(sender))
 	})
@@ -372,6 +418,8 @@ func (v_ *View) ZoomOut(sender obj.Object) {
 
 // AreaOfInterestForMouse wraps the corresponding Objective-C method.
 func (v_ *View) AreaOfInterestForMouse(event obj.Object) AreaOfInterest {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(event)
 	var _mainthread0 AreaOfInterest
 	purego.Main(func() {
 		_mainthread0 = func() AreaOfInterest {
@@ -385,6 +433,7 @@ func (v_ *View) AreaOfInterestForMouse(event obj.Object) AreaOfInterest {
 
 // AreaOfInterestForPoint wraps the corresponding Objective-C method.
 func (v_ *View) AreaOfInterestForPoint(cursorLocation corefoundation.CGPoint) AreaOfInterest {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 AreaOfInterest
 	purego.Main(func() {
 		_mainthread0 = func() AreaOfInterest {
@@ -398,6 +447,7 @@ func (v_ *View) AreaOfInterestForPoint(cursorLocation corefoundation.CGPoint) Ar
 
 // SetCursorForAreaOfInterest wraps the corresponding Objective-C method.
 func (v_ *View) SetCursorForAreaOfInterest(area AreaOfInterest) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setCursorForAreaOfInterest:"), area)
 	})
@@ -406,6 +456,8 @@ func (v_ *View) SetCursorForAreaOfInterest(area AreaOfInterest) {
 
 // PerformAction performs action.
 func (v_ *View) PerformAction(action *Action) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(action)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("performAction:"), objref.IDOf(action))
 	})
@@ -414,6 +466,8 @@ func (v_ *View) PerformAction(action *Action) {
 
 // SetCurrentSelectionAnimate wraps the corresponding Objective-C method.
 func (v_ *View) SetCurrentSelectionAnimate(selection *Selection, animate bool) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(selection)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setCurrentSelection:animate:"), objref.IDOf(selection), animate)
 	})
@@ -422,6 +476,7 @@ func (v_ *View) SetCurrentSelectionAnimate(selection *Selection, animate bool) {
 
 // ClearSelection clears selection.
 func (v_ *View) ClearSelection() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("clearSelection"))
 	})
@@ -430,6 +485,8 @@ func (v_ *View) ClearSelection() {
 
 // SelectAll selects all.
 func (v_ *View) SelectAll(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("selectAll:"), objref.IDOf(sender))
 	})
@@ -438,6 +495,8 @@ func (v_ *View) SelectAll(sender obj.Object) {
 
 // ScrollSelectionToVisible scrolls selection to visible.
 func (v_ *View) ScrollSelectionToVisible(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("scrollSelectionToVisible:"), objref.IDOf(sender))
 	})
@@ -446,6 +505,9 @@ func (v_ *View) ScrollSelectionToVisible(sender obj.Object) {
 
 // DrawPageToContext draws page to context.
 func (v_ *View) DrawPageToContext(page *Page, context_ obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(page)
+	defer runtime.KeepAlive(context_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawPage:toContext:"), objref.IDOf(page), objref.IDOf(context_))
 	})
@@ -454,6 +516,9 @@ func (v_ *View) DrawPageToContext(page *Page, context_ obj.Object) {
 
 // DrawPagePostToContext draws page post to context.
 func (v_ *View) DrawPagePostToContext(page *Page, context_ obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(page)
+	defer runtime.KeepAlive(context_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawPagePost:toContext:"), objref.IDOf(page), objref.IDOf(context_))
 	})
@@ -462,6 +527,8 @@ func (v_ *View) DrawPagePostToContext(page *Page, context_ obj.Object) {
 
 // Copy wraps the corresponding Objective-C method.
 func (v_ *View) Copy(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("copy:"), objref.IDOf(sender))
 	})
@@ -470,6 +537,8 @@ func (v_ *View) Copy(sender obj.Object) {
 
 // PrintWithInfoAutoRotate wraps the corresponding Objective-C method.
 func (v_ *View) PrintWithInfoAutoRotate(printInfo obj.Object, doRotate bool) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(printInfo)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("printWithInfo:autoRotate:"), objref.IDOf(printInfo), doRotate)
 	})
@@ -478,6 +547,8 @@ func (v_ *View) PrintWithInfoAutoRotate(printInfo obj.Object, doRotate bool) {
 
 // PrintWithInfoAutoRotatePageScaling wraps the corresponding Objective-C method.
 func (v_ *View) PrintWithInfoAutoRotatePageScaling(printInfo obj.Object, doRotate bool, scale PrintScalingMode) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(printInfo)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("printWithInfo:autoRotate:pageScaling:"), objref.IDOf(printInfo), doRotate, scale)
 	})
@@ -486,6 +557,7 @@ func (v_ *View) PrintWithInfoAutoRotatePageScaling(printInfo obj.Object, doRotat
 
 // PageForPointNearest wraps the corresponding Objective-C method.
 func (v_ *View) PageForPointNearest(point corefoundation.CGPoint, nearest bool) *Page {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *Page
 	purego.Main(func() {
 		_mainthread0 = func() *Page {
@@ -499,6 +571,8 @@ func (v_ *View) PageForPointNearest(point corefoundation.CGPoint, nearest bool) 
 
 // ConvertPointToPage wraps the corresponding Objective-C method.
 func (v_ *View) ConvertPointToPage(point corefoundation.CGPoint, page *Page) corefoundation.CGPoint {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(page)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -512,6 +586,8 @@ func (v_ *View) ConvertPointToPage(point corefoundation.CGPoint, page *Page) cor
 
 // ConvertRectToPage wraps the corresponding Objective-C method.
 func (v_ *View) ConvertRectToPage(rect corefoundation.CGRect, page *Page) corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(page)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -525,6 +601,8 @@ func (v_ *View) ConvertRectToPage(rect corefoundation.CGRect, page *Page) corefo
 
 // ConvertPointFromPage wraps the corresponding Objective-C method.
 func (v_ *View) ConvertPointFromPage(point corefoundation.CGPoint, page *Page) corefoundation.CGPoint {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(page)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -538,6 +616,8 @@ func (v_ *View) ConvertPointFromPage(point corefoundation.CGPoint, page *Page) c
 
 // ConvertRectFromPage wraps the corresponding Objective-C method.
 func (v_ *View) ConvertRectFromPage(rect corefoundation.CGRect, page *Page) corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(page)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -551,6 +631,7 @@ func (v_ *View) ConvertRectFromPage(rect corefoundation.CGRect, page *Page) core
 
 // LayoutDocumentView wraps the corresponding Objective-C method.
 func (v_ *View) LayoutDocumentView() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("layoutDocumentView"))
 	})
@@ -559,6 +640,8 @@ func (v_ *View) LayoutDocumentView() {
 
 // AnnotationsChangedOnPage wraps the corresponding Objective-C method.
 func (v_ *View) AnnotationsChangedOnPage(page *Page) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(page)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("annotationsChangedOnPage:"), objref.IDOf(page))
 	})
@@ -567,6 +650,8 @@ func (v_ *View) AnnotationsChangedOnPage(page *Page) {
 
 // RowSizeForPage wraps the corresponding Objective-C method.
 func (v_ *View) RowSizeForPage(page *Page) corefoundation.CGSize {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(page)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -580,6 +665,7 @@ func (v_ *View) RowSizeForPage(page *Page) corefoundation.CGSize {
 
 // Document returns the document.
 func (v_ *View) Document() *Document {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *Document
 	purego.Main(func() {
 		_mainthread0 = func() *Document {
@@ -593,6 +679,7 @@ func (v_ *View) Document() *Document {
 
 // CanGoToFirstPage wraps the corresponding Objective-C method.
 func (v_ *View) CanGoToFirstPage() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -606,6 +693,7 @@ func (v_ *View) CanGoToFirstPage() bool {
 
 // CanGoToLastPage wraps the corresponding Objective-C method.
 func (v_ *View) CanGoToLastPage() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -619,6 +707,7 @@ func (v_ *View) CanGoToLastPage() bool {
 
 // CanGoToNextPage wraps the corresponding Objective-C method.
 func (v_ *View) CanGoToNextPage() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -632,6 +721,7 @@ func (v_ *View) CanGoToNextPage() bool {
 
 // CanGoToPreviousPage wraps the corresponding Objective-C method.
 func (v_ *View) CanGoToPreviousPage() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -645,6 +735,7 @@ func (v_ *View) CanGoToPreviousPage() bool {
 
 // CanGoBack wraps the corresponding Objective-C method.
 func (v_ *View) CanGoBack() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -658,6 +749,7 @@ func (v_ *View) CanGoBack() bool {
 
 // CanGoForward wraps the corresponding Objective-C method.
 func (v_ *View) CanGoForward() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -671,6 +763,7 @@ func (v_ *View) CanGoForward() bool {
 
 // CurrentPage returns the current page.
 func (v_ *View) CurrentPage() *Page {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *Page
 	purego.Main(func() {
 		_mainthread0 = func() *Page {
@@ -684,6 +777,7 @@ func (v_ *View) CurrentPage() *Page {
 
 // CurrentDestination returns the current destination.
 func (v_ *View) CurrentDestination() *Destination {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *Destination
 	purego.Main(func() {
 		_mainthread0 = func() *Destination {
@@ -697,6 +791,7 @@ func (v_ *View) CurrentDestination() *Destination {
 
 // DisplayMode returns the display mode.
 func (v_ *View) DisplayMode() DisplayMode {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 DisplayMode
 	purego.Main(func() {
 		_mainthread0 = func() DisplayMode {
@@ -710,6 +805,7 @@ func (v_ *View) DisplayMode() DisplayMode {
 
 // DisplayDirection returns the display direction.
 func (v_ *View) DisplayDirection() DisplayDirection {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 DisplayDirection
 	purego.Main(func() {
 		_mainthread0 = func() DisplayDirection {
@@ -723,6 +819,7 @@ func (v_ *View) DisplayDirection() DisplayDirection {
 
 // DisplaysPageBreaks wraps the corresponding Objective-C method.
 func (v_ *View) DisplaysPageBreaks() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -736,6 +833,7 @@ func (v_ *View) DisplaysPageBreaks() bool {
 
 // PageBreakMargins returns the page break margins.
 func (v_ *View) PageBreakMargins() foundation.NSEdgeInsets {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 foundation.NSEdgeInsets
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSEdgeInsets {
@@ -749,6 +847,7 @@ func (v_ *View) PageBreakMargins() foundation.NSEdgeInsets {
 
 // DisplayBox returns the display box.
 func (v_ *View) DisplayBox() DisplayBox {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 DisplayBox
 	purego.Main(func() {
 		_mainthread0 = func() DisplayBox {
@@ -762,6 +861,7 @@ func (v_ *View) DisplayBox() DisplayBox {
 
 // DisplaysAsBook wraps the corresponding Objective-C method.
 func (v_ *View) DisplaysAsBook() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -775,6 +875,7 @@ func (v_ *View) DisplaysAsBook() bool {
 
 // DisplaysRTL wraps the corresponding Objective-C method.
 func (v_ *View) DisplaysRTL() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -788,6 +889,7 @@ func (v_ *View) DisplaysRTL() bool {
 
 // BackgroundColor returns the background color.
 func (v_ *View) BackgroundColor() obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -801,6 +903,7 @@ func (v_ *View) BackgroundColor() obj.Object {
 
 // InterpolationQuality returns the interpolation quality.
 func (v_ *View) InterpolationQuality() InterpolationQuality {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 InterpolationQuality
 	purego.Main(func() {
 		_mainthread0 = func() InterpolationQuality {
@@ -814,6 +917,7 @@ func (v_ *View) InterpolationQuality() InterpolationQuality {
 
 // PageShadowsEnabled wraps the corresponding Objective-C method.
 func (v_ *View) PageShadowsEnabled() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -827,6 +931,7 @@ func (v_ *View) PageShadowsEnabled() bool {
 
 // ScaleFactor returns the scale factor.
 func (v_ *View) ScaleFactor() float64 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -840,6 +945,7 @@ func (v_ *View) ScaleFactor() float64 {
 
 // MinScaleFactor returns the min scale factor.
 func (v_ *View) MinScaleFactor() float64 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -853,6 +959,7 @@ func (v_ *View) MinScaleFactor() float64 {
 
 // MaxScaleFactor returns the max scale factor.
 func (v_ *View) MaxScaleFactor() float64 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -866,6 +973,7 @@ func (v_ *View) MaxScaleFactor() float64 {
 
 // AutoScales wraps the corresponding Objective-C method.
 func (v_ *View) AutoScales() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -879,6 +987,7 @@ func (v_ *View) AutoScales() bool {
 
 // ScaleFactorForSizeToFit returns the scale factor for size to fit.
 func (v_ *View) ScaleFactorForSizeToFit() float64 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -892,6 +1001,7 @@ func (v_ *View) ScaleFactorForSizeToFit() float64 {
 
 // CanZoomIn wraps the corresponding Objective-C method.
 func (v_ *View) CanZoomIn() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -905,6 +1015,7 @@ func (v_ *View) CanZoomIn() bool {
 
 // CanZoomOut wraps the corresponding Objective-C method.
 func (v_ *View) CanZoomOut() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -918,6 +1029,7 @@ func (v_ *View) CanZoomOut() bool {
 
 // CurrentSelection returns the current selection.
 func (v_ *View) CurrentSelection() *Selection {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *Selection
 	purego.Main(func() {
 		_mainthread0 = func() *Selection {
@@ -931,6 +1043,7 @@ func (v_ *View) CurrentSelection() *Selection {
 
 // DocumentView returns the document view.
 func (v_ *View) DocumentView() obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -944,6 +1057,7 @@ func (v_ *View) DocumentView() obj.Object {
 
 // AcceptsDraggedFiles wraps the corresponding Objective-C method.
 func (v_ *View) AcceptsDraggedFiles() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -957,6 +1071,7 @@ func (v_ *View) AcceptsDraggedFiles() bool {
 
 // EnableDataDetectors wraps the corresponding Objective-C method.
 func (v_ *View) EnableDataDetectors() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -970,6 +1085,7 @@ func (v_ *View) EnableDataDetectors() bool {
 
 // IsInMarkupMode reports whether the object is in markup mode.
 func (v_ *View) IsInMarkupMode() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -983,6 +1099,8 @@ func (v_ *View) IsInMarkupMode() bool {
 
 // TakePasswordFrom unlocks with the password from the specified sender.
 func (v_ *View) TakePasswordFrom(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("takePasswordFrom:"), objref.IDOf(sender))
 	})
@@ -991,6 +1109,8 @@ func (v_ *View) TakePasswordFrom(sender obj.Object) {
 
 // DrawPage draws page.
 func (v_ *View) DrawPage(page *Page) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(page)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawPage:"), objref.IDOf(page))
 	})
@@ -999,6 +1119,8 @@ func (v_ *View) DrawPage(page *Page) {
 
 // DrawPagePost draws page post.
 func (v_ *View) DrawPagePost(page *Page) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(page)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawPagePost:"), objref.IDOf(page))
 	})
@@ -1007,6 +1129,8 @@ func (v_ *View) DrawPagePost(page *Page) {
 
 // TakeBackgroundColorFrom wraps the corresponding Objective-C method.
 func (v_ *View) TakeBackgroundColorFrom(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("takeBackgroundColorFrom:"), objref.IDOf(sender))
 	})
@@ -1015,6 +1139,7 @@ func (v_ *View) TakeBackgroundColorFrom(sender obj.Object) {
 
 // ShouldAntiAlias wraps the corresponding Objective-C method.
 func (v_ *View) ShouldAntiAlias() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1028,6 +1153,7 @@ func (v_ *View) ShouldAntiAlias() bool {
 
 // GreekingThreshold returns the greeking threshold.
 func (v_ *View) GreekingThreshold() float64 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1041,6 +1167,7 @@ func (v_ *View) GreekingThreshold() float64 {
 
 // AllowsDragging wraps the corresponding Objective-C method.
 func (v_ *View) AllowsDragging() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

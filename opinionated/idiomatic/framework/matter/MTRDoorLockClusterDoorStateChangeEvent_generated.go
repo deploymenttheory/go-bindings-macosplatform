@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDoorLockClusterDoorStateChangeEventAdopt(id objc.ID) *MTRDoorLockCluster
 
 // Description returns the object's -description text.
 func (mdlcdsce *MTRDoorLockClusterDoorStateChangeEvent) Description() string {
+	defer runtime.KeepAlive(mdlcdsce)
 	return rt.Description(objref.IDOf(mdlcdsce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdlcdsce *MTRDoorLockClusterDoorStateChangeEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdlcdsce)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdlcdsce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdlcdsce *MTRDoorLockClusterDoorStateChangeEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdlcdsce)
 	return rt.IsKind(objref.IDOf(mdlcdsce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdlcdsce *MTRDoorLockClusterDoorStateChangeEvent) String() string {
+	defer runtime.KeepAlive(mdlcdsce)
 	return rt.Description(objref.IDOf(mdlcdsce))
 }
 
@@ -72,12 +80,14 @@ func NewMTRDoorLockClusterDoorStateChangeEvent() *MTRDoorLockClusterDoorStateCha
 
 // WithDoorState sets the door state.
 func (mdlcdsce *MTRDoorLockClusterDoorStateChangeEvent) WithDoorState(doorState obj.Object) *MTRDoorLockClusterDoorStateChangeEvent {
+	defer runtime.KeepAlive(doorState)
 	objc.Send[objc.ID](objref.IDOf(mdlcdsce), objc.RegisterName("setDoorState:"), objref.IDOf(doorState))
 	return mdlcdsce
 }
 
 // DoorState returns the door state.
-func (mdlcdsce *MTRDoorLockClusterDoorStateChangeEvent) DoorState() obj.Object {
+func (mdlcdsce *MTRDoorLockClusterDoorStateChangeEvent) DoorState() *foundation.Number {
+	defer runtime.KeepAlive(mdlcdsce)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcdsce), objc.RegisterName("doorState"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

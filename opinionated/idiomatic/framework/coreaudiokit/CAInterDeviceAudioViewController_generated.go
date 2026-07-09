@@ -5,6 +5,8 @@
 package coreaudiokit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func cAInterDeviceAudioViewControllerAdopt(id objc.ID) *CAInterDeviceAudioViewCo
 
 // Description returns the object's -description text.
 func (cidavc *CAInterDeviceAudioViewController) Description() string {
+	defer runtime.KeepAlive(cidavc)
 	return rt.Description(objref.IDOf(cidavc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cidavc *CAInterDeviceAudioViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cidavc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cidavc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cidavc *CAInterDeviceAudioViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(cidavc)
 	return rt.IsKind(objref.IDOf(cidavc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cidavc *CAInterDeviceAudioViewController) String() string {
+	defer runtime.KeepAlive(cidavc)
 	return rt.Description(objref.IDOf(cidavc))
 }
 

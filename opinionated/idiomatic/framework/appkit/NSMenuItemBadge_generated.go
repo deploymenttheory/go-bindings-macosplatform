@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func menuItemBadgeAdopt(id objc.ID) *MenuItemBadge {
 
 // Description returns the object's -description text.
 func (mib *MenuItemBadge) Description() string {
+	defer runtime.KeepAlive(mib)
 	return rt.Description(objref.IDOf(mib))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mib *MenuItemBadge) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mib)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mib), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mib *MenuItemBadge) IsKind(className string) bool {
+	defer runtime.KeepAlive(mib)
 	return rt.IsKind(objref.IDOf(mib), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mib *MenuItemBadge) String() string {
+	defer runtime.KeepAlive(mib)
 	return rt.Description(objref.IDOf(mib))
 }
 
@@ -81,26 +88,29 @@ func NewMenuItemBadgeWithCount(itemCount int) *MenuItemBadge {
 }
 
 // NewMenuItemBadgeWithString creates a badge with the provided custom string.
-func NewMenuItemBadgeWithString(string_ string) *MenuItemBadge {
+func NewMenuItemBadgeWithString(str string) *MenuItemBadge {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMenuItemBadge")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(string_))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(str))
 	return menuItemBadgeAdopt(_id)
 }
 
 // ItemCount returns the count of items the badge displays. If a custom string was used to create a badge, the value is 0.
 func (mib *MenuItemBadge) ItemCount() int {
+	defer runtime.KeepAlive(mib)
 	_r := objc.Send[int](objref.IDOf(mib), objc.RegisterName("itemCount"))
 	return _r
 }
 
 // Type returns the type of items the badge displays. If a custom string was used to create a badge, this value is
 func (mib *MenuItemBadge) Type() MenuItemBadgeType {
+	defer runtime.KeepAlive(mib)
 	_r := objc.Send[MenuItemBadgeType](objref.IDOf(mib), objc.RegisterName("type"))
 	return _r
 }
 
 // StringValue returns the string representation of the badge as it would appear when the badge is displayed.
 func (mib *MenuItemBadge) StringValue() string {
+	defer runtime.KeepAlive(mib)
 	_r := objc.Send[objc.ID](objref.IDOf(mib), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,7 @@
 package authenticationservices
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,22 +49,27 @@ func authorizationProviderExtensionUserLoginConfigurationAdopt(id objc.ID) *Auth
 
 // Description returns the object's -description text.
 func (apeulc *AuthorizationProviderExtensionUserLoginConfiguration) Description() string {
+	defer runtime.KeepAlive(apeulc)
 	return rt.Description(objref.IDOf(apeulc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apeulc *AuthorizationProviderExtensionUserLoginConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apeulc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apeulc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apeulc *AuthorizationProviderExtensionUserLoginConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(apeulc)
 	return rt.IsKind(objref.IDOf(apeulc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apeulc *AuthorizationProviderExtensionUserLoginConfiguration) String() string {
+	defer runtime.KeepAlive(apeulc)
 	return rt.Description(objref.IDOf(apeulc))
 }
 
@@ -80,40 +86,44 @@ func (apeulc *AuthorizationProviderExtensionUserLoginConfiguration) WithLoginUse
 	return apeulc
 }
 
-// SetCustomAssertionRequestHeaderClaimsReturningError sets custom claims to be added to the embedded assertion request header.
-func (apeulc *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomAssertionRequestHeaderClaimsReturningError(claims obj.Object) error {
+// SetCustomAssertionRequestHeaderClaimsReturning sets custom claims to be added to the embedded assertion request header.
+func (apeulc *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomAssertionRequestHeaderClaimsReturning(claims map[string]obj.Object) error {
+	defer runtime.KeepAlive(apeulc)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(apeulc), objc.RegisterName("setCustomAssertionRequestHeaderClaims:returningError:"), objref.IDOf(claims), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(apeulc), objc.RegisterName("setCustomAssertionRequestHeaderClaims:returningError:"), rt.MapToDict(claims, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// SetCustomAssertionRequestBodyClaimsReturningError sets custom claims to be added to the embedded assertion request body.
-func (apeulc *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomAssertionRequestBodyClaimsReturningError(claims obj.Object) error {
+// SetCustomAssertionRequestBodyClaimsReturning sets custom claims to be added to the embedded assertion request body.
+func (apeulc *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomAssertionRequestBodyClaimsReturning(claims map[string]obj.Object) error {
+	defer runtime.KeepAlive(apeulc)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(apeulc), objc.RegisterName("setCustomAssertionRequestBodyClaims:returningError:"), objref.IDOf(claims), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(apeulc), objc.RegisterName("setCustomAssertionRequestBodyClaims:returningError:"), rt.MapToDict(claims, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// SetCustomLoginRequestHeaderClaimsReturningError sets custom claims to be added to the login request header.
-func (apeulc *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomLoginRequestHeaderClaimsReturningError(claims obj.Object) error {
+// SetCustomLoginRequestHeaderClaimsReturning sets custom claims to be added to the login request header.
+func (apeulc *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomLoginRequestHeaderClaimsReturning(claims map[string]obj.Object) error {
+	defer runtime.KeepAlive(apeulc)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(apeulc), objc.RegisterName("setCustomLoginRequestHeaderClaims:returningError:"), objref.IDOf(claims), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(apeulc), objc.RegisterName("setCustomLoginRequestHeaderClaims:returningError:"), rt.MapToDict(claims, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// SetCustomLoginRequestBodyClaimsReturningError sets custom claims to be added to the login request body.
-func (apeulc *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomLoginRequestBodyClaimsReturningError(claims obj.Object) error {
+// SetCustomLoginRequestBodyClaimsReturning sets custom claims to be added to the login request body.
+func (apeulc *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomLoginRequestBodyClaimsReturning(claims map[string]obj.Object) error {
+	defer runtime.KeepAlive(apeulc)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(apeulc), objc.RegisterName("setCustomLoginRequestBodyClaims:returningError:"), objref.IDOf(claims), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(apeulc), objc.RegisterName("setCustomLoginRequestBodyClaims:returningError:"), rt.MapToDict(claims, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -122,6 +132,7 @@ func (apeulc *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomLog
 
 // LoginUserName returns the user name to use when authenticating with the identity provider.
 func (apeulc *AuthorizationProviderExtensionUserLoginConfiguration) LoginUserName() string {
+	defer runtime.KeepAlive(apeulc)
 	_r := objc.Send[objc.ID](objref.IDOf(apeulc), objc.RegisterName("loginUserName"))
 	if _r == 0 {
 		return ""

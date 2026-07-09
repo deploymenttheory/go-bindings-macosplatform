@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func sharingCollaborationModeRestrictionAdopt(id objc.ID) *SharingCollaborationM
 
 // Description returns the object's -description text.
 func (scmr *SharingCollaborationModeRestriction) Description() string {
+	defer runtime.KeepAlive(scmr)
 	return rt.Description(objref.IDOf(scmr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (scmr *SharingCollaborationModeRestriction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(scmr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(scmr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (scmr *SharingCollaborationModeRestriction) IsKind(className string) bool {
+	defer runtime.KeepAlive(scmr)
 	return rt.IsKind(objref.IDOf(scmr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (scmr *SharingCollaborationModeRestriction) String() string {
+	defer runtime.KeepAlive(scmr)
 	return rt.Description(objref.IDOf(scmr))
 }
 
@@ -96,12 +103,14 @@ func NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessag
 
 // DisabledMode returns the type of sharing which should be disabled
 func (scmr *SharingCollaborationModeRestriction) DisabledMode() SharingCollaborationMode {
+	defer runtime.KeepAlive(scmr)
 	_r := objc.Send[SharingCollaborationMode](objref.IDOf(scmr), objc.RegisterName("disabledMode"))
 	return _r
 }
 
 // AlertTitle returns the title of the alert if a reason for disabling is provided
 func (scmr *SharingCollaborationModeRestriction) AlertTitle() string {
+	defer runtime.KeepAlive(scmr)
 	_r := objc.Send[objc.ID](objref.IDOf(scmr), objc.RegisterName("alertTitle"))
 	if _r == 0 {
 		return ""
@@ -111,6 +120,7 @@ func (scmr *SharingCollaborationModeRestriction) AlertTitle() string {
 
 // AlertMessage returns the message of the alert if a reason for disabling is provided
 func (scmr *SharingCollaborationModeRestriction) AlertMessage() string {
+	defer runtime.KeepAlive(scmr)
 	_r := objc.Send[objc.ID](objref.IDOf(scmr), objc.RegisterName("alertMessage"))
 	if _r == 0 {
 		return ""
@@ -120,6 +130,7 @@ func (scmr *SharingCollaborationModeRestriction) AlertMessage() string {
 
 // AlertDismissButtonTitle returns the label on the alert button which will simply confirm that the alert was viewed and dismiss it Defaults to "OK"
 func (scmr *SharingCollaborationModeRestriction) AlertDismissButtonTitle() string {
+	defer runtime.KeepAlive(scmr)
 	_r := objc.Send[objc.ID](objref.IDOf(scmr), objc.RegisterName("alertDismissButtonTitle"))
 	if _r == 0 {
 		return ""
@@ -129,6 +140,7 @@ func (scmr *SharingCollaborationModeRestriction) AlertDismissButtonTitle() strin
 
 // AlertRecoverySuggestionButtonTitle returns the label on the recovery suggestion button if it is provided
 func (scmr *SharingCollaborationModeRestriction) AlertRecoverySuggestionButtonTitle() string {
+	defer runtime.KeepAlive(scmr)
 	_r := objc.Send[objc.ID](objref.IDOf(scmr), objc.RegisterName("alertRecoverySuggestionButtonTitle"))
 	if _r == 0 {
 		return ""
@@ -137,7 +149,8 @@ func (scmr *SharingCollaborationModeRestriction) AlertRecoverySuggestionButtonTi
 }
 
 // AlertRecoverySuggestionButtonLaunchURL returns the URL that is opened when the user selects the recovery suggestion, if any
-func (scmr *SharingCollaborationModeRestriction) AlertRecoverySuggestionButtonLaunchURL() obj.Object {
+func (scmr *SharingCollaborationModeRestriction) AlertRecoverySuggestionButtonLaunchURL() string {
+	defer runtime.KeepAlive(scmr)
 	_r := objc.Send[objc.ID](objref.IDOf(scmr), objc.RegisterName("alertRecoverySuggestionButtonLaunchURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

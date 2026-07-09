@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func touchBarAdopt(id objc.ID) *TouchBar {
 
 // Description returns the object's -description text.
 func (tb *TouchBar) Description() string {
+	defer runtime.KeepAlive(tb)
 	return rt.Description(objref.IDOf(tb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tb *TouchBar) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tb *TouchBar) IsKind(className string) bool {
+	defer runtime.KeepAlive(tb)
 	return rt.IsKind(objref.IDOf(tb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tb *TouchBar) String() string {
+	defer runtime.KeepAlive(tb)
 	return rt.Description(objref.IDOf(tb))
 }
 
@@ -80,6 +88,7 @@ func NewTouchBar() *TouchBar {
 
 // NewTouchBarWithCoder creates a Touch Bar object from a coder object provided by a storyboard or NIB file.
 func NewTouchBarWithCoder(coder obj.Object) *TouchBar {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *TouchBar
 	purego.Main(func() {
 		_mainthread0 = func() *TouchBar {
@@ -93,6 +102,7 @@ func NewTouchBarWithCoder(coder obj.Object) *TouchBar {
 
 // WithCustomizationIdentifier sets a globally unique string that makes the Touch Bar eligible for user customization.
 func (tb *TouchBar) WithCustomizationIdentifier(customizationIdentifier obj.Object) *TouchBar {
+	defer runtime.KeepAlive(customizationIdentifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setCustomizationIdentifier:"), objref.IDOf(customizationIdentifier))
 	})
@@ -128,6 +138,7 @@ func (tb *TouchBar) WithDefaultItemIdentifiers(items ...obj.Object) *TouchBar {
 
 // WithPrincipalItemIdentifier sets the identifier of an item you want the system to center in the Touch Bar.
 func (tb *TouchBar) WithPrincipalItemIdentifier(principalItemIdentifier obj.Object) *TouchBar {
+	defer runtime.KeepAlive(principalItemIdentifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setPrincipalItemIdentifier:"), objref.IDOf(principalItemIdentifier))
 	})
@@ -136,6 +147,7 @@ func (tb *TouchBar) WithPrincipalItemIdentifier(principalItemIdentifier obj.Obje
 
 // WithEscapeKeyReplacementItemIdentifier sets the identifier of an item that replaces the system-provided button in the Touch Bar.
 func (tb *TouchBar) WithEscapeKeyReplacementItemIdentifier(escapeKeyReplacementItemIdentifier obj.Object) *TouchBar {
+	defer runtime.KeepAlive(escapeKeyReplacementItemIdentifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setEscapeKeyReplacementItemIdentifier:"), objref.IDOf(escapeKeyReplacementItemIdentifier))
 	})
@@ -143,15 +155,17 @@ func (tb *TouchBar) WithEscapeKeyReplacementItemIdentifier(escapeKeyReplacementI
 }
 
 // WithTemplateItems sets the primary source of items that the Touch Bar uses to fill its private items array, unless you provide items using a delegate.
-func (tb *TouchBar) WithTemplateItems(templateItems obj.Object) *TouchBar {
+func (tb *TouchBar) WithTemplateItems(templateItems []*TouchBarItem) *TouchBar {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setTemplateItems:"), objref.IDOf(templateItems))
+		objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setTemplateItems:"), rt.SliceToNSSet(templateItems, func(_v *TouchBarItem) objc.ID { return objref.IDOf(_v) }))
 	})
 	return tb
 }
 
 // ItemForIdentifier returns the Touch Bar item that corresponds to a given identifier.
 func (tb *TouchBar) ItemForIdentifier(identifier obj.Object) *TouchBarItem {
+	defer runtime.KeepAlive(tb)
+	defer runtime.KeepAlive(identifier)
 	var _mainthread0 *TouchBarItem
 	purego.Main(func() {
 		_mainthread0 = func() *TouchBarItem {
@@ -164,12 +178,13 @@ func (tb *TouchBar) ItemForIdentifier(identifier obj.Object) *TouchBarItem {
 }
 
 // CustomizationIdentifier returns the customization identifier.
-func (tb *TouchBar) CustomizationIdentifier() obj.Object {
-	var _mainthread0 obj.Object
+func (tb *TouchBar) CustomizationIdentifier() *foundation.String {
+	defer runtime.KeepAlive(tb)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("customizationIdentifier"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -180,6 +195,7 @@ func (tb *TouchBar) CustomizationIdentifier() obj.Object {
 //
 // CustomizationAllowedItemIdentifiers returns the collection as a Go slice.
 func (tb *TouchBar) CustomizationAllowedItemIdentifiers() []obj.Object {
+	defer runtime.KeepAlive(tb)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -194,6 +210,7 @@ func (tb *TouchBar) CustomizationAllowedItemIdentifiers() []obj.Object {
 //
 // CustomizationRequiredItemIdentifiers returns the collection as a Go slice.
 func (tb *TouchBar) CustomizationRequiredItemIdentifiers() []obj.Object {
+	defer runtime.KeepAlive(tb)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -208,6 +225,7 @@ func (tb *TouchBar) CustomizationRequiredItemIdentifiers() []obj.Object {
 //
 // DefaultItemIdentifiers returns the collection as a Go slice.
 func (tb *TouchBar) DefaultItemIdentifiers() []obj.Object {
+	defer runtime.KeepAlive(tb)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -222,6 +240,7 @@ func (tb *TouchBar) DefaultItemIdentifiers() []obj.Object {
 //
 // ItemIdentifiers returns the collection as a Go slice.
 func (tb *TouchBar) ItemIdentifiers() []obj.Object {
+	defer runtime.KeepAlive(tb)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -233,12 +252,13 @@ func (tb *TouchBar) ItemIdentifiers() []obj.Object {
 }
 
 // PrincipalItemIdentifier returns the principal item identifier.
-func (tb *TouchBar) PrincipalItemIdentifier() obj.Object {
-	var _mainthread0 obj.Object
+func (tb *TouchBar) PrincipalItemIdentifier() *foundation.String {
+	defer runtime.KeepAlive(tb)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("principalItemIdentifier"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -246,25 +266,27 @@ func (tb *TouchBar) PrincipalItemIdentifier() obj.Object {
 }
 
 // EscapeKeyReplacementItemIdentifier returns the escape key replacement item identifier.
-func (tb *TouchBar) EscapeKeyReplacementItemIdentifier() obj.Object {
-	var _mainthread0 obj.Object
+func (tb *TouchBar) EscapeKeyReplacementItemIdentifier() *foundation.String {
+	defer runtime.KeepAlive(tb)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("escapeKeyReplacementItemIdentifier"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
 
 }
 
-// TemplateItems returns the template items.
-func (tb *TouchBar) TemplateItems() obj.Object {
-	var _mainthread0 obj.Object
+// TemplateItems returns the order of the returned elements is unspecified.
+func (tb *TouchBar) TemplateItems() []*TouchBarItem {
+	defer runtime.KeepAlive(tb)
+	var _mainthread0 []*TouchBarItem
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []*TouchBarItem {
 			_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("templateItems"))
-			return obj.Wrap(_r)
+			return rt.NSSetToSlice(_r, func(_id objc.ID) *TouchBarItem { return TouchBarItemFromID(_id) })
 		}()
 	})
 	return _mainthread0
@@ -273,6 +295,7 @@ func (tb *TouchBar) TemplateItems() obj.Object {
 
 // IsVisible reports whether the object is visible.
 func (tb *TouchBar) IsVisible() bool {
+	defer runtime.KeepAlive(tb)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

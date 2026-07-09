@@ -5,6 +5,7 @@
 package appkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,29 +50,34 @@ func colorSpaceAdopt(id objc.ID) *ColorSpace {
 
 // Description returns the object's -description text.
 func (cs *ColorSpace) Description() string {
+	defer runtime.KeepAlive(cs)
 	return rt.Description(objref.IDOf(cs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cs *ColorSpace) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cs *ColorSpace) IsKind(className string) bool {
+	defer runtime.KeepAlive(cs)
 	return rt.IsKind(objref.IDOf(cs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cs *ColorSpace) String() string {
+	defer runtime.KeepAlive(cs)
 	return rt.Description(objref.IDOf(cs))
 }
 
 // NewColorSpaceWithICCProfileData initializes and returns a color space object from the specified ICC profile.
-func NewColorSpaceWithICCProfileData(iccData obj.Object) *ColorSpace {
+func NewColorSpaceWithICCProfileData(iccData []byte) *ColorSpace {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSColorSpace")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithICCProfileData:"), objref.IDOf(iccData))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithICCProfileData:"), rt.BytesToNSData(iccData))
 	return colorSpaceAdopt(_id)
 }
 
@@ -84,37 +90,43 @@ func NewColorSpaceWithColorSyncProfile(prof unsafe.Pointer) *ColorSpace {
 
 // NewColorSpaceWithCGColorSpace initializes and returns a color space object initialized from a Core Graphics color-space object.
 func NewColorSpaceWithCGColorSpace(cgColorSpace obj.Object) *ColorSpace {
+	defer runtime.KeepAlive(cgColorSpace)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSColorSpace")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGColorSpace:"), objref.IDOf(cgColorSpace))
 	return colorSpaceAdopt(_id)
 }
 
 // ICCProfileData returns the icc profile data.
-func (cs *ColorSpace) ICCProfileData() obj.Object {
+func (cs *ColorSpace) ICCProfileData() []byte {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("ICCProfileData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // CGColorSpace returns the cg color space.
 func (cs *ColorSpace) CGColorSpace() obj.Object {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("CGColorSpace"))
 	return obj.Wrap(_r)
 }
 
 // NumberOfColorComponents returns the number of color components.
 func (cs *ColorSpace) NumberOfColorComponents() int {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[int](objref.IDOf(cs), objc.RegisterName("numberOfColorComponents"))
 	return _r
 }
 
 // ColorSpaceModel returns the color space model.
 func (cs *ColorSpace) ColorSpaceModel() ColorSpaceModel {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[ColorSpaceModel](objref.IDOf(cs), objc.RegisterName("colorSpaceModel"))
 	return _r
 }
 
 // LocalizedName returns the localized name.
 func (cs *ColorSpace) LocalizedName() string {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""

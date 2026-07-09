@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -80,12 +81,14 @@ func (ih *ImageHistogram) WithLabel(label string) *ImageHistogram {
 
 // ClipRectSource returns the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
 func (ih *ImageHistogram) ClipRectSource() metal.MTLRegion {
+	defer runtime.KeepAlive(ih)
 	_r := objc.Send[metal.MTLRegion](objref.IDOf(ih), objc.RegisterName("clipRectSource"))
 	return _r
 }
 
 // ZeroHistogram reports whether zero-initalize the histogram results Indicates that the memory region in which the histogram results are to be written in the histogram buffer are to be zero-initialized or not. Default: true.
 func (ih *ImageHistogram) ZeroHistogram() bool {
+	defer runtime.KeepAlive(ih)
 	_r := objc.Send[bool](objref.IDOf(ih), objc.RegisterName("zeroHistogram"))
 	return _r
 }

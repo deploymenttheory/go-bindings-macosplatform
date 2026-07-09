@@ -5,6 +5,7 @@
 package gameplaykit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func noiseMapAdopt(id objc.ID) *NoiseMap {
 
 // Description returns the object's -description text.
 func (nm *NoiseMap) Description() string {
+	defer runtime.KeepAlive(nm)
 	return rt.Description(objref.IDOf(nm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nm *NoiseMap) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nm *NoiseMap) IsKind(className string) bool {
+	defer runtime.KeepAlive(nm)
 	return rt.IsKind(objref.IDOf(nm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nm *NoiseMap) String() string {
+	defer runtime.KeepAlive(nm)
 	return rt.Description(objref.IDOf(nm))
 }
 
@@ -76,6 +82,7 @@ func NewNoiseMap() *NoiseMap {
 
 // NewNoiseMapWithNoise initializes a noise map by sampling from the specified noise object.
 func NewNoiseMapWithNoise(noise *Noise) *NoiseMap {
+	defer runtime.KeepAlive(noise)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKNoiseMap")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNoise:"), objref.IDOf(noise))
 	return noiseMapAdopt(_id)
@@ -83,6 +90,7 @@ func NewNoiseMapWithNoise(noise *Noise) *NoiseMap {
 
 // NewNoiseMapWithNoiseSizeOriginSampleCountSeamless creates a noise map by sampling from the specified noise object.
 func NewNoiseMapWithNoiseSizeOriginSampleCountSeamless(noise *Noise, size unsafe.Pointer, origin unsafe.Pointer, sampleCount unsafe.Pointer, seamless bool) *NoiseMap {
+	defer runtime.KeepAlive(noise)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKNoiseMap")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNoise:size:origin:sampleCount:seamless:"), objref.IDOf(noise), size, origin, sampleCount, seamless)
 	return noiseMapAdopt(_id)
@@ -90,23 +98,27 @@ func NewNoiseMapWithNoiseSizeOriginSampleCountSeamless(noise *Noise, size unsafe
 
 // ValueAtPosition returns the value at the specified position in the noise map’s discrete sample grid.
 func (nm *NoiseMap) ValueAtPosition(position unsafe.Pointer) float32 {
+	defer runtime.KeepAlive(nm)
 	_r := objc.Send[float32](objref.IDOf(nm), objc.RegisterName("valueAtPosition:"), position)
 	return _r
 }
 
 // InterpolatedValueAtPosition returns the value at the specified position in the noise map, interpolating results for positions not on the discrete sample grid.
 func (nm *NoiseMap) InterpolatedValueAtPosition(position unsafe.Pointer) float32 {
+	defer runtime.KeepAlive(nm)
 	_r := objc.Send[float32](objref.IDOf(nm), objc.RegisterName("interpolatedValueAtPosition:"), position)
 	return _r
 }
 
 // SetValueAtPosition sets the value at the specified position in the noise map.
 func (nm *NoiseMap) SetValueAtPosition(value float32, position unsafe.Pointer) {
+	defer runtime.KeepAlive(nm)
 	objc.Send[objc.ID](objref.IDOf(nm), objc.RegisterName("setValue:atPosition:"), value, position)
 }
 
 // IsSeamless reports whether the values at the edges of the 2D plane are modified to allow seamless tiling of the extracted noise map.
 func (nm *NoiseMap) IsSeamless() bool {
+	defer runtime.KeepAlive(nm)
 	_r := objc.Send[bool](objref.IDOf(nm), objc.RegisterName("isSeamless"))
 	return _r
 }

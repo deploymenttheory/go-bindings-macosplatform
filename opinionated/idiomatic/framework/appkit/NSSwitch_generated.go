@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -70,6 +72,7 @@ func (s *Switch) WithState(state int) *Switch {
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (s *Switch) WithTarget(target obj.Object) *Switch {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -134,6 +137,7 @@ func (s *Switch) WithControlSize(controlSize ControlSize) *Switch {
 
 // WithFormatter sets the receiver’s formatter.
 func (s *Switch) WithFormatter(formatter obj.Object) *Switch {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -142,6 +146,7 @@ func (s *Switch) WithFormatter(formatter obj.Object) *Switch {
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (s *Switch) WithObjectValue(objectValue obj.Object) *Switch {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -158,6 +163,7 @@ func (s *Switch) WithStringValue(stringValue string) *Switch {
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (s *Switch) WithAttributedStringValue(attributedStringValue obj.Object) *Switch {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -198,6 +204,7 @@ func (s *Switch) WithDoubleValue(doubleValue float64) *Switch {
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (s *Switch) WithFont(font *Font) *Switch {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -246,6 +253,7 @@ func (s *Switch) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Swit
 
 // WithCell sets the cell.
 func (s *Switch) WithCell(cell CellProvider) *Switch {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -391,6 +399,7 @@ func (s *Switch) WithWantsLayer(wantsLayer bool) *Switch {
 
 // WithLayer sets the layer.
 func (s *Switch) WithLayer(layer obj.Object) *Switch {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -440,6 +449,7 @@ func (s *Switch) WithBackgroundFilters(items ...obj.Object) *Switch {
 
 // WithCompositingFilter sets the compositing filter.
 func (s *Switch) WithCompositingFilter(compositingFilter obj.Object) *Switch {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -457,6 +467,7 @@ func (s *Switch) WithContentFilters(items ...obj.Object) *Switch {
 
 // WithShadow sets the shadow.
 func (s *Switch) WithShadow(shadow *Shadow) *Switch {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -505,6 +516,7 @@ func (s *Switch) WithPreparedContentRect(preparedContentRect corefoundation.CGRe
 
 // WithNextKeyView sets the next key view.
 func (s *Switch) WithNextKeyView(nextKeyView ViewProvider) *Switch {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -554,6 +566,7 @@ func (s *Switch) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeM
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (s *Switch) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Switch {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -610,6 +623,7 @@ func (s *Switch) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamic
 
 // WithPressureConfiguration sets the pressure configuration.
 func (s *Switch) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Switch {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -618,6 +632,7 @@ func (s *Switch) WithPressureConfiguration(pressureConfiguration *PressureConfig
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (s *Switch) WithNextResponder(nextResponder ResponderProvider) *Switch {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -626,6 +641,7 @@ func (s *Switch) WithNextResponder(nextResponder ResponderProvider) *Switch {
 
 // WithMenu sets returns the responder’s menu.
 func (s *Switch) WithMenu(menu *Menu) *Switch {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -634,6 +650,7 @@ func (s *Switch) WithMenu(menu *Menu) *Switch {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (s *Switch) WithUserActivity(userActivity obj.Object) *Switch {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -642,6 +659,7 @@ func (s *Switch) WithUserActivity(userActivity obj.Object) *Switch {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (s *Switch) WithTouchBar(touchBar *TouchBar) *Switch {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -650,6 +668,7 @@ func (s *Switch) WithTouchBar(touchBar *TouchBar) *Switch {
 
 // State returns the state.
 func (s *Switch) State() int {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {

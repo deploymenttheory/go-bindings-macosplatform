@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nowPlayingInfoCenterAdopt(id objc.ID) *NowPlayingInfoCenter {
 
 // Description returns the object's -description text.
 func (npic *NowPlayingInfoCenter) Description() string {
+	defer runtime.KeepAlive(npic)
 	return rt.Description(objref.IDOf(npic))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (npic *NowPlayingInfoCenter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(npic)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(npic), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (npic *NowPlayingInfoCenter) IsKind(className string) bool {
+	defer runtime.KeepAlive(npic)
 	return rt.IsKind(objref.IDOf(npic), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (npic *NowPlayingInfoCenter) String() string {
+	defer runtime.KeepAlive(npic)
 	return rt.Description(objref.IDOf(npic))
 }
 
@@ -73,8 +80,8 @@ func NewNowPlayingInfoCenter() *NowPlayingInfoCenter {
 }
 
 // WithNowPlayingInfo sets the current Now Playing information for the default Now Playing info center.
-func (npic *NowPlayingInfoCenter) WithNowPlayingInfo(nowPlayingInfo obj.Object) *NowPlayingInfoCenter {
-	objc.Send[objc.ID](objref.IDOf(npic), objc.RegisterName("setNowPlayingInfo:"), objref.IDOf(nowPlayingInfo))
+func (npic *NowPlayingInfoCenter) WithNowPlayingInfo(nowPlayingInfo map[string]obj.Object) *NowPlayingInfoCenter {
+	objc.Send[objc.ID](objref.IDOf(npic), objc.RegisterName("setNowPlayingInfo:"), rt.MapToDict(nowPlayingInfo, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return npic
 }
 
@@ -85,13 +92,15 @@ func (npic *NowPlayingInfoCenter) WithPlaybackState(playbackState NowPlayingPlay
 }
 
 // NowPlayingInfo returns the current now playing info for the center. Setting the info to nil will clear it.
-func (npic *NowPlayingInfoCenter) NowPlayingInfo() obj.Object {
+func (npic *NowPlayingInfoCenter) NowPlayingInfo() map[string]obj.Object {
+	defer runtime.KeepAlive(npic)
 	_r := objc.Send[objc.ID](objref.IDOf(npic), objc.RegisterName("nowPlayingInfo"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PlaybackState returns the current playback state of the app. This only applies on macOS, where playback state cannot be determined by the application's audio session. This property must be set every time the app begins or halts playback, otherwise remote control functionality may not work as expected.
 func (npic *NowPlayingInfoCenter) PlaybackState() NowPlayingPlaybackState {
+	defer runtime.KeepAlive(npic)
 	_r := objc.Send[NowPlayingPlaybackState](objref.IDOf(npic), objc.RegisterName("playbackState"))
 	return _r
 }

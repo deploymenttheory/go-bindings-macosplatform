@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,27 +50,34 @@ func rulerMarkerAdopt(id objc.ID) *RulerMarker {
 
 // Description returns the object's -description text.
 func (rm *RulerMarker) Description() string {
+	defer runtime.KeepAlive(rm)
 	return rt.Description(objref.IDOf(rm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rm *RulerMarker) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rm *RulerMarker) IsKind(className string) bool {
+	defer runtime.KeepAlive(rm)
 	return rt.IsKind(objref.IDOf(rm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rm *RulerMarker) String() string {
+	defer runtime.KeepAlive(rm)
 	return rt.Description(objref.IDOf(rm))
 }
 
 // NewRulerMarkerWithRulerViewMarkerLocationImageImageOrigin initializes a newly allocated ruler marker, associating it with (but not adding it to) a specified ruler view and assigning the attributes provided.
 func NewRulerMarkerWithRulerViewMarkerLocationImageImageOrigin(ruler *RulerView, location float64, image *Image, imageOrigin corefoundation.CGPoint) *RulerMarker {
+	defer runtime.KeepAlive(ruler)
+	defer runtime.KeepAlive(image)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSRulerMarker")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRulerView:markerLocation:image:imageOrigin:"), objref.IDOf(ruler), location, objref.IDOf(image), imageOrigin)
 	return rulerMarkerAdopt(_id)
@@ -76,6 +85,7 @@ func NewRulerMarkerWithRulerViewMarkerLocationImageImageOrigin(ruler *RulerView,
 
 // NewRulerMarkerWithCoder creates a new RulerMarker.
 func NewRulerMarkerWithCoder(coder obj.Object) *RulerMarker {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSRulerMarker")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return rulerMarkerAdopt(_id)
@@ -89,6 +99,7 @@ func (rm *RulerMarker) WithMarkerLocation(markerLocation float64) *RulerMarker {
 
 // WithImage sets the receiver’s image.
 func (rm *RulerMarker) WithImage(image *Image) *RulerMarker {
+	defer runtime.KeepAlive(image)
 	objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return rm
 }
@@ -113,65 +124,77 @@ func (rm *RulerMarker) WithRemovable(removable bool) *RulerMarker {
 
 // DrawRect draws the receiver’s image that appears in the supplied rectangle.
 func (rm *RulerMarker) DrawRect(rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(rm)
 	objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("drawRect:"), rect)
 }
 
 // TrackMouseAdding handles user manipulation of the receiver in its ruler view.
 func (rm *RulerMarker) TrackMouseAdding(mouseDownEvent *Event, isAdding bool) bool {
+	defer runtime.KeepAlive(rm)
+	defer runtime.KeepAlive(mouseDownEvent)
 	_r := objc.Send[bool](objref.IDOf(rm), objc.RegisterName("trackMouse:adding:"), objref.IDOf(mouseDownEvent), isAdding)
 	return _r
 }
 
 // Ruler returns the ruler.
 func (rm *RulerMarker) Ruler() *RulerView {
+	defer runtime.KeepAlive(rm)
 	_r := objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("ruler"))
 	return RulerViewFromID(_r)
 }
 
 // MarkerLocation returns the marker location.
 func (rm *RulerMarker) MarkerLocation() float64 {
+	defer runtime.KeepAlive(rm)
 	_r := objc.Send[float64](objref.IDOf(rm), objc.RegisterName("markerLocation"))
 	return _r
 }
 
 // Image returns the image.
 func (rm *RulerMarker) Image() *Image {
+	defer runtime.KeepAlive(rm)
 	_r := objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
 // ImageOrigin returns the image origin.
 func (rm *RulerMarker) ImageOrigin() corefoundation.CGPoint {
+	defer runtime.KeepAlive(rm)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(rm), objc.RegisterName("imageOrigin"))
 	return _r
 }
 
 // IsMovable reports whether the object is movable.
 func (rm *RulerMarker) IsMovable() bool {
+	defer runtime.KeepAlive(rm)
 	_r := objc.Send[bool](objref.IDOf(rm), objc.RegisterName("isMovable"))
 	return _r
 }
 
 // IsRemovable reports whether the object is removable.
 func (rm *RulerMarker) IsRemovable() bool {
+	defer runtime.KeepAlive(rm)
 	_r := objc.Send[bool](objref.IDOf(rm), objc.RegisterName("isRemovable"))
 	return _r
 }
 
 // IsDragging reports whether the object is dragging.
 func (rm *RulerMarker) IsDragging() bool {
+	defer runtime.KeepAlive(rm)
 	_r := objc.Send[bool](objref.IDOf(rm), objc.RegisterName("isDragging"))
 	return _r
 }
 
 // ImageRectInRuler returns the image rect in ruler.
 func (rm *RulerMarker) ImageRectInRuler() corefoundation.CGRect {
+	defer runtime.KeepAlive(rm)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(rm), objc.RegisterName("imageRectInRuler"))
 	return _r
 }
 
 // ThicknessRequiredInRuler returns the thickness required in ruler.
 func (rm *RulerMarker) ThicknessRequiredInRuler() float64 {
+	defer runtime.KeepAlive(rm)
 	_r := objc.Send[float64](objref.IDOf(rm), objc.RegisterName("thicknessRequiredInRuler"))
 	return _r
 }

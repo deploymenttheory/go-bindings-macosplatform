@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func sceneAdopt(id objc.ID) *Scene {
 
 // Description returns the object's -description text.
 func (s *Scene) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Scene) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Scene) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Scene) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -74,21 +81,28 @@ func NewScene() *Scene {
 
 // AddEntity adds a GameplayKit entity to the list of entities managed by the scene.
 func (s *Scene) AddEntity(entity *Entity) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(entity)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("addEntity:"), objref.IDOf(entity))
 }
 
 // RemoveEntity removes a GameplayKit entity from the list of entities managed by the scene.
 func (s *Scene) RemoveEntity(entity *Entity) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(entity)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("removeEntity:"), objref.IDOf(entity))
 }
 
 // AddGraphName adds a graph to the scene's list of graphs.
 func (s *Scene) AddGraphName(graph *Graph, name string) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(graph)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("addGraph:name:"), objref.IDOf(graph), purego.NSString(name))
 }
 
 // RemoveGraph removes a pathfinding graph from the list of graphs managed by the scene.
 func (s *Scene) RemoveGraph(name string) {
+	defer runtime.KeepAlive(s)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("removeGraph:"), purego.NSString(name))
 }
 
@@ -96,12 +110,14 @@ func (s *Scene) RemoveGraph(name string) {
 //
 // Entities returns the collection as a Go slice.
 func (s *Scene) Entities() []*Entity {
+	defer runtime.KeepAlive(s)
 	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("entities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Entity { return EntityFromID(_id) })
 }
 
 // Graphs returns the navigational graphs of this scene.
-func (s *Scene) Graphs() obj.Object {
+func (s *Scene) Graphs() map[string]*Graph {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("graphs"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *Graph { return GraphFromID(_id) })
 }

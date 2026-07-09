@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -81,18 +83,21 @@ func (fro *FetchRecordsOperation) WithPerRecordProgressBlock(perRecordProgressBl
 
 // WithDatabase sets the database that the operation uses.
 func (fro *FetchRecordsOperation) WithDatabase(database *Database) *FetchRecordsOperation {
+	defer runtime.KeepAlive(database)
 	objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return fro
 }
 
 // WithConfiguration sets the operation’s configuration.
 func (fro *FetchRecordsOperation) WithConfiguration(configuration *OperationConfiguration) *FetchRecordsOperation {
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return fro
 }
 
 // WithGroup sets the operation’s group.
 func (fro *FetchRecordsOperation) WithGroup(group *OperationGroup) *FetchRecordsOperation {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return fro
 }
@@ -105,6 +110,7 @@ func (fro *FetchRecordsOperation) WithLongLivedOperationWasPersistedBlock(longLi
 
 // WithContainer sets the operation's container.
 func (fro *FetchRecordsOperation) WithContainer(container *Container) *FetchRecordsOperation {
+	defer runtime.KeepAlive(container)
 	objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return fro
 }
@@ -137,6 +143,7 @@ func (fro *FetchRecordsOperation) WithTimeoutIntervalForResource(timeoutInterval
 //
 // RecordIDs returns the collection as a Go slice.
 func (fro *FetchRecordsOperation) RecordIDs() []*RecordID {
+	defer runtime.KeepAlive(fro)
 	_arr := objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("recordIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordID { return RecordIDFromID(_id) })
 }
@@ -145,6 +152,7 @@ func (fro *FetchRecordsOperation) RecordIDs() []*RecordID {
 //
 // DesiredKeys returns the collection as a Go slice.
 func (fro *FetchRecordsOperation) DesiredKeys() []obj.Object {
+	defer runtime.KeepAlive(fro)
 	_arr := objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("desiredKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

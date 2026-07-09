@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func iKSlideshowAdopt(id objc.ID) *IKSlideshow {
 
 // Description returns the object's -description text.
 func (is *IKSlideshow) Description() string {
+	defer runtime.KeepAlive(is)
 	return rt.Description(objref.IDOf(is))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (is *IKSlideshow) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(is)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(is), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (is *IKSlideshow) IsKind(className string) bool {
+	defer runtime.KeepAlive(is)
 	return rt.IsKind(objref.IDOf(is), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (is *IKSlideshow) String() string {
+	defer runtime.KeepAlive(is)
 	return rt.Description(objref.IDOf(is))
 }
 
@@ -80,32 +87,41 @@ func (is *IKSlideshow) WithAutoPlayDelay(autoPlayDelay float64) *IKSlideshow {
 
 // RunSlideshowWithDataSourceInModeOptions runs a slideshow that contains the specified kind of items, provided from a data source.
 func (is *IKSlideshow) RunSlideshowWithDataSourceInModeOptions(dataSource obj.Object, slideshowMode string, slideshowOptions obj.Object) {
+	defer runtime.KeepAlive(is)
+	defer runtime.KeepAlive(dataSource)
+	defer runtime.KeepAlive(slideshowOptions)
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("runSlideshowWithDataSource:inMode:options:"), objref.IDOf(dataSource), purego.NSString(slideshowMode), objref.IDOf(slideshowOptions))
 }
 
 // StopSlideshow stops a slideshow.
 func (is *IKSlideshow) StopSlideshow(sender obj.Object) {
+	defer runtime.KeepAlive(is)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("stopSlideshow:"), objref.IDOf(sender))
 }
 
 // ReloadData reloads the data for a slideshow.
 func (is *IKSlideshow) ReloadData() {
+	defer runtime.KeepAlive(is)
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("reloadData"))
 }
 
 // ReloadSlideshowItemAtIndex reloads the data for a slideshow, starting at the specified index.
 func (is *IKSlideshow) ReloadSlideshowItemAtIndex(index int) {
+	defer runtime.KeepAlive(is)
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("reloadSlideshowItemAtIndex:"), index)
 }
 
 // IndexOfCurrentSlideshowItem returns the index of the current slideshow item.
 func (is *IKSlideshow) IndexOfCurrentSlideshowItem() int {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("indexOfCurrentSlideshowItem"))
 	return _r
 }
 
 // AutoPlayDelay returns array of filters reflecting the current user adjustments in the adjust or effects tab.
 func (is *IKSlideshow) AutoPlayDelay() float64 {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[float64](objref.IDOf(is), objc.RegisterName("autoPlayDelay"))
 	return _r
 }

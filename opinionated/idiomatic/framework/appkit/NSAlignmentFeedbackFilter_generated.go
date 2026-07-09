@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func alignmentFeedbackFilterAdopt(id objc.ID) *AlignmentFeedbackFilter {
 
 // Description returns the object's -description text.
 func (aff *AlignmentFeedbackFilter) Description() string {
+	defer runtime.KeepAlive(aff)
 	return rt.Description(objref.IDOf(aff))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aff *AlignmentFeedbackFilter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aff)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aff), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aff *AlignmentFeedbackFilter) IsKind(className string) bool {
+	defer runtime.KeepAlive(aff)
 	return rt.IsKind(objref.IDOf(aff), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aff *AlignmentFeedbackFilter) String() string {
+	defer runtime.KeepAlive(aff)
 	return rt.Description(objref.IDOf(aff))
 }
 
@@ -72,17 +79,22 @@ func NewAlignmentFeedbackFilter() *AlignmentFeedbackFilter {
 	return alignmentFeedbackFilterAdopt(_id)
 }
 
-// UpdateWithEvent informs the feedback filter about a new event.
-func (aff *AlignmentFeedbackFilter) UpdateWithEvent(event *Event) {
+// Update informs the feedback filter about a new event.
+func (aff *AlignmentFeedbackFilter) Update(event *Event) {
+	defer runtime.KeepAlive(aff)
+	defer runtime.KeepAlive(event)
 	objc.Send[objc.ID](objref.IDOf(aff), objc.RegisterName("updateWithEvent:"), objref.IDOf(event))
 }
 
 // UpdateWithPanRecognizer informs the feedback filter about a new pan (drag) gesture recognizer event.
 func (aff *AlignmentFeedbackFilter) UpdateWithPanRecognizer(panRecognizer *PanGestureRecognizer) {
+	defer runtime.KeepAlive(aff)
+	defer runtime.KeepAlive(panRecognizer)
 	objc.Send[objc.ID](objref.IDOf(aff), objc.RegisterName("updateWithPanRecognizer:"), objref.IDOf(panRecognizer))
 }
 
 // PerformFeedbackPerformanceTime performs the haptic feedback described by one or more alignment feedback tokens.
 func (aff *AlignmentFeedbackFilter) PerformFeedbackPerformanceTime(alignmentFeedbackTokens []obj.Object, performanceTime HapticFeedbackPerformanceTime) {
+	defer runtime.KeepAlive(aff)
 	objc.Send[objc.ID](objref.IDOf(aff), objc.RegisterName("performFeedback:performanceTime:"), purego.SliceToNSArray(alignmentFeedbackTokens, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), performanceTime)
 }

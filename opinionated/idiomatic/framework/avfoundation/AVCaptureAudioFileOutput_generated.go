@@ -5,10 +5,14 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,8 +65,18 @@ func (cafo *CaptureAudioFileOutput) WithMetadata(items ...MetadataItemProvider) 
 }
 
 // WithAudioSettings sets the settings used to decode or re-encode audio before it is output by the receiver.
-func (cafo *CaptureAudioFileOutput) WithAudioSettings(audioSettings obj.Object) *CaptureAudioFileOutput {
-	objc.Send[objc.ID](objref.IDOf(cafo), objc.RegisterName("setAudioSettings:"), objref.IDOf(audioSettings))
+func (cafo *CaptureAudioFileOutput) WithAudioSettings(audioSettings map[string]obj.Object) *CaptureAudioFileOutput {
+	objc.Send[objc.ID](objref.IDOf(cafo), objc.RegisterName("setAudioSettings:"), rt.MapToDict(audioSettings, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return cafo
+}
+
+// WithDelegate sets the delegate object for the capture file output.
+func (cafo *CaptureAudioFileOutput) WithDelegate(delegate CaptureFileOutputDelegate) *CaptureAudioFileOutput {
+	_shim := newCaptureFileOutputDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(cafo), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(cafo), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
 	return cafo
 }
 
@@ -94,14 +108,16 @@ func (cafo *CaptureAudioFileOutput) WithDeferredStartEnabled(deferredStartEnable
 //
 // Metadata returns the collection as a Go slice.
 func (cafo *CaptureAudioFileOutput) Metadata() []*MetadataItem {
+	defer runtime.KeepAlive(cafo)
 	_arr := objc.Send[objc.ID](objref.IDOf(cafo), objc.RegisterName("metadata"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
 // AudioSettings specifies the options the receiver uses to re-encode audio as it is being recorded. The output settings dictionary can contain values for keys from AVAudioSettings.h. A value of nil indicates that the format of the audio should not be changed before being written to the file.
-func (cafo *CaptureAudioFileOutput) AudioSettings() obj.Object {
+func (cafo *CaptureAudioFileOutput) AudioSettings() map[string]obj.Object {
+	defer runtime.KeepAlive(cafo)
 	_r := objc.Send[objc.ID](objref.IDOf(cafo), objc.RegisterName("audioSettings"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ CaptureFileOutputProvider = (*CaptureAudioFileOutput)(nil)

@@ -5,10 +5,13 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -88,6 +91,7 @@ func (pc *PathControl) WithPlaceholderString(placeholderString string) *PathCont
 
 // WithPlaceholderAttributedString sets the placeholder attributed string.
 func (pc *PathControl) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *PathControl {
+	defer runtime.KeepAlive(placeholderAttributedString)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	})
@@ -95,9 +99,9 @@ func (pc *PathControl) WithPlaceholderAttributedString(placeholderAttributedStri
 }
 
 // WithURL sets the path value displayed by the receiver.
-func (pc *PathControl) WithURL(uRL string) *PathControl {
+func (pc *PathControl) WithURL(url string) *PathControl {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setURL:"), rt.FileURL(url))
 	})
 	return pc
 }
@@ -121,14 +125,28 @@ func (pc *PathControl) WithPathItems(items ...*PathControlItem) *PathControl {
 
 // WithBackgroundColor sets the receiver’s background color.
 func (pc *PathControl) WithBackgroundColor(backgroundColor *Color) *PathControl {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
 	return pc
 }
 
+// WithDelegate sets the receiver’s delegate.
+func (pc *PathControl) WithDelegate(delegate PathControlDelegate) *PathControl {
+	_shim := newPathControlDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(pc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return pc
+}
+
 // WithTarget sets the target object that receives action messages from the cell.
 func (pc *PathControl) WithTarget(target obj.Object) *PathControl {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -193,6 +211,7 @@ func (pc *PathControl) WithControlSize(controlSize ControlSize) *PathControl {
 
 // WithFormatter sets the receiver’s formatter.
 func (pc *PathControl) WithFormatter(formatter obj.Object) *PathControl {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -201,6 +220,7 @@ func (pc *PathControl) WithFormatter(formatter obj.Object) *PathControl {
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (pc *PathControl) WithObjectValue(objectValue obj.Object) *PathControl {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -217,6 +237,7 @@ func (pc *PathControl) WithStringValue(stringValue string) *PathControl {
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (pc *PathControl) WithAttributedStringValue(attributedStringValue obj.Object) *PathControl {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -257,6 +278,7 @@ func (pc *PathControl) WithDoubleValue(doubleValue float64) *PathControl {
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (pc *PathControl) WithFont(font *Font) *PathControl {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -305,6 +327,7 @@ func (pc *PathControl) WithAllowsExpansionToolTips(allowsExpansionToolTips bool)
 
 // WithCell sets the cell.
 func (pc *PathControl) WithCell(cell CellProvider) *PathControl {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -450,6 +473,7 @@ func (pc *PathControl) WithWantsLayer(wantsLayer bool) *PathControl {
 
 // WithLayer sets the layer.
 func (pc *PathControl) WithLayer(layer obj.Object) *PathControl {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -499,6 +523,7 @@ func (pc *PathControl) WithBackgroundFilters(items ...obj.Object) *PathControl {
 
 // WithCompositingFilter sets the compositing filter.
 func (pc *PathControl) WithCompositingFilter(compositingFilter obj.Object) *PathControl {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -516,6 +541,7 @@ func (pc *PathControl) WithContentFilters(items ...obj.Object) *PathControl {
 
 // WithShadow sets the shadow.
 func (pc *PathControl) WithShadow(shadow *Shadow) *PathControl {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -564,6 +590,7 @@ func (pc *PathControl) WithPreparedContentRect(preparedContentRect corefoundatio
 
 // WithNextKeyView sets the next key view.
 func (pc *PathControl) WithNextKeyView(nextKeyView ViewProvider) *PathControl {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -613,6 +640,7 @@ func (pc *PathControl) WithPrefersCompactControlSizeMetrics(prefersCompactContro
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (pc *PathControl) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PathControl {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -669,6 +697,7 @@ func (pc *PathControl) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedD
 
 // WithPressureConfiguration sets the pressure configuration.
 func (pc *PathControl) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PathControl {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -677,6 +706,7 @@ func (pc *PathControl) WithPressureConfiguration(pressureConfiguration *Pressure
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (pc *PathControl) WithNextResponder(nextResponder ResponderProvider) *PathControl {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -685,6 +715,7 @@ func (pc *PathControl) WithNextResponder(nextResponder ResponderProvider) *PathC
 
 // WithMenu sets returns the responder’s menu.
 func (pc *PathControl) WithMenu(menu *Menu) *PathControl {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -693,6 +724,7 @@ func (pc *PathControl) WithMenu(menu *Menu) *PathControl {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (pc *PathControl) WithUserActivity(userActivity obj.Object) *PathControl {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -701,6 +733,7 @@ func (pc *PathControl) WithUserActivity(userActivity obj.Object) *PathControl {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (pc *PathControl) WithTouchBar(touchBar *TouchBar) *PathControl {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -709,6 +742,7 @@ func (pc *PathControl) WithTouchBar(touchBar *TouchBar) *PathControl {
 
 // SetDraggingSourceOperationMaskForLocal configures the drag operation mask.
 func (pc *PathControl) SetDraggingSourceOperationMaskForLocal(mask DragOperation, isLocal bool) {
+	defer runtime.KeepAlive(pc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setDraggingSourceOperationMask:forLocal:"), mask, isLocal)
 	})
@@ -717,6 +751,7 @@ func (pc *PathControl) SetDraggingSourceOperationMaskForLocal(mask DragOperation
 
 // IsEditable reports whether the object is editable.
 func (pc *PathControl) IsEditable() bool {
+	defer runtime.KeepAlive(pc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -732,6 +767,7 @@ func (pc *PathControl) IsEditable() bool {
 //
 // AllowedTypes returns the collection as a Go slice.
 func (pc *PathControl) AllowedTypes() []string {
+	defer runtime.KeepAlive(pc)
 	var _mainthread0 []string
 	purego.Main(func() {
 		_mainthread0 = func() []string {
@@ -744,6 +780,7 @@ func (pc *PathControl) AllowedTypes() []string {
 
 // PlaceholderString returns the placeholder string.
 func (pc *PathControl) PlaceholderString() string {
+	defer runtime.KeepAlive(pc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -759,12 +796,13 @@ func (pc *PathControl) PlaceholderString() string {
 }
 
 // PlaceholderAttributedString returns the placeholder attributed string.
-func (pc *PathControl) PlaceholderAttributedString() obj.Object {
-	var _mainthread0 obj.Object
+func (pc *PathControl) PlaceholderAttributedString() *foundation.AttributedString {
+	defer runtime.KeepAlive(pc)
+	var _mainthread0 *foundation.AttributedString
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.AttributedString {
 			_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("placeholderAttributedString"))
-			return obj.Wrap(_r)
+			return foundation.AttributedStringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -772,12 +810,13 @@ func (pc *PathControl) PlaceholderAttributedString() obj.Object {
 }
 
 // URL returns the URL.
-func (pc *PathControl) URL() obj.Object {
-	var _mainthread0 obj.Object
+func (pc *PathControl) URL() string {
+	defer runtime.KeepAlive(pc)
+	var _mainthread0 string
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() string {
 			_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("URL"))
-			return obj.Wrap(_r)
+			return rt.URLString(_r)
 		}()
 	})
 	return _mainthread0
@@ -786,6 +825,7 @@ func (pc *PathControl) URL() obj.Object {
 
 // PathStyle returns the path style.
 func (pc *PathControl) PathStyle() PathStyle {
+	defer runtime.KeepAlive(pc)
 	var _mainthread0 PathStyle
 	purego.Main(func() {
 		_mainthread0 = func() PathStyle {
@@ -799,6 +839,7 @@ func (pc *PathControl) PathStyle() PathStyle {
 
 // ClickedPathItem returns the clicked path item.
 func (pc *PathControl) ClickedPathItem() *PathControlItem {
+	defer runtime.KeepAlive(pc)
 	var _mainthread0 *PathControlItem
 	purego.Main(func() {
 		_mainthread0 = func() *PathControlItem {
@@ -814,6 +855,7 @@ func (pc *PathControl) ClickedPathItem() *PathControlItem {
 //
 // PathItems returns the collection as a Go slice.
 func (pc *PathControl) PathItems() []*PathControlItem {
+	defer runtime.KeepAlive(pc)
 	var _mainthread0 []*PathControlItem
 	purego.Main(func() {
 		_mainthread0 = func() []*PathControlItem {
@@ -826,6 +868,7 @@ func (pc *PathControl) PathItems() []*PathControlItem {
 
 // BackgroundColor returns the background color.
 func (pc *PathControl) BackgroundColor() *Color {
+	defer runtime.KeepAlive(pc)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -839,6 +882,7 @@ func (pc *PathControl) BackgroundColor() *Color {
 
 // ClickedPathComponentCell returns the clicked cell.
 func (pc *PathControl) ClickedPathComponentCell() *PathComponentCell {
+	defer runtime.KeepAlive(pc)
 	var _mainthread0 *PathComponentCell
 	purego.Main(func() {
 		_mainthread0 = func() *PathComponentCell {
@@ -854,6 +898,7 @@ func (pc *PathControl) ClickedPathComponentCell() *PathComponentCell {
 //
 // PathComponentCells returns the collection as a Go slice.
 func (pc *PathControl) PathComponentCells() []*PathComponentCell {
+	defer runtime.KeepAlive(pc)
 	var _mainthread0 []*PathComponentCell
 	purego.Main(func() {
 		_mainthread0 = func() []*PathComponentCell {
@@ -866,6 +911,7 @@ func (pc *PathControl) PathComponentCells() []*PathComponentCell {
 
 // SetPathComponentCells sets the array of NSPathComponentCell objects currently being displayed.
 func (pc *PathControl) SetPathComponentCells(cells []*PathComponentCell) {
+	defer runtime.KeepAlive(pc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPathComponentCells:"), purego.SliceToNSArray(cells, func(_v *PathComponentCell) objc.ID { return objref.IDOf(_v) }))
 	})

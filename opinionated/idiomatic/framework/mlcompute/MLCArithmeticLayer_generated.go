@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (al *ArithmeticLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Arit
 
 // Operation returns the arithmetic operation.
 func (al *ArithmeticLayer) Operation() ArithmeticOperation {
+	defer runtime.KeepAlive(al)
 	_r := objc.Send[ArithmeticOperation](objref.IDOf(al), objc.RegisterName("operation"))
 	return _r
 }

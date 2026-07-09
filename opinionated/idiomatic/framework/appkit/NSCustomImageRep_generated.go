@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -73,6 +75,7 @@ func (cir *CustomImageRep) WithOpaque(opaque bool) *CustomImageRep {
 
 // WithColorSpaceName sets the name of the color space used by the image data.
 func (cir *CustomImageRep) WithColorSpaceName(colorSpaceName obj.Object) *CustomImageRep {
+	defer runtime.KeepAlive(colorSpaceName)
 	objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
 	return cir
 }
@@ -103,6 +106,7 @@ func (cir *CustomImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirect
 
 // Delegate returns the delegate.
 func (cir *CustomImageRep) Delegate() obj.Object {
+	defer runtime.KeepAlive(cir)
 	_r := objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }

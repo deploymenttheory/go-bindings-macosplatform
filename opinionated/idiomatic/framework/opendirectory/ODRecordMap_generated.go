@@ -5,6 +5,8 @@
 package opendirectory
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func recordMapAdopt(id objc.ID) *RecordMap {
 
 // Description returns the object's -description text.
 func (rm *RecordMap) Description() string {
+	defer runtime.KeepAlive(rm)
 	return rt.Description(objref.IDOf(rm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rm *RecordMap) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rm *RecordMap) IsKind(className string) bool {
+	defer runtime.KeepAlive(rm)
 	return rt.IsKind(objref.IDOf(rm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rm *RecordMap) String() string {
+	defer runtime.KeepAlive(rm)
 	return rt.Description(objref.IDOf(rm))
 }
 
@@ -78,23 +85,28 @@ func (rm *RecordMap) WithNative(native string) *RecordMap {
 
 // WithOdPredicate sets the od predicate.
 func (rm *RecordMap) WithOdPredicate(odPredicate obj.Object) *RecordMap {
+	defer runtime.KeepAlive(odPredicate)
 	objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("setOdPredicate:"), objref.IDOf(odPredicate))
 	return rm
 }
 
 // AttributeMapForStandardAttribute returns an ODAttributeMap object for the given OD standard attribute. Returns an ODAttributeMap object for the given OD standard attribute.
 func (rm *RecordMap) AttributeMapForStandardAttribute(standardAttribute string) *AttributeMap {
+	defer runtime.KeepAlive(rm)
 	_r := objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("attributeMapForStandardAttribute:"), purego.NSString(standardAttribute))
 	return AttributeMapFromID(_r)
 }
 
 // SetAttributeMapForStandardAttribute sets an ODAttributeMap object for a given OD standard attribute. Sets an ODAttributeMap object for a given OD standard attribute.
 func (rm *RecordMap) SetAttributeMapForStandardAttribute(attributeMap *AttributeMap, standardAttribute string) {
+	defer runtime.KeepAlive(rm)
+	defer runtime.KeepAlive(attributeMap)
 	objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("setAttributeMap:forStandardAttribute:"), objref.IDOf(attributeMap), purego.NSString(standardAttribute))
 }
 
 // Native returns the native.
 func (rm *RecordMap) Native() string {
+	defer runtime.KeepAlive(rm)
 	_r := objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("native"))
 	if _r == 0 {
 		return ""
@@ -104,18 +116,21 @@ func (rm *RecordMap) Native() string {
 
 // OdPredicate returns the od predicate.
 func (rm *RecordMap) OdPredicate() obj.Object {
+	defer runtime.KeepAlive(rm)
 	_r := objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("odPredicate"))
 	return obj.Wrap(_r)
 }
 
 // Attributes returns the attributes.
 func (rm *RecordMap) Attributes() obj.Object {
+	defer runtime.KeepAlive(rm)
 	_r := objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
 // StandardAttributeTypes returns the standard attribute types.
 func (rm *RecordMap) StandardAttributeTypes() obj.Object {
+	defer runtime.KeepAlive(rm)
 	_r := objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("standardAttributeTypes"))
 	return obj.Wrap(_r)
 }

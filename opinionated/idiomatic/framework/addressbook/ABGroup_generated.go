@@ -5,6 +5,8 @@
 package addressbook
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,54 +56,69 @@ func NewGroup() *Group {
 
 // Members returns an array of persons in a group.
 func (g *Group) Members() obj.Object {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("members"))
 	return obj.Wrap(_r)
 }
 
 // AddMember adds a person to a group.
 func (g *Group) AddMember(person *Person) bool {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(person)
 	_r := objc.Send[bool](objref.IDOf(g), objc.RegisterName("addMember:"), objref.IDOf(person))
 	return _r
 }
 
 // RemoveMember removes a person from a group.
 func (g *Group) RemoveMember(person *Person) bool {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(person)
 	_r := objc.Send[bool](objref.IDOf(g), objc.RegisterName("removeMember:"), objref.IDOf(person))
 	return _r
 }
 
 // Subgroups returns an array containing a group’s subgroups.
 func (g *Group) Subgroups() obj.Object {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("subgroups"))
 	return obj.Wrap(_r)
 }
 
 // AddSubgroup adds a subgroup to another group.
 func (g *Group) AddSubgroup(group *Group) bool {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(group)
 	_r := objc.Send[bool](objref.IDOf(g), objc.RegisterName("addSubgroup:"), objref.IDOf(group))
 	return _r
 }
 
 // RemoveSubgroup removes a subgroup from a group.
 func (g *Group) RemoveSubgroup(group *Group) bool {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(group)
 	_r := objc.Send[bool](objref.IDOf(g), objc.RegisterName("removeSubgroup:"), objref.IDOf(group))
 	return _r
 }
 
 // ParentGroups returns an array containing a group’s parents—that is, the groups that a group belongs to.
 func (g *Group) ParentGroups() obj.Object {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("parentGroups"))
 	return obj.Wrap(_r)
 }
 
 // SetDistributionIdentifierForPropertyPerson assigns a specific distribution identifier for a person’s multivalue list property so that the group can be used as a distribution list.
 func (g *Group) SetDistributionIdentifierForPropertyPerson(identifier string, property string, person *Person) bool {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(person)
 	_r := objc.Send[bool](objref.IDOf(g), objc.RegisterName("setDistributionIdentifier:forProperty:person:"), purego.NSString(identifier), purego.NSString(property), objref.IDOf(person))
 	return _r
 }
 
 // DistributionIdentifierForPropertyPerson returns the distribution identifier for the given property and person.
 func (g *Group) DistributionIdentifierForPropertyPerson(property string, person *Person) string {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(person)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("distributionIdentifierForProperty:person:"), purego.NSString(property), objref.IDOf(person))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -68,6 +70,7 @@ func (sl *SliceLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SliceLaye
 //
 // Start returns the collection as a Go slice.
 func (sl *SliceLayer) Start() []obj.Object {
+	defer runtime.KeepAlive(sl)
 	_arr := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("start"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -76,6 +79,7 @@ func (sl *SliceLayer) Start() []obj.Object {
 //
 // End returns the collection as a Go slice.
 func (sl *SliceLayer) End() []obj.Object {
+	defer runtime.KeepAlive(sl)
 	_arr := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("end"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -84,6 +88,7 @@ func (sl *SliceLayer) End() []obj.Object {
 //
 // Stride returns the collection as a Go slice.
 func (sl *SliceLayer) Stride() []obj.Object {
+	defer runtime.KeepAlive(sl)
 	_arr := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("stride"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

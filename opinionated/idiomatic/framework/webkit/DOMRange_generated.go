@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,90 +53,118 @@ func NewDOMRange() *DOMRange {
 
 // SetStartOffset wraps the corresponding Objective-C method.
 func (dr *DOMRange) SetStartOffset(refNode *DOMNode, offset int) {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(refNode)
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setStart:offset:"), objref.IDOf(refNode), offset)
 }
 
 // SetEndOffset wraps the corresponding Objective-C method.
 func (dr *DOMRange) SetEndOffset(refNode *DOMNode, offset int) {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(refNode)
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setEnd:offset:"), objref.IDOf(refNode), offset)
 }
 
 // SetStartBefore wraps the corresponding Objective-C method.
 func (dr *DOMRange) SetStartBefore(refNode *DOMNode) {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(refNode)
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setStartBefore:"), objref.IDOf(refNode))
 }
 
 // SetStartAfter wraps the corresponding Objective-C method.
 func (dr *DOMRange) SetStartAfter(refNode *DOMNode) {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(refNode)
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setStartAfter:"), objref.IDOf(refNode))
 }
 
 // SetEndBefore wraps the corresponding Objective-C method.
 func (dr *DOMRange) SetEndBefore(refNode *DOMNode) {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(refNode)
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setEndBefore:"), objref.IDOf(refNode))
 }
 
 // SetEndAfter wraps the corresponding Objective-C method.
 func (dr *DOMRange) SetEndAfter(refNode *DOMNode) {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(refNode)
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setEndAfter:"), objref.IDOf(refNode))
 }
 
 // Collapse wraps the corresponding Objective-C method.
 func (dr *DOMRange) Collapse(toStart bool) {
+	defer runtime.KeepAlive(dr)
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("collapse:"), toStart)
 }
 
 // SelectNode selects node.
 func (dr *DOMRange) SelectNode(refNode *DOMNode) {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(refNode)
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("selectNode:"), objref.IDOf(refNode))
 }
 
 // SelectNodeContents selects node contents.
 func (dr *DOMRange) SelectNodeContents(refNode *DOMNode) {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(refNode)
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("selectNodeContents:"), objref.IDOf(refNode))
 }
 
 // CompareBoundaryPointsSourceRange wraps the corresponding Objective-C method.
 func (dr *DOMRange) CompareBoundaryPointsSourceRange(how uint16, sourceRange *DOMRange) int16 {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(sourceRange)
 	_r := objc.Send[int16](objref.IDOf(dr), objc.RegisterName("compareBoundaryPoints:sourceRange:"), how, objref.IDOf(sourceRange))
 	return _r
 }
 
 // DeleteContents deletes contents.
 func (dr *DOMRange) DeleteContents() {
+	defer runtime.KeepAlive(dr)
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("deleteContents"))
 }
 
 // ExtractContents returns the extract contents.
 func (dr *DOMRange) ExtractContents() *DOMDocumentFragment {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("extractContents"))
 	return DOMDocumentFragmentFromID(_r)
 }
 
 // CloneContents returns the clone contents.
 func (dr *DOMRange) CloneContents() *DOMDocumentFragment {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("cloneContents"))
 	return DOMDocumentFragmentFromID(_r)
 }
 
 // InsertNode inserts node.
 func (dr *DOMRange) InsertNode(newNode *DOMNode) {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(newNode)
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("insertNode:"), objref.IDOf(newNode))
 }
 
 // SurroundContents wraps the corresponding Objective-C method.
 func (dr *DOMRange) SurroundContents(newParent *DOMNode) {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(newParent)
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("surroundContents:"), objref.IDOf(newParent))
 }
 
 // CloneRange returns the clone range.
 func (dr *DOMRange) CloneRange() *DOMRange {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("cloneRange"))
 	return DOMRangeFromID(_r)
 }
 
 // ToString returns the to string.
 func (dr *DOMRange) ToString() string {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("toString"))
 	if _r == 0 {
 		return ""
@@ -144,77 +174,94 @@ func (dr *DOMRange) ToString() string {
 
 // Detach wraps the corresponding Objective-C method.
 func (dr *DOMRange) Detach() {
+	defer runtime.KeepAlive(dr)
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("detach"))
 }
 
 // CreateContextualFragment creates contextual fragment.
 func (dr *DOMRange) CreateContextualFragment(html string) *DOMDocumentFragment {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("createContextualFragment:"), purego.NSString(html))
 	return DOMDocumentFragmentFromID(_r)
 }
 
 // CompareNode wraps the corresponding Objective-C method.
 func (dr *DOMRange) CompareNode(refNode *DOMNode) int16 {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(refNode)
 	_r := objc.Send[int16](objref.IDOf(dr), objc.RegisterName("compareNode:"), objref.IDOf(refNode))
 	return _r
 }
 
 // IntersectsNode wraps the corresponding Objective-C method.
 func (dr *DOMRange) IntersectsNode(refNode *DOMNode) bool {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(refNode)
 	_r := objc.Send[bool](objref.IDOf(dr), objc.RegisterName("intersectsNode:"), objref.IDOf(refNode))
 	return _r
 }
 
 // ComparePointOffset wraps the corresponding Objective-C method.
 func (dr *DOMRange) ComparePointOffset(refNode *DOMNode, offset int) int16 {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(refNode)
 	_r := objc.Send[int16](objref.IDOf(dr), objc.RegisterName("comparePoint:offset:"), objref.IDOf(refNode), offset)
 	return _r
 }
 
 // IsPointInRangeOffset wraps the corresponding Objective-C method.
 func (dr *DOMRange) IsPointInRangeOffset(refNode *DOMNode, offset int) bool {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(refNode)
 	_r := objc.Send[bool](objref.IDOf(dr), objc.RegisterName("isPointInRange:offset:"), objref.IDOf(refNode), offset)
 	return _r
 }
 
 // StartContainer returns the start container.
 func (dr *DOMRange) StartContainer() *DOMNode {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("startContainer"))
 	return DOMNodeFromID(_r)
 }
 
 // StartOffset returns the start offset.
 func (dr *DOMRange) StartOffset() int {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[int](objref.IDOf(dr), objc.RegisterName("startOffset"))
 	return _r
 }
 
 // EndContainer returns the end container.
 func (dr *DOMRange) EndContainer() *DOMNode {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("endContainer"))
 	return DOMNodeFromID(_r)
 }
 
 // EndOffset returns the end offset.
 func (dr *DOMRange) EndOffset() int {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[int](objref.IDOf(dr), objc.RegisterName("endOffset"))
 	return _r
 }
 
 // Collapsed wraps the corresponding Objective-C method.
 func (dr *DOMRange) Collapsed() bool {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[bool](objref.IDOf(dr), objc.RegisterName("collapsed"))
 	return _r
 }
 
 // CommonAncestorContainer returns the common ancestor container.
 func (dr *DOMRange) CommonAncestorContainer() *DOMNode {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("commonAncestorContainer"))
 	return DOMNodeFromID(_r)
 }
 
 // Text returns the text.
 func (dr *DOMRange) Text() string {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("text"))
 	if _r == 0 {
 		return ""
@@ -224,28 +271,36 @@ func (dr *DOMRange) Text() string {
 
 // SetStart wraps the corresponding Objective-C method.
 func (dr *DOMRange) SetStart(refNode *DOMNode, offset int) {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(refNode)
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setStart::"), objref.IDOf(refNode), offset)
 }
 
 // SetEnd wraps the corresponding Objective-C method.
 func (dr *DOMRange) SetEnd(refNode *DOMNode, offset int) {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(refNode)
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setEnd::"), objref.IDOf(refNode), offset)
 }
 
 // CompareBoundaryPoints wraps the corresponding Objective-C method.
 func (dr *DOMRange) CompareBoundaryPoints(how uint16, sourceRange *DOMRange) int16 {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(sourceRange)
 	_r := objc.Send[int16](objref.IDOf(dr), objc.RegisterName("compareBoundaryPoints::"), how, objref.IDOf(sourceRange))
 	return _r
 }
 
 // WebArchive returns a WebArchive representing the range.
 func (dr *DOMRange) WebArchive() *WebArchive {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("webArchive"))
 	return WebArchiveFromID(_r)
 }
 
 // MarkupString returns a markup string representing the range.
 func (dr *DOMRange) MarkupString() string {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("markupString"))
 	if _r == 0 {
 		return ""

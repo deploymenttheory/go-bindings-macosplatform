@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,42 +67,49 @@ func (gnl *GroupNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bo
 
 // FeatureChannelCount returns the number of feature channels
 func (gnl *GroupNormalizationLayer) FeatureChannelCount() int {
+	defer runtime.KeepAlive(gnl)
 	_r := objc.Send[int](objref.IDOf(gnl), objc.RegisterName("featureChannelCount"))
 	return _r
 }
 
 // GroupCount returns the number of groups to separate the channels into
 func (gnl *GroupNormalizationLayer) GroupCount() int {
+	defer runtime.KeepAlive(gnl)
 	_r := objc.Send[int](objref.IDOf(gnl), objc.RegisterName("groupCount"))
 	return _r
 }
 
 // Beta returns the beta tensor
 func (gnl *GroupNormalizationLayer) Beta() *Tensor {
+	defer runtime.KeepAlive(gnl)
 	_r := objc.Send[objc.ID](objref.IDOf(gnl), objc.RegisterName("beta"))
 	return TensorFromID(_r)
 }
 
 // Gamma returns the gamma tensor
 func (gnl *GroupNormalizationLayer) Gamma() *Tensor {
+	defer runtime.KeepAlive(gnl)
 	_r := objc.Send[objc.ID](objref.IDOf(gnl), objc.RegisterName("gamma"))
 	return TensorFromID(_r)
 }
 
 // BetaParameter returns the beta tensor parameter used for optimizer update
 func (gnl *GroupNormalizationLayer) BetaParameter() *TensorParameter {
+	defer runtime.KeepAlive(gnl)
 	_r := objc.Send[objc.ID](objref.IDOf(gnl), objc.RegisterName("betaParameter"))
 	return TensorParameterFromID(_r)
 }
 
 // GammaParameter returns the gamma tensor parameter used for optimizer update
 func (gnl *GroupNormalizationLayer) GammaParameter() *TensorParameter {
+	defer runtime.KeepAlive(gnl)
 	_r := objc.Send[objc.ID](objref.IDOf(gnl), objc.RegisterName("gammaParameter"))
 	return TensorParameterFromID(_r)
 }
 
 // VarianceEpsilon returns a value used for numerical stability
 func (gnl *GroupNormalizationLayer) VarianceEpsilon() float32 {
+	defer runtime.KeepAlive(gnl)
 	_r := objc.Send[float32](objref.IDOf(gnl), objc.RegisterName("varianceEpsilon"))
 	return _r
 }

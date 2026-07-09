@@ -71,8 +71,8 @@ func (o *NSXMLElement) InitWithName(name *NSString) *NSXMLElement {
 }
 
 // @method initWithName:URI: @abstract Returns an element whose full QName is specified.
-func (o *NSXMLElement) InitWithNameURI(name *NSString, uRI *NSString) *NSXMLElement {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelInitWithNameURI, name.Ptr(), uRI.Ptr())
+func (o *NSXMLElement) InitWithNameURI(name *NSString, uri *NSString) *NSXMLElement {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelInitWithNameURI, name.Ptr(), uri.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -119,8 +119,8 @@ func (o *NSXMLElement) ElementsForName(name *NSString) *NSArray[*NSXMLElement] {
 }
 
 // @method elementsForLocalName:URI @abstract Returns all of the child elements that match this localname URI pair.
-func (o *NSXMLElement) ElementsForLocalNameURI(localName *NSString, uRI *NSString) *NSArray[*NSXMLElement] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelElementsForLocalNameURI, localName.Ptr(), uRI.Ptr())
+func (o *NSXMLElement) ElementsForLocalNameURI(localName *NSString, uri *NSString) *NSArray[*NSXMLElement] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelElementsForLocalNameURI, localName.Ptr(), uri.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -152,8 +152,8 @@ func (o *NSXMLElement) AttributeForName(name *NSString) *NSXMLNode {
 }
 
 // @method attributeForLocalName:URI: @abstract Returns an attribute matching this localname URI pair.
-func (o *NSXMLElement) AttributeForLocalNameURI(localName *NSString, uRI *NSString) *NSXMLNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelAttributeForLocalNameURI, localName.Ptr(), uRI.Ptr())
+func (o *NSXMLElement) AttributeForLocalNameURI(localName *NSString, uri *NSString) *NSXMLNode {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLElementSelAttributeForLocalNameURI, localName.Ptr(), uri.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

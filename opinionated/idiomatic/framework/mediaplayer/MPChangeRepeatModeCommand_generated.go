@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (crmc *ChangeRepeatModeCommand) WithEnabled(enabled bool) *ChangeRepeatMode
 
 // CurrentRepeatType returns the current repeat type.
 func (crmc *ChangeRepeatModeCommand) CurrentRepeatType() RepeatType {
+	defer runtime.KeepAlive(crmc)
 	_r := objc.Send[RepeatType](objref.IDOf(crmc), objc.RegisterName("currentRepeatType"))
 	return _r
 }

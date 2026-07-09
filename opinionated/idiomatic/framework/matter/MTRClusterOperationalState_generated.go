@@ -6,11 +6,13 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,6 +51,9 @@ func mTRClusterOperationalStateAdopt(id objc.ID) *MTRClusterOperationalState {
 
 // NewMTRClusterOperationalStateWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterOperationalStateWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterOperationalState {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterOperationalState")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterOperationalStateAdopt(_id)
@@ -58,6 +63,9 @@ func NewMTRClusterOperationalStateWithDeviceEndpointIDQueue(device *MTRDevice, e
 //
 // PauseWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcos *MTRClusterOperationalState) PauseWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalStateClusterPauseParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
+	defer runtime.KeepAlive(mcos)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -83,6 +91,8 @@ func (mcos *MTRClusterOperationalState) PauseWithParamsExpectedValuesExpectedVal
 //
 // PauseWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcos *MTRClusterOperationalState) PauseWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
+	defer runtime.KeepAlive(mcos)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -108,6 +118,9 @@ func (mcos *MTRClusterOperationalState) PauseWithExpectedValuesExpectedValueInte
 //
 // StopWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcos *MTRClusterOperationalState) StopWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalStateClusterStopParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
+	defer runtime.KeepAlive(mcos)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -133,6 +146,8 @@ func (mcos *MTRClusterOperationalState) StopWithParamsExpectedValuesExpectedValu
 //
 // StopWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcos *MTRClusterOperationalState) StopWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
+	defer runtime.KeepAlive(mcos)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -158,6 +173,9 @@ func (mcos *MTRClusterOperationalState) StopWithExpectedValuesExpectedValueInter
 //
 // StartWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcos *MTRClusterOperationalState) StartWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalStateClusterStartParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
+	defer runtime.KeepAlive(mcos)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -183,6 +201,8 @@ func (mcos *MTRClusterOperationalState) StartWithParamsExpectedValuesExpectedVal
 //
 // StartWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcos *MTRClusterOperationalState) StartWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
+	defer runtime.KeepAlive(mcos)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -208,6 +228,9 @@ func (mcos *MTRClusterOperationalState) StartWithExpectedValuesExpectedValueInte
 //
 // ResumeWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcos *MTRClusterOperationalState) ResumeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalStateClusterResumeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
+	defer runtime.KeepAlive(mcos)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -233,6 +256,8 @@ func (mcos *MTRClusterOperationalState) ResumeWithParamsExpectedValuesExpectedVa
 //
 // ResumeWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcos *MTRClusterOperationalState) ResumeWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
+	defer runtime.KeepAlive(mcos)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -255,69 +280,91 @@ func (mcos *MTRClusterOperationalState) ResumeWithExpectedValuesExpectedValueInt
 }
 
 // ReadAttributePhaseListWithParams reads attribute phase list with params.
-func (mcos *MTRClusterOperationalState) ReadAttributePhaseListWithParams(params *MTRReadParams) obj.Object {
+func (mcos *MTRClusterOperationalState) ReadAttributePhaseListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcos)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcos), objc.RegisterName("readAttributePhaseListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCurrentPhaseWithParams reads attribute current phase with params.
-func (mcos *MTRClusterOperationalState) ReadAttributeCurrentPhaseWithParams(params *MTRReadParams) obj.Object {
+func (mcos *MTRClusterOperationalState) ReadAttributeCurrentPhaseWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcos)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcos), objc.RegisterName("readAttributeCurrentPhaseWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCountdownTimeWithParams reads attribute countdown time with params.
-func (mcos *MTRClusterOperationalState) ReadAttributeCountdownTimeWithParams(params *MTRReadParams) obj.Object {
+func (mcos *MTRClusterOperationalState) ReadAttributeCountdownTimeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcos)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcos), objc.RegisterName("readAttributeCountdownTimeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeOperationalStateListWithParams reads attribute operational state list with params.
-func (mcos *MTRClusterOperationalState) ReadAttributeOperationalStateListWithParams(params *MTRReadParams) obj.Object {
+func (mcos *MTRClusterOperationalState) ReadAttributeOperationalStateListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcos)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcos), objc.RegisterName("readAttributeOperationalStateListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeOperationalStateWithParams reads attribute operational state with params.
-func (mcos *MTRClusterOperationalState) ReadAttributeOperationalStateWithParams(params *MTRReadParams) obj.Object {
+func (mcos *MTRClusterOperationalState) ReadAttributeOperationalStateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcos)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcos), objc.RegisterName("readAttributeOperationalStateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeOperationalErrorWithParams reads attribute operational error with params.
-func (mcos *MTRClusterOperationalState) ReadAttributeOperationalErrorWithParams(params *MTRReadParams) obj.Object {
+func (mcos *MTRClusterOperationalState) ReadAttributeOperationalErrorWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcos)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcos), objc.RegisterName("readAttributeOperationalErrorWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcos *MTRClusterOperationalState) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcos *MTRClusterOperationalState) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcos)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcos), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcos *MTRClusterOperationalState) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcos *MTRClusterOperationalState) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcos)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcos), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcos *MTRClusterOperationalState) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcos *MTRClusterOperationalState) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcos)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcos), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcos *MTRClusterOperationalState) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcos *MTRClusterOperationalState) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcos)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcos), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcos *MTRClusterOperationalState) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcos *MTRClusterOperationalState) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcos)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcos), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterOperationalState)(nil)

@@ -3,11 +3,11 @@
 package idiofw
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"io"
 	"maps"
 	"strings"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -121,8 +121,13 @@ type withSetterModel struct {
 	param           setterParamModel
 	isNSArray       bool   // true: variadic slice → NSArray
 	sliceElemType   string // parameter elem type (a provider interface or an object type)
-	mainThread      bool   // run the setter on the main thread (@MainActor class)
-	extraImports    map[string]string
+	// isDelegate marks a delegate-typed property: the setter takes the Go
+	// delegate interface, builds the Objective-C shim, and ties its lifetime to
+	// the receiver via an associated object. delegateShimFunc is the builder.
+	isDelegate       bool
+	delegateShimFunc string
+	mainThread       bool // run the setter on the main thread (@MainActor class)
+	extraImports     map[string]string
 }
 
 type setterParamModel struct {
@@ -184,7 +189,12 @@ func buildWithSetter(
 			return nil
 		}
 		impSet := make(typemap.ImportSet)
-		goElem := qualifyRaw(mapper.GoType(elemObjC, ctx, impSet), fc, rawPkgAlias, ctx.GenericParams)
+		goElem := qualifyRaw(
+			mapper.GoType(elemObjC, ctx, impSet),
+			fc,
+			rawPkgAlias,
+			ctx.GenericParams,
+		)
 		if !isObjectPointerType(goElem, mapper) {
 			return nil
 		}
@@ -220,6 +230,25 @@ func buildWithSetter(
 	extraImports["objref"] = objrefImportPath
 	extraImports["objc"] = objcImportPath
 
+	// A property typed as an emitted delegate protocol accepts the Go delegate
+	// interface; the generated setter builds the Objective-C shim and keeps it
+	// alive exactly as long as the receiver (delegate properties are weak, so
+	// the association carries the only strong reference).
+	if protocolName, isProto := singleProtocolOf(prop.ObjCType); isProto {
+		if ifaceName, emitted := fc.delegates[protocolName]; emitted {
+			extraImports["shim"] = shimImportPath
+			return &withSetterModel{
+				goName:           goWithName,
+				rawSetterGoName:  rawSetterGoName,
+				setterSelector:   setterSel,
+				isDelegate:       true,
+				delegateShimFunc: delegateShimFuncName(ifaceName),
+				param:            setterParamModel{goName: pName, goType: ifaceName},
+				extraImports:     extraImports,
+			}
+		}
+	}
+
 	// A property typed as an abstract base class accepts a provider interface so
 	// any concrete subtype can be passed.
 	impSet := make(typemap.ImportSet)
@@ -231,6 +260,7 @@ func buildWithSetter(
 	)
 	rawClass := strings.TrimPrefix(strings.TrimPrefix(goType, "*"), rawPkgAlias+".")
 	if baseGoTypeName, isBase := abstractBases[rawClass]; isBase {
+		extraImports["runtime"] = "runtime" // defer runtime.KeepAlive on the object param
 		return &withSetterModel{
 			goName:          goWithName,
 			rawSetterGoName: rawSetterGoName,
@@ -257,6 +287,11 @@ func buildWithSetter(
 		return nil
 	}
 	maps.Copy(extraImports, imports)
+	if strings.HasPrefix(argExpr, "objref.IDOf(") {
+		// The wrapper argument's pointer is read before the send; keep the
+		// wrapper alive across the call (defer runtime.KeepAlive).
+		extraImports["runtime"] = "runtime"
+	}
 	return &withSetterModel{
 		goName:          goWithName,
 		rawSetterGoName: rawSetterGoName,
@@ -287,12 +322,24 @@ func writeWithMethod(w io.Writer, typeName string, setter withSetterModel) {
 		IsNSArray:      setter.isNSArray,
 		MainThread:     setter.mainThread,
 	}
-	if setter.isNSArray {
+	switch {
+	case setter.isNSArray:
 		view.SliceElemType = setter.sliceElemType
-	} else {
+	case setter.isDelegate:
+		view.IsDelegate = true
+		view.ShimFunc = setter.delegateShimFunc
+		view.ParamName = setter.param.goName
+		view.ParamType = setter.param.goType
+	default:
 		view.ParamName = setter.param.goName
 		view.ParamType = setter.param.goType
 		view.ParamRawExpr = setter.param.rawExpression
+		// The receiver is returned (and so stays alive); only a wrapper argument
+		// passed by pointer needs to outlive the send. Collection setters build
+		// an NSArray that retains its elements, so they need nothing.
+		if strings.HasPrefix(setter.param.rawExpression, "objref.IDOf(") {
+			view.KeepAlive = []string{setter.param.goName}
+		}
 	}
 
 	render.Must(w, "with_setter", view)
@@ -311,8 +358,16 @@ type withSetterView struct {
 	// NSArray collection setter:
 	SliceElemType string
 
+	// Delegate setter: the property takes a Go delegate interface; ShimFunc is
+	// the generated builder wrapping it as an Objective-C object.
+	IsDelegate bool
+	ShimFunc   string
+
 	// Scalar/object setter:
 	ParamName    string
 	ParamType    string
 	ParamRawExpr string
+	// KeepAlive names wrapper arguments kept alive until the setter returns
+	// (defer runtime.KeepAlive) so the collector cannot finalize them mid-send.
+	KeepAlive []string
 }

@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,24 +54,28 @@ func NewMTRTestClusterClusterTestStructArrayArgumentRequestParams() *MTRTestClus
 
 // WithArg5 sets the arg5.
 func (mtcctsaarp *MTRTestClusterClusterTestStructArrayArgumentRequestParams) WithArg5(arg5 obj.Object) *MTRTestClusterClusterTestStructArrayArgumentRequestParams {
+	defer runtime.KeepAlive(arg5)
 	objc.Send[objc.ID](objref.IDOf(mtcctsaarp), objc.RegisterName("setArg5:"), objref.IDOf(arg5))
 	return mtcctsaarp
 }
 
 // WithArg6 sets the arg6.
 func (mtcctsaarp *MTRTestClusterClusterTestStructArrayArgumentRequestParams) WithArg6(arg6 obj.Object) *MTRTestClusterClusterTestStructArrayArgumentRequestParams {
+	defer runtime.KeepAlive(arg6)
 	objc.Send[objc.ID](objref.IDOf(mtcctsaarp), objc.RegisterName("setArg6:"), objref.IDOf(arg6))
 	return mtcctsaarp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mtcctsaarp *MTRTestClusterClusterTestStructArrayArgumentRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestStructArrayArgumentRequestParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mtcctsaarp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mtcctsaarp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mtcctsaarp *MTRTestClusterClusterTestStructArrayArgumentRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestStructArrayArgumentRequestParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mtcctsaarp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mtcctsaarp
 }

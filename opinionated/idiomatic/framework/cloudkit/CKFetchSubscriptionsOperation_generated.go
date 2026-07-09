@@ -5,7 +5,10 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -53,9 +56,9 @@ func NewFetchSubscriptionsOperation() *FetchSubscriptionsOperation {
 }
 
 // NewFetchSubscriptionsOperationWithSubscriptionIDs creates an operation for fetching the specified subscriptions.
-func NewFetchSubscriptionsOperationWithSubscriptionIDs(subscriptionIDs []obj.Object) *FetchSubscriptionsOperation {
+func NewFetchSubscriptionsOperationWithSubscriptionIDs(subscriptionIDs []*foundation.String) *FetchSubscriptionsOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKFetchSubscriptionsOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubscriptionIDs:"), purego.SliceToNSArray(subscriptionIDs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubscriptionIDs:"), purego.SliceToNSArray(subscriptionIDs, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
 	return fetchSubscriptionsOperationAdopt(_id)
 }
 
@@ -68,18 +71,21 @@ func (fso *FetchSubscriptionsOperation) WithSubscriptionIDs(items ...obj.Object)
 
 // WithDatabase sets the database that the operation uses.
 func (fso *FetchSubscriptionsOperation) WithDatabase(database *Database) *FetchSubscriptionsOperation {
+	defer runtime.KeepAlive(database)
 	objc.Send[objc.ID](objref.IDOf(fso), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return fso
 }
 
 // WithConfiguration sets the operation’s configuration.
 func (fso *FetchSubscriptionsOperation) WithConfiguration(configuration *OperationConfiguration) *FetchSubscriptionsOperation {
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(fso), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return fso
 }
 
 // WithGroup sets the operation’s group.
 func (fso *FetchSubscriptionsOperation) WithGroup(group *OperationGroup) *FetchSubscriptionsOperation {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(fso), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return fso
 }
@@ -92,6 +98,7 @@ func (fso *FetchSubscriptionsOperation) WithLongLivedOperationWasPersistedBlock(
 
 // WithContainer sets the operation's container.
 func (fso *FetchSubscriptionsOperation) WithContainer(container *Container) *FetchSubscriptionsOperation {
+	defer runtime.KeepAlive(container)
 	objc.Send[objc.ID](objref.IDOf(fso), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return fso
 }
@@ -124,6 +131,7 @@ func (fso *FetchSubscriptionsOperation) WithTimeoutIntervalForResource(timeoutIn
 //
 // SubscriptionIDs returns the collection as a Go slice.
 func (fso *FetchSubscriptionsOperation) SubscriptionIDs() []obj.Object {
+	defer runtime.KeepAlive(fso)
 	_arr := objc.Send[objc.ID](objref.IDOf(fso), objc.RegisterName("subscriptionIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

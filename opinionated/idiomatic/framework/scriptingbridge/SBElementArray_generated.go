@@ -5,6 +5,8 @@
 package scriptingbridge
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func elementArrayAdopt(id objc.ID) *ElementArray {
 
 // Description returns the object's -description text.
 func (ea *ElementArray) Description() string {
+	defer runtime.KeepAlive(ea)
 	return rt.Description(objref.IDOf(ea))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ea *ElementArray) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ea)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ea), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ea *ElementArray) IsKind(className string) bool {
+	defer runtime.KeepAlive(ea)
 	return rt.IsKind(objref.IDOf(ea), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ea *ElementArray) String() string {
+	defer runtime.KeepAlive(ea)
 	return rt.Description(objref.IDOf(ea))
 }
 
@@ -74,24 +81,30 @@ func NewElementArray() *ElementArray {
 
 // ObjectWithName returns the object in the array with the given name.
 func (ea *ElementArray) ObjectWithName(name string) obj.Object {
+	defer runtime.KeepAlive(ea)
 	_r := objc.Send[objc.ID](objref.IDOf(ea), objc.RegisterName("objectWithName:"), purego.NSString(name))
 	return obj.Wrap(_r)
 }
 
 // ObjectWithID returns the object in the array with the given identifier.
 func (ea *ElementArray) ObjectWithID(identifier obj.Object) obj.Object {
+	defer runtime.KeepAlive(ea)
+	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[objc.ID](objref.IDOf(ea), objc.RegisterName("objectWithID:"), objref.IDOf(identifier))
 	return obj.Wrap(_r)
 }
 
 // ObjectAtLocation returns the object at the given location in the receiver.
 func (ea *ElementArray) ObjectAtLocation(location obj.Object) obj.Object {
+	defer runtime.KeepAlive(ea)
+	defer runtime.KeepAlive(location)
 	_r := objc.Send[objc.ID](objref.IDOf(ea), objc.RegisterName("objectAtLocation:"), objref.IDOf(location))
 	return obj.Wrap(_r)
 }
 
 // Get returns forces evaluation of the receiver, causing the real object to be returned immediately.
 func (ea *ElementArray) Get() []obj.Object {
+	defer runtime.KeepAlive(ea)
 	_r := objc.Send[objc.ID](objref.IDOf(ea), objc.RegisterName("get"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

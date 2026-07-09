@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func userLocationAdopt(id objc.ID) *UserLocation {
 
 // Description returns the object's -description text.
 func (ul *UserLocation) Description() string {
+	defer runtime.KeepAlive(ul)
 	return rt.Description(objref.IDOf(ul))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ul *UserLocation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ul)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ul), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ul *UserLocation) IsKind(className string) bool {
+	defer runtime.KeepAlive(ul)
 	return rt.IsKind(objref.IDOf(ul), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ul *UserLocation) String() string {
+	defer runtime.KeepAlive(ul)
 	return rt.Description(objref.IDOf(ul))
 }
 
@@ -86,18 +93,21 @@ func (ul *UserLocation) WithSubtitle(subtitle string) *UserLocation {
 
 // IsUpdating reports whether the object is updating.
 func (ul *UserLocation) IsUpdating() bool {
+	defer runtime.KeepAlive(ul)
 	_r := objc.Send[bool](objref.IDOf(ul), objc.RegisterName("isUpdating"))
 	return _r
 }
 
 // Heading returns the heading.
 func (ul *UserLocation) Heading() obj.Object {
+	defer runtime.KeepAlive(ul)
 	_r := objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("heading"))
 	return obj.Wrap(_r)
 }
 
 // Title returns the title.
 func (ul *UserLocation) Title() string {
+	defer runtime.KeepAlive(ul)
 	_r := objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -107,6 +117,7 @@ func (ul *UserLocation) Title() string {
 
 // Subtitle returns the subtitle.
 func (ul *UserLocation) Subtitle() string {
+	defer runtime.KeepAlive(ul)
 	_r := objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("subtitle"))
 	if _r == 0 {
 		return ""

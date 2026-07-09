@@ -5,6 +5,7 @@
 package pdfkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -58,6 +59,7 @@ func NewAnnotationMarkup() *AnnotationMarkup {
 
 // WithPage sets returns the page that the annotation is associated with.
 func (am *AnnotationMarkup) WithPage(page *Page) *AnnotationMarkup {
+	defer runtime.KeepAlive(page)
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setPage:"), objref.IDOf(page))
 	return am
 }
@@ -142,18 +144,21 @@ func (am *AnnotationMarkup) WithMouseUpAction(mouseUpAction unsafe.Pointer) *Ann
 
 // WithFont sets the font the annotation uses to display text.
 func (am *AnnotationMarkup) WithFont(font obj.Object) *AnnotationMarkup {
+	defer runtime.KeepAlive(font)
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return am
 }
 
 // WithFontColor sets the font color the annotation uses to display text.
 func (am *AnnotationMarkup) WithFontColor(fontColor obj.Object) *AnnotationMarkup {
+	defer runtime.KeepAlive(fontColor)
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
 	return am
 }
 
 // WithInteriorColor sets the fill color for drawing a circle, line, or square annotation.
 func (am *AnnotationMarkup) WithInteriorColor(interiorColor obj.Object) *AnnotationMarkup {
+	defer runtime.KeepAlive(interiorColor)
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setInteriorColor:"), objref.IDOf(interiorColor))
 	return am
 }
@@ -203,6 +208,7 @@ func (am *AnnotationMarkup) WithMarkupType(markupType MarkupType) *AnnotationMar
 
 // WithWidgetFieldType sets the type of widget annotation, such as button, choice, or text.
 func (am *AnnotationMarkup) WithWidgetFieldType(widgetFieldType obj.Object) *AnnotationMarkup {
+	defer runtime.KeepAlive(widgetFieldType)
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setWidgetFieldType:"), objref.IDOf(widgetFieldType))
 	return am
 }
@@ -301,13 +307,14 @@ func (am *AnnotationMarkup) WithOpen(open bool) *AnnotationMarkup {
 
 // WithDestination sets the destination for a link annotation.
 func (am *AnnotationMarkup) WithDestination(destination *Destination) *AnnotationMarkup {
+	defer runtime.KeepAlive(destination)
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return am
 }
 
 // WithURL sets a URL for a link annotation.
-func (am *AnnotationMarkup) WithURL(uRL string) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (am *AnnotationMarkup) WithURL(url string) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return am
 }
 
@@ -325,6 +332,7 @@ func (am *AnnotationMarkup) WithCaption(caption string) *AnnotationMarkup {
 
 // WithBackgroundColor sets the color of the widget’s background.
 func (am *AnnotationMarkup) WithBackgroundColor(backgroundColor obj.Object) *AnnotationMarkup {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return am
 }

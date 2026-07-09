@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,6 +61,7 @@ func (vtmbd *VirtioTraditionalMemoryBalloonDevice) WithTargetVirtualMachineMemor
 
 // TargetVirtualMachineMemorySize returns the target virtual machine memory size.
 func (vtmbd *VirtioTraditionalMemoryBalloonDevice) TargetVirtualMachineMemorySize() uint64 {
+	defer runtime.KeepAlive(vtmbd)
 	_r := objc.Send[uint64](objref.IDOf(vtmbd), objc.RegisterName("targetVirtualMachineMemorySize"))
 	return _r
 }

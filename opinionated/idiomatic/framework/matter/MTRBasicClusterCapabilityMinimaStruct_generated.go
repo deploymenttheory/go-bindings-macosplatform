@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,12 +54,14 @@ func NewMTRBasicClusterCapabilityMinimaStruct() *MTRBasicClusterCapabilityMinima
 
 // WithCaseSessionsPerFabric sets the case sessions per fabric.
 func (mbccms *MTRBasicClusterCapabilityMinimaStruct) WithCaseSessionsPerFabric(caseSessionsPerFabric obj.Object) *MTRBasicClusterCapabilityMinimaStruct {
+	defer runtime.KeepAlive(caseSessionsPerFabric)
 	objc.Send[objc.ID](objref.IDOf(mbccms), objc.RegisterName("setCaseSessionsPerFabric:"), objref.IDOf(caseSessionsPerFabric))
 	return mbccms
 }
 
 // WithSubscriptionsPerFabric sets the subscriptions per fabric.
 func (mbccms *MTRBasicClusterCapabilityMinimaStruct) WithSubscriptionsPerFabric(subscriptionsPerFabric obj.Object) *MTRBasicClusterCapabilityMinimaStruct {
+	defer runtime.KeepAlive(subscriptionsPerFabric)
 	objc.Send[objc.ID](objref.IDOf(mbccms), objc.RegisterName("setSubscriptionsPerFabric:"), objref.IDOf(subscriptionsPerFabric))
 	return mbccms
 }

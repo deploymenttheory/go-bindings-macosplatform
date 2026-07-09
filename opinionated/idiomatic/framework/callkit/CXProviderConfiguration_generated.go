@@ -5,7 +5,10 @@
 package callkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func providerConfigurationAdopt(id objc.ID) *ProviderConfiguration {
 
 // Description returns the object's -description text.
 func (pc *ProviderConfiguration) Description() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pc *ProviderConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pc *ProviderConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(pc)
 	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pc *ProviderConfiguration) String() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
@@ -86,8 +94,8 @@ func (pc *ProviderConfiguration) WithRingtoneSound(ringtoneSound string) *Provid
 }
 
 // WithIconTemplateImageData sets the PNG data for the icon image to be displayed for the provider.
-func (pc *ProviderConfiguration) WithIconTemplateImageData(iconTemplateImageData obj.Object) *ProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setIconTemplateImageData:"), objref.IDOf(iconTemplateImageData))
+func (pc *ProviderConfiguration) WithIconTemplateImageData(iconTemplateImageData []byte) *ProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setIconTemplateImageData:"), rt.BytesToNSData(iconTemplateImageData))
 	return pc
 }
 
@@ -122,13 +130,14 @@ func (pc *ProviderConfiguration) WithSupportsAudioTranslation(supportsAudioTrans
 }
 
 // WithSupportedHandleTypes sets the supported handle types.
-func (pc *ProviderConfiguration) WithSupportedHandleTypes(supportedHandleTypes obj.Object) *ProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSupportedHandleTypes:"), objref.IDOf(supportedHandleTypes))
+func (pc *ProviderConfiguration) WithSupportedHandleTypes(supportedHandleTypes []*foundation.Number) *ProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSupportedHandleTypes:"), rt.SliceToNSSet(supportedHandleTypes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return pc
 }
 
 // LocalizedName returns localized name of the provider
 func (pc *ProviderConfiguration) LocalizedName() string {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
@@ -138,6 +147,7 @@ func (pc *ProviderConfiguration) LocalizedName() string {
 
 // RingtoneSound returns name of resource in app's bundle to play as ringtone for incoming call
 func (pc *ProviderConfiguration) RingtoneSound() string {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("ringtoneSound"))
 	if _r == 0 {
 		return ""
@@ -146,43 +156,50 @@ func (pc *ProviderConfiguration) RingtoneSound() string {
 }
 
 // IconTemplateImageData returns the icon template image data.
-func (pc *ProviderConfiguration) IconTemplateImageData() obj.Object {
+func (pc *ProviderConfiguration) IconTemplateImageData() []byte {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("iconTemplateImageData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // MaximumCallGroups returns the maximum call groups.
 func (pc *ProviderConfiguration) MaximumCallGroups() int {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[int](objref.IDOf(pc), objc.RegisterName("maximumCallGroups"))
 	return _r
 }
 
 // MaximumCallsPerCallGroup returns the maximum calls per call group.
 func (pc *ProviderConfiguration) MaximumCallsPerCallGroup() int {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[int](objref.IDOf(pc), objc.RegisterName("maximumCallsPerCallGroup"))
 	return _r
 }
 
 // IncludesCallsInRecents reports whether this provider's calls should be included in the system's Recents list at the end of each call. Default: true
 func (pc *ProviderConfiguration) IncludesCallsInRecents() bool {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[bool](objref.IDOf(pc), objc.RegisterName("includesCallsInRecents"))
 	return _r
 }
 
 // SupportsVideo wraps the corresponding Objective-C method.
 func (pc *ProviderConfiguration) SupportsVideo() bool {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[bool](objref.IDOf(pc), objc.RegisterName("supportsVideo"))
 	return _r
 }
 
 // SupportsAudioTranslation wraps the corresponding Objective-C method.
 func (pc *ProviderConfiguration) SupportsAudioTranslation() bool {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[bool](objref.IDOf(pc), objc.RegisterName("supportsAudioTranslation"))
 	return _r
 }
 
-// SupportedHandleTypes returns the supported handle types.
-func (pc *ProviderConfiguration) SupportedHandleTypes() obj.Object {
+// SupportedHandleTypes returns the order of the returned elements is unspecified.
+func (pc *ProviderConfiguration) SupportedHandleTypes() []*foundation.Number {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("supportedHandleTypes"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.Number { return foundation.NumberFromID(_id) })
 }

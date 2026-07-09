@@ -5,6 +5,8 @@
 package cinematic
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func decisionAdopt(id objc.ID) *Decision {
 
 // Description returns the object's -description text.
 func (d *Decision) Description() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (d *Decision) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (d *Decision) IsKind(className string) bool {
+	defer runtime.KeepAlive(d)
 	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (d *Decision) String() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
@@ -83,36 +90,42 @@ func NewDecisionWithTimeDetectionGroupIDStrong(time_ coremedia.CMTime, detection
 
 // Time returns the first presentation time at which the subject should be in focus. The rack focus transition to the subject occurs prior to this time.
 func (d *Decision) Time() coremedia.CMTime {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(d), objc.RegisterName("time"))
 	return _r
 }
 
 // DetectionID returns the detectionID of the detection to focus on if this is not a group decision.
 func (d *Decision) DetectionID() int64 {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[int64](objref.IDOf(d), objc.RegisterName("detectionID"))
 	return _r
 }
 
 // DetectionGroupID returns the detectionGroupID of the detection to focus on if this is a group decision.
 func (d *Decision) DetectionGroupID() int64 {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[int64](objref.IDOf(d), objc.RegisterName("detectionGroupID"))
 	return _r
 }
 
 // IsUserDecision reports whether this is a user-created decision, or a base decision.
 func (d *Decision) IsUserDecision() bool {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isUserDecision"))
 	return _r
 }
 
 // IsGroupDecision reports whether this is a group decision or not.
 func (d *Decision) IsGroupDecision() bool {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isGroupDecision"))
 	return _r
 }
 
 // IsStrongDecision reports whether this is a strong decision or not. A strong decision keeps focus for as long as possible.
 func (d *Decision) IsStrongDecision() bool {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isStrongDecision"))
 	return _r
 }

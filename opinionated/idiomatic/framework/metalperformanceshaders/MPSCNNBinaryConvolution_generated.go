@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -85,12 +87,14 @@ func (cbc *CNNBinaryConvolution) WithLabel(label string) *CNNBinaryConvolution {
 
 // InputFeatureChannels returns the input feature channels.
 func (cbc *CNNBinaryConvolution) InputFeatureChannels() int {
+	defer runtime.KeepAlive(cbc)
 	_r := objc.Send[int](objref.IDOf(cbc), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
 // OutputFeatureChannels returns the number of feature channels per pixel in the output image.
 func (cbc *CNNBinaryConvolution) OutputFeatureChannels() int {
+	defer runtime.KeepAlive(cbc)
 	_r := objc.Send[int](objref.IDOf(cbc), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }

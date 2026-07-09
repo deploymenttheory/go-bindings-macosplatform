@@ -5,6 +5,8 @@
 package syncservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func iSyncManagerAdopt(id objc.ID) *ISyncManager {
 
 // Description returns the object's -description text.
 func (ism *ISyncManager) Description() string {
+	defer runtime.KeepAlive(ism)
 	return rt.Description(objref.IDOf(ism))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ism *ISyncManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ism)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ism), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ism *ISyncManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(ism)
 	return rt.IsKind(objref.IDOf(ism), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ism *ISyncManager) String() string {
+	defer runtime.KeepAlive(ism)
 	return rt.Description(objref.IDOf(ism))
 }
 
@@ -72,61 +79,75 @@ func NewISyncManager() *ISyncManager {
 
 // IsEnabled reports whether the object is enabled.
 func (ism *ISyncManager) IsEnabled() bool {
+	defer runtime.KeepAlive(ism)
 	_r := objc.Send[bool](objref.IDOf(ism), objc.RegisterName("isEnabled"))
 	return _r
 }
 
 // ClientWithIdentifier wraps the corresponding Objective-C method.
 func (ism *ISyncManager) ClientWithIdentifier(clientId string) *ISyncClient {
+	defer runtime.KeepAlive(ism)
 	_r := objc.Send[objc.ID](objref.IDOf(ism), objc.RegisterName("clientWithIdentifier:"), purego.NSString(clientId))
 	return ISyncClientFromID(_r)
 }
 
 // RegisterClientWithIdentifierDescriptionFilePath registers client with identifier description file path.
 func (ism *ISyncManager) RegisterClientWithIdentifierDescriptionFilePath(clientId string, descriptionFilePath string) *ISyncClient {
+	defer runtime.KeepAlive(ism)
 	_r := objc.Send[objc.ID](objref.IDOf(ism), objc.RegisterName("registerClientWithIdentifier:descriptionFilePath:"), purego.NSString(clientId), purego.NSString(descriptionFilePath))
 	return ISyncClientFromID(_r)
 }
 
 // UnregisterClient unregisters client.
 func (ism *ISyncManager) UnregisterClient(client *ISyncClient) {
+	defer runtime.KeepAlive(ism)
+	defer runtime.KeepAlive(client)
 	objc.Send[objc.ID](objref.IDOf(ism), objc.RegisterName("unregisterClient:"), objref.IDOf(client))
 }
 
 // RegisterSchemaWithBundlePath registers schema with bundle path.
 func (ism *ISyncManager) RegisterSchemaWithBundlePath(bundlePath string) bool {
+	defer runtime.KeepAlive(ism)
 	_r := objc.Send[bool](objref.IDOf(ism), objc.RegisterName("registerSchemaWithBundlePath:"), purego.NSString(bundlePath))
 	return _r
 }
 
 // UnregisterSchemaWithName unregisters schema with name.
 func (ism *ISyncManager) UnregisterSchemaWithName(schemaName string) {
+	defer runtime.KeepAlive(ism)
 	objc.Send[objc.ID](objref.IDOf(ism), objc.RegisterName("unregisterSchemaWithName:"), purego.NSString(schemaName))
 }
 
 // ClientWithIdentifierNeedsSyncing wraps the corresponding Objective-C method.
 func (ism *ISyncManager) ClientWithIdentifierNeedsSyncing(clientId string, flag bool) {
+	defer runtime.KeepAlive(ism)
 	objc.Send[objc.ID](objref.IDOf(ism), objc.RegisterName("clientWithIdentifier:needsSyncing:"), purego.NSString(clientId), flag)
 }
 
 // SnapshotOfRecordsInTruthWithEntityNamesUsingIdentifiersForClient wraps the corresponding Objective-C method.
 func (ism *ISyncManager) SnapshotOfRecordsInTruthWithEntityNamesUsingIdentifiersForClient(entityNames obj.Object, client *ISyncClient) *ISyncRecordSnapshot {
+	defer runtime.KeepAlive(ism)
+	defer runtime.KeepAlive(entityNames)
+	defer runtime.KeepAlive(client)
 	_r := objc.Send[objc.ID](objref.IDOf(ism), objc.RegisterName("snapshotOfRecordsInTruthWithEntityNames:usingIdentifiersForClient:"), objref.IDOf(entityNames), objref.IDOf(client))
 	return ISyncRecordSnapshotFromID(_r)
 }
 
 // AddRequestMode adds request mode.
 func (ism *ISyncManager) AddRequestMode(mode string) {
+	defer runtime.KeepAlive(ism)
 	objc.Send[objc.ID](objref.IDOf(ism), objc.RegisterName("addRequestMode:"), purego.NSString(mode))
 }
 
 // RemoveRequestMode removes request mode.
 func (ism *ISyncManager) RemoveRequestMode(mode string) {
+	defer runtime.KeepAlive(ism)
 	objc.Send[objc.ID](objref.IDOf(ism), objc.RegisterName("removeRequestMode:"), purego.NSString(mode))
 }
 
 // RequestModes returns the request modes.
 func (ism *ISyncManager) RequestModes() obj.Object {
+	defer runtime.KeepAlive(ism)
 	_r := objc.Send[objc.ID](objref.IDOf(ism), objc.RegisterName("requestModes"))
 	return obj.Wrap(_r)
 }

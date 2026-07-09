@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRBridgedDeviceBasicInformationClusterKeepActiveParamsAdopt(id objc.ID) *M
 
 // Description returns the object's -description text.
 func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) Description() string {
+	defer runtime.KeepAlive(mbdbickap)
 	return rt.Description(objref.IDOf(mbdbickap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbdbickap)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbdbickap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbdbickap)
 	return rt.IsKind(objref.IDOf(mbdbickap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) String() string {
+	defer runtime.KeepAlive(mbdbickap)
 	return rt.Description(objref.IDOf(mbdbickap))
 }
 
@@ -72,48 +80,56 @@ func NewMTRBridgedDeviceBasicInformationClusterKeepActiveParams() *MTRBridgedDev
 
 // WithStayActiveDuration sets the stay active duration.
 func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) WithStayActiveDuration(stayActiveDuration obj.Object) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams {
+	defer runtime.KeepAlive(stayActiveDuration)
 	objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("setStayActiveDuration:"), objref.IDOf(stayActiveDuration))
 	return mbdbickap
 }
 
 // WithTimeoutMs sets the timeout ms.
 func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) WithTimeoutMs(timeoutMs obj.Object) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams {
+	defer runtime.KeepAlive(timeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("setTimeoutMs:"), objref.IDOf(timeoutMs))
 	return mbdbickap
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mbdbickap
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mbdbickap
 }
 
 // StayActiveDuration returns the stay active duration.
-func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) StayActiveDuration() obj.Object {
+func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) StayActiveDuration() *foundation.Number {
+	defer runtime.KeepAlive(mbdbickap)
 	_r := objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("stayActiveDuration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimeoutMs returns the timeout ms.
-func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) TimeoutMs() obj.Object {
+func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) TimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mbdbickap)
 	_r := objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("timeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) TimedInvokeTimeoutMs() obj.Object {
+func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mbdbickap)
 	_r := objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) ServerSideProcessingTimeout() obj.Object {
+func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mbdbickap)
 	_r := objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

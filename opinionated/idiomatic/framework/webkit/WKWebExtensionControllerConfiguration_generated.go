@@ -5,7 +5,10 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func wKWebExtensionControllerConfigurationAdopt(id objc.ID) *WKWebExtensionContr
 
 // Description returns the object's -description text.
 func (wwecc *WKWebExtensionControllerConfiguration) Description() string {
+	defer runtime.KeepAlive(wwecc)
 	return rt.Description(objref.IDOf(wwecc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wwecc *WKWebExtensionControllerConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wwecc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wwecc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wwecc *WKWebExtensionControllerConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(wwecc)
 	return rt.IsKind(objref.IDOf(wwecc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wwecc *WKWebExtensionControllerConfiguration) String() string {
+	defer runtime.KeepAlive(wwecc)
 	return rt.Description(objref.IDOf(wwecc))
 }
 
@@ -78,6 +86,7 @@ func NewWKWebExtensionControllerConfiguration() *WKWebExtensionControllerConfigu
 
 // WithWebViewConfiguration sets the web view configuration to be used as a basis for configuring web views in extension contexts.
 func (wwecc *WKWebExtensionControllerConfiguration) WithWebViewConfiguration(webViewConfiguration *WKWebViewConfiguration) *WKWebExtensionControllerConfiguration {
+	defer runtime.KeepAlive(webViewConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwecc), objc.RegisterName("setWebViewConfiguration:"), objref.IDOf(webViewConfiguration))
 	})
@@ -86,6 +95,7 @@ func (wwecc *WKWebExtensionControllerConfiguration) WithWebViewConfiguration(web
 
 // WithDefaultWebsiteDataStore sets the default data store for website data and cookie access in extension contexts. This property sets the primary data store for managing website data, including cookies, which extensions can access, subject to the granted permissions within the extension contexts. Defaults to “WKWebsiteDataStore.defaultDataStore“.
 func (wwecc *WKWebExtensionControllerConfiguration) WithDefaultWebsiteDataStore(defaultWebsiteDataStore *WKWebsiteDataStore) *WKWebExtensionControllerConfiguration {
+	defer runtime.KeepAlive(defaultWebsiteDataStore)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwecc), objc.RegisterName("setDefaultWebsiteDataStore:"), objref.IDOf(defaultWebsiteDataStore))
 	})
@@ -94,6 +104,7 @@ func (wwecc *WKWebExtensionControllerConfiguration) WithDefaultWebsiteDataStore(
 
 // IsPersistent reports whether a Boolean value indicating if this context will write data to the the file system.
 func (wwecc *WKWebExtensionControllerConfiguration) IsPersistent() bool {
+	defer runtime.KeepAlive(wwecc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -106,12 +117,13 @@ func (wwecc *WKWebExtensionControllerConfiguration) IsPersistent() bool {
 }
 
 // Identifier returns the unique identifier used for persistent configuration storage, or `nil` when it is the default or not persistent.
-func (wwecc *WKWebExtensionControllerConfiguration) Identifier() obj.Object {
-	var _mainthread0 obj.Object
+func (wwecc *WKWebExtensionControllerConfiguration) Identifier() *foundation.UUID {
+	defer runtime.KeepAlive(wwecc)
+	var _mainthread0 *foundation.UUID
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.UUID {
 			_r := objc.Send[objc.ID](objref.IDOf(wwecc), objc.RegisterName("identifier"))
-			return obj.Wrap(_r)
+			return foundation.UUIDFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -120,6 +132,7 @@ func (wwecc *WKWebExtensionControllerConfiguration) Identifier() obj.Object {
 
 // WebViewConfiguration returns the web view configuration to be used as a basis for configuring web views in extension contexts.
 func (wwecc *WKWebExtensionControllerConfiguration) WebViewConfiguration() *WKWebViewConfiguration {
+	defer runtime.KeepAlive(wwecc)
 	var _mainthread0 *WKWebViewConfiguration
 	purego.Main(func() {
 		_mainthread0 = func() *WKWebViewConfiguration {
@@ -133,6 +146,7 @@ func (wwecc *WKWebExtensionControllerConfiguration) WebViewConfiguration() *WKWe
 
 // DefaultWebsiteDataStore returns the default data store for website data and cookie access in extension contexts. This property sets the primary data store for managing website data, including cookies, which extensions can access, subject to the granted permissions within the extension contexts. Defaults to “WKWebsiteDataStore.defaultDataStore“.
 func (wwecc *WKWebExtensionControllerConfiguration) DefaultWebsiteDataStore() *WKWebsiteDataStore {
+	defer runtime.KeepAlive(wwecc)
 	var _mainthread0 *WKWebsiteDataStore
 	purego.Main(func() {
 		_mainthread0 = func() *WKWebsiteDataStore {

@@ -5,7 +5,10 @@
 package corelocation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func monitorConfigurationAdopt(id objc.ID) *MonitorConfiguration {
 
 // Description returns the object's -description text.
 func (mc *MonitorConfiguration) Description() string {
+	defer runtime.KeepAlive(mc)
 	return rt.Description(objref.IDOf(mc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mc *MonitorConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mc *MonitorConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(mc)
 	return rt.IsKind(objref.IDOf(mc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mc *MonitorConfiguration) String() string {
+	defer runtime.KeepAlive(mc)
 	return rt.Description(objref.IDOf(mc))
 }
 
@@ -74,6 +82,7 @@ func NewMonitorConfiguration() *MonitorConfiguration {
 
 // Name returns the name.
 func (mc *MonitorConfiguration) Name() string {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -82,7 +91,8 @@ func (mc *MonitorConfiguration) Name() string {
 }
 
 // Queue returns the queue.
-func (mc *MonitorConfiguration) Queue() obj.Object {
+func (mc *MonitorConfiguration) Queue() *foundation.Object {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("queue"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }

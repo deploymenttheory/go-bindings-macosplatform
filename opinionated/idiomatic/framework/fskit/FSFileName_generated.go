@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,16 +49,20 @@ func fileNameAdopt(id objc.ID) *FileName {
 
 // Description returns the object's -description text.
 func (fn *FileName) Description() string {
+	defer runtime.KeepAlive(fn)
 	return rt.Description(objref.IDOf(fn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fn *FileName) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fn)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fn *FileName) IsKind(className string) bool {
+	defer runtime.KeepAlive(fn)
 	return rt.IsKind(objref.IDOf(fn), className)
 }
 
@@ -68,16 +74,16 @@ func NewFileNameWithCString(name string) *FileName {
 }
 
 // NewFileNameWithBytesLength initializes a file name by copying a character sequence from a byte array.
-func NewFileNameWithBytesLength(bytes_ string, length int) *FileName {
+func NewFileNameWithBytesLength(data string, length int) *FileName {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:length:"), bytes_, length)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:length:"), data, length)
 	return fileNameAdopt(_id)
 }
 
 // NewFileNameWithData creates a filename by copying a character sequence data object.
-func NewFileNameWithData(name obj.Object) *FileName {
+func NewFileNameWithData(name []byte) *FileName {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(name))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), rt.BytesToNSData(name))
 	return fileNameAdopt(_id)
 }
 
@@ -89,13 +95,15 @@ func NewFileNameWithString(name string) *FileName {
 }
 
 // Data returns the byte sequence of the filename, as a data object. This property always provides a value.
-func (fn *FileName) Data() obj.Object {
+func (fn *FileName) Data() []byte {
+	defer runtime.KeepAlive(fn)
 	_r := objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // String returns the filename, represented as a Unicode string. If the value of the filename's “FSFileName/data“ is not a valid UTF-8 byte sequence, this property is empty.
 func (fn *FileName) String() string {
+	defer runtime.KeepAlive(fn)
 	_r := objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("string"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,7 @@
 package mpsimage
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,22 +49,27 @@ func imageHistogramAdopt(id objc.ID) *ImageHistogram {
 
 // Description returns the object's -description text.
 func (ih *ImageHistogram) Description() string {
+	defer runtime.KeepAlive(ih)
 	return rt.Description(objref.IDOf(ih))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ih *ImageHistogram) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ih)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ih), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ih *ImageHistogram) IsKind(className string) bool {
+	defer runtime.KeepAlive(ih)
 	return rt.IsKind(objref.IDOf(ih), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ih *ImageHistogram) String() string {
+	defer runtime.KeepAlive(ih)
 	return rt.Description(objref.IDOf(ih))
 }
 
@@ -93,12 +99,14 @@ func (ih *ImageHistogram) WithMinPixelThresholdValue(minPixelThresholdValue unsa
 
 // ClipRectSource returns the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
 func (ih *ImageHistogram) ClipRectSource() metal.MTLRegion {
+	defer runtime.KeepAlive(ih)
 	_r := objc.Send[metal.MTLRegion](objref.IDOf(ih), objc.RegisterName("clipRectSource"))
 	return _r
 }
 
 // ZeroHistogram reports whether zero-initalize the histogram results Indicates that the memory region in which the histogram results are to be written in the histogram buffer are to be zero-initialized or not. Default: true.
 func (ih *ImageHistogram) ZeroHistogram() bool {
+	defer runtime.KeepAlive(ih)
 	_r := objc.Send[bool](objref.IDOf(ih), objc.RegisterName("zeroHistogram"))
 	return _r
 }

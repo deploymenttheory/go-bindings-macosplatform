@@ -548,8 +548,8 @@ type XLibContainerHeader struct {
 	FragNameLength         uint
 	DylibPathOffset        uint
 	DylibPathLength        uint
-	CpuFamily              uint
-	CpuModel               uint
+	CPUFamily              uint
+	CPUModel               uint
 	DateTimeStamp          uint
 	CurrentVersion         uint
 	OldDefVersion          uint

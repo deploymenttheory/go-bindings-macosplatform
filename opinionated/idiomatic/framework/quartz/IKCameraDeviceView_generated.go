@@ -5,7 +5,10 @@
 package quartz
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func iKCameraDeviceViewAdopt(id objc.ID) *IKCameraDeviceView {
 
 // Description returns the object's -description text.
 func (icdv *IKCameraDeviceView) Description() string {
+	defer runtime.KeepAlive(icdv)
 	return rt.Description(objref.IDOf(icdv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (icdv *IKCameraDeviceView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(icdv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(icdv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (icdv *IKCameraDeviceView) IsKind(className string) bool {
+	defer runtime.KeepAlive(icdv)
 	return rt.IsKind(objref.IDOf(icdv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (icdv *IKCameraDeviceView) String() string {
+	defer runtime.KeepAlive(icdv)
 	return rt.Description(objref.IDOf(icdv))
 }
 
@@ -80,6 +88,7 @@ func NewIKCameraDeviceView() *IKCameraDeviceView {
 
 // WithDelegate sets the camera device view delegate.
 func (icdv *IKCameraDeviceView) WithDelegate(delegate obj.Object) *IKCameraDeviceView {
+	defer runtime.KeepAlive(delegate)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	})
@@ -88,6 +97,7 @@ func (icdv *IKCameraDeviceView) WithDelegate(delegate obj.Object) *IKCameraDevic
 
 // WithCameraDevice sets the current camera device.
 func (icdv *IKCameraDeviceView) WithCameraDevice(cameraDevice obj.Object) *IKCameraDeviceView {
+	defer runtime.KeepAlive(cameraDevice)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setCameraDevice:"), objref.IDOf(cameraDevice))
 	})
@@ -96,6 +106,7 @@ func (icdv *IKCameraDeviceView) WithCameraDevice(cameraDevice obj.Object) *IKCam
 
 // WithMode sets specifies the display mode of the camera device view.
 func (icdv *IKCameraDeviceView) WithMode(mode obj.Object) *IKCameraDeviceView {
+	defer runtime.KeepAlive(mode)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	})
@@ -144,6 +155,7 @@ func (icdv *IKCameraDeviceView) WithIconSize(iconSize int) *IKCameraDeviceView {
 
 // WithTransferMode sets determines how the contents are saved by the delegate.
 func (icdv *IKCameraDeviceView) WithTransferMode(transferMode obj.Object) *IKCameraDeviceView {
+	defer runtime.KeepAlive(transferMode)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setTransferMode:"), objref.IDOf(transferMode))
 	})
@@ -183,12 +195,13 @@ func (icdv *IKCameraDeviceView) WithPostProcessApplication(postProcessApplicatio
 }
 
 // SelectedIndexes returns the selected indexes of the camera files.
-func (icdv *IKCameraDeviceView) SelectedIndexes() obj.Object {
-	var _mainthread0 obj.Object
+func (icdv *IKCameraDeviceView) SelectedIndexes() *foundation.IndexSet {
+	defer runtime.KeepAlive(icdv)
+	var _mainthread0 *foundation.IndexSet
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexSet {
 			_r := objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("selectedIndexes"))
-			return obj.Wrap(_r)
+			return foundation.IndexSetFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -197,6 +210,8 @@ func (icdv *IKCameraDeviceView) SelectedIndexes() obj.Object {
 
 // SelectIndexesByExtendingSelection invoked to select the specified files, extending the selection if specified.
 func (icdv *IKCameraDeviceView) SelectIndexesByExtendingSelection(indexes obj.Object, extend bool) {
+	defer runtime.KeepAlive(icdv)
+	defer runtime.KeepAlive(indexes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("selectIndexes:byExtendingSelection:"), objref.IDOf(indexes), extend)
 	})
@@ -205,6 +220,8 @@ func (icdv *IKCameraDeviceView) SelectIndexesByExtendingSelection(indexes obj.Ob
 
 // RotateLeft rotates the selected image to the left.
 func (icdv *IKCameraDeviceView) RotateLeft(sender obj.Object) {
+	defer runtime.KeepAlive(icdv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("rotateLeft:"), objref.IDOf(sender))
 	})
@@ -213,6 +230,8 @@ func (icdv *IKCameraDeviceView) RotateLeft(sender obj.Object) {
 
 // RotateRight rotates the selected image to the right.
 func (icdv *IKCameraDeviceView) RotateRight(sender obj.Object) {
+	defer runtime.KeepAlive(icdv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("rotateRight:"), objref.IDOf(sender))
 	})
@@ -221,6 +240,8 @@ func (icdv *IKCameraDeviceView) RotateRight(sender obj.Object) {
 
 // DeleteSelectedItems deletes the currently selected items.
 func (icdv *IKCameraDeviceView) DeleteSelectedItems(sender obj.Object) {
+	defer runtime.KeepAlive(icdv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("deleteSelectedItems:"), objref.IDOf(sender))
 	})
@@ -229,6 +250,8 @@ func (icdv *IKCameraDeviceView) DeleteSelectedItems(sender obj.Object) {
 
 // DownloadSelectedItems deletes the selected items from the camera.
 func (icdv *IKCameraDeviceView) DownloadSelectedItems(sender obj.Object) {
+	defer runtime.KeepAlive(icdv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("downloadSelectedItems:"), objref.IDOf(sender))
 	})
@@ -237,6 +260,8 @@ func (icdv *IKCameraDeviceView) DownloadSelectedItems(sender obj.Object) {
 
 // DownloadAllItems downloads all the items.
 func (icdv *IKCameraDeviceView) DownloadAllItems(sender obj.Object) {
+	defer runtime.KeepAlive(icdv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("downloadAllItems:"), objref.IDOf(sender))
 	})
@@ -245,6 +270,8 @@ func (icdv *IKCameraDeviceView) DownloadAllItems(sender obj.Object) {
 
 // SetCustomIconSizeSlider provide your own NSSlider to resize item thumbnails
 func (icdv *IKCameraDeviceView) SetCustomIconSizeSlider(slider obj.Object) {
+	defer runtime.KeepAlive(icdv)
+	defer runtime.KeepAlive(slider)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setCustomIconSizeSlider:"), objref.IDOf(slider))
 	})
@@ -253,6 +280,8 @@ func (icdv *IKCameraDeviceView) SetCustomIconSizeSlider(slider obj.Object) {
 
 // SetCustomModeControl provide your own control to toggle between IKCameraDeviceViewDisplayMode table / icon
 func (icdv *IKCameraDeviceView) SetCustomModeControl(control obj.Object) {
+	defer runtime.KeepAlive(icdv)
+	defer runtime.KeepAlive(control)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setCustomModeControl:"), objref.IDOf(control))
 	})
@@ -261,6 +290,8 @@ func (icdv *IKCameraDeviceView) SetCustomModeControl(control obj.Object) {
 
 // SetCustomActionControl provide your own control to toggle between IKCameraDeviceViewDisplayMode table / icon
 func (icdv *IKCameraDeviceView) SetCustomActionControl(control obj.Object) {
+	defer runtime.KeepAlive(icdv)
+	defer runtime.KeepAlive(control)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setCustomActionControl:"), objref.IDOf(control))
 	})
@@ -269,6 +300,8 @@ func (icdv *IKCameraDeviceView) SetCustomActionControl(control obj.Object) {
 
 // SetCustomRotateControl provide your own control to rotate items (multiple of 90º)
 func (icdv *IKCameraDeviceView) SetCustomRotateControl(control obj.Object) {
+	defer runtime.KeepAlive(icdv)
+	defer runtime.KeepAlive(control)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setCustomRotateControl:"), objref.IDOf(control))
 	})
@@ -277,6 +310,8 @@ func (icdv *IKCameraDeviceView) SetCustomRotateControl(control obj.Object) {
 
 // SetCustomDeleteControl provide your own control to delete selected items
 func (icdv *IKCameraDeviceView) SetCustomDeleteControl(control obj.Object) {
+	defer runtime.KeepAlive(icdv)
+	defer runtime.KeepAlive(control)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setCustomDeleteControl:"), objref.IDOf(control))
 	})
@@ -285,6 +320,7 @@ func (icdv *IKCameraDeviceView) SetCustomDeleteControl(control obj.Object) {
 
 // SetShowStatusInfoAsWindowSubtitle display status info as window subtitle
 func (icdv *IKCameraDeviceView) SetShowStatusInfoAsWindowSubtitle(value bool) {
+	defer runtime.KeepAlive(icdv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setShowStatusInfoAsWindowSubtitle:"), value)
 	})
@@ -293,6 +329,7 @@ func (icdv *IKCameraDeviceView) SetShowStatusInfoAsWindowSubtitle(value bool) {
 
 // Delegate returns delegate of the IKCameraDeviceView.
 func (icdv *IKCameraDeviceView) Delegate() obj.Object {
+	defer runtime.KeepAlive(icdv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -306,6 +343,7 @@ func (icdv *IKCameraDeviceView) Delegate() obj.Object {
 
 // CameraDevice returns the camera device.
 func (icdv *IKCameraDeviceView) CameraDevice() obj.Object {
+	defer runtime.KeepAlive(icdv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -319,6 +357,7 @@ func (icdv *IKCameraDeviceView) CameraDevice() obj.Object {
 
 // Mode returns current display mode.
 func (icdv *IKCameraDeviceView) Mode() obj.Object {
+	defer runtime.KeepAlive(icdv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -332,6 +371,7 @@ func (icdv *IKCameraDeviceView) Mode() obj.Object {
 
 // HasDisplayModeTable reports whether support table view display mode.
 func (icdv *IKCameraDeviceView) HasDisplayModeTable() bool {
+	defer runtime.KeepAlive(icdv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -345,6 +385,7 @@ func (icdv *IKCameraDeviceView) HasDisplayModeTable() bool {
 
 // HasDisplayModeIcon reports whether support icon view display mode.
 func (icdv *IKCameraDeviceView) HasDisplayModeIcon() bool {
+	defer runtime.KeepAlive(icdv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -358,6 +399,7 @@ func (icdv *IKCameraDeviceView) HasDisplayModeIcon() bool {
 
 // DownloadAllControlLabel returns label for the 'Download All' control - allows for example renaming to 'Import All'.
 func (icdv *IKCameraDeviceView) DownloadAllControlLabel() string {
+	defer runtime.KeepAlive(icdv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -374,6 +416,7 @@ func (icdv *IKCameraDeviceView) DownloadAllControlLabel() string {
 
 // DownloadSelectedControlLabel returns label for the 'Download Selected' control.
 func (icdv *IKCameraDeviceView) DownloadSelectedControlLabel() string {
+	defer runtime.KeepAlive(icdv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -390,6 +433,7 @@ func (icdv *IKCameraDeviceView) DownloadSelectedControlLabel() string {
 
 // IconSize returns in icon mode: size of the image thumbnails.
 func (icdv *IKCameraDeviceView) IconSize() int {
+	defer runtime.KeepAlive(icdv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -403,6 +447,7 @@ func (icdv *IKCameraDeviceView) IconSize() int {
 
 // TransferMode returns transfer mode either file based - or - in memory.
 func (icdv *IKCameraDeviceView) TransferMode() obj.Object {
+	defer runtime.KeepAlive(icdv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -416,6 +461,7 @@ func (icdv *IKCameraDeviceView) TransferMode() obj.Object {
 
 // DisplaysDownloadsDirectoryControl reports whether show a downloads directory control.
 func (icdv *IKCameraDeviceView) DisplaysDownloadsDirectoryControl() bool {
+	defer runtime.KeepAlive(icdv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -428,12 +474,13 @@ func (icdv *IKCameraDeviceView) DisplaysDownloadsDirectoryControl() bool {
 }
 
 // DownloadsDirectory returns downloads directory.
-func (icdv *IKCameraDeviceView) DownloadsDirectory() obj.Object {
-	var _mainthread0 obj.Object
+func (icdv *IKCameraDeviceView) DownloadsDirectory() string {
+	defer runtime.KeepAlive(icdv)
+	var _mainthread0 string
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() string {
 			_r := objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("downloadsDirectory"))
-			return obj.Wrap(_r)
+			return rt.URLString(_r)
 		}()
 	})
 	return _mainthread0
@@ -442,6 +489,7 @@ func (icdv *IKCameraDeviceView) DownloadsDirectory() obj.Object {
 
 // DisplaysPostProcessApplicationControl reports whether show a postprocessing application control.
 func (icdv *IKCameraDeviceView) DisplaysPostProcessApplicationControl() bool {
+	defer runtime.KeepAlive(icdv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -454,12 +502,13 @@ func (icdv *IKCameraDeviceView) DisplaysPostProcessApplicationControl() bool {
 }
 
 // PostProcessApplication returns postprocessing application.
-func (icdv *IKCameraDeviceView) PostProcessApplication() obj.Object {
-	var _mainthread0 obj.Object
+func (icdv *IKCameraDeviceView) PostProcessApplication() string {
+	defer runtime.KeepAlive(icdv)
+	var _mainthread0 string
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() string {
 			_r := objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("postProcessApplication"))
-			return obj.Wrap(_r)
+			return rt.URLString(_r)
 		}()
 	})
 	return _mainthread0
@@ -468,6 +517,7 @@ func (icdv *IKCameraDeviceView) PostProcessApplication() obj.Object {
 
 // CanRotateSelectedItemsLeft reports whether indicates if the user selected items can be rotated left.
 func (icdv *IKCameraDeviceView) CanRotateSelectedItemsLeft() bool {
+	defer runtime.KeepAlive(icdv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -481,6 +531,7 @@ func (icdv *IKCameraDeviceView) CanRotateSelectedItemsLeft() bool {
 
 // CanRotateSelectedItemsRight reports whether indicates if the user selected items can be rotated right.
 func (icdv *IKCameraDeviceView) CanRotateSelectedItemsRight() bool {
+	defer runtime.KeepAlive(icdv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -494,6 +545,7 @@ func (icdv *IKCameraDeviceView) CanRotateSelectedItemsRight() bool {
 
 // CanDeleteSelectedItems reports whether indicates if the user selected items can be deleted.
 func (icdv *IKCameraDeviceView) CanDeleteSelectedItems() bool {
+	defer runtime.KeepAlive(icdv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -507,6 +559,7 @@ func (icdv *IKCameraDeviceView) CanDeleteSelectedItems() bool {
 
 // CanDownloadSelectedItems reports whether indicates if the user selected items can be downloaded.
 func (icdv *IKCameraDeviceView) CanDownloadSelectedItems() bool {
+	defer runtime.KeepAlive(icdv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

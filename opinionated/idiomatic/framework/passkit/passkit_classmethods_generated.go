@@ -6,9 +6,11 @@ package passkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -18,6 +20,7 @@ import (
 //
 // ConfigurationForMetadataCompletion blocks until the operation completes or ctx is cancelled.
 func ConfigurationForMetadataCompletion(ctx context.Context, metadata *IdentityDocumentMetadata) (result *AddIdentityDocumentConfiguration, err error) {
+	defer runtime.KeepAlive(metadata)
 	type _result struct {
 		val *AddIdentityDocumentConfiguration
 		err error
@@ -41,6 +44,7 @@ func ConfigurationForMetadataCompletion(ctx context.Context, metadata *IdentityD
 
 // PreviewWithPassThumbnailLocalizedDescription initializes properties you need to preview an object that represents the pass you add to Wallet.
 func PreviewWithPassThumbnailLocalizedDescription(passThumbnail obj.Object, description string) *AddPassMetadataPreview {
+	defer runtime.KeepAlive(passThumbnail)
 	_r := objc.Send[objc.ID](objc.ID(_class("PKAddPassMetadataPreview")), objc.RegisterName("previewWithPassThumbnail:localizedDescription:"), objref.IDOf(passThumbnail), purego.NSString(description))
 	return AddPassMetadataPreviewFromID(_r)
 }
@@ -125,14 +129,14 @@ func CanMakePayments() bool {
 }
 
 // CanMakePaymentsUsingNetworks returns whether the user can make payments through the specified network.
-func CanMakePaymentsUsingNetworks(supportedNetworks []obj.Object) bool {
-	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("canMakePaymentsUsingNetworks:"), purego.SliceToNSArray(supportedNetworks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func CanMakePaymentsUsingNetworks(supportedNetworks []*foundation.String) bool {
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("canMakePaymentsUsingNetworks:"), purego.SliceToNSArray(supportedNetworks, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // CanMakePaymentsUsingNetworksCapabilities returns whether the user can make payments using a card from the specified network with the specified capabilities.
-func CanMakePaymentsUsingNetworksCapabilities(supportedNetworks []obj.Object, capabilties MerchantCapability) bool {
-	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("canMakePaymentsUsingNetworks:capabilities:"), purego.SliceToNSArray(supportedNetworks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), capabilties)
+func CanMakePaymentsUsingNetworksCapabilities(supportedNetworks []*foundation.String, capabilties MerchantCapability) bool {
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("canMakePaymentsUsingNetworks:capabilities:"), purego.SliceToNSArray(supportedNetworks, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }), capabilties)
 	return _r
 }
 
@@ -143,14 +147,14 @@ func SupportsDisbursements() bool {
 }
 
 // SupportsDisbursementsUsingNetworks returns a Boolean value that indicates whether this device can process disbursement requests using the specified payment network brands.
-func SupportsDisbursementsUsingNetworks(supportedNetworks []obj.Object) bool {
-	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("supportsDisbursementsUsingNetworks:"), purego.SliceToNSArray(supportedNetworks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func SupportsDisbursementsUsingNetworks(supportedNetworks []*foundation.String) bool {
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("supportsDisbursementsUsingNetworks:"), purego.SliceToNSArray(supportedNetworks, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // SupportsDisbursementsUsingNetworksCapabilities returns a Boolean value indicating whether this device can process disbursement requests using the specified payment network brands and capabilities.
-func SupportsDisbursementsUsingNetworksCapabilities(supportedNetworks []obj.Object, capabilties MerchantCapability) bool {
-	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("supportsDisbursementsUsingNetworks:capabilities:"), purego.SliceToNSArray(supportedNetworks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), capabilties)
+func SupportsDisbursementsUsingNetworksCapabilities(supportedNetworks []*foundation.String, capabilties MerchantCapability) bool {
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("supportsDisbursementsUsingNetworks:capabilities:"), purego.SliceToNSArray(supportedNetworks, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }), capabilties)
 	return _r
 }
 
@@ -161,14 +165,14 @@ func PKPaymentAuthorizationViewControllerCanMakePayments() bool {
 }
 
 // PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworks returns whether the user can make payments through the specified network.
-func PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworks(supportedNetworks []obj.Object) bool {
-	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("canMakePaymentsUsingNetworks:"), purego.SliceToNSArray(supportedNetworks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworks(supportedNetworks []*foundation.String) bool {
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("canMakePaymentsUsingNetworks:"), purego.SliceToNSArray(supportedNetworks, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworksCapabilities returns whether the user can make payments using a card from the specified network with the specified capabilities.
-func PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworksCapabilities(supportedNetworks []obj.Object, capabilties MerchantCapability) bool {
-	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("canMakePaymentsUsingNetworks:capabilities:"), purego.SliceToNSArray(supportedNetworks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), capabilties)
+func PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworksCapabilities(supportedNetworks []*foundation.String, capabilties MerchantCapability) bool {
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("canMakePaymentsUsingNetworks:capabilities:"), purego.SliceToNSArray(supportedNetworks, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }), capabilties)
 	return _r
 }
 
@@ -179,14 +183,14 @@ func PKPaymentAuthorizationViewControllerSupportsDisbursements() bool {
 }
 
 // PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworks returns a Boolean value that indicates whether this device can process disbursement requests using the specified payment networks.
-func PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworks(supportedNetworks []obj.Object) bool {
-	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("supportsDisbursementsUsingNetworks:"), purego.SliceToNSArray(supportedNetworks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworks(supportedNetworks []*foundation.String) bool {
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("supportsDisbursementsUsingNetworks:"), purego.SliceToNSArray(supportedNetworks, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworksCapabilities returns a Boolean value that indicates whether this device can process disbursement requests using the specified payment networks and merchant capabilities.
-func PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworksCapabilities(supportedNetworks []obj.Object, capabilities MerchantCapability) bool {
-	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("supportsDisbursementsUsingNetworks:capabilities:"), purego.SliceToNSArray(supportedNetworks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), capabilities)
+func PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworksCapabilities(supportedNetworks []*foundation.String, capabilities MerchantCapability) bool {
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("supportsDisbursementsUsingNetworks:capabilities:"), purego.SliceToNSArray(supportedNetworks, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }), capabilities)
 	return _r
 }
 
@@ -206,12 +210,14 @@ func AvailableNetworks() []obj.Object {
 
 // SummaryItemWithLabelAmount initializes and returns a summary item with the given label and amount.
 func SummaryItemWithLabelAmount(label string, amount obj.Object) *PaymentSummaryItem {
+	defer runtime.KeepAlive(amount)
 	_r := objc.Send[objc.ID](objc.ID(_class("PKPaymentSummaryItem")), objc.RegisterName("summaryItemWithLabel:amount:"), purego.NSString(label), objref.IDOf(amount))
 	return PaymentSummaryItemFromID(_r)
 }
 
 // SummaryItemWithLabelAmountType initializes and returns a summary item with the given label, amount, and type.
 func SummaryItemWithLabelAmountType(label string, amount obj.Object, type_ PaymentSummaryItemType) *PaymentSummaryItem {
+	defer runtime.KeepAlive(amount)
 	_r := objc.Send[objc.ID](objc.ID(_class("PKPaymentSummaryItem")), objc.RegisterName("summaryItemWithLabel:amount:type:"), purego.NSString(label), objref.IDOf(amount), type_)
 	return PaymentSummaryItemFromID(_r)
 }
@@ -224,12 +230,14 @@ func PreviewWithTemplateIdentifier(templateIdentifier string) *ShareablePassMeta
 
 // PassPropertiesForPass creates a stored-value pass properties object for the specified pass.
 func PassPropertiesForPass(pass *Pass) *StoredValuePassProperties {
+	defer runtime.KeepAlive(pass)
 	_r := objc.Send[objc.ID](objc.ID(_class("PKStoredValuePassProperties")), objc.RegisterName("passPropertiesForPass:"), objref.IDOf(pass))
 	return StoredValuePassPropertiesFromID(_r)
 }
 
 // PKSuicaPassPropertiesPassPropertiesForPass instantiates a Suica pass properties object that contains the properties supported in the specified pass.
 func PKSuicaPassPropertiesPassPropertiesForPass(pass *Pass) *SuicaPassProperties {
+	defer runtime.KeepAlive(pass)
 	_r := objc.Send[objc.ID](objc.ID(_class("PKSuicaPassProperties")), objc.RegisterName("passPropertiesForPass:"), objref.IDOf(pass))
 	return SuicaPassPropertiesFromID(_r)
 }

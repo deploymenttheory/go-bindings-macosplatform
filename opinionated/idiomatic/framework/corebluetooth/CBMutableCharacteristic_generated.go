@@ -5,9 +5,11 @@
 package corebluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,9 +49,10 @@ func mutableCharacteristicAdopt(id objc.ID) *MutableCharacteristic {
 }
 
 // NewMutableCharacteristicWithTypePropertiesValuePermissions creates a mutable characteristic with specified permissions, properties, and value.
-func NewMutableCharacteristicWithTypePropertiesValuePermissions(uUID *UUID, properties CharacteristicProperties, value obj.Object, permissions AttributePermissions) *MutableCharacteristic {
+func NewMutableCharacteristicWithTypePropertiesValuePermissions(uuid *UUID, properties CharacteristicProperties, value []byte, permissions AttributePermissions) *MutableCharacteristic {
+	defer runtime.KeepAlive(uuid)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CBMutableCharacteristic")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:properties:value:permissions:"), objref.IDOf(uUID), properties, objref.IDOf(value), permissions)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:properties:value:permissions:"), objref.IDOf(uuid), properties, rt.BytesToNSData(value), permissions)
 	return mutableCharacteristicAdopt(_id)
 }
 
@@ -66,8 +69,8 @@ func (mc *MutableCharacteristic) WithProperties(properties CharacteristicPropert
 }
 
 // WithValue sets the value of the characteristic.
-func (mc *MutableCharacteristic) WithValue(value obj.Object) *MutableCharacteristic {
-	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setValue:"), objref.IDOf(value))
+func (mc *MutableCharacteristic) WithValue(value []byte) *MutableCharacteristic {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setValue:"), rt.BytesToNSData(value))
 	return mc
 }
 
@@ -80,6 +83,7 @@ func (mc *MutableCharacteristic) WithDescriptors(items ...DescriptorProvider) *M
 
 // Permissions returns the permissions of the characteristic value.
 func (mc *MutableCharacteristic) Permissions() AttributePermissions {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[AttributePermissions](objref.IDOf(mc), objc.RegisterName("permissions"))
 	return _r
 }
@@ -88,6 +92,7 @@ func (mc *MutableCharacteristic) Permissions() AttributePermissions {
 //
 // SubscribedCentrals returns the collection as a Go slice.
 func (mc *MutableCharacteristic) SubscribedCentrals() []*Central {
+	defer runtime.KeepAlive(mc)
 	_arr := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("subscribedCentrals"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Central { return CentralFromID(_id) })
 }

@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -153,11 +155,13 @@ func (dme *DOMHTMLMarqueeElement) WithTextContent(textContent string) *DOMHTMLMa
 
 // Start wraps the corresponding Objective-C method.
 func (dme *DOMHTMLMarqueeElement) Start() {
+	defer runtime.KeepAlive(dme)
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("start"))
 }
 
 // Stop wraps the corresponding Objective-C method.
 func (dme *DOMHTMLMarqueeElement) Stop() {
+	defer runtime.KeepAlive(dme)
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("stop"))
 }
 

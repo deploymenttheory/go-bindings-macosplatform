@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func addressFilterAdopt(id objc.ID) *AddressFilter {
 
 // Description returns the object's -description text.
 func (af *AddressFilter) Description() string {
+	defer runtime.KeepAlive(af)
 	return rt.Description(objref.IDOf(af))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (af *AddressFilter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(af)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(af), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (af *AddressFilter) IsKind(className string) bool {
+	defer runtime.KeepAlive(af)
 	return rt.IsKind(objref.IDOf(af), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (af *AddressFilter) String() string {
+	defer runtime.KeepAlive(af)
 	return rt.Description(objref.IDOf(af))
 }
 
@@ -82,12 +89,14 @@ func NewAddressFilterExcludingOptions(options AddressFilterOption) *AddressFilte
 
 // IncludesOptions indicates whether options are included for filtering.
 func (af *AddressFilter) IncludesOptions(options AddressFilterOption) bool {
+	defer runtime.KeepAlive(af)
 	_r := objc.Send[bool](objref.IDOf(af), objc.RegisterName("includesOptions:"), options)
 	return _r
 }
 
 // ExcludesOptions indicates whether options are excluded from filtering.
 func (af *AddressFilter) ExcludesOptions(options AddressFilterOption) bool {
+	defer runtime.KeepAlive(af)
 	_r := objc.Send[bool](objref.IDOf(af), objc.RegisterName("excludesOptions:"), options)
 	return _r
 }

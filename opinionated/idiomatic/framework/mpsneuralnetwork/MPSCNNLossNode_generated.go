@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,8 @@ func cNNLossNodeAdopt(id objc.ID) *CNNLossNode {
 
 // NewCNNLossNodeWithSourceLossDescriptor creates a new CNNLossNode.
 func NewCNNLossNodeWithSourceLossDescriptor(source *NNImageNode, descriptor *CNNLossDescriptor) *CNNLossNode {
+	defer runtime.KeepAlive(source)
+	defer runtime.KeepAlive(descriptor)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNLossNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:lossDescriptor:"), objref.IDOf(source), objref.IDOf(descriptor))
 	return cNNLossNodeAdopt(_id)
@@ -60,6 +64,7 @@ func (cln *CNNLossNode) WithLabel(label string) *CNNLossNode {
 
 // InputLabels get the input node for labes and weights, for example to set the handle
 func (cln *CNNLossNode) InputLabels() *NNLabelsNode {
+	defer runtime.KeepAlive(cln)
 	_r := objc.Send[objc.ID](objref.IDOf(cln), objc.RegisterName("inputLabels"))
 	return NNLabelsNodeFromID(_r)
 }

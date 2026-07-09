@@ -5,6 +5,7 @@
 package phase
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func envelopeSegmentAdopt(id objc.ID) *EnvelopeSegment {
 
 // Description returns the object's -description text.
 func (es *EnvelopeSegment) Description() string {
+	defer runtime.KeepAlive(es)
 	return rt.Description(objref.IDOf(es))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (es *EnvelopeSegment) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(es)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(es), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (es *EnvelopeSegment) IsKind(className string) bool {
+	defer runtime.KeepAlive(es)
 	return rt.IsKind(objref.IDOf(es), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (es *EnvelopeSegment) String() string {
+	defer runtime.KeepAlive(es)
 	return rt.Description(objref.IDOf(es))
 }
 
@@ -89,6 +95,7 @@ func (es *EnvelopeSegment) WithCurveType(curveType CurveType) *EnvelopeSegment {
 
 // CurveType returns the curve type of the envelope segment. The default value is PHASECurveTypeLinear.
 func (es *EnvelopeSegment) CurveType() CurveType {
+	defer runtime.KeepAlive(es)
 	_r := objc.Send[CurveType](objref.IDOf(es), objc.RegisterName("curveType"))
 	return _r
 }

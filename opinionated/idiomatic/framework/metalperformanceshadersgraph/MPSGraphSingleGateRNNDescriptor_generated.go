@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -77,24 +79,28 @@ func (gsgrd *GraphSingleGateRNNDescriptor) WithActivation(activation GraphRNNAct
 
 // Reverse reports whether a parameter that defines time direction of the input sequence. If set to `YES` then the input sequence is passed in reverse time order to the layer. Note: Ignored when `bidirectional = YES`. Default value: `NO`.
 func (gsgrd *GraphSingleGateRNNDescriptor) Reverse() bool {
+	defer runtime.KeepAlive(gsgrd)
 	_r := objc.Send[bool](objref.IDOf(gsgrd), objc.RegisterName("reverse"))
 	return _r
 }
 
 // Bidirectional reports whether a parameter that defines a bidirectional RNN layer. If set to `YES` then the input sequence is traversed in both directions and the two results are concatenated together on the channel-axis. Default value: `NO`.
 func (gsgrd *GraphSingleGateRNNDescriptor) Bidirectional() bool {
+	defer runtime.KeepAlive(gsgrd)
 	_r := objc.Send[bool](objref.IDOf(gsgrd), objc.RegisterName("bidirectional"))
 	return _r
 }
 
 // Training reports whether a parameter that makes the RNN layer support training. If set to `YES` then the layer will produce training state tensor as a secondary output. Default value: `NO`.
 func (gsgrd *GraphSingleGateRNNDescriptor) Training() bool {
+	defer runtime.KeepAlive(gsgrd)
 	_r := objc.Send[bool](objref.IDOf(gsgrd), objc.RegisterName("training"))
 	return _r
 }
 
 // Activation returns a parameter that defines the activation function to use with the RNN operation. Default value: `MPSGraphRNNActivationRelu`.
 func (gsgrd *GraphSingleGateRNNDescriptor) Activation() GraphRNNActivation {
+	defer runtime.KeepAlive(gsgrd)
 	_r := objc.Send[GraphRNNActivation](objref.IDOf(gsgrd), objc.RegisterName("activation"))
 	return _r
 }

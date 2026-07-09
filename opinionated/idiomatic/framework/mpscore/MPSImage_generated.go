@@ -5,6 +5,7 @@
 package mpscore
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,27 +51,33 @@ func imageAdopt(id objc.ID) *Image {
 
 // Description returns the object's -description text.
 func (i *Image) Description() string {
+	defer runtime.KeepAlive(i)
 	return rt.Description(objref.IDOf(i))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (i *Image) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(i)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(i), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (i *Image) IsKind(className string) bool {
+	defer runtime.KeepAlive(i)
 	return rt.IsKind(objref.IDOf(i), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (i *Image) String() string {
+	defer runtime.KeepAlive(i)
 	return rt.Description(objref.IDOf(i))
 }
 
 // NewImageWithParentImageSliceRangeFeatureChannels use -batchRepresentation or -subImageWithFeatureChannelRange instead Generally, you should call -batchRepresentation or -subImageWithFeatureChannelRange instead because they are safer. This is provided so that these interfaces will work with your MPSImage subclass.
 func NewImageWithParentImageSliceRangeFeatureChannels(parent *Image, sliceRange foundation.NSRange, featureChannels int) *Image {
+	defer runtime.KeepAlive(parent)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParentImage:sliceRange:featureChannels:"), objref.IDOf(parent), sliceRange, featureChannels)
 	return imageAdopt(_id)
@@ -84,76 +91,89 @@ func (i *Image) WithLabel(label string) *Image {
 
 // SubImageWithFeatureChannelRange wraps the corresponding Objective-C method.
 func (i *Image) SubImageWithFeatureChannelRange(range_ foundation.NSRange) *Image {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("subImageWithFeatureChannelRange:"), range_)
 	return ImageFromID(_r)
 }
 
 // ResourceSize get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSImage instantiation and MTLTexture is not included. It only measures the size of the allocation used to hold the texels in the image. This value is subject to change between different devices and operating systems. Except when -initWithTexture:featureChannels: is used, most MPSImages (including MPSTemporaryImages) are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSImage is created with -initWithTexture:featureChannels:, in which case 0 will be returned. 0 will also be returned if it is a sub-image or sub-batch (.parent is not nil).
 func (i *Image) ResourceSize() int {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[int](objref.IDOf(i), objc.RegisterName("resourceSize"))
 	return _r
 }
 
 // SetPurgeableState set (or query) the purgeability state of a MPSImage Usage is per [MTLResource setPurgeableState:], except that the MTLTexture might be MPSPurgeableStateAllocationDeferred, which means there is no texture to mark volatile / nonvolatile. Attempts to set purgeability on MTLTextures that have not been allocated will be ignored.
 func (i *Image) SetPurgeableState(state PurgeableState) PurgeableState {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[PurgeableState](objref.IDOf(i), objc.RegisterName("setPurgeableState:"), state)
 	return _r
 }
 
 // ReadBytesDataLayoutImageIndex get the values inside MPSImage and put them in the Buffer passed in. Use the enum to set data is coming in with what order. The data type will be determined by the pixelFormat defined in the Image Descriptor. Region is full image, buffer width and height is same as MPSImage width and height.
 func (i *Image) ReadBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout DataLayout, imageIndex int) {
+	defer runtime.KeepAlive(i)
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("readBytes:dataLayout:imageIndex:"), dataBytes, dataLayout, imageIndex)
 }
 
 // WriteBytesDataLayoutImageIndex set the values inside MPSImage with the Buffer passed in. Use the enum to set data is coming in with what order. The data type will be determined by the pixelFormat defined in the Image Descriptor. Region is full image, buffer width and height is same as MPSImage width and height.
 func (i *Image) WriteBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout DataLayout, imageIndex int) {
+	defer runtime.KeepAlive(i)
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("writeBytes:dataLayout:imageIndex:"), dataBytes, dataLayout, imageIndex)
 }
 
 // Width returns the formal width of the image in pixels.
 func (i *Image) Width() int {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[int](objref.IDOf(i), objc.RegisterName("width"))
 	return _r
 }
 
 // Height returns the formal height of the image in pixels.
 func (i *Image) Height() int {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[int](objref.IDOf(i), objc.RegisterName("height"))
 	return _r
 }
 
 // FeatureChannels returns the number of feature channels per pixel.
 func (i *Image) FeatureChannels() int {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[int](objref.IDOf(i), objc.RegisterName("featureChannels"))
 	return _r
 }
 
 // NumberOfImages returns numberOfImages for batch processing
 func (i *Image) NumberOfImages() int {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[int](objref.IDOf(i), objc.RegisterName("numberOfImages"))
 	return _r
 }
 
 // Precision returns the number of bits of numeric precision available for each feature channel. This is precision, not size.  That is, float is 24 bits, not 32. half precision floating-point is 11 bits, not 16. SNorm formats have one less bit of precision for the sign bit, etc. For formats like MTLPixelFormatB5G6R5Unorm it is the precision of the most precise channel, in this case 6.  When this information is unavailable, typically compressed formats, 0 will be returned.
 func (i *Image) Precision() int {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[int](objref.IDOf(i), objc.RegisterName("precision"))
 	return _r
 }
 
 // FeatureChannelFormat returns the true encoding of the feature channels
 func (i *Image) FeatureChannelFormat() ImageFeatureChannelFormat {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[ImageFeatureChannelFormat](objref.IDOf(i), objc.RegisterName("featureChannelFormat"))
 	return _r
 }
 
 // PixelSize returns number of bytes from the first byte of one pixel to the first byte of the next pixel in storage order.  (Includes padding.)
 func (i *Image) PixelSize() int {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[int](objref.IDOf(i), objc.RegisterName("pixelSize"))
 	return _r
 }
 
 // Label returns a string to help identify this object.
 func (i *Image) Label() string {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -163,6 +183,7 @@ func (i *Image) Label() string {
 
 // Parent returns the MPSImage from which this MPSImage was derived. Otherwise nil. This will point to the original image if this image was created using -batchRepresentation, -batchRepresentationWithRange: or -subImageWithFeatureChannelRange:.
 func (i *Image) Parent() *Image {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("parent"))
 	return ImageFromID(_r)
 }

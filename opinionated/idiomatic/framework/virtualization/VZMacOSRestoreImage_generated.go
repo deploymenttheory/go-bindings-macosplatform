@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func macOSRestoreImageAdopt(id objc.ID) *MacOSRestoreImage {
 
 // Description returns the object's -description text.
 func (mori *MacOSRestoreImage) Description() string {
+	defer runtime.KeepAlive(mori)
 	return rt.Description(objref.IDOf(mori))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mori *MacOSRestoreImage) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mori)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mori), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mori *MacOSRestoreImage) IsKind(className string) bool {
+	defer runtime.KeepAlive(mori)
 	return rt.IsKind(objref.IDOf(mori), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mori *MacOSRestoreImage) String() string {
+	defer runtime.KeepAlive(mori)
 	return rt.Description(objref.IDOf(mori))
 }
 
@@ -75,18 +82,21 @@ func NewMacOSRestoreImage() *MacOSRestoreImage {
 
 // IsSupported reports whether this restore image is supported on the current host.
 func (mori *MacOSRestoreImage) IsSupported() bool {
+	defer runtime.KeepAlive(mori)
 	_r := objc.Send[bool](objref.IDOf(mori), objc.RegisterName("isSupported"))
 	return _r
 }
 
 // URL returns the URL of this restore image. If the restore image was loaded using +[VZMacOSRestoreImage loadFileURL:completionHandler:], the value of this property will be a file URL. If the restore image was fetched using +[VZMacOSRestoreImage fetchLatestSupportedWithCompletionHandler:], the value of this property will be a network URL referring to an installation media file.
-func (mori *MacOSRestoreImage) URL() obj.Object {
+func (mori *MacOSRestoreImage) URL() string {
+	defer runtime.KeepAlive(mori)
 	_r := objc.Send[objc.ID](objref.IDOf(mori), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // BuildVersion returns the build version this restore image contains.
 func (mori *MacOSRestoreImage) BuildVersion() string {
+	defer runtime.KeepAlive(mori)
 	_r := objc.Send[objc.ID](objref.IDOf(mori), objc.RegisterName("buildVersion"))
 	if _r == 0 {
 		return ""
@@ -96,12 +106,14 @@ func (mori *MacOSRestoreImage) BuildVersion() string {
 
 // OperatingSystemVersion returns the operating system version this restore image contains.
 func (mori *MacOSRestoreImage) OperatingSystemVersion() foundation.NSOperatingSystemVersion {
+	defer runtime.KeepAlive(mori)
 	_r := objc.Send[foundation.NSOperatingSystemVersion](objref.IDOf(mori), objc.RegisterName("operatingSystemVersion"))
 	return _r
 }
 
 // MostFeaturefulSupportedConfiguration returns the configuration requirements for the most featureful configuration supported by the current host and by this restore image. A VZMacOSRestoreImage can contain installation media for multiple Mac hardware models (VZMacHardwareModel). Some of these hardware models may not be supported by the current host. The mostFeaturefulSupportedConfiguration property can be used to determine the hardware model and configuration requirements that will provide the most complete feature set on the current host. If none of the hardware models are supported on the current host, this property is nil.
 func (mori *MacOSRestoreImage) MostFeaturefulSupportedConfiguration() *MacOSConfigurationRequirements {
+	defer runtime.KeepAlive(mori)
 	_r := objc.Send[objc.ID](objref.IDOf(mori), objc.RegisterName("mostFeaturefulSupportedConfiguration"))
 	return MacOSConfigurationRequirementsFromID(_r)
 }

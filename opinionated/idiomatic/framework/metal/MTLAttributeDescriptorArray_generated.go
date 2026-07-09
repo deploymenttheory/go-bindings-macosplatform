@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func attributeDescriptorArrayAdopt(id objc.ID) *AttributeDescriptorArray {
 
 // Description returns the object's -description text.
 func (ada *AttributeDescriptorArray) Description() string {
+	defer runtime.KeepAlive(ada)
 	return rt.Description(objref.IDOf(ada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ada *AttributeDescriptorArray) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ada)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ada *AttributeDescriptorArray) IsKind(className string) bool {
+	defer runtime.KeepAlive(ada)
 	return rt.IsKind(objref.IDOf(ada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ada *AttributeDescriptorArray) String() string {
+	defer runtime.KeepAlive(ada)
 	return rt.Description(objref.IDOf(ada))
 }
 
@@ -74,11 +81,14 @@ func NewAttributeDescriptorArray() *AttributeDescriptorArray {
 
 // ObjectAtIndexedSubscript returns the state of the specified attribute.
 func (ada *AttributeDescriptorArray) ObjectAtIndexedSubscript(index int) *AttributeDescriptor {
+	defer runtime.KeepAlive(ada)
 	_r := objc.Send[objc.ID](objref.IDOf(ada), objc.RegisterName("objectAtIndexedSubscript:"), index)
 	return AttributeDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets state for the specified attribute.
 func (ada *AttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *AttributeDescriptor, index int) {
+	defer runtime.KeepAlive(ada)
+	defer runtime.KeepAlive(attributeDesc)
 	objc.Send[objc.ID](objref.IDOf(ada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attributeDesc), index)
 }

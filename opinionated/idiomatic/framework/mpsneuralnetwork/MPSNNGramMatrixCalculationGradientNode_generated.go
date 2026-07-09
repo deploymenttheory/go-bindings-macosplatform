@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,9 @@ func nNGramMatrixCalculationGradientNodeAdopt(id objc.ID) *NNGramMatrixCalculati
 
 // NewNNGramMatrixCalculationGradientNodeWithSourceGradientSourceImageGradientState creates a new NNGramMatrixCalculationGradientNode.
 func NewNNGramMatrixCalculationGradientNodeWithSourceGradientSourceImageGradientState(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode) *NNGramMatrixCalculationGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculationGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
 	return nNGramMatrixCalculationGradientNodeAdopt(_id)
@@ -54,6 +59,9 @@ func NewNNGramMatrixCalculationGradientNodeWithSourceGradientSourceImageGradient
 
 // NewNNGramMatrixCalculationGradientNodeWithSourceGradientSourceImageGradientStateAlpha creates a new NNGramMatrixCalculationGradientNode.
 func NewNNGramMatrixCalculationGradientNodeWithSourceGradientSourceImageGradientStateAlpha(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode, alpha float32) *NNGramMatrixCalculationGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculationGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:alpha:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), alpha)
 	return nNGramMatrixCalculationGradientNodeAdopt(_id)
@@ -67,6 +75,7 @@ func (ngmcgn *NNGramMatrixCalculationGradientNode) WithLabel(label string) *NNGr
 
 // Alpha returns scaling factor for the output. Default: 1.0f.
 func (ngmcgn *NNGramMatrixCalculationGradientNode) Alpha() float32 {
+	defer runtime.KeepAlive(ngmcgn)
 	_r := objc.Send[float32](objref.IDOf(ngmcgn), objc.RegisterName("alpha"))
 	return _r
 }

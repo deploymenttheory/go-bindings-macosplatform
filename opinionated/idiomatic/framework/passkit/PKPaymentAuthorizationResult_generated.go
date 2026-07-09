@@ -5,6 +5,7 @@
 package passkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func paymentAuthorizationResultAdopt(id objc.ID) *PaymentAuthorizationResult {
 
 // Description returns the object's -description text.
 func (par *PaymentAuthorizationResult) Description() string {
+	defer runtime.KeepAlive(par)
 	return rt.Description(objref.IDOf(par))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (par *PaymentAuthorizationResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(par)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(par), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (par *PaymentAuthorizationResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(par)
 	return rt.IsKind(objref.IDOf(par), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (par *PaymentAuthorizationResult) String() string {
+	defer runtime.KeepAlive(par)
 	return rt.Description(objref.IDOf(par))
 }
 
@@ -88,24 +94,28 @@ func (par *PaymentAuthorizationResult) WithStatus(status PaymentAuthorizationSta
 
 // WithOrderDetails sets optional metadata with order details for the placed order.
 func (par *PaymentAuthorizationResult) WithOrderDetails(orderDetails *PaymentOrderDetails) *PaymentAuthorizationResult {
+	defer runtime.KeepAlive(orderDetails)
 	objc.Send[objc.ID](objref.IDOf(par), objc.RegisterName("setOrderDetails:"), objref.IDOf(orderDetails))
 	return par
 }
 
 // Status returns the status.
 func (par *PaymentAuthorizationResult) Status() PaymentAuthorizationStatus {
+	defer runtime.KeepAlive(par)
 	_r := objc.Send[PaymentAuthorizationStatus](objref.IDOf(par), objc.RegisterName("status"))
 	return _r
 }
 
 // Errors returns the errors.
 func (par *PaymentAuthorizationResult) Errors() []obj.Object {
+	defer runtime.KeepAlive(par)
 	_r := objc.Send[objc.ID](objref.IDOf(par), objc.RegisterName("errors"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetErrors wraps the corresponding Objective-C method.
 func (par *PaymentAuthorizationResult) SetErrors() error {
+	defer runtime.KeepAlive(par)
 	var _nsErr uintptr
 	_ = objc.Send[objc.ID](objref.IDOf(par), objc.RegisterName("setErrors:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -116,6 +126,7 @@ func (par *PaymentAuthorizationResult) SetErrors() error {
 
 // OrderDetails returns the order details.
 func (par *PaymentAuthorizationResult) OrderDetails() *PaymentOrderDetails {
+	defer runtime.KeepAlive(par)
 	_r := objc.Send[objc.ID](objref.IDOf(par), objc.RegisterName("orderDetails"))
 	return PaymentOrderDetailsFromID(_r)
 }

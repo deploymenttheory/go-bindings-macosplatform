@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func authorizationPublicKeyCredentialPRFRegistrationInputAdopt(id objc.ID) *Auth
 
 // Description returns the object's -description text.
 func (apkcpri *AuthorizationPublicKeyCredentialPRFRegistrationInput) Description() string {
+	defer runtime.KeepAlive(apkcpri)
 	return rt.Description(objref.IDOf(apkcpri))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apkcpri *AuthorizationPublicKeyCredentialPRFRegistrationInput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apkcpri)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apkcpri), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apkcpri *AuthorizationPublicKeyCredentialPRFRegistrationInput) IsKind(className string) bool {
+	defer runtime.KeepAlive(apkcpri)
 	return rt.IsKind(objref.IDOf(apkcpri), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apkcpri *AuthorizationPublicKeyCredentialPRFRegistrationInput) String() string {
+	defer runtime.KeepAlive(apkcpri)
 	return rt.Description(objref.IDOf(apkcpri))
 }
 
 // NewAuthorizationPublicKeyCredentialPRFRegistrationInputWithInputValues creates a new AuthorizationPublicKeyCredentialPRFRegistrationInput.
 func NewAuthorizationPublicKeyCredentialPRFRegistrationInputWithInputValues(inputValues *AuthorizationPublicKeyCredentialPRFAssertionInputValues) *AuthorizationPublicKeyCredentialPRFRegistrationInput {
+	defer runtime.KeepAlive(inputValues)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialPRFRegistrationInput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputValues:"), objref.IDOf(inputValues))
 	return authorizationPublicKeyCredentialPRFRegistrationInputAdopt(_id)
@@ -75,12 +83,14 @@ func NewAuthorizationPublicKeyCredentialPRFRegistrationInputWithInputValues(inpu
 
 // ShouldCheckForSupport wraps the corresponding Objective-C method.
 func (apkcpri *AuthorizationPublicKeyCredentialPRFRegistrationInput) ShouldCheckForSupport() bool {
+	defer runtime.KeepAlive(apkcpri)
 	_r := objc.Send[bool](objref.IDOf(apkcpri), objc.RegisterName("shouldCheckForSupport"))
 	return _r
 }
 
 // InputValues returns the input values.
 func (apkcpri *AuthorizationPublicKeyCredentialPRFRegistrationInput) InputValues() *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
+	defer runtime.KeepAlive(apkcpri)
 	_r := objc.Send[objc.ID](objref.IDOf(apkcpri), objc.RegisterName("inputValues"))
 	return AuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(_r)
 }

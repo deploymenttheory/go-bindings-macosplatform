@@ -59,8 +59,8 @@ func (o *NEProvider) Wake() {
 
 // Create a TCP connection.
 // Deprecated: Use nw_connection_t in Network framework instead
-func (o *NEProvider) CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *NWTLSParameters, delegate objc.ID) *NWTCPConnection {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nEProviderSelCreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate, remoteEndpoint, enableTLS, tLSParameters.Ptr(), delegate)
+func (o *NEProvider) CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tlsParameters *NWTLSParameters, delegate objc.ID) *NWTCPConnection {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEProviderSelCreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate, remoteEndpoint, enableTLS, tlsParameters.Ptr(), delegate)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

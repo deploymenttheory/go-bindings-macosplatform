@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,33 +51,40 @@ func distanceModelParametersAdopt(id objc.ID) *DistanceModelParameters {
 
 // Description returns the object's -description text.
 func (dmp *DistanceModelParameters) Description() string {
+	defer runtime.KeepAlive(dmp)
 	return rt.Description(objref.IDOf(dmp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dmp *DistanceModelParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dmp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dmp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dmp *DistanceModelParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(dmp)
 	return rt.IsKind(objref.IDOf(dmp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dmp *DistanceModelParameters) String() string {
+	defer runtime.KeepAlive(dmp)
 	return rt.Description(objref.IDOf(dmp))
 }
 
 // WithFadeOutParameters sets a distance over which the framework fades out the mixer’s sound.
 func (dmp *DistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *DistanceModelParameters {
+	defer runtime.KeepAlive(fadeOutParameters)
 	objc.Send[objc.ID](objref.IDOf(dmp), objc.RegisterName("setFadeOutParameters:"), objref.IDOf(fadeOutParameters))
 	return dmp
 }
 
 // FadeOutParameters returns the fade out parameters.
 func (dmp *DistanceModelParameters) FadeOutParameters() *DistanceModelFadeOutParameters {
+	defer runtime.KeepAlive(dmp)
 	_r := objc.Send[objc.ID](objref.IDOf(dmp), objc.RegisterName("fadeOutParameters"))
 	return DistanceModelFadeOutParametersFromID(_r)
 }

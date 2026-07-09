@@ -19,8 +19,27 @@ objc.Send[objc.ID](objref.IDOf({{.RecvVar}}), objc.RegisterName({{.SetterSelecto
 return {{.RecvVar}}
 }
 
+{{else if .IsDelegate -}}
+func ({{.RecvVar}} *{{.TypeName}}) {{.GoName}}({{.ParamName}} {{.ParamType}}) *{{.TypeName}} {
+_shim := {{.ShimFunc}}({{.ParamName}})
+_sel := objc.RegisterName({{.SetterSelector | printf "%q"}})
+shim.Associate(objref.IDOf({{.RecvVar}}), uintptr(_sel), _shim)
+{{- if .MainThread}}
+purego.Main(func() {
+objc.Send[objc.ID](objref.IDOf({{.RecvVar}}), _sel, _shim)
+})
+{{- else}}
+objc.Send[objc.ID](objref.IDOf({{.RecvVar}}), _sel, _shim)
+{{- end}}
+_shim.Send(objc.RegisterName("release"))
+return {{.RecvVar}}
+}
+
 {{else -}}
 func ({{.RecvVar}} *{{.TypeName}}) {{.GoName}}({{.ParamName}} {{.ParamType}}) *{{.TypeName}} {
+{{- range .KeepAlive}}
+defer runtime.KeepAlive({{.}})
+{{- end}}
 {{- if .MainThread}}
 purego.Main(func() {
 objc.Send[objc.ID](objref.IDOf({{.RecvVar}}), objc.RegisterName({{.SetterSelector | printf "%q"}}), {{.ParamRawExpr}})

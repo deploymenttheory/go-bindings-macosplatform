@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,33 +63,40 @@ func (mcs *MutableCharacterSet) WithObservationInfo(observationInfo unsafe.Point
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (mcs *MutableCharacterSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableCharacterSet {
-	objc.Send[objc.ID](objref.IDOf(mcs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (mcs *MutableCharacterSet) WithScriptingProperties(scriptingProperties map[string]obj.Object) *MutableCharacterSet {
+	objc.Send[objc.ID](objref.IDOf(mcs), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return mcs
 }
 
 // AddCharactersInString adds to the receiver the characters in a given string.
 func (mcs *MutableCharacterSet) AddCharactersInString(aString string) {
+	defer runtime.KeepAlive(mcs)
 	objc.Send[objc.ID](objref.IDOf(mcs), objc.RegisterName("addCharactersInString:"), purego.NSString(aString))
 }
 
 // RemoveCharactersInString removes from the receiver the characters in a given string.
 func (mcs *MutableCharacterSet) RemoveCharactersInString(aString string) {
+	defer runtime.KeepAlive(mcs)
 	objc.Send[objc.ID](objref.IDOf(mcs), objc.RegisterName("removeCharactersInString:"), purego.NSString(aString))
 }
 
-// FormUnionWithCharacterSet modifies the receiver so it contains all characters that exist in either the receiver or another set.
-func (mcs *MutableCharacterSet) FormUnionWithCharacterSet(otherSet *CharacterSet) {
+// FormUnion modifies the receiver so it contains all characters that exist in either the receiver or another set.
+func (mcs *MutableCharacterSet) FormUnion(otherSet *CharacterSet) {
+	defer runtime.KeepAlive(mcs)
+	defer runtime.KeepAlive(otherSet)
 	objc.Send[objc.ID](objref.IDOf(mcs), objc.RegisterName("formUnionWithCharacterSet:"), objref.IDOf(otherSet))
 }
 
-// FormIntersectionWithCharacterSet modifies the receiver so it contains only characters that exist in both the receiver and another set.
-func (mcs *MutableCharacterSet) FormIntersectionWithCharacterSet(otherSet *CharacterSet) {
+// FormIntersection modifies the receiver so it contains only characters that exist in both the receiver and another set.
+func (mcs *MutableCharacterSet) FormIntersection(otherSet *CharacterSet) {
+	defer runtime.KeepAlive(mcs)
+	defer runtime.KeepAlive(otherSet)
 	objc.Send[objc.ID](objref.IDOf(mcs), objc.RegisterName("formIntersectionWithCharacterSet:"), objref.IDOf(otherSet))
 }
 
 // Invert replaces all the characters in the receiver with all the characters it didn’t previously contain.
 func (mcs *MutableCharacterSet) Invert() {
+	defer runtime.KeepAlive(mcs)
 	objc.Send[objc.ID](objref.IDOf(mcs), objc.RegisterName("invert"))
 }
 

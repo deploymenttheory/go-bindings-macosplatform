@@ -5,9 +5,12 @@
 package corebluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,19 +33,21 @@ func UUIDWithString(theString string) *UUID {
 }
 
 // UUIDWithData creates a Core Bluetooth UUID object from a 16-, 32-, or 128-bit UUID data container.
-func UUIDWithData(theData obj.Object) *UUID {
-	_r := objc.Send[objc.ID](objc.ID(_class("CBUUID")), objc.RegisterName("UUIDWithData:"), objref.IDOf(theData))
+func UUIDWithData(theData []byte) *UUID {
+	_r := objc.Send[objc.ID](objc.ID(_class("CBUUID")), objc.RegisterName("UUIDWithData:"), rt.BytesToNSData(theData))
 	return UUIDFromID(_r)
 }
 
 // UUIDWithCFUUID creates a Core Bluetooth UUID object from a Core Foundation UUID object.
 func UUIDWithCFUUID(theUUID obj.Object) *UUID {
+	defer runtime.KeepAlive(theUUID)
 	_r := objc.Send[objc.ID](objc.ID(_class("CBUUID")), objc.RegisterName("UUIDWithCFUUID:"), objref.IDOf(theUUID))
 	return UUIDFromID(_r)
 }
 
 // UUIDWithNSUUID creates a Core Bluetooth UUID object from a Foundation UUID object.
 func UUIDWithNSUUID(theUUID obj.Object) *UUID {
+	defer runtime.KeepAlive(theUUID)
 	_r := objc.Send[objc.ID](objc.ID(_class("CBUUID")), objc.RegisterName("UUIDWithNSUUID:"), objref.IDOf(theUUID))
 	return UUIDFromID(_r)
 }

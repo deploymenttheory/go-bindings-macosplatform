@@ -5,6 +5,8 @@
 package screencapturekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func contentSharingPickerConfigurationAdopt(id objc.ID) *ContentSharingPickerCon
 
 // Description returns the object's -description text.
 func (cspc *ContentSharingPickerConfiguration) Description() string {
+	defer runtime.KeepAlive(cspc)
 	return rt.Description(objref.IDOf(cspc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cspc *ContentSharingPickerConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cspc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cspc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cspc *ContentSharingPickerConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(cspc)
 	return rt.IsKind(objref.IDOf(cspc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cspc *ContentSharingPickerConfiguration) String() string {
+	defer runtime.KeepAlive(cspc)
 	return rt.Description(objref.IDOf(cspc))
 }
 
@@ -100,6 +107,7 @@ func (cspc *ContentSharingPickerConfiguration) WithAllowsChangingSelectedContent
 
 // AllowedPickerModes returns allowedPickerModes Limits the type of selections available to the user when the picker is presented. Default is 0, no excluded picking modes
 func (cspc *ContentSharingPickerConfiguration) AllowedPickerModes() ContentSharingPickerMode {
+	defer runtime.KeepAlive(cspc)
 	_r := objc.Send[ContentSharingPickerMode](objref.IDOf(cspc), objc.RegisterName("allowedPickerModes"))
 	return _r
 }
@@ -108,6 +116,7 @@ func (cspc *ContentSharingPickerConfiguration) AllowedPickerModes() ContentShari
 //
 // ExcludedWindowIDs returns the collection as a Go slice.
 func (cspc *ContentSharingPickerConfiguration) ExcludedWindowIDs() []obj.Object {
+	defer runtime.KeepAlive(cspc)
 	_arr := objc.Send[objc.ID](objref.IDOf(cspc), objc.RegisterName("excludedWindowIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -116,12 +125,14 @@ func (cspc *ContentSharingPickerConfiguration) ExcludedWindowIDs() []obj.Object 
 //
 // ExcludedBundleIDs returns the collection as a Go slice.
 func (cspc *ContentSharingPickerConfiguration) ExcludedBundleIDs() []string {
+	defer runtime.KeepAlive(cspc)
 	_arr := objc.Send[objc.ID](objref.IDOf(cspc), objc.RegisterName("excludedBundleIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // AllowsChangingSelectedContent reports whether allowsChangingSelectedContent Controls if the user can make updates to the content filter after the initial selection. Defaults is true.
 func (cspc *ContentSharingPickerConfiguration) AllowsChangingSelectedContent() bool {
+	defer runtime.KeepAlive(cspc)
 	_r := objc.Send[bool](objref.IDOf(cspc), objc.RegisterName("allowsChangingSelectedContent"))
 	return _r
 }

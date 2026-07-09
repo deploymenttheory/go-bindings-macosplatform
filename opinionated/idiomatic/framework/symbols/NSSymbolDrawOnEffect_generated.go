@@ -5,6 +5,8 @@
 package symbols
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,18 +55,21 @@ func NewSymbolDrawOnEffect() *SymbolDrawOnEffect {
 
 // EffectWithByLayer returns a copy of the effect requesting an animation that applies separately to each motion group.
 func (sdoe *SymbolDrawOnEffect) EffectWithByLayer() *SymbolDrawOnEffect {
+	defer runtime.KeepAlive(sdoe)
 	_r := objc.Send[objc.ID](objref.IDOf(sdoe), objc.RegisterName("effectWithByLayer"))
 	return SymbolDrawOnEffectFromID(_r)
 }
 
 // EffectWithWholeSymbol returns a copy of the effect requesting an animation that applies to all motion groups simultaneously.
 func (sdoe *SymbolDrawOnEffect) EffectWithWholeSymbol() *SymbolDrawOnEffect {
+	defer runtime.KeepAlive(sdoe)
 	_r := objc.Send[objc.ID](objref.IDOf(sdoe), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolDrawOnEffectFromID(_r)
 }
 
 // EffectWithIndividually returns a copy of the effect requesting an animation that applies separately to each motion group, where only one motion group is active at a time.
 func (sdoe *SymbolDrawOnEffect) EffectWithIndividually() *SymbolDrawOnEffect {
+	defer runtime.KeepAlive(sdoe)
 	_r := objc.Send[objc.ID](objref.IDOf(sdoe), objc.RegisterName("effectWithIndividually"))
 	return SymbolDrawOnEffectFromID(_r)
 }

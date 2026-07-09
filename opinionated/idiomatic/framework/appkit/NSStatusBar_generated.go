@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func statusBarAdopt(id objc.ID) *StatusBar {
 
 // Description returns the object's -description text.
 func (sb *StatusBar) Description() string {
+	defer runtime.KeepAlive(sb)
 	return rt.Description(objref.IDOf(sb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sb *StatusBar) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sb *StatusBar) IsKind(className string) bool {
+	defer runtime.KeepAlive(sb)
 	return rt.IsKind(objref.IDOf(sb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sb *StatusBar) String() string {
+	defer runtime.KeepAlive(sb)
 	return rt.Description(objref.IDOf(sb))
 }
 
@@ -74,23 +81,28 @@ func NewStatusBar() *StatusBar {
 
 // StatusItemWithLength returns a newly created status item that has been allotted a specified space within the status bar.
 func (sb *StatusBar) StatusItemWithLength(length float64) *StatusItem {
+	defer runtime.KeepAlive(sb)
 	_r := objc.Send[objc.ID](objref.IDOf(sb), objc.RegisterName("statusItemWithLength:"), length)
 	return StatusItemFromID(_r)
 }
 
 // RemoveStatusItem removes the specified status item from the receiver.
 func (sb *StatusBar) RemoveStatusItem(item *StatusItem) {
+	defer runtime.KeepAlive(sb)
+	defer runtime.KeepAlive(item)
 	objc.Send[objc.ID](objref.IDOf(sb), objc.RegisterName("removeStatusItem:"), objref.IDOf(item))
 }
 
 // IsVertical reports whether the object is vertical.
 func (sb *StatusBar) IsVertical() bool {
+	defer runtime.KeepAlive(sb)
 	_r := objc.Send[bool](objref.IDOf(sb), objc.RegisterName("isVertical"))
 	return _r
 }
 
 // Thickness returns the thickness.
 func (sb *StatusBar) Thickness() float64 {
+	defer runtime.KeepAlive(sb)
 	_r := objc.Send[float64](objref.IDOf(sb), objc.RegisterName("thickness"))
 	return _r
 }

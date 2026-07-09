@@ -1286,7 +1286,7 @@
     "MPMediaItemAnimatedArtwork": {
       "init(artworkID:previewImageRequestHandler:videoAssetFileURLRequestHandler:)": {
         "doc": "Creates an animated artwork.",
-        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitemanimatedartwork/init(artworkid:previewimagerequesthandler:videoassetfileurlrequesthandler:)-7bb3j"
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitemanimatedartwork/init(artworkid:previewimagerequesthandler:videoassetfileurlrequesthandler:)-7n23z"
       }
     },
     "MPMediaItemArtwork": {

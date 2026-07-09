@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRWiFiNetworkDiagnosticsClusterDisconnectionEventAdopt(id objc.ID) *MTRWiF
 
 // Description returns the object's -description text.
 func (mwfndcde *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) Description() string {
+	defer runtime.KeepAlive(mwfndcde)
 	return rt.Description(objref.IDOf(mwfndcde))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mwfndcde *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mwfndcde)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mwfndcde), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mwfndcde *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mwfndcde)
 	return rt.IsKind(objref.IDOf(mwfndcde), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mwfndcde *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) String() string {
+	defer runtime.KeepAlive(mwfndcde)
 	return rt.Description(objref.IDOf(mwfndcde))
 }
 
@@ -72,12 +80,14 @@ func NewMTRWiFiNetworkDiagnosticsClusterDisconnectionEvent() *MTRWiFiNetworkDiag
 
 // WithReasonCode sets the reason code.
 func (mwfndcde *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) WithReasonCode(reasonCode obj.Object) *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent {
+	defer runtime.KeepAlive(reasonCode)
 	objc.Send[objc.ID](objref.IDOf(mwfndcde), objc.RegisterName("setReasonCode:"), objref.IDOf(reasonCode))
 	return mwfndcde
 }
 
 // ReasonCode returns the reason code.
-func (mwfndcde *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) ReasonCode() obj.Object {
+func (mwfndcde *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) ReasonCode() *foundation.Number {
+	defer runtime.KeepAlive(mwfndcde)
 	_r := objc.Send[objc.ID](objref.IDOf(mwfndcde), objc.RegisterName("reasonCode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -163,24 +165,28 @@ func (cccng *CNNCrossChannelNormalizationGradient) WithLabel(label string) *CNNC
 
 // Alpha returns the value of alpha.  Default is 1.0. Must be non-negative.
 func (cccng *CNNCrossChannelNormalizationGradient) Alpha() float32 {
+	defer runtime.KeepAlive(cccng)
 	_r := objc.Send[float32](objref.IDOf(cccng), objc.RegisterName("alpha"))
 	return _r
 }
 
 // Beta returns the value of beta.  Default is 5.0
 func (cccng *CNNCrossChannelNormalizationGradient) Beta() float32 {
+	defer runtime.KeepAlive(cccng)
 	_r := objc.Send[float32](objref.IDOf(cccng), objc.RegisterName("beta"))
 	return _r
 }
 
 // Delta returns the value of delta.  Default is 1.0
 func (cccng *CNNCrossChannelNormalizationGradient) Delta() float32 {
+	defer runtime.KeepAlive(cccng)
 	_r := objc.Send[float32](objref.IDOf(cccng), objc.RegisterName("delta"))
 	return _r
 }
 
 // KernelSize returns the size of the square filter window.  Default is 5
 func (cccng *CNNCrossChannelNormalizationGradient) KernelSize() int {
+	defer runtime.KeepAlive(cccng)
 	_r := objc.Send[int](objref.IDOf(cccng), objc.RegisterName("kernelSize"))
 	return _r
 }

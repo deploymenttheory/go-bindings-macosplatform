@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRContentLauncherClusterLaunchContentParamsAdopt(id objc.ID) *MTRContentLa
 
 // Description returns the object's -description text.
 func (mclclcp *MTRContentLauncherClusterLaunchContentParams) Description() string {
+	defer runtime.KeepAlive(mclclcp)
 	return rt.Description(objref.IDOf(mclclcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mclclcp *MTRContentLauncherClusterLaunchContentParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mclclcp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mclclcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mclclcp *MTRContentLauncherClusterLaunchContentParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mclclcp)
 	return rt.IsKind(objref.IDOf(mclclcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mclclcp *MTRContentLauncherClusterLaunchContentParams) String() string {
+	defer runtime.KeepAlive(mclclcp)
 	return rt.Description(objref.IDOf(mclclcp))
 }
 
@@ -72,12 +80,14 @@ func NewMTRContentLauncherClusterLaunchContentParams() *MTRContentLauncherCluste
 
 // WithSearch sets the search.
 func (mclclcp *MTRContentLauncherClusterLaunchContentParams) WithSearch(search MTRContentLauncherClusterContentSearchStructProvider) *MTRContentLauncherClusterLaunchContentParams {
+	defer runtime.KeepAlive(search)
 	objc.Send[objc.ID](objref.IDOf(mclclcp), objc.RegisterName("setSearch:"), objref.IDOf(search))
 	return mclclcp
 }
 
 // WithAutoPlay sets the auto play.
 func (mclclcp *MTRContentLauncherClusterLaunchContentParams) WithAutoPlay(autoPlay obj.Object) *MTRContentLauncherClusterLaunchContentParams {
+	defer runtime.KeepAlive(autoPlay)
 	objc.Send[objc.ID](objref.IDOf(mclclcp), objc.RegisterName("setAutoPlay:"), objref.IDOf(autoPlay))
 	return mclclcp
 }
@@ -90,36 +100,42 @@ func (mclclcp *MTRContentLauncherClusterLaunchContentParams) WithData(data strin
 
 // WithUseCurrentContext sets the use current context.
 func (mclclcp *MTRContentLauncherClusterLaunchContentParams) WithUseCurrentContext(useCurrentContext obj.Object) *MTRContentLauncherClusterLaunchContentParams {
+	defer runtime.KeepAlive(useCurrentContext)
 	objc.Send[objc.ID](objref.IDOf(mclclcp), objc.RegisterName("setUseCurrentContext:"), objref.IDOf(useCurrentContext))
 	return mclclcp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mclclcp *MTRContentLauncherClusterLaunchContentParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRContentLauncherClusterLaunchContentParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mclclcp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mclclcp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mclclcp *MTRContentLauncherClusterLaunchContentParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRContentLauncherClusterLaunchContentParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mclclcp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mclclcp
 }
 
 // Search returns the search.
 func (mclclcp *MTRContentLauncherClusterLaunchContentParams) Search() *MTRContentLauncherClusterContentSearchStruct {
+	defer runtime.KeepAlive(mclclcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mclclcp), objc.RegisterName("search"))
 	return MTRContentLauncherClusterContentSearchStructFromID(_r)
 }
 
 // AutoPlay returns the auto play.
-func (mclclcp *MTRContentLauncherClusterLaunchContentParams) AutoPlay() obj.Object {
+func (mclclcp *MTRContentLauncherClusterLaunchContentParams) AutoPlay() *foundation.Number {
+	defer runtime.KeepAlive(mclclcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mclclcp), objc.RegisterName("autoPlay"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Data returns the data.
 func (mclclcp *MTRContentLauncherClusterLaunchContentParams) Data() string {
+	defer runtime.KeepAlive(mclclcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mclclcp), objc.RegisterName("data"))
 	if _r == 0 {
 		return ""
@@ -128,19 +144,22 @@ func (mclclcp *MTRContentLauncherClusterLaunchContentParams) Data() string {
 }
 
 // UseCurrentContext returns the use current context.
-func (mclclcp *MTRContentLauncherClusterLaunchContentParams) UseCurrentContext() obj.Object {
+func (mclclcp *MTRContentLauncherClusterLaunchContentParams) UseCurrentContext() *foundation.Number {
+	defer runtime.KeepAlive(mclclcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mclclcp), objc.RegisterName("useCurrentContext"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mclclcp *MTRContentLauncherClusterLaunchContentParams) TimedInvokeTimeoutMs() obj.Object {
+func (mclclcp *MTRContentLauncherClusterLaunchContentParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mclclcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mclclcp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mclclcp *MTRContentLauncherClusterLaunchContentParams) ServerSideProcessingTimeout() obj.Object {
+func (mclclcp *MTRContentLauncherClusterLaunchContentParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mclclcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mclclcp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

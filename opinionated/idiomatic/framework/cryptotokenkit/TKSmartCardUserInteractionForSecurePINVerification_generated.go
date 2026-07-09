@@ -5,9 +5,13 @@
 package cryptotokenkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,8 +57,8 @@ func NewSmartCardUserInteractionForSecurePINVerification() *SmartCardUserInterac
 }
 
 // WithPINCompletion sets the conditions under which PIN entry should be considered complete.
-func (scuifspv *SmartCardUserInteractionForSecurePINVerification) WithPINCompletion(pINCompletion SmartCardPINCompletion) *SmartCardUserInteractionForSecurePINVerification {
-	objc.Send[objc.ID](objref.IDOf(scuifspv), objc.RegisterName("setPINCompletion:"), pINCompletion)
+func (scuifspv *SmartCardUserInteractionForSecurePINVerification) WithPINCompletion(pinCompletion SmartCardPINCompletion) *SmartCardUserInteractionForSecurePINVerification {
+	objc.Send[objc.ID](objref.IDOf(scuifspv), objc.RegisterName("setPINCompletion:"), pinCompletion)
 	return scuifspv
 }
 
@@ -67,6 +71,7 @@ func (scuifspv *SmartCardUserInteractionForSecurePINVerification) WithPINMessage
 
 // WithLocale sets the locale for the displayed messages. If nil, the user’s current locale is used. By default, this value is the current locale of the system.
 func (scuifspv *SmartCardUserInteractionForSecurePINVerification) WithLocale(locale obj.Object) *SmartCardUserInteractionForSecurePINVerification {
+	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(scuifspv), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return scuifspv
 }
@@ -78,8 +83,18 @@ func (scuifspv *SmartCardUserInteractionForSecurePINVerification) WithResultSW(r
 }
 
 // WithResultData sets the returned data without SW1-SW2 bytes, if any.
-func (scuifspv *SmartCardUserInteractionForSecurePINVerification) WithResultData(resultData obj.Object) *SmartCardUserInteractionForSecurePINVerification {
-	objc.Send[objc.ID](objref.IDOf(scuifspv), objc.RegisterName("setResultData:"), objref.IDOf(resultData))
+func (scuifspv *SmartCardUserInteractionForSecurePINVerification) WithResultData(resultData []byte) *SmartCardUserInteractionForSecurePINVerification {
+	objc.Send[objc.ID](objref.IDOf(scuifspv), objc.RegisterName("setResultData:"), rt.BytesToNSData(resultData))
+	return scuifspv
+}
+
+// WithDelegate sets the delegate for observing events that occur during the user interaction.
+func (scuifspv *SmartCardUserInteractionForSecurePINVerification) WithDelegate(delegate SmartCardUserInteractionDelegate) *SmartCardUserInteractionForSecurePINVerification {
+	_shim := newSmartCardUserInteractionDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(scuifspv), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(scuifspv), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
 	return scuifspv
 }
 

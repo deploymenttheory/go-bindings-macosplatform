@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nEIPv4RouteAdopt(id objc.ID) *NEIPv4Route {
 
 // Description returns the object's -description text.
 func (npr *NEIPv4Route) Description() string {
+	defer runtime.KeepAlive(npr)
 	return rt.Description(objref.IDOf(npr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (npr *NEIPv4Route) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(npr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(npr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (npr *NEIPv4Route) IsKind(className string) bool {
+	defer runtime.KeepAlive(npr)
 	return rt.IsKind(objref.IDOf(npr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (npr *NEIPv4Route) String() string {
+	defer runtime.KeepAlive(npr)
 	return rt.Description(objref.IDOf(npr))
 }
 
@@ -81,6 +88,7 @@ func (npr *NEIPv4Route) WithGatewayAddress(gatewayAddress string) *NEIPv4Route {
 
 // DestinationAddress returns an IPv4 address represented as a dotted decimal string.
 func (npr *NEIPv4Route) DestinationAddress() string {
+	defer runtime.KeepAlive(npr)
 	_r := objc.Send[objc.ID](objref.IDOf(npr), objc.RegisterName("destinationAddress"))
 	if _r == 0 {
 		return ""
@@ -90,6 +98,7 @@ func (npr *NEIPv4Route) DestinationAddress() string {
 
 // DestinationSubnetMask returns an IPv4 subnet mask represented as a dotted decimal string. This mask in combination with the destinationAddress property is used to determine the destination network of the route.
 func (npr *NEIPv4Route) DestinationSubnetMask() string {
+	defer runtime.KeepAlive(npr)
 	_r := objc.Send[objc.ID](objref.IDOf(npr), objc.RegisterName("destinationSubnetMask"))
 	if _r == 0 {
 		return ""
@@ -99,6 +108,7 @@ func (npr *NEIPv4Route) DestinationSubnetMask() string {
 
 // GatewayAddress returns the IPv4 address of the route's gateway. If this property is nil then the route's gateway will be set to the tunnel's virtual interface.
 func (npr *NEIPv4Route) GatewayAddress() string {
+	defer runtime.KeepAlive(npr)
 	_r := objc.Send[objc.ID](objref.IDOf(npr), objc.RegisterName("gatewayAddress"))
 	if _r == 0 {
 		return ""

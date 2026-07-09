@@ -6,6 +6,7 @@ package videosubscriberaccount
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func vSUserAccountManagerAdopt(id objc.ID) *VSUserAccountManager {
 
 // Description returns the object's -description text.
 func (vuam *VSUserAccountManager) Description() string {
+	defer runtime.KeepAlive(vuam)
 	return rt.Description(objref.IDOf(vuam))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vuam *VSUserAccountManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vuam)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vuam), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vuam *VSUserAccountManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(vuam)
 	return rt.IsKind(objref.IDOf(vuam), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vuam *VSUserAccountManager) String() string {
+	defer runtime.KeepAlive(vuam)
 	return rt.Description(objref.IDOf(vuam))
 }
 
@@ -79,6 +85,8 @@ func NewVSUserAccountManager() *VSUserAccountManager {
 //
 // UpdateUserAccountCompletion blocks until the operation completes or ctx is cancelled.
 func (vuam *VSUserAccountManager) UpdateUserAccountCompletion(ctx context.Context, account *VSUserAccount) error {
+	defer runtime.KeepAlive(vuam)
+	defer runtime.KeepAlive(account)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -98,6 +106,7 @@ func (vuam *VSUserAccountManager) UpdateUserAccountCompletion(ctx context.Contex
 //
 // QueryUserAccountsWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
 func (vuam *VSUserAccountManager) QueryUserAccountsWithOptionsCompletion(ctx context.Context, options VSUserAccountQueryOptions) (result obj.Object, err error) {
+	defer runtime.KeepAlive(vuam)
 	type _result struct {
 		val obj.Object
 		err error
@@ -123,6 +132,7 @@ func (vuam *VSUserAccountManager) QueryUserAccountsWithOptionsCompletion(ctx con
 //
 // QueryAutoSignInToken blocks until the operation completes or ctx is cancelled.
 func (vuam *VSUserAccountManager) QueryAutoSignInToken(ctx context.Context) (result *VSAutoSignInToken, err error) {
+	defer runtime.KeepAlive(vuam)
 	type _result struct {
 		val *VSAutoSignInToken
 		err error
@@ -148,6 +158,7 @@ func (vuam *VSUserAccountManager) QueryAutoSignInToken(ctx context.Context) (res
 //
 // DeleteAutoSignInToken blocks until the operation completes or ctx is cancelled.
 func (vuam *VSUserAccountManager) DeleteAutoSignInToken(ctx context.Context) error {
+	defer runtime.KeepAlive(vuam)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error

@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func wKFindResultAdopt(id objc.ID) *WKFindResult {
 
 // Description returns the object's -description text.
 func (wfr *WKFindResult) Description() string {
+	defer runtime.KeepAlive(wfr)
 	return rt.Description(objref.IDOf(wfr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wfr *WKFindResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wfr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wfr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wfr *WKFindResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(wfr)
 	return rt.IsKind(objref.IDOf(wfr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wfr *WKFindResult) String() string {
+	defer runtime.KeepAlive(wfr)
 	return rt.Description(objref.IDOf(wfr))
 }
 
@@ -80,6 +87,7 @@ func NewWKFindResult() *WKFindResult {
 
 // MatchFound wraps the corresponding Objective-C method.
 func (wfr *WKFindResult) MatchFound() bool {
+	defer runtime.KeepAlive(wfr)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

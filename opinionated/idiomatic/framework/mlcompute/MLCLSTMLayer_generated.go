@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (ll *LSTMLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *LSTMLayer 
 
 // Descriptor returns the LSTM descriptor
 func (ll *LSTMLayer) Descriptor() *LSTMDescriptor {
+	defer runtime.KeepAlive(ll)
 	_r := objc.Send[objc.ID](objref.IDOf(ll), objc.RegisterName("descriptor"))
 	return LSTMDescriptorFromID(_r)
 }
@@ -73,12 +76,14 @@ func (ll *LSTMLayer) Descriptor() *LSTMDescriptor {
 //
 // GateActivations returns the collection as a Go slice.
 func (ll *LSTMLayer) GateActivations() []*ActivationDescriptor {
+	defer runtime.KeepAlive(ll)
 	_arr := objc.Send[objc.ID](objref.IDOf(ll), objc.RegisterName("gateActivations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ActivationDescriptor { return ActivationDescriptorFromID(_id) })
 }
 
 // OutputResultActivation returns the output activation descriptor
 func (ll *LSTMLayer) OutputResultActivation() *ActivationDescriptor {
+	defer runtime.KeepAlive(ll)
 	_r := objc.Send[objc.ID](objref.IDOf(ll), objc.RegisterName("outputResultActivation"))
 	return ActivationDescriptorFromID(_r)
 }
@@ -87,6 +92,7 @@ func (ll *LSTMLayer) OutputResultActivation() *ActivationDescriptor {
 //
 // InputWeights returns the collection as a Go slice.
 func (ll *LSTMLayer) InputWeights() []*Tensor {
+	defer runtime.KeepAlive(ll)
 	_arr := objc.Send[objc.ID](objref.IDOf(ll), objc.RegisterName("inputWeights"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
@@ -95,6 +101,7 @@ func (ll *LSTMLayer) InputWeights() []*Tensor {
 //
 // HiddenWeights returns the collection as a Go slice.
 func (ll *LSTMLayer) HiddenWeights() []*Tensor {
+	defer runtime.KeepAlive(ll)
 	_arr := objc.Send[objc.ID](objref.IDOf(ll), objc.RegisterName("hiddenWeights"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
@@ -103,6 +110,7 @@ func (ll *LSTMLayer) HiddenWeights() []*Tensor {
 //
 // PeepholeWeights returns the collection as a Go slice.
 func (ll *LSTMLayer) PeepholeWeights() []*Tensor {
+	defer runtime.KeepAlive(ll)
 	_arr := objc.Send[objc.ID](objref.IDOf(ll), objc.RegisterName("peepholeWeights"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
@@ -111,6 +119,7 @@ func (ll *LSTMLayer) PeepholeWeights() []*Tensor {
 //
 // Biases returns the collection as a Go slice.
 func (ll *LSTMLayer) Biases() []*Tensor {
+	defer runtime.KeepAlive(ll)
 	_arr := objc.Send[objc.ID](objref.IDOf(ll), objc.RegisterName("biases"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
@@ -119,6 +128,7 @@ func (ll *LSTMLayer) Biases() []*Tensor {
 //
 // InputWeightsParameters returns the collection as a Go slice.
 func (ll *LSTMLayer) InputWeightsParameters() []*TensorParameter {
+	defer runtime.KeepAlive(ll)
 	_arr := objc.Send[objc.ID](objref.IDOf(ll), objc.RegisterName("inputWeightsParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorParameter { return TensorParameterFromID(_id) })
 }
@@ -127,6 +137,7 @@ func (ll *LSTMLayer) InputWeightsParameters() []*TensorParameter {
 //
 // HiddenWeightsParameters returns the collection as a Go slice.
 func (ll *LSTMLayer) HiddenWeightsParameters() []*TensorParameter {
+	defer runtime.KeepAlive(ll)
 	_arr := objc.Send[objc.ID](objref.IDOf(ll), objc.RegisterName("hiddenWeightsParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorParameter { return TensorParameterFromID(_id) })
 }
@@ -135,6 +146,7 @@ func (ll *LSTMLayer) HiddenWeightsParameters() []*TensorParameter {
 //
 // PeepholeWeightsParameters returns the collection as a Go slice.
 func (ll *LSTMLayer) PeepholeWeightsParameters() []*TensorParameter {
+	defer runtime.KeepAlive(ll)
 	_arr := objc.Send[objc.ID](objref.IDOf(ll), objc.RegisterName("peepholeWeightsParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorParameter { return TensorParameterFromID(_id) })
 }
@@ -143,6 +155,7 @@ func (ll *LSTMLayer) PeepholeWeightsParameters() []*TensorParameter {
 //
 // BiasesParameters returns the collection as a Go slice.
 func (ll *LSTMLayer) BiasesParameters() []*TensorParameter {
+	defer runtime.KeepAlive(ll)
 	_arr := objc.Send[objc.ID](objref.IDOf(ll), objc.RegisterName("biasesParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorParameter { return TensorParameterFromID(_id) })
 }

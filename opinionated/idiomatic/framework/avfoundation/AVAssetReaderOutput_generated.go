@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,22 +52,27 @@ func assetReaderOutputAdopt(id objc.ID) *AssetReaderOutput {
 
 // Description returns the object's -description text.
 func (aro *AssetReaderOutput) Description() string {
+	defer runtime.KeepAlive(aro)
 	return rt.Description(objref.IDOf(aro))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aro *AssetReaderOutput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aro)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aro), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aro *AssetReaderOutput) IsKind(className string) bool {
+	defer runtime.KeepAlive(aro)
 	return rt.IsKind(objref.IDOf(aro), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aro *AssetReaderOutput) String() string {
+	defer runtime.KeepAlive(aro)
 	return rt.Description(objref.IDOf(aro))
 }
 
@@ -82,34 +90,40 @@ func (aro *AssetReaderOutput) WithSupportsRandomAccess(supportsRandomAccess bool
 
 // CopyNextSampleBuffer returns copies the next sample buffer from the output.
 func (aro *AssetReaderOutput) CopyNextSampleBuffer() obj.Object {
+	defer runtime.KeepAlive(aro)
 	_r := objc.Send[objc.ID](objref.IDOf(aro), objc.RegisterName("copyNextSampleBuffer"))
 	return obj.Wrap(_r)
 }
 
 // MediaType returns the media type of the samples that can be read from the receiver. The value of this property is one of the media type strings defined in AVMediaFormat.h.
-func (aro *AssetReaderOutput) MediaType() obj.Object {
+func (aro *AssetReaderOutput) MediaType() *foundation.String {
+	defer runtime.KeepAlive(aro)
 	_r := objc.Send[objc.ID](objref.IDOf(aro), objc.RegisterName("mediaType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // AlwaysCopiesSampleData reports whether the data in buffers gets copied before being vended to the client. When the value of this property is true, the AVAssetReaderOutput will always vend a buffer with copied data to the client. Data in such buffers can be freely modified by the client. When the value of this property is false, the buffers vended to the client may not be copied. Such buffers may still be referenced by other entities. The result of modifying a buffer whose data hasn't been copied is undefined. Requesting buffers whose data hasn't been copied when possible can lead to performance improvements. The default value is true. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown).
 func (aro *AssetReaderOutput) AlwaysCopiesSampleData() bool {
+	defer runtime.KeepAlive(aro)
 	_r := objc.Send[bool](objref.IDOf(aro), objc.RegisterName("alwaysCopiesSampleData"))
 	return _r
 }
 
 // ResetForReadingTimeRanges restarts reading with a new set of time ranges.
-func (aro *AssetReaderOutput) ResetForReadingTimeRanges(timeRanges []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(aro), objc.RegisterName("resetForReadingTimeRanges:"), purego.SliceToNSArray(timeRanges, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (aro *AssetReaderOutput) ResetForReadingTimeRanges(timeRanges []*foundation.Value) {
+	defer runtime.KeepAlive(aro)
+	objc.Send[objc.ID](objref.IDOf(aro), objc.RegisterName("resetForReadingTimeRanges:"), purego.SliceToNSArray(timeRanges, func(_v *foundation.Value) objc.ID { return objref.IDOf(_v) }))
 }
 
 // MarkConfigurationAsFinal tells the output that it’s finished reconfiguring time ranges, and allows the asset reader to advance to a completed state.
 func (aro *AssetReaderOutput) MarkConfigurationAsFinal() {
+	defer runtime.KeepAlive(aro)
 	objc.Send[objc.ID](objref.IDOf(aro), objc.RegisterName("markConfigurationAsFinal"))
 }
 
 // SupportsRandomAccess reports whether the asset reader output supports reconfiguration of the time ranges to read. When the value of this property is true, the time ranges read by the asset reader output can be reconfigured during reading using the -resetForReadingTimeRanges: method. This also prevents the attached AVAssetReader from progressing to AVAssetReaderStatusCompleted until -markConfigurationAsFinal has been invoked. The default value is false, which means that the asset reader output may not be reconfigured once reading has begun. When the value of this property is false, AVAssetReader may be able to read media data more efficiently, particularly when multiple asset reader outputs are attached. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown) or after an AVAssetReaderOutput.Provider is attached.
 func (aro *AssetReaderOutput) SupportsRandomAccess() bool {
+	defer runtime.KeepAlive(aro)
 	_r := objc.Send[bool](objref.IDOf(aro), objc.RegisterName("supportsRandomAccess"))
 	return _r
 }

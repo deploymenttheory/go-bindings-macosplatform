@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func cNNLossDescriptorAdopt(id objc.ID) *CNNLossDescriptor {
 
 // Description returns the object's -description text.
 func (cld *CNNLossDescriptor) Description() string {
+	defer runtime.KeepAlive(cld)
 	return rt.Description(objref.IDOf(cld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cld *CNNLossDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cld)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cld *CNNLossDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(cld)
 	return rt.IsKind(objref.IDOf(cld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cld *CNNLossDescriptor) String() string {
+	defer runtime.KeepAlive(cld)
 	return rt.Description(objref.IDOf(cld))
 }
 
@@ -120,48 +127,56 @@ func (cld *CNNLossDescriptor) WithDelta(delta float32) *CNNLossDescriptor {
 
 // LossType returns the type of a loss filter. This parameter specifies the type of a loss filter.
 func (cld *CNNLossDescriptor) LossType() CNNLossType {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[CNNLossType](objref.IDOf(cld), objc.RegisterName("lossType"))
 	return _r
 }
 
 // ReductionType returns the type of a reduction operation performed in the loss filter. This parameter specifies the type of a reduction operation performed in the loss filter.
 func (cld *CNNLossDescriptor) ReductionType() CNNReductionType {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[CNNReductionType](objref.IDOf(cld), objc.RegisterName("reductionType"))
 	return _r
 }
 
 // ReduceAcrossBatch reports whether if set to true then the reduction operation is applied also across the batch-index dimension, ie. the loss value is summed over images in the batch and the result of the reduction is written on the first loss image in the batch while the other loss images will be set to zero. If set to false, then no reductions are performed across the batch dimension and each image in the batch will contain the loss value associated with that one particular image. NOTE: If reductionType == MPSCNNReductionTypeNone, then this flag has no effect on results, that is no reductions are done in this case. NOTE: If reduceAcrossBatch is set to true and reductionType == MPSCNNReductionTypeMean then the final forward loss value is computed by first summing over the components and then by dividing the result with: number of feature channels * width * height * number of images in the batch. The default value is false.
 func (cld *CNNLossDescriptor) ReduceAcrossBatch() bool {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("reduceAcrossBatch"))
 	return _r
 }
 
 // Weight returns the scale factor to apply to each element of a result. Each element of a result is multiplied by the weight value. The default value is 1.0f.
 func (cld *CNNLossDescriptor) Weight() float32 {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[float32](objref.IDOf(cld), objc.RegisterName("weight"))
 	return _r
 }
 
 // LabelSmoothing returns the label smoothing parameter. The default value is 0.0f. This parameter is valid only for the loss functions of the following type(s): MPSCNNLossFunctionTypeSoftmaxCrossEntropy, MPSCNNLossFunctionTypeSigmoidCrossEntropy. MPSCNNLossFunctionTypeSoftmaxCrossEntropy: given labels (ground truth), it is applied in the following way: labels = labelSmoothing > 0 ? labels * (1 - labelSmoothing) + labelSmoothing / numberOfClasses : labels MPSCNNLossFunctionTypeSigmoidCrossEntropy: given labels (ground truth), it is applied in the following way: labels = labelSmoothing > 0 ? labels * (1 - labelSmoothing) + 0.5 * labelSmoothing : labels
 func (cld *CNNLossDescriptor) LabelSmoothing() float32 {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[float32](objref.IDOf(cld), objc.RegisterName("labelSmoothing"))
 	return _r
 }
 
 // NumberOfClasses returns the number of classes parameter. The default value is 1. This parameter is valid only for the loss functions of the following type(s): MPSCNNLossFunctionTypeSoftmaxCrossEntropy. Given labels (ground truth), it is applied in the following way: labels = labelSmoothing > 0 ? labels * (1 - labelSmoothing) + labelSmoothing / numberOfClasses : labels
 func (cld *CNNLossDescriptor) NumberOfClasses() int {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[int](objref.IDOf(cld), objc.RegisterName("numberOfClasses"))
 	return _r
 }
 
 // Epsilon returns the epsilon parameter. The default value is 1e-7. This parameter is valid only for the loss functions of the following type(s): MPSCNNLossTypeLog. Given predictions and labels (ground truth), it is applied in the following way: -(labels * log(predictions + epsilon)) - ((1 - labels) * log(1 - predictions + epsilon))
 func (cld *CNNLossDescriptor) Epsilon() float32 {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[float32](objref.IDOf(cld), objc.RegisterName("epsilon"))
 	return _r
 }
 
 // Delta returns the delta parameter. The default value is 1.0f. This parameter is valid only for the loss functions of the following type(s): MPSCNNLossTypeHuber. Given predictions and labels (ground truth), it is applied in the following way: if (|predictions - labels| <= delta, loss = 0.5f * predictions^2 if (|predictions - labels| >  delta, loss = 0.5 * delta^2 + delta * (|predictions - labels| - delta)
 func (cld *CNNLossDescriptor) Delta() float32 {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[float32](objref.IDOf(cld), objc.RegisterName("delta"))
 	return _r
 }

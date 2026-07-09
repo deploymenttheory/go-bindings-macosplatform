@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func captionConversionWarningAdopt(id objc.ID) *CaptionConversionWarning {
 
 // Description returns the object's -description text.
 func (ccw *CaptionConversionWarning) Description() string {
+	defer runtime.KeepAlive(ccw)
 	return rt.Description(objref.IDOf(ccw))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ccw *CaptionConversionWarning) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ccw)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ccw), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ccw *CaptionConversionWarning) IsKind(className string) bool {
+	defer runtime.KeepAlive(ccw)
 	return rt.IsKind(objref.IDOf(ccw), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ccw *CaptionConversionWarning) String() string {
+	defer runtime.KeepAlive(ccw)
 	return rt.Description(objref.IDOf(ccw))
 }
 
@@ -74,19 +81,22 @@ func NewCaptionConversionWarning() *CaptionConversionWarning {
 }
 
 // WarningType indicates the type of warning provided by the receiver.
-func (ccw *CaptionConversionWarning) WarningType() obj.Object {
+func (ccw *CaptionConversionWarning) WarningType() *foundation.String {
+	defer runtime.KeepAlive(ccw)
 	_r := objc.Send[objc.ID](objref.IDOf(ccw), objc.RegisterName("warningType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // RangeOfCaptions indicates the range of captions in the validator's captions array for which the specified warning has been issued. Only captions with the same start time and duration will be referenced. If captions with different start times and durations exhibit similar problems, a separate instance of AVCaptionConversionWarning will be used to indicate each problematic case. If the referenced captions have multiple problems, a separate instance of AVCaptionConversionWarning will be issued to indicate each problem.
 func (ccw *CaptionConversionWarning) RangeOfCaptions() foundation.NSRange {
+	defer runtime.KeepAlive(ccw)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(ccw), objc.RegisterName("rangeOfCaptions"))
 	return _r
 }
 
 // Adjustment indicates an adjustment to the indicated captions that can be applied in order to correct the problem. If the value of adjustment is not nil and the conversion operation is performed without correcting the problem, the adjustment will be applied during conversion. If the value of adjustment is nil and the conversion operation is performed without correcting the problem, the indicated captions will be omitted from the output media data.
 func (ccw *CaptionConversionWarning) Adjustment() *CaptionConversionAdjustment {
+	defer runtime.KeepAlive(ccw)
 	_r := objc.Send[objc.ID](objref.IDOf(ccw), objc.RegisterName("adjustment"))
 	return CaptionConversionAdjustmentFromID(_r)
 }

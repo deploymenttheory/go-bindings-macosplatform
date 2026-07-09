@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func metadataRangeAdopt(id objc.ID) *MetadataRange {
 
 // Description returns the object's -description text.
 func (mr *MetadataRange) Description() string {
+	defer runtime.KeepAlive(mr)
 	return rt.Description(objref.IDOf(mr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mr *MetadataRange) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mr *MetadataRange) IsKind(className string) bool {
+	defer runtime.KeepAlive(mr)
 	return rt.IsKind(objref.IDOf(mr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mr *MetadataRange) String() string {
+	defer runtime.KeepAlive(mr)
 	return rt.Description(objref.IDOf(mr))
 }
 
@@ -75,18 +82,21 @@ func NewMetadataRangeWithOffsetSegmentLengthSegmentCount(startOffset int64, segm
 
 // StartOffset returns the start offset of the range in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“.
 func (mr *MetadataRange) StartOffset() int64 {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[int64](objref.IDOf(mr), objc.RegisterName("startOffset"))
 	return _r
 }
 
 // SegmentLength returns the segment length in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“.
 func (mr *MetadataRange) SegmentLength() uint64 {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[uint64](objref.IDOf(mr), objc.RegisterName("segmentLength"))
 	return _r
 }
 
 // SegmentCount returns the number of segments in the range.
 func (mr *MetadataRange) SegmentCount() uint64 {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[uint64](objref.IDOf(mr), objc.RegisterName("segmentCount"))
 	return _r
 }

@@ -5,9 +5,13 @@
 package passkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,8 +57,8 @@ func NewRecurringPaymentSummaryItem() *RecurringPaymentSummaryItem {
 }
 
 // WithStartDate sets the date of the first payment.
-func (rpsi *RecurringPaymentSummaryItem) WithStartDate(startDate obj.Object) *RecurringPaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(rpsi), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
+func (rpsi *RecurringPaymentSummaryItem) WithStartDate(startDate time.Time) *RecurringPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(rpsi), objc.RegisterName("setStartDate:"), rt.TimeToNSDate(startDate))
 	return rpsi
 }
 
@@ -65,8 +69,8 @@ func (rpsi *RecurringPaymentSummaryItem) WithIntervalCount(intervalCount int) *R
 }
 
 // WithEndDate sets the date of the final payment.
-func (rpsi *RecurringPaymentSummaryItem) WithEndDate(endDate obj.Object) *RecurringPaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(rpsi), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
+func (rpsi *RecurringPaymentSummaryItem) WithEndDate(endDate time.Time) *RecurringPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(rpsi), objc.RegisterName("setEndDate:"), rt.TimeToNSDate(endDate))
 	return rpsi
 }
 
@@ -78,6 +82,7 @@ func (rpsi *RecurringPaymentSummaryItem) WithLabel(label string) *RecurringPayme
 
 // WithAmount sets the summary item’s amount.
 func (rpsi *RecurringPaymentSummaryItem) WithAmount(amount obj.Object) *RecurringPaymentSummaryItem {
+	defer runtime.KeepAlive(amount)
 	objc.Send[objc.ID](objref.IDOf(rpsi), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return rpsi
 }
@@ -89,21 +94,24 @@ func (rpsi *RecurringPaymentSummaryItem) WithType(type_ PaymentSummaryItemType) 
 }
 
 // StartDate returns the start date.
-func (rpsi *RecurringPaymentSummaryItem) StartDate() obj.Object {
+func (rpsi *RecurringPaymentSummaryItem) StartDate() time.Time {
+	defer runtime.KeepAlive(rpsi)
 	_r := objc.Send[objc.ID](objref.IDOf(rpsi), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // IntervalCount returns the interval count.
 func (rpsi *RecurringPaymentSummaryItem) IntervalCount() int {
+	defer runtime.KeepAlive(rpsi)
 	_r := objc.Send[int](objref.IDOf(rpsi), objc.RegisterName("intervalCount"))
 	return _r
 }
 
 // EndDate returns the end date.
-func (rpsi *RecurringPaymentSummaryItem) EndDate() obj.Object {
+func (rpsi *RecurringPaymentSummaryItem) EndDate() time.Time {
+	defer runtime.KeepAlive(rpsi)
 	_r := objc.Send[objc.ID](objref.IDOf(rpsi), objc.RegisterName("endDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 var _ PaymentSummaryItemProvider = (*RecurringPaymentSummaryItem)(nil)

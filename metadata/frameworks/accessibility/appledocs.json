@@ -390,7 +390,7 @@
       },
       "xAxis": {
         "doc": "The axis descriptor for the chart’s x-axis.",
-        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/xaxis-6dnxd"
+        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/xaxis-7sb9a"
       },
       "yAxis": {
         "doc": "The axis descriptor for the chart’s y-axis.",
@@ -488,7 +488,7 @@
       },
       "gridlinePositions": {
         "doc": "The positions of the gridlines along the axis.",
-        "url": "https://developer.apple.com/documentation/accessibility/axnumericdataaxisdescriptor/gridlinepositions-9z10e"
+        "url": "https://developer.apple.com/documentation/accessibility/axnumericdataaxisdescriptor/gridlinepositions-5cfmw"
       },
       "init(attributedTitle:range:gridlinePositions:valueDescriptionProvider:)": {
         "doc": "Creates a numeric data axis with the specified attributed title, range, gridline positions, and value description provider closure.",

@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -69,6 +71,7 @@ func (de *DOMEntity) WithTextContent(textContent string) *DOMEntity {
 
 // PublicID returns the public ID.
 func (de *DOMEntity) PublicID() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("publicId"))
 	if _r == 0 {
 		return ""
@@ -78,6 +81,7 @@ func (de *DOMEntity) PublicID() string {
 
 // SystemID returns the system ID.
 func (de *DOMEntity) SystemID() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("systemId"))
 	if _r == 0 {
 		return ""
@@ -87,6 +91,7 @@ func (de *DOMEntity) SystemID() string {
 
 // NotationName returns the notation name.
 func (de *DOMEntity) NotationName() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("notationName"))
 	if _r == 0 {
 		return ""

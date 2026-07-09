@@ -5,6 +5,7 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func metadataItemValueRequestAdopt(id objc.ID) *MetadataItemValueRequest {
 
 // Description returns the object's -description text.
 func (mivr *MetadataItemValueRequest) Description() string {
+	defer runtime.KeepAlive(mivr)
 	return rt.Description(objref.IDOf(mivr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mivr *MetadataItemValueRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mivr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mivr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mivr *MetadataItemValueRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(mivr)
 	return rt.IsKind(objref.IDOf(mivr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mivr *MetadataItemValueRequest) String() string {
+	defer runtime.KeepAlive(mivr)
 	return rt.Description(objref.IDOf(mivr))
 }
 
@@ -76,16 +82,20 @@ func NewMetadataItemValueRequest() *MetadataItemValueRequest {
 
 // RespondWithValue returns the metadata item’s value.
 func (mivr *MetadataItemValueRequest) RespondWithValue(value obj.Object) {
+	defer runtime.KeepAlive(mivr)
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(mivr), objc.RegisterName("respondWithValue:"), objref.IDOf(value))
 }
 
 // RespondWithError returns an error when the system fails to load the value.
-func (mivr *MetadataItemValueRequest) RespondWithError(error_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(mivr), objc.RegisterName("respondWithError:"), error_)
+func (mivr *MetadataItemValueRequest) RespondWithError(err unsafe.Pointer) {
+	defer runtime.KeepAlive(mivr)
+	objc.Send[objc.ID](objref.IDOf(mivr), objc.RegisterName("respondWithError:"), err)
 }
 
 // MetadataItem returns the metadata item.
 func (mivr *MetadataItemValueRequest) MetadataItem() *MetadataItem {
+	defer runtime.KeepAlive(mivr)
 	_r := objc.Send[objc.ID](objref.IDOf(mivr), objc.RegisterName("metadataItem"))
 	return MetadataItemFromID(_r)
 }

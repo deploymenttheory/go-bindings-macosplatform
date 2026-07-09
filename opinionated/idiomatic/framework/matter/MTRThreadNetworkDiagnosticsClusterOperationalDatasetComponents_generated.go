@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsAdopt(id objc
 
 // Description returns the object's -description text.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) Description() string {
+	defer runtime.KeepAlive(mtndcodc)
 	return rt.Description(objref.IDOf(mtndcodc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtndcodc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtndcodc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtndcodc)
 	return rt.IsKind(objref.IDOf(mtndcodc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) String() string {
+	defer runtime.KeepAlive(mtndcodc)
 	return rt.Description(objref.IDOf(mtndcodc))
 }
 
@@ -72,144 +80,168 @@ func NewMTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents() *MTRThr
 
 // WithActiveTimestampPresent sets the active timestamp present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithActiveTimestampPresent(activeTimestampPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
+	defer runtime.KeepAlive(activeTimestampPresent)
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setActiveTimestampPresent:"), objref.IDOf(activeTimestampPresent))
 	return mtndcodc
 }
 
 // WithPendingTimestampPresent sets the pending timestamp present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithPendingTimestampPresent(pendingTimestampPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
+	defer runtime.KeepAlive(pendingTimestampPresent)
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setPendingTimestampPresent:"), objref.IDOf(pendingTimestampPresent))
 	return mtndcodc
 }
 
 // WithMasterKeyPresent sets the master key present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithMasterKeyPresent(masterKeyPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
+	defer runtime.KeepAlive(masterKeyPresent)
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setMasterKeyPresent:"), objref.IDOf(masterKeyPresent))
 	return mtndcodc
 }
 
 // WithNetworkNamePresent sets the network name present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithNetworkNamePresent(networkNamePresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
+	defer runtime.KeepAlive(networkNamePresent)
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setNetworkNamePresent:"), objref.IDOf(networkNamePresent))
 	return mtndcodc
 }
 
 // WithExtendedPanIDPresent sets the extended pan ID present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithExtendedPanIDPresent(extendedPanIdPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
+	defer runtime.KeepAlive(extendedPanIdPresent)
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setExtendedPanIdPresent:"), objref.IDOf(extendedPanIdPresent))
 	return mtndcodc
 }
 
 // WithMeshLocalPrefixPresent sets the mesh local prefix present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithMeshLocalPrefixPresent(meshLocalPrefixPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
+	defer runtime.KeepAlive(meshLocalPrefixPresent)
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setMeshLocalPrefixPresent:"), objref.IDOf(meshLocalPrefixPresent))
 	return mtndcodc
 }
 
 // WithDelayPresent sets the delay present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithDelayPresent(delayPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
+	defer runtime.KeepAlive(delayPresent)
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setDelayPresent:"), objref.IDOf(delayPresent))
 	return mtndcodc
 }
 
 // WithPanIDPresent sets the pan ID present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithPanIDPresent(panIdPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
+	defer runtime.KeepAlive(panIdPresent)
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setPanIdPresent:"), objref.IDOf(panIdPresent))
 	return mtndcodc
 }
 
 // WithChannelPresent sets the channel present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithChannelPresent(channelPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
+	defer runtime.KeepAlive(channelPresent)
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setChannelPresent:"), objref.IDOf(channelPresent))
 	return mtndcodc
 }
 
 // WithPskcPresent sets the pskc present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithPskcPresent(pskcPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
+	defer runtime.KeepAlive(pskcPresent)
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setPskcPresent:"), objref.IDOf(pskcPresent))
 	return mtndcodc
 }
 
 // WithSecurityPolicyPresent sets the security policy present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithSecurityPolicyPresent(securityPolicyPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
+	defer runtime.KeepAlive(securityPolicyPresent)
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setSecurityPolicyPresent:"), objref.IDOf(securityPolicyPresent))
 	return mtndcodc
 }
 
 // WithChannelMaskPresent sets the channel mask present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithChannelMaskPresent(channelMaskPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
+	defer runtime.KeepAlive(channelMaskPresent)
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setChannelMaskPresent:"), objref.IDOf(channelMaskPresent))
 	return mtndcodc
 }
 
 // ActiveTimestampPresent returns the active timestamp present.
-func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) ActiveTimestampPresent() obj.Object {
+func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) ActiveTimestampPresent() *foundation.Number {
+	defer runtime.KeepAlive(mtndcodc)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("activeTimestampPresent"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // PendingTimestampPresent returns the pending timestamp present.
-func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) PendingTimestampPresent() obj.Object {
+func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) PendingTimestampPresent() *foundation.Number {
+	defer runtime.KeepAlive(mtndcodc)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("pendingTimestampPresent"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MasterKeyPresent returns the master key present.
-func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) MasterKeyPresent() obj.Object {
+func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) MasterKeyPresent() *foundation.Number {
+	defer runtime.KeepAlive(mtndcodc)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("masterKeyPresent"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NetworkNamePresent returns the network name present.
-func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) NetworkNamePresent() obj.Object {
+func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) NetworkNamePresent() *foundation.Number {
+	defer runtime.KeepAlive(mtndcodc)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("networkNamePresent"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ExtendedPanIDPresent returns the extended pan ID present.
-func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) ExtendedPanIDPresent() obj.Object {
+func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) ExtendedPanIDPresent() *foundation.Number {
+	defer runtime.KeepAlive(mtndcodc)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("extendedPanIdPresent"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MeshLocalPrefixPresent returns the mesh local prefix present.
-func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) MeshLocalPrefixPresent() obj.Object {
+func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) MeshLocalPrefixPresent() *foundation.Number {
+	defer runtime.KeepAlive(mtndcodc)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("meshLocalPrefixPresent"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DelayPresent returns the delay present.
-func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) DelayPresent() obj.Object {
+func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) DelayPresent() *foundation.Number {
+	defer runtime.KeepAlive(mtndcodc)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("delayPresent"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // PanIDPresent returns the pan ID present.
-func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) PanIDPresent() obj.Object {
+func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) PanIDPresent() *foundation.Number {
+	defer runtime.KeepAlive(mtndcodc)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("panIdPresent"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ChannelPresent returns the channel present.
-func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) ChannelPresent() obj.Object {
+func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) ChannelPresent() *foundation.Number {
+	defer runtime.KeepAlive(mtndcodc)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("channelPresent"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // PskcPresent returns the pskc present.
-func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) PskcPresent() obj.Object {
+func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) PskcPresent() *foundation.Number {
+	defer runtime.KeepAlive(mtndcodc)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("pskcPresent"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // SecurityPolicyPresent returns the security policy present.
-func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) SecurityPolicyPresent() obj.Object {
+func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) SecurityPolicyPresent() *foundation.Number {
+	defer runtime.KeepAlive(mtndcodc)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("securityPolicyPresent"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ChannelMaskPresent returns the channel mask present.
-func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) ChannelMaskPresent() obj.Object {
+func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) ChannelMaskPresent() *foundation.Number {
+	defer runtime.KeepAlive(mtndcodc)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("channelMaskPresent"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

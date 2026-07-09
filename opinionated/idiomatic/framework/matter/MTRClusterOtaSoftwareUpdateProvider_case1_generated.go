@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,8 @@ func mTRClusterOtaSoftwareUpdateProviderAdopt(id objc.ID) *MTRClusterOtaSoftware
 
 // NewMTRClusterOtaSoftwareUpdateProviderWithDeviceEndpointQueue creates a new MTRClusterOtaSoftwareUpdateProvider.
 func NewMTRClusterOtaSoftwareUpdateProviderWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterOtaSoftwareUpdateProvider {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterOtaSoftwareUpdateProvider")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterOtaSoftwareUpdateProviderAdopt(_id)
@@ -58,6 +61,9 @@ func NewMTRClusterOtaSoftwareUpdateProviderWithDeviceEndpointQueue(device *MTRDe
 //
 // QueryImageWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcosup *MTRClusterOtaSoftwareUpdateProvider) QueryImageWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROtaSoftwareUpdateProviderClusterQueryImageParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams, err error) {
+	defer runtime.KeepAlive(mcosup)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams
 		err error
@@ -83,6 +89,9 @@ func (mcosup *MTRClusterOtaSoftwareUpdateProvider) QueryImageWithParamsExpectedV
 //
 // ApplyUpdateRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcosup *MTRClusterOtaSoftwareUpdateProvider) ApplyUpdateRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams, err error) {
+	defer runtime.KeepAlive(mcosup)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams
 		err error

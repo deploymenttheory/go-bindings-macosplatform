@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func gridRowAdopt(id objc.ID) *GridRow {
 
 // Description returns the object's -description text.
 func (gr *GridRow) Description() string {
+	defer runtime.KeepAlive(gr)
 	return rt.Description(objref.IDOf(gr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gr *GridRow) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gr *GridRow) IsKind(className string) bool {
+	defer runtime.KeepAlive(gr)
 	return rt.IsKind(objref.IDOf(gr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gr *GridRow) String() string {
+	defer runtime.KeepAlive(gr)
 	return rt.Description(objref.IDOf(gr))
 }
 
@@ -129,6 +136,7 @@ func (gr *GridRow) WithHidden(hidden bool) *GridRow {
 
 // CellAtIndex wraps the corresponding Objective-C method.
 func (gr *GridRow) CellAtIndex(index int) *GridCell {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 *GridCell
 	purego.Main(func() {
 		_mainthread0 = func() *GridCell {
@@ -142,6 +150,7 @@ func (gr *GridRow) CellAtIndex(index int) *GridCell {
 
 // MergeCellsInRange wraps the corresponding Objective-C method.
 func (gr *GridRow) MergeCellsInRange(range_ foundation.NSRange) {
+	defer runtime.KeepAlive(gr)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("mergeCellsInRange:"), range_)
 	})
@@ -150,6 +159,7 @@ func (gr *GridRow) MergeCellsInRange(range_ foundation.NSRange) {
 
 // GridView returns the grid view.
 func (gr *GridRow) GridView() *GridView {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 *GridView
 	purego.Main(func() {
 		_mainthread0 = func() *GridView {
@@ -163,6 +173,7 @@ func (gr *GridRow) GridView() *GridView {
 
 // NumberOfCells returns the number of cells.
 func (gr *GridRow) NumberOfCells() int {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -176,6 +187,7 @@ func (gr *GridRow) NumberOfCells() int {
 
 // YPlacement returns the y placement.
 func (gr *GridRow) YPlacement() GridCellPlacement {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 GridCellPlacement
 	purego.Main(func() {
 		_mainthread0 = func() GridCellPlacement {
@@ -189,6 +201,7 @@ func (gr *GridRow) YPlacement() GridCellPlacement {
 
 // RowAlignment returns the row alignment.
 func (gr *GridRow) RowAlignment() GridRowAlignment {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 GridRowAlignment
 	purego.Main(func() {
 		_mainthread0 = func() GridRowAlignment {
@@ -202,6 +215,7 @@ func (gr *GridRow) RowAlignment() GridRowAlignment {
 
 // Height returns the height.
 func (gr *GridRow) Height() float64 {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -215,6 +229,7 @@ func (gr *GridRow) Height() float64 {
 
 // TopPadding returns the top padding.
 func (gr *GridRow) TopPadding() float64 {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -228,6 +243,7 @@ func (gr *GridRow) TopPadding() float64 {
 
 // BottomPadding returns the bottom padding.
 func (gr *GridRow) BottomPadding() float64 {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -241,6 +257,7 @@ func (gr *GridRow) BottomPadding() float64 {
 
 // IsHidden reports whether the object is hidden.
 func (gr *GridRow) IsHidden() bool {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

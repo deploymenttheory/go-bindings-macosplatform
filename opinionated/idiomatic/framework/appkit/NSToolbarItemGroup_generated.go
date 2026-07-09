@@ -5,10 +5,13 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -109,9 +112,9 @@ func (tig *ToolbarItemGroup) WithPaletteLabel(paletteLabel string) *ToolbarItemG
 }
 
 // WithPossibleLabels sets the set of labels that the item might display.
-func (tig *ToolbarItemGroup) WithPossibleLabels(possibleLabels obj.Object) *ToolbarItemGroup {
+func (tig *ToolbarItemGroup) WithPossibleLabels(possibleLabels []string) *ToolbarItemGroup {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(tig), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
+		objc.Send[objc.ID](objref.IDOf(tig), objc.RegisterName("setPossibleLabels:"), rt.SliceToNSSet(possibleLabels, func(_v string) objc.ID { return purego.NSString(_v) }))
 	})
 	return tig
 }
@@ -126,6 +129,7 @@ func (tig *ToolbarItemGroup) WithToolTip(toolTip string) *ToolbarItemGroup {
 
 // WithMenuFormRepresentation sets the menu item to use when the toolbar item is in the overflow menu.
 func (tig *ToolbarItemGroup) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *ToolbarItemGroup {
+	defer runtime.KeepAlive(menuFormRepresentation)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tig), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
 	})
@@ -142,6 +146,7 @@ func (tig *ToolbarItemGroup) WithTag(tag int) *ToolbarItemGroup {
 
 // WithTarget sets the object that defines the action method the toolbar item calls when clicked.
 func (tig *ToolbarItemGroup) WithTarget(target obj.Object) *ToolbarItemGroup {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tig), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -158,6 +163,7 @@ func (tig *ToolbarItemGroup) WithEnabled(enabled bool) *ToolbarItemGroup {
 
 // WithImage sets the image to display for the toolbar item.
 func (tig *ToolbarItemGroup) WithImage(image *Image) *ToolbarItemGroup {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tig), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -182,6 +188,7 @@ func (tig *ToolbarItemGroup) WithBordered(bordered bool) *ToolbarItemGroup {
 
 // WithBackgroundTintColor sets the background tint color.
 func (tig *ToolbarItemGroup) WithBackgroundTintColor(backgroundTintColor *Color) *ToolbarItemGroup {
+	defer runtime.KeepAlive(backgroundTintColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tig), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
 	})
@@ -206,6 +213,7 @@ func (tig *ToolbarItemGroup) WithNavigational(navigational bool) *ToolbarItemGro
 
 // WithView sets the custom view you use to draw the toolbar item.
 func (tig *ToolbarItemGroup) WithView(view ViewProvider) *ToolbarItemGroup {
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tig), objc.RegisterName("setView:"), objref.IDOf(view))
 	})
@@ -246,6 +254,7 @@ func (tig *ToolbarItemGroup) WithVisibilityPriority(visibilityPriority int) *Too
 
 // WithBadge sets a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (tig *ToolbarItemGroup) WithBadge(badge *ItemBadge) *ToolbarItemGroup {
+	defer runtime.KeepAlive(badge)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tig), objc.RegisterName("setBadge:"), objref.IDOf(badge))
 	})
@@ -262,6 +271,7 @@ func (tig *ToolbarItemGroup) WithAutovalidates(autovalidates bool) *ToolbarItemG
 
 // SetSelectedAtIndex sets the selected state of a subitem in a grouped toolbar item.
 func (tig *ToolbarItemGroup) SetSelectedAtIndex(selected bool, index int) {
+	defer runtime.KeepAlive(tig)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tig), objc.RegisterName("setSelected:atIndex:"), selected, index)
 	})
@@ -270,6 +280,7 @@ func (tig *ToolbarItemGroup) SetSelectedAtIndex(selected bool, index int) {
 
 // IsSelectedAtIndex indicates whether a specified index is currently selected.
 func (tig *ToolbarItemGroup) IsSelectedAtIndex(index int) bool {
+	defer runtime.KeepAlive(tig)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -285,6 +296,7 @@ func (tig *ToolbarItemGroup) IsSelectedAtIndex(index int) bool {
 //
 // Subitems returns the collection as a Go slice.
 func (tig *ToolbarItemGroup) Subitems() []*ToolbarItem {
+	defer runtime.KeepAlive(tig)
 	var _mainthread0 []*ToolbarItem
 	purego.Main(func() {
 		_mainthread0 = func() []*ToolbarItem {
@@ -297,6 +309,7 @@ func (tig *ToolbarItemGroup) Subitems() []*ToolbarItem {
 
 // ControlRepresentation returns the style in which this item will be represented to the user. Defaults to `NSToolbarItemGroupControlRepresentationAutomatic`.
 func (tig *ToolbarItemGroup) ControlRepresentation() ToolbarItemGroupControlRepresentation {
+	defer runtime.KeepAlive(tig)
 	var _mainthread0 ToolbarItemGroupControlRepresentation
 	purego.Main(func() {
 		_mainthread0 = func() ToolbarItemGroupControlRepresentation {
@@ -310,6 +323,7 @@ func (tig *ToolbarItemGroup) ControlRepresentation() ToolbarItemGroupControlRepr
 
 // SelectionMode get and set how selection is handled by the control. Only applies when using one of the constructors to create the item with a system defined control representation.
 func (tig *ToolbarItemGroup) SelectionMode() ToolbarItemGroupSelectionMode {
+	defer runtime.KeepAlive(tig)
 	var _mainthread0 ToolbarItemGroupSelectionMode
 	purego.Main(func() {
 		_mainthread0 = func() ToolbarItemGroupSelectionMode {
@@ -323,6 +337,7 @@ func (tig *ToolbarItemGroup) SelectionMode() ToolbarItemGroupSelectionMode {
 
 // SelectedIndex returns the most recently selected item of the group, or -1 if nothing is selected.
 func (tig *ToolbarItemGroup) SelectedIndex() int {
+	defer runtime.KeepAlive(tig)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {

@@ -5,6 +5,7 @@
 package pdfkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -58,6 +59,7 @@ func NewAnnotationLine() *AnnotationLine {
 
 // WithPage sets returns the page that the annotation is associated with.
 func (al *AnnotationLine) WithPage(page *Page) *AnnotationLine {
+	defer runtime.KeepAlive(page)
 	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setPage:"), objref.IDOf(page))
 	return al
 }
@@ -142,18 +144,21 @@ func (al *AnnotationLine) WithMouseUpAction(mouseUpAction unsafe.Pointer) *Annot
 
 // WithFont sets the font the annotation uses to display text.
 func (al *AnnotationLine) WithFont(font obj.Object) *AnnotationLine {
+	defer runtime.KeepAlive(font)
 	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return al
 }
 
 // WithFontColor sets the font color the annotation uses to display text.
 func (al *AnnotationLine) WithFontColor(fontColor obj.Object) *AnnotationLine {
+	defer runtime.KeepAlive(fontColor)
 	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
 	return al
 }
 
 // WithInteriorColor sets the fill color for drawing a circle, line, or square annotation.
 func (al *AnnotationLine) WithInteriorColor(interiorColor obj.Object) *AnnotationLine {
+	defer runtime.KeepAlive(interiorColor)
 	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setInteriorColor:"), objref.IDOf(interiorColor))
 	return al
 }
@@ -203,6 +208,7 @@ func (al *AnnotationLine) WithMarkupType(markupType MarkupType) *AnnotationLine 
 
 // WithWidgetFieldType sets the type of widget annotation, such as button, choice, or text.
 func (al *AnnotationLine) WithWidgetFieldType(widgetFieldType obj.Object) *AnnotationLine {
+	defer runtime.KeepAlive(widgetFieldType)
 	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setWidgetFieldType:"), objref.IDOf(widgetFieldType))
 	return al
 }
@@ -301,13 +307,14 @@ func (al *AnnotationLine) WithOpen(open bool) *AnnotationLine {
 
 // WithDestination sets the destination for a link annotation.
 func (al *AnnotationLine) WithDestination(destination *Destination) *AnnotationLine {
+	defer runtime.KeepAlive(destination)
 	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return al
 }
 
 // WithURL sets a URL for a link annotation.
-func (al *AnnotationLine) WithURL(uRL string) *AnnotationLine {
-	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (al *AnnotationLine) WithURL(url string) *AnnotationLine {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return al
 }
 
@@ -325,6 +332,7 @@ func (al *AnnotationLine) WithCaption(caption string) *AnnotationLine {
 
 // WithBackgroundColor sets the color of the widget’s background.
 func (al *AnnotationLine) WithBackgroundColor(backgroundColor obj.Object) *AnnotationLine {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return al
 }

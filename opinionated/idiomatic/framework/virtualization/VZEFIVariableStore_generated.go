@@ -5,6 +5,7 @@
 package virtualization
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,37 +51,42 @@ func eFIVariableStoreAdopt(id objc.ID) *EFIVariableStore {
 
 // Description returns the object's -description text.
 func (evs *EFIVariableStore) Description() string {
+	defer runtime.KeepAlive(evs)
 	return rt.Description(objref.IDOf(evs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (evs *EFIVariableStore) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(evs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(evs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (evs *EFIVariableStore) IsKind(className string) bool {
+	defer runtime.KeepAlive(evs)
 	return rt.IsKind(objref.IDOf(evs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (evs *EFIVariableStore) String() string {
+	defer runtime.KeepAlive(evs)
 	return rt.Description(objref.IDOf(evs))
 }
 
 // NewEFIVariableStoreWithURL initialize the variable store from the URL of an existing file.
-func NewEFIVariableStoreWithURL(uRL string) *EFIVariableStore {
+func NewEFIVariableStoreWithURL(url string) *EFIVariableStore {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZEFIVariableStore")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(uRL))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
 	return eFIVariableStoreAdopt(_id)
 }
 
-// NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError creates a new EFI variable store at specified the URL on the filesystem, initialization options, and error-return variable.
-func NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError(uRL string, options EFIVariableStoreInitializationOptions) (result *EFIVariableStore, err error) {
+// NewEFIVariableStoreCreatingVariableStoreAtURLOptions creates a new EFI variable store at specified the URL on the filesystem, initialization options, and error-return variable.
+func NewEFIVariableStoreCreatingVariableStoreAtURLOptions(url string, options EFIVariableStoreInitializationOptions) (result *EFIVariableStore, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZEFIVariableStore")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCreatingVariableStoreAtURL:options:error:"), rt.FileURL(uRL), options, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCreatingVariableStoreAtURL:options:error:"), rt.FileURL(url), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -88,7 +94,8 @@ func NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError(uRL string, optio
 }
 
 // URL returns the URL.
-func (evs *EFIVariableStore) URL() obj.Object {
+func (evs *EFIVariableStore) URL() string {
+	defer runtime.KeepAlive(evs)
 	_r := objc.Send[objc.ID](objref.IDOf(evs), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

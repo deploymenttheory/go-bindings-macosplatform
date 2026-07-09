@@ -5,7 +5,10 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func persistentStoreDescriptionAdopt(id objc.ID) *PersistentStoreDescription {
 
 // Description returns the object's -description text.
 func (psd *PersistentStoreDescription) Description() string {
+	defer runtime.KeepAlive(psd)
 	return rt.Description(objref.IDOf(psd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (psd *PersistentStoreDescription) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(psd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(psd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (psd *PersistentStoreDescription) IsKind(className string) bool {
+	defer runtime.KeepAlive(psd)
 	return rt.IsKind(objref.IDOf(psd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (psd *PersistentStoreDescription) String() string {
+	defer runtime.KeepAlive(psd)
 	return rt.Description(objref.IDOf(psd))
 }
 
@@ -86,8 +94,8 @@ func (psd *PersistentStoreDescription) WithConfiguration(configuration string) *
 }
 
 // WithURL sets the URL that the store will use for its location.
-func (psd *PersistentStoreDescription) WithURL(uRL string) *PersistentStoreDescription {
-	objc.Send[objc.ID](objref.IDOf(psd), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (psd *PersistentStoreDescription) WithURL(url string) *PersistentStoreDescription {
+	objc.Send[objc.ID](objref.IDOf(psd), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return psd
 }
 
@@ -123,22 +131,28 @@ func (psd *PersistentStoreDescription) WithShouldInferMappingModelAutomatically(
 
 // WithCloudKitContainerOptions sets options that customize how this store description aligns with a CloudKit database.
 func (psd *PersistentStoreDescription) WithCloudKitContainerOptions(cloudKitContainerOptions *PersistentCloudKitContainerOptions) *PersistentStoreDescription {
+	defer runtime.KeepAlive(cloudKitContainerOptions)
 	objc.Send[objc.ID](objref.IDOf(psd), objc.RegisterName("setCloudKitContainerOptions:"), objref.IDOf(cloudKitContainerOptions))
 	return psd
 }
 
 // SetOptionForKey sets an option on the store.
 func (psd *PersistentStoreDescription) SetOptionForKey(option obj.Object, key string) {
+	defer runtime.KeepAlive(psd)
+	defer runtime.KeepAlive(option)
 	objc.Send[objc.ID](objref.IDOf(psd), objc.RegisterName("setOption:forKey:"), objref.IDOf(option), purego.NSString(key))
 }
 
 // SetValueForPragmaNamed allows you to set pragmas for the SQLite store.
 func (psd *PersistentStoreDescription) SetValueForPragmaNamed(value obj.Object, name string) {
+	defer runtime.KeepAlive(psd)
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(psd), objc.RegisterName("setValue:forPragmaNamed:"), objref.IDOf(value), purego.NSString(name))
 }
 
 // Type returns the type.
 func (psd *PersistentStoreDescription) Type() string {
+	defer runtime.KeepAlive(psd)
 	_r := objc.Send[objc.ID](objref.IDOf(psd), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -148,6 +162,7 @@ func (psd *PersistentStoreDescription) Type() string {
 
 // Configuration returns the configuration.
 func (psd *PersistentStoreDescription) Configuration() string {
+	defer runtime.KeepAlive(psd)
 	_r := objc.Send[objc.ID](objref.IDOf(psd), objc.RegisterName("configuration"))
 	if _r == 0 {
 		return ""
@@ -156,55 +171,64 @@ func (psd *PersistentStoreDescription) Configuration() string {
 }
 
 // URL returns the URL.
-func (psd *PersistentStoreDescription) URL() obj.Object {
+func (psd *PersistentStoreDescription) URL() string {
+	defer runtime.KeepAlive(psd)
 	_r := objc.Send[objc.ID](objref.IDOf(psd), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Options returns the options.
-func (psd *PersistentStoreDescription) Options() obj.Object {
+func (psd *PersistentStoreDescription) Options() map[string]*foundation.Object {
+	defer runtime.KeepAlive(psd)
 	_r := objc.Send[objc.ID](objref.IDOf(psd), objc.RegisterName("options"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *foundation.Object { return foundation.ObjectFromID(_id) })
 }
 
 // IsReadOnly reports whether the object is read only.
 func (psd *PersistentStoreDescription) IsReadOnly() bool {
+	defer runtime.KeepAlive(psd)
 	_r := objc.Send[bool](objref.IDOf(psd), objc.RegisterName("isReadOnly"))
 	return _r
 }
 
 // Timeout returns the timeout.
 func (psd *PersistentStoreDescription) Timeout() float64 {
+	defer runtime.KeepAlive(psd)
 	_r := objc.Send[float64](objref.IDOf(psd), objc.RegisterName("timeout"))
 	return _r
 }
 
 // SqlitePragmas returns the sqlite pragmas.
-func (psd *PersistentStoreDescription) SqlitePragmas() obj.Object {
+func (psd *PersistentStoreDescription) SqlitePragmas() map[string]*foundation.Object {
+	defer runtime.KeepAlive(psd)
 	_r := objc.Send[objc.ID](objref.IDOf(psd), objc.RegisterName("sqlitePragmas"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *foundation.Object { return foundation.ObjectFromID(_id) })
 }
 
 // ShouldAddStoreAsynchronously wraps the corresponding Objective-C method.
 func (psd *PersistentStoreDescription) ShouldAddStoreAsynchronously() bool {
+	defer runtime.KeepAlive(psd)
 	_r := objc.Send[bool](objref.IDOf(psd), objc.RegisterName("shouldAddStoreAsynchronously"))
 	return _r
 }
 
 // ShouldMigrateStoreAutomatically wraps the corresponding Objective-C method.
 func (psd *PersistentStoreDescription) ShouldMigrateStoreAutomatically() bool {
+	defer runtime.KeepAlive(psd)
 	_r := objc.Send[bool](objref.IDOf(psd), objc.RegisterName("shouldMigrateStoreAutomatically"))
 	return _r
 }
 
 // ShouldInferMappingModelAutomatically wraps the corresponding Objective-C method.
 func (psd *PersistentStoreDescription) ShouldInferMappingModelAutomatically() bool {
+	defer runtime.KeepAlive(psd)
 	_r := objc.Send[bool](objref.IDOf(psd), objc.RegisterName("shouldInferMappingModelAutomatically"))
 	return _r
 }
 
 // CloudKitContainerOptions returns the cloud kit container options.
 func (psd *PersistentStoreDescription) CloudKitContainerOptions() *PersistentCloudKitContainerOptions {
+	defer runtime.KeepAlive(psd)
 	_r := objc.Send[objc.ID](objref.IDOf(psd), objc.RegisterName("cloudKitContainerOptions"))
 	return PersistentCloudKitContainerOptionsFromID(_r)
 }

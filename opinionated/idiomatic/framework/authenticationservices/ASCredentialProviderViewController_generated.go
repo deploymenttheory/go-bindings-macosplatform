@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func credentialProviderViewControllerAdopt(id objc.ID) *CredentialProviderViewCo
 
 // Description returns the object's -description text.
 func (cpvc *CredentialProviderViewController) Description() string {
+	defer runtime.KeepAlive(cpvc)
 	return rt.Description(objref.IDOf(cpvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cpvc *CredentialProviderViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cpvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cpvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cpvc *CredentialProviderViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(cpvc)
 	return rt.IsKind(objref.IDOf(cpvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cpvc *CredentialProviderViewController) String() string {
+	defer runtime.KeepAlive(cpvc)
 	return rt.Description(objref.IDOf(cpvc))
 }
 
@@ -80,6 +87,7 @@ func NewCredentialProviderViewController() *CredentialProviderViewController {
 
 // PrepareCredentialListForServiceIdentifiers prepares the interface to display a list of credentials from which the user can select.
 func (cpvc *CredentialProviderViewController) PrepareCredentialListForServiceIdentifiers(serviceIdentifiers []*CredentialServiceIdentifier) {
+	defer runtime.KeepAlive(cpvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpvc), objc.RegisterName("prepareCredentialListForServiceIdentifiers:"), purego.SliceToNSArray(serviceIdentifiers, func(_v *CredentialServiceIdentifier) objc.ID { return objref.IDOf(_v) }))
 	})
@@ -88,6 +96,8 @@ func (cpvc *CredentialProviderViewController) PrepareCredentialListForServiceIde
 
 // PrepareCredentialListForServiceIdentifiersRequestParameters prepares the interface to display a list of passkey and password credentials from which the user can select.
 func (cpvc *CredentialProviderViewController) PrepareCredentialListForServiceIdentifiersRequestParameters(serviceIdentifiers []*CredentialServiceIdentifier, requestParameters *PasskeyCredentialRequestParameters) {
+	defer runtime.KeepAlive(cpvc)
+	defer runtime.KeepAlive(requestParameters)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpvc), objc.RegisterName("prepareCredentialListForServiceIdentifiers:requestParameters:"), purego.SliceToNSArray(serviceIdentifiers, func(_v *CredentialServiceIdentifier) objc.ID { return objref.IDOf(_v) }), objref.IDOf(requestParameters))
 	})
@@ -96,6 +106,7 @@ func (cpvc *CredentialProviderViewController) PrepareCredentialListForServiceIde
 
 // PrepareOneTimeCodeCredentialListForServiceIdentifiers prepares the interface to display a list of one-time passcodes (OTPs) that people can select from.
 func (cpvc *CredentialProviderViewController) PrepareOneTimeCodeCredentialListForServiceIdentifiers(serviceIdentifiers []*CredentialServiceIdentifier) {
+	defer runtime.KeepAlive(cpvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpvc), objc.RegisterName("prepareOneTimeCodeCredentialListForServiceIdentifiers:"), purego.SliceToNSArray(serviceIdentifiers, func(_v *CredentialServiceIdentifier) objc.ID { return objref.IDOf(_v) }))
 	})
@@ -104,6 +115,8 @@ func (cpvc *CredentialProviderViewController) PrepareOneTimeCodeCredentialListFo
 
 // ProvideCredentialWithoutUserInteractionForIdentity attempts to provide the user-requested credential with no further user interaction.
 func (cpvc *CredentialProviderViewController) ProvideCredentialWithoutUserInteractionForIdentity(credentialIdentity *PasswordCredentialIdentity) {
+	defer runtime.KeepAlive(cpvc)
+	defer runtime.KeepAlive(credentialIdentity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpvc), objc.RegisterName("provideCredentialWithoutUserInteractionForIdentity:"), objref.IDOf(credentialIdentity))
 	})
@@ -112,6 +125,8 @@ func (cpvc *CredentialProviderViewController) ProvideCredentialWithoutUserIntera
 
 // PrepareInterfaceToProvideCredentialForIdentity prepares the interface for a user interaction, like a database login, that enables it to access and return the credential for the given identity.
 func (cpvc *CredentialProviderViewController) PrepareInterfaceToProvideCredentialForIdentity(credentialIdentity *PasswordCredentialIdentity) {
+	defer runtime.KeepAlive(cpvc)
+	defer runtime.KeepAlive(credentialIdentity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpvc), objc.RegisterName("prepareInterfaceToProvideCredentialForIdentity:"), objref.IDOf(credentialIdentity))
 	})
@@ -120,6 +135,7 @@ func (cpvc *CredentialProviderViewController) PrepareInterfaceToProvideCredentia
 
 // PrepareInterfaceForExtensionConfiguration prepares the interface to enable the user to configure the extension.
 func (cpvc *CredentialProviderViewController) PrepareInterfaceForExtensionConfiguration() {
+	defer runtime.KeepAlive(cpvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpvc), objc.RegisterName("prepareInterfaceForExtensionConfiguration"))
 	})
@@ -128,6 +144,8 @@ func (cpvc *CredentialProviderViewController) PrepareInterfaceForExtensionConfig
 
 // PerformPasskeyRegistrationWithoutUserInteractionIfPossible perform a conditional passkey registration, if possible.
 func (cpvc *CredentialProviderViewController) PerformPasskeyRegistrationWithoutUserInteractionIfPossible(registrationRequest *PasskeyCredentialRequest) {
+	defer runtime.KeepAlive(cpvc)
+	defer runtime.KeepAlive(registrationRequest)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpvc), objc.RegisterName("performPasskeyRegistrationWithoutUserInteractionIfPossible:"), objref.IDOf(registrationRequest))
 	})
@@ -135,31 +153,35 @@ func (cpvc *CredentialProviderViewController) PerformPasskeyRegistrationWithoutU
 }
 
 // ReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName receives a report from the system that a relying party indicated that a passkey’s user name updated.
-func (cpvc *CredentialProviderViewController) ReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName(relyingParty string, userHandle obj.Object, newName string) {
+func (cpvc *CredentialProviderViewController) ReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName(relyingParty string, userHandle []byte, newName string) {
+	defer runtime.KeepAlive(cpvc)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(cpvc), objc.RegisterName("reportPublicKeyCredentialUpdateForRelyingParty:userHandle:newName:"), purego.NSString(relyingParty), objref.IDOf(userHandle), purego.NSString(newName))
+		objc.Send[objc.ID](objref.IDOf(cpvc), objc.RegisterName("reportPublicKeyCredentialUpdateForRelyingParty:userHandle:newName:"), purego.NSString(relyingParty), rt.BytesToNSData(userHandle), purego.NSString(newName))
 	})
 
 }
 
 // ReportUnknownPublicKeyCredentialForRelyingPartyCredentialID receives a report from the system that a relying party indicated a passkey credential is invalid.
-func (cpvc *CredentialProviderViewController) ReportUnknownPublicKeyCredentialForRelyingPartyCredentialID(relyingParty string, credentialID obj.Object) {
+func (cpvc *CredentialProviderViewController) ReportUnknownPublicKeyCredentialForRelyingPartyCredentialID(relyingParty string, credentialID []byte) {
+	defer runtime.KeepAlive(cpvc)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(cpvc), objc.RegisterName("reportUnknownPublicKeyCredentialForRelyingParty:credentialID:"), purego.NSString(relyingParty), objref.IDOf(credentialID))
+		objc.Send[objc.ID](objref.IDOf(cpvc), objc.RegisterName("reportUnknownPublicKeyCredentialForRelyingParty:credentialID:"), purego.NSString(relyingParty), rt.BytesToNSData(credentialID))
 	})
 
 }
 
 // ReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs receives a report from the system that a relying party sent a snapshot of all accepted credentials for an account.
-func (cpvc *CredentialProviderViewController) ReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs(relyingParty string, userHandle obj.Object, acceptedCredentialIDs []obj.Object) {
+func (cpvc *CredentialProviderViewController) ReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs(relyingParty string, userHandle []byte, acceptedCredentialIDs [][]byte) {
+	defer runtime.KeepAlive(cpvc)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(cpvc), objc.RegisterName("reportAllAcceptedPublicKeyCredentialsForRelyingParty:userHandle:acceptedCredentialIDs:"), purego.NSString(relyingParty), objref.IDOf(userHandle), purego.SliceToNSArray(acceptedCredentialIDs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+		objc.Send[objc.ID](objref.IDOf(cpvc), objc.RegisterName("reportAllAcceptedPublicKeyCredentialsForRelyingParty:userHandle:acceptedCredentialIDs:"), purego.NSString(relyingParty), rt.BytesToNSData(userHandle), purego.SliceToNSArray(acceptedCredentialIDs, func(_v []byte) objc.ID { return rt.BytesToNSData(_v) }))
 	})
 
 }
 
 // ReportUnusedPasswordCredentialForDomainUserName receives a report from the system that a relying party indicatd that a password credential isn’t needed anymore for a given user name.
 func (cpvc *CredentialProviderViewController) ReportUnusedPasswordCredentialForDomainUserName(domain string, userName string) {
+	defer runtime.KeepAlive(cpvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpvc), objc.RegisterName("reportUnusedPasswordCredentialForDomain:userName:"), purego.NSString(domain), purego.NSString(userName))
 	})

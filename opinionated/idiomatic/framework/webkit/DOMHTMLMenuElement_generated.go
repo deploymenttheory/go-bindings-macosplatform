@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -159,6 +161,7 @@ func (dme *DOMHTMLMenuElement) WithTextContent(textContent string) *DOMHTMLMenuE
 
 // Compact wraps the corresponding Objective-C method.
 func (dme *DOMHTMLMenuElement) Compact() bool {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[bool](objref.IDOf(dme), objc.RegisterName("compact"))
 	return _r
 }

@@ -5,7 +5,10 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,53 +52,63 @@ func nEFilterFlowAdopt(id objc.ID) *NEFilterFlow {
 
 // Description returns the object's -description text.
 func (nff *NEFilterFlow) Description() string {
+	defer runtime.KeepAlive(nff)
 	return rt.Description(objref.IDOf(nff))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nff *NEFilterFlow) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nff)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nff), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nff *NEFilterFlow) IsKind(className string) bool {
+	defer runtime.KeepAlive(nff)
 	return rt.IsKind(objref.IDOf(nff), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nff *NEFilterFlow) String() string {
+	defer runtime.KeepAlive(nff)
 	return rt.Description(objref.IDOf(nff))
 }
 
 // URL returns the flow's HTTP request URL. Will be nil if the flow did not originate from WebKit.
-func (nff *NEFilterFlow) URL() obj.Object {
+func (nff *NEFilterFlow) URL() string {
+	defer runtime.KeepAlive(nff)
 	_r := objc.Send[objc.ID](objref.IDOf(nff), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Direction returns initial direction of the flow (outgoing or incoming flow)
 func (nff *NEFilterFlow) Direction() NETrafficDirection {
+	defer runtime.KeepAlive(nff)
 	_r := objc.Send[NETrafficDirection](objref.IDOf(nff), objc.RegisterName("direction"))
 	return _r
 }
 
 // SourceAppAuditToken returns audit token of the source application of the flow.
-func (nff *NEFilterFlow) SourceAppAuditToken() obj.Object {
+func (nff *NEFilterFlow) SourceAppAuditToken() []byte {
+	defer runtime.KeepAlive(nff)
 	_r := objc.Send[objc.ID](objref.IDOf(nff), objc.RegisterName("sourceAppAuditToken"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // SourceProcessAuditToken returns the audit token of the process that created the flow. In cases where the connection was created by a system process on behalf of the source application, sourceProcessAuditToken will be different from sourceAppAuditToken and will contain the audit token of the system process. In cases where the source application directly created the connection sourceAppAuditToken and sourceProcessAuditToken will be identical.
-func (nff *NEFilterFlow) SourceProcessAuditToken() obj.Object {
+func (nff *NEFilterFlow) SourceProcessAuditToken() []byte {
+	defer runtime.KeepAlive(nff)
 	_r := objc.Send[objc.ID](objref.IDOf(nff), objc.RegisterName("sourceProcessAuditToken"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Identifier returns the unique identifier of the flow.
-func (nff *NEFilterFlow) Identifier() obj.Object {
+func (nff *NEFilterFlow) Identifier() *foundation.UUID {
+	defer runtime.KeepAlive(nff)
 	_r := objc.Send[objc.ID](objref.IDOf(nff), objc.RegisterName("identifier"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // isNEFilterFlow marks NEFilterFlow — and, by embedding promotion, its

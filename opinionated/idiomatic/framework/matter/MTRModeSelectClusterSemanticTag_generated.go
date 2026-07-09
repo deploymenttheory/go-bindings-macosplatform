@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,12 +54,14 @@ func NewMTRModeSelectClusterSemanticTag() *MTRModeSelectClusterSemanticTag {
 
 // WithMfgCode sets the mfg code.
 func (mmscst *MTRModeSelectClusterSemanticTag) WithMfgCode(mfgCode obj.Object) *MTRModeSelectClusterSemanticTag {
+	defer runtime.KeepAlive(mfgCode)
 	objc.Send[objc.ID](objref.IDOf(mmscst), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return mmscst
 }
 
 // WithValue sets the value.
 func (mmscst *MTRModeSelectClusterSemanticTag) WithValue(value obj.Object) *MTRModeSelectClusterSemanticTag {
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(mmscst), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mmscst
 }

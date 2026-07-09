@@ -6,12 +6,14 @@ package shazamkit
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,6 +25,7 @@ func New() *CustomCatalog {
 
 // MediaItemWithProperties creates a media item object with a dictionary of properties and their associated values.
 func MediaItemWithProperties(properties obj.Object) *MediaItem {
+	defer runtime.KeepAlive(properties)
 	_r := objc.Send[objc.ID](objc.ID(_class("SHMediaItem")), objc.RegisterName("mediaItemWithProperties:"), objref.IDOf(properties))
 	return MediaItemFromID(_r)
 }
@@ -64,10 +67,10 @@ func RangeWithLowerBoundUpperBound(lowerBound float64, upperBound float64) *Rang
 	return RangeFromID(_r)
 }
 
-// SignatureWithDataRepresentationError creates a signature object from raw data.
-func SignatureWithDataRepresentationError(dataRepresentation obj.Object) (result *Signature, err error) {
+// SignatureWithDataRepresentation creates a signature object from raw data.
+func SignatureWithDataRepresentation(dataRepresentation []byte) (result *Signature, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("SHSignature")), objc.RegisterName("signatureWithDataRepresentation:error:"), objref.IDOf(dataRepresentation), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("SHSignature")), objc.RegisterName("signatureWithDataRepresentation:error:"), rt.BytesToNSData(dataRepresentation), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -78,6 +81,7 @@ func SignatureWithDataRepresentationError(dataRepresentation obj.Object) (result
 //
 // GenerateSignatureFromAsset blocks until the operation completes or ctx is cancelled.
 func GenerateSignatureFromAsset(ctx context.Context, asset obj.Object) (result *Signature, err error) {
+	defer runtime.KeepAlive(asset)
 	type _result struct {
 		val *Signature
 		err error

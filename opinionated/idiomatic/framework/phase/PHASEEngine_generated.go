@@ -5,6 +5,7 @@
 package phase
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func engineAdopt(id objc.ID) *Engine {
 
 // Description returns the object's -description text.
 func (e *Engine) Description() string {
+	defer runtime.KeepAlive(e)
 	return rt.Description(objref.IDOf(e))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (e *Engine) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(e)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(e), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (e *Engine) IsKind(className string) bool {
+	defer runtime.KeepAlive(e)
 	return rt.IsKind(objref.IDOf(e), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (e *Engine) String() string {
+	defer runtime.KeepAlive(e)
 	return rt.Description(objref.IDOf(e))
 }
 
@@ -84,6 +90,7 @@ func (e *Engine) WithOutputSpatializationMode(outputSpatializationMode Spatializ
 
 // WithDefaultMedium sets the physical matter through which sound travels.
 func (e *Engine) WithDefaultMedium(defaultMedium *Medium) *Engine {
+	defer runtime.KeepAlive(defaultMedium)
 	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setDefaultMedium:"), objref.IDOf(defaultMedium))
 	return e
 }
@@ -110,6 +117,7 @@ func (e *Engine) WithUnitsPerMeter(unitsPerMeter float64) *Engine {
 //
 // StartAndReturnError returns an error if the operation did not succeed.
 func (e *Engine) StartAndReturnError() error {
+	defer runtime.KeepAlive(e)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(e), objc.RegisterName("startAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -120,63 +128,74 @@ func (e *Engine) StartAndReturnError() error {
 
 // Pause pauses all audio playback.
 func (e *Engine) Pause() {
+	defer runtime.KeepAlive(e)
 	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("pause"))
 }
 
 // Stop stops all audio playback.
 func (e *Engine) Stop() {
+	defer runtime.KeepAlive(e)
 	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("stop"))
 }
 
 // Update processes app commands and increments framework processing.
 func (e *Engine) Update() {
+	defer runtime.KeepAlive(e)
 	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("update"))
 }
 
 // OutputSpatializationMode returns when set to a value other than PHASESpatializationModeAutomatic, overrides the default output spatializer and uses the specified one instead.
 func (e *Engine) OutputSpatializationMode() SpatializationMode {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[SpatializationMode](objref.IDOf(e), objc.RegisterName("outputSpatializationMode"))
 	return _r
 }
 
 // RenderingState returns the engine's current rendering state.
 func (e *Engine) RenderingState() RenderingState {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[RenderingState](objref.IDOf(e), objc.RegisterName("renderingState"))
 	return _r
 }
 
 // RootObject returns the root object of the engine's scene graph. Attach objects to the engine's rootObject or one of its children to make them active within the engine's scene graph. This will ensure they take part in the simulation.
 func (e *Engine) RootObject() *Object {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("rootObject"))
 	return ObjectFromID(_r)
 }
 
 // DefaultMedium returns the default medium in the engine. The default value is PHASEMediumPresetAir.
 func (e *Engine) DefaultMedium() *Medium {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("defaultMedium"))
 	return MediumFromID(_r)
 }
 
 // DefaultReverbPreset returns the default reverb preset in the engine. The default value is PHASEReverbPresetNone.
 func (e *Engine) DefaultReverbPreset() ReverbPreset {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[ReverbPreset](objref.IDOf(e), objc.RegisterName("defaultReverbPreset"))
 	return _r
 }
 
 // UnitsPerSecond returns the number of units in a second. The unitsPerSecond is used internally to scale time/duration values passed to the API. This allows clients to pass time/duration values in their own native time scale.
 func (e *Engine) UnitsPerSecond() float64 {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("unitsPerSecond"))
 	return _r
 }
 
 // UnitsPerMeter returns the number of units in a meter. The unitsPerMeter is used internally to scale metric values passed to the API. This allows clients to pass metric values in their own native spatial scale.
 func (e *Engine) UnitsPerMeter() float64 {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("unitsPerMeter"))
 	return _r
 }
 
 // AssetRegistry returns a registry for assets available to the engine
 func (e *Engine) AssetRegistry() *AssetRegistry {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("assetRegistry"))
 	return AssetRegistryFromID(_r)
 }
@@ -185,32 +204,37 @@ func (e *Engine) AssetRegistry() *AssetRegistry {
 //
 // SoundEvents returns the collection as a Go slice.
 func (e *Engine) SoundEvents() []*SoundEvent {
+	defer runtime.KeepAlive(e)
 	_arr := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("soundEvents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SoundEvent { return SoundEventFromID(_id) })
 }
 
 // Groups returns a dictionary of the groups in the system Returns a dictionary of the groups at the time it is retrieved.
-func (e *Engine) Groups() obj.Object {
+func (e *Engine) Groups() map[string]*Group {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("groups"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *Group { return GroupFromID(_id) })
 }
 
 // Duckers returns an array of the ducker objects in the system Returns a dictionary of the ducker objects at the time it is retrieved.
 //
 // Duckers returns the collection as a Go slice.
 func (e *Engine) Duckers() []*Ducker {
+	defer runtime.KeepAlive(e)
 	_arr := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("duckers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Ducker { return DuckerFromID(_id) })
 }
 
 // ActiveGroupPreset returns the active group mixer preset in the system Returns nil if there are no active group presets in the engine. Activate or Deactivate the preset via [PHASEGroupPreset activate] and [PHASEGroupPreset deactivate]
 func (e *Engine) ActiveGroupPreset() *GroupPreset {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("activeGroupPreset"))
 	return GroupPresetFromID(_r)
 }
 
 // LastRenderTime returns obtain the time for which the engine most recently rendered. Will return nil if the engine is not running
 func (e *Engine) LastRenderTime() obj.Object {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("lastRenderTime"))
 	return obj.Wrap(_r)
 }

@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (al *ActivationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Acti
 
 // Descriptor returns the activation descriptor
 func (al *ActivationLayer) Descriptor() *ActivationDescriptor {
+	defer runtime.KeepAlive(al)
 	_r := objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("descriptor"))
 	return ActivationDescriptorFromID(_r)
 }

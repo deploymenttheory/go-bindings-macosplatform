@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventAdopt(id ob
 
 // Description returns the object's -description text.
 func (mepmcmpre *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) Description() string {
+	defer runtime.KeepAlive(mepmcmpre)
 	return rt.Description(objref.IDOf(mepmcmpre))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mepmcmpre *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mepmcmpre)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mepmcmpre), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mepmcmpre *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mepmcmpre)
 	return rt.IsKind(objref.IDOf(mepmcmpre), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mepmcmpre *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) String() string {
+	defer runtime.KeepAlive(mepmcmpre)
 	return rt.Description(objref.IDOf(mepmcmpre))
 }
 
@@ -72,11 +79,14 @@ func NewMTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent() *MTRE
 
 // Ranges returns the ranges.
 func (mepmcmpre *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) Ranges() obj.Object {
+	defer runtime.KeepAlive(mepmcmpre)
 	_r := objc.Send[objc.ID](objref.IDOf(mepmcmpre), objc.RegisterName("ranges"))
 	return obj.Wrap(_r)
 }
 
 // SetRanges wraps the corresponding Objective-C method.
 func (mepmcmpre *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) SetRanges(ranges obj.Object) {
+	defer runtime.KeepAlive(mepmcmpre)
+	defer runtime.KeepAlive(ranges)
 	objc.Send[objc.ID](objref.IDOf(mepmcmpre), objc.RegisterName("setRanges:"), objref.IDOf(ranges))
 }

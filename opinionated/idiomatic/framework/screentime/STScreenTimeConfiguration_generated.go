@@ -5,6 +5,8 @@
 package screentime
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func screenTimeConfigurationAdopt(id objc.ID) *ScreenTimeConfiguration {
 
 // Description returns the object's -description text.
 func (stc *ScreenTimeConfiguration) Description() string {
+	defer runtime.KeepAlive(stc)
 	return rt.Description(objref.IDOf(stc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (stc *ScreenTimeConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(stc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(stc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (stc *ScreenTimeConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(stc)
 	return rt.IsKind(objref.IDOf(stc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (stc *ScreenTimeConfiguration) String() string {
+	defer runtime.KeepAlive(stc)
 	return rt.Description(objref.IDOf(stc))
 }
 
@@ -74,6 +81,7 @@ func NewScreenTimeConfiguration() *ScreenTimeConfiguration {
 
 // EnforcesChildRestrictions reports whether a Boolean that indicates whether the device is currently enforcing child restrictions.
 func (stc *ScreenTimeConfiguration) EnforcesChildRestrictions() bool {
+	defer runtime.KeepAlive(stc)
 	_r := objc.Send[bool](objref.IDOf(stc), objc.RegisterName("enforcesChildRestrictions"))
 	return _r
 }

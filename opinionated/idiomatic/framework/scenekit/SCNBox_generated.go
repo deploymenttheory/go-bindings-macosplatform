@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -114,6 +116,7 @@ func (b *Box) WithMaterials(items ...*Material) *Box {
 
 // WithFirstMaterial sets the first material attached to the geometry.
 func (b *Box) WithFirstMaterial(firstMaterial *Material) *Box {
+	defer runtime.KeepAlive(firstMaterial)
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return b
 }
@@ -127,6 +130,7 @@ func (b *Box) WithLevelsOfDetail(items ...*LevelOfDetail) *Box {
 
 // WithTessellator sets the tessellator.
 func (b *Box) WithTessellator(tessellator *GeometryTessellator) *Box {
+	defer runtime.KeepAlive(tessellator)
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return b
 }
@@ -145,60 +149,70 @@ func (b *Box) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Box {
 
 // WithEdgeCreasesElement sets the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 func (b *Box) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Box {
+	defer runtime.KeepAlive(edgeCreasesElement)
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return b
 }
 
 // WithEdgeCreasesSource sets the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 func (b *Box) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Box {
+	defer runtime.KeepAlive(edgeCreasesSource)
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return b
 }
 
 // Width returns the width of the box. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (b *Box) Width() float64 {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("width"))
 	return _r
 }
 
 // Height returns the height of the box. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (b *Box) Height() float64 {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("height"))
 	return _r
 }
 
 // Length returns the length of the box. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (b *Box) Length() float64 {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("length"))
 	return _r
 }
 
 // ChamferRadius returns the chamfer radius. Animatable. If the value is strictly less than 0, the geometry is empty. The default value is 0.
 func (b *Box) ChamferRadius() float64 {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("chamferRadius"))
 	return _r
 }
 
 // WidthSegmentCount returns the number of subdivisions along the X axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (b *Box) WidthSegmentCount() int {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("widthSegmentCount"))
 	return _r
 }
 
 // HeightSegmentCount returns the number of subdivisions along the Y axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (b *Box) HeightSegmentCount() int {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("heightSegmentCount"))
 	return _r
 }
 
 // LengthSegmentCount returns the number of subdivisions along the Z axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (b *Box) LengthSegmentCount() int {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("lengthSegmentCount"))
 	return _r
 }
 
 // ChamferSegmentCount returns the number of chamfer subdivisions. Animatable. If the value is less than 1, the behavior is undefined. The default value is 10.
 func (b *Box) ChamferSegmentCount() int {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("chamferSegmentCount"))
 	return _r
 }

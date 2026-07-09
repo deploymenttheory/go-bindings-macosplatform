@@ -5,6 +5,7 @@
 package mailkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func outgoingMessageEncodingStatusAdopt(id objc.ID) *OutgoingMessageEncodingStat
 
 // Description returns the object's -description text.
 func (omes *OutgoingMessageEncodingStatus) Description() string {
+	defer runtime.KeepAlive(omes)
 	return rt.Description(objref.IDOf(omes))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (omes *OutgoingMessageEncodingStatus) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(omes)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(omes), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (omes *OutgoingMessageEncodingStatus) IsKind(className string) bool {
+	defer runtime.KeepAlive(omes)
 	return rt.IsKind(objref.IDOf(omes), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (omes *OutgoingMessageEncodingStatus) String() string {
+	defer runtime.KeepAlive(omes)
 	return rt.Description(objref.IDOf(omes))
 }
 
@@ -77,12 +83,14 @@ func NewOutgoingMessageEncodingStatusWithCanSignCanEncryptSecurityErrorAddresses
 
 // CanSign reports whether the message can be signed.
 func (omes *OutgoingMessageEncodingStatus) CanSign() bool {
+	defer runtime.KeepAlive(omes)
 	_r := objc.Send[bool](objref.IDOf(omes), objc.RegisterName("canSign"))
 	return _r
 }
 
 // CanEncrypt reports whether the message can be encrypted.
 func (omes *OutgoingMessageEncodingStatus) CanEncrypt() bool {
+	defer runtime.KeepAlive(omes)
 	_r := objc.Send[bool](objref.IDOf(omes), objc.RegisterName("canEncrypt"))
 	return _r
 }
@@ -91,6 +99,7 @@ func (omes *OutgoingMessageEncodingStatus) CanEncrypt() bool {
 //
 // AddressesFailingEncryption returns the collection as a Go slice.
 func (omes *OutgoingMessageEncodingStatus) AddressesFailingEncryption() []*EmailAddress {
+	defer runtime.KeepAlive(omes)
 	_arr := objc.Send[objc.ID](objref.IDOf(omes), objc.RegisterName("addressesFailingEncryption"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }

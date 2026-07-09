@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func physicsContactAdopt(id objc.ID) *PhysicsContact {
 
 // Description returns the object's -description text.
 func (pc *PhysicsContact) Description() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pc *PhysicsContact) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pc *PhysicsContact) IsKind(className string) bool {
+	defer runtime.KeepAlive(pc)
 	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pc *PhysicsContact) String() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
@@ -75,30 +82,35 @@ func NewPhysicsContact() *PhysicsContact {
 
 // BodyA returns the body a.
 func (pc *PhysicsContact) BodyA() *PhysicsBody {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("bodyA"))
 	return PhysicsBodyFromID(_r)
 }
 
 // BodyB returns the body b.
 func (pc *PhysicsContact) BodyB() *PhysicsBody {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)
 }
 
 // ContactPoint returns the contact point.
 func (pc *PhysicsContact) ContactPoint() corefoundation.CGPoint {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(pc), objc.RegisterName("contactPoint"))
 	return _r
 }
 
 // ContactNormal returns the contact normal.
 func (pc *PhysicsContact) ContactNormal() corefoundation.CGVector {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[corefoundation.CGVector](objref.IDOf(pc), objc.RegisterName("contactNormal"))
 	return _r
 }
 
 // CollisionImpulse returns the collision impulse.
 func (pc *PhysicsContact) CollisionImpulse() float64 {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[float64](objref.IDOf(pc), objc.RegisterName("collisionImpulse"))
 	return _r
 }

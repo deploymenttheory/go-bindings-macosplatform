@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,12 +67,14 @@ func (qssq *QuantitySeriesSampleQuery) WithOrderByQuantitySampleStartDate(orderB
 
 // IncludeSample reports whether include owning HKQuantitySample in quantityHandler handler. Default value is false. If includeSample is set then the quantitySample parameter of quantityHandler will be non-nil anytime the quantity parameter is non-nil. Specifying this option has a performance cost. This property may not be modified once the query has been executed.
 func (qssq *QuantitySeriesSampleQuery) IncludeSample() bool {
+	defer runtime.KeepAlive(qssq)
 	_r := objc.Send[bool](objref.IDOf(qssq), objc.RegisterName("includeSample"))
 	return _r
 }
 
 // OrderByQuantitySampleStartDate reports whether order enumerated results first by quantitySample.startDate, then by the quantity's dateInterval.startDate. Default value is false. All quantities owned by a given quantitySample will be enumerated before any quantities owned by any other quantity sample, and the quantity samples will be enumerated in their startDate order. Note that individual quantities may not be returned in their dateInterval.startDate order if more than one quantitySample overlap in time. This property may not be modified once the query has been executed.
 func (qssq *QuantitySeriesSampleQuery) OrderByQuantitySampleStartDate() bool {
+	defer runtime.KeepAlive(qssq)
 	_r := objc.Send[bool](objref.IDOf(qssq), objc.RegisterName("orderByQuantitySampleStartDate"))
 	return _r
 }

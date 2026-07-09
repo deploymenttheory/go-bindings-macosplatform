@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,6 +62,7 @@ func (ifofsi *InstantFundsOutFeeSummaryItem) WithLabel(label string) *InstantFun
 
 // WithAmount sets the summary item’s amount.
 func (ifofsi *InstantFundsOutFeeSummaryItem) WithAmount(amount obj.Object) *InstantFundsOutFeeSummaryItem {
+	defer runtime.KeepAlive(amount)
 	objc.Send[objc.ID](objref.IDOf(ifofsi), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return ifofsi
 }

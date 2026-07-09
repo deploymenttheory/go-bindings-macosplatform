@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,12 +53,14 @@ func NewDOMFileList() *DOMFileList {
 
 // Item wraps the corresponding Objective-C method.
 func (dfl *DOMFileList) Item(index int) *DOMFile {
+	defer runtime.KeepAlive(dfl)
 	_r := objc.Send[objc.ID](objref.IDOf(dfl), objc.RegisterName("item:"), index)
 	return DOMFileFromID(_r)
 }
 
 // Length returns the length.
 func (dfl *DOMFileList) Length() int {
+	defer runtime.KeepAlive(dfl)
 	_r := objc.Send[int](objref.IDOf(dfl), objc.RegisterName("length"))
 	return _r
 }

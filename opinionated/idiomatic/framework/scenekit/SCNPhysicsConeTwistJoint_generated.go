@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -82,42 +84,49 @@ func (pctj *PhysicsConeTwistJoint) WithMaximumTwistAngle(maximumTwistAngle float
 
 // BodyA returns the body a.
 func (pctj *PhysicsConeTwistJoint) BodyA() *PhysicsBody {
+	defer runtime.KeepAlive(pctj)
 	_r := objc.Send[objc.ID](objref.IDOf(pctj), objc.RegisterName("bodyA"))
 	return PhysicsBodyFromID(_r)
 }
 
 // FrameA returns the frame a.
 func (pctj *PhysicsConeTwistJoint) FrameA() quartzcore.CATransform3D {
+	defer runtime.KeepAlive(pctj)
 	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(pctj), objc.RegisterName("frameA"))
 	return _r
 }
 
 // BodyB returns the body b.
 func (pctj *PhysicsConeTwistJoint) BodyB() *PhysicsBody {
+	defer runtime.KeepAlive(pctj)
 	_r := objc.Send[objc.ID](objref.IDOf(pctj), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)
 }
 
 // FrameB returns the frame b.
 func (pctj *PhysicsConeTwistJoint) FrameB() quartzcore.CATransform3D {
+	defer runtime.KeepAlive(pctj)
 	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(pctj), objc.RegisterName("frameB"))
 	return _r
 }
 
 // MaximumAngularLimit1 returns the maximum angular limit1.
 func (pctj *PhysicsConeTwistJoint) MaximumAngularLimit1() float64 {
+	defer runtime.KeepAlive(pctj)
 	_r := objc.Send[float64](objref.IDOf(pctj), objc.RegisterName("maximumAngularLimit1"))
 	return _r
 }
 
 // MaximumAngularLimit2 returns the maximum angular limit2.
 func (pctj *PhysicsConeTwistJoint) MaximumAngularLimit2() float64 {
+	defer runtime.KeepAlive(pctj)
 	_r := objc.Send[float64](objref.IDOf(pctj), objc.RegisterName("maximumAngularLimit2"))
 	return _r
 }
 
 // MaximumTwistAngle returns the maximum twist angle.
 func (pctj *PhysicsConeTwistJoint) MaximumTwistAngle() float64 {
+	defer runtime.KeepAlive(pctj)
 	_r := objc.Send[float64](objref.IDOf(pctj), objc.RegisterName("maximumTwistAngle"))
 	return _r
 }

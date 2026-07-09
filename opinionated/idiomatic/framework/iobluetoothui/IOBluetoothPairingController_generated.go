@@ -5,6 +5,8 @@
 package iobluetoothui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func bluetoothPairingControllerAdopt(id objc.ID) *BluetoothPairingController {
 
 // Description returns the object's -description text.
 func (bpc *BluetoothPairingController) Description() string {
+	defer runtime.KeepAlive(bpc)
 	return rt.Description(objref.IDOf(bpc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bpc *BluetoothPairingController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bpc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bpc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bpc *BluetoothPairingController) IsKind(className string) bool {
+	defer runtime.KeepAlive(bpc)
 	return rt.IsKind(objref.IDOf(bpc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bpc *BluetoothPairingController) String() string {
+	defer runtime.KeepAlive(bpc)
 	return rt.Description(objref.IDOf(bpc))
 }
 
@@ -80,6 +87,7 @@ func NewBluetoothPairingController() *BluetoothPairingController {
 
 // RunModal returns runs the pairing panel in a modal session to allow the user to select a Bluetooth device.
 func (bpc *BluetoothPairingController) RunModal() int {
+	defer runtime.KeepAlive(bpc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -93,6 +101,7 @@ func (bpc *BluetoothPairingController) RunModal() int {
 
 // Results returns an NSArray of the devices that were paired.
 func (bpc *BluetoothPairingController) Results() obj.Object {
+	defer runtime.KeepAlive(bpc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -106,6 +115,7 @@ func (bpc *BluetoothPairingController) Results() obj.Object {
 
 // SetOptions sets the option bits that control the panel’s behavior.
 func (bpc *BluetoothPairingController) SetOptions(options uint32) {
+	defer runtime.KeepAlive(bpc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpc), objc.RegisterName("setOptions:"), options)
 	})
@@ -114,6 +124,7 @@ func (bpc *BluetoothPairingController) SetOptions(options uint32) {
 
 // Options returns the option bits that control the panel’s behavior.
 func (bpc *BluetoothPairingController) Options() uint32 {
+	defer runtime.KeepAlive(bpc)
 	var _mainthread0 uint32
 	purego.Main(func() {
 		_mainthread0 = func() uint32 {
@@ -127,6 +138,8 @@ func (bpc *BluetoothPairingController) Options() uint32 {
 
 // AddAllowedUUID adds a UUID to the list of UUIDs that are used to validate the user’s selection.
 func (bpc *BluetoothPairingController) AddAllowedUUID(allowedUUID obj.Object) {
+	defer runtime.KeepAlive(bpc)
+	defer runtime.KeepAlive(allowedUUID)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpc), objc.RegisterName("addAllowedUUID:"), objref.IDOf(allowedUUID))
 	})
@@ -135,6 +148,8 @@ func (bpc *BluetoothPairingController) AddAllowedUUID(allowedUUID obj.Object) {
 
 // AddAllowedUUIDArray adds an array of UUIDs to the list of UUIDs that are used to validate the user’s selection.
 func (bpc *BluetoothPairingController) AddAllowedUUIDArray(allowedUUIDArray obj.Object) {
+	defer runtime.KeepAlive(bpc)
+	defer runtime.KeepAlive(allowedUUIDArray)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpc), objc.RegisterName("addAllowedUUIDArray:"), objref.IDOf(allowedUUIDArray))
 	})
@@ -143,6 +158,7 @@ func (bpc *BluetoothPairingController) AddAllowedUUIDArray(allowedUUIDArray obj.
 
 // ClearAllowedUUIDs resets the controller back to the default state where it will accept any device the user selects.
 func (bpc *BluetoothPairingController) ClearAllowedUUIDs() {
+	defer runtime.KeepAlive(bpc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpc), objc.RegisterName("clearAllowedUUIDs"))
 	})
@@ -151,6 +167,7 @@ func (bpc *BluetoothPairingController) ClearAllowedUUIDs() {
 
 // SetTitle sets the title of the panel when not run as a sheet.
 func (bpc *BluetoothPairingController) SetTitle(windowTitle string) {
+	defer runtime.KeepAlive(bpc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpc), objc.RegisterName("setTitle:"), purego.NSString(windowTitle))
 	})
@@ -159,6 +176,7 @@ func (bpc *BluetoothPairingController) SetTitle(windowTitle string) {
 
 // Title returns the title of the device selector panel.
 func (bpc *BluetoothPairingController) Title() string {
+	defer runtime.KeepAlive(bpc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -175,6 +193,7 @@ func (bpc *BluetoothPairingController) Title() string {
 
 // SetDescriptionText sets the description text that appears in the device selector panel.
 func (bpc *BluetoothPairingController) SetDescriptionText(descriptionText string) {
+	defer runtime.KeepAlive(bpc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpc), objc.RegisterName("setDescriptionText:"), purego.NSString(descriptionText))
 	})
@@ -183,6 +202,7 @@ func (bpc *BluetoothPairingController) SetDescriptionText(descriptionText string
 
 // DescriptionText returns the description text that appears in the device selector panel.
 func (bpc *BluetoothPairingController) DescriptionText() string {
+	defer runtime.KeepAlive(bpc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -199,6 +219,7 @@ func (bpc *BluetoothPairingController) DescriptionText() string {
 
 // SetPrompt sets the title of the default/select button in the device selector panel.
 func (bpc *BluetoothPairingController) SetPrompt(prompt string) {
+	defer runtime.KeepAlive(bpc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpc), objc.RegisterName("setPrompt:"), purego.NSString(prompt))
 	})
@@ -207,6 +228,7 @@ func (bpc *BluetoothPairingController) SetPrompt(prompt string) {
 
 // Prompt returns the title of the default/select button in the device selector panel.
 func (bpc *BluetoothPairingController) Prompt() string {
+	defer runtime.KeepAlive(bpc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

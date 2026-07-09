@@ -8,35 +8,26 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrUnknown matches the SystemExtensions error OSSystemExtensionErrorUnknown.
-var ErrUnknown = errkit.New("OSSystemExtensionErrorDomain", 1)
-
-// ErrMissingEntitlement matches the SystemExtensions error OSSystemExtensionErrorMissingEntitlement.
-var ErrMissingEntitlement = errkit.New("OSSystemExtensionErrorDomain", 2)
-
-// ErrUnsupportedParentBundleLocation matches the SystemExtensions error OSSystemExtensionErrorUnsupportedParentBundleLocation.
-var ErrUnsupportedParentBundleLocation = errkit.New("OSSystemExtensionErrorDomain", 3)
-
-// ErrExtensionNotFound matches the SystemExtensions error OSSystemExtensionErrorExtensionNotFound.
-var ErrExtensionNotFound = errkit.New("OSSystemExtensionErrorDomain", 4)
-
-// ErrExtensionMissingIdentifier matches the SystemExtensions error OSSystemExtensionErrorExtensionMissingIdentifier.
-var ErrExtensionMissingIdentifier = errkit.New("OSSystemExtensionErrorDomain", 5)
-
-// ErrDuplicateExtensionIdentifer matches the SystemExtensions error OSSystemExtensionErrorDuplicateExtensionIdentifer.
-var ErrDuplicateExtensionIdentifer = errkit.New("OSSystemExtensionErrorDomain", 6)
-
-// ErrUnknownExtensionCategory matches the SystemExtensions error OSSystemExtensionErrorUnknownExtensionCategory.
-var ErrUnknownExtensionCategory = errkit.New("OSSystemExtensionErrorDomain", 7)
+// ErrAuthorizationRequired matches the SystemExtensions error OSSystemExtensionErrorAuthorizationRequired.
+var ErrAuthorizationRequired = errkit.New("OSSystemExtensionErrorDomain", 13)
 
 // ErrCodeSignatureInvalid matches the SystemExtensions error OSSystemExtensionErrorCodeSignatureInvalid.
 var ErrCodeSignatureInvalid = errkit.New("OSSystemExtensionErrorDomain", 8)
 
-// ErrValidationFailed matches the SystemExtensions error OSSystemExtensionErrorValidationFailed.
-var ErrValidationFailed = errkit.New("OSSystemExtensionErrorDomain", 9)
+// ErrDuplicateExtensionIdentifer matches the SystemExtensions error OSSystemExtensionErrorDuplicateExtensionIdentifer.
+var ErrDuplicateExtensionIdentifer = errkit.New("OSSystemExtensionErrorDomain", 6)
+
+// ErrExtensionMissingIdentifier matches the SystemExtensions error OSSystemExtensionErrorExtensionMissingIdentifier.
+var ErrExtensionMissingIdentifier = errkit.New("OSSystemExtensionErrorDomain", 5)
+
+// ErrExtensionNotFound matches the SystemExtensions error OSSystemExtensionErrorExtensionNotFound.
+var ErrExtensionNotFound = errkit.New("OSSystemExtensionErrorDomain", 4)
 
 // ErrForbiddenBySystemPolicy matches the SystemExtensions error OSSystemExtensionErrorForbiddenBySystemPolicy.
 var ErrForbiddenBySystemPolicy = errkit.New("OSSystemExtensionErrorDomain", 10)
+
+// ErrMissingEntitlement matches the SystemExtensions error OSSystemExtensionErrorMissingEntitlement.
+var ErrMissingEntitlement = errkit.New("OSSystemExtensionErrorDomain", 2)
 
 // ErrRequestCanceled matches the SystemExtensions error OSSystemExtensionErrorRequestCanceled.
 var ErrRequestCanceled = errkit.New("OSSystemExtensionErrorDomain", 11)
@@ -44,5 +35,14 @@ var ErrRequestCanceled = errkit.New("OSSystemExtensionErrorDomain", 11)
 // ErrRequestSuperseded matches the SystemExtensions error OSSystemExtensionErrorRequestSuperseded.
 var ErrRequestSuperseded = errkit.New("OSSystemExtensionErrorDomain", 12)
 
-// ErrAuthorizationRequired matches the SystemExtensions error OSSystemExtensionErrorAuthorizationRequired.
-var ErrAuthorizationRequired = errkit.New("OSSystemExtensionErrorDomain", 13)
+// ErrUnknown matches the SystemExtensions error OSSystemExtensionErrorUnknown.
+var ErrUnknown = errkit.New("OSSystemExtensionErrorDomain", 1)
+
+// ErrUnknownExtensionCategory matches the SystemExtensions error OSSystemExtensionErrorUnknownExtensionCategory.
+var ErrUnknownExtensionCategory = errkit.New("OSSystemExtensionErrorDomain", 7)
+
+// ErrUnsupportedParentBundleLocation matches the SystemExtensions error OSSystemExtensionErrorUnsupportedParentBundleLocation.
+var ErrUnsupportedParentBundleLocation = errkit.New("OSSystemExtensionErrorDomain", 3)
+
+// ErrValidationFailed matches the SystemExtensions error OSSystemExtensionErrorValidationFailed.
+var ErrValidationFailed = errkit.New("OSSystemExtensionErrorDomain", 9)

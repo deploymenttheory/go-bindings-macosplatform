@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func sendMessageAttachmentAdopt(id objc.ID) *SendMessageAttachment {
 
 // Description returns the object's -description text.
 func (sma *SendMessageAttachment) Description() string {
+	defer runtime.KeepAlive(sma)
 	return rt.Description(objref.IDOf(sma))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sma *SendMessageAttachment) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sma)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sma), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sma *SendMessageAttachment) IsKind(className string) bool {
+	defer runtime.KeepAlive(sma)
 	return rt.IsKind(objref.IDOf(sma), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sma *SendMessageAttachment) String() string {
+	defer runtime.KeepAlive(sma)
 	return rt.Description(objref.IDOf(sma))
 }
 
@@ -74,6 +81,7 @@ func NewSendMessageAttachment() *SendMessageAttachment {
 
 // AudioMessageFile returns the audio message file.
 func (sma *SendMessageAttachment) AudioMessageFile() *File {
+	defer runtime.KeepAlive(sma)
 	_r := objc.Send[objc.ID](objref.IDOf(sma), objc.RegisterName("audioMessageFile"))
 	return FileFromID(_r)
 }

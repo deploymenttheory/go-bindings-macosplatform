@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -114,24 +116,28 @@ func (mfcg *MatrixFullyConnectedGradient) WithLabel(label string) *MatrixFullyCo
 
 // SourceNumberOfFeatureVectors returns the number of input vectors which make up the input array. This is equivalent to the number of rows in both the input matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
 func (mfcg *MatrixFullyConnectedGradient) SourceNumberOfFeatureVectors() int {
+	defer runtime.KeepAlive(mfcg)
 	_r := objc.Send[int](objref.IDOf(mfcg), objc.RegisterName("sourceNumberOfFeatureVectors"))
 	return _r
 }
 
 // SourceOutputFeatureChannels returns the number of feature channels in the output of the forward fully connected layer. This is equivalent to the number of columns in both the weight matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
 func (mfcg *MatrixFullyConnectedGradient) SourceOutputFeatureChannels() int {
+	defer runtime.KeepAlive(mfcg)
 	_r := objc.Send[int](objref.IDOf(mfcg), objc.RegisterName("sourceOutputFeatureChannels"))
 	return _r
 }
 
 // SourceInputFeatureChannels returns the number of feature channels in the input to the forward fully connected layer. This is equivalent to the number of columns in the input matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
 func (mfcg *MatrixFullyConnectedGradient) SourceInputFeatureChannels() int {
+	defer runtime.KeepAlive(mfcg)
 	_r := objc.Send[int](objref.IDOf(mfcg), objc.RegisterName("sourceInputFeatureChannels"))
 	return _r
 }
 
 // Alpha returns scale factor to apply to the product.  This value should be equal to the corresponding value in the forward fully connected kernel.
 func (mfcg *MatrixFullyConnectedGradient) Alpha() float64 {
+	defer runtime.KeepAlive(mfcg)
 	_r := objc.Send[float64](objref.IDOf(mfcg), objc.RegisterName("alpha"))
 	return _r
 }

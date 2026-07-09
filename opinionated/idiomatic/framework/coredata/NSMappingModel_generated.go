@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mappingModelAdopt(id objc.ID) *MappingModel {
 
 // Description returns the object's -description text.
 func (mm *MappingModel) Description() string {
+	defer runtime.KeepAlive(mm)
 	return rt.Description(objref.IDOf(mm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mm *MappingModel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mm *MappingModel) IsKind(className string) bool {
+	defer runtime.KeepAlive(mm)
 	return rt.IsKind(objref.IDOf(mm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mm *MappingModel) String() string {
+	defer runtime.KeepAlive(mm)
 	return rt.Description(objref.IDOf(mm))
 }
 
@@ -84,12 +91,14 @@ func (mm *MappingModel) WithEntityMappings(items ...*EntityMapping) *MappingMode
 //
 // EntityMappings returns the collection as a Go slice.
 func (mm *MappingModel) EntityMappings() []*EntityMapping {
+	defer runtime.KeepAlive(mm)
 	_arr := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("entityMappings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EntityMapping { return EntityMappingFromID(_id) })
 }
 
 // EntityMappingsByName returns the entity mappings by name.
-func (mm *MappingModel) EntityMappingsByName() obj.Object {
+func (mm *MappingModel) EntityMappingsByName() map[string]*EntityMapping {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("entityMappingsByName"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *EntityMapping { return EntityMappingFromID(_id) })
 }

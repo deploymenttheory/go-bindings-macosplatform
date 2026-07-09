@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRMessagesClusterMessagePresentedEventAdopt(id objc.ID) *MTRMessagesCluste
 
 // Description returns the object's -description text.
 func (mmcmpe *MTRMessagesClusterMessagePresentedEvent) Description() string {
+	defer runtime.KeepAlive(mmcmpe)
 	return rt.Description(objref.IDOf(mmcmpe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmcmpe *MTRMessagesClusterMessagePresentedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmcmpe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmcmpe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmcmpe *MTRMessagesClusterMessagePresentedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmcmpe)
 	return rt.IsKind(objref.IDOf(mmcmpe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmcmpe *MTRMessagesClusterMessagePresentedEvent) String() string {
+	defer runtime.KeepAlive(mmcmpe)
 	return rt.Description(objref.IDOf(mmcmpe))
 }
 
@@ -71,13 +78,14 @@ func NewMTRMessagesClusterMessagePresentedEvent() *MTRMessagesClusterMessagePres
 }
 
 // WithMessageID sets the message ID.
-func (mmcmpe *MTRMessagesClusterMessagePresentedEvent) WithMessageID(messageID obj.Object) *MTRMessagesClusterMessagePresentedEvent {
-	objc.Send[objc.ID](objref.IDOf(mmcmpe), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
+func (mmcmpe *MTRMessagesClusterMessagePresentedEvent) WithMessageID(messageID []byte) *MTRMessagesClusterMessagePresentedEvent {
+	objc.Send[objc.ID](objref.IDOf(mmcmpe), objc.RegisterName("setMessageID:"), rt.BytesToNSData(messageID))
 	return mmcmpe
 }
 
 // MessageID returns the message ID.
-func (mmcmpe *MTRMessagesClusterMessagePresentedEvent) MessageID() obj.Object {
+func (mmcmpe *MTRMessagesClusterMessagePresentedEvent) MessageID() []byte {
+	defer runtime.KeepAlive(mmcmpe)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmpe), objc.RegisterName("messageID"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

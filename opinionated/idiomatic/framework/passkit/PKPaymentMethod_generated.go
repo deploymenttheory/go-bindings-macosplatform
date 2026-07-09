@@ -5,7 +5,10 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func paymentMethodAdopt(id objc.ID) *PaymentMethod {
 
 // Description returns the object's -description text.
 func (pm *PaymentMethod) Description() string {
+	defer runtime.KeepAlive(pm)
 	return rt.Description(objref.IDOf(pm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pm *PaymentMethod) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pm *PaymentMethod) IsKind(className string) bool {
+	defer runtime.KeepAlive(pm)
 	return rt.IsKind(objref.IDOf(pm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pm *PaymentMethod) String() string {
+	defer runtime.KeepAlive(pm)
 	return rt.Description(objref.IDOf(pm))
 }
 
@@ -74,6 +82,7 @@ func NewPaymentMethod() *PaymentMethod {
 
 // DisplayName returns the display name.
 func (pm *PaymentMethod) DisplayName() string {
+	defer runtime.KeepAlive(pm)
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
@@ -82,31 +91,36 @@ func (pm *PaymentMethod) DisplayName() string {
 }
 
 // Network returns the network.
-func (pm *PaymentMethod) Network() obj.Object {
+func (pm *PaymentMethod) Network() *foundation.String {
+	defer runtime.KeepAlive(pm)
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("network"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Type returns the type.
 func (pm *PaymentMethod) Type() PaymentMethodType {
+	defer runtime.KeepAlive(pm)
 	_r := objc.Send[PaymentMethodType](objref.IDOf(pm), objc.RegisterName("type"))
 	return _r
 }
 
 // PaymentPass returns the payment pass.
 func (pm *PaymentMethod) PaymentPass() *PaymentPass {
+	defer runtime.KeepAlive(pm)
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("paymentPass"))
 	return PaymentPassFromID(_r)
 }
 
 // SecureElementPass returns the secure element pass.
 func (pm *PaymentMethod) SecureElementPass() *SecureElementPass {
+	defer runtime.KeepAlive(pm)
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("secureElementPass"))
 	return SecureElementPassFromID(_r)
 }
 
 // BillingAddress returns the billing address.
 func (pm *PaymentMethod) BillingAddress() obj.Object {
+	defer runtime.KeepAlive(pm)
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("billingAddress"))
 	return obj.Wrap(_r)
 }

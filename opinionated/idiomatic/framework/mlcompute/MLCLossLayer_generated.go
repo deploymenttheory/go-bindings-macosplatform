@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,12 +61,14 @@ func (ll *LossLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *LossLayer 
 
 // Descriptor returns the loss descriptor
 func (ll *LossLayer) Descriptor() *LossDescriptor {
+	defer runtime.KeepAlive(ll)
 	_r := objc.Send[objc.ID](objref.IDOf(ll), objc.RegisterName("descriptor"))
 	return LossDescriptorFromID(_r)
 }
 
 // Weights returns the loss label weights tensor
 func (ll *LossLayer) Weights() *Tensor {
+	defer runtime.KeepAlive(ll)
 	_r := objc.Send[objc.ID](objref.IDOf(ll), objc.RegisterName("weights"))
 	return TensorFromID(_r)
 }

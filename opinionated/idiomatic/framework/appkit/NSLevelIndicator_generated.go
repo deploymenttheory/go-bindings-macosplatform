@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -134,6 +136,7 @@ func (li *LevelIndicator) WithNumberOfMajorTickMarks(numberOfMajorTickMarks int)
 
 // WithFillColor sets sets the fill color used by Continuous and Discrete Capacity indicators when drawing the “normal” state, and by the rating indicator when drawing stars.
 func (li *LevelIndicator) WithFillColor(fillColor *Color) *LevelIndicator {
+	defer runtime.KeepAlive(fillColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 	})
@@ -142,6 +145,7 @@ func (li *LevelIndicator) WithFillColor(fillColor *Color) *LevelIndicator {
 
 // WithWarningFillColor sets sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the “warning” threshold.
 func (li *LevelIndicator) WithWarningFillColor(warningFillColor *Color) *LevelIndicator {
+	defer runtime.KeepAlive(warningFillColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWarningFillColor:"), objref.IDOf(warningFillColor))
 	})
@@ -150,6 +154,7 @@ func (li *LevelIndicator) WithWarningFillColor(warningFillColor *Color) *LevelIn
 
 // WithCriticalFillColor sets sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the “critical” threshold.
 func (li *LevelIndicator) WithCriticalFillColor(criticalFillColor *Color) *LevelIndicator {
+	defer runtime.KeepAlive(criticalFillColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCriticalFillColor:"), objref.IDOf(criticalFillColor))
 	})
@@ -174,6 +179,7 @@ func (li *LevelIndicator) WithPlaceholderVisibility(placeholderVisibility LevelI
 
 // WithRatingImage sets sets the image used by the rating indicator style in place of the default star image.
 func (li *LevelIndicator) WithRatingImage(ratingImage *Image) *LevelIndicator {
+	defer runtime.KeepAlive(ratingImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setRatingImage:"), objref.IDOf(ratingImage))
 	})
@@ -182,6 +188,7 @@ func (li *LevelIndicator) WithRatingImage(ratingImage *Image) *LevelIndicator {
 
 // WithRatingPlaceholderImage sets sets the image used by the rating indicator style in place of the default faded placeholder image.
 func (li *LevelIndicator) WithRatingPlaceholderImage(ratingPlaceholderImage *Image) *LevelIndicator {
+	defer runtime.KeepAlive(ratingPlaceholderImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setRatingPlaceholderImage:"), objref.IDOf(ratingPlaceholderImage))
 	})
@@ -190,6 +197,7 @@ func (li *LevelIndicator) WithRatingPlaceholderImage(ratingPlaceholderImage *Ima
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (li *LevelIndicator) WithTarget(target obj.Object) *LevelIndicator {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -254,6 +262,7 @@ func (li *LevelIndicator) WithControlSize(controlSize ControlSize) *LevelIndicat
 
 // WithFormatter sets the receiver’s formatter.
 func (li *LevelIndicator) WithFormatter(formatter obj.Object) *LevelIndicator {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -262,6 +271,7 @@ func (li *LevelIndicator) WithFormatter(formatter obj.Object) *LevelIndicator {
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (li *LevelIndicator) WithObjectValue(objectValue obj.Object) *LevelIndicator {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -278,6 +288,7 @@ func (li *LevelIndicator) WithStringValue(stringValue string) *LevelIndicator {
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (li *LevelIndicator) WithAttributedStringValue(attributedStringValue obj.Object) *LevelIndicator {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -318,6 +329,7 @@ func (li *LevelIndicator) WithDoubleValue(doubleValue float64) *LevelIndicator {
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (li *LevelIndicator) WithFont(font *Font) *LevelIndicator {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -366,6 +378,7 @@ func (li *LevelIndicator) WithAllowsExpansionToolTips(allowsExpansionToolTips bo
 
 // WithCell sets the cell.
 func (li *LevelIndicator) WithCell(cell CellProvider) *LevelIndicator {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -511,6 +524,7 @@ func (li *LevelIndicator) WithWantsLayer(wantsLayer bool) *LevelIndicator {
 
 // WithLayer sets the layer.
 func (li *LevelIndicator) WithLayer(layer obj.Object) *LevelIndicator {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -560,6 +574,7 @@ func (li *LevelIndicator) WithBackgroundFilters(items ...obj.Object) *LevelIndic
 
 // WithCompositingFilter sets the compositing filter.
 func (li *LevelIndicator) WithCompositingFilter(compositingFilter obj.Object) *LevelIndicator {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -577,6 +592,7 @@ func (li *LevelIndicator) WithContentFilters(items ...obj.Object) *LevelIndicato
 
 // WithShadow sets the shadow.
 func (li *LevelIndicator) WithShadow(shadow *Shadow) *LevelIndicator {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -625,6 +641,7 @@ func (li *LevelIndicator) WithPreparedContentRect(preparedContentRect corefounda
 
 // WithNextKeyView sets the next key view.
 func (li *LevelIndicator) WithNextKeyView(nextKeyView ViewProvider) *LevelIndicator {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -674,6 +691,7 @@ func (li *LevelIndicator) WithPrefersCompactControlSizeMetrics(prefersCompactCon
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (li *LevelIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *LevelIndicator {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -730,6 +748,7 @@ func (li *LevelIndicator) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtend
 
 // WithPressureConfiguration sets the pressure configuration.
 func (li *LevelIndicator) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *LevelIndicator {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -738,6 +757,7 @@ func (li *LevelIndicator) WithPressureConfiguration(pressureConfiguration *Press
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (li *LevelIndicator) WithNextResponder(nextResponder ResponderProvider) *LevelIndicator {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -746,6 +766,7 @@ func (li *LevelIndicator) WithNextResponder(nextResponder ResponderProvider) *Le
 
 // WithMenu sets returns the responder’s menu.
 func (li *LevelIndicator) WithMenu(menu *Menu) *LevelIndicator {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -754,6 +775,7 @@ func (li *LevelIndicator) WithMenu(menu *Menu) *LevelIndicator {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (li *LevelIndicator) WithUserActivity(userActivity obj.Object) *LevelIndicator {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -762,6 +784,7 @@ func (li *LevelIndicator) WithUserActivity(userActivity obj.Object) *LevelIndica
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (li *LevelIndicator) WithTouchBar(touchBar *TouchBar) *LevelIndicator {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -770,6 +793,7 @@ func (li *LevelIndicator) WithTouchBar(touchBar *TouchBar) *LevelIndicator {
 
 // TickMarkValueAtIndex returns the receiver’s value represented by the tick mark at the specified index (the minimum-value tick mark has an index of 0).
 func (li *LevelIndicator) TickMarkValueAtIndex(index int) float64 {
+	defer runtime.KeepAlive(li)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -783,6 +807,7 @@ func (li *LevelIndicator) TickMarkValueAtIndex(index int) float64 {
 
 // RectOfTickMarkAtIndex returns the bounding rectangle of the tick mark identified by the specified index (the minimum-value tick mark is at index 0).
 func (li *LevelIndicator) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
+	defer runtime.KeepAlive(li)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -796,6 +821,7 @@ func (li *LevelIndicator) RectOfTickMarkAtIndex(index int) corefoundation.CGRect
 
 // LevelIndicatorStyle returns the level indicator style.
 func (li *LevelIndicator) LevelIndicatorStyle() LevelIndicatorStyle {
+	defer runtime.KeepAlive(li)
 	var _mainthread0 LevelIndicatorStyle
 	purego.Main(func() {
 		_mainthread0 = func() LevelIndicatorStyle {
@@ -809,6 +835,7 @@ func (li *LevelIndicator) LevelIndicatorStyle() LevelIndicatorStyle {
 
 // IsEditable reports whether the object is editable.
 func (li *LevelIndicator) IsEditable() bool {
+	defer runtime.KeepAlive(li)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -822,6 +849,7 @@ func (li *LevelIndicator) IsEditable() bool {
 
 // MinValue returns the min value.
 func (li *LevelIndicator) MinValue() float64 {
+	defer runtime.KeepAlive(li)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -835,6 +863,7 @@ func (li *LevelIndicator) MinValue() float64 {
 
 // MaxValue returns the max value.
 func (li *LevelIndicator) MaxValue() float64 {
+	defer runtime.KeepAlive(li)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -848,6 +877,7 @@ func (li *LevelIndicator) MaxValue() float64 {
 
 // WarningValue returns the warning value.
 func (li *LevelIndicator) WarningValue() float64 {
+	defer runtime.KeepAlive(li)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -861,6 +891,7 @@ func (li *LevelIndicator) WarningValue() float64 {
 
 // CriticalValue returns the critical value.
 func (li *LevelIndicator) CriticalValue() float64 {
+	defer runtime.KeepAlive(li)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -874,6 +905,7 @@ func (li *LevelIndicator) CriticalValue() float64 {
 
 // TickMarkPosition returns the tick mark position.
 func (li *LevelIndicator) TickMarkPosition() TickMarkPosition {
+	defer runtime.KeepAlive(li)
 	var _mainthread0 TickMarkPosition
 	purego.Main(func() {
 		_mainthread0 = func() TickMarkPosition {
@@ -887,6 +919,7 @@ func (li *LevelIndicator) TickMarkPosition() TickMarkPosition {
 
 // NumberOfTickMarks returns the number of tick marks.
 func (li *LevelIndicator) NumberOfTickMarks() int {
+	defer runtime.KeepAlive(li)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -900,6 +933,7 @@ func (li *LevelIndicator) NumberOfTickMarks() int {
 
 // NumberOfMajorTickMarks returns the number of major tick marks.
 func (li *LevelIndicator) NumberOfMajorTickMarks() int {
+	defer runtime.KeepAlive(li)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -913,6 +947,7 @@ func (li *LevelIndicator) NumberOfMajorTickMarks() int {
 
 // FillColor sets the fill color used by Continuous and Discrete Capacity indicators when drawing the "normal" state, and by the rating indicator when drawing stars. The default value is a system-defined color which may vary between level indicator styles and OS releases.
 func (li *LevelIndicator) FillColor() *Color {
+	defer runtime.KeepAlive(li)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -926,6 +961,7 @@ func (li *LevelIndicator) FillColor() *Color {
 
 // WarningFillColor sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "warning" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
 func (li *LevelIndicator) WarningFillColor() *Color {
+	defer runtime.KeepAlive(li)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -939,6 +975,7 @@ func (li *LevelIndicator) WarningFillColor() *Color {
 
 // CriticalFillColor sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "critical" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
 func (li *LevelIndicator) CriticalFillColor() *Color {
+	defer runtime.KeepAlive(li)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -952,6 +989,7 @@ func (li *LevelIndicator) CriticalFillColor() *Color {
 
 // DrawsTieredCapacityLevels wraps the corresponding Objective-C method.
 func (li *LevelIndicator) DrawsTieredCapacityLevels() bool {
+	defer runtime.KeepAlive(li)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -965,6 +1003,7 @@ func (li *LevelIndicator) DrawsTieredCapacityLevels() bool {
 
 // PlaceholderVisibility returns for a rating-style indicator, sets the conditions under which rating placeholders are displayed. This property currently has no effect for other indicator styles. The default value is `NSLevelIndicatorPlaceholderVisibilityAutomatic`.
 func (li *LevelIndicator) PlaceholderVisibility() LevelIndicatorPlaceholderVisibility {
+	defer runtime.KeepAlive(li)
 	var _mainthread0 LevelIndicatorPlaceholderVisibility
 	purego.Main(func() {
 		_mainthread0 = func() LevelIndicatorPlaceholderVisibility {
@@ -978,6 +1017,7 @@ func (li *LevelIndicator) PlaceholderVisibility() LevelIndicatorPlaceholderVisib
 
 // RatingImage sets the image used by the rating indicator style in place of the default star image. The default value is `nil`.
 func (li *LevelIndicator) RatingImage() *Image {
+	defer runtime.KeepAlive(li)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {
@@ -991,6 +1031,7 @@ func (li *LevelIndicator) RatingImage() *Image {
 
 // RatingPlaceholderImage returns the rating placeholder image.
 func (li *LevelIndicator) RatingPlaceholderImage() *Image {
+	defer runtime.KeepAlive(li)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {

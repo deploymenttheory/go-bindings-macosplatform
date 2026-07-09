@@ -5,9 +5,11 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,19 +50,22 @@ func persistentStoreAsynchronousResultAdopt(id objc.ID) *PersistentStoreAsynchro
 
 // Cancel cancels the asynchronous fetch request.
 func (psar *PersistentStoreAsynchronousResult) Cancel() {
+	defer runtime.KeepAlive(psar)
 	objc.Send[objc.ID](objref.IDOf(psar), objc.RegisterName("cancel"))
 }
 
 // ManagedObjectContext returns the managed object context.
 func (psar *PersistentStoreAsynchronousResult) ManagedObjectContext() *ManagedObjectContext {
+	defer runtime.KeepAlive(psar)
 	_r := objc.Send[objc.ID](objref.IDOf(psar), objc.RegisterName("managedObjectContext"))
 	return ManagedObjectContextFromID(_r)
 }
 
 // Progress returns the progress.
-func (psar *PersistentStoreAsynchronousResult) Progress() obj.Object {
+func (psar *PersistentStoreAsynchronousResult) Progress() *foundation.Progress {
+	defer runtime.KeepAlive(psar)
 	_r := objc.Send[objc.ID](objref.IDOf(psar), objc.RegisterName("progress"))
-	return obj.Wrap(_r)
+	return foundation.ProgressFromID(_r)
 }
 
 // isPersistentStoreAsynchronousResult marks PersistentStoreAsynchronousResult — and, by embedding promotion, its

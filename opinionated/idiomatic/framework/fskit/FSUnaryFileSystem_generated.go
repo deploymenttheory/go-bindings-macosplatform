@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func unaryFileSystemAdopt(id objc.ID) *UnaryFileSystem {
 
 // Description returns the object's -description text.
 func (ufs *UnaryFileSystem) Description() string {
+	defer runtime.KeepAlive(ufs)
 	return rt.Description(objref.IDOf(ufs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ufs *UnaryFileSystem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ufs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ufs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ufs *UnaryFileSystem) IsKind(className string) bool {
+	defer runtime.KeepAlive(ufs)
 	return rt.IsKind(objref.IDOf(ufs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ufs *UnaryFileSystem) String() string {
+	defer runtime.KeepAlive(ufs)
 	return rt.Description(objref.IDOf(ufs))
 }
 

@@ -5,10 +5,12 @@
 package coremidi
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func cISessionAdopt(id objc.ID) *CISession {
 
 // Description returns the object's -description text.
 func (cs *CISession) Description() string {
+	defer runtime.KeepAlive(cs)
 	return rt.Description(objref.IDOf(cs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cs *CISession) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cs *CISession) IsKind(className string) bool {
+	defer runtime.KeepAlive(cs)
 	return rt.IsKind(objref.IDOf(cs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cs *CISession) String() string {
+	defer runtime.KeepAlive(cs)
 	return rt.Description(objref.IDOf(cs))
 }
 
@@ -77,12 +84,15 @@ func NewCISession() *CISession {
 
 // ProfileStateForChannel returns the profile state for the specified MIDI channel number.
 func (cs *CISession) ProfileStateForChannel(channel uint8) *CIProfileState {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("profileStateForChannel:"), channel)
 	return CIProfileStateFromID(_r)
 }
 
 // EnableProfileOnChannel performs an asynchronous request to enable a profile for a specific MIDI channel number.
 func (cs *CISession) EnableProfileOnChannel(profile *CIProfile, channel uint8) error {
+	defer runtime.KeepAlive(cs)
+	defer runtime.KeepAlive(profile)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(cs), objc.RegisterName("enableProfile:onChannel:error:"), objref.IDOf(profile), channel, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -93,6 +103,8 @@ func (cs *CISession) EnableProfileOnChannel(profile *CIProfile, channel uint8) e
 
 // DisableProfileOnChannel performs an asynchronous request to disable a profile for a specific MIDI channel number.
 func (cs *CISession) DisableProfileOnChannel(profile *CIProfile, channel uint8) error {
+	defer runtime.KeepAlive(cs)
+	defer runtime.KeepAlive(profile)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(cs), objc.RegisterName("disableProfile:onChannel:error:"), objref.IDOf(profile), channel, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -102,43 +114,51 @@ func (cs *CISession) DisableProfileOnChannel(profile *CIProfile, channel uint8) 
 }
 
 // SendProfileOnChannelProfileData sends profile-specific data to the MIDI-CI session.
-func (cs *CISession) SendProfileOnChannelProfileData(profile *CIProfile, channel uint8, profileSpecificData obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(cs), objc.RegisterName("sendProfile:onChannel:profileData:"), objref.IDOf(profile), channel, objref.IDOf(profileSpecificData))
+func (cs *CISession) SendProfileOnChannelProfileData(profile *CIProfile, channel uint8, profileSpecificData []byte) bool {
+	defer runtime.KeepAlive(cs)
+	defer runtime.KeepAlive(profile)
+	_r := objc.Send[bool](objref.IDOf(cs), objc.RegisterName("sendProfile:onChannel:profileData:"), objref.IDOf(profile), channel, rt.BytesToNSData(profileSpecificData))
 	return _r
 }
 
 // MidiDestination returns the midi destination.
 func (cs *CISession) MidiDestination() int {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[int](objref.IDOf(cs), objc.RegisterName("midiDestination"))
 	return _r
 }
 
 // SupportsProfileCapability wraps the corresponding Objective-C method.
 func (cs *CISession) SupportsProfileCapability() bool {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[bool](objref.IDOf(cs), objc.RegisterName("supportsProfileCapability"))
 	return _r
 }
 
 // SupportsPropertyCapability wraps the corresponding Objective-C method.
 func (cs *CISession) SupportsPropertyCapability() bool {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[bool](objref.IDOf(cs), objc.RegisterName("supportsPropertyCapability"))
 	return _r
 }
 
 // DeviceInfo returns the device info.
 func (cs *CISession) DeviceInfo() *CIDeviceInfo {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("deviceInfo"))
 	return CIDeviceInfoFromID(_r)
 }
 
 // MaxSysExSize returns the max sys ex size.
-func (cs *CISession) MaxSysExSize() obj.Object {
+func (cs *CISession) MaxSysExSize() *foundation.Number {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("maxSysExSize"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MaxPropertyRequests returns the max property requests.
-func (cs *CISession) MaxPropertyRequests() obj.Object {
+func (cs *CISession) MaxPropertyRequests() *foundation.Number {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("maxPropertyRequests"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

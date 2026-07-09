@@ -96,9 +96,9 @@ func (o *STWebpageController) URL() *foundation.NSURL {
 	return _mainthread0
 }
 
-func (o *STWebpageController) SetURL(uRL *foundation.NSURL) {
+func (o *STWebpageController) SetURL(url *foundation.NSURL) {
 	purego.Main(func() {
-		o.Ptr().Send(_sTWebpageControllerSelSetURL, uRL.Ptr())
+		o.Ptr().Send(_sTWebpageControllerSelSetURL, url.Ptr())
 	})
 }
 
@@ -114,9 +114,9 @@ func (o *STWebpageController) URLIsPlayingVideo() bool {
 	return _mainthread0
 }
 
-func (o *STWebpageController) SetURLIsPlayingVideo(uRLIsPlayingVideo bool) {
+func (o *STWebpageController) SetURLIsPlayingVideo(urlisPlayingVideo bool) {
 	purego.Main(func() {
-		o.Ptr().Send(_sTWebpageControllerSelSetURLIsPlayingVideo, uRLIsPlayingVideo)
+		o.Ptr().Send(_sTWebpageControllerSelSetURLIsPlayingVideo, urlisPlayingVideo)
 	})
 }
 
@@ -132,9 +132,9 @@ func (o *STWebpageController) URLIsPictureInPicture() bool {
 	return _mainthread0
 }
 
-func (o *STWebpageController) SetURLIsPictureInPicture(uRLIsPictureInPicture bool) {
+func (o *STWebpageController) SetURLIsPictureInPicture(urlisPictureInPicture bool) {
 	purego.Main(func() {
-		o.Ptr().Send(_sTWebpageControllerSelSetURLIsPictureInPicture, uRLIsPictureInPicture)
+		o.Ptr().Send(_sTWebpageControllerSelSetURLIsPictureInPicture, urlisPictureInPicture)
 	})
 }
 

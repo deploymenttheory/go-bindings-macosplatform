@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -71,18 +73,21 @@ func (ain *AudioInputNode) WithVoiceProcessingInputMuted(voiceProcessingInputMut
 
 // IsVoiceProcessingBypassed reports whether bypass all processing for microphone uplink done by the voice processing unit. Querying this property when voice processing is disabled will return false.
 func (ain *AudioInputNode) IsVoiceProcessingBypassed() bool {
+	defer runtime.KeepAlive(ain)
 	_r := objc.Send[bool](objref.IDOf(ain), objc.RegisterName("isVoiceProcessingBypassed"))
 	return _r
 }
 
 // IsVoiceProcessingAGCEnabled reports whether enable automatic gain control on the processed microphone uplink. signal. Enabled by default. Querying this property when voice processing is disabled will return false.
 func (ain *AudioInputNode) IsVoiceProcessingAGCEnabled() bool {
+	defer runtime.KeepAlive(ain)
 	_r := objc.Send[bool](objref.IDOf(ain), objc.RegisterName("isVoiceProcessingAGCEnabled"))
 	return _r
 }
 
 // IsVoiceProcessingInputMuted reports whether mutes the input of the voice processing unit. Querying this property when voice processing is disabled will return false.
 func (ain *AudioInputNode) IsVoiceProcessingInputMuted() bool {
+	defer runtime.KeepAlive(ain)
 	_r := objc.Send[bool](objref.IDOf(ain), objc.RegisterName("isVoiceProcessingInputMuted"))
 	return _r
 }

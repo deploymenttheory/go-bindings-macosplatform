@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +51,27 @@ func conditionLockAdopt(id objc.ID) *ConditionLock {
 
 // Description returns the object's -description text.
 func (cl *ConditionLock) Description() string {
+	defer runtime.KeepAlive(cl)
 	return rt.Description(objref.IDOf(cl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cl *ConditionLock) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cl *ConditionLock) IsKind(className string) bool {
+	defer runtime.KeepAlive(cl)
 	return rt.IsKind(objref.IDOf(cl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cl *ConditionLock) String() string {
+	defer runtime.KeepAlive(cl)
 	return rt.Description(objref.IDOf(cl))
 }
 
@@ -77,6 +84,7 @@ func NewConditionLockWithCondition(condition int) *ConditionLock {
 
 // WithName sets the name associated with the receiver.
 func (cl *ConditionLock) WithName(name StringProvider) *ConditionLock {
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("setName:"), objref.IDOf(name))
 	return cl
 }
@@ -88,53 +96,61 @@ func (cl *ConditionLock) WithObservationInfo(observationInfo unsafe.Pointer) *Co
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (cl *ConditionLock) WithScriptingProperties(scriptingProperties obj.Object) *ConditionLock {
-	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (cl *ConditionLock) WithScriptingProperties(scriptingProperties map[string]obj.Object) *ConditionLock {
+	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return cl
 }
 
 // LockWhenCondition attempts to acquire a lock.
 func (cl *ConditionLock) LockWhenCondition(condition int) {
+	defer runtime.KeepAlive(cl)
 	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("lockWhenCondition:"), condition)
 }
 
 // TryLock reports whether attempts to acquire a lock without regard to the receiver’s condition.
 func (cl *ConditionLock) TryLock() bool {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[bool](objref.IDOf(cl), objc.RegisterName("tryLock"))
 	return _r
 }
 
 // TryLockWhenCondition attempts to acquire a lock if the receiver’s condition is equal to the specified condition.
 func (cl *ConditionLock) TryLockWhenCondition(condition int) bool {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[bool](objref.IDOf(cl), objc.RegisterName("tryLockWhenCondition:"), condition)
 	return _r
 }
 
 // UnlockWithCondition relinquishes the lock and sets the receiver’s condition.
 func (cl *ConditionLock) UnlockWithCondition(condition int) {
+	defer runtime.KeepAlive(cl)
 	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("unlockWithCondition:"), condition)
 }
 
 // LockBeforeDate attempts to acquire a lock before a specified moment in time.
-func (cl *ConditionLock) LockBeforeDate(limit *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(cl), objc.RegisterName("lockBeforeDate:"), objref.IDOf(limit))
+func (cl *ConditionLock) LockBeforeDate(limit time.Time) bool {
+	defer runtime.KeepAlive(cl)
+	_r := objc.Send[bool](objref.IDOf(cl), objc.RegisterName("lockBeforeDate:"), rt.TimeToNSDate(limit))
 	return _r
 }
 
 // LockWhenConditionBeforeDate attempts to acquire a lock before a specified moment in time.
-func (cl *ConditionLock) LockWhenConditionBeforeDate(condition int, limit *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(cl), objc.RegisterName("lockWhenCondition:beforeDate:"), condition, objref.IDOf(limit))
+func (cl *ConditionLock) LockWhenConditionBeforeDate(condition int, limit time.Time) bool {
+	defer runtime.KeepAlive(cl)
+	_r := objc.Send[bool](objref.IDOf(cl), objc.RegisterName("lockWhenCondition:beforeDate:"), condition, rt.TimeToNSDate(limit))
 	return _r
 }
 
 // Condition returns the condition.
 func (cl *ConditionLock) Condition() int {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[int](objref.IDOf(cl), objc.RegisterName("condition"))
 	return _r
 }
 
 // Name returns the name.
 func (cl *ConditionLock) Name() string {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

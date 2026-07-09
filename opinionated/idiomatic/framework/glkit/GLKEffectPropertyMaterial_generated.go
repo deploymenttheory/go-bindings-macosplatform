@@ -5,6 +5,7 @@
 package glkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -85,6 +86,7 @@ func (epm *EffectPropertyMaterial) WithShininess(shininess float32) *EffectPrope
 
 // Shininess returns the shininess.
 func (epm *EffectPropertyMaterial) Shininess() float32 {
+	defer runtime.KeepAlive(epm)
 	_r := objc.Send[float32](objref.IDOf(epm), objc.RegisterName("shininess"))
 	return _r
 }

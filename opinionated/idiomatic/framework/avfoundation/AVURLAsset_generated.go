@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,38 +51,44 @@ func uRLAssetAdopt(id objc.ID) *URLAsset {
 }
 
 // NewURLAssetWithURLOptions creates an asset that models the media resource at the specified URL.
-func NewURLAssetWithURLOptions(uRL string, options obj.Object) *URLAsset {
+func NewURLAssetWithURLOptions(url string, options map[string]obj.Object) *URLAsset {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVURLAsset")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), rt.FileURL(uRL), objref.IDOf(options))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), rt.FileURL(url), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return uRLAssetAdopt(_id)
 }
 
 // URL indicates the URL with which the instance of AVURLAsset was initialized.
-func (ua *URLAsset) URL() obj.Object {
+func (ua *URLAsset) URL() string {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // HTTPSessionIdentifier provides the identifier that's automatically included in any HTTP request issued on behalf of this asset in the HTTP header field "X-Playback-Session-Id". The value is an NSUUID from which the UUID string can be obtained. Note that copies of an AVURLAsset vend an equivalent httpSessionIdentifier.
-func (ua *URLAsset) HTTPSessionIdentifier() obj.Object {
+func (ua *URLAsset) HTTPSessionIdentifier() *foundation.UUID {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("httpSessionIdentifier"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // ResourceLoader returns the resource loader.
 func (ua *URLAsset) ResourceLoader() *AssetResourceLoader {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("resourceLoader"))
 	return AssetResourceLoaderFromID(_r)
 }
 
 // AssetCache returns the asset cache.
 func (ua *URLAsset) AssetCache() *AssetCache {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("assetCache"))
 	return AssetCacheFromID(_r)
 }
 
 // CompatibleTrackForCompositionTrack returns an asset track from which you can insert any time range into a given composition track.
 func (ua *URLAsset) CompatibleTrackForCompositionTrack(compositionTrack *CompositionTrack) *AssetTrack {
+	defer runtime.KeepAlive(ua)
+	defer runtime.KeepAlive(compositionTrack)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("compatibleTrackForCompositionTrack:"), objref.IDOf(compositionTrack))
 	return AssetTrackFromID(_r)
 }
@@ -88,24 +97,28 @@ func (ua *URLAsset) CompatibleTrackForCompositionTrack(compositionTrack *Composi
 //
 // Variants returns the collection as a Go slice.
 func (ua *URLAsset) Variants() []*AssetVariant {
+	defer runtime.KeepAlive(ua)
 	_arr := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("variants"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetVariant { return AssetVariantFromID(_id) })
 }
 
 // MediaExtensionProperties returns the properties of the MediaExtension format reader for the asset. If the asset is being decoded using a MediaExtension format reader, this property will return a AVMediaExtensionProperties object describing the extension. If the asset is not being decoded with a MediaExtension format reader, this property will return nil.
 func (ua *URLAsset) MediaExtensionProperties() *MediaExtensionProperties {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("mediaExtensionProperties"))
 	return MediaExtensionPropertiesFromID(_r)
 }
 
 // SidecarURL returns the sidecar URL used by the MediaExtension. The sidecar URL is returned only if the MediaExtension format reader supports sidecar files, and implements this property [MEFileInfo setSidecarFilename:]. Will return nil otherwise.
-func (ua *URLAsset) SidecarURL() obj.Object {
+func (ua *URLAsset) SidecarURL() string {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("sidecarURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // MayRequireContentKeysForMediaDataProcessing wraps the corresponding Objective-C method.
 func (ua *URLAsset) MayRequireContentKeysForMediaDataProcessing() bool {
+	defer runtime.KeepAlive(ua)
 	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("mayRequireContentKeysForMediaDataProcessing"))
 	return _r
 }

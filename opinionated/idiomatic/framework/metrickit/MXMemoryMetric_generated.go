@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,14 @@ func NewMemoryMetric() *MemoryMetric {
 
 // PeakMemoryUsage returns a single value representing the peak memory consumption of the application. Dimensioned as NSUnitInformationStorage.
 func (mm *MemoryMetric) PeakMemoryUsage() obj.Object {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("peakMemoryUsage"))
 	return obj.Wrap(_r)
 }
 
 // AverageSuspendedMemory returns average memory of the application upon suspend. Dimensioned as NSUnitInformationStorage.
 func (mm *MemoryMetric) AverageSuspendedMemory() obj.Object {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("averageSuspendedMemory"))
 	return obj.Wrap(_r)
 }

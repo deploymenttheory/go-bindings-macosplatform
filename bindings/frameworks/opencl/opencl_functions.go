@@ -466,8 +466,8 @@ func ClGetContextInfo(arg unsafe.Pointer, arg2 uint32, arg3 uint, arg4 unsafe.Po
 }
 
 // C function: clGetDAGNodeAPPLE
-func ClGetDAGNodeAPPLE(d unsafe.Pointer, f unsafe.Pointer, args *int, arg_indices *uint32, nargs uint) int {
-	return _clGetDAGNodeAPPLE(d, f, args, arg_indices, nargs)
+func ClGetDAGNodeAPPLE(d unsafe.Pointer, f unsafe.Pointer, args *int, argIndices *uint32, nargs uint) int {
+	return _clGetDAGNodeAPPLE(d, f, args, argIndices, nargs)
 }
 
 // C function: clGetDeviceIDs
@@ -726,18 +726,18 @@ func ClWaitForEvents(arg uint32, arg2 unsafe.Pointer) int32 {
 }
 
 // C function: gcl_copy_image
-func GclCopyImage(dst_image unsafe.Pointer, src_image unsafe.Pointer, dst_origin *uint, src_origin *uint, region *uint) {
-	_gcl_copy_image(dst_image, src_image, dst_origin, src_origin, region)
+func GclCopyImage(dstImage unsafe.Pointer, srcImage unsafe.Pointer, dstOrigin *uint, srcOrigin *uint, region *uint) {
+	_gcl_copy_image(dstImage, srcImage, dstOrigin, srcOrigin, region)
 }
 
 // C function: gcl_copy_image_to_ptr
-func GclCopyImageToPtr(dst_ptr unsafe.Pointer, src_image unsafe.Pointer, src_origin *uint, region *uint) {
-	_gcl_copy_image_to_ptr(dst_ptr, src_image, src_origin, region)
+func GclCopyImageToPtr(dstPtr unsafe.Pointer, srcImage unsafe.Pointer, srcOrigin *uint, region *uint) {
+	_gcl_copy_image_to_ptr(dstPtr, srcImage, srcOrigin, region)
 }
 
 // C function: gcl_copy_ptr_to_image
-func GclCopyPtrToImage(dst_image unsafe.Pointer, src_ptr unsafe.Pointer, dst_origin *uint, region *uint) {
-	_gcl_copy_ptr_to_image(dst_image, src_ptr, dst_origin, region)
+func GclCopyPtrToImage(dstImage unsafe.Pointer, srcPtr unsafe.Pointer, dstOrigin *uint, region *uint) {
+	_gcl_copy_ptr_to_image(dstImage, srcPtr, dstOrigin, region)
 }
 
 // C function: gcl_create_buffer_from_ptr
@@ -746,18 +746,18 @@ func GclCreateBufferFromPtr(ptr unsafe.Pointer) unsafe.Pointer {
 }
 
 // C function: gcl_create_dispatch_queue
-func GclCreateDispatchQueue(flags uint64, device_id unsafe.Pointer) unsafe.Pointer {
-	return _gcl_create_dispatch_queue(flags, device_id)
+func GclCreateDispatchQueue(flags uint64, deviceId unsafe.Pointer) unsafe.Pointer {
+	return _gcl_create_dispatch_queue(flags, deviceId)
 }
 
 // C function: gcl_create_image
-func GclCreateImage(image_format *ClImageFormat, image_width uint, image_height uint, image_depth uint, io_surface unsafe.Pointer) unsafe.Pointer {
-	return _gcl_create_image(image_format, image_width, image_height, image_depth, io_surface)
+func GclCreateImage(imageFormat *ClImageFormat, imageWidth uint, imageHeight uint, imageDepth uint, ioSurface unsafe.Pointer) unsafe.Pointer {
+	return _gcl_create_image(imageFormat, imageWidth, imageHeight, imageDepth, ioSurface)
 }
 
 // C function: gcl_create_kernel_from_block
-func GclCreateKernelFromBlock(kernel_block_ptr unsafe.Pointer) unsafe.Pointer {
-	return _gcl_create_kernel_from_block(kernel_block_ptr)
+func GclCreateKernelFromBlock(kernelBlockPtr unsafe.Pointer) unsafe.Pointer {
+	return _gcl_create_kernel_from_block(kernelBlockPtr)
 }
 
 // C function: gcl_free
@@ -776,23 +776,23 @@ func GclGetDeviceIdWithDispatchQueue(queue *foundation.NSObject) unsafe.Pointer 
 }
 
 // C function: gcl_get_kernel_block_workgroup_info
-func GclGetKernelBlockWorkgroupInfo(kernel_block_ptr unsafe.Pointer, param_name uint32, param_value_size uint, param_value unsafe.Pointer, param_value_size_ret *uint) {
-	_gcl_get_kernel_block_workgroup_info(kernel_block_ptr, param_name, param_value_size, param_value, param_value_size_ret)
+func GclGetKernelBlockWorkgroupInfo(kernelBlockPtr unsafe.Pointer, paramName uint32, paramValueSize uint, paramValue unsafe.Pointer, paramValueSizeRet *uint) {
+	_gcl_get_kernel_block_workgroup_info(kernelBlockPtr, paramName, paramValueSize, paramValue, paramValueSizeRet)
 }
 
 // C function: gcl_get_supported_image_formats
-func GclGetSupportedImageFormats(device_id unsafe.Pointer, image_type uint32, num_entries uint, image_formats *ClImageFormat, num_image_formats *uint32) {
-	_gcl_get_supported_image_formats(device_id, image_type, num_entries, image_formats, num_image_formats)
+func GclGetSupportedImageFormats(deviceId unsafe.Pointer, imageType uint32, numEntries uint, imageFormats *ClImageFormat, numImageFormats *uint32) {
+	_gcl_get_supported_image_formats(deviceId, imageType, numEntries, imageFormats, numImageFormats)
 }
 
 // C function: gcl_gl_create_image_from_renderbuffer
-func GclGlCreateImageFromRenderbuffer(render_buffer uint32) unsafe.Pointer {
-	return _gcl_gl_create_image_from_renderbuffer(render_buffer)
+func GclGlCreateImageFromRenderbuffer(renderBuffer uint32) unsafe.Pointer {
+	return _gcl_gl_create_image_from_renderbuffer(renderBuffer)
 }
 
 // C function: gcl_gl_create_image_from_texture
-func GclGlCreateImageFromTexture(texture_target uint32, mip_level int32, texture uint32) unsafe.Pointer {
-	return _gcl_gl_create_image_from_texture(texture_target, mip_level, texture)
+func GclGlCreateImageFromTexture(textureTarget uint32, mipLevel int32, texture uint32) unsafe.Pointer {
+	return _gcl_gl_create_image_from_texture(textureTarget, mipLevel, texture)
 }
 
 // C function: gcl_gl_create_ptr_from_buffer
@@ -806,18 +806,18 @@ func GclGlSetSharegroup(share unsafe.Pointer) {
 }
 
 // C function: gcl_malloc
-func GclMalloc(bytes_ uint, host_ptr unsafe.Pointer, flags uint64) unsafe.Pointer {
-	return _gcl_malloc(bytes_, host_ptr, flags)
+func GclMalloc(bytes_ uint, hostPtr unsafe.Pointer, flags uint64) unsafe.Pointer {
+	return _gcl_malloc(bytes_, hostPtr, flags)
 }
 
 // C function: gcl_map_image
-func GclMapImage(image unsafe.Pointer, map_flags uint64, origin *uint, region *uint) unsafe.Pointer {
-	return _gcl_map_image(image, map_flags, origin, region)
+func GclMapImage(image unsafe.Pointer, mapFlags uint64, origin *uint, region *uint) unsafe.Pointer {
+	return _gcl_map_image(image, mapFlags, origin, region)
 }
 
 // C function: gcl_map_ptr
-func GclMapPtr(ptr unsafe.Pointer, map_flags uint64, cb uint) unsafe.Pointer {
-	return _gcl_map_ptr(ptr, map_flags, cb)
+func GclMapPtr(ptr unsafe.Pointer, mapFlags uint64, cb uint) unsafe.Pointer {
+	return _gcl_map_ptr(ptr, mapFlags, cb)
 }
 
 // C function: gcl_memcpy
@@ -826,8 +826,8 @@ func GclMemcpy(dst unsafe.Pointer, src unsafe.Pointer, size uint) {
 }
 
 // C function: gcl_memcpy_rect
-func GclMemcpyRect(dst unsafe.Pointer, src unsafe.Pointer, dst_origin *uint, src_origin *uint, region *uint, dst_row_pitch uint, dst_slice_pitch uint, src_row_pitch uint, src_slice_pitch uint) {
-	_gcl_memcpy_rect(dst, src, dst_origin, src_origin, region, dst_row_pitch, dst_slice_pitch, src_row_pitch, src_slice_pitch)
+func GclMemcpyRect(dst unsafe.Pointer, src unsafe.Pointer, dstOrigin *uint, srcOrigin *uint, region *uint, dstRowPitch uint, dstSlicePitch uint, srcRowPitch uint, srcSlicePitch uint) {
+	_gcl_memcpy_rect(dst, src, dstOrigin, srcOrigin, region, dstRowPitch, dstSlicePitch, srcRowPitch, srcSlicePitch)
 }
 
 // C function: gcl_release_image
@@ -841,8 +841,8 @@ func GclRetainImage(image unsafe.Pointer) {
 }
 
 // C function: gcl_set_finalizer
-func GclSetFinalizer(object unsafe.Pointer, cl_pfn_finalizer unsafe.Pointer, user_data unsafe.Pointer) {
-	_gcl_set_finalizer(object, cl_pfn_finalizer, user_data)
+func GclSetFinalizer(object unsafe.Pointer, clPfnFinalizer unsafe.Pointer, userData unsafe.Pointer) {
+	_gcl_set_finalizer(object, clPfnFinalizer, userData)
 }
 
 // C function: gcl_start_timer

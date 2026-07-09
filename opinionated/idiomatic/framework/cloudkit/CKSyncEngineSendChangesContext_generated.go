@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func syncEngineSendChangesContextAdopt(id objc.ID) *SyncEngineSendChangesContext
 
 // Description returns the object's -description text.
 func (sescc *SyncEngineSendChangesContext) Description() string {
+	defer runtime.KeepAlive(sescc)
 	return rt.Description(objref.IDOf(sescc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sescc *SyncEngineSendChangesContext) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sescc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sescc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sescc *SyncEngineSendChangesContext) IsKind(className string) bool {
+	defer runtime.KeepAlive(sescc)
 	return rt.IsKind(objref.IDOf(sescc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sescc *SyncEngineSendChangesContext) String() string {
+	defer runtime.KeepAlive(sescc)
 	return rt.Description(objref.IDOf(sescc))
 }
 
@@ -74,12 +81,14 @@ func NewSyncEngineSendChangesContext() *SyncEngineSendChangesContext {
 
 // Reason returns the reason for the send operation.
 func (sescc *SyncEngineSendChangesContext) Reason() SyncEngineSyncReason {
+	defer runtime.KeepAlive(sescc)
 	_r := objc.Send[SyncEngineSyncReason](objref.IDOf(sescc), objc.RegisterName("reason"))
 	return _r
 }
 
 // Options returns the additional options for the send operation.
 func (sescc *SyncEngineSendChangesContext) Options() *SyncEngineSendChangesOptions {
+	defer runtime.KeepAlive(sescc)
 	_r := objc.Send[objc.ID](objref.IDOf(sescc), objc.RegisterName("options"))
 	return SyncEngineSendChangesOptionsFromID(_r)
 }

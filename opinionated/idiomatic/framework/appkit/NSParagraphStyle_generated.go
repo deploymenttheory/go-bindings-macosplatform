@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,99 +51,117 @@ func paragraphStyleAdopt(id objc.ID) *ParagraphStyle {
 
 // Description returns the object's -description text.
 func (ps *ParagraphStyle) Description() string {
+	defer runtime.KeepAlive(ps)
 	return rt.Description(objref.IDOf(ps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ps *ParagraphStyle) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ps *ParagraphStyle) IsKind(className string) bool {
+	defer runtime.KeepAlive(ps)
 	return rt.IsKind(objref.IDOf(ps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ps *ParagraphStyle) String() string {
+	defer runtime.KeepAlive(ps)
 	return rt.Description(objref.IDOf(ps))
 }
 
 // LineSpacing returns the line spacing.
 func (ps *ParagraphStyle) LineSpacing() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("lineSpacing"))
 	return _r
 }
 
 // ParagraphSpacing returns the paragraph spacing.
 func (ps *ParagraphStyle) ParagraphSpacing() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("paragraphSpacing"))
 	return _r
 }
 
 // HeadIndent returns the head indent.
 func (ps *ParagraphStyle) HeadIndent() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("headIndent"))
 	return _r
 }
 
 // TailIndent returns the tail indent.
 func (ps *ParagraphStyle) TailIndent() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("tailIndent"))
 	return _r
 }
 
 // FirstLineHeadIndent returns the first line head indent.
 func (ps *ParagraphStyle) FirstLineHeadIndent() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("firstLineHeadIndent"))
 	return _r
 }
 
 // MinimumLineHeight returns the minimum line height.
 func (ps *ParagraphStyle) MinimumLineHeight() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("minimumLineHeight"))
 	return _r
 }
 
 // MaximumLineHeight returns the maximum line height.
 func (ps *ParagraphStyle) MaximumLineHeight() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("maximumLineHeight"))
 	return _r
 }
 
 // LineBreakMode returns the line break mode.
 func (ps *ParagraphStyle) LineBreakMode() LineBreakMode {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[LineBreakMode](objref.IDOf(ps), objc.RegisterName("lineBreakMode"))
 	return _r
 }
 
 // BaseWritingDirection returns the base writing direction.
 func (ps *ParagraphStyle) BaseWritingDirection() WritingDirection {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[WritingDirection](objref.IDOf(ps), objc.RegisterName("baseWritingDirection"))
 	return _r
 }
 
 // LineHeightMultiple returns the line height multiple.
 func (ps *ParagraphStyle) LineHeightMultiple() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("lineHeightMultiple"))
 	return _r
 }
 
 // ParagraphSpacingBefore returns the paragraph spacing before.
 func (ps *ParagraphStyle) ParagraphSpacingBefore() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("paragraphSpacingBefore"))
 	return _r
 }
 
 // HyphenationFactor returns the hyphenation factor.
 func (ps *ParagraphStyle) HyphenationFactor() float32 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float32](objref.IDOf(ps), objc.RegisterName("hyphenationFactor"))
 	return _r
 }
 
 // UsesDefaultHyphenation wraps the corresponding Objective-C method.
 func (ps *ParagraphStyle) UsesDefaultHyphenation() bool {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("usesDefaultHyphenation"))
 	return _r
 }
@@ -150,12 +170,14 @@ func (ps *ParagraphStyle) UsesDefaultHyphenation() bool {
 //
 // TabStops returns the collection as a Go slice.
 func (ps *ParagraphStyle) TabStops() []*TextTab {
+	defer runtime.KeepAlive(ps)
 	_arr := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("tabStops"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextTab { return TextTabFromID(_id) })
 }
 
 // DefaultTabInterval returns the default tab interval.
 func (ps *ParagraphStyle) DefaultTabInterval() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("defaultTabInterval"))
 	return _r
 }
@@ -164,30 +186,35 @@ func (ps *ParagraphStyle) DefaultTabInterval() float64 {
 //
 // TextLists returns the collection as a Go slice.
 func (ps *ParagraphStyle) TextLists() []*TextList {
+	defer runtime.KeepAlive(ps)
 	_arr := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("textLists"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextList { return TextListFromID(_id) })
 }
 
 // AllowsDefaultTighteningForTruncation wraps the corresponding Objective-C method.
 func (ps *ParagraphStyle) AllowsDefaultTighteningForTruncation() bool {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("allowsDefaultTighteningForTruncation"))
 	return _r
 }
 
 // LineBreakStrategy returns the line break strategy.
 func (ps *ParagraphStyle) LineBreakStrategy() LineBreakStrategy {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[LineBreakStrategy](objref.IDOf(ps), objc.RegisterName("lineBreakStrategy"))
 	return _r
 }
 
 // Alignment returns the alignment.
 func (ps *ParagraphStyle) Alignment() TextAlignment {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[TextAlignment](objref.IDOf(ps), objc.RegisterName("alignment"))
 	return _r
 }
 
 // TighteningFactorForTruncation returns the tightening factor for truncation.
 func (ps *ParagraphStyle) TighteningFactorForTruncation() float32 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float32](objref.IDOf(ps), objc.RegisterName("tighteningFactorForTruncation"))
 	return _r
 }
@@ -196,12 +223,14 @@ func (ps *ParagraphStyle) TighteningFactorForTruncation() float32 {
 //
 // TextBlocks returns the collection as a Go slice.
 func (ps *ParagraphStyle) TextBlocks() []*TextBlock {
+	defer runtime.KeepAlive(ps)
 	_arr := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("textBlocks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextBlock { return TextBlockFromID(_id) })
 }
 
 // HeaderLevel returns the header level.
 func (ps *ParagraphStyle) HeaderLevel() int {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[int](objref.IDOf(ps), objc.RegisterName("headerLevel"))
 	return _r
 }

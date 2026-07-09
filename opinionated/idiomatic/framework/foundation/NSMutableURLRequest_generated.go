@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -56,8 +57,8 @@ func NewMutableURLRequest() *MutableURLRequest {
 }
 
 // WithURL sets the URL being requested.
-func (mur *MutableURLRequest) WithURL(uRL string) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (mur *MutableURLRequest) WithURL(url string) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return mur
 }
 
@@ -135,43 +136,47 @@ func (mur *MutableURLRequest) WithAllowsPersistentDNS(allowsPersistentDNS bool) 
 
 // WithCookiePartitionIdentifier sets the cookie partition identifier.
 func (mur *MutableURLRequest) WithCookiePartitionIdentifier(cookiePartitionIdentifier StringProvider) *MutableURLRequest {
+	defer runtime.KeepAlive(cookiePartitionIdentifier)
 	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setCookiePartitionIdentifier:"), objref.IDOf(cookiePartitionIdentifier))
 	return mur
 }
 
 // WithHTTPMethod sets the HTTP request method.
-func (mur *MutableURLRequest) WithHTTPMethod(hTTPMethod StringProvider) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setHTTPMethod:"), objref.IDOf(hTTPMethod))
+func (mur *MutableURLRequest) WithHTTPMethod(httpMethod StringProvider) *MutableURLRequest {
+	defer runtime.KeepAlive(httpMethod)
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setHTTPMethod:"), objref.IDOf(httpMethod))
 	return mur
 }
 
 // WithAllHTTPHeaderFields sets a dictionary containing all of the HTTP header fields for a request.
-func (mur *MutableURLRequest) WithAllHTTPHeaderFields(allHTTPHeaderFields obj.Object) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setAllHTTPHeaderFields:"), objref.IDOf(allHTTPHeaderFields))
+func (mur *MutableURLRequest) WithAllHTTPHeaderFields(allHTTPHeaderFields map[string]string) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setAllHTTPHeaderFields:"), rt.MapToDict(allHTTPHeaderFields, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return mur
 }
 
 // WithHTTPBody sets the request body.
-func (mur *MutableURLRequest) WithHTTPBody(hTTPBody DataProvider) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setHTTPBody:"), objref.IDOf(hTTPBody))
+func (mur *MutableURLRequest) WithHTTPBody(httpBody DataProvider) *MutableURLRequest {
+	defer runtime.KeepAlive(httpBody)
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setHTTPBody:"), objref.IDOf(httpBody))
 	return mur
 }
 
 // WithHTTPBodyStream sets the request body as an input stream.
-func (mur *MutableURLRequest) WithHTTPBodyStream(hTTPBodyStream *InputStream) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setHTTPBodyStream:"), objref.IDOf(hTTPBodyStream))
+func (mur *MutableURLRequest) WithHTTPBodyStream(httpBodyStream *InputStream) *MutableURLRequest {
+	defer runtime.KeepAlive(httpBodyStream)
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setHTTPBodyStream:"), objref.IDOf(httpBodyStream))
 	return mur
 }
 
 // WithHTTPShouldHandleCookies sets a Boolean value that indicates whether the request should use the default cookie handling for the request.
-func (mur *MutableURLRequest) WithHTTPShouldHandleCookies(hTTPShouldHandleCookies bool) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setHTTPShouldHandleCookies:"), hTTPShouldHandleCookies)
+func (mur *MutableURLRequest) WithHTTPShouldHandleCookies(httpShouldHandleCookies bool) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setHTTPShouldHandleCookies:"), httpShouldHandleCookies)
 	return mur
 }
 
 // WithHTTPShouldUsePipelining sets a Boolean value that indicates whether the request can continue transmitting data before receiving a response from an earlier transmission.
-func (mur *MutableURLRequest) WithHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setHTTPShouldUsePipelining:"), hTTPShouldUsePipelining)
+func (mur *MutableURLRequest) WithHTTPShouldUsePipelining(httpShouldUsePipelining bool) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setHTTPShouldUsePipelining:"), httpShouldUsePipelining)
 	return mur
 }
 
@@ -182,18 +187,20 @@ func (mur *MutableURLRequest) WithObservationInfo(observationInfo unsafe.Pointer
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (mur *MutableURLRequest) WithScriptingProperties(scriptingProperties obj.Object) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (mur *MutableURLRequest) WithScriptingProperties(scriptingProperties map[string]obj.Object) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return mur
 }
 
 // SetValueForHTTPHeaderField sets a value for the header field.
 func (mur *MutableURLRequest) SetValueForHTTPHeaderField(value string, field string) {
+	defer runtime.KeepAlive(mur)
 	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setValue:forHTTPHeaderField:"), purego.NSString(value), purego.NSString(field))
 }
 
 // AddValueForHTTPHeaderField adds a value to the header field.
 func (mur *MutableURLRequest) AddValueForHTTPHeaderField(value string, field string) {
+	defer runtime.KeepAlive(mur)
 	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("addValue:forHTTPHeaderField:"), purego.NSString(value), purego.NSString(field))
 }
 

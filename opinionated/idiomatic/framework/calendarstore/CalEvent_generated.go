@@ -5,6 +5,9 @@
 package calendarstore
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -65,24 +68,26 @@ func (ce *CalEvent) WithLocation(location string) *CalEvent {
 
 // WithRecurrenceRule sets the recurrence rule.
 func (ce *CalEvent) WithRecurrenceRule(recurrenceRule *CalRecurrenceRule) *CalEvent {
+	defer runtime.KeepAlive(recurrenceRule)
 	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("setRecurrenceRule:"), objref.IDOf(recurrenceRule))
 	return ce
 }
 
 // WithStartDate sets the start date.
-func (ce *CalEvent) WithStartDate(startDate obj.Object) *CalEvent {
-	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
+func (ce *CalEvent) WithStartDate(startDate time.Time) *CalEvent {
+	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("setStartDate:"), rt.TimeToNSDate(startDate))
 	return ce
 }
 
 // WithEndDate sets the end date.
-func (ce *CalEvent) WithEndDate(endDate obj.Object) *CalEvent {
-	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
+func (ce *CalEvent) WithEndDate(endDate time.Time) *CalEvent {
+	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("setEndDate:"), rt.TimeToNSDate(endDate))
 	return ce
 }
 
 // WithCalendar sets the calendar.
 func (ce *CalEvent) WithCalendar(calendar *CalCalendar) *CalEvent {
+	defer runtime.KeepAlive(calendar)
 	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return ce
 }
@@ -107,12 +112,14 @@ func (ce *CalEvent) WithTitle(title string) *CalEvent {
 
 // IsAllDay reports whether the object is all day.
 func (ce *CalEvent) IsAllDay() bool {
+	defer runtime.KeepAlive(ce)
 	_r := objc.Send[bool](objref.IDOf(ce), objc.RegisterName("isAllDay"))
 	return _r
 }
 
 // Location returns the location.
 func (ce *CalEvent) Location() string {
+	defer runtime.KeepAlive(ce)
 	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("location"))
 	if _r == 0 {
 		return ""
@@ -122,38 +129,44 @@ func (ce *CalEvent) Location() string {
 
 // RecurrenceRule returns the recurrence rule.
 func (ce *CalEvent) RecurrenceRule() *CalRecurrenceRule {
+	defer runtime.KeepAlive(ce)
 	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("recurrenceRule"))
 	return CalRecurrenceRuleFromID(_r)
 }
 
 // StartDate returns the start date.
-func (ce *CalEvent) StartDate() obj.Object {
+func (ce *CalEvent) StartDate() time.Time {
+	defer runtime.KeepAlive(ce)
 	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // EndDate returns the end date.
-func (ce *CalEvent) EndDate() obj.Object {
+func (ce *CalEvent) EndDate() time.Time {
+	defer runtime.KeepAlive(ce)
 	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("endDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Attendees returns the attendees.
 func (ce *CalEvent) Attendees() obj.Object {
+	defer runtime.KeepAlive(ce)
 	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("attendees"))
 	return obj.Wrap(_r)
 }
 
 // IsDetached reports whether the object is detached.
 func (ce *CalEvent) IsDetached() bool {
+	defer runtime.KeepAlive(ce)
 	_r := objc.Send[bool](objref.IDOf(ce), objc.RegisterName("isDetached"))
 	return _r
 }
 
 // Occurrence returns the occurrence.
-func (ce *CalEvent) Occurrence() obj.Object {
+func (ce *CalEvent) Occurrence() time.Time {
+	defer runtime.KeepAlive(ce)
 	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("occurrence"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 var _ CalCalendarItemProvider = (*CalEvent)(nil)

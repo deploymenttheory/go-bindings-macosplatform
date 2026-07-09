@@ -39,8 +39,8 @@ func AVCompositionTrackSegmentFromID(id objc.ID) *AVCompositionTrackSegment {
 }
 
 // Returns a new an object that presents a segment of a media file that the specified URL references.
-func AVCompositionTrackSegmentCompositionTrackSegmentWithURLTrackIDSourceTimeRangeTargetTimeRange(uRL *foundation.NSURL, trackID int32, sourceTimeRange coremedia.CMTimeRange, targetTimeRange coremedia.CMTimeRange) *AVCompositionTrackSegment {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVCompositionTrackSegment), _aVCompositionTrackSegmentSelCompositionTrackSegmentWithURLTrackIDSourceTimeRangeTargetTimeRange, uRL.Ptr(), trackID, sourceTimeRange, targetTimeRange)
+func AVCompositionTrackSegmentCompositionTrackSegmentWithURLTrackIDSourceTimeRangeTargetTimeRange(url *foundation.NSURL, trackID int32, sourceTimeRange coremedia.CMTimeRange, targetTimeRange coremedia.CMTimeRange) *AVCompositionTrackSegment {
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVCompositionTrackSegment), _aVCompositionTrackSegmentSelCompositionTrackSegmentWithURLTrackIDSourceTimeRangeTargetTimeRange, url.Ptr(), trackID, sourceTimeRange, targetTimeRange)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -57,8 +57,8 @@ func AVCompositionTrackSegmentCompositionTrackSegmentWithTimeRange(timeRange cor
 }
 
 // Creates an object that presents a segment of a media file that the specified URL references.
-func (o *AVCompositionTrackSegment) InitWithURLTrackIDSourceTimeRangeTargetTimeRange(uRL *foundation.NSURL, trackID int32, sourceTimeRange coremedia.CMTimeRange, targetTimeRange coremedia.CMTimeRange) *AVCompositionTrackSegment {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVCompositionTrackSegmentSelInitWithURLTrackIDSourceTimeRangeTargetTimeRange, uRL.Ptr(), trackID, sourceTimeRange, targetTimeRange)
+func (o *AVCompositionTrackSegment) InitWithURLTrackIDSourceTimeRangeTargetTimeRange(url *foundation.NSURL, trackID int32, sourceTimeRange coremedia.CMTimeRange, targetTimeRange coremedia.CMTimeRange) *AVCompositionTrackSegment {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCompositionTrackSegmentSelInitWithURLTrackIDSourceTimeRangeTargetTimeRange, url.Ptr(), trackID, sourceTimeRange, targetTimeRange)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

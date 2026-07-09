@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,30 +49,35 @@ func mTRChannelClusterProgramGuideResponseParamsAdopt(id objc.ID) *MTRChannelClu
 
 // Description returns the object's -description text.
 func (mccpgrp *MTRChannelClusterProgramGuideResponseParams) Description() string {
+	defer runtime.KeepAlive(mccpgrp)
 	return rt.Description(objref.IDOf(mccpgrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mccpgrp *MTRChannelClusterProgramGuideResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mccpgrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mccpgrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mccpgrp *MTRChannelClusterProgramGuideResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mccpgrp)
 	return rt.IsKind(objref.IDOf(mccpgrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mccpgrp *MTRChannelClusterProgramGuideResponseParams) String() string {
+	defer runtime.KeepAlive(mccpgrp)
 	return rt.Description(objref.IDOf(mccpgrp))
 }
 
-// NewMTRChannelClusterProgramGuideResponseParamsWithResponseValueError initialize an MTRChannelClusterProgramGuideResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-func NewMTRChannelClusterProgramGuideResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRChannelClusterProgramGuideResponseParams, err error) {
+// NewMTRChannelClusterProgramGuideResponseParamsWithResponseValue initialize an MTRChannelClusterProgramGuideResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRChannelClusterProgramGuideResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRChannelClusterProgramGuideResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRChannelClusterProgramGuideResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,23 +86,28 @@ func NewMTRChannelClusterProgramGuideResponseParamsWithResponseValueError(respon
 
 // WithPaging sets the paging.
 func (mccpgrp *MTRChannelClusterProgramGuideResponseParams) WithPaging(paging *MTRChannelClusterChannelPagingStruct) *MTRChannelClusterProgramGuideResponseParams {
+	defer runtime.KeepAlive(paging)
 	objc.Send[objc.ID](objref.IDOf(mccpgrp), objc.RegisterName("setPaging:"), objref.IDOf(paging))
 	return mccpgrp
 }
 
 // Paging returns the paging.
 func (mccpgrp *MTRChannelClusterProgramGuideResponseParams) Paging() *MTRChannelClusterChannelPagingStruct {
+	defer runtime.KeepAlive(mccpgrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccpgrp), objc.RegisterName("paging"))
 	return MTRChannelClusterChannelPagingStructFromID(_r)
 }
 
 // ProgramList returns the program list.
 func (mccpgrp *MTRChannelClusterProgramGuideResponseParams) ProgramList() obj.Object {
+	defer runtime.KeepAlive(mccpgrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccpgrp), objc.RegisterName("programList"))
 	return obj.Wrap(_r)
 }
 
 // SetProgramList wraps the corresponding Objective-C method.
 func (mccpgrp *MTRChannelClusterProgramGuideResponseParams) SetProgramList(programList obj.Object) {
+	defer runtime.KeepAlive(mccpgrp)
+	defer runtime.KeepAlive(programList)
 	objc.Send[objc.ID](objref.IDOf(mccpgrp), objc.RegisterName("setProgramList:"), objref.IDOf(programList))
 }

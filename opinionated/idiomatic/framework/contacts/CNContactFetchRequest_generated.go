@@ -5,7 +5,10 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -55,6 +58,7 @@ func NewContactFetchRequestWithKeysToFetch(keysToFetch []obj.Object) *ContactFet
 
 // WithPredicate sets the predicate to match contacts against.
 func (cfr *ContactFetchRequest) WithPredicate(predicate obj.Object) *ContactFetchRequest {
+	defer runtime.KeepAlive(predicate)
 	objc.Send[objc.ID](objref.IDOf(cfr), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
 	return cfr
 }
@@ -78,36 +82,42 @@ func (cfr *ContactFetchRequest) WithSortOrder(sortOrder ContactSortOrder) *Conta
 }
 
 // Predicate returns the predicate to match contacts against. Use only predicates from CNContact+Predicates.h. Compound predicates are not supported. Set to nil to match all contacts.
-func (cfr *ContactFetchRequest) Predicate() obj.Object {
+func (cfr *ContactFetchRequest) Predicate() *foundation.Predicate {
+	defer runtime.KeepAlive(cfr)
 	_r := objc.Send[objc.ID](objref.IDOf(cfr), objc.RegisterName("predicate"))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // KeysToFetch returns the properties to fetch in the returned contacts. Should only fetch the properties that will be used. Can combine contact keys and contact key descriptors.
 func (cfr *ContactFetchRequest) KeysToFetch() []obj.Object {
+	defer runtime.KeepAlive(cfr)
 	_r := objc.Send[objc.ID](objref.IDOf(cfr), objc.RegisterName("keysToFetch"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetKeysToFetch wraps the corresponding Objective-C method.
 func (cfr *ContactFetchRequest) SetKeysToFetch(keysToFetch []obj.Object) {
+	defer runtime.KeepAlive(cfr)
 	objc.Send[objc.ID](objref.IDOf(cfr), objc.RegisterName("setKeysToFetch:"), purego.SliceToNSArray(keysToFetch, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // MutableObjects reports whether to return mutable contacts. If true returns CNMutableContact objects, otherwise returns CNContact objects. Default is false.
 func (cfr *ContactFetchRequest) MutableObjects() bool {
+	defer runtime.KeepAlive(cfr)
 	_r := objc.Send[bool](objref.IDOf(cfr), objc.RegisterName("mutableObjects"))
 	return _r
 }
 
 // UnifyResults reports whether to return linked contacts as unified contacts. If true returns unified contacts, otherwise returns individual contacts. Default is true.
 func (cfr *ContactFetchRequest) UnifyResults() bool {
+	defer runtime.KeepAlive(cfr)
 	_r := objc.Send[bool](objref.IDOf(cfr), objc.RegisterName("unifyResults"))
 	return _r
 }
 
 // SortOrder returns to return contacts in a specific sort order. Default is CNContactSortOrderNone.
 func (cfr *ContactFetchRequest) SortOrder() ContactSortOrder {
+	defer runtime.KeepAlive(cfr)
 	_r := objc.Send[ContactSortOrder](objref.IDOf(cfr), objc.RegisterName("sortOrder"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func categoricalDataAxisDescriptorAdopt(id objc.ID) *CategoricalDataAxisDescript
 
 // Description returns the object's -description text.
 func (cdad *CategoricalDataAxisDescriptor) Description() string {
+	defer runtime.KeepAlive(cdad)
 	return rt.Description(objref.IDOf(cdad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cdad *CategoricalDataAxisDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cdad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cdad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cdad *CategoricalDataAxisDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(cdad)
 	return rt.IsKind(objref.IDOf(cdad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cdad *CategoricalDataAxisDescriptor) String() string {
+	defer runtime.KeepAlive(cdad)
 	return rt.Description(objref.IDOf(cdad))
 }
 
@@ -75,6 +82,7 @@ func NewCategoricalDataAxisDescriptorWithTitleCategoryOrder(title string, catego
 
 // NewCategoricalDataAxisDescriptorWithAttributedTitleCategoryOrder creates a categorical data axis with the specified attributed title and an array of categories in the specified order.
 func NewCategoricalDataAxisDescriptorWithAttributedTitleCategoryOrder(attributedTitle obj.Object, categoryOrder []string) *CategoricalDataAxisDescriptor {
+	defer runtime.KeepAlive(attributedTitle)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AXCategoricalDataAxisDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttributedTitle:categoryOrder:"), objref.IDOf(attributedTitle), purego.SliceToNSArray(categoryOrder, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return categoricalDataAxisDescriptorAdopt(_id)
@@ -91,6 +99,7 @@ func (cdad *CategoricalDataAxisDescriptor) WithCategoryOrder(items ...obj.Object
 //
 // CategoryOrder returns the collection as a Go slice.
 func (cdad *CategoricalDataAxisDescriptor) CategoryOrder() []string {
+	defer runtime.KeepAlive(cdad)
 	_arr := objc.Send[objc.ID](objref.IDOf(cdad), objc.RegisterName("categoryOrder"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

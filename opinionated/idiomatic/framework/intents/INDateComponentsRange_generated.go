@@ -5,7 +5,10 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,34 @@ func dateComponentsRangeAdopt(id objc.ID) *DateComponentsRange {
 
 // Description returns the object's -description text.
 func (dcr *DateComponentsRange) Description() string {
+	defer runtime.KeepAlive(dcr)
 	return rt.Description(objref.IDOf(dcr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dcr *DateComponentsRange) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dcr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dcr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dcr *DateComponentsRange) IsKind(className string) bool {
+	defer runtime.KeepAlive(dcr)
 	return rt.IsKind(objref.IDOf(dcr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dcr *DateComponentsRange) String() string {
+	defer runtime.KeepAlive(dcr)
 	return rt.Description(objref.IDOf(dcr))
 }
 
 // NewDateComponentsRangeWithStartDateComponentsEndDateComponents initializes the object using the specified start and end dates.
 func NewDateComponentsRangeWithStartDateComponentsEndDateComponents(startDateComponents obj.Object, endDateComponents obj.Object) *DateComponentsRange {
+	defer runtime.KeepAlive(startDateComponents)
+	defer runtime.KeepAlive(endDateComponents)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INDateComponentsRange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartDateComponents:endDateComponents:"), objref.IDOf(startDateComponents), objref.IDOf(endDateComponents))
 	return dateComponentsRangeAdopt(_id)
@@ -75,6 +85,9 @@ func NewDateComponentsRangeWithStartDateComponentsEndDateComponents(startDateCom
 
 // NewDateComponentsRangeWithStartDateComponentsEndDateComponentsRecurrenceRule initializes the date range to a repeating time period.
 func NewDateComponentsRangeWithStartDateComponentsEndDateComponentsRecurrenceRule(startDateComponents obj.Object, endDateComponents obj.Object, recurrenceRule obj.Object) *DateComponentsRange {
+	defer runtime.KeepAlive(startDateComponents)
+	defer runtime.KeepAlive(endDateComponents)
+	defer runtime.KeepAlive(recurrenceRule)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INDateComponentsRange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartDateComponents:endDateComponents:recurrenceRule:"), objref.IDOf(startDateComponents), objref.IDOf(endDateComponents), objref.IDOf(recurrenceRule))
 	return dateComponentsRangeAdopt(_id)
@@ -82,6 +95,7 @@ func NewDateComponentsRangeWithStartDateComponentsEndDateComponentsRecurrenceRul
 
 // NewDateComponentsRangeWithEKRecurrenceRule initializes the date range using the specified recurrence rule.
 func NewDateComponentsRangeWithEKRecurrenceRule(recurrenceRule obj.Object) *DateComponentsRange {
+	defer runtime.KeepAlive(recurrenceRule)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INDateComponentsRange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEKRecurrenceRule:"), objref.IDOf(recurrenceRule))
 	return dateComponentsRangeAdopt(_id)
@@ -89,24 +103,28 @@ func NewDateComponentsRangeWithEKRecurrenceRule(recurrenceRule obj.Object) *Date
 
 // EKRecurrenceRule returns an Event Kit recurrence rule that matches the available information.
 func (dcr *DateComponentsRange) EKRecurrenceRule() obj.Object {
+	defer runtime.KeepAlive(dcr)
 	_r := objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("EKRecurrenceRule"))
 	return obj.Wrap(_r)
 }
 
 // StartDateComponents returns the start date components.
-func (dcr *DateComponentsRange) StartDateComponents() obj.Object {
+func (dcr *DateComponentsRange) StartDateComponents() *foundation.DateComponents {
+	defer runtime.KeepAlive(dcr)
 	_r := objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("startDateComponents"))
-	return obj.Wrap(_r)
+	return foundation.DateComponentsFromID(_r)
 }
 
 // EndDateComponents returns the end date components.
-func (dcr *DateComponentsRange) EndDateComponents() obj.Object {
+func (dcr *DateComponentsRange) EndDateComponents() *foundation.DateComponents {
+	defer runtime.KeepAlive(dcr)
 	_r := objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("endDateComponents"))
-	return obj.Wrap(_r)
+	return foundation.DateComponentsFromID(_r)
 }
 
 // RecurrenceRule returns the recurrence rule.
 func (dcr *DateComponentsRange) RecurrenceRule() obj.Object {
+	defer runtime.KeepAlive(dcr)
 	_r := objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("recurrenceRule"))
 	return obj.Wrap(_r)
 }

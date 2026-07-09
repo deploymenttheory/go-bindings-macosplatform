@@ -5,11 +5,16 @@
 package appkit
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,8 +65,21 @@ func NewApplication() *Application {
 	return _mainthread0
 }
 
+// WithDelegate sets the app delegate object.
+func (a *Application) WithDelegate(delegate ApplicationDelegate) *Application {
+	_shim := newApplicationDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(a), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return a
+}
+
 // WithMainMenu sets the main menu.
 func (a *Application) WithMainMenu(mainMenu *Menu) *Application {
+	defer runtime.KeepAlive(mainMenu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setMainMenu:"), objref.IDOf(mainMenu))
 	})
@@ -70,6 +88,7 @@ func (a *Application) WithMainMenu(mainMenu *Menu) *Application {
 
 // WithHelpMenu sets the help menu used by the app.
 func (a *Application) WithHelpMenu(helpMenu *Menu) *Application {
+	defer runtime.KeepAlive(helpMenu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setHelpMenu:"), objref.IDOf(helpMenu))
 	})
@@ -78,6 +97,7 @@ func (a *Application) WithHelpMenu(helpMenu *Menu) *Application {
 
 // WithApplicationIconImage sets the image used for the app’s icon.
 func (a *Application) WithApplicationIconImage(applicationIconImage *Image) *Application {
+	defer runtime.KeepAlive(applicationIconImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setApplicationIconImage:"), objref.IDOf(applicationIconImage))
 	})
@@ -94,6 +114,7 @@ func (a *Application) WithPresentationOptions(presentationOptions ApplicationPre
 
 // WithAppearance sets the appearance associated with the app’s windows.
 func (a *Application) WithAppearance(appearance *Appearance) *Application {
+	defer runtime.KeepAlive(appearance)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setAppearance:"), objref.IDOf(appearance))
 	})
@@ -102,6 +123,7 @@ func (a *Application) WithAppearance(appearance *Appearance) *Application {
 
 // WithWindowsMenu sets the windows menu.
 func (a *Application) WithWindowsMenu(windowsMenu *Menu) *Application {
+	defer runtime.KeepAlive(windowsMenu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setWindowsMenu:"), objref.IDOf(windowsMenu))
 	})
@@ -110,6 +132,7 @@ func (a *Application) WithWindowsMenu(windowsMenu *Menu) *Application {
 
 // WithServicesMenu sets the services menu.
 func (a *Application) WithServicesMenu(servicesMenu *Menu) *Application {
+	defer runtime.KeepAlive(servicesMenu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setServicesMenu:"), objref.IDOf(servicesMenu))
 	})
@@ -118,6 +141,7 @@ func (a *Application) WithServicesMenu(servicesMenu *Menu) *Application {
 
 // WithServicesProvider sets the object that provides the services the current app advertises in the Services menu of other apps.
 func (a *Application) WithServicesProvider(servicesProvider obj.Object) *Application {
+	defer runtime.KeepAlive(servicesProvider)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setServicesProvider:"), objref.IDOf(servicesProvider))
 	})
@@ -134,6 +158,7 @@ func (a *Application) WithAutomaticCustomizeTouchBarMenuItemEnabled(automaticCus
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (a *Application) WithNextResponder(nextResponder ResponderProvider) *Application {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -142,6 +167,7 @@ func (a *Application) WithNextResponder(nextResponder ResponderProvider) *Applic
 
 // WithMenu sets returns the responder’s menu.
 func (a *Application) WithMenu(menu *Menu) *Application {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -150,6 +176,7 @@ func (a *Application) WithMenu(menu *Menu) *Application {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (a *Application) WithUserActivity(userActivity obj.Object) *Application {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -158,6 +185,7 @@ func (a *Application) WithUserActivity(userActivity obj.Object) *Application {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (a *Application) WithTouchBar(touchBar *TouchBar) *Application {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -166,6 +194,8 @@ func (a *Application) WithTouchBar(touchBar *TouchBar) *Application {
 
 // Hide hides all the receiver’s windows, and the next app in line is activated.
 func (a *Application) Hide(sender obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("hide:"), objref.IDOf(sender))
 	})
@@ -174,6 +204,8 @@ func (a *Application) Hide(sender obj.Object) {
 
 // Unhide wraps the corresponding Objective-C method.
 func (a *Application) Unhide(sender obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("unhide:"), objref.IDOf(sender))
 	})
@@ -182,6 +214,7 @@ func (a *Application) Unhide(sender obj.Object) {
 
 // UnhideWithoutActivation restores hidden windows without activating their owner (the receiver).
 func (a *Application) UnhideWithoutActivation() {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("unhideWithoutActivation"))
 	})
@@ -190,6 +223,7 @@ func (a *Application) UnhideWithoutActivation() {
 
 // WindowWithWindowNumber wraps the corresponding Objective-C method.
 func (a *Application) WindowWithWindowNumber(windowNum int) *Window {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 *Window
 	purego.Main(func() {
 		_mainthread0 = func() *Window {
@@ -203,6 +237,7 @@ func (a *Application) WindowWithWindowNumber(windowNum int) *Window {
 
 // Deactivate deactivates the receiver.
 func (a *Application) Deactivate() {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("deactivate"))
 	})
@@ -211,6 +246,7 @@ func (a *Application) Deactivate() {
 
 // ActivateIgnoringOtherApps makes the receiver the active app. - Parameter ignoreOtherApps: If `NO`, the app is activated only if no other app is currently active. If `YES`, the app activates regardless.
 func (a *Application) ActivateIgnoringOtherApps(ignoreOtherApps bool) {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("activateIgnoringOtherApps:"), ignoreOtherApps)
 	})
@@ -219,6 +255,7 @@ func (a *Application) ActivateIgnoringOtherApps(ignoreOtherApps bool) {
 
 // Activate activates the receiver app, if appropriate.
 func (a *Application) Activate() {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("activate"))
 	})
@@ -227,6 +264,8 @@ func (a *Application) Activate() {
 
 // YieldActivationToApplication explicitly allows another app to make itself active.
 func (a *Application) YieldActivationToApplication(application *RunningApplication) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(application)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("yieldActivationToApplication:"), objref.IDOf(application))
 	})
@@ -235,6 +274,7 @@ func (a *Application) YieldActivationToApplication(application *RunningApplicati
 
 // YieldActivationToApplicationWithBundleIdentifier explicitly allows another app to make itself active.
 func (a *Application) YieldActivationToApplicationWithBundleIdentifier(bundleIdentifier string) {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("yieldActivationToApplicationWithBundleIdentifier:"), purego.NSString(bundleIdentifier))
 	})
@@ -243,6 +283,8 @@ func (a *Application) YieldActivationToApplicationWithBundleIdentifier(bundleIde
 
 // HideOtherApplications hides all apps, except the receiver.
 func (a *Application) HideOtherApplications(sender obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("hideOtherApplications:"), objref.IDOf(sender))
 	})
@@ -251,6 +293,8 @@ func (a *Application) HideOtherApplications(sender obj.Object) {
 
 // UnhideAllApplications unhides all apps, including the receiver.
 func (a *Application) UnhideAllApplications(sender obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("unhideAllApplications:"), objref.IDOf(sender))
 	})
@@ -259,6 +303,7 @@ func (a *Application) UnhideAllApplications(sender obj.Object) {
 
 // FinishLaunching activates the app, opens any files specified by the NSOpen user default, and unhighlights the app’s icon.
 func (a *Application) FinishLaunching() {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("finishLaunching"))
 	})
@@ -267,6 +312,7 @@ func (a *Application) FinishLaunching() {
 
 // Run starts the main event loop.
 func (a *Application) Run() {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("run"))
 	})
@@ -275,6 +321,8 @@ func (a *Application) Run() {
 
 // RunModalForWindow runs modal for window.
 func (a *Application) RunModalForWindow(window *Window) int {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(window)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -288,6 +336,8 @@ func (a *Application) RunModalForWindow(window *Window) int {
 
 // Stop stops the main event loop.
 func (a *Application) Stop(sender obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stop:"), objref.IDOf(sender))
 	})
@@ -296,6 +346,7 @@ func (a *Application) Stop(sender obj.Object) {
 
 // StopModal stops modal.
 func (a *Application) StopModal() {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stopModal"))
 	})
@@ -304,6 +355,7 @@ func (a *Application) StopModal() {
 
 // StopModalWithCode stops modal with code.
 func (a *Application) StopModalWithCode(returnCode int) {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stopModalWithCode:"), returnCode)
 	})
@@ -312,6 +364,7 @@ func (a *Application) StopModalWithCode(returnCode int) {
 
 // AbortModal wraps the corresponding Objective-C method.
 func (a *Application) AbortModal() {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("abortModal"))
 	})
@@ -320,6 +373,8 @@ func (a *Application) AbortModal() {
 
 // BeginModalSessionForWindow begins modal session for window.
 func (a *Application) BeginModalSessionForWindow(window *Window) obj.Object {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(window)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -333,6 +388,8 @@ func (a *Application) BeginModalSessionForWindow(window *Window) obj.Object {
 
 // RunModalSession runs modal session.
 func (a *Application) RunModalSession(session obj.Object) int {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(session)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -346,6 +403,8 @@ func (a *Application) RunModalSession(session obj.Object) int {
 
 // EndModalSession ends modal session.
 func (a *Application) EndModalSession(session obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(session)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("endModalSession:"), objref.IDOf(session))
 	})
@@ -354,6 +413,8 @@ func (a *Application) EndModalSession(session obj.Object) {
 
 // Terminate terminates the receiver.
 func (a *Application) Terminate(sender obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("terminate:"), objref.IDOf(sender))
 	})
@@ -362,6 +423,7 @@ func (a *Application) Terminate(sender obj.Object) {
 
 // RequestUserAttention starts a user attention request.
 func (a *Application) RequestUserAttention(requestType RequestUserAttentionType) int {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -375,6 +437,7 @@ func (a *Application) RequestUserAttention(requestType RequestUserAttentionType)
 
 // CancelUserAttentionRequest cancels a previous user attention request.
 func (a *Application) CancelUserAttentionRequest(request int) {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("cancelUserAttentionRequest:"), request)
 	})
@@ -383,6 +446,7 @@ func (a *Application) CancelUserAttentionRequest(request int) {
 
 // EnumerateWindowsWithOptionsUsing execute a block for each of the app's windows. Set `*stop = YES` if desired, to halt the enumeration early.
 func (a *Application) EnumerateWindowsWithOptionsUsing(options WindowListOptions, block func(obj.Object, *bool)) {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("enumerateWindowsWithOptions:usingBlock:"), options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 	})
@@ -391,6 +455,7 @@ func (a *Application) EnumerateWindowsWithOptionsUsing(options WindowListOptions
 
 // PreventWindowOrdering wraps the corresponding Objective-C method.
 func (a *Application) PreventWindowOrdering() {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("preventWindowOrdering"))
 	})
@@ -399,6 +464,7 @@ func (a *Application) PreventWindowOrdering() {
 
 // SetWindowsNeedUpdate wraps the corresponding Objective-C method.
 func (a *Application) SetWindowsNeedUpdate(needUpdate bool) {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setWindowsNeedUpdate:"), needUpdate)
 	})
@@ -407,6 +473,7 @@ func (a *Application) SetWindowsNeedUpdate(needUpdate bool) {
 
 // UpdateWindows sends an message to each onscreen window.
 func (a *Application) UpdateWindows() {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("updateWindows"))
 	})
@@ -415,6 +482,7 @@ func (a *Application) UpdateWindows() {
 
 // ActivationPolicy returns the app’s activation policy.
 func (a *Application) ActivationPolicy() ApplicationActivationPolicy {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 ApplicationActivationPolicy
 	purego.Main(func() {
 		_mainthread0 = func() ApplicationActivationPolicy {
@@ -428,6 +496,7 @@ func (a *Application) ActivationPolicy() ApplicationActivationPolicy {
 
 // SetActivationPolicy attempts to modify the app’s activation policy.
 func (a *Application) SetActivationPolicy(activationPolicy ApplicationActivationPolicy) bool {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -441,6 +510,8 @@ func (a *Application) SetActivationPolicy(activationPolicy ApplicationActivation
 
 // ReportException logs a given exception by calling NSLog().
 func (a *Application) ReportException(exception obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(exception)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("reportException:"), objref.IDOf(exception))
 	})
@@ -449,6 +520,7 @@ func (a *Application) ReportException(exception obj.Object) {
 
 // ReplyToApplicationShouldTerminate responds to NSTerminateLater once the app knows whether it can terminate.
 func (a *Application) ReplyToApplicationShouldTerminate(shouldTerminate bool) {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("replyToApplicationShouldTerminate:"), shouldTerminate)
 	})
@@ -457,6 +529,7 @@ func (a *Application) ReplyToApplicationShouldTerminate(shouldTerminate bool) {
 
 // ReplyToOpenOrPrint handles errors that might occur when the user attempts to open or print files.
 func (a *Application) ReplyToOpenOrPrint(reply ApplicationDelegateReply) {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("replyToOpenOrPrint:"), reply)
 	})
@@ -465,6 +538,8 @@ func (a *Application) ReplyToOpenOrPrint(reply ApplicationDelegateReply) {
 
 // OrderFrontCharacterPalette opens the character palette.
 func (a *Application) OrderFrontCharacterPalette(sender obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("orderFrontCharacterPalette:"), objref.IDOf(sender))
 	})
@@ -473,6 +548,7 @@ func (a *Application) OrderFrontCharacterPalette(sender obj.Object) {
 
 // MainWindow returns the main window.
 func (a *Application) MainWindow() *Window {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 *Window
 	purego.Main(func() {
 		_mainthread0 = func() *Window {
@@ -486,6 +562,7 @@ func (a *Application) MainWindow() *Window {
 
 // KeyWindow returns the key window.
 func (a *Application) KeyWindow() *Window {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 *Window
 	purego.Main(func() {
 		_mainthread0 = func() *Window {
@@ -499,6 +576,7 @@ func (a *Application) KeyWindow() *Window {
 
 // IsActive reports whether the object is active.
 func (a *Application) IsActive() bool {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -512,6 +590,7 @@ func (a *Application) IsActive() bool {
 
 // IsHidden reports whether the object is hidden.
 func (a *Application) IsHidden() bool {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -525,6 +604,7 @@ func (a *Application) IsHidden() bool {
 
 // IsRunning reports whether the object is running.
 func (a *Application) IsRunning() bool {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -538,6 +618,7 @@ func (a *Application) IsRunning() bool {
 
 // ApplicationShouldSuppressHighDynamicRangeContent reports whether your application should suppress HDR content based on established policy. Built-in AppKit components such as NSImageView will automatically behave correctly with HDR content. You should use this value in conjunction with notifications (`NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification` and `NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification`) to suppress HDR content in your application when signaled to do so.
 func (a *Application) ApplicationShouldSuppressHighDynamicRangeContent() bool {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -551,6 +632,7 @@ func (a *Application) ApplicationShouldSuppressHighDynamicRangeContent() bool {
 
 // ModalWindow returns the modal window.
 func (a *Application) ModalWindow() *Window {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 *Window
 	purego.Main(func() {
 		_mainthread0 = func() *Window {
@@ -566,6 +648,7 @@ func (a *Application) ModalWindow() *Window {
 //
 // Windows returns the collection as a Go slice.
 func (a *Application) Windows() []*Window {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 []*Window
 	purego.Main(func() {
 		_mainthread0 = func() []*Window {
@@ -578,6 +661,7 @@ func (a *Application) Windows() []*Window {
 
 // MainMenu returns the main menu.
 func (a *Application) MainMenu() *Menu {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 *Menu
 	purego.Main(func() {
 		_mainthread0 = func() *Menu {
@@ -591,6 +675,7 @@ func (a *Application) MainMenu() *Menu {
 
 // HelpMenu set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from `-helpMenu`).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.
 func (a *Application) HelpMenu() *Menu {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 *Menu
 	purego.Main(func() {
 		_mainthread0 = func() *Menu {
@@ -604,6 +689,7 @@ func (a *Application) HelpMenu() *Menu {
 
 // ApplicationIconImage returns the application icon image.
 func (a *Application) ApplicationIconImage() *Image {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {
@@ -617,6 +703,7 @@ func (a *Application) ApplicationIconImage() *Image {
 
 // DockTile returns the dock tile.
 func (a *Application) DockTile() *DockTile {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 *DockTile
 	purego.Main(func() {
 		_mainthread0 = func() *DockTile {
@@ -630,6 +717,7 @@ func (a *Application) DockTile() *DockTile {
 
 // PresentationOptions gets or sets the
 func (a *Application) PresentationOptions() ApplicationPresentationOptions {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 ApplicationPresentationOptions
 	purego.Main(func() {
 		_mainthread0 = func() ApplicationPresentationOptions {
@@ -643,6 +731,7 @@ func (a *Application) PresentationOptions() ApplicationPresentationOptions {
 
 // CurrentSystemPresentationOptions returns the current system presentation options.
 func (a *Application) CurrentSystemPresentationOptions() ApplicationPresentationOptions {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 ApplicationPresentationOptions
 	purego.Main(func() {
 		_mainthread0 = func() ApplicationPresentationOptions {
@@ -656,6 +745,7 @@ func (a *Application) CurrentSystemPresentationOptions() ApplicationPresentation
 
 // OcclusionState returns the occlusion state.
 func (a *Application) OcclusionState() ApplicationOcclusionState {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 ApplicationOcclusionState
 	purego.Main(func() {
 		_mainthread0 = func() ApplicationOcclusionState {
@@ -669,6 +759,7 @@ func (a *Application) OcclusionState() ApplicationOcclusionState {
 
 // IsProtectedDataAvailable reports whether the object is protected data available.
 func (a *Application) IsProtectedDataAvailable() bool {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -682,6 +773,7 @@ func (a *Application) IsProtectedDataAvailable() bool {
 
 // Appearance returns the appearance.
 func (a *Application) Appearance() *Appearance {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 *Appearance
 	purego.Main(func() {
 		_mainthread0 = func() *Appearance {
@@ -695,6 +787,7 @@ func (a *Application) Appearance() *Appearance {
 
 // EffectiveAppearance returns the effective appearance.
 func (a *Application) EffectiveAppearance() *Appearance {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 *Appearance
 	purego.Main(func() {
 		_mainthread0 = func() *Appearance {
@@ -708,6 +801,8 @@ func (a *Application) EffectiveAppearance() *Appearance {
 
 // SendEvent dispatches an event to other objects.
 func (a *Application) SendEvent(event *Event) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("sendEvent:"), objref.IDOf(event))
 	})
@@ -716,6 +811,8 @@ func (a *Application) SendEvent(event *Event) {
 
 // PostEventAtStart adds a given event to the receiver’s event queue.
 func (a *Application) PostEventAtStart(event *Event, atStart bool) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("postEvent:atStart:"), objref.IDOf(event), atStart)
 	})
@@ -723,11 +820,13 @@ func (a *Application) PostEventAtStart(event *Event, atStart bool) {
 }
 
 // NextEventMatchingMaskUntilDateInModeDequeue returns the next event matching a given mask, or nil if no such event is found before a specified expiration date.
-func (a *Application) NextEventMatchingMaskUntilDateInModeDequeue(mask EventMask, expiration obj.Object, mode obj.Object, deqFlag bool) *Event {
+func (a *Application) NextEventMatchingMaskUntilDateInModeDequeue(mask EventMask, expiration time.Time, mode obj.Object, deqFlag bool) *Event {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(mode)
 	var _mainthread0 *Event
 	purego.Main(func() {
 		_mainthread0 = func() *Event {
-			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("nextEventMatchingMask:untilDate:inMode:dequeue:"), mask, objref.IDOf(expiration), objref.IDOf(mode), deqFlag)
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("nextEventMatchingMask:untilDate:inMode:dequeue:"), mask, rt.TimeToNSDate(expiration), objref.IDOf(mode), deqFlag)
 			return EventFromID(_r)
 		}()
 	})
@@ -737,6 +836,8 @@ func (a *Application) NextEventMatchingMaskUntilDateInModeDequeue(mask EventMask
 
 // DiscardEventsMatchingMaskBeforeEvent removes all events matching the given mask and generated before the specified event.
 func (a *Application) DiscardEventsMatchingMaskBeforeEvent(mask EventMask, lastEvent *Event) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(lastEvent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("discardEventsMatchingMask:beforeEvent:"), mask, objref.IDOf(lastEvent))
 	})
@@ -745,6 +846,7 @@ func (a *Application) DiscardEventsMatchingMaskBeforeEvent(mask EventMask, lastE
 
 // CurrentEvent returns the current event.
 func (a *Application) CurrentEvent() *Event {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 *Event
 	purego.Main(func() {
 		_mainthread0 = func() *Event {
@@ -758,6 +860,8 @@ func (a *Application) CurrentEvent() *Event {
 
 // ArrangeInFront wraps the corresponding Objective-C method.
 func (a *Application) ArrangeInFront(sender obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("arrangeInFront:"), objref.IDOf(sender))
 	})
@@ -766,6 +870,8 @@ func (a *Application) ArrangeInFront(sender obj.Object) {
 
 // RemoveWindowsItem removes windows item.
 func (a *Application) RemoveWindowsItem(win *Window) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(win)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeWindowsItem:"), objref.IDOf(win))
 	})
@@ -773,23 +879,29 @@ func (a *Application) RemoveWindowsItem(win *Window) {
 }
 
 // AddWindowsItemTitleFilename adds windows item title filename.
-func (a *Application) AddWindowsItemTitleFilename(win *Window, string_ string, isFilename bool) {
+func (a *Application) AddWindowsItemTitleFilename(win *Window, str string, isFilename bool) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(win)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addWindowsItem:title:filename:"), objref.IDOf(win), purego.NSString(string_), isFilename)
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addWindowsItem:title:filename:"), objref.IDOf(win), purego.NSString(str), isFilename)
 	})
 
 }
 
 // ChangeWindowsItemTitleFilename wraps the corresponding Objective-C method.
-func (a *Application) ChangeWindowsItemTitleFilename(win *Window, string_ string, isFilename bool) {
+func (a *Application) ChangeWindowsItemTitleFilename(win *Window, str string, isFilename bool) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(win)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("changeWindowsItem:title:filename:"), objref.IDOf(win), purego.NSString(string_), isFilename)
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("changeWindowsItem:title:filename:"), objref.IDOf(win), purego.NSString(str), isFilename)
 	})
 
 }
 
 // UpdateWindowsItem updates windows item.
 func (a *Application) UpdateWindowsItem(win *Window) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(win)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("updateWindowsItem:"), objref.IDOf(win))
 	})
@@ -798,6 +910,8 @@ func (a *Application) UpdateWindowsItem(win *Window) {
 
 // MiniaturizeAll wraps the corresponding Objective-C method.
 func (a *Application) MiniaturizeAll(sender obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("miniaturizeAll:"), objref.IDOf(sender))
 	})
@@ -806,6 +920,7 @@ func (a *Application) MiniaturizeAll(sender obj.Object) {
 
 // WindowsMenu returns the windows menu.
 func (a *Application) WindowsMenu() *Menu {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 *Menu
 	purego.Main(func() {
 		_mainthread0 = func() *Menu {
@@ -819,6 +934,7 @@ func (a *Application) WindowsMenu() *Menu {
 
 // IsFullKeyboardAccessEnabled reports whether keyboard navigation is enabled in System Settings > Keyboard. - Note: The value of this property is `YES` if keyboard navigation is enabled or `NO` if it’s not. You might use this value to implement your own key loop or to implement in-control tabbing behavior similar to `NSTableView`. Because of the nature of the preference storage, you won’t be notified of changes to this property if you attempt to observe it through key-value observing; however, accessing this property is fairly inexpensive, so you can access it directly rather than caching it. - Note: This property’s value isn’t necessarily reflective of the separate accessibility setting named “Full Keyboard Access” in System Settings > Accessibility > Keyboard.
 func (a *Application) IsFullKeyboardAccessEnabled() bool {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -831,15 +947,17 @@ func (a *Application) IsFullKeyboardAccessEnabled() bool {
 }
 
 // RegisterServicesMenuSendTypesReturnTypes registers services menu send types return types.
-func (a *Application) RegisterServicesMenuSendTypesReturnTypes(sendTypes []obj.Object, returnTypes []obj.Object) {
+func (a *Application) RegisterServicesMenuSendTypesReturnTypes(sendTypes []*foundation.String, returnTypes []*foundation.String) {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("registerServicesMenuSendTypes:returnTypes:"), purego.SliceToNSArray(sendTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(returnTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("registerServicesMenuSendTypes:returnTypes:"), purego.SliceToNSArray(sendTypes, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(returnTypes, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
 	})
 
 }
 
 // ServicesMenu returns the services menu.
 func (a *Application) ServicesMenu() *Menu {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 *Menu
 	purego.Main(func() {
 		_mainthread0 = func() *Menu {
@@ -853,6 +971,7 @@ func (a *Application) ServicesMenu() *Menu {
 
 // ServicesProvider returns the services provider.
 func (a *Application) ServicesProvider() obj.Object {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -866,6 +985,8 @@ func (a *Application) ServicesProvider() obj.Object {
 
 // OrderFrontStandardAboutPanel wraps the corresponding Objective-C method.
 func (a *Application) OrderFrontStandardAboutPanel(sender obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("orderFrontStandardAboutPanel:"), objref.IDOf(sender))
 	})
@@ -874,6 +995,8 @@ func (a *Application) OrderFrontStandardAboutPanel(sender obj.Object) {
 
 // OrderFrontStandardAboutPanelWithOptions wraps the corresponding Objective-C method.
 func (a *Application) OrderFrontStandardAboutPanelWithOptions(optionsDictionary obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(optionsDictionary)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("orderFrontStandardAboutPanelWithOptions:"), objref.IDOf(optionsDictionary))
 	})
@@ -882,6 +1005,7 @@ func (a *Application) OrderFrontStandardAboutPanelWithOptions(optionsDictionary 
 
 // UserInterfaceLayoutDirection returns the user interface layout direction.
 func (a *Application) UserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 UserInterfaceLayoutDirection
 	purego.Main(func() {
 		_mainthread0 = func() UserInterfaceLayoutDirection {
@@ -895,6 +1019,7 @@ func (a *Application) UserInterfaceLayoutDirection() UserInterfaceLayoutDirectio
 
 // DisableRelaunchOnLogin disables relaunching the app on login.
 func (a *Application) DisableRelaunchOnLogin() {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("disableRelaunchOnLogin"))
 	})
@@ -903,6 +1028,7 @@ func (a *Application) DisableRelaunchOnLogin() {
 
 // EnableRelaunchOnLogin enables relaunching the app on login.
 func (a *Application) EnableRelaunchOnLogin() {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("enableRelaunchOnLogin"))
 	})
@@ -911,6 +1037,7 @@ func (a *Application) EnableRelaunchOnLogin() {
 
 // RegisterForRemoteNotifications register for notifications sent by Apple Push Notification service (APNs).
 func (a *Application) RegisterForRemoteNotifications() {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("registerForRemoteNotifications"))
 	})
@@ -919,6 +1046,7 @@ func (a *Application) RegisterForRemoteNotifications() {
 
 // UnregisterForRemoteNotifications unregister for notifications received from Apple Push Notification service.
 func (a *Application) UnregisterForRemoteNotifications() {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("unregisterForRemoteNotifications"))
 	})
@@ -927,6 +1055,7 @@ func (a *Application) UnregisterForRemoteNotifications() {
 
 // RegisterForRemoteNotificationTypes register to receive notifications of the specified types from a provider through the Apple Push Notification service.
 func (a *Application) RegisterForRemoteNotificationTypes(types RemoteNotificationType) {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("registerForRemoteNotificationTypes:"), types)
 	})
@@ -935,6 +1064,7 @@ func (a *Application) RegisterForRemoteNotificationTypes(types RemoteNotificatio
 
 // IsRegisteredForRemoteNotifications reports whether the object is registered for remote notifications.
 func (a *Application) IsRegisteredForRemoteNotifications() bool {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -948,6 +1078,7 @@ func (a *Application) IsRegisteredForRemoteNotifications() bool {
 
 // EnabledRemoteNotificationTypes returns the enabled remote notification types.
 func (a *Application) EnabledRemoteNotificationTypes() RemoteNotificationType {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 RemoteNotificationType
 	purego.Main(func() {
 		_mainthread0 = func() RemoteNotificationType {
@@ -961,6 +1092,9 @@ func (a *Application) EnabledRemoteNotificationTypes() RemoteNotificationType {
 
 // RunModalForWindowRelativeToWindow `-runModalForWindow:relativeToWindow:` was deprecated in Mac OS X 10.0. Please use `-[NSWindow beginSheet:completionHandler:]` instead.
 func (a *Application) RunModalForWindowRelativeToWindow(window *Window, docWindow *Window) int {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(window)
+	defer runtime.KeepAlive(docWindow)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -974,6 +1108,9 @@ func (a *Application) RunModalForWindowRelativeToWindow(window *Window, docWindo
 
 // BeginModalSessionForWindowRelativeToWindow `-beginModalSessionForWindow:relativeToWindow:` was deprecated in Mac OS X 10.0. Please use `-[NSWindow beginSheet:completionHandler:]` instead.
 func (a *Application) BeginModalSessionForWindowRelativeToWindow(window *Window, docWindow *Window) obj.Object {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(window)
+	defer runtime.KeepAlive(docWindow)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -987,6 +1124,8 @@ func (a *Application) BeginModalSessionForWindowRelativeToWindow(window *Window,
 
 // ApplicationPrintFiles `-application:printFiles:` was deprecated in Mac OS X 10.4. Implement `-application:printFiles:withSettings:showPrintPanels:` in your application delegate instead.
 func (a *Application) ApplicationPrintFiles(sender *Application, filenames []string) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("application:printFiles:"), objref.IDOf(sender), purego.SliceToNSArray(filenames, func(_v string) objc.ID { return purego.NSString(_v) }))
 	})
@@ -995,6 +1134,8 @@ func (a *Application) ApplicationPrintFiles(sender *Application, filenames []str
 
 // EndSheet ends sheet.
 func (a *Application) EndSheet(sheet *Window) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(sheet)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("endSheet:"), objref.IDOf(sheet))
 	})
@@ -1003,6 +1144,8 @@ func (a *Application) EndSheet(sheet *Window) {
 
 // EndSheetReturnCode ends sheet return code.
 func (a *Application) EndSheetReturnCode(sheet *Window, returnCode int) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(sheet)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("endSheet:returnCode:"), objref.IDOf(sheet), returnCode)
 	})
@@ -1011,6 +1154,7 @@ func (a *Application) EndSheetReturnCode(sheet *Window, returnCode int) {
 
 // Context returns this method is deprecated as of macOS 10.12. Beginning in OS X 10.11 it would always return nil. Prior to this it would return an undefined graphics context that was not generally suitable for drawing.
 func (a *Application) Context() *GraphicsContext {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 *GraphicsContext
 	purego.Main(func() {
 		_mainthread0 = func() *GraphicsContext {
@@ -1024,6 +1168,8 @@ func (a *Application) Context() *GraphicsContext {
 
 // ActivateContextHelpMode places the receiver in context-sensitive help mode.
 func (a *Application) ActivateContextHelpMode(sender obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("activateContextHelpMode:"), objref.IDOf(sender))
 	})
@@ -1032,6 +1178,8 @@ func (a *Application) ActivateContextHelpMode(sender obj.Object) {
 
 // ShowHelp if your project is properly registered, and the necessary keys have been set in the property list, this method launches Help Viewer and displays the first page of your app’s help book.
 func (a *Application) ShowHelp(sender obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("showHelp:"), objref.IDOf(sender))
 	})
@@ -1040,6 +1188,8 @@ func (a *Application) ShowHelp(sender obj.Object) {
 
 // ToggleTouchBarCustomizationPalette show or hides the interface for customizing the Touch Bar.
 func (a *Application) ToggleTouchBarCustomizationPalette(sender obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("toggleTouchBarCustomizationPalette:"), objref.IDOf(sender))
 	})
@@ -1048,6 +1198,7 @@ func (a *Application) ToggleTouchBarCustomizationPalette(sender obj.Object) {
 
 // IsAutomaticCustomizeTouchBarMenuItemEnabled reports whether a menu item to customize the NSTouchBar can be automatically added to the main menu. It will only actually be added when Touch Bar hardware or simulator is present. Defaults to false. Setting this property to true is the recommended way to add the customization menu item. But if non-standard placement of the menu item is needed, creating a menu item with an action of `toggleTouchBarCustomizationPalette:` can be used instead.
 func (a *Application) IsAutomaticCustomizeTouchBarMenuItemEnabled() bool {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1061,6 +1212,8 @@ func (a *Application) IsAutomaticCustomizeTouchBarMenuItemEnabled() bool {
 
 // OrderFrontColorPanel wraps the corresponding Objective-C method.
 func (a *Application) OrderFrontColorPanel(sender obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("orderFrontColorPanel:"), objref.IDOf(sender))
 	})
@@ -1069,6 +1222,8 @@ func (a *Application) OrderFrontColorPanel(sender obj.Object) {
 
 // RunPageLayout runs page layout.
 func (a *Application) RunPageLayout(sender obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("runPageLayout:"), objref.IDOf(sender))
 	})
@@ -1079,6 +1234,7 @@ func (a *Application) RunPageLayout(sender obj.Object) {
 //
 // OrderedDocuments returns the collection as a Go slice.
 func (a *Application) OrderedDocuments() []*Document {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 []*Document
 	purego.Main(func() {
 		_mainthread0 = func() []*Document {
@@ -1093,6 +1249,7 @@ func (a *Application) OrderedDocuments() []*Document {
 //
 // OrderedWindows returns the collection as a Go slice.
 func (a *Application) OrderedWindows() []*Window {
+	defer runtime.KeepAlive(a)
 	var _mainthread0 []*Window
 	purego.Main(func() {
 		_mainthread0 = func() []*Window {
@@ -1105,6 +1262,7 @@ func (a *Application) OrderedWindows() []*Window {
 
 // ExtendStateRestoration wraps the corresponding Objective-C method.
 func (a *Application) ExtendStateRestoration() {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("extendStateRestoration"))
 	})
@@ -1113,6 +1271,7 @@ func (a *Application) ExtendStateRestoration() {
 
 // CompleteStateRestoration wraps the corresponding Objective-C method.
 func (a *Application) CompleteStateRestoration() {
+	defer runtime.KeepAlive(a)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("completeStateRestoration"))
 	})

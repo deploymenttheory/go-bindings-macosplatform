@@ -5,6 +5,8 @@
 package speech
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -91,27 +93,34 @@ func (sabrr *SpeechAudioBufferRecognitionRequest) WithAddsPunctuation(addsPunctu
 
 // WithCustomizedLanguageModel sets the customized language model.
 func (sabrr *SpeechAudioBufferRecognitionRequest) WithCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) *SpeechAudioBufferRecognitionRequest {
+	defer runtime.KeepAlive(customizedLanguageModel)
 	objc.Send[objc.ID](objref.IDOf(sabrr), objc.RegisterName("setCustomizedLanguageModel:"), objref.IDOf(customizedLanguageModel))
 	return sabrr
 }
 
 // AppendAudioPCMBuffer appends audio in the PCM format to the end of the recognition request.
 func (sabrr *SpeechAudioBufferRecognitionRequest) AppendAudioPCMBuffer(audioPCMBuffer obj.Object) {
+	defer runtime.KeepAlive(sabrr)
+	defer runtime.KeepAlive(audioPCMBuffer)
 	objc.Send[objc.ID](objref.IDOf(sabrr), objc.RegisterName("appendAudioPCMBuffer:"), objref.IDOf(audioPCMBuffer))
 }
 
 // AppendAudioSampleBuffer appends audio to the end of the recognition request.
 func (sabrr *SpeechAudioBufferRecognitionRequest) AppendAudioSampleBuffer(sampleBuffer obj.Object) {
+	defer runtime.KeepAlive(sabrr)
+	defer runtime.KeepAlive(sampleBuffer)
 	objc.Send[objc.ID](objref.IDOf(sabrr), objc.RegisterName("appendAudioSampleBuffer:"), objref.IDOf(sampleBuffer))
 }
 
 // EndAudio marks the end of audio input for the recognition request.
 func (sabrr *SpeechAudioBufferRecognitionRequest) EndAudio() {
+	defer runtime.KeepAlive(sabrr)
 	objc.Send[objc.ID](objref.IDOf(sabrr), objc.RegisterName("endAudio"))
 }
 
 // NativeAudioFormat returns the preferred audio format for optimal speech recognition. Use the audio format in this property as a hint for optimal recording, but don't depend on the value remaining unchanged.
 func (sabrr *SpeechAudioBufferRecognitionRequest) NativeAudioFormat() obj.Object {
+	defer runtime.KeepAlive(sabrr)
 	_r := objc.Send[objc.ID](objref.IDOf(sabrr), objc.RegisterName("nativeAudioFormat"))
 	return obj.Wrap(_r)
 }

@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func multiPolylineRendererAdopt(id objc.ID) *MultiPolylineRenderer {
 
 // NewMultiPolylineRendererWithMultiPolyline creates an object that renders a visual representation of multiple polyline objects.
 func NewMultiPolylineRendererWithMultiPolyline(multiPolyline *MultiPolyline) *MultiPolylineRenderer {
+	defer runtime.KeepAlive(multiPolyline)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMultiPolylineRenderer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMultiPolyline:"), objref.IDOf(multiPolyline))
 	return multiPolylineRendererAdopt(_id)
@@ -55,12 +58,14 @@ func NewMultiPolylineRendererWithMultiPolyline(multiPolyline *MultiPolyline) *Mu
 
 // WithFillColor sets the fill color to use for the path.
 func (mpr *MultiPolylineRenderer) WithFillColor(fillColor obj.Object) *MultiPolylineRenderer {
+	defer runtime.KeepAlive(fillColor)
 	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 	return mpr
 }
 
 // WithStrokeColor sets the stroke color to use for the path.
 func (mpr *MultiPolylineRenderer) WithStrokeColor(strokeColor obj.Object) *MultiPolylineRenderer {
+	defer runtime.KeepAlive(strokeColor)
 	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 	return mpr
 }
@@ -98,6 +103,7 @@ func (mpr *MultiPolylineRenderer) WithShouldRasterize(shouldRasterize bool) *Mul
 
 // WithPath sets the path representing the overlay’s shape.
 func (mpr *MultiPolylineRenderer) WithPath(path obj.Object) *MultiPolylineRenderer {
+	defer runtime.KeepAlive(path)
 	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return mpr
 }
@@ -110,6 +116,7 @@ func (mpr *MultiPolylineRenderer) WithAlpha(alpha float64) *MultiPolylineRendere
 
 // MultiPolyline returns the multi polyline.
 func (mpr *MultiPolylineRenderer) MultiPolyline() *MultiPolyline {
+	defer runtime.KeepAlive(mpr)
 	_r := objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("multiPolyline"))
 	return MultiPolylineFromID(_r)
 }

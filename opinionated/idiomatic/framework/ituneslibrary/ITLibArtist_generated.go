@@ -5,7 +5,10 @@
 package ituneslibrary
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func libArtistAdopt(id objc.ID) *LibArtist {
 
 // Description returns the object's -description text.
 func (la *LibArtist) Description() string {
+	defer runtime.KeepAlive(la)
 	return rt.Description(objref.IDOf(la))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (la *LibArtist) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(la)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(la), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (la *LibArtist) IsKind(className string) bool {
+	defer runtime.KeepAlive(la)
 	return rt.IsKind(objref.IDOf(la), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (la *LibArtist) String() string {
+	defer runtime.KeepAlive(la)
 	return rt.Description(objref.IDOf(la))
 }
 
@@ -74,6 +82,7 @@ func NewLibArtist() *LibArtist {
 
 // Name returns the name of this artist.
 func (la *LibArtist) Name() string {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -83,6 +92,7 @@ func (la *LibArtist) Name() string {
 
 // SortName returns the name of this artist that should be used for sorting purposes.
 func (la *LibArtist) SortName() string {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("sortName"))
 	if _r == 0 {
 		return ""
@@ -91,7 +101,8 @@ func (la *LibArtist) SortName() string {
 }
 
 // PersistentID returns the unique identifier of this artist.
-func (la *LibArtist) PersistentID() obj.Object {
+func (la *LibArtist) PersistentID() *foundation.Number {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("persistentID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

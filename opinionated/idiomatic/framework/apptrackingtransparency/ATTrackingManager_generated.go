@@ -5,6 +5,8 @@
 package apptrackingtransparency
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func trackingManagerAdopt(id objc.ID) *TrackingManager {
 
 // Description returns the object's -description text.
 func (tm *TrackingManager) Description() string {
+	defer runtime.KeepAlive(tm)
 	return rt.Description(objref.IDOf(tm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tm *TrackingManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tm *TrackingManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(tm)
 	return rt.IsKind(objref.IDOf(tm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tm *TrackingManager) String() string {
+	defer runtime.KeepAlive(tm)
 	return rt.Description(objref.IDOf(tm))
 }
 

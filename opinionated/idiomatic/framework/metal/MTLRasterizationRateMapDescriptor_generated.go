@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func rasterizationRateMapDescriptorAdopt(id objc.ID) *RasterizationRateMapDescri
 
 // Description returns the object's -description text.
 func (rrmd *RasterizationRateMapDescriptor) Description() string {
+	defer runtime.KeepAlive(rrmd)
 	return rt.Description(objref.IDOf(rrmd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rrmd *RasterizationRateMapDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rrmd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rrmd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rrmd *RasterizationRateMapDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(rrmd)
 	return rt.IsKind(objref.IDOf(rrmd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rrmd *RasterizationRateMapDescriptor) String() string {
+	defer runtime.KeepAlive(rrmd)
 	return rt.Description(objref.IDOf(rrmd))
 }
 
@@ -80,23 +87,28 @@ func (rrmd *RasterizationRateMapDescriptor) WithLabel(label string) *Rasterizati
 
 // LayerAtIndex returns the layer description for a layer in the rate map.
 func (rrmd *RasterizationRateMapDescriptor) LayerAtIndex(layerIndex int) *RasterizationRateLayerDescriptor {
+	defer runtime.KeepAlive(rrmd)
 	_r := objc.Send[objc.ID](objref.IDOf(rrmd), objc.RegisterName("layerAtIndex:"), layerIndex)
 	return RasterizationRateLayerDescriptorFromID(_r)
 }
 
 // SetLayerAtIndex sets a configuration for a layer rate map.
 func (rrmd *RasterizationRateMapDescriptor) SetLayerAtIndex(layer *RasterizationRateLayerDescriptor, layerIndex int) {
+	defer runtime.KeepAlive(rrmd)
+	defer runtime.KeepAlive(layer)
 	objc.Send[objc.ID](objref.IDOf(rrmd), objc.RegisterName("setLayer:atIndex:"), objref.IDOf(layer), layerIndex)
 }
 
 // Layers returns accesses the layers currently stored in the descriptor. Syntactic sugar around "layerAtIndex:" and "setLayer:atIndex:"
 func (rrmd *RasterizationRateMapDescriptor) Layers() *RasterizationRateLayerArray {
+	defer runtime.KeepAlive(rrmd)
 	_r := objc.Send[objc.ID](objref.IDOf(rrmd), objc.RegisterName("layers"))
 	return RasterizationRateLayerArrayFromID(_r)
 }
 
 // Label returns a string to help identify this object. The default value is nil.
 func (rrmd *RasterizationRateMapDescriptor) Label() string {
+	defer runtime.KeepAlive(rrmd)
 	_r := objc.Send[objc.ID](objref.IDOf(rrmd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -106,6 +118,7 @@ func (rrmd *RasterizationRateMapDescriptor) Label() string {
 
 // LayerCount returns this property is modified by setting new layer instances using setLayer:atIndex: or assigning to layers[X]
 func (rrmd *RasterizationRateMapDescriptor) LayerCount() int {
+	defer runtime.KeepAlive(rrmd)
 	_r := objc.Send[int](objref.IDOf(rrmd), objc.RegisterName("layerCount"))
 	return _r
 }

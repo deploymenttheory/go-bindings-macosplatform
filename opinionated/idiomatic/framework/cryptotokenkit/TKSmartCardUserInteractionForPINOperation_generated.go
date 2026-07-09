@@ -5,9 +5,14 @@
 package cryptotokenkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,8 +52,8 @@ func smartCardUserInteractionForPINOperationAdopt(id objc.ID) *SmartCardUserInte
 }
 
 // WithPINCompletion sets the conditions under which PIN entry should be considered complete.
-func (scuifpo *SmartCardUserInteractionForPINOperation) WithPINCompletion(pINCompletion SmartCardPINCompletion) *SmartCardUserInteractionForPINOperation {
-	objc.Send[objc.ID](objref.IDOf(scuifpo), objc.RegisterName("setPINCompletion:"), pINCompletion)
+func (scuifpo *SmartCardUserInteractionForPINOperation) WithPINCompletion(pinCompletion SmartCardPINCompletion) *SmartCardUserInteractionForPINOperation {
+	objc.Send[objc.ID](objref.IDOf(scuifpo), objc.RegisterName("setPINCompletion:"), pinCompletion)
 	return scuifpo
 }
 
@@ -61,6 +66,7 @@ func (scuifpo *SmartCardUserInteractionForPINOperation) WithPINMessageIndices(it
 
 // WithLocale sets the locale for the displayed messages. If nil, the user’s current locale is used. By default, this value is the current locale of the system.
 func (scuifpo *SmartCardUserInteractionForPINOperation) WithLocale(locale obj.Object) *SmartCardUserInteractionForPINOperation {
+	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(scuifpo), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return scuifpo
 }
@@ -72,8 +78,18 @@ func (scuifpo *SmartCardUserInteractionForPINOperation) WithResultSW(resultSW ui
 }
 
 // WithResultData sets the returned data without SW1-SW2 bytes, if any.
-func (scuifpo *SmartCardUserInteractionForPINOperation) WithResultData(resultData obj.Object) *SmartCardUserInteractionForPINOperation {
-	objc.Send[objc.ID](objref.IDOf(scuifpo), objc.RegisterName("setResultData:"), objref.IDOf(resultData))
+func (scuifpo *SmartCardUserInteractionForPINOperation) WithResultData(resultData []byte) *SmartCardUserInteractionForPINOperation {
+	objc.Send[objc.ID](objref.IDOf(scuifpo), objc.RegisterName("setResultData:"), rt.BytesToNSData(resultData))
+	return scuifpo
+}
+
+// WithDelegate sets the delegate for observing events that occur during the user interaction.
+func (scuifpo *SmartCardUserInteractionForPINOperation) WithDelegate(delegate SmartCardUserInteractionDelegate) *SmartCardUserInteractionForPINOperation {
+	_shim := newSmartCardUserInteractionDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(scuifpo), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(scuifpo), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
 	return scuifpo
 }
 
@@ -91,6 +107,7 @@ func (scuifpo *SmartCardUserInteractionForPINOperation) WithInteractionTimeout(i
 
 // PINCompletion returns bitmask specifying condition(s) under which PIN entry should be considered complete.
 func (scuifpo *SmartCardUserInteractionForPINOperation) PINCompletion() SmartCardPINCompletion {
+	defer runtime.KeepAlive(scuifpo)
 	_r := objc.Send[SmartCardPINCompletion](objref.IDOf(scuifpo), objc.RegisterName("PINCompletion"))
 	return _r
 }
@@ -99,26 +116,30 @@ func (scuifpo *SmartCardUserInteractionForPINOperation) PINCompletion() SmartCar
 //
 // PINMessageIndices returns the collection as a Go slice.
 func (scuifpo *SmartCardUserInteractionForPINOperation) PINMessageIndices() []obj.Object {
+	defer runtime.KeepAlive(scuifpo)
 	_arr := objc.Send[objc.ID](objref.IDOf(scuifpo), objc.RegisterName("PINMessageIndices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Locale returns locale defining the language of displayed messages. If set to nil, the user's current locale is used.
-func (scuifpo *SmartCardUserInteractionForPINOperation) Locale() obj.Object {
+func (scuifpo *SmartCardUserInteractionForPINOperation) Locale() *foundation.Locale {
+	defer runtime.KeepAlive(scuifpo)
 	_r := objc.Send[objc.ID](objref.IDOf(scuifpo), objc.RegisterName("locale"))
-	return obj.Wrap(_r)
+	return foundation.LocaleFromID(_r)
 }
 
 // ResultSW returns SW1SW2 result code.
 func (scuifpo *SmartCardUserInteractionForPINOperation) ResultSW() uint16 {
+	defer runtime.KeepAlive(scuifpo)
 	_r := objc.Send[uint16](objref.IDOf(scuifpo), objc.RegisterName("resultSW"))
 	return _r
 }
 
 // ResultData returns optional block of returned data (without SW1SW2 bytes).
-func (scuifpo *SmartCardUserInteractionForPINOperation) ResultData() obj.Object {
+func (scuifpo *SmartCardUserInteractionForPINOperation) ResultData() []byte {
+	defer runtime.KeepAlive(scuifpo)
 	_r := objc.Send[objc.ID](objref.IDOf(scuifpo), objc.RegisterName("resultData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // isSmartCardUserInteractionForPINOperation marks SmartCardUserInteractionForPINOperation — and, by embedding promotion, its

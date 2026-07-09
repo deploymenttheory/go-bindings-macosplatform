@@ -5,7 +5,10 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func fetchOptionsAdopt(id objc.ID) *FetchOptions {
 
 // Description returns the object's -description text.
 func (fo *FetchOptions) Description() string {
+	defer runtime.KeepAlive(fo)
 	return rt.Description(objref.IDOf(fo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fo *FetchOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fo *FetchOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(fo)
 	return rt.IsKind(objref.IDOf(fo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fo *FetchOptions) String() string {
+	defer runtime.KeepAlive(fo)
 	return rt.Description(objref.IDOf(fo))
 }
 
@@ -74,6 +82,7 @@ func NewFetchOptions() *FetchOptions {
 
 // WithPredicate sets a predicate that specifies which properties to select results by and that also specifies any constraints on selection.
 func (fo *FetchOptions) WithPredicate(predicate obj.Object) *FetchOptions {
+	defer runtime.KeepAlive(predicate)
 	objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
 	return fo
 }
@@ -116,45 +125,52 @@ func (fo *FetchOptions) WithWantsIncrementalChangeDetails(wantsIncrementalChange
 }
 
 // Predicate returns the predicate.
-func (fo *FetchOptions) Predicate() obj.Object {
+func (fo *FetchOptions) Predicate() *foundation.Predicate {
+	defer runtime.KeepAlive(fo)
 	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("predicate"))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // SortDescriptors returns the sort descriptors.
 //
 // SortDescriptors returns the collection as a Go slice.
 func (fo *FetchOptions) SortDescriptors() []obj.Object {
+	defer runtime.KeepAlive(fo)
 	_arr := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("sortDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // IncludeHiddenAssets wraps the corresponding Objective-C method.
 func (fo *FetchOptions) IncludeHiddenAssets() bool {
+	defer runtime.KeepAlive(fo)
 	_r := objc.Send[bool](objref.IDOf(fo), objc.RegisterName("includeHiddenAssets"))
 	return _r
 }
 
 // IncludeAllBurstAssets wraps the corresponding Objective-C method.
 func (fo *FetchOptions) IncludeAllBurstAssets() bool {
+	defer runtime.KeepAlive(fo)
 	_r := objc.Send[bool](objref.IDOf(fo), objc.RegisterName("includeAllBurstAssets"))
 	return _r
 }
 
 // IncludeAssetSourceTypes returns the include asset source types.
 func (fo *FetchOptions) IncludeAssetSourceTypes() AssetSourceType {
+	defer runtime.KeepAlive(fo)
 	_r := objc.Send[AssetSourceType](objref.IDOf(fo), objc.RegisterName("includeAssetSourceTypes"))
 	return _r
 }
 
 // FetchLimit returns the fetch limit.
 func (fo *FetchOptions) FetchLimit() int {
+	defer runtime.KeepAlive(fo)
 	_r := objc.Send[int](objref.IDOf(fo), objc.RegisterName("fetchLimit"))
 	return _r
 }
 
 // WantsIncrementalChangeDetails wraps the corresponding Objective-C method.
 func (fo *FetchOptions) WantsIncrementalChangeDetails() bool {
+	defer runtime.KeepAlive(fo)
 	_r := objc.Send[bool](objref.IDOf(fo), objc.RegisterName("wantsIncrementalChangeDetails"))
 	return _r
 }

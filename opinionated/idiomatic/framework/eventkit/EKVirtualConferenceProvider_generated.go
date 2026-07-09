@@ -6,6 +6,7 @@ package eventkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func virtualConferenceProviderAdopt(id objc.ID) *VirtualConferenceProvider {
 
 // Description returns the object's -description text.
 func (vcp *VirtualConferenceProvider) Description() string {
+	defer runtime.KeepAlive(vcp)
 	return rt.Description(objref.IDOf(vcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vcp *VirtualConferenceProvider) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vcp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vcp *VirtualConferenceProvider) IsKind(className string) bool {
+	defer runtime.KeepAlive(vcp)
 	return rt.IsKind(objref.IDOf(vcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vcp *VirtualConferenceProvider) String() string {
+	defer runtime.KeepAlive(vcp)
 	return rt.Description(objref.IDOf(vcp))
 }
 
@@ -79,6 +85,7 @@ func NewVirtualConferenceProvider() *VirtualConferenceProvider {
 //
 // FetchAvailableRoomTypes blocks until the operation completes or ctx is cancelled.
 func (vcp *VirtualConferenceProvider) FetchAvailableRoomTypes(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(vcp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -104,6 +111,8 @@ func (vcp *VirtualConferenceProvider) FetchAvailableRoomTypes(ctx context.Contex
 //
 // FetchVirtualConferenceForIdentifier blocks until the operation completes or ctx is cancelled.
 func (vcp *VirtualConferenceProvider) FetchVirtualConferenceForIdentifier(ctx context.Context, identifier obj.Object) (result *VirtualConferenceDescriptor, err error) {
+	defer runtime.KeepAlive(vcp)
+	defer runtime.KeepAlive(identifier)
 	type _result struct {
 		val *VirtualConferenceDescriptor
 		err error

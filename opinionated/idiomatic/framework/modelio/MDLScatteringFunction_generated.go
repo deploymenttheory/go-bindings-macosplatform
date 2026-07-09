@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func scatteringFunctionAdopt(id objc.ID) *ScatteringFunction {
 
 // Description returns the object's -description text.
 func (sf *ScatteringFunction) Description() string {
+	defer runtime.KeepAlive(sf)
 	return rt.Description(objref.IDOf(sf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sf *ScatteringFunction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sf *ScatteringFunction) IsKind(className string) bool {
+	defer runtime.KeepAlive(sf)
 	return rt.IsKind(objref.IDOf(sf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sf *ScatteringFunction) String() string {
+	defer runtime.KeepAlive(sf)
 	return rt.Description(objref.IDOf(sf))
 }
 
@@ -76,6 +83,7 @@ func (sf *ScatteringFunction) WithName(name string) *ScatteringFunction {
 
 // Name returns the name.
 func (sf *ScatteringFunction) Name() string {
+	defer runtime.KeepAlive(sf)
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -85,48 +93,56 @@ func (sf *ScatteringFunction) Name() string {
 
 // BaseColor returns the base color.
 func (sf *ScatteringFunction) BaseColor() *MaterialProperty {
+	defer runtime.KeepAlive(sf)
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("baseColor"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Emission returns the emission.
 func (sf *ScatteringFunction) Emission() *MaterialProperty {
+	defer runtime.KeepAlive(sf)
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("emission"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Specular returns the specular.
 func (sf *ScatteringFunction) Specular() *MaterialProperty {
+	defer runtime.KeepAlive(sf)
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("specular"))
 	return MaterialPropertyFromID(_r)
 }
 
 // MaterialIndexOfRefraction returns the material index of refraction.
 func (sf *ScatteringFunction) MaterialIndexOfRefraction() *MaterialProperty {
+	defer runtime.KeepAlive(sf)
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("materialIndexOfRefraction"))
 	return MaterialPropertyFromID(_r)
 }
 
 // InterfaceIndexOfRefraction returns the interface index of refraction.
 func (sf *ScatteringFunction) InterfaceIndexOfRefraction() *MaterialProperty {
+	defer runtime.KeepAlive(sf)
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("interfaceIndexOfRefraction"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Normal returns the normal.
 func (sf *ScatteringFunction) Normal() *MaterialProperty {
+	defer runtime.KeepAlive(sf)
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("normal"))
 	return MaterialPropertyFromID(_r)
 }
 
 // AmbientOcclusion returns the ambient occlusion.
 func (sf *ScatteringFunction) AmbientOcclusion() *MaterialProperty {
+	defer runtime.KeepAlive(sf)
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("ambientOcclusion"))
 	return MaterialPropertyFromID(_r)
 }
 
 // AmbientOcclusionScale returns the ambient occlusion scale.
 func (sf *ScatteringFunction) AmbientOcclusionScale() *MaterialProperty {
+	defer runtime.KeepAlive(sf)
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("ambientOcclusionScale"))
 	return MaterialPropertyFromID(_r)
 }

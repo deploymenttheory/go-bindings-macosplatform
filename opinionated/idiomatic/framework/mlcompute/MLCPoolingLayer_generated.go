@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (pl *PoolingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Pooling
 
 // Descriptor returns the pooling descriptor
 func (pl *PoolingLayer) Descriptor() *PoolingDescriptor {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("descriptor"))
 	return PoolingDescriptorFromID(_r)
 }

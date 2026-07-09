@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -61,6 +64,7 @@ func (ac *ArrayController) WithSortDescriptors(items ...obj.Object) *ArrayContro
 
 // WithFilterPredicate sets a predicate used by the receiver to filter the array controller contents
 func (ac *ArrayController) WithFilterPredicate(filterPredicate obj.Object) *ArrayController {
+	defer runtime.KeepAlive(filterPredicate)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setFilterPredicate:"), objref.IDOf(filterPredicate))
 	return ac
 }
@@ -97,6 +101,7 @@ func (ac *ArrayController) WithAlwaysUsesMultipleValuesMarker(alwaysUsesMultiple
 
 // WithSelectionIndexes sets an index set containing the indexes of the receiver’s currently selected objects in the content array
 func (ac *ArrayController) WithSelectionIndexes(selectionIndexes obj.Object) *ArrayController {
+	defer runtime.KeepAlive(selectionIndexes)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setSelectionIndexes:"), objref.IDOf(selectionIndexes))
 	return ac
 }
@@ -109,6 +114,7 @@ func (ac *ArrayController) WithSelectionIndex(selectionIndex int) *ArrayControll
 
 // WithContent sets the receiver’s content object.
 func (ac *ArrayController) WithContent(content obj.Object) *ArrayController {
+	defer runtime.KeepAlive(content)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setContent:"), objref.IDOf(content))
 	return ac
 }
@@ -127,6 +133,7 @@ func (ac *ArrayController) WithEditable(editable bool) *ArrayController {
 
 // WithManagedObjectContext sets the receiver’s managed object context.
 func (ac *ArrayController) WithManagedObjectContext(managedObjectContext obj.Object) *ArrayController {
+	defer runtime.KeepAlive(managedObjectContext)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setManagedObjectContext:"), objref.IDOf(managedObjectContext))
 	return ac
 }
@@ -139,6 +146,7 @@ func (ac *ArrayController) WithEntityName(entityName string) *ArrayController {
 
 // WithFetchPredicate sets the receiver’s fetch predicate.
 func (ac *ArrayController) WithFetchPredicate(fetchPredicate obj.Object) *ArrayController {
+	defer runtime.KeepAlive(fetchPredicate)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setFetchPredicate:"), objref.IDOf(fetchPredicate))
 	return ac
 }
@@ -151,97 +159,130 @@ func (ac *ArrayController) WithUsesLazyFetching(usesLazyFetching bool) *ArrayCon
 
 // RearrangeObjects triggers filtering of the receiver’s content.
 func (ac *ArrayController) RearrangeObjects() {
+	defer runtime.KeepAlive(ac)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("rearrangeObjects"))
 }
 
 // DidChangeArrangementCriteria invoked when any criteria for arranging objects change.
 func (ac *ArrayController) DidChangeArrangementCriteria() {
+	defer runtime.KeepAlive(ac)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("didChangeArrangementCriteria"))
 }
 
 // ArrangeObjects returns a given array, appropriately sorted and filtered.
 func (ac *ArrayController) ArrangeObjects(objects obj.Object) obj.Object {
+	defer runtime.KeepAlive(ac)
+	defer runtime.KeepAlive(objects)
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("arrangeObjects:"), objref.IDOf(objects))
 	return obj.Wrap(_r)
 }
 
 // AddSelectionIndexes adds the objects at the specified indexes in the receiver’s content array to the current selection.
 func (ac *ArrayController) AddSelectionIndexes(indexes obj.Object) bool {
+	defer runtime.KeepAlive(ac)
+	defer runtime.KeepAlive(indexes)
 	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("addSelectionIndexes:"), objref.IDOf(indexes))
 	return _r
 }
 
 // RemoveSelectionIndexes removes the object as the specified indexes from the receiver’s current selection.
 func (ac *ArrayController) RemoveSelectionIndexes(indexes obj.Object) bool {
+	defer runtime.KeepAlive(ac)
+	defer runtime.KeepAlive(indexes)
 	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("removeSelectionIndexes:"), objref.IDOf(indexes))
 	return _r
 }
 
 // SetSelectedObjects sets the specified objects as the receiver’s current selection.
 func (ac *ArrayController) SetSelectedObjects(objects obj.Object) bool {
+	defer runtime.KeepAlive(ac)
+	defer runtime.KeepAlive(objects)
 	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("setSelectedObjects:"), objref.IDOf(objects))
 	return _r
 }
 
 // AddSelectedObjects adds the specified objects from the receiver’s content array to the current selection.
 func (ac *ArrayController) AddSelectedObjects(objects obj.Object) bool {
+	defer runtime.KeepAlive(ac)
+	defer runtime.KeepAlive(objects)
 	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("addSelectedObjects:"), objref.IDOf(objects))
 	return _r
 }
 
 // RemoveSelectedObjects removes the specified objects from the receiver’s current selection.
 func (ac *ArrayController) RemoveSelectedObjects(objects obj.Object) bool {
+	defer runtime.KeepAlive(ac)
+	defer runtime.KeepAlive(objects)
 	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("removeSelectedObjects:"), objref.IDOf(objects))
 	return _r
 }
 
 // Insert creates a new object and inserts it into the receiver’s content array.
 func (ac *ArrayController) Insert(sender obj.Object) {
+	defer runtime.KeepAlive(ac)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("insert:"), objref.IDOf(sender))
 }
 
 // SelectNext selects the next object, relative to the current selection, in the receiver’s arranged content.
 func (ac *ArrayController) SelectNext(sender obj.Object) {
+	defer runtime.KeepAlive(ac)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("selectNext:"), objref.IDOf(sender))
 }
 
 // SelectPrevious selects the previous object, relative to the current selection, in the receiver’s arranged content.
 func (ac *ArrayController) SelectPrevious(sender obj.Object) {
+	defer runtime.KeepAlive(ac)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("selectPrevious:"), objref.IDOf(sender))
 }
 
 // AddObjects adds objects to the receiver’s content collection.
 func (ac *ArrayController) AddObjects(objects obj.Object) {
+	defer runtime.KeepAlive(ac)
+	defer runtime.KeepAlive(objects)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("addObjects:"), objref.IDOf(objects))
 }
 
 // InsertObjectAtArrangedObjectIndex inserts object into the receiver’s arranged objects array at the location specified by index, and adds it to the receiver’s content collection.
 func (ac *ArrayController) InsertObjectAtArrangedObjectIndex(object obj.Object, index int) {
+	defer runtime.KeepAlive(ac)
+	defer runtime.KeepAlive(object)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("insertObject:atArrangedObjectIndex:"), objref.IDOf(object), index)
 }
 
 // InsertObjectsAtArrangedObjectIndexes inserts objects into the receiver’s arranged objects array at the locations specified in indexes, and adds it to the receiver’s content collection.
 func (ac *ArrayController) InsertObjectsAtArrangedObjectIndexes(objects obj.Object, indexes obj.Object) {
+	defer runtime.KeepAlive(ac)
+	defer runtime.KeepAlive(objects)
+	defer runtime.KeepAlive(indexes)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("insertObjects:atArrangedObjectIndexes:"), objref.IDOf(objects), objref.IDOf(indexes))
 }
 
 // RemoveObjectAtArrangedObjectIndex removes the object at the specified index in the receiver’s arranged objects from the receiver’s content array.
 func (ac *ArrayController) RemoveObjectAtArrangedObjectIndex(index int) {
+	defer runtime.KeepAlive(ac)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("removeObjectAtArrangedObjectIndex:"), index)
 }
 
 // RemoveObjectsAtArrangedObjectIndexes removes the objects at the specified indexes in the receiver’s arranged objects from the content array.
 func (ac *ArrayController) RemoveObjectsAtArrangedObjectIndexes(indexes obj.Object) {
+	defer runtime.KeepAlive(ac)
+	defer runtime.KeepAlive(indexes)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("removeObjectsAtArrangedObjectIndexes:"), objref.IDOf(indexes))
 }
 
 // RemoveObjects removes objects from the receiver’s content collection.
 func (ac *ArrayController) RemoveObjects(objects obj.Object) {
+	defer runtime.KeepAlive(ac)
+	defer runtime.KeepAlive(objects)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("removeObjects:"), objref.IDOf(objects))
 }
 
 // AutomaticallyRearrangesObjects wraps the corresponding Objective-C method.
 func (ac *ArrayController) AutomaticallyRearrangesObjects() bool {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("automaticallyRearrangesObjects"))
 	return _r
 }
@@ -250,6 +291,7 @@ func (ac *ArrayController) AutomaticallyRearrangesObjects() bool {
 //
 // AutomaticRearrangementKeyPaths returns the collection as a Go slice.
 func (ac *ArrayController) AutomaticRearrangementKeyPaths() []string {
+	defer runtime.KeepAlive(ac)
 	_arr := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("automaticRearrangementKeyPaths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -258,78 +300,91 @@ func (ac *ArrayController) AutomaticRearrangementKeyPaths() []string {
 //
 // SortDescriptors returns the collection as a Go slice.
 func (ac *ArrayController) SortDescriptors() []obj.Object {
+	defer runtime.KeepAlive(ac)
 	_arr := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("sortDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // FilterPredicate returns the filter predicate.
-func (ac *ArrayController) FilterPredicate() obj.Object {
+func (ac *ArrayController) FilterPredicate() *foundation.Predicate {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("filterPredicate"))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // ClearsFilterPredicateOnInsertion wraps the corresponding Objective-C method.
 func (ac *ArrayController) ClearsFilterPredicateOnInsertion() bool {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("clearsFilterPredicateOnInsertion"))
 	return _r
 }
 
 // ArrangedObjects returns the arranged objects.
 func (ac *ArrayController) ArrangedObjects() obj.Object {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("arrangedObjects"))
 	return obj.Wrap(_r)
 }
 
 // AvoidsEmptySelection wraps the corresponding Objective-C method.
 func (ac *ArrayController) AvoidsEmptySelection() bool {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("avoidsEmptySelection"))
 	return _r
 }
 
 // PreservesSelection wraps the corresponding Objective-C method.
 func (ac *ArrayController) PreservesSelection() bool {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("preservesSelection"))
 	return _r
 }
 
 // SelectsInsertedObjects wraps the corresponding Objective-C method.
 func (ac *ArrayController) SelectsInsertedObjects() bool {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("selectsInsertedObjects"))
 	return _r
 }
 
 // AlwaysUsesMultipleValuesMarker wraps the corresponding Objective-C method.
 func (ac *ArrayController) AlwaysUsesMultipleValuesMarker() bool {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("alwaysUsesMultipleValuesMarker"))
 	return _r
 }
 
 // SelectionIndexes returns the selection indexes.
-func (ac *ArrayController) SelectionIndexes() obj.Object {
+func (ac *ArrayController) SelectionIndexes() *foundation.IndexSet {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("selectionIndexes"))
-	return obj.Wrap(_r)
+	return foundation.IndexSetFromID(_r)
 }
 
 // SelectionIndex returns the selection index.
 func (ac *ArrayController) SelectionIndex() int {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[int](objref.IDOf(ac), objc.RegisterName("selectionIndex"))
 	return _r
 }
 
 // CanInsert wraps the corresponding Objective-C method.
 func (ac *ArrayController) CanInsert() bool {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("canInsert"))
 	return _r
 }
 
 // CanSelectNext wraps the corresponding Objective-C method.
 func (ac *ArrayController) CanSelectNext() bool {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("canSelectNext"))
 	return _r
 }
 
 // CanSelectPrevious wraps the corresponding Objective-C method.
 func (ac *ArrayController) CanSelectPrevious() bool {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[bool](objref.IDOf(ac), objc.RegisterName("canSelectPrevious"))
 	return _r
 }

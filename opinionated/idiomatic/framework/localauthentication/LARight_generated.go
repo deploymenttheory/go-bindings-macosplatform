@@ -6,6 +6,7 @@ package localauthentication
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -52,27 +53,33 @@ func rightAdopt(id objc.ID) *Right {
 
 // Description returns the object's -description text.
 func (r *Right) Description() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (r *Right) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (r *Right) IsKind(className string) bool {
+	defer runtime.KeepAlive(r)
 	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (r *Right) String() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // NewRightWithRequirement creates a right with the authentication requirements you supply.
 func NewRightWithRequirement(requirement *AuthenticationRequirement) *Right {
+	defer runtime.KeepAlive(requirement)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("LARight")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequirement:"), objref.IDOf(requirement))
 	return rightAdopt(_id)
@@ -88,6 +95,7 @@ func (r *Right) WithTag(tag int) *Right {
 //
 // AuthorizeWithLocalizedReasonCompletion blocks until the operation completes or ctx is cancelled.
 func (r *Right) AuthorizeWithLocalizedReasonCompletion(ctx context.Context, localizedReason string) error {
+	defer runtime.KeepAlive(r)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -107,6 +115,7 @@ func (r *Right) AuthorizeWithLocalizedReasonCompletion(ctx context.Context, loca
 //
 // CheckCanAuthorizeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (r *Right) CheckCanAuthorizeWithCompletion(ctx context.Context) error {
+	defer runtime.KeepAlive(r)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -126,6 +135,7 @@ func (r *Right) CheckCanAuthorizeWithCompletion(ctx context.Context) error {
 //
 // DeauthorizeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (r *Right) DeauthorizeWithCompletion(ctx context.Context) error {
+	defer runtime.KeepAlive(r)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -141,12 +151,14 @@ func (r *Right) DeauthorizeWithCompletion(ctx context.Context) error {
 
 // State provides the current authorization state of the
 func (r *Right) State() RightState {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[RightState](objref.IDOf(r), objc.RegisterName("state"))
 	return _r
 }
 
 // Tag returns an application-supplied integer that can be used to identify right instances. The default value is
 func (r *Right) Tag() int {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[int](objref.IDOf(r), objc.RegisterName("tag"))
 	return _r
 }

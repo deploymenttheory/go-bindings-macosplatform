@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,36 +55,40 @@ func NewMTRNetworkCommissioningClusterWiFiInterfaceScanResult() *MTRNetworkCommi
 
 // WithSecurity sets the security.
 func (mnccwfisr *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithSecurity(security obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	defer runtime.KeepAlive(security)
 	objc.Send[objc.ID](objref.IDOf(mnccwfisr), objc.RegisterName("setSecurity:"), objref.IDOf(security))
 	return mnccwfisr
 }
 
 // WithSsid sets the ssid.
-func (mnccwfisr *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithSsid(ssid obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
-	objc.Send[objc.ID](objref.IDOf(mnccwfisr), objc.RegisterName("setSsid:"), objref.IDOf(ssid))
+func (mnccwfisr *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithSsid(ssid []byte) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	objc.Send[objc.ID](objref.IDOf(mnccwfisr), objc.RegisterName("setSsid:"), rt.BytesToNSData(ssid))
 	return mnccwfisr
 }
 
 // WithBssid sets the bssid.
-func (mnccwfisr *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithBssid(bssid obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
-	objc.Send[objc.ID](objref.IDOf(mnccwfisr), objc.RegisterName("setBssid:"), objref.IDOf(bssid))
+func (mnccwfisr *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithBssid(bssid []byte) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	objc.Send[objc.ID](objref.IDOf(mnccwfisr), objc.RegisterName("setBssid:"), rt.BytesToNSData(bssid))
 	return mnccwfisr
 }
 
 // WithChannel sets the channel.
 func (mnccwfisr *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithChannel(channel obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	defer runtime.KeepAlive(channel)
 	objc.Send[objc.ID](objref.IDOf(mnccwfisr), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 	return mnccwfisr
 }
 
 // WithWiFiBand sets the wi fi band.
 func (mnccwfisr *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithWiFiBand(wiFiBand obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	defer runtime.KeepAlive(wiFiBand)
 	objc.Send[objc.ID](objref.IDOf(mnccwfisr), objc.RegisterName("setWiFiBand:"), objref.IDOf(wiFiBand))
 	return mnccwfisr
 }
 
 // WithRssi sets the rssi.
 func (mnccwfisr *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithRssi(rssi obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	defer runtime.KeepAlive(rssi)
 	objc.Send[objc.ID](objref.IDOf(mnccwfisr), objc.RegisterName("setRssi:"), objref.IDOf(rssi))
 	return mnccwfisr
 }

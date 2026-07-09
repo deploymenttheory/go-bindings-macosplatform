@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTROperationalCredentialsClusterAttestationResponseParamsAdopt(id objc.ID) 
 
 // Description returns the object's -description text.
 func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) Description() string {
+	defer runtime.KeepAlive(moccarp)
 	return rt.Description(objref.IDOf(moccarp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(moccarp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(moccarp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(moccarp)
 	return rt.IsKind(objref.IDOf(moccarp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) String() string {
+	defer runtime.KeepAlive(moccarp)
 	return rt.Description(objref.IDOf(moccarp))
 }
 
-// NewMTROperationalCredentialsClusterAttestationResponseParamsWithResponseValueError initialize an MTROperationalCredentialsClusterAttestationResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-func NewMTROperationalCredentialsClusterAttestationResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTROperationalCredentialsClusterAttestationResponseParams, err error) {
+// NewMTROperationalCredentialsClusterAttestationResponseParamsWithResponseValue initialize an MTROperationalCredentialsClusterAttestationResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTROperationalCredentialsClusterAttestationResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTROperationalCredentialsClusterAttestationResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTROperationalCredentialsClusterAttestationResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -79,49 +86,54 @@ func NewMTROperationalCredentialsClusterAttestationResponseParamsWithResponseVal
 }
 
 // WithAttestationElements sets the attestation elements.
-func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) WithAttestationElements(attestationElements obj.Object) *MTROperationalCredentialsClusterAttestationResponseParams {
-	objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("setAttestationElements:"), objref.IDOf(attestationElements))
+func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) WithAttestationElements(attestationElements []byte) *MTROperationalCredentialsClusterAttestationResponseParams {
+	objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("setAttestationElements:"), rt.BytesToNSData(attestationElements))
 	return moccarp
 }
 
 // WithAttestationSignature sets the attestation signature.
-func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) WithAttestationSignature(attestationSignature obj.Object) *MTROperationalCredentialsClusterAttestationResponseParams {
-	objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("setAttestationSignature:"), objref.IDOf(attestationSignature))
+func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) WithAttestationSignature(attestationSignature []byte) *MTROperationalCredentialsClusterAttestationResponseParams {
+	objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("setAttestationSignature:"), rt.BytesToNSData(attestationSignature))
 	return moccarp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterAttestationResponseParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return moccarp
 }
 
 // WithSignature sets the signature.
-func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) WithSignature(signature obj.Object) *MTROperationalCredentialsClusterAttestationResponseParams {
-	objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("setSignature:"), objref.IDOf(signature))
+func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) WithSignature(signature []byte) *MTROperationalCredentialsClusterAttestationResponseParams {
+	objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("setSignature:"), rt.BytesToNSData(signature))
 	return moccarp
 }
 
 // AttestationElements returns the attestation elements.
-func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) AttestationElements() obj.Object {
+func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) AttestationElements() []byte {
+	defer runtime.KeepAlive(moccarp)
 	_r := objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("attestationElements"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // AttestationSignature returns the attestation signature.
-func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) AttestationSignature() obj.Object {
+func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) AttestationSignature() []byte {
+	defer runtime.KeepAlive(moccarp)
 	_r := objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("attestationSignature"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) TimedInvokeTimeoutMs() obj.Object {
+func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(moccarp)
 	_r := objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Signature returns the signature.
-func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) Signature() obj.Object {
+func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) Signature() []byte {
+	defer runtime.KeepAlive(moccarp)
 	_r := objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("signature"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

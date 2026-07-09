@@ -5,6 +5,8 @@
 package iobluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func iOBluetoothObjectAdopt(id objc.ID) *IOBluetoothObject {
 
 // Description returns the object's -description text.
 func (ibo *IOBluetoothObject) Description() string {
+	defer runtime.KeepAlive(ibo)
 	return rt.Description(objref.IDOf(ibo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ibo *IOBluetoothObject) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ibo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ibo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ibo *IOBluetoothObject) IsKind(className string) bool {
+	defer runtime.KeepAlive(ibo)
 	return rt.IsKind(objref.IDOf(ibo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ibo *IOBluetoothObject) String() string {
+	defer runtime.KeepAlive(ibo)
 	return rt.Description(objref.IDOf(ibo))
 }
 

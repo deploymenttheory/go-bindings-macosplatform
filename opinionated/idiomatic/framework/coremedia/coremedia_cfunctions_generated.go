@@ -1621,28 +1621,28 @@ func CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData(allocator o
 var _fnCMVideoFormatDescriptionCreateFromH264ParameterSets func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // CMVideoFormatDescriptionCreateFromH264ParameterSets calls the CoreMedia framework function CMVideoFormatDescriptionCreateFromH264ParameterSets.
-func CMVideoFormatDescriptionCreateFromH264ParameterSets(allocator obj.Object, parameterSetCount int, nALUnitHeaderLength int, formatDescriptionOut unsafe.Pointer) (result int, parameterSetPointers uint8, parameterSetSizes int) {
+func CMVideoFormatDescriptionCreateFromH264ParameterSets(allocator obj.Object, parameterSetCount int, nalUnitHeaderLength int, formatDescriptionOut unsafe.Pointer) (result int, parameterSetPointers uint8, parameterSetSizes int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMVideoFormatDescriptionCreateFromH264ParameterSets == nil {
 		ebipurego.RegisterLibFunc(&_fnCMVideoFormatDescriptionCreateFromH264ParameterSets, _lib, "CMVideoFormatDescriptionCreateFromH264ParameterSets")
 	}
 	var _out0 uint8
 	var _out1 int
-	_ret := int(_fnCMVideoFormatDescriptionCreateFromH264ParameterSets(objref.IDOf(allocator), parameterSetCount, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), nALUnitHeaderLength, formatDescriptionOut))
+	_ret := int(_fnCMVideoFormatDescriptionCreateFromH264ParameterSets(objref.IDOf(allocator), parameterSetCount, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), nalUnitHeaderLength, formatDescriptionOut))
 	return _ret, _out0, _out1
 }
 
 var _fnCMVideoFormatDescriptionCreateFromHEVCParameterSets func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, int, objc.ID, unsafe.Pointer) int32
 
 // CMVideoFormatDescriptionCreateFromHEVCParameterSets calls the CoreMedia framework function CMVideoFormatDescriptionCreateFromHEVCParameterSets.
-func CMVideoFormatDescriptionCreateFromHEVCParameterSets(allocator obj.Object, parameterSetCount int, nALUnitHeaderLength int, extensions obj.Object, formatDescriptionOut unsafe.Pointer) (result int, parameterSetPointers uint8, parameterSetSizes int) {
+func CMVideoFormatDescriptionCreateFromHEVCParameterSets(allocator obj.Object, parameterSetCount int, nalUnitHeaderLength int, extensions obj.Object, formatDescriptionOut unsafe.Pointer) (result int, parameterSetPointers uint8, parameterSetSizes int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMVideoFormatDescriptionCreateFromHEVCParameterSets == nil {
 		ebipurego.RegisterLibFunc(&_fnCMVideoFormatDescriptionCreateFromHEVCParameterSets, _lib, "CMVideoFormatDescriptionCreateFromHEVCParameterSets")
 	}
 	var _out0 uint8
 	var _out1 int
-	_ret := int(_fnCMVideoFormatDescriptionCreateFromHEVCParameterSets(objref.IDOf(allocator), parameterSetCount, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), nALUnitHeaderLength, objref.IDOf(extensions), formatDescriptionOut))
+	_ret := int(_fnCMVideoFormatDescriptionCreateFromHEVCParameterSets(objref.IDOf(allocator), parameterSetCount, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), nalUnitHeaderLength, objref.IDOf(extensions), formatDescriptionOut))
 	return _ret, _out0, _out1
 }
 
@@ -1672,7 +1672,7 @@ func CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers() obj.Object
 var _fnCMVideoFormatDescriptionGetH264ParameterSetAtIndex func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMVideoFormatDescriptionGetH264ParameterSetAtIndex calls the CoreMedia framework function CMVideoFormatDescriptionGetH264ParameterSetAtIndex.
-func CMVideoFormatDescriptionGetH264ParameterSetAtIndex(videoDesc obj.Object, parameterSetIndex int) (result int, parameterSetPointerOut uint8, parameterSetSizeOut int, parameterSetCountOut int, nALUnitHeaderLengthOut int32) {
+func CMVideoFormatDescriptionGetH264ParameterSetAtIndex(videoDesc obj.Object, parameterSetIndex int) (result int, parameterSetPointerOut uint8, parameterSetSizeOut int, parameterSetCountOut int, nalUnitHeaderLengthOut int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMVideoFormatDescriptionGetH264ParameterSetAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCMVideoFormatDescriptionGetH264ParameterSetAtIndex, _lib, "CMVideoFormatDescriptionGetH264ParameterSetAtIndex")
@@ -1688,7 +1688,7 @@ func CMVideoFormatDescriptionGetH264ParameterSetAtIndex(videoDesc obj.Object, pa
 var _fnCMVideoFormatDescriptionGetHEVCParameterSetAtIndex func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMVideoFormatDescriptionGetHEVCParameterSetAtIndex calls the CoreMedia framework function CMVideoFormatDescriptionGetHEVCParameterSetAtIndex.
-func CMVideoFormatDescriptionGetHEVCParameterSetAtIndex(videoDesc obj.Object, parameterSetIndex int) (result int, parameterSetPointerOut uint8, parameterSetSizeOut int, parameterSetCountOut int, nALUnitHeaderLengthOut int32) {
+func CMVideoFormatDescriptionGetHEVCParameterSetAtIndex(videoDesc obj.Object, parameterSetIndex int) (result int, parameterSetPointerOut uint8, parameterSetSizeOut int, parameterSetCountOut int, nalUnitHeaderLengthOut int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMVideoFormatDescriptionGetHEVCParameterSetAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCMVideoFormatDescriptionGetHEVCParameterSetAtIndex, _lib, "CMVideoFormatDescriptionGetHEVCParameterSetAtIndex")

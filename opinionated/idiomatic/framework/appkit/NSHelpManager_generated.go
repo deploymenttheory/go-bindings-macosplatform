@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +51,27 @@ func helpManagerAdopt(id objc.ID) *HelpManager {
 
 // Description returns the object's -description text.
 func (hm *HelpManager) Description() string {
+	defer runtime.KeepAlive(hm)
 	return rt.Description(objref.IDOf(hm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hm *HelpManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hm *HelpManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(hm)
 	return rt.IsKind(objref.IDOf(hm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hm *HelpManager) String() string {
+	defer runtime.KeepAlive(hm)
 	return rt.Description(objref.IDOf(hm))
 }
 
@@ -81,6 +89,9 @@ func NewHelpManager() *HelpManager {
 
 // SetContextHelpForObject associates help content with an object.
 func (hm *HelpManager) SetContextHelpForObject(attrString obj.Object, object obj.Object) {
+	defer runtime.KeepAlive(hm)
+	defer runtime.KeepAlive(attrString)
+	defer runtime.KeepAlive(object)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("setContextHelp:forObject:"), objref.IDOf(attrString), objref.IDOf(object))
 	})
@@ -89,6 +100,8 @@ func (hm *HelpManager) SetContextHelpForObject(attrString obj.Object, object obj
 
 // RemoveContextHelpForObject removes the association between an object and its context-sensitive help.
 func (hm *HelpManager) RemoveContextHelpForObject(object obj.Object) {
+	defer runtime.KeepAlive(hm)
+	defer runtime.KeepAlive(object)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("removeContextHelpForObject:"), objref.IDOf(object))
 	})
@@ -96,12 +109,14 @@ func (hm *HelpManager) RemoveContextHelpForObject(object obj.Object) {
 }
 
 // ContextHelpForObject returns context-sensitive help for an object.
-func (hm *HelpManager) ContextHelpForObject(object obj.Object) obj.Object {
-	var _mainthread0 obj.Object
+func (hm *HelpManager) ContextHelpForObject(object obj.Object) *foundation.AttributedString {
+	defer runtime.KeepAlive(hm)
+	defer runtime.KeepAlive(object)
+	var _mainthread0 *foundation.AttributedString
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.AttributedString {
 			_r := objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("contextHelpForObject:"), objref.IDOf(object))
-			return obj.Wrap(_r)
+			return foundation.AttributedStringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -110,6 +125,8 @@ func (hm *HelpManager) ContextHelpForObject(object obj.Object) obj.Object {
 
 // ShowContextHelpForObjectLocationHint displays the context-sensitive help for a given object at or near the point on the screen specified by a given point.
 func (hm *HelpManager) ShowContextHelpForObjectLocationHint(object obj.Object, pt corefoundation.CGPoint) bool {
+	defer runtime.KeepAlive(hm)
+	defer runtime.KeepAlive(object)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -123,6 +140,9 @@ func (hm *HelpManager) ShowContextHelpForObjectLocationHint(object obj.Object, p
 
 // OpenHelpAnchorInBook finds and displays the text at the given anchor location in the given book.
 func (hm *HelpManager) OpenHelpAnchorInBook(anchor obj.Object, book obj.Object) {
+	defer runtime.KeepAlive(hm)
+	defer runtime.KeepAlive(anchor)
+	defer runtime.KeepAlive(book)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("openHelpAnchor:inBook:"), objref.IDOf(anchor), objref.IDOf(book))
 	})
@@ -131,6 +151,8 @@ func (hm *HelpManager) OpenHelpAnchorInBook(anchor obj.Object, book obj.Object) 
 
 // FindStringInBook performs a search for the specified string in the specified book.
 func (hm *HelpManager) FindStringInBook(query string, book obj.Object) {
+	defer runtime.KeepAlive(hm)
+	defer runtime.KeepAlive(book)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("findString:inBook:"), purego.NSString(query), objref.IDOf(book))
 	})
@@ -139,6 +161,8 @@ func (hm *HelpManager) FindStringInBook(query string, book obj.Object) {
 
 // RegisterBooksInBundle registers one or more help books in the given bundle.
 func (hm *HelpManager) RegisterBooksInBundle(bundle obj.Object) bool {
+	defer runtime.KeepAlive(hm)
+	defer runtime.KeepAlive(bundle)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

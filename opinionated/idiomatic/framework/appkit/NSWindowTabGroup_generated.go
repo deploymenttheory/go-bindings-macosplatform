@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func windowTabGroupAdopt(id objc.ID) *WindowTabGroup {
 
 // Description returns the object's -description text.
 func (wtg *WindowTabGroup) Description() string {
+	defer runtime.KeepAlive(wtg)
 	return rt.Description(objref.IDOf(wtg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wtg *WindowTabGroup) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wtg)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wtg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wtg *WindowTabGroup) IsKind(className string) bool {
+	defer runtime.KeepAlive(wtg)
 	return rt.IsKind(objref.IDOf(wtg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wtg *WindowTabGroup) String() string {
+	defer runtime.KeepAlive(wtg)
 	return rt.Description(objref.IDOf(wtg))
 }
 
@@ -80,53 +88,65 @@ func (wtg *WindowTabGroup) WithOverviewVisible(overviewVisible bool) *WindowTabG
 
 // WithSelectedWindow sets the selected, or frontmost, window in the tab group.
 func (wtg *WindowTabGroup) WithSelectedWindow(selectedWindow WindowProvider) *WindowTabGroup {
+	defer runtime.KeepAlive(selectedWindow)
 	objc.Send[objc.ID](objref.IDOf(wtg), objc.RegisterName("setSelectedWindow:"), objref.IDOf(selectedWindow))
 	return wtg
 }
 
 // AddWindow adds a window to the tab group.
 func (wtg *WindowTabGroup) AddWindow(window *Window) {
+	defer runtime.KeepAlive(wtg)
+	defer runtime.KeepAlive(window)
 	objc.Send[objc.ID](objref.IDOf(wtg), objc.RegisterName("addWindow:"), objref.IDOf(window))
 }
 
 // InsertWindowAtIndex inserts a window at a specific location within the tab group.
 func (wtg *WindowTabGroup) InsertWindowAtIndex(window *Window, index int) {
+	defer runtime.KeepAlive(wtg)
+	defer runtime.KeepAlive(window)
 	objc.Send[objc.ID](objref.IDOf(wtg), objc.RegisterName("insertWindow:atIndex:"), objref.IDOf(window), index)
 }
 
 // RemoveWindow removes a window from the tab group.
 func (wtg *WindowTabGroup) RemoveWindow(window *Window) {
+	defer runtime.KeepAlive(wtg)
+	defer runtime.KeepAlive(window)
 	objc.Send[objc.ID](objref.IDOf(wtg), objc.RegisterName("removeWindow:"), objref.IDOf(window))
 }
 
 // Identifier returns the identifier.
-func (wtg *WindowTabGroup) Identifier() obj.Object {
+func (wtg *WindowTabGroup) Identifier() *foundation.String {
+	defer runtime.KeepAlive(wtg)
 	_r := objc.Send[objc.ID](objref.IDOf(wtg), objc.RegisterName("identifier"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Windows returns the windows.
 //
 // Windows returns the collection as a Go slice.
 func (wtg *WindowTabGroup) Windows() []*Window {
+	defer runtime.KeepAlive(wtg)
 	_arr := objc.Send[objc.ID](objref.IDOf(wtg), objc.RegisterName("windows"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
 }
 
 // IsOverviewVisible reports whether the object is overview visible.
 func (wtg *WindowTabGroup) IsOverviewVisible() bool {
+	defer runtime.KeepAlive(wtg)
 	_r := objc.Send[bool](objref.IDOf(wtg), objc.RegisterName("isOverviewVisible"))
 	return _r
 }
 
 // IsTabBarVisible reports whether the object is tab bar visible.
 func (wtg *WindowTabGroup) IsTabBarVisible() bool {
+	defer runtime.KeepAlive(wtg)
 	_r := objc.Send[bool](objref.IDOf(wtg), objc.RegisterName("isTabBarVisible"))
 	return _r
 }
 
 // SelectedWindow returns the selected window.
 func (wtg *WindowTabGroup) SelectedWindow() *Window {
+	defer runtime.KeepAlive(wtg)
 	_r := objc.Send[objc.ID](objref.IDOf(wtg), objc.RegisterName("selectedWindow"))
 	return WindowFromID(_r)
 }

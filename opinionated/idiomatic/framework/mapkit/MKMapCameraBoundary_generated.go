@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func mapCameraBoundaryAdopt(id objc.ID) *MapCameraBoundary {
 
 // Description returns the object's -description text.
 func (mcb *MapCameraBoundary) Description() string {
+	defer runtime.KeepAlive(mcb)
 	return rt.Description(objref.IDOf(mcb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcb *MapCameraBoundary) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcb *MapCameraBoundary) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcb)
 	return rt.IsKind(objref.IDOf(mcb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcb *MapCameraBoundary) String() string {
+	defer runtime.KeepAlive(mcb)
 	return rt.Description(objref.IDOf(mcb))
 }
 
 // NewMapCameraBoundaryWithCoder creates a new MapCameraBoundary.
 func NewMapCameraBoundaryWithCoder(coder obj.Object) *MapCameraBoundary {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapCameraBoundary")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return mapCameraBoundaryAdopt(_id)

@@ -6,6 +6,8 @@ package foundation
 
 import (
 	"context"
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +52,27 @@ func runLoopAdopt(id objc.ID) *RunLoop {
 
 // Description returns the object's -description text.
 func (rl *RunLoop) Description() string {
+	defer runtime.KeepAlive(rl)
 	return rt.Description(objref.IDOf(rl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rl *RunLoop) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rl *RunLoop) IsKind(className string) bool {
+	defer runtime.KeepAlive(rl)
 	return rt.IsKind(objref.IDOf(rl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rl *RunLoop) String() string {
+	defer runtime.KeepAlive(rl)
 	return rt.Description(objref.IDOf(rl))
 }
 
@@ -82,67 +89,87 @@ func (rl *RunLoop) WithObservationInfo(observationInfo unsafe.Pointer) *RunLoop 
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (rl *RunLoop) WithScriptingProperties(scriptingProperties obj.Object) *RunLoop {
-	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (rl *RunLoop) WithScriptingProperties(scriptingProperties map[string]obj.Object) *RunLoop {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return rl
 }
 
 // CFRunLoop returns the cf run loop.
 func (rl *RunLoop) CFRunLoop() obj.Object {
+	defer runtime.KeepAlive(rl)
 	_r := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("getCFRunLoop"))
 	return obj.Wrap(_r)
 }
 
 // AddTimerForMode adds timer for mode.
 func (rl *RunLoop) AddTimerForMode(timer *Timer, mode *String) {
+	defer runtime.KeepAlive(rl)
+	defer runtime.KeepAlive(timer)
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("addTimer:forMode:"), objref.IDOf(timer), objref.IDOf(mode))
 }
 
 // AddPortForMode adds port for mode.
 func (rl *RunLoop) AddPortForMode(aPort *Port, mode *String) {
+	defer runtime.KeepAlive(rl)
+	defer runtime.KeepAlive(aPort)
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("addPort:forMode:"), objref.IDOf(aPort), objref.IDOf(mode))
 }
 
 // RemovePortForMode removes port for mode.
 func (rl *RunLoop) RemovePortForMode(aPort *Port, mode *String) {
+	defer runtime.KeepAlive(rl)
+	defer runtime.KeepAlive(aPort)
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("removePort:forMode:"), objref.IDOf(aPort), objref.IDOf(mode))
 }
 
 // LimitDateForMode wraps the corresponding Objective-C method.
-func (rl *RunLoop) LimitDateForMode(mode *String) *Date {
+func (rl *RunLoop) LimitDateForMode(mode *String) time.Time {
+	defer runtime.KeepAlive(rl)
+	defer runtime.KeepAlive(mode)
 	_r := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("limitDateForMode:"), objref.IDOf(mode))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // AcceptInputForModeBeforeDate wraps the corresponding Objective-C method.
-func (rl *RunLoop) AcceptInputForModeBeforeDate(mode *String, limitDate *Date) {
-	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("acceptInputForMode:beforeDate:"), objref.IDOf(mode), objref.IDOf(limitDate))
+func (rl *RunLoop) AcceptInputForModeBeforeDate(mode *String, limitDate time.Time) {
+	defer runtime.KeepAlive(rl)
+	defer runtime.KeepAlive(mode)
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("acceptInputForMode:beforeDate:"), objref.IDOf(mode), rt.TimeToNSDate(limitDate))
 }
 
 // CurrentMode returns the current mode.
 func (rl *RunLoop) CurrentMode() *String {
+	defer runtime.KeepAlive(rl)
 	_r := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("currentMode"))
 	return StringFromID(_r)
 }
 
 // Run wraps the corresponding Objective-C method.
 func (rl *RunLoop) Run() {
+	defer runtime.KeepAlive(rl)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("run"))
 }
 
 // RunUntilDate runs until date.
-func (rl *RunLoop) RunUntilDate(limitDate *Date) {
-	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("runUntilDate:"), objref.IDOf(limitDate))
+func (rl *RunLoop) RunUntilDate(limitDate time.Time) {
+	defer runtime.KeepAlive(rl)
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("runUntilDate:"), rt.TimeToNSDate(limitDate))
 }
 
 // RunModeBeforeDate runs mode before date.
-func (rl *RunLoop) RunModeBeforeDate(mode *String, limitDate *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(rl), objc.RegisterName("runMode:beforeDate:"), objref.IDOf(mode), objref.IDOf(limitDate))
+func (rl *RunLoop) RunModeBeforeDate(mode *String, limitDate time.Time) bool {
+	defer runtime.KeepAlive(rl)
+	defer runtime.KeepAlive(mode)
+	_r := objc.Send[bool](objref.IDOf(rl), objc.RegisterName("runMode:beforeDate:"), objref.IDOf(mode), rt.TimeToNSDate(limitDate))
 	return _r
 }
 
 // ConfigureAsServer deprecated. Does nothing.
 func (rl *RunLoop) ConfigureAsServer() {
+	defer runtime.KeepAlive(rl)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("configureAsServer"))
 }
 
@@ -150,6 +177,7 @@ func (rl *RunLoop) ConfigureAsServer() {
 //
 // PerformInModesBlock blocks until the operation completes or ctx is cancelled.
 func (rl *RunLoop) PerformInModesBlock(ctx context.Context, modes []*String) error {
+	defer runtime.KeepAlive(rl)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -167,6 +195,7 @@ func (rl *RunLoop) PerformInModesBlock(ctx context.Context, modes []*String) err
 //
 // PerformBlock blocks until the operation completes or ctx is cancelled.
 func (rl *RunLoop) PerformBlock(ctx context.Context) error {
+	defer runtime.KeepAlive(rl)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -182,5 +211,7 @@ func (rl *RunLoop) PerformBlock(ctx context.Context) error {
 
 // CancelPerformSelectorsWithTarget cancels perform selectors with target.
 func (rl *RunLoop) CancelPerformSelectorsWithTarget(target obj.Object) {
+	defer runtime.KeepAlive(rl)
+	defer runtime.KeepAlive(target)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("cancelPerformSelectorsWithTarget:"), objref.IDOf(target))
 }

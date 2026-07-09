@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func activityMoveModeObjectAdopt(id objc.ID) *ActivityMoveModeObject {
 
 // Description returns the object's -description text.
 func (ammo *ActivityMoveModeObject) Description() string {
+	defer runtime.KeepAlive(ammo)
 	return rt.Description(objref.IDOf(ammo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ammo *ActivityMoveModeObject) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ammo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ammo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ammo *ActivityMoveModeObject) IsKind(className string) bool {
+	defer runtime.KeepAlive(ammo)
 	return rt.IsKind(objref.IDOf(ammo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ammo *ActivityMoveModeObject) String() string {
+	defer runtime.KeepAlive(ammo)
 	return rt.Description(objref.IDOf(ammo))
 }
 
@@ -74,6 +81,7 @@ func NewActivityMoveModeObject() *ActivityMoveModeObject {
 
 // ActivityMoveMode returns the activity move mode.
 func (ammo *ActivityMoveModeObject) ActivityMoveMode() ActivityMoveMode {
+	defer runtime.KeepAlive(ammo)
 	_r := objc.Send[ActivityMoveMode](objref.IDOf(ammo), objc.RegisterName("activityMoveMode"))
 	return _r
 }

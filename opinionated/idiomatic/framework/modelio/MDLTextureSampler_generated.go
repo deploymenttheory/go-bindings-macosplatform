@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func textureSamplerAdopt(id objc.ID) *TextureSampler {
 
 // Description returns the object's -description text.
 func (ts *TextureSampler) Description() string {
+	defer runtime.KeepAlive(ts)
 	return rt.Description(objref.IDOf(ts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ts *TextureSampler) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ts *TextureSampler) IsKind(className string) bool {
+	defer runtime.KeepAlive(ts)
 	return rt.IsKind(objref.IDOf(ts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ts *TextureSampler) String() string {
+	defer runtime.KeepAlive(ts)
 	return rt.Description(objref.IDOf(ts))
 }
 
@@ -74,36 +81,42 @@ func NewTextureSampler() *TextureSampler {
 
 // WithTexture sets the texture object that provides image data for sampling.
 func (ts *TextureSampler) WithTexture(texture TextureProvider) *TextureSampler {
+	defer runtime.KeepAlive(texture)
 	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setTexture:"), objref.IDOf(texture))
 	return ts
 }
 
 // WithHardwareFilter sets an object that describes filtering modes for sampling from the texture.
 func (ts *TextureSampler) WithHardwareFilter(hardwareFilter *TextureFilter) *TextureSampler {
+	defer runtime.KeepAlive(hardwareFilter)
 	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setHardwareFilter:"), objref.IDOf(hardwareFilter))
 	return ts
 }
 
 // WithTransform sets the transformation to be applied to texture coordinate data before sampling from the texture.
 func (ts *TextureSampler) WithTransform(transform *Transform) *TextureSampler {
+	defer runtime.KeepAlive(transform)
 	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setTransform:"), objref.IDOf(transform))
 	return ts
 }
 
 // Texture returns the texture.
 func (ts *TextureSampler) Texture() *Texture {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("texture"))
 	return TextureFromID(_r)
 }
 
 // HardwareFilter returns the hardware filter.
 func (ts *TextureSampler) HardwareFilter() *TextureFilter {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("hardwareFilter"))
 	return TextureFilterFromID(_r)
 }
 
 // Transform returns the transform.
 func (ts *TextureSampler) Transform() *Transform {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("transform"))
 	return TransformFromID(_r)
 }

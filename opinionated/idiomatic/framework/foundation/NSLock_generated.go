@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +51,27 @@ func lockAdopt(id objc.ID) *Lock {
 
 // Description returns the object's -description text.
 func (l *Lock) Description() string {
+	defer runtime.KeepAlive(l)
 	return rt.Description(objref.IDOf(l))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (l *Lock) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(l)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(l), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (l *Lock) IsKind(className string) bool {
+	defer runtime.KeepAlive(l)
 	return rt.IsKind(objref.IDOf(l), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (l *Lock) String() string {
+	defer runtime.KeepAlive(l)
 	return rt.Description(objref.IDOf(l))
 }
 
@@ -76,6 +83,7 @@ func NewLock() *Lock {
 
 // WithName sets the name associated with the receiver.
 func (l *Lock) WithName(name StringProvider) *Lock {
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setName:"), objref.IDOf(name))
 	return l
 }
@@ -87,25 +95,28 @@ func (l *Lock) WithObservationInfo(observationInfo unsafe.Pointer) *Lock {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (l *Lock) WithScriptingProperties(scriptingProperties obj.Object) *Lock {
-	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (l *Lock) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Lock {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return l
 }
 
 // TryLock reports whether attempts to acquire a lock and immediately returns a Boolean value that indicates whether the attempt was successful.
 func (l *Lock) TryLock() bool {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("tryLock"))
 	return _r
 }
 
 // LockBeforeDate attempts to acquire a lock before a given time and returns a Boolean value indicating whether the attempt was successful.
-func (l *Lock) LockBeforeDate(limit *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("lockBeforeDate:"), objref.IDOf(limit))
+func (l *Lock) LockBeforeDate(limit time.Time) bool {
+	defer runtime.KeepAlive(l)
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("lockBeforeDate:"), rt.TimeToNSDate(limit))
 	return _r
 }
 
 // Name returns the name.
 func (l *Lock) Name() string {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

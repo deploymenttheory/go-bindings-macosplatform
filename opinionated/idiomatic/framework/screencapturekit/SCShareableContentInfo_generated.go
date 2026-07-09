@@ -5,6 +5,8 @@
 package screencapturekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func shareableContentInfoAdopt(id objc.ID) *ShareableContentInfo {
 
 // Description returns the object's -description text.
 func (sci *ShareableContentInfo) Description() string {
+	defer runtime.KeepAlive(sci)
 	return rt.Description(objref.IDOf(sci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sci *ShareableContentInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sci *ShareableContentInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(sci)
 	return rt.IsKind(objref.IDOf(sci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sci *ShareableContentInfo) String() string {
+	defer runtime.KeepAlive(sci)
 	return rt.Description(objref.IDOf(sci))
 }
 
@@ -75,18 +82,21 @@ func NewShareableContentInfo() *ShareableContentInfo {
 
 // Style returns style of stream
 func (sci *ShareableContentInfo) Style() ShareableContentStyle {
+	defer runtime.KeepAlive(sci)
 	_r := objc.Send[ShareableContentStyle](objref.IDOf(sci), objc.RegisterName("style"))
 	return _r
 }
 
 // PointPixelScale returns pixel to points scaling factor
 func (sci *ShareableContentInfo) PointPixelScale() float32 {
+	defer runtime.KeepAlive(sci)
 	_r := objc.Send[float32](objref.IDOf(sci), objc.RegisterName("pointPixelScale"))
 	return _r
 }
 
 // ContentRect returns size and location of content in points
 func (sci *ShareableContentInfo) ContentRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(sci)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sci), objc.RegisterName("contentRect"))
 	return _r
 }

@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -59,16 +60,19 @@ func (aq *AnimatedQuaternion) WithInterpolation(interpolation AnimatedValueInter
 
 // SetFloatQuaternionAtTime wraps the corresponding Objective-C method.
 func (aq *AnimatedQuaternion) SetFloatQuaternionAtTime(value unsafe.Pointer, time_ float64) {
+	defer runtime.KeepAlive(aq)
 	objc.Send[objc.ID](objref.IDOf(aq), objc.RegisterName("setFloatQuaternion:atTime:"), value, time_)
 }
 
 // SetDoubleQuaternionAtTime wraps the corresponding Objective-C method.
 func (aq *AnimatedQuaternion) SetDoubleQuaternionAtTime(value unsafe.Pointer, time_ float64) {
+	defer runtime.KeepAlive(aq)
 	objc.Send[objc.ID](objref.IDOf(aq), objc.RegisterName("setDoubleQuaternion:atTime:"), value, time_)
 }
 
 // ResetWithFloatQuaternionArrayAtTimesCount resets with float quaternion array at times count.
 func (aq *AnimatedQuaternion) ResetWithFloatQuaternionArrayAtTimesCount(valuesArray unsafe.Pointer, count int) (timesArray float64) {
+	defer runtime.KeepAlive(aq)
 	var _out0 float64
 	objc.Send[objc.ID](objref.IDOf(aq), objc.RegisterName("resetWithFloatQuaternionArray:atTimes:count:"), valuesArray, unsafe.Pointer(&_out0), count)
 	return _out0
@@ -76,6 +80,7 @@ func (aq *AnimatedQuaternion) ResetWithFloatQuaternionArrayAtTimesCount(valuesAr
 
 // ResetWithDoubleQuaternionArrayAtTimesCount resets with double quaternion array at times count.
 func (aq *AnimatedQuaternion) ResetWithDoubleQuaternionArrayAtTimesCount(valuesArray unsafe.Pointer, count int) (timesArray float64) {
+	defer runtime.KeepAlive(aq)
 	var _out0 float64
 	objc.Send[objc.ID](objref.IDOf(aq), objc.RegisterName("resetWithDoubleQuaternionArray:atTimes:count:"), valuesArray, unsafe.Pointer(&_out0), count)
 	return _out0
@@ -83,12 +88,14 @@ func (aq *AnimatedQuaternion) ResetWithDoubleQuaternionArrayAtTimesCount(valuesA
 
 // GetFloatQuaternionArrayMaxCount wraps the corresponding Objective-C method.
 func (aq *AnimatedQuaternion) GetFloatQuaternionArrayMaxCount(valuesArray unsafe.Pointer, maxCount int) int {
+	defer runtime.KeepAlive(aq)
 	_r := objc.Send[int](objref.IDOf(aq), objc.RegisterName("getFloatQuaternionArray:maxCount:"), valuesArray, maxCount)
 	return _r
 }
 
 // GetDoubleQuaternionArrayMaxCount wraps the corresponding Objective-C method.
 func (aq *AnimatedQuaternion) GetDoubleQuaternionArrayMaxCount(valuesArray unsafe.Pointer, maxCount int) int {
+	defer runtime.KeepAlive(aq)
 	_r := objc.Send[int](objref.IDOf(aq), objc.RegisterName("getDoubleQuaternionArray:maxCount:"), valuesArray, maxCount)
 	return _r
 }

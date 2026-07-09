@@ -6,11 +6,12 @@ package speech
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -19,6 +20,7 @@ import (
 //
 // PrepareCustomLanguageModelForUrlClientIdentifierConfigurationCompletion blocks until the operation completes or ctx is cancelled.
 func PrepareCustomLanguageModelForUrlClientIdentifierConfigurationCompletion(ctx context.Context, asset string, clientIdentifier string, configuration *SpeechLanguageModelConfiguration) error {
+	defer runtime.KeepAlive(configuration)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -38,6 +40,7 @@ func PrepareCustomLanguageModelForUrlClientIdentifierConfigurationCompletion(ctx
 //
 // PrepareCustomLanguageModelForUrlClientIdentifierConfigurationIgnoresCacheCompletion blocks until the operation completes or ctx is cancelled.
 func PrepareCustomLanguageModelForUrlClientIdentifierConfigurationIgnoresCacheCompletion(ctx context.Context, asset string, clientIdentifier string, configuration *SpeechLanguageModelConfiguration, ignoresCache bool) error {
+	defer runtime.KeepAlive(configuration)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -57,6 +60,7 @@ func PrepareCustomLanguageModelForUrlClientIdentifierConfigurationIgnoresCacheCo
 //
 // PrepareCustomLanguageModelForUrlConfigurationCompletion blocks until the operation completes or ctx is cancelled.
 func PrepareCustomLanguageModelForUrlConfigurationCompletion(ctx context.Context, asset string, configuration *SpeechLanguageModelConfiguration) error {
+	defer runtime.KeepAlive(configuration)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -76,6 +80,7 @@ func PrepareCustomLanguageModelForUrlConfigurationCompletion(ctx context.Context
 //
 // PrepareCustomLanguageModelForUrlConfigurationIgnoresCacheCompletion blocks until the operation completes or ctx is cancelled.
 func PrepareCustomLanguageModelForUrlConfigurationIgnoresCacheCompletion(ctx context.Context, asset string, configuration *SpeechLanguageModelConfiguration, ignoresCache bool) error {
+	defer runtime.KeepAlive(configuration)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -92,9 +97,9 @@ func PrepareCustomLanguageModelForUrlConfigurationIgnoresCacheCompletion(ctx con
 }
 
 // SupportedLocales returns the set of locales that are supported by the speech recognizer.
-func SupportedLocales() obj.Object {
+func SupportedLocales() []*foundation.Locale {
 	_r := objc.Send[objc.ID](objc.ID(_class("SFSpeechRecognizer")), objc.RegisterName("supportedLocales"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.Locale { return foundation.LocaleFromID(_id) })
 }
 
 // AuthorizationStatusClass returns your app’s current authorization to perform speech recognition.

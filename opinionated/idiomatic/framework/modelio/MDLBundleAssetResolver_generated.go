@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func bundleAssetResolverAdopt(id objc.ID) *BundleAssetResolver {
 
 // Description returns the object's -description text.
 func (bar *BundleAssetResolver) Description() string {
+	defer runtime.KeepAlive(bar)
 	return rt.Description(objref.IDOf(bar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bar *BundleAssetResolver) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bar)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bar *BundleAssetResolver) IsKind(className string) bool {
+	defer runtime.KeepAlive(bar)
 	return rt.IsKind(objref.IDOf(bar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bar *BundleAssetResolver) String() string {
+	defer runtime.KeepAlive(bar)
 	return rt.Description(objref.IDOf(bar))
 }
 
@@ -79,6 +86,7 @@ func (bar *BundleAssetResolver) WithPath(path string) *BundleAssetResolver {
 
 // Path returns the path.
 func (bar *BundleAssetResolver) Path() string {
+	defer runtime.KeepAlive(bar)
 	_r := objc.Send[objc.ID](objref.IDOf(bar), objc.RegisterName("path"))
 	if _r == 0 {
 		return ""

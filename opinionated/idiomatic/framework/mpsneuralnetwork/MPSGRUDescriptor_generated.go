@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -93,12 +95,14 @@ func (gd *GRUDescriptor) WithLayerSequenceDirection(layerSequenceDirection RNNSe
 
 // GatePnormValue returns the p-norm gating norm value as specified by the GRU formulae. Defaults to 1.0f.
 func (gd *GRUDescriptor) GatePnormValue() float32 {
+	defer runtime.KeepAlive(gd)
 	_r := objc.Send[float32](objref.IDOf(gd), objc.RegisterName("gatePnormValue"))
 	return _r
 }
 
 // FlipOutputGates reports whether if true then the GRU-block output formula is changed to: h1_i = ( 1 - z_i ^ p)^(1/p) h0_i + z_i h_i. Defaults to false.
 func (gd *GRUDescriptor) FlipOutputGates() bool {
+	defer runtime.KeepAlive(gd)
 	_r := objc.Send[bool](objref.IDOf(gd), objc.RegisterName("flipOutputGates"))
 	return _r
 }

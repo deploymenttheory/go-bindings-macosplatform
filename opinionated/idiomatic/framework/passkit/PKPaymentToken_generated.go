@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func paymentTokenAdopt(id objc.ID) *PaymentToken {
 
 // Description returns the object's -description text.
 func (pt *PaymentToken) Description() string {
+	defer runtime.KeepAlive(pt)
 	return rt.Description(objref.IDOf(pt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pt *PaymentToken) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pt *PaymentToken) IsKind(className string) bool {
+	defer runtime.KeepAlive(pt)
 	return rt.IsKind(objref.IDOf(pt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pt *PaymentToken) String() string {
+	defer runtime.KeepAlive(pt)
 	return rt.Description(objref.IDOf(pt))
 }
 
@@ -74,12 +81,14 @@ func NewPaymentToken() *PaymentToken {
 
 // PaymentMethod returns the payment method.
 func (pt *PaymentToken) PaymentMethod() *PaymentMethod {
+	defer runtime.KeepAlive(pt)
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("paymentMethod"))
 	return PaymentMethodFromID(_r)
 }
 
 // PaymentInstrumentName returns the payment instrument name.
 func (pt *PaymentToken) PaymentInstrumentName() string {
+	defer runtime.KeepAlive(pt)
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("paymentInstrumentName"))
 	if _r == 0 {
 		return ""
@@ -89,6 +98,7 @@ func (pt *PaymentToken) PaymentInstrumentName() string {
 
 // PaymentNetwork returns the payment network.
 func (pt *PaymentToken) PaymentNetwork() string {
+	defer runtime.KeepAlive(pt)
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("paymentNetwork"))
 	if _r == 0 {
 		return ""
@@ -98,6 +108,7 @@ func (pt *PaymentToken) PaymentNetwork() string {
 
 // TransactionIdentifier returns the transaction identifier.
 func (pt *PaymentToken) TransactionIdentifier() string {
+	defer runtime.KeepAlive(pt)
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("transactionIdentifier"))
 	if _r == 0 {
 		return ""
@@ -106,7 +117,8 @@ func (pt *PaymentToken) TransactionIdentifier() string {
 }
 
 // PaymentData returns the payment data.
-func (pt *PaymentToken) PaymentData() obj.Object {
+func (pt *PaymentToken) PaymentData() []byte {
+	defer runtime.KeepAlive(pt)
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("paymentData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

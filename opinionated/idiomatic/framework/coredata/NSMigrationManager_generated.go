@@ -5,6 +5,7 @@
 package coredata
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,27 +51,34 @@ func migrationManagerAdopt(id objc.ID) *MigrationManager {
 
 // Description returns the object's -description text.
 func (mm *MigrationManager) Description() string {
+	defer runtime.KeepAlive(mm)
 	return rt.Description(objref.IDOf(mm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mm *MigrationManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mm *MigrationManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(mm)
 	return rt.IsKind(objref.IDOf(mm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mm *MigrationManager) String() string {
+	defer runtime.KeepAlive(mm)
 	return rt.Description(objref.IDOf(mm))
 }
 
 // NewMigrationManagerWithSourceModelDestinationModel initializes a migration manager instance with given source and destination models.
 func NewMigrationManagerWithSourceModelDestinationModel(sourceModel *ManagedObjectModel, destinationModel *ManagedObjectModel) *MigrationManager {
+	defer runtime.KeepAlive(sourceModel)
+	defer runtime.KeepAlive(destinationModel)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMigrationManager")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceModel:destinationModel:"), objref.IDOf(sourceModel), objref.IDOf(destinationModel))
 	return migrationManagerAdopt(_id)
@@ -84,12 +92,17 @@ func (mm *MigrationManager) WithUsesStoreSpecificMigrationManager(usesStoreSpeci
 
 // WithUserInfo sets the user info for the migration manager.
 func (mm *MigrationManager) WithUserInfo(userInfo obj.Object) *MigrationManager {
+	defer runtime.KeepAlive(userInfo)
 	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return mm
 }
 
 // MigrateStoreFromURLTypeOptionsWithMappingModelToDestinationURLDestinationTypeDestinationOptions migrates the store at a given source URL to the store at a given destination URL, performing all of the mappings specified in a given mapping model.
 func (mm *MigrationManager) MigrateStoreFromURLTypeOptionsWithMappingModelToDestinationURLDestinationTypeDestinationOptions(sourceURL string, sStoreType string, sOptions obj.Object, mappings *MappingModel, dURL string, dStoreType string, dOptions obj.Object) error {
+	defer runtime.KeepAlive(mm)
+	defer runtime.KeepAlive(sOptions)
+	defer runtime.KeepAlive(mappings)
+	defer runtime.KeepAlive(dOptions)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(mm), objc.RegisterName("migrateStoreFromURL:type:options:withMappingModel:toDestinationURL:destinationType:destinationOptions:error:"), rt.FileURL(sourceURL), purego.NSString(sStoreType), objref.IDOf(sOptions), objref.IDOf(mappings), rt.FileURL(dURL), purego.NSString(dStoreType), objref.IDOf(dOptions), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -100,93 +113,114 @@ func (mm *MigrationManager) MigrateStoreFromURLTypeOptionsWithMappingModelToDest
 
 // Reset resets the association tables for the migration.
 func (mm *MigrationManager) Reset() {
+	defer runtime.KeepAlive(mm)
 	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("reset"))
 }
 
 // SourceEntityForEntityMapping returns the entity description for the source entity of a given entity mapping.
 func (mm *MigrationManager) SourceEntityForEntityMapping(mEntity *EntityMapping) *EntityDescription {
+	defer runtime.KeepAlive(mm)
+	defer runtime.KeepAlive(mEntity)
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("sourceEntityForEntityMapping:"), objref.IDOf(mEntity))
 	return EntityDescriptionFromID(_r)
 }
 
 // DestinationEntityForEntityMapping returns the entity description for the destination entity of a given entity mapping.
 func (mm *MigrationManager) DestinationEntityForEntityMapping(mEntity *EntityMapping) *EntityDescription {
+	defer runtime.KeepAlive(mm)
+	defer runtime.KeepAlive(mEntity)
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("destinationEntityForEntityMapping:"), objref.IDOf(mEntity))
 	return EntityDescriptionFromID(_r)
 }
 
 // AssociateSourceInstanceWithDestinationInstanceForEntityMapping associates a given source managed object instance with an array of destination instances for a given property mapping.
 func (mm *MigrationManager) AssociateSourceInstanceWithDestinationInstanceForEntityMapping(sourceInstance *ManagedObject, destinationInstance *ManagedObject, entityMapping *EntityMapping) {
+	defer runtime.KeepAlive(mm)
+	defer runtime.KeepAlive(sourceInstance)
+	defer runtime.KeepAlive(destinationInstance)
+	defer runtime.KeepAlive(entityMapping)
 	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("associateSourceInstance:withDestinationInstance:forEntityMapping:"), objref.IDOf(sourceInstance), objref.IDOf(destinationInstance), objref.IDOf(entityMapping))
 }
 
 // DestinationInstancesForEntityMappingNamedSourceInstances returns the managed object instances created in the destination store for the named entity mapping for the given array of source instances.
 func (mm *MigrationManager) DestinationInstancesForEntityMappingNamedSourceInstances(mappingName string, sourceInstances []*ManagedObject) []*ManagedObject {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("destinationInstancesForEntityMappingNamed:sourceInstances:"), purego.NSString(mappingName), purego.SliceToNSArray(sourceInstances, func(_v *ManagedObject) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *ManagedObject { return ManagedObjectFromID(_id) })
 }
 
 // SourceInstancesForEntityMappingNamedDestinationInstances returns the managed object instances in the source store used to create the given destination instances for the passed in property mapping.
 func (mm *MigrationManager) SourceInstancesForEntityMappingNamedDestinationInstances(mappingName string, destinationInstances []*ManagedObject) []*ManagedObject {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("sourceInstancesForEntityMappingNamed:destinationInstances:"), purego.NSString(mappingName), purego.SliceToNSArray(destinationInstances, func(_v *ManagedObject) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *ManagedObject { return ManagedObjectFromID(_id) })
 }
 
 // CancelMigrationWithError cancels the migration with a given error.
-func (mm *MigrationManager) CancelMigrationWithError(error_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("cancelMigrationWithError:"), error_)
+func (mm *MigrationManager) CancelMigrationWithError(err unsafe.Pointer) {
+	defer runtime.KeepAlive(mm)
+	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("cancelMigrationWithError:"), err)
 }
 
 // UsesStoreSpecificMigrationManager wraps the corresponding Objective-C method.
 func (mm *MigrationManager) UsesStoreSpecificMigrationManager() bool {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[bool](objref.IDOf(mm), objc.RegisterName("usesStoreSpecificMigrationManager"))
 	return _r
 }
 
 // MappingModel returns the mapping model.
 func (mm *MigrationManager) MappingModel() *MappingModel {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("mappingModel"))
 	return MappingModelFromID(_r)
 }
 
 // SourceModel returns the source model.
 func (mm *MigrationManager) SourceModel() *ManagedObjectModel {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("sourceModel"))
 	return ManagedObjectModelFromID(_r)
 }
 
 // DestinationModel returns the destination model.
 func (mm *MigrationManager) DestinationModel() *ManagedObjectModel {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("destinationModel"))
 	return ManagedObjectModelFromID(_r)
 }
 
 // SourceContext returns the source context.
 func (mm *MigrationManager) SourceContext() *ManagedObjectContext {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("sourceContext"))
 	return ManagedObjectContextFromID(_r)
 }
 
 // DestinationContext returns the destination context.
 func (mm *MigrationManager) DestinationContext() *ManagedObjectContext {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("destinationContext"))
 	return ManagedObjectContextFromID(_r)
 }
 
 // CurrentEntityMapping returns the current entity mapping.
 func (mm *MigrationManager) CurrentEntityMapping() *EntityMapping {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("currentEntityMapping"))
 	return EntityMappingFromID(_r)
 }
 
 // MigrationProgress returns the migration progress.
 func (mm *MigrationManager) MigrationProgress() float32 {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[float32](objref.IDOf(mm), objc.RegisterName("migrationProgress"))
 	return _r
 }
 
 // UserInfo returns the user info.
 func (mm *MigrationManager) UserInfo() obj.Object {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }

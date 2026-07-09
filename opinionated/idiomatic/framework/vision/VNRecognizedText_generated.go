@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,16 +52,20 @@ func recognizedTextAdopt(id objc.ID) *RecognizedText {
 
 // Description returns the object's -description text.
 func (rt_ *RecognizedText) Description() string {
+	defer runtime.KeepAlive(rt_)
 	return rt.Description(objref.IDOf(rt_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rt_ *RecognizedText) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rt_)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rt_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rt_ *RecognizedText) IsKind(className string) bool {
+	defer runtime.KeepAlive(rt_)
 	return rt.IsKind(objref.IDOf(rt_), className)
 }
 
@@ -70,8 +75,9 @@ func NewRecognizedText() *RecognizedText {
 	return recognizedTextAdopt(_id)
 }
 
-// BoundingBoxForRangeError calculates the bounding box around the characters in the range of a string.
-func (rt_ *RecognizedText) BoundingBoxForRangeError(range_ foundation.NSRange) (result *RectangleObservation, err error) {
+// BoundingBoxForRange calculates the bounding box around the characters in the range of a string.
+func (rt_ *RecognizedText) BoundingBoxForRange(range_ foundation.NSRange) (result *RectangleObservation, err error) {
+	defer runtime.KeepAlive(rt_)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(rt_), objc.RegisterName("boundingBoxForRange:error:"), range_, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -82,6 +88,7 @@ func (rt_ *RecognizedText) BoundingBoxForRangeError(range_ foundation.NSRange) (
 
 // String returns field that contains recognized text. This is the top candidate of the recognized text.
 func (rt_ *RecognizedText) String() string {
+	defer runtime.KeepAlive(rt_)
 	_r := objc.Send[objc.ID](objref.IDOf(rt_), objc.RegisterName("string"))
 	if _r == 0 {
 		return ""
@@ -91,6 +98,7 @@ func (rt_ *RecognizedText) String() string {
 
 // Confidence returns the level of confidence normalized to [0.0, 1.0] where 1.0 is most confident
 func (rt_ *RecognizedText) Confidence() float32 {
+	defer runtime.KeepAlive(rt_)
 	_r := objc.Send[float32](objref.IDOf(rt_), objc.RegisterName("confidence"))
 	return _r
 }

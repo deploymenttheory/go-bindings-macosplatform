@@ -5,6 +5,8 @@
 package pdfkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func actionGoToAdopt(id objc.ID) *ActionGoTo {
 
 // NewActionGoToWithDestination initializes the go-to action.
 func NewActionGoToWithDestination(destination *Destination) *ActionGoTo {
+	defer runtime.KeepAlive(destination)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFActionGoTo")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestination:"), objref.IDOf(destination))
 	return actionGoToAdopt(_id)
@@ -54,12 +57,14 @@ func NewActionGoToWithDestination(destination *Destination) *ActionGoTo {
 
 // WithDestination sets returns the destination associated with the action.
 func (agt *ActionGoTo) WithDestination(destination *Destination) *ActionGoTo {
+	defer runtime.KeepAlive(destination)
 	objc.Send[objc.ID](objref.IDOf(agt), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return agt
 }
 
 // Destination returns the destination.
 func (agt *ActionGoTo) Destination() *Destination {
+	defer runtime.KeepAlive(agt)
 	_r := objc.Send[objc.ID](objref.IDOf(agt), objc.RegisterName("destination"))
 	return DestinationFromID(_r)
 }

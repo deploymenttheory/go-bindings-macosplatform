@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -56,6 +58,7 @@ func NewVerifiableClinicalRecordQuery() *VerifiableClinicalRecordQuery {
 //
 // RecordTypes returns the collection as a Go slice.
 func (vcrq *VerifiableClinicalRecordQuery) RecordTypes() []string {
+	defer runtime.KeepAlive(vcrq)
 	_arr := objc.Send[objc.ID](objref.IDOf(vcrq), objc.RegisterName("recordTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -64,6 +67,7 @@ func (vcrq *VerifiableClinicalRecordQuery) RecordTypes() []string {
 //
 // SourceTypes returns the collection as a Go slice.
 func (vcrq *VerifiableClinicalRecordQuery) SourceTypes() []obj.Object {
+	defer runtime.KeepAlive(vcrq)
 	_arr := objc.Send[objc.ID](objref.IDOf(vcrq), objc.RegisterName("sourceTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

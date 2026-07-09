@@ -5,6 +5,8 @@
 package naturallanguage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,16 +50,20 @@ func tokenizerAdopt(id objc.ID) *Tokenizer {
 
 // Description returns the object's -description text.
 func (t *Tokenizer) Description() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (t *Tokenizer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (t *Tokenizer) IsKind(className string) bool {
+	defer runtime.KeepAlive(t)
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
@@ -69,42 +75,49 @@ func NewTokenizerWithUnit(unit TokenUnit) *Tokenizer {
 }
 
 // WithString sets the text to be tokenized.
-func (t *Tokenizer) WithString(string_ string) *Tokenizer {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setString:"), purego.NSString(string_))
+func (t *Tokenizer) WithString(str string) *Tokenizer {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setString:"), purego.NSString(str))
 	return t
 }
 
 // SetLanguage sets the language of the text to be tokenized.
 func (t *Tokenizer) SetLanguage(language obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(language)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLanguage:"), objref.IDOf(language))
 }
 
 // TokenRangeAtIndex finds the range of the token at the given index.
 func (t *Tokenizer) TokenRangeAtIndex(characterIndex int) foundation.NSRange {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(t), objc.RegisterName("tokenRangeAtIndex:"), characterIndex)
 	return _r
 }
 
 // TokenRangeForRange finds the entire range of all tokens contained completely or partially within the specified range.
 func (t *Tokenizer) TokenRangeForRange(range_ foundation.NSRange) foundation.NSRange {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(t), objc.RegisterName("tokenRangeForRange:"), range_)
 	return _r
 }
 
 // TokensForRange tokenizes the string within the provided range.
-func (t *Tokenizer) TokensForRange(range_ foundation.NSRange) []obj.Object {
+func (t *Tokenizer) TokensForRange(range_ foundation.NSRange) []*foundation.Value {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("tokensForRange:"), range_)
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *foundation.Value { return foundation.ValueFromID(_id) })
 }
 
 // Unit returns the unit.
 func (t *Tokenizer) Unit() TokenUnit {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[TokenUnit](objref.IDOf(t), objc.RegisterName("unit"))
 	return _r
 }
 
 // String returns the string.
 func (t *Tokenizer) String() string {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("string"))
 	if _r == 0 {
 		return ""

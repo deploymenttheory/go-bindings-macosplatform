@@ -8,8 +8,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrCodeUserCancelled matches the FileProviderUI error FPUIExtensionErrorCodeUserCancelled.
-var ErrCodeUserCancelled = errkit.New("FPUIExtensionErrorDomain", 0)
-
 // ErrCodeFailed matches the FileProviderUI error FPUIExtensionErrorCodeFailed.
 var ErrCodeFailed = errkit.New("FPUIExtensionErrorDomain", 1)
+
+// ErrCodeUserCancelled matches the FileProviderUI error FPUIExtensionErrorCodeUserCancelled.
+var ErrCodeUserCancelled = errkit.New("FPUIExtensionErrorDomain", 0)

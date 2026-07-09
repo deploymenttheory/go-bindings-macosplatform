@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,12 +67,14 @@ func (dl *DropoutLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Dropout
 
 // Rate returns the probability that each element is dropped
 func (dl *DropoutLayer) Rate() float32 {
+	defer runtime.KeepAlive(dl)
 	_r := objc.Send[float32](objref.IDOf(dl), objc.RegisterName("rate"))
 	return _r
 }
 
 // Seed returns the initial seed used to generate random numbers
 func (dl *DropoutLayer) Seed() int {
+	defer runtime.KeepAlive(dl)
 	_r := objc.Send[int](objref.IDOf(dl), objc.RegisterName("seed"))
 	return _r
 }

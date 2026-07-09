@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,6 +52,7 @@ func trackingRequestAdopt(id objc.ID) *TrackingRequest {
 
 // WithInputObservation sets the observation object defining a region to track.
 func (tr *TrackingRequest) WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackingRequest {
+	defer runtime.KeepAlive(inputObservation)
 	objc.Send[objc.ID](objref.IDOf(tr), objc.RegisterName("setInputObservation:"), objref.IDOf(inputObservation))
 	return tr
 }
@@ -91,8 +93,9 @@ func (tr *TrackingRequest) WithRevision(revision int) *TrackingRequest {
 	return tr
 }
 
-// SupportedNumberOfTrackersAndReturnError returns the maximum number of simultaneous trackers for the request.
-func (tr *TrackingRequest) SupportedNumberOfTrackersAndReturnError() (result int, err error) {
+// SupportedNumberOfTrackers returns the maximum number of simultaneous trackers for the request.
+func (tr *TrackingRequest) SupportedNumberOfTrackers() (result int, err error) {
+	defer runtime.KeepAlive(tr)
 	var _nsErr uintptr
 	_r := objc.Send[int](objref.IDOf(tr), objc.RegisterName("supportedNumberOfTrackersAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -103,18 +106,21 @@ func (tr *TrackingRequest) SupportedNumberOfTrackersAndReturnError() (result int
 
 // InputObservation returns the observation object that defines a region to track. Providing an observation not returned from a tracker (e.g. user-defined, or from a detector) begins a new tracker for the sequence. Providing an observation that was returned from a tracker continues the use of that tracker, to track the region to the next frame. In general, unless documented in the request's documentation, the rectangle must be defined in normalized coordinates (both dimensions normalized to [0,1] with the origin at the lower-left corner).
 func (tr *TrackingRequest) InputObservation() *DetectedObjectObservation {
+	defer runtime.KeepAlive(tr)
 	_r := objc.Send[objc.ID](objref.IDOf(tr), objc.RegisterName("inputObservation"))
 	return DetectedObjectObservationFromID(_r)
 }
 
 // TrackingLevel returns tracking level allows tuning tracking algorithm to prefer speed (VNRequestTrackingLevelFast) vs. tracking object location accuracy (VNRequestTrackingLevelAccurate). This property has no effect on general purpose object tracker (VNTrackObjectRequest) revision 2 (VNTrackObjectRequestRevision2)
 func (tr *TrackingRequest) TrackingLevel() RequestTrackingLevel {
+	defer runtime.KeepAlive(tr)
 	_r := objc.Send[RequestTrackingLevel](objref.IDOf(tr), objc.RegisterName("trackingLevel"))
 	return _r
 }
 
 // IsLastFrame reports whether this property allows marking the last frame for tracking using current tracker. If set to true, the results for this frame will be processed and returned and the current tracker will be released to the pool of available trackers
 func (tr *TrackingRequest) IsLastFrame() bool {
+	defer runtime.KeepAlive(tr)
 	_r := objc.Send[bool](objref.IDOf(tr), objc.RegisterName("isLastFrame"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func numericPairAdopt(id objc.ID) *NumericPair {
 
 // Description returns the object's -description text.
 func (np *NumericPair) Description() string {
+	defer runtime.KeepAlive(np)
 	return rt.Description(objref.IDOf(np))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (np *NumericPair) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(np)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(np), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (np *NumericPair) IsKind(className string) bool {
+	defer runtime.KeepAlive(np)
 	return rt.IsKind(objref.IDOf(np), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (np *NumericPair) String() string {
+	defer runtime.KeepAlive(np)
 	return rt.Description(objref.IDOf(np))
 }
 
@@ -87,12 +94,14 @@ func (np *NumericPair) WithSecond(second float64) *NumericPair {
 
 // First returns the first value in the numeric pair. The default value is 0.0.
 func (np *NumericPair) First() float64 {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[float64](objref.IDOf(np), objc.RegisterName("first"))
 	return _r
 }
 
 // Second returns the second value in the numeric pair. The default value is 0.0.
 func (np *NumericPair) Second() float64 {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[float64](objref.IDOf(np), objc.RegisterName("second"))
 	return _r
 }

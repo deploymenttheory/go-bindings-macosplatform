@@ -68,8 +68,8 @@ func (o *NSHTTPCookieStorage) RemoveCookiesSinceDate(date *NSDate) {
 }
 
 // @method cookiesForURL: @abstract Returns an array of cookies to send to the given URL. @param URL The URL for which to get cookies. @result an NSArray of NSHTTPCookie objects. @discussion The cookie manager examines the cookies it stores and includes those which should be sent to the given URL. You can use <tt>+[NSCookie requestHeaderFieldsWithCookies:]</tt> to turn this array into a set of header fields to add to a request.
-func (o *NSHTTPCookieStorage) CookiesForURL(uRL *NSURL) *NSArray[*NSHTTPCookie] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSHTTPCookieStorageSelCookiesForURL, uRL.Ptr())
+func (o *NSHTTPCookieStorage) CookiesForURL(url *NSURL) *NSArray[*NSHTTPCookie] {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSHTTPCookieStorageSelCookiesForURL, url.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -77,8 +77,8 @@ func (o *NSHTTPCookieStorage) CookiesForURL(uRL *NSURL) *NSArray[*NSHTTPCookie] 
 }
 
 // @method setCookies:forURL:mainDocumentURL: @abstract Adds an array cookies to the cookie store, following the cookie accept policy. @param cookies The cookies to set. @param URL The URL from which the cookies were sent. @param mainDocumentURL The main document URL to be used as a base for the "same domain as main document" policy. @discussion For mainDocumentURL, the caller should pass the URL for an appropriate main document, if known. For example, when loading a web page, the URL of the main html document for the top-level frame should be passed. To save cookies based on a set of response headers, you can use <tt>+[NSCookie cookiesWithResponseHeaderFields:forURL:]</tt> on a header field dictionary and then use this method to store the resulting cookies in accordance with policy settings.
-func (o *NSHTTPCookieStorage) SetCookiesForURLMainDocumentURL(cookies *NSArray[*NSHTTPCookie], uRL *NSURL, mainDocumentURL *NSURL) {
-	o.Ptr().Send(_nSHTTPCookieStorageSelSetCookiesForURLMainDocumentURL, cookies.Ptr(), uRL.Ptr(), mainDocumentURL.Ptr())
+func (o *NSHTTPCookieStorage) SetCookiesForURLMainDocumentURL(cookies *NSArray[*NSHTTPCookie], url *NSURL, mainDocumentURL *NSURL) {
+	o.Ptr().Send(_nSHTTPCookieStorageSelSetCookiesForURLMainDocumentURL, cookies.Ptr(), url.Ptr(), mainDocumentURL.Ptr())
 }
 
 // @method sortedCookiesUsingDescriptors: @abstract Returns an array of all cookies in the store, sorted according to the key value and sorting direction of the NSSortDescriptors specified in the parameter. @param sortOrder an array of NSSortDescriptors which represent the preferred sort order of the resulting array. @discussion proper sorting of cookies may require extensive string conversion, which can be avoided by allowing the system to perform the sorting.  This API is to be preferred over the more generic -[NSHTTPCookieStorage cookies] API, if sorting is going to be performed.

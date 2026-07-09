@@ -1042,8 +1042,8 @@ func (o *CSSearchableItemAttributeSet) HTMLContentData() *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetHTMLContentData(hTMLContentData *foundation.NSData) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetHTMLContentData, hTMLContentData.Ptr())
+func (o *CSSearchableItemAttributeSet) SetHTMLContentData(htmlContentData *foundation.NSData) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetHTMLContentData, htmlContentData.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) TextContent() *foundation.NSString {
@@ -1734,8 +1734,8 @@ func (o *CSSearchableItemAttributeSet) URL() *foundation.NSURL {
 	return foundation.NSURLFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetURL(uRL *foundation.NSURL) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetURL, uRL.Ptr())
+func (o *CSSearchableItemAttributeSet) SetURL(url *foundation.NSURL) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetURL, url.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) AudioSampleRate() *foundation.NSNumber {
@@ -2082,8 +2082,8 @@ func (o *CSSearchableItemAttributeSet) ISOSpeed() *foundation.NSNumber {
 	return foundation.NSNumberFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetISOSpeed(iSOSpeed *foundation.NSNumber) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetISOSpeed, iSOSpeed.Ptr())
+func (o *CSSearchableItemAttributeSet) SetISOSpeed(isoSpeed *foundation.NSNumber) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetISOSpeed, isoSpeed.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) Orientation() *foundation.NSNumber {
@@ -2202,8 +2202,8 @@ func (o *CSSearchableItemAttributeSet) EXIFVersion() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetEXIFVersion(eXIFVersion *foundation.NSString) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetEXIFVersion, eXIFVersion.Ptr())
+func (o *CSSearchableItemAttributeSet) SetEXIFVersion(exifVersion *foundation.NSString) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetEXIFVersion, exifVersion.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) EXIFGPSVersion() *foundation.NSString {
@@ -2214,8 +2214,8 @@ func (o *CSSearchableItemAttributeSet) EXIFGPSVersion() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetEXIFGPSVersion(eXIFGPSVersion *foundation.NSString) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetEXIFGPSVersion, eXIFGPSVersion.Ptr())
+func (o *CSSearchableItemAttributeSet) SetEXIFGPSVersion(exifgpsVersion *foundation.NSString) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetEXIFGPSVersion, exifgpsVersion.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) HasAlphaChannel() *foundation.NSNumber {
@@ -2502,8 +2502,8 @@ func (o *CSSearchableItemAttributeSet) GPSTrack() *foundation.NSNumber {
 	return foundation.NSNumberFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetGPSTrack(gPSTrack *foundation.NSNumber) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSTrack, gPSTrack.Ptr())
+func (o *CSSearchableItemAttributeSet) SetGPSTrack(gpsTrack *foundation.NSNumber) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSTrack, gpsTrack.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) GPSStatus() *foundation.NSString {
@@ -2514,8 +2514,8 @@ func (o *CSSearchableItemAttributeSet) GPSStatus() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetGPSStatus(gPSStatus *foundation.NSString) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSStatus, gPSStatus.Ptr())
+func (o *CSSearchableItemAttributeSet) SetGPSStatus(gpsStatus *foundation.NSString) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSStatus, gpsStatus.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) GPSMeasureMode() *foundation.NSString {
@@ -2526,8 +2526,8 @@ func (o *CSSearchableItemAttributeSet) GPSMeasureMode() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetGPSMeasureMode(gPSMeasureMode *foundation.NSString) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSMeasureMode, gPSMeasureMode.Ptr())
+func (o *CSSearchableItemAttributeSet) SetGPSMeasureMode(gpsMeasureMode *foundation.NSString) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSMeasureMode, gpsMeasureMode.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) GPSDOP() *foundation.NSNumber {
@@ -2538,8 +2538,8 @@ func (o *CSSearchableItemAttributeSet) GPSDOP() *foundation.NSNumber {
 	return foundation.NSNumberFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetGPSDOP(gPSDOP *foundation.NSNumber) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSDOP, gPSDOP.Ptr())
+func (o *CSSearchableItemAttributeSet) SetGPSDOP(gpsdop *foundation.NSNumber) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSDOP, gpsdop.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) GPSMapDatum() *foundation.NSString {
@@ -2550,8 +2550,8 @@ func (o *CSSearchableItemAttributeSet) GPSMapDatum() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetGPSMapDatum(gPSMapDatum *foundation.NSString) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSMapDatum, gPSMapDatum.Ptr())
+func (o *CSSearchableItemAttributeSet) SetGPSMapDatum(gpsMapDatum *foundation.NSString) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSMapDatum, gpsMapDatum.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) GPSDestLatitude() *foundation.NSNumber {
@@ -2562,8 +2562,8 @@ func (o *CSSearchableItemAttributeSet) GPSDestLatitude() *foundation.NSNumber {
 	return foundation.NSNumberFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetGPSDestLatitude(gPSDestLatitude *foundation.NSNumber) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSDestLatitude, gPSDestLatitude.Ptr())
+func (o *CSSearchableItemAttributeSet) SetGPSDestLatitude(gpsDestLatitude *foundation.NSNumber) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSDestLatitude, gpsDestLatitude.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) GPSDestLongitude() *foundation.NSNumber {
@@ -2574,8 +2574,8 @@ func (o *CSSearchableItemAttributeSet) GPSDestLongitude() *foundation.NSNumber {
 	return foundation.NSNumberFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetGPSDestLongitude(gPSDestLongitude *foundation.NSNumber) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSDestLongitude, gPSDestLongitude.Ptr())
+func (o *CSSearchableItemAttributeSet) SetGPSDestLongitude(gpsDestLongitude *foundation.NSNumber) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSDestLongitude, gpsDestLongitude.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) GPSDestBearing() *foundation.NSNumber {
@@ -2586,8 +2586,8 @@ func (o *CSSearchableItemAttributeSet) GPSDestBearing() *foundation.NSNumber {
 	return foundation.NSNumberFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetGPSDestBearing(gPSDestBearing *foundation.NSNumber) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSDestBearing, gPSDestBearing.Ptr())
+func (o *CSSearchableItemAttributeSet) SetGPSDestBearing(gpsDestBearing *foundation.NSNumber) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSDestBearing, gpsDestBearing.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) GPSDestDistance() *foundation.NSNumber {
@@ -2598,8 +2598,8 @@ func (o *CSSearchableItemAttributeSet) GPSDestDistance() *foundation.NSNumber {
 	return foundation.NSNumberFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetGPSDestDistance(gPSDestDistance *foundation.NSNumber) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSDestDistance, gPSDestDistance.Ptr())
+func (o *CSSearchableItemAttributeSet) SetGPSDestDistance(gpsDestDistance *foundation.NSNumber) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSDestDistance, gpsDestDistance.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) GPSProcessingMethod() *foundation.NSString {
@@ -2610,8 +2610,8 @@ func (o *CSSearchableItemAttributeSet) GPSProcessingMethod() *foundation.NSStrin
 	return foundation.NSStringFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetGPSProcessingMethod(gPSProcessingMethod *foundation.NSString) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSProcessingMethod, gPSProcessingMethod.Ptr())
+func (o *CSSearchableItemAttributeSet) SetGPSProcessingMethod(gpsProcessingMethod *foundation.NSString) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSProcessingMethod, gpsProcessingMethod.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) GPSAreaInformation() *foundation.NSString {
@@ -2622,8 +2622,8 @@ func (o *CSSearchableItemAttributeSet) GPSAreaInformation() *foundation.NSString
 	return foundation.NSStringFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetGPSAreaInformation(gPSAreaInformation *foundation.NSString) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSAreaInformation, gPSAreaInformation.Ptr())
+func (o *CSSearchableItemAttributeSet) SetGPSAreaInformation(gpsAreaInformation *foundation.NSString) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSAreaInformation, gpsAreaInformation.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) GPSDateStamp() *foundation.NSDate {
@@ -2634,8 +2634,8 @@ func (o *CSSearchableItemAttributeSet) GPSDateStamp() *foundation.NSDate {
 	return foundation.NSDateFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetGPSDateStamp(gPSDateStamp *foundation.NSDate) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSDateStamp, gPSDateStamp.Ptr())
+func (o *CSSearchableItemAttributeSet) SetGPSDateStamp(gpsDateStamp *foundation.NSDate) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSDateStamp, gpsDateStamp.Ptr())
 }
 
 func (o *CSSearchableItemAttributeSet) GPSDifferental() *foundation.NSNumber {
@@ -2646,6 +2646,6 @@ func (o *CSSearchableItemAttributeSet) GPSDifferental() *foundation.NSNumber {
 	return foundation.NSNumberFromID(_ret)
 }
 
-func (o *CSSearchableItemAttributeSet) SetGPSDifferental(gPSDifferental *foundation.NSNumber) {
-	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSDifferental, gPSDifferental.Ptr())
+func (o *CSSearchableItemAttributeSet) SetGPSDifferental(gpsDifferental *foundation.NSNumber) {
+	o.Ptr().Send(_cSSearchableItemAttributeSetSelSetGPSDifferental, gpsDifferental.Ptr())
 }

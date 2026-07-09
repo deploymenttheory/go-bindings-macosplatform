@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -58,12 +60,14 @@ func (emi *EditMessageIntent) WithSuggestedInvocationPhrase(suggestedInvocationP
 
 // WithDonationMetadata sets the donation metadata.
 func (emi *EditMessageIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *EditMessageIntent {
+	defer runtime.KeepAlive(donationMetadata)
 	objc.Send[objc.ID](objref.IDOf(emi), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return emi
 }
 
 // MessageIdentifier returns the message identifier.
 func (emi *EditMessageIntent) MessageIdentifier() string {
+	defer runtime.KeepAlive(emi)
 	_r := objc.Send[objc.ID](objref.IDOf(emi), objc.RegisterName("messageIdentifier"))
 	if _r == 0 {
 		return ""
@@ -73,6 +77,7 @@ func (emi *EditMessageIntent) MessageIdentifier() string {
 
 // EditedContent returns the edited content.
 func (emi *EditMessageIntent) EditedContent() string {
+	defer runtime.KeepAlive(emi)
 	_r := objc.Send[objc.ID](objref.IDOf(emi), objc.RegisterName("editedContent"))
 	if _r == 0 {
 		return ""

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRICDManagementClusterUnregisterClientParamsAdopt(id objc.ID) *MTRICDManag
 
 // Description returns the object's -description text.
 func (mmcucp *MTRICDManagementClusterUnregisterClientParams) Description() string {
+	defer runtime.KeepAlive(mmcucp)
 	return rt.Description(objref.IDOf(mmcucp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmcucp *MTRICDManagementClusterUnregisterClientParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmcucp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmcucp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmcucp *MTRICDManagementClusterUnregisterClientParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmcucp)
 	return rt.IsKind(objref.IDOf(mmcucp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmcucp *MTRICDManagementClusterUnregisterClientParams) String() string {
+	defer runtime.KeepAlive(mmcucp)
 	return rt.Description(objref.IDOf(mmcucp))
 }
 
@@ -72,48 +80,55 @@ func NewMTRICDManagementClusterUnregisterClientParams() *MTRICDManagementCluster
 
 // WithCheckInNodeID sets the check in node ID.
 func (mmcucp *MTRICDManagementClusterUnregisterClientParams) WithCheckInNodeID(checkInNodeID obj.Object) *MTRICDManagementClusterUnregisterClientParams {
+	defer runtime.KeepAlive(checkInNodeID)
 	objc.Send[objc.ID](objref.IDOf(mmcucp), objc.RegisterName("setCheckInNodeID:"), objref.IDOf(checkInNodeID))
 	return mmcucp
 }
 
 // WithVerificationKey sets the verification key.
-func (mmcucp *MTRICDManagementClusterUnregisterClientParams) WithVerificationKey(verificationKey obj.Object) *MTRICDManagementClusterUnregisterClientParams {
-	objc.Send[objc.ID](objref.IDOf(mmcucp), objc.RegisterName("setVerificationKey:"), objref.IDOf(verificationKey))
+func (mmcucp *MTRICDManagementClusterUnregisterClientParams) WithVerificationKey(verificationKey []byte) *MTRICDManagementClusterUnregisterClientParams {
+	objc.Send[objc.ID](objref.IDOf(mmcucp), objc.RegisterName("setVerificationKey:"), rt.BytesToNSData(verificationKey))
 	return mmcucp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mmcucp *MTRICDManagementClusterUnregisterClientParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRICDManagementClusterUnregisterClientParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mmcucp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mmcucp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mmcucp *MTRICDManagementClusterUnregisterClientParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRICDManagementClusterUnregisterClientParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mmcucp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mmcucp
 }
 
 // CheckInNodeID returns the check in node ID.
-func (mmcucp *MTRICDManagementClusterUnregisterClientParams) CheckInNodeID() obj.Object {
+func (mmcucp *MTRICDManagementClusterUnregisterClientParams) CheckInNodeID() *foundation.Number {
+	defer runtime.KeepAlive(mmcucp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcucp), objc.RegisterName("checkInNodeID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // VerificationKey returns the verification key.
-func (mmcucp *MTRICDManagementClusterUnregisterClientParams) VerificationKey() obj.Object {
+func (mmcucp *MTRICDManagementClusterUnregisterClientParams) VerificationKey() []byte {
+	defer runtime.KeepAlive(mmcucp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcucp), objc.RegisterName("verificationKey"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mmcucp *MTRICDManagementClusterUnregisterClientParams) TimedInvokeTimeoutMs() obj.Object {
+func (mmcucp *MTRICDManagementClusterUnregisterClientParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mmcucp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcucp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mmcucp *MTRICDManagementClusterUnregisterClientParams) ServerSideProcessingTimeout() obj.Object {
+func (mmcucp *MTRICDManagementClusterUnregisterClientParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mmcucp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcucp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

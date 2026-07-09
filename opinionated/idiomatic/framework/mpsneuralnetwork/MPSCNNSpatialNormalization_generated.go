@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -101,18 +103,21 @@ func (csn *CNNSpatialNormalization) WithSourceFeatureChannelMaxCount(sourceFeatu
 
 // Alpha returns the value of alpha.  Default is 1.0. Must be non-negative.
 func (csn *CNNSpatialNormalization) Alpha() float32 {
+	defer runtime.KeepAlive(csn)
 	_r := objc.Send[float32](objref.IDOf(csn), objc.RegisterName("alpha"))
 	return _r
 }
 
 // Beta returns the value of beta.  Default is 5.0
 func (csn *CNNSpatialNormalization) Beta() float32 {
+	defer runtime.KeepAlive(csn)
 	_r := objc.Send[float32](objref.IDOf(csn), objc.RegisterName("beta"))
 	return _r
 }
 
 // Delta returns the value of delta.  Default is 1.0
 func (csn *CNNSpatialNormalization) Delta() float32 {
+	defer runtime.KeepAlive(csn)
 	_r := objc.Send[float32](objref.IDOf(csn), objc.RegisterName("delta"))
 	return _r
 }

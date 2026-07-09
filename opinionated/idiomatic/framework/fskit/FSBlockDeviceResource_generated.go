@@ -5,6 +5,7 @@
 package fskit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -54,8 +55,9 @@ func NewBlockDeviceResource() *BlockDeviceResource {
 	return blockDeviceResourceAdopt(_id)
 }
 
-// ReadIntoStartingAtLengthError synchronously reads data from the resource into a buffer.
-func (bdr *BlockDeviceResource) ReadIntoStartingAtLengthError(buffer unsafe.Pointer, offset int64, length int) (result int, err error) {
+// ReadIntoStartingAtLength synchronously reads data from the resource into a buffer.
+func (bdr *BlockDeviceResource) ReadIntoStartingAtLength(buffer unsafe.Pointer, offset int64, length int) (result int, err error) {
+	defer runtime.KeepAlive(bdr)
 	var _nsErr uintptr
 	_r := objc.Send[int](objref.IDOf(bdr), objc.RegisterName("readInto:startingAt:length:error:"), buffer, offset, length, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -64,8 +66,9 @@ func (bdr *BlockDeviceResource) ReadIntoStartingAtLengthError(buffer unsafe.Poin
 	return _r, nil
 }
 
-// WriteFromStartingAtLengthError synchronously writes data from from a buffer to the resource and executes a block afterwards.
-func (bdr *BlockDeviceResource) WriteFromStartingAtLengthError(buffer unsafe.Pointer, offset int64, length int) (result int, err error) {
+// WriteFromStartingAtLength synchronously writes data from from a buffer to the resource and executes a block afterwards.
+func (bdr *BlockDeviceResource) WriteFromStartingAtLength(buffer unsafe.Pointer, offset int64, length int) (result int, err error) {
+	defer runtime.KeepAlive(bdr)
 	var _nsErr uintptr
 	_r := objc.Send[int](objref.IDOf(bdr), objc.RegisterName("writeFrom:startingAt:length:error:"), buffer, offset, length, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -76,6 +79,7 @@ func (bdr *BlockDeviceResource) WriteFromStartingAtLengthError(buffer unsafe.Poi
 
 // MetadataReadIntoStartingAtLength synchronously reads file system metadata from the resource into a buffer.
 func (bdr *BlockDeviceResource) MetadataReadIntoStartingAtLength(buffer unsafe.Pointer, offset int64, length int) error {
+	defer runtime.KeepAlive(bdr)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(bdr), objc.RegisterName("metadataReadInto:startingAt:length:error:"), buffer, offset, length, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -86,6 +90,7 @@ func (bdr *BlockDeviceResource) MetadataReadIntoStartingAtLength(buffer unsafe.P
 
 // MetadataWriteFromStartingAtLength synchronously writes file system metadata from a buffer to the resource.
 func (bdr *BlockDeviceResource) MetadataWriteFromStartingAtLength(buffer unsafe.Pointer, offset int64, length int) error {
+	defer runtime.KeepAlive(bdr)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(bdr), objc.RegisterName("metadataWriteFrom:startingAt:length:error:"), buffer, offset, length, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -96,6 +101,7 @@ func (bdr *BlockDeviceResource) MetadataWriteFromStartingAtLength(buffer unsafe.
 
 // DelayedMetadataWriteFromStartingAtLength writes file system metadata from a buffer to a cache, prior to flushing it to the resource.
 func (bdr *BlockDeviceResource) DelayedMetadataWriteFromStartingAtLength(buffer unsafe.Pointer, offset int64, length int) error {
+	defer runtime.KeepAlive(bdr)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(bdr), objc.RegisterName("delayedMetadataWriteFrom:startingAt:length:error:"), buffer, offset, length, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -108,6 +114,7 @@ func (bdr *BlockDeviceResource) DelayedMetadataWriteFromStartingAtLength(buffer 
 //
 // MetadataFlush returns an error if the operation did not succeed.
 func (bdr *BlockDeviceResource) MetadataFlush() error {
+	defer runtime.KeepAlive(bdr)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(bdr), objc.RegisterName("metadataFlushWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -120,6 +127,7 @@ func (bdr *BlockDeviceResource) MetadataFlush() error {
 //
 // AsynchronousMetadataFlush returns an error if the operation did not succeed.
 func (bdr *BlockDeviceResource) AsynchronousMetadataFlush() error {
+	defer runtime.KeepAlive(bdr)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(bdr), objc.RegisterName("asynchronousMetadataFlushWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -130,6 +138,7 @@ func (bdr *BlockDeviceResource) AsynchronousMetadataFlush() error {
 
 // MetadataClearWithDelayedWrites clears the given ranges within the buffer cache.
 func (bdr *BlockDeviceResource) MetadataClearWithDelayedWrites(rangesToClear []*MetadataRange, withDelayedWrites bool) error {
+	defer runtime.KeepAlive(bdr)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(bdr), objc.RegisterName("metadataClear:withDelayedWrites:error:"), purego.SliceToNSArray(rangesToClear, func(_v *MetadataRange) objc.ID { return objref.IDOf(_v) }), withDelayedWrites, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -140,6 +149,7 @@ func (bdr *BlockDeviceResource) MetadataClearWithDelayedWrites(rangesToClear []*
 
 // MetadataPurge synchronously purges the given ranges from the buffer cache.
 func (bdr *BlockDeviceResource) MetadataPurge(rangesToPurge []*MetadataRange) error {
+	defer runtime.KeepAlive(bdr)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(bdr), objc.RegisterName("metadataPurge:error:"), purego.SliceToNSArray(rangesToPurge, func(_v *MetadataRange) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -150,6 +160,7 @@ func (bdr *BlockDeviceResource) MetadataPurge(rangesToPurge []*MetadataRange) er
 
 // BSDName returns the device name of the resource.
 func (bdr *BlockDeviceResource) BSDName() string {
+	defer runtime.KeepAlive(bdr)
 	_r := objc.Send[objc.ID](objref.IDOf(bdr), objc.RegisterName("BSDName"))
 	if _r == 0 {
 		return ""
@@ -159,24 +170,28 @@ func (bdr *BlockDeviceResource) BSDName() string {
 
 // IsWritable reports whether the object is writable.
 func (bdr *BlockDeviceResource) IsWritable() bool {
+	defer runtime.KeepAlive(bdr)
 	_r := objc.Send[bool](objref.IDOf(bdr), objc.RegisterName("isWritable"))
 	return _r
 }
 
 // BlockSize returns the logical block size, the size of data blocks used by the file system. This is equivalent to the `DKIOCGETBLOCKSIZE` device parameter.
 func (bdr *BlockDeviceResource) BlockSize() uint64 {
+	defer runtime.KeepAlive(bdr)
 	_r := objc.Send[uint64](objref.IDOf(bdr), objc.RegisterName("blockSize"))
 	return _r
 }
 
 // BlockCount returns the block count on this resource.
 func (bdr *BlockDeviceResource) BlockCount() uint64 {
+	defer runtime.KeepAlive(bdr)
 	_r := objc.Send[uint64](objref.IDOf(bdr), objc.RegisterName("blockCount"))
 	return _r
 }
 
 // PhysicalBlockSize returns the sector size of the device. This is equivalent to the `DKIOCGETPHYSICALBLOCKSIZE` device parameter.
 func (bdr *BlockDeviceResource) PhysicalBlockSize() uint64 {
+	defer runtime.KeepAlive(bdr)
 	_r := objc.Send[uint64](objref.IDOf(bdr), objc.RegisterName("physicalBlockSize"))
 	return _r
 }

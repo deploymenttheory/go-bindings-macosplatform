@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -62,6 +64,7 @@ func (vsdc *VirtioSoundDeviceConfiguration) WithStreams(items ...VirtioSoundDevi
 //
 // Streams returns the collection as a Go slice.
 func (vsdc *VirtioSoundDeviceConfiguration) Streams() []*VirtioSoundDeviceStreamConfiguration {
+	defer runtime.KeepAlive(vsdc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vsdc), objc.RegisterName("streams"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *VirtioSoundDeviceStreamConfiguration {
 		return VirtioSoundDeviceStreamConfigurationFromID(_id)

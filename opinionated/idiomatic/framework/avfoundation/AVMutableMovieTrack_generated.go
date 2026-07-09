@@ -5,6 +5,7 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -60,6 +61,7 @@ func NewMutableMovieTrack() *MutableMovieTrack {
 
 // WithMediaDataStorage sets a storage container for the media data to be added to a track.
 func (mmt *MutableMovieTrack) WithMediaDataStorage(mediaDataStorage *MediaDataStorage) *MutableMovieTrack {
+	defer runtime.KeepAlive(mediaDataStorage)
 	objc.Send[objc.ID](objref.IDOf(mmt), objc.RegisterName("setMediaDataStorage:"), objref.IDOf(mediaDataStorage))
 	return mmt
 }
@@ -174,73 +176,86 @@ func (mmt *MutableMovieTrack) WithMetadata(items ...MetadataItemProvider) *Mutab
 }
 
 // SampleReferenceBaseURL returns for file types that support writing sample references, such as QuickTime Movie files, specifies the base URL that sample references are relative to; may be nil. If the value of this property can be resolved as an absolute URL, the sample locations written to the file when appending sample references to this track will be relative to this URL. The URL must point to a location contained by any common parent directory of the locations that will be referenced. For example, setting the sampleReferenceBaseURL property to "file:///Users/johnappleseed/Movies/" and appending sample buffers that refer to "file:///Users/johnappleseed/Movies/data/movie1.mov" will cause the sample reference "data/movie1.mov" to be written to the movie file. If the value of the property cannot be resolved as an absolute URL or if it points to a location that is not contained by any common parent directory of the locations that will be referenced, the location will be written unmodified. The default value is nil, which means that the location will be written unmodified.
-func (mmt *MutableMovieTrack) SampleReferenceBaseURL() obj.Object {
+func (mmt *MutableMovieTrack) SampleReferenceBaseURL() string {
+	defer runtime.KeepAlive(mmt)
 	_r := objc.Send[objc.ID](objref.IDOf(mmt), objc.RegisterName("sampleReferenceBaseURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // IsModified reports whether a track has been modified. The value of this property is a BOOL that indicates whether the AVMutableMovieTrack object has been modified since it was created, was last written, or had its modified state cleared via a call to setModified:NO.
 func (mmt *MutableMovieTrack) IsModified() bool {
+	defer runtime.KeepAlive(mmt)
 	_r := objc.Send[bool](objref.IDOf(mmt), objc.RegisterName("isModified"))
 	return _r
 }
 
 // HasProtectedContent reports whether a track contains protected content. The value of this property is a BOOL that indicates whether the track contains protected content.
 func (mmt *MutableMovieTrack) HasProtectedContent() bool {
+	defer runtime.KeepAlive(mmt)
 	_r := objc.Send[bool](objref.IDOf(mmt), objc.RegisterName("hasProtectedContent"))
 	return _r
 }
 
 // Timescale returns for file types that contain a 'moov' atom, such as QuickTime Movie files, specifies the time scale of the track's media. The default media time scale is 0. This property should be set on a new empty track before any edits are performed on the track.
 func (mmt *MutableMovieTrack) Timescale() int32 {
+	defer runtime.KeepAlive(mmt)
 	_r := objc.Send[int32](objref.IDOf(mmt), objc.RegisterName("timescale"))
 	return _r
 }
 
 // Layer returns the layer level of the visual media data of the track.
 func (mmt *MutableMovieTrack) Layer() int {
+	defer runtime.KeepAlive(mmt)
 	_r := objc.Send[int](objref.IDOf(mmt), objc.RegisterName("layer"))
 	return _r
 }
 
 // CleanApertureDimensions returns a CGSize indicating the clean aperture dimensions of the track.
 func (mmt *MutableMovieTrack) CleanApertureDimensions() corefoundation.CGSize {
+	defer runtime.KeepAlive(mmt)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(mmt), objc.RegisterName("cleanApertureDimensions"))
 	return _r
 }
 
 // ProductionApertureDimensions returns a CGSize indicating the production aperture dimensions of the track.
 func (mmt *MutableMovieTrack) ProductionApertureDimensions() corefoundation.CGSize {
+	defer runtime.KeepAlive(mmt)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(mmt), objc.RegisterName("productionApertureDimensions"))
 	return _r
 }
 
 // EncodedPixelsDimensions returns a CGSize indicating the dimensions encoded pixels dimensions of the track.
 func (mmt *MutableMovieTrack) EncodedPixelsDimensions() corefoundation.CGSize {
+	defer runtime.KeepAlive(mmt)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(mmt), objc.RegisterName("encodedPixelsDimensions"))
 	return _r
 }
 
 // PreferredMediaChunkSize returns for file types that support media chunk sizes, the maximum size (in bytes) to be used for each chunk of sample data written to the file. The total size of the samples in a chunk will be no larger than this preferred chunk size, or the size of a single sample if the sample is larger than this preferred chunk size. The default media chunk size is 1024 * 1024 bytes. It is an error to set a negative chunk size.
 func (mmt *MutableMovieTrack) PreferredMediaChunkSize() int {
+	defer runtime.KeepAlive(mmt)
 	_r := objc.Send[int](objref.IDOf(mmt), objc.RegisterName("preferredMediaChunkSize"))
 	return _r
 }
 
 // PreferredMediaChunkDuration returns for file types that support media chunk durations, the maximum duration to be used for each chunk of sample data written to the file. The total duration of the samples in a chunk will be no greater than this preferred chunk duration, or the duration of a single sample if the sample's duration is greater than this preferred chunk duration. The default media chunk duration is 1.0 second. It is an error to set a chunk duration that is negative or non-numeric.
 func (mmt *MutableMovieTrack) PreferredMediaChunkDuration() coremedia.CMTime {
+	defer runtime.KeepAlive(mmt)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(mmt), objc.RegisterName("preferredMediaChunkDuration"))
 	return _r
 }
 
 // PreferredMediaChunkAlignment returns for file types that support media chunk alignment, the boundary for media chunk alignment (in bytes). The default value is 0, which means that no padding should be used to achieve chunk alignment. It is an error to set a negative value for chunk alignment.
 func (mmt *MutableMovieTrack) PreferredMediaChunkAlignment() int {
+	defer runtime.KeepAlive(mmt)
 	_r := objc.Send[int](objref.IDOf(mmt), objc.RegisterName("preferredMediaChunkAlignment"))
 	return _r
 }
 
 // InsertTimeRangeOfTrackAtTimeCopySampleData inserts a portion of an asset track into the target movie.
 func (mmt *MutableMovieTrack) InsertTimeRangeOfTrackAtTimeCopySampleData(timeRange coremedia.CMTimeRange, track *AssetTrack, startTime coremedia.CMTime, copySampleData bool) error {
+	defer runtime.KeepAlive(mmt)
+	defer runtime.KeepAlive(track)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(mmt), objc.RegisterName("insertTimeRange:ofTrack:atTime:copySampleData:error:"), timeRange, objref.IDOf(track), startTime, copySampleData, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -251,36 +266,49 @@ func (mmt *MutableMovieTrack) InsertTimeRangeOfTrackAtTimeCopySampleData(timeRan
 
 // InsertEmptyTimeRange adds an empty time range to a track.
 func (mmt *MutableMovieTrack) InsertEmptyTimeRange(timeRange coremedia.CMTimeRange) {
+	defer runtime.KeepAlive(mmt)
 	objc.Send[objc.ID](objref.IDOf(mmt), objc.RegisterName("insertEmptyTimeRange:"), timeRange)
 }
 
 // RemoveTimeRange removes the specified time range from a track.
 func (mmt *MutableMovieTrack) RemoveTimeRange(timeRange coremedia.CMTimeRange) {
+	defer runtime.KeepAlive(mmt)
 	objc.Send[objc.ID](objref.IDOf(mmt), objc.RegisterName("removeTimeRange:"), timeRange)
 }
 
 // ScaleTimeRangeToDuration changes the duration of a time range in a track.
 func (mmt *MutableMovieTrack) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime) {
+	defer runtime.KeepAlive(mmt)
 	objc.Send[objc.ID](objref.IDOf(mmt), objc.RegisterName("scaleTimeRange:toDuration:"), timeRange, duration)
 }
 
 // AddTrackAssociationToTrackType creates a specific type of track association between two tracks.
 func (mmt *MutableMovieTrack) AddTrackAssociationToTrackType(movieTrack *MovieTrack, trackAssociationType obj.Object) {
+	defer runtime.KeepAlive(mmt)
+	defer runtime.KeepAlive(movieTrack)
+	defer runtime.KeepAlive(trackAssociationType)
 	objc.Send[objc.ID](objref.IDOf(mmt), objc.RegisterName("addTrackAssociationToTrack:type:"), objref.IDOf(movieTrack), objref.IDOf(trackAssociationType))
 }
 
 // RemoveTrackAssociationToTrackType removes a specific type of track association between two tracks.
 func (mmt *MutableMovieTrack) RemoveTrackAssociationToTrackType(movieTrack *MovieTrack, trackAssociationType obj.Object) {
+	defer runtime.KeepAlive(mmt)
+	defer runtime.KeepAlive(movieTrack)
+	defer runtime.KeepAlive(trackAssociationType)
 	objc.Send[objc.ID](objref.IDOf(mmt), objc.RegisterName("removeTrackAssociationToTrack:type:"), objref.IDOf(movieTrack), objref.IDOf(trackAssociationType))
 }
 
 // ReplaceFormatDescriptionWithFormatDescription replaces the track’s format description with a new format description.
 func (mmt *MutableMovieTrack) ReplaceFormatDescriptionWithFormatDescription(formatDescription obj.Object, newFormatDescription obj.Object) {
+	defer runtime.KeepAlive(mmt)
+	defer runtime.KeepAlive(formatDescription)
+	defer runtime.KeepAlive(newFormatDescription)
 	objc.Send[objc.ID](objref.IDOf(mmt), objc.RegisterName("replaceFormatDescription:withFormatDescription:"), objref.IDOf(formatDescription), objref.IDOf(newFormatDescription))
 }
 
 // InsertMediaTimeRangeIntoTimeRange inserts a reference to a media time range into a track.
 func (mmt *MutableMovieTrack) InsertMediaTimeRangeIntoTimeRange(mediaTimeRange coremedia.CMTimeRange, trackTimeRange coremedia.CMTimeRange) bool {
+	defer runtime.KeepAlive(mmt)
 	_r := objc.Send[bool](objref.IDOf(mmt), objc.RegisterName("insertMediaTimeRange:intoTimeRange:"), mediaTimeRange, trackTimeRange)
 	return _r
 }

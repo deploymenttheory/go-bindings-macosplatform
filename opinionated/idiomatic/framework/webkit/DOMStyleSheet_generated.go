@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,6 +53,7 @@ func (dss *DOMStyleSheet) WithDisabled(disabled bool) *DOMStyleSheet {
 
 // Type returns the type.
 func (dss *DOMStyleSheet) Type() string {
+	defer runtime.KeepAlive(dss)
 	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -60,24 +63,28 @@ func (dss *DOMStyleSheet) Type() string {
 
 // Disabled wraps the corresponding Objective-C method.
 func (dss *DOMStyleSheet) Disabled() bool {
+	defer runtime.KeepAlive(dss)
 	_r := objc.Send[bool](objref.IDOf(dss), objc.RegisterName("disabled"))
 	return _r
 }
 
 // OwnerNode returns the owner node.
 func (dss *DOMStyleSheet) OwnerNode() *DOMNode {
+	defer runtime.KeepAlive(dss)
 	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("ownerNode"))
 	return DOMNodeFromID(_r)
 }
 
 // ParentStyleSheet returns the parent style sheet.
 func (dss *DOMStyleSheet) ParentStyleSheet() *DOMStyleSheet {
+	defer runtime.KeepAlive(dss)
 	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("parentStyleSheet"))
 	return DOMStyleSheetFromID(_r)
 }
 
 // Href returns the href.
 func (dss *DOMStyleSheet) Href() string {
+	defer runtime.KeepAlive(dss)
 	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("href"))
 	if _r == 0 {
 		return ""
@@ -87,6 +94,7 @@ func (dss *DOMStyleSheet) Href() string {
 
 // Title returns the title.
 func (dss *DOMStyleSheet) Title() string {
+	defer runtime.KeepAlive(dss)
 	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -96,6 +104,7 @@ func (dss *DOMStyleSheet) Title() string {
 
 // Media returns the media.
 func (dss *DOMStyleSheet) Media() *DOMMediaList {
+	defer runtime.KeepAlive(dss)
 	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("media"))
 	return DOMMediaListFromID(_r)
 }

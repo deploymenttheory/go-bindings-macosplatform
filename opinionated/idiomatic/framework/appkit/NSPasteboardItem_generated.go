@@ -6,9 +6,11 @@ package appkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func pasteboardItemAdopt(id objc.ID) *PasteboardItem {
 
 // Description returns the object's -description text.
 func (pi *PasteboardItem) Description() string {
+	defer runtime.KeepAlive(pi)
 	return rt.Description(objref.IDOf(pi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pi *PasteboardItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pi *PasteboardItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(pi)
 	return rt.IsKind(objref.IDOf(pi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pi *PasteboardItem) String() string {
+	defer runtime.KeepAlive(pi)
 	return rt.Description(objref.IDOf(pi))
 }
 
@@ -76,37 +83,49 @@ func NewPasteboardItem() *PasteboardItem {
 }
 
 // AvailableTypeFromArray returns from a given array of types the first type within the pasteboard item, according to the ordering of types.
-func (pi *PasteboardItem) AvailableTypeFromArray(types []obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("availableTypeFromArray:"), purego.SliceToNSArray(types, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-	return obj.Wrap(_r)
+func (pi *PasteboardItem) AvailableTypeFromArray(types []*foundation.String) *foundation.String {
+	defer runtime.KeepAlive(pi)
+	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("availableTypeFromArray:"), purego.SliceToNSArray(types, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
+	return foundation.StringFromID(_r)
 }
 
 // SetDataForType sets the value for a specified type as a data object.
-func (pi *PasteboardItem) SetDataForType(data obj.Object, type_ obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("setData:forType:"), objref.IDOf(data), objref.IDOf(type_))
+func (pi *PasteboardItem) SetDataForType(data []byte, type_ obj.Object) bool {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(type_)
+	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("setData:forType:"), rt.BytesToNSData(data), objref.IDOf(type_))
 	return _r
 }
 
 // SetStringForType sets the value for a specified type as a string.
-func (pi *PasteboardItem) SetStringForType(string_ string, type_ obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("setString:forType:"), purego.NSString(string_), objref.IDOf(type_))
+func (pi *PasteboardItem) SetStringForType(str string, type_ obj.Object) bool {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(type_)
+	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("setString:forType:"), purego.NSString(str), objref.IDOf(type_))
 	return _r
 }
 
 // SetPropertyListForType sets the value for a specified type as a property list.
 func (pi *PasteboardItem) SetPropertyListForType(propertyList obj.Object, type_ obj.Object) bool {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(propertyList)
+	defer runtime.KeepAlive(type_)
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("setPropertyList:forType:"), objref.IDOf(propertyList), objref.IDOf(type_))
 	return _r
 }
 
 // DataForType returns the value for the specified type as a data object.
-func (pi *PasteboardItem) DataForType(type_ obj.Object) obj.Object {
+func (pi *PasteboardItem) DataForType(type_ obj.Object) []byte {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(type_)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("dataForType:"), objref.IDOf(type_))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // StringForType returns the value for the specified type as a string.
 func (pi *PasteboardItem) StringForType(type_ obj.Object) string {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(type_)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("stringForType:"), objref.IDOf(type_))
 	if _r == 0 {
 		return ""
@@ -116,6 +135,8 @@ func (pi *PasteboardItem) StringForType(type_ obj.Object) string {
 
 // PropertyListForType returns the value for the specified type as a property list.
 func (pi *PasteboardItem) PropertyListForType(type_ obj.Object) obj.Object {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(type_)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("propertyListForType:"), objref.IDOf(type_))
 	return obj.Wrap(_r)
 }
@@ -123,7 +144,8 @@ func (pi *PasteboardItem) PropertyListForType(type_ obj.Object) obj.Object {
 // DetectPatternsForPatterns determines whether this pasteboard item matches the specified patterns, without notifying the person using the app.
 //
 // DetectPatternsForPatterns blocks until the operation completes or ctx is cancelled.
-func (pi *PasteboardItem) DetectPatternsForPatterns(ctx context.Context, patterns obj.Object) (result obj.Object, err error) {
+func (pi *PasteboardItem) DetectPatternsForPatterns(ctx context.Context, patterns []*foundation.String) (result obj.Object, err error) {
+	defer runtime.KeepAlive(pi)
 	type _result struct {
 		val obj.Object
 		err error
@@ -135,7 +157,7 @@ func (pi *PasteboardItem) DetectPatternsForPatterns(ctx context.Context, pattern
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("detectPatternsForPatterns:completionHandler:"), objref.IDOf(patterns), _block)
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("detectPatternsForPatterns:completionHandler:"), rt.SliceToNSSet(patterns, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -149,6 +171,7 @@ func (pi *PasteboardItem) DetectPatternsForPatterns(ctx context.Context, pattern
 //
 // Types returns the collection as a Go slice.
 func (pi *PasteboardItem) Types() []obj.Object {
+	defer runtime.KeepAlive(pi)
 	_arr := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("types"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

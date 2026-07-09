@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,8 @@ func mTRBaseClusterWakeOnLanAdopt(id objc.ID) *MTRBaseClusterWakeOnLan {
 
 // NewMTRBaseClusterWakeOnLanWithDeviceEndpointQueue creates a new MTRBaseClusterWakeOnLan.
 func NewMTRBaseClusterWakeOnLanWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterWakeOnLan {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterWakeOnLan")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRBaseClusterWakeOnLanAdopt(_id)
@@ -58,6 +61,7 @@ func NewMTRBaseClusterWakeOnLanWithDeviceEndpointQueue(device *MTRBaseDevice, en
 //
 // ReadAttributeMACAddress blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLan) ReadAttributeMACAddress(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbcwol)
 	type _result struct {
 		val string
 		err error
@@ -83,6 +87,10 @@ func (mbcwol *MTRBaseClusterWakeOnLan) ReadAttributeMACAddress(ctx context.Conte
 //
 // SubscribeAttributeMACAddressWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLan) SubscribeAttributeMACAddressWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result string, err error) {
+	defer runtime.KeepAlive(mbcwol)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -108,6 +116,7 @@ func (mbcwol *MTRBaseClusterWakeOnLan) SubscribeAttributeMACAddressWithMinInterv
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLan) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwol)
 	type _result struct {
 		val obj.Object
 		err error
@@ -133,6 +142,10 @@ func (mbcwol *MTRBaseClusterWakeOnLan) ReadAttributeGeneratedCommandList(ctx con
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLan) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwol)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -158,6 +171,7 @@ func (mbcwol *MTRBaseClusterWakeOnLan) SubscribeAttributeGeneratedCommandListWit
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLan) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwol)
 	type _result struct {
 		val obj.Object
 		err error
@@ -183,6 +197,10 @@ func (mbcwol *MTRBaseClusterWakeOnLan) ReadAttributeAcceptedCommandList(ctx cont
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLan) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwol)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -208,6 +226,7 @@ func (mbcwol *MTRBaseClusterWakeOnLan) SubscribeAttributeAcceptedCommandListWith
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLan) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwol)
 	type _result struct {
 		val obj.Object
 		err error
@@ -233,6 +252,10 @@ func (mbcwol *MTRBaseClusterWakeOnLan) ReadAttributeAttributeList(ctx context.Co
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLan) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwol)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -258,6 +281,7 @@ func (mbcwol *MTRBaseClusterWakeOnLan) SubscribeAttributeAttributeListWithMinInt
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLan) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwol)
 	type _result struct {
 		val obj.Object
 		err error
@@ -283,6 +307,10 @@ func (mbcwol *MTRBaseClusterWakeOnLan) ReadAttributeFeatureMap(ctx context.Conte
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLan) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwol)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -308,6 +336,7 @@ func (mbcwol *MTRBaseClusterWakeOnLan) SubscribeAttributeFeatureMapWithMinInterv
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLan) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwol)
 	type _result struct {
 		val obj.Object
 		err error
@@ -333,6 +362,10 @@ func (mbcwol *MTRBaseClusterWakeOnLan) ReadAttributeClusterRevision(ctx context.
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLan) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwol)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

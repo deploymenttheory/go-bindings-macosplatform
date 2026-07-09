@@ -6,9 +6,11 @@ package gamekit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func gameActivityDefinitionAdopt(id objc.ID) *GameActivityDefinition {
 
 // Description returns the object's -description text.
 func (gad *GameActivityDefinition) Description() string {
+	defer runtime.KeepAlive(gad)
 	return rt.Description(objref.IDOf(gad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gad *GameActivityDefinition) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gad *GameActivityDefinition) IsKind(className string) bool {
+	defer runtime.KeepAlive(gad)
 	return rt.IsKind(objref.IDOf(gad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gad *GameActivityDefinition) String() string {
+	defer runtime.KeepAlive(gad)
 	return rt.Description(objref.IDOf(gad))
 }
 
@@ -79,6 +86,7 @@ func NewGameActivityDefinition() *GameActivityDefinition {
 //
 // LoadAchievementDescriptions blocks until the operation completes or ctx is cancelled.
 func (gad *GameActivityDefinition) LoadAchievementDescriptions(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(gad)
 	type _result struct {
 		val obj.Object
 		err error
@@ -104,6 +112,7 @@ func (gad *GameActivityDefinition) LoadAchievementDescriptions(ctx context.Conte
 //
 // LoadLeaderboards blocks until the operation completes or ctx is cancelled.
 func (gad *GameActivityDefinition) LoadLeaderboards(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(gad)
 	type _result struct {
 		val obj.Object
 		err error
@@ -127,6 +136,7 @@ func (gad *GameActivityDefinition) LoadLeaderboards(ctx context.Context) (result
 
 // Identifier returns the developer defined identifier for a given game activity.
 func (gad *GameActivityDefinition) Identifier() string {
+	defer runtime.KeepAlive(gad)
 	_r := objc.Send[objc.ID](objref.IDOf(gad), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -136,6 +146,7 @@ func (gad *GameActivityDefinition) Identifier() string {
 
 // GroupIdentifier returns the group identifier for the activity, if one exists.
 func (gad *GameActivityDefinition) GroupIdentifier() string {
+	defer runtime.KeepAlive(gad)
 	_r := objc.Send[objc.ID](objref.IDOf(gad), objc.RegisterName("groupIdentifier"))
 	if _r == 0 {
 		return ""
@@ -145,6 +156,7 @@ func (gad *GameActivityDefinition) GroupIdentifier() string {
 
 // Title returns a short title for the game activity.
 func (gad *GameActivityDefinition) Title() string {
+	defer runtime.KeepAlive(gad)
 	_r := objc.Send[objc.ID](objref.IDOf(gad), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -154,6 +166,7 @@ func (gad *GameActivityDefinition) Title() string {
 
 // Details returns a more detailed description of the game activity.
 func (gad *GameActivityDefinition) Details() string {
+	defer runtime.KeepAlive(gad)
 	_r := objc.Send[objc.ID](objref.IDOf(gad), objc.RegisterName("details"))
 	if _r == 0 {
 		return ""
@@ -162,49 +175,57 @@ func (gad *GameActivityDefinition) Details() string {
 }
 
 // DefaultProperties returns default properties defined by the developer for this type of game activity.
-func (gad *GameActivityDefinition) DefaultProperties() obj.Object {
+func (gad *GameActivityDefinition) DefaultProperties() map[string]string {
+	defer runtime.KeepAlive(gad)
 	_r := objc.Send[objc.ID](objref.IDOf(gad), objc.RegisterName("defaultProperties"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // FallbackURL returns a fallback URL that can be used to construct a game-specific URL for players to share or join, if the joining device does not support the default URL.
-func (gad *GameActivityDefinition) FallbackURL() obj.Object {
+func (gad *GameActivityDefinition) FallbackURL() string {
+	defer runtime.KeepAlive(gad)
 	_r := objc.Send[objc.ID](objref.IDOf(gad), objc.RegisterName("fallbackURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // SupportsPartyCode reports whether the activity can be joined by others via a party code. - SeeAlso: “-[GKGameActivityListener player:wantsToPlayGameActivity:completionHandler:]“ where you can receive and handle game activities that players want to play in a party with friends.
 func (gad *GameActivityDefinition) SupportsPartyCode() bool {
+	defer runtime.KeepAlive(gad)
 	_r := objc.Send[bool](objref.IDOf(gad), objc.RegisterName("supportsPartyCode"))
 	return _r
 }
 
 // MaxPlayers returns the maximum number of participants that can join the activity. Returns nil when no maximum is set (unlimited players) or when player range is undefined. When not nil, the value is always greater than or equal to `minPlayers`.
-func (gad *GameActivityDefinition) MaxPlayers() obj.Object {
+func (gad *GameActivityDefinition) MaxPlayers() *foundation.Number {
+	defer runtime.KeepAlive(gad)
 	_r := objc.Send[objc.ID](objref.IDOf(gad), objc.RegisterName("maxPlayers"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MinPlayers returns the minimum number of participants that can join the activity.
-func (gad *GameActivityDefinition) MinPlayers() obj.Object {
+func (gad *GameActivityDefinition) MinPlayers() *foundation.Number {
+	defer runtime.KeepAlive(gad)
 	_r := objc.Send[objc.ID](objref.IDOf(gad), objc.RegisterName("minPlayers"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // SupportsUnlimitedPlayers reports whether the activity supports an unlimited number of players. False if maxPlayers is set to a defined limit or if no player range is provided.
 func (gad *GameActivityDefinition) SupportsUnlimitedPlayers() bool {
+	defer runtime.KeepAlive(gad)
 	_r := objc.Send[bool](objref.IDOf(gad), objc.RegisterName("supportsUnlimitedPlayers"))
 	return _r
 }
 
 // PlayStyle returns the play style of the game activity.
 func (gad *GameActivityDefinition) PlayStyle() GameActivityPlayStyle {
+	defer runtime.KeepAlive(gad)
 	_r := objc.Send[GameActivityPlayStyle](objref.IDOf(gad), objc.RegisterName("playStyle"))
 	return _r
 }
 
 // ReleaseState returns the release state of the game activity definition in App Store Connect.
 func (gad *GameActivityDefinition) ReleaseState() ReleaseState {
+	defer runtime.KeepAlive(gad)
 	_r := objc.Send[ReleaseState](objref.IDOf(gad), objc.RegisterName("releaseState"))
 	return _r
 }

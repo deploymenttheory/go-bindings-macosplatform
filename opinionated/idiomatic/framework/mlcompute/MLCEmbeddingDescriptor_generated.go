@@ -5,7 +5,10 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func embeddingDescriptorAdopt(id objc.ID) *EmbeddingDescriptor {
 
 // Description returns the object's -description text.
 func (ed *EmbeddingDescriptor) Description() string {
+	defer runtime.KeepAlive(ed)
 	return rt.Description(objref.IDOf(ed))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ed *EmbeddingDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ed)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ed), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ed *EmbeddingDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(ed)
 	return rt.IsKind(objref.IDOf(ed), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ed *EmbeddingDescriptor) String() string {
+	defer runtime.KeepAlive(ed)
 	return rt.Description(objref.IDOf(ed))
 }
 
@@ -73,37 +81,43 @@ func NewEmbeddingDescriptor() *EmbeddingDescriptor {
 }
 
 // EmbeddingCount returns the size of the dictionary
-func (ed *EmbeddingDescriptor) EmbeddingCount() obj.Object {
+func (ed *EmbeddingDescriptor) EmbeddingCount() *foundation.Number {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("embeddingCount"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EmbeddingDimension returns the dimension of embedding vectors
-func (ed *EmbeddingDescriptor) EmbeddingDimension() obj.Object {
+func (ed *EmbeddingDescriptor) EmbeddingDimension() *foundation.Number {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("embeddingDimension"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // PaddingIndex returns if set, the embedding vector at paddingIndex is initialized with zero and will not be updated in gradient pass, Default=nil
-func (ed *EmbeddingDescriptor) PaddingIndex() obj.Object {
+func (ed *EmbeddingDescriptor) PaddingIndex() *foundation.Number {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("paddingIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MaximumNorm returns a float, if set, in the forward pass only, the selected embedding vectors will be re-normalized to have an Lp norm of less than maximumNorm in the dictionary, Default=nil
-func (ed *EmbeddingDescriptor) MaximumNorm() obj.Object {
+func (ed *EmbeddingDescriptor) MaximumNorm() *foundation.Number {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("maximumNorm"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // PNorm returns a float, the p of the Lp norm, can be set to infinity norm by [NSNumber numberWithFloat:INFINITY]. Default=2.0
-func (ed *EmbeddingDescriptor) PNorm() obj.Object {
+func (ed *EmbeddingDescriptor) PNorm() *foundation.Number {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("pNorm"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ScalesGradientByFrequency reports whether if set, the gradients are scaled by the inverse of the frequency of the words in batch before the weight update. Default=NO
 func (ed *EmbeddingDescriptor) ScalesGradientByFrequency() bool {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[bool](objref.IDOf(ed), objc.RegisterName("scalesGradientByFrequency"))
 	return _r
 }

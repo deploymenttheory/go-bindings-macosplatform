@@ -6,6 +6,7 @@ package localauthentication
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func privateKeyAdopt(id objc.ID) *PrivateKey {
 
 // Description returns the object's -description text.
 func (pk *PrivateKey) Description() string {
+	defer runtime.KeepAlive(pk)
 	return rt.Description(objref.IDOf(pk))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pk *PrivateKey) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pk)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pk), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pk *PrivateKey) IsKind(className string) bool {
+	defer runtime.KeepAlive(pk)
 	return rt.IsKind(objref.IDOf(pk), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pk *PrivateKey) String() string {
+	defer runtime.KeepAlive(pk)
 	return rt.Description(objref.IDOf(pk))
 }
 
@@ -79,7 +85,8 @@ func NewPrivateKey() *PrivateKey {
 // SignDataSecKeyAlgorithmCompletion generates a digital signature for the data you supply.
 //
 // SignDataSecKeyAlgorithmCompletion blocks until the operation completes or ctx is cancelled.
-func (pk *PrivateKey) SignDataSecKeyAlgorithmCompletion(ctx context.Context, data obj.Object, algorithm unsafe.Pointer) (result obj.Object, err error) {
+func (pk *PrivateKey) SignDataSecKeyAlgorithmCompletion(ctx context.Context, data []byte, algorithm unsafe.Pointer) (result obj.Object, err error) {
+	defer runtime.KeepAlive(pk)
 	type _result struct {
 		val obj.Object
 		err error
@@ -91,7 +98,7 @@ func (pk *PrivateKey) SignDataSecKeyAlgorithmCompletion(ctx context.Context, dat
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("signData:secKeyAlgorithm:completion:"), objref.IDOf(data), algorithm, _block)
+	objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("signData:secKeyAlgorithm:completion:"), rt.BytesToNSData(data), algorithm, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -103,6 +110,7 @@ func (pk *PrivateKey) SignDataSecKeyAlgorithmCompletion(ctx context.Context, dat
 
 // CanSignUsingSecKeyAlgorithm checks whether the algorithm you supply is valid for signing data with the key.
 func (pk *PrivateKey) CanSignUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
+	defer runtime.KeepAlive(pk)
 	_r := objc.Send[bool](objref.IDOf(pk), objc.RegisterName("canSignUsingSecKeyAlgorithm:"), algorithm)
 	return _r
 }
@@ -110,7 +118,8 @@ func (pk *PrivateKey) CanSignUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool
 // DecryptDataSecKeyAlgorithmCompletion decrypts the data you supply with a given algorithm.
 //
 // DecryptDataSecKeyAlgorithmCompletion blocks until the operation completes or ctx is cancelled.
-func (pk *PrivateKey) DecryptDataSecKeyAlgorithmCompletion(ctx context.Context, data obj.Object, algorithm unsafe.Pointer) (result obj.Object, err error) {
+func (pk *PrivateKey) DecryptDataSecKeyAlgorithmCompletion(ctx context.Context, data []byte, algorithm unsafe.Pointer) (result obj.Object, err error) {
+	defer runtime.KeepAlive(pk)
 	type _result struct {
 		val obj.Object
 		err error
@@ -122,7 +131,7 @@ func (pk *PrivateKey) DecryptDataSecKeyAlgorithmCompletion(ctx context.Context, 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("decryptData:secKeyAlgorithm:completion:"), objref.IDOf(data), algorithm, _block)
+	objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("decryptData:secKeyAlgorithm:completion:"), rt.BytesToNSData(data), algorithm, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -134,6 +143,7 @@ func (pk *PrivateKey) DecryptDataSecKeyAlgorithmCompletion(ctx context.Context, 
 
 // CanDecryptUsingSecKeyAlgorithm checks whether the algorithm you supply is valid for decrypting data with the key.
 func (pk *PrivateKey) CanDecryptUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
+	defer runtime.KeepAlive(pk)
 	_r := objc.Send[bool](objref.IDOf(pk), objc.RegisterName("canDecryptUsingSecKeyAlgorithm:"), algorithm)
 	return _r
 }
@@ -141,7 +151,9 @@ func (pk *PrivateKey) CanDecryptUsingSecKeyAlgorithm(algorithm unsafe.Pointer) b
 // ExchangeKeysWithPublicKeySecKeyAlgorithmSecKeyParametersCompletion performs a Diffie-Hellman style key exchange operation.
 //
 // ExchangeKeysWithPublicKeySecKeyAlgorithmSecKeyParametersCompletion blocks until the operation completes or ctx is cancelled.
-func (pk *PrivateKey) ExchangeKeysWithPublicKeySecKeyAlgorithmSecKeyParametersCompletion(ctx context.Context, publicKey obj.Object, algorithm unsafe.Pointer, parameters obj.Object) (result obj.Object, err error) {
+func (pk *PrivateKey) ExchangeKeysWithPublicKeySecKeyAlgorithmSecKeyParametersCompletion(ctx context.Context, publicKey []byte, algorithm unsafe.Pointer, parameters obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(pk)
+	defer runtime.KeepAlive(parameters)
 	type _result struct {
 		val obj.Object
 		err error
@@ -153,7 +165,7 @@ func (pk *PrivateKey) ExchangeKeysWithPublicKeySecKeyAlgorithmSecKeyParametersCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("exchangeKeysWithPublicKey:secKeyAlgorithm:secKeyParameters:completion:"), objref.IDOf(publicKey), algorithm, objref.IDOf(parameters), _block)
+	objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("exchangeKeysWithPublicKey:secKeyAlgorithm:secKeyParameters:completion:"), rt.BytesToNSData(publicKey), algorithm, objref.IDOf(parameters), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -165,12 +177,14 @@ func (pk *PrivateKey) ExchangeKeysWithPublicKeySecKeyAlgorithmSecKeyParametersCo
 
 // CanExchangeKeysUsingSecKeyAlgorithm checks whether the algorithm you supply is valid for performing key exchanges.
 func (pk *PrivateKey) CanExchangeKeysUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
+	defer runtime.KeepAlive(pk)
 	_r := objc.Send[bool](objref.IDOf(pk), objc.RegisterName("canExchangeKeysUsingSecKeyAlgorithm:"), algorithm)
 	return _r
 }
 
 // PublicKey returns offers the public key counterpart of a
 func (pk *PrivateKey) PublicKey() *PublicKey {
+	defer runtime.KeepAlive(pk)
 	_r := objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("publicKey"))
 	return PublicKeyFromID(_r)
 }

@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func dictionaryControllerKeyValuePairAdopt(id objc.ID) *DictionaryControllerKeyV
 
 // Description returns the object's -description text.
 func (dckvp *DictionaryControllerKeyValuePair) Description() string {
+	defer runtime.KeepAlive(dckvp)
 	return rt.Description(objref.IDOf(dckvp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dckvp *DictionaryControllerKeyValuePair) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dckvp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dckvp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dckvp *DictionaryControllerKeyValuePair) IsKind(className string) bool {
+	defer runtime.KeepAlive(dckvp)
 	return rt.IsKind(objref.IDOf(dckvp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dckvp *DictionaryControllerKeyValuePair) String() string {
+	defer runtime.KeepAlive(dckvp)
 	return rt.Description(objref.IDOf(dckvp))
 }
 
@@ -80,6 +87,7 @@ func (dckvp *DictionaryControllerKeyValuePair) WithKey(key string) *DictionaryCo
 
 // WithValue sets the value.
 func (dckvp *DictionaryControllerKeyValuePair) WithValue(value obj.Object) *DictionaryControllerKeyValuePair {
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(dckvp), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return dckvp
 }
@@ -92,6 +100,7 @@ func (dckvp *DictionaryControllerKeyValuePair) WithLocalizedKey(localizedKey str
 
 // Key returns the key.
 func (dckvp *DictionaryControllerKeyValuePair) Key() string {
+	defer runtime.KeepAlive(dckvp)
 	_r := objc.Send[objc.ID](objref.IDOf(dckvp), objc.RegisterName("key"))
 	if _r == 0 {
 		return ""
@@ -101,12 +110,14 @@ func (dckvp *DictionaryControllerKeyValuePair) Key() string {
 
 // Value returns the value.
 func (dckvp *DictionaryControllerKeyValuePair) Value() obj.Object {
+	defer runtime.KeepAlive(dckvp)
 	_r := objc.Send[objc.ID](objref.IDOf(dckvp), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
 // LocalizedKey returns the localized key.
 func (dckvp *DictionaryControllerKeyValuePair) LocalizedKey() string {
+	defer runtime.KeepAlive(dckvp)
 	_r := objc.Send[objc.ID](objref.IDOf(dckvp), objc.RegisterName("localizedKey"))
 	if _r == 0 {
 		return ""
@@ -116,6 +127,7 @@ func (dckvp *DictionaryControllerKeyValuePair) LocalizedKey() string {
 
 // IsExplicitlyIncluded reports whether the object is explicitly included.
 func (dckvp *DictionaryControllerKeyValuePair) IsExplicitlyIncluded() bool {
+	defer runtime.KeepAlive(dckvp)
 	_r := objc.Send[bool](objref.IDOf(dckvp), objc.RegisterName("isExplicitlyIncluded"))
 	return _r
 }

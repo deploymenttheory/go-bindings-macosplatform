@@ -5,10 +5,13 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -69,6 +72,7 @@ func (ln *LightNode) WithEnabled(enabled bool) *LightNode {
 
 // WithLightColor sets the diffuse and specular color of the light source.
 func (ln *LightNode) WithLightColor(lightColor obj.Object) *LightNode {
+	defer runtime.KeepAlive(lightColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setLightColor:"), objref.IDOf(lightColor))
 	})
@@ -77,6 +81,7 @@ func (ln *LightNode) WithLightColor(lightColor obj.Object) *LightNode {
 
 // WithAmbientColor sets the ambient color of the light.
 func (ln *LightNode) WithAmbientColor(ambientColor obj.Object) *LightNode {
+	defer runtime.KeepAlive(ambientColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAmbientColor:"), objref.IDOf(ambientColor))
 	})
@@ -85,6 +90,7 @@ func (ln *LightNode) WithAmbientColor(ambientColor obj.Object) *LightNode {
 
 // WithShadowColor sets the color of any shadow cast by a sprite.
 func (ln *LightNode) WithShadowColor(shadowColor obj.Object) *LightNode {
+	defer runtime.KeepAlive(shadowColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 	})
@@ -197,6 +203,7 @@ func (ln *LightNode) WithName(name string) *LightNode {
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (ln *LightNode) WithPhysicsBody(physicsBody *PhysicsBody) *LightNode {
+	defer runtime.KeepAlive(physicsBody)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	})
@@ -205,6 +212,7 @@ func (ln *LightNode) WithPhysicsBody(physicsBody *PhysicsBody) *LightNode {
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (ln *LightNode) WithUserData(userData obj.Object) *LightNode {
+	defer runtime.KeepAlive(userData)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	})
@@ -213,6 +221,7 @@ func (ln *LightNode) WithUserData(userData obj.Object) *LightNode {
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (ln *LightNode) WithReachConstraints(reachConstraints *ReachConstraints) *LightNode {
+	defer runtime.KeepAlive(reachConstraints)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	})
@@ -229,9 +238,9 @@ func (ln *LightNode) WithConstraints(items ...*Constraint) *LightNode {
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
-func (ln *LightNode) WithAttributeValues(attributeValues obj.Object) *LightNode {
+func (ln *LightNode) WithAttributeValues(attributeValues map[string]*AttributeValue) *LightNode {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAttributeValues:"), rt.MapToDict(attributeValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *AttributeValue) objc.ID { return objref.IDOf(_v) }))
 	})
 	return ln
 }
@@ -278,6 +287,7 @@ func (ln *LightNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CG
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (ln *LightNode) WithAccessibilityParent(accessibilityParent obj.Object) *LightNode {
+	defer runtime.KeepAlive(accessibilityParent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	})
@@ -310,6 +320,7 @@ func (ln *LightNode) WithAccessibilityEnabled(accessibilityEnabled bool) *LightN
 
 // IsEnabled reports whether enables or disables lighting contribution from this light node. Set to true; sprites using this light will be lit with the ambient color and the light color, with a falloff in intensity according to the falloff property. Set to false; this light does not contribute any lighting. If no lights are active on a sprite it will be drawn normally, as if not lit. The default value is true.
 func (ln *LightNode) IsEnabled() bool {
+	defer runtime.KeepAlive(ln)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -323,6 +334,7 @@ func (ln *LightNode) IsEnabled() bool {
 
 // LightColor returns diffuse and Specular color of the light source, defaults to opaque white. The alpha component of the color is ignored. If using shaders bind a uniform to this property to use scene based custom lighting.
 func (ln *LightNode) LightColor() obj.Object {
+	defer runtime.KeepAlive(ln)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -336,6 +348,7 @@ func (ln *LightNode) LightColor() obj.Object {
 
 // AmbientColor returns ambient color of the light source, defaults to black. If you had only a single light in the scene with an ambient color of opaque white and a light color of black, it would appear as if the scene was rendered without lighting. The alpha component of the color is ignored. The color is not affected by falloff or surface normals.
 func (ln *LightNode) AmbientColor() obj.Object {
+	defer runtime.KeepAlive(ln)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -349,6 +362,7 @@ func (ln *LightNode) AmbientColor() obj.Object {
 
 // ShadowColor returns color of the shadow casted on occluded objects, defaults to half opacity black. The alpha component of the color is used for blending with the regions that are in shadow.
 func (ln *LightNode) ShadowColor() obj.Object {
+	defer runtime.KeepAlive(ln)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -362,6 +376,7 @@ func (ln *LightNode) ShadowColor() obj.Object {
 
 // Falloff returns falloff in intensity of the light over distance, defaults to 1. The falloff does not affect the ambient color nor the shadow color.
 func (ln *LightNode) Falloff() float64 {
+	defer runtime.KeepAlive(ln)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -375,6 +390,7 @@ func (ln *LightNode) Falloff() float64 {
 
 // CategoryBitMask returns the category of the light, which determines the group(s) a light belongs to. Any node that has its corresponding light and shadow bitmasks set to an overlapping value will be lit, shadow casting or shadowed by this light.
 func (ln *LightNode) CategoryBitMask() uint32 {
+	defer runtime.KeepAlive(ln)
 	var _mainthread0 uint32
 	purego.Main(func() {
 		_mainthread0 = func() uint32 {

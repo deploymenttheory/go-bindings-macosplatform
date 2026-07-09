@@ -5,6 +5,8 @@
 package coremidi
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func uMPEndpointAdopt(id objc.ID) *UMPEndpoint {
 
 // Description returns the object's -description text.
 func (ue *UMPEndpoint) Description() string {
+	defer runtime.KeepAlive(ue)
 	return rt.Description(objref.IDOf(ue))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ue *UMPEndpoint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ue)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ue), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ue *UMPEndpoint) IsKind(className string) bool {
+	defer runtime.KeepAlive(ue)
 	return rt.IsKind(objref.IDOf(ue), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ue *UMPEndpoint) String() string {
+	defer runtime.KeepAlive(ue)
 	return rt.Description(objref.IDOf(ue))
 }
 
@@ -75,6 +82,7 @@ func (ue *UMPEndpoint) WithFunctionBlocks(items ...UMPFunctionBlockProvider) *UM
 
 // Name returns the UTF-8 encoded name of the UMP endpoint. The name shall not be any longer than 98 bytes of UTF-8 Text.
 func (ue *UMPEndpoint) Name() string {
+	defer runtime.KeepAlive(ue)
 	_r := objc.Send[objc.ID](objref.IDOf(ue), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -84,36 +92,42 @@ func (ue *UMPEndpoint) Name() string {
 
 // MIDIProtocol returns the MIDI protocol currently used by the UMP endpoint.
 func (ue *UMPEndpoint) MIDIProtocol() ProtocolID {
+	defer runtime.KeepAlive(ue)
 	_r := objc.Send[ProtocolID](objref.IDOf(ue), objc.RegisterName("MIDIProtocol"))
 	return _r
 }
 
 // SupportedMIDIProtocols returns all protocols the UMP endpoint is capable of using for communication.
 func (ue *UMPEndpoint) SupportedMIDIProtocols() UMPProtocolOptions {
+	defer runtime.KeepAlive(ue)
 	_r := objc.Send[UMPProtocolOptions](objref.IDOf(ue), objc.RegisterName("supportedMIDIProtocols"))
 	return _r
 }
 
 // MIDIDestination returns the MIDI destination for the UMP endpoint.
 func (ue *UMPEndpoint) MIDIDestination() int {
+	defer runtime.KeepAlive(ue)
 	_r := objc.Send[int](objref.IDOf(ue), objc.RegisterName("MIDIDestination"))
 	return _r
 }
 
 // MIDISource returns the MIDI source for the UMP endpoint.
 func (ue *UMPEndpoint) MIDISource() int {
+	defer runtime.KeepAlive(ue)
 	_r := objc.Send[int](objref.IDOf(ue), objc.RegisterName("MIDISource"))
 	return _r
 }
 
 // DeviceInfo returns the MIDI 2.0 Device identity information associated with the device.
 func (ue *UMPEndpoint) DeviceInfo() *MIDI2DeviceInfo {
+	defer runtime.KeepAlive(ue)
 	_r := objc.Send[objc.ID](objref.IDOf(ue), objc.RegisterName("deviceInfo"))
 	return MIDI2DeviceInfoFromID(_r)
 }
 
 // ProductInstanceID returns serial number (or similar value) uniquely identifying this manufacturer/family/model, up to 42 bytes of ASCII Text in the ordinal range 32-126.
 func (ue *UMPEndpoint) ProductInstanceID() string {
+	defer runtime.KeepAlive(ue)
 	_r := objc.Send[objc.ID](objref.IDOf(ue), objc.RegisterName("productInstanceID"))
 	if _r == 0 {
 		return ""
@@ -123,24 +137,28 @@ func (ue *UMPEndpoint) ProductInstanceID() string {
 
 // HasStaticFunctionBlocks reports whether indicates if the Function Block state will never change once discovered.
 func (ue *UMPEndpoint) HasStaticFunctionBlocks() bool {
+	defer runtime.KeepAlive(ue)
 	_r := objc.Send[bool](objref.IDOf(ue), objc.RegisterName("hasStaticFunctionBlocks"))
 	return _r
 }
 
 // HasJRTSReceiveCapability reports whether jitter-reduction timestamp receive capability.
 func (ue *UMPEndpoint) HasJRTSReceiveCapability() bool {
+	defer runtime.KeepAlive(ue)
 	_r := objc.Send[bool](objref.IDOf(ue), objc.RegisterName("hasJRTSReceiveCapability"))
 	return _r
 }
 
 // HasJRTSTransmitCapability reports whether jitter-reduction timestamp transmit capability
 func (ue *UMPEndpoint) HasJRTSTransmitCapability() bool {
+	defer runtime.KeepAlive(ue)
 	_r := objc.Send[bool](objref.IDOf(ue), objc.RegisterName("hasJRTSTransmitCapability"))
 	return _r
 }
 
 // EndpointType indicates the type of UMP Endpoint, if known.
 func (ue *UMPEndpoint) EndpointType() UMPCIObjectBackingType {
+	defer runtime.KeepAlive(ue)
 	_r := objc.Send[UMPCIObjectBackingType](objref.IDOf(ue), objc.RegisterName("endpointType"))
 	return _r
 }
@@ -149,6 +167,7 @@ func (ue *UMPEndpoint) EndpointType() UMPCIObjectBackingType {
 //
 // FunctionBlocks returns the collection as a Go slice.
 func (ue *UMPEndpoint) FunctionBlocks() []*UMPFunctionBlock {
+	defer runtime.KeepAlive(ue)
 	_arr := objc.Send[objc.ID](objref.IDOf(ue), objc.RegisterName("functionBlocks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UMPFunctionBlock { return UMPFunctionBlockFromID(_id) })
 }

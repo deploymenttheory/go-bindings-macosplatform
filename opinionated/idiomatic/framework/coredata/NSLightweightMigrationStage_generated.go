@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -62,6 +64,7 @@ func (lms *LightweightMigrationStage) WithLabel(label string) *LightweightMigrat
 //
 // VersionChecksums returns the collection as a Go slice.
 func (lms *LightweightMigrationStage) VersionChecksums() []string {
+	defer runtime.KeepAlive(lms)
 	_arr := objc.Send[objc.ID](objref.IDOf(lms), objc.RegisterName("versionChecksums"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

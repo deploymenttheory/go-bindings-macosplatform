@@ -5,6 +5,7 @@
 package executionpolicy
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,22 +49,27 @@ func executionPolicyAdopt(id objc.ID) *ExecutionPolicy {
 
 // Description returns the object's -description text.
 func (ep *ExecutionPolicy) Description() string {
+	defer runtime.KeepAlive(ep)
 	return rt.Description(objref.IDOf(ep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ep *ExecutionPolicy) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ep)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ep *ExecutionPolicy) IsKind(className string) bool {
+	defer runtime.KeepAlive(ep)
 	return rt.IsKind(objref.IDOf(ep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ep *ExecutionPolicy) String() string {
+	defer runtime.KeepAlive(ep)
 	return rt.Description(objref.IDOf(ep))
 }
 
@@ -75,6 +81,7 @@ func NewExecutionPolicy() *ExecutionPolicy {
 
 // AddPolicyExceptionForURL adds policy exception for URL.
 func (ep *ExecutionPolicy) AddPolicyExceptionForURL(url string) error {
+	defer runtime.KeepAlive(ep)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ep), objc.RegisterName("addPolicyExceptionForURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func methodSignatureAdopt(id objc.ID) *MethodSignature {
 
 // Description returns the object's -description text.
 func (ms *MethodSignature) Description() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ms *MethodSignature) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ms)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ms *MethodSignature) IsKind(className string) bool {
+	defer runtime.KeepAlive(ms)
 	return rt.IsKind(objref.IDOf(ms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ms *MethodSignature) String() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
@@ -81,37 +87,42 @@ func (ms *MethodSignature) WithObservationInfo(observationInfo unsafe.Pointer) *
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ms *MethodSignature) WithScriptingProperties(scriptingProperties obj.Object) *MethodSignature {
-	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ms *MethodSignature) WithScriptingProperties(scriptingProperties map[string]obj.Object) *MethodSignature {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ms
 }
 
 // GetArgumentTypeAtIndex returns the type encoding for the argument at a given index.
 func (ms *MethodSignature) GetArgumentTypeAtIndex(idx int) string {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[string](objref.IDOf(ms), objc.RegisterName("getArgumentTypeAtIndex:"), idx)
 	return _r
 }
 
 // IsOneway reports whether the receiver is asynchronous when invoked through distributed objects.
 func (ms *MethodSignature) IsOneway() bool {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[bool](objref.IDOf(ms), objc.RegisterName("isOneway"))
 	return _r
 }
 
 // NumberOfArguments returns the number of arguments.
 func (ms *MethodSignature) NumberOfArguments() int {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("numberOfArguments"))
 	return _r
 }
 
 // FrameLength returns the frame length.
 func (ms *MethodSignature) FrameLength() int {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("frameLength"))
 	return _r
 }
 
 // MethodReturnLength returns the method return length.
 func (ms *MethodSignature) MethodReturnLength() int {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("methodReturnLength"))
 	return _r
 }

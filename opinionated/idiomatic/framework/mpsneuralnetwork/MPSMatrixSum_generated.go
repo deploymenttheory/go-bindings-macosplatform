@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -46,22 +48,27 @@ func matrixSumAdopt(id objc.ID) *MatrixSum {
 
 // Description returns the object's -description text.
 func (ms *MatrixSum) Description() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ms *MatrixSum) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ms)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ms *MatrixSum) IsKind(className string) bool {
+	defer runtime.KeepAlive(ms)
 	return rt.IsKind(objref.IDOf(ms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ms *MatrixSum) String() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
@@ -79,59 +86,69 @@ func (ms *MatrixSum) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) 
 
 // SetNeuronTypeParameterAParameterBParameterC specifies a neuron activation function to be used. This method can be used to add a neuron activation funtion of given type with associated scalar parameters A, B, and C that are shared across all output values. Note that this method can only be used to specify neurons which are specified by three (or fewer) parameters shared across all output values (or channels, in CNN nomenclature). It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. An MPSMatrixSum kernel is initialized with a default neuron function of MPSCNNNeuronTypeNone.
 func (ms *MatrixSum) SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
+	defer runtime.KeepAlive(ms)
 	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:"), neuronType, parameterA, parameterB, parameterC)
 }
 
 // NeuronType returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (ms *MatrixSum) NeuronType() CNNNeuronType {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[CNNNeuronType](objref.IDOf(ms), objc.RegisterName("neuronType"))
 	return _r
 }
 
 // Rows returns the number of rows to sum.
 func (ms *MatrixSum) Rows() int {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("rows"))
 	return _r
 }
 
 // Columns returns the number of columns to sum.
 func (ms *MatrixSum) Columns() int {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("columns"))
 	return _r
 }
 
 // Count returns the number of matrices to sum.
 func (ms *MatrixSum) Count() int {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("count"))
 	return _r
 }
 
 // Transpose reports whether the transposition used to initialize the kernel.
 func (ms *MatrixSum) Transpose() bool {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[bool](objref.IDOf(ms), objc.RegisterName("transpose"))
 	return _r
 }
 
 // ResultMatrixOrigin returns the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.
 func (ms *MatrixSum) ResultMatrixOrigin() metal.MTLOrigin {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[metal.MTLOrigin](objref.IDOf(ms), objc.RegisterName("resultMatrixOrigin"))
 	return _r
 }
 
 // NeuronParameterA returns neuron parameter A.
 func (ms *MatrixSum) NeuronParameterA() float32 {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[float32](objref.IDOf(ms), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
 // NeuronParameterB returns neuron parameter B.
 func (ms *MatrixSum) NeuronParameterB() float32 {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[float32](objref.IDOf(ms), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
 // NeuronParameterC returns neuron parameter C.
 func (ms *MatrixSum) NeuronParameterC() float32 {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[float32](objref.IDOf(ms), objc.RegisterName("neuronParameterC"))
 	return _r
 }

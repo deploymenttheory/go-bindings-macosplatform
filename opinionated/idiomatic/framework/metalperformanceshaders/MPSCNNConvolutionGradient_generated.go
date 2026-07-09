@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -145,35 +147,41 @@ func (ccg *CNNConvolutionGradient) WithLabel(label string) *CNNConvolutionGradie
 
 // ReloadWeightsAndBiasesFromDataSource CPU side reload. Reload the updated weights and biases from data provider into internal weights and bias buffers. Weights and biases gradients needed for update are obtained from MPSCNNConvolutionGradientState object. Data provider passed in init call is used for this purpose.
 func (ccg *CNNConvolutionGradient) ReloadWeightsAndBiasesFromDataSource() {
+	defer runtime.KeepAlive(ccg)
 	objc.Send[objc.ID](objref.IDOf(ccg), objc.RegisterName("reloadWeightsAndBiasesFromDataSource"))
 }
 
 // SourceGradientFeatureChannels returns the number of feature channels per pixel in the gradient image (primarySource) of encode call. This is same is outputFeatureChannels or the feature channels of destination image in forward convolution i.e. dataSource.descriptor.outputFeatureChannels
 func (ccg *CNNConvolutionGradient) SourceGradientFeatureChannels() int {
+	defer runtime.KeepAlive(ccg)
 	_r := objc.Send[int](objref.IDOf(ccg), objc.RegisterName("sourceGradientFeatureChannels"))
 	return _r
 }
 
 // SourceImageFeatureChannels returns the number of feature channels per pixel in the input image to forward convolution which is used here as secondarySource. This is same as dataSource.descriptor.inputFeatureChannels. This is also the number of feature channels in destinatin image here i.e. gradient with respect to data.
 func (ccg *CNNConvolutionGradient) SourceImageFeatureChannels() int {
+	defer runtime.KeepAlive(ccg)
 	_r := objc.Send[int](objref.IDOf(ccg), objc.RegisterName("sourceImageFeatureChannels"))
 	return _r
 }
 
 // Groups returns number of groups input and output channels are divided into.
 func (ccg *CNNConvolutionGradient) Groups() int {
+	defer runtime.KeepAlive(ccg)
 	_r := objc.Send[int](objref.IDOf(ccg), objc.RegisterName("groups"))
 	return _r
 }
 
 // ChannelMultiplier returns channel multiplier. For convolution created with MPSCNNDepthWiseConvolutionDescriptor, it is the number of output feature channels for each input channel. See MPSCNNDepthWiseConvolutionDescriptor for more details. Default is 0 which means regular CNN convolution. Currently only channelMultiplier of 1 is supported i.e. inputChannels == outputChannels
 func (ccg *CNNConvolutionGradient) ChannelMultiplier() int {
+	defer runtime.KeepAlive(ccg)
 	_r := objc.Send[int](objref.IDOf(ccg), objc.RegisterName("channelMultiplier"))
 	return _r
 }
 
 // SerializeWeightsAndBiases reports whether property to control serialization of weights and bias. During serialization of convolution object in -encodeWithCoder call, weights and biases are saved so that convolution object can be properly unserialized/restored in -initWithCoder call. If data source provied is NSSecureCoding compliant, data source is serialized else weights and biases are serialized. As weights/biases data may be several MB and these are same for both gradient and forward convolution object, application may already have weights/biases on disk through convolution, it can save disk space by setting this property false so convolution gradient object does not end up storing another copy of weights/biases. Default is false. When application decides to set it to false, it MUST call -(void) reloadWeightsAndBiasesFromDataSource after initWithCoder has initialized convolution object.
 func (ccg *CNNConvolutionGradient) SerializeWeightsAndBiases() bool {
+	defer runtime.KeepAlive(ccg)
 	_r := objc.Send[bool](objref.IDOf(ccg), objc.RegisterName("serializeWeightsAndBiases"))
 	return _r
 }

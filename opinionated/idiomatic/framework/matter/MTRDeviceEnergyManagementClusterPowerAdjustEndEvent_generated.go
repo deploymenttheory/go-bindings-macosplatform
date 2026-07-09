@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDeviceEnergyManagementClusterPowerAdjustEndEventAdopt(id objc.ID) *MTRDe
 
 // Description returns the object's -description text.
 func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) Description() string {
+	defer runtime.KeepAlive(mdemcpaee)
 	return rt.Description(objref.IDOf(mdemcpaee))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdemcpaee)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdemcpaee), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdemcpaee)
 	return rt.IsKind(objref.IDOf(mdemcpaee), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) String() string {
+	defer runtime.KeepAlive(mdemcpaee)
 	return rt.Description(objref.IDOf(mdemcpaee))
 }
 
@@ -72,36 +80,42 @@ func NewMTRDeviceEnergyManagementClusterPowerAdjustEndEvent() *MTRDeviceEnergyMa
 
 // WithCause sets the cause.
 func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent {
+	defer runtime.KeepAlive(cause)
 	objc.Send[objc.ID](objref.IDOf(mdemcpaee), objc.RegisterName("setCause:"), objref.IDOf(cause))
 	return mdemcpaee
 }
 
 // WithDuration sets the duration.
 func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent {
+	defer runtime.KeepAlive(duration)
 	objc.Send[objc.ID](objref.IDOf(mdemcpaee), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return mdemcpaee
 }
 
 // WithEnergyUse sets the energy use.
 func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) WithEnergyUse(energyUse obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent {
+	defer runtime.KeepAlive(energyUse)
 	objc.Send[objc.ID](objref.IDOf(mdemcpaee), objc.RegisterName("setEnergyUse:"), objref.IDOf(energyUse))
 	return mdemcpaee
 }
 
 // Cause returns the cause.
-func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) Cause() obj.Object {
+func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) Cause() *foundation.Number {
+	defer runtime.KeepAlive(mdemcpaee)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcpaee), objc.RegisterName("cause"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Duration returns the duration.
-func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) Duration() obj.Object {
+func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) Duration() *foundation.Number {
+	defer runtime.KeepAlive(mdemcpaee)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcpaee), objc.RegisterName("duration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EnergyUse returns the energy use.
-func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) EnergyUse() obj.Object {
+func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) EnergyUse() *foundation.Number {
+	defer runtime.KeepAlive(mdemcpaee)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcpaee), objc.RegisterName("energyUse"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

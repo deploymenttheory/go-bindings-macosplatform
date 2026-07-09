@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func blitPassSampleBufferAttachmentDescriptorAdopt(id objc.ID) *BlitPassSampleBu
 
 // Description returns the object's -description text.
 func (bpsbad *BlitPassSampleBufferAttachmentDescriptor) Description() string {
+	defer runtime.KeepAlive(bpsbad)
 	return rt.Description(objref.IDOf(bpsbad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bpsbad *BlitPassSampleBufferAttachmentDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bpsbad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bpsbad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bpsbad *BlitPassSampleBufferAttachmentDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(bpsbad)
 	return rt.IsKind(objref.IDOf(bpsbad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bpsbad *BlitPassSampleBufferAttachmentDescriptor) String() string {
+	defer runtime.KeepAlive(bpsbad)
 	return rt.Description(objref.IDOf(bpsbad))
 }
 
@@ -86,12 +93,14 @@ func (bpsbad *BlitPassSampleBufferAttachmentDescriptor) WithEndOfEncoderSampleIn
 
 // StartOfEncoderSampleIndex returns the sample index to use to store the sample taken at the start of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a blit pass will fail.
 func (bpsbad *BlitPassSampleBufferAttachmentDescriptor) StartOfEncoderSampleIndex() int {
+	defer runtime.KeepAlive(bpsbad)
 	_r := objc.Send[int](objref.IDOf(bpsbad), objc.RegisterName("startOfEncoderSampleIndex"))
 	return _r
 }
 
 // EndOfEncoderSampleIndex returns the sample index to use to store the sample taken at the end of Command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a blit pass will fail.
 func (bpsbad *BlitPassSampleBufferAttachmentDescriptor) EndOfEncoderSampleIndex() int {
+	defer runtime.KeepAlive(bpsbad)
 	_r := objc.Send[int](objref.IDOf(bpsbad), objc.RegisterName("endOfEncoderSampleIndex"))
 	return _r
 }

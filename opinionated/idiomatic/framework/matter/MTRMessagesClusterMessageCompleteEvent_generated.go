@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRMessagesClusterMessageCompleteEventAdopt(id objc.ID) *MTRMessagesCluster
 
 // Description returns the object's -description text.
 func (mmcmce *MTRMessagesClusterMessageCompleteEvent) Description() string {
+	defer runtime.KeepAlive(mmcmce)
 	return rt.Description(objref.IDOf(mmcmce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmcmce *MTRMessagesClusterMessageCompleteEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmcmce)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmcmce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmcmce *MTRMessagesClusterMessageCompleteEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmcmce)
 	return rt.IsKind(objref.IDOf(mmcmce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmcmce *MTRMessagesClusterMessageCompleteEvent) String() string {
+	defer runtime.KeepAlive(mmcmce)
 	return rt.Description(objref.IDOf(mmcmce))
 }
 
@@ -71,13 +79,14 @@ func NewMTRMessagesClusterMessageCompleteEvent() *MTRMessagesClusterMessageCompl
 }
 
 // WithMessageID sets the message ID.
-func (mmcmce *MTRMessagesClusterMessageCompleteEvent) WithMessageID(messageID obj.Object) *MTRMessagesClusterMessageCompleteEvent {
-	objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
+func (mmcmce *MTRMessagesClusterMessageCompleteEvent) WithMessageID(messageID []byte) *MTRMessagesClusterMessageCompleteEvent {
+	objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("setMessageID:"), rt.BytesToNSData(messageID))
 	return mmcmce
 }
 
 // WithResponseID sets the response ID.
 func (mmcmce *MTRMessagesClusterMessageCompleteEvent) WithResponseID(responseID obj.Object) *MTRMessagesClusterMessageCompleteEvent {
+	defer runtime.KeepAlive(responseID)
 	objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("setResponseID:"), objref.IDOf(responseID))
 	return mmcmce
 }
@@ -90,24 +99,28 @@ func (mmcmce *MTRMessagesClusterMessageCompleteEvent) WithReply(reply string) *M
 
 // WithFutureMessagesPreference sets the future messages preference.
 func (mmcmce *MTRMessagesClusterMessageCompleteEvent) WithFutureMessagesPreference(futureMessagesPreference obj.Object) *MTRMessagesClusterMessageCompleteEvent {
+	defer runtime.KeepAlive(futureMessagesPreference)
 	objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("setFutureMessagesPreference:"), objref.IDOf(futureMessagesPreference))
 	return mmcmce
 }
 
 // MessageID returns the message ID.
-func (mmcmce *MTRMessagesClusterMessageCompleteEvent) MessageID() obj.Object {
+func (mmcmce *MTRMessagesClusterMessageCompleteEvent) MessageID() []byte {
+	defer runtime.KeepAlive(mmcmce)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("messageID"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ResponseID returns the response ID.
-func (mmcmce *MTRMessagesClusterMessageCompleteEvent) ResponseID() obj.Object {
+func (mmcmce *MTRMessagesClusterMessageCompleteEvent) ResponseID() *foundation.Number {
+	defer runtime.KeepAlive(mmcmce)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("responseID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Reply returns the reply.
 func (mmcmce *MTRMessagesClusterMessageCompleteEvent) Reply() string {
+	defer runtime.KeepAlive(mmcmce)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("reply"))
 	if _r == 0 {
 		return ""
@@ -116,7 +129,8 @@ func (mmcmce *MTRMessagesClusterMessageCompleteEvent) Reply() string {
 }
 
 // FutureMessagesPreference returns the future messages preference.
-func (mmcmce *MTRMessagesClusterMessageCompleteEvent) FutureMessagesPreference() obj.Object {
+func (mmcmce *MTRMessagesClusterMessageCompleteEvent) FutureMessagesPreference() *foundation.Number {
+	defer runtime.KeepAlive(mmcmce)
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("futureMessagesPreference"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -70,6 +72,7 @@ func (cb *ComboButton) WithTitle(title string) *ComboButton {
 
 // WithImage sets the image that the button displays.
 func (cb *ComboButton) WithImage(image *Image) *ComboButton {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -94,6 +97,7 @@ func (cb *ComboButton) WithStyle(style ComboButtonStyle) *ComboButton {
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (cb *ComboButton) WithTarget(target obj.Object) *ComboButton {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -158,6 +162,7 @@ func (cb *ComboButton) WithControlSize(controlSize ControlSize) *ComboButton {
 
 // WithFormatter sets the receiver’s formatter.
 func (cb *ComboButton) WithFormatter(formatter obj.Object) *ComboButton {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -166,6 +171,7 @@ func (cb *ComboButton) WithFormatter(formatter obj.Object) *ComboButton {
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (cb *ComboButton) WithObjectValue(objectValue obj.Object) *ComboButton {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -182,6 +188,7 @@ func (cb *ComboButton) WithStringValue(stringValue string) *ComboButton {
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (cb *ComboButton) WithAttributedStringValue(attributedStringValue obj.Object) *ComboButton {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -222,6 +229,7 @@ func (cb *ComboButton) WithDoubleValue(doubleValue float64) *ComboButton {
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (cb *ComboButton) WithFont(font *Font) *ComboButton {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -270,6 +278,7 @@ func (cb *ComboButton) WithAllowsExpansionToolTips(allowsExpansionToolTips bool)
 
 // WithCell sets the cell.
 func (cb *ComboButton) WithCell(cell CellProvider) *ComboButton {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -415,6 +424,7 @@ func (cb *ComboButton) WithWantsLayer(wantsLayer bool) *ComboButton {
 
 // WithLayer sets the layer.
 func (cb *ComboButton) WithLayer(layer obj.Object) *ComboButton {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -464,6 +474,7 @@ func (cb *ComboButton) WithBackgroundFilters(items ...obj.Object) *ComboButton {
 
 // WithCompositingFilter sets the compositing filter.
 func (cb *ComboButton) WithCompositingFilter(compositingFilter obj.Object) *ComboButton {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -481,6 +492,7 @@ func (cb *ComboButton) WithContentFilters(items ...obj.Object) *ComboButton {
 
 // WithShadow sets the shadow.
 func (cb *ComboButton) WithShadow(shadow *Shadow) *ComboButton {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -529,6 +541,7 @@ func (cb *ComboButton) WithPreparedContentRect(preparedContentRect corefoundatio
 
 // WithNextKeyView sets the next key view.
 func (cb *ComboButton) WithNextKeyView(nextKeyView ViewProvider) *ComboButton {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -578,6 +591,7 @@ func (cb *ComboButton) WithPrefersCompactControlSizeMetrics(prefersCompactContro
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (cb *ComboButton) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ComboButton {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -634,6 +648,7 @@ func (cb *ComboButton) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedD
 
 // WithPressureConfiguration sets the pressure configuration.
 func (cb *ComboButton) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ComboButton {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -642,6 +657,7 @@ func (cb *ComboButton) WithPressureConfiguration(pressureConfiguration *Pressure
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (cb *ComboButton) WithNextResponder(nextResponder ResponderProvider) *ComboButton {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -650,6 +666,7 @@ func (cb *ComboButton) WithNextResponder(nextResponder ResponderProvider) *Combo
 
 // WithMenu sets returns the responder’s menu.
 func (cb *ComboButton) WithMenu(menu *Menu) *ComboButton {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -658,6 +675,7 @@ func (cb *ComboButton) WithMenu(menu *Menu) *ComboButton {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (cb *ComboButton) WithUserActivity(userActivity obj.Object) *ComboButton {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -666,6 +684,7 @@ func (cb *ComboButton) WithUserActivity(userActivity obj.Object) *ComboButton {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (cb *ComboButton) WithTouchBar(touchBar *TouchBar) *ComboButton {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -674,6 +693,7 @@ func (cb *ComboButton) WithTouchBar(touchBar *TouchBar) *ComboButton {
 
 // Title returns the title displayed on the control. The default value is an empty string.
 func (cb *ComboButton) Title() string {
+	defer runtime.KeepAlive(cb)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -690,6 +710,7 @@ func (cb *ComboButton) Title() string {
 
 // Image returns the image displayed on the control. The default value is `nil`.
 func (cb *ComboButton) Image() *Image {
+	defer runtime.KeepAlive(cb)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {
@@ -703,6 +724,7 @@ func (cb *ComboButton) Image() *Image {
 
 // ImageScaling returns the scaling mode applied to fit the button's image within the content area. The default value is `NSImageScaleProportionallyDown`.
 func (cb *ComboButton) ImageScaling() ImageScaling {
+	defer runtime.KeepAlive(cb)
 	var _mainthread0 ImageScaling
 	purego.Main(func() {
 		_mainthread0 = func() ImageScaling {
@@ -716,6 +738,7 @@ func (cb *ComboButton) ImageScaling() ImageScaling {
 
 // Style specifies the visual presentation and behavior for NSComboButton's primary action and its menu. The default value is `NSComboButtonStyleSplit`.
 func (cb *ComboButton) Style() ComboButtonStyle {
+	defer runtime.KeepAlive(cb)
 	var _mainthread0 ComboButtonStyle
 	purego.Main(func() {
 		_mainthread0 = func() ComboButtonStyle {

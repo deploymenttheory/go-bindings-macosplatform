@@ -67,8 +67,8 @@ func (o *LPLinkMetadata) URL() *foundation.NSURL {
 	return foundation.NSURLFromID(_ret)
 }
 
-func (o *LPLinkMetadata) SetURL(uRL *foundation.NSURL) {
-	o.Ptr().Send(_lPLinkMetadataSelSetURL, uRL.Ptr())
+func (o *LPLinkMetadata) SetURL(url *foundation.NSURL) {
+	o.Ptr().Send(_lPLinkMetadataSelSetURL, url.Ptr())
 }
 
 // A representative title for the URL.

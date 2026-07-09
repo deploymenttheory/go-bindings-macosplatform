@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func vertexBufferLayoutDescriptorArrayAdopt(id objc.ID) *VertexBufferLayoutDescr
 
 // Description returns the object's -description text.
 func (vblda *VertexBufferLayoutDescriptorArray) Description() string {
+	defer runtime.KeepAlive(vblda)
 	return rt.Description(objref.IDOf(vblda))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vblda *VertexBufferLayoutDescriptorArray) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vblda)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vblda), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vblda *VertexBufferLayoutDescriptorArray) IsKind(className string) bool {
+	defer runtime.KeepAlive(vblda)
 	return rt.IsKind(objref.IDOf(vblda), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vblda *VertexBufferLayoutDescriptorArray) String() string {
+	defer runtime.KeepAlive(vblda)
 	return rt.Description(objref.IDOf(vblda))
 }
 
@@ -74,11 +81,14 @@ func NewVertexBufferLayoutDescriptorArray() *VertexBufferLayoutDescriptorArray {
 
 // ObjectAtIndexedSubscript returns the state of the specified vertex buffer layout.
 func (vblda *VertexBufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index int) *VertexBufferLayoutDescriptor {
+	defer runtime.KeepAlive(vblda)
 	_r := objc.Send[objc.ID](objref.IDOf(vblda), objc.RegisterName("objectAtIndexedSubscript:"), index)
 	return VertexBufferLayoutDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets the state of the specified vertex buffer layout.
 func (vblda *VertexBufferLayoutDescriptorArray) SetObjectAtIndexedSubscript(bufferDesc *VertexBufferLayoutDescriptor, index int) {
+	defer runtime.KeepAlive(vblda)
+	defer runtime.KeepAlive(bufferDesc)
 	objc.Send[objc.ID](objref.IDOf(vblda), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(bufferDesc), index)
 }

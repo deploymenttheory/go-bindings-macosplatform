@@ -6,11 +6,13 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,6 +51,9 @@ func mTRClusterGroupsAdopt(id objc.ID) *MTRClusterGroups {
 
 // NewMTRClusterGroupsWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterGroupsWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterGroups {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterGroups")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterGroupsAdopt(_id)
@@ -56,6 +61,8 @@ func NewMTRClusterGroupsWithDeviceEndpointIDQueue(device *MTRDevice, endpointID 
 
 // NewMTRClusterGroupsWithDeviceEndpointQueue creates a new MTRClusterGroups.
 func NewMTRClusterGroupsWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterGroups {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterGroups")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterGroupsAdopt(_id)
@@ -65,6 +72,9 @@ func NewMTRClusterGroupsWithDeviceEndpointQueue(device *MTRDevice, endpoint uint
 //
 // AddGroupWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcg *MTRClusterGroups) AddGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupsClusterAddGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupsClusterAddGroupResponseParams, err error) {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRGroupsClusterAddGroupResponseParams
 		err error
@@ -90,6 +100,9 @@ func (mcg *MTRClusterGroups) AddGroupWithParamsExpectedValuesExpectedValueInterv
 //
 // ViewGroupWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcg *MTRClusterGroups) ViewGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupsClusterViewGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupsClusterViewGroupResponseParams, err error) {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRGroupsClusterViewGroupResponseParams
 		err error
@@ -115,6 +128,9 @@ func (mcg *MTRClusterGroups) ViewGroupWithParamsExpectedValuesExpectedValueInter
 //
 // GetGroupMembershipWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcg *MTRClusterGroups) GetGroupMembershipWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupsClusterGetGroupMembershipParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupsClusterGetGroupMembershipResponseParams, err error) {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRGroupsClusterGetGroupMembershipResponseParams
 		err error
@@ -140,6 +156,9 @@ func (mcg *MTRClusterGroups) GetGroupMembershipWithParamsExpectedValuesExpectedV
 //
 // RemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcg *MTRClusterGroups) RemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupsClusterRemoveGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupsClusterRemoveGroupResponseParams, err error) {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRGroupsClusterRemoveGroupResponseParams
 		err error
@@ -162,45 +181,60 @@ func (mcg *MTRClusterGroups) RemoveGroupWithParamsExpectedValuesExpectedValueInt
 }
 
 // ReadAttributeNameSupportWithParams reads attribute name support with params.
-func (mcg *MTRClusterGroups) ReadAttributeNameSupportWithParams(params *MTRReadParams) obj.Object {
+func (mcg *MTRClusterGroups) ReadAttributeNameSupportWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcg), objc.RegisterName("readAttributeNameSupportWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcg *MTRClusterGroups) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcg *MTRClusterGroups) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcg), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcg *MTRClusterGroups) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcg *MTRClusterGroups) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcg), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcg *MTRClusterGroups) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcg *MTRClusterGroups) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcg), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcg *MTRClusterGroups) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcg *MTRClusterGroups) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcg), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcg *MTRClusterGroups) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcg *MTRClusterGroups) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcg), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AddGroupWithParamsExpectedValuesExpectedValueInterval adds group with params expected values expected value interval.
 //
 // AddGroupWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcg *MTRClusterGroups) AddGroupWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupsClusterAddGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupsClusterAddGroupResponseParams, err error) {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRGroupsClusterAddGroupResponseParams
 		err error
@@ -226,6 +260,9 @@ func (mcg *MTRClusterGroups) AddGroupWithParamsExpectedValuesExpectedValueInterv
 //
 // ViewGroupWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcg *MTRClusterGroups) ViewGroupWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupsClusterViewGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupsClusterViewGroupResponseParams, err error) {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRGroupsClusterViewGroupResponseParams
 		err error
@@ -251,6 +288,9 @@ func (mcg *MTRClusterGroups) ViewGroupWithParamsExpectedValuesExpectedValueInter
 //
 // GetGroupMembershipWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcg *MTRClusterGroups) GetGroupMembershipWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupsClusterGetGroupMembershipParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupsClusterGetGroupMembershipResponseParams, err error) {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRGroupsClusterGetGroupMembershipResponseParams
 		err error
@@ -276,6 +316,9 @@ func (mcg *MTRClusterGroups) GetGroupMembershipWithParamsExpectedValuesExpectedV
 //
 // RemoveGroupWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcg *MTRClusterGroups) RemoveGroupWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupsClusterRemoveGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupsClusterRemoveGroupResponseParams, err error) {
+	defer runtime.KeepAlive(mcg)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRGroupsClusterRemoveGroupResponseParams
 		err error

@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func wKPreferencesAdopt(id objc.ID) *WKPreferences {
 
 // Description returns the object's -description text.
 func (wp *WKPreferences) Description() string {
+	defer runtime.KeepAlive(wp)
 	return rt.Description(objref.IDOf(wp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wp *WKPreferences) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wp *WKPreferences) IsKind(className string) bool {
+	defer runtime.KeepAlive(wp)
 	return rt.IsKind(objref.IDOf(wp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wp *WKPreferences) String() string {
+	defer runtime.KeepAlive(wp)
 	return rt.Description(objref.IDOf(wp))
 }
 
@@ -176,6 +183,7 @@ func (wp *WKPreferences) WithJavaScriptEnabled(javaScriptEnabled bool) *WKPrefer
 
 // MinimumFontSize returns the minimum font size in points. The default value is 0.
 func (wp *WKPreferences) MinimumFontSize() float64 {
+	defer runtime.KeepAlive(wp)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -189,6 +197,7 @@ func (wp *WKPreferences) MinimumFontSize() float64 {
 
 // JavaScriptCanOpenWindowsAutomatically reports whether javaScript can open windows without user interaction. The default value is false in iOS and true in OS X.
 func (wp *WKPreferences) JavaScriptCanOpenWindowsAutomatically() bool {
+	defer runtime.KeepAlive(wp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -202,6 +211,7 @@ func (wp *WKPreferences) JavaScriptCanOpenWindowsAutomatically() bool {
 
 // IsFraudulentWebsiteWarningEnabled reports whether warnings should be shown for suspected fraudulent content such as phishing or malware. The default value is true.
 func (wp *WKPreferences) IsFraudulentWebsiteWarningEnabled() bool {
+	defer runtime.KeepAlive(wp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -215,6 +225,7 @@ func (wp *WKPreferences) IsFraudulentWebsiteWarningEnabled() bool {
 
 // ShouldPrintBackgrounds reports whether the web view should include backgrounds when printing. The default value is `NO`.
 func (wp *WKPreferences) ShouldPrintBackgrounds() bool {
+	defer runtime.KeepAlive(wp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -228,6 +239,7 @@ func (wp *WKPreferences) ShouldPrintBackgrounds() bool {
 
 // TabFocusesLinks reports whether if tabFocusesLinks is true, the tab key will focus links and form controls. The Option key temporarily reverses this preference.
 func (wp *WKPreferences) TabFocusesLinks() bool {
+	defer runtime.KeepAlive(wp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -241,6 +253,7 @@ func (wp *WKPreferences) TabFocusesLinks() bool {
 
 // IsTextInteractionEnabled reports whether text interaction is disabled.
 func (wp *WKPreferences) IsTextInteractionEnabled() bool {
+	defer runtime.KeepAlive(wp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -254,6 +267,7 @@ func (wp *WKPreferences) IsTextInteractionEnabled() bool {
 
 // IsSiteSpecificQuirksModeEnabled reports whether webKit will apply built-in workarounds (quirks) to improve compatibility with certain known websites. You can disable site-specific quirks to help test your website without these workarounds. Enabled by default.
 func (wp *WKPreferences) IsSiteSpecificQuirksModeEnabled() bool {
+	defer runtime.KeepAlive(wp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -267,6 +281,7 @@ func (wp *WKPreferences) IsSiteSpecificQuirksModeEnabled() bool {
 
 // IsElementFullscreenEnabled reports whether fullscreen API is enabled. The default value is false. We can set it to true to enable support for the fullscreen API.
 func (wp *WKPreferences) IsElementFullscreenEnabled() bool {
+	defer runtime.KeepAlive(wp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -280,6 +295,7 @@ func (wp *WKPreferences) IsElementFullscreenEnabled() bool {
 
 // InactiveSchedulingPolicy specify the scheduling policy for the web view when it is inactive and detached from the view hierarchy. Web views are not considered idle when playing media or loading web pages. A suspended web view will pause JavaScript execution and page layout.
 func (wp *WKPreferences) InactiveSchedulingPolicy() WKInactiveSchedulingPolicy {
+	defer runtime.KeepAlive(wp)
 	var _mainthread0 WKInactiveSchedulingPolicy
 	purego.Main(func() {
 		_mainthread0 = func() WKInactiveSchedulingPolicy {
@@ -293,6 +309,7 @@ func (wp *WKPreferences) InactiveSchedulingPolicy() WKInactiveSchedulingPolicy {
 
 // JavaEnabled wraps the corresponding Objective-C method.
 func (wp *WKPreferences) JavaEnabled() bool {
+	defer runtime.KeepAlive(wp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -306,6 +323,7 @@ func (wp *WKPreferences) JavaEnabled() bool {
 
 // PlugInsEnabled wraps the corresponding Objective-C method.
 func (wp *WKPreferences) PlugInsEnabled() bool {
+	defer runtime.KeepAlive(wp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -319,6 +337,7 @@ func (wp *WKPreferences) PlugInsEnabled() bool {
 
 // JavaScriptEnabled wraps the corresponding Objective-C method.
 func (wp *WKPreferences) JavaScriptEnabled() bool {
+	defer runtime.KeepAlive(wp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

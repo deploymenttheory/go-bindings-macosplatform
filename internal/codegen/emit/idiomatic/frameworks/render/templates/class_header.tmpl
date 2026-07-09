@@ -45,16 +45,20 @@ return x
 {{if .EmbedsRoot}}
 // Description returns the object's -description text.
 func ({{.RecvVar}} *{{.GoTypeName}}) Description() string {
+defer runtime.KeepAlive({{.RecvVar}})
 return rt.Description(objref.IDOf({{.RecvVar}}))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func ({{.RecvVar}} *{{.GoTypeName}}) IsEqual(other obj.Object) bool {
+defer runtime.KeepAlive({{.RecvVar}})
+defer runtime.KeepAlive(other)
 return rt.IsEqual(objref.IDOf({{.RecvVar}}), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func ({{.RecvVar}} *{{.GoTypeName}}) IsKind(className string) bool {
+defer runtime.KeepAlive({{.RecvVar}})
 return rt.IsKind(objref.IDOf({{.RecvVar}}), className)
 }
 
@@ -62,6 +66,7 @@ return rt.IsKind(objref.IDOf({{.RecvVar}}), className)
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func ({{.RecvVar}} *{{.GoTypeName}}) String() string {
+defer runtime.KeepAlive({{.RecvVar}})
 return rt.Description(objref.IDOf({{.RecvVar}}))
 }
 {{end}}

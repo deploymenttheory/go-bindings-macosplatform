@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewPhysicsJointFixed() *PhysicsJointFixed {
 
 // WithBodyA sets the first body connected by the joint.
 func (pjf *PhysicsJointFixed) WithBodyA(bodyA *PhysicsBody) *PhysicsJointFixed {
+	defer runtime.KeepAlive(bodyA)
 	objc.Send[objc.ID](objref.IDOf(pjf), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
 	return pjf
 }
 
 // WithBodyB sets the second body connected by the joint.
 func (pjf *PhysicsJointFixed) WithBodyB(bodyB *PhysicsBody) *PhysicsJointFixed {
+	defer runtime.KeepAlive(bodyB)
 	objc.Send[objc.ID](objref.IDOf(pjf), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
 	return pjf
 }

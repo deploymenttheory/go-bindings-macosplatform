@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -63,12 +64,14 @@ func (dauio *DiscoverAllUserIdentitiesOperation) WithUserIdentityDiscoveredBlock
 
 // WithConfiguration sets the operation’s configuration.
 func (dauio *DiscoverAllUserIdentitiesOperation) WithConfiguration(configuration *OperationConfiguration) *DiscoverAllUserIdentitiesOperation {
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(dauio), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return dauio
 }
 
 // WithGroup sets the operation’s group.
 func (dauio *DiscoverAllUserIdentitiesOperation) WithGroup(group *OperationGroup) *DiscoverAllUserIdentitiesOperation {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(dauio), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return dauio
 }
@@ -81,6 +84,7 @@ func (dauio *DiscoverAllUserIdentitiesOperation) WithLongLivedOperationWasPersis
 
 // WithContainer sets the operation's container.
 func (dauio *DiscoverAllUserIdentitiesOperation) WithContainer(container *Container) *DiscoverAllUserIdentitiesOperation {
+	defer runtime.KeepAlive(container)
 	objc.Send[objc.ID](objref.IDOf(dauio), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return dauio
 }
@@ -113,6 +117,7 @@ func (dauio *DiscoverAllUserIdentitiesOperation) WithTimeoutIntervalForResource(
 //
 // SetDiscoverAllUserIdentitiesCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (dauio *DiscoverAllUserIdentitiesOperation) SetDiscoverAllUserIdentitiesCompletionBlock(ctx context.Context) error {
+	defer runtime.KeepAlive(dauio)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error

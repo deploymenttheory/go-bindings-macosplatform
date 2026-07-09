@@ -5,6 +5,8 @@
 package gamekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func dialogControllerAdopt(id objc.ID) *DialogController {
 
 // Description returns the object's -description text.
 func (dc *DialogController) Description() string {
+	defer runtime.KeepAlive(dc)
 	return rt.Description(objref.IDOf(dc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dc *DialogController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dc *DialogController) IsKind(className string) bool {
+	defer runtime.KeepAlive(dc)
 	return rt.IsKind(objref.IDOf(dc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dc *DialogController) String() string {
+	defer runtime.KeepAlive(dc)
 	return rt.Description(objref.IDOf(dc))
 }
 
@@ -80,6 +87,7 @@ func NewDialogController() *DialogController {
 
 // WithParentWindow sets the window that displays the dashboard.
 func (dc *DialogController) WithParentWindow(parentWindow obj.Object) *DialogController {
+	defer runtime.KeepAlive(parentWindow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
 	})
@@ -88,6 +96,8 @@ func (dc *DialogController) WithParentWindow(parentWindow obj.Object) *DialogCon
 
 // PresentViewController presents the dashboard in the window.
 func (dc *DialogController) PresentViewController(viewController obj.Object) bool {
+	defer runtime.KeepAlive(dc)
+	defer runtime.KeepAlive(viewController)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -101,6 +111,8 @@ func (dc *DialogController) PresentViewController(viewController obj.Object) boo
 
 // Dismiss dismisses the dashboard.
 func (dc *DialogController) Dismiss(sender obj.Object) {
+	defer runtime.KeepAlive(dc)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("dismiss:"), objref.IDOf(sender))
 	})
@@ -109,6 +121,7 @@ func (dc *DialogController) Dismiss(sender obj.Object) {
 
 // ParentWindow returns the parent window.
 func (dc *DialogController) ParentWindow() obj.Object {
+	defer runtime.KeepAlive(dc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

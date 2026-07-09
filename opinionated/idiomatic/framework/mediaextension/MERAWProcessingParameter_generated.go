@@ -5,6 +5,8 @@
 package mediaextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func rAWProcessingParameterAdopt(id objc.ID) *RAWProcessingParameter {
 
 // Description returns the object's -description text.
 func (rpp *RAWProcessingParameter) Description() string {
+	defer runtime.KeepAlive(rpp)
 	return rt.Description(objref.IDOf(rpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rpp *RAWProcessingParameter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rpp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rpp *RAWProcessingParameter) IsKind(className string) bool {
+	defer runtime.KeepAlive(rpp)
 	return rt.IsKind(objref.IDOf(rpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rpp *RAWProcessingParameter) String() string {
+	defer runtime.KeepAlive(rpp)
 	return rt.Description(objref.IDOf(rpp))
 }
 
@@ -76,6 +83,7 @@ func (rpp *RAWProcessingParameter) WithEnabled(enabled bool) *RAWProcessingParam
 
 // Name returns a localized human-readable name for the parameter, suitable for displaying in application UI.
 func (rpp *RAWProcessingParameter) Name() string {
+	defer runtime.KeepAlive(rpp)
 	_r := objc.Send[objc.ID](objref.IDOf(rpp), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -85,6 +93,7 @@ func (rpp *RAWProcessingParameter) Name() string {
 
 // Key returns a unique key string identifying this parameter.
 func (rpp *RAWProcessingParameter) Key() string {
+	defer runtime.KeepAlive(rpp)
 	_r := objc.Send[objc.ID](objref.IDOf(rpp), objc.RegisterName("key"))
 	if _r == 0 {
 		return ""
@@ -94,6 +103,7 @@ func (rpp *RAWProcessingParameter) Key() string {
 
 // LongDescription returns a localized description of the parameter, suitable for displaying in a tool tip or similar explanatory UI.
 func (rpp *RAWProcessingParameter) LongDescription() string {
+	defer runtime.KeepAlive(rpp)
 	_r := objc.Send[objc.ID](objref.IDOf(rpp), objc.RegisterName("longDescription"))
 	if _r == 0 {
 		return ""
@@ -103,6 +113,7 @@ func (rpp *RAWProcessingParameter) LongDescription() string {
 
 // Enabled reports whether the parameter is enabled or disabled by the extension. This parameter can only be modified by the extension. From the application-facing interface, VTRAWProcessingSession, this is a read-only value which indicates whether the parameter should be greyed out and disabled in any UI being generated.
 func (rpp *RAWProcessingParameter) Enabled() bool {
+	defer runtime.KeepAlive(rpp)
 	_r := objc.Send[bool](objref.IDOf(rpp), objc.RegisterName("enabled"))
 	return _r
 }

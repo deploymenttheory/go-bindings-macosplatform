@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,6 +53,7 @@ func (dv *DOMCSSValue) WithCSSText(cssText string) *DOMCSSValue {
 
 // CSSText returns the CSS text.
 func (dv *DOMCSSValue) CSSText() string {
+	defer runtime.KeepAlive(dv)
 	_r := objc.Send[objc.ID](objref.IDOf(dv), objc.RegisterName("cssText"))
 	if _r == 0 {
 		return ""
@@ -60,6 +63,7 @@ func (dv *DOMCSSValue) CSSText() string {
 
 // CSSValueType returns the CSS value type.
 func (dv *DOMCSSValue) CSSValueType() uint16 {
+	defer runtime.KeepAlive(dv)
 	_r := objc.Send[uint16](objref.IDOf(dv), objc.RegisterName("cssValueType"))
 	return _r
 }

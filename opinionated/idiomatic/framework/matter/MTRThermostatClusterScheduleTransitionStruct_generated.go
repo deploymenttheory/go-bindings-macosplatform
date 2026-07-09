@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRThermostatClusterScheduleTransitionStructAdopt(id objc.ID) *MTRThermosta
 
 // Description returns the object's -description text.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) Description() string {
+	defer runtime.KeepAlive(mtcsts)
 	return rt.Description(objref.IDOf(mtcsts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtcsts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtcsts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtcsts)
 	return rt.IsKind(objref.IDOf(mtcsts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) String() string {
+	defer runtime.KeepAlive(mtcsts)
 	return rt.Description(objref.IDOf(mtcsts))
 }
 
@@ -72,72 +80,83 @@ func NewMTRThermostatClusterScheduleTransitionStruct() *MTRThermostatClusterSche
 
 // WithDayOfWeek sets the day of week.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) WithDayOfWeek(dayOfWeek obj.Object) *MTRThermostatClusterScheduleTransitionStruct {
+	defer runtime.KeepAlive(dayOfWeek)
 	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setDayOfWeek:"), objref.IDOf(dayOfWeek))
 	return mtcsts
 }
 
 // WithTransitionTime sets the transition time.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) WithTransitionTime(transitionTime obj.Object) *MTRThermostatClusterScheduleTransitionStruct {
+	defer runtime.KeepAlive(transitionTime)
 	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return mtcsts
 }
 
 // WithPresetHandle sets the preset handle.
-func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) WithPresetHandle(presetHandle obj.Object) *MTRThermostatClusterScheduleTransitionStruct {
-	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setPresetHandle:"), objref.IDOf(presetHandle))
+func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) WithPresetHandle(presetHandle []byte) *MTRThermostatClusterScheduleTransitionStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setPresetHandle:"), rt.BytesToNSData(presetHandle))
 	return mtcsts
 }
 
 // WithSystemMode sets the system mode.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) WithSystemMode(systemMode obj.Object) *MTRThermostatClusterScheduleTransitionStruct {
+	defer runtime.KeepAlive(systemMode)
 	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setSystemMode:"), objref.IDOf(systemMode))
 	return mtcsts
 }
 
 // WithCoolingSetpoint sets the cooling setpoint.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) WithCoolingSetpoint(coolingSetpoint obj.Object) *MTRThermostatClusterScheduleTransitionStruct {
+	defer runtime.KeepAlive(coolingSetpoint)
 	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setCoolingSetpoint:"), objref.IDOf(coolingSetpoint))
 	return mtcsts
 }
 
 // WithHeatingSetpoint sets the heating setpoint.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) WithHeatingSetpoint(heatingSetpoint obj.Object) *MTRThermostatClusterScheduleTransitionStruct {
+	defer runtime.KeepAlive(heatingSetpoint)
 	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setHeatingSetpoint:"), objref.IDOf(heatingSetpoint))
 	return mtcsts
 }
 
 // DayOfWeek returns the day of week.
-func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) DayOfWeek() obj.Object {
+func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) DayOfWeek() *foundation.Number {
+	defer runtime.KeepAlive(mtcsts)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("dayOfWeek"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TransitionTime returns the transition time.
-func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) TransitionTime() obj.Object {
+func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) TransitionTime() *foundation.Number {
+	defer runtime.KeepAlive(mtcsts)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("transitionTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // PresetHandle returns the preset handle.
-func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) PresetHandle() obj.Object {
+func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) PresetHandle() []byte {
+	defer runtime.KeepAlive(mtcsts)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("presetHandle"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // SystemMode returns the system mode.
-func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) SystemMode() obj.Object {
+func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) SystemMode() *foundation.Number {
+	defer runtime.KeepAlive(mtcsts)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("systemMode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // CoolingSetpoint returns the cooling setpoint.
-func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) CoolingSetpoint() obj.Object {
+func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) CoolingSetpoint() *foundation.Number {
+	defer runtime.KeepAlive(mtcsts)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("coolingSetpoint"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // HeatingSetpoint returns the heating setpoint.
-func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) HeatingSetpoint() obj.Object {
+func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) HeatingSetpoint() *foundation.Number {
+	defer runtime.KeepAlive(mtcsts)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("heatingSetpoint"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

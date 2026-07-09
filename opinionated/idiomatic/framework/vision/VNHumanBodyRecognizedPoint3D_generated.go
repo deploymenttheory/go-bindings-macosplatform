@@ -5,9 +5,11 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,9 +55,10 @@ func NewHumanBodyRecognizedPoint3D() *HumanBodyRecognizedPoint3D {
 }
 
 // ParentJoint returns the parent joint.
-func (hbrpd *HumanBodyRecognizedPoint3D) ParentJoint() obj.Object {
+func (hbrpd *HumanBodyRecognizedPoint3D) ParentJoint() *foundation.String {
+	defer runtime.KeepAlive(hbrpd)
 	_r := objc.Send[objc.ID](objref.IDOf(hbrpd), objc.RegisterName("parentJoint"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 var _ RecognizedPoint3DProvider = (*HumanBodyRecognizedPoint3D)(nil)

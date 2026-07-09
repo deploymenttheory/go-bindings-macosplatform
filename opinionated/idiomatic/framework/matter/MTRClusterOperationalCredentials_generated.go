@@ -6,11 +6,13 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,6 +51,9 @@ func mTRClusterOperationalCredentialsAdopt(id objc.ID) *MTRClusterOperationalCre
 
 // NewMTRClusterOperationalCredentialsWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterOperationalCredentialsWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterOperationalCredentials {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterOperationalCredentials")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterOperationalCredentialsAdopt(_id)
@@ -56,6 +61,8 @@ func NewMTRClusterOperationalCredentialsWithDeviceEndpointIDQueue(device *MTRDev
 
 // NewMTRClusterOperationalCredentialsWithDeviceEndpointQueue creates a new MTRClusterOperationalCredentials.
 func NewMTRClusterOperationalCredentialsWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterOperationalCredentials {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterOperationalCredentials")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterOperationalCredentialsAdopt(_id)
@@ -65,6 +72,9 @@ func NewMTRClusterOperationalCredentialsWithDeviceEndpointQueue(device *MTRDevic
 //
 // AttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) AttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterAttestationResponseParams, err error) {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalCredentialsClusterAttestationResponseParams
 		err error
@@ -90,6 +100,9 @@ func (mcoc *MTRClusterOperationalCredentials) AttestationRequestWithParamsExpect
 //
 // CertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) CertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterCertificateChainResponseParams, err error) {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalCredentialsClusterCertificateChainResponseParams
 		err error
@@ -115,6 +128,9 @@ func (mcoc *MTRClusterOperationalCredentials) CertificateChainRequestWithParamsE
 //
 // CSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterCSRResponseParams, err error) {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalCredentialsClusterCSRResponseParams
 		err error
@@ -140,6 +156,9 @@ func (mcoc *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValues
 //
 // AddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -165,6 +184,9 @@ func (mcoc *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpe
 //
 // UpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -190,6 +212,9 @@ func (mcoc *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesE
 //
 // UpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -215,6 +240,9 @@ func (mcoc *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpecte
 //
 // RemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -237,75 +265,100 @@ func (mcoc *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValu
 }
 
 // ReadAttributeNOCsWithParams reads attribute no cs with params.
-func (mcoc *MTRClusterOperationalCredentials) ReadAttributeNOCsWithParams(params *MTRReadParams) obj.Object {
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeNOCsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeNOCsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFabricsWithParams reads attribute fabrics with params.
-func (mcoc *MTRClusterOperationalCredentials) ReadAttributeFabricsWithParams(params *MTRReadParams) obj.Object {
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeFabricsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeFabricsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSupportedFabricsWithParams reads attribute supported fabrics with params.
-func (mcoc *MTRClusterOperationalCredentials) ReadAttributeSupportedFabricsWithParams(params *MTRReadParams) obj.Object {
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeSupportedFabricsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeSupportedFabricsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCommissionedFabricsWithParams reads attribute commissioned fabrics with params.
-func (mcoc *MTRClusterOperationalCredentials) ReadAttributeCommissionedFabricsWithParams(params *MTRReadParams) obj.Object {
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeCommissionedFabricsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeCommissionedFabricsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTrustedRootCertificatesWithParams reads attribute trusted root certificates with params.
-func (mcoc *MTRClusterOperationalCredentials) ReadAttributeTrustedRootCertificatesWithParams(params *MTRReadParams) obj.Object {
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeTrustedRootCertificatesWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeTrustedRootCertificatesWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCurrentFabricIndexWithParams reads attribute current fabric index with params.
-func (mcoc *MTRClusterOperationalCredentials) ReadAttributeCurrentFabricIndexWithParams(params *MTRReadParams) obj.Object {
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeCurrentFabricIndexWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeCurrentFabricIndexWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcoc *MTRClusterOperationalCredentials) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcoc *MTRClusterOperationalCredentials) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcoc *MTRClusterOperationalCredentials) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcoc *MTRClusterOperationalCredentials) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcoc *MTRClusterOperationalCredentials) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AttestationRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // AttestationRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) AttestationRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterAttestationResponseParams, err error) {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalCredentialsClusterAttestationResponseParams
 		err error
@@ -331,6 +384,9 @@ func (mcoc *MTRClusterOperationalCredentials) AttestationRequestWithParamsExpect
 //
 // CertificateChainRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) CertificateChainRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterCertificateChainResponseParams, err error) {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalCredentialsClusterCertificateChainResponseParams
 		err error
@@ -356,6 +412,9 @@ func (mcoc *MTRClusterOperationalCredentials) CertificateChainRequestWithParamsE
 //
 // CSRRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterCSRResponseParams, err error) {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalCredentialsClusterCSRResponseParams
 		err error
@@ -381,6 +440,9 @@ func (mcoc *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValues
 //
 // AddNOCWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -406,6 +468,9 @@ func (mcoc *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpe
 //
 // UpdateNOCWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -431,6 +496,9 @@ func (mcoc *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesE
 //
 // UpdateFabricLabelWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -456,6 +524,9 @@ func (mcoc *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpecte
 //
 // RemoveFabricWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+	defer runtime.KeepAlive(mcoc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error

@@ -5,7 +5,11 @@
 package coremotion
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +51,27 @@ func pedometerDataAdopt(id objc.ID) *PedometerData {
 
 // Description returns the object's -description text.
 func (pd *PedometerData) Description() string {
+	defer runtime.KeepAlive(pd)
 	return rt.Description(objref.IDOf(pd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pd *PedometerData) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pd *PedometerData) IsKind(className string) bool {
+	defer runtime.KeepAlive(pd)
 	return rt.IsKind(objref.IDOf(pd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pd *PedometerData) String() string {
+	defer runtime.KeepAlive(pd)
 	return rt.Description(objref.IDOf(pd))
 }
 
@@ -73,37 +82,43 @@ func NewPedometerData() *PedometerData {
 }
 
 // StartDate returns the start date.
-func (pd *PedometerData) StartDate() obj.Object {
+func (pd *PedometerData) StartDate() time.Time {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // EndDate returns the end date.
-func (pd *PedometerData) EndDate() obj.Object {
+func (pd *PedometerData) EndDate() time.Time {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("endDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // NumberOfSteps returns the number of steps.
-func (pd *PedometerData) NumberOfSteps() obj.Object {
+func (pd *PedometerData) NumberOfSteps() *foundation.Number {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("numberOfSteps"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Distance returns the distance.
-func (pd *PedometerData) Distance() obj.Object {
+func (pd *PedometerData) Distance() *foundation.Number {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("distance"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // FloorsAscended returns the floors ascended.
-func (pd *PedometerData) FloorsAscended() obj.Object {
+func (pd *PedometerData) FloorsAscended() *foundation.Number {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("floorsAscended"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // FloorsDescended returns the floors descended.
-func (pd *PedometerData) FloorsDescended() obj.Object {
+func (pd *PedometerData) FloorsDescended() *foundation.Number {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("floorsDescended"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

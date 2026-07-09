@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRSwitchClusterMultiPressOngoingEventAdopt(id objc.ID) *MTRSwitchClusterMu
 
 // Description returns the object's -description text.
 func (mscmpoe *MTRSwitchClusterMultiPressOngoingEvent) Description() string {
+	defer runtime.KeepAlive(mscmpoe)
 	return rt.Description(objref.IDOf(mscmpoe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mscmpoe *MTRSwitchClusterMultiPressOngoingEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mscmpoe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mscmpoe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mscmpoe *MTRSwitchClusterMultiPressOngoingEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mscmpoe)
 	return rt.IsKind(objref.IDOf(mscmpoe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mscmpoe *MTRSwitchClusterMultiPressOngoingEvent) String() string {
+	defer runtime.KeepAlive(mscmpoe)
 	return rt.Description(objref.IDOf(mscmpoe))
 }
 
@@ -72,24 +80,28 @@ func NewMTRSwitchClusterMultiPressOngoingEvent() *MTRSwitchClusterMultiPressOngo
 
 // WithNewPosition sets the new position.
 func (mscmpoe *MTRSwitchClusterMultiPressOngoingEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterMultiPressOngoingEvent {
+	defer runtime.KeepAlive(newPosition)
 	objc.Send[objc.ID](objref.IDOf(mscmpoe), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
 	return mscmpoe
 }
 
 // WithCurrentNumberOfPressesCounted sets the current number of presses counted.
 func (mscmpoe *MTRSwitchClusterMultiPressOngoingEvent) WithCurrentNumberOfPressesCounted(currentNumberOfPressesCounted obj.Object) *MTRSwitchClusterMultiPressOngoingEvent {
+	defer runtime.KeepAlive(currentNumberOfPressesCounted)
 	objc.Send[objc.ID](objref.IDOf(mscmpoe), objc.RegisterName("setCurrentNumberOfPressesCounted:"), objref.IDOf(currentNumberOfPressesCounted))
 	return mscmpoe
 }
 
 // NewPosition returns the new position.
-func (mscmpoe *MTRSwitchClusterMultiPressOngoingEvent) NewPosition() obj.Object {
+func (mscmpoe *MTRSwitchClusterMultiPressOngoingEvent) NewPosition() *foundation.Number {
+	defer runtime.KeepAlive(mscmpoe)
 	_r := objc.Send[objc.ID](objref.IDOf(mscmpoe), objc.RegisterName("getNewPosition"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // CurrentNumberOfPressesCounted returns the current number of presses counted.
-func (mscmpoe *MTRSwitchClusterMultiPressOngoingEvent) CurrentNumberOfPressesCounted() obj.Object {
+func (mscmpoe *MTRSwitchClusterMultiPressOngoingEvent) CurrentNumberOfPressesCounted() *foundation.Number {
+	defer runtime.KeepAlive(mscmpoe)
 	_r := objc.Send[objc.ID](objref.IDOf(mscmpoe), objc.RegisterName("currentNumberOfPressesCounted"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

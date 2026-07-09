@@ -5,10 +5,13 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,6 +64,7 @@ func NewSearchToolbarItem() *SearchToolbarItem {
 
 // WithSearchField sets the search field inside the toolbar item.
 func (sti *SearchToolbarItem) WithSearchField(searchField *SearchField) *SearchToolbarItem {
+	defer runtime.KeepAlive(searchField)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setSearchField:"), objref.IDOf(searchField))
 	})
@@ -100,9 +104,9 @@ func (sti *SearchToolbarItem) WithPaletteLabel(paletteLabel string) *SearchToolb
 }
 
 // WithPossibleLabels sets the set of labels that the item might display.
-func (sti *SearchToolbarItem) WithPossibleLabels(possibleLabels obj.Object) *SearchToolbarItem {
+func (sti *SearchToolbarItem) WithPossibleLabels(possibleLabels []string) *SearchToolbarItem {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setPossibleLabels:"), rt.SliceToNSSet(possibleLabels, func(_v string) objc.ID { return purego.NSString(_v) }))
 	})
 	return sti
 }
@@ -117,6 +121,7 @@ func (sti *SearchToolbarItem) WithToolTip(toolTip string) *SearchToolbarItem {
 
 // WithMenuFormRepresentation sets the menu item to use when the toolbar item is in the overflow menu.
 func (sti *SearchToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *SearchToolbarItem {
+	defer runtime.KeepAlive(menuFormRepresentation)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
 	})
@@ -133,6 +138,7 @@ func (sti *SearchToolbarItem) WithTag(tag int) *SearchToolbarItem {
 
 // WithTarget sets the object that defines the action method the toolbar item calls when clicked.
 func (sti *SearchToolbarItem) WithTarget(target obj.Object) *SearchToolbarItem {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -149,6 +155,7 @@ func (sti *SearchToolbarItem) WithEnabled(enabled bool) *SearchToolbarItem {
 
 // WithImage sets the image to display for the toolbar item.
 func (sti *SearchToolbarItem) WithImage(image *Image) *SearchToolbarItem {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -173,6 +180,7 @@ func (sti *SearchToolbarItem) WithBordered(bordered bool) *SearchToolbarItem {
 
 // WithBackgroundTintColor sets the background tint color.
 func (sti *SearchToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *SearchToolbarItem {
+	defer runtime.KeepAlive(backgroundTintColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
 	})
@@ -197,6 +205,7 @@ func (sti *SearchToolbarItem) WithNavigational(navigational bool) *SearchToolbar
 
 // WithView sets the custom view you use to draw the toolbar item.
 func (sti *SearchToolbarItem) WithView(view ViewProvider) *SearchToolbarItem {
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setView:"), objref.IDOf(view))
 	})
@@ -237,6 +246,7 @@ func (sti *SearchToolbarItem) WithVisibilityPriority(visibilityPriority int) *Se
 
 // WithBadge sets a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (sti *SearchToolbarItem) WithBadge(badge *ItemBadge) *SearchToolbarItem {
+	defer runtime.KeepAlive(badge)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setBadge:"), objref.IDOf(badge))
 	})
@@ -253,6 +263,7 @@ func (sti *SearchToolbarItem) WithAutovalidates(autovalidates bool) *SearchToolb
 
 // BeginSearchInteraction starts a search interaction and moves the keyboard focus to the search field.
 func (sti *SearchToolbarItem) BeginSearchInteraction() {
+	defer runtime.KeepAlive(sti)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("beginSearchInteraction"))
 	})
@@ -261,6 +272,7 @@ func (sti *SearchToolbarItem) BeginSearchInteraction() {
 
 // EndSearchInteraction ends a search interaction by giving up the first responder and adjusting the size of the search field to the available width for the toolbar item if necessary.
 func (sti *SearchToolbarItem) EndSearchInteraction() {
+	defer runtime.KeepAlive(sti)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("endSearchInteraction"))
 	})
@@ -269,6 +281,7 @@ func (sti *SearchToolbarItem) EndSearchInteraction() {
 
 // SearchField returns an `NSSearchField` displayed in the toolbar item. While inside the toolbar item, the field properties and layout constraints are managed by the item. The field should be configured before assigned. The width constraint for the field could be updated after assigned. When set to nil, will reset to a search field with the default configuration.
 func (sti *SearchToolbarItem) SearchField() *SearchField {
+	defer runtime.KeepAlive(sti)
 	var _mainthread0 *SearchField
 	purego.Main(func() {
 		_mainthread0 = func() *SearchField {
@@ -282,6 +295,7 @@ func (sti *SearchToolbarItem) SearchField() *SearchField {
 
 // ResignsFirstResponderWithCancel reports whether when true, the cancel button in the field resigns the first responder status of the search field as clearing the contents. The default is true.
 func (sti *SearchToolbarItem) ResignsFirstResponderWithCancel() bool {
+	defer runtime.KeepAlive(sti)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -295,6 +309,7 @@ func (sti *SearchToolbarItem) ResignsFirstResponderWithCancel() bool {
 
 // PreferredWidthForSearchField returns the preferred width for the search field. This value is used to configure the search field width whenever it gets the keyboard focus. If specifying custom width constraints to the search field, they should not conflict with this value.
 func (sti *SearchToolbarItem) PreferredWidthForSearchField() float64 {
+	defer runtime.KeepAlive(sti)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {

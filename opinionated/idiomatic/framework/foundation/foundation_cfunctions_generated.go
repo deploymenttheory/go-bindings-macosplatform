@@ -111,12 +111,12 @@ func NSCopyHashTableWithZone(table obj.Object, zone unsafe.Pointer) obj.Object {
 var _fnNSCopyMemoryPages func(unsafe.Pointer, unsafe.Pointer, int)
 
 // NSCopyMemoryPages calls the Foundation framework function NSCopyMemoryPages.
-func NSCopyMemoryPages(source unsafe.Pointer, dest unsafe.Pointer, bytes_ int) {
+func NSCopyMemoryPages(source unsafe.Pointer, dest unsafe.Pointer, data int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSCopyMemoryPages == nil {
 		ebipurego.RegisterLibFunc(&_fnNSCopyMemoryPages, _lib, "NSCopyMemoryPages")
 	}
-	_fnNSCopyMemoryPages(source, dest, bytes_)
+	_fnNSCopyMemoryPages(source, dest, data)
 }
 
 var _fnNSCopyObject func(objc.ID, int, unsafe.Pointer) objc.ID
@@ -156,12 +156,12 @@ func NSCountMapTable(table obj.Object) int {
 var _fnNSDeallocateMemoryPages func(unsafe.Pointer, int)
 
 // NSDeallocateMemoryPages calls the Foundation framework function NSDeallocateMemoryPages.
-func NSDeallocateMemoryPages(ptr unsafe.Pointer, bytes_ int) {
+func NSDeallocateMemoryPages(ptr unsafe.Pointer, data int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDeallocateMemoryPages == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDeallocateMemoryPages, _lib, "NSDeallocateMemoryPages")
 	}
-	_fnNSDeallocateMemoryPages(ptr, bytes_)
+	_fnNSDeallocateMemoryPages(ptr, data)
 }
 
 var _fnNSDeallocateObject func(objc.ID)
@@ -821,23 +821,23 @@ func NSResetMapTable(table obj.Object) {
 var _fnNSRoundDownToMultipleOfPageSize func(int) int
 
 // NSRoundDownToMultipleOfPageSize calls the Foundation framework function NSRoundDownToMultipleOfPageSize.
-func NSRoundDownToMultipleOfPageSize(bytes_ int) int {
+func NSRoundDownToMultipleOfPageSize(data int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSRoundDownToMultipleOfPageSize == nil {
 		ebipurego.RegisterLibFunc(&_fnNSRoundDownToMultipleOfPageSize, _lib, "NSRoundDownToMultipleOfPageSize")
 	}
-	return _fnNSRoundDownToMultipleOfPageSize(bytes_)
+	return _fnNSRoundDownToMultipleOfPageSize(data)
 }
 
 var _fnNSRoundUpToMultipleOfPageSize func(int) int
 
 // NSRoundUpToMultipleOfPageSize calls the Foundation framework function NSRoundUpToMultipleOfPageSize.
-func NSRoundUpToMultipleOfPageSize(bytes_ int) int {
+func NSRoundUpToMultipleOfPageSize(data int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSRoundUpToMultipleOfPageSize == nil {
 		ebipurego.RegisterLibFunc(&_fnNSRoundUpToMultipleOfPageSize, _lib, "NSRoundUpToMultipleOfPageSize")
 	}
-	return _fnNSRoundUpToMultipleOfPageSize(bytes_)
+	return _fnNSRoundUpToMultipleOfPageSize(data)
 }
 
 var _fnNSSearchPathForDirectoriesInDomains func(SearchPathDirectory, SearchPathDomainMask, bool) objc.ID
@@ -1321,10 +1321,10 @@ func NXReadNSObjectFromCoder(decoder *Coder) *Object {
 var _fnObjectGetClassName func(objc.ID) string
 
 // ObjectGetClassName calls the Foundation framework function object_getClassName.
-func ObjectGetClassName(obj_ obj.Object) string {
+func ObjectGetClassName(object obj.Object) string {
 	_loadOnce.Do(_loadLibrary)
 	if _fnObjectGetClassName == nil {
 		ebipurego.RegisterLibFunc(&_fnObjectGetClassName, _lib, "object_getClassName")
 	}
-	return _fnObjectGetClassName(objref.IDOf(obj_))
+	return _fnObjectGetClassName(objref.IDOf(object))
 }

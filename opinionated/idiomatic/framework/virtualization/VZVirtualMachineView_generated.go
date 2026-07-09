@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func virtualMachineViewAdopt(id objc.ID) *VirtualMachineView {
 
 // Description returns the object's -description text.
 func (vmv *VirtualMachineView) Description() string {
+	defer runtime.KeepAlive(vmv)
 	return rt.Description(objref.IDOf(vmv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vmv *VirtualMachineView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vmv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vmv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vmv *VirtualMachineView) IsKind(className string) bool {
+	defer runtime.KeepAlive(vmv)
 	return rt.IsKind(objref.IDOf(vmv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vmv *VirtualMachineView) String() string {
+	defer runtime.KeepAlive(vmv)
 	return rt.Description(objref.IDOf(vmv))
 }
 
@@ -80,6 +87,7 @@ func NewVirtualMachineView() *VirtualMachineView {
 
 // WithVirtualMachine sets the VM to display in the view.
 func (vmv *VirtualMachineView) WithVirtualMachine(virtualMachine *VirtualMachine) *VirtualMachineView {
+	defer runtime.KeepAlive(virtualMachine)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vmv), objc.RegisterName("setVirtualMachine:"), objref.IDOf(virtualMachine))
 	})
@@ -104,6 +112,7 @@ func (vmv *VirtualMachineView) WithAutomaticallyReconfiguresDisplay(automaticall
 
 // VirtualMachine returns the virtual machine to display in the view.
 func (vmv *VirtualMachineView) VirtualMachine() *VirtualMachine {
+	defer runtime.KeepAlive(vmv)
 	var _mainthread0 *VirtualMachine
 	purego.Main(func() {
 		_mainthread0 = func() *VirtualMachine {
@@ -117,6 +126,7 @@ func (vmv *VirtualMachineView) VirtualMachine() *VirtualMachine {
 
 // CapturesSystemKeys reports whether certain system hot keys should be sent to the guest instead of the host. Defaults to false.
 func (vmv *VirtualMachineView) CapturesSystemKeys() bool {
+	defer runtime.KeepAlive(vmv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -130,6 +140,7 @@ func (vmv *VirtualMachineView) CapturesSystemKeys() bool {
 
 // AutomaticallyReconfiguresDisplay reports whether automatically reconfigures the graphics display associated with this view with respect to view changes. Defaults to false. Automatically resize or reconfigure this graphics display when the view properties update. For example, resizing the display when the view has a live resize operation. When enabled, the graphics display will automatically be reconfigured to match the host display environment. This property can only be set on a single VZVirtualMachineView targeting a particular VZGraphicsDisplay at a time. If multiple VZVirtualMachineViews targeting the same VZGraphicsDisplay enable this property, only one view will respect the property, and the other view will have had the property disabled.
 func (vmv *VirtualMachineView) AutomaticallyReconfiguresDisplay() bool {
+	defer runtime.KeepAlive(vmv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

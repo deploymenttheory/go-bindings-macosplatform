@@ -7,7 +7,7 @@ package corewlan
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,8 +53,8 @@ func NewMutableNetworkProfile() *MutableNetworkProfile {
 }
 
 // WithSsidData sets the service set identifier (SSID).
-func (mnp *MutableNetworkProfile) WithSsidData(ssidData obj.Object) *MutableNetworkProfile {
-	objc.Send[objc.ID](objref.IDOf(mnp), objc.RegisterName("setSsidData:"), objref.IDOf(ssidData))
+func (mnp *MutableNetworkProfile) WithSsidData(ssidData []byte) *MutableNetworkProfile {
+	objc.Send[objc.ID](objref.IDOf(mnp), objc.RegisterName("setSsidData:"), rt.BytesToNSData(ssidData))
 	return mnp
 }
 

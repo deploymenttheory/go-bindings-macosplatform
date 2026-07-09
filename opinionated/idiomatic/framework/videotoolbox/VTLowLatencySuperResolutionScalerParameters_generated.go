@@ -5,6 +5,8 @@
 package videotoolbox
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,34 @@ func lowLatencySuperResolutionScalerParametersAdopt(id objc.ID) *LowLatencySuper
 
 // Description returns the object's -description text.
 func (llsrsp *LowLatencySuperResolutionScalerParameters) Description() string {
+	defer runtime.KeepAlive(llsrsp)
 	return rt.Description(objref.IDOf(llsrsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (llsrsp *LowLatencySuperResolutionScalerParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(llsrsp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(llsrsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (llsrsp *LowLatencySuperResolutionScalerParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(llsrsp)
 	return rt.IsKind(objref.IDOf(llsrsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (llsrsp *LowLatencySuperResolutionScalerParameters) String() string {
+	defer runtime.KeepAlive(llsrsp)
 	return rt.Description(objref.IDOf(llsrsp))
 }
 
 // NewLowLatencySuperResolutionScalerParametersWithSourceFrameDestinationFrame creates a new low-latency, super-resolution scaler parameters object.
 func NewLowLatencySuperResolutionScalerParametersWithSourceFrameDestinationFrame(sourceFrame *FrameProcessorFrame, destinationFrame *FrameProcessorFrame) *LowLatencySuperResolutionScalerParameters {
+	defer runtime.KeepAlive(sourceFrame)
+	defer runtime.KeepAlive(destinationFrame)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VTLowLatencySuperResolutionScalerParameters")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:destinationFrame:"), objref.IDOf(sourceFrame), objref.IDOf(destinationFrame))
 	return lowLatencySuperResolutionScalerParametersAdopt(_id)
@@ -75,12 +84,14 @@ func NewLowLatencySuperResolutionScalerParametersWithSourceFrameDestinationFrame
 
 // SourceFrame returns current source frame, which must be non `nil`.
 func (llsrsp *LowLatencySuperResolutionScalerParameters) SourceFrame() *FrameProcessorFrame {
+	defer runtime.KeepAlive(llsrsp)
 	_r := objc.Send[objc.ID](objref.IDOf(llsrsp), objc.RegisterName("sourceFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
 // DestinationFrame returns destination frame that contains user-allocated pixel buffer that receives the scaled processor output.
 func (llsrsp *LowLatencySuperResolutionScalerParameters) DestinationFrame() *FrameProcessorFrame {
+	defer runtime.KeepAlive(llsrsp)
 	_r := objc.Send[objc.ID](objref.IDOf(llsrsp), objc.RegisterName("destinationFrame"))
 	return FrameProcessorFrameFromID(_r)
 }

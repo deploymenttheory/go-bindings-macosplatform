@@ -5,6 +5,7 @@
 package automator
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func workspaceAdopt(id objc.ID) *Workspace {
 
 // Description returns the object's -description text.
 func (w *Workspace) Description() string {
+	defer runtime.KeepAlive(w)
 	return rt.Description(objref.IDOf(w))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (w *Workspace) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(w), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (w *Workspace) IsKind(className string) bool {
+	defer runtime.KeepAlive(w)
 	return rt.IsKind(objref.IDOf(w), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (w *Workspace) String() string {
+	defer runtime.KeepAlive(w)
 	return rt.Description(objref.IDOf(w))
 }
 
@@ -75,8 +81,10 @@ func NewWorkspace() *Workspace {
 	return workspaceAdopt(_id)
 }
 
-// RunWorkflowAtPathWithInputError loads and runs the specified workflow file.
-func (w *Workspace) RunWorkflowAtPathWithInputError(path string, input obj.Object) (result obj.Object, err error) {
+// RunWorkflowAtPathWithInput loads and runs the specified workflow file.
+func (w *Workspace) RunWorkflowAtPathWithInput(path string, input obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(input)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("runWorkflowAtPath:withInput:error:"), purego.NSString(path), objref.IDOf(input), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

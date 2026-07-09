@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -69,6 +72,7 @@ func (tvc *TabViewController) WithTabStyle(tabStyle TabViewControllerTabStyle) *
 
 // WithTabView sets the tab view that manages the views of the interface.
 func (tvc *TabViewController) WithTabView(tabView *TabView) *TabViewController {
+	defer runtime.KeepAlive(tabView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tvc), objc.RegisterName("setTabView:"), objref.IDOf(tabView))
 	})
@@ -110,6 +114,7 @@ func (tvc *TabViewController) WithSelectedTabViewItemIndex(selectedTabViewItemIn
 
 // WithRepresentedObject sets the object whose value is presented in the receiver’s primary view.
 func (tvc *TabViewController) WithRepresentedObject(representedObject obj.Object) *TabViewController {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tvc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -126,6 +131,7 @@ func (tvc *TabViewController) WithTitle(title string) *TabViewController {
 
 // WithView sets the view controller’s primary view.
 func (tvc *TabViewController) WithView(view ViewProvider) *TabViewController {
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tvc), objc.RegisterName("setView:"), objref.IDOf(view))
 	})
@@ -151,6 +157,7 @@ func (tvc *TabViewController) WithChildViewControllers(items ...ViewControllerPr
 
 // WithSourceItemView sets the source item view.
 func (tvc *TabViewController) WithSourceItemView(sourceItemView ViewProvider) *TabViewController {
+	defer runtime.KeepAlive(sourceItemView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tvc), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
 	})
@@ -167,6 +174,7 @@ func (tvc *TabViewController) WithPreferredScreenOrigin(preferredScreenOrigin co
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (tvc *TabViewController) WithNextResponder(nextResponder ResponderProvider) *TabViewController {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tvc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -175,6 +183,7 @@ func (tvc *TabViewController) WithNextResponder(nextResponder ResponderProvider)
 
 // WithMenu sets returns the responder’s menu.
 func (tvc *TabViewController) WithMenu(menu *Menu) *TabViewController {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tvc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -183,6 +192,7 @@ func (tvc *TabViewController) WithMenu(menu *Menu) *TabViewController {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (tvc *TabViewController) WithUserActivity(userActivity obj.Object) *TabViewController {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tvc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -191,6 +201,7 @@ func (tvc *TabViewController) WithUserActivity(userActivity obj.Object) *TabView
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (tvc *TabViewController) WithTouchBar(touchBar *TouchBar) *TabViewController {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tvc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -199,6 +210,8 @@ func (tvc *TabViewController) WithTouchBar(touchBar *TouchBar) *TabViewControlle
 
 // AddTabViewItem adds the specified tab to the end of the tab view controller’s list of tabs.
 func (tvc *TabViewController) AddTabViewItem(tabViewItem *TabViewItem) {
+	defer runtime.KeepAlive(tvc)
+	defer runtime.KeepAlive(tabViewItem)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tvc), objc.RegisterName("addTabViewItem:"), objref.IDOf(tabViewItem))
 	})
@@ -207,6 +220,8 @@ func (tvc *TabViewController) AddTabViewItem(tabViewItem *TabViewItem) {
 
 // InsertTabViewItemAtIndex inserts a tab view into the tab view controller’s list of tabs.
 func (tvc *TabViewController) InsertTabViewItemAtIndex(tabViewItem *TabViewItem, index int) {
+	defer runtime.KeepAlive(tvc)
+	defer runtime.KeepAlive(tabViewItem)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tvc), objc.RegisterName("insertTabViewItem:atIndex:"), objref.IDOf(tabViewItem), index)
 	})
@@ -215,6 +230,8 @@ func (tvc *TabViewController) InsertTabViewItemAtIndex(tabViewItem *TabViewItem,
 
 // RemoveTabViewItem removes the specified tab view item from the tab view controller.
 func (tvc *TabViewController) RemoveTabViewItem(tabViewItem *TabViewItem) {
+	defer runtime.KeepAlive(tvc)
+	defer runtime.KeepAlive(tabViewItem)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tvc), objc.RegisterName("removeTabViewItem:"), objref.IDOf(tabViewItem))
 	})
@@ -223,6 +240,8 @@ func (tvc *TabViewController) RemoveTabViewItem(tabViewItem *TabViewItem) {
 
 // TabViewItemForViewController returns the tab view item for the specified child view controller.
 func (tvc *TabViewController) TabViewItemForViewController(viewController *ViewController) *TabViewItem {
+	defer runtime.KeepAlive(tvc)
+	defer runtime.KeepAlive(viewController)
 	var _mainthread0 *TabViewItem
 	purego.Main(func() {
 		_mainthread0 = func() *TabViewItem {
@@ -236,6 +255,9 @@ func (tvc *TabViewController) TabViewItemForViewController(viewController *ViewC
 
 // TabViewWillSelectTabViewItem informs the tab view controller that the specified tab is about to be selected.
 func (tvc *TabViewController) TabViewWillSelectTabViewItem(tabView *TabView, tabViewItem *TabViewItem) {
+	defer runtime.KeepAlive(tvc)
+	defer runtime.KeepAlive(tabView)
+	defer runtime.KeepAlive(tabViewItem)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tvc), objc.RegisterName("tabView:willSelectTabViewItem:"), objref.IDOf(tabView), objref.IDOf(tabViewItem))
 	})
@@ -244,6 +266,9 @@ func (tvc *TabViewController) TabViewWillSelectTabViewItem(tabView *TabView, tab
 
 // TabViewDidSelectTabViewItem informs the tab view controller that the specified tab was selected.
 func (tvc *TabViewController) TabViewDidSelectTabViewItem(tabView *TabView, tabViewItem *TabViewItem) {
+	defer runtime.KeepAlive(tvc)
+	defer runtime.KeepAlive(tabView)
+	defer runtime.KeepAlive(tabViewItem)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tvc), objc.RegisterName("tabView:didSelectTabViewItem:"), objref.IDOf(tabView), objref.IDOf(tabViewItem))
 	})
@@ -252,6 +277,9 @@ func (tvc *TabViewController) TabViewDidSelectTabViewItem(tabView *TabView, tabV
 
 // TabViewShouldSelectTabViewItem asks the tab view controller if the specified tab should be selected.
 func (tvc *TabViewController) TabViewShouldSelectTabViewItem(tabView *TabView, tabViewItem *TabViewItem) bool {
+	defer runtime.KeepAlive(tvc)
+	defer runtime.KeepAlive(tabView)
+	defer runtime.KeepAlive(tabViewItem)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -265,6 +293,9 @@ func (tvc *TabViewController) TabViewShouldSelectTabViewItem(tabView *TabView, t
 
 // ToolbarItemForItemIdentifierWillBeInsertedIntoToolbar returns the toolbar item for the specified identifier.
 func (tvc *TabViewController) ToolbarItemForItemIdentifierWillBeInsertedIntoToolbar(toolbar *Toolbar, itemIdentifier obj.Object, flag bool) *ToolbarItem {
+	defer runtime.KeepAlive(tvc)
+	defer runtime.KeepAlive(toolbar)
+	defer runtime.KeepAlive(itemIdentifier)
 	var _mainthread0 *ToolbarItem
 	purego.Main(func() {
 		_mainthread0 = func() *ToolbarItem {
@@ -277,12 +308,14 @@ func (tvc *TabViewController) ToolbarItemForItemIdentifierWillBeInsertedIntoTool
 }
 
 // ToolbarDefaultItemIdentifiers returns the array of identifier strings for the default toolbar items.
-func (tvc *TabViewController) ToolbarDefaultItemIdentifiers(toolbar *Toolbar) []obj.Object {
-	var _mainthread0 []obj.Object
+func (tvc *TabViewController) ToolbarDefaultItemIdentifiers(toolbar *Toolbar) []*foundation.String {
+	defer runtime.KeepAlive(tvc)
+	defer runtime.KeepAlive(toolbar)
+	var _mainthread0 []*foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() []obj.Object {
+		_mainthread0 = func() []*foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(tvc), objc.RegisterName("toolbarDefaultItemIdentifiers:"), objref.IDOf(toolbar))
-			return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+			return purego.NSArrayToSlice(_r, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
 		}()
 	})
 	return _mainthread0
@@ -290,12 +323,14 @@ func (tvc *TabViewController) ToolbarDefaultItemIdentifiers(toolbar *Toolbar) []
 }
 
 // ToolbarAllowedItemIdentifiers returns the array of identifier strings for the allowed toolbar items.
-func (tvc *TabViewController) ToolbarAllowedItemIdentifiers(toolbar *Toolbar) []obj.Object {
-	var _mainthread0 []obj.Object
+func (tvc *TabViewController) ToolbarAllowedItemIdentifiers(toolbar *Toolbar) []*foundation.String {
+	defer runtime.KeepAlive(tvc)
+	defer runtime.KeepAlive(toolbar)
+	var _mainthread0 []*foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() []obj.Object {
+		_mainthread0 = func() []*foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(tvc), objc.RegisterName("toolbarAllowedItemIdentifiers:"), objref.IDOf(toolbar))
-			return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+			return purego.NSArrayToSlice(_r, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
 		}()
 	})
 	return _mainthread0
@@ -303,12 +338,14 @@ func (tvc *TabViewController) ToolbarAllowedItemIdentifiers(toolbar *Toolbar) []
 }
 
 // ToolbarSelectableItemIdentifiers returns the array of identifier strings for the selectable toolbar items
-func (tvc *TabViewController) ToolbarSelectableItemIdentifiers(toolbar *Toolbar) []obj.Object {
-	var _mainthread0 []obj.Object
+func (tvc *TabViewController) ToolbarSelectableItemIdentifiers(toolbar *Toolbar) []*foundation.String {
+	defer runtime.KeepAlive(tvc)
+	defer runtime.KeepAlive(toolbar)
+	var _mainthread0 []*foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() []obj.Object {
+		_mainthread0 = func() []*foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(tvc), objc.RegisterName("toolbarSelectableItemIdentifiers:"), objref.IDOf(toolbar))
-			return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+			return purego.NSArrayToSlice(_r, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
 		}()
 	})
 	return _mainthread0
@@ -317,6 +354,7 @@ func (tvc *TabViewController) ToolbarSelectableItemIdentifiers(toolbar *Toolbar)
 
 // TabStyle returns the style that this NSTabViewController displays its UI as. Defaults to \c NSTabViewControllerTabStyleSegmentedControlOnTop.
 func (tvc *TabViewController) TabStyle() TabViewControllerTabStyle {
+	defer runtime.KeepAlive(tvc)
 	var _mainthread0 TabViewControllerTabStyle
 	purego.Main(func() {
 		_mainthread0 = func() TabViewControllerTabStyle {
@@ -330,6 +368,7 @@ func (tvc *TabViewController) TabStyle() TabViewControllerTabStyle {
 
 // TabView returns access to the tab view that the controller is controlling. To provide a custom NSTabView, assign the value anytime before \c self.viewLoaded is \c YES. Querying the value will create it on-demand, if needed. Check \c self.viewLoaded before querying the value to avoid prematurely creating the view. Note that the \c -tabView may not be equal to the \c viewController.view. Properties such as the tabStyle can be directly manipulated, but calling methods that add and remove tabViewItems or changing the delegate is not allowed. The NSTabViewController will be made the delegate of the NSTabView. Internally, the NSTabView is always used to switch between displayed childViewControllers, regardless of the style displayed.
 func (tvc *TabViewController) TabView() *TabView {
+	defer runtime.KeepAlive(tvc)
 	var _mainthread0 *TabView
 	purego.Main(func() {
 		_mainthread0 = func() *TabView {
@@ -343,6 +382,7 @@ func (tvc *TabViewController) TabView() *TabView {
 
 // TransitionOptions returns this defines how NSTabViewController transitions from one view to another. Transitions go through [self transitionFromViewController:toViewController:options:completionHandler:]. The default value is \c NSViewControllerTransitionCrossfade|NSViewControllerTransitionAllowUserInteraction.
 func (tvc *TabViewController) TransitionOptions() ViewControllerTransitionOptions {
+	defer runtime.KeepAlive(tvc)
 	var _mainthread0 ViewControllerTransitionOptions
 	purego.Main(func() {
 		_mainthread0 = func() ViewControllerTransitionOptions {
@@ -356,6 +396,7 @@ func (tvc *TabViewController) TransitionOptions() ViewControllerTransitionOption
 
 // CanPropagateSelectedChildViewControllerTitle reports whether if true and the receiving NSTabViewController has a nil title, \c -title will return its selected child ViewController's title. If false, it will continue to return nil. The default value is \c true.
 func (tvc *TabViewController) CanPropagateSelectedChildViewControllerTitle() bool {
+	defer runtime.KeepAlive(tvc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -371,6 +412,7 @@ func (tvc *TabViewController) CanPropagateSelectedChildViewControllerTitle() boo
 //
 // TabViewItems returns the collection as a Go slice.
 func (tvc *TabViewController) TabViewItems() []*TabViewItem {
+	defer runtime.KeepAlive(tvc)
 	var _mainthread0 []*TabViewItem
 	purego.Main(func() {
 		_mainthread0 = func() []*TabViewItem {
@@ -383,6 +425,7 @@ func (tvc *TabViewController) TabViewItems() []*TabViewItem {
 
 // SelectedTabViewItemIndex returns read and write the current selected TabViewItem that is being shown. This value is KVC compliant and can be the target of a binding. For instance, a NSSegmentedControl's selection can be bound to this value with: \code [segmentedControl bind:NSSelectedIndexBinding toObject:tabViewController withKeyPath:
 func (tvc *TabViewController) SelectedTabViewItemIndex() int {
+	defer runtime.KeepAlive(tvc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {

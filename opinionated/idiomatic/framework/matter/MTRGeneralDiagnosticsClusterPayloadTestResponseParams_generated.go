@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,30 +49,35 @@ func mTRGeneralDiagnosticsClusterPayloadTestResponseParamsAdopt(id objc.ID) *MTR
 
 // Description returns the object's -description text.
 func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) Description() string {
+	defer runtime.KeepAlive(mgdcptrp)
 	return rt.Description(objref.IDOf(mgdcptrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mgdcptrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mgdcptrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mgdcptrp)
 	return rt.IsKind(objref.IDOf(mgdcptrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) String() string {
+	defer runtime.KeepAlive(mgdcptrp)
 	return rt.Description(objref.IDOf(mgdcptrp))
 }
 
-// NewMTRGeneralDiagnosticsClusterPayloadTestResponseParamsWithResponseValueError initialize an MTRGeneralDiagnosticsClusterPayloadTestResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-func NewMTRGeneralDiagnosticsClusterPayloadTestResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRGeneralDiagnosticsClusterPayloadTestResponseParams, err error) {
+// NewMTRGeneralDiagnosticsClusterPayloadTestResponseParamsWithResponseValue initialize an MTRGeneralDiagnosticsClusterPayloadTestResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRGeneralDiagnosticsClusterPayloadTestResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRGeneralDiagnosticsClusterPayloadTestResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRGeneralDiagnosticsClusterPayloadTestResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -79,13 +85,14 @@ func NewMTRGeneralDiagnosticsClusterPayloadTestResponseParamsWithResponseValueEr
 }
 
 // WithPayload sets the payload.
-func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) WithPayload(payload obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestResponseParams {
-	objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("setPayload:"), objref.IDOf(payload))
+func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) WithPayload(payload []byte) *MTRGeneralDiagnosticsClusterPayloadTestResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("setPayload:"), rt.BytesToNSData(payload))
 	return mgdcptrp
 }
 
 // Payload returns the payload.
-func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) Payload() obj.Object {
+func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) Payload() []byte {
+	defer runtime.KeepAlive(mgdcptrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("payload"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func syncEngineStateAdopt(id objc.ID) *SyncEngineState {
 
 // Description returns the object's -description text.
 func (ses *SyncEngineState) Description() string {
+	defer runtime.KeepAlive(ses)
 	return rt.Description(objref.IDOf(ses))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ses *SyncEngineState) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ses)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ses), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ses *SyncEngineState) IsKind(className string) bool {
+	defer runtime.KeepAlive(ses)
 	return rt.IsKind(objref.IDOf(ses), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ses *SyncEngineState) String() string {
+	defer runtime.KeepAlive(ses)
 	return rt.Description(objref.IDOf(ses))
 }
 
@@ -80,21 +87,25 @@ func (ses *SyncEngineState) WithHasPendingUntrackedChanges(hasPendingUntrackedCh
 
 // AddPendingRecordZoneChanges adds the specified record zone changes to the state.
 func (ses *SyncEngineState) AddPendingRecordZoneChanges(changes []*SyncEnginePendingRecordZoneChange) {
+	defer runtime.KeepAlive(ses)
 	objc.Send[objc.ID](objref.IDOf(ses), objc.RegisterName("addPendingRecordZoneChanges:"), purego.SliceToNSArray(changes, func(_v *SyncEnginePendingRecordZoneChange) objc.ID { return objref.IDOf(_v) }))
 }
 
 // RemovePendingRecordZoneChanges removes the specified record zone changes from the state.
 func (ses *SyncEngineState) RemovePendingRecordZoneChanges(changes []*SyncEnginePendingRecordZoneChange) {
+	defer runtime.KeepAlive(ses)
 	objc.Send[objc.ID](objref.IDOf(ses), objc.RegisterName("removePendingRecordZoneChanges:"), purego.SliceToNSArray(changes, func(_v *SyncEnginePendingRecordZoneChange) objc.ID { return objref.IDOf(_v) }))
 }
 
 // AddPendingDatabaseChanges adds the specified database changes to the state.
 func (ses *SyncEngineState) AddPendingDatabaseChanges(changes []*SyncEnginePendingDatabaseChange) {
+	defer runtime.KeepAlive(ses)
 	objc.Send[objc.ID](objref.IDOf(ses), objc.RegisterName("addPendingDatabaseChanges:"), purego.SliceToNSArray(changes, func(_v *SyncEnginePendingDatabaseChange) objc.ID { return objref.IDOf(_v) }))
 }
 
 // RemovePendingDatabaseChanges removes the specified database changes from the state.
 func (ses *SyncEngineState) RemovePendingDatabaseChanges(changes []*SyncEnginePendingDatabaseChange) {
+	defer runtime.KeepAlive(ses)
 	objc.Send[objc.ID](objref.IDOf(ses), objc.RegisterName("removePendingDatabaseChanges:"), purego.SliceToNSArray(changes, func(_v *SyncEnginePendingDatabaseChange) objc.ID { return objref.IDOf(_v) }))
 }
 
@@ -102,6 +113,7 @@ func (ses *SyncEngineState) RemovePendingDatabaseChanges(changes []*SyncEnginePe
 //
 // PendingRecordZoneChanges returns the collection as a Go slice.
 func (ses *SyncEngineState) PendingRecordZoneChanges() []*SyncEnginePendingRecordZoneChange {
+	defer runtime.KeepAlive(ses)
 	_arr := objc.Send[objc.ID](objref.IDOf(ses), objc.RegisterName("pendingRecordZoneChanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SyncEnginePendingRecordZoneChange {
 		return SyncEnginePendingRecordZoneChangeFromID(_id)
@@ -112,12 +124,14 @@ func (ses *SyncEngineState) PendingRecordZoneChanges() []*SyncEnginePendingRecor
 //
 // PendingDatabaseChanges returns the collection as a Go slice.
 func (ses *SyncEngineState) PendingDatabaseChanges() []*SyncEnginePendingDatabaseChange {
+	defer runtime.KeepAlive(ses)
 	_arr := objc.Send[objc.ID](objref.IDOf(ses), objc.RegisterName("pendingDatabaseChanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SyncEnginePendingDatabaseChange { return SyncEnginePendingDatabaseChangeFromID(_id) })
 }
 
 // HasPendingUntrackedChanges reports whether there are pending changes that the sync engine is unaware of. Use this property to inform the sync engine that there are pending changes other than those available in “CKSyncEngineState/pendingRecordZoneChanges“. After you set this property, the sync engine automatically schedules a send operation and, when that operation executes, asks your delegate to provide those changes by invoking the “CKSyncEngineDelegate/syncEngine:nextRecordZoneChangeBatchForContext:“ method. Using this property is optional and is necessary only if you track pending changes manually, outside of the sync engine's state.
 func (ses *SyncEngineState) HasPendingUntrackedChanges() bool {
+	defer runtime.KeepAlive(ses)
 	_r := objc.Send[bool](objref.IDOf(ses), objc.RegisterName("hasPendingUntrackedChanges"))
 	return _r
 }
@@ -126,6 +140,7 @@ func (ses *SyncEngineState) HasPendingUntrackedChanges() bool {
 //
 // ZoneIDsWithUnfetchedServerChanges returns the collection as a Go slice.
 func (ses *SyncEngineState) ZoneIDsWithUnfetchedServerChanges() []*RecordZoneID {
+	defer runtime.KeepAlive(ses)
 	_arr := objc.Send[objc.ID](objref.IDOf(ses), objc.RegisterName("zoneIDsWithUnfetchedServerChanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }

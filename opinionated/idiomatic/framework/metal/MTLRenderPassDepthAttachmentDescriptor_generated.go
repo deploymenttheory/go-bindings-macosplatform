@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -119,12 +121,14 @@ func (rpdad *RenderPassDepthAttachmentDescriptor) WithStoreActionOptions(storeAc
 
 // ClearDepth returns the clear depth value to be used if the loadAction property is MTLLoadActionClear
 func (rpdad *RenderPassDepthAttachmentDescriptor) ClearDepth() float64 {
+	defer runtime.KeepAlive(rpdad)
 	_r := objc.Send[float64](objref.IDOf(rpdad), objc.RegisterName("clearDepth"))
 	return _r
 }
 
 // DepthResolveFilter returns the filter to be used for depth multisample resolve.  Defaults to MTLMultisampleDepthResolveFilterSample0.
 func (rpdad *RenderPassDepthAttachmentDescriptor) DepthResolveFilter() MultisampleDepthResolveFilter {
+	defer runtime.KeepAlive(rpdad)
 	_r := objc.Send[MultisampleDepthResolveFilter](objref.IDOf(rpdad), objc.RegisterName("depthResolveFilter"))
 	return _r
 }

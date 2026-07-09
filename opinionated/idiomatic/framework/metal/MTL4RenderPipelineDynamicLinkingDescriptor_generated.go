@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTL4RenderPipelineDynamicLinkingDescriptorAdopt(id objc.ID) *MTL4RenderPipe
 
 // Description returns the object's -description text.
 func (mrpdld *MTL4RenderPipelineDynamicLinkingDescriptor) Description() string {
+	defer runtime.KeepAlive(mrpdld)
 	return rt.Description(objref.IDOf(mrpdld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mrpdld *MTL4RenderPipelineDynamicLinkingDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mrpdld)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mrpdld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mrpdld *MTL4RenderPipelineDynamicLinkingDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(mrpdld)
 	return rt.IsKind(objref.IDOf(mrpdld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mrpdld *MTL4RenderPipelineDynamicLinkingDescriptor) String() string {
+	defer runtime.KeepAlive(mrpdld)
 	return rt.Description(objref.IDOf(mrpdld))
 }
 
@@ -74,30 +81,35 @@ func NewMTL4RenderPipelineDynamicLinkingDescriptor() *MTL4RenderPipelineDynamicL
 
 // VertexLinkingDescriptor returns controls properties for linking the vertex stage of the render pipeline.
 func (mrpdld *MTL4RenderPipelineDynamicLinkingDescriptor) VertexLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
+	defer runtime.KeepAlive(mrpdld)
 	_r := objc.Send[objc.ID](objref.IDOf(mrpdld), objc.RegisterName("vertexLinkingDescriptor"))
 	return MTL4PipelineStageDynamicLinkingDescriptorFromID(_r)
 }
 
 // FragmentLinkingDescriptor returns controls properties for linking the fragment stage of the render pipeline.
 func (mrpdld *MTL4RenderPipelineDynamicLinkingDescriptor) FragmentLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
+	defer runtime.KeepAlive(mrpdld)
 	_r := objc.Send[objc.ID](objref.IDOf(mrpdld), objc.RegisterName("fragmentLinkingDescriptor"))
 	return MTL4PipelineStageDynamicLinkingDescriptorFromID(_r)
 }
 
 // TileLinkingDescriptor returns controls properties for linking the tile stage of the render pipeline.
 func (mrpdld *MTL4RenderPipelineDynamicLinkingDescriptor) TileLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
+	defer runtime.KeepAlive(mrpdld)
 	_r := objc.Send[objc.ID](objref.IDOf(mrpdld), objc.RegisterName("tileLinkingDescriptor"))
 	return MTL4PipelineStageDynamicLinkingDescriptorFromID(_r)
 }
 
 // ObjectLinkingDescriptor returns controls properties for link the object stage of the render pipeline.
 func (mrpdld *MTL4RenderPipelineDynamicLinkingDescriptor) ObjectLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
+	defer runtime.KeepAlive(mrpdld)
 	_r := objc.Send[objc.ID](objref.IDOf(mrpdld), objc.RegisterName("objectLinkingDescriptor"))
 	return MTL4PipelineStageDynamicLinkingDescriptorFromID(_r)
 }
 
 // MeshLinkingDescriptor returns controls properties for linking the mesh stage of the render pipeline.
 func (mrpdld *MTL4RenderPipelineDynamicLinkingDescriptor) MeshLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
+	defer runtime.KeepAlive(mrpdld)
 	_r := objc.Send[objc.ID](objref.IDOf(mrpdld), objc.RegisterName("meshLinkingDescriptor"))
 	return MTL4PipelineStageDynamicLinkingDescriptorFromID(_r)
 }

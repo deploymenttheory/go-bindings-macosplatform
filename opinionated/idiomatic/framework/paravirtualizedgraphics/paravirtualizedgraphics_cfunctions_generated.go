@@ -5,7 +5,7 @@
 package paravirtualizedgraphics
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -13,13 +13,13 @@ import (
 var _fnPGCopyOptionROMURL func() objc.ID
 
 // PGCopyOptionROMURL calls the ParavirtualizedGraphics framework function PGCopyOptionROMURL.
-func PGCopyOptionROMURL() obj.Object {
+func PGCopyOptionROMURL() string {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPGCopyOptionROMURL == nil {
 		ebipurego.RegisterLibFunc(&_fnPGCopyOptionROMURL, _lib, "PGCopyOptionROMURL")
 	}
 	_ret := _fnPGCopyOptionROMURL()
-	return obj.Wrap(_ret)
+	return rt.URLString(_ret)
 }
 
 var _fnPGMaxDisplayPortCount func() uint32

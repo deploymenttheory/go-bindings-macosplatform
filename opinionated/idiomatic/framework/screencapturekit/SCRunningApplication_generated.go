@@ -5,6 +5,8 @@
 package screencapturekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func runningApplicationAdopt(id objc.ID) *RunningApplication {
 
 // Description returns the object's -description text.
 func (ra *RunningApplication) Description() string {
+	defer runtime.KeepAlive(ra)
 	return rt.Description(objref.IDOf(ra))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ra *RunningApplication) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ra)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ra), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ra *RunningApplication) IsKind(className string) bool {
+	defer runtime.KeepAlive(ra)
 	return rt.IsKind(objref.IDOf(ra), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ra *RunningApplication) String() string {
+	defer runtime.KeepAlive(ra)
 	return rt.Description(objref.IDOf(ra))
 }
 
@@ -74,6 +81,7 @@ func NewRunningApplication() *RunningApplication {
 
 // BundleIdentifier returns bundleIdentifier the bundleIdentifier for the SCRunningApplication
 func (ra *RunningApplication) BundleIdentifier() string {
+	defer runtime.KeepAlive(ra)
 	_r := objc.Send[objc.ID](objref.IDOf(ra), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (ra *RunningApplication) BundleIdentifier() string {
 
 // ApplicationName returns applicationName the application name for the SCRunningApplication
 func (ra *RunningApplication) ApplicationName() string {
+	defer runtime.KeepAlive(ra)
 	_r := objc.Send[objc.ID](objref.IDOf(ra), objc.RegisterName("applicationName"))
 	if _r == 0 {
 		return ""
@@ -92,6 +101,7 @@ func (ra *RunningApplication) ApplicationName() string {
 
 // ProcessID returns processID the SCRunningApplication
 func (ra *RunningApplication) ProcessID() int {
+	defer runtime.KeepAlive(ra)
 	_r := objc.Send[int](objref.IDOf(ra), objc.RegisterName("processID"))
 	return _r
 }

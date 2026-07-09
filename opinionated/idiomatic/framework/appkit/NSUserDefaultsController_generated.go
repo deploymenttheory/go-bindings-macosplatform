@@ -5,9 +5,13 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,22 +57,24 @@ func NewUserDefaultsController() *UserDefaultsController {
 }
 
 // NewUserDefaultsControllerWithDefaultsInitialValues returns an initialized NSUserDefaultsController object using the NSUserDefaults instance specified in defaults and the initial default values contained in the initialValues dictionary.
-func NewUserDefaultsControllerWithDefaultsInitialValues(defaults obj.Object, initialValues obj.Object) *UserDefaultsController {
+func NewUserDefaultsControllerWithDefaultsInitialValues(defaults obj.Object, initialValues map[string]obj.Object) *UserDefaultsController {
+	defer runtime.KeepAlive(defaults)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUserDefaultsController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDefaults:initialValues:"), objref.IDOf(defaults), objref.IDOf(initialValues))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDefaults:initialValues:"), objref.IDOf(defaults), rt.MapToDict(initialValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return userDefaultsControllerAdopt(_id)
 }
 
 // NewUserDefaultsControllerWithCoder creates a new UserDefaultsController.
 func NewUserDefaultsControllerWithCoder(coder obj.Object) *UserDefaultsController {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUserDefaultsController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return userDefaultsControllerAdopt(_id)
 }
 
 // WithInitialValues sets returns a dictionary containing the receiver’s initial default values.
-func (udc *UserDefaultsController) WithInitialValues(initialValues obj.Object) *UserDefaultsController {
-	objc.Send[objc.ID](objref.IDOf(udc), objc.RegisterName("setInitialValues:"), objref.IDOf(initialValues))
+func (udc *UserDefaultsController) WithInitialValues(initialValues map[string]obj.Object) *UserDefaultsController {
+	objc.Send[objc.ID](objref.IDOf(udc), objc.RegisterName("setInitialValues:"), rt.MapToDict(initialValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return udc
 }
 
@@ -80,39 +86,49 @@ func (udc *UserDefaultsController) WithAppliesImmediately(appliesImmediately boo
 
 // Revert causes the receiver to discard any unsaved changes to bound user default properties, restoring their previous values.
 func (udc *UserDefaultsController) Revert(sender obj.Object) {
+	defer runtime.KeepAlive(udc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(udc), objc.RegisterName("revert:"), objref.IDOf(sender))
 }
 
 // Save saves the values of the receiver’s user default properties.
 func (udc *UserDefaultsController) Save(sender obj.Object) {
+	defer runtime.KeepAlive(udc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(udc), objc.RegisterName("save:"), objref.IDOf(sender))
 }
 
 // RevertToInitialValues causes the receiver to discard all edits and replace the values of all the user default properties with any corresponding values in the initialValues dictionary.
 func (udc *UserDefaultsController) RevertToInitialValues(sender obj.Object) {
+	defer runtime.KeepAlive(udc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(udc), objc.RegisterName("revertToInitialValues:"), objref.IDOf(sender))
 }
 
 // Defaults returns the defaults.
-func (udc *UserDefaultsController) Defaults() obj.Object {
+func (udc *UserDefaultsController) Defaults() *foundation.UserDefaults {
+	defer runtime.KeepAlive(udc)
 	_r := objc.Send[objc.ID](objref.IDOf(udc), objc.RegisterName("defaults"))
-	return obj.Wrap(_r)
+	return foundation.UserDefaultsFromID(_r)
 }
 
 // AppliesImmediately wraps the corresponding Objective-C method.
 func (udc *UserDefaultsController) AppliesImmediately() bool {
+	defer runtime.KeepAlive(udc)
 	_r := objc.Send[bool](objref.IDOf(udc), objc.RegisterName("appliesImmediately"))
 	return _r
 }
 
 // HasUnappliedChanges reports whether the object has unapplied changes.
 func (udc *UserDefaultsController) HasUnappliedChanges() bool {
+	defer runtime.KeepAlive(udc)
 	_r := objc.Send[bool](objref.IDOf(udc), objc.RegisterName("hasUnappliedChanges"))
 	return _r
 }
 
 // Values returns the values.
 func (udc *UserDefaultsController) Values() obj.Object {
+	defer runtime.KeepAlive(udc)
 	_r := objc.Send[objc.ID](objref.IDOf(udc), objc.RegisterName("values"))
 	return obj.Wrap(_r)
 }

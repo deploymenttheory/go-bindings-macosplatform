@@ -5,6 +5,7 @@
 package appkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,27 +50,34 @@ func openGLContextAdopt(id objc.ID) *OpenGLContext {
 
 // Description returns the object's -description text.
 func (ogc *OpenGLContext) Description() string {
+	defer runtime.KeepAlive(ogc)
 	return rt.Description(objref.IDOf(ogc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ogc *OpenGLContext) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ogc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ogc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ogc *OpenGLContext) IsKind(className string) bool {
+	defer runtime.KeepAlive(ogc)
 	return rt.IsKind(objref.IDOf(ogc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ogc *OpenGLContext) String() string {
+	defer runtime.KeepAlive(ogc)
 	return rt.Description(objref.IDOf(ogc))
 }
 
 // NewOpenGLContextWithFormatShareContext returns an OpenGL context object initialized with the specified pixel format information.
 func NewOpenGLContextWithFormatShareContext(format *OpenGLPixelFormat, share *OpenGLContext) *OpenGLContext {
+	defer runtime.KeepAlive(format)
+	defer runtime.KeepAlive(share)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOpenGLContext")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:shareContext:"), objref.IDOf(format), objref.IDOf(share))
 	return openGLContextAdopt(_id)
@@ -77,6 +85,7 @@ func NewOpenGLContextWithFormatShareContext(format *OpenGLPixelFormat, share *Op
 
 // NewOpenGLContextWithCGLContextObj initializes and returns an OpenGL context object using an existing CGL context.
 func NewOpenGLContextWithCGLContextObj(context_ obj.Object) *OpenGLContext {
+	defer runtime.KeepAlive(context_)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOpenGLContext")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLContextObj:"), objref.IDOf(context_))
 	return openGLContextAdopt(_id)
@@ -84,6 +93,7 @@ func NewOpenGLContextWithCGLContextObj(context_ obj.Object) *OpenGLContext {
 
 // WithView sets returns the OpenGL context’s view.
 func (ogc *OpenGLContext) WithView(view ViewProvider) *OpenGLContext {
+	defer runtime.KeepAlive(view)
 	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("setView:"), objref.IDOf(view))
 	return ogc
 }
@@ -96,6 +106,7 @@ func (ogc *OpenGLContext) WithCurrentVirtualScreen(currentVirtualScreen int32) *
 
 // SetFullScreen sets the OpenGL context to full-screen mode.
 func (ogc *OpenGLContext) SetFullScreen() {
+	defer runtime.KeepAlive(ogc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("setFullScreen"))
 	})
@@ -104,16 +115,19 @@ func (ogc *OpenGLContext) SetFullScreen() {
 
 // SetOffScreenWidthHeightRowbytes instructs the OpenGL context to render into an offscreen buffer with the specified attributes.
 func (ogc *OpenGLContext) SetOffScreenWidthHeightRowbytes(baseaddr unsafe.Pointer, width int32, height int32, rowbytes int32) {
+	defer runtime.KeepAlive(ogc)
 	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("setOffScreen:width:height:rowbytes:"), baseaddr, width, height, rowbytes)
 }
 
 // ClearDrawable disassociates the OpenGL context from its viewport.
 func (ogc *OpenGLContext) ClearDrawable() {
+	defer runtime.KeepAlive(ogc)
 	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("clearDrawable"))
 }
 
 // Update updates the OpenGL context’s drawable object.
 func (ogc *OpenGLContext) Update() {
+	defer runtime.KeepAlive(ogc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("update"))
 	})
@@ -122,21 +136,26 @@ func (ogc *OpenGLContext) Update() {
 
 // FlushBuffer copies the back buffer to the front buffer of the OpenGL context.
 func (ogc *OpenGLContext) FlushBuffer() {
+	defer runtime.KeepAlive(ogc)
 	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("flushBuffer"))
 }
 
 // MakeCurrentContext sets the context as the current OpenGL context object.
 func (ogc *OpenGLContext) MakeCurrentContext() {
+	defer runtime.KeepAlive(ogc)
 	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("makeCurrentContext"))
 }
 
 // CopyAttributesFromContextWithMask copies selected groups of state variables to the OpenGL context.
 func (ogc *OpenGLContext) CopyAttributesFromContextWithMask(context_ *OpenGLContext, mask uint32) {
+	defer runtime.KeepAlive(ogc)
+	defer runtime.KeepAlive(context_)
 	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("copyAttributesFromContext:withMask:"), objref.IDOf(context_), mask)
 }
 
 // SetValuesForParameter sets the value of the specified parameter.
 func (ogc *OpenGLContext) SetValuesForParameter(param OpenGLContextParameter) (vals int32) {
+	defer runtime.KeepAlive(ogc)
 	var _out0 int32
 	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("setValues:forParameter:"), unsafe.Pointer(&_out0), param)
 	return _out0
@@ -144,6 +163,7 @@ func (ogc *OpenGLContext) SetValuesForParameter(param OpenGLContextParameter) (v
 
 // GetValuesForParameter returns the value of the requested parameter.
 func (ogc *OpenGLContext) GetValuesForParameter(param OpenGLContextParameter) (vals int32) {
+	defer runtime.KeepAlive(ogc)
 	var _out0 int32
 	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("getValues:forParameter:"), unsafe.Pointer(&_out0), param)
 	return _out0
@@ -151,17 +171,21 @@ func (ogc *OpenGLContext) GetValuesForParameter(param OpenGLContextParameter) (v
 
 // CreateTextureFromViewInternalFormat creates a new texture from the contents of the specified view.
 func (ogc *OpenGLContext) CreateTextureFromViewInternalFormat(target uint32, view *View, format uint32) {
+	defer runtime.KeepAlive(ogc)
+	defer runtime.KeepAlive(view)
 	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("createTexture:fromView:internalFormat:"), target, objref.IDOf(view), format)
 }
 
 // PixelFormat returns the pixel format.
 func (ogc *OpenGLContext) PixelFormat() *OpenGLPixelFormat {
+	defer runtime.KeepAlive(ogc)
 	_r := objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("pixelFormat"))
 	return OpenGLPixelFormatFromID(_r)
 }
 
 // View returns the view.
 func (ogc *OpenGLContext) View() *View {
+	defer runtime.KeepAlive(ogc)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -175,40 +199,49 @@ func (ogc *OpenGLContext) View() *View {
 
 // CurrentVirtualScreen returns the current virtual screen.
 func (ogc *OpenGLContext) CurrentVirtualScreen() int32 {
+	defer runtime.KeepAlive(ogc)
 	_r := objc.Send[int32](objref.IDOf(ogc), objc.RegisterName("currentVirtualScreen"))
 	return _r
 }
 
 // CGLContextObj returns the cgl context obj.
 func (ogc *OpenGLContext) CGLContextObj() obj.Object {
+	defer runtime.KeepAlive(ogc)
 	_r := objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("CGLContextObj"))
 	return obj.Wrap(_r)
 }
 
 // SetPixelBufferCubeMapFaceMipMapLevelCurrentVirtualScreen attaches the specified pixel buffer to the OpenGL context.
 func (ogc *OpenGLContext) SetPixelBufferCubeMapFaceMipMapLevelCurrentVirtualScreen(pixelBuffer *OpenGLPixelBuffer, face uint32, level int32, screen int32) {
+	defer runtime.KeepAlive(ogc)
+	defer runtime.KeepAlive(pixelBuffer)
 	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("setPixelBuffer:cubeMapFace:mipMapLevel:currentVirtualScreen:"), objref.IDOf(pixelBuffer), face, level, screen)
 }
 
 // PixelBuffer returns the pixel-buffer object attached to the OpenGL context.
 func (ogc *OpenGLContext) PixelBuffer() *OpenGLPixelBuffer {
+	defer runtime.KeepAlive(ogc)
 	_r := objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("pixelBuffer"))
 	return OpenGLPixelBufferFromID(_r)
 }
 
 // PixelBufferCubeMapFace returns the cube map face of the pixel buffer attached to the OpenGL context.
 func (ogc *OpenGLContext) PixelBufferCubeMapFace() uint32 {
+	defer runtime.KeepAlive(ogc)
 	_r := objc.Send[uint32](objref.IDOf(ogc), objc.RegisterName("pixelBufferCubeMapFace"))
 	return _r
 }
 
 // PixelBufferMipMapLevel returns the mipmap level of the pixel buffer attached to the OpenGL context.
 func (ogc *OpenGLContext) PixelBufferMipMapLevel() int32 {
+	defer runtime.KeepAlive(ogc)
 	_r := objc.Send[int32](objref.IDOf(ogc), objc.RegisterName("pixelBufferMipMapLevel"))
 	return _r
 }
 
 // SetTextureImageToPixelBufferColorBuffer attaches the image data in the specified pixel buffer to the texture object currently bound by the OpenGL context.
 func (ogc *OpenGLContext) SetTextureImageToPixelBufferColorBuffer(pixelBuffer *OpenGLPixelBuffer, source uint32) {
+	defer runtime.KeepAlive(ogc)
+	defer runtime.KeepAlive(pixelBuffer)
 	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("setTextureImageToPixelBuffer:colorBuffer:"), objref.IDOf(pixelBuffer), source)
 }

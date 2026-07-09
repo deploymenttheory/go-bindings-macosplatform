@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func parameterDescriptionAdopt(id objc.ID) *ParameterDescription {
 
 // Description returns the object's -description text.
 func (pd *ParameterDescription) Description() string {
+	defer runtime.KeepAlive(pd)
 	return rt.Description(objref.IDOf(pd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pd *ParameterDescription) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pd *ParameterDescription) IsKind(className string) bool {
+	defer runtime.KeepAlive(pd)
 	return rt.IsKind(objref.IDOf(pd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pd *ParameterDescription) String() string {
+	defer runtime.KeepAlive(pd)
 	return rt.Description(objref.IDOf(pd))
 }
 
@@ -74,18 +81,21 @@ func NewParameterDescription() *ParameterDescription {
 
 // Key returns the key.
 func (pd *ParameterDescription) Key() *ParameterKey {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("key"))
 	return ParameterKeyFromID(_r)
 }
 
 // DefaultValue returns the default value.
 func (pd *ParameterDescription) DefaultValue() obj.Object {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("defaultValue"))
 	return obj.Wrap(_r)
 }
 
 // NumericConstraint returns the numeric constraint.
 func (pd *ParameterDescription) NumericConstraint() *NumericConstraint {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("numericConstraint"))
 	return NumericConstraintFromID(_r)
 }

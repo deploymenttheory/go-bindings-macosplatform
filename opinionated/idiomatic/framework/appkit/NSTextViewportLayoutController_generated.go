@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,27 +50,33 @@ func textViewportLayoutControllerAdopt(id objc.ID) *TextViewportLayoutController
 
 // Description returns the object's -description text.
 func (tvlc *TextViewportLayoutController) Description() string {
+	defer runtime.KeepAlive(tvlc)
 	return rt.Description(objref.IDOf(tvlc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tvlc *TextViewportLayoutController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tvlc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tvlc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tvlc *TextViewportLayoutController) IsKind(className string) bool {
+	defer runtime.KeepAlive(tvlc)
 	return rt.IsKind(objref.IDOf(tvlc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tvlc *TextViewportLayoutController) String() string {
+	defer runtime.KeepAlive(tvlc)
 	return rt.Description(objref.IDOf(tvlc))
 }
 
 // NewTextViewportLayoutControllerWithTextLayoutManager creates a new instance with the text layout manager you provide.
 func NewTextViewportLayoutControllerWithTextLayoutManager(textLayoutManager *TextLayoutManager) *TextViewportLayoutController {
+	defer runtime.KeepAlive(textLayoutManager)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextViewportLayoutController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextLayoutManager:"), objref.IDOf(textLayoutManager))
 	return textViewportLayoutControllerAdopt(_id)
@@ -76,28 +84,33 @@ func NewTextViewportLayoutControllerWithTextLayoutManager(textLayoutManager *Tex
 
 // LayoutViewport performs layout in the viewport.
 func (tvlc *TextViewportLayoutController) LayoutViewport() {
+	defer runtime.KeepAlive(tvlc)
 	objc.Send[objc.ID](objref.IDOf(tvlc), objc.RegisterName("layoutViewport"))
 }
 
 // AdjustViewportByVerticalOffset adjusts the viewport rect by the specified offset if needed.
 func (tvlc *TextViewportLayoutController) AdjustViewportByVerticalOffset(verticalOffset float64) {
+	defer runtime.KeepAlive(tvlc)
 	objc.Send[objc.ID](objref.IDOf(tvlc), objc.RegisterName("adjustViewportByVerticalOffset:"), verticalOffset)
 }
 
 // TextLayoutManager returns the text layout manager.
 func (tvlc *TextViewportLayoutController) TextLayoutManager() *TextLayoutManager {
+	defer runtime.KeepAlive(tvlc)
 	_r := objc.Send[objc.ID](objref.IDOf(tvlc), objc.RegisterName("textLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
 // ViewportBounds returns the viewport bounds.
 func (tvlc *TextViewportLayoutController) ViewportBounds() corefoundation.CGRect {
+	defer runtime.KeepAlive(tvlc)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tvlc), objc.RegisterName("viewportBounds"))
 	return _r
 }
 
 // ViewportRange returns the viewport range.
 func (tvlc *TextViewportLayoutController) ViewportRange() *TextRange {
+	defer runtime.KeepAlive(tvlc)
 	_r := objc.Send[objc.ID](objref.IDOf(tvlc), objc.RegisterName("viewportRange"))
 	return TextRangeFromID(_r)
 }

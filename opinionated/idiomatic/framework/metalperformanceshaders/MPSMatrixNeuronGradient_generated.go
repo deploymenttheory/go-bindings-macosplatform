@@ -5,10 +5,12 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -109,41 +111,48 @@ func (mng *MatrixNeuronGradient) WithLabel(label string) *MatrixNeuronGradient {
 
 // NeuronParameterA returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mng *MatrixNeuronGradient) NeuronParameterA() float32 {
+	defer runtime.KeepAlive(mng)
 	_r := objc.Send[float32](objref.IDOf(mng), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
 // NeuronParameterB returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mng *MatrixNeuronGradient) NeuronParameterB() float32 {
+	defer runtime.KeepAlive(mng)
 	_r := objc.Send[float32](objref.IDOf(mng), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
 // NeuronParameterC returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mng *MatrixNeuronGradient) NeuronParameterC() float32 {
+	defer runtime.KeepAlive(mng)
 	_r := objc.Send[float32](objref.IDOf(mng), objc.RegisterName("neuronParameterC"))
 	return _r
 }
 
 // SetNeuronToPReLUWithParametersA add per output value neuron parameters A for PReLu neuron activation functions. This method sets the neuron to PReLU, zeros parameters A and B and sets the per output value neuron parameters A to an array containing a unique value of A for each output value. If the neuron function is f(v,a,b), it will apply resultMatrix(i, j) = f( input(i, j), A[j], B[j] ) where j in [0, sourceInputFeatureChannels] See https://arxiv.org/pdf/1502.01852.pdf for details. All other neuron types, where parameter A and parameter B are shared across output values must be set using -setNeuronType:parameterA:parameterB:
-func (mng *MatrixNeuronGradient) SetNeuronToPReLUWithParametersA(a obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mng), objc.RegisterName("setNeuronToPReLUWithParametersA:"), objref.IDOf(a))
+func (mng *MatrixNeuronGradient) SetNeuronToPReLUWithParametersA(a []byte) {
+	defer runtime.KeepAlive(mng)
+	objc.Send[objc.ID](objref.IDOf(mng), objc.RegisterName("setNeuronToPReLUWithParametersA:"), rt.BytesToNSData(a))
 }
 
 // SourceNumberOfFeatureVectors returns the number of input vectors which make up the input array.
 func (mng *MatrixNeuronGradient) SourceNumberOfFeatureVectors() int {
+	defer runtime.KeepAlive(mng)
 	_r := objc.Send[int](objref.IDOf(mng), objc.RegisterName("sourceNumberOfFeatureVectors"))
 	return _r
 }
 
 // SourceInputFeatureChannels returns the number of feature channels in the input vectors.
 func (mng *MatrixNeuronGradient) SourceInputFeatureChannels() int {
+	defer runtime.KeepAlive(mng)
 	_r := objc.Send[int](objref.IDOf(mng), objc.RegisterName("sourceInputFeatureChannels"))
 	return _r
 }
 
 // Alpha returns the scale factor to apply to the input.
 func (mng *MatrixNeuronGradient) Alpha() float64 {
+	defer runtime.KeepAlive(mng)
 	_r := objc.Send[float64](objref.IDOf(mng), objc.RegisterName("alpha"))
 	return _r
 }

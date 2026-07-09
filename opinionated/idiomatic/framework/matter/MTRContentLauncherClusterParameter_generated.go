@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,6 +54,7 @@ func NewMTRContentLauncherClusterParameter() *MTRContentLauncherClusterParameter
 
 // WithType sets the type.
 func (mclcp *MTRContentLauncherClusterParameter) WithType(type_ obj.Object) *MTRContentLauncherClusterParameter {
+	defer runtime.KeepAlive(type_)
 	objc.Send[objc.ID](objref.IDOf(mclcp), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return mclcp
 }

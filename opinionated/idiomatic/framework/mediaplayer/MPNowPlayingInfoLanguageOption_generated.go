@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nowPlayingInfoLanguageOptionAdopt(id objc.ID) *NowPlayingInfoLanguageOption
 
 // Description returns the object's -description text.
 func (npilo *NowPlayingInfoLanguageOption) Description() string {
+	defer runtime.KeepAlive(npilo)
 	return rt.Description(objref.IDOf(npilo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (npilo *NowPlayingInfoLanguageOption) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(npilo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(npilo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (npilo *NowPlayingInfoLanguageOption) IsKind(className string) bool {
+	defer runtime.KeepAlive(npilo)
 	return rt.IsKind(objref.IDOf(npilo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (npilo *NowPlayingInfoLanguageOption) String() string {
+	defer runtime.KeepAlive(npilo)
 	return rt.Description(objref.IDOf(npilo))
 }
 
@@ -75,24 +82,28 @@ func NewNowPlayingInfoLanguageOptionWithTypeLanguageTagCharacteristicsDisplayNam
 
 // IsAutomaticLegibleLanguageOption reports whether returns a Boolean value that determines whether to use the best legible language option based on the system preferences.
 func (npilo *NowPlayingInfoLanguageOption) IsAutomaticLegibleLanguageOption() bool {
+	defer runtime.KeepAlive(npilo)
 	_r := objc.Send[bool](objref.IDOf(npilo), objc.RegisterName("isAutomaticLegibleLanguageOption"))
 	return _r
 }
 
 // IsAutomaticAudibleLanguageOption reports whether returns a Boolean value that determines whether to use the best audible language option based on the system preferences.
 func (npilo *NowPlayingInfoLanguageOption) IsAutomaticAudibleLanguageOption() bool {
+	defer runtime.KeepAlive(npilo)
 	_r := objc.Send[bool](objref.IDOf(npilo), objc.RegisterName("isAutomaticAudibleLanguageOption"))
 	return _r
 }
 
 // LanguageOptionType returns the type of language option.
 func (npilo *NowPlayingInfoLanguageOption) LanguageOptionType() NowPlayingInfoLanguageOptionType {
+	defer runtime.KeepAlive(npilo)
 	_r := objc.Send[NowPlayingInfoLanguageOptionType](objref.IDOf(npilo), objc.RegisterName("languageOptionType"))
 	return _r
 }
 
 // LanguageTag returns the IETF BCP 47 language tag. A nil languageTag reprsents that this option should be disabled. A languageTag with the value of MPLangaugeOptionAutoLangaugeTag represents that the best langauge based on the system preferences should be used.
 func (npilo *NowPlayingInfoLanguageOption) LanguageTag() string {
+	defer runtime.KeepAlive(npilo)
 	_r := objc.Send[objc.ID](objref.IDOf(npilo), objc.RegisterName("languageTag"))
 	if _r == 0 {
 		return ""
@@ -104,12 +115,14 @@ func (npilo *NowPlayingInfoLanguageOption) LanguageTag() string {
 //
 // LanguageOptionCharacteristics returns the collection as a Go slice.
 func (npilo *NowPlayingInfoLanguageOption) LanguageOptionCharacteristics() []string {
+	defer runtime.KeepAlive(npilo)
 	_arr := objc.Send[objc.ID](objref.IDOf(npilo), objc.RegisterName("languageOptionCharacteristics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // DisplayName returns a user presentable display name for this option.
 func (npilo *NowPlayingInfoLanguageOption) DisplayName() string {
+	defer runtime.KeepAlive(npilo)
 	_r := objc.Send[objc.ID](objref.IDOf(npilo), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
@@ -119,6 +132,7 @@ func (npilo *NowPlayingInfoLanguageOption) DisplayName() string {
 
 // Identifier returns a unique identifier representing this option.
 func (npilo *NowPlayingInfoLanguageOption) Identifier() string {
+	defer runtime.KeepAlive(npilo)
 	_r := objc.Send[objc.ID](objref.IDOf(npilo), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func sendMessageRecipientResolutionResultAdopt(id objc.ID) *SendMessageRecipient
 
 // NewSendMessageRecipientResolutionResultWithPersonResolutionResult creates a resolution result object with the specified person resolution result object.
 func NewSendMessageRecipientResolutionResultWithPersonResolutionResult(personResolutionResult *PersonResolutionResult) *SendMessageRecipientResolutionResult {
+	defer runtime.KeepAlive(personResolutionResult)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INSendMessageRecipientResolutionResult")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonResolutionResult:"), objref.IDOf(personResolutionResult))
 	return sendMessageRecipientResolutionResultAdopt(_id)

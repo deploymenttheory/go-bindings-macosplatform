@@ -5,10 +5,12 @@
 package coreml
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,30 +52,35 @@ func multiArrayAdopt(id objc.ID) *MultiArray {
 
 // Description returns the object's -description text.
 func (ma *MultiArray) Description() string {
+	defer runtime.KeepAlive(ma)
 	return rt.Description(objref.IDOf(ma))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ma *MultiArray) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ma)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ma), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ma *MultiArray) IsKind(className string) bool {
+	defer runtime.KeepAlive(ma)
 	return rt.IsKind(objref.IDOf(ma), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ma *MultiArray) String() string {
+	defer runtime.KeepAlive(ma)
 	return rt.Description(objref.IDOf(ma))
 }
 
-// NewMultiArrayWithShapeDataTypeError creates a multidimensional array with a shape and type.
-func NewMultiArrayWithShapeDataTypeError(shape []obj.Object, dataType MultiArrayDataType) (result *MultiArray, err error) {
+// NewMultiArrayWithShapeDataType creates a multidimensional array with a shape and type.
+func NewMultiArrayWithShapeDataType(shape []*foundation.Number, dataType MultiArrayDataType) (result *MultiArray, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MLMultiArray")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShape:dataType:error:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), dataType, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShape:dataType:error:"), purego.SliceToNSArray(shape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), dataType, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -81,21 +88,22 @@ func NewMultiArrayWithShapeDataTypeError(shape []obj.Object, dataType MultiArray
 }
 
 // NewMultiArrayWithShapeDataTypeStrides creates the object with specified strides.
-func NewMultiArrayWithShapeDataTypeStrides(shape []obj.Object, dataType MultiArrayDataType, strides []obj.Object) *MultiArray {
+func NewMultiArrayWithShapeDataTypeStrides(shape []*foundation.Number, dataType MultiArrayDataType, strides []*foundation.Number) *MultiArray {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MLMultiArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShape:dataType:strides:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), dataType, purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShape:dataType:strides:"), purego.SliceToNSArray(shape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), dataType, purego.SliceToNSArray(strides, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return multiArrayAdopt(_id)
 }
 
 // NewMultiArrayWithPixelBufferShape creates a multiarray sharing the surface of a pixel buffer.
-func NewMultiArrayWithPixelBufferShape(pixelBuffer unsafe.Pointer, shape []obj.Object) *MultiArray {
+func NewMultiArrayWithPixelBufferShape(pixelBuffer unsafe.Pointer, shape []*foundation.Number) *MultiArray {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MLMultiArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPixelBuffer:shape:"), pixelBuffer, purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPixelBuffer:shape:"), pixelBuffer, purego.SliceToNSArray(shape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return multiArrayAdopt(_id)
 }
 
 // DataType returns scalar's data type.
 func (ma *MultiArray) DataType() MultiArrayDataType {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[MultiArrayDataType](objref.IDOf(ma), objc.RegisterName("dataType"))
 	return _r
 }
@@ -104,6 +112,7 @@ func (ma *MultiArray) DataType() MultiArrayDataType {
 //
 // Shape returns the collection as a Go slice.
 func (ma *MultiArray) Shape() []obj.Object {
+	defer runtime.KeepAlive(ma)
 	_arr := objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("shape"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -112,40 +121,50 @@ func (ma *MultiArray) Shape() []obj.Object {
 //
 // Strides returns the collection as a Go slice.
 func (ma *MultiArray) Strides() []obj.Object {
+	defer runtime.KeepAlive(ma)
 	_arr := objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("strides"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Count returns count of total number of addressable scalars. The value is same as `product_d shape[d]`.
 func (ma *MultiArray) Count() int {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[int](objref.IDOf(ma), objc.RegisterName("count"))
 	return _r
 }
 
 // ObjectAtIndexedSubscript get a value by its linear index (assumes C-style index ordering)
-func (ma *MultiArray) ObjectAtIndexedSubscript(idx int) obj.Object {
+func (ma *MultiArray) ObjectAtIndexedSubscript(idx int) *foundation.Number {
+	defer runtime.KeepAlive(ma)
 	errkit.CheckIndex(idx, ma.Count())
 	_r := objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("objectAtIndexedSubscript:"), idx)
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ObjectForKeyedSubscript get a value by its multidimensional index (NSArray<NSNumber *>)
-func (ma *MultiArray) ObjectForKeyedSubscript(key []obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("objectForKeyedSubscript:"), purego.SliceToNSArray(key, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-	return obj.Wrap(_r)
+func (ma *MultiArray) ObjectForKeyedSubscript(key []*foundation.Number) *foundation.Number {
+	defer runtime.KeepAlive(ma)
+	_r := objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("objectForKeyedSubscript:"), purego.SliceToNSArray(key, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
+	return foundation.NumberFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript assigns a number to the multiarray’s element at the location that the linear offset defines.
-func (ma *MultiArray) SetObjectAtIndexedSubscript(obj_ obj.Object, idx int) {
-	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(obj_), idx)
+func (ma *MultiArray) SetObjectAtIndexedSubscript(object obj.Object, idx int) {
+	defer runtime.KeepAlive(ma)
+	defer runtime.KeepAlive(object)
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(object), idx)
 }
 
 // SetObjectForKeyedSubscript assigns a number to the multiarray’s element at the location that the number array defines.
-func (ma *MultiArray) SetObjectForKeyedSubscript(obj_ obj.Object, key []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("setObject:forKeyedSubscript:"), objref.IDOf(obj_), purego.SliceToNSArray(key, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (ma *MultiArray) SetObjectForKeyedSubscript(object obj.Object, key []*foundation.Number) {
+	defer runtime.KeepAlive(ma)
+	defer runtime.KeepAlive(object)
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("setObject:forKeyedSubscript:"), objref.IDOf(object), purego.SliceToNSArray(key, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 }
 
 // TransferToMultiArray transfer the contents to the destination multi-array.
 func (ma *MultiArray) TransferToMultiArray(destinationMultiArray *MultiArray) {
+	defer runtime.KeepAlive(ma)
+	defer runtime.KeepAlive(destinationMultiArray)
 	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("transferToMultiArray:"), objref.IDOf(destinationMultiArray))
 }

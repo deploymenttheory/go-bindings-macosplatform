@@ -5,7 +5,10 @@
 package corehaptics
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func hapticEventAdopt(id objc.ID) *HapticEvent {
 
 // Description returns the object's -description text.
 func (he *HapticEvent) Description() string {
+	defer runtime.KeepAlive(he)
 	return rt.Description(objref.IDOf(he))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (he *HapticEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(he)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(he), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (he *HapticEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(he)
 	return rt.IsKind(objref.IDOf(he), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (he *HapticEvent) String() string {
+	defer runtime.KeepAlive(he)
 	return rt.Description(objref.IDOf(he))
 }
 
 // NewHapticEventWithEventTypeParametersRelativeTime initializes a haptic event of the specified type, parameters, and start time.
 func NewHapticEventWithEventTypeParametersRelativeTime(type_ obj.Object, eventParams []*HapticEventParameter, time_ float64) *HapticEvent {
+	defer runtime.KeepAlive(type_)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEventType:parameters:relativeTime:"), objref.IDOf(type_), purego.SliceToNSArray(eventParams, func(_v *HapticEventParameter) objc.ID { return objref.IDOf(_v) }), time_)
 	return hapticEventAdopt(_id)
@@ -75,6 +84,7 @@ func NewHapticEventWithEventTypeParametersRelativeTime(type_ obj.Object, eventPa
 
 // NewHapticEventWithEventTypeParametersRelativeTimeDuration initializes a haptic event of the specified type, parameters, start time, and duration.
 func NewHapticEventWithEventTypeParametersRelativeTimeDuration(type_ obj.Object, eventParams []*HapticEventParameter, time_ float64, duration float64) *HapticEvent {
+	defer runtime.KeepAlive(type_)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEventType:parameters:relativeTime:duration:"), objref.IDOf(type_), purego.SliceToNSArray(eventParams, func(_v *HapticEventParameter) objc.ID { return objref.IDOf(_v) }), time_, duration)
 	return hapticEventAdopt(_id)
@@ -107,27 +117,31 @@ func (he *HapticEvent) WithDuration(duration float64) *HapticEvent {
 }
 
 // Type returns the type.
-func (he *HapticEvent) Type() obj.Object {
+func (he *HapticEvent) Type() *foundation.String {
+	defer runtime.KeepAlive(he)
 	_r := objc.Send[objc.ID](objref.IDOf(he), objc.RegisterName("type"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // EventParameters returns the event parameters.
 //
 // EventParameters returns the collection as a Go slice.
 func (he *HapticEvent) EventParameters() []*HapticEventParameter {
+	defer runtime.KeepAlive(he)
 	_arr := objc.Send[objc.ID](objref.IDOf(he), objc.RegisterName("eventParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *HapticEventParameter { return HapticEventParameterFromID(_id) })
 }
 
 // RelativeTime returns the relative time.
 func (he *HapticEvent) RelativeTime() float64 {
+	defer runtime.KeepAlive(he)
 	_r := objc.Send[float64](objref.IDOf(he), objc.RegisterName("relativeTime"))
 	return _r
 }
 
 // Duration returns the duration.
 func (he *HapticEvent) Duration() float64 {
+	defer runtime.KeepAlive(he)
 	_r := objc.Send[float64](objref.IDOf(he), objc.RegisterName("duration"))
 	return _r
 }

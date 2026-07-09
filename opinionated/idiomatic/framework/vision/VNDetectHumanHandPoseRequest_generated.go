@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -90,6 +91,7 @@ func (dhhpr *DetectHumanHandPoseRequest) WithRevision(revision int) *DetectHuman
 //
 // SupportedJointNames returns the collection as a Go slice.
 func (dhhpr *DetectHumanHandPoseRequest) SupportedJointNames() (result []obj.Object, err error) {
+	defer runtime.KeepAlive(dhhpr)
 	var _nsErr uintptr
 	_arr := objc.Send[objc.ID](objref.IDOf(dhhpr), objc.RegisterName("supportedJointNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -102,6 +104,7 @@ func (dhhpr *DetectHumanHandPoseRequest) SupportedJointNames() (result []obj.Obj
 //
 // SupportedJointsGroupNames returns the collection as a Go slice.
 func (dhhpr *DetectHumanHandPoseRequest) SupportedJointsGroupNames() (result []obj.Object, err error) {
+	defer runtime.KeepAlive(dhhpr)
 	var _nsErr uintptr
 	_arr := objc.Send[objc.ID](objref.IDOf(dhhpr), objc.RegisterName("supportedJointsGroupNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -112,6 +115,7 @@ func (dhhpr *DetectHumanHandPoseRequest) SupportedJointsGroupNames() (result []o
 
 // MaximumHandCount defines an upper bounds to the maximum number of hands that will be processed for key points in an image. The complexity in key points determination is scalable by the number of hands to be processed.  All hands detected in an image will be ordered by relative size, with only the N largest ones having key points determined.  The default value for this property is 2. The maximum value for VNDetectHumanHandPoseRequestRevision1 is 6.
 func (dhhpr *DetectHumanHandPoseRequest) MaximumHandCount() int {
+	defer runtime.KeepAlive(dhhpr)
 	_r := objc.Send[int](objref.IDOf(dhhpr), objc.RegisterName("maximumHandCount"))
 	return _r
 }

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func mTRDeviceTypeAdopt(id objc.ID) *MTRDeviceType {
 
 // Description returns the object's -description text.
 func (mdt *MTRDeviceType) Description() string {
+	defer runtime.KeepAlive(mdt)
 	return rt.Description(objref.IDOf(mdt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdt *MTRDeviceType) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdt *MTRDeviceType) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdt)
 	return rt.IsKind(objref.IDOf(mdt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdt *MTRDeviceType) String() string {
+	defer runtime.KeepAlive(mdt)
 	return rt.Description(objref.IDOf(mdt))
 }
 
@@ -73,13 +81,15 @@ func NewMTRDeviceType() *MTRDeviceType {
 }
 
 // ID returns the identifier of the device type (32-bit unsigned integer).
-func (mdt *MTRDeviceType) ID() obj.Object {
+func (mdt *MTRDeviceType) ID() *foundation.Number {
+	defer runtime.KeepAlive(mdt)
 	_r := objc.Send[objc.ID](objref.IDOf(mdt), objc.RegisterName("id"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Name returns the name of the device type.
 func (mdt *MTRDeviceType) Name() string {
+	defer runtime.KeepAlive(mdt)
 	_r := objc.Send[objc.ID](objref.IDOf(mdt), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -89,6 +99,7 @@ func (mdt *MTRDeviceType) Name() string {
 
 // IsUtility reports whether this is a utility device type.
 func (mdt *MTRDeviceType) IsUtility() bool {
+	defer runtime.KeepAlive(mdt)
 	_r := objc.Send[bool](objref.IDOf(mdt), objc.RegisterName("isUtility"))
 	return _r
 }

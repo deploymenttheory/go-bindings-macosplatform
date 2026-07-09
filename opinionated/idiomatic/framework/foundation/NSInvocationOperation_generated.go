@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,6 +52,7 @@ func invocationOperationAdopt(id objc.ID) *InvocationOperation {
 
 // NewInvocationOperationWithInvocation returns an NSInvocationOperation object initialized with the specified invocation object.
 func NewInvocationOperationWithInvocation(inv *Invocation) *InvocationOperation {
+	defer runtime.KeepAlive(inv)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSInvocationOperation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInvocation:"), objref.IDOf(inv))
 	return invocationOperationAdopt(_id)
@@ -81,6 +84,7 @@ func (io *InvocationOperation) WithQualityOfService(qualityOfService QualityOfSe
 
 // WithName sets the name.
 func (io *InvocationOperation) WithName(name StringProvider) *InvocationOperation {
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setName:"), objref.IDOf(name))
 	return io
 }
@@ -92,19 +96,21 @@ func (io *InvocationOperation) WithObservationInfo(observationInfo unsafe.Pointe
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (io *InvocationOperation) WithScriptingProperties(scriptingProperties obj.Object) *InvocationOperation {
-	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (io *InvocationOperation) WithScriptingProperties(scriptingProperties map[string]obj.Object) *InvocationOperation {
+	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return io
 }
 
 // Invocation returns the invocation.
 func (io *InvocationOperation) Invocation() *Invocation {
+	defer runtime.KeepAlive(io)
 	_r := objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("invocation"))
 	return InvocationFromID(_r)
 }
 
 // Result returns the result.
 func (io *InvocationOperation) Result() obj.Object {
+	defer runtime.KeepAlive(io)
 	_r := objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }

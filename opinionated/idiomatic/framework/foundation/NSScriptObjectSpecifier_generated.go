@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,27 +52,33 @@ func scriptObjectSpecifierAdopt(id objc.ID) *ScriptObjectSpecifier {
 
 // Description returns the object's -description text.
 func (sos *ScriptObjectSpecifier) Description() string {
+	defer runtime.KeepAlive(sos)
 	return rt.Description(objref.IDOf(sos))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sos *ScriptObjectSpecifier) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sos)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sos), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sos *ScriptObjectSpecifier) IsKind(className string) bool {
+	defer runtime.KeepAlive(sos)
 	return rt.IsKind(objref.IDOf(sos), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sos *ScriptObjectSpecifier) String() string {
+	defer runtime.KeepAlive(sos)
 	return rt.Description(objref.IDOf(sos))
 }
 
 // NewScriptObjectSpecifierWithContainerSpecifierKey returns an NSScriptObjectSpecifier object initialized with a given container specifier and key.
 func NewScriptObjectSpecifierWithContainerSpecifierKey(container *ScriptObjectSpecifier, property string) *ScriptObjectSpecifier {
+	defer runtime.KeepAlive(container)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScriptObjectSpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerSpecifier:key:"), objref.IDOf(container), purego.NSString(property))
 	return scriptObjectSpecifierAdopt(_id)
@@ -79,6 +86,8 @@ func NewScriptObjectSpecifierWithContainerSpecifierKey(container *ScriptObjectSp
 
 // NewScriptObjectSpecifierWithContainerClassDescriptionContainerSpecifierKey returns an NSScriptObjectSpecifier object initialized with the given attributes.
 func NewScriptObjectSpecifierWithContainerClassDescriptionContainerSpecifierKey(classDesc *ScriptClassDescription, container *ScriptObjectSpecifier, property string) *ScriptObjectSpecifier {
+	defer runtime.KeepAlive(classDesc)
+	defer runtime.KeepAlive(container)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScriptObjectSpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:"), objref.IDOf(classDesc), objref.IDOf(container), purego.NSString(property))
 	return scriptObjectSpecifierAdopt(_id)
@@ -86,6 +95,7 @@ func NewScriptObjectSpecifierWithContainerClassDescriptionContainerSpecifierKey(
 
 // NewScriptObjectSpecifierWithCoder creates a new ScriptObjectSpecifier.
 func NewScriptObjectSpecifierWithCoder(inCoder *Coder) *ScriptObjectSpecifier {
+	defer runtime.KeepAlive(inCoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScriptObjectSpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(inCoder))
 	return scriptObjectSpecifierAdopt(_id)
@@ -93,12 +103,14 @@ func NewScriptObjectSpecifierWithCoder(inCoder *Coder) *ScriptObjectSpecifier {
 
 // WithChildSpecifier sets sets the receiver’s child reference.
 func (sos *ScriptObjectSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *ScriptObjectSpecifier {
+	defer runtime.KeepAlive(childSpecifier)
 	objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("setChildSpecifier:"), objref.IDOf(childSpecifier))
 	return sos
 }
 
 // WithContainerSpecifier sets sets the container specifier of the receiver.
 func (sos *ScriptObjectSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *ScriptObjectSpecifier {
+	defer runtime.KeepAlive(containerSpecifier)
 	objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("setContainerSpecifier:"), objref.IDOf(containerSpecifier))
 	return sos
 }
@@ -117,12 +129,14 @@ func (sos *ScriptObjectSpecifier) WithContainerIsRangeContainerObject(containerI
 
 // WithKey sets sets the key of the receiver.
 func (sos *ScriptObjectSpecifier) WithKey(key StringProvider) *ScriptObjectSpecifier {
+	defer runtime.KeepAlive(key)
 	objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return sos
 }
 
 // WithContainerClassDescription sets sets the class description of the receiver’s container specifier to a given specifier.
 func (sos *ScriptObjectSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *ScriptObjectSpecifier {
+	defer runtime.KeepAlive(containerClassDescription)
 	objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("setContainerClassDescription:"), objref.IDOf(containerClassDescription))
 	return sos
 }
@@ -140,43 +154,50 @@ func (sos *ScriptObjectSpecifier) WithObservationInfo(observationInfo unsafe.Poi
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (sos *ScriptObjectSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *ScriptObjectSpecifier {
-	objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (sos *ScriptObjectSpecifier) WithScriptingProperties(scriptingProperties map[string]obj.Object) *ScriptObjectSpecifier {
+	objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return sos
 }
 
 // ObjectsByEvaluatingWithContainers returns the actual object or objects specified by the receiver as evaluated in the context of given container object.
 func (sos *ScriptObjectSpecifier) ObjectsByEvaluatingWithContainers(containers obj.Object) obj.Object {
+	defer runtime.KeepAlive(sos)
+	defer runtime.KeepAlive(containers)
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("objectsByEvaluatingWithContainers:"), objref.IDOf(containers))
 	return obj.Wrap(_r)
 }
 
 // ChildSpecifier returns the child specifier.
 func (sos *ScriptObjectSpecifier) ChildSpecifier() *ScriptObjectSpecifier {
+	defer runtime.KeepAlive(sos)
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("childSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
 
 // ContainerSpecifier returns the container specifier.
 func (sos *ScriptObjectSpecifier) ContainerSpecifier() *ScriptObjectSpecifier {
+	defer runtime.KeepAlive(sos)
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("containerSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
 
 // ContainerIsObjectBeingTested wraps the corresponding Objective-C method.
 func (sos *ScriptObjectSpecifier) ContainerIsObjectBeingTested() bool {
+	defer runtime.KeepAlive(sos)
 	_r := objc.Send[bool](objref.IDOf(sos), objc.RegisterName("containerIsObjectBeingTested"))
 	return _r
 }
 
 // ContainerIsRangeContainerObject wraps the corresponding Objective-C method.
 func (sos *ScriptObjectSpecifier) ContainerIsRangeContainerObject() bool {
+	defer runtime.KeepAlive(sos)
 	_r := objc.Send[bool](objref.IDOf(sos), objc.RegisterName("containerIsRangeContainerObject"))
 	return _r
 }
 
 // Key returns the key.
 func (sos *ScriptObjectSpecifier) Key() string {
+	defer runtime.KeepAlive(sos)
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("key"))
 	if _r == 0 {
 		return ""
@@ -186,36 +207,42 @@ func (sos *ScriptObjectSpecifier) Key() string {
 
 // ContainerClassDescription returns the container class description.
 func (sos *ScriptObjectSpecifier) ContainerClassDescription() *ScriptClassDescription {
+	defer runtime.KeepAlive(sos)
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("containerClassDescription"))
 	return ScriptClassDescriptionFromID(_r)
 }
 
 // KeyClassDescription returns the key class description.
 func (sos *ScriptObjectSpecifier) KeyClassDescription() *ScriptClassDescription {
+	defer runtime.KeepAlive(sos)
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("keyClassDescription"))
 	return ScriptClassDescriptionFromID(_r)
 }
 
 // ObjectsByEvaluatingSpecifier returns the objects by evaluating specifier.
 func (sos *ScriptObjectSpecifier) ObjectsByEvaluatingSpecifier() obj.Object {
+	defer runtime.KeepAlive(sos)
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("objectsByEvaluatingSpecifier"))
 	return obj.Wrap(_r)
 }
 
 // EvaluationErrorNumber returns the evaluation error number.
 func (sos *ScriptObjectSpecifier) EvaluationErrorNumber() int {
+	defer runtime.KeepAlive(sos)
 	_r := objc.Send[int](objref.IDOf(sos), objc.RegisterName("evaluationErrorNumber"))
 	return _r
 }
 
 // EvaluationErrorSpecifier returns the evaluation error specifier.
 func (sos *ScriptObjectSpecifier) EvaluationErrorSpecifier() *ScriptObjectSpecifier {
+	defer runtime.KeepAlive(sos)
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("evaluationErrorSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
 
 // Descriptor returns the descriptor.
 func (sos *ScriptObjectSpecifier) Descriptor() *AppleEventDescriptor {
+	defer runtime.KeepAlive(sos)
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("descriptor"))
 	return AppleEventDescriptorFromID(_r)
 }

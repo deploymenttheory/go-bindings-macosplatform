@@ -5,6 +5,8 @@
 package imagecapturecore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,33 +51,40 @@ func scannerFeatureAdopt(id objc.ID) *ScannerFeature {
 
 // Description returns the object's -description text.
 func (sf *ScannerFeature) Description() string {
+	defer runtime.KeepAlive(sf)
 	return rt.Description(objref.IDOf(sf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sf *ScannerFeature) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sf *ScannerFeature) IsKind(className string) bool {
+	defer runtime.KeepAlive(sf)
 	return rt.IsKind(objref.IDOf(sf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sf *ScannerFeature) String() string {
+	defer runtime.KeepAlive(sf)
 	return rt.Description(objref.IDOf(sf))
 }
 
 // Type returns ￼Scanner feature type.
 func (sf *ScannerFeature) Type() ScannerFeatureType {
+	defer runtime.KeepAlive(sf)
 	_r := objc.Send[ScannerFeatureType](objref.IDOf(sf), objc.RegisterName("type"))
 	return _r
 }
 
 // InternalName returns ￼The internal name of this feature.
 func (sf *ScannerFeature) InternalName() string {
+	defer runtime.KeepAlive(sf)
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("internalName"))
 	if _r == 0 {
 		return ""
@@ -85,6 +94,7 @@ func (sf *ScannerFeature) InternalName() string {
 
 // HumanReadableName returns the human readable name of this feature.
 func (sf *ScannerFeature) HumanReadableName() string {
+	defer runtime.KeepAlive(sf)
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("humanReadableName"))
 	if _r == 0 {
 		return ""
@@ -94,6 +104,7 @@ func (sf *ScannerFeature) HumanReadableName() string {
 
 // Tooltip returns ￼Tooltip text describing the feature.
 func (sf *ScannerFeature) Tooltip() string {
+	defer runtime.KeepAlive(sf)
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("tooltip"))
 	if _r == 0 {
 		return ""

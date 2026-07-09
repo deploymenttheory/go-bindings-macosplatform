@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -159,12 +161,14 @@ func (dle *DOMHTMLLabelElement) WithTextContent(textContent string) *DOMHTMLLabe
 
 // Form returns the form.
 func (dle *DOMHTMLLabelElement) Form() *DOMHTMLFormElement {
+	defer runtime.KeepAlive(dle)
 	_r := objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("form"))
 	return DOMHTMLFormElementFromID(_r)
 }
 
 // HTMLFor returns the HTML for.
 func (dle *DOMHTMLLabelElement) HTMLFor() string {
+	defer runtime.KeepAlive(dle)
 	_r := objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("htmlFor"))
 	if _r == 0 {
 		return ""

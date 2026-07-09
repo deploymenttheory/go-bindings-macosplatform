@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func gridCellAdopt(id objc.ID) *GridCell {
 
 // Description returns the object's -description text.
 func (gc *GridCell) Description() string {
+	defer runtime.KeepAlive(gc)
 	return rt.Description(objref.IDOf(gc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gc *GridCell) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gc *GridCell) IsKind(className string) bool {
+	defer runtime.KeepAlive(gc)
 	return rt.IsKind(objref.IDOf(gc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gc *GridCell) String() string {
+	defer runtime.KeepAlive(gc)
 	return rt.Description(objref.IDOf(gc))
 }
 
@@ -80,6 +87,7 @@ func NewGridCell() *GridCell {
 
 // WithContentView sets the content view.
 func (gc *GridCell) WithContentView(contentView ViewProvider) *GridCell {
+	defer runtime.KeepAlive(contentView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	})
@@ -121,6 +129,7 @@ func (gc *GridCell) WithCustomPlacementConstraints(items ...*LayoutConstraint) *
 
 // ContentView returns the content view.
 func (gc *GridCell) ContentView() *View {
+	defer runtime.KeepAlive(gc)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -134,6 +143,7 @@ func (gc *GridCell) ContentView() *View {
 
 // Row returns the row.
 func (gc *GridCell) Row() *GridRow {
+	defer runtime.KeepAlive(gc)
 	var _mainthread0 *GridRow
 	purego.Main(func() {
 		_mainthread0 = func() *GridRow {
@@ -147,6 +157,7 @@ func (gc *GridCell) Row() *GridRow {
 
 // Column returns the column.
 func (gc *GridCell) Column() *GridColumn {
+	defer runtime.KeepAlive(gc)
 	var _mainthread0 *GridColumn
 	purego.Main(func() {
 		_mainthread0 = func() *GridColumn {
@@ -160,6 +171,7 @@ func (gc *GridCell) Column() *GridColumn {
 
 // XPlacement returns the x placement.
 func (gc *GridCell) XPlacement() GridCellPlacement {
+	defer runtime.KeepAlive(gc)
 	var _mainthread0 GridCellPlacement
 	purego.Main(func() {
 		_mainthread0 = func() GridCellPlacement {
@@ -173,6 +185,7 @@ func (gc *GridCell) XPlacement() GridCellPlacement {
 
 // YPlacement returns the y placement.
 func (gc *GridCell) YPlacement() GridCellPlacement {
+	defer runtime.KeepAlive(gc)
 	var _mainthread0 GridCellPlacement
 	purego.Main(func() {
 		_mainthread0 = func() GridCellPlacement {
@@ -186,6 +199,7 @@ func (gc *GridCell) YPlacement() GridCellPlacement {
 
 // RowAlignment returns the row alignment.
 func (gc *GridCell) RowAlignment() GridRowAlignment {
+	defer runtime.KeepAlive(gc)
 	var _mainthread0 GridRowAlignment
 	purego.Main(func() {
 		_mainthread0 = func() GridRowAlignment {
@@ -201,6 +215,7 @@ func (gc *GridCell) RowAlignment() GridRowAlignment {
 //
 // CustomPlacementConstraints returns the collection as a Go slice.
 func (gc *GridCell) CustomPlacementConstraints() []*LayoutConstraint {
+	defer runtime.KeepAlive(gc)
 	var _mainthread0 []*LayoutConstraint
 	purego.Main(func() {
 		_mainthread0 = func() []*LayoutConstraint {

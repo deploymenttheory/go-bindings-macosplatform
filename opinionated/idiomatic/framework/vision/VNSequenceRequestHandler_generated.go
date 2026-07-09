@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func sequenceRequestHandlerAdopt(id objc.ID) *SequenceRequestHandler {
 
 // Description returns the object's -description text.
 func (srh *SequenceRequestHandler) Description() string {
+	defer runtime.KeepAlive(srh)
 	return rt.Description(objref.IDOf(srh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (srh *SequenceRequestHandler) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(srh)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(srh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (srh *SequenceRequestHandler) IsKind(className string) bool {
+	defer runtime.KeepAlive(srh)
 	return rt.IsKind(objref.IDOf(srh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (srh *SequenceRequestHandler) String() string {
+	defer runtime.KeepAlive(srh)
 	return rt.Description(objref.IDOf(srh))
 }
 
@@ -77,6 +83,7 @@ func NewSequenceRequestHandler() *SequenceRequestHandler {
 
 // PerformRequestsOnCVPixelBuffer schedules one or more Vision requests to be performed on a Core Video pixel buffer.
 func (srh *SequenceRequestHandler) PerformRequestsOnCVPixelBuffer(requests []*Request, pixelBuffer unsafe.Pointer) error {
+	defer runtime.KeepAlive(srh)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(srh), objc.RegisterName("performRequests:onCVPixelBuffer:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), pixelBuffer, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -87,6 +94,8 @@ func (srh *SequenceRequestHandler) PerformRequestsOnCVPixelBuffer(requests []*Re
 
 // PerformRequestsOnCGImage schedules Vision requests to be performed on a Core Graphics image.
 func (srh *SequenceRequestHandler) PerformRequestsOnCGImage(requests []*Request, image obj.Object) error {
+	defer runtime.KeepAlive(srh)
+	defer runtime.KeepAlive(image)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(srh), objc.RegisterName("performRequests:onCGImage:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(image), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -97,6 +106,8 @@ func (srh *SequenceRequestHandler) PerformRequestsOnCGImage(requests []*Request,
 
 // PerformRequestsOnCIImage schedules one or more Vision requests to be performed on Core Image image data.
 func (srh *SequenceRequestHandler) PerformRequestsOnCIImage(requests []*Request, image obj.Object) error {
+	defer runtime.KeepAlive(srh)
+	defer runtime.KeepAlive(image)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(srh), objc.RegisterName("performRequests:onCIImage:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(image), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -107,6 +118,7 @@ func (srh *SequenceRequestHandler) PerformRequestsOnCIImage(requests []*Request,
 
 // PerformRequestsOnImageURL schedules one or more Vision requests to be performed on an image.
 func (srh *SequenceRequestHandler) PerformRequestsOnImageURL(requests []*Request, imageURL string) error {
+	defer runtime.KeepAlive(srh)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(srh), objc.RegisterName("performRequests:onImageURL:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), rt.FileURL(imageURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -116,9 +128,10 @@ func (srh *SequenceRequestHandler) PerformRequestsOnImageURL(requests []*Request
 }
 
 // PerformRequestsOnImageData schedules one or more Vision requests to be performed on raw image data.
-func (srh *SequenceRequestHandler) PerformRequestsOnImageData(requests []*Request, imageData obj.Object) error {
+func (srh *SequenceRequestHandler) PerformRequestsOnImageData(requests []*Request, imageData []byte) error {
+	defer runtime.KeepAlive(srh)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(srh), objc.RegisterName("performRequests:onImageData:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(imageData), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(srh), objc.RegisterName("performRequests:onImageData:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), rt.BytesToNSData(imageData), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -127,6 +140,8 @@ func (srh *SequenceRequestHandler) PerformRequestsOnImageData(requests []*Reques
 
 // PerformRequestsOnCMSampleBuffer performs one or more requests on an image contained within a sample buffer.
 func (srh *SequenceRequestHandler) PerformRequestsOnCMSampleBuffer(requests []*Request, sampleBuffer obj.Object) error {
+	defer runtime.KeepAlive(srh)
+	defer runtime.KeepAlive(sampleBuffer)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(srh), objc.RegisterName("performRequests:onCMSampleBuffer:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(sampleBuffer), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

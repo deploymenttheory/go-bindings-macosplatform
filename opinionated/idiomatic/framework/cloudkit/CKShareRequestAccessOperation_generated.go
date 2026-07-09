@@ -6,11 +6,13 @@ package cloudkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,9 +56,9 @@ func NewShareRequestAccessOperation() *ShareRequestAccessOperation {
 }
 
 // NewShareRequestAccessOperationWithShareURLs creates a share request access operation configured with specified share URLs.
-func NewShareRequestAccessOperationWithShareURLs(shareURLs []obj.Object) *ShareRequestAccessOperation {
+func NewShareRequestAccessOperationWithShareURLs(shareURLs []string) *ShareRequestAccessOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKShareRequestAccessOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShareURLs:"), purego.SliceToNSArray(shareURLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShareURLs:"), purego.SliceToNSArray(shareURLs, func(_v string) objc.ID { return rt.FileURL(_v) }))
 	return shareRequestAccessOperationAdopt(_id)
 }
 
@@ -69,12 +71,14 @@ func (srao *ShareRequestAccessOperation) WithShareURLs(items ...obj.Object) *Sha
 
 // WithConfiguration sets the operation’s configuration.
 func (srao *ShareRequestAccessOperation) WithConfiguration(configuration *OperationConfiguration) *ShareRequestAccessOperation {
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(srao), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return srao
 }
 
 // WithGroup sets the operation’s group.
 func (srao *ShareRequestAccessOperation) WithGroup(group *OperationGroup) *ShareRequestAccessOperation {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(srao), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return srao
 }
@@ -87,6 +91,7 @@ func (srao *ShareRequestAccessOperation) WithLongLivedOperationWasPersistedBlock
 
 // WithContainer sets the operation's container.
 func (srao *ShareRequestAccessOperation) WithContainer(container *Container) *ShareRequestAccessOperation {
+	defer runtime.KeepAlive(container)
 	objc.Send[objc.ID](objref.IDOf(srao), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return srao
 }
@@ -118,15 +123,17 @@ func (srao *ShareRequestAccessOperation) WithTimeoutIntervalForResource(timeoutI
 // ShareURLs returns the URLs of the shares to request access to. Include multiple URLs to request access to multiple shares simultaneously. The server processes each URL independently.
 //
 // ShareURLs returns the collection as a Go slice.
-func (srao *ShareRequestAccessOperation) ShareURLs() []obj.Object {
+func (srao *ShareRequestAccessOperation) ShareURLs() []string {
+	defer runtime.KeepAlive(srao)
 	_arr := objc.Send[objc.ID](objref.IDOf(srao), objc.RegisterName("shareURLs"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return rt.URLString(_id) })
 }
 
 // SetPerShareAccessRequestCompletionBlock wraps the corresponding Objective-C method.
 //
 // SetPerShareAccessRequestCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (srao *ShareRequestAccessOperation) SetPerShareAccessRequestCompletionBlock(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(srao)
 	type _result struct {
 		val obj.Object
 		err error
@@ -152,6 +159,7 @@ func (srao *ShareRequestAccessOperation) SetPerShareAccessRequestCompletionBlock
 //
 // SetShareRequestAccessCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (srao *ShareRequestAccessOperation) SetShareRequestAccessCompletionBlock(ctx context.Context) error {
+	defer runtime.KeepAlive(srao)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error

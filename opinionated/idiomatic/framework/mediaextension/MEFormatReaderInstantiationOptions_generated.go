@@ -5,6 +5,8 @@
 package mediaextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func formatReaderInstantiationOptionsAdopt(id objc.ID) *FormatReaderInstantiatio
 
 // Description returns the object's -description text.
 func (frio *FormatReaderInstantiationOptions) Description() string {
+	defer runtime.KeepAlive(frio)
 	return rt.Description(objref.IDOf(frio))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (frio *FormatReaderInstantiationOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(frio)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(frio), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (frio *FormatReaderInstantiationOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(frio)
 	return rt.IsKind(objref.IDOf(frio), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (frio *FormatReaderInstantiationOptions) String() string {
+	defer runtime.KeepAlive(frio)
 	return rt.Description(objref.IDOf(frio))
 }
 
@@ -74,6 +81,7 @@ func NewFormatReaderInstantiationOptions() *FormatReaderInstantiationOptions {
 
 // AllowIncrementalFragmentParsing wraps the corresponding Objective-C method.
 func (frio *FormatReaderInstantiationOptions) AllowIncrementalFragmentParsing() bool {
+	defer runtime.KeepAlive(frio)
 	_r := objc.Send[bool](objref.IDOf(frio), objc.RegisterName("allowIncrementalFragmentParsing"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package devicediscoveryextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func dDDeviceEventAdopt(id objc.ID) *DDDeviceEvent {
 
 // Description returns the object's -description text.
 func (dde *DDDeviceEvent) Description() string {
+	defer runtime.KeepAlive(dde)
 	return rt.Description(objref.IDOf(dde))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dde *DDDeviceEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dde)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dde), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dde *DDDeviceEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(dde)
 	return rt.IsKind(objref.IDOf(dde), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dde *DDDeviceEvent) String() string {
+	defer runtime.KeepAlive(dde)
 	return rt.Description(objref.IDOf(dde))
 }
 
 // NewDDDeviceEventWithEventTypeDevice creates an event object that conveys status for a discovered device of interest.
 func NewDDDeviceEventWithEventTypeDevice(type_ DDEventType, device *DDDevice) *DDDeviceEvent {
+	defer runtime.KeepAlive(device)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DDDeviceEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEventType:device:"), type_, objref.IDOf(device))
 	return dDDeviceEventAdopt(_id)
@@ -75,12 +83,14 @@ func NewDDDeviceEventWithEventTypeDevice(type_ DDEventType, device *DDDevice) *D
 
 // Device returns device found or lost.
 func (dde *DDDeviceEvent) Device() *DDDevice {
+	defer runtime.KeepAlive(dde)
 	_r := objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("device"))
 	return DDDeviceFromID(_r)
 }
 
 // EventType returns type of event.
 func (dde *DDDeviceEvent) EventType() DDEventType {
+	defer runtime.KeepAlive(dde)
 	_r := objc.Send[DDEventType](objref.IDOf(dde), objc.RegisterName("eventType"))
 	return _r
 }

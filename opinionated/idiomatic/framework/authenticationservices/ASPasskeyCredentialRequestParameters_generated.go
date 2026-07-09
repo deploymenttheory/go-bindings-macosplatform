@@ -5,7 +5,10 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func passkeyCredentialRequestParametersAdopt(id objc.ID) *PasskeyCredentialReque
 
 // Description returns the object's -description text.
 func (pcrp *PasskeyCredentialRequestParameters) Description() string {
+	defer runtime.KeepAlive(pcrp)
 	return rt.Description(objref.IDOf(pcrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pcrp *PasskeyCredentialRequestParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pcrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pcrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pcrp *PasskeyCredentialRequestParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(pcrp)
 	return rt.IsKind(objref.IDOf(pcrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pcrp *PasskeyCredentialRequestParameters) String() string {
+	defer runtime.KeepAlive(pcrp)
 	return rt.Description(objref.IDOf(pcrp))
 }
 
@@ -74,6 +82,7 @@ func NewPasskeyCredentialRequestParameters() *PasskeyCredentialRequestParameters
 
 // RelyingPartyIdentifier returns the relying party identifier for this request.
 func (pcrp *PasskeyCredentialRequestParameters) RelyingPartyIdentifier() string {
+	defer runtime.KeepAlive(pcrp)
 	_r := objc.Send[objc.ID](objref.IDOf(pcrp), objc.RegisterName("relyingPartyIdentifier"))
 	if _r == 0 {
 		return ""
@@ -82,27 +91,31 @@ func (pcrp *PasskeyCredentialRequestParameters) RelyingPartyIdentifier() string 
 }
 
 // ClientDataHash returns hash of client data for credential provider to sign as part of the operation.
-func (pcrp *PasskeyCredentialRequestParameters) ClientDataHash() obj.Object {
+func (pcrp *PasskeyCredentialRequestParameters) ClientDataHash() []byte {
+	defer runtime.KeepAlive(pcrp)
 	_r := objc.Send[objc.ID](objref.IDOf(pcrp), objc.RegisterName("clientDataHash"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // UserVerificationPreference returns a preference for whether the authenticator should attempt to verify that it is being used by its owner, such as through a PIN or biometrics.
-func (pcrp *PasskeyCredentialRequestParameters) UserVerificationPreference() obj.Object {
+func (pcrp *PasskeyCredentialRequestParameters) UserVerificationPreference() *foundation.String {
+	defer runtime.KeepAlive(pcrp)
 	_r := objc.Send[objc.ID](objref.IDOf(pcrp), objc.RegisterName("userVerificationPreference"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // AllowedCredentials returns a list of allowed credential IDs for this request. An empty list means all credentials are allowed.
 //
 // AllowedCredentials returns the collection as a Go slice.
-func (pcrp *PasskeyCredentialRequestParameters) AllowedCredentials() []obj.Object {
+func (pcrp *PasskeyCredentialRequestParameters) AllowedCredentials() [][]byte {
+	defer runtime.KeepAlive(pcrp)
 	_arr := objc.Send[objc.ID](objref.IDOf(pcrp), objc.RegisterName("allowedCredentials"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) []byte { return rt.NSDataToBytes(_id) })
 }
 
 // ExtensionInput returns inputs for WebAuthn extensions used for passkey assertion.
 func (pcrp *PasskeyCredentialRequestParameters) ExtensionInput() *PasskeyAssertionCredentialExtensionInput {
+	defer runtime.KeepAlive(pcrp)
 	_r := objc.Send[objc.ID](objref.IDOf(pcrp), objc.RegisterName("extensionInput"))
 	return PasskeyAssertionCredentialExtensionInputFromID(_r)
 }

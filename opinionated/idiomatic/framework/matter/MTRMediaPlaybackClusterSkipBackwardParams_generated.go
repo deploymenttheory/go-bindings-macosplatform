@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRMediaPlaybackClusterSkipBackwardParamsAdopt(id objc.ID) *MTRMediaPlaybac
 
 // Description returns the object's -description text.
 func (mmpcsbp *MTRMediaPlaybackClusterSkipBackwardParams) Description() string {
+	defer runtime.KeepAlive(mmpcsbp)
 	return rt.Description(objref.IDOf(mmpcsbp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmpcsbp *MTRMediaPlaybackClusterSkipBackwardParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmpcsbp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmpcsbp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmpcsbp *MTRMediaPlaybackClusterSkipBackwardParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmpcsbp)
 	return rt.IsKind(objref.IDOf(mmpcsbp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmpcsbp *MTRMediaPlaybackClusterSkipBackwardParams) String() string {
+	defer runtime.KeepAlive(mmpcsbp)
 	return rt.Description(objref.IDOf(mmpcsbp))
 }
 
@@ -72,36 +80,42 @@ func NewMTRMediaPlaybackClusterSkipBackwardParams() *MTRMediaPlaybackClusterSkip
 
 // WithDeltaPositionMilliseconds sets the delta position milliseconds.
 func (mmpcsbp *MTRMediaPlaybackClusterSkipBackwardParams) WithDeltaPositionMilliseconds(deltaPositionMilliseconds obj.Object) *MTRMediaPlaybackClusterSkipBackwardParams {
+	defer runtime.KeepAlive(deltaPositionMilliseconds)
 	objc.Send[objc.ID](objref.IDOf(mmpcsbp), objc.RegisterName("setDeltaPositionMilliseconds:"), objref.IDOf(deltaPositionMilliseconds))
 	return mmpcsbp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mmpcsbp *MTRMediaPlaybackClusterSkipBackwardParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMediaPlaybackClusterSkipBackwardParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mmpcsbp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mmpcsbp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mmpcsbp *MTRMediaPlaybackClusterSkipBackwardParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMediaPlaybackClusterSkipBackwardParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mmpcsbp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mmpcsbp
 }
 
 // DeltaPositionMilliseconds returns the delta position milliseconds.
-func (mmpcsbp *MTRMediaPlaybackClusterSkipBackwardParams) DeltaPositionMilliseconds() obj.Object {
+func (mmpcsbp *MTRMediaPlaybackClusterSkipBackwardParams) DeltaPositionMilliseconds() *foundation.Number {
+	defer runtime.KeepAlive(mmpcsbp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcsbp), objc.RegisterName("deltaPositionMilliseconds"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mmpcsbp *MTRMediaPlaybackClusterSkipBackwardParams) TimedInvokeTimeoutMs() obj.Object {
+func (mmpcsbp *MTRMediaPlaybackClusterSkipBackwardParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mmpcsbp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcsbp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mmpcsbp *MTRMediaPlaybackClusterSkipBackwardParams) ServerSideProcessingTimeout() obj.Object {
+func (mmpcsbp *MTRMediaPlaybackClusterSkipBackwardParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mmpcsbp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcsbp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewParameterKey() *ParameterKey {
 
 // ScopedTo creates a copy of a parameter key and adds the scope to it.
 func (pk *ParameterKey) ScopedTo(scope string) *ParameterKey {
+	defer runtime.KeepAlive(pk)
 	_r := objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("scopedTo:"), purego.NSString(scope))
 	return ParameterKeyFromID(_r)
 }

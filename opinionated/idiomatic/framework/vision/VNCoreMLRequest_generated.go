@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,6 +50,7 @@ func coreMLRequestAdopt(id objc.ID) *CoreMLRequest {
 
 // NewCoreMLRequestWithModel creates a model container to use with an image analysis request based on the model you provide.
 func NewCoreMLRequestWithModel(model *CoreMLModel) *CoreMLRequest {
+	defer runtime.KeepAlive(model)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNCoreMLRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithModel:"), objref.IDOf(model))
 	return coreMLRequestAdopt(_id)
@@ -85,12 +88,14 @@ func (cmr *CoreMLRequest) WithRevision(revision int) *CoreMLRequest {
 
 // Model returns the model from CoreML wrapped in a VNCoreMLModel.
 func (cmr *CoreMLRequest) Model() *CoreMLModel {
+	defer runtime.KeepAlive(cmr)
 	_r := objc.Send[objc.ID](objref.IDOf(cmr), objc.RegisterName("model"))
 	return CoreMLModelFromID(_r)
 }
 
 // ImageCropAndScaleOption returns the image crop and scale option.
 func (cmr *CoreMLRequest) ImageCropAndScaleOption() ImageCropAndScaleOption {
+	defer runtime.KeepAlive(cmr)
 	_r := objc.Send[ImageCropAndScaleOption](objref.IDOf(cmr), objc.RegisterName("imageCropAndScaleOption"))
 	return _r
 }

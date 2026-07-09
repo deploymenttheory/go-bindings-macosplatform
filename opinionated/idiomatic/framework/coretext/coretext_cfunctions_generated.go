@@ -434,24 +434,24 @@ func CTFontCopyVariationAxes(font obj.Object) obj.Object {
 var _fnCTFontCreateForString func(objc.ID, objc.ID, corefoundation.CFRange) objc.ID
 
 // CTFontCreateForString calls the CoreText framework function CTFontCreateForString.
-func CTFontCreateForString(currentFont obj.Object, string_ obj.Object, range_ corefoundation.CFRange) obj.Object {
+func CTFontCreateForString(currentFont obj.Object, str obj.Object, range_ corefoundation.CFRange) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTFontCreateForString == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontCreateForString, _lib, "CTFontCreateForString")
 	}
-	_ret := _fnCTFontCreateForString(objref.IDOf(currentFont), objref.IDOf(string_), range_)
+	_ret := _fnCTFontCreateForString(objref.IDOf(currentFont), objref.IDOf(str), range_)
 	return obj.Wrap(_ret)
 }
 
 var _fnCTFontCreateForStringWithLanguage func(objc.ID, objc.ID, corefoundation.CFRange, objc.ID) objc.ID
 
 // CTFontCreateForStringWithLanguage calls the CoreText framework function CTFontCreateForStringWithLanguage.
-func CTFontCreateForStringWithLanguage(currentFont obj.Object, string_ obj.Object, range_ corefoundation.CFRange, language obj.Object) obj.Object {
+func CTFontCreateForStringWithLanguage(currentFont obj.Object, str obj.Object, range_ corefoundation.CFRange, language obj.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTFontCreateForStringWithLanguage == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontCreateForStringWithLanguage, _lib, "CTFontCreateForStringWithLanguage")
 	}
-	_ret := _fnCTFontCreateForStringWithLanguage(objref.IDOf(currentFont), objref.IDOf(string_), range_, objref.IDOf(language))
+	_ret := _fnCTFontCreateForStringWithLanguage(objref.IDOf(currentFont), objref.IDOf(str), range_, objref.IDOf(language))
 	return obj.Wrap(_ret)
 }
 
@@ -1585,12 +1585,12 @@ func CTRubyAnnotationCreateCopy(rubyAnnotation obj.Object) obj.Object {
 var _fnCTRubyAnnotationCreateWithAttributes func(CTRubyAlignment, CTRubyOverhang, CTRubyPosition, objc.ID, objc.ID) objc.ID
 
 // CTRubyAnnotationCreateWithAttributes calls the CoreText framework function CTRubyAnnotationCreateWithAttributes.
-func CTRubyAnnotationCreateWithAttributes(alignment CTRubyAlignment, overhang CTRubyOverhang, position CTRubyPosition, string_ obj.Object, attributes obj.Object) obj.Object {
+func CTRubyAnnotationCreateWithAttributes(alignment CTRubyAlignment, overhang CTRubyOverhang, position CTRubyPosition, str obj.Object, attributes obj.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTRubyAnnotationCreateWithAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnCTRubyAnnotationCreateWithAttributes, _lib, "CTRubyAnnotationCreateWithAttributes")
 	}
-	_ret := _fnCTRubyAnnotationCreateWithAttributes(alignment, overhang, position, objref.IDOf(string_), objref.IDOf(attributes))
+	_ret := _fnCTRubyAnnotationCreateWithAttributes(alignment, overhang, position, objref.IDOf(str), objref.IDOf(attributes))
 	return obj.Wrap(_ret)
 }
 
@@ -1875,24 +1875,24 @@ func CTTypesetterCreateLineWithOffset(typesetter obj.Object, stringRange corefou
 var _fnCTTypesetterCreateWithAttributedString func(objc.ID) objc.ID
 
 // CTTypesetterCreateWithAttributedString calls the CoreText framework function CTTypesetterCreateWithAttributedString.
-func CTTypesetterCreateWithAttributedString(string_ obj.Object) obj.Object {
+func CTTypesetterCreateWithAttributedString(str obj.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTTypesetterCreateWithAttributedString == nil {
 		ebipurego.RegisterLibFunc(&_fnCTTypesetterCreateWithAttributedString, _lib, "CTTypesetterCreateWithAttributedString")
 	}
-	_ret := _fnCTTypesetterCreateWithAttributedString(objref.IDOf(string_))
+	_ret := _fnCTTypesetterCreateWithAttributedString(objref.IDOf(str))
 	return obj.Wrap(_ret)
 }
 
 var _fnCTTypesetterCreateWithAttributedStringAndOptions func(objc.ID, objc.ID) objc.ID
 
 // CTTypesetterCreateWithAttributedStringAndOptions calls the CoreText framework function CTTypesetterCreateWithAttributedStringAndOptions.
-func CTTypesetterCreateWithAttributedStringAndOptions(string_ obj.Object, options obj.Object) obj.Object {
+func CTTypesetterCreateWithAttributedStringAndOptions(str obj.Object, options obj.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTTypesetterCreateWithAttributedStringAndOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnCTTypesetterCreateWithAttributedStringAndOptions, _lib, "CTTypesetterCreateWithAttributedStringAndOptions")
 	}
-	_ret := _fnCTTypesetterCreateWithAttributedStringAndOptions(objref.IDOf(string_), objref.IDOf(options))
+	_ret := _fnCTTypesetterCreateWithAttributedStringAndOptions(objref.IDOf(str), objref.IDOf(options))
 	return obj.Wrap(_ret)
 }
 

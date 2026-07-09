@@ -5,6 +5,8 @@
 package avkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func playbackSpeedAdopt(id objc.ID) *PlaybackSpeed {
 
 // Description returns the object's -description text.
 func (ps *PlaybackSpeed) Description() string {
+	defer runtime.KeepAlive(ps)
 	return rt.Description(objref.IDOf(ps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ps *PlaybackSpeed) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ps *PlaybackSpeed) IsKind(className string) bool {
+	defer runtime.KeepAlive(ps)
 	return rt.IsKind(objref.IDOf(ps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ps *PlaybackSpeed) String() string {
+	defer runtime.KeepAlive(ps)
 	return rt.Description(objref.IDOf(ps))
 }
 
@@ -75,12 +82,14 @@ func NewPlaybackSpeedWithRateLocalizedName(rate float32, localizedName string) *
 
 // Rate returns the rate associated with this object. When this playback speed is selected this rate will be set in response to the play button being pressed.
 func (ps *PlaybackSpeed) Rate() float32 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float32](objref.IDOf(ps), objc.RegisterName("rate"))
 	return _r
 }
 
 // LocalizedName returns a localized name for this playback speed. This name will be used to represent this playback speed in playback UIs where more space is available.
 func (ps *PlaybackSpeed) LocalizedName() string {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
@@ -90,6 +99,7 @@ func (ps *PlaybackSpeed) LocalizedName() string {
 
 // LocalizedNumericName returns a localized name for this playback speed used when space is limited. This name will be used to represent this playback speed in playback UIs where limited space is available.
 func (ps *PlaybackSpeed) LocalizedNumericName() string {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("localizedNumericName"))
 	if _r == 0 {
 		return ""

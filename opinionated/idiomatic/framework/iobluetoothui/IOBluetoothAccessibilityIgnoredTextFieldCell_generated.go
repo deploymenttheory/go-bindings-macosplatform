@@ -5,6 +5,8 @@
 package iobluetoothui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func bluetoothAccessibilityIgnoredTextFieldCellAdopt(id objc.ID) *BluetoothAcces
 
 // Description returns the object's -description text.
 func (baitfc *BluetoothAccessibilityIgnoredTextFieldCell) Description() string {
+	defer runtime.KeepAlive(baitfc)
 	return rt.Description(objref.IDOf(baitfc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (baitfc *BluetoothAccessibilityIgnoredTextFieldCell) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(baitfc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(baitfc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (baitfc *BluetoothAccessibilityIgnoredTextFieldCell) IsKind(className string) bool {
+	defer runtime.KeepAlive(baitfc)
 	return rt.IsKind(objref.IDOf(baitfc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (baitfc *BluetoothAccessibilityIgnoredTextFieldCell) String() string {
+	defer runtime.KeepAlive(baitfc)
 	return rt.Description(objref.IDOf(baitfc))
 }
 

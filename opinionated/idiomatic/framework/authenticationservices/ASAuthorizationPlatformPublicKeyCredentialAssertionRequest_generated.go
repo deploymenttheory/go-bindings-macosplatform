@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -60,12 +62,14 @@ func (appkcar *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithAll
 
 // WithLargeBlob sets the request’s binary large object value.
 func (appkcar *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithLargeBlob(largeBlob *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
+	defer runtime.KeepAlive(largeBlob)
 	objc.Send[objc.ID](objref.IDOf(appkcar), objc.RegisterName("setLargeBlob:"), objref.IDOf(largeBlob))
 	return appkcar
 }
 
 // WithPrf sets the prf.
 func (appkcar *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithPrf(prf *AuthorizationPublicKeyCredentialPRFAssertionInput) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
+	defer runtime.KeepAlive(prf)
 	objc.Send[objc.ID](objref.IDOf(appkcar), objc.RegisterName("setPrf:"), objref.IDOf(prf))
 	return appkcar
 }
@@ -74,6 +78,7 @@ func (appkcar *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithPrf
 //
 // AllowedCredentials returns the collection as a Go slice.
 func (appkcar *AuthorizationPlatformPublicKeyCredentialAssertionRequest) AllowedCredentials() []*AuthorizationPlatformPublicKeyCredentialDescriptor {
+	defer runtime.KeepAlive(appkcar)
 	_arr := objc.Send[objc.ID](objref.IDOf(appkcar), objc.RegisterName("allowedCredentials"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AuthorizationPlatformPublicKeyCredentialDescriptor {
 		return AuthorizationPlatformPublicKeyCredentialDescriptorFromID(_id)
@@ -82,12 +87,14 @@ func (appkcar *AuthorizationPlatformPublicKeyCredentialAssertionRequest) Allowed
 
 // LargeBlob returns the large blob.
 func (appkcar *AuthorizationPlatformPublicKeyCredentialAssertionRequest) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
+	defer runtime.KeepAlive(appkcar)
 	_r := objc.Send[objc.ID](objref.IDOf(appkcar), objc.RegisterName("largeBlob"))
 	return AuthorizationPublicKeyCredentialLargeBlobAssertionInputFromID(_r)
 }
 
 // Prf returns the prf.
 func (appkcar *AuthorizationPlatformPublicKeyCredentialAssertionRequest) Prf() *AuthorizationPublicKeyCredentialPRFAssertionInput {
+	defer runtime.KeepAlive(appkcar)
 	_r := objc.Send[objc.ID](objref.IDOf(appkcar), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFAssertionInputFromID(_r)
 }

@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func rNNDescriptorAdopt(id objc.ID) *RNNDescriptor {
 
 // Description returns the object's -description text.
 func (rd *RNNDescriptor) Description() string {
+	defer runtime.KeepAlive(rd)
 	return rt.Description(objref.IDOf(rd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rd *RNNDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rd *RNNDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(rd)
 	return rt.IsKind(objref.IDOf(rd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rd *RNNDescriptor) String() string {
+	defer runtime.KeepAlive(rd)
 	return rt.Description(objref.IDOf(rd))
 }
 
@@ -94,24 +101,28 @@ func (rd *RNNDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *RNNDescr
 
 // InputFeatureChannels returns the number of feature channels per pixel in the input image or number of rows in the input matrix.
 func (rd *RNNDescriptor) InputFeatureChannels() int {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[int](objref.IDOf(rd), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
 // OutputFeatureChannels returns the number of feature channels per pixel in the destination image or number of rows in the destination matrix.
 func (rd *RNNDescriptor) OutputFeatureChannels() int {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[int](objref.IDOf(rd), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }
 
 // UseLayerInputUnitTransformMode reports whether if true then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
 func (rd *RNNDescriptor) UseLayerInputUnitTransformMode() bool {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("useLayerInputUnitTransformMode"))
 	return _r
 }
 
 // UseFloat32Weights reports whether if true, then
 func (rd *RNNDescriptor) UseFloat32Weights() bool {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("useFloat32Weights"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func gPUComputeDeviceAdopt(id objc.ID) *GPUComputeDevice {
 
 // Description returns the object's -description text.
 func (gcd *GPUComputeDevice) Description() string {
+	defer runtime.KeepAlive(gcd)
 	return rt.Description(objref.IDOf(gcd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gcd *GPUComputeDevice) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gcd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gcd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gcd *GPUComputeDevice) IsKind(className string) bool {
+	defer runtime.KeepAlive(gcd)
 	return rt.IsKind(objref.IDOf(gcd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gcd *GPUComputeDevice) String() string {
+	defer runtime.KeepAlive(gcd)
 	return rt.Description(objref.IDOf(gcd))
 }
 

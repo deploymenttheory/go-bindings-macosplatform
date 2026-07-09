@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,6 +56,7 @@ func NewCellularConditionMetric() *CellularConditionMetric {
 
 // HistogrammedCellularConditionTime returns the histogrammed cellular condition time.
 func (ccm *CellularConditionMetric) HistogrammedCellularConditionTime() obj.Object {
+	defer runtime.KeepAlive(ccm)
 	_r := objc.Send[objc.ID](objref.IDOf(ccm), objc.RegisterName("histogrammedCellularConditionTime"))
 	return obj.Wrap(_r)
 }

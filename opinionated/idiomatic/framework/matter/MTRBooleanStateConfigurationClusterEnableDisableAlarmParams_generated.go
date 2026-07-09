@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRBooleanStateConfigurationClusterEnableDisableAlarmParamsAdopt(id objc.ID
 
 // Description returns the object's -description text.
 func (mbsccedap *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) Description() string {
+	defer runtime.KeepAlive(mbsccedap)
 	return rt.Description(objref.IDOf(mbsccedap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbsccedap *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbsccedap)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbsccedap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbsccedap *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbsccedap)
 	return rt.IsKind(objref.IDOf(mbsccedap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbsccedap *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) String() string {
+	defer runtime.KeepAlive(mbsccedap)
 	return rt.Description(objref.IDOf(mbsccedap))
 }
 
@@ -72,36 +80,42 @@ func NewMTRBooleanStateConfigurationClusterEnableDisableAlarmParams() *MTRBoolea
 
 // WithAlarmsToEnableDisable sets the alarms to enable disable.
 func (mbsccedap *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) WithAlarmsToEnableDisable(alarmsToEnableDisable obj.Object) *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams {
+	defer runtime.KeepAlive(alarmsToEnableDisable)
 	objc.Send[objc.ID](objref.IDOf(mbsccedap), objc.RegisterName("setAlarmsToEnableDisable:"), objref.IDOf(alarmsToEnableDisable))
 	return mbsccedap
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mbsccedap *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mbsccedap), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mbsccedap
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mbsccedap *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mbsccedap), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mbsccedap
 }
 
 // AlarmsToEnableDisable returns the alarms to enable disable.
-func (mbsccedap *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) AlarmsToEnableDisable() obj.Object {
+func (mbsccedap *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) AlarmsToEnableDisable() *foundation.Number {
+	defer runtime.KeepAlive(mbsccedap)
 	_r := objc.Send[objc.ID](objref.IDOf(mbsccedap), objc.RegisterName("alarmsToEnableDisable"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mbsccedap *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) TimedInvokeTimeoutMs() obj.Object {
+func (mbsccedap *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mbsccedap)
 	_r := objc.Send[objc.ID](objref.IDOf(mbsccedap), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mbsccedap *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) ServerSideProcessingTimeout() obj.Object {
+func (mbsccedap *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mbsccedap)
 	_r := objc.Send[objc.ID](objref.IDOf(mbsccedap), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

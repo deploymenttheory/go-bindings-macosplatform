@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTRContentLauncherClusterStyleInformationStructAdopt(id objc.ID) *MTRConten
 
 // Description returns the object's -description text.
 func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) Description() string {
+	defer runtime.KeepAlive(mclcsis)
 	return rt.Description(objref.IDOf(mclcsis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mclcsis)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mclcsis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mclcsis)
 	return rt.IsKind(objref.IDOf(mclcsis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) String() string {
+	defer runtime.KeepAlive(mclcsis)
 	return rt.Description(objref.IDOf(mclcsis))
 }
 
@@ -80,12 +87,14 @@ func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) WithColor(color 
 
 // WithSize sets the size.
 func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) WithSize(size MTRContentLauncherClusterDimensionStructProvider) *MTRContentLauncherClusterStyleInformationStruct {
+	defer runtime.KeepAlive(size)
 	objc.Send[objc.ID](objref.IDOf(mclcsis), objc.RegisterName("setSize:"), objref.IDOf(size))
 	return mclcsis
 }
 
 // ImageURL returns the image URL.
 func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) ImageURL() string {
+	defer runtime.KeepAlive(mclcsis)
 	_r := objc.Send[objc.ID](objref.IDOf(mclcsis), objc.RegisterName("imageURL"))
 	if _r == 0 {
 		return ""
@@ -95,6 +104,7 @@ func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) ImageURL() strin
 
 // Color returns the color.
 func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) Color() string {
+	defer runtime.KeepAlive(mclcsis)
 	_r := objc.Send[objc.ID](objref.IDOf(mclcsis), objc.RegisterName("color"))
 	if _r == 0 {
 		return ""
@@ -104,6 +114,7 @@ func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) Color() string {
 
 // Size returns the size.
 func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) Size() *MTRContentLauncherClusterDimensionStruct {
+	defer runtime.KeepAlive(mclcsis)
 	_r := objc.Send[objc.ID](objref.IDOf(mclcsis), objc.RegisterName("size"))
 	return MTRContentLauncherClusterDimensionStructFromID(_r)
 }

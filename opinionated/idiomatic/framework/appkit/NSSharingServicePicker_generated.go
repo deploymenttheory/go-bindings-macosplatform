@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,39 +50,57 @@ func sharingServicePickerAdopt(id objc.ID) *SharingServicePicker {
 
 // Description returns the object's -description text.
 func (ssp *SharingServicePicker) Description() string {
+	defer runtime.KeepAlive(ssp)
 	return rt.Description(objref.IDOf(ssp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ssp *SharingServicePicker) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ssp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ssp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ssp *SharingServicePicker) IsKind(className string) bool {
+	defer runtime.KeepAlive(ssp)
 	return rt.IsKind(objref.IDOf(ssp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ssp *SharingServicePicker) String() string {
+	defer runtime.KeepAlive(ssp)
 	return rt.Description(objref.IDOf(ssp))
 }
 
 // NewSharingServicePickerWithItems creates a new sharing service picker for the selected items.
 func NewSharingServicePickerWithItems(items obj.Object) *SharingServicePicker {
+	defer runtime.KeepAlive(items)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSharingServicePicker")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItems:"), objref.IDOf(items))
 	return sharingServicePickerAdopt(_id)
 }
 
+// WithDelegate sets the object for managing the sharing service picker.
+func (ssp *SharingServicePicker) WithDelegate(delegate SharingServicePickerDelegate) *SharingServicePicker {
+	_shim := newSharingServicePickerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ssp), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ssp), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return ssp
+}
+
 // Close closes the picker interface.
 func (ssp *SharingServicePicker) Close() {
+	defer runtime.KeepAlive(ssp)
 	objc.Send[objc.ID](objref.IDOf(ssp), objc.RegisterName("close"))
 }
 
 // StandardShareMenuItem returns a menu item suitable to display the picker for the given items.
 func (ssp *SharingServicePicker) StandardShareMenuItem() *MenuItem {
+	defer runtime.KeepAlive(ssp)
 	_r := objc.Send[objc.ID](objref.IDOf(ssp), objc.RegisterName("standardShareMenuItem"))
 	return MenuItemFromID(_r)
 }

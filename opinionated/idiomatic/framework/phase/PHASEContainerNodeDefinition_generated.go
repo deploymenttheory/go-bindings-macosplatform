@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -60,6 +62,8 @@ func NewContainerNodeDefinitionWithIdentifier(identifier string) *ContainerNodeD
 
 // AddSubtree adds a sound event node as a child.
 func (cnd *ContainerNodeDefinition) AddSubtree(subtree *SoundEventNodeDefinition) {
+	defer runtime.KeepAlive(cnd)
+	defer runtime.KeepAlive(subtree)
 	objc.Send[objc.ID](objref.IDOf(cnd), objc.RegisterName("addSubtree:"), objref.IDOf(subtree))
 }
 

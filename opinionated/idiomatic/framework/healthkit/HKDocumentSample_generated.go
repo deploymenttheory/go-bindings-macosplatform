@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func documentSampleAdopt(id objc.ID) *DocumentSample {
 
 // DocumentType returns the document type.
 func (ds *DocumentSample) DocumentType() *DocumentType {
+	defer runtime.KeepAlive(ds)
 	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("documentType"))
 	return DocumentTypeFromID(_r)
 }

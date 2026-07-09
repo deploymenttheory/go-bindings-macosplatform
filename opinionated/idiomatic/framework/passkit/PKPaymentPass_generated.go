@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewPaymentPass() *PaymentPass {
 
 // ActivationState returns the activation state.
 func (pp *PaymentPass) ActivationState() PaymentPassActivationState {
+	defer runtime.KeepAlive(pp)
 	_r := objc.Send[PaymentPassActivationState](objref.IDOf(pp), objc.RegisterName("activationState"))
 	return _r
 }

@@ -5,8 +5,11 @@
 package avkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,27 +50,33 @@ func pictureInPictureControllerAdopt(id objc.ID) *PictureInPictureController {
 
 // Description returns the object's -description text.
 func (pipc *PictureInPictureController) Description() string {
+	defer runtime.KeepAlive(pipc)
 	return rt.Description(objref.IDOf(pipc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pipc *PictureInPictureController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pipc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pipc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pipc *PictureInPictureController) IsKind(className string) bool {
+	defer runtime.KeepAlive(pipc)
 	return rt.IsKind(objref.IDOf(pipc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pipc *PictureInPictureController) String() string {
+	defer runtime.KeepAlive(pipc)
 	return rt.Description(objref.IDOf(pipc))
 }
 
 // NewPictureInPictureControllerWithContentSource creates a Picture in Picture controller with a content source.
 func NewPictureInPictureControllerWithContentSource(contentSource *PictureInPictureControllerContentSource) *PictureInPictureController {
+	defer runtime.KeepAlive(contentSource)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPictureInPictureController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentSource:"), objref.IDOf(contentSource))
 	return pictureInPictureControllerAdopt(_id)
@@ -75,6 +84,7 @@ func NewPictureInPictureControllerWithContentSource(contentSource *PictureInPict
 
 // NewPictureInPictureControllerWithPlayerLayer creates a Picture in Picture controller with a player layer.
 func NewPictureInPictureControllerWithPlayerLayer(playerLayer obj.Object) *PictureInPictureController {
+	defer runtime.KeepAlive(playerLayer)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPictureInPictureController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayerLayer:"), objref.IDOf(playerLayer))
 	return pictureInPictureControllerAdopt(_id)
@@ -82,7 +92,18 @@ func NewPictureInPictureControllerWithPlayerLayer(playerLayer obj.Object) *Pictu
 
 // WithContentSource sets the source of the controller’s content.
 func (pipc *PictureInPictureController) WithContentSource(contentSource *PictureInPictureControllerContentSource) *PictureInPictureController {
+	defer runtime.KeepAlive(contentSource)
 	objc.Send[objc.ID](objref.IDOf(pipc), objc.RegisterName("setContentSource:"), objref.IDOf(contentSource))
+	return pipc
+}
+
+// WithDelegate sets a delegate object for a Picture in Picture controller.
+func (pipc *PictureInPictureController) WithDelegate(delegate PictureInPictureControllerDelegate) *PictureInPictureController {
+	_shim := newPictureInPictureControllerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(pipc), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(pipc), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
 	return pipc
 }
 
@@ -94,51 +115,60 @@ func (pipc *PictureInPictureController) WithRequiresLinearPlayback(requiresLinea
 
 // StartPictureInPicture starts Picture in Picture, if possible.
 func (pipc *PictureInPictureController) StartPictureInPicture() {
+	defer runtime.KeepAlive(pipc)
 	objc.Send[objc.ID](objref.IDOf(pipc), objc.RegisterName("startPictureInPicture"))
 }
 
 // StopPictureInPicture stops Picture in Picture, if active.
 func (pipc *PictureInPictureController) StopPictureInPicture() {
+	defer runtime.KeepAlive(pipc)
 	objc.Send[objc.ID](objref.IDOf(pipc), objc.RegisterName("stopPictureInPicture"))
 }
 
 // ContentSource returns the receiver's content source. Can be changed while Picture in Picture is active, but the new content source must be ready for display (in the case of AVPlayerLayer, that means AVPlayerLayer.isReadyForDisplay must return YES), otherwise Picture in Picture will stop.
 func (pipc *PictureInPictureController) ContentSource() *PictureInPictureControllerContentSource {
+	defer runtime.KeepAlive(pipc)
 	_r := objc.Send[objc.ID](objref.IDOf(pipc), objc.RegisterName("contentSource"))
 	return PictureInPictureControllerContentSourceFromID(_r)
 }
 
 // PlayerLayer returns the receiver's player layer.
 func (pipc *PictureInPictureController) PlayerLayer() obj.Object {
+	defer runtime.KeepAlive(pipc)
 	_r := objc.Send[objc.ID](objref.IDOf(pipc), objc.RegisterName("playerLayer"))
 	return obj.Wrap(_r)
 }
 
 // IsPictureInPicturePossible reports whether picture in Picture is currently possible.
 func (pipc *PictureInPictureController) IsPictureInPicturePossible() bool {
+	defer runtime.KeepAlive(pipc)
 	_r := objc.Send[bool](objref.IDOf(pipc), objc.RegisterName("isPictureInPicturePossible"))
 	return _r
 }
 
 // IsPictureInPictureActive reports whether picture in Picture is currently active.
 func (pipc *PictureInPictureController) IsPictureInPictureActive() bool {
+	defer runtime.KeepAlive(pipc)
 	_r := objc.Send[bool](objref.IDOf(pipc), objc.RegisterName("isPictureInPictureActive"))
 	return _r
 }
 
 // IsPictureInPictureSuspended reports whether picture in Picture is currently suspended.
 func (pipc *PictureInPictureController) IsPictureInPictureSuspended() bool {
+	defer runtime.KeepAlive(pipc)
 	_r := objc.Send[bool](objref.IDOf(pipc), objc.RegisterName("isPictureInPictureSuspended"))
 	return _r
 }
 
 // RequiresLinearPlayback reports whether disables certain user operations (fast forward, forward skip, and scrubbing). This can be used to temporarily enforce playback of mandatory content (such as legalese or advertisements).
 func (pipc *PictureInPictureController) RequiresLinearPlayback() bool {
+	defer runtime.KeepAlive(pipc)
 	_r := objc.Send[bool](objref.IDOf(pipc), objc.RegisterName("requiresLinearPlayback"))
 	return _r
 }
 
 // InvalidatePlaybackState invalidates the controller’s current playback state and fetches the updated state from the sample buffer playback delegate object.
 func (pipc *PictureInPictureController) InvalidatePlaybackState() {
+	defer runtime.KeepAlive(pipc)
 	objc.Send[objc.ID](objref.IDOf(pipc), objc.RegisterName("invalidatePlaybackState"))
 }

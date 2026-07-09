@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func pipelineBufferDescriptorArrayAdopt(id objc.ID) *PipelineBufferDescriptorArr
 
 // Description returns the object's -description text.
 func (pbda *PipelineBufferDescriptorArray) Description() string {
+	defer runtime.KeepAlive(pbda)
 	return rt.Description(objref.IDOf(pbda))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pbda *PipelineBufferDescriptorArray) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pbda)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pbda), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pbda *PipelineBufferDescriptorArray) IsKind(className string) bool {
+	defer runtime.KeepAlive(pbda)
 	return rt.IsKind(objref.IDOf(pbda), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pbda *PipelineBufferDescriptorArray) String() string {
+	defer runtime.KeepAlive(pbda)
 	return rt.Description(objref.IDOf(pbda))
 }
 
@@ -74,11 +81,14 @@ func NewPipelineBufferDescriptorArray() *PipelineBufferDescriptorArray {
 
 // ObjectAtIndexedSubscript returns the pipeline buffer descriptor at the specified array index.
 func (pbda *PipelineBufferDescriptorArray) ObjectAtIndexedSubscript(bufferIndex int) *PipelineBufferDescriptor {
+	defer runtime.KeepAlive(pbda)
 	_r := objc.Send[objc.ID](objref.IDOf(pbda), objc.RegisterName("objectAtIndexedSubscript:"), bufferIndex)
 	return PipelineBufferDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets a pipeline buffer descriptor at the specified array index.
 func (pbda *PipelineBufferDescriptorArray) SetObjectAtIndexedSubscript(buffer *PipelineBufferDescriptor, bufferIndex int) {
+	defer runtime.KeepAlive(pbda)
+	defer runtime.KeepAlive(buffer)
 	objc.Send[objc.ID](objref.IDOf(pbda), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(buffer), bufferIndex)
 }

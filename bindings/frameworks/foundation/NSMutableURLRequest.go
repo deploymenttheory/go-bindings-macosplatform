@@ -52,8 +52,8 @@ func NSMutableURLRequestFromID(id objc.ID) *NSMutableURLRequest {
 	return o
 }
 
-func (o *NSMutableURLRequest) SetURL(uRL *NSURL) {
-	o.Ptr().Send(_nSMutableURLRequestSelSetURL, uRL.Ptr())
+func (o *NSMutableURLRequest) SetURL(url *NSURL) {
+	o.Ptr().Send(_nSMutableURLRequestSelSetURL, url.Ptr())
 }
 
 func (o *NSMutableURLRequest) SetCachePolicy(cachePolicy NSURLRequestCachePolicy) {
@@ -118,27 +118,27 @@ func (o *NSMutableURLRequest) AddValueForHTTPHeaderField(value *NSString, field 
 	o.Ptr().Send(_nSMutableURLRequestSelAddValueForHTTPHeaderField, value.Ptr(), field.Ptr())
 }
 
-func (o *NSMutableURLRequest) SetHTTPMethod(hTTPMethod *NSString) {
-	o.Ptr().Send(_nSMutableURLRequestSelSetHTTPMethod, hTTPMethod.Ptr())
+func (o *NSMutableURLRequest) SetHTTPMethod(httpMethod *NSString) {
+	o.Ptr().Send(_nSMutableURLRequestSelSetHTTPMethod, httpMethod.Ptr())
 }
 
 func (o *NSMutableURLRequest) SetAllHTTPHeaderFields(allHTTPHeaderFields *NSDictionary[*NSString, *NSString]) {
 	o.Ptr().Send(_nSMutableURLRequestSelSetAllHTTPHeaderFields, allHTTPHeaderFields.Ptr())
 }
 
-func (o *NSMutableURLRequest) SetHTTPBody(hTTPBody *NSData) {
-	o.Ptr().Send(_nSMutableURLRequestSelSetHTTPBody, hTTPBody.Ptr())
+func (o *NSMutableURLRequest) SetHTTPBody(httpBody *NSData) {
+	o.Ptr().Send(_nSMutableURLRequestSelSetHTTPBody, httpBody.Ptr())
 }
 
-func (o *NSMutableURLRequest) SetHTTPBodyStream(hTTPBodyStream *NSInputStream) {
-	o.Ptr().Send(_nSMutableURLRequestSelSetHTTPBodyStream, hTTPBodyStream.Ptr())
+func (o *NSMutableURLRequest) SetHTTPBodyStream(httpBodyStream *NSInputStream) {
+	o.Ptr().Send(_nSMutableURLRequestSelSetHTTPBodyStream, httpBodyStream.Ptr())
 }
 
-func (o *NSMutableURLRequest) SetHTTPShouldHandleCookies(hTTPShouldHandleCookies bool) {
-	o.Ptr().Send(_nSMutableURLRequestSelSetHTTPShouldHandleCookies, hTTPShouldHandleCookies)
+func (o *NSMutableURLRequest) SetHTTPShouldHandleCookies(httpShouldHandleCookies bool) {
+	o.Ptr().Send(_nSMutableURLRequestSelSetHTTPShouldHandleCookies, httpShouldHandleCookies)
 }
 
 // Deprecated: Only supported in the classic loader, please adopt HTTP/2 and HTTP/3 instead
-func (o *NSMutableURLRequest) SetHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) {
-	o.Ptr().Send(_nSMutableURLRequestSelSetHTTPShouldUsePipelining, hTTPShouldUsePipelining)
+func (o *NSMutableURLRequest) SetHTTPShouldUsePipelining(httpShouldUsePipelining bool) {
+	o.Ptr().Send(_nSMutableURLRequestSelSetHTTPShouldUsePipelining, httpShouldUsePipelining)
 }

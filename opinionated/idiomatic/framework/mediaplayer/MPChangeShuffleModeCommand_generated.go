@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (csmc *ChangeShuffleModeCommand) WithEnabled(enabled bool) *ChangeShuffleMo
 
 // CurrentShuffleType returns the current shuffle type.
 func (csmc *ChangeShuffleModeCommand) CurrentShuffleType() ShuffleType {
+	defer runtime.KeepAlive(csmc)
 	_r := objc.Send[ShuffleType](objref.IDOf(csmc), objc.RegisterName("currentShuffleType"))
 	return _r
 }

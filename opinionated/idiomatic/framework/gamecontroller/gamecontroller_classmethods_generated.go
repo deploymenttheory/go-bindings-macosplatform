@@ -9,7 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -99,7 +99,7 @@ func GCMouseCurrent() *Mouse {
 }
 
 // ConnectedRacingWheels get the collection of racing wheels currently attached to the system.
-func ConnectedRacingWheels() obj.Object {
+func ConnectedRacingWheels() []*RacingWheel {
 	_r := objc.Send[objc.ID](objc.ID(_class("GCRacingWheel")), objc.RegisterName("connectedRacingWheels"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *RacingWheel { return RacingWheelFromID(_id) })
 }

@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func cNNConvolutionWeightsAndBiasesStateAdopt(id objc.ID) *CNNConvolutionWeights
 
 // Description returns the object's -description text.
 func (ccwabs *CNNConvolutionWeightsAndBiasesState) Description() string {
+	defer runtime.KeepAlive(ccwabs)
 	return rt.Description(objref.IDOf(ccwabs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ccwabs *CNNConvolutionWeightsAndBiasesState) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ccwabs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ccwabs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ccwabs *CNNConvolutionWeightsAndBiasesState) IsKind(className string) bool {
+	defer runtime.KeepAlive(ccwabs)
 	return rt.IsKind(objref.IDOf(ccwabs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ccwabs *CNNConvolutionWeightsAndBiasesState) String() string {
+	defer runtime.KeepAlive(ccwabs)
 	return rt.Description(objref.IDOf(ccwabs))
 }
 
@@ -72,12 +79,14 @@ func NewCNNConvolutionWeightsAndBiasesState() *CNNConvolutionWeightsAndBiasesSta
 
 // WeightsOffset returns offset at which weights start in weights buffer Default value is 0.
 func (ccwabs *CNNConvolutionWeightsAndBiasesState) WeightsOffset() int {
+	defer runtime.KeepAlive(ccwabs)
 	_r := objc.Send[int](objref.IDOf(ccwabs), objc.RegisterName("weightsOffset"))
 	return _r
 }
 
 // BiasesOffset returns offset at which weights start in biases buffer Default value is 0.
 func (ccwabs *CNNConvolutionWeightsAndBiasesState) BiasesOffset() int {
+	defer runtime.KeepAlive(ccwabs)
 	_r := objc.Send[int](objref.IDOf(ccwabs), objc.RegisterName("biasesOffset"))
 	return _r
 }

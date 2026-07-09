@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func cloudIdentifierAdopt(id objc.ID) *CloudIdentifier {
 
 // Description returns the object's -description text.
 func (ci *CloudIdentifier) Description() string {
+	defer runtime.KeepAlive(ci)
 	return rt.Description(objref.IDOf(ci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ci *CloudIdentifier) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ci *CloudIdentifier) IsKind(className string) bool {
+	defer runtime.KeepAlive(ci)
 	return rt.IsKind(objref.IDOf(ci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ci *CloudIdentifier) String() string {
+	defer runtime.KeepAlive(ci)
 	return rt.Description(objref.IDOf(ci))
 }
 
@@ -75,6 +82,7 @@ func NewCloudIdentifierWithStringValue(stringValue string) *CloudIdentifier {
 
 // StringValue returns for use in serialization
 func (ci *CloudIdentifier) StringValue() string {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""

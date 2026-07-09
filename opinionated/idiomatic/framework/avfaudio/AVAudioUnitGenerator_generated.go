@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func audioUnitGeneratorAdopt(id objc.ID) *AudioUnitGenerator {
 
 // NewAudioUnitGeneratorWithAudioComponentDescription creates a generator audio unit with the specified description.
 func NewAudioUnitGeneratorWithAudioComponentDescription(audioComponentDescription obj.Object) *AudioUnitGenerator {
+	defer runtime.KeepAlive(audioComponentDescription)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioUnitGenerator")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioComponentDescription:"), objref.IDOf(audioComponentDescription))
 	return audioUnitGeneratorAdopt(_id)
@@ -61,6 +64,7 @@ func (aug *AudioUnitGenerator) WithBypass(bypass bool) *AudioUnitGenerator {
 
 // Bypass wraps the corresponding Objective-C method.
 func (aug *AudioUnitGenerator) Bypass() bool {
+	defer runtime.KeepAlive(aug)
 	_r := objc.Send[bool](objref.IDOf(aug), objc.RegisterName("bypass"))
 	return _r
 }

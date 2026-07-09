@@ -5,6 +5,7 @@
 package phase
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,6 +50,7 @@ func sourceAdopt(id objc.ID) *Source {
 
 // NewSourceWithEngine creates a single point in the environment from which sound emanates.
 func NewSourceWithEngine(engine *Engine) *Source {
+	defer runtime.KeepAlive(engine)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:"), objref.IDOf(engine))
 	return sourceAdopt(_id)
@@ -56,6 +58,7 @@ func NewSourceWithEngine(engine *Engine) *Source {
 
 // NewSourceWithEngineShapes creates a voluminous area in the environment from which sound emanates.
 func NewSourceWithEngineShapes(engine *Engine, shapes []*Shape) *Source {
+	defer runtime.KeepAlive(engine)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:shapes:"), objref.IDOf(engine), purego.SliceToNSArray(shapes, func(_v *Shape) objc.ID { return objref.IDOf(_v) }))
 	return sourceAdopt(_id)
@@ -81,6 +84,7 @@ func (s *Source) WithWorldTransform(worldTransform unsafe.Pointer) *Source {
 
 // Gain returns linear gain scalar.
 func (s *Source) Gain() float64 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("gain"))
 	return _r
 }
@@ -89,6 +93,7 @@ func (s *Source) Gain() float64 {
 //
 // Shapes returns the collection as a Go slice.
 func (s *Source) Shapes() []*Shape {
+	defer runtime.KeepAlive(s)
 	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("shapes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Shape { return ShapeFromID(_id) })
 }

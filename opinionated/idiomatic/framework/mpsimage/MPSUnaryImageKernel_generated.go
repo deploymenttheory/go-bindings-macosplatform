@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -49,22 +51,27 @@ func unaryImageKernelAdopt(id objc.ID) *UnaryImageKernel {
 
 // Description returns the object's -description text.
 func (uik *UnaryImageKernel) Description() string {
+	defer runtime.KeepAlive(uik)
 	return rt.Description(objref.IDOf(uik))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (uik *UnaryImageKernel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(uik)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(uik), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (uik *UnaryImageKernel) IsKind(className string) bool {
+	defer runtime.KeepAlive(uik)
 	return rt.IsKind(objref.IDOf(uik), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (uik *UnaryImageKernel) String() string {
+	defer runtime.KeepAlive(uik)
 	return rt.Description(objref.IDOf(uik))
 }
 
@@ -82,18 +89,21 @@ func (uik *UnaryImageKernel) WithClipRect(clipRect metal.MTLRegion) *UnaryImageK
 
 // SourceRegionForDestinationSize sourceRegionForDestinationSize: is used to determine which region of the sourceTexture will be read by encodeToCommandBuffer:sourceTexture:destinationTexture (and similar) when the filter runs. This information may be needed if the source image is broken into multiple textures.  The size of the full (untiled) destination image is provided. The region of the full (untiled) source image that will be read is returned. You can then piece together an appropriate texture containing that information for use in your tiled context. The function will consult the MPSUnaryImageKernel offset and clipRect parameters, to determine the full region read by the function. Other parameters such as sourceClipRect, kernelHeight and kernelWidth will be consulted as necessary. All properties should be set to intended values prior to calling sourceRegionForDestinationSize:. Caution: This function operates using global image coordinates, but -encodeToCommandBuffer:... uses coordinates local to the source and destination image textures. Consequently, the offset and clipRect attached to this object will need to be updated using a global to local coordinate transform before -encodeToCommandBuffer:... is called. Determine the region of the source texture that will be read for a encode operation
 func (uik *UnaryImageKernel) SourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion {
+	defer runtime.KeepAlive(uik)
 	_r := objc.Send[mpscore.MPSRegion](objref.IDOf(uik), objc.RegisterName("sourceRegionForDestinationSize:"), destinationSize)
 	return _r
 }
 
 // Offset returns the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
 func (uik *UnaryImageKernel) Offset() mpscore.MPSOffset {
+	defer runtime.KeepAlive(uik)
 	_r := objc.Send[mpscore.MPSOffset](objref.IDOf(uik), objc.RegisterName("offset"))
 	return _r
 }
 
 // ClipRect returns an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
 func (uik *UnaryImageKernel) ClipRect() metal.MTLRegion {
+	defer runtime.KeepAlive(uik)
 	_r := objc.Send[metal.MTLRegion](objref.IDOf(uik), objc.RegisterName("clipRect"))
 	return _r
 }

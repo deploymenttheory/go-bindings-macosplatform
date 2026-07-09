@@ -5,6 +5,8 @@
 package coremidi
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mIDI2DeviceInfoAdopt(id objc.ID) *MIDI2DeviceInfo {
 
 // Description returns the object's -description text.
 func (mdi *MIDI2DeviceInfo) Description() string {
+	defer runtime.KeepAlive(mdi)
 	return rt.Description(objref.IDOf(mdi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdi *MIDI2DeviceInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdi *MIDI2DeviceInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdi)
 	return rt.IsKind(objref.IDOf(mdi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdi *MIDI2DeviceInfo) String() string {
+	defer runtime.KeepAlive(mdi)
 	return rt.Description(objref.IDOf(mdi))
 }
 
@@ -72,12 +79,14 @@ func NewMIDI2DeviceInfo() *MIDI2DeviceInfo {
 
 // Family returns the family of models to which the device belongs, up to 14 bits.
 func (mdi *MIDI2DeviceInfo) Family() uint16 {
+	defer runtime.KeepAlive(mdi)
 	_r := objc.Send[uint16](objref.IDOf(mdi), objc.RegisterName("family"))
 	return _r
 }
 
 // ModelNumber returns the specific model from the device manufacturer, up to 14 bits.
 func (mdi *MIDI2DeviceInfo) ModelNumber() uint16 {
+	defer runtime.KeepAlive(mdi)
 	_r := objc.Send[uint16](objref.IDOf(mdi), objc.RegisterName("modelNumber"))
 	return _r
 }

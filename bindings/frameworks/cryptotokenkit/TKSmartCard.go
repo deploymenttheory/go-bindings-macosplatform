@@ -89,8 +89,8 @@ func (o *TKSmartCard) EndSession() {
 }
 
 // Creates and returns a new user interaction object for secure PIN verification using the Smart Card reader facilities.
-func (o *TKSmartCard) UserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset(pINFormat *TKSmartCardPINFormat, aPDU *foundation.NSData, pINByteOffset int) *TKSmartCardUserInteractionForSecurePINVerification {
-	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardSelUserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset, pINFormat.Ptr(), aPDU.Ptr(), pINByteOffset)
+func (o *TKSmartCard) UserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset(pinFormat *TKSmartCardPINFormat, apdu *foundation.NSData, pinByteOffset int) *TKSmartCardUserInteractionForSecurePINVerification {
+	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardSelUserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset, pinFormat.Ptr(), apdu.Ptr(), pinByteOffset)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -98,8 +98,8 @@ func (o *TKSmartCard) UserInteractionForSecurePINVerificationWithPINFormatAPDUPI
 }
 
 // Creates a new user interaction object for secure PIN change using the smart card reader facilities (typically a HW keypad).
-func (o *TKSmartCard) UserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset(pINFormat *TKSmartCardPINFormat, aPDU *foundation.NSData, currentPINByteOffset int, newPINByteOffset int) *TKSmartCardUserInteractionForSecurePINChange {
-	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardSelUserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset, pINFormat.Ptr(), aPDU.Ptr(), currentPINByteOffset, newPINByteOffset)
+func (o *TKSmartCard) UserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset(pinFormat *TKSmartCardPINFormat, apdu *foundation.NSData, currentPINByteOffset int, newPINByteOffset int) *TKSmartCardUserInteractionForSecurePINChange {
+	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardSelUserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset, pinFormat.Ptr(), apdu.Ptr(), currentPINByteOffset, newPINByteOffset)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

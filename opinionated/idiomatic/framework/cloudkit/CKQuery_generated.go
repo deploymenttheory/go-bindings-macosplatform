@@ -5,7 +5,10 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func queryAdopt(id objc.ID) *Query {
 
 // Description returns the object's -description text.
 func (q *Query) Description() string {
+	defer runtime.KeepAlive(q)
 	return rt.Description(objref.IDOf(q))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (q *Query) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(q)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(q), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (q *Query) IsKind(className string) bool {
+	defer runtime.KeepAlive(q)
 	return rt.IsKind(objref.IDOf(q), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (q *Query) String() string {
+	defer runtime.KeepAlive(q)
 	return rt.Description(objref.IDOf(q))
 }
 
 // NewQueryWithCoder creates an operation group from a serialized instance.
 func NewQueryWithCoder(aDecoder obj.Object) *Query {
+	defer runtime.KeepAlive(aDecoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKQuery")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return queryAdopt(_id)
@@ -75,6 +84,8 @@ func NewQueryWithCoder(aDecoder obj.Object) *Query {
 
 // NewQueryWithRecordTypePredicate creates a query with the specified record type and predicate.
 func NewQueryWithRecordTypePredicate(recordType obj.Object, predicate obj.Object) *Query {
+	defer runtime.KeepAlive(recordType)
+	defer runtime.KeepAlive(predicate)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKQuery")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordType:predicate:"), objref.IDOf(recordType), objref.IDOf(predicate))
 	return queryAdopt(_id)
@@ -88,21 +99,24 @@ func (q *Query) WithSortDescriptors(items ...obj.Object) *Query {
 }
 
 // RecordType returns the record type to search. A query's results include only records of the specified type. The record type is an app-specific string that you use to distinguish among the records of your app. The records of a particular type all represent different instances of the same information. For example, an employee record type might store the employee's name, phone number, and a reference to the employee's manager.
-func (q *Query) RecordType() obj.Object {
+func (q *Query) RecordType() *foundation.String {
+	defer runtime.KeepAlive(q)
 	_r := objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("recordType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Predicate returns the predicate to use for matching records. A predicate contains one or more expressions that evaluate to <doc://com.apple.documentation/documentation/swift/true> or <doc://com.apple.documentation/documentation/swift/false>. Expressions are often value-based comparisons, but predicates support other types of operators, including string comparisons and aggregate operations. For guidelines on how to construct predicates for your queries, see <doc:CKQuery#Predicate-Rules-for-Query-Objects>.
-func (q *Query) Predicate() obj.Object {
+func (q *Query) Predicate() *foundation.Predicate {
+	defer runtime.KeepAlive(q)
 	_r := objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("predicate"))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // SortDescriptors returns the sort descriptors for organizing the query's results. You can add sort descriptors to a query and change them later as necessary. Each sort descriptor contains a field name of the intended record type and information about whether to sort values in that field in ascending or descending order. The default value of this property is `nil`, which means that records return in an indeterminate order. The order of the items in the array defines the order that CloudKit applies the sort descriptors to the results. In other words, CloudKit applies the first sort descriptor in the array, then the second sort descriptor, if necessary, then the third, and so on.
 //
 // SortDescriptors returns the collection as a Go slice.
 func (q *Query) SortDescriptors() []obj.Object {
+	defer runtime.KeepAlive(q)
 	_arr := objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("sortDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -60,6 +62,7 @@ func (sns *SpheresNoiseSource) WithFrequency(frequency float64) *SpheresNoiseSou
 
 // Frequency returns the frequency.
 func (sns *SpheresNoiseSource) Frequency() float64 {
+	defer runtime.KeepAlive(sns)
 	_r := objc.Send[float64](objref.IDOf(sns), objc.RegisterName("frequency"))
 	return _r
 }

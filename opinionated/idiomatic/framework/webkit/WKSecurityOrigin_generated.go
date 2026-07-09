@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func wKSecurityOriginAdopt(id objc.ID) *WKSecurityOrigin {
 
 // Description returns the object's -description text.
 func (wso *WKSecurityOrigin) Description() string {
+	defer runtime.KeepAlive(wso)
 	return rt.Description(objref.IDOf(wso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wso *WKSecurityOrigin) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wso)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wso *WKSecurityOrigin) IsKind(className string) bool {
+	defer runtime.KeepAlive(wso)
 	return rt.IsKind(objref.IDOf(wso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wso *WKSecurityOrigin) String() string {
+	defer runtime.KeepAlive(wso)
 	return rt.Description(objref.IDOf(wso))
 }
 
@@ -80,6 +87,7 @@ func NewWKSecurityOrigin() *WKSecurityOrigin {
 
 // Protocol returns the security origin's protocol.
 func (wso *WKSecurityOrigin) Protocol() string {
+	defer runtime.KeepAlive(wso)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -96,6 +104,7 @@ func (wso *WKSecurityOrigin) Protocol() string {
 
 // Host returns the security origin's host.
 func (wso *WKSecurityOrigin) Host() string {
+	defer runtime.KeepAlive(wso)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -112,6 +121,7 @@ func (wso *WKSecurityOrigin) Host() string {
 
 // Port returns the security origin's port.
 func (wso *WKSecurityOrigin) Port() int {
+	defer runtime.KeepAlive(wso)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {

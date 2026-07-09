@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func nNDefaultPaddingAdopt(id objc.ID) *NNDefaultPadding {
 
 // Description returns the object's -description text.
 func (ndp *NNDefaultPadding) Description() string {
+	defer runtime.KeepAlive(ndp)
 	return rt.Description(objref.IDOf(ndp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ndp *NNDefaultPadding) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ndp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ndp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ndp *NNDefaultPadding) IsKind(className string) bool {
+	defer runtime.KeepAlive(ndp)
 	return rt.IsKind(objref.IDOf(ndp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ndp *NNDefaultPadding) String() string {
+	defer runtime.KeepAlive(ndp)
 	return rt.Description(objref.IDOf(ndp))
 }
 
@@ -72,6 +79,7 @@ func NewNNDefaultPadding() *NNDefaultPadding {
 
 // Label returns human readable description of what the padding policy does
 func (ndp *NNDefaultPadding) Label() string {
+	defer runtime.KeepAlive(ndp)
 	_r := objc.Send[objc.ID](objref.IDOf(ndp), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

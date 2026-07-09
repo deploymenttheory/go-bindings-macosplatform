@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func mTL4PipelineDescriptorAdopt(id objc.ID) *MTL4PipelineDescriptor {
 
 // Description returns the object's -description text.
 func (mpd *MTL4PipelineDescriptor) Description() string {
+	defer runtime.KeepAlive(mpd)
 	return rt.Description(objref.IDOf(mpd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mpd *MTL4PipelineDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mpd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mpd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mpd *MTL4PipelineDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(mpd)
 	return rt.IsKind(objref.IDOf(mpd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mpd *MTL4PipelineDescriptor) String() string {
+	defer runtime.KeepAlive(mpd)
 	return rt.Description(objref.IDOf(mpd))
 }
 
@@ -76,12 +83,14 @@ func (mpd *MTL4PipelineDescriptor) WithLabel(label string) *MTL4PipelineDescript
 
 // WithOptions sets provides compile-time options when you build the pipeline.
 func (mpd *MTL4PipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4PipelineDescriptor {
+	defer runtime.KeepAlive(options)
 	objc.Send[objc.ID](objref.IDOf(mpd), objc.RegisterName("setOptions:"), objref.IDOf(options))
 	return mpd
 }
 
 // Label returns assigns an optional string that uniquely identifies a pipeline descriptor. After you provide this label, you can use it to look up a pipeline state object by name in a binary archive.
 func (mpd *MTL4PipelineDescriptor) Label() string {
+	defer runtime.KeepAlive(mpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mpd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -91,6 +100,7 @@ func (mpd *MTL4PipelineDescriptor) Label() string {
 
 // Options provides compile-time options when you build the pipeline.
 func (mpd *MTL4PipelineDescriptor) Options() *MTL4PipelineOptions {
+	defer runtime.KeepAlive(mpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mpd), objc.RegisterName("options"))
 	return MTL4PipelineOptionsFromID(_r)
 }

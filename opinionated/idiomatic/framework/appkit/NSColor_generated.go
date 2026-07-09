@@ -5,10 +5,12 @@
 package appkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func colorAdopt(id objc.ID) *Color {
 
 // Description returns the object's -description text.
 func (c *Color) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Color) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Color) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Color) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
@@ -77,6 +84,7 @@ func NewColor() *Color {
 
 // NewColorWithCoder creates a new Color.
 func NewColorWithCoder(coder obj.Object) *Color {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return colorAdopt(_id)
@@ -84,69 +92,83 @@ func NewColorWithCoder(coder obj.Object) *Color {
 
 // ColorUsingType returns a version of the color object that is compatible with the specified color type.
 func (c *Color) ColorUsingType(type_ ColorType) *Color {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorUsingType:"), type_)
 	return ColorFromID(_r)
 }
 
 // ColorUsingColorSpace creates a new color object representing the color of the current color object in the specified color space.
 func (c *Color) ColorUsingColorSpace(space *ColorSpace) *Color {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(space)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorUsingColorSpace:"), objref.IDOf(space))
 	return ColorFromID(_r)
 }
 
 // ColorByApplyingContentHeadroom reinterpret the color by applying a new contentHeadroom without changing the color components. Changing the contentHeadroom redefines the color relative to a different peak white, changing its behavior under tone mapping and the result of calling standardDynamicRangeColor. The new color will have a contentHeadroom >= 1.0. If called on a color with a color space that does not support extended range, or does not have an equivalent extended range counterpart, this will return self.
 func (c *Color) ColorByApplyingContentHeadroom(contentHeadroom float64) *Color {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorByApplyingContentHeadroom:"), contentHeadroom)
 	return ColorFromID(_r)
 }
 
 // HighlightWithLevel creates a new color object that represents a blend between the current color and the highlight color.
 func (c *Color) HighlightWithLevel(val float64) *Color {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("highlightWithLevel:"), val)
 	return ColorFromID(_r)
 }
 
 // ShadowWithLevel creates a new color object that represents a blend between the current color and the shadow color.
 func (c *Color) ShadowWithLevel(val float64) *Color {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("shadowWithLevel:"), val)
 	return ColorFromID(_r)
 }
 
 // ColorWithSystemEffect returns a new color object that represents the current color modified to include the specified visual effect.
 func (c *Color) ColorWithSystemEffect(systemEffect ColorSystemEffect) *Color {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorWithSystemEffect:"), systemEffect)
 	return ColorFromID(_r)
 }
 
 // Set sets the color of subsequent drawing to the color that the color object represents.
 func (c *Color) Set() {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("set"))
 }
 
 // SetFill sets the fill color of subsequent drawing to the color object’s color.
 func (c *Color) SetFill() {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFill"))
 }
 
 // SetStroke sets the stroke color of subsequent drawing to the color object’s color.
 func (c *Color) SetStroke() {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setStroke"))
 }
 
 // BlendedColorWithFractionOfColor creates a new color object whose component values are a weighted sum of the current color object and the specified color object’s.
 func (c *Color) BlendedColorWithFractionOfColor(fraction float64, color *Color) *Color {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(color)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("blendedColorWithFraction:ofColor:"), fraction, objref.IDOf(color))
 	return ColorFromID(_r)
 }
 
 // ColorWithAlphaComponent creates a new color object that has the same color space and component values as the current color object, but the specified alpha component.
 func (c *Color) ColorWithAlphaComponent(alpha float64) *Color {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorWithAlphaComponent:"), alpha)
 	return ColorFromID(_r)
 }
 
 // GetRedGreenBlueAlpha returns the color object’s RGB component and opacity values in the respective arguments.
 func (c *Color) GetRedGreenBlueAlpha() (red float64, green float64, blue float64, alpha float64) {
+	defer runtime.KeepAlive(c)
 	var _out0 float64
 	var _out1 float64
 	var _out2 float64
@@ -157,6 +179,7 @@ func (c *Color) GetRedGreenBlueAlpha() (red float64, green float64, blue float64
 
 // GetHueSaturationBrightnessAlpha returns the color object’s HSB component and opacity values in the respective arguments.
 func (c *Color) GetHueSaturationBrightnessAlpha() (hue float64, saturation float64, brightness float64, alpha float64) {
+	defer runtime.KeepAlive(c)
 	var _out0 float64
 	var _out1 float64
 	var _out2 float64
@@ -167,6 +190,7 @@ func (c *Color) GetHueSaturationBrightnessAlpha() (hue float64, saturation float
 
 // GetWhiteAlpha returns the grayscale and alpha values of the color.
 func (c *Color) GetWhiteAlpha() (white float64, alpha float64) {
+	defer runtime.KeepAlive(c)
 	var _out0 float64
 	var _out1 float64
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("getWhite:alpha:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
@@ -175,6 +199,7 @@ func (c *Color) GetWhiteAlpha() (white float64, alpha float64) {
 
 // GetCyanMagentaYellowBlackAlpha returns the color object’s CMYK and opacity values.
 func (c *Color) GetCyanMagentaYellowBlackAlpha() (cyan float64, magenta float64, yellow float64, black float64, alpha float64) {
+	defer runtime.KeepAlive(c)
 	var _out0 float64
 	var _out1 float64
 	var _out2 float64
@@ -186,6 +211,7 @@ func (c *Color) GetCyanMagentaYellowBlackAlpha() (cyan float64, magenta float64,
 
 // GetComponents returns the components of the color as an array.
 func (c *Color) GetComponents() (components float64) {
+	defer runtime.KeepAlive(c)
 	var _out0 float64
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("getComponents:"), unsafe.Pointer(&_out0))
 	return _out0
@@ -193,40 +219,48 @@ func (c *Color) GetComponents() (components float64) {
 
 // WriteToPasteboard writes the color object’s data to the specified pasteboard.
 func (c *Color) WriteToPasteboard(pasteBoard *Pasteboard) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(pasteBoard)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("writeToPasteboard:"), objref.IDOf(pasteBoard))
 }
 
 // DrawSwatchInRect draws the current color in the specified rectangle.
 func (c *Color) DrawSwatchInRect(rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("drawSwatchInRect:"), rect)
 }
 
 // Type returns the type.
 func (c *Color) Type() ColorType {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[ColorType](objref.IDOf(c), objc.RegisterName("type"))
 	return _r
 }
 
 // StandardDynamicRangeColor returns in some cases it is useful to recover the color that was base the SDR color that was exposed to generate an HDR color. If a color's `linearExposure` is > 1, then this will return the base SDR color. If the color is not an HDR color, this will return `self`.
 func (c *Color) StandardDynamicRangeColor() *Color {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("standardDynamicRangeColor"))
 	return ColorFromID(_r)
 }
 
 // CatalogNameComponent returns the catalog name component.
-func (c *Color) CatalogNameComponent() obj.Object {
+func (c *Color) CatalogNameComponent() *foundation.String {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("catalogNameComponent"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // ColorNameComponent returns the color name component.
-func (c *Color) ColorNameComponent() obj.Object {
+func (c *Color) ColorNameComponent() *foundation.String {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorNameComponent"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // LocalizedCatalogNameComponent returns the localized catalog name component.
 func (c *Color) LocalizedCatalogNameComponent() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("localizedCatalogNameComponent"))
 	if _r == 0 {
 		return ""
@@ -236,6 +270,7 @@ func (c *Color) LocalizedCatalogNameComponent() string {
 
 // LocalizedColorNameComponent returns the localized color name component.
 func (c *Color) LocalizedColorNameComponent() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("localizedColorNameComponent"))
 	if _r == 0 {
 		return ""
@@ -245,120 +280,143 @@ func (c *Color) LocalizedColorNameComponent() string {
 
 // RedComponent returns the red component.
 func (c *Color) RedComponent() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("redComponent"))
 	return _r
 }
 
 // GreenComponent returns the green component.
 func (c *Color) GreenComponent() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("greenComponent"))
 	return _r
 }
 
 // BlueComponent returns the blue component.
 func (c *Color) BlueComponent() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("blueComponent"))
 	return _r
 }
 
 // HueComponent returns the hue component.
 func (c *Color) HueComponent() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("hueComponent"))
 	return _r
 }
 
 // SaturationComponent returns the saturation component.
 func (c *Color) SaturationComponent() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("saturationComponent"))
 	return _r
 }
 
 // BrightnessComponent returns the brightness component.
 func (c *Color) BrightnessComponent() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("brightnessComponent"))
 	return _r
 }
 
 // WhiteComponent returns the white component.
 func (c *Color) WhiteComponent() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("whiteComponent"))
 	return _r
 }
 
 // CyanComponent returns the cyan component.
 func (c *Color) CyanComponent() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("cyanComponent"))
 	return _r
 }
 
 // MagentaComponent returns the magenta component.
 func (c *Color) MagentaComponent() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("magentaComponent"))
 	return _r
 }
 
 // YellowComponent returns the yellow component.
 func (c *Color) YellowComponent() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("yellowComponent"))
 	return _r
 }
 
 // BlackComponent returns the black component.
 func (c *Color) BlackComponent() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("blackComponent"))
 	return _r
 }
 
 // ColorSpace returns the color space.
 func (c *Color) ColorSpace() *ColorSpace {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
 // NumberOfComponents returns the number of components.
 func (c *Color) NumberOfComponents() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("numberOfComponents"))
 	return _r
 }
 
 // PatternImage returns the pattern image.
 func (c *Color) PatternImage() *Image {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("patternImage"))
 	return ImageFromID(_r)
 }
 
 // AlphaComponent returns the alpha component.
 func (c *Color) AlphaComponent() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("alphaComponent"))
 	return _r
 }
 
 // LinearExposure returns for HDR colors, the linear brightness multiplier that was applied when generating the color. Colors created with an exposure by NSColor create CGColors that are tagged with a contentHeadroom value. While CGColors created without a contentHeadroom tag will return 0 from CGColorGetHeadroom, NSColors generated in a similar fashion return a linearExposure of 1.0.
 func (c *Color) LinearExposure() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("linearExposure"))
 	return _r
 }
 
 // CGColor returns the cg color.
 func (c *Color) CGColor() obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("CGColor"))
 	return obj.Wrap(_r)
 }
 
 // ColorUsingColorSpaceNameDevice creates a new color object for the same color, but in the specified color space and specific to the provided device.
 func (c *Color) ColorUsingColorSpaceNameDevice(name obj.Object, deviceDescription obj.Object) *Color {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(deviceDescription)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorUsingColorSpaceName:device:"), objref.IDOf(name), objref.IDOf(deviceDescription))
 	return ColorFromID(_r)
 }
 
 // ColorUsingColorSpaceName creates a new color object whose color is the same as the receiver’s, except that the new color object is in the specified color space.
 func (c *Color) ColorUsingColorSpaceName(name obj.Object) *Color {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(name)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorUsingColorSpaceName:"), objref.IDOf(name))
 	return ColorFromID(_r)
 }
 
 // ColorSpaceName returns the color space name.
-func (c *Color) ColorSpaceName() obj.Object {
+func (c *Color) ColorSpaceName() *foundation.String {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorSpaceName"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }

@@ -5,6 +5,8 @@
 package sharedwithyoucore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -78,6 +80,7 @@ func (copg *CollaborationOptionsPickerGroup) WithOptions(items ...*Collaboration
 
 // SelectedOptionIdentifier returns the selected option identifier.
 func (copg *CollaborationOptionsPickerGroup) SelectedOptionIdentifier() string {
+	defer runtime.KeepAlive(copg)
 	_r := objc.Send[objc.ID](objref.IDOf(copg), objc.RegisterName("selectedOptionIdentifier"))
 	if _r == 0 {
 		return ""

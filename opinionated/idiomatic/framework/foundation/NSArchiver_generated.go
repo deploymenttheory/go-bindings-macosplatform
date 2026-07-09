@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,6 +52,7 @@ func archiverAdopt(id objc.ID) *Archiver {
 
 // NewArchiverForWritingWithMutableData returns an archiver, initialized to encode stream and version information into a given mutable data object.
 func NewArchiverForWritingWithMutableData(mdata *MutableData) *Archiver {
+	defer runtime.KeepAlive(mdata)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSArchiver")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWritingWithMutableData:"), objref.IDOf(mdata))
 	return archiverAdopt(_id)
@@ -62,18 +65,20 @@ func (a *Archiver) WithObservationInfo(observationInfo unsafe.Pointer) *Archiver
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (a *Archiver) WithScriptingProperties(scriptingProperties obj.Object) *Archiver {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (a *Archiver) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Archiver {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return a
 }
 
 // EncodeClassNameIntoClassName encodes a substitute name for the class with a given true name.
 func (a *Archiver) EncodeClassNameIntoClassName(trueName string, inArchiveName string) {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("encodeClassName:intoClassName:"), purego.NSString(trueName), purego.NSString(inArchiveName))
 }
 
 // ClassNameEncodedForTrueClassName returns the name of the class used to archive instances of the class with a given true name.
 func (a *Archiver) ClassNameEncodedForTrueClassName(trueName string) string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("classNameEncodedForTrueClassName:"), purego.NSString(trueName))
 	if _r == 0 {
 		return ""
@@ -83,11 +88,15 @@ func (a *Archiver) ClassNameEncodedForTrueClassName(trueName string) string {
 
 // ReplaceObjectWithObject causes the receiver to treat subsequent requests to encode a given object as though they were requests to encode another given object.
 func (a *Archiver) ReplaceObjectWithObject(object obj.Object, newObject obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(object)
+	defer runtime.KeepAlive(newObject)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("replaceObject:withObject:"), objref.IDOf(object), objref.IDOf(newObject))
 }
 
 // ArchiverData returns the archiver data.
 func (a *Archiver) ArchiverData() *MutableData {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("archiverData"))
 	return MutableDataFromID(_r)
 }

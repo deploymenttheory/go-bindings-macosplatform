@@ -4,6 +4,37 @@
 
 // Package multipeerconnectivity provides a fluent Go API over the macOS MultipeerConnectivity framework.
 //
-// Each With… method sets one property and returns its receiver, so configuration
-// calls can be chained.
+// # Construction
+//
+// New… functions create objects; each With… method sets one property and
+// returns its receiver, so configuration calls chain. A <Type>FromID
+// constructor adopts an Objective-C object obtained elsewhere.
+//
+// # Lifecycle
+//
+// A wrapper releases its Objective-C object automatically once the garbage
+// collector finds it unreachable. Call Release to relinquish the reference
+// deterministically (for objects holding scarce resources); Release is
+// idempotent, and afterwards the wrapper's methods are no-ops returning zero
+// values.
+//
+// # Errors
+//
+// Failing calls return errors carrying the Objective-C error domain and code.
+// Match them against this package's Err… sentinel values with errors.Is, or
+// inspect domain, code, and Apple's prose via errors.As with *errkit.Error.
+//
+// # Main-thread requirements
+//
+// Methods, setters, and constructors of classes Apple isolates to the main
+// thread run there automatically; callers never need to arrange main-thread
+// dispatch for the generated API.
+//
+// # Delegates
+//
+// A …Delegate interface is implemented by a plain Go value and installed with
+// the matching With… setter; the package builds the Objective-C delegate
+// object behind the scenes. Optional protocol methods are separate one-method
+// …Handler interfaces — implement the ones you need on the same value and the
+// framework calls them too.
 package multipeerconnectivity

@@ -5,6 +5,7 @@
 package imagecapturecore
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -74,47 +75,56 @@ func (cd *CameraDevice) WithAutolaunchApplicationPath(autolaunchApplicationPath 
 
 // FilesOfType returns an array of files of the selected type on the camera.
 func (cd *CameraDevice) FilesOfType(fileUTType string) []string {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("filesOfType:"), purego.NSString(fileUTType))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // CancelDownload cancels a download from the camera.
 func (cd *CameraDevice) CancelDownload() {
+	defer runtime.KeepAlive(cd)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("cancelDownload"))
 }
 
 // RequestDeleteFiles deletes files from the camera.
 func (cd *CameraDevice) RequestDeleteFiles(files []*CameraItem) {
+	defer runtime.KeepAlive(cd)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("requestDeleteFiles:"), purego.SliceToNSArray(files, func(_v *CameraItem) objc.ID { return objref.IDOf(_v) }))
 }
 
 // CancelDelete cancels the current delete operation.
 func (cd *CameraDevice) CancelDelete() {
+	defer runtime.KeepAlive(cd)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("cancelDelete"))
 }
 
 // RequestSyncClock synchronizes the camera’s clock with the computer’s clock.
 func (cd *CameraDevice) RequestSyncClock() {
+	defer runtime.KeepAlive(cd)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("requestSyncClock"))
 }
 
 // RequestTakePicture captures a new image using the camera.
 func (cd *CameraDevice) RequestTakePicture() {
+	defer runtime.KeepAlive(cd)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("requestTakePicture"))
 }
 
 // RequestEnableTethering enables tethered capture if the camera has the capability to take pictures while connected.
 func (cd *CameraDevice) RequestEnableTethering() {
+	defer runtime.KeepAlive(cd)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("requestEnableTethering"))
 }
 
 // RequestDisableTethering disables tethered capture on the camera.
 func (cd *CameraDevice) RequestDisableTethering() {
+	defer runtime.KeepAlive(cd)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("requestDisableTethering"))
 }
 
 // ContentCatalogPercentCompleted returns ￼Indicates the percentage of content cataloging completed on the device. Its value ranges from 0 to 100.
 func (cd *CameraDevice) ContentCatalogPercentCompleted() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("contentCatalogPercentCompleted"))
 	return _r
 }
@@ -123,6 +133,7 @@ func (cd *CameraDevice) ContentCatalogPercentCompleted() int {
 //
 // Contents returns the collection as a Go slice.
 func (cd *CameraDevice) Contents() []*CameraItem {
+	defer runtime.KeepAlive(cd)
 	_arr := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("contents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CameraItem { return CameraItemFromID(_id) })
 }
@@ -131,60 +142,70 @@ func (cd *CameraDevice) Contents() []*CameraItem {
 //
 // MediaFiles returns the collection as a Go slice.
 func (cd *CameraDevice) MediaFiles() []*CameraItem {
+	defer runtime.KeepAlive(cd)
 	_arr := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("mediaFiles"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CameraItem { return CameraItemFromID(_id) })
 }
 
 // IsEjectable reports whether ￼Indicates whether the device can be 'soft' removed or disconnected.
 func (cd *CameraDevice) IsEjectable() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isEjectable"))
 	return _r
 }
 
 // IsLocked reports whether ￼Indicates whether the device is locked. A locked device does not allow for deletion of any asset.
 func (cd *CameraDevice) IsLocked() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isLocked"))
 	return _r
 }
 
 // IsAccessRestrictedAppleDevice reports whether set to true if the device is made by Apple and is pass-coded locked and connected to an untrusted host.
 func (cd *CameraDevice) IsAccessRestrictedAppleDevice() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isAccessRestrictedAppleDevice"))
 	return _r
 }
 
 // ICloudPhotosEnabled reports whether set to true if the device is made by Apple and is pass-coded locked and connected to an untrusted host.
 func (cd *CameraDevice) ICloudPhotosEnabled() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("iCloudPhotosEnabled"))
 	return _r
 }
 
 // MediaPresentation returns the media presentation describes the visible assets from a device that may contain multiple formats of each media asset.  The asigngments are of the type ICMediaPresentation enumeration.  This property is available only if the capability ICCameraDeviceSupportsHEIF is  present. A device supporting this capability can specify the following presentations: ICMediaPresentationConverted - The default behavior for applications retrieving images from a device supporting HEIF is to show only converted JPG from HEIF originals, and only H264 encoded video assets from HEVC. ICMediaPresentationOriginal - This presentation will show only original images from a device supporting HEIF and HEVC.  Burned in renders are always exported in JPG, as are burned in effects for MOV clips.
 func (cd *CameraDevice) MediaPresentation() MediaPresentation {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[MediaPresentation](objref.IDOf(cd), objc.RegisterName("mediaPresentation"))
 	return _r
 }
 
 // TimeOffset indicates the time offset, in seconds, between the camera's clock and the computer's clock￼. This value is positive if the camera's clock is ahead of the computer's clock. This property should be ignored if the camera's capabilities property does not contain ICCameraDeviceCanSyncClock.
 func (cd *CameraDevice) TimeOffset() float64 {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[float64](objref.IDOf(cd), objc.RegisterName("timeOffset"))
 	return _r
 }
 
 // BatteryLevelAvailable reports whether indicates if the device has reported battery charge level￼.
 func (cd *CameraDevice) BatteryLevelAvailable() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("batteryLevelAvailable"))
 	return _r
 }
 
 // BatteryLevel returns ￼Indicates the battery charge level. Its value ranges from 0 to 100.
 func (cd *CameraDevice) BatteryLevel() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("batteryLevel"))
 	return _r
 }
 
 // TetheredCaptureEnabled reports whether this property is always set to true when the device has the capability 'ICCameraDeviceCanTakePicture' requestEnableTethering/requestDisableTethering is no longer required to setup and destroy the standard take picture functionality of supported cameras.
 func (cd *CameraDevice) TetheredCaptureEnabled() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("tetheredCaptureEnabled"))
 	return _r
 }

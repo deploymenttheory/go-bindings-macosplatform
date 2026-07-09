@@ -6,11 +6,13 @@ package gamekit
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -51,22 +53,27 @@ func matchAdopt(id objc.ID) *Match {
 
 // Description returns the object's -description text.
 func (m *Match) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Match) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Match) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Match) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
@@ -76,10 +83,21 @@ func NewMatch() *Match {
 	return matchAdopt(_id)
 }
 
+// WithDelegate sets the delegate that handles communication between players in a match.
+func (m *Match) WithDelegate(delegate MatchDelegate) *Match {
+	_shim := newMatchDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(m), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(m), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return m
+}
+
 // SendDataToPlayersDataMode transmits data to one or more players connected to the match.
-func (m *Match) SendDataToPlayersDataMode(data obj.Object, players []*Player, mode MatchSendDataMode) error {
+func (m *Match) SendDataToPlayersDataMode(data []byte, players []*Player, mode MatchSendDataMode) error {
+	defer runtime.KeepAlive(m)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(m), objc.RegisterName("sendData:toPlayers:dataMode:error:"), objref.IDOf(data), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }), mode, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(m), objc.RegisterName("sendData:toPlayers:dataMode:error:"), rt.BytesToNSData(data), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }), mode, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -87,9 +105,10 @@ func (m *Match) SendDataToPlayersDataMode(data obj.Object, players []*Player, mo
 }
 
 // SendDataToAllPlayersWithDataMode transmits data to all players connected to the match.
-func (m *Match) SendDataToAllPlayersWithDataMode(data obj.Object, mode MatchSendDataMode) error {
+func (m *Match) SendDataToAllPlayersWithDataMode(data []byte, mode MatchSendDataMode) error {
+	defer runtime.KeepAlive(m)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(m), objc.RegisterName("sendDataToAllPlayers:withDataMode:error:"), objref.IDOf(data), mode, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(m), objc.RegisterName("sendDataToAllPlayers:withDataMode:error:"), rt.BytesToNSData(data), mode, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -98,6 +117,7 @@ func (m *Match) SendDataToAllPlayersWithDataMode(data obj.Object, mode MatchSend
 
 // Disconnect disconnects the local player from the match.
 func (m *Match) Disconnect() {
+	defer runtime.KeepAlive(m)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("disconnect"))
 }
 
@@ -105,6 +125,7 @@ func (m *Match) Disconnect() {
 //
 // ChooseBestHostingPlayer blocks until the operation completes or ctx is cancelled.
 func (m *Match) ChooseBestHostingPlayer(ctx context.Context) (result *Player, err error) {
+	defer runtime.KeepAlive(m)
 	type _result struct {
 		val *Player
 		err error
@@ -129,6 +150,7 @@ func (m *Match) ChooseBestHostingPlayer(ctx context.Context) (result *Player, er
 //
 // Rematch blocks until the operation completes or ctx is cancelled.
 func (m *Match) Rematch(ctx context.Context) (result *Match, err error) {
+	defer runtime.KeepAlive(m)
 	type _result struct {
 		val *Match
 		err error
@@ -152,6 +174,7 @@ func (m *Match) Rematch(ctx context.Context) (result *Match, err error) {
 
 // VoiceChatWithName joins the local player to a voice channel.
 func (m *Match) VoiceChatWithName(name string) *VoiceChat {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("voiceChatWithName:"), purego.NSString(name))
 	return VoiceChatFromID(_r)
 }
@@ -160,18 +183,21 @@ func (m *Match) VoiceChatWithName(name string) *VoiceChat {
 //
 // Players returns the collection as a Go slice.
 func (m *Match) Players() []*Player {
+	defer runtime.KeepAlive(m)
 	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("players"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Player { return PlayerFromID(_id) })
 }
 
 // ExpectedPlayerCount returns the expected player count.
 func (m *Match) ExpectedPlayerCount() int {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("expectedPlayerCount"))
 	return _r
 }
 
 // PlayerProperties returns the player properties.
 func (m *Match) PlayerProperties() obj.Object {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("playerProperties"))
 	return obj.Wrap(_r)
 }
@@ -180,6 +206,7 @@ func (m *Match) PlayerProperties() obj.Object {
 //
 // ChooseBestHostPlayer blocks until the operation completes or ctx is cancelled.
 func (m *Match) ChooseBestHostPlayer(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(m)
 	type _result struct {
 		val string
 		err error
@@ -201,9 +228,10 @@ func (m *Match) ChooseBestHostPlayer(ctx context.Context) (result string, err er
 }
 
 // SendDataToPlayersWithDataMode transmits data to a list of connected players.
-func (m *Match) SendDataToPlayersWithDataMode(data obj.Object, playerIDs []string, mode MatchSendDataMode) error {
+func (m *Match) SendDataToPlayersWithDataMode(data []byte, playerIDs []string, mode MatchSendDataMode) error {
+	defer runtime.KeepAlive(m)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(m), objc.RegisterName("sendData:toPlayers:withDataMode:error:"), objref.IDOf(data), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }), mode, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(m), objc.RegisterName("sendData:toPlayers:withDataMode:error:"), rt.BytesToNSData(data), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }), mode, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -214,6 +242,7 @@ func (m *Match) SendDataToPlayersWithDataMode(data obj.Object, playerIDs []strin
 //
 // PlayerIDs returns the collection as a Go slice.
 func (m *Match) PlayerIDs() []string {
+	defer runtime.KeepAlive(m)
 	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("playerIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

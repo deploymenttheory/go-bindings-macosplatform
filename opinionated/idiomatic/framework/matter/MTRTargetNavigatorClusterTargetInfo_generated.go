@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,6 +54,7 @@ func NewMTRTargetNavigatorClusterTargetInfo() *MTRTargetNavigatorClusterTargetIn
 
 // WithIdentifier sets the identifier.
 func (mtncti *MTRTargetNavigatorClusterTargetInfo) WithIdentifier(identifier obj.Object) *MTRTargetNavigatorClusterTargetInfo {
+	defer runtime.KeepAlive(identifier)
 	objc.Send[objc.ID](objref.IDOf(mtncti), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 	return mtncti
 }

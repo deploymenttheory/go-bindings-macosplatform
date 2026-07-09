@@ -6,6 +6,7 @@ package screentime
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,27 +52,33 @@ func webHistoryAdopt(id objc.ID) *WebHistory {
 
 // Description returns the object's -description text.
 func (wh *WebHistory) Description() string {
+	defer runtime.KeepAlive(wh)
 	return rt.Description(objref.IDOf(wh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wh *WebHistory) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wh)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wh *WebHistory) IsKind(className string) bool {
+	defer runtime.KeepAlive(wh)
 	return rt.IsKind(objref.IDOf(wh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wh *WebHistory) String() string {
+	defer runtime.KeepAlive(wh)
 	return rt.Description(objref.IDOf(wh))
 }
 
-// NewWebHistoryWithBundleIdentifierProfileIdentifierError creates a web history instance to delete web-usage data associated to the bundle identifier and profile identifier you specify.
-func NewWebHistoryWithBundleIdentifierProfileIdentifierError(bundleIdentifier string, profileIdentifier obj.Object) (result *WebHistory, err error) {
+// NewWebHistoryWithBundleIdentifierProfileIdentifier creates a web history instance to delete web-usage data associated to the bundle identifier and profile identifier you specify.
+func NewWebHistoryWithBundleIdentifierProfileIdentifier(bundleIdentifier string, profileIdentifier obj.Object) (result *WebHistory, err error) {
+	defer runtime.KeepAlive(profileIdentifier)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("STWebHistory")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundleIdentifier:profileIdentifier:error:"), purego.NSString(bundleIdentifier), objref.IDOf(profileIdentifier), unsafe.Pointer(&_nsErr))
@@ -83,13 +90,14 @@ func NewWebHistoryWithBundleIdentifierProfileIdentifierError(bundleIdentifier st
 
 // NewWebHistoryWithProfileIdentifier creates a web history instance to delete web-usage data associated to the profile identifier you specify.
 func NewWebHistoryWithProfileIdentifier(profileIdentifier obj.Object) *WebHistory {
+	defer runtime.KeepAlive(profileIdentifier)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("STWebHistory")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProfileIdentifier:"), objref.IDOf(profileIdentifier))
 	return webHistoryAdopt(_id)
 }
 
-// NewWebHistoryWithBundleIdentifierError creates a web history instance to delete web-usage data associated to the bundle identifier you specify.
-func NewWebHistoryWithBundleIdentifierError(bundleIdentifier string) (result *WebHistory, err error) {
+// NewWebHistoryWithBundleIdentifier creates a web history instance to delete web-usage data associated to the bundle identifier you specify.
+func NewWebHistoryWithBundleIdentifier(bundleIdentifier string) (result *WebHistory, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("STWebHistory")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundleIdentifier:error:"), purego.NSString(bundleIdentifier), unsafe.Pointer(&_nsErr))
@@ -103,6 +111,8 @@ func NewWebHistoryWithBundleIdentifierError(bundleIdentifier string) (result *We
 //
 // FetchHistoryDuringInterval blocks until the operation completes or ctx is cancelled.
 func (wh *WebHistory) FetchHistoryDuringInterval(ctx context.Context, interval obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(wh)
+	defer runtime.KeepAlive(interval)
 	type _result struct {
 		val obj.Object
 		err error
@@ -128,6 +138,7 @@ func (wh *WebHistory) FetchHistoryDuringInterval(ctx context.Context, interval o
 //
 // FetchAllHistory blocks until the operation completes or ctx is cancelled.
 func (wh *WebHistory) FetchAllHistory(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(wh)
 	type _result struct {
 		val obj.Object
 		err error
@@ -151,15 +162,19 @@ func (wh *WebHistory) FetchAllHistory(ctx context.Context) (result obj.Object, e
 
 // DeleteHistoryForURL deletes all the web history for the URL you specify.
 func (wh *WebHistory) DeleteHistoryForURL(url string) {
+	defer runtime.KeepAlive(wh)
 	objc.Send[objc.ID](objref.IDOf(wh), objc.RegisterName("deleteHistoryForURL:"), rt.FileURL(url))
 }
 
 // DeleteHistoryDuringInterval deletes web history that occurred during the date interval you specify.
 func (wh *WebHistory) DeleteHistoryDuringInterval(interval obj.Object) {
+	defer runtime.KeepAlive(wh)
+	defer runtime.KeepAlive(interval)
 	objc.Send[objc.ID](objref.IDOf(wh), objc.RegisterName("deleteHistoryDuringInterval:"), objref.IDOf(interval))
 }
 
 // DeleteAllHistory deletes all web history associated with the bundle identifier you specified during initialization.
 func (wh *WebHistory) DeleteAllHistory() {
+	defer runtime.KeepAlive(wh)
 	objc.Send[objc.ID](objref.IDOf(wh), objc.RegisterName("deleteAllHistory"))
 }

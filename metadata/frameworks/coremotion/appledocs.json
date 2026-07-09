@@ -1001,7 +1001,7 @@
       },
       "maxAbsSlope": {
         "doc": "The maximum absolute slope at the location toward all directions, measured in degrees.",
-        "url": "https://developer.apple.com/documentation/coremotion/cmodometerdata/maxabsslope-9mnfd"
+        "url": "https://developer.apple.com/documentation/coremotion/cmodometerdata/maxabsslope-96ulr"
       },
       "originDevice": {
         "doc": "The device that measures the data.",

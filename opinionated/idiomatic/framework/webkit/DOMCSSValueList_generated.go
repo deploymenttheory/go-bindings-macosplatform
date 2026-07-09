@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -57,12 +59,14 @@ func (dvl *DOMCSSValueList) WithCSSText(cssText string) *DOMCSSValueList {
 
 // Item wraps the corresponding Objective-C method.
 func (dvl *DOMCSSValueList) Item(index int) *DOMCSSValue {
+	defer runtime.KeepAlive(dvl)
 	_r := objc.Send[objc.ID](objref.IDOf(dvl), objc.RegisterName("item:"), index)
 	return DOMCSSValueFromID(_r)
 }
 
 // Length returns the length.
 func (dvl *DOMCSSValueList) Length() int {
+	defer runtime.KeepAlive(dvl)
 	_r := objc.Send[int](objref.IDOf(dvl), objc.RegisterName("length"))
 	return _r
 }

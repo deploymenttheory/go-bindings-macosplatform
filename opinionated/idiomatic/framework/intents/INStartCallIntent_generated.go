@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,8 @@ func startCallIntentAdopt(id objc.ID) *StartCallIntent {
 
 // NewStartCallIntentWithCallRecordFilterCallRecordToCallBackAudioRouteDestinationTypeContactsCallCapability creates a start call intent object with the specified parameters.
 func NewStartCallIntentWithCallRecordFilterCallRecordToCallBackAudioRouteDestinationTypeContactsCallCapability(callRecordFilter *CallRecordFilter, callRecordToCallBack *CallRecord, audioRoute CallAudioRoute, destinationType CallDestinationType, contacts []*Person, callCapability CallCapability) *StartCallIntent {
+	defer runtime.KeepAlive(callRecordFilter)
+	defer runtime.KeepAlive(callRecordToCallBack)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INStartCallIntent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCallRecordFilter:callRecordToCallBack:audioRoute:destinationType:contacts:callCapability:"), objref.IDOf(callRecordFilter), objref.IDOf(callRecordToCallBack), audioRoute, destinationType, purego.SliceToNSArray(contacts, func(_v *Person) objc.ID { return objref.IDOf(_v) }), callCapability)
 	return startCallIntentAdopt(_id)
@@ -60,30 +64,35 @@ func (sci *StartCallIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhr
 
 // WithDonationMetadata sets the donation metadata.
 func (sci *StartCallIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *StartCallIntent {
+	defer runtime.KeepAlive(donationMetadata)
 	objc.Send[objc.ID](objref.IDOf(sci), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return sci
 }
 
 // CallRecordFilter returns the call record filter.
 func (sci *StartCallIntent) CallRecordFilter() *CallRecordFilter {
+	defer runtime.KeepAlive(sci)
 	_r := objc.Send[objc.ID](objref.IDOf(sci), objc.RegisterName("callRecordFilter"))
 	return CallRecordFilterFromID(_r)
 }
 
 // CallRecordToCallBack returns the call record to call back.
 func (sci *StartCallIntent) CallRecordToCallBack() *CallRecord {
+	defer runtime.KeepAlive(sci)
 	_r := objc.Send[objc.ID](objref.IDOf(sci), objc.RegisterName("callRecordToCallBack"))
 	return CallRecordFromID(_r)
 }
 
 // AudioRoute returns the audio route.
 func (sci *StartCallIntent) AudioRoute() CallAudioRoute {
+	defer runtime.KeepAlive(sci)
 	_r := objc.Send[CallAudioRoute](objref.IDOf(sci), objc.RegisterName("audioRoute"))
 	return _r
 }
 
 // DestinationType returns the destination type.
 func (sci *StartCallIntent) DestinationType() CallDestinationType {
+	defer runtime.KeepAlive(sci)
 	_r := objc.Send[CallDestinationType](objref.IDOf(sci), objc.RegisterName("destinationType"))
 	return _r
 }
@@ -92,12 +101,14 @@ func (sci *StartCallIntent) DestinationType() CallDestinationType {
 //
 // Contacts returns the collection as a Go slice.
 func (sci *StartCallIntent) Contacts() []*Person {
+	defer runtime.KeepAlive(sci)
 	_arr := objc.Send[objc.ID](objref.IDOf(sci), objc.RegisterName("contacts"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
 // CallCapability returns the call capability.
 func (sci *StartCallIntent) CallCapability() CallCapability {
+	defer runtime.KeepAlive(sci)
 	_r := objc.Send[CallCapability](objref.IDOf(sci), objc.RegisterName("callCapability"))
 	return _r
 }

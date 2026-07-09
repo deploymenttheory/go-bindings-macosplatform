@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -81,12 +82,12 @@ func CWKeychainCopyPassword(ssidData obj.Object) (obj.Object, error) {
 var _fnCWKeychainCopyWiFiEAPIdentity func(KeychainDomain, objc.ID, unsafe.Pointer) int32
 
 // CWKeychainCopyWiFiEAPIdentity reports an error if the CoreWLAN framework function CWKeychainCopyWiFiEAPIdentity fails.
-func CWKeychainCopyWiFiEAPIdentity(domain KeychainDomain, ssid obj.Object, identity unsafe.Pointer) error {
+func CWKeychainCopyWiFiEAPIdentity(domain KeychainDomain, ssid []byte, identity unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCWKeychainCopyWiFiEAPIdentity == nil {
 		ebipurego.RegisterLibFunc(&_fnCWKeychainCopyWiFiEAPIdentity, _lib, "CWKeychainCopyWiFiEAPIdentity")
 	}
-	_rc := _fnCWKeychainCopyWiFiEAPIdentity(domain, objref.IDOf(ssid), identity)
+	_rc := _fnCWKeychainCopyWiFiEAPIdentity(domain, rt.BytesToNSData(ssid), identity)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -126,12 +127,12 @@ func CWKeychainDeletePassword(ssidData obj.Object) error {
 var _fnCWKeychainDeleteWiFiEAPUsernameAndPassword func(KeychainDomain, objc.ID) int32
 
 // CWKeychainDeleteWiFiEAPUsernameAndPassword reports an error if the CoreWLAN framework function CWKeychainDeleteWiFiEAPUsernameAndPassword fails.
-func CWKeychainDeleteWiFiEAPUsernameAndPassword(domain KeychainDomain, ssid obj.Object) error {
+func CWKeychainDeleteWiFiEAPUsernameAndPassword(domain KeychainDomain, ssid []byte) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCWKeychainDeleteWiFiEAPUsernameAndPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnCWKeychainDeleteWiFiEAPUsernameAndPassword, _lib, "CWKeychainDeleteWiFiEAPUsernameAndPassword")
 	}
-	_rc := _fnCWKeychainDeleteWiFiEAPUsernameAndPassword(domain, objref.IDOf(ssid))
+	_rc := _fnCWKeychainDeleteWiFiEAPUsernameAndPassword(domain, rt.BytesToNSData(ssid))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -141,12 +142,12 @@ func CWKeychainDeleteWiFiEAPUsernameAndPassword(domain KeychainDomain, ssid obj.
 var _fnCWKeychainDeleteWiFiPassword func(KeychainDomain, objc.ID) int32
 
 // CWKeychainDeleteWiFiPassword reports an error if the CoreWLAN framework function CWKeychainDeleteWiFiPassword fails.
-func CWKeychainDeleteWiFiPassword(domain KeychainDomain, ssid obj.Object) error {
+func CWKeychainDeleteWiFiPassword(domain KeychainDomain, ssid []byte) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCWKeychainDeleteWiFiPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnCWKeychainDeleteWiFiPassword, _lib, "CWKeychainDeleteWiFiPassword")
 	}
-	_rc := _fnCWKeychainDeleteWiFiPassword(domain, objref.IDOf(ssid))
+	_rc := _fnCWKeychainDeleteWiFiPassword(domain, rt.BytesToNSData(ssid))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -156,12 +157,12 @@ func CWKeychainDeleteWiFiPassword(domain KeychainDomain, ssid obj.Object) error 
 var _fnCWKeychainFindWiFiEAPUsernameAndPassword func(KeychainDomain, objc.ID, objc.ID, objc.ID) int32
 
 // CWKeychainFindWiFiEAPUsernameAndPassword reports an error if the CoreWLAN framework function CWKeychainFindWiFiEAPUsernameAndPassword fails.
-func CWKeychainFindWiFiEAPUsernameAndPassword(domain KeychainDomain, ssid obj.Object, username string, password string) error {
+func CWKeychainFindWiFiEAPUsernameAndPassword(domain KeychainDomain, ssid []byte, username string, password string) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCWKeychainFindWiFiEAPUsernameAndPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnCWKeychainFindWiFiEAPUsernameAndPassword, _lib, "CWKeychainFindWiFiEAPUsernameAndPassword")
 	}
-	_rc := _fnCWKeychainFindWiFiEAPUsernameAndPassword(domain, objref.IDOf(ssid), purego.NSString(username), purego.NSString(password))
+	_rc := _fnCWKeychainFindWiFiEAPUsernameAndPassword(domain, rt.BytesToNSData(ssid), purego.NSString(username), purego.NSString(password))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -171,12 +172,12 @@ func CWKeychainFindWiFiEAPUsernameAndPassword(domain KeychainDomain, ssid obj.Ob
 var _fnCWKeychainFindWiFiPassword func(KeychainDomain, objc.ID, objc.ID) int32
 
 // CWKeychainFindWiFiPassword reports an error if the CoreWLAN framework function CWKeychainFindWiFiPassword fails.
-func CWKeychainFindWiFiPassword(domain KeychainDomain, ssid obj.Object, password string) error {
+func CWKeychainFindWiFiPassword(domain KeychainDomain, ssid []byte, password string) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCWKeychainFindWiFiPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnCWKeychainFindWiFiPassword, _lib, "CWKeychainFindWiFiPassword")
 	}
-	_rc := _fnCWKeychainFindWiFiPassword(domain, objref.IDOf(ssid), purego.NSString(password))
+	_rc := _fnCWKeychainFindWiFiPassword(domain, rt.BytesToNSData(ssid), purego.NSString(password))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -231,12 +232,12 @@ func CWKeychainSetPassword(ssidData obj.Object, password obj.Object) error {
 var _fnCWKeychainSetWiFiEAPIdentity func(KeychainDomain, objc.ID, objc.ID) int32
 
 // CWKeychainSetWiFiEAPIdentity reports an error if the CoreWLAN framework function CWKeychainSetWiFiEAPIdentity fails.
-func CWKeychainSetWiFiEAPIdentity(domain KeychainDomain, ssid obj.Object, identity obj.Object) error {
+func CWKeychainSetWiFiEAPIdentity(domain KeychainDomain, ssid []byte, identity obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCWKeychainSetWiFiEAPIdentity == nil {
 		ebipurego.RegisterLibFunc(&_fnCWKeychainSetWiFiEAPIdentity, _lib, "CWKeychainSetWiFiEAPIdentity")
 	}
-	_rc := _fnCWKeychainSetWiFiEAPIdentity(domain, objref.IDOf(ssid), objref.IDOf(identity))
+	_rc := _fnCWKeychainSetWiFiEAPIdentity(domain, rt.BytesToNSData(ssid), objref.IDOf(identity))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -246,12 +247,12 @@ func CWKeychainSetWiFiEAPIdentity(domain KeychainDomain, ssid obj.Object, identi
 var _fnCWKeychainSetWiFiEAPUsernameAndPassword func(KeychainDomain, objc.ID, objc.ID, objc.ID) int32
 
 // CWKeychainSetWiFiEAPUsernameAndPassword reports an error if the CoreWLAN framework function CWKeychainSetWiFiEAPUsernameAndPassword fails.
-func CWKeychainSetWiFiEAPUsernameAndPassword(domain KeychainDomain, ssid obj.Object, username string, password string) error {
+func CWKeychainSetWiFiEAPUsernameAndPassword(domain KeychainDomain, ssid []byte, username string, password string) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCWKeychainSetWiFiEAPUsernameAndPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnCWKeychainSetWiFiEAPUsernameAndPassword, _lib, "CWKeychainSetWiFiEAPUsernameAndPassword")
 	}
-	_rc := _fnCWKeychainSetWiFiEAPUsernameAndPassword(domain, objref.IDOf(ssid), purego.NSString(username), purego.NSString(password))
+	_rc := _fnCWKeychainSetWiFiEAPUsernameAndPassword(domain, rt.BytesToNSData(ssid), purego.NSString(username), purego.NSString(password))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -261,12 +262,12 @@ func CWKeychainSetWiFiEAPUsernameAndPassword(domain KeychainDomain, ssid obj.Obj
 var _fnCWKeychainSetWiFiPassword func(KeychainDomain, objc.ID, objc.ID) int32
 
 // CWKeychainSetWiFiPassword reports an error if the CoreWLAN framework function CWKeychainSetWiFiPassword fails.
-func CWKeychainSetWiFiPassword(domain KeychainDomain, ssid obj.Object, password string) error {
+func CWKeychainSetWiFiPassword(domain KeychainDomain, ssid []byte, password string) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCWKeychainSetWiFiPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnCWKeychainSetWiFiPassword, _lib, "CWKeychainSetWiFiPassword")
 	}
-	_rc := _fnCWKeychainSetWiFiPassword(domain, objref.IDOf(ssid), purego.NSString(password))
+	_rc := _fnCWKeychainSetWiFiPassword(domain, rt.BytesToNSData(ssid), purego.NSString(password))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

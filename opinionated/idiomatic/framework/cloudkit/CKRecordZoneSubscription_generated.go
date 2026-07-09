@@ -5,7 +5,10 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -48,6 +51,7 @@ func recordZoneSubscriptionAdopt(id objc.ID) *RecordZoneSubscription {
 
 // NewRecordZoneSubscriptionWithZoneID creates a subscription for all records in the specified record zone.
 func NewRecordZoneSubscriptionWithZoneID(zoneID *RecordZoneID) *RecordZoneSubscription {
+	defer runtime.KeepAlive(zoneID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKRecordZoneSubscription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneID:"), objref.IDOf(zoneID))
 	return recordZoneSubscriptionAdopt(_id)
@@ -55,6 +59,8 @@ func NewRecordZoneSubscriptionWithZoneID(zoneID *RecordZoneID) *RecordZoneSubscr
 
 // NewRecordZoneSubscriptionWithZoneIDSubscriptionID creates a named subscription for all records in the specified record zone.
 func NewRecordZoneSubscriptionWithZoneIDSubscriptionID(zoneID *RecordZoneID, subscriptionID obj.Object) *RecordZoneSubscription {
+	defer runtime.KeepAlive(zoneID)
+	defer runtime.KeepAlive(subscriptionID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKRecordZoneSubscription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneID:subscriptionID:"), objref.IDOf(zoneID), objref.IDOf(subscriptionID))
 	return recordZoneSubscriptionAdopt(_id)
@@ -62,6 +68,7 @@ func NewRecordZoneSubscriptionWithZoneIDSubscriptionID(zoneID *RecordZoneID, sub
 
 // NewRecordZoneSubscriptionWithCoder creates a zone-based subscription from a serialized instance.
 func NewRecordZoneSubscriptionWithCoder(aDecoder obj.Object) *RecordZoneSubscription {
+	defer runtime.KeepAlive(aDecoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKRecordZoneSubscription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return recordZoneSubscriptionAdopt(_id)
@@ -69,26 +76,30 @@ func NewRecordZoneSubscriptionWithCoder(aDecoder obj.Object) *RecordZoneSubscrip
 
 // WithRecordType sets the type of record that the subscription queries.
 func (rzs *RecordZoneSubscription) WithRecordType(recordType obj.Object) *RecordZoneSubscription {
+	defer runtime.KeepAlive(recordType)
 	objc.Send[objc.ID](objref.IDOf(rzs), objc.RegisterName("setRecordType:"), objref.IDOf(recordType))
 	return rzs
 }
 
 // WithNotificationInfo sets the configuration for a subscription’s push notifications.
 func (rzs *RecordZoneSubscription) WithNotificationInfo(notificationInfo *NotificationInfo) *RecordZoneSubscription {
+	defer runtime.KeepAlive(notificationInfo)
 	objc.Send[objc.ID](objref.IDOf(rzs), objc.RegisterName("setNotificationInfo:"), objref.IDOf(notificationInfo))
 	return rzs
 }
 
 // ZoneID returns the ID of the record zone that the subscription queries. This property applies to query-based subscriptions and zone-based subscriptions. Specifying a record zone ID limits the scope of the query to only the records in that zone. For zone-based subscriptions, the query includes all records in the specified record zone. For a query-based subscription, the query includes only records of a specific type in the specified record zone. For zone-based subscriptions, CloudKit sets this property's value automatically. For all other subscription types, the default value is `nil`. If you want to scope your query-based subscription to a specific record zone, you must assign a value explicitly.
 func (rzs *RecordZoneSubscription) ZoneID() *RecordZoneID {
+	defer runtime.KeepAlive(rzs)
 	_r := objc.Send[objc.ID](objref.IDOf(rzs), objc.RegisterName("zoneID"))
 	return RecordZoneIDFromID(_r)
 }
 
 // RecordType returns the type of record that the subscription queries.
-func (rzs *RecordZoneSubscription) RecordType() obj.Object {
+func (rzs *RecordZoneSubscription) RecordType() *foundation.String {
+	defer runtime.KeepAlive(rzs)
 	_r := objc.Send[objc.ID](objref.IDOf(rzs), objc.RegisterName("recordType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 var _ SubscriptionProvider = (*RecordZoneSubscription)(nil)

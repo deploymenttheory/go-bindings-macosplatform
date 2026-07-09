@@ -5,6 +5,8 @@
 package oslog
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func logEnumeratorAdopt(id objc.ID) *LogEnumerator {
 
 // Description returns the object's -description text.
 func (le *LogEnumerator) Description() string {
+	defer runtime.KeepAlive(le)
 	return rt.Description(objref.IDOf(le))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (le *LogEnumerator) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(le)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(le), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (le *LogEnumerator) IsKind(className string) bool {
+	defer runtime.KeepAlive(le)
 	return rt.IsKind(objref.IDOf(le), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (le *LogEnumerator) String() string {
+	defer runtime.KeepAlive(le)
 	return rt.Description(objref.IDOf(le))
 }
 

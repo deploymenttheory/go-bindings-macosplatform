@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func keyedUnarchiverAdopt(id objc.ID) *KeyedUnarchiver {
 
 // Description returns the object's -description text.
 func (ku *KeyedUnarchiver) Description() string {
+	defer runtime.KeepAlive(ku)
 	return rt.Description(objref.IDOf(ku))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ku *KeyedUnarchiver) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ku)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ku), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ku *KeyedUnarchiver) IsKind(className string) bool {
+	defer runtime.KeepAlive(ku)
 	return rt.IsKind(objref.IDOf(ku), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ku *KeyedUnarchiver) String() string {
+	defer runtime.KeepAlive(ku)
 	return rt.Description(objref.IDOf(ku))
 }
 

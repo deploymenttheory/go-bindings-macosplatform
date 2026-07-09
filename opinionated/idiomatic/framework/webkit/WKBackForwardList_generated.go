@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func wKBackForwardListAdopt(id objc.ID) *WKBackForwardList {
 
 // Description returns the object's -description text.
 func (wbfl *WKBackForwardList) Description() string {
+	defer runtime.KeepAlive(wbfl)
 	return rt.Description(objref.IDOf(wbfl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wbfl *WKBackForwardList) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wbfl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wbfl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wbfl *WKBackForwardList) IsKind(className string) bool {
+	defer runtime.KeepAlive(wbfl)
 	return rt.IsKind(objref.IDOf(wbfl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wbfl *WKBackForwardList) String() string {
+	defer runtime.KeepAlive(wbfl)
 	return rt.Description(objref.IDOf(wbfl))
 }
 
@@ -80,6 +87,7 @@ func NewWKBackForwardList() *WKBackForwardList {
 
 // ItemAtIndex returns the item at the relative offset from the current item.
 func (wbfl *WKBackForwardList) ItemAtIndex(index int) *WKBackForwardListItem {
+	defer runtime.KeepAlive(wbfl)
 	var _mainthread0 *WKBackForwardListItem
 	purego.Main(func() {
 		_mainthread0 = func() *WKBackForwardListItem {
@@ -93,6 +101,7 @@ func (wbfl *WKBackForwardList) ItemAtIndex(index int) *WKBackForwardListItem {
 
 // CurrentItem returns the current item.
 func (wbfl *WKBackForwardList) CurrentItem() *WKBackForwardListItem {
+	defer runtime.KeepAlive(wbfl)
 	var _mainthread0 *WKBackForwardListItem
 	purego.Main(func() {
 		_mainthread0 = func() *WKBackForwardListItem {
@@ -106,6 +115,7 @@ func (wbfl *WKBackForwardList) CurrentItem() *WKBackForwardListItem {
 
 // BackItem returns the item immediately preceding the current item, or nil if there isn't one.
 func (wbfl *WKBackForwardList) BackItem() *WKBackForwardListItem {
+	defer runtime.KeepAlive(wbfl)
 	var _mainthread0 *WKBackForwardListItem
 	purego.Main(func() {
 		_mainthread0 = func() *WKBackForwardListItem {
@@ -119,6 +129,7 @@ func (wbfl *WKBackForwardList) BackItem() *WKBackForwardListItem {
 
 // ForwardItem returns the item immediately following the current item, or nil if there isn't one.
 func (wbfl *WKBackForwardList) ForwardItem() *WKBackForwardListItem {
+	defer runtime.KeepAlive(wbfl)
 	var _mainthread0 *WKBackForwardListItem
 	purego.Main(func() {
 		_mainthread0 = func() *WKBackForwardListItem {
@@ -134,6 +145,7 @@ func (wbfl *WKBackForwardList) ForwardItem() *WKBackForwardListItem {
 //
 // BackList returns the collection as a Go slice.
 func (wbfl *WKBackForwardList) BackList() []*WKBackForwardListItem {
+	defer runtime.KeepAlive(wbfl)
 	var _mainthread0 []*WKBackForwardListItem
 	purego.Main(func() {
 		_mainthread0 = func() []*WKBackForwardListItem {
@@ -148,6 +160,7 @@ func (wbfl *WKBackForwardList) BackList() []*WKBackForwardListItem {
 //
 // ForwardList returns the collection as a Go slice.
 func (wbfl *WKBackForwardList) ForwardList() []*WKBackForwardListItem {
+	defer runtime.KeepAlive(wbfl)
 	var _mainthread0 []*WKBackForwardListItem
 	purego.Main(func() {
 		_mainthread0 = func() []*WKBackForwardListItem {

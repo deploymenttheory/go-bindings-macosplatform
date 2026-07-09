@@ -5,9 +5,11 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -66,13 +68,15 @@ func (pimo *PlayerItemMetadataOutput) WithSuppressesPlayerRendering(suppressesPl
 }
 
 // DelegateQueue returns the dispatch queue on which messages are sent to the delegate. This property is not key-value observable.
-func (pimo *PlayerItemMetadataOutput) DelegateQueue() obj.Object {
+func (pimo *PlayerItemMetadataOutput) DelegateQueue() *foundation.Object {
+	defer runtime.KeepAlive(pimo)
 	_r := objc.Send[objc.ID](objref.IDOf(pimo), objc.RegisterName("delegateQueue"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 // AdvanceIntervalForDelegateInvocation returns permits advance invocation of the associated delegate, if any. If it is possible, an AVPlayerItemMetadataOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemMetadataOutput is prepared to act on them, the delegate will be invoked as soon as possible.
 func (pimo *PlayerItemMetadataOutput) AdvanceIntervalForDelegateInvocation() float64 {
+	defer runtime.KeepAlive(pimo)
 	_r := objc.Send[float64](objref.IDOf(pimo), objc.RegisterName("advanceIntervalForDelegateInvocation"))
 	return _r
 }

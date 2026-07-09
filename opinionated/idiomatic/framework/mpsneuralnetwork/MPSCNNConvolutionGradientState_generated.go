@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,12 +47,14 @@ func cNNConvolutionGradientStateAdopt(id objc.ID) *CNNConvolutionGradientState {
 
 // Convolution returns the convolution filter that produced the state. For child MPSCNNConvolutionTrasposeGradientState object, convolution below refers to MPSCNNConvolution object that produced MPSCNNConvolutionGradientState object which was used to create MPSCNNConvolutionTransposeGradientState object. See resultStateForSourceImage:sourceStates method of MPSCNNConvolutionTranspose below.
 func (ccgs *CNNConvolutionGradientState) Convolution() *CNNConvolution {
+	defer runtime.KeepAlive(ccgs)
 	_r := objc.Send[objc.ID](objref.IDOf(ccgs), objc.RegisterName("convolution"))
 	return CNNConvolutionFromID(_r)
 }
 
 // GradientForWeightsLayout returns layout of gradient with respect to weights in gradientForWeights buffer. Currently only MPSCNNConvolutionWeightsLayoutOHWI is supported.
 func (ccgs *CNNConvolutionGradientState) GradientForWeightsLayout() CNNConvolutionWeightsLayout {
+	defer runtime.KeepAlive(ccgs)
 	_r := objc.Send[CNNConvolutionWeightsLayout](objref.IDOf(ccgs), objc.RegisterName("gradientForWeightsLayout"))
 	return _r
 }

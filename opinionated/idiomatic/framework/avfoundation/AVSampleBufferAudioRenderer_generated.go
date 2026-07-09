@@ -5,8 +5,11 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +51,27 @@ func sampleBufferAudioRendererAdopt(id objc.ID) *SampleBufferAudioRenderer {
 
 // Description returns the object's -description text.
 func (sbar *SampleBufferAudioRenderer) Description() string {
+	defer runtime.KeepAlive(sbar)
 	return rt.Description(objref.IDOf(sbar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sbar *SampleBufferAudioRenderer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sbar)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sbar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sbar *SampleBufferAudioRenderer) IsKind(className string) bool {
+	defer runtime.KeepAlive(sbar)
 	return rt.IsKind(objref.IDOf(sbar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sbar *SampleBufferAudioRenderer) String() string {
+	defer runtime.KeepAlive(sbar)
 	return rt.Description(objref.IDOf(sbar))
 }
 
@@ -81,6 +89,7 @@ func (sbar *SampleBufferAudioRenderer) WithAudioOutputDeviceUniqueID(audioOutput
 
 // WithAudioTimePitchAlgorithm sets the processing algorithm used to manage audio pitch at different rates.
 func (sbar *SampleBufferAudioRenderer) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *SampleBufferAudioRenderer {
+	defer runtime.KeepAlive(audioTimePitchAlgorithm)
 	objc.Send[objc.ID](objref.IDOf(sbar), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
 	return sbar
 }
@@ -105,12 +114,14 @@ func (sbar *SampleBufferAudioRenderer) WithMuted(muted bool) *SampleBufferAudioR
 
 // Status returns the status.
 func (sbar *SampleBufferAudioRenderer) Status() QueuedSampleBufferRenderingStatus {
+	defer runtime.KeepAlive(sbar)
 	_r := objc.Send[QueuedSampleBufferRenderingStatus](objref.IDOf(sbar), objc.RegisterName("status"))
 	return _r
 }
 
 // AudioOutputDeviceUniqueID specifies the unique ID of the Core Audio output device used to play audio. By default, the value of this property is nil, indicating that the default audio output device is used. Otherwise the value of this property is an NSString containing the unique ID of the Core Audio output device to be used for audio output. Core Audio's kAudioDevicePropertyDeviceUID is a suitable source of audio output device unique IDs. Modifying this property while the timebase's rate is not 0.0 may cause the rate to briefly change to 0.0. On macOS, the audio device clock may be used as the AVSampleBufferRenderSynchronizer's and all attached AVQueuedSampleBufferRendering's timebase's clocks.  If the audioOutputDeviceUniqueID is modified, the clocks of all these timebases may also change. If multiple AVSampleBufferAudioRenderers with different values for audioOutputDeviceUniqueID are attached to the same AVSampleBufferRenderSynchronizer, audio may not stay in sync during playback.  To avoid this, ensure that all synchronized AVSampleBufferAudioRenderers are using the same audio output device.
 func (sbar *SampleBufferAudioRenderer) AudioOutputDeviceUniqueID() string {
+	defer runtime.KeepAlive(sbar)
 	_r := objc.Send[objc.ID](objref.IDOf(sbar), objc.RegisterName("audioOutputDeviceUniqueID"))
 	if _r == 0 {
 		return ""
@@ -119,30 +130,35 @@ func (sbar *SampleBufferAudioRenderer) AudioOutputDeviceUniqueID() string {
 }
 
 // AudioTimePitchAlgorithm indicates the processing algorithm used to manage audio pitch at varying rates. Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. The default value for applications linked on or after iOS 15.0 or macOS 12.0 is AVAudioTimePitchAlgorithmTimeDomain. For iOS versions prior to 15.0 the default value is AVAudioTimePitchAlgorithmLowQualityZeroLatency. For macOS versions prior to 12.0 the default value is AVAudioTimePitchAlgorithmSpectral. If the timebase's rate is not supported by the audioTimePitchAlgorithm, audio will be muted. Modifying this property while the timebase's rate is not 0.0 may cause the rate to briefly change to 0.0.
-func (sbar *SampleBufferAudioRenderer) AudioTimePitchAlgorithm() obj.Object {
+func (sbar *SampleBufferAudioRenderer) AudioTimePitchAlgorithm() *foundation.String {
+	defer runtime.KeepAlive(sbar)
 	_r := objc.Send[objc.ID](objref.IDOf(sbar), objc.RegisterName("audioTimePitchAlgorithm"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // AllowedAudioSpatializationFormats indicates the source audio channel layouts allowed by the receiver for spatialization. Spatialization uses psychoacoustic methods to create a more immersive audio rendering when the content is played on specialized headphones and speaker arrangements. When an  AVSampleBufferAudioRenderer's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMonoAndStereo the  AVSampleBufferAudioRenderer will attempt to spatialize content tagged with a stereo channel layout, two-channel content with no layout specified as well as mono. It is considered incorrect to render a binaural recording with spatialization. A binaural recording is captured using two carefully placed microphones at each ear where the intent, when played on headphones, is to reproduce a naturally occurring spatial effect. Content tagged with a binaural channel layout will ignore this property value. When an  AVSampleBufferAudioRenderer's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMultichannel the  AVSampleBufferAudioRenderer will attempt to spatialize any decodable multichannel layout. Setting this property to AVAudioSpatializationFormatMonoStereoAndMultichannel indicates that the sender allows the  AVSampleBufferAudioRenderer to spatialize any decodable mono, stereo or multichannel layout. This property is not observable. The default value for this property is AVAudioSpatializationFormatMultichannel.
 func (sbar *SampleBufferAudioRenderer) AllowedAudioSpatializationFormats() AudioSpatializationFormats {
+	defer runtime.KeepAlive(sbar)
 	_r := objc.Send[AudioSpatializationFormats](objref.IDOf(sbar), objc.RegisterName("allowedAudioSpatializationFormats"))
 	return _r
 }
 
 // Volume returns the volume.
 func (sbar *SampleBufferAudioRenderer) Volume() float32 {
+	defer runtime.KeepAlive(sbar)
 	_r := objc.Send[float32](objref.IDOf(sbar), objc.RegisterName("volume"))
 	return _r
 }
 
 // IsMuted reports whether the object is muted.
 func (sbar *SampleBufferAudioRenderer) IsMuted() bool {
+	defer runtime.KeepAlive(sbar)
 	_r := objc.Send[bool](objref.IDOf(sbar), objc.RegisterName("isMuted"))
 	return _r
 }
 
 // FlushFromSourceTimeCompletionHandler flushes queued sample buffers with presentation time stamps later than or equal to the specified time.
 func (sbar *SampleBufferAudioRenderer) FlushFromSourceTimeCompletionHandler(time_ coremedia.CMTime, completionHandler func(bool)) {
+	defer runtime.KeepAlive(sbar)
 	objc.Send[objc.ID](objref.IDOf(sbar), objc.RegisterName("flushFromSourceTime:completionHandler:"), time_, objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }

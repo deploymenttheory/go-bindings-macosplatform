@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func assetResourceLoaderAdopt(id objc.ID) *AssetResourceLoader {
 
 // Description returns the object's -description text.
 func (arl *AssetResourceLoader) Description() string {
+	defer runtime.KeepAlive(arl)
 	return rt.Description(objref.IDOf(arl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (arl *AssetResourceLoader) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(arl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(arl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (arl *AssetResourceLoader) IsKind(className string) bool {
+	defer runtime.KeepAlive(arl)
 	return rt.IsKind(objref.IDOf(arl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (arl *AssetResourceLoader) String() string {
+	defer runtime.KeepAlive(arl)
 	return rt.Description(objref.IDOf(arl))
 }
 
@@ -85,19 +93,22 @@ func (arl *AssetResourceLoader) WithSendsCommonMediaClientDataAsHTTPHeaders(send
 }
 
 // DelegateQueue returns the dispatch queue on which all delegate methods will be invoked. The value of this property is a dispatch_queue_t. The queue is set using the setDelegate:queue: method.
-func (arl *AssetResourceLoader) DelegateQueue() obj.Object {
+func (arl *AssetResourceLoader) DelegateQueue() *foundation.Object {
+	defer runtime.KeepAlive(arl)
 	_r := objc.Send[objc.ID](objref.IDOf(arl), objc.RegisterName("delegateQueue"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 // PreloadsEligibleContentKeys wraps the corresponding Objective-C method.
 func (arl *AssetResourceLoader) PreloadsEligibleContentKeys() bool {
+	defer runtime.KeepAlive(arl)
 	_r := objc.Send[bool](objref.IDOf(arl), objc.RegisterName("preloadsEligibleContentKeys"))
 	return _r
 }
 
 // SendsCommonMediaClientDataAsHTTPHeaders wraps the corresponding Objective-C method.
 func (arl *AssetResourceLoader) SendsCommonMediaClientDataAsHTTPHeaders() bool {
+	defer runtime.KeepAlive(arl)
 	_r := objc.Send[bool](objref.IDOf(arl), objc.RegisterName("sendsCommonMediaClientDataAsHTTPHeaders"))
 	return _r
 }

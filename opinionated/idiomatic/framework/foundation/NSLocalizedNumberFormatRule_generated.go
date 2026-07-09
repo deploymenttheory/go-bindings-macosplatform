@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -47,22 +48,27 @@ func localizedNumberFormatRuleAdopt(id objc.ID) *LocalizedNumberFormatRule {
 
 // Description returns the object's -description text.
 func (lnfr *LocalizedNumberFormatRule) Description() string {
+	defer runtime.KeepAlive(lnfr)
 	return rt.Description(objref.IDOf(lnfr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lnfr *LocalizedNumberFormatRule) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lnfr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lnfr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lnfr *LocalizedNumberFormatRule) IsKind(className string) bool {
+	defer runtime.KeepAlive(lnfr)
 	return rt.IsKind(objref.IDOf(lnfr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lnfr *LocalizedNumberFormatRule) String() string {
+	defer runtime.KeepAlive(lnfr)
 	return rt.Description(objref.IDOf(lnfr))
 }
 
@@ -79,7 +85,7 @@ func (lnfr *LocalizedNumberFormatRule) WithObservationInfo(observationInfo unsaf
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (lnfr *LocalizedNumberFormatRule) WithScriptingProperties(scriptingProperties obj.Object) *LocalizedNumberFormatRule {
-	objc.Send[objc.ID](objref.IDOf(lnfr), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (lnfr *LocalizedNumberFormatRule) WithScriptingProperties(scriptingProperties map[string]obj.Object) *LocalizedNumberFormatRule {
+	objc.Send[objc.ID](objref.IDOf(lnfr), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return lnfr
 }

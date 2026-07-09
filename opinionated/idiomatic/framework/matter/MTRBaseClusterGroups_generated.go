@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterGroupsAdopt(id objc.ID) *MTRBaseClusterGroups {
 
 // NewMTRBaseClusterGroupsWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterGroupsWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterGroups {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterGroups")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterGroupsAdopt(_id)
@@ -56,6 +60,8 @@ func NewMTRBaseClusterGroupsWithDeviceEndpointIDQueue(device *MTRBaseDevice, end
 
 // NewMTRBaseClusterGroupsWithDeviceEndpointQueue creates a new MTRBaseClusterGroups.
 func NewMTRBaseClusterGroupsWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterGroups {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterGroups")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRBaseClusterGroupsAdopt(_id)
@@ -65,6 +71,8 @@ func NewMTRBaseClusterGroupsWithDeviceEndpointQueue(device *MTRBaseDevice, endpo
 //
 // AddGroupWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) AddGroupWithParamsCompletion(ctx context.Context, params *MTRGroupsClusterAddGroupParams) (result *MTRGroupsClusterAddGroupResponseParams, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRGroupsClusterAddGroupResponseParams
 		err error
@@ -90,6 +98,8 @@ func (mbcg *MTRBaseClusterGroups) AddGroupWithParamsCompletion(ctx context.Conte
 //
 // ViewGroupWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ViewGroupWithParamsCompletion(ctx context.Context, params *MTRGroupsClusterViewGroupParams) (result *MTRGroupsClusterViewGroupResponseParams, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRGroupsClusterViewGroupResponseParams
 		err error
@@ -115,6 +125,8 @@ func (mbcg *MTRBaseClusterGroups) ViewGroupWithParamsCompletion(ctx context.Cont
 //
 // GetGroupMembershipWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) GetGroupMembershipWithParamsCompletion(ctx context.Context, params *MTRGroupsClusterGetGroupMembershipParams) (result *MTRGroupsClusterGetGroupMembershipResponseParams, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRGroupsClusterGetGroupMembershipResponseParams
 		err error
@@ -140,6 +152,8 @@ func (mbcg *MTRBaseClusterGroups) GetGroupMembershipWithParamsCompletion(ctx con
 //
 // RemoveGroupWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) RemoveGroupWithParamsCompletion(ctx context.Context, params *MTRGroupsClusterRemoveGroupParams) (result *MTRGroupsClusterRemoveGroupResponseParams, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRGroupsClusterRemoveGroupResponseParams
 		err error
@@ -165,6 +179,7 @@ func (mbcg *MTRBaseClusterGroups) RemoveGroupWithParamsCompletion(ctx context.Co
 //
 // ReadAttributeNameSupportWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeNameSupportWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
 	type _result struct {
 		val obj.Object
 		err error
@@ -190,6 +205,8 @@ func (mbcg *MTRBaseClusterGroups) ReadAttributeNameSupportWithCompletion(ctx con
 //
 // SubscribeAttributeNameSupportWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) SubscribeAttributeNameSupportWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -215,6 +232,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeNameSupportWithParamsSubscri
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
 	type _result struct {
 		val obj.Object
 		err error
@@ -240,6 +258,8 @@ func (mbcg *MTRBaseClusterGroups) ReadAttributeGeneratedCommandListWithCompletio
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -265,6 +285,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeGeneratedCommandListWithPara
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
 	type _result struct {
 		val obj.Object
 		err error
@@ -290,6 +311,8 @@ func (mbcg *MTRBaseClusterGroups) ReadAttributeAcceptedCommandListWithCompletion
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -315,6 +338,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeAcceptedCommandListWithParam
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
 	type _result struct {
 		val obj.Object
 		err error
@@ -340,6 +364,8 @@ func (mbcg *MTRBaseClusterGroups) ReadAttributeAttributeListWithCompletion(ctx c
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -365,6 +391,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeAttributeListWithParamsSubsc
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
 	type _result struct {
 		val obj.Object
 		err error
@@ -390,6 +417,8 @@ func (mbcg *MTRBaseClusterGroups) ReadAttributeFeatureMapWithCompletion(ctx cont
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -415,6 +444,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeFeatureMapWithParamsSubscrip
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
 	type _result struct {
 		val obj.Object
 		err error
@@ -440,6 +470,8 @@ func (mbcg *MTRBaseClusterGroups) ReadAttributeClusterRevisionWithCompletion(ctx
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,6 +497,8 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeClusterRevisionWithParamsSub
 //
 // AddGroupWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) AddGroupWithParams(ctx context.Context, params *MTRGroupsClusterAddGroupParams) (result *MTRGroupsClusterAddGroupResponseParams, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRGroupsClusterAddGroupResponseParams
 		err error
@@ -490,6 +524,8 @@ func (mbcg *MTRBaseClusterGroups) AddGroupWithParams(ctx context.Context, params
 //
 // ViewGroupWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ViewGroupWithParams(ctx context.Context, params *MTRGroupsClusterViewGroupParams) (result *MTRGroupsClusterViewGroupResponseParams, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRGroupsClusterViewGroupResponseParams
 		err error
@@ -515,6 +551,8 @@ func (mbcg *MTRBaseClusterGroups) ViewGroupWithParams(ctx context.Context, param
 //
 // GetGroupMembershipWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) GetGroupMembershipWithParams(ctx context.Context, params *MTRGroupsClusterGetGroupMembershipParams) (result *MTRGroupsClusterGetGroupMembershipResponseParams, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRGroupsClusterGetGroupMembershipResponseParams
 		err error
@@ -540,6 +578,8 @@ func (mbcg *MTRBaseClusterGroups) GetGroupMembershipWithParams(ctx context.Conte
 //
 // RemoveGroupWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) RemoveGroupWithParams(ctx context.Context, params *MTRGroupsClusterRemoveGroupParams) (result *MTRGroupsClusterRemoveGroupResponseParams, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRGroupsClusterRemoveGroupResponseParams
 		err error
@@ -565,6 +605,7 @@ func (mbcg *MTRBaseClusterGroups) RemoveGroupWithParams(ctx context.Context, par
 //
 // ReadAttributeNameSupport blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeNameSupport(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
 	type _result struct {
 		val obj.Object
 		err error
@@ -590,6 +631,10 @@ func (mbcg *MTRBaseClusterGroups) ReadAttributeNameSupport(ctx context.Context) 
 //
 // SubscribeAttributeNameSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) SubscribeAttributeNameSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -615,6 +660,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeNameSupportWithMinIntervalMa
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
 	type _result struct {
 		val obj.Object
 		err error
@@ -640,6 +686,10 @@ func (mbcg *MTRBaseClusterGroups) ReadAttributeGeneratedCommandList(ctx context.
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -665,6 +715,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeGeneratedCommandListWithMinI
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
 	type _result struct {
 		val obj.Object
 		err error
@@ -690,6 +741,10 @@ func (mbcg *MTRBaseClusterGroups) ReadAttributeAcceptedCommandList(ctx context.C
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -715,6 +770,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeAcceptedCommandListWithMinIn
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
 	type _result struct {
 		val obj.Object
 		err error
@@ -740,6 +796,10 @@ func (mbcg *MTRBaseClusterGroups) ReadAttributeAttributeList(ctx context.Context
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -765,6 +825,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeAttributeListWithMinInterval
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
 	type _result struct {
 		val obj.Object
 		err error
@@ -790,6 +851,10 @@ func (mbcg *MTRBaseClusterGroups) ReadAttributeFeatureMap(ctx context.Context) (
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -815,6 +880,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeFeatureMapWithMinIntervalMax
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
 	type _result struct {
 		val obj.Object
 		err error
@@ -840,6 +906,10 @@ func (mbcg *MTRBaseClusterGroups) ReadAttributeClusterRevision(ctx context.Conte
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcg)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

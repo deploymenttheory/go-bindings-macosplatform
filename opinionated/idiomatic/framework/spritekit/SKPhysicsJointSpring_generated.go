@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,24 +67,28 @@ func (pjs *PhysicsJointSpring) WithFrequency(frequency float64) *PhysicsJointSpr
 
 // WithBodyA sets the first body connected by the joint.
 func (pjs *PhysicsJointSpring) WithBodyA(bodyA *PhysicsBody) *PhysicsJointSpring {
+	defer runtime.KeepAlive(bodyA)
 	objc.Send[objc.ID](objref.IDOf(pjs), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
 	return pjs
 }
 
 // WithBodyB sets the second body connected by the joint.
 func (pjs *PhysicsJointSpring) WithBodyB(bodyB *PhysicsBody) *PhysicsJointSpring {
+	defer runtime.KeepAlive(bodyB)
 	objc.Send[objc.ID](objref.IDOf(pjs), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
 	return pjs
 }
 
 // Damping returns the damping.
 func (pjs *PhysicsJointSpring) Damping() float64 {
+	defer runtime.KeepAlive(pjs)
 	_r := objc.Send[float64](objref.IDOf(pjs), objc.RegisterName("damping"))
 	return _r
 }
 
 // Frequency returns the frequency.
 func (pjs *PhysicsJointSpring) Frequency() float64 {
+	defer runtime.KeepAlive(pjs)
 	_r := objc.Send[float64](objref.IDOf(pjs), objc.RegisterName("frequency"))
 	return _r
 }

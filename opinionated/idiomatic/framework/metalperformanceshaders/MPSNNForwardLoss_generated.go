@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -113,36 +115,42 @@ func (nfl *NNForwardLoss) WithLabel(label string) *NNForwardLoss {
 
 // ReduceAcrossBatch wraps the corresponding Objective-C method.
 func (nfl *NNForwardLoss) ReduceAcrossBatch() bool {
+	defer runtime.KeepAlive(nfl)
 	_r := objc.Send[bool](objref.IDOf(nfl), objc.RegisterName("reduceAcrossBatch"))
 	return _r
 }
 
 // NumberOfClasses returns the number of classes.
 func (nfl *NNForwardLoss) NumberOfClasses() int {
+	defer runtime.KeepAlive(nfl)
 	_r := objc.Send[int](objref.IDOf(nfl), objc.RegisterName("numberOfClasses"))
 	return _r
 }
 
 // Weight returns the weight.
 func (nfl *NNForwardLoss) Weight() float32 {
+	defer runtime.KeepAlive(nfl)
 	_r := objc.Send[float32](objref.IDOf(nfl), objc.RegisterName("weight"))
 	return _r
 }
 
 // LabelSmoothing returns the label smoothing.
 func (nfl *NNForwardLoss) LabelSmoothing() float32 {
+	defer runtime.KeepAlive(nfl)
 	_r := objc.Send[float32](objref.IDOf(nfl), objc.RegisterName("labelSmoothing"))
 	return _r
 }
 
 // Epsilon returns the epsilon.
 func (nfl *NNForwardLoss) Epsilon() float32 {
+	defer runtime.KeepAlive(nfl)
 	_r := objc.Send[float32](objref.IDOf(nfl), objc.RegisterName("epsilon"))
 	return _r
 }
 
 // Delta returns the delta.
 func (nfl *NNForwardLoss) Delta() float32 {
+	defer runtime.KeepAlive(nfl)
 	_r := objc.Send[float32](objref.IDOf(nfl), objc.RegisterName("delta"))
 	return _r
 }

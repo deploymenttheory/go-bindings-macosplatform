@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func scrubberSelectionStyleAdopt(id objc.ID) *ScrubberSelectionStyle {
 
 // Description returns the object's -description text.
 func (sss *ScrubberSelectionStyle) Description() string {
+	defer runtime.KeepAlive(sss)
 	return rt.Description(objref.IDOf(sss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sss *ScrubberSelectionStyle) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sss)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sss *ScrubberSelectionStyle) IsKind(className string) bool {
+	defer runtime.KeepAlive(sss)
 	return rt.IsKind(objref.IDOf(sss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sss *ScrubberSelectionStyle) String() string {
+	defer runtime.KeepAlive(sss)
 	return rt.Description(objref.IDOf(sss))
 }
 
@@ -80,6 +87,7 @@ func NewScrubberSelectionStyle() *ScrubberSelectionStyle {
 
 // NewScrubberSelectionStyleWithCoder initializes a scrubber selection style when included from a nib or Storyboard.
 func NewScrubberSelectionStyleWithCoder(coder obj.Object) *ScrubberSelectionStyle {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *ScrubberSelectionStyle
 	purego.Main(func() {
 		_mainthread0 = func() *ScrubberSelectionStyle {
@@ -93,6 +101,7 @@ func NewScrubberSelectionStyleWithCoder(coder obj.Object) *ScrubberSelectionStyl
 
 // MakeSelectionView provides an opportunity to create a customized scrubber selection style.
 func (sss *ScrubberSelectionStyle) MakeSelectionView() *ScrubberSelectionView {
+	defer runtime.KeepAlive(sss)
 	var _mainthread0 *ScrubberSelectionView
 	purego.Main(func() {
 		_mainthread0 = func() *ScrubberSelectionView {

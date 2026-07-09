@@ -75,8 +75,8 @@ func (o *IOBluetoothDevicePair) SetDevice(inDevice *IOBluetoothDevice) {
 }
 
 // This is the required reply to the devicePairingPINCodeRequest delegate message. Set the PIN code to use during pairing if required.
-func (o *IOBluetoothDevicePair) ReplyPINCodePINCode(pINCodeSize uint, pINCode *BluetoothPINCode) {
-	o.Ptr().Send(_iOBluetoothDevicePairSelReplyPINCodePINCode, pINCodeSize, pINCode)
+func (o *IOBluetoothDevicePair) ReplyPINCodePINCode(pinCodeSize uint, pinCode *BluetoothPINCode) {
+	o.Ptr().Send(_iOBluetoothDevicePairSelReplyPINCodePINCode, pinCodeSize, pinCode)
 }
 
 // This is the required reply to the devicePairingUserConfirmationRequest delegate message.

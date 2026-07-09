@@ -5,9 +5,10 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -48,20 +49,22 @@ func pathURLResourceAdopt(id objc.ID) *PathURLResource {
 }
 
 // NewPathURLResourceWithURLWritable creates a path URL resource.
-func NewPathURLResourceWithURLWritable(uRL string, writable bool) *PathURLResource {
+func NewPathURLResourceWithURLWritable(url string, writable bool) *PathURLResource {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("FSPathURLResource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:writable:"), rt.FileURL(uRL), writable)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:writable:"), rt.FileURL(url), writable)
 	return pathURLResourceAdopt(_id)
 }
 
 // URL returns the URL represented by the resource.
-func (pur *PathURLResource) URL() obj.Object {
+func (pur *PathURLResource) URL() string {
+	defer runtime.KeepAlive(pur)
 	_r := objc.Send[objc.ID](objref.IDOf(pur), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // IsWritable reports whether the object is writable.
 func (pur *PathURLResource) IsWritable() bool {
+	defer runtime.KeepAlive(pur)
 	_r := objc.Send[bool](objref.IDOf(pur), objc.RegisterName("isWritable"))
 	return _r
 }

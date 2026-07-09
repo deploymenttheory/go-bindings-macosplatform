@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,6 +56,7 @@ func NewFetchedPropertyDescription() *FetchedPropertyDescription {
 
 // WithFetchRequest sets the fetch request of the receiver.
 func (fpd *FetchedPropertyDescription) WithFetchRequest(fetchRequest obj.Object) *FetchedPropertyDescription {
+	defer runtime.KeepAlive(fetchRequest)
 	objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("setFetchRequest:"), objref.IDOf(fetchRequest))
 	return fpd
 }
@@ -78,6 +81,7 @@ func (fpd *FetchedPropertyDescription) WithTransient(transient bool) *FetchedPro
 
 // WithUserInfo sets the user info dictionary of the receiver.
 func (fpd *FetchedPropertyDescription) WithUserInfo(userInfo obj.Object) *FetchedPropertyDescription {
+	defer runtime.KeepAlive(userInfo)
 	objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return fpd
 }
@@ -114,6 +118,7 @@ func (fpd *FetchedPropertyDescription) WithRenamingIdentifier(renamingIdentifier
 
 // FetchRequest returns the fetch request.
 func (fpd *FetchedPropertyDescription) FetchRequest() obj.Object {
+	defer runtime.KeepAlive(fpd)
 	_r := objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
 }

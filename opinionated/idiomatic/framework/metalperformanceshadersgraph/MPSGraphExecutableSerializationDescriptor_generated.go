@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -71,18 +73,21 @@ func (gesd *GraphExecutableSerializationDescriptor) WithMinimumDeploymentTarget(
 
 // Append reports whether flag to append to an existing .mpsgraphpackage if found at provided url. If false, the exisiting .mpsgraphpackage will be overwritten.
 func (gesd *GraphExecutableSerializationDescriptor) Append() bool {
+	defer runtime.KeepAlive(gesd)
 	_r := objc.Send[bool](objref.IDOf(gesd), objc.RegisterName("append"))
 	return _r
 }
 
 // DeploymentPlatform returns the deployment platform used to serialize the executable. Defaults to the current platform.
 func (gesd *GraphExecutableSerializationDescriptor) DeploymentPlatform() GraphDeploymentPlatform {
+	defer runtime.KeepAlive(gesd)
 	_r := objc.Send[GraphDeploymentPlatform](objref.IDOf(gesd), objc.RegisterName("deploymentPlatform"))
 	return _r
 }
 
 // MinimumDeploymentTarget returns the minimum deployment target to serialize the executable. If not set, the package created will target the latest version of the `deploymentPlatform` set.
 func (gesd *GraphExecutableSerializationDescriptor) MinimumDeploymentTarget() string {
+	defer runtime.KeepAlive(gesd)
 	_r := objc.Send[objc.ID](objref.IDOf(gesd), objc.RegisterName("minimumDeploymentTarget"))
 	if _r == 0 {
 		return ""

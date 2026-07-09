@@ -1721,8 +1721,8 @@
     },
     "PHChange": {
       "changeDetails(for:)": {
-        "doc": "Returns detailed change information for the specified asset or collection.",
-        "url": "https://developer.apple.com/documentation/photos/phchange/changedetails(for:)-536rd"
+        "doc": "Returns detailed change information for a fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phchange/changedetails(for:)-2fne7"
       }
     },
     "PHCloudIdentifier": {

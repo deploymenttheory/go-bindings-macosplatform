@@ -5,11 +5,12 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,6 +51,7 @@ func voxelArrayAdopt(id objc.ID) *VoxelArray {
 
 // NewVoxelArrayWithAssetDivisionsPatchRadius initialize a voxel grid from an MDLAsset. Attempts to create a closed volume model by applying "patches" of radius patchRadius to any holes found in the orginal mesh. Choose a patch radius that will be large enough to fill in the largest hole in the model.
 func NewVoxelArrayWithAssetDivisionsPatchRadius(asset *Asset, divisions int, patchRadius float32) *VoxelArray {
+	defer runtime.KeepAlive(asset)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLVoxelArray")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:divisions:patchRadius:"), objref.IDOf(asset), divisions, patchRadius)
 	return voxelArrayAdopt(_id)
@@ -57,6 +59,7 @@ func NewVoxelArrayWithAssetDivisionsPatchRadius(asset *Asset, divisions int, pat
 
 // NewVoxelArrayWithAssetDivisionsInteriorShellsExteriorShellsPatchRadius initializes a voxel array that models the volume of 3D objects in the specified asset and creates the specified number of voxel shells.
 func NewVoxelArrayWithAssetDivisionsInteriorShellsExteriorShellsPatchRadius(asset *Asset, divisions int, interiorShells int, exteriorShells int, patchRadius float32) *VoxelArray {
+	defer runtime.KeepAlive(asset)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLVoxelArray")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:divisions:interiorShells:exteriorShells:patchRadius:"), objref.IDOf(asset), divisions, interiorShells, exteriorShells, patchRadius)
 	return voxelArrayAdopt(_id)
@@ -64,6 +67,7 @@ func NewVoxelArrayWithAssetDivisionsInteriorShellsExteriorShellsPatchRadius(asse
 
 // NewVoxelArrayWithAssetDivisionsInteriorNBWidthExteriorNBWidthPatchRadius initializes a voxel array that models the volume of 3D objects in the specified asset, creating voxel shells for the specified distances from the object’s surface.
 func NewVoxelArrayWithAssetDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(asset *Asset, divisions int, interiorNBWidth float32, exteriorNBWidth float32, patchRadius float32) *VoxelArray {
+	defer runtime.KeepAlive(asset)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLVoxelArray")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:divisions:interiorNBWidth:exteriorNBWidth:patchRadius:"), objref.IDOf(asset), divisions, interiorNBWidth, exteriorNBWidth, patchRadius)
 	return voxelArrayAdopt(_id)
@@ -83,12 +87,14 @@ func (va *VoxelArray) WithShellFieldExteriorThickness(shellFieldExteriorThicknes
 
 // WithParent sets the parent object that contains this object.
 func (va *VoxelArray) WithParent(parent ObjectProvider) *VoxelArray {
+	defer runtime.KeepAlive(parent)
 	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return va
 }
 
 // WithInstance sets the primary object, if applicable, of which this object is an instance.
 func (va *VoxelArray) WithInstance(instance ObjectProvider) *VoxelArray {
+	defer runtime.KeepAlive(instance)
 	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return va
 }
@@ -101,82 +107,103 @@ func (va *VoxelArray) WithHidden(hidden bool) *VoxelArray {
 
 // VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell returns a Boolean value indicating whether the voxel array contains voxel data for the specified index.
 func (va *VoxelArray) VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell(index unsafe.Pointer, allowAnyX bool, allowAnyY bool, allowAnyZ bool, allowAnyShell bool) bool {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[bool](objref.IDOf(va), objc.RegisterName("voxelExistsAtIndex:allowAnyX:allowAnyY:allowAnyZ:allowAnyShell:"), index, allowAnyX, allowAnyY, allowAnyZ, allowAnyShell)
 	return _r
 }
 
 // VoxelIndices returns a data object containing all voxels within the voxel array.
-func (va *VoxelArray) VoxelIndices() obj.Object {
+func (va *VoxelArray) VoxelIndices() []byte {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("voxelIndices"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // SetVoxelAtIndex sets voxel characteristics at the specified index in the array.
 func (va *VoxelArray) SetVoxelAtIndex(index unsafe.Pointer) {
+	defer runtime.KeepAlive(va)
 	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setVoxelAtIndex:"), index)
 }
 
 // SetVoxelsForMeshDivisionsPatchRadius set voxels corresponding to a mesh. Routine will attempt to create a closed volume model by applying "patches" of a given radius to any holes it may find in the mesh.
 func (va *VoxelArray) SetVoxelsForMeshDivisionsPatchRadius(mesh *Mesh, divisions int, patchRadius float32) {
+	defer runtime.KeepAlive(va)
+	defer runtime.KeepAlive(mesh)
 	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setVoxelsForMesh:divisions:patchRadius:"), objref.IDOf(mesh), divisions, patchRadius)
 }
 
 // SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius sets voxel values in the array to model the volume of the specified mesh and creates the specified number of voxel shells.
 func (va *VoxelArray) SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius(mesh *Mesh, divisions int, interiorShells int, exteriorShells int, patchRadius float32) {
+	defer runtime.KeepAlive(va)
+	defer runtime.KeepAlive(mesh)
 	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setVoxelsForMesh:divisions:interiorShells:exteriorShells:patchRadius:"), objref.IDOf(mesh), divisions, interiorShells, exteriorShells, patchRadius)
 }
 
 // SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius sets voxel values in the array to model the volume of the specified mesh and creates voxel shells for the specified distances from the object’s surface.
 func (va *VoxelArray) SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(mesh *Mesh, divisions int, interiorNBWidth float32, exteriorNBWidth float32, patchRadius float32) {
+	defer runtime.KeepAlive(va)
+	defer runtime.KeepAlive(mesh)
 	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setVoxelsForMesh:divisions:interiorNBWidth:exteriorNBWidth:patchRadius:"), objref.IDOf(mesh), divisions, interiorNBWidth, exteriorNBWidth, patchRadius)
 }
 
 // UnionWithVoxels extends the voxel array to also cover the volume of the specified voxel array.
 func (va *VoxelArray) UnionWithVoxels(voxels *VoxelArray) {
+	defer runtime.KeepAlive(va)
+	defer runtime.KeepAlive(voxels)
 	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("unionWithVoxels:"), objref.IDOf(voxels))
 }
 
 // IntersectWithVoxels reduces the voxel array to cover only the volume within both it and another voxel array.
 func (va *VoxelArray) IntersectWithVoxels(voxels *VoxelArray) {
+	defer runtime.KeepAlive(va)
+	defer runtime.KeepAlive(voxels)
 	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("intersectWithVoxels:"), objref.IDOf(voxels))
 }
 
 // DifferenceWithVoxels reduces the voxel array to cover only the portion of its volume not covered by another voxel array.
 func (va *VoxelArray) DifferenceWithVoxels(voxels *VoxelArray) {
+	defer runtime.KeepAlive(va)
+	defer runtime.KeepAlive(voxels)
 	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("differenceWithVoxels:"), objref.IDOf(voxels))
 }
 
 // ConvertToSignedShellField converts volume grid into a signed shell field by surrounding the surface voxels, which have shell level values of zero, by an inner layer of voxels with shell level values of negative one and an outer layer of voxels with shell level values of positive one. The volume model must be closed in order to generate a signed shell field.
 func (va *VoxelArray) ConvertToSignedShellField() {
+	defer runtime.KeepAlive(va)
 	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("convertToSignedShellField"))
 }
 
 // CoarseMesh creates a coarse mesh from the voxel grid
 func (va *VoxelArray) CoarseMesh() *Mesh {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("coarseMesh"))
 	return MeshFromID(_r)
 }
 
 // Count returns the number of voxels in the grid
 func (va *VoxelArray) Count() int {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[int](objref.IDOf(va), objc.RegisterName("count"))
 	return _r
 }
 
 // IsValidSignedShellField reports whether the volume grid is in a valid signed shell field form. This property will be set to true after calling generateSignedShellField. All other methods that modify the voxel grid will cause this property to be set to false. Setting shellFieldInteriorThickness and shellFieldExteriorThickness will not affect the value of this property.
 func (va *VoxelArray) IsValidSignedShellField() bool {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[bool](objref.IDOf(va), objc.RegisterName("isValidSignedShellField"))
 	return _r
 }
 
 // ShellFieldInteriorThickness returns if voxel grid is in a valid signed shell field form, sets the interior thickness to the desired width, as measured from the model surface. If the voxel grid is not in a valid signed shell field form, the value of this property is zero.
 func (va *VoxelArray) ShellFieldInteriorThickness() float32 {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[float32](objref.IDOf(va), objc.RegisterName("shellFieldInteriorThickness"))
 	return _r
 }
 
 // ShellFieldExteriorThickness returns if voxel grid is in a valid signed shell field form, sets the exterior thickness to the desired width, as measured from the model surface. If the voxel grid is not in a valid signed shell field form, the value of this property is zero.
 func (va *VoxelArray) ShellFieldExteriorThickness() float32 {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[float32](objref.IDOf(va), objc.RegisterName("shellFieldExteriorThickness"))
 	return _r
 }

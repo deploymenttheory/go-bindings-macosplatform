@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,11 +53,13 @@ func NewCNNBatchNormalizationState() *CNNBatchNormalizationState {
 
 // Reset reset any accumulated state data to its initial values.
 func (cbns *CNNBatchNormalizationState) Reset() {
+	defer runtime.KeepAlive(cbns)
 	objc.Send[objc.ID](objref.IDOf(cbns), objc.RegisterName("reset"))
 }
 
 // BatchNormalization returns the batch normalization.
 func (cbns *CNNBatchNormalizationState) BatchNormalization() *CNNBatchNormalization {
+	defer runtime.KeepAlive(cbns)
 	_r := objc.Send[objc.ID](objref.IDOf(cbns), objc.RegisterName("batchNormalization"))
 	return CNNBatchNormalizationFromID(_r)
 }

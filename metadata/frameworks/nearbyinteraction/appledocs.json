@@ -268,7 +268,7 @@
       },
       "direction": {
         "doc": "A vector that points from the user’s device in the direction of the peer device.",
-        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject/direction-4qh5w"
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject/direction-5xcld"
       },
       "discoveryToken": {
         "doc": "A unique identifier for a peer device in the session.",

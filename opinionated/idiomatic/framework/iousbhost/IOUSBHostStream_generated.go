@@ -5,6 +5,7 @@
 package iousbhost
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -57,6 +58,7 @@ func NewHostStream() *HostStream {
 
 // AbortWithOption aborts pending input/output requests.
 func (hs *HostStream) AbortWithOption(option HostAbortOption) error {
+	defer runtime.KeepAlive(hs)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(hs), objc.RegisterName("abortWithOption:error:"), option, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -69,6 +71,7 @@ func (hs *HostStream) AbortWithOption(option HostAbortOption) error {
 //
 // Abort returns an error if the operation did not succeed.
 func (hs *HostStream) Abort() error {
+	defer runtime.KeepAlive(hs)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(hs), objc.RegisterName("abortWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -79,6 +82,8 @@ func (hs *HostStream) Abort() error {
 
 // SendIORequestWithDataBytesTransferred sends an input/output request on the stream.
 func (hs *HostStream) SendIORequestWithDataBytesTransferred(data obj.Object) (bytesTransferred int, err error) {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(data)
 	var _out0 int
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(hs), objc.RegisterName("sendIORequestWithData:bytesTransferred:error:"), objref.IDOf(data), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
@@ -89,19 +94,23 @@ func (hs *HostStream) SendIORequestWithDataBytesTransferred(data obj.Object) (by
 }
 
 // EnqueueIORequestWithDataErrorCompletionHandler enqueues an input/output request on the stream.
-func (hs *HostStream) EnqueueIORequestWithDataErrorCompletionHandler(data obj.Object, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
-	_r := objc.Send[bool](objref.IDOf(hs), objc.RegisterName("enqueueIORequestWithData:error:completionHandler:"), objref.IDOf(data), error_, completionHandler)
+func (hs *HostStream) EnqueueIORequestWithDataErrorCompletionHandler(data obj.Object, err unsafe.Pointer, completionHandler func(int, uint)) bool {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(data)
+	_r := objc.Send[bool](objref.IDOf(hs), objc.RegisterName("enqueueIORequestWithData:error:completionHandler:"), objref.IDOf(data), err, completionHandler)
 	return _r
 }
 
 // HostPipe returns the IOUSBHostPipe this stream was created from
 func (hs *HostStream) HostPipe() *HostPipe {
+	defer runtime.KeepAlive(hs)
 	_r := objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("hostPipe"))
 	return HostPipeFromID(_r)
 }
 
 // StreamID returns streamID associated with this IOUSBHostStream.
 func (hs *HostStream) StreamID() int {
+	defer runtime.KeepAlive(hs)
 	_r := objc.Send[int](objref.IDOf(hs), objc.RegisterName("streamID"))
 	return _r
 }

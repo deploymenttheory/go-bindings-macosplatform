@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func livePhotoAdopt(id objc.ID) *LivePhoto {
 
 // Description returns the object's -description text.
 func (lp *LivePhoto) Description() string {
+	defer runtime.KeepAlive(lp)
 	return rt.Description(objref.IDOf(lp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lp *LivePhoto) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lp *LivePhoto) IsKind(className string) bool {
+	defer runtime.KeepAlive(lp)
 	return rt.IsKind(objref.IDOf(lp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lp *LivePhoto) String() string {
+	defer runtime.KeepAlive(lp)
 	return rt.Description(objref.IDOf(lp))
 }
 
@@ -75,6 +82,7 @@ func NewLivePhoto() *LivePhoto {
 
 // Size returns the dimensions of the live photo measured in pixels.
 func (lp *LivePhoto) Size() corefoundation.CGSize {
+	defer runtime.KeepAlive(lp)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(lp), objc.RegisterName("size"))
 	return _r
 }

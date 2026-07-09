@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func linuxRosettaCachingOptionsAdopt(id objc.ID) *LinuxRosettaCachingOptions {
 
 // Description returns the object's -description text.
 func (lrco *LinuxRosettaCachingOptions) Description() string {
+	defer runtime.KeepAlive(lrco)
 	return rt.Description(objref.IDOf(lrco))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lrco *LinuxRosettaCachingOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lrco)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lrco), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lrco *LinuxRosettaCachingOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(lrco)
 	return rt.IsKind(objref.IDOf(lrco), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lrco *LinuxRosettaCachingOptions) String() string {
+	defer runtime.KeepAlive(lrco)
 	return rt.Description(objref.IDOf(lrco))
 }
 

@@ -5,9 +5,12 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,13 +55,14 @@ func NewVolumeIdentifier() *VolumeIdentifier {
 
 // WithUUID sets a UUID to uniquely identify this entity.
 func (vi *VolumeIdentifier) WithUUID(uuid obj.Object) *VolumeIdentifier {
+	defer runtime.KeepAlive(uuid)
 	objc.Send[objc.ID](objref.IDOf(vi), objc.RegisterName("setUuid:"), objref.IDOf(uuid))
 	return vi
 }
 
 // WithQualifier sets an optional piece of data to distinguish entities that otherwise share the same UUID.
-func (vi *VolumeIdentifier) WithQualifier(qualifier obj.Object) *VolumeIdentifier {
-	objc.Send[objc.ID](objref.IDOf(vi), objc.RegisterName("setQualifier:"), objref.IDOf(qualifier))
+func (vi *VolumeIdentifier) WithQualifier(qualifier []byte) *VolumeIdentifier {
+	objc.Send[objc.ID](objref.IDOf(vi), objc.RegisterName("setQualifier:"), rt.BytesToNSData(qualifier))
 	return vi
 }
 

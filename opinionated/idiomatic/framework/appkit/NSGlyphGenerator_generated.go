@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func glyphGeneratorAdopt(id objc.ID) *GlyphGenerator {
 
 // Description returns the object's -description text.
 func (gg *GlyphGenerator) Description() string {
+	defer runtime.KeepAlive(gg)
 	return rt.Description(objref.IDOf(gg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gg *GlyphGenerator) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gg)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gg *GlyphGenerator) IsKind(className string) bool {
+	defer runtime.KeepAlive(gg)
 	return rt.IsKind(objref.IDOf(gg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gg *GlyphGenerator) String() string {
+	defer runtime.KeepAlive(gg)
 	return rt.Description(objref.IDOf(gg))
 }
 

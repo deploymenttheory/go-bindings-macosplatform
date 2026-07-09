@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,34 @@ func liveWorkoutDataSourceAdopt(id objc.ID) *LiveWorkoutDataSource {
 
 // Description returns the object's -description text.
 func (lwds *LiveWorkoutDataSource) Description() string {
+	defer runtime.KeepAlive(lwds)
 	return rt.Description(objref.IDOf(lwds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lwds *LiveWorkoutDataSource) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lwds)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lwds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lwds *LiveWorkoutDataSource) IsKind(className string) bool {
+	defer runtime.KeepAlive(lwds)
 	return rt.IsKind(objref.IDOf(lwds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lwds *LiveWorkoutDataSource) String() string {
+	defer runtime.KeepAlive(lwds)
 	return rt.Description(objref.IDOf(lwds))
 }
 
 // NewLiveWorkoutDataSourceWithHealthStoreWorkoutConfiguration creates a new data source based on the provided workout configuration.
 func NewLiveWorkoutDataSourceWithHealthStoreWorkoutConfiguration(healthStore *HealthStore, configuration *WorkoutConfiguration) *LiveWorkoutDataSource {
+	defer runtime.KeepAlive(healthStore)
+	defer runtime.KeepAlive(configuration)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKLiveWorkoutDataSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:workoutConfiguration:"), objref.IDOf(healthStore), objref.IDOf(configuration))
 	return liveWorkoutDataSourceAdopt(_id)
@@ -75,16 +84,23 @@ func NewLiveWorkoutDataSourceWithHealthStoreWorkoutConfiguration(healthStore *He
 
 // EnableCollectionForTypePredicate begins automatically calculating statistics for samples that match the quantity type and predicate.
 func (lwds *LiveWorkoutDataSource) EnableCollectionForTypePredicate(quantityType *QuantityType, predicate obj.Object) {
+	defer runtime.KeepAlive(lwds)
+	defer runtime.KeepAlive(quantityType)
+	defer runtime.KeepAlive(predicate)
 	objc.Send[objc.ID](objref.IDOf(lwds), objc.RegisterName("enableCollectionForType:predicate:"), objref.IDOf(quantityType), objref.IDOf(predicate))
 }
 
 // DisableCollectionForType stops automatically calculating statistics for the quantity type.
 func (lwds *LiveWorkoutDataSource) DisableCollectionForType(quantityType *QuantityType) {
+	defer runtime.KeepAlive(lwds)
+	defer runtime.KeepAlive(quantityType)
 	objc.Send[objc.ID](objref.IDOf(lwds), objc.RegisterName("disableCollectionForType:"), objref.IDOf(quantityType))
 }
 
 // TypesToCollect returns the quantity types the receiver is collecting.
-func (lwds *LiveWorkoutDataSource) TypesToCollect() obj.Object {
+// The order of the returned elements is unspecified.
+func (lwds *LiveWorkoutDataSource) TypesToCollect() []*QuantityType {
+	defer runtime.KeepAlive(lwds)
 	_r := objc.Send[objc.ID](objref.IDOf(lwds), objc.RegisterName("typesToCollect"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *QuantityType { return QuantityTypeFromID(_id) })
 }

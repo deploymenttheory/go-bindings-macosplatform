@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -93,24 +95,28 @@ func (ac *AccelerationConstraint) WithIncremental(incremental bool) *Acceleratio
 
 // MaximumLinearAcceleration returns controls the maximum linear acceleration. Defaults to MAXFLOAT. Animatable. The maximum linear acceleration is in m.s^-2
 func (ac *AccelerationConstraint) MaximumLinearAcceleration() float64 {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[float64](objref.IDOf(ac), objc.RegisterName("maximumLinearAcceleration"))
 	return _r
 }
 
 // MaximumLinearVelocity returns controls the maximum linear velocity. Defaults to MAXFLOAT. Animatable. The maximum linear velocity is in m.s
 func (ac *AccelerationConstraint) MaximumLinearVelocity() float64 {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[float64](objref.IDOf(ac), objc.RegisterName("maximumLinearVelocity"))
 	return _r
 }
 
 // DecelerationDistance returns controls the distance at which the node should start decelerating. Defaults to 0. Animatable.
 func (ac *AccelerationConstraint) DecelerationDistance() float64 {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[float64](objref.IDOf(ac), objc.RegisterName("decelerationDistance"))
 	return _r
 }
 
 // Damping specifies the damping factor of the receiver. Optionally reduce the body's linear velocity each frame to simulate fluid/air friction. Value should be zero or greater. Defaults to 0.1. Animatable.
 func (ac *AccelerationConstraint) Damping() float64 {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[float64](objref.IDOf(ac), objc.RegisterName("damping"))
 	return _r
 }

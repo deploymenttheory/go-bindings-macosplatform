@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func physicsVehicleWheelAdopt(id objc.ID) *PhysicsVehicleWheel {
 
 // Description returns the object's -description text.
 func (pvw *PhysicsVehicleWheel) Description() string {
+	defer runtime.KeepAlive(pvw)
 	return rt.Description(objref.IDOf(pvw))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pvw *PhysicsVehicleWheel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pvw)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pvw), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pvw *PhysicsVehicleWheel) IsKind(className string) bool {
+	defer runtime.KeepAlive(pvw)
 	return rt.IsKind(objref.IDOf(pvw), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pvw *PhysicsVehicleWheel) String() string {
+	defer runtime.KeepAlive(pvw)
 	return rt.Description(objref.IDOf(pvw))
 }
 
@@ -122,54 +129,63 @@ func (pvw *PhysicsVehicleWheel) WithSuspensionRestLength(suspensionRestLength fl
 
 // Node returns the node.
 func (pvw *PhysicsVehicleWheel) Node() *Node {
+	defer runtime.KeepAlive(pvw)
 	_r := objc.Send[objc.ID](objref.IDOf(pvw), objc.RegisterName("node"))
 	return NodeFromID(_r)
 }
 
 // SuspensionStiffness returns the suspension stiffness.
 func (pvw *PhysicsVehicleWheel) SuspensionStiffness() float64 {
+	defer runtime.KeepAlive(pvw)
 	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("suspensionStiffness"))
 	return _r
 }
 
 // SuspensionCompression returns the suspension compression.
 func (pvw *PhysicsVehicleWheel) SuspensionCompression() float64 {
+	defer runtime.KeepAlive(pvw)
 	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("suspensionCompression"))
 	return _r
 }
 
 // SuspensionDamping returns the suspension damping.
 func (pvw *PhysicsVehicleWheel) SuspensionDamping() float64 {
+	defer runtime.KeepAlive(pvw)
 	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("suspensionDamping"))
 	return _r
 }
 
 // MaximumSuspensionTravel returns the maximum suspension travel.
 func (pvw *PhysicsVehicleWheel) MaximumSuspensionTravel() float64 {
+	defer runtime.KeepAlive(pvw)
 	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("maximumSuspensionTravel"))
 	return _r
 }
 
 // FrictionSlip returns the friction slip.
 func (pvw *PhysicsVehicleWheel) FrictionSlip() float64 {
+	defer runtime.KeepAlive(pvw)
 	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("frictionSlip"))
 	return _r
 }
 
 // MaximumSuspensionForce returns the maximum suspension force.
 func (pvw *PhysicsVehicleWheel) MaximumSuspensionForce() float64 {
+	defer runtime.KeepAlive(pvw)
 	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("maximumSuspensionForce"))
 	return _r
 }
 
 // Radius returns the radius.
 func (pvw *PhysicsVehicleWheel) Radius() float64 {
+	defer runtime.KeepAlive(pvw)
 	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("radius"))
 	return _r
 }
 
 // SuspensionRestLength returns the suspension rest length.
 func (pvw *PhysicsVehicleWheel) SuspensionRestLength() float64 {
+	defer runtime.KeepAlive(pvw)
 	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("suspensionRestLength"))
 	return _r
 }

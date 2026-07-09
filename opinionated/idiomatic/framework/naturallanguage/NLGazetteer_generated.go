@@ -5,10 +5,12 @@
 package naturallanguage
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,27 +52,32 @@ func gazetteerAdopt(id objc.ID) *Gazetteer {
 
 // Description returns the object's -description text.
 func (g *Gazetteer) Description() string {
+	defer runtime.KeepAlive(g)
 	return rt.Description(objref.IDOf(g))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (g *Gazetteer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(g), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (g *Gazetteer) IsKind(className string) bool {
+	defer runtime.KeepAlive(g)
 	return rt.IsKind(objref.IDOf(g), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (g *Gazetteer) String() string {
+	defer runtime.KeepAlive(g)
 	return rt.Description(objref.IDOf(g))
 }
 
-// NewGazetteerWithContentsOfURLError creates a Natural Language gazetteer from a model created with the Create ML framework.
-func NewGazetteerWithContentsOfURLError(url string) (result *Gazetteer, err error) {
+// NewGazetteerWithContentsOfURL creates a Natural Language gazetteer from a model created with the Create ML framework.
+func NewGazetteerWithContentsOfURL(url string) (result *Gazetteer, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NLGazetteer")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
@@ -80,22 +87,23 @@ func NewGazetteerWithContentsOfURLError(url string) (result *Gazetteer, err erro
 	return gazetteerAdopt(_id), nil
 }
 
-// NewGazetteerWithDataError creates a gazetteer from a data instance.
-func NewGazetteerWithDataError(data obj.Object) (result *Gazetteer, err error) {
+// NewGazetteerWithData creates a gazetteer from a data instance.
+func NewGazetteerWithData(data []byte) (result *Gazetteer, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NLGazetteer")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:error:"), rt.BytesToNSData(data), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return gazetteerAdopt(_id), nil
 }
 
-// NewGazetteerWithDictionaryLanguageError creates a gazetteer from a set of labels for terms represented by a dictionary.
-func NewGazetteerWithDictionaryLanguageError(dictionary obj.Object, language obj.Object) (result *Gazetteer, err error) {
+// NewGazetteerWithDictionaryLanguage creates a gazetteer from a set of labels for terms represented by a dictionary.
+func NewGazetteerWithDictionaryLanguage(dictionary map[string]obj.Object, language obj.Object) (result *Gazetteer, err error) {
+	defer runtime.KeepAlive(language)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NLGazetteer")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:language:error:"), objref.IDOf(dictionary), objref.IDOf(language), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:language:error:"), rt.MapToDict(dictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(language), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -103,8 +111,9 @@ func NewGazetteerWithDictionaryLanguageError(dictionary obj.Object, language obj
 }
 
 // LabelForString retrieves the label for the given term.
-func (g *Gazetteer) LabelForString(string_ string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("labelForString:"), purego.NSString(string_))
+func (g *Gazetteer) LabelForString(str string) string {
+	defer runtime.KeepAlive(g)
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("labelForString:"), purego.NSString(str))
 	if _r == 0 {
 		return ""
 	}
@@ -112,13 +121,15 @@ func (g *Gazetteer) LabelForString(string_ string) string {
 }
 
 // Language returns the language.
-func (g *Gazetteer) Language() obj.Object {
+func (g *Gazetteer) Language() *foundation.String {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("language"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Data returns the data.
-func (g *Gazetteer) Data() obj.Object {
+func (g *Gazetteer) Data() []byte {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

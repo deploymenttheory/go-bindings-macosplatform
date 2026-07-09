@@ -5,7 +5,10 @@
 package storekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func productAdopt(id objc.ID) *Product {
 
 // Description returns the object's -description text.
 func (p *Product) Description() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (p *Product) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (p *Product) IsKind(className string) bool {
+	defer runtime.KeepAlive(p)
 	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (p *Product) String() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
@@ -74,6 +82,7 @@ func NewProduct() *Product {
 
 // LocalizedDescription returns the localized description.
 func (p *Product) LocalizedDescription() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""
@@ -83,6 +92,7 @@ func (p *Product) LocalizedDescription() string {
 
 // LocalizedTitle returns the localized title.
 func (p *Product) LocalizedTitle() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("localizedTitle"))
 	if _r == 0 {
 		return ""
@@ -91,19 +101,22 @@ func (p *Product) LocalizedTitle() string {
 }
 
 // Price returns the price.
-func (p *Product) Price() obj.Object {
+func (p *Product) Price() *foundation.DecimalNumber {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("price"))
-	return obj.Wrap(_r)
+	return foundation.DecimalNumberFromID(_r)
 }
 
 // PriceLocale returns the price locale.
-func (p *Product) PriceLocale() obj.Object {
+func (p *Product) PriceLocale() *foundation.Locale {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("priceLocale"))
-	return obj.Wrap(_r)
+	return foundation.LocaleFromID(_r)
 }
 
 // ProductIdentifier returns the product identifier.
 func (p *Product) ProductIdentifier() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("productIdentifier"))
 	if _r == 0 {
 		return ""
@@ -113,18 +126,21 @@ func (p *Product) ProductIdentifier() string {
 
 // IsDownloadable reports whether the object is downloadable.
 func (p *Product) IsDownloadable() bool {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isDownloadable"))
 	return _r
 }
 
 // Downloadable wraps the corresponding Objective-C method.
 func (p *Product) Downloadable() bool {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("downloadable"))
 	return _r
 }
 
 // IsFamilyShareable reports whether the object is family shareable.
 func (p *Product) IsFamilyShareable() bool {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isFamilyShareable"))
 	return _r
 }
@@ -133,12 +149,14 @@ func (p *Product) IsFamilyShareable() bool {
 //
 // DownloadContentLengths returns the collection as a Go slice.
 func (p *Product) DownloadContentLengths() []obj.Object {
+	defer runtime.KeepAlive(p)
 	_arr := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("downloadContentLengths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DownloadContentVersion returns the download content version.
 func (p *Product) DownloadContentVersion() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("downloadContentVersion"))
 	if _r == 0 {
 		return ""
@@ -148,18 +166,21 @@ func (p *Product) DownloadContentVersion() string {
 
 // SubscriptionPeriod returns the subscription period.
 func (p *Product) SubscriptionPeriod() *ProductSubscriptionPeriod {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("subscriptionPeriod"))
 	return ProductSubscriptionPeriodFromID(_r)
 }
 
 // IntroductoryPrice returns the introductory price.
 func (p *Product) IntroductoryPrice() *ProductDiscount {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("introductoryPrice"))
 	return ProductDiscountFromID(_r)
 }
 
 // SubscriptionGroupIdentifier returns the subscription group identifier.
 func (p *Product) SubscriptionGroupIdentifier() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("subscriptionGroupIdentifier"))
 	if _r == 0 {
 		return ""
@@ -171,6 +192,7 @@ func (p *Product) SubscriptionGroupIdentifier() string {
 //
 // Discounts returns the collection as a Go slice.
 func (p *Product) Discounts() []*ProductDiscount {
+	defer runtime.KeepAlive(p)
 	_arr := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("discounts"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ProductDiscount { return ProductDiscountFromID(_id) })
 }

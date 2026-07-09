@@ -6,6 +6,7 @@ package webkit
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func wKWebExtensionMessagePortAdopt(id objc.ID) *WKWebExtensionMessagePort {
 
 // Description returns the object's -description text.
 func (wwemp *WKWebExtensionMessagePort) Description() string {
+	defer runtime.KeepAlive(wwemp)
 	return rt.Description(objref.IDOf(wwemp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wwemp *WKWebExtensionMessagePort) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wwemp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wwemp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wwemp *WKWebExtensionMessagePort) IsKind(className string) bool {
+	defer runtime.KeepAlive(wwemp)
 	return rt.IsKind(objref.IDOf(wwemp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wwemp *WKWebExtensionMessagePort) String() string {
+	defer runtime.KeepAlive(wwemp)
 	return rt.Description(objref.IDOf(wwemp))
 }
 
@@ -84,6 +90,8 @@ func NewWKWebExtensionMessagePort() *WKWebExtensionMessagePort {
 //
 // SendMessage blocks until the operation completes or ctx is cancelled.
 func (wwemp *WKWebExtensionMessagePort) SendMessage(ctx context.Context, message obj.Object) error {
+	defer runtime.KeepAlive(wwemp)
+	defer runtime.KeepAlive(message)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -101,6 +109,7 @@ func (wwemp *WKWebExtensionMessagePort) SendMessage(ctx context.Context, message
 
 // Disconnect disconnects the port, terminating all further messages.
 func (wwemp *WKWebExtensionMessagePort) Disconnect() {
+	defer runtime.KeepAlive(wwemp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("disconnect"))
 	})
@@ -108,15 +117,17 @@ func (wwemp *WKWebExtensionMessagePort) Disconnect() {
 }
 
 // DisconnectWithError disconnects the port, terminating all further messages with an optional error.
-func (wwemp *WKWebExtensionMessagePort) DisconnectWithError(error_ unsafe.Pointer) {
+func (wwemp *WKWebExtensionMessagePort) DisconnectWithError(err unsafe.Pointer) {
+	defer runtime.KeepAlive(wwemp)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("disconnectWithError:"), error_)
+		objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("disconnectWithError:"), err)
 	})
 
 }
 
 // ApplicationIdentifier returns the unique identifier for the app to which this port should be connected. This identifier is provided by the web extension and may or may not be used by the app. It's up to the app to decide how to interpret this identifier.
 func (wwemp *WKWebExtensionMessagePort) ApplicationIdentifier() string {
+	defer runtime.KeepAlive(wwemp)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -135,6 +146,7 @@ func (wwemp *WKWebExtensionMessagePort) ApplicationIdentifier() string {
 //
 // SetDisconnectHandler blocks until the operation completes or ctx is cancelled.
 func (wwemp *WKWebExtensionMessagePort) SetDisconnectHandler(ctx context.Context) error {
+	defer runtime.KeepAlive(wwemp)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -152,6 +164,7 @@ func (wwemp *WKWebExtensionMessagePort) SetDisconnectHandler(ctx context.Context
 
 // IsDisconnected reports whether the message port is disconnected.
 func (wwemp *WKWebExtensionMessagePort) IsDisconnected() bool {
+	defer runtime.KeepAlive(wwemp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

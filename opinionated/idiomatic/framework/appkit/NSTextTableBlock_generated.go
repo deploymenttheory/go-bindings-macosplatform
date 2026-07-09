@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func textTableBlockAdopt(id objc.ID) *TextTableBlock {
 
 // NewTextTableBlockWithTableStartingRowRowSpanStartingColumnColumnSpan returns an initialized text table block.
 func NewTextTableBlockWithTableStartingRowRowSpanStartingColumnColumnSpan(table *TextTable, row int, rowSpan int, col int, colSpan int) *TextTableBlock {
+	defer runtime.KeepAlive(table)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextTableBlock")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTable:startingRow:rowSpan:startingColumn:columnSpan:"), objref.IDOf(table), row, rowSpan, col, colSpan)
 	return textTableBlockAdopt(_id)
@@ -60,36 +63,42 @@ func (ttb *TextTableBlock) WithVerticalAlignment(verticalAlignment TextBlockVert
 
 // WithBackgroundColor sets the background color of the text block.
 func (ttb *TextTableBlock) WithBackgroundColor(backgroundColor *Color) *TextTableBlock {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(ttb), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return ttb
 }
 
 // Table returns the table.
 func (ttb *TextTableBlock) Table() *TextTable {
+	defer runtime.KeepAlive(ttb)
 	_r := objc.Send[objc.ID](objref.IDOf(ttb), objc.RegisterName("table"))
 	return TextTableFromID(_r)
 }
 
 // StartingRow returns the starting row.
 func (ttb *TextTableBlock) StartingRow() int {
+	defer runtime.KeepAlive(ttb)
 	_r := objc.Send[int](objref.IDOf(ttb), objc.RegisterName("startingRow"))
 	return _r
 }
 
 // RowSpan returns the row span.
 func (ttb *TextTableBlock) RowSpan() int {
+	defer runtime.KeepAlive(ttb)
 	_r := objc.Send[int](objref.IDOf(ttb), objc.RegisterName("rowSpan"))
 	return _r
 }
 
 // StartingColumn returns the starting column.
 func (ttb *TextTableBlock) StartingColumn() int {
+	defer runtime.KeepAlive(ttb)
 	_r := objc.Send[int](objref.IDOf(ttb), objc.RegisterName("startingColumn"))
 	return _r
 }
 
 // ColumnSpan returns the column span.
 func (ttb *TextTableBlock) ColumnSpan() int {
+	defer runtime.KeepAlive(ttb)
 	_r := objc.Send[int](objref.IDOf(ttb), objc.RegisterName("columnSpan"))
 	return _r
 }

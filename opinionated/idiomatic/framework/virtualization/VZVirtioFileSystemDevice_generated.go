@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewVirtioFileSystemDevice() *VirtioFileSystemDevice {
 
 // WithShare sets a value that defines the directory share the host exposes to the guest VM.
 func (vfsd *VirtioFileSystemDevice) WithShare(share DirectoryShareProvider) *VirtioFileSystemDevice {
+	defer runtime.KeepAlive(share)
 	objc.Send[objc.ID](objref.IDOf(vfsd), objc.RegisterName("setShare:"), objref.IDOf(share))
 	return vfsd
 }
 
 // Tag returns the tag is a string identifying the device. The tag is presented as a label in the guest identifying this device for mounting.
 func (vfsd *VirtioFileSystemDevice) Tag() string {
+	defer runtime.KeepAlive(vfsd)
 	_r := objc.Send[objc.ID](objref.IDOf(vfsd), objc.RegisterName("tag"))
 	if _r == 0 {
 		return ""
@@ -68,6 +72,7 @@ func (vfsd *VirtioFileSystemDevice) Tag() string {
 
 // Share returns directory share. Defines how host resources are exposed to the guest virtual machine. Setting this property to VZLinuxRosettaDirectoryShare is not supported and will cause an exception to be raised.
 func (vfsd *VirtioFileSystemDevice) Share() *DirectoryShare {
+	defer runtime.KeepAlive(vfsd)
 	_r := objc.Send[objc.ID](objref.IDOf(vfsd), objc.RegisterName("share"))
 	return DirectoryShareFromID(_r)
 }

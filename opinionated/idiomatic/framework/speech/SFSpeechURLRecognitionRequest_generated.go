@@ -5,6 +5,8 @@
 package speech
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,9 +50,9 @@ func speechURLRecognitionRequestAdopt(id objc.ID) *SpeechURLRecognitionRequest {
 }
 
 // NewSpeechURLRecognitionRequestWithURL creates a speech recognition request, initialized with the specified URL.
-func NewSpeechURLRecognitionRequestWithURL(uRL string) *SpeechURLRecognitionRequest {
+func NewSpeechURLRecognitionRequestWithURL(url string) *SpeechURLRecognitionRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SFSpeechURLRecognitionRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(uRL))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
 	return speechURLRecognitionRequestAdopt(_id)
 }
 
@@ -93,14 +95,16 @@ func (surr *SpeechURLRecognitionRequest) WithAddsPunctuation(addsPunctuation boo
 
 // WithCustomizedLanguageModel sets the customized language model.
 func (surr *SpeechURLRecognitionRequest) WithCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) *SpeechURLRecognitionRequest {
+	defer runtime.KeepAlive(customizedLanguageModel)
 	objc.Send[objc.ID](objref.IDOf(surr), objc.RegisterName("setCustomizedLanguageModel:"), objref.IDOf(customizedLanguageModel))
 	return surr
 }
 
 // URL returns the URL.
-func (surr *SpeechURLRecognitionRequest) URL() obj.Object {
+func (surr *SpeechURLRecognitionRequest) URL() string {
+	defer runtime.KeepAlive(surr)
 	_r := objc.Send[objc.ID](objref.IDOf(surr), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 var _ SpeechRecognitionRequestProvider = (*SpeechURLRecognitionRequest)(nil)

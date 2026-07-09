@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTREnergyEVSEClusterEVConnectedEventAdopt(id objc.ID) *MTREnergyEVSECluster
 
 // Description returns the object's -description text.
 func (meecece *MTREnergyEVSEClusterEVConnectedEvent) Description() string {
+	defer runtime.KeepAlive(meecece)
 	return rt.Description(objref.IDOf(meecece))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (meecece *MTREnergyEVSEClusterEVConnectedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(meecece)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(meecece), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (meecece *MTREnergyEVSEClusterEVConnectedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(meecece)
 	return rt.IsKind(objref.IDOf(meecece), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (meecece *MTREnergyEVSEClusterEVConnectedEvent) String() string {
+	defer runtime.KeepAlive(meecece)
 	return rt.Description(objref.IDOf(meecece))
 }
 
@@ -72,12 +80,14 @@ func NewMTREnergyEVSEClusterEVConnectedEvent() *MTREnergyEVSEClusterEVConnectedE
 
 // WithSessionID sets the session ID.
 func (meecece *MTREnergyEVSEClusterEVConnectedEvent) WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterEVConnectedEvent {
+	defer runtime.KeepAlive(sessionID)
 	objc.Send[objc.ID](objref.IDOf(meecece), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 	return meecece
 }
 
 // SessionID returns the session ID.
-func (meecece *MTREnergyEVSEClusterEVConnectedEvent) SessionID() obj.Object {
+func (meecece *MTREnergyEVSEClusterEVConnectedEvent) SessionID() *foundation.Number {
+	defer runtime.KeepAlive(meecece)
 	_r := objc.Send[objc.ID](objref.IDOf(meecece), objc.RegisterName("sessionID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

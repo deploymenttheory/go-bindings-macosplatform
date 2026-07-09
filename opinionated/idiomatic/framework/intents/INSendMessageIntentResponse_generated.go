@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func sendMessageIntentResponseAdopt(id objc.ID) *SendMessageIntentResponse {
 
 // NewSendMessageIntentResponseWithCodeUserActivity initializes the response object with the specified code and user activity object.
 func NewSendMessageIntentResponseWithCodeUserActivity(code SendMessageIntentResponseCode, userActivity obj.Object) *SendMessageIntentResponse {
+	defer runtime.KeepAlive(userActivity)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INSendMessageIntentResponse")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, objref.IDOf(userActivity))
 	return sendMessageIntentResponseAdopt(_id)
@@ -55,24 +58,28 @@ func NewSendMessageIntentResponseWithCodeUserActivity(code SendMessageIntentResp
 
 // WithUserActivity sets the user activity object to use when launching the app.
 func (smir *SendMessageIntentResponse) WithUserActivity(userActivity obj.Object) *SendMessageIntentResponse {
+	defer runtime.KeepAlive(userActivity)
 	objc.Send[objc.ID](objref.IDOf(smir), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return smir
 }
 
 // Code returns the code.
 func (smir *SendMessageIntentResponse) Code() SendMessageIntentResponseCode {
+	defer runtime.KeepAlive(smir)
 	_r := objc.Send[SendMessageIntentResponseCode](objref.IDOf(smir), objc.RegisterName("code"))
 	return _r
 }
 
 // SentMessages returns the sent messages.
 func (smir *SendMessageIntentResponse) SentMessages() []obj.Object {
+	defer runtime.KeepAlive(smir)
 	_r := objc.Send[objc.ID](objref.IDOf(smir), objc.RegisterName("sentMessages"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetSentMessages wraps the corresponding Objective-C method.
 func (smir *SendMessageIntentResponse) SetSentMessages(sentMessages []obj.Object) {
+	defer runtime.KeepAlive(smir)
 	objc.Send[objc.ID](objref.IDOf(smir), objc.RegisterName("setSentMessages:"), purego.SliceToNSArray(sentMessages, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 

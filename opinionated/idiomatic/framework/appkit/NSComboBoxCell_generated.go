@@ -5,9 +5,12 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -115,8 +118,21 @@ func (cbc *ComboBoxCell) WithCompletes(completes bool) *ComboBoxCell {
 	return cbc
 }
 
+// WithDataSource sets the object that provides the data displayed in the combo box’s pop-up list.
+func (cbc *ComboBoxCell) WithDataSource(dataSource ComboBoxCellDataSource) *ComboBoxCell {
+	_shim := newComboBoxCellDataSourceShim(dataSource)
+	_sel := objc.RegisterName("setDataSource:")
+	shim.Associate(objref.IDOf(cbc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cbc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return cbc
+}
+
 // WithBackgroundColor sets the color of the cell’s background.
 func (cbc *ComboBoxCell) WithBackgroundColor(backgroundColor *Color) *ComboBoxCell {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -133,6 +149,7 @@ func (cbc *ComboBoxCell) WithDrawsBackground(drawsBackground bool) *ComboBoxCell
 
 // WithTextColor sets the color to use to draw the cell’s text.
 func (cbc *ComboBoxCell) WithTextColor(textColor *Color) *ComboBoxCell {
+	defer runtime.KeepAlive(textColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	})
@@ -157,6 +174,7 @@ func (cbc *ComboBoxCell) WithPlaceholderString(placeholderString string) *ComboB
 
 // WithPlaceholderAttributedString sets the placeholder text for the cell, specified as an attributed string.
 func (cbc *ComboBoxCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *ComboBoxCell {
+	defer runtime.KeepAlive(placeholderAttributedString)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	})
@@ -174,6 +192,7 @@ func (cbc *ComboBoxCell) WithAllowedInputSourceLocales(items ...obj.Object) *Com
 
 // WithControlView sets the view associated with the cell.
 func (cbc *ComboBoxCell) WithControlView(controlView ViewProvider) *ComboBoxCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -198,6 +217,7 @@ func (cbc *ComboBoxCell) WithState(state int) *ComboBoxCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (cbc *ComboBoxCell) WithTarget(target obj.Object) *ComboBoxCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -302,6 +322,7 @@ func (cbc *ComboBoxCell) WithWraps(wraps bool) *ComboBoxCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (cbc *ComboBoxCell) WithFont(font *Font) *ComboBoxCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -310,6 +331,7 @@ func (cbc *ComboBoxCell) WithFont(font *Font) *ComboBoxCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (cbc *ComboBoxCell) WithFormatter(formatter obj.Object) *ComboBoxCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -318,6 +340,7 @@ func (cbc *ComboBoxCell) WithFormatter(formatter obj.Object) *ComboBoxCell {
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (cbc *ComboBoxCell) WithObjectValue(objectValue obj.Object) *ComboBoxCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -366,6 +389,7 @@ func (cbc *ComboBoxCell) WithIntegerValue(integerValue int) *ComboBoxCell {
 
 // WithImage sets the image displayed by the cell, if any.
 func (cbc *ComboBoxCell) WithImage(image *Image) *ComboBoxCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -382,6 +406,7 @@ func (cbc *ComboBoxCell) WithControlSize(controlSize ControlSize) *ComboBoxCell 
 
 // WithRepresentedObject sets the object represented by the cell.
 func (cbc *ComboBoxCell) WithRepresentedObject(representedObject obj.Object) *ComboBoxCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -390,6 +415,7 @@ func (cbc *ComboBoxCell) WithRepresentedObject(representedObject obj.Object) *Co
 
 // WithMenu sets the cell’s contextual menu.
 func (cbc *ComboBoxCell) WithMenu(menu *Menu) *ComboBoxCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -478,6 +504,7 @@ func (cbc *ComboBoxCell) WithFocusRingType(focusRingType FocusRingType) *ComboBo
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (cbc *ComboBoxCell) WithAttributedStringValue(attributedStringValue obj.Object) *ComboBoxCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -526,6 +553,7 @@ func (cbc *ComboBoxCell) WithControlTint(controlTint ControlTint) *ComboBoxCell 
 
 // ReloadData marks the combo box as needing redisplay, so that it will reload the data for visible pop-up items and draw the new values.
 func (cbc *ComboBoxCell) ReloadData() {
+	defer runtime.KeepAlive(cbc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("reloadData"))
 	})
@@ -534,6 +562,7 @@ func (cbc *ComboBoxCell) ReloadData() {
 
 // NoteNumberOfItemsChanged informs the combo box that the number of items in its data source has changed.
 func (cbc *ComboBoxCell) NoteNumberOfItemsChanged() {
+	defer runtime.KeepAlive(cbc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("noteNumberOfItemsChanged"))
 	})
@@ -542,6 +571,7 @@ func (cbc *ComboBoxCell) NoteNumberOfItemsChanged() {
 
 // ScrollItemAtIndexToTop scrolls the combo box’s pop-up list vertically so that the item at the given index is as close to the top as possible.
 func (cbc *ComboBoxCell) ScrollItemAtIndexToTop(index int) {
+	defer runtime.KeepAlive(cbc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("scrollItemAtIndexToTop:"), index)
 	})
@@ -550,6 +580,7 @@ func (cbc *ComboBoxCell) ScrollItemAtIndexToTop(index int) {
 
 // ScrollItemAtIndexToVisible scrolls the combo box’s pop-up list vertically so that the item at the given index is visible.
 func (cbc *ComboBoxCell) ScrollItemAtIndexToVisible(index int) {
+	defer runtime.KeepAlive(cbc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("scrollItemAtIndexToVisible:"), index)
 	})
@@ -558,6 +589,7 @@ func (cbc *ComboBoxCell) ScrollItemAtIndexToVisible(index int) {
 
 // SelectItemAtIndex selects the pop-up list row at the given index.
 func (cbc *ComboBoxCell) SelectItemAtIndex(index int) {
+	defer runtime.KeepAlive(cbc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("selectItemAtIndex:"), index)
 	})
@@ -566,6 +598,7 @@ func (cbc *ComboBoxCell) SelectItemAtIndex(index int) {
 
 // DeselectItemAtIndex deselects the pop-up list item at the given index if it’s selected.
 func (cbc *ComboBoxCell) DeselectItemAtIndex(index int) {
+	defer runtime.KeepAlive(cbc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("deselectItemAtIndex:"), index)
 	})
@@ -573,11 +606,12 @@ func (cbc *ComboBoxCell) DeselectItemAtIndex(index int) {
 }
 
 // CompletedString returns a string from the combo box’s pop-up list that starts with the given substring.
-func (cbc *ComboBoxCell) CompletedString(string_ string) string {
+func (cbc *ComboBoxCell) CompletedString(str string) string {
+	defer runtime.KeepAlive(cbc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
-			_r := objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("completedString:"), purego.NSString(string_))
+			_r := objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("completedString:"), purego.NSString(str))
 			if _r == 0 {
 				return ""
 			}
@@ -590,6 +624,8 @@ func (cbc *ComboBoxCell) CompletedString(string_ string) string {
 
 // AddItemWithObjectValue adds the specified object to the internal item list.
 func (cbc *ComboBoxCell) AddItemWithObjectValue(object obj.Object) {
+	defer runtime.KeepAlive(cbc)
+	defer runtime.KeepAlive(object)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("addItemWithObjectValue:"), objref.IDOf(object))
 	})
@@ -598,6 +634,8 @@ func (cbc *ComboBoxCell) AddItemWithObjectValue(object obj.Object) {
 
 // AddItemsWithObjectValues adds multiple objects to the internal item list.
 func (cbc *ComboBoxCell) AddItemsWithObjectValues(objects obj.Object) {
+	defer runtime.KeepAlive(cbc)
+	defer runtime.KeepAlive(objects)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("addItemsWithObjectValues:"), objref.IDOf(objects))
 	})
@@ -606,6 +644,8 @@ func (cbc *ComboBoxCell) AddItemsWithObjectValues(objects obj.Object) {
 
 // InsertItemWithObjectValueAtIndex inserts an object at the specified location in the internal item list.
 func (cbc *ComboBoxCell) InsertItemWithObjectValueAtIndex(object obj.Object, index int) {
+	defer runtime.KeepAlive(cbc)
+	defer runtime.KeepAlive(object)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("insertItemWithObjectValue:atIndex:"), objref.IDOf(object), index)
 	})
@@ -614,6 +654,8 @@ func (cbc *ComboBoxCell) InsertItemWithObjectValueAtIndex(object obj.Object, ind
 
 // RemoveItemWithObjectValue removes all occurrences of the specified object from the combo box’s internal item list.
 func (cbc *ComboBoxCell) RemoveItemWithObjectValue(object obj.Object) {
+	defer runtime.KeepAlive(cbc)
+	defer runtime.KeepAlive(object)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("removeItemWithObjectValue:"), objref.IDOf(object))
 	})
@@ -622,6 +664,7 @@ func (cbc *ComboBoxCell) RemoveItemWithObjectValue(object obj.Object) {
 
 // RemoveItemAtIndex removes the object at the specified location from the combo box’s internal item list.
 func (cbc *ComboBoxCell) RemoveItemAtIndex(index int) {
+	defer runtime.KeepAlive(cbc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("removeItemAtIndex:"), index)
 	})
@@ -630,6 +673,7 @@ func (cbc *ComboBoxCell) RemoveItemAtIndex(index int) {
 
 // RemoveAllItems removes all items from the combo box’s internal item list.
 func (cbc *ComboBoxCell) RemoveAllItems() {
+	defer runtime.KeepAlive(cbc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("removeAllItems"))
 	})
@@ -638,6 +682,8 @@ func (cbc *ComboBoxCell) RemoveAllItems() {
 
 // SelectItemWithObjectValue selects the first pop-up list item that corresponds to the specified object.
 func (cbc *ComboBoxCell) SelectItemWithObjectValue(object obj.Object) {
+	defer runtime.KeepAlive(cbc)
+	defer runtime.KeepAlive(object)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("selectItemWithObjectValue:"), objref.IDOf(object))
 	})
@@ -646,6 +692,7 @@ func (cbc *ComboBoxCell) SelectItemWithObjectValue(object obj.Object) {
 
 // ItemObjectValueAtIndex returns the object located at the specified location in the internal item list.
 func (cbc *ComboBoxCell) ItemObjectValueAtIndex(index int) obj.Object {
+	defer runtime.KeepAlive(cbc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -659,6 +706,8 @@ func (cbc *ComboBoxCell) ItemObjectValueAtIndex(index int) obj.Object {
 
 // IndexOfItemWithObjectValue searches the combo box’s internal item list for the given object and returns the matching index number.
 func (cbc *ComboBoxCell) IndexOfItemWithObjectValue(object obj.Object) int {
+	defer runtime.KeepAlive(cbc)
+	defer runtime.KeepAlive(object)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -672,6 +721,7 @@ func (cbc *ComboBoxCell) IndexOfItemWithObjectValue(object obj.Object) int {
 
 // HasVerticalScroller reports whether the object has vertical scroller.
 func (cbc *ComboBoxCell) HasVerticalScroller() bool {
+	defer runtime.KeepAlive(cbc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -685,6 +735,7 @@ func (cbc *ComboBoxCell) HasVerticalScroller() bool {
 
 // IntercellSpacing returns the intercell spacing.
 func (cbc *ComboBoxCell) IntercellSpacing() corefoundation.CGSize {
+	defer runtime.KeepAlive(cbc)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -698,6 +749,7 @@ func (cbc *ComboBoxCell) IntercellSpacing() corefoundation.CGSize {
 
 // ItemHeight returns the item height.
 func (cbc *ComboBoxCell) ItemHeight() float64 {
+	defer runtime.KeepAlive(cbc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -711,6 +763,7 @@ func (cbc *ComboBoxCell) ItemHeight() float64 {
 
 // NumberOfVisibleItems returns the number of visible items.
 func (cbc *ComboBoxCell) NumberOfVisibleItems() int {
+	defer runtime.KeepAlive(cbc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -724,6 +777,7 @@ func (cbc *ComboBoxCell) NumberOfVisibleItems() int {
 
 // IsButtonBordered reports whether the object is button bordered.
 func (cbc *ComboBoxCell) IsButtonBordered() bool {
+	defer runtime.KeepAlive(cbc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -737,6 +791,7 @@ func (cbc *ComboBoxCell) IsButtonBordered() bool {
 
 // UsesDataSource wraps the corresponding Objective-C method.
 func (cbc *ComboBoxCell) UsesDataSource() bool {
+	defer runtime.KeepAlive(cbc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -750,6 +805,7 @@ func (cbc *ComboBoxCell) UsesDataSource() bool {
 
 // IndexOfSelectedItem returns the index of selected item.
 func (cbc *ComboBoxCell) IndexOfSelectedItem() int {
+	defer runtime.KeepAlive(cbc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -763,6 +819,7 @@ func (cbc *ComboBoxCell) IndexOfSelectedItem() int {
 
 // NumberOfItems returns the number of items.
 func (cbc *ComboBoxCell) NumberOfItems() int {
+	defer runtime.KeepAlive(cbc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -776,6 +833,7 @@ func (cbc *ComboBoxCell) NumberOfItems() int {
 
 // Completes wraps the corresponding Objective-C method.
 func (cbc *ComboBoxCell) Completes() bool {
+	defer runtime.KeepAlive(cbc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -789,6 +847,7 @@ func (cbc *ComboBoxCell) Completes() bool {
 
 // ObjectValueOfSelectedItem returns the object value of selected item.
 func (cbc *ComboBoxCell) ObjectValueOfSelectedItem() obj.Object {
+	defer runtime.KeepAlive(cbc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -802,6 +861,7 @@ func (cbc *ComboBoxCell) ObjectValueOfSelectedItem() obj.Object {
 
 // ObjectValues returns the object values.
 func (cbc *ComboBoxCell) ObjectValues() obj.Object {
+	defer runtime.KeepAlive(cbc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

@@ -5,9 +5,13 @@
 package usernotifications
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,15 +57,17 @@ func NewCalendarNotificationTrigger() *CalendarNotificationTrigger {
 }
 
 // NextTriggerDate returns the next date at which the trigger conditions are met.
-func (cnt *CalendarNotificationTrigger) NextTriggerDate() obj.Object {
+func (cnt *CalendarNotificationTrigger) NextTriggerDate() time.Time {
+	defer runtime.KeepAlive(cnt)
 	_r := objc.Send[objc.ID](objref.IDOf(cnt), objc.RegisterName("nextTriggerDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // DateComponents returns the date components.
-func (cnt *CalendarNotificationTrigger) DateComponents() obj.Object {
+func (cnt *CalendarNotificationTrigger) DateComponents() *foundation.DateComponents {
+	defer runtime.KeepAlive(cnt)
 	_r := objc.Send[objc.ID](objref.IDOf(cnt), objc.RegisterName("dateComponents"))
-	return obj.Wrap(_r)
+	return foundation.DateComponentsFromID(_r)
 }
 
 var _ NotificationTriggerProvider = (*CalendarNotificationTrigger)(nil)

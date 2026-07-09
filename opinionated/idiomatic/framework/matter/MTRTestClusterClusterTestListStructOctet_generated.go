@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,13 +55,14 @@ func NewMTRTestClusterClusterTestListStructOctet() *MTRTestClusterClusterTestLis
 
 // WithMember1 sets the member1.
 func (mtcctlso *MTRTestClusterClusterTestListStructOctet) WithMember1(member1 obj.Object) *MTRTestClusterClusterTestListStructOctet {
+	defer runtime.KeepAlive(member1)
 	objc.Send[objc.ID](objref.IDOf(mtcctlso), objc.RegisterName("setMember1:"), objref.IDOf(member1))
 	return mtcctlso
 }
 
 // WithMember2 sets the member2.
-func (mtcctlso *MTRTestClusterClusterTestListStructOctet) WithMember2(member2 obj.Object) *MTRTestClusterClusterTestListStructOctet {
-	objc.Send[objc.ID](objref.IDOf(mtcctlso), objc.RegisterName("setMember2:"), objref.IDOf(member2))
+func (mtcctlso *MTRTestClusterClusterTestListStructOctet) WithMember2(member2 []byte) *MTRTestClusterClusterTestListStructOctet {
+	objc.Send[objc.ID](objref.IDOf(mtcctlso), objc.RegisterName("setMember2:"), rt.BytesToNSData(member2))
 	return mtcctlso
 }
 

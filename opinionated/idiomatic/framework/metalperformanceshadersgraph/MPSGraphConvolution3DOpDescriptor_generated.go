@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -149,101 +151,118 @@ func (gcdod *GraphConvolution3DOpDescriptor) WithGroups(groups int) *GraphConvol
 
 // SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBack sets the left, right, top, bottom, front, and back padding values.
 func (gcdod *GraphConvolution3DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBack(paddingLeft int, paddingRight int, paddingTop int, paddingBottom int, paddingFront int, paddingBack int) {
+	defer runtime.KeepAlive(gcdod)
 	objc.Send[objc.ID](objref.IDOf(gcdod), objc.RegisterName("setExplicitPaddingWithPaddingLeft:paddingRight:paddingTop:paddingBottom:paddingFront:paddingBack:"), paddingLeft, paddingRight, paddingTop, paddingBottom, paddingFront, paddingBack)
 }
 
 // StrideInX returns the scale that maps`x`-coordinate of destination to `x`-coordinate of source. Source `x`-coordinate, `sx` is computed from destination `x`-coordinate, `dx` as `sx = strideInX*dx`. Default value is 1.
 func (gcdod *GraphConvolution3DOpDescriptor) StrideInX() int {
+	defer runtime.KeepAlive(gcdod)
 	_r := objc.Send[int](objref.IDOf(gcdod), objc.RegisterName("strideInX"))
 	return _r
 }
 
 // StrideInY returns the scale that maps`y`-coordinate of destination to `y`-coordinate of source. Source `y`-coordinate, `sy` is computed from destination `y`-coordinate, `dy` as `sy = strideInY*dy`. Default value is 1.
 func (gcdod *GraphConvolution3DOpDescriptor) StrideInY() int {
+	defer runtime.KeepAlive(gcdod)
 	_r := objc.Send[int](objref.IDOf(gcdod), objc.RegisterName("strideInY"))
 	return _r
 }
 
 // StrideInZ returns the scale that maps`z`-coordinate of destination to `z`-coordinate of source. Source `z`-coordinate, `sz` is computed from destination `z`-coordinate, `dz` as `sz = strideInZ*dz`. Default value is 1.
 func (gcdod *GraphConvolution3DOpDescriptor) StrideInZ() int {
+	defer runtime.KeepAlive(gcdod)
 	_r := objc.Send[int](objref.IDOf(gcdod), objc.RegisterName("strideInZ"))
 	return _r
 }
 
 // DilationRateInX returns the amount by which weights tensor expands in the `x`-direction. The weights tensor is dilated by inserting `dilationRateInX-1` zeros between consecutive values in `x`-dimension. Dilated weights tensor width is `(dilationRateInX-1)*kernelWidth+1`. Default value is 1.
 func (gcdod *GraphConvolution3DOpDescriptor) DilationRateInX() int {
+	defer runtime.KeepAlive(gcdod)
 	_r := objc.Send[int](objref.IDOf(gcdod), objc.RegisterName("dilationRateInX"))
 	return _r
 }
 
 // DilationRateInY returns the amount by which weights tensor expands in the `y`-direction. The weights tensor is dilated by inserting `dilationRateInY-1` zeros between consecutive values in `y`-dimension. Dilated weights tensor width is `(dilationRateInY-1)*kernelHeight+1`. Default value is 1.
 func (gcdod *GraphConvolution3DOpDescriptor) DilationRateInY() int {
+	defer runtime.KeepAlive(gcdod)
 	_r := objc.Send[int](objref.IDOf(gcdod), objc.RegisterName("dilationRateInY"))
 	return _r
 }
 
 // DilationRateInZ returns the amount by which weights tensor expands in the `z`-direction. The weights tensor is dilated by inserting `dilationRateInZ-1` zeros between consecutive values in `z`-dimension. Dilated weights tensor depth is `(dilationRateInZ-1)*kernelDepth+1`. Default value is 1.
 func (gcdod *GraphConvolution3DOpDescriptor) DilationRateInZ() int {
+	defer runtime.KeepAlive(gcdod)
 	_r := objc.Send[int](objref.IDOf(gcdod), objc.RegisterName("dilationRateInZ"))
 	return _r
 }
 
 // PaddingLeft returns the number of zeros added on the left side of the source tensor.
 func (gcdod *GraphConvolution3DOpDescriptor) PaddingLeft() int {
+	defer runtime.KeepAlive(gcdod)
 	_r := objc.Send[int](objref.IDOf(gcdod), objc.RegisterName("paddingLeft"))
 	return _r
 }
 
 // PaddingRight returns the number of zeros added on the right side of the source tensor.
 func (gcdod *GraphConvolution3DOpDescriptor) PaddingRight() int {
+	defer runtime.KeepAlive(gcdod)
 	_r := objc.Send[int](objref.IDOf(gcdod), objc.RegisterName("paddingRight"))
 	return _r
 }
 
 // PaddingTop returns the number of zeros added at the top of the source tensor.
 func (gcdod *GraphConvolution3DOpDescriptor) PaddingTop() int {
+	defer runtime.KeepAlive(gcdod)
 	_r := objc.Send[int](objref.IDOf(gcdod), objc.RegisterName("paddingTop"))
 	return _r
 }
 
 // PaddingBottom returns the number of zeros added at the bottom of the source tensor.
 func (gcdod *GraphConvolution3DOpDescriptor) PaddingBottom() int {
+	defer runtime.KeepAlive(gcdod)
 	_r := objc.Send[int](objref.IDOf(gcdod), objc.RegisterName("paddingBottom"))
 	return _r
 }
 
 // PaddingFront returns the number of zeros added at the front of the source tensor.
 func (gcdod *GraphConvolution3DOpDescriptor) PaddingFront() int {
+	defer runtime.KeepAlive(gcdod)
 	_r := objc.Send[int](objref.IDOf(gcdod), objc.RegisterName("paddingFront"))
 	return _r
 }
 
 // PaddingBack returns the number of zeros added at the back of the source tensor.
 func (gcdod *GraphConvolution3DOpDescriptor) PaddingBack() int {
+	defer runtime.KeepAlive(gcdod)
 	_r := objc.Send[int](objref.IDOf(gcdod), objc.RegisterName("paddingBack"))
 	return _r
 }
 
 // PaddingStyle returns the type of padding that is applied to the source tensor. If paddingStyle is `MPSGraphPaddingStyleExplicit`, `paddingLeft`, `laddingRight`, `paddingTop`, `paddingBottom`,   `paddingFront` and `paddingBack` must to be specified. For all other padding styles, framework compute these values so you dont need to provide these values.
 func (gcdod *GraphConvolution3DOpDescriptor) PaddingStyle() GraphPaddingStyle {
+	defer runtime.KeepAlive(gcdod)
 	_r := objc.Send[GraphPaddingStyle](objref.IDOf(gcdod), objc.RegisterName("paddingStyle"))
 	return _r
 }
 
 // DataLayout returns the named layout of data in the source tensor. It defines the order of named dimensions (Batch, Channel, Depth, Height, Width). The convolution operation uses this to interpret data in the source tensor. For example, if `dataLayout` is `MPSGraphTensorNamedDataLayoutNCDHW`, frameork interprets data in source tensor as `batch x channels x depth x height x width` with `width` as fastest moving dimension.
 func (gcdod *GraphConvolution3DOpDescriptor) DataLayout() GraphTensorNamedDataLayout {
+	defer runtime.KeepAlive(gcdod)
 	_r := objc.Send[GraphTensorNamedDataLayout](objref.IDOf(gcdod), objc.RegisterName("dataLayout"))
 	return _r
 }
 
 // WeightsLayout returns the named layout of data in the weights tensor. It defines the order of named dimensions (Output channels, Input channels, Kernel depth, Kernel height, Kernel width). The convolution operation uses this to interpret data in the weights tensor. For example, if `weightsLayout` is `MPSGraphTensorNamedDataLayoutOIDHW`, frameork interprets data in weights tensor as `outputChannels x inputChannels x kernelDepth x kernelHeight x kernelWidth` with `kernelWidth` as fastest moving dimension.
 func (gcdod *GraphConvolution3DOpDescriptor) WeightsLayout() GraphTensorNamedDataLayout {
+	defer runtime.KeepAlive(gcdod)
 	_r := objc.Send[GraphTensorNamedDataLayout](objref.IDOf(gcdod), objc.RegisterName("weightsLayout"))
 	return _r
 }
 
 // Groups returns the number of partitions of the input and output channels. The convolution operation divides input and output channels in `groups` partitions. input channels in a group or partition are only connected to output channels in corresponding group. Number of weights the convolution needs is `outputFeatureChannels x inputFeatureChannels/groups x kernelDepth x kernelWidth x kernelHeight`
 func (gcdod *GraphConvolution3DOpDescriptor) Groups() int {
+	defer runtime.KeepAlive(gcdod)
 	_r := objc.Send[int](objref.IDOf(gcdod), objc.RegisterName("groups"))
 	return _r
 }

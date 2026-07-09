@@ -5,6 +5,8 @@
 package usernotifications
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -61,6 +63,7 @@ func (mnc *MutableNotificationContent) WithAttachments(items ...*NotificationAtt
 
 // WithBadge sets the number that your app’s icon displays.
 func (mnc *MutableNotificationContent) WithBadge(badge obj.Object) *MutableNotificationContent {
+	defer runtime.KeepAlive(badge)
 	objc.Send[objc.ID](objref.IDOf(mnc), objc.RegisterName("setBadge:"), objref.IDOf(badge))
 	return mnc
 }
@@ -97,6 +100,7 @@ func (mnc *MutableNotificationContent) WithTitle(title string) *MutableNotificat
 
 // WithUserInfo sets the custom data to associate with the notification.
 func (mnc *MutableNotificationContent) WithUserInfo(userInfo obj.Object) *MutableNotificationContent {
+	defer runtime.KeepAlive(userInfo)
 	objc.Send[objc.ID](objref.IDOf(mnc), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return mnc
 }

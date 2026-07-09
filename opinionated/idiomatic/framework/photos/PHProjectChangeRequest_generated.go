@@ -5,9 +5,12 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,6 +51,7 @@ func projectChangeRequestAdopt(id objc.ID) *ProjectChangeRequest {
 
 // NewProjectChangeRequestWithProject creates a change request around the specified project.
 func NewProjectChangeRequestWithProject(project *Project) *ProjectChangeRequest {
+	defer runtime.KeepAlive(project)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHProjectChangeRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProject:"), objref.IDOf(project))
 	return projectChangeRequestAdopt(_id)
@@ -60,23 +64,28 @@ func (pcr *ProjectChangeRequest) WithTitle(title string) *ProjectChangeRequest {
 }
 
 // WithProjectExtensionData sets compressed project-specific data to use in the change request.
-func (pcr *ProjectChangeRequest) WithProjectExtensionData(projectExtensionData obj.Object) *ProjectChangeRequest {
-	objc.Send[objc.ID](objref.IDOf(pcr), objc.RegisterName("setProjectExtensionData:"), objref.IDOf(projectExtensionData))
+func (pcr *ProjectChangeRequest) WithProjectExtensionData(projectExtensionData []byte) *ProjectChangeRequest {
+	objc.Send[objc.ID](objref.IDOf(pcr), objc.RegisterName("setProjectExtensionData:"), rt.BytesToNSData(projectExtensionData))
 	return pcr
 }
 
 // SetKeyAsset sets the key asset representing the project.
 func (pcr *ProjectChangeRequest) SetKeyAsset(keyAsset *Asset) {
+	defer runtime.KeepAlive(pcr)
+	defer runtime.KeepAlive(keyAsset)
 	objc.Send[objc.ID](objref.IDOf(pcr), objc.RegisterName("setKeyAsset:"), objref.IDOf(keyAsset))
 }
 
 // SetProjectPreviewImage updates the project preview in Photos.
 func (pcr *ProjectChangeRequest) SetProjectPreviewImage(previewImage obj.Object) {
+	defer runtime.KeepAlive(pcr)
+	defer runtime.KeepAlive(previewImage)
 	objc.Send[objc.ID](objref.IDOf(pcr), objc.RegisterName("setProjectPreviewImage:"), objref.IDOf(previewImage))
 }
 
 // Title returns the title.
 func (pcr *ProjectChangeRequest) Title() string {
+	defer runtime.KeepAlive(pcr)
 	_r := objc.Send[objc.ID](objref.IDOf(pcr), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -85,9 +94,10 @@ func (pcr *ProjectChangeRequest) Title() string {
 }
 
 // ProjectExtensionData returns the projectExtensionData property is intended for storage of compressed, project specific data only. Do not include things like rasterized images that can be locally cached in this data. The total size of stored data is limited to 5 MB. Attempting to store more data than allowed will result in an error.
-func (pcr *ProjectChangeRequest) ProjectExtensionData() obj.Object {
+func (pcr *ProjectChangeRequest) ProjectExtensionData() []byte {
+	defer runtime.KeepAlive(pcr)
 	_r := objc.Send[objc.ID](objref.IDOf(pcr), objc.RegisterName("projectExtensionData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ ChangeRequestProvider = (*ProjectChangeRequest)(nil)

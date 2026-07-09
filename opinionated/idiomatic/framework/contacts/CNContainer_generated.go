@@ -5,6 +5,8 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func containerAdopt(id objc.ID) *Container {
 
 // Description returns the object's -description text.
 func (c *Container) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Container) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Container) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Container) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
@@ -74,6 +81,7 @@ func NewContainer() *Container {
 
 // Identifier returns the identifier is unique among containers on the device. It can be saved and used for fetching containers next application launch.
 func (c *Container) Identifier() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (c *Container) Identifier() string {
 
 // Name returns the name.
 func (c *Container) Name() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -92,6 +101,7 @@ func (c *Container) Name() string {
 
 // Type returns the type.
 func (c *Container) Type() ContainerType {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[ContainerType](objref.IDOf(c), objc.RegisterName("type"))
 	return _r
 }

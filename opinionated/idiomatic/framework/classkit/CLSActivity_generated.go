@@ -5,6 +5,8 @@
 package classkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,34 +61,41 @@ func (a *Activity) WithProgress(progress float64) *Activity {
 
 // WithPrimaryActivityItem sets adds an activity item to an activity and sets it as the primary activity item.
 func (a *Activity) WithPrimaryActivityItem(primaryActivityItem ActivityItemProvider) *Activity {
+	defer runtime.KeepAlive(primaryActivityItem)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setPrimaryActivityItem:"), objref.IDOf(primaryActivityItem))
 	return a
 }
 
 // AddProgressRangeFromStartToEnd adds a progress range to a given activity.
 func (a *Activity) AddProgressRangeFromStartToEnd(start float64, end float64) {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addProgressRangeFromStart:toEnd:"), start, end)
 }
 
 // AddAdditionalActivityItem adds an activity item to an activity.
 func (a *Activity) AddAdditionalActivityItem(activityItem *ActivityItem) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(activityItem)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addAdditionalActivityItem:"), objref.IDOf(activityItem))
 }
 
 // Progress returns current progress as a decimal representation of a percentage. Should be [0.0, 1.0].
 func (a *Activity) Progress() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("progress"))
 	return _r
 }
 
 // Duration returns the total time tracked in this activity (excluding any previous activities). The time between calling
 func (a *Activity) Duration() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("duration"))
 	return _r
 }
 
 // PrimaryActivityItem returns the primary activityItem to be reported on. This can be nil indicating
 func (a *Activity) PrimaryActivityItem() *ActivityItem {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("primaryActivityItem"))
 	return ActivityItemFromID(_r)
 }
@@ -95,27 +104,32 @@ func (a *Activity) PrimaryActivityItem() *ActivityItem {
 //
 // AdditionalActivityItems returns the collection as a Go slice.
 func (a *Activity) AdditionalActivityItems() []*ActivityItem {
+	defer runtime.KeepAlive(a)
 	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("additionalActivityItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ActivityItem { return ActivityItemFromID(_id) })
 }
 
 // Start tells an activity to start recording duration and progress for a task.
 func (a *Activity) Start() {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("start"))
 }
 
 // Stop tells an activity to stop or pause recording duration and progress for a task.
 func (a *Activity) Stop() {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stop"))
 }
 
 // RemoveAllActivityItems deletes all activity items associated with the current activity.
 func (a *Activity) RemoveAllActivityItems() {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeAllActivityItems"))
 }
 
 // IsStarted reports whether this Activity has been started or not.
 func (a *Activity) IsStarted() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isStarted"))
 	return _r
 }

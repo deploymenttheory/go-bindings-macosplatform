@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -62,28 +64,32 @@ func (ms *MutableString) WithObservationInfo(observationInfo unsafe.Pointer) *Mu
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ms *MutableString) WithScriptingProperties(scriptingProperties obj.Object) *MutableString {
-	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ms *MutableString) WithScriptingProperties(scriptingProperties map[string]obj.Object) *MutableString {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ms
 }
 
 // InsertStringAtIndex inserts into the receiver the characters of a given string at a given location.
 func (ms *MutableString) InsertStringAtIndex(aString string, loc int) {
+	defer runtime.KeepAlive(ms)
 	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("insertString:atIndex:"), purego.NSString(aString), loc)
 }
 
 // AppendString adds to the end of the receiver the characters of a given string.
 func (ms *MutableString) AppendString(aString string) {
+	defer runtime.KeepAlive(ms)
 	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("appendString:"), purego.NSString(aString))
 }
 
 // AppendFormat adds a constructed string to the receiver.
 func (ms *MutableString) AppendFormat(format string) {
+	defer runtime.KeepAlive(ms)
 	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("appendFormat:"), purego.NSString(format))
 }
 
 // SetString replaces the characters of the receiver with those in a given string.
 func (ms *MutableString) SetString(aString string) {
+	defer runtime.KeepAlive(ms)
 	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setString:"), purego.NSString(aString))
 }
 

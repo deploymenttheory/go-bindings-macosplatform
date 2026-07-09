@@ -5,6 +5,8 @@
 package mpsmatrix
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func matrixRandomDistributionDescriptorAdopt(id objc.ID) *MatrixRandomDistributi
 
 // Description returns the object's -description text.
 func (mrdd *MatrixRandomDistributionDescriptor) Description() string {
+	defer runtime.KeepAlive(mrdd)
 	return rt.Description(objref.IDOf(mrdd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mrdd *MatrixRandomDistributionDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mrdd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mrdd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mrdd *MatrixRandomDistributionDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(mrdd)
 	return rt.IsKind(objref.IDOf(mrdd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mrdd *MatrixRandomDistributionDescriptor) String() string {
+	defer runtime.KeepAlive(mrdd)
 	return rt.Description(objref.IDOf(mrdd))
 }
 
@@ -102,30 +109,35 @@ func (mrdd *MatrixRandomDistributionDescriptor) WithStandardDeviation(standardDe
 
 // DistributionType returns the type of distribution.
 func (mrdd *MatrixRandomDistributionDescriptor) DistributionType() MatrixRandomDistribution {
+	defer runtime.KeepAlive(mrdd)
 	_r := objc.Send[MatrixRandomDistribution](objref.IDOf(mrdd), objc.RegisterName("distributionType"))
 	return _r
 }
 
 // Minimum returns for distributions of values bounded below, this value describes the minimum.
 func (mrdd *MatrixRandomDistributionDescriptor) Minimum() float32 {
+	defer runtime.KeepAlive(mrdd)
 	_r := objc.Send[float32](objref.IDOf(mrdd), objc.RegisterName("minimum"))
 	return _r
 }
 
 // Maximum returns for distributions of values bounded above, this value describes the maximum.
 func (mrdd *MatrixRandomDistributionDescriptor) Maximum() float32 {
+	defer runtime.KeepAlive(mrdd)
 	_r := objc.Send[float32](objref.IDOf(mrdd), objc.RegisterName("maximum"))
 	return _r
 }
 
 // Mean returns the value to use for distributions described by their mean.
 func (mrdd *MatrixRandomDistributionDescriptor) Mean() float32 {
+	defer runtime.KeepAlive(mrdd)
 	_r := objc.Send[float32](objref.IDOf(mrdd), objc.RegisterName("mean"))
 	return _r
 }
 
 // StandardDeviation returns the value to use for distributions described by their standardDeviation.
 func (mrdd *MatrixRandomDistributionDescriptor) StandardDeviation() float32 {
+	defer runtime.KeepAlive(mrdd)
 	_r := objc.Send[float32](objref.IDOf(mrdd), objc.RegisterName("standardDeviation"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func fileSystemAdopt(id objc.ID) *FileSystem {
 
 // Description returns the object's -description text.
 func (fs *FileSystem) Description() string {
+	defer runtime.KeepAlive(fs)
 	return rt.Description(objref.IDOf(fs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fs *FileSystem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fs *FileSystem) IsKind(className string) bool {
+	defer runtime.KeepAlive(fs)
 	return rt.IsKind(objref.IDOf(fs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fs *FileSystem) String() string {
+	defer runtime.KeepAlive(fs)
 	return rt.Description(objref.IDOf(fs))
 }
 

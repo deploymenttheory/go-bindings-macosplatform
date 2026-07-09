@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,24 +53,28 @@ func NewDOMHTMLCollection() *DOMHTMLCollection {
 
 // Item wraps the corresponding Objective-C method.
 func (dc *DOMHTMLCollection) Item(index int) *DOMNode {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("item:"), index)
 	return DOMNodeFromID(_r)
 }
 
 // NamedItem wraps the corresponding Objective-C method.
 func (dc *DOMHTMLCollection) NamedItem(name string) *DOMNode {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("namedItem:"), purego.NSString(name))
 	return DOMNodeFromID(_r)
 }
 
 // Tags wraps the corresponding Objective-C method.
 func (dc *DOMHTMLCollection) Tags(name string) *DOMNodeList {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("tags:"), purego.NSString(name))
 	return DOMNodeListFromID(_r)
 }
 
 // Length returns the length.
 func (dc *DOMHTMLCollection) Length() int {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("length"))
 	return _r
 }

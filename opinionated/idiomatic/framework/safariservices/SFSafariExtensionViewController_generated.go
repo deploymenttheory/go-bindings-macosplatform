@@ -5,6 +5,8 @@
 package safariservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func safariExtensionViewControllerAdopt(id objc.ID) *SafariExtensionViewControll
 
 // Description returns the object's -description text.
 func (sevc *SafariExtensionViewController) Description() string {
+	defer runtime.KeepAlive(sevc)
 	return rt.Description(objref.IDOf(sevc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sevc *SafariExtensionViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sevc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sevc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sevc *SafariExtensionViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(sevc)
 	return rt.IsKind(objref.IDOf(sevc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sevc *SafariExtensionViewController) String() string {
+	defer runtime.KeepAlive(sevc)
 	return rt.Description(objref.IDOf(sevc))
 }
 
@@ -80,6 +87,7 @@ func NewSafariExtensionViewController() *SafariExtensionViewController {
 
 // DismissPopover dismisses popover.
 func (sevc *SafariExtensionViewController) DismissPopover() {
+	defer runtime.KeepAlive(sevc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sevc), objc.RegisterName("dismissPopover"))
 	})

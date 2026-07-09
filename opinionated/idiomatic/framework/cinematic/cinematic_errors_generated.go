@@ -8,11 +8,11 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrCodeUnknown matches the Cinematic error CNCinematicErrorCodeUnknown.
-var ErrCodeUnknown = errkit.New("CNCinematicErrorDomain", 1)
+// ErrCodeCancelled matches the Cinematic error CNCinematicErrorCodeCancelled.
+var ErrCodeCancelled = errkit.New("CNCinematicErrorDomain", 7)
 
-// ErrCodeUnreadable matches the Cinematic error CNCinematicErrorCodeUnreadable.
-var ErrCodeUnreadable = errkit.New("CNCinematicErrorDomain", 2)
+// ErrCodeIncompatible matches the Cinematic error CNCinematicErrorCodeIncompatible.
+var ErrCodeIncompatible = errkit.New("CNCinematicErrorDomain", 6)
 
 // ErrCodeIncomplete matches the Cinematic error CNCinematicErrorCodeIncomplete.
 var ErrCodeIncomplete = errkit.New("CNCinematicErrorDomain", 3)
@@ -20,11 +20,11 @@ var ErrCodeIncomplete = errkit.New("CNCinematicErrorDomain", 3)
 // ErrCodeMalformed matches the Cinematic error CNCinematicErrorCodeMalformed.
 var ErrCodeMalformed = errkit.New("CNCinematicErrorDomain", 4)
 
+// ErrCodeUnknown matches the Cinematic error CNCinematicErrorCodeUnknown.
+var ErrCodeUnknown = errkit.New("CNCinematicErrorDomain", 1)
+
+// ErrCodeUnreadable matches the Cinematic error CNCinematicErrorCodeUnreadable.
+var ErrCodeUnreadable = errkit.New("CNCinematicErrorDomain", 2)
+
 // ErrCodeUnsupported matches the Cinematic error CNCinematicErrorCodeUnsupported.
 var ErrCodeUnsupported = errkit.New("CNCinematicErrorDomain", 5)
-
-// ErrCodeIncompatible matches the Cinematic error CNCinematicErrorCodeIncompatible.
-var ErrCodeIncompatible = errkit.New("CNCinematicErrorDomain", 6)
-
-// ErrCodeCancelled matches the Cinematic error CNCinematicErrorCodeCancelled.
-var ErrCodeCancelled = errkit.New("CNCinematicErrorDomain", 7)

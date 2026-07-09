@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func predictionOptionsAdopt(id objc.ID) *PredictionOptions {
 
 // Description returns the object's -description text.
 func (po *PredictionOptions) Description() string {
+	defer runtime.KeepAlive(po)
 	return rt.Description(objref.IDOf(po))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (po *PredictionOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(po)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(po), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (po *PredictionOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(po)
 	return rt.IsKind(objref.IDOf(po), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (po *PredictionOptions) String() string {
+	defer runtime.KeepAlive(po)
 	return rt.Description(objref.IDOf(po))
 }
 
@@ -79,19 +86,21 @@ func (po *PredictionOptions) WithUsesCPUOnly(usesCPUOnly bool) *PredictionOption
 }
 
 // WithOutputBackings sets a dictionary of feature names and client-allocated buffers.
-func (po *PredictionOptions) WithOutputBackings(outputBackings obj.Object) *PredictionOptions {
-	objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setOutputBackings:"), objref.IDOf(outputBackings))
+func (po *PredictionOptions) WithOutputBackings(outputBackings map[string]obj.Object) *PredictionOptions {
+	objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setOutputBackings:"), rt.MapToDict(outputBackings, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return po
 }
 
 // UsesCPUOnly reports whether set to true to force computation to be on the CPU only
 func (po *PredictionOptions) UsesCPUOnly() bool {
+	defer runtime.KeepAlive(po)
 	_r := objc.Send[bool](objref.IDOf(po), objc.RegisterName("usesCPUOnly"))
 	return _r
 }
 
 // OutputBackings returns propose the model to use the specified backing objects for the output feature values. Use the property to get the inference result directly into the client allocated buffer when possible for efficient memory management. The property is a dictionary of the feature name and the output backing object. The framework may not use the specified backing object and instead allocates one by itself if the outputBacking dictionary doesn't contain the entry for the feature name, the model doesn't support the user allocated buffers, or in the batch prediction mode. To check if the backing object was used, compare the output prediction and the backing object by object identity. \code CVPixelBufferRef outputBacking = ...; [options setOutputBackings:
-func (po *PredictionOptions) OutputBackings() obj.Object {
+func (po *PredictionOptions) OutputBackings() map[string]obj.Object {
+	defer runtime.KeepAlive(po)
 	_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("outputBackings"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

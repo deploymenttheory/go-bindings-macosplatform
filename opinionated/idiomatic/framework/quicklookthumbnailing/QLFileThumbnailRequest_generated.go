@@ -5,6 +5,8 @@
 package quicklookthumbnailing
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func fileThumbnailRequestAdopt(id objc.ID) *FileThumbnailRequest {
 
 // Description returns the object's -description text.
 func (ftr *FileThumbnailRequest) Description() string {
+	defer runtime.KeepAlive(ftr)
 	return rt.Description(objref.IDOf(ftr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ftr *FileThumbnailRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ftr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ftr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ftr *FileThumbnailRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(ftr)
 	return rt.IsKind(objref.IDOf(ftr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ftr *FileThumbnailRequest) String() string {
+	defer runtime.KeepAlive(ftr)
 	return rt.Description(objref.IDOf(ftr))
 }
 
@@ -75,24 +82,28 @@ func NewFileThumbnailRequest() *FileThumbnailRequest {
 
 // MaximumSize returns the maximum size of the generated thumbnail that will be accepted. This is also the preferred size, ideally either the width or the height will match the maximumSize's width or height respectively.
 func (ftr *FileThumbnailRequest) MaximumSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(ftr)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ftr), objc.RegisterName("maximumSize"))
 	return _r
 }
 
 // MinimumSize returns the minimum size of the generated thumbnail that will be accepted.
 func (ftr *FileThumbnailRequest) MinimumSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(ftr)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ftr), objc.RegisterName("minimumSize"))
 	return _r
 }
 
 // Scale returns the scale of the requested thumbnail.
 func (ftr *FileThumbnailRequest) Scale() float64 {
+	defer runtime.KeepAlive(ftr)
 	_r := objc.Send[float64](objref.IDOf(ftr), objc.RegisterName("scale"))
 	return _r
 }
 
 // FileURL returns the url of the file for which a thumbnail is being requested.
-func (ftr *FileThumbnailRequest) FileURL() obj.Object {
+func (ftr *FileThumbnailRequest) FileURL() string {
+	defer runtime.KeepAlive(ftr)
 	_r := objc.Send[objc.ID](objref.IDOf(ftr), objc.RegisterName("fileURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

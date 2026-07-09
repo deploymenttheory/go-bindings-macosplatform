@@ -5,6 +5,8 @@
 package mediaextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,27 +50,33 @@ func sampleLocationAdopt(id objc.ID) *SampleLocation {
 
 // Description returns the object's -description text.
 func (sl *SampleLocation) Description() string {
+	defer runtime.KeepAlive(sl)
 	return rt.Description(objref.IDOf(sl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sl *SampleLocation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sl *SampleLocation) IsKind(className string) bool {
+	defer runtime.KeepAlive(sl)
 	return rt.IsKind(objref.IDOf(sl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sl *SampleLocation) String() string {
+	defer runtime.KeepAlive(sl)
 	return rt.Description(objref.IDOf(sl))
 }
 
 // NewSampleLocationWithByteSourceSampleLocation creates a sample location object with the byte source and sample location that you specify.
 func NewSampleLocationWithByteSourceSampleLocation(byteSource *ByteSource, sampleLocation avfoundation.AVSampleCursorStorageRange) *SampleLocation {
+	defer runtime.KeepAlive(byteSource)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MESampleLocation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithByteSource:sampleLocation:"), objref.IDOf(byteSource), sampleLocation)
 	return sampleLocationAdopt(_id)
@@ -76,12 +84,14 @@ func NewSampleLocationWithByteSourceSampleLocation(byteSource *ByteSource, sampl
 
 // SampleLocation returns the starting file offset and size in bytes of the sample.
 func (sl *SampleLocation) SampleLocation() avfoundation.AVSampleCursorStorageRange {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[avfoundation.AVSampleCursorStorageRange](objref.IDOf(sl), objc.RegisterName("sampleLocation"))
 	return _r
 }
 
 // ByteSource returns the MEByteSource to be used to read the data for the sample.
 func (sl *SampleLocation) ByteSource() *ByteSource {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("byteSource"))
 	return ByteSourceFromID(_r)
 }

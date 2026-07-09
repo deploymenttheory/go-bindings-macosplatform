@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -53,29 +54,35 @@ func contentKeyRequestAdopt(id objc.ID) *ContentKeyRequest {
 
 // Description returns the object's -description text.
 func (ckr *ContentKeyRequest) Description() string {
+	defer runtime.KeepAlive(ckr)
 	return rt.Description(objref.IDOf(ckr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ckr *ContentKeyRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ckr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ckr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ckr *ContentKeyRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(ckr)
 	return rt.IsKind(objref.IDOf(ckr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ckr *ContentKeyRequest) String() string {
+	defer runtime.KeepAlive(ckr)
 	return rt.Description(objref.IDOf(ckr))
 }
 
 // MakeStreamingContentKeyRequestDataForAppContentIdentifierOptions obtains encrypted key request data for a specific combination of app and content.
 //
 // MakeStreamingContentKeyRequestDataForAppContentIdentifierOptions blocks until the operation completes or ctx is cancelled.
-func (ckr *ContentKeyRequest) MakeStreamingContentKeyRequestDataForAppContentIdentifierOptions(ctx context.Context, appIdentifier obj.Object, contentIdentifier obj.Object, options obj.Object) (result obj.Object, err error) {
+func (ckr *ContentKeyRequest) MakeStreamingContentKeyRequestDataForAppContentIdentifierOptions(ctx context.Context, appIdentifier []byte, contentIdentifier []byte, options map[string]obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(ckr)
 	type _result struct {
 		val obj.Object
 		err error
@@ -87,7 +94,7 @@ func (ckr *ContentKeyRequest) MakeStreamingContentKeyRequestDataForAppContentIde
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(ckr), objc.RegisterName("makeStreamingContentKeyRequestDataForApp:contentIdentifier:options:completionHandler:"), objref.IDOf(appIdentifier), objref.IDOf(contentIdentifier), objref.IDOf(options), _block)
+	objc.Send[objc.ID](objref.IDOf(ckr), objc.RegisterName("makeStreamingContentKeyRequestDataForApp:contentIdentifier:options:completionHandler:"), rt.BytesToNSData(appIdentifier), rt.BytesToNSData(contentIdentifier), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -99,18 +106,22 @@ func (ckr *ContentKeyRequest) MakeStreamingContentKeyRequestDataForAppContentIde
 
 // ProcessContentKeyResponse sends the specified content key response to the receiver for processing.
 func (ckr *ContentKeyRequest) ProcessContentKeyResponse(keyResponse *ContentKeyResponse) {
+	defer runtime.KeepAlive(ckr)
+	defer runtime.KeepAlive(keyResponse)
 	objc.Send[objc.ID](objref.IDOf(ckr), objc.RegisterName("processContentKeyResponse:"), objref.IDOf(keyResponse))
 }
 
 // ProcessContentKeyResponseError tells the receiver that the app was unable to obtain a content key response.
-func (ckr *ContentKeyRequest) ProcessContentKeyResponseError(error_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(ckr), objc.RegisterName("processContentKeyResponseError:"), error_)
+func (ckr *ContentKeyRequest) ProcessContentKeyResponseError(err unsafe.Pointer) {
+	defer runtime.KeepAlive(ckr)
+	objc.Send[objc.ID](objref.IDOf(ckr), objc.RegisterName("processContentKeyResponseError:"), err)
 }
 
 // RespondByRequestingPersistableContentKeyRequestAndReturnError tells the receiver that the app requires a persistable content key request object for processing.
 //
 // RespondByRequestingPersistableContentKeyRequestAndReturnError returns an error if the operation did not succeed.
 func (ckr *ContentKeyRequest) RespondByRequestingPersistableContentKeyRequestAndReturnError() error {
+	defer runtime.KeepAlive(ckr)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(ckr), objc.RegisterName("respondByRequestingPersistableContentKeyRequestAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -121,42 +132,49 @@ func (ckr *ContentKeyRequest) RespondByRequestingPersistableContentKeyRequestAnd
 
 // Status returns this describes the state of the AVContentKeyRequest, value is one of AVContentKeyRequestStatus.
 func (ckr *ContentKeyRequest) Status() ContentKeyRequestStatus {
+	defer runtime.KeepAlive(ckr)
 	_r := objc.Send[ContentKeyRequestStatus](objref.IDOf(ckr), objc.RegisterName("status"))
 	return _r
 }
 
 // Identifier returns container- and protocol-specific identifier for the content key. In order to use a key with an HTTP Live Streaming AVURLAsset, the identifier must be an NSURL that matches a key URI in the Media Playlist.
 func (ckr *ContentKeyRequest) Identifier() obj.Object {
+	defer runtime.KeepAlive(ckr)
 	_r := objc.Send[objc.ID](objref.IDOf(ckr), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
 // Options returns additional information specified while initiaing key loading using -processContentKeyRequestWithIdentifier:initializationData:options:.
-func (ckr *ContentKeyRequest) Options() obj.Object {
+func (ckr *ContentKeyRequest) Options() map[string]obj.Object {
+	defer runtime.KeepAlive(ckr)
 	_r := objc.Send[objc.ID](objref.IDOf(ckr), objc.RegisterName("options"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // CanProvidePersistableContentKey reports whether when the value of this property is true, you can use the method -persistableContentKeyFromKeyVendorResponse:options:error: to create a persistable content key from the content key response. The value of this property will be true only when the receiver is provided to your AVContentKeySession delegate via the method -contentKeySession:didProvidePersistableContentKeyRequest:. If you have an AVContentKeyRequest for which the value of canProvidePersistableContentKey is false, but you wish to obtain a persistable content key, send the AVContentKeyRequest the message -respondByRequestingPersistableContentKeyRequest.
 func (ckr *ContentKeyRequest) CanProvidePersistableContentKey() bool {
+	defer runtime.KeepAlive(ckr)
 	_r := objc.Send[bool](objref.IDOf(ckr), objc.RegisterName("canProvidePersistableContentKey"))
 	return _r
 }
 
 // ContentKeySpecifier specifies the requested content key.
 func (ckr *ContentKeyRequest) ContentKeySpecifier() *ContentKeySpecifier {
+	defer runtime.KeepAlive(ckr)
 	_r := objc.Send[objc.ID](objref.IDOf(ckr), objc.RegisterName("contentKeySpecifier"))
 	return ContentKeySpecifierFromID(_r)
 }
 
 // ContentKey represents an AVContentKey that results from an invocation of -processContentKeyResponse:. Before the receiver achieves the status AVContentKeyRequestReceivedResponse, the value of this property will be nil. Once that status has been achieved, the value of this property becomes a non-nil AVContentKey that can be provided to content key recipients that apply content keys manually to objects that require them, such as CMSampleBuffers, or to initiate renewal. A non-nil value does not indicate that the content key is valid; authorization failures may yet be possible.
 func (ckr *ContentKeyRequest) ContentKey() *ContentKey {
+	defer runtime.KeepAlive(ckr)
 	_r := objc.Send[objc.ID](objref.IDOf(ckr), objc.RegisterName("contentKey"))
 	return ContentKeyFromID(_r)
 }
 
 // RenewsExpiringResponseData wraps the corresponding Objective-C method.
 func (ckr *ContentKeyRequest) RenewsExpiringResponseData() bool {
+	defer runtime.KeepAlive(ckr)
 	_r := objc.Send[bool](objref.IDOf(ckr), objc.RegisterName("renewsExpiringResponseData"))
 	return _r
 }

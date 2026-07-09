@@ -306,12 +306,12 @@ func MADimFlashingLightsEnabled() bool {
 var _fnMAImageCaptioningCopyCaption func(objc.ID, unsafe.Pointer) objc.ID
 
 // MAImageCaptioningCopyCaption calls the MediaAccessibility framework function MAImageCaptioningCopyCaption.
-func MAImageCaptioningCopyCaption(url obj.Object, error_ unsafe.Pointer) obj.Object {
+func MAImageCaptioningCopyCaption(url obj.Object, err unsafe.Pointer) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMAImageCaptioningCopyCaption == nil {
 		ebipurego.RegisterLibFunc(&_fnMAImageCaptioningCopyCaption, _lib, "MAImageCaptioningCopyCaption")
 	}
-	_ret := _fnMAImageCaptioningCopyCaption(objref.IDOf(url), error_)
+	_ret := _fnMAImageCaptioningCopyCaption(objref.IDOf(url), err)
 	return obj.Wrap(_ret)
 }
 
@@ -330,10 +330,10 @@ func MAImageCaptioningCopyMetadataTagPath() obj.Object {
 var _fnMAImageCaptioningSetCaption func(objc.ID, objc.ID, unsafe.Pointer) bool
 
 // MAImageCaptioningSetCaption calls the MediaAccessibility framework function MAImageCaptioningSetCaption.
-func MAImageCaptioningSetCaption(url obj.Object, string_ obj.Object, error_ unsafe.Pointer) bool {
+func MAImageCaptioningSetCaption(url obj.Object, str obj.Object, err unsafe.Pointer) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMAImageCaptioningSetCaption == nil {
 		ebipurego.RegisterLibFunc(&_fnMAImageCaptioningSetCaption, _lib, "MAImageCaptioningSetCaption")
 	}
-	return _fnMAImageCaptioningSetCaption(objref.IDOf(url), objref.IDOf(string_), error_)
+	return _fnMAImageCaptioningSetCaption(objref.IDOf(url), objref.IDOf(str), err)
 }

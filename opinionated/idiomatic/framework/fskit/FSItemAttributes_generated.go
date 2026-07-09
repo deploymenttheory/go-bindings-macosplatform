@@ -5,6 +5,7 @@
 package fskit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func itemAttributesAdopt(id objc.ID) *ItemAttributes {
 
 // Description returns the object's -description text.
 func (ia *ItemAttributes) Description() string {
+	defer runtime.KeepAlive(ia)
 	return rt.Description(objref.IDOf(ia))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ia *ItemAttributes) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ia)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ia), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ia *ItemAttributes) IsKind(className string) bool {
+	defer runtime.KeepAlive(ia)
 	return rt.IsKind(objref.IDOf(ia), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ia *ItemAttributes) String() string {
+	defer runtime.KeepAlive(ia)
 	return rt.Description(objref.IDOf(ia))
 }
 
@@ -178,83 +184,97 @@ func (ia *ItemAttributes) WithBackupTime(backupTime unsafe.Pointer) *ItemAttribu
 
 // InvalidateAllProperties marks all attributes inactive.
 func (ia *ItemAttributes) InvalidateAllProperties() {
+	defer runtime.KeepAlive(ia)
 	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("invalidateAllProperties"))
 }
 
 // IsValid returns a Boolean value that indicates whether the attribute is valid. If the value returned by this method is `YES` (Objective-C) or `true` (Swift), a caller can safely use the given attribute.
 func (ia *ItemAttributes) IsValid(attribute ItemAttribute) bool {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[bool](objref.IDOf(ia), objc.RegisterName("isValid:"), attribute)
 	return _r
 }
 
 // UID returns the user identifier.
 func (ia *ItemAttributes) UID() uint32 {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[uint32](objref.IDOf(ia), objc.RegisterName("uid"))
 	return _r
 }
 
 // Gid returns the group identifier.
 func (ia *ItemAttributes) Gid() uint32 {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[uint32](objref.IDOf(ia), objc.RegisterName("gid"))
 	return _r
 }
 
 // Mode returns the mode of the item. The mode is often used for `setuid`, `setgid`, and `sticky` bits.
 func (ia *ItemAttributes) Mode() uint32 {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[uint32](objref.IDOf(ia), objc.RegisterName("mode"))
 	return _r
 }
 
 // Type returns the item type, such as a regular file, directory, or symbolic link.
 func (ia *ItemAttributes) Type() ItemType {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[ItemType](objref.IDOf(ia), objc.RegisterName("type"))
 	return _r
 }
 
 // LinkCount returns the number of hard links to the item.
 func (ia *ItemAttributes) LinkCount() uint32 {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[uint32](objref.IDOf(ia), objc.RegisterName("linkCount"))
 	return _r
 }
 
 // Flags returns the item's behavior flags. See `st_flags` in `stat.h` for flag definitions.
 func (ia *ItemAttributes) Flags() uint32 {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[uint32](objref.IDOf(ia), objc.RegisterName("flags"))
 	return _r
 }
 
 // Size returns the item's size.
 func (ia *ItemAttributes) Size() uint64 {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[uint64](objref.IDOf(ia), objc.RegisterName("size"))
 	return _r
 }
 
 // AllocSize returns the item's allocated size.
 func (ia *ItemAttributes) AllocSize() uint64 {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[uint64](objref.IDOf(ia), objc.RegisterName("allocSize"))
 	return _r
 }
 
 // FileID returns the item's file identifier.
 func (ia *ItemAttributes) FileID() ItemID {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[ItemID](objref.IDOf(ia), objc.RegisterName("fileID"))
 	return _r
 }
 
 // ParentID returns the identifier of the item's parent.
 func (ia *ItemAttributes) ParentID() ItemID {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[ItemID](objref.IDOf(ia), objc.RegisterName("parentID"))
 	return _r
 }
 
 // SupportsLimitedXAttrs reports whether the item supports a limited set of extended attributes.
 func (ia *ItemAttributes) SupportsLimitedXAttrs() bool {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[bool](objref.IDOf(ia), objc.RegisterName("supportsLimitedXAttrs"))
 	return _r
 }
 
 // InhibitKernelOffloadedIO reports whether the file system overrides the per-volume settings for kernel offloaded I/O for a specific file. This property has no meaning if the volume doesn't conform to “FSVolumeKernelOffloadedIOOperations“.
 func (ia *ItemAttributes) InhibitKernelOffloadedIO() bool {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[bool](objref.IDOf(ia), objc.RegisterName("inhibitKernelOffloadedIO"))
 	return _r
 }

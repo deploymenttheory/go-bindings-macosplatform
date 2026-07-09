@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -183,35 +185,41 @@ func (dtre *DOMHTMLTableRowElement) WithTextContent(textContent string) *DOMHTML
 
 // InsertCell inserts cell.
 func (dtre *DOMHTMLTableRowElement) InsertCell(index int) *DOMHTMLElement {
+	defer runtime.KeepAlive(dtre)
 	_r := objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("insertCell:"), index)
 	return DOMHTMLElementFromID(_r)
 }
 
 // DeleteCell deletes cell.
 func (dtre *DOMHTMLTableRowElement) DeleteCell(index int) {
+	defer runtime.KeepAlive(dtre)
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("deleteCell:"), index)
 }
 
 // RowIndex returns the row index.
 func (dtre *DOMHTMLTableRowElement) RowIndex() int {
+	defer runtime.KeepAlive(dtre)
 	_r := objc.Send[int](objref.IDOf(dtre), objc.RegisterName("rowIndex"))
 	return _r
 }
 
 // SectionRowIndex returns the section row index.
 func (dtre *DOMHTMLTableRowElement) SectionRowIndex() int {
+	defer runtime.KeepAlive(dtre)
 	_r := objc.Send[int](objref.IDOf(dtre), objc.RegisterName("sectionRowIndex"))
 	return _r
 }
 
 // Cells returns the cells.
 func (dtre *DOMHTMLTableRowElement) Cells() *DOMHTMLCollection {
+	defer runtime.KeepAlive(dtre)
 	_r := objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("cells"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
 // Align returns the align.
 func (dtre *DOMHTMLTableRowElement) Align() string {
+	defer runtime.KeepAlive(dtre)
 	_r := objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""
@@ -221,6 +229,7 @@ func (dtre *DOMHTMLTableRowElement) Align() string {
 
 // BgColor returns the bg color.
 func (dtre *DOMHTMLTableRowElement) BgColor() string {
+	defer runtime.KeepAlive(dtre)
 	_r := objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("bgColor"))
 	if _r == 0 {
 		return ""
@@ -230,6 +239,7 @@ func (dtre *DOMHTMLTableRowElement) BgColor() string {
 
 // Ch returns the ch.
 func (dtre *DOMHTMLTableRowElement) Ch() string {
+	defer runtime.KeepAlive(dtre)
 	_r := objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("ch"))
 	if _r == 0 {
 		return ""
@@ -239,6 +249,7 @@ func (dtre *DOMHTMLTableRowElement) Ch() string {
 
 // ChOff returns the ch off.
 func (dtre *DOMHTMLTableRowElement) ChOff() string {
+	defer runtime.KeepAlive(dtre)
 	_r := objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("chOff"))
 	if _r == 0 {
 		return ""
@@ -248,6 +259,7 @@ func (dtre *DOMHTMLTableRowElement) ChOff() string {
 
 // VAlign returns the v align.
 func (dtre *DOMHTMLTableRowElement) VAlign() string {
+	defer runtime.KeepAlive(dtre)
 	_r := objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("vAlign"))
 	if _r == 0 {
 		return ""

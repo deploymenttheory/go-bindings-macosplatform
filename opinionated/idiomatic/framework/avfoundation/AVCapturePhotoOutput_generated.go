@@ -5,8 +5,11 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -114,21 +117,26 @@ func (cpo *CapturePhotoOutput) WithDeferredStartEnabled(deferredStartEnabled boo
 }
 
 // SupportedPhotoPixelFormatTypesForFileType returns the list of uncompressed pixel formats supported for photo data in the specified file type.
-func (cpo *CapturePhotoOutput) SupportedPhotoPixelFormatTypesForFileType(fileType obj.Object) []obj.Object {
+func (cpo *CapturePhotoOutput) SupportedPhotoPixelFormatTypesForFileType(fileType obj.Object) []*foundation.Number {
+	defer runtime.KeepAlive(cpo)
+	defer runtime.KeepAlive(fileType)
 	_r := objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("supportedPhotoPixelFormatTypesForFileType:"), objref.IDOf(fileType))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *foundation.Number { return foundation.NumberFromID(_id) })
 }
 
 // SupportedPhotoCodecTypesForFileType returns the list of photo codecs (such as JPEG or HEVC) supported for photo data in the specified file type.
-func (cpo *CapturePhotoOutput) SupportedPhotoCodecTypesForFileType(fileType obj.Object) []obj.Object {
+func (cpo *CapturePhotoOutput) SupportedPhotoCodecTypesForFileType(fileType obj.Object) []*foundation.String {
+	defer runtime.KeepAlive(cpo)
+	defer runtime.KeepAlive(fileType)
 	_r := objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("supportedPhotoCodecTypesForFileType:"), objref.IDOf(fileType))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
 }
 
 // AvailablePhotoPixelFormatTypes returns an array of kCVPixelBufferPixelFormatTypeKey values that are currently supported by the receiver. If you wish to capture a photo in an uncompressed format, such as 420f, 420v, or BGRA, you must ensure that the format you want is present in the receiver's availablePhotoPixelFormatTypes array. If you've not yet added your receiver to an AVCaptureSession with a video source, no pixel format types are available. This property is key-value observable.
 //
 // AvailablePhotoPixelFormatTypes returns the collection as a Go slice.
 func (cpo *CapturePhotoOutput) AvailablePhotoPixelFormatTypes() []obj.Object {
+	defer runtime.KeepAlive(cpo)
 	_arr := objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("availablePhotoPixelFormatTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -137,6 +145,7 @@ func (cpo *CapturePhotoOutput) AvailablePhotoPixelFormatTypes() []obj.Object {
 //
 // AvailablePhotoCodecTypes returns the collection as a Go slice.
 func (cpo *CapturePhotoOutput) AvailablePhotoCodecTypes() []obj.Object {
+	defer runtime.KeepAlive(cpo)
 	_arr := objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("availablePhotoCodecTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -145,24 +154,28 @@ func (cpo *CapturePhotoOutput) AvailablePhotoCodecTypes() []obj.Object {
 //
 // AvailablePhotoFileTypes returns the collection as a Go slice.
 func (cpo *CapturePhotoOutput) AvailablePhotoFileTypes() []obj.Object {
+	defer runtime.KeepAlive(cpo)
 	_arr := objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("availablePhotoFileTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // MaxPhotoQualityPrioritization indicates the highest quality the receiver should be prepared to output on a capture-by-capture basis. Default value is AVCapturePhotoQualityPrioritizationBalanced when attached to an AVCaptureSession, and AVCapturePhotoQualityPrioritizationSpeed when attached to an AVCaptureMultiCamSession. The AVCapturePhotoOutput is capable of applying a variety of techniques to improve photo quality (reduce noise, preserve detail in low light, freeze motion, etc). Some techniques improve image quality at the expense of speed (shot-to-shot time). Before starting your session, you may set this property to indicate the highest quality prioritization you intend to request when calling -capturePhotoWithSettings:delegate:. When configuring an AVCapturePhotoSettings object, you may not exceed this quality prioritization level, but you may select a lower (speedier) prioritization level. Changing the maxPhotoQualityPrioritization while the session is running can result in a lengthy rebuild of the session in which video preview is disrupted. Setting the maxPhotoQualityPrioritization to .quality will turn on optical image stabilization if the -isHighPhotoQualitySupported of the source device's -activeFormat is true.
 func (cpo *CapturePhotoOutput) MaxPhotoQualityPrioritization() CapturePhotoQualityPrioritization {
+	defer runtime.KeepAlive(cpo)
 	_r := objc.Send[CapturePhotoQualityPrioritization](objref.IDOf(cpo), objc.RegisterName("maxPhotoQualityPrioritization"))
 	return _r
 }
 
 // IsFastCapturePrioritizationSupported reports whether fast capture prioritization is supported. Fast capture prioritization allows capture quality to be automatically reduced from the selected AVCapturePhotoQualityPrioritization to ensure the photo output can keep up when captures are requested in rapid succession. Fast capture prioritization is only supported for certain AVCaptureSession sessionPresets and AVCaptureDevice activeFormats and only when responsiveCaptureEnabled is true. When switching cameras or formats this property may change. When this property changes from true to false, fastCapturePrioritizationEnabled also reverts to false. If you've previously opted in for fast capture prioritization and then change configurations, you may need to set fastCapturePrioritizationEnabled = true again.
 func (cpo *CapturePhotoOutput) IsFastCapturePrioritizationSupported() bool {
+	defer runtime.KeepAlive(cpo)
 	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isFastCapturePrioritizationSupported"))
 	return _r
 }
 
 // IsFastCapturePrioritizationEnabled reports whether fast capture prioritization is enabled. This property defaults to false. This property may only be set to true if fastCapturePrioritizationSupported is true, otherwise an NSInvalidArgumentException is thrown. By setting this property to true, the photo output prepares itself to automatically reduce capture quality from the selected AVCapturePhotoQualityPrioritization when needed to keep up with rapid capture requests. In many cases the slightly reduced quality is preferable to missing the moment entirely. If you intend to use fast capture prioritization, you should set this property to true before calling -[AVCaptureSession startRunning] or within -[AVCaptureSession beginConfiguration] and -[AVCaptureSession commitConfiguration] while running.
 func (cpo *CapturePhotoOutput) IsFastCapturePrioritizationEnabled() bool {
+	defer runtime.KeepAlive(cpo)
 	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isFastCapturePrioritizationEnabled"))
 	return _r
 }
@@ -171,72 +184,84 @@ func (cpo *CapturePhotoOutput) IsFastCapturePrioritizationEnabled() bool {
 //
 // SupportedFlashModes returns the collection as a Go slice.
 func (cpo *CapturePhotoOutput) SupportedFlashModes() []obj.Object {
+	defer runtime.KeepAlive(cpo)
 	_arr := objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("supportedFlashModes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // IsHighResolutionCaptureEnabled reports whether the photo render pipeline should be configured to deliver high resolution still images. Some AVCaptureDeviceFormats support outputting higher resolution stills than their streaming resolution (See AVCaptureDeviceFormat.highResolutionStillImageDimensions). Under some conditions, AVCaptureSession needs to set up the photo render pipeline differently to support high resolution still image capture. If you intend to take high resolution still images at all, you should set this property to true before calling -[AVCaptureSession startRunning]. Once you've opted in for high resolution capture, you are free to issue photo capture requests with or without highResolutionCaptureEnabled in the AVCapturePhotoSettings. If you have not set this property to true and call capturePhotoWithSettings:delegate: with settings.highResolutionCaptureEnabled set to true, an NSInvalidArgumentException will be thrown.
 func (cpo *CapturePhotoOutput) IsHighResolutionCaptureEnabled() bool {
+	defer runtime.KeepAlive(cpo)
 	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isHighResolutionCaptureEnabled"))
 	return _r
 }
 
 // MaxPhotoDimensions indicates the maximum resolution of the requested photo. Set this property to enable requesting of images up to as large as the specified dimensions. Images returned by AVCapturePhotoOutput may be smaller than these dimensions but will never be larger. Once set, images can be requested with any valid maximum photo dimensions by setting AVCapturePhotoSettings.maxPhotoDimensions on a per photo basis. The dimensions set must match one of the dimensions returned by AVCaptureDeviceFormat.supportedMaxPhotoDimensions for the current active format. Changing this property may trigger a lengthy reconfiguration of the capture render pipeline so it is recommended that this is set before calling -[AVCaptureSession startRunning]. Note: When supported, the 24MP setting (5712, 4284) is only serviced as 24MP when opted-in to autoDeferredPhotoDeliveryEnabled.
 func (cpo *CapturePhotoOutput) MaxPhotoDimensions() coremedia.CMVideoDimensions {
+	defer runtime.KeepAlive(cpo)
 	_r := objc.Send[coremedia.CMVideoDimensions](objref.IDOf(cpo), objc.RegisterName("maxPhotoDimensions"))
 	return _r
 }
 
 // PreservesLivePhotoCaptureSuspendedOnSessionStop reports whether by default, Live Photo capture is resumed when the session stops. This property allows clients to opt out of this and preserve the value of livePhotoCaptureSuspended. Defaults to false.
 func (cpo *CapturePhotoOutput) PreservesLivePhotoCaptureSuspendedOnSessionStop() bool {
+	defer runtime.KeepAlive(cpo)
 	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("preservesLivePhotoCaptureSuspendedOnSessionStop"))
 	return _r
 }
 
 // IsZeroShutterLagSupported reports whether a BOOL value specifying whether zero shutter lag is supported. This property returns true if the session's current configuration allows zero shutter lag. When switching cameras or formats, setting depthDataDeliveryEnabled, or setting virtualDeviceConstituentPhotoDeliveryEnabled this property may change. When this property changes from true to false, zeroShutterLagEnabled also reverts to false. This property is key-value observable.
 func (cpo *CapturePhotoOutput) IsZeroShutterLagSupported() bool {
+	defer runtime.KeepAlive(cpo)
 	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isZeroShutterLagSupported"))
 	return _r
 }
 
 // IsZeroShutterLagEnabled reports whether a BOOL value specifying whether the output is set up to support zero shutter lag. This property may only be set to true if zeroShutterLagSupported is true, otherwise an NSInvalidArgumentException is thrown. For apps linked on or after iOS 17 zero shutter lag is automatically enabled when supported. Enabling zero shutter lag reduces or eliminates shutter lag when using AVCapturePhotoQualityPrioritizationBalanced or Quality at the cost of additional memory usage by the photo output. The timestamp of the AVCapturePhoto may be slightly earlier than when -capturePhotoWithSettings:delegate: was called. To minimize camera shake from the user's tapping gesture it is recommended that -capturePhotoWithSettings:delegate: be called as early as possible when handling the touch down event. Zero shutter lag isn't available when using manual exposure or bracketed capture. Changing this property requires a lengthy reconfiguration of the capture render pipeline, so you should set this property to true before calling -[AVCaptureSession startRunning] or within -[AVCaptureSession beginConfiguration] and -[AVCaptureSession commitConfiguration] while running.
 func (cpo *CapturePhotoOutput) IsZeroShutterLagEnabled() bool {
+	defer runtime.KeepAlive(cpo)
 	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isZeroShutterLagEnabled"))
 	return _r
 }
 
 // IsResponsiveCaptureSupported reports whether a BOOL value specifying whether responsive capture is supported. Enabling responsive capture increases peak and sustained capture rates, and reduces shutter lag at the cost of additional memory usage by the photo output. This property returns true if the session's current configuration allows responsive capture. When switching cameras or formats, enabling depth data delivery, or enabling zero shutter lag this property may change. Responsive capture is only supported when zero shutter lag is enabled. When this property changes from true to false, responsiveCaptureEnabled also reverts to false. This property is key-value observable.
 func (cpo *CapturePhotoOutput) IsResponsiveCaptureSupported() bool {
+	defer runtime.KeepAlive(cpo)
 	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isResponsiveCaptureSupported"))
 	return _r
 }
 
 // IsResponsiveCaptureEnabled reports whether a BOOL value specifying whether the photo output is set up to support responsive capture. This property may only be set to true if responsiveCaptureSupported is true, otherwise an NSInvalidArgumentException is thrown. When responsiveCaptureEnabled is true the captureReadiness property should be used to determine whether new capture requests can be serviced in a reasonable time and whether the shutter control should be available to the user. Responsive capture adds buffering between the capture and photo processing stages which allows a new capture to start before processing has completed for the previous capture, so be prepared to handle -captureOutput:willBeginCaptureForResolvedSettings: being called before the -captureOutput:didFinishProcessingPhoto: for the prior requests. Processed photos continue to be delivered in the order they were captured. To minimize camera shake from the user's tapping gesture it is recommended that -capturePhotoWithSettings:delegate: be called as early as possible when handling the touch down event. Enabling responsive capture allows the fast capture prioritization feature to be used, which further increases capture rates and reduces preview and recording disruptions. See the fastCapturePrioritizationEnabled property. When requesting uncompressed output using kCVPixelBufferPixelFormatTypeKey in AVCapturePhotoSetting.format the AVCapturePhoto's pixelBuffer is allocated from a pool with enough capacity for that request only, and overlap between capture and processing is disabled. The client must release the AVCapturePhoto and references to the pixelBuffer before capturing again and the pixelBuffer's IOSurface must also no longer be in use. Changing this property requires a lengthy reconfiguration of the capture render pipeline, so you should set this property to true before calling -[AVCaptureSession startRunning] or within -[AVCaptureSession beginConfiguration] and -[AVCaptureSession commitConfiguration] while running.
 func (cpo *CapturePhotoOutput) IsResponsiveCaptureEnabled() bool {
+	defer runtime.KeepAlive(cpo)
 	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isResponsiveCaptureEnabled"))
 	return _r
 }
 
 // CaptureReadiness returns a value specifying whether the photo output is ready to respond to new capture requests in a timely manner. This property can be key-value observed to enable and disable shutter button UI depending on whether the output is ready to capture, which is especially important when the responsiveCaptureEnabled property is YES. When interacting with AVCapturePhotoOutput on a background queue AVCapturePhotoOutputReadinessCoordinator should instead be used to observe readiness changes and perform UI updates. Capturing only when the output is ready limits the number of requests inflight to minimize shutter lag while maintaining the fastest shot to shot time. When the property returns a value other than Ready the output is not ready to capture and the shutter button should be disabled to prevent the user from initiating new requests. The output continues to accept requests when the captureReadiness property returns a value other than Ready, but the request may not be serviced for a longer period. The visual presentation of the shutter button can be customized based on the readiness value. When the user rapidly taps the shutter button the property may transition to NotReadyMomentarily for a brief period. Although the shutter button should be disabled during this period it is short lived enough that dimming or changing the appearance of the shutter is not recommended as it would be visually distracting to the user. Longer running capture types like flash or captures with AVCapturePhotoQualityPrioritizationQuality may prevent the output from capturing for an extended period, indicated by NotReadyWaitingForCapture or NotReadyWaitingForProcessing, which is appropriate to show by dimming or disabling the shutter button. For NotReadyWaitingForProcessing it is also appropriate to show a spinner or other indication that the shutter is busy.
 func (cpo *CapturePhotoOutput) CaptureReadiness() CapturePhotoOutputCaptureReadiness {
+	defer runtime.KeepAlive(cpo)
 	_r := objc.Send[CapturePhotoOutputCaptureReadiness](objref.IDOf(cpo), objc.RegisterName("captureReadiness"))
 	return _r
 }
 
 // IsConstantColorSupported reports whether a BOOL value specifying whether constant color capture is supported. An object's color in a photograph is affected by the light sources illuminating the scene, so the color of the same object photographed in warm light might look markedly different than in colder light. In some use cases, such ambient light induced color variation is undesirable, and the user may prefer an estimate of what these materials would look like under a standard light such as daylight (D65), regardless of the lighting conditions at the time the photograph was taken. Some devices are capable of producing such constant color photos. Constant color captures require the flash to be fired and may require pre-flash sequence to determine the correct focus and exposure, therefore it might take several seconds to acquire a constant color photo. Due to this flash requirement, a constant color capture can only be taken with AVCaptureFlashModeAuto or AVCaptureFlashModeOn as the flash mode, otherwise an exception is thrown. Constant color can only be achieved when the flash has a discernible effect on the scene so it may not perform well in bright conditions such as direct sunlight. Use the constantColorConfidenceMap property to examine the confidence level, and therefore the usefulness, of each region of a constant color photo. Constant color should not be used in conjunction with locked or manual white balance. This property returns true if the session's current configuration allows photos to be captured with constant color. When switching cameras or formats this property may change. When this property changes from true to false, constantColorEnabled also reverts to false. If you've previously opted in for constant color and then change configurations, you may need to set constantColorEnabled = true again. This property is key-value observable.
 func (cpo *CapturePhotoOutput) IsConstantColorSupported() bool {
+	defer runtime.KeepAlive(cpo)
 	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isConstantColorSupported"))
 	return _r
 }
 
 // IsConstantColorEnabled reports whether a BOOL value specifying whether the photo render pipeline is set up to perform constant color captures. Default is false. Set to true to enable support for taking constant color photos. This property may only be set to true if constantColorSupported is true. Enabling constant color requires a lengthy reconfiguration of the capture render pipeline, so if you intend to capture constant color photos, you should set this property to true before calling -[AVCaptureSession startRunning] or within -[AVCaptureSession beginConfiguration] and -[AVCaptureSession commitConfiguration] while running.
 func (cpo *CapturePhotoOutput) IsConstantColorEnabled() bool {
+	defer runtime.KeepAlive(cpo)
 	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isConstantColorEnabled"))
 	return _r
 }
 
 // IsShutterSoundSuppressionSupported reports whether suppressing the shutter sound is supported. On iOS, this property returns false in jurisdictions where shutter sound production cannot be disabled. On all other platforms, it always returns false.
 func (cpo *CapturePhotoOutput) IsShutterSoundSuppressionSupported() bool {
+	defer runtime.KeepAlive(cpo)
 	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isShutterSoundSuppressionSupported"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewChangePlaybackRateCommandEvent() *ChangePlaybackRateCommandEvent {
 
 // PlaybackRate returns the playback rate.
 func (cprce *ChangePlaybackRateCommandEvent) PlaybackRate() float32 {
+	defer runtime.KeepAlive(cprce)
 	_r := objc.Send[float32](objref.IDOf(cprce), objc.RegisterName("playbackRate"))
 	return _r
 }

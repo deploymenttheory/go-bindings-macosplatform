@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func menuItemAdopt(id objc.ID) *MenuItem {
 
 // Description returns the object's -description text.
 func (mi *MenuItem) Description() string {
+	defer runtime.KeepAlive(mi)
 	return rt.Description(objref.IDOf(mi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mi *MenuItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mi *MenuItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(mi)
 	return rt.IsKind(objref.IDOf(mi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mi *MenuItem) String() string {
+	defer runtime.KeepAlive(mi)
 	return rt.Description(objref.IDOf(mi))
 }
 
 // NewMenuItemWithCoder creates a new MenuItem.
 func NewMenuItemWithCoder(coder obj.Object) *MenuItem {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMenuItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return menuItemAdopt(_id)
@@ -75,12 +84,14 @@ func NewMenuItemWithCoder(coder obj.Object) *MenuItem {
 
 // WithMenu sets the menu item’s menu.
 func (mi *MenuItem) WithMenu(menu *Menu) *MenuItem {
+	defer runtime.KeepAlive(menu)
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return mi
 }
 
 // WithSubmenu sets the submenu of the menu item.
 func (mi *MenuItem) WithSubmenu(submenu *Menu) *MenuItem {
+	defer runtime.KeepAlive(submenu)
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setSubmenu:"), objref.IDOf(submenu))
 	return mi
 }
@@ -93,6 +104,7 @@ func (mi *MenuItem) WithTitle(title string) *MenuItem {
 
 // WithAttributedTitle sets a custom string for a menu item.
 func (mi *MenuItem) WithAttributedTitle(attributedTitle obj.Object) *MenuItem {
+	defer runtime.KeepAlive(attributedTitle)
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	return mi
 }
@@ -135,6 +147,7 @@ func (mi *MenuItem) WithAllowsAutomaticKeyEquivalentMirroring(allowsAutomaticKey
 
 // WithImage sets the menu item’s image.
 func (mi *MenuItem) WithImage(image *Image) *MenuItem {
+	defer runtime.KeepAlive(image)
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return mi
 }
@@ -147,18 +160,21 @@ func (mi *MenuItem) WithState(state int) *MenuItem {
 
 // WithOnStateImage sets the image of the menu item that indicates an “on” state.
 func (mi *MenuItem) WithOnStateImage(onStateImage *Image) *MenuItem {
+	defer runtime.KeepAlive(onStateImage)
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setOnStateImage:"), objref.IDOf(onStateImage))
 	return mi
 }
 
 // WithOffStateImage sets the image of the menu item that indicates an “off” state.
 func (mi *MenuItem) WithOffStateImage(offStateImage *Image) *MenuItem {
+	defer runtime.KeepAlive(offStateImage)
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setOffStateImage:"), objref.IDOf(offStateImage))
 	return mi
 }
 
 // WithMixedStateImage sets the image of the menu item that indicates a “mixed” state, that is, a state neither “on” nor “off.”
 func (mi *MenuItem) WithMixedStateImage(mixedStateImage *Image) *MenuItem {
+	defer runtime.KeepAlive(mixedStateImage)
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setMixedStateImage:"), objref.IDOf(mixedStateImage))
 	return mi
 }
@@ -183,6 +199,7 @@ func (mi *MenuItem) WithIndentationLevel(indentationLevel int) *MenuItem {
 
 // WithTarget sets the menu item’s target.
 func (mi *MenuItem) WithTarget(target obj.Object) *MenuItem {
+	defer runtime.KeepAlive(target)
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return mi
 }
@@ -195,12 +212,14 @@ func (mi *MenuItem) WithTag(tag int) *MenuItem {
 
 // WithRepresentedObject sets the object represented by the menu item.
 func (mi *MenuItem) WithRepresentedObject(representedObject obj.Object) *MenuItem {
+	defer runtime.KeepAlive(representedObject)
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return mi
 }
 
 // WithView sets the content view for the menu item.
 func (mi *MenuItem) WithView(view ViewProvider) *MenuItem {
+	defer runtime.KeepAlive(view)
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setView:"), objref.IDOf(view))
 	return mi
 }
@@ -219,36 +238,42 @@ func (mi *MenuItem) WithToolTip(toolTip string) *MenuItem {
 
 // WithBadge sets a badge used to provide additional quantitative information specific to the menu item, such as the number of available updates.
 func (mi *MenuItem) WithBadge(badge *MenuItemBadge) *MenuItem {
+	defer runtime.KeepAlive(badge)
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setBadge:"), objref.IDOf(badge))
 	return mi
 }
 
 // Menu returns the menu.
 func (mi *MenuItem) Menu() *Menu {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("menu"))
 	return MenuFromID(_r)
 }
 
 // HasSubmenu reports whether the object has submenu.
 func (mi *MenuItem) HasSubmenu() bool {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("hasSubmenu"))
 	return _r
 }
 
 // Submenu returns the submenu.
 func (mi *MenuItem) Submenu() *Menu {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("submenu"))
 	return MenuFromID(_r)
 }
 
 // ParentItem returns the parent item.
 func (mi *MenuItem) ParentItem() *MenuItem {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("parentItem"))
 	return MenuItemFromID(_r)
 }
 
 // Title returns the title.
 func (mi *MenuItem) Title() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -257,13 +282,15 @@ func (mi *MenuItem) Title() string {
 }
 
 // AttributedTitle returns the attributed title.
-func (mi *MenuItem) AttributedTitle() obj.Object {
+func (mi *MenuItem) AttributedTitle() *foundation.AttributedString {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("attributedTitle"))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // Subtitle returns used to specify a standard subtitle for the menu item. The subtitle is displayed below the standard title.
 func (mi *MenuItem) Subtitle() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("subtitle"))
 	if _r == 0 {
 		return ""
@@ -273,18 +300,21 @@ func (mi *MenuItem) Subtitle() string {
 
 // IsSeparatorItem reports whether the object is separator item.
 func (mi *MenuItem) IsSeparatorItem() bool {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isSeparatorItem"))
 	return _r
 }
 
 // IsSectionHeader reports whether the item is a section header. Section header items are created using the `sectionHeader(title:)` class method.
 func (mi *MenuItem) IsSectionHeader() bool {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isSectionHeader"))
 	return _r
 }
 
 // KeyEquivalent returns the key equivalent.
 func (mi *MenuItem) KeyEquivalent() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("keyEquivalent"))
 	if _r == 0 {
 		return ""
@@ -294,12 +324,14 @@ func (mi *MenuItem) KeyEquivalent() string {
 
 // KeyEquivalentModifierMask returns the key equivalent modifier mask.
 func (mi *MenuItem) KeyEquivalentModifierMask() EventModifierFlags {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[EventModifierFlags](objref.IDOf(mi), objc.RegisterName("keyEquivalentModifierMask"))
 	return _r
 }
 
 // UserKeyEquivalent returns the user key equivalent.
 func (mi *MenuItem) UserKeyEquivalent() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("userKeyEquivalent"))
 	if _r == 0 {
 		return ""
@@ -309,114 +341,133 @@ func (mi *MenuItem) UserKeyEquivalent() string {
 
 // AllowsKeyEquivalentWhenHidden wraps the corresponding Objective-C method.
 func (mi *MenuItem) AllowsKeyEquivalentWhenHidden() bool {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("allowsKeyEquivalentWhenHidden"))
 	return _r
 }
 
 // AllowsAutomaticKeyEquivalentLocalization wraps the corresponding Objective-C method.
 func (mi *MenuItem) AllowsAutomaticKeyEquivalentLocalization() bool {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("allowsAutomaticKeyEquivalentLocalization"))
 	return _r
 }
 
 // AllowsAutomaticKeyEquivalentMirroring wraps the corresponding Objective-C method.
 func (mi *MenuItem) AllowsAutomaticKeyEquivalentMirroring() bool {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("allowsAutomaticKeyEquivalentMirroring"))
 	return _r
 }
 
 // Image returns the image.
 func (mi *MenuItem) Image() *Image {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
 // State returns the state.
 func (mi *MenuItem) State() int {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[int](objref.IDOf(mi), objc.RegisterName("state"))
 	return _r
 }
 
 // OnStateImage returns the on state image.
 func (mi *MenuItem) OnStateImage() *Image {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("onStateImage"))
 	return ImageFromID(_r)
 }
 
 // OffStateImage returns the off state image.
 func (mi *MenuItem) OffStateImage() *Image {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("offStateImage"))
 	return ImageFromID(_r)
 }
 
 // MixedStateImage returns the mixed state image.
 func (mi *MenuItem) MixedStateImage() *Image {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("mixedStateImage"))
 	return ImageFromID(_r)
 }
 
 // IsEnabled reports whether the object is enabled.
 func (mi *MenuItem) IsEnabled() bool {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isEnabled"))
 	return _r
 }
 
 // IsAlternate reports whether the object is alternate.
 func (mi *MenuItem) IsAlternate() bool {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isAlternate"))
 	return _r
 }
 
 // IndentationLevel returns the indentation level.
 func (mi *MenuItem) IndentationLevel() int {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[int](objref.IDOf(mi), objc.RegisterName("indentationLevel"))
 	return _r
 }
 
 // Target returns the target.
 func (mi *MenuItem) Target() obj.Object {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("target"))
 	return obj.Wrap(_r)
 }
 
 // Tag returns the tag.
 func (mi *MenuItem) Tag() int {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[int](objref.IDOf(mi), objc.RegisterName("tag"))
 	return _r
 }
 
 // RepresentedObject returns the represented object.
 func (mi *MenuItem) RepresentedObject() obj.Object {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("representedObject"))
 	return obj.Wrap(_r)
 }
 
 // View returns the view.
 func (mi *MenuItem) View() *View {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
 // IsHighlighted reports whether the object is highlighted.
 func (mi *MenuItem) IsHighlighted() bool {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isHighlighted"))
 	return _r
 }
 
 // IsHidden reports whether the object is hidden.
 func (mi *MenuItem) IsHidden() bool {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isHidden"))
 	return _r
 }
 
 // IsHiddenOrHasHiddenAncestor reports whether the object is hidden or has hidden ancestor.
 func (mi *MenuItem) IsHiddenOrHasHiddenAncestor() bool {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isHiddenOrHasHiddenAncestor"))
 	return _r
 }
 
 // ToolTip returns the tool tip.
 func (mi *MenuItem) ToolTip() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("toolTip"))
 	if _r == 0 {
 		return ""
@@ -426,23 +477,27 @@ func (mi *MenuItem) ToolTip() string {
 
 // Badge returns a badge used to provide additional quantitative information specific to the menu item, such as the number of available updates. The default value of this property is `nil`.
 func (mi *MenuItem) Badge() *MenuItemBadge {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("badge"))
 	return MenuItemBadgeFromID(_r)
 }
 
 // SetMnemonicLocation sets the character of the menu item title at location that is to be underlined.
 func (mi *MenuItem) SetMnemonicLocation(location int) {
+	defer runtime.KeepAlive(mi)
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setMnemonicLocation:"), location)
 }
 
 // MnemonicLocation returns the position of the underlined character in the menu item title used as a mnemonic.
 func (mi *MenuItem) MnemonicLocation() int {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[int](objref.IDOf(mi), objc.RegisterName("mnemonicLocation"))
 	return _r
 }
 
 // Mnemonic returns the character in the menu item title that appears underlined for use as a mnemonic.
 func (mi *MenuItem) Mnemonic() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("mnemonic"))
 	if _r == 0 {
 		return ""
@@ -452,5 +507,6 @@ func (mi *MenuItem) Mnemonic() string {
 
 // SetTitleWithMnemonic sets the title of a menu item with a character denoting an access key.
 func (mi *MenuItem) SetTitleWithMnemonic(stringWithAmpersand string) {
+	defer runtime.KeepAlive(mi)
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
 }

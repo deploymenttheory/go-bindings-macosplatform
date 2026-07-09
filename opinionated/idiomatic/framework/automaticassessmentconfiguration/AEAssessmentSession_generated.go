@@ -5,8 +5,11 @@
 package automaticassessmentconfiguration
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,55 +50,77 @@ func assessmentSessionAdopt(id objc.ID) *AssessmentSession {
 
 // Description returns the object's -description text.
 func (as *AssessmentSession) Description() string {
+	defer runtime.KeepAlive(as)
 	return rt.Description(objref.IDOf(as))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (as *AssessmentSession) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(as), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (as *AssessmentSession) IsKind(className string) bool {
+	defer runtime.KeepAlive(as)
 	return rt.IsKind(objref.IDOf(as), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (as *AssessmentSession) String() string {
+	defer runtime.KeepAlive(as)
 	return rt.Description(objref.IDOf(as))
 }
 
 // NewAssessmentSessionWithConfiguration creates a new assessment session.
 func NewAssessmentSessionWithConfiguration(configuration *AssessmentConfiguration) *AssessmentSession {
+	defer runtime.KeepAlive(configuration)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AEAssessmentSession")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
 	return assessmentSessionAdopt(_id)
 }
 
+// WithDelegate sets a delegate to which the session provides state change updates.
+func (as *AssessmentSession) WithDelegate(delegate AssessmentSessionDelegate) *AssessmentSession {
+	_shim := newAssessmentSessionDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(as), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(as), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return as
+}
+
 // Begin starts an assessment session.
 func (as *AssessmentSession) Begin() {
+	defer runtime.KeepAlive(as)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("begin"))
 }
 
 // End ends an assessment session.
 func (as *AssessmentSession) End() {
+	defer runtime.KeepAlive(as)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("end"))
 }
 
 // UpdateToConfiguration changes the session to use the specified configuration.
 func (as *AssessmentSession) UpdateToConfiguration(configuration *AssessmentConfiguration) {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("updateToConfiguration:"), objref.IDOf(configuration))
 }
 
 // Configuration returns the configuration.
 func (as *AssessmentSession) Configuration() *AssessmentConfiguration {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("configuration"))
 	return AssessmentConfigurationFromID(_r)
 }
 
 // IsActive reports whether the object is active.
 func (as *AssessmentSession) IsActive() bool {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[bool](objref.IDOf(as), objc.RegisterName("isActive"))
 	return _r
 }

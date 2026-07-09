@@ -34,7 +34,8 @@ func buildAbstractBaseIndex(framework *meta.FrameworkMeta, prefix string) abstra
 		if class.Availability.IsUnavailable || class.Super == "" {
 			continue
 		}
-		if superCls, ok := framework.Classes[class.Super]; ok && !superCls.Availability.IsUnavailable {
+		if superCls, ok := framework.Classes[class.Super]; ok &&
+			!superCls.Availability.IsUnavailable {
 			bases[class.Super] = trialTypeName(class.Super, prefix)
 		}
 	}
@@ -63,11 +64,26 @@ func adoptHelperName(goTypeName string) string {
 
 // safeParamName renames a parameter that would shadow one of the package
 // aliases the generated bodies use (e.g. a parameter literally named "obj"
-// would hide the obj package). The trailing underscore keeps it a valid,
-// distinct identifier.
+// would hide the obj package), and substitutes a readable name for the
+// ugliest reserved-word escapes ParamName produces (string_ / bytes_ / len_ /
+// id_). A collision with another parameter of the same method is handled by
+// the caller's usedParamNames dedup, so a substitution never duplicates a
+// name.
 func safeParamName(name string) string {
 	switch name {
-	case "obj", "rt", "errkit", "objref", "purego", "objc", "ebipurego", "unsafe", "context":
+	case "string_":
+		return "str"
+	case "bytes_":
+		return "data"
+	case "len_":
+		return "length"
+	case "id_":
+		return "identifier"
+	case "error_":
+		return "err"
+	case "obj":
+		return "object"
+	case "rt", "errkit", "objref", "purego", "objc", "ebipurego", "unsafe", "context":
 		return name + "_"
 	}
 	return name

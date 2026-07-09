@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func virtioSocketConnectionAdopt(id objc.ID) *VirtioSocketConnection {
 
 // Description returns the object's -description text.
 func (vsc *VirtioSocketConnection) Description() string {
+	defer runtime.KeepAlive(vsc)
 	return rt.Description(objref.IDOf(vsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vsc *VirtioSocketConnection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vsc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vsc *VirtioSocketConnection) IsKind(className string) bool {
+	defer runtime.KeepAlive(vsc)
 	return rt.IsKind(objref.IDOf(vsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vsc *VirtioSocketConnection) String() string {
+	defer runtime.KeepAlive(vsc)
 	return rt.Description(objref.IDOf(vsc))
 }
 
@@ -74,23 +81,27 @@ func NewVirtioSocketConnection() *VirtioSocketConnection {
 
 // Close close the file descriptor associated with the socket.
 func (vsc *VirtioSocketConnection) Close() {
+	defer runtime.KeepAlive(vsc)
 	objc.Send[objc.ID](objref.IDOf(vsc), objc.RegisterName("close"))
 }
 
 // DestinationPort returns the destination port number of the connection.
 func (vsc *VirtioSocketConnection) DestinationPort() uint32 {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[uint32](objref.IDOf(vsc), objc.RegisterName("destinationPort"))
 	return _r
 }
 
 // SourcePort returns the source port number of the connection.
 func (vsc *VirtioSocketConnection) SourcePort() uint32 {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[uint32](objref.IDOf(vsc), objc.RegisterName("sourcePort"))
 	return _r
 }
 
 // FileDescriptor returns the file descriptor associated with the socket. Data is sent by writing to the file descriptor. Data is received by reading from the file descriptor. A file descriptor of -1 indicates a closed connection. The file descriptor is owned by the VZVirtioSocketConnection. It is automatically closed when the object is destroyed.
 func (vsc *VirtioSocketConnection) FileDescriptor() int {
+	defer runtime.KeepAlive(vsc)
 	_r := objc.Send[int](objref.IDOf(vsc), objc.RegisterName("fileDescriptor"))
 	return _r
 }

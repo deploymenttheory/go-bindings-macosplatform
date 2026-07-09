@@ -5,8 +5,11 @@
 package multipeerconnectivity
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,27 +50,33 @@ func browserViewControllerAdopt(id objc.ID) *BrowserViewController {
 
 // Description returns the object's -description text.
 func (bvc *BrowserViewController) Description() string {
+	defer runtime.KeepAlive(bvc)
 	return rt.Description(objref.IDOf(bvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bvc *BrowserViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bvc *BrowserViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(bvc)
 	return rt.IsKind(objref.IDOf(bvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bvc *BrowserViewController) String() string {
+	defer runtime.KeepAlive(bvc)
 	return rt.Description(objref.IDOf(bvc))
 }
 
 // NewBrowserViewControllerWithServiceTypeSession initializes a browser view controller using the provided service type and session.
 func NewBrowserViewControllerWithServiceTypeSession(serviceType string, session *Session) *BrowserViewController {
+	defer runtime.KeepAlive(session)
 	var _mainthread0 *BrowserViewController
 	purego.Main(func() {
 		_mainthread0 = func() *BrowserViewController {
@@ -81,6 +90,8 @@ func NewBrowserViewControllerWithServiceTypeSession(serviceType string, session 
 
 // NewBrowserViewControllerWithBrowserSession initializes a browser view controller with the provided browser and session.
 func NewBrowserViewControllerWithBrowserSession(browser *NearbyServiceBrowser, session *Session) *BrowserViewController {
+	defer runtime.KeepAlive(browser)
+	defer runtime.KeepAlive(session)
 	var _mainthread0 *BrowserViewController
 	purego.Main(func() {
 		_mainthread0 = func() *BrowserViewController {
@@ -90,6 +101,18 @@ func NewBrowserViewControllerWithBrowserSession(browser *NearbyServiceBrowser, s
 		}()
 	})
 	return _mainthread0
+}
+
+// WithDelegate sets the delegate object that handles browser-view-controller-related events.
+func (bvc *BrowserViewController) WithDelegate(delegate BrowserViewControllerDelegate) *BrowserViewController {
+	_shim := newBrowserViewControllerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(bvc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bvc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return bvc
 }
 
 // WithMinimumNumberOfPeers sets the minimum number of peers that need to be in a session, including the local peer.
@@ -110,6 +133,7 @@ func (bvc *BrowserViewController) WithMaximumNumberOfPeers(maximumNumberOfPeers 
 
 // Browser returns the browser.
 func (bvc *BrowserViewController) Browser() *NearbyServiceBrowser {
+	defer runtime.KeepAlive(bvc)
 	var _mainthread0 *NearbyServiceBrowser
 	purego.Main(func() {
 		_mainthread0 = func() *NearbyServiceBrowser {
@@ -123,6 +147,7 @@ func (bvc *BrowserViewController) Browser() *NearbyServiceBrowser {
 
 // Session returns the session.
 func (bvc *BrowserViewController) Session() *Session {
+	defer runtime.KeepAlive(bvc)
 	var _mainthread0 *Session
 	purego.Main(func() {
 		_mainthread0 = func() *Session {
@@ -136,6 +161,7 @@ func (bvc *BrowserViewController) Session() *Session {
 
 // MinimumNumberOfPeers returns the minimum number of peers.
 func (bvc *BrowserViewController) MinimumNumberOfPeers() int {
+	defer runtime.KeepAlive(bvc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -149,6 +175,7 @@ func (bvc *BrowserViewController) MinimumNumberOfPeers() int {
 
 // MaximumNumberOfPeers returns the maximum number of peers.
 func (bvc *BrowserViewController) MaximumNumberOfPeers() int {
+	defer runtime.KeepAlive(bvc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {

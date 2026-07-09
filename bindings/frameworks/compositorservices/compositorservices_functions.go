@@ -141,8 +141,8 @@ func CpDrawableAddMtl4RenderContext(drawable unsafe.Pointer) unsafe.Pointer {
 }
 
 // C function: cp_drawable_add_render_context
-func CpDrawableAddRenderContext(drawable unsafe.Pointer, cmd_buffer metal.MTLCommandBuffer) unsafe.Pointer {
-	return _cp_drawable_add_render_context(drawable, cmd_buffer)
+func CpDrawableAddRenderContext(drawable unsafe.Pointer, cmdBuffer metal.MTLCommandBuffer) unsafe.Pointer {
+	return _cp_drawable_add_render_context(drawable, cmdBuffer)
 }
 
 // C function: cp_drawable_add_tracking_area
@@ -151,23 +151,23 @@ func CpDrawableAddTrackingArea(drawable unsafe.Pointer, identifier uint64) unsaf
 }
 
 // C function: cp_drawable_array_get_count
-func CpDrawableArrayGetCount(drawable_array unsafe.Pointer) uint {
-	return _cp_drawable_array_get_count(drawable_array)
+func CpDrawableArrayGetCount(drawableArray unsafe.Pointer) uint {
+	return _cp_drawable_array_get_count(drawableArray)
 }
 
 // C function: cp_drawable_array_get_drawable
-func CpDrawableArrayGetDrawable(drawable_array unsafe.Pointer, index uint) unsafe.Pointer {
-	return _cp_drawable_array_get_drawable(drawable_array, index)
+func CpDrawableArrayGetDrawable(drawableArray unsafe.Pointer, index uint) unsafe.Pointer {
+	return _cp_drawable_array_get_drawable(drawableArray, index)
 }
 
 // C function: cp_drawable_compute_projection
-func CpDrawableComputeProjection(drawable unsafe.Pointer, normalized_device_coordinates_convension Cp_axis_direction_convention, view_index uint) unsafe.Pointer {
-	return _cp_drawable_compute_projection(drawable, normalized_device_coordinates_convension, view_index)
+func CpDrawableComputeProjection(drawable unsafe.Pointer, normalizedDeviceCoordinatesConvension Cp_axis_direction_convention, viewIndex uint) unsafe.Pointer {
+	return _cp_drawable_compute_projection(drawable, normalizedDeviceCoordinatesConvension, viewIndex)
 }
 
 // C function: cp_drawable_encode_present
-func CpDrawableEncodePresent(drawable unsafe.Pointer, command_buffer metal.MTLCommandBuffer) {
-	_cp_drawable_encode_present(drawable, command_buffer)
+func CpDrawableEncodePresent(drawable unsafe.Pointer, commandBuffer metal.MTLCommandBuffer) {
+	_cp_drawable_encode_present(drawable, commandBuffer)
 }
 
 // C function: cp_drawable_get_color_texture
@@ -260,43 +260,43 @@ func CpDrawableMtl4EncodePresent(drawable unsafe.Pointer) {
 }
 
 // C function: cp_drawable_render_context_draw_mask_on_stencil_attachment
-func CpDrawableRenderContextDrawMaskOnStencilAttachment(render_context unsafe.Pointer, command_encoder metal.MTLRenderCommandEncoder, value uint8) {
-	_cp_drawable_render_context_draw_mask_on_stencil_attachment(render_context, command_encoder, value)
+func CpDrawableRenderContextDrawMaskOnStencilAttachment(renderContext unsafe.Pointer, commandEncoder metal.MTLRenderCommandEncoder, value uint8) {
+	_cp_drawable_render_context_draw_mask_on_stencil_attachment(renderContext, commandEncoder, value)
 }
 
 // C function: cp_drawable_render_context_end_encoding
-func CpDrawableRenderContextEndEncoding(render_context unsafe.Pointer, command_encoder metal.MTLRenderCommandEncoder) {
-	_cp_drawable_render_context_end_encoding(render_context, command_encoder)
+func CpDrawableRenderContextEndEncoding(renderContext unsafe.Pointer, commandEncoder metal.MTLRenderCommandEncoder) {
+	_cp_drawable_render_context_end_encoding(renderContext, commandEncoder)
 }
 
 // C function: cp_drawable_render_context_mtl4_draw_mask_on_stencil_attachment
-func CpDrawableRenderContextMtl4DrawMaskOnStencilAttachment(render_context unsafe.Pointer, command_encoder metal.MTL4RenderCommandEncoder, value uint8) {
-	_cp_drawable_render_context_mtl4_draw_mask_on_stencil_attachment(render_context, command_encoder, value)
+func CpDrawableRenderContextMtl4DrawMaskOnStencilAttachment(renderContext unsafe.Pointer, commandEncoder metal.MTL4RenderCommandEncoder, value uint8) {
+	_cp_drawable_render_context_mtl4_draw_mask_on_stencil_attachment(renderContext, commandEncoder, value)
 }
 
 // C function: cp_drawable_render_context_mtl4_end_encoding
-func CpDrawableRenderContextMtl4EndEncoding(render_context unsafe.Pointer, command_encoder metal.MTL4RenderCommandEncoder) {
-	_cp_drawable_render_context_mtl4_end_encoding(render_context, command_encoder)
+func CpDrawableRenderContextMtl4EndEncoding(renderContext unsafe.Pointer, commandEncoder metal.MTL4RenderCommandEncoder) {
+	_cp_drawable_render_context_mtl4_end_encoding(renderContext, commandEncoder)
 }
 
 // C function: cp_drawable_set_depth_range
-func CpDrawableSetDepthRange(drawable unsafe.Pointer, depth_range unsafe.Pointer) {
-	_cp_drawable_set_depth_range(drawable, depth_range)
+func CpDrawableSetDepthRange(drawable unsafe.Pointer, depthRange unsafe.Pointer) {
+	_cp_drawable_set_depth_range(drawable, depthRange)
 }
 
 // C function: cp_drawable_set_device_anchor
-func CpDrawableSetDeviceAnchor(drawable unsafe.Pointer, device_anchor *foundation.NSObject) {
-	_cp_drawable_set_device_anchor(drawable, device_anchor.Ptr())
+func CpDrawableSetDeviceAnchor(drawable unsafe.Pointer, deviceAnchor *foundation.NSObject) {
+	_cp_drawable_set_device_anchor(drawable, deviceAnchor.Ptr())
 }
 
 // C function: cp_frame_binocular_frustum_matrix
-func CpFrameBinocularFrustumMatrix(frame unsafe.Pointer, convention Cp_axis_direction_convention, increase_tangents unsafe.Pointer, depth_range unsafe.Pointer) unsafe.Pointer {
-	return _cp_frame_binocular_frustum_matrix(frame, convention, increase_tangents, depth_range)
+func CpFrameBinocularFrustumMatrix(frame unsafe.Pointer, convention Cp_axis_direction_convention, increaseTangents unsafe.Pointer, depthRange unsafe.Pointer) unsafe.Pointer {
+	return _cp_frame_binocular_frustum_matrix(frame, convention, increaseTangents, depthRange)
 }
 
 // C function: cp_frame_binocular_frustum_matrix_for_drawable_target
-func CpFrameBinocularFrustumMatrixForDrawableTarget(frame unsafe.Pointer, drawable_target Cp_drawable_target, convention Cp_axis_direction_convention, increase_tangents unsafe.Pointer, depth_range unsafe.Pointer) unsafe.Pointer {
-	return _cp_frame_binocular_frustum_matrix_for_drawable_target(frame, drawable_target, convention, increase_tangents, depth_range)
+func CpFrameBinocularFrustumMatrixForDrawableTarget(frame unsafe.Pointer, drawableTarget Cp_drawable_target, convention Cp_axis_direction_convention, increaseTangents unsafe.Pointer, depthRange unsafe.Pointer) unsafe.Pointer {
+	return _cp_frame_binocular_frustum_matrix_for_drawable_target(frame, drawableTarget, convention, increaseTangents, depthRange)
 }
 
 // C function: cp_frame_end_submission
@@ -310,8 +310,8 @@ func CpFrameEndUpdate(frame unsafe.Pointer) {
 }
 
 // C function: cp_frame_get_drawable_target_view_count
-func CpFrameGetDrawableTargetViewCount(frame unsafe.Pointer, drawable_target Cp_drawable_target) uint {
-	return _cp_frame_get_drawable_target_view_count(frame, drawable_target)
+func CpFrameGetDrawableTargetViewCount(frame unsafe.Pointer, drawableTarget Cp_drawable_target) uint {
+	return _cp_frame_get_drawable_target_view_count(frame, drawableTarget)
 }
 
 // C function: cp_frame_get_frame_index
@@ -320,13 +320,13 @@ func CpFrameGetFrameIndex(frame unsafe.Pointer) uint64 {
 }
 
 // C function: cp_frame_monocular_frustum_matrix
-func CpFrameMonocularFrustumMatrix(frame unsafe.Pointer, normalized_device_coordinates_convension Cp_axis_direction_convention, view_index uint, increase_tangents unsafe.Pointer, depth_range unsafe.Pointer) unsafe.Pointer {
-	return _cp_frame_monocular_frustum_matrix(frame, normalized_device_coordinates_convension, view_index, increase_tangents, depth_range)
+func CpFrameMonocularFrustumMatrix(frame unsafe.Pointer, normalizedDeviceCoordinatesConvension Cp_axis_direction_convention, viewIndex uint, increaseTangents unsafe.Pointer, depthRange unsafe.Pointer) unsafe.Pointer {
+	return _cp_frame_monocular_frustum_matrix(frame, normalizedDeviceCoordinatesConvension, viewIndex, increaseTangents, depthRange)
 }
 
 // C function: cp_frame_monocular_frustum_matrix_for_drawable_target
-func CpFrameMonocularFrustumMatrixForDrawableTarget(frame unsafe.Pointer, drawable_target Cp_drawable_target, normalized_device_coordinates_convension Cp_axis_direction_convention, view_index uint, increase_tangents unsafe.Pointer, depth_range unsafe.Pointer) unsafe.Pointer {
-	return _cp_frame_monocular_frustum_matrix_for_drawable_target(frame, drawable_target, normalized_device_coordinates_convension, view_index, increase_tangents, depth_range)
+func CpFrameMonocularFrustumMatrixForDrawableTarget(frame unsafe.Pointer, drawableTarget Cp_drawable_target, normalizedDeviceCoordinatesConvension Cp_axis_direction_convention, viewIndex uint, increaseTangents unsafe.Pointer, depthRange unsafe.Pointer) unsafe.Pointer {
+	return _cp_frame_monocular_frustum_matrix_for_drawable_target(frame, drawableTarget, normalizedDeviceCoordinatesConvension, viewIndex, increaseTangents, depthRange)
 }
 
 // C function: cp_frame_predict_timing
@@ -350,88 +350,88 @@ func CpFrameStartUpdate(frame unsafe.Pointer) {
 }
 
 // C function: cp_frame_timing_get_optimal_input_time
-func CpFrameTimingGetOptimalInputTime(frame_timing unsafe.Pointer) CpTime {
-	return _cp_frame_timing_get_optimal_input_time(frame_timing)
+func CpFrameTimingGetOptimalInputTime(frameTiming unsafe.Pointer) CpTime {
+	return _cp_frame_timing_get_optimal_input_time(frameTiming)
 }
 
 // C function: cp_frame_timing_get_presentation_time
-func CpFrameTimingGetPresentationTime(frame_timing unsafe.Pointer) CpTime {
-	return _cp_frame_timing_get_presentation_time(frame_timing)
+func CpFrameTimingGetPresentationTime(frameTiming unsafe.Pointer) CpTime {
+	return _cp_frame_timing_get_presentation_time(frameTiming)
 }
 
 // C function: cp_frame_timing_get_rendering_deadline
-func CpFrameTimingGetRenderingDeadline(frame_timing unsafe.Pointer) CpTime {
-	return _cp_frame_timing_get_rendering_deadline(frame_timing)
+func CpFrameTimingGetRenderingDeadline(frameTiming unsafe.Pointer) CpTime {
+	return _cp_frame_timing_get_rendering_deadline(frameTiming)
 }
 
 // C function: cp_frame_timing_get_trackable_anchor_time
-func CpFrameTimingGetTrackableAnchorTime(frame_timing unsafe.Pointer) CpTime {
-	return _cp_frame_timing_get_trackable_anchor_time(frame_timing)
+func CpFrameTimingGetTrackableAnchorTime(frameTiming unsafe.Pointer) CpTime {
+	return _cp_frame_timing_get_trackable_anchor_time(frameTiming)
 }
 
 // C function: cp_layer_renderer_capabilities_drawable_render_context_supported_stencil_format
-func CpLayerRendererCapabilitiesDrawableRenderContextSupportedStencilFormat(layer_capabilities *CP_OBJECT_cp_layer_renderer_capabilities, index uint) metal.MTLPixelFormat {
-	return _cp_layer_renderer_capabilities_drawable_render_context_supported_stencil_format(layer_capabilities.Ptr(), index)
+func CpLayerRendererCapabilitiesDrawableRenderContextSupportedStencilFormat(layerCapabilities *CP_OBJECT_cp_layer_renderer_capabilities, index uint) metal.MTLPixelFormat {
+	return _cp_layer_renderer_capabilities_drawable_render_context_supported_stencil_format(layerCapabilities.Ptr(), index)
 }
 
 // C function: cp_layer_renderer_capabilities_drawable_render_context_supported_stencil_formats_count
-func CpLayerRendererCapabilitiesDrawableRenderContextSupportedStencilFormatsCount(layer_capabilities *CP_OBJECT_cp_layer_renderer_capabilities) uint {
-	return _cp_layer_renderer_capabilities_drawable_render_context_supported_stencil_formats_count(layer_capabilities.Ptr())
+func CpLayerRendererCapabilitiesDrawableRenderContextSupportedStencilFormatsCount(layerCapabilities *CP_OBJECT_cp_layer_renderer_capabilities) uint {
+	return _cp_layer_renderer_capabilities_drawable_render_context_supported_stencil_formats_count(layerCapabilities.Ptr())
 }
 
 // C function: cp_layer_renderer_capabilities_get_default_render_quality
-func CpLayerRendererCapabilitiesGetDefaultRenderQuality(layer_capabilities *CP_OBJECT_cp_layer_renderer_capabilities) float32 {
-	return _cp_layer_renderer_capabilities_get_default_render_quality(layer_capabilities.Ptr())
+func CpLayerRendererCapabilitiesGetDefaultRenderQuality(layerCapabilities *CP_OBJECT_cp_layer_renderer_capabilities) float32 {
+	return _cp_layer_renderer_capabilities_get_default_render_quality(layerCapabilities.Ptr())
 }
 
 // C function: cp_layer_renderer_capabilities_supported_color_format_with_options
-func CpLayerRendererCapabilitiesSupportedColorFormatWithOptions(layer_capabilities *CP_OBJECT_cp_layer_renderer_capabilities, options Cp_supported_color_formats_options, index uint) metal.MTLPixelFormat {
-	return _cp_layer_renderer_capabilities_supported_color_format_with_options(layer_capabilities.Ptr(), options, index)
+func CpLayerRendererCapabilitiesSupportedColorFormatWithOptions(layerCapabilities *CP_OBJECT_cp_layer_renderer_capabilities, options Cp_supported_color_formats_options, index uint) metal.MTLPixelFormat {
+	return _cp_layer_renderer_capabilities_supported_color_format_with_options(layerCapabilities.Ptr(), options, index)
 }
 
 // C function: cp_layer_renderer_capabilities_supported_color_formats_count_with_options
-func CpLayerRendererCapabilitiesSupportedColorFormatsCountWithOptions(layer_capabilities *CP_OBJECT_cp_layer_renderer_capabilities, options Cp_supported_color_formats_options) uint {
-	return _cp_layer_renderer_capabilities_supported_color_formats_count_with_options(layer_capabilities.Ptr(), options)
+func CpLayerRendererCapabilitiesSupportedColorFormatsCountWithOptions(layerCapabilities *CP_OBJECT_cp_layer_renderer_capabilities, options Cp_supported_color_formats_options) uint {
+	return _cp_layer_renderer_capabilities_supported_color_formats_count_with_options(layerCapabilities.Ptr(), options)
 }
 
 // C function: cp_layer_renderer_capabilities_supported_depth_format
-func CpLayerRendererCapabilitiesSupportedDepthFormat(layer_capabilities *CP_OBJECT_cp_layer_renderer_capabilities, index uint) metal.MTLPixelFormat {
-	return _cp_layer_renderer_capabilities_supported_depth_format(layer_capabilities.Ptr(), index)
+func CpLayerRendererCapabilitiesSupportedDepthFormat(layerCapabilities *CP_OBJECT_cp_layer_renderer_capabilities, index uint) metal.MTLPixelFormat {
+	return _cp_layer_renderer_capabilities_supported_depth_format(layerCapabilities.Ptr(), index)
 }
 
 // C function: cp_layer_renderer_capabilities_supported_depth_formats_count
-func CpLayerRendererCapabilitiesSupportedDepthFormatsCount(layer_capabilities *CP_OBJECT_cp_layer_renderer_capabilities) uint {
-	return _cp_layer_renderer_capabilities_supported_depth_formats_count(layer_capabilities.Ptr())
+func CpLayerRendererCapabilitiesSupportedDepthFormatsCount(layerCapabilities *CP_OBJECT_cp_layer_renderer_capabilities) uint {
+	return _cp_layer_renderer_capabilities_supported_depth_formats_count(layerCapabilities.Ptr())
 }
 
 // C function: cp_layer_renderer_capabilities_supported_layout
-func CpLayerRendererCapabilitiesSupportedLayout(layer_capabilities *CP_OBJECT_cp_layer_renderer_capabilities, options Cp_supported_layouts_options, index uint) Cp_layer_renderer_layout {
-	return _cp_layer_renderer_capabilities_supported_layout(layer_capabilities.Ptr(), options, index)
+func CpLayerRendererCapabilitiesSupportedLayout(layerCapabilities *CP_OBJECT_cp_layer_renderer_capabilities, options Cp_supported_layouts_options, index uint) Cp_layer_renderer_layout {
+	return _cp_layer_renderer_capabilities_supported_layout(layerCapabilities.Ptr(), options, index)
 }
 
 // C function: cp_layer_renderer_capabilities_supported_layouts_count
-func CpLayerRendererCapabilitiesSupportedLayoutsCount(layer_capabilities *CP_OBJECT_cp_layer_renderer_capabilities, options Cp_supported_layouts_options) uint {
-	return _cp_layer_renderer_capabilities_supported_layouts_count(layer_capabilities.Ptr(), options)
+func CpLayerRendererCapabilitiesSupportedLayoutsCount(layerCapabilities *CP_OBJECT_cp_layer_renderer_capabilities, options Cp_supported_layouts_options) uint {
+	return _cp_layer_renderer_capabilities_supported_layouts_count(layerCapabilities.Ptr(), options)
 }
 
 // C function: cp_layer_renderer_capabilities_supported_minimum_near_plane_distance
-func CpLayerRendererCapabilitiesSupportedMinimumNearPlaneDistance(layer_capabilities *CP_OBJECT_cp_layer_renderer_capabilities) float32 {
-	return _cp_layer_renderer_capabilities_supported_minimum_near_plane_distance(layer_capabilities.Ptr())
+func CpLayerRendererCapabilitiesSupportedMinimumNearPlaneDistance(layerCapabilities *CP_OBJECT_cp_layer_renderer_capabilities) float32 {
+	return _cp_layer_renderer_capabilities_supported_minimum_near_plane_distance(layerCapabilities.Ptr())
 }
 
 // C function: cp_layer_renderer_capabilities_supported_tracking_areas_format
-func CpLayerRendererCapabilitiesSupportedTrackingAreasFormat(layer_capabilities *CP_OBJECT_cp_layer_renderer_capabilities, index uint) metal.MTLPixelFormat {
-	return _cp_layer_renderer_capabilities_supported_tracking_areas_format(layer_capabilities.Ptr(), index)
+func CpLayerRendererCapabilitiesSupportedTrackingAreasFormat(layerCapabilities *CP_OBJECT_cp_layer_renderer_capabilities, index uint) metal.MTLPixelFormat {
+	return _cp_layer_renderer_capabilities_supported_tracking_areas_format(layerCapabilities.Ptr(), index)
 }
 
 // C function: cp_layer_renderer_capabilities_supported_tracking_areas_formats_count
-func CpLayerRendererCapabilitiesSupportedTrackingAreasFormatsCount(layer_capabilities *CP_OBJECT_cp_layer_renderer_capabilities) uint {
-	return _cp_layer_renderer_capabilities_supported_tracking_areas_formats_count(layer_capabilities.Ptr())
+func CpLayerRendererCapabilitiesSupportedTrackingAreasFormatsCount(layerCapabilities *CP_OBJECT_cp_layer_renderer_capabilities) uint {
+	return _cp_layer_renderer_capabilities_supported_tracking_areas_formats_count(layerCapabilities.Ptr())
 }
 
 // C function: cp_layer_renderer_capabilities_supports_foveation
-func CpLayerRendererCapabilitiesSupportsFoveation(layer_capabilities *CP_OBJECT_cp_layer_renderer_capabilities) bool {
-	return _cp_layer_renderer_capabilities_supports_foveation(layer_capabilities.Ptr())
+func CpLayerRendererCapabilitiesSupportsFoveation(layerCapabilities *CP_OBJECT_cp_layer_renderer_capabilities) bool {
+	return _cp_layer_renderer_capabilities_supports_foveation(layerCapabilities.Ptr())
 }
 
 // C function: cp_layer_renderer_configuration_get_color_format
@@ -505,48 +505,48 @@ func CpLayerRendererConfigurationGetTrackingAreasUsage(configuration *CP_OBJECT_
 }
 
 // C function: cp_layer_renderer_configuration_set_color_format
-func CpLayerRendererConfigurationSetColorFormat(configuration *CP_OBJECT_cp_layer_renderer_configuration, color_format metal.MTLPixelFormat) {
-	_cp_layer_renderer_configuration_set_color_format(configuration.Ptr(), color_format)
+func CpLayerRendererConfigurationSetColorFormat(configuration *CP_OBJECT_cp_layer_renderer_configuration, colorFormat metal.MTLPixelFormat) {
+	_cp_layer_renderer_configuration_set_color_format(configuration.Ptr(), colorFormat)
 }
 
 // C function: cp_layer_renderer_configuration_set_color_usage
-func CpLayerRendererConfigurationSetColorUsage(configuration *CP_OBJECT_cp_layer_renderer_configuration, color_usage metal.MTLTextureUsage) {
-	_cp_layer_renderer_configuration_set_color_usage(configuration.Ptr(), color_usage)
+func CpLayerRendererConfigurationSetColorUsage(configuration *CP_OBJECT_cp_layer_renderer_configuration, colorUsage metal.MTLTextureUsage) {
+	_cp_layer_renderer_configuration_set_color_usage(configuration.Ptr(), colorUsage)
 }
 
 // C function: cp_layer_renderer_configuration_set_default_depth_range
-func CpLayerRendererConfigurationSetDefaultDepthRange(configuration *CP_OBJECT_cp_layer_renderer_configuration, depth_range unsafe.Pointer) {
-	_cp_layer_renderer_configuration_set_default_depth_range(configuration.Ptr(), depth_range)
+func CpLayerRendererConfigurationSetDefaultDepthRange(configuration *CP_OBJECT_cp_layer_renderer_configuration, depthRange unsafe.Pointer) {
+	_cp_layer_renderer_configuration_set_default_depth_range(configuration.Ptr(), depthRange)
 }
 
 // C function: cp_layer_renderer_configuration_set_depth_format
-func CpLayerRendererConfigurationSetDepthFormat(configuration *CP_OBJECT_cp_layer_renderer_configuration, depth_format metal.MTLPixelFormat) {
-	_cp_layer_renderer_configuration_set_depth_format(configuration.Ptr(), depth_format)
+func CpLayerRendererConfigurationSetDepthFormat(configuration *CP_OBJECT_cp_layer_renderer_configuration, depthFormat metal.MTLPixelFormat) {
+	_cp_layer_renderer_configuration_set_depth_format(configuration.Ptr(), depthFormat)
 }
 
 // C function: cp_layer_renderer_configuration_set_depth_usage
-func CpLayerRendererConfigurationSetDepthUsage(configuration *CP_OBJECT_cp_layer_renderer_configuration, depth_usage metal.MTLTextureUsage) {
-	_cp_layer_renderer_configuration_set_depth_usage(configuration.Ptr(), depth_usage)
+func CpLayerRendererConfigurationSetDepthUsage(configuration *CP_OBJECT_cp_layer_renderer_configuration, depthUsage metal.MTLTextureUsage) {
+	_cp_layer_renderer_configuration_set_depth_usage(configuration.Ptr(), depthUsage)
 }
 
 // C function: cp_layer_renderer_configuration_set_drawable_render_context_raster_sample_count
-func CpLayerRendererConfigurationSetDrawableRenderContextRasterSampleCount(configuration *CP_OBJECT_cp_layer_renderer_configuration, raster_sample_count int) {
-	_cp_layer_renderer_configuration_set_drawable_render_context_raster_sample_count(configuration.Ptr(), raster_sample_count)
+func CpLayerRendererConfigurationSetDrawableRenderContextRasterSampleCount(configuration *CP_OBJECT_cp_layer_renderer_configuration, rasterSampleCount int) {
+	_cp_layer_renderer_configuration_set_drawable_render_context_raster_sample_count(configuration.Ptr(), rasterSampleCount)
 }
 
 // C function: cp_layer_renderer_configuration_set_drawable_render_context_stencil_format
-func CpLayerRendererConfigurationSetDrawableRenderContextStencilFormat(configuration *CP_OBJECT_cp_layer_renderer_configuration, stencil_format metal.MTLPixelFormat) {
-	_cp_layer_renderer_configuration_set_drawable_render_context_stencil_format(configuration.Ptr(), stencil_format)
+func CpLayerRendererConfigurationSetDrawableRenderContextStencilFormat(configuration *CP_OBJECT_cp_layer_renderer_configuration, stencilFormat metal.MTLPixelFormat) {
+	_cp_layer_renderer_configuration_set_drawable_render_context_stencil_format(configuration.Ptr(), stencilFormat)
 }
 
 // C function: cp_layer_renderer_configuration_set_foveation_enabled
-func CpLayerRendererConfigurationSetFoveationEnabled(configuration *CP_OBJECT_cp_layer_renderer_configuration, foveation_enabled bool) {
-	_cp_layer_renderer_configuration_set_foveation_enabled(configuration.Ptr(), foveation_enabled)
+func CpLayerRendererConfigurationSetFoveationEnabled(configuration *CP_OBJECT_cp_layer_renderer_configuration, foveationEnabled bool) {
+	_cp_layer_renderer_configuration_set_foveation_enabled(configuration.Ptr(), foveationEnabled)
 }
 
 // C function: cp_layer_renderer_configuration_set_generate_flipped_rasterization_rate_maps
-func CpLayerRendererConfigurationSetGenerateFlippedRasterizationRateMaps(configuration *CP_OBJECT_cp_layer_renderer_configuration, generate_flipped_rasterization_rate_maps bool) {
-	_cp_layer_renderer_configuration_set_generate_flipped_rasterization_rate_maps(configuration.Ptr(), generate_flipped_rasterization_rate_maps)
+func CpLayerRendererConfigurationSetGenerateFlippedRasterizationRateMaps(configuration *CP_OBJECT_cp_layer_renderer_configuration, generateFlippedRasterizationRateMaps bool) {
+	_cp_layer_renderer_configuration_set_generate_flipped_rasterization_rate_maps(configuration.Ptr(), generateFlippedRasterizationRateMaps)
 }
 
 // C function: cp_layer_renderer_configuration_set_layout
@@ -555,28 +555,28 @@ func CpLayerRendererConfigurationSetLayout(configuration *CP_OBJECT_cp_layer_ren
 }
 
 // C function: cp_layer_renderer_configuration_set_max_render_quality
-func CpLayerRendererConfigurationSetMaxRenderQuality(configuration *CP_OBJECT_cp_layer_renderer_configuration, render_quality float32) {
-	_cp_layer_renderer_configuration_set_max_render_quality(configuration.Ptr(), render_quality)
+func CpLayerRendererConfigurationSetMaxRenderQuality(configuration *CP_OBJECT_cp_layer_renderer_configuration, renderQuality float32) {
+	_cp_layer_renderer_configuration_set_max_render_quality(configuration.Ptr(), renderQuality)
 }
 
 // C function: cp_layer_renderer_configuration_set_supports_mtl4
-func CpLayerRendererConfigurationSetSupportsMtl4(configuration *CP_OBJECT_cp_layer_renderer_configuration, supports_mtl4 bool) {
-	_cp_layer_renderer_configuration_set_supports_mtl4(configuration.Ptr(), supports_mtl4)
+func CpLayerRendererConfigurationSetSupportsMtl4(configuration *CP_OBJECT_cp_layer_renderer_configuration, supportsMtl4 bool) {
+	_cp_layer_renderer_configuration_set_supports_mtl4(configuration.Ptr(), supportsMtl4)
 }
 
 // C function: cp_layer_renderer_configuration_set_tracking_areas_format
-func CpLayerRendererConfigurationSetTrackingAreasFormat(configuration *CP_OBJECT_cp_layer_renderer_configuration, tracking_areas_format metal.MTLPixelFormat) {
-	_cp_layer_renderer_configuration_set_tracking_areas_format(configuration.Ptr(), tracking_areas_format)
+func CpLayerRendererConfigurationSetTrackingAreasFormat(configuration *CP_OBJECT_cp_layer_renderer_configuration, trackingAreasFormat metal.MTLPixelFormat) {
+	_cp_layer_renderer_configuration_set_tracking_areas_format(configuration.Ptr(), trackingAreasFormat)
 }
 
 // C function: cp_layer_renderer_configuration_set_tracking_areas_usage
-func CpLayerRendererConfigurationSetTrackingAreasUsage(configuration *CP_OBJECT_cp_layer_renderer_configuration, tracking_areas_usage metal.MTLTextureUsage) {
-	_cp_layer_renderer_configuration_set_tracking_areas_usage(configuration.Ptr(), tracking_areas_usage)
+func CpLayerRendererConfigurationSetTrackingAreasUsage(configuration *CP_OBJECT_cp_layer_renderer_configuration, trackingAreasUsage metal.MTLTextureUsage) {
+	_cp_layer_renderer_configuration_set_tracking_areas_usage(configuration.Ptr(), trackingAreasUsage)
 }
 
 // C function: cp_layer_renderer_get_configuration
-func CpLayerRendererGetConfiguration(layer_renderer *CP_OBJECT_cp_layer_renderer) *CP_OBJECT_cp_layer_renderer_configuration {
-	_ret := _cp_layer_renderer_get_configuration(layer_renderer.Ptr())
+func CpLayerRendererGetConfiguration(layerRenderer *CP_OBJECT_cp_layer_renderer) *CP_OBJECT_cp_layer_renderer_configuration {
+	_ret := _cp_layer_renderer_get_configuration(layerRenderer.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -584,23 +584,23 @@ func CpLayerRendererGetConfiguration(layer_renderer *CP_OBJECT_cp_layer_renderer
 }
 
 // C function: cp_layer_renderer_get_device
-func CpLayerRendererGetDevice(layer_renderer *CP_OBJECT_cp_layer_renderer) metal.MTLDevice {
-	return _cp_layer_renderer_get_device(layer_renderer.Ptr())
+func CpLayerRendererGetDevice(layerRenderer *CP_OBJECT_cp_layer_renderer) metal.MTLDevice {
+	return _cp_layer_renderer_get_device(layerRenderer.Ptr())
 }
 
 // C function: cp_layer_renderer_get_minimum_frame_repeat_count
-func CpLayerRendererGetMinimumFrameRepeatCount(layer_renderer *CP_OBJECT_cp_layer_renderer) int {
-	return _cp_layer_renderer_get_minimum_frame_repeat_count(layer_renderer.Ptr())
+func CpLayerRendererGetMinimumFrameRepeatCount(layerRenderer *CP_OBJECT_cp_layer_renderer) int {
+	return _cp_layer_renderer_get_minimum_frame_repeat_count(layerRenderer.Ptr())
 }
 
 // C function: cp_layer_renderer_get_mtl4_command_queue
-func CpLayerRendererGetMtl4CommandQueue(layer_renderer *CP_OBJECT_cp_layer_renderer) metal.MTL4CommandQueue {
-	return _cp_layer_renderer_get_mtl4_command_queue(layer_renderer.Ptr())
+func CpLayerRendererGetMtl4CommandQueue(layerRenderer *CP_OBJECT_cp_layer_renderer) metal.MTL4CommandQueue {
+	return _cp_layer_renderer_get_mtl4_command_queue(layerRenderer.Ptr())
 }
 
 // C function: cp_layer_renderer_get_properties
-func CpLayerRendererGetProperties(layer_renderer *CP_OBJECT_cp_layer_renderer) *CP_OBJECT_cp_layer_renderer_properties {
-	_ret := _cp_layer_renderer_get_properties(layer_renderer.Ptr())
+func CpLayerRendererGetProperties(layerRenderer *CP_OBJECT_cp_layer_renderer) *CP_OBJECT_cp_layer_renderer_properties {
+	_ret := _cp_layer_renderer_get_properties(layerRenderer.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -608,13 +608,13 @@ func CpLayerRendererGetProperties(layer_renderer *CP_OBJECT_cp_layer_renderer) *
 }
 
 // C function: cp_layer_renderer_get_render_quality
-func CpLayerRendererGetRenderQuality(layer_renderer *CP_OBJECT_cp_layer_renderer) float32 {
-	return _cp_layer_renderer_get_render_quality(layer_renderer.Ptr())
+func CpLayerRendererGetRenderQuality(layerRenderer *CP_OBJECT_cp_layer_renderer) float32 {
+	return _cp_layer_renderer_get_render_quality(layerRenderer.Ptr())
 }
 
 // C function: cp_layer_renderer_get_state
-func CpLayerRendererGetState(layer_renderer *CP_OBJECT_cp_layer_renderer) Cp_layer_renderer_state {
-	return _cp_layer_renderer_get_state(layer_renderer.Ptr())
+func CpLayerRendererGetState(layerRenderer *CP_OBJECT_cp_layer_renderer) Cp_layer_renderer_state {
+	return _cp_layer_renderer_get_state(layerRenderer.Ptr())
 }
 
 // C function: cp_layer_renderer_properties_create_using_configuration
@@ -623,13 +623,13 @@ func CpLayerRendererPropertiesCreateUsingConfiguration(configuration *CP_OBJECT_
 }
 
 // C function: cp_layer_renderer_properties_get_texture_topology
-func CpLayerRendererPropertiesGetTextureTopology(layer_properties *CP_OBJECT_cp_layer_renderer_properties, index uint) unsafe.Pointer {
-	return _cp_layer_renderer_properties_get_texture_topology(layer_properties.Ptr(), index)
+func CpLayerRendererPropertiesGetTextureTopology(layerProperties *CP_OBJECT_cp_layer_renderer_properties, index uint) unsafe.Pointer {
+	return _cp_layer_renderer_properties_get_texture_topology(layerProperties.Ptr(), index)
 }
 
 // C function: cp_layer_renderer_properties_get_texture_topology_count
-func CpLayerRendererPropertiesGetTextureTopologyCount(layer_properties *CP_OBJECT_cp_layer_renderer_properties) uint {
-	return _cp_layer_renderer_properties_get_texture_topology_count(layer_properties.Ptr())
+func CpLayerRendererPropertiesGetTextureTopologyCount(layerProperties *CP_OBJECT_cp_layer_renderer_properties) uint {
+	return _cp_layer_renderer_properties_get_texture_topology_count(layerProperties.Ptr())
 }
 
 // C function: cp_layer_renderer_properties_get_tracking_areas_max_value
@@ -638,28 +638,28 @@ func CpLayerRendererPropertiesGetTrackingAreasMaxValue(properties *CP_OBJECT_cp_
 }
 
 // C function: cp_layer_renderer_properties_get_view_count
-func CpLayerRendererPropertiesGetViewCount(layer_properties *CP_OBJECT_cp_layer_renderer_properties) uint {
-	return _cp_layer_renderer_properties_get_view_count(layer_properties.Ptr())
+func CpLayerRendererPropertiesGetViewCount(layerProperties *CP_OBJECT_cp_layer_renderer_properties) uint {
+	return _cp_layer_renderer_properties_get_view_count(layerProperties.Ptr())
 }
 
 // C function: cp_layer_renderer_query_next_frame
-func CpLayerRendererQueryNextFrame(layer_renderer *CP_OBJECT_cp_layer_renderer) unsafe.Pointer {
-	return _cp_layer_renderer_query_next_frame(layer_renderer.Ptr())
+func CpLayerRendererQueryNextFrame(layerRenderer *CP_OBJECT_cp_layer_renderer) unsafe.Pointer {
+	return _cp_layer_renderer_query_next_frame(layerRenderer.Ptr())
 }
 
 // C function: cp_layer_renderer_set_minimum_frame_repeat_count
-func CpLayerRendererSetMinimumFrameRepeatCount(layer_renderer *CP_OBJECT_cp_layer_renderer, frame_repeat_count int) {
-	_cp_layer_renderer_set_minimum_frame_repeat_count(layer_renderer.Ptr(), frame_repeat_count)
+func CpLayerRendererSetMinimumFrameRepeatCount(layerRenderer *CP_OBJECT_cp_layer_renderer, frameRepeatCount int) {
+	_cp_layer_renderer_set_minimum_frame_repeat_count(layerRenderer.Ptr(), frameRepeatCount)
 }
 
 // C function: cp_layer_renderer_set_render_quality
-func CpLayerRendererSetRenderQuality(layer_renderer *CP_OBJECT_cp_layer_renderer, render_quality float32) {
-	_cp_layer_renderer_set_render_quality(layer_renderer.Ptr(), render_quality)
+func CpLayerRendererSetRenderQuality(layerRenderer *CP_OBJECT_cp_layer_renderer, renderQuality float32) {
+	_cp_layer_renderer_set_render_quality(layerRenderer.Ptr(), renderQuality)
 }
 
 // C function: cp_layer_renderer_wait_until_running
-func CpLayerRendererWaitUntilRunning(layer_renderer *CP_OBJECT_cp_layer_renderer) {
-	_cp_layer_renderer_wait_until_running(layer_renderer.Ptr())
+func CpLayerRendererWaitUntilRunning(layerRenderer *CP_OBJECT_cp_layer_renderer) {
+	_cp_layer_renderer_wait_until_running(layerRenderer.Ptr())
 }
 
 // Decrement the reference count of the specified object. - Parameters: - obj: The object to release. If this parameter is an Objective-C object, the function is equivalent to calling the `release` method of that object. Don’t call this function in Swift code or on types you manage using automatic reference counting (ARC).
@@ -675,13 +675,13 @@ func CpRetain(obj unsafe.Pointer) unsafe.Pointer {
 }
 
 // C function: cp_texture_topology_get_array_length
-func CpTextureTopologyGetArrayLength(texture_topology unsafe.Pointer) uint64 {
-	return _cp_texture_topology_get_array_length(texture_topology)
+func CpTextureTopologyGetArrayLength(textureTopology unsafe.Pointer) uint64 {
+	return _cp_texture_topology_get_array_length(textureTopology)
 }
 
 // C function: cp_texture_topology_get_texture_type
-func CpTextureTopologyGetTextureType(texture_topology unsafe.Pointer) metal.MTLTextureType {
-	return _cp_texture_topology_get_texture_type(texture_topology)
+func CpTextureTopologyGetTextureType(textureTopology unsafe.Pointer) metal.MTLTextureType {
+	return _cp_texture_topology_get_texture_type(textureTopology)
 }
 
 // C function: cp_time_to_cf_time_interval
@@ -696,18 +696,18 @@ func CpTimeWaitUntil(time_ CpTime) {
 }
 
 // C function: cp_tracking_area_add_automatic_hover_effect
-func CpTrackingAreaAddAutomaticHoverEffect(tracking_area unsafe.Pointer) unsafe.Pointer {
-	return _cp_tracking_area_add_automatic_hover_effect(tracking_area)
+func CpTrackingAreaAddAutomaticHoverEffect(trackingArea unsafe.Pointer) unsafe.Pointer {
+	return _cp_tracking_area_add_automatic_hover_effect(trackingArea)
 }
 
 // C function: cp_tracking_area_get_identifier
-func CpTrackingAreaGetIdentifier(tracking_area unsafe.Pointer) uint64 {
-	return _cp_tracking_area_get_identifier(tracking_area)
+func CpTrackingAreaGetIdentifier(trackingArea unsafe.Pointer) uint64 {
+	return _cp_tracking_area_get_identifier(trackingArea)
 }
 
 // C function: cp_tracking_area_get_render_value
-func CpTrackingAreaGetRenderValue(tracking_area unsafe.Pointer) uint16 {
-	return _cp_tracking_area_get_render_value(tracking_area)
+func CpTrackingAreaGetRenderValue(trackingArea unsafe.Pointer) uint16 {
+	return _cp_tracking_area_get_render_value(trackingArea)
 }
 
 // C function: cp_view_get_transform
@@ -721,16 +721,16 @@ func CpViewGetViewTextureMap(view unsafe.Pointer) unsafe.Pointer {
 }
 
 // C function: cp_view_texture_map_get_slice_index
-func CpViewTextureMapGetSliceIndex(view_texture_map unsafe.Pointer) uint {
-	return _cp_view_texture_map_get_slice_index(view_texture_map)
+func CpViewTextureMapGetSliceIndex(viewTextureMap unsafe.Pointer) uint {
+	return _cp_view_texture_map_get_slice_index(viewTextureMap)
 }
 
 // C function: cp_view_texture_map_get_texture_index
-func CpViewTextureMapGetTextureIndex(view_texture_map unsafe.Pointer) uint {
-	return _cp_view_texture_map_get_texture_index(view_texture_map)
+func CpViewTextureMapGetTextureIndex(viewTextureMap unsafe.Pointer) uint {
+	return _cp_view_texture_map_get_texture_index(viewTextureMap)
 }
 
 // C function: cp_view_texture_map_get_viewport
-func CpViewTextureMapGetViewport(view_texture_map unsafe.Pointer) metal.MTLViewport {
-	return _cp_view_texture_map_get_viewport(view_texture_map)
+func CpViewTextureMapGetViewport(viewTextureMap unsafe.Pointer) metal.MTLViewport {
+	return _cp_view_texture_map_get_viewport(viewTextureMap)
 }

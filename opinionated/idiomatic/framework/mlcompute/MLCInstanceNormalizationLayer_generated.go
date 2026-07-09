@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,54 +67,63 @@ func (inl *InstanceNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled
 
 // FeatureChannelCount returns the number of feature channels
 func (inl *InstanceNormalizationLayer) FeatureChannelCount() int {
+	defer runtime.KeepAlive(inl)
 	_r := objc.Send[int](objref.IDOf(inl), objc.RegisterName("featureChannelCount"))
 	return _r
 }
 
 // Mean returns the running mean tensor
 func (inl *InstanceNormalizationLayer) Mean() *Tensor {
+	defer runtime.KeepAlive(inl)
 	_r := objc.Send[objc.ID](objref.IDOf(inl), objc.RegisterName("mean"))
 	return TensorFromID(_r)
 }
 
 // Variance returns the running variance tensor
 func (inl *InstanceNormalizationLayer) Variance() *Tensor {
+	defer runtime.KeepAlive(inl)
 	_r := objc.Send[objc.ID](objref.IDOf(inl), objc.RegisterName("variance"))
 	return TensorFromID(_r)
 }
 
 // Beta returns the beta tensor
 func (inl *InstanceNormalizationLayer) Beta() *Tensor {
+	defer runtime.KeepAlive(inl)
 	_r := objc.Send[objc.ID](objref.IDOf(inl), objc.RegisterName("beta"))
 	return TensorFromID(_r)
 }
 
 // Gamma returns the gamma tensor
 func (inl *InstanceNormalizationLayer) Gamma() *Tensor {
+	defer runtime.KeepAlive(inl)
 	_r := objc.Send[objc.ID](objref.IDOf(inl), objc.RegisterName("gamma"))
 	return TensorFromID(_r)
 }
 
 // BetaParameter returns the beta tensor parameter used for optimizer update
 func (inl *InstanceNormalizationLayer) BetaParameter() *TensorParameter {
+	defer runtime.KeepAlive(inl)
 	_r := objc.Send[objc.ID](objref.IDOf(inl), objc.RegisterName("betaParameter"))
 	return TensorParameterFromID(_r)
 }
 
 // GammaParameter returns the gamma tensor parameter used for optimizer update
 func (inl *InstanceNormalizationLayer) GammaParameter() *TensorParameter {
+	defer runtime.KeepAlive(inl)
 	_r := objc.Send[objc.ID](objref.IDOf(inl), objc.RegisterName("gammaParameter"))
 	return TensorParameterFromID(_r)
 }
 
 // VarianceEpsilon returns a value used for numerical stability
 func (inl *InstanceNormalizationLayer) VarianceEpsilon() float32 {
+	defer runtime.KeepAlive(inl)
 	_r := objc.Send[float32](objref.IDOf(inl), objc.RegisterName("varianceEpsilon"))
 	return _r
 }
 
 // Momentum returns the value used for the running mean and variance computation The default is 0.99f.
 func (inl *InstanceNormalizationLayer) Momentum() float32 {
+	defer runtime.KeepAlive(inl)
 	_r := objc.Send[float32](objref.IDOf(inl), objc.RegisterName("momentum"))
 	return _r
 }

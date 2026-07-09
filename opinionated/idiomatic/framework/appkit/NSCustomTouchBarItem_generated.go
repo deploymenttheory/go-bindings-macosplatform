@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,6 +61,7 @@ func NewCustomTouchBarItem() *CustomTouchBarItem {
 
 // WithView sets the view displayed in the bar to represent this item.
 func (ctbi *CustomTouchBarItem) WithView(view ViewProvider) *CustomTouchBarItem {
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ctbi), objc.RegisterName("setView:"), objref.IDOf(view))
 	})
@@ -67,6 +70,7 @@ func (ctbi *CustomTouchBarItem) WithView(view ViewProvider) *CustomTouchBarItem 
 
 // WithViewController sets a view controller whose view is displayed in the bar to represent this item.
 func (ctbi *CustomTouchBarItem) WithViewController(viewController ViewControllerProvider) *CustomTouchBarItem {
+	defer runtime.KeepAlive(viewController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ctbi), objc.RegisterName("setViewController:"), objref.IDOf(viewController))
 	})

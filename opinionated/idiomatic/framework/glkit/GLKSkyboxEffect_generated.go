@@ -5,6 +5,7 @@
 package glkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func skyboxEffectAdopt(id objc.ID) *SkyboxEffect {
 
 // Description returns the object's -description text.
 func (se *SkyboxEffect) Description() string {
+	defer runtime.KeepAlive(se)
 	return rt.Description(objref.IDOf(se))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (se *SkyboxEffect) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(se)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(se), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (se *SkyboxEffect) IsKind(className string) bool {
+	defer runtime.KeepAlive(se)
 	return rt.IsKind(objref.IDOf(se), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (se *SkyboxEffect) String() string {
+	defer runtime.KeepAlive(se)
 	return rt.Description(objref.IDOf(se))
 }
 
@@ -106,46 +112,54 @@ func (se *SkyboxEffect) WithLabel(label string) *SkyboxEffect {
 
 // PrepareToDraw prepares an effect for rendering.
 func (se *SkyboxEffect) PrepareToDraw() {
+	defer runtime.KeepAlive(se)
 	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("prepareToDraw"))
 }
 
 // Draw draws the skybox.
 func (se *SkyboxEffect) Draw() {
+	defer runtime.KeepAlive(se)
 	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("draw"))
 }
 
 // XSize returns the x size.
 func (se *SkyboxEffect) XSize() float32 {
+	defer runtime.KeepAlive(se)
 	_r := objc.Send[float32](objref.IDOf(se), objc.RegisterName("xSize"))
 	return _r
 }
 
 // YSize returns the y size.
 func (se *SkyboxEffect) YSize() float32 {
+	defer runtime.KeepAlive(se)
 	_r := objc.Send[float32](objref.IDOf(se), objc.RegisterName("ySize"))
 	return _r
 }
 
 // ZSize returns the z size.
 func (se *SkyboxEffect) ZSize() float32 {
+	defer runtime.KeepAlive(se)
 	_r := objc.Send[float32](objref.IDOf(se), objc.RegisterName("zSize"))
 	return _r
 }
 
 // TextureCubeMap returns the texture cube map.
 func (se *SkyboxEffect) TextureCubeMap() *EffectPropertyTexture {
+	defer runtime.KeepAlive(se)
 	_r := objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("textureCubeMap"))
 	return EffectPropertyTextureFromID(_r)
 }
 
 // Transform returns the transform.
 func (se *SkyboxEffect) Transform() *EffectPropertyTransform {
+	defer runtime.KeepAlive(se)
 	_r := objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("transform"))
 	return EffectPropertyTransformFromID(_r)
 }
 
 // Label returns the label.
 func (se *SkyboxEffect) Label() string {
+	defer runtime.KeepAlive(se)
 	_r := objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

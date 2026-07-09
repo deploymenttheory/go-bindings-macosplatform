@@ -5,7 +5,10 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -66,12 +69,14 @@ func (gpr *GradientPolylineRenderer) WithStrokeEnd(strokeEnd float64) *GradientP
 
 // WithFillColor sets the fill color to use for the path.
 func (gpr *GradientPolylineRenderer) WithFillColor(fillColor obj.Object) *GradientPolylineRenderer {
+	defer runtime.KeepAlive(fillColor)
 	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 	return gpr
 }
 
 // WithStrokeColor sets the stroke color to use for the path.
 func (gpr *GradientPolylineRenderer) WithStrokeColor(strokeColor obj.Object) *GradientPolylineRenderer {
+	defer runtime.KeepAlive(strokeColor)
 	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 	return gpr
 }
@@ -109,6 +114,7 @@ func (gpr *GradientPolylineRenderer) WithShouldRasterize(shouldRasterize bool) *
 
 // WithPath sets the path representing the overlay’s shape.
 func (gpr *GradientPolylineRenderer) WithPath(path obj.Object) *GradientPolylineRenderer {
+	defer runtime.KeepAlive(path)
 	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return gpr
 }
@@ -120,14 +126,16 @@ func (gpr *GradientPolylineRenderer) WithAlpha(alpha float64) *GradientPolylineR
 }
 
 // SetColorsAtLocations sets the colors and corresponding unit distance values to create gradients.
-func (gpr *GradientPolylineRenderer) SetColorsAtLocations(colors []obj.Object, locations []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setColors:atLocations:"), purego.SliceToNSArray(colors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(locations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (gpr *GradientPolylineRenderer) SetColorsAtLocations(colors []obj.Object, locations []*foundation.Number) {
+	defer runtime.KeepAlive(gpr)
+	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setColors:atLocations:"), purego.SliceToNSArray(colors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(locations, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Locations returns the locations.
 //
 // Locations returns the collection as a Go slice.
 func (gpr *GradientPolylineRenderer) Locations() []obj.Object {
+	defer runtime.KeepAlive(gpr)
 	_arr := objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("locations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -136,6 +144,7 @@ func (gpr *GradientPolylineRenderer) Locations() []obj.Object {
 //
 // Colors returns the collection as a Go slice.
 func (gpr *GradientPolylineRenderer) Colors() []obj.Object {
+	defer runtime.KeepAlive(gpr)
 	_arr := objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("colors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

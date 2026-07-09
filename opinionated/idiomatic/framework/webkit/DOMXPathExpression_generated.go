@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,12 +53,18 @@ func NewDOMXPathExpression() *DOMXPathExpression {
 
 // EvaluateTypeInResult wraps the corresponding Objective-C method.
 func (dpe *DOMXPathExpression) EvaluateTypeInResult(contextNode *DOMNode, type_ uint16, inResult *DOMXPathResult) *DOMXPathResult {
+	defer runtime.KeepAlive(dpe)
+	defer runtime.KeepAlive(contextNode)
+	defer runtime.KeepAlive(inResult)
 	_r := objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("evaluate:type:inResult:"), objref.IDOf(contextNode), type_, objref.IDOf(inResult))
 	return DOMXPathResultFromID(_r)
 }
 
 // Evaluate wraps the corresponding Objective-C method.
 func (dpe *DOMXPathExpression) Evaluate(contextNode *DOMNode, type_ uint16, inResult *DOMXPathResult) *DOMXPathResult {
+	defer runtime.KeepAlive(dpe)
+	defer runtime.KeepAlive(contextNode)
+	defer runtime.KeepAlive(inResult)
 	_r := objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("evaluate:::"), objref.IDOf(contextNode), type_, objref.IDOf(inResult))
 	return DOMXPathResultFromID(_r)
 }

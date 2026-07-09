@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func tensorDescriptorAdopt(id objc.ID) *TensorDescriptor {
 
 // Description returns the object's -description text.
 func (td *TensorDescriptor) Description() string {
+	defer runtime.KeepAlive(td)
 	return rt.Description(objref.IDOf(td))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (td *TensorDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(td)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(td), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (td *TensorDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(td)
 	return rt.IsKind(objref.IDOf(td), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (td *TensorDescriptor) String() string {
+	defer runtime.KeepAlive(td)
 	return rt.Description(objref.IDOf(td))
 }
 
@@ -74,12 +81,14 @@ func NewTensorDescriptor() *TensorDescriptor {
 
 // WithDimensions sets an array of sizes, in elements, one for each dimension of the tensors you create with this descriptor.
 func (td *TensorDescriptor) WithDimensions(dimensions *TensorExtents) *TensorDescriptor {
+	defer runtime.KeepAlive(dimensions)
 	objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("setDimensions:"), objref.IDOf(dimensions))
 	return td
 }
 
 // WithStrides sets an array of strides, in elements, one for each dimension in the tensors you create with this descriptor, if applicable.
 func (td *TensorDescriptor) WithStrides(strides *TensorExtents) *TensorDescriptor {
+	defer runtime.KeepAlive(strides)
 	objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("setStrides:"), objref.IDOf(strides))
 	return td
 }
@@ -122,48 +131,56 @@ func (td *TensorDescriptor) WithHazardTrackingMode(hazardTrackingMode HazardTrac
 
 // Dimensions returns an array of sizes, in elements, one for each dimension of the tensors you create with this descriptor. The default value of this property is a rank one extents with size one.
 func (td *TensorDescriptor) Dimensions() *TensorExtents {
+	defer runtime.KeepAlive(td)
 	_r := objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("dimensions"))
 	return TensorExtentsFromID(_r)
 }
 
 // Strides returns an array of strides, in elements, one for each dimension in the tensors you create with this descriptor, if applicable. You are responsible for ensuring `strides` meets the following requirements: - The first element of `strides` is one. - If “usage“ contains “MTLTensorUsage/MTLTensorUsageMachineLearning“, the second element of `strides` is aligned to 64 bytes, and for any `i` larger than one, `strides[i]` is equal to `strides[i-1] * dimensions[i-1]`. - If “dataType“ is a sub-byte “MTLTensorDataType“, for any `i` greater than or equal to 1, `strides[i]` is aligned to 128 bytes. This is not a requirement for non-sub-byte data types, but following this convention improves performance. Only set this property when creating tensors from a buffer.
 func (td *TensorDescriptor) Strides() *TensorExtents {
+	defer runtime.KeepAlive(td)
 	_r := objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("strides"))
 	return TensorExtentsFromID(_r)
 }
 
 // DataType returns a data format for the tensors you create with this descriptor. The default value of this property is “MTLTensorDataType/MTLTensorDataTypeFloat32“.
 func (td *TensorDescriptor) DataType() TensorDataType {
+	defer runtime.KeepAlive(td)
 	_r := objc.Send[TensorDataType](objref.IDOf(td), objc.RegisterName("dataType"))
 	return _r
 }
 
 // Usage returns a set of contexts in which you can use tensors you create with this descriptor. The default value for this property is a bitwise `OR` of: - “MTLTensorUsage/MTLTensorUsageRender“ - “MTLTensorUsage/MTLTensorUsageCompute“
 func (td *TensorDescriptor) Usage() TensorUsage {
+	defer runtime.KeepAlive(td)
 	_r := objc.Send[TensorUsage](objref.IDOf(td), objc.RegisterName("usage"))
 	return _r
 }
 
 // ResourceOptions returns a packed set of the `storageMode`, `cpuCacheMode` and `hazardTrackingMode` properties.
 func (td *TensorDescriptor) ResourceOptions() ResourceOptions {
+	defer runtime.KeepAlive(td)
 	_r := objc.Send[ResourceOptions](objref.IDOf(td), objc.RegisterName("resourceOptions"))
 	return _r
 }
 
 // CPUCacheMode returns a value that configures the cache mode of CPU mapping of tensors you create with this descriptor. The default value of this property is “MTLCPUCacheMode/MTLCPUCacheModeDefaultCache“.
 func (td *TensorDescriptor) CPUCacheMode() CPUCacheMode {
+	defer runtime.KeepAlive(td)
 	_r := objc.Send[CPUCacheMode](objref.IDOf(td), objc.RegisterName("cpuCacheMode"))
 	return _r
 }
 
 // StorageMode returns a value that configures the memory location and access permissions of tensors you create with this descriptor. The default value of this property defaults to “MTLStorageMode/MTLStorageModeShared“.
 func (td *TensorDescriptor) StorageMode() StorageMode {
+	defer runtime.KeepAlive(td)
 	_r := objc.Send[StorageMode](objref.IDOf(td), objc.RegisterName("storageMode"))
 	return _r
 }
 
 // HazardTrackingMode returns a value that configures the hazard tracking of tensors you create with this descriptor. The default value of this property is “MTLHazardTrackingMode/MTLHazardTrackingModeDefault“.
 func (td *TensorDescriptor) HazardTrackingMode() HazardTrackingMode {
+	defer runtime.KeepAlive(td)
 	_r := objc.Send[HazardTrackingMode](objref.IDOf(td), objc.RegisterName("hazardTrackingMode"))
 	return _r
 }

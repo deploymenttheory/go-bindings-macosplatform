@@ -5,6 +5,9 @@
 package calendarstore
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +50,33 @@ func calCalendarItemAdopt(id objc.ID) *CalCalendarItem {
 
 // Description returns the object's -description text.
 func (cci *CalCalendarItem) Description() string {
+	defer runtime.KeepAlive(cci)
 	return rt.Description(objref.IDOf(cci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cci *CalCalendarItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cci *CalCalendarItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(cci)
 	return rt.IsKind(objref.IDOf(cci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cci *CalCalendarItem) String() string {
+	defer runtime.KeepAlive(cci)
 	return rt.Description(objref.IDOf(cci))
 }
 
 // WithCalendar sets the calendar.
 func (cci *CalCalendarItem) WithCalendar(calendar *CalCalendar) *CalCalendarItem {
+	defer runtime.KeepAlive(calendar)
 	objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return cci
 }
@@ -92,44 +101,56 @@ func (cci *CalCalendarItem) WithTitle(title string) *CalCalendarItem {
 
 // HasAlarm reports whether the object has alarm.
 func (cci *CalCalendarItem) HasAlarm() bool {
+	defer runtime.KeepAlive(cci)
 	_r := objc.Send[bool](objref.IDOf(cci), objc.RegisterName("hasAlarm"))
 	return _r
 }
 
 // NextAlarmDate returns the next alarm date.
-func (cci *CalCalendarItem) NextAlarmDate() obj.Object {
+func (cci *CalCalendarItem) NextAlarmDate() time.Time {
+	defer runtime.KeepAlive(cci)
 	_r := objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("nextAlarmDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // AddAlarm adds alarm.
 func (cci *CalCalendarItem) AddAlarm(alarm *CalAlarm) {
+	defer runtime.KeepAlive(cci)
+	defer runtime.KeepAlive(alarm)
 	objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("addAlarm:"), objref.IDOf(alarm))
 }
 
 // AddAlarms adds alarms.
 func (cci *CalCalendarItem) AddAlarms(alarms obj.Object) {
+	defer runtime.KeepAlive(cci)
+	defer runtime.KeepAlive(alarms)
 	objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("addAlarms:"), objref.IDOf(alarms))
 }
 
 // RemoveAlarm removes alarm.
 func (cci *CalCalendarItem) RemoveAlarm(alarm *CalAlarm) {
+	defer runtime.KeepAlive(cci)
+	defer runtime.KeepAlive(alarm)
 	objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("removeAlarm:"), objref.IDOf(alarm))
 }
 
 // RemoveAlarms removes alarms.
 func (cci *CalCalendarItem) RemoveAlarms(alarms obj.Object) {
+	defer runtime.KeepAlive(cci)
+	defer runtime.KeepAlive(alarms)
 	objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("removeAlarms:"), objref.IDOf(alarms))
 }
 
 // Calendar returns the calendar.
 func (cci *CalCalendarItem) Calendar() *CalCalendar {
+	defer runtime.KeepAlive(cci)
 	_r := objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("calendar"))
 	return CalCalendarFromID(_r)
 }
 
 // Notes returns the notes.
 func (cci *CalCalendarItem) Notes() string {
+	defer runtime.KeepAlive(cci)
 	_r := objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("notes"))
 	if _r == 0 {
 		return ""
@@ -138,13 +159,15 @@ func (cci *CalCalendarItem) Notes() string {
 }
 
 // URL returns the URL.
-func (cci *CalCalendarItem) URL() obj.Object {
+func (cci *CalCalendarItem) URL() string {
+	defer runtime.KeepAlive(cci)
 	_r := objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Title returns the title.
 func (cci *CalCalendarItem) Title() string {
+	defer runtime.KeepAlive(cci)
 	_r := objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -154,6 +177,7 @@ func (cci *CalCalendarItem) Title() string {
 
 // UID returns the UID.
 func (cci *CalCalendarItem) UID() string {
+	defer runtime.KeepAlive(cci)
 	_r := objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("uid"))
 	if _r == 0 {
 		return ""
@@ -162,19 +186,23 @@ func (cci *CalCalendarItem) UID() string {
 }
 
 // DateStamp returns the date stamp.
-func (cci *CalCalendarItem) DateStamp() obj.Object {
+func (cci *CalCalendarItem) DateStamp() time.Time {
+	defer runtime.KeepAlive(cci)
 	_r := objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("dateStamp"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Alarms returns the alarms.
 func (cci *CalCalendarItem) Alarms() obj.Object {
+	defer runtime.KeepAlive(cci)
 	_r := objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("alarms"))
 	return obj.Wrap(_r)
 }
 
 // SetAlarms wraps the corresponding Objective-C method.
 func (cci *CalCalendarItem) SetAlarms(alarms obj.Object) {
+	defer runtime.KeepAlive(cci)
+	defer runtime.KeepAlive(alarms)
 	objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("setAlarms:"), objref.IDOf(alarms))
 }
 

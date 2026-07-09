@@ -5,9 +5,11 @@
 package eventkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -60,13 +62,14 @@ func (a *Alarm) WithRelativeOffset(relativeOffset float64) *Alarm {
 }
 
 // WithAbsoluteDate sets the absolute date for the alarm.
-func (a *Alarm) WithAbsoluteDate(absoluteDate obj.Object) *Alarm {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setAbsoluteDate:"), objref.IDOf(absoluteDate))
+func (a *Alarm) WithAbsoluteDate(absoluteDate time.Time) *Alarm {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setAbsoluteDate:"), rt.TimeToNSDate(absoluteDate))
 	return a
 }
 
 // WithStructuredLocation sets the location to trigger an alarm.
 func (a *Alarm) WithStructuredLocation(structuredLocation *StructuredLocation) *Alarm {
+	defer runtime.KeepAlive(structuredLocation)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setStructuredLocation:"), objref.IDOf(structuredLocation))
 	return a
 }
@@ -97,36 +100,42 @@ func (a *Alarm) WithURL(url string) *Alarm {
 
 // RelativeOffset specifies a relative offset from an event start date to fire an alarm. Set this property to an appropriate negative value to establish an alarm trigger relative to the start date/time of an event. Setting this clears any existing date trigger.
 func (a *Alarm) RelativeOffset() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("relativeOffset"))
 	return _r
 }
 
 // AbsoluteDate represents an alarm that fires at a specific date. Set this property to a date to establish an absolute alarm trigger. Setting this clears any relative interval trigger.
-func (a *Alarm) AbsoluteDate() obj.Object {
+func (a *Alarm) AbsoluteDate() time.Time {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("absoluteDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // StructuredLocation returns allows you to set a structured location (a location with a potential geo-coordinate) on an alarm. This is used in conjunction with proximity to do geofence-based triggering of reminders.
 func (a *Alarm) StructuredLocation() *StructuredLocation {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("structuredLocation"))
 	return StructuredLocationFromID(_r)
 }
 
 // Proximity defines whether this alarm triggers via entering/exiting a geofence as defined by structuredLocation.
 func (a *Alarm) Proximity() AlarmProximity {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[AlarmProximity](objref.IDOf(a), objc.RegisterName("proximity"))
 	return _r
 }
 
 // Type returns the type of alarm, based on the action taken when triggering the alarm. This field is read-only; to change the type of alarm, set emailAddress for EKAlarmTypeEmail, soundName for EKAlarmTypeAudio or url for EKAlarmTypeProcedure. Setting all of those to nil will change it to EKAlarmTypeDisplay.
 func (a *Alarm) Type() AlarmType {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[AlarmType](objref.IDOf(a), objc.RegisterName("type"))
 	return _r
 }
 
 // EmailAddress returns an email address that is the recipient of an email alarm, which is an alarm that triggers an email message. When you set the emailAddress property, the action property is set to EKAlarmTypeEmail, and the soundName and url properties are set to nil.
 func (a *Alarm) EmailAddress() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("emailAddress"))
 	if _r == 0 {
 		return ""
@@ -136,6 +145,7 @@ func (a *Alarm) EmailAddress() string {
 
 // SoundName returns the name of the sound to play when the alarm triggers. The value of this property is the name of a system sound that can be used with the soundNamed: class method to create an NSSound object. When you set the soundName property, the action property is set to EKAlarmTypeAudio, and the emailAddress and url properties are set to nil.
 func (a *Alarm) SoundName() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("soundName"))
 	if _r == 0 {
 		return ""
@@ -144,9 +154,10 @@ func (a *Alarm) SoundName() string {
 }
 
 // URL returns the URL to open when the alarm triggers. When you set the url property, the action property is set to EKAlarmTypeProcedure, and the emailAddress and soundName properties are set to nil. Note: Starting with OS X 10.9, it is not possible to create new procedure alarms or view URLs for existing procedure alarms. Trying to save or modify a procedure alarm will result in a save error. Editing other aspects of events or reminders that have existing procedure alarms is allowed as long as the alarm isn't modified.
-func (a *Alarm) URL() obj.Object {
+func (a *Alarm) URL() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 var _ ObjectProvider = (*Alarm)(nil)

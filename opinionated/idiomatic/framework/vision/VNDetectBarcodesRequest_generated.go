@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -97,6 +98,7 @@ func (dbr *DetectBarcodesRequest) WithRevision(revision int) *DetectBarcodesRequ
 //
 // SupportedSymbologies returns the collection as a Go slice.
 func (dbr *DetectBarcodesRequest) SupportedSymbologies() (result []obj.Object, err error) {
+	defer runtime.KeepAlive(dbr)
 	var _nsErr uintptr
 	_arr := objc.Send[objc.ID](objref.IDOf(dbr), objc.RegisterName("supportedSymbologiesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -109,12 +111,14 @@ func (dbr *DetectBarcodesRequest) SupportedSymbologies() (result []obj.Object, e
 //
 // Symbologies returns the collection as a Go slice.
 func (dbr *DetectBarcodesRequest) Symbologies() []obj.Object {
+	defer runtime.KeepAlive(dbr)
 	_arr := objc.Send[objc.ID](objref.IDOf(dbr), objc.RegisterName("symbologies"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // CoalesceCompositeSymbologies reports whether an option to coalesce multiple codes if applicable based on the symbology
 func (dbr *DetectBarcodesRequest) CoalesceCompositeSymbologies() bool {
+	defer runtime.KeepAlive(dbr)
 	_r := objc.Send[bool](objref.IDOf(dbr), objc.RegisterName("coalesceCompositeSymbologies"))
 	return _r
 }

@@ -6,10 +6,12 @@ package replaykit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -50,22 +52,27 @@ func screenRecorderAdopt(id objc.ID) *ScreenRecorder {
 
 // Description returns the object's -description text.
 func (sr *ScreenRecorder) Description() string {
+	defer runtime.KeepAlive(sr)
 	return rt.Description(objref.IDOf(sr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sr *ScreenRecorder) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sr *ScreenRecorder) IsKind(className string) bool {
+	defer runtime.KeepAlive(sr)
 	return rt.IsKind(objref.IDOf(sr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sr *ScreenRecorder) String() string {
+	defer runtime.KeepAlive(sr)
 	return rt.Description(objref.IDOf(sr))
 }
 
@@ -73,6 +80,16 @@ func (sr *ScreenRecorder) String() string {
 func NewScreenRecorder() *ScreenRecorder {
 	_id := objc.Send[objc.ID](objc.ID(_class("RPScreenRecorder")), objc.RegisterName("new"))
 	return screenRecorderAdopt(_id)
+}
+
+// WithDelegate sets the delegate for the screen recorder.
+func (sr *ScreenRecorder) WithDelegate(delegate ScreenRecorderDelegate) *ScreenRecorder {
+	_shim := newScreenRecorderDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(sr), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(sr), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return sr
 }
 
 // WithMicrophoneEnabled sets a Boolean value that indicates whether the microphone is currently enabled.
@@ -97,6 +114,7 @@ func (sr *ScreenRecorder) WithCameraPosition(cameraPosition CameraPosition) *Scr
 //
 // StartRecordingWithHandler blocks until the operation completes or ctx is cancelled.
 func (sr *ScreenRecorder) StartRecordingWithHandler(ctx context.Context) error {
+	defer runtime.KeepAlive(sr)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -116,6 +134,7 @@ func (sr *ScreenRecorder) StartRecordingWithHandler(ctx context.Context) error {
 //
 // StopRecordingWithHandler blocks until the operation completes or ctx is cancelled.
 func (sr *ScreenRecorder) StopRecordingWithHandler(ctx context.Context) (result *PreviewViewController, err error) {
+	defer runtime.KeepAlive(sr)
 	type _result struct {
 		val *PreviewViewController
 		err error
@@ -141,6 +160,7 @@ func (sr *ScreenRecorder) StopRecordingWithHandler(ctx context.Context) (result 
 //
 // StopRecordingWithOutputURL blocks until the operation completes or ctx is cancelled.
 func (sr *ScreenRecorder) StopRecordingWithOutputURL(ctx context.Context, url string) error {
+	defer runtime.KeepAlive(sr)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -160,6 +180,7 @@ func (sr *ScreenRecorder) StopRecordingWithOutputURL(ctx context.Context, url st
 //
 // DiscardRecordingWithHandler blocks until the operation completes or ctx is cancelled.
 func (sr *ScreenRecorder) DiscardRecordingWithHandler(ctx context.Context) error {
+	defer runtime.KeepAlive(sr)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -177,6 +198,7 @@ func (sr *ScreenRecorder) DiscardRecordingWithHandler(ctx context.Context) error
 //
 // StopCaptureWithHandler blocks until the operation completes or ctx is cancelled.
 func (sr *ScreenRecorder) StopCaptureWithHandler(ctx context.Context) error {
+	defer runtime.KeepAlive(sr)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -196,6 +218,7 @@ func (sr *ScreenRecorder) StopCaptureWithHandler(ctx context.Context) error {
 //
 // StartClipBuffering blocks until the operation completes or ctx is cancelled.
 func (sr *ScreenRecorder) StartClipBuffering(ctx context.Context) error {
+	defer runtime.KeepAlive(sr)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -215,6 +238,7 @@ func (sr *ScreenRecorder) StartClipBuffering(ctx context.Context) error {
 //
 // StopClipBuffering blocks until the operation completes or ctx is cancelled.
 func (sr *ScreenRecorder) StopClipBuffering(ctx context.Context) error {
+	defer runtime.KeepAlive(sr)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -234,6 +258,7 @@ func (sr *ScreenRecorder) StopClipBuffering(ctx context.Context) error {
 //
 // ExportClipToURLDuration blocks until the operation completes or ctx is cancelled.
 func (sr *ScreenRecorder) ExportClipToURLDuration(ctx context.Context, url string, duration float64) error {
+	defer runtime.KeepAlive(sr)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -251,36 +276,42 @@ func (sr *ScreenRecorder) ExportClipToURLDuration(ctx context.Context, url strin
 
 // IsAvailable reports whether the object is available.
 func (sr *ScreenRecorder) IsAvailable() bool {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[bool](objref.IDOf(sr), objc.RegisterName("isAvailable"))
 	return _r
 }
 
 // IsRecording reports whether the object is recording.
 func (sr *ScreenRecorder) IsRecording() bool {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[bool](objref.IDOf(sr), objc.RegisterName("isRecording"))
 	return _r
 }
 
 // IsMicrophoneEnabled reports whether the object is microphone enabled.
 func (sr *ScreenRecorder) IsMicrophoneEnabled() bool {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[bool](objref.IDOf(sr), objc.RegisterName("isMicrophoneEnabled"))
 	return _r
 }
 
 // IsCameraEnabled reports whether the object is camera enabled.
 func (sr *ScreenRecorder) IsCameraEnabled() bool {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[bool](objref.IDOf(sr), objc.RegisterName("isCameraEnabled"))
 	return _r
 }
 
 // CameraPosition returns the camera position.
 func (sr *ScreenRecorder) CameraPosition() CameraPosition {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[CameraPosition](objref.IDOf(sr), objc.RegisterName("cameraPosition"))
 	return _r
 }
 
 // CameraPreviewView returns the camera preview view.
 func (sr *ScreenRecorder) CameraPreviewView() obj.Object {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("cameraPreviewView"))
 	return obj.Wrap(_r)
 }

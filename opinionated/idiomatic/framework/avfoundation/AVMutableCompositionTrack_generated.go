@@ -5,12 +5,14 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -102,6 +104,8 @@ func (mct *MutableCompositionTrack) WithSegments(items ...*CompositionTrackSegme
 
 // InsertTimeRangeOfTrackAtTime inserts a time range of media from a source track into a composition track.
 func (mct *MutableCompositionTrack) InsertTimeRangeOfTrackAtTime(timeRange coremedia.CMTimeRange, track *AssetTrack, startTime coremedia.CMTime) error {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(track)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(mct), objc.RegisterName("insertTimeRange:ofTrack:atTime:error:"), timeRange, objref.IDOf(track), startTime, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -111,9 +115,10 @@ func (mct *MutableCompositionTrack) InsertTimeRangeOfTrackAtTime(timeRange corem
 }
 
 // InsertTimeRangesOfTracksAtTime inserts the time ranges of multiple source tracks into a track of a composition.
-func (mct *MutableCompositionTrack) InsertTimeRangesOfTracksAtTime(timeRanges []obj.Object, tracks []*AssetTrack, startTime coremedia.CMTime) error {
+func (mct *MutableCompositionTrack) InsertTimeRangesOfTracksAtTime(timeRanges []*foundation.Value, tracks []*AssetTrack, startTime coremedia.CMTime) error {
+	defer runtime.KeepAlive(mct)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(mct), objc.RegisterName("insertTimeRanges:ofTracks:atTime:error:"), purego.SliceToNSArray(timeRanges, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(tracks, func(_v *AssetTrack) objc.ID { return objref.IDOf(_v) }), startTime, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(mct), objc.RegisterName("insertTimeRanges:ofTracks:atTime:error:"), purego.SliceToNSArray(timeRanges, func(_v *foundation.Value) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(tracks, func(_v *AssetTrack) objc.ID { return objref.IDOf(_v) }), startTime, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -122,21 +127,25 @@ func (mct *MutableCompositionTrack) InsertTimeRangesOfTracksAtTime(timeRanges []
 
 // InsertEmptyTimeRange adds or extends an empty time range within the track.
 func (mct *MutableCompositionTrack) InsertEmptyTimeRange(timeRange coremedia.CMTimeRange) {
+	defer runtime.KeepAlive(mct)
 	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("insertEmptyTimeRange:"), timeRange)
 }
 
 // RemoveTimeRange removes a time range of media from a composition track.
 func (mct *MutableCompositionTrack) RemoveTimeRange(timeRange coremedia.CMTimeRange) {
+	defer runtime.KeepAlive(mct)
 	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("removeTimeRange:"), timeRange)
 }
 
 // ScaleTimeRangeToDuration changes the duration of a time range of the track.
 func (mct *MutableCompositionTrack) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime) {
+	defer runtime.KeepAlive(mct)
 	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("scaleTimeRange:toDuration:"), timeRange, duration)
 }
 
 // ValidateTrackSegments returns a Boolean value that indicates whether a given array of track segments conform to the timing rules for a composition track.
 func (mct *MutableCompositionTrack) ValidateTrackSegments(trackSegments []*CompositionTrackSegment) error {
+	defer runtime.KeepAlive(mct)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(mct), objc.RegisterName("validateTrackSegments:error:"), purego.SliceToNSArray(trackSegments, func(_v *CompositionTrackSegment) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -147,16 +156,25 @@ func (mct *MutableCompositionTrack) ValidateTrackSegments(trackSegments []*Compo
 
 // AddTrackAssociationToTrackType establishes a track association of a specific type between two tracks.
 func (mct *MutableCompositionTrack) AddTrackAssociationToTrackType(compositionTrack *CompositionTrack, trackAssociationType obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(compositionTrack)
+	defer runtime.KeepAlive(trackAssociationType)
 	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("addTrackAssociationToTrack:type:"), objref.IDOf(compositionTrack), objref.IDOf(trackAssociationType))
 }
 
 // RemoveTrackAssociationToTrackType removes an association from a composition track.
 func (mct *MutableCompositionTrack) RemoveTrackAssociationToTrackType(compositionTrack *CompositionTrack, trackAssociationType obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(compositionTrack)
+	defer runtime.KeepAlive(trackAssociationType)
 	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("removeTrackAssociationToTrack:type:"), objref.IDOf(compositionTrack), objref.IDOf(trackAssociationType))
 }
 
 // ReplaceFormatDescriptionWithFormatDescription replaces a format description with another or cancels a previous replacement.
 func (mct *MutableCompositionTrack) ReplaceFormatDescriptionWithFormatDescription(originalFormatDescription obj.Object, replacementFormatDescription obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(originalFormatDescription)
+	defer runtime.KeepAlive(replacementFormatDescription)
 	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("replaceFormatDescription:withFormatDescription:"), objref.IDOf(originalFormatDescription), objref.IDOf(replacementFormatDescription))
 }
 

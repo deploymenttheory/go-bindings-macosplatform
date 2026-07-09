@@ -5,6 +5,8 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func fetchRequestAdopt(id objc.ID) *FetchRequest {
 
 // Description returns the object's -description text.
 func (fr *FetchRequest) Description() string {
+	defer runtime.KeepAlive(fr)
 	return rt.Description(objref.IDOf(fr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fr *FetchRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fr *FetchRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(fr)
 	return rt.IsKind(objref.IDOf(fr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fr *FetchRequest) String() string {
+	defer runtime.KeepAlive(fr)
 	return rt.Description(objref.IDOf(fr))
 }
 

@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func quantityAdopt(id objc.ID) *Quantity {
 
 // Description returns the object's -description text.
 func (q *Quantity) Description() string {
+	defer runtime.KeepAlive(q)
 	return rt.Description(objref.IDOf(q))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (q *Quantity) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(q)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(q), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (q *Quantity) IsKind(className string) bool {
+	defer runtime.KeepAlive(q)
 	return rt.IsKind(objref.IDOf(q), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (q *Quantity) String() string {
+	defer runtime.KeepAlive(q)
 	return rt.Description(objref.IDOf(q))
 }
 
@@ -72,14 +79,18 @@ func NewQuantity() *Quantity {
 	return quantityAdopt(_id)
 }
 
-// IsCompatibleWithUnit returns a boolean value indicating whether the quantity is compatible with the provided unit.
-func (q *Quantity) IsCompatibleWithUnit(unit *Unit) bool {
+// IsCompatible returns a boolean value indicating whether the quantity is compatible with the provided unit.
+func (q *Quantity) IsCompatible(unit *Unit) bool {
+	defer runtime.KeepAlive(q)
+	defer runtime.KeepAlive(unit)
 	_r := objc.Send[bool](objref.IDOf(q), objc.RegisterName("isCompatibleWithUnit:"), objref.IDOf(unit))
 	return _r
 }
 
 // DoubleValueForUnit returns the quantity’s value in the provided unit.
 func (q *Quantity) DoubleValueForUnit(unit *Unit) float64 {
+	defer runtime.KeepAlive(q)
+	defer runtime.KeepAlive(unit)
 	_r := objc.Send[float64](objref.IDOf(q), objc.RegisterName("doubleValueForUnit:"), objref.IDOf(unit))
 	return _r
 }

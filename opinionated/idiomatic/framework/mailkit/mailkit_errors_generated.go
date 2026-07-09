@@ -8,17 +8,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrCodeInvalidRecipients matches the MailKit error MEComposeSessionErrorCodeInvalidRecipients.
-var ErrCodeInvalidRecipients = errkit.New("MEComposeSessionErrorDomain", 0)
+// ErrCodeInvalidBody matches the MailKit error MEComposeSessionErrorCodeInvalidBody.
+var ErrCodeInvalidBody = errkit.New("MEComposeSessionErrorDomain", 2)
 
 // ErrCodeInvalidHeaders matches the MailKit error MEComposeSessionErrorCodeInvalidHeaders.
 var ErrCodeInvalidHeaders = errkit.New("MEComposeSessionErrorDomain", 1)
 
-// ErrCodeInvalidBody matches the MailKit error MEComposeSessionErrorCodeInvalidBody.
-var ErrCodeInvalidBody = errkit.New("MEComposeSessionErrorDomain", 2)
-
-// ErrMEMessageSecurityEncodingError matches the MailKit error MEMessageSecurityEncodingError.
-var ErrMEMessageSecurityEncodingError = errkit.New("MEMessageSecurityErrorDomain", 0)
+// ErrCodeInvalidRecipients matches the MailKit error MEComposeSessionErrorCodeInvalidRecipients.
+var ErrCodeInvalidRecipients = errkit.New("MEComposeSessionErrorDomain", 0)
 
 // ErrMEMessageSecurityDecodingError matches the MailKit error MEMessageSecurityDecodingError.
 var ErrMEMessageSecurityDecodingError = errkit.New("MEMessageSecurityErrorDomain", 1)
+
+// ErrMEMessageSecurityEncodingError matches the MailKit error MEMessageSecurityEncodingError.
+var ErrMEMessageSecurityEncodingError = errkit.New("MEMessageSecurityErrorDomain", 0)

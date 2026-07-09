@@ -5,10 +5,13 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -76,9 +79,9 @@ func (sspti *SharingServicePickerToolbarItem) WithPaletteLabel(paletteLabel stri
 }
 
 // WithPossibleLabels sets the set of labels that the item might display.
-func (sspti *SharingServicePickerToolbarItem) WithPossibleLabels(possibleLabels obj.Object) *SharingServicePickerToolbarItem {
+func (sspti *SharingServicePickerToolbarItem) WithPossibleLabels(possibleLabels []string) *SharingServicePickerToolbarItem {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setPossibleLabels:"), rt.SliceToNSSet(possibleLabels, func(_v string) objc.ID { return purego.NSString(_v) }))
 	})
 	return sspti
 }
@@ -93,6 +96,7 @@ func (sspti *SharingServicePickerToolbarItem) WithToolTip(toolTip string) *Shari
 
 // WithMenuFormRepresentation sets the menu item to use when the toolbar item is in the overflow menu.
 func (sspti *SharingServicePickerToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *SharingServicePickerToolbarItem {
+	defer runtime.KeepAlive(menuFormRepresentation)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
 	})
@@ -109,6 +113,7 @@ func (sspti *SharingServicePickerToolbarItem) WithTag(tag int) *SharingServicePi
 
 // WithTarget sets the object that defines the action method the toolbar item calls when clicked.
 func (sspti *SharingServicePickerToolbarItem) WithTarget(target obj.Object) *SharingServicePickerToolbarItem {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -125,6 +130,7 @@ func (sspti *SharingServicePickerToolbarItem) WithEnabled(enabled bool) *Sharing
 
 // WithImage sets the image to display for the toolbar item.
 func (sspti *SharingServicePickerToolbarItem) WithImage(image *Image) *SharingServicePickerToolbarItem {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -149,6 +155,7 @@ func (sspti *SharingServicePickerToolbarItem) WithBordered(bordered bool) *Shari
 
 // WithBackgroundTintColor sets the background tint color.
 func (sspti *SharingServicePickerToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *SharingServicePickerToolbarItem {
+	defer runtime.KeepAlive(backgroundTintColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
 	})
@@ -173,6 +180,7 @@ func (sspti *SharingServicePickerToolbarItem) WithNavigational(navigational bool
 
 // WithView sets the custom view you use to draw the toolbar item.
 func (sspti *SharingServicePickerToolbarItem) WithView(view ViewProvider) *SharingServicePickerToolbarItem {
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setView:"), objref.IDOf(view))
 	})
@@ -213,6 +221,7 @@ func (sspti *SharingServicePickerToolbarItem) WithVisibilityPriority(visibilityP
 
 // WithBadge sets a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (sspti *SharingServicePickerToolbarItem) WithBadge(badge *ItemBadge) *SharingServicePickerToolbarItem {
+	defer runtime.KeepAlive(badge)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setBadge:"), objref.IDOf(badge))
 	})

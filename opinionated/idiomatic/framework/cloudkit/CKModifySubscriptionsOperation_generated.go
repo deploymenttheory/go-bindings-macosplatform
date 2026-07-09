@@ -6,9 +6,11 @@ package cloudkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -56,9 +58,9 @@ func NewModifySubscriptionsOperation() *ModifySubscriptionsOperation {
 }
 
 // NewModifySubscriptionsOperationWithSubscriptionsToSaveSubscriptionIDsToDelete creates an operation for saving and deleting the specified subscriptions.
-func NewModifySubscriptionsOperationWithSubscriptionsToSaveSubscriptionIDsToDelete(subscriptionsToSave []*Subscription, subscriptionIDsToDelete []obj.Object) *ModifySubscriptionsOperation {
+func NewModifySubscriptionsOperationWithSubscriptionsToSaveSubscriptionIDsToDelete(subscriptionsToSave []*Subscription, subscriptionIDsToDelete []*foundation.String) *ModifySubscriptionsOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKModifySubscriptionsOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubscriptionsToSave:subscriptionIDsToDelete:"), purego.SliceToNSArray(subscriptionsToSave, func(_v *Subscription) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(subscriptionIDsToDelete, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubscriptionsToSave:subscriptionIDsToDelete:"), purego.SliceToNSArray(subscriptionsToSave, func(_v *Subscription) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(subscriptionIDsToDelete, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
 	return modifySubscriptionsOperationAdopt(_id)
 }
 
@@ -78,18 +80,21 @@ func (mso *ModifySubscriptionsOperation) WithSubscriptionIDsToDelete(items ...ob
 
 // WithDatabase sets the database that the operation uses.
 func (mso *ModifySubscriptionsOperation) WithDatabase(database *Database) *ModifySubscriptionsOperation {
+	defer runtime.KeepAlive(database)
 	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return mso
 }
 
 // WithConfiguration sets the operation’s configuration.
 func (mso *ModifySubscriptionsOperation) WithConfiguration(configuration *OperationConfiguration) *ModifySubscriptionsOperation {
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return mso
 }
 
 // WithGroup sets the operation’s group.
 func (mso *ModifySubscriptionsOperation) WithGroup(group *OperationGroup) *ModifySubscriptionsOperation {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return mso
 }
@@ -102,6 +107,7 @@ func (mso *ModifySubscriptionsOperation) WithLongLivedOperationWasPersistedBlock
 
 // WithContainer sets the operation's container.
 func (mso *ModifySubscriptionsOperation) WithContainer(container *Container) *ModifySubscriptionsOperation {
+	defer runtime.KeepAlive(container)
 	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return mso
 }
@@ -134,6 +140,7 @@ func (mso *ModifySubscriptionsOperation) WithTimeoutIntervalForResource(timeoutI
 //
 // SubscriptionsToSave returns the collection as a Go slice.
 func (mso *ModifySubscriptionsOperation) SubscriptionsToSave() []*Subscription {
+	defer runtime.KeepAlive(mso)
 	_arr := objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("subscriptionsToSave"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Subscription { return SubscriptionFromID(_id) })
 }
@@ -142,6 +149,7 @@ func (mso *ModifySubscriptionsOperation) SubscriptionsToSave() []*Subscription {
 //
 // SubscriptionIDsToDelete returns the collection as a Go slice.
 func (mso *ModifySubscriptionsOperation) SubscriptionIDsToDelete() []obj.Object {
+	defer runtime.KeepAlive(mso)
 	_arr := objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("subscriptionIDsToDelete"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -150,6 +158,7 @@ func (mso *ModifySubscriptionsOperation) SubscriptionIDsToDelete() []obj.Object 
 //
 // SetPerSubscriptionDeleteBlock blocks until the operation completes or ctx is cancelled.
 func (mso *ModifySubscriptionsOperation) SetPerSubscriptionDeleteBlock(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mso)
 	type _result struct {
 		val string
 		err error

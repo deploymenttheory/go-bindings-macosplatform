@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func portNameServerAdopt(id objc.ID) *PortNameServer {
 
 // Description returns the object's -description text.
 func (pns *PortNameServer) Description() string {
+	defer runtime.KeepAlive(pns)
 	return rt.Description(objref.IDOf(pns))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pns *PortNameServer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pns)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pns), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pns *PortNameServer) IsKind(className string) bool {
+	defer runtime.KeepAlive(pns)
 	return rt.IsKind(objref.IDOf(pns), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pns *PortNameServer) String() string {
+	defer runtime.KeepAlive(pns)
 	return rt.Description(objref.IDOf(pns))
 }
 
@@ -77,31 +83,36 @@ func (pns *PortNameServer) WithObservationInfo(observationInfo unsafe.Pointer) *
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (pns *PortNameServer) WithScriptingProperties(scriptingProperties obj.Object) *PortNameServer {
-	objc.Send[objc.ID](objref.IDOf(pns), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (pns *PortNameServer) WithScriptingProperties(scriptingProperties map[string]obj.Object) *PortNameServer {
+	objc.Send[objc.ID](objref.IDOf(pns), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return pns
 }
 
 // PortForName looks up and returns the port registered under the specified name on the local host.
 func (pns *PortNameServer) PortForName(name string) *Port {
+	defer runtime.KeepAlive(pns)
 	_r := objc.Send[objc.ID](objref.IDOf(pns), objc.RegisterName("portForName:"), purego.NSString(name))
 	return PortFromID(_r)
 }
 
 // PortForNameHost looks up and returns the port registered under the specified name on a specified host.
 func (pns *PortNameServer) PortForNameHost(name string, host string) *Port {
+	defer runtime.KeepAlive(pns)
 	_r := objc.Send[objc.ID](objref.IDOf(pns), objc.RegisterName("portForName:host:"), purego.NSString(name), purego.NSString(host))
 	return PortFromID(_r)
 }
 
 // RegisterPortName makes a given port available on the network under a specified name.
 func (pns *PortNameServer) RegisterPortName(port *Port, name string) bool {
+	defer runtime.KeepAlive(pns)
+	defer runtime.KeepAlive(port)
 	_r := objc.Send[bool](objref.IDOf(pns), objc.RegisterName("registerPort:name:"), objref.IDOf(port), purego.NSString(name))
 	return _r
 }
 
 // RemovePortForName unregisters the port for a given name on the local host.
 func (pns *PortNameServer) RemovePortForName(name string) bool {
+	defer runtime.KeepAlive(pns)
 	_r := objc.Send[bool](objref.IDOf(pns), objc.RegisterName("removePortForName:"), purego.NSString(name))
 	return _r
 }

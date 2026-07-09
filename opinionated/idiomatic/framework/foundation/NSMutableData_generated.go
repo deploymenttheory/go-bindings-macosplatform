@@ -5,12 +5,14 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -76,33 +78,38 @@ func (md *MutableData) WithObservationInfo(observationInfo unsafe.Pointer) *Muta
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (md *MutableData) WithScriptingProperties(scriptingProperties obj.Object) *MutableData {
-	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (md *MutableData) WithScriptingProperties(scriptingProperties map[string]obj.Object) *MutableData {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return md
 }
 
 // AppendBytesLength appends to the receiver a given number of bytes from a given buffer.
-func (md *MutableData) AppendBytesLength(bytes_ unsafe.Pointer, length int) {
-	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("appendBytes:length:"), bytes_, length)
+func (md *MutableData) AppendBytesLength(data unsafe.Pointer, length int) {
+	defer runtime.KeepAlive(md)
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("appendBytes:length:"), data, length)
 }
 
 // AppendData appends the content of another data object to the receiver.
-func (md *MutableData) AppendData(other *Data) {
-	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("appendData:"), objref.IDOf(other))
+func (md *MutableData) AppendData(other []byte) {
+	defer runtime.KeepAlive(md)
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("appendData:"), rt.BytesToNSData(other))
 }
 
 // IncreaseLengthBy increases the length of the receiver by a given number of bytes.
 func (md *MutableData) IncreaseLengthBy(extraLength int) {
+	defer runtime.KeepAlive(md)
 	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("increaseLengthBy:"), extraLength)
 }
 
 // SetData replaces the entire contents of the receiver with the contents of another data object.
-func (md *MutableData) SetData(data *Data) {
-	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setData:"), objref.IDOf(data))
+func (md *MutableData) SetData(data []byte) {
+	defer runtime.KeepAlive(md)
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setData:"), rt.BytesToNSData(data))
 }
 
 // DecompressUsingAlgorithm decompresses the data object’s bytes.
 func (md *MutableData) DecompressUsingAlgorithm(algorithm DataCompressionAlgorithm) error {
+	defer runtime.KeepAlive(md)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(md), objc.RegisterName("decompressUsingAlgorithm:error:"), algorithm, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -113,6 +120,7 @@ func (md *MutableData) DecompressUsingAlgorithm(algorithm DataCompressionAlgorit
 
 // CompressUsingAlgorithm compresses the data object’s bytes using an algorithm that you specify.
 func (md *MutableData) CompressUsingAlgorithm(algorithm DataCompressionAlgorithm) error {
+	defer runtime.KeepAlive(md)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(md), objc.RegisterName("compressUsingAlgorithm:error:"), algorithm, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

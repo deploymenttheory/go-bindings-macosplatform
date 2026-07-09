@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func uSBMassStorageDeviceAdopt(id objc.ID) *USBMassStorageDevice {
 
 // NewUSBMassStorageDeviceWithConfiguration creates a USB mass storage device with the provided configuration.
 func NewUSBMassStorageDeviceWithConfiguration(configuration *USBMassStorageDeviceConfiguration) *USBMassStorageDevice {
+	defer runtime.KeepAlive(configuration)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZUSBMassStorageDevice")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
 	return uSBMassStorageDeviceAdopt(_id)

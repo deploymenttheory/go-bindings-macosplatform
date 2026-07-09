@@ -5,6 +5,8 @@
 package corewlan
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func configurationAdopt(id objc.ID) *Configuration {
 
 // Description returns the object's -description text.
 func (c *Configuration) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Configuration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Configuration) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Configuration) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // NewConfigurationWithConfiguration creates and returns a CWConfiguration object initialized with the given CWConfiguration object.
 func NewConfigurationWithConfiguration(configuration *Configuration) *Configuration {
+	defer runtime.KeepAlive(configuration)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CWConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
 	return configurationAdopt(_id)
@@ -77,36 +85,43 @@ func NewConfigurationWithConfiguration(configuration *Configuration) *Configurat
 
 // IsEqualToConfiguration determine CWConfiguration object equality.
 func (c *Configuration) IsEqualToConfiguration(configuration *Configuration) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(configuration)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isEqualToConfiguration:"), objref.IDOf(configuration))
 	return _r
 }
 
 // NetworkProfiles returns the preferred networks list. The order of the ordered set corresponds to the order the preferred networks list.
 func (c *Configuration) NetworkProfiles() obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("networkProfiles"))
 	return obj.Wrap(_r)
 }
 
 // RequireAdministratorForAssociation reports whether returns the preference to require an administrator password to change networks. If true, the user may be prompted to enter an administrator password upon attempting to join a Wi-Fi network. This preference is enforced at the API layer.
 func (c *Configuration) RequireAdministratorForAssociation() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("requireAdministratorForAssociation"))
 	return _r
 }
 
 // RequireAdministratorForPower reports whether returns the preference to require an administrator password to change the interface power state. If true, the user may be prompted to enter an administrator password upon attempting to turn Wi-Fi on or off. This preference is enforced at the API layer.
 func (c *Configuration) RequireAdministratorForPower() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("requireAdministratorForPower"))
 	return _r
 }
 
 // RequireAdministratorForIBSSMode reports whether returns the preference to require an administrator password to create a computer-to-computer network. If true, the user may be prompted to enter an administrator password upon attempting to create an IBSS network. This preference is enforced at the API layer.
 func (c *Configuration) RequireAdministratorForIBSSMode() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("requireAdministratorForIBSSMode"))
 	return _r
 }
 
 // RememberJoinedNetworks reports whether returns the preference to remember all Wi-Fi networks joined unless otherwise specified by the user when joining a particular Wi-Fi network.
 func (c *Configuration) RememberJoinedNetworks() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("rememberJoinedNetworks"))
 	return _r
 }

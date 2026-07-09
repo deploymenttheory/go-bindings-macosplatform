@@ -5,6 +5,9 @@
 package shazamkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,39 +52,49 @@ func mediaItemAdopt(id objc.ID) *MediaItem {
 
 // Description returns the object's -description text.
 func (mi *MediaItem) Description() string {
+	defer runtime.KeepAlive(mi)
 	return rt.Description(objref.IDOf(mi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mi *MediaItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mi *MediaItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(mi)
 	return rt.IsKind(objref.IDOf(mi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mi *MediaItem) String() string {
+	defer runtime.KeepAlive(mi)
 	return rt.Description(objref.IDOf(mi))
 }
 
 // ValueForProperty accesses the property for the specified key for reading.
 func (mi *MediaItem) ValueForProperty(property obj.Object) obj.Object {
+	defer runtime.KeepAlive(mi)
+	defer runtime.KeepAlive(property)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("valueForProperty:"), objref.IDOf(property))
 	return obj.Wrap(_r)
 }
 
 // ObjectForKeyedSubscript accesses the property for the specified key for reading.
 func (mi *MediaItem) ObjectForKeyedSubscript(key obj.Object) obj.Object {
+	defer runtime.KeepAlive(mi)
+	defer runtime.KeepAlive(key)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(key))
 	return obj.Wrap(_r)
 }
 
 // ShazamID returns the Shazam ID for the song.
 func (mi *MediaItem) ShazamID() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("shazamID"))
 	if _r == 0 {
 		return ""
@@ -91,6 +104,7 @@ func (mi *MediaItem) ShazamID() string {
 
 // Title returns a title for the media item.
 func (mi *MediaItem) Title() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -100,6 +114,7 @@ func (mi *MediaItem) Title() string {
 
 // Subtitle returns a subtitle for the media item.
 func (mi *MediaItem) Subtitle() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("subtitle"))
 	if _r == 0 {
 		return ""
@@ -109,6 +124,7 @@ func (mi *MediaItem) Subtitle() string {
 
 // Artist returns the name of the artist for the media item, such as the performer of a song.
 func (mi *MediaItem) Artist() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("artist"))
 	if _r == 0 {
 		return ""
@@ -120,12 +136,14 @@ func (mi *MediaItem) Artist() string {
 //
 // Genres returns the collection as a Go slice.
 func (mi *MediaItem) Genres() []string {
+	defer runtime.KeepAlive(mi)
 	_arr := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("genres"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // AppleMusicID returns the Apple Music ID for the song.
 func (mi *MediaItem) AppleMusicID() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("appleMusicID"))
 	if _r == 0 {
 		return ""
@@ -134,37 +152,43 @@ func (mi *MediaItem) AppleMusicID() string {
 }
 
 // AppleMusicURL returns a link to the Apple Music page that contains the full information for the song.
-func (mi *MediaItem) AppleMusicURL() obj.Object {
+func (mi *MediaItem) AppleMusicURL() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("appleMusicURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // WebURL returns a link to the Shazam Music catalog page that contains the full information for the song. This link opens the Shazam app or App Clip if it's available on the device.
-func (mi *MediaItem) WebURL() obj.Object {
+func (mi *MediaItem) WebURL() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("webURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // ArtworkURL returns the URL for artwork for the media item, such as an album cover.
-func (mi *MediaItem) ArtworkURL() obj.Object {
+func (mi *MediaItem) ArtworkURL() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("artworkURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // VideoURL returns the URL for a video for the media item, such as a music video.
-func (mi *MediaItem) VideoURL() obj.Object {
+func (mi *MediaItem) VideoURL() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("videoURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // ExplicitContent reports whether the media item contains explicit content.
 func (mi *MediaItem) ExplicitContent() bool {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("explicitContent"))
 	return _r
 }
 
 // Isrc returns the International Standard Recording Code (ISRC) for the media item.
 func (mi *MediaItem) Isrc() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("isrc"))
 	if _r == 0 {
 		return ""
@@ -176,6 +200,7 @@ func (mi *MediaItem) Isrc() string {
 //
 // TimeRanges returns the collection as a Go slice.
 func (mi *MediaItem) TimeRanges() []*Range {
+	defer runtime.KeepAlive(mi)
 	_arr := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("timeRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Range { return RangeFromID(_id) })
 }
@@ -184,14 +209,16 @@ func (mi *MediaItem) TimeRanges() []*Range {
 //
 // FrequencySkewRanges returns the collection as a Go slice.
 func (mi *MediaItem) FrequencySkewRanges() []*Range {
+	defer runtime.KeepAlive(mi)
 	_arr := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("frequencySkewRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Range { return RangeFromID(_id) })
 }
 
 // CreationDate returns the date the media item was created.
-func (mi *MediaItem) CreationDate() obj.Object {
+func (mi *MediaItem) CreationDate() time.Time {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("creationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // isMediaItem marks MediaItem — and, by embedding promotion, its

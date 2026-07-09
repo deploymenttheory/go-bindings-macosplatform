@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,64 +49,76 @@ func mTRCommandWithRequiredResponseAdopt(id objc.ID) *MTRCommandWithRequiredResp
 
 // Description returns the object's -description text.
 func (mcwrr *MTRCommandWithRequiredResponse) Description() string {
+	defer runtime.KeepAlive(mcwrr)
 	return rt.Description(objref.IDOf(mcwrr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcwrr *MTRCommandWithRequiredResponse) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcwrr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcwrr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcwrr *MTRCommandWithRequiredResponse) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcwrr)
 	return rt.IsKind(objref.IDOf(mcwrr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcwrr *MTRCommandWithRequiredResponse) String() string {
+	defer runtime.KeepAlive(mcwrr)
 	return rt.Description(objref.IDOf(mcwrr))
 }
 
 // NewMTRCommandWithRequiredResponseWithPathCommandFieldsRequiredResponse creates a new MTRCommandWithRequiredResponse.
-func NewMTRCommandWithRequiredResponseWithPathCommandFieldsRequiredResponse(path *MTRCommandPath, commandFields obj.Object, requiredResponse obj.Object) *MTRCommandWithRequiredResponse {
+func NewMTRCommandWithRequiredResponseWithPathCommandFieldsRequiredResponse(path *MTRCommandPath, commandFields map[string]obj.Object, requiredResponse obj.Object) *MTRCommandWithRequiredResponse {
+	defer runtime.KeepAlive(path)
+	defer runtime.KeepAlive(requiredResponse)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRCommandWithRequiredResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:commandFields:requiredResponse:"), objref.IDOf(path), objref.IDOf(commandFields), objref.IDOf(requiredResponse))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:commandFields:requiredResponse:"), objref.IDOf(path), rt.MapToDict(commandFields, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(requiredResponse))
 	return mTRCommandWithRequiredResponseAdopt(_id)
 }
 
 // WithPath sets the path of the command being invoked.
 func (mcwrr *MTRCommandWithRequiredResponse) WithPath(path *MTRCommandPath) *MTRCommandWithRequiredResponse {
+	defer runtime.KeepAlive(path)
 	objc.Send[objc.ID](objref.IDOf(mcwrr), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return mcwrr
 }
 
 // WithCommandFields sets the command fields to pass for the command invoke. nil if this command does not have any fields. If not nil, this should be a data-value dictionary of MTRStructureValueType.
-func (mcwrr *MTRCommandWithRequiredResponse) WithCommandFields(commandFields obj.Object) *MTRCommandWithRequiredResponse {
-	objc.Send[objc.ID](objref.IDOf(mcwrr), objc.RegisterName("setCommandFields:"), objref.IDOf(commandFields))
+func (mcwrr *MTRCommandWithRequiredResponse) WithCommandFields(commandFields map[string]obj.Object) *MTRCommandWithRequiredResponse {
+	objc.Send[objc.ID](objref.IDOf(mcwrr), objc.RegisterName("setCommandFields:"), rt.MapToDict(commandFields, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return mcwrr
 }
 
 // WithRequiredResponse sets the response that represents this command succeeding.
 func (mcwrr *MTRCommandWithRequiredResponse) WithRequiredResponse(requiredResponse obj.Object) *MTRCommandWithRequiredResponse {
+	defer runtime.KeepAlive(requiredResponse)
 	objc.Send[objc.ID](objref.IDOf(mcwrr), objc.RegisterName("setRequiredResponse:"), objref.IDOf(requiredResponse))
 	return mcwrr
 }
 
 // Path returns the path of the command being invoked.
 func (mcwrr *MTRCommandWithRequiredResponse) Path() *MTRCommandPath {
+	defer runtime.KeepAlive(mcwrr)
 	_r := objc.Send[objc.ID](objref.IDOf(mcwrr), objc.RegisterName("path"))
 	return MTRCommandPathFromID(_r)
 }
 
 // CommandFields returns the command fields to pass for the command invoke.  nil if this command does not have any fields.  If not nil, this should be a data-value dictionary of MTRStructureValueType.
-func (mcwrr *MTRCommandWithRequiredResponse) CommandFields() obj.Object {
+func (mcwrr *MTRCommandWithRequiredResponse) CommandFields() map[string]obj.Object {
+	defer runtime.KeepAlive(mcwrr)
 	_r := objc.Send[objc.ID](objref.IDOf(mcwrr), objc.RegisterName("commandFields"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // RequiredResponse returns the response that represents this command succeeding. If this is nil, that indicates that the invoke is considered successful if it does not result in an error status response. If this is is not nil, then the invoke is considered successful if the response is a data response and for each entry in the provided requiredResponse the field whose field ID matches the key of the entry has a value that equals the value of the entry.  Values of entries are data-value dictionaries.
 func (mcwrr *MTRCommandWithRequiredResponse) RequiredResponse() obj.Object {
+	defer runtime.KeepAlive(mcwrr)
 	_r := objc.Send[objc.ID](objref.IDOf(mcwrr), objc.RegisterName("requiredResponse"))
 	return obj.Wrap(_r)
 }

@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nEIPv4SettingsAdopt(id objc.ID) *NEIPv4Settings {
 
 // Description returns the object's -description text.
 func (nps *NEIPv4Settings) Description() string {
+	defer runtime.KeepAlive(nps)
 	return rt.Description(objref.IDOf(nps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nps *NEIPv4Settings) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nps *NEIPv4Settings) IsKind(className string) bool {
+	defer runtime.KeepAlive(nps)
 	return rt.IsKind(objref.IDOf(nps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nps *NEIPv4Settings) String() string {
+	defer runtime.KeepAlive(nps)
 	return rt.Description(objref.IDOf(nps))
 }
 
@@ -97,6 +104,7 @@ func (nps *NEIPv4Settings) WithExcludedRoutes(items ...*NEIPv4Route) *NEIPv4Sett
 //
 // Addresses returns the collection as a Go slice.
 func (nps *NEIPv4Settings) Addresses() []string {
+	defer runtime.KeepAlive(nps)
 	_arr := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("addresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -105,12 +113,14 @@ func (nps *NEIPv4Settings) Addresses() []string {
 //
 // SubnetMasks returns the collection as a Go slice.
 func (nps *NEIPv4Settings) SubnetMasks() []string {
+	defer runtime.KeepAlive(nps)
 	_arr := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("subnetMasks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Router returns the address of the next-hop gateway router represented as a dotted decimal string. This property is ignored for TUN interfaces.
 func (nps *NEIPv4Settings) Router() string {
+	defer runtime.KeepAlive(nps)
 	_r := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("router"))
 	if _r == 0 {
 		return ""
@@ -122,6 +132,7 @@ func (nps *NEIPv4Settings) Router() string {
 //
 // IncludedRoutes returns the collection as a Go slice.
 func (nps *NEIPv4Settings) IncludedRoutes() []*NEIPv4Route {
+	defer runtime.KeepAlive(nps)
 	_arr := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("includedRoutes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEIPv4Route { return NEIPv4RouteFromID(_id) })
 }
@@ -130,6 +141,7 @@ func (nps *NEIPv4Settings) IncludedRoutes() []*NEIPv4Route {
 //
 // ExcludedRoutes returns the collection as a Go slice.
 func (nps *NEIPv4Settings) ExcludedRoutes() []*NEIPv4Route {
+	defer runtime.KeepAlive(nps)
 	_arr := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("excludedRoutes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEIPv4Route { return NEIPv4RouteFromID(_id) })
 }

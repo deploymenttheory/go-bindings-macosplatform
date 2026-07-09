@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,24 +53,28 @@ func NewDOMRect() *DOMRect {
 
 // Top returns the top.
 func (dr *DOMRect) Top() *DOMCSSPrimitiveValue {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("top"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
 // Right returns the right.
 func (dr *DOMRect) Right() *DOMCSSPrimitiveValue {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("right"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
 // Bottom returns the bottom.
 func (dr *DOMRect) Bottom() *DOMCSSPrimitiveValue {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("bottom"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
 // Left returns the left.
 func (dr *DOMRect) Left() *DOMCSSPrimitiveValue {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("left"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }

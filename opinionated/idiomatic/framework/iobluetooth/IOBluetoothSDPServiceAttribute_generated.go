@@ -5,6 +5,8 @@
 package iobluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func iOBluetoothSDPServiceAttributeAdopt(id objc.ID) *IOBluetoothSDPServiceAttri
 
 // Description returns the object's -description text.
 func (ibssa *IOBluetoothSDPServiceAttribute) Description() string {
+	defer runtime.KeepAlive(ibssa)
 	return rt.Description(objref.IDOf(ibssa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ibssa *IOBluetoothSDPServiceAttribute) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ibssa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ibssa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ibssa *IOBluetoothSDPServiceAttribute) IsKind(className string) bool {
+	defer runtime.KeepAlive(ibssa)
 	return rt.IsKind(objref.IDOf(ibssa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ibssa *IOBluetoothSDPServiceAttribute) String() string {
+	defer runtime.KeepAlive(ibssa)
 	return rt.Description(objref.IDOf(ibssa))
 }
 
 // NewIOBluetoothSDPServiceAttributeWithIDAttributeElementValue initializes a new service attribute with the given ID and element value.
 func NewIOBluetoothSDPServiceAttributeWithIDAttributeElementValue(newAttributeID uint16, attributeElementValue obj.Object) *IOBluetoothSDPServiceAttribute {
+	defer runtime.KeepAlive(attributeElementValue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPServiceAttribute")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithID:attributeElementValue:"), newAttributeID, objref.IDOf(attributeElementValue))
 	return iOBluetoothSDPServiceAttributeAdopt(_id)
@@ -75,6 +83,7 @@ func NewIOBluetoothSDPServiceAttributeWithIDAttributeElementValue(newAttributeID
 
 // NewIOBluetoothSDPServiceAttributeWithIDAttributeElement initializes a new service attribute with the given ID and data element.
 func NewIOBluetoothSDPServiceAttributeWithIDAttributeElement(newAttributeID uint16, attributeElement *IOBluetoothSDPDataElement) *IOBluetoothSDPServiceAttribute {
+	defer runtime.KeepAlive(attributeElement)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPServiceAttribute")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithID:attributeElement:"), newAttributeID, objref.IDOf(attributeElement))
 	return iOBluetoothSDPServiceAttributeAdopt(_id)
@@ -82,18 +91,21 @@ func NewIOBluetoothSDPServiceAttributeWithIDAttributeElement(newAttributeID uint
 
 // AttributeID returns the attribute ID for the target service attribute.
 func (ibssa *IOBluetoothSDPServiceAttribute) AttributeID() uint16 {
+	defer runtime.KeepAlive(ibssa)
 	_r := objc.Send[uint16](objref.IDOf(ibssa), objc.RegisterName("getAttributeID"))
 	return _r
 }
 
 // DataElement returns the data element for the target service attribute.
 func (ibssa *IOBluetoothSDPServiceAttribute) DataElement() *IOBluetoothSDPDataElement {
+	defer runtime.KeepAlive(ibssa)
 	_r := objc.Send[objc.ID](objref.IDOf(ibssa), objc.RegisterName("getDataElement"))
 	return IOBluetoothSDPDataElementFromID(_r)
 }
 
 // IDDataElement returns the data element representing the attribute ID for the target service attribute.
 func (ibssa *IOBluetoothSDPServiceAttribute) IDDataElement() *IOBluetoothSDPDataElement {
+	defer runtime.KeepAlive(ibssa)
 	_r := objc.Send[objc.ID](objref.IDOf(ibssa), objc.RegisterName("getIDDataElement"))
 	return IOBluetoothSDPDataElementFromID(_r)
 }

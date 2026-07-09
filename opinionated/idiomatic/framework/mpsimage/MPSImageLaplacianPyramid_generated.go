@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -71,12 +73,14 @@ func (ilp *ImageLaplacianPyramid) WithClipRect(clipRect metal.MTLRegion) *ImageL
 
 // LaplacianBias returns the laplacian bias.
 func (ilp *ImageLaplacianPyramid) LaplacianBias() float32 {
+	defer runtime.KeepAlive(ilp)
 	_r := objc.Send[float32](objref.IDOf(ilp), objc.RegisterName("getLaplacianBias"))
 	return _r
 }
 
 // LaplacianScale returns the laplacian scale.
 func (ilp *ImageLaplacianPyramid) LaplacianScale() float32 {
+	defer runtime.KeepAlive(ilp)
 	_r := objc.Send[float32](objref.IDOf(ilp), objc.RegisterName("getLaplacianScale"))
 	return _r
 }

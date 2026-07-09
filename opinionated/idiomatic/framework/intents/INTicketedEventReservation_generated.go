@@ -5,9 +5,11 @@
 package intents
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -48,27 +50,35 @@ func ticketedEventReservationAdopt(id objc.ID) *TicketedEventReservation {
 }
 
 // NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatEvent creates a ticketed event reservation with the specified contents and attributes.
-func NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatEvent(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, uRL string, reservedSeat *Seat, event *TicketedEvent) *TicketedEventReservation {
+func NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatEvent(itemReference *SpeakableString, reservationNumber string, bookingTime time.Time, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, url string, reservedSeat *Seat, event *TicketedEvent) *TicketedEventReservation {
+	defer runtime.KeepAlive(itemReference)
+	defer runtime.KeepAlive(reservedSeat)
+	defer runtime.KeepAlive(event)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INTicketedEventReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:event:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), objref.IDOf(reservedSeat), objref.IDOf(event))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:event:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), rt.TimeToNSDate(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(url), objref.IDOf(reservedSeat), objref.IDOf(event))
 	return ticketedEventReservationAdopt(_id)
 }
 
 // NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatEvent creates a new ticketed event reservation with the specified contents and attributes.
-func NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatEvent(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, reservedSeat *Seat, event *TicketedEvent) *TicketedEventReservation {
+func NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatEvent(itemReference *SpeakableString, reservationNumber string, bookingTime time.Time, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, reservedSeat *Seat, event *TicketedEvent) *TicketedEventReservation {
+	defer runtime.KeepAlive(itemReference)
+	defer runtime.KeepAlive(reservedSeat)
+	defer runtime.KeepAlive(event)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INTicketedEventReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:reservedSeat:event:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), objref.IDOf(reservedSeat), objref.IDOf(event))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:reservedSeat:event:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), rt.TimeToNSDate(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), objref.IDOf(reservedSeat), objref.IDOf(event))
 	return ticketedEventReservationAdopt(_id)
 }
 
 // Event returns the event.
 func (ter *TicketedEventReservation) Event() *TicketedEvent {
+	defer runtime.KeepAlive(ter)
 	_r := objc.Send[objc.ID](objref.IDOf(ter), objc.RegisterName("event"))
 	return TicketedEventFromID(_r)
 }
 
 // ReservedSeat returns the reserved seat.
 func (ter *TicketedEventReservation) ReservedSeat() *Seat {
+	defer runtime.KeepAlive(ter)
 	_r := objc.Send[objc.ID](objref.IDOf(ter), objc.RegisterName("reservedSeat"))
 	return SeatFromID(_r)
 }

@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func vectorAdopt(id objc.ID) *Vector {
 
 // Description returns the object's -description text.
 func (v_ *Vector) Description() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (v_ *Vector) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (v_ *Vector) IsKind(className string) bool {
+	defer runtime.KeepAlive(v_)
 	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (v_ *Vector) String() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
@@ -125,60 +132,70 @@ func NewVectorWithString(representation string) *Vector {
 
 // ValueAtIndex returns a value from a specific position in the vector.
 func (v_ *Vector) ValueAtIndex(index int) float64 {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("valueAtIndex:"), index)
 	return _r
 }
 
 // Count returns the number of items in the vector.
 func (v_ *Vector) Count() int {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("count"))
 	return _r
 }
 
 // X returns the value located in the first position in the vector.
 func (v_ *Vector) X() float64 {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("X"))
 	return _r
 }
 
 // Y returns the value located in the second position in the vector.
 func (v_ *Vector) Y() float64 {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("Y"))
 	return _r
 }
 
 // Z returns the value located in the third position in the vector.
 func (v_ *Vector) Z() float64 {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("Z"))
 	return _r
 }
 
 // W returns the value located in the forth position in the vector.
 func (v_ *Vector) W() float64 {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("W"))
 	return _r
 }
 
 // CGPointValue returns the values in the vector as a `CGPoint` structure. - Returns: Reading this property returns a `CGPoint` structure from the `X` and `Y` values from the vector.
 func (v_ *Vector) CGPointValue() corefoundation.CGPoint {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("CGPointValue"))
 	return _r
 }
 
 // CGRectValue returns the values in the vector as a `CGRect` structure. - Returns: Reading this property creates a `CGRect` structure whose origin is the `X`, `Y`, `Z` and `W` values from the vector.
 func (v_ *Vector) CGRectValue() corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("CGRectValue"))
 	return _r
 }
 
 // CGAffineTransformValue returns the values in the vector as a `CGAffineTransformValue` structure. - Returns: Reading this property creates a `CGAffineTransformValue` structure from the first six values in the vector.
 func (v_ *Vector) CGAffineTransformValue() corefoundation.CGAffineTransform {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(v_), objc.RegisterName("CGAffineTransformValue"))
 	return _r
 }
 
 // StringRepresentation returns a formatted string with all the values of a `CIVector`. Some example string representations of vectors: `CIVector`                               | `stringRepresentation` ---------------------------------------- | -------------- `[CIVector vectorWithX:1.0 Y:0.5 Z:0.3]` | `"[1.0 0.5 0.3]"` `[CIVector vectorWithX:10.0 Y:23.0]`     | `"[10.0 23.0]"` To create a “CIVector“ object from a string representation, use the “vectorWithString:“ method.
 func (v_ *Vector) StringRepresentation() string {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("stringRepresentation"))
 	if _r == 0 {
 		return ""

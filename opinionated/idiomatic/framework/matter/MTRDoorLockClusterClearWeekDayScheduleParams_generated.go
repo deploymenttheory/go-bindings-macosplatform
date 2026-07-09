@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDoorLockClusterClearWeekDayScheduleParamsAdopt(id objc.ID) *MTRDoorLockC
 
 // Description returns the object's -description text.
 func (mdlccwdsp *MTRDoorLockClusterClearWeekDayScheduleParams) Description() string {
+	defer runtime.KeepAlive(mdlccwdsp)
 	return rt.Description(objref.IDOf(mdlccwdsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdlccwdsp *MTRDoorLockClusterClearWeekDayScheduleParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdlccwdsp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdlccwdsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdlccwdsp *MTRDoorLockClusterClearWeekDayScheduleParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdlccwdsp)
 	return rt.IsKind(objref.IDOf(mdlccwdsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdlccwdsp *MTRDoorLockClusterClearWeekDayScheduleParams) String() string {
+	defer runtime.KeepAlive(mdlccwdsp)
 	return rt.Description(objref.IDOf(mdlccwdsp))
 }
 
@@ -72,48 +80,56 @@ func NewMTRDoorLockClusterClearWeekDayScheduleParams() *MTRDoorLockClusterClearW
 
 // WithWeekDayIndex sets the week day index.
 func (mdlccwdsp *MTRDoorLockClusterClearWeekDayScheduleParams) WithWeekDayIndex(weekDayIndex obj.Object) *MTRDoorLockClusterClearWeekDayScheduleParams {
+	defer runtime.KeepAlive(weekDayIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlccwdsp), objc.RegisterName("setWeekDayIndex:"), objref.IDOf(weekDayIndex))
 	return mdlccwdsp
 }
 
 // WithUserIndex sets the user index.
 func (mdlccwdsp *MTRDoorLockClusterClearWeekDayScheduleParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterClearWeekDayScheduleParams {
+	defer runtime.KeepAlive(userIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlccwdsp), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlccwdsp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mdlccwdsp *MTRDoorLockClusterClearWeekDayScheduleParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterClearWeekDayScheduleParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mdlccwdsp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mdlccwdsp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mdlccwdsp *MTRDoorLockClusterClearWeekDayScheduleParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterClearWeekDayScheduleParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mdlccwdsp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mdlccwdsp
 }
 
 // WeekDayIndex returns the week day index.
-func (mdlccwdsp *MTRDoorLockClusterClearWeekDayScheduleParams) WeekDayIndex() obj.Object {
+func (mdlccwdsp *MTRDoorLockClusterClearWeekDayScheduleParams) WeekDayIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlccwdsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlccwdsp), objc.RegisterName("weekDayIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // UserIndex returns the user index.
-func (mdlccwdsp *MTRDoorLockClusterClearWeekDayScheduleParams) UserIndex() obj.Object {
+func (mdlccwdsp *MTRDoorLockClusterClearWeekDayScheduleParams) UserIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlccwdsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlccwdsp), objc.RegisterName("userIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mdlccwdsp *MTRDoorLockClusterClearWeekDayScheduleParams) TimedInvokeTimeoutMs() obj.Object {
+func (mdlccwdsp *MTRDoorLockClusterClearWeekDayScheduleParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mdlccwdsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlccwdsp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mdlccwdsp *MTRDoorLockClusterClearWeekDayScheduleParams) ServerSideProcessingTimeout() obj.Object {
+func (mdlccwdsp *MTRDoorLockClusterClearWeekDayScheduleParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mdlccwdsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlccwdsp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

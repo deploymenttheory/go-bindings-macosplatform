@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRGeneralDiagnosticsClusterTestEventTriggerParamsAdopt(id objc.ID) *MTRGen
 
 // Description returns the object's -description text.
 func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) Description() string {
+	defer runtime.KeepAlive(mgdctetp)
 	return rt.Description(objref.IDOf(mgdctetp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mgdctetp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mgdctetp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mgdctetp)
 	return rt.IsKind(objref.IDOf(mgdctetp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) String() string {
+	defer runtime.KeepAlive(mgdctetp)
 	return rt.Description(objref.IDOf(mgdctetp))
 }
 
@@ -71,49 +79,56 @@ func NewMTRGeneralDiagnosticsClusterTestEventTriggerParams() *MTRGeneralDiagnost
 }
 
 // WithEnableKey sets the enable key.
-func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) WithEnableKey(enableKey obj.Object) *MTRGeneralDiagnosticsClusterTestEventTriggerParams {
-	objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("setEnableKey:"), objref.IDOf(enableKey))
+func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) WithEnableKey(enableKey []byte) *MTRGeneralDiagnosticsClusterTestEventTriggerParams {
+	objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("setEnableKey:"), rt.BytesToNSData(enableKey))
 	return mgdctetp
 }
 
 // WithEventTrigger sets the event trigger.
 func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) WithEventTrigger(eventTrigger obj.Object) *MTRGeneralDiagnosticsClusterTestEventTriggerParams {
+	defer runtime.KeepAlive(eventTrigger)
 	objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("setEventTrigger:"), objref.IDOf(eventTrigger))
 	return mgdctetp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralDiagnosticsClusterTestEventTriggerParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mgdctetp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGeneralDiagnosticsClusterTestEventTriggerParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mgdctetp
 }
 
 // EnableKey returns the enable key.
-func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) EnableKey() obj.Object {
+func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) EnableKey() []byte {
+	defer runtime.KeepAlive(mgdctetp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("enableKey"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // EventTrigger returns the event trigger.
-func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) EventTrigger() obj.Object {
+func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) EventTrigger() *foundation.Number {
+	defer runtime.KeepAlive(mgdctetp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("eventTrigger"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) TimedInvokeTimeoutMs() obj.Object {
+func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mgdctetp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) ServerSideProcessingTimeout() obj.Object {
+func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mgdctetp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRThermostatClusterScheduleStructAdopt(id objc.ID) *MTRThermostatClusterSc
 
 // Description returns the object's -description text.
 func (mtcss *MTRThermostatClusterScheduleStruct) Description() string {
+	defer runtime.KeepAlive(mtcss)
 	return rt.Description(objref.IDOf(mtcss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtcss *MTRThermostatClusterScheduleStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtcss)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtcss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtcss *MTRThermostatClusterScheduleStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtcss)
 	return rt.IsKind(objref.IDOf(mtcss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtcss *MTRThermostatClusterScheduleStruct) String() string {
+	defer runtime.KeepAlive(mtcss)
 	return rt.Description(objref.IDOf(mtcss))
 }
 
@@ -71,13 +79,14 @@ func NewMTRThermostatClusterScheduleStruct() *MTRThermostatClusterScheduleStruct
 }
 
 // WithScheduleHandle sets the schedule handle.
-func (mtcss *MTRThermostatClusterScheduleStruct) WithScheduleHandle(scheduleHandle obj.Object) *MTRThermostatClusterScheduleStruct {
-	objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("setScheduleHandle:"), objref.IDOf(scheduleHandle))
+func (mtcss *MTRThermostatClusterScheduleStruct) WithScheduleHandle(scheduleHandle []byte) *MTRThermostatClusterScheduleStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("setScheduleHandle:"), rt.BytesToNSData(scheduleHandle))
 	return mtcss
 }
 
 // WithSystemMode sets the system mode.
 func (mtcss *MTRThermostatClusterScheduleStruct) WithSystemMode(systemMode obj.Object) *MTRThermostatClusterScheduleStruct {
+	defer runtime.KeepAlive(systemMode)
 	objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("setSystemMode:"), objref.IDOf(systemMode))
 	return mtcss
 }
@@ -89,31 +98,35 @@ func (mtcss *MTRThermostatClusterScheduleStruct) WithName(name string) *MTRTherm
 }
 
 // WithPresetHandle sets the preset handle.
-func (mtcss *MTRThermostatClusterScheduleStruct) WithPresetHandle(presetHandle obj.Object) *MTRThermostatClusterScheduleStruct {
-	objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("setPresetHandle:"), objref.IDOf(presetHandle))
+func (mtcss *MTRThermostatClusterScheduleStruct) WithPresetHandle(presetHandle []byte) *MTRThermostatClusterScheduleStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("setPresetHandle:"), rt.BytesToNSData(presetHandle))
 	return mtcss
 }
 
 // WithBuiltIn sets the built in.
 func (mtcss *MTRThermostatClusterScheduleStruct) WithBuiltIn(builtIn obj.Object) *MTRThermostatClusterScheduleStruct {
+	defer runtime.KeepAlive(builtIn)
 	objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("setBuiltIn:"), objref.IDOf(builtIn))
 	return mtcss
 }
 
 // ScheduleHandle returns the schedule handle.
-func (mtcss *MTRThermostatClusterScheduleStruct) ScheduleHandle() obj.Object {
+func (mtcss *MTRThermostatClusterScheduleStruct) ScheduleHandle() []byte {
+	defer runtime.KeepAlive(mtcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("scheduleHandle"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // SystemMode returns the system mode.
-func (mtcss *MTRThermostatClusterScheduleStruct) SystemMode() obj.Object {
+func (mtcss *MTRThermostatClusterScheduleStruct) SystemMode() *foundation.Number {
+	defer runtime.KeepAlive(mtcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("systemMode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Name returns the name.
 func (mtcss *MTRThermostatClusterScheduleStruct) Name() string {
+	defer runtime.KeepAlive(mtcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -122,24 +135,29 @@ func (mtcss *MTRThermostatClusterScheduleStruct) Name() string {
 }
 
 // PresetHandle returns the preset handle.
-func (mtcss *MTRThermostatClusterScheduleStruct) PresetHandle() obj.Object {
+func (mtcss *MTRThermostatClusterScheduleStruct) PresetHandle() []byte {
+	defer runtime.KeepAlive(mtcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("presetHandle"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Transitions returns the transitions.
 func (mtcss *MTRThermostatClusterScheduleStruct) Transitions() obj.Object {
+	defer runtime.KeepAlive(mtcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("transitions"))
 	return obj.Wrap(_r)
 }
 
 // SetTransitions wraps the corresponding Objective-C method.
 func (mtcss *MTRThermostatClusterScheduleStruct) SetTransitions(transitions obj.Object) {
+	defer runtime.KeepAlive(mtcss)
+	defer runtime.KeepAlive(transitions)
 	objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("setTransitions:"), objref.IDOf(transitions))
 }
 
 // BuiltIn returns the built in.
-func (mtcss *MTRThermostatClusterScheduleStruct) BuiltIn() obj.Object {
+func (mtcss *MTRThermostatClusterScheduleStruct) BuiltIn() *foundation.Number {
+	defer runtime.KeepAlive(mtcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("builtIn"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

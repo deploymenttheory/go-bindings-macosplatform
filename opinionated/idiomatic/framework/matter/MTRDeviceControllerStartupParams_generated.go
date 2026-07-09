@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDeviceControllerStartupParamsAdopt(id objc.ID) *MTRDeviceControllerStart
 
 // Description returns the object's -description text.
 func (mdcsp *MTRDeviceControllerStartupParams) Description() string {
+	defer runtime.KeepAlive(mdcsp)
 	return rt.Description(objref.IDOf(mdcsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdcsp *MTRDeviceControllerStartupParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdcsp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdcsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdcsp *MTRDeviceControllerStartupParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdcsp)
 	return rt.IsKind(objref.IDOf(mdcsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdcsp *MTRDeviceControllerStartupParams) String() string {
+	defer runtime.KeepAlive(mdcsp)
 	return rt.Description(objref.IDOf(mdcsp))
 }
 
@@ -72,90 +80,104 @@ func NewMTRDeviceControllerStartupParams() *MTRDeviceControllerStartupParams {
 
 // WithVendorID sets vendor ID (allocated by the Connectivity Standards Alliance) for this controller. If not nil, must not be the "standard" vendor id (0). When creating a new fabric: * Must not be nil. When using an existing fabric: * Will override existing value if not nil. Otherwise existing value will be used.
 func (mdcsp *MTRDeviceControllerStartupParams) WithVendorID(vendorID obj.Object) *MTRDeviceControllerStartupParams {
+	defer runtime.KeepAlive(vendorID)
 	objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 	return mdcsp
 }
 
 // WithNodeID sets node id for this controller.
 func (mdcsp *MTRDeviceControllerStartupParams) WithNodeID(nodeID obj.Object) *MTRDeviceControllerStartupParams {
+	defer runtime.KeepAlive(nodeID)
 	objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("setNodeID:"), objref.IDOf(nodeID))
 	return mdcsp
 }
 
 // WithCaseAuthenticatedTags sets the case authenticated tags.
-func (mdcsp *MTRDeviceControllerStartupParams) WithCaseAuthenticatedTags(caseAuthenticatedTags obj.Object) *MTRDeviceControllerStartupParams {
-	objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("setCaseAuthenticatedTags:"), objref.IDOf(caseAuthenticatedTags))
+func (mdcsp *MTRDeviceControllerStartupParams) WithCaseAuthenticatedTags(caseAuthenticatedTags []*foundation.Number) *MTRDeviceControllerStartupParams {
+	objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("setCaseAuthenticatedTags:"), rt.SliceToNSSet(caseAuthenticatedTags, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return mdcsp
 }
 
 // WithRootCertificate sets root certificate, in X.509 DER form, to use. Must not be nil if an intermediate CA is being used, to allow determination of the root public key. If not nil, and if an intermediate CA is not being used, the public key of this certificate must match the public key of nocSigner, if nocSigner is not nil. When creating a new fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case the nocSigner keypair, which is the keypair for the root certificate, will be used to generate and sign a root certificate, with a random issuer id.  In this case, the fabricID will be included in the root certificate's subject DN. When using an existing fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case, the existing root certificate for the fabric will be used. * If not nil must satisfy the following properties: 1) The public key must match the public key of the existing root certificate. 2) The subject DN must match the subject DN of the existing root certificate.
 func (mdcsp *MTRDeviceControllerStartupParams) WithRootCertificate(rootCertificate obj.Object) *MTRDeviceControllerStartupParams {
+	defer runtime.KeepAlive(rootCertificate)
 	objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("setRootCertificate:"), objref.IDOf(rootCertificate))
 	return mdcsp
 }
 
 // WithIntermediateCertificate sets intermediate certificate, in X.509 DER form, to use. If not nil, rootCertificate must not be nil, and the intermediate certificate must be signed by rootCertificate. If not nil, and nocSigner is not nil, the public key of this certificate must match the public key of nocSigner. When creating a new fabric: * Must not be nil if an intermediate CA is being used. * Must be nil if an intermediate CA is not being used. When using an existing fabric: * If not nil, will be used as the intermediate certificate for issuing operational certificates. * If nil: * If nocSigner is not nil, there is an existing intermediate certificate, and it matches the nocSigner public key, the existing intermediate certificate will be used. * Otherwise the fabric will not use an intermediate certificate.  This allows switching from using an intermediate CA to not using one.
 func (mdcsp *MTRDeviceControllerStartupParams) WithIntermediateCertificate(intermediateCertificate obj.Object) *MTRDeviceControllerStartupParams {
+	defer runtime.KeepAlive(intermediateCertificate)
 	objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("setIntermediateCertificate:"), objref.IDOf(intermediateCertificate))
 	return mdcsp
 }
 
 // WithOperationalCertificateIssuerQueue sets the operational certificate issuer queue.
 func (mdcsp *MTRDeviceControllerStartupParams) WithOperationalCertificateIssuerQueue(operationalCertificateIssuerQueue obj.Object) *MTRDeviceControllerStartupParams {
+	defer runtime.KeepAlive(operationalCertificateIssuerQueue)
 	objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("setOperationalCertificateIssuerQueue:"), objref.IDOf(operationalCertificateIssuerQueue))
 	return mdcsp
 }
 
 // FabricID returns fabric id for the controller.  Must be set to a nonzero value.  This is scoped by the root public key, which is determined as follows: * If a root certificate is provided, it is the public key of the root certificate. * If a root certificate is not provided, the root public key is the public key of the nocSigner keypair, since in this case we are not using an intermediate certificate.
-func (mdcsp *MTRDeviceControllerStartupParams) FabricID() obj.Object {
+func (mdcsp *MTRDeviceControllerStartupParams) FabricID() *foundation.Number {
+	defer runtime.KeepAlive(mdcsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("fabricID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Ipk returns IPK to use for the controller's fabric.  Allowed to change from the last time a controller was started on this fabric if a new IPK has been distributed to all the devices the controller wants to interact with.
-func (mdcsp *MTRDeviceControllerStartupParams) Ipk() obj.Object {
+func (mdcsp *MTRDeviceControllerStartupParams) Ipk() []byte {
+	defer runtime.KeepAlive(mdcsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("ipk"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // VendorID returns vendor ID (allocated by the Connectivity Standards Alliance) for this controller. If not nil, must not be the "standard" vendor id (0). When creating a new fabric: * Must not be nil. When using an existing fabric: * Will override existing value if not nil. Otherwise existing value will be used.
-func (mdcsp *MTRDeviceControllerStartupParams) VendorID() obj.Object {
+func (mdcsp *MTRDeviceControllerStartupParams) VendorID() *foundation.Number {
+	defer runtime.KeepAlive(mdcsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("vendorID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NodeID returns node id for this controller. If operationalCertificate is not nil, must be nil.  The provided operational certificate will be used as-is. If not nil, must be a valid Matter operational node id. If operationalCertificate is nil, nodeID and operationalKeypair are used to determine an operational certificate, as follows: * When creating a new fabric: ** nodeID is allowed to be nil to indicate that a random node id should be generated. * When using an existing fabric: ** nodeID is allowed to be nil to indicate that the existing operational node id should be used.  The existing operational keys will also be used, unless operationalKeypair is provided.  The existing caseAuthenticatedTags will be used. ** If nodeID is not nil, a new operational certificate will be generated for the provided node id (even if that matches the existing node id), using either the operationalKeypair if that is provided or a new randomly generated operational key, and using the provided caseAuthenticatedTags.
-func (mdcsp *MTRDeviceControllerStartupParams) NodeID() obj.Object {
+func (mdcsp *MTRDeviceControllerStartupParams) NodeID() *foundation.Number {
+	defer runtime.KeepAlive(mdcsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("nodeID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
-// CaseAuthenticatedTags returns the case authenticated tags.
-func (mdcsp *MTRDeviceControllerStartupParams) CaseAuthenticatedTags() obj.Object {
+// CaseAuthenticatedTags returns the order of the returned elements is unspecified.
+func (mdcsp *MTRDeviceControllerStartupParams) CaseAuthenticatedTags() []*foundation.Number {
+	defer runtime.KeepAlive(mdcsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("caseAuthenticatedTags"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.Number { return foundation.NumberFromID(_id) })
 }
 
 // RootCertificate returns root certificate, in X.509 DER form, to use. Must not be nil if an intermediate CA is being used, to allow determination of the root public key. If not nil, and if an intermediate CA is not being used, the public key of this certificate must match the public key of nocSigner, if nocSigner is not nil. When creating a new fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case the nocSigner keypair, which is the keypair for the root certificate, will be used to generate and sign a root certificate, with a random issuer id.  In this case, the fabricID will be included in the root certificate's subject DN. When using an existing fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case, the existing root certificate for the fabric will be used. * If not nil must satisfy the following properties: 1) The public key must match the public key of the existing root certificate. 2) The subject DN must match the subject DN of the existing root certificate.
-func (mdcsp *MTRDeviceControllerStartupParams) RootCertificate() obj.Object {
+func (mdcsp *MTRDeviceControllerStartupParams) RootCertificate() *foundation.Data {
+	defer runtime.KeepAlive(mdcsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("rootCertificate"))
-	return obj.Wrap(_r)
+	return foundation.DataFromID(_r)
 }
 
 // IntermediateCertificate returns intermediate certificate, in X.509 DER form, to use. If not nil, rootCertificate must not be nil, and the intermediate certificate must be signed by rootCertificate. If not nil, and nocSigner is not nil, the public key of this certificate must match the public key of nocSigner. When creating a new fabric: * Must not be nil if an intermediate CA is being used. * Must be nil if an intermediate CA is not being used. When using an existing fabric: * If not nil, will be used as the intermediate certificate for issuing operational certificates. * If nil: * If nocSigner is not nil, there is an existing intermediate certificate, and it matches the nocSigner public key, the existing intermediate certificate will be used. * Otherwise the fabric will not use an intermediate certificate.  This allows switching from using an intermediate CA to not using one.
-func (mdcsp *MTRDeviceControllerStartupParams) IntermediateCertificate() obj.Object {
+func (mdcsp *MTRDeviceControllerStartupParams) IntermediateCertificate() *foundation.Data {
+	defer runtime.KeepAlive(mdcsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("intermediateCertificate"))
-	return obj.Wrap(_r)
+	return foundation.DataFromID(_r)
 }
 
 // OperationalCertificate returns operational certificate, in X.509 DER form, to use. If not nil, will be used as the operational certificate.  In this case operationalKeypair must not be nil. If nil, an operational certificate will be determined as described in the documentation for nodeID.
-func (mdcsp *MTRDeviceControllerStartupParams) OperationalCertificate() obj.Object {
+func (mdcsp *MTRDeviceControllerStartupParams) OperationalCertificate() *foundation.Data {
+	defer runtime.KeepAlive(mdcsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("operationalCertificate"))
-	return obj.Wrap(_r)
+	return foundation.DataFromID(_r)
 }
 
 // OperationalCertificateIssuerQueue returns the operational certificate issuer queue.
-func (mdcsp *MTRDeviceControllerStartupParams) OperationalCertificateIssuerQueue() obj.Object {
+func (mdcsp *MTRDeviceControllerStartupParams) OperationalCertificateIssuerQueue() *foundation.Object {
+	defer runtime.KeepAlive(mdcsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("operationalCertificateIssuerQueue"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }

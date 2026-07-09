@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -63,6 +65,7 @@ func (nag *NDArrayGather) WithLabel(label string) *NDArrayGather {
 
 // Axis returns the axis along which to apply the gather operation. Defaults to zero.
 func (nag *NDArrayGather) Axis() int {
+	defer runtime.KeepAlive(nag)
 	_r := objc.Send[int](objref.IDOf(nag), objc.RegisterName("axis"))
 	return _r
 }

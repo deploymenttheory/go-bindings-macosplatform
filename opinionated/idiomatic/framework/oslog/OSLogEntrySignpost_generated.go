@@ -5,6 +5,8 @@
 package oslog
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewLogEntrySignpost() *LogEntrySignpost {
 
 // SignpostIdentifier returns the signpost ID associated with this entry.
 func (les *LogEntrySignpost) SignpostIdentifier() uint64 {
+	defer runtime.KeepAlive(les)
 	_r := objc.Send[uint64](objref.IDOf(les), objc.RegisterName("signpostIdentifier"))
 	return _r
 }
 
 // SignpostName returns the signpost name associated with this entry.
 func (les *LogEntrySignpost) SignpostName() string {
+	defer runtime.KeepAlive(les)
 	_r := objc.Send[objc.ID](objref.IDOf(les), objc.RegisterName("signpostName"))
 	if _r == 0 {
 		return ""
@@ -68,6 +72,7 @@ func (les *LogEntrySignpost) SignpostName() string {
 
 // SignpostType returns the signpost type associated with this entry.
 func (les *LogEntrySignpost) SignpostType() LogEntrySignpostType {
+	defer runtime.KeepAlive(les)
 	_r := objc.Send[LogEntrySignpostType](objref.IDOf(les), objc.RegisterName("signpostType"))
 	return _r
 }

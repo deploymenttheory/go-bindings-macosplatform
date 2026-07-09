@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -90,6 +92,7 @@ func (c *Cylinder) WithMaterials(items ...*Material) *Cylinder {
 
 // WithFirstMaterial sets the first material attached to the geometry.
 func (c *Cylinder) WithFirstMaterial(firstMaterial *Material) *Cylinder {
+	defer runtime.KeepAlive(firstMaterial)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return c
 }
@@ -103,6 +106,7 @@ func (c *Cylinder) WithLevelsOfDetail(items ...*LevelOfDetail) *Cylinder {
 
 // WithTessellator sets the tessellator.
 func (c *Cylinder) WithTessellator(tessellator *GeometryTessellator) *Cylinder {
+	defer runtime.KeepAlive(tessellator)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return c
 }
@@ -121,36 +125,42 @@ func (c *Cylinder) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *
 
 // WithEdgeCreasesElement sets the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 func (c *Cylinder) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Cylinder {
+	defer runtime.KeepAlive(edgeCreasesElement)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return c
 }
 
 // WithEdgeCreasesSource sets the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 func (c *Cylinder) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Cylinder {
+	defer runtime.KeepAlive(edgeCreasesSource)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return c
 }
 
 // Radius returns the radius of the cylinder. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
 func (c *Cylinder) Radius() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("radius"))
 	return _r
 }
 
 // Height returns the height of the cylinder. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (c *Cylinder) Height() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("height"))
 	return _r
 }
 
 // RadialSegmentCount returns the number of subdivisions along the radial coordinate. Animatable. If the value is less than 3, the behavior is undefined. The default value is 48.
 func (c *Cylinder) RadialSegmentCount() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("radialSegmentCount"))
 	return _r
 }
 
 // HeightSegmentCount returns the number of subdivisions along the Y axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (c *Cylinder) HeightSegmentCount() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("heightSegmentCount"))
 	return _r
 }

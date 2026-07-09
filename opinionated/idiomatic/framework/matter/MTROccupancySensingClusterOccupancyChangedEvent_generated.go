@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTROccupancySensingClusterOccupancyChangedEventAdopt(id objc.ID) *MTROccupa
 
 // Description returns the object's -description text.
 func (moscoce *MTROccupancySensingClusterOccupancyChangedEvent) Description() string {
+	defer runtime.KeepAlive(moscoce)
 	return rt.Description(objref.IDOf(moscoce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (moscoce *MTROccupancySensingClusterOccupancyChangedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(moscoce)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(moscoce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (moscoce *MTROccupancySensingClusterOccupancyChangedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(moscoce)
 	return rt.IsKind(objref.IDOf(moscoce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (moscoce *MTROccupancySensingClusterOccupancyChangedEvent) String() string {
+	defer runtime.KeepAlive(moscoce)
 	return rt.Description(objref.IDOf(moscoce))
 }
 
@@ -72,12 +80,14 @@ func NewMTROccupancySensingClusterOccupancyChangedEvent() *MTROccupancySensingCl
 
 // WithOccupancy sets the occupancy.
 func (moscoce *MTROccupancySensingClusterOccupancyChangedEvent) WithOccupancy(occupancy obj.Object) *MTROccupancySensingClusterOccupancyChangedEvent {
+	defer runtime.KeepAlive(occupancy)
 	objc.Send[objc.ID](objref.IDOf(moscoce), objc.RegisterName("setOccupancy:"), objref.IDOf(occupancy))
 	return moscoce
 }
 
 // Occupancy returns the occupancy.
-func (moscoce *MTROccupancySensingClusterOccupancyChangedEvent) Occupancy() obj.Object {
+func (moscoce *MTROccupancySensingClusterOccupancyChangedEvent) Occupancy() *foundation.Number {
+	defer runtime.KeepAlive(moscoce)
 	_r := objc.Send[objc.ID](objref.IDOf(moscoce), objc.RegisterName("occupancy"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

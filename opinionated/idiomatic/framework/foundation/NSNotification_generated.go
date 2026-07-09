@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,27 +50,35 @@ func notificationAdopt(id objc.ID) *Notification {
 
 // Description returns the object's -description text.
 func (n *Notification) Description() string {
+	defer runtime.KeepAlive(n)
 	return rt.Description(objref.IDOf(n))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (n *Notification) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(n), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (n *Notification) IsKind(className string) bool {
+	defer runtime.KeepAlive(n)
 	return rt.IsKind(objref.IDOf(n), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (n *Notification) String() string {
+	defer runtime.KeepAlive(n)
 	return rt.Description(objref.IDOf(n))
 }
 
 // NewNotificationWithNameObjectUserInfo initializes a notification with a specified name, object, and user information.
 func NewNotificationWithNameObjectUserInfo(name *String, object obj.Object, userInfo obj.Object) *Notification {
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(object)
+	defer runtime.KeepAlive(userInfo)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNotification")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:object:userInfo:"), objref.IDOf(name), objref.IDOf(object), objref.IDOf(userInfo))
 	return notificationAdopt(_id)
@@ -77,6 +86,7 @@ func NewNotificationWithNameObjectUserInfo(name *String, object obj.Object, user
 
 // NewNotificationWithCoder initializes a notification with the data from an unarchiver.
 func NewNotificationWithCoder(coder *Coder) *Notification {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNotification")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return notificationAdopt(_id)
@@ -89,25 +99,28 @@ func (n *Notification) WithObservationInfo(observationInfo unsafe.Pointer) *Noti
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (n *Notification) WithScriptingProperties(scriptingProperties obj.Object) *Notification {
-	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (n *Notification) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Notification {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return n
 }
 
 // Name returns the name.
 func (n *Notification) Name() *String {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("name"))
 	return StringFromID(_r)
 }
 
 // Object returns the object.
 func (n *Notification) Object() obj.Object {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("object"))
 	return obj.Wrap(_r)
 }
 
 // UserInfo returns the user info.
 func (n *Notification) UserInfo() obj.Object {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }

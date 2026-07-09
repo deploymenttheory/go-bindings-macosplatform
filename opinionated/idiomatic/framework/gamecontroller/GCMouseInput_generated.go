@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,24 +62,28 @@ func (mi *MouseInput) WithValueDidChangeHandler(valueDidChangeHandler func(obj.O
 
 // Scroll returns scroll is a dpad with undefined range.
 func (mi *MouseInput) Scroll() *DeviceCursor {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("scroll"))
 	return DeviceCursorFromID(_r)
 }
 
 // LeftButton returns mouse buttons that can be used only as digital inputs
 func (mi *MouseInput) LeftButton() *ControllerButtonInput {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("leftButton"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // RightButton returns the right button.
 func (mi *MouseInput) RightButton() *ControllerButtonInput {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("rightButton"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // MiddleButton returns the middle button.
 func (mi *MouseInput) MiddleButton() *ControllerButtonInput {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("middleButton"))
 	return ControllerButtonInputFromID(_r)
 }
@@ -86,6 +92,7 @@ func (mi *MouseInput) MiddleButton() *ControllerButtonInput {
 //
 // AuxiliaryButtons returns the collection as a Go slice.
 func (mi *MouseInput) AuxiliaryButtons() []*ControllerButtonInput {
+	defer runtime.KeepAlive(mi)
 	_arr := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("auxiliaryButtons"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ControllerButtonInput { return ControllerButtonInputFromID(_id) })
 }

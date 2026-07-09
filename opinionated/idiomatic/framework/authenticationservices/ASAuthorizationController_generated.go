@@ -5,8 +5,11 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func authorizationControllerAdopt(id objc.ID) *AuthorizationController {
 
 // Description returns the object's -description text.
 func (ac *AuthorizationController) Description() string {
+	defer runtime.KeepAlive(ac)
 	return rt.Description(objref.IDOf(ac))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ac *AuthorizationController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ac)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ac), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ac *AuthorizationController) IsKind(className string) bool {
+	defer runtime.KeepAlive(ac)
 	return rt.IsKind(objref.IDOf(ac), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ac *AuthorizationController) String() string {
+	defer runtime.KeepAlive(ac)
 	return rt.Description(objref.IDOf(ac))
 }
 
@@ -73,18 +81,31 @@ func NewAuthorizationControllerWithAuthorizationRequests(authorizationRequests [
 	return authorizationControllerAdopt(_id)
 }
 
+// WithDelegate sets a delegate that the authorization controller informs about the success or failure of an authorization attempt.
+func (ac *AuthorizationController) WithDelegate(delegate AuthorizationControllerDelegate) *AuthorizationController {
+	_shim := newAuthorizationControllerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ac), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ac), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return ac
+}
+
 // PerformRequests starts the specified authorization flows during controller initialization.
 func (ac *AuthorizationController) PerformRequests() {
+	defer runtime.KeepAlive(ac)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("performRequests"))
 }
 
-// PerformRequestsWithOptions starts the specified authorization flows during controller initialization.
-func (ac *AuthorizationController) PerformRequestsWithOptions(options AuthorizationControllerRequestOptions) {
+// PerformRequestsWith starts the specified authorization flows during controller initialization.
+func (ac *AuthorizationController) PerformRequestsWith(options AuthorizationControllerRequestOptions) {
+	defer runtime.KeepAlive(ac)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("performRequestsWithOptions:"), options)
 }
 
 // Cancel cancels any active authorization requests.
 func (ac *AuthorizationController) Cancel() {
+	defer runtime.KeepAlive(ac)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("cancel"))
 }
 
@@ -92,6 +113,7 @@ func (ac *AuthorizationController) Cancel() {
 //
 // AuthorizationRequests returns the collection as a Go slice.
 func (ac *AuthorizationController) AuthorizationRequests() []*AuthorizationRequest {
+	defer runtime.KeepAlive(ac)
 	_arr := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("authorizationRequests"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AuthorizationRequest { return AuthorizationRequestFromID(_id) })
 }

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDoorLockClusterDoorLockAlarmEventAdopt(id objc.ID) *MTRDoorLockClusterDo
 
 // Description returns the object's -description text.
 func (mdlcdlae *MTRDoorLockClusterDoorLockAlarmEvent) Description() string {
+	defer runtime.KeepAlive(mdlcdlae)
 	return rt.Description(objref.IDOf(mdlcdlae))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdlcdlae *MTRDoorLockClusterDoorLockAlarmEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdlcdlae)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdlcdlae), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdlcdlae *MTRDoorLockClusterDoorLockAlarmEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdlcdlae)
 	return rt.IsKind(objref.IDOf(mdlcdlae), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdlcdlae *MTRDoorLockClusterDoorLockAlarmEvent) String() string {
+	defer runtime.KeepAlive(mdlcdlae)
 	return rt.Description(objref.IDOf(mdlcdlae))
 }
 
@@ -72,12 +80,14 @@ func NewMTRDoorLockClusterDoorLockAlarmEvent() *MTRDoorLockClusterDoorLockAlarmE
 
 // WithAlarmCode sets the alarm code.
 func (mdlcdlae *MTRDoorLockClusterDoorLockAlarmEvent) WithAlarmCode(alarmCode obj.Object) *MTRDoorLockClusterDoorLockAlarmEvent {
+	defer runtime.KeepAlive(alarmCode)
 	objc.Send[objc.ID](objref.IDOf(mdlcdlae), objc.RegisterName("setAlarmCode:"), objref.IDOf(alarmCode))
 	return mdlcdlae
 }
 
 // AlarmCode returns the alarm code.
-func (mdlcdlae *MTRDoorLockClusterDoorLockAlarmEvent) AlarmCode() obj.Object {
+func (mdlcdlae *MTRDoorLockClusterDoorLockAlarmEvent) AlarmCode() *foundation.Number {
+	defer runtime.KeepAlive(mdlcdlae)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcdlae), objc.RegisterName("alarmCode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

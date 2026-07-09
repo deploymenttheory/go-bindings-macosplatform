@@ -37,11 +37,11 @@ func LPLinkViewFromID(id objc.ID) *LPLinkView {
 }
 
 // Initializes a placeholder link view without metadata for a given URL.
-func (o *LPLinkView) InitWithURL(uRL *foundation.NSURL) *LPLinkView {
+func (o *LPLinkView) InitWithURL(url *foundation.NSURL) *LPLinkView {
 	var _mainthread0 *LPLinkView
 	purego.Main(func() {
 		_mainthread0 = func() *LPLinkView {
-			_ret := objc.Send[objc.ID](o.Ptr(), _lPLinkViewSelInitWithURL, uRL.Ptr())
+			_ret := objc.Send[objc.ID](o.Ptr(), _lPLinkViewSelInitWithURL, url.Ptr())
 			if _ret != 0 {
 				_ret.Send(objc.RegisterName("retain"))
 			}

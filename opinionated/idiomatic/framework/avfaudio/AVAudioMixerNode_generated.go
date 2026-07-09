@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,12 +61,14 @@ func (amn *AudioMixerNode) WithOutputVolume(outputVolume float32) *AudioMixerNod
 
 // OutputVolume returns the mixer's output volume. This accesses the mixer's output volume (0.0-1.0, inclusive).
 func (amn *AudioMixerNode) OutputVolume() float32 {
+	defer runtime.KeepAlive(amn)
 	_r := objc.Send[float32](objref.IDOf(amn), objc.RegisterName("outputVolume"))
 	return _r
 }
 
 // NextAvailableInputBus returns find an unused input bus. This will find and return the first input bus to which no other node is connected.
 func (amn *AudioMixerNode) NextAvailableInputBus() int {
+	defer runtime.KeepAlive(amn)
 	_r := objc.Send[int](objref.IDOf(amn), objc.RegisterName("nextAvailableInputBus"))
 	return _r
 }

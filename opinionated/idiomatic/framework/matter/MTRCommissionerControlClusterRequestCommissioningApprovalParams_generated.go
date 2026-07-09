@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRCommissionerControlClusterRequestCommissioningApprovalParamsAdopt(id obj
 
 // Description returns the object's -description text.
 func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) Description() string {
+	defer runtime.KeepAlive(mcccrcap)
 	return rt.Description(objref.IDOf(mcccrcap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcccrcap)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcccrcap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcccrcap)
 	return rt.IsKind(objref.IDOf(mcccrcap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) String() string {
+	defer runtime.KeepAlive(mcccrcap)
 	return rt.Description(objref.IDOf(mcccrcap))
 }
 
@@ -72,18 +80,21 @@ func NewMTRCommissionerControlClusterRequestCommissioningApprovalParams() *MTRCo
 
 // WithRequestID sets the request ID.
 func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithRequestID(requestID obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
+	defer runtime.KeepAlive(requestID)
 	objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("setRequestID:"), objref.IDOf(requestID))
 	return mcccrcap
 }
 
 // WithVendorID sets the vendor ID.
 func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithVendorID(vendorID obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
+	defer runtime.KeepAlive(vendorID)
 	objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 	return mcccrcap
 }
 
 // WithProductID sets the product ID.
 func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithProductID(productID obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
+	defer runtime.KeepAlive(productID)
 	objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("setProductID:"), objref.IDOf(productID))
 	return mcccrcap
 }
@@ -96,36 +107,42 @@ func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams)
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mcccrcap
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mcccrcap
 }
 
 // RequestID returns the request ID.
-func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) RequestID() obj.Object {
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) RequestID() *foundation.Number {
+	defer runtime.KeepAlive(mcccrcap)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("requestID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // VendorID returns the vendor ID.
-func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) VendorID() obj.Object {
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) VendorID() *foundation.Number {
+	defer runtime.KeepAlive(mcccrcap)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("vendorID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ProductID returns the product ID.
-func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) ProductID() obj.Object {
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) ProductID() *foundation.Number {
+	defer runtime.KeepAlive(mcccrcap)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("productID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Label returns the label.
 func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) Label() string {
+	defer runtime.KeepAlive(mcccrcap)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -134,13 +151,15 @@ func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) TimedInvokeTimeoutMs() obj.Object {
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mcccrcap)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) ServerSideProcessingTimeout() obj.Object {
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mcccrcap)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

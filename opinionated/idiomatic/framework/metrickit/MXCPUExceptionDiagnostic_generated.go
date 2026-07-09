@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,18 +56,21 @@ func NewCPUExceptionDiagnostic() *CPUExceptionDiagnostic {
 
 // CallStackTree returns the application call stack tree associated with the excessive CPU consumption.
 func (ced *CPUExceptionDiagnostic) CallStackTree() *CallStackTree {
+	defer runtime.KeepAlive(ced)
 	_r := objc.Send[objc.ID](objref.IDOf(ced), objc.RegisterName("callStackTree"))
 	return CallStackTreeFromID(_r)
 }
 
 // TotalCPUTime returns total CPU time consumed in the scope of this CPU exception. Dimensioned as NSUnitDuration.
 func (ced *CPUExceptionDiagnostic) TotalCPUTime() obj.Object {
+	defer runtime.KeepAlive(ced)
 	_r := objc.Send[objc.ID](objref.IDOf(ced), objc.RegisterName("totalCPUTime"))
 	return obj.Wrap(_r)
 }
 
 // TotalSampledTime returns total time that the application was sampled for during the CPU exception. Dimensioned as NSUnitDuration.
 func (ced *CPUExceptionDiagnostic) TotalSampledTime() obj.Object {
+	defer runtime.KeepAlive(ced)
 	_r := objc.Send[objc.ID](objref.IDOf(ced), objc.RegisterName("totalSampledTime"))
 	return obj.Wrap(_r)
 }

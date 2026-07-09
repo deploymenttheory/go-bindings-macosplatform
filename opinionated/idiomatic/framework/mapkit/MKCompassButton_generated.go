@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func compassButtonAdopt(id objc.ID) *CompassButton {
 
 // Description returns the object's -description text.
 func (cb *CompassButton) Description() string {
+	defer runtime.KeepAlive(cb)
 	return rt.Description(objref.IDOf(cb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cb *CompassButton) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cb *CompassButton) IsKind(className string) bool {
+	defer runtime.KeepAlive(cb)
 	return rt.IsKind(objref.IDOf(cb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cb *CompassButton) String() string {
+	defer runtime.KeepAlive(cb)
 	return rt.Description(objref.IDOf(cb))
 }
 
@@ -80,6 +87,7 @@ func NewCompassButton() *CompassButton {
 
 // WithMapView sets the map view that provides the heading information for the compass button.
 func (cb *CompassButton) WithMapView(mapView *MapView) *CompassButton {
+	defer runtime.KeepAlive(mapView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
 	})
@@ -96,6 +104,7 @@ func (cb *CompassButton) WithCompassVisibility(compassVisibility FeatureVisibili
 
 // MapView returns the map view.
 func (cb *CompassButton) MapView() *MapView {
+	defer runtime.KeepAlive(cb)
 	var _mainthread0 *MapView
 	purego.Main(func() {
 		_mainthread0 = func() *MapView {
@@ -109,6 +118,7 @@ func (cb *CompassButton) MapView() *MapView {
 
 // CompassVisibility returns the compass visibility.
 func (cb *CompassButton) CompassVisibility() FeatureVisibility {
+	defer runtime.KeepAlive(cb)
 	var _mainthread0 FeatureVisibility
 	purego.Main(func() {
 		_mainthread0 = func() FeatureVisibility {

@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewSyncEngineStateUpdateEvent() *SyncEngineStateUpdateEvent {
 
 // StateSerialization returns the state serialization.
 func (sesue *SyncEngineStateUpdateEvent) StateSerialization() *SyncEngineStateSerialization {
+	defer runtime.KeepAlive(sesue)
 	_r := objc.Send[objc.ID](objref.IDOf(sesue), objc.RegisterName("stateSerialization"))
 	return SyncEngineStateSerializationFromID(_r)
 }

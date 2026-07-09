@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func qCCompositionAdopt(id objc.ID) *QCComposition {
 
 // Description returns the object's -description text.
 func (qc *QCComposition) Description() string {
+	defer runtime.KeepAlive(qc)
 	return rt.Description(objref.IDOf(qc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (qc *QCComposition) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(qc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(qc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (qc *QCComposition) IsKind(className string) bool {
+	defer runtime.KeepAlive(qc)
 	return rt.IsKind(objref.IDOf(qc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (qc *QCComposition) String() string {
+	defer runtime.KeepAlive(qc)
 	return rt.Description(objref.IDOf(qc))
 }
 
@@ -74,24 +81,28 @@ func NewQCComposition() *QCComposition {
 
 // Protocols returns the list of protocols to which the composition conforms.
 func (qc *QCComposition) Protocols() obj.Object {
+	defer runtime.KeepAlive(qc)
 	_r := objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("protocols"))
 	return obj.Wrap(_r)
 }
 
 // Attributes returns the attributes of the composition.
 func (qc *QCComposition) Attributes() obj.Object {
+	defer runtime.KeepAlive(qc)
 	_r := objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
 // InputKeys returns an array listing the keys that identify the input ports of the root patch of the composition.
 func (qc *QCComposition) InputKeys() obj.Object {
+	defer runtime.KeepAlive(qc)
 	_r := objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("inputKeys"))
 	return obj.Wrap(_r)
 }
 
 // OutputKeys returns an array listing the keys that identify the output ports of the root patch of the composition.
 func (qc *QCComposition) OutputKeys() obj.Object {
+	defer runtime.KeepAlive(qc)
 	_r := objc.Send[objc.ID](objref.IDOf(qc), objc.RegisterName("outputKeys"))
 	return obj.Wrap(_r)
 }

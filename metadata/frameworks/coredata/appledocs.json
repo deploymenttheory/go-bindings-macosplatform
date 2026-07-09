@@ -2022,7 +2022,7 @@
       },
       "willMigrateHandler": {
         "doc": "The handler to execute before the stage runs.",
-        "url": "https://developer.apple.com/documentation/coredata/nscustommigrationstage/willmigratehandler-72p73"
+        "url": "https://developer.apple.com/documentation/coredata/nscustommigrationstage/willmigratehandler-5wead"
       }
     },
     "NSDerivedAttributeDescription": {
@@ -2782,7 +2782,7 @@
       },
       "databaseScope": {
         "doc": "The database scope — public, private, or shared — to use for a specified store in a persistent CloudKit container.",
-        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontaineroptions/databasescope-2784h"
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontaineroptions/databasescope-4c72t"
       }
     },
     "NSPersistentContainer": {

@@ -5,10 +5,12 @@
 package appkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -51,6 +53,7 @@ func objectControllerAdopt(id objc.ID) *ObjectController {
 
 // NewObjectControllerWithContent initializes and returns an NSObjectController object with the given content.
 func NewObjectControllerWithContent(content obj.Object) *ObjectController {
+	defer runtime.KeepAlive(content)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSObjectController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContent:"), objref.IDOf(content))
 	return objectControllerAdopt(_id)
@@ -58,6 +61,7 @@ func NewObjectControllerWithContent(content obj.Object) *ObjectController {
 
 // NewObjectControllerWithCoder creates a new ObjectController.
 func NewObjectControllerWithCoder(coder obj.Object) *ObjectController {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSObjectController")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return objectControllerAdopt(_id)
@@ -65,6 +69,7 @@ func NewObjectControllerWithCoder(coder obj.Object) *ObjectController {
 
 // WithContent sets the receiver’s content object.
 func (oc *ObjectController) WithContent(content obj.Object) *ObjectController {
+	defer runtime.KeepAlive(content)
 	objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("setContent:"), objref.IDOf(content))
 	return oc
 }
@@ -83,6 +88,7 @@ func (oc *ObjectController) WithEditable(editable bool) *ObjectController {
 
 // WithManagedObjectContext sets the receiver’s managed object context.
 func (oc *ObjectController) WithManagedObjectContext(managedObjectContext obj.Object) *ObjectController {
+	defer runtime.KeepAlive(managedObjectContext)
 	objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("setManagedObjectContext:"), objref.IDOf(managedObjectContext))
 	return oc
 }
@@ -95,6 +101,7 @@ func (oc *ObjectController) WithEntityName(entityName string) *ObjectController 
 
 // WithFetchPredicate sets the receiver’s fetch predicate.
 func (oc *ObjectController) WithFetchPredicate(fetchPredicate obj.Object) *ObjectController {
+	defer runtime.KeepAlive(fetchPredicate)
 	objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("setFetchPredicate:"), objref.IDOf(fetchPredicate))
 	return oc
 }
@@ -107,79 +114,98 @@ func (oc *ObjectController) WithUsesLazyFetching(usesLazyFetching bool) *ObjectC
 
 // PrepareContent typically overridden by subclasses that require additional control over the creation of new objects.
 func (oc *ObjectController) PrepareContent() {
+	defer runtime.KeepAlive(oc)
 	objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("prepareContent"))
 }
 
 // NewObject creates and returns a new object of the appropriate class.
 func (oc *ObjectController) NewObject() obj.Object {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("newObject"))
 	return obj.Wrap(_r)
 }
 
 // AddObject sets the receiver’s content object.
 func (oc *ObjectController) AddObject(object obj.Object) {
+	defer runtime.KeepAlive(oc)
+	defer runtime.KeepAlive(object)
 	objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("addObject:"), objref.IDOf(object))
 }
 
 // RemoveObject removes a given object from the receiver’s content.
 func (oc *ObjectController) RemoveObject(object obj.Object) {
+	defer runtime.KeepAlive(oc)
+	defer runtime.KeepAlive(object)
 	objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("removeObject:"), objref.IDOf(object))
 }
 
 // Add creates a new object and sets it as the receiver’s content object.
 func (oc *ObjectController) Add(sender obj.Object) {
+	defer runtime.KeepAlive(oc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("add:"), objref.IDOf(sender))
 }
 
 // Remove removes the receiver’s content object.
 func (oc *ObjectController) Remove(sender obj.Object) {
+	defer runtime.KeepAlive(oc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("remove:"), objref.IDOf(sender))
 }
 
 // Content returns the content.
 func (oc *ObjectController) Content() obj.Object {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("content"))
 	return obj.Wrap(_r)
 }
 
 // Selection returns the selection.
 func (oc *ObjectController) Selection() obj.Object {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("selection"))
 	return obj.Wrap(_r)
 }
 
 // SelectedObjects returns the selected objects.
 func (oc *ObjectController) SelectedObjects() obj.Object {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("selectedObjects"))
 	return obj.Wrap(_r)
 }
 
 // AutomaticallyPreparesContent wraps the corresponding Objective-C method.
 func (oc *ObjectController) AutomaticallyPreparesContent() bool {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[bool](objref.IDOf(oc), objc.RegisterName("automaticallyPreparesContent"))
 	return _r
 }
 
 // IsEditable reports whether the object is editable.
 func (oc *ObjectController) IsEditable() bool {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[bool](objref.IDOf(oc), objc.RegisterName("isEditable"))
 	return _r
 }
 
 // CanAdd wraps the corresponding Objective-C method.
 func (oc *ObjectController) CanAdd() bool {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[bool](objref.IDOf(oc), objc.RegisterName("canAdd"))
 	return _r
 }
 
 // CanRemove wraps the corresponding Objective-C method.
 func (oc *ObjectController) CanRemove() bool {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[bool](objref.IDOf(oc), objc.RegisterName("canRemove"))
 	return _r
 }
 
 // FetchWithRequestMerge subclasses should override this method to customize a fetch request, for example to specify fetch limits.
 func (oc *ObjectController) FetchWithRequestMerge(fetchRequest obj.Object, merge bool) error {
+	defer runtime.KeepAlive(oc)
+	defer runtime.KeepAlive(fetchRequest)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(oc), objc.RegisterName("fetchWithRequest:merge:error:"), objref.IDOf(fetchRequest), merge, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -190,23 +216,28 @@ func (oc *ObjectController) FetchWithRequestMerge(fetchRequest obj.Object, merge
 
 // Fetch causes the receiver to fetch the data objects specified by the entity name and fetch predicate.
 func (oc *ObjectController) Fetch(sender obj.Object) {
+	defer runtime.KeepAlive(oc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("fetch:"), objref.IDOf(sender))
 }
 
 // DefaultFetchRequest returns the default fetch request used by the receiver.
 func (oc *ObjectController) DefaultFetchRequest() obj.Object {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("defaultFetchRequest"))
 	return obj.Wrap(_r)
 }
 
 // ManagedObjectContext returns the managed object context.
 func (oc *ObjectController) ManagedObjectContext() obj.Object {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("managedObjectContext"))
 	return obj.Wrap(_r)
 }
 
 // EntityName returns the entity name.
 func (oc *ObjectController) EntityName() string {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("entityName"))
 	if _r == 0 {
 		return ""
@@ -215,13 +246,15 @@ func (oc *ObjectController) EntityName() string {
 }
 
 // FetchPredicate returns the fetch predicate.
-func (oc *ObjectController) FetchPredicate() obj.Object {
+func (oc *ObjectController) FetchPredicate() *foundation.Predicate {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("fetchPredicate"))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // UsesLazyFetching wraps the corresponding Objective-C method.
 func (oc *ObjectController) UsesLazyFetching() bool {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[bool](objref.IDOf(oc), objc.RegisterName("usesLazyFetching"))
 	return _r
 }

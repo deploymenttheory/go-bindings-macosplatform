@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +51,27 @@ func textCheckingResultAdopt(id objc.ID) *TextCheckingResult {
 
 // Description returns the object's -description text.
 func (tcr *TextCheckingResult) Description() string {
+	defer runtime.KeepAlive(tcr)
 	return rt.Description(objref.IDOf(tcr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tcr *TextCheckingResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tcr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tcr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tcr *TextCheckingResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(tcr)
 	return rt.IsKind(objref.IDOf(tcr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tcr *TextCheckingResult) String() string {
+	defer runtime.KeepAlive(tcr)
 	return rt.Description(objref.IDOf(tcr))
 }
 
@@ -81,25 +88,28 @@ func (tcr *TextCheckingResult) WithObservationInfo(observationInfo unsafe.Pointe
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (tcr *TextCheckingResult) WithScriptingProperties(scriptingProperties obj.Object) *TextCheckingResult {
-	objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (tcr *TextCheckingResult) WithScriptingProperties(scriptingProperties map[string]obj.Object) *TextCheckingResult {
+	objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return tcr
 }
 
 // ResultType returns the result type.
 func (tcr *TextCheckingResult) ResultType() TextCheckingType {
+	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[TextCheckingType](objref.IDOf(tcr), objc.RegisterName("resultType"))
 	return _r
 }
 
 // ResultByAdjustingRangesWithOffset returns a new text checking result after adjusting the ranges as specified by the offset.
 func (tcr *TextCheckingResult) ResultByAdjustingRangesWithOffset(offset int) *TextCheckingResult {
+	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("resultByAdjustingRangesWithOffset:"), offset)
 	return TextCheckingResultFromID(_r)
 }
 
 // Orthography returns the orthography.
 func (tcr *TextCheckingResult) Orthography() *Orthography {
+	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("orthography"))
 	return OrthographyFromID(_r)
 }
@@ -108,42 +118,49 @@ func (tcr *TextCheckingResult) Orthography() *Orthography {
 //
 // GrammarDetails returns the collection as a Go slice.
 func (tcr *TextCheckingResult) GrammarDetails() []obj.Object {
+	defer runtime.KeepAlive(tcr)
 	_arr := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("grammarDetails"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Date returns the date.
-func (tcr *TextCheckingResult) Date() *Date {
+func (tcr *TextCheckingResult) Date() time.Time {
+	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("date"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // TimeZone returns the time zone.
 func (tcr *TextCheckingResult) TimeZone() *TimeZone {
+	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
 // Duration returns the duration.
 func (tcr *TextCheckingResult) Duration() float64 {
+	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[float64](objref.IDOf(tcr), objc.RegisterName("duration"))
 	return _r
 }
 
 // Components returns the components.
 func (tcr *TextCheckingResult) Components() obj.Object {
+	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("components"))
 	return obj.Wrap(_r)
 }
 
 // URL returns the URL.
-func (tcr *TextCheckingResult) URL() *URL {
+func (tcr *TextCheckingResult) URL() string {
+	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("URL"))
-	return URLFromID(_r)
+	return rt.URLString(_r)
 }
 
 // ReplacementString returns the replacement string.
 func (tcr *TextCheckingResult) ReplacementString() string {
+	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("replacementString"))
 	if _r == 0 {
 		return ""
@@ -155,18 +172,21 @@ func (tcr *TextCheckingResult) ReplacementString() string {
 //
 // AlternativeStrings returns the collection as a Go slice.
 func (tcr *TextCheckingResult) AlternativeStrings() []string {
+	defer runtime.KeepAlive(tcr)
 	_arr := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("alternativeStrings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // RegularExpression returns the regular expression.
 func (tcr *TextCheckingResult) RegularExpression() *RegularExpression {
+	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("regularExpression"))
 	return RegularExpressionFromID(_r)
 }
 
 // PhoneNumber returns the phone number.
 func (tcr *TextCheckingResult) PhoneNumber() string {
+	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("phoneNumber"))
 	if _r == 0 {
 		return ""
@@ -176,12 +196,14 @@ func (tcr *TextCheckingResult) PhoneNumber() string {
 
 // NumberOfRanges returns the number of ranges.
 func (tcr *TextCheckingResult) NumberOfRanges() int {
+	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[int](objref.IDOf(tcr), objc.RegisterName("numberOfRanges"))
 	return _r
 }
 
 // AddressComponents returns the address components.
 func (tcr *TextCheckingResult) AddressComponents() obj.Object {
+	defer runtime.KeepAlive(tcr)
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("addressComponents"))
 	return obj.Wrap(_r)
 }

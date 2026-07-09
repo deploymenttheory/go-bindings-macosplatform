@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func taskAdopt(id objc.ID) *Task {
 
 // Description returns the object's -description text.
 func (t *Task) Description() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (t *Task) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (t *Task) IsKind(className string) bool {
+	defer runtime.KeepAlive(t)
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (t *Task) String() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
@@ -89,8 +95,8 @@ func (t *Task) WithArguments(items ...StringProvider) *Task {
 }
 
 // WithEnvironment sets the environment.
-func (t *Task) WithEnvironment(environment obj.Object) *Task {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setEnvironment:"), objref.IDOf(environment))
+func (t *Task) WithEnvironment(environment map[string]string) *Task {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setEnvironment:"), rt.MapToDict(environment, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return t
 }
 
@@ -102,24 +108,28 @@ func (t *Task) WithCurrentDirectoryURL(currentDirectoryURL string) *Task {
 
 // WithLaunchRequirementData sets the launch requirement data.
 func (t *Task) WithLaunchRequirementData(launchRequirementData DataProvider) *Task {
+	defer runtime.KeepAlive(launchRequirementData)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLaunchRequirementData:"), objref.IDOf(launchRequirementData))
 	return t
 }
 
 // WithStandardInput sets the standard input.
 func (t *Task) WithStandardInput(standardInput obj.Object) *Task {
+	defer runtime.KeepAlive(standardInput)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setStandardInput:"), objref.IDOf(standardInput))
 	return t
 }
 
 // WithStandardOutput sets the standard output.
 func (t *Task) WithStandardOutput(standardOutput obj.Object) *Task {
+	defer runtime.KeepAlive(standardOutput)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setStandardOutput:"), objref.IDOf(standardOutput))
 	return t
 }
 
 // WithStandardError sets the standard error.
 func (t *Task) WithStandardError(standardError obj.Object) *Task {
+	defer runtime.KeepAlive(standardError)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setStandardError:"), objref.IDOf(standardError))
 	return t
 }
@@ -155,8 +165,8 @@ func (t *Task) WithObservationInfo(observationInfo unsafe.Pointer) *Task {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (t *Task) WithScriptingProperties(scriptingProperties obj.Object) *Task {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (t *Task) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Task {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return t
 }
 
@@ -164,6 +174,7 @@ func (t *Task) WithScriptingProperties(scriptingProperties obj.Object) *Task {
 //
 // LaunchAndReturnError returns an error if the operation did not succeed.
 func (t *Task) LaunchAndReturnError() error {
+	defer runtime.KeepAlive(t)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(t), objc.RegisterName("launchAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -174,112 +185,131 @@ func (t *Task) LaunchAndReturnError() error {
 
 // Interrupt wraps the corresponding Objective-C method.
 func (t *Task) Interrupt() {
+	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("interrupt"))
 }
 
 // Terminate wraps the corresponding Objective-C method.
 func (t *Task) Terminate() {
+	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("terminate"))
 }
 
 // Suspend wraps the corresponding Objective-C method.
 func (t *Task) Suspend() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("suspend"))
 	return _r
 }
 
 // Resume wraps the corresponding Objective-C method.
 func (t *Task) Resume() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("resume"))
 	return _r
 }
 
 // ExecutableURL returns the executable URL.
-func (t *Task) ExecutableURL() *URL {
+func (t *Task) ExecutableURL() string {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("executableURL"))
-	return URLFromID(_r)
+	return rt.URLString(_r)
 }
 
 // Arguments returns the arguments.
 //
 // Arguments returns the collection as a Go slice.
 func (t *Task) Arguments() []string {
+	defer runtime.KeepAlive(t)
 	_arr := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("arguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Environment returns the environment.
-func (t *Task) Environment() obj.Object {
+func (t *Task) Environment() map[string]string {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("environment"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // CurrentDirectoryURL returns the current directory URL.
-func (t *Task) CurrentDirectoryURL() *URL {
+func (t *Task) CurrentDirectoryURL() string {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("currentDirectoryURL"))
-	return URLFromID(_r)
+	return rt.URLString(_r)
 }
 
 // LaunchRequirementData returns the launch requirement data.
-func (t *Task) LaunchRequirementData() *Data {
+func (t *Task) LaunchRequirementData() []byte {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("launchRequirementData"))
-	return DataFromID(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // StandardInput returns the standard input.
 func (t *Task) StandardInput() obj.Object {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("standardInput"))
 	return obj.Wrap(_r)
 }
 
 // StandardOutput returns the standard output.
 func (t *Task) StandardOutput() obj.Object {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("standardOutput"))
 	return obj.Wrap(_r)
 }
 
 // StandardError returns the standard error.
 func (t *Task) StandardError() obj.Object {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("standardError"))
 	return obj.Wrap(_r)
 }
 
 // ProcessIdentifier returns the process identifier.
 func (t *Task) ProcessIdentifier() int {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("processIdentifier"))
 	return _r
 }
 
 // IsRunning reports whether the object is running.
 func (t *Task) IsRunning() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isRunning"))
 	return _r
 }
 
 // TerminationStatus returns the termination status.
 func (t *Task) TerminationStatus() int {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("terminationStatus"))
 	return _r
 }
 
 // TerminationReason returns the termination reason.
 func (t *Task) TerminationReason() TaskTerminationReason {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[TaskTerminationReason](objref.IDOf(t), objc.RegisterName("terminationReason"))
 	return _r
 }
 
 // QualityOfService returns the quality of service.
 func (t *Task) QualityOfService() QualityOfService {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[QualityOfService](objref.IDOf(t), objc.RegisterName("qualityOfService"))
 	return _r
 }
 
 // WaitUntilExit wraps the corresponding Objective-C method.
 func (t *Task) WaitUntilExit() {
+	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("waitUntilExit"))
 }
 
 // Launch wraps the corresponding Objective-C method.
 func (t *Task) Launch() {
+	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("launch"))
 }

@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func modelStructureProgramValueTypeAdopt(id objc.ID) *ModelStructureProgramValue
 
 // Description returns the object's -description text.
 func (mspvt *ModelStructureProgramValueType) Description() string {
+	defer runtime.KeepAlive(mspvt)
 	return rt.Description(objref.IDOf(mspvt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mspvt *ModelStructureProgramValueType) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mspvt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mspvt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mspvt *ModelStructureProgramValueType) IsKind(className string) bool {
+	defer runtime.KeepAlive(mspvt)
 	return rt.IsKind(objref.IDOf(mspvt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mspvt *ModelStructureProgramValueType) String() string {
+	defer runtime.KeepAlive(mspvt)
 	return rt.Description(objref.IDOf(mspvt))
 }
 

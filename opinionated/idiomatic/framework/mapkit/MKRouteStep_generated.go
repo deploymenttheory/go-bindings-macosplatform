@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func routeStepAdopt(id objc.ID) *RouteStep {
 
 // Description returns the object's -description text.
 func (rs *RouteStep) Description() string {
+	defer runtime.KeepAlive(rs)
 	return rt.Description(objref.IDOf(rs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rs *RouteStep) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rs *RouteStep) IsKind(className string) bool {
+	defer runtime.KeepAlive(rs)
 	return rt.IsKind(objref.IDOf(rs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rs *RouteStep) String() string {
+	defer runtime.KeepAlive(rs)
 	return rt.Description(objref.IDOf(rs))
 }
 
@@ -74,6 +81,7 @@ func NewRouteStep() *RouteStep {
 
 // Instructions returns the instructions.
 func (rs *RouteStep) Instructions() string {
+	defer runtime.KeepAlive(rs)
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("instructions"))
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (rs *RouteStep) Instructions() string {
 
 // Notice returns the notice.
 func (rs *RouteStep) Notice() string {
+	defer runtime.KeepAlive(rs)
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("notice"))
 	if _r == 0 {
 		return ""
@@ -92,12 +101,14 @@ func (rs *RouteStep) Notice() string {
 
 // Polyline returns the polyline.
 func (rs *RouteStep) Polyline() *Polyline {
+	defer runtime.KeepAlive(rs)
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("polyline"))
 	return PolylineFromID(_r)
 }
 
 // TransportType returns the transport type.
 func (rs *RouteStep) TransportType() DirectionsTransportType {
+	defer runtime.KeepAlive(rs)
 	_r := objc.Send[DirectionsTransportType](objref.IDOf(rs), objc.RegisterName("transportType"))
 	return _r
 }

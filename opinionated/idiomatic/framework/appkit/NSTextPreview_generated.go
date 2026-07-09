@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,32 +51,38 @@ func textPreviewAdopt(id objc.ID) *TextPreview {
 
 // Description returns the object's -description text.
 func (tp *TextPreview) Description() string {
+	defer runtime.KeepAlive(tp)
 	return rt.Description(objref.IDOf(tp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tp *TextPreview) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tp *TextPreview) IsKind(className string) bool {
+	defer runtime.KeepAlive(tp)
 	return rt.IsKind(objref.IDOf(tp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tp *TextPreview) String() string {
+	defer runtime.KeepAlive(tp)
 	return rt.Description(objref.IDOf(tp))
 }
 
 // NewTextPreviewWithSnapshotImagePresentationFrameCandidateRects creates a text preview using the specified image and rectangles that indicate the portions of text to highlight.
-func NewTextPreviewWithSnapshotImagePresentationFrameCandidateRects(snapshotImage obj.Object, presentationFrame corefoundation.CGRect, candidateRects []obj.Object) *TextPreview {
+func NewTextPreviewWithSnapshotImagePresentationFrameCandidateRects(snapshotImage obj.Object, presentationFrame corefoundation.CGRect, candidateRects []*foundation.Value) *TextPreview {
+	defer runtime.KeepAlive(snapshotImage)
 	var _mainthread0 *TextPreview
 	purego.Main(func() {
 		_mainthread0 = func() *TextPreview {
 			_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextPreview")), objc.RegisterName("alloc"))
-			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotImage:presentationFrame:candidateRects:"), objref.IDOf(snapshotImage), presentationFrame, purego.SliceToNSArray(candidateRects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotImage:presentationFrame:candidateRects:"), objref.IDOf(snapshotImage), presentationFrame, purego.SliceToNSArray(candidateRects, func(_v *foundation.Value) objc.ID { return objref.IDOf(_v) }))
 			return textPreviewAdopt(_id)
 		}()
 	})
@@ -82,6 +91,7 @@ func NewTextPreviewWithSnapshotImagePresentationFrameCandidateRects(snapshotImag
 
 // NewTextPreviewWithSnapshotImagePresentationFrame creates a text preview using the specified image.
 func NewTextPreviewWithSnapshotImagePresentationFrame(snapshotImage obj.Object, presentationFrame corefoundation.CGRect) *TextPreview {
+	defer runtime.KeepAlive(snapshotImage)
 	var _mainthread0 *TextPreview
 	purego.Main(func() {
 		_mainthread0 = func() *TextPreview {
@@ -95,6 +105,7 @@ func NewTextPreviewWithSnapshotImagePresentationFrame(snapshotImage obj.Object, 
 
 // PreviewImage returns the image that contains the requested text from your view. You specify this image at initialization time. The system uses it to implement any visual effects involving your view’s text. Create the image with your text on a transparent background.
 func (tp *TextPreview) PreviewImage() obj.Object {
+	defer runtime.KeepAlive(tp)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -108,6 +119,7 @@ func (tp *TextPreview) PreviewImage() obj.Object {
 
 // PresentationFrame returns the frame rectangle that places the preview image directly over the matching text. You specify this value at initialization time. The system uses it to position the preview image over the text in your view. Make sure the frame rectangle is in your view's coordinate space.
 func (tp *TextPreview) PresentationFrame() corefoundation.CGRect {
+	defer runtime.KeepAlive(tp)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -123,6 +135,7 @@ func (tp *TextPreview) PresentationFrame() corefoundation.CGRect {
 //
 // CandidateRects returns the collection as a Go slice.
 func (tp *TextPreview) CandidateRects() []obj.Object {
+	defer runtime.KeepAlive(tp)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {

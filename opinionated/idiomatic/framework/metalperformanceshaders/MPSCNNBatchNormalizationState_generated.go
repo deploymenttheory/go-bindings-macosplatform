@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,11 +68,13 @@ func (cbns *CNNBatchNormalizationState) WithLabel(label string) *CNNBatchNormali
 
 // Reset reset any accumulated state data to its initial values.
 func (cbns *CNNBatchNormalizationState) Reset() {
+	defer runtime.KeepAlive(cbns)
 	objc.Send[objc.ID](objref.IDOf(cbns), objc.RegisterName("reset"))
 }
 
 // BatchNormalization returns the batch normalization.
 func (cbns *CNNBatchNormalizationState) BatchNormalization() obj.Object {
+	defer runtime.KeepAlive(cbns)
 	_r := objc.Send[objc.ID](objref.IDOf(cbns), objc.RegisterName("batchNormalization"))
 	return obj.Wrap(_r)
 }

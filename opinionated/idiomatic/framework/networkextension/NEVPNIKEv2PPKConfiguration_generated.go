@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,29 +49,34 @@ func nEVPNIKEv2PPKConfigurationAdopt(id objc.ID) *NEVPNIKEv2PPKConfiguration {
 
 // Description returns the object's -description text.
 func (nepc *NEVPNIKEv2PPKConfiguration) Description() string {
+	defer runtime.KeepAlive(nepc)
 	return rt.Description(objref.IDOf(nepc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nepc *NEVPNIKEv2PPKConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nepc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nepc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nepc *NEVPNIKEv2PPKConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(nepc)
 	return rt.IsKind(objref.IDOf(nepc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nepc *NEVPNIKEv2PPKConfiguration) String() string {
+	defer runtime.KeepAlive(nepc)
 	return rt.Description(objref.IDOf(nepc))
 }
 
 // NewNEVPNIKEv2PPKConfigurationWithIdentifierKeychainReference initializes a quantum-secure pre-shared key (PPK) configuration.
-func NewNEVPNIKEv2PPKConfigurationWithIdentifierKeychainReference(identifier string, keychainReference obj.Object) *NEVPNIKEv2PPKConfiguration {
+func NewNEVPNIKEv2PPKConfigurationWithIdentifierKeychainReference(identifier string, keychainReference []byte) *NEVPNIKEv2PPKConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NEVPNIKEv2PPKConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:keychainReference:"), purego.NSString(identifier), objref.IDOf(keychainReference))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:keychainReference:"), purego.NSString(identifier), rt.BytesToNSData(keychainReference))
 	return nEVPNIKEv2PPKConfigurationAdopt(_id)
 }
 
@@ -81,6 +88,7 @@ func (nepc *NEVPNIKEv2PPKConfiguration) WithIsMandatory(isMandatory bool) *NEVPN
 
 // Identifier returns the identifer for the PPK.
 func (nepc *NEVPNIKEv2PPKConfiguration) Identifier() string {
+	defer runtime.KeepAlive(nepc)
 	_r := objc.Send[objc.ID](objref.IDOf(nepc), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -89,13 +97,15 @@ func (nepc *NEVPNIKEv2PPKConfiguration) Identifier() string {
 }
 
 // KeychainReference returns a persistent reference to a keychain item of class kSecClassGenericPassword containing the PPK.
-func (nepc *NEVPNIKEv2PPKConfiguration) KeychainReference() obj.Object {
+func (nepc *NEVPNIKEv2PPKConfiguration) KeychainReference() []byte {
+	defer runtime.KeepAlive(nepc)
 	_r := objc.Send[objc.ID](objref.IDOf(nepc), objc.RegisterName("keychainReference"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // IsMandatory reports whether boolean indicating whether use of the PPK is mandatory or not. Default is true.
 func (nepc *NEVPNIKEv2PPKConfiguration) IsMandatory() bool {
+	defer runtime.KeepAlive(nepc)
 	_r := objc.Send[bool](objref.IDOf(nepc), objc.RegisterName("isMandatory"))
 	return _r
 }

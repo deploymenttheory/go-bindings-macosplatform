@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nDArrayQuantizationDescriptorAdopt(id objc.ID) *NDArrayQuantizationDescript
 
 // Description returns the object's -description text.
 func (naqd *NDArrayQuantizationDescriptor) Description() string {
+	defer runtime.KeepAlive(naqd)
 	return rt.Description(objref.IDOf(naqd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (naqd *NDArrayQuantizationDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(naqd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(naqd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (naqd *NDArrayQuantizationDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(naqd)
 	return rt.IsKind(objref.IDOf(naqd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (naqd *NDArrayQuantizationDescriptor) String() string {
+	defer runtime.KeepAlive(naqd)
 	return rt.Description(objref.IDOf(naqd))
 }
 

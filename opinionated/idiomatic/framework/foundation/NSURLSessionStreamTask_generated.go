@@ -6,12 +6,15 @@ package foundation
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,8 +59,19 @@ func NewURLSessionStreamTask() *URLSessionStreamTask {
 	return uRLSessionStreamTaskAdopt(_id)
 }
 
+// WithDelegate sets the delegate.
+func (usst *URLSessionStreamTask) WithDelegate(delegate URLSessionTaskDelegate) *URLSessionStreamTask {
+	_shim := newURLSessionTaskDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(usst), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(usst), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return usst
+}
+
 // WithEarliestBeginDate sets the earliest begin date.
 func (usst *URLSessionStreamTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionStreamTask {
+	defer runtime.KeepAlive(earliestBeginDate)
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
 	return usst
 }
@@ -76,6 +90,7 @@ func (usst *URLSessionStreamTask) WithCountOfBytesClientExpectsToReceive(countOf
 
 // WithTaskDescription sets the task description.
 func (usst *URLSessionStreamTask) WithTaskDescription(taskDescription StringProvider) *URLSessionStreamTask {
+	defer runtime.KeepAlive(taskDescription)
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
 	return usst
 }
@@ -99,22 +114,23 @@ func (usst *URLSessionStreamTask) WithObservationInfo(observationInfo unsafe.Poi
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (usst *URLSessionStreamTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionStreamTask {
-	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (usst *URLSessionStreamTask) WithScriptingProperties(scriptingProperties map[string]obj.Object) *URLSessionStreamTask {
+	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return usst
 }
 
 // WriteDataTimeout writes data timeout.
 //
 // WriteDataTimeout blocks until the operation completes or ctx is cancelled.
-func (usst *URLSessionStreamTask) WriteDataTimeout(ctx context.Context, data *Data, timeout float64) error {
+func (usst *URLSessionStreamTask) WriteDataTimeout(ctx context.Context, data []byte, timeout float64) error {
+	defer runtime.KeepAlive(usst)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("writeData:timeout:completionHandler:"), objref.IDOf(data), timeout, _block)
+	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("writeData:timeout:completionHandler:"), rt.BytesToNSData(data), timeout, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -125,26 +141,31 @@ func (usst *URLSessionStreamTask) WriteDataTimeout(ctx context.Context, data *Da
 
 // CaptureStreams wraps the corresponding Objective-C method.
 func (usst *URLSessionStreamTask) CaptureStreams() {
+	defer runtime.KeepAlive(usst)
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("captureStreams"))
 }
 
 // CloseWrite closes write.
 func (usst *URLSessionStreamTask) CloseWrite() {
+	defer runtime.KeepAlive(usst)
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("closeWrite"))
 }
 
 // CloseRead closes read.
 func (usst *URLSessionStreamTask) CloseRead() {
+	defer runtime.KeepAlive(usst)
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("closeRead"))
 }
 
 // StartSecureConnection starts secure connection.
 func (usst *URLSessionStreamTask) StartSecureConnection() {
+	defer runtime.KeepAlive(usst)
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("startSecureConnection"))
 }
 
 // StopSecureConnection stops secure connection.
 func (usst *URLSessionStreamTask) StopSecureConnection() {
+	defer runtime.KeepAlive(usst)
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("stopSecureConnection"))
 }
 

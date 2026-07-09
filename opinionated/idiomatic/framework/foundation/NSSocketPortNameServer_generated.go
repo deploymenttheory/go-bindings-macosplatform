@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -67,25 +69,29 @@ func (spns *SocketPortNameServer) WithObservationInfo(observationInfo unsafe.Poi
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (spns *SocketPortNameServer) WithScriptingProperties(scriptingProperties obj.Object) *SocketPortNameServer {
-	objc.Send[objc.ID](objref.IDOf(spns), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (spns *SocketPortNameServer) WithScriptingProperties(scriptingProperties map[string]obj.Object) *SocketPortNameServer {
+	objc.Send[objc.ID](objref.IDOf(spns), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return spns
 }
 
 // PortForNameHostNameServerPortNumber looks up and returns the port registered under the specified name on a specified host.
 func (spns *SocketPortNameServer) PortForNameHostNameServerPortNumber(name string, host string, portNumber uint16) *Port {
+	defer runtime.KeepAlive(spns)
 	_r := objc.Send[objc.ID](objref.IDOf(spns), objc.RegisterName("portForName:host:nameServerPortNumber:"), purego.NSString(name), purego.NSString(host), portNumber)
 	return PortFromID(_r)
 }
 
 // RegisterPortNameNameServerPortNumber registers a given port as a network service with the specified name in the local domain.
 func (spns *SocketPortNameServer) RegisterPortNameNameServerPortNumber(port *Port, name string, portNumber uint16) bool {
+	defer runtime.KeepAlive(spns)
+	defer runtime.KeepAlive(port)
 	_r := objc.Send[bool](objref.IDOf(spns), objc.RegisterName("registerPort:name:nameServerPortNumber:"), objref.IDOf(port), purego.NSString(name), portNumber)
 	return _r
 }
 
 // DefaultNameServerPortNumber returns the default name server port number.
 func (spns *SocketPortNameServer) DefaultNameServerPortNumber() uint16 {
+	defer runtime.KeepAlive(spns)
 	_r := objc.Send[uint16](objref.IDOf(spns), objc.RegisterName("defaultNameServerPortNumber"))
 	return _r
 }

@@ -5,8 +5,12 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -60,12 +64,24 @@ func (tcs *TextContentStorage) WithIncludesTextListMarkers(includesTextListMarke
 
 // WithAttributedString sets an attributed string that contains the contents of the document.
 func (tcs *TextContentStorage) WithAttributedString(attributedString obj.Object) *TextContentStorage {
+	defer runtime.KeepAlive(attributedString)
 	objc.Send[objc.ID](objref.IDOf(tcs), objc.RegisterName("setAttributedString:"), objref.IDOf(attributedString))
+	return tcs
+}
+
+// WithDelegate sets the delegate for the content manager object.
+func (tcs *TextContentStorage) WithDelegate(delegate TextContentManagerDelegate) *TextContentStorage {
+	_shim := newTextContentManagerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(tcs), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(tcs), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
 	return tcs
 }
 
 // WithPrimaryTextLayoutManager sets the primary text layout manager for this content.
 func (tcs *TextContentStorage) WithPrimaryTextLayoutManager(primaryTextLayoutManager *TextLayoutManager) *TextContentStorage {
+	defer runtime.KeepAlive(primaryTextLayoutManager)
 	objc.Send[objc.ID](objref.IDOf(tcs), objc.RegisterName("setPrimaryTextLayoutManager:"), objref.IDOf(primaryTextLayoutManager))
 	return tcs
 }
@@ -83,33 +99,41 @@ func (tcs *TextContentStorage) WithAutomaticallySynchronizesToBackingStore(autom
 }
 
 // AttributedStringForTextElement returns a new attributed string for the text element.
-func (tcs *TextContentStorage) AttributedStringForTextElement(textElement *TextElement) obj.Object {
+func (tcs *TextContentStorage) AttributedStringForTextElement(textElement *TextElement) *foundation.AttributedString {
+	defer runtime.KeepAlive(tcs)
+	defer runtime.KeepAlive(textElement)
 	_r := objc.Send[objc.ID](objref.IDOf(tcs), objc.RegisterName("attributedStringForTextElement:"), objref.IDOf(textElement))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // TextElementForAttributedString returns the text element corresponding to object’s attributed string.
 func (tcs *TextContentStorage) TextElementForAttributedString(attributedString obj.Object) *TextElement {
+	defer runtime.KeepAlive(tcs)
+	defer runtime.KeepAlive(attributedString)
 	_r := objc.Send[objc.ID](objref.IDOf(tcs), objc.RegisterName("textElementForAttributedString:"), objref.IDOf(attributedString))
 	return TextElementFromID(_r)
 }
 
 // AdjustedRangeFromRangeForEditingTextSelection returns the text range, if any, in the backing store that required manual adjustment after editing.
 func (tcs *TextContentStorage) AdjustedRangeFromRangeForEditingTextSelection(textRange *TextRange, forEditingTextSelection bool) *TextRange {
+	defer runtime.KeepAlive(tcs)
+	defer runtime.KeepAlive(textRange)
 	_r := objc.Send[objc.ID](objref.IDOf(tcs), objc.RegisterName("adjustedRangeFromRange:forEditingTextSelection:"), objref.IDOf(textRange), forEditingTextSelection)
 	return TextRangeFromID(_r)
 }
 
 // IncludesTextListMarkers wraps the corresponding Objective-C method.
 func (tcs *TextContentStorage) IncludesTextListMarkers() bool {
+	defer runtime.KeepAlive(tcs)
 	_r := objc.Send[bool](objref.IDOf(tcs), objc.RegisterName("includesTextListMarkers"))
 	return _r
 }
 
 // AttributedString returns the attributed string.
-func (tcs *TextContentStorage) AttributedString() obj.Object {
+func (tcs *TextContentStorage) AttributedString() *foundation.AttributedString {
+	defer runtime.KeepAlive(tcs)
 	_r := objc.Send[objc.ID](objref.IDOf(tcs), objc.RegisterName("attributedString"))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 var _ TextContentManagerProvider = (*TextContentStorage)(nil)

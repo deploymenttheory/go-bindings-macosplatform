@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func webAuthenticationSessionAdopt(id objc.ID) *WebAuthenticationSession {
 
 // Description returns the object's -description text.
 func (was *WebAuthenticationSession) Description() string {
+	defer runtime.KeepAlive(was)
 	return rt.Description(objref.IDOf(was))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (was *WebAuthenticationSession) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(was)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(was), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (was *WebAuthenticationSession) IsKind(className string) bool {
+	defer runtime.KeepAlive(was)
 	return rt.IsKind(objref.IDOf(was), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (was *WebAuthenticationSession) String() string {
+	defer runtime.KeepAlive(was)
 	return rt.Description(objref.IDOf(was))
 }
 
@@ -79,36 +86,41 @@ func (was *WebAuthenticationSession) WithPrefersEphemeralWebBrowserSession(prefe
 }
 
 // WithAdditionalHeaderFields sets any additional header fields to set when loading the initial URL.
-func (was *WebAuthenticationSession) WithAdditionalHeaderFields(additionalHeaderFields obj.Object) *WebAuthenticationSession {
-	objc.Send[objc.ID](objref.IDOf(was), objc.RegisterName("setAdditionalHeaderFields:"), objref.IDOf(additionalHeaderFields))
+func (was *WebAuthenticationSession) WithAdditionalHeaderFields(additionalHeaderFields map[string]string) *WebAuthenticationSession {
+	objc.Send[objc.ID](objref.IDOf(was), objc.RegisterName("setAdditionalHeaderFields:"), rt.MapToDict(additionalHeaderFields, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return was
 }
 
 // Start reports whether starts a web authentication session.
 func (was *WebAuthenticationSession) Start() bool {
+	defer runtime.KeepAlive(was)
 	_r := objc.Send[bool](objref.IDOf(was), objc.RegisterName("start"))
 	return _r
 }
 
 // Cancel cancels a web authentication session.
 func (was *WebAuthenticationSession) Cancel() {
+	defer runtime.KeepAlive(was)
 	objc.Send[objc.ID](objref.IDOf(was), objc.RegisterName("cancel"))
 }
 
 // PrefersEphemeralWebBrowserSession reports whether this session should ask the browser for an ephemeral session. Ephemeral web browser sessions do not not share cookies or other browsing data with a user's normal browser session. This value is false by default. Setting this property after calling -[ASWebAuthenticationSession start] has no effect.
 func (was *WebAuthenticationSession) PrefersEphemeralWebBrowserSession() bool {
+	defer runtime.KeepAlive(was)
 	_r := objc.Send[bool](objref.IDOf(was), objc.RegisterName("prefersEphemeralWebBrowserSession"))
 	return _r
 }
 
 // AdditionalHeaderFields returns any additional header fields to be set when loading the initial URL. All header field names must start with the "X-" prefix.
-func (was *WebAuthenticationSession) AdditionalHeaderFields() obj.Object {
+func (was *WebAuthenticationSession) AdditionalHeaderFields() map[string]string {
+	defer runtime.KeepAlive(was)
 	_r := objc.Send[objc.ID](objref.IDOf(was), objc.RegisterName("additionalHeaderFields"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // CanStart reports whether the session can be successfully started. This property returns the same value as calling -start, but without the side effect of actually starting the session.
 func (was *WebAuthenticationSession) CanStart() bool {
+	defer runtime.KeepAlive(was)
 	_r := objc.Send[bool](objref.IDOf(was), objc.RegisterName("canStart"))
 	return _r
 }

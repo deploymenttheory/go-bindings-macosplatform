@@ -5,6 +5,8 @@
 package avkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func pictureInPictureControllerContentSourceAdopt(id objc.ID) *PictureInPictureC
 
 // Description returns the object's -description text.
 func (pipccs *PictureInPictureControllerContentSource) Description() string {
+	defer runtime.KeepAlive(pipccs)
 	return rt.Description(objref.IDOf(pipccs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pipccs *PictureInPictureControllerContentSource) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pipccs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pipccs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pipccs *PictureInPictureControllerContentSource) IsKind(className string) bool {
+	defer runtime.KeepAlive(pipccs)
 	return rt.IsKind(objref.IDOf(pipccs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pipccs *PictureInPictureControllerContentSource) String() string {
+	defer runtime.KeepAlive(pipccs)
 	return rt.Description(objref.IDOf(pipccs))
 }
 
 // NewPictureInPictureControllerContentSourceWithPlayerLayer use this initializer for a content source with a player layer.
 func NewPictureInPictureControllerContentSourceWithPlayerLayer(playerLayer obj.Object) *PictureInPictureControllerContentSource {
+	defer runtime.KeepAlive(playerLayer)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPictureInPictureControllerContentSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayerLayer:"), objref.IDOf(playerLayer))
 	return pictureInPictureControllerContentSourceAdopt(_id)
@@ -75,12 +83,14 @@ func NewPictureInPictureControllerContentSourceWithPlayerLayer(playerLayer obj.O
 
 // PlayerLayer returns the player layer.
 func (pipccs *PictureInPictureControllerContentSource) PlayerLayer() obj.Object {
+	defer runtime.KeepAlive(pipccs)
 	_r := objc.Send[objc.ID](objref.IDOf(pipccs), objc.RegisterName("playerLayer"))
 	return obj.Wrap(_r)
 }
 
 // SampleBufferDisplayLayer returns the receiver's sample buffer display layer.
 func (pipccs *PictureInPictureControllerContentSource) SampleBufferDisplayLayer() obj.Object {
+	defer runtime.KeepAlive(pipccs)
 	_r := objc.Send[objc.ID](objref.IDOf(pipccs), objc.RegisterName("sampleBufferDisplayLayer"))
 	return obj.Wrap(_r)
 }

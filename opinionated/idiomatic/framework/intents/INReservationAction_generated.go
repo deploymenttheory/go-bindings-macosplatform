@@ -5,7 +5,10 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,34 @@ func reservationActionAdopt(id objc.ID) *ReservationAction {
 
 // Description returns the object's -description text.
 func (ra *ReservationAction) Description() string {
+	defer runtime.KeepAlive(ra)
 	return rt.Description(objref.IDOf(ra))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ra *ReservationAction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ra)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ra), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ra *ReservationAction) IsKind(className string) bool {
+	defer runtime.KeepAlive(ra)
 	return rt.IsKind(objref.IDOf(ra), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ra *ReservationAction) String() string {
+	defer runtime.KeepAlive(ra)
 	return rt.Description(objref.IDOf(ra))
 }
 
 // NewReservationActionWithTypeValidDurationUserActivity creates a new reservation action.
 func NewReservationActionWithTypeValidDurationUserActivity(type_ ReservationActionType, validDuration *DateComponentsRange, userActivity obj.Object) *ReservationAction {
+	defer runtime.KeepAlive(validDuration)
+	defer runtime.KeepAlive(userActivity)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INReservationAction")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:validDuration:userActivity:"), type_, objref.IDOf(validDuration), objref.IDOf(userActivity))
 	return reservationActionAdopt(_id)
@@ -75,18 +85,21 @@ func NewReservationActionWithTypeValidDurationUserActivity(type_ ReservationActi
 
 // Type returns the type.
 func (ra *ReservationAction) Type() ReservationActionType {
+	defer runtime.KeepAlive(ra)
 	_r := objc.Send[ReservationActionType](objref.IDOf(ra), objc.RegisterName("type"))
 	return _r
 }
 
 // ValidDuration returns the valid duration.
 func (ra *ReservationAction) ValidDuration() *DateComponentsRange {
+	defer runtime.KeepAlive(ra)
 	_r := objc.Send[objc.ID](objref.IDOf(ra), objc.RegisterName("validDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
 // UserActivity returns the user activity.
-func (ra *ReservationAction) UserActivity() obj.Object {
+func (ra *ReservationAction) UserActivity() *foundation.UserActivity {
+	defer runtime.KeepAlive(ra)
 	_r := objc.Send[objc.ID](objref.IDOf(ra), objc.RegisterName("userActivity"))
-	return obj.Wrap(_r)
+	return foundation.UserActivityFromID(_r)
 }

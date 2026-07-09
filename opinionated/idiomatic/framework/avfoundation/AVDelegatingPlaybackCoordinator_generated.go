@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -66,28 +68,34 @@ func (dpc *DelegatingPlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(
 	return dpc
 }
 
-// CoordinateRateChangeToRateOptions coordinates a rate change across all participants, waiting for others to become ready, if necessary.
-func (dpc *DelegatingPlaybackCoordinator) CoordinateRateChangeToRateOptions(rate float32, options DelegatingPlaybackCoordinatorRateChangeOptions) {
+// CoordinateRateChangeToRate coordinates a rate change across all participants, waiting for others to become ready, if necessary.
+func (dpc *DelegatingPlaybackCoordinator) CoordinateRateChangeToRate(rate float32, options DelegatingPlaybackCoordinatorRateChangeOptions) {
+	defer runtime.KeepAlive(dpc)
 	objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("coordinateRateChangeToRate:options:"), rate, options)
 }
 
-// CoordinateSeekToTimeOptions coordinates a seek to the specified time for all connected participants.
-func (dpc *DelegatingPlaybackCoordinator) CoordinateSeekToTimeOptions(time_ coremedia.CMTime, options DelegatingPlaybackCoordinatorSeekOptions) {
+// CoordinateSeekToTime coordinates a seek to the specified time for all connected participants.
+func (dpc *DelegatingPlaybackCoordinator) CoordinateSeekToTime(time_ coremedia.CMTime, options DelegatingPlaybackCoordinatorSeekOptions) {
+	defer runtime.KeepAlive(dpc)
 	objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("coordinateSeekToTime:options:"), time_, options)
 }
 
 // TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase tells the coordinator to transition to a new item.
 func (dpc *DelegatingPlaybackCoordinator) TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase(itemIdentifier string, snapshotTimebase obj.Object) {
+	defer runtime.KeepAlive(dpc)
+	defer runtime.KeepAlive(snapshotTimebase)
 	objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("transitionToItemWithIdentifier:proposingInitialTimingBasedOnTimebase:"), purego.NSString(itemIdentifier), objref.IDOf(snapshotTimebase))
 }
 
 // ReapplyCurrentItemStateToPlaybackControlDelegate tells the coordinator to reissue current play state commands to synchronize the current item to the state of other participants.
 func (dpc *DelegatingPlaybackCoordinator) ReapplyCurrentItemStateToPlaybackControlDelegate() {
+	defer runtime.KeepAlive(dpc)
 	objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("reapplyCurrentItemStateToPlaybackControlDelegate"))
 }
 
 // CurrentItemIdentifier returns the item identifier of the current item. Previously set by a call to transitionToItemWithIdentifier:proposingInitialTimingBasedOnTimebase:
 func (dpc *DelegatingPlaybackCoordinator) CurrentItemIdentifier() string {
+	defer runtime.KeepAlive(dpc)
 	_r := objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("currentItemIdentifier"))
 	if _r == 0 {
 		return ""

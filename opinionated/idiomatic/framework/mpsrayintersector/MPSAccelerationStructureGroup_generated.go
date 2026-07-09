@@ -5,6 +5,8 @@
 package mpsrayintersector
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func accelerationStructureGroupAdopt(id objc.ID) *AccelerationStructureGroup {
 
 // Description returns the object's -description text.
 func (asg *AccelerationStructureGroup) Description() string {
+	defer runtime.KeepAlive(asg)
 	return rt.Description(objref.IDOf(asg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (asg *AccelerationStructureGroup) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(asg)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(asg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (asg *AccelerationStructureGroup) IsKind(className string) bool {
+	defer runtime.KeepAlive(asg)
 	return rt.IsKind(objref.IDOf(asg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (asg *AccelerationStructureGroup) String() string {
+	defer runtime.KeepAlive(asg)
 	return rt.Description(objref.IDOf(asg))
 }
 

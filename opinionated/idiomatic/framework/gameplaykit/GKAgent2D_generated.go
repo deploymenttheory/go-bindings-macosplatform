@@ -5,10 +5,12 @@
 package gameplaykit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -65,8 +67,19 @@ func (ad *Agent2D) WithRotation(rotation float32) *Agent2D {
 	return ad
 }
 
+// WithDelegate sets an object that prepares for or responds to updates in the agent simulation.
+func (ad *Agent2D) WithDelegate(delegate AgentDelegate) *Agent2D {
+	_shim := newAgentDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ad), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ad), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return ad
+}
+
 // WithBehavior sets a weighted collection of goals that influence the agent’s movement.
 func (ad *Agent2D) WithBehavior(behavior BehaviorProvider) *Agent2D {
+	defer runtime.KeepAlive(behavior)
 	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
 	return ad
 }
@@ -103,6 +116,7 @@ func (ad *Agent2D) WithMaxSpeed(maxSpeed float32) *Agent2D {
 
 // Rotation returns z rotation of the agent on the logical XY plane
 func (ad *Agent2D) Rotation() float32 {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[float32](objref.IDOf(ad), objc.RegisterName("rotation"))
 	return _r
 }

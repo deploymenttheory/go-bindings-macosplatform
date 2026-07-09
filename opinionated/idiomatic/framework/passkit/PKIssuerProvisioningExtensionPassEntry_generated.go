@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func issuerProvisioningExtensionPassEntryAdopt(id objc.ID) *IssuerProvisioningEx
 
 // Description returns the object's -description text.
 func (ipepe *IssuerProvisioningExtensionPassEntry) Description() string {
+	defer runtime.KeepAlive(ipepe)
 	return rt.Description(objref.IDOf(ipepe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ipepe *IssuerProvisioningExtensionPassEntry) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ipepe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ipepe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ipepe *IssuerProvisioningExtensionPassEntry) IsKind(className string) bool {
+	defer runtime.KeepAlive(ipepe)
 	return rt.IsKind(objref.IDOf(ipepe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ipepe *IssuerProvisioningExtensionPassEntry) String() string {
+	defer runtime.KeepAlive(ipepe)
 	return rt.Description(objref.IDOf(ipepe))
 }
 
 // Identifier returns the identifier.
 func (ipepe *IssuerProvisioningExtensionPassEntry) Identifier() string {
+	defer runtime.KeepAlive(ipepe)
 	_r := objc.Send[objc.ID](objref.IDOf(ipepe), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -79,6 +87,7 @@ func (ipepe *IssuerProvisioningExtensionPassEntry) Identifier() string {
 
 // Title returns the title.
 func (ipepe *IssuerProvisioningExtensionPassEntry) Title() string {
+	defer runtime.KeepAlive(ipepe)
 	_r := objc.Send[objc.ID](objref.IDOf(ipepe), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -88,6 +97,7 @@ func (ipepe *IssuerProvisioningExtensionPassEntry) Title() string {
 
 // Art returns the art.
 func (ipepe *IssuerProvisioningExtensionPassEntry) Art() obj.Object {
+	defer runtime.KeepAlive(ipepe)
 	_r := objc.Send[objc.ID](objref.IDOf(ipepe), objc.RegisterName("art"))
 	return obj.Wrap(_r)
 }

@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,12 +50,12 @@ func menuItemCellAdopt(id objc.ID) *MenuItemCell {
 }
 
 // NewMenuItemCellTextCell creates a new MenuItemCell.
-func NewMenuItemCellTextCell(string_ string) *MenuItemCell {
+func NewMenuItemCellTextCell(str string) *MenuItemCell {
 	var _mainthread0 *MenuItemCell
 	purego.Main(func() {
 		_mainthread0 = func() *MenuItemCell {
 			_alloc := objc.Send[objc.ID](objc.ID(_class("NSMenuItemCell")), objc.RegisterName("alloc"))
-			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(str))
 			return menuItemCellAdopt(_id)
 		}()
 	})
@@ -62,6 +64,7 @@ func NewMenuItemCellTextCell(string_ string) *MenuItemCell {
 
 // NewMenuItemCellWithCoder creates a new MenuItemCell.
 func NewMenuItemCellWithCoder(coder obj.Object) *MenuItemCell {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *MenuItemCell
 	purego.Main(func() {
 		_mainthread0 = func() *MenuItemCell {
@@ -75,6 +78,7 @@ func NewMenuItemCellWithCoder(coder obj.Object) *MenuItemCell {
 
 // WithMenuItem sets the menu item object associated with the cell.
 func (mic *MenuItemCell) WithMenuItem(menuItem *MenuItem) *MenuItemCell {
+	defer runtime.KeepAlive(menuItem)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setMenuItem:"), objref.IDOf(menuItem))
 	})
@@ -123,6 +127,7 @@ func (mic *MenuItemCell) WithShowsStateBy(showsStateBy CellStyleMask) *MenuItemC
 
 // WithAttributedTitle sets the title displayed by the button when it’s in its normal state as an attributed string.
 func (mic *MenuItemCell) WithAttributedTitle(attributedTitle obj.Object) *MenuItemCell {
+	defer runtime.KeepAlive(attributedTitle)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	})
@@ -139,6 +144,7 @@ func (mic *MenuItemCell) WithAlternateTitle(alternateTitle string) *MenuItemCell
 
 // WithAttributedAlternateTitle sets the title displayed by the button when it’s in its alternate state, as an attributed string.
 func (mic *MenuItemCell) WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *MenuItemCell {
+	defer runtime.KeepAlive(attributedAlternateTitle)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAttributedAlternateTitle:"), objref.IDOf(attributedAlternateTitle))
 	})
@@ -147,6 +153,7 @@ func (mic *MenuItemCell) WithAttributedAlternateTitle(attributedAlternateTitle o
 
 // WithAlternateImage sets the image the button displays in its alternate state.
 func (mic *MenuItemCell) WithAlternateImage(alternateImage *Image) *MenuItemCell {
+	defer runtime.KeepAlive(alternateImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
 	})
@@ -211,6 +218,7 @@ func (mic *MenuItemCell) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhil
 
 // WithSound sets the sound that’s played when the user presses the button (that is during a mouse-down event).
 func (mic *MenuItemCell) WithSound(sound *Sound) *MenuItemCell {
+	defer runtime.KeepAlive(sound)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setSound:"), objref.IDOf(sound))
 	})
@@ -219,6 +227,7 @@ func (mic *MenuItemCell) WithSound(sound *Sound) *MenuItemCell {
 
 // WithBackgroundColor sets the background color of the button.
 func (mic *MenuItemCell) WithBackgroundColor(backgroundColor *Color) *MenuItemCell {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -235,6 +244,7 @@ func (mic *MenuItemCell) WithGradientType(gradientType GradientType) *MenuItemCe
 
 // WithKeyEquivalentFont sets the font used to draw the button’s key equivalent.
 func (mic *MenuItemCell) WithKeyEquivalentFont(keyEquivalentFont *Font) *MenuItemCell {
+	defer runtime.KeepAlive(keyEquivalentFont)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setKeyEquivalentFont:"), objref.IDOf(keyEquivalentFont))
 	})
@@ -243,6 +253,7 @@ func (mic *MenuItemCell) WithKeyEquivalentFont(keyEquivalentFont *Font) *MenuIte
 
 // WithControlView sets the view associated with the cell.
 func (mic *MenuItemCell) WithControlView(controlView ViewProvider) *MenuItemCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -267,6 +278,7 @@ func (mic *MenuItemCell) WithState(state int) *MenuItemCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (mic *MenuItemCell) WithTarget(target obj.Object) *MenuItemCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -371,6 +383,7 @@ func (mic *MenuItemCell) WithWraps(wraps bool) *MenuItemCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (mic *MenuItemCell) WithFont(font *Font) *MenuItemCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -379,6 +392,7 @@ func (mic *MenuItemCell) WithFont(font *Font) *MenuItemCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (mic *MenuItemCell) WithFormatter(formatter obj.Object) *MenuItemCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -387,6 +401,7 @@ func (mic *MenuItemCell) WithFormatter(formatter obj.Object) *MenuItemCell {
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (mic *MenuItemCell) WithObjectValue(objectValue obj.Object) *MenuItemCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -435,6 +450,7 @@ func (mic *MenuItemCell) WithIntegerValue(integerValue int) *MenuItemCell {
 
 // WithImage sets the image displayed by the cell, if any.
 func (mic *MenuItemCell) WithImage(image *Image) *MenuItemCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -451,6 +467,7 @@ func (mic *MenuItemCell) WithControlSize(controlSize ControlSize) *MenuItemCell 
 
 // WithRepresentedObject sets the object represented by the cell.
 func (mic *MenuItemCell) WithRepresentedObject(representedObject obj.Object) *MenuItemCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -459,6 +476,7 @@ func (mic *MenuItemCell) WithRepresentedObject(representedObject obj.Object) *Me
 
 // WithMenu sets the cell’s contextual menu.
 func (mic *MenuItemCell) WithMenu(menu *Menu) *MenuItemCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -547,6 +565,7 @@ func (mic *MenuItemCell) WithFocusRingType(focusRingType FocusRingType) *MenuIte
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (mic *MenuItemCell) WithAttributedStringValue(attributedStringValue obj.Object) *MenuItemCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -595,6 +614,7 @@ func (mic *MenuItemCell) WithControlTint(controlTint ControlTint) *MenuItemCell 
 
 // CalcSize calculates the minimum required width and height of the receiver’s menu item.
 func (mic *MenuItemCell) CalcSize() {
+	defer runtime.KeepAlive(mic)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("calcSize"))
 	})
@@ -603,6 +623,7 @@ func (mic *MenuItemCell) CalcSize() {
 
 // StateImageRectForBounds returns the rectangle into which the menu item’s state image should be drawn.
 func (mic *MenuItemCell) StateImageRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(mic)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -616,6 +637,7 @@ func (mic *MenuItemCell) StateImageRectForBounds(cellFrame corefoundation.CGRect
 
 // KeyEquivalentRectForBounds returns the rectangle into which the menu item’s key equivalent should be drawn.
 func (mic *MenuItemCell) KeyEquivalentRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(mic)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -629,6 +651,8 @@ func (mic *MenuItemCell) KeyEquivalentRectForBounds(cellFrame corefoundation.CGR
 
 // DrawSeparatorItemWithFrameInView draws a menu item separator.
 func (mic *MenuItemCell) DrawSeparatorItemWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	defer runtime.KeepAlive(mic)
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawSeparatorItemWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
 	})
@@ -637,6 +661,8 @@ func (mic *MenuItemCell) DrawSeparatorItemWithFrameInView(cellFrame corefoundati
 
 // DrawStateImageWithFrameInView draws the state image associated with the menu item.
 func (mic *MenuItemCell) DrawStateImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	defer runtime.KeepAlive(mic)
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawStateImageWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
 	})
@@ -645,6 +671,8 @@ func (mic *MenuItemCell) DrawStateImageWithFrameInView(cellFrame corefoundation.
 
 // DrawImageWithFrameInView draws the image associated with the menu item.
 func (mic *MenuItemCell) DrawImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	defer runtime.KeepAlive(mic)
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawImageWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
 	})
@@ -653,6 +681,8 @@ func (mic *MenuItemCell) DrawImageWithFrameInView(cellFrame corefoundation.CGRec
 
 // DrawTitleWithFrameInView draws the title associated with the menu item.
 func (mic *MenuItemCell) DrawTitleWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	defer runtime.KeepAlive(mic)
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawTitleWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
 	})
@@ -661,6 +691,8 @@ func (mic *MenuItemCell) DrawTitleWithFrameInView(cellFrame corefoundation.CGRec
 
 // DrawKeyEquivalentWithFrameInView draws the key equivalent associated with the menu item.
 func (mic *MenuItemCell) DrawKeyEquivalentWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	defer runtime.KeepAlive(mic)
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawKeyEquivalentWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
 	})
@@ -669,6 +701,8 @@ func (mic *MenuItemCell) DrawKeyEquivalentWithFrameInView(cellFrame corefoundati
 
 // DrawBorderAndBackgroundWithFrameInView draws the borders and background associated with the receiver’s menu item (if any).
 func (mic *MenuItemCell) DrawBorderAndBackgroundWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	defer runtime.KeepAlive(mic)
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawBorderAndBackgroundWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
 	})
@@ -677,6 +711,7 @@ func (mic *MenuItemCell) DrawBorderAndBackgroundWithFrameInView(cellFrame corefo
 
 // MenuItem returns the menu item.
 func (mic *MenuItemCell) MenuItem() *MenuItem {
+	defer runtime.KeepAlive(mic)
 	var _mainthread0 *MenuItem
 	purego.Main(func() {
 		_mainthread0 = func() *MenuItem {
@@ -690,6 +725,7 @@ func (mic *MenuItemCell) MenuItem() *MenuItem {
 
 // NeedsSizing wraps the corresponding Objective-C method.
 func (mic *MenuItemCell) NeedsSizing() bool {
+	defer runtime.KeepAlive(mic)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -703,6 +739,7 @@ func (mic *MenuItemCell) NeedsSizing() bool {
 
 // NeedsDisplay wraps the corresponding Objective-C method.
 func (mic *MenuItemCell) NeedsDisplay() bool {
+	defer runtime.KeepAlive(mic)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -716,6 +753,7 @@ func (mic *MenuItemCell) NeedsDisplay() bool {
 
 // StateImageWidth returns the state image width.
 func (mic *MenuItemCell) StateImageWidth() float64 {
+	defer runtime.KeepAlive(mic)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -729,6 +767,7 @@ func (mic *MenuItemCell) StateImageWidth() float64 {
 
 // ImageWidth returns the image width.
 func (mic *MenuItemCell) ImageWidth() float64 {
+	defer runtime.KeepAlive(mic)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -742,6 +781,7 @@ func (mic *MenuItemCell) ImageWidth() float64 {
 
 // TitleWidth returns the title width.
 func (mic *MenuItemCell) TitleWidth() float64 {
+	defer runtime.KeepAlive(mic)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -755,6 +795,7 @@ func (mic *MenuItemCell) TitleWidth() float64 {
 
 // KeyEquivalentWidth returns the key equivalent width.
 func (mic *MenuItemCell) KeyEquivalentWidth() float64 {
+	defer runtime.KeepAlive(mic)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {

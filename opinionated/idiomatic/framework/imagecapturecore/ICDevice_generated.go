@@ -6,6 +6,7 @@ package imagecapturecore
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -53,22 +54,27 @@ func deviceAdopt(id objc.ID) *Device {
 
 // Description returns the object's -description text.
 func (d *Device) Description() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (d *Device) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (d *Device) IsKind(className string) bool {
+	defer runtime.KeepAlive(d)
 	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (d *Device) String() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
@@ -80,16 +86,19 @@ func (d *Device) WithAutolaunchApplicationPath(autolaunchApplicationPath unsafe.
 
 // RequestOpenSession requests to open a session on the device.
 func (d *Device) RequestOpenSession() {
+	defer runtime.KeepAlive(d)
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("requestOpenSession"))
 }
 
 // RequestCloseSession requests to close an open session on the device.
 func (d *Device) RequestCloseSession() {
+	defer runtime.KeepAlive(d)
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("requestCloseSession"))
 }
 
 // RequestEject requests to eject the media if permitted by the device, or to disconnect from a remote device.
 func (d *Device) RequestEject() {
+	defer runtime.KeepAlive(d)
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("requestEject"))
 }
 
@@ -97,6 +106,8 @@ func (d *Device) RequestEject() {
 //
 // RequestOpenSessionWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
 func (d *Device) RequestOpenSessionWithOptionsCompletion(ctx context.Context, options obj.Object) error {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(options)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -116,6 +127,8 @@ func (d *Device) RequestOpenSessionWithOptionsCompletion(ctx context.Context, op
 //
 // RequestCloseSessionWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
 func (d *Device) RequestCloseSessionWithOptionsCompletion(ctx context.Context, options obj.Object) error {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(options)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -135,6 +148,7 @@ func (d *Device) RequestCloseSessionWithOptionsCompletion(ctx context.Context, o
 //
 // RequestEjectWithCompletion blocks until the operation completes or ctx is cancelled.
 func (d *Device) RequestEjectWithCompletion(ctx context.Context) error {
+	defer runtime.KeepAlive(d)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -152,16 +166,19 @@ func (d *Device) RequestEjectWithCompletion(ctx context.Context) error {
 
 // RequestEjectOrDisconnect requests to eject the media if permitted by the device, or to disconnect from a remote device.
 func (d *Device) RequestEjectOrDisconnect() {
+	defer runtime.KeepAlive(d)
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("requestEjectOrDisconnect"))
 }
 
 // RequestYield requests that device module in control of this device yield control.
 func (d *Device) RequestYield() {
+	defer runtime.KeepAlive(d)
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("requestYield"))
 }
 
 // Type returns ￼The type of the device as defined by ICDeviceType OR'd with its ICDeviceLocationType.
 func (d *Device) Type() DeviceType {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[DeviceType](objref.IDOf(d), objc.RegisterName("type"))
 	return _r
 }
@@ -170,12 +187,14 @@ func (d *Device) Type() DeviceType {
 //
 // Capabilities returns the collection as a Go slice.
 func (d *Device) Capabilities() []string {
+	defer runtime.KeepAlive(d)
 	_arr := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("capabilities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Name returns ￼Name of the device as reported by the device module or by the device transport when a device module is not in control of this device.
 func (d *Device) Name() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -185,6 +204,7 @@ func (d *Device) Name() string {
 
 // ProductKind returns ￼Type of the device. Possible values are:
 func (d *Device) ProductKind() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("productKind"))
 	if _r == 0 {
 		return ""
@@ -194,12 +214,14 @@ func (d *Device) ProductKind() string {
 
 // Icon returns ￼Icon image for the device class.  If there is no custom icon present from a device manufacturer, this will be a rendered version of the system symbol for the device class.  Using a rendered system symbol instead of the systemSymbolName is discouraged.
 func (d *Device) Icon() obj.Object {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("icon"))
 	return obj.Wrap(_r)
 }
 
 // SystemSymbolName returns ￼Standard system symbol used to represent the device class.  Using the symbol to render an appropriate device icon will ensure proper scaling for high resolution devices.
 func (d *Device) SystemSymbolName() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("systemSymbolName"))
 	if _r == 0 {
 		return ""
@@ -209,6 +231,7 @@ func (d *Device) SystemSymbolName() string {
 
 // TransportType returns ￼The transport type used by the device. The possible values are: ICTransportTypeUSB or ICTransportTypeMassStorage.
 func (d *Device) TransportType() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("transportType"))
 	if _r == 0 {
 		return ""
@@ -218,6 +241,7 @@ func (d *Device) TransportType() string {
 
 // UUIDString returns ￼A string representation of the Universally Unique ID of the device.
 func (d *Device) UUIDString() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("UUIDString"))
 	if _r == 0 {
 		return ""
@@ -227,42 +251,49 @@ func (d *Device) UUIDString() string {
 
 // HasOpenSession reports whether ￼Indicates whether the device has an open session.
 func (d *Device) HasOpenSession() bool {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("hasOpenSession"))
 	return _r
 }
 
 // UserData returns ￼Client convenience bookkeeping object retained by the framework.
 func (d *Device) UserData() obj.Object {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("userData"))
 	return obj.Wrap(_r)
 }
 
 // USBLocationID returns ￼The USB location of which the device is occupying.
 func (d *Device) USBLocationID() int {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("usbLocationID"))
 	return _r
 }
 
 // USBProductID returns ￼The USB PID associated with the device attached.
 func (d *Device) USBProductID() int {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("usbProductID"))
 	return _r
 }
 
 // USBVendorID returns ￼The USB VID associated with the device attached.
 func (d *Device) USBVendorID() int {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("usbVendorID"))
 	return _r
 }
 
 // IsRemote reports whether ￼Indicates whether the device is a remote device published by Image Capture device sharing facility. ￼Name of the device as reported by the device module or by the device transport when a device module is not in control of this device.
 func (d *Device) IsRemote() bool {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isRemote"))
 	return _r
 }
 
 // ModuleExecutableArchitecture returns reports the device module servicing the requests executable architecture.
 func (d *Device) ModuleExecutableArchitecture() int {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("moduleExecutableArchitecture"))
 	return _r
 }

@@ -52,8 +52,8 @@ func (o *NWTLSParameters) TLSSessionID() *foundation.NSData {
 
 // @property TLSSessionID @discussion The session ID for the associated connection, used for TLS session resumption. This property is optional when using TLS.
 // Deprecated: Use `sec_protocol_options_set_tls_resumption_enabled` in Security framework instead, see deprecation notice in <NetworkExtension/NWTLSParameters.h>
-func (o *NWTLSParameters) SetTLSSessionID(tLSSessionID *foundation.NSData) {
-	o.Ptr().Send(_nWTLSParametersSelSetTLSSessionID, tLSSessionID.Ptr())
+func (o *NWTLSParameters) SetTLSSessionID(tlsSessionID *foundation.NSData) {
+	o.Ptr().Send(_nWTLSParametersSelSetTLSSessionID, tlsSessionID.Ptr())
 }
 
 // @property SSLCipherSuites @discussion The set of allowed cipher suites, as defined in <Security/CipherSuite.h>. If set to nil, the default cipher suites will be used.
@@ -68,8 +68,8 @@ func (o *NWTLSParameters) SSLCipherSuites() *foundation.NSSet[*foundation.NSNumb
 
 // @property SSLCipherSuites @discussion The set of allowed cipher suites, as defined in <Security/CipherSuite.h>. If set to nil, the default cipher suites will be used.
 // Deprecated: Use `sec_protocol_options_append_tls_ciphersuite` in Security framework instead, see deprecation notice in <NetworkExtension/NWTLSParameters.h>
-func (o *NWTLSParameters) SetSSLCipherSuites(sSLCipherSuites *foundation.NSSet[*foundation.NSNumber]) {
-	o.Ptr().Send(_nWTLSParametersSelSetSSLCipherSuites, sSLCipherSuites.Ptr())
+func (o *NWTLSParameters) SetSSLCipherSuites(sslCipherSuites *foundation.NSSet[*foundation.NSNumber]) {
+	o.Ptr().Send(_nWTLSParametersSelSetSSLCipherSuites, sslCipherSuites.Ptr())
 }
 
 // @property minimumSSLProtocolVersion @discussion The minimum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version older than the minimum.

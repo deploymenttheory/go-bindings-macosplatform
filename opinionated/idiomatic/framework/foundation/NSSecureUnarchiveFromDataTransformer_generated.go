@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,8 +62,8 @@ func (sufdt *SecureUnarchiveFromDataTransformer) WithObservationInfo(observation
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (sufdt *SecureUnarchiveFromDataTransformer) WithScriptingProperties(scriptingProperties obj.Object) *SecureUnarchiveFromDataTransformer {
-	objc.Send[objc.ID](objref.IDOf(sufdt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (sufdt *SecureUnarchiveFromDataTransformer) WithScriptingProperties(scriptingProperties map[string]obj.Object) *SecureUnarchiveFromDataTransformer {
+	objc.Send[objc.ID](objref.IDOf(sufdt), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return sufdt
 }
 

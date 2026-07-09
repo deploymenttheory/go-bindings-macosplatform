@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,63 +51,81 @@ func layoutAnchorAdopt(id objc.ID) *LayoutAnchor {
 
 // Description returns the object's -description text.
 func (la *LayoutAnchor) Description() string {
+	defer runtime.KeepAlive(la)
 	return rt.Description(objref.IDOf(la))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (la *LayoutAnchor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(la)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(la), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (la *LayoutAnchor) IsKind(className string) bool {
+	defer runtime.KeepAlive(la)
 	return rt.IsKind(objref.IDOf(la), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (la *LayoutAnchor) String() string {
+	defer runtime.KeepAlive(la)
 	return rt.Description(objref.IDOf(la))
 }
 
 // ConstraintEqualToAnchor returns a constraint that defines one item’s attribute as equal to another.
 func (la *LayoutAnchor) ConstraintEqualToAnchor(anchor obj.Object) *LayoutConstraint {
+	defer runtime.KeepAlive(la)
+	defer runtime.KeepAlive(anchor)
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("constraintEqualToAnchor:"), objref.IDOf(anchor))
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintGreaterThanOrEqualToAnchor returns a constraint that defines one item’s attribute as greater than or equal to another.
 func (la *LayoutAnchor) ConstraintGreaterThanOrEqualToAnchor(anchor obj.Object) *LayoutConstraint {
+	defer runtime.KeepAlive(la)
+	defer runtime.KeepAlive(anchor)
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("constraintGreaterThanOrEqualToAnchor:"), objref.IDOf(anchor))
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintLessThanOrEqualToAnchor returns a constraint that defines one item’s attribute as less than or equal to another.
 func (la *LayoutAnchor) ConstraintLessThanOrEqualToAnchor(anchor obj.Object) *LayoutConstraint {
+	defer runtime.KeepAlive(la)
+	defer runtime.KeepAlive(anchor)
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("constraintLessThanOrEqualToAnchor:"), objref.IDOf(anchor))
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintEqualToAnchorConstant returns a constraint that defines one item’s attribute as equal to another item’s attribute plus a constant offset.
 func (la *LayoutAnchor) ConstraintEqualToAnchorConstant(anchor obj.Object, c float64) *LayoutConstraint {
+	defer runtime.KeepAlive(la)
+	defer runtime.KeepAlive(anchor)
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("constraintEqualToAnchor:constant:"), objref.IDOf(anchor), c)
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintGreaterThanOrEqualToAnchorConstant returns a constraint that defines one item’s attribute as greater than or equal to another item’s attribute plus a constant offset.
 func (la *LayoutAnchor) ConstraintGreaterThanOrEqualToAnchorConstant(anchor obj.Object, c float64) *LayoutConstraint {
+	defer runtime.KeepAlive(la)
+	defer runtime.KeepAlive(anchor)
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("constraintGreaterThanOrEqualToAnchor:constant:"), objref.IDOf(anchor), c)
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintLessThanOrEqualToAnchorConstant returns a constraint that defines one item’s attribute as less than or equal to another item’s attribute plus a constant offset.
 func (la *LayoutAnchor) ConstraintLessThanOrEqualToAnchorConstant(anchor obj.Object, c float64) *LayoutConstraint {
+	defer runtime.KeepAlive(la)
+	defer runtime.KeepAlive(anchor)
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("constraintLessThanOrEqualToAnchor:constant:"), objref.IDOf(anchor), c)
 	return LayoutConstraintFromID(_r)
 }
 
 // Name returns the name.
 func (la *LayoutAnchor) Name() string {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -115,12 +135,14 @@ func (la *LayoutAnchor) Name() string {
 
 // Item returns the item.
 func (la *LayoutAnchor) Item() obj.Object {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("item"))
 	return obj.Wrap(_r)
 }
 
 // HasAmbiguousLayout reports whether the object has ambiguous layout.
 func (la *LayoutAnchor) HasAmbiguousLayout() bool {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[bool](objref.IDOf(la), objc.RegisterName("hasAmbiguousLayout"))
 	return _r
 }
@@ -129,6 +151,7 @@ func (la *LayoutAnchor) HasAmbiguousLayout() bool {
 //
 // ConstraintsAffectingLayout returns the collection as a Go slice.
 func (la *LayoutAnchor) ConstraintsAffectingLayout() []*LayoutConstraint {
+	defer runtime.KeepAlive(la)
 	_arr := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("constraintsAffectingLayout"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LayoutConstraint { return LayoutConstraintFromID(_id) })
 }

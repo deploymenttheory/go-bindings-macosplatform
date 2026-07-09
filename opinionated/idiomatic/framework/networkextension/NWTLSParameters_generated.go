@@ -5,7 +5,10 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func nWTLSParametersAdopt(id objc.ID) *NWTLSParameters {
 
 // Description returns the object's -description text.
 func (np *NWTLSParameters) Description() string {
+	defer runtime.KeepAlive(np)
 	return rt.Description(objref.IDOf(np))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (np *NWTLSParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(np)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(np), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (np *NWTLSParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(np)
 	return rt.IsKind(objref.IDOf(np), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (np *NWTLSParameters) String() string {
+	defer runtime.KeepAlive(np)
 	return rt.Description(objref.IDOf(np))
 }
 
@@ -73,14 +81,14 @@ func NewNWTLSParameters() *NWTLSParameters {
 }
 
 // WithTLSSessionID sets the Session ID to use for the associated TCP connection.
-func (np *NWTLSParameters) WithTLSSessionID(tLSSessionID obj.Object) *NWTLSParameters {
-	objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("setTLSSessionID:"), objref.IDOf(tLSSessionID))
+func (np *NWTLSParameters) WithTLSSessionID(tlsSessionID []byte) *NWTLSParameters {
+	objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("setTLSSessionID:"), rt.BytesToNSData(tlsSessionID))
 	return np
 }
 
 // WithSSLCipherSuites sets the set of allowed cipher suites when negotiating TLS.
-func (np *NWTLSParameters) WithSSLCipherSuites(sSLCipherSuites obj.Object) *NWTLSParameters {
-	objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("setSSLCipherSuites:"), objref.IDOf(sSLCipherSuites))
+func (np *NWTLSParameters) WithSSLCipherSuites(sslCipherSuites []*foundation.Number) *NWTLSParameters {
+	objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("setSSLCipherSuites:"), rt.SliceToNSSet(sslCipherSuites, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return np
 }
 
@@ -97,25 +105,30 @@ func (np *NWTLSParameters) WithMaximumSSLProtocolVersion(maximumSSLProtocolVersi
 }
 
 // TLSSessionID returns the session ID for the associated connection, used for TLS session resumption. This property is optional when using TLS.
-func (np *NWTLSParameters) TLSSessionID() obj.Object {
+func (np *NWTLSParameters) TLSSessionID() []byte {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("TLSSessionID"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // SSLCipherSuites returns the set of allowed cipher suites, as defined in <Security/CipherSuite.h>. If set to nil, the default cipher suites will be used.
-func (np *NWTLSParameters) SSLCipherSuites() obj.Object {
+// The order of the returned elements is unspecified.
+func (np *NWTLSParameters) SSLCipherSuites() []*foundation.Number {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("SSLCipherSuites"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.Number { return foundation.NumberFromID(_id) })
 }
 
 // MinimumSSLProtocolVersion returns the minimum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version older than the minimum.
 func (np *NWTLSParameters) MinimumSSLProtocolVersion() int {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[int](objref.IDOf(np), objc.RegisterName("minimumSSLProtocolVersion"))
 	return _r
 }
 
 // MaximumSSLProtocolVersion returns the maximum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version newer than the maximum. This property should be used with caution, since it may limit the use of preferred SSL protocols.
 func (np *NWTLSParameters) MaximumSSLProtocolVersion() int {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[int](objref.IDOf(np), objc.RegisterName("maximumSSLProtocolVersion"))
 	return _r
 }

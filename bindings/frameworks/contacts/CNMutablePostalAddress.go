@@ -67,6 +67,6 @@ func (o *CNMutablePostalAddress) SetCountry(country *foundation.NSString) {
 	o.Ptr().Send(_cNMutablePostalAddressSelSetCountry, country.Ptr())
 }
 
-func (o *CNMutablePostalAddress) SetISOCountryCode(iSOCountryCode *foundation.NSString) {
-	o.Ptr().Send(_cNMutablePostalAddressSelSetISOCountryCode, iSOCountryCode.Ptr())
+func (o *CNMutablePostalAddress) SetISOCountryCode(isoCountryCode *foundation.NSString) {
+	o.Ptr().Send(_cNMutablePostalAddressSelSetISOCountryCode, isoCountryCode.Ptr())
 }

@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -108,6 +110,7 @@ func (gpdod *GraphPooling4DOpDescriptor) WithReturnIndicesMode(returnIndicesMode
 //
 // KernelSizes returns the collection as a Go slice.
 func (gpdod *GraphPooling4DOpDescriptor) KernelSizes() []obj.Object {
+	defer runtime.KeepAlive(gpdod)
 	_arr := objc.Send[objc.ID](objref.IDOf(gpdod), objc.RegisterName("kernelSizes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -116,6 +119,7 @@ func (gpdod *GraphPooling4DOpDescriptor) KernelSizes() []obj.Object {
 //
 // Strides returns the collection as a Go slice.
 func (gpdod *GraphPooling4DOpDescriptor) Strides() []obj.Object {
+	defer runtime.KeepAlive(gpdod)
 	_arr := objc.Send[objc.ID](objref.IDOf(gpdod), objc.RegisterName("strides"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -124,6 +128,7 @@ func (gpdod *GraphPooling4DOpDescriptor) Strides() []obj.Object {
 //
 // DilationRates returns the collection as a Go slice.
 func (gpdod *GraphPooling4DOpDescriptor) DilationRates() []obj.Object {
+	defer runtime.KeepAlive(gpdod)
 	_arr := objc.Send[objc.ID](objref.IDOf(gpdod), objc.RegisterName("dilationRates"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -132,30 +137,35 @@ func (gpdod *GraphPooling4DOpDescriptor) DilationRates() []obj.Object {
 //
 // PaddingValues returns the collection as a Go slice.
 func (gpdod *GraphPooling4DOpDescriptor) PaddingValues() []obj.Object {
+	defer runtime.KeepAlive(gpdod)
 	_arr := objc.Send[objc.ID](objref.IDOf(gpdod), objc.RegisterName("paddingValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PaddingStyle defines what kind of padding graph applies to the operation. Default value: `MPSGraphPaddingStyleExplicit`.
 func (gpdod *GraphPooling4DOpDescriptor) PaddingStyle() GraphPaddingStyle {
+	defer runtime.KeepAlive(gpdod)
 	_r := objc.Send[GraphPaddingStyle](objref.IDOf(gpdod), objc.RegisterName("paddingStyle"))
 	return _r
 }
 
 // CeilMode reports whether affects how MPSGraph computes the output size: if set to `YES` then output size is computed by rounding up instead of down when dividing input size by stride. Default value: `NO`.
 func (gpdod *GraphPooling4DOpDescriptor) CeilMode() bool {
+	defer runtime.KeepAlive(gpdod)
 	_r := objc.Send[bool](objref.IDOf(gpdod), objc.RegisterName("ceilMode"))
 	return _r
 }
 
 // IncludeZeroPadToAverage reports whether defines a mode for average pooling, where samples outside the input tensor count as zeroes in the average computation. Otherwise the result is sum over samples divided by number of samples that didn't come from padding. Default value: `NO`.
 func (gpdod *GraphPooling4DOpDescriptor) IncludeZeroPadToAverage() bool {
+	defer runtime.KeepAlive(gpdod)
 	_r := objc.Send[bool](objref.IDOf(gpdod), objc.RegisterName("includeZeroPadToAverage"))
 	return _r
 }
 
 // ReturnIndicesMode defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
 func (gpdod *GraphPooling4DOpDescriptor) ReturnIndicesMode() GraphPoolingReturnIndicesMode {
+	defer runtime.KeepAlive(gpdod)
 	_r := objc.Send[GraphPoolingReturnIndicesMode](objref.IDOf(gpdod), objc.RegisterName("returnIndicesMode"))
 	return _r
 }

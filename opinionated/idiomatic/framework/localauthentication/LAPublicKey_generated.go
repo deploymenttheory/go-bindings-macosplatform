@@ -6,6 +6,7 @@ package localauthentication
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func publicKeyAdopt(id objc.ID) *PublicKey {
 
 // Description returns the object's -description text.
 func (pk *PublicKey) Description() string {
+	defer runtime.KeepAlive(pk)
 	return rt.Description(objref.IDOf(pk))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pk *PublicKey) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pk)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pk), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pk *PublicKey) IsKind(className string) bool {
+	defer runtime.KeepAlive(pk)
 	return rt.IsKind(objref.IDOf(pk), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pk *PublicKey) String() string {
+	defer runtime.KeepAlive(pk)
 	return rt.Description(objref.IDOf(pk))
 }
 
@@ -80,6 +86,7 @@ func NewPublicKey() *PublicKey {
 //
 // ExportBytesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (pk *PublicKey) ExportBytesWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(pk)
 	type _result struct {
 		val obj.Object
 		err error
@@ -104,7 +111,8 @@ func (pk *PublicKey) ExportBytesWithCompletion(ctx context.Context) (result obj.
 // EncryptDataSecKeyAlgorithmCompletion encrypts the data you supply with a given algorithm.
 //
 // EncryptDataSecKeyAlgorithmCompletion blocks until the operation completes or ctx is cancelled.
-func (pk *PublicKey) EncryptDataSecKeyAlgorithmCompletion(ctx context.Context, data obj.Object, algorithm unsafe.Pointer) (result obj.Object, err error) {
+func (pk *PublicKey) EncryptDataSecKeyAlgorithmCompletion(ctx context.Context, data []byte, algorithm unsafe.Pointer) (result obj.Object, err error) {
+	defer runtime.KeepAlive(pk)
 	type _result struct {
 		val obj.Object
 		err error
@@ -116,7 +124,7 @@ func (pk *PublicKey) EncryptDataSecKeyAlgorithmCompletion(ctx context.Context, d
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("encryptData:secKeyAlgorithm:completion:"), objref.IDOf(data), algorithm, _block)
+	objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("encryptData:secKeyAlgorithm:completion:"), rt.BytesToNSData(data), algorithm, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -128,6 +136,7 @@ func (pk *PublicKey) EncryptDataSecKeyAlgorithmCompletion(ctx context.Context, d
 
 // CanEncryptUsingSecKeyAlgorithm checks whether the algorithm you supply is valid for encrypting data with the key.
 func (pk *PublicKey) CanEncryptUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
+	defer runtime.KeepAlive(pk)
 	_r := objc.Send[bool](objref.IDOf(pk), objc.RegisterName("canEncryptUsingSecKeyAlgorithm:"), algorithm)
 	return _r
 }
@@ -135,14 +144,15 @@ func (pk *PublicKey) CanEncryptUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bo
 // VerifyDataSignatureSecKeyAlgorithmCompletion verifies a digital signature for the data you supply.
 //
 // VerifyDataSignatureSecKeyAlgorithmCompletion blocks until the operation completes or ctx is cancelled.
-func (pk *PublicKey) VerifyDataSignatureSecKeyAlgorithmCompletion(ctx context.Context, signedData obj.Object, signature obj.Object, algorithm unsafe.Pointer) error {
+func (pk *PublicKey) VerifyDataSignatureSecKeyAlgorithmCompletion(ctx context.Context, signedData []byte, signature []byte, algorithm unsafe.Pointer) error {
+	defer runtime.KeepAlive(pk)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("verifyData:signature:secKeyAlgorithm:completion:"), objref.IDOf(signedData), objref.IDOf(signature), algorithm, _block)
+	objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("verifyData:signature:secKeyAlgorithm:completion:"), rt.BytesToNSData(signedData), rt.BytesToNSData(signature), algorithm, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -153,6 +163,7 @@ func (pk *PublicKey) VerifyDataSignatureSecKeyAlgorithmCompletion(ctx context.Co
 
 // CanVerifyUsingSecKeyAlgorithm checks whether the algorithm you supply is valid for verifying signatures with the key.
 func (pk *PublicKey) CanVerifyUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
+	defer runtime.KeepAlive(pk)
 	_r := objc.Send[bool](objref.IDOf(pk), objc.RegisterName("canVerifyUsingSecKeyAlgorithm:"), algorithm)
 	return _r
 }

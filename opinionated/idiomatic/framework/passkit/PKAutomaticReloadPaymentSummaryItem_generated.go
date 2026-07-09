@@ -5,7 +5,10 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -54,6 +57,7 @@ func NewAutomaticReloadPaymentSummaryItem() *AutomaticReloadPaymentSummaryItem {
 
 // WithThresholdAmount sets the balance an account reaches before you apply the automatic reload amount.
 func (arpsi *AutomaticReloadPaymentSummaryItem) WithThresholdAmount(thresholdAmount obj.Object) *AutomaticReloadPaymentSummaryItem {
+	defer runtime.KeepAlive(thresholdAmount)
 	objc.Send[objc.ID](objref.IDOf(arpsi), objc.RegisterName("setThresholdAmount:"), objref.IDOf(thresholdAmount))
 	return arpsi
 }
@@ -66,6 +70,7 @@ func (arpsi *AutomaticReloadPaymentSummaryItem) WithLabel(label string) *Automat
 
 // WithAmount sets the summary item’s amount.
 func (arpsi *AutomaticReloadPaymentSummaryItem) WithAmount(amount obj.Object) *AutomaticReloadPaymentSummaryItem {
+	defer runtime.KeepAlive(amount)
 	objc.Send[objc.ID](objref.IDOf(arpsi), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return arpsi
 }
@@ -77,9 +82,10 @@ func (arpsi *AutomaticReloadPaymentSummaryItem) WithType(type_ PaymentSummaryIte
 }
 
 // ThresholdAmount returns the threshold amount.
-func (arpsi *AutomaticReloadPaymentSummaryItem) ThresholdAmount() obj.Object {
+func (arpsi *AutomaticReloadPaymentSummaryItem) ThresholdAmount() *foundation.DecimalNumber {
+	defer runtime.KeepAlive(arpsi)
 	_r := objc.Send[objc.ID](objref.IDOf(arpsi), objc.RegisterName("thresholdAmount"))
-	return obj.Wrap(_r)
+	return foundation.DecimalNumberFromID(_r)
 }
 
 var _ PaymentSummaryItemProvider = (*AutomaticReloadPaymentSummaryItem)(nil)

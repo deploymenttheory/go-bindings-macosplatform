@@ -5,9 +5,11 @@
 package mapkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,27 +51,33 @@ func mapItemAdopt(id objc.ID) *MapItem {
 
 // Description returns the object's -description text.
 func (mi *MapItem) Description() string {
+	defer runtime.KeepAlive(mi)
 	return rt.Description(objref.IDOf(mi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mi *MapItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mi *MapItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(mi)
 	return rt.IsKind(objref.IDOf(mi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mi *MapItem) String() string {
+	defer runtime.KeepAlive(mi)
 	return rt.Description(objref.IDOf(mi))
 }
 
 // NewMapItemWithPlacemark creates and returns a map item object using the specified placemark object.
 func NewMapItemWithPlacemark(placemark *Placemark) *MapItem {
+	defer runtime.KeepAlive(placemark)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlacemark:"), objref.IDOf(placemark))
 	return mapItemAdopt(_id)
@@ -77,6 +85,7 @@ func NewMapItemWithPlacemark(placemark *Placemark) *MapItem {
 
 // NewMapItemWithLocationAddress creates and returns a map item object using the specified location and address objects.
 func NewMapItemWithLocationAddress(location unsafe.Pointer, address *Address) *MapItem {
+	defer runtime.KeepAlive(address)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocation:address:"), location, objref.IDOf(address))
 	return mapItemAdopt(_id)
@@ -102,65 +111,76 @@ func (mi *MapItem) WithURL(url string) *MapItem {
 
 // WithTimeZone sets the time zone of the specified location.
 func (mi *MapItem) WithTimeZone(timeZone obj.Object) *MapItem {
+	defer runtime.KeepAlive(timeZone)
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return mi
 }
 
 // WithPointOfInterestCategory sets the point-of-interest category for the map item.
 func (mi *MapItem) WithPointOfInterestCategory(pointOfInterestCategory obj.Object) *MapItem {
+	defer runtime.KeepAlive(pointOfInterestCategory)
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setPointOfInterestCategory:"), objref.IDOf(pointOfInterestCategory))
 	return mi
 }
 
 // OpenInMapsWithLaunchOptions opens the Maps app and displays the map item.
-func (mi *MapItem) OpenInMapsWithLaunchOptions(launchOptions obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("openInMapsWithLaunchOptions:"), objref.IDOf(launchOptions))
+func (mi *MapItem) OpenInMapsWithLaunchOptions(launchOptions map[string]obj.Object) bool {
+	defer runtime.KeepAlive(mi)
+	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("openInMapsWithLaunchOptions:"), rt.MapToDict(launchOptions, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // OpenInMapsWithLaunchOptionsCompletionHandler opens the Maps app and displays the map item.
-func (mi *MapItem) OpenInMapsWithLaunchOptionsCompletionHandler(launchOptions obj.Object, completion func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("openInMapsWithLaunchOptions:completionHandler:"), objref.IDOf(launchOptions), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
+func (mi *MapItem) OpenInMapsWithLaunchOptionsCompletionHandler(launchOptions map[string]obj.Object, completion func(bool)) {
+	defer runtime.KeepAlive(mi)
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("openInMapsWithLaunchOptions:completionHandler:"), rt.MapToDict(launchOptions, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }
 
 // Identifier returns the identifier.
 func (mi *MapItem) Identifier() *MapItemIdentifier {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("identifier"))
 	return MapItemIdentifierFromID(_r)
 }
 
-// AlternateIdentifiers returns the alternate identifiers.
-func (mi *MapItem) AlternateIdentifiers() obj.Object {
+// AlternateIdentifiers returns the order of the returned elements is unspecified.
+func (mi *MapItem) AlternateIdentifiers() []*MapItemIdentifier {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("alternateIdentifiers"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *MapItemIdentifier { return MapItemIdentifierFromID(_id) })
 }
 
 // Placemark returns the placemark.
 func (mi *MapItem) Placemark() *Placemark {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("placemark"))
 	return PlacemarkFromID(_r)
 }
 
 // IsCurrentLocation reports whether the object is current location.
 func (mi *MapItem) IsCurrentLocation() bool {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isCurrentLocation"))
 	return _r
 }
 
 // Address returns the address.
 func (mi *MapItem) Address() *Address {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("address"))
 	return AddressFromID(_r)
 }
 
 // AddressRepresentations returns the address representations.
 func (mi *MapItem) AddressRepresentations() *AddressRepresentations {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("addressRepresentations"))
 	return AddressRepresentationsFromID(_r)
 }
 
 // Name returns the name.
 func (mi *MapItem) Name() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -170,6 +190,7 @@ func (mi *MapItem) Name() string {
 
 // PhoneNumber returns the phone number.
 func (mi *MapItem) PhoneNumber() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("phoneNumber"))
 	if _r == 0 {
 		return ""
@@ -178,19 +199,22 @@ func (mi *MapItem) PhoneNumber() string {
 }
 
 // URL returns the URL.
-func (mi *MapItem) URL() obj.Object {
+func (mi *MapItem) URL() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // TimeZone returns the time zone.
-func (mi *MapItem) TimeZone() obj.Object {
+func (mi *MapItem) TimeZone() *foundation.TimeZone {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("timeZone"))
-	return obj.Wrap(_r)
+	return foundation.TimeZoneFromID(_r)
 }
 
 // PointOfInterestCategory returns the point of interest category.
-func (mi *MapItem) PointOfInterestCategory() obj.Object {
+func (mi *MapItem) PointOfInterestCategory() *foundation.String {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("pointOfInterestCategory"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }

@@ -9,9 +9,9 @@ type GssKrb5LucidContextVersion struct {
 }
 
 type Krb5LastReqEntry struct {
-	Magic   int
-	Lr_type int
-	Value   int
+	Magic  int
+	LrType int
+	Value  int
 }
 
 type Krb5ReplayData struct {
@@ -21,13 +21,13 @@ type Krb5ReplayData struct {
 }
 
 type Krb5TicketTimes struct {
-	Authtime   int
-	Starttime  int
-	Endtime    int
-	Renew_till int
+	Authtime  int
+	Starttime int
+	Endtime   int
+	RenewTill int
 }
 
 type Krb5VerifyInitCredsOpt struct {
-	Flags         int
-	Ap_req_nofail int
+	Flags       int
+	ApReqNofail int
 }

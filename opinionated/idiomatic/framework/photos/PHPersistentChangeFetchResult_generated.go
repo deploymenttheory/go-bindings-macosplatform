@@ -5,6 +5,7 @@
 package photos
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func persistentChangeFetchResultAdopt(id objc.ID) *PersistentChangeFetchResult {
 
 // Description returns the object's -description text.
 func (pcfr *PersistentChangeFetchResult) Description() string {
+	defer runtime.KeepAlive(pcfr)
 	return rt.Description(objref.IDOf(pcfr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pcfr *PersistentChangeFetchResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pcfr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pcfr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pcfr *PersistentChangeFetchResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(pcfr)
 	return rt.IsKind(objref.IDOf(pcfr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pcfr *PersistentChangeFetchResult) String() string {
+	defer runtime.KeepAlive(pcfr)
 	return rt.Description(objref.IDOf(pcfr))
 }
 
@@ -76,5 +82,6 @@ func NewPersistentChangeFetchResult() *PersistentChangeFetchResult {
 
 // EnumerateChangesWith executes the block you specify by using the objects in the fetch result.
 func (pcfr *PersistentChangeFetchResult) EnumerateChangesWith(block func(obj.Object, *bool)) {
+	defer runtime.KeepAlive(pcfr)
 	objc.Send[objc.ID](objref.IDOf(pcfr), objc.RegisterName("enumerateChangesWithBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }

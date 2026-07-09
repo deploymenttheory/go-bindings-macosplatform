@@ -153,7 +153,7 @@ type MTLMapIndirectArguments struct {
 	RegionSizeHeight uint32
 	RegionSizeDepth  uint32
 	MipMapLevel      uint32
-	SliceId          uint32
+	SliceID          uint32
 }
 
 // The coordinates for the front upper-left corner of a region.
@@ -178,7 +178,7 @@ type MTLRegion struct {
 
 // Handle of the GPU resource used for binding resources to argument tables, navigating resource view pools and storing resources in an argument buffer MTLResourceID represents a specific GPU resource. This handle can be mutated by modifying textureID or samplerID values to get to individual resource views in a resource view pool.
 type MTLResourceID struct {
-	_impl uint64
+	Impl uint64
 }
 
 // A subpixel sample position for use in multisample antialiasing (MSAA).

@@ -5,6 +5,8 @@
 package gamekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewScoreChallenge() *ScoreChallenge {
 
 // Score returns the score to meet to satisfy this challenge
 func (sc *ScoreChallenge) Score() *Score {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("score"))
 	return ScoreFromID(_r)
 }
 
 // LeaderboardEntry returns the leaderboard entry to meet to satisfy this challenge
 func (sc *ScoreChallenge) LeaderboardEntry() *LeaderboardEntry {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("leaderboardEntry"))
 	return LeaderboardEntryFromID(_r)
 }

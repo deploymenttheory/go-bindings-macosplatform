@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewMTL4ComputePipelineDescriptor() *MTL4ComputePipelineDescriptor {
 
 // WithComputeFunctionDescriptor sets a descriptor representing the compute pipeline’s function.
 func (mcpd *MTL4ComputePipelineDescriptor) WithComputeFunctionDescriptor(computeFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4ComputePipelineDescriptor {
+	defer runtime.KeepAlive(computeFunctionDescriptor)
 	objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("setComputeFunctionDescriptor:"), objref.IDOf(computeFunctionDescriptor))
 	return mcpd
 }
@@ -77,6 +80,7 @@ func (mcpd *MTL4ComputePipelineDescriptor) WithSupportBinaryLinking(supportBinar
 
 // WithStaticLinkingDescriptor sets an object that contains information about functions to link to the compute pipeline.
 func (mcpd *MTL4ComputePipelineDescriptor) WithStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4ComputePipelineDescriptor {
+	defer runtime.KeepAlive(staticLinkingDescriptor)
 	objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("setStaticLinkingDescriptor:"), objref.IDOf(staticLinkingDescriptor))
 	return mcpd
 }
@@ -95,47 +99,55 @@ func (mcpd *MTL4ComputePipelineDescriptor) WithLabel(label string) *MTL4ComputeP
 
 // WithOptions sets provides compile-time options when you build the pipeline.
 func (mcpd *MTL4ComputePipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4ComputePipelineDescriptor {
+	defer runtime.KeepAlive(options)
 	objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("setOptions:"), objref.IDOf(options))
 	return mcpd
 }
 
 // Reset resets the descriptor to its default values.
 func (mcpd *MTL4ComputePipelineDescriptor) Reset() {
+	defer runtime.KeepAlive(mcpd)
 	objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("reset"))
 }
 
 // ComputeFunctionDescriptor returns a descriptor representing the compute pipeline's function. You don't assign instances of “MTL4FunctionDescriptor“ to this property directly, instead assign an instance of one of its subclasses, such as “MTL4LibraryFunctionDescriptor“, which represents a function from a Metal library.
 func (mcpd *MTL4ComputePipelineDescriptor) ComputeFunctionDescriptor() *MTL4FunctionDescriptor {
+	defer runtime.KeepAlive(mcpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("computeFunctionDescriptor"))
 	return MTL4FunctionDescriptorFromID(_r)
 }
 
 // ThreadGroupSizeIsMultipleOfThreadExecutionWidth reports whether each dimension of the threadgroup size is a multiple of its corresponding thread execution width.
 func (mcpd *MTL4ComputePipelineDescriptor) ThreadGroupSizeIsMultipleOfThreadExecutionWidth() bool {
+	defer runtime.KeepAlive(mcpd)
 	_r := objc.Send[bool](objref.IDOf(mcpd), objc.RegisterName("threadGroupSizeIsMultipleOfThreadExecutionWidth"))
 	return _r
 }
 
 // MaxTotalThreadsPerThreadgroup returns the maximum total number of threads that Metal can execute in a single threadgroup for the compute function.
 func (mcpd *MTL4ComputePipelineDescriptor) MaxTotalThreadsPerThreadgroup() int {
+	defer runtime.KeepAlive(mcpd)
 	_r := objc.Send[int](objref.IDOf(mcpd), objc.RegisterName("maxTotalThreadsPerThreadgroup"))
 	return _r
 }
 
 // SupportBinaryLinking reports whether the compute pipeline supports linking binary functions.
 func (mcpd *MTL4ComputePipelineDescriptor) SupportBinaryLinking() bool {
+	defer runtime.KeepAlive(mcpd)
 	_r := objc.Send[bool](objref.IDOf(mcpd), objc.RegisterName("supportBinaryLinking"))
 	return _r
 }
 
 // StaticLinkingDescriptor returns an object that contains information about functions to link to the compute pipeline.
 func (mcpd *MTL4ComputePipelineDescriptor) StaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
+	defer runtime.KeepAlive(mcpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("staticLinkingDescriptor"))
 	return MTL4StaticLinkingDescriptorFromID(_r)
 }
 
 // SupportIndirectCommandBuffers returns a value indicating whether the pipeline supports Metal indirect command buffers.
 func (mcpd *MTL4ComputePipelineDescriptor) SupportIndirectCommandBuffers() MTL4IndirectCommandBufferSupportState {
+	defer runtime.KeepAlive(mcpd)
 	_r := objc.Send[MTL4IndirectCommandBufferSupportState](objref.IDOf(mcpd), objc.RegisterName("supportIndirectCommandBuffers"))
 	return _r
 }

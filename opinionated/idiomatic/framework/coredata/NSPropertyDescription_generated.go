@@ -5,7 +5,10 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,22 +52,27 @@ func propertyDescriptionAdopt(id objc.ID) *PropertyDescription {
 
 // Description returns the object's -description text.
 func (pd *PropertyDescription) Description() string {
+	defer runtime.KeepAlive(pd)
 	return rt.Description(objref.IDOf(pd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pd *PropertyDescription) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pd *PropertyDescription) IsKind(className string) bool {
+	defer runtime.KeepAlive(pd)
 	return rt.IsKind(objref.IDOf(pd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pd *PropertyDescription) String() string {
+	defer runtime.KeepAlive(pd)
 	return rt.Description(objref.IDOf(pd))
 }
 
@@ -88,6 +96,7 @@ func (pd *PropertyDescription) WithTransient(transient bool) *PropertyDescriptio
 
 // WithUserInfo sets the user info dictionary of the receiver.
 func (pd *PropertyDescription) WithUserInfo(userInfo obj.Object) *PropertyDescription {
+	defer runtime.KeepAlive(userInfo)
 	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return pd
 }
@@ -123,18 +132,21 @@ func (pd *PropertyDescription) WithRenamingIdentifier(renamingIdentifier string)
 }
 
 // SetValidationPredicatesWithValidationWarnings sets the validation predicates and warnings of the receiver.
-func (pd *PropertyDescription) SetValidationPredicatesWithValidationWarnings(validationPredicates []obj.Object, validationWarnings []string) {
-	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setValidationPredicates:withValidationWarnings:"), purego.SliceToNSArray(validationPredicates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(validationWarnings, func(_v string) objc.ID { return purego.NSString(_v) }))
+func (pd *PropertyDescription) SetValidationPredicatesWithValidationWarnings(validationPredicates []*foundation.Predicate, validationWarnings []string) {
+	defer runtime.KeepAlive(pd)
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setValidationPredicates:withValidationWarnings:"), purego.SliceToNSArray(validationPredicates, func(_v *foundation.Predicate) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(validationWarnings, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // Entity returns the entity.
 func (pd *PropertyDescription) Entity() *EntityDescription {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
 // Name returns the name.
 func (pd *PropertyDescription) Name() string {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -144,12 +156,14 @@ func (pd *PropertyDescription) Name() string {
 
 // IsOptional reports whether the object is optional.
 func (pd *PropertyDescription) IsOptional() bool {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[bool](objref.IDOf(pd), objc.RegisterName("isOptional"))
 	return _r
 }
 
 // IsTransient reports whether the object is transient.
 func (pd *PropertyDescription) IsTransient() bool {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[bool](objref.IDOf(pd), objc.RegisterName("isTransient"))
 	return _r
 }
@@ -158,36 +172,42 @@ func (pd *PropertyDescription) IsTransient() bool {
 //
 // ValidationPredicates returns the collection as a Go slice.
 func (pd *PropertyDescription) ValidationPredicates() []obj.Object {
+	defer runtime.KeepAlive(pd)
 	_arr := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("validationPredicates"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ValidationWarnings returns the validation warnings.
 func (pd *PropertyDescription) ValidationWarnings() obj.Object {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("validationWarnings"))
 	return obj.Wrap(_r)
 }
 
 // UserInfo returns the user info.
 func (pd *PropertyDescription) UserInfo() obj.Object {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
 // IsIndexed reports whether the object is indexed.
 func (pd *PropertyDescription) IsIndexed() bool {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[bool](objref.IDOf(pd), objc.RegisterName("isIndexed"))
 	return _r
 }
 
 // VersionHash returns the version hash.
-func (pd *PropertyDescription) VersionHash() obj.Object {
+func (pd *PropertyDescription) VersionHash() []byte {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("versionHash"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // VersionHashModifier returns the version hash modifier.
 func (pd *PropertyDescription) VersionHashModifier() string {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("versionHashModifier"))
 	if _r == 0 {
 		return ""
@@ -197,18 +217,21 @@ func (pd *PropertyDescription) VersionHashModifier() string {
 
 // IsIndexedBySpotlight reports whether the object is indexed by spotlight.
 func (pd *PropertyDescription) IsIndexedBySpotlight() bool {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[bool](objref.IDOf(pd), objc.RegisterName("isIndexedBySpotlight"))
 	return _r
 }
 
 // IsStoredInExternalRecord reports whether the object is stored in external record.
 func (pd *PropertyDescription) IsStoredInExternalRecord() bool {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[bool](objref.IDOf(pd), objc.RegisterName("isStoredInExternalRecord"))
 	return _r
 }
 
 // RenamingIdentifier returns the renaming identifier.
 func (pd *PropertyDescription) RenamingIdentifier() string {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("renamingIdentifier"))
 	if _r == 0 {
 		return ""

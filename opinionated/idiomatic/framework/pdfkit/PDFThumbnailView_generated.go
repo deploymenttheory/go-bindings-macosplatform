@@ -5,6 +5,8 @@
 package pdfkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func thumbnailViewAdopt(id objc.ID) *ThumbnailView {
 
 // Description returns the object's -description text.
 func (tv *ThumbnailView) Description() string {
+	defer runtime.KeepAlive(tv)
 	return rt.Description(objref.IDOf(tv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tv *ThumbnailView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tv *ThumbnailView) IsKind(className string) bool {
+	defer runtime.KeepAlive(tv)
 	return rt.IsKind(objref.IDOf(tv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tv *ThumbnailView) String() string {
+	defer runtime.KeepAlive(tv)
 	return rt.Description(objref.IDOf(tv))
 }
 
@@ -80,15 +87,17 @@ func NewThumbnailView() *ThumbnailView {
 }
 
 // WithPDFView sets returns the PDFView object associated with the thumbnail view.
-func (tv *ThumbnailView) WithPDFView(pDFView *View) *ThumbnailView {
+func (tv *ThumbnailView) WithPDFView(pdfView *View) *ThumbnailView {
+	defer runtime.KeepAlive(pdfView)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPDFView:"), objref.IDOf(pDFView))
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPDFView:"), objref.IDOf(pdfView))
 	})
 	return tv
 }
 
 // WithBackgroundColor sets returns the color used in the background of the thumbnail view.
 func (tv *ThumbnailView) WithBackgroundColor(backgroundColor obj.Object) *ThumbnailView {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -113,6 +122,7 @@ func (tv *ThumbnailView) WithMaximumNumberOfColumns(maximumNumberOfColumns int) 
 
 // WithLabelFont sets returns the font used to label the thumbnails.
 func (tv *ThumbnailView) WithLabelFont(labelFont obj.Object) *ThumbnailView {
+	defer runtime.KeepAlive(labelFont)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLabelFont:"), objref.IDOf(labelFont))
 	})
@@ -137,6 +147,7 @@ func (tv *ThumbnailView) WithAllowsMultipleSelection(allowsMultipleSelection boo
 
 // PDFView returns the pdf view.
 func (tv *ThumbnailView) PDFView() *View {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -150,6 +161,7 @@ func (tv *ThumbnailView) PDFView() *View {
 
 // BackgroundColor returns the background color.
 func (tv *ThumbnailView) BackgroundColor() obj.Object {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -165,6 +177,7 @@ func (tv *ThumbnailView) BackgroundColor() obj.Object {
 //
 // SelectedPages returns the collection as a Go slice.
 func (tv *ThumbnailView) SelectedPages() []*Page {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 []*Page
 	purego.Main(func() {
 		_mainthread0 = func() []*Page {
@@ -177,6 +190,7 @@ func (tv *ThumbnailView) SelectedPages() []*Page {
 
 // ThumbnailSize returns the thumbnail size.
 func (tv *ThumbnailView) ThumbnailSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -190,6 +204,7 @@ func (tv *ThumbnailView) ThumbnailSize() corefoundation.CGSize {
 
 // MaximumNumberOfColumns returns the maximum number of columns.
 func (tv *ThumbnailView) MaximumNumberOfColumns() int {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -203,6 +218,7 @@ func (tv *ThumbnailView) MaximumNumberOfColumns() int {
 
 // LabelFont returns the label font.
 func (tv *ThumbnailView) LabelFont() obj.Object {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -216,6 +232,7 @@ func (tv *ThumbnailView) LabelFont() obj.Object {
 
 // AllowsDragging wraps the corresponding Objective-C method.
 func (tv *ThumbnailView) AllowsDragging() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -229,6 +246,7 @@ func (tv *ThumbnailView) AllowsDragging() bool {
 
 // AllowsMultipleSelection wraps the corresponding Objective-C method.
 func (tv *ThumbnailView) AllowsMultipleSelection() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

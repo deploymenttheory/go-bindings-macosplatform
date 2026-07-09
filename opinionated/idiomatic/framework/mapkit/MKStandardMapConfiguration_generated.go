@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -80,6 +82,7 @@ func (smc *StandardMapConfiguration) WithEmphasisStyle(emphasisStyle StandardMap
 
 // WithPointOfInterestFilter sets the filter used to determine the points of interest shown on the map.
 func (smc *StandardMapConfiguration) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *StandardMapConfiguration {
+	defer runtime.KeepAlive(pointOfInterestFilter)
 	objc.Send[objc.ID](objref.IDOf(smc), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 	return smc
 }
@@ -98,18 +101,21 @@ func (smc *StandardMapConfiguration) WithElevationStyle(elevationStyle MapElevat
 
 // EmphasisStyle returns the emphasis style.
 func (smc *StandardMapConfiguration) EmphasisStyle() StandardMapEmphasisStyle {
+	defer runtime.KeepAlive(smc)
 	_r := objc.Send[StandardMapEmphasisStyle](objref.IDOf(smc), objc.RegisterName("emphasisStyle"))
 	return _r
 }
 
 // PointOfInterestFilter returns the point of interest filter.
 func (smc *StandardMapConfiguration) PointOfInterestFilter() *PointOfInterestFilter {
+	defer runtime.KeepAlive(smc)
 	_r := objc.Send[objc.ID](objref.IDOf(smc), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
 // ShowsTraffic wraps the corresponding Objective-C method.
 func (smc *StandardMapConfiguration) ShowsTraffic() bool {
+	defer runtime.KeepAlive(smc)
 	_r := objc.Send[bool](objref.IDOf(smc), objc.RegisterName("showsTraffic"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package addressbook
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -25,12 +27,14 @@ func ABAddressBookAddressBook() *AddressBook {
 
 // AddPropertiesAndTypes adds the given properties to all records of this type in the Address Book database.
 func AddPropertiesAndTypes(properties obj.Object) int {
+	defer runtime.KeepAlive(properties)
 	_r := objc.Send[int](objc.ID(_class("ABGroup")), objc.RegisterName("addPropertiesAndTypes:"), objref.IDOf(properties))
 	return _r
 }
 
 // RemoveProperties removes the given properties from all the records of this type in the Address Book database.
 func RemoveProperties(properties obj.Object) int {
+	defer runtime.KeepAlive(properties)
 	_r := objc.Send[int](objc.ID(_class("ABGroup")), objc.RegisterName("removeProperties:"), objref.IDOf(properties))
 	return _r
 }
@@ -49,18 +53,21 @@ func TypeOfProperty(property string) int {
 
 // SearchElementForPropertyLabelKeyValueComparison returns a search element object that searches for records of this type.
 func SearchElementForPropertyLabelKeyValueComparison(property string, label string, key string, value obj.Object, comparison int) *SearchElement {
+	defer runtime.KeepAlive(value)
 	_r := objc.Send[objc.ID](objc.ID(_class("ABGroup")), objc.RegisterName("searchElementForProperty:label:key:value:comparison:"), purego.NSString(property), purego.NSString(label), purego.NSString(key), objref.IDOf(value), comparison)
 	return SearchElementFromID(_r)
 }
 
 // ABPersonAddPropertiesAndTypes adds the given properties to all the records of this type in the Address Book database.
 func ABPersonAddPropertiesAndTypes(properties obj.Object) int {
+	defer runtime.KeepAlive(properties)
 	_r := objc.Send[int](objc.ID(_class("ABPerson")), objc.RegisterName("addPropertiesAndTypes:"), objref.IDOf(properties))
 	return _r
 }
 
 // ABPersonRemoveProperties removes the given properties from all the records of this type in the Address Book database.
 func ABPersonRemoveProperties(properties obj.Object) int {
+	defer runtime.KeepAlive(properties)
 	_r := objc.Send[int](objc.ID(_class("ABPerson")), objc.RegisterName("removeProperties:"), objref.IDOf(properties))
 	return _r
 }
@@ -79,6 +86,7 @@ func ABPersonTypeOfProperty(property string) int {
 
 // ABPersonSearchElementForPropertyLabelKeyValueComparison returns a search element object that specifies a query for records of this type.
 func ABPersonSearchElementForPropertyLabelKeyValueComparison(property string, label string, key string, value obj.Object, comparison int) *SearchElement {
+	defer runtime.KeepAlive(value)
 	_r := objc.Send[objc.ID](objc.ID(_class("ABPerson")), objc.RegisterName("searchElementForProperty:label:key:value:comparison:"), purego.NSString(property), purego.NSString(label), purego.NSString(key), objref.IDOf(value), comparison)
 	return SearchElementFromID(_r)
 }
@@ -90,6 +98,7 @@ func CancelLoadingImageDataForTag(tag int) {
 
 // SearchElementForConjunctionChildren returns a compound search element, created by combining the search elements in an array with the given conjunction.
 func SearchElementForConjunctionChildren(conjuction int, children obj.Object) *SearchElement {
+	defer runtime.KeepAlive(children)
 	_r := objc.Send[objc.ID](objc.ID(_class("ABSearchElement")), objc.RegisterName("searchElementForConjunction:children:"), conjuction, objref.IDOf(children))
 	return SearchElementFromID(_r)
 }

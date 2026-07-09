@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRRVCOperationalStateClusterOperationalStateStructAdopt(id objc.ID) *MTRRV
 
 // Description returns the object's -description text.
 func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) Description() string {
+	defer runtime.KeepAlive(moscoss)
 	return rt.Description(objref.IDOf(moscoss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(moscoss)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(moscoss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(moscoss)
 	return rt.IsKind(objref.IDOf(moscoss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) String() string {
+	defer runtime.KeepAlive(moscoss)
 	return rt.Description(objref.IDOf(moscoss))
 }
 
@@ -72,6 +80,7 @@ func NewMTRRVCOperationalStateClusterOperationalStateStruct() *MTRRVCOperational
 
 // WithOperationalStateID sets the operational state ID.
 func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) WithOperationalStateID(operationalStateID obj.Object) *MTRRVCOperationalStateClusterOperationalStateStruct {
+	defer runtime.KeepAlive(operationalStateID)
 	objc.Send[objc.ID](objref.IDOf(moscoss), objc.RegisterName("setOperationalStateID:"), objref.IDOf(operationalStateID))
 	return moscoss
 }
@@ -83,13 +92,15 @@ func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) WithOperatio
 }
 
 // OperationalStateID returns the operational state ID.
-func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) OperationalStateID() obj.Object {
+func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) OperationalStateID() *foundation.Number {
+	defer runtime.KeepAlive(moscoss)
 	_r := objc.Send[objc.ID](objref.IDOf(moscoss), objc.RegisterName("operationalStateID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // OperationalStateLabel returns the operational state label.
 func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) OperationalStateLabel() string {
+	defer runtime.KeepAlive(moscoss)
 	_r := objc.Send[objc.ID](objref.IDOf(moscoss), objc.RegisterName("operationalStateLabel"))
 	if _r == 0 {
 		return ""

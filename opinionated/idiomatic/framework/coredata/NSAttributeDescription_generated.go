@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,6 +62,7 @@ func (ad *AttributeDescription) WithAttributeValueClassName(attributeValueClassN
 
 // WithDefaultValue sets the default value of the attribute.
 func (ad *AttributeDescription) WithDefaultValue(defaultValue obj.Object) *AttributeDescription {
+	defer runtime.KeepAlive(defaultValue)
 	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setDefaultValue:"), objref.IDOf(defaultValue))
 	return ad
 }
@@ -108,6 +111,7 @@ func (ad *AttributeDescription) WithTransient(transient bool) *AttributeDescript
 
 // WithUserInfo sets the user info dictionary of the receiver.
 func (ad *AttributeDescription) WithUserInfo(userInfo obj.Object) *AttributeDescription {
+	defer runtime.KeepAlive(userInfo)
 	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return ad
 }
@@ -144,12 +148,14 @@ func (ad *AttributeDescription) WithRenamingIdentifier(renamingIdentifier string
 
 // AttributeType returns the attribute type.
 func (ad *AttributeDescription) AttributeType() AttributeType {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[AttributeType](objref.IDOf(ad), objc.RegisterName("attributeType"))
 	return _r
 }
 
 // AttributeValueClassName returns the attribute value class name.
 func (ad *AttributeDescription) AttributeValueClassName() string {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("attributeValueClassName"))
 	if _r == 0 {
 		return ""
@@ -159,12 +165,14 @@ func (ad *AttributeDescription) AttributeValueClassName() string {
 
 // DefaultValue returns the default value.
 func (ad *AttributeDescription) DefaultValue() obj.Object {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("defaultValue"))
 	return obj.Wrap(_r)
 }
 
 // ValueTransformerName returns the value transformer name.
 func (ad *AttributeDescription) ValueTransformerName() string {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("valueTransformerName"))
 	if _r == 0 {
 		return ""
@@ -174,18 +182,21 @@ func (ad *AttributeDescription) ValueTransformerName() string {
 
 // AllowsExternalBinaryDataStorage wraps the corresponding Objective-C method.
 func (ad *AttributeDescription) AllowsExternalBinaryDataStorage() bool {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[bool](objref.IDOf(ad), objc.RegisterName("allowsExternalBinaryDataStorage"))
 	return _r
 }
 
 // PreservesValueInHistoryOnDeletion wraps the corresponding Objective-C method.
 func (ad *AttributeDescription) PreservesValueInHistoryOnDeletion() bool {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[bool](objref.IDOf(ad), objc.RegisterName("preservesValueInHistoryOnDeletion"))
 	return _r
 }
 
 // AllowsCloudEncryption wraps the corresponding Objective-C method.
 func (ad *AttributeDescription) AllowsCloudEncryption() bool {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[bool](objref.IDOf(ad), objc.RegisterName("allowsCloudEncryption"))
 	return _r
 }

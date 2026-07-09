@@ -215,8 +215,8 @@ func NSURLFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL(path strin
 }
 
 // Initializes an NSURL object with a provided URL string.
-func (o *NSURL) InitWithString(uRLString *NSString) *NSURL {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitWithString, uRLString.Ptr())
+func (o *NSURL) InitWithString(urlString *NSString) *NSURL {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitWithString, urlString.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -224,8 +224,8 @@ func (o *NSURL) InitWithString(uRLString *NSString) *NSURL {
 }
 
 // Initializes an NSURL object with a base URL and a relative string.
-func (o *NSURL) InitWithStringRelativeToURL(uRLString *NSString, baseURL *NSURL) *NSURL {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitWithStringRelativeToURL, uRLString.Ptr(), baseURL.Ptr())
+func (o *NSURL) InitWithStringRelativeToURL(urlString *NSString, baseURL *NSURL) *NSURL {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitWithStringRelativeToURL, urlString.Ptr(), baseURL.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -233,8 +233,8 @@ func (o *NSURL) InitWithStringRelativeToURL(uRLString *NSString, baseURL *NSURL)
 }
 
 // Creates and returns an NSURL object initialized with a provided URL string.
-func NSURLURLWithString(uRLString *NSString) *NSURL {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLWithString, uRLString.Ptr())
+func NSURLURLWithString(urlString *NSString) *NSURL {
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLWithString, urlString.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -242,8 +242,8 @@ func NSURLURLWithString(uRLString *NSString) *NSURL {
 }
 
 // Creates and returns an NSURL object initialized with a base URL and a relative string.
-func NSURLURLWithStringRelativeToURL(uRLString *NSString, baseURL *NSURL) *NSURL {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLWithStringRelativeToURL, uRLString.Ptr(), baseURL.Ptr())
+func NSURLURLWithStringRelativeToURL(urlString *NSString, baseURL *NSURL) *NSURL {
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLWithStringRelativeToURL, urlString.Ptr(), baseURL.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -251,8 +251,8 @@ func NSURLURLWithStringRelativeToURL(uRLString *NSString, baseURL *NSURL) *NSURL
 }
 
 // Creates an instance from the provided string, optionally IDNA- and percent-encoding any invalid characters.
-func (o *NSURL) InitWithStringEncodingInvalidCharacters(uRLString *NSString, encodingInvalidCharacters bool) *NSURL {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitWithStringEncodingInvalidCharacters, uRLString.Ptr(), encodingInvalidCharacters)
+func (o *NSURL) InitWithStringEncodingInvalidCharacters(urlString *NSString, encodingInvalidCharacters bool) *NSURL {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitWithStringEncodingInvalidCharacters, urlString.Ptr(), encodingInvalidCharacters)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -260,8 +260,8 @@ func (o *NSURL) InitWithStringEncodingInvalidCharacters(uRLString *NSString, enc
 }
 
 // Creates and returns an instance from the provided string, optionally IDNA- and percent-encoding any invalid characters.
-func NSURLURLWithStringEncodingInvalidCharacters(uRLString *NSString, encodingInvalidCharacters bool) *NSURL {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLWithStringEncodingInvalidCharacters, uRLString.Ptr(), encodingInvalidCharacters)
+func NSURLURLWithStringEncodingInvalidCharacters(urlString *NSString, encodingInvalidCharacters bool) *NSURL {
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLWithStringEncodingInvalidCharacters, urlString.Ptr(), encodingInvalidCharacters)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

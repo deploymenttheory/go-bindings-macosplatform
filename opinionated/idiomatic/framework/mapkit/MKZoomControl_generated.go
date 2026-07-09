@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func zoomControlAdopt(id objc.ID) *ZoomControl {
 
 // Description returns the object's -description text.
 func (zc *ZoomControl) Description() string {
+	defer runtime.KeepAlive(zc)
 	return rt.Description(objref.IDOf(zc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (zc *ZoomControl) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(zc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(zc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (zc *ZoomControl) IsKind(className string) bool {
+	defer runtime.KeepAlive(zc)
 	return rt.IsKind(objref.IDOf(zc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (zc *ZoomControl) String() string {
+	defer runtime.KeepAlive(zc)
 	return rt.Description(objref.IDOf(zc))
 }
 
@@ -80,6 +87,7 @@ func NewZoomControl() *ZoomControl {
 
 // WithMapView sets the map view associated with this control.
 func (zc *ZoomControl) WithMapView(mapView *MapView) *ZoomControl {
+	defer runtime.KeepAlive(mapView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(zc), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
 	})
@@ -88,6 +96,7 @@ func (zc *ZoomControl) WithMapView(mapView *MapView) *ZoomControl {
 
 // MapView returns the map view.
 func (zc *ZoomControl) MapView() *MapView {
+	defer runtime.KeepAlive(zc)
 	var _mainthread0 *MapView
 	purego.Main(func() {
 		_mainthread0 = func() *MapView {

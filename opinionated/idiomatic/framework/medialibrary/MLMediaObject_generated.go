@@ -5,6 +5,9 @@
 package medialibrary
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func mediaObjectAdopt(id objc.ID) *MediaObject {
 
 // Description returns the object's -description text.
 func (mo *MediaObject) Description() string {
+	defer runtime.KeepAlive(mo)
 	return rt.Description(objref.IDOf(mo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mo *MediaObject) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mo *MediaObject) IsKind(className string) bool {
+	defer runtime.KeepAlive(mo)
 	return rt.IsKind(objref.IDOf(mo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mo *MediaObject) String() string {
+	defer runtime.KeepAlive(mo)
 	return rt.Description(objref.IDOf(mo))
 }
 
@@ -74,12 +82,14 @@ func NewMediaObject() *MediaObject {
 
 // MediaLibrary returns the media library.
 func (mo *MediaObject) MediaLibrary() *MediaLibrary {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("mediaLibrary"))
 	return MediaLibraryFromID(_r)
 }
 
 // Identifier returns the identifier.
 func (mo *MediaObject) Identifier() string {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -89,6 +99,7 @@ func (mo *MediaObject) Identifier() string {
 
 // MediaSourceIdentifier returns the media source identifier.
 func (mo *MediaObject) MediaSourceIdentifier() string {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("mediaSourceIdentifier"))
 	if _r == 0 {
 		return ""
@@ -97,19 +108,22 @@ func (mo *MediaObject) MediaSourceIdentifier() string {
 }
 
 // Attributes returns the attributes.
-func (mo *MediaObject) Attributes() obj.Object {
+func (mo *MediaObject) Attributes() map[string]obj.Object {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("attributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // MediaType returns the media type.
 func (mo *MediaObject) MediaType() MediaType {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[MediaType](objref.IDOf(mo), objc.RegisterName("mediaType"))
 	return _r
 }
 
 // ContentType returns the content type.
 func (mo *MediaObject) ContentType() string {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("contentType"))
 	if _r == 0 {
 		return ""
@@ -119,6 +133,7 @@ func (mo *MediaObject) ContentType() string {
 
 // Name returns the name.
 func (mo *MediaObject) Name() string {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -127,37 +142,43 @@ func (mo *MediaObject) Name() string {
 }
 
 // URL returns the URL.
-func (mo *MediaObject) URL() obj.Object {
+func (mo *MediaObject) URL() string {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // OriginalURL returns the original URL.
-func (mo *MediaObject) OriginalURL() obj.Object {
+func (mo *MediaObject) OriginalURL() string {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("originalURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // FileSize returns the file size.
 func (mo *MediaObject) FileSize() int {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[int](objref.IDOf(mo), objc.RegisterName("fileSize"))
 	return _r
 }
 
 // ModificationDate returns the modification date.
-func (mo *MediaObject) ModificationDate() obj.Object {
+func (mo *MediaObject) ModificationDate() time.Time {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("modificationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ThumbnailURL returns the thumbnail URL.
-func (mo *MediaObject) ThumbnailURL() obj.Object {
+func (mo *MediaObject) ThumbnailURL() string {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("thumbnailURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // ArtworkImage returns the artwork image.
 func (mo *MediaObject) ArtworkImage() obj.Object {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("artworkImage"))
 	return obj.Wrap(_r)
 }

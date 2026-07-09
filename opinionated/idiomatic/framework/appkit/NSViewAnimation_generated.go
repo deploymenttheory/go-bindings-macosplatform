@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -90,6 +93,16 @@ func (va *ViewAnimation) WithAnimationCurve(animationCurve AnimationCurve) *View
 	return va
 }
 
+// WithDelegate sets the animation delegate.
+func (va *ViewAnimation) WithDelegate(delegate AnimationDelegate) *ViewAnimation {
+	_shim := newAnimationDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(va), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(va), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return va
+}
+
 // WithProgressMarks sets an array of floating-point numbers representing current progress marks.
 func (va *ViewAnimation) WithProgressMarks(items ...obj.Object) *ViewAnimation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
@@ -101,6 +114,7 @@ func (va *ViewAnimation) WithProgressMarks(items ...obj.Object) *ViewAnimation {
 //
 // ViewAnimations returns the collection as a Go slice.
 func (va *ViewAnimation) ViewAnimations() []obj.Object {
+	defer runtime.KeepAlive(va)
 	_arr := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("viewAnimations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

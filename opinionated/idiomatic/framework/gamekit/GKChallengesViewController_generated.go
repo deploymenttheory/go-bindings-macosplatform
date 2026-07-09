@@ -5,8 +5,11 @@
 package gamekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -45,22 +48,27 @@ func challengesViewControllerAdopt(id objc.ID) *ChallengesViewController {
 
 // Description returns the object's -description text.
 func (cvc *ChallengesViewController) Description() string {
+	defer runtime.KeepAlive(cvc)
 	return rt.Description(objref.IDOf(cvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cvc *ChallengesViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cvc *ChallengesViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(cvc)
 	return rt.IsKind(objref.IDOf(cvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cvc *ChallengesViewController) String() string {
+	defer runtime.KeepAlive(cvc)
 	return rt.Description(objref.IDOf(cvc))
 }
 
@@ -74,4 +82,16 @@ func NewChallengesViewController() *ChallengesViewController {
 		}()
 	})
 	return _mainthread0
+}
+
+// WithChallengeDelegate sets the challenge delegate.
+func (cvc *ChallengesViewController) WithChallengeDelegate(challengeDelegate ChallengesViewControllerDelegate) *ChallengesViewController {
+	_shim := newChallengesViewControllerDelegateShim(challengeDelegate)
+	_sel := objc.RegisterName("setChallengeDelegate:")
+	shim.Associate(objref.IDOf(cvc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return cvc
 }

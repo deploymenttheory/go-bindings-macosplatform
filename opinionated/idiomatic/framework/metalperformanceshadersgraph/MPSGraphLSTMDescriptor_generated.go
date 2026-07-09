@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -113,60 +115,70 @@ func (gld *GraphLSTMDescriptor) WithActivation(activation GraphRNNActivation) *G
 
 // Reverse reports whether a parameter that defines time direction of the input sequence. If set to `YES` then the input sequence is passed in reverse time order to the layer. Note: Ignored when `bidirectional = YES`. Default value: `NO`.
 func (gld *GraphLSTMDescriptor) Reverse() bool {
+	defer runtime.KeepAlive(gld)
 	_r := objc.Send[bool](objref.IDOf(gld), objc.RegisterName("reverse"))
 	return _r
 }
 
 // Bidirectional reports whether a parameter that defines a bidirectional LSTM layer. If set to `YES` then the input sequence is traversed in both directions and the two results are concatenated together on the channel-axis. Default value: `NO`.
 func (gld *GraphLSTMDescriptor) Bidirectional() bool {
+	defer runtime.KeepAlive(gld)
 	_r := objc.Send[bool](objref.IDOf(gld), objc.RegisterName("bidirectional"))
 	return _r
 }
 
 // ProduceCell reports whether a parameter that controls whether or not to return the output cell from the LSTM layer. If set to `YES` then this layer will produce the internal cell of the LSTM unit as secondary output. Default value: `NO`.
 func (gld *GraphLSTMDescriptor) ProduceCell() bool {
+	defer runtime.KeepAlive(gld)
 	_r := objc.Send[bool](objref.IDOf(gld), objc.RegisterName("produceCell"))
 	return _r
 }
 
 // Training reports whether a parameter that enables the LSTM layer to support training. If set to `YES` then the layer will produce training state tensor as a secondary output. Default value: `NO`.
 func (gld *GraphLSTMDescriptor) Training() bool {
+	defer runtime.KeepAlive(gld)
 	_r := objc.Send[bool](objref.IDOf(gld), objc.RegisterName("training"))
 	return _r
 }
 
 // ForgetGateLast reports whether a parameter that controls the internal order of the LSTM gates. If set to `YES` then the layer will use the gate-ordering `[ i, z, f, o ]` instead of default `[ i, f, z, o ]`. Default value: `NO`
 func (gld *GraphLSTMDescriptor) ForgetGateLast() bool {
+	defer runtime.KeepAlive(gld)
 	_r := objc.Send[bool](objref.IDOf(gld), objc.RegisterName("forgetGateLast"))
 	return _r
 }
 
 // InputGateActivation returns a parameter that defines the activation function used with the input gate of the LSTM operation. Default value: `MPSGraphRNNActivationSigmoid`.
 func (gld *GraphLSTMDescriptor) InputGateActivation() GraphRNNActivation {
+	defer runtime.KeepAlive(gld)
 	_r := objc.Send[GraphRNNActivation](objref.IDOf(gld), objc.RegisterName("inputGateActivation"))
 	return _r
 }
 
 // ForgetGateActivation returns a parameter that defines the activation function used with the forget gate of the LSTM operation. Default value: `MPSGraphRNNActivationSigmoid`.
 func (gld *GraphLSTMDescriptor) ForgetGateActivation() GraphRNNActivation {
+	defer runtime.KeepAlive(gld)
 	_r := objc.Send[GraphRNNActivation](objref.IDOf(gld), objc.RegisterName("forgetGateActivation"))
 	return _r
 }
 
 // CellGateActivation returns a parameter that defines the activation function used with the cell gate of the LSTM operation. Default value: `MPSGraphRNNActivationTanh`.
 func (gld *GraphLSTMDescriptor) CellGateActivation() GraphRNNActivation {
+	defer runtime.KeepAlive(gld)
 	_r := objc.Send[GraphRNNActivation](objref.IDOf(gld), objc.RegisterName("cellGateActivation"))
 	return _r
 }
 
 // OutputGateActivation returns a parameter that defines the activation function used with the output gate of the LSTM operation. Default value: `MPSGraphRNNActivationSigmoid`.
 func (gld *GraphLSTMDescriptor) OutputGateActivation() GraphRNNActivation {
+	defer runtime.KeepAlive(gld)
 	_r := objc.Send[GraphRNNActivation](objref.IDOf(gld), objc.RegisterName("outputGateActivation"))
 	return _r
 }
 
 // Activation returns a parameter that defines the activation function used with the current cell value of the LSTM operation. Default value: `MPSGraphRNNActivationTanh`.
 func (gld *GraphLSTMDescriptor) Activation() GraphRNNActivation {
+	defer runtime.KeepAlive(gld)
 	_r := objc.Send[GraphRNNActivation](objref.IDOf(gld), objc.RegisterName("activation"))
 	return _r
 }

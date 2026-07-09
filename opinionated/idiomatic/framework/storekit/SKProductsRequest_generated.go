@@ -7,7 +7,8 @@ package storekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,10 +48,20 @@ func productsRequestAdopt(id objc.ID) *ProductsRequest {
 }
 
 // NewProductsRequestWithProductIdentifiers initializes the request with the set of product identifiers.
-func NewProductsRequestWithProductIdentifiers(productIdentifiers obj.Object) *ProductsRequest {
+func NewProductsRequestWithProductIdentifiers(productIdentifiers []string) *ProductsRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKProductsRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProductIdentifiers:"), objref.IDOf(productIdentifiers))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProductIdentifiers:"), rt.SliceToNSSet(productIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return productsRequestAdopt(_id)
+}
+
+// WithDelegate sets the delegate of the request object.
+func (pr *ProductsRequest) WithDelegate(delegate RequestDelegate) *ProductsRequest {
+	_shim := newRequestDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(pr), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(pr), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return pr
 }
 
 var _ RequestProvider = (*ProductsRequest)(nil)

@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -46,22 +48,27 @@ func cNNLossDataDescriptorAdopt(id objc.ID) *CNNLossDataDescriptor {
 
 // Description returns the object's -description text.
 func (cldd *CNNLossDataDescriptor) Description() string {
+	defer runtime.KeepAlive(cldd)
 	return rt.Description(objref.IDOf(cldd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cldd *CNNLossDataDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cldd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cldd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cldd *CNNLossDataDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(cldd)
 	return rt.IsKind(objref.IDOf(cldd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cldd *CNNLossDataDescriptor) String() string {
+	defer runtime.KeepAlive(cldd)
 	return rt.Description(objref.IDOf(cldd))
 }
 
@@ -85,18 +92,21 @@ func (cldd *CNNLossDataDescriptor) WithBytesPerImage(bytesPerImage int) *CNNLoss
 
 // Size returns size of loss data: (width, height, feature channels}. This parameter specifies the size of loss data.
 func (cldd *CNNLossDataDescriptor) Size() metal.MTLSize {
+	defer runtime.KeepAlive(cldd)
 	_r := objc.Send[metal.MTLSize](objref.IDOf(cldd), objc.RegisterName("size"))
 	return _r
 }
 
 // BytesPerRow returns row bytes of loss data. This parameter specifies the row bytes of loss data.
 func (cldd *CNNLossDataDescriptor) BytesPerRow() int {
+	defer runtime.KeepAlive(cldd)
 	_r := objc.Send[int](objref.IDOf(cldd), objc.RegisterName("bytesPerRow"))
 	return _r
 }
 
 // BytesPerImage returns slice bytes of loss data. This parameter specifies the slice bytes of loss data.
 func (cldd *CNNLossDataDescriptor) BytesPerImage() int {
+	defer runtime.KeepAlive(cldd)
 	_r := objc.Send[int](objref.IDOf(cldd), objc.RegisterName("bytesPerImage"))
 	return _r
 }

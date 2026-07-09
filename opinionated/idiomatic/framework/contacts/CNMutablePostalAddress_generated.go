@@ -94,8 +94,8 @@ func (mpa *MutablePostalAddress) WithCountry(country string) *MutablePostalAddre
 }
 
 // WithISOCountryCode sets the ISO country code, using the ISO 3166-1 alpha-2 standard.
-func (mpa *MutablePostalAddress) WithISOCountryCode(iSOCountryCode string) *MutablePostalAddress {
-	objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("setISOCountryCode:"), purego.NSString(iSOCountryCode))
+func (mpa *MutablePostalAddress) WithISOCountryCode(isoCountryCode string) *MutablePostalAddress {
+	objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("setISOCountryCode:"), purego.NSString(isoCountryCode))
 	return mpa
 }
 

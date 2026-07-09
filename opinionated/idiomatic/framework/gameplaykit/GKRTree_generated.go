@@ -5,6 +5,7 @@
 package gameplaykit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func rTreeAdopt(id objc.ID) *RTree {
 
 // Description returns the object's -description text.
 func (rt_ *RTree) Description() string {
+	defer runtime.KeepAlive(rt_)
 	return rt.Description(objref.IDOf(rt_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rt_ *RTree) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rt_)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rt_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rt_ *RTree) IsKind(className string) bool {
+	defer runtime.KeepAlive(rt_)
 	return rt.IsKind(objref.IDOf(rt_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rt_ *RTree) String() string {
+	defer runtime.KeepAlive(rt_)
 	return rt.Description(objref.IDOf(rt_))
 }
 
@@ -83,22 +89,28 @@ func (rt_ *RTree) WithQueryReserve(queryReserve int) *RTree {
 
 // AddElementBoundingRectMinBoundingRectMaxSplitStrategy adds the specified object to the tree.
 func (rt_ *RTree) AddElementBoundingRectMinBoundingRectMaxSplitStrategy(element obj.Object, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer, splitStrategy RTreeSplitStrategy) {
+	defer runtime.KeepAlive(rt_)
+	defer runtime.KeepAlive(element)
 	objc.Send[objc.ID](objref.IDOf(rt_), objc.RegisterName("addElement:boundingRectMin:boundingRectMax:splitStrategy:"), objref.IDOf(element), boundingRectMin, boundingRectMax, splitStrategy)
 }
 
 // RemoveElementBoundingRectMinBoundingRectMax removes the specified object from the tree.
 func (rt_ *RTree) RemoveElementBoundingRectMinBoundingRectMax(element obj.Object, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer) {
+	defer runtime.KeepAlive(rt_)
+	defer runtime.KeepAlive(element)
 	objc.Send[objc.ID](objref.IDOf(rt_), objc.RegisterName("removeElement:boundingRectMin:boundingRectMax:"), objref.IDOf(element), boundingRectMin, boundingRectMax)
 }
 
 // ElementsInBoundingRectMinRectMax searches the tree and returns all elements found within the specified bounding region.
 func (rt_ *RTree) ElementsInBoundingRectMinRectMax(rectMin unsafe.Pointer, rectMax unsafe.Pointer) []obj.Object {
+	defer runtime.KeepAlive(rt_)
 	_r := objc.Send[objc.ID](objref.IDOf(rt_), objc.RegisterName("elementsInBoundingRectMin:rectMax:"), rectMin, rectMax)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // QueryReserve returns amount of array items to reserve before a query. This improves query performance at the cost of memory
 func (rt_ *RTree) QueryReserve() int {
+	defer runtime.KeepAlive(rt_)
 	_r := objc.Send[int](objref.IDOf(rt_), objc.RegisterName("queryReserve"))
 	return _r
 }

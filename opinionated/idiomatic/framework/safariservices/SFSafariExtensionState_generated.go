@@ -5,6 +5,8 @@
 package safariservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func safariExtensionStateAdopt(id objc.ID) *SafariExtensionState {
 
 // Description returns the object's -description text.
 func (ses *SafariExtensionState) Description() string {
+	defer runtime.KeepAlive(ses)
 	return rt.Description(objref.IDOf(ses))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ses *SafariExtensionState) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ses)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ses), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ses *SafariExtensionState) IsKind(className string) bool {
+	defer runtime.KeepAlive(ses)
 	return rt.IsKind(objref.IDOf(ses), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ses *SafariExtensionState) String() string {
+	defer runtime.KeepAlive(ses)
 	return rt.Description(objref.IDOf(ses))
 }
 
@@ -74,6 +81,7 @@ func NewSafariExtensionState() *SafariExtensionState {
 
 // IsEnabled reports whether the object is enabled.
 func (ses *SafariExtensionState) IsEnabled() bool {
+	defer runtime.KeepAlive(ses)
 	_r := objc.Send[bool](objref.IDOf(ses), objc.RegisterName("isEnabled"))
 	return _r
 }

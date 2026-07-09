@@ -6,6 +6,7 @@ package mediaextension
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func byteSourceAdopt(id objc.ID) *ByteSource {
 
 // Description returns the object's -description text.
 func (bs *ByteSource) Description() string {
+	defer runtime.KeepAlive(bs)
 	return rt.Description(objref.IDOf(bs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bs *ByteSource) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bs *ByteSource) IsKind(className string) bool {
+	defer runtime.KeepAlive(bs)
 	return rt.IsKind(objref.IDOf(bs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bs *ByteSource) String() string {
+	defer runtime.KeepAlive(bs)
 	return rt.Description(objref.IDOf(bs))
 }
 
@@ -80,6 +86,7 @@ func NewByteSource() *ByteSource {
 //
 // ReadDataOfLengthFromOffset blocks until the operation completes or ctx is cancelled.
 func (bs *ByteSource) ReadDataOfLengthFromOffset(ctx context.Context, length int, offset int64) (result obj.Object, err error) {
+	defer runtime.KeepAlive(bs)
 	type _result struct {
 		val obj.Object
 		err error
@@ -103,6 +110,7 @@ func (bs *ByteSource) ReadDataOfLengthFromOffset(ctx context.Context, length int
 
 // ReadDataOfLengthFromOffsetToDestinationBytesRead reads bytes from a byte source into a buffer.
 func (bs *ByteSource) ReadDataOfLengthFromOffsetToDestinationBytesRead(length int, offset int64, dest unsafe.Pointer) (bytesReadOut int, err error) {
+	defer runtime.KeepAlive(bs)
 	var _out0 int
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(bs), objc.RegisterName("readDataOfLength:fromOffset:toDestination:bytesRead:error:"), length, offset, dest, unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
@@ -114,12 +122,14 @@ func (bs *ByteSource) ReadDataOfLengthFromOffsetToDestinationBytesRead(length in
 
 // AvailableLengthAtOffset gets the number of available bytes from the offset within the byte source.
 func (bs *ByteSource) AvailableLengthAtOffset(offset int64) int64 {
+	defer runtime.KeepAlive(bs)
 	_r := objc.Send[int64](objref.IDOf(bs), objc.RegisterName("availableLengthAtOffset:"), offset)
 	return _r
 }
 
-// ByteSourceForRelatedFileNameError creates a new byte source for a related file.
-func (bs *ByteSource) ByteSourceForRelatedFileNameError(fileName string) (result *ByteSource, err error) {
+// ByteSourceForRelatedFileName creates a new byte source for a related file.
+func (bs *ByteSource) ByteSourceForRelatedFileName(fileName string) (result *ByteSource, err error) {
+	defer runtime.KeepAlive(bs)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(bs), objc.RegisterName("byteSourceForRelatedFileName:error:"), purego.NSString(fileName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -130,6 +140,7 @@ func (bs *ByteSource) ByteSourceForRelatedFileNameError(fileName string) (result
 
 // FileName returns the name of a MEByteSource's file. The name of the source file for the MEByteSource.
 func (bs *ByteSource) FileName() string {
+	defer runtime.KeepAlive(bs)
 	_r := objc.Send[objc.ID](objref.IDOf(bs), objc.RegisterName("fileName"))
 	if _r == 0 {
 		return ""
@@ -139,12 +150,14 @@ func (bs *ByteSource) FileName() string {
 
 // ContentType returns a UTType indicating the format of the MEByteSource's file. A UTType indicating the format of the source file for the MEByteSource.
 func (bs *ByteSource) ContentType() obj.Object {
+	defer runtime.KeepAlive(bs)
 	_r := objc.Send[objc.ID](objref.IDOf(bs), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
 }
 
 // FileLength returns the length of the MEByteSource's file. The length in bytes of the source file for the MEByteSource, or 0 if that information is not available.
 func (bs *ByteSource) FileLength() int64 {
+	defer runtime.KeepAlive(bs)
 	_r := objc.Send[int64](objref.IDOf(bs), objc.RegisterName("fileLength"))
 	return _r
 }
@@ -153,6 +166,7 @@ func (bs *ByteSource) FileLength() int64 {
 //
 // RelatedFileNamesInSameDirectory returns the collection as a Go slice.
 func (bs *ByteSource) RelatedFileNamesInSameDirectory() []string {
+	defer runtime.KeepAlive(bs)
 	_arr := objc.Send[objc.ID](objref.IDOf(bs), objc.RegisterName("relatedFileNamesInSameDirectory"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

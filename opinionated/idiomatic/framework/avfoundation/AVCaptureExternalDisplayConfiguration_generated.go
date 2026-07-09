@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func captureExternalDisplayConfigurationAdopt(id objc.ID) *CaptureExternalDispla
 
 // Description returns the object's -description text.
 func (cedc *CaptureExternalDisplayConfiguration) Description() string {
+	defer runtime.KeepAlive(cedc)
 	return rt.Description(objref.IDOf(cedc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cedc *CaptureExternalDisplayConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cedc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cedc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cedc *CaptureExternalDisplayConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(cedc)
 	return rt.IsKind(objref.IDOf(cedc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cedc *CaptureExternalDisplayConfiguration) String() string {
+	defer runtime.KeepAlive(cedc)
 	return rt.Description(objref.IDOf(cedc))
 }
 
@@ -93,18 +100,21 @@ func (cedc *CaptureExternalDisplayConfiguration) WithPreferredResolution(preferr
 
 // ShouldMatchFrameRate reports whether a property indicating whether the frame rate of the external display should be configured to match the camera's frame rate. If you want to configure your “AVCaptureVideoPreviewLayer“ to match its source “AVCaptureDevice/activeVideoMinFrameDuration“, set “shouldMatchFrameRate“ to `true`. The default value is `false`.
 func (cedc *CaptureExternalDisplayConfiguration) ShouldMatchFrameRate() bool {
+	defer runtime.KeepAlive(cedc)
 	_r := objc.Send[bool](objref.IDOf(cedc), objc.RegisterName("shouldMatchFrameRate"))
 	return _r
 }
 
 // BypassColorSpaceConversion reports whether a property indicating whether the color space of the configurator's preview layer should be preserved on the output display by avoiding color space conversions. Set “bypassColorSpaceConversion“ to `true` if you would like the configurator's “AVCaptureVideoPreviewLayer“ color space preserved on the output display. This is accomplished by setting the working color space to match the color space of the external display. The color properties of the “CALayer“ remain untouched. The default value is `false`.
 func (cedc *CaptureExternalDisplayConfiguration) BypassColorSpaceConversion() bool {
+	defer runtime.KeepAlive(cedc)
 	_r := objc.Send[bool](objref.IDOf(cedc), objc.RegisterName("bypassColorSpaceConversion"))
 	return _r
 }
 
 // PreferredResolution returns your preferred external display resolution. Use “preferredResolution“ to set your desired resolution of the external display. When left at the default value of { 0, 0 },  the native resolution of the external display is used.
 func (cedc *CaptureExternalDisplayConfiguration) PreferredResolution() coremedia.CMVideoDimensions {
+	defer runtime.KeepAlive(cedc)
 	_r := objc.Send[coremedia.CMVideoDimensions](objref.IDOf(cedc), objc.RegisterName("preferredResolution"))
 	return _r
 }

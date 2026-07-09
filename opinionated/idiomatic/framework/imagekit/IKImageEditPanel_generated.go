@@ -5,6 +5,8 @@
 package imagekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func imageEditPanelAdopt(id objc.ID) *ImageEditPanel {
 
 // Description returns the object's -description text.
 func (iep *ImageEditPanel) Description() string {
+	defer runtime.KeepAlive(iep)
 	return rt.Description(objref.IDOf(iep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (iep *ImageEditPanel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(iep)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(iep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (iep *ImageEditPanel) IsKind(className string) bool {
+	defer runtime.KeepAlive(iep)
 	return rt.IsKind(objref.IDOf(iep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (iep *ImageEditPanel) String() string {
+	defer runtime.KeepAlive(iep)
 	return rt.Description(objref.IDOf(iep))
 }
 
@@ -78,6 +85,7 @@ func NewImageEditPanel() *ImageEditPanel {
 
 // ReloadData reloads the data from the data associated with an image editing panel.
 func (iep *ImageEditPanel) ReloadData() {
+	defer runtime.KeepAlive(iep)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iep), objc.RegisterName("reloadData"))
 	})
@@ -86,6 +94,7 @@ func (iep *ImageEditPanel) ReloadData() {
 
 // FilterArray returns array of filters reflecting the current user adjustments in the adjust or effects tab.
 func (iep *ImageEditPanel) FilterArray() obj.Object {
+	defer runtime.KeepAlive(iep)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

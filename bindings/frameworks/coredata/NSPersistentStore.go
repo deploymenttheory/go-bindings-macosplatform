@@ -143,8 +143,8 @@ func (o *NSPersistentStore) URL() *foundation.NSURL {
 	return foundation.NSURLFromID(_ret)
 }
 
-func (o *NSPersistentStore) SetURL(uRL *foundation.NSURL) {
-	o.Ptr().Send(_nSPersistentStoreSelSetURL, uRL.Ptr())
+func (o *NSPersistentStore) SetURL(url *foundation.NSURL) {
+	o.Ptr().Send(_nSPersistentStoreSelSetURL, url.Ptr())
 }
 
 func (o *NSPersistentStore) Identifier() *foundation.NSString {

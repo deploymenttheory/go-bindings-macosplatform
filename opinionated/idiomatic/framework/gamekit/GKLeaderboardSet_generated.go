@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func leaderboardSetAdopt(id objc.ID) *LeaderboardSet {
 
 // Description returns the object's -description text.
 func (ls *LeaderboardSet) Description() string {
+	defer runtime.KeepAlive(ls)
 	return rt.Description(objref.IDOf(ls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ls *LeaderboardSet) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ls)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ls *LeaderboardSet) IsKind(className string) bool {
+	defer runtime.KeepAlive(ls)
 	return rt.IsKind(objref.IDOf(ls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ls *LeaderboardSet) String() string {
+	defer runtime.KeepAlive(ls)
 	return rt.Description(objref.IDOf(ls))
 }
 
@@ -85,6 +91,7 @@ func (ls *LeaderboardSet) WithIdentifier(identifier string) *LeaderboardSet {
 //
 // LoadLeaderboardsWithHandler blocks until the operation completes or ctx is cancelled.
 func (ls *LeaderboardSet) LoadLeaderboardsWithHandler(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(ls)
 	type _result struct {
 		val obj.Object
 		err error
@@ -108,6 +115,7 @@ func (ls *LeaderboardSet) LoadLeaderboardsWithHandler(ctx context.Context) (resu
 
 // Title returns localized set title.
 func (ls *LeaderboardSet) Title() string {
+	defer runtime.KeepAlive(ls)
 	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -117,6 +125,7 @@ func (ls *LeaderboardSet) Title() string {
 
 // GroupIdentifier set when leaderboardSets have been designated a game group; set when loadLeaderboardSetsWithCompletionHandler has been called for leaderboards that support game groups
 func (ls *LeaderboardSet) GroupIdentifier() string {
+	defer runtime.KeepAlive(ls)
 	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("groupIdentifier"))
 	if _r == 0 {
 		return ""
@@ -126,6 +135,7 @@ func (ls *LeaderboardSet) GroupIdentifier() string {
 
 // Identifier returns leaderboard set.
 func (ls *LeaderboardSet) Identifier() string {
+	defer runtime.KeepAlive(ls)
 	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -137,6 +147,7 @@ func (ls *LeaderboardSet) Identifier() string {
 //
 // LoadLeaderboards blocks until the operation completes or ctx is cancelled.
 func (ls *LeaderboardSet) LoadLeaderboards(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(ls)
 	type _result struct {
 		val obj.Object
 		err error
@@ -162,6 +173,7 @@ func (ls *LeaderboardSet) LoadLeaderboards(ctx context.Context) (result obj.Obje
 //
 // LoadImage blocks until the operation completes or ctx is cancelled.
 func (ls *LeaderboardSet) LoadImage(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(ls)
 	type _result struct {
 		val obj.Object
 		err error

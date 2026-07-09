@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,34 @@ func webFrameAdopt(id objc.ID) *WebFrame {
 
 // Description returns the object's -description text.
 func (wf *WebFrame) Description() string {
+	defer runtime.KeepAlive(wf)
 	return rt.Description(objref.IDOf(wf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wf *WebFrame) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wf *WebFrame) IsKind(className string) bool {
+	defer runtime.KeepAlive(wf)
 	return rt.IsKind(objref.IDOf(wf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wf *WebFrame) String() string {
+	defer runtime.KeepAlive(wf)
 	return rt.Description(objref.IDOf(wf))
 }
 
 // NewWebFrameWithNameWebFrameViewWebView initializes the receiver with a frame name, web frame view, and controlling web view.
 func NewWebFrameWithNameWebFrameViewWebView(name string, view *WebFrameView, webView *WebView) *WebFrame {
+	defer runtime.KeepAlive(view)
+	defer runtime.KeepAlive(webView)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("WebFrame")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:webFrameView:webView:"), purego.NSString(name), objref.IDOf(view), objref.IDOf(webView))
 	return webFrameAdopt(_id)
@@ -75,52 +84,64 @@ func NewWebFrameWithNameWebFrameViewWebView(name string, view *WebFrameView, web
 
 // LoadRequest connects to a given URL by initiating an asynchronous client request.
 func (wf *WebFrame) LoadRequest(request obj.Object) {
+	defer runtime.KeepAlive(wf)
+	defer runtime.KeepAlive(request)
 	objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("loadRequest:"), objref.IDOf(request))
 }
 
 // LoadDataMIMETypeTextEncodingNameBaseURL sets the main page contents, MIME type, content encoding, and base URL.
-func (wf *WebFrame) LoadDataMIMETypeTextEncodingNameBaseURL(data obj.Object, mIMEType string, encodingName string, uRL string) {
-	objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("loadData:MIMEType:textEncodingName:baseURL:"), objref.IDOf(data), purego.NSString(mIMEType), purego.NSString(encodingName), rt.FileURL(uRL))
+func (wf *WebFrame) LoadDataMIMETypeTextEncodingNameBaseURL(data []byte, mimeType string, encodingName string, url string) {
+	defer runtime.KeepAlive(wf)
+	objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("loadData:MIMEType:textEncodingName:baseURL:"), rt.BytesToNSData(data), purego.NSString(mimeType), purego.NSString(encodingName), rt.FileURL(url))
 }
 
 // LoadHTMLStringBaseURL sets the main page contents and base URL.
-func (wf *WebFrame) LoadHTMLStringBaseURL(string_ string, uRL string) {
-	objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("loadHTMLString:baseURL:"), purego.NSString(string_), rt.FileURL(uRL))
+func (wf *WebFrame) LoadHTMLStringBaseURL(str string, url string) {
+	defer runtime.KeepAlive(wf)
+	objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("loadHTMLString:baseURL:"), purego.NSString(str), rt.FileURL(url))
 }
 
 // LoadAlternateHTMLStringBaseURLForUnreachableURL loads alternate content for a frame whose URL is unreachable.
-func (wf *WebFrame) LoadAlternateHTMLStringBaseURLForUnreachableURL(string_ string, baseURL string, unreachableURL string) {
-	objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("loadAlternateHTMLString:baseURL:forUnreachableURL:"), purego.NSString(string_), rt.FileURL(baseURL), rt.FileURL(unreachableURL))
+func (wf *WebFrame) LoadAlternateHTMLStringBaseURLForUnreachableURL(str string, baseURL string, unreachableURL string) {
+	defer runtime.KeepAlive(wf)
+	objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("loadAlternateHTMLString:baseURL:forUnreachableURL:"), purego.NSString(str), rt.FileURL(baseURL), rt.FileURL(unreachableURL))
 }
 
 // LoadArchive loads an archive into the web frame.
 func (wf *WebFrame) LoadArchive(archive *WebArchive) {
+	defer runtime.KeepAlive(wf)
+	defer runtime.KeepAlive(archive)
 	objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("loadArchive:"), objref.IDOf(archive))
 }
 
 // StopLoading stops any pending loads on the receiver’s data source, and those of its children.
 func (wf *WebFrame) StopLoading() {
+	defer runtime.KeepAlive(wf)
 	objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("stopLoading"))
 }
 
 // Reload reloads the initial request passed as an argument to loadRequest:.
 func (wf *WebFrame) Reload() {
+	defer runtime.KeepAlive(wf)
 	objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("reload"))
 }
 
 // ReloadFromOrigin performs an end-to-end revalidation using cache-validating conditionals if possible.
 func (wf *WebFrame) ReloadFromOrigin() {
+	defer runtime.KeepAlive(wf)
 	objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("reloadFromOrigin"))
 }
 
 // FindFrameNamed returns a web frame that matches the given name.
 func (wf *WebFrame) FindFrameNamed(name string) *WebFrame {
+	defer runtime.KeepAlive(wf)
 	_r := objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("findFrameNamed:"), purego.NSString(name))
 	return WebFrameFromID(_r)
 }
 
 // Name returns the frame name.
 func (wf *WebFrame) Name() string {
+	defer runtime.KeepAlive(wf)
 	_r := objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -130,66 +151,77 @@ func (wf *WebFrame) Name() string {
 
 // WebView returns the WebView for the document that includes this frame.
 func (wf *WebFrame) WebView() *WebView {
+	defer runtime.KeepAlive(wf)
 	_r := objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("webView"))
 	return WebViewFromID(_r)
 }
 
 // FrameView returns the WebFrameView for this frame.
 func (wf *WebFrame) FrameView() *WebFrameView {
+	defer runtime.KeepAlive(wf)
 	_r := objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("frameView"))
 	return WebFrameViewFromID(_r)
 }
 
 // DOMDocument returns the DOM document of the frame.
 func (wf *WebFrame) DOMDocument() *DOMDocument {
+	defer runtime.KeepAlive(wf)
 	_r := objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("DOMDocument"))
 	return DOMDocumentFromID(_r)
 }
 
 // FrameElement returns the frame element of the frame.
 func (wf *WebFrame) FrameElement() *DOMHTMLElement {
+	defer runtime.KeepAlive(wf)
 	_r := objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("frameElement"))
 	return DOMHTMLElementFromID(_r)
 }
 
 // DataSource returns the datasource for this frame. Returns the committed data source.  Will return nil if the provisional data source hasn't yet been loaded.
 func (wf *WebFrame) DataSource() *WebDataSource {
+	defer runtime.KeepAlive(wf)
 	_r := objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("dataSource"))
 	return WebDataSourceFromID(_r)
 }
 
 // ProvisionalDataSource returns the provisional datasource of this frame. Will return the provisional data source.  The provisional data source will be nil if no data source has been set on the frame, or the data source has successfully transitioned to the committed data source.
 func (wf *WebFrame) ProvisionalDataSource() *WebDataSource {
+	defer runtime.KeepAlive(wf)
 	_r := objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("provisionalDataSource"))
 	return WebDataSourceFromID(_r)
 }
 
 // ParentFrame returns the frame containing this frame, or nil if this is a top level frame.
 func (wf *WebFrame) ParentFrame() *WebFrame {
+	defer runtime.KeepAlive(wf)
 	_r := objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("parentFrame"))
 	return WebFrameFromID(_r)
 }
 
 // ChildFrames returns an array of WebFrame. The frames in the array are associated with a frame set or iframe.
 func (wf *WebFrame) ChildFrames() obj.Object {
+	defer runtime.KeepAlive(wf)
 	_r := objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("childFrames"))
 	return obj.Wrap(_r)
 }
 
 // WindowObject returns the WebScriptObject representing the frame's JavaScript window object.
 func (wf *WebFrame) WindowObject() *WebScriptObject {
+	defer runtime.KeepAlive(wf)
 	_r := objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("windowObject"))
 	return WebScriptObjectFromID(_r)
 }
 
 // GlobalContext returns the frame's global JavaScript execution context. Use this method to bridge between the WebKit and JavaScriptCore APIs.
 func (wf *WebFrame) GlobalContext() obj.Object {
+	defer runtime.KeepAlive(wf)
 	_r := objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("globalContext"))
 	return obj.Wrap(_r)
 }
 
 // JavaScriptContext returns the frame's global JavaScript execution context. Use this method to bridge between the WebKit and Objective-C JavaScriptCore API.
 func (wf *WebFrame) JavaScriptContext() obj.Object {
+	defer runtime.KeepAlive(wf)
 	_r := objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("javaScriptContext"))
 	return obj.Wrap(_r)
 }

@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -94,30 +95,37 @@ func (cd *CNNDropout) WithLabel(label string) *CNNDropout {
 
 // ResultStateForSourceImageSourceStatesDestinationImage wraps the corresponding Objective-C method.
 func (cd *CNNDropout) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage obj.Object, sourceStates []obj.Object, destinationImage obj.Object) obj.Object {
+	defer runtime.KeepAlive(cd)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(destinationImage)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("resultStateForSourceImage:sourceStates:destinationImage:"), objref.IDOf(sourceImage), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationImage))
 	return obj.Wrap(_r)
 }
 
 // ResultStateBatchForSourceImageSourceStatesDestinationImage wraps the corresponding Objective-C method.
 func (cd *CNNDropout) ResultStateBatchForSourceImageSourceStatesDestinationImage(sourceImage unsafe.Pointer, sourceStates []obj.Object, destinationImage unsafe.Pointer) obj.Object {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("resultStateBatchForSourceImage:sourceStates:destinationImage:"), sourceImage, purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), destinationImage)
 	return obj.Wrap(_r)
 }
 
 // KeepProbability returns the probability that each element in the input is kept. The valid range is (0.0f, 1.0f).
 func (cd *CNNDropout) KeepProbability() float32 {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[float32](objref.IDOf(cd), objc.RegisterName("keepProbability"))
 	return _r
 }
 
 // Seed returns the seed used to generate random numbers.
 func (cd *CNNDropout) Seed() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("seed"))
 	return _r
 }
 
 // MaskStrideInPixels returns the mask stride in the x, y, and x dimensions, which allows for the broadcasting the mask data. The only valid values are 0 and 1 for each dimension. For no broadcasting, set the values for each dimension to 1. For broadcasting, set desired values to 0.
 func (cd *CNNDropout) MaskStrideInPixels() metal.MTLSize {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[metal.MTLSize](objref.IDOf(cd), objc.RegisterName("maskStrideInPixels"))
 	return _r
 }

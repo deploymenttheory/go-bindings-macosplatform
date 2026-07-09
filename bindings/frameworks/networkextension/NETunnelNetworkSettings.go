@@ -64,8 +64,8 @@ func (o *NETunnelNetworkSettings) DNSSettings() *NEDNSSettings {
 	return NEDNSSettingsFromID(_ret)
 }
 
-func (o *NETunnelNetworkSettings) SetDNSSettings(dNSSettings *NEDNSSettings) {
-	o.Ptr().Send(_nETunnelNetworkSettingsSelSetDNSSettings, dNSSettings.Ptr())
+func (o *NETunnelNetworkSettings) SetDNSSettings(dnsSettings *NEDNSSettings) {
+	o.Ptr().Send(_nETunnelNetworkSettingsSelSetDNSSettings, dnsSettings.Ptr())
 }
 
 // @property proxySettings @discussion An NEProxySettings object that contains the desired tunnel proxy settings.

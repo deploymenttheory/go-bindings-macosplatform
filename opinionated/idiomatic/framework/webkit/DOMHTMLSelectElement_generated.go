@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -195,52 +197,63 @@ func (dse *DOMHTMLSelectElement) WithTextContent(textContent string) *DOMHTMLSel
 
 // Item wraps the corresponding Objective-C method.
 func (dse *DOMHTMLSelectElement) Item(index int) *DOMNode {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("item:"), index)
 	return DOMNodeFromID(_r)
 }
 
 // NamedItem wraps the corresponding Objective-C method.
 func (dse *DOMHTMLSelectElement) NamedItem(name string) *DOMNode {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("namedItem:"), purego.NSString(name))
 	return DOMNodeFromID(_r)
 }
 
 // AddBefore adds before.
 func (dse *DOMHTMLSelectElement) AddBefore(element *DOMHTMLElement, before *DOMHTMLElement) {
+	defer runtime.KeepAlive(dse)
+	defer runtime.KeepAlive(element)
+	defer runtime.KeepAlive(before)
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("add:before:"), objref.IDOf(element), objref.IDOf(before))
 }
 
 // Remove wraps the corresponding Objective-C method.
 func (dse *DOMHTMLSelectElement) Remove(index int) {
+	defer runtime.KeepAlive(dse)
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("remove:"), index)
 }
 
 // Autofocus wraps the corresponding Objective-C method.
 func (dse *DOMHTMLSelectElement) Autofocus() bool {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[bool](objref.IDOf(dse), objc.RegisterName("autofocus"))
 	return _r
 }
 
 // Disabled wraps the corresponding Objective-C method.
 func (dse *DOMHTMLSelectElement) Disabled() bool {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[bool](objref.IDOf(dse), objc.RegisterName("disabled"))
 	return _r
 }
 
 // Form returns the form.
 func (dse *DOMHTMLSelectElement) Form() *DOMHTMLFormElement {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("form"))
 	return DOMHTMLFormElementFromID(_r)
 }
 
 // Multiple wraps the corresponding Objective-C method.
 func (dse *DOMHTMLSelectElement) Multiple() bool {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[bool](objref.IDOf(dse), objc.RegisterName("multiple"))
 	return _r
 }
 
 // Name returns the name.
 func (dse *DOMHTMLSelectElement) Name() string {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -250,12 +263,14 @@ func (dse *DOMHTMLSelectElement) Name() string {
 
 // Size returns the size.
 func (dse *DOMHTMLSelectElement) Size() int {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[int](objref.IDOf(dse), objc.RegisterName("size"))
 	return _r
 }
 
 // Type returns the type.
 func (dse *DOMHTMLSelectElement) Type() string {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -265,24 +280,28 @@ func (dse *DOMHTMLSelectElement) Type() string {
 
 // Options returns the options.
 func (dse *DOMHTMLSelectElement) Options() *DOMHTMLOptionsCollection {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("options"))
 	return DOMHTMLOptionsCollectionFromID(_r)
 }
 
 // Length returns the length.
 func (dse *DOMHTMLSelectElement) Length() int {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[int](objref.IDOf(dse), objc.RegisterName("length"))
 	return _r
 }
 
 // SelectedIndex returns the selected index.
 func (dse *DOMHTMLSelectElement) SelectedIndex() int {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[int](objref.IDOf(dse), objc.RegisterName("selectedIndex"))
 	return _r
 }
 
 // Value returns the value.
 func (dse *DOMHTMLSelectElement) Value() string {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
@@ -292,12 +311,16 @@ func (dse *DOMHTMLSelectElement) Value() string {
 
 // WillValidate wraps the corresponding Objective-C method.
 func (dse *DOMHTMLSelectElement) WillValidate() bool {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[bool](objref.IDOf(dse), objc.RegisterName("willValidate"))
 	return _r
 }
 
 // Add wraps the corresponding Objective-C method.
 func (dse *DOMHTMLSelectElement) Add(element *DOMHTMLElement, before *DOMHTMLElement) {
+	defer runtime.KeepAlive(dse)
+	defer runtime.KeepAlive(element)
+	defer runtime.KeepAlive(before)
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("add::"), objref.IDOf(element), objref.IDOf(before))
 }
 

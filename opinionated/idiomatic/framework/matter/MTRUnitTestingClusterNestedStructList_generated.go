@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,102 +50,125 @@ func mTRUnitTestingClusterNestedStructListAdopt(id objc.ID) *MTRUnitTestingClust
 
 // Description returns the object's -description text.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) Description() string {
+	defer runtime.KeepAlive(mutcnsl)
 	return rt.Description(objref.IDOf(mutcnsl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mutcnsl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mutcnsl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) IsKind(className string) bool {
+	defer runtime.KeepAlive(mutcnsl)
 	return rt.IsKind(objref.IDOf(mutcnsl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) String() string {
+	defer runtime.KeepAlive(mutcnsl)
 	return rt.Description(objref.IDOf(mutcnsl))
 }
 
 // WithA sets the a.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) WithA(a obj.Object) *MTRUnitTestingClusterNestedStructList {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("setA:"), objref.IDOf(a))
 	return mutcnsl
 }
 
 // WithB sets the b.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) WithB(b obj.Object) *MTRUnitTestingClusterNestedStructList {
+	defer runtime.KeepAlive(b)
 	objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("setB:"), objref.IDOf(b))
 	return mutcnsl
 }
 
 // WithC sets the c.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) WithC(c MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterNestedStructList {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("setC:"), objref.IDOf(c))
 	return mutcnsl
 }
 
 // A returns the a.
-func (mutcnsl *MTRUnitTestingClusterNestedStructList) A() obj.Object {
+func (mutcnsl *MTRUnitTestingClusterNestedStructList) A() *foundation.Number {
+	defer runtime.KeepAlive(mutcnsl)
 	_r := objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("a"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // B returns the b.
-func (mutcnsl *MTRUnitTestingClusterNestedStructList) B() obj.Object {
+func (mutcnsl *MTRUnitTestingClusterNestedStructList) B() *foundation.Number {
+	defer runtime.KeepAlive(mutcnsl)
 	_r := objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("b"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // C returns the c.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) C() *MTRUnitTestingClusterSimpleStruct {
+	defer runtime.KeepAlive(mutcnsl)
 	_r := objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("c"))
 	return MTRUnitTestingClusterSimpleStructFromID(_r)
 }
 
 // D returns the d.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) D() obj.Object {
+	defer runtime.KeepAlive(mutcnsl)
 	_r := objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("d"))
 	return obj.Wrap(_r)
 }
 
 // SetD wraps the corresponding Objective-C method.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) SetD(d obj.Object) {
+	defer runtime.KeepAlive(mutcnsl)
+	defer runtime.KeepAlive(d)
 	objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("setD:"), objref.IDOf(d))
 }
 
 // E returns the e.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) E() obj.Object {
+	defer runtime.KeepAlive(mutcnsl)
 	_r := objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("e"))
 	return obj.Wrap(_r)
 }
 
 // SetE wraps the corresponding Objective-C method.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) SetE(e obj.Object) {
+	defer runtime.KeepAlive(mutcnsl)
+	defer runtime.KeepAlive(e)
 	objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("setE:"), objref.IDOf(e))
 }
 
 // F returns the f.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) F() obj.Object {
+	defer runtime.KeepAlive(mutcnsl)
 	_r := objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("f"))
 	return obj.Wrap(_r)
 }
 
 // SetF wraps the corresponding Objective-C method.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) SetF(f obj.Object) {
+	defer runtime.KeepAlive(mutcnsl)
+	defer runtime.KeepAlive(f)
 	objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("setF:"), objref.IDOf(f))
 }
 
 // G returns the g.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) G() obj.Object {
+	defer runtime.KeepAlive(mutcnsl)
 	_r := objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("g"))
 	return obj.Wrap(_r)
 }
 
 // SetG wraps the corresponding Objective-C method.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) SetG(g obj.Object) {
+	defer runtime.KeepAlive(mutcnsl)
+	defer runtime.KeepAlive(g)
 	objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("setG:"), objref.IDOf(g))
 }
 

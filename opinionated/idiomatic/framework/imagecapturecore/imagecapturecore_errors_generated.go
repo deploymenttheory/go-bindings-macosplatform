@@ -8,20 +8,32 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrICReturnConnectionDriverExited matches the ImageCaptureCore error ICReturnConnectionDriverExited.
-var ErrICReturnConnectionDriverExited = errkit.New("ICReturnConnectionErrorDomain", -21350)
+// ErrICReturnCodeObjectCouldNotBeRead matches the ImageCaptureCore error ICReturnCodeObjectCouldNotBeRead.
+var ErrICReturnCodeObjectCouldNotBeRead = errkit.New("ICReturnObjectErrorDomain", -21448)
+
+// ErrICReturnCodeObjectDataEmpty matches the ImageCaptureCore error ICReturnCodeObjectDataEmpty.
+var ErrICReturnCodeObjectDataEmpty = errkit.New("ICReturnObjectErrorDomain", -21447)
+
+// ErrICReturnCodeObjectDataOffsetInvalid matches the ImageCaptureCore error ICReturnCodeObjectDataOffsetInvalid.
+var ErrICReturnCodeObjectDataOffsetInvalid = errkit.New("ICReturnObjectErrorDomain", -21449)
+
+// ErrICReturnCodeObjectDataRequestTooLarge matches the ImageCaptureCore error ICReturnCodeObjectDataRequestTooLarge.
+var ErrICReturnCodeObjectDataRequestTooLarge = errkit.New("ICReturnObjectErrorDomain", -21446)
+
+// ErrICReturnCodeObjectDoesNotExist matches the ImageCaptureCore error ICReturnCodeObjectDoesNotExist.
+var ErrICReturnCodeObjectDoesNotExist = errkit.New("ICReturnObjectErrorDomain", -21450)
 
 // ErrICReturnConnectionClosedSessionSuddenly matches the ImageCaptureCore error ICReturnConnectionClosedSessionSuddenly.
 var ErrICReturnConnectionClosedSessionSuddenly = errkit.New("ICReturnConnectionErrorDomain", -21349)
 
-// ErrICReturnConnectionEjectedSuddenly matches the ImageCaptureCore error ICReturnConnectionEjectedSuddenly.
-var ErrICReturnConnectionEjectedSuddenly = errkit.New("ICReturnConnectionErrorDomain", -21348)
-
-// ErrICReturnConnectionSessionAlreadyOpen matches the ImageCaptureCore error ICReturnConnectionSessionAlreadyOpen.
-var ErrICReturnConnectionSessionAlreadyOpen = errkit.New("ICReturnConnectionErrorDomain", -21347)
+// ErrICReturnConnectionDriverExited matches the ImageCaptureCore error ICReturnConnectionDriverExited.
+var ErrICReturnConnectionDriverExited = errkit.New("ICReturnConnectionErrorDomain", -21350)
 
 // ErrICReturnConnectionEjectFailed matches the ImageCaptureCore error ICReturnConnectionEjectFailed.
 var ErrICReturnConnectionEjectFailed = errkit.New("ICReturnConnectionErrorDomain", -21346)
+
+// ErrICReturnConnectionEjectedSuddenly matches the ImageCaptureCore error ICReturnConnectionEjectedSuddenly.
+var ErrICReturnConnectionEjectedSuddenly = errkit.New("ICReturnConnectionErrorDomain", -21348)
 
 // ErrICReturnConnectionFailedToOpen matches the ImageCaptureCore error ICReturnConnectionFailedToOpen.
 var ErrICReturnConnectionFailedToOpen = errkit.New("ICReturnConnectionErrorDomain", -21345)
@@ -32,14 +44,14 @@ var ErrICReturnConnectionFailedToOpenDevice = errkit.New("ICReturnConnectionErro
 // ErrICReturnConnectionNotAuthorizedToOpenDevice matches the ImageCaptureCore error ICReturnConnectionNotAuthorizedToOpenDevice.
 var ErrICReturnConnectionNotAuthorizedToOpenDevice = errkit.New("ICReturnConnectionErrorDomain", -21343)
 
-// ErrICReturnDownloadPathInvalid matches the ImageCaptureCore error ICReturnDownloadPathInvalid.
-var ErrICReturnDownloadPathInvalid = errkit.New("ICReturnDownloadErrorDomain", -21100)
+// ErrICReturnConnectionSessionAlreadyOpen matches the ImageCaptureCore error ICReturnConnectionSessionAlreadyOpen.
+var ErrICReturnConnectionSessionAlreadyOpen = errkit.New("ICReturnConnectionErrorDomain", -21347)
 
 // ErrICReturnDownloadFileWritable matches the ImageCaptureCore error ICReturnDownloadFileWritable.
 var ErrICReturnDownloadFileWritable = errkit.New("ICReturnDownloadErrorDomain", -21099)
 
-// ErrICReturnMetadataNotAvailable matches the ImageCaptureCore error ICReturnMetadataNotAvailable.
-var ErrICReturnMetadataNotAvailable = errkit.New("ICReturnMetadataErrorDomain", -20150)
+// ErrICReturnDownloadPathInvalid matches the ImageCaptureCore error ICReturnDownloadPathInvalid.
+var ErrICReturnDownloadPathInvalid = errkit.New("ICReturnDownloadErrorDomain", -21100)
 
 // ErrICReturnMetadataAlreadyFetching matches the ImageCaptureCore error ICReturnMetadataAlreadyFetching.
 var ErrICReturnMetadataAlreadyFetching = errkit.New("ICReturnMetadataErrorDomain", -20149)
@@ -50,29 +62,14 @@ var ErrICReturnMetadataCanceled = errkit.New("ICReturnMetadataErrorDomain", -201
 // ErrICReturnMetadataInvalid matches the ImageCaptureCore error ICReturnMetadataInvalid.
 var ErrICReturnMetadataInvalid = errkit.New("ICReturnMetadataErrorDomain", -20147)
 
-// ErrICReturnCodeObjectDoesNotExist matches the ImageCaptureCore error ICReturnCodeObjectDoesNotExist.
-var ErrICReturnCodeObjectDoesNotExist = errkit.New("ICReturnObjectErrorDomain", -21450)
-
-// ErrICReturnCodeObjectDataOffsetInvalid matches the ImageCaptureCore error ICReturnCodeObjectDataOffsetInvalid.
-var ErrICReturnCodeObjectDataOffsetInvalid = errkit.New("ICReturnObjectErrorDomain", -21449)
-
-// ErrICReturnCodeObjectCouldNotBeRead matches the ImageCaptureCore error ICReturnCodeObjectCouldNotBeRead.
-var ErrICReturnCodeObjectCouldNotBeRead = errkit.New("ICReturnObjectErrorDomain", -21448)
-
-// ErrICReturnCodeObjectDataEmpty matches the ImageCaptureCore error ICReturnCodeObjectDataEmpty.
-var ErrICReturnCodeObjectDataEmpty = errkit.New("ICReturnObjectErrorDomain", -21447)
-
-// ErrICReturnCodeObjectDataRequestTooLarge matches the ImageCaptureCore error ICReturnCodeObjectDataRequestTooLarge.
-var ErrICReturnCodeObjectDataRequestTooLarge = errkit.New("ICReturnObjectErrorDomain", -21446)
+// ErrICReturnMetadataNotAvailable matches the ImageCaptureCore error ICReturnMetadataNotAvailable.
+var ErrICReturnMetadataNotAvailable = errkit.New("ICReturnMetadataErrorDomain", -20150)
 
 // ErrICReturnPTPFailedToSendCommand matches the ImageCaptureCore error ICReturnPTPFailedToSendCommand.
 var ErrICReturnPTPFailedToSendCommand = errkit.New("ICReturnPTPDeviceErrorDomain", -21250)
 
 // ErrICReturnPTPNotAuthorizedToSendCommand matches the ImageCaptureCore error ICReturnPTPNotAuthorizedToSendCommand.
 var ErrICReturnPTPNotAuthorizedToSendCommand = errkit.New("ICReturnPTPDeviceErrorDomain", -21249)
-
-// ErrICReturnThumbnailNotAvailable matches the ImageCaptureCore error ICReturnThumbnailNotAvailable.
-var ErrICReturnThumbnailNotAvailable = errkit.New("ICReturnThumbnailErrorDomain", -21000)
 
 // ErrICReturnThumbnailAlreadyFetching matches the ImageCaptureCore error ICReturnThumbnailAlreadyFetching.
 var ErrICReturnThumbnailAlreadyFetching = errkit.New("ICReturnThumbnailErrorDomain", -20999)
@@ -82,3 +79,6 @@ var ErrICReturnThumbnailCanceled = errkit.New("ICReturnThumbnailErrorDomain", -2
 
 // ErrICReturnThumbnailInvalid matches the ImageCaptureCore error ICReturnThumbnailInvalid.
 var ErrICReturnThumbnailInvalid = errkit.New("ICReturnThumbnailErrorDomain", -20097)
+
+// ErrICReturnThumbnailNotAvailable matches the ImageCaptureCore error ICReturnThumbnailNotAvailable.
+var ErrICReturnThumbnailNotAvailable = errkit.New("ICReturnThumbnailErrorDomain", -21000)

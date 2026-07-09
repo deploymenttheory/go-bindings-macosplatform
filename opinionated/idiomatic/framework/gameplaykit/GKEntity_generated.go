@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func entityAdopt(id objc.ID) *Entity {
 
 // Description returns the object's -description text.
 func (e *Entity) Description() string {
+	defer runtime.KeepAlive(e)
 	return rt.Description(objref.IDOf(e))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (e *Entity) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(e)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(e), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (e *Entity) IsKind(className string) bool {
+	defer runtime.KeepAlive(e)
 	return rt.IsKind(objref.IDOf(e), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (e *Entity) String() string {
+	defer runtime.KeepAlive(e)
 	return rt.Description(objref.IDOf(e))
 }
 
@@ -74,11 +81,14 @@ func NewEntity() *Entity {
 
 // UpdateWithDeltaTime performs periodic updates for each of the entity’s components.
 func (e *Entity) UpdateWithDeltaTime(seconds float64) {
+	defer runtime.KeepAlive(e)
 	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("updateWithDeltaTime:"), seconds)
 }
 
 // AddComponent adds a component to the entity.
 func (e *Entity) AddComponent(component *Component) {
+	defer runtime.KeepAlive(e)
+	defer runtime.KeepAlive(component)
 	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("addComponent:"), objref.IDOf(component))
 }
 
@@ -86,6 +96,7 @@ func (e *Entity) AddComponent(component *Component) {
 //
 // Components returns the collection as a Go slice.
 func (e *Entity) Components() []*Component {
+	defer runtime.KeepAlive(e)
 	_arr := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("components"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Component { return ComponentFromID(_id) })
 }

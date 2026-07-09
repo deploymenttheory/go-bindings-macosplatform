@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,47 +50,56 @@ func mTRModeSelectClusterSemanticTagStructAdopt(id objc.ID) *MTRModeSelectCluste
 
 // Description returns the object's -description text.
 func (mmscsts *MTRModeSelectClusterSemanticTagStruct) Description() string {
+	defer runtime.KeepAlive(mmscsts)
 	return rt.Description(objref.IDOf(mmscsts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmscsts *MTRModeSelectClusterSemanticTagStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmscsts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmscsts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmscsts *MTRModeSelectClusterSemanticTagStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmscsts)
 	return rt.IsKind(objref.IDOf(mmscsts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmscsts *MTRModeSelectClusterSemanticTagStruct) String() string {
+	defer runtime.KeepAlive(mmscsts)
 	return rt.Description(objref.IDOf(mmscsts))
 }
 
 // WithMfgCode sets the mfg code.
 func (mmscsts *MTRModeSelectClusterSemanticTagStruct) WithMfgCode(mfgCode obj.Object) *MTRModeSelectClusterSemanticTagStruct {
+	defer runtime.KeepAlive(mfgCode)
 	objc.Send[objc.ID](objref.IDOf(mmscsts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return mmscsts
 }
 
 // WithValue sets the value.
 func (mmscsts *MTRModeSelectClusterSemanticTagStruct) WithValue(value obj.Object) *MTRModeSelectClusterSemanticTagStruct {
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(mmscsts), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mmscsts
 }
 
 // MfgCode returns the mfg code.
-func (mmscsts *MTRModeSelectClusterSemanticTagStruct) MfgCode() obj.Object {
+func (mmscsts *MTRModeSelectClusterSemanticTagStruct) MfgCode() *foundation.Number {
+	defer runtime.KeepAlive(mmscsts)
 	_r := objc.Send[objc.ID](objref.IDOf(mmscsts), objc.RegisterName("mfgCode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Value returns the value.
-func (mmscsts *MTRModeSelectClusterSemanticTagStruct) Value() obj.Object {
+func (mmscsts *MTRModeSelectClusterSemanticTagStruct) Value() *foundation.Number {
+	defer runtime.KeepAlive(mmscsts)
 	_r := objc.Send[objc.ID](objref.IDOf(mmscsts), objc.RegisterName("value"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRModeSelectClusterSemanticTagStruct marks MTRModeSelectClusterSemanticTagStruct — and, by embedding promotion, its

@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,66 +61,77 @@ func (ppsf *PhysicallyPlausibleScatteringFunction) WithName(name string) *Physic
 
 // Subsurface returns the subsurface.
 func (ppsf *PhysicallyPlausibleScatteringFunction) Subsurface() *MaterialProperty {
+	defer runtime.KeepAlive(ppsf)
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("subsurface"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Metallic returns the metallic.
 func (ppsf *PhysicallyPlausibleScatteringFunction) Metallic() *MaterialProperty {
+	defer runtime.KeepAlive(ppsf)
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("metallic"))
 	return MaterialPropertyFromID(_r)
 }
 
 // SpecularAmount returns the specular amount.
 func (ppsf *PhysicallyPlausibleScatteringFunction) SpecularAmount() *MaterialProperty {
+	defer runtime.KeepAlive(ppsf)
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("specularAmount"))
 	return MaterialPropertyFromID(_r)
 }
 
 // SpecularTint returns the specular tint.
 func (ppsf *PhysicallyPlausibleScatteringFunction) SpecularTint() *MaterialProperty {
+	defer runtime.KeepAlive(ppsf)
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("specularTint"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Roughness returns the roughness.
 func (ppsf *PhysicallyPlausibleScatteringFunction) Roughness() *MaterialProperty {
+	defer runtime.KeepAlive(ppsf)
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("roughness"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Anisotropic returns the anisotropic.
 func (ppsf *PhysicallyPlausibleScatteringFunction) Anisotropic() *MaterialProperty {
+	defer runtime.KeepAlive(ppsf)
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("anisotropic"))
 	return MaterialPropertyFromID(_r)
 }
 
 // AnisotropicRotation returns the anisotropic rotation.
 func (ppsf *PhysicallyPlausibleScatteringFunction) AnisotropicRotation() *MaterialProperty {
+	defer runtime.KeepAlive(ppsf)
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("anisotropicRotation"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Sheen returns the sheen.
 func (ppsf *PhysicallyPlausibleScatteringFunction) Sheen() *MaterialProperty {
+	defer runtime.KeepAlive(ppsf)
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("sheen"))
 	return MaterialPropertyFromID(_r)
 }
 
 // SheenTint returns the sheen tint.
 func (ppsf *PhysicallyPlausibleScatteringFunction) SheenTint() *MaterialProperty {
+	defer runtime.KeepAlive(ppsf)
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("sheenTint"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Clearcoat returns the clearcoat.
 func (ppsf *PhysicallyPlausibleScatteringFunction) Clearcoat() *MaterialProperty {
+	defer runtime.KeepAlive(ppsf)
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("clearcoat"))
 	return MaterialPropertyFromID(_r)
 }
 
 // ClearcoatGloss returns the clearcoat gloss.
 func (ppsf *PhysicallyPlausibleScatteringFunction) ClearcoatGloss() *MaterialProperty {
+	defer runtime.KeepAlive(ppsf)
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("clearcoatGloss"))
 	return MaterialPropertyFromID(_r)
 }

@@ -5,8 +5,11 @@
 package intentsui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func addVoiceShortcutButtonAdopt(id objc.ID) *AddVoiceShortcutButton {
 
 // Description returns the object's -description text.
 func (avsb *AddVoiceShortcutButton) Description() string {
+	defer runtime.KeepAlive(avsb)
 	return rt.Description(objref.IDOf(avsb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (avsb *AddVoiceShortcutButton) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(avsb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(avsb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (avsb *AddVoiceShortcutButton) IsKind(className string) bool {
+	defer runtime.KeepAlive(avsb)
 	return rt.IsKind(objref.IDOf(avsb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (avsb *AddVoiceShortcutButton) String() string {
+	defer runtime.KeepAlive(avsb)
 	return rt.Description(objref.IDOf(avsb))
 }
 
@@ -87,8 +95,21 @@ func (avsb *AddVoiceShortcutButton) WithStyle(style AddVoiceShortcutButtonStyle)
 	return avsb
 }
 
+// WithDelegate sets the object that receives presentation requests from the button.
+func (avsb *AddVoiceShortcutButton) WithDelegate(delegate AddVoiceShortcutButtonDelegate) *AddVoiceShortcutButton {
+	_shim := newAddVoiceShortcutButtonDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(avsb), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(avsb), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return avsb
+}
+
 // WithShortcut sets the shortcut Siri invokes when the user speaks the invocation phrase.
 func (avsb *AddVoiceShortcutButton) WithShortcut(shortcut obj.Object) *AddVoiceShortcutButton {
+	defer runtime.KeepAlive(shortcut)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(avsb), objc.RegisterName("setShortcut:"), objref.IDOf(shortcut))
 	})
@@ -105,6 +126,7 @@ func (avsb *AddVoiceShortcutButton) WithCornerRadius(cornerRadius float64) *AddV
 
 // Style returns the style.
 func (avsb *AddVoiceShortcutButton) Style() AddVoiceShortcutButtonStyle {
+	defer runtime.KeepAlive(avsb)
 	var _mainthread0 AddVoiceShortcutButtonStyle
 	purego.Main(func() {
 		_mainthread0 = func() AddVoiceShortcutButtonStyle {
@@ -118,6 +140,7 @@ func (avsb *AddVoiceShortcutButton) Style() AddVoiceShortcutButtonStyle {
 
 // Shortcut returns the shortcut.
 func (avsb *AddVoiceShortcutButton) Shortcut() obj.Object {
+	defer runtime.KeepAlive(avsb)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -131,6 +154,7 @@ func (avsb *AddVoiceShortcutButton) Shortcut() obj.Object {
 
 // CornerRadius returns a custom corner radius for the If the provided corner radius is greater than half of the button’s height, it will be capped at half of the button’s height.
 func (avsb *AddVoiceShortcutButton) CornerRadius() float64 {
+	defer runtime.KeepAlive(avsb)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {

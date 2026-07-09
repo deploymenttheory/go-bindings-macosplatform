@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func regionAdopt(id objc.ID) *Region {
 
 // Description returns the object's -description text.
 func (r *Region) Description() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (r *Region) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (r *Region) IsKind(className string) bool {
+	defer runtime.KeepAlive(r)
 	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (r *Region) String() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
@@ -83,6 +90,7 @@ func NewRegionWithSize(size corefoundation.CGSize) *Region {
 
 // NewRegionWithPath initializes a new region using a Core Graphics path.
 func NewRegionWithPath(path obj.Object) *Region {
+	defer runtime.KeepAlive(path)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKRegion")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:"), objref.IDOf(path))
 	return regionAdopt(_id)
@@ -90,36 +98,45 @@ func NewRegionWithPath(path obj.Object) *Region {
 
 // InverseRegion returns a new region that is the mathematical inverse of an existing region.
 func (r *Region) InverseRegion() *Region {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("inverseRegion"))
 	return RegionFromID(_r)
 }
 
-// RegionByUnionWithRegion returns a new region created by combining the contents of this region with another region.
-func (r *Region) RegionByUnionWithRegion(region *Region) *Region {
+// RegionByUnion returns a new region created by combining the contents of this region with another region.
+func (r *Region) RegionByUnion(region *Region) *Region {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(region)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("regionByUnionWithRegion:"), objref.IDOf(region))
 	return RegionFromID(_r)
 }
 
 // RegionByDifferenceFromRegion returns a new region created by subtracting the contents of another region from this region.
 func (r *Region) RegionByDifferenceFromRegion(region *Region) *Region {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(region)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("regionByDifferenceFromRegion:"), objref.IDOf(region))
 	return RegionFromID(_r)
 }
 
-// RegionByIntersectionWithRegion returns a new region created by intersecting the contents of this region with another region.
-func (r *Region) RegionByIntersectionWithRegion(region *Region) *Region {
+// RegionByIntersection returns a new region created by intersecting the contents of this region with another region.
+func (r *Region) RegionByIntersection(region *Region) *Region {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(region)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("regionByIntersectionWithRegion:"), objref.IDOf(region))
 	return RegionFromID(_r)
 }
 
 // ContainsPoint returns a Boolean value that indicates whether a particular point is contained in the region.
 func (r *Region) ContainsPoint(point corefoundation.CGPoint) bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("containsPoint:"), point)
 	return _r
 }
 
 // Path returns the path.
 func (r *Region) Path() obj.Object {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("path"))
 	return obj.Wrap(_r)
 }

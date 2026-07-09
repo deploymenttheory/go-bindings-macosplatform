@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -51,8 +53,9 @@ func NewMTRSoftwareDiagnosticsClusterThreadMetrics() *MTRSoftwareDiagnosticsClus
 }
 
 // WithID sets the ID.
-func (msdctm *MTRSoftwareDiagnosticsClusterThreadMetrics) WithID(id_ obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics {
-	objc.Send[objc.ID](objref.IDOf(msdctm), objc.RegisterName("setId:"), objref.IDOf(id_))
+func (msdctm *MTRSoftwareDiagnosticsClusterThreadMetrics) WithID(identifier obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics {
+	defer runtime.KeepAlive(identifier)
+	objc.Send[objc.ID](objref.IDOf(msdctm), objc.RegisterName("setId:"), objref.IDOf(identifier))
 	return msdctm
 }
 
@@ -64,18 +67,21 @@ func (msdctm *MTRSoftwareDiagnosticsClusterThreadMetrics) WithName(name string) 
 
 // WithStackFreeCurrent sets the stack free current.
 func (msdctm *MTRSoftwareDiagnosticsClusterThreadMetrics) WithStackFreeCurrent(stackFreeCurrent obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics {
+	defer runtime.KeepAlive(stackFreeCurrent)
 	objc.Send[objc.ID](objref.IDOf(msdctm), objc.RegisterName("setStackFreeCurrent:"), objref.IDOf(stackFreeCurrent))
 	return msdctm
 }
 
 // WithStackFreeMinimum sets the stack free minimum.
 func (msdctm *MTRSoftwareDiagnosticsClusterThreadMetrics) WithStackFreeMinimum(stackFreeMinimum obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics {
+	defer runtime.KeepAlive(stackFreeMinimum)
 	objc.Send[objc.ID](objref.IDOf(msdctm), objc.RegisterName("setStackFreeMinimum:"), objref.IDOf(stackFreeMinimum))
 	return msdctm
 }
 
 // WithStackSize sets the stack size.
 func (msdctm *MTRSoftwareDiagnosticsClusterThreadMetrics) WithStackSize(stackSize obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics {
+	defer runtime.KeepAlive(stackSize)
 	objc.Send[objc.ID](objref.IDOf(msdctm), objc.RegisterName("setStackSize:"), objref.IDOf(stackSize))
 	return msdctm
 }

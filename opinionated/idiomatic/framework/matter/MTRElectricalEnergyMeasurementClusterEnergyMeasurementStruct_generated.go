@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructAdopt(id objc.I
 
 // Description returns the object's -description text.
 func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) Description() string {
+	defer runtime.KeepAlive(meemcems)
 	return rt.Description(objref.IDOf(meemcems))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(meemcems)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(meemcems), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(meemcems)
 	return rt.IsKind(objref.IDOf(meemcems), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) String() string {
+	defer runtime.KeepAlive(meemcems)
 	return rt.Description(objref.IDOf(meemcems))
 }
 
@@ -72,60 +80,70 @@ func NewMTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct() *MTRElect
 
 // WithEnergy sets the energy.
 func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithEnergy(energy obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
+	defer runtime.KeepAlive(energy)
 	objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("setEnergy:"), objref.IDOf(energy))
 	return meemcems
 }
 
 // WithStartTimestamp sets the start timestamp.
 func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithStartTimestamp(startTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
+	defer runtime.KeepAlive(startTimestamp)
 	objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("setStartTimestamp:"), objref.IDOf(startTimestamp))
 	return meemcems
 }
 
 // WithEndTimestamp sets the end timestamp.
 func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithEndTimestamp(endTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
+	defer runtime.KeepAlive(endTimestamp)
 	objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("setEndTimestamp:"), objref.IDOf(endTimestamp))
 	return meemcems
 }
 
 // WithStartSystime sets the start systime.
 func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithStartSystime(startSystime obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
+	defer runtime.KeepAlive(startSystime)
 	objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("setStartSystime:"), objref.IDOf(startSystime))
 	return meemcems
 }
 
 // WithEndSystime sets the end systime.
 func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithEndSystime(endSystime obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
+	defer runtime.KeepAlive(endSystime)
 	objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("setEndSystime:"), objref.IDOf(endSystime))
 	return meemcems
 }
 
 // Energy returns the energy.
-func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) Energy() obj.Object {
+func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) Energy() *foundation.Number {
+	defer runtime.KeepAlive(meemcems)
 	_r := objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("energy"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StartTimestamp returns the start timestamp.
-func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) StartTimestamp() obj.Object {
+func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) StartTimestamp() *foundation.Number {
+	defer runtime.KeepAlive(meemcems)
 	_r := objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("startTimestamp"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EndTimestamp returns the end timestamp.
-func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) EndTimestamp() obj.Object {
+func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) EndTimestamp() *foundation.Number {
+	defer runtime.KeepAlive(meemcems)
 	_r := objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("endTimestamp"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StartSystime returns the start systime.
-func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) StartSystime() obj.Object {
+func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) StartSystime() *foundation.Number {
+	defer runtime.KeepAlive(meemcems)
 	_r := objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("startSystime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EndSystime returns the end systime.
-func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) EndSystime() obj.Object {
+func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) EndSystime() *foundation.Number {
+	defer runtime.KeepAlive(meemcems)
 	_r := objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("endSystime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

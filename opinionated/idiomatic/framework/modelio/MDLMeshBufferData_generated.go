@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func meshBufferDataAdopt(id objc.ID) *MeshBufferData {
 
 // Description returns the object's -description text.
 func (mbd *MeshBufferData) Description() string {
+	defer runtime.KeepAlive(mbd)
 	return rt.Description(objref.IDOf(mbd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbd *MeshBufferData) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbd *MeshBufferData) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbd)
 	return rt.IsKind(objref.IDOf(mbd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbd *MeshBufferData) String() string {
+	defer runtime.KeepAlive(mbd)
 	return rt.Description(objref.IDOf(mbd))
 }
 
@@ -74,14 +81,15 @@ func NewMeshBufferDataWithTypeLength(type_ MeshBufferType, length int) *MeshBuff
 }
 
 // NewMeshBufferDataWithTypeData initializes a buffer containing the specified data.
-func NewMeshBufferDataWithTypeData(type_ MeshBufferType, data obj.Object) *MeshBufferData {
+func NewMeshBufferDataWithTypeData(type_ MeshBufferType, data []byte) *MeshBufferData {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMeshBufferData")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:data:"), type_, objref.IDOf(data))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:data:"), type_, rt.BytesToNSData(data))
 	return meshBufferDataAdopt(_id)
 }
 
 // Data returns the data.
-func (mbd *MeshBufferData) Data() obj.Object {
+func (mbd *MeshBufferData) Data() []byte {
+	defer runtime.KeepAlive(mbd)
 	_r := objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

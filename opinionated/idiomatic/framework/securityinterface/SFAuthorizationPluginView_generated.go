@@ -5,6 +5,7 @@
 package securityinterface
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func authorizationPluginViewAdopt(id objc.ID) *AuthorizationPluginView {
 
 // Description returns the object's -description text.
 func (apv *AuthorizationPluginView) Description() string {
+	defer runtime.KeepAlive(apv)
 	return rt.Description(objref.IDOf(apv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apv *AuthorizationPluginView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apv *AuthorizationPluginView) IsKind(className string) bool {
+	defer runtime.KeepAlive(apv)
 	return rt.IsKind(objref.IDOf(apv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apv *AuthorizationPluginView) String() string {
+	defer runtime.KeepAlive(apv)
 	return rt.Description(objref.IDOf(apv))
 }
 
@@ -77,64 +83,77 @@ func NewAuthorizationPluginViewWithCallbacksAndEngineRef(callbacks unsafe.Pointe
 
 // ButtonPressed tells the authorization plug-in that the user pressed a button in the custom view.
 func (apv *AuthorizationPluginView) ButtonPressed(inButtonType ButtonType) {
+	defer runtime.KeepAlive(apv)
 	objc.Send[objc.ID](objref.IDOf(apv), objc.RegisterName("buttonPressed:"), inButtonType)
 }
 
 // DidActivate tells the authorization plug-in when its user interface has become active.
 func (apv *AuthorizationPluginView) DidActivate() {
+	defer runtime.KeepAlive(apv)
 	objc.Send[objc.ID](objref.IDOf(apv), objc.RegisterName("didActivate"))
 }
 
 // WillActivateWithUser tells the authorization plug-in that its user interface is about to be made active by the Apple-provided Security Agent.
 func (apv *AuthorizationPluginView) WillActivateWithUser(inUserInformation obj.Object) {
+	defer runtime.KeepAlive(apv)
+	defer runtime.KeepAlive(inUserInformation)
 	objc.Send[objc.ID](objref.IDOf(apv), objc.RegisterName("willActivateWithUser:"), objref.IDOf(inUserInformation))
 }
 
 // DidDeactivate tells the authorization plug-in that its user interface has been deactivated.
 func (apv *AuthorizationPluginView) DidDeactivate() {
+	defer runtime.KeepAlive(apv)
 	objc.Send[objc.ID](objref.IDOf(apv), objc.RegisterName("didDeactivate"))
 }
 
 // FirstKeyView returns the first view in the keyboard loop of the view.
 func (apv *AuthorizationPluginView) FirstKeyView() obj.Object {
+	defer runtime.KeepAlive(apv)
 	_r := objc.Send[objc.ID](objref.IDOf(apv), objc.RegisterName("firstKeyView"))
 	return obj.Wrap(_r)
 }
 
 // FirstResponder returns the view that should get focus for keyboard events.
 func (apv *AuthorizationPluginView) FirstResponder() obj.Object {
+	defer runtime.KeepAlive(apv)
 	_r := objc.Send[objc.ID](objref.IDOf(apv), objc.RegisterName("firstResponder"))
 	return obj.Wrap(_r)
 }
 
 // LastKeyView returns the last view in the keyboard loop of the view.
 func (apv *AuthorizationPluginView) LastKeyView() obj.Object {
+	defer runtime.KeepAlive(apv)
 	_r := objc.Send[objc.ID](objref.IDOf(apv), objc.RegisterName("lastKeyView"))
 	return obj.Wrap(_r)
 }
 
 // SetEnabled enables or disables the controls in the authorization plug-in’s view.
 func (apv *AuthorizationPluginView) SetEnabled(inEnabled bool) {
+	defer runtime.KeepAlive(apv)
 	objc.Send[objc.ID](objref.IDOf(apv), objc.RegisterName("setEnabled:"), inEnabled)
 }
 
 // ViewForType returns the appropriate view object for the specified view type.
 func (apv *AuthorizationPluginView) ViewForType(inType ViewType) obj.Object {
+	defer runtime.KeepAlive(apv)
 	_r := objc.Send[objc.ID](objref.IDOf(apv), objc.RegisterName("viewForType:"), inType)
 	return obj.Wrap(_r)
 }
 
 // DisplayView displays the user interface provided by the authorization plug-in view subclass.
 func (apv *AuthorizationPluginView) DisplayView() {
+	defer runtime.KeepAlive(apv)
 	objc.Send[objc.ID](objref.IDOf(apv), objc.RegisterName("displayView"))
 }
 
 // SetButtonEnabled enables or disables a button in the authorization plug-in’s user interface.
 func (apv *AuthorizationPluginView) SetButtonEnabled(inButtonType ButtonType, inEnabled bool) {
+	defer runtime.KeepAlive(apv)
 	objc.Send[objc.ID](objref.IDOf(apv), objc.RegisterName("setButton:enabled:"), inButtonType, inEnabled)
 }
 
 // UpdateView tells the authorization plug-in to get and display the appropriate view in the authorization plug-in’s user interface.
 func (apv *AuthorizationPluginView) UpdateView() {
+	defer runtime.KeepAlive(apv)
 	objc.Send[objc.ID](objref.IDOf(apv), objc.RegisterName("updateView"))
 }

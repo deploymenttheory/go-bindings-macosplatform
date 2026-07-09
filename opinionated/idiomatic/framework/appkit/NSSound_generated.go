@@ -5,8 +5,12 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +51,27 @@ func soundAdopt(id objc.ID) *Sound {
 
 // Description returns the object's -description text.
 func (s *Sound) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Sound) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Sound) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Sound) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -81,14 +90,15 @@ func NewSoundWithContentsOfFileByReference(path string, byRef bool) *Sound {
 }
 
 // NewSoundWithData initializes the receiver with a given audio data.
-func NewSoundWithData(data obj.Object) *Sound {
+func NewSoundWithData(data []byte) *Sound {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSound")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), rt.BytesToNSData(data))
 	return soundAdopt(_id)
 }
 
 // NewSoundWithPasteboard initializes the receiver with data from a pasteboard. The pasteboard should contain a type returned by NSSound. NSSound expects the data to have a proper magic number, sound header, and data for the formats it supports.
 func NewSoundWithPasteboard(pasteboard *Pasteboard) *Sound {
+	defer runtime.KeepAlive(pasteboard)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSound")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPasteboard:"), objref.IDOf(pasteboard))
 	return soundAdopt(_id)
@@ -96,7 +106,18 @@ func NewSoundWithPasteboard(pasteboard *Pasteboard) *Sound {
 
 // WithName sets the name assigned to the sound.
 func (s *Sound) WithName(name obj.Object) *Sound {
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setName:"), objref.IDOf(name))
+	return s
+}
+
+// WithDelegate sets the sound’s delegate.
+func (s *Sound) WithDelegate(delegate SoundDelegate) *Sound {
+	_shim := newSoundDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(s), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(s), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
 	return s
 }
 
@@ -120,88 +141,105 @@ func (s *Sound) WithLoops(loops bool) *Sound {
 
 // WithPlaybackDeviceIdentifier sets identifies the sound’s output device
 func (s *Sound) WithPlaybackDeviceIdentifier(playbackDeviceIdentifier obj.Object) *Sound {
+	defer runtime.KeepAlive(playbackDeviceIdentifier)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPlaybackDeviceIdentifier:"), objref.IDOf(playbackDeviceIdentifier))
 	return s
 }
 
 // WriteToPasteboard writes the receiver’s data to a pasteboard.
 func (s *Sound) WriteToPasteboard(pasteboard *Pasteboard) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(pasteboard)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("writeToPasteboard:"), objref.IDOf(pasteboard))
 }
 
 // Play reports whether initiates audio playback.
 func (s *Sound) Play() bool {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("play"))
 	return _r
 }
 
 // Pause reports whether pauses audio playback.
 func (s *Sound) Pause() bool {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("pause"))
 	return _r
 }
 
 // Resume reports whether resumes audio playback.
 func (s *Sound) Resume() bool {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("resume"))
 	return _r
 }
 
 // Stop reports whether concludes audio playback.
 func (s *Sound) Stop() bool {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("stop"))
 	return _r
 }
 
 // SetChannelMapping specifies the receiver’s channel map.
 func (s *Sound) SetChannelMapping(channelMapping obj.Object) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(channelMapping)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setChannelMapping:"), objref.IDOf(channelMapping))
 }
 
 // ChannelMapping provides the receiver’s channel map.
 func (s *Sound) ChannelMapping() obj.Object {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("channelMapping"))
 	return obj.Wrap(_r)
 }
 
 // Name returns the name.
-func (s *Sound) Name() obj.Object {
+func (s *Sound) Name() *foundation.String {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("name"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // IsPlaying reports whether the object is playing.
 func (s *Sound) IsPlaying() bool {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isPlaying"))
 	return _r
 }
 
 // Duration returns the duration.
 func (s *Sound) Duration() float64 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("duration"))
 	return _r
 }
 
 // Volume returns the volume.
 func (s *Sound) Volume() float32 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float32](objref.IDOf(s), objc.RegisterName("volume"))
 	return _r
 }
 
 // CurrentTime returns the current time.
 func (s *Sound) CurrentTime() float64 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("currentTime"))
 	return _r
 }
 
 // Loops wraps the corresponding Objective-C method.
 func (s *Sound) Loops() bool {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("loops"))
 	return _r
 }
 
 // PlaybackDeviceIdentifier returns the playback device identifier.
-func (s *Sound) PlaybackDeviceIdentifier() obj.Object {
+func (s *Sound) PlaybackDeviceIdentifier() *foundation.String {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("playbackDeviceIdentifier"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }

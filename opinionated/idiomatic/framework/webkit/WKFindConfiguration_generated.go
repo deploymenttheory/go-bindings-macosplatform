@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func wKFindConfigurationAdopt(id objc.ID) *WKFindConfiguration {
 
 // Description returns the object's -description text.
 func (wfc *WKFindConfiguration) Description() string {
+	defer runtime.KeepAlive(wfc)
 	return rt.Description(objref.IDOf(wfc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wfc *WKFindConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wfc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wfc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wfc *WKFindConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(wfc)
 	return rt.IsKind(objref.IDOf(wfc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wfc *WKFindConfiguration) String() string {
+	defer runtime.KeepAlive(wfc)
 	return rt.Description(objref.IDOf(wfc))
 }
 
@@ -104,6 +111,7 @@ func (wfc *WKFindConfiguration) WithWraps(wraps bool) *WKFindConfiguration {
 
 // Backwards wraps the corresponding Objective-C method.
 func (wfc *WKFindConfiguration) Backwards() bool {
+	defer runtime.KeepAlive(wfc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -117,6 +125,7 @@ func (wfc *WKFindConfiguration) Backwards() bool {
 
 // CaseSensitive wraps the corresponding Objective-C method.
 func (wfc *WKFindConfiguration) CaseSensitive() bool {
+	defer runtime.KeepAlive(wfc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -130,6 +139,7 @@ func (wfc *WKFindConfiguration) CaseSensitive() bool {
 
 // Wraps wraps the corresponding Objective-C method.
 func (wfc *WKFindConfiguration) Wraps() bool {
+	defer runtime.KeepAlive(wfc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

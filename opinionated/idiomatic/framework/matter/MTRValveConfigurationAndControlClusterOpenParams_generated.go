@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRValveConfigurationAndControlClusterOpenParamsAdopt(id objc.ID) *MTRValve
 
 // Description returns the object's -description text.
 func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) Description() string {
+	defer runtime.KeepAlive(mvcaccop)
 	return rt.Description(objref.IDOf(mvcaccop))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mvcaccop)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mvcaccop), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mvcaccop)
 	return rt.IsKind(objref.IDOf(mvcaccop), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) String() string {
+	defer runtime.KeepAlive(mvcaccop)
 	return rt.Description(objref.IDOf(mvcaccop))
 }
 
@@ -72,48 +80,56 @@ func NewMTRValveConfigurationAndControlClusterOpenParams() *MTRValveConfiguratio
 
 // WithOpenDuration sets the open duration.
 func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) WithOpenDuration(openDuration obj.Object) *MTRValveConfigurationAndControlClusterOpenParams {
+	defer runtime.KeepAlive(openDuration)
 	objc.Send[objc.ID](objref.IDOf(mvcaccop), objc.RegisterName("setOpenDuration:"), objref.IDOf(openDuration))
 	return mvcaccop
 }
 
 // WithTargetLevel sets the target level.
 func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) WithTargetLevel(targetLevel obj.Object) *MTRValveConfigurationAndControlClusterOpenParams {
+	defer runtime.KeepAlive(targetLevel)
 	objc.Send[objc.ID](objref.IDOf(mvcaccop), objc.RegisterName("setTargetLevel:"), objref.IDOf(targetLevel))
 	return mvcaccop
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRValveConfigurationAndControlClusterOpenParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mvcaccop), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mvcaccop
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRValveConfigurationAndControlClusterOpenParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mvcaccop), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mvcaccop
 }
 
 // OpenDuration returns the open duration.
-func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) OpenDuration() obj.Object {
+func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) OpenDuration() *foundation.Number {
+	defer runtime.KeepAlive(mvcaccop)
 	_r := objc.Send[objc.ID](objref.IDOf(mvcaccop), objc.RegisterName("openDuration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TargetLevel returns the target level.
-func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) TargetLevel() obj.Object {
+func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) TargetLevel() *foundation.Number {
+	defer runtime.KeepAlive(mvcaccop)
 	_r := objc.Send[objc.ID](objref.IDOf(mvcaccop), objc.RegisterName("targetLevel"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) TimedInvokeTimeoutMs() obj.Object {
+func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mvcaccop)
 	_r := objc.Send[objc.ID](objref.IDOf(mvcaccop), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) ServerSideProcessingTimeout() obj.Object {
+func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mvcaccop)
 	_r := objc.Send[objc.ID](objref.IDOf(mvcaccop), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

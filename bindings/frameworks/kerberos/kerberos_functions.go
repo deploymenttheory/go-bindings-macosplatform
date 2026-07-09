@@ -952,20 +952,20 @@ func AddErrorTable(et *ErrorTable) int {
 
 // C function: apple_gss_krb5_export_authdata_if_relevant_context
 // Deprecated: Use GSS.framework
-func AppleGssKrb5ExportAuthdataIfRelevantContext(minor_status *uint32, context_handle unsafe.Pointer, version uint32, kctx unsafe.Pointer) uint32 {
-	return _apple_gss_krb5_export_authdata_if_relevant_context(minor_status, context_handle, version, kctx)
+func AppleGssKrb5ExportAuthdataIfRelevantContext(minorStatus *uint32, contextHandle unsafe.Pointer, version uint32, kctx unsafe.Pointer) uint32 {
+	return _apple_gss_krb5_export_authdata_if_relevant_context(minorStatus, contextHandle, version, kctx)
 }
 
 // C function: apple_gss_krb5_free_authdata_if_relevant
 // Deprecated: Use GSS.framework
-func AppleGssKrb5FreeAuthdataIfRelevant(minor_status *uint32, kctx unsafe.Pointer) uint32 {
-	return _apple_gss_krb5_free_authdata_if_relevant(minor_status, kctx)
+func AppleGssKrb5FreeAuthdataIfRelevant(minorStatus *uint32, kctx unsafe.Pointer) uint32 {
+	return _apple_gss_krb5_free_authdata_if_relevant(minorStatus, kctx)
 }
 
 // \ingroup cc_context_reference \param out_context on exit, a new context object.  Must be free with cc_context_release(). \param in_version  the requested API version.  This should be the maximum version the application supports. \param out_supported_version if non-NULL, on exit contains the maximum API version supported by the implementation. \param out_vendor if non-NULL, on exit contains a pointer to a read-only C string which contains a string describing the vendor which implemented the credentials cache API. \return On success, #ccNoError.  On failure, an error code representing the failure. May return CCAPI v2 error CC_BAD_API_VERSION if #ccapi_version_2 is passed in. \brief Initialize a new cc_context.
 // C function: cc_initialize
-func CcInitialize(out_context **CcContextD, in_version int32, out_supported_version *int32, out_vendor string) int32 {
-	return _cc_initialize(out_context, in_version, out_supported_version, out_vendor)
+func CcInitialize(outContext **CcContextD, inVersion int32, outSupportedVersion *int32, outVendor string) int32 {
+	return _cc_initialize(outContext, inVersion, outSupportedVersion, outVendor)
 }
 
 // C function: com_err_va
@@ -1124,38 +1124,38 @@ func GssInquireNamesForMech(arg *uint32, arg2 *gss.GssOIDDescStruct, arg3 **gss.
 
 // C function: gss_krb5_ccache_name
 // Deprecated: Use GSS.framework
-func GssKrb5CcacheName(minor_status *uint32, name string, out_name string) uint32 {
-	return _gss_krb5_ccache_name(minor_status, name, out_name)
+func GssKrb5CcacheName(minorStatus *uint32, name string, outName string) uint32 {
+	return _gss_krb5_ccache_name(minorStatus, name, outName)
 }
 
 // C function: gss_krb5_copy_ccache
 // Deprecated: Use GSS.framework
-func GssKrb5CopyCcache(minor_status *uint32, cred_handle unsafe.Pointer, out_ccache unsafe.Pointer) uint32 {
-	return _gss_krb5_copy_ccache(minor_status, cred_handle, out_ccache)
+func GssKrb5CopyCcache(minorStatus *uint32, credHandle unsafe.Pointer, outCcache unsafe.Pointer) uint32 {
+	return _gss_krb5_copy_ccache(minorStatus, credHandle, outCcache)
 }
 
 // C function: gss_krb5_export_lucid_sec_context
 // Deprecated: Use GSS.framework
-func GssKrb5ExportLucidSecContext(minor_status *uint32, context_handle unsafe.Pointer, version uint32, kctx unsafe.Pointer) uint32 {
-	return _gss_krb5_export_lucid_sec_context(minor_status, context_handle, version, kctx)
+func GssKrb5ExportLucidSecContext(minorStatus *uint32, contextHandle unsafe.Pointer, version uint32, kctx unsafe.Pointer) uint32 {
+	return _gss_krb5_export_lucid_sec_context(minorStatus, contextHandle, version, kctx)
 }
 
 // C function: gss_krb5_free_lucid_sec_context
 // Deprecated: Use GSS.framework
-func GssKrb5FreeLucidSecContext(minor_status *uint32, kctx unsafe.Pointer) uint32 {
-	return _gss_krb5_free_lucid_sec_context(minor_status, kctx)
+func GssKrb5FreeLucidSecContext(minorStatus *uint32, kctx unsafe.Pointer) uint32 {
+	return _gss_krb5_free_lucid_sec_context(minorStatus, kctx)
 }
 
 // C function: gss_krb5_get_tkt_flags
 // Deprecated: Use GSS.framework
-func GssKrb5GetTktFlags(minor_status *uint32, context_handle unsafe.Pointer, ticket_flags *int) uint32 {
-	return _gss_krb5_get_tkt_flags(minor_status, context_handle, ticket_flags)
+func GssKrb5GetTktFlags(minorStatus *uint32, contextHandle unsafe.Pointer, ticketFlags *int) uint32 {
+	return _gss_krb5_get_tkt_flags(minorStatus, contextHandle, ticketFlags)
 }
 
 // C function: gss_krb5_set_allowable_enctypes
 // Deprecated: Use GSS.framework
-func GssKrb5SetAllowableEnctypes(minor_status *uint32, cred unsafe.Pointer, num_ktypes uint32, ktypes *int) uint32 {
-	return _gss_krb5_set_allowable_enctypes(minor_status, cred, num_ktypes, ktypes)
+func GssKrb5SetAllowableEnctypes(minorStatus *uint32, cred unsafe.Pointer, numKtypes uint32, ktypes *int) uint32 {
+	return _gss_krb5_set_allowable_enctypes(minorStatus, cred, numKtypes, ktypes)
 }
 
 // C function: gss_krb5_ui
@@ -1330,14 +1330,14 @@ func Krb5AnameToLocalname(arg unsafe.Pointer, arg2 *Krb5PrincipalData, arg3 int,
 
 // C function: krb5_appdefault_boolean
 // Deprecated: Use GSS.framework
-func Krb5AppdefaultBoolean(context_ unsafe.Pointer, appname string, realm *Krb5Data, option string, default_value int, ret_value *int32) {
-	_krb5_appdefault_boolean(context_, appname, realm, option, default_value, ret_value)
+func Krb5AppdefaultBoolean(context_ unsafe.Pointer, appname string, realm *Krb5Data, option string, defaultValue int, retValue *int32) {
+	_krb5_appdefault_boolean(context_, appname, realm, option, defaultValue, retValue)
 }
 
 // C function: krb5_appdefault_string
 // Deprecated: Use GSS.framework
-func Krb5AppdefaultString(context_ unsafe.Pointer, appname string, realm *Krb5Data, option string, default_value string, ret_value string) {
-	_krb5_appdefault_string(context_, appname, realm, option, default_value, ret_value)
+func Krb5AppdefaultString(context_ unsafe.Pointer, appname string, realm *Krb5Data, option string, defaultValue string, retValue string) {
+	_krb5_appdefault_string(context_, appname, realm, option, defaultValue, retValue)
 }
 
 // C function: krb5_auth_con_free
@@ -1486,14 +1486,14 @@ func Krb5CChecksumLength(context_ unsafe.Pointer, cksumtype int, length *uint) i
 
 // C function: krb5_c_decrypt
 // Deprecated: Use GSS.framework
-func Krb5CDecrypt(context_ unsafe.Pointer, key *Krb5Keyblock, usage int, cipher_state *Krb5Data, input *Krb5EncData, output *Krb5Data) int {
-	return _krb5_c_decrypt(context_, key, usage, cipher_state, input, output)
+func Krb5CDecrypt(context_ unsafe.Pointer, key *Krb5Keyblock, usage int, cipherState *Krb5Data, input *Krb5EncData, output *Krb5Data) int {
+	return _krb5_c_decrypt(context_, key, usage, cipherState, input, output)
 }
 
 // C function: krb5_c_encrypt
 // Deprecated: Use GSS.framework
-func Krb5CEncrypt(context_ unsafe.Pointer, key *Krb5Keyblock, usage int, cipher_state *Krb5Data, input *Krb5Data, output *Krb5EncData) int {
-	return _krb5_c_encrypt(context_, key, usage, cipher_state, input, output)
+func Krb5CEncrypt(context_ unsafe.Pointer, key *Krb5Keyblock, usage int, cipherState *Krb5Data, input *Krb5Data, output *Krb5EncData) int {
+	return _krb5_c_encrypt(context_, key, usage, cipherState, input, output)
 }
 
 // C function: krb5_c_encrypt_length
@@ -1516,8 +1516,8 @@ func Krb5CFreeState(context_ unsafe.Pointer, key *Krb5Keyblock, state *Krb5Data)
 
 // C function: krb5_c_init_state
 // Deprecated: Use GSS.framework
-func Krb5CInitState(context_ unsafe.Pointer, key *Krb5Keyblock, usage int, new_state *Krb5Data) int {
-	return _krb5_c_init_state(context_, key, usage, new_state)
+func Krb5CInitState(context_ unsafe.Pointer, key *Krb5Keyblock, usage int, newState *Krb5Data) int {
+	return _krb5_c_init_state(context_, key, usage, newState)
 }
 
 // C function: krb5_c_is_coll_proof_cksum
@@ -1546,14 +1546,14 @@ func Krb5CMakeChecksum(context_ unsafe.Pointer, cksumtype int, key *Krb5Keyblock
 
 // C function: krb5_c_make_random_key
 // Deprecated: Use GSS.framework
-func Krb5CMakeRandomKey(context_ unsafe.Pointer, enctype int, k5_random_key *Krb5Keyblock) int {
-	return _krb5_c_make_random_key(context_, enctype, k5_random_key)
+func Krb5CMakeRandomKey(context_ unsafe.Pointer, enctype int, k5RandomKey *Krb5Keyblock) int {
+	return _krb5_c_make_random_key(context_, enctype, k5RandomKey)
 }
 
 // C function: krb5_c_random_add_entropy
 // Deprecated: Use GSS.framework
-func Krb5CRandomAddEntropy(context_ unsafe.Pointer, randsource_id uint, data *Krb5Data) int {
-	return _krb5_c_random_add_entropy(context_, randsource_id, data)
+func Krb5CRandomAddEntropy(context_ unsafe.Pointer, randsourceId uint, data *Krb5Data) int {
+	return _krb5_c_random_add_entropy(context_, randsourceId, data)
 }
 
 // C function: krb5_c_random_make_octets
@@ -1606,8 +1606,8 @@ func Krb5CVerifyChecksum(context_ unsafe.Pointer, key *Krb5Keyblock, usage int, 
 
 // C function: krb5_calculate_checksum
 // Deprecated: Use GSS.framework
-func Krb5CalculateChecksum(context_ unsafe.Pointer, ctype int, in unsafe.Pointer, in_length uint, seed unsafe.Pointer, seed_length uint, outcksum *Krb5Checksum) int {
-	return _krb5_calculate_checksum(context_, ctype, in, in_length, seed, seed_length, outcksum)
+func Krb5CalculateChecksum(context_ unsafe.Pointer, ctype int, in unsafe.Pointer, inLength uint, seed unsafe.Pointer, seedLength uint, outcksum *Krb5Checksum) int {
+	return _krb5_calculate_checksum(context_, ctype, in, inLength, seed, seedLength, outcksum)
 }
 
 // C function: krb5_cc_cache_match
@@ -1690,8 +1690,8 @@ func Krb5CcInitialize(context_ unsafe.Pointer, cache unsafe.Pointer, principal *
 
 // C function: krb5_cc_last_change_time
 // Deprecated: Use GSS.framework
-func Krb5CcLastChangeTime(context_ unsafe.Pointer, ccache unsafe.Pointer, change_time *int) int {
-	return _krb5_cc_last_change_time(context_, ccache, change_time)
+func Krb5CcLastChangeTime(context_ unsafe.Pointer, ccache unsafe.Pointer, changeTime *int) int {
+	return _krb5_cc_last_change_time(context_, ccache, changeTime)
 }
 
 // C function: krb5_cc_lock
@@ -1792,8 +1792,8 @@ func Krb5CccolCursorNext(context_ unsafe.Pointer, cursor unsafe.Pointer, ccache 
 
 // C function: krb5_cccol_last_change_time
 // Deprecated: Use GSS.framework
-func Krb5CccolLastChangeTime(context_ unsafe.Pointer, change_time *int) int {
-	return _krb5_cccol_last_change_time(context_, change_time)
+func Krb5CccolLastChangeTime(context_ unsafe.Pointer, changeTime *int) int {
+	return _krb5_cccol_last_change_time(context_, changeTime)
 }
 
 // C function: krb5_cccol_lock
@@ -1810,8 +1810,8 @@ func Krb5CccolUnlock(context_ unsafe.Pointer) int {
 
 // C function: krb5_change_password
 // Deprecated: Use GSS.framework
-func Krb5ChangePassword(context_ unsafe.Pointer, creds *Krb5Creds, newpw string, result_code *int32, result_code_string *Krb5Data, result_string *Krb5Data) int {
-	return _krb5_change_password(context_, creds, newpw, result_code, result_code_string, result_string)
+func Krb5ChangePassword(context_ unsafe.Pointer, creds *Krb5Creds, newpw string, resultCode *int32, resultCodeString *Krb5Data, resultString *Krb5Data) int {
+	return _krb5_change_password(context_, creds, newpw, resultCode, resultCodeString, resultString)
 }
 
 // C function: krb5_checksum_size
@@ -2134,8 +2134,8 @@ func Krb5GetHostRealm(arg unsafe.Pointer, arg2 string, arg3 string) int {
 
 // C function: krb5_get_init_creds_keytab
 // Deprecated: Use GSS.framework
-func Krb5GetInitCredsKeytab(context_ unsafe.Pointer, creds *Krb5Creds, client *Krb5PrincipalData, arg_keytab unsafe.Pointer, start_time int, in_tkt_service string, k5_gic_options *Krb5GetInitCredsOpt) int {
-	return _krb5_get_init_creds_keytab(context_, creds, client, arg_keytab, start_time, in_tkt_service, k5_gic_options)
+func Krb5GetInitCredsKeytab(context_ unsafe.Pointer, creds *Krb5Creds, client *Krb5PrincipalData, argKeytab unsafe.Pointer, startTime int, inTktService string, k5GicOptions *Krb5GetInitCredsOpt) int {
+	return _krb5_get_init_creds_keytab(context_, creds, client, argKeytab, startTime, inTktService, k5GicOptions)
 }
 
 // C function: krb5_get_init_creds_opt_alloc
@@ -2176,8 +2176,8 @@ func Krb5GetInitCredsOptSetChangePasswordPrompt(opt *Krb5GetInitCredsOpt, prompt
 
 // C function: krb5_get_init_creds_opt_set_etype_list
 // Deprecated: Use GSS.framework
-func Krb5GetInitCredsOptSetEtypeList(opt *Krb5GetInitCredsOpt, etype_list *int, etype_list_length int) {
-	_krb5_get_init_creds_opt_set_etype_list(opt, etype_list, etype_list_length)
+func Krb5GetInitCredsOptSetEtypeList(opt *Krb5GetInitCredsOpt, etypeList *int, etypeListLength int) {
+	_krb5_get_init_creds_opt_set_etype_list(opt, etypeList, etypeListLength)
 }
 
 // C function: krb5_get_init_creds_opt_set_forwardable
@@ -2194,8 +2194,8 @@ func Krb5GetInitCredsOptSetPa(context_ unsafe.Pointer, opt *Krb5GetInitCredsOpt,
 
 // C function: krb5_get_init_creds_opt_set_preauth_list
 // Deprecated: Use GSS.framework
-func Krb5GetInitCredsOptSetPreauthList(opt *Krb5GetInitCredsOpt, preauth_list *int, preauth_list_length int) {
-	_krb5_get_init_creds_opt_set_preauth_list(opt, preauth_list, preauth_list_length)
+func Krb5GetInitCredsOptSetPreauthList(opt *Krb5GetInitCredsOpt, preauthList *int, preauthListLength int) {
+	_krb5_get_init_creds_opt_set_preauth_list(opt, preauthList, preauthListLength)
 }
 
 // C function: krb5_get_init_creds_opt_set_process_last_req
@@ -2212,8 +2212,8 @@ func Krb5GetInitCredsOptSetProxiable(opt *Krb5GetInitCredsOpt, proxiable int) {
 
 // C function: krb5_get_init_creds_opt_set_renew_life
 // Deprecated: Use GSS.framework
-func Krb5GetInitCredsOptSetRenewLife(opt *Krb5GetInitCredsOpt, renew_life int) {
-	_krb5_get_init_creds_opt_set_renew_life(opt, renew_life)
+func Krb5GetInitCredsOptSetRenewLife(opt *Krb5GetInitCredsOpt, renewLife int) {
+	_krb5_get_init_creds_opt_set_renew_life(opt, renewLife)
 }
 
 // C function: krb5_get_init_creds_opt_set_salt
@@ -2224,14 +2224,14 @@ func Krb5GetInitCredsOptSetSalt(opt *Krb5GetInitCredsOpt, salt *Krb5Data) {
 
 // C function: krb5_get_init_creds_opt_set_tkt_life
 // Deprecated: Use GSS.framework
-func Krb5GetInitCredsOptSetTktLife(opt *Krb5GetInitCredsOpt, tkt_life int) {
-	_krb5_get_init_creds_opt_set_tkt_life(opt, tkt_life)
+func Krb5GetInitCredsOptSetTktLife(opt *Krb5GetInitCredsOpt, tktLife int) {
+	_krb5_get_init_creds_opt_set_tkt_life(opt, tktLife)
 }
 
 // C function: krb5_get_init_creds_password
 // Deprecated: Use GSS.framework
-func Krb5GetInitCredsPassword(context_ unsafe.Pointer, creds *Krb5Creds, client *Krb5PrincipalData, password string, prompter unsafe.Pointer, data unsafe.Pointer, start_time int, in_tkt_service string, k5_gic_options *Krb5GetInitCredsOpt) int {
-	return _krb5_get_init_creds_password(context_, creds, client, password, prompter, data, start_time, in_tkt_service, k5_gic_options)
+func Krb5GetInitCredsPassword(context_ unsafe.Pointer, creds *Krb5Creds, client *Krb5PrincipalData, password string, prompter unsafe.Pointer, data unsafe.Pointer, startTime int, inTktService string, k5GicOptions *Krb5GetInitCredsOpt) int {
+	return _krb5_get_init_creds_password(context_, creds, client, password, prompter, data, startTime, inTktService, k5GicOptions)
 }
 
 // C function: krb5_get_permitted_enctypes
@@ -2254,8 +2254,8 @@ func Krb5GetPromptTypes(context_ unsafe.Pointer) *int {
 
 // C function: krb5_get_renewed_creds
 // Deprecated: Use GSS.framework
-func Krb5GetRenewedCreds(context_ unsafe.Pointer, creds *Krb5Creds, client *Krb5PrincipalData, ccache unsafe.Pointer, in_tkt_service string) int {
-	return _krb5_get_renewed_creds(context_, creds, client, ccache, in_tkt_service)
+func Krb5GetRenewedCreds(context_ unsafe.Pointer, creds *Krb5Creds, client *Krb5PrincipalData, ccache unsafe.Pointer, inTktService string) int {
+	return _krb5_get_renewed_creds(context_, creds, client, ccache, inTktService)
 }
 
 // C function: krb5_get_server_rcache
@@ -2272,8 +2272,8 @@ func Krb5GetTimeOffsets(arg unsafe.Pointer, arg2 *int, arg3 *int) int {
 
 // C function: krb5_get_validated_creds
 // Deprecated: Use GSS.framework
-func Krb5GetValidatedCreds(context_ unsafe.Pointer, creds *Krb5Creds, client *Krb5PrincipalData, ccache unsafe.Pointer, in_tkt_service string) int {
-	return _krb5_get_validated_creds(context_, creds, client, ccache, in_tkt_service)
+func Krb5GetValidatedCreds(context_ unsafe.Pointer, creds *Krb5Creds, client *Krb5PrincipalData, ccache unsafe.Pointer, inTktService string) int {
+	return _krb5_get_validated_creds(context_, creds, client, ccache, inTktService)
 }
 
 // C function: krb5_gss_register_acceptor_identity
@@ -2494,8 +2494,8 @@ func Krb5ProcessKey(context_ unsafe.Pointer, eblock *Krb5EncryptBlock, key *Krb5
 
 // C function: krb5_prompter_posix
 // Deprecated: Use GSS.framework
-func Krb5PrompterPosix(context_ unsafe.Pointer, data unsafe.Pointer, name string, banner string, num_prompts int, prompts *Krb5Prompt) int {
-	return _krb5_prompter_posix(context_, data, name, banner, num_prompts, prompts)
+func Krb5PrompterPosix(context_ unsafe.Pointer, data unsafe.Pointer, name string, banner string, numPrompts int, prompts *Krb5Prompt) int {
+	return _krb5_prompter_posix(context_, data, name, banner, numPrompts, prompts)
 }
 
 // C function: krb5_random_key
@@ -2596,14 +2596,14 @@ func Krb5SetDefaultTgsEnctypes(arg unsafe.Pointer, arg2 *int) int {
 
 // C function: krb5_set_password
 // Deprecated: Use GSS.framework
-func Krb5SetPassword(context_ unsafe.Pointer, creds *Krb5Creds, newpw string, change_password_for *Krb5PrincipalData, result_code *int32, result_code_string *Krb5Data, result_string *Krb5Data) int {
-	return _krb5_set_password(context_, creds, newpw, change_password_for, result_code, result_code_string, result_string)
+func Krb5SetPassword(context_ unsafe.Pointer, creds *Krb5Creds, newpw string, changePasswordFor *Krb5PrincipalData, resultCode *int32, resultCodeString *Krb5Data, resultString *Krb5Data) int {
+	return _krb5_set_password(context_, creds, newpw, changePasswordFor, resultCode, resultCodeString, resultString)
 }
 
 // C function: krb5_set_password_using_ccache
 // Deprecated: Use GSS.framework
-func Krb5SetPasswordUsingCcache(context_ unsafe.Pointer, ccache unsafe.Pointer, newpw string, change_password_for *Krb5PrincipalData, result_code *int32, result_code_string *Krb5Data, result_string *Krb5Data) int {
-	return _krb5_set_password_using_ccache(context_, ccache, newpw, change_password_for, result_code, result_code_string, result_string)
+func Krb5SetPasswordUsingCcache(context_ unsafe.Pointer, ccache unsafe.Pointer, newpw string, changePasswordFor *Krb5PrincipalData, resultCode *int32, resultCodeString *Krb5Data, resultString *Krb5Data) int {
+	return _krb5_set_password_using_ccache(context_, ccache, newpw, changePasswordFor, resultCode, resultCodeString, resultString)
 }
 
 // C function: krb5_set_principal_realm
@@ -2716,26 +2716,26 @@ func Krb5UseEnctype(context_ unsafe.Pointer, eblock *Krb5EncryptBlock, enctype i
 
 // C function: krb5_verify_checksum
 // Deprecated: Use GSS.framework
-func Krb5VerifyChecksum(context_ unsafe.Pointer, ctype int, cksum *Krb5Checksum, in unsafe.Pointer, in_length uint, seed unsafe.Pointer, seed_length uint) int {
-	return _krb5_verify_checksum(context_, ctype, cksum, in, in_length, seed, seed_length)
+func Krb5VerifyChecksum(context_ unsafe.Pointer, ctype int, cksum *Krb5Checksum, in unsafe.Pointer, inLength uint, seed unsafe.Pointer, seedLength uint) int {
+	return _krb5_verify_checksum(context_, ctype, cksum, in, inLength, seed, seedLength)
 }
 
 // C function: krb5_verify_init_creds
 // Deprecated: Use GSS.framework
-func Krb5VerifyInitCreds(context_ unsafe.Pointer, creds *Krb5Creds, ap_req_server *Krb5PrincipalData, ap_req_keytab unsafe.Pointer, ccache unsafe.Pointer, k5_vic_options *Krb5VerifyInitCredsOpt) int {
-	return _krb5_verify_init_creds(context_, creds, ap_req_server, ap_req_keytab, ccache, k5_vic_options)
+func Krb5VerifyInitCreds(context_ unsafe.Pointer, creds *Krb5Creds, apReqServer *Krb5PrincipalData, apReqKeytab unsafe.Pointer, ccache unsafe.Pointer, k5VicOptions *Krb5VerifyInitCredsOpt) int {
+	return _krb5_verify_init_creds(context_, creds, apReqServer, apReqKeytab, ccache, k5VicOptions)
 }
 
 // C function: krb5_verify_init_creds_opt_init
 // Deprecated: Use GSS.framework
-func Krb5VerifyInitCredsOptInit(k5_vic_options *Krb5VerifyInitCredsOpt) {
-	_krb5_verify_init_creds_opt_init(k5_vic_options)
+func Krb5VerifyInitCredsOptInit(k5VicOptions *Krb5VerifyInitCredsOpt) {
+	_krb5_verify_init_creds_opt_init(k5VicOptions)
 }
 
 // C function: krb5_verify_init_creds_opt_set_ap_req_nofail
 // Deprecated: Use GSS.framework
-func Krb5VerifyInitCredsOptSetApReqNofail(k5_vic_options *Krb5VerifyInitCredsOpt, ap_req_nofail int) {
-	_krb5_verify_init_creds_opt_set_ap_req_nofail(k5_vic_options, ap_req_nofail)
+func Krb5VerifyInitCredsOptSetApReqNofail(k5VicOptions *Krb5VerifyInitCredsOpt, apReqNofail int) {
+	_krb5_verify_init_creds_opt_set_ap_req_nofail(k5VicOptions, apReqNofail)
 }
 
 // C function: krb5_vset_error_message
@@ -2749,8 +2749,8 @@ func ProfileAbandon(profile unsafe.Pointer) {
 }
 
 // C function: profile_add_relation
-func ProfileAddRelation(profile unsafe.Pointer, names string, new_value string) int {
-	return _profile_add_relation(profile, names, new_value)
+func ProfileAddRelation(profile unsafe.Pointer, names string, newValue string) int {
+	return _profile_add_relation(profile, names, newValue)
 }
 
 // C function: profile_clear_relation
@@ -2789,43 +2789,43 @@ func ProfileFreeList(list string) {
 }
 
 // C function: profile_get_boolean
-func ProfileGetBoolean(profile unsafe.Pointer, name string, subname string, subsubname string, def_val int, ret_default *int32) int {
-	return _profile_get_boolean(profile, name, subname, subsubname, def_val, ret_default)
+func ProfileGetBoolean(profile unsafe.Pointer, name string, subname string, subsubname string, defVal int, retDefault *int32) int {
+	return _profile_get_boolean(profile, name, subname, subsubname, defVal, retDefault)
 }
 
 // C function: profile_get_integer
-func ProfileGetInteger(profile unsafe.Pointer, name string, subname string, subsubname string, def_val int, ret_default *int32) int {
-	return _profile_get_integer(profile, name, subname, subsubname, def_val, ret_default)
+func ProfileGetInteger(profile unsafe.Pointer, name string, subname string, subsubname string, defVal int, retDefault *int32) int {
+	return _profile_get_integer(profile, name, subname, subsubname, defVal, retDefault)
 }
 
 // C function: profile_get_relation_names
-func ProfileGetRelationNames(profile unsafe.Pointer, names string, ret_names string) int {
-	return _profile_get_relation_names(profile, names, ret_names)
+func ProfileGetRelationNames(profile unsafe.Pointer, names string, retNames string) int {
+	return _profile_get_relation_names(profile, names, retNames)
 }
 
 // C function: profile_get_string
-func ProfileGetString(profile unsafe.Pointer, name string, subname string, subsubname string, def_val string, ret_string string) int {
-	return _profile_get_string(profile, name, subname, subsubname, def_val, ret_string)
+func ProfileGetString(profile unsafe.Pointer, name string, subname string, subsubname string, defVal string, retString string) int {
+	return _profile_get_string(profile, name, subname, subsubname, defVal, retString)
 }
 
 // C function: profile_get_subsection_names
-func ProfileGetSubsectionNames(profile unsafe.Pointer, names string, ret_names string) int {
-	return _profile_get_subsection_names(profile, names, ret_names)
+func ProfileGetSubsectionNames(profile unsafe.Pointer, names string, retNames string) int {
+	return _profile_get_subsection_names(profile, names, retNames)
 }
 
 // C function: profile_get_values
-func ProfileGetValues(profile unsafe.Pointer, names string, ret_values string) int {
-	return _profile_get_values(profile, names, ret_values)
+func ProfileGetValues(profile unsafe.Pointer, names string, retValues string) int {
+	return _profile_get_values(profile, names, retValues)
 }
 
 // C function: profile_init
-func ProfileInit(files *string, ret_profile unsafe.Pointer) int {
-	return _profile_init(files, ret_profile)
+func ProfileInit(files *string, retProfile unsafe.Pointer) int {
+	return _profile_init(files, retProfile)
 }
 
 // C function: profile_init_path
-func ProfileInitPath(filelist string, ret_profile unsafe.Pointer) int {
-	return _profile_init_path(filelist, ret_profile)
+func ProfileInitPath(filelist string, retProfile unsafe.Pointer) int {
+	return _profile_init_path(filelist, retProfile)
 }
 
 // C function: profile_is_modified
@@ -2839,18 +2839,18 @@ func ProfileIsWritable(profile unsafe.Pointer, writable *int32) int {
 }
 
 // C function: profile_iterator
-func ProfileIterator(iter_p unsafe.Pointer, ret_name string, ret_value string) int {
-	return _profile_iterator(iter_p, ret_name, ret_value)
+func ProfileIterator(iterP unsafe.Pointer, retName string, retValue string) int {
+	return _profile_iterator(iterP, retName, retValue)
 }
 
 // C function: profile_iterator_create
-func ProfileIteratorCreate(profile unsafe.Pointer, names string, flags int, ret_iter unsafe.Pointer) int {
-	return _profile_iterator_create(profile, names, flags, ret_iter)
+func ProfileIteratorCreate(profile unsafe.Pointer, names string, flags int, retIter unsafe.Pointer) int {
+	return _profile_iterator_create(profile, names, flags, retIter)
 }
 
 // C function: profile_iterator_free
-func ProfileIteratorFree(iter_p unsafe.Pointer) {
-	_profile_iterator_free(iter_p)
+func ProfileIteratorFree(iterP unsafe.Pointer) {
+	_profile_iterator_free(iterP)
 }
 
 // C function: profile_release
@@ -2864,13 +2864,13 @@ func ProfileReleaseString(str string) {
 }
 
 // C function: profile_rename_section
-func ProfileRenameSection(profile unsafe.Pointer, names string, new_name string) int {
-	return _profile_rename_section(profile, names, new_name)
+func ProfileRenameSection(profile unsafe.Pointer, names string, newName string) int {
+	return _profile_rename_section(profile, names, newName)
 }
 
 // C function: profile_update_relation
-func ProfileUpdateRelation(profile unsafe.Pointer, names string, old_value string, new_value string) int {
-	return _profile_update_relation(profile, names, old_value, new_value)
+func ProfileUpdateRelation(profile unsafe.Pointer, names string, oldValue string, newValue string) int {
+	return _profile_update_relation(profile, names, oldValue, newValue)
 }
 
 // C function: remove_error_table

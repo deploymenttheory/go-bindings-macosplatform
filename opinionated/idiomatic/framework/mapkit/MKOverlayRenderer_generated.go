@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func overlayRendererAdopt(id objc.ID) *OverlayRenderer {
 
 // Description returns the object's -description text.
 func (or *OverlayRenderer) Description() string {
+	defer runtime.KeepAlive(or)
 	return rt.Description(objref.IDOf(or))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (or *OverlayRenderer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(or)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(or), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (or *OverlayRenderer) IsKind(className string) bool {
+	defer runtime.KeepAlive(or)
 	return rt.IsKind(objref.IDOf(or), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (or *OverlayRenderer) String() string {
+	defer runtime.KeepAlive(or)
 	return rt.Description(objref.IDOf(or))
 }
 
@@ -76,17 +83,20 @@ func (or *OverlayRenderer) WithAlpha(alpha float64) *OverlayRenderer {
 
 // SetNeedsDisplay invalidates the entire contents of the overlay for all zoom scales.
 func (or *OverlayRenderer) SetNeedsDisplay() {
+	defer runtime.KeepAlive(or)
 	objc.Send[objc.ID](objref.IDOf(or), objc.RegisterName("setNeedsDisplay"))
 }
 
 // Alpha returns the alpha.
 func (or *OverlayRenderer) Alpha() float64 {
+	defer runtime.KeepAlive(or)
 	_r := objc.Send[float64](objref.IDOf(or), objc.RegisterName("alpha"))
 	return _r
 }
 
 // ContentScaleFactor returns the content scale factor.
 func (or *OverlayRenderer) ContentScaleFactor() float64 {
+	defer runtime.KeepAlive(or)
 	_r := objc.Send[float64](objref.IDOf(or), objc.RegisterName("contentScaleFactor"))
 	return _r
 }

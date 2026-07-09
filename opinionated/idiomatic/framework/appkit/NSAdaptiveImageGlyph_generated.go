@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,47 +49,55 @@ func adaptiveImageGlyphAdopt(id objc.ID) *AdaptiveImageGlyph {
 
 // Description returns the object's -description text.
 func (aig *AdaptiveImageGlyph) Description() string {
+	defer runtime.KeepAlive(aig)
 	return rt.Description(objref.IDOf(aig))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aig *AdaptiveImageGlyph) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aig)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aig), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aig *AdaptiveImageGlyph) IsKind(className string) bool {
+	defer runtime.KeepAlive(aig)
 	return rt.IsKind(objref.IDOf(aig), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aig *AdaptiveImageGlyph) String() string {
+	defer runtime.KeepAlive(aig)
 	return rt.Description(objref.IDOf(aig))
 }
 
 // NewAdaptiveImageGlyphWithImageContent create an adaptive image glyph from the previously saved data.
-func NewAdaptiveImageGlyphWithImageContent(imageContent obj.Object) *AdaptiveImageGlyph {
+func NewAdaptiveImageGlyphWithImageContent(imageContent []byte) *AdaptiveImageGlyph {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAdaptiveImageGlyph")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageContent:"), objref.IDOf(imageContent))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageContent:"), rt.BytesToNSData(imageContent))
 	return adaptiveImageGlyphAdopt(_id)
 }
 
 // NewAdaptiveImageGlyphWithCoder creates a new AdaptiveImageGlyph.
 func NewAdaptiveImageGlyphWithCoder(coder obj.Object) *AdaptiveImageGlyph {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAdaptiveImageGlyph")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return adaptiveImageGlyphAdopt(_id)
 }
 
 // ImageContent returns the image content.
-func (aig *AdaptiveImageGlyph) ImageContent() obj.Object {
+func (aig *AdaptiveImageGlyph) ImageContent() []byte {
+	defer runtime.KeepAlive(aig)
 	_r := objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("imageContent"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ContentIdentifier returns the content identifier.
 func (aig *AdaptiveImageGlyph) ContentIdentifier() string {
+	defer runtime.KeepAlive(aig)
 	_r := objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("contentIdentifier"))
 	if _r == 0 {
 		return ""
@@ -97,6 +107,7 @@ func (aig *AdaptiveImageGlyph) ContentIdentifier() string {
 
 // ContentDescription returns the content description.
 func (aig *AdaptiveImageGlyph) ContentDescription() string {
+	defer runtime.KeepAlive(aig)
 	_r := objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("contentDescription"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func webBackForwardListAdopt(id objc.ID) *WebBackForwardList {
 
 // Description returns the object's -description text.
 func (wbfl *WebBackForwardList) Description() string {
+	defer runtime.KeepAlive(wbfl)
 	return rt.Description(objref.IDOf(wbfl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wbfl *WebBackForwardList) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wbfl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wbfl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wbfl *WebBackForwardList) IsKind(className string) bool {
+	defer runtime.KeepAlive(wbfl)
 	return rt.IsKind(objref.IDOf(wbfl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wbfl *WebBackForwardList) String() string {
+	defer runtime.KeepAlive(wbfl)
 	return rt.Description(objref.IDOf(wbfl))
 }
 
@@ -80,91 +87,110 @@ func (wbfl *WebBackForwardList) WithCapacity(capacity int) *WebBackForwardList {
 
 // AddItem inserts an item into the back-forward list, immediately after the current item.
 func (wbfl *WebBackForwardList) AddItem(item *WebHistoryItem) {
+	defer runtime.KeepAlive(wbfl)
+	defer runtime.KeepAlive(item)
 	objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("addItem:"), objref.IDOf(item))
 }
 
 // GoBack moves backward one item in the back-forward list.
 func (wbfl *WebBackForwardList) GoBack() {
+	defer runtime.KeepAlive(wbfl)
 	objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("goBack"))
 }
 
 // GoForward moves forward one item in the back-forward list.
 func (wbfl *WebBackForwardList) GoForward() {
+	defer runtime.KeepAlive(wbfl)
 	objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("goForward"))
 }
 
 // GoToItem makes the specified item in the back-forward list the current item.
 func (wbfl *WebBackForwardList) GoToItem(item *WebHistoryItem) {
+	defer runtime.KeepAlive(wbfl)
+	defer runtime.KeepAlive(item)
 	objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("goToItem:"), objref.IDOf(item))
 }
 
 // BackListWithLimit returns the items that precede the current item in the back-forward list, up to the specified number of items.
 func (wbfl *WebBackForwardList) BackListWithLimit(limit int) obj.Object {
+	defer runtime.KeepAlive(wbfl)
 	_r := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("backListWithLimit:"), limit)
 	return obj.Wrap(_r)
 }
 
 // ForwardListWithLimit returns the items that follow the current item in the back-forward list, up to the specified number of items.
 func (wbfl *WebBackForwardList) ForwardListWithLimit(limit int) obj.Object {
+	defer runtime.KeepAlive(wbfl)
 	_r := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("forwardListWithLimit:"), limit)
 	return obj.Wrap(_r)
 }
 
 // ContainsItem returns a Boolean value indicating whether the back-forward list contains the specified item.
 func (wbfl *WebBackForwardList) ContainsItem(item *WebHistoryItem) bool {
+	defer runtime.KeepAlive(wbfl)
+	defer runtime.KeepAlive(item)
 	_r := objc.Send[bool](objref.IDOf(wbfl), objc.RegisterName("containsItem:"), objref.IDOf(item))
 	return _r
 }
 
 // ItemAtIndex returns the item at the specified index in the back-forward list.
 func (wbfl *WebBackForwardList) ItemAtIndex(index int) *WebHistoryItem {
+	defer runtime.KeepAlive(wbfl)
 	_r := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("itemAtIndex:"), index)
 	return WebHistoryItemFromID(_r)
 }
 
 // BackItem returns the entry right before the current entry, or nil if there isn't one.
 func (wbfl *WebBackForwardList) BackItem() *WebHistoryItem {
+	defer runtime.KeepAlive(wbfl)
 	_r := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("backItem"))
 	return WebHistoryItemFromID(_r)
 }
 
 // CurrentItem returns the current entry.
 func (wbfl *WebBackForwardList) CurrentItem() *WebHistoryItem {
+	defer runtime.KeepAlive(wbfl)
 	_r := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("currentItem"))
 	return WebHistoryItemFromID(_r)
 }
 
 // ForwardItem returns the entry right after the current entry, or nil if there isn't one.
 func (wbfl *WebBackForwardList) ForwardItem() *WebHistoryItem {
+	defer runtime.KeepAlive(wbfl)
 	_r := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("forwardItem"))
 	return WebHistoryItemFromID(_r)
 }
 
 // Capacity returns the list's maximum size.
 func (wbfl *WebBackForwardList) Capacity() int {
+	defer runtime.KeepAlive(wbfl)
 	_r := objc.Send[int](objref.IDOf(wbfl), objc.RegisterName("capacity"))
 	return _r
 }
 
 // BackListCount returns the number of items in the list.
 func (wbfl *WebBackForwardList) BackListCount() int {
+	defer runtime.KeepAlive(wbfl)
 	_r := objc.Send[int](objref.IDOf(wbfl), objc.RegisterName("backListCount"))
 	return _r
 }
 
 // ForwardListCount returns the forward list count.
 func (wbfl *WebBackForwardList) ForwardListCount() int {
+	defer runtime.KeepAlive(wbfl)
 	_r := objc.Send[int](objref.IDOf(wbfl), objc.RegisterName("forwardListCount"))
 	return _r
 }
 
 // SetPageCacheSize sets the maximum number of pages the receiver can cache.
 func (wbfl *WebBackForwardList) SetPageCacheSize(size int) {
+	defer runtime.KeepAlive(wbfl)
 	objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("setPageCacheSize:"), size)
 }
 
 // PageCacheSize returns the maximum number of pages that the receiver can cache.
 func (wbfl *WebBackForwardList) PageCacheSize() int {
+	defer runtime.KeepAlive(wbfl)
 	_r := objc.Send[int](objref.IDOf(wbfl), objc.RegisterName("pageCacheSize"))
 	return _r
 }

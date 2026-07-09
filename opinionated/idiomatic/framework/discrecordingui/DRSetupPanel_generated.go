@@ -5,6 +5,8 @@
 package discrecordingui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func setupPanelAdopt(id objc.ID) *SetupPanel {
 
 // Description returns the object's -description text.
 func (sp *SetupPanel) Description() string {
+	defer runtime.KeepAlive(sp)
 	return rt.Description(objref.IDOf(sp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sp *SetupPanel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sp *SetupPanel) IsKind(className string) bool {
+	defer runtime.KeepAlive(sp)
 	return rt.IsKind(objref.IDOf(sp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sp *SetupPanel) String() string {
+	defer runtime.KeepAlive(sp)
 	return rt.Description(objref.IDOf(sp))
 }
 
@@ -83,6 +90,7 @@ func NewSetupPanelWithNibName(nibName string) *SetupPanel {
 
 // RunSetupPanel returns displays the receiver and begins its event loop. Invokes NSApplication's
 func (sp *SetupPanel) RunSetupPanel() int {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -96,6 +104,8 @@ func (sp *SetupPanel) RunSetupPanel() int {
 
 // Ok invoked when the user clicks the panel's default button.
 func (sp *SetupPanel) Ok(sender obj.Object) {
+	defer runtime.KeepAlive(sp)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("ok:"), objref.IDOf(sender))
 	})
@@ -104,6 +114,8 @@ func (sp *SetupPanel) Ok(sender obj.Object) {
 
 // Cancel invoked when the user clicks the panel's cancel button.
 func (sp *SetupPanel) Cancel(sender obj.Object) {
+	defer runtime.KeepAlive(sp)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("cancel:"), objref.IDOf(sender))
 	})
@@ -112,6 +124,8 @@ func (sp *SetupPanel) Cancel(sender obj.Object) {
 
 // Eject invoked when the user clicks the panel's eject button.
 func (sp *SetupPanel) Eject(sender obj.Object) {
+	defer runtime.KeepAlive(sp)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("eject:"), objref.IDOf(sender))
 	})
@@ -120,6 +134,8 @@ func (sp *SetupPanel) Eject(sender obj.Object) {
 
 // Open invoked when the user clicks the panel's open button.
 func (sp *SetupPanel) Open(sender obj.Object) {
+	defer runtime.KeepAlive(sp)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("open:"), objref.IDOf(sender))
 	})
@@ -128,6 +144,8 @@ func (sp *SetupPanel) Open(sender obj.Object) {
 
 // Close invoked when the user clicks the panel's close button.
 func (sp *SetupPanel) Close(sender obj.Object) {
+	defer runtime.KeepAlive(sp)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("close:"), objref.IDOf(sender))
 	})
@@ -136,6 +154,8 @@ func (sp *SetupPanel) Close(sender obj.Object) {
 
 // DeviceSelectionChanged invoked when the user changes the device selected in the device popup. If the device currently selected is disconnected from the machine, the device popup will remove the device from itself and select a new device. This will act as if the user changed the device selected. Because of this, device may be nil if no eligible devices are currently connected to the machine.
 func (sp *SetupPanel) DeviceSelectionChanged(device obj.Object) {
+	defer runtime.KeepAlive(sp)
+	defer runtime.KeepAlive(device)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("deviceSelectionChanged:"), objref.IDOf(device))
 	})
@@ -144,6 +164,8 @@ func (sp *SetupPanel) DeviceSelectionChanged(device obj.Object) {
 
 // MediaStateChanged invoked when the media state of the currently selected device changes. This can include media being ejected, inserted, being used by another application, etc.
 func (sp *SetupPanel) MediaStateChanged(status obj.Object) bool {
+	defer runtime.KeepAlive(sp)
+	defer runtime.KeepAlive(status)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -157,6 +179,7 @@ func (sp *SetupPanel) MediaStateChanged(status obj.Object) bool {
 
 // SetupForDisplay this method is called immediately before panel is displayed on the screen. Any setup to be done in preparation for display should be done here.
 func (sp *SetupPanel) SetupForDisplay() {
+	defer runtime.KeepAlive(sp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setupForDisplay"))
 	})

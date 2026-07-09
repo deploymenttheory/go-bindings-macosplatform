@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func renderPipelineColorAttachmentDescriptorAdopt(id objc.ID) *RenderPipelineCol
 
 // Description returns the object's -description text.
 func (rpcad *RenderPipelineColorAttachmentDescriptor) Description() string {
+	defer runtime.KeepAlive(rpcad)
 	return rt.Description(objref.IDOf(rpcad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rpcad *RenderPipelineColorAttachmentDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rpcad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rpcad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rpcad *RenderPipelineColorAttachmentDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(rpcad)
 	return rt.IsKind(objref.IDOf(rpcad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rpcad *RenderPipelineColorAttachmentDescriptor) String() string {
+	defer runtime.KeepAlive(rpcad)
 	return rt.Description(objref.IDOf(rpcad))
 }
 
@@ -128,54 +135,63 @@ func (rpcad *RenderPipelineColorAttachmentDescriptor) WithWriteMask(writeMask Co
 
 // PixelFormat returns pixel format.  Defaults to MTLPixelFormatInvalid
 func (rpcad *RenderPipelineColorAttachmentDescriptor) PixelFormat() PixelFormat {
+	defer runtime.KeepAlive(rpcad)
 	_r := objc.Send[PixelFormat](objref.IDOf(rpcad), objc.RegisterName("pixelFormat"))
 	return _r
 }
 
 // IsBlendingEnabled reports whether enable blending. Defaults to false.
 func (rpcad *RenderPipelineColorAttachmentDescriptor) IsBlendingEnabled() bool {
+	defer runtime.KeepAlive(rpcad)
 	_r := objc.Send[bool](objref.IDOf(rpcad), objc.RegisterName("isBlendingEnabled"))
 	return _r
 }
 
 // SourceRGBBlendFactor returns defaults to MTLBlendFactorOne
 func (rpcad *RenderPipelineColorAttachmentDescriptor) SourceRGBBlendFactor() BlendFactor {
+	defer runtime.KeepAlive(rpcad)
 	_r := objc.Send[BlendFactor](objref.IDOf(rpcad), objc.RegisterName("sourceRGBBlendFactor"))
 	return _r
 }
 
 // DestinationRGBBlendFactor returns defaults to MTLBlendFactorZero
 func (rpcad *RenderPipelineColorAttachmentDescriptor) DestinationRGBBlendFactor() BlendFactor {
+	defer runtime.KeepAlive(rpcad)
 	_r := objc.Send[BlendFactor](objref.IDOf(rpcad), objc.RegisterName("destinationRGBBlendFactor"))
 	return _r
 }
 
 // RgbBlendOperation returns defaults to MTLBlendOperationAdd
 func (rpcad *RenderPipelineColorAttachmentDescriptor) RgbBlendOperation() BlendOperation {
+	defer runtime.KeepAlive(rpcad)
 	_r := objc.Send[BlendOperation](objref.IDOf(rpcad), objc.RegisterName("rgbBlendOperation"))
 	return _r
 }
 
 // SourceAlphaBlendFactor returns defaults to MTLBlendFactorOne
 func (rpcad *RenderPipelineColorAttachmentDescriptor) SourceAlphaBlendFactor() BlendFactor {
+	defer runtime.KeepAlive(rpcad)
 	_r := objc.Send[BlendFactor](objref.IDOf(rpcad), objc.RegisterName("sourceAlphaBlendFactor"))
 	return _r
 }
 
 // DestinationAlphaBlendFactor returns defaults to MTLBlendFactorZero
 func (rpcad *RenderPipelineColorAttachmentDescriptor) DestinationAlphaBlendFactor() BlendFactor {
+	defer runtime.KeepAlive(rpcad)
 	_r := objc.Send[BlendFactor](objref.IDOf(rpcad), objc.RegisterName("destinationAlphaBlendFactor"))
 	return _r
 }
 
 // AlphaBlendOperation returns defaults to MTLBlendOperationAdd
 func (rpcad *RenderPipelineColorAttachmentDescriptor) AlphaBlendOperation() BlendOperation {
+	defer runtime.KeepAlive(rpcad)
 	_r := objc.Send[BlendOperation](objref.IDOf(rpcad), objc.RegisterName("alphaBlendOperation"))
 	return _r
 }
 
 // WriteMask returns defaults to MTLColorWriteMaskAll
 func (rpcad *RenderPipelineColorAttachmentDescriptor) WriteMask() ColorWriteMask {
+	defer runtime.KeepAlive(rpcad)
 	_r := objc.Send[ColorWriteMask](objref.IDOf(rpcad), objc.RegisterName("writeMask"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,27 +47,33 @@ func mTRAsyncCallbackQueueWorkItemAdopt(id objc.ID) *MTRAsyncCallbackQueueWorkIt
 
 // Description returns the object's -description text.
 func (macqwi *MTRAsyncCallbackQueueWorkItem) Description() string {
+	defer runtime.KeepAlive(macqwi)
 	return rt.Description(objref.IDOf(macqwi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (macqwi *MTRAsyncCallbackQueueWorkItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(macqwi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(macqwi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (macqwi *MTRAsyncCallbackQueueWorkItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(macqwi)
 	return rt.IsKind(objref.IDOf(macqwi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (macqwi *MTRAsyncCallbackQueueWorkItem) String() string {
+	defer runtime.KeepAlive(macqwi)
 	return rt.Description(objref.IDOf(macqwi))
 }
 
 // NewMTRAsyncCallbackQueueWorkItemWithQueue creates a new MTRAsyncCallbackQueueWorkItem.
 func NewMTRAsyncCallbackQueueWorkItemWithQueue(queue obj.Object) *MTRAsyncCallbackQueueWorkItem {
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRAsyncCallbackQueueWorkItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQueue:"), objref.IDOf(queue))
 	return mTRAsyncCallbackQueueWorkItemAdopt(_id)
@@ -79,10 +87,12 @@ func (macqwi *MTRAsyncCallbackQueueWorkItem) WithCancelHandler(cancelHandler fun
 
 // EndWork ends work.
 func (macqwi *MTRAsyncCallbackQueueWorkItem) EndWork() {
+	defer runtime.KeepAlive(macqwi)
 	objc.Send[objc.ID](objref.IDOf(macqwi), objc.RegisterName("endWork"))
 }
 
 // RetryWork wraps the corresponding Objective-C method.
 func (macqwi *MTRAsyncCallbackQueueWorkItem) RetryWork() {
+	defer runtime.KeepAlive(macqwi)
 	objc.Send[objc.ID](objref.IDOf(macqwi), objc.RegisterName("retryWork"))
 }

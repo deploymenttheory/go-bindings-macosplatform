@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func labeledValueAdopt(id objc.ID) *LabeledValue {
 
 // Description returns the object's -description text.
 func (lv *LabeledValue) Description() string {
+	defer runtime.KeepAlive(lv)
 	return rt.Description(objref.IDOf(lv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lv *LabeledValue) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lv *LabeledValue) IsKind(className string) bool {
+	defer runtime.KeepAlive(lv)
 	return rt.IsKind(objref.IDOf(lv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lv *LabeledValue) String() string {
+	defer runtime.KeepAlive(lv)
 	return rt.Description(objref.IDOf(lv))
 }
 
@@ -75,6 +82,7 @@ func NewLabeledValueWithLabelValue(label string, value string) *LabeledValue {
 
 // Label returns the label.
 func (lv *LabeledValue) Label() string {
+	defer runtime.KeepAlive(lv)
 	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -84,6 +92,7 @@ func (lv *LabeledValue) Label() string {
 
 // Value returns the value.
 func (lv *LabeledValue) Value() string {
+	defer runtime.KeepAlive(lv)
 	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,12 +62,14 @@ func (ki *KeyboardInput) WithValueDidChangeHandler(valueDidChangeHandler func(ob
 
 // ButtonForKeyCode returns the button element for the specified key code.
 func (ki *KeyboardInput) ButtonForKeyCode(code int) *ControllerButtonInput {
+	defer runtime.KeepAlive(ki)
 	_r := objc.Send[objc.ID](objref.IDOf(ki), objc.RegisterName("buttonForKeyCode:"), code)
 	return ControllerButtonInputFromID(_r)
 }
 
 // IsAnyKeyPressed reports whether before querying any key for a value it might be useful to check if any key is actually pressed
 func (ki *KeyboardInput) IsAnyKeyPressed() bool {
+	defer runtime.KeepAlive(ki)
 	_r := objc.Send[bool](objref.IDOf(ki), objc.RegisterName("isAnyKeyPressed"))
 	return _r
 }

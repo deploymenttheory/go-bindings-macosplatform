@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -119,30 +121,35 @@ func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithPr
 
 // VertexFormat defines the format of the vertices in the vertex buffers. All keyframes share the same vertex format. Defaults to `MTLAttributeFormatFloat3`, corresponding to three packed floating point numbers.
 func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) VertexFormat() AttributeFormat {
+	defer runtime.KeepAlive(masmtgd)
 	_r := objc.Send[AttributeFormat](objref.IDOf(masmtgd), objc.RegisterName("vertexFormat"))
 	return _r
 }
 
 // VertexStride sets the stride, in bytes, between vertices in all the vertex buffer. All keyframes share the same vertex stride. This stride needs to be a multiple of the size of the vertex format you provide in the “vertexFormat“ property. Similarly, you are responsible for ensuring this stride matches the vertex format data type's alignment. Defaults to `0`, which signals the stride matches the size of the “vertexFormat“ data.
 func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) VertexStride() int {
+	defer runtime.KeepAlive(masmtgd)
 	_r := objc.Send[int](objref.IDOf(masmtgd), objc.RegisterName("vertexStride"))
 	return _r
 }
 
 // IndexType specifies the size of the indices the `indexBuffer` contains, which is typically either 16 or 32-bits for each index.
 func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) IndexType() IndexType {
+	defer runtime.KeepAlive(masmtgd)
 	_r := objc.Send[IndexType](objref.IDOf(masmtgd), objc.RegisterName("indexType"))
 	return _r
 }
 
 // TriangleCount returns declares the number of triangles in the vertex buffers that the buffer in the vertex buffers property references. All keyframes share the same triangle count.
 func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) TriangleCount() int {
+	defer runtime.KeepAlive(masmtgd)
 	_r := objc.Send[int](objref.IDOf(masmtgd), objc.RegisterName("triangleCount"))
 	return _r
 }
 
 // TransformationMatrixLayout returns configures the layout for the transformation matrix in the transformation matrix buffer. You can provide matrices in column-major or row-major form, and this property allows you to control how Metal interprets them. Defaults to `MTLMatrixLayoutColumnMajor`.
 func (masmtgd *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) TransformationMatrixLayout() MatrixLayout {
+	defer runtime.KeepAlive(masmtgd)
 	_r := objc.Send[MatrixLayout](objref.IDOf(masmtgd), objc.RegisterName("transformationMatrixLayout"))
 	return _r
 }

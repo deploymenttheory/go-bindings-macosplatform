@@ -5,6 +5,8 @@
 package corespotlight
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func searchQueryContextAdopt(id objc.ID) *SearchQueryContext {
 
 // Description returns the object's -description text.
 func (sqc *SearchQueryContext) Description() string {
+	defer runtime.KeepAlive(sqc)
 	return rt.Description(objref.IDOf(sqc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sqc *SearchQueryContext) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sqc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sqc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sqc *SearchQueryContext) IsKind(className string) bool {
+	defer runtime.KeepAlive(sqc)
 	return rt.IsKind(objref.IDOf(sqc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sqc *SearchQueryContext) String() string {
+	defer runtime.KeepAlive(sqc)
 	return rt.Description(objref.IDOf(sqc))
 }
 
@@ -98,6 +105,7 @@ func (sqc *SearchQueryContext) WithSourceOptions(sourceOptions SearchQuerySource
 //
 // FetchAttributes returns the collection as a Go slice.
 func (sqc *SearchQueryContext) FetchAttributes() []string {
+	defer runtime.KeepAlive(sqc)
 	_arr := objc.Send[objc.ID](objref.IDOf(sqc), objc.RegisterName("fetchAttributes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -106,12 +114,14 @@ func (sqc *SearchQueryContext) FetchAttributes() []string {
 //
 // FilterQueries returns the collection as a Go slice.
 func (sqc *SearchQueryContext) FilterQueries() []string {
+	defer runtime.KeepAlive(sqc)
 	_arr := objc.Send[objc.ID](objref.IDOf(sqc), objc.RegisterName("filterQueries"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // KeyboardLanguage returns the keyboard language.
 func (sqc *SearchQueryContext) KeyboardLanguage() string {
+	defer runtime.KeepAlive(sqc)
 	_r := objc.Send[objc.ID](objref.IDOf(sqc), objc.RegisterName("keyboardLanguage"))
 	if _r == 0 {
 		return ""
@@ -121,6 +131,7 @@ func (sqc *SearchQueryContext) KeyboardLanguage() string {
 
 // SourceOptions returns the source options.
 func (sqc *SearchQueryContext) SourceOptions() SearchQuerySourceOptions {
+	defer runtime.KeepAlive(sqc)
 	_r := objc.Send[SearchQuerySourceOptions](objref.IDOf(sqc), objc.RegisterName("sourceOptions"))
 	return _r
 }

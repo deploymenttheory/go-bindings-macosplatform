@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRThreadNetworkDiagnosticsClusterConnectionStatusEventAdopt(id objc.ID) *M
 
 // Description returns the object's -description text.
 func (mtndccse *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) Description() string {
+	defer runtime.KeepAlive(mtndccse)
 	return rt.Description(objref.IDOf(mtndccse))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtndccse *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtndccse)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtndccse), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtndccse *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtndccse)
 	return rt.IsKind(objref.IDOf(mtndccse), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtndccse *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) String() string {
+	defer runtime.KeepAlive(mtndccse)
 	return rt.Description(objref.IDOf(mtndccse))
 }
 
@@ -72,12 +80,14 @@ func NewMTRThreadNetworkDiagnosticsClusterConnectionStatusEvent() *MTRThreadNetw
 
 // WithConnectionStatus sets the connection status.
 func (mtndccse *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) WithConnectionStatus(connectionStatus obj.Object) *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent {
+	defer runtime.KeepAlive(connectionStatus)
 	objc.Send[objc.ID](objref.IDOf(mtndccse), objc.RegisterName("setConnectionStatus:"), objref.IDOf(connectionStatus))
 	return mtndccse
 }
 
 // ConnectionStatus returns the connection status.
-func (mtndccse *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) ConnectionStatus() obj.Object {
+func (mtndccse *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) ConnectionStatus() *foundation.Number {
+	defer runtime.KeepAlive(mtndccse)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndccse), objc.RegisterName("connectionStatus"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

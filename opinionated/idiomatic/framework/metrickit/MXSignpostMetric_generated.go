@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewSignpostMetric() *SignpostMetric {
 
 // SignpostName returns the name associated with this aggregated signpost.
 func (sm *SignpostMetric) SignpostName() string {
+	defer runtime.KeepAlive(sm)
 	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("signpostName"))
 	if _r == 0 {
 		return ""
@@ -62,6 +65,7 @@ func (sm *SignpostMetric) SignpostName() string {
 
 // SignpostCategory returns the category associated with this aggregated signpost.
 func (sm *SignpostMetric) SignpostCategory() string {
+	defer runtime.KeepAlive(sm)
 	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("signpostCategory"))
 	if _r == 0 {
 		return ""
@@ -71,12 +75,14 @@ func (sm *SignpostMetric) SignpostCategory() string {
 
 // SignpostIntervalData returns a class that encapsulates metrics associated with app specific signpost intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no intervals.
 func (sm *SignpostMetric) SignpostIntervalData() *SignpostIntervalData {
+	defer runtime.KeepAlive(sm)
 	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("signpostIntervalData"))
 	return SignpostIntervalDataFromID(_r)
 }
 
 // TotalCount returns the total number of signposts emit with the given signpostName in the aggregation period of the parent payload.
 func (sm *SignpostMetric) TotalCount() int {
+	defer runtime.KeepAlive(sm)
 	_r := objc.Send[int](objref.IDOf(sm), objc.RegisterName("totalCount"))
 	return _r
 }

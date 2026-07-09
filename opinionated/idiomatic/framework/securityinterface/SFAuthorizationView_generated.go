@@ -5,6 +5,8 @@
 package securityinterface
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func authorizationViewAdopt(id objc.ID) *AuthorizationView {
 
 // Description returns the object's -description text.
 func (av *AuthorizationView) Description() string {
+	defer runtime.KeepAlive(av)
 	return rt.Description(objref.IDOf(av))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (av *AuthorizationView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(av)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(av), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (av *AuthorizationView) IsKind(className string) bool {
+	defer runtime.KeepAlive(av)
 	return rt.IsKind(objref.IDOf(av), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (av *AuthorizationView) String() string {
+	defer runtime.KeepAlive(av)
 	return rt.Description(objref.IDOf(av))
 }
 
@@ -80,6 +87,7 @@ func NewAuthorizationView() *AuthorizationView {
 
 // SetString sets the requested-right string to use with the default authorization rights set.
 func (av *AuthorizationView) SetString(authorizationString string) {
+	defer runtime.KeepAlive(av)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setString:"), authorizationString)
 	})
@@ -88,6 +96,7 @@ func (av *AuthorizationView) SetString(authorizationString string) {
 
 // Authorization returns the authorization object associated with this view.
 func (av *AuthorizationView) Authorization() obj.Object {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -101,6 +110,8 @@ func (av *AuthorizationView) Authorization() obj.Object {
 
 // UpdateStatus manually updates the authorization view.
 func (av *AuthorizationView) UpdateStatus(inSender obj.Object) bool {
+	defer runtime.KeepAlive(av)
+	defer runtime.KeepAlive(inSender)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -114,6 +125,7 @@ func (av *AuthorizationView) UpdateStatus(inSender obj.Object) bool {
 
 // SetAutoupdate sets the authorization view to update itself automatically.
 func (av *AuthorizationView) SetAutoupdate(autoupdate bool) {
+	defer runtime.KeepAlive(av)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setAutoupdate:"), autoupdate)
 	})
@@ -122,6 +134,7 @@ func (av *AuthorizationView) SetAutoupdate(autoupdate bool) {
 
 // SetAutoupdateInterval sets the authorization view to update itself at a specific interval.
 func (av *AuthorizationView) SetAutoupdateInterval(autoupdate bool, interval float64) {
+	defer runtime.KeepAlive(av)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setAutoupdate:interval:"), autoupdate, interval)
 	})
@@ -130,6 +143,7 @@ func (av *AuthorizationView) SetAutoupdateInterval(autoupdate bool, interval flo
 
 // AuthorizationState returns the current state of the authorization view.
 func (av *AuthorizationView) AuthorizationState() AuthorizationViewState {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 AuthorizationViewState
 	purego.Main(func() {
 		_mainthread0 = func() AuthorizationViewState {
@@ -143,6 +157,7 @@ func (av *AuthorizationView) AuthorizationState() AuthorizationViewState {
 
 // SetEnabled sets the current state of the authorization view.
 func (av *AuthorizationView) SetEnabled(enabled bool) {
+	defer runtime.KeepAlive(av)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setEnabled:"), enabled)
 	})
@@ -151,6 +166,7 @@ func (av *AuthorizationView) SetEnabled(enabled bool) {
 
 // IsEnabled reports whether the authorization view is enabled (true) or disabled (false).
 func (av *AuthorizationView) IsEnabled() bool {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -164,6 +180,8 @@ func (av *AuthorizationView) IsEnabled() bool {
 
 // SetDelegate sets the delegate for this authorization view.
 func (av *AuthorizationView) SetDelegate(delegate obj.Object) {
+	defer runtime.KeepAlive(av)
+	defer runtime.KeepAlive(delegate)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	})
@@ -172,6 +190,7 @@ func (av *AuthorizationView) SetDelegate(delegate obj.Object) {
 
 // Delegate returns the delegate for this view.
 func (av *AuthorizationView) Delegate() obj.Object {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -185,6 +204,8 @@ func (av *AuthorizationView) Delegate() obj.Object {
 
 // Authorize attempts to unlock the lock icon in the view.
 func (av *AuthorizationView) Authorize(inSender obj.Object) bool {
+	defer runtime.KeepAlive(av)
+	defer runtime.KeepAlive(inSender)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -198,6 +219,8 @@ func (av *AuthorizationView) Authorize(inSender obj.Object) bool {
 
 // Deauthorize sets the authorization state to unauthorized and locks the lock icon in the view.
 func (av *AuthorizationView) Deauthorize(inSender obj.Object) bool {
+	defer runtime.KeepAlive(av)
+	defer runtime.KeepAlive(inSender)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

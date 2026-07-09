@@ -6,11 +6,14 @@ package avfoundation
 
 import (
 	"context"
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -54,33 +57,40 @@ func metadataItemAdopt(id objc.ID) *MetadataItem {
 
 // Description returns the object's -description text.
 func (mi *MetadataItem) Description() string {
+	defer runtime.KeepAlive(mi)
 	return rt.Description(objref.IDOf(mi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mi *MetadataItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mi *MetadataItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(mi)
 	return rt.IsKind(objref.IDOf(mi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mi *MetadataItem) String() string {
+	defer runtime.KeepAlive(mi)
 	return rt.Description(objref.IDOf(mi))
 }
 
 // Identifier returns the identifier.
-func (mi *MetadataItem) Identifier() obj.Object {
+func (mi *MetadataItem) Identifier() *foundation.String {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("identifier"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // ExtendedLanguageTag returns the extended language tag.
 func (mi *MetadataItem) ExtendedLanguageTag() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("extendedLanguageTag"))
 	if _r == 0 {
 		return ""
@@ -89,25 +99,29 @@ func (mi *MetadataItem) ExtendedLanguageTag() string {
 }
 
 // Locale returns the locale.
-func (mi *MetadataItem) Locale() obj.Object {
+func (mi *MetadataItem) Locale() *foundation.Locale {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("locale"))
-	return obj.Wrap(_r)
+	return foundation.LocaleFromID(_r)
 }
 
 // Time returns the time.
 func (mi *MetadataItem) Time() coremedia.CMTime {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(mi), objc.RegisterName("time"))
 	return _r
 }
 
 // Duration returns the duration.
 func (mi *MetadataItem) Duration() coremedia.CMTime {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(mi), objc.RegisterName("duration"))
 	return _r
 }
 
 // DataType returns the data type.
 func (mi *MetadataItem) DataType() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("dataType"))
 	if _r == 0 {
 		return ""
@@ -117,24 +131,28 @@ func (mi *MetadataItem) DataType() string {
 
 // Value returns the value.
 func (mi *MetadataItem) Value() obj.Object {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
 // ExtraAttributes returns the extra attributes.
 func (mi *MetadataItem) ExtraAttributes() obj.Object {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("extraAttributes"))
 	return obj.Wrap(_r)
 }
 
 // StartDate returns the start date.
-func (mi *MetadataItem) StartDate() obj.Object {
+func (mi *MetadataItem) StartDate() time.Time {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // StringValue returns the string value.
 func (mi *MetadataItem) StringValue() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""
@@ -143,25 +161,29 @@ func (mi *MetadataItem) StringValue() string {
 }
 
 // NumberValue returns the number value.
-func (mi *MetadataItem) NumberValue() obj.Object {
+func (mi *MetadataItem) NumberValue() *foundation.Number {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("numberValue"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DateValue returns the date value.
-func (mi *MetadataItem) DateValue() obj.Object {
+func (mi *MetadataItem) DateValue() time.Time {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("dateValue"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // DataValue returns the data value.
-func (mi *MetadataItem) DataValue() obj.Object {
+func (mi *MetadataItem) DataValue() []byte {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("dataValue"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
-// StatusOfValueForKeyError reports whether the value for a given key is immediately available without blocking.
-func (mi *MetadataItem) StatusOfValueForKeyError(key string) (result KeyValueStatus, err error) {
+// StatusOfValueForKey reports whether the value for a given key is immediately available without blocking.
+func (mi *MetadataItem) StatusOfValueForKey(key string) (result KeyValueStatus, err error) {
+	defer runtime.KeepAlive(mi)
 	var _nsErr uintptr
 	_r := objc.Send[KeyValueStatus](objref.IDOf(mi), objc.RegisterName("statusOfValueForKey:error:"), purego.NSString(key), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -174,6 +196,7 @@ func (mi *MetadataItem) StatusOfValueForKeyError(key string) (result KeyValueSta
 //
 // LoadValuesAsynchronouslyForKeys blocks until the operation completes or ctx is cancelled.
 func (mi *MetadataItem) LoadValuesAsynchronouslyForKeys(ctx context.Context, keys []string) error {
+	defer runtime.KeepAlive(mi)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -189,20 +212,23 @@ func (mi *MetadataItem) LoadValuesAsynchronouslyForKeys(ctx context.Context, key
 
 // Key returns the key.
 func (mi *MetadataItem) Key() obj.Object {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("key"))
 	return obj.Wrap(_r)
 }
 
 // CommonKey returns the common key.
-func (mi *MetadataItem) CommonKey() obj.Object {
+func (mi *MetadataItem) CommonKey() *foundation.String {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("commonKey"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // KeySpace returns the key space.
-func (mi *MetadataItem) KeySpace() obj.Object {
+func (mi *MetadataItem) KeySpace() *foundation.String {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("keySpace"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // isMetadataItem marks MetadataItem — and, by embedding promotion, its

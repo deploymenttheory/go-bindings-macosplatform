@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func webPreferencesAdopt(id objc.ID) *WebPreferences {
 
 // Description returns the object's -description text.
 func (wp *WebPreferences) Description() string {
+	defer runtime.KeepAlive(wp)
 	return rt.Description(objref.IDOf(wp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wp *WebPreferences) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wp *WebPreferences) IsKind(className string) bool {
+	defer runtime.KeepAlive(wp)
 	return rt.IsKind(objref.IDOf(wp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wp *WebPreferences) String() string {
+	defer runtime.KeepAlive(wp)
 	return rt.Description(objref.IDOf(wp))
 }
 
@@ -243,6 +250,7 @@ func (wp *WebPreferences) WithAllowsAirPlayForMediaPlayback(allowsAirPlayForMedi
 
 // Identifier returns the identifier.
 func (wp *WebPreferences) Identifier() string {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -252,6 +260,7 @@ func (wp *WebPreferences) Identifier() string {
 
 // StandardFontFamily returns the standard font family.
 func (wp *WebPreferences) StandardFontFamily() string {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("standardFontFamily"))
 	if _r == 0 {
 		return ""
@@ -261,6 +270,7 @@ func (wp *WebPreferences) StandardFontFamily() string {
 
 // FixedFontFamily returns the fixed font family.
 func (wp *WebPreferences) FixedFontFamily() string {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("fixedFontFamily"))
 	if _r == 0 {
 		return ""
@@ -270,6 +280,7 @@ func (wp *WebPreferences) FixedFontFamily() string {
 
 // SerifFontFamily returns the serif font family.
 func (wp *WebPreferences) SerifFontFamily() string {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("serifFontFamily"))
 	if _r == 0 {
 		return ""
@@ -279,6 +290,7 @@ func (wp *WebPreferences) SerifFontFamily() string {
 
 // SansSerifFontFamily returns the sans serif font family.
 func (wp *WebPreferences) SansSerifFontFamily() string {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("sansSerifFontFamily"))
 	if _r == 0 {
 		return ""
@@ -288,6 +300,7 @@ func (wp *WebPreferences) SansSerifFontFamily() string {
 
 // CursiveFontFamily returns the cursive font family.
 func (wp *WebPreferences) CursiveFontFamily() string {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("cursiveFontFamily"))
 	if _r == 0 {
 		return ""
@@ -297,6 +310,7 @@ func (wp *WebPreferences) CursiveFontFamily() string {
 
 // FantasyFontFamily returns the fantasy font family.
 func (wp *WebPreferences) FantasyFontFamily() string {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("fantasyFontFamily"))
 	if _r == 0 {
 		return ""
@@ -306,30 +320,35 @@ func (wp *WebPreferences) FantasyFontFamily() string {
 
 // DefaultFontSize returns the default font size.
 func (wp *WebPreferences) DefaultFontSize() int {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[int](objref.IDOf(wp), objc.RegisterName("defaultFontSize"))
 	return _r
 }
 
 // DefaultFixedFontSize returns the default fixed font size.
 func (wp *WebPreferences) DefaultFixedFontSize() int {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[int](objref.IDOf(wp), objc.RegisterName("defaultFixedFontSize"))
 	return _r
 }
 
 // MinimumFontSize returns the minimum font size.
 func (wp *WebPreferences) MinimumFontSize() int {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[int](objref.IDOf(wp), objc.RegisterName("minimumFontSize"))
 	return _r
 }
 
 // MinimumLogicalFontSize returns the minimum logical font size.
 func (wp *WebPreferences) MinimumLogicalFontSize() int {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[int](objref.IDOf(wp), objc.RegisterName("minimumLogicalFontSize"))
 	return _r
 }
 
 // DefaultTextEncodingName returns the default text encoding name.
 func (wp *WebPreferences) DefaultTextEncodingName() string {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("defaultTextEncodingName"))
 	if _r == 0 {
 		return ""
@@ -339,102 +358,119 @@ func (wp *WebPreferences) DefaultTextEncodingName() string {
 
 // UserStyleSheetEnabled wraps the corresponding Objective-C method.
 func (wp *WebPreferences) UserStyleSheetEnabled() bool {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("userStyleSheetEnabled"))
 	return _r
 }
 
 // UserStyleSheetLocation returns the location of the user style sheet.
-func (wp *WebPreferences) UserStyleSheetLocation() obj.Object {
+func (wp *WebPreferences) UserStyleSheetLocation() string {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("userStyleSheetLocation"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // IsJavaEnabled reports whether deprecated function that does nothing and always returns false.
 func (wp *WebPreferences) IsJavaEnabled() bool {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("isJavaEnabled"))
 	return _r
 }
 
 // IsJavaScriptEnabled reports whether the object is java script enabled.
 func (wp *WebPreferences) IsJavaScriptEnabled() bool {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("isJavaScriptEnabled"))
 	return _r
 }
 
 // JavaScriptCanOpenWindowsAutomatically wraps the corresponding Objective-C method.
 func (wp *WebPreferences) JavaScriptCanOpenWindowsAutomatically() bool {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("javaScriptCanOpenWindowsAutomatically"))
 	return _r
 }
 
 // ArePlugInsEnabled wraps the corresponding Objective-C method.
 func (wp *WebPreferences) ArePlugInsEnabled() bool {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("arePlugInsEnabled"))
 	return _r
 }
 
 // AllowsAnimatedImages wraps the corresponding Objective-C method.
 func (wp *WebPreferences) AllowsAnimatedImages() bool {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("allowsAnimatedImages"))
 	return _r
 }
 
 // AllowsAnimatedImageLooping wraps the corresponding Objective-C method.
 func (wp *WebPreferences) AllowsAnimatedImageLooping() bool {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("allowsAnimatedImageLooping"))
 	return _r
 }
 
 // LoadsImagesAutomatically wraps the corresponding Objective-C method.
 func (wp *WebPreferences) LoadsImagesAutomatically() bool {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("loadsImagesAutomatically"))
 	return _r
 }
 
 // Autosaves reports whether if autosaves is true the settings represented by WebPreferences will be stored in the user defaults database.
 func (wp *WebPreferences) Autosaves() bool {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("autosaves"))
 	return _r
 }
 
 // ShouldPrintBackgrounds wraps the corresponding Objective-C method.
 func (wp *WebPreferences) ShouldPrintBackgrounds() bool {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("shouldPrintBackgrounds"))
 	return _r
 }
 
 // PrivateBrowsingEnabled reports whether if private browsing is enabled, WebKit will not store information about sites the user visits.
 func (wp *WebPreferences) PrivateBrowsingEnabled() bool {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("privateBrowsingEnabled"))
 	return _r
 }
 
 // TabsToLinks reports whether if tabsToLinks is true, the tab key will focus links and form controls. The option key temporarily reverses this preference.
 func (wp *WebPreferences) TabsToLinks() bool {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("tabsToLinks"))
 	return _r
 }
 
 // UsesPageCache reports whether the receiver's associated WebViews use the shared page cache. Pages are cached as they are added to a WebBackForwardList, and removed from the cache as they are removed from a WebBackForwardList. Because the page cache is global, caching a page in one WebBackForwardList may cause a page in another WebBackForwardList to be evicted from the cache.
 func (wp *WebPreferences) UsesPageCache() bool {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("usesPageCache"))
 	return _r
 }
 
 // CacheModel specifies a usage model for a WebView, which WebKit will use to determine its caching behavior. If necessary, WebKit will prune its caches to match cacheModel when set. Research indicates that users tend to browse within clusters of documents that hold resources in common, and to revisit previously visited documents. WebKit and the frameworks below it include built-in caches that take advantage of these patterns, substantially improving document load speed in browsing situations. The WebKit cache model controls the behaviors of all of these caches, including NSURLCache and the various WebCore caches. Applications with a browsing interface can improve document load speed substantially by specifying WebCacheModelDocumentBrowser. Applications without a browsing interface can reduce memory usage substantially by specifying WebCacheModelDocumentViewer. If cacheModel is not set, WebKit will select a cache model automatically.
 func (wp *WebPreferences) CacheModel() WebCacheModel {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[WebCacheModel](objref.IDOf(wp), objc.RegisterName("cacheModel"))
 	return _r
 }
 
 // SuppressesIncrementalRendering wraps the corresponding Objective-C method.
 func (wp *WebPreferences) SuppressesIncrementalRendering() bool {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("suppressesIncrementalRendering"))
 	return _r
 }
 
 // AllowsAirPlayForMediaPlayback wraps the corresponding Objective-C method.
 func (wp *WebPreferences) AllowsAirPlayForMediaPlayback() bool {
+	defer runtime.KeepAlive(wp)
 	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("allowsAirPlayForMediaPlayback"))
 	return _r
 }

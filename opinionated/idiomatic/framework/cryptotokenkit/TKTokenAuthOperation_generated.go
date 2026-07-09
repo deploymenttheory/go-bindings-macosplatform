@@ -5,6 +5,7 @@
 package cryptotokenkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -52,22 +53,27 @@ func tokenAuthOperationAdopt(id objc.ID) *TokenAuthOperation {
 
 // Description returns the object's -description text.
 func (tao *TokenAuthOperation) Description() string {
+	defer runtime.KeepAlive(tao)
 	return rt.Description(objref.IDOf(tao))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tao *TokenAuthOperation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tao)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tao), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tao *TokenAuthOperation) IsKind(className string) bool {
+	defer runtime.KeepAlive(tao)
 	return rt.IsKind(objref.IDOf(tao), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tao *TokenAuthOperation) String() string {
+	defer runtime.KeepAlive(tao)
 	return rt.Description(objref.IDOf(tao))
 }
 
@@ -75,6 +81,7 @@ func (tao *TokenAuthOperation) String() string {
 //
 // Finish returns an error if the operation did not succeed.
 func (tao *TokenAuthOperation) Finish() error {
+	defer runtime.KeepAlive(tao)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(tao), objc.RegisterName("finishWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

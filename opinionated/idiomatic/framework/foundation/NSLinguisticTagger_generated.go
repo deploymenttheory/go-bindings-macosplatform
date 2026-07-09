@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,16 +50,20 @@ func linguisticTaggerAdopt(id objc.ID) *LinguisticTagger {
 
 // Description returns the object's -description text.
 func (lt *LinguisticTagger) Description() string {
+	defer runtime.KeepAlive(lt)
 	return rt.Description(objref.IDOf(lt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lt *LinguisticTagger) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lt *LinguisticTagger) IsKind(className string) bool {
+	defer runtime.KeepAlive(lt)
 	return rt.IsKind(objref.IDOf(lt), className)
 }
 
@@ -70,8 +75,9 @@ func NewLinguisticTaggerWithTagSchemesOptions(tagSchemes []*String, opts int) *L
 }
 
 // WithString sets the string being analyzed by the linguistic tagger.
-func (lt *LinguisticTagger) WithString(string_ StringProvider) *LinguisticTagger {
-	objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("setString:"), objref.IDOf(string_))
+func (lt *LinguisticTagger) WithString(str StringProvider) *LinguisticTagger {
+	defer runtime.KeepAlive(str)
+	objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("setString:"), objref.IDOf(str))
 	return lt
 }
 
@@ -82,8 +88,8 @@ func (lt *LinguisticTagger) WithObservationInfo(observationInfo unsafe.Pointer) 
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (lt *LinguisticTagger) WithScriptingProperties(scriptingProperties obj.Object) *LinguisticTagger {
-	objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (lt *LinguisticTagger) WithScriptingProperties(scriptingProperties map[string]obj.Object) *LinguisticTagger {
+	objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return lt
 }
 
@@ -91,12 +97,14 @@ func (lt *LinguisticTagger) WithScriptingProperties(scriptingProperties obj.Obje
 //
 // TagSchemes returns the collection as a Go slice.
 func (lt *LinguisticTagger) TagSchemes() []*String {
+	defer runtime.KeepAlive(lt)
 	_arr := objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("tagSchemes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *String { return StringFromID(_id) })
 }
 
 // String returns the string.
 func (lt *LinguisticTagger) String() string {
+	defer runtime.KeepAlive(lt)
 	_r := objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("string"))
 	if _r == 0 {
 		return ""
@@ -106,6 +114,7 @@ func (lt *LinguisticTagger) String() string {
 
 // DominantLanguage returns the dominant language.
 func (lt *LinguisticTagger) DominantLanguage() string {
+	defer runtime.KeepAlive(lt)
 	_r := objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("dominantLanguage"))
 	if _r == 0 {
 		return ""

@@ -8,38 +8,38 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrCodeNotificationsNotAllowed matches the UserNotifications error UNErrorCodeNotificationsNotAllowed.
-var ErrCodeNotificationsNotAllowed = errkit.New("UNErrorDomain", 1)
-
-// ErrCodeAttachmentInvalidURL matches the UserNotifications error UNErrorCodeAttachmentInvalidURL.
-var ErrCodeAttachmentInvalidURL = errkit.New("UNErrorDomain", 100)
-
-// ErrCodeAttachmentUnrecognizedType matches the UserNotifications error UNErrorCodeAttachmentUnrecognizedType.
-var ErrCodeAttachmentUnrecognizedType = errkit.New("UNErrorDomain", 101)
+// ErrCodeAttachmentCorrupt matches the UserNotifications error UNErrorCodeAttachmentCorrupt.
+var ErrCodeAttachmentCorrupt = errkit.New("UNErrorDomain", 105)
 
 // ErrCodeAttachmentInvalidFileSize matches the UserNotifications error UNErrorCodeAttachmentInvalidFileSize.
 var ErrCodeAttachmentInvalidFileSize = errkit.New("UNErrorDomain", 102)
 
-// ErrCodeAttachmentNotInDataStore matches the UserNotifications error UNErrorCodeAttachmentNotInDataStore.
-var ErrCodeAttachmentNotInDataStore = errkit.New("UNErrorDomain", 103)
+// ErrCodeAttachmentInvalidURL matches the UserNotifications error UNErrorCodeAttachmentInvalidURL.
+var ErrCodeAttachmentInvalidURL = errkit.New("UNErrorDomain", 100)
 
 // ErrCodeAttachmentMoveIntoDataStoreFailed matches the UserNotifications error UNErrorCodeAttachmentMoveIntoDataStoreFailed.
 var ErrCodeAttachmentMoveIntoDataStoreFailed = errkit.New("UNErrorDomain", 104)
 
-// ErrCodeAttachmentCorrupt matches the UserNotifications error UNErrorCodeAttachmentCorrupt.
-var ErrCodeAttachmentCorrupt = errkit.New("UNErrorDomain", 105)
+// ErrCodeAttachmentNotInDataStore matches the UserNotifications error UNErrorCodeAttachmentNotInDataStore.
+var ErrCodeAttachmentNotInDataStore = errkit.New("UNErrorDomain", 103)
 
-// ErrCodeNotificationInvalidNoDate matches the UserNotifications error UNErrorCodeNotificationInvalidNoDate.
-var ErrCodeNotificationInvalidNoDate = errkit.New("UNErrorDomain", 1400)
+// ErrCodeAttachmentUnrecognizedType matches the UserNotifications error UNErrorCodeAttachmentUnrecognizedType.
+var ErrCodeAttachmentUnrecognizedType = errkit.New("UNErrorDomain", 101)
 
-// ErrCodeNotificationInvalidNoContent matches the UserNotifications error UNErrorCodeNotificationInvalidNoContent.
-var ErrCodeNotificationInvalidNoContent = errkit.New("UNErrorDomain", 1401)
-
-// ErrCodeContentProvidingObjectNotAllowed matches the UserNotifications error UNErrorCodeContentProvidingObjectNotAllowed.
-var ErrCodeContentProvidingObjectNotAllowed = errkit.New("UNErrorDomain", 1500)
+// ErrCodeBadgeInputInvalid matches the UserNotifications error UNErrorCodeBadgeInputInvalid.
+var ErrCodeBadgeInputInvalid = errkit.New("UNErrorDomain", 1600)
 
 // ErrCodeContentProvidingInvalid matches the UserNotifications error UNErrorCodeContentProvidingInvalid.
 var ErrCodeContentProvidingInvalid = errkit.New("UNErrorDomain", 1501)
 
-// ErrCodeBadgeInputInvalid matches the UserNotifications error UNErrorCodeBadgeInputInvalid.
-var ErrCodeBadgeInputInvalid = errkit.New("UNErrorDomain", 1600)
+// ErrCodeContentProvidingObjectNotAllowed matches the UserNotifications error UNErrorCodeContentProvidingObjectNotAllowed.
+var ErrCodeContentProvidingObjectNotAllowed = errkit.New("UNErrorDomain", 1500)
+
+// ErrCodeNotificationInvalidNoContent matches the UserNotifications error UNErrorCodeNotificationInvalidNoContent.
+var ErrCodeNotificationInvalidNoContent = errkit.New("UNErrorDomain", 1401)
+
+// ErrCodeNotificationInvalidNoDate matches the UserNotifications error UNErrorCodeNotificationInvalidNoDate.
+var ErrCodeNotificationInvalidNoDate = errkit.New("UNErrorDomain", 1400)
+
+// ErrCodeNotificationsNotAllowed matches the UserNotifications error UNErrorCodeNotificationsNotAllowed.
+var ErrCodeNotificationsNotAllowed = errkit.New("UNErrorDomain", 1)

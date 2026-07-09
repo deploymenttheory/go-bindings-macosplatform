@@ -5,6 +5,8 @@
 package corebluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,12 +50,14 @@ func descriptorAdopt(id objc.ID) *Descriptor {
 
 // Characteristic returns a back-pointer to the characteristic this descriptor belongs to.
 func (d *Descriptor) Characteristic() *Characteristic {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("characteristic"))
 	return CharacteristicFromID(_r)
 }
 
 // Value returns the value of the descriptor. The corresponding value types for the various descriptors are detailed in
 func (d *Descriptor) Value() obj.Object {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }

@@ -5,6 +5,7 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -95,6 +96,7 @@ func (qp *QueuePlayer) WithAutomaticallyWaitsToMinimizeStalling(automaticallyWai
 
 // WithSourceClock sets a clock the player uses for item time bases.
 func (qp *QueuePlayer) WithSourceClock(sourceClock obj.Object) *QueuePlayer {
+	defer runtime.KeepAlive(sourceClock)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setSourceClock:"), objref.IDOf(sourceClock))
 	})
@@ -167,6 +169,7 @@ func (qp *QueuePlayer) WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgr
 
 // WithVideoOutput sets the video output for this player.
 func (qp *QueuePlayer) WithVideoOutput(videoOutput *PlayerVideoOutput) *QueuePlayer {
+	defer runtime.KeepAlive(videoOutput)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setVideoOutput:"), objref.IDOf(videoOutput))
 	})
@@ -207,6 +210,7 @@ func (qp *QueuePlayer) WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnabl
 
 // WithMasterClock sets the host clock for item time bases.
 func (qp *QueuePlayer) WithMasterClock(masterClock obj.Object) *QueuePlayer {
+	defer runtime.KeepAlive(masterClock)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setMasterClock:"), objref.IDOf(masterClock))
 	})
@@ -217,33 +221,44 @@ func (qp *QueuePlayer) WithMasterClock(masterClock obj.Object) *QueuePlayer {
 //
 // Items returns the collection as a Go slice.
 func (qp *QueuePlayer) Items() []*PlayerItem {
+	defer runtime.KeepAlive(qp)
 	_arr := objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("items"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItem { return PlayerItemFromID(_id) })
 }
 
 // AdvanceToNextItem ends playback of the current item and starts playback of the next item in the player’s queue.
 func (qp *QueuePlayer) AdvanceToNextItem() {
+	defer runtime.KeepAlive(qp)
 	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("advanceToNextItem"))
 }
 
 // CanInsertItemAfterItem returns a Boolean value that indicates whether you can insert a player item into the player’s queue.
 func (qp *QueuePlayer) CanInsertItemAfterItem(item *PlayerItem, afterItem *PlayerItem) bool {
+	defer runtime.KeepAlive(qp)
+	defer runtime.KeepAlive(item)
+	defer runtime.KeepAlive(afterItem)
 	_r := objc.Send[bool](objref.IDOf(qp), objc.RegisterName("canInsertItem:afterItem:"), objref.IDOf(item), objref.IDOf(afterItem))
 	return _r
 }
 
 // InsertItemAfterItem inserts a player item after another player item in the queue.
 func (qp *QueuePlayer) InsertItemAfterItem(item *PlayerItem, afterItem *PlayerItem) {
+	defer runtime.KeepAlive(qp)
+	defer runtime.KeepAlive(item)
+	defer runtime.KeepAlive(afterItem)
 	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("insertItem:afterItem:"), objref.IDOf(item), objref.IDOf(afterItem))
 }
 
 // RemoveItem removes a given player item from the queue.
 func (qp *QueuePlayer) RemoveItem(item *PlayerItem) {
+	defer runtime.KeepAlive(qp)
+	defer runtime.KeepAlive(item)
 	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("removeItem:"), objref.IDOf(item))
 }
 
 // RemoveAllItems removes all player items from the queue.
 func (qp *QueuePlayer) RemoveAllItems() {
+	defer runtime.KeepAlive(qp)
 	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("removeAllItems"))
 }
 

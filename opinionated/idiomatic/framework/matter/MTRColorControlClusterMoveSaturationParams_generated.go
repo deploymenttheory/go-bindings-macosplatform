@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRColorControlClusterMoveSaturationParamsAdopt(id objc.ID) *MTRColorContro
 
 // Description returns the object's -description text.
 func (mcccmsp *MTRColorControlClusterMoveSaturationParams) Description() string {
+	defer runtime.KeepAlive(mcccmsp)
 	return rt.Description(objref.IDOf(mcccmsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcccmsp *MTRColorControlClusterMoveSaturationParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcccmsp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcccmsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcccmsp *MTRColorControlClusterMoveSaturationParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcccmsp)
 	return rt.IsKind(objref.IDOf(mcccmsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcccmsp *MTRColorControlClusterMoveSaturationParams) String() string {
+	defer runtime.KeepAlive(mcccmsp)
 	return rt.Description(objref.IDOf(mcccmsp))
 }
 
@@ -72,72 +80,84 @@ func NewMTRColorControlClusterMoveSaturationParams() *MTRColorControlClusterMove
 
 // WithMoveMode sets the move mode.
 func (mcccmsp *MTRColorControlClusterMoveSaturationParams) WithMoveMode(moveMode obj.Object) *MTRColorControlClusterMoveSaturationParams {
+	defer runtime.KeepAlive(moveMode)
 	objc.Send[objc.ID](objref.IDOf(mcccmsp), objc.RegisterName("setMoveMode:"), objref.IDOf(moveMode))
 	return mcccmsp
 }
 
 // WithRate sets the rate.
 func (mcccmsp *MTRColorControlClusterMoveSaturationParams) WithRate(rate obj.Object) *MTRColorControlClusterMoveSaturationParams {
+	defer runtime.KeepAlive(rate)
 	objc.Send[objc.ID](objref.IDOf(mcccmsp), objc.RegisterName("setRate:"), objref.IDOf(rate))
 	return mcccmsp
 }
 
 // WithOptionsMask sets the options mask.
 func (mcccmsp *MTRColorControlClusterMoveSaturationParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterMoveSaturationParams {
+	defer runtime.KeepAlive(optionsMask)
 	objc.Send[objc.ID](objref.IDOf(mcccmsp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mcccmsp
 }
 
 // WithOptionsOverride sets the options override.
 func (mcccmsp *MTRColorControlClusterMoveSaturationParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterMoveSaturationParams {
+	defer runtime.KeepAlive(optionsOverride)
 	objc.Send[objc.ID](objref.IDOf(mcccmsp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mcccmsp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mcccmsp *MTRColorControlClusterMoveSaturationParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterMoveSaturationParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mcccmsp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mcccmsp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mcccmsp *MTRColorControlClusterMoveSaturationParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterMoveSaturationParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mcccmsp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mcccmsp
 }
 
 // MoveMode returns the move mode.
-func (mcccmsp *MTRColorControlClusterMoveSaturationParams) MoveMode() obj.Object {
+func (mcccmsp *MTRColorControlClusterMoveSaturationParams) MoveMode() *foundation.Number {
+	defer runtime.KeepAlive(mcccmsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmsp), objc.RegisterName("moveMode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Rate returns the rate.
-func (mcccmsp *MTRColorControlClusterMoveSaturationParams) Rate() obj.Object {
+func (mcccmsp *MTRColorControlClusterMoveSaturationParams) Rate() *foundation.Number {
+	defer runtime.KeepAlive(mcccmsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmsp), objc.RegisterName("rate"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // OptionsMask returns the options mask.
-func (mcccmsp *MTRColorControlClusterMoveSaturationParams) OptionsMask() obj.Object {
+func (mcccmsp *MTRColorControlClusterMoveSaturationParams) OptionsMask() *foundation.Number {
+	defer runtime.KeepAlive(mcccmsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmsp), objc.RegisterName("optionsMask"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // OptionsOverride returns the options override.
-func (mcccmsp *MTRColorControlClusterMoveSaturationParams) OptionsOverride() obj.Object {
+func (mcccmsp *MTRColorControlClusterMoveSaturationParams) OptionsOverride() *foundation.Number {
+	defer runtime.KeepAlive(mcccmsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmsp), objc.RegisterName("optionsOverride"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mcccmsp *MTRColorControlClusterMoveSaturationParams) TimedInvokeTimeoutMs() obj.Object {
+func (mcccmsp *MTRColorControlClusterMoveSaturationParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mcccmsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmsp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mcccmsp *MTRColorControlClusterMoveSaturationParams) ServerSideProcessingTimeout() obj.Object {
+func (mcccmsp *MTRColorControlClusterMoveSaturationParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mcccmsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmsp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

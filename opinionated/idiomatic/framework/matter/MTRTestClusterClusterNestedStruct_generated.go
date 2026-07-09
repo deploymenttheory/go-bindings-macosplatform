@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,18 +54,21 @@ func NewMTRTestClusterClusterNestedStruct() *MTRTestClusterClusterNestedStruct {
 
 // WithA sets the a.
 func (mtccns *MTRTestClusterClusterNestedStruct) WithA(a obj.Object) *MTRTestClusterClusterNestedStruct {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(mtccns), objc.RegisterName("setA:"), objref.IDOf(a))
 	return mtccns
 }
 
 // WithB sets the b.
 func (mtccns *MTRTestClusterClusterNestedStruct) WithB(b obj.Object) *MTRTestClusterClusterNestedStruct {
+	defer runtime.KeepAlive(b)
 	objc.Send[objc.ID](objref.IDOf(mtccns), objc.RegisterName("setB:"), objref.IDOf(b))
 	return mtccns
 }
 
 // WithC sets the c.
 func (mtccns *MTRTestClusterClusterNestedStruct) WithC(c MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterNestedStruct {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(mtccns), objc.RegisterName("setC:"), objref.IDOf(c))
 	return mtccns
 }

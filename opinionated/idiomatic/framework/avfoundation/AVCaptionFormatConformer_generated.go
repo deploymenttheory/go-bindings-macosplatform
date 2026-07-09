@@ -5,6 +5,7 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,27 +51,33 @@ func captionFormatConformerAdopt(id objc.ID) *CaptionFormatConformer {
 
 // Description returns the object's -description text.
 func (cfc *CaptionFormatConformer) Description() string {
+	defer runtime.KeepAlive(cfc)
 	return rt.Description(objref.IDOf(cfc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cfc *CaptionFormatConformer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cfc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cfc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cfc *CaptionFormatConformer) IsKind(className string) bool {
+	defer runtime.KeepAlive(cfc)
 	return rt.IsKind(objref.IDOf(cfc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cfc *CaptionFormatConformer) String() string {
+	defer runtime.KeepAlive(cfc)
 	return rt.Description(objref.IDOf(cfc))
 }
 
 // NewCaptionFormatConformerWithConversionSettings creates a new object with format conversion settings.
 func NewCaptionFormatConformerWithConversionSettings(conversionSettings obj.Object) *CaptionFormatConformer {
+	defer runtime.KeepAlive(conversionSettings)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptionFormatConformer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConversionSettings:"), objref.IDOf(conversionSettings))
 	return captionFormatConformerAdopt(_id)
@@ -82,8 +89,10 @@ func (cfc *CaptionFormatConformer) WithConformsCaptionsToTimeRange(conformsCapti
 	return cfc
 }
 
-// ConformedCaptionForCaptionError creates a caption that conforms to a specific format.
-func (cfc *CaptionFormatConformer) ConformedCaptionForCaptionError(caption *Caption) (result *Caption, err error) {
+// ConformedCaptionForCaption creates a caption that conforms to a specific format.
+func (cfc *CaptionFormatConformer) ConformedCaptionForCaption(caption *Caption) (result *Caption, err error) {
+	defer runtime.KeepAlive(cfc)
+	defer runtime.KeepAlive(caption)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(cfc), objc.RegisterName("conformedCaptionForCaption:error:"), objref.IDOf(caption), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -94,6 +103,7 @@ func (cfc *CaptionFormatConformer) ConformedCaptionForCaptionError(caption *Capt
 
 // ConformsCaptionsToTimeRange reports whether to conform the time range of a given canonical caption as well. When set to true, conforms time range. When set to false, the time range of the conformed caption will be same as a given canonical caption. In the case of conforming to CAE608 format, AVCaption is encoded so that each CAE608 control code (2 bytes) fits into 1 frame duration (1001/30000). When set to true and if all the encoded data can not fit inside the canonical caption time range, the caption time range will be extended to fit all the data and will be returned in the conformed AVCaption. The default value is false.
 func (cfc *CaptionFormatConformer) ConformsCaptionsToTimeRange() bool {
+	defer runtime.KeepAlive(cfc)
 	_r := objc.Send[bool](objref.IDOf(cfc), objc.RegisterName("conformsCaptionsToTimeRange"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package metalkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func submeshAdopt(id objc.ID) *Submesh {
 
 // Description returns the object's -description text.
 func (s *Submesh) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Submesh) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Submesh) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Submesh) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -80,24 +87,28 @@ func (s *Submesh) WithName(name string) *Submesh {
 
 // IndexBuffer returns indexBuffer (including indexCount) to render the object. The MTLBuffer to use for indexBuffer parameter in a [MTLRenderCommandEncoder drawIndexedPrimitives] call.
 func (s *Submesh) IndexBuffer() *MeshBuffer {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("indexBuffer"))
 	return MeshBufferFromID(_r)
 }
 
 // IndexCount returns number of indicies in indexBuffer. Value to use for indexCount parameter in a [MTLRenderCommandEncoder drawIndexedPrimitives] call.
 func (s *Submesh) IndexCount() int {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("indexCount"))
 	return _r
 }
 
 // Mesh returns parent MTKMesh object containing vertex data of this object. The buffer of this parent mesh should be set in the encoder before a drawIndexedPrimitives call is made.
 func (s *Submesh) Mesh() *Mesh {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("mesh"))
 	return MeshFromID(_r)
 }
 
 // Name returns name from the original MDLSubmesh object. Although not directly used by this object, the application may use this to identify the submesh in the renderer/scene/world.
 func (s *Submesh) Name() string {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

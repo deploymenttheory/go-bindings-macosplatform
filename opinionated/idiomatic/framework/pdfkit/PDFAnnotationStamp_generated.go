@@ -5,6 +5,7 @@
 package pdfkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -58,6 +59,7 @@ func NewAnnotationStamp() *AnnotationStamp {
 
 // WithPage sets returns the page that the annotation is associated with.
 func (as *AnnotationStamp) WithPage(page *Page) *AnnotationStamp {
+	defer runtime.KeepAlive(page)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setPage:"), objref.IDOf(page))
 	return as
 }
@@ -142,18 +144,21 @@ func (as *AnnotationStamp) WithMouseUpAction(mouseUpAction unsafe.Pointer) *Anno
 
 // WithFont sets the font the annotation uses to display text.
 func (as *AnnotationStamp) WithFont(font obj.Object) *AnnotationStamp {
+	defer runtime.KeepAlive(font)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return as
 }
 
 // WithFontColor sets the font color the annotation uses to display text.
 func (as *AnnotationStamp) WithFontColor(fontColor obj.Object) *AnnotationStamp {
+	defer runtime.KeepAlive(fontColor)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
 	return as
 }
 
 // WithInteriorColor sets the fill color for drawing a circle, line, or square annotation.
 func (as *AnnotationStamp) WithInteriorColor(interiorColor obj.Object) *AnnotationStamp {
+	defer runtime.KeepAlive(interiorColor)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setInteriorColor:"), objref.IDOf(interiorColor))
 	return as
 }
@@ -203,6 +208,7 @@ func (as *AnnotationStamp) WithMarkupType(markupType MarkupType) *AnnotationStam
 
 // WithWidgetFieldType sets the type of widget annotation, such as button, choice, or text.
 func (as *AnnotationStamp) WithWidgetFieldType(widgetFieldType obj.Object) *AnnotationStamp {
+	defer runtime.KeepAlive(widgetFieldType)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setWidgetFieldType:"), objref.IDOf(widgetFieldType))
 	return as
 }
@@ -301,13 +307,14 @@ func (as *AnnotationStamp) WithOpen(open bool) *AnnotationStamp {
 
 // WithDestination sets the destination for a link annotation.
 func (as *AnnotationStamp) WithDestination(destination *Destination) *AnnotationStamp {
+	defer runtime.KeepAlive(destination)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return as
 }
 
 // WithURL sets a URL for a link annotation.
-func (as *AnnotationStamp) WithURL(uRL string) *AnnotationStamp {
-	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (as *AnnotationStamp) WithURL(url string) *AnnotationStamp {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return as
 }
 
@@ -325,6 +332,7 @@ func (as *AnnotationStamp) WithCaption(caption string) *AnnotationStamp {
 
 // WithBackgroundColor sets the color of the widget’s background.
 func (as *AnnotationStamp) WithBackgroundColor(backgroundColor obj.Object) *AnnotationStamp {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return as
 }
@@ -337,6 +345,7 @@ func (as *AnnotationStamp) WithStampName(stampName string) *AnnotationStamp {
 
 // Name returns name associated with the stamp annotation.
 func (as *AnnotationStamp) Name() string {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -346,6 +355,7 @@ func (as *AnnotationStamp) Name() string {
 
 // SetName sets the name associated with the stamp annotation.
 func (as *AnnotationStamp) SetName(name string) {
+	defer runtime.KeepAlive(as)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setName:"), purego.NSString(name))
 }
 

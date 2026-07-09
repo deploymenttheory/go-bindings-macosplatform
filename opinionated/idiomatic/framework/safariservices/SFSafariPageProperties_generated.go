@@ -5,6 +5,8 @@
 package safariservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func safariPagePropertiesAdopt(id objc.ID) *SafariPageProperties {
 
 // Description returns the object's -description text.
 func (spp *SafariPageProperties) Description() string {
+	defer runtime.KeepAlive(spp)
 	return rt.Description(objref.IDOf(spp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (spp *SafariPageProperties) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(spp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(spp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (spp *SafariPageProperties) IsKind(className string) bool {
+	defer runtime.KeepAlive(spp)
 	return rt.IsKind(objref.IDOf(spp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (spp *SafariPageProperties) String() string {
+	defer runtime.KeepAlive(spp)
 	return rt.Description(objref.IDOf(spp))
 }
 
@@ -73,13 +80,15 @@ func NewSafariPageProperties() *SafariPageProperties {
 }
 
 // URL returns the URL.
-func (spp *SafariPageProperties) URL() obj.Object {
+func (spp *SafariPageProperties) URL() string {
+	defer runtime.KeepAlive(spp)
 	_r := objc.Send[objc.ID](objref.IDOf(spp), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Title returns the title.
 func (spp *SafariPageProperties) Title() string {
+	defer runtime.KeepAlive(spp)
 	_r := objc.Send[objc.ID](objref.IDOf(spp), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -89,12 +98,14 @@ func (spp *SafariPageProperties) Title() string {
 
 // UsesPrivateBrowsing wraps the corresponding Objective-C method.
 func (spp *SafariPageProperties) UsesPrivateBrowsing() bool {
+	defer runtime.KeepAlive(spp)
 	_r := objc.Send[bool](objref.IDOf(spp), objc.RegisterName("usesPrivateBrowsing"))
 	return _r
 }
 
 // IsActive reports whether the object is active.
 func (spp *SafariPageProperties) IsActive() bool {
+	defer runtime.KeepAlive(spp)
 	_r := objc.Send[bool](objref.IDOf(spp), objc.RegisterName("isActive"))
 	return _r
 }

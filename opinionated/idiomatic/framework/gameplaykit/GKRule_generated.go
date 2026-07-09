@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func ruleAdopt(id objc.ID) *Rule {
 
 // Description returns the object's -description text.
 func (r *Rule) Description() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (r *Rule) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (r *Rule) IsKind(className string) bool {
+	defer runtime.KeepAlive(r)
 	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (r *Rule) String() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
@@ -76,17 +83,22 @@ func (r *Rule) WithSalience(salience int) *Rule {
 
 // EvaluatePredicateWithSystem returns a Boolean value indicating whether the rule has been satisfied in the context of the specified rule system.
 func (r *Rule) EvaluatePredicateWithSystem(system *RuleSystem) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(system)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("evaluatePredicateWithSystem:"), objref.IDOf(system))
 	return _r
 }
 
 // PerformActionWithSystem performs actions that should result when the rule is satisfied in the context of the specified rule system.
 func (r *Rule) PerformActionWithSystem(system *RuleSystem) {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(system)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("performActionWithSystem:"), objref.IDOf(system))
 }
 
 // Salience returns salience defines the order in the rule agenda that the system will evaluate. A rule with higher salience will be evaluated before another rule in the agenda that has a lower salience. Defaults to 0.
 func (r *Rule) Salience() int {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[int](objref.IDOf(r), objc.RegisterName("salience"))
 	return _r
 }

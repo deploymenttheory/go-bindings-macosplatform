@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -66,6 +68,7 @@ func (lcrs *LinearCongruentialRandomSource) WithSeed(seed uint64) *LinearCongrue
 
 // Seed returns the seed used to stir the linear congruential random source. The seed changes each time a random value is generated from this source, as the seed is the state buffer. The seed is encoded through archiving.
 func (lcrs *LinearCongruentialRandomSource) Seed() uint64 {
+	defer runtime.KeepAlive(lcrs)
 	_r := objc.Send[uint64](objref.IDOf(lcrs), objc.RegisterName("seed"))
 	return _r
 }

@@ -5,6 +5,7 @@
 package pdfkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -58,6 +59,7 @@ func NewAnnotationChoiceWidget() *AnnotationChoiceWidget {
 
 // WithPage sets returns the page that the annotation is associated with.
 func (acw *AnnotationChoiceWidget) WithPage(page *Page) *AnnotationChoiceWidget {
+	defer runtime.KeepAlive(page)
 	objc.Send[objc.ID](objref.IDOf(acw), objc.RegisterName("setPage:"), objref.IDOf(page))
 	return acw
 }
@@ -142,18 +144,21 @@ func (acw *AnnotationChoiceWidget) WithMouseUpAction(mouseUpAction unsafe.Pointe
 
 // WithFont sets the font the annotation uses to display text.
 func (acw *AnnotationChoiceWidget) WithFont(font obj.Object) *AnnotationChoiceWidget {
+	defer runtime.KeepAlive(font)
 	objc.Send[objc.ID](objref.IDOf(acw), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return acw
 }
 
 // WithFontColor sets the font color the annotation uses to display text.
 func (acw *AnnotationChoiceWidget) WithFontColor(fontColor obj.Object) *AnnotationChoiceWidget {
+	defer runtime.KeepAlive(fontColor)
 	objc.Send[objc.ID](objref.IDOf(acw), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
 	return acw
 }
 
 // WithInteriorColor sets the fill color for drawing a circle, line, or square annotation.
 func (acw *AnnotationChoiceWidget) WithInteriorColor(interiorColor obj.Object) *AnnotationChoiceWidget {
+	defer runtime.KeepAlive(interiorColor)
 	objc.Send[objc.ID](objref.IDOf(acw), objc.RegisterName("setInteriorColor:"), objref.IDOf(interiorColor))
 	return acw
 }
@@ -203,6 +208,7 @@ func (acw *AnnotationChoiceWidget) WithMarkupType(markupType MarkupType) *Annota
 
 // WithWidgetFieldType sets the type of widget annotation, such as button, choice, or text.
 func (acw *AnnotationChoiceWidget) WithWidgetFieldType(widgetFieldType obj.Object) *AnnotationChoiceWidget {
+	defer runtime.KeepAlive(widgetFieldType)
 	objc.Send[objc.ID](objref.IDOf(acw), objc.RegisterName("setWidgetFieldType:"), objref.IDOf(widgetFieldType))
 	return acw
 }
@@ -301,13 +307,14 @@ func (acw *AnnotationChoiceWidget) WithOpen(open bool) *AnnotationChoiceWidget {
 
 // WithDestination sets the destination for a link annotation.
 func (acw *AnnotationChoiceWidget) WithDestination(destination *Destination) *AnnotationChoiceWidget {
+	defer runtime.KeepAlive(destination)
 	objc.Send[objc.ID](objref.IDOf(acw), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return acw
 }
 
 // WithURL sets a URL for a link annotation.
-func (acw *AnnotationChoiceWidget) WithURL(uRL string) *AnnotationChoiceWidget {
-	objc.Send[objc.ID](objref.IDOf(acw), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (acw *AnnotationChoiceWidget) WithURL(url string) *AnnotationChoiceWidget {
+	objc.Send[objc.ID](objref.IDOf(acw), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return acw
 }
 
@@ -325,6 +332,7 @@ func (acw *AnnotationChoiceWidget) WithCaption(caption string) *AnnotationChoice
 
 // WithBackgroundColor sets the color of the widget’s background.
 func (acw *AnnotationChoiceWidget) WithBackgroundColor(backgroundColor obj.Object) *AnnotationChoiceWidget {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(acw), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return acw
 }
@@ -337,6 +345,7 @@ func (acw *AnnotationChoiceWidget) WithStampName(stampName string) *AnnotationCh
 
 // StringValue returns the selection in the widget annotation.
 func (acw *AnnotationChoiceWidget) StringValue() string {
+	defer runtime.KeepAlive(acw)
 	_r := objc.Send[objc.ID](objref.IDOf(acw), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""
@@ -346,11 +355,13 @@ func (acw *AnnotationChoiceWidget) StringValue() string {
 
 // SetStringValue sets the selection in the widget annotation.
 func (acw *AnnotationChoiceWidget) SetStringValue(value string) {
+	defer runtime.KeepAlive(acw)
 	objc.Send[objc.ID](objref.IDOf(acw), objc.RegisterName("setStringValue:"), purego.NSString(value))
 }
 
 // SetIsListChoice sets whether the widget annotation is a list.
 func (acw *AnnotationChoiceWidget) SetIsListChoice(isList bool) {
+	defer runtime.KeepAlive(acw)
 	objc.Send[objc.ID](objref.IDOf(acw), objc.RegisterName("setIsListChoice:"), isList)
 }
 

@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func genericMachineIdentifierAdopt(id objc.ID) *GenericMachineIdentifier {
 
 // Description returns the object's -description text.
 func (gmi *GenericMachineIdentifier) Description() string {
+	defer runtime.KeepAlive(gmi)
 	return rt.Description(objref.IDOf(gmi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gmi *GenericMachineIdentifier) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gmi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gmi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gmi *GenericMachineIdentifier) IsKind(className string) bool {
+	defer runtime.KeepAlive(gmi)
 	return rt.IsKind(objref.IDOf(gmi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gmi *GenericMachineIdentifier) String() string {
+	defer runtime.KeepAlive(gmi)
 	return rt.Description(objref.IDOf(gmi))
 }
 
@@ -73,14 +80,15 @@ func NewGenericMachineIdentifier() *GenericMachineIdentifier {
 }
 
 // NewGenericMachineIdentifierWithDataRepresentation creates a new unique identifier for a VM with the provided data.
-func NewGenericMachineIdentifierWithDataRepresentation(dataRepresentation obj.Object) *GenericMachineIdentifier {
+func NewGenericMachineIdentifierWithDataRepresentation(dataRepresentation []byte) *GenericMachineIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZGenericMachineIdentifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:"), objref.IDOf(dataRepresentation))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:"), rt.BytesToNSData(dataRepresentation))
 	return genericMachineIdentifierAdopt(_id)
 }
 
 // DataRepresentation returns the data representation.
-func (gmi *GenericMachineIdentifier) DataRepresentation() obj.Object {
+func (gmi *GenericMachineIdentifier) DataRepresentation() []byte {
+	defer runtime.KeepAlive(gmi)
 	_r := objc.Send[objc.ID](objref.IDOf(gmi), objc.RegisterName("dataRepresentation"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

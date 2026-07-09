@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -49,22 +52,27 @@ func animationAdopt(id objc.ID) *Animation {
 
 // Description returns the object's -description text.
 func (a *Animation) Description() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (a *Animation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (a *Animation) IsKind(className string) bool {
+	defer runtime.KeepAlive(a)
 	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (a *Animation) String() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
@@ -77,6 +85,7 @@ func NewAnimationWithDurationAnimationCurve(duration float64, animationCurve Ani
 
 // NewAnimationWithCoder creates a new Animation.
 func NewAnimationWithCoder(coder obj.Object) *Animation {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAnimation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return animationAdopt(_id)
@@ -112,6 +121,16 @@ func (a *Animation) WithAnimationCurve(animationCurve AnimationCurve) *Animation
 	return a
 }
 
+// WithDelegate sets the animation delegate.
+func (a *Animation) WithDelegate(delegate AnimationDelegate) *Animation {
+	_shim := newAnimationDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(a), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(a), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return a
+}
+
 // WithProgressMarks sets an array of floating-point numbers representing current progress marks.
 func (a *Animation) WithProgressMarks(items ...obj.Object) *Animation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
@@ -121,82 +140,99 @@ func (a *Animation) WithProgressMarks(items ...obj.Object) *Animation {
 
 // StartAnimation starts the animation represented by the receiver.
 func (a *Animation) StartAnimation() {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("startAnimation"))
 }
 
 // StopAnimation stops the animation represented by the receiver.
 func (a *Animation) StopAnimation() {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stopAnimation"))
 }
 
 // AddProgressMark adds the progress mark to the receiver.
 func (a *Animation) AddProgressMark(progressMark float32) {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addProgressMark:"), progressMark)
 }
 
 // RemoveProgressMark removes progress mark from the receiver.
 func (a *Animation) RemoveProgressMark(progressMark float32) {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeProgressMark:"), progressMark)
 }
 
 // StartWhenAnimationReachesProgress starts running the animation represented by the receiver when another animation reaches a specific progress mark.
 func (a *Animation) StartWhenAnimationReachesProgress(animation *Animation, startProgress float32) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(animation)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("startWhenAnimation:reachesProgress:"), objref.IDOf(animation), startProgress)
 }
 
 // StopWhenAnimationReachesProgress stops running the animation represented by the receiver when another animation reaches a specific progress mark.
 func (a *Animation) StopWhenAnimationReachesProgress(animation *Animation, stopProgress float32) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(animation)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stopWhenAnimation:reachesProgress:"), objref.IDOf(animation), stopProgress)
 }
 
 // ClearStartAnimation clears linkage to another animation that causes the receiver to start.
 func (a *Animation) ClearStartAnimation() {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("clearStartAnimation"))
 }
 
 // ClearStopAnimation clears linkage to another animation that causes the receiver to stop.
 func (a *Animation) ClearStopAnimation() {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("clearStopAnimation"))
 }
 
 // IsAnimating reports whether the object is animating.
 func (a *Animation) IsAnimating() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isAnimating"))
 	return _r
 }
 
 // CurrentProgress returns the current progress.
 func (a *Animation) CurrentProgress() float32 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float32](objref.IDOf(a), objc.RegisterName("currentProgress"))
 	return _r
 }
 
 // Duration returns the duration.
 func (a *Animation) Duration() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("duration"))
 	return _r
 }
 
 // AnimationBlockingMode returns the animation blocking mode.
 func (a *Animation) AnimationBlockingMode() AnimationBlockingMode {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[AnimationBlockingMode](objref.IDOf(a), objc.RegisterName("animationBlockingMode"))
 	return _r
 }
 
 // FrameRate returns the frame rate.
 func (a *Animation) FrameRate() float32 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float32](objref.IDOf(a), objc.RegisterName("frameRate"))
 	return _r
 }
 
 // AnimationCurve returns the animation curve.
 func (a *Animation) AnimationCurve() AnimationCurve {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[AnimationCurve](objref.IDOf(a), objc.RegisterName("animationCurve"))
 	return _r
 }
 
 // CurrentValue returns the current value.
 func (a *Animation) CurrentValue() float32 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float32](objref.IDOf(a), objc.RegisterName("currentValue"))
 	return _r
 }
@@ -205,6 +241,7 @@ func (a *Animation) CurrentValue() float32 {
 //
 // ProgressMarks returns the collection as a Go slice.
 func (a *Animation) ProgressMarks() []obj.Object {
+	defer runtime.KeepAlive(a)
 	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("progressMarks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -213,6 +250,7 @@ func (a *Animation) ProgressMarks() []obj.Object {
 //
 // RunLoopModesForAnimating returns the collection as a Go slice.
 func (a *Animation) RunLoopModesForAnimating() []obj.Object {
+	defer runtime.KeepAlive(a)
 	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("runLoopModesForAnimating"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

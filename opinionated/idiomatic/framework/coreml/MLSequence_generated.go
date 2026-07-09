@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func sequenceAdopt(id objc.ID) *Sequence {
 
 // Description returns the object's -description text.
 func (s *Sequence) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Sequence) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Sequence) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Sequence) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -74,6 +81,7 @@ func NewSequence() *Sequence {
 
 // Type returns type of values held
 func (s *Sequence) Type() FeatureType {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[FeatureType](objref.IDOf(s), objc.RegisterName("type"))
 	return _r
 }
@@ -82,6 +90,7 @@ func (s *Sequence) Type() FeatureType {
 //
 // StringValues returns the collection as a Go slice.
 func (s *Sequence) StringValues() []string {
+	defer runtime.KeepAlive(s)
 	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stringValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -90,6 +99,7 @@ func (s *Sequence) StringValues() []string {
 //
 // Int64Values returns the collection as a Go slice.
 func (s *Sequence) Int64Values() []obj.Object {
+	defer runtime.KeepAlive(s)
 	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("int64Values"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

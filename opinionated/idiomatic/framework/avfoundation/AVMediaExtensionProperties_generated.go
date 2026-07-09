@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mediaExtensionPropertiesAdopt(id objc.ID) *MediaExtensionProperties {
 
 // Description returns the object's -description text.
 func (mep *MediaExtensionProperties) Description() string {
+	defer runtime.KeepAlive(mep)
 	return rt.Description(objref.IDOf(mep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mep *MediaExtensionProperties) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mep)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mep *MediaExtensionProperties) IsKind(className string) bool {
+	defer runtime.KeepAlive(mep)
 	return rt.IsKind(objref.IDOf(mep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mep *MediaExtensionProperties) String() string {
+	defer runtime.KeepAlive(mep)
 	return rt.Description(objref.IDOf(mep))
 }
 
@@ -74,6 +81,7 @@ func NewMediaExtensionProperties() *MediaExtensionProperties {
 
 // ExtensionIdentifier returns the identifier of the Media Extension. The extension identifier string, corresponding to the ClassImplementationID value from the EXAppExtensionAttributes dictionary in the Info.plist file.
 func (mep *MediaExtensionProperties) ExtensionIdentifier() string {
+	defer runtime.KeepAlive(mep)
 	_r := objc.Send[objc.ID](objref.IDOf(mep), objc.RegisterName("extensionIdentifier"))
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (mep *MediaExtensionProperties) ExtensionIdentifier() string {
 
 // ExtensionName returns the name of the MediaExtension. The localized name of the MediaExtension format reader or video decoder, corresponding to the CFBundleDisplayName.
 func (mep *MediaExtensionProperties) ExtensionName() string {
+	defer runtime.KeepAlive(mep)
 	_r := objc.Send[objc.ID](objref.IDOf(mep), objc.RegisterName("extensionName"))
 	if _r == 0 {
 		return ""
@@ -92,6 +101,7 @@ func (mep *MediaExtensionProperties) ExtensionName() string {
 
 // ContainingBundleName returns the name of the containing application bundle. The localized name of the application that hosts the MediaExtension.
 func (mep *MediaExtensionProperties) ContainingBundleName() string {
+	defer runtime.KeepAlive(mep)
 	_r := objc.Send[objc.ID](objref.IDOf(mep), objc.RegisterName("containingBundleName"))
 	if _r == 0 {
 		return ""
@@ -100,13 +110,15 @@ func (mep *MediaExtensionProperties) ContainingBundleName() string {
 }
 
 // ExtensionURL returns the file URL of the MediaExtension bundle.
-func (mep *MediaExtensionProperties) ExtensionURL() obj.Object {
+func (mep *MediaExtensionProperties) ExtensionURL() string {
+	defer runtime.KeepAlive(mep)
 	_r := objc.Send[objc.ID](objref.IDOf(mep), objc.RegisterName("extensionURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // ContainingBundleURL returns the file URL of the host application for the MediaExtension.
-func (mep *MediaExtensionProperties) ContainingBundleURL() obj.Object {
+func (mep *MediaExtensionProperties) ContainingBundleURL() string {
+	defer runtime.KeepAlive(mep)
 	_r := objc.Send[objc.ID](objref.IDOf(mep), objc.RegisterName("containingBundleURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mediaPresentationSelectorAdopt(id objc.ID) *MediaPresentationSelector {
 
 // Description returns the object's -description text.
 func (mps *MediaPresentationSelector) Description() string {
+	defer runtime.KeepAlive(mps)
 	return rt.Description(objref.IDOf(mps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mps *MediaPresentationSelector) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mps *MediaPresentationSelector) IsKind(className string) bool {
+	defer runtime.KeepAlive(mps)
 	return rt.IsKind(objref.IDOf(mps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mps *MediaPresentationSelector) String() string {
+	defer runtime.KeepAlive(mps)
 	return rt.Description(objref.IDOf(mps))
 }
 
@@ -74,6 +81,7 @@ func NewMediaPresentationSelector() *MediaPresentationSelector {
 
 // DisplayNameForLocaleIdentifier returns the display name for the selector that best matches the specified locale identifier.
 func (mps *MediaPresentationSelector) DisplayNameForLocaleIdentifier(localeIdentifier string) string {
+	defer runtime.KeepAlive(mps)
 	_r := objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("displayNameForLocaleIdentifier:"), purego.NSString(localeIdentifier))
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (mps *MediaPresentationSelector) DisplayNameForLocaleIdentifier(localeIdent
 
 // Identifier provides the authored identifier for the selector.
 func (mps *MediaPresentationSelector) Identifier() string {
+	defer runtime.KeepAlive(mps)
 	_r := objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -94,6 +103,7 @@ func (mps *MediaPresentationSelector) Identifier() string {
 //
 // Settings returns the collection as a Go slice.
 func (mps *MediaPresentationSelector) Settings() []*MediaPresentationSetting {
+	defer runtime.KeepAlive(mps)
 	_arr := objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("settings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaPresentationSetting { return MediaPresentationSettingFromID(_id) })
 }

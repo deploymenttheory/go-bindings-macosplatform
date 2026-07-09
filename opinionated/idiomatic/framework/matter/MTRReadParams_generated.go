@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func mTRReadParamsAdopt(id objc.ID) *MTRReadParams {
 
 // Description returns the object's -description text.
 func (mrp *MTRReadParams) Description() string {
+	defer runtime.KeepAlive(mrp)
 	return rt.Description(objref.IDOf(mrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mrp *MTRReadParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mrp *MTRReadParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mrp)
 	return rt.IsKind(objref.IDOf(mrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mrp *MTRReadParams) String() string {
+	defer runtime.KeepAlive(mrp)
 	return rt.Description(objref.IDOf(mrp))
 }
 
@@ -74,6 +82,7 @@ func (mrp *MTRReadParams) WithFilterByFabric(filterByFabric bool) *MTRReadParams
 
 // WithMinEventNumber sets sets a filter for which events will be reported in the read/subscribe interaction. If nil (the default value), all of the queued events will be reported from lowest to highest event number. If not nil, queued events with an event number smaller than minEventNumber will not be reported.
 func (mrp *MTRReadParams) WithMinEventNumber(minEventNumber obj.Object) *MTRReadParams {
+	defer runtime.KeepAlive(minEventNumber)
 	objc.Send[objc.ID](objref.IDOf(mrp), objc.RegisterName("setMinEventNumber:"), objref.IDOf(minEventNumber))
 	return mrp
 }
@@ -86,32 +95,37 @@ func (mrp *MTRReadParams) WithAssumeUnknownAttributesReportable(assumeUnknownAtt
 
 // WithFabricFiltered sets the fabric filtered.
 func (mrp *MTRReadParams) WithFabricFiltered(fabricFiltered obj.Object) *MTRReadParams {
+	defer runtime.KeepAlive(fabricFiltered)
 	objc.Send[objc.ID](objref.IDOf(mrp), objc.RegisterName("setFabricFiltered:"), objref.IDOf(fabricFiltered))
 	return mrp
 }
 
 // ShouldFilterByFabric wraps the corresponding Objective-C method.
 func (mrp *MTRReadParams) ShouldFilterByFabric() bool {
+	defer runtime.KeepAlive(mrp)
 	_r := objc.Send[bool](objref.IDOf(mrp), objc.RegisterName("shouldFilterByFabric"))
 	return _r
 }
 
 // MinEventNumber sets a filter for which events will be reported in the read/subscribe interaction. If nil (the default value), all of the queued events will be reported from lowest to highest event number. If not nil, queued events with an event number smaller than minEventNumber will not be reported.
-func (mrp *MTRReadParams) MinEventNumber() obj.Object {
+func (mrp *MTRReadParams) MinEventNumber() *foundation.Number {
+	defer runtime.KeepAlive(mrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mrp), objc.RegisterName("minEventNumber"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ShouldAssumeUnknownAttributesReportable reports whether controls whether attributes without known schema (e.g. vendor-specific attributes) should be assumed to be reportable normally via subscriptions. The default is true. This setting is only relevant to some consumers of MTRReadParams. One of those consumers is readAttributeWithEndpointID:clusterID:attributeID:params: on MTRDevice.
 func (mrp *MTRReadParams) ShouldAssumeUnknownAttributesReportable() bool {
+	defer runtime.KeepAlive(mrp)
 	_r := objc.Send[bool](objref.IDOf(mrp), objc.RegisterName("shouldAssumeUnknownAttributesReportable"))
 	return _r
 }
 
 // FabricFiltered returns the fabric filtered.
-func (mrp *MTRReadParams) FabricFiltered() obj.Object {
+func (mrp *MTRReadParams) FabricFiltered() *foundation.Number {
+	defer runtime.KeepAlive(mrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mrp), objc.RegisterName("fabricFiltered"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRReadParams marks MTRReadParams — and, by embedding promotion, its

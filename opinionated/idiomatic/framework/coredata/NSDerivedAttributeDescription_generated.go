@@ -5,7 +5,10 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -54,6 +57,7 @@ func NewDerivedAttributeDescription() *DerivedAttributeDescription {
 
 // WithDerivationExpression sets an expression for generating derived data.
 func (dad *DerivedAttributeDescription) WithDerivationExpression(derivationExpression obj.Object) *DerivedAttributeDescription {
+	defer runtime.KeepAlive(derivationExpression)
 	objc.Send[objc.ID](objref.IDOf(dad), objc.RegisterName("setDerivationExpression:"), objref.IDOf(derivationExpression))
 	return dad
 }
@@ -72,6 +76,7 @@ func (dad *DerivedAttributeDescription) WithAttributeValueClassName(attributeVal
 
 // WithDefaultValue sets the default value of the attribute.
 func (dad *DerivedAttributeDescription) WithDefaultValue(defaultValue obj.Object) *DerivedAttributeDescription {
+	defer runtime.KeepAlive(defaultValue)
 	objc.Send[objc.ID](objref.IDOf(dad), objc.RegisterName("setDefaultValue:"), objref.IDOf(defaultValue))
 	return dad
 }
@@ -120,6 +125,7 @@ func (dad *DerivedAttributeDescription) WithTransient(transient bool) *DerivedAt
 
 // WithUserInfo sets the user info dictionary of the receiver.
 func (dad *DerivedAttributeDescription) WithUserInfo(userInfo obj.Object) *DerivedAttributeDescription {
+	defer runtime.KeepAlive(userInfo)
 	objc.Send[objc.ID](objref.IDOf(dad), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return dad
 }
@@ -155,9 +161,10 @@ func (dad *DerivedAttributeDescription) WithRenamingIdentifier(renamingIdentifie
 }
 
 // DerivationExpression returns the derivation expression.
-func (dad *DerivedAttributeDescription) DerivationExpression() obj.Object {
+func (dad *DerivedAttributeDescription) DerivationExpression() *foundation.Expression {
+	defer runtime.KeepAlive(dad)
 	_r := objc.Send[objc.ID](objref.IDOf(dad), objc.RegisterName("derivationExpression"))
-	return obj.Wrap(_r)
+	return foundation.ExpressionFromID(_r)
 }
 
 var _ AttributeDescriptionProvider = (*DerivedAttributeDescription)(nil)

@@ -5,11 +5,12 @@
 package fskit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -62,14 +63,14 @@ func NameWithCString(name string) *FileName {
 }
 
 // NameWithBytesLength creates a filename by copying a character sequence from a byte array.
-func NameWithBytesLength(bytes_ string, length int) *FileName {
-	_r := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("nameWithBytes:length:"), bytes_, length)
+func NameWithBytesLength(data string, length int) *FileName {
+	_r := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("nameWithBytes:length:"), data, length)
 	return FileNameFromID(_r)
 }
 
 // NameWithData creates a filename by copying a character sequence data object.
-func NameWithData(name obj.Object) *FileName {
-	_r := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("nameWithData:"), objref.IDOf(name))
+func NameWithData(name []byte) *FileName {
+	_r := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("nameWithData:"), rt.BytesToNSData(name))
 	return FileNameFromID(_r)
 }
 
@@ -87,18 +88,21 @@ func RangeWithOffsetSegmentLengthSegmentCount(startOffset int64, segmentLength u
 
 // RecognizedProbeResultWithNameContainerID creates a probe result for a recognized file system.
 func RecognizedProbeResultWithNameContainerID(name string, containerID *ContainerIdentifier) *ProbeResult {
+	defer runtime.KeepAlive(containerID)
 	_r := objc.Send[objc.ID](objc.ID(_class("FSProbeResult")), objc.RegisterName("recognizedProbeResultWithName:containerID:"), purego.NSString(name), objref.IDOf(containerID))
 	return ProbeResultFromID(_r)
 }
 
 // UsableButLimitedProbeResultWithNameContainerID creates a probe result for a recognized file system that is usable, but with limited capabilities.
 func UsableButLimitedProbeResultWithNameContainerID(name string, containerID *ContainerIdentifier) *ProbeResult {
+	defer runtime.KeepAlive(containerID)
 	_r := objc.Send[objc.ID](objc.ID(_class("FSProbeResult")), objc.RegisterName("usableButLimitedProbeResultWithName:containerID:"), purego.NSString(name), objref.IDOf(containerID))
 	return ProbeResultFromID(_r)
 }
 
 // UsableProbeResultWithNameContainerID creates a probe result for a recognized and usable file system.
 func UsableProbeResultWithNameContainerID(name string, containerID *ContainerIdentifier) *ProbeResult {
+	defer runtime.KeepAlive(containerID)
 	_r := objc.Send[objc.ID](objc.ID(_class("FSProbeResult")), objc.RegisterName("usableProbeResultWithName:containerID:"), purego.NSString(name), objref.IDOf(containerID))
 	return ProbeResultFromID(_r)
 }

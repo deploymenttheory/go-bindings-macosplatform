@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func transformAdopt(id objc.ID) *Transform {
 
 // Description returns the object's -description text.
 func (t *Transform) Description() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (t *Transform) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (t *Transform) IsKind(className string) bool {
+	defer runtime.KeepAlive(t)
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (t *Transform) String() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
@@ -114,30 +120,36 @@ func (t *Transform) WithScale(scale unsafe.Pointer) *Transform {
 
 // SetIdentity sets all factors of the transform to those of the identity transformation.
 func (t *Transform) SetIdentity() {
+	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setIdentity"))
 }
 
 // SetMatrixForTime wraps the corresponding Objective-C method.
 func (t *Transform) SetMatrixForTime(matrix unsafe.Pointer, time_ float64) {
+	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setMatrix:forTime:"), matrix, time_)
 }
 
 // SetTranslationForTime sets the x-, y-, and z-axis offsets of the transform for the specified time sample.
 func (t *Transform) SetTranslationForTime(translation unsafe.Pointer, time_ float64) {
+	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTranslation:forTime:"), translation, time_)
 }
 
 // SetRotationForTime sets the orientation of the transform for the specified time sample.
 func (t *Transform) SetRotationForTime(rotation unsafe.Pointer, time_ float64) {
+	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setRotation:forTime:"), rotation, time_)
 }
 
 // SetShearForTime sets the x-, y-, and z-axis shear factors of the transform for the specified time sample.
 func (t *Transform) SetShearForTime(shear unsafe.Pointer, time_ float64) {
+	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setShear:forTime:"), shear, time_)
 }
 
 // SetScaleForTime sets the x-, y-, and z-axis scale factors of the transform for the specified time sample.
 func (t *Transform) SetScaleForTime(scale unsafe.Pointer, time_ float64) {
+	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setScale:forTime:"), scale, time_)
 }

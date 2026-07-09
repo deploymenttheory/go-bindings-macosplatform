@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRMessagesClusterCancelMessagesRequestParamsAdopt(id objc.ID) *MTRMessages
 
 // Description returns the object's -description text.
 func (mmccmrp *MTRMessagesClusterCancelMessagesRequestParams) Description() string {
+	defer runtime.KeepAlive(mmccmrp)
 	return rt.Description(objref.IDOf(mmccmrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmccmrp *MTRMessagesClusterCancelMessagesRequestParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmccmrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmccmrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmccmrp *MTRMessagesClusterCancelMessagesRequestParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmccmrp)
 	return rt.IsKind(objref.IDOf(mmccmrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmccmrp *MTRMessagesClusterCancelMessagesRequestParams) String() string {
+	defer runtime.KeepAlive(mmccmrp)
 	return rt.Description(objref.IDOf(mmccmrp))
 }
 
@@ -72,35 +80,42 @@ func NewMTRMessagesClusterCancelMessagesRequestParams() *MTRMessagesClusterCance
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mmccmrp *MTRMessagesClusterCancelMessagesRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMessagesClusterCancelMessagesRequestParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mmccmrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mmccmrp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mmccmrp *MTRMessagesClusterCancelMessagesRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMessagesClusterCancelMessagesRequestParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mmccmrp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mmccmrp
 }
 
 // MessageIDs returns the message i ds.
 func (mmccmrp *MTRMessagesClusterCancelMessagesRequestParams) MessageIDs() obj.Object {
+	defer runtime.KeepAlive(mmccmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmccmrp), objc.RegisterName("messageIDs"))
 	return obj.Wrap(_r)
 }
 
 // SetMessageIDs wraps the corresponding Objective-C method.
 func (mmccmrp *MTRMessagesClusterCancelMessagesRequestParams) SetMessageIDs(messageIDs obj.Object) {
+	defer runtime.KeepAlive(mmccmrp)
+	defer runtime.KeepAlive(messageIDs)
 	objc.Send[objc.ID](objref.IDOf(mmccmrp), objc.RegisterName("setMessageIDs:"), objref.IDOf(messageIDs))
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mmccmrp *MTRMessagesClusterCancelMessagesRequestParams) TimedInvokeTimeoutMs() obj.Object {
+func (mmccmrp *MTRMessagesClusterCancelMessagesRequestParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mmccmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmccmrp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mmccmrp *MTRMessagesClusterCancelMessagesRequestParams) ServerSideProcessingTimeout() obj.Object {
+func (mmccmrp *MTRMessagesClusterCancelMessagesRequestParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mmccmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmccmrp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

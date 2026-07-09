@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func vertexBufferLayoutAdopt(id objc.ID) *VertexBufferLayout {
 
 // Description returns the object's -description text.
 func (vbl *VertexBufferLayout) Description() string {
+	defer runtime.KeepAlive(vbl)
 	return rt.Description(objref.IDOf(vbl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vbl *VertexBufferLayout) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vbl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vbl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vbl *VertexBufferLayout) IsKind(className string) bool {
+	defer runtime.KeepAlive(vbl)
 	return rt.IsKind(objref.IDOf(vbl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vbl *VertexBufferLayout) String() string {
+	defer runtime.KeepAlive(vbl)
 	return rt.Description(objref.IDOf(vbl))
 }
 
@@ -81,6 +88,7 @@ func (vbl *VertexBufferLayout) WithStride(stride int) *VertexBufferLayout {
 
 // Stride returns the stride.
 func (vbl *VertexBufferLayout) Stride() int {
+	defer runtime.KeepAlive(vbl)
 	_r := objc.Send[int](objref.IDOf(vbl), objc.RegisterName("stride"))
 	return _r
 }

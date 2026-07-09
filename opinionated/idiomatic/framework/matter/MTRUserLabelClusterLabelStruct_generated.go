@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRUserLabelClusterLabelStructAdopt(id objc.ID) *MTRUserLabelClusterLabelSt
 
 // Description returns the object's -description text.
 func (mulcls *MTRUserLabelClusterLabelStruct) Description() string {
+	defer runtime.KeepAlive(mulcls)
 	return rt.Description(objref.IDOf(mulcls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mulcls *MTRUserLabelClusterLabelStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mulcls)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mulcls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mulcls *MTRUserLabelClusterLabelStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mulcls)
 	return rt.IsKind(objref.IDOf(mulcls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mulcls *MTRUserLabelClusterLabelStruct) String() string {
+	defer runtime.KeepAlive(mulcls)
 	return rt.Description(objref.IDOf(mulcls))
 }
 
@@ -84,6 +91,7 @@ func (mulcls *MTRUserLabelClusterLabelStruct) WithValue(value string) *MTRUserLa
 
 // Label returns the label.
 func (mulcls *MTRUserLabelClusterLabelStruct) Label() string {
+	defer runtime.KeepAlive(mulcls)
 	_r := objc.Send[objc.ID](objref.IDOf(mulcls), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -93,6 +101,7 @@ func (mulcls *MTRUserLabelClusterLabelStruct) Label() string {
 
 // Value returns the value.
 func (mulcls *MTRUserLabelClusterLabelStruct) Value() string {
+	defer runtime.KeepAlive(mulcls)
 	_r := objc.Send[objc.ID](objref.IDOf(mulcls), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""

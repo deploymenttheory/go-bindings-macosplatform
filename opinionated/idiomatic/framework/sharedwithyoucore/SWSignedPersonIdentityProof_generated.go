@@ -5,9 +5,11 @@
 package sharedwithyoucore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,16 +47,18 @@ func signedPersonIdentityProofAdopt(id objc.ID) *SignedPersonIdentityProof {
 }
 
 // NewSignedPersonIdentityProofWithPersonIdentityProofSignatureData creates a new SignedPersonIdentityProof.
-func NewSignedPersonIdentityProofWithPersonIdentityProofSignatureData(personIdentityProof *PersonIdentityProof, data obj.Object) *SignedPersonIdentityProof {
+func NewSignedPersonIdentityProofWithPersonIdentityProofSignatureData(personIdentityProof *PersonIdentityProof, data []byte) *SignedPersonIdentityProof {
+	defer runtime.KeepAlive(personIdentityProof)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWSignedPersonIdentityProof")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonIdentityProof:signatureData:"), objref.IDOf(personIdentityProof), objref.IDOf(data))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonIdentityProof:signatureData:"), objref.IDOf(personIdentityProof), rt.BytesToNSData(data))
 	return signedPersonIdentityProofAdopt(_id)
 }
 
 // SignatureData returns the signature data.
-func (spip *SignedPersonIdentityProof) SignatureData() obj.Object {
+func (spip *SignedPersonIdentityProof) SignatureData() []byte {
+	defer runtime.KeepAlive(spip)
 	_r := objc.Send[objc.ID](objref.IDOf(spip), objc.RegisterName("signatureData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ PersonIdentityProofProvider = (*SignedPersonIdentityProof)(nil)

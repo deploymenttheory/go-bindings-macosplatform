@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func geometryUtilsAdopt(id objc.ID) *GeometryUtils {
 
 // Description returns the object's -description text.
 func (gu *GeometryUtils) Description() string {
+	defer runtime.KeepAlive(gu)
 	return rt.Description(objref.IDOf(gu))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gu *GeometryUtils) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gu)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gu), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gu *GeometryUtils) IsKind(className string) bool {
+	defer runtime.KeepAlive(gu)
 	return rt.IsKind(objref.IDOf(gu), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gu *GeometryUtils) String() string {
+	defer runtime.KeepAlive(gu)
 	return rt.Description(objref.IDOf(gu))
 }
 

@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,48 +56,56 @@ func NewDiskSpaceUsageMetric() *DiskSpaceUsageMetric {
 
 // TotalBinaryFileSize returns total fixed size used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
 func (dsum *DiskSpaceUsageMetric) TotalBinaryFileSize() obj.Object {
+	defer runtime.KeepAlive(dsum)
 	_r := objc.Send[objc.ID](objref.IDOf(dsum), objc.RegisterName("totalBinaryFileSize"))
 	return obj.Wrap(_r)
 }
 
 // TotalBinaryFileCount returns total count of fixed files owned by the app.
 func (dsum *DiskSpaceUsageMetric) TotalBinaryFileCount() int {
+	defer runtime.KeepAlive(dsum)
 	_r := objc.Send[int](objref.IDOf(dsum), objc.RegisterName("totalBinaryFileCount"))
 	return _r
 }
 
 // TotalDataFileSize returns total data file size used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
 func (dsum *DiskSpaceUsageMetric) TotalDataFileSize() obj.Object {
+	defer runtime.KeepAlive(dsum)
 	_r := objc.Send[objc.ID](objref.IDOf(dsum), objc.RegisterName("totalDataFileSize"))
 	return obj.Wrap(_r)
 }
 
 // TotalDataFileCount returns total count of data files owned by the app.
 func (dsum *DiskSpaceUsageMetric) TotalDataFileCount() int {
+	defer runtime.KeepAlive(dsum)
 	_r := objc.Send[int](objref.IDOf(dsum), objc.RegisterName("totalDataFileCount"))
 	return _r
 }
 
 // TotalCacheFolderSize returns total file size contained within the apps cache folder. Dimensioned as NSUnitInformationStorage, base unit is bytes.
 func (dsum *DiskSpaceUsageMetric) TotalCacheFolderSize() obj.Object {
+	defer runtime.KeepAlive(dsum)
 	_r := objc.Send[objc.ID](objref.IDOf(dsum), objc.RegisterName("totalCacheFolderSize"))
 	return obj.Wrap(_r)
 }
 
 // TotalCloneSize returns total clone size used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
 func (dsum *DiskSpaceUsageMetric) TotalCloneSize() obj.Object {
+	defer runtime.KeepAlive(dsum)
 	_r := objc.Send[objc.ID](objref.IDOf(dsum), objc.RegisterName("totalCloneSize"))
 	return obj.Wrap(_r)
 }
 
 // TotalDiskSpaceUsedSize returns total disk space used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
 func (dsum *DiskSpaceUsageMetric) TotalDiskSpaceUsedSize() obj.Object {
+	defer runtime.KeepAlive(dsum)
 	_r := objc.Send[objc.ID](objref.IDOf(dsum), objc.RegisterName("totalDiskSpaceUsedSize"))
 	return obj.Wrap(_r)
 }
 
 // TotalDiskSpaceCapacity returns total disk space capacity of the device Dimensioned as NSUnitInformationStorage, base unit is bytes.
 func (dsum *DiskSpaceUsageMetric) TotalDiskSpaceCapacity() obj.Object {
+	defer runtime.KeepAlive(dsum)
 	_r := objc.Send[objc.ID](objref.IDOf(dsum), objc.RegisterName("totalDiskSpaceCapacity"))
 	return obj.Wrap(_r)
 }

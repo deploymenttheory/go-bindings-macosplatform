@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -84,6 +86,7 @@ func (ic *ImageCell) WithImageFrameStyle(imageFrameStyle ImageFrameStyle) *Image
 
 // WithControlView sets the view associated with the cell.
 func (ic *ImageCell) WithControlView(controlView ViewProvider) *ImageCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -108,6 +111,7 @@ func (ic *ImageCell) WithState(state int) *ImageCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (ic *ImageCell) WithTarget(target obj.Object) *ImageCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -212,6 +216,7 @@ func (ic *ImageCell) WithWraps(wraps bool) *ImageCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (ic *ImageCell) WithFont(font *Font) *ImageCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -220,6 +225,7 @@ func (ic *ImageCell) WithFont(font *Font) *ImageCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (ic *ImageCell) WithFormatter(formatter obj.Object) *ImageCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -228,6 +234,7 @@ func (ic *ImageCell) WithFormatter(formatter obj.Object) *ImageCell {
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (ic *ImageCell) WithObjectValue(objectValue obj.Object) *ImageCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -276,6 +283,7 @@ func (ic *ImageCell) WithIntegerValue(integerValue int) *ImageCell {
 
 // WithImage sets the image displayed by the cell, if any.
 func (ic *ImageCell) WithImage(image *Image) *ImageCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -292,6 +300,7 @@ func (ic *ImageCell) WithControlSize(controlSize ControlSize) *ImageCell {
 
 // WithRepresentedObject sets the object represented by the cell.
 func (ic *ImageCell) WithRepresentedObject(representedObject obj.Object) *ImageCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -300,6 +309,7 @@ func (ic *ImageCell) WithRepresentedObject(representedObject obj.Object) *ImageC
 
 // WithMenu sets the cell’s contextual menu.
 func (ic *ImageCell) WithMenu(menu *Menu) *ImageCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -388,6 +398,7 @@ func (ic *ImageCell) WithFocusRingType(focusRingType FocusRingType) *ImageCell {
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (ic *ImageCell) WithAttributedStringValue(attributedStringValue obj.Object) *ImageCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -436,6 +447,7 @@ func (ic *ImageCell) WithControlTint(controlTint ControlTint) *ImageCell {
 
 // ImageAlignment returns the image alignment.
 func (ic *ImageCell) ImageAlignment() ImageAlignment {
+	defer runtime.KeepAlive(ic)
 	var _mainthread0 ImageAlignment
 	purego.Main(func() {
 		_mainthread0 = func() ImageAlignment {
@@ -449,6 +461,7 @@ func (ic *ImageCell) ImageAlignment() ImageAlignment {
 
 // ImageScaling returns the image scaling.
 func (ic *ImageCell) ImageScaling() ImageScaling {
+	defer runtime.KeepAlive(ic)
 	var _mainthread0 ImageScaling
 	purego.Main(func() {
 		_mainthread0 = func() ImageScaling {
@@ -462,6 +475,7 @@ func (ic *ImageCell) ImageScaling() ImageScaling {
 
 // ImageFrameStyle returns the image frame style.
 func (ic *ImageCell) ImageFrameStyle() ImageFrameStyle {
+	defer runtime.KeepAlive(ic)
 	var _mainthread0 ImageFrameStyle
 	purego.Main(func() {
 		_mainthread0 = func() ImageFrameStyle {

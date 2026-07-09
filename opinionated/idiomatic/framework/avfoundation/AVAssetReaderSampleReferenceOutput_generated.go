@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func assetReaderSampleReferenceOutputAdopt(id objc.ID) *AssetReaderSampleReferen
 
 // NewAssetReaderSampleReferenceOutputWithTrack creates an object that supplies sample references.
 func NewAssetReaderSampleReferenceOutputWithTrack(track *AssetTrack) *AssetReaderSampleReferenceOutput {
+	defer runtime.KeepAlive(track)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderSampleReferenceOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTrack:"), objref.IDOf(track))
 	return assetReaderSampleReferenceOutputAdopt(_id)
@@ -66,6 +69,7 @@ func (arsro *AssetReaderSampleReferenceOutput) WithSupportsRandomAccess(supports
 
 // Track returns the track.
 func (arsro *AssetReaderSampleReferenceOutput) Track() *AssetTrack {
+	defer runtime.KeepAlive(arsro)
 	_r := objc.Send[objc.ID](objref.IDOf(arsro), objc.RegisterName("track"))
 	return AssetTrackFromID(_r)
 }

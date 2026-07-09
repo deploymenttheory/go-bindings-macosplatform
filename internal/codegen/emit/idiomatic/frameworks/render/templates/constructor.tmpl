@@ -9,6 +9,9 @@
     reused verbatim inside an inner closure. Spacing is loose here; gofmt tidies.
 */}}
 {{define "constructor"}}{{.DocComment}}func {{.GoName}}({{.ParamStr}}) {{.RetStr}} {
+{{- range .KeepAlive}}
+defer runtime.KeepAlive({{.}})
+{{- end}}
 {{- if .Preamble}}
 {{.Preamble}}
 {{- end}}

@@ -5,6 +5,8 @@
 package videotoolbox
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func lowLatencyFrameInterpolationConfigurationAdopt(id objc.ID) *LowLatencyFrame
 
 // Description returns the object's -description text.
 func (llfic *LowLatencyFrameInterpolationConfiguration) Description() string {
+	defer runtime.KeepAlive(llfic)
 	return rt.Description(objref.IDOf(llfic))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (llfic *LowLatencyFrameInterpolationConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(llfic)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(llfic), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (llfic *LowLatencyFrameInterpolationConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(llfic)
 	return rt.IsKind(objref.IDOf(llfic), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (llfic *LowLatencyFrameInterpolationConfiguration) String() string {
+	defer runtime.KeepAlive(llfic)
 	return rt.Description(objref.IDOf(llfic))
 }
 
@@ -82,24 +89,28 @@ func NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightSpatia
 
 // FrameWidth returns width of source frames in pixels.
 func (llfic *LowLatencyFrameInterpolationConfiguration) FrameWidth() int {
+	defer runtime.KeepAlive(llfic)
 	_r := objc.Send[int](objref.IDOf(llfic), objc.RegisterName("frameWidth"))
 	return _r
 }
 
 // FrameHeight returns height of source frames in pixels.
 func (llfic *LowLatencyFrameInterpolationConfiguration) FrameHeight() int {
+	defer runtime.KeepAlive(llfic)
 	_r := objc.Send[int](objref.IDOf(llfic), objc.RegisterName("frameHeight"))
 	return _r
 }
 
 // SpatialScaleFactor returns configured spatial scale factor as an integer.
 func (llfic *LowLatencyFrameInterpolationConfiguration) SpatialScaleFactor() int {
+	defer runtime.KeepAlive(llfic)
 	_r := objc.Send[int](objref.IDOf(llfic), objc.RegisterName("spatialScaleFactor"))
 	return _r
 }
 
 // NumberOfInterpolatedFrames returns number of uniformly spaced frames for which you configured the processor.
 func (llfic *LowLatencyFrameInterpolationConfiguration) NumberOfInterpolatedFrames() int {
+	defer runtime.KeepAlive(llfic)
 	_r := objc.Send[int](objref.IDOf(llfic), objc.RegisterName("numberOfInterpolatedFrames"))
 	return _r
 }
@@ -108,18 +119,21 @@ func (llfic *LowLatencyFrameInterpolationConfiguration) NumberOfInterpolatedFram
 //
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (llfic *LowLatencyFrameInterpolationConfiguration) FrameSupportedPixelFormats() []obj.Object {
+	defer runtime.KeepAlive(llfic)
 	_arr := objc.Send[objc.ID](objref.IDOf(llfic), objc.RegisterName("frameSupportedPixelFormats"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SourcePixelBufferAttributes returns pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-func (llfic *LowLatencyFrameInterpolationConfiguration) SourcePixelBufferAttributes() obj.Object {
+func (llfic *LowLatencyFrameInterpolationConfiguration) SourcePixelBufferAttributes() map[string]obj.Object {
+	defer runtime.KeepAlive(llfic)
 	_r := objc.Send[objc.ID](objref.IDOf(llfic), objc.RegisterName("sourcePixelBufferAttributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DestinationPixelBufferAttributes returns pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-func (llfic *LowLatencyFrameInterpolationConfiguration) DestinationPixelBufferAttributes() obj.Object {
+func (llfic *LowLatencyFrameInterpolationConfiguration) DestinationPixelBufferAttributes() map[string]obj.Object {
+	defer runtime.KeepAlive(llfic)
 	_r := objc.Send[objc.ID](objref.IDOf(llfic), objc.RegisterName("destinationPixelBufferAttributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

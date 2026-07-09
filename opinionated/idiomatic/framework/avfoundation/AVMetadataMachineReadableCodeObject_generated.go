@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -56,12 +58,14 @@ func NewMetadataMachineReadableCodeObject() *MetadataMachineReadableCodeObject {
 //
 // Corners returns the collection as a Go slice.
 func (mmrco *MetadataMachineReadableCodeObject) Corners() []obj.Object {
+	defer runtime.KeepAlive(mmrco)
 	_arr := objc.Send[objc.ID](objref.IDOf(mmrco), objc.RegisterName("corners"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // StringValue returns the receiver's errorCorrectedData decoded into a human-readable string. The value of this property is an NSString created by decoding the binary payload according to the format of the machine readable code. Returns nil if a string representation cannot be created from the payload.
 func (mmrco *MetadataMachineReadableCodeObject) StringValue() string {
+	defer runtime.KeepAlive(mmrco)
 	_r := objc.Send[objc.ID](objref.IDOf(mmrco), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""
@@ -71,6 +75,7 @@ func (mmrco *MetadataMachineReadableCodeObject) StringValue() string {
 
 // Descriptor returns the descriptor.
 func (mmrco *MetadataMachineReadableCodeObject) Descriptor() obj.Object {
+	defer runtime.KeepAlive(mmrco)
 	_r := objc.Send[objc.ID](objref.IDOf(mmrco), objc.RegisterName("descriptor"))
 	return obj.Wrap(_r)
 }

@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -103,30 +105,35 @@ func (riil *RNNImageInferenceLayer) WithLabel(label string) *RNNImageInferenceLa
 
 // InputFeatureChannels returns the number of feature channels per pixel in the input image.
 func (riil *RNNImageInferenceLayer) InputFeatureChannels() int {
+	defer runtime.KeepAlive(riil)
 	_r := objc.Send[int](objref.IDOf(riil), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
 // OutputFeatureChannels returns the number of feature channels per pixel in the output image.
 func (riil *RNNImageInferenceLayer) OutputFeatureChannels() int {
+	defer runtime.KeepAlive(riil)
 	_r := objc.Send[int](objref.IDOf(riil), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }
 
 // NumberOfLayers returns number of layers in the filter-stack. This will be one when using initWithDevice:rnnDescriptor to initialize this filter and the number of entries in the array 'rnnDescriptors' when initializing this filter with initWithDevice:rnnDescriptors.
 func (riil *RNNImageInferenceLayer) NumberOfLayers() int {
+	defer runtime.KeepAlive(riil)
 	_r := objc.Send[int](objref.IDOf(riil), objc.RegisterName("numberOfLayers"))
 	return _r
 }
 
 // RecurrentOutputIsTemporary reports whether how output states from
 func (riil *RNNImageInferenceLayer) RecurrentOutputIsTemporary() bool {
+	defer runtime.KeepAlive(riil)
 	_r := objc.Send[bool](objref.IDOf(riil), objc.RegisterName("recurrentOutputIsTemporary"))
 	return _r
 }
 
 // StoreAllIntermediateStates reports whether if true then calls to
 func (riil *RNNImageInferenceLayer) StoreAllIntermediateStates() bool {
+	defer runtime.KeepAlive(riil)
 	_r := objc.Send[bool](objref.IDOf(riil), objc.RegisterName("storeAllIntermediateStates"))
 	return _r
 }

@@ -6,9 +6,11 @@ package authenticationservices
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -77,26 +79,28 @@ func CredentialWithCode(code string) *OneTimeCodeCredential {
 }
 
 // CredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID creates and initializes a new passkey assertion credential.
-func CredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID(userHandle obj.Object, relyingParty string, signature obj.Object, clientDataHash obj.Object, authenticatorData obj.Object, credentialID obj.Object) *PasskeyAssertionCredential {
-	_r := objc.Send[objc.ID](objc.ID(_class("ASPasskeyAssertionCredential")), objc.RegisterName("credentialWithUserHandle:relyingParty:signature:clientDataHash:authenticatorData:credentialID:"), objref.IDOf(userHandle), purego.NSString(relyingParty), objref.IDOf(signature), objref.IDOf(clientDataHash), objref.IDOf(authenticatorData), objref.IDOf(credentialID))
+func CredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID(userHandle []byte, relyingParty string, signature []byte, clientDataHash []byte, authenticatorData []byte, credentialID []byte) *PasskeyAssertionCredential {
+	_r := objc.Send[objc.ID](objc.ID(_class("ASPasskeyAssertionCredential")), objc.RegisterName("credentialWithUserHandle:relyingParty:signature:clientDataHash:authenticatorData:credentialID:"), rt.BytesToNSData(userHandle), purego.NSString(relyingParty), rt.BytesToNSData(signature), rt.BytesToNSData(clientDataHash), rt.BytesToNSData(authenticatorData), rt.BytesToNSData(credentialID))
 	return PasskeyAssertionCredentialFromID(_r)
 }
 
 // IdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier creates and initializes a passkey credential identity.
-func IdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier(relyingPartyIdentifier string, userName string, credentialID obj.Object, userHandle obj.Object, recordIdentifier string) *PasskeyCredentialIdentity {
-	_r := objc.Send[objc.ID](objc.ID(_class("ASPasskeyCredentialIdentity")), objc.RegisterName("identityWithRelyingPartyIdentifier:userName:credentialID:userHandle:recordIdentifier:"), purego.NSString(relyingPartyIdentifier), purego.NSString(userName), objref.IDOf(credentialID), objref.IDOf(userHandle), purego.NSString(recordIdentifier))
+func IdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier(relyingPartyIdentifier string, userName string, credentialID []byte, userHandle []byte, recordIdentifier string) *PasskeyCredentialIdentity {
+	_r := objc.Send[objc.ID](objc.ID(_class("ASPasskeyCredentialIdentity")), objc.RegisterName("identityWithRelyingPartyIdentifier:userName:credentialID:userHandle:recordIdentifier:"), purego.NSString(relyingPartyIdentifier), purego.NSString(userName), rt.BytesToNSData(credentialID), rt.BytesToNSData(userHandle), purego.NSString(recordIdentifier))
 	return PasskeyCredentialIdentityFromID(_r)
 }
 
 // RequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms initializes a passkey credential request, identifying supported algorithms by number.
-func RequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms(credentialIdentity *PasskeyCredentialIdentity, clientDataHash obj.Object, userVerificationPreference obj.Object, supportedAlgorithms []obj.Object) *PasskeyCredentialRequest {
-	_r := objc.Send[objc.ID](objc.ID(_class("ASPasskeyCredentialRequest")), objc.RegisterName("requestWithCredentialIdentity:clientDataHash:userVerificationPreference:supportedAlgorithms:"), objref.IDOf(credentialIdentity), objref.IDOf(clientDataHash), objref.IDOf(userVerificationPreference), purego.SliceToNSArray(supportedAlgorithms, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func RequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms(credentialIdentity *PasskeyCredentialIdentity, clientDataHash []byte, userVerificationPreference obj.Object, supportedAlgorithms []*foundation.Number) *PasskeyCredentialRequest {
+	defer runtime.KeepAlive(credentialIdentity)
+	defer runtime.KeepAlive(userVerificationPreference)
+	_r := objc.Send[objc.ID](objc.ID(_class("ASPasskeyCredentialRequest")), objc.RegisterName("requestWithCredentialIdentity:clientDataHash:userVerificationPreference:supportedAlgorithms:"), objref.IDOf(credentialIdentity), rt.BytesToNSData(clientDataHash), objref.IDOf(userVerificationPreference), purego.SliceToNSArray(supportedAlgorithms, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return PasskeyCredentialRequestFromID(_r)
 }
 
 // CredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject creates and initializes a new passkey registration credential.
-func CredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject(relyingParty string, clientDataHash obj.Object, credentialID obj.Object, attestationObject obj.Object) *PasskeyRegistrationCredential {
-	_r := objc.Send[objc.ID](objc.ID(_class("ASPasskeyRegistrationCredential")), objc.RegisterName("credentialWithRelyingParty:clientDataHash:credentialID:attestationObject:"), purego.NSString(relyingParty), objref.IDOf(clientDataHash), objref.IDOf(credentialID), objref.IDOf(attestationObject))
+func CredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject(relyingParty string, clientDataHash []byte, credentialID []byte, attestationObject []byte) *PasskeyRegistrationCredential {
+	_r := objc.Send[objc.ID](objc.ID(_class("ASPasskeyRegistrationCredential")), objc.RegisterName("credentialWithRelyingParty:clientDataHash:credentialID:attestationObject:"), purego.NSString(relyingParty), rt.BytesToNSData(clientDataHash), rt.BytesToNSData(credentialID), rt.BytesToNSData(attestationObject))
 	return PasskeyRegistrationCredentialFromID(_r)
 }
 
@@ -108,12 +112,14 @@ func CredentialWithUserPassword(user string, password string) *PasswordCredentia
 
 // IdentityWithServiceIdentifierUserRecordIdentifier creates and returns a password credential identity object with a service identifier.
 func IdentityWithServiceIdentifierUserRecordIdentifier(serviceIdentifier *CredentialServiceIdentifier, user string, recordIdentifier string) *PasswordCredentialIdentity {
+	defer runtime.KeepAlive(serviceIdentifier)
 	_r := objc.Send[objc.ID](objc.ID(_class("ASPasswordCredentialIdentity")), objc.RegisterName("identityWithServiceIdentifier:user:recordIdentifier:"), objref.IDOf(serviceIdentifier), purego.NSString(user), purego.NSString(recordIdentifier))
 	return PasswordCredentialIdentityFromID(_r)
 }
 
 // RequestWithCredentialIdentity creates and initializes a password credential request object.
 func RequestWithCredentialIdentity(credentialIdentity *PasswordCredentialIdentity) *PasswordCredentialRequest {
+	defer runtime.KeepAlive(credentialIdentity)
 	_r := objc.Send[objc.ID](objc.ID(_class("ASPasswordCredentialRequest")), objc.RegisterName("requestWithCredentialIdentity:"), objref.IDOf(credentialIdentity))
 	return PasswordCredentialRequestFromID(_r)
 }

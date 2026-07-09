@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -75,6 +77,7 @@ func (ssptbi *SharingServicePickerTouchBarItem) WithButtonTitle(buttonTitle stri
 
 // WithButtonImage sets the image displayed in the sharing service picker item button.
 func (ssptbi *SharingServicePickerTouchBarItem) WithButtonImage(buttonImage *Image) *SharingServicePickerTouchBarItem {
+	defer runtime.KeepAlive(buttonImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("setButtonImage:"), objref.IDOf(buttonImage))
 	})
@@ -91,6 +94,7 @@ func (ssptbi *SharingServicePickerTouchBarItem) WithVisibilityPriority(visibilit
 
 // IsEnabled reports whether the object is enabled.
 func (ssptbi *SharingServicePickerTouchBarItem) IsEnabled() bool {
+	defer runtime.KeepAlive(ssptbi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -104,6 +108,7 @@ func (ssptbi *SharingServicePickerTouchBarItem) IsEnabled() bool {
 
 // ButtonTitle returns the button title.
 func (ssptbi *SharingServicePickerTouchBarItem) ButtonTitle() string {
+	defer runtime.KeepAlive(ssptbi)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -120,6 +125,7 @@ func (ssptbi *SharingServicePickerTouchBarItem) ButtonTitle() string {
 
 // ButtonImage returns the button image.
 func (ssptbi *SharingServicePickerTouchBarItem) ButtonImage() *Image {
+	defer runtime.KeepAlive(ssptbi)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {

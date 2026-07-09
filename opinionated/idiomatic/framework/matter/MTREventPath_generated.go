@@ -5,9 +5,11 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,9 +53,10 @@ func NewMTREventPath() *MTREventPath {
 }
 
 // Event returns the event.
-func (mep *MTREventPath) Event() obj.Object {
+func (mep *MTREventPath) Event() *foundation.Number {
+	defer runtime.KeepAlive(mep)
 	_r := objc.Send[objc.ID](objref.IDOf(mep), objc.RegisterName("event"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 var _ MTRClusterPathProvider = (*MTREventPath)(nil)

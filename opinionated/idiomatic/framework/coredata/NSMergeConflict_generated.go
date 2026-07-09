@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,64 +49,76 @@ func mergeConflictAdopt(id objc.ID) *MergeConflict {
 
 // Description returns the object's -description text.
 func (mc *MergeConflict) Description() string {
+	defer runtime.KeepAlive(mc)
 	return rt.Description(objref.IDOf(mc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mc *MergeConflict) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mc *MergeConflict) IsKind(className string) bool {
+	defer runtime.KeepAlive(mc)
 	return rt.IsKind(objref.IDOf(mc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mc *MergeConflict) String() string {
+	defer runtime.KeepAlive(mc)
 	return rt.Description(objref.IDOf(mc))
 }
 
 // NewMergeConflictWithSourceNewVersionOldVersionCachedSnapshotPersistedSnapshot initializes a merge conflict.
-func NewMergeConflictWithSourceNewVersionOldVersionCachedSnapshotPersistedSnapshot(srcObject *ManagedObject, newvers int, oldvers int, cachesnap obj.Object, persnap obj.Object) *MergeConflict {
+func NewMergeConflictWithSourceNewVersionOldVersionCachedSnapshotPersistedSnapshot(srcObject *ManagedObject, newvers int, oldvers int, cachesnap map[string]obj.Object, persnap map[string]obj.Object) *MergeConflict {
+	defer runtime.KeepAlive(srcObject)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMergeConflict")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:newVersion:oldVersion:cachedSnapshot:persistedSnapshot:"), objref.IDOf(srcObject), newvers, oldvers, objref.IDOf(cachesnap), objref.IDOf(persnap))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:newVersion:oldVersion:cachedSnapshot:persistedSnapshot:"), objref.IDOf(srcObject), newvers, oldvers, rt.MapToDict(cachesnap, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(persnap, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return mergeConflictAdopt(_id)
 }
 
 // SourceObject returns the source object.
 func (mc *MergeConflict) SourceObject() *ManagedObject {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("sourceObject"))
 	return ManagedObjectFromID(_r)
 }
 
 // ObjectSnapshot returns the object snapshot.
-func (mc *MergeConflict) ObjectSnapshot() obj.Object {
+func (mc *MergeConflict) ObjectSnapshot() map[string]obj.Object {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("objectSnapshot"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // CachedSnapshot returns the cached snapshot.
-func (mc *MergeConflict) CachedSnapshot() obj.Object {
+func (mc *MergeConflict) CachedSnapshot() map[string]obj.Object {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("cachedSnapshot"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PersistedSnapshot returns the persisted snapshot.
-func (mc *MergeConflict) PersistedSnapshot() obj.Object {
+func (mc *MergeConflict) PersistedSnapshot() map[string]obj.Object {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("persistedSnapshot"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // NewVersionNumber returns the new version number.
 func (mc *MergeConflict) NewVersionNumber() int {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[int](objref.IDOf(mc), objc.RegisterName("newVersionNumber"))
 	return _r
 }
 
 // OldVersionNumber returns the old version number.
 func (mc *MergeConflict) OldVersionNumber() int {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[int](objref.IDOf(mc), objc.RegisterName("oldVersionNumber"))
 	return _r
 }

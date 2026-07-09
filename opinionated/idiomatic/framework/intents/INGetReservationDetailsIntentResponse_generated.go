@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func getReservationDetailsIntentResponseAdopt(id objc.ID) *GetReservationDetails
 
 // NewGetReservationDetailsIntentResponseWithCodeUserActivity creates the response object with the specified code and user activity object.
 func NewGetReservationDetailsIntentResponseWithCodeUserActivity(code GetReservationDetailsIntentResponseCode, userActivity obj.Object) *GetReservationDetailsIntentResponse {
+	defer runtime.KeepAlive(userActivity)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INGetReservationDetailsIntentResponse")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, objref.IDOf(userActivity))
 	return getReservationDetailsIntentResponseAdopt(_id)
@@ -62,12 +65,14 @@ func (grdir *GetReservationDetailsIntentResponse) WithReservations(items ...Rese
 
 // WithUserActivity sets the user activity object to use when launching the app.
 func (grdir *GetReservationDetailsIntentResponse) WithUserActivity(userActivity obj.Object) *GetReservationDetailsIntentResponse {
+	defer runtime.KeepAlive(userActivity)
 	objc.Send[objc.ID](objref.IDOf(grdir), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return grdir
 }
 
 // Code returns the code.
 func (grdir *GetReservationDetailsIntentResponse) Code() GetReservationDetailsIntentResponseCode {
+	defer runtime.KeepAlive(grdir)
 	_r := objc.Send[GetReservationDetailsIntentResponseCode](objref.IDOf(grdir), objc.RegisterName("code"))
 	return _r
 }
@@ -76,6 +81,7 @@ func (grdir *GetReservationDetailsIntentResponse) Code() GetReservationDetailsIn
 //
 // Reservations returns the collection as a Go slice.
 func (grdir *GetReservationDetailsIntentResponse) Reservations() []*Reservation {
+	defer runtime.KeepAlive(grdir)
 	_arr := objc.Send[objc.ID](objref.IDOf(grdir), objc.RegisterName("reservations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Reservation { return ReservationFromID(_id) })
 }

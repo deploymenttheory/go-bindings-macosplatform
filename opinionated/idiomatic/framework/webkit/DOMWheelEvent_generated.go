@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,6 +47,7 @@ func dOMWheelEventAdopt(id objc.ID) *DOMWheelEvent {
 
 // NewDOMWheelEventWheelEventWheelDeltaYViewScreenXScreenYClientXClientYCtrlKeyAltKeyShiftKeyMetaKey creates a new DOMWheelEvent.
 func NewDOMWheelEventWheelEventWheelDeltaYViewScreenXScreenYClientXClientYCtrlKeyAltKeyShiftKeyMetaKey(wheelDeltaX int, wheelDeltaY int, view *DOMAbstractView, screenX int, screenY int, clientX int, clientY int, ctrlKey bool, altKey bool, shiftKey bool, metaKey bool) *DOMWheelEvent {
+	defer runtime.KeepAlive(view)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DOMWheelEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWheelEvent:wheelDeltaY:view:screenX:screenY:clientX:clientY:ctrlKey:altKey:shiftKey:metaKey:"), wheelDeltaX, wheelDeltaY, objref.IDOf(view), screenX, screenY, clientX, clientY, ctrlKey, altKey, shiftKey, metaKey)
 	return dOMWheelEventAdopt(_id)
@@ -64,24 +67,28 @@ func (dwe *DOMWheelEvent) WithCancelBubble(cancelBubble bool) *DOMWheelEvent {
 
 // WheelDeltaX returns the wheel delta x.
 func (dwe *DOMWheelEvent) WheelDeltaX() int {
+	defer runtime.KeepAlive(dwe)
 	_r := objc.Send[int](objref.IDOf(dwe), objc.RegisterName("wheelDeltaX"))
 	return _r
 }
 
 // WheelDeltaY returns the wheel delta y.
 func (dwe *DOMWheelEvent) WheelDeltaY() int {
+	defer runtime.KeepAlive(dwe)
 	_r := objc.Send[int](objref.IDOf(dwe), objc.RegisterName("wheelDeltaY"))
 	return _r
 }
 
 // WheelDelta returns the wheel delta.
 func (dwe *DOMWheelEvent) WheelDelta() int {
+	defer runtime.KeepAlive(dwe)
 	_r := objc.Send[int](objref.IDOf(dwe), objc.RegisterName("wheelDelta"))
 	return _r
 }
 
 // IsHorizontal reports whether the object is horizontal.
 func (dwe *DOMWheelEvent) IsHorizontal() bool {
+	defer runtime.KeepAlive(dwe)
 	_r := objc.Send[bool](objref.IDOf(dwe), objc.RegisterName("isHorizontal"))
 	return _r
 }

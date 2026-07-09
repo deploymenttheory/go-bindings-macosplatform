@@ -5,7 +5,10 @@
 package replaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,32 +52,39 @@ func broadcastHandlerAdopt(id objc.ID) *BroadcastHandler {
 
 // Description returns the object's -description text.
 func (bh *BroadcastHandler) Description() string {
+	defer runtime.KeepAlive(bh)
 	return rt.Description(objref.IDOf(bh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bh *BroadcastHandler) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bh)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bh *BroadcastHandler) IsKind(className string) bool {
+	defer runtime.KeepAlive(bh)
 	return rt.IsKind(objref.IDOf(bh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bh *BroadcastHandler) String() string {
+	defer runtime.KeepAlive(bh)
 	return rt.Description(objref.IDOf(bh))
 }
 
 // UpdateServiceInfo sends information about the current broadcast to the broadcasting app.
-func (bh *BroadcastHandler) UpdateServiceInfo(serviceInfo obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(bh), objc.RegisterName("updateServiceInfo:"), objref.IDOf(serviceInfo))
+func (bh *BroadcastHandler) UpdateServiceInfo(serviceInfo map[string]*foundation.Object) {
+	defer runtime.KeepAlive(bh)
+	objc.Send[objc.ID](objref.IDOf(bh), objc.RegisterName("updateServiceInfo:"), rt.MapToDict(serviceInfo, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // UpdateBroadcastURL sends the current broadcast URL to the broadcast controller.
 func (bh *BroadcastHandler) UpdateBroadcastURL(broadcastURL string) {
+	defer runtime.KeepAlive(bh)
 	objc.Send[objc.ID](objref.IDOf(bh), objc.RegisterName("updateBroadcastURL:"), rt.FileURL(broadcastURL))
 }
 

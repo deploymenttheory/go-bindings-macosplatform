@@ -5,7 +5,10 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,35 +52,42 @@ func intentResponseAdopt(id objc.ID) *IntentResponse {
 
 // Description returns the object's -description text.
 func (ir *IntentResponse) Description() string {
+	defer runtime.KeepAlive(ir)
 	return rt.Description(objref.IDOf(ir))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ir *IntentResponse) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ir)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ir), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ir *IntentResponse) IsKind(className string) bool {
+	defer runtime.KeepAlive(ir)
 	return rt.IsKind(objref.IDOf(ir), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ir *IntentResponse) String() string {
+	defer runtime.KeepAlive(ir)
 	return rt.Description(objref.IDOf(ir))
 }
 
 // WithUserActivity sets the user activity object to use when launching the app.
 func (ir *IntentResponse) WithUserActivity(userActivity obj.Object) *IntentResponse {
+	defer runtime.KeepAlive(userActivity)
 	objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return ir
 }
 
 // UserActivity returns the user activity.
-func (ir *IntentResponse) UserActivity() obj.Object {
+func (ir *IntentResponse) UserActivity() *foundation.UserActivity {
+	defer runtime.KeepAlive(ir)
 	_r := objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("userActivity"))
-	return obj.Wrap(_r)
+	return foundation.UserActivityFromID(_r)
 }
 
 // isIntentResponse marks IntentResponse — and, by embedding promotion, its

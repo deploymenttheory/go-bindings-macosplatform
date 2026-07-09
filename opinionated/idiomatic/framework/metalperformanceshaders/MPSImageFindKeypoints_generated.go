@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpsimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -60,6 +62,7 @@ func (ifk *ImageFindKeypoints) WithLabel(label string) *ImageFindKeypoints {
 
 // KeypointRangeInfo returns a structure describing the keypoint range info Returns a MPSImageKeypointRangeInfo structure
 func (ifk *ImageFindKeypoints) KeypointRangeInfo() mpsimage.MPSImageKeypointRangeInfo {
+	defer runtime.KeepAlive(ifk)
 	_r := objc.Send[mpsimage.MPSImageKeypointRangeInfo](objref.IDOf(ifk), objc.RegisterName("keypointRangeInfo"))
 	return _r
 }

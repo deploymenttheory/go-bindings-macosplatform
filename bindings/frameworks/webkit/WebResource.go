@@ -38,8 +38,8 @@ func WebResourceFromID(id objc.ID) *WebResource {
 }
 
 // Initializes and returns a web resource instance.
-func (o *WebResource) InitWithDataURLMIMETypeTextEncodingNameFrameName(data *foundation.NSData, uRL *foundation.NSURL, mIMEType *foundation.NSString, textEncodingName *foundation.NSString, frameName *foundation.NSString) *WebResource {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webResourceSelInitWithDataURLMIMETypeTextEncodingNameFrameName, data.Ptr(), uRL.Ptr(), mIMEType.Ptr(), textEncodingName.Ptr(), frameName.Ptr())
+func (o *WebResource) InitWithDataURLMIMETypeTextEncodingNameFrameName(data *foundation.NSData, url *foundation.NSURL, mimeType *foundation.NSString, textEncodingName *foundation.NSString, frameName *foundation.NSString) *WebResource {
+	_ret := objc.Send[objc.ID](o.Ptr(), _webResourceSelInitWithDataURLMIMETypeTextEncodingNameFrameName, data.Ptr(), url.Ptr(), mimeType.Ptr(), textEncodingName.Ptr(), frameName.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

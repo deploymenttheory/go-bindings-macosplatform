@@ -5,6 +5,8 @@
 package corespotlight
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func customAttributeKeyAdopt(id objc.ID) *CustomAttributeKey {
 
 // Description returns the object's -description text.
 func (cak *CustomAttributeKey) Description() string {
+	defer runtime.KeepAlive(cak)
 	return rt.Description(objref.IDOf(cak))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cak *CustomAttributeKey) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cak)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cak), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cak *CustomAttributeKey) IsKind(className string) bool {
+	defer runtime.KeepAlive(cak)
 	return rt.IsKind(objref.IDOf(cak), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cak *CustomAttributeKey) String() string {
+	defer runtime.KeepAlive(cak)
 	return rt.Description(objref.IDOf(cak))
 }
 
@@ -82,6 +89,7 @@ func NewCustomAttributeKeyWithKeyNameSearchableSearchableByDefaultUniqueMultiVal
 
 // KeyName returns the key name.
 func (cak *CustomAttributeKey) KeyName() string {
+	defer runtime.KeepAlive(cak)
 	_r := objc.Send[objc.ID](objref.IDOf(cak), objc.RegisterName("keyName"))
 	if _r == 0 {
 		return ""
@@ -91,24 +99,28 @@ func (cak *CustomAttributeKey) KeyName() string {
 
 // IsSearchable reports whether the object is searchable.
 func (cak *CustomAttributeKey) IsSearchable() bool {
+	defer runtime.KeepAlive(cak)
 	_r := objc.Send[bool](objref.IDOf(cak), objc.RegisterName("isSearchable"))
 	return _r
 }
 
 // IsSearchableByDefault reports whether the object is searchable by default.
 func (cak *CustomAttributeKey) IsSearchableByDefault() bool {
+	defer runtime.KeepAlive(cak)
 	_r := objc.Send[bool](objref.IDOf(cak), objc.RegisterName("isSearchableByDefault"))
 	return _r
 }
 
 // IsUnique reports whether the object is unique.
 func (cak *CustomAttributeKey) IsUnique() bool {
+	defer runtime.KeepAlive(cak)
 	_r := objc.Send[bool](objref.IDOf(cak), objc.RegisterName("isUnique"))
 	return _r
 }
 
 // IsMultiValued reports whether the object is multi valued.
 func (cak *CustomAttributeKey) IsMultiValued() bool {
+	defer runtime.KeepAlive(cak)
 	_r := objc.Send[bool](objref.IDOf(cak), objc.RegisterName("isMultiValued"))
 	return _r
 }

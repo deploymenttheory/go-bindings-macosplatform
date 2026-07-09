@@ -136,6 +136,15 @@ func zeroValue(k objKind, idiomaticType string) string {
 	case kindString:
 		return `""`
 	case kindObject, kindArray:
+		// Object-kind results whose idiomatic type is a Go value (an NSURL
+		// surfaced as string, an NSDate as time.Time) need that value's zero;
+		// wrapper pointers, slices, and maps zero to nil.
+		switch idiomaticType {
+		case "string":
+			return `""`
+		case "time.Time":
+			return "time.Time{}"
+		}
 		return "nil"
 	case kindBool:
 		return "false"

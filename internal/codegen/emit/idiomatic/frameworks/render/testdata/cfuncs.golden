@@ -40,3 +40,20 @@ return errkit.FromCFError(_cfErr)
 return nil
 }
 
+var _fnVcpuCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// VcpuCreate reports an error if the Hypervisor framework function hv_vcpu_create fails.
+func VcpuCreate() (vcpu uint64, exit *HvVcpuExitT, err error) {
+_loadOnce.Do(_loadLibrary)
+if _fnVcpuCreate == nil {
+ebipurego.RegisterLibFunc(&_fnVcpuCreate, _lib, "hv_vcpu_create")
+}
+var _out0 uint64
+var _out1 *HvVcpuExitT
+_rc := _fnVcpuCreate(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), nil)
+if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+return 0, nil, _err
+}
+return _out0, _out1, nil
+}
+

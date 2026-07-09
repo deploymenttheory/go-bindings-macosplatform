@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func audioChannelLayoutAdopt(id objc.ID) *AudioChannelLayout {
 
 // Description returns the object's -description text.
 func (acl *AudioChannelLayout) Description() string {
+	defer runtime.KeepAlive(acl)
 	return rt.Description(objref.IDOf(acl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (acl *AudioChannelLayout) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(acl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(acl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (acl *AudioChannelLayout) IsKind(className string) bool {
+	defer runtime.KeepAlive(acl)
 	return rt.IsKind(objref.IDOf(acl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (acl *AudioChannelLayout) String() string {
+	defer runtime.KeepAlive(acl)
 	return rt.Description(objref.IDOf(acl))
 }
 
@@ -75,12 +82,14 @@ func NewAudioChannelLayoutWithLayoutTag(layoutTag int) *AudioChannelLayout {
 
 // LayoutTag returns the layout's tag.
 func (acl *AudioChannelLayout) LayoutTag() int {
+	defer runtime.KeepAlive(acl)
 	_r := objc.Send[int](objref.IDOf(acl), objc.RegisterName("layoutTag"))
 	return _r
 }
 
 // ChannelCount returns the number of channels of audio data.
 func (acl *AudioChannelLayout) ChannelCount() uint32 {
+	defer runtime.KeepAlive(acl)
 	_r := objc.Send[uint32](objref.IDOf(acl), objc.RegisterName("channelCount"))
 	return _r
 }

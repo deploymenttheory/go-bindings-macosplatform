@@ -59,3 +59,33 @@ func TestExportedTypeName(t *testing.T) {
 		}
 	}
 }
+
+// TestParamName locks the parameter-name derivation: initialism-aware leading
+// lowering (never cPUCount), snake_case→camelCase for C parameters, and the
+// reserved-word escape.
+func TestParamName(t *testing.T) {
+	cases := map[string]string{
+		"":                         "arg",
+		"name":                     "name",
+		"Name":                     "name",
+		"CPUCount":                 "cpuCount",
+		"URLString":                "urlString",
+		"URL":                      "url",
+		"URLs":                     "urls",
+		"IDs":                      "ids",
+		"AVAsset":                  "avAsset",
+		"UTF8String":               "utf8String",
+		"distributor_base_address": "distributorBaseAddress",
+		"vcpu_count":               "vcpuCount",
+		"string":                   "string_",
+		"len":                      "len_",
+		"type":                     "type_",
+		"kernelURL":                "kernelURL", // lowercase start is untouched
+		"_":                        "arg",
+	}
+	for in, want := range cases {
+		if got := ParamName(in); got != want {
+			t.Errorf("ParamName(%q) = %q; want %q", in, got, want)
+		}
+	}
+}

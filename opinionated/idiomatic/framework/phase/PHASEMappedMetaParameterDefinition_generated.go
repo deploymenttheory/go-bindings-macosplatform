@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,8 @@ func mappedMetaParameterDefinitionAdopt(id objc.ID) *MappedMetaParameterDefiniti
 
 // NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelopeIdentifier creates a specification for a named metaparameter that the app plots on a graph defined by the given set of curves.
 func NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelopeIdentifier(inputMetaParameterDefinition *NumberMetaParameterDefinition, envelope *Envelope, identifier string) *MappedMetaParameterDefinition {
+	defer runtime.KeepAlive(inputMetaParameterDefinition)
+	defer runtime.KeepAlive(envelope)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEMappedMetaParameterDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputMetaParameterDefinition:envelope:identifier:"), objref.IDOf(inputMetaParameterDefinition), objref.IDOf(envelope), purego.NSString(identifier))
 	return mappedMetaParameterDefinitionAdopt(_id)
@@ -54,6 +58,8 @@ func NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelopeIde
 
 // NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelope creates a specification for a metaparameter that the app plots on a graph defined by the given set of curves.
 func NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelope(inputMetaParameterDefinition *NumberMetaParameterDefinition, envelope *Envelope) *MappedMetaParameterDefinition {
+	defer runtime.KeepAlive(inputMetaParameterDefinition)
+	defer runtime.KeepAlive(envelope)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEMappedMetaParameterDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputMetaParameterDefinition:envelope:"), objref.IDOf(inputMetaParameterDefinition), objref.IDOf(envelope))
 	return mappedMetaParameterDefinitionAdopt(_id)
@@ -61,12 +67,14 @@ func NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelope(in
 
 // Envelope returns an Envelope to define segments of curves
 func (mmpd *MappedMetaParameterDefinition) Envelope() *Envelope {
+	defer runtime.KeepAlive(mmpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpd), objc.RegisterName("envelope"))
 	return EnvelopeFromID(_r)
 }
 
 // InputMetaParameterDefinition returns the readonly PHASENumberMetaParameterDefinition that this metaparameter definition was initialized with
 func (mmpd *MappedMetaParameterDefinition) InputMetaParameterDefinition() *NumberMetaParameterDefinition {
+	defer runtime.KeepAlive(mmpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpd), objc.RegisterName("inputMetaParameterDefinition"))
 	return NumberMetaParameterDefinitionFromID(_r)
 }

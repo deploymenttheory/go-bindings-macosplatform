@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -91,18 +93,21 @@ func (ncarb *NNCropAndResizeBilinear) WithLabel(label string) *NNCropAndResizeBi
 
 // ResizeWidth returns the resize width.
 func (ncarb *NNCropAndResizeBilinear) ResizeWidth() int {
+	defer runtime.KeepAlive(ncarb)
 	_r := objc.Send[int](objref.IDOf(ncarb), objc.RegisterName("resizeWidth"))
 	return _r
 }
 
 // ResizeHeight returns the resize height.
 func (ncarb *NNCropAndResizeBilinear) ResizeHeight() int {
+	defer runtime.KeepAlive(ncarb)
 	_r := objc.Send[int](objref.IDOf(ncarb), objc.RegisterName("resizeHeight"))
 	return _r
 }
 
 // NumberOfRegions returns the number of bounding box i.e. regions to resize.
 func (ncarb *NNCropAndResizeBilinear) NumberOfRegions() int {
+	defer runtime.KeepAlive(ncarb)
 	_r := objc.Send[int](objref.IDOf(ncarb), objc.RegisterName("numberOfRegions"))
 	return _r
 }

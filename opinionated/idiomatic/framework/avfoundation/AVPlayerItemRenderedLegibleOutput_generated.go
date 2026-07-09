@@ -5,10 +5,12 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -73,19 +75,22 @@ func (pirlo *PlayerItemRenderedLegibleOutput) WithSuppressesPlayerRendering(supp
 }
 
 // DelegateQueue returns the dispatch queue where the delegate is messaged. This property is not key-value observable.
-func (pirlo *PlayerItemRenderedLegibleOutput) DelegateQueue() obj.Object {
+func (pirlo *PlayerItemRenderedLegibleOutput) DelegateQueue() *foundation.Object {
+	defer runtime.KeepAlive(pirlo)
 	_r := objc.Send[objc.ID](objref.IDOf(pirlo), objc.RegisterName("delegateQueue"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 // AdvanceIntervalForDelegateInvocation returns permits advance invocation of the associated delegate, if any. If it is possible, an AVPlayerItemRenderedLegibleOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemRenderedLegibleOutput is prepared to act on them, the delegate will be invoked as soon as possible.
 func (pirlo *PlayerItemRenderedLegibleOutput) AdvanceIntervalForDelegateInvocation() float64 {
+	defer runtime.KeepAlive(pirlo)
 	_r := objc.Send[float64](objref.IDOf(pirlo), objc.RegisterName("advanceIntervalForDelegateInvocation"))
 	return _r
 }
 
 // VideoDisplaySize returns permits rendering of pixel buffers according to the set width and height The client is expected to set videodisplay size during init and may also set it again during playback. The pixel buffers will be rendered according to the set width and height of display area. If this property is set during the presentation time of a vended caption image, a new caption image rendered according to new videoDisplaySize, will be vended out. Setting this property with a zero height or width will result in an exception being thrown and it is client's responsibility to handle it using appropriate catch block.
 func (pirlo *PlayerItemRenderedLegibleOutput) VideoDisplaySize() corefoundation.CGSize {
+	defer runtime.KeepAlive(pirlo)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(pirlo), objc.RegisterName("videoDisplaySize"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,34 +49,40 @@ func deviceAdopt(id objc.ID) *Device {
 
 // Description returns the object's -description text.
 func (d *Device) Description() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (d *Device) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (d *Device) IsKind(className string) bool {
+	defer runtime.KeepAlive(d)
 	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (d *Device) String() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // NewDeviceWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier initializes a new device object.
-func NewDeviceWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier(name string, manufacturer string, model string, hardwareVersion string, firmwareVersion string, softwareVersion string, localIdentifier string, uDIDeviceIdentifier string) *Device {
+func NewDeviceWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier(name string, manufacturer string, model string, hardwareVersion string, firmwareVersion string, softwareVersion string, localIdentifier string, udiDeviceIdentifier string) *Device {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKDevice")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:manufacturer:model:hardwareVersion:firmwareVersion:softwareVersion:localIdentifier:UDIDeviceIdentifier:"), purego.NSString(name), purego.NSString(manufacturer), purego.NSString(model), purego.NSString(hardwareVersion), purego.NSString(firmwareVersion), purego.NSString(softwareVersion), purego.NSString(localIdentifier), purego.NSString(uDIDeviceIdentifier))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:manufacturer:model:hardwareVersion:firmwareVersion:softwareVersion:localIdentifier:UDIDeviceIdentifier:"), purego.NSString(name), purego.NSString(manufacturer), purego.NSString(model), purego.NSString(hardwareVersion), purego.NSString(firmwareVersion), purego.NSString(softwareVersion), purego.NSString(localIdentifier), purego.NSString(udiDeviceIdentifier))
 	return deviceAdopt(_id)
 }
 
 // Name returns the name of the receiver. The user-facing name, such as the one displayed in the Bluetooth Settings for a BLE device.
 func (d *Device) Name() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -84,6 +92,7 @@ func (d *Device) Name() string {
 
 // Manufacturer returns the manufacturer of the receiver.
 func (d *Device) Manufacturer() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("manufacturer"))
 	if _r == 0 {
 		return ""
@@ -93,6 +102,7 @@ func (d *Device) Manufacturer() string {
 
 // Model returns the model of the receiver.
 func (d *Device) Model() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("model"))
 	if _r == 0 {
 		return ""
@@ -102,6 +112,7 @@ func (d *Device) Model() string {
 
 // HardwareVersion returns the hardware revision of the receiver.
 func (d *Device) HardwareVersion() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("hardwareVersion"))
 	if _r == 0 {
 		return ""
@@ -111,6 +122,7 @@ func (d *Device) HardwareVersion() string {
 
 // FirmwareVersion returns the firmware revision of the receiver.
 func (d *Device) FirmwareVersion() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("firmwareVersion"))
 	if _r == 0 {
 		return ""
@@ -120,6 +132,7 @@ func (d *Device) FirmwareVersion() string {
 
 // SoftwareVersion returns the software revision of the receiver.
 func (d *Device) SoftwareVersion() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("softwareVersion"))
 	if _r == 0 {
 		return ""
@@ -129,6 +142,7 @@ func (d *Device) SoftwareVersion() string {
 
 // LocalIdentifier returns a unique identifier for the receiver. This property is available to clients for a local identifier. For example, Bluetooth peripherals managed by HealthKit use this for the CoreBluetooth UUID which is valid only on the local device and thus distinguish the same Bluetooth peripheral used between multiple devices.
 func (d *Device) LocalIdentifier() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("localIdentifier"))
 	if _r == 0 {
 		return ""
@@ -138,6 +152,7 @@ func (d *Device) LocalIdentifier() string {
 
 // UDIDeviceIdentifier represents the device identifier portion of a device's FDA UDI (Unique Device Identifier). The device identifier can be used to reference the FDA's GUDID (Globally Unique Device Identifier Database). Note that for user privacy concerns this field should not be used to persist the production identifier portion of the device UDI. HealthKit clients should manage the production identifier independently, if needed. See http://www.fda.gov/MedicalDevices/DeviceRegulationandGuidance/UniqueDeviceIdentification/ for more information.
 func (d *Device) UDIDeviceIdentifier() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("UDIDeviceIdentifier"))
 	if _r == 0 {
 		return ""

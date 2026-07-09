@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -96,18 +98,21 @@ func (tofr *TrackOpticalFlowRequest) WithRevision(revision int) *TrackOpticalFlo
 
 // ComputationAccuracy returns the level of accuracy used to compute the optical flow. Default is VNTrackOpticalFlowRequestComputationAccuracyMedium. The computational time typically trends with the accuracy level.  This parameter allows for selective tuning by the client application.
 func (tofr *TrackOpticalFlowRequest) ComputationAccuracy() TrackOpticalFlowRequestComputationAccuracy {
+	defer runtime.KeepAlive(tofr)
 	_r := objc.Send[TrackOpticalFlowRequestComputationAccuracy](objref.IDOf(tofr), objc.RegisterName("computationAccuracy"))
 	return _r
 }
 
 // OutputPixelFormat returns pixel format type of the output buffer. Valid values are `kCVPixelFormatType_TwoComponent32Float` and `kCVPixelFormatType_TwoComponent16Half`.  Default is `kCVPixelFormatType_TwoComponent32Float`.
 func (tofr *TrackOpticalFlowRequest) OutputPixelFormat() int {
+	defer runtime.KeepAlive(tofr)
 	_r := objc.Send[int](objref.IDOf(tofr), objc.RegisterName("outputPixelFormat"))
 	return _r
 }
 
 // KeepNetworkOutput reports whether setting this to `YES` will keep the raw pixel buffer coming from the the ML network. The default is `NO`. When set to `YES`, the outputPixelFormat is ignored.
 func (tofr *TrackOpticalFlowRequest) KeepNetworkOutput() bool {
+	defer runtime.KeepAlive(tofr)
 	_r := objc.Send[bool](objref.IDOf(tofr), objc.RegisterName("keepNetworkOutput"))
 	return _r
 }

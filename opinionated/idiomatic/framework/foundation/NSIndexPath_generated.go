@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func indexPathAdopt(id objc.ID) *IndexPath {
 
 // Description returns the object's -description text.
 func (ip *IndexPath) Description() string {
+	defer runtime.KeepAlive(ip)
 	return rt.Description(objref.IDOf(ip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ip *IndexPath) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ip)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ip *IndexPath) IsKind(className string) bool {
+	defer runtime.KeepAlive(ip)
 	return rt.IsKind(objref.IDOf(ip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ip *IndexPath) String() string {
+	defer runtime.KeepAlive(ip)
 	return rt.Description(objref.IDOf(ip))
 }
 
@@ -82,43 +88,50 @@ func (ip *IndexPath) WithObservationInfo(observationInfo unsafe.Pointer) *IndexP
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ip *IndexPath) WithScriptingProperties(scriptingProperties obj.Object) *IndexPath {
-	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ip *IndexPath) WithScriptingProperties(scriptingProperties map[string]obj.Object) *IndexPath {
+	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ip
 }
 
 // IndexPathByAddingIndex returns an index path containing the nodes in the receiving index path plus another given index.
 func (ip *IndexPath) IndexPathByAddingIndex(index int) *IndexPath {
+	defer runtime.KeepAlive(ip)
 	_r := objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("indexPathByAddingIndex:"), index)
 	return IndexPathFromID(_r)
 }
 
 // IndexPathByRemovingLastIndex returns an index path with the nodes in the receiving index path, excluding the last one.
 func (ip *IndexPath) IndexPathByRemovingLastIndex() *IndexPath {
+	defer runtime.KeepAlive(ip)
 	_r := objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("indexPathByRemovingLastIndex"))
 	return IndexPathFromID(_r)
 }
 
 // IndexAtPosition provides the value at a particular node in the index path.
 func (ip *IndexPath) IndexAtPosition(position int) int {
+	defer runtime.KeepAlive(ip)
 	_r := objc.Send[int](objref.IDOf(ip), objc.RegisterName("indexAtPosition:"), position)
 	return _r
 }
 
 // Compare indicates the depth-first traversal order of the receiving index path and another index path.
 func (ip *IndexPath) Compare(otherObject *IndexPath) ComparisonResult {
+	defer runtime.KeepAlive(ip)
+	defer runtime.KeepAlive(otherObject)
 	_r := objc.Send[ComparisonResult](objref.IDOf(ip), objc.RegisterName("compare:"), objref.IDOf(otherObject))
 	return _r
 }
 
 // Length returns the length.
 func (ip *IndexPath) Length() int {
+	defer runtime.KeepAlive(ip)
 	_r := objc.Send[int](objref.IDOf(ip), objc.RegisterName("length"))
 	return _r
 }
 
 // GetIndexes copies the objects contained in the index path into indexes.
 func (ip *IndexPath) GetIndexes() (indexes int) {
+	defer runtime.KeepAlive(ip)
 	var _out0 int
 	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("getIndexes:"), unsafe.Pointer(&_out0))
 	return _out0

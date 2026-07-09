@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func intentAdopt(id objc.ID) *Intent {
 
 // Description returns the object's -description text.
 func (i *Intent) Description() string {
+	defer runtime.KeepAlive(i)
 	return rt.Description(objref.IDOf(i))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (i *Intent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(i)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(i), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (i *Intent) IsKind(className string) bool {
+	defer runtime.KeepAlive(i)
 	return rt.IsKind(objref.IDOf(i), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (i *Intent) String() string {
+	defer runtime.KeepAlive(i)
 	return rt.Description(objref.IDOf(i))
 }
 
@@ -76,29 +83,35 @@ func (i *Intent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string)
 
 // WithDonationMetadata sets the donation metadata.
 func (i *Intent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *Intent {
+	defer runtime.KeepAlive(donationMetadata)
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return i
 }
 
 // SetImageForParameterNamed sets the image to use for the specified parameter.
 func (i *Intent) SetImageForParameterNamed(image *Image, parameterName string) {
+	defer runtime.KeepAlive(i)
+	defer runtime.KeepAlive(image)
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("setImage:forParameterNamed:"), objref.IDOf(image), purego.NSString(parameterName))
 }
 
 // ImageForParameterNamed returns the image associated with the specified parameter.
 func (i *Intent) ImageForParameterNamed(parameterName string) *Image {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("imageForParameterNamed:"), purego.NSString(parameterName))
 	return ImageFromID(_r)
 }
 
 // KeyImage returns the most relevant image to display to the user.
 func (i *Intent) KeyImage() *Image {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("keyImage"))
 	return ImageFromID(_r)
 }
 
 // Identifier returns the identifier.
 func (i *Intent) Identifier() string {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -108,6 +121,7 @@ func (i *Intent) Identifier() string {
 
 // IntentDescription returns the intent description.
 func (i *Intent) IntentDescription() string {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("intentDescription"))
 	if _r == 0 {
 		return ""
@@ -117,6 +131,7 @@ func (i *Intent) IntentDescription() string {
 
 // SuggestedInvocationPhrase returns the suggested invocation phrase.
 func (i *Intent) SuggestedInvocationPhrase() string {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("suggestedInvocationPhrase"))
 	if _r == 0 {
 		return ""
@@ -126,6 +141,7 @@ func (i *Intent) SuggestedInvocationPhrase() string {
 
 // DonationMetadata returns the donation metadata.
 func (i *Intent) DonationMetadata() *IntentDonationMetadata {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("donationMetadata"))
 	return IntentDonationMetadataFromID(_r)
 }

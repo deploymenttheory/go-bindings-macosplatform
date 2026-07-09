@@ -6,12 +6,14 @@ package gamekit
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,6 +62,7 @@ func NewLocalPlayer() *LocalPlayer {
 //
 // LoadRecentPlayers blocks until the operation completes or ctx is cancelled.
 func (lp *LocalPlayer) LoadRecentPlayers(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(lp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -85,6 +88,7 @@ func (lp *LocalPlayer) LoadRecentPlayers(ctx context.Context) (result obj.Object
 //
 // LoadChallengableFriends blocks until the operation completes or ctx is cancelled.
 func (lp *LocalPlayer) LoadChallengableFriends(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(lp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -108,30 +112,35 @@ func (lp *LocalPlayer) LoadChallengableFriends(ctx context.Context) (result obj.
 
 // IsAuthenticated reports whether authentication state
 func (lp *LocalPlayer) IsAuthenticated() bool {
+	defer runtime.KeepAlive(lp)
 	_r := objc.Send[bool](objref.IDOf(lp), objc.RegisterName("isAuthenticated"))
 	return _r
 }
 
 // IsUnderage reports whether indicates if a player is under age
 func (lp *LocalPlayer) IsUnderage() bool {
+	defer runtime.KeepAlive(lp)
 	_r := objc.Send[bool](objref.IDOf(lp), objc.RegisterName("isUnderage"))
 	return _r
 }
 
 // IsMultiplayerGamingRestricted reports whether a Boolean value that declares whether or not multiplayer gaming is restricted on this device.
 func (lp *LocalPlayer) IsMultiplayerGamingRestricted() bool {
+	defer runtime.KeepAlive(lp)
 	_r := objc.Send[bool](objref.IDOf(lp), objc.RegisterName("isMultiplayerGamingRestricted"))
 	return _r
 }
 
 // IsPersonalizedCommunicationRestricted reports whether a Boolean value that declares whether personalized communication is restricted on this device. If it is restricted, the player will not be able to read or write personalized messages on game invites, challenges, or enable voice communication in multiplayer games. Note: this value will always be true when isUnderage is true.
 func (lp *LocalPlayer) IsPersonalizedCommunicationRestricted() bool {
+	defer runtime.KeepAlive(lp)
 	_r := objc.Send[bool](objref.IDOf(lp), objc.RegisterName("isPersonalizedCommunicationRestricted"))
 	return _r
 }
 
 // UnregisterAllListeners unregisters all listeners in your game.
 func (lp *LocalPlayer) UnregisterAllListeners() {
+	defer runtime.KeepAlive(lp)
 	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("unregisterAllListeners"))
 }
 
@@ -139,6 +148,7 @@ func (lp *LocalPlayer) UnregisterAllListeners() {
 //
 // SetDefaultLeaderboardCategoryID blocks until the operation completes or ctx is cancelled.
 func (lp *LocalPlayer) SetDefaultLeaderboardCategoryID(ctx context.Context, categoryID string) error {
+	defer runtime.KeepAlive(lp)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -158,6 +168,7 @@ func (lp *LocalPlayer) SetDefaultLeaderboardCategoryID(ctx context.Context, cate
 //
 // LoadDefaultLeaderboardCategoryID blocks until the operation completes or ctx is cancelled.
 func (lp *LocalPlayer) LoadDefaultLeaderboardCategoryID(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(lp)
 	type _result struct {
 		val string
 		err error
@@ -183,6 +194,7 @@ func (lp *LocalPlayer) LoadDefaultLeaderboardCategoryID(ctx context.Context) (re
 //
 // Authenticate blocks until the operation completes or ctx is cancelled.
 func (lp *LocalPlayer) Authenticate(ctx context.Context) error {
+	defer runtime.KeepAlive(lp)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -202,6 +214,7 @@ func (lp *LocalPlayer) Authenticate(ctx context.Context) error {
 //
 // LoadFriendPlayers blocks until the operation completes or ctx is cancelled.
 func (lp *LocalPlayer) LoadFriendPlayers(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(lp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -227,6 +240,7 @@ func (lp *LocalPlayer) LoadFriendPlayers(ctx context.Context) (result obj.Object
 //
 // LoadDefaultLeaderboardIdentifier blocks until the operation completes or ctx is cancelled.
 func (lp *LocalPlayer) LoadDefaultLeaderboardIdentifier(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(lp)
 	type _result struct {
 		val string
 		err error
@@ -252,6 +266,7 @@ func (lp *LocalPlayer) LoadDefaultLeaderboardIdentifier(ctx context.Context) (re
 //
 // SetDefaultLeaderboardIdentifier blocks until the operation completes or ctx is cancelled.
 func (lp *LocalPlayer) SetDefaultLeaderboardIdentifier(ctx context.Context, leaderboardIdentifier string) error {
+	defer runtime.KeepAlive(lp)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -271,6 +286,7 @@ func (lp *LocalPlayer) SetDefaultLeaderboardIdentifier(ctx context.Context, lead
 //
 // LoadFriends blocks until the operation completes or ctx is cancelled.
 func (lp *LocalPlayer) LoadFriends(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(lp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -296,6 +312,7 @@ func (lp *LocalPlayer) LoadFriends(ctx context.Context) (result obj.Object, err 
 //
 // Friends returns the collection as a Go slice.
 func (lp *LocalPlayer) Friends() []string {
+	defer runtime.KeepAlive(lp)
 	_arr := objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("friends"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -304,6 +321,7 @@ func (lp *LocalPlayer) Friends() []string {
 //
 // LoadFriendsWithIdentifiers blocks until the operation completes or ctx is cancelled.
 func (lp *LocalPlayer) LoadFriendsWithIdentifiers(ctx context.Context, identifiers []string) (result obj.Object, err error) {
+	defer runtime.KeepAlive(lp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -327,6 +345,8 @@ func (lp *LocalPlayer) LoadFriendsWithIdentifiers(ctx context.Context, identifie
 
 // PresentFriendRequestCreatorFromWindow opens the Messages app with a sheet for the player to request friends.
 func (lp *LocalPlayer) PresentFriendRequestCreatorFromWindow(window obj.Object) error {
+	defer runtime.KeepAlive(lp)
+	defer runtime.KeepAlive(window)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(lp), objc.RegisterName("presentFriendRequestCreatorFromWindow:error:"), objref.IDOf(window), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -339,6 +359,7 @@ func (lp *LocalPlayer) PresentFriendRequestCreatorFromWindow(window obj.Object) 
 //
 // SetAuthenticateHandler blocks until the operation completes or ctx is cancelled.
 func (lp *LocalPlayer) SetAuthenticateHandler(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(lp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -362,6 +383,7 @@ func (lp *LocalPlayer) SetAuthenticateHandler(ctx context.Context) (result obj.O
 
 // IsPresentingFriendRequestViewController reports whether observable property that becomes true when the friend request view controller is displayed. It becomes false when it is dismissed
 func (lp *LocalPlayer) IsPresentingFriendRequestViewController() bool {
+	defer runtime.KeepAlive(lp)
 	_r := objc.Send[bool](objref.IDOf(lp), objc.RegisterName("isPresentingFriendRequestViewController"))
 	return _r
 }
@@ -370,6 +392,7 @@ func (lp *LocalPlayer) IsPresentingFriendRequestViewController() bool {
 //
 // FetchSavedGames blocks until the operation completes or ctx is cancelled.
 func (lp *LocalPlayer) FetchSavedGames(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(lp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -394,7 +417,8 @@ func (lp *LocalPlayer) FetchSavedGames(ctx context.Context) (result obj.Object, 
 // SaveGameDataWithName saves game data with the specified name.
 //
 // SaveGameDataWithName blocks until the operation completes or ctx is cancelled.
-func (lp *LocalPlayer) SaveGameDataWithName(ctx context.Context, data obj.Object, name string) (result *SavedGame, err error) {
+func (lp *LocalPlayer) SaveGameDataWithName(ctx context.Context, data []byte, name string) (result *SavedGame, err error) {
+	defer runtime.KeepAlive(lp)
 	type _result struct {
 		val *SavedGame
 		err error
@@ -406,7 +430,7 @@ func (lp *LocalPlayer) SaveGameDataWithName(ctx context.Context, data obj.Object
 		_o.val = SavedGameFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("saveGameData:withName:completionHandler:"), objref.IDOf(data), purego.NSString(name), _block)
+	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("saveGameData:withName:completionHandler:"), rt.BytesToNSData(data), purego.NSString(name), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -420,6 +444,7 @@ func (lp *LocalPlayer) SaveGameDataWithName(ctx context.Context, data obj.Object
 //
 // DeleteSavedGamesWithName blocks until the operation completes or ctx is cancelled.
 func (lp *LocalPlayer) DeleteSavedGamesWithName(ctx context.Context, name string) error {
+	defer runtime.KeepAlive(lp)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -438,7 +463,8 @@ func (lp *LocalPlayer) DeleteSavedGamesWithName(ctx context.Context, name string
 // ResolveConflictingSavedGamesWithData replaces duplicate saved games that use the same filename with one file containing the specified game data.
 //
 // ResolveConflictingSavedGamesWithData blocks until the operation completes or ctx is cancelled.
-func (lp *LocalPlayer) ResolveConflictingSavedGamesWithData(ctx context.Context, conflictingSavedGames []*SavedGame, data obj.Object) (result obj.Object, err error) {
+func (lp *LocalPlayer) ResolveConflictingSavedGamesWithData(ctx context.Context, conflictingSavedGames []*SavedGame, data []byte) (result obj.Object, err error) {
+	defer runtime.KeepAlive(lp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -450,7 +476,7 @@ func (lp *LocalPlayer) ResolveConflictingSavedGamesWithData(ctx context.Context,
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("resolveConflictingSavedGames:withData:completionHandler:"), purego.SliceToNSArray(conflictingSavedGames, func(_v *SavedGame) objc.ID { return objref.IDOf(_v) }), objref.IDOf(data), _block)
+	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("resolveConflictingSavedGames:withData:completionHandler:"), purego.SliceToNSArray(conflictingSavedGames, func(_v *SavedGame) objc.ID { return objref.IDOf(_v) }), rt.BytesToNSData(data), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

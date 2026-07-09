@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -63,34 +65,41 @@ func (doc *DOMHTMLOptionsCollection) WithLength(length int) *DOMHTMLOptionsColle
 
 // NamedItem wraps the corresponding Objective-C method.
 func (doc *DOMHTMLOptionsCollection) NamedItem(name string) *DOMNode {
+	defer runtime.KeepAlive(doc)
 	_r := objc.Send[objc.ID](objref.IDOf(doc), objc.RegisterName("namedItem:"), purego.NSString(name))
 	return DOMNodeFromID(_r)
 }
 
 // AddIndex adds index.
 func (doc *DOMHTMLOptionsCollection) AddIndex(option *DOMHTMLOptionElement, index int) {
+	defer runtime.KeepAlive(doc)
+	defer runtime.KeepAlive(option)
 	objc.Send[objc.ID](objref.IDOf(doc), objc.RegisterName("add:index:"), objref.IDOf(option), index)
 }
 
 // Remove wraps the corresponding Objective-C method.
 func (doc *DOMHTMLOptionsCollection) Remove(index int) {
+	defer runtime.KeepAlive(doc)
 	objc.Send[objc.ID](objref.IDOf(doc), objc.RegisterName("remove:"), index)
 }
 
 // Item wraps the corresponding Objective-C method.
 func (doc *DOMHTMLOptionsCollection) Item(index int) *DOMNode {
+	defer runtime.KeepAlive(doc)
 	_r := objc.Send[objc.ID](objref.IDOf(doc), objc.RegisterName("item:"), index)
 	return DOMNodeFromID(_r)
 }
 
 // SelectedIndex returns the selected index.
 func (doc *DOMHTMLOptionsCollection) SelectedIndex() int {
+	defer runtime.KeepAlive(doc)
 	_r := objc.Send[int](objref.IDOf(doc), objc.RegisterName("selectedIndex"))
 	return _r
 }
 
 // Length returns the length.
 func (doc *DOMHTMLOptionsCollection) Length() int {
+	defer runtime.KeepAlive(doc)
 	_r := objc.Send[int](objref.IDOf(doc), objc.RegisterName("length"))
 	return _r
 }

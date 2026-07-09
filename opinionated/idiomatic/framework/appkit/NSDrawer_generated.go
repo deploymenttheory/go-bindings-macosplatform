@@ -5,9 +5,12 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -61,6 +64,7 @@ func NewDrawer() *Drawer {
 
 // WithParentWindow sets the receiver’s parent window.
 func (d *Drawer) WithParentWindow(parentWindow WindowProvider) *Drawer {
+	defer runtime.KeepAlive(parentWindow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
 	})
@@ -69,9 +73,22 @@ func (d *Drawer) WithParentWindow(parentWindow WindowProvider) *Drawer {
 
 // WithContentView sets the receiver’s content view.
 func (d *Drawer) WithContentView(contentView ViewProvider) *Drawer {
+	defer runtime.KeepAlive(contentView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	})
+	return d
+}
+
+// WithDelegate sets the receiver’s delegate.
+func (d *Drawer) WithDelegate(delegate DrawerDelegate) *Drawer {
+	_shim := newDrawerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(d), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return d
 }
 
@@ -117,6 +134,7 @@ func (d *Drawer) WithTrailingOffset(trailingOffset float64) *Drawer {
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (d *Drawer) WithNextResponder(nextResponder ResponderProvider) *Drawer {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -125,6 +143,7 @@ func (d *Drawer) WithNextResponder(nextResponder ResponderProvider) *Drawer {
 
 // WithMenu sets returns the responder’s menu.
 func (d *Drawer) WithMenu(menu *Menu) *Drawer {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -133,6 +152,7 @@ func (d *Drawer) WithMenu(menu *Menu) *Drawer {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (d *Drawer) WithUserActivity(userActivity obj.Object) *Drawer {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -141,6 +161,7 @@ func (d *Drawer) WithUserActivity(userActivity obj.Object) *Drawer {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (d *Drawer) WithTouchBar(touchBar *TouchBar) *Drawer {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -149,6 +170,7 @@ func (d *Drawer) WithTouchBar(touchBar *TouchBar) *Drawer {
 
 // Open if the receiver is closed, this method opens it.
 func (d *Drawer) Open() {
+	defer runtime.KeepAlive(d)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("open"))
 	})
@@ -157,6 +179,7 @@ func (d *Drawer) Open() {
 
 // Close if the receiver is open, this method closes it.
 func (d *Drawer) Close() {
+	defer runtime.KeepAlive(d)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("close"))
 	})
@@ -165,6 +188,8 @@ func (d *Drawer) Close() {
 
 // Open2 an action method to open the drawer.
 func (d *Drawer) Open2(sender obj.Object) {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("open:"), objref.IDOf(sender))
 	})
@@ -173,6 +198,8 @@ func (d *Drawer) Open2(sender obj.Object) {
 
 // Close2 an action method to close the receiver.
 func (d *Drawer) Close2(sender obj.Object) {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("close:"), objref.IDOf(sender))
 	})
@@ -181,6 +208,8 @@ func (d *Drawer) Close2(sender obj.Object) {
 
 // Toggle toggles the drawer open or closed.
 func (d *Drawer) Toggle(sender obj.Object) {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("toggle:"), objref.IDOf(sender))
 	})
@@ -189,6 +218,7 @@ func (d *Drawer) Toggle(sender obj.Object) {
 
 // ParentWindow returns the parent window.
 func (d *Drawer) ParentWindow() *Window {
+	defer runtime.KeepAlive(d)
 	var _mainthread0 *Window
 	purego.Main(func() {
 		_mainthread0 = func() *Window {
@@ -202,6 +232,7 @@ func (d *Drawer) ParentWindow() *Window {
 
 // ContentView returns the content view.
 func (d *Drawer) ContentView() *View {
+	defer runtime.KeepAlive(d)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -215,6 +246,7 @@ func (d *Drawer) ContentView() *View {
 
 // State returns the state.
 func (d *Drawer) State() int {
+	defer runtime.KeepAlive(d)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -228,6 +260,7 @@ func (d *Drawer) State() int {
 
 // ContentSize returns the content size.
 func (d *Drawer) ContentSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(d)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -241,6 +274,7 @@ func (d *Drawer) ContentSize() corefoundation.CGSize {
 
 // MinContentSize returns the min content size.
 func (d *Drawer) MinContentSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(d)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -254,6 +288,7 @@ func (d *Drawer) MinContentSize() corefoundation.CGSize {
 
 // MaxContentSize returns the max content size.
 func (d *Drawer) MaxContentSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(d)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -267,6 +302,7 @@ func (d *Drawer) MaxContentSize() corefoundation.CGSize {
 
 // LeadingOffset returns the leading offset.
 func (d *Drawer) LeadingOffset() float64 {
+	defer runtime.KeepAlive(d)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -280,6 +316,7 @@ func (d *Drawer) LeadingOffset() float64 {
 
 // TrailingOffset returns the trailing offset.
 func (d *Drawer) TrailingOffset() float64 {
+	defer runtime.KeepAlive(d)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {

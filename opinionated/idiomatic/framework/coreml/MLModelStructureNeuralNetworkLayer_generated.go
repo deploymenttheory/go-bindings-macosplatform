@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func modelStructureNeuralNetworkLayerAdopt(id objc.ID) *ModelStructureNeuralNetw
 
 // Description returns the object's -description text.
 func (msnnl *ModelStructureNeuralNetworkLayer) Description() string {
+	defer runtime.KeepAlive(msnnl)
 	return rt.Description(objref.IDOf(msnnl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msnnl *ModelStructureNeuralNetworkLayer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msnnl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msnnl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msnnl *ModelStructureNeuralNetworkLayer) IsKind(className string) bool {
+	defer runtime.KeepAlive(msnnl)
 	return rt.IsKind(objref.IDOf(msnnl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msnnl *ModelStructureNeuralNetworkLayer) String() string {
+	defer runtime.KeepAlive(msnnl)
 	return rt.Description(objref.IDOf(msnnl))
 }
 
@@ -74,6 +81,7 @@ func NewModelStructureNeuralNetworkLayer() *ModelStructureNeuralNetworkLayer {
 
 // Name returns the layer name.
 func (msnnl *ModelStructureNeuralNetworkLayer) Name() string {
+	defer runtime.KeepAlive(msnnl)
 	_r := objc.Send[objc.ID](objref.IDOf(msnnl), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (msnnl *ModelStructureNeuralNetworkLayer) Name() string {
 
 // Type returns the type of the layer, e,g, "elementwise", "pooling", etc.
 func (msnnl *ModelStructureNeuralNetworkLayer) Type() string {
+	defer runtime.KeepAlive(msnnl)
 	_r := objc.Send[objc.ID](objref.IDOf(msnnl), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -94,6 +103,7 @@ func (msnnl *ModelStructureNeuralNetworkLayer) Type() string {
 //
 // InputNames returns the collection as a Go slice.
 func (msnnl *ModelStructureNeuralNetworkLayer) InputNames() []string {
+	defer runtime.KeepAlive(msnnl)
 	_arr := objc.Send[objc.ID](objref.IDOf(msnnl), objc.RegisterName("inputNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -102,6 +112,7 @@ func (msnnl *ModelStructureNeuralNetworkLayer) InputNames() []string {
 //
 // OutputNames returns the collection as a Go slice.
 func (msnnl *ModelStructureNeuralNetworkLayer) OutputNames() []string {
+	defer runtime.KeepAlive(msnnl)
 	_arr := objc.Send[objc.ID](objref.IDOf(msnnl), objc.RegisterName("outputNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

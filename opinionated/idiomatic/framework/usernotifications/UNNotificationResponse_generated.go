@@ -5,6 +5,8 @@
 package usernotifications
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,33 +51,40 @@ func notificationResponseAdopt(id objc.ID) *NotificationResponse {
 
 // Description returns the object's -description text.
 func (nr *NotificationResponse) Description() string {
+	defer runtime.KeepAlive(nr)
 	return rt.Description(objref.IDOf(nr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nr *NotificationResponse) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nr *NotificationResponse) IsKind(className string) bool {
+	defer runtime.KeepAlive(nr)
 	return rt.IsKind(objref.IDOf(nr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nr *NotificationResponse) String() string {
+	defer runtime.KeepAlive(nr)
 	return rt.Description(objref.IDOf(nr))
 }
 
 // Notification returns the notification.
 func (nr *NotificationResponse) Notification() *Notification {
+	defer runtime.KeepAlive(nr)
 	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("notification"))
 	return NotificationFromID(_r)
 }
 
 // ActionIdentifier returns the action identifier.
 func (nr *NotificationResponse) ActionIdentifier() string {
+	defer runtime.KeepAlive(nr)
 	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("actionIdentifier"))
 	if _r == 0 {
 		return ""

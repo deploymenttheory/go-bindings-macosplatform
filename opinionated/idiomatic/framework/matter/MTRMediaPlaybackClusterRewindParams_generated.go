@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRMediaPlaybackClusterRewindParamsAdopt(id objc.ID) *MTRMediaPlaybackClust
 
 // Description returns the object's -description text.
 func (mmpcrp *MTRMediaPlaybackClusterRewindParams) Description() string {
+	defer runtime.KeepAlive(mmpcrp)
 	return rt.Description(objref.IDOf(mmpcrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmpcrp *MTRMediaPlaybackClusterRewindParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmpcrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmpcrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmpcrp *MTRMediaPlaybackClusterRewindParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmpcrp)
 	return rt.IsKind(objref.IDOf(mmpcrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmpcrp *MTRMediaPlaybackClusterRewindParams) String() string {
+	defer runtime.KeepAlive(mmpcrp)
 	return rt.Description(objref.IDOf(mmpcrp))
 }
 
@@ -72,36 +80,42 @@ func NewMTRMediaPlaybackClusterRewindParams() *MTRMediaPlaybackClusterRewindPara
 
 // WithAudioAdvanceUnmuted sets the audio advance unmuted.
 func (mmpcrp *MTRMediaPlaybackClusterRewindParams) WithAudioAdvanceUnmuted(audioAdvanceUnmuted obj.Object) *MTRMediaPlaybackClusterRewindParams {
+	defer runtime.KeepAlive(audioAdvanceUnmuted)
 	objc.Send[objc.ID](objref.IDOf(mmpcrp), objc.RegisterName("setAudioAdvanceUnmuted:"), objref.IDOf(audioAdvanceUnmuted))
 	return mmpcrp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mmpcrp *MTRMediaPlaybackClusterRewindParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMediaPlaybackClusterRewindParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mmpcrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mmpcrp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mmpcrp *MTRMediaPlaybackClusterRewindParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMediaPlaybackClusterRewindParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mmpcrp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mmpcrp
 }
 
 // AudioAdvanceUnmuted returns the audio advance unmuted.
-func (mmpcrp *MTRMediaPlaybackClusterRewindParams) AudioAdvanceUnmuted() obj.Object {
+func (mmpcrp *MTRMediaPlaybackClusterRewindParams) AudioAdvanceUnmuted() *foundation.Number {
+	defer runtime.KeepAlive(mmpcrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcrp), objc.RegisterName("audioAdvanceUnmuted"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mmpcrp *MTRMediaPlaybackClusterRewindParams) TimedInvokeTimeoutMs() obj.Object {
+func (mmpcrp *MTRMediaPlaybackClusterRewindParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mmpcrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcrp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mmpcrp *MTRMediaPlaybackClusterRewindParams) ServerSideProcessingTimeout() obj.Object {
+func (mmpcrp *MTRMediaPlaybackClusterRewindParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mmpcrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcrp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

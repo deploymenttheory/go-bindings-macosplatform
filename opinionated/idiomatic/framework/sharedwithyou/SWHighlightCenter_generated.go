@@ -6,11 +6,13 @@ package sharedwithyou
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -51,22 +53,27 @@ func highlightCenterAdopt(id objc.ID) *HighlightCenter {
 
 // Description returns the object's -description text.
 func (hc *HighlightCenter) Description() string {
+	defer runtime.KeepAlive(hc)
 	return rt.Description(objref.IDOf(hc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hc *HighlightCenter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hc *HighlightCenter) IsKind(className string) bool {
+	defer runtime.KeepAlive(hc)
 	return rt.IsKind(objref.IDOf(hc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hc *HighlightCenter) String() string {
+	defer runtime.KeepAlive(hc)
 	return rt.Description(objref.IDOf(hc))
 }
 
@@ -76,10 +83,21 @@ func NewHighlightCenter() *HighlightCenter {
 	return highlightCenterAdopt(_id)
 }
 
+// WithDelegate sets the delegate object for the highlight center.
+func (hc *HighlightCenter) WithDelegate(delegate HighlightCenterDelegate) *HighlightCenter {
+	_shim := newHighlightCenterDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(hc), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(hc), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return hc
+}
+
 // GetHighlightForURL returns a highlight for a specified URL.
 //
 // GetHighlightForURL blocks until the operation completes or ctx is cancelled.
-func (hc *HighlightCenter) GetHighlightForURL(ctx context.Context, uRL string) (result *Highlight, err error) {
+func (hc *HighlightCenter) GetHighlightForURL(ctx context.Context, url string) (result *Highlight, err error) {
+	defer runtime.KeepAlive(hc)
 	type _result struct {
 		val *Highlight
 		err error
@@ -91,7 +109,7 @@ func (hc *HighlightCenter) GetHighlightForURL(ctx context.Context, uRL string) (
 		_o.val = HighlightFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(hc), objc.RegisterName("getHighlightForURL:completionHandler:"), rt.FileURL(uRL), _block)
+	objc.Send[objc.ID](objref.IDOf(hc), objc.RegisterName("getHighlightForURL:completionHandler:"), rt.FileURL(url), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -101,8 +119,10 @@ func (hc *HighlightCenter) GetHighlightForURL(ctx context.Context, uRL string) (
 	}
 }
 
-// CollaborationHighlightForIdentifierError returns a collaboration highlight for a specified collaboration identifier.
-func (hc *HighlightCenter) CollaborationHighlightForIdentifierError(collaborationIdentifier obj.Object) (result *CollaborationHighlight, err error) {
+// CollaborationHighlightForIdentifier returns a collaboration highlight for a specified collaboration identifier.
+func (hc *HighlightCenter) CollaborationHighlightForIdentifier(collaborationIdentifier obj.Object) (result *CollaborationHighlight, err error) {
+	defer runtime.KeepAlive(hc)
+	defer runtime.KeepAlive(collaborationIdentifier)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(hc), objc.RegisterName("collaborationHighlightForIdentifier:error:"), objref.IDOf(collaborationIdentifier), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -114,7 +134,8 @@ func (hc *HighlightCenter) CollaborationHighlightForIdentifierError(collaboratio
 // GetCollaborationHighlightForURL returns a collaboration highlight for a specified URL.
 //
 // GetCollaborationHighlightForURL blocks until the operation completes or ctx is cancelled.
-func (hc *HighlightCenter) GetCollaborationHighlightForURL(ctx context.Context, uRL string) (result *CollaborationHighlight, err error) {
+func (hc *HighlightCenter) GetCollaborationHighlightForURL(ctx context.Context, url string) (result *CollaborationHighlight, err error) {
+	defer runtime.KeepAlive(hc)
 	type _result struct {
 		val *CollaborationHighlight
 		err error
@@ -126,7 +147,7 @@ func (hc *HighlightCenter) GetCollaborationHighlightForURL(ctx context.Context, 
 		_o.val = CollaborationHighlightFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(hc), objc.RegisterName("getCollaborationHighlightForURL:completionHandler:"), rt.FileURL(uRL), _block)
+	objc.Send[objc.ID](objref.IDOf(hc), objc.RegisterName("getCollaborationHighlightForURL:completionHandler:"), rt.FileURL(url), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -138,13 +159,17 @@ func (hc *HighlightCenter) GetCollaborationHighlightForURL(ctx context.Context, 
 
 // ClearNoticesForHighlight clears the notices for a specified collaboration highlight.
 func (hc *HighlightCenter) ClearNoticesForHighlight(highlight *CollaborationHighlight) {
+	defer runtime.KeepAlive(hc)
+	defer runtime.KeepAlive(highlight)
 	objc.Send[objc.ID](objref.IDOf(hc), objc.RegisterName("clearNoticesForHighlight:"), objref.IDOf(highlight))
 }
 
 // GetSignedIdentityProofForCollaborationHighlightUsingData signs passed-in data with the local device’s private key.
 //
 // GetSignedIdentityProofForCollaborationHighlightUsingData blocks until the operation completes or ctx is cancelled.
-func (hc *HighlightCenter) GetSignedIdentityProofForCollaborationHighlightUsingData(ctx context.Context, collaborationHighlight *CollaborationHighlight, data obj.Object) (result obj.Object, err error) {
+func (hc *HighlightCenter) GetSignedIdentityProofForCollaborationHighlightUsingData(ctx context.Context, collaborationHighlight *CollaborationHighlight, data []byte) (result obj.Object, err error) {
+	defer runtime.KeepAlive(hc)
+	defer runtime.KeepAlive(collaborationHighlight)
 	type _result struct {
 		val obj.Object
 		err error
@@ -156,7 +181,7 @@ func (hc *HighlightCenter) GetSignedIdentityProofForCollaborationHighlightUsingD
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(hc), objc.RegisterName("getSignedIdentityProofForCollaborationHighlight:usingData:completionHandler:"), objref.IDOf(collaborationHighlight), objref.IDOf(data), _block)
+	objc.Send[objc.ID](objref.IDOf(hc), objc.RegisterName("getSignedIdentityProofForCollaborationHighlight:usingData:completionHandler:"), objref.IDOf(collaborationHighlight), rt.BytesToNSData(data), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -170,6 +195,7 @@ func (hc *HighlightCenter) GetSignedIdentityProofForCollaborationHighlightUsingD
 //
 // Highlights returns the collection as a Go slice.
 func (hc *HighlightCenter) Highlights() []*Highlight {
+	defer runtime.KeepAlive(hc)
 	_arr := objc.Send[objc.ID](objref.IDOf(hc), objc.RegisterName("highlights"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Highlight { return HighlightFromID(_id) })
 }

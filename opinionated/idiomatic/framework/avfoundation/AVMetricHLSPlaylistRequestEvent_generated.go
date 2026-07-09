@@ -5,9 +5,12 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,25 +56,29 @@ func NewMetricHLSPlaylistRequestEvent() *MetricHLSPlaylistRequestEvent {
 }
 
 // URL returns the URL of the playlist. If no value is available, returns nil.
-func (mhpre *MetricHLSPlaylistRequestEvent) URL() obj.Object {
+func (mhpre *MetricHLSPlaylistRequestEvent) URL() string {
+	defer runtime.KeepAlive(mhpre)
 	_r := objc.Send[objc.ID](objref.IDOf(mhpre), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // IsMultivariantPlaylist reports whether the playlist request is for a multivariant playlist.
 func (mhpre *MetricHLSPlaylistRequestEvent) IsMultivariantPlaylist() bool {
+	defer runtime.KeepAlive(mhpre)
 	_r := objc.Send[bool](objref.IDOf(mhpre), objc.RegisterName("isMultivariantPlaylist"))
 	return _r
 }
 
 // MediaType returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
-func (mhpre *MetricHLSPlaylistRequestEvent) MediaType() obj.Object {
+func (mhpre *MetricHLSPlaylistRequestEvent) MediaType() *foundation.String {
+	defer runtime.KeepAlive(mhpre)
 	_r := objc.Send[objc.ID](objref.IDOf(mhpre), objc.RegisterName("mediaType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // MediaResourceRequestEvent returns the media resource request event which was used to satisfy the playlist.
 func (mhpre *MetricHLSPlaylistRequestEvent) MediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
+	defer runtime.KeepAlive(mhpre)
 	_r := objc.Send[objc.ID](objref.IDOf(mhpre), objc.RegisterName("mediaResourceRequestEvent"))
 	return MetricMediaResourceRequestEventFromID(_r)
 }

@@ -5,10 +5,13 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,9 +51,9 @@ func pDFImageRepAdopt(id objc.ID) *PDFImageRep {
 }
 
 // NewPDFImageRepWithData returns a representation of an image initialized with the specified PDF data.
-func NewPDFImageRepWithData(pdfData obj.Object) *PDFImageRep {
+func NewPDFImageRepWithData(pdfData []byte) *PDFImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPDFImageRep")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(pdfData))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), rt.BytesToNSData(pdfData))
 	return pDFImageRepAdopt(_id)
 }
 
@@ -80,6 +83,7 @@ func (pir *PDFImageRep) WithOpaque(opaque bool) *PDFImageRep {
 
 // WithColorSpaceName sets the name of the color space used by the image data.
 func (pir *PDFImageRep) WithColorSpaceName(colorSpaceName obj.Object) *PDFImageRep {
+	defer runtime.KeepAlive(colorSpaceName)
 	objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
 	return pir
 }
@@ -109,25 +113,29 @@ func (pir *PDFImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection
 }
 
 // PDFRepresentation returns the pdf representation.
-func (pir *PDFImageRep) PDFRepresentation() obj.Object {
+func (pir *PDFImageRep) PDFRepresentation() []byte {
+	defer runtime.KeepAlive(pir)
 	_r := objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("PDFRepresentation"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Bounds returns the bounds.
 func (pir *PDFImageRep) Bounds() corefoundation.CGRect {
+	defer runtime.KeepAlive(pir)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(pir), objc.RegisterName("bounds"))
 	return _r
 }
 
 // CurrentPage returns the current page.
 func (pir *PDFImageRep) CurrentPage() int {
+	defer runtime.KeepAlive(pir)
 	_r := objc.Send[int](objref.IDOf(pir), objc.RegisterName("currentPage"))
 	return _r
 }
 
 // PageCount returns the page count.
 func (pir *PDFImageRep) PageCount() int {
+	defer runtime.KeepAlive(pir)
 	_r := objc.Send[int](objref.IDOf(pir), objc.RegisterName("pageCount"))
 	return _r
 }

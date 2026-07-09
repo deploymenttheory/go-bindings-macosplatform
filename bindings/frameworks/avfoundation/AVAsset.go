@@ -82,8 +82,8 @@ func AVAssetFromID(id objc.ID) *AVAsset {
 }
 
 // Creates an asset that models the media at the specified URL.
-func AVAssetAssetWithURL(uRL *foundation.NSURL) *AVAsset {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVAsset), _aVAssetSelAssetWithURL, uRL.Ptr())
+func AVAssetAssetWithURL(url *foundation.NSURL) *AVAsset {
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVAsset), _aVAssetSelAssetWithURL, url.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

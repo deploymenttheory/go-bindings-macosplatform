@@ -5,9 +5,12 @@
 package photosui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -48,22 +51,27 @@ func livePhotoViewAdopt(id objc.ID) *LivePhotoView {
 
 // Description returns the object's -description text.
 func (lpv *LivePhotoView) Description() string {
+	defer runtime.KeepAlive(lpv)
 	return rt.Description(objref.IDOf(lpv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lpv *LivePhotoView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lpv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lpv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lpv *LivePhotoView) IsKind(className string) bool {
+	defer runtime.KeepAlive(lpv)
 	return rt.IsKind(objref.IDOf(lpv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lpv *LivePhotoView) String() string {
+	defer runtime.KeepAlive(lpv)
 	return rt.Description(objref.IDOf(lpv))
 }
 
@@ -79,8 +87,21 @@ func NewLivePhotoView() *LivePhotoView {
 	return _mainthread0
 }
 
+// WithDelegate sets an object to be notified when Live Photo playback begins or ends.
+func (lpv *LivePhotoView) WithDelegate(delegate LivePhotoViewDelegate) *LivePhotoView {
+	_shim := newLivePhotoViewDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(lpv), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lpv), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return lpv
+}
+
 // WithLivePhoto sets the Live Photo displayed in the view.
 func (lpv *LivePhotoView) WithLivePhoto(livePhoto obj.Object) *LivePhotoView {
+	defer runtime.KeepAlive(livePhoto)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("setLivePhoto:"), objref.IDOf(livePhoto))
 	})
@@ -121,6 +142,7 @@ func (lpv *LivePhotoView) WithMuted(muted bool) *LivePhotoView {
 
 // StartPlaybackWithStyle begins playback of Live Photo content in the view.
 func (lpv *LivePhotoView) StartPlaybackWithStyle(playbackStyle LivePhotoViewPlaybackStyle) {
+	defer runtime.KeepAlive(lpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("startPlaybackWithStyle:"), playbackStyle)
 	})
@@ -129,6 +151,7 @@ func (lpv *LivePhotoView) StartPlaybackWithStyle(playbackStyle LivePhotoViewPlay
 
 // StopPlayback stops playback of a Live Photo.
 func (lpv *LivePhotoView) StopPlayback() {
+	defer runtime.KeepAlive(lpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("stopPlayback"))
 	})
@@ -137,6 +160,7 @@ func (lpv *LivePhotoView) StopPlayback() {
 
 // StopPlaybackAnimated stops playback of a Live Photo in an animated manner.
 func (lpv *LivePhotoView) StopPlaybackAnimated(animated bool) {
+	defer runtime.KeepAlive(lpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("stopPlaybackAnimated:"), animated)
 	})
@@ -145,6 +169,7 @@ func (lpv *LivePhotoView) StopPlaybackAnimated(animated bool) {
 
 // LivePhoto returns live photo displayed in the receiver.
 func (lpv *LivePhotoView) LivePhoto() obj.Object {
+	defer runtime.KeepAlive(lpv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -158,6 +183,7 @@ func (lpv *LivePhotoView) LivePhoto() obj.Object {
 
 // ContentMode returns the mode in which the receiver will display its content. Defaults to PHLivePhotoViewContentModeAspectFit.
 func (lpv *LivePhotoView) ContentMode() LivePhotoViewContentMode {
+	defer runtime.KeepAlive(lpv)
 	var _mainthread0 LivePhotoViewContentMode
 	purego.Main(func() {
 		_mainthread0 = func() LivePhotoViewContentMode {
@@ -171,6 +197,7 @@ func (lpv *LivePhotoView) ContentMode() LivePhotoViewContentMode {
 
 // ContentsRect returns the rectangle, in the unit coordinate space, that defines the portion of the Live Photo contents that should be displayed. In this coordinate system, the point `{0.0,0.0}` refers to the upper left corner of the Live Photo, and `{1.0,1.0}` refers to the bottom right corner.
 func (lpv *LivePhotoView) ContentsRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(lpv)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -184,6 +211,7 @@ func (lpv *LivePhotoView) ContentsRect() corefoundation.CGRect {
 
 // AudioVolume returns the audio volume during playback
 func (lpv *LivePhotoView) AudioVolume() float32 {
+	defer runtime.KeepAlive(lpv)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -197,6 +225,7 @@ func (lpv *LivePhotoView) AudioVolume() float32 {
 
 // IsMuted reports whether the audio of the Live Photo is muted.
 func (lpv *LivePhotoView) IsMuted() bool {
+	defer runtime.KeepAlive(lpv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -210,6 +239,7 @@ func (lpv *LivePhotoView) IsMuted() bool {
 
 // LivePhotoBadgeView returns directly access the livePhotoBadge in cases where it should be added to a different place in the view hierarchy and not the live photo view. This can be useful when the live photo view is added to a scroll view.
 func (lpv *LivePhotoView) LivePhotoBadgeView() obj.Object {
+	defer runtime.KeepAlive(lpv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

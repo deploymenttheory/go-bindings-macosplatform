@@ -5,6 +5,8 @@
 package browserenginekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,40 +49,47 @@ func webAppManifestAdopt(id objc.ID) *WebAppManifest {
 
 // Description returns the object's -description text.
 func (wam *WebAppManifest) Description() string {
+	defer runtime.KeepAlive(wam)
 	return rt.Description(objref.IDOf(wam))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wam *WebAppManifest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wam)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wam), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wam *WebAppManifest) IsKind(className string) bool {
+	defer runtime.KeepAlive(wam)
 	return rt.IsKind(objref.IDOf(wam), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wam *WebAppManifest) String() string {
+	defer runtime.KeepAlive(wam)
 	return rt.Description(objref.IDOf(wam))
 }
 
 // NewWebAppManifestWithJSONDataManifestURL returns nil if manifestURL is invalid or jsonData cannot be parsed.
-func NewWebAppManifestWithJSONDataManifestURL(jsonData obj.Object, manifestURL string) *WebAppManifest {
+func NewWebAppManifestWithJSONDataManifestURL(jsonData []byte, manifestURL string) *WebAppManifest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("BEWebAppManifest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithJSONData:manifestURL:"), objref.IDOf(jsonData), rt.FileURL(manifestURL))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithJSONData:manifestURL:"), rt.BytesToNSData(jsonData), rt.FileURL(manifestURL))
 	return webAppManifestAdopt(_id)
 }
 
 // JSONData returns the JSON data.
-func (wam *WebAppManifest) JSONData() obj.Object {
+func (wam *WebAppManifest) JSONData() []byte {
+	defer runtime.KeepAlive(wam)
 	_r := objc.Send[objc.ID](objref.IDOf(wam), objc.RegisterName("jsonData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ManifestURL returns the manifest URL.
-func (wam *WebAppManifest) ManifestURL() obj.Object {
+func (wam *WebAppManifest) ManifestURL() string {
+	defer runtime.KeepAlive(wam)
 	_r := objc.Send[objc.ID](objref.IDOf(wam), objc.RegisterName("manifestURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

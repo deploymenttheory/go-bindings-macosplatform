@@ -5,6 +5,8 @@
 package gamesave
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func syncedDirectoryStateAdopt(id objc.ID) *SyncedDirectoryState {
 
 // Description returns the object's -description text.
 func (sds *SyncedDirectoryState) Description() string {
+	defer runtime.KeepAlive(sds)
 	return rt.Description(objref.IDOf(sds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sds *SyncedDirectoryState) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sds)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sds *SyncedDirectoryState) IsKind(className string) bool {
+	defer runtime.KeepAlive(sds)
 	return rt.IsKind(objref.IDOf(sds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sds *SyncedDirectoryState) String() string {
+	defer runtime.KeepAlive(sds)
 	return rt.Description(objref.IDOf(sds))
 }
 
@@ -74,20 +81,23 @@ func NewSyncedDirectoryState() *SyncedDirectoryState {
 
 // State specifies the current state of the directory
 func (sds *SyncedDirectoryState) State() SyncState {
+	defer runtime.KeepAlive(sds)
 	_r := objc.Send[SyncState](objref.IDOf(sds), objc.RegisterName("state"))
 	return _r
 }
 
 // URL returns the URL of a directory to read and write game-save data in. This property's value is `nil` unless the state is `GSSyncStateReady`, `GSSyncStateOffline`, or `GSSyncStateLocal`.
-func (sds *SyncedDirectoryState) URL() obj.Object {
+func (sds *SyncedDirectoryState) URL() string {
+	defer runtime.KeepAlive(sds)
 	_r := objc.Send[objc.ID](objref.IDOf(sds), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // ConflictedVersions returns the conflicting versions. If you're implementing your own conflict resolution, read all of the conflicting versions, and modify one of them to incorporate the state and changes from the others. Then call “GSSyncedDirectory/resolveConflictsWithVersion:“, passing that version. This property's value is `nil` unless the state is `GSSyncStateConflicted`.
 //
 // ConflictedVersions returns the collection as a Go slice.
 func (sds *SyncedDirectoryState) ConflictedVersions() []*SyncedDirectoryVersion {
+	defer runtime.KeepAlive(sds)
 	_arr := objc.Send[objc.ID](objref.IDOf(sds), objc.RegisterName("conflictedVersions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SyncedDirectoryVersion { return SyncedDirectoryVersionFromID(_id) })
 }

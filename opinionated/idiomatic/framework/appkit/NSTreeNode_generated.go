@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func treeNodeAdopt(id objc.ID) *TreeNode {
 
 // Description returns the object's -description text.
 func (tn *TreeNode) Description() string {
+	defer runtime.KeepAlive(tn)
 	return rt.Description(objref.IDOf(tn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tn *TreeNode) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tn)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tn *TreeNode) IsKind(className string) bool {
+	defer runtime.KeepAlive(tn)
 	return rt.IsKind(objref.IDOf(tn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tn *TreeNode) String() string {
+	defer runtime.KeepAlive(tn)
 	return rt.Description(objref.IDOf(tn))
 }
 
 // NewTreeNodeWithRepresentedObject initializes a newly allocated tree node that represents the specified object.
 func NewTreeNodeWithRepresentedObject(modelObject obj.Object) *TreeNode {
+	defer runtime.KeepAlive(modelObject)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTreeNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRepresentedObject:"), objref.IDOf(modelObject))
 	return treeNodeAdopt(_id)
@@ -75,29 +84,35 @@ func NewTreeNodeWithRepresentedObject(modelObject obj.Object) *TreeNode {
 
 // DescendantNodeAtIndexPath returns the receiver’s descendant at the specified index path.
 func (tn *TreeNode) DescendantNodeAtIndexPath(indexPath obj.Object) *TreeNode {
+	defer runtime.KeepAlive(tn)
+	defer runtime.KeepAlive(indexPath)
 	_r := objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("descendantNodeAtIndexPath:"), objref.IDOf(indexPath))
 	return TreeNodeFromID(_r)
 }
 
 // SortWithSortDescriptorsRecursively sorts the receiver’s subtree using the values of the represented objects with the specified sort descriptors.
-func (tn *TreeNode) SortWithSortDescriptorsRecursively(sortDescriptors []obj.Object, recursively bool) {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("sortWithSortDescriptors:recursively:"), purego.SliceToNSArray(sortDescriptors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), recursively)
+func (tn *TreeNode) SortWithSortDescriptorsRecursively(sortDescriptors []*foundation.SortDescriptor, recursively bool) {
+	defer runtime.KeepAlive(tn)
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("sortWithSortDescriptors:recursively:"), purego.SliceToNSArray(sortDescriptors, func(_v *foundation.SortDescriptor) objc.ID { return objref.IDOf(_v) }), recursively)
 }
 
 // RepresentedObject returns the represented object.
 func (tn *TreeNode) RepresentedObject() obj.Object {
+	defer runtime.KeepAlive(tn)
 	_r := objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("representedObject"))
 	return obj.Wrap(_r)
 }
 
 // IndexPath returns the index path.
-func (tn *TreeNode) IndexPath() obj.Object {
+func (tn *TreeNode) IndexPath() *foundation.IndexPath {
+	defer runtime.KeepAlive(tn)
 	_r := objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("indexPath"))
-	return obj.Wrap(_r)
+	return foundation.IndexPathFromID(_r)
 }
 
 // IsLeaf reports whether the object is leaf.
 func (tn *TreeNode) IsLeaf() bool {
+	defer runtime.KeepAlive(tn)
 	_r := objc.Send[bool](objref.IDOf(tn), objc.RegisterName("isLeaf"))
 	return _r
 }
@@ -106,6 +121,7 @@ func (tn *TreeNode) IsLeaf() bool {
 //
 // ChildNodes returns the collection as a Go slice.
 func (tn *TreeNode) ChildNodes() []*TreeNode {
+	defer runtime.KeepAlive(tn)
 	_arr := objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("childNodes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TreeNode { return TreeNodeFromID(_id) })
 }
@@ -114,12 +130,14 @@ func (tn *TreeNode) ChildNodes() []*TreeNode {
 //
 // MutableChildNodes returns the collection as a Go slice.
 func (tn *TreeNode) MutableChildNodes() []*TreeNode {
+	defer runtime.KeepAlive(tn)
 	_arr := objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("mutableChildNodes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TreeNode { return TreeNodeFromID(_id) })
 }
 
 // ParentNode returns the parent node.
 func (tn *TreeNode) ParentNode() *TreeNode {
+	defer runtime.KeepAlive(tn)
 	_r := objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("parentNode"))
 	return TreeNodeFromID(_r)
 }

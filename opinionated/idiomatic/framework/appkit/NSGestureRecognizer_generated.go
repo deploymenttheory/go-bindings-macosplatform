@@ -5,9 +5,12 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -50,27 +53,33 @@ func gestureRecognizerAdopt(id objc.ID) *GestureRecognizer {
 
 // Description returns the object's -description text.
 func (gr *GestureRecognizer) Description() string {
+	defer runtime.KeepAlive(gr)
 	return rt.Description(objref.IDOf(gr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gr *GestureRecognizer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gr *GestureRecognizer) IsKind(className string) bool {
+	defer runtime.KeepAlive(gr)
 	return rt.IsKind(objref.IDOf(gr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gr *GestureRecognizer) String() string {
+	defer runtime.KeepAlive(gr)
 	return rt.Description(objref.IDOf(gr))
 }
 
 // NewGestureRecognizerWithCoder creates a new GestureRecognizer.
 func NewGestureRecognizerWithCoder(coder obj.Object) *GestureRecognizer {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *GestureRecognizer
 	purego.Main(func() {
 		_mainthread0 = func() *GestureRecognizer {
@@ -84,6 +93,7 @@ func NewGestureRecognizerWithCoder(coder obj.Object) *GestureRecognizer {
 
 // WithTarget sets the object that implements the action method.
 func (gr *GestureRecognizer) WithTarget(target obj.Object) *GestureRecognizer {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -98,6 +108,18 @@ func (gr *GestureRecognizer) WithState(state GestureRecognizerState) *GestureRec
 	return gr
 }
 
+// WithDelegate sets the delegate of the gesture recognizer.
+func (gr *GestureRecognizer) WithDelegate(delegate GestureRecognizerDelegate) *GestureRecognizer {
+	_shim := newGestureRecognizerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(gr), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gr), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return gr
+}
+
 // WithEnabled sets a Boolean value indicating whether the gesture recognizer is able to handle events.
 func (gr *GestureRecognizer) WithEnabled(enabled bool) *GestureRecognizer {
 	purego.Main(func() {
@@ -108,6 +130,7 @@ func (gr *GestureRecognizer) WithEnabled(enabled bool) *GestureRecognizer {
 
 // WithPressureConfiguration sets configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
 func (gr *GestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GestureRecognizer {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -180,6 +203,8 @@ func (gr *GestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMa
 
 // LocationInView returns the point computed as the location of the gesture.
 func (gr *GestureRecognizer) LocationInView(view *View) corefoundation.CGPoint {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(view)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -193,6 +218,7 @@ func (gr *GestureRecognizer) LocationInView(view *View) corefoundation.CGPoint {
 
 // Target returns the target.
 func (gr *GestureRecognizer) Target() obj.Object {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -206,6 +232,7 @@ func (gr *GestureRecognizer) Target() obj.Object {
 
 // State returns the state.
 func (gr *GestureRecognizer) State() GestureRecognizerState {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 GestureRecognizerState
 	purego.Main(func() {
 		_mainthread0 = func() GestureRecognizerState {
@@ -219,6 +246,7 @@ func (gr *GestureRecognizer) State() GestureRecognizerState {
 
 // IsEnabled reports whether the object is enabled.
 func (gr *GestureRecognizer) IsEnabled() bool {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -232,6 +260,7 @@ func (gr *GestureRecognizer) IsEnabled() bool {
 
 // View returns the view.
 func (gr *GestureRecognizer) View() *View {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -245,6 +274,7 @@ func (gr *GestureRecognizer) View() *View {
 
 // PressureConfiguration returns the pressure configuration.
 func (gr *GestureRecognizer) PressureConfiguration() *PressureConfiguration {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 *PressureConfiguration
 	purego.Main(func() {
 		_mainthread0 = func() *PressureConfiguration {
@@ -258,6 +288,7 @@ func (gr *GestureRecognizer) PressureConfiguration() *PressureConfiguration {
 
 // DelaysPrimaryMouseButtonEvents wraps the corresponding Objective-C method.
 func (gr *GestureRecognizer) DelaysPrimaryMouseButtonEvents() bool {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -271,6 +302,7 @@ func (gr *GestureRecognizer) DelaysPrimaryMouseButtonEvents() bool {
 
 // DelaysSecondaryMouseButtonEvents wraps the corresponding Objective-C method.
 func (gr *GestureRecognizer) DelaysSecondaryMouseButtonEvents() bool {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -284,6 +316,7 @@ func (gr *GestureRecognizer) DelaysSecondaryMouseButtonEvents() bool {
 
 // DelaysOtherMouseButtonEvents wraps the corresponding Objective-C method.
 func (gr *GestureRecognizer) DelaysOtherMouseButtonEvents() bool {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -297,6 +330,7 @@ func (gr *GestureRecognizer) DelaysOtherMouseButtonEvents() bool {
 
 // DelaysKeyEvents wraps the corresponding Objective-C method.
 func (gr *GestureRecognizer) DelaysKeyEvents() bool {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -310,6 +344,7 @@ func (gr *GestureRecognizer) DelaysKeyEvents() bool {
 
 // DelaysMagnificationEvents wraps the corresponding Objective-C method.
 func (gr *GestureRecognizer) DelaysMagnificationEvents() bool {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -323,6 +358,7 @@ func (gr *GestureRecognizer) DelaysMagnificationEvents() bool {
 
 // DelaysRotationEvents wraps the corresponding Objective-C method.
 func (gr *GestureRecognizer) DelaysRotationEvents() bool {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -336,6 +372,7 @@ func (gr *GestureRecognizer) DelaysRotationEvents() bool {
 
 // Name returns the name.
 func (gr *GestureRecognizer) Name() string {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -352,6 +389,7 @@ func (gr *GestureRecognizer) Name() string {
 
 // ModifierFlags returns the modifier flags.
 func (gr *GestureRecognizer) ModifierFlags() EventModifierFlags {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 EventModifierFlags
 	purego.Main(func() {
 		_mainthread0 = func() EventModifierFlags {
@@ -365,6 +403,7 @@ func (gr *GestureRecognizer) ModifierFlags() EventModifierFlags {
 
 // AllowedTouchTypes returns the allowed touch types.
 func (gr *GestureRecognizer) AllowedTouchTypes() TouchTypeMask {
+	defer runtime.KeepAlive(gr)
 	var _mainthread0 TouchTypeMask
 	purego.Main(func() {
 		_mainthread0 = func() TouchTypeMask {
@@ -378,6 +417,7 @@ func (gr *GestureRecognizer) AllowedTouchTypes() TouchTypeMask {
 
 // Reset overridden to reset the internal state of the gesture recognizer when an attempt completes.
 func (gr *GestureRecognizer) Reset() {
+	defer runtime.KeepAlive(gr)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("reset"))
 	})
@@ -386,6 +426,8 @@ func (gr *GestureRecognizer) Reset() {
 
 // CanPreventGestureRecognizer overridden to indicate that the current object can prevent the specified gesture recognizer from recognizing its gesture.
 func (gr *GestureRecognizer) CanPreventGestureRecognizer(preventedGestureRecognizer *GestureRecognizer) bool {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(preventedGestureRecognizer)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -399,6 +441,8 @@ func (gr *GestureRecognizer) CanPreventGestureRecognizer(preventedGestureRecogni
 
 // CanBePreventedByGestureRecognizer overridden to indicate that the specified gesture recognizer can prevent the current object from recognizing a gesture.
 func (gr *GestureRecognizer) CanBePreventedByGestureRecognizer(preventingGestureRecognizer *GestureRecognizer) bool {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(preventingGestureRecognizer)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -412,6 +456,8 @@ func (gr *GestureRecognizer) CanBePreventedByGestureRecognizer(preventingGesture
 
 // ShouldRequireFailureOfGestureRecognizer overridden to indicate that the specified gesture recognizer must fail before the current object begins recognizing its gesture.
 func (gr *GestureRecognizer) ShouldRequireFailureOfGestureRecognizer(otherGestureRecognizer *GestureRecognizer) bool {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(otherGestureRecognizer)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -425,6 +471,8 @@ func (gr *GestureRecognizer) ShouldRequireFailureOfGestureRecognizer(otherGestur
 
 // ShouldBeRequiredToFailByGestureRecognizer overridden to indicate that the current object must fail before the specified gesture recognizer begins recognizing its gesture.
 func (gr *GestureRecognizer) ShouldBeRequiredToFailByGestureRecognizer(otherGestureRecognizer *GestureRecognizer) bool {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(otherGestureRecognizer)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -438,6 +486,8 @@ func (gr *GestureRecognizer) ShouldBeRequiredToFailByGestureRecognizer(otherGest
 
 // MouseDown informs the gesture recognizer that the user pressed the left mouse button.
 func (gr *GestureRecognizer) MouseDown(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("mouseDown:"), objref.IDOf(event))
 	})
@@ -446,6 +496,8 @@ func (gr *GestureRecognizer) MouseDown(event *Event) {
 
 // RightMouseDown informs the gesture recognizer that the user pressed the right mouse button.
 func (gr *GestureRecognizer) RightMouseDown(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("rightMouseDown:"), objref.IDOf(event))
 	})
@@ -454,6 +506,8 @@ func (gr *GestureRecognizer) RightMouseDown(event *Event) {
 
 // OtherMouseDown informs the gesture recognizer that the user pressed a mouse button other than the left or right one.
 func (gr *GestureRecognizer) OtherMouseDown(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("otherMouseDown:"), objref.IDOf(event))
 	})
@@ -462,6 +516,8 @@ func (gr *GestureRecognizer) OtherMouseDown(event *Event) {
 
 // MouseUp informs the gesture recognizer that the user released the left mouse button.
 func (gr *GestureRecognizer) MouseUp(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("mouseUp:"), objref.IDOf(event))
 	})
@@ -470,6 +526,8 @@ func (gr *GestureRecognizer) MouseUp(event *Event) {
 
 // RightMouseUp informs the gesture recognizer that the user released the right mouse button.
 func (gr *GestureRecognizer) RightMouseUp(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("rightMouseUp:"), objref.IDOf(event))
 	})
@@ -478,6 +536,8 @@ func (gr *GestureRecognizer) RightMouseUp(event *Event) {
 
 // OtherMouseUp informs the gesture recognizer that the user released a mouse button other than the left or right one.
 func (gr *GestureRecognizer) OtherMouseUp(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("otherMouseUp:"), objref.IDOf(event))
 	})
@@ -486,6 +546,8 @@ func (gr *GestureRecognizer) OtherMouseUp(event *Event) {
 
 // MouseDragged informs the gesture recognizer that the user moved the mouse with the left button pressed.
 func (gr *GestureRecognizer) MouseDragged(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("mouseDragged:"), objref.IDOf(event))
 	})
@@ -494,6 +556,8 @@ func (gr *GestureRecognizer) MouseDragged(event *Event) {
 
 // RightMouseDragged informs the gesture recognizer that the user moved the mouse with the right button pressed.
 func (gr *GestureRecognizer) RightMouseDragged(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("rightMouseDragged:"), objref.IDOf(event))
 	})
@@ -502,6 +566,8 @@ func (gr *GestureRecognizer) RightMouseDragged(event *Event) {
 
 // OtherMouseDragged informs the gesture recognizer that the user moved the mouse with a button other than the left or right one pressed.
 func (gr *GestureRecognizer) OtherMouseDragged(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("otherMouseDragged:"), objref.IDOf(event))
 	})
@@ -510,6 +576,8 @@ func (gr *GestureRecognizer) OtherMouseDragged(event *Event) {
 
 // MouseCancelled wraps the corresponding Objective-C method.
 func (gr *GestureRecognizer) MouseCancelled(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("mouseCancelled:"), objref.IDOf(event))
 	})
@@ -518,6 +586,8 @@ func (gr *GestureRecognizer) MouseCancelled(event *Event) {
 
 // KeyDown informs the gesture recognizer that the user has pressed a key.
 func (gr *GestureRecognizer) KeyDown(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("keyDown:"), objref.IDOf(event))
 	})
@@ -526,6 +596,8 @@ func (gr *GestureRecognizer) KeyDown(event *Event) {
 
 // KeyUp informs the gesture recognizer that the user released a key.
 func (gr *GestureRecognizer) KeyUp(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("keyUp:"), objref.IDOf(event))
 	})
@@ -534,6 +606,8 @@ func (gr *GestureRecognizer) KeyUp(event *Event) {
 
 // FlagsChanged informs the current object that the user pressed or released a modifier key (Shift, Control, and so on).
 func (gr *GestureRecognizer) FlagsChanged(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("flagsChanged:"), objref.IDOf(event))
 	})
@@ -542,62 +616,78 @@ func (gr *GestureRecognizer) FlagsChanged(event *Event) {
 
 // TabletPoint informs the user that a tablet-point event occurred.
 func (gr *GestureRecognizer) TabletPoint(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("tabletPoint:"), objref.IDOf(event))
 	})
 
 }
 
-// MagnifyWithEvent informs the gesture recognizer that the user is performing a pinch gesture.
-func (gr *GestureRecognizer) MagnifyWithEvent(event *Event) {
+// Magnify informs the gesture recognizer that the user is performing a pinch gesture.
+func (gr *GestureRecognizer) Magnify(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("magnifyWithEvent:"), objref.IDOf(event))
 	})
 
 }
 
-// RotateWithEvent informs the gesture recognizer that the user is performing a rotation gesture.
-func (gr *GestureRecognizer) RotateWithEvent(event *Event) {
+// Rotate informs the gesture recognizer that the user is performing a rotation gesture.
+func (gr *GestureRecognizer) Rotate(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("rotateWithEvent:"), objref.IDOf(event))
 	})
 
 }
 
-// PressureChangeWithEvent informs the current object that a pressure change occurred on a system that supports pressure sensitivity.
-func (gr *GestureRecognizer) PressureChangeWithEvent(event *Event) {
+// PressureChange informs the current object that a pressure change occurred on a system that supports pressure sensitivity.
+func (gr *GestureRecognizer) PressureChange(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("pressureChangeWithEvent:"), objref.IDOf(event))
 	})
 
 }
 
-// TouchesBeganWithEvent called when one or more fingers first make contact with an NSTouchBar instance on the Touch Bar.
-func (gr *GestureRecognizer) TouchesBeganWithEvent(event *Event) {
+// TouchesBegan called when one or more fingers first make contact with an NSTouchBar instance on the Touch Bar.
+func (gr *GestureRecognizer) TouchesBegan(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("touchesBeganWithEvent:"), objref.IDOf(event))
 	})
 
 }
 
-// TouchesMovedWithEvent called when one or more fingers, associated with an in-progress event, move within an NSTouchBar instance on the Touch Bar.
-func (gr *GestureRecognizer) TouchesMovedWithEvent(event *Event) {
+// TouchesMoved called when one or more fingers, associated with an in-progress event, move within an NSTouchBar instance on the Touch Bar.
+func (gr *GestureRecognizer) TouchesMoved(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("touchesMovedWithEvent:"), objref.IDOf(event))
 	})
 
 }
 
-// TouchesEndedWithEvent called when one or more fingers are removed from contact with an NSTouchBar instance on the Touch Bar.
-func (gr *GestureRecognizer) TouchesEndedWithEvent(event *Event) {
+// TouchesEnded called when one or more fingers are removed from contact with an NSTouchBar instance on the Touch Bar.
+func (gr *GestureRecognizer) TouchesEnded(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("touchesEndedWithEvent:"), objref.IDOf(event))
 	})
 
 }
 
-// TouchesCancelledWithEvent called when a system event, such as a low-memory warning, cancels an in-progress touch event in an NSTouchBar object.
-func (gr *GestureRecognizer) TouchesCancelledWithEvent(event *Event) {
+// TouchesCancelled called when a system event, such as a low-memory warning, cancels an in-progress touch event in an NSTouchBar object.
+func (gr *GestureRecognizer) TouchesCancelled(event *Event) {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("touchesCancelledWithEvent:"), objref.IDOf(event))
 	})

@@ -5,12 +5,15 @@
 package localauthentication
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
 )
 
 // BiometryRequirementWithFallback creates a requirement that requires biometric authentication or a fallback requirement that you specify.
 func BiometryRequirementWithFallback(fallback *BiometryFallbackRequirement) *AuthenticationRequirement {
+	defer runtime.KeepAlive(fallback)
 	_r := objc.Send[objc.ID](objc.ID(_class("LAAuthenticationRequirement")), objc.RegisterName("biometryRequirementWithFallback:"), objref.IDOf(fallback))
 	return AuthenticationRequirementFromID(_r)
 }

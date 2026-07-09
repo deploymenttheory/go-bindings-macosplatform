@@ -5,6 +5,8 @@
 package mediaextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -60,6 +62,7 @@ func (rpsgp *RAWProcessingSubGroupParameter) WithEnabled(enabled bool) *RAWProce
 //
 // SubGroupParameters returns the collection as a Go slice.
 func (rpsgp *RAWProcessingSubGroupParameter) SubGroupParameters() []*RAWProcessingParameter {
+	defer runtime.KeepAlive(rpsgp)
 	_arr := objc.Send[objc.ID](objref.IDOf(rpsgp), objc.RegisterName("subGroupParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RAWProcessingParameter { return RAWProcessingParameterFromID(_id) })
 }

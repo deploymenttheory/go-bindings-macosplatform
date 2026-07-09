@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRMetricsAdopt(id objc.ID) *MTRMetrics {
 
 // Description returns the object's -description text.
 func (mm *MTRMetrics) Description() string {
+	defer runtime.KeepAlive(mm)
 	return rt.Description(objref.IDOf(mm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mm *MTRMetrics) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mm *MTRMetrics) IsKind(className string) bool {
+	defer runtime.KeepAlive(mm)
 	return rt.IsKind(objref.IDOf(mm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mm *MTRMetrics) String() string {
+	defer runtime.KeepAlive(mm)
 	return rt.Description(objref.IDOf(mm))
 }
 
@@ -72,20 +80,23 @@ func NewMTRMetrics() *MTRMetrics {
 
 // MetricDataForKey returns metric data corresponding to the metric identified by its key.
 func (mm *MTRMetrics) MetricDataForKey(key string) *MTRMetricData {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("metricDataForKey:"), purego.NSString(key))
 	return MTRMetricDataFromID(_r)
 }
 
 // UniqueIdentifier returns a unique identifier for the object
-func (mm *MTRMetrics) UniqueIdentifier() obj.Object {
+func (mm *MTRMetrics) UniqueIdentifier() *foundation.UUID {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("uniqueIdentifier"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // AllKeys returns the names of all the metrics data items collected.
 //
 // AllKeys returns the collection as a Go slice.
 func (mm *MTRMetrics) AllKeys() []string {
+	defer runtime.KeepAlive(mm)
 	_arr := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("allKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

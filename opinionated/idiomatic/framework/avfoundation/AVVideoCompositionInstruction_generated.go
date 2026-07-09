@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func videoCompositionInstructionAdopt(id objc.ID) *VideoCompositionInstruction {
 
 // Description returns the object's -description text.
 func (vci *VideoCompositionInstruction) Description() string {
+	defer runtime.KeepAlive(vci)
 	return rt.Description(objref.IDOf(vci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vci *VideoCompositionInstruction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vci *VideoCompositionInstruction) IsKind(className string) bool {
+	defer runtime.KeepAlive(vci)
 	return rt.IsKind(objref.IDOf(vci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vci *VideoCompositionInstruction) String() string {
+	defer runtime.KeepAlive(vci)
 	return rt.Description(objref.IDOf(vci))
 }
 
 // BackgroundColor indicates the background color of the composition. Solid BGRA colors only are supported; patterns and other color refs that are not supported will be ignored. - If the background color is not specified the video compositor will use a default backgroundColor of opaque black. - If the rendered pixel buffer does not have alpha, the alpha value of the backgroundColor will be ignored.
 func (vci *VideoCompositionInstruction) BackgroundColor() obj.Object {
+	defer runtime.KeepAlive(vci)
 	_r := objc.Send[objc.ID](objref.IDOf(vci), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
 }
@@ -78,6 +86,7 @@ func (vci *VideoCompositionInstruction) BackgroundColor() obj.Object {
 //
 // LayerInstructions returns the collection as a Go slice.
 func (vci *VideoCompositionInstruction) LayerInstructions() []*VideoCompositionLayerInstruction {
+	defer runtime.KeepAlive(vci)
 	_arr := objc.Send[objc.ID](objref.IDOf(vci), objc.RegisterName("layerInstructions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *VideoCompositionLayerInstruction {
 		return VideoCompositionLayerInstructionFromID(_id)
@@ -86,6 +95,7 @@ func (vci *VideoCompositionInstruction) LayerInstructions() []*VideoCompositionL
 
 // EnablePostProcessing reports whether if false, indicates that post-processing should be skipped for the duration of this instruction. true by default. See +[AVVideoCompositionCoreAnimationTool videoCompositionToolWithPostProcessingAsVideoLayer:inLayer:].
 func (vci *VideoCompositionInstruction) EnablePostProcessing() bool {
+	defer runtime.KeepAlive(vci)
 	_r := objc.Send[bool](objref.IDOf(vci), objc.RegisterName("enablePostProcessing"))
 	return _r
 }
@@ -94,12 +104,14 @@ func (vci *VideoCompositionInstruction) EnablePostProcessing() bool {
 //
 // RequiredSourceTrackIDs returns the collection as a Go slice.
 func (vci *VideoCompositionInstruction) RequiredSourceTrackIDs() []obj.Object {
+	defer runtime.KeepAlive(vci)
 	_arr := objc.Send[objc.ID](objref.IDOf(vci), objc.RegisterName("requiredSourceTrackIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PassthroughTrackID returns if the video composition result is one of the source frames for the duration of the instruction, this property returns the corresponding track ID. The compositor won't be run for the duration of the instruction and the proper source frame will be used instead. The value of this property is computed from the layer instructions
 func (vci *VideoCompositionInstruction) PassthroughTrackID() int32 {
+	defer runtime.KeepAlive(vci)
 	_r := objc.Send[int32](objref.IDOf(vci), objc.RegisterName("passthroughTrackID"))
 	return _r
 }
@@ -108,6 +120,7 @@ func (vci *VideoCompositionInstruction) PassthroughTrackID() int32 {
 //
 // RequiredSourceSampleDataTrackIDs returns the collection as a Go slice.
 func (vci *VideoCompositionInstruction) RequiredSourceSampleDataTrackIDs() []obj.Object {
+	defer runtime.KeepAlive(vci)
 	_arr := objc.Send[objc.ID](objref.IDOf(vci), objc.RegisterName("requiredSourceSampleDataTrackIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,12 +54,14 @@ func NewMTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent() *MTROtaSoftwar
 
 // WithSoftwareVersion sets the software version.
 func (mosurcvae *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
+	defer runtime.KeepAlive(softwareVersion)
 	objc.Send[objc.ID](objref.IDOf(mosurcvae), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return mosurcvae
 }
 
 // WithProductID sets the product ID.
 func (mosurcvae *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) WithProductID(productID obj.Object) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
+	defer runtime.KeepAlive(productID)
 	objc.Send[objc.ID](objref.IDOf(mosurcvae), objc.RegisterName("setProductID:"), objref.IDOf(productID))
 	return mosurcvae
 }

@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func syncEngineFailedRecordSaveAdopt(id objc.ID) *SyncEngineFailedRecordSave {
 
 // Description returns the object's -description text.
 func (sefrs *SyncEngineFailedRecordSave) Description() string {
+	defer runtime.KeepAlive(sefrs)
 	return rt.Description(objref.IDOf(sefrs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sefrs *SyncEngineFailedRecordSave) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sefrs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sefrs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sefrs *SyncEngineFailedRecordSave) IsKind(className string) bool {
+	defer runtime.KeepAlive(sefrs)
 	return rt.IsKind(objref.IDOf(sefrs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sefrs *SyncEngineFailedRecordSave) String() string {
+	defer runtime.KeepAlive(sefrs)
 	return rt.Description(objref.IDOf(sefrs))
 }
 
@@ -74,6 +81,7 @@ func NewSyncEngineFailedRecordSave() *SyncEngineFailedRecordSave {
 
 // Record returns the record that CloudKit is unable to modify.
 func (sefrs *SyncEngineFailedRecordSave) Record() *Record {
+	defer runtime.KeepAlive(sefrs)
 	_r := objc.Send[objc.ID](objref.IDOf(sefrs), objc.RegisterName("record"))
 	return RecordFromID(_r)
 }

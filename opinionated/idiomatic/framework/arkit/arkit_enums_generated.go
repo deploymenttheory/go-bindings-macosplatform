@@ -10,20 +10,20 @@ import (
 )
 
 // The authorization states for a type of ARKit data.
-type Ar_authorization_status_t int64
+type AuthorizationStatus int64
 
 const (
 	// Permission for your app to use the associated kind of ARKit data is undetermined.
-	Ar_authorization_status_not_determined Ar_authorization_status_t = 0
+	Ar_authorization_status_not_determined AuthorizationStatus = 0
 	// Your app has permission to use the associated kind of ARKit data.
-	Ar_authorization_status_allowed Ar_authorization_status_t = 1
+	Ar_authorization_status_allowed AuthorizationStatus = 1
 	// Your app doesn’t have permission to use the associated kind of ARKit data.
-	Ar_authorization_status_denied Ar_authorization_status_t = 2
+	Ar_authorization_status_denied AuthorizationStatus = 2
 )
 
-// String returns the Ar_authorization_status_t constant's name, or its numeric form when the
+// String returns the AuthorizationStatus constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Ar_authorization_status_t) String() string {
+func (e AuthorizationStatus) String() string {
 	switch e {
 	case Ar_authorization_status_not_determined:
 		return "Ar_authorization_status_not_determined"
@@ -32,28 +32,28 @@ func (e Ar_authorization_status_t) String() string {
 	case Ar_authorization_status_denied:
 		return "Ar_authorization_status_denied"
 	default:
-		return fmt.Sprintf("Ar_authorization_status_t(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationStatus(%d)", int64(e))
 	}
 }
 
 // The authorization types you can request from ARKit.
 // Bitmask — values may be combined with |.
-type Ar_authorization_type_t int64
+type AuthorizationType int64
 
 const (
 	// There isn’t an authorization type.
-	Ar_authorization_type_none Ar_authorization_type_t = 0
+	Ar_authorization_type_none AuthorizationType = 0
 	// The authorization for access to detailed hand-tracking data.
-	Ar_authorization_type_hand_tracking Ar_authorization_type_t = 1
+	Ar_authorization_type_hand_tracking AuthorizationType = 1
 	// The authorization for access to plane detection, scene reconstruction, and image tracking.
-	Ar_authorization_type_world_sensing Ar_authorization_type_t = 2
+	Ar_authorization_type_world_sensing AuthorizationType = 2
 	// The authorization for camera access.
-	Ar_authorization_type_camera_access Ar_authorization_type_t = 8
+	Ar_authorization_type_camera_access AuthorizationType = 8
 )
 
-// String returns the Ar_authorization_type_t constant's name, or its numeric form when the
+// String returns the AuthorizationType constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Ar_authorization_type_t) String() string {
+func (e AuthorizationType) String() string {
 	var parts []string
 	if e&Ar_authorization_type_hand_tracking != 0 {
 		parts = append(parts, "Ar_authorization_type_hand_tracking")
@@ -71,22 +71,22 @@ func (e Ar_authorization_type_t) String() string {
 }
 
 // The possible states of a data provider.
-type Ar_data_provider_state_t int64
+type DataProviderState int64
 
 const (
 	// The data provider has been created.
-	Ar_data_provider_state_initialized Ar_data_provider_state_t = 0
+	Ar_data_provider_state_initialized DataProviderState = 0
 	// The data provider is running.
-	Ar_data_provider_state_running Ar_data_provider_state_t = 1
+	Ar_data_provider_state_running DataProviderState = 1
 	// The data provider is paused.
-	Ar_data_provider_state_paused Ar_data_provider_state_t = 2
+	Ar_data_provider_state_paused DataProviderState = 2
 	// The data provider is stopped.
-	Ar_data_provider_state_stopped Ar_data_provider_state_t = 3
+	Ar_data_provider_state_stopped DataProviderState = 3
 )
 
-// String returns the Ar_data_provider_state_t constant's name, or its numeric form when the
+// String returns the DataProviderState constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Ar_data_provider_state_t) String() string {
+func (e DataProviderState) String() string {
 	switch e {
 	case Ar_data_provider_state_initialized:
 		return "Ar_data_provider_state_initialized"
@@ -97,47 +97,47 @@ func (e Ar_data_provider_state_t) String() string {
 	case Ar_data_provider_state_stopped:
 		return "Ar_data_provider_state_stopped"
 	default:
-		return fmt.Sprintf("Ar_data_provider_state_t(%d)", int64(e))
+		return fmt.Sprintf("DataProviderState(%d)", int64(e))
 	}
 }
 
-type Ar_device_anchor_query_status_t int64
+type DeviceAnchorQueryStatus int64
 
 const (
 	// The device anchor query succeeded.
-	Ar_device_anchor_query_status_success Ar_device_anchor_query_status_t = 0
+	Ar_device_anchor_query_status_success DeviceAnchorQueryStatus = 0
 	// The device anchor query failed.
-	Ar_device_anchor_query_status_failure Ar_device_anchor_query_status_t = 1
+	Ar_device_anchor_query_status_failure DeviceAnchorQueryStatus = 1
 )
 
-// String returns the Ar_device_anchor_query_status_t constant's name, or its numeric form when the
+// String returns the DeviceAnchorQueryStatus constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Ar_device_anchor_query_status_t) String() string {
+func (e DeviceAnchorQueryStatus) String() string {
 	switch e {
 	case Ar_device_anchor_query_status_success:
 		return "Ar_device_anchor_query_status_success"
 	case Ar_device_anchor_query_status_failure:
 		return "Ar_device_anchor_query_status_failure"
 	default:
-		return fmt.Sprintf("Ar_device_anchor_query_status_t(%d)", int64(e))
+		return fmt.Sprintf("DeviceAnchorQueryStatus(%d)", int64(e))
 	}
 }
 
 // Values that describe the tracking states of a device anchor.
-type Ar_device_anchor_tracking_state_t int64
+type DeviceAnchorTrackingState int64
 
 const (
 	// The value that indicates the framework isn’t tracking the anchor.
-	Ar_device_anchor_tracking_state_untracked Ar_device_anchor_tracking_state_t = 0
+	Ar_device_anchor_tracking_state_untracked DeviceAnchorTrackingState = 0
 	// The value that indicates that the framework is only currently tracking orientation.
-	Ar_device_anchor_tracking_state_orientation_tracked Ar_device_anchor_tracking_state_t = 1
+	Ar_device_anchor_tracking_state_orientation_tracked DeviceAnchorTrackingState = 1
 	// The value that indicates that the framework is currently tracking both position and orientation.
-	Ar_device_anchor_tracking_state_tracked Ar_device_anchor_tracking_state_t = 2
+	Ar_device_anchor_tracking_state_tracked DeviceAnchorTrackingState = 2
 )
 
-// String returns the Ar_device_anchor_tracking_state_t constant's name, or its numeric form when the
+// String returns the DeviceAnchorTrackingState constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Ar_device_anchor_tracking_state_t) String() string {
+func (e DeviceAnchorTrackingState) String() string {
 	switch e {
 	case Ar_device_anchor_tracking_state_untracked:
 		return "Ar_device_anchor_tracking_state_untracked"
@@ -146,6 +146,6 @@ func (e Ar_device_anchor_tracking_state_t) String() string {
 	case Ar_device_anchor_tracking_state_tracked:
 		return "Ar_device_anchor_tracking_state_tracked"
 	default:
-		return fmt.Sprintf("Ar_device_anchor_tracking_state_t(%d)", int64(e))
+		return fmt.Sprintf("DeviceAnchorTrackingState(%d)", int64(e))
 	}
 }

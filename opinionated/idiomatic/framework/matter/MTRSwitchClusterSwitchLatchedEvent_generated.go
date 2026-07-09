@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRSwitchClusterSwitchLatchedEventAdopt(id objc.ID) *MTRSwitchClusterSwitch
 
 // Description returns the object's -description text.
 func (mscsle *MTRSwitchClusterSwitchLatchedEvent) Description() string {
+	defer runtime.KeepAlive(mscsle)
 	return rt.Description(objref.IDOf(mscsle))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mscsle *MTRSwitchClusterSwitchLatchedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mscsle)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mscsle), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mscsle *MTRSwitchClusterSwitchLatchedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mscsle)
 	return rt.IsKind(objref.IDOf(mscsle), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mscsle *MTRSwitchClusterSwitchLatchedEvent) String() string {
+	defer runtime.KeepAlive(mscsle)
 	return rt.Description(objref.IDOf(mscsle))
 }
 
@@ -72,12 +80,14 @@ func NewMTRSwitchClusterSwitchLatchedEvent() *MTRSwitchClusterSwitchLatchedEvent
 
 // WithNewPosition sets the new position.
 func (mscsle *MTRSwitchClusterSwitchLatchedEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterSwitchLatchedEvent {
+	defer runtime.KeepAlive(newPosition)
 	objc.Send[objc.ID](objref.IDOf(mscsle), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
 	return mscsle
 }
 
 // NewPosition returns the new position.
-func (mscsle *MTRSwitchClusterSwitchLatchedEvent) NewPosition() obj.Object {
+func (mscsle *MTRSwitchClusterSwitchLatchedEvent) NewPosition() *foundation.Number {
+	defer runtime.KeepAlive(mscsle)
 	_r := objc.Send[objc.ID](objref.IDOf(mscsle), objc.RegisterName("getNewPosition"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -50,27 +52,33 @@ func featureAdopt(id objc.ID) *Feature {
 
 // Description returns the object's -description text.
 func (f *Feature) Description() string {
+	defer runtime.KeepAlive(f)
 	return rt.Description(objref.IDOf(f))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (f *Feature) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(f)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(f), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (f *Feature) IsKind(className string) bool {
+	defer runtime.KeepAlive(f)
 	return rt.IsKind(objref.IDOf(f), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (f *Feature) String() string {
+	defer runtime.KeepAlive(f)
 	return rt.Description(objref.IDOf(f))
 }
 
 // Type returns the type of feature that was discovered. The type can be one of: * “CIFeatureTypeFace“ * “CIFeatureTypeRectangle“ * “CIFeatureTypeQRCode“ * “CIFeatureTypeText“
 func (f *Feature) Type() string {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -80,6 +88,7 @@ func (f *Feature) Type() string {
 
 // Bounds returns the rectangle that bounds the location of discovered feature. The rectangle is in the cartesian coordinate system of the image.
 func (f *Feature) Bounds() corefoundation.CGRect {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(f), objc.RegisterName("bounds"))
 	return _r
 }

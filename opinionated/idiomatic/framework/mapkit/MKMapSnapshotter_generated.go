@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func mapSnapshotterAdopt(id objc.ID) *MapSnapshotter {
 
 // Description returns the object's -description text.
 func (ms *MapSnapshotter) Description() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ms *MapSnapshotter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ms)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ms *MapSnapshotter) IsKind(className string) bool {
+	defer runtime.KeepAlive(ms)
 	return rt.IsKind(objref.IDOf(ms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ms *MapSnapshotter) String() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
 // NewMapSnapshotterWithOptions creates and returns a snapshotter object based on the specified options.
 func NewMapSnapshotterWithOptions(options *MapSnapshotOptions) *MapSnapshotter {
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapSnapshotter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), objref.IDOf(options))
 	return mapSnapshotterAdopt(_id)
@@ -75,6 +83,7 @@ func NewMapSnapshotterWithOptions(options *MapSnapshotOptions) *MapSnapshotter {
 
 // Cancel cancels the request to create a snapshot.
 func (ms *MapSnapshotter) Cancel() {
+	defer runtime.KeepAlive(ms)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("cancel"))
 	})
@@ -83,6 +92,7 @@ func (ms *MapSnapshotter) Cancel() {
 
 // IsLoading reports whether the object is loading.
 func (ms *MapSnapshotter) IsLoading() bool {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[bool](objref.IDOf(ms), objc.RegisterName("isLoading"))
 	return _r
 }

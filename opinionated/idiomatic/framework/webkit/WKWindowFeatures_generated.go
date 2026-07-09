@@ -5,7 +5,10 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func wKWindowFeaturesAdopt(id objc.ID) *WKWindowFeatures {
 
 // Description returns the object's -description text.
 func (wwf *WKWindowFeatures) Description() string {
+	defer runtime.KeepAlive(wwf)
 	return rt.Description(objref.IDOf(wwf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wwf *WKWindowFeatures) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wwf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wwf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wwf *WKWindowFeatures) IsKind(className string) bool {
+	defer runtime.KeepAlive(wwf)
 	return rt.IsKind(objref.IDOf(wwf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wwf *WKWindowFeatures) String() string {
+	defer runtime.KeepAlive(wwf)
 	return rt.Description(objref.IDOf(wwf))
 }
 
@@ -79,12 +87,13 @@ func NewWKWindowFeatures() *WKWindowFeatures {
 }
 
 // MenuBarVisibility returns BOOL. Whether the menu bar should be visible. nil if menu bar visibility was not specified.
-func (wwf *WKWindowFeatures) MenuBarVisibility() obj.Object {
-	var _mainthread0 obj.Object
+func (wwf *WKWindowFeatures) MenuBarVisibility() *foundation.Number {
+	defer runtime.KeepAlive(wwf)
+	var _mainthread0 *foundation.Number
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.Number {
 			_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("menuBarVisibility"))
-			return obj.Wrap(_r)
+			return foundation.NumberFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -92,12 +101,13 @@ func (wwf *WKWindowFeatures) MenuBarVisibility() obj.Object {
 }
 
 // StatusBarVisibility returns BOOL. Whether the status bar should be visible. nil if status bar visibility was not specified.
-func (wwf *WKWindowFeatures) StatusBarVisibility() obj.Object {
-	var _mainthread0 obj.Object
+func (wwf *WKWindowFeatures) StatusBarVisibility() *foundation.Number {
+	defer runtime.KeepAlive(wwf)
+	var _mainthread0 *foundation.Number
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.Number {
 			_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("statusBarVisibility"))
-			return obj.Wrap(_r)
+			return foundation.NumberFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -105,12 +115,13 @@ func (wwf *WKWindowFeatures) StatusBarVisibility() obj.Object {
 }
 
 // ToolbarsVisibility returns BOOL. Whether toolbars should be visible. nil if toolbar visibility was not specified.
-func (wwf *WKWindowFeatures) ToolbarsVisibility() obj.Object {
-	var _mainthread0 obj.Object
+func (wwf *WKWindowFeatures) ToolbarsVisibility() *foundation.Number {
+	defer runtime.KeepAlive(wwf)
+	var _mainthread0 *foundation.Number
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.Number {
 			_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("toolbarsVisibility"))
-			return obj.Wrap(_r)
+			return foundation.NumberFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -118,12 +129,13 @@ func (wwf *WKWindowFeatures) ToolbarsVisibility() obj.Object {
 }
 
 // AllowsResizing returns BOOL. Whether the containing window should be resizable. nil if resizability was not specified.
-func (wwf *WKWindowFeatures) AllowsResizing() obj.Object {
-	var _mainthread0 obj.Object
+func (wwf *WKWindowFeatures) AllowsResizing() *foundation.Number {
+	defer runtime.KeepAlive(wwf)
+	var _mainthread0 *foundation.Number
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.Number {
 			_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("allowsResizing"))
-			return obj.Wrap(_r)
+			return foundation.NumberFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -131,12 +143,13 @@ func (wwf *WKWindowFeatures) AllowsResizing() obj.Object {
 }
 
 // X returns CGFloat. The x coordinate of the containing window. nil if the x coordinate was not specified.
-func (wwf *WKWindowFeatures) X() obj.Object {
-	var _mainthread0 obj.Object
+func (wwf *WKWindowFeatures) X() *foundation.Number {
+	defer runtime.KeepAlive(wwf)
+	var _mainthread0 *foundation.Number
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.Number {
 			_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("x"))
-			return obj.Wrap(_r)
+			return foundation.NumberFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -144,12 +157,13 @@ func (wwf *WKWindowFeatures) X() obj.Object {
 }
 
 // Y returns CGFloat. The y coordinate of the containing window. nil if the y coordinate was not specified.
-func (wwf *WKWindowFeatures) Y() obj.Object {
-	var _mainthread0 obj.Object
+func (wwf *WKWindowFeatures) Y() *foundation.Number {
+	defer runtime.KeepAlive(wwf)
+	var _mainthread0 *foundation.Number
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.Number {
 			_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("y"))
-			return obj.Wrap(_r)
+			return foundation.NumberFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -157,12 +171,13 @@ func (wwf *WKWindowFeatures) Y() obj.Object {
 }
 
 // Width returns CGFloat. The width coordinate of the containing window. nil if the width was not specified.
-func (wwf *WKWindowFeatures) Width() obj.Object {
-	var _mainthread0 obj.Object
+func (wwf *WKWindowFeatures) Width() *foundation.Number {
+	defer runtime.KeepAlive(wwf)
+	var _mainthread0 *foundation.Number
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.Number {
 			_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("width"))
-			return obj.Wrap(_r)
+			return foundation.NumberFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -170,12 +185,13 @@ func (wwf *WKWindowFeatures) Width() obj.Object {
 }
 
 // Height returns CGFloat. The height coordinate of the containing window. nil if the height was not specified.
-func (wwf *WKWindowFeatures) Height() obj.Object {
-	var _mainthread0 obj.Object
+func (wwf *WKWindowFeatures) Height() *foundation.Number {
+	defer runtime.KeepAlive(wwf)
+	var _mainthread0 *foundation.Number
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.Number {
 			_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("height"))
-			return obj.Wrap(_r)
+			return foundation.NumberFromID(_r)
 		}()
 	})
 	return _mainthread0

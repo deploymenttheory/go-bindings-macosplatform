@@ -1536,7 +1536,7 @@
       },
       "packetDependencies": {
         "doc": "The buffer’s array of packet dependencies.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudiocompressedbuffer/packetdependencies-3a6ln"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiocompressedbuffer/packetdependencies-5oae6"
       },
       "packetDescriptions": {
         "doc": "The buffer’s array of packet descriptions.",
@@ -1834,7 +1834,7 @@
       },
       "withAudioUnit(_:)": {
         "doc": "Provides scoped access to the I/O node’s AudioUnit",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudioionode/withaudiounit(_:)-6i8ld"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudioionode/withaudiounit(_:)-57kv"
       }
     },
     "AVAudioInputNode": {
@@ -1912,7 +1912,7 @@
     "AVAudioOutputNode": {
       "intendedSpatialExperience": {
         "doc": "The intended spatial experience for this output node.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudiooutputnode/intendedspatialexperience-3ts59"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiooutputnode/intendedspatialexperience-3uznq"
       }
     },
     "AVAudioPCMBuffer": {
@@ -2004,7 +2004,7 @@
       },
       "intendedSpatialExperience": {
         "doc": "The intended spatial experience for this player.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudioplayer/intendedspatialexperience-6py9z"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudioplayer/intendedspatialexperience-27klj"
       },
       "meteringEnabled": {
         "doc": "A Boolean value that indicates whether the player is able to generate audio-level metering data.",
@@ -2550,7 +2550,7 @@
       },
       "withAudioUnit(_:)": {
         "doc": "Provides scoped access to the audio unit’s AudioUnit",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudiounit/withaudiounit(_:)-6c2ze"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiounit/withaudiounit(_:)-66uo7"
       }
     },
     "AVAudioUnitComponent": {

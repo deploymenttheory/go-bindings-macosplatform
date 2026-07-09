@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,18 +49,21 @@ func quantitySampleAdopt(id objc.ID) *QuantitySample {
 
 // QuantityType returns the quantity type.
 func (qs *QuantitySample) QuantityType() *QuantityType {
+	defer runtime.KeepAlive(qs)
 	_r := objc.Send[objc.ID](objref.IDOf(qs), objc.RegisterName("quantityType"))
 	return QuantityTypeFromID(_r)
 }
 
 // Quantity returns the quantity.
 func (qs *QuantitySample) Quantity() *Quantity {
+	defer runtime.KeepAlive(qs)
 	_r := objc.Send[objc.ID](objref.IDOf(qs), objc.RegisterName("quantity"))
 	return QuantityFromID(_r)
 }
 
 // Count returns the number of individual values making up the receiver's quantity. Requests for the individual series quantities can be made using HKQuantitySeriesSampleQuery.
 func (qs *QuantitySample) Count() int {
+	defer runtime.KeepAlive(qs)
 	_r := objc.Send[int](objref.IDOf(qs), objc.RegisterName("count"))
 	return _r
 }

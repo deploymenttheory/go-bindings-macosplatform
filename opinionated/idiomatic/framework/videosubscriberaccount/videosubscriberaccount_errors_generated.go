@@ -11,23 +11,23 @@ import (
 // ErrCodeAccessNotGranted matches the VideoSubscriberAccount error VSErrorCodeAccessNotGranted.
 var ErrCodeAccessNotGranted = errkit.New("VSErrorDomain", 0)
 
+// ErrCodeInvalidVerificationToken matches the VideoSubscriberAccount error VSErrorCodeInvalidVerificationToken.
+var ErrCodeInvalidVerificationToken = errkit.New("VSErrorDomain", 5)
+
+// ErrCodeProviderRejected matches the VideoSubscriberAccount error VSErrorCodeProviderRejected.
+var ErrCodeProviderRejected = errkit.New("VSErrorDomain", 4)
+
+// ErrCodeRejected matches the VideoSubscriberAccount error VSErrorCodeRejected.
+var ErrCodeRejected = errkit.New("VSErrorDomain", 6)
+
+// ErrCodeServiceTemporarilyUnavailable matches the VideoSubscriberAccount error VSErrorCodeServiceTemporarilyUnavailable.
+var ErrCodeServiceTemporarilyUnavailable = errkit.New("VSErrorDomain", 3)
+
+// ErrCodeUnsupported matches the VideoSubscriberAccount error VSErrorCodeUnsupported.
+var ErrCodeUnsupported = errkit.New("VSErrorDomain", 7)
+
 // ErrCodeUnsupportedProvider matches the VideoSubscriberAccount error VSErrorCodeUnsupportedProvider.
 var ErrCodeUnsupportedProvider = errkit.New("VSErrorDomain", 1)
 
 // ErrCodeUserCancelled matches the VideoSubscriberAccount error VSErrorCodeUserCancelled.
 var ErrCodeUserCancelled = errkit.New("VSErrorDomain", 2)
-
-// ErrCodeServiceTemporarilyUnavailable matches the VideoSubscriberAccount error VSErrorCodeServiceTemporarilyUnavailable.
-var ErrCodeServiceTemporarilyUnavailable = errkit.New("VSErrorDomain", 3)
-
-// ErrCodeProviderRejected matches the VideoSubscriberAccount error VSErrorCodeProviderRejected.
-var ErrCodeProviderRejected = errkit.New("VSErrorDomain", 4)
-
-// ErrCodeInvalidVerificationToken matches the VideoSubscriberAccount error VSErrorCodeInvalidVerificationToken.
-var ErrCodeInvalidVerificationToken = errkit.New("VSErrorDomain", 5)
-
-// ErrCodeRejected matches the VideoSubscriberAccount error VSErrorCodeRejected.
-var ErrCodeRejected = errkit.New("VSErrorDomain", 6)
-
-// ErrCodeUnsupported matches the VideoSubscriberAccount error VSErrorCodeUnsupported.
-var ErrCodeUnsupported = errkit.New("VSErrorDomain", 7)

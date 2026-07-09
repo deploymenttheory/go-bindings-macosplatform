@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func remoteCommandAdopt(id objc.ID) *RemoteCommand {
 
 // Description returns the object's -description text.
 func (rc *RemoteCommand) Description() string {
+	defer runtime.KeepAlive(rc)
 	return rt.Description(objref.IDOf(rc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rc *RemoteCommand) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rc *RemoteCommand) IsKind(className string) bool {
+	defer runtime.KeepAlive(rc)
 	return rt.IsKind(objref.IDOf(rc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rc *RemoteCommand) String() string {
+	defer runtime.KeepAlive(rc)
 	return rt.Description(objref.IDOf(rc))
 }
 
@@ -76,17 +83,21 @@ func (rc *RemoteCommand) WithEnabled(enabled bool) *RemoteCommand {
 
 // RemoveTarget removes a target from the remote command object.
 func (rc *RemoteCommand) RemoveTarget(target obj.Object) {
+	defer runtime.KeepAlive(rc)
+	defer runtime.KeepAlive(target)
 	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("removeTarget:"), objref.IDOf(target))
 }
 
 // AddTargetWithHandler adds a block to be called when an event is received.
 func (rc *RemoteCommand) AddTargetWithHandler(handler func(obj.Object) int) obj.Object {
+	defer runtime.KeepAlive(rc)
 	_r := objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("addTargetWithHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return handler(obj.Wrap(_b0)) }))
 	return obj.Wrap(_r)
 }
 
 // IsEnabled reports whether a button (for example) should be enabled and tappable for this particular command.
 func (rc *RemoteCommand) IsEnabled() bool {
+	defer runtime.KeepAlive(rc)
 	_r := objc.Send[bool](objref.IDOf(rc), objc.RegisterName("isEnabled"))
 	return _r
 }

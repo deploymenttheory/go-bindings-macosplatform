@@ -5,10 +5,13 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -70,6 +73,7 @@ func (stf *SecureTextField) WithPlaceholderString(placeholderString string) *Sec
 
 // WithPlaceholderAttributedString sets the attributed string the text field displays when empty to help the user understand the text field’s purpose.
 func (stf *SecureTextField) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *SecureTextField {
+	defer runtime.KeepAlive(placeholderAttributedString)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	})
@@ -78,6 +82,7 @@ func (stf *SecureTextField) WithPlaceholderAttributedString(placeholderAttribute
 
 // WithBackgroundColor sets the color of the background the text field’s cell draws behind the text.
 func (stf *SecureTextField) WithBackgroundColor(backgroundColor *Color) *SecureTextField {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -94,6 +99,7 @@ func (stf *SecureTextField) WithDrawsBackground(drawsBackground bool) *SecureTex
 
 // WithTextColor sets the color of the text field’s content.
 func (stf *SecureTextField) WithTextColor(textColor *Color) *SecureTextField {
+	defer runtime.KeepAlive(textColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	})
@@ -129,6 +135,18 @@ func (stf *SecureTextField) WithSelectable(selectable bool) *SecureTextField {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setSelectable:"), selectable)
 	})
+	return stf
+}
+
+// WithDelegate sets the text field’s delegate.
+func (stf *SecureTextField) WithDelegate(delegate TextFieldDelegate) *SecureTextField {
+	_shim := newTextFieldDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(stf), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return stf
 }
 
@@ -248,6 +266,7 @@ func (stf *SecureTextField) WithImportsGraphics(importsGraphics bool) *SecureTex
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (stf *SecureTextField) WithTarget(target obj.Object) *SecureTextField {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -312,6 +331,7 @@ func (stf *SecureTextField) WithControlSize(controlSize ControlSize) *SecureText
 
 // WithFormatter sets the receiver’s formatter.
 func (stf *SecureTextField) WithFormatter(formatter obj.Object) *SecureTextField {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -320,6 +340,7 @@ func (stf *SecureTextField) WithFormatter(formatter obj.Object) *SecureTextField
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (stf *SecureTextField) WithObjectValue(objectValue obj.Object) *SecureTextField {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -336,6 +357,7 @@ func (stf *SecureTextField) WithStringValue(stringValue string) *SecureTextField
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (stf *SecureTextField) WithAttributedStringValue(attributedStringValue obj.Object) *SecureTextField {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -376,6 +398,7 @@ func (stf *SecureTextField) WithDoubleValue(doubleValue float64) *SecureTextFiel
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (stf *SecureTextField) WithFont(font *Font) *SecureTextField {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -424,6 +447,7 @@ func (stf *SecureTextField) WithAllowsExpansionToolTips(allowsExpansionToolTips 
 
 // WithCell sets the cell.
 func (stf *SecureTextField) WithCell(cell CellProvider) *SecureTextField {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -569,6 +593,7 @@ func (stf *SecureTextField) WithWantsLayer(wantsLayer bool) *SecureTextField {
 
 // WithLayer sets the layer.
 func (stf *SecureTextField) WithLayer(layer obj.Object) *SecureTextField {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -618,6 +643,7 @@ func (stf *SecureTextField) WithBackgroundFilters(items ...obj.Object) *SecureTe
 
 // WithCompositingFilter sets the compositing filter.
 func (stf *SecureTextField) WithCompositingFilter(compositingFilter obj.Object) *SecureTextField {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -635,6 +661,7 @@ func (stf *SecureTextField) WithContentFilters(items ...obj.Object) *SecureTextF
 
 // WithShadow sets the shadow.
 func (stf *SecureTextField) WithShadow(shadow *Shadow) *SecureTextField {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -683,6 +710,7 @@ func (stf *SecureTextField) WithPreparedContentRect(preparedContentRect corefoun
 
 // WithNextKeyView sets the next key view.
 func (stf *SecureTextField) WithNextKeyView(nextKeyView ViewProvider) *SecureTextField {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -732,6 +760,7 @@ func (stf *SecureTextField) WithPrefersCompactControlSizeMetrics(prefersCompactC
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (stf *SecureTextField) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SecureTextField {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -788,6 +817,7 @@ func (stf *SecureTextField) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExte
 
 // WithPressureConfiguration sets the pressure configuration.
 func (stf *SecureTextField) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SecureTextField {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -796,6 +826,7 @@ func (stf *SecureTextField) WithPressureConfiguration(pressureConfiguration *Pre
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (stf *SecureTextField) WithNextResponder(nextResponder ResponderProvider) *SecureTextField {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -804,6 +835,7 @@ func (stf *SecureTextField) WithNextResponder(nextResponder ResponderProvider) *
 
 // WithMenu sets returns the responder’s menu.
 func (stf *SecureTextField) WithMenu(menu *Menu) *SecureTextField {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -812,6 +844,7 @@ func (stf *SecureTextField) WithMenu(menu *Menu) *SecureTextField {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (stf *SecureTextField) WithUserActivity(userActivity obj.Object) *SecureTextField {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -820,6 +853,7 @@ func (stf *SecureTextField) WithUserActivity(userActivity obj.Object) *SecureTex
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (stf *SecureTextField) WithTouchBar(touchBar *TouchBar) *SecureTextField {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})

@@ -5,6 +5,7 @@
 package photos
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,27 +51,33 @@ func contentEditingOutputAdopt(id objc.ID) *ContentEditingOutput {
 
 // Description returns the object's -description text.
 func (ceo *ContentEditingOutput) Description() string {
+	defer runtime.KeepAlive(ceo)
 	return rt.Description(objref.IDOf(ceo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ceo *ContentEditingOutput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ceo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ceo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ceo *ContentEditingOutput) IsKind(className string) bool {
+	defer runtime.KeepAlive(ceo)
 	return rt.IsKind(objref.IDOf(ceo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ceo *ContentEditingOutput) String() string {
+	defer runtime.KeepAlive(ceo)
 	return rt.Description(objref.IDOf(ceo))
 }
 
 // NewContentEditingOutputWithContentEditingInput creates an editing output from the specified editing input.
 func NewContentEditingOutputWithContentEditingInput(contentEditingInput *ContentEditingInput) *ContentEditingOutput {
+	defer runtime.KeepAlive(contentEditingInput)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHContentEditingOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentEditingInput:"), objref.IDOf(contentEditingInput))
 	return contentEditingOutputAdopt(_id)
@@ -78,6 +85,7 @@ func NewContentEditingOutputWithContentEditingInput(contentEditingInput *Content
 
 // NewContentEditingOutputWithPlaceholderForCreatedAsset creates an editing output for use in adding a new asset to the photo library.
 func NewContentEditingOutputWithPlaceholderForCreatedAsset(placeholderForCreatedAsset *ObjectPlaceholder) *ContentEditingOutput {
+	defer runtime.KeepAlive(placeholderForCreatedAsset)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHContentEditingOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlaceholderForCreatedAsset:"), objref.IDOf(placeholderForCreatedAsset))
 	return contentEditingOutputAdopt(_id)
@@ -85,34 +93,40 @@ func NewContentEditingOutputWithPlaceholderForCreatedAsset(placeholderForCreated
 
 // WithAdjustmentData sets an object describing the changes made to the asset.
 func (ceo *ContentEditingOutput) WithAdjustmentData(adjustmentData *AdjustmentData) *ContentEditingOutput {
+	defer runtime.KeepAlive(adjustmentData)
 	objc.Send[objc.ID](objref.IDOf(ceo), objc.RegisterName("setAdjustmentData:"), objref.IDOf(adjustmentData))
 	return ceo
 }
 
-// RenderedContentURLForTypeError returns a file URL where the rendered output in the specified format, with adjustments baked-in, needs to be written to. Returns nil and provides an error identifying the reason if the format is unsupported or the requested content URL cannot be provided
-func (ceo *ContentEditingOutput) RenderedContentURLForTypeError(type_ obj.Object) (result obj.Object, err error) {
+// RenderedContentURLForType returns a file URL where the rendered output in the specified format, with adjustments baked-in, needs to be written to. Returns nil and provides an error identifying the reason if the format is unsupported or the requested content URL cannot be provided
+func (ceo *ContentEditingOutput) RenderedContentURLForType(type_ obj.Object) (result string, err error) {
+	defer runtime.KeepAlive(ceo)
+	defer runtime.KeepAlive(type_)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(ceo), objc.RegisterName("renderedContentURLForType:error:"), objref.IDOf(type_), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+		return "", errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return rt.URLString(_r), nil
 }
 
 // AdjustmentData returns the adjustment data.
 func (ceo *ContentEditingOutput) AdjustmentData() *AdjustmentData {
+	defer runtime.KeepAlive(ceo)
 	_r := objc.Send[objc.ID](objref.IDOf(ceo), objc.RegisterName("adjustmentData"))
 	return AdjustmentDataFromID(_r)
 }
 
 // RenderedContentURL returns file URL where the rendered output in the default format, with adjustments baked-in, needs to be written to.
-func (ceo *ContentEditingOutput) RenderedContentURL() obj.Object {
+func (ceo *ContentEditingOutput) RenderedContentURL() string {
+	defer runtime.KeepAlive(ceo)
 	_r := objc.Send[objc.ID](objref.IDOf(ceo), objc.RegisterName("renderedContentURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // DefaultRenderedContentType returns the default type for the rendered content output
 func (ceo *ContentEditingOutput) DefaultRenderedContentType() obj.Object {
+	defer runtime.KeepAlive(ceo)
 	_r := objc.Send[objc.ID](objref.IDOf(ceo), objc.RegisterName("defaultRenderedContentType"))
 	return obj.Wrap(_r)
 }
@@ -121,6 +135,7 @@ func (ceo *ContentEditingOutput) DefaultRenderedContentType() obj.Object {
 //
 // SupportedRenderedContentTypes returns the collection as a Go slice.
 func (ceo *ContentEditingOutput) SupportedRenderedContentTypes() []obj.Object {
+	defer runtime.KeepAlive(ceo)
 	_arr := objc.Send[objc.ID](objref.IDOf(ceo), objc.RegisterName("supportedRenderedContentTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

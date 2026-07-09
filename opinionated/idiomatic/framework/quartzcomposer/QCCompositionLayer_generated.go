@@ -5,6 +5,8 @@
 package quartzcomposer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func compositionLayerAdopt(id objc.ID) *CompositionLayer {
 
 // Description returns the object's -description text.
 func (cl *CompositionLayer) Description() string {
+	defer runtime.KeepAlive(cl)
 	return rt.Description(objref.IDOf(cl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cl *CompositionLayer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cl *CompositionLayer) IsKind(className string) bool {
+	defer runtime.KeepAlive(cl)
 	return rt.IsKind(objref.IDOf(cl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cl *CompositionLayer) String() string {
+	defer runtime.KeepAlive(cl)
 	return rt.Description(objref.IDOf(cl))
 }
 
@@ -73,6 +80,7 @@ func NewCompositionLayerWithFile(path string) *CompositionLayer {
 
 // NewCompositionLayerWithComposition creates a new CompositionLayer.
 func NewCompositionLayerWithComposition(composition obj.Object) *CompositionLayer {
+	defer runtime.KeepAlive(composition)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QCCompositionLayer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComposition:"), objref.IDOf(composition))
 	return compositionLayerAdopt(_id)
@@ -80,6 +88,7 @@ func NewCompositionLayerWithComposition(composition obj.Object) *CompositionLaye
 
 // Composition returns the composition.
 func (cl *CompositionLayer) Composition() obj.Object {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("composition"))
 	return obj.Wrap(_r)
 }

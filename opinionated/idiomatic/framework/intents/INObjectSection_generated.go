@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func objectSectionAdopt(id objc.ID) *ObjectSection {
 
 // Description returns the object's -description text.
 func (os *ObjectSection) Description() string {
+	defer runtime.KeepAlive(os)
 	return rt.Description(objref.IDOf(os))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (os *ObjectSection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(os)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(os), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (os *ObjectSection) IsKind(className string) bool {
+	defer runtime.KeepAlive(os)
 	return rt.IsKind(objref.IDOf(os), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (os *ObjectSection) String() string {
+	defer runtime.KeepAlive(os)
 	return rt.Description(objref.IDOf(os))
 }
 
@@ -73,6 +80,7 @@ func NewObjectSectionWithTitleItems(title string, items []obj.Object) *ObjectSec
 
 // Title returns the title.
 func (os *ObjectSection) Title() string {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -82,6 +90,7 @@ func (os *ObjectSection) Title() string {
 
 // Items returns the items.
 func (os *ObjectSection) Items() []obj.Object {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("items"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

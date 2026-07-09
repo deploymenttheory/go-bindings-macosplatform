@@ -5,6 +5,9 @@
 package calendarstore
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +48,27 @@ func calAlarmAdopt(id objc.ID) *CalAlarm {
 
 // Description returns the object's -description text.
 func (ca *CalAlarm) Description() string {
+	defer runtime.KeepAlive(ca)
 	return rt.Description(objref.IDOf(ca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ca *CalAlarm) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ca)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ca *CalAlarm) IsKind(className string) bool {
+	defer runtime.KeepAlive(ca)
 	return rt.IsKind(objref.IDOf(ca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ca *CalAlarm) String() string {
+	defer runtime.KeepAlive(ca)
 	return rt.Description(objref.IDOf(ca))
 }
 
@@ -101,29 +109,33 @@ func (ca *CalAlarm) WithRelativeTrigger(relativeTrigger float64) *CalAlarm {
 }
 
 // WithAbsoluteTrigger sets the absolute trigger.
-func (ca *CalAlarm) WithAbsoluteTrigger(absoluteTrigger obj.Object) *CalAlarm {
-	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setAbsoluteTrigger:"), objref.IDOf(absoluteTrigger))
+func (ca *CalAlarm) WithAbsoluteTrigger(absoluteTrigger time.Time) *CalAlarm {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setAbsoluteTrigger:"), rt.TimeToNSDate(absoluteTrigger))
 	return ca
 }
 
 // SetAcknowledged wraps the corresponding Objective-C method.
-func (ca *CalAlarm) SetAcknowledged(date obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setAcknowledged:"), objref.IDOf(date))
+func (ca *CalAlarm) SetAcknowledged(date time.Time) {
+	defer runtime.KeepAlive(ca)
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setAcknowledged:"), rt.TimeToNSDate(date))
 }
 
 // Acknowledged returns the acknowledged.
-func (ca *CalAlarm) Acknowledged() obj.Object {
+func (ca *CalAlarm) Acknowledged() time.Time {
+	defer runtime.KeepAlive(ca)
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("acknowledged"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // SetRelatedTo wraps the corresponding Objective-C method.
 func (ca *CalAlarm) SetRelatedTo(relatedTo string) {
+	defer runtime.KeepAlive(ca)
 	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setRelatedTo:"), purego.NSString(relatedTo))
 }
 
 // RelatedTo returns the related to.
 func (ca *CalAlarm) RelatedTo() string {
+	defer runtime.KeepAlive(ca)
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("relatedTo"))
 	if _r == 0 {
 		return ""
@@ -132,13 +144,15 @@ func (ca *CalAlarm) RelatedTo() string {
 }
 
 // TriggerDateRelativeTo wraps the corresponding Objective-C method.
-func (ca *CalAlarm) TriggerDateRelativeTo(date obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("triggerDateRelativeTo:"), objref.IDOf(date))
-	return obj.Wrap(_r)
+func (ca *CalAlarm) TriggerDateRelativeTo(date time.Time) time.Time {
+	defer runtime.KeepAlive(ca)
+	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("triggerDateRelativeTo:"), rt.TimeToNSDate(date))
+	return rt.NSDateToTime(_r)
 }
 
 // Action returns the action.
 func (ca *CalAlarm) Action() string {
+	defer runtime.KeepAlive(ca)
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("action"))
 	if _r == 0 {
 		return ""
@@ -148,6 +162,7 @@ func (ca *CalAlarm) Action() string {
 
 // Sound returns the sound.
 func (ca *CalAlarm) Sound() string {
+	defer runtime.KeepAlive(ca)
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("sound"))
 	if _r == 0 {
 		return ""
@@ -157,6 +172,7 @@ func (ca *CalAlarm) Sound() string {
 
 // EmailAddress returns the email address.
 func (ca *CalAlarm) EmailAddress() string {
+	defer runtime.KeepAlive(ca)
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("emailAddress"))
 	if _r == 0 {
 		return ""
@@ -165,19 +181,22 @@ func (ca *CalAlarm) EmailAddress() string {
 }
 
 // URL returns the URL.
-func (ca *CalAlarm) URL() obj.Object {
+func (ca *CalAlarm) URL() string {
+	defer runtime.KeepAlive(ca)
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // RelativeTrigger returns the relative trigger.
 func (ca *CalAlarm) RelativeTrigger() float64 {
+	defer runtime.KeepAlive(ca)
 	_r := objc.Send[float64](objref.IDOf(ca), objc.RegisterName("relativeTrigger"))
 	return _r
 }
 
 // AbsoluteTrigger returns the absolute trigger.
-func (ca *CalAlarm) AbsoluteTrigger() obj.Object {
+func (ca *CalAlarm) AbsoluteTrigger() time.Time {
+	defer runtime.KeepAlive(ca)
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("absoluteTrigger"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }

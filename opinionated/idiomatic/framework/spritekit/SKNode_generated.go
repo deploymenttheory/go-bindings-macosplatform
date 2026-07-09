@@ -6,6 +6,7 @@ package spritekit
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -53,27 +54,33 @@ func nodeAdopt(id objc.ID) *Node {
 
 // Description returns the object's -description text.
 func (n *Node) Description() string {
+	defer runtime.KeepAlive(n)
 	return rt.Description(objref.IDOf(n))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (n *Node) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(n), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (n *Node) IsKind(className string) bool {
+	defer runtime.KeepAlive(n)
 	return rt.IsKind(objref.IDOf(n), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (n *Node) String() string {
+	defer runtime.KeepAlive(n)
 	return rt.Description(objref.IDOf(n))
 }
 
 // NewNodeWithCoder called when a node is initialized from an .sks file.
 func NewNodeWithCoder(aDecoder obj.Object) *Node {
+	defer runtime.KeepAlive(aDecoder)
 	var _mainthread0 *Node
 	purego.Main(func() {
 		_mainthread0 = func() *Node {
@@ -175,6 +182,7 @@ func (n *Node) WithName(name string) *Node {
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (n *Node) WithPhysicsBody(physicsBody *PhysicsBody) *Node {
+	defer runtime.KeepAlive(physicsBody)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	})
@@ -183,6 +191,7 @@ func (n *Node) WithPhysicsBody(physicsBody *PhysicsBody) *Node {
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (n *Node) WithUserData(userData obj.Object) *Node {
+	defer runtime.KeepAlive(userData)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	})
@@ -191,6 +200,7 @@ func (n *Node) WithUserData(userData obj.Object) *Node {
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (n *Node) WithReachConstraints(reachConstraints *ReachConstraints) *Node {
+	defer runtime.KeepAlive(reachConstraints)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	})
@@ -207,9 +217,9 @@ func (n *Node) WithConstraints(items ...*Constraint) *Node {
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
-func (n *Node) WithAttributeValues(attributeValues obj.Object) *Node {
+func (n *Node) WithAttributeValues(attributeValues map[string]*AttributeValue) *Node {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setAttributeValues:"), rt.MapToDict(attributeValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *AttributeValue) objc.ID { return objref.IDOf(_v) }))
 	})
 	return n
 }
@@ -256,6 +266,7 @@ func (n *Node) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) 
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (n *Node) WithAccessibilityParent(accessibilityParent obj.Object) *Node {
+	defer runtime.KeepAlive(accessibilityParent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	})
@@ -288,6 +299,7 @@ func (n *Node) WithAccessibilityEnabled(accessibilityEnabled bool) *Node {
 
 // CalculateAccumulatedFrame returns a rectangle in the parent’s coordinate system that contains the position and size of itself and all child nodes.
 func (n *Node) CalculateAccumulatedFrame() corefoundation.CGRect {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -301,6 +313,7 @@ func (n *Node) CalculateAccumulatedFrame() corefoundation.CGRect {
 
 // ValueForAttributeNamed the value of a shader attribute.
 func (n *Node) ValueForAttributeNamed(key string) *AttributeValue {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 *AttributeValue
 	purego.Main(func() {
 		_mainthread0 = func() *AttributeValue {
@@ -314,6 +327,8 @@ func (n *Node) ValueForAttributeNamed(key string) *AttributeValue {
 
 // SetValueForAttributeNamed sets an attribute value for an attached shader
 func (n *Node) SetValueForAttributeNamed(value *AttributeValue, key string) {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(value)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setValue:forAttributeNamed:"), objref.IDOf(value), purego.NSString(key))
 	})
@@ -322,6 +337,7 @@ func (n *Node) SetValueForAttributeNamed(value *AttributeValue, key string) {
 
 // SetScale sets the xScale and yScale properties of the node.
 func (n *Node) SetScale(scale float64) {
+	defer runtime.KeepAlive(n)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setScale:"), scale)
 	})
@@ -330,6 +346,8 @@ func (n *Node) SetScale(scale float64) {
 
 // AddChild adds a node to the end of the receiver’s list of child nodes.
 func (n *Node) AddChild(node *Node) {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(node)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("addChild:"), objref.IDOf(node))
 	})
@@ -338,6 +356,8 @@ func (n *Node) AddChild(node *Node) {
 
 // InsertChildAtIndex inserts a node into a specific position in the receiver’s list of child nodes.
 func (n *Node) InsertChildAtIndex(node *Node, index int) {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(node)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("insertChild:atIndex:"), objref.IDOf(node), index)
 	})
@@ -346,6 +366,7 @@ func (n *Node) InsertChildAtIndex(node *Node, index int) {
 
 // RemoveChildrenInArray removes a list of children from the receiving node.
 func (n *Node) RemoveChildrenInArray(nodes []*Node) {
+	defer runtime.KeepAlive(n)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("removeChildrenInArray:"), purego.SliceToNSArray(nodes, func(_v *Node) objc.ID { return objref.IDOf(_v) }))
 	})
@@ -354,6 +375,7 @@ func (n *Node) RemoveChildrenInArray(nodes []*Node) {
 
 // RemoveAllChildren removes all of the node’s children.
 func (n *Node) RemoveAllChildren() {
+	defer runtime.KeepAlive(n)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("removeAllChildren"))
 	})
@@ -362,6 +384,7 @@ func (n *Node) RemoveAllChildren() {
 
 // RemoveFromParent removes the receiving node from its parent.
 func (n *Node) RemoveFromParent() {
+	defer runtime.KeepAlive(n)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("removeFromParent"))
 	})
@@ -370,6 +393,8 @@ func (n *Node) RemoveFromParent() {
 
 // MoveToParent moves the node to a new parent node in the scene.
 func (n *Node) MoveToParent(parent *Node) {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(parent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("moveToParent:"), objref.IDOf(parent))
 	})
@@ -378,6 +403,7 @@ func (n *Node) MoveToParent(parent *Node) {
 
 // ChildNodeWithName searches the children of the receiving node for a node with a specific name.
 func (n *Node) ChildNodeWithName(name string) *Node {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 *Node
 	purego.Main(func() {
 		_mainthread0 = func() *Node {
@@ -391,6 +417,7 @@ func (n *Node) ChildNodeWithName(name string) *Node {
 
 // EnumerateChildNodesWithNameUsing searches the children of the receiving node to perform processing for nodes that share a name.
 func (n *Node) EnumerateChildNodesWithNameUsing(name string, block func(obj.Object, *bool)) {
+	defer runtime.KeepAlive(n)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("enumerateChildNodesWithName:usingBlock:"), purego.NSString(name), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 	})
@@ -399,6 +426,7 @@ func (n *Node) EnumerateChildNodesWithNameUsing(name string, block func(obj.Obje
 
 // ObjectForKeyedSubscript returns an array of nodes that match the name parameter.
 func (n *Node) ObjectForKeyedSubscript(name string) []*Node {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 []*Node
 	purego.Main(func() {
 		_mainthread0 = func() []*Node {
@@ -412,6 +440,8 @@ func (n *Node) ObjectForKeyedSubscript(name string) []*Node {
 
 // InParentHierarchy returns a Boolean value that indicates whether the node is a descendant of the target node.
 func (n *Node) InParentHierarchy(parent *Node) bool {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(parent)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -425,6 +455,8 @@ func (n *Node) InParentHierarchy(parent *Node) bool {
 
 // RunAction adds an action to the list of actions executed by the node.
 func (n *Node) RunAction(action *Action) {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(action)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("runAction:"), objref.IDOf(action))
 	})
@@ -435,6 +467,8 @@ func (n *Node) RunAction(action *Action) {
 //
 // RunActionCompletion blocks until the operation completes or ctx is cancelled.
 func (n *Node) RunActionCompletion(ctx context.Context, action *Action) error {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(action)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -450,6 +484,8 @@ func (n *Node) RunActionCompletion(ctx context.Context, action *Action) error {
 
 // RunActionWithKey adds an identifiable action to the list of actions executed by the node.
 func (n *Node) RunActionWithKey(action *Action, key string) {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(action)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("runAction:withKey:"), objref.IDOf(action), purego.NSString(key))
 	})
@@ -458,6 +494,7 @@ func (n *Node) RunActionWithKey(action *Action, key string) {
 
 // HasActions reports whether returns a Boolean value that indicates whether the node is executing actions.
 func (n *Node) HasActions() bool {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -471,6 +508,7 @@ func (n *Node) HasActions() bool {
 
 // ActionForKey returns an action associated with a specific key.
 func (n *Node) ActionForKey(key string) *Action {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 *Action
 	purego.Main(func() {
 		_mainthread0 = func() *Action {
@@ -484,6 +522,7 @@ func (n *Node) ActionForKey(key string) *Action {
 
 // RemoveActionForKey removes an action associated with a specific key.
 func (n *Node) RemoveActionForKey(key string) {
+	defer runtime.KeepAlive(n)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("removeActionForKey:"), purego.NSString(key))
 	})
@@ -492,6 +531,7 @@ func (n *Node) RemoveActionForKey(key string) {
 
 // RemoveAllActions ends and removes all actions from the node.
 func (n *Node) RemoveAllActions() {
+	defer runtime.KeepAlive(n)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("removeAllActions"))
 	})
@@ -500,6 +540,7 @@ func (n *Node) RemoveAllActions() {
 
 // ContainsPoint returns a Boolean value that indicates whether a point lies inside the parent’s coordinate system.
 func (n *Node) ContainsPoint(p corefoundation.CGPoint) bool {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -513,6 +554,7 @@ func (n *Node) ContainsPoint(p corefoundation.CGPoint) bool {
 
 // NodeAtPoint returns the deepest visible descendant that intersects a point.
 func (n *Node) NodeAtPoint(p corefoundation.CGPoint) *Node {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 *Node
 	purego.Main(func() {
 		_mainthread0 = func() *Node {
@@ -526,6 +568,7 @@ func (n *Node) NodeAtPoint(p corefoundation.CGPoint) *Node {
 
 // NodesAtPoint returns an array of all visible descendants that intersect a point.
 func (n *Node) NodesAtPoint(p corefoundation.CGPoint) []*Node {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 []*Node
 	purego.Main(func() {
 		_mainthread0 = func() []*Node {
@@ -539,6 +582,8 @@ func (n *Node) NodesAtPoint(p corefoundation.CGPoint) []*Node {
 
 // ConvertPointFromNode converts a point from the coordinate system of another node in the node tree to the coordinate system of this node.
 func (n *Node) ConvertPointFromNode(point corefoundation.CGPoint, node *Node) corefoundation.CGPoint {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(node)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -552,6 +597,8 @@ func (n *Node) ConvertPointFromNode(point corefoundation.CGPoint, node *Node) co
 
 // ConvertPointToNode converts a point in this node’s coordinate system to the coordinate system of another node in the node tree.
 func (n *Node) ConvertPointToNode(point corefoundation.CGPoint, node *Node) corefoundation.CGPoint {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(node)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -565,6 +612,8 @@ func (n *Node) ConvertPointToNode(point corefoundation.CGPoint, node *Node) core
 
 // IntersectsNode returns a Boolean value that indicates whether this node intersects the specified node.
 func (n *Node) IntersectsNode(node *Node) bool {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(node)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -578,6 +627,8 @@ func (n *Node) IntersectsNode(node *Node) bool {
 
 // IsEqualToNode compares the parameter node to the receiving node.
 func (n *Node) IsEqualToNode(node *Node) bool {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(node)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -591,6 +642,7 @@ func (n *Node) IsEqualToNode(node *Node) bool {
 
 // Frame returns the frame.
 func (n *Node) Frame() corefoundation.CGRect {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -604,6 +656,7 @@ func (n *Node) Frame() corefoundation.CGRect {
 
 // Position returns the position of the node in the parent's coordinate system
 func (n *Node) Position() corefoundation.CGPoint {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -617,6 +670,7 @@ func (n *Node) Position() corefoundation.CGPoint {
 
 // ZPosition returns the z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
 func (n *Node) ZPosition() float64 {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -630,6 +684,7 @@ func (n *Node) ZPosition() float64 {
 
 // ZRotation returns the Euler rotation about the z axis (in radians)
 func (n *Node) ZRotation() float64 {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -643,6 +698,7 @@ func (n *Node) ZRotation() float64 {
 
 // XScale returns the scaling in the X axis
 func (n *Node) XScale() float64 {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -656,6 +712,7 @@ func (n *Node) XScale() float64 {
 
 // YScale returns the scaling in the Y axis
 func (n *Node) YScale() float64 {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -669,6 +726,7 @@ func (n *Node) YScale() float64 {
 
 // Speed returns the speed multiplier applied to all actions run on this node. Inherited by its children.
 func (n *Node) Speed() float64 {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -682,6 +740,7 @@ func (n *Node) Speed() float64 {
 
 // Alpha returns alpha of this node (multiplied by the output color to give the final result)
 func (n *Node) Alpha() float64 {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -695,6 +754,7 @@ func (n *Node) Alpha() float64 {
 
 // IsPaused reports whether controls whether or not the node's actions is updated or paused.
 func (n *Node) IsPaused() bool {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -708,6 +768,7 @@ func (n *Node) IsPaused() bool {
 
 // IsHidden reports whether controls whether or not the node and its children are rendered.
 func (n *Node) IsHidden() bool {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -721,6 +782,7 @@ func (n *Node) IsHidden() bool {
 
 // IsUserInteractionEnabled reports whether controls whether or not the node receives touch events
 func (n *Node) IsUserInteractionEnabled() bool {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -734,6 +796,7 @@ func (n *Node) IsUserInteractionEnabled() bool {
 
 // Parent returns the parent of the node. If this is nil the node has not been added to another group and is thus the root node of its own graph.
 func (n *Node) Parent() *Node {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 *Node
 	purego.Main(func() {
 		_mainthread0 = func() *Node {
@@ -749,6 +812,7 @@ func (n *Node) Parent() *Node {
 //
 // Children returns the collection as a Go slice.
 func (n *Node) Children() []*Node {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 []*Node
 	purego.Main(func() {
 		_mainthread0 = func() []*Node {
@@ -761,6 +825,7 @@ func (n *Node) Children() []*Node {
 
 // Name returns the client assignable name. In general, this should be unique among peers in the scene graph.
 func (n *Node) Name() string {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -777,6 +842,7 @@ func (n *Node) Name() string {
 
 // Scene returns the scene that the node is currently in.
 func (n *Node) Scene() *Scene {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 *Scene
 	purego.Main(func() {
 		_mainthread0 = func() *Scene {
@@ -790,6 +856,7 @@ func (n *Node) Scene() *Scene {
 
 // PhysicsBody returns physics body attached to the node, with synchronized scale, rotation, and position
 func (n *Node) PhysicsBody() *PhysicsBody {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 *PhysicsBody
 	purego.Main(func() {
 		_mainthread0 = func() *PhysicsBody {
@@ -803,6 +870,7 @@ func (n *Node) PhysicsBody() *PhysicsBody {
 
 // UserData returns an optional dictionary that can be used to store your own data in a node. Defaults to nil.
 func (n *Node) UserData() obj.Object {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -816,6 +884,7 @@ func (n *Node) UserData() obj.Object {
 
 // ReachConstraints returns kinematic constraints, used in IK solving
 func (n *Node) ReachConstraints() *ReachConstraints {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 *ReachConstraints
 	purego.Main(func() {
 		_mainthread0 = func() *ReachConstraints {
@@ -831,6 +900,7 @@ func (n *Node) ReachConstraints() *ReachConstraints {
 //
 // Constraints returns the collection as a Go slice.
 func (n *Node) Constraints() []*Constraint {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 []*Constraint
 	purego.Main(func() {
 		_mainthread0 = func() []*Constraint {
@@ -842,12 +912,13 @@ func (n *Node) Constraints() []*Constraint {
 }
 
 // AttributeValues returns optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
-func (n *Node) AttributeValues() obj.Object {
-	var _mainthread0 obj.Object
+func (n *Node) AttributeValues() map[string]*AttributeValue {
+	defer runtime.KeepAlive(n)
+	var _mainthread0 map[string]*AttributeValue
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() map[string]*AttributeValue {
 			_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("attributeValues"))
-			return obj.Wrap(_r)
+			return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *AttributeValue { return AttributeValueFromID(_id) })
 		}()
 	})
 	return _mainthread0
@@ -856,6 +927,7 @@ func (n *Node) AttributeValues() obj.Object {
 
 // AccessibilityHitTest returns the frontmost user interface element in the element hierarchy.
 func (n *Node) AccessibilityHitTest(point corefoundation.CGPoint) obj.Object {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -869,6 +941,7 @@ func (n *Node) AccessibilityHitTest(point corefoundation.CGPoint) obj.Object {
 
 // IsAccessibilityElement reports whether the object is accessibility element.
 func (n *Node) IsAccessibilityElement() bool {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -882,6 +955,7 @@ func (n *Node) IsAccessibilityElement() bool {
 
 // AccessibilityRole returns the accessibility role.
 func (n *Node) AccessibilityRole() string {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -898,6 +972,7 @@ func (n *Node) AccessibilityRole() string {
 
 // AccessibilityRoleDescription returns the accessibility role description.
 func (n *Node) AccessibilityRoleDescription() string {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -914,6 +989,7 @@ func (n *Node) AccessibilityRoleDescription() string {
 
 // AccessibilitySubrole returns the accessibility subrole.
 func (n *Node) AccessibilitySubrole() string {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -930,6 +1006,7 @@ func (n *Node) AccessibilitySubrole() string {
 
 // AccessibilityFrame returns the accessibility frame.
 func (n *Node) AccessibilityFrame() corefoundation.CGRect {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -943,6 +1020,7 @@ func (n *Node) AccessibilityFrame() corefoundation.CGRect {
 
 // AccessibilityParent returns the accessibility parent.
 func (n *Node) AccessibilityParent() obj.Object {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -956,6 +1034,7 @@ func (n *Node) AccessibilityParent() obj.Object {
 
 // AccessibilityChildren returns the accessibility children.
 func (n *Node) AccessibilityChildren() obj.Object {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -969,6 +1048,8 @@ func (n *Node) AccessibilityChildren() obj.Object {
 
 // SetAccessibilityChildren wraps the corresponding Objective-C method.
 func (n *Node) SetAccessibilityChildren(accessibilityChildren obj.Object) {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(accessibilityChildren)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setAccessibilityChildren:"), objref.IDOf(accessibilityChildren))
 	})
@@ -977,6 +1058,7 @@ func (n *Node) SetAccessibilityChildren(accessibilityChildren obj.Object) {
 
 // AccessibilityHelp returns the accessibility help.
 func (n *Node) AccessibilityHelp() string {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -993,6 +1075,7 @@ func (n *Node) AccessibilityHelp() string {
 
 // AccessibilityLabel returns the accessibility label.
 func (n *Node) AccessibilityLabel() string {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -1009,6 +1092,7 @@ func (n *Node) AccessibilityLabel() string {
 
 // IsAccessibilityEnabled reports whether the object is accessibility enabled.
 func (n *Node) IsAccessibilityEnabled() bool {
+	defer runtime.KeepAlive(n)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

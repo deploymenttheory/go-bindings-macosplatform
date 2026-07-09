@@ -5,10 +5,15 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -74,6 +79,7 @@ func (gl *GradientLayer) WithEndPoint(endPoint corefoundation.CGPoint) *Gradient
 
 // WithType sets style of gradient drawn by the layer.
 func (gl *GradientLayer) WithType(type_ obj.Object) *GradientLayer {
+	defer runtime.KeepAlive(type_)
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return gl
 }
@@ -141,6 +147,7 @@ func (gl *GradientLayer) WithSublayers(items ...LayerProvider) *GradientLayer {
 
 // WithMask sets an optional layer whose alpha channel is used to mask the layer’s content.
 func (gl *GradientLayer) WithMask(mask LayerProvider) *GradientLayer {
+	defer runtime.KeepAlive(mask)
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setMask:"), objref.IDOf(mask))
 	return gl
 }
@@ -153,6 +160,7 @@ func (gl *GradientLayer) WithMasksToBounds(masksToBounds bool) *GradientLayer {
 
 // WithContents sets an object that provides the contents of the layer. Animatable.
 func (gl *GradientLayer) WithContents(contents obj.Object) *GradientLayer {
+	defer runtime.KeepAlive(contents)
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setContents:"), objref.IDOf(contents))
 	return gl
 }
@@ -165,6 +173,7 @@ func (gl *GradientLayer) WithContentsRect(contentsRect corefoundation.CGRect) *G
 
 // WithContentsGravity sets a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
 func (gl *GradientLayer) WithContentsGravity(contentsGravity obj.Object) *GradientLayer {
+	defer runtime.KeepAlive(contentsGravity)
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
 	return gl
 }
@@ -183,6 +192,7 @@ func (gl *GradientLayer) WithContentsCenter(contentsCenter corefoundation.CGRect
 
 // WithContentsFormat sets a hint for the desired storage format of the layer contents.
 func (gl *GradientLayer) WithContentsFormat(contentsFormat obj.Object) *GradientLayer {
+	defer runtime.KeepAlive(contentsFormat)
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
 	return gl
 }
@@ -195,12 +205,14 @@ func (gl *GradientLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynam
 
 // WithToneMapMode sets the tone map mode.
 func (gl *GradientLayer) WithToneMapMode(toneMapMode obj.Object) *GradientLayer {
+	defer runtime.KeepAlive(toneMapMode)
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return gl
 }
 
 // WithPreferredDynamicRange sets the preferred dynamic range.
 func (gl *GradientLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *GradientLayer {
+	defer runtime.KeepAlive(preferredDynamicRange)
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return gl
 }
@@ -213,12 +225,14 @@ func (gl *GradientLayer) WithContentsHeadroom(contentsHeadroom float64) *Gradien
 
 // WithMinificationFilter sets the filter used when reducing the size of the content.
 func (gl *GradientLayer) WithMinificationFilter(minificationFilter obj.Object) *GradientLayer {
+	defer runtime.KeepAlive(minificationFilter)
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
 	return gl
 }
 
 // WithMagnificationFilter sets the filter used when increasing the size of the content.
 func (gl *GradientLayer) WithMagnificationFilter(magnificationFilter obj.Object) *GradientLayer {
+	defer runtime.KeepAlive(magnificationFilter)
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
 	return gl
 }
@@ -261,6 +275,7 @@ func (gl *GradientLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool)
 
 // WithBackgroundColor sets the background color of the receiver. Animatable.
 func (gl *GradientLayer) WithBackgroundColor(backgroundColor obj.Object) *GradientLayer {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return gl
 }
@@ -279,6 +294,7 @@ func (gl *GradientLayer) WithMaskedCorners(maskedCorners CornerMask) *GradientLa
 
 // WithCornerCurve sets the corner curve.
 func (gl *GradientLayer) WithCornerCurve(cornerCurve obj.Object) *GradientLayer {
+	defer runtime.KeepAlive(cornerCurve)
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return gl
 }
@@ -291,6 +307,7 @@ func (gl *GradientLayer) WithBorderWidth(borderWidth float64) *GradientLayer {
 
 // WithBorderColor sets the color of the layer’s border. Animatable.
 func (gl *GradientLayer) WithBorderColor(borderColor obj.Object) *GradientLayer {
+	defer runtime.KeepAlive(borderColor)
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 	return gl
 }
@@ -309,6 +326,7 @@ func (gl *GradientLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *Gradie
 
 // WithCompositingFilter sets a CoreImage filter used to composite the layer and the content behind it. Animatable.
 func (gl *GradientLayer) WithCompositingFilter(compositingFilter obj.Object) *GradientLayer {
+	defer runtime.KeepAlive(compositingFilter)
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return gl
 }
@@ -327,6 +345,7 @@ func (gl *GradientLayer) WithRasterizationScale(rasterizationScale float64) *Gra
 
 // WithShadowColor sets the color of the layer’s shadow. Animatable.
 func (gl *GradientLayer) WithShadowColor(shadowColor obj.Object) *GradientLayer {
+	defer runtime.KeepAlive(shadowColor)
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 	return gl
 }
@@ -351,6 +370,7 @@ func (gl *GradientLayer) WithShadowRadius(shadowRadius float64) *GradientLayer {
 
 // WithShadowPath sets the shape of the layer’s shadow. Animatable.
 func (gl *GradientLayer) WithShadowPath(shadowPath obj.Object) *GradientLayer {
+	defer runtime.KeepAlive(shadowPath)
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
 	return gl
 }
@@ -362,8 +382,8 @@ func (gl *GradientLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask)
 }
 
 // WithActions sets a dictionary containing layer actions.
-func (gl *GradientLayer) WithActions(actions obj.Object) *GradientLayer {
-	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setActions:"), objref.IDOf(actions))
+func (gl *GradientLayer) WithActions(actions map[string]obj.Object) *GradientLayer {
+	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setActions:"), rt.MapToDict(actions, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return gl
 }
 
@@ -373,8 +393,19 @@ func (gl *GradientLayer) WithName(name string) *GradientLayer {
 	return gl
 }
 
+// WithDelegate sets the layer’s delegate object.
+func (gl *GradientLayer) WithDelegate(delegate LayerDelegate) *GradientLayer {
+	_shim := newLayerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(gl), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(gl), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return gl
+}
+
 // WithStyle sets an optional dictionary used to store property values that aren’t explicitly defined by the layer.
 func (gl *GradientLayer) WithStyle(style obj.Object) *GradientLayer {
+	defer runtime.KeepAlive(style)
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setStyle:"), objref.IDOf(style))
 	return gl
 }
@@ -388,12 +419,15 @@ func (gl *GradientLayer) WithConstraints(items ...*Constraint) *GradientLayer {
 
 // Colors returns the colors.
 func (gl *GradientLayer) Colors() obj.Object {
+	defer runtime.KeepAlive(gl)
 	_r := objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("colors"))
 	return obj.Wrap(_r)
 }
 
 // SetColors wraps the corresponding Objective-C method.
 func (gl *GradientLayer) SetColors(colors obj.Object) {
+	defer runtime.KeepAlive(gl)
+	defer runtime.KeepAlive(colors)
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setColors:"), objref.IDOf(colors))
 }
 
@@ -401,26 +435,30 @@ func (gl *GradientLayer) SetColors(colors obj.Object) {
 //
 // Locations returns the collection as a Go slice.
 func (gl *GradientLayer) Locations() []obj.Object {
+	defer runtime.KeepAlive(gl)
 	_arr := objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("locations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // StartPoint returns the start point.
 func (gl *GradientLayer) StartPoint() corefoundation.CGPoint {
+	defer runtime.KeepAlive(gl)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(gl), objc.RegisterName("startPoint"))
 	return _r
 }
 
 // EndPoint returns the end point.
 func (gl *GradientLayer) EndPoint() corefoundation.CGPoint {
+	defer runtime.KeepAlive(gl)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(gl), objc.RegisterName("endPoint"))
 	return _r
 }
 
 // Type returns the type.
-func (gl *GradientLayer) Type() obj.Object {
+func (gl *GradientLayer) Type() *foundation.String {
+	defer runtime.KeepAlive(gl)
 	_r := objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("type"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 var _ LayerProvider = (*GradientLayer)(nil)

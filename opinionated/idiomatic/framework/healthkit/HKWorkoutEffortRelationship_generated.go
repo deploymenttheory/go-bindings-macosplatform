@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func workoutEffortRelationshipAdopt(id objc.ID) *WorkoutEffortRelationship {
 
 // Description returns the object's -description text.
 func (wer *WorkoutEffortRelationship) Description() string {
+	defer runtime.KeepAlive(wer)
 	return rt.Description(objref.IDOf(wer))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wer *WorkoutEffortRelationship) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wer)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wer), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wer *WorkoutEffortRelationship) IsKind(className string) bool {
+	defer runtime.KeepAlive(wer)
 	return rt.IsKind(objref.IDOf(wer), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wer *WorkoutEffortRelationship) String() string {
+	defer runtime.KeepAlive(wer)
 	return rt.Description(objref.IDOf(wer))
 }
 
@@ -72,12 +79,14 @@ func NewWorkoutEffortRelationship() *WorkoutEffortRelationship {
 
 // Workout returns the workout.
 func (wer *WorkoutEffortRelationship) Workout() *Workout {
+	defer runtime.KeepAlive(wer)
 	_r := objc.Send[objc.ID](objref.IDOf(wer), objc.RegisterName("workout"))
 	return WorkoutFromID(_r)
 }
 
 // Activity returns the activity.
 func (wer *WorkoutEffortRelationship) Activity() *WorkoutActivity {
+	defer runtime.KeepAlive(wer)
 	_r := objc.Send[objc.ID](objref.IDOf(wer), objc.RegisterName("activity"))
 	return WorkoutActivityFromID(_r)
 }
@@ -86,6 +95,7 @@ func (wer *WorkoutEffortRelationship) Activity() *WorkoutActivity {
 //
 // Samples returns the collection as a Go slice.
 func (wer *WorkoutEffortRelationship) Samples() []*Sample {
+	defer runtime.KeepAlive(wer)
 	_arr := objc.Send[objc.ID](objref.IDOf(wer), objc.RegisterName("samples"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Sample { return SampleFromID(_id) })
 }

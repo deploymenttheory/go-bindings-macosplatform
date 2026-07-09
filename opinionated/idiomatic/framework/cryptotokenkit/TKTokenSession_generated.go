@@ -5,8 +5,11 @@
 package cryptotokenkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -49,34 +52,51 @@ func tokenSessionAdopt(id objc.ID) *TokenSession {
 
 // Description returns the object's -description text.
 func (ts *TokenSession) Description() string {
+	defer runtime.KeepAlive(ts)
 	return rt.Description(objref.IDOf(ts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ts *TokenSession) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ts *TokenSession) IsKind(className string) bool {
+	defer runtime.KeepAlive(ts)
 	return rt.IsKind(objref.IDOf(ts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ts *TokenSession) String() string {
+	defer runtime.KeepAlive(ts)
 	return rt.Description(objref.IDOf(ts))
 }
 
 // NewTokenSessionWithToken initializes a token session with the specified token.
 func NewTokenSessionWithToken(token *Token) *TokenSession {
+	defer runtime.KeepAlive(token)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("TKTokenSession")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithToken:"), objref.IDOf(token))
 	return tokenSessionAdopt(_id)
 }
 
+// WithDelegate sets the token session delegate.
+func (ts *TokenSession) WithDelegate(delegate TokenSessionDelegate) *TokenSession {
+	_shim := newTokenSessionDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ts), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ts), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return ts
+}
+
 // Token returns the token.
 func (ts *TokenSession) Token() *Token {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("token"))
 	return TokenFromID(_r)
 }

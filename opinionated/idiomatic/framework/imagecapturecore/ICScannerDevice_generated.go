@@ -5,6 +5,7 @@
 package imagecapturecore
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -97,37 +98,44 @@ func (sd *ScannerDevice) WithAutolaunchApplicationPath(autolaunchApplicationPath
 
 // RequestOpenSessionWithCredentialsPassword opens a session on the protected device with the authorized username and passcode.
 func (sd *ScannerDevice) RequestOpenSessionWithCredentialsPassword(username string, password string) {
+	defer runtime.KeepAlive(sd)
 	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("requestOpenSessionWithCredentials:password:"), purego.NSString(username), purego.NSString(password))
 }
 
 // RequestSelectFunctionalUnit requests to select a functional unit on the scanner.
 func (sd *ScannerDevice) RequestSelectFunctionalUnit(type_ ScannerFunctionalUnitType) {
+	defer runtime.KeepAlive(sd)
 	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("requestSelectFunctionalUnit:"), type_)
 }
 
 // RequestOverviewScan starts an overview scan on the selected functional unit.
 func (sd *ScannerDevice) RequestOverviewScan() {
+	defer runtime.KeepAlive(sd)
 	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("requestOverviewScan"))
 }
 
 // RequestScan starts a scan on the selected functional unit.
 func (sd *ScannerDevice) RequestScan() {
+	defer runtime.KeepAlive(sd)
 	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("requestScan"))
 }
 
 // CancelScan cancels the current scan.
 func (sd *ScannerDevice) CancelScan() {
+	defer runtime.KeepAlive(sd)
 	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("cancelScan"))
 }
 
 // TransferMode returns ￼The transfer mode for scanned document.
 func (sd *ScannerDevice) TransferMode() ScannerTransferMode {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[ScannerTransferMode](objref.IDOf(sd), objc.RegisterName("transferMode"))
 	return _r
 }
 
 // MaxMemoryBandSize returns ￼The total maximum band size requested when performing a ICScannerTransferModeMemoryBased.
 func (sd *ScannerDevice) MaxMemoryBandSize() int {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[int](objref.IDOf(sd), objc.RegisterName("maxMemoryBandSize"))
 	return _r
 }

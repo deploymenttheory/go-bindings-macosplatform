@@ -5,7 +5,10 @@
 package coremediaio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func extensionClientAdopt(id objc.ID) *ExtensionClient {
 
 // Description returns the object's -description text.
 func (ec *ExtensionClient) Description() string {
+	defer runtime.KeepAlive(ec)
 	return rt.Description(objref.IDOf(ec))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ec *ExtensionClient) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ec)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ec), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ec *ExtensionClient) IsKind(className string) bool {
+	defer runtime.KeepAlive(ec)
 	return rt.IsKind(objref.IDOf(ec), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ec *ExtensionClient) String() string {
+	defer runtime.KeepAlive(ec)
 	return rt.Description(objref.IDOf(ec))
 }
 
@@ -73,13 +81,15 @@ func NewExtensionClient() *ExtensionClient {
 }
 
 // ClientID returns the client unique identifier.
-func (ec *ExtensionClient) ClientID() obj.Object {
+func (ec *ExtensionClient) ClientID() *foundation.UUID {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("clientID"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // SigningID returns the client's signing identifier.
 func (ec *ExtensionClient) SigningID() string {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("signingID"))
 	if _r == 0 {
 		return ""
@@ -89,6 +99,7 @@ func (ec *ExtensionClient) SigningID() string {
 
 // Pid returns the pid of the client application.
 func (ec *ExtensionClient) Pid() int {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[int](objref.IDOf(ec), objc.RegisterName("pid"))
 	return _r
 }

@@ -5,8 +5,11 @@
 package cryptotokenkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -49,23 +52,38 @@ func smartCardUserInteractionAdopt(id objc.ID) *SmartCardUserInteraction {
 
 // Description returns the object's -description text.
 func (scui *SmartCardUserInteraction) Description() string {
+	defer runtime.KeepAlive(scui)
 	return rt.Description(objref.IDOf(scui))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (scui *SmartCardUserInteraction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(scui)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(scui), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (scui *SmartCardUserInteraction) IsKind(className string) bool {
+	defer runtime.KeepAlive(scui)
 	return rt.IsKind(objref.IDOf(scui), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (scui *SmartCardUserInteraction) String() string {
+	defer runtime.KeepAlive(scui)
 	return rt.Description(objref.IDOf(scui))
+}
+
+// WithDelegate sets the delegate for observing events that occur during the user interaction.
+func (scui *SmartCardUserInteraction) WithDelegate(delegate SmartCardUserInteractionDelegate) *SmartCardUserInteraction {
+	_shim := newSmartCardUserInteractionDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(scui), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(scui), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return scui
 }
 
 // WithInitialTimeout sets the timeout, in seconds, for initial interaction. If set to 0, the reader-defined default timeout is used. 0 by default.
@@ -82,12 +100,14 @@ func (scui *SmartCardUserInteraction) WithInteractionTimeout(interactionTimeout 
 
 // Cancel reports whether attempts to cancel an interaction started by calling runWithReply:. For certain interactions, cancellation may not be available.
 func (scui *SmartCardUserInteraction) Cancel() bool {
+	defer runtime.KeepAlive(scui)
 	_r := objc.Send[bool](objref.IDOf(scui), objc.RegisterName("cancel"))
 	return _r
 }
 
 // InteractionTimeout returns timeout after the first key stroke. If set to 0, the reader-defined default timeout is used.
 func (scui *SmartCardUserInteraction) InteractionTimeout() float64 {
+	defer runtime.KeepAlive(scui)
 	_r := objc.Send[float64](objref.IDOf(scui), objc.RegisterName("interactionTimeout"))
 	return _r
 }

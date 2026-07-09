@@ -5,6 +5,8 @@
 package paravirtualizedgraphics
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func pGDisplayModeAdopt(id objc.ID) *PGDisplayMode {
 
 // Description returns the object's -description text.
 func (pdm *PGDisplayMode) Description() string {
+	defer runtime.KeepAlive(pdm)
 	return rt.Description(objref.IDOf(pdm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pdm *PGDisplayMode) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pdm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pdm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pdm *PGDisplayMode) IsKind(className string) bool {
+	defer runtime.KeepAlive(pdm)
 	return rt.IsKind(objref.IDOf(pdm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pdm *PGDisplayMode) String() string {
+	defer runtime.KeepAlive(pdm)
 	return rt.Description(objref.IDOf(pdm))
 }
 
@@ -74,6 +81,7 @@ func NewPGDisplayMode() *PGDisplayMode {
 
 // RefreshRate returns refreshRate of supported display mode.  Consider only supplying modes using a refreshRate equal to that of host OS's physical display where representation is ultimately shown.
 func (pdm *PGDisplayMode) RefreshRate() float64 {
+	defer runtime.KeepAlive(pdm)
 	_r := objc.Send[float64](objref.IDOf(pdm), objc.RegisterName("refreshRate"))
 	return _r
 }

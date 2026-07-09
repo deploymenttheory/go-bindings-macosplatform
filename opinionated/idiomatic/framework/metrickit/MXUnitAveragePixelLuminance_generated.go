@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func unitAveragePixelLuminanceAdopt(id objc.ID) *UnitAveragePixelLuminance {
 
 // Description returns the object's -description text.
 func (uapl *UnitAveragePixelLuminance) Description() string {
+	defer runtime.KeepAlive(uapl)
 	return rt.Description(objref.IDOf(uapl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (uapl *UnitAveragePixelLuminance) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(uapl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(uapl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (uapl *UnitAveragePixelLuminance) IsKind(className string) bool {
+	defer runtime.KeepAlive(uapl)
 	return rt.IsKind(objref.IDOf(uapl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (uapl *UnitAveragePixelLuminance) String() string {
+	defer runtime.KeepAlive(uapl)
 	return rt.Description(objref.IDOf(uapl))
 }
 

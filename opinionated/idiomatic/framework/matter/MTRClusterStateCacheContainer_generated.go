@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRClusterStateCacheContainerAdopt(id objc.ID) *MTRClusterStateCacheContain
 
 // Description returns the object's -description text.
 func (mcscc *MTRClusterStateCacheContainer) Description() string {
+	defer runtime.KeepAlive(mcscc)
 	return rt.Description(objref.IDOf(mcscc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcscc *MTRClusterStateCacheContainer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcscc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcscc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcscc *MTRClusterStateCacheContainer) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcscc)
 	return rt.IsKind(objref.IDOf(mcscc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcscc *MTRClusterStateCacheContainer) String() string {
+	defer runtime.KeepAlive(mcscc)
 	return rt.Description(objref.IDOf(mcscc))
 }
 

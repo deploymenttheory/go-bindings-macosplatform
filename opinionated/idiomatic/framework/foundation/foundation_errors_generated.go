@@ -8,14 +8,14 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrNSItemProviderUnknownError matches the Foundation error NSItemProviderUnknownError.
-var ErrNSItemProviderUnknownError = errkit.New("NSItemProviderErrorDomain", -1)
-
 // ErrNSItemProviderItemUnavailableError matches the Foundation error NSItemProviderItemUnavailableError.
 var ErrNSItemProviderItemUnavailableError = errkit.New("NSItemProviderErrorDomain", -1000)
+
+// ErrNSItemProviderUnavailableCoercionError matches the Foundation error NSItemProviderUnavailableCoercionError.
+var ErrNSItemProviderUnavailableCoercionError = errkit.New("NSItemProviderErrorDomain", -1200)
 
 // ErrNSItemProviderUnexpectedValueClassError matches the Foundation error NSItemProviderUnexpectedValueClassError.
 var ErrNSItemProviderUnexpectedValueClassError = errkit.New("NSItemProviderErrorDomain", -1100)
 
-// ErrNSItemProviderUnavailableCoercionError matches the Foundation error NSItemProviderUnavailableCoercionError.
-var ErrNSItemProviderUnavailableCoercionError = errkit.New("NSItemProviderErrorDomain", -1200)
+// ErrNSItemProviderUnknownError matches the Foundation error NSItemProviderUnknownError.
+var ErrNSItemProviderUnknownError = errkit.New("NSItemProviderErrorDomain", -1)

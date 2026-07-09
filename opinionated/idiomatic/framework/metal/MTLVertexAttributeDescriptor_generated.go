@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func vertexAttributeDescriptorAdopt(id objc.ID) *VertexAttributeDescriptor {
 
 // Description returns the object's -description text.
 func (vad *VertexAttributeDescriptor) Description() string {
+	defer runtime.KeepAlive(vad)
 	return rt.Description(objref.IDOf(vad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vad *VertexAttributeDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vad *VertexAttributeDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(vad)
 	return rt.IsKind(objref.IDOf(vad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vad *VertexAttributeDescriptor) String() string {
+	defer runtime.KeepAlive(vad)
 	return rt.Description(objref.IDOf(vad))
 }
 
@@ -92,18 +99,21 @@ func (vad *VertexAttributeDescriptor) WithBufferIndex(bufferIndex int) *VertexAt
 
 // Format returns the format.
 func (vad *VertexAttributeDescriptor) Format() VertexFormat {
+	defer runtime.KeepAlive(vad)
 	_r := objc.Send[VertexFormat](objref.IDOf(vad), objc.RegisterName("format"))
 	return _r
 }
 
 // Offset returns the offset.
 func (vad *VertexAttributeDescriptor) Offset() int {
+	defer runtime.KeepAlive(vad)
 	_r := objc.Send[int](objref.IDOf(vad), objc.RegisterName("offset"))
 	return _r
 }
 
 // BufferIndex returns the buffer index.
 func (vad *VertexAttributeDescriptor) BufferIndex() int {
+	defer runtime.KeepAlive(vad)
 	_r := objc.Send[int](objref.IDOf(vad), objc.RegisterName("bufferIndex"))
 	return _r
 }

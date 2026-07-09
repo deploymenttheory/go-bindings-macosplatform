@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func wheelchairUseObjectAdopt(id objc.ID) *WheelchairUseObject {
 
 // Description returns the object's -description text.
 func (wuo *WheelchairUseObject) Description() string {
+	defer runtime.KeepAlive(wuo)
 	return rt.Description(objref.IDOf(wuo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wuo *WheelchairUseObject) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wuo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wuo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wuo *WheelchairUseObject) IsKind(className string) bool {
+	defer runtime.KeepAlive(wuo)
 	return rt.IsKind(objref.IDOf(wuo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wuo *WheelchairUseObject) String() string {
+	defer runtime.KeepAlive(wuo)
 	return rt.Description(objref.IDOf(wuo))
 }
 
@@ -74,6 +81,7 @@ func NewWheelchairUseObject() *WheelchairUseObject {
 
 // WheelchairUse returns the wheelchair use.
 func (wuo *WheelchairUseObject) WheelchairUse() WheelchairUse {
+	defer runtime.KeepAlive(wuo)
 	_r := objc.Send[WheelchairUse](objref.IDOf(wuo), objc.RegisterName("wheelchairUse"))
 	return _r
 }

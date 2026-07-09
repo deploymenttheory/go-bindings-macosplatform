@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func textTabAdopt(id objc.ID) *TextTab {
 
 // Description returns the object's -description text.
 func (tt *TextTab) Description() string {
+	defer runtime.KeepAlive(tt)
 	return rt.Description(objref.IDOf(tt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tt *TextTab) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tt *TextTab) IsKind(className string) bool {
+	defer runtime.KeepAlive(tt)
 	return rt.IsKind(objref.IDOf(tt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tt *TextTab) String() string {
+	defer runtime.KeepAlive(tt)
 	return rt.Description(objref.IDOf(tt))
 }
 
 // NewTextTabWithTextAlignmentLocationOptions initializes a text tab with the specified text alignment, location, and options.
 func NewTextTabWithTextAlignmentLocationOptions(alignment TextAlignment, loc float64, options obj.Object) *TextTab {
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextTab")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextAlignment:location:options:"), alignment, loc, objref.IDOf(options))
 	return textTabAdopt(_id)
@@ -82,24 +90,28 @@ func NewTextTabWithTypeLocation(type_ TextTabType, loc float64) *TextTab {
 
 // Location returns the location.
 func (tt *TextTab) Location() float64 {
+	defer runtime.KeepAlive(tt)
 	_r := objc.Send[float64](objref.IDOf(tt), objc.RegisterName("location"))
 	return _r
 }
 
 // Options returns the options.
 func (tt *TextTab) Options() obj.Object {
+	defer runtime.KeepAlive(tt)
 	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("options"))
 	return obj.Wrap(_r)
 }
 
 // Alignment returns the alignment.
 func (tt *TextTab) Alignment() TextAlignment {
+	defer runtime.KeepAlive(tt)
 	_r := objc.Send[TextAlignment](objref.IDOf(tt), objc.RegisterName("alignment"))
 	return _r
 }
 
 // TabStopType returns the tab stop type.
 func (tt *TextTab) TabStopType() TextTabType {
+	defer runtime.KeepAlive(tt)
 	_r := objc.Send[TextTabType](objref.IDOf(tt), objc.RegisterName("tabStopType"))
 	return _r
 }

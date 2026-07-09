@@ -5,6 +5,8 @@
 package cinematic
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,34 @@ func renderingSessionFrameAttributesAdopt(id objc.ID) *RenderingSessionFrameAttr
 
 // Description returns the object's -description text.
 func (rsfa *RenderingSessionFrameAttributes) Description() string {
+	defer runtime.KeepAlive(rsfa)
 	return rt.Description(objref.IDOf(rsfa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rsfa *RenderingSessionFrameAttributes) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rsfa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rsfa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rsfa *RenderingSessionFrameAttributes) IsKind(className string) bool {
+	defer runtime.KeepAlive(rsfa)
 	return rt.IsKind(objref.IDOf(rsfa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rsfa *RenderingSessionFrameAttributes) String() string {
+	defer runtime.KeepAlive(rsfa)
 	return rt.Description(objref.IDOf(rsfa))
 }
 
 // NewRenderingSessionFrameAttributesWithSampleBufferSessionAttributes initializes the rendering frame attributes from a sample buffer read from a Cinematic metadata track.
 func NewRenderingSessionFrameAttributesWithSampleBufferSessionAttributes(sampleBuffer obj.Object, sessionAttributes *RenderingSessionAttributes) *RenderingSessionFrameAttributes {
+	defer runtime.KeepAlive(sampleBuffer)
+	defer runtime.KeepAlive(sessionAttributes)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CNRenderingSessionFrameAttributes")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleBuffer:sessionAttributes:"), objref.IDOf(sampleBuffer), objref.IDOf(sessionAttributes))
 	return renderingSessionFrameAttributesAdopt(_id)
@@ -75,6 +84,8 @@ func NewRenderingSessionFrameAttributesWithSampleBufferSessionAttributes(sampleB
 
 // NewRenderingSessionFrameAttributesWithTimedMetadataGroupSessionAttributes initializes the rendering frame attributes from a timed metadata group read from a Cinematic metadata track.
 func NewRenderingSessionFrameAttributesWithTimedMetadataGroupSessionAttributes(metadataGroup obj.Object, sessionAttributes *RenderingSessionAttributes) *RenderingSessionFrameAttributes {
+	defer runtime.KeepAlive(metadataGroup)
+	defer runtime.KeepAlive(sessionAttributes)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CNRenderingSessionFrameAttributes")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTimedMetadataGroup:sessionAttributes:"), objref.IDOf(metadataGroup), objref.IDOf(sessionAttributes))
 	return renderingSessionFrameAttributesAdopt(_id)
@@ -94,12 +105,14 @@ func (rsfa *RenderingSessionFrameAttributes) WithFNumber(fNumber float32) *Rende
 
 // FocusDisparity returns the disparity value which represents the focus plane at which the rendered image should be in focus. A larger disparity results in the focus plane being closer to the camera. The scale and offset of disparity is not defined. It is best practice to obtain disparity values from detections or by interpolation between known disparity values.
 func (rsfa *RenderingSessionFrameAttributes) FocusDisparity() float32 {
+	defer runtime.KeepAlive(rsfa)
 	_r := objc.Send[float32](objref.IDOf(rsfa), objc.RegisterName("focusDisparity"))
 	return _r
 }
 
 // FNumber returns the f-stop value which inversely affects the aperture used to render the image. A smaller f/ number results in larger bokeh and a shallower depth of field in the rendered image.
 func (rsfa *RenderingSessionFrameAttributes) FNumber() float32 {
+	defer runtime.KeepAlive(rsfa)
 	_r := objc.Send[float32](objref.IDOf(rsfa), objc.RegisterName("fNumber"))
 	return _r
 }

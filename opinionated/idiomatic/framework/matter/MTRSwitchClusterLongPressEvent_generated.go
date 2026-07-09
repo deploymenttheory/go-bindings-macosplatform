@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRSwitchClusterLongPressEventAdopt(id objc.ID) *MTRSwitchClusterLongPressE
 
 // Description returns the object's -description text.
 func (msclpe *MTRSwitchClusterLongPressEvent) Description() string {
+	defer runtime.KeepAlive(msclpe)
 	return rt.Description(objref.IDOf(msclpe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msclpe *MTRSwitchClusterLongPressEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msclpe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msclpe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msclpe *MTRSwitchClusterLongPressEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(msclpe)
 	return rt.IsKind(objref.IDOf(msclpe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msclpe *MTRSwitchClusterLongPressEvent) String() string {
+	defer runtime.KeepAlive(msclpe)
 	return rt.Description(objref.IDOf(msclpe))
 }
 
@@ -72,12 +80,14 @@ func NewMTRSwitchClusterLongPressEvent() *MTRSwitchClusterLongPressEvent {
 
 // WithNewPosition sets the new position.
 func (msclpe *MTRSwitchClusterLongPressEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterLongPressEvent {
+	defer runtime.KeepAlive(newPosition)
 	objc.Send[objc.ID](objref.IDOf(msclpe), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
 	return msclpe
 }
 
 // NewPosition returns the new position.
-func (msclpe *MTRSwitchClusterLongPressEvent) NewPosition() obj.Object {
+func (msclpe *MTRSwitchClusterLongPressEvent) NewPosition() *foundation.Number {
+	defer runtime.KeepAlive(msclpe)
 	_r := objc.Send[objc.ID](objref.IDOf(msclpe), objc.RegisterName("getNewPosition"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

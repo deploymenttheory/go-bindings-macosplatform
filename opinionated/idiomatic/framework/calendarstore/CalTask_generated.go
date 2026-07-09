@@ -5,9 +5,11 @@
 package calendarstore
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -52,8 +54,8 @@ func NewCalTask() *CalTask {
 }
 
 // WithDueDate sets the due date.
-func (ct *CalTask) WithDueDate(dueDate obj.Object) *CalTask {
-	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setDueDate:"), objref.IDOf(dueDate))
+func (ct *CalTask) WithDueDate(dueDate time.Time) *CalTask {
+	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setDueDate:"), rt.TimeToNSDate(dueDate))
 	return ct
 }
 
@@ -70,13 +72,14 @@ func (ct *CalTask) WithIsCompleted(isCompleted bool) *CalTask {
 }
 
 // WithCompletedDate sets the completed date.
-func (ct *CalTask) WithCompletedDate(completedDate obj.Object) *CalTask {
-	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setCompletedDate:"), objref.IDOf(completedDate))
+func (ct *CalTask) WithCompletedDate(completedDate time.Time) *CalTask {
+	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setCompletedDate:"), rt.TimeToNSDate(completedDate))
 	return ct
 }
 
 // WithCalendar sets the calendar.
 func (ct *CalTask) WithCalendar(calendar *CalCalendar) *CalTask {
+	defer runtime.KeepAlive(calendar)
 	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return ct
 }
@@ -100,27 +103,31 @@ func (ct *CalTask) WithTitle(title string) *CalTask {
 }
 
 // DueDate returns the due date.
-func (ct *CalTask) DueDate() obj.Object {
+func (ct *CalTask) DueDate() time.Time {
+	defer runtime.KeepAlive(ct)
 	_r := objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("dueDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Priority returns the priority.
 func (ct *CalTask) Priority() int {
+	defer runtime.KeepAlive(ct)
 	_r := objc.Send[int](objref.IDOf(ct), objc.RegisterName("priority"))
 	return _r
 }
 
 // IsCompleted reports whether the object is completed.
 func (ct *CalTask) IsCompleted() bool {
+	defer runtime.KeepAlive(ct)
 	_r := objc.Send[bool](objref.IDOf(ct), objc.RegisterName("isCompleted"))
 	return _r
 }
 
 // CompletedDate returns the completed date.
-func (ct *CalTask) CompletedDate() obj.Object {
+func (ct *CalTask) CompletedDate() time.Time {
+	defer runtime.KeepAlive(ct)
 	_r := objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("completedDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 var _ CalCalendarItemProvider = (*CalTask)(nil)

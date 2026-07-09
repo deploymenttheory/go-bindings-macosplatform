@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func biologicalSexObjectAdopt(id objc.ID) *BiologicalSexObject {
 
 // Description returns the object's -description text.
 func (bso *BiologicalSexObject) Description() string {
+	defer runtime.KeepAlive(bso)
 	return rt.Description(objref.IDOf(bso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bso *BiologicalSexObject) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bso)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bso *BiologicalSexObject) IsKind(className string) bool {
+	defer runtime.KeepAlive(bso)
 	return rt.IsKind(objref.IDOf(bso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bso *BiologicalSexObject) String() string {
+	defer runtime.KeepAlive(bso)
 	return rt.Description(objref.IDOf(bso))
 }
 
@@ -74,6 +81,7 @@ func NewBiologicalSexObject() *BiologicalSexObject {
 
 // BiologicalSex returns the biological sex.
 func (bso *BiologicalSexObject) BiologicalSex() BiologicalSex {
+	defer runtime.KeepAlive(bso)
 	_r := objc.Send[BiologicalSex](objref.IDOf(bso), objc.RegisterName("biologicalSex"))
 	return _r
 }

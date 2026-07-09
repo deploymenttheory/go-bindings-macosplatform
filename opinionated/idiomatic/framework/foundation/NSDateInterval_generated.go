@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +51,27 @@ func dateIntervalAdopt(id objc.ID) *DateInterval {
 
 // Description returns the object's -description text.
 func (di *DateInterval) Description() string {
+	defer runtime.KeepAlive(di)
 	return rt.Description(objref.IDOf(di))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (di *DateInterval) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(di)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(di), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (di *DateInterval) IsKind(className string) bool {
+	defer runtime.KeepAlive(di)
 	return rt.IsKind(objref.IDOf(di), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (di *DateInterval) String() string {
+	defer runtime.KeepAlive(di)
 	return rt.Description(objref.IDOf(di))
 }
 
@@ -76,22 +83,23 @@ func NewDateInterval() *DateInterval {
 
 // NewDateIntervalWithCoder returns a date interval initialized from data in the given unarchiver.
 func NewDateIntervalWithCoder(coder *Coder) *DateInterval {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDateInterval")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return dateIntervalAdopt(_id)
 }
 
 // NewDateIntervalWithStartDateDuration initializes a date interval with a given start date and duration.
-func NewDateIntervalWithStartDateDuration(startDate *Date, duration float64) *DateInterval {
+func NewDateIntervalWithStartDateDuration(startDate time.Time, duration float64) *DateInterval {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDateInterval")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartDate:duration:"), objref.IDOf(startDate), duration)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartDate:duration:"), rt.TimeToNSDate(startDate), duration)
 	return dateIntervalAdopt(_id)
 }
 
 // NewDateIntervalWithStartDateEndDate initializes a date interval from a given start date and end date.
-func NewDateIntervalWithStartDateEndDate(startDate *Date, endDate *Date) *DateInterval {
+func NewDateIntervalWithStartDateEndDate(startDate time.Time, endDate time.Time) *DateInterval {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDateInterval")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartDate:endDate:"), objref.IDOf(startDate), objref.IDOf(endDate))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartDate:endDate:"), rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate))
 	return dateIntervalAdopt(_id)
 }
 
@@ -102,55 +110,67 @@ func (di *DateInterval) WithObservationInfo(observationInfo unsafe.Pointer) *Dat
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (di *DateInterval) WithScriptingProperties(scriptingProperties obj.Object) *DateInterval {
-	objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (di *DateInterval) WithScriptingProperties(scriptingProperties map[string]obj.Object) *DateInterval {
+	objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return di
 }
 
 // Compare compares the receiver with the specified date interval.
 func (di *DateInterval) Compare(dateInterval *DateInterval) ComparisonResult {
+	defer runtime.KeepAlive(di)
+	defer runtime.KeepAlive(dateInterval)
 	_r := objc.Send[ComparisonResult](objref.IDOf(di), objc.RegisterName("compare:"), objref.IDOf(dateInterval))
 	return _r
 }
 
 // IsEqualToDateInterval indicates whether the receiver is equal to the specified date interval.
 func (di *DateInterval) IsEqualToDateInterval(dateInterval *DateInterval) bool {
+	defer runtime.KeepAlive(di)
+	defer runtime.KeepAlive(dateInterval)
 	_r := objc.Send[bool](objref.IDOf(di), objc.RegisterName("isEqualToDateInterval:"), objref.IDOf(dateInterval))
 	return _r
 }
 
 // IntersectsDateInterval indicates whether the receiver intersects with the specified date interval.
 func (di *DateInterval) IntersectsDateInterval(dateInterval *DateInterval) bool {
+	defer runtime.KeepAlive(di)
+	defer runtime.KeepAlive(dateInterval)
 	_r := objc.Send[bool](objref.IDOf(di), objc.RegisterName("intersectsDateInterval:"), objref.IDOf(dateInterval))
 	return _r
 }
 
-// IntersectionWithDateInterval returns the intersection between the receiver and the specified date interval.
-func (di *DateInterval) IntersectionWithDateInterval(dateInterval *DateInterval) *DateInterval {
+// Intersection returns the intersection between the receiver and the specified date interval.
+func (di *DateInterval) Intersection(dateInterval *DateInterval) *DateInterval {
+	defer runtime.KeepAlive(di)
+	defer runtime.KeepAlive(dateInterval)
 	_r := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("intersectionWithDateInterval:"), objref.IDOf(dateInterval))
 	return DateIntervalFromID(_r)
 }
 
 // ContainsDate indicates whether the receiver contains the specified date.
-func (di *DateInterval) ContainsDate(date *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(di), objc.RegisterName("containsDate:"), objref.IDOf(date))
+func (di *DateInterval) ContainsDate(date time.Time) bool {
+	defer runtime.KeepAlive(di)
+	_r := objc.Send[bool](objref.IDOf(di), objc.RegisterName("containsDate:"), rt.TimeToNSDate(date))
 	return _r
 }
 
 // StartDate returns the start date.
-func (di *DateInterval) StartDate() *Date {
+func (di *DateInterval) StartDate() time.Time {
+	defer runtime.KeepAlive(di)
 	_r := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("startDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // EndDate returns the end date.
-func (di *DateInterval) EndDate() *Date {
+func (di *DateInterval) EndDate() time.Time {
+	defer runtime.KeepAlive(di)
 	_r := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("endDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Duration returns the duration.
 func (di *DateInterval) Duration() float64 {
+	defer runtime.KeepAlive(di)
 	_r := objc.Send[float64](objref.IDOf(di), objc.RegisterName("duration"))
 	return _r
 }

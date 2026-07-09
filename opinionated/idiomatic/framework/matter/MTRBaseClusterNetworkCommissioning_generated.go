@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterNetworkCommissioningAdopt(id objc.ID) *MTRBaseClusterNetworkC
 
 // NewMTRBaseClusterNetworkCommissioningWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterNetworkCommissioningWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterNetworkCommissioning {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterNetworkCommissioning")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterNetworkCommissioningAdopt(_id)
@@ -56,6 +60,8 @@ func NewMTRBaseClusterNetworkCommissioningWithDeviceEndpointIDQueue(device *MTRB
 
 // NewMTRBaseClusterNetworkCommissioningWithDeviceEndpointQueue creates a new MTRBaseClusterNetworkCommissioning.
 func NewMTRBaseClusterNetworkCommissioningWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterNetworkCommissioning {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterNetworkCommissioning")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRBaseClusterNetworkCommissioningAdopt(_id)
@@ -65,6 +71,8 @@ func NewMTRBaseClusterNetworkCommissioningWithDeviceEndpointQueue(device *MTRBas
 //
 // ScanNetworksWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ScanNetworksWithParamsCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterScanNetworksParams) (result *MTRNetworkCommissioningClusterScanNetworksResponseParams, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRNetworkCommissioningClusterScanNetworksResponseParams
 		err error
@@ -90,6 +98,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ScanNetworksWithParamsCompletio
 //
 // ScanNetworksWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ScanNetworksWithCompletion(ctx context.Context) (result *MTRNetworkCommissioningClusterScanNetworksResponseParams, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val *MTRNetworkCommissioningClusterScanNetworksResponseParams
 		err error
@@ -115,6 +124,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ScanNetworksWithCompletion(ctx 
 //
 // AddOrUpdateWiFiNetworkWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParamsCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRNetworkCommissioningClusterNetworkConfigResponseParams
 		err error
@@ -140,6 +151,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParam
 //
 // AddOrUpdateThreadNetworkWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParamsCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRNetworkCommissioningClusterNetworkConfigResponseParams
 		err error
@@ -165,6 +178,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithPar
 //
 // RemoveNetworkWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) RemoveNetworkWithParamsCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterRemoveNetworkParams) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRNetworkCommissioningClusterNetworkConfigResponseParams
 		err error
@@ -190,6 +205,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) RemoveNetworkWithParamsCompleti
 //
 // ConnectNetworkWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ConnectNetworkWithParamsCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterConnectNetworkParams) (result *MTRNetworkCommissioningClusterConnectNetworkResponseParams, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRNetworkCommissioningClusterConnectNetworkResponseParams
 		err error
@@ -215,6 +232,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ConnectNetworkWithParamsComplet
 //
 // ReorderNetworkWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReorderNetworkWithParamsCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterReorderNetworkParams) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRNetworkCommissioningClusterNetworkConfigResponseParams
 		err error
@@ -240,6 +259,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReorderNetworkWithParamsComplet
 //
 // ReadAttributeMaxNetworksWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeMaxNetworksWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -265,6 +285,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeMaxNetworksWithCom
 //
 // SubscribeAttributeMaxNetworksWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeMaxNetworksWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -290,6 +312,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeMaxNetworksWi
 //
 // ReadAttributeNetworksWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeNetworksWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -315,6 +338,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeNetworksWithComple
 //
 // SubscribeAttributeNetworksWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeNetworksWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -340,6 +365,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeNetworksWithP
 //
 // ReadAttributeScanMaxTimeSecondsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeScanMaxTimeSecondsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -365,6 +391,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeScanMaxTimeSeconds
 //
 // SubscribeAttributeScanMaxTimeSecondsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeScanMaxTimeSecondsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -390,6 +418,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeScanMaxTimeSe
 //
 // ReadAttributeConnectMaxTimeSecondsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeConnectMaxTimeSecondsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -415,6 +444,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeConnectMaxTimeSeco
 //
 // SubscribeAttributeConnectMaxTimeSecondsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeConnectMaxTimeSecondsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -440,6 +471,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeConnectMaxTim
 //
 // ReadAttributeInterfaceEnabledWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeInterfaceEnabledWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,6 +497,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeInterfaceEnabledWi
 //
 // SubscribeAttributeInterfaceEnabledWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeInterfaceEnabledWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -490,6 +524,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeInterfaceEnab
 //
 // ReadAttributeLastNetworkingStatusWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeLastNetworkingStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -515,6 +550,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeLastNetworkingStat
 //
 // SubscribeAttributeLastNetworkingStatusWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeLastNetworkingStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -540,6 +577,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeLastNetworkin
 //
 // ReadAttributeLastNetworkIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeLastNetworkIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -565,6 +603,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeLastNetworkIDWithC
 //
 // SubscribeAttributeLastNetworkIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeLastNetworkIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -590,6 +630,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeLastNetworkID
 //
 // ReadAttributeLastConnectErrorValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeLastConnectErrorValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -615,6 +656,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeLastConnectErrorVa
 //
 // SubscribeAttributeLastConnectErrorValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeLastConnectErrorValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -640,6 +683,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeLastConnectEr
 //
 // ReadAttributeSupportedWiFiBandsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeSupportedWiFiBandsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -665,6 +709,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeSupportedWiFiBands
 //
 // SubscribeAttributeSupportedWiFiBandsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeSupportedWiFiBandsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -690,6 +736,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeSupportedWiFi
 //
 // ReadAttributeSupportedThreadFeaturesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeSupportedThreadFeaturesWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -715,6 +762,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeSupportedThreadFea
 //
 // SubscribeAttributeSupportedThreadFeaturesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeSupportedThreadFeaturesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -740,6 +789,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeSupportedThre
 //
 // ReadAttributeThreadVersionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeThreadVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -765,6 +815,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeThreadVersionWithC
 //
 // SubscribeAttributeThreadVersionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeThreadVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -790,6 +842,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeThreadVersion
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -815,6 +868,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeGeneratedCommandLi
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -840,6 +895,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeGeneratedComm
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -865,6 +921,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeAcceptedCommandLis
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -890,6 +948,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeAcceptedComma
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -915,6 +974,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeAttributeListWithC
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -940,6 +1001,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeAttributeList
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -965,6 +1027,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeFeatureMapWithComp
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -990,6 +1054,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeFeatureMapWit
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1015,6 +1080,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeClusterRevisionWit
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,6 +1107,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeClusterRevisi
 //
 // ScanNetworksWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ScanNetworksWithParams(ctx context.Context, params *MTRNetworkCommissioningClusterScanNetworksParams) (result *MTRNetworkCommissioningClusterScanNetworksResponseParams, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRNetworkCommissioningClusterScanNetworksResponseParams
 		err error
@@ -1065,6 +1134,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ScanNetworksWithParams(ctx cont
 //
 // AddOrUpdateWiFiNetworkWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParams(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRNetworkCommissioningClusterNetworkConfigResponseParams
 		err error
@@ -1090,6 +1161,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParam
 //
 // AddOrUpdateThreadNetworkWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParams(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRNetworkCommissioningClusterNetworkConfigResponseParams
 		err error
@@ -1115,6 +1188,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithPar
 //
 // RemoveNetworkWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) RemoveNetworkWithParams(ctx context.Context, params *MTRNetworkCommissioningClusterRemoveNetworkParams) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRNetworkCommissioningClusterNetworkConfigResponseParams
 		err error
@@ -1140,6 +1215,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) RemoveNetworkWithParams(ctx con
 //
 // ConnectNetworkWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ConnectNetworkWithParams(ctx context.Context, params *MTRNetworkCommissioningClusterConnectNetworkParams) (result *MTRNetworkCommissioningClusterConnectNetworkResponseParams, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRNetworkCommissioningClusterConnectNetworkResponseParams
 		err error
@@ -1165,6 +1242,8 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ConnectNetworkWithParams(ctx co
 //
 // ReorderNetworkWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReorderNetworkWithParams(ctx context.Context, params *MTRNetworkCommissioningClusterReorderNetworkParams) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRNetworkCommissioningClusterNetworkConfigResponseParams
 		err error
@@ -1190,6 +1269,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReorderNetworkWithParams(ctx co
 //
 // ReadAttributeMaxNetworks blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeMaxNetworks(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1215,6 +1295,10 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeMaxNetworks(ctx co
 //
 // SubscribeAttributeMaxNetworksWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeMaxNetworksWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1240,6 +1324,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeMaxNetworksWi
 //
 // ReadAttributeNetworks blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeNetworks(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1265,6 +1350,10 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeNetworks(ctx conte
 //
 // SubscribeAttributeNetworksWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeNetworksWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1290,6 +1379,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeNetworksWithM
 //
 // ReadAttributeScanMaxTimeSeconds blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeScanMaxTimeSeconds(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1315,6 +1405,10 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeScanMaxTimeSeconds
 //
 // SubscribeAttributeScanMaxTimeSecondsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeScanMaxTimeSecondsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1340,6 +1434,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeScanMaxTimeSe
 //
 // ReadAttributeConnectMaxTimeSeconds blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeConnectMaxTimeSeconds(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1365,6 +1460,10 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeConnectMaxTimeSeco
 //
 // SubscribeAttributeConnectMaxTimeSecondsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeConnectMaxTimeSecondsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1390,6 +1489,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeConnectMaxTim
 //
 // ReadAttributeInterfaceEnabled blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeInterfaceEnabled(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1415,6 +1515,10 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeInterfaceEnabled(c
 //
 // SubscribeAttributeInterfaceEnabledWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeInterfaceEnabledWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1440,6 +1544,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeInterfaceEnab
 //
 // ReadAttributeLastNetworkingStatus blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeLastNetworkingStatus(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1465,6 +1570,10 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeLastNetworkingStat
 //
 // SubscribeAttributeLastNetworkingStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeLastNetworkingStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1490,6 +1599,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeLastNetworkin
 //
 // ReadAttributeLastNetworkID blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeLastNetworkID(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1515,6 +1625,10 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeLastNetworkID(ctx 
 //
 // SubscribeAttributeLastNetworkIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeLastNetworkIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1540,6 +1654,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeLastNetworkID
 //
 // ReadAttributeLastConnectErrorValue blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeLastConnectErrorValue(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1565,6 +1680,10 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeLastConnectErrorVa
 //
 // SubscribeAttributeLastConnectErrorValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeLastConnectErrorValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1590,6 +1709,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeLastConnectEr
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1615,6 +1735,10 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeGeneratedCommandLi
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1640,6 +1764,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeGeneratedComm
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1665,6 +1790,10 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeAcceptedCommandLis
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1690,6 +1819,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeAcceptedComma
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1715,6 +1845,10 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeAttributeList(ctx 
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1740,6 +1874,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeAttributeList
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1765,6 +1900,10 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeFeatureMap(ctx con
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1790,6 +1929,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeFeatureMapWit
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1815,6 +1955,10 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeClusterRevision(ct
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcnc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

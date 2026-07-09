@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -69,6 +71,7 @@ func (cprc *ChangePlaybackRateCommand) WithEnabled(enabled bool) *ChangePlayback
 //
 // SupportedPlaybackRates returns the collection as a Go slice.
 func (cprc *ChangePlaybackRateCommand) SupportedPlaybackRates() []obj.Object {
+	defer runtime.KeepAlive(cprc)
 	_arr := objc.Send[objc.ID](objref.IDOf(cprc), objc.RegisterName("supportedPlaybackRates"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

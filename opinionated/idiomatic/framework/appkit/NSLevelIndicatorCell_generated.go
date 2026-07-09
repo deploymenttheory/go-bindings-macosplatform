@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -126,6 +128,7 @@ func (lic *LevelIndicatorCell) WithNumberOfMajorTickMarks(numberOfMajorTickMarks
 
 // WithControlView sets the view associated with the cell.
 func (lic *LevelIndicatorCell) WithControlView(controlView ViewProvider) *LevelIndicatorCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -150,6 +153,7 @@ func (lic *LevelIndicatorCell) WithState(state int) *LevelIndicatorCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (lic *LevelIndicatorCell) WithTarget(target obj.Object) *LevelIndicatorCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -254,6 +258,7 @@ func (lic *LevelIndicatorCell) WithWraps(wraps bool) *LevelIndicatorCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (lic *LevelIndicatorCell) WithFont(font *Font) *LevelIndicatorCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -262,6 +267,7 @@ func (lic *LevelIndicatorCell) WithFont(font *Font) *LevelIndicatorCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (lic *LevelIndicatorCell) WithFormatter(formatter obj.Object) *LevelIndicatorCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -270,6 +276,7 @@ func (lic *LevelIndicatorCell) WithFormatter(formatter obj.Object) *LevelIndicat
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (lic *LevelIndicatorCell) WithObjectValue(objectValue obj.Object) *LevelIndicatorCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -318,6 +325,7 @@ func (lic *LevelIndicatorCell) WithIntegerValue(integerValue int) *LevelIndicato
 
 // WithImage sets the image displayed by the cell, if any.
 func (lic *LevelIndicatorCell) WithImage(image *Image) *LevelIndicatorCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -334,6 +342,7 @@ func (lic *LevelIndicatorCell) WithControlSize(controlSize ControlSize) *LevelIn
 
 // WithRepresentedObject sets the object represented by the cell.
 func (lic *LevelIndicatorCell) WithRepresentedObject(representedObject obj.Object) *LevelIndicatorCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -342,6 +351,7 @@ func (lic *LevelIndicatorCell) WithRepresentedObject(representedObject obj.Objec
 
 // WithMenu sets the cell’s contextual menu.
 func (lic *LevelIndicatorCell) WithMenu(menu *Menu) *LevelIndicatorCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -430,6 +440,7 @@ func (lic *LevelIndicatorCell) WithFocusRingType(focusRingType FocusRingType) *L
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (lic *LevelIndicatorCell) WithAttributedStringValue(attributedStringValue obj.Object) *LevelIndicatorCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -478,6 +489,7 @@ func (lic *LevelIndicatorCell) WithControlTint(controlTint ControlTint) *LevelIn
 
 // RectOfTickMarkAtIndex returns the bounding rectangle of the tick mark identified by index (the minimum-value tick mark is at index 0).
 func (lic *LevelIndicatorCell) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
+	defer runtime.KeepAlive(lic)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -491,6 +503,7 @@ func (lic *LevelIndicatorCell) RectOfTickMarkAtIndex(index int) corefoundation.C
 
 // TickMarkValueAtIndex returns the receiver’s value represented by the tick mark at index (the minimum-value tick mark has an index of 0).
 func (lic *LevelIndicatorCell) TickMarkValueAtIndex(index int) float64 {
+	defer runtime.KeepAlive(lic)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -504,6 +517,7 @@ func (lic *LevelIndicatorCell) TickMarkValueAtIndex(index int) float64 {
 
 // LevelIndicatorStyle returns the level indicator style.
 func (lic *LevelIndicatorCell) LevelIndicatorStyle() LevelIndicatorStyle {
+	defer runtime.KeepAlive(lic)
 	var _mainthread0 LevelIndicatorStyle
 	purego.Main(func() {
 		_mainthread0 = func() LevelIndicatorStyle {
@@ -517,6 +531,7 @@ func (lic *LevelIndicatorCell) LevelIndicatorStyle() LevelIndicatorStyle {
 
 // MinValue returns the min value.
 func (lic *LevelIndicatorCell) MinValue() float64 {
+	defer runtime.KeepAlive(lic)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -530,6 +545,7 @@ func (lic *LevelIndicatorCell) MinValue() float64 {
 
 // MaxValue returns the max value.
 func (lic *LevelIndicatorCell) MaxValue() float64 {
+	defer runtime.KeepAlive(lic)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -543,6 +559,7 @@ func (lic *LevelIndicatorCell) MaxValue() float64 {
 
 // WarningValue returns the warning value.
 func (lic *LevelIndicatorCell) WarningValue() float64 {
+	defer runtime.KeepAlive(lic)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -556,6 +573,7 @@ func (lic *LevelIndicatorCell) WarningValue() float64 {
 
 // CriticalValue returns the critical value.
 func (lic *LevelIndicatorCell) CriticalValue() float64 {
+	defer runtime.KeepAlive(lic)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -569,6 +587,7 @@ func (lic *LevelIndicatorCell) CriticalValue() float64 {
 
 // TickMarkPosition returns the tick mark position.
 func (lic *LevelIndicatorCell) TickMarkPosition() TickMarkPosition {
+	defer runtime.KeepAlive(lic)
 	var _mainthread0 TickMarkPosition
 	purego.Main(func() {
 		_mainthread0 = func() TickMarkPosition {
@@ -582,6 +601,7 @@ func (lic *LevelIndicatorCell) TickMarkPosition() TickMarkPosition {
 
 // NumberOfTickMarks returns the number of tick marks.
 func (lic *LevelIndicatorCell) NumberOfTickMarks() int {
+	defer runtime.KeepAlive(lic)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -595,6 +615,7 @@ func (lic *LevelIndicatorCell) NumberOfTickMarks() int {
 
 // NumberOfMajorTickMarks returns the number of major tick marks.
 func (lic *LevelIndicatorCell) NumberOfMajorTickMarks() int {
+	defer runtime.KeepAlive(lic)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {

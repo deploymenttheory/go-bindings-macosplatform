@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -159,12 +161,14 @@ func (dle *DOMHTMLLegendElement) WithTextContent(textContent string) *DOMHTMLLeg
 
 // Form returns the form.
 func (dle *DOMHTMLLegendElement) Form() *DOMHTMLFormElement {
+	defer runtime.KeepAlive(dle)
 	_r := objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("form"))
 	return DOMHTMLFormElementFromID(_r)
 }
 
 // Align returns the align.
 func (dle *DOMHTMLLegendElement) Align() string {
+	defer runtime.KeepAlive(dle)
 	_r := objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""

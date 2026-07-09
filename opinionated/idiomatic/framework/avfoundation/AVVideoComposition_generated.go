@@ -5,9 +5,12 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -51,57 +54,68 @@ func videoCompositionAdopt(id objc.ID) *VideoComposition {
 
 // Description returns the object's -description text.
 func (vc *VideoComposition) Description() string {
+	defer runtime.KeepAlive(vc)
 	return rt.Description(objref.IDOf(vc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vc *VideoComposition) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vc *VideoComposition) IsKind(className string) bool {
+	defer runtime.KeepAlive(vc)
 	return rt.IsKind(objref.IDOf(vc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vc *VideoComposition) String() string {
+	defer runtime.KeepAlive(vc)
 	return rt.Description(objref.IDOf(vc))
 }
 
 // FrameDuration indicates the interval which the video composition, when enabled, should render composed video frames
 func (vc *VideoComposition) FrameDuration() coremedia.CMTime {
+	defer runtime.KeepAlive(vc)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(vc), objc.RegisterName("frameDuration"))
 	return _r
 }
 
 // SourceTrackIDForFrameTiming returns if sourceTrackIDForFrameTiming is not kCMPersistentTrackID_Invalid, frame timing for the video composition is derived from the source asset's track with the corresponding ID. This may be used to preserve a source asset's variable frame timing. If an empty edit is encountered in the source asset’s track, the compositor composes frames as needed up to the frequency specified in frameDuration property. */
 func (vc *VideoComposition) SourceTrackIDForFrameTiming() int32 {
+	defer runtime.KeepAlive(vc)
 	_r := objc.Send[int32](objref.IDOf(vc), objc.RegisterName("sourceTrackIDForFrameTiming"))
 	return _r
 }
 
 // RenderSize indicates the size at which the video composition, when enabled, should render
 func (vc *VideoComposition) RenderSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(vc)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(vc), objc.RegisterName("renderSize"))
 	return _r
 }
 
 // RenderScale indicates the scale at which the video composition should render. May only be other than 1.0 for a video composition set on an AVPlayerItem
 func (vc *VideoComposition) RenderScale() float32 {
+	defer runtime.KeepAlive(vc)
 	_r := objc.Send[float32](objref.IDOf(vc), objc.RegisterName("renderScale"))
 	return _r
 }
 
 // Instructions indicates instructions for video composition via an NSArray of instances of classes implementing the AVVideoCompositionInstruction protocol. For the first instruction in the array, timeRange.start must be less than or equal to the earliest time for which playback or other processing will be attempted (note that this will typically be kCMTimeZero). For subsequent instructions, timeRange.start must be equal to the prior instruction's end time. The end time of the last instruction must be greater than or equal to the latest time for which playback or other processing will be attempted (note that this will often be the duration of the asset with which the instance of AVVideoComposition is associated).
 func (vc *VideoComposition) Instructions() []obj.Object {
+	defer runtime.KeepAlive(vc)
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("instructions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AnimationTool indicates a special video composition tool for use of Core Animation; may be nil
 func (vc *VideoComposition) AnimationTool() *VideoCompositionCoreAnimationTool {
+	defer runtime.KeepAlive(vc)
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("animationTool"))
 	return VideoCompositionCoreAnimationToolFromID(_r)
 }
@@ -110,12 +124,14 @@ func (vc *VideoComposition) AnimationTool() *VideoCompositionCoreAnimationTool {
 //
 // SourceSampleDataTrackIDs returns the collection as a Go slice.
 func (vc *VideoComposition) SourceSampleDataTrackIDs() []obj.Object {
+	defer runtime.KeepAlive(vc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("sourceSampleDataTrackIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // OutputBufferDescription returns the output buffers of the video composition can be specified with the outputBufferDescription. The value is an array of CMTagCollectionRef objects that describes the output buffers. If the video composition will output tagged buffers, the details of those buffers should be specified with CMTags. Specifically, the StereoView (eyes) and ProjectionKind must be specified. The behavior is undefined if the output tagged buffers do not match the outputBufferDescription. The default is nil, which means monoscopic output. Note that an empty array is not valid. An exception will be thrown if the objects in the array are not of type CMTagCollectionRef. Note that tagged buffers are only supported for custom compositors.
 func (vc *VideoComposition) OutputBufferDescription() obj.Object {
+	defer runtime.KeepAlive(vc)
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("outputBufferDescription"))
 	return obj.Wrap(_r)
 }
@@ -124,12 +140,14 @@ func (vc *VideoComposition) OutputBufferDescription() obj.Object {
 //
 // SpatialVideoConfigurations returns the collection as a Go slice.
 func (vc *VideoComposition) SpatialVideoConfigurations() []*SpatialVideoConfiguration {
+	defer runtime.KeepAlive(vc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("spatialVideoConfigurations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SpatialVideoConfiguration { return SpatialVideoConfigurationFromID(_id) })
 }
 
 // ColorPrimaries returns rendering will use these primaries and frames will be tagged as such. If the value of this property is nil then the source's primaries will be propagated and used. Default is nil. Valid values are those suitable for AVVideoColorPrimariesKey. Generally set as a triple along with colorYCbCrMatrix and colorTransferFunction.
 func (vc *VideoComposition) ColorPrimaries() string {
+	defer runtime.KeepAlive(vc)
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("colorPrimaries"))
 	if _r == 0 {
 		return ""
@@ -139,6 +157,7 @@ func (vc *VideoComposition) ColorPrimaries() string {
 
 // ColorYCbCrMatrix returns rendering will use this matrix and frames will be tagged as such. If the value of this property is nil then the source's matrix will be propagated and used. Default is nil. Valid values are those suitable for AVVideoYCbCrMatrixKey. Generally set as a triple along with colorPrimaries and colorTransferFunction.
 func (vc *VideoComposition) ColorYCbCrMatrix() string {
+	defer runtime.KeepAlive(vc)
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("colorYCbCrMatrix"))
 	if _r == 0 {
 		return ""
@@ -148,6 +167,7 @@ func (vc *VideoComposition) ColorYCbCrMatrix() string {
 
 // ColorTransferFunction returns rendering will use this transfer function and frames will be tagged as such. If the value of this property is nil then the source's transfer function will be propagated and used. Default is nil. Valid values are those suitable for AVVideoTransferFunctionKey. Generally set as a triple along with colorYCbCrMatrix and colorYCbCrMatrix.
 func (vc *VideoComposition) ColorTransferFunction() string {
+	defer runtime.KeepAlive(vc)
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("colorTransferFunction"))
 	if _r == 0 {
 		return ""
@@ -156,9 +176,10 @@ func (vc *VideoComposition) ColorTransferFunction() string {
 }
 
 // PerFrameHDRDisplayMetadataPolicy returns configures policy for per frame HDR display metadata on the rendered frame Allows the system to identify situations where HDR metadata can be generated and attached to the rendered video frame. Default is AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate. Any HDR metadata attached to the composed frame will be propagated to the rendered video frames.
-func (vc *VideoComposition) PerFrameHDRDisplayMetadataPolicy() obj.Object {
+func (vc *VideoComposition) PerFrameHDRDisplayMetadataPolicy() *foundation.String {
+	defer runtime.KeepAlive(vc)
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("perFrameHDRDisplayMetadataPolicy"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // isVideoComposition marks VideoComposition — and, by embedding promotion, its

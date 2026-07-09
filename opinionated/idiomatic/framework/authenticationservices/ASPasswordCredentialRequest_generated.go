@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func passwordCredentialRequestAdopt(id objc.ID) *PasswordCredentialRequest {
 
 // Description returns the object's -description text.
 func (pcr *PasswordCredentialRequest) Description() string {
+	defer runtime.KeepAlive(pcr)
 	return rt.Description(objref.IDOf(pcr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pcr *PasswordCredentialRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pcr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pcr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pcr *PasswordCredentialRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(pcr)
 	return rt.IsKind(objref.IDOf(pcr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pcr *PasswordCredentialRequest) String() string {
+	defer runtime.KeepAlive(pcr)
 	return rt.Description(objref.IDOf(pcr))
 }
 
 // NewPasswordCredentialRequestWithCredentialIdentity initializes a password credential request object.
 func NewPasswordCredentialRequestWithCredentialIdentity(credentialIdentity *PasswordCredentialIdentity) *PasswordCredentialRequest {
+	defer runtime.KeepAlive(credentialIdentity)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasswordCredentialRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialIdentity:"), objref.IDOf(credentialIdentity))
 	return passwordCredentialRequestAdopt(_id)

@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -70,6 +72,7 @@ func (tii *TextInsertionIndicator) WithDisplayMode(displayMode TextInsertionIndi
 
 // WithColor sets the color of this indicator.
 func (tii *TextInsertionIndicator) WithColor(color *Color) *TextInsertionIndicator {
+	defer runtime.KeepAlive(color)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setColor:"), objref.IDOf(color))
 	})
@@ -231,6 +234,7 @@ func (tii *TextInsertionIndicator) WithWantsLayer(wantsLayer bool) *TextInsertio
 
 // WithLayer sets the layer.
 func (tii *TextInsertionIndicator) WithLayer(layer obj.Object) *TextInsertionIndicator {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -280,6 +284,7 @@ func (tii *TextInsertionIndicator) WithBackgroundFilters(items ...obj.Object) *T
 
 // WithCompositingFilter sets the compositing filter.
 func (tii *TextInsertionIndicator) WithCompositingFilter(compositingFilter obj.Object) *TextInsertionIndicator {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -297,6 +302,7 @@ func (tii *TextInsertionIndicator) WithContentFilters(items ...obj.Object) *Text
 
 // WithShadow sets the shadow.
 func (tii *TextInsertionIndicator) WithShadow(shadow *Shadow) *TextInsertionIndicator {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -345,6 +351,7 @@ func (tii *TextInsertionIndicator) WithPreparedContentRect(preparedContentRect c
 
 // WithNextKeyView sets the next key view.
 func (tii *TextInsertionIndicator) WithNextKeyView(nextKeyView ViewProvider) *TextInsertionIndicator {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -394,6 +401,7 @@ func (tii *TextInsertionIndicator) WithPrefersCompactControlSizeMetrics(prefersC
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (tii *TextInsertionIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextInsertionIndicator {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -450,6 +458,7 @@ func (tii *TextInsertionIndicator) WithWantsExtendedDynamicRangeOpenGLSurface(wa
 
 // WithPressureConfiguration sets the pressure configuration.
 func (tii *TextInsertionIndicator) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TextInsertionIndicator {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -458,6 +467,7 @@ func (tii *TextInsertionIndicator) WithPressureConfiguration(pressureConfigurati
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (tii *TextInsertionIndicator) WithNextResponder(nextResponder ResponderProvider) *TextInsertionIndicator {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -466,6 +476,7 @@ func (tii *TextInsertionIndicator) WithNextResponder(nextResponder ResponderProv
 
 // WithMenu sets returns the responder’s menu.
 func (tii *TextInsertionIndicator) WithMenu(menu *Menu) *TextInsertionIndicator {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -474,6 +485,7 @@ func (tii *TextInsertionIndicator) WithMenu(menu *Menu) *TextInsertionIndicator 
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (tii *TextInsertionIndicator) WithUserActivity(userActivity obj.Object) *TextInsertionIndicator {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -482,6 +494,7 @@ func (tii *TextInsertionIndicator) WithUserActivity(userActivity obj.Object) *Te
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (tii *TextInsertionIndicator) WithTouchBar(touchBar *TouchBar) *TextInsertionIndicator {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -490,6 +503,7 @@ func (tii *TextInsertionIndicator) WithTouchBar(touchBar *TouchBar) *TextInserti
 
 // DisplayMode returns sets-returns the indicator's display mode.
 func (tii *TextInsertionIndicator) DisplayMode() TextInsertionIndicatorDisplayMode {
+	defer runtime.KeepAlive(tii)
 	var _mainthread0 TextInsertionIndicatorDisplayMode
 	purego.Main(func() {
 		_mainthread0 = func() TextInsertionIndicatorDisplayMode {
@@ -503,6 +517,7 @@ func (tii *TextInsertionIndicator) DisplayMode() TextInsertionIndicatorDisplayMo
 
 // Color returns the color of the indicator. Defaults to NSColor.textInsertionPointColor.
 func (tii *TextInsertionIndicator) Color() *Color {
+	defer runtime.KeepAlive(tii)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -516,6 +531,7 @@ func (tii *TextInsertionIndicator) Color() *Color {
 
 // AutomaticModeOptions returns options for the NSTextInsertionIndicatorDisplayModeAutomatic display mode. Defaults to NSTextInsertionIndicatorAutomaticModeOptionsShowEffectsView.
 func (tii *TextInsertionIndicator) AutomaticModeOptions() TextInsertionIndicatorAutomaticModeOptions {
+	defer runtime.KeepAlive(tii)
 	var _mainthread0 TextInsertionIndicatorAutomaticModeOptions
 	purego.Main(func() {
 		_mainthread0 = func() TextInsertionIndicatorAutomaticModeOptions {

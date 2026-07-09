@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func pipelineBufferDescriptorAdopt(id objc.ID) *PipelineBufferDescriptor {
 
 // Description returns the object's -description text.
 func (pbd *PipelineBufferDescriptor) Description() string {
+	defer runtime.KeepAlive(pbd)
 	return rt.Description(objref.IDOf(pbd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pbd *PipelineBufferDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pbd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pbd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pbd *PipelineBufferDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(pbd)
 	return rt.IsKind(objref.IDOf(pbd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pbd *PipelineBufferDescriptor) String() string {
+	defer runtime.KeepAlive(pbd)
 	return rt.Description(objref.IDOf(pbd))
 }
 
@@ -80,6 +87,7 @@ func (pbd *PipelineBufferDescriptor) WithMutability(mutability Mutability) *Pipe
 
 // Mutability returns the mutability.
 func (pbd *PipelineBufferDescriptor) Mutability() Mutability {
+	defer runtime.KeepAlive(pbd)
 	_r := objc.Send[Mutability](objref.IDOf(pbd), objc.RegisterName("mutability"))
 	return _r
 }

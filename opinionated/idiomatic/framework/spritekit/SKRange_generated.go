@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func rangeAdopt(id objc.ID) *Range {
 
 // Description returns the object's -description text.
 func (r *Range) Description() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (r *Range) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (r *Range) IsKind(className string) bool {
+	defer runtime.KeepAlive(r)
 	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (r *Range) String() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
@@ -87,12 +94,14 @@ func (r *Range) WithUpperLimit(upperLimit float64) *Range {
 
 // LowerLimit returns the lower limit.
 func (r *Range) LowerLimit() float64 {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[float64](objref.IDOf(r), objc.RegisterName("lowerLimit"))
 	return _r
 }
 
 // UpperLimit returns the upper limit.
 func (r *Range) UpperLimit() float64 {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[float64](objref.IDOf(r), objc.RegisterName("upperLimit"))
 	return _r
 }

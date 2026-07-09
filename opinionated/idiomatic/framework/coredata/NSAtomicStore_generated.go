@@ -5,6 +5,7 @@
 package coredata
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -52,14 +53,16 @@ func atomicStoreAdopt(id objc.ID) *AtomicStore {
 
 // NewAtomicStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions creates an atomic store at the specified location.
 func NewAtomicStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions(coordinator *PersistentStoreCoordinator, configurationName string, url string, options obj.Object) *AtomicStore {
+	defer runtime.KeepAlive(coordinator)
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAtomicStore")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersistentStoreCoordinator:configurationName:URL:options:"), objref.IDOf(coordinator), purego.NSString(configurationName), rt.FileURL(url), objref.IDOf(options))
 	return atomicStoreAdopt(_id)
 }
 
 // WithURL sets the URL for the persistent store.
-func (as *AtomicStore) WithURL(uRL string) *AtomicStore {
-	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (as *AtomicStore) WithURL(url string) *AtomicStore {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return as
 }
 
@@ -76,8 +79,8 @@ func (as *AtomicStore) WithReadOnly(readOnly bool) *AtomicStore {
 }
 
 // WithMetadata sets the metadata for the persistent store.
-func (as *AtomicStore) WithMetadata(metadata obj.Object) *AtomicStore {
-	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setMetadata:"), objref.IDOf(metadata))
+func (as *AtomicStore) WithMetadata(metadata map[string]obj.Object) *AtomicStore {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setMetadata:"), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return as
 }
 
@@ -85,6 +88,7 @@ func (as *AtomicStore) WithMetadata(metadata obj.Object) *AtomicStore {
 //
 // Load returns an error if the operation did not succeed.
 func (as *AtomicStore) Load() error {
+	defer runtime.KeepAlive(as)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(as), objc.RegisterName("load:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -97,6 +101,7 @@ func (as *AtomicStore) Load() error {
 //
 // Save returns an error if the operation did not succeed.
 func (as *AtomicStore) Save() error {
+	defer runtime.KeepAlive(as)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(as), objc.RegisterName("save:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -107,51 +112,69 @@ func (as *AtomicStore) Save() error {
 
 // NewCacheNodeForManagedObject returns a new cache node for a given managed object.
 func (as *AtomicStore) NewCacheNodeForManagedObject(managedObject *ManagedObject) *AtomicStoreCacheNode {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(managedObject)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("newCacheNodeForManagedObject:"), objref.IDOf(managedObject))
 	return AtomicStoreCacheNodeFromID(_r)
 }
 
 // UpdateCacheNodeFromManagedObject updates the given cache node using the values in a given managed object.
 func (as *AtomicStore) UpdateCacheNodeFromManagedObject(node *AtomicStoreCacheNode, managedObject *ManagedObject) {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(managedObject)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("updateCacheNode:fromManagedObject:"), objref.IDOf(node), objref.IDOf(managedObject))
 }
 
 // CacheNodes returns the set of cache nodes registered with the receiver.
-func (as *AtomicStore) CacheNodes() obj.Object {
+// The order of the returned elements is unspecified.
+func (as *AtomicStore) CacheNodes() []*AtomicStoreCacheNode {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("cacheNodes"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *AtomicStoreCacheNode { return AtomicStoreCacheNodeFromID(_id) })
 }
 
 // AddCacheNodes registers a set of cache nodes with the receiver.
-func (as *AtomicStore) AddCacheNodes(cacheNodes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("addCacheNodes:"), objref.IDOf(cacheNodes))
+func (as *AtomicStore) AddCacheNodes(cacheNodes []*AtomicStoreCacheNode) {
+	defer runtime.KeepAlive(as)
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("addCacheNodes:"), rt.SliceToNSSet(cacheNodes, func(_v *AtomicStoreCacheNode) objc.ID { return objref.IDOf(_v) }))
 }
 
 // WillRemoveCacheNodes method invoked before the store removes the given collection of cache nodes.
-func (as *AtomicStore) WillRemoveCacheNodes(cacheNodes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("willRemoveCacheNodes:"), objref.IDOf(cacheNodes))
+func (as *AtomicStore) WillRemoveCacheNodes(cacheNodes []*AtomicStoreCacheNode) {
+	defer runtime.KeepAlive(as)
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("willRemoveCacheNodes:"), rt.SliceToNSSet(cacheNodes, func(_v *AtomicStoreCacheNode) objc.ID { return objref.IDOf(_v) }))
 }
 
 // CacheNodeForObjectID returns the cache node for a given managed object ID.
 func (as *AtomicStore) CacheNodeForObjectID(objectID *ManagedObjectID) *AtomicStoreCacheNode {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(objectID)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("cacheNodeForObjectID:"), objref.IDOf(objectID))
 	return AtomicStoreCacheNodeFromID(_r)
 }
 
 // ObjectIDForEntityReferenceObject returns a managed object ID from the reference data for a specified entity.
 func (as *AtomicStore) ObjectIDForEntityReferenceObject(entity *EntityDescription, data obj.Object) *ManagedObjectID {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(entity)
+	defer runtime.KeepAlive(data)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("objectIDForEntity:referenceObject:"), objref.IDOf(entity), objref.IDOf(data))
 	return ManagedObjectIDFromID(_r)
 }
 
 // NewReferenceObjectForManagedObject returns a new reference object for a given managed object.
 func (as *AtomicStore) NewReferenceObjectForManagedObject(managedObject *ManagedObject) obj.Object {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(managedObject)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("newReferenceObjectForManagedObject:"), objref.IDOf(managedObject))
 	return obj.Wrap(_r)
 }
 
 // ReferenceObjectForObjectID returns the reference object for a given managed object ID.
 func (as *AtomicStore) ReferenceObjectForObjectID(objectID *ManagedObjectID) obj.Object {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(objectID)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("referenceObjectForObjectID:"), objref.IDOf(objectID))
 	return obj.Wrap(_r)
 }

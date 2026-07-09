@@ -5,10 +5,12 @@
 package imagecapturecore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -120,19 +122,22 @@ func (sfuf *ScannerFunctionalUnitFlatbed) WithOverviewResolution(overviewResolut
 }
 
 // SupportedDocumentTypes returns ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
-func (sfuf *ScannerFunctionalUnitFlatbed) SupportedDocumentTypes() obj.Object {
+func (sfuf *ScannerFunctionalUnitFlatbed) SupportedDocumentTypes() *foundation.IndexSet {
+	defer runtime.KeepAlive(sfuf)
 	_r := objc.Send[objc.ID](objref.IDOf(sfuf), objc.RegisterName("supportedDocumentTypes"))
-	return obj.Wrap(_r)
+	return foundation.IndexSetFromID(_r)
 }
 
 // DocumentType returns ￼Current document type. This will always be one of the supported document types.
 func (sfuf *ScannerFunctionalUnitFlatbed) DocumentType() ScannerDocumentType {
+	defer runtime.KeepAlive(sfuf)
 	_r := objc.Send[ScannerDocumentType](objref.IDOf(sfuf), objc.RegisterName("documentType"))
 	return _r
 }
 
 // DocumentSize returns ￼Document size of the current document type expressed in current measurement unit.
 func (sfuf *ScannerFunctionalUnitFlatbed) DocumentSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(sfuf)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(sfuf), objc.RegisterName("documentSize"))
 	return _r
 }

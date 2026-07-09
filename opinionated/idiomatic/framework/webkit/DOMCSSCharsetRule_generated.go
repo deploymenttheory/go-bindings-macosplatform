@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -57,6 +59,7 @@ func (dcr *DOMCSSCharsetRule) WithCSSText(cssText string) *DOMCSSCharsetRule {
 
 // Encoding returns the encoding.
 func (dcr *DOMCSSCharsetRule) Encoding() string {
+	defer runtime.KeepAlive(dcr)
 	_r := objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("encoding"))
 	if _r == 0 {
 		return ""

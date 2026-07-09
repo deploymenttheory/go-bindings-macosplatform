@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewSyncEngineWillFetchRecordZoneChangesEvent() *SyncEngineWillFetchRecordZo
 
 // ZoneID returns the zone ID.
 func (sewfrzce *SyncEngineWillFetchRecordZoneChangesEvent) ZoneID() *RecordZoneID {
+	defer runtime.KeepAlive(sewfrzce)
 	_r := objc.Send[objc.ID](objref.IDOf(sewfrzce), objc.RegisterName("zoneID"))
 	return RecordZoneIDFromID(_r)
 }

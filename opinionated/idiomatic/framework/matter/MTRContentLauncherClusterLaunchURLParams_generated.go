@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRContentLauncherClusterLaunchURLParamsAdopt(id objc.ID) *MTRContentLaunch
 
 // Description returns the object's -description text.
 func (mclclup *MTRContentLauncherClusterLaunchURLParams) Description() string {
+	defer runtime.KeepAlive(mclclup)
 	return rt.Description(objref.IDOf(mclclup))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mclclup *MTRContentLauncherClusterLaunchURLParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mclclup)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mclclup), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mclclup *MTRContentLauncherClusterLaunchURLParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mclclup)
 	return rt.IsKind(objref.IDOf(mclclup), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mclclup *MTRContentLauncherClusterLaunchURLParams) String() string {
+	defer runtime.KeepAlive(mclclup)
 	return rt.Description(objref.IDOf(mclclup))
 }
 
@@ -84,24 +92,28 @@ func (mclclup *MTRContentLauncherClusterLaunchURLParams) WithDisplayString(displ
 
 // WithBrandingInformation sets the branding information.
 func (mclclup *MTRContentLauncherClusterLaunchURLParams) WithBrandingInformation(brandingInformation MTRContentLauncherClusterBrandingInformationStructProvider) *MTRContentLauncherClusterLaunchURLParams {
+	defer runtime.KeepAlive(brandingInformation)
 	objc.Send[objc.ID](objref.IDOf(mclclup), objc.RegisterName("setBrandingInformation:"), objref.IDOf(brandingInformation))
 	return mclclup
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mclclup *MTRContentLauncherClusterLaunchURLParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRContentLauncherClusterLaunchURLParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mclclup), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mclclup
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mclclup *MTRContentLauncherClusterLaunchURLParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRContentLauncherClusterLaunchURLParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mclclup), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mclclup
 }
 
 // ContentURL returns the content URL.
 func (mclclup *MTRContentLauncherClusterLaunchURLParams) ContentURL() string {
+	defer runtime.KeepAlive(mclclup)
 	_r := objc.Send[objc.ID](objref.IDOf(mclclup), objc.RegisterName("contentURL"))
 	if _r == 0 {
 		return ""
@@ -111,6 +123,7 @@ func (mclclup *MTRContentLauncherClusterLaunchURLParams) ContentURL() string {
 
 // DisplayString returns the display string.
 func (mclclup *MTRContentLauncherClusterLaunchURLParams) DisplayString() string {
+	defer runtime.KeepAlive(mclclup)
 	_r := objc.Send[objc.ID](objref.IDOf(mclclup), objc.RegisterName("displayString"))
 	if _r == 0 {
 		return ""
@@ -120,18 +133,21 @@ func (mclclup *MTRContentLauncherClusterLaunchURLParams) DisplayString() string 
 
 // BrandingInformation returns the branding information.
 func (mclclup *MTRContentLauncherClusterLaunchURLParams) BrandingInformation() *MTRContentLauncherClusterBrandingInformationStruct {
+	defer runtime.KeepAlive(mclclup)
 	_r := objc.Send[objc.ID](objref.IDOf(mclclup), objc.RegisterName("brandingInformation"))
 	return MTRContentLauncherClusterBrandingInformationStructFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mclclup *MTRContentLauncherClusterLaunchURLParams) TimedInvokeTimeoutMs() obj.Object {
+func (mclclup *MTRContentLauncherClusterLaunchURLParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mclclup)
 	_r := objc.Send[objc.ID](objref.IDOf(mclclup), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mclclup *MTRContentLauncherClusterLaunchURLParams) ServerSideProcessingTimeout() obj.Object {
+func (mclclup *MTRContentLauncherClusterLaunchURLParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mclclup)
 	_r := objc.Send[objc.ID](objref.IDOf(mclclup), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

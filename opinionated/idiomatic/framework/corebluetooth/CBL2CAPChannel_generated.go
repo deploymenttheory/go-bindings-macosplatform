@@ -5,7 +5,10 @@
 package corebluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func l2CAPChannelAdopt(id objc.ID) *L2CAPChannel {
 
 // Description returns the object's -description text.
 func (lcc *L2CAPChannel) Description() string {
+	defer runtime.KeepAlive(lcc)
 	return rt.Description(objref.IDOf(lcc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lcc *L2CAPChannel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lcc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lcc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lcc *L2CAPChannel) IsKind(className string) bool {
+	defer runtime.KeepAlive(lcc)
 	return rt.IsKind(objref.IDOf(lcc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lcc *L2CAPChannel) String() string {
+	defer runtime.KeepAlive(lcc)
 	return rt.Description(objref.IDOf(lcc))
 }
 
@@ -74,24 +82,28 @@ func NewL2CAPChannel() *L2CAPChannel {
 
 // Peer returns the peer connected to the channel
 func (lcc *L2CAPChannel) Peer() *Peer {
+	defer runtime.KeepAlive(lcc)
 	_r := objc.Send[objc.ID](objref.IDOf(lcc), objc.RegisterName("peer"))
 	return PeerFromID(_r)
 }
 
 // InputStream returns an NSStream used for reading data from the remote peer
-func (lcc *L2CAPChannel) InputStream() obj.Object {
+func (lcc *L2CAPChannel) InputStream() *foundation.InputStream {
+	defer runtime.KeepAlive(lcc)
 	_r := objc.Send[objc.ID](objref.IDOf(lcc), objc.RegisterName("inputStream"))
-	return obj.Wrap(_r)
+	return foundation.InputStreamFromID(_r)
 }
 
 // OutputStream returns an NSStream used for writing data to the peer
-func (lcc *L2CAPChannel) OutputStream() obj.Object {
+func (lcc *L2CAPChannel) OutputStream() *foundation.OutputStream {
+	defer runtime.KeepAlive(lcc)
 	_r := objc.Send[objc.ID](objref.IDOf(lcc), objc.RegisterName("outputStream"))
-	return obj.Wrap(_r)
+	return foundation.OutputStreamFromID(_r)
 }
 
 // PSM returns the PSM (Protocol/Service Multiplexer) of the channel
 func (lcc *L2CAPChannel) PSM() uint16 {
+	defer runtime.KeepAlive(lcc)
 	_r := objc.Send[uint16](objref.IDOf(lcc), objc.RegisterName("PSM"))
 	return _r
 }

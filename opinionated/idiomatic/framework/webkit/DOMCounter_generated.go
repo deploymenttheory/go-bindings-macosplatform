@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,6 +53,7 @@ func NewDOMCounter() *DOMCounter {
 
 // Identifier returns the identifier.
 func (dc *DOMCounter) Identifier() string {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -60,6 +63,7 @@ func (dc *DOMCounter) Identifier() string {
 
 // ListStyle returns the list style.
 func (dc *DOMCounter) ListStyle() string {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("listStyle"))
 	if _r == 0 {
 		return ""
@@ -69,6 +73,7 @@ func (dc *DOMCounter) ListStyle() string {
 
 // Separator returns the separator.
 func (dc *DOMCounter) Separator() string {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("separator"))
 	if _r == 0 {
 		return ""

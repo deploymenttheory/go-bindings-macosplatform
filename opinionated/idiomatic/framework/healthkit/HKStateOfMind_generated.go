@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,18 +54,21 @@ func NewStateOfMind() *StateOfMind {
 
 // Kind returns a description of the kind of feeling type captured by this state of mind. Feeling types can be understood by the timeframe considered to create this log, possibly indicated by the context used to create it. For example, a `momentary emotion` log might be in response to 'how are you feeling right now?' while a `daily mood` log might be in response to 'how have you been feeling today?'.
 func (som *StateOfMind) Kind() StateOfMindKind {
+	defer runtime.KeepAlive(som)
 	_r := objc.Send[StateOfMindKind](objref.IDOf(som), objc.RegisterName("kind"))
 	return _r
 }
 
 // Valence returns a signed, self-reported measure of how positive or negative one is feeling, on a continuous scale from -1 to +1.
 func (som *StateOfMind) Valence() float64 {
+	defer runtime.KeepAlive(som)
 	_r := objc.Send[float64](objref.IDOf(som), objc.RegisterName("valence"))
 	return _r
 }
 
 // ValenceClassification returns a general region of pleasantness based on this sample's valence value.
 func (som *StateOfMind) ValenceClassification() StateOfMindValenceClassification {
+	defer runtime.KeepAlive(som)
 	_r := objc.Send[StateOfMindValenceClassification](objref.IDOf(som), objc.RegisterName("valenceClassification"))
 	return _r
 }
@@ -72,6 +77,7 @@ func (som *StateOfMind) ValenceClassification() StateOfMindValenceClassification
 //
 // Labels returns the collection as a Go slice.
 func (som *StateOfMind) Labels() []obj.Object {
+	defer runtime.KeepAlive(som)
 	_arr := objc.Send[objc.ID](objref.IDOf(som), objc.RegisterName("labels"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -80,6 +86,7 @@ func (som *StateOfMind) Labels() []obj.Object {
 //
 // Associations returns the collection as a Go slice.
 func (som *StateOfMind) Associations() []obj.Object {
+	defer runtime.KeepAlive(som)
 	_arr := objc.Send[objc.ID](objref.IDOf(som), objc.RegisterName("associations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

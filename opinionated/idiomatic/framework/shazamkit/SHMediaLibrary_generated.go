@@ -6,6 +6,7 @@ package shazamkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func mediaLibraryAdopt(id objc.ID) *MediaLibrary {
 
 // Description returns the object's -description text.
 func (ml *MediaLibrary) Description() string {
+	defer runtime.KeepAlive(ml)
 	return rt.Description(objref.IDOf(ml))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ml *MediaLibrary) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ml)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ml), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ml *MediaLibrary) IsKind(className string) bool {
+	defer runtime.KeepAlive(ml)
 	return rt.IsKind(objref.IDOf(ml), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ml *MediaLibrary) String() string {
+	defer runtime.KeepAlive(ml)
 	return rt.Description(objref.IDOf(ml))
 }
 
@@ -79,6 +85,7 @@ func NewMediaLibrary() *MediaLibrary {
 //
 // AddMediaItems blocks until the operation completes or ctx is cancelled.
 func (ml *MediaLibrary) AddMediaItems(ctx context.Context, mediaItems []*MediaItem) error {
+	defer runtime.KeepAlive(ml)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error

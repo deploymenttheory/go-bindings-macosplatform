@@ -5,10 +5,13 @@
 package coredata
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -41,12 +44,14 @@ func BatchUpdateRequestWithEntityName(entityName string) *BatchUpdateRequest {
 
 // EntityForNameInManagedObjectContext returns the entity with the specified name from the managed object model associated with the specified managed object context’s persistent store coordinator.
 func EntityForNameInManagedObjectContext(entityName string, context_ *ManagedObjectContext) *EntityDescription {
+	defer runtime.KeepAlive(context_)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSEntityDescription")), objc.RegisterName("entityForName:inManagedObjectContext:"), purego.NSString(entityName), objref.IDOf(context_))
 	return EntityDescriptionFromID(_r)
 }
 
 // InsertNewObjectForEntityForNameInManagedObjectContext creates, configures, and returns an instance of the class for the entity with a given name.
 func InsertNewObjectForEntityForNameInManagedObjectContext(entityName string, context_ *ManagedObjectContext) *ManagedObject {
+	defer runtime.KeepAlive(context_)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSEntityDescription")), objc.RegisterName("insertNewObjectForEntityForName:inManagedObjectContext:"), purego.NSString(entityName), objref.IDOf(context_))
 	return ManagedObjectFromID(_r)
 }
@@ -58,9 +63,11 @@ func FetchRequestWithEntityName(entityName string) obj.Object {
 }
 
 // ExpressionForFetchContextCountOnly returns an expression which will evaluate to the result of executing a fetch request on a context.
-func ExpressionForFetchContextCountOnly(fetch obj.Object, context_ obj.Object, countFlag bool) obj.Object {
+func ExpressionForFetchContextCountOnly(fetch obj.Object, context_ obj.Object, countFlag bool) *foundation.Expression {
+	defer runtime.KeepAlive(fetch)
+	defer runtime.KeepAlive(context_)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFetchRequestExpression")), objc.RegisterName("expressionForFetch:context:countOnly:"), objref.IDOf(fetch), objref.IDOf(context_), countFlag)
-	return obj.Wrap(_r)
+	return foundation.ExpressionFromID(_r)
 }
 
 // DeleteCacheWithName deletes the cached section information with the given name.
@@ -100,12 +107,13 @@ func New() *ManagedObjectContext {
 
 // MergeChangesFromRemoteContextSaveIntoContexts handles changes from other processes or from a serialized state.
 func MergeChangesFromRemoteContextSaveIntoContexts(changeNotificationData obj.Object, contexts []*ManagedObjectContext) {
+	defer runtime.KeepAlive(changeNotificationData)
 	objc.Send[objc.ID](objc.ID(_class("NSManagedObjectContext")), objc.RegisterName("mergeChangesFromRemoteContextSave:intoContexts:"), objref.IDOf(changeNotificationData), purego.SliceToNSArray(contexts, func(_v *ManagedObjectContext) objc.ID { return objref.IDOf(_v) }))
 }
 
 // MergedModelFromBundles returns a model created by merging all the models found in given bundles.
-func MergedModelFromBundles(bundles []obj.Object) *ManagedObjectModel {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectModel")), objc.RegisterName("mergedModelFromBundles:"), purego.SliceToNSArray(bundles, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func MergedModelFromBundles(bundles []*foundation.Bundle) *ManagedObjectModel {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectModel")), objc.RegisterName("mergedModelFromBundles:"), purego.SliceToNSArray(bundles, func(_v *foundation.Bundle) objc.ID { return objref.IDOf(_v) }))
 	return ManagedObjectModelFromID(_r)
 }
 
@@ -116,35 +124,39 @@ func ModelByMergingModels(models []*ManagedObjectModel) *ManagedObjectModel {
 }
 
 // MergedModelFromBundlesForStoreMetadata returns a merged model from a specified array for the version information in provided metadata.
-func MergedModelFromBundlesForStoreMetadata(bundles []obj.Object, metadata obj.Object) *ManagedObjectModel {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectModel")), objc.RegisterName("mergedModelFromBundles:forStoreMetadata:"), purego.SliceToNSArray(bundles, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(metadata))
+func MergedModelFromBundlesForStoreMetadata(bundles []*foundation.Bundle, metadata map[string]obj.Object) *ManagedObjectModel {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectModel")), objc.RegisterName("mergedModelFromBundles:forStoreMetadata:"), purego.SliceToNSArray(bundles, func(_v *foundation.Bundle) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ManagedObjectModelFromID(_r)
 }
 
 // ModelByMergingModelsForStoreMetadata returns, for the version information in given metadata, a model merged from a given array of models.
-func ModelByMergingModelsForStoreMetadata(models []*ManagedObjectModel, metadata obj.Object) *ManagedObjectModel {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectModel")), objc.RegisterName("modelByMergingModels:forStoreMetadata:"), purego.SliceToNSArray(models, func(_v *ManagedObjectModel) objc.ID { return objref.IDOf(_v) }), objref.IDOf(metadata))
+func ModelByMergingModelsForStoreMetadata(models []*ManagedObjectModel, metadata map[string]obj.Object) *ManagedObjectModel {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectModel")), objc.RegisterName("modelByMergingModels:forStoreMetadata:"), purego.SliceToNSArray(models, func(_v *ManagedObjectModel) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ManagedObjectModelFromID(_r)
 }
 
-// ChecksumsForVersionedModelAtURLError wraps the corresponding Objective-C method.
-func ChecksumsForVersionedModelAtURLError(modelURL string) (result obj.Object, err error) {
+// ChecksumsForVersionedModelAtURL wraps the corresponding Objective-C method.
+func ChecksumsForVersionedModelAtURL(modelURL string) (result map[string]string, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectModel")), objc.RegisterName("checksumsForVersionedModelAtURL:error:"), rt.FileURL(modelURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) }), nil
 }
 
 // MappingModelFromBundlesForSourceModelDestinationModel returns the mapping model that will translate data from the source to the destination model.
-func MappingModelFromBundlesForSourceModelDestinationModel(bundles []obj.Object, sourceModel *ManagedObjectModel, destinationModel *ManagedObjectModel) *MappingModel {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSMappingModel")), objc.RegisterName("mappingModelFromBundles:forSourceModel:destinationModel:"), purego.SliceToNSArray(bundles, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(sourceModel), objref.IDOf(destinationModel))
+func MappingModelFromBundlesForSourceModelDestinationModel(bundles []*foundation.Bundle, sourceModel *ManagedObjectModel, destinationModel *ManagedObjectModel) *MappingModel {
+	defer runtime.KeepAlive(sourceModel)
+	defer runtime.KeepAlive(destinationModel)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMappingModel")), objc.RegisterName("mappingModelFromBundles:forSourceModel:destinationModel:"), purego.SliceToNSArray(bundles, func(_v *foundation.Bundle) objc.ID { return objref.IDOf(_v) }), objref.IDOf(sourceModel), objref.IDOf(destinationModel))
 	return MappingModelFromID(_r)
 }
 
-// InferredMappingModelForSourceModelDestinationModelError returns a newly created mapping model that will migrate data from the source to the destination model.
-func InferredMappingModelForSourceModelDestinationModelError(sourceModel *ManagedObjectModel, destinationModel *ManagedObjectModel) (result *MappingModel, err error) {
+// InferredMappingModelForSourceModelDestinationModel returns a newly created mapping model that will migrate data from the source to the destination model.
+func InferredMappingModelForSourceModelDestinationModel(sourceModel *ManagedObjectModel, destinationModel *ManagedObjectModel) (result *MappingModel, err error) {
+	defer runtime.KeepAlive(sourceModel)
+	defer runtime.KeepAlive(destinationModel)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMappingModel")), objc.RegisterName("inferredMappingModelForSourceModel:destinationModel:error:"), objref.IDOf(sourceModel), objref.IDOf(destinationModel), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -184,19 +196,21 @@ func MergeByPropertyStoreTrumpMergePolicy() *MergePolicy {
 }
 
 // FetchEventsAfterDate creates a fetch request for events after a specified date from a persistent CloudKit container.
-func FetchEventsAfterDate(date obj.Object) *PersistentCloudKitContainerEventRequest {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentCloudKitContainerEventRequest")), objc.RegisterName("fetchEventsAfterDate:"), objref.IDOf(date))
+func FetchEventsAfterDate(date time.Time) *PersistentCloudKitContainerEventRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentCloudKitContainerEventRequest")), objc.RegisterName("fetchEventsAfterDate:"), rt.TimeToNSDate(date))
 	return PersistentCloudKitContainerEventRequestFromID(_r)
 }
 
 // FetchEventsAfterEvent creates a fetch request for events that occur after a specified event from a persistent CloudKit container.
 func FetchEventsAfterEvent(event *PersistentCloudKitContainerEvent) *PersistentCloudKitContainerEventRequest {
+	defer runtime.KeepAlive(event)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentCloudKitContainerEventRequest")), objc.RegisterName("fetchEventsAfterEvent:"), objref.IDOf(event))
 	return PersistentCloudKitContainerEventRequestFromID(_r)
 }
 
 // FetchEventsMatchingFetchRequest creates a fetch request for events that match a specified fetch request from a persistent CloudKit container.
 func FetchEventsMatchingFetchRequest(fetchRequest obj.Object) *PersistentCloudKitContainerEventRequest {
+	defer runtime.KeepAlive(fetchRequest)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentCloudKitContainerEventRequest")), objc.RegisterName("fetchEventsMatchingFetchRequest:"), objref.IDOf(fetchRequest))
 	return PersistentCloudKitContainerEventRequestFromID(_r)
 }
@@ -215,18 +229,20 @@ func PersistentContainerWithName(name string) *PersistentContainer {
 
 // PersistentContainerWithNameManagedObjectModel initializes a new persistent container using the provided name and managed object model.
 func PersistentContainerWithNameManagedObjectModel(name string, model *ManagedObjectModel) *PersistentContainer {
+	defer runtime.KeepAlive(model)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentContainer")), objc.RegisterName("persistentContainerWithName:managedObjectModel:"), purego.NSString(name), objref.IDOf(model))
 	return PersistentContainerFromID(_r)
 }
 
 // DefaultDirectoryURL returns the location of the directory that contains the persistent stores.
-func DefaultDirectoryURL() obj.Object {
+func DefaultDirectoryURL() string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentContainer")), objc.RegisterName("defaultDirectoryURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // EntityDescriptionWithContext requests an entity description for the managed object type affected by the change using the provided context.
 func EntityDescriptionWithContext(context_ *ManagedObjectContext) *EntityDescription {
+	defer runtime.KeepAlive(context_)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChange")), objc.RegisterName("entityDescriptionWithContext:"), objref.IDOf(context_))
 	return EntityDescriptionFromID(_r)
 }
@@ -244,49 +260,55 @@ func NSPersistentHistoryChangeFetchRequest() obj.Object {
 }
 
 // FetchHistoryAfterDate retrieves history since a given date.
-func FetchHistoryAfterDate(date obj.Object) *PersistentHistoryChangeRequest {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChangeRequest")), objc.RegisterName("fetchHistoryAfterDate:"), objref.IDOf(date))
+func FetchHistoryAfterDate(date time.Time) *PersistentHistoryChangeRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChangeRequest")), objc.RegisterName("fetchHistoryAfterDate:"), rt.TimeToNSDate(date))
 	return PersistentHistoryChangeRequestFromID(_r)
 }
 
 // FetchHistoryAfterToken retrieves the request history after a given token.
 func FetchHistoryAfterToken(token *PersistentHistoryToken) *PersistentHistoryChangeRequest {
+	defer runtime.KeepAlive(token)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChangeRequest")), objc.RegisterName("fetchHistoryAfterToken:"), objref.IDOf(token))
 	return PersistentHistoryChangeRequestFromID(_r)
 }
 
 // FetchHistoryAfterTransaction retrieves history since a given transaction.
 func FetchHistoryAfterTransaction(transaction *PersistentHistoryTransaction) *PersistentHistoryChangeRequest {
+	defer runtime.KeepAlive(transaction)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChangeRequest")), objc.RegisterName("fetchHistoryAfterTransaction:"), objref.IDOf(transaction))
 	return PersistentHistoryChangeRequestFromID(_r)
 }
 
 // FetchHistoryWithFetchRequest retrieves history based on a fetch request.
 func FetchHistoryWithFetchRequest(fetchRequest obj.Object) *PersistentHistoryChangeRequest {
+	defer runtime.KeepAlive(fetchRequest)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChangeRequest")), objc.RegisterName("fetchHistoryWithFetchRequest:"), objref.IDOf(fetchRequest))
 	return PersistentHistoryChangeRequestFromID(_r)
 }
 
 // DeleteHistoryBeforeDate purges history older than a given date.
-func DeleteHistoryBeforeDate(date obj.Object) *PersistentHistoryChangeRequest {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChangeRequest")), objc.RegisterName("deleteHistoryBeforeDate:"), objref.IDOf(date))
+func DeleteHistoryBeforeDate(date time.Time) *PersistentHistoryChangeRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChangeRequest")), objc.RegisterName("deleteHistoryBeforeDate:"), rt.TimeToNSDate(date))
 	return PersistentHistoryChangeRequestFromID(_r)
 }
 
 // DeleteHistoryBeforeToken purges history older than that defined by a given token.
 func DeleteHistoryBeforeToken(token *PersistentHistoryToken) *PersistentHistoryChangeRequest {
+	defer runtime.KeepAlive(token)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChangeRequest")), objc.RegisterName("deleteHistoryBeforeToken:"), objref.IDOf(token))
 	return PersistentHistoryChangeRequestFromID(_r)
 }
 
 // DeleteHistoryBeforeTransaction purges history older than a given transaction.
 func DeleteHistoryBeforeTransaction(transaction *PersistentHistoryTransaction) *PersistentHistoryChangeRequest {
+	defer runtime.KeepAlive(transaction)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChangeRequest")), objc.RegisterName("deleteHistoryBeforeTransaction:"), objref.IDOf(transaction))
 	return PersistentHistoryChangeRequestFromID(_r)
 }
 
 // NSPersistentHistoryTransactionEntityDescriptionWithContext requests an entity description using the provided context for the managed object type affected by the transaction.
 func NSPersistentHistoryTransactionEntityDescriptionWithContext(context_ *ManagedObjectContext) *EntityDescription {
+	defer runtime.KeepAlive(context_)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryTransaction")), objc.RegisterName("entityDescriptionWithContext:"), objref.IDOf(context_))
 	return EntityDescriptionFromID(_r)
 }
@@ -303,48 +325,51 @@ func NSPersistentHistoryTransactionFetchRequest() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// MetadataForPersistentStoreWithURLError returns the metadata from the persistent store at the given URL.
-func MetadataForPersistentStoreWithURLError(url string) (result obj.Object, err error) {
+// MetadataForPersistentStoreWithURL returns the metadata from the persistent store at the given URL.
+func MetadataForPersistentStoreWithURL(url string) (result map[string]obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentStore")), objc.RegisterName("metadataForPersistentStoreWithURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
 // SetMetadataForPersistentStoreWithURL sets the metadata for the store at a given URL.
-func SetMetadataForPersistentStoreWithURL(metadata obj.Object, url string) error {
+func SetMetadataForPersistentStoreWithURL(metadata map[string]obj.Object, url string) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objc.ID(_class("NSPersistentStore")), objc.RegisterName("setMetadata:forPersistentStoreWithURL:error:"), objref.IDOf(metadata), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objc.ID(_class("NSPersistentStore")), objc.RegisterName("setMetadata:forPersistentStoreWithURL:error:"), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// MetadataForPersistentStoreOfTypeURLOptionsError returns the metadata of a specific type of persistent store at the provided location.
-func MetadataForPersistentStoreOfTypeURLOptionsError(storeType string, url string, options obj.Object) (result obj.Object, err error) {
+// MetadataForPersistentStoreOfTypeURLOptions returns the metadata of a specific type of persistent store at the provided location.
+func MetadataForPersistentStoreOfTypeURLOptions(storeType string, url string, options obj.Object) (result map[string]obj.Object, err error) {
+	defer runtime.KeepAlive(options)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("metadataForPersistentStoreOfType:URL:options:error:"), purego.NSString(storeType), rt.FileURL(url), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
 // SetMetadataForPersistentStoreOfTypeURLOptions updates the metadata of a specific type of persistent store at the provided location.
-func SetMetadataForPersistentStoreOfTypeURLOptions(metadata obj.Object, storeType string, url string, options obj.Object) error {
+func SetMetadataForPersistentStoreOfTypeURLOptions(metadata map[string]obj.Object, storeType string, url string, options obj.Object) error {
+	defer runtime.KeepAlive(options)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("setMetadata:forPersistentStoreOfType:URL:options:error:"), objref.IDOf(metadata), purego.NSString(storeType), rt.FileURL(url), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("setMetadata:forPersistentStoreOfType:URL:options:error:"), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(storeType), rt.FileURL(url), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// CachedModelForPersistentStoreAtURLOptionsError wraps the corresponding Objective-C method.
-func CachedModelForPersistentStoreAtURLOptionsError(url string, options obj.Object) (result *ManagedObjectModel, err error) {
+// CachedModelForPersistentStoreAtURLOptions wraps the corresponding Objective-C method.
+func CachedModelForPersistentStoreAtURLOptions(url string, options obj.Object) (result *ManagedObjectModel, err error) {
+	defer runtime.KeepAlive(options)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("cachedModelForPersistentStoreAtURL:options:error:"), rt.FileURL(url), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -359,8 +384,8 @@ func ElementsDerivedFromExternalRecordURL(fileURL string) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// NSPersistentStoreCoordinatorMetadataForPersistentStoreWithURLError wraps the corresponding Objective-C method.
-func NSPersistentStoreCoordinatorMetadataForPersistentStoreWithURLError(url string) (result obj.Object, err error) {
+// NSPersistentStoreCoordinatorMetadataForPersistentStoreWithURL wraps the corresponding Objective-C method.
+func NSPersistentStoreCoordinatorMetadataForPersistentStoreWithURL(url string) (result obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("metadataForPersistentStoreWithURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -369,20 +394,20 @@ func NSPersistentStoreCoordinatorMetadataForPersistentStoreWithURLError(url stri
 	return obj.Wrap(_r), nil
 }
 
-// MetadataForPersistentStoreOfTypeURLError wraps the corresponding Objective-C method.
-func MetadataForPersistentStoreOfTypeURLError(storeType string, url string) (result obj.Object, err error) {
+// MetadataForPersistentStoreOfTypeURL wraps the corresponding Objective-C method.
+func MetadataForPersistentStoreOfTypeURL(storeType string, url string) (result map[string]obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("metadataForPersistentStoreOfType:URL:error:"), purego.NSString(storeType), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
 // SetMetadataForPersistentStoreOfTypeURL wraps the corresponding Objective-C method.
-func SetMetadataForPersistentStoreOfTypeURL(metadata obj.Object, storeType string, url string) error {
+func SetMetadataForPersistentStoreOfTypeURL(metadata map[string]obj.Object, storeType string, url string) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("setMetadata:forPersistentStoreOfType:URL:error:"), objref.IDOf(metadata), purego.NSString(storeType), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("setMetadata:forPersistentStoreOfType:URL:error:"), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(storeType), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -391,6 +416,7 @@ func SetMetadataForPersistentStoreOfTypeURL(metadata obj.Object, storeType strin
 
 // RemoveUbiquitousContentAndPersistentStoreAtURLOptions removes ubiquitous content and persistent store at URL options.
 func RemoveUbiquitousContentAndPersistentStoreAtURLOptions(storeURL string, options obj.Object) error {
+	defer runtime.KeepAlive(options)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("removeUbiquitousContentAndPersistentStoreAtURL:options:error:"), rt.FileURL(storeURL), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -400,14 +426,14 @@ func RemoveUbiquitousContentAndPersistentStoreAtURLOptions(storeURL string, opti
 }
 
 // RegisteredStoreTypes returns the registered store types.
-func RegisteredStoreTypes() obj.Object {
+func RegisteredStoreTypes() map[string]*foundation.Value {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("registeredStoreTypes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *foundation.Value { return foundation.ValueFromID(_id) })
 }
 
 // PersistentStoreDescriptionWithURL initializes and returns a persistent store description with the given URL.
-func PersistentStoreDescriptionWithURL(uRL string) *PersistentStoreDescription {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreDescription")), objc.RegisterName("persistentStoreDescriptionWithURL:"), rt.FileURL(uRL))
+func PersistentStoreDescriptionWithURL(url string) *PersistentStoreDescription {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreDescription")), objc.RegisterName("persistentStoreDescriptionWithURL:"), rt.FileURL(url))
 	return PersistentStoreDescriptionFromID(_r)
 }
 

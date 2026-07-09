@@ -5,6 +5,7 @@
 package appkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,52 +50,61 @@ func openGLPixelFormatAdopt(id objc.ID) *OpenGLPixelFormat {
 
 // Description returns the object's -description text.
 func (ogpf *OpenGLPixelFormat) Description() string {
+	defer runtime.KeepAlive(ogpf)
 	return rt.Description(objref.IDOf(ogpf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ogpf *OpenGLPixelFormat) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ogpf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ogpf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ogpf *OpenGLPixelFormat) IsKind(className string) bool {
+	defer runtime.KeepAlive(ogpf)
 	return rt.IsKind(objref.IDOf(ogpf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ogpf *OpenGLPixelFormat) String() string {
+	defer runtime.KeepAlive(ogpf)
 	return rt.Description(objref.IDOf(ogpf))
 }
 
 // NewOpenGLPixelFormatWithCGLPixelFormatObj returns an OpenGL pixel format object initialized with using an existing CGL pixel format object.
 func NewOpenGLPixelFormatWithCGLPixelFormatObj(format obj.Object) *OpenGLPixelFormat {
+	defer runtime.KeepAlive(format)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOpenGLPixelFormat")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLPixelFormatObj:"), objref.IDOf(format))
 	return openGLPixelFormatAdopt(_id)
 }
 
 // NewOpenGLPixelFormatWithData returns an OpenGL pixel format object initialized with specified pixel format attribute data.
-func NewOpenGLPixelFormatWithData(attribs obj.Object) *OpenGLPixelFormat {
+func NewOpenGLPixelFormatWithData(attribs []byte) *OpenGLPixelFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOpenGLPixelFormat")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(attribs))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), rt.BytesToNSData(attribs))
 	return openGLPixelFormatAdopt(_id)
 }
 
 // Attributes returns the attribute data for the pixel format object.
-func (ogpf *OpenGLPixelFormat) Attributes() obj.Object {
+func (ogpf *OpenGLPixelFormat) Attributes() []byte {
+	defer runtime.KeepAlive(ogpf)
 	_r := objc.Send[objc.ID](objref.IDOf(ogpf), objc.RegisterName("attributes"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // SetAttributes sets the attribute data for the pixel format object.
-func (ogpf *OpenGLPixelFormat) SetAttributes(attribs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(ogpf), objc.RegisterName("setAttributes:"), objref.IDOf(attribs))
+func (ogpf *OpenGLPixelFormat) SetAttributes(attribs []byte) {
+	defer runtime.KeepAlive(ogpf)
+	objc.Send[objc.ID](objref.IDOf(ogpf), objc.RegisterName("setAttributes:"), rt.BytesToNSData(attribs))
 }
 
 // GetValuesForAttributeForVirtualScreen gets the value for the specified pixel format attribute.
 func (ogpf *OpenGLPixelFormat) GetValuesForAttributeForVirtualScreen(attrib uint32, screen int32) (vals int32) {
+	defer runtime.KeepAlive(ogpf)
 	var _out0 int32
 	objc.Send[objc.ID](objref.IDOf(ogpf), objc.RegisterName("getValues:forAttribute:forVirtualScreen:"), unsafe.Pointer(&_out0), attrib, screen)
 	return _out0
@@ -102,12 +112,14 @@ func (ogpf *OpenGLPixelFormat) GetValuesForAttributeForVirtualScreen(attrib uint
 
 // NumberOfVirtualScreens returns the number of virtual screens.
 func (ogpf *OpenGLPixelFormat) NumberOfVirtualScreens() int32 {
+	defer runtime.KeepAlive(ogpf)
 	_r := objc.Send[int32](objref.IDOf(ogpf), objc.RegisterName("numberOfVirtualScreens"))
 	return _r
 }
 
 // CGLPixelFormatObj returns the cgl pixel format obj.
 func (ogpf *OpenGLPixelFormat) CGLPixelFormatObj() obj.Object {
+	defer runtime.KeepAlive(ogpf)
 	_r := objc.Send[objc.ID](objref.IDOf(ogpf), objc.RegisterName("CGLPixelFormatObj"))
 	return obj.Wrap(_r)
 }

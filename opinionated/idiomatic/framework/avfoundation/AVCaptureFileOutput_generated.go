@@ -5,10 +5,13 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,6 +50,16 @@ func captureFileOutputAdopt(id objc.ID) *CaptureFileOutput {
 	return x
 }
 
+// WithDelegate sets the delegate object for the capture file output.
+func (cfo *CaptureFileOutput) WithDelegate(delegate CaptureFileOutputDelegate) *CaptureFileOutput {
+	_shim := newCaptureFileOutputDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(cfo), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(cfo), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return cfo
+}
+
 // WithMaxRecordedDuration sets the longest duration allowed for the recording.
 func (cfo *CaptureFileOutput) WithMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) *CaptureFileOutput {
 	objc.Send[objc.ID](objref.IDOf(cfo), objc.RegisterName("setMaxRecordedDuration:"), maxRecordedDuration)
@@ -73,63 +86,74 @@ func (cfo *CaptureFileOutput) WithDeferredStartEnabled(deferredStartEnabled bool
 
 // StopRecording tells the receiver to stop recording to the current file.
 func (cfo *CaptureFileOutput) StopRecording() {
+	defer runtime.KeepAlive(cfo)
 	objc.Send[objc.ID](objref.IDOf(cfo), objc.RegisterName("stopRecording"))
 }
 
 // PauseRecording pauses recording to the current output file.
 func (cfo *CaptureFileOutput) PauseRecording() {
+	defer runtime.KeepAlive(cfo)
 	objc.Send[objc.ID](objref.IDOf(cfo), objc.RegisterName("pauseRecording"))
 }
 
 // ResumeRecording resumes recording to the current output file after it was previously paused using pauseRecording.
 func (cfo *CaptureFileOutput) ResumeRecording() {
+	defer runtime.KeepAlive(cfo)
 	objc.Send[objc.ID](objref.IDOf(cfo), objc.RegisterName("resumeRecording"))
 }
 
 // OutputFileURL returns the file URL of the file to which the receiver is currently recording incoming buffers. The value of this property is an NSURL object containing the file URL of the file currently being written by the receiver. Returns nil if the receiver is not recording to any file.
-func (cfo *CaptureFileOutput) OutputFileURL() obj.Object {
+func (cfo *CaptureFileOutput) OutputFileURL() string {
+	defer runtime.KeepAlive(cfo)
 	_r := objc.Send[objc.ID](objref.IDOf(cfo), objc.RegisterName("outputFileURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // IsRecording reports whether the receiver is currently recording. The value of this property is true when the receiver currently has a file to which it is writing new samples.
 func (cfo *CaptureFileOutput) IsRecording() bool {
+	defer runtime.KeepAlive(cfo)
 	_r := objc.Send[bool](objref.IDOf(cfo), objc.RegisterName("isRecording"))
 	return _r
 }
 
 // IsRecordingPaused reports whether recording to the current output file is paused. This property indicates recording to the file returned by outputFileURL has been previously paused using the pauseRecording method. When a recording is paused, captured samples are not written to the output file, but new samples can be written to the same file in the future by calling resumeRecording.
 func (cfo *CaptureFileOutput) IsRecordingPaused() bool {
+	defer runtime.KeepAlive(cfo)
 	_r := objc.Send[bool](objref.IDOf(cfo), objc.RegisterName("isRecordingPaused"))
 	return _r
 }
 
 // RecordedDuration indicates the duration of the media recorded to the current output file. If recording is in progress, this property returns the total time recorded so far.
 func (cfo *CaptureFileOutput) RecordedDuration() coremedia.CMTime {
+	defer runtime.KeepAlive(cfo)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(cfo), objc.RegisterName("recordedDuration"))
 	return _r
 }
 
 // RecordedFileSize indicates the size, in bytes, of the data recorded to the current output file. If a recording is in progress, this property returns the size in bytes of the data recorded so far.
 func (cfo *CaptureFileOutput) RecordedFileSize() int64 {
+	defer runtime.KeepAlive(cfo)
 	_r := objc.Send[int64](objref.IDOf(cfo), objc.RegisterName("recordedFileSize"))
 	return _r
 }
 
 // MaxRecordedDuration specifies the maximum duration of the media that should be recorded by the receiver. This property specifies a hard limit on the duration of recorded files. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error. The default value of this property is kCMTimeInvalid, which indicates no limit.
 func (cfo *CaptureFileOutput) MaxRecordedDuration() coremedia.CMTime {
+	defer runtime.KeepAlive(cfo)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(cfo), objc.RegisterName("maxRecordedDuration"))
 	return _r
 }
 
 // MaxRecordedFileSize specifies the maximum size, in bytes, of the data that should be recorded by the receiver. This property specifies a hard limit on the data size of recorded files. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error. The default value of this property is 0, which indicates no limit.
 func (cfo *CaptureFileOutput) MaxRecordedFileSize() int64 {
+	defer runtime.KeepAlive(cfo)
 	_r := objc.Send[int64](objref.IDOf(cfo), objc.RegisterName("maxRecordedFileSize"))
 	return _r
 }
 
 // MinFreeDiskSpaceLimit specifies the minimum amount of free space, in bytes, required for recording to continue on a given volume. This property specifies a hard lower limit on the amount of free space that must remain on a target volume for recording to continue. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error.
 func (cfo *CaptureFileOutput) MinFreeDiskSpaceLimit() int64 {
+	defer runtime.KeepAlive(cfo)
 	_r := objc.Send[int64](objref.IDOf(cfo), objc.RegisterName("minFreeDiskSpaceLimit"))
 	return _r
 }

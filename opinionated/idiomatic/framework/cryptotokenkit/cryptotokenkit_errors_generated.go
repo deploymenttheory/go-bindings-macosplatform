@@ -8,8 +8,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrCodeNotImplemented matches the CryptoTokenKit error TKErrorCodeNotImplemented.
-var ErrCodeNotImplemented = errkit.New("TKErrorDomain", -1)
+// ErrCodeAuthenticationFailed matches the CryptoTokenKit error TKErrorCodeAuthenticationFailed.
+var ErrCodeAuthenticationFailed = errkit.New("TKErrorDomain", -5)
+
+// ErrCodeAuthenticationNeeded matches the CryptoTokenKit error TKErrorCodeAuthenticationNeeded.
+var ErrCodeAuthenticationNeeded = errkit.New("TKErrorDomain", -9)
+
+// ErrCodeBadParameter matches the CryptoTokenKit error TKErrorCodeBadParameter.
+var ErrCodeBadParameter = errkit.New("TKErrorDomain", -8)
+
+// ErrCodeCanceledByUser matches the CryptoTokenKit error TKErrorCodeCanceledByUser.
+var ErrCodeCanceledByUser = errkit.New("TKErrorDomain", -4)
 
 // ErrCodeCommunicationError matches the CryptoTokenKit error TKErrorCodeCommunicationError.
 var ErrCodeCommunicationError = errkit.New("TKErrorDomain", -2)
@@ -17,20 +26,11 @@ var ErrCodeCommunicationError = errkit.New("TKErrorDomain", -2)
 // ErrCodeCorruptedData matches the CryptoTokenKit error TKErrorCodeCorruptedData.
 var ErrCodeCorruptedData = errkit.New("TKErrorDomain", -3)
 
-// ErrCodeCanceledByUser matches the CryptoTokenKit error TKErrorCodeCanceledByUser.
-var ErrCodeCanceledByUser = errkit.New("TKErrorDomain", -4)
-
-// ErrCodeAuthenticationFailed matches the CryptoTokenKit error TKErrorCodeAuthenticationFailed.
-var ErrCodeAuthenticationFailed = errkit.New("TKErrorDomain", -5)
+// ErrCodeNotImplemented matches the CryptoTokenKit error TKErrorCodeNotImplemented.
+var ErrCodeNotImplemented = errkit.New("TKErrorDomain", -1)
 
 // ErrCodeObjectNotFound matches the CryptoTokenKit error TKErrorCodeObjectNotFound.
 var ErrCodeObjectNotFound = errkit.New("TKErrorDomain", -6)
 
 // ErrCodeTokenNotFound matches the CryptoTokenKit error TKErrorCodeTokenNotFound.
 var ErrCodeTokenNotFound = errkit.New("TKErrorDomain", -7)
-
-// ErrCodeBadParameter matches the CryptoTokenKit error TKErrorCodeBadParameter.
-var ErrCodeBadParameter = errkit.New("TKErrorDomain", -8)
-
-// ErrCodeAuthenticationNeeded matches the CryptoTokenKit error TKErrorCodeAuthenticationNeeded.
-var ErrCodeAuthenticationNeeded = errkit.New("TKErrorDomain", -9)

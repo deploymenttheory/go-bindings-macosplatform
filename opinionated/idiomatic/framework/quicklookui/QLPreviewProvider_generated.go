@@ -5,6 +5,8 @@
 package quicklookui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func previewProviderAdopt(id objc.ID) *PreviewProvider {
 
 // Description returns the object's -description text.
 func (pp *PreviewProvider) Description() string {
+	defer runtime.KeepAlive(pp)
 	return rt.Description(objref.IDOf(pp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pp *PreviewProvider) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pp *PreviewProvider) IsKind(className string) bool {
+	defer runtime.KeepAlive(pp)
 	return rt.IsKind(objref.IDOf(pp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pp *PreviewProvider) String() string {
+	defer runtime.KeepAlive(pp)
 	return rt.Description(objref.IDOf(pp))
 }
 

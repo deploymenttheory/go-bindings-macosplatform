@@ -5,7 +5,10 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -48,6 +51,8 @@ func querySubscriptionAdopt(id objc.ID) *QuerySubscription {
 
 // NewQuerySubscriptionWithRecordTypePredicateOptions creates a query-based subscription that queries records of a specific type.
 func NewQuerySubscriptionWithRecordTypePredicateOptions(recordType obj.Object, predicate obj.Object, querySubscriptionOptions QuerySubscriptionOptions) *QuerySubscription {
+	defer runtime.KeepAlive(recordType)
+	defer runtime.KeepAlive(predicate)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKQuerySubscription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordType:predicate:options:"), objref.IDOf(recordType), objref.IDOf(predicate), querySubscriptionOptions)
 	return querySubscriptionAdopt(_id)
@@ -55,6 +60,9 @@ func NewQuerySubscriptionWithRecordTypePredicateOptions(recordType obj.Object, p
 
 // NewQuerySubscriptionWithRecordTypePredicateSubscriptionIDOptions creates a named query-based subscription that queries records of a specific type.
 func NewQuerySubscriptionWithRecordTypePredicateSubscriptionIDOptions(recordType obj.Object, predicate obj.Object, subscriptionID obj.Object, querySubscriptionOptions QuerySubscriptionOptions) *QuerySubscription {
+	defer runtime.KeepAlive(recordType)
+	defer runtime.KeepAlive(predicate)
+	defer runtime.KeepAlive(subscriptionID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKQuerySubscription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordType:predicate:subscriptionID:options:"), objref.IDOf(recordType), objref.IDOf(predicate), objref.IDOf(subscriptionID), querySubscriptionOptions)
 	return querySubscriptionAdopt(_id)
@@ -62,6 +70,7 @@ func NewQuerySubscriptionWithRecordTypePredicateSubscriptionIDOptions(recordType
 
 // NewQuerySubscriptionWithCoder creates a query-based subscription from a serialized instance.
 func NewQuerySubscriptionWithCoder(aDecoder obj.Object) *QuerySubscription {
+	defer runtime.KeepAlive(aDecoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKQuerySubscription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return querySubscriptionAdopt(_id)
@@ -69,36 +78,42 @@ func NewQuerySubscriptionWithCoder(aDecoder obj.Object) *QuerySubscription {
 
 // WithZoneID sets the ID of the record zone that the subscription queries.
 func (qs *QuerySubscription) WithZoneID(zoneID *RecordZoneID) *QuerySubscription {
+	defer runtime.KeepAlive(zoneID)
 	objc.Send[objc.ID](objref.IDOf(qs), objc.RegisterName("setZoneID:"), objref.IDOf(zoneID))
 	return qs
 }
 
 // WithNotificationInfo sets the configuration for a subscription’s push notifications.
 func (qs *QuerySubscription) WithNotificationInfo(notificationInfo *NotificationInfo) *QuerySubscription {
+	defer runtime.KeepAlive(notificationInfo)
 	objc.Send[objc.ID](objref.IDOf(qs), objc.RegisterName("setNotificationInfo:"), objref.IDOf(notificationInfo))
 	return qs
 }
 
 // RecordType returns the type of record that the subscription queries.
-func (qs *QuerySubscription) RecordType() obj.Object {
+func (qs *QuerySubscription) RecordType() *foundation.String {
+	defer runtime.KeepAlive(qs)
 	_r := objc.Send[objc.ID](objref.IDOf(qs), objc.RegisterName("recordType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Predicate returns the matching criteria to apply to records. A query-based subscription uses its search predicate to identify potential matches for records. It combines the predicate information with the value in the “CKQuerySubscription/querySubscriptionOptions“ property to determine when to send a push notification to the app. The search predicate defines the records that the subscription object monitors for changes. The system only uses the property's value when the “CKSubscription/subscriptionType“ property is “CKSubscription/SubscriptionType/query“. Otherwise, the system ignores it.
-func (qs *QuerySubscription) Predicate() obj.Object {
+func (qs *QuerySubscription) Predicate() *foundation.Predicate {
+	defer runtime.KeepAlive(qs)
 	_r := objc.Send[objc.ID](objref.IDOf(qs), objc.RegisterName("predicate"))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // ZoneID returns the ID of the record zone that the subscription queries. This property applies to query-based subscriptions and zone-based subscriptions. Specifying a record zone ID limits the scope of the query to only the records in that zone. For zone-based subscriptions, the query includes all records in the specified record zone. For a query-based subscription, the query includes only records of a specific type in the specified record zone. For zone-based subscriptions, CloudKit sets this property's value automatically. For all other subscription types, the default value is `nil`. If you want to scope your query-based subscription to a specific record zone, you must assign a value explicitly.
 func (qs *QuerySubscription) ZoneID() *RecordZoneID {
+	defer runtime.KeepAlive(qs)
 	_r := objc.Send[objc.ID](objref.IDOf(qs), objc.RegisterName("zoneID"))
 	return RecordZoneIDFromID(_r)
 }
 
 // QuerySubscriptionOptions returns options that define the behavior of the subscription. Set the value of this property at initialization time. When you configure a query-based subscription, use one of the following values: - “CKQuerySubscription/Options/firesOnRecordCreation“ - “CKQuerySubscription/Options/firesOnRecordUpdate“ - “CKQuerySubscription/Options/firesOnRecordDeletion“ If you don't set an option, the system throws an <doc://com.apple.documentation/documentation/foundation/nsexceptionname/invalidargumentexception>.
 func (qs *QuerySubscription) QuerySubscriptionOptions() QuerySubscriptionOptions {
+	defer runtime.KeepAlive(qs)
 	_r := objc.Send[QuerySubscriptionOptions](objref.IDOf(qs), objc.RegisterName("querySubscriptionOptions"))
 	return _r
 }

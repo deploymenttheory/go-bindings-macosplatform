@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRPumpConfigurationAndControlClusterPumpBlockedEventAdopt(id objc.ID) *MTR
 
 // Description returns the object's -description text.
 func (mpcaccpbe *MTRPumpConfigurationAndControlClusterPumpBlockedEvent) Description() string {
+	defer runtime.KeepAlive(mpcaccpbe)
 	return rt.Description(objref.IDOf(mpcaccpbe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mpcaccpbe *MTRPumpConfigurationAndControlClusterPumpBlockedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mpcaccpbe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mpcaccpbe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mpcaccpbe *MTRPumpConfigurationAndControlClusterPumpBlockedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mpcaccpbe)
 	return rt.IsKind(objref.IDOf(mpcaccpbe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mpcaccpbe *MTRPumpConfigurationAndControlClusterPumpBlockedEvent) String() string {
+	defer runtime.KeepAlive(mpcaccpbe)
 	return rt.Description(objref.IDOf(mpcaccpbe))
 }
 

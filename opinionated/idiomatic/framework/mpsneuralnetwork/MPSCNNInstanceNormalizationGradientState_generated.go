@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,6 +53,7 @@ func NewCNNInstanceNormalizationGradientState() *CNNInstanceNormalizationGradien
 
 // InstanceNormalization returns the MPSCNNInstanceNormalization object that created this state object.
 func (cings *CNNInstanceNormalizationGradientState) InstanceNormalization() *CNNInstanceNormalization {
+	defer runtime.KeepAlive(cings)
 	_r := objc.Send[objc.ID](objref.IDOf(cings), objc.RegisterName("instanceNormalization"))
 	return CNNInstanceNormalizationFromID(_r)
 }

@@ -5,6 +5,8 @@
 package javaruntimesupport
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func inputMethodControllerAdopt(id objc.ID) *InputMethodController {
 
 // Description returns the object's -description text.
 func (imc *InputMethodController) Description() string {
+	defer runtime.KeepAlive(imc)
 	return rt.Description(objref.IDOf(imc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (imc *InputMethodController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(imc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(imc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (imc *InputMethodController) IsKind(className string) bool {
+	defer runtime.KeepAlive(imc)
 	return rt.IsKind(objref.IDOf(imc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (imc *InputMethodController) String() string {
+	defer runtime.KeepAlive(imc)
 	return rt.Description(objref.IDOf(imc))
 }
 
@@ -72,12 +79,14 @@ func NewInputMethodController() *InputMethodController {
 
 // AvailableInputMethodLocales returns the available input method locales.
 func (imc *InputMethodController) AvailableInputMethodLocales() obj.Object {
+	defer runtime.KeepAlive(imc)
 	_r := objc.Send[objc.ID](objref.IDOf(imc), objc.RegisterName("availableInputMethodLocales"))
 	return obj.Wrap(_r)
 }
 
 // CurrentInputMethodName returns the current input method name.
 func (imc *InputMethodController) CurrentInputMethodName() string {
+	defer runtime.KeepAlive(imc)
 	_r := objc.Send[objc.ID](objref.IDOf(imc), objc.RegisterName("currentInputMethodName"))
 	if _r == 0 {
 		return ""
@@ -87,6 +96,7 @@ func (imc *InputMethodController) CurrentInputMethodName() string {
 
 // CurrentInputMethodLocale returns the current input method locale.
 func (imc *InputMethodController) CurrentInputMethodLocale() string {
+	defer runtime.KeepAlive(imc)
 	_r := objc.Send[objc.ID](objref.IDOf(imc), objc.RegisterName("currentInputMethodLocale"))
 	if _r == 0 {
 		return ""
@@ -96,5 +106,6 @@ func (imc *InputMethodController) CurrentInputMethodLocale() string {
 
 // SetCurrentInputMethodForLocale wraps the corresponding Objective-C method.
 func (imc *InputMethodController) SetCurrentInputMethodForLocale(theLocale string) {
+	defer runtime.KeepAlive(imc)
 	objc.Send[objc.ID](objref.IDOf(imc), objc.RegisterName("setCurrentInputMethodForLocale:"), purego.NSString(theLocale))
 }

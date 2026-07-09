@@ -5,6 +5,7 @@
 package gameplaykit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func quadtreeAdopt(id objc.ID) *Quadtree {
 
 // Description returns the object's -description text.
 func (q *Quadtree) Description() string {
+	defer runtime.KeepAlive(q)
 	return rt.Description(objref.IDOf(q))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (q *Quadtree) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(q)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(q), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (q *Quadtree) IsKind(className string) bool {
+	defer runtime.KeepAlive(q)
 	return rt.IsKind(objref.IDOf(q), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (q *Quadtree) String() string {
+	defer runtime.KeepAlive(q)
 	return rt.Description(objref.IDOf(q))
 }
 
@@ -76,24 +82,32 @@ func NewQuadtree() *Quadtree {
 
 // AddElementWithPoint adds an object to the tree corresponding to the specified point in 2D space.
 func (q *Quadtree) AddElementWithPoint(element obj.Object, point unsafe.Pointer) *QuadtreeNode {
+	defer runtime.KeepAlive(q)
+	defer runtime.KeepAlive(element)
 	_r := objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("addElement:withPoint:"), objref.IDOf(element), point)
 	return QuadtreeNodeFromID(_r)
 }
 
 // ElementsAtPoint returns all objects whose corresponding locations overlap the specified point.
 func (q *Quadtree) ElementsAtPoint(point unsafe.Pointer) []obj.Object {
+	defer runtime.KeepAlive(q)
 	_r := objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("elementsAtPoint:"), point)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // RemoveElement searches for the specified object and removes it from the tree.
 func (q *Quadtree) RemoveElement(element obj.Object) bool {
+	defer runtime.KeepAlive(q)
+	defer runtime.KeepAlive(element)
 	_r := objc.Send[bool](objref.IDOf(q), objc.RegisterName("removeElement:"), objref.IDOf(element))
 	return _r
 }
 
 // RemoveElementWithNode removes the specified object from the tree, using a reference to its containing node.
 func (q *Quadtree) RemoveElementWithNode(data obj.Object, node *QuadtreeNode) bool {
+	defer runtime.KeepAlive(q)
+	defer runtime.KeepAlive(data)
+	defer runtime.KeepAlive(node)
 	_r := objc.Send[bool](objref.IDOf(q), objc.RegisterName("removeElement:withNode:"), objref.IDOf(data), objref.IDOf(node))
 	return _r
 }

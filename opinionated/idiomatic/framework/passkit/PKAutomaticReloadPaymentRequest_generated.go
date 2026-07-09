@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func automaticReloadPaymentRequestAdopt(id objc.ID) *AutomaticReloadPaymentReque
 
 // Description returns the object's -description text.
 func (arpr *AutomaticReloadPaymentRequest) Description() string {
+	defer runtime.KeepAlive(arpr)
 	return rt.Description(objref.IDOf(arpr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (arpr *AutomaticReloadPaymentRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(arpr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(arpr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (arpr *AutomaticReloadPaymentRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(arpr)
 	return rt.IsKind(objref.IDOf(arpr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (arpr *AutomaticReloadPaymentRequest) String() string {
+	defer runtime.KeepAlive(arpr)
 	return rt.Description(objref.IDOf(arpr))
 }
 
 // NewAutomaticReloadPaymentRequestWithPaymentDescriptionAutomaticReloadBillingManagementURL create an automatic reload payment object with a description, automatic billing information, and a management URL.
 func NewAutomaticReloadPaymentRequestWithPaymentDescriptionAutomaticReloadBillingManagementURL(paymentDescription string, automaticReloadBilling *AutomaticReloadPaymentSummaryItem, managementURL string) *AutomaticReloadPaymentRequest {
+	defer runtime.KeepAlive(automaticReloadBilling)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKAutomaticReloadPaymentRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentDescription:automaticReloadBilling:managementURL:"), purego.NSString(paymentDescription), objref.IDOf(automaticReloadBilling), rt.FileURL(managementURL))
 	return automaticReloadPaymentRequestAdopt(_id)
@@ -81,6 +89,7 @@ func (arpr *AutomaticReloadPaymentRequest) WithPaymentDescription(paymentDescrip
 
 // WithAutomaticReloadBilling sets summary items that contain the top-up amount and balance threshold amount for the automatic reload payment.
 func (arpr *AutomaticReloadPaymentRequest) WithAutomaticReloadBilling(automaticReloadBilling *AutomaticReloadPaymentSummaryItem) *AutomaticReloadPaymentRequest {
+	defer runtime.KeepAlive(automaticReloadBilling)
 	objc.Send[objc.ID](objref.IDOf(arpr), objc.RegisterName("setAutomaticReloadBilling:"), objref.IDOf(automaticReloadBilling))
 	return arpr
 }
@@ -105,6 +114,7 @@ func (arpr *AutomaticReloadPaymentRequest) WithTokenNotificationURL(tokenNotific
 
 // PaymentDescription returns the payment description.
 func (arpr *AutomaticReloadPaymentRequest) PaymentDescription() string {
+	defer runtime.KeepAlive(arpr)
 	_r := objc.Send[objc.ID](objref.IDOf(arpr), objc.RegisterName("paymentDescription"))
 	if _r == 0 {
 		return ""
@@ -114,12 +124,14 @@ func (arpr *AutomaticReloadPaymentRequest) PaymentDescription() string {
 
 // AutomaticReloadBilling returns the automatic reload billing.
 func (arpr *AutomaticReloadPaymentRequest) AutomaticReloadBilling() *AutomaticReloadPaymentSummaryItem {
+	defer runtime.KeepAlive(arpr)
 	_r := objc.Send[objc.ID](objref.IDOf(arpr), objc.RegisterName("automaticReloadBilling"))
 	return AutomaticReloadPaymentSummaryItemFromID(_r)
 }
 
 // BillingAgreement returns the billing agreement.
 func (arpr *AutomaticReloadPaymentRequest) BillingAgreement() string {
+	defer runtime.KeepAlive(arpr)
 	_r := objc.Send[objc.ID](objref.IDOf(arpr), objc.RegisterName("billingAgreement"))
 	if _r == 0 {
 		return ""
@@ -128,13 +140,15 @@ func (arpr *AutomaticReloadPaymentRequest) BillingAgreement() string {
 }
 
 // ManagementURL returns the management URL.
-func (arpr *AutomaticReloadPaymentRequest) ManagementURL() obj.Object {
+func (arpr *AutomaticReloadPaymentRequest) ManagementURL() string {
+	defer runtime.KeepAlive(arpr)
 	_r := objc.Send[objc.ID](objref.IDOf(arpr), objc.RegisterName("managementURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // TokenNotificationURL returns the token notification URL.
-func (arpr *AutomaticReloadPaymentRequest) TokenNotificationURL() obj.Object {
+func (arpr *AutomaticReloadPaymentRequest) TokenNotificationURL() string {
+	defer runtime.KeepAlive(arpr)
 	_r := objc.Send[objc.ID](objref.IDOf(arpr), objc.RegisterName("tokenNotificationURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func renderPipelineFunctionsDescriptorAdopt(id objc.ID) *RenderPipelineFunctions
 
 // Description returns the object's -description text.
 func (rpfd *RenderPipelineFunctionsDescriptor) Description() string {
+	defer runtime.KeepAlive(rpfd)
 	return rt.Description(objref.IDOf(rpfd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rpfd *RenderPipelineFunctionsDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rpfd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rpfd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rpfd *RenderPipelineFunctionsDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(rpfd)
 	return rt.IsKind(objref.IDOf(rpfd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rpfd *RenderPipelineFunctionsDescriptor) String() string {
+	defer runtime.KeepAlive(rpfd)
 	return rt.Description(objref.IDOf(rpfd))
 }
 
@@ -74,33 +81,39 @@ func NewRenderPipelineFunctionsDescriptor() *RenderPipelineFunctionsDescriptor {
 
 // VertexAdditionalBinaryFunctions returns the set of additional binary functions to be accessed from the vertex function in an incrementally created pipeline state.
 func (rpfd *RenderPipelineFunctionsDescriptor) VertexAdditionalBinaryFunctions() []obj.Object {
+	defer runtime.KeepAlive(rpfd)
 	_r := objc.Send[objc.ID](objref.IDOf(rpfd), objc.RegisterName("vertexAdditionalBinaryFunctions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetVertexAdditionalBinaryFunctions wraps the corresponding Objective-C method.
 func (rpfd *RenderPipelineFunctionsDescriptor) SetVertexAdditionalBinaryFunctions(vertexAdditionalBinaryFunctions []obj.Object) {
+	defer runtime.KeepAlive(rpfd)
 	objc.Send[objc.ID](objref.IDOf(rpfd), objc.RegisterName("setVertexAdditionalBinaryFunctions:"), purego.SliceToNSArray(vertexAdditionalBinaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // FragmentAdditionalBinaryFunctions returns the set of additional binary functions to be accessed from the fragment function in an incrementally created pipeline state.
 func (rpfd *RenderPipelineFunctionsDescriptor) FragmentAdditionalBinaryFunctions() []obj.Object {
+	defer runtime.KeepAlive(rpfd)
 	_r := objc.Send[objc.ID](objref.IDOf(rpfd), objc.RegisterName("fragmentAdditionalBinaryFunctions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetFragmentAdditionalBinaryFunctions wraps the corresponding Objective-C method.
 func (rpfd *RenderPipelineFunctionsDescriptor) SetFragmentAdditionalBinaryFunctions(fragmentAdditionalBinaryFunctions []obj.Object) {
+	defer runtime.KeepAlive(rpfd)
 	objc.Send[objc.ID](objref.IDOf(rpfd), objc.RegisterName("setFragmentAdditionalBinaryFunctions:"), purego.SliceToNSArray(fragmentAdditionalBinaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // TileAdditionalBinaryFunctions returns the set of additional binary functions to be accessed from the tile function in an incrementally created pipeline state.
 func (rpfd *RenderPipelineFunctionsDescriptor) TileAdditionalBinaryFunctions() []obj.Object {
+	defer runtime.KeepAlive(rpfd)
 	_r := objc.Send[objc.ID](objref.IDOf(rpfd), objc.RegisterName("tileAdditionalBinaryFunctions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetTileAdditionalBinaryFunctions wraps the corresponding Objective-C method.
 func (rpfd *RenderPipelineFunctionsDescriptor) SetTileAdditionalBinaryFunctions(tileAdditionalBinaryFunctions []obj.Object) {
+	defer runtime.KeepAlive(rpfd)
 	objc.Send[objc.ID](objref.IDOf(rpfd), objc.RegisterName("setTileAdditionalBinaryFunctions:"), purego.SliceToNSArray(tileAdditionalBinaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }

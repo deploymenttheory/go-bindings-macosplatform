@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,27 +48,36 @@ func mTROperationalCertificateChainAdopt(id objc.ID) *MTROperationalCertificateC
 
 // Description returns the object's -description text.
 func (mocc *MTROperationalCertificateChain) Description() string {
+	defer runtime.KeepAlive(mocc)
 	return rt.Description(objref.IDOf(mocc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mocc *MTROperationalCertificateChain) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mocc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mocc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mocc *MTROperationalCertificateChain) IsKind(className string) bool {
+	defer runtime.KeepAlive(mocc)
 	return rt.IsKind(objref.IDOf(mocc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mocc *MTROperationalCertificateChain) String() string {
+	defer runtime.KeepAlive(mocc)
 	return rt.Description(objref.IDOf(mocc))
 }
 
 // NewMTROperationalCertificateChainWithOperationalCertificateIntermediateCertificateRootCertificateAdminSubject creates a new MTROperationalCertificateChain.
 func NewMTROperationalCertificateChainWithOperationalCertificateIntermediateCertificateRootCertificateAdminSubject(operationalCertificate obj.Object, intermediateCertificate obj.Object, rootCertificate obj.Object, adminSubject obj.Object) *MTROperationalCertificateChain {
+	defer runtime.KeepAlive(operationalCertificate)
+	defer runtime.KeepAlive(intermediateCertificate)
+	defer runtime.KeepAlive(rootCertificate)
+	defer runtime.KeepAlive(adminSubject)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTROperationalCertificateChain")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOperationalCertificate:intermediateCertificate:rootCertificate:adminSubject:"), objref.IDOf(operationalCertificate), objref.IDOf(intermediateCertificate), objref.IDOf(rootCertificate), objref.IDOf(adminSubject))
 	return mTROperationalCertificateChainAdopt(_id)
@@ -73,48 +85,56 @@ func NewMTROperationalCertificateChainWithOperationalCertificateIntermediateCert
 
 // WithOperationalCertificate sets the operational certificate.
 func (mocc *MTROperationalCertificateChain) WithOperationalCertificate(operationalCertificate obj.Object) *MTROperationalCertificateChain {
+	defer runtime.KeepAlive(operationalCertificate)
 	objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("setOperationalCertificate:"), objref.IDOf(operationalCertificate))
 	return mocc
 }
 
 // WithIntermediateCertificate sets a nil intermediateCertificate means there is no intermediate.
 func (mocc *MTROperationalCertificateChain) WithIntermediateCertificate(intermediateCertificate obj.Object) *MTROperationalCertificateChain {
+	defer runtime.KeepAlive(intermediateCertificate)
 	objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("setIntermediateCertificate:"), objref.IDOf(intermediateCertificate))
 	return mocc
 }
 
 // WithRootCertificate sets the root certificate.
 func (mocc *MTROperationalCertificateChain) WithRootCertificate(rootCertificate obj.Object) *MTROperationalCertificateChain {
+	defer runtime.KeepAlive(rootCertificate)
 	objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("setRootCertificate:"), objref.IDOf(rootCertificate))
 	return mocc
 }
 
 // WithAdminSubject sets adminSubject is passed to the device as part of the AddNOC command.  A nil adminSubject means the node id of the relevant MTRDeviceController will be used.
 func (mocc *MTROperationalCertificateChain) WithAdminSubject(adminSubject obj.Object) *MTROperationalCertificateChain {
+	defer runtime.KeepAlive(adminSubject)
 	objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("setAdminSubject:"), objref.IDOf(adminSubject))
 	return mocc
 }
 
 // OperationalCertificate returns the operational certificate.
-func (mocc *MTROperationalCertificateChain) OperationalCertificate() obj.Object {
+func (mocc *MTROperationalCertificateChain) OperationalCertificate() *foundation.Data {
+	defer runtime.KeepAlive(mocc)
 	_r := objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("operationalCertificate"))
-	return obj.Wrap(_r)
+	return foundation.DataFromID(_r)
 }
 
 // IntermediateCertificate returns a nil intermediateCertificate means there is no intermediate.
-func (mocc *MTROperationalCertificateChain) IntermediateCertificate() obj.Object {
+func (mocc *MTROperationalCertificateChain) IntermediateCertificate() *foundation.Data {
+	defer runtime.KeepAlive(mocc)
 	_r := objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("intermediateCertificate"))
-	return obj.Wrap(_r)
+	return foundation.DataFromID(_r)
 }
 
 // RootCertificate returns the root certificate.
-func (mocc *MTROperationalCertificateChain) RootCertificate() obj.Object {
+func (mocc *MTROperationalCertificateChain) RootCertificate() *foundation.Data {
+	defer runtime.KeepAlive(mocc)
 	_r := objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("rootCertificate"))
-	return obj.Wrap(_r)
+	return foundation.DataFromID(_r)
 }
 
 // AdminSubject returns adminSubject is passed to the device as part of the AddNOC command.  A nil adminSubject means the node id of the relevant MTRDeviceController will be used.
-func (mocc *MTROperationalCertificateChain) AdminSubject() obj.Object {
+func (mocc *MTROperationalCertificateChain) AdminSubject() *foundation.Number {
+	defer runtime.KeepAlive(mocc)
 	_r := objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("adminSubject"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

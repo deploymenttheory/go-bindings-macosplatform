@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRApplicationLauncherClusterStopAppParamsAdopt(id objc.ID) *MTRApplication
 
 // Description returns the object's -description text.
 func (malcsap *MTRApplicationLauncherClusterStopAppParams) Description() string {
+	defer runtime.KeepAlive(malcsap)
 	return rt.Description(objref.IDOf(malcsap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (malcsap *MTRApplicationLauncherClusterStopAppParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(malcsap)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(malcsap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (malcsap *MTRApplicationLauncherClusterStopAppParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(malcsap)
 	return rt.IsKind(objref.IDOf(malcsap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (malcsap *MTRApplicationLauncherClusterStopAppParams) String() string {
+	defer runtime.KeepAlive(malcsap)
 	return rt.Description(objref.IDOf(malcsap))
 }
 
@@ -72,36 +80,42 @@ func NewMTRApplicationLauncherClusterStopAppParams() *MTRApplicationLauncherClus
 
 // WithApplication sets the application.
 func (malcsap *MTRApplicationLauncherClusterStopAppParams) WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterStopAppParams {
+	defer runtime.KeepAlive(application)
 	objc.Send[objc.ID](objref.IDOf(malcsap), objc.RegisterName("setApplication:"), objref.IDOf(application))
 	return malcsap
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (malcsap *MTRApplicationLauncherClusterStopAppParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRApplicationLauncherClusterStopAppParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(malcsap), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return malcsap
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (malcsap *MTRApplicationLauncherClusterStopAppParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRApplicationLauncherClusterStopAppParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(malcsap), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return malcsap
 }
 
 // Application returns the application.
 func (malcsap *MTRApplicationLauncherClusterStopAppParams) Application() *MTRApplicationLauncherClusterApplicationStruct {
+	defer runtime.KeepAlive(malcsap)
 	_r := objc.Send[objc.ID](objref.IDOf(malcsap), objc.RegisterName("application"))
 	return MTRApplicationLauncherClusterApplicationStructFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (malcsap *MTRApplicationLauncherClusterStopAppParams) TimedInvokeTimeoutMs() obj.Object {
+func (malcsap *MTRApplicationLauncherClusterStopAppParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(malcsap)
 	_r := objc.Send[objc.ID](objref.IDOf(malcsap), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (malcsap *MTRApplicationLauncherClusterStopAppParams) ServerSideProcessingTimeout() obj.Object {
+func (malcsap *MTRApplicationLauncherClusterStopAppParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(malcsap)
 	_r := objc.Send[objc.ID](objref.IDOf(malcsap), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

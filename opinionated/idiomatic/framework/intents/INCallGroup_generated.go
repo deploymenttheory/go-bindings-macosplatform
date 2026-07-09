@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func callGroupAdopt(id objc.ID) *CallGroup {
 
 // Description returns the object's -description text.
 func (cg *CallGroup) Description() string {
+	defer runtime.KeepAlive(cg)
 	return rt.Description(objref.IDOf(cg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cg *CallGroup) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cg)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cg *CallGroup) IsKind(className string) bool {
+	defer runtime.KeepAlive(cg)
 	return rt.IsKind(objref.IDOf(cg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cg *CallGroup) String() string {
+	defer runtime.KeepAlive(cg)
 	return rt.Description(objref.IDOf(cg))
 }
 
@@ -75,6 +82,7 @@ func NewCallGroupWithGroupNameGroupID(groupName string, groupId string) *CallGro
 
 // GroupName returns the group name.
 func (cg *CallGroup) GroupName() string {
+	defer runtime.KeepAlive(cg)
 	_r := objc.Send[objc.ID](objref.IDOf(cg), objc.RegisterName("groupName"))
 	if _r == 0 {
 		return ""
@@ -84,6 +92,7 @@ func (cg *CallGroup) GroupName() string {
 
 // GroupID returns the group ID.
 func (cg *CallGroup) GroupID() string {
+	defer runtime.KeepAlive(cg)
 	_r := objc.Send[objc.ID](objref.IDOf(cg), objc.RegisterName("groupId"))
 	if _r == 0 {
 		return ""

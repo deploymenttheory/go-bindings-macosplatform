@@ -8,11 +8,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrUnknown matches the MediaPlayer error MPErrorUnknown.
-var ErrUnknown = errkit.New("MPErrorDomain", 0)
-
-// ErrPermissionDenied matches the MediaPlayer error MPErrorPermissionDenied.
-var ErrPermissionDenied = errkit.New("MPErrorDomain", 1)
+// ErrCancelled matches the MediaPlayer error MPErrorCancelled.
+var ErrCancelled = errkit.New("MPErrorDomain", 6)
 
 // ErrCloudServiceCapabilityMissing matches the MediaPlayer error MPErrorCloudServiceCapabilityMissing.
 var ErrCloudServiceCapabilityMissing = errkit.New("MPErrorDomain", 2)
@@ -26,8 +23,11 @@ var ErrNotFound = errkit.New("MPErrorDomain", 4)
 // ErrNotSupported matches the MediaPlayer error MPErrorNotSupported.
 var ErrNotSupported = errkit.New("MPErrorDomain", 5)
 
-// ErrCancelled matches the MediaPlayer error MPErrorCancelled.
-var ErrCancelled = errkit.New("MPErrorDomain", 6)
+// ErrPermissionDenied matches the MediaPlayer error MPErrorPermissionDenied.
+var ErrPermissionDenied = errkit.New("MPErrorDomain", 1)
 
 // ErrRequestTimedOut matches the MediaPlayer error MPErrorRequestTimedOut.
 var ErrRequestTimedOut = errkit.New("MPErrorDomain", 7)
+
+// ErrUnknown matches the MediaPlayer error MPErrorUnknown.
+var ErrUnknown = errkit.New("MPErrorDomain", 0)

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRGroupsClusterAddGroupParamsAdopt(id objc.ID) *MTRGroupsClusterAddGroupPa
 
 // Description returns the object's -description text.
 func (mgcagp *MTRGroupsClusterAddGroupParams) Description() string {
+	defer runtime.KeepAlive(mgcagp)
 	return rt.Description(objref.IDOf(mgcagp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mgcagp *MTRGroupsClusterAddGroupParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mgcagp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mgcagp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mgcagp *MTRGroupsClusterAddGroupParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mgcagp)
 	return rt.IsKind(objref.IDOf(mgcagp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mgcagp *MTRGroupsClusterAddGroupParams) String() string {
+	defer runtime.KeepAlive(mgcagp)
 	return rt.Description(objref.IDOf(mgcagp))
 }
 
@@ -72,6 +80,7 @@ func NewMTRGroupsClusterAddGroupParams() *MTRGroupsClusterAddGroupParams {
 
 // WithGroupID sets the group ID.
 func (mgcagp *MTRGroupsClusterAddGroupParams) WithGroupID(groupID obj.Object) *MTRGroupsClusterAddGroupParams {
+	defer runtime.KeepAlive(groupID)
 	objc.Send[objc.ID](objref.IDOf(mgcagp), objc.RegisterName("setGroupID:"), objref.IDOf(groupID))
 	return mgcagp
 }
@@ -84,24 +93,28 @@ func (mgcagp *MTRGroupsClusterAddGroupParams) WithGroupName(groupName string) *M
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mgcagp *MTRGroupsClusterAddGroupParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupsClusterAddGroupParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mgcagp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mgcagp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mgcagp *MTRGroupsClusterAddGroupParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGroupsClusterAddGroupParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mgcagp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mgcagp
 }
 
 // GroupID returns the group ID.
-func (mgcagp *MTRGroupsClusterAddGroupParams) GroupID() obj.Object {
+func (mgcagp *MTRGroupsClusterAddGroupParams) GroupID() *foundation.Number {
+	defer runtime.KeepAlive(mgcagp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgcagp), objc.RegisterName("groupID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // GroupName returns the group name.
 func (mgcagp *MTRGroupsClusterAddGroupParams) GroupName() string {
+	defer runtime.KeepAlive(mgcagp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgcagp), objc.RegisterName("groupName"))
 	if _r == 0 {
 		return ""
@@ -110,13 +123,15 @@ func (mgcagp *MTRGroupsClusterAddGroupParams) GroupName() string {
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mgcagp *MTRGroupsClusterAddGroupParams) TimedInvokeTimeoutMs() obj.Object {
+func (mgcagp *MTRGroupsClusterAddGroupParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mgcagp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgcagp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mgcagp *MTRGroupsClusterAddGroupParams) ServerSideProcessingTimeout() obj.Object {
+func (mgcagp *MTRGroupsClusterAddGroupParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mgcagp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgcagp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

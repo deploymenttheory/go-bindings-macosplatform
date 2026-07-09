@@ -8,51 +8,51 @@ import (
 	"fmt"
 )
 
-type Tcl_PathType int64
+type Pathtype int64
 
 const (
-	TCL_PATH_ABSOLUTE        Tcl_PathType = 0
-	TCL_PATH_RELATIVE        Tcl_PathType = 1
-	TCL_PATH_VOLUME_RELATIVE Tcl_PathType = 2
+	PathtypeAbsolute       Pathtype = 0
+	PathtypeRelative       Pathtype = 1
+	PathtypeVolumeRelative Pathtype = 2
 )
 
-// String returns the Tcl_PathType constant's name, or its numeric form when the
+// String returns the Pathtype constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Tcl_PathType) String() string {
+func (e Pathtype) String() string {
 	switch e {
-	case TCL_PATH_ABSOLUTE:
-		return "TCL_PATH_ABSOLUTE"
-	case TCL_PATH_RELATIVE:
-		return "TCL_PATH_RELATIVE"
-	case TCL_PATH_VOLUME_RELATIVE:
-		return "TCL_PATH_VOLUME_RELATIVE"
+	case PathtypeAbsolute:
+		return "PathtypeAbsolute"
+	case PathtypeRelative:
+		return "PathtypeRelative"
+	case PathtypeVolumeRelative:
+		return "PathtypeVolumeRelative"
 	default:
-		return fmt.Sprintf("Tcl_PathType(%d)", int64(e))
+		return fmt.Sprintf("Pathtype(%d)", int64(e))
 	}
 }
 
-type Tcl_ValueType int64
+type Valuetype int64
 
 const (
-	TCL_INT      Tcl_ValueType = 0
-	TCL_DOUBLE   Tcl_ValueType = 1
-	TCL_EITHER   Tcl_ValueType = 2
-	TCL_WIDE_INT Tcl_ValueType = 3
+	ValuetypeInt     Valuetype = 0
+	ValuetypeDouble  Valuetype = 1
+	ValuetypeEither  Valuetype = 2
+	ValuetypeWideInt Valuetype = 3
 )
 
-// String returns the Tcl_ValueType constant's name, or its numeric form when the
+// String returns the Valuetype constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Tcl_ValueType) String() string {
+func (e Valuetype) String() string {
 	switch e {
-	case TCL_INT:
-		return "TCL_INT"
-	case TCL_DOUBLE:
-		return "TCL_DOUBLE"
-	case TCL_EITHER:
-		return "TCL_EITHER"
-	case TCL_WIDE_INT:
-		return "TCL_WIDE_INT"
+	case ValuetypeInt:
+		return "ValuetypeInt"
+	case ValuetypeDouble:
+		return "ValuetypeDouble"
+	case ValuetypeEither:
+		return "ValuetypeEither"
+	case ValuetypeWideInt:
+		return "ValuetypeWideInt"
 	default:
-		return fmt.Sprintf("Tcl_ValueType(%d)", int64(e))
+		return fmt.Sprintf("Valuetype(%d)", int64(e))
 	}
 }

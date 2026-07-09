@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,6 +47,7 @@ func mTRGenericClusterAdopt(id objc.ID) *MTRGenericCluster {
 
 // Device returns the device.
 func (mgc *MTRGenericCluster) Device() *MTRDevice {
+	defer runtime.KeepAlive(mgc)
 	_r := objc.Send[objc.ID](objref.IDOf(mgc), objc.RegisterName("device"))
 	return MTRDeviceFromID(_r)
 }

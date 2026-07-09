@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -67,11 +69,15 @@ func (rnd *RandomNodeDefinition) WithUniqueSelectionQueueLength(uniqueSelectionQ
 
 // AddSubtreeWeight adds a node tree that’s one of the random-selection options.
 func (rnd *RandomNodeDefinition) AddSubtreeWeight(subtree *SoundEventNodeDefinition, weight obj.Object) {
+	defer runtime.KeepAlive(rnd)
+	defer runtime.KeepAlive(subtree)
+	defer runtime.KeepAlive(weight)
 	objc.Send[objc.ID](objref.IDOf(rnd), objc.RegisterName("addSubtree:weight:"), objref.IDOf(subtree), objref.IDOf(weight))
 }
 
 // UniqueSelectionQueueLength returns the unique selection queue length.
 func (rnd *RandomNodeDefinition) UniqueSelectionQueueLength() int {
+	defer runtime.KeepAlive(rnd)
 	_r := objc.Send[int](objref.IDOf(rnd), objc.RegisterName("uniqueSelectionQueueLength"))
 	return _r
 }

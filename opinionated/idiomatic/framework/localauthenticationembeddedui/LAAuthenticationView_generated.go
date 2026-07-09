@@ -5,6 +5,8 @@
 package localauthenticationembeddedui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func authenticationViewAdopt(id objc.ID) *AuthenticationView {
 
 // Description returns the object's -description text.
 func (av *AuthenticationView) Description() string {
+	defer runtime.KeepAlive(av)
 	return rt.Description(objref.IDOf(av))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (av *AuthenticationView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(av)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(av), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (av *AuthenticationView) IsKind(className string) bool {
+	defer runtime.KeepAlive(av)
 	return rt.IsKind(objref.IDOf(av), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (av *AuthenticationView) String() string {
+	defer runtime.KeepAlive(av)
 	return rt.Description(objref.IDOf(av))
 }
 
 // NewAuthenticationViewWithContext creates a new authentication icon that reflects the current authentication state.
 func NewAuthenticationViewWithContext(context_ obj.Object) *AuthenticationView {
+	defer runtime.KeepAlive(context_)
 	var _mainthread0 *AuthenticationView
 	purego.Main(func() {
 		_mainthread0 = func() *AuthenticationView {
@@ -81,6 +89,7 @@ func NewAuthenticationViewWithContext(context_ obj.Object) *AuthenticationView {
 
 // Context returns the context.
 func (av *AuthenticationView) Context() obj.Object {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

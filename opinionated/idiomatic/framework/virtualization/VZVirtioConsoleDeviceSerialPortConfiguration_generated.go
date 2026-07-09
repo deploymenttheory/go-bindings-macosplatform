@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewVirtioConsoleDeviceSerialPortConfiguration() *VirtioConsoleDeviceSerialP
 
 // WithAttachment sets the object that defines how the configuration of the virtual machine’s serial port interfaces.
 func (vcdspc *VirtioConsoleDeviceSerialPortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsoleDeviceSerialPortConfiguration {
+	defer runtime.KeepAlive(attachment)
 	objc.Send[objc.ID](objref.IDOf(vcdspc), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 	return vcdspc
 }

@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewClinicalRecord() *ClinicalRecord {
 
 // ClinicalType returns the clinical type.
 func (cr *ClinicalRecord) ClinicalType() *ClinicalType {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("clinicalType"))
 	return ClinicalTypeFromID(_r)
 }
 
 // DisplayName returns the primary display name used in Health. The display name is not localized, and is generally expected to be US English.
 func (cr *ClinicalRecord) DisplayName() string {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
@@ -68,6 +72,7 @@ func (cr *ClinicalRecord) DisplayName() string {
 
 // FHIRResource returns the FHIR resource (where applicable) backing this sample.
 func (cr *ClinicalRecord) FHIRResource() *FHIRResource {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("FHIRResource"))
 	return FHIRResourceFromID(_r)
 }

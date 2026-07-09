@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func audioDeviceConfigurationAdopt(id objc.ID) *AudioDeviceConfiguration {
 
 // Description returns the object's -description text.
 func (adc *AudioDeviceConfiguration) Description() string {
+	defer runtime.KeepAlive(adc)
 	return rt.Description(objref.IDOf(adc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (adc *AudioDeviceConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(adc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(adc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (adc *AudioDeviceConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(adc)
 	return rt.IsKind(objref.IDOf(adc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (adc *AudioDeviceConfiguration) String() string {
+	defer runtime.KeepAlive(adc)
 	return rt.Description(objref.IDOf(adc))
 }
 

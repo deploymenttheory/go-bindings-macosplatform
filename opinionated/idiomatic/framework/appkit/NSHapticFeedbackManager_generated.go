@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func hapticFeedbackManagerAdopt(id objc.ID) *HapticFeedbackManager {
 
 // Description returns the object's -description text.
 func (hfm *HapticFeedbackManager) Description() string {
+	defer runtime.KeepAlive(hfm)
 	return rt.Description(objref.IDOf(hfm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hfm *HapticFeedbackManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hfm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hfm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hfm *HapticFeedbackManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(hfm)
 	return rt.IsKind(objref.IDOf(hfm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hfm *HapticFeedbackManager) String() string {
+	defer runtime.KeepAlive(hfm)
 	return rt.Description(objref.IDOf(hfm))
 }
 

@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -63,9 +65,9 @@ func NewCountedSetWithArray(array []obj.Object) *CountedSet {
 }
 
 // NewCountedSetWithSet returns a counted set object initialized with the contents of a given set.
-func NewCountedSetWithSet(set obj.Object) *CountedSet {
+func NewCountedSetWithSet(set []obj.Object) *CountedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCountedSet")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSet:"), objref.IDOf(set))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSet:"), rt.SliceToNSSet(set, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return countedSetAdopt(_id)
 }
 
@@ -76,13 +78,15 @@ func (cs *CountedSet) WithObservationInfo(observationInfo unsafe.Pointer) *Count
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (cs *CountedSet) WithScriptingProperties(scriptingProperties obj.Object) *CountedSet {
-	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (cs *CountedSet) WithScriptingProperties(scriptingProperties map[string]obj.Object) *CountedSet {
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return cs
 }
 
 // CountForObject returns the count associated with a given object in the set.
 func (cs *CountedSet) CountForObject(object obj.Object) int {
+	defer runtime.KeepAlive(cs)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[int](objref.IDOf(cs), objc.RegisterName("countForObject:"), objref.IDOf(object))
 	return _r
 }

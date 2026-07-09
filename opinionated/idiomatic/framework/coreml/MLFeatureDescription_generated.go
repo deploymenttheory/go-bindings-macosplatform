@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func featureDescriptionAdopt(id objc.ID) *FeatureDescription {
 
 // Description returns the object's -description text.
 func (fd *FeatureDescription) Description() string {
+	defer runtime.KeepAlive(fd)
 	return rt.Description(objref.IDOf(fd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fd *FeatureDescription) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fd *FeatureDescription) IsKind(className string) bool {
+	defer runtime.KeepAlive(fd)
 	return rt.IsKind(objref.IDOf(fd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fd *FeatureDescription) String() string {
+	defer runtime.KeepAlive(fd)
 	return rt.Description(objref.IDOf(fd))
 }
 
@@ -74,12 +81,15 @@ func NewFeatureDescription() *FeatureDescription {
 
 // IsAllowedValue checks whether the model will accept an input feature value.
 func (fd *FeatureDescription) IsAllowedValue(value *FeatureValue) bool {
+	defer runtime.KeepAlive(fd)
+	defer runtime.KeepAlive(value)
 	_r := objc.Send[bool](objref.IDOf(fd), objc.RegisterName("isAllowedValue:"), objref.IDOf(value))
 	return _r
 }
 
 // Name returns name of feature
 func (fd *FeatureDescription) Name() string {
+	defer runtime.KeepAlive(fd)
 	_r := objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -89,42 +99,49 @@ func (fd *FeatureDescription) Name() string {
 
 // Type returns type of data
 func (fd *FeatureDescription) Type() FeatureType {
+	defer runtime.KeepAlive(fd)
 	_r := objc.Send[FeatureType](objref.IDOf(fd), objc.RegisterName("type"))
 	return _r
 }
 
 // IsOptional reports whether this feature can take an undefined value or not
 func (fd *FeatureDescription) IsOptional() bool {
+	defer runtime.KeepAlive(fd)
 	_r := objc.Send[bool](objref.IDOf(fd), objc.RegisterName("isOptional"))
 	return _r
 }
 
 // MultiArrayConstraint returns constraint when type == MLFeatureTypeMultiArray, nil otherwise
 func (fd *FeatureDescription) MultiArrayConstraint() *MultiArrayConstraint {
+	defer runtime.KeepAlive(fd)
 	_r := objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("multiArrayConstraint"))
 	return MultiArrayConstraintFromID(_r)
 }
 
 // ImageConstraint returns constraint when type == MLFeatureTypeImage, nil otherwise
 func (fd *FeatureDescription) ImageConstraint() *ImageConstraint {
+	defer runtime.KeepAlive(fd)
 	_r := objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("imageConstraint"))
 	return ImageConstraintFromID(_r)
 }
 
 // DictionaryConstraint returns constraint when type == MLFeatureTypeDictionary, nil otherwise
 func (fd *FeatureDescription) DictionaryConstraint() *DictionaryConstraint {
+	defer runtime.KeepAlive(fd)
 	_r := objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("dictionaryConstraint"))
 	return DictionaryConstraintFromID(_r)
 }
 
 // SequenceConstraint returns constraint when type == MLFeatureTypeSequence, nil otherwise
 func (fd *FeatureDescription) SequenceConstraint() *SequenceConstraint {
+	defer runtime.KeepAlive(fd)
 	_r := objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("sequenceConstraint"))
 	return SequenceConstraintFromID(_r)
 }
 
 // StateConstraint returns the state feature value constraint. The property has a value when `.type == MLFeatureTypeState`.
 func (fd *FeatureDescription) StateConstraint() *StateConstraint {
+	defer runtime.KeepAlive(fd)
 	_r := objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("stateConstraint"))
 	return StateConstraintFromID(_r)
 }

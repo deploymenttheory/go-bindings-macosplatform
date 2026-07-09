@@ -5,6 +5,7 @@
 package photos
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func fetchResultAdopt(id objc.ID) *FetchResult {
 
 // Description returns the object's -description text.
 func (fr *FetchResult) Description() string {
+	defer runtime.KeepAlive(fr)
 	return rt.Description(objref.IDOf(fr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fr *FetchResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fr *FetchResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(fr)
 	return rt.IsKind(objref.IDOf(fr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fr *FetchResult) String() string {
+	defer runtime.KeepAlive(fr)
 	return rt.Description(objref.IDOf(fr))
 }
 
@@ -78,6 +84,7 @@ func NewFetchResult() *FetchResult {
 
 // ObjectAtIndex returns the object located at the specified index.
 func (fr *FetchResult) ObjectAtIndex(index int) obj.Object {
+	defer runtime.KeepAlive(fr)
 	errkit.CheckIndex(index, fr.Count())
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("objectAtIndex:"), index)
 	return obj.Wrap(_r)
@@ -85,6 +92,7 @@ func (fr *FetchResult) ObjectAtIndex(index int) obj.Object {
 
 // ObjectAtIndexedSubscript returns the object located at the specified index.
 func (fr *FetchResult) ObjectAtIndexedSubscript(idx int) obj.Object {
+	defer runtime.KeepAlive(fr)
 	errkit.CheckIndex(idx, fr.Count())
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("objectAtIndexedSubscript:"), idx)
 	return obj.Wrap(_r)
@@ -92,53 +100,66 @@ func (fr *FetchResult) ObjectAtIndexedSubscript(idx int) obj.Object {
 
 // ContainsObject returns whether the specified object is present in the fetch result.
 func (fr *FetchResult) ContainsObject(anObject obj.Object) bool {
+	defer runtime.KeepAlive(fr)
+	defer runtime.KeepAlive(anObject)
 	_r := objc.Send[bool](objref.IDOf(fr), objc.RegisterName("containsObject:"), objref.IDOf(anObject))
 	return _r
 }
 
 // IndexOfObject returns the lowest index whose corresponding object in the fetch result is equal to the specified object.
 func (fr *FetchResult) IndexOfObject(anObject obj.Object) int {
+	defer runtime.KeepAlive(fr)
+	defer runtime.KeepAlive(anObject)
 	_r := objc.Send[int](objref.IDOf(fr), objc.RegisterName("indexOfObject:"), objref.IDOf(anObject))
 	return _r
 }
 
 // IndexOfObjectInRange returns the lowest index within the specified range whose corresponding object in the fetch result is equal to the specified object.
 func (fr *FetchResult) IndexOfObjectInRange(anObject obj.Object, range_ foundation.NSRange) int {
+	defer runtime.KeepAlive(fr)
+	defer runtime.KeepAlive(anObject)
 	_r := objc.Send[int](objref.IDOf(fr), objc.RegisterName("indexOfObject:inRange:"), objref.IDOf(anObject), range_)
 	return _r
 }
 
 // ObjectsAtIndexes returns an array containing the objects in the fetch result at the indexes in the specified index set.
 func (fr *FetchResult) ObjectsAtIndexes(indexes obj.Object) []obj.Object {
+	defer runtime.KeepAlive(fr)
+	defer runtime.KeepAlive(indexes)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("objectsAtIndexes:"), objref.IDOf(indexes))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // EnumerateObjectsUsing executes the specified block using each object in the fetch result, starting with the first object and continuing in order to the last object.
 func (fr *FetchResult) EnumerateObjectsUsing(block func(obj.Object, int, *bool)) {
+	defer runtime.KeepAlive(fr)
 	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("enumerateObjectsUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
 }
 
 // CountOfAssetsWithMediaType returns the number of assets in the fetch result of a specified type.
 func (fr *FetchResult) CountOfAssetsWithMediaType(mediaType AssetMediaType) int {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[int](objref.IDOf(fr), objc.RegisterName("countOfAssetsWithMediaType:"), mediaType)
 	return _r
 }
 
 // Count returns the count.
 func (fr *FetchResult) Count() int {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[int](objref.IDOf(fr), objc.RegisterName("count"))
 	return _r
 }
 
 // FirstObject returns the first object.
 func (fr *FetchResult) FirstObject() obj.Object {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("firstObject"))
 	return obj.Wrap(_r)
 }
 
 // LastObject returns the last object.
 func (fr *FetchResult) LastObject() obj.Object {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("lastObject"))
 	return obj.Wrap(_r)
 }

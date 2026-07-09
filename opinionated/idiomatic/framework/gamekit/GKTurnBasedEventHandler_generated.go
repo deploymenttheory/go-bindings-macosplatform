@@ -5,7 +5,10 @@
 package gamekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func turnBasedEventHandlerAdopt(id objc.ID) *TurnBasedEventHandler {
 
 // Description returns the object's -description text.
 func (tbeh *TurnBasedEventHandler) Description() string {
+	defer runtime.KeepAlive(tbeh)
 	return rt.Description(objref.IDOf(tbeh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tbeh *TurnBasedEventHandler) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tbeh)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tbeh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tbeh *TurnBasedEventHandler) IsKind(className string) bool {
+	defer runtime.KeepAlive(tbeh)
 	return rt.IsKind(objref.IDOf(tbeh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tbeh *TurnBasedEventHandler) String() string {
+	defer runtime.KeepAlive(tbeh)
 	return rt.Description(objref.IDOf(tbeh))
 }
 
@@ -74,12 +82,14 @@ func NewTurnBasedEventHandler() *TurnBasedEventHandler {
 
 // WithDelegate sets the delegate for the event handler.
 func (tbeh *TurnBasedEventHandler) WithDelegate(delegate obj.Object) *TurnBasedEventHandler {
+	defer runtime.KeepAlive(delegate)
 	objc.Send[objc.ID](objref.IDOf(tbeh), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return tbeh
 }
 
 // Delegate returns the delegate.
-func (tbeh *TurnBasedEventHandler) Delegate() obj.Object {
+func (tbeh *TurnBasedEventHandler) Delegate() *foundation.Object {
+	defer runtime.KeepAlive(tbeh)
 	_r := objc.Send[objc.ID](objref.IDOf(tbeh), objc.RegisterName("delegate"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }

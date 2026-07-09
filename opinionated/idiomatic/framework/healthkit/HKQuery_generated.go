@@ -5,7 +5,10 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,41 +52,49 @@ func queryAdopt(id objc.ID) *Query {
 
 // Description returns the object's -description text.
 func (q *Query) Description() string {
+	defer runtime.KeepAlive(q)
 	return rt.Description(objref.IDOf(q))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (q *Query) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(q)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(q), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (q *Query) IsKind(className string) bool {
+	defer runtime.KeepAlive(q)
 	return rt.IsKind(objref.IDOf(q), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (q *Query) String() string {
+	defer runtime.KeepAlive(q)
 	return rt.Description(objref.IDOf(q))
 }
 
 // ObjectType returns the object type.
 func (q *Query) ObjectType() *ObjectType {
+	defer runtime.KeepAlive(q)
 	_r := objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("objectType"))
 	return ObjectTypeFromID(_r)
 }
 
 // SampleType returns the sample type.
 func (q *Query) SampleType() *SampleType {
+	defer runtime.KeepAlive(q)
 	_r := objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("sampleType"))
 	return SampleTypeFromID(_r)
 }
 
 // Predicate returns the predicate.
-func (q *Query) Predicate() obj.Object {
+func (q *Query) Predicate() *foundation.Predicate {
+	defer runtime.KeepAlive(q)
 	_r := objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("predicate"))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // isQuery marks Query — and, by embedding promotion, its

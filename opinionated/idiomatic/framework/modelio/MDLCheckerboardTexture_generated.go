@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,6 +51,8 @@ func checkerboardTextureAdopt(id objc.ID) *CheckerboardTexture {
 
 // NewCheckerboardTextureWithDivisionsNameDimensionsChannelCountChannelEncodingColor1Color2 initializes a checkerboard texture with the specified colors and other properties.
 func NewCheckerboardTextureWithDivisionsNameDimensionsChannelCountChannelEncodingColor1Color2(divisions float32, name string, dimensions unsafe.Pointer, channelCount int, channelEncoding TextureChannelEncoding, color1 obj.Object, color2 obj.Object) *CheckerboardTexture {
+	defer runtime.KeepAlive(color1)
+	defer runtime.KeepAlive(color2)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLCheckerboardTexture")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDivisions:name:dimensions:channelCount:channelEncoding:color1:color2:"), divisions, purego.NSString(name), dimensions, channelCount, channelEncoding, objref.IDOf(color1), objref.IDOf(color2))
 	return checkerboardTextureAdopt(_id)
@@ -63,12 +66,14 @@ func (ct *CheckerboardTexture) WithDivisions(divisions float32) *CheckerboardTex
 
 // WithColor1 sets the color for half of the squares in the checkerboard pattern.
 func (ct *CheckerboardTexture) WithColor1(color1 obj.Object) *CheckerboardTexture {
+	defer runtime.KeepAlive(color1)
 	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setColor1:"), objref.IDOf(color1))
 	return ct
 }
 
 // WithColor2 sets the color for the other half of the squares in the checkerboard pattern.
 func (ct *CheckerboardTexture) WithColor2(color2 obj.Object) *CheckerboardTexture {
+	defer runtime.KeepAlive(color2)
 	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setColor2:"), objref.IDOf(color2))
 	return ct
 }
@@ -87,18 +92,21 @@ func (ct *CheckerboardTexture) WithHasAlphaValues(hasAlphaValues bool) *Checkerb
 
 // Divisions returns the divisions.
 func (ct *CheckerboardTexture) Divisions() float32 {
+	defer runtime.KeepAlive(ct)
 	_r := objc.Send[float32](objref.IDOf(ct), objc.RegisterName("divisions"))
 	return _r
 }
 
 // Color1 returns the color1.
 func (ct *CheckerboardTexture) Color1() obj.Object {
+	defer runtime.KeepAlive(ct)
 	_r := objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("color1"))
 	return obj.Wrap(_r)
 }
 
 // Color2 returns the color2.
 func (ct *CheckerboardTexture) Color2() obj.Object {
+	defer runtime.KeepAlive(ct)
 	_r := objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("color2"))
 	return obj.Wrap(_r)
 }

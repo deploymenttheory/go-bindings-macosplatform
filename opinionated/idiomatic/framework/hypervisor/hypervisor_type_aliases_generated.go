@@ -6,18 +6,18 @@ package hypervisor
 
 // The structure that describes information about an exit from the virtual CPU (vCPU) to the host.
 type HvVcpuExitExceptionT struct {
-	Syndrome         uint64
-	Virtual_address  uint64
-	Physical_address uint64
+	Syndrome        uint64
+	VirtualAddress  uint64
+	PhysicalAddress uint64
 }
 
 // Information about an exit from the vCPU to the host.
 type HvVcpuExitT struct {
-	Reason    Hv_exit_reason_t
+	Reason    ExitReason
 	Exception HvVcpuExitExceptionT
 }
 
 type HvVcpuSmeStateT struct {
-	Streaming_sve_mode_enabled bool
-	Za_storage_enabled         bool
+	StreamingSVEModeEnabled bool
+	ZaStorageEnabled        bool
 }

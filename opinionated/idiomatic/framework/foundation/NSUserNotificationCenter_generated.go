@@ -5,10 +5,12 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -49,22 +51,27 @@ func userNotificationCenterAdopt(id objc.ID) *UserNotificationCenter {
 
 // Description returns the object's -description text.
 func (unc *UserNotificationCenter) Description() string {
+	defer runtime.KeepAlive(unc)
 	return rt.Description(objref.IDOf(unc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (unc *UserNotificationCenter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(unc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(unc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (unc *UserNotificationCenter) IsKind(className string) bool {
+	defer runtime.KeepAlive(unc)
 	return rt.IsKind(objref.IDOf(unc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (unc *UserNotificationCenter) String() string {
+	defer runtime.KeepAlive(unc)
 	return rt.Description(objref.IDOf(unc))
 }
 
@@ -72,6 +79,16 @@ func (unc *UserNotificationCenter) String() string {
 func NewUserNotificationCenter() *UserNotificationCenter {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSUserNotificationCenter")), objc.RegisterName("new"))
 	return userNotificationCenterAdopt(_id)
+}
+
+// WithDelegate sets specifies the notification center delegate.
+func (unc *UserNotificationCenter) WithDelegate(delegate UserNotificationCenterDelegate) *UserNotificationCenter {
+	_shim := newUserNotificationCenterDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(unc), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(unc), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return unc
 }
 
 // WithScheduledNotifications sets specifies an array of scheduled user notifications that have not yet been delivered.
@@ -88,33 +105,42 @@ func (unc *UserNotificationCenter) WithObservationInfo(observationInfo unsafe.Po
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (unc *UserNotificationCenter) WithScriptingProperties(scriptingProperties obj.Object) *UserNotificationCenter {
-	objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (unc *UserNotificationCenter) WithScriptingProperties(scriptingProperties map[string]obj.Object) *UserNotificationCenter {
+	objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return unc
 }
 
 // ScheduleNotification schedules the specified user notification.
 func (unc *UserNotificationCenter) ScheduleNotification(notification *UserNotification) {
+	defer runtime.KeepAlive(unc)
+	defer runtime.KeepAlive(notification)
 	objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("scheduleNotification:"), objref.IDOf(notification))
 }
 
 // RemoveScheduledNotification removes the specified user notification for the scheduled notifications.
 func (unc *UserNotificationCenter) RemoveScheduledNotification(notification *UserNotification) {
+	defer runtime.KeepAlive(unc)
+	defer runtime.KeepAlive(notification)
 	objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("removeScheduledNotification:"), objref.IDOf(notification))
 }
 
 // DeliverNotification deliver the specified user notification.
 func (unc *UserNotificationCenter) DeliverNotification(notification *UserNotification) {
+	defer runtime.KeepAlive(unc)
+	defer runtime.KeepAlive(notification)
 	objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("deliverNotification:"), objref.IDOf(notification))
 }
 
 // RemoveDeliveredNotification remove a delivered user notification from the user notification center.
 func (unc *UserNotificationCenter) RemoveDeliveredNotification(notification *UserNotification) {
+	defer runtime.KeepAlive(unc)
+	defer runtime.KeepAlive(notification)
 	objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("removeDeliveredNotification:"), objref.IDOf(notification))
 }
 
 // RemoveAllDeliveredNotifications remove all delivered user notifications from the user notification center.
 func (unc *UserNotificationCenter) RemoveAllDeliveredNotifications() {
+	defer runtime.KeepAlive(unc)
 	objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("removeAllDeliveredNotifications"))
 }
 
@@ -122,6 +148,7 @@ func (unc *UserNotificationCenter) RemoveAllDeliveredNotifications() {
 //
 // ScheduledNotifications returns the collection as a Go slice.
 func (unc *UserNotificationCenter) ScheduledNotifications() []*UserNotification {
+	defer runtime.KeepAlive(unc)
 	_arr := objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("scheduledNotifications"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UserNotification { return UserNotificationFromID(_id) })
 }
@@ -130,6 +157,7 @@ func (unc *UserNotificationCenter) ScheduledNotifications() []*UserNotification 
 //
 // DeliveredNotifications returns the collection as a Go slice.
 func (unc *UserNotificationCenter) DeliveredNotifications() []*UserNotification {
+	defer runtime.KeepAlive(unc)
 	_arr := objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("deliveredNotifications"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UserNotification { return UserNotificationFromID(_id) })
 }

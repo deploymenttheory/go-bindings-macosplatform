@@ -5,8 +5,11 @@
 package paravirtualizedgraphics
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +51,27 @@ func pGDisplayDescriptorAdopt(id objc.ID) *PGDisplayDescriptor {
 
 // Description returns the object's -description text.
 func (pdd *PGDisplayDescriptor) Description() string {
+	defer runtime.KeepAlive(pdd)
 	return rt.Description(objref.IDOf(pdd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pdd *PGDisplayDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pdd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pdd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pdd *PGDisplayDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(pdd)
 	return rt.IsKind(objref.IDOf(pdd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pdd *PGDisplayDescriptor) String() string {
+	defer runtime.KeepAlive(pdd)
 	return rt.Description(objref.IDOf(pdd))
 }
 
@@ -87,6 +95,7 @@ func (pdd *PGDisplayDescriptor) WithSizeInMillimeters(sizeInMillimeters corefoun
 
 // WithQueue sets the queue that the framework uses when dispatching messages to any of the display’s registered handlers.
 func (pdd *PGDisplayDescriptor) WithQueue(queue obj.Object) *PGDisplayDescriptor {
+	defer runtime.KeepAlive(queue)
 	objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("setQueue:"), objref.IDOf(queue))
 	return pdd
 }
@@ -111,6 +120,7 @@ func (pdd *PGDisplayDescriptor) WithCursorMoveHandler(cursorMoveHandler func()) 
 
 // Name returns client supplied name of display, as seen by guest. Truncates to 13 characters.  Defaults to "Apple Virtual".  Value provided here may be made visible via guest UI.
 func (pdd *PGDisplayDescriptor) Name() string {
+	defer runtime.KeepAlive(pdd)
 	_r := objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -120,12 +130,14 @@ func (pdd *PGDisplayDescriptor) Name() string {
 
 // SizeInMillimeters returns client supplied display size conveyed to guest compositor. Conveyed size contributes to guest compositor layout, but host-side VM app can scale to UI of its own choosing.
 func (pdd *PGDisplayDescriptor) SizeInMillimeters() corefoundation.CGSize {
+	defer runtime.KeepAlive(pdd)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(pdd), objc.RegisterName("sizeInMillimeters"))
 	return _r
 }
 
 // Queue returns client supplied dispatch_queue on which to invoke client supplied blocks. Typical client provides serial queue, and redispatches if beneficial to process out of order.
-func (pdd *PGDisplayDescriptor) Queue() obj.Object {
+func (pdd *PGDisplayDescriptor) Queue() *foundation.Object {
+	defer runtime.KeepAlive(pdd)
 	_r := objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("queue"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }

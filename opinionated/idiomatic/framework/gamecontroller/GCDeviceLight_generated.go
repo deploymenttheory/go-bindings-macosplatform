@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func deviceLightAdopt(id objc.ID) *DeviceLight {
 
 // Description returns the object's -description text.
 func (dl *DeviceLight) Description() string {
+	defer runtime.KeepAlive(dl)
 	return rt.Description(objref.IDOf(dl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dl *DeviceLight) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dl *DeviceLight) IsKind(className string) bool {
+	defer runtime.KeepAlive(dl)
 	return rt.IsKind(objref.IDOf(dl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dl *DeviceLight) String() string {
+	defer runtime.KeepAlive(dl)
 	return rt.Description(objref.IDOf(dl))
 }
 
@@ -74,12 +81,14 @@ func NewDeviceLight() *DeviceLight {
 
 // WithColor sets the color of a device’s light.
 func (dl *DeviceLight) WithColor(color *Color) *DeviceLight {
+	defer runtime.KeepAlive(color)
 	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return dl
 }
 
 // Color returns the color.
 func (dl *DeviceLight) Color() *Color {
+	defer runtime.KeepAlive(dl)
 	_r := objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("color"))
 	return ColorFromID(_r)
 }

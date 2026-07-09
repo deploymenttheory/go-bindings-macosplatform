@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,35 +49,40 @@ func publicKeyCredentialClientDataAdopt(id objc.ID) *PublicKeyCredentialClientDa
 
 // Description returns the object's -description text.
 func (pkccd *PublicKeyCredentialClientData) Description() string {
+	defer runtime.KeepAlive(pkccd)
 	return rt.Description(objref.IDOf(pkccd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pkccd *PublicKeyCredentialClientData) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pkccd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pkccd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pkccd *PublicKeyCredentialClientData) IsKind(className string) bool {
+	defer runtime.KeepAlive(pkccd)
 	return rt.IsKind(objref.IDOf(pkccd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pkccd *PublicKeyCredentialClientData) String() string {
+	defer runtime.KeepAlive(pkccd)
 	return rt.Description(objref.IDOf(pkccd))
 }
 
 // NewPublicKeyCredentialClientDataWithChallengeOrigin creates a new PublicKeyCredentialClientData.
-func NewPublicKeyCredentialClientDataWithChallengeOrigin(challenge obj.Object, origin string) *PublicKeyCredentialClientData {
+func NewPublicKeyCredentialClientDataWithChallengeOrigin(challenge []byte, origin string) *PublicKeyCredentialClientData {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPublicKeyCredentialClientData")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChallenge:origin:"), objref.IDOf(challenge), purego.NSString(origin))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChallenge:origin:"), rt.BytesToNSData(challenge), purego.NSString(origin))
 	return publicKeyCredentialClientDataAdopt(_id)
 }
 
 // WithChallenge sets the challenge to be signed during the operation.
-func (pkccd *PublicKeyCredentialClientData) WithChallenge(challenge obj.Object) *PublicKeyCredentialClientData {
-	objc.Send[objc.ID](objref.IDOf(pkccd), objc.RegisterName("setChallenge:"), objref.IDOf(challenge))
+func (pkccd *PublicKeyCredentialClientData) WithChallenge(challenge []byte) *PublicKeyCredentialClientData {
+	objc.Send[objc.ID](objref.IDOf(pkccd), objc.RegisterName("setChallenge:"), rt.BytesToNSData(challenge))
 	return pkccd
 }
 
@@ -98,13 +105,15 @@ func (pkccd *PublicKeyCredentialClientData) WithCrossOrigin(crossOrigin PublicKe
 }
 
 // Challenge returns the challenge to be signed during the operation.
-func (pkccd *PublicKeyCredentialClientData) Challenge() obj.Object {
+func (pkccd *PublicKeyCredentialClientData) Challenge() []byte {
+	defer runtime.KeepAlive(pkccd)
 	_r := objc.Send[objc.ID](objref.IDOf(pkccd), objc.RegisterName("challenge"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Origin returns the origin for where the request was performed.
 func (pkccd *PublicKeyCredentialClientData) Origin() string {
+	defer runtime.KeepAlive(pkccd)
 	_r := objc.Send[objc.ID](objref.IDOf(pkccd), objc.RegisterName("origin"))
 	if _r == 0 {
 		return ""
@@ -114,6 +123,7 @@ func (pkccd *PublicKeyCredentialClientData) Origin() string {
 
 // TopOrigin returns the top-level origin, if applicable.
 func (pkccd *PublicKeyCredentialClientData) TopOrigin() string {
+	defer runtime.KeepAlive(pkccd)
 	_r := objc.Send[objc.ID](objref.IDOf(pkccd), objc.RegisterName("topOrigin"))
 	if _r == 0 {
 		return ""
@@ -123,6 +133,7 @@ func (pkccd *PublicKeyCredentialClientData) TopOrigin() string {
 
 // CrossOrigin indicates whether this is a cross-origin request, if applicable.
 func (pkccd *PublicKeyCredentialClientData) CrossOrigin() PublicKeyCredentialClientDataCrossOriginValue {
+	defer runtime.KeepAlive(pkccd)
 	_r := objc.Send[PublicKeyCredentialClientDataCrossOriginValue](objref.IDOf(pkccd), objc.RegisterName("crossOrigin"))
 	return _r
 }

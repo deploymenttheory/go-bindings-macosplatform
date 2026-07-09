@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func writingToolsCoordinatorAnimationParametersAdopt(id objc.ID) *WritingToolsCo
 
 // Description returns the object's -description text.
 func (wtcap *WritingToolsCoordinatorAnimationParameters) Description() string {
+	defer runtime.KeepAlive(wtcap)
 	return rt.Description(objref.IDOf(wtcap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wtcap *WritingToolsCoordinatorAnimationParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wtcap)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wtcap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wtcap *WritingToolsCoordinatorAnimationParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(wtcap)
 	return rt.IsKind(objref.IDOf(wtcap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wtcap *WritingToolsCoordinatorAnimationParameters) String() string {
+	defer runtime.KeepAlive(wtcap)
 	return rt.Description(objref.IDOf(wtcap))
 }
 
@@ -84,12 +91,14 @@ func (wtcap *WritingToolsCoordinatorAnimationParameters) WithCompletionHandler(c
 
 // Duration returns the number of seconds it takes the system animations to run.
 func (wtcap *WritingToolsCoordinatorAnimationParameters) Duration() float64 {
+	defer runtime.KeepAlive(wtcap)
 	_r := objc.Send[float64](objref.IDOf(wtcap), objc.RegisterName("duration"))
 	return _r
 }
 
 // Delay returns the number of seconds the system waits before starting its animations.
 func (wtcap *WritingToolsCoordinatorAnimationParameters) Delay() float64 {
+	defer runtime.KeepAlive(wtcap)
 	_r := objc.Send[float64](objref.IDOf(wtcap), objc.RegisterName("delay"))
 	return _r
 }

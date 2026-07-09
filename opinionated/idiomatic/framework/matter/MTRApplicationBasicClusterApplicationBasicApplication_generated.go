@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,6 +54,7 @@ func NewMTRApplicationBasicClusterApplicationBasicApplication() *MTRApplicationB
 
 // WithCatalogVendorID sets the catalog vendor ID.
 func (mabcaba *MTRApplicationBasicClusterApplicationBasicApplication) WithCatalogVendorID(catalogVendorID obj.Object) *MTRApplicationBasicClusterApplicationBasicApplication {
+	defer runtime.KeepAlive(catalogVendorID)
 	objc.Send[objc.ID](objref.IDOf(mabcaba), objc.RegisterName("setCatalogVendorID:"), objref.IDOf(catalogVendorID))
 	return mabcaba
 }

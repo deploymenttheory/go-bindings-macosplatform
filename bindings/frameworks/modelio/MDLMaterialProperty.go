@@ -125,8 +125,8 @@ func (o *MDLMaterialProperty) InitWithNameSemanticMatrix4x4(name *foundation.NSS
 }
 
 // Initializes a material property with a URL value.
-func (o *MDLMaterialProperty) InitWithNameSemanticURL(name *foundation.NSString, semantic MDLMaterialSemantic, uRL *foundation.NSURL) *MDLMaterialProperty {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticURL, name.Ptr(), semantic, uRL.Ptr())
+func (o *MDLMaterialProperty) InitWithNameSemanticURL(name *foundation.NSString, semantic MDLMaterialSemantic, url *foundation.NSURL) *MDLMaterialProperty {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticURL, name.Ptr(), semantic, url.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -216,8 +216,8 @@ func (o *MDLMaterialProperty) URLValue() *foundation.NSURL {
 	return foundation.NSURLFromID(_ret)
 }
 
-func (o *MDLMaterialProperty) SetURLValue(uRLValue *foundation.NSURL) {
-	o.Ptr().Send(_mDLMaterialPropertySelSetURLValue, uRLValue.Ptr())
+func (o *MDLMaterialProperty) SetURLValue(urlValue *foundation.NSURL) {
+	o.Ptr().Send(_mDLMaterialPropertySelSetURLValue, urlValue.Ptr())
 }
 
 func (o *MDLMaterialProperty) TextureSamplerValue() *MDLTextureSampler {

@@ -5,6 +5,8 @@
 package gamekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func inviteAdopt(id objc.ID) *Invite {
 
 // Description returns the object's -description text.
 func (i *Invite) Description() string {
+	defer runtime.KeepAlive(i)
 	return rt.Description(objref.IDOf(i))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (i *Invite) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(i)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(i), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (i *Invite) IsKind(className string) bool {
+	defer runtime.KeepAlive(i)
 	return rt.IsKind(objref.IDOf(i), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (i *Invite) String() string {
+	defer runtime.KeepAlive(i)
 	return rt.Description(objref.IDOf(i))
 }
 
@@ -74,30 +81,35 @@ func NewInvite() *Invite {
 
 // Sender returns the sender.
 func (i *Invite) Sender() *Player {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("sender"))
 	return PlayerFromID(_r)
 }
 
 // IsHosted reports whether the object is hosted.
 func (i *Invite) IsHosted() bool {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[bool](objref.IDOf(i), objc.RegisterName("isHosted"))
 	return _r
 }
 
 // PlayerGroup returns player group from inviter's match request
 func (i *Invite) PlayerGroup() int {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[int](objref.IDOf(i), objc.RegisterName("playerGroup"))
 	return _r
 }
 
 // PlayerAttributes returns player attributes from inviter's match request
 func (i *Invite) PlayerAttributes() uint32 {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[uint32](objref.IDOf(i), objc.RegisterName("playerAttributes"))
 	return _r
 }
 
 // Inviter returns * This property is obsolete. **
 func (i *Invite) Inviter() string {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("inviter"))
 	if _r == 0 {
 		return ""

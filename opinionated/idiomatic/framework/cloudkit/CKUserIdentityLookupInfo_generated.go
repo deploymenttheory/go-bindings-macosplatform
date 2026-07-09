@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func userIdentityLookupInfoAdopt(id objc.ID) *UserIdentityLookupInfo {
 
 // Description returns the object's -description text.
 func (uili *UserIdentityLookupInfo) Description() string {
+	defer runtime.KeepAlive(uili)
 	return rt.Description(objref.IDOf(uili))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (uili *UserIdentityLookupInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(uili)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(uili), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (uili *UserIdentityLookupInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(uili)
 	return rt.IsKind(objref.IDOf(uili), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (uili *UserIdentityLookupInfo) String() string {
+	defer runtime.KeepAlive(uili)
 	return rt.Description(objref.IDOf(uili))
 }
 
@@ -82,6 +89,7 @@ func NewUserIdentityLookupInfoWithPhoneNumber(phoneNumber string) *UserIdentityL
 
 // NewUserIdentityLookupInfoWithUserRecordID creates a lookup info for the specified user record ID. - Parameters: - userRecordID: The user record ID for looking up the user identity. After you create a lookup info, use the “CKDiscoverUserIdentitiesOperation“ operation or the  “CKFetchShareParticipantsOperation“ operation to retrieve the corresponding user identity.
 func NewUserIdentityLookupInfoWithUserRecordID(userRecordID *RecordID) *UserIdentityLookupInfo {
+	defer runtime.KeepAlive(userRecordID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKUserIdentityLookupInfo")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUserRecordID:"), objref.IDOf(userRecordID))
 	return userIdentityLookupInfoAdopt(_id)
@@ -89,6 +97,7 @@ func NewUserIdentityLookupInfoWithUserRecordID(userRecordID *RecordID) *UserIden
 
 // EmailAddress returns the user's email address.
 func (uili *UserIdentityLookupInfo) EmailAddress() string {
+	defer runtime.KeepAlive(uili)
 	_r := objc.Send[objc.ID](objref.IDOf(uili), objc.RegisterName("emailAddress"))
 	if _r == 0 {
 		return ""
@@ -98,6 +107,7 @@ func (uili *UserIdentityLookupInfo) EmailAddress() string {
 
 // PhoneNumber returns the user's phone number.
 func (uili *UserIdentityLookupInfo) PhoneNumber() string {
+	defer runtime.KeepAlive(uili)
 	_r := objc.Send[objc.ID](objref.IDOf(uili), objc.RegisterName("phoneNumber"))
 	if _r == 0 {
 		return ""
@@ -107,6 +117,7 @@ func (uili *UserIdentityLookupInfo) PhoneNumber() string {
 
 // UserRecordID returns the ID of the user record. Use this value to retrieve the user record for the user identity. The user record doesn't contain any personal information about the user, by default. You can add data to the user record, but you shouldn't add anything sensitive.
 func (uili *UserIdentityLookupInfo) UserRecordID() *RecordID {
+	defer runtime.KeepAlive(uili)
 	_r := objc.Send[objc.ID](objref.IDOf(uili), objc.RegisterName("userRecordID"))
 	return RecordIDFromID(_r)
 }

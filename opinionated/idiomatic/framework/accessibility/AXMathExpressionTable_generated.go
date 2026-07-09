@@ -5,6 +5,8 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -54,6 +56,7 @@ func NewMathExpressionTableWithExpressions(expressions []*MathExpression) *MathE
 //
 // Expressions returns the collection as a Go slice.
 func (met *MathExpressionTable) Expressions() []*MathExpression {
+	defer runtime.KeepAlive(met)
 	_arr := objc.Send[objc.ID](objref.IDOf(met), objc.RegisterName("expressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }

@@ -5,6 +5,8 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func phoneNumberAdopt(id objc.ID) *PhoneNumber {
 
 // Description returns the object's -description text.
 func (pn *PhoneNumber) Description() string {
+	defer runtime.KeepAlive(pn)
 	return rt.Description(objref.IDOf(pn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pn *PhoneNumber) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pn)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pn *PhoneNumber) IsKind(className string) bool {
+	defer runtime.KeepAlive(pn)
 	return rt.IsKind(objref.IDOf(pn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pn *PhoneNumber) String() string {
+	defer runtime.KeepAlive(pn)
 	return rt.Description(objref.IDOf(pn))
 }
 
@@ -73,14 +80,15 @@ func NewPhoneNumber() *PhoneNumber {
 }
 
 // NewPhoneNumberWithStringValue returns a new phone number object initialized with the specified phone number string.
-func NewPhoneNumberWithStringValue(string_ string) *PhoneNumber {
+func NewPhoneNumberWithStringValue(str string) *PhoneNumber {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CNPhoneNumber")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStringValue:"), purego.NSString(string_))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStringValue:"), purego.NSString(str))
 	return phoneNumberAdopt(_id)
 }
 
 // StringValue returns the string value.
 func (pn *PhoneNumber) StringValue() string {
+	defer runtime.KeepAlive(pn)
 	_r := objc.Send[objc.ID](objref.IDOf(pn), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""

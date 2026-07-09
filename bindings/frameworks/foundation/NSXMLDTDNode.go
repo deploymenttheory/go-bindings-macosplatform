@@ -73,8 +73,8 @@ func (o *NSXMLDTDNode) DTDKind() NSXMLDTDNodeKind {
 	return _ret
 }
 
-func (o *NSXMLDTDNode) SetDTDKind(dTDKind NSXMLDTDNodeKind) {
-	o.Ptr().Send(_nSXMLDTDNodeSelSetDTDKind, dTDKind)
+func (o *NSXMLDTDNode) SetDTDKind(dtdKind NSXMLDTDNodeKind) {
+	o.Ptr().Send(_nSXMLDTDNodeSelSetDTDKind, dtdKind)
 }
 
 // @abstract True if the system id is set. Valid for entities and notations.

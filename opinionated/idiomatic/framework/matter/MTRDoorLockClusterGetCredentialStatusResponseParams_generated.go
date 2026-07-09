@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRDoorLockClusterGetCredentialStatusResponseParamsAdopt(id objc.ID) *MTRDo
 
 // Description returns the object's -description text.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) Description() string {
+	defer runtime.KeepAlive(mdlcgcsrp)
 	return rt.Description(objref.IDOf(mdlcgcsrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdlcgcsrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdlcgcsrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdlcgcsrp)
 	return rt.IsKind(objref.IDOf(mdlcgcsrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) String() string {
+	defer runtime.KeepAlive(mdlcgcsrp)
 	return rt.Description(objref.IDOf(mdlcgcsrp))
 }
 
-// NewMTRDoorLockClusterGetCredentialStatusResponseParamsWithResponseValueError initialize an MTRDoorLockClusterGetCredentialStatusResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-func NewMTRDoorLockClusterGetCredentialStatusResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRDoorLockClusterGetCredentialStatusResponseParams, err error) {
+// NewMTRDoorLockClusterGetCredentialStatusResponseParamsWithResponseValue initialize an MTRDoorLockClusterGetCredentialStatusResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRDoorLockClusterGetCredentialStatusResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRDoorLockClusterGetCredentialStatusResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRDoorLockClusterGetCredentialStatusResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,84 +87,97 @@ func NewMTRDoorLockClusterGetCredentialStatusResponseParamsWithResponseValueErro
 
 // WithCredentialExists sets the credential exists.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) WithCredentialExists(credentialExists obj.Object) *MTRDoorLockClusterGetCredentialStatusResponseParams {
+	defer runtime.KeepAlive(credentialExists)
 	objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("setCredentialExists:"), objref.IDOf(credentialExists))
 	return mdlcgcsrp
 }
 
 // WithUserIndex sets the user index.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterGetCredentialStatusResponseParams {
+	defer runtime.KeepAlive(userIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlcgcsrp
 }
 
 // WithCreatorFabricIndex sets the creator fabric index.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) WithCreatorFabricIndex(creatorFabricIndex obj.Object) *MTRDoorLockClusterGetCredentialStatusResponseParams {
+	defer runtime.KeepAlive(creatorFabricIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("setCreatorFabricIndex:"), objref.IDOf(creatorFabricIndex))
 	return mdlcgcsrp
 }
 
 // WithLastModifiedFabricIndex sets the last modified fabric index.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) WithLastModifiedFabricIndex(lastModifiedFabricIndex obj.Object) *MTRDoorLockClusterGetCredentialStatusResponseParams {
+	defer runtime.KeepAlive(lastModifiedFabricIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("setLastModifiedFabricIndex:"), objref.IDOf(lastModifiedFabricIndex))
 	return mdlcgcsrp
 }
 
 // WithNextCredentialIndex sets the next credential index.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) WithNextCredentialIndex(nextCredentialIndex obj.Object) *MTRDoorLockClusterGetCredentialStatusResponseParams {
+	defer runtime.KeepAlive(nextCredentialIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("setNextCredentialIndex:"), objref.IDOf(nextCredentialIndex))
 	return mdlcgcsrp
 }
 
 // WithCredentialData sets the credential data.
-func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) WithCredentialData(credentialData obj.Object) *MTRDoorLockClusterGetCredentialStatusResponseParams {
-	objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("setCredentialData:"), objref.IDOf(credentialData))
+func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) WithCredentialData(credentialData []byte) *MTRDoorLockClusterGetCredentialStatusResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("setCredentialData:"), rt.BytesToNSData(credentialData))
 	return mdlcgcsrp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterGetCredentialStatusResponseParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mdlcgcsrp
 }
 
 // CredentialExists returns the credential exists.
-func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) CredentialExists() obj.Object {
+func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) CredentialExists() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgcsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("credentialExists"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // UserIndex returns the user index.
-func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) UserIndex() obj.Object {
+func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) UserIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgcsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("userIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // CreatorFabricIndex returns the creator fabric index.
-func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) CreatorFabricIndex() obj.Object {
+func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) CreatorFabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgcsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("creatorFabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // LastModifiedFabricIndex returns the last modified fabric index.
-func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) LastModifiedFabricIndex() obj.Object {
+func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) LastModifiedFabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgcsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("lastModifiedFabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NextCredentialIndex returns the next credential index.
-func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) NextCredentialIndex() obj.Object {
+func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) NextCredentialIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgcsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("nextCredentialIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // CredentialData returns the credential data.
-func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) CredentialData() obj.Object {
+func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) CredentialData() []byte {
+	defer runtime.KeepAlive(mdlcgcsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("credentialData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) TimedInvokeTimeoutMs() obj.Object {
+func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgcsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

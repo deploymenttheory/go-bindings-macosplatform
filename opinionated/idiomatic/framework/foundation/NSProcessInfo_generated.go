@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func processInfoAdopt(id objc.ID) *ProcessInfo {
 
 // Description returns the object's -description text.
 func (pi *ProcessInfo) Description() string {
+	defer runtime.KeepAlive(pi)
 	return rt.Description(objref.IDOf(pi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pi *ProcessInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pi *ProcessInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(pi)
 	return rt.IsKind(objref.IDOf(pi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pi *ProcessInfo) String() string {
+	defer runtime.KeepAlive(pi)
 	return rt.Description(objref.IDOf(pi))
 }
 
@@ -77,6 +83,7 @@ func NewProcessInfo() *ProcessInfo {
 
 // WithProcessName sets the process name.
 func (pi *ProcessInfo) WithProcessName(processName StringProvider) *ProcessInfo {
+	defer runtime.KeepAlive(processName)
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setProcessName:"), objref.IDOf(processName))
 	return pi
 }
@@ -94,19 +101,21 @@ func (pi *ProcessInfo) WithObservationInfo(observationInfo unsafe.Pointer) *Proc
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (pi *ProcessInfo) WithScriptingProperties(scriptingProperties obj.Object) *ProcessInfo {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (pi *ProcessInfo) WithScriptingProperties(scriptingProperties map[string]obj.Object) *ProcessInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return pi
 }
 
 // OperatingSystem returns the operating system.
 func (pi *ProcessInfo) OperatingSystem() int {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("operatingSystem"))
 	return _r
 }
 
 // OperatingSystemName returns the operating system name.
 func (pi *ProcessInfo) OperatingSystemName() string {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("operatingSystemName"))
 	if _r == 0 {
 		return ""
@@ -116,40 +125,47 @@ func (pi *ProcessInfo) OperatingSystemName() string {
 
 // DisableSuddenTermination disables sudden termination.
 func (pi *ProcessInfo) DisableSuddenTermination() {
+	defer runtime.KeepAlive(pi)
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("disableSuddenTermination"))
 }
 
 // EnableSuddenTermination enables sudden termination.
 func (pi *ProcessInfo) EnableSuddenTermination() {
+	defer runtime.KeepAlive(pi)
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("enableSuddenTermination"))
 }
 
 // DisableAutomaticTermination disables automatic termination.
 func (pi *ProcessInfo) DisableAutomaticTermination(reason string) {
+	defer runtime.KeepAlive(pi)
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("disableAutomaticTermination:"), purego.NSString(reason))
 }
 
 // EnableAutomaticTermination enables automatic termination.
 func (pi *ProcessInfo) EnableAutomaticTermination(reason string) {
+	defer runtime.KeepAlive(pi)
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("enableAutomaticTermination:"), purego.NSString(reason))
 }
 
 // Environment returns the environment.
-func (pi *ProcessInfo) Environment() obj.Object {
+func (pi *ProcessInfo) Environment() map[string]string {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("environment"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Arguments returns the arguments.
 //
 // Arguments returns the collection as a Go slice.
 func (pi *ProcessInfo) Arguments() []string {
+	defer runtime.KeepAlive(pi)
 	_arr := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("arguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // HostName returns the host name.
 func (pi *ProcessInfo) HostName() string {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("hostName"))
 	if _r == 0 {
 		return ""
@@ -159,6 +175,7 @@ func (pi *ProcessInfo) HostName() string {
 
 // ProcessName returns the process name.
 func (pi *ProcessInfo) ProcessName() string {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("processName"))
 	if _r == 0 {
 		return ""
@@ -168,12 +185,14 @@ func (pi *ProcessInfo) ProcessName() string {
 
 // ProcessIdentifier returns the process identifier.
 func (pi *ProcessInfo) ProcessIdentifier() int {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("processIdentifier"))
 	return _r
 }
 
 // GloballyUniqueString returns the globally unique string.
 func (pi *ProcessInfo) GloballyUniqueString() string {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("globallyUniqueString"))
 	if _r == 0 {
 		return ""
@@ -183,6 +202,7 @@ func (pi *ProcessInfo) GloballyUniqueString() string {
 
 // OperatingSystemVersionString returns the operating system version string.
 func (pi *ProcessInfo) OperatingSystemVersionString() string {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("operatingSystemVersionString"))
 	if _r == 0 {
 		return ""
@@ -192,30 +212,35 @@ func (pi *ProcessInfo) OperatingSystemVersionString() string {
 
 // ProcessorCount returns the processor count.
 func (pi *ProcessInfo) ProcessorCount() int {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("processorCount"))
 	return _r
 }
 
 // ActiveProcessorCount returns the active processor count.
 func (pi *ProcessInfo) ActiveProcessorCount() int {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("activeProcessorCount"))
 	return _r
 }
 
 // PhysicalMemory returns the physical memory.
 func (pi *ProcessInfo) PhysicalMemory() uint64 {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[uint64](objref.IDOf(pi), objc.RegisterName("physicalMemory"))
 	return _r
 }
 
 // SystemUptime returns the system uptime.
 func (pi *ProcessInfo) SystemUptime() float64 {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("systemUptime"))
 	return _r
 }
 
 // AutomaticTerminationSupportEnabled wraps the corresponding Objective-C method.
 func (pi *ProcessInfo) AutomaticTerminationSupportEnabled() bool {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("automaticTerminationSupportEnabled"))
 	return _r
 }
@@ -224,6 +249,7 @@ func (pi *ProcessInfo) AutomaticTerminationSupportEnabled() bool {
 //
 // PerformActivityWithOptionsReasonUsing blocks until the operation completes or ctx is cancelled.
 func (pi *ProcessInfo) PerformActivityWithOptionsReasonUsing(ctx context.Context, options ActivityOptions, reason string) error {
+	defer runtime.KeepAlive(pi)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -239,6 +265,7 @@ func (pi *ProcessInfo) PerformActivityWithOptionsReasonUsing(ctx context.Context
 
 // UserName returns the user name.
 func (pi *ProcessInfo) UserName() string {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("userName"))
 	if _r == 0 {
 		return ""
@@ -248,6 +275,7 @@ func (pi *ProcessInfo) UserName() string {
 
 // FullUserName returns the full user name.
 func (pi *ProcessInfo) FullUserName() string {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("fullUserName"))
 	if _r == 0 {
 		return ""
@@ -257,30 +285,35 @@ func (pi *ProcessInfo) FullUserName() string {
 
 // ThermalState returns the thermal state.
 func (pi *ProcessInfo) ThermalState() ProcessInfoThermalState {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[ProcessInfoThermalState](objref.IDOf(pi), objc.RegisterName("thermalState"))
 	return _r
 }
 
 // IsLowPowerModeEnabled reports whether the object is low power mode enabled.
 func (pi *ProcessInfo) IsLowPowerModeEnabled() bool {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isLowPowerModeEnabled"))
 	return _r
 }
 
 // IsMACCatalystApp reports whether the object is MAC catalyst app.
 func (pi *ProcessInfo) IsMACCatalystApp() bool {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isMacCatalystApp"))
 	return _r
 }
 
 // IsiOSAppOnMAC wraps the corresponding Objective-C method.
 func (pi *ProcessInfo) IsiOSAppOnMAC() bool {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isiOSAppOnMac"))
 	return _r
 }
 
 // IsiOSAppOnVision wraps the corresponding Objective-C method.
 func (pi *ProcessInfo) IsiOSAppOnVision() bool {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isiOSAppOnVision"))
 	return _r
 }

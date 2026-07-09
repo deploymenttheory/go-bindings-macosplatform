@@ -5,6 +5,7 @@
 package mapkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func mapSnapshotAdopt(id objc.ID) *MapSnapshot {
 
 // Description returns the object's -description text.
 func (ms *MapSnapshot) Description() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ms *MapSnapshot) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ms)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ms *MapSnapshot) IsKind(className string) bool {
+	defer runtime.KeepAlive(ms)
 	return rt.IsKind(objref.IDOf(ms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ms *MapSnapshot) String() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
@@ -77,12 +83,14 @@ func NewMapSnapshot() *MapSnapshot {
 
 // PointForCoordinate wraps the corresponding Objective-C method.
 func (ms *MapSnapshot) PointForCoordinate(coordinate unsafe.Pointer) corefoundation.CGPoint {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(ms), objc.RegisterName("pointForCoordinate:"), coordinate)
 	return _r
 }
 
 // Appearance returns the appearance.
 func (ms *MapSnapshot) Appearance() obj.Object {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("appearance"))
 	return obj.Wrap(_r)
 }

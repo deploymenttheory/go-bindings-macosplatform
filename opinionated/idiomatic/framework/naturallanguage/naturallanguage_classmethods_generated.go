@@ -5,10 +5,12 @@
 package naturallanguage
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -23,48 +25,55 @@ func ContextualEmbeddingWithModelIdentifier(modelIdentifier string) *ContextualE
 
 // ContextualEmbeddingsForValues returns contextual embedding models that match the specified language, script, or revision criteria.
 func ContextualEmbeddingsForValues(valuesDictionary obj.Object) []*ContextualEmbedding {
+	defer runtime.KeepAlive(valuesDictionary)
 	_r := objc.Send[objc.ID](objc.ID(_class("NLContextualEmbedding")), objc.RegisterName("contextualEmbeddingsForValues:"), objref.IDOf(valuesDictionary))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *ContextualEmbedding { return ContextualEmbeddingFromID(_id) })
 }
 
 // ContextualEmbeddingWithLanguage creates a contextual embedding from a language.
 func ContextualEmbeddingWithLanguage(language obj.Object) *ContextualEmbedding {
+	defer runtime.KeepAlive(language)
 	_r := objc.Send[objc.ID](objc.ID(_class("NLContextualEmbedding")), objc.RegisterName("contextualEmbeddingWithLanguage:"), objref.IDOf(language))
 	return ContextualEmbeddingFromID(_r)
 }
 
 // ContextualEmbeddingWithScript creates a contextual embedding from a script.
 func ContextualEmbeddingWithScript(script obj.Object) *ContextualEmbedding {
+	defer runtime.KeepAlive(script)
 	_r := objc.Send[objc.ID](objc.ID(_class("NLContextualEmbedding")), objc.RegisterName("contextualEmbeddingWithScript:"), objref.IDOf(script))
 	return ContextualEmbeddingFromID(_r)
 }
 
 // WordEmbeddingForLanguage retrieves a word embedding for a given language.
 func WordEmbeddingForLanguage(language obj.Object) *Embedding {
+	defer runtime.KeepAlive(language)
 	_r := objc.Send[objc.ID](objc.ID(_class("NLEmbedding")), objc.RegisterName("wordEmbeddingForLanguage:"), objref.IDOf(language))
 	return EmbeddingFromID(_r)
 }
 
 // WordEmbeddingForLanguageRevision retrieves a word embedding for a given language and revision.
 func WordEmbeddingForLanguageRevision(language obj.Object, revision int) *Embedding {
+	defer runtime.KeepAlive(language)
 	_r := objc.Send[objc.ID](objc.ID(_class("NLEmbedding")), objc.RegisterName("wordEmbeddingForLanguage:revision:"), objref.IDOf(language), revision)
 	return EmbeddingFromID(_r)
 }
 
 // SentenceEmbeddingForLanguage retrieves a sentence embedding for a given language.
 func SentenceEmbeddingForLanguage(language obj.Object) *Embedding {
+	defer runtime.KeepAlive(language)
 	_r := objc.Send[objc.ID](objc.ID(_class("NLEmbedding")), objc.RegisterName("sentenceEmbeddingForLanguage:"), objref.IDOf(language))
 	return EmbeddingFromID(_r)
 }
 
 // SentenceEmbeddingForLanguageRevision retrieves a sentence embedding for a given language and revision.
 func SentenceEmbeddingForLanguageRevision(language obj.Object, revision int) *Embedding {
+	defer runtime.KeepAlive(language)
 	_r := objc.Send[objc.ID](objc.ID(_class("NLEmbedding")), objc.RegisterName("sentenceEmbeddingForLanguage:revision:"), objref.IDOf(language), revision)
 	return EmbeddingFromID(_r)
 }
 
-// EmbeddingWithContentsOfURLError creates a word embedding from a model file.
-func EmbeddingWithContentsOfURLError(url string) (result *Embedding, err error) {
+// EmbeddingWithContentsOfURL creates a word embedding from a model file.
+func EmbeddingWithContentsOfURL(url string) (result *Embedding, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NLEmbedding")), objc.RegisterName("embeddingWithContentsOfURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -74,41 +83,46 @@ func EmbeddingWithContentsOfURLError(url string) (result *Embedding, err error) 
 }
 
 // SupportedRevisionsForLanguage retrieves all version numbers of a word embedding for the given language.
-func SupportedRevisionsForLanguage(language obj.Object) obj.Object {
+func SupportedRevisionsForLanguage(language obj.Object) *foundation.IndexSet {
+	defer runtime.KeepAlive(language)
 	_r := objc.Send[objc.ID](objc.ID(_class("NLEmbedding")), objc.RegisterName("supportedRevisionsForLanguage:"), objref.IDOf(language))
-	return obj.Wrap(_r)
+	return foundation.IndexSetFromID(_r)
 }
 
 // CurrentRevisionForLanguage retrieves the current version of a word embedding for the given language.
 func CurrentRevisionForLanguage(language obj.Object) int {
+	defer runtime.KeepAlive(language)
 	_r := objc.Send[int](objc.ID(_class("NLEmbedding")), objc.RegisterName("currentRevisionForLanguage:"), objref.IDOf(language))
 	return _r
 }
 
 // SupportedSentenceEmbeddingRevisionsForLanguage retrieves all version numbers of a sentence embedding for the given language.
-func SupportedSentenceEmbeddingRevisionsForLanguage(language obj.Object) obj.Object {
+func SupportedSentenceEmbeddingRevisionsForLanguage(language obj.Object) *foundation.IndexSet {
+	defer runtime.KeepAlive(language)
 	_r := objc.Send[objc.ID](objc.ID(_class("NLEmbedding")), objc.RegisterName("supportedSentenceEmbeddingRevisionsForLanguage:"), objref.IDOf(language))
-	return obj.Wrap(_r)
+	return foundation.IndexSetFromID(_r)
 }
 
 // CurrentSentenceEmbeddingRevisionForLanguage retrieves the current version of a sentence embedding for the given language.
 func CurrentSentenceEmbeddingRevisionForLanguage(language obj.Object) int {
+	defer runtime.KeepAlive(language)
 	_r := objc.Send[int](objc.ID(_class("NLEmbedding")), objc.RegisterName("currentSentenceEmbeddingRevisionForLanguage:"), objref.IDOf(language))
 	return _r
 }
 
 // WriteEmbeddingForDictionaryLanguageRevisionToURL exports the word embedding contained within a Core ML model file at the given URL.
-func WriteEmbeddingForDictionaryLanguageRevisionToURL(dictionary obj.Object, language obj.Object, revision int, url string) error {
+func WriteEmbeddingForDictionaryLanguageRevisionToURL(dictionary map[string]obj.Object, language obj.Object, revision int, url string) error {
+	defer runtime.KeepAlive(language)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objc.ID(_class("NLEmbedding")), objc.RegisterName("writeEmbeddingForDictionary:language:revision:toURL:error:"), objref.IDOf(dictionary), objref.IDOf(language), revision, rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objc.ID(_class("NLEmbedding")), objc.RegisterName("writeEmbeddingForDictionary:language:revision:toURL:error:"), rt.MapToDict(dictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(language), revision, rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// GazetteerWithContentsOfURLError creates a Natural Language gazetteer from a model created with the Create ML framework.
-func GazetteerWithContentsOfURLError(url string) (result *Gazetteer, err error) {
+// GazetteerWithContentsOfURL creates a Natural Language gazetteer from a model created with the Create ML framework.
+func GazetteerWithContentsOfURL(url string) (result *Gazetteer, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NLGazetteer")), objc.RegisterName("gazetteerWithContentsOfURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -118,9 +132,10 @@ func GazetteerWithContentsOfURLError(url string) (result *Gazetteer, err error) 
 }
 
 // WriteGazetteerForDictionaryLanguageToURL creates a gazetteer from a set of labels for terms represented by a dictionary and saves the gazetteer to a file.
-func WriteGazetteerForDictionaryLanguageToURL(dictionary obj.Object, language obj.Object, url string) error {
+func WriteGazetteerForDictionaryLanguageToURL(dictionary map[string]obj.Object, language obj.Object, url string) error {
+	defer runtime.KeepAlive(language)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objc.ID(_class("NLGazetteer")), objc.RegisterName("writeGazetteerForDictionary:language:toURL:error:"), objref.IDOf(dictionary), objref.IDOf(language), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objc.ID(_class("NLGazetteer")), objc.RegisterName("writeGazetteerForDictionary:language:toURL:error:"), rt.MapToDict(dictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(language), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -128,13 +143,13 @@ func WriteGazetteerForDictionaryLanguageToURL(dictionary obj.Object, language ob
 }
 
 // DominantLanguageForString finds the most likely language of a piece of text.
-func DominantLanguageForString(string_ string) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("NLLanguageRecognizer")), objc.RegisterName("dominantLanguageForString:"), purego.NSString(string_))
-	return obj.Wrap(_r)
+func DominantLanguageForString(str string) *foundation.String {
+	_r := objc.Send[objc.ID](objc.ID(_class("NLLanguageRecognizer")), objc.RegisterName("dominantLanguageForString:"), purego.NSString(str))
+	return foundation.StringFromID(_r)
 }
 
-// ModelWithContentsOfURLError creates a new natural language model based on a compiled Core ML model at the given URL.
-func ModelWithContentsOfURLError(url string) (result *Model, err error) {
+// ModelWithContentsOfURL creates a new natural language model based on a compiled Core ML model at the given URL.
+func ModelWithContentsOfURL(url string) (result *Model, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NLModel")), objc.RegisterName("modelWithContentsOfURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -143,8 +158,9 @@ func ModelWithContentsOfURLError(url string) (result *Model, err error) {
 	return ModelFromID(_r), nil
 }
 
-// ModelWithMLModelError creates a new natural language model based on the given Core ML model instance.
-func ModelWithMLModelError(mlModel obj.Object) (result *Model, err error) {
+// ModelWithMLModel creates a new natural language model based on the given Core ML model instance.
+func ModelWithMLModel(mlModel obj.Object) (result *Model, err error) {
+	defer runtime.KeepAlive(mlModel)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NLModel")), objc.RegisterName("modelWithMLModel:error:"), objref.IDOf(mlModel), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -154,9 +170,9 @@ func ModelWithMLModelError(mlModel obj.Object) (result *Model, err error) {
 }
 
 // SupportedRevisionsForType returns the versions of the Natural Language framework the OS supports.
-func SupportedRevisionsForType(type_ ModelType) obj.Object {
+func SupportedRevisionsForType(type_ ModelType) *foundation.IndexSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NLModelConfiguration")), objc.RegisterName("supportedRevisionsForType:"), type_)
-	return obj.Wrap(_r)
+	return foundation.IndexSetFromID(_r)
 }
 
 // CurrentRevisionForType returns the current Natural Language framework version in the OS.
@@ -166,7 +182,8 @@ func CurrentRevisionForType(type_ ModelType) int {
 }
 
 // AvailableTagSchemesForUnitLanguage retrieves the tag schemes available for a particular unit (like word or sentence) and language on the current device.
-func AvailableTagSchemesForUnitLanguage(unit TokenUnit, language obj.Object) []obj.Object {
+func AvailableTagSchemesForUnitLanguage(unit TokenUnit, language obj.Object) []*foundation.String {
+	defer runtime.KeepAlive(language)
 	_r := objc.Send[objc.ID](objc.ID(_class("NLTagger")), objc.RegisterName("availableTagSchemesForUnit:language:"), unit, objref.IDOf(language))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
 }

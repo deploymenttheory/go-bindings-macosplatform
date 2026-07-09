@@ -5,6 +5,7 @@
 package avfaudio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,6 +51,7 @@ func audioIONodeAdopt(id objc.ID) *AudioIONode {
 
 // SetVoiceProcessingEnabled enables or disables voice processing on the I/O node.
 func (ain *AudioIONode) SetVoiceProcessingEnabled(enabled bool) error {
+	defer runtime.KeepAlive(ain)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ain), objc.RegisterName("setVoiceProcessingEnabled:error:"), enabled, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -60,12 +62,14 @@ func (ain *AudioIONode) SetVoiceProcessingEnabled(enabled bool) error {
 
 // PresentationLatency returns the presentation or hardware latency, applicable when the engine is rendering to/from an audio device. This corresponds to kAudioDevicePropertyLatency and kAudioStreamPropertyLatency. See <CoreAudio/AudioHardwareBase.h>.
 func (ain *AudioIONode) PresentationLatency() float64 {
+	defer runtime.KeepAlive(ain)
 	_r := objc.Send[float64](objref.IDOf(ain), objc.RegisterName("presentationLatency"))
 	return _r
 }
 
 // IsVoiceProcessingEnabled reports whether voice processing is enabled.
 func (ain *AudioIONode) IsVoiceProcessingEnabled() bool {
+	defer runtime.KeepAlive(ain)
 	_r := objc.Send[bool](objref.IDOf(ain), objc.RegisterName("isVoiceProcessingEnabled"))
 	return _r
 }

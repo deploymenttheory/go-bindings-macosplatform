@@ -5,10 +5,12 @@
 package browserenginekit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func webContentProcessAdopt(id objc.ID) *WebContentProcess {
 
 // Description returns the object's -description text.
 func (wcp *WebContentProcess) Description() string {
+	defer runtime.KeepAlive(wcp)
 	return rt.Description(objref.IDOf(wcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wcp *WebContentProcess) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wcp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wcp *WebContentProcess) IsKind(className string) bool {
+	defer runtime.KeepAlive(wcp)
 	return rt.IsKind(objref.IDOf(wcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wcp *WebContentProcess) String() string {
+	defer runtime.KeepAlive(wcp)
 	return rt.Description(objref.IDOf(wcp))
 }
 
@@ -77,15 +84,17 @@ func NewWebContentProcess() *WebContentProcess {
 
 // Invalidate stops the web content process.
 func (wcp *WebContentProcess) Invalidate() {
+	defer runtime.KeepAlive(wcp)
 	objc.Send[objc.ID](objref.IDOf(wcp), objc.RegisterName("invalidate"))
 }
 
-// MakeLibXPCConnectionError creates a new XPC connection to the extension process.
-func (wcp *WebContentProcess) MakeLibXPCConnectionError() (result obj.Object, err error) {
+// MakeLibXPCConnection creates a new XPC connection to the extension process.
+func (wcp *WebContentProcess) MakeLibXPCConnection() (result *foundation.Object, err error) {
+	defer runtime.KeepAlive(wcp)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(wcp), objc.RegisterName("makeLibXPCConnectionError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return foundation.ObjectFromID(_r), nil
 }

@@ -5,6 +5,7 @@
 package iobluetooth
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -56,54 +57,63 @@ func NewIOBluetoothRFCOMMChannel() *IOBluetoothRFCOMMChannel {
 
 // RFCOMMChannelRef returns an IOBluetoothRFCOMMChannelRef representation of the target IOBluetoothRFCOMMChannel object.
 func (ibrc *IOBluetoothRFCOMMChannel) RFCOMMChannelRef() obj.Object {
+	defer runtime.KeepAlive(ibrc)
 	_r := objc.Send[objc.ID](objref.IDOf(ibrc), objc.RegisterName("getRFCOMMChannelRef"))
 	return obj.Wrap(_r)
 }
 
 // CloseChannel returns close the channel.
 func (ibrc *IOBluetoothRFCOMMChannel) CloseChannel() int {
+	defer runtime.KeepAlive(ibrc)
 	_r := objc.Send[int](objref.IDOf(ibrc), objc.RegisterName("closeChannel"))
 	return _r
 }
 
 // IsOpen reports whether returns the state of the channel.
 func (ibrc *IOBluetoothRFCOMMChannel) IsOpen() bool {
+	defer runtime.KeepAlive(ibrc)
 	_r := objc.Send[bool](objref.IDOf(ibrc), objc.RegisterName("isOpen"))
 	return _r
 }
 
 // MTU returns the channel maximum transfer unit.
 func (ibrc *IOBluetoothRFCOMMChannel) MTU() uint16 {
+	defer runtime.KeepAlive(ibrc)
 	_r := objc.Send[uint16](objref.IDOf(ibrc), objc.RegisterName("getMTU"))
 	return _r
 }
 
 // IsTransmissionPaused reports whether flow control is off.
 func (ibrc *IOBluetoothRFCOMMChannel) IsTransmissionPaused() bool {
+	defer runtime.KeepAlive(ibrc)
 	_r := objc.Send[bool](objref.IDOf(ibrc), objc.RegisterName("isTransmissionPaused"))
 	return _r
 }
 
 // WriteLengthSleep sends a block of data in the channel syncronously.
 func (ibrc *IOBluetoothRFCOMMChannel) WriteLengthSleep(data unsafe.Pointer, length uint16, sleep bool) int {
+	defer runtime.KeepAlive(ibrc)
 	_r := objc.Send[int](objref.IDOf(ibrc), objc.RegisterName("write:length:sleep:"), data, length, sleep)
 	return _r
 }
 
 // WriteAsyncLengthRefcon sends a block of data in the channel asynchronously.
 func (ibrc *IOBluetoothRFCOMMChannel) WriteAsyncLengthRefcon(data unsafe.Pointer, length uint16, refcon unsafe.Pointer) int {
+	defer runtime.KeepAlive(ibrc)
 	_r := objc.Send[int](objref.IDOf(ibrc), objc.RegisterName("writeAsync:length:refcon:"), data, length, refcon)
 	return _r
 }
 
 // WriteSyncLength sends a block of data in the channel synchronously.
 func (ibrc *IOBluetoothRFCOMMChannel) WriteSyncLength(data unsafe.Pointer, length uint16) int {
+	defer runtime.KeepAlive(ibrc)
 	_r := objc.Send[int](objref.IDOf(ibrc), objc.RegisterName("writeSync:length:"), data, length)
 	return _r
 }
 
 // WriteSimpleLengthSleepBytesSent sends a block of data in the channel.
 func (ibrc *IOBluetoothRFCOMMChannel) WriteSimpleLengthSleepBytesSent(data unsafe.Pointer, length uint16, sleep bool) (result int, numBytesSent int) {
+	defer runtime.KeepAlive(ibrc)
 	var _out0 int
 	_r := objc.Send[int](objref.IDOf(ibrc), objc.RegisterName("writeSimple:length:sleep:bytesSent:"), data, length, sleep, unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -111,48 +121,57 @@ func (ibrc *IOBluetoothRFCOMMChannel) WriteSimpleLengthSleepBytesSent(data unsaf
 
 // SetSerialParametersDataBitsParityStopBits changes the parameters of the serial connection.
 func (ibrc *IOBluetoothRFCOMMChannel) SetSerialParametersDataBitsParityStopBits(speed int, nBits uint8, parity BluetoothRFCOMMParityType, bitStop uint8) int {
+	defer runtime.KeepAlive(ibrc)
 	_r := objc.Send[int](objref.IDOf(ibrc), objc.RegisterName("setSerialParameters:dataBits:parity:stopBits:"), speed, nBits, parity, bitStop)
 	return _r
 }
 
 // SendRemoteLineStatus sends an error to the remote side.
 func (ibrc *IOBluetoothRFCOMMChannel) SendRemoteLineStatus(lineStatus BluetoothRFCOMMLineStatus) int {
+	defer runtime.KeepAlive(ibrc)
 	_r := objc.Send[int](objref.IDOf(ibrc), objc.RegisterName("sendRemoteLineStatus:"), lineStatus)
 	return _r
 }
 
 // SetDelegate allows an object to register itself as a client of the RFCOMM channel.
 func (ibrc *IOBluetoothRFCOMMChannel) SetDelegate(delegate obj.Object) int {
+	defer runtime.KeepAlive(ibrc)
+	defer runtime.KeepAlive(delegate)
 	_r := objc.Send[int](objref.IDOf(ibrc), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return _r
 }
 
 // Delegate returns the object delegate
 func (ibrc *IOBluetoothRFCOMMChannel) Delegate() obj.Object {
+	defer runtime.KeepAlive(ibrc)
 	_r := objc.Send[objc.ID](objref.IDOf(ibrc), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
 // ChannelID returns the object rfcomm channel ID.
 func (ibrc *IOBluetoothRFCOMMChannel) ChannelID() uint8 {
+	defer runtime.KeepAlive(ibrc)
 	_r := objc.Send[uint8](objref.IDOf(ibrc), objc.RegisterName("getChannelID"))
 	return _r
 }
 
 // IsIncoming reports whether returns the direction of the channel. An incoming channel is one that was opened by the remote device.
 func (ibrc *IOBluetoothRFCOMMChannel) IsIncoming() bool {
+	defer runtime.KeepAlive(ibrc)
 	_r := objc.Send[bool](objref.IDOf(ibrc), objc.RegisterName("isIncoming"))
 	return _r
 }
 
 // Device returns the Bluetooth Device that carries the rfcomm data.
 func (ibrc *IOBluetoothRFCOMMChannel) Device() *IOBluetoothDevice {
+	defer runtime.KeepAlive(ibrc)
 	_r := objc.Send[objc.ID](objref.IDOf(ibrc), objc.RegisterName("getDevice"))
 	return IOBluetoothDeviceFromID(_r)
 }
 
 // ObjectID returns the IOBluetoothObjectID of the given IOBluetoothRFCOMMChannel.
 func (ibrc *IOBluetoothRFCOMMChannel) ObjectID() int {
+	defer runtime.KeepAlive(ibrc)
 	_r := objc.Send[int](objref.IDOf(ibrc), objc.RegisterName("getObjectID"))
 	return _r
 }

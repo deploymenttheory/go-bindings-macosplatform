@@ -5,12 +5,15 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,11 +58,11 @@ func NewKeyedUnarchiver() *KeyedUnarchiver {
 	return keyedUnarchiverAdopt(_id)
 }
 
-// NewKeyedUnarchiverForReadingFromDataError initializes an archiver to decode data from the specified location.
-func NewKeyedUnarchiverForReadingFromDataError(data *Data) (result *KeyedUnarchiver, err error) {
+// NewKeyedUnarchiverForReadingFromData initializes an archiver to decode data from the specified location.
+func NewKeyedUnarchiverForReadingFromData(data []byte) (result *KeyedUnarchiver, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReadingFromData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReadingFromData:error:"), rt.BytesToNSData(data), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -67,10 +70,20 @@ func NewKeyedUnarchiverForReadingFromDataError(data *Data) (result *KeyedUnarchi
 }
 
 // NewKeyedUnarchiverForReadingWithData initializes an archiver to decode data from the specified location.
-func NewKeyedUnarchiverForReadingWithData(data *Data) *KeyedUnarchiver {
+func NewKeyedUnarchiverForReadingWithData(data []byte) *KeyedUnarchiver {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReadingWithData:"), objref.IDOf(data))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReadingWithData:"), rt.BytesToNSData(data))
 	return keyedUnarchiverAdopt(_id)
+}
+
+// WithDelegate sets the receiver’s delegate.
+func (ku *KeyedUnarchiver) WithDelegate(delegate KeyedUnarchiverDelegate) *KeyedUnarchiver {
+	_shim := newKeyedUnarchiverDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ku), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ku), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return ku
 }
 
 // WithRequiresSecureCoding sets indicates whether the receiver requires all unarchived classes to conform to NSSecureCoding.
@@ -92,13 +105,14 @@ func (ku *KeyedUnarchiver) WithObservationInfo(observationInfo unsafe.Pointer) *
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ku *KeyedUnarchiver) WithScriptingProperties(scriptingProperties obj.Object) *KeyedUnarchiver {
-	objc.Send[objc.ID](objref.IDOf(ku), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ku *KeyedUnarchiver) WithScriptingProperties(scriptingProperties map[string]obj.Object) *KeyedUnarchiver {
+	objc.Send[objc.ID](objref.IDOf(ku), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ku
 }
 
 // FinishDecoding tells the receiver that you are finished decoding objects.
 func (ku *KeyedUnarchiver) FinishDecoding() {
+	defer runtime.KeepAlive(ku)
 	objc.Send[objc.ID](objref.IDOf(ku), objc.RegisterName("finishDecoding"))
 }
 

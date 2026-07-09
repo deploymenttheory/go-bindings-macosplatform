@@ -5,6 +5,8 @@
 package opendirectory
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mappingsAdopt(id objc.ID) *Mappings {
 
 // Description returns the object's -description text.
 func (m *Mappings) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Mappings) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Mappings) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Mappings) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
@@ -96,17 +103,21 @@ func (m *Mappings) WithFunction(function string) *Mappings {
 
 // RecordMapForStandardRecordType returns an ODRecordMap associated with the provided recordtype. Returns an ODRecordMap associated with the provided recordtype.
 func (m *Mappings) RecordMapForStandardRecordType(stdType string) *RecordMap {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("recordMapForStandardRecordType:"), purego.NSString(stdType))
 	return RecordMapFromID(_r)
 }
 
 // SetRecordMapForStandardRecordType sets a particular ODRecordMap for a given standard record type. Sets a particular ODRecordMap for a given standard record type.
 func (m *Mappings) SetRecordMapForStandardRecordType(map_ *RecordMap, stdType string) {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(map_)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setRecordMap:forStandardRecordType:"), objref.IDOf(map_), purego.NSString(stdType))
 }
 
 // Comment returns the comment.
 func (m *Mappings) Comment() string {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("comment"))
 	if _r == 0 {
 		return ""
@@ -116,6 +127,7 @@ func (m *Mappings) Comment() string {
 
 // TemplateName returns the template name.
 func (m *Mappings) TemplateName() string {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("templateName"))
 	if _r == 0 {
 		return ""
@@ -125,6 +137,7 @@ func (m *Mappings) TemplateName() string {
 
 // Identifier returns the identifier.
 func (m *Mappings) Identifier() string {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -134,12 +147,14 @@ func (m *Mappings) Identifier() string {
 
 // RecordTypes returns the record types.
 func (m *Mappings) RecordTypes() obj.Object {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("recordTypes"))
 	return obj.Wrap(_r)
 }
 
 // Function returns the function.
 func (m *Mappings) Function() string {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("function"))
 	if _r == 0 {
 		return ""
@@ -149,11 +164,14 @@ func (m *Mappings) Function() string {
 
 // FunctionAttributes returns the function attributes.
 func (m *Mappings) FunctionAttributes() obj.Object {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("functionAttributes"))
 	return obj.Wrap(_r)
 }
 
 // SetFunctionAttributes wraps the corresponding Objective-C method.
 func (m *Mappings) SetFunctionAttributes(functionAttributes obj.Object) {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(functionAttributes)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setFunctionAttributes:"), objref.IDOf(functionAttributes))
 }

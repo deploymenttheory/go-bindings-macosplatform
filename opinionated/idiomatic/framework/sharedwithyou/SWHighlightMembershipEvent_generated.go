@@ -5,6 +5,8 @@
 package sharedwithyou
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func highlightMembershipEventAdopt(id objc.ID) *HighlightMembershipEvent {
 
 // Description returns the object's -description text.
 func (hme *HighlightMembershipEvent) Description() string {
+	defer runtime.KeepAlive(hme)
 	return rt.Description(objref.IDOf(hme))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hme *HighlightMembershipEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hme)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hme), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hme *HighlightMembershipEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(hme)
 	return rt.IsKind(objref.IDOf(hme), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hme *HighlightMembershipEvent) String() string {
+	defer runtime.KeepAlive(hme)
 	return rt.Description(objref.IDOf(hme))
 }
 
 // NewHighlightMembershipEventWithHighlightTrigger creates and initializes a membership event.
 func NewHighlightMembershipEventWithHighlightTrigger(highlight *Highlight, trigger HighlightMembershipEventTrigger) *HighlightMembershipEvent {
+	defer runtime.KeepAlive(highlight)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWHighlightMembershipEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:trigger:"), objref.IDOf(highlight), trigger)
 	return highlightMembershipEventAdopt(_id)
@@ -75,6 +83,7 @@ func NewHighlightMembershipEventWithHighlightTrigger(highlight *Highlight, trigg
 
 // MembershipEventTrigger returns the type of membership event for the highlight.
 func (hme *HighlightMembershipEvent) MembershipEventTrigger() HighlightMembershipEventTrigger {
+	defer runtime.KeepAlive(hme)
 	_r := objc.Send[HighlightMembershipEventTrigger](objref.IDOf(hme), objc.RegisterName("membershipEventTrigger"))
 	return _r
 }

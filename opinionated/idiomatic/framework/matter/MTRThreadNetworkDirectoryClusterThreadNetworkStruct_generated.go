@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRThreadNetworkDirectoryClusterThreadNetworkStructAdopt(id objc.ID) *MTRTh
 
 // Description returns the object's -description text.
 func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) Description() string {
+	defer runtime.KeepAlive(mtndctns)
 	return rt.Description(objref.IDOf(mtndctns))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtndctns)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtndctns), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtndctns)
 	return rt.IsKind(objref.IDOf(mtndctns), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) String() string {
+	defer runtime.KeepAlive(mtndctns)
 	return rt.Description(objref.IDOf(mtndctns))
 }
 
@@ -71,8 +79,8 @@ func NewMTRThreadNetworkDirectoryClusterThreadNetworkStruct() *MTRThreadNetworkD
 }
 
 // WithExtendedPanID sets the extended pan ID.
-func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithExtendedPanID(extendedPanID obj.Object) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
-	objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("setExtendedPanID:"), objref.IDOf(extendedPanID))
+func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithExtendedPanID(extendedPanID []byte) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
+	objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("setExtendedPanID:"), rt.BytesToNSData(extendedPanID))
 	return mtndctns
 }
 
@@ -84,24 +92,28 @@ func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithNetwork
 
 // WithChannel sets the channel.
 func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithChannel(channel obj.Object) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
+	defer runtime.KeepAlive(channel)
 	objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 	return mtndctns
 }
 
 // WithActiveTimestamp sets the active timestamp.
 func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithActiveTimestamp(activeTimestamp obj.Object) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
+	defer runtime.KeepAlive(activeTimestamp)
 	objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("setActiveTimestamp:"), objref.IDOf(activeTimestamp))
 	return mtndctns
 }
 
 // ExtendedPanID returns the extended pan ID.
-func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) ExtendedPanID() obj.Object {
+func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) ExtendedPanID() []byte {
+	defer runtime.KeepAlive(mtndctns)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("extendedPanID"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // NetworkName returns the network name.
 func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) NetworkName() string {
+	defer runtime.KeepAlive(mtndctns)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("networkName"))
 	if _r == 0 {
 		return ""
@@ -110,13 +122,15 @@ func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) NetworkName
 }
 
 // Channel returns the channel.
-func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) Channel() obj.Object {
+func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) Channel() *foundation.Number {
+	defer runtime.KeepAlive(mtndctns)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("channel"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ActiveTimestamp returns the active timestamp.
-func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) ActiveTimestamp() obj.Object {
+func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) ActiveTimestamp() *foundation.Number {
+	defer runtime.KeepAlive(mtndctns)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("activeTimestamp"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

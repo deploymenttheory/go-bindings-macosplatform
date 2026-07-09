@@ -5,6 +5,7 @@
 package coredata
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,8 +50,8 @@ func persistentCloudKitContainerAdopt(id objc.ID) *PersistentCloudKitContainer {
 	return x
 }
 
-// NewPersistentCloudKitContainerializeCloudKitSchemaWithOptionsError creates the CloudKit schema for all stores in the container that manage a CloudKit database.
-func NewPersistentCloudKitContainerializeCloudKitSchemaWithOptionsError(options PersistentCloudKitContainerSchemaInitializationOptions) (result *PersistentCloudKitContainer, err error) {
+// NewPersistentCloudKitContainerializeCloudKitSchemaWithOptions creates the CloudKit schema for all stores in the container that manage a CloudKit database.
+func NewPersistentCloudKitContainerializeCloudKitSchemaWithOptions(options PersistentCloudKitContainerSchemaInitializationOptions) (result *PersistentCloudKitContainer, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPersistentCloudKitContainer")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initializeCloudKitSchemaWithOptions:error:"), options, unsafe.Pointer(&_nsErr))
@@ -69,42 +70,54 @@ func (pckc *PersistentCloudKitContainer) WithPersistentStoreDescriptions(items .
 
 // RecordForManagedObjectID returns the CloudKit record for the specified managed object ID.
 func (pckc *PersistentCloudKitContainer) RecordForManagedObjectID(managedObjectID *ManagedObjectID) obj.Object {
+	defer runtime.KeepAlive(pckc)
+	defer runtime.KeepAlive(managedObjectID)
 	_r := objc.Send[objc.ID](objref.IDOf(pckc), objc.RegisterName("recordForManagedObjectID:"), objref.IDOf(managedObjectID))
 	return obj.Wrap(_r)
 }
 
 // RecordsForManagedObjectIDs returns a dictionary that contains the CloudKit records for the specified managed object IDs.
 func (pckc *PersistentCloudKitContainer) RecordsForManagedObjectIDs(managedObjectIDs []*ManagedObjectID) obj.Object {
+	defer runtime.KeepAlive(pckc)
 	_r := objc.Send[objc.ID](objref.IDOf(pckc), objc.RegisterName("recordsForManagedObjectIDs:"), purego.SliceToNSArray(managedObjectIDs, func(_v *ManagedObjectID) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
 // RecordIDForManagedObjectID returns the CloudKit record ID for the specified managed object ID.
 func (pckc *PersistentCloudKitContainer) RecordIDForManagedObjectID(managedObjectID *ManagedObjectID) obj.Object {
+	defer runtime.KeepAlive(pckc)
+	defer runtime.KeepAlive(managedObjectID)
 	_r := objc.Send[objc.ID](objref.IDOf(pckc), objc.RegisterName("recordIDForManagedObjectID:"), objref.IDOf(managedObjectID))
 	return obj.Wrap(_r)
 }
 
 // RecordIDsForManagedObjectIDs returns a dictionary that contains the CloudKit record IDs for the specified managed object IDs.
 func (pckc *PersistentCloudKitContainer) RecordIDsForManagedObjectIDs(managedObjectIDs []*ManagedObjectID) obj.Object {
+	defer runtime.KeepAlive(pckc)
 	_r := objc.Send[objc.ID](objref.IDOf(pckc), objc.RegisterName("recordIDsForManagedObjectIDs:"), purego.SliceToNSArray(managedObjectIDs, func(_v *ManagedObjectID) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
 // CanUpdateRecordForManagedObjectWithID returns a Boolean value that indicates whether the user can modify the managed object’s underlying CloudKit record.
 func (pckc *PersistentCloudKitContainer) CanUpdateRecordForManagedObjectWithID(objectID *ManagedObjectID) bool {
+	defer runtime.KeepAlive(pckc)
+	defer runtime.KeepAlive(objectID)
 	_r := objc.Send[bool](objref.IDOf(pckc), objc.RegisterName("canUpdateRecordForManagedObjectWithID:"), objref.IDOf(objectID))
 	return _r
 }
 
 // CanDeleteRecordForManagedObjectWithID returns a Boolean value that indicates whether the user can delete the managed object’s underlying CloudKit record.
 func (pckc *PersistentCloudKitContainer) CanDeleteRecordForManagedObjectWithID(objectID *ManagedObjectID) bool {
+	defer runtime.KeepAlive(pckc)
+	defer runtime.KeepAlive(objectID)
 	_r := objc.Send[bool](objref.IDOf(pckc), objc.RegisterName("canDeleteRecordForManagedObjectWithID:"), objref.IDOf(objectID))
 	return _r
 }
 
 // CanModifyManagedObjectsInStore returns a Boolean value that indicates whether the user can modify the specified persistent store.
 func (pckc *PersistentCloudKitContainer) CanModifyManagedObjectsInStore(store *PersistentStore) bool {
+	defer runtime.KeepAlive(pckc)
+	defer runtime.KeepAlive(store)
 	_r := objc.Send[bool](objref.IDOf(pckc), objc.RegisterName("canModifyManagedObjectsInStore:"), objref.IDOf(store))
 	return _r
 }

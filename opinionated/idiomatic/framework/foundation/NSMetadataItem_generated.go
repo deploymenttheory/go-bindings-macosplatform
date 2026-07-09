@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func metadataItemAdopt(id objc.ID) *MetadataItem {
 
 // Description returns the object's -description text.
 func (mi *MetadataItem) Description() string {
+	defer runtime.KeepAlive(mi)
 	return rt.Description(objref.IDOf(mi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mi *MetadataItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mi *MetadataItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(mi)
 	return rt.IsKind(objref.IDOf(mi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mi *MetadataItem) String() string {
+	defer runtime.KeepAlive(mi)
 	return rt.Description(objref.IDOf(mi))
 }
 
@@ -82,27 +88,30 @@ func (mi *MetadataItem) WithObservationInfo(observationInfo unsafe.Pointer) *Met
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (mi *MetadataItem) WithScriptingProperties(scriptingProperties obj.Object) *MetadataItem {
-	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (mi *MetadataItem) WithScriptingProperties(scriptingProperties map[string]obj.Object) *MetadataItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return mi
 }
 
 // ValueForAttribute returns the receiver’s metadata attribute name specified by a given key.
 func (mi *MetadataItem) ValueForAttribute(key string) obj.Object {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("valueForAttribute:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // ValuesForAttributes returns a dictionary containing the key-value pairs for the attribute names specified by a given array of keys.
-func (mi *MetadataItem) ValuesForAttributes(keys []string) obj.Object {
+func (mi *MetadataItem) ValuesForAttributes(keys []string) map[string]obj.Object {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("valuesForAttributes:"), purego.SliceToNSArray(keys, func(_v string) objc.ID { return purego.NSString(_v) }))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Attributes returns the attributes.
 //
 // Attributes returns the collection as a Go slice.
 func (mi *MetadataItem) Attributes() []string {
+	defer runtime.KeepAlive(mi)
 	_arr := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("attributes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

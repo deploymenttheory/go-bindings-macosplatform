@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func cNNNeuronGeLUNodeAdopt(id objc.ID) *CNNNeuronGeLUNode {
 
 // NewCNNNeuronGeLUNodeWithSource init a node representing a MPSCNNNeuronGeLU kernel For each pixel, applies the following function:
 func NewCNNNeuronGeLUNodeWithSource(sourceNode obj.Object) *CNNNeuronGeLUNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronGeLUNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNNeuronGeLUNodeAdopt(_id)

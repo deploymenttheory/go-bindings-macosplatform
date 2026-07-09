@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -159,6 +161,7 @@ func (dpe *DOMHTMLParagraphElement) WithTextContent(textContent string) *DOMHTML
 
 // Align returns the align.
 func (dpe *DOMHTMLParagraphElement) Align() string {
+	defer runtime.KeepAlive(dpe)
 	_r := objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""

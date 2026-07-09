@@ -71,8 +71,8 @@ func (o *NEPacketTunnelProvider) CancelTunnelWithError(error_ unsafe.Pointer) {
 
 // Create a TCP connection through the current tunnel.
 // Deprecated: Use the `virtualInterface` property with `nw_parameters_require_interface`
-func (o *NEPacketTunnelProvider) CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *NWTLSParameters, delegate objc.ID) *NWTCPConnection {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nEPacketTunnelProviderSelCreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate, remoteEndpoint, enableTLS, tLSParameters.Ptr(), delegate)
+func (o *NEPacketTunnelProvider) CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tlsParameters *NWTLSParameters, delegate objc.ID) *NWTCPConnection {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEPacketTunnelProviderSelCreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate, remoteEndpoint, enableTLS, tlsParameters.Ptr(), delegate)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

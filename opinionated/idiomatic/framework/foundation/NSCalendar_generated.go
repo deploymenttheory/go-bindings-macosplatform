@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,27 +51,33 @@ func calendarAdopt(id objc.ID) *Calendar {
 
 // Description returns the object's -description text.
 func (c *Calendar) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Calendar) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Calendar) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Calendar) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // NewCalendarWithCalendarIdentifier initializes a calendar according to a given identifier.
 func NewCalendarWithCalendarIdentifier(ident *String) *Calendar {
+	defer runtime.KeepAlive(ident)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCalendar")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCalendarIdentifier:"), objref.IDOf(ident))
 	return calendarAdopt(_id)
@@ -77,12 +85,14 @@ func NewCalendarWithCalendarIdentifier(ident *String) *Calendar {
 
 // WithLocale sets the locale of the receiver.
 func (c *Calendar) WithLocale(locale *Locale) *Calendar {
+	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return c
 }
 
 // WithTimeZone sets the time zone for the calendar.
 func (c *Calendar) WithTimeZone(timeZone *TimeZone) *Calendar {
+	defer runtime.KeepAlive(timeZone)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return c
 }
@@ -106,243 +116,291 @@ func (c *Calendar) WithObservationInfo(observationInfo unsafe.Pointer) *Calendar
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (c *Calendar) WithScriptingProperties(scriptingProperties obj.Object) *Calendar {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (c *Calendar) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Calendar {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return c
 }
 
 // OrdinalityOfUnitInUnitForDate returns, for a given absolute time, the ordinal number of a smaller calendar unit (such as a day) within a specified larger calendar unit (such as a week).
-func (c *Calendar) OrdinalityOfUnitInUnitForDate(smaller CalendarUnit, larger CalendarUnit, date *Date) int {
-	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("ordinalityOfUnit:inUnit:forDate:"), smaller, larger, objref.IDOf(date))
+func (c *Calendar) OrdinalityOfUnitInUnitForDate(smaller CalendarUnit, larger CalendarUnit, date time.Time) int {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("ordinalityOfUnit:inUnit:forDate:"), smaller, larger, rt.TimeToNSDate(date))
 	return _r
 }
 
 // RangeOfUnitStartDateIntervalForDate returns by reference the starting time and duration of a given calendar unit that contains a given date.
-func (c *Calendar) RangeOfUnitStartDateIntervalForDate(unit CalendarUnit, datep *Date, date *Date) (ok bool, tip float64) {
+func (c *Calendar) RangeOfUnitStartDateIntervalForDate(unit CalendarUnit, datep *Date, date time.Time) (ok bool, tip float64) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(datep)
 	var _out0 float64
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("rangeOfUnit:startDate:interval:forDate:"), unit, objref.IDOf(datep), unsafe.Pointer(&_out0), objref.IDOf(date))
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("rangeOfUnit:startDate:interval:forDate:"), unit, objref.IDOf(datep), unsafe.Pointer(&_out0), rt.TimeToNSDate(date))
 	return _r, _out0
 }
 
 // DateFromComponents returns a date representing the absolute time calculated from given components.
-func (c *Calendar) DateFromComponents(comps *DateComponents) *Date {
+func (c *Calendar) DateFromComponents(comps *DateComponents) time.Time {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(comps)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("dateFromComponents:"), objref.IDOf(comps))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ComponentsFromDate returns the date components representing a given date.
-func (c *Calendar) ComponentsFromDate(unitFlags CalendarUnit, date *Date) *DateComponents {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("components:fromDate:"), unitFlags, objref.IDOf(date))
+func (c *Calendar) ComponentsFromDate(unitFlags CalendarUnit, date time.Time) *DateComponents {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("components:fromDate:"), unitFlags, rt.TimeToNSDate(date))
 	return DateComponentsFromID(_r)
 }
 
-// DateByAddingComponentsToDateOptions returns a date representing the absolute time calculated by adding given components to a given date.
-func (c *Calendar) DateByAddingComponentsToDateOptions(comps *DateComponents, date *Date, opts CalendarOptions) *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("dateByAddingComponents:toDate:options:"), objref.IDOf(comps), objref.IDOf(date), opts)
-	return DateFromID(_r)
+// DateByAddingComponentsToDate returns a date representing the absolute time calculated by adding given components to a given date.
+func (c *Calendar) DateByAddingComponentsToDate(comps *DateComponents, date time.Time, opts CalendarOptions) time.Time {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(comps)
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("dateByAddingComponents:toDate:options:"), objref.IDOf(comps), rt.TimeToNSDate(date), opts)
+	return rt.NSDateToTime(_r)
 }
 
-// ComponentsFromDateToDateOptions returns the difference between two supplied dates as date components.
-func (c *Calendar) ComponentsFromDateToDateOptions(unitFlags CalendarUnit, startingDate *Date, resultDate *Date, opts CalendarOptions) *DateComponents {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("components:fromDate:toDate:options:"), unitFlags, objref.IDOf(startingDate), objref.IDOf(resultDate), opts)
+// ComponentsFromDateToDate returns the difference between two supplied dates as date components.
+func (c *Calendar) ComponentsFromDateToDate(unitFlags CalendarUnit, startingDate time.Time, resultDate time.Time, opts CalendarOptions) *DateComponents {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("components:fromDate:toDate:options:"), unitFlags, rt.TimeToNSDate(startingDate), rt.TimeToNSDate(resultDate), opts)
 	return DateComponentsFromID(_r)
 }
 
 // GetEraYearMonthDayFromDate returns by reference the era, year, week of year, and weekday component values for a given date.
-func (c *Calendar) GetEraYearMonthDayFromDate(date *Date) (eraValuePointer int64, yearValuePointer int64, monthValuePointer int64, dayValuePointer int64) {
+func (c *Calendar) GetEraYearMonthDayFromDate(date time.Time) (eraValuePointer int64, yearValuePointer int64, monthValuePointer int64, dayValuePointer int64) {
+	defer runtime.KeepAlive(c)
 	var _out0 int64
 	var _out1 int64
 	var _out2 int64
 	var _out3 int64
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("getEra:year:month:day:fromDate:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), objref.IDOf(date))
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("getEra:year:month:day:fromDate:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), rt.TimeToNSDate(date))
 	return _out0, _out1, _out2, _out3
 }
 
 // GetEraYearForWeekOfYearWeekOfYearWeekdayFromDate returns by reference the era, year, week of year, and weekday component values for a given date.
-func (c *Calendar) GetEraYearForWeekOfYearWeekOfYearWeekdayFromDate(date *Date) (eraValuePointer int64, yearValuePointer int64, weekValuePointer int64, weekdayValuePointer int64) {
+func (c *Calendar) GetEraYearForWeekOfYearWeekOfYearWeekdayFromDate(date time.Time) (eraValuePointer int64, yearValuePointer int64, weekValuePointer int64, weekdayValuePointer int64) {
+	defer runtime.KeepAlive(c)
 	var _out0 int64
 	var _out1 int64
 	var _out2 int64
 	var _out3 int64
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("getEra:yearForWeekOfYear:weekOfYear:weekday:fromDate:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), objref.IDOf(date))
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("getEra:yearForWeekOfYear:weekOfYear:weekday:fromDate:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), rt.TimeToNSDate(date))
 	return _out0, _out1, _out2, _out3
 }
 
 // GetHourMinuteSecondNanosecondFromDate returns by reference the hour, minute, second, and nanosecond component values for a given date.
-func (c *Calendar) GetHourMinuteSecondNanosecondFromDate(date *Date) (hourValuePointer int64, minuteValuePointer int64, secondValuePointer int64, nanosecondValuePointer int64) {
+func (c *Calendar) GetHourMinuteSecondNanosecondFromDate(date time.Time) (hourValuePointer int64, minuteValuePointer int64, secondValuePointer int64, nanosecondValuePointer int64) {
+	defer runtime.KeepAlive(c)
 	var _out0 int64
 	var _out1 int64
 	var _out2 int64
 	var _out3 int64
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("getHour:minute:second:nanosecond:fromDate:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), objref.IDOf(date))
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("getHour:minute:second:nanosecond:fromDate:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), rt.TimeToNSDate(date))
 	return _out0, _out1, _out2, _out3
 }
 
 // ComponentFromDate returns the specified date component from a given date.
-func (c *Calendar) ComponentFromDate(unit CalendarUnit, date *Date) int {
-	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("component:fromDate:"), unit, objref.IDOf(date))
+func (c *Calendar) ComponentFromDate(unit CalendarUnit, date time.Time) int {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("component:fromDate:"), unit, rt.TimeToNSDate(date))
 	return _r
 }
 
 // DateWithEraYearMonthDayHourMinuteSecondNanosecond returns a date created with the given components.
-func (c *Calendar) DateWithEraYearMonthDayHourMinuteSecondNanosecond(eraValue int, yearValue int, monthValue int, dayValue int, hourValue int, minuteValue int, secondValue int, nanosecondValue int) *Date {
+func (c *Calendar) DateWithEraYearMonthDayHourMinuteSecondNanosecond(eraValue int, yearValue int, monthValue int, dayValue int, hourValue int, minuteValue int, secondValue int, nanosecondValue int) time.Time {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("dateWithEra:year:month:day:hour:minute:second:nanosecond:"), eraValue, yearValue, monthValue, dayValue, hourValue, minuteValue, secondValue, nanosecondValue)
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // DateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSecondNanosecond returns a new date created with the given components base on a week-of-year value.
-func (c *Calendar) DateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSecondNanosecond(eraValue int, yearValue int, weekValue int, weekdayValue int, hourValue int, minuteValue int, secondValue int, nanosecondValue int) *Date {
+func (c *Calendar) DateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSecondNanosecond(eraValue int, yearValue int, weekValue int, weekdayValue int, hourValue int, minuteValue int, secondValue int, nanosecondValue int) time.Time {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("dateWithEra:yearForWeekOfYear:weekOfYear:weekday:hour:minute:second:nanosecond:"), eraValue, yearValue, weekValue, weekdayValue, hourValue, minuteValue, secondValue, nanosecondValue)
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // StartOfDayForDate returns the first moment of a given date as a date instance.
-func (c *Calendar) StartOfDayForDate(date *Date) *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("startOfDayForDate:"), objref.IDOf(date))
-	return DateFromID(_r)
+func (c *Calendar) StartOfDayForDate(date time.Time) time.Time {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("startOfDayForDate:"), rt.TimeToNSDate(date))
+	return rt.NSDateToTime(_r)
 }
 
 // ComponentsInTimeZoneFromDate returns all the date components of a date, as if in a given time zone (instead of the receiving calendar’s time zone).
-func (c *Calendar) ComponentsInTimeZoneFromDate(timezone *TimeZone, date *Date) *DateComponents {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("componentsInTimeZone:fromDate:"), objref.IDOf(timezone), objref.IDOf(date))
+func (c *Calendar) ComponentsInTimeZoneFromDate(timezone *TimeZone, date time.Time) *DateComponents {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(timezone)
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("componentsInTimeZone:fromDate:"), objref.IDOf(timezone), rt.TimeToNSDate(date))
 	return DateComponentsFromID(_r)
 }
 
 // CompareDateToDateToUnitGranularity indicates the ordering of two given dates based on their components down to a given unit granularity.
-func (c *Calendar) CompareDateToDateToUnitGranularity(date1 *Date, date2 *Date, unit CalendarUnit) ComparisonResult {
-	_r := objc.Send[ComparisonResult](objref.IDOf(c), objc.RegisterName("compareDate:toDate:toUnitGranularity:"), objref.IDOf(date1), objref.IDOf(date2), unit)
+func (c *Calendar) CompareDateToDateToUnitGranularity(date1 time.Time, date2 time.Time, unit CalendarUnit) ComparisonResult {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[ComparisonResult](objref.IDOf(c), objc.RegisterName("compareDate:toDate:toUnitGranularity:"), rt.TimeToNSDate(date1), rt.TimeToNSDate(date2), unit)
 	return _r
 }
 
 // IsDateEqualToDateToUnitGranularity indicates whether two dates are equal to a given unit of granularity.
-func (c *Calendar) IsDateEqualToDateToUnitGranularity(date1 *Date, date2 *Date, unit CalendarUnit) bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isDate:equalToDate:toUnitGranularity:"), objref.IDOf(date1), objref.IDOf(date2), unit)
+func (c *Calendar) IsDateEqualToDateToUnitGranularity(date1 time.Time, date2 time.Time, unit CalendarUnit) bool {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isDate:equalToDate:toUnitGranularity:"), rt.TimeToNSDate(date1), rt.TimeToNSDate(date2), unit)
 	return _r
 }
 
 // IsDateInSameDayAsDate indicates whether two dates are in the same day.
-func (c *Calendar) IsDateInSameDayAsDate(date1 *Date, date2 *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isDate:inSameDayAsDate:"), objref.IDOf(date1), objref.IDOf(date2))
+func (c *Calendar) IsDateInSameDayAsDate(date1 time.Time, date2 time.Time) bool {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isDate:inSameDayAsDate:"), rt.TimeToNSDate(date1), rt.TimeToNSDate(date2))
 	return _r
 }
 
 // IsDateInToday indicates whether the given date is in “today.”
-func (c *Calendar) IsDateInToday(date *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isDateInToday:"), objref.IDOf(date))
+func (c *Calendar) IsDateInToday(date time.Time) bool {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isDateInToday:"), rt.TimeToNSDate(date))
 	return _r
 }
 
 // IsDateInYesterday indicates whether the given date is in “yesterday.”
-func (c *Calendar) IsDateInYesterday(date *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isDateInYesterday:"), objref.IDOf(date))
+func (c *Calendar) IsDateInYesterday(date time.Time) bool {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isDateInYesterday:"), rt.TimeToNSDate(date))
 	return _r
 }
 
 // IsDateInTomorrow indicates whether the given date is in “tomorrow.”
-func (c *Calendar) IsDateInTomorrow(date *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isDateInTomorrow:"), objref.IDOf(date))
+func (c *Calendar) IsDateInTomorrow(date time.Time) bool {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isDateInTomorrow:"), rt.TimeToNSDate(date))
 	return _r
 }
 
 // IsDateInWeekend indicates whether a given date falls within a weekend period, as defined by the calendar and the calendar’s locale.
-func (c *Calendar) IsDateInWeekend(date *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isDateInWeekend:"), objref.IDOf(date))
+func (c *Calendar) IsDateInWeekend(date time.Time) bool {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isDateInWeekend:"), rt.TimeToNSDate(date))
 	return _r
 }
 
 // RangeOfWeekendStartDateIntervalContainingDate returns whether a given date falls within a weekend period, and if so, returns by reference the start date and time interval of the weekend range.
-func (c *Calendar) RangeOfWeekendStartDateIntervalContainingDate(datep *Date, date *Date) (ok bool, tip float64) {
+func (c *Calendar) RangeOfWeekendStartDateIntervalContainingDate(datep *Date, date time.Time) (ok bool, tip float64) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(datep)
 	var _out0 float64
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("rangeOfWeekendStartDate:interval:containingDate:"), objref.IDOf(datep), unsafe.Pointer(&_out0), objref.IDOf(date))
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("rangeOfWeekendStartDate:interval:containingDate:"), objref.IDOf(datep), unsafe.Pointer(&_out0), rt.TimeToNSDate(date))
 	return _r, _out0
 }
 
 // NextWeekendStartDateIntervalOptionsAfterDate returns by reference the starting date and time interval range of the next weekend period after a given date.
-func (c *Calendar) NextWeekendStartDateIntervalOptionsAfterDate(datep *Date, options CalendarOptions, date *Date) (ok bool, tip float64) {
+func (c *Calendar) NextWeekendStartDateIntervalOptionsAfterDate(datep *Date, options CalendarOptions, date time.Time) (ok bool, tip float64) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(datep)
 	var _out0 float64
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("nextWeekendStartDate:interval:options:afterDate:"), objref.IDOf(datep), unsafe.Pointer(&_out0), options, objref.IDOf(date))
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("nextWeekendStartDate:interval:options:afterDate:"), objref.IDOf(datep), unsafe.Pointer(&_out0), options, rt.TimeToNSDate(date))
 	return _r, _out0
 }
 
-// ComponentsFromDateComponentsToDateComponentsOptions returns the difference between start and end dates given as date components.
-func (c *Calendar) ComponentsFromDateComponentsToDateComponentsOptions(unitFlags CalendarUnit, startingDateComp *DateComponents, resultDateComp *DateComponents, options CalendarOptions) *DateComponents {
+// ComponentsFromDateComponentsToDateComponents returns the difference between start and end dates given as date components.
+func (c *Calendar) ComponentsFromDateComponentsToDateComponents(unitFlags CalendarUnit, startingDateComp *DateComponents, resultDateComp *DateComponents, options CalendarOptions) *DateComponents {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(startingDateComp)
+	defer runtime.KeepAlive(resultDateComp)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("components:fromDateComponents:toDateComponents:options:"), unitFlags, objref.IDOf(startingDateComp), objref.IDOf(resultDateComp), options)
 	return DateComponentsFromID(_r)
 }
 
-// DateByAddingUnitValueToDateOptions returns a date representing the absolute time calculated by adding the value of a given component to a given date.
-func (c *Calendar) DateByAddingUnitValueToDateOptions(unit CalendarUnit, value int, date *Date, options CalendarOptions) *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("dateByAddingUnit:value:toDate:options:"), unit, value, objref.IDOf(date), options)
-	return DateFromID(_r)
+// DateByAddingUnitValueToDate returns a date representing the absolute time calculated by adding the value of a given component to a given date.
+func (c *Calendar) DateByAddingUnitValueToDate(unit CalendarUnit, value int, date time.Time, options CalendarOptions) time.Time {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("dateByAddingUnit:value:toDate:options:"), unit, value, rt.TimeToNSDate(date), options)
+	return rt.NSDateToTime(_r)
 }
 
 // EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing computes the dates that match (or most closely match) a given set of components, and calls the block once for each of them, until the enumeration is stopped.
-func (c *Calendar) EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing(start *Date, comps *DateComponents, opts CalendarOptions, block func(obj.Object, bool, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("enumerateDatesStartingAfterDate:matchingComponents:options:usingBlock:"), objref.IDOf(start), objref.IDOf(comps), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 bool, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
+func (c *Calendar) EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing(start time.Time, comps *DateComponents, opts CalendarOptions, block func(obj.Object, bool, *bool)) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(comps)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("enumerateDatesStartingAfterDate:matchingComponents:options:usingBlock:"), rt.TimeToNSDate(start), objref.IDOf(comps), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 bool, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
 }
 
-// NextDateAfterDateMatchingComponentsOptions returns the next date after a given date matching the given components.
-func (c *Calendar) NextDateAfterDateMatchingComponentsOptions(date *Date, comps *DateComponents, options CalendarOptions) *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("nextDateAfterDate:matchingComponents:options:"), objref.IDOf(date), objref.IDOf(comps), options)
-	return DateFromID(_r)
+// NextDateAfterDateMatchingComponents returns the next date after a given date matching the given components.
+func (c *Calendar) NextDateAfterDateMatchingComponents(date time.Time, comps *DateComponents, options CalendarOptions) time.Time {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(comps)
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("nextDateAfterDate:matchingComponents:options:"), rt.TimeToNSDate(date), objref.IDOf(comps), options)
+	return rt.NSDateToTime(_r)
 }
 
-// NextDateAfterDateMatchingUnitValueOptions returns the next date after a given date matching the given calendar unit value.
-func (c *Calendar) NextDateAfterDateMatchingUnitValueOptions(date *Date, unit CalendarUnit, value int, options CalendarOptions) *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("nextDateAfterDate:matchingUnit:value:options:"), objref.IDOf(date), unit, value, options)
-	return DateFromID(_r)
+// NextDateAfterDateMatchingUnitValue returns the next date after a given date matching the given calendar unit value.
+func (c *Calendar) NextDateAfterDateMatchingUnitValue(date time.Time, unit CalendarUnit, value int, options CalendarOptions) time.Time {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("nextDateAfterDate:matchingUnit:value:options:"), rt.TimeToNSDate(date), unit, value, options)
+	return rt.NSDateToTime(_r)
 }
 
-// NextDateAfterDateMatchingHourMinuteSecondOptions returns the next date after a given date that matches the given hour, minute, and second, component values.
-func (c *Calendar) NextDateAfterDateMatchingHourMinuteSecondOptions(date *Date, hourValue int, minuteValue int, secondValue int, options CalendarOptions) *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("nextDateAfterDate:matchingHour:minute:second:options:"), objref.IDOf(date), hourValue, minuteValue, secondValue, options)
-	return DateFromID(_r)
+// NextDateAfterDateMatchingHourMinuteSecond returns the next date after a given date that matches the given hour, minute, and second, component values.
+func (c *Calendar) NextDateAfterDateMatchingHourMinuteSecond(date time.Time, hourValue int, minuteValue int, secondValue int, options CalendarOptions) time.Time {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("nextDateAfterDate:matchingHour:minute:second:options:"), rt.TimeToNSDate(date), hourValue, minuteValue, secondValue, options)
+	return rt.NSDateToTime(_r)
 }
 
-// DateBySettingUnitValueOfDateOptions returns a new date representing the date calculated by setting a specific component of a given date to a given value, while trying to keep lower components the same.
-func (c *Calendar) DateBySettingUnitValueOfDateOptions(unit CalendarUnit, v int, date *Date, opts CalendarOptions) *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("dateBySettingUnit:value:ofDate:options:"), unit, v, objref.IDOf(date), opts)
-	return DateFromID(_r)
+// DateBySettingUnitValueOfDate returns a new date representing the date calculated by setting a specific component of a given date to a given value, while trying to keep lower components the same.
+func (c *Calendar) DateBySettingUnitValueOfDate(unit CalendarUnit, v int, date time.Time, opts CalendarOptions) time.Time {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("dateBySettingUnit:value:ofDate:options:"), unit, v, rt.TimeToNSDate(date), opts)
+	return rt.NSDateToTime(_r)
 }
 
-// DateBySettingHourMinuteSecondOfDateOptions creates a new date calculated with the given time.
-func (c *Calendar) DateBySettingHourMinuteSecondOfDateOptions(h int, m int, s int, date *Date, opts CalendarOptions) *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("dateBySettingHour:minute:second:ofDate:options:"), h, m, s, objref.IDOf(date), opts)
-	return DateFromID(_r)
+// DateBySettingHourMinuteSecondOfDate creates a new date calculated with the given time.
+func (c *Calendar) DateBySettingHourMinuteSecondOfDate(h int, m int, s int, date time.Time, opts CalendarOptions) time.Time {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("dateBySettingHour:minute:second:ofDate:options:"), h, m, s, rt.TimeToNSDate(date), opts)
+	return rt.NSDateToTime(_r)
 }
 
 // DateMatchesComponents returns whether a given date matches all of the given date components.
-func (c *Calendar) DateMatchesComponents(date *Date, components *DateComponents) bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("date:matchesComponents:"), objref.IDOf(date), objref.IDOf(components))
+func (c *Calendar) DateMatchesComponents(date time.Time, components *DateComponents) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(components)
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("date:matchesComponents:"), rt.TimeToNSDate(date), objref.IDOf(components))
 	return _r
 }
 
 // CalendarIdentifier returns the calendar identifier.
 func (c *Calendar) CalendarIdentifier() *String {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("calendarIdentifier"))
 	return StringFromID(_r)
 }
 
 // Locale returns the locale.
 func (c *Calendar) Locale() *Locale {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
 }
 
 // TimeZone returns the time zone.
 func (c *Calendar) TimeZone() *TimeZone {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
 // FirstWeekday returns the first weekday.
 func (c *Calendar) FirstWeekday() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("firstWeekday"))
 	return _r
 }
 
 // MinimumDaysInFirstWeek returns the minimum days in first week.
 func (c *Calendar) MinimumDaysInFirstWeek() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("minimumDaysInFirstWeek"))
 	return _r
 }
@@ -351,6 +409,7 @@ func (c *Calendar) MinimumDaysInFirstWeek() int {
 //
 // EraSymbols returns the collection as a Go slice.
 func (c *Calendar) EraSymbols() []string {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("eraSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -359,6 +418,7 @@ func (c *Calendar) EraSymbols() []string {
 //
 // LongEraSymbols returns the collection as a Go slice.
 func (c *Calendar) LongEraSymbols() []string {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("longEraSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -367,6 +427,7 @@ func (c *Calendar) LongEraSymbols() []string {
 //
 // MonthSymbols returns the collection as a Go slice.
 func (c *Calendar) MonthSymbols() []string {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("monthSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -375,6 +436,7 @@ func (c *Calendar) MonthSymbols() []string {
 //
 // ShortMonthSymbols returns the collection as a Go slice.
 func (c *Calendar) ShortMonthSymbols() []string {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("shortMonthSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -383,6 +445,7 @@ func (c *Calendar) ShortMonthSymbols() []string {
 //
 // VeryShortMonthSymbols returns the collection as a Go slice.
 func (c *Calendar) VeryShortMonthSymbols() []string {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("veryShortMonthSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -391,6 +454,7 @@ func (c *Calendar) VeryShortMonthSymbols() []string {
 //
 // StandaloneMonthSymbols returns the collection as a Go slice.
 func (c *Calendar) StandaloneMonthSymbols() []string {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("standaloneMonthSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -399,6 +463,7 @@ func (c *Calendar) StandaloneMonthSymbols() []string {
 //
 // ShortStandaloneMonthSymbols returns the collection as a Go slice.
 func (c *Calendar) ShortStandaloneMonthSymbols() []string {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("shortStandaloneMonthSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -407,6 +472,7 @@ func (c *Calendar) ShortStandaloneMonthSymbols() []string {
 //
 // VeryShortStandaloneMonthSymbols returns the collection as a Go slice.
 func (c *Calendar) VeryShortStandaloneMonthSymbols() []string {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("veryShortStandaloneMonthSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -415,6 +481,7 @@ func (c *Calendar) VeryShortStandaloneMonthSymbols() []string {
 //
 // WeekdaySymbols returns the collection as a Go slice.
 func (c *Calendar) WeekdaySymbols() []string {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("weekdaySymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -423,6 +490,7 @@ func (c *Calendar) WeekdaySymbols() []string {
 //
 // ShortWeekdaySymbols returns the collection as a Go slice.
 func (c *Calendar) ShortWeekdaySymbols() []string {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("shortWeekdaySymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -431,6 +499,7 @@ func (c *Calendar) ShortWeekdaySymbols() []string {
 //
 // VeryShortWeekdaySymbols returns the collection as a Go slice.
 func (c *Calendar) VeryShortWeekdaySymbols() []string {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("veryShortWeekdaySymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -439,6 +508,7 @@ func (c *Calendar) VeryShortWeekdaySymbols() []string {
 //
 // StandaloneWeekdaySymbols returns the collection as a Go slice.
 func (c *Calendar) StandaloneWeekdaySymbols() []string {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("standaloneWeekdaySymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -447,6 +517,7 @@ func (c *Calendar) StandaloneWeekdaySymbols() []string {
 //
 // ShortStandaloneWeekdaySymbols returns the collection as a Go slice.
 func (c *Calendar) ShortStandaloneWeekdaySymbols() []string {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("shortStandaloneWeekdaySymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -455,6 +526,7 @@ func (c *Calendar) ShortStandaloneWeekdaySymbols() []string {
 //
 // VeryShortStandaloneWeekdaySymbols returns the collection as a Go slice.
 func (c *Calendar) VeryShortStandaloneWeekdaySymbols() []string {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("veryShortStandaloneWeekdaySymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -463,6 +535,7 @@ func (c *Calendar) VeryShortStandaloneWeekdaySymbols() []string {
 //
 // QuarterSymbols returns the collection as a Go slice.
 func (c *Calendar) QuarterSymbols() []string {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("quarterSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -471,6 +544,7 @@ func (c *Calendar) QuarterSymbols() []string {
 //
 // ShortQuarterSymbols returns the collection as a Go slice.
 func (c *Calendar) ShortQuarterSymbols() []string {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("shortQuarterSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -479,6 +553,7 @@ func (c *Calendar) ShortQuarterSymbols() []string {
 //
 // StandaloneQuarterSymbols returns the collection as a Go slice.
 func (c *Calendar) StandaloneQuarterSymbols() []string {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("standaloneQuarterSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -487,12 +562,14 @@ func (c *Calendar) StandaloneQuarterSymbols() []string {
 //
 // ShortStandaloneQuarterSymbols returns the collection as a Go slice.
 func (c *Calendar) ShortStandaloneQuarterSymbols() []string {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("shortStandaloneQuarterSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // AMSymbol returns the am symbol.
 func (c *Calendar) AMSymbol() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("AMSymbol"))
 	if _r == 0 {
 		return ""
@@ -502,6 +579,7 @@ func (c *Calendar) AMSymbol() string {
 
 // PMSymbol returns the pm symbol.
 func (c *Calendar) PMSymbol() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("PMSymbol"))
 	if _r == 0 {
 		return ""

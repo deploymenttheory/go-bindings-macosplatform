@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func shareAccessRequesterAdopt(id objc.ID) *ShareAccessRequester {
 
 // Description returns the object's -description text.
 func (sar *ShareAccessRequester) Description() string {
+	defer runtime.KeepAlive(sar)
 	return rt.Description(objref.IDOf(sar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sar *ShareAccessRequester) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sar)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sar *ShareAccessRequester) IsKind(className string) bool {
+	defer runtime.KeepAlive(sar)
 	return rt.IsKind(objref.IDOf(sar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sar *ShareAccessRequester) String() string {
+	defer runtime.KeepAlive(sar)
 	return rt.Description(objref.IDOf(sar))
 }
 
@@ -72,18 +79,21 @@ func NewShareAccessRequester() *ShareAccessRequester {
 
 // UserIdentity returns the identity of the user requesting access to the share.
 func (sar *ShareAccessRequester) UserIdentity() *UserIdentity {
+	defer runtime.KeepAlive(sar)
 	_r := objc.Send[objc.ID](objref.IDOf(sar), objc.RegisterName("userIdentity"))
 	return UserIdentityFromID(_r)
 }
 
 // ParticipantLookupInfo returns lookup information for the requester. Use this lookup info with “CKFetchShareParticipantsOperation“ to fetch the corresponding participant. Once fetched, add the participant to the share to approve the requester.
 func (sar *ShareAccessRequester) ParticipantLookupInfo() *UserIdentityLookupInfo {
+	defer runtime.KeepAlive(sar)
 	_r := objc.Send[objc.ID](objref.IDOf(sar), objc.RegisterName("participantLookupInfo"))
 	return UserIdentityLookupInfoFromID(_r)
 }
 
 // Contact returns a displayable CNContact representing the requester. If the requester doesn't exist in the user's contacts or is not accessible, returns a newly created `CNContact`. This provides formatted requester information suitable for display in the application's UI.
 func (sar *ShareAccessRequester) Contact() obj.Object {
+	defer runtime.KeepAlive(sar)
 	_r := objc.Send[objc.ID](objref.IDOf(sar), objc.RegisterName("contact"))
 	return obj.Wrap(_r)
 }

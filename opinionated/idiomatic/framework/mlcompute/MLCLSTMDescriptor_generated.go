@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func lSTMDescriptorAdopt(id objc.ID) *LSTMDescriptor {
 
 // Description returns the object's -description text.
 func (ld *LSTMDescriptor) Description() string {
+	defer runtime.KeepAlive(ld)
 	return rt.Description(objref.IDOf(ld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ld *LSTMDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ld)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ld *LSTMDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(ld)
 	return rt.IsKind(objref.IDOf(ld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ld *LSTMDescriptor) String() string {
+	defer runtime.KeepAlive(ld)
 	return rt.Description(objref.IDOf(ld))
 }
 
@@ -74,54 +81,63 @@ func NewLSTMDescriptor() *LSTMDescriptor {
 
 // InputSize returns the number of expected feature channels in the input
 func (ld *LSTMDescriptor) InputSize() int {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[int](objref.IDOf(ld), objc.RegisterName("inputSize"))
 	return _r
 }
 
 // HiddenSize returns the number of feature channels in the hidden state
 func (ld *LSTMDescriptor) HiddenSize() int {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[int](objref.IDOf(ld), objc.RegisterName("hiddenSize"))
 	return _r
 }
 
 // LayerCount returns the number of recurrent layers.  Default is 1.
 func (ld *LSTMDescriptor) LayerCount() int {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[int](objref.IDOf(ld), objc.RegisterName("layerCount"))
 	return _r
 }
 
 // UsesBiases reports whether if false, the layer does not use bias terms. Default is true.
 func (ld *LSTMDescriptor) UsesBiases() bool {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[bool](objref.IDOf(ld), objc.RegisterName("usesBiases"))
 	return _r
 }
 
 // BatchFirst reports whether LSTM only supports batchFirst=YES. This means the input and output will have shape [batch size, time steps, feature]. Default is true.
 func (ld *LSTMDescriptor) BatchFirst() bool {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[bool](objref.IDOf(ld), objc.RegisterName("batchFirst"))
 	return _r
 }
 
 // IsBidirectional reports whether if true, becomes a bidirectional LSTM. Default is false.
 func (ld *LSTMDescriptor) IsBidirectional() bool {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[bool](objref.IDOf(ld), objc.RegisterName("isBidirectional"))
 	return _r
 }
 
 // ReturnsSequences reports whether if true return output for all sequences else return output only for the last sequences. Default: true
 func (ld *LSTMDescriptor) ReturnsSequences() bool {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[bool](objref.IDOf(ld), objc.RegisterName("returnsSequences"))
 	return _r
 }
 
 // Dropout returns if non-zero, intrdouces a dropout layer on the outputs of each LSTM layer except the last layer, with dropout probablity equal to dropout.  Default is 0.0.
 func (ld *LSTMDescriptor) Dropout() float32 {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[float32](objref.IDOf(ld), objc.RegisterName("dropout"))
 	return _r
 }
 
 // ResultMode returns MLCLSTMResultModeOutput returns output data. MLCLSTMResultModeOutputAndStates returns output data, last hidden state h_n, and last cell state c_n. Default MLCLSTMResultModeOutput.
 func (ld *LSTMDescriptor) ResultMode() LSTMResultMode {
+	defer runtime.KeepAlive(ld)
 	_r := objc.Send[LSTMResultMode](objref.IDOf(ld), objc.RegisterName("resultMode"))
 	return _r
 }

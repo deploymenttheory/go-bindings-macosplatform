@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,33 +50,40 @@ func mTRNetworkCommissioningClusterThreadInterfaceScanResultStructAdopt(id objc.
 
 // Description returns the object's -description text.
 func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Description() string {
+	defer runtime.KeepAlive(mncctisrs)
 	return rt.Description(objref.IDOf(mncctisrs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mncctisrs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mncctisrs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mncctisrs)
 	return rt.IsKind(objref.IDOf(mncctisrs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) String() string {
+	defer runtime.KeepAlive(mncctisrs)
 	return rt.Description(objref.IDOf(mncctisrs))
 }
 
 // WithPanID sets the pan ID.
 func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithPanID(panId obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
+	defer runtime.KeepAlive(panId)
 	objc.Send[objc.ID](objref.IDOf(mncctisrs), objc.RegisterName("setPanId:"), objref.IDOf(panId))
 	return mncctisrs
 }
 
 // WithExtendedPanID sets the extended pan ID.
 func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithExtendedPanID(extendedPanId obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
+	defer runtime.KeepAlive(extendedPanId)
 	objc.Send[objc.ID](objref.IDOf(mncctisrs), objc.RegisterName("setExtendedPanId:"), objref.IDOf(extendedPanId))
 	return mncctisrs
 }
@@ -86,42 +96,48 @@ func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) 
 
 // WithChannel sets the channel.
 func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithChannel(channel obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
+	defer runtime.KeepAlive(channel)
 	objc.Send[objc.ID](objref.IDOf(mncctisrs), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 	return mncctisrs
 }
 
 // WithExtendedAddress sets the extended address.
-func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithExtendedAddress(extendedAddress obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
-	objc.Send[objc.ID](objref.IDOf(mncctisrs), objc.RegisterName("setExtendedAddress:"), objref.IDOf(extendedAddress))
+func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithExtendedAddress(extendedAddress []byte) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
+	objc.Send[objc.ID](objref.IDOf(mncctisrs), objc.RegisterName("setExtendedAddress:"), rt.BytesToNSData(extendedAddress))
 	return mncctisrs
 }
 
 // WithRssi sets the rssi.
 func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithRssi(rssi obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
+	defer runtime.KeepAlive(rssi)
 	objc.Send[objc.ID](objref.IDOf(mncctisrs), objc.RegisterName("setRssi:"), objref.IDOf(rssi))
 	return mncctisrs
 }
 
 // WithLqi sets the lqi.
 func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithLqi(lqi obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
+	defer runtime.KeepAlive(lqi)
 	objc.Send[objc.ID](objref.IDOf(mncctisrs), objc.RegisterName("setLqi:"), objref.IDOf(lqi))
 	return mncctisrs
 }
 
 // PanID returns the pan ID.
-func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) PanID() obj.Object {
+func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) PanID() *foundation.Number {
+	defer runtime.KeepAlive(mncctisrs)
 	_r := objc.Send[objc.ID](objref.IDOf(mncctisrs), objc.RegisterName("panId"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ExtendedPanID returns the extended pan ID.
-func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) ExtendedPanID() obj.Object {
+func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) ExtendedPanID() *foundation.Number {
+	defer runtime.KeepAlive(mncctisrs)
 	_r := objc.Send[objc.ID](objref.IDOf(mncctisrs), objc.RegisterName("extendedPanId"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NetworkName returns the network name.
 func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) NetworkName() string {
+	defer runtime.KeepAlive(mncctisrs)
 	_r := objc.Send[objc.ID](objref.IDOf(mncctisrs), objc.RegisterName("networkName"))
 	if _r == 0 {
 		return ""
@@ -130,27 +146,31 @@ func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) 
 }
 
 // Channel returns the channel.
-func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Channel() obj.Object {
+func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Channel() *foundation.Number {
+	defer runtime.KeepAlive(mncctisrs)
 	_r := objc.Send[objc.ID](objref.IDOf(mncctisrs), objc.RegisterName("channel"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ExtendedAddress returns the extended address.
-func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) ExtendedAddress() obj.Object {
+func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) ExtendedAddress() []byte {
+	defer runtime.KeepAlive(mncctisrs)
 	_r := objc.Send[objc.ID](objref.IDOf(mncctisrs), objc.RegisterName("extendedAddress"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Rssi returns the rssi.
-func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Rssi() obj.Object {
+func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Rssi() *foundation.Number {
+	defer runtime.KeepAlive(mncctisrs)
 	_r := objc.Send[objc.ID](objref.IDOf(mncctisrs), objc.RegisterName("rssi"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Lqi returns the lqi.
-func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Lqi() obj.Object {
+func (mncctisrs *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Lqi() *foundation.Number {
+	defer runtime.KeepAlive(mncctisrs)
 	_r := objc.Send[objc.ID](objref.IDOf(mncctisrs), objc.RegisterName("lqi"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRNetworkCommissioningClusterThreadInterfaceScanResultStruct marks MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct — and, by embedding promotion, its

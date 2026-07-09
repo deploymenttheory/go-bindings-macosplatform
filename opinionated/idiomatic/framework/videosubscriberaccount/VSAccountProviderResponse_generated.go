@@ -5,7 +5,10 @@
 package videosubscriberaccount
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func vSAccountProviderResponseAdopt(id objc.ID) *VSAccountProviderResponse {
 
 // Description returns the object's -description text.
 func (vapr *VSAccountProviderResponse) Description() string {
+	defer runtime.KeepAlive(vapr)
 	return rt.Description(objref.IDOf(vapr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vapr *VSAccountProviderResponse) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vapr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vapr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vapr *VSAccountProviderResponse) IsKind(className string) bool {
+	defer runtime.KeepAlive(vapr)
 	return rt.IsKind(objref.IDOf(vapr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vapr *VSAccountProviderResponse) String() string {
+	defer runtime.KeepAlive(vapr)
 	return rt.Description(objref.IDOf(vapr))
 }
 
@@ -73,13 +81,15 @@ func NewVSAccountProviderResponse() *VSAccountProviderResponse {
 }
 
 // AuthenticationScheme returns identifies the protocol used in constructing this response.
-func (vapr *VSAccountProviderResponse) AuthenticationScheme() obj.Object {
+func (vapr *VSAccountProviderResponse) AuthenticationScheme() *foundation.String {
+	defer runtime.KeepAlive(vapr)
 	_r := objc.Send[objc.ID](objref.IDOf(vapr), objc.RegisterName("authenticationScheme"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Status returns the status code for this response. May be nil if there is no meaningful value for this type of response.
 func (vapr *VSAccountProviderResponse) Status() string {
+	defer runtime.KeepAlive(vapr)
 	_r := objc.Send[objc.ID](objref.IDOf(vapr), objc.RegisterName("status"))
 	if _r == 0 {
 		return ""
@@ -89,6 +99,7 @@ func (vapr *VSAccountProviderResponse) Status() string {
 
 // Body returns the raw response from the provider. May be nil if the response contained security-sensitive information.
 func (vapr *VSAccountProviderResponse) Body() string {
+	defer runtime.KeepAlive(vapr)
 	_r := objc.Send[objc.ID](objref.IDOf(vapr), objc.RegisterName("body"))
 	if _r == 0 {
 		return ""

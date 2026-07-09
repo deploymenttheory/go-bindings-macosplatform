@@ -5,6 +5,7 @@
 package mapkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func placemarkAdopt(id objc.ID) *Placemark {
 
 // Description returns the object's -description text.
 func (p *Placemark) Description() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (p *Placemark) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (p *Placemark) IsKind(className string) bool {
+	defer runtime.KeepAlive(p)
 	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (p *Placemark) String() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
@@ -76,14 +82,15 @@ func NewPlacemarkWithCoordinate(coordinate unsafe.Pointer) *Placemark {
 }
 
 // NewPlacemarkWithCoordinateAddressDictionary creates and returns a placemark object using the specified coordinate and Address Book dictionary.
-func NewPlacemarkWithCoordinateAddressDictionary(coordinate unsafe.Pointer, addressDictionary obj.Object) *Placemark {
+func NewPlacemarkWithCoordinateAddressDictionary(coordinate unsafe.Pointer, addressDictionary map[string]obj.Object) *Placemark {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKPlacemark")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoordinate:addressDictionary:"), coordinate, objref.IDOf(addressDictionary))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoordinate:addressDictionary:"), coordinate, rt.MapToDict(addressDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return placemarkAdopt(_id)
 }
 
 // NewPlacemarkWithCoordinatePostalAddress creates and returns a placemark object with the specified coordinate and postal address from the user’s Contacts database.
 func NewPlacemarkWithCoordinatePostalAddress(coordinate unsafe.Pointer, postalAddress obj.Object) *Placemark {
+	defer runtime.KeepAlive(postalAddress)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKPlacemark")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoordinate:postalAddress:"), coordinate, objref.IDOf(postalAddress))
 	return placemarkAdopt(_id)
@@ -91,6 +98,7 @@ func NewPlacemarkWithCoordinatePostalAddress(coordinate unsafe.Pointer, postalAd
 
 // CountryCode returns the country code.
 func (p *Placemark) CountryCode() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("countryCode"))
 	if _r == 0 {
 		return ""

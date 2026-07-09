@@ -6,9 +6,11 @@ package intents
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,27 +52,34 @@ func interactionAdopt(id objc.ID) *Interaction {
 
 // Description returns the object's -description text.
 func (i *Interaction) Description() string {
+	defer runtime.KeepAlive(i)
 	return rt.Description(objref.IDOf(i))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (i *Interaction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(i)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(i), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (i *Interaction) IsKind(className string) bool {
+	defer runtime.KeepAlive(i)
 	return rt.IsKind(objref.IDOf(i), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (i *Interaction) String() string {
+	defer runtime.KeepAlive(i)
 	return rt.Description(objref.IDOf(i))
 }
 
 // NewInteractionWithIntentResponse initializes and returns an interaction object with an intent object and your app’s response.
 func NewInteractionWithIntentResponse(intent *Intent, response *IntentResponse) *Interaction {
+	defer runtime.KeepAlive(intent)
+	defer runtime.KeepAlive(response)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INInteraction")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIntent:response:"), objref.IDOf(intent), objref.IDOf(response))
 	return interactionAdopt(_id)
@@ -84,6 +93,7 @@ func (i *Interaction) WithDirection(direction InteractionDirection) *Interaction
 
 // WithDateInterval sets the time at which the interaction started and its duration.
 func (i *Interaction) WithDateInterval(dateInterval obj.Object) *Interaction {
+	defer runtime.KeepAlive(dateInterval)
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("setDateInterval:"), objref.IDOf(dateInterval))
 	return i
 }
@@ -104,6 +114,7 @@ func (i *Interaction) WithGroupIdentifier(groupIdentifier string) *Interaction {
 //
 // DonateInteractionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (i *Interaction) DonateInteractionWithCompletion(ctx context.Context) error {
+	defer runtime.KeepAlive(i)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -121,36 +132,42 @@ func (i *Interaction) DonateInteractionWithCompletion(ctx context.Context) error
 
 // Intent returns the intent.
 func (i *Interaction) Intent() *Intent {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("intent"))
 	return IntentFromID(_r)
 }
 
 // IntentResponse returns the intent response.
 func (i *Interaction) IntentResponse() *IntentResponse {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("intentResponse"))
 	return IntentResponseFromID(_r)
 }
 
 // IntentHandlingStatus returns the intent handling status.
 func (i *Interaction) IntentHandlingStatus() IntentHandlingStatus {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[IntentHandlingStatus](objref.IDOf(i), objc.RegisterName("intentHandlingStatus"))
 	return _r
 }
 
 // Direction returns the direction.
 func (i *Interaction) Direction() InteractionDirection {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[InteractionDirection](objref.IDOf(i), objc.RegisterName("direction"))
 	return _r
 }
 
 // DateInterval returns the date interval.
-func (i *Interaction) DateInterval() obj.Object {
+func (i *Interaction) DateInterval() *foundation.DateInterval {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("dateInterval"))
-	return obj.Wrap(_r)
+	return foundation.DateIntervalFromID(_r)
 }
 
 // Identifier returns the identifier.
 func (i *Interaction) Identifier() string {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -160,6 +177,7 @@ func (i *Interaction) Identifier() string {
 
 // GroupIdentifier returns the group identifier.
 func (i *Interaction) GroupIdentifier() string {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("groupIdentifier"))
 	if _r == 0 {
 		return ""

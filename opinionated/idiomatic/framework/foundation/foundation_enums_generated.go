@@ -3454,6 +3454,43 @@ func (e SortOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Bitmask — values may be combined with |.
+type StreamEvent uint64
+
+const (
+	StreamEventNone              StreamEvent = 0
+	StreamEventOpenCompleted     StreamEvent = 1
+	StreamEventHasBytesAvailable StreamEvent = 2
+	StreamEventHasSpaceAvailable StreamEvent = 4
+	StreamEventErrorOccurred     StreamEvent = 8
+	StreamEventEndEncountered    StreamEvent = 16
+)
+
+// String returns the StreamEvent constant's name, or its numeric form when the
+// value is not a known constant.
+func (e StreamEvent) String() string {
+	var parts []string
+	if e&StreamEventOpenCompleted != 0 {
+		parts = append(parts, "StreamEventOpenCompleted")
+	}
+	if e&StreamEventHasBytesAvailable != 0 {
+		parts = append(parts, "StreamEventHasBytesAvailable")
+	}
+	if e&StreamEventHasSpaceAvailable != 0 {
+		parts = append(parts, "StreamEventHasSpaceAvailable")
+	}
+	if e&StreamEventErrorOccurred != 0 {
+		parts = append(parts, "StreamEventErrorOccurred")
+	}
+	if e&StreamEventEndEncountered != 0 {
+		parts = append(parts, "StreamEventEndEncountered")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // The type declared for the constants listed in doc:stream/stream_status_constants.
 type StreamStatus uint64
 

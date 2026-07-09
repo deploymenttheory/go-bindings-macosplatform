@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func intersectionFunctionTableDescriptorAdopt(id objc.ID) *IntersectionFunctionT
 
 // Description returns the object's -description text.
 func (iftd *IntersectionFunctionTableDescriptor) Description() string {
+	defer runtime.KeepAlive(iftd)
 	return rt.Description(objref.IDOf(iftd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (iftd *IntersectionFunctionTableDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(iftd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(iftd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (iftd *IntersectionFunctionTableDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(iftd)
 	return rt.IsKind(objref.IDOf(iftd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (iftd *IntersectionFunctionTableDescriptor) String() string {
+	defer runtime.KeepAlive(iftd)
 	return rt.Description(objref.IDOf(iftd))
 }
 
@@ -80,6 +87,7 @@ func (iftd *IntersectionFunctionTableDescriptor) WithFunctionCount(functionCount
 
 // FunctionCount returns the function count.
 func (iftd *IntersectionFunctionTableDescriptor) FunctionCount() int {
+	defer runtime.KeepAlive(iftd)
 	_r := objc.Send[int](objref.IDOf(iftd), objc.RegisterName("functionCount"))
 	return _r
 }

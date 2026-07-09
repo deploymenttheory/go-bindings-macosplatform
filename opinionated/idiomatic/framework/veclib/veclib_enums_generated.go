@@ -8,61 +8,61 @@ import (
 	"fmt"
 )
 
-type BLAS_THREADING uint32
+type BlasThreading uint32
 
 const (
-	BLAS_THREADING_MULTI_THREADED  BLAS_THREADING = 0
-	BLAS_THREADING_SINGLE_THREADED BLAS_THREADING = 1
-	BLAS_THREADING_MAX_OPTIONS     BLAS_THREADING = 2
+	BlasThreadingMultiThreaded  BlasThreading = 0
+	BlasThreadingSingleThreaded BlasThreading = 1
+	BlasThreadingMaxOptions     BlasThreading = 2
 )
 
-// String returns the BLAS_THREADING constant's name, or its numeric form when the
+// String returns the BlasThreading constant's name, or its numeric form when the
 // value is not a known constant.
-func (e BLAS_THREADING) String() string {
+func (e BlasThreading) String() string {
 	switch e {
-	case BLAS_THREADING_MULTI_THREADED:
-		return "BLAS_THREADING_MULTI_THREADED"
-	case BLAS_THREADING_SINGLE_THREADED:
-		return "BLAS_THREADING_SINGLE_THREADED"
-	case BLAS_THREADING_MAX_OPTIONS:
-		return "BLAS_THREADING_MAX_OPTIONS"
+	case BlasThreadingMultiThreaded:
+		return "BlasThreadingMultiThreaded"
+	case BlasThreadingSingleThreaded:
+		return "BlasThreadingSingleThreaded"
+	case BlasThreadingMaxOptions:
+		return "BlasThreadingMaxOptions"
 	default:
-		return fmt.Sprintf("BLAS_THREADING(%d)", int64(e))
+		return fmt.Sprintf("BlasThreading(%d)", int64(e))
 	}
 }
 
-type CBLAS_ORDER int64
+type CblasOrder int64
 
 const (
-	CblasRowMajor CBLAS_ORDER = 101
-	CblasColMajor CBLAS_ORDER = 102
+	CblasRowMajor CblasOrder = 101
+	CblasColMajor CblasOrder = 102
 )
 
-// String returns the CBLAS_ORDER constant's name, or its numeric form when the
+// String returns the CblasOrder constant's name, or its numeric form when the
 // value is not a known constant.
-func (e CBLAS_ORDER) String() string {
+func (e CblasOrder) String() string {
 	switch e {
 	case CblasRowMajor:
 		return "CblasRowMajor"
 	case CblasColMajor:
 		return "CblasColMajor"
 	default:
-		return fmt.Sprintf("CBLAS_ORDER(%d)", int64(e))
+		return fmt.Sprintf("CblasOrder(%d)", int64(e))
 	}
 }
 
-type CBLAS_TRANSPOSE int64
+type CblasTranspose int64
 
 const (
-	CblasNoTrans   CBLAS_TRANSPOSE = 111
-	CblasTrans     CBLAS_TRANSPOSE = 112
-	CblasConjTrans CBLAS_TRANSPOSE = 113
-	AtlasConj      CBLAS_TRANSPOSE = 114
+	CblasNoTrans   CblasTranspose = 111
+	CblasTrans     CblasTranspose = 112
+	CblasConjTrans CblasTranspose = 113
+	AtlasConj      CblasTranspose = 114
 )
 
-// String returns the CBLAS_TRANSPOSE constant's name, or its numeric form when the
+// String returns the CblasTranspose constant's name, or its numeric form when the
 // value is not a known constant.
-func (e CBLAS_TRANSPOSE) String() string {
+func (e CblasTranspose) String() string {
 	switch e {
 	case CblasNoTrans:
 		return "CblasNoTrans"
@@ -73,21 +73,21 @@ func (e CBLAS_TRANSPOSE) String() string {
 	case AtlasConj:
 		return "AtlasConj"
 	default:
-		return fmt.Sprintf("CBLAS_TRANSPOSE(%d)", int64(e))
+		return fmt.Sprintf("CblasTranspose(%d)", int64(e))
 	}
 }
 
-type VDSP_DCT_Type int32
+type VdspDctType int32
 
 const (
-	VDSP_DCT_II  VDSP_DCT_Type = 2
-	VDSP_DCT_III VDSP_DCT_Type = 3
-	VDSP_DCT_IV  VDSP_DCT_Type = 4
+	VDSP_DCT_II  VdspDctType = 2
+	VDSP_DCT_III VdspDctType = 3
+	VDSP_DCT_IV  VdspDctType = 4
 )
 
-// String returns the VDSP_DCT_Type constant's name, or its numeric form when the
+// String returns the VdspDctType constant's name, or its numeric form when the
 // value is not a known constant.
-func (e VDSP_DCT_Type) String() string {
+func (e VdspDctType) String() string {
 	switch e {
 	case VDSP_DCT_II:
 		return "VDSP_DCT_II"
@@ -96,46 +96,46 @@ func (e VDSP_DCT_Type) String() string {
 	case VDSP_DCT_IV:
 		return "VDSP_DCT_IV"
 	default:
-		return fmt.Sprintf("VDSP_DCT_Type(%d)", int64(e))
+		return fmt.Sprintf("VdspDctType(%d)", int64(e))
 	}
 }
 
-type VDSP_DFT_Direction int32
+type VdspDftDirection int32
 
 const (
-	VDSP_DFT_FORWARD VDSP_DFT_Direction = 1
-	VDSP_DFT_INVERSE VDSP_DFT_Direction = -1
+	VDSP_DFT_FORWARD VdspDftDirection = 1
+	VDSP_DFT_INVERSE VdspDftDirection = -1
 )
 
-// String returns the VDSP_DFT_Direction constant's name, or its numeric form when the
+// String returns the VdspDftDirection constant's name, or its numeric form when the
 // value is not a known constant.
-func (e VDSP_DFT_Direction) String() string {
+func (e VdspDftDirection) String() string {
 	switch e {
 	case VDSP_DFT_FORWARD:
 		return "VDSP_DFT_FORWARD"
 	case VDSP_DFT_INVERSE:
 		return "VDSP_DFT_INVERSE"
 	default:
-		return fmt.Sprintf("VDSP_DFT_Direction(%d)", int64(e))
+		return fmt.Sprintf("VdspDftDirection(%d)", int64(e))
 	}
 }
 
-type VDSP_DFT_RealtoComplex int64
+type VdspDftRealtocomplex int64
 
 const (
-	VDSP_DFT_Interleaved_ComplextoComplex VDSP_DFT_RealtoComplex = 0
-	VDSP_DFT_Interleaved_RealtoComplex    VDSP_DFT_RealtoComplex = 1
+	VDSP_DFT_Interleaved_ComplextoComplex VdspDftRealtocomplex = 0
+	VDSP_DFT_Interleaved_RealtoComplex    VdspDftRealtocomplex = 1
 )
 
-// String returns the VDSP_DFT_RealtoComplex constant's name, or its numeric form when the
+// String returns the VdspDftRealtocomplex constant's name, or its numeric form when the
 // value is not a known constant.
-func (e VDSP_DFT_RealtoComplex) String() string {
+func (e VdspDftRealtocomplex) String() string {
 	switch e {
 	case VDSP_DFT_Interleaved_ComplextoComplex:
 		return "VDSP_DFT_Interleaved_ComplextoComplex"
 	case VDSP_DFT_Interleaved_RealtoComplex:
 		return "VDSP_DFT_Interleaved_RealtoComplex"
 	default:
-		return fmt.Sprintf("VDSP_DFT_RealtoComplex(%d)", int64(e))
+		return fmt.Sprintf("VdspDftRealtocomplex(%d)", int64(e))
 	}
 }

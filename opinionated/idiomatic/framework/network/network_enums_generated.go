@@ -9,24 +9,24 @@ import (
 )
 
 // The entities that can make a network request.
-type Nw_parameters_attribution_t int64
+type ParametersAttribution int64
 
 const (
 	// A developer-initiated network request.
-	Nw_parameters_attribution_developer Nw_parameters_attribution_t = 1
+	Nw_parameters_attribution_developer ParametersAttribution = 1
 	// The user explicitly directs the app to make a network request.
-	Nw_parameters_attribution_user Nw_parameters_attribution_t = 2
+	Nw_parameters_attribution_user ParametersAttribution = 2
 )
 
-// String returns the Nw_parameters_attribution_t constant's name, or its numeric form when the
+// String returns the ParametersAttribution constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Nw_parameters_attribution_t) String() string {
+func (e ParametersAttribution) String() string {
 	switch e {
 	case Nw_parameters_attribution_developer:
 		return "Nw_parameters_attribution_developer"
 	case Nw_parameters_attribution_user:
 		return "Nw_parameters_attribution_user"
 	default:
-		return fmt.Sprintf("Nw_parameters_attribution_t(%d)", int64(e))
+		return fmt.Sprintf("ParametersAttribution(%d)", int64(e))
 	}
 }

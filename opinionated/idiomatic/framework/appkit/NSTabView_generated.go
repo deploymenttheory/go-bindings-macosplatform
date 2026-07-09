@@ -5,10 +5,13 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -62,6 +65,7 @@ func NewTabView() *TabView {
 
 // WithFont sets the font used for the tab view’s label text.
 func (tv *TabView) WithFont(font *Font) *TabView {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -122,6 +126,18 @@ func (tv *TabView) WithControlSize(controlSize ControlSize) *TabView {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setControlSize:"), controlSize)
 	})
+	return tv
+}
+
+// WithDelegate sets the tab view’s delegate.
+func (tv *TabView) WithDelegate(delegate TabViewDelegate) *TabView {
+	_shim := newTabViewDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(tv), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return tv
 }
 
@@ -272,6 +288,7 @@ func (tv *TabView) WithWantsLayer(wantsLayer bool) *TabView {
 
 // WithLayer sets the layer.
 func (tv *TabView) WithLayer(layer obj.Object) *TabView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -321,6 +338,7 @@ func (tv *TabView) WithBackgroundFilters(items ...obj.Object) *TabView {
 
 // WithCompositingFilter sets the compositing filter.
 func (tv *TabView) WithCompositingFilter(compositingFilter obj.Object) *TabView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -338,6 +356,7 @@ func (tv *TabView) WithContentFilters(items ...obj.Object) *TabView {
 
 // WithShadow sets the shadow.
 func (tv *TabView) WithShadow(shadow *Shadow) *TabView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -386,6 +405,7 @@ func (tv *TabView) WithPreparedContentRect(preparedContentRect corefoundation.CG
 
 // WithNextKeyView sets the next key view.
 func (tv *TabView) WithNextKeyView(nextKeyView ViewProvider) *TabView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -435,6 +455,7 @@ func (tv *TabView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSiz
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (tv *TabView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TabView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -491,6 +512,7 @@ func (tv *TabView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynam
 
 // WithPressureConfiguration sets the pressure configuration.
 func (tv *TabView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TabView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -499,6 +521,7 @@ func (tv *TabView) WithPressureConfiguration(pressureConfiguration *PressureConf
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (tv *TabView) WithNextResponder(nextResponder ResponderProvider) *TabView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -507,6 +530,7 @@ func (tv *TabView) WithNextResponder(nextResponder ResponderProvider) *TabView {
 
 // WithMenu sets returns the responder’s menu.
 func (tv *TabView) WithMenu(menu *Menu) *TabView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -515,6 +539,7 @@ func (tv *TabView) WithMenu(menu *Menu) *TabView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (tv *TabView) WithUserActivity(userActivity obj.Object) *TabView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -523,6 +548,7 @@ func (tv *TabView) WithUserActivity(userActivity obj.Object) *TabView {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (tv *TabView) WithTouchBar(touchBar *TouchBar) *TabView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -531,6 +557,8 @@ func (tv *TabView) WithTouchBar(touchBar *TouchBar) *TabView {
 
 // SelectTabViewItem selects the specified tab view item.
 func (tv *TabView) SelectTabViewItem(tabViewItem *TabViewItem) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(tabViewItem)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectTabViewItem:"), objref.IDOf(tabViewItem))
 	})
@@ -539,6 +567,7 @@ func (tv *TabView) SelectTabViewItem(tabViewItem *TabViewItem) {
 
 // SelectTabViewItemAtIndex selects the tab view item specified by index.
 func (tv *TabView) SelectTabViewItemAtIndex(index int) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectTabViewItemAtIndex:"), index)
 	})
@@ -547,6 +576,8 @@ func (tv *TabView) SelectTabViewItemAtIndex(index int) {
 
 // SelectTabViewItemWithIdentifier selects the tab view item specified by identifier.
 func (tv *TabView) SelectTabViewItemWithIdentifier(identifier obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(identifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectTabViewItemWithIdentifier:"), objref.IDOf(identifier))
 	})
@@ -555,6 +586,8 @@ func (tv *TabView) SelectTabViewItemWithIdentifier(identifier obj.Object) {
 
 // TakeSelectedTabViewItemFromSender sets the selected tab view item to the selected item obtained from the sender.
 func (tv *TabView) TakeSelectedTabViewItemFromSender(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("takeSelectedTabViewItemFromSender:"), objref.IDOf(sender))
 	})
@@ -563,6 +596,8 @@ func (tv *TabView) TakeSelectedTabViewItemFromSender(sender obj.Object) {
 
 // SelectFirstTabViewItem this action method selects the first tab view item.
 func (tv *TabView) SelectFirstTabViewItem(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectFirstTabViewItem:"), objref.IDOf(sender))
 	})
@@ -571,6 +606,8 @@ func (tv *TabView) SelectFirstTabViewItem(sender obj.Object) {
 
 // SelectLastTabViewItem this action method selects the last tab view item.
 func (tv *TabView) SelectLastTabViewItem(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectLastTabViewItem:"), objref.IDOf(sender))
 	})
@@ -579,6 +616,8 @@ func (tv *TabView) SelectLastTabViewItem(sender obj.Object) {
 
 // SelectNextTabViewItem this action method selects the next tab view item in the sequence.
 func (tv *TabView) SelectNextTabViewItem(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectNextTabViewItem:"), objref.IDOf(sender))
 	})
@@ -587,6 +626,8 @@ func (tv *TabView) SelectNextTabViewItem(sender obj.Object) {
 
 // SelectPreviousTabViewItem this action method selects the previous tab view item in the sequence.
 func (tv *TabView) SelectPreviousTabViewItem(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectPreviousTabViewItem:"), objref.IDOf(sender))
 	})
@@ -595,6 +636,8 @@ func (tv *TabView) SelectPreviousTabViewItem(sender obj.Object) {
 
 // AddTabViewItem adds the specified tab item.
 func (tv *TabView) AddTabViewItem(tabViewItem *TabViewItem) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(tabViewItem)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("addTabViewItem:"), objref.IDOf(tabViewItem))
 	})
@@ -603,6 +646,8 @@ func (tv *TabView) AddTabViewItem(tabViewItem *TabViewItem) {
 
 // InsertTabViewItemAtIndex inserts the specified item into the tab view’s array of tab view items at the specified index.
 func (tv *TabView) InsertTabViewItemAtIndex(tabViewItem *TabViewItem, index int) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(tabViewItem)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("insertTabViewItem:atIndex:"), objref.IDOf(tabViewItem), index)
 	})
@@ -611,6 +656,8 @@ func (tv *TabView) InsertTabViewItemAtIndex(tabViewItem *TabViewItem, index int)
 
 // RemoveTabViewItem removes the specified item from the tab view’s array of tab view items.
 func (tv *TabView) RemoveTabViewItem(tabViewItem *TabViewItem) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(tabViewItem)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("removeTabViewItem:"), objref.IDOf(tabViewItem))
 	})
@@ -619,6 +666,7 @@ func (tv *TabView) RemoveTabViewItem(tabViewItem *TabViewItem) {
 
 // TabViewItemAtPoint returns the tab view item at the specified point.
 func (tv *TabView) TabViewItemAtPoint(point corefoundation.CGPoint) *TabViewItem {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *TabViewItem
 	purego.Main(func() {
 		_mainthread0 = func() *TabViewItem {
@@ -632,6 +680,8 @@ func (tv *TabView) TabViewItemAtPoint(point corefoundation.CGPoint) *TabViewItem
 
 // IndexOfTabViewItem returns the index of the specified item in the tab view.
 func (tv *TabView) IndexOfTabViewItem(tabViewItem *TabViewItem) int {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(tabViewItem)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -645,6 +695,7 @@ func (tv *TabView) IndexOfTabViewItem(tabViewItem *TabViewItem) int {
 
 // TabViewItemAtIndex returns the tab view item at index in the tab view’s array of items.
 func (tv *TabView) TabViewItemAtIndex(index int) *TabViewItem {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *TabViewItem
 	purego.Main(func() {
 		_mainthread0 = func() *TabViewItem {
@@ -658,6 +709,8 @@ func (tv *TabView) TabViewItemAtIndex(index int) *TabViewItem {
 
 // IndexOfTabViewItemWithIdentifier returns the index of the item that matches the specified identifier or NSNotFound if the item is not found.
 func (tv *TabView) IndexOfTabViewItemWithIdentifier(identifier obj.Object) int {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(identifier)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -671,6 +724,7 @@ func (tv *TabView) IndexOfTabViewItemWithIdentifier(identifier obj.Object) int {
 
 // SelectedTabViewItem returns the selected tab view item.
 func (tv *TabView) SelectedTabViewItem() *TabViewItem {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *TabViewItem
 	purego.Main(func() {
 		_mainthread0 = func() *TabViewItem {
@@ -684,6 +738,7 @@ func (tv *TabView) SelectedTabViewItem() *TabViewItem {
 
 // Font returns the font.
 func (tv *TabView) Font() *Font {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *Font
 	purego.Main(func() {
 		_mainthread0 = func() *Font {
@@ -697,6 +752,7 @@ func (tv *TabView) Font() *Font {
 
 // TabViewType returns the tab view type.
 func (tv *TabView) TabViewType() TabViewType {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 TabViewType
 	purego.Main(func() {
 		_mainthread0 = func() TabViewType {
@@ -710,6 +766,7 @@ func (tv *TabView) TabViewType() TabViewType {
 
 // TabPosition returns the tab position.
 func (tv *TabView) TabPosition() TabPosition {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 TabPosition
 	purego.Main(func() {
 		_mainthread0 = func() TabPosition {
@@ -723,6 +780,7 @@ func (tv *TabView) TabPosition() TabPosition {
 
 // TabViewBorderType returns the tab view border type.
 func (tv *TabView) TabViewBorderType() TabViewBorderType {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 TabViewBorderType
 	purego.Main(func() {
 		_mainthread0 = func() TabViewBorderType {
@@ -738,6 +796,7 @@ func (tv *TabView) TabViewBorderType() TabViewBorderType {
 //
 // TabViewItems returns the collection as a Go slice.
 func (tv *TabView) TabViewItems() []*TabViewItem {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 []*TabViewItem
 	purego.Main(func() {
 		_mainthread0 = func() []*TabViewItem {
@@ -750,6 +809,7 @@ func (tv *TabView) TabViewItems() []*TabViewItem {
 
 // AllowsTruncatedLabels wraps the corresponding Objective-C method.
 func (tv *TabView) AllowsTruncatedLabels() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -763,6 +823,7 @@ func (tv *TabView) AllowsTruncatedLabels() bool {
 
 // MinimumSize returns the minimum size.
 func (tv *TabView) MinimumSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -776,6 +837,7 @@ func (tv *TabView) MinimumSize() corefoundation.CGSize {
 
 // DrawsBackground wraps the corresponding Objective-C method.
 func (tv *TabView) DrawsBackground() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -789,6 +851,7 @@ func (tv *TabView) DrawsBackground() bool {
 
 // ControlSize returns the control size.
 func (tv *TabView) ControlSize() ControlSize {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 ControlSize
 	purego.Main(func() {
 		_mainthread0 = func() ControlSize {
@@ -802,6 +865,7 @@ func (tv *TabView) ControlSize() ControlSize {
 
 // ContentRect returns the content rect.
 func (tv *TabView) ContentRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -815,6 +879,7 @@ func (tv *TabView) ContentRect() corefoundation.CGRect {
 
 // NumberOfTabViewItems returns the number of tab view items.
 func (tv *TabView) NumberOfTabViewItems() int {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -828,6 +893,7 @@ func (tv *TabView) NumberOfTabViewItems() int {
 
 // ControlTint returns the control tint.
 func (tv *TabView) ControlTint() ControlTint {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 ControlTint
 	purego.Main(func() {
 		_mainthread0 = func() ControlTint {

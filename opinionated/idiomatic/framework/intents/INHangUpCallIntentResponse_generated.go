@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -46,6 +48,7 @@ func hangUpCallIntentResponseAdopt(id objc.ID) *HangUpCallIntentResponse {
 
 // NewHangUpCallIntentResponseWithCodeUserActivity creates a new HangUpCallIntentResponse.
 func NewHangUpCallIntentResponseWithCodeUserActivity(code HangUpCallIntentResponseCode, userActivity obj.Object) *HangUpCallIntentResponse {
+	defer runtime.KeepAlive(userActivity)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INHangUpCallIntentResponse")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, objref.IDOf(userActivity))
 	return hangUpCallIntentResponseAdopt(_id)
@@ -53,12 +56,14 @@ func NewHangUpCallIntentResponseWithCodeUserActivity(code HangUpCallIntentRespon
 
 // WithUserActivity sets the user activity object to use when launching the app.
 func (hucir *HangUpCallIntentResponse) WithUserActivity(userActivity obj.Object) *HangUpCallIntentResponse {
+	defer runtime.KeepAlive(userActivity)
 	objc.Send[objc.ID](objref.IDOf(hucir), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return hucir
 }
 
 // Code returns the code.
 func (hucir *HangUpCallIntentResponse) Code() HangUpCallIntentResponseCode {
+	defer runtime.KeepAlive(hucir)
 	_r := objc.Send[HangUpCallIntentResponseCode](objref.IDOf(hucir), objc.RegisterName("code"))
 	return _r
 }

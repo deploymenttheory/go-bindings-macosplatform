@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -68,36 +70,42 @@ func (lnl *LayerNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bo
 //
 // NormalizedShape returns the collection as a Go slice.
 func (lnl *LayerNormalizationLayer) NormalizedShape() []obj.Object {
+	defer runtime.KeepAlive(lnl)
 	_arr := objc.Send[objc.ID](objref.IDOf(lnl), objc.RegisterName("normalizedShape"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Beta returns the beta tensor
 func (lnl *LayerNormalizationLayer) Beta() *Tensor {
+	defer runtime.KeepAlive(lnl)
 	_r := objc.Send[objc.ID](objref.IDOf(lnl), objc.RegisterName("beta"))
 	return TensorFromID(_r)
 }
 
 // Gamma returns the gamma tensor
 func (lnl *LayerNormalizationLayer) Gamma() *Tensor {
+	defer runtime.KeepAlive(lnl)
 	_r := objc.Send[objc.ID](objref.IDOf(lnl), objc.RegisterName("gamma"))
 	return TensorFromID(_r)
 }
 
 // BetaParameter returns the beta tensor parameter used for optimizer update
 func (lnl *LayerNormalizationLayer) BetaParameter() *TensorParameter {
+	defer runtime.KeepAlive(lnl)
 	_r := objc.Send[objc.ID](objref.IDOf(lnl), objc.RegisterName("betaParameter"))
 	return TensorParameterFromID(_r)
 }
 
 // GammaParameter returns the gamma tensor parameter used for optimizer update
 func (lnl *LayerNormalizationLayer) GammaParameter() *TensorParameter {
+	defer runtime.KeepAlive(lnl)
 	_r := objc.Send[objc.ID](objref.IDOf(lnl), objc.RegisterName("gammaParameter"))
 	return TensorParameterFromID(_r)
 }
 
 // VarianceEpsilon returns a value used for numerical stability
 func (lnl *LayerNormalizationLayer) VarianceEpsilon() float32 {
+	defer runtime.KeepAlive(lnl)
 	_r := objc.Send[float32](objref.IDOf(lnl), objc.RegisterName("varianceEpsilon"))
 	return _r
 }

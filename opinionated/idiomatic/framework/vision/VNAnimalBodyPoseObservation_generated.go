@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -55,8 +56,10 @@ func NewAnimalBodyPoseObservation() *AnimalBodyPoseObservation {
 	return animalBodyPoseObservationAdopt(_id)
 }
 
-// RecognizedPointForJointNameError returns the point for a joint name the observation recognizes.
-func (abpo *AnimalBodyPoseObservation) RecognizedPointForJointNameError(jointName obj.Object) (result *RecognizedPoint, err error) {
+// RecognizedPointForJointName returns the point for a joint name the observation recognizes.
+func (abpo *AnimalBodyPoseObservation) RecognizedPointForJointName(jointName obj.Object) (result *RecognizedPoint, err error) {
+	defer runtime.KeepAlive(abpo)
+	defer runtime.KeepAlive(jointName)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(abpo), objc.RegisterName("recognizedPointForJointName:error:"), objref.IDOf(jointName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -65,8 +68,10 @@ func (abpo *AnimalBodyPoseObservation) RecognizedPointForJointNameError(jointNam
 	return RecognizedPointFromID(_r), nil
 }
 
-// RecognizedPointsForJointsGroupNameError returns the points for a joint group name the observation recognizes.
-func (abpo *AnimalBodyPoseObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (result obj.Object, err error) {
+// RecognizedPointsForJointsGroupName returns the points for a joint group name the observation recognizes.
+func (abpo *AnimalBodyPoseObservation) RecognizedPointsForJointsGroupName(jointsGroupName obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(abpo)
+	defer runtime.KeepAlive(jointsGroupName)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(abpo), objc.RegisterName("recognizedPointsForJointsGroupName:error:"), objref.IDOf(jointsGroupName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -79,6 +84,7 @@ func (abpo *AnimalBodyPoseObservation) RecognizedPointsForJointsGroupNameError(j
 //
 // AvailableJointNames returns the collection as a Go slice.
 func (abpo *AnimalBodyPoseObservation) AvailableJointNames() []obj.Object {
+	defer runtime.KeepAlive(abpo)
 	_arr := objc.Send[objc.ID](objref.IDOf(abpo), objc.RegisterName("availableJointNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -87,6 +93,7 @@ func (abpo *AnimalBodyPoseObservation) AvailableJointNames() []obj.Object {
 //
 // AvailableJointGroupNames returns the collection as a Go slice.
 func (abpo *AnimalBodyPoseObservation) AvailableJointGroupNames() []obj.Object {
+	defer runtime.KeepAlive(abpo)
 	_arr := objc.Send[objc.ID](objref.IDOf(abpo), objc.RegisterName("availableJointGroupNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

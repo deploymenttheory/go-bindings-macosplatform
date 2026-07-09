@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,30 +50,47 @@ func sharingServiceAdopt(id objc.ID) *SharingService {
 
 // Description returns the object's -description text.
 func (ss *SharingService) Description() string {
+	defer runtime.KeepAlive(ss)
 	return rt.Description(objref.IDOf(ss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ss *SharingService) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ss)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ss *SharingService) IsKind(className string) bool {
+	defer runtime.KeepAlive(ss)
 	return rt.IsKind(objref.IDOf(ss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ss *SharingService) String() string {
+	defer runtime.KeepAlive(ss)
 	return rt.Description(objref.IDOf(ss))
 }
 
 // NewSharingServiceWithTitleImageAlternateImageHandler creates a custom sharing service object.
 func NewSharingServiceWithTitleImageAlternateImageHandler(title string, image *Image, alternateImage *Image, block func()) *SharingService {
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(alternateImage)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSharingService")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:image:alternateImage:handler:"), purego.NSString(title), objref.IDOf(image), objref.IDOf(alternateImage), objc.NewBlock(func(_ objc.Block) { block() }))
 	return sharingServiceAdopt(_id)
+}
+
+// WithDelegate sets specifies the delegate of the sharing service.
+func (ss *SharingService) WithDelegate(delegate SharingServiceDelegate) *SharingService {
+	_shim := newSharingServiceDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ss), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ss), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return ss
 }
 
 // WithMenuItemTitle sets the title of the service in the Share menu.
@@ -94,17 +114,22 @@ func (ss *SharingService) WithSubject(subject string) *SharingService {
 
 // CanPerformWithItems returns whether the service can share all the specified items.
 func (ss *SharingService) CanPerformWithItems(items obj.Object) bool {
+	defer runtime.KeepAlive(ss)
+	defer runtime.KeepAlive(items)
 	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("canPerformWithItems:"), objref.IDOf(items))
 	return _r
 }
 
 // PerformWithItems manually performs the service on the provided items.
 func (ss *SharingService) PerformWithItems(items obj.Object) {
+	defer runtime.KeepAlive(ss)
+	defer runtime.KeepAlive(items)
 	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("performWithItems:"), objref.IDOf(items))
 }
 
 // Title returns the title.
 func (ss *SharingService) Title() string {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -114,18 +139,21 @@ func (ss *SharingService) Title() string {
 
 // Image returns the image.
 func (ss *SharingService) Image() *Image {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
 // AlternateImage returns the alternate image.
 func (ss *SharingService) AlternateImage() *Image {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("alternateImage"))
 	return ImageFromID(_r)
 }
 
 // MenuItemTitle returns title of the service in the Share menu. Can be modified.
 func (ss *SharingService) MenuItemTitle() string {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("menuItemTitle"))
 	if _r == 0 {
 		return ""
@@ -137,12 +165,14 @@ func (ss *SharingService) MenuItemTitle() string {
 //
 // Recipients returns the collection as a Go slice.
 func (ss *SharingService) Recipients() []string {
+	defer runtime.KeepAlive(ss)
 	_arr := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("recipients"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Subject returns the subject.
 func (ss *SharingService) Subject() string {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("subject"))
 	if _r == 0 {
 		return ""
@@ -152,6 +182,7 @@ func (ss *SharingService) Subject() string {
 
 // MessageBody returns message body as string
 func (ss *SharingService) MessageBody() string {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("messageBody"))
 	if _r == 0 {
 		return ""
@@ -160,13 +191,15 @@ func (ss *SharingService) MessageBody() string {
 }
 
 // PermanentLink returns URL to access the post on Facebook, Twitter, Sina Weibo, etc. (also known as permalink)
-func (ss *SharingService) PermanentLink() obj.Object {
+func (ss *SharingService) PermanentLink() string {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("permanentLink"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // AccountName returns account name used for sending on Twitter or Sina Weibo
 func (ss *SharingService) AccountName() string {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("accountName"))
 	if _r == 0 {
 		return ""
@@ -177,7 +210,8 @@ func (ss *SharingService) AccountName() string {
 // AttachmentFileURLs returns NSArray of NSURL objects representing the files that were shared
 //
 // AttachmentFileURLs returns the collection as a Go slice.
-func (ss *SharingService) AttachmentFileURLs() []obj.Object {
+func (ss *SharingService) AttachmentFileURLs() []string {
+	defer runtime.KeepAlive(ss)
 	_arr := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("attachmentFileURLs"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return rt.URLString(_id) })
 }

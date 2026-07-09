@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRRVCCleanModeClusterModeOptionStructAdopt(id objc.ID) *MTRRVCCleanModeClu
 
 // Description returns the object's -description text.
 func (mcmcmos *MTRRVCCleanModeClusterModeOptionStruct) Description() string {
+	defer runtime.KeepAlive(mcmcmos)
 	return rt.Description(objref.IDOf(mcmcmos))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcmcmos *MTRRVCCleanModeClusterModeOptionStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcmcmos)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcmcmos), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcmcmos *MTRRVCCleanModeClusterModeOptionStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcmcmos)
 	return rt.IsKind(objref.IDOf(mcmcmos), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcmcmos *MTRRVCCleanModeClusterModeOptionStruct) String() string {
+	defer runtime.KeepAlive(mcmcmos)
 	return rt.Description(objref.IDOf(mcmcmos))
 }
 
@@ -78,12 +86,14 @@ func (mcmcmos *MTRRVCCleanModeClusterModeOptionStruct) WithLabel(label string) *
 
 // WithMode sets the mode.
 func (mcmcmos *MTRRVCCleanModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTRRVCCleanModeClusterModeOptionStruct {
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(mcmcmos), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return mcmcmos
 }
 
 // Label returns the label.
 func (mcmcmos *MTRRVCCleanModeClusterModeOptionStruct) Label() string {
+	defer runtime.KeepAlive(mcmcmos)
 	_r := objc.Send[objc.ID](objref.IDOf(mcmcmos), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -92,18 +102,22 @@ func (mcmcmos *MTRRVCCleanModeClusterModeOptionStruct) Label() string {
 }
 
 // Mode returns the mode.
-func (mcmcmos *MTRRVCCleanModeClusterModeOptionStruct) Mode() obj.Object {
+func (mcmcmos *MTRRVCCleanModeClusterModeOptionStruct) Mode() *foundation.Number {
+	defer runtime.KeepAlive(mcmcmos)
 	_r := objc.Send[objc.ID](objref.IDOf(mcmcmos), objc.RegisterName("mode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ModeTags returns the mode tags.
 func (mcmcmos *MTRRVCCleanModeClusterModeOptionStruct) ModeTags() obj.Object {
+	defer runtime.KeepAlive(mcmcmos)
 	_r := objc.Send[objc.ID](objref.IDOf(mcmcmos), objc.RegisterName("modeTags"))
 	return obj.Wrap(_r)
 }
 
 // SetModeTags wraps the corresponding Objective-C method.
 func (mcmcmos *MTRRVCCleanModeClusterModeOptionStruct) SetModeTags(modeTags obj.Object) {
+	defer runtime.KeepAlive(mcmcmos)
+	defer runtime.KeepAlive(modeTags)
 	objc.Send[objc.ID](objref.IDOf(mcmcmos), objc.RegisterName("setModeTags:"), objref.IDOf(modeTags))
 }

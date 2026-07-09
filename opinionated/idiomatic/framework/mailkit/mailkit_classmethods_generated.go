@@ -6,6 +6,7 @@ package mailkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -113,6 +114,7 @@ func MarkAsUnreadAction() *MessageAction {
 
 // DecisionApplyingAction wraps the corresponding Objective-C method.
 func DecisionApplyingAction(action *MessageAction) *MessageActionDecision {
+	defer runtime.KeepAlive(action)
 	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageActionDecision")), objc.RegisterName("decisionApplyingAction:"), objref.IDOf(action))
 	return MessageActionDecisionFromID(_r)
 }

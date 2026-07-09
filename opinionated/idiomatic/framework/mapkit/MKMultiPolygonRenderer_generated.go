@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func multiPolygonRendererAdopt(id objc.ID) *MultiPolygonRenderer {
 
 // NewMultiPolygonRendererWithMultiPolygon creates and returns a renderer that handles drawing for the specified multipolygon overlay object.
 func NewMultiPolygonRendererWithMultiPolygon(multiPolygon *MultiPolygon) *MultiPolygonRenderer {
+	defer runtime.KeepAlive(multiPolygon)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMultiPolygonRenderer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMultiPolygon:"), objref.IDOf(multiPolygon))
 	return multiPolygonRendererAdopt(_id)
@@ -55,12 +58,14 @@ func NewMultiPolygonRendererWithMultiPolygon(multiPolygon *MultiPolygon) *MultiP
 
 // WithFillColor sets the fill color to use for the path.
 func (mpr *MultiPolygonRenderer) WithFillColor(fillColor obj.Object) *MultiPolygonRenderer {
+	defer runtime.KeepAlive(fillColor)
 	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 	return mpr
 }
 
 // WithStrokeColor sets the stroke color to use for the path.
 func (mpr *MultiPolygonRenderer) WithStrokeColor(strokeColor obj.Object) *MultiPolygonRenderer {
+	defer runtime.KeepAlive(strokeColor)
 	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 	return mpr
 }
@@ -98,6 +103,7 @@ func (mpr *MultiPolygonRenderer) WithShouldRasterize(shouldRasterize bool) *Mult
 
 // WithPath sets the path representing the overlay’s shape.
 func (mpr *MultiPolygonRenderer) WithPath(path obj.Object) *MultiPolygonRenderer {
+	defer runtime.KeepAlive(path)
 	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return mpr
 }
@@ -110,6 +116,7 @@ func (mpr *MultiPolygonRenderer) WithAlpha(alpha float64) *MultiPolygonRenderer 
 
 // MultiPolygon returns the multi polygon.
 func (mpr *MultiPolygonRenderer) MultiPolygon() *MultiPolygon {
+	defer runtime.KeepAlive(mpr)
 	_r := objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("multiPolygon"))
 	return MultiPolygonFromID(_r)
 }

@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func tensorParameterAdopt(id objc.ID) *TensorParameter {
 
 // Description returns the object's -description text.
 func (tp *TensorParameter) Description() string {
+	defer runtime.KeepAlive(tp)
 	return rt.Description(objref.IDOf(tp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tp *TensorParameter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tp *TensorParameter) IsKind(className string) bool {
+	defer runtime.KeepAlive(tp)
 	return rt.IsKind(objref.IDOf(tp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tp *TensorParameter) String() string {
+	defer runtime.KeepAlive(tp)
 	return rt.Description(objref.IDOf(tp))
 }
 
@@ -80,12 +87,14 @@ func (tp *TensorParameter) WithIsUpdatable(isUpdatable bool) *TensorParameter {
 
 // Tensor returns the underlying tensor
 func (tp *TensorParameter) Tensor() *Tensor {
+	defer runtime.KeepAlive(tp)
 	_r := objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("tensor"))
 	return TensorFromID(_r)
 }
 
 // IsUpdatable reports whether this tensor parameter is updatable
 func (tp *TensorParameter) IsUpdatable() bool {
+	defer runtime.KeepAlive(tp)
 	_r := objc.Send[bool](objref.IDOf(tp), objc.RegisterName("isUpdatable"))
 	return _r
 }

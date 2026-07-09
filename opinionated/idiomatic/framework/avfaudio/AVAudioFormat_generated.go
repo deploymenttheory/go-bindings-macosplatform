@@ -5,6 +5,7 @@
 package avfaudio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func audioFormatAdopt(id objc.ID) *AudioFormat {
 
 // Description returns the object's -description text.
 func (af *AudioFormat) Description() string {
+	defer runtime.KeepAlive(af)
 	return rt.Description(objref.IDOf(af))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (af *AudioFormat) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(af)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(af), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (af *AudioFormat) IsKind(className string) bool {
+	defer runtime.KeepAlive(af)
 	return rt.IsKind(objref.IDOf(af), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (af *AudioFormat) String() string {
+	defer runtime.KeepAlive(af)
 	return rt.Description(objref.IDOf(af))
 }
 
@@ -77,6 +83,7 @@ func NewAudioFormatStandardFormatWithSampleRateChannels(sampleRate float64, chan
 
 // NewAudioFormatStandardFormatWithSampleRateChannelLayout creates an audio format instance as a deinterleaved float with the specified sample rate and channel layout.
 func NewAudioFormatStandardFormatWithSampleRateChannelLayout(sampleRate float64, layout *AudioChannelLayout) *AudioFormat {
+	defer runtime.KeepAlive(layout)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFormat")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initStandardFormatWithSampleRate:channelLayout:"), sampleRate, objref.IDOf(layout))
 	return audioFormatAdopt(_id)
@@ -91,15 +98,16 @@ func NewAudioFormatWithCommonFormatSampleRateChannelsInterleaved(format AudioCom
 
 // NewAudioFormatWithCommonFormatSampleRateInterleavedChannelLayout creates an audio format instance with the specified audio format, sample rate, interleaved state, and channel layout.
 func NewAudioFormatWithCommonFormatSampleRateInterleavedChannelLayout(format AudioCommonFormat, sampleRate float64, interleaved bool, layout *AudioChannelLayout) *AudioFormat {
+	defer runtime.KeepAlive(layout)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFormat")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCommonFormat:sampleRate:interleaved:channelLayout:"), format, sampleRate, interleaved, objref.IDOf(layout))
 	return audioFormatAdopt(_id)
 }
 
 // NewAudioFormatWithSettings creates an audio format instance using the specified settings dictionary.
-func NewAudioFormatWithSettings(settings obj.Object) *AudioFormat {
+func NewAudioFormatWithSettings(settings map[string]obj.Object) *AudioFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFormat")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSettings:"), objref.IDOf(settings))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSettings:"), rt.MapToDict(settings, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return audioFormatAdopt(_id)
 }
 
@@ -111,55 +119,63 @@ func NewAudioFormatWithCMAudioFormatDescription(formatDescription unsafe.Pointer
 }
 
 // WithMagicCookie sets an object that contains metadata that encoders and decoders require.
-func (af *AudioFormat) WithMagicCookie(magicCookie obj.Object) *AudioFormat {
-	objc.Send[objc.ID](objref.IDOf(af), objc.RegisterName("setMagicCookie:"), objref.IDOf(magicCookie))
+func (af *AudioFormat) WithMagicCookie(magicCookie []byte) *AudioFormat {
+	objc.Send[objc.ID](objref.IDOf(af), objc.RegisterName("setMagicCookie:"), rt.BytesToNSData(magicCookie))
 	return af
 }
 
 // IsStandard reports whether the format is deinterleaved native-endian float.
 func (af *AudioFormat) IsStandard() bool {
+	defer runtime.KeepAlive(af)
 	_r := objc.Send[bool](objref.IDOf(af), objc.RegisterName("isStandard"))
 	return _r
 }
 
 // CommonFormat returns an `AVAudioCommonFormat` identifying the format
 func (af *AudioFormat) CommonFormat() AudioCommonFormat {
+	defer runtime.KeepAlive(af)
 	_r := objc.Send[AudioCommonFormat](objref.IDOf(af), objc.RegisterName("commonFormat"))
 	return _r
 }
 
 // ChannelCount returns the number of channels of audio data.
 func (af *AudioFormat) ChannelCount() uint32 {
+	defer runtime.KeepAlive(af)
 	_r := objc.Send[uint32](objref.IDOf(af), objc.RegisterName("channelCount"))
 	return _r
 }
 
 // SampleRate returns a sampling rate in Hertz.
 func (af *AudioFormat) SampleRate() float64 {
+	defer runtime.KeepAlive(af)
 	_r := objc.Send[float64](objref.IDOf(af), objc.RegisterName("sampleRate"))
 	return _r
 }
 
 // IsInterleaved reports whether the samples are interleaved. For non-PCM formats, the value is undefined.
 func (af *AudioFormat) IsInterleaved() bool {
+	defer runtime.KeepAlive(af)
 	_r := objc.Send[bool](objref.IDOf(af), objc.RegisterName("isInterleaved"))
 	return _r
 }
 
 // ChannelLayout returns the underlying AVAudioChannelLayout, if any. Only formats with more than 2 channels are required to have channel layouts.
 func (af *AudioFormat) ChannelLayout() *AudioChannelLayout {
+	defer runtime.KeepAlive(af)
 	_r := objc.Send[objc.ID](objref.IDOf(af), objc.RegisterName("channelLayout"))
 	return AudioChannelLayoutFromID(_r)
 }
 
 // MagicCookie returns the underlying magic cookie, if any. A magic cookie contains metadata associated with encoders and decoders. Encoders produce a magic cookie, and some decoders require a magic cookie to decode properly.
-func (af *AudioFormat) MagicCookie() obj.Object {
+func (af *AudioFormat) MagicCookie() []byte {
+	defer runtime.KeepAlive(af)
 	_r := objc.Send[objc.ID](objref.IDOf(af), objc.RegisterName("magicCookie"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Settings returns the format represented as a dictionary with keys from AVAudioSettings.h.
-func (af *AudioFormat) Settings() obj.Object {
+func (af *AudioFormat) Settings() map[string]obj.Object {
+	defer runtime.KeepAlive(af)
 	_r := objc.Send[objc.ID](objref.IDOf(af), objc.RegisterName("settings"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

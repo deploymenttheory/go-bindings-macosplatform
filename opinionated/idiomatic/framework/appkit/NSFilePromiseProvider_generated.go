@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func filePromiseProviderAdopt(id objc.ID) *FilePromiseProvider {
 
 // Description returns the object's -description text.
 func (fpp *FilePromiseProvider) Description() string {
+	defer runtime.KeepAlive(fpp)
 	return rt.Description(objref.IDOf(fpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fpp *FilePromiseProvider) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fpp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fpp *FilePromiseProvider) IsKind(className string) bool {
+	defer runtime.KeepAlive(fpp)
 	return rt.IsKind(objref.IDOf(fpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fpp *FilePromiseProvider) String() string {
+	defer runtime.KeepAlive(fpp)
 	return rt.Description(objref.IDOf(fpp))
 }
 
@@ -80,12 +87,14 @@ func (fpp *FilePromiseProvider) WithFileType(fileType string) *FilePromiseProvid
 
 // WithUserInfo sets optional user information to pass to the file promise provider.
 func (fpp *FilePromiseProvider) WithUserInfo(userInfo obj.Object) *FilePromiseProvider {
+	defer runtime.KeepAlive(userInfo)
 	objc.Send[objc.ID](objref.IDOf(fpp), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return fpp
 }
 
 // FileType returns the file type.
 func (fpp *FilePromiseProvider) FileType() string {
+	defer runtime.KeepAlive(fpp)
 	_r := objc.Send[objc.ID](objref.IDOf(fpp), objc.RegisterName("fileType"))
 	if _r == 0 {
 		return ""
@@ -95,6 +104,7 @@ func (fpp *FilePromiseProvider) FileType() string {
 
 // UserInfo returns the user info.
 func (fpp *FilePromiseProvider) UserInfo() obj.Object {
+	defer runtime.KeepAlive(fpp)
 	_r := objc.Send[objc.ID](objref.IDOf(fpp), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }

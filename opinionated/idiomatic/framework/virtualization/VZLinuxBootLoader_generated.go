@@ -5,9 +5,10 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -79,13 +80,15 @@ func (lbl *LinuxBootLoader) WithInitialRamdiskURL(initialRamdiskURL string) *Lin
 }
 
 // KernelURL returns URL of the Linux kernel.
-func (lbl *LinuxBootLoader) KernelURL() obj.Object {
+func (lbl *LinuxBootLoader) KernelURL() string {
+	defer runtime.KeepAlive(lbl)
 	_r := objc.Send[objc.ID](objref.IDOf(lbl), objc.RegisterName("kernelURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // CommandLine define the command-line parameters passed to the kernel on boot.
 func (lbl *LinuxBootLoader) CommandLine() string {
+	defer runtime.KeepAlive(lbl)
 	_r := objc.Send[objc.ID](objref.IDOf(lbl), objc.RegisterName("commandLine"))
 	if _r == 0 {
 		return ""

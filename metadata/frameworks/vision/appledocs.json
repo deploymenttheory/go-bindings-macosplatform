@@ -1514,7 +1514,7 @@
       },
       "normalizedPoints": {
         "doc": "The contour’s array of points in normalized coordinates.",
-        "url": "https://developer.apple.com/documentation/vision/vncontour/normalizedpoints-8n2s5"
+        "url": "https://developer.apple.com/documentation/vision/vncontour/normalizedpoints-2orqj"
       },
       "pointCount": {
         "doc": "The contour’s number of points.",
@@ -1811,8 +1811,8 @@
     },
     "VNFaceLandmarkRegion2D": {
       "normalizedPoints": {
-        "doc": "A buffer in memory containing normalized landmark points.",
-        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarkregion2d/normalizedpoints-1o38f"
+        "doc": "The array of normalized landmark points.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarkregion2d/normalizedpoints-7s7im"
       },
       "pointsClassification": {
         "doc": "An enumeration that describes how to interpret the points the region provides.",
@@ -1823,8 +1823,8 @@
         "url": "https://developer.apple.com/documentation/vision/vnfacelandmarkregion2d/pointsinimage(imagesize:)"
       },
       "precisionEstimatesPerPoint": {
-        "doc": "An array of precision estimates for each landmark point.",
-        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarkregion2d/precisionestimatesperpoint-3kx5a"
+        "doc": "Requests an array of precision estimates for each landmark point.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarkregion2d/precisionestimatesperpoint-5jl22"
       }
     },
     "VNFaceLandmarks": {
@@ -1890,7 +1890,7 @@
     "VNFaceObservation": {
       "faceCaptureQuality": {
         "doc": "A value that indicates the quality of the face capture.",
-        "url": "https://developer.apple.com/documentation/vision/vnfaceobservation/facecapturequality-2o4xv"
+        "url": "https://developer.apple.com/documentation/vision/vnfaceobservation/facecapturequality-bjg5"
       },
       "landmarks": {
         "doc": "The facial features of the detected face.",

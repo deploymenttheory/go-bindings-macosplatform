@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func cumulativeQuantitySampleAdopt(id objc.ID) *CumulativeQuantitySample {
 
 // SumQuantity returns the sum quantity.
 func (cqs *CumulativeQuantitySample) SumQuantity() *Quantity {
+	defer runtime.KeepAlive(cqs)
 	_r := objc.Send[objc.ID](objref.IDOf(cqs), objc.RegisterName("sumQuantity"))
 	return QuantityFromID(_r)
 }

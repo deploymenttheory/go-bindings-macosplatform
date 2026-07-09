@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func syncEnginePendingZoneDeleteAdopt(id objc.ID) *SyncEnginePendingZoneDelete {
 
 // NewSyncEnginePendingZoneDeleteWithZoneID creates a pending zone delete for the specified record zone identifier.
 func NewSyncEnginePendingZoneDeleteWithZoneID(zoneID *RecordZoneID) *SyncEnginePendingZoneDelete {
+	defer runtime.KeepAlive(zoneID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEnginePendingZoneDelete")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneID:"), objref.IDOf(zoneID))
 	return syncEnginePendingZoneDeleteAdopt(_id)

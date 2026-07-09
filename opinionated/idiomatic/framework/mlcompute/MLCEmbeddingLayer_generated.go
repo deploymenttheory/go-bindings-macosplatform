@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,18 +67,21 @@ func (el *EmbeddingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Embed
 
 // Descriptor returns the descriptor.
 func (el *EmbeddingLayer) Descriptor() *EmbeddingDescriptor {
+	defer runtime.KeepAlive(el)
 	_r := objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("descriptor"))
 	return EmbeddingDescriptorFromID(_r)
 }
 
 // Weights returns the array of word embeddings
 func (el *EmbeddingLayer) Weights() *Tensor {
+	defer runtime.KeepAlive(el)
 	_r := objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("weights"))
 	return TensorFromID(_r)
 }
 
 // WeightsParameter returns the weights tensor parameter used for optimizer update
 func (el *EmbeddingLayer) WeightsParameter() *TensorParameter {
+	defer runtime.KeepAlive(el)
 	_r := objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("weightsParameter"))
 	return TensorParameterFromID(_r)
 }

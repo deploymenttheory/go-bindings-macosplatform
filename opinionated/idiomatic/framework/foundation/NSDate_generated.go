@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +53,27 @@ func dateAdopt(id objc.ID) *Date {
 
 // Description returns the object's -description text.
 func (d *Date) Description() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (d *Date) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (d *Date) IsKind(className string) bool {
+	defer runtime.KeepAlive(d)
 	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (d *Date) String() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
@@ -79,6 +86,7 @@ func NewDateWithTimeIntervalSinceReferenceDate(ti float64) *Date {
 
 // NewDateWithCoder returns a date object initialized from data in the given unarchiver.
 func NewDateWithCoder(coder *Coder) *Date {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return dateAdopt(_id)
@@ -99,9 +107,9 @@ func NewDateWithTimeIntervalSince1970(secs float64) *Date {
 }
 
 // NewDateWithTimeIntervalSinceDate returns a date object initialized relative to another given date by a given number of seconds.
-func NewDateWithTimeIntervalSinceDate(secsToBeAdded float64, date *Date) *Date {
+func NewDateWithTimeIntervalSinceDate(secsToBeAdded float64, date time.Time) *Date {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTimeInterval:sinceDate:"), secsToBeAdded, objref.IDOf(date))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTimeInterval:sinceDate:"), secsToBeAdded, rt.TimeToNSDate(date))
 	return dateAdopt(_id)
 }
 
@@ -119,61 +127,71 @@ func (d *Date) WithObservationInfo(observationInfo unsafe.Pointer) *Date {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (d *Date) WithScriptingProperties(scriptingProperties obj.Object) *Date {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (d *Date) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Date {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return d
 }
 
 // TimeIntervalSinceReferenceDate returns the time interval since reference date.
 func (d *Date) TimeIntervalSinceReferenceDate() float64 {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("timeIntervalSinceReferenceDate"))
 	return _r
 }
 
 // TimeIntervalSinceDate returns the interval between the receiver and another given date.
-func (d *Date) TimeIntervalSinceDate(anotherDate *Date) float64 {
-	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("timeIntervalSinceDate:"), objref.IDOf(anotherDate))
+func (d *Date) TimeIntervalSinceDate(anotherDate time.Time) float64 {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("timeIntervalSinceDate:"), rt.TimeToNSDate(anotherDate))
 	return _r
 }
 
 // AddTimeInterval returns a new date object that is set to a given number of seconds relative to the receiver.
 func (d *Date) AddTimeInterval(seconds float64) obj.Object {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("addTimeInterval:"), seconds)
 	return obj.Wrap(_r)
 }
 
 // DateByAddingTimeInterval returns a new date object that is set to a given number of seconds relative to the receiver.
 func (d *Date) DateByAddingTimeInterval(ti float64) *Date {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("dateByAddingTimeInterval:"), ti)
 	return DateFromID(_r)
 }
 
 // EarlierDate returns the earlier of the receiver and another given date.
-func (d *Date) EarlierDate(anotherDate *Date) *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("earlierDate:"), objref.IDOf(anotherDate))
-	return DateFromID(_r)
+func (d *Date) EarlierDate(anotherDate time.Time) time.Time {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("earlierDate:"), rt.TimeToNSDate(anotherDate))
+	return rt.NSDateToTime(_r)
 }
 
 // LaterDate returns the later of the receiver and another given date.
-func (d *Date) LaterDate(anotherDate *Date) *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("laterDate:"), objref.IDOf(anotherDate))
-	return DateFromID(_r)
+func (d *Date) LaterDate(anotherDate time.Time) time.Time {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("laterDate:"), rt.TimeToNSDate(anotherDate))
+	return rt.NSDateToTime(_r)
 }
 
 // Compare indicates the temporal ordering of the receiver and another given date.
-func (d *Date) Compare(other *Date) ComparisonResult {
-	_r := objc.Send[ComparisonResult](objref.IDOf(d), objc.RegisterName("compare:"), objref.IDOf(other))
+func (d *Date) Compare(other time.Time) ComparisonResult {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[ComparisonResult](objref.IDOf(d), objc.RegisterName("compare:"), rt.TimeToNSDate(other))
 	return _r
 }
 
 // IsEqualToDate returns a Boolean value that indicates whether a given object is a date that is exactly equal the receiver.
-func (d *Date) IsEqualToDate(otherDate *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isEqualToDate:"), objref.IDOf(otherDate))
+func (d *Date) IsEqualToDate(otherDate time.Time) bool {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isEqualToDate:"), rt.TimeToNSDate(otherDate))
 	return _r
 }
 
 // DescriptionWithLocale returns a string representation of the date using the given locale.
 func (d *Date) DescriptionWithLocale(locale obj.Object) string {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(locale)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("descriptionWithLocale:"), objref.IDOf(locale))
 	if _r == 0 {
 		return ""
@@ -183,24 +201,31 @@ func (d *Date) DescriptionWithLocale(locale obj.Object) string {
 
 // TimeIntervalSinceNow returns the time interval since now.
 func (d *Date) TimeIntervalSinceNow() float64 {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("timeIntervalSinceNow"))
 	return _r
 }
 
 // TimeIntervalSince1970 returns the time interval since1970.
 func (d *Date) TimeIntervalSince1970() float64 {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("timeIntervalSince1970"))
 	return _r
 }
 
 // DateWithCalendarFormatTimeZone converts the receiver to a calendar date with a given format string and time zone.
 func (d *Date) DateWithCalendarFormatTimeZone(format string, aTimeZone *TimeZone) *CalendarDate {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(aTimeZone)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("dateWithCalendarFormat:timeZone:"), purego.NSString(format), objref.IDOf(aTimeZone))
 	return CalendarDateFromID(_r)
 }
 
 // DescriptionWithCalendarFormatTimeZoneLocale returns a string representation of the date formatted as specified by given conversion specifiers.
 func (d *Date) DescriptionWithCalendarFormatTimeZoneLocale(format string, aTimeZone *TimeZone, locale obj.Object) string {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(aTimeZone)
+	defer runtime.KeepAlive(locale)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("descriptionWithCalendarFormat:timeZone:locale:"), purego.NSString(format), objref.IDOf(aTimeZone), objref.IDOf(locale))
 	if _r == 0 {
 		return ""

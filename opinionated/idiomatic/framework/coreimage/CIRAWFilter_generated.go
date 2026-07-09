@@ -5,8 +5,11 @@
 package coreimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -61,6 +64,7 @@ func (rf *RAWFilter) WithDraftModeEnabled(draftModeEnabled bool) *RAWFilter {
 
 // WithDecoderVersion sets a value that indicates the decoder version to use.
 func (rf *RAWFilter) WithDecoderVersion(decoderVersion obj.Object) *RAWFilter {
+	defer runtime.KeepAlive(decoderVersion)
 	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setDecoderVersion:"), objref.IDOf(decoderVersion))
 	return rf
 }
@@ -193,6 +197,7 @@ func (rf *RAWFilter) WithNeutralTint(neutralTint float32) *RAWFilter {
 
 // WithLinearSpaceFilter sets an optional filter you can apply to the RAW image while it’s in linear space.
 func (rf *RAWFilter) WithLinearSpaceFilter(linearSpaceFilter FilterProvider) *RAWFilter {
+	defer runtime.KeepAlive(linearSpaceFilter)
 	objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("setLinearSpaceFilter:"), objref.IDOf(linearSpaceFilter))
 	return rf
 }
@@ -213,258 +218,301 @@ func (rf *RAWFilter) WithEnabled(enabled bool) *RAWFilter {
 //
 // SupportedDecoderVersions returns the collection as a Go slice.
 func (rf *RAWFilter) SupportedDecoderVersions() []obj.Object {
+	defer runtime.KeepAlive(rf)
 	_arr := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("supportedDecoderVersions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // NativeSize returns the native size.
 func (rf *RAWFilter) NativeSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(rf), objc.RegisterName("nativeSize"))
 	return _r
 }
 
 // Properties returns the properties.
 func (rf *RAWFilter) Properties() obj.Object {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("properties"))
 	return obj.Wrap(_r)
 }
 
 // IsDraftModeEnabled reports whether the object is draft mode enabled.
 func (rf *RAWFilter) IsDraftModeEnabled() bool {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isDraftModeEnabled"))
 	return _r
 }
 
 // DecoderVersion returns the decoder version.
-func (rf *RAWFilter) DecoderVersion() obj.Object {
+func (rf *RAWFilter) DecoderVersion() *foundation.String {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("decoderVersion"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // ScaleFactor returns the scale factor.
 func (rf *RAWFilter) ScaleFactor() float32 {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("scaleFactor"))
 	return _r
 }
 
 // Exposure returns the exposure.
 func (rf *RAWFilter) Exposure() float32 {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("exposure"))
 	return _r
 }
 
 // BaselineExposure returns the baseline exposure.
 func (rf *RAWFilter) BaselineExposure() float32 {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("baselineExposure"))
 	return _r
 }
 
 // ShadowBias returns the shadow bias.
 func (rf *RAWFilter) ShadowBias() float32 {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("shadowBias"))
 	return _r
 }
 
 // BoostAmount returns the boost amount.
 func (rf *RAWFilter) BoostAmount() float32 {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("boostAmount"))
 	return _r
 }
 
 // BoostShadowAmount returns the boost shadow amount.
 func (rf *RAWFilter) BoostShadowAmount() float32 {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("boostShadowAmount"))
 	return _r
 }
 
 // IsHighlightRecoverySupported reports whether the object is highlight recovery supported.
 func (rf *RAWFilter) IsHighlightRecoverySupported() bool {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isHighlightRecoverySupported"))
 	return _r
 }
 
 // IsHighlightRecoveryEnabled reports whether the object is highlight recovery enabled.
 func (rf *RAWFilter) IsHighlightRecoveryEnabled() bool {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isHighlightRecoveryEnabled"))
 	return _r
 }
 
 // IsGamutMappingEnabled reports whether the object is gamut mapping enabled.
 func (rf *RAWFilter) IsGamutMappingEnabled() bool {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isGamutMappingEnabled"))
 	return _r
 }
 
 // IsLensCorrectionSupported reports whether the object is lens correction supported.
 func (rf *RAWFilter) IsLensCorrectionSupported() bool {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isLensCorrectionSupported"))
 	return _r
 }
 
 // IsLensCorrectionEnabled reports whether the object is lens correction enabled.
 func (rf *RAWFilter) IsLensCorrectionEnabled() bool {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isLensCorrectionEnabled"))
 	return _r
 }
 
 // IsLuminanceNoiseReductionSupported reports whether the object is luminance noise reduction supported.
 func (rf *RAWFilter) IsLuminanceNoiseReductionSupported() bool {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isLuminanceNoiseReductionSupported"))
 	return _r
 }
 
 // LuminanceNoiseReductionAmount returns the luminance noise reduction amount.
 func (rf *RAWFilter) LuminanceNoiseReductionAmount() float32 {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("luminanceNoiseReductionAmount"))
 	return _r
 }
 
 // IsColorNoiseReductionSupported reports whether the object is color noise reduction supported.
 func (rf *RAWFilter) IsColorNoiseReductionSupported() bool {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isColorNoiseReductionSupported"))
 	return _r
 }
 
 // ColorNoiseReductionAmount returns the color noise reduction amount.
 func (rf *RAWFilter) ColorNoiseReductionAmount() float32 {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("colorNoiseReductionAmount"))
 	return _r
 }
 
 // IsSharpnessSupported reports whether the object is sharpness supported.
 func (rf *RAWFilter) IsSharpnessSupported() bool {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isSharpnessSupported"))
 	return _r
 }
 
 // SharpnessAmount returns the sharpness amount.
 func (rf *RAWFilter) SharpnessAmount() float32 {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("sharpnessAmount"))
 	return _r
 }
 
 // IsContrastSupported reports whether the object is contrast supported.
 func (rf *RAWFilter) IsContrastSupported() bool {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isContrastSupported"))
 	return _r
 }
 
 // ContrastAmount returns the contrast amount.
 func (rf *RAWFilter) ContrastAmount() float32 {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("contrastAmount"))
 	return _r
 }
 
 // IsDetailSupported reports whether the object is detail supported.
 func (rf *RAWFilter) IsDetailSupported() bool {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isDetailSupported"))
 	return _r
 }
 
 // DetailAmount returns the detail amount.
 func (rf *RAWFilter) DetailAmount() float32 {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("detailAmount"))
 	return _r
 }
 
 // IsMoireReductionSupported reports whether the object is moire reduction supported.
 func (rf *RAWFilter) IsMoireReductionSupported() bool {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isMoireReductionSupported"))
 	return _r
 }
 
 // MoireReductionAmount returns the moire reduction amount.
 func (rf *RAWFilter) MoireReductionAmount() float32 {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("moireReductionAmount"))
 	return _r
 }
 
 // IsLocalToneMapSupported reports whether the object is local tone map supported.
 func (rf *RAWFilter) IsLocalToneMapSupported() bool {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[bool](objref.IDOf(rf), objc.RegisterName("isLocalToneMapSupported"))
 	return _r
 }
 
 // LocalToneMapAmount returns the local tone map amount.
 func (rf *RAWFilter) LocalToneMapAmount() float32 {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("localToneMapAmount"))
 	return _r
 }
 
 // ExtendedDynamicRangeAmount returns the extended dynamic range amount.
 func (rf *RAWFilter) ExtendedDynamicRangeAmount() float32 {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("extendedDynamicRangeAmount"))
 	return _r
 }
 
 // NeutralChromaticity returns the neutral chromaticity.
 func (rf *RAWFilter) NeutralChromaticity() corefoundation.CGPoint {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(rf), objc.RegisterName("neutralChromaticity"))
 	return _r
 }
 
 // NeutralLocation returns the neutral location.
 func (rf *RAWFilter) NeutralLocation() corefoundation.CGPoint {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(rf), objc.RegisterName("neutralLocation"))
 	return _r
 }
 
 // NeutralTemperature returns the neutral temperature.
 func (rf *RAWFilter) NeutralTemperature() float32 {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("neutralTemperature"))
 	return _r
 }
 
 // NeutralTint returns the neutral tint.
 func (rf *RAWFilter) NeutralTint() float32 {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[float32](objref.IDOf(rf), objc.RegisterName("neutralTint"))
 	return _r
 }
 
 // LinearSpaceFilter returns the linear space filter.
 func (rf *RAWFilter) LinearSpaceFilter() *Filter {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("linearSpaceFilter"))
 	return FilterFromID(_r)
 }
 
 // PreviewImage returns the preview image.
 func (rf *RAWFilter) PreviewImage() *Image {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("previewImage"))
 	return ImageFromID(_r)
 }
 
 // PortraitEffectsMatte returns the portrait effects matte.
 func (rf *RAWFilter) PortraitEffectsMatte() *Image {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("portraitEffectsMatte"))
 	return ImageFromID(_r)
 }
 
 // SemanticSegmentationSkinMatte returns the semantic segmentation skin matte.
 func (rf *RAWFilter) SemanticSegmentationSkinMatte() *Image {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("semanticSegmentationSkinMatte"))
 	return ImageFromID(_r)
 }
 
 // SemanticSegmentationHairMatte returns the semantic segmentation hair matte.
 func (rf *RAWFilter) SemanticSegmentationHairMatte() *Image {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("semanticSegmentationHairMatte"))
 	return ImageFromID(_r)
 }
 
 // SemanticSegmentationGlassesMatte returns the semantic segmentation glasses matte.
 func (rf *RAWFilter) SemanticSegmentationGlassesMatte() *Image {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("semanticSegmentationGlassesMatte"))
 	return ImageFromID(_r)
 }
 
 // SemanticSegmentationSkyMatte returns the semantic segmentation sky matte.
 func (rf *RAWFilter) SemanticSegmentationSkyMatte() *Image {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("semanticSegmentationSkyMatte"))
 	return ImageFromID(_r)
 }
 
 // SemanticSegmentationTeethMatte returns the semantic segmentation teeth matte.
 func (rf *RAWFilter) SemanticSegmentationTeethMatte() *Image {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[objc.ID](objref.IDOf(rf), objc.RegisterName("semanticSegmentationTeethMatte"))
 	return ImageFromID(_r)
 }

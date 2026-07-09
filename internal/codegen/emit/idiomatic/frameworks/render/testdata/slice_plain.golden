@@ -1,5 +1,6 @@
 // ComponentsSeparatedByString returns the collection as a Go slice.
 func (x *Array) ComponentsSeparatedByString() []string {
+defer runtime.KeepAlive(x)
 _arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("componentsSeparatedByString:"))
 return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

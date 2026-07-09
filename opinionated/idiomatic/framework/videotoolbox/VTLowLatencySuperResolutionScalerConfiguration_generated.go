@@ -5,6 +5,8 @@
 package videotoolbox
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func lowLatencySuperResolutionScalerConfigurationAdopt(id objc.ID) *LowLatencySu
 
 // Description returns the object's -description text.
 func (llsrsc *LowLatencySuperResolutionScalerConfiguration) Description() string {
+	defer runtime.KeepAlive(llsrsc)
 	return rt.Description(objref.IDOf(llsrsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (llsrsc *LowLatencySuperResolutionScalerConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(llsrsc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(llsrsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (llsrsc *LowLatencySuperResolutionScalerConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(llsrsc)
 	return rt.IsKind(objref.IDOf(llsrsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (llsrsc *LowLatencySuperResolutionScalerConfiguration) String() string {
+	defer runtime.KeepAlive(llsrsc)
 	return rt.Description(objref.IDOf(llsrsc))
 }
 
@@ -75,12 +82,14 @@ func NewLowLatencySuperResolutionScalerConfigurationWithFrameWidthFrameHeightSca
 
 // FrameWidth returns width of source frame in pixels.
 func (llsrsc *LowLatencySuperResolutionScalerConfiguration) FrameWidth() int {
+	defer runtime.KeepAlive(llsrsc)
 	_r := objc.Send[int](objref.IDOf(llsrsc), objc.RegisterName("frameWidth"))
 	return _r
 }
 
 // FrameHeight returns height of source frame in pixels.
 func (llsrsc *LowLatencySuperResolutionScalerConfiguration) FrameHeight() int {
+	defer runtime.KeepAlive(llsrsc)
 	_r := objc.Send[int](objref.IDOf(llsrsc), objc.RegisterName("frameHeight"))
 	return _r
 }
@@ -89,24 +98,28 @@ func (llsrsc *LowLatencySuperResolutionScalerConfiguration) FrameHeight() int {
 //
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (llsrsc *LowLatencySuperResolutionScalerConfiguration) FrameSupportedPixelFormats() []obj.Object {
+	defer runtime.KeepAlive(llsrsc)
 	_arr := objc.Send[objc.ID](objref.IDOf(llsrsc), objc.RegisterName("frameSupportedPixelFormats"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SourcePixelBufferAttributes returns pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-func (llsrsc *LowLatencySuperResolutionScalerConfiguration) SourcePixelBufferAttributes() obj.Object {
+func (llsrsc *LowLatencySuperResolutionScalerConfiguration) SourcePixelBufferAttributes() map[string]obj.Object {
+	defer runtime.KeepAlive(llsrsc)
 	_r := objc.Send[objc.ID](objref.IDOf(llsrsc), objc.RegisterName("sourcePixelBufferAttributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DestinationPixelBufferAttributes returns pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-func (llsrsc *LowLatencySuperResolutionScalerConfiguration) DestinationPixelBufferAttributes() obj.Object {
+func (llsrsc *LowLatencySuperResolutionScalerConfiguration) DestinationPixelBufferAttributes() map[string]obj.Object {
+	defer runtime.KeepAlive(llsrsc)
 	_r := objc.Send[objc.ID](objref.IDOf(llsrsc), objc.RegisterName("destinationPixelBufferAttributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ScaleFactor returns scale factor with which you initialized the configuration.
 func (llsrsc *LowLatencySuperResolutionScalerConfiguration) ScaleFactor() float32 {
+	defer runtime.KeepAlive(llsrsc)
 	_r := objc.Send[float32](objref.IDOf(llsrsc), objc.RegisterName("scaleFactor"))
 	return _r
 }

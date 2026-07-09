@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func externalStorageDeviceDiscoverySessionAdopt(id objc.ID) *ExternalStorageDevi
 
 // Description returns the object's -description text.
 func (esdds *ExternalStorageDeviceDiscoverySession) Description() string {
+	defer runtime.KeepAlive(esdds)
 	return rt.Description(objref.IDOf(esdds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (esdds *ExternalStorageDeviceDiscoverySession) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(esdds)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(esdds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (esdds *ExternalStorageDeviceDiscoverySession) IsKind(className string) bool {
+	defer runtime.KeepAlive(esdds)
 	return rt.IsKind(objref.IDOf(esdds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (esdds *ExternalStorageDeviceDiscoverySession) String() string {
+	defer runtime.KeepAlive(esdds)
 	return rt.Description(objref.IDOf(esdds))
 }
 
@@ -76,6 +83,7 @@ func NewExternalStorageDeviceDiscoverySession() *ExternalStorageDeviceDiscoveryS
 //
 // ExternalStorageDevices returns the collection as a Go slice.
 func (esdds *ExternalStorageDeviceDiscoverySession) ExternalStorageDevices() []*ExternalStorageDevice {
+	defer runtime.KeepAlive(esdds)
 	_arr := objc.Send[objc.ID](objref.IDOf(esdds), objc.RegisterName("externalStorageDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ExternalStorageDevice { return ExternalStorageDeviceFromID(_id) })
 }

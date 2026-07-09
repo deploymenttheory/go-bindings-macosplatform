@@ -5,6 +5,9 @@
 package gamekit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,62 +52,74 @@ func challengeAdopt(id objc.ID) *Challenge {
 
 // Description returns the object's -description text.
 func (c *Challenge) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Challenge) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Challenge) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Challenge) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // Decline declines a challenge that another player issues to the local player.
 func (c *Challenge) Decline() {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decline"))
 }
 
 // IssuingPlayer returns the GKPlayer who issued the challenge
 func (c *Challenge) IssuingPlayer() *Player {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("issuingPlayer"))
 	return PlayerFromID(_r)
 }
 
 // ReceivingPlayer returns the GKPlayer who has received the challenge
 func (c *Challenge) ReceivingPlayer() *Player {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("receivingPlayer"))
 	return PlayerFromID(_r)
 }
 
 // State returns current state of the challenge
 func (c *Challenge) State() ChallengeState {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[ChallengeState](objref.IDOf(c), objc.RegisterName("state"))
 	return _r
 }
 
 // IssueDate returns date the challenge was issued
-func (c *Challenge) IssueDate() obj.Object {
+func (c *Challenge) IssueDate() time.Time {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("issueDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // CompletionDate returns date the challenge was completed or aborted
-func (c *Challenge) CompletionDate() obj.Object {
+func (c *Challenge) CompletionDate() time.Time {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("completionDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Message returns the message sent to receivers of this challenge
 func (c *Challenge) Message() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("message"))
 	if _r == 0 {
 		return ""
@@ -114,6 +129,7 @@ func (c *Challenge) Message() string {
 
 // IssuingPlayerID returns * This property is obsolete. **
 func (c *Challenge) IssuingPlayerID() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("issuingPlayerID"))
 	if _r == 0 {
 		return ""
@@ -123,6 +139,7 @@ func (c *Challenge) IssuingPlayerID() string {
 
 // ReceivingPlayerID returns * This property is obsolete. **
 func (c *Challenge) ReceivingPlayerID() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("receivingPlayerID"))
 	if _r == 0 {
 		return ""

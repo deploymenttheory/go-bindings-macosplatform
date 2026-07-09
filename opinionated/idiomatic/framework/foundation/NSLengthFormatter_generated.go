@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,6 +58,7 @@ func NewLengthFormatter() *LengthFormatter {
 
 // WithNumberFormatter sets the number formatter.
 func (lf *LengthFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *LengthFormatter {
+	defer runtime.KeepAlive(numberFormatter)
 	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 	return lf
 }
@@ -79,13 +82,14 @@ func (lf *LengthFormatter) WithObservationInfo(observationInfo unsafe.Pointer) *
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (lf *LengthFormatter) WithScriptingProperties(scriptingProperties obj.Object) *LengthFormatter {
-	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (lf *LengthFormatter) WithScriptingProperties(scriptingProperties map[string]obj.Object) *LengthFormatter {
+	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return lf
 }
 
 // StringFromValueUnit wraps the corresponding Objective-C method.
 func (lf *LengthFormatter) StringFromValueUnit(value float64, unit LengthFormatterUnit) string {
+	defer runtime.KeepAlive(lf)
 	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("stringFromValue:unit:"), value, unit)
 	if _r == 0 {
 		return ""
@@ -95,6 +99,7 @@ func (lf *LengthFormatter) StringFromValueUnit(value float64, unit LengthFormatt
 
 // StringFromMeters wraps the corresponding Objective-C method.
 func (lf *LengthFormatter) StringFromMeters(numberInMeters float64) string {
+	defer runtime.KeepAlive(lf)
 	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("stringFromMeters:"), numberInMeters)
 	if _r == 0 {
 		return ""
@@ -104,6 +109,7 @@ func (lf *LengthFormatter) StringFromMeters(numberInMeters float64) string {
 
 // UnitStringFromValueUnit wraps the corresponding Objective-C method.
 func (lf *LengthFormatter) UnitStringFromValueUnit(value float64, unit LengthFormatterUnit) string {
+	defer runtime.KeepAlive(lf)
 	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("unitStringFromValue:unit:"), value, unit)
 	if _r == 0 {
 		return ""
@@ -113,6 +119,7 @@ func (lf *LengthFormatter) UnitStringFromValueUnit(value float64, unit LengthFor
 
 // UnitStringFromMetersUsedUnit wraps the corresponding Objective-C method.
 func (lf *LengthFormatter) UnitStringFromMetersUsedUnit(numberInMeters float64) (result string, unitp LengthFormatterUnit) {
+	defer runtime.KeepAlive(lf)
 	var _out0 LengthFormatterUnit
 	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("unitStringFromMeters:usedUnit:"), numberInMeters, unsafe.Pointer(&_out0))
 	_v := ""
@@ -124,18 +131,21 @@ func (lf *LengthFormatter) UnitStringFromMetersUsedUnit(numberInMeters float64) 
 
 // NumberFormatter returns the number formatter.
 func (lf *LengthFormatter) NumberFormatter() *NumberFormatter {
+	defer runtime.KeepAlive(lf)
 	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("numberFormatter"))
 	return NumberFormatterFromID(_r)
 }
 
 // UnitStyle returns the unit style.
 func (lf *LengthFormatter) UnitStyle() FormattingUnitStyle {
+	defer runtime.KeepAlive(lf)
 	_r := objc.Send[FormattingUnitStyle](objref.IDOf(lf), objc.RegisterName("unitStyle"))
 	return _r
 }
 
 // IsForPersonHeightUse reports whether the object is for person height use.
 func (lf *LengthFormatter) IsForPersonHeightUse() bool {
+	defer runtime.KeepAlive(lf)
 	_r := objc.Send[bool](objref.IDOf(lf), objc.RegisterName("isForPersonHeightUse"))
 	return _r
 }

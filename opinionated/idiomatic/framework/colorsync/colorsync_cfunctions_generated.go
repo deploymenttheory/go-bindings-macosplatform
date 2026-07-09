@@ -166,26 +166,26 @@ func ColorSyncIterateInstalledCMMs(callBack unsafe.Pointer, userInfo unsafe.Poin
 var _fnColorSyncIterateInstalledProfiles func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // ColorSyncIterateInstalledProfiles calls the ColorSync framework function ColorSyncIterateInstalledProfiles.
-func ColorSyncIterateInstalledProfiles(callBack unsafe.Pointer, userInfo unsafe.Pointer, error_ unsafe.Pointer) (seed uint32) {
+func ColorSyncIterateInstalledProfiles(callBack unsafe.Pointer, userInfo unsafe.Pointer, err unsafe.Pointer) (seed uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncIterateInstalledProfiles == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncIterateInstalledProfiles, _lib, "ColorSyncIterateInstalledProfiles")
 	}
 	var _out0 uint32
-	_fnColorSyncIterateInstalledProfiles(callBack, unsafe.Pointer(&_out0), userInfo, error_)
+	_fnColorSyncIterateInstalledProfiles(callBack, unsafe.Pointer(&_out0), userInfo, err)
 	return _out0
 }
 
 var _fnColorSyncIterateInstalledProfilesWithOptions func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer)
 
 // ColorSyncIterateInstalledProfilesWithOptions calls the ColorSync framework function ColorSyncIterateInstalledProfilesWithOptions.
-func ColorSyncIterateInstalledProfilesWithOptions(callBack unsafe.Pointer, userInfo unsafe.Pointer, options obj.Object, error_ unsafe.Pointer) (seed uint32) {
+func ColorSyncIterateInstalledProfilesWithOptions(callBack unsafe.Pointer, userInfo unsafe.Pointer, options obj.Object, err unsafe.Pointer) (seed uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncIterateInstalledProfilesWithOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncIterateInstalledProfilesWithOptions, _lib, "ColorSyncIterateInstalledProfilesWithOptions")
 	}
 	var _out0 uint32
-	_fnColorSyncIterateInstalledProfilesWithOptions(callBack, unsafe.Pointer(&_out0), userInfo, objref.IDOf(options), error_)
+	_fnColorSyncIterateInstalledProfilesWithOptions(callBack, unsafe.Pointer(&_out0), userInfo, objref.IDOf(options), err)
 	return _out0
 }
 

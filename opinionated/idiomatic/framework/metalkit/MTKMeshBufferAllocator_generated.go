@@ -5,6 +5,8 @@
 package metalkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func meshBufferAllocatorAdopt(id objc.ID) *MeshBufferAllocator {
 
 // Description returns the object's -description text.
 func (mba *MeshBufferAllocator) Description() string {
+	defer runtime.KeepAlive(mba)
 	return rt.Description(objref.IDOf(mba))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mba *MeshBufferAllocator) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mba)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mba), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mba *MeshBufferAllocator) IsKind(className string) bool {
+	defer runtime.KeepAlive(mba)
 	return rt.IsKind(objref.IDOf(mba), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mba *MeshBufferAllocator) String() string {
+	defer runtime.KeepAlive(mba)
 	return rt.Description(objref.IDOf(mba))
 }
 

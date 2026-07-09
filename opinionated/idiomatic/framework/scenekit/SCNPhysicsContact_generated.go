@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func physicsContactAdopt(id objc.ID) *PhysicsContact {
 
 // Description returns the object's -description text.
 func (pc *PhysicsContact) Description() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pc *PhysicsContact) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pc *PhysicsContact) IsKind(className string) bool {
+	defer runtime.KeepAlive(pc)
 	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pc *PhysicsContact) String() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
@@ -74,30 +81,35 @@ func NewPhysicsContact() *PhysicsContact {
 
 // NodeA returns the node a.
 func (pc *PhysicsContact) NodeA() *Node {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("nodeA"))
 	return NodeFromID(_r)
 }
 
 // NodeB returns the node b.
 func (pc *PhysicsContact) NodeB() *Node {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("nodeB"))
 	return NodeFromID(_r)
 }
 
 // CollisionImpulse returns the collision impulse.
 func (pc *PhysicsContact) CollisionImpulse() float64 {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[float64](objref.IDOf(pc), objc.RegisterName("collisionImpulse"))
 	return _r
 }
 
 // PenetrationDistance returns the penetration distance.
 func (pc *PhysicsContact) PenetrationDistance() float64 {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[float64](objref.IDOf(pc), objc.RegisterName("penetrationDistance"))
 	return _r
 }
 
 // SweepTestFraction returns the sweep test fraction.
 func (pc *PhysicsContact) SweepTestFraction() float64 {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[float64](objref.IDOf(pc), objc.RegisterName("sweepTestFraction"))
 	return _r
 }

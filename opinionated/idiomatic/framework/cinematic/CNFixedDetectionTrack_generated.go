@@ -5,6 +5,8 @@
 package cinematic
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -54,6 +56,7 @@ func NewFixedDetectionTrackWithFocusDisparity(focusDisparity float32) *FixedDete
 
 // NewFixedDetectionTrackWithOriginalDetection create a detection track with fixed focus at the disparity of an existing detection.
 func NewFixedDetectionTrackWithOriginalDetection(originalDetection *Detection) *FixedDetectionTrack {
+	defer runtime.KeepAlive(originalDetection)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CNFixedDetectionTrack")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOriginalDetection:"), objref.IDOf(originalDetection))
 	return fixedDetectionTrackAdopt(_id)
@@ -61,12 +64,14 @@ func NewFixedDetectionTrackWithOriginalDetection(originalDetection *Detection) *
 
 // FocusDisparity returns the focus disparity.
 func (fdt *FixedDetectionTrack) FocusDisparity() float32 {
+	defer runtime.KeepAlive(fdt)
 	_r := objc.Send[float32](objref.IDOf(fdt), objc.RegisterName("focusDisparity"))
 	return _r
 }
 
 // OriginalDetection returns the original detection upon which this fixed detection track was based, if any. This is the way to determine the time and rect from which fixed focus originated, if any. This detection is not part of the detection track and has a different detectionID or none. - Important: To get a detection from the fixed detection track, use detectionAtOrBeforeTime: instead, which will return a properly time-stamped detection.
 func (fdt *FixedDetectionTrack) OriginalDetection() *Detection {
+	defer runtime.KeepAlive(fdt)
 	_r := objc.Send[objc.ID](objref.IDOf(fdt), objc.RegisterName("originalDetection"))
 	return DetectionFromID(_r)
 }

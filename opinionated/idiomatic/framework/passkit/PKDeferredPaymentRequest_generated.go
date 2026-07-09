@@ -5,7 +5,11 @@
 package passkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +51,33 @@ func deferredPaymentRequestAdopt(id objc.ID) *DeferredPaymentRequest {
 
 // Description returns the object's -description text.
 func (dpr *DeferredPaymentRequest) Description() string {
+	defer runtime.KeepAlive(dpr)
 	return rt.Description(objref.IDOf(dpr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dpr *DeferredPaymentRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dpr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dpr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dpr *DeferredPaymentRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(dpr)
 	return rt.IsKind(objref.IDOf(dpr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dpr *DeferredPaymentRequest) String() string {
+	defer runtime.KeepAlive(dpr)
 	return rt.Description(objref.IDOf(dpr))
 }
 
 // NewDeferredPaymentRequestWithPaymentDescriptionDeferredBillingManagementURL creates a deferred payment request with the payment description, deferred billing summary, and management URL you provide.
 func NewDeferredPaymentRequestWithPaymentDescriptionDeferredBillingManagementURL(paymentDescription string, deferredBilling *DeferredPaymentSummaryItem, managementURL string) *DeferredPaymentRequest {
+	defer runtime.KeepAlive(deferredBilling)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKDeferredPaymentRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentDescription:deferredBilling:managementURL:"), purego.NSString(paymentDescription), objref.IDOf(deferredBilling), rt.FileURL(managementURL))
 	return deferredPaymentRequestAdopt(_id)
@@ -81,6 +91,7 @@ func (dpr *DeferredPaymentRequest) WithPaymentDescription(paymentDescription str
 
 // WithDeferredBilling sets an object that contains details about the deferred payment.
 func (dpr *DeferredPaymentRequest) WithDeferredBilling(deferredBilling *DeferredPaymentSummaryItem) *DeferredPaymentRequest {
+	defer runtime.KeepAlive(deferredBilling)
 	objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("setDeferredBilling:"), objref.IDOf(deferredBilling))
 	return dpr
 }
@@ -104,19 +115,21 @@ func (dpr *DeferredPaymentRequest) WithTokenNotificationURL(tokenNotificationURL
 }
 
 // WithFreeCancellationDate sets the date before which you must cancel a deferred payment without incurring any cancellation charges.
-func (dpr *DeferredPaymentRequest) WithFreeCancellationDate(freeCancellationDate obj.Object) *DeferredPaymentRequest {
-	objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("setFreeCancellationDate:"), objref.IDOf(freeCancellationDate))
+func (dpr *DeferredPaymentRequest) WithFreeCancellationDate(freeCancellationDate time.Time) *DeferredPaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("setFreeCancellationDate:"), rt.TimeToNSDate(freeCancellationDate))
 	return dpr
 }
 
 // WithFreeCancellationDateTimeZone sets the time zone at the destination location of the payment.
 func (dpr *DeferredPaymentRequest) WithFreeCancellationDateTimeZone(freeCancellationDateTimeZone obj.Object) *DeferredPaymentRequest {
+	defer runtime.KeepAlive(freeCancellationDateTimeZone)
 	objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("setFreeCancellationDateTimeZone:"), objref.IDOf(freeCancellationDateTimeZone))
 	return dpr
 }
 
 // PaymentDescription returns the payment description.
 func (dpr *DeferredPaymentRequest) PaymentDescription() string {
+	defer runtime.KeepAlive(dpr)
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("paymentDescription"))
 	if _r == 0 {
 		return ""
@@ -126,12 +139,14 @@ func (dpr *DeferredPaymentRequest) PaymentDescription() string {
 
 // DeferredBilling returns the deferred billing.
 func (dpr *DeferredPaymentRequest) DeferredBilling() *DeferredPaymentSummaryItem {
+	defer runtime.KeepAlive(dpr)
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("deferredBilling"))
 	return DeferredPaymentSummaryItemFromID(_r)
 }
 
 // BillingAgreement returns the billing agreement.
 func (dpr *DeferredPaymentRequest) BillingAgreement() string {
+	defer runtime.KeepAlive(dpr)
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("billingAgreement"))
 	if _r == 0 {
 		return ""
@@ -140,25 +155,29 @@ func (dpr *DeferredPaymentRequest) BillingAgreement() string {
 }
 
 // ManagementURL returns the management URL.
-func (dpr *DeferredPaymentRequest) ManagementURL() obj.Object {
+func (dpr *DeferredPaymentRequest) ManagementURL() string {
+	defer runtime.KeepAlive(dpr)
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("managementURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // TokenNotificationURL returns the token notification URL.
-func (dpr *DeferredPaymentRequest) TokenNotificationURL() obj.Object {
+func (dpr *DeferredPaymentRequest) TokenNotificationURL() string {
+	defer runtime.KeepAlive(dpr)
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("tokenNotificationURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // FreeCancellationDate returns the free cancellation date.
-func (dpr *DeferredPaymentRequest) FreeCancellationDate() obj.Object {
+func (dpr *DeferredPaymentRequest) FreeCancellationDate() time.Time {
+	defer runtime.KeepAlive(dpr)
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("freeCancellationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // FreeCancellationDateTimeZone returns the free cancellation date time zone.
-func (dpr *DeferredPaymentRequest) FreeCancellationDateTimeZone() obj.Object {
+func (dpr *DeferredPaymentRequest) FreeCancellationDateTimeZone() *foundation.TimeZone {
+	defer runtime.KeepAlive(dpr)
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("freeCancellationDateTimeZone"))
-	return obj.Wrap(_r)
+	return foundation.TimeZoneFromID(_r)
 }

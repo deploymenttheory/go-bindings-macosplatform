@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventAdopt(id objc.ID) *M
 
 // Description returns the object's -description text.
 func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) Description() string {
+	defer runtime.KeepAlive(mwfndcafe)
 	return rt.Description(objref.IDOf(mwfndcafe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mwfndcafe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mwfndcafe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mwfndcafe)
 	return rt.IsKind(objref.IDOf(mwfndcafe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) String() string {
+	defer runtime.KeepAlive(mwfndcafe)
 	return rt.Description(objref.IDOf(mwfndcafe))
 }
 
@@ -72,36 +80,42 @@ func NewMTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent() *MTRWiFiNetwor
 
 // WithAssociationFailureCause sets the association failure cause.
 func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) WithAssociationFailureCause(associationFailureCause obj.Object) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent {
+	defer runtime.KeepAlive(associationFailureCause)
 	objc.Send[objc.ID](objref.IDOf(mwfndcafe), objc.RegisterName("setAssociationFailureCause:"), objref.IDOf(associationFailureCause))
 	return mwfndcafe
 }
 
 // WithAssociationFailure sets the association failure.
 func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) WithAssociationFailure(associationFailure obj.Object) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent {
+	defer runtime.KeepAlive(associationFailure)
 	objc.Send[objc.ID](objref.IDOf(mwfndcafe), objc.RegisterName("setAssociationFailure:"), objref.IDOf(associationFailure))
 	return mwfndcafe
 }
 
 // WithStatus sets the status.
 func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) WithStatus(status obj.Object) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent {
+	defer runtime.KeepAlive(status)
 	objc.Send[objc.ID](objref.IDOf(mwfndcafe), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mwfndcafe
 }
 
 // AssociationFailureCause returns the association failure cause.
-func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) AssociationFailureCause() obj.Object {
+func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) AssociationFailureCause() *foundation.Number {
+	defer runtime.KeepAlive(mwfndcafe)
 	_r := objc.Send[objc.ID](objref.IDOf(mwfndcafe), objc.RegisterName("associationFailureCause"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // AssociationFailure returns the association failure.
-func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) AssociationFailure() obj.Object {
+func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) AssociationFailure() *foundation.Number {
+	defer runtime.KeepAlive(mwfndcafe)
 	_r := objc.Send[objc.ID](objref.IDOf(mwfndcafe), objc.RegisterName("associationFailure"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Status returns the status.
-func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) Status() obj.Object {
+func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) Status() *foundation.Number {
+	defer runtime.KeepAlive(mwfndcafe)
 	_r := objc.Send[objc.ID](objref.IDOf(mwfndcafe), objc.RegisterName("status"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

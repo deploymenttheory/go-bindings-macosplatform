@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
@@ -49,22 +51,27 @@ func hitTestResultAdopt(id objc.ID) *HitTestResult {
 
 // Description returns the object's -description text.
 func (htr *HitTestResult) Description() string {
+	defer runtime.KeepAlive(htr)
 	return rt.Description(objref.IDOf(htr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (htr *HitTestResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(htr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(htr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (htr *HitTestResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(htr)
 	return rt.IsKind(objref.IDOf(htr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (htr *HitTestResult) String() string {
+	defer runtime.KeepAlive(htr)
 	return rt.Description(objref.IDOf(htr))
 }
 
@@ -76,36 +83,42 @@ func NewHitTestResult() *HitTestResult {
 
 // TextureCoordinatesWithMappingChannel returns the texture coordinates at the point of intersection for the specified texture mapping channel.
 func (htr *HitTestResult) TextureCoordinatesWithMappingChannel(channel int) corefoundation.CGPoint {
+	defer runtime.KeepAlive(htr)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(htr), objc.RegisterName("textureCoordinatesWithMappingChannel:"), channel)
 	return _r
 }
 
 // Node returns the hit node.
 func (htr *HitTestResult) Node() *Node {
+	defer runtime.KeepAlive(htr)
 	_r := objc.Send[objc.ID](objref.IDOf(htr), objc.RegisterName("node"))
 	return NodeFromID(_r)
 }
 
 // GeometryIndex returns index of the hit geometry element.
 func (htr *HitTestResult) GeometryIndex() int {
+	defer runtime.KeepAlive(htr)
 	_r := objc.Send[int](objref.IDOf(htr), objc.RegisterName("geometryIndex"))
 	return _r
 }
 
 // FaceIndex returns index of the hit primitive of the geometry element.
 func (htr *HitTestResult) FaceIndex() int {
+	defer runtime.KeepAlive(htr)
 	_r := objc.Send[int](objref.IDOf(htr), objc.RegisterName("faceIndex"))
 	return _r
 }
 
 // ModelTransform returns world transform of the hit node.
 func (htr *HitTestResult) ModelTransform() quartzcore.CATransform3D {
+	defer runtime.KeepAlive(htr)
 	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(htr), objc.RegisterName("modelTransform"))
 	return _r
 }
 
 // BoneNode returns the hit bone. Only available if the node hit has a SCNSkinner attached.
 func (htr *HitTestResult) BoneNode() *Node {
+	defer runtime.KeepAlive(htr)
 	_r := objc.Send[objc.ID](objref.IDOf(htr), objc.RegisterName("boneNode"))
 	return NodeFromID(_r)
 }

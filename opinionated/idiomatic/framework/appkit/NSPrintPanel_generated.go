@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func printPanelAdopt(id objc.ID) *PrintPanel {
 
 // Description returns the object's -description text.
 func (pp *PrintPanel) Description() string {
+	defer runtime.KeepAlive(pp)
 	return rt.Description(objref.IDOf(pp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pp *PrintPanel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pp *PrintPanel) IsKind(className string) bool {
+	defer runtime.KeepAlive(pp)
 	return rt.IsKind(objref.IDOf(pp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pp *PrintPanel) String() string {
+	defer runtime.KeepAlive(pp)
 	return rt.Description(objref.IDOf(pp))
 }
 
@@ -88,6 +96,7 @@ func (pp *PrintPanel) WithOptions(options PrintPanelOptions) *PrintPanel {
 
 // WithHelpAnchor sets the HTML help anchor associated with the Print panel.
 func (pp *PrintPanel) WithHelpAnchor(helpAnchor obj.Object) *PrintPanel {
+	defer runtime.KeepAlive(helpAnchor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setHelpAnchor:"), objref.IDOf(helpAnchor))
 	})
@@ -96,6 +105,7 @@ func (pp *PrintPanel) WithHelpAnchor(helpAnchor obj.Object) *PrintPanel {
 
 // WithJobStyleHint sets the type of settings that the print panel displays.
 func (pp *PrintPanel) WithJobStyleHint(jobStyleHint obj.Object) *PrintPanel {
+	defer runtime.KeepAlive(jobStyleHint)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setJobStyleHint:"), objref.IDOf(jobStyleHint))
 	})
@@ -104,6 +114,8 @@ func (pp *PrintPanel) WithJobStyleHint(jobStyleHint obj.Object) *PrintPanel {
 
 // AddAccessoryController adds a custom controller to the Print panel to manage an accessory view.
 func (pp *PrintPanel) AddAccessoryController(accessoryController *ViewController) {
+	defer runtime.KeepAlive(pp)
+	defer runtime.KeepAlive(accessoryController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("addAccessoryController:"), objref.IDOf(accessoryController))
 	})
@@ -112,6 +124,8 @@ func (pp *PrintPanel) AddAccessoryController(accessoryController *ViewController
 
 // RemoveAccessoryController removes the specified controller and accessory view from the Print panel.
 func (pp *PrintPanel) RemoveAccessoryController(accessoryController *ViewController) {
+	defer runtime.KeepAlive(pp)
+	defer runtime.KeepAlive(accessoryController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("removeAccessoryController:"), objref.IDOf(accessoryController))
 	})
@@ -120,6 +134,7 @@ func (pp *PrintPanel) RemoveAccessoryController(accessoryController *ViewControl
 
 // SetDefaultButtonTitle sets the title of the Print panel’s default button.
 func (pp *PrintPanel) SetDefaultButtonTitle(defaultButtonTitle string) {
+	defer runtime.KeepAlive(pp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setDefaultButtonTitle:"), purego.NSString(defaultButtonTitle))
 	})
@@ -128,6 +143,7 @@ func (pp *PrintPanel) SetDefaultButtonTitle(defaultButtonTitle string) {
 
 // DefaultButtonTitle returns the title of the Print panel’s default button.
 func (pp *PrintPanel) DefaultButtonTitle() string {
+	defer runtime.KeepAlive(pp)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -144,6 +160,8 @@ func (pp *PrintPanel) DefaultButtonTitle() string {
 
 // RunModalWithPrintInfo displays the Print panel and runs the modal loop using the specified printing information.
 func (pp *PrintPanel) RunModalWithPrintInfo(printInfo *PrintInfo) int {
+	defer runtime.KeepAlive(pp)
+	defer runtime.KeepAlive(printInfo)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -157,6 +175,7 @@ func (pp *PrintPanel) RunModalWithPrintInfo(printInfo *PrintInfo) int {
 
 // RunModal returns displays the Print panel and begins the modal loop.
 func (pp *PrintPanel) RunModal() int {
+	defer runtime.KeepAlive(pp)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -172,6 +191,7 @@ func (pp *PrintPanel) RunModal() int {
 //
 // AccessoryControllers returns the collection as a Go slice.
 func (pp *PrintPanel) AccessoryControllers() []*ViewController {
+	defer runtime.KeepAlive(pp)
 	var _mainthread0 []*ViewController
 	purego.Main(func() {
 		_mainthread0 = func() []*ViewController {
@@ -184,6 +204,7 @@ func (pp *PrintPanel) AccessoryControllers() []*ViewController {
 
 // Options returns the options.
 func (pp *PrintPanel) Options() PrintPanelOptions {
+	defer runtime.KeepAlive(pp)
 	var _mainthread0 PrintPanelOptions
 	purego.Main(func() {
 		_mainthread0 = func() PrintPanelOptions {
@@ -196,12 +217,13 @@ func (pp *PrintPanel) Options() PrintPanelOptions {
 }
 
 // HelpAnchor returns the help anchor.
-func (pp *PrintPanel) HelpAnchor() obj.Object {
-	var _mainthread0 obj.Object
+func (pp *PrintPanel) HelpAnchor() *foundation.String {
+	defer runtime.KeepAlive(pp)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("helpAnchor"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -209,12 +231,13 @@ func (pp *PrintPanel) HelpAnchor() obj.Object {
 }
 
 // JobStyleHint returns the job style hint.
-func (pp *PrintPanel) JobStyleHint() obj.Object {
-	var _mainthread0 obj.Object
+func (pp *PrintPanel) JobStyleHint() *foundation.String {
+	defer runtime.KeepAlive(pp)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("jobStyleHint"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -223,6 +246,7 @@ func (pp *PrintPanel) JobStyleHint() obj.Object {
 
 // PrintInfo returns the print info.
 func (pp *PrintPanel) PrintInfo() *PrintInfo {
+	defer runtime.KeepAlive(pp)
 	var _mainthread0 *PrintInfo
 	purego.Main(func() {
 		_mainthread0 = func() *PrintInfo {
@@ -236,6 +260,8 @@ func (pp *PrintPanel) PrintInfo() *PrintInfo {
 
 // SetAccessoryView sets the accessory view for the Print panel.
 func (pp *PrintPanel) SetAccessoryView(accessoryView *View) {
+	defer runtime.KeepAlive(pp)
+	defer runtime.KeepAlive(accessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 	})
@@ -244,6 +270,7 @@ func (pp *PrintPanel) SetAccessoryView(accessoryView *View) {
 
 // AccessoryView returns the accessory view of the Print panel.
 func (pp *PrintPanel) AccessoryView() *View {
+	defer runtime.KeepAlive(pp)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -257,6 +284,7 @@ func (pp *PrintPanel) AccessoryView() *View {
 
 // UpdateFromPrintInfo updates the Print panel with information from the current print operation object.
 func (pp *PrintPanel) UpdateFromPrintInfo() {
+	defer runtime.KeepAlive(pp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("updateFromPrintInfo"))
 	})
@@ -265,6 +293,7 @@ func (pp *PrintPanel) UpdateFromPrintInfo() {
 
 // FinalWritePrintInfo writes the Print panel’s printing attributes to the current print operation object.
 func (pp *PrintPanel) FinalWritePrintInfo() {
+	defer runtime.KeepAlive(pp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("finalWritePrintInfo"))
 	})

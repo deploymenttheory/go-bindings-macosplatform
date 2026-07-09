@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,12 +55,14 @@ func NewMTROtaSoftwareUpdateProviderClusterQueryImageResponseParams() *MTROtaSof
 
 // WithStatus sets the status.
 func (mosupcqirp *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithStatus(status obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
+	defer runtime.KeepAlive(status)
 	objc.Send[objc.ID](objref.IDOf(mosupcqirp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mosupcqirp
 }
 
 // WithDelayedActionTime sets the delayed action time.
 func (mosupcqirp *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithDelayedActionTime(delayedActionTime obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
+	defer runtime.KeepAlive(delayedActionTime)
 	objc.Send[objc.ID](objref.IDOf(mosupcqirp), objc.RegisterName("setDelayedActionTime:"), objref.IDOf(delayedActionTime))
 	return mosupcqirp
 }
@@ -70,6 +75,7 @@ func (mosupcqirp *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) W
 
 // WithSoftwareVersion sets the software version.
 func (mosupcqirp *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
+	defer runtime.KeepAlive(softwareVersion)
 	objc.Send[objc.ID](objref.IDOf(mosupcqirp), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return mosupcqirp
 }
@@ -81,25 +87,27 @@ func (mosupcqirp *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) W
 }
 
 // WithUpdateToken sets the update token.
-func (mosupcqirp *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithUpdateToken(updateToken obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
-	objc.Send[objc.ID](objref.IDOf(mosupcqirp), objc.RegisterName("setUpdateToken:"), objref.IDOf(updateToken))
+func (mosupcqirp *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithUpdateToken(updateToken []byte) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mosupcqirp), objc.RegisterName("setUpdateToken:"), rt.BytesToNSData(updateToken))
 	return mosupcqirp
 }
 
 // WithUserConsentNeeded sets the user consent needed.
 func (mosupcqirp *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithUserConsentNeeded(userConsentNeeded obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
+	defer runtime.KeepAlive(userConsentNeeded)
 	objc.Send[objc.ID](objref.IDOf(mosupcqirp), objc.RegisterName("setUserConsentNeeded:"), objref.IDOf(userConsentNeeded))
 	return mosupcqirp
 }
 
 // WithMetadataForRequestor sets the metadata for requestor.
-func (mosupcqirp *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithMetadataForRequestor(metadataForRequestor obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
-	objc.Send[objc.ID](objref.IDOf(mosupcqirp), objc.RegisterName("setMetadataForRequestor:"), objref.IDOf(metadataForRequestor))
+func (mosupcqirp *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithMetadataForRequestor(metadataForRequestor []byte) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mosupcqirp), objc.RegisterName("setMetadataForRequestor:"), rt.BytesToNSData(metadataForRequestor))
 	return mosupcqirp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mosupcqirp *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mosupcqirp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mosupcqirp
 }

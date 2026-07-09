@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func pageLayoutAdopt(id objc.ID) *PageLayout {
 
 // Description returns the object's -description text.
 func (pl *PageLayout) Description() string {
+	defer runtime.KeepAlive(pl)
 	return rt.Description(objref.IDOf(pl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pl *PageLayout) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pl *PageLayout) IsKind(className string) bool {
+	defer runtime.KeepAlive(pl)
 	return rt.IsKind(objref.IDOf(pl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pl *PageLayout) String() string {
+	defer runtime.KeepAlive(pl)
 	return rt.Description(objref.IDOf(pl))
 }
 
@@ -80,6 +87,8 @@ func NewPageLayout() *PageLayout {
 
 // AddAccessoryController adds the specified controller of an accessory view to be presented in the page setup panel.
 func (pl *PageLayout) AddAccessoryController(accessoryController *ViewController) {
+	defer runtime.KeepAlive(pl)
+	defer runtime.KeepAlive(accessoryController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("addAccessoryController:"), objref.IDOf(accessoryController))
 	})
@@ -88,6 +97,8 @@ func (pl *PageLayout) AddAccessoryController(accessoryController *ViewController
 
 // RemoveAccessoryController removes the specified controller of an accessory view.
 func (pl *PageLayout) RemoveAccessoryController(accessoryController *ViewController) {
+	defer runtime.KeepAlive(pl)
+	defer runtime.KeepAlive(accessoryController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("removeAccessoryController:"), objref.IDOf(accessoryController))
 	})
@@ -96,6 +107,8 @@ func (pl *PageLayout) RemoveAccessoryController(accessoryController *ViewControl
 
 // RunModalWithPrintInfo displays the page layout panel and begins the modal loop using the specified print info object.
 func (pl *PageLayout) RunModalWithPrintInfo(printInfo *PrintInfo) int {
+	defer runtime.KeepAlive(pl)
+	defer runtime.KeepAlive(printInfo)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -109,6 +122,7 @@ func (pl *PageLayout) RunModalWithPrintInfo(printInfo *PrintInfo) int {
 
 // RunModal returns displays the page layout panel and begins the modal loop using the shared print info object.
 func (pl *PageLayout) RunModal() int {
+	defer runtime.KeepAlive(pl)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -124,6 +138,7 @@ func (pl *PageLayout) RunModal() int {
 //
 // AccessoryControllers returns the collection as a Go slice.
 func (pl *PageLayout) AccessoryControllers() []*ViewController {
+	defer runtime.KeepAlive(pl)
 	var _mainthread0 []*ViewController
 	purego.Main(func() {
 		_mainthread0 = func() []*ViewController {
@@ -136,6 +151,7 @@ func (pl *PageLayout) AccessoryControllers() []*ViewController {
 
 // PrintInfo returns the print info.
 func (pl *PageLayout) PrintInfo() *PrintInfo {
+	defer runtime.KeepAlive(pl)
 	var _mainthread0 *PrintInfo
 	purego.Main(func() {
 		_mainthread0 = func() *PrintInfo {
@@ -149,6 +165,8 @@ func (pl *PageLayout) PrintInfo() *PrintInfo {
 
 // SetAccessoryView adds a view object to the page layout panel.
 func (pl *PageLayout) SetAccessoryView(accessoryView *View) {
+	defer runtime.KeepAlive(pl)
+	defer runtime.KeepAlive(accessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 	})
@@ -157,6 +175,7 @@ func (pl *PageLayout) SetAccessoryView(accessoryView *View) {
 
 // AccessoryView returns the page layout panel’s accessory view.
 func (pl *PageLayout) AccessoryView() *View {
+	defer runtime.KeepAlive(pl)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -170,6 +189,7 @@ func (pl *PageLayout) AccessoryView() *View {
 
 // ReadPrintInfo sets the page layout’s values to those stored in the print info object used when the page layout panel is run.
 func (pl *PageLayout) ReadPrintInfo() {
+	defer runtime.KeepAlive(pl)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("readPrintInfo"))
 	})
@@ -178,6 +198,7 @@ func (pl *PageLayout) ReadPrintInfo() {
 
 // WritePrintInfo writes the page layout’s values to the print info object used when the page layout panel is run.
 func (pl *PageLayout) WritePrintInfo() {
+	defer runtime.KeepAlive(pl)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("writePrintInfo"))
 	})

@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTRCommissioneeInfoAdopt(id objc.ID) *MTRCommissioneeInfo {
 
 // Description returns the object's -description text.
 func (mci *MTRCommissioneeInfo) Description() string {
+	defer runtime.KeepAlive(mci)
 	return rt.Description(objref.IDOf(mci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mci *MTRCommissioneeInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mci *MTRCommissioneeInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(mci)
 	return rt.IsKind(objref.IDOf(mci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mci *MTRCommissioneeInfo) String() string {
+	defer runtime.KeepAlive(mci)
 	return rt.Description(objref.IDOf(mci))
 }
 
@@ -74,24 +81,28 @@ func NewMTRCommissioneeInfo() *MTRCommissioneeInfo {
 
 // ProductIdentity returns the product identity (VID / PID) of the commissionee.
 func (mci *MTRCommissioneeInfo) ProductIdentity() *MTRProductIdentity {
+	defer runtime.KeepAlive(mci)
 	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("productIdentity"))
 	return MTRProductIdentityFromID(_r)
 }
 
 // EndpointsByID returns endpoint information for all endpoints of the commissionee. Will be present only if readEndpointInformation is set to YES on MTRCommissioningParameters. Use `rootEndpoint` and `-[MTREndpointInfo children]` to traverse endpoints in composition order.
 func (mci *MTRCommissioneeInfo) EndpointsByID() obj.Object {
+	defer runtime.KeepAlive(mci)
 	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("endpointsById"))
 	return obj.Wrap(_r)
 }
 
 // RootEndpoint returns endpoint information for the root endpoint of the commissionee. Will be present only if readEndpointInformation is set to YES on MTRCommissioningParameters.
 func (mci *MTRCommissioneeInfo) RootEndpoint() *MTREndpointInfo {
+	defer runtime.KeepAlive(mci)
 	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("rootEndpoint"))
 	return MTREndpointInfoFromID(_r)
 }
 
 // Attributes returns attributes that were read from the commissionee.  This will contain the following, if they are available: 1) The attributes in extraAttributesToRead on MTRCommissioningParameters. 2) The FeatureMap attributes of all Network Commissioning clusters on the commissionee.
 func (mci *MTRCommissioneeInfo) Attributes() obj.Object {
+	defer runtime.KeepAlive(mci)
 	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }

@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func cNNDilatedPoolingMaxNodeAdopt(id objc.ID) *CNNDilatedPoolingMaxNode {
 
 // NewCNNDilatedPoolingMaxNodeWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY init a node representing a MPSCNNPooling kernel
 func NewCNNDilatedPoolingMaxNodeWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY(sourceNode *NNImageNode, kernelWidth int, kernelHeight int, strideInPixelsX int, strideInPixelsY int, dilationRateX int, dilationRateY int) *CNNDilatedPoolingMaxNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDilatedPoolingMaxNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:dilationRateX:dilationRateY:"), objref.IDOf(sourceNode), kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY, dilationRateX, dilationRateY)
 	return cNNDilatedPoolingMaxNodeAdopt(_id)
@@ -54,6 +57,7 @@ func NewCNNDilatedPoolingMaxNodeWithSourceKernelWidthKernelHeightStrideInPixelsX
 
 // NewCNNDilatedPoolingMaxNodeWithSourceFilterSizeStrideDilationRate convenience initializer for MPSCNNDilatedPooling nodes with square kernels and equal dilation factors
 func NewCNNDilatedPoolingMaxNodeWithSourceFilterSizeStrideDilationRate(sourceNode *NNImageNode, size int, stride int, dilationRate int) *CNNDilatedPoolingMaxNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDilatedPoolingMaxNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:filterSize:stride:dilationRate:"), objref.IDOf(sourceNode), size, stride, dilationRate)
 	return cNNDilatedPoolingMaxNodeAdopt(_id)
@@ -61,6 +65,7 @@ func NewCNNDilatedPoolingMaxNodeWithSourceFilterSizeStrideDilationRate(sourceNod
 
 // NewCNNDilatedPoolingMaxNodeWithSourceFilterSize convenience initializer for MPSCNNDilatedPooling nodes with square non-overlapping kernels
 func NewCNNDilatedPoolingMaxNodeWithSourceFilterSize(sourceNode *NNImageNode, size int) *CNNDilatedPoolingMaxNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDilatedPoolingMaxNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:filterSize:"), objref.IDOf(sourceNode), size)
 	return cNNDilatedPoolingMaxNodeAdopt(_id)
@@ -74,12 +79,14 @@ func (cdpmn *CNNDilatedPoolingMaxNode) WithLabel(label string) *CNNDilatedPoolin
 
 // DilationRateX returns the dilation rate x.
 func (cdpmn *CNNDilatedPoolingMaxNode) DilationRateX() int {
+	defer runtime.KeepAlive(cdpmn)
 	_r := objc.Send[int](objref.IDOf(cdpmn), objc.RegisterName("dilationRateX"))
 	return _r
 }
 
 // DilationRateY returns the dilation rate y.
 func (cdpmn *CNNDilatedPoolingMaxNode) DilationRateY() int {
+	defer runtime.KeepAlive(cdpmn)
 	_r := objc.Send[int](objref.IDOf(cdpmn), objc.RegisterName("dilationRateY"))
 	return _r
 }

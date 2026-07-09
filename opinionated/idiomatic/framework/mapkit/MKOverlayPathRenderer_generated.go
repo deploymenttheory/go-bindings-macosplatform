@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,12 +50,14 @@ func overlayPathRendererAdopt(id objc.ID) *OverlayPathRenderer {
 
 // WithFillColor sets the fill color to use for the path.
 func (opr *OverlayPathRenderer) WithFillColor(fillColor obj.Object) *OverlayPathRenderer {
+	defer runtime.KeepAlive(fillColor)
 	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 	return opr
 }
 
 // WithStrokeColor sets the stroke color to use for the path.
 func (opr *OverlayPathRenderer) WithStrokeColor(strokeColor obj.Object) *OverlayPathRenderer {
+	defer runtime.KeepAlive(strokeColor)
 	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 	return opr
 }
@@ -91,6 +95,7 @@ func (opr *OverlayPathRenderer) WithShouldRasterize(shouldRasterize bool) *Overl
 
 // WithPath sets the path representing the overlay’s shape.
 func (opr *OverlayPathRenderer) WithPath(path obj.Object) *OverlayPathRenderer {
+	defer runtime.KeepAlive(path)
 	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return opr
 }
@@ -103,60 +108,77 @@ func (opr *OverlayPathRenderer) WithAlpha(alpha float64) *OverlayPathRenderer {
 
 // CreatePath creates the path for the overlay.
 func (opr *OverlayPathRenderer) CreatePath() {
+	defer runtime.KeepAlive(opr)
 	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("createPath"))
 }
 
 // InvalidatePath updates the path associated with the overlay renderer.
 func (opr *OverlayPathRenderer) InvalidatePath() {
+	defer runtime.KeepAlive(opr)
 	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("invalidatePath"))
 }
 
 // ApplyStrokePropertiesToContextAtZoomScale applies the renderer’s stroke-related drawing properties to the specified graphics context.
 func (opr *OverlayPathRenderer) ApplyStrokePropertiesToContextAtZoomScale(context_ obj.Object, zoomScale float64) {
+	defer runtime.KeepAlive(opr)
+	defer runtime.KeepAlive(context_)
 	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("applyStrokePropertiesToContext:atZoomScale:"), objref.IDOf(context_), zoomScale)
 }
 
 // ApplyFillPropertiesToContextAtZoomScale applies the receiver’s fill-related drawing properties to the specified graphics context.
 func (opr *OverlayPathRenderer) ApplyFillPropertiesToContextAtZoomScale(context_ obj.Object, zoomScale float64) {
+	defer runtime.KeepAlive(opr)
+	defer runtime.KeepAlive(context_)
 	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("applyFillPropertiesToContext:atZoomScale:"), objref.IDOf(context_), zoomScale)
 }
 
 // StrokePathInContext draws a line along the specified path.
 func (opr *OverlayPathRenderer) StrokePathInContext(path obj.Object, context_ obj.Object) {
+	defer runtime.KeepAlive(opr)
+	defer runtime.KeepAlive(path)
+	defer runtime.KeepAlive(context_)
 	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("strokePath:inContext:"), objref.IDOf(path), objref.IDOf(context_))
 }
 
 // FillPathInContext fills the area that the specified path encloses.
 func (opr *OverlayPathRenderer) FillPathInContext(path obj.Object, context_ obj.Object) {
+	defer runtime.KeepAlive(opr)
+	defer runtime.KeepAlive(path)
+	defer runtime.KeepAlive(context_)
 	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("fillPath:inContext:"), objref.IDOf(path), objref.IDOf(context_))
 }
 
 // FillColor returns the fill color.
 func (opr *OverlayPathRenderer) FillColor() obj.Object {
+	defer runtime.KeepAlive(opr)
 	_r := objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("fillColor"))
 	return obj.Wrap(_r)
 }
 
 // StrokeColor returns the stroke color.
 func (opr *OverlayPathRenderer) StrokeColor() obj.Object {
+	defer runtime.KeepAlive(opr)
 	_r := objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("strokeColor"))
 	return obj.Wrap(_r)
 }
 
 // LineWidth returns the line width.
 func (opr *OverlayPathRenderer) LineWidth() float64 {
+	defer runtime.KeepAlive(opr)
 	_r := objc.Send[float64](objref.IDOf(opr), objc.RegisterName("lineWidth"))
 	return _r
 }
 
 // MiterLimit returns the miter limit.
 func (opr *OverlayPathRenderer) MiterLimit() float64 {
+	defer runtime.KeepAlive(opr)
 	_r := objc.Send[float64](objref.IDOf(opr), objc.RegisterName("miterLimit"))
 	return _r
 }
 
 // LineDashPhase returns the line dash phase.
 func (opr *OverlayPathRenderer) LineDashPhase() float64 {
+	defer runtime.KeepAlive(opr)
 	_r := objc.Send[float64](objref.IDOf(opr), objc.RegisterName("lineDashPhase"))
 	return _r
 }
@@ -165,18 +187,21 @@ func (opr *OverlayPathRenderer) LineDashPhase() float64 {
 //
 // LineDashPattern returns the collection as a Go slice.
 func (opr *OverlayPathRenderer) LineDashPattern() []obj.Object {
+	defer runtime.KeepAlive(opr)
 	_arr := objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("lineDashPattern"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ShouldRasterize wraps the corresponding Objective-C method.
 func (opr *OverlayPathRenderer) ShouldRasterize() bool {
+	defer runtime.KeepAlive(opr)
 	_r := objc.Send[bool](objref.IDOf(opr), objc.RegisterName("shouldRasterize"))
 	return _r
 }
 
 // Path returns the path.
 func (opr *OverlayPathRenderer) Path() obj.Object {
+	defer runtime.KeepAlive(opr)
 	_r := objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("path"))
 	return obj.Wrap(_r)
 }

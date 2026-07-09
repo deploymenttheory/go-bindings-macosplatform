@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRRVCOperationalStateClusterPauseParamsAdopt(id objc.ID) *MTRRVCOperationa
 
 // Description returns the object's -description text.
 func (moscpp *MTRRVCOperationalStateClusterPauseParams) Description() string {
+	defer runtime.KeepAlive(moscpp)
 	return rt.Description(objref.IDOf(moscpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (moscpp *MTRRVCOperationalStateClusterPauseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(moscpp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(moscpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (moscpp *MTRRVCOperationalStateClusterPauseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(moscpp)
 	return rt.IsKind(objref.IDOf(moscpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (moscpp *MTRRVCOperationalStateClusterPauseParams) String() string {
+	defer runtime.KeepAlive(moscpp)
 	return rt.Description(objref.IDOf(moscpp))
 }
 
@@ -72,24 +80,28 @@ func NewMTRRVCOperationalStateClusterPauseParams() *MTRRVCOperationalStateCluste
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (moscpp *MTRRVCOperationalStateClusterPauseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRRVCOperationalStateClusterPauseParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(moscpp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return moscpp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (moscpp *MTRRVCOperationalStateClusterPauseParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRRVCOperationalStateClusterPauseParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(moscpp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return moscpp
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (moscpp *MTRRVCOperationalStateClusterPauseParams) TimedInvokeTimeoutMs() obj.Object {
+func (moscpp *MTRRVCOperationalStateClusterPauseParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(moscpp)
 	_r := objc.Send[objc.ID](objref.IDOf(moscpp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (moscpp *MTRRVCOperationalStateClusterPauseParams) ServerSideProcessingTimeout() obj.Object {
+func (moscpp *MTRRVCOperationalStateClusterPauseParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(moscpp)
 	_r := objc.Send[objc.ID](objref.IDOf(moscpp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

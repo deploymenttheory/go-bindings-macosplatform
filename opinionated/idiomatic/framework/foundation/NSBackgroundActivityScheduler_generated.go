@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func backgroundActivitySchedulerAdopt(id objc.ID) *BackgroundActivityScheduler {
 
 // Description returns the object's -description text.
 func (bas *BackgroundActivityScheduler) Description() string {
+	defer runtime.KeepAlive(bas)
 	return rt.Description(objref.IDOf(bas))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bas *BackgroundActivityScheduler) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bas)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bas), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bas *BackgroundActivityScheduler) IsKind(className string) bool {
+	defer runtime.KeepAlive(bas)
 	return rt.IsKind(objref.IDOf(bas), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bas *BackgroundActivityScheduler) String() string {
+	defer runtime.KeepAlive(bas)
 	return rt.Description(objref.IDOf(bas))
 }
 
@@ -106,18 +112,20 @@ func (bas *BackgroundActivityScheduler) WithObservationInfo(observationInfo unsa
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (bas *BackgroundActivityScheduler) WithScriptingProperties(scriptingProperties obj.Object) *BackgroundActivityScheduler {
-	objc.Send[objc.ID](objref.IDOf(bas), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (bas *BackgroundActivityScheduler) WithScriptingProperties(scriptingProperties map[string]obj.Object) *BackgroundActivityScheduler {
+	objc.Send[objc.ID](objref.IDOf(bas), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return bas
 }
 
 // Invalidate prevents the background activity from being scheduled again.
 func (bas *BackgroundActivityScheduler) Invalidate() {
+	defer runtime.KeepAlive(bas)
 	objc.Send[objc.ID](objref.IDOf(bas), objc.RegisterName("invalidate"))
 }
 
 // Identifier returns the identifier.
 func (bas *BackgroundActivityScheduler) Identifier() string {
+	defer runtime.KeepAlive(bas)
 	_r := objc.Send[objc.ID](objref.IDOf(bas), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -127,30 +135,35 @@ func (bas *BackgroundActivityScheduler) Identifier() string {
 
 // QualityOfService returns the quality of service.
 func (bas *BackgroundActivityScheduler) QualityOfService() QualityOfService {
+	defer runtime.KeepAlive(bas)
 	_r := objc.Send[QualityOfService](objref.IDOf(bas), objc.RegisterName("qualityOfService"))
 	return _r
 }
 
 // Repeats wraps the corresponding Objective-C method.
 func (bas *BackgroundActivityScheduler) Repeats() bool {
+	defer runtime.KeepAlive(bas)
 	_r := objc.Send[bool](objref.IDOf(bas), objc.RegisterName("repeats"))
 	return _r
 }
 
 // Interval returns the interval.
 func (bas *BackgroundActivityScheduler) Interval() float64 {
+	defer runtime.KeepAlive(bas)
 	_r := objc.Send[float64](objref.IDOf(bas), objc.RegisterName("interval"))
 	return _r
 }
 
 // Tolerance returns the tolerance.
 func (bas *BackgroundActivityScheduler) Tolerance() float64 {
+	defer runtime.KeepAlive(bas)
 	_r := objc.Send[float64](objref.IDOf(bas), objc.RegisterName("tolerance"))
 	return _r
 }
 
 // ShouldDefer wraps the corresponding Objective-C method.
 func (bas *BackgroundActivityScheduler) ShouldDefer() bool {
+	defer runtime.KeepAlive(bas)
 	_r := objc.Send[bool](objref.IDOf(bas), objc.RegisterName("shouldDefer"))
 	return _r
 }

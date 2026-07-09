@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func fetchIndexElementDescriptionAdopt(id objc.ID) *FetchIndexElementDescription
 
 // Description returns the object's -description text.
 func (fied *FetchIndexElementDescription) Description() string {
+	defer runtime.KeepAlive(fied)
 	return rt.Description(objref.IDOf(fied))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fied *FetchIndexElementDescription) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fied)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fied), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fied *FetchIndexElementDescription) IsKind(className string) bool {
+	defer runtime.KeepAlive(fied)
 	return rt.IsKind(objref.IDOf(fied), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fied *FetchIndexElementDescription) String() string {
+	defer runtime.KeepAlive(fied)
 	return rt.Description(objref.IDOf(fied))
 }
 
 // NewFetchIndexElementDescriptionWithPropertyCollationType creates an index element description using the specified property description and collation type.
 func NewFetchIndexElementDescriptionWithPropertyCollationType(property *PropertyDescription, collationType FetchIndexElementType) *FetchIndexElementDescription {
+	defer runtime.KeepAlive(property)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFetchIndexElementDescription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProperty:collationType:"), objref.IDOf(property), collationType)
 	return fetchIndexElementDescriptionAdopt(_id)
@@ -87,12 +95,14 @@ func (fied *FetchIndexElementDescription) WithAscending(ascending bool) *FetchIn
 
 // Property returns the property.
 func (fied *FetchIndexElementDescription) Property() *PropertyDescription {
+	defer runtime.KeepAlive(fied)
 	_r := objc.Send[objc.ID](objref.IDOf(fied), objc.RegisterName("property"))
 	return PropertyDescriptionFromID(_r)
 }
 
 // PropertyName returns the property name.
 func (fied *FetchIndexElementDescription) PropertyName() string {
+	defer runtime.KeepAlive(fied)
 	_r := objc.Send[objc.ID](objref.IDOf(fied), objc.RegisterName("propertyName"))
 	if _r == 0 {
 		return ""
@@ -102,18 +112,21 @@ func (fied *FetchIndexElementDescription) PropertyName() string {
 
 // CollationType returns the collation type.
 func (fied *FetchIndexElementDescription) CollationType() FetchIndexElementType {
+	defer runtime.KeepAlive(fied)
 	_r := objc.Send[FetchIndexElementType](objref.IDOf(fied), objc.RegisterName("collationType"))
 	return _r
 }
 
 // IsAscending reports whether the object is ascending.
 func (fied *FetchIndexElementDescription) IsAscending() bool {
+	defer runtime.KeepAlive(fied)
 	_r := objc.Send[bool](objref.IDOf(fied), objc.RegisterName("isAscending"))
 	return _r
 }
 
 // IndexDescription returns the index description.
 func (fied *FetchIndexElementDescription) IndexDescription() *FetchIndexDescription {
+	defer runtime.KeepAlive(fied)
 	_r := objc.Send[objc.ID](objref.IDOf(fied), objc.RegisterName("indexDescription"))
 	return FetchIndexDescriptionFromID(_r)
 }

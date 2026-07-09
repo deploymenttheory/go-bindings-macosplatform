@@ -6,11 +6,13 @@ package corelocation
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -51,22 +53,27 @@ func locationManagerAdopt(id objc.ID) *LocationManager {
 
 // Description returns the object's -description text.
 func (lm *LocationManager) Description() string {
+	defer runtime.KeepAlive(lm)
 	return rt.Description(objref.IDOf(lm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lm *LocationManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lm *LocationManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(lm)
 	return rt.IsKind(objref.IDOf(lm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lm *LocationManager) String() string {
+	defer runtime.KeepAlive(lm)
 	return rt.Description(objref.IDOf(lm))
 }
 
@@ -74,6 +81,16 @@ func (lm *LocationManager) String() string {
 func NewLocationManager() *LocationManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("CLLocationManager")), objc.RegisterName("new"))
 	return locationManagerAdopt(_id)
+}
+
+// WithDelegate sets the delegate object to receive update events.
+func (lm *LocationManager) WithDelegate(delegate LocationManagerDelegate) *LocationManager {
+	_shim := newLocationManagerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(lm), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(lm), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return lm
 }
 
 // WithPurpose sets the purpose.
@@ -126,11 +143,13 @@ func (lm *LocationManager) WithHeadingOrientation(headingOrientation DeviceOrien
 
 // RequestWhenInUseAuthorization requests the user’s permission to use location services while the app is in use.
 func (lm *LocationManager) RequestWhenInUseAuthorization() {
+	defer runtime.KeepAlive(lm)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("requestWhenInUseAuthorization"))
 }
 
 // RequestAlwaysAuthorization requests the user’s permission to use location services regardless of whether the app is in use.
 func (lm *LocationManager) RequestAlwaysAuthorization() {
+	defer runtime.KeepAlive(lm)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("requestAlwaysAuthorization"))
 }
 
@@ -138,6 +157,7 @@ func (lm *LocationManager) RequestAlwaysAuthorization() {
 //
 // RequestTemporaryFullAccuracyAuthorizationWithPurposeKeyCompletion blocks until the operation completes or ctx is cancelled.
 func (lm *LocationManager) RequestTemporaryFullAccuracyAuthorizationWithPurposeKeyCompletion(ctx context.Context, purposeKey string) error {
+	defer runtime.KeepAlive(lm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -155,120 +175,151 @@ func (lm *LocationManager) RequestTemporaryFullAccuracyAuthorizationWithPurposeK
 
 // RequestTemporaryFullAccuracyAuthorizationWithPurposeKey requests permission to temporarily use location services with full accuracy.
 func (lm *LocationManager) RequestTemporaryFullAccuracyAuthorizationWithPurposeKey(purposeKey string) {
+	defer runtime.KeepAlive(lm)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("requestTemporaryFullAccuracyAuthorizationWithPurposeKey:"), purego.NSString(purposeKey))
 }
 
 // StartUpdatingLocation starts the generation of updates that report the user’s current location.
 func (lm *LocationManager) StartUpdatingLocation() {
+	defer runtime.KeepAlive(lm)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("startUpdatingLocation"))
 }
 
 // StopUpdatingLocation stops the generation of location updates.
 func (lm *LocationManager) StopUpdatingLocation() {
+	defer runtime.KeepAlive(lm)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("stopUpdatingLocation"))
 }
 
 // RequestLocation requests the one-time delivery of the user’s current location.
 func (lm *LocationManager) RequestLocation() {
+	defer runtime.KeepAlive(lm)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("requestLocation"))
 }
 
 // StartUpdatingHeading starts the generation of updates that report the user’s current heading.
 func (lm *LocationManager) StartUpdatingHeading() {
+	defer runtime.KeepAlive(lm)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("startUpdatingHeading"))
 }
 
 // DismissHeadingCalibrationDisplay dismisses the heading calibration view from the screen immediately.
 func (lm *LocationManager) DismissHeadingCalibrationDisplay() {
+	defer runtime.KeepAlive(lm)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("dismissHeadingCalibrationDisplay"))
 }
 
 // StartMonitoringSignificantLocationChanges starts the generation of updates based on significant location changes.
 func (lm *LocationManager) StartMonitoringSignificantLocationChanges() {
+	defer runtime.KeepAlive(lm)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("startMonitoringSignificantLocationChanges"))
 }
 
 // StopMonitoringSignificantLocationChanges stops the delivery of location events based on significant location changes.
 func (lm *LocationManager) StopMonitoringSignificantLocationChanges() {
+	defer runtime.KeepAlive(lm)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("stopMonitoringSignificantLocationChanges"))
 }
 
 // StartMonitoringForRegionDesiredAccuracy starts monitoring for region desired accuracy.
 func (lm *LocationManager) StartMonitoringForRegionDesiredAccuracy(region *Region, accuracy unsafe.Pointer) {
+	defer runtime.KeepAlive(lm)
+	defer runtime.KeepAlive(region)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("startMonitoringForRegion:desiredAccuracy:"), objref.IDOf(region), accuracy)
 }
 
 // StopMonitoringForRegion stops monitoring for region.
 func (lm *LocationManager) StopMonitoringForRegion(region *Region) {
+	defer runtime.KeepAlive(lm)
+	defer runtime.KeepAlive(region)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("stopMonitoringForRegion:"), objref.IDOf(region))
 }
 
 // StartMonitoringForRegion starts monitoring for region.
 func (lm *LocationManager) StartMonitoringForRegion(region *Region) {
+	defer runtime.KeepAlive(lm)
+	defer runtime.KeepAlive(region)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("startMonitoringForRegion:"), objref.IDOf(region))
 }
 
 // RequestStateForRegion requests state for region.
 func (lm *LocationManager) RequestStateForRegion(region *Region) {
+	defer runtime.KeepAlive(lm)
+	defer runtime.KeepAlive(region)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("requestStateForRegion:"), objref.IDOf(region))
 }
 
 // StartRangingBeaconsInRegion starts ranging beacons in region.
 func (lm *LocationManager) StartRangingBeaconsInRegion(region *BeaconRegion) {
+	defer runtime.KeepAlive(lm)
+	defer runtime.KeepAlive(region)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("startRangingBeaconsInRegion:"), objref.IDOf(region))
 }
 
 // StopRangingBeaconsInRegion stops ranging beacons in region.
 func (lm *LocationManager) StopRangingBeaconsInRegion(region *BeaconRegion) {
+	defer runtime.KeepAlive(lm)
+	defer runtime.KeepAlive(region)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("stopRangingBeaconsInRegion:"), objref.IDOf(region))
 }
 
 // StartRangingBeaconsSatisfyingConstraint starts the delivery of notifications for the specified beacon constraints.
 func (lm *LocationManager) StartRangingBeaconsSatisfyingConstraint(constraint *BeaconIdentityConstraint) {
+	defer runtime.KeepAlive(lm)
+	defer runtime.KeepAlive(constraint)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("startRangingBeaconsSatisfyingConstraint:"), objref.IDOf(constraint))
 }
 
 // StopRangingBeaconsSatisfyingConstraint stops the delivery of notifications for the specified beacon constraints.
 func (lm *LocationManager) StopRangingBeaconsSatisfyingConstraint(constraint *BeaconIdentityConstraint) {
+	defer runtime.KeepAlive(lm)
+	defer runtime.KeepAlive(constraint)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("stopRangingBeaconsSatisfyingConstraint:"), objref.IDOf(constraint))
 }
 
 // AllowDeferredLocationUpdatesUntilTraveledTimeout wraps the corresponding Objective-C method.
 func (lm *LocationManager) AllowDeferredLocationUpdatesUntilTraveledTimeout(distance unsafe.Pointer, timeout float64) {
+	defer runtime.KeepAlive(lm)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("allowDeferredLocationUpdatesUntilTraveled:timeout:"), distance, timeout)
 }
 
 // DisallowDeferredLocationUpdates wraps the corresponding Objective-C method.
 func (lm *LocationManager) DisallowDeferredLocationUpdates() {
+	defer runtime.KeepAlive(lm)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("disallowDeferredLocationUpdates"))
 }
 
 // AuthorizationStatus returns the authorization status.
 func (lm *LocationManager) AuthorizationStatus() AuthorizationStatus {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[AuthorizationStatus](objref.IDOf(lm), objc.RegisterName("authorizationStatus"))
 	return _r
 }
 
 // AccuracyAuthorization returns the accuracy authorization.
 func (lm *LocationManager) AccuracyAuthorization() AccuracyAuthorization {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[AccuracyAuthorization](objref.IDOf(lm), objc.RegisterName("accuracyAuthorization"))
 	return _r
 }
 
 // IsAuthorizedForWidgetUpdates reports whether the object is authorized for widget updates.
 func (lm *LocationManager) IsAuthorizedForWidgetUpdates() bool {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[bool](objref.IDOf(lm), objc.RegisterName("isAuthorizedForWidgetUpdates"))
 	return _r
 }
 
 // LocationServicesEnabled wraps the corresponding Objective-C method.
 func (lm *LocationManager) LocationServicesEnabled() bool {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[bool](objref.IDOf(lm), objc.RegisterName("locationServicesEnabled"))
 	return _r
 }
 
 // Purpose returns the purpose.
 func (lm *LocationManager) Purpose() string {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("purpose"))
 	if _r == 0 {
 		return ""
@@ -278,64 +329,75 @@ func (lm *LocationManager) Purpose() string {
 
 // ActivityType returns the activity type.
 func (lm *LocationManager) ActivityType() ActivityType {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[ActivityType](objref.IDOf(lm), objc.RegisterName("activityType"))
 	return _r
 }
 
 // PausesLocationUpdatesAutomatically wraps the corresponding Objective-C method.
 func (lm *LocationManager) PausesLocationUpdatesAutomatically() bool {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[bool](objref.IDOf(lm), objc.RegisterName("pausesLocationUpdatesAutomatically"))
 	return _r
 }
 
 // AllowsBackgroundLocationUpdates wraps the corresponding Objective-C method.
 func (lm *LocationManager) AllowsBackgroundLocationUpdates() bool {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[bool](objref.IDOf(lm), objc.RegisterName("allowsBackgroundLocationUpdates"))
 	return _r
 }
 
 // HeadingAvailable wraps the corresponding Objective-C method.
 func (lm *LocationManager) HeadingAvailable() bool {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[bool](objref.IDOf(lm), objc.RegisterName("headingAvailable"))
 	return _r
 }
 
 // HeadingOrientation returns the heading orientation.
 func (lm *LocationManager) HeadingOrientation() DeviceOrientation {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[DeviceOrientation](objref.IDOf(lm), objc.RegisterName("headingOrientation"))
 	return _r
 }
 
 // Heading returns the heading.
 func (lm *LocationManager) Heading() *Heading {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("heading"))
 	return HeadingFromID(_r)
 }
 
-// MonitoredRegions returns the monitored regions.
-func (lm *LocationManager) MonitoredRegions() obj.Object {
+// MonitoredRegions returns the order of the returned elements is unspecified.
+func (lm *LocationManager) MonitoredRegions() []*Region {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("monitoredRegions"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *Region { return RegionFromID(_id) })
 }
 
-// RangedRegions returns the ranged regions.
-func (lm *LocationManager) RangedRegions() obj.Object {
+// RangedRegions returns the order of the returned elements is unspecified.
+func (lm *LocationManager) RangedRegions() []*Region {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("rangedRegions"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *Region { return RegionFromID(_id) })
 }
 
-// RangedBeaconConstraints returns the ranged beacon constraints.
-func (lm *LocationManager) RangedBeaconConstraints() obj.Object {
+// RangedBeaconConstraints returns the order of the returned elements is unspecified.
+func (lm *LocationManager) RangedBeaconConstraints() []*BeaconIdentityConstraint {
+	defer runtime.KeepAlive(lm)
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("rangedBeaconConstraints"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *BeaconIdentityConstraint { return BeaconIdentityConstraintFromID(_id) })
 }
 
 // StartMonitoringVisits starts the delivery of visit-related events.
 func (lm *LocationManager) StartMonitoringVisits() {
+	defer runtime.KeepAlive(lm)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("startMonitoringVisits"))
 }
 
 // StopMonitoringVisits stops the delivery of visit-related events.
 func (lm *LocationManager) StopMonitoringVisits() {
+	defer runtime.KeepAlive(lm)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("stopMonitoringVisits"))
 }

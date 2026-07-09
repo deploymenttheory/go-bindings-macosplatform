@@ -5,6 +5,8 @@
 package coreaudiokit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func aUGenericViewControllerAdopt(id objc.ID) *AUGenericViewController {
 
 // Description returns the object's -description text.
 func (agvc *AUGenericViewController) Description() string {
+	defer runtime.KeepAlive(agvc)
 	return rt.Description(objref.IDOf(agvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (agvc *AUGenericViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(agvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(agvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (agvc *AUGenericViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(agvc)
 	return rt.IsKind(objref.IDOf(agvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (agvc *AUGenericViewController) String() string {
+	defer runtime.KeepAlive(agvc)
 	return rt.Description(objref.IDOf(agvc))
 }
 
@@ -78,6 +85,7 @@ func NewAUGenericViewController() *AUGenericViewController {
 
 // WithAuAudioUnit sets the au audio unit.
 func (agvc *AUGenericViewController) WithAuAudioUnit(auAudioUnit obj.Object) *AUGenericViewController {
+	defer runtime.KeepAlive(auAudioUnit)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(agvc), objc.RegisterName("setAuAudioUnit:"), objref.IDOf(auAudioUnit))
 	})
@@ -86,6 +94,7 @@ func (agvc *AUGenericViewController) WithAuAudioUnit(auAudioUnit obj.Object) *AU
 
 // AuAudioUnit returns the au audio unit.
 func (agvc *AUGenericViewController) AuAudioUnit() obj.Object {
+	defer runtime.KeepAlive(agvc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

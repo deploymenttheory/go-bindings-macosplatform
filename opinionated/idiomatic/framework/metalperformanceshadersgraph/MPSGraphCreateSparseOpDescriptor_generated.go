@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,6 +61,7 @@ func (gcsod *GraphCreateSparseOpDescriptor) WithSparseStorageType(sparseStorageT
 
 // SparseStorageType defines the storage format of the sparse tensor.
 func (gcsod *GraphCreateSparseOpDescriptor) SparseStorageType() GraphSparseStorageType {
+	defer runtime.KeepAlive(gcsod)
 	_r := objc.Send[GraphSparseStorageType](objref.IDOf(gcsod), objc.RegisterName("sparseStorageType"))
 	return _r
 }

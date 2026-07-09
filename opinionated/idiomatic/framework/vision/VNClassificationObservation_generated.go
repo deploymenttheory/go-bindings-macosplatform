@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewClassificationObservation() *ClassificationObservation {
 
 // Identifier returns the identifier.
 func (co *ClassificationObservation) Identifier() string {
+	defer runtime.KeepAlive(co)
 	_r := objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -62,18 +65,21 @@ func (co *ClassificationObservation) Identifier() string {
 
 // HasMinimumRecallForPrecision determines whether the observation for a specific precision has a minimum recall value.
 func (co *ClassificationObservation) HasMinimumRecallForPrecision(minimumRecall float32, precision float32) bool {
+	defer runtime.KeepAlive(co)
 	_r := objc.Send[bool](objref.IDOf(co), objc.RegisterName("hasMinimumRecall:forPrecision:"), minimumRecall, precision)
 	return _r
 }
 
 // HasMinimumPrecisionForRecall determines whether the observation for a specific recall has a minimum precision value.
 func (co *ClassificationObservation) HasMinimumPrecisionForRecall(minimumPrecision float32, recall float32) bool {
+	defer runtime.KeepAlive(co)
 	_r := objc.Send[bool](objref.IDOf(co), objc.RegisterName("hasMinimumPrecision:forRecall:"), minimumPrecision, recall)
 	return _r
 }
 
 // HasPrecisionRecallCurve reports whether determine whether or not precision/recall curves are available with the observation. If this property is true, then all other precision/recall related methods in this addition can be called.
 func (co *ClassificationObservation) HasPrecisionRecallCurve() bool {
+	defer runtime.KeepAlive(co)
 	_r := objc.Send[bool](objref.IDOf(co), objc.RegisterName("hasPrecisionRecallCurve"))
 	return _r
 }

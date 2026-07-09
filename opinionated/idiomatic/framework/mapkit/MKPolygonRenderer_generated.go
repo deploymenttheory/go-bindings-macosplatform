@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func polygonRendererAdopt(id objc.ID) *PolygonRenderer {
 
 // NewPolygonRendererWithPolygon creates a new renderer that handles drawing for the specified polygon overlay object.
 func NewPolygonRendererWithPolygon(polygon *Polygon) *PolygonRenderer {
+	defer runtime.KeepAlive(polygon)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKPolygonRenderer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPolygon:"), objref.IDOf(polygon))
 	return polygonRendererAdopt(_id)
@@ -67,12 +70,14 @@ func (pr *PolygonRenderer) WithStrokeEnd(strokeEnd float64) *PolygonRenderer {
 
 // WithFillColor sets the fill color to use for the path.
 func (pr *PolygonRenderer) WithFillColor(fillColor obj.Object) *PolygonRenderer {
+	defer runtime.KeepAlive(fillColor)
 	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 	return pr
 }
 
 // WithStrokeColor sets the stroke color to use for the path.
 func (pr *PolygonRenderer) WithStrokeColor(strokeColor obj.Object) *PolygonRenderer {
+	defer runtime.KeepAlive(strokeColor)
 	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 	return pr
 }
@@ -110,6 +115,7 @@ func (pr *PolygonRenderer) WithShouldRasterize(shouldRasterize bool) *PolygonRen
 
 // WithPath sets the path representing the overlay’s shape.
 func (pr *PolygonRenderer) WithPath(path obj.Object) *PolygonRenderer {
+	defer runtime.KeepAlive(path)
 	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return pr
 }
@@ -122,18 +128,21 @@ func (pr *PolygonRenderer) WithAlpha(alpha float64) *PolygonRenderer {
 
 // Polygon returns the polygon.
 func (pr *PolygonRenderer) Polygon() *Polygon {
+	defer runtime.KeepAlive(pr)
 	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("polygon"))
 	return PolygonFromID(_r)
 }
 
 // StrokeStart returns the stroke start.
 func (pr *PolygonRenderer) StrokeStart() float64 {
+	defer runtime.KeepAlive(pr)
 	_r := objc.Send[float64](objref.IDOf(pr), objc.RegisterName("strokeStart"))
 	return _r
 }
 
 // StrokeEnd returns the stroke end.
 func (pr *PolygonRenderer) StrokeEnd() float64 {
+	defer runtime.KeepAlive(pr)
 	_r := objc.Send[float64](objref.IDOf(pr), objc.RegisterName("strokeEnd"))
 	return _r
 }

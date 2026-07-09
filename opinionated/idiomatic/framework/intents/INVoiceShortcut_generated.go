@@ -5,7 +5,10 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func voiceShortcutAdopt(id objc.ID) *VoiceShortcut {
 
 // Description returns the object's -description text.
 func (vs *VoiceShortcut) Description() string {
+	defer runtime.KeepAlive(vs)
 	return rt.Description(objref.IDOf(vs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vs *VoiceShortcut) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vs *VoiceShortcut) IsKind(className string) bool {
+	defer runtime.KeepAlive(vs)
 	return rt.IsKind(objref.IDOf(vs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vs *VoiceShortcut) String() string {
+	defer runtime.KeepAlive(vs)
 	return rt.Description(objref.IDOf(vs))
 }
 
@@ -73,13 +81,15 @@ func NewVoiceShortcut() *VoiceShortcut {
 }
 
 // Identifier returns the unique identifier for this voice shortcut
-func (vs *VoiceShortcut) Identifier() obj.Object {
+func (vs *VoiceShortcut) Identifier() *foundation.UUID {
+	defer runtime.KeepAlive(vs)
 	_r := objc.Send[objc.ID](objref.IDOf(vs), objc.RegisterName("identifier"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // InvocationPhrase returns the phrase the user speaks to invoke this shortcut; set by the user when they add it to Siri.
 func (vs *VoiceShortcut) InvocationPhrase() string {
+	defer runtime.KeepAlive(vs)
 	_r := objc.Send[objc.ID](objref.IDOf(vs), objc.RegisterName("invocationPhrase"))
 	if _r == 0 {
 		return ""
@@ -89,6 +99,7 @@ func (vs *VoiceShortcut) InvocationPhrase() string {
 
 // Shortcut returns the shortcut that will be performed when this voice shortcut is invoked via Siri.
 func (vs *VoiceShortcut) Shortcut() *Shortcut {
+	defer runtime.KeepAlive(vs)
 	_r := objc.Send[objc.ID](objref.IDOf(vs), objc.RegisterName("shortcut"))
 	return ShortcutFromID(_r)
 }

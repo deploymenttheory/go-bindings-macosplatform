@@ -6,6 +6,7 @@ package safariservices
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,22 +50,27 @@ func safariPageAdopt(id objc.ID) *SafariPage {
 
 // Description returns the object's -description text.
 func (sp *SafariPage) Description() string {
+	defer runtime.KeepAlive(sp)
 	return rt.Description(objref.IDOf(sp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sp *SafariPage) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sp *SafariPage) IsKind(className string) bool {
+	defer runtime.KeepAlive(sp)
 	return rt.IsKind(objref.IDOf(sp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sp *SafariPage) String() string {
+	defer runtime.KeepAlive(sp)
 	return rt.Description(objref.IDOf(sp))
 }
 
@@ -75,12 +81,14 @@ func NewSafariPage() *SafariPage {
 }
 
 // DispatchMessageToScriptWithNameUserInfo dispatches a message from the app extension to the content script injected in this page.
-func (sp *SafariPage) DispatchMessageToScriptWithNameUserInfo(messageName string, userInfo obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("dispatchMessageToScriptWithName:userInfo:"), purego.NSString(messageName), objref.IDOf(userInfo))
+func (sp *SafariPage) DispatchMessageToScriptWithNameUserInfo(messageName string, userInfo map[string]obj.Object) {
+	defer runtime.KeepAlive(sp)
+	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("dispatchMessageToScriptWithName:userInfo:"), purego.NSString(messageName), rt.MapToDict(userInfo, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Reload tells Safari to reload the webpage.
 func (sp *SafariPage) Reload() {
+	defer runtime.KeepAlive(sp)
 	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("reload"))
 }
 
@@ -88,6 +96,7 @@ func (sp *SafariPage) Reload() {
 //
 // GetPageProperties blocks until the operation completes or ctx is cancelled.
 func (sp *SafariPage) GetPageProperties(ctx context.Context) (result *SafariPageProperties, err error) {
+	defer runtime.KeepAlive(sp)
 	type _result struct {
 		val *SafariPageProperties
 		err error
@@ -112,6 +121,7 @@ func (sp *SafariPage) GetPageProperties(ctx context.Context) (result *SafariPage
 //
 // GetContainingTab blocks until the operation completes or ctx is cancelled.
 func (sp *SafariPage) GetContainingTab(ctx context.Context) (result *SafariTab, err error) {
+	defer runtime.KeepAlive(sp)
 	type _result struct {
 		val *SafariTab
 		err error
@@ -136,6 +146,7 @@ func (sp *SafariPage) GetContainingTab(ctx context.Context) (result *SafariTab, 
 //
 // GetScreenshotOfVisibleArea blocks until the operation completes or ctx is cancelled.
 func (sp *SafariPage) GetScreenshotOfVisibleArea(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(sp)
 	type _result struct {
 		val obj.Object
 		err error

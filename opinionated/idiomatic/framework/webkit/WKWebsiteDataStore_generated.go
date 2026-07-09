@@ -5,7 +5,11 @@
 package webkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +51,27 @@ func wKWebsiteDataStoreAdopt(id objc.ID) *WKWebsiteDataStore {
 
 // Description returns the object's -description text.
 func (wwds *WKWebsiteDataStore) Description() string {
+	defer runtime.KeepAlive(wwds)
 	return rt.Description(objref.IDOf(wwds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wwds *WKWebsiteDataStore) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wwds)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wwds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wwds *WKWebsiteDataStore) IsKind(className string) bool {
+	defer runtime.KeepAlive(wwds)
 	return rt.IsKind(objref.IDOf(wwds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wwds *WKWebsiteDataStore) String() string {
+	defer runtime.KeepAlive(wwds)
 	return rt.Description(objref.IDOf(wwds))
 }
 
@@ -88,31 +97,35 @@ func (wwds *WKWebsiteDataStore) WithProxyConfigurations(items ...obj.Object) *WK
 }
 
 // FetchDataRecordsOfTypesCompletionHandler fetches the specified types of records from the data store.
-func (wwds *WKWebsiteDataStore) FetchDataRecordsOfTypesCompletionHandler(dataTypes obj.Object, completionHandler func(obj.Object) int) {
+func (wwds *WKWebsiteDataStore) FetchDataRecordsOfTypesCompletionHandler(dataTypes []string, completionHandler func(obj.Object) int) {
+	defer runtime.KeepAlive(wwds)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwds), objc.RegisterName("fetchDataRecordsOfTypes:completionHandler:"), objref.IDOf(dataTypes), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
+		objc.Send[objc.ID](objref.IDOf(wwds), objc.RegisterName("fetchDataRecordsOfTypes:completionHandler:"), rt.SliceToNSSet(dataTypes, func(_v string) objc.ID { return purego.NSString(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
 	})
 
 }
 
 // RemoveDataOfTypesForDataRecordsCompletionHandler removes the specified types of website data from one or more data records.
-func (wwds *WKWebsiteDataStore) RemoveDataOfTypesForDataRecordsCompletionHandler(dataTypes obj.Object, dataRecords []*WKWebsiteDataRecord, completionHandler func() int) {
+func (wwds *WKWebsiteDataStore) RemoveDataOfTypesForDataRecordsCompletionHandler(dataTypes []string, dataRecords []*WKWebsiteDataRecord, completionHandler func() int) {
+	defer runtime.KeepAlive(wwds)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwds), objc.RegisterName("removeDataOfTypes:forDataRecords:completionHandler:"), objref.IDOf(dataTypes), purego.SliceToNSArray(dataRecords, func(_v *WKWebsiteDataRecord) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+		objc.Send[objc.ID](objref.IDOf(wwds), objc.RegisterName("removeDataOfTypes:forDataRecords:completionHandler:"), rt.SliceToNSSet(dataTypes, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(dataRecords, func(_v *WKWebsiteDataRecord) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
 	})
 
 }
 
 // RemoveDataOfTypesModifiedSinceCompletionHandler removes website data that changed after the specified date.
-func (wwds *WKWebsiteDataStore) RemoveDataOfTypesModifiedSinceCompletionHandler(dataTypes obj.Object, date obj.Object, completionHandler func() int) {
+func (wwds *WKWebsiteDataStore) RemoveDataOfTypesModifiedSinceCompletionHandler(dataTypes []string, date time.Time, completionHandler func() int) {
+	defer runtime.KeepAlive(wwds)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwds), objc.RegisterName("removeDataOfTypes:modifiedSince:completionHandler:"), objref.IDOf(dataTypes), objref.IDOf(date), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+		objc.Send[objc.ID](objref.IDOf(wwds), objc.RegisterName("removeDataOfTypes:modifiedSince:completionHandler:"), rt.SliceToNSSet(dataTypes, func(_v string) objc.ID { return purego.NSString(_v) }), rt.TimeToNSDate(date), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
 	})
 
 }
 
 // IsPersistent reports whether the data store is persistent or not.
 func (wwds *WKWebsiteDataStore) IsPersistent() bool {
+	defer runtime.KeepAlive(wwds)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -126,6 +139,7 @@ func (wwds *WKWebsiteDataStore) IsPersistent() bool {
 
 // HTTPCookieStore returns the cookie store representing HTTP cookies in this website data store.
 func (wwds *WKWebsiteDataStore) HTTPCookieStore() *WKHTTPCookieStore {
+	defer runtime.KeepAlive(wwds)
 	var _mainthread0 *WKHTTPCookieStore
 	purego.Main(func() {
 		_mainthread0 = func() *WKHTTPCookieStore {
@@ -138,12 +152,13 @@ func (wwds *WKWebsiteDataStore) HTTPCookieStore() *WKHTTPCookieStore {
 }
 
 // Identifier get identifier for a data store. Returns nil for default and non-persistent data store .
-func (wwds *WKWebsiteDataStore) Identifier() obj.Object {
-	var _mainthread0 obj.Object
+func (wwds *WKWebsiteDataStore) Identifier() *foundation.UUID {
+	defer runtime.KeepAlive(wwds)
+	var _mainthread0 *foundation.UUID
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.UUID {
 			_r := objc.Send[objc.ID](objref.IDOf(wwds), objc.RegisterName("identifier"))
-			return obj.Wrap(_r)
+			return foundation.UUIDFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -154,6 +169,7 @@ func (wwds *WKWebsiteDataStore) Identifier() obj.Object {
 //
 // ProxyConfigurations returns the collection as a Go slice.
 func (wwds *WKWebsiteDataStore) ProxyConfigurations() []obj.Object {
+	defer runtime.KeepAlive(wwds)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {

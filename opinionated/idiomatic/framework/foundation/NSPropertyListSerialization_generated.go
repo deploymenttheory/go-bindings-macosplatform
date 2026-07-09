@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func propertyListSerializationAdopt(id objc.ID) *PropertyListSerialization {
 
 // Description returns the object's -description text.
 func (pls *PropertyListSerialization) Description() string {
+	defer runtime.KeepAlive(pls)
 	return rt.Description(objref.IDOf(pls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pls *PropertyListSerialization) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pls)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pls *PropertyListSerialization) IsKind(className string) bool {
+	defer runtime.KeepAlive(pls)
 	return rt.IsKind(objref.IDOf(pls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pls *PropertyListSerialization) String() string {
+	defer runtime.KeepAlive(pls)
 	return rt.Description(objref.IDOf(pls))
 }
 
@@ -81,7 +87,7 @@ func (pls *PropertyListSerialization) WithObservationInfo(observationInfo unsafe
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (pls *PropertyListSerialization) WithScriptingProperties(scriptingProperties obj.Object) *PropertyListSerialization {
-	objc.Send[objc.ID](objref.IDOf(pls), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (pls *PropertyListSerialization) WithScriptingProperties(scriptingProperties map[string]obj.Object) *PropertyListSerialization {
+	objc.Send[objc.ID](objref.IDOf(pls), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return pls
 }

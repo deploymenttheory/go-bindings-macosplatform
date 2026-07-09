@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func workoutConfigurationAdopt(id objc.ID) *WorkoutConfiguration {
 
 // Description returns the object's -description text.
 func (wc *WorkoutConfiguration) Description() string {
+	defer runtime.KeepAlive(wc)
 	return rt.Description(objref.IDOf(wc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wc *WorkoutConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wc *WorkoutConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(wc)
 	return rt.IsKind(objref.IDOf(wc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wc *WorkoutConfiguration) String() string {
+	defer runtime.KeepAlive(wc)
 	return rt.Description(objref.IDOf(wc))
 }
 
@@ -92,30 +99,35 @@ func (wc *WorkoutConfiguration) WithSwimmingLocationType(swimmingLocationType Wo
 
 // WithLapLength sets the length of the lap for a workout session.
 func (wc *WorkoutConfiguration) WithLapLength(lapLength *Quantity) *WorkoutConfiguration {
+	defer runtime.KeepAlive(lapLength)
 	objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setLapLength:"), objref.IDOf(lapLength))
 	return wc
 }
 
 // ActivityType indicates the type of workout for the configuration.
 func (wc *WorkoutConfiguration) ActivityType() WorkoutActivityType {
+	defer runtime.KeepAlive(wc)
 	_r := objc.Send[WorkoutActivityType](objref.IDOf(wc), objc.RegisterName("activityType"))
 	return _r
 }
 
 // LocationType indicates the type of location (indoors vs. outdoors) for the configuration.
 func (wc *WorkoutConfiguration) LocationType() WorkoutSessionLocationType {
+	defer runtime.KeepAlive(wc)
 	_r := objc.Send[WorkoutSessionLocationType](objref.IDOf(wc), objc.RegisterName("locationType"))
 	return _r
 }
 
 // SwimmingLocationType indicates the type of swimming location (pool vs. open water) where the workout will take place.
 func (wc *WorkoutConfiguration) SwimmingLocationType() WorkoutSwimmingLocationType {
+	defer runtime.KeepAlive(wc)
 	_r := objc.Send[WorkoutSwimmingLocationType](objref.IDOf(wc), objc.RegisterName("swimmingLocationType"))
 	return _r
 }
 
 // LapLength indicates the length of the pool, when the workout location type is pool. This metric represents the length of the pool where the workout takes place. It should be a quantity with a unit representing length.
 func (wc *WorkoutConfiguration) LapLength() *Quantity {
+	defer runtime.KeepAlive(wc)
 	_r := objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("lapLength"))
 	return QuantityFromID(_r)
 }

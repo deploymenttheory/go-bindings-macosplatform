@@ -404,8 +404,8 @@ func (o *SCNLight) IESProfileURL() *foundation.NSURL {
 	return foundation.NSURLFromID(_ret)
 }
 
-func (o *SCNLight) SetIESProfileURL(iESProfileURL *foundation.NSURL) {
-	o.Ptr().Send(_sCNLightSelSetIESProfileURL, iESProfileURL.Ptr())
+func (o *SCNLight) SetIESProfileURL(iesProfileURL *foundation.NSURL) {
+	o.Ptr().Send(_sCNLightSelSetIESProfileURL, iesProfileURL.Ptr())
 }
 
 // @property sphericalHarmonicsCoefficients @abstract The receiver's spherical harmonics coefficients. @discussion Currently spherical harmonics are only supported by light probes (SCNLightTypeProbe). The data is an array of 27 32-bit floating-point values, containing three non-interleaved data sets corresponding to the red, green, and blue sets of coefficients.

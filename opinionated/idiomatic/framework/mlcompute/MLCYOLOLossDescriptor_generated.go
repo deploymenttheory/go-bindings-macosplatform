@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func yOLOLossDescriptorAdopt(id objc.ID) *YOLOLossDescriptor {
 
 // Description returns the object's -description text.
 func (yld *YOLOLossDescriptor) Description() string {
+	defer runtime.KeepAlive(yld)
 	return rt.Description(objref.IDOf(yld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (yld *YOLOLossDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(yld)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(yld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (yld *YOLOLossDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(yld)
 	return rt.IsKind(objref.IDOf(yld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (yld *YOLOLossDescriptor) String() string {
+	defer runtime.KeepAlive(yld)
 	return rt.Description(objref.IDOf(yld))
 }
 
@@ -122,60 +129,70 @@ func (yld *YOLOLossDescriptor) WithMaximumIOUForObjectAbsence(maximumIOUForObjec
 
 // AnchorBoxCount returns number of anchor boxes used to detect object per grid cell
 func (yld *YOLOLossDescriptor) AnchorBoxCount() int {
+	defer runtime.KeepAlive(yld)
 	_r := objc.Send[int](objref.IDOf(yld), objc.RegisterName("anchorBoxCount"))
 	return _r
 }
 
 // AnchorBoxes returns \p NSData containing the width and height for \p anchorBoxCount anchor boxes This \p NSData should have 2 floating-point values per anchor box which represent the width and height of the anchor box.
-func (yld *YOLOLossDescriptor) AnchorBoxes() obj.Object {
+func (yld *YOLOLossDescriptor) AnchorBoxes() []byte {
+	defer runtime.KeepAlive(yld)
 	_r := objc.Send[objc.ID](objref.IDOf(yld), objc.RegisterName("anchorBoxes"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ShouldRescore reports whether rescore pertains to multiplying the confidence groundTruth with IOU (intersection over union) of predicted bounding box and the groundTruth boundingBox. The default is true
 func (yld *YOLOLossDescriptor) ShouldRescore() bool {
+	defer runtime.KeepAlive(yld)
 	_r := objc.Send[bool](objref.IDOf(yld), objc.RegisterName("shouldRescore"))
 	return _r
 }
 
 // ScaleSpatialPositionLoss returns the scale factor for spatial position loss and loss gradient.  The default is 10.0
 func (yld *YOLOLossDescriptor) ScaleSpatialPositionLoss() float32 {
+	defer runtime.KeepAlive(yld)
 	_r := objc.Send[float32](objref.IDOf(yld), objc.RegisterName("scaleSpatialPositionLoss"))
 	return _r
 }
 
 // ScaleSpatialSizeLoss returns the scale factor for spatial size loss and loss gradient.  The default is 10.0
 func (yld *YOLOLossDescriptor) ScaleSpatialSizeLoss() float32 {
+	defer runtime.KeepAlive(yld)
 	_r := objc.Send[float32](objref.IDOf(yld), objc.RegisterName("scaleSpatialSizeLoss"))
 	return _r
 }
 
 // ScaleNoObjectConfidenceLoss returns the scale factor for no object confidence loss and loss gradient.  The default is 5.0
 func (yld *YOLOLossDescriptor) ScaleNoObjectConfidenceLoss() float32 {
+	defer runtime.KeepAlive(yld)
 	_r := objc.Send[float32](objref.IDOf(yld), objc.RegisterName("scaleNoObjectConfidenceLoss"))
 	return _r
 }
 
 // ScaleObjectConfidenceLoss returns the scale factor for object confidence loss and loss gradient.  The default is 100.0
 func (yld *YOLOLossDescriptor) ScaleObjectConfidenceLoss() float32 {
+	defer runtime.KeepAlive(yld)
 	_r := objc.Send[float32](objref.IDOf(yld), objc.RegisterName("scaleObjectConfidenceLoss"))
 	return _r
 }
 
 // ScaleClassLoss returns the scale factor for no object classes loss and loss gradient.  The default is 2.0
 func (yld *YOLOLossDescriptor) ScaleClassLoss() float32 {
+	defer runtime.KeepAlive(yld)
 	_r := objc.Send[float32](objref.IDOf(yld), objc.RegisterName("scaleClassLoss"))
 	return _r
 }
 
 // MinimumIOUForObjectPresence returns if the prediction IOU with groundTruth is higher than this value we consider it a confident object presence, The default is 0.7
 func (yld *YOLOLossDescriptor) MinimumIOUForObjectPresence() float32 {
+	defer runtime.KeepAlive(yld)
 	_r := objc.Send[float32](objref.IDOf(yld), objc.RegisterName("minimumIOUForObjectPresence"))
 	return _r
 }
 
 // MaximumIOUForObjectAbsence returns if the prediction IOU with groundTruth is lower than this value we consider it a confident object absence.  The default is 0.3
 func (yld *YOLOLossDescriptor) MaximumIOUForObjectAbsence() float32 {
+	defer runtime.KeepAlive(yld)
 	_r := objc.Send[float32](objref.IDOf(yld), objc.RegisterName("maximumIOUForObjectAbsence"))
 	return _r
 }

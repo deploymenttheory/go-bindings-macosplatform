@@ -5,6 +5,8 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func changeHistoryEventAdopt(id objc.ID) *ChangeHistoryEvent {
 
 // Description returns the object's -description text.
 func (che *ChangeHistoryEvent) Description() string {
+	defer runtime.KeepAlive(che)
 	return rt.Description(objref.IDOf(che))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (che *ChangeHistoryEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(che)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(che), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (che *ChangeHistoryEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(che)
 	return rt.IsKind(objref.IDOf(che), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (che *ChangeHistoryEvent) String() string {
+	defer runtime.KeepAlive(che)
 	return rt.Description(objref.IDOf(che))
 }
 

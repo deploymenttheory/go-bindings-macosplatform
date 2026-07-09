@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func stringDrawingContextAdopt(id objc.ID) *StringDrawingContext {
 
 // Description returns the object's -description text.
 func (sdc *StringDrawingContext) Description() string {
+	defer runtime.KeepAlive(sdc)
 	return rt.Description(objref.IDOf(sdc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sdc *StringDrawingContext) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sdc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sdc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sdc *StringDrawingContext) IsKind(className string) bool {
+	defer runtime.KeepAlive(sdc)
 	return rt.IsKind(objref.IDOf(sdc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sdc *StringDrawingContext) String() string {
+	defer runtime.KeepAlive(sdc)
 	return rt.Description(objref.IDOf(sdc))
 }
 
@@ -81,18 +88,21 @@ func (sdc *StringDrawingContext) WithMinimumScaleFactor(minimumScaleFactor float
 
 // MinimumScaleFactor returns the minimum scale factor.
 func (sdc *StringDrawingContext) MinimumScaleFactor() float64 {
+	defer runtime.KeepAlive(sdc)
 	_r := objc.Send[float64](objref.IDOf(sdc), objc.RegisterName("minimumScaleFactor"))
 	return _r
 }
 
 // ActualScaleFactor returns the actual scale factor.
 func (sdc *StringDrawingContext) ActualScaleFactor() float64 {
+	defer runtime.KeepAlive(sdc)
 	_r := objc.Send[float64](objref.IDOf(sdc), objc.RegisterName("actualScaleFactor"))
 	return _r
 }
 
 // TotalBounds returns the total bounds.
 func (sdc *StringDrawingContext) TotalBounds() corefoundation.CGRect {
+	defer runtime.KeepAlive(sdc)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sdc), objc.RegisterName("totalBounds"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,27 +47,33 @@ func nNImageNodeAdopt(id objc.ID) *NNImageNode {
 
 // Description returns the object's -description text.
 func (nin *NNImageNode) Description() string {
+	defer runtime.KeepAlive(nin)
 	return rt.Description(objref.IDOf(nin))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nin *NNImageNode) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nin)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nin), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nin *NNImageNode) IsKind(className string) bool {
+	defer runtime.KeepAlive(nin)
 	return rt.IsKind(objref.IDOf(nin), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nin *NNImageNode) String() string {
+	defer runtime.KeepAlive(nin)
 	return rt.Description(objref.IDOf(nin))
 }
 
 // NewNNImageNodeWithHandle creates a new NNImageNode.
 func NewNNImageNodeWithHandle(handle obj.Object) *NNImageNode {
+	defer runtime.KeepAlive(handle)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNImageNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHandle:"), objref.IDOf(handle))
 	return nNImageNodeAdopt(_id)
@@ -91,18 +99,21 @@ func (nin *NNImageNode) WithStopGradient(stopGradient bool) *NNImageNode {
 
 // ExportFromGraph reports whether tag a image node for view later Most image nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits. When exportFromGraph = true, the image is preserved and made available through the [MPSNNGraph encode... intermediateImages:... list. CAUTION: exporting an image from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the image. There will probably be a performance regression accordingly. This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: false
 func (nin *NNImageNode) ExportFromGraph() bool {
+	defer runtime.KeepAlive(nin)
 	_r := objc.Send[bool](objref.IDOf(nin), objc.RegisterName("exportFromGraph"))
 	return _r
 }
 
 // SynchronizeResource reports whether set to true to cause the resource to be synchronized with the CPU It is not needed on iOS/tvOS devices, where it does nothing.
 func (nin *NNImageNode) SynchronizeResource() bool {
+	defer runtime.KeepAlive(nin)
 	_r := objc.Send[bool](objref.IDOf(nin), objc.RegisterName("synchronizeResource"))
 	return _r
 }
 
 // StopGradient reports whether stop training graph automatic creation at this node. An inference graph of MPSNNFilterNodes, MPSNNStateNodes and MPSNNImageNodes can be automatically converted to a training graph using -[MPSNNFilterNode trainingGraphWithSourceGradient:nodeHandler:]. Sometimes, an inference graph may contain extra nodes at start to do operations like resampling or range adjustment that should not be part of the training graph. To prevent gradient operations for these extra nodes from being included in the training graph, set <undesired node>.resultImage.stopGradient = true. This will prevent gradient propagation beyond this MPSNNImageNode. Default: false
 func (nin *NNImageNode) StopGradient() bool {
+	defer runtime.KeepAlive(nin)
 	_r := objc.Send[bool](objref.IDOf(nin), objc.RegisterName("stopGradient"))
 	return _r
 }

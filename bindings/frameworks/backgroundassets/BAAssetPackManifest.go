@@ -39,9 +39,9 @@ func BAAssetPackManifestFromID(id objc.ID) *BAAssetPackManifest {
 }
 
 // Initializes a representation of a manifest in memory given a URL to the manifest’s representation as a JSON file on disk.
-func (o *BAAssetPackManifest) InitWithContentsOfURLApplicationGroupIdentifierError(uRL *foundation.NSURL, applicationGroupIdentifier *foundation.NSString) (*BAAssetPackManifest, error) {
+func (o *BAAssetPackManifest) InitWithContentsOfURLApplicationGroupIdentifierError(url *foundation.NSURL, applicationGroupIdentifier *foundation.NSString) (*BAAssetPackManifest, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManifestSelInitWithContentsOfURLApplicationGroupIdentifierError, uRL.Ptr(), applicationGroupIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManifestSelInitWithContentsOfURLApplicationGroupIdentifierError, url.Ptr(), applicationGroupIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

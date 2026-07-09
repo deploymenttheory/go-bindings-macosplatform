@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,12 +53,14 @@ func NewDOMStyleSheetList() *DOMStyleSheetList {
 
 // Item wraps the corresponding Objective-C method.
 func (dssl *DOMStyleSheetList) Item(index int) *DOMStyleSheet {
+	defer runtime.KeepAlive(dssl)
 	_r := objc.Send[objc.ID](objref.IDOf(dssl), objc.RegisterName("item:"), index)
 	return DOMStyleSheetFromID(_r)
 }
 
 // Length returns the length.
 func (dssl *DOMStyleSheetList) Length() int {
+	defer runtime.KeepAlive(dssl)
 	_r := objc.Send[int](objref.IDOf(dssl), objc.RegisterName("length"))
 	return _r
 }

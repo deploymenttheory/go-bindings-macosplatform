@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -62,6 +64,7 @@ func (vgdc *VirtioGraphicsDeviceConfiguration) WithScanouts(items ...*VirtioGrap
 //
 // Scanouts returns the collection as a Go slice.
 func (vgdc *VirtioGraphicsDeviceConfiguration) Scanouts() []*VirtioGraphicsScanoutConfiguration {
+	defer runtime.KeepAlive(vgdc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vgdc), objc.RegisterName("scanouts"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *VirtioGraphicsScanoutConfiguration {
 		return VirtioGraphicsScanoutConfigurationFromID(_id)

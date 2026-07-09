@@ -109,9 +109,9 @@ func (o *AVAudioSequencer) WriteToURLSMPTEResolutionReplaceExistingError(fileURL
 }
 
 // Gets a data object that contains the events from the sequence.
-func (o *AVAudioSequencer) DataWithSMPTEResolutionError(sMPTEResolution int) (*foundation.NSData, error) {
+func (o *AVAudioSequencer) DataWithSMPTEResolutionError(smpteResolution int) (*foundation.NSData, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSequencerSelDataWithSMPTEResolutionError, sMPTEResolution, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSequencerSelDataWithSMPTEResolutionError, smpteResolution, unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

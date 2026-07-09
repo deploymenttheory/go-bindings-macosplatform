@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,42 +51,52 @@ func proxyAdopt(id objc.ID) *Proxy {
 
 // Description returns the object's -description text.
 func (p *Proxy) Description() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (p *Proxy) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (p *Proxy) IsKind(className string) bool {
+	defer runtime.KeepAlive(p)
 	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (p *Proxy) String() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
 // ForwardInvocation passes a given invocation to the real object the proxy represents.
 func (p *Proxy) ForwardInvocation(invocation *Invocation) {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(invocation)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("forwardInvocation:"), objref.IDOf(invocation))
 }
 
 // Dealloc deallocates the memory occupied by the receiver.
 func (p *Proxy) Dealloc() {
+	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("dealloc"))
 }
 
 // Finalize the garbage collector invokes this method on the receiver before disposing of the memory it uses.
 func (p *Proxy) Finalize() {
+	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("finalize"))
 }
 
 // DebugDescription returns the debug description.
 func (p *Proxy) DebugDescription() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("debugDescription"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func polylineRendererAdopt(id objc.ID) *PolylineRenderer {
 
 // NewPolylineRendererWithPolyline creates a new overlay view using the specified polyline overlay object.
 func NewPolylineRendererWithPolyline(polyline *Polyline) *PolylineRenderer {
+	defer runtime.KeepAlive(polyline)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKPolylineRenderer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPolyline:"), objref.IDOf(polyline))
 	return polylineRendererAdopt(_id)
@@ -67,12 +70,14 @@ func (pr *PolylineRenderer) WithStrokeEnd(strokeEnd float64) *PolylineRenderer {
 
 // WithFillColor sets the fill color to use for the path.
 func (pr *PolylineRenderer) WithFillColor(fillColor obj.Object) *PolylineRenderer {
+	defer runtime.KeepAlive(fillColor)
 	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 	return pr
 }
 
 // WithStrokeColor sets the stroke color to use for the path.
 func (pr *PolylineRenderer) WithStrokeColor(strokeColor obj.Object) *PolylineRenderer {
+	defer runtime.KeepAlive(strokeColor)
 	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 	return pr
 }
@@ -110,6 +115,7 @@ func (pr *PolylineRenderer) WithShouldRasterize(shouldRasterize bool) *PolylineR
 
 // WithPath sets the path representing the overlay’s shape.
 func (pr *PolylineRenderer) WithPath(path obj.Object) *PolylineRenderer {
+	defer runtime.KeepAlive(path)
 	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return pr
 }
@@ -122,18 +128,21 @@ func (pr *PolylineRenderer) WithAlpha(alpha float64) *PolylineRenderer {
 
 // Polyline returns the polyline.
 func (pr *PolylineRenderer) Polyline() *Polyline {
+	defer runtime.KeepAlive(pr)
 	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("polyline"))
 	return PolylineFromID(_r)
 }
 
 // StrokeStart returns the stroke start.
 func (pr *PolylineRenderer) StrokeStart() float64 {
+	defer runtime.KeepAlive(pr)
 	_r := objc.Send[float64](objref.IDOf(pr), objc.RegisterName("strokeStart"))
 	return _r
 }
 
 // StrokeEnd returns the stroke end.
 func (pr *PolylineRenderer) StrokeEnd() float64 {
+	defer runtime.KeepAlive(pr)
 	_r := objc.Send[float64](objref.IDOf(pr), objc.RegisterName("strokeEnd"))
 	return _r
 }

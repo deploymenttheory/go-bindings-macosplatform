@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,6 +49,9 @@ func mTRClusterDescriptorAdopt(id objc.ID) *MTRClusterDescriptor {
 
 // NewMTRClusterDescriptorWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func NewMTRClusterDescriptorWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterDescriptor {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterDescriptorAdopt(_id)
@@ -53,69 +59,91 @@ func NewMTRClusterDescriptorWithDeviceEndpointIDQueue(device *MTRDevice, endpoin
 
 // NewMTRClusterDescriptorWithDeviceEndpointQueue creates a new MTRClusterDescriptor.
 func NewMTRClusterDescriptorWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterDescriptor {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterDescriptorAdopt(_id)
 }
 
 // ReadAttributeDeviceTypeListWithParams reads attribute device type list with params.
-func (mcd *MTRClusterDescriptor) ReadAttributeDeviceTypeListWithParams(params *MTRReadParams) obj.Object {
+func (mcd *MTRClusterDescriptor) ReadAttributeDeviceTypeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributeDeviceTypeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeServerListWithParams reads attribute server list with params.
-func (mcd *MTRClusterDescriptor) ReadAttributeServerListWithParams(params *MTRReadParams) obj.Object {
+func (mcd *MTRClusterDescriptor) ReadAttributeServerListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributeServerListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClientListWithParams reads attribute client list with params.
-func (mcd *MTRClusterDescriptor) ReadAttributeClientListWithParams(params *MTRReadParams) obj.Object {
+func (mcd *MTRClusterDescriptor) ReadAttributeClientListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributeClientListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePartsListWithParams reads attribute parts list with params.
-func (mcd *MTRClusterDescriptor) ReadAttributePartsListWithParams(params *MTRReadParams) obj.Object {
+func (mcd *MTRClusterDescriptor) ReadAttributePartsListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributePartsListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcd *MTRClusterDescriptor) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcd *MTRClusterDescriptor) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcd *MTRClusterDescriptor) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcd *MTRClusterDescriptor) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcd *MTRClusterDescriptor) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcd *MTRClusterDescriptor) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcd *MTRClusterDescriptor) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcd *MTRClusterDescriptor) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcd *MTRClusterDescriptor) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcd *MTRClusterDescriptor) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDeviceListWithParams reads attribute device list with params.
-func (mcd *MTRClusterDescriptor) ReadAttributeDeviceListWithParams(params *MTRReadParams) obj.Object {
+func (mcd *MTRClusterDescriptor) ReadAttributeDeviceListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributeDeviceListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterDescriptor)(nil)

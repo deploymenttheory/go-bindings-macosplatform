@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func inflectionRuleAdopt(id objc.ID) *InflectionRule {
 
 // Description returns the object's -description text.
 func (ir *InflectionRule) Description() string {
+	defer runtime.KeepAlive(ir)
 	return rt.Description(objref.IDOf(ir))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ir *InflectionRule) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ir)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ir), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ir *InflectionRule) IsKind(className string) bool {
+	defer runtime.KeepAlive(ir)
 	return rt.IsKind(objref.IDOf(ir), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ir *InflectionRule) String() string {
+	defer runtime.KeepAlive(ir)
 	return rt.Description(objref.IDOf(ir))
 }
 
@@ -77,8 +83,8 @@ func (ir *InflectionRule) WithObservationInfo(observationInfo unsafe.Pointer) *I
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ir *InflectionRule) WithScriptingProperties(scriptingProperties obj.Object) *InflectionRule {
-	objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ir *InflectionRule) WithScriptingProperties(scriptingProperties map[string]obj.Object) *InflectionRule {
+	objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ir
 }
 

@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func nETunnelNetworkSettingsAdopt(id objc.ID) *NETunnelNetworkSettings {
 
 // Description returns the object's -description text.
 func (ntns *NETunnelNetworkSettings) Description() string {
+	defer runtime.KeepAlive(ntns)
 	return rt.Description(objref.IDOf(ntns))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ntns *NETunnelNetworkSettings) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ntns)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ntns), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ntns *NETunnelNetworkSettings) IsKind(className string) bool {
+	defer runtime.KeepAlive(ntns)
 	return rt.IsKind(objref.IDOf(ntns), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ntns *NETunnelNetworkSettings) String() string {
+	defer runtime.KeepAlive(ntns)
 	return rt.Description(objref.IDOf(ntns))
 }
 
@@ -76,19 +83,22 @@ func NewNETunnelNetworkSettingsWithTunnelRemoteAddress(address string) *NETunnel
 }
 
 // WithDNSSettings sets the tunnel DNS settings.
-func (ntns *NETunnelNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NETunnelNetworkSettings {
-	objc.Send[objc.ID](objref.IDOf(ntns), objc.RegisterName("setDNSSettings:"), objref.IDOf(dNSSettings))
+func (ntns *NETunnelNetworkSettings) WithDNSSettings(dnsSettings NEDNSSettingsProvider) *NETunnelNetworkSettings {
+	defer runtime.KeepAlive(dnsSettings)
+	objc.Send[objc.ID](objref.IDOf(ntns), objc.RegisterName("setDNSSettings:"), objref.IDOf(dnsSettings))
 	return ntns
 }
 
 // WithProxySettings sets the tunnel HTTP proxy settings.
 func (ntns *NETunnelNetworkSettings) WithProxySettings(proxySettings *NEProxySettings) *NETunnelNetworkSettings {
+	defer runtime.KeepAlive(proxySettings)
 	objc.Send[objc.ID](objref.IDOf(ntns), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
 	return ntns
 }
 
 // TunnelRemoteAddress returns a string containing the IP address of the remote endpoint that is providing the tunnel service.
 func (ntns *NETunnelNetworkSettings) TunnelRemoteAddress() string {
+	defer runtime.KeepAlive(ntns)
 	_r := objc.Send[objc.ID](objref.IDOf(ntns), objc.RegisterName("tunnelRemoteAddress"))
 	if _r == 0 {
 		return ""
@@ -98,12 +108,14 @@ func (ntns *NETunnelNetworkSettings) TunnelRemoteAddress() string {
 
 // DNSSettings returns an NEDNSSettings object that contains the desired tunnel DNS settings.
 func (ntns *NETunnelNetworkSettings) DNSSettings() *NEDNSSettings {
+	defer runtime.KeepAlive(ntns)
 	_r := objc.Send[objc.ID](objref.IDOf(ntns), objc.RegisterName("DNSSettings"))
 	return NEDNSSettingsFromID(_r)
 }
 
 // ProxySettings returns an NEProxySettings object that contains the desired tunnel proxy settings.
 func (ntns *NETunnelNetworkSettings) ProxySettings() *NEProxySettings {
+	defer runtime.KeepAlive(ntns)
 	_r := objc.Send[objc.ID](objref.IDOf(ntns), objc.RegisterName("proxySettings"))
 	return NEProxySettingsFromID(_r)
 }

@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -71,24 +73,28 @@ func (cns *CoherentNoiseSource) WithSeed(seed int32) *CoherentNoiseSource {
 
 // Frequency returns the frequency.
 func (cns *CoherentNoiseSource) Frequency() float64 {
+	defer runtime.KeepAlive(cns)
 	_r := objc.Send[float64](objref.IDOf(cns), objc.RegisterName("frequency"))
 	return _r
 }
 
 // OctaveCount returns the octave count.
 func (cns *CoherentNoiseSource) OctaveCount() int {
+	defer runtime.KeepAlive(cns)
 	_r := objc.Send[int](objref.IDOf(cns), objc.RegisterName("octaveCount"))
 	return _r
 }
 
 // Lacunarity returns the lacunarity.
 func (cns *CoherentNoiseSource) Lacunarity() float64 {
+	defer runtime.KeepAlive(cns)
 	_r := objc.Send[float64](objref.IDOf(cns), objc.RegisterName("lacunarity"))
 	return _r
 }
 
 // Seed returns the seed.
 func (cns *CoherentNoiseSource) Seed() int32 {
+	defer runtime.KeepAlive(cns)
 	_r := objc.Send[int32](objref.IDOf(cns), objc.RegisterName("seed"))
 	return _r
 }

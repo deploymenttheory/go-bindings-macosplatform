@@ -6,11 +6,13 @@ package cloudkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,9 +58,9 @@ func NewFetchShareMetadataOperation() *FetchShareMetadataOperation {
 }
 
 // NewFetchShareMetadataOperationWithShareURLs creates an operation for fetching the metadata for the specified shares.
-func NewFetchShareMetadataOperationWithShareURLs(shareURLs []obj.Object) *FetchShareMetadataOperation {
+func NewFetchShareMetadataOperationWithShareURLs(shareURLs []string) *FetchShareMetadataOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKFetchShareMetadataOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShareURLs:"), purego.SliceToNSArray(shareURLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShareURLs:"), purego.SliceToNSArray(shareURLs, func(_v string) objc.ID { return rt.FileURL(_v) }))
 	return fetchShareMetadataOperationAdopt(_id)
 }
 
@@ -84,12 +86,14 @@ func (fsmo *FetchShareMetadataOperation) WithRootRecordDesiredKeys(items ...obj.
 
 // WithConfiguration sets the operation’s configuration.
 func (fsmo *FetchShareMetadataOperation) WithConfiguration(configuration *OperationConfiguration) *FetchShareMetadataOperation {
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return fsmo
 }
 
 // WithGroup sets the operation’s group.
 func (fsmo *FetchShareMetadataOperation) WithGroup(group *OperationGroup) *FetchShareMetadataOperation {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return fsmo
 }
@@ -102,6 +106,7 @@ func (fsmo *FetchShareMetadataOperation) WithLongLivedOperationWasPersistedBlock
 
 // WithContainer sets the operation's container.
 func (fsmo *FetchShareMetadataOperation) WithContainer(container *Container) *FetchShareMetadataOperation {
+	defer runtime.KeepAlive(container)
 	objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return fsmo
 }
@@ -133,13 +138,15 @@ func (fsmo *FetchShareMetadataOperation) WithTimeoutIntervalForResource(timeoutI
 // ShareURLs returns the URLs of the shares to fetch. Use this property to view or change the URLs of the shares to fetch. If you intend to specify or change this property's value, do so before you execute the operation or submit it to a queue.
 //
 // ShareURLs returns the collection as a Go slice.
-func (fsmo *FetchShareMetadataOperation) ShareURLs() []obj.Object {
+func (fsmo *FetchShareMetadataOperation) ShareURLs() []string {
+	defer runtime.KeepAlive(fsmo)
 	_arr := objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("shareURLs"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return rt.URLString(_id) })
 }
 
 // ShouldFetchRootRecord reports whether to retrieve the root record. For a shared record hierarchy, set this property to <doc://com.apple.documentation/documentation/swift/true> to include the root record in the fetched share metadata. CloudKit ignores this property for a shared record zone because, unlike a shared record hierarchy, it doesn't have a nominated root record. The default value is <doc://com.apple.documentation/documentation/swift/false>.
 func (fsmo *FetchShareMetadataOperation) ShouldFetchRootRecord() bool {
+	defer runtime.KeepAlive(fsmo)
 	_r := objc.Send[bool](objref.IDOf(fsmo), objc.RegisterName("shouldFetchRootRecord"))
 	return _r
 }
@@ -148,6 +155,7 @@ func (fsmo *FetchShareMetadataOperation) ShouldFetchRootRecord() bool {
 //
 // RootRecordDesiredKeys returns the collection as a Go slice.
 func (fsmo *FetchShareMetadataOperation) RootRecordDesiredKeys() []obj.Object {
+	defer runtime.KeepAlive(fsmo)
 	_arr := objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("rootRecordDesiredKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -156,6 +164,7 @@ func (fsmo *FetchShareMetadataOperation) RootRecordDesiredKeys() []obj.Object {
 //
 // SetFetchShareMetadataCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (fsmo *FetchShareMetadataOperation) SetFetchShareMetadataCompletionBlock(ctx context.Context) error {
+	defer runtime.KeepAlive(fsmo)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error

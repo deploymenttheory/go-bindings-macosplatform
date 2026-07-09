@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func gridColumnAdopt(id objc.ID) *GridColumn {
 
 // Description returns the object's -description text.
 func (gc *GridColumn) Description() string {
+	defer runtime.KeepAlive(gc)
 	return rt.Description(objref.IDOf(gc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gc *GridColumn) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gc *GridColumn) IsKind(className string) bool {
+	defer runtime.KeepAlive(gc)
 	return rt.IsKind(objref.IDOf(gc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gc *GridColumn) String() string {
+	defer runtime.KeepAlive(gc)
 	return rt.Description(objref.IDOf(gc))
 }
 
@@ -121,6 +128,7 @@ func (gc *GridColumn) WithHidden(hidden bool) *GridColumn {
 
 // CellAtIndex wraps the corresponding Objective-C method.
 func (gc *GridColumn) CellAtIndex(index int) *GridCell {
+	defer runtime.KeepAlive(gc)
 	var _mainthread0 *GridCell
 	purego.Main(func() {
 		_mainthread0 = func() *GridCell {
@@ -134,6 +142,7 @@ func (gc *GridColumn) CellAtIndex(index int) *GridCell {
 
 // MergeCellsInRange wraps the corresponding Objective-C method.
 func (gc *GridColumn) MergeCellsInRange(range_ foundation.NSRange) {
+	defer runtime.KeepAlive(gc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("mergeCellsInRange:"), range_)
 	})
@@ -142,6 +151,7 @@ func (gc *GridColumn) MergeCellsInRange(range_ foundation.NSRange) {
 
 // GridView returns the grid view.
 func (gc *GridColumn) GridView() *GridView {
+	defer runtime.KeepAlive(gc)
 	var _mainthread0 *GridView
 	purego.Main(func() {
 		_mainthread0 = func() *GridView {
@@ -155,6 +165,7 @@ func (gc *GridColumn) GridView() *GridView {
 
 // NumberOfCells returns the number of cells.
 func (gc *GridColumn) NumberOfCells() int {
+	defer runtime.KeepAlive(gc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -168,6 +179,7 @@ func (gc *GridColumn) NumberOfCells() int {
 
 // XPlacement returns the x placement.
 func (gc *GridColumn) XPlacement() GridCellPlacement {
+	defer runtime.KeepAlive(gc)
 	var _mainthread0 GridCellPlacement
 	purego.Main(func() {
 		_mainthread0 = func() GridCellPlacement {
@@ -181,6 +193,7 @@ func (gc *GridColumn) XPlacement() GridCellPlacement {
 
 // Width returns the width.
 func (gc *GridColumn) Width() float64 {
+	defer runtime.KeepAlive(gc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -194,6 +207,7 @@ func (gc *GridColumn) Width() float64 {
 
 // LeadingPadding returns the leading padding.
 func (gc *GridColumn) LeadingPadding() float64 {
+	defer runtime.KeepAlive(gc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -207,6 +221,7 @@ func (gc *GridColumn) LeadingPadding() float64 {
 
 // TrailingPadding returns the trailing padding.
 func (gc *GridColumn) TrailingPadding() float64 {
+	defer runtime.KeepAlive(gc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -220,6 +235,7 @@ func (gc *GridColumn) TrailingPadding() float64 {
 
 // IsHidden reports whether the object is hidden.
 func (gc *GridColumn) IsHidden() bool {
+	defer runtime.KeepAlive(gc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

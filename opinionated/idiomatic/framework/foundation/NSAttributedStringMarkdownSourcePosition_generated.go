@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func attributedStringMarkdownSourcePositionAdopt(id objc.ID) *AttributedStringMa
 
 // Description returns the object's -description text.
 func (asmsp *AttributedStringMarkdownSourcePosition) Description() string {
+	defer runtime.KeepAlive(asmsp)
 	return rt.Description(objref.IDOf(asmsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (asmsp *AttributedStringMarkdownSourcePosition) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(asmsp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(asmsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (asmsp *AttributedStringMarkdownSourcePosition) IsKind(className string) bool {
+	defer runtime.KeepAlive(asmsp)
 	return rt.IsKind(objref.IDOf(asmsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (asmsp *AttributedStringMarkdownSourcePosition) String() string {
+	defer runtime.KeepAlive(asmsp)
 	return rt.Description(objref.IDOf(asmsp))
 }
 
@@ -82,31 +88,35 @@ func (asmsp *AttributedStringMarkdownSourcePosition) WithObservationInfo(observa
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (asmsp *AttributedStringMarkdownSourcePosition) WithScriptingProperties(scriptingProperties obj.Object) *AttributedStringMarkdownSourcePosition {
-	objc.Send[objc.ID](objref.IDOf(asmsp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (asmsp *AttributedStringMarkdownSourcePosition) WithScriptingProperties(scriptingProperties map[string]obj.Object) *AttributedStringMarkdownSourcePosition {
+	objc.Send[objc.ID](objref.IDOf(asmsp), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return asmsp
 }
 
 // StartLine returns the start line.
 func (asmsp *AttributedStringMarkdownSourcePosition) StartLine() int {
+	defer runtime.KeepAlive(asmsp)
 	_r := objc.Send[int](objref.IDOf(asmsp), objc.RegisterName("startLine"))
 	return _r
 }
 
 // StartColumn returns the start column.
 func (asmsp *AttributedStringMarkdownSourcePosition) StartColumn() int {
+	defer runtime.KeepAlive(asmsp)
 	_r := objc.Send[int](objref.IDOf(asmsp), objc.RegisterName("startColumn"))
 	return _r
 }
 
 // EndLine returns the end line.
 func (asmsp *AttributedStringMarkdownSourcePosition) EndLine() int {
+	defer runtime.KeepAlive(asmsp)
 	_r := objc.Send[int](objref.IDOf(asmsp), objc.RegisterName("endLine"))
 	return _r
 }
 
 // EndColumn returns the end column.
 func (asmsp *AttributedStringMarkdownSourcePosition) EndColumn() int {
+	defer runtime.KeepAlive(asmsp)
 	_r := objc.Send[int](objref.IDOf(asmsp), objc.RegisterName("endColumn"))
 	return _r
 }

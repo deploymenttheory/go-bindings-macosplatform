@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func queryCursorAdopt(id objc.ID) *QueryCursor {
 
 // Description returns the object's -description text.
 func (qc *QueryCursor) Description() string {
+	defer runtime.KeepAlive(qc)
 	return rt.Description(objref.IDOf(qc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (qc *QueryCursor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(qc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(qc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (qc *QueryCursor) IsKind(className string) bool {
+	defer runtime.KeepAlive(qc)
 	return rt.IsKind(objref.IDOf(qc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (qc *QueryCursor) String() string {
+	defer runtime.KeepAlive(qc)
 	return rt.Description(objref.IDOf(qc))
 }
 

@@ -43,9 +43,9 @@ func VZNetworkBlockDeviceStorageDeviceAttachmentFromID(id objc.ID) *VZNetworkBlo
 }
 
 // Creates a new network block device storage attachment from an NBD Uniform Resource Indicator (URI) represented as a URL, timeout value, and read-only and synchronization modes that you provide.
-func (o *VZNetworkBlockDeviceStorageDeviceAttachment) InitWithURLTimeoutForcedReadOnlySynchronizationModeError(uRL *foundation.NSURL, timeout float64, forcedReadOnly bool, synchronizationMode VZDiskSynchronizationMode) (*VZNetworkBlockDeviceStorageDeviceAttachment, error) {
+func (o *VZNetworkBlockDeviceStorageDeviceAttachment) InitWithURLTimeoutForcedReadOnlySynchronizationModeError(url *foundation.NSURL, timeout float64, forcedReadOnly bool, synchronizationMode VZDiskSynchronizationMode) (*VZNetworkBlockDeviceStorageDeviceAttachment, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _vZNetworkBlockDeviceStorageDeviceAttachmentSelInitWithURLTimeoutForcedReadOnlySynchronizationModeError, uRL.Ptr(), timeout, forcedReadOnly, synchronizationMode, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _vZNetworkBlockDeviceStorageDeviceAttachmentSelInitWithURLTimeoutForcedReadOnlySynchronizationModeError, url.Ptr(), timeout, forcedReadOnly, synchronizationMode, unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -56,9 +56,9 @@ func (o *VZNetworkBlockDeviceStorageDeviceAttachment) InitWithURLTimeoutForcedRe
 }
 
 // Creates a new network block device (NBD) storage attachment from an NDB Uniform Resource Indicator (URI) represented as a URL that you provide.
-func (o *VZNetworkBlockDeviceStorageDeviceAttachment) InitWithURLError(uRL *foundation.NSURL) (*VZNetworkBlockDeviceStorageDeviceAttachment, error) {
+func (o *VZNetworkBlockDeviceStorageDeviceAttachment) InitWithURLError(url *foundation.NSURL) (*VZNetworkBlockDeviceStorageDeviceAttachment, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _vZNetworkBlockDeviceStorageDeviceAttachmentSelInitWithURLError, uRL.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _vZNetworkBlockDeviceStorageDeviceAttachmentSelInitWithURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -69,9 +69,9 @@ func (o *VZNetworkBlockDeviceStorageDeviceAttachment) InitWithURLError(uRL *foun
 }
 
 // Checks if the URL is a valid network block device URL.
-func VZNetworkBlockDeviceStorageDeviceAttachmentValidateURLError(uRL *foundation.NSURL) (bool, error) {
+func VZNetworkBlockDeviceStorageDeviceAttachmentValidateURLError(url *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](objc.ID(_clsVZNetworkBlockDeviceStorageDeviceAttachment), _vZNetworkBlockDeviceStorageDeviceAttachmentSelValidateURLError, uRL.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](objc.ID(_clsVZNetworkBlockDeviceStorageDeviceAttachment), _vZNetworkBlockDeviceStorageDeviceAttachmentSelValidateURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}

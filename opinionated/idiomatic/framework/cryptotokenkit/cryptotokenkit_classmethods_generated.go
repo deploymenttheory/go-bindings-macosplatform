@@ -6,15 +6,15 @@ package cryptotokenkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // DataForTag encodes a specified tag using BER-TLV tag encoding rules.
-func DataForTag(tag uint64) obj.Object {
+func DataForTag(tag uint64) []byte {
 	_r := objc.Send[objc.ID](objc.ID(_class("TKBERTLVRecord")), objc.RegisterName("dataForTag:"), tag)
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // DefaultManager returns global pool of SmartCard reader slots. macOS: Note that defaultManager instance is accessible only if the calling application has 'com.apple.security.smartcard' entitlement set to Boolean:YES.  If the calling application does not have this entitlement, defaultManager is always set to nil. iOS: The defaultManager instance is always accessible.
@@ -24,14 +24,14 @@ func DefaultManager() *SmartCardSlotManager {
 }
 
 // RecordFromData creates and returns a TLV record from by parsing the specified data.
-func RecordFromData(data obj.Object) *TLVRecord {
-	_r := objc.Send[objc.ID](objc.ID(_class("TKTLVRecord")), objc.RegisterName("recordFromData:"), objref.IDOf(data))
+func RecordFromData(data []byte) *TLVRecord {
+	_r := objc.Send[objc.ID](objc.ID(_class("TKTLVRecord")), objc.RegisterName("recordFromData:"), rt.BytesToNSData(data))
 	return TLVRecordFromID(_r)
 }
 
 // SequenceOfRecordsFromData creates and returns an array of TLV records from the specified data.
-func SequenceOfRecordsFromData(data obj.Object) []*TLVRecord {
-	_r := objc.Send[objc.ID](objc.ID(_class("TKTLVRecord")), objc.RegisterName("sequenceOfRecordsFromData:"), objref.IDOf(data))
+func SequenceOfRecordsFromData(data []byte) []*TLVRecord {
+	_r := objc.Send[objc.ID](objc.ID(_class("TKTLVRecord")), objc.RegisterName("sequenceOfRecordsFromData:"), rt.BytesToNSData(data))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *TLVRecord { return TLVRecordFromID(_id) })
 }
 

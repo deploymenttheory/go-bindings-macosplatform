@@ -5,6 +5,8 @@
 package datadetection
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewMatchMoneyAmount() *MatchMoneyAmount {
 
 // Currency returns a string that contains an ISO currency code, which the data detection system identifies from the matched string and user preferences.
 func (mma *MatchMoneyAmount) Currency() string {
+	defer runtime.KeepAlive(mma)
 	_r := objc.Send[objc.ID](objref.IDOf(mma), objc.RegisterName("currency"))
 	if _r == 0 {
 		return ""
@@ -62,6 +65,7 @@ func (mma *MatchMoneyAmount) Currency() string {
 
 // Amount returns a number that represents an amount of money.
 func (mma *MatchMoneyAmount) Amount() float64 {
+	defer runtime.KeepAlive(mma)
 	_r := objc.Send[float64](objref.IDOf(mma), objc.RegisterName("amount"))
 	return _r
 }

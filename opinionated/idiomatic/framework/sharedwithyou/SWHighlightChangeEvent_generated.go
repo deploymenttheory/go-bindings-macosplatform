@@ -5,6 +5,8 @@
 package sharedwithyou
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func highlightChangeEventAdopt(id objc.ID) *HighlightChangeEvent {
 
 // Description returns the object's -description text.
 func (hce *HighlightChangeEvent) Description() string {
+	defer runtime.KeepAlive(hce)
 	return rt.Description(objref.IDOf(hce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hce *HighlightChangeEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hce)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hce *HighlightChangeEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(hce)
 	return rt.IsKind(objref.IDOf(hce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hce *HighlightChangeEvent) String() string {
+	defer runtime.KeepAlive(hce)
 	return rt.Description(objref.IDOf(hce))
 }
 
 // NewHighlightChangeEventWithHighlightTrigger creates and initializes a change event.
 func NewHighlightChangeEventWithHighlightTrigger(highlight *Highlight, trigger HighlightChangeEventTrigger) *HighlightChangeEvent {
+	defer runtime.KeepAlive(highlight)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWHighlightChangeEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:trigger:"), objref.IDOf(highlight), trigger)
 	return highlightChangeEventAdopt(_id)
@@ -75,12 +83,14 @@ func NewHighlightChangeEventWithHighlightTrigger(highlight *Highlight, trigger H
 
 // ChangeEventTrigger returns the change event trigger.
 func (hce *HighlightChangeEvent) ChangeEventTrigger() HighlightChangeEventTrigger {
+	defer runtime.KeepAlive(hce)
 	_r := objc.Send[HighlightChangeEventTrigger](objref.IDOf(hce), objc.RegisterName("changeEventTrigger"))
 	return _r
 }
 
 // HighlightURL returns the highlight URL.
-func (hce *HighlightChangeEvent) HighlightURL() obj.Object {
+func (hce *HighlightChangeEvent) HighlightURL() string {
+	defer runtime.KeepAlive(hce)
 	_r := objc.Send[objc.ID](objref.IDOf(hce), objc.RegisterName("highlightURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

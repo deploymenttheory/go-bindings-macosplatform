@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -70,6 +72,7 @@ func (nrfcsn *NNReductionFeatureChannelsSumNode) WithLabel(label string) *NNRedu
 
 // Weight returns a scale factor to apply to each feature channel sum.
 func (nrfcsn *NNReductionFeatureChannelsSumNode) Weight() float32 {
+	defer runtime.KeepAlive(nrfcsn)
 	_r := objc.Send[float32](objref.IDOf(nrfcsn), objc.RegisterName("weight"))
 	return _r
 }

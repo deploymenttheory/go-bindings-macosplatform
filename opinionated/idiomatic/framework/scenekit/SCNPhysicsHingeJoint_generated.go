@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewPhysicsHingeJoint() *PhysicsHingeJoint {
 
 // BodyA returns the body a.
 func (phj *PhysicsHingeJoint) BodyA() *PhysicsBody {
+	defer runtime.KeepAlive(phj)
 	_r := objc.Send[objc.ID](objref.IDOf(phj), objc.RegisterName("bodyA"))
 	return PhysicsBodyFromID(_r)
 }
 
 // BodyB returns the body b.
 func (phj *PhysicsHingeJoint) BodyB() *PhysicsBody {
+	defer runtime.KeepAlive(phj)
 	_r := objc.Send[objc.ID](objref.IDOf(phj), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)
 }

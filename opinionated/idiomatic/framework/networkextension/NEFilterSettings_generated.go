@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nEFilterSettingsAdopt(id objc.ID) *NEFilterSettings {
 
 // Description returns the object's -description text.
 func (nfs *NEFilterSettings) Description() string {
+	defer runtime.KeepAlive(nfs)
 	return rt.Description(objref.IDOf(nfs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nfs *NEFilterSettings) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nfs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nfs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nfs *NEFilterSettings) IsKind(className string) bool {
+	defer runtime.KeepAlive(nfs)
 	return rt.IsKind(objref.IDOf(nfs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nfs *NEFilterSettings) String() string {
+	defer runtime.KeepAlive(nfs)
 	return rt.Description(objref.IDOf(nfs))
 }
 
@@ -77,12 +84,14 @@ func NewNEFilterSettingsWithRulesDefaultAction(rules []*NEFilterRule, defaultAct
 //
 // Rules returns the collection as a Go slice.
 func (nfs *NEFilterSettings) Rules() []*NEFilterRule {
+	defer runtime.KeepAlive(nfs)
 	_arr := objc.Send[objc.ID](objref.IDOf(nfs), objc.RegisterName("rules"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEFilterRule { return NEFilterRuleFromID(_id) })
 }
 
 // DefaultAction returns an NEFilterAction containing the default action to take for flows of network data that do not match any of the specified rules.
 func (nfs *NEFilterSettings) DefaultAction() NEFilterAction {
+	defer runtime.KeepAlive(nfs)
 	_r := objc.Send[NEFilterAction](objref.IDOf(nfs), objc.RegisterName("defaultAction"))
 	return _r
 }

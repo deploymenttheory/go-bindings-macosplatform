@@ -5,6 +5,8 @@
 package photosui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -50,33 +52,40 @@ func projectElementAdopt(id objc.ID) *ProjectElement {
 
 // Description returns the object's -description text.
 func (pe *ProjectElement) Description() string {
+	defer runtime.KeepAlive(pe)
 	return rt.Description(objref.IDOf(pe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pe *ProjectElement) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pe *ProjectElement) IsKind(className string) bool {
+	defer runtime.KeepAlive(pe)
 	return rt.IsKind(objref.IDOf(pe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pe *ProjectElement) String() string {
+	defer runtime.KeepAlive(pe)
 	return rt.Description(objref.IDOf(pe))
 }
 
 // Weight returns relative significance of any element in the section content is defined by it's weight. Values range from 0.0 to 1.0 where the higher numbers represent higher overall significance. Projects that allow a user to reduce the number of elements in any section content can use this hint to determine which elements are most important to keep in order to preserve context. Default is 0.5.
 func (pe *ProjectElement) Weight() float64 {
+	defer runtime.KeepAlive(pe)
 	_r := objc.Send[float64](objref.IDOf(pe), objc.RegisterName("weight"))
 	return _r
 }
 
 // Placement returns placement of elements in the suggested layout is provided in grid space coordinates. For example, a rect of (0,0,3,4) represents a placement in the upper-left of the layout grid that is 3 grid units wide by 4 grid units high. For layout grids with more than one column, the values in the rect will always be integral. For fixed layouts, rect values will be in fractional unit values. If suggested placement could not be determined at time of project creation, placement will contain CGRectNull.
 func (pe *ProjectElement) Placement() corefoundation.CGRect {
+	defer runtime.KeepAlive(pe)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(pe), objc.RegisterName("placement"))
 	return _r
 }

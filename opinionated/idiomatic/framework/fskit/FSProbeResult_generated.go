@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func probeResultAdopt(id objc.ID) *ProbeResult {
 
 // Description returns the object's -description text.
 func (pr *ProbeResult) Description() string {
+	defer runtime.KeepAlive(pr)
 	return rt.Description(objref.IDOf(pr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pr *ProbeResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pr *ProbeResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(pr)
 	return rt.IsKind(objref.IDOf(pr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pr *ProbeResult) String() string {
+	defer runtime.KeepAlive(pr)
 	return rt.Description(objref.IDOf(pr))
 }
 
@@ -74,12 +81,14 @@ func NewProbeResult() *ProbeResult {
 
 // Result returns the match result, representing the recognition and usability of a probed resource.
 func (pr *ProbeResult) Result() MatchResult {
+	defer runtime.KeepAlive(pr)
 	_r := objc.Send[MatchResult](objref.IDOf(pr), objc.RegisterName("result"))
 	return _r
 }
 
 // Name returns the resource name, as found during the probe operation. This value is non-`nil` unless the “FSProbeResult/result“ is “FSMatchResult/notRecognized`. For formats that lack a name, this value may be an empty string. This value can also be an empty string if the format supports a name, but the value isn't set yet.
 func (pr *ProbeResult) Name() string {
+	defer runtime.KeepAlive(pr)
 	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -89,6 +98,7 @@ func (pr *ProbeResult) Name() string {
 
 // ContainerID returns the container identifier, as found during the probe operation. This value is non-`nil` unless the “FSProbeResult/result“ is “FSMatchResult/notRecognized“. For formats that lack a durable UUID on which to base a container identifier --- which is only legal for a “FSUnaryFileSystem“ --- this value may be a random UUID.
 func (pr *ProbeResult) ContainerID() *ContainerIdentifier {
+	defer runtime.KeepAlive(pr)
 	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("containerID"))
 	return ContainerIdentifierFromID(_r)
 }

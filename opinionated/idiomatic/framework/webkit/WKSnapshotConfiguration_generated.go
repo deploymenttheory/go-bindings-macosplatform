@@ -5,8 +5,11 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +51,27 @@ func wKSnapshotConfigurationAdopt(id objc.ID) *WKSnapshotConfiguration {
 
 // Description returns the object's -description text.
 func (wsc *WKSnapshotConfiguration) Description() string {
+	defer runtime.KeepAlive(wsc)
 	return rt.Description(objref.IDOf(wsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wsc *WKSnapshotConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wsc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wsc *WKSnapshotConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(wsc)
 	return rt.IsKind(objref.IDOf(wsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wsc *WKSnapshotConfiguration) String() string {
+	defer runtime.KeepAlive(wsc)
 	return rt.Description(objref.IDOf(wsc))
 }
 
@@ -89,6 +97,7 @@ func (wsc *WKSnapshotConfiguration) WithRect(rect corefoundation.CGRect) *WKSnap
 
 // WithSnapshotWidth sets the width of the captured image, in points.
 func (wsc *WKSnapshotConfiguration) WithSnapshotWidth(snapshotWidth obj.Object) *WKSnapshotConfiguration {
+	defer runtime.KeepAlive(snapshotWidth)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wsc), objc.RegisterName("setSnapshotWidth:"), objref.IDOf(snapshotWidth))
 	})
@@ -105,6 +114,7 @@ func (wsc *WKSnapshotConfiguration) WithAfterScreenUpdates(afterScreenUpdates bo
 
 // Rect returns the rect to snapshot in view coordinates. This rect should be contained within WKWebView's bounds. If the rect is set to the null rect, the view's bounds will be used. The initial value is the null rect.
 func (wsc *WKSnapshotConfiguration) Rect() corefoundation.CGRect {
+	defer runtime.KeepAlive(wsc)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -117,12 +127,13 @@ func (wsc *WKSnapshotConfiguration) Rect() corefoundation.CGRect {
 }
 
 // SnapshotWidth specify a custom width to control the size of image you get back. The height will be computed to maintain the aspect ratio established by rect. snapshotWidth represents the width in points. If the snapshotWidth is nil, rect's width will be used.
-func (wsc *WKSnapshotConfiguration) SnapshotWidth() obj.Object {
-	var _mainthread0 obj.Object
+func (wsc *WKSnapshotConfiguration) SnapshotWidth() *foundation.Number {
+	defer runtime.KeepAlive(wsc)
+	var _mainthread0 *foundation.Number
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.Number {
 			_r := objc.Send[objc.ID](objref.IDOf(wsc), objc.RegisterName("snapshotWidth"))
-			return obj.Wrap(_r)
+			return foundation.NumberFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -131,6 +142,7 @@ func (wsc *WKSnapshotConfiguration) SnapshotWidth() obj.Object {
 
 // AfterScreenUpdates reports whether a Boolean value that specifies whether the snapshot should be taken after recent changes have been incorporated. The value false will capture the screen in its current state, which might not include recent changes. The default value is true.
 func (wsc *WKSnapshotConfiguration) AfterScreenUpdates() bool {
+	defer runtime.KeepAlive(wsc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

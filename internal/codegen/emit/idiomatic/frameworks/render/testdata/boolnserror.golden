@@ -1,5 +1,6 @@
 // Validate returns an error if the operation did not succeed.
 func (x *Machine) Validate() error {
+defer runtime.KeepAlive(x)
 var _nsErr uintptr
 objc.Send[bool](objref.IDOf(x), objc.RegisterName("validateWithError:"), unsafe.Pointer(&_nsErr))
 if _nsErr != 0 {

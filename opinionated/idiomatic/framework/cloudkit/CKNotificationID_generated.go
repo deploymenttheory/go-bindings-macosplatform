@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func notificationIDAdopt(id objc.ID) *NotificationID {
 
 // Description returns the object's -description text.
 func (ni *NotificationID) Description() string {
+	defer runtime.KeepAlive(ni)
 	return rt.Description(objref.IDOf(ni))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ni *NotificationID) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ni)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ni), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ni *NotificationID) IsKind(className string) bool {
+	defer runtime.KeepAlive(ni)
 	return rt.IsKind(objref.IDOf(ni), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ni *NotificationID) String() string {
+	defer runtime.KeepAlive(ni)
 	return rt.Description(objref.IDOf(ni))
 }
 

@@ -5,10 +5,11 @@
 package pdfkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -68,27 +69,30 @@ func (argt *ActionRemoteGoTo) WithPoint(point corefoundation.CGPoint) *ActionRem
 }
 
 // WithURL sets returns the URL of the document referenced by the remote go-to action.
-func (argt *ActionRemoteGoTo) WithURL(uRL string) *ActionRemoteGoTo {
-	objc.Send[objc.ID](objref.IDOf(argt), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (argt *ActionRemoteGoTo) WithURL(url string) *ActionRemoteGoTo {
+	objc.Send[objc.ID](objref.IDOf(argt), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return argt
 }
 
 // PageIndex returns the page index.
 func (argt *ActionRemoteGoTo) PageIndex() int {
+	defer runtime.KeepAlive(argt)
 	_r := objc.Send[int](objref.IDOf(argt), objc.RegisterName("pageIndex"))
 	return _r
 }
 
 // Point returns the point.
 func (argt *ActionRemoteGoTo) Point() corefoundation.CGPoint {
+	defer runtime.KeepAlive(argt)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(argt), objc.RegisterName("point"))
 	return _r
 }
 
 // URL returns the URL.
-func (argt *ActionRemoteGoTo) URL() obj.Object {
+func (argt *ActionRemoteGoTo) URL() string {
+	defer runtime.KeepAlive(argt)
 	_r := objc.Send[objc.ID](objref.IDOf(argt), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 var _ ActionProvider = (*ActionRemoteGoTo)(nil)

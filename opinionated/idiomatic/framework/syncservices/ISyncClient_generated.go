@@ -5,6 +5,9 @@
 package syncservices
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +48,27 @@ func iSyncClientAdopt(id objc.ID) *ISyncClient {
 
 // Description returns the object's -description text.
 func (isc *ISyncClient) Description() string {
+	defer runtime.KeepAlive(isc)
 	return rt.Description(objref.IDOf(isc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (isc *ISyncClient) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(isc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(isc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (isc *ISyncClient) IsKind(className string) bool {
+	defer runtime.KeepAlive(isc)
 	return rt.IsKind(objref.IDOf(isc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (isc *ISyncClient) String() string {
+	defer runtime.KeepAlive(isc)
 	return rt.Description(objref.IDOf(isc))
 }
 
@@ -72,6 +80,7 @@ func NewISyncClient() *ISyncClient {
 
 // ClientIdentifier returns the client identifier.
 func (isc *ISyncClient) ClientIdentifier() string {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("clientIdentifier"))
 	if _r == 0 {
 		return ""
@@ -81,6 +90,7 @@ func (isc *ISyncClient) ClientIdentifier() string {
 
 // ClientType returns the client type.
 func (isc *ISyncClient) ClientType() string {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("clientType"))
 	if _r == 0 {
 		return ""
@@ -90,6 +100,7 @@ func (isc *ISyncClient) ClientType() string {
 
 // DisplayName returns the display name.
 func (isc *ISyncClient) DisplayName() string {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
@@ -99,11 +110,13 @@ func (isc *ISyncClient) DisplayName() string {
 
 // SetDisplayName wraps the corresponding Objective-C method.
 func (isc *ISyncClient) SetDisplayName(displayName string) {
+	defer runtime.KeepAlive(isc)
 	objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("setDisplayName:"), purego.NSString(displayName))
 }
 
 // ImagePath returns the image path.
 func (isc *ISyncClient) ImagePath() string {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("imagePath"))
 	if _r == 0 {
 		return ""
@@ -113,108 +126,130 @@ func (isc *ISyncClient) ImagePath() string {
 
 // SetImagePath wraps the corresponding Objective-C method.
 func (isc *ISyncClient) SetImagePath(path string) {
+	defer runtime.KeepAlive(isc)
 	objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("setImagePath:"), purego.NSString(path))
 }
 
 // SupportedEntityNames returns the supported entity names.
 func (isc *ISyncClient) SupportedEntityNames() obj.Object {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("supportedEntityNames"))
 	return obj.Wrap(_r)
 }
 
 // CanPushChangesForEntityName wraps the corresponding Objective-C method.
 func (isc *ISyncClient) CanPushChangesForEntityName(entityName string) bool {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[bool](objref.IDOf(isc), objc.RegisterName("canPushChangesForEntityName:"), purego.NSString(entityName))
 	return _r
 }
 
 // CanPullChangesForEntityName wraps the corresponding Objective-C method.
 func (isc *ISyncClient) CanPullChangesForEntityName(entityName string) bool {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[bool](objref.IDOf(isc), objc.RegisterName("canPullChangesForEntityName:"), purego.NSString(entityName))
 	return _r
 }
 
 // LastSyncDateForEntityName wraps the corresponding Objective-C method.
-func (isc *ISyncClient) LastSyncDateForEntityName(entityName string) obj.Object {
+func (isc *ISyncClient) LastSyncDateForEntityName(entityName string) time.Time {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("lastSyncDateForEntityName:"), purego.NSString(entityName))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // LastSyncStatusForEntityName wraps the corresponding Objective-C method.
 func (isc *ISyncClient) LastSyncStatusForEntityName(entityName string) int {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[int](objref.IDOf(isc), objc.RegisterName("lastSyncStatusForEntityName:"), purego.NSString(entityName))
 	return _r
 }
 
 // EnabledEntityNames returns the enabled entity names.
 func (isc *ISyncClient) EnabledEntityNames() obj.Object {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("enabledEntityNames"))
 	return obj.Wrap(_r)
 }
 
 // IsEnabledForEntityName wraps the corresponding Objective-C method.
 func (isc *ISyncClient) IsEnabledForEntityName(entityName string) bool {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[bool](objref.IDOf(isc), objc.RegisterName("isEnabledForEntityName:"), purego.NSString(entityName))
 	return _r
 }
 
 // SetEnabledForEntityNames wraps the corresponding Objective-C method.
 func (isc *ISyncClient) SetEnabledForEntityNames(flag bool, entityNames obj.Object) {
+	defer runtime.KeepAlive(isc)
+	defer runtime.KeepAlive(entityNames)
 	objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("setEnabled:forEntityNames:"), flag, objref.IDOf(entityNames))
 }
 
 // FormatsRelationships wraps the corresponding Objective-C method.
 func (isc *ISyncClient) FormatsRelationships() bool {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[bool](objref.IDOf(isc), objc.RegisterName("formatsRelationships"))
 	return _r
 }
 
 // SetFormatsRelationships wraps the corresponding Objective-C method.
 func (isc *ISyncClient) SetFormatsRelationships(flag bool) {
+	defer runtime.KeepAlive(isc)
 	objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("setFormatsRelationships:"), flag)
 }
 
 // ShouldReplaceClientRecordsForEntityName wraps the corresponding Objective-C method.
 func (isc *ISyncClient) ShouldReplaceClientRecordsForEntityName(entityName string) bool {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[bool](objref.IDOf(isc), objc.RegisterName("shouldReplaceClientRecordsForEntityName:"), purego.NSString(entityName))
 	return _r
 }
 
 // SetShouldReplaceClientRecordsForEntityNames wraps the corresponding Objective-C method.
 func (isc *ISyncClient) SetShouldReplaceClientRecordsForEntityNames(flag bool, entityNames obj.Object) {
+	defer runtime.KeepAlive(isc)
+	defer runtime.KeepAlive(entityNames)
 	objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("setShouldReplaceClientRecords:forEntityNames:"), flag, objref.IDOf(entityNames))
 }
 
 // ObjectForKey wraps the corresponding Objective-C method.
 func (isc *ISyncClient) ObjectForKey(key string) obj.Object {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("objectForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // Filters returns the filters.
 func (isc *ISyncClient) Filters() obj.Object {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("filters"))
 	return obj.Wrap(_r)
 }
 
 // SetFilters wraps the corresponding Objective-C method.
 func (isc *ISyncClient) SetFilters(filters obj.Object) {
+	defer runtime.KeepAlive(isc)
+	defer runtime.KeepAlive(filters)
 	objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("setFilters:"), objref.IDOf(filters))
 }
 
 // ShouldSynchronizeWithClientsOfType wraps the corresponding Objective-C method.
 func (isc *ISyncClient) ShouldSynchronizeWithClientsOfType(clientType string) bool {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[bool](objref.IDOf(isc), objc.RegisterName("shouldSynchronizeWithClientsOfType:"), purego.NSString(clientType))
 	return _r
 }
 
 // SetShouldSynchronizeWithClientsOfType wraps the corresponding Objective-C method.
 func (isc *ISyncClient) SetShouldSynchronizeWithClientsOfType(flag bool, clientType string) {
+	defer runtime.KeepAlive(isc)
 	objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("setShouldSynchronize:withClientsOfType:"), flag, purego.NSString(clientType))
 }
 
 // SyncAlertToolPath returns the sync alert tool path.
 func (isc *ISyncClient) SyncAlertToolPath() string {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("syncAlertToolPath"))
 	if _r == 0 {
 		return ""
@@ -224,5 +259,6 @@ func (isc *ISyncClient) SyncAlertToolPath() string {
 
 // SetSyncAlertToolPath wraps the corresponding Objective-C method.
 func (isc *ISyncClient) SetSyncAlertToolPath(path string) {
+	defer runtime.KeepAlive(isc)
 	objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("setSyncAlertToolPath:"), purego.NSString(path))
 }

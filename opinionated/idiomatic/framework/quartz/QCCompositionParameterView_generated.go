@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func qCCompositionParameterViewAdopt(id objc.ID) *QCCompositionParameterView {
 
 // Description returns the object's -description text.
 func (qcpv *QCCompositionParameterView) Description() string {
+	defer runtime.KeepAlive(qcpv)
 	return rt.Description(objref.IDOf(qcpv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (qcpv *QCCompositionParameterView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(qcpv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(qcpv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (qcpv *QCCompositionParameterView) IsKind(className string) bool {
+	defer runtime.KeepAlive(qcpv)
 	return rt.IsKind(objref.IDOf(qcpv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (qcpv *QCCompositionParameterView) String() string {
+	defer runtime.KeepAlive(qcpv)
 	return rt.Description(objref.IDOf(qcpv))
 }
 
@@ -80,6 +87,8 @@ func NewQCCompositionParameterView() *QCCompositionParameterView {
 
 // SetCompositionRenderer sets the composition parameter view for editing the input parameters of the provided renderer object.
 func (qcpv *QCCompositionParameterView) SetCompositionRenderer(renderer obj.Object) {
+	defer runtime.KeepAlive(qcpv)
+	defer runtime.KeepAlive(renderer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setCompositionRenderer:"), objref.IDOf(renderer))
 	})
@@ -88,6 +97,7 @@ func (qcpv *QCCompositionParameterView) SetCompositionRenderer(renderer obj.Obje
 
 // CompositionRenderer returns the renderer object associated with the composition parameter view.
 func (qcpv *QCCompositionParameterView) CompositionRenderer() obj.Object {
+	defer runtime.KeepAlive(qcpv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -101,6 +111,7 @@ func (qcpv *QCCompositionParameterView) CompositionRenderer() obj.Object {
 
 // HasParameters reports whether checks whether the composition that is currently edited by the composition parameter view has any input parameters.
 func (qcpv *QCCompositionParameterView) HasParameters() bool {
+	defer runtime.KeepAlive(qcpv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -114,6 +125,8 @@ func (qcpv *QCCompositionParameterView) HasParameters() bool {
 
 // SetBackgroundColor sets the background color of the composition parameter view.
 func (qcpv *QCCompositionParameterView) SetBackgroundColor(color obj.Object) {
+	defer runtime.KeepAlive(qcpv)
+	defer runtime.KeepAlive(color)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(color))
 	})
@@ -122,6 +135,7 @@ func (qcpv *QCCompositionParameterView) SetBackgroundColor(color obj.Object) {
 
 // BackgroundColor returns retrieves the background color of the composition parameter view.
 func (qcpv *QCCompositionParameterView) BackgroundColor() obj.Object {
+	defer runtime.KeepAlive(qcpv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -135,6 +149,7 @@ func (qcpv *QCCompositionParameterView) BackgroundColor() obj.Object {
 
 // SetDrawsBackground sets whether the composition parameter view draws its background.
 func (qcpv *QCCompositionParameterView) SetDrawsBackground(flag bool) {
+	defer runtime.KeepAlive(qcpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setDrawsBackground:"), flag)
 	})
@@ -143,6 +158,7 @@ func (qcpv *QCCompositionParameterView) SetDrawsBackground(flag bool) {
 
 // DrawsBackground reports whether the composition parameter view draws its background.
 func (qcpv *QCCompositionParameterView) DrawsBackground() bool {
+	defer runtime.KeepAlive(qcpv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -156,6 +172,8 @@ func (qcpv *QCCompositionParameterView) DrawsBackground() bool {
 
 // SetDelegate sets the composition parameter view delegate.
 func (qcpv *QCCompositionParameterView) SetDelegate(delegate obj.Object) {
+	defer runtime.KeepAlive(qcpv)
+	defer runtime.KeepAlive(delegate)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	})
@@ -164,6 +182,7 @@ func (qcpv *QCCompositionParameterView) SetDelegate(delegate obj.Object) {
 
 // Delegate returns the composition parameter view delegate.
 func (qcpv *QCCompositionParameterView) Delegate() obj.Object {
+	defer runtime.KeepAlive(qcpv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

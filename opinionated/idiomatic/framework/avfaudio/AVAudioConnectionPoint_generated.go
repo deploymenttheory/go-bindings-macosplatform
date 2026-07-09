@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func audioConnectionPointAdopt(id objc.ID) *AudioConnectionPoint {
 
 // Description returns the object's -description text.
 func (acp *AudioConnectionPoint) Description() string {
+	defer runtime.KeepAlive(acp)
 	return rt.Description(objref.IDOf(acp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (acp *AudioConnectionPoint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(acp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(acp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (acp *AudioConnectionPoint) IsKind(className string) bool {
+	defer runtime.KeepAlive(acp)
 	return rt.IsKind(objref.IDOf(acp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (acp *AudioConnectionPoint) String() string {
+	defer runtime.KeepAlive(acp)
 	return rt.Description(objref.IDOf(acp))
 }
 
 // NewAudioConnectionPointWithNodeBus creates a connection point object.
 func NewAudioConnectionPointWithNodeBus(node *AudioNode, bus int) *AudioConnectionPoint {
+	defer runtime.KeepAlive(node)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioConnectionPoint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNode:bus:"), objref.IDOf(node), bus)
 	return audioConnectionPointAdopt(_id)
@@ -75,12 +83,14 @@ func NewAudioConnectionPointWithNodeBus(node *AudioNode, bus int) *AudioConnecti
 
 // Node returns the node in the connection point.
 func (acp *AudioConnectionPoint) Node() *AudioNode {
+	defer runtime.KeepAlive(acp)
 	_r := objc.Send[objc.ID](objref.IDOf(acp), objc.RegisterName("node"))
 	return AudioNodeFromID(_r)
 }
 
 // Bus returns the bus on the node in the connection point.
 func (acp *AudioConnectionPoint) Bus() int {
+	defer runtime.KeepAlive(acp)
 	_r := objc.Send[int](objref.IDOf(acp), objc.RegisterName("bus"))
 	return _r
 }

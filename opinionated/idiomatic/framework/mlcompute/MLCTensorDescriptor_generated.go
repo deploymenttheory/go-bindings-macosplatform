@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func tensorDescriptorAdopt(id objc.ID) *TensorDescriptor {
 
 // Description returns the object's -description text.
 func (td *TensorDescriptor) Description() string {
+	defer runtime.KeepAlive(td)
 	return rt.Description(objref.IDOf(td))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (td *TensorDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(td)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(td), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (td *TensorDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(td)
 	return rt.IsKind(objref.IDOf(td), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (td *TensorDescriptor) String() string {
+	defer runtime.KeepAlive(td)
 	return rt.Description(objref.IDOf(td))
 }
 
@@ -74,12 +81,14 @@ func NewTensorDescriptor() *TensorDescriptor {
 
 // DataType returns the tensor data type.  The default is MLCDataTypeFloat32.
 func (td *TensorDescriptor) DataType() DataType {
+	defer runtime.KeepAlive(td)
 	_r := objc.Send[DataType](objref.IDOf(td), objc.RegisterName("dataType"))
 	return _r
 }
 
 // DimensionCount returns the number of dimensions in the tensor
 func (td *TensorDescriptor) DimensionCount() int {
+	defer runtime.KeepAlive(td)
 	_r := objc.Send[int](objref.IDOf(td), objc.RegisterName("dimensionCount"))
 	return _r
 }
@@ -88,6 +97,7 @@ func (td *TensorDescriptor) DimensionCount() int {
 //
 // Shape returns the collection as a Go slice.
 func (td *TensorDescriptor) Shape() []obj.Object {
+	defer runtime.KeepAlive(td)
 	_arr := objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("shape"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -96,12 +106,14 @@ func (td *TensorDescriptor) Shape() []obj.Object {
 //
 // Stride returns the collection as a Go slice.
 func (td *TensorDescriptor) Stride() []obj.Object {
+	defer runtime.KeepAlive(td)
 	_arr := objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("stride"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // TensorAllocationSizeInBytes returns the allocation size in bytes for a tensor.
 func (td *TensorDescriptor) TensorAllocationSizeInBytes() int {
+	defer runtime.KeepAlive(td)
 	_r := objc.Send[int](objref.IDOf(td), objc.RegisterName("tensorAllocationSizeInBytes"))
 	return _r
 }
@@ -110,12 +122,14 @@ func (td *TensorDescriptor) TensorAllocationSizeInBytes() int {
 //
 // SequenceLengths returns the collection as a Go slice.
 func (td *TensorDescriptor) SequenceLengths() []obj.Object {
+	defer runtime.KeepAlive(td)
 	_arr := objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("sequenceLengths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SortedSequences reports whether the sequences are sorted or not.
 func (td *TensorDescriptor) SortedSequences() bool {
+	defer runtime.KeepAlive(td)
 	_r := objc.Send[bool](objref.IDOf(td), objc.RegisterName("sortedSequences"))
 	return _r
 }
@@ -124,6 +138,7 @@ func (td *TensorDescriptor) SortedSequences() bool {
 //
 // BatchSizePerSequenceStep returns the collection as a Go slice.
 func (td *TensorDescriptor) BatchSizePerSequenceStep() []obj.Object {
+	defer runtime.KeepAlive(td)
 	_arr := objc.Send[objc.ID](objref.IDOf(td), objc.RegisterName("batchSizePerSequenceStep"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

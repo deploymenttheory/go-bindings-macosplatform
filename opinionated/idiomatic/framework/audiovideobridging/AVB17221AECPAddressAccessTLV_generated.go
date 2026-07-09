@@ -5,6 +5,8 @@
 package audiovideobridging
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func aVB17221AECPAddressAccessTLVAdopt(id objc.ID) *AVB17221AECPAddressAccessTLV
 
 // Description returns the object's -description text.
 func (aaaat *AVB17221AECPAddressAccessTLV) Description() string {
+	defer runtime.KeepAlive(aaaat)
 	return rt.Description(objref.IDOf(aaaat))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aaaat *AVB17221AECPAddressAccessTLV) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aaaat)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aaaat), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aaaat *AVB17221AECPAddressAccessTLV) IsKind(className string) bool {
+	defer runtime.KeepAlive(aaaat)
 	return rt.IsKind(objref.IDOf(aaaat), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aaaat *AVB17221AECPAddressAccessTLV) String() string {
+	defer runtime.KeepAlive(aaaat)
 	return rt.Description(objref.IDOf(aaaat))
 }
 
@@ -83,25 +90,28 @@ func (aaaat *AVB17221AECPAddressAccessTLV) WithAddress(address uint64) *AVB17221
 }
 
 // WithMemoryData sets the memory_data field of the Address Access TLV.
-func (aaaat *AVB17221AECPAddressAccessTLV) WithMemoryData(memoryData obj.Object) *AVB17221AECPAddressAccessTLV {
-	objc.Send[objc.ID](objref.IDOf(aaaat), objc.RegisterName("setMemoryData:"), objref.IDOf(memoryData))
+func (aaaat *AVB17221AECPAddressAccessTLV) WithMemoryData(memoryData []byte) *AVB17221AECPAddressAccessTLV {
+	objc.Send[objc.ID](objref.IDOf(aaaat), objc.RegisterName("setMemoryData:"), rt.BytesToNSData(memoryData))
 	return aaaat
 }
 
 // Mode returns the mode field of the Address Access TLV.
 func (aaaat *AVB17221AECPAddressAccessTLV) Mode() AVB17221AECPAddressAccessTLVMode {
+	defer runtime.KeepAlive(aaaat)
 	_r := objc.Send[AVB17221AECPAddressAccessTLVMode](objref.IDOf(aaaat), objc.RegisterName("mode"))
 	return _r
 }
 
 // Address returns the address field of the Address Access TLV.
 func (aaaat *AVB17221AECPAddressAccessTLV) Address() uint64 {
+	defer runtime.KeepAlive(aaaat)
 	_r := objc.Send[uint64](objref.IDOf(aaaat), objc.RegisterName("address"))
 	return _r
 }
 
 // MemoryData returns the memory_data field of the Address Access TLV.
-func (aaaat *AVB17221AECPAddressAccessTLV) MemoryData() obj.Object {
+func (aaaat *AVB17221AECPAddressAccessTLV) MemoryData() []byte {
+	defer runtime.KeepAlive(aaaat)
 	_r := objc.Send[objc.ID](objref.IDOf(aaaat), objc.RegisterName("memoryData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

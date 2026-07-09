@@ -8,41 +8,86 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrInternalError matches the CloudKit error CKErrorInternalError.
-var ErrInternalError = errkit.New("CKErrorDomain", 1)
+// ErrAccountTemporarilyUnavailable matches the CloudKit error CKErrorAccountTemporarilyUnavailable.
+var ErrAccountTemporarilyUnavailable = errkit.New("CKErrorDomain", 36)
 
-// ErrPartialFailure matches the CloudKit error CKErrorPartialFailure.
-var ErrPartialFailure = errkit.New("CKErrorDomain", 2)
+// ErrAlreadyShared matches the CloudKit error CKErrorAlreadyShared.
+var ErrAlreadyShared = errkit.New("CKErrorDomain", 30)
 
-// ErrNetworkUnavailable matches the CloudKit error CKErrorNetworkUnavailable.
-var ErrNetworkUnavailable = errkit.New("CKErrorDomain", 3)
+// ErrAssetFileModified matches the CloudKit error CKErrorAssetFileModified.
+var ErrAssetFileModified = errkit.New("CKErrorDomain", 17)
 
-// ErrNetworkFailure matches the CloudKit error CKErrorNetworkFailure.
-var ErrNetworkFailure = errkit.New("CKErrorDomain", 4)
+// ErrAssetFileNotFound matches the CloudKit error CKErrorAssetFileNotFound.
+var ErrAssetFileNotFound = errkit.New("CKErrorDomain", 16)
+
+// ErrAssetNotAvailable matches the CloudKit error CKErrorAssetNotAvailable.
+var ErrAssetNotAvailable = errkit.New("CKErrorDomain", 35)
 
 // ErrBadContainer matches the CloudKit error CKErrorBadContainer.
 var ErrBadContainer = errkit.New("CKErrorDomain", 5)
 
-// ErrServiceUnavailable matches the CloudKit error CKErrorServiceUnavailable.
-var ErrServiceUnavailable = errkit.New("CKErrorDomain", 6)
+// ErrBadDatabase matches the CloudKit error CKErrorBadDatabase.
+var ErrBadDatabase = errkit.New("CKErrorDomain", 24)
 
-// ErrRequestRateLimited matches the CloudKit error CKErrorRequestRateLimited.
-var ErrRequestRateLimited = errkit.New("CKErrorDomain", 7)
+// ErrBatchRequestFailed matches the CloudKit error CKErrorBatchRequestFailed.
+var ErrBatchRequestFailed = errkit.New("CKErrorDomain", 22)
+
+// ErrChangeTokenExpired matches the CloudKit error CKErrorChangeTokenExpired.
+var ErrChangeTokenExpired = errkit.New("CKErrorDomain", 21)
+
+// ErrConstraintViolation matches the CloudKit error CKErrorConstraintViolation.
+var ErrConstraintViolation = errkit.New("CKErrorDomain", 19)
+
+// ErrIncompatibleVersion matches the CloudKit error CKErrorIncompatibleVersion.
+var ErrIncompatibleVersion = errkit.New("CKErrorDomain", 18)
+
+// ErrInternalError matches the CloudKit error CKErrorInternalError.
+var ErrInternalError = errkit.New("CKErrorDomain", 1)
+
+// ErrInvalidArguments matches the CloudKit error CKErrorInvalidArguments.
+var ErrInvalidArguments = errkit.New("CKErrorDomain", 12)
+
+// ErrLimitExceeded matches the CloudKit error CKErrorLimitExceeded.
+var ErrLimitExceeded = errkit.New("CKErrorDomain", 27)
+
+// ErrManagedAccountRestricted matches the CloudKit error CKErrorManagedAccountRestricted.
+var ErrManagedAccountRestricted = errkit.New("CKErrorDomain", 32)
 
 // ErrMissingEntitlement matches the CloudKit error CKErrorMissingEntitlement.
 var ErrMissingEntitlement = errkit.New("CKErrorDomain", 8)
 
+// ErrNetworkFailure matches the CloudKit error CKErrorNetworkFailure.
+var ErrNetworkFailure = errkit.New("CKErrorDomain", 4)
+
+// ErrNetworkUnavailable matches the CloudKit error CKErrorNetworkUnavailable.
+var ErrNetworkUnavailable = errkit.New("CKErrorDomain", 3)
+
 // ErrNotAuthenticated matches the CloudKit error CKErrorNotAuthenticated.
 var ErrNotAuthenticated = errkit.New("CKErrorDomain", 9)
+
+// ErrOperationCancelled matches the CloudKit error CKErrorOperationCancelled.
+var ErrOperationCancelled = errkit.New("CKErrorDomain", 20)
+
+// ErrPartialFailure matches the CloudKit error CKErrorPartialFailure.
+var ErrPartialFailure = errkit.New("CKErrorDomain", 2)
+
+// ErrParticipantAlreadyInvited matches the CloudKit error CKErrorParticipantAlreadyInvited.
+var ErrParticipantAlreadyInvited = errkit.New("CKErrorDomain", 37)
+
+// ErrParticipantMayNeedVerification matches the CloudKit error CKErrorParticipantMayNeedVerification.
+var ErrParticipantMayNeedVerification = errkit.New("CKErrorDomain", 33)
 
 // ErrPermissionFailure matches the CloudKit error CKErrorPermissionFailure.
 var ErrPermissionFailure = errkit.New("CKErrorDomain", 10)
 
-// ErrUnknownItem matches the CloudKit error CKErrorUnknownItem.
-var ErrUnknownItem = errkit.New("CKErrorDomain", 11)
+// ErrQuotaExceeded matches the CloudKit error CKErrorQuotaExceeded.
+var ErrQuotaExceeded = errkit.New("CKErrorDomain", 25)
 
-// ErrInvalidArguments matches the CloudKit error CKErrorInvalidArguments.
-var ErrInvalidArguments = errkit.New("CKErrorDomain", 12)
+// ErrReferenceViolation matches the CloudKit error CKErrorReferenceViolation.
+var ErrReferenceViolation = errkit.New("CKErrorDomain", 31)
+
+// ErrRequestRateLimited matches the CloudKit error CKErrorRequestRateLimited.
+var ErrRequestRateLimited = errkit.New("CKErrorDomain", 7)
 
 // ErrResultsTruncated matches the CloudKit error CKErrorResultsTruncated.
 var ErrResultsTruncated = errkit.New("CKErrorDomain", 13)
@@ -53,68 +98,23 @@ var ErrServerRecordChanged = errkit.New("CKErrorDomain", 14)
 // ErrServerRejectedRequest matches the CloudKit error CKErrorServerRejectedRequest.
 var ErrServerRejectedRequest = errkit.New("CKErrorDomain", 15)
 
-// ErrAssetFileNotFound matches the CloudKit error CKErrorAssetFileNotFound.
-var ErrAssetFileNotFound = errkit.New("CKErrorDomain", 16)
+// ErrServerResponseLost matches the CloudKit error CKErrorServerResponseLost.
+var ErrServerResponseLost = errkit.New("CKErrorDomain", 34)
 
-// ErrAssetFileModified matches the CloudKit error CKErrorAssetFileModified.
-var ErrAssetFileModified = errkit.New("CKErrorDomain", 17)
-
-// ErrIncompatibleVersion matches the CloudKit error CKErrorIncompatibleVersion.
-var ErrIncompatibleVersion = errkit.New("CKErrorDomain", 18)
-
-// ErrConstraintViolation matches the CloudKit error CKErrorConstraintViolation.
-var ErrConstraintViolation = errkit.New("CKErrorDomain", 19)
-
-// ErrOperationCancelled matches the CloudKit error CKErrorOperationCancelled.
-var ErrOperationCancelled = errkit.New("CKErrorDomain", 20)
-
-// ErrChangeTokenExpired matches the CloudKit error CKErrorChangeTokenExpired.
-var ErrChangeTokenExpired = errkit.New("CKErrorDomain", 21)
-
-// ErrBatchRequestFailed matches the CloudKit error CKErrorBatchRequestFailed.
-var ErrBatchRequestFailed = errkit.New("CKErrorDomain", 22)
-
-// ErrZoneBusy matches the CloudKit error CKErrorZoneBusy.
-var ErrZoneBusy = errkit.New("CKErrorDomain", 23)
-
-// ErrBadDatabase matches the CloudKit error CKErrorBadDatabase.
-var ErrBadDatabase = errkit.New("CKErrorDomain", 24)
-
-// ErrQuotaExceeded matches the CloudKit error CKErrorQuotaExceeded.
-var ErrQuotaExceeded = errkit.New("CKErrorDomain", 25)
-
-// ErrZoneNotFound matches the CloudKit error CKErrorZoneNotFound.
-var ErrZoneNotFound = errkit.New("CKErrorDomain", 26)
-
-// ErrLimitExceeded matches the CloudKit error CKErrorLimitExceeded.
-var ErrLimitExceeded = errkit.New("CKErrorDomain", 27)
-
-// ErrUserDeletedZone matches the CloudKit error CKErrorUserDeletedZone.
-var ErrUserDeletedZone = errkit.New("CKErrorDomain", 28)
+// ErrServiceUnavailable matches the CloudKit error CKErrorServiceUnavailable.
+var ErrServiceUnavailable = errkit.New("CKErrorDomain", 6)
 
 // ErrTooManyParticipants matches the CloudKit error CKErrorTooManyParticipants.
 var ErrTooManyParticipants = errkit.New("CKErrorDomain", 29)
 
-// ErrAlreadyShared matches the CloudKit error CKErrorAlreadyShared.
-var ErrAlreadyShared = errkit.New("CKErrorDomain", 30)
+// ErrUnknownItem matches the CloudKit error CKErrorUnknownItem.
+var ErrUnknownItem = errkit.New("CKErrorDomain", 11)
 
-// ErrReferenceViolation matches the CloudKit error CKErrorReferenceViolation.
-var ErrReferenceViolation = errkit.New("CKErrorDomain", 31)
+// ErrUserDeletedZone matches the CloudKit error CKErrorUserDeletedZone.
+var ErrUserDeletedZone = errkit.New("CKErrorDomain", 28)
 
-// ErrManagedAccountRestricted matches the CloudKit error CKErrorManagedAccountRestricted.
-var ErrManagedAccountRestricted = errkit.New("CKErrorDomain", 32)
+// ErrZoneBusy matches the CloudKit error CKErrorZoneBusy.
+var ErrZoneBusy = errkit.New("CKErrorDomain", 23)
 
-// ErrParticipantMayNeedVerification matches the CloudKit error CKErrorParticipantMayNeedVerification.
-var ErrParticipantMayNeedVerification = errkit.New("CKErrorDomain", 33)
-
-// ErrServerResponseLost matches the CloudKit error CKErrorServerResponseLost.
-var ErrServerResponseLost = errkit.New("CKErrorDomain", 34)
-
-// ErrAssetNotAvailable matches the CloudKit error CKErrorAssetNotAvailable.
-var ErrAssetNotAvailable = errkit.New("CKErrorDomain", 35)
-
-// ErrAccountTemporarilyUnavailable matches the CloudKit error CKErrorAccountTemporarilyUnavailable.
-var ErrAccountTemporarilyUnavailable = errkit.New("CKErrorDomain", 36)
-
-// ErrParticipantAlreadyInvited matches the CloudKit error CKErrorParticipantAlreadyInvited.
-var ErrParticipantAlreadyInvited = errkit.New("CKErrorDomain", 37)
+// ErrZoneNotFound matches the CloudKit error CKErrorZoneNotFound.
+var ErrZoneNotFound = errkit.New("CKErrorDomain", 26)

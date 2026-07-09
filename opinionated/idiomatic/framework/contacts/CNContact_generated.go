@@ -5,7 +5,10 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,45 +52,54 @@ func contactAdopt(id objc.ID) *Contact {
 
 // Description returns the object's -description text.
 func (c *Contact) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Contact) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Contact) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Contact) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsKeyAvailable determines whether the contact property value for the specified key is fetched.
 func (c *Contact) IsKeyAvailable(key string) bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isKeyAvailable:"), purego.NSString(key))
 	return _r
 }
 
 // AreKeysAvailable determines whether all contact property values for the specified keys are fetched.
 func (c *Contact) AreKeysAvailable(keyDescriptors []obj.Object) bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("areKeysAvailable:"), purego.SliceToNSArray(keyDescriptors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // IsUnifiedWithContactWithIdentifier returns a Boolean indicating whether the current contact is a unified contact and includes a contact with the specified identifier.
 func (c *Contact) IsUnifiedWithContactWithIdentifier(contactIdentifier string) bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isUnifiedWithContactWithIdentifier:"), purego.NSString(contactIdentifier))
 	return _r
 }
 
 // Identifier returns the identifier is unique among contacts on the device. It can be saved and used for fetching contacts next application launch.
 func (c *Contact) Identifier() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -97,12 +109,14 @@ func (c *Contact) Identifier() string {
 
 // ContactType returns the contact type.
 func (c *Contact) ContactType() ContactType {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[ContactType](objref.IDOf(c), objc.RegisterName("contactType"))
 	return _r
 }
 
 // NamePrefix returns the name prefix.
 func (c *Contact) NamePrefix() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("namePrefix"))
 	if _r == 0 {
 		return ""
@@ -112,6 +126,7 @@ func (c *Contact) NamePrefix() string {
 
 // GivenName returns the given name.
 func (c *Contact) GivenName() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("givenName"))
 	if _r == 0 {
 		return ""
@@ -121,6 +136,7 @@ func (c *Contact) GivenName() string {
 
 // MiddleName returns the middle name.
 func (c *Contact) MiddleName() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("middleName"))
 	if _r == 0 {
 		return ""
@@ -130,6 +146,7 @@ func (c *Contact) MiddleName() string {
 
 // FamilyName returns the family name.
 func (c *Contact) FamilyName() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("familyName"))
 	if _r == 0 {
 		return ""
@@ -139,6 +156,7 @@ func (c *Contact) FamilyName() string {
 
 // PreviousFamilyName returns the previous family name.
 func (c *Contact) PreviousFamilyName() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("previousFamilyName"))
 	if _r == 0 {
 		return ""
@@ -148,6 +166,7 @@ func (c *Contact) PreviousFamilyName() string {
 
 // NameSuffix returns the name suffix.
 func (c *Contact) NameSuffix() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("nameSuffix"))
 	if _r == 0 {
 		return ""
@@ -157,6 +176,7 @@ func (c *Contact) NameSuffix() string {
 
 // Nickname returns the nickname.
 func (c *Contact) Nickname() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("nickname"))
 	if _r == 0 {
 		return ""
@@ -166,6 +186,7 @@ func (c *Contact) Nickname() string {
 
 // OrganizationName returns the organization name.
 func (c *Contact) OrganizationName() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("organizationName"))
 	if _r == 0 {
 		return ""
@@ -175,6 +196,7 @@ func (c *Contact) OrganizationName() string {
 
 // DepartmentName returns the department name.
 func (c *Contact) DepartmentName() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("departmentName"))
 	if _r == 0 {
 		return ""
@@ -184,6 +206,7 @@ func (c *Contact) DepartmentName() string {
 
 // JobTitle returns the job title.
 func (c *Contact) JobTitle() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("jobTitle"))
 	if _r == 0 {
 		return ""
@@ -193,6 +216,7 @@ func (c *Contact) JobTitle() string {
 
 // PhoneticGivenName returns the phonetic given name.
 func (c *Contact) PhoneticGivenName() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("phoneticGivenName"))
 	if _r == 0 {
 		return ""
@@ -202,6 +226,7 @@ func (c *Contact) PhoneticGivenName() string {
 
 // PhoneticMiddleName returns the phonetic middle name.
 func (c *Contact) PhoneticMiddleName() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("phoneticMiddleName"))
 	if _r == 0 {
 		return ""
@@ -211,6 +236,7 @@ func (c *Contact) PhoneticMiddleName() string {
 
 // PhoneticFamilyName returns the phonetic family name.
 func (c *Contact) PhoneticFamilyName() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("phoneticFamilyName"))
 	if _r == 0 {
 		return ""
@@ -220,6 +246,7 @@ func (c *Contact) PhoneticFamilyName() string {
 
 // PhoneticOrganizationName returns the phonetic organization name.
 func (c *Contact) PhoneticOrganizationName() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("phoneticOrganizationName"))
 	if _r == 0 {
 		return ""
@@ -229,6 +256,7 @@ func (c *Contact) PhoneticOrganizationName() string {
 
 // Note returns the note.
 func (c *Contact) Note() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("note"))
 	if _r == 0 {
 		return ""
@@ -237,19 +265,22 @@ func (c *Contact) Note() string {
 }
 
 // ImageData returns the image data.
-func (c *Contact) ImageData() obj.Object {
+func (c *Contact) ImageData() []byte {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("imageData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ThumbnailImageData returns the thumbnail image data.
-func (c *Contact) ThumbnailImageData() obj.Object {
+func (c *Contact) ThumbnailImageData() []byte {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("thumbnailImageData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ImageDataAvailable wraps the corresponding Objective-C method.
 func (c *Contact) ImageDataAvailable() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("imageDataAvailable"))
 	return _r
 }
@@ -258,6 +289,7 @@ func (c *Contact) ImageDataAvailable() bool {
 //
 // PhoneNumbers returns the collection as a Go slice.
 func (c *Contact) PhoneNumbers() []obj.Object {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("phoneNumbers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -266,6 +298,7 @@ func (c *Contact) PhoneNumbers() []obj.Object {
 //
 // EmailAddresses returns the collection as a Go slice.
 func (c *Contact) EmailAddresses() []obj.Object {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("emailAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -274,6 +307,7 @@ func (c *Contact) EmailAddresses() []obj.Object {
 //
 // PostalAddresses returns the collection as a Go slice.
 func (c *Contact) PostalAddresses() []obj.Object {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("postalAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -282,6 +316,7 @@ func (c *Contact) PostalAddresses() []obj.Object {
 //
 // URLAddresses returns the collection as a Go slice.
 func (c *Contact) URLAddresses() []obj.Object {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("urlAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -290,6 +325,7 @@ func (c *Contact) URLAddresses() []obj.Object {
 //
 // ContactRelations returns the collection as a Go slice.
 func (c *Contact) ContactRelations() []obj.Object {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("contactRelations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -298,6 +334,7 @@ func (c *Contact) ContactRelations() []obj.Object {
 //
 // SocialProfiles returns the collection as a Go slice.
 func (c *Contact) SocialProfiles() []obj.Object {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("socialProfiles"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -306,26 +343,30 @@ func (c *Contact) SocialProfiles() []obj.Object {
 //
 // InstantMessageAddresses returns the collection as a Go slice.
 func (c *Contact) InstantMessageAddresses() []obj.Object {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("instantMessageAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Birthday returns the Gregorian birthday.
-func (c *Contact) Birthday() obj.Object {
+func (c *Contact) Birthday() *foundation.DateComponents {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("birthday"))
-	return obj.Wrap(_r)
+	return foundation.DateComponentsFromID(_r)
 }
 
 // NonGregorianBirthday returns the alternate birthday (Lunisolar).
-func (c *Contact) NonGregorianBirthday() obj.Object {
+func (c *Contact) NonGregorianBirthday() *foundation.DateComponents {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("nonGregorianBirthday"))
-	return obj.Wrap(_r)
+	return foundation.DateComponentsFromID(_r)
 }
 
 // Dates returns other Gregorian dates (anniversaries, etc).
 //
 // Dates returns the collection as a Go slice.
 func (c *Contact) Dates() []obj.Object {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("dates"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

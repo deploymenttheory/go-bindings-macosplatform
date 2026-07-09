@@ -5,6 +5,8 @@
 package collaboration
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func identityPickerAdopt(id objc.ID) *IdentityPicker {
 
 // Description returns the object's -description text.
 func (ip *IdentityPicker) Description() string {
+	defer runtime.KeepAlive(ip)
 	return rt.Description(objref.IDOf(ip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ip *IdentityPicker) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ip)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ip *IdentityPicker) IsKind(className string) bool {
+	defer runtime.KeepAlive(ip)
 	return rt.IsKind(objref.IDOf(ip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ip *IdentityPicker) String() string {
+	defer runtime.KeepAlive(ip)
 	return rt.Description(objref.IDOf(ip))
 }
 
@@ -86,17 +93,21 @@ func (ip *IdentityPicker) WithAllowsMultipleSelection(allowsMultipleSelection bo
 
 // RunModal returns runs the receiver as an application-modal dialog.
 func (ip *IdentityPicker) RunModal() int {
+	defer runtime.KeepAlive(ip)
 	_r := objc.Send[int](objref.IDOf(ip), objc.RegisterName("runModal"))
 	return _r
 }
 
 // RunModalForWindowCompletionHandler runs the identity picker modally as a sheet attached to a specified window.
 func (ip *IdentityPicker) RunModalForWindowCompletionHandler(window obj.Object, completionHandler func(int)) {
+	defer runtime.KeepAlive(ip)
+	defer runtime.KeepAlive(window)
 	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("runModalForWindow:completionHandler:"), objref.IDOf(window), objc.NewBlock(func(_ objc.Block, _b0 int) { completionHandler(_b0) }))
 }
 
 // Title returns the title of the identity picker. The value of this property is the title text that appears at the top of the panel. By default, the title is "Select a person to share with:".
 func (ip *IdentityPicker) Title() string {
+	defer runtime.KeepAlive(ip)
 	_r := objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -106,6 +117,7 @@ func (ip *IdentityPicker) Title() string {
 
 // AllowsMultipleSelection reports whether the user is allowed to select multiple identities. The value of this property is <doc://com.apple.documentation/documentation/objectivec/yes> if the user can select multiple records; otherwise, <doc://com.apple.documentation/documentation/objectivec/no>. The default value is <doc://com.apple.documentation/documentation/objectivec/no>.
 func (ip *IdentityPicker) AllowsMultipleSelection() bool {
+	defer runtime.KeepAlive(ip)
 	_r := objc.Send[bool](objref.IDOf(ip), objc.RegisterName("allowsMultipleSelection"))
 	return _r
 }
@@ -114,6 +126,7 @@ func (ip *IdentityPicker) AllowsMultipleSelection() bool {
 //
 // Identities returns the collection as a Go slice.
 func (ip *IdentityPicker) Identities() []*Identity {
+	defer runtime.KeepAlive(ip)
 	_arr := objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("identities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Identity { return IdentityFromID(_id) })
 }

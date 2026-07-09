@@ -5,9 +5,12 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,22 +50,23 @@ func microGamepadSnapshotAdopt(id objc.ID) *MicroGamepadSnapshot {
 }
 
 // NewMicroGamepadSnapshotWithSnapshotData initializes a snapshot object with the flattened data representation obtained from another snapshot.
-func NewMicroGamepadSnapshotWithSnapshotData(data obj.Object) *MicroGamepadSnapshot {
+func NewMicroGamepadSnapshotWithSnapshotData(data []byte) *MicroGamepadSnapshot {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GCMicroGamepadSnapshot")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotData:"), objref.IDOf(data))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotData:"), rt.BytesToNSData(data))
 	return microGamepadSnapshotAdopt(_id)
 }
 
 // NewMicroGamepadSnapshotWithControllerSnapshotData creates a new MicroGamepadSnapshot.
-func NewMicroGamepadSnapshotWithControllerSnapshotData(controller *Controller, data obj.Object) *MicroGamepadSnapshot {
+func NewMicroGamepadSnapshotWithControllerSnapshotData(controller *Controller, data []byte) *MicroGamepadSnapshot {
+	defer runtime.KeepAlive(controller)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GCMicroGamepadSnapshot")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithController:snapshotData:"), objref.IDOf(controller), objref.IDOf(data))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithController:snapshotData:"), objref.IDOf(controller), rt.BytesToNSData(data))
 	return microGamepadSnapshotAdopt(_id)
 }
 
 // WithSnapshotData sets the flattened control input values for the snapshot.
-func (mgs *MicroGamepadSnapshot) WithSnapshotData(snapshotData obj.Object) *MicroGamepadSnapshot {
-	objc.Send[objc.ID](objref.IDOf(mgs), objc.RegisterName("setSnapshotData:"), objref.IDOf(snapshotData))
+func (mgs *MicroGamepadSnapshot) WithSnapshotData(snapshotData []byte) *MicroGamepadSnapshot {
+	objc.Send[objc.ID](objref.IDOf(mgs), objc.RegisterName("setSnapshotData:"), rt.BytesToNSData(snapshotData))
 	return mgs
 }
 
@@ -85,9 +89,10 @@ func (mgs *MicroGamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler
 }
 
 // SnapshotData returns the snapshot data.
-func (mgs *MicroGamepadSnapshot) SnapshotData() obj.Object {
+func (mgs *MicroGamepadSnapshot) SnapshotData() []byte {
+	defer runtime.KeepAlive(mgs)
 	_r := objc.Send[objc.ID](objref.IDOf(mgs), objc.RegisterName("snapshotData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ MicroGamepadProvider = (*MicroGamepadSnapshot)(nil)

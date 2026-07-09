@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func animatedValueAdopt(id objc.ID) *AnimatedValue {
 
 // Description returns the object's -description text.
 func (av *AnimatedValue) Description() string {
+	defer runtime.KeepAlive(av)
 	return rt.Description(objref.IDOf(av))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (av *AnimatedValue) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(av)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(av), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (av *AnimatedValue) IsKind(className string) bool {
+	defer runtime.KeepAlive(av)
 	return rt.IsKind(objref.IDOf(av), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (av *AnimatedValue) String() string {
+	defer runtime.KeepAlive(av)
 	return rt.Description(objref.IDOf(av))
 }
 
@@ -76,17 +82,20 @@ func (av *AnimatedValue) WithInterpolation(interpolation AnimatedValueInterpolat
 
 // IsAnimated reports whether the object is animated.
 func (av *AnimatedValue) IsAnimated() bool {
+	defer runtime.KeepAlive(av)
 	_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("isAnimated"))
 	return _r
 }
 
 // Clear wraps the corresponding Objective-C method.
 func (av *AnimatedValue) Clear() {
+	defer runtime.KeepAlive(av)
 	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("clear"))
 }
 
 // GetTimesMaxCount wraps the corresponding Objective-C method.
 func (av *AnimatedValue) GetTimesMaxCount(maxCount int) (result int, timesArray float64) {
+	defer runtime.KeepAlive(av)
 	var _out0 float64
 	_r := objc.Send[int](objref.IDOf(av), objc.RegisterName("getTimes:maxCount:"), unsafe.Pointer(&_out0), maxCount)
 	return _r, _out0
@@ -94,30 +103,35 @@ func (av *AnimatedValue) GetTimesMaxCount(maxCount int) (result int, timesArray 
 
 // Precision returns the precision.
 func (av *AnimatedValue) Precision() DataPrecision {
+	defer runtime.KeepAlive(av)
 	_r := objc.Send[DataPrecision](objref.IDOf(av), objc.RegisterName("precision"))
 	return _r
 }
 
 // TimeSampleCount returns the time sample count.
 func (av *AnimatedValue) TimeSampleCount() int {
+	defer runtime.KeepAlive(av)
 	_r := objc.Send[int](objref.IDOf(av), objc.RegisterName("timeSampleCount"))
 	return _r
 }
 
 // MinimumTime returns the minimum time.
 func (av *AnimatedValue) MinimumTime() float64 {
+	defer runtime.KeepAlive(av)
 	_r := objc.Send[float64](objref.IDOf(av), objc.RegisterName("minimumTime"))
 	return _r
 }
 
 // MaximumTime returns the maximum time.
 func (av *AnimatedValue) MaximumTime() float64 {
+	defer runtime.KeepAlive(av)
 	_r := objc.Send[float64](objref.IDOf(av), objc.RegisterName("maximumTime"))
 	return _r
 }
 
 // Interpolation returns the interpolation.
 func (av *AnimatedValue) Interpolation() AnimatedValueInterpolation {
+	defer runtime.KeepAlive(av)
 	_r := objc.Send[AnimatedValueInterpolation](objref.IDOf(av), objc.RegisterName("interpolation"))
 	return _r
 }
@@ -126,6 +140,7 @@ func (av *AnimatedValue) Interpolation() AnimatedValueInterpolation {
 //
 // KeyTimes returns the collection as a Go slice.
 func (av *AnimatedValue) KeyTimes() []obj.Object {
+	defer runtime.KeepAlive(av)
 	_arr := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("keyTimes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

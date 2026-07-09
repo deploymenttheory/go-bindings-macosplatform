@@ -5,6 +5,8 @@
 package symbols
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewSymbolDisappearEffect() *SymbolDisappearEffect {
 
 // EffectWithByLayer returns an effect that makes each layer disappear separately.
 func (sde *SymbolDisappearEffect) EffectWithByLayer() *SymbolDisappearEffect {
+	defer runtime.KeepAlive(sde)
 	_r := objc.Send[objc.ID](objref.IDOf(sde), objc.RegisterName("effectWithByLayer"))
 	return SymbolDisappearEffectFromID(_r)
 }
 
 // EffectWithWholeSymbol returns an effect that makes all layers disappear simultaneously.
 func (sde *SymbolDisappearEffect) EffectWithWholeSymbol() *SymbolDisappearEffect {
+	defer runtime.KeepAlive(sde)
 	_r := objc.Send[objc.ID](objref.IDOf(sde), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolDisappearEffectFromID(_r)
 }

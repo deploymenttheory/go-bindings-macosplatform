@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func affineTransformAdopt(id objc.ID) *AffineTransform {
 
 // Description returns the object's -description text.
 func (at *AffineTransform) Description() string {
+	defer runtime.KeepAlive(at)
 	return rt.Description(objref.IDOf(at))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (at *AffineTransform) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(at)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(at), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (at *AffineTransform) IsKind(className string) bool {
+	defer runtime.KeepAlive(at)
 	return rt.IsKind(objref.IDOf(at), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (at *AffineTransform) String() string {
+	defer runtime.KeepAlive(at)
 	return rt.Description(objref.IDOf(at))
 }
 
@@ -77,6 +83,7 @@ func NewAffineTransform() *AffineTransform {
 
 // NewAffineTransformWithTransform initializes the receiver’s matrix using another transform object.
 func NewAffineTransformWithTransform(transform *AffineTransform) *AffineTransform {
+	defer runtime.KeepAlive(transform)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAffineTransform")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTransform:"), objref.IDOf(transform))
 	return affineTransformAdopt(_id)
@@ -89,59 +96,71 @@ func (at *AffineTransform) WithObservationInfo(observationInfo unsafe.Pointer) *
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (at *AffineTransform) WithScriptingProperties(scriptingProperties obj.Object) *AffineTransform {
-	objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (at *AffineTransform) WithScriptingProperties(scriptingProperties map[string]obj.Object) *AffineTransform {
+	objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return at
 }
 
 // TranslateXByYBy applies the specified translation factors to the receiver’s transformation matrix.
 func (at *AffineTransform) TranslateXByYBy(deltaX float64, deltaY float64) {
+	defer runtime.KeepAlive(at)
 	objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("translateXBy:yBy:"), deltaX, deltaY)
 }
 
 // RotateByDegrees applies a rotation factor (measured in degrees) to the receiver’s transformation matrix.
 func (at *AffineTransform) RotateByDegrees(angle float64) {
+	defer runtime.KeepAlive(at)
 	objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("rotateByDegrees:"), angle)
 }
 
 // RotateByRadians applies a rotation factor (measured in radians) to the receiver’s transformation matrix.
 func (at *AffineTransform) RotateByRadians(angle float64) {
+	defer runtime.KeepAlive(at)
 	objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("rotateByRadians:"), angle)
 }
 
 // ScaleBy applies the specified scaling factor along both x and y axes to the receiver’s transformation matrix.
 func (at *AffineTransform) ScaleBy(scale float64) {
+	defer runtime.KeepAlive(at)
 	objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("scaleBy:"), scale)
 }
 
 // ScaleXByYBy applies scaling factors to each axis of the receiver’s transformation matrix.
 func (at *AffineTransform) ScaleXByYBy(scaleX float64, scaleY float64) {
+	defer runtime.KeepAlive(at)
 	objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("scaleXBy:yBy:"), scaleX, scaleY)
 }
 
 // Invert replaces the receiver’s matrix with its inverse matrix.
 func (at *AffineTransform) Invert() {
+	defer runtime.KeepAlive(at)
 	objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("invert"))
 }
 
 // AppendTransform appends the specified matrix to the receiver’s matrix.
 func (at *AffineTransform) AppendTransform(transform *AffineTransform) {
+	defer runtime.KeepAlive(at)
+	defer runtime.KeepAlive(transform)
 	objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("appendTransform:"), objref.IDOf(transform))
 }
 
 // PrependTransform prepends the specified matrix to the receiver’s matrix.
 func (at *AffineTransform) PrependTransform(transform *AffineTransform) {
+	defer runtime.KeepAlive(at)
+	defer runtime.KeepAlive(transform)
 	objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("prependTransform:"), objref.IDOf(transform))
 }
 
 // TransformPoint applies the receiver’s transform to the specified point and returns the result.
 func (at *AffineTransform) TransformPoint(aPoint corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(at), objc.RegisterName("transformPoint:"), aPoint)
 	return _r
 }
 
 // TransformSize applies the receiver’s transform to the specified size and returns the results.
 func (at *AffineTransform) TransformSize(aSize corefoundation.CGSize) corefoundation.CGSize {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(at), objc.RegisterName("transformSize:"), aSize)
 	return _r
 }

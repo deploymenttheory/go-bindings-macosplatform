@@ -5,6 +5,8 @@
 package photosui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func projectSectionAdopt(id objc.ID) *ProjectSection {
 
 // Description returns the object's -description text.
 func (ps *ProjectSection) Description() string {
+	defer runtime.KeepAlive(ps)
 	return rt.Description(objref.IDOf(ps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ps *ProjectSection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ps *ProjectSection) IsKind(className string) bool {
+	defer runtime.KeepAlive(ps)
 	return rt.IsKind(objref.IDOf(ps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ps *ProjectSection) String() string {
+	defer runtime.KeepAlive(ps)
 	return rt.Description(objref.IDOf(ps))
 }
 
@@ -76,18 +83,21 @@ func NewProjectSection() *ProjectSection {
 //
 // SectionContents returns the collection as a Go slice.
 func (ps *ProjectSection) SectionContents() []*ProjectSectionContent {
+	defer runtime.KeepAlive(ps)
 	_arr := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("sectionContents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ProjectSectionContent { return ProjectSectionContentFromID(_id) })
 }
 
 // SectionType returns the intended usage of the section (e.g., cover, content, auxiliary)
 func (ps *ProjectSection) SectionType() ProjectSectionType {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[ProjectSectionType](objref.IDOf(ps), objc.RegisterName("sectionType"))
 	return _r
 }
 
 // Title returns title for the section (e.g., a Moment name or a general geographical location), might be an empty string.
 func (ps *ProjectSection) Title() string {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""

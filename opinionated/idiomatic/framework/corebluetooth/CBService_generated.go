@@ -5,6 +5,8 @@
 package corebluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,12 +49,14 @@ func serviceAdopt(id objc.ID) *Service {
 
 // Peripheral returns a back-pointer to the peripheral this service belongs to.
 func (s *Service) Peripheral() *Peripheral {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("peripheral"))
 	return PeripheralFromID(_r)
 }
 
 // IsPrimary reports whether the type of the service (primary or secondary).
 func (s *Service) IsPrimary() bool {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isPrimary"))
 	return _r
 }
@@ -61,6 +65,7 @@ func (s *Service) IsPrimary() bool {
 //
 // IncludedServices returns the collection as a Go slice.
 func (s *Service) IncludedServices() []*Service {
+	defer runtime.KeepAlive(s)
 	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("includedServices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Service { return ServiceFromID(_id) })
 }
@@ -69,6 +74,7 @@ func (s *Service) IncludedServices() []*Service {
 //
 // Characteristics returns the collection as a Go slice.
 func (s *Service) Characteristics() []*Characteristic {
+	defer runtime.KeepAlive(s)
 	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("characteristics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Characteristic { return CharacteristicFromID(_id) })
 }

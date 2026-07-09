@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -103,6 +105,7 @@ func (tas *TriangleAccelerationStructure) WithLabel(label string) *TriangleAccel
 
 // TriangleCount returns number of triangles. Changes to this property require rebuilding the acceleration structure. Note that this property is an alias for the polygonCount property.
 func (tas *TriangleAccelerationStructure) TriangleCount() int {
+	defer runtime.KeepAlive(tas)
 	_r := objc.Send[int](objref.IDOf(tas), objc.RegisterName("triangleCount"))
 	return _r
 }

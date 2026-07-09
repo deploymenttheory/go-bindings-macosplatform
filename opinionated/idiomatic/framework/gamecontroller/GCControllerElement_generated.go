@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func controllerElementAdopt(id objc.ID) *ControllerElement {
 
 // Description returns the object's -description text.
 func (ce *ControllerElement) Description() string {
+	defer runtime.KeepAlive(ce)
 	return rt.Description(objref.IDOf(ce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ce *ControllerElement) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ce)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ce *ControllerElement) IsKind(className string) bool {
+	defer runtime.KeepAlive(ce)
 	return rt.IsKind(objref.IDOf(ce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ce *ControllerElement) String() string {
+	defer runtime.KeepAlive(ce)
 	return rt.Description(objref.IDOf(ce))
 }
 
@@ -100,30 +107,35 @@ func (ce *ControllerElement) WithUnmappedLocalizedName(unmappedLocalizedName str
 
 // Collection returns each element can be part of a wider collection of inputs that map to a single logical element. A directional pad (dpad) is a logical collection of two axis inputs and thus each axis belongs to the same collection element - the dpad.
 func (ce *ControllerElement) Collection() *ControllerElement {
+	defer runtime.KeepAlive(ce)
 	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("collection"))
 	return ControllerElementFromID(_r)
 }
 
 // IsAnalog reports whether check if the element can support more than just digital values, such as decimal ranges between 0 and 1. Defaults to true for most elements.
 func (ce *ControllerElement) IsAnalog() bool {
+	defer runtime.KeepAlive(ce)
 	_r := objc.Send[bool](objref.IDOf(ce), objc.RegisterName("isAnalog"))
 	return _r
 }
 
 // IsBoundToSystemGesture reports whether check if the element is bound to a system gesture. Defaults to false for most elements.
 func (ce *ControllerElement) IsBoundToSystemGesture() bool {
+	defer runtime.KeepAlive(ce)
 	_r := objc.Send[bool](objref.IDOf(ce), objc.RegisterName("isBoundToSystemGesture"))
 	return _r
 }
 
 // PreferredSystemGestureState returns the preferred system gesture state for this element. Defaults to GCSystemGestureStateEnabled for most elements
 func (ce *ControllerElement) PreferredSystemGestureState() SystemGestureState {
+	defer runtime.KeepAlive(ce)
 	_r := objc.Send[SystemGestureState](objref.IDOf(ce), objc.RegisterName("preferredSystemGestureState"))
 	return _r
 }
 
 // SfSymbolsName returns the element's SF Symbols name, taking input remapping into account.
 func (ce *ControllerElement) SfSymbolsName() string {
+	defer runtime.KeepAlive(ce)
 	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("sfSymbolsName"))
 	if _r == 0 {
 		return ""
@@ -133,6 +145,7 @@ func (ce *ControllerElement) SfSymbolsName() string {
 
 // LocalizedName returns the element's localized name, taking input remapping into account.
 func (ce *ControllerElement) LocalizedName() string {
+	defer runtime.KeepAlive(ce)
 	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
@@ -142,6 +155,7 @@ func (ce *ControllerElement) LocalizedName() string {
 
 // UnmappedSfSymbolsName returns the element's SF Symbols name, not taking any input remapping into account.
 func (ce *ControllerElement) UnmappedSfSymbolsName() string {
+	defer runtime.KeepAlive(ce)
 	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("unmappedSfSymbolsName"))
 	if _r == 0 {
 		return ""
@@ -151,6 +165,7 @@ func (ce *ControllerElement) UnmappedSfSymbolsName() string {
 
 // UnmappedLocalizedName returns the element's localized name, not taking any input remapping into account.
 func (ce *ControllerElement) UnmappedLocalizedName() string {
+	defer runtime.KeepAlive(ce)
 	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("unmappedLocalizedName"))
 	if _r == 0 {
 		return ""
@@ -159,9 +174,11 @@ func (ce *ControllerElement) UnmappedLocalizedName() string {
 }
 
 // Aliases returns a set of aliases that can be used to access this element with keyed subscript notation.
-func (ce *ControllerElement) Aliases() obj.Object {
+// The order of the returned elements is unspecified.
+func (ce *ControllerElement) Aliases() []string {
+	defer runtime.KeepAlive(ce)
 	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("aliases"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // isControllerElement marks ControllerElement — and, by embedding promotion, its

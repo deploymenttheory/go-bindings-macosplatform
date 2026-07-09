@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nEFilterReportAdopt(id objc.ID) *NEFilterReport {
 
 // Description returns the object's -description text.
 func (nfr *NEFilterReport) Description() string {
+	defer runtime.KeepAlive(nfr)
 	return rt.Description(objref.IDOf(nfr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nfr *NEFilterReport) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nfr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nfr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nfr *NEFilterReport) IsKind(className string) bool {
+	defer runtime.KeepAlive(nfr)
 	return rt.IsKind(objref.IDOf(nfr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nfr *NEFilterReport) String() string {
+	defer runtime.KeepAlive(nfr)
 	return rt.Description(objref.IDOf(nfr))
 }
 
@@ -74,30 +81,35 @@ func NewNEFilterReport() *NEFilterReport {
 
 // Flow returns the flow on which the described action was taken.
 func (nfr *NEFilterReport) Flow() *NEFilterFlow {
+	defer runtime.KeepAlive(nfr)
 	_r := objc.Send[objc.ID](objref.IDOf(nfr), objc.RegisterName("flow"))
 	return NEFilterFlowFromID(_r)
 }
 
 // Action returns the action taken upon the reported flow.
 func (nfr *NEFilterReport) Action() NEFilterAction {
+	defer runtime.KeepAlive(nfr)
 	_r := objc.Send[NEFilterAction](objref.IDOf(nfr), objc.RegisterName("action"))
 	return _r
 }
 
 // Event returns the type of event that the report is reporting.
 func (nfr *NEFilterReport) Event() NEFilterReportEvent {
+	defer runtime.KeepAlive(nfr)
 	_r := objc.Send[NEFilterReportEvent](objref.IDOf(nfr), objc.RegisterName("event"))
 	return _r
 }
 
 // BytesInboundCount returns the number of inbound bytes received from the flow. This property is only non-zero when the report event is NEFilterReportEventFlowClosed or NEFilterReportEventFlowStatistics.
 func (nfr *NEFilterReport) BytesInboundCount() int {
+	defer runtime.KeepAlive(nfr)
 	_r := objc.Send[int](objref.IDOf(nfr), objc.RegisterName("bytesInboundCount"))
 	return _r
 }
 
 // BytesOutboundCount returns the number of outbound bytes sent on the flow. This property is only non-zero when the report event is NEFilterReportEventFlowClosed or NEFilterReportEventFlowStatistics.
 func (nfr *NEFilterReport) BytesOutboundCount() int {
+	defer runtime.KeepAlive(nfr)
 	_r := objc.Send[int](objref.IDOf(nfr), objc.RegisterName("bytesOutboundCount"))
 	return _r
 }

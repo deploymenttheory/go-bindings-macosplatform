@@ -5,8 +5,11 @@
 package multipeerconnectivity
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,55 +50,78 @@ func nearbyServiceBrowserAdopt(id objc.ID) *NearbyServiceBrowser {
 
 // Description returns the object's -description text.
 func (nsb *NearbyServiceBrowser) Description() string {
+	defer runtime.KeepAlive(nsb)
 	return rt.Description(objref.IDOf(nsb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nsb *NearbyServiceBrowser) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nsb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nsb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nsb *NearbyServiceBrowser) IsKind(className string) bool {
+	defer runtime.KeepAlive(nsb)
 	return rt.IsKind(objref.IDOf(nsb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nsb *NearbyServiceBrowser) String() string {
+	defer runtime.KeepAlive(nsb)
 	return rt.Description(objref.IDOf(nsb))
 }
 
 // NewNearbyServiceBrowserWithPeerServiceType initializes the nearby service browser object.
 func NewNearbyServiceBrowserWithPeerServiceType(myPeerID *PeerID, serviceType string) *NearbyServiceBrowser {
+	defer runtime.KeepAlive(myPeerID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MCNearbyServiceBrowser")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPeer:serviceType:"), objref.IDOf(myPeerID), purego.NSString(serviceType))
 	return nearbyServiceBrowserAdopt(_id)
 }
 
+// WithDelegate sets the delegate object that handles browser-related events.
+func (nsb *NearbyServiceBrowser) WithDelegate(delegate NearbyServiceBrowserDelegate) *NearbyServiceBrowser {
+	_shim := newNearbyServiceBrowserDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(nsb), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(nsb), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return nsb
+}
+
 // StartBrowsingForPeers starts browsing for peers.
 func (nsb *NearbyServiceBrowser) StartBrowsingForPeers() {
+	defer runtime.KeepAlive(nsb)
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("startBrowsingForPeers"))
 }
 
 // StopBrowsingForPeers stops browsing for peers.
 func (nsb *NearbyServiceBrowser) StopBrowsingForPeers() {
+	defer runtime.KeepAlive(nsb)
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("stopBrowsingForPeers"))
 }
 
 // InvitePeerToSessionWithContextTimeout invites a discovered peer to join a Multipeer Connectivity session.
-func (nsb *NearbyServiceBrowser) InvitePeerToSessionWithContextTimeout(peerID *PeerID, session *Session, context_ obj.Object, timeout float64) {
-	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("invitePeer:toSession:withContext:timeout:"), objref.IDOf(peerID), objref.IDOf(session), objref.IDOf(context_), timeout)
+func (nsb *NearbyServiceBrowser) InvitePeerToSessionWithContextTimeout(peerID *PeerID, session *Session, context_ []byte, timeout float64) {
+	defer runtime.KeepAlive(nsb)
+	defer runtime.KeepAlive(peerID)
+	defer runtime.KeepAlive(session)
+	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("invitePeer:toSession:withContext:timeout:"), objref.IDOf(peerID), objref.IDOf(session), rt.BytesToNSData(context_), timeout)
 }
 
 // MyPeerID returns the my peer ID.
 func (nsb *NearbyServiceBrowser) MyPeerID() *PeerID {
+	defer runtime.KeepAlive(nsb)
 	_r := objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("myPeerID"))
 	return PeerIDFromID(_r)
 }
 
 // ServiceType returns the service type.
 func (nsb *NearbyServiceBrowser) ServiceType() string {
+	defer runtime.KeepAlive(nsb)
 	_r := objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("serviceType"))
 	if _r == 0 {
 		return ""

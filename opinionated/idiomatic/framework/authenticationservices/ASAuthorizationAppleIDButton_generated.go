@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func authorizationAppleIDButtonAdopt(id objc.ID) *AuthorizationAppleIDButton {
 
 // Description returns the object's -description text.
 func (aaib *AuthorizationAppleIDButton) Description() string {
+	defer runtime.KeepAlive(aaib)
 	return rt.Description(objref.IDOf(aaib))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aaib *AuthorizationAppleIDButton) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aaib)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aaib), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aaib *AuthorizationAppleIDButton) IsKind(className string) bool {
+	defer runtime.KeepAlive(aaib)
 	return rt.IsKind(objref.IDOf(aaib), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aaib *AuthorizationAppleIDButton) String() string {
+	defer runtime.KeepAlive(aaib)
 	return rt.Description(objref.IDOf(aaib))
 }
 
@@ -89,6 +96,7 @@ func (aaib *AuthorizationAppleIDButton) WithCornerRadius(cornerRadius float64) *
 
 // CornerRadius returns the corner radius.
 func (aaib *AuthorizationAppleIDButton) CornerRadius() float64 {
+	defer runtime.KeepAlive(aaib)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {

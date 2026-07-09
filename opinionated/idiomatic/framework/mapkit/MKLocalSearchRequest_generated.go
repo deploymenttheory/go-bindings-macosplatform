@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func localSearchRequestAdopt(id objc.ID) *LocalSearchRequest {
 
 // Description returns the object's -description text.
 func (lsr *LocalSearchRequest) Description() string {
+	defer runtime.KeepAlive(lsr)
 	return rt.Description(objref.IDOf(lsr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lsr *LocalSearchRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lsr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lsr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lsr *LocalSearchRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(lsr)
 	return rt.IsKind(objref.IDOf(lsr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lsr *LocalSearchRequest) String() string {
+	defer runtime.KeepAlive(lsr)
 	return rt.Description(objref.IDOf(lsr))
 }
 
@@ -81,6 +88,7 @@ func NewLocalSearchRequestWithNaturalLanguageQuery(naturalLanguageQuery string) 
 
 // NewLocalSearchRequestWithCompletion creates a new LocalSearchRequest.
 func NewLocalSearchRequestWithCompletion(completion *LocalSearchCompletion) *LocalSearchRequest {
+	defer runtime.KeepAlive(completion)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLocalSearchRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompletion:"), objref.IDOf(completion))
 	return localSearchRequestAdopt(_id)
@@ -106,18 +114,21 @@ func (lsr *LocalSearchRequest) WithResultTypes(resultTypes LocalSearchResultType
 
 // WithPointOfInterestFilter sets the point of interest filter.
 func (lsr *LocalSearchRequest) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalSearchRequest {
+	defer runtime.KeepAlive(pointOfInterestFilter)
 	objc.Send[objc.ID](objref.IDOf(lsr), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 	return lsr
 }
 
 // WithAddressFilter sets the address filter.
 func (lsr *LocalSearchRequest) WithAddressFilter(addressFilter *AddressFilter) *LocalSearchRequest {
+	defer runtime.KeepAlive(addressFilter)
 	objc.Send[objc.ID](objref.IDOf(lsr), objc.RegisterName("setAddressFilter:"), objref.IDOf(addressFilter))
 	return lsr
 }
 
 // NaturalLanguageQuery returns the natural language query.
 func (lsr *LocalSearchRequest) NaturalLanguageQuery() string {
+	defer runtime.KeepAlive(lsr)
 	_r := objc.Send[objc.ID](objref.IDOf(lsr), objc.RegisterName("naturalLanguageQuery"))
 	if _r == 0 {
 		return ""
@@ -127,24 +138,28 @@ func (lsr *LocalSearchRequest) NaturalLanguageQuery() string {
 
 // RegionPriority returns the region priority.
 func (lsr *LocalSearchRequest) RegionPriority() LocalSearchRegionPriority {
+	defer runtime.KeepAlive(lsr)
 	_r := objc.Send[LocalSearchRegionPriority](objref.IDOf(lsr), objc.RegisterName("regionPriority"))
 	return _r
 }
 
 // ResultTypes returns the result types.
 func (lsr *LocalSearchRequest) ResultTypes() LocalSearchResultType {
+	defer runtime.KeepAlive(lsr)
 	_r := objc.Send[LocalSearchResultType](objref.IDOf(lsr), objc.RegisterName("resultTypes"))
 	return _r
 }
 
 // PointOfInterestFilter returns the point of interest filter.
 func (lsr *LocalSearchRequest) PointOfInterestFilter() *PointOfInterestFilter {
+	defer runtime.KeepAlive(lsr)
 	_r := objc.Send[objc.ID](objref.IDOf(lsr), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
 // AddressFilter returns the address filter.
 func (lsr *LocalSearchRequest) AddressFilter() *AddressFilter {
+	defer runtime.KeepAlive(lsr)
 	_r := objc.Send[objc.ID](objref.IDOf(lsr), objc.RegisterName("addressFilter"))
 	return AddressFilterFromID(_r)
 }

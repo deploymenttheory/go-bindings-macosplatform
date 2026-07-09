@@ -5,9 +5,12 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -46,22 +49,27 @@ func cameraControllerAdopt(id objc.ID) *CameraController {
 
 // Description returns the object's -description text.
 func (cc *CameraController) Description() string {
+	defer runtime.KeepAlive(cc)
 	return rt.Description(objref.IDOf(cc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cc *CameraController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cc *CameraController) IsKind(className string) bool {
+	defer runtime.KeepAlive(cc)
 	return rt.IsKind(objref.IDOf(cc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cc *CameraController) String() string {
+	defer runtime.KeepAlive(cc)
 	return rt.Description(objref.IDOf(cc))
 }
 
@@ -71,8 +79,19 @@ func NewCameraController() *CameraController {
 	return cameraControllerAdopt(_id)
 }
 
+// WithDelegate sets the delegate.
+func (cc *CameraController) WithDelegate(delegate CameraControllerDelegate) *CameraController {
+	_shim := newCameraControllerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(cc), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(cc), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return cc
+}
+
 // WithPointOfView sets the point of view.
 func (cc *CameraController) WithPointOfView(pointOfView NodeProvider) *CameraController {
+	defer runtime.KeepAlive(pointOfView)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setPointOfView:"), objref.IDOf(pointOfView))
 	return cc
 }
@@ -127,120 +146,142 @@ func (cc *CameraController) WithMaximumHorizontalAngle(maximumHorizontalAngle fl
 
 // TranslateInCameraSpaceByXYZ wraps the corresponding Objective-C method.
 func (cc *CameraController) TranslateInCameraSpaceByXYZ(deltaX float32, deltaY float32, deltaZ float32) {
+	defer runtime.KeepAlive(cc)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("translateInCameraSpaceByX:Y:Z:"), deltaX, deltaY, deltaZ)
 }
 
 // FrameNodes wraps the corresponding Objective-C method.
 func (cc *CameraController) FrameNodes(nodes []*Node) {
+	defer runtime.KeepAlive(cc)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("frameNodes:"), purego.SliceToNSArray(nodes, func(_v *Node) objc.ID { return objref.IDOf(_v) }))
 }
 
 // RotateByXY wraps the corresponding Objective-C method.
 func (cc *CameraController) RotateByXY(deltaX float32, deltaY float32) {
+	defer runtime.KeepAlive(cc)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("rotateByX:Y:"), deltaX, deltaY)
 }
 
 // RollByAroundScreenPointViewport wraps the corresponding Objective-C method.
 func (cc *CameraController) RollByAroundScreenPointViewport(delta float32, point corefoundation.CGPoint, viewport corefoundation.CGSize) {
+	defer runtime.KeepAlive(cc)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("rollBy:aroundScreenPoint:viewport:"), delta, point, viewport)
 }
 
 // DollyByOnScreenPointViewport wraps the corresponding Objective-C method.
 func (cc *CameraController) DollyByOnScreenPointViewport(delta float32, point corefoundation.CGPoint, viewport corefoundation.CGSize) {
+	defer runtime.KeepAlive(cc)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("dollyBy:onScreenPoint:viewport:"), delta, point, viewport)
 }
 
 // RollAroundTarget wraps the corresponding Objective-C method.
 func (cc *CameraController) RollAroundTarget(delta float32) {
+	defer runtime.KeepAlive(cc)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("rollAroundTarget:"), delta)
 }
 
 // DollyToTarget wraps the corresponding Objective-C method.
 func (cc *CameraController) DollyToTarget(delta float32) {
+	defer runtime.KeepAlive(cc)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("dollyToTarget:"), delta)
 }
 
 // ClearRoll clears roll.
 func (cc *CameraController) ClearRoll() {
+	defer runtime.KeepAlive(cc)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("clearRoll"))
 }
 
 // StopInertia stops inertia.
 func (cc *CameraController) StopInertia() {
+	defer runtime.KeepAlive(cc)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("stopInertia"))
 }
 
 // BeginInteractionWithViewport begins interaction with viewport.
 func (cc *CameraController) BeginInteractionWithViewport(location corefoundation.CGPoint, viewport corefoundation.CGSize) {
+	defer runtime.KeepAlive(cc)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("beginInteraction:withViewport:"), location, viewport)
 }
 
 // ContinueInteractionWithViewportSensitivity wraps the corresponding Objective-C method.
 func (cc *CameraController) ContinueInteractionWithViewportSensitivity(location corefoundation.CGPoint, viewport corefoundation.CGSize, sensitivity float64) {
+	defer runtime.KeepAlive(cc)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("continueInteraction:withViewport:sensitivity:"), location, viewport, sensitivity)
 }
 
 // EndInteractionWithViewportVelocity ends interaction with viewport velocity.
 func (cc *CameraController) EndInteractionWithViewportVelocity(location corefoundation.CGPoint, viewport corefoundation.CGSize, velocity corefoundation.CGPoint) {
+	defer runtime.KeepAlive(cc)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("endInteraction:withViewport:velocity:"), location, viewport, velocity)
 }
 
 // PointOfView returns the point of view.
 func (cc *CameraController) PointOfView() *Node {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("pointOfView"))
 	return NodeFromID(_r)
 }
 
 // InteractionMode returns the interaction mode.
 func (cc *CameraController) InteractionMode() InteractionMode {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[InteractionMode](objref.IDOf(cc), objc.RegisterName("interactionMode"))
 	return _r
 }
 
 // AutomaticTarget wraps the corresponding Objective-C method.
 func (cc *CameraController) AutomaticTarget() bool {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("automaticTarget"))
 	return _r
 }
 
 // InertiaEnabled wraps the corresponding Objective-C method.
 func (cc *CameraController) InertiaEnabled() bool {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("inertiaEnabled"))
 	return _r
 }
 
 // InertiaFriction returns the inertia friction.
 func (cc *CameraController) InertiaFriction() float32 {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[float32](objref.IDOf(cc), objc.RegisterName("inertiaFriction"))
 	return _r
 }
 
 // IsInertiaRunning reports whether the object is inertia running.
 func (cc *CameraController) IsInertiaRunning() bool {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("isInertiaRunning"))
 	return _r
 }
 
 // MinimumVerticalAngle returns the minimum vertical angle.
 func (cc *CameraController) MinimumVerticalAngle() float32 {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[float32](objref.IDOf(cc), objc.RegisterName("minimumVerticalAngle"))
 	return _r
 }
 
 // MaximumVerticalAngle returns the maximum vertical angle.
 func (cc *CameraController) MaximumVerticalAngle() float32 {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[float32](objref.IDOf(cc), objc.RegisterName("maximumVerticalAngle"))
 	return _r
 }
 
 // MinimumHorizontalAngle returns the minimum horizontal angle.
 func (cc *CameraController) MinimumHorizontalAngle() float32 {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[float32](objref.IDOf(cc), objc.RegisterName("minimumHorizontalAngle"))
 	return _r
 }
 
 // MaximumHorizontalAngle returns the maximum horizontal angle.
 func (cc *CameraController) MaximumHorizontalAngle() float32 {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[float32](objref.IDOf(cc), objc.RegisterName("maximumHorizontalAngle"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package corewlan
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func channelAdopt(id objc.ID) *Channel {
 
 // Description returns the object's -description text.
 func (c *Channel) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Channel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Channel) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Channel) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
@@ -74,24 +81,29 @@ func NewChannel() *Channel {
 
 // IsEqualToChannel determine CWChannel object equality.
 func (c *Channel) IsEqualToChannel(channel *Channel) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(channel)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isEqualToChannel:"), objref.IDOf(channel))
 	return _r
 }
 
 // ChannelNumber returns the channel number represented as an integer value.
 func (c *Channel) ChannelNumber() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("channelNumber"))
 	return _r
 }
 
 // ChannelWidth returns the channel width as indicated by the CWChannelWidth type.
 func (c *Channel) ChannelWidth() ChannelWidth {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[ChannelWidth](objref.IDOf(c), objc.RegisterName("channelWidth"))
 	return _r
 }
 
 // ChannelBand returns the channel band as indicated by the CWChannelBand type.
 func (c *Channel) ChannelBand() ChannelBand {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[ChannelBand](objref.IDOf(c), objc.RegisterName("channelBand"))
 	return _r
 }

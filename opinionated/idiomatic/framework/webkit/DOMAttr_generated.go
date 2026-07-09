@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -75,6 +77,7 @@ func (da *DOMAttr) WithTextContent(textContent string) *DOMAttr {
 
 // Name returns the name.
 func (da *DOMAttr) Name() string {
+	defer runtime.KeepAlive(da)
 	_r := objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -84,12 +87,14 @@ func (da *DOMAttr) Name() string {
 
 // Specified wraps the corresponding Objective-C method.
 func (da *DOMAttr) Specified() bool {
+	defer runtime.KeepAlive(da)
 	_r := objc.Send[bool](objref.IDOf(da), objc.RegisterName("specified"))
 	return _r
 }
 
 // Value returns the value.
 func (da *DOMAttr) Value() string {
+	defer runtime.KeepAlive(da)
 	_r := objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
@@ -99,12 +104,14 @@ func (da *DOMAttr) Value() string {
 
 // OwnerElement returns the owner element.
 func (da *DOMAttr) OwnerElement() *DOMElement {
+	defer runtime.KeepAlive(da)
 	_r := objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("ownerElement"))
 	return DOMElementFromID(_r)
 }
 
 // Style returns the style.
 func (da *DOMAttr) Style() *DOMCSSStyleDeclaration {
+	defer runtime.KeepAlive(da)
 	_r := objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("style"))
 	return DOMCSSStyleDeclarationFromID(_r)
 }

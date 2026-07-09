@@ -38,9 +38,9 @@ func UNNotificationAttachmentFromID(id objc.ID) *UNNotificationAttachment {
 }
 
 // Creates an attachment object from the specified file and options.
-func UNNotificationAttachmentAttachmentWithIdentifierURLOptionsError(identifier *foundation.NSString, uRL *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID]) (*UNNotificationAttachment, error) {
+func UNNotificationAttachmentAttachmentWithIdentifierURLOptionsError(identifier *foundation.NSString, url *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID]) (*UNNotificationAttachment, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationAttachment), _uNNotificationAttachmentSelAttachmentWithIdentifierURLOptionsError, identifier.Ptr(), uRL.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationAttachment), _uNNotificationAttachmentSelAttachmentWithIdentifierURLOptionsError, identifier.Ptr(), url.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

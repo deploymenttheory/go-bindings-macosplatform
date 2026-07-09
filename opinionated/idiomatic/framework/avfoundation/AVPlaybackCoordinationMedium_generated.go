@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func playbackCoordinationMediumAdopt(id objc.ID) *PlaybackCoordinationMedium {
 
 // Description returns the object's -description text.
 func (pcm *PlaybackCoordinationMedium) Description() string {
+	defer runtime.KeepAlive(pcm)
 	return rt.Description(objref.IDOf(pcm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pcm *PlaybackCoordinationMedium) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pcm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pcm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pcm *PlaybackCoordinationMedium) IsKind(className string) bool {
+	defer runtime.KeepAlive(pcm)
 	return rt.IsKind(objref.IDOf(pcm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pcm *PlaybackCoordinationMedium) String() string {
+	defer runtime.KeepAlive(pcm)
 	return rt.Description(objref.IDOf(pcm))
 }
 
@@ -76,6 +83,7 @@ func NewPlaybackCoordinationMedium() *PlaybackCoordinationMedium {
 //
 // ConnectedPlaybackCoordinators returns the collection as a Go slice.
 func (pcm *PlaybackCoordinationMedium) ConnectedPlaybackCoordinators() []*PlayerPlaybackCoordinator {
+	defer runtime.KeepAlive(pcm)
 	_arr := objc.Send[objc.ID](objref.IDOf(pcm), objc.RegisterName("connectedPlaybackCoordinators"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerPlaybackCoordinator { return PlayerPlaybackCoordinatorFromID(_id) })
 }

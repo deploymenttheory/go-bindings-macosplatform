@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,33 +51,40 @@ func objectTypeAdopt(id objc.ID) *ObjectType {
 
 // Description returns the object's -description text.
 func (ot *ObjectType) Description() string {
+	defer runtime.KeepAlive(ot)
 	return rt.Description(objref.IDOf(ot))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ot *ObjectType) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ot)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ot), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ot *ObjectType) IsKind(className string) bool {
+	defer runtime.KeepAlive(ot)
 	return rt.IsKind(objref.IDOf(ot), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ot *ObjectType) String() string {
+	defer runtime.KeepAlive(ot)
 	return rt.Description(objref.IDOf(ot))
 }
 
 // RequiresPerObjectAuthorization reports whether returns a Boolean that indicates whether the data type requires per-object authorization.
 func (ot *ObjectType) RequiresPerObjectAuthorization() bool {
+	defer runtime.KeepAlive(ot)
 	_r := objc.Send[bool](objref.IDOf(ot), objc.RegisterName("requiresPerObjectAuthorization"))
 	return _r
 }
 
 // Identifier returns a unique string identifying a type of health object. See HKTypeIdentifiers.h for possible values.
 func (ot *ObjectType) Identifier() string {
+	defer runtime.KeepAlive(ot)
 	_r := objc.Send[objc.ID](objref.IDOf(ot), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""

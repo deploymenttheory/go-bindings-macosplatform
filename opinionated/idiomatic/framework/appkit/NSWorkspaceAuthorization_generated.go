@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func workspaceAuthorizationAdopt(id objc.ID) *WorkspaceAuthorization {
 
 // Description returns the object's -description text.
 func (wa *WorkspaceAuthorization) Description() string {
+	defer runtime.KeepAlive(wa)
 	return rt.Description(objref.IDOf(wa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wa *WorkspaceAuthorization) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wa *WorkspaceAuthorization) IsKind(className string) bool {
+	defer runtime.KeepAlive(wa)
 	return rt.IsKind(objref.IDOf(wa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wa *WorkspaceAuthorization) String() string {
+	defer runtime.KeepAlive(wa)
 	return rt.Description(objref.IDOf(wa))
 }
 

@@ -6,11 +6,13 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,6 +51,9 @@ func mTRClusterContentLauncherAdopt(id objc.ID) *MTRClusterContentLauncher {
 
 // NewMTRClusterContentLauncherWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterContentLauncherWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterContentLauncher {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterContentLauncher")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterContentLauncherAdopt(_id)
@@ -56,6 +61,8 @@ func NewMTRClusterContentLauncherWithDeviceEndpointIDQueue(device *MTRDevice, en
 
 // NewMTRClusterContentLauncherWithDeviceEndpointQueue creates a new MTRClusterContentLauncher.
 func NewMTRClusterContentLauncherWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterContentLauncher {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterContentLauncher")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterContentLauncherAdopt(_id)
@@ -65,6 +72,9 @@ func NewMTRClusterContentLauncherWithDeviceEndpointQueue(device *MTRDevice, endp
 //
 // LaunchContentWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mccl *MTRClusterContentLauncher) LaunchContentWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRContentLauncherClusterLaunchContentParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRContentLauncherClusterLauncherResponseParams, err error) {
+	defer runtime.KeepAlive(mccl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRContentLauncherClusterLauncherResponseParams
 		err error
@@ -90,6 +100,9 @@ func (mccl *MTRClusterContentLauncher) LaunchContentWithParamsExpectedValuesExpe
 //
 // LaunchURLWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mccl *MTRClusterContentLauncher) LaunchURLWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRContentLauncherClusterLaunchURLParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRContentLauncherClusterLauncherResponseParams, err error) {
+	defer runtime.KeepAlive(mccl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRContentLauncherClusterLauncherResponseParams
 		err error
@@ -112,61 +125,83 @@ func (mccl *MTRClusterContentLauncher) LaunchURLWithParamsExpectedValuesExpected
 }
 
 // ReadAttributeAcceptHeaderWithParams reads attribute accept header with params.
-func (mccl *MTRClusterContentLauncher) ReadAttributeAcceptHeaderWithParams(params *MTRReadParams) obj.Object {
+func (mccl *MTRClusterContentLauncher) ReadAttributeAcceptHeaderWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mccl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("readAttributeAcceptHeaderWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSupportedStreamingProtocolsWithParams reads attribute supported streaming protocols with params.
-func (mccl *MTRClusterContentLauncher) ReadAttributeSupportedStreamingProtocolsWithParams(params *MTRReadParams) obj.Object {
+func (mccl *MTRClusterContentLauncher) ReadAttributeSupportedStreamingProtocolsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mccl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("readAttributeSupportedStreamingProtocolsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueInterval writes attribute supported streaming protocols with value expected value interval.
-func (mccl *MTRClusterContentLauncher) WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("writeAttributeSupportedStreamingProtocolsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mccl *MTRClusterContentLauncher) WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mccl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("writeAttributeSupportedStreamingProtocolsWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueIntervalParams writes attribute supported streaming protocols with value expected value interval params.
-func (mccl *MTRClusterContentLauncher) WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("writeAttributeSupportedStreamingProtocolsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mccl *MTRClusterContentLauncher) WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mccl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("writeAttributeSupportedStreamingProtocolsWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mccl *MTRClusterContentLauncher) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mccl *MTRClusterContentLauncher) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mccl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mccl *MTRClusterContentLauncher) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mccl *MTRClusterContentLauncher) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mccl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mccl *MTRClusterContentLauncher) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mccl *MTRClusterContentLauncher) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mccl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mccl *MTRClusterContentLauncher) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mccl *MTRClusterContentLauncher) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mccl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mccl *MTRClusterContentLauncher) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mccl *MTRClusterContentLauncher) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mccl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // LaunchContentWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // LaunchContentWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mccl *MTRClusterContentLauncher) LaunchContentWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRContentLauncherClusterLaunchContentParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRContentLauncherClusterLaunchResponseParams, err error) {
+	defer runtime.KeepAlive(mccl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRContentLauncherClusterLaunchResponseParams
 		err error
@@ -192,6 +227,9 @@ func (mccl *MTRClusterContentLauncher) LaunchContentWithParamsExpectedValuesExpe
 //
 // LaunchURLWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mccl *MTRClusterContentLauncher) LaunchURLWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRContentLauncherClusterLaunchURLParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRContentLauncherClusterLaunchResponseParams, err error) {
+	defer runtime.KeepAlive(mccl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRContentLauncherClusterLaunchResponseParams
 		err error

@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -79,12 +80,14 @@ func (duio *DiscoverUserIdentitiesOperation) WithUserIdentityDiscoveredBlock(use
 
 // WithConfiguration sets the operation’s configuration.
 func (duio *DiscoverUserIdentitiesOperation) WithConfiguration(configuration *OperationConfiguration) *DiscoverUserIdentitiesOperation {
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(duio), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return duio
 }
 
 // WithGroup sets the operation’s group.
 func (duio *DiscoverUserIdentitiesOperation) WithGroup(group *OperationGroup) *DiscoverUserIdentitiesOperation {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(duio), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return duio
 }
@@ -97,6 +100,7 @@ func (duio *DiscoverUserIdentitiesOperation) WithLongLivedOperationWasPersistedB
 
 // WithContainer sets the operation's container.
 func (duio *DiscoverUserIdentitiesOperation) WithContainer(container *Container) *DiscoverUserIdentitiesOperation {
+	defer runtime.KeepAlive(container)
 	objc.Send[objc.ID](objref.IDOf(duio), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return duio
 }
@@ -129,6 +133,7 @@ func (duio *DiscoverUserIdentitiesOperation) WithTimeoutIntervalForResource(time
 //
 // UserIdentityLookupInfos returns the collection as a Go slice.
 func (duio *DiscoverUserIdentitiesOperation) UserIdentityLookupInfos() []*UserIdentityLookupInfo {
+	defer runtime.KeepAlive(duio)
 	_arr := objc.Send[objc.ID](objref.IDOf(duio), objc.RegisterName("userIdentityLookupInfos"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UserIdentityLookupInfo { return UserIdentityLookupInfoFromID(_id) })
 }
@@ -137,6 +142,7 @@ func (duio *DiscoverUserIdentitiesOperation) UserIdentityLookupInfos() []*UserId
 //
 // SetDiscoverUserIdentitiesCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (duio *DiscoverUserIdentitiesOperation) SetDiscoverUserIdentitiesCompletionBlock(ctx context.Context) error {
+	defer runtime.KeepAlive(duio)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error

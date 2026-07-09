@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func startCallCallRecordToCallBackResolutionResultAdopt(id objc.ID) *StartCallCa
 
 // NewStartCallCallRecordToCallBackResolutionResultWithCallRecordResolutionResult creates an object whose resolution involves successfully redialing a call.
 func NewStartCallCallRecordToCallBackResolutionResultWithCallRecordResolutionResult(callRecordResolutionResult *CallRecordResolutionResult) *StartCallCallRecordToCallBackResolutionResult {
+	defer runtime.KeepAlive(callRecordResolutionResult)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INStartCallCallRecordToCallBackResolutionResult")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCallRecordResolutionResult:"), objref.IDOf(callRecordResolutionResult))
 	return startCallCallRecordToCallBackResolutionResultAdopt(_id)

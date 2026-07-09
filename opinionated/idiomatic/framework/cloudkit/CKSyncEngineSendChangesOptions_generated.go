@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func syncEngineSendChangesOptionsAdopt(id objc.ID) *SyncEngineSendChangesOptions
 
 // Description returns the object's -description text.
 func (sesco *SyncEngineSendChangesOptions) Description() string {
+	defer runtime.KeepAlive(sesco)
 	return rt.Description(objref.IDOf(sesco))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sesco *SyncEngineSendChangesOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sesco)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sesco), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sesco *SyncEngineSendChangesOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(sesco)
 	return rt.IsKind(objref.IDOf(sesco), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sesco *SyncEngineSendChangesOptions) String() string {
+	defer runtime.KeepAlive(sesco)
 	return rt.Description(objref.IDOf(sesco))
 }
 
 // NewSyncEngineSendChangesOptionsWithScope initializes a set of options with the specific scope.
 func NewSyncEngineSendChangesOptionsWithScope(scope *SyncEngineSendChangesScope) *SyncEngineSendChangesOptions {
+	defer runtime.KeepAlive(scope)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineSendChangesOptions")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScope:"), objref.IDOf(scope))
 	return syncEngineSendChangesOptionsAdopt(_id)
@@ -75,24 +83,28 @@ func NewSyncEngineSendChangesOptionsWithScope(scope *SyncEngineSendChangesScope)
 
 // WithScope sets the scope in which to send changes to the server.
 func (sesco *SyncEngineSendChangesOptions) WithScope(scope *SyncEngineSendChangesScope) *SyncEngineSendChangesOptions {
+	defer runtime.KeepAlive(scope)
 	objc.Send[objc.ID](objref.IDOf(sesco), objc.RegisterName("setScope:"), objref.IDOf(scope))
 	return sesco
 }
 
 // WithOperationGroup sets the operation group to use for the underlying CloudKit operations.
 func (sesco *SyncEngineSendChangesOptions) WithOperationGroup(operationGroup *OperationGroup) *SyncEngineSendChangesOptions {
+	defer runtime.KeepAlive(operationGroup)
 	objc.Send[objc.ID](objref.IDOf(sesco), objc.RegisterName("setOperationGroup:"), objref.IDOf(operationGroup))
 	return sesco
 }
 
 // Scope returns the scope in which to send changes to the server.
 func (sesco *SyncEngineSendChangesOptions) Scope() *SyncEngineSendChangesScope {
+	defer runtime.KeepAlive(sesco)
 	_r := objc.Send[objc.ID](objref.IDOf(sesco), objc.RegisterName("scope"))
 	return SyncEngineSendChangesScopeFromID(_r)
 }
 
 // OperationGroup returns the operation group to use for the underlying CloudKit operations. - Tip: Providing a specific operation group helps you to identify and analyze the telemetry of send operations in CloudKit Console. The default value is `nil`.
 func (sesco *SyncEngineSendChangesOptions) OperationGroup() *OperationGroup {
+	defer runtime.KeepAlive(sesco)
 	_r := objc.Send[objc.ID](objref.IDOf(sesco), objc.RegisterName("operationGroup"))
 	return OperationGroupFromID(_r)
 }

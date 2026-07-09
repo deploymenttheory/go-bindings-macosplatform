@@ -5,7 +5,10 @@
 package videotoolbox
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,46 +50,57 @@ func frameRateConversionParametersAdopt(id objc.ID) *FrameRateConversionParamete
 
 // Description returns the object's -description text.
 func (frcp *FrameRateConversionParameters) Description() string {
+	defer runtime.KeepAlive(frcp)
 	return rt.Description(objref.IDOf(frcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (frcp *FrameRateConversionParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(frcp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(frcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (frcp *FrameRateConversionParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(frcp)
 	return rt.IsKind(objref.IDOf(frcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (frcp *FrameRateConversionParameters) String() string {
+	defer runtime.KeepAlive(frcp)
 	return rt.Description(objref.IDOf(frcp))
 }
 
 // NewFrameRateConversionParametersWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames creates a new frame rate conversion parameters object.
-func NewFrameRateConversionParametersWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames(sourceFrame *FrameProcessorFrame, nextFrame *FrameProcessorFrame, opticalFlow *FrameProcessorOpticalFlow, interpolationPhase []obj.Object, submissionMode FrameRateConversionParametersSubmissionMode, destinationFrame []*FrameProcessorFrame) *FrameRateConversionParameters {
+func NewFrameRateConversionParametersWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames(sourceFrame *FrameProcessorFrame, nextFrame *FrameProcessorFrame, opticalFlow *FrameProcessorOpticalFlow, interpolationPhase []*foundation.Number, submissionMode FrameRateConversionParametersSubmissionMode, destinationFrame []*FrameProcessorFrame) *FrameRateConversionParameters {
+	defer runtime.KeepAlive(sourceFrame)
+	defer runtime.KeepAlive(nextFrame)
+	defer runtime.KeepAlive(opticalFlow)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VTFrameRateConversionParameters")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:nextFrame:opticalFlow:interpolationPhase:submissionMode:destinationFrames:"), objref.IDOf(sourceFrame), objref.IDOf(nextFrame), objref.IDOf(opticalFlow), purego.SliceToNSArray(interpolationPhase, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), submissionMode, purego.SliceToNSArray(destinationFrame, func(_v *FrameProcessorFrame) objc.ID { return objref.IDOf(_v) }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:nextFrame:opticalFlow:interpolationPhase:submissionMode:destinationFrames:"), objref.IDOf(sourceFrame), objref.IDOf(nextFrame), objref.IDOf(opticalFlow), purego.SliceToNSArray(interpolationPhase, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), submissionMode, purego.SliceToNSArray(destinationFrame, func(_v *FrameProcessorFrame) objc.ID { return objref.IDOf(_v) }))
 	return frameRateConversionParametersAdopt(_id)
 }
 
 // SourceFrame returns current source frame, which must be non `nil`.
 func (frcp *FrameRateConversionParameters) SourceFrame() *FrameProcessorFrame {
+	defer runtime.KeepAlive(frcp)
 	_r := objc.Send[objc.ID](objref.IDOf(frcp), objc.RegisterName("sourceFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
 // NextFrame returns the next source frame in presentation time order, which is `nil` for the last frame.
 func (frcp *FrameRateConversionParameters) NextFrame() *FrameProcessorFrame {
+	defer runtime.KeepAlive(frcp)
 	_r := objc.Send[objc.ID](objref.IDOf(frcp), objc.RegisterName("nextFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
 // OpticalFlow returns an optional object that contains forward and backward optical flow with next frame. Only needed if optical flow is pre-computed. For the last frame this is `nil`.
 func (frcp *FrameRateConversionParameters) OpticalFlow() *FrameProcessorOpticalFlow {
+	defer runtime.KeepAlive(frcp)
 	_r := objc.Send[objc.ID](objref.IDOf(frcp), objc.RegisterName("opticalFlow"))
 	return FrameProcessorOpticalFlowFromID(_r)
 }
@@ -95,12 +109,14 @@ func (frcp *FrameRateConversionParameters) OpticalFlow() *FrameProcessorOpticalF
 //
 // InterpolationPhase returns the collection as a Go slice.
 func (frcp *FrameRateConversionParameters) InterpolationPhase() []obj.Object {
+	defer runtime.KeepAlive(frcp)
 	_arr := objc.Send[objc.ID](objref.IDOf(frcp), objc.RegisterName("interpolationPhase"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SubmissionMode returns ordering of the input frames in this submission relative to the previous submission.
 func (frcp *FrameRateConversionParameters) SubmissionMode() FrameRateConversionParametersSubmissionMode {
+	defer runtime.KeepAlive(frcp)
 	_r := objc.Send[FrameRateConversionParametersSubmissionMode](objref.IDOf(frcp), objc.RegisterName("submissionMode"))
 	return _r
 }
@@ -109,6 +125,7 @@ func (frcp *FrameRateConversionParameters) SubmissionMode() FrameRateConversionP
 //
 // DestinationFrames returns the collection as a Go slice.
 func (frcp *FrameRateConversionParameters) DestinationFrames() []*FrameProcessorFrame {
+	defer runtime.KeepAlive(frcp)
 	_arr := objc.Send[objc.ID](objref.IDOf(frcp), objc.RegisterName("destinationFrames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FrameProcessorFrame { return FrameProcessorFrameFromID(_id) })
 }

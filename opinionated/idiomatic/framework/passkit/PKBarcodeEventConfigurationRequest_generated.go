@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func barcodeEventConfigurationRequestAdopt(id objc.ID) *BarcodeEventConfiguratio
 
 // Description returns the object's -description text.
 func (becr *BarcodeEventConfigurationRequest) Description() string {
+	defer runtime.KeepAlive(becr)
 	return rt.Description(objref.IDOf(becr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (becr *BarcodeEventConfigurationRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(becr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(becr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (becr *BarcodeEventConfigurationRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(becr)
 	return rt.IsKind(objref.IDOf(becr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (becr *BarcodeEventConfigurationRequest) String() string {
+	defer runtime.KeepAlive(becr)
 	return rt.Description(objref.IDOf(becr))
 }
 
@@ -72,6 +79,7 @@ func NewBarcodeEventConfigurationRequest() *BarcodeEventConfigurationRequest {
 
 // DeviceAccountIdentifier returns the device account identifier.
 func (becr *BarcodeEventConfigurationRequest) DeviceAccountIdentifier() string {
+	defer runtime.KeepAlive(becr)
 	_r := objc.Send[objc.ID](objref.IDOf(becr), objc.RegisterName("deviceAccountIdentifier"))
 	if _r == 0 {
 		return ""
@@ -80,13 +88,15 @@ func (becr *BarcodeEventConfigurationRequest) DeviceAccountIdentifier() string {
 }
 
 // ConfigurationData returns the configuration data.
-func (becr *BarcodeEventConfigurationRequest) ConfigurationData() obj.Object {
+func (becr *BarcodeEventConfigurationRequest) ConfigurationData() []byte {
+	defer runtime.KeepAlive(becr)
 	_r := objc.Send[objc.ID](objref.IDOf(becr), objc.RegisterName("configurationData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ConfigurationDataType returns the configuration data type.
 func (becr *BarcodeEventConfigurationRequest) ConfigurationDataType() BarcodeEventConfigurationDataType {
+	defer runtime.KeepAlive(becr)
 	_r := objc.Send[BarcodeEventConfigurationDataType](objref.IDOf(becr), objc.RegisterName("configurationDataType"))
 	return _r
 }

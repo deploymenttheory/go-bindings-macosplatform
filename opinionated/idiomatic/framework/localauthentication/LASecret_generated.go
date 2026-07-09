@@ -6,6 +6,7 @@ package localauthentication
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func secretAdopt(id objc.ID) *Secret {
 
 // Description returns the object's -description text.
 func (s *Secret) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Secret) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Secret) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Secret) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -79,6 +85,7 @@ func NewSecret() *Secret {
 //
 // LoadDataWithCompletion blocks until the operation completes or ctx is cancelled.
 func (s *Secret) LoadDataWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(s)
 	type _result struct {
 		val obj.Object
 		err error

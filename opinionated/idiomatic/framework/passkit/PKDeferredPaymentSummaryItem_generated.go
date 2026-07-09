@@ -5,9 +5,13 @@
 package passkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,8 +57,8 @@ func NewDeferredPaymentSummaryItem() *DeferredPaymentSummaryItem {
 }
 
 // WithDeferredDate sets the date, in the future, of the payment.
-func (dpsi *DeferredPaymentSummaryItem) WithDeferredDate(deferredDate obj.Object) *DeferredPaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(dpsi), objc.RegisterName("setDeferredDate:"), objref.IDOf(deferredDate))
+func (dpsi *DeferredPaymentSummaryItem) WithDeferredDate(deferredDate time.Time) *DeferredPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(dpsi), objc.RegisterName("setDeferredDate:"), rt.TimeToNSDate(deferredDate))
 	return dpsi
 }
 
@@ -66,6 +70,7 @@ func (dpsi *DeferredPaymentSummaryItem) WithLabel(label string) *DeferredPayment
 
 // WithAmount sets the summary item’s amount.
 func (dpsi *DeferredPaymentSummaryItem) WithAmount(amount obj.Object) *DeferredPaymentSummaryItem {
+	defer runtime.KeepAlive(amount)
 	objc.Send[objc.ID](objref.IDOf(dpsi), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return dpsi
 }
@@ -77,9 +82,10 @@ func (dpsi *DeferredPaymentSummaryItem) WithType(type_ PaymentSummaryItemType) *
 }
 
 // DeferredDate returns the deferred date.
-func (dpsi *DeferredPaymentSummaryItem) DeferredDate() obj.Object {
+func (dpsi *DeferredPaymentSummaryItem) DeferredDate() time.Time {
+	defer runtime.KeepAlive(dpsi)
 	_r := objc.Send[objc.ID](objref.IDOf(dpsi), objc.RegisterName("deferredDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 var _ PaymentSummaryItemProvider = (*DeferredPaymentSummaryItem)(nil)

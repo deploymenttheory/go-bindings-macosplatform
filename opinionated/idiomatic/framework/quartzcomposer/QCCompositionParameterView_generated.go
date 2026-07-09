@@ -5,6 +5,8 @@
 package quartzcomposer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func compositionParameterViewAdopt(id objc.ID) *CompositionParameterView {
 
 // Description returns the object's -description text.
 func (cpv *CompositionParameterView) Description() string {
+	defer runtime.KeepAlive(cpv)
 	return rt.Description(objref.IDOf(cpv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cpv *CompositionParameterView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cpv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cpv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cpv *CompositionParameterView) IsKind(className string) bool {
+	defer runtime.KeepAlive(cpv)
 	return rt.IsKind(objref.IDOf(cpv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cpv *CompositionParameterView) String() string {
+	defer runtime.KeepAlive(cpv)
 	return rt.Description(objref.IDOf(cpv))
 }
 
@@ -78,6 +85,7 @@ func NewCompositionParameterView() *CompositionParameterView {
 
 // HasParameters reports whether the object has parameters.
 func (cpv *CompositionParameterView) HasParameters() bool {
+	defer runtime.KeepAlive(cpv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -91,6 +99,8 @@ func (cpv *CompositionParameterView) HasParameters() bool {
 
 // SetBackgroundColor wraps the corresponding Objective-C method.
 func (cpv *CompositionParameterView) SetBackgroundColor(color obj.Object) {
+	defer runtime.KeepAlive(cpv)
+	defer runtime.KeepAlive(color)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(color))
 	})
@@ -99,6 +109,7 @@ func (cpv *CompositionParameterView) SetBackgroundColor(color obj.Object) {
 
 // BackgroundColor returns the background color.
 func (cpv *CompositionParameterView) BackgroundColor() obj.Object {
+	defer runtime.KeepAlive(cpv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -112,6 +123,7 @@ func (cpv *CompositionParameterView) BackgroundColor() obj.Object {
 
 // SetDrawsBackground wraps the corresponding Objective-C method.
 func (cpv *CompositionParameterView) SetDrawsBackground(flag bool) {
+	defer runtime.KeepAlive(cpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setDrawsBackground:"), flag)
 	})
@@ -120,6 +132,7 @@ func (cpv *CompositionParameterView) SetDrawsBackground(flag bool) {
 
 // DrawsBackground wraps the corresponding Objective-C method.
 func (cpv *CompositionParameterView) DrawsBackground() bool {
+	defer runtime.KeepAlive(cpv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -133,6 +146,8 @@ func (cpv *CompositionParameterView) DrawsBackground() bool {
 
 // SetDelegate wraps the corresponding Objective-C method.
 func (cpv *CompositionParameterView) SetDelegate(delegate obj.Object) {
+	defer runtime.KeepAlive(cpv)
+	defer runtime.KeepAlive(delegate)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	})
@@ -141,6 +156,7 @@ func (cpv *CompositionParameterView) SetDelegate(delegate obj.Object) {
 
 // Delegate returns the delegate.
 func (cpv *CompositionParameterView) Delegate() obj.Object {
+	defer runtime.KeepAlive(cpv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

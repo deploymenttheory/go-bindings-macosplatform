@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func pixelBufferObservationAdopt(id objc.ID) *PixelBufferObservation {
 
 // FeatureName returns the name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model. This can be nil if the observation is not the result of a VNCoreMLRequest operation.
 func (pbo *PixelBufferObservation) FeatureName() string {
+	defer runtime.KeepAlive(pbo)
 	_r := objc.Send[objc.ID](objref.IDOf(pbo), objc.RegisterName("featureName"))
 	if _r == 0 {
 		return ""

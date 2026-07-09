@@ -5,10 +5,12 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -49,22 +51,27 @@ func netServiceAdopt(id objc.ID) *NetService {
 
 // Description returns the object's -description text.
 func (ns *NetService) Description() string {
+	defer runtime.KeepAlive(ns)
 	return rt.Description(objref.IDOf(ns))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ns *NetService) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ns)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ns), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ns *NetService) IsKind(className string) bool {
+	defer runtime.KeepAlive(ns)
 	return rt.IsKind(objref.IDOf(ns), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ns *NetService) String() string {
+	defer runtime.KeepAlive(ns)
 	return rt.Description(objref.IDOf(ns))
 }
 
@@ -82,6 +89,16 @@ func NewNetServiceWithDomainTypeName(domain string, type_ string, name string) *
 	return netServiceAdopt(_id)
 }
 
+// WithDelegate sets the delegate.
+func (ns *NetService) WithDelegate(delegate NetServiceDelegate) *NetService {
+	_shim := newNetServiceDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ns), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ns), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return ns
+}
+
 // WithIncludesPeerToPeer sets the includes peer to peer.
 func (ns *NetService) WithIncludesPeerToPeer(includesPeerToPeer bool) *NetService {
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setIncludesPeerToPeer:"), includesPeerToPeer)
@@ -95,82 +112,102 @@ func (ns *NetService) WithObservationInfo(observationInfo unsafe.Pointer) *NetSe
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ns *NetService) WithScriptingProperties(scriptingProperties obj.Object) *NetService {
-	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ns *NetService) WithScriptingProperties(scriptingProperties map[string]obj.Object) *NetService {
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ns
 }
 
 // ScheduleInRunLoopForMode wraps the corresponding Objective-C method.
 func (ns *NetService) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) {
+	defer runtime.KeepAlive(ns)
+	defer runtime.KeepAlive(aRunLoop)
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
 // RemoveFromRunLoopForMode removes from run loop for mode.
 func (ns *NetService) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
+	defer runtime.KeepAlive(ns)
+	defer runtime.KeepAlive(aRunLoop)
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
 // Publish wraps the corresponding Objective-C method.
 func (ns *NetService) Publish() {
+	defer runtime.KeepAlive(ns)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("publish"))
 }
 
-// PublishWithOptions wraps the corresponding Objective-C method.
-func (ns *NetService) PublishWithOptions(options NetServiceOptions) {
+// PublishWith wraps the corresponding Objective-C method.
+func (ns *NetService) PublishWith(options NetServiceOptions) {
+	defer runtime.KeepAlive(ns)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("publishWithOptions:"), options)
 }
 
 // Resolve wraps the corresponding Objective-C method.
 func (ns *NetService) Resolve() {
+	defer runtime.KeepAlive(ns)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("resolve"))
 }
 
 // Stop wraps the corresponding Objective-C method.
 func (ns *NetService) Stop() {
+	defer runtime.KeepAlive(ns)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("stop"))
 }
 
 // ResolveWithTimeout wraps the corresponding Objective-C method.
 func (ns *NetService) ResolveWithTimeout(timeout float64) {
+	defer runtime.KeepAlive(ns)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("resolveWithTimeout:"), timeout)
 }
 
 // GetInputStreamOutputStream wraps the corresponding Objective-C method.
 func (ns *NetService) GetInputStreamOutputStream(inputStream *InputStream, outputStream *OutputStream) bool {
+	defer runtime.KeepAlive(ns)
+	defer runtime.KeepAlive(inputStream)
+	defer runtime.KeepAlive(outputStream)
 	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("getInputStream:outputStream:"), objref.IDOf(inputStream), objref.IDOf(outputStream))
 	return _r
 }
 
 // SetTXTRecordData wraps the corresponding Objective-C method.
-func (ns *NetService) SetTXTRecordData(recordData *Data) bool {
-	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("setTXTRecordData:"), objref.IDOf(recordData))
+func (ns *NetService) SetTXTRecordData(recordData []byte) bool {
+	defer runtime.KeepAlive(ns)
+	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("setTXTRecordData:"), rt.BytesToNSData(recordData))
 	return _r
 }
 
 // TXTRecordData returns the txt record data.
-func (ns *NetService) TXTRecordData() *Data {
+func (ns *NetService) TXTRecordData() []byte {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("TXTRecordData"))
-	return DataFromID(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // StartMonitoring starts monitoring.
 func (ns *NetService) StartMonitoring() {
+	defer runtime.KeepAlive(ns)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("startMonitoring"))
 }
 
 // StopMonitoring stops monitoring.
 func (ns *NetService) StopMonitoring() {
+	defer runtime.KeepAlive(ns)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("stopMonitoring"))
 }
 
 // IncludesPeerToPeer wraps the corresponding Objective-C method.
 func (ns *NetService) IncludesPeerToPeer() bool {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("includesPeerToPeer"))
 	return _r
 }
 
 // Name returns the name.
 func (ns *NetService) Name() string {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -180,6 +217,7 @@ func (ns *NetService) Name() string {
 
 // Type returns the type.
 func (ns *NetService) Type() string {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -189,6 +227,7 @@ func (ns *NetService) Type() string {
 
 // Domain returns the domain.
 func (ns *NetService) Domain() string {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("domain"))
 	if _r == 0 {
 		return ""
@@ -198,6 +237,7 @@ func (ns *NetService) Domain() string {
 
 // HostName returns the host name.
 func (ns *NetService) HostName() string {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("hostName"))
 	if _r == 0 {
 		return ""
@@ -208,13 +248,15 @@ func (ns *NetService) HostName() string {
 // Addresses returns the addresses.
 //
 // Addresses returns the collection as a Go slice.
-func (ns *NetService) Addresses() []*Data {
+func (ns *NetService) Addresses() [][]byte {
+	defer runtime.KeepAlive(ns)
 	_arr := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("addresses"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Data { return DataFromID(_id) })
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) []byte { return rt.NSDataToBytes(_id) })
 }
 
 // Port returns the port.
 func (ns *NetService) Port() int {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[int](objref.IDOf(ns), objc.RegisterName("port"))
 	return _r
 }

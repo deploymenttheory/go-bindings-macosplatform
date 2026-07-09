@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func bloodTypeObjectAdopt(id objc.ID) *BloodTypeObject {
 
 // Description returns the object's -description text.
 func (bto *BloodTypeObject) Description() string {
+	defer runtime.KeepAlive(bto)
 	return rt.Description(objref.IDOf(bto))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bto *BloodTypeObject) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bto)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bto), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bto *BloodTypeObject) IsKind(className string) bool {
+	defer runtime.KeepAlive(bto)
 	return rt.IsKind(objref.IDOf(bto), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bto *BloodTypeObject) String() string {
+	defer runtime.KeepAlive(bto)
 	return rt.Description(objref.IDOf(bto))
 }
 
@@ -74,6 +81,7 @@ func NewBloodTypeObject() *BloodTypeObject {
 
 // BloodType returns the blood type.
 func (bto *BloodTypeObject) BloodType() BloodType {
+	defer runtime.KeepAlive(bto)
 	_r := objc.Send[BloodType](objref.IDOf(bto), objc.RegisterName("bloodType"))
 	return _r
 }

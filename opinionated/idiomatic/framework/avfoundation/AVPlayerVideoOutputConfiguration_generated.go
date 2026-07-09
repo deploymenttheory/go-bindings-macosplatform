@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
@@ -49,22 +51,27 @@ func playerVideoOutputConfigurationAdopt(id objc.ID) *PlayerVideoOutputConfigura
 
 // Description returns the object's -description text.
 func (pvoc *PlayerVideoOutputConfiguration) Description() string {
+	defer runtime.KeepAlive(pvoc)
 	return rt.Description(objref.IDOf(pvoc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pvoc *PlayerVideoOutputConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pvoc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pvoc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pvoc *PlayerVideoOutputConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(pvoc)
 	return rt.IsKind(objref.IDOf(pvoc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pvoc *PlayerVideoOutputConfiguration) String() string {
+	defer runtime.KeepAlive(pvoc)
 	return rt.Description(objref.IDOf(pvoc))
 }
 
@@ -76,24 +83,28 @@ func NewPlayerVideoOutputConfiguration() *PlayerVideoOutputConfiguration {
 
 // SourcePlayerItem returns the AVPlayerItem which is the source of this configuration. This AVPlayerItem can be seen as the source of all samples this configuration vended alongside.
 func (pvoc *PlayerVideoOutputConfiguration) SourcePlayerItem() *PlayerItem {
+	defer runtime.KeepAlive(pvoc)
 	_r := objc.Send[objc.ID](objref.IDOf(pvoc), objc.RegisterName("sourcePlayerItem"))
 	return PlayerItemFromID(_r)
 }
 
 // DataChannelDescriptions returns list of data channels, represented as CMTagCollections, selected for this configuration. Returns an Array of CMTagCollections
 func (pvoc *PlayerVideoOutputConfiguration) DataChannelDescriptions() obj.Object {
+	defer runtime.KeepAlive(pvoc)
 	_r := objc.Send[objc.ID](objref.IDOf(pvoc), objc.RegisterName("dataChannelDescriptions"))
 	return obj.Wrap(_r)
 }
 
 // PreferredTransform returns the preferred transformation of the visual media data vended with this configuration. This transformation is acquired from the AVAssetTrack that was used to source the media data accompanying this configuration. If no transform was specified by the source track a default value of CGAffineTransformIdentity is returned.
 func (pvoc *PlayerVideoOutputConfiguration) PreferredTransform() corefoundation.CGAffineTransform {
+	defer runtime.KeepAlive(pvoc)
 	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(pvoc), objc.RegisterName("preferredTransform"))
 	return _r
 }
 
 // ActivationTime returns host time when this configuration became active on the player the vending output is attached to.
 func (pvoc *PlayerVideoOutputConfiguration) ActivationTime() coremedia.CMTime {
+	defer runtime.KeepAlive(pvoc)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(pvoc), objc.RegisterName("activationTime"))
 	return _r
 }

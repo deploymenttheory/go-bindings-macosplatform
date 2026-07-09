@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -155,66 +157,77 @@ func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDat
 
 // ControlPointCount returns declares the number of control points in the control point buffer.
 func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) ControlPointCount() int {
+	defer runtime.KeepAlive(mascgd)
 	_r := objc.Send[int](objref.IDOf(mascgd), objc.RegisterName("controlPointCount"))
 	return _r
 }
 
 // ControlPointStride sets the stride, in bytes, between control points in the control point buffer the control point buffer references. You are responsible for ensuring this stride is a multiple of the control point format's element size, and at a minimum exactly the control point format's size. This property defaults to `0`, indicating that the control points are tightly-packed.
 func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) ControlPointStride() int {
+	defer runtime.KeepAlive(mascgd)
 	_r := objc.Send[int](objref.IDOf(mascgd), objc.RegisterName("controlPointStride"))
 	return _r
 }
 
 // ControlPointFormat returns declares the format of the control points the control point buffer references. Defaults to `MTLAttributeFormatFloat3`, representing 3 floating point values tightly packed.
 func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) ControlPointFormat() AttributeFormat {
+	defer runtime.KeepAlive(mascgd)
 	_r := objc.Send[AttributeFormat](objref.IDOf(mascgd), objc.RegisterName("controlPointFormat"))
 	return _r
 }
 
 // RadiusFormat returns declares the format of the radii in the radius buffer. Defaults to  `MTLAttributeFormatFloat`.
 func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) RadiusFormat() AttributeFormat {
+	defer runtime.KeepAlive(mascgd)
 	_r := objc.Send[AttributeFormat](objref.IDOf(mascgd), objc.RegisterName("radiusFormat"))
 	return _r
 }
 
 // RadiusStride returns configures the stride, in bytes, between radii in the radius buffer. You are responsible for ensuring this property is set to a multiple of the size corresponding to the “radiusFormat“. This property defaults to `0` bytes, indicating that the radii are tightly packed.
 func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) RadiusStride() int {
+	defer runtime.KeepAlive(mascgd)
 	_r := objc.Send[int](objref.IDOf(mascgd), objc.RegisterName("radiusStride"))
 	return _r
 }
 
 // IndexType specifies the size of the indices the `indexBuffer` contains, which is typically either 16 or 32-bits for each index.
 func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) IndexType() IndexType {
+	defer runtime.KeepAlive(mascgd)
 	_r := objc.Send[IndexType](objref.IDOf(mascgd), objc.RegisterName("indexType"))
 	return _r
 }
 
 // SegmentCount returns declares the number of curve segments.
 func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) SegmentCount() int {
+	defer runtime.KeepAlive(mascgd)
 	_r := objc.Send[int](objref.IDOf(mascgd), objc.RegisterName("segmentCount"))
 	return _r
 }
 
 // SegmentControlPointCount returns declares the number of control points per curve segment. Valid values for this property are `2`, `3`, or `4`.
 func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) SegmentControlPointCount() int {
+	defer runtime.KeepAlive(mascgd)
 	_r := objc.Send[int](objref.IDOf(mascgd), objc.RegisterName("segmentControlPointCount"))
 	return _r
 }
 
 // CurveType returns controls the curve type. Defaults to `MTLCurveTypeRound`.
 func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) CurveType() CurveType {
+	defer runtime.KeepAlive(mascgd)
 	_r := objc.Send[CurveType](objref.IDOf(mascgd), objc.RegisterName("curveType"))
 	return _r
 }
 
 // CurveBasis returns controls the curve basis function, determining how Metal interpolates the control points. Defaults to `MTLCurveBasisBSpline`.
 func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) CurveBasis() CurveBasis {
+	defer runtime.KeepAlive(mascgd)
 	_r := objc.Send[CurveBasis](objref.IDOf(mascgd), objc.RegisterName("curveBasis"))
 	return _r
 }
 
 // CurveEndCaps sets the type of curve end caps. Defaults to `MTLCurveEndCapsNone`.
 func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) CurveEndCaps() CurveEndCaps {
+	defer runtime.KeepAlive(mascgd)
 	_r := objc.Send[CurveEndCaps](objref.IDOf(mascgd), objc.RegisterName("curveEndCaps"))
 	return _r
 }

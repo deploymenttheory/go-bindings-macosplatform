@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func audioUnitEQFilterParametersAdopt(id objc.ID) *AudioUnitEQFilterParameters {
 
 // Description returns the object's -description text.
 func (auefp *AudioUnitEQFilterParameters) Description() string {
+	defer runtime.KeepAlive(auefp)
 	return rt.Description(objref.IDOf(auefp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (auefp *AudioUnitEQFilterParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(auefp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(auefp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (auefp *AudioUnitEQFilterParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(auefp)
 	return rt.IsKind(objref.IDOf(auefp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (auefp *AudioUnitEQFilterParameters) String() string {
+	defer runtime.KeepAlive(auefp)
 	return rt.Description(objref.IDOf(auefp))
 }
 
@@ -104,30 +111,35 @@ func (auefp *AudioUnitEQFilterParameters) WithBypass(bypass bool) *AudioUnitEQFi
 
 // FilterType returns AVAudioUnitEQFilterType Default:    AVAudioUnitEQFilterTypeParametric
 func (auefp *AudioUnitEQFilterParameters) FilterType() AudioUnitEQFilterType {
+	defer runtime.KeepAlive(auefp)
 	_r := objc.Send[AudioUnitEQFilterType](objref.IDOf(auefp), objc.RegisterName("filterType"))
 	return _r
 }
 
 // Frequency returns frequency in Hertz. Range:      20 -> (SampleRate/2) Unit:       Hertz
 func (auefp *AudioUnitEQFilterParameters) Frequency() float32 {
+	defer runtime.KeepAlive(auefp)
 	_r := objc.Send[float32](objref.IDOf(auefp), objc.RegisterName("frequency"))
 	return _r
 }
 
 // Bandwidth returns bandwidth in octaves. Range:      0.05 -> 5.0 Unit:       Octaves
 func (auefp *AudioUnitEQFilterParameters) Bandwidth() float32 {
+	defer runtime.KeepAlive(auefp)
 	_r := objc.Send[float32](objref.IDOf(auefp), objc.RegisterName("bandwidth"))
 	return _r
 }
 
 // Gain returns gain in dB. Range:      -96 -> 24 Default:    0 Unit:       dB
 func (auefp *AudioUnitEQFilterParameters) Gain() float32 {
+	defer runtime.KeepAlive(auefp)
 	_r := objc.Send[float32](objref.IDOf(auefp), objc.RegisterName("gain"))
 	return _r
 }
 
 // Bypass reports whether bypass state of band. Default: true
 func (auefp *AudioUnitEQFilterParameters) Bypass() bool {
+	defer runtime.KeepAlive(auefp)
 	_r := objc.Send[bool](objref.IDOf(auefp), objc.RegisterName("bypass"))
 	return _r
 }

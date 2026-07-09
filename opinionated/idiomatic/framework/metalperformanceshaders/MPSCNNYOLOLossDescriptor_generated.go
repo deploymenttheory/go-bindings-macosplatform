@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func cNNYOLOLossDescriptorAdopt(id objc.ID) *CNNYOLOLossDescriptor {
 
 // Description returns the object's -description text.
 func (cld *CNNYOLOLossDescriptor) Description() string {
+	defer runtime.KeepAlive(cld)
 	return rt.Description(objref.IDOf(cld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cld *CNNYOLOLossDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cld)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cld *CNNYOLOLossDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(cld)
 	return rt.IsKind(objref.IDOf(cld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cld *CNNYOLOLossDescriptor) String() string {
+	defer runtime.KeepAlive(cld)
 	return rt.Description(objref.IDOf(cld))
 }
 
@@ -73,25 +80,29 @@ func NewCNNYOLOLossDescriptor() *CNNYOLOLossDescriptor {
 }
 
 // WithXYLossDescriptor sets the type of a loss filter. This parameter specifies the type of a loss filter.
-func (cld *CNNYOLOLossDescriptor) WithXYLossDescriptor(xYLossDescriptor obj.Object) *CNNYOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setXYLossDescriptor:"), objref.IDOf(xYLossDescriptor))
+func (cld *CNNYOLOLossDescriptor) WithXYLossDescriptor(xyLossDescriptor obj.Object) *CNNYOLOLossDescriptor {
+	defer runtime.KeepAlive(xyLossDescriptor)
+	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setXYLossDescriptor:"), objref.IDOf(xyLossDescriptor))
 	return cld
 }
 
 // WithWHLossDescriptor sets the type of a loss filter. This parameter specifies the type of a loss filter.
-func (cld *CNNYOLOLossDescriptor) WithWHLossDescriptor(wHLossDescriptor obj.Object) *CNNYOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setWHLossDescriptor:"), objref.IDOf(wHLossDescriptor))
+func (cld *CNNYOLOLossDescriptor) WithWHLossDescriptor(whLossDescriptor obj.Object) *CNNYOLOLossDescriptor {
+	defer runtime.KeepAlive(whLossDescriptor)
+	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setWHLossDescriptor:"), objref.IDOf(whLossDescriptor))
 	return cld
 }
 
 // WithConfidenceLossDescriptor sets the type of a loss filter. This parameter specifies the type of a loss filter.
 func (cld *CNNYOLOLossDescriptor) WithConfidenceLossDescriptor(confidenceLossDescriptor obj.Object) *CNNYOLOLossDescriptor {
+	defer runtime.KeepAlive(confidenceLossDescriptor)
 	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setConfidenceLossDescriptor:"), objref.IDOf(confidenceLossDescriptor))
 	return cld
 }
 
 // WithClassesLossDescriptor sets the type of a loss filter. This parameter specifies the type of a loss filter.
 func (cld *CNNYOLOLossDescriptor) WithClassesLossDescriptor(classesLossDescriptor obj.Object) *CNNYOLOLossDescriptor {
+	defer runtime.KeepAlive(classesLossDescriptor)
 	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setClassesLossDescriptor:"), objref.IDOf(classesLossDescriptor))
 	return cld
 }
@@ -157,97 +168,112 @@ func (cld *CNNYOLOLossDescriptor) WithNumberOfAnchorBoxes(numberOfAnchorBoxes in
 }
 
 // WithAnchorBoxes sets NSData containing the width and height for numberOfAnchorBoxes anchor boxes This NSData should have 2 float values per anchor box which represent the width and height of the anchor box.
-func (cld *CNNYOLOLossDescriptor) WithAnchorBoxes(anchorBoxes obj.Object) *CNNYOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setAnchorBoxes:"), objref.IDOf(anchorBoxes))
+func (cld *CNNYOLOLossDescriptor) WithAnchorBoxes(anchorBoxes []byte) *CNNYOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setAnchorBoxes:"), rt.BytesToNSData(anchorBoxes))
 	return cld
 }
 
 // XYLossDescriptor returns the type of a loss filter. This parameter specifies the type of a loss filter.
 func (cld *CNNYOLOLossDescriptor) XYLossDescriptor() obj.Object {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("XYLossDescriptor"))
 	return obj.Wrap(_r)
 }
 
 // WHLossDescriptor returns the type of a loss filter. This parameter specifies the type of a loss filter.
 func (cld *CNNYOLOLossDescriptor) WHLossDescriptor() obj.Object {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("WHLossDescriptor"))
 	return obj.Wrap(_r)
 }
 
 // ConfidenceLossDescriptor returns the type of a loss filter. This parameter specifies the type of a loss filter.
 func (cld *CNNYOLOLossDescriptor) ConfidenceLossDescriptor() obj.Object {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("confidenceLossDescriptor"))
 	return obj.Wrap(_r)
 }
 
 // ClassesLossDescriptor returns the type of a loss filter. This parameter specifies the type of a loss filter.
 func (cld *CNNYOLOLossDescriptor) ClassesLossDescriptor() obj.Object {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("classesLossDescriptor"))
 	return obj.Wrap(_r)
 }
 
 // ReduceAcrossBatch reports whether if set to true then the reduction operation is applied also across the batch-index dimension, ie. the loss value is summed over images in the batch and the result of the reduction is written on the first loss image in the batch while the other loss images will be set to zero. If set to false, then no reductions are performed across the batch dimension and each image in the batch will contain the loss value associated with that one particular image. NOTE: If reductionType == MPSCNNReductionTypeNone, then this flag has no effect on results, that is no reductions are done in this case. NOTE: If reduceAcrossBatch is set to true and reductionType == MPSCNNReductionTypeMean then the final forward loss value is computed by first summing over the components and then by dividing the result with: number of feature channels * width * height * number of images in the batch. The default value is false.
 func (cld *CNNYOLOLossDescriptor) ReduceAcrossBatch() bool {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("reduceAcrossBatch"))
 	return _r
 }
 
 // Rescore reports whether rescore pertains to multiplying the confidence groundTruth with IOU (intersection over union) of predicted bounding box and the groundTruth boundingBox. Default is true
 func (cld *CNNYOLOLossDescriptor) Rescore() bool {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("rescore"))
 	return _r
 }
 
 // ScaleXY returns scale factor for XY loss and loss gradient default is 10.0
 func (cld *CNNYOLOLossDescriptor) ScaleXY() float32 {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[float32](objref.IDOf(cld), objc.RegisterName("scaleXY"))
 	return _r
 }
 
 // ScaleWH returns scale factor for WH loss and loss gradient default is 10.0
 func (cld *CNNYOLOLossDescriptor) ScaleWH() float32 {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[float32](objref.IDOf(cld), objc.RegisterName("scaleWH"))
 	return _r
 }
 
 // ScaleNoObject returns scale factor for no object confidence loss and loss gradient default is 5.0
 func (cld *CNNYOLOLossDescriptor) ScaleNoObject() float32 {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[float32](objref.IDOf(cld), objc.RegisterName("scaleNoObject"))
 	return _r
 }
 
 // ScaleObject returns scale factor for no object confidence loss and loss gradient default is 100.0
 func (cld *CNNYOLOLossDescriptor) ScaleObject() float32 {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[float32](objref.IDOf(cld), objc.RegisterName("scaleObject"))
 	return _r
 }
 
 // ScaleClass returns scale factor for no object classes loss and loss gradient default is 2.0
 func (cld *CNNYOLOLossDescriptor) ScaleClass() float32 {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[float32](objref.IDOf(cld), objc.RegisterName("scaleClass"))
 	return _r
 }
 
 // MinIOUForObjectPresence returns if the prediction IOU with groundTruth is higher than this value we consider it a confident object presence, default is 0.7
 func (cld *CNNYOLOLossDescriptor) MinIOUForObjectPresence() float32 {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[float32](objref.IDOf(cld), objc.RegisterName("minIOUForObjectPresence"))
 	return _r
 }
 
 // MaxIOUForObjectAbsence returns if the prediction IOU with groundTruth is lower than this value we consider it a confident object absence, default is 0.3
 func (cld *CNNYOLOLossDescriptor) MaxIOUForObjectAbsence() float32 {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[float32](objref.IDOf(cld), objc.RegisterName("maxIOUForObjectAbsence"))
 	return _r
 }
 
 // NumberOfAnchorBoxes returns number of anchor boxes used to detect object per grid cell
 func (cld *CNNYOLOLossDescriptor) NumberOfAnchorBoxes() int {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[int](objref.IDOf(cld), objc.RegisterName("numberOfAnchorBoxes"))
 	return _r
 }
 
 // AnchorBoxes returns NSData containing the width and height for numberOfAnchorBoxes anchor boxes This NSData should have 2 float values per anchor box which represent the width and height of the anchor box.
-func (cld *CNNYOLOLossDescriptor) AnchorBoxes() obj.Object {
+func (cld *CNNYOLOLossDescriptor) AnchorBoxes() []byte {
+	defer runtime.KeepAlive(cld)
 	_r := objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("anchorBoxes"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func fetchRecordZoneChangesConfigurationAdopt(id objc.ID) *FetchRecordZoneChange
 
 // Description returns the object's -description text.
 func (frzcc *FetchRecordZoneChangesConfiguration) Description() string {
+	defer runtime.KeepAlive(frzcc)
 	return rt.Description(objref.IDOf(frzcc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (frzcc *FetchRecordZoneChangesConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(frzcc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(frzcc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (frzcc *FetchRecordZoneChangesConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(frzcc)
 	return rt.IsKind(objref.IDOf(frzcc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (frzcc *FetchRecordZoneChangesConfiguration) String() string {
+	defer runtime.KeepAlive(frzcc)
 	return rt.Description(objref.IDOf(frzcc))
 }
 
@@ -74,6 +81,7 @@ func NewFetchRecordZoneChangesConfiguration() *FetchRecordZoneChangesConfigurati
 
 // WithPreviousServerChangeToken sets the token that identifies the starting point for retrieving changes. Each fetch request returns a unique token in addition to any changes. CloudKit passes the token to your “CKFetchRecordZoneChangesOperation/recordZoneFetchResultBlock“ handler. During a subsequent fetch request, providing the previous token causes the server to return only the changes since the previous fetch request. Tokens are opaque values that you can write to disk safely and reuse later.
 func (frzcc *FetchRecordZoneChangesConfiguration) WithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchRecordZoneChangesConfiguration {
+	defer runtime.KeepAlive(previousServerChangeToken)
 	objc.Send[objc.ID](objref.IDOf(frzcc), objc.RegisterName("setPreviousServerChangeToken:"), objref.IDOf(previousServerChangeToken))
 	return frzcc
 }
@@ -93,12 +101,14 @@ func (frzcc *FetchRecordZoneChangesConfiguration) WithDesiredKeys(items ...obj.O
 
 // PreviousServerChangeToken returns the token that identifies the starting point for retrieving changes. Each fetch request returns a unique token in addition to any changes. CloudKit passes the token to your “CKFetchRecordZoneChangesOperation/recordZoneFetchResultBlock“ handler. During a subsequent fetch request, providing the previous token causes the server to return only the changes since the previous fetch request. Tokens are opaque values that you can write to disk safely and reuse later.
 func (frzcc *FetchRecordZoneChangesConfiguration) PreviousServerChangeToken() *ServerChangeToken {
+	defer runtime.KeepAlive(frzcc)
 	_r := objc.Send[objc.ID](objref.IDOf(frzcc), objc.RegisterName("previousServerChangeToken"))
 	return ServerChangeTokenFromID(_r)
 }
 
 // ResultsLimit returns the maximum number of records to fetch from the record zone. Use this property to limit the number of results in situations where you expect a large number of records. The default value is 0, which causes the server to return an appropriate number of records using dynamic conditions. When the number of records that CloudKit returns exceeds this limit, the operation sets the `moreComing` property to <doc://com.apple.documentation/documentation/swift/true> when executing the “CKFetchRecordZoneChangesOperation/recordZoneFetchResultBlock“ handler.
 func (frzcc *FetchRecordZoneChangesConfiguration) ResultsLimit() int {
+	defer runtime.KeepAlive(frzcc)
 	_r := objc.Send[int](objref.IDOf(frzcc), objc.RegisterName("resultsLimit"))
 	return _r
 }
@@ -107,6 +117,7 @@ func (frzcc *FetchRecordZoneChangesConfiguration) ResultsLimit() int {
 //
 // DesiredKeys returns the collection as a Go slice.
 func (frzcc *FetchRecordZoneChangesConfiguration) DesiredKeys() []obj.Object {
+	defer runtime.KeepAlive(frzcc)
 	_arr := objc.Send[objc.ID](objref.IDOf(frzcc), objc.RegisterName("desiredKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

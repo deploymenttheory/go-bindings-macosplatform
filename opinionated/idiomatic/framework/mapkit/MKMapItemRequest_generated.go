@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func mapItemRequestAdopt(id objc.ID) *MapItemRequest {
 
 // Description returns the object's -description text.
 func (mir *MapItemRequest) Description() string {
+	defer runtime.KeepAlive(mir)
 	return rt.Description(objref.IDOf(mir))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mir *MapItemRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mir)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mir), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mir *MapItemRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(mir)
 	return rt.IsKind(objref.IDOf(mir), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mir *MapItemRequest) String() string {
+	defer runtime.KeepAlive(mir)
 	return rt.Description(objref.IDOf(mir))
 }
 
 // NewMapItemRequestWithMapItemIdentifier create a request with a map item identifier.
 func NewMapItemRequestWithMapItemIdentifier(identifier *MapItemIdentifier) *MapItemRequest {
+	defer runtime.KeepAlive(identifier)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItemRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItemIdentifier:"), objref.IDOf(identifier))
 	return mapItemRequestAdopt(_id)
@@ -75,6 +83,7 @@ func NewMapItemRequestWithMapItemIdentifier(identifier *MapItemIdentifier) *MapI
 
 // MapItemIdentifier returns the map item identifier.
 func (mir *MapItemRequest) MapItemIdentifier() *MapItemIdentifier {
+	defer runtime.KeepAlive(mir)
 	_r := objc.Send[objc.ID](objref.IDOf(mir), objc.RegisterName("mapItemIdentifier"))
 	return MapItemIdentifierFromID(_r)
 }

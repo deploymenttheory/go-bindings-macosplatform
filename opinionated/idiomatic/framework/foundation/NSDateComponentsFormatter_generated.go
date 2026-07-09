@@ -5,11 +5,14 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -74,12 +77,14 @@ func (dcf *DateComponentsFormatter) WithZeroFormattingBehavior(zeroFormattingBeh
 
 // WithCalendar sets the calendar.
 func (dcf *DateComponentsFormatter) WithCalendar(calendar *Calendar) *DateComponentsFormatter {
+	defer runtime.KeepAlive(calendar)
 	objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return dcf
 }
 
 // WithReferenceDate sets the reference date.
 func (dcf *DateComponentsFormatter) WithReferenceDate(referenceDate DateProvider) *DateComponentsFormatter {
+	defer runtime.KeepAlive(referenceDate)
 	objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("setReferenceDate:"), objref.IDOf(referenceDate))
 	return dcf
 }
@@ -127,13 +132,15 @@ func (dcf *DateComponentsFormatter) WithObservationInfo(observationInfo unsafe.P
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (dcf *DateComponentsFormatter) WithScriptingProperties(scriptingProperties obj.Object) *DateComponentsFormatter {
-	objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (dcf *DateComponentsFormatter) WithScriptingProperties(scriptingProperties map[string]obj.Object) *DateComponentsFormatter {
+	objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return dcf
 }
 
 // StringFromDateComponents wraps the corresponding Objective-C method.
 func (dcf *DateComponentsFormatter) StringFromDateComponents(components *DateComponents) string {
+	defer runtime.KeepAlive(dcf)
+	defer runtime.KeepAlive(components)
 	_r := objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("stringFromDateComponents:"), objref.IDOf(components))
 	if _r == 0 {
 		return ""
@@ -142,8 +149,9 @@ func (dcf *DateComponentsFormatter) StringFromDateComponents(components *DateCom
 }
 
 // StringFromDateToDate wraps the corresponding Objective-C method.
-func (dcf *DateComponentsFormatter) StringFromDateToDate(startDate *Date, endDate *Date) string {
-	_r := objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("stringFromDate:toDate:"), objref.IDOf(startDate), objref.IDOf(endDate))
+func (dcf *DateComponentsFormatter) StringFromDateToDate(startDate time.Time, endDate time.Time) string {
+	defer runtime.KeepAlive(dcf)
+	_r := objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("stringFromDate:toDate:"), rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate))
 	if _r == 0 {
 		return ""
 	}
@@ -152,6 +160,7 @@ func (dcf *DateComponentsFormatter) StringFromDateToDate(startDate *Date, endDat
 
 // StringFromTimeInterval wraps the corresponding Objective-C method.
 func (dcf *DateComponentsFormatter) StringFromTimeInterval(ti float64) string {
+	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("stringFromTimeInterval:"), ti)
 	if _r == 0 {
 		return ""
@@ -161,66 +170,77 @@ func (dcf *DateComponentsFormatter) StringFromTimeInterval(ti float64) string {
 
 // UnitsStyle returns the units style.
 func (dcf *DateComponentsFormatter) UnitsStyle() DateComponentsFormatterUnitsStyle {
+	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[DateComponentsFormatterUnitsStyle](objref.IDOf(dcf), objc.RegisterName("unitsStyle"))
 	return _r
 }
 
 // AllowedUnits returns the allowed units.
 func (dcf *DateComponentsFormatter) AllowedUnits() CalendarUnit {
+	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[CalendarUnit](objref.IDOf(dcf), objc.RegisterName("allowedUnits"))
 	return _r
 }
 
 // ZeroFormattingBehavior returns the zero formatting behavior.
 func (dcf *DateComponentsFormatter) ZeroFormattingBehavior() DateComponentsFormatterZeroFormattingBehavior {
+	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[DateComponentsFormatterZeroFormattingBehavior](objref.IDOf(dcf), objc.RegisterName("zeroFormattingBehavior"))
 	return _r
 }
 
 // Calendar returns the calendar.
 func (dcf *DateComponentsFormatter) Calendar() *Calendar {
+	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("calendar"))
 	return CalendarFromID(_r)
 }
 
 // ReferenceDate returns the reference date.
-func (dcf *DateComponentsFormatter) ReferenceDate() *Date {
+func (dcf *DateComponentsFormatter) ReferenceDate() time.Time {
+	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("referenceDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // AllowsFractionalUnits wraps the corresponding Objective-C method.
 func (dcf *DateComponentsFormatter) AllowsFractionalUnits() bool {
+	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[bool](objref.IDOf(dcf), objc.RegisterName("allowsFractionalUnits"))
 	return _r
 }
 
 // MaximumUnitCount returns the maximum unit count.
 func (dcf *DateComponentsFormatter) MaximumUnitCount() int {
+	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[int](objref.IDOf(dcf), objc.RegisterName("maximumUnitCount"))
 	return _r
 }
 
 // CollapsesLargestUnit wraps the corresponding Objective-C method.
 func (dcf *DateComponentsFormatter) CollapsesLargestUnit() bool {
+	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[bool](objref.IDOf(dcf), objc.RegisterName("collapsesLargestUnit"))
 	return _r
 }
 
 // IncludesApproximationPhrase wraps the corresponding Objective-C method.
 func (dcf *DateComponentsFormatter) IncludesApproximationPhrase() bool {
+	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[bool](objref.IDOf(dcf), objc.RegisterName("includesApproximationPhrase"))
 	return _r
 }
 
 // IncludesTimeRemainingPhrase wraps the corresponding Objective-C method.
 func (dcf *DateComponentsFormatter) IncludesTimeRemainingPhrase() bool {
+	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[bool](objref.IDOf(dcf), objc.RegisterName("includesTimeRemainingPhrase"))
 	return _r
 }
 
 // FormattingContext returns the formatting context.
 func (dcf *DateComponentsFormatter) FormattingContext() FormattingContext {
+	defer runtime.KeepAlive(dcf)
 	_r := objc.Send[FormattingContext](objref.IDOf(dcf), objc.RegisterName("formattingContext"))
 	return _r
 }

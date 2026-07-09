@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func contentKeyAdopt(id objc.ID) *ContentKey {
 
 // Description returns the object's -description text.
 func (ck *ContentKey) Description() string {
+	defer runtime.KeepAlive(ck)
 	return rt.Description(objref.IDOf(ck))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ck *ContentKey) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ck)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ck), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ck *ContentKey) IsKind(className string) bool {
+	defer runtime.KeepAlive(ck)
 	return rt.IsKind(objref.IDOf(ck), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ck *ContentKey) String() string {
+	defer runtime.KeepAlive(ck)
 	return rt.Description(objref.IDOf(ck))
 }
 
@@ -74,17 +81,20 @@ func NewContentKey() *ContentKey {
 
 // Revoke revokes the decryption context of the content key, and removes it from its associated AVContentKeySession. Once revoked, the AVContentKey is no longer eligible to be used with any media. If the key is required again, or if the key is requested to be loaded by the application, a new AVContentKeyRequest will be dispatched to the delegate. If there is media playback occurring which is dependent on the content key it will fail and may result in an error being generated with the playback halting.
 func (ck *ContentKey) Revoke() {
+	defer runtime.KeepAlive(ck)
 	objc.Send[objc.ID](objref.IDOf(ck), objc.RegisterName("revoke"))
 }
 
 // ContentKeySpecifier specifies the content key.
 func (ck *ContentKey) ContentKeySpecifier() *ContentKeySpecifier {
+	defer runtime.KeepAlive(ck)
 	_r := objc.Send[objc.ID](objref.IDOf(ck), objc.RegisterName("contentKeySpecifier"))
 	return ContentKeySpecifierFromID(_r)
 }
 
 // ExternalContentProtectionStatus returns the external protection status for the AVContentKey based on all attached displays. This property is not key-value observable, instead the contentKeySession:externalProtectionStatusDidChangeForContentKey: delegate method should be used.
 func (ck *ContentKey) ExternalContentProtectionStatus() ExternalContentProtectionStatus {
+	defer runtime.KeepAlive(ck)
 	_r := objc.Send[ExternalContentProtectionStatus](objref.IDOf(ck), objc.RegisterName("externalContentProtectionStatus"))
 	return _r
 }

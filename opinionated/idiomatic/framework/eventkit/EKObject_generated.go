@@ -5,6 +5,8 @@
 package eventkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,49 +51,59 @@ func objectAdopt(id objc.ID) *Object {
 
 // Description returns the object's -description text.
 func (o *Object) Description() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (o *Object) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (o *Object) IsKind(className string) bool {
+	defer runtime.KeepAlive(o)
 	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (o *Object) String() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
 // Reset returns this object to its saved state.
 func (o *Object) Reset() {
+	defer runtime.KeepAlive(o)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("reset"))
 }
 
 // Rollback rolls back the property values of this object to its original state when it was first fetched.
 func (o *Object) Rollback() {
+	defer runtime.KeepAlive(o)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("rollback"))
 }
 
 // Refresh reports whether merges changes to this object with the latest saved values.
 func (o *Object) Refresh() bool {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("refresh"))
 	return _r
 }
 
 // HasChanges reports whether the object has changes.
 func (o *Object) HasChanges() bool {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("hasChanges"))
 	return _r
 }
 
 // IsNew reports whether the object is new.
 func (o *Object) IsNew() bool {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isNew"))
 	return _r
 }

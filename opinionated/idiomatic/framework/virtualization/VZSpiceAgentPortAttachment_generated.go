@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,6 +61,7 @@ func (sapa *SpiceAgentPortAttachment) WithSharesClipboard(sharesClipboard bool) 
 
 // SharesClipboard reports whether enable the Spice agent clipboard sharing capability. If enabled, the clipboard capability will be advertised to the Spice guest agent. Copy and paste events will be shared between the host and the virtual machine. This property is enabled by default.
 func (sapa *SpiceAgentPortAttachment) SharesClipboard() bool {
+	defer runtime.KeepAlive(sapa)
 	_r := objc.Send[bool](objref.IDOf(sapa), objc.RegisterName("sharesClipboard"))
 	return _r
 }

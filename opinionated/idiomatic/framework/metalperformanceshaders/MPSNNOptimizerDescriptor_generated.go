@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nNOptimizerDescriptorAdopt(id objc.ID) *NNOptimizerDescriptor {
 
 // Description returns the object's -description text.
 func (nod *NNOptimizerDescriptor) Description() string {
+	defer runtime.KeepAlive(nod)
 	return rt.Description(objref.IDOf(nod))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nod *NNOptimizerDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nod)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nod), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nod *NNOptimizerDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(nod)
 	return rt.IsKind(objref.IDOf(nod), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nod *NNOptimizerDescriptor) String() string {
+	defer runtime.KeepAlive(nod)
 	return rt.Description(objref.IDOf(nod))
 }
 
@@ -110,36 +117,42 @@ func (nod *NNOptimizerDescriptor) WithRegularizationScale(regularizationScale fl
 
 // LearningRate returns the learningRate at which we update values The default value is 0.001f
 func (nod *NNOptimizerDescriptor) LearningRate() float32 {
+	defer runtime.KeepAlive(nod)
 	_r := objc.Send[float32](objref.IDOf(nod), objc.RegisterName("learningRate"))
 	return _r
 }
 
 // GradientRescale returns the gradientRescale at which we apply to incoming gradient values The default value is 1.0
 func (nod *NNOptimizerDescriptor) GradientRescale() float32 {
+	defer runtime.KeepAlive(nod)
 	_r := objc.Send[float32](objref.IDOf(nod), objc.RegisterName("gradientRescale"))
 	return _r
 }
 
 // ApplyGradientClipping reports whether a bool which decides if gradient will be clipped The default value is false
 func (nod *NNOptimizerDescriptor) ApplyGradientClipping() bool {
+	defer runtime.KeepAlive(nod)
 	_r := objc.Send[bool](objref.IDOf(nod), objc.RegisterName("applyGradientClipping"))
 	return _r
 }
 
 // GradientClipMax returns the maximum value at which incoming gradient will be clipped before rescaling, applyGradientClipping must be true
 func (nod *NNOptimizerDescriptor) GradientClipMax() float32 {
+	defer runtime.KeepAlive(nod)
 	_r := objc.Send[float32](objref.IDOf(nod), objc.RegisterName("gradientClipMax"))
 	return _r
 }
 
 // GradientClipMin returns the minimum value at which incoming gradient will be clipped before rescaling, applyGradientClipping must be true
 func (nod *NNOptimizerDescriptor) GradientClipMin() float32 {
+	defer runtime.KeepAlive(nod)
 	_r := objc.Send[float32](objref.IDOf(nod), objc.RegisterName("gradientClipMin"))
 	return _r
 }
 
 // RegularizationScale returns the regularizationScale at which we apply L1 or L2 regularization, it gets ignored if regularization is None The default value is 0.0
 func (nod *NNOptimizerDescriptor) RegularizationScale() float32 {
+	defer runtime.KeepAlive(nod)
 	_r := objc.Send[float32](objref.IDOf(nod), objc.RegisterName("regularizationScale"))
 	return _r
 }

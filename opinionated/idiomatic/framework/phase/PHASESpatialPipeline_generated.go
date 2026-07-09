@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func spatialPipelineAdopt(id objc.ID) *SpatialPipeline {
 
 // Description returns the object's -description text.
 func (sp *SpatialPipeline) Description() string {
+	defer runtime.KeepAlive(sp)
 	return rt.Description(objref.IDOf(sp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sp *SpatialPipeline) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sp *SpatialPipeline) IsKind(className string) bool {
+	defer runtime.KeepAlive(sp)
 	return rt.IsKind(objref.IDOf(sp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sp *SpatialPipeline) String() string {
+	defer runtime.KeepAlive(sp)
 	return rt.Description(objref.IDOf(sp))
 }
 
@@ -75,12 +82,14 @@ func NewSpatialPipelineWithFlags(flags SpatialPipelineFlags) *SpatialPipeline {
 
 // Flags returns spatial Pipeline Flags.
 func (sp *SpatialPipeline) Flags() SpatialPipelineFlags {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[SpatialPipelineFlags](objref.IDOf(sp), objc.RegisterName("flags"))
 	return _r
 }
 
 // Entries returns a dictionary of entries in the Spatial Pipeline. Upon initialization, an entry will be created for every flag in the PHASESpatialPipelineFlags passed to PHASESpatialPipeline:initWithFlags.
 func (sp *SpatialPipeline) Entries() obj.Object {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("entries"))
 	return obj.Wrap(_r)
 }

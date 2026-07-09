@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRMediaPlaybackClusterPauseParamsAdopt(id objc.ID) *MTRMediaPlaybackCluste
 
 // Description returns the object's -description text.
 func (mmpcpp *MTRMediaPlaybackClusterPauseParams) Description() string {
+	defer runtime.KeepAlive(mmpcpp)
 	return rt.Description(objref.IDOf(mmpcpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmpcpp *MTRMediaPlaybackClusterPauseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmpcpp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmpcpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmpcpp *MTRMediaPlaybackClusterPauseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmpcpp)
 	return rt.IsKind(objref.IDOf(mmpcpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmpcpp *MTRMediaPlaybackClusterPauseParams) String() string {
+	defer runtime.KeepAlive(mmpcpp)
 	return rt.Description(objref.IDOf(mmpcpp))
 }
 
@@ -72,24 +80,28 @@ func NewMTRMediaPlaybackClusterPauseParams() *MTRMediaPlaybackClusterPauseParams
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mmpcpp *MTRMediaPlaybackClusterPauseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMediaPlaybackClusterPauseParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mmpcpp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mmpcpp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mmpcpp *MTRMediaPlaybackClusterPauseParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMediaPlaybackClusterPauseParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mmpcpp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mmpcpp
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mmpcpp *MTRMediaPlaybackClusterPauseParams) TimedInvokeTimeoutMs() obj.Object {
+func (mmpcpp *MTRMediaPlaybackClusterPauseParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mmpcpp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcpp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mmpcpp *MTRMediaPlaybackClusterPauseParams) ServerSideProcessingTimeout() obj.Object {
+func (mmpcpp *MTRMediaPlaybackClusterPauseParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mmpcpp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcpp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

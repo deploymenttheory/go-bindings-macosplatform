@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -50,6 +52,7 @@ func videoNodeAdopt(id objc.ID) *VideoNode {
 
 // NewVideoNodeWithAVPlayer initializes a video node using an existing AVPlayer object.
 func NewVideoNodeWithAVPlayer(player obj.Object) *VideoNode {
+	defer runtime.KeepAlive(player)
 	var _mainthread0 *VideoNode
 	purego.Main(func() {
 		_mainthread0 = func() *VideoNode {
@@ -115,6 +118,7 @@ func NewVideoNodeWithURL(url string) *VideoNode {
 
 // NewVideoNodeWithCoder tells you when to initialize a video node that was created from an archive.
 func NewVideoNodeWithCoder(aDecoder obj.Object) *VideoNode {
+	defer runtime.KeepAlive(aDecoder)
 	var _mainthread0 *VideoNode
 	purego.Main(func() {
 		_mainthread0 = func() *VideoNode {
@@ -232,6 +236,7 @@ func (vn *VideoNode) WithName(name string) *VideoNode {
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (vn *VideoNode) WithPhysicsBody(physicsBody *PhysicsBody) *VideoNode {
+	defer runtime.KeepAlive(physicsBody)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	})
@@ -240,6 +245,7 @@ func (vn *VideoNode) WithPhysicsBody(physicsBody *PhysicsBody) *VideoNode {
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (vn *VideoNode) WithUserData(userData obj.Object) *VideoNode {
+	defer runtime.KeepAlive(userData)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	})
@@ -248,6 +254,7 @@ func (vn *VideoNode) WithUserData(userData obj.Object) *VideoNode {
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (vn *VideoNode) WithReachConstraints(reachConstraints *ReachConstraints) *VideoNode {
+	defer runtime.KeepAlive(reachConstraints)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	})
@@ -264,9 +271,9 @@ func (vn *VideoNode) WithConstraints(items ...*Constraint) *VideoNode {
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
-func (vn *VideoNode) WithAttributeValues(attributeValues obj.Object) *VideoNode {
+func (vn *VideoNode) WithAttributeValues(attributeValues map[string]*AttributeValue) *VideoNode {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAttributeValues:"), rt.MapToDict(attributeValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *AttributeValue) objc.ID { return objref.IDOf(_v) }))
 	})
 	return vn
 }
@@ -313,6 +320,7 @@ func (vn *VideoNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CG
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (vn *VideoNode) WithAccessibilityParent(accessibilityParent obj.Object) *VideoNode {
+	defer runtime.KeepAlive(accessibilityParent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	})
@@ -345,6 +353,7 @@ func (vn *VideoNode) WithAccessibilityEnabled(accessibilityEnabled bool) *VideoN
 
 // Play starts video playback.
 func (vn *VideoNode) Play() {
+	defer runtime.KeepAlive(vn)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("play"))
 	})
@@ -353,6 +362,7 @@ func (vn *VideoNode) Play() {
 
 // Pause pauses video playback.
 func (vn *VideoNode) Pause() {
+	defer runtime.KeepAlive(vn)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("pause"))
 	})
@@ -361,6 +371,7 @@ func (vn *VideoNode) Pause() {
 
 // Size returns the display size of the video (in parent's coordinate space)
 func (vn *VideoNode) Size() corefoundation.CGSize {
+	defer runtime.KeepAlive(vn)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -374,6 +385,7 @@ func (vn *VideoNode) Size() corefoundation.CGSize {
 
 // AnchorPoint returns the location in the video that maps to its 'position' in the parent's coordinate space. (0.0-1.0)
 func (vn *VideoNode) AnchorPoint() corefoundation.CGPoint {
+	defer runtime.KeepAlive(vn)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {

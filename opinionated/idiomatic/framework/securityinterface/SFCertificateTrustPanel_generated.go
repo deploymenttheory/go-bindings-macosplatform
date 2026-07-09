@@ -5,6 +5,8 @@
 package securityinterface
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,6 +62,8 @@ func NewCertificateTrustPanel() *CertificateTrustPanel {
 
 // RunModalForTrustMessage displays a modal panel that shows the results of a certificate trust evaluation and that allows the user to edit trust settings.
 func (ctp *CertificateTrustPanel) RunModalForTrustMessage(trust obj.Object, message string) int {
+	defer runtime.KeepAlive(ctp)
+	defer runtime.KeepAlive(trust)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -73,6 +77,7 @@ func (ctp *CertificateTrustPanel) RunModalForTrustMessage(trust obj.Object, mess
 
 // SetInformativeText sets the (optional) informative text displayed in the panel.
 func (ctp *CertificateTrustPanel) SetInformativeText(informativeText string) {
+	defer runtime.KeepAlive(ctp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ctp), objc.RegisterName("setInformativeText:"), purego.NSString(informativeText))
 	})
@@ -81,6 +86,7 @@ func (ctp *CertificateTrustPanel) SetInformativeText(informativeText string) {
 
 // InformativeText returns the (optional) informative text currently displayed in the panel.
 func (ctp *CertificateTrustPanel) InformativeText() string {
+	defer runtime.KeepAlive(ctp)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

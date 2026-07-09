@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,27 +51,33 @@ func syncEngineAdopt(id objc.ID) *SyncEngine {
 
 // Description returns the object's -description text.
 func (se *SyncEngine) Description() string {
+	defer runtime.KeepAlive(se)
 	return rt.Description(objref.IDOf(se))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (se *SyncEngine) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(se)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(se), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (se *SyncEngine) IsKind(className string) bool {
+	defer runtime.KeepAlive(se)
 	return rt.IsKind(objref.IDOf(se), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (se *SyncEngine) String() string {
+	defer runtime.KeepAlive(se)
 	return rt.Description(objref.IDOf(se))
 }
 
 // NewSyncEngineWithConfiguration creates a sync engine with the specified configuration. - Parameters: - configuration: The attributes of the new sync engine, such as the associated database and the object to use as the engine's delegate. For more information, see “CKSyncEngineConfiguration“. - Returns: A configured sync engine.
 func NewSyncEngineWithConfiguration(configuration *SyncEngineConfiguration) *SyncEngine {
+	defer runtime.KeepAlive(configuration)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEngine")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
 	return syncEngineAdopt(_id)
@@ -80,6 +87,7 @@ func NewSyncEngineWithConfiguration(configuration *SyncEngineConfiguration) *Syn
 //
 // FetchChanges blocks until the operation completes or ctx is cancelled.
 func (se *SyncEngine) FetchChanges(ctx context.Context) error {
+	defer runtime.KeepAlive(se)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -99,6 +107,8 @@ func (se *SyncEngine) FetchChanges(ctx context.Context) error {
 //
 // FetchChangesWithOptions blocks until the operation completes or ctx is cancelled.
 func (se *SyncEngine) FetchChangesWithOptions(ctx context.Context, options *SyncEngineFetchChangesOptions) error {
+	defer runtime.KeepAlive(se)
+	defer runtime.KeepAlive(options)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -118,6 +128,7 @@ func (se *SyncEngine) FetchChangesWithOptions(ctx context.Context, options *Sync
 //
 // SendChanges blocks until the operation completes or ctx is cancelled.
 func (se *SyncEngine) SendChanges(ctx context.Context) error {
+	defer runtime.KeepAlive(se)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -137,6 +148,8 @@ func (se *SyncEngine) SendChanges(ctx context.Context) error {
 //
 // SendChangesWithOptions blocks until the operation completes or ctx is cancelled.
 func (se *SyncEngine) SendChangesWithOptions(ctx context.Context, options *SyncEngineSendChangesOptions) error {
+	defer runtime.KeepAlive(se)
+	defer runtime.KeepAlive(options)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -156,6 +169,7 @@ func (se *SyncEngine) SendChangesWithOptions(ctx context.Context, options *SyncE
 //
 // CancelOperations blocks until the operation completes or ctx is cancelled.
 func (se *SyncEngine) CancelOperations(ctx context.Context) error {
+	defer runtime.KeepAlive(se)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -171,12 +185,14 @@ func (se *SyncEngine) CancelOperations(ctx context.Context) error {
 
 // Database returns the associated database. Multiple sync engines can run in the same process, each targeting a different database. For example, you may use one sync engine for a person's private database and another for their shared database.
 func (se *SyncEngine) Database() *Database {
+	defer runtime.KeepAlive(se)
 	_r := objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("database"))
 	return DatabaseFromID(_r)
 }
 
 // State returns a collection of state properties used to efficiently manage sync engine operation. - SeeAlso: “CKSyncEngineState“
 func (se *SyncEngine) State() *SyncEngineState {
+	defer runtime.KeepAlive(se)
 	_r := objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("state"))
 	return SyncEngineStateFromID(_r)
 }

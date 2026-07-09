@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewSeekCommandEvent() *SeekCommandEvent {
 
 // Type returns the type.
 func (sce *SeekCommandEvent) Type() SeekCommandEventType {
+	defer runtime.KeepAlive(sce)
 	_r := objc.Send[SeekCommandEventType](objref.IDOf(sce), objc.RegisterName("type"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -71,12 +73,14 @@ func (rc *RatingCommand) WithEnabled(enabled bool) *RatingCommand {
 
 // MinimumRating returns minimum rating for the command.
 func (rc *RatingCommand) MinimumRating() float32 {
+	defer runtime.KeepAlive(rc)
 	_r := objc.Send[float32](objref.IDOf(rc), objc.RegisterName("minimumRating"))
 	return _r
 }
 
 // MaximumRating returns maximum rating for the command.
 func (rc *RatingCommand) MaximumRating() float32 {
+	defer runtime.KeepAlive(rc)
 	_r := objc.Send[float32](objref.IDOf(rc), objc.RegisterName("maximumRating"))
 	return _r
 }

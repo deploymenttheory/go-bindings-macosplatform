@@ -8,41 +8,26 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrUnknown matches the StoreKit error SKErrorUnknown.
-var ErrUnknown = errkit.New("SKErrorDomain", 0)
-
 // ErrClientInvalid matches the StoreKit error SKErrorClientInvalid.
 var ErrClientInvalid = errkit.New("SKErrorDomain", 1)
-
-// ErrPaymentCancelled matches the StoreKit error SKErrorPaymentCancelled.
-var ErrPaymentCancelled = errkit.New("SKErrorDomain", 2)
-
-// ErrPaymentInvalid matches the StoreKit error SKErrorPaymentInvalid.
-var ErrPaymentInvalid = errkit.New("SKErrorDomain", 3)
-
-// ErrPaymentNotAllowed matches the StoreKit error SKErrorPaymentNotAllowed.
-var ErrPaymentNotAllowed = errkit.New("SKErrorDomain", 4)
-
-// ErrStoreProductNotAvailable matches the StoreKit error SKErrorStoreProductNotAvailable.
-var ErrStoreProductNotAvailable = errkit.New("SKErrorDomain", 5)
-
-// ErrCloudServicePermissionDenied matches the StoreKit error SKErrorCloudServicePermissionDenied.
-var ErrCloudServicePermissionDenied = errkit.New("SKErrorDomain", 6)
 
 // ErrCloudServiceNetworkConnectionFailed matches the StoreKit error SKErrorCloudServiceNetworkConnectionFailed.
 var ErrCloudServiceNetworkConnectionFailed = errkit.New("SKErrorDomain", 7)
 
+// ErrCloudServicePermissionDenied matches the StoreKit error SKErrorCloudServicePermissionDenied.
+var ErrCloudServicePermissionDenied = errkit.New("SKErrorDomain", 6)
+
 // ErrCloudServiceRevoked matches the StoreKit error SKErrorCloudServiceRevoked.
 var ErrCloudServiceRevoked = errkit.New("SKErrorDomain", 8)
 
-// ErrPrivacyAcknowledgementRequired matches the StoreKit error SKErrorPrivacyAcknowledgementRequired.
-var ErrPrivacyAcknowledgementRequired = errkit.New("SKErrorDomain", 9)
-
-// ErrUnauthorizedRequestData matches the StoreKit error SKErrorUnauthorizedRequestData.
-var ErrUnauthorizedRequestData = errkit.New("SKErrorDomain", 10)
+// ErrIneligibleForOffer matches the StoreKit error SKErrorIneligibleForOffer.
+var ErrIneligibleForOffer = errkit.New("SKErrorDomain", 18)
 
 // ErrInvalidOfferIdentifier matches the StoreKit error SKErrorInvalidOfferIdentifier.
 var ErrInvalidOfferIdentifier = errkit.New("SKErrorDomain", 11)
+
+// ErrInvalidOfferPrice matches the StoreKit error SKErrorInvalidOfferPrice.
+var ErrInvalidOfferPrice = errkit.New("SKErrorDomain", 14)
 
 // ErrInvalidSignature matches the StoreKit error SKErrorInvalidSignature.
 var ErrInvalidSignature = errkit.New("SKErrorDomain", 12)
@@ -50,17 +35,32 @@ var ErrInvalidSignature = errkit.New("SKErrorDomain", 12)
 // ErrMissingOfferParams matches the StoreKit error SKErrorMissingOfferParams.
 var ErrMissingOfferParams = errkit.New("SKErrorDomain", 13)
 
-// ErrInvalidOfferPrice matches the StoreKit error SKErrorInvalidOfferPrice.
-var ErrInvalidOfferPrice = errkit.New("SKErrorDomain", 14)
-
 // ErrOverlayCancelled matches the StoreKit error SKErrorOverlayCancelled.
 var ErrOverlayCancelled = errkit.New("SKErrorDomain", 15)
 
-// ErrIneligibleForOffer matches the StoreKit error SKErrorIneligibleForOffer.
-var ErrIneligibleForOffer = errkit.New("SKErrorDomain", 18)
+// ErrPaymentCancelled matches the StoreKit error SKErrorPaymentCancelled.
+var ErrPaymentCancelled = errkit.New("SKErrorDomain", 2)
 
-// ErrUnsupportedPlatform matches the StoreKit error SKErrorUnsupportedPlatform.
-var ErrUnsupportedPlatform = errkit.New("SKErrorDomain", 19)
+// ErrPaymentInvalid matches the StoreKit error SKErrorPaymentInvalid.
+var ErrPaymentInvalid = errkit.New("SKErrorDomain", 3)
 
 // ErrPaymentMethodBindingConfigurationRequired matches the StoreKit error SKErrorPaymentMethodBindingConfigurationRequired.
 var ErrPaymentMethodBindingConfigurationRequired = errkit.New("SKErrorDomain", 21)
+
+// ErrPaymentNotAllowed matches the StoreKit error SKErrorPaymentNotAllowed.
+var ErrPaymentNotAllowed = errkit.New("SKErrorDomain", 4)
+
+// ErrPrivacyAcknowledgementRequired matches the StoreKit error SKErrorPrivacyAcknowledgementRequired.
+var ErrPrivacyAcknowledgementRequired = errkit.New("SKErrorDomain", 9)
+
+// ErrStoreProductNotAvailable matches the StoreKit error SKErrorStoreProductNotAvailable.
+var ErrStoreProductNotAvailable = errkit.New("SKErrorDomain", 5)
+
+// ErrUnauthorizedRequestData matches the StoreKit error SKErrorUnauthorizedRequestData.
+var ErrUnauthorizedRequestData = errkit.New("SKErrorDomain", 10)
+
+// ErrUnknown matches the StoreKit error SKErrorUnknown.
+var ErrUnknown = errkit.New("SKErrorDomain", 0)
+
+// ErrUnsupportedPlatform matches the StoreKit error SKErrorUnsupportedPlatform.
+var ErrUnsupportedPlatform = errkit.New("SKErrorDomain", 19)

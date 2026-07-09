@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,81 +51,108 @@ func mTRClusterMicrowaveOvenControlAdopt(id objc.ID) *MTRClusterMicrowaveOvenCon
 
 // NewMTRClusterMicrowaveOvenControlWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterMicrowaveOvenControlWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterMicrowaveOvenControl {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterMicrowaveOvenControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterMicrowaveOvenControlAdopt(_id)
 }
 
 // ReadAttributeCookTimeWithParams reads attribute cook time with params.
-func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeCookTimeWithParams(params *MTRReadParams) obj.Object {
+func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeCookTimeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcmoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeCookTimeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMaxCookTimeWithParams reads attribute max cook time with params.
-func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeMaxCookTimeWithParams(params *MTRReadParams) obj.Object {
+func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeMaxCookTimeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcmoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeMaxCookTimeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePowerSettingWithParams reads attribute power setting with params.
-func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributePowerSettingWithParams(params *MTRReadParams) obj.Object {
+func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributePowerSettingWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcmoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributePowerSettingWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMinPowerWithParams reads attribute min power with params.
-func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeMinPowerWithParams(params *MTRReadParams) obj.Object {
+func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeMinPowerWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcmoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeMinPowerWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMaxPowerWithParams reads attribute max power with params.
-func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeMaxPowerWithParams(params *MTRReadParams) obj.Object {
+func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeMaxPowerWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcmoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeMaxPowerWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePowerStepWithParams reads attribute power step with params.
-func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributePowerStepWithParams(params *MTRReadParams) obj.Object {
+func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributePowerStepWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcmoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributePowerStepWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeWattRatingWithParams reads attribute watt rating with params.
-func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeWattRatingWithParams(params *MTRReadParams) obj.Object {
+func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeWattRatingWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcmoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeWattRatingWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcmoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcmoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcmoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcmoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcmoc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterMicrowaveOvenControl)(nil)

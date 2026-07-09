@@ -5,9 +5,12 @@
 package healthkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,20 +51,23 @@ func visionPrescriptionAdopt(id objc.ID) *VisionPrescription {
 
 // PrescriptionType returns a vision prescription type (glasses or contacts)
 func (vp *VisionPrescription) PrescriptionType() VisionPrescriptionType {
+	defer runtime.KeepAlive(vp)
 	_r := objc.Send[VisionPrescriptionType](objref.IDOf(vp), objc.RegisterName("prescriptionType"))
 	return _r
 }
 
 // DateIssued returns the date the prescription was issued
-func (vp *VisionPrescription) DateIssued() obj.Object {
+func (vp *VisionPrescription) DateIssued() time.Time {
+	defer runtime.KeepAlive(vp)
 	_r := objc.Send[objc.ID](objref.IDOf(vp), objc.RegisterName("dateIssued"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ExpirationDate returns the date the prescription will expire
-func (vp *VisionPrescription) ExpirationDate() obj.Object {
+func (vp *VisionPrescription) ExpirationDate() time.Time {
+	defer runtime.KeepAlive(vp)
 	_r := objc.Send[objc.ID](objref.IDOf(vp), objc.RegisterName("expirationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // isVisionPrescription marks VisionPrescription — and, by embedding promotion, its

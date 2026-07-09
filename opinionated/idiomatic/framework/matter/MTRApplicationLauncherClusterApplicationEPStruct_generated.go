@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,47 +50,56 @@ func mTRApplicationLauncherClusterApplicationEPStructAdopt(id objc.ID) *MTRAppli
 
 // Description returns the object's -description text.
 func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) Description() string {
+	defer runtime.KeepAlive(malcaes)
 	return rt.Description(objref.IDOf(malcaes))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(malcaes)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(malcaes), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(malcaes)
 	return rt.IsKind(objref.IDOf(malcaes), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) String() string {
+	defer runtime.KeepAlive(malcaes)
 	return rt.Description(objref.IDOf(malcaes))
 }
 
 // WithApplication sets the application.
 func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterApplicationEPStruct {
+	defer runtime.KeepAlive(application)
 	objc.Send[objc.ID](objref.IDOf(malcaes), objc.RegisterName("setApplication:"), objref.IDOf(application))
 	return malcaes
 }
 
 // WithEndpoint sets the endpoint.
 func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) WithEndpoint(endpoint obj.Object) *MTRApplicationLauncherClusterApplicationEPStruct {
+	defer runtime.KeepAlive(endpoint)
 	objc.Send[objc.ID](objref.IDOf(malcaes), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return malcaes
 }
 
 // Application returns the application.
 func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) Application() *MTRApplicationLauncherClusterApplicationStruct {
+	defer runtime.KeepAlive(malcaes)
 	_r := objc.Send[objc.ID](objref.IDOf(malcaes), objc.RegisterName("application"))
 	return MTRApplicationLauncherClusterApplicationStructFromID(_r)
 }
 
 // Endpoint returns the endpoint.
-func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) Endpoint() obj.Object {
+func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) Endpoint() *foundation.Number {
+	defer runtime.KeepAlive(malcaes)
 	_r := objc.Send[objc.ID](objref.IDOf(malcaes), objc.RegisterName("endpoint"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRApplicationLauncherClusterApplicationEPStruct marks MTRApplicationLauncherClusterApplicationEPStruct — and, by embedding promotion, its

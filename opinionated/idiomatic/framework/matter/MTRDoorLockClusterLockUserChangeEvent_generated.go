@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDoorLockClusterLockUserChangeEventAdopt(id objc.ID) *MTRDoorLockClusterL
 
 // Description returns the object's -description text.
 func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) Description() string {
+	defer runtime.KeepAlive(mdlcluce)
 	return rt.Description(objref.IDOf(mdlcluce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdlcluce)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdlcluce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdlcluce)
 	return rt.IsKind(objref.IDOf(mdlcluce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) String() string {
+	defer runtime.KeepAlive(mdlcluce)
 	return rt.Description(objref.IDOf(mdlcluce))
 }
 
@@ -72,84 +80,98 @@ func NewMTRDoorLockClusterLockUserChangeEvent() *MTRDoorLockClusterLockUserChang
 
 // WithLockDataType sets the lock data type.
 func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) WithLockDataType(lockDataType obj.Object) *MTRDoorLockClusterLockUserChangeEvent {
+	defer runtime.KeepAlive(lockDataType)
 	objc.Send[objc.ID](objref.IDOf(mdlcluce), objc.RegisterName("setLockDataType:"), objref.IDOf(lockDataType))
 	return mdlcluce
 }
 
 // WithDataOperationType sets the data operation type.
 func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) WithDataOperationType(dataOperationType obj.Object) *MTRDoorLockClusterLockUserChangeEvent {
+	defer runtime.KeepAlive(dataOperationType)
 	objc.Send[objc.ID](objref.IDOf(mdlcluce), objc.RegisterName("setDataOperationType:"), objref.IDOf(dataOperationType))
 	return mdlcluce
 }
 
 // WithOperationSource sets the operation source.
 func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) WithOperationSource(operationSource obj.Object) *MTRDoorLockClusterLockUserChangeEvent {
+	defer runtime.KeepAlive(operationSource)
 	objc.Send[objc.ID](objref.IDOf(mdlcluce), objc.RegisterName("setOperationSource:"), objref.IDOf(operationSource))
 	return mdlcluce
 }
 
 // WithUserIndex sets the user index.
 func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterLockUserChangeEvent {
+	defer runtime.KeepAlive(userIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcluce), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlcluce
 }
 
 // WithFabricIndex sets the fabric index.
 func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) WithFabricIndex(fabricIndex obj.Object) *MTRDoorLockClusterLockUserChangeEvent {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcluce), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mdlcluce
 }
 
 // WithSourceNode sets the source node.
 func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) WithSourceNode(sourceNode obj.Object) *MTRDoorLockClusterLockUserChangeEvent {
+	defer runtime.KeepAlive(sourceNode)
 	objc.Send[objc.ID](objref.IDOf(mdlcluce), objc.RegisterName("setSourceNode:"), objref.IDOf(sourceNode))
 	return mdlcluce
 }
 
 // WithDataIndex sets the data index.
 func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) WithDataIndex(dataIndex obj.Object) *MTRDoorLockClusterLockUserChangeEvent {
+	defer runtime.KeepAlive(dataIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcluce), objc.RegisterName("setDataIndex:"), objref.IDOf(dataIndex))
 	return mdlcluce
 }
 
 // LockDataType returns the lock data type.
-func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) LockDataType() obj.Object {
+func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) LockDataType() *foundation.Number {
+	defer runtime.KeepAlive(mdlcluce)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcluce), objc.RegisterName("lockDataType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DataOperationType returns the data operation type.
-func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) DataOperationType() obj.Object {
+func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) DataOperationType() *foundation.Number {
+	defer runtime.KeepAlive(mdlcluce)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcluce), objc.RegisterName("dataOperationType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // OperationSource returns the operation source.
-func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) OperationSource() obj.Object {
+func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) OperationSource() *foundation.Number {
+	defer runtime.KeepAlive(mdlcluce)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcluce), objc.RegisterName("operationSource"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // UserIndex returns the user index.
-func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) UserIndex() obj.Object {
+func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) UserIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlcluce)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcluce), objc.RegisterName("userIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // FabricIndex returns the fabric index.
-func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) FabricIndex() obj.Object {
+func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) FabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlcluce)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcluce), objc.RegisterName("fabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // SourceNode returns the source node.
-func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) SourceNode() obj.Object {
+func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) SourceNode() *foundation.Number {
+	defer runtime.KeepAlive(mdlcluce)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcluce), objc.RegisterName("sourceNode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DataIndex returns the data index.
-func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) DataIndex() obj.Object {
+func (mdlcluce *MTRDoorLockClusterLockUserChangeEvent) DataIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlcluce)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcluce), objc.RegisterName("dataIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

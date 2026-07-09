@@ -32,8 +32,8 @@ func CBMutableDescriptorFromID(id objc.ID) *CBMutableDescriptor {
 }
 
 // Creates a mutable descriptor with a specified value.
-func (o *CBMutableDescriptor) InitWithTypeValue(uUID *CBUUID, value objc.ID) *CBMutableDescriptor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cBMutableDescriptorSelInitWithTypeValue, uUID.Ptr(), value)
+func (o *CBMutableDescriptor) InitWithTypeValue(uuid *CBUUID, value objc.ID) *CBMutableDescriptor {
+	_ret := objc.Send[objc.ID](o.Ptr(), _cBMutableDescriptorSelInitWithTypeValue, uuid.Ptr(), value)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

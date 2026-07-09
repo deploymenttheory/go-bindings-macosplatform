@@ -5,10 +5,13 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -58,6 +61,7 @@ func (tf *TextField) WithPlaceholderString(placeholderString string) *TextField 
 
 // WithPlaceholderAttributedString sets the attributed string the text field displays when empty to help the user understand the text field’s purpose.
 func (tf *TextField) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TextField {
+	defer runtime.KeepAlive(placeholderAttributedString)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	})
@@ -66,6 +70,7 @@ func (tf *TextField) WithPlaceholderAttributedString(placeholderAttributedString
 
 // WithBackgroundColor sets the color of the background the text field’s cell draws behind the text.
 func (tf *TextField) WithBackgroundColor(backgroundColor *Color) *TextField {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -82,6 +87,7 @@ func (tf *TextField) WithDrawsBackground(drawsBackground bool) *TextField {
 
 // WithTextColor sets the color of the text field’s content.
 func (tf *TextField) WithTextColor(textColor *Color) *TextField {
+	defer runtime.KeepAlive(textColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	})
@@ -117,6 +123,18 @@ func (tf *TextField) WithSelectable(selectable bool) *TextField {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setSelectable:"), selectable)
 	})
+	return tf
+}
+
+// WithDelegate sets the text field’s delegate.
+func (tf *TextField) WithDelegate(delegate TextFieldDelegate) *TextField {
+	_shim := newTextFieldDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(tf), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return tf
 }
 
@@ -236,6 +254,7 @@ func (tf *TextField) WithImportsGraphics(importsGraphics bool) *TextField {
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (tf *TextField) WithTarget(target obj.Object) *TextField {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -300,6 +319,7 @@ func (tf *TextField) WithControlSize(controlSize ControlSize) *TextField {
 
 // WithFormatter sets the receiver’s formatter.
 func (tf *TextField) WithFormatter(formatter obj.Object) *TextField {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -308,6 +328,7 @@ func (tf *TextField) WithFormatter(formatter obj.Object) *TextField {
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (tf *TextField) WithObjectValue(objectValue obj.Object) *TextField {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -324,6 +345,7 @@ func (tf *TextField) WithStringValue(stringValue string) *TextField {
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (tf *TextField) WithAttributedStringValue(attributedStringValue obj.Object) *TextField {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -364,6 +386,7 @@ func (tf *TextField) WithDoubleValue(doubleValue float64) *TextField {
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (tf *TextField) WithFont(font *Font) *TextField {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -412,6 +435,7 @@ func (tf *TextField) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *
 
 // WithCell sets the cell.
 func (tf *TextField) WithCell(cell CellProvider) *TextField {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -557,6 +581,7 @@ func (tf *TextField) WithWantsLayer(wantsLayer bool) *TextField {
 
 // WithLayer sets the layer.
 func (tf *TextField) WithLayer(layer obj.Object) *TextField {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -606,6 +631,7 @@ func (tf *TextField) WithBackgroundFilters(items ...obj.Object) *TextField {
 
 // WithCompositingFilter sets the compositing filter.
 func (tf *TextField) WithCompositingFilter(compositingFilter obj.Object) *TextField {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -623,6 +649,7 @@ func (tf *TextField) WithContentFilters(items ...obj.Object) *TextField {
 
 // WithShadow sets the shadow.
 func (tf *TextField) WithShadow(shadow *Shadow) *TextField {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -671,6 +698,7 @@ func (tf *TextField) WithPreparedContentRect(preparedContentRect corefoundation.
 
 // WithNextKeyView sets the next key view.
 func (tf *TextField) WithNextKeyView(nextKeyView ViewProvider) *TextField {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -720,6 +748,7 @@ func (tf *TextField) WithPrefersCompactControlSizeMetrics(prefersCompactControlS
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (tf *TextField) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextField {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -776,6 +805,7 @@ func (tf *TextField) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyn
 
 // WithPressureConfiguration sets the pressure configuration.
 func (tf *TextField) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TextField {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -784,6 +814,7 @@ func (tf *TextField) WithPressureConfiguration(pressureConfiguration *PressureCo
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (tf *TextField) WithNextResponder(nextResponder ResponderProvider) *TextField {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -792,6 +823,7 @@ func (tf *TextField) WithNextResponder(nextResponder ResponderProvider) *TextFie
 
 // WithMenu sets returns the responder’s menu.
 func (tf *TextField) WithMenu(menu *Menu) *TextField {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -800,6 +832,7 @@ func (tf *TextField) WithMenu(menu *Menu) *TextField {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (tf *TextField) WithUserActivity(userActivity obj.Object) *TextField {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -808,6 +841,7 @@ func (tf *TextField) WithUserActivity(userActivity obj.Object) *TextField {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (tf *TextField) WithTouchBar(touchBar *TouchBar) *TextField {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -816,6 +850,8 @@ func (tf *TextField) WithTouchBar(touchBar *TouchBar) *TextField {
 
 // SelectText ends editing in the text field and, if it’s selectable, selects the entire text content.
 func (tf *TextField) SelectText(sender obj.Object) {
+	defer runtime.KeepAlive(tf)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("selectText:"), objref.IDOf(sender))
 	})
@@ -824,6 +860,8 @@ func (tf *TextField) SelectText(sender obj.Object) {
 
 // TextShouldBeginEditing requests permission to begin editing a text object.
 func (tf *TextField) TextShouldBeginEditing(textObject *Text) bool {
+	defer runtime.KeepAlive(tf)
+	defer runtime.KeepAlive(textObject)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -837,6 +875,8 @@ func (tf *TextField) TextShouldBeginEditing(textObject *Text) bool {
 
 // TextShouldEndEditing performs validation on the text field’s new value.
 func (tf *TextField) TextShouldEndEditing(textObject *Text) bool {
+	defer runtime.KeepAlive(tf)
+	defer runtime.KeepAlive(textObject)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -850,6 +890,8 @@ func (tf *TextField) TextShouldEndEditing(textObject *Text) bool {
 
 // TextDidBeginEditing posts a notification to the default notification center that the text is about to go into edit mode.
 func (tf *TextField) TextDidBeginEditing(notification obj.Object) {
+	defer runtime.KeepAlive(tf)
+	defer runtime.KeepAlive(notification)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("textDidBeginEditing:"), objref.IDOf(notification))
 	})
@@ -858,6 +900,8 @@ func (tf *TextField) TextDidBeginEditing(notification obj.Object) {
 
 // TextDidEndEditing posts a notification when the text is no longer in edit mode.
 func (tf *TextField) TextDidEndEditing(notification obj.Object) {
+	defer runtime.KeepAlive(tf)
+	defer runtime.KeepAlive(notification)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("textDidEndEditing:"), objref.IDOf(notification))
 	})
@@ -866,6 +910,8 @@ func (tf *TextField) TextDidEndEditing(notification obj.Object) {
 
 // TextDidChange posts a notification when the text changes, and forwards the message to the text field’s cell if it responds.
 func (tf *TextField) TextDidChange(notification obj.Object) {
+	defer runtime.KeepAlive(tf)
+	defer runtime.KeepAlive(notification)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("textDidChange:"), objref.IDOf(notification))
 	})
@@ -874,6 +920,7 @@ func (tf *TextField) TextDidChange(notification obj.Object) {
 
 // PlaceholderString returns the placeholder string.
 func (tf *TextField) PlaceholderString() string {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -889,12 +936,13 @@ func (tf *TextField) PlaceholderString() string {
 }
 
 // PlaceholderAttributedString returns the placeholder attributed string.
-func (tf *TextField) PlaceholderAttributedString() obj.Object {
-	var _mainthread0 obj.Object
+func (tf *TextField) PlaceholderAttributedString() *foundation.AttributedString {
+	defer runtime.KeepAlive(tf)
+	var _mainthread0 *foundation.AttributedString
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.AttributedString {
 			_r := objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("placeholderAttributedString"))
-			return obj.Wrap(_r)
+			return foundation.AttributedStringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -903,6 +951,7 @@ func (tf *TextField) PlaceholderAttributedString() obj.Object {
 
 // BackgroundColor returns the background color.
 func (tf *TextField) BackgroundColor() *Color {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -916,6 +965,7 @@ func (tf *TextField) BackgroundColor() *Color {
 
 // DrawsBackground wraps the corresponding Objective-C method.
 func (tf *TextField) DrawsBackground() bool {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -929,6 +979,7 @@ func (tf *TextField) DrawsBackground() bool {
 
 // TextColor returns the text color.
 func (tf *TextField) TextColor() *Color {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -942,6 +993,7 @@ func (tf *TextField) TextColor() *Color {
 
 // IsBordered reports whether the object is bordered.
 func (tf *TextField) IsBordered() bool {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -955,6 +1007,7 @@ func (tf *TextField) IsBordered() bool {
 
 // IsBezeled reports whether the object is bezeled.
 func (tf *TextField) IsBezeled() bool {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -968,6 +1021,7 @@ func (tf *TextField) IsBezeled() bool {
 
 // IsEditable reports whether the object is editable.
 func (tf *TextField) IsEditable() bool {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -981,6 +1035,7 @@ func (tf *TextField) IsEditable() bool {
 
 // IsSelectable reports whether the object is selectable.
 func (tf *TextField) IsSelectable() bool {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -994,6 +1049,7 @@ func (tf *TextField) IsSelectable() bool {
 
 // BezelStyle returns the bezel style.
 func (tf *TextField) BezelStyle() TextFieldBezelStyle {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 TextFieldBezelStyle
 	purego.Main(func() {
 		_mainthread0 = func() TextFieldBezelStyle {
@@ -1007,6 +1063,7 @@ func (tf *TextField) BezelStyle() TextFieldBezelStyle {
 
 // PreferredMaxLayoutWidth returns the preferred max layout width.
 func (tf *TextField) PreferredMaxLayoutWidth() float64 {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1020,6 +1077,7 @@ func (tf *TextField) PreferredMaxLayoutWidth() float64 {
 
 // MaximumNumberOfLines returns the maximum number of lines.
 func (tf *TextField) MaximumNumberOfLines() int {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1033,6 +1091,7 @@ func (tf *TextField) MaximumNumberOfLines() int {
 
 // AllowsDefaultTighteningForTruncation wraps the corresponding Objective-C method.
 func (tf *TextField) AllowsDefaultTighteningForTruncation() bool {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1046,6 +1105,7 @@ func (tf *TextField) AllowsDefaultTighteningForTruncation() bool {
 
 // LineBreakStrategy returns the line break strategy.
 func (tf *TextField) LineBreakStrategy() LineBreakStrategy {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 LineBreakStrategy
 	purego.Main(func() {
 		_mainthread0 = func() LineBreakStrategy {
@@ -1059,6 +1119,7 @@ func (tf *TextField) LineBreakStrategy() LineBreakStrategy {
 
 // AllowsWritingTools wraps the corresponding Objective-C method.
 func (tf *TextField) AllowsWritingTools() bool {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1072,6 +1133,7 @@ func (tf *TextField) AllowsWritingTools() bool {
 
 // AllowsWritingToolsAffordance wraps the corresponding Objective-C method.
 func (tf *TextField) AllowsWritingToolsAffordance() bool {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1087,6 +1149,7 @@ func (tf *TextField) AllowsWritingToolsAffordance() bool {
 //
 // PlaceholderStrings returns the collection as a Go slice.
 func (tf *TextField) PlaceholderStrings() []string {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 []string
 	purego.Main(func() {
 		_mainthread0 = func() []string {
@@ -1101,6 +1164,7 @@ func (tf *TextField) PlaceholderStrings() []string {
 //
 // PlaceholderAttributedStrings returns the collection as a Go slice.
 func (tf *TextField) PlaceholderAttributedStrings() []obj.Object {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -1113,6 +1177,7 @@ func (tf *TextField) PlaceholderAttributedStrings() []obj.Object {
 
 // ResolvesNaturalAlignmentWithBaseWritingDirection reports whether specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
 func (tf *TextField) ResolvesNaturalAlignmentWithBaseWritingDirection() bool {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1126,6 +1191,7 @@ func (tf *TextField) ResolvesNaturalAlignmentWithBaseWritingDirection() bool {
 
 // IsAutomaticTextCompletionEnabled reports whether the object is automatic text completion enabled.
 func (tf *TextField) IsAutomaticTextCompletionEnabled() bool {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1139,6 +1205,7 @@ func (tf *TextField) IsAutomaticTextCompletionEnabled() bool {
 
 // AllowsCharacterPickerTouchBarItem wraps the corresponding Objective-C method.
 func (tf *TextField) AllowsCharacterPickerTouchBarItem() bool {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1152,6 +1219,7 @@ func (tf *TextField) AllowsCharacterPickerTouchBarItem() bool {
 
 // AllowsEditingTextAttributes wraps the corresponding Objective-C method.
 func (tf *TextField) AllowsEditingTextAttributes() bool {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1165,6 +1233,7 @@ func (tf *TextField) AllowsEditingTextAttributes() bool {
 
 // ImportsGraphics wraps the corresponding Objective-C method.
 func (tf *TextField) ImportsGraphics() bool {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1178,6 +1247,7 @@ func (tf *TextField) ImportsGraphics() bool {
 
 // SetTitleWithMnemonic sets the text field’s string value using the embedded character as the keyboard mnemonic.
 func (tf *TextField) SetTitleWithMnemonic(stringWithAmpersand string) {
+	defer runtime.KeepAlive(tf)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
 	})

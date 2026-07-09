@@ -5,7 +5,10 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func sharedEventListenerAdopt(id objc.ID) *SharedEventListener {
 
 // Description returns the object's -description text.
 func (sel *SharedEventListener) Description() string {
+	defer runtime.KeepAlive(sel)
 	return rt.Description(objref.IDOf(sel))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sel *SharedEventListener) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sel)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sel), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sel *SharedEventListener) IsKind(className string) bool {
+	defer runtime.KeepAlive(sel)
 	return rt.IsKind(objref.IDOf(sel), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sel *SharedEventListener) String() string {
+	defer runtime.KeepAlive(sel)
 	return rt.Description(objref.IDOf(sel))
 }
 
@@ -74,13 +82,15 @@ func NewSharedEventListener() *SharedEventListener {
 
 // NewSharedEventListenerWithDispatchQueue creates a new shareable event listener with a specific dispatch queue.
 func NewSharedEventListenerWithDispatchQueue(dispatchQueue obj.Object) *SharedEventListener {
+	defer runtime.KeepAlive(dispatchQueue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTLSharedEventListener")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDispatchQueue:"), objref.IDOf(dispatchQueue))
 	return sharedEventListenerAdopt(_id)
 }
 
 // DispatchQueue returns the dispatch queue.
-func (sel *SharedEventListener) DispatchQueue() obj.Object {
+func (sel *SharedEventListener) DispatchQueue() *foundation.Object {
+	defer runtime.KeepAlive(sel)
 	_r := objc.Send[objc.ID](objref.IDOf(sel), objc.RegisterName("dispatchQueue"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }

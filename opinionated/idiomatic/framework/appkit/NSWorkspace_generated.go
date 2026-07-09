@@ -6,11 +6,13 @@ package appkit
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -52,22 +54,27 @@ func workspaceAdopt(id objc.ID) *Workspace {
 
 // Description returns the object's -description text.
 func (w *Workspace) Description() string {
+	defer runtime.KeepAlive(w)
 	return rt.Description(objref.IDOf(w))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (w *Workspace) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(w), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (w *Workspace) IsKind(className string) bool {
+	defer runtime.KeepAlive(w)
 	return rt.IsKind(objref.IDOf(w), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (w *Workspace) String() string {
+	defer runtime.KeepAlive(w)
 	return rt.Description(objref.IDOf(w))
 }
 
@@ -79,6 +86,7 @@ func NewWorkspace() *Workspace {
 
 // OpenURL opens the location at the specified URL.
 func (w *Workspace) OpenURL(url string) bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openURL:"), rt.FileURL(url))
 	return _r
 }
@@ -87,6 +95,8 @@ func (w *Workspace) OpenURL(url string) bool {
 //
 // OpenURLConfiguration blocks until the operation completes or ctx is cancelled.
 func (w *Workspace) OpenURLConfiguration(ctx context.Context, url string, configuration *WorkspaceOpenConfiguration) (result *RunningApplication, err error) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(configuration)
 	type _result struct {
 		val *RunningApplication
 		err error
@@ -111,7 +121,9 @@ func (w *Workspace) OpenURLConfiguration(ctx context.Context, url string, config
 // OpenURLsWithApplicationAtURLConfiguration opens one or more URLs asynchronously in the specified app using the provided options.
 //
 // OpenURLsWithApplicationAtURLConfiguration blocks until the operation completes or ctx is cancelled.
-func (w *Workspace) OpenURLsWithApplicationAtURLConfiguration(ctx context.Context, urls []obj.Object, applicationURL string, configuration *WorkspaceOpenConfiguration) (result *RunningApplication, err error) {
+func (w *Workspace) OpenURLsWithApplicationAtURLConfiguration(ctx context.Context, urls []string, applicationURL string, configuration *WorkspaceOpenConfiguration) (result *RunningApplication, err error) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(configuration)
 	type _result struct {
 		val *RunningApplication
 		err error
@@ -123,7 +135,7 @@ func (w *Workspace) OpenURLsWithApplicationAtURLConfiguration(ctx context.Contex
 		_o.val = RunningApplicationFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("openURLs:withApplicationAtURL:configuration:completionHandler:"), purego.SliceToNSArray(urls, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.FileURL(applicationURL), objref.IDOf(configuration), _block)
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("openURLs:withApplicationAtURL:configuration:completionHandler:"), purego.SliceToNSArray(urls, func(_v string) objc.ID { return rt.FileURL(_v) }), rt.FileURL(applicationURL), objref.IDOf(configuration), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -137,6 +149,8 @@ func (w *Workspace) OpenURLsWithApplicationAtURLConfiguration(ctx context.Contex
 //
 // OpenApplicationAtURLConfiguration blocks until the operation completes or ctx is cancelled.
 func (w *Workspace) OpenApplicationAtURLConfiguration(ctx context.Context, applicationURL string, configuration *WorkspaceOpenConfiguration) (result *RunningApplication, err error) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(configuration)
 	type _result struct {
 		val *RunningApplication
 		err error
@@ -160,58 +174,70 @@ func (w *Workspace) OpenApplicationAtURLConfiguration(ctx context.Context, appli
 
 // SelectFileInFileViewerRootedAtPath selects the file at the specified path.
 func (w *Workspace) SelectFileInFileViewerRootedAtPath(fullPath string, rootFullPath string) bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("selectFile:inFileViewerRootedAtPath:"), purego.NSString(fullPath), purego.NSString(rootFullPath))
 	return _r
 }
 
 // ActivateFileViewerSelectingURLs activates the Finder, and opens one or more windows selecting the specified files.
-func (w *Workspace) ActivateFileViewerSelectingURLs(fileURLs []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("activateFileViewerSelectingURLs:"), purego.SliceToNSArray(fileURLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (w *Workspace) ActivateFileViewerSelectingURLs(fileURLs []string) {
+	defer runtime.KeepAlive(w)
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("activateFileViewerSelectingURLs:"), purego.SliceToNSArray(fileURLs, func(_v string) objc.ID { return rt.FileURL(_v) }))
 }
 
 // ShowSearchResultsForQueryString displays a Spotlight search results window in Finder for the specified query string.
 func (w *Workspace) ShowSearchResultsForQueryString(queryString string) bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("showSearchResultsForQueryString:"), purego.NSString(queryString))
 	return _r
 }
 
 // NoteFileSystemChanged informs the workspace object that the file system changed at the specified path.
 func (w *Workspace) NoteFileSystemChanged(path string) {
+	defer runtime.KeepAlive(w)
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("noteFileSystemChanged:"), purego.NSString(path))
 }
 
 // IsFilePackageAtPath determines whether the specified path is a file package.
 func (w *Workspace) IsFilePackageAtPath(fullPath string) bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isFilePackageAtPath:"), purego.NSString(fullPath))
 	return _r
 }
 
 // IconForFile returns an image containing the icon for the specified file.
 func (w *Workspace) IconForFile(fullPath string) *Image {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("iconForFile:"), purego.NSString(fullPath))
 	return ImageFromID(_r)
 }
 
 // IconForFiles returns an image containing the icon for the specified files.
 func (w *Workspace) IconForFiles(fullPaths []string) *Image {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("iconForFiles:"), purego.SliceToNSArray(fullPaths, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return ImageFromID(_r)
 }
 
 // IconForContentType returns an image containing the icon for the specified content type.
 func (w *Workspace) IconForContentType(contentType obj.Object) *Image {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(contentType)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("iconForContentType:"), objref.IDOf(contentType))
 	return ImageFromID(_r)
 }
 
-// SetIconForFileOptions sets the icon for the file or directory at the specified path.
-func (w *Workspace) SetIconForFileOptions(image *Image, fullPath string, options WorkspaceIconCreationOptions) bool {
+// SetIconForFile sets the icon for the file or directory at the specified path.
+func (w *Workspace) SetIconForFile(image *Image, fullPath string, options WorkspaceIconCreationOptions) bool {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(image)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("setIcon:forFile:options:"), objref.IDOf(image), purego.NSString(fullPath), options)
 	return _r
 }
 
 // GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType returns information about the file system at the specified path.
 func (w *Workspace) GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType(fullPath string, description string, fileSystemType string) (ok bool, removableFlag bool, writableFlag bool, unmountableFlag bool) {
+	defer runtime.KeepAlive(w)
 	var _out0 bool
 	var _out1 bool
 	var _out2 bool
@@ -221,12 +247,14 @@ func (w *Workspace) GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDe
 
 // UnmountAndEjectDeviceAtPath unmounts and ejects the device at the specified path.
 func (w *Workspace) UnmountAndEjectDeviceAtPath(path string) bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("unmountAndEjectDeviceAtPath:"), purego.NSString(path))
 	return _r
 }
 
 // UnmountAndEjectDeviceAtURL attempts to eject the volume mounted at the given path.
 func (w *Workspace) UnmountAndEjectDeviceAtURL(url string) error {
+	defer runtime.KeepAlive(w)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(w), objc.RegisterName("unmountAndEjectDeviceAtURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -237,43 +265,50 @@ func (w *Workspace) UnmountAndEjectDeviceAtURL(url string) error {
 
 // ExtendPowerOffBy requests the system wait for the specified amount of time before turning off the power or logging out the user.
 func (w *Workspace) ExtendPowerOffBy(requested int) int {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[int](objref.IDOf(w), objc.RegisterName("extendPowerOffBy:"), requested)
 	return _r
 }
 
 // HideOtherApplications hides all applications other than the sender.
 func (w *Workspace) HideOtherApplications() {
+	defer runtime.KeepAlive(w)
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("hideOtherApplications"))
 }
 
 // URLForApplicationWithBundleIdentifier returns the URL to the default app with the specified bundle identifier.
-func (w *Workspace) URLForApplicationWithBundleIdentifier(bundleIdentifier string) obj.Object {
+func (w *Workspace) URLForApplicationWithBundleIdentifier(bundleIdentifier string) string {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("URLForApplicationWithBundleIdentifier:"), purego.NSString(bundleIdentifier))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // URLsForApplicationsWithBundleIdentifier returns an array of URLs to all available applications that can open the specified bundle identifier.
-func (w *Workspace) URLsForApplicationsWithBundleIdentifier(bundleIdentifier string) []obj.Object {
+func (w *Workspace) URLsForApplicationsWithBundleIdentifier(bundleIdentifier string) []string {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("URLsForApplicationsWithBundleIdentifier:"), purego.NSString(bundleIdentifier))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return rt.URLString(_id) })
 }
 
 // URLForApplicationToOpenURL returns the URL to the default app to open the specified URL.
-func (w *Workspace) URLForApplicationToOpenURL(url string) obj.Object {
+func (w *Workspace) URLForApplicationToOpenURL(url string) string {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("URLForApplicationToOpenURL:"), rt.FileURL(url))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // URLsForApplicationsToOpenURL returns an array of URLs to all available applications that can open the URL.
-func (w *Workspace) URLsForApplicationsToOpenURL(url string) []obj.Object {
+func (w *Workspace) URLsForApplicationsToOpenURL(url string) []string {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("URLsForApplicationsToOpenURL:"), rt.FileURL(url))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return rt.URLString(_id) })
 }
 
 // SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURL sets the default app to use when opening files of a specific content type defined by a file URL.
 //
 // SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURL blocks until the operation completes or ctx is cancelled.
 func (w *Workspace) SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURL(ctx context.Context, applicationURL string, url string) error {
+	defer runtime.KeepAlive(w)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -293,6 +328,7 @@ func (w *Workspace) SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURL(ctx c
 //
 // SetDefaultApplicationAtURLToOpenURLsWithScheme blocks until the operation completes or ctx is cancelled.
 func (w *Workspace) SetDefaultApplicationAtURLToOpenURLsWithScheme(ctx context.Context, applicationURL string, urlScheme string) error {
+	defer runtime.KeepAlive(w)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -312,6 +348,7 @@ func (w *Workspace) SetDefaultApplicationAtURLToOpenURLsWithScheme(ctx context.C
 //
 // SetDefaultApplicationAtURLToOpenFileAtURL blocks until the operation completes or ctx is cancelled.
 func (w *Workspace) SetDefaultApplicationAtURLToOpenFileAtURL(ctx context.Context, applicationURL string, url string) error {
+	defer runtime.KeepAlive(w)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -328,21 +365,27 @@ func (w *Workspace) SetDefaultApplicationAtURLToOpenFileAtURL(ctx context.Contex
 }
 
 // URLForApplicationToOpenContentType returns the URL to the default app to open the specified content type.
-func (w *Workspace) URLForApplicationToOpenContentType(contentType obj.Object) obj.Object {
+func (w *Workspace) URLForApplicationToOpenContentType(contentType obj.Object) string {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(contentType)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("URLForApplicationToOpenContentType:"), objref.IDOf(contentType))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // URLsForApplicationsToOpenContentType returns an array of URLs to all available applications that can open the specified content type.
-func (w *Workspace) URLsForApplicationsToOpenContentType(contentType obj.Object) []obj.Object {
+func (w *Workspace) URLsForApplicationsToOpenContentType(contentType obj.Object) []string {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(contentType)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("URLsForApplicationsToOpenContentType:"), objref.IDOf(contentType))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return rt.URLString(_id) })
 }
 
 // SetDefaultApplicationAtURLToOpenContentType sets the default app to use when opening files of a specific content type.
 //
 // SetDefaultApplicationAtURLToOpenContentType blocks until the operation completes or ctx is cancelled.
 func (w *Workspace) SetDefaultApplicationAtURLToOpenContentType(ctx context.Context, applicationURL string, contentType obj.Object) error {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(contentType)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -359,15 +402,17 @@ func (w *Workspace) SetDefaultApplicationAtURLToOpenContentType(ctx context.Cont
 }
 
 // NotificationCenter returns the notification center.
-func (w *Workspace) NotificationCenter() obj.Object {
+func (w *Workspace) NotificationCenter() *foundation.NotificationCenter {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("notificationCenter"))
-	return obj.Wrap(_r)
+	return foundation.NotificationCenterFromID(_r)
 }
 
 // FileLabels returns the file labels.
 //
 // FileLabels returns the collection as a Go slice.
 func (w *Workspace) FileLabels() []string {
+	defer runtime.KeepAlive(w)
 	_arr := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("fileLabels"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -376,24 +421,30 @@ func (w *Workspace) FileLabels() []string {
 //
 // FileLabelColors returns the collection as a Go slice.
 func (w *Workspace) FileLabelColors() []*Color {
+	defer runtime.KeepAlive(w)
 	_arr := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("fileLabelColors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Color { return ColorFromID(_id) })
 }
 
 // FrontmostApplication returns the frontmost application.
 func (w *Workspace) FrontmostApplication() *RunningApplication {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("frontmostApplication"))
 	return RunningApplicationFromID(_r)
 }
 
 // MenuBarOwningApplication returns the menu bar owning application.
 func (w *Workspace) MenuBarOwningApplication() *RunningApplication {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("menuBarOwningApplication"))
 	return RunningApplicationFromID(_r)
 }
 
 // SetDesktopImageURLForScreenOptions sets the desktop image for the given screen to the image at the specified URL.
 func (w *Workspace) SetDesktopImageURLForScreenOptions(url string, screen *Screen, options obj.Object) error {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(screen)
+	defer runtime.KeepAlive(options)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(w), objc.RegisterName("setDesktopImageURL:forScreen:options:error:"), rt.FileURL(url), objref.IDOf(screen), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -403,13 +454,17 @@ func (w *Workspace) SetDesktopImageURLForScreenOptions(url string, screen *Scree
 }
 
 // DesktopImageURLForScreen returns the URL for the desktop image for the given screen.
-func (w *Workspace) DesktopImageURLForScreen(screen *Screen) obj.Object {
+func (w *Workspace) DesktopImageURLForScreen(screen *Screen) string {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(screen)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("desktopImageURLForScreen:"), objref.IDOf(screen))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // DesktopImageOptionsForScreen returns the desktop image options for the given screen.
 func (w *Workspace) DesktopImageOptionsForScreen(screen *Screen) obj.Object {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(screen)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("desktopImageOptionsForScreen:"), objref.IDOf(screen))
 	return obj.Wrap(_r)
 }
@@ -418,6 +473,7 @@ func (w *Workspace) DesktopImageOptionsForScreen(screen *Screen) obj.Object {
 //
 // RequestAuthorizationOfType blocks until the operation completes or ctx is cancelled.
 func (w *Workspace) RequestAuthorizationOfType(ctx context.Context, type_ WorkspaceAuthorizationType) (result *WorkspaceAuthorization, err error) {
+	defer runtime.KeepAlive(w)
 	type _result struct {
 		val *WorkspaceAuthorization
 		err error
@@ -441,30 +497,36 @@ func (w *Workspace) RequestAuthorizationOfType(ctx context.Context, type_ Worksp
 
 // OpenFile opens file.
 func (w *Workspace) OpenFile(fullPath string) bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openFile:"), purego.NSString(fullPath))
 	return _r
 }
 
 // OpenFileWithApplication opens file with application.
 func (w *Workspace) OpenFileWithApplication(fullPath string, appName string) bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openFile:withApplication:"), purego.NSString(fullPath), purego.NSString(appName))
 	return _r
 }
 
 // OpenFileWithApplicationAndDeactivate opens file with application and deactivate.
 func (w *Workspace) OpenFileWithApplicationAndDeactivate(fullPath string, appName string, flag bool) bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openFile:withApplication:andDeactivate:"), purego.NSString(fullPath), purego.NSString(appName), flag)
 	return _r
 }
 
 // LaunchApplication wraps the corresponding Objective-C method.
 func (w *Workspace) LaunchApplication(appName string) bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("launchApplication:"), purego.NSString(appName))
 	return _r
 }
 
-// LaunchApplicationAtURLOptionsConfigurationError wraps the corresponding Objective-C method.
-func (w *Workspace) LaunchApplicationAtURLOptionsConfigurationError(url string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error) {
+// LaunchApplicationAtURLOptionsConfiguration wraps the corresponding Objective-C method.
+func (w *Workspace) LaunchApplicationAtURLOptionsConfiguration(url string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(configuration)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("launchApplicationAtURL:options:configuration:error:"), rt.FileURL(url), options, objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -473,8 +535,10 @@ func (w *Workspace) LaunchApplicationAtURLOptionsConfigurationError(url string, 
 	return RunningApplicationFromID(_r), nil
 }
 
-// OpenURLOptionsConfigurationError opens URL options configuration error.
-func (w *Workspace) OpenURLOptionsConfigurationError(url string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error) {
+// OpenURLOptionsConfiguration opens URL options configuration.
+func (w *Workspace) OpenURLOptionsConfiguration(url string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(configuration)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("openURL:options:configuration:error:"), rt.FileURL(url), options, objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -483,10 +547,12 @@ func (w *Workspace) OpenURLOptionsConfigurationError(url string, options Workspa
 	return RunningApplicationFromID(_r), nil
 }
 
-// OpenURLsWithApplicationAtURLOptionsConfigurationError opens ur ls with application at URL options configuration error.
-func (w *Workspace) OpenURLsWithApplicationAtURLOptionsConfigurationError(urls []obj.Object, applicationURL string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error) {
+// OpenURLsWithApplicationAtURLOptionsConfiguration opens ur ls with application at URL options configuration.
+func (w *Workspace) OpenURLsWithApplicationAtURLOptionsConfiguration(urls []string, applicationURL string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(configuration)
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("openURLs:withApplicationAtURL:options:configuration:error:"), purego.SliceToNSArray(urls, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.FileURL(applicationURL), options, objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("openURLs:withApplicationAtURL:options:configuration:error:"), purego.SliceToNSArray(urls, func(_v string) objc.ID { return rt.FileURL(_v) }), rt.FileURL(applicationURL), options, objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -495,12 +561,14 @@ func (w *Workspace) OpenURLsWithApplicationAtURLOptionsConfigurationError(urls [
 
 // LaunchApplicationShowIconAutolaunch wraps the corresponding Objective-C method.
 func (w *Workspace) LaunchApplicationShowIconAutolaunch(appName string, showIcon bool, autolaunch bool) bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("launchApplication:showIcon:autolaunch:"), purego.NSString(appName), showIcon, autolaunch)
 	return _r
 }
 
 // FullPathForApplication wraps the corresponding Objective-C method.
 func (w *Workspace) FullPathForApplication(appName string) string {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("fullPathForApplication:"), purego.NSString(appName))
 	if _r == 0 {
 		return ""
@@ -510,6 +578,7 @@ func (w *Workspace) FullPathForApplication(appName string) string {
 
 // AbsolutePathForAppBundleWithIdentifier wraps the corresponding Objective-C method.
 func (w *Workspace) AbsolutePathForAppBundleWithIdentifier(bundleIdentifier string) string {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("absolutePathForAppBundleWithIdentifier:"), purego.NSString(bundleIdentifier))
 	if _r == 0 {
 		return ""
@@ -519,97 +588,122 @@ func (w *Workspace) AbsolutePathForAppBundleWithIdentifier(bundleIdentifier stri
 
 // LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier wraps the corresponding Objective-C method.
 func (w *Workspace) LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier(bundleIdentifier string, options WorkspaceLaunchOptions, descriptor obj.Object, identifier obj.Object) bool {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(descriptor)
+	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("launchAppWithBundleIdentifier:options:additionalEventParamDescriptor:launchIdentifier:"), purego.NSString(bundleIdentifier), options, objref.IDOf(descriptor), objref.IDOf(identifier))
 	return _r
 }
 
 // OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers opens ur ls with app bundle identifier options additional event param descriptor launch identifiers.
-func (w *Workspace) OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers(urls []obj.Object, bundleIdentifier string, options WorkspaceLaunchOptions, descriptor obj.Object, identifiers []obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openURLs:withAppBundleIdentifier:options:additionalEventParamDescriptor:launchIdentifiers:"), purego.SliceToNSArray(urls, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(bundleIdentifier), options, objref.IDOf(descriptor), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (w *Workspace) OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers(urls []string, bundleIdentifier string, options WorkspaceLaunchOptions, descriptor obj.Object, identifiers []*foundation.Number) bool {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(descriptor)
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openURLs:withAppBundleIdentifier:options:additionalEventParamDescriptor:launchIdentifiers:"), purego.SliceToNSArray(urls, func(_v string) objc.ID { return rt.FileURL(_v) }), purego.NSString(bundleIdentifier), options, objref.IDOf(descriptor), purego.SliceToNSArray(identifiers, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // OpenTempFile opens temp file.
 func (w *Workspace) OpenTempFile(fullPath string) bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openTempFile:"), purego.NSString(fullPath))
 	return _r
 }
 
 // FindApplications wraps the corresponding Objective-C method.
 func (w *Workspace) FindApplications() {
+	defer runtime.KeepAlive(w)
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("findApplications"))
 }
 
 // NoteUserDefaultsChanged wraps the corresponding Objective-C method.
 func (w *Workspace) NoteUserDefaultsChanged() {
+	defer runtime.KeepAlive(w)
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("noteUserDefaultsChanged"))
 }
 
 // SlideImageFromTo wraps the corresponding Objective-C method.
 func (w *Workspace) SlideImageFromTo(image *Image, fromPoint corefoundation.CGPoint, toPoint corefoundation.CGPoint) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(image)
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("slideImage:from:to:"), objref.IDOf(image), fromPoint, toPoint)
 }
 
 // CheckForRemovableMedia wraps the corresponding Objective-C method.
 func (w *Workspace) CheckForRemovableMedia() {
+	defer runtime.KeepAlive(w)
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("checkForRemovableMedia"))
 }
 
 // NoteFileSystemChanged2 wraps the corresponding Objective-C method.
 func (w *Workspace) NoteFileSystemChanged2() {
+	defer runtime.KeepAlive(w)
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("noteFileSystemChanged"))
 }
 
 // FileSystemChanged wraps the corresponding Objective-C method.
 func (w *Workspace) FileSystemChanged() bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("fileSystemChanged"))
 	return _r
 }
 
 // UserDefaultsChanged wraps the corresponding Objective-C method.
 func (w *Workspace) UserDefaultsChanged() bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("userDefaultsChanged"))
 	return _r
 }
 
 // MountNewRemovableMedia returns the mount new removable media.
 func (w *Workspace) MountNewRemovableMedia() obj.Object {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("mountNewRemovableMedia"))
 	return obj.Wrap(_r)
 }
 
 // ActiveApplication returns the active application.
 func (w *Workspace) ActiveApplication() obj.Object {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("activeApplication"))
 	return obj.Wrap(_r)
 }
 
 // MountedLocalVolumePaths returns the mounted local volume paths.
 func (w *Workspace) MountedLocalVolumePaths() obj.Object {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("mountedLocalVolumePaths"))
 	return obj.Wrap(_r)
 }
 
 // MountedRemovableMedia returns the mounted removable media.
 func (w *Workspace) MountedRemovableMedia() obj.Object {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("mountedRemovableMedia"))
 	return obj.Wrap(_r)
 }
 
 // LaunchedApplications returns the launched applications.
 func (w *Workspace) LaunchedApplications() obj.Object {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("launchedApplications"))
 	return obj.Wrap(_r)
 }
 
 // OpenFileFromImageAtInView opens file from image at in view.
 func (w *Workspace) OpenFileFromImageAtInView(fullPath string, image *Image, point corefoundation.CGPoint, view *View) bool {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(view)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openFile:fromImage:at:inView:"), purego.NSString(fullPath), objref.IDOf(image), point, objref.IDOf(view))
 	return _r
 }
 
 // PerformFileOperationSourceDestinationFilesTag performs file operation source destination files tag.
 func (w *Workspace) PerformFileOperationSourceDestinationFilesTag(operation obj.Object, source string, destination string, files obj.Object) (ok bool, tag int64) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(operation)
+	defer runtime.KeepAlive(files)
 	var _out0 int64
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("performFileOperation:source:destination:files:tag:"), objref.IDOf(operation), purego.NSString(source), purego.NSString(destination), objref.IDOf(files), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -617,18 +711,21 @@ func (w *Workspace) PerformFileOperationSourceDestinationFilesTag(operation obj.
 
 // GetInfoForFileApplicationType retrieves information about the specified file.
 func (w *Workspace) GetInfoForFileApplicationType(fullPath string, appName string, type_ string) bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("getInfoForFile:application:type:"), purego.NSString(fullPath), purego.NSString(appName), purego.NSString(type_))
 	return _r
 }
 
 // IconForFileType wraps the corresponding Objective-C method.
 func (w *Workspace) IconForFileType(fileType string) *Image {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("iconForFileType:"), purego.NSString(fileType))
 	return ImageFromID(_r)
 }
 
-// TypeOfFileError returns the uniform type identifier of the specified file, if it can be determined.
-func (w *Workspace) TypeOfFileError(absoluteFilePath string) (result string, err error) {
+// TypeOfFile returns the uniform type identifier of the specified file, if it can be determined.
+func (w *Workspace) TypeOfFile(absoluteFilePath string) (result string, err error) {
+	defer runtime.KeepAlive(w)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("typeOfFile:error:"), purego.NSString(absoluteFilePath), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -642,6 +739,7 @@ func (w *Workspace) TypeOfFileError(absoluteFilePath string) (result string, err
 
 // LocalizedDescriptionForType returns the localized description for the specified Uniform Type Identifier (UTI).
 func (w *Workspace) LocalizedDescriptionForType(typeName string) string {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("localizedDescriptionForType:"), purego.NSString(typeName))
 	if _r == 0 {
 		return ""
@@ -651,6 +749,7 @@ func (w *Workspace) LocalizedDescriptionForType(typeName string) string {
 
 // PreferredFilenameExtensionForType returns the preferred filename extension for the specified Uniform Type Identifier (UTI).
 func (w *Workspace) PreferredFilenameExtensionForType(typeName string) string {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("preferredFilenameExtensionForType:"), purego.NSString(typeName))
 	if _r == 0 {
 		return ""
@@ -660,54 +759,63 @@ func (w *Workspace) PreferredFilenameExtensionForType(typeName string) string {
 
 // FilenameExtensionIsValidForType returns whether the specified filename extension is appropriate for the Uniform Type Identifier (UTI).
 func (w *Workspace) FilenameExtensionIsValidForType(filenameExtension string, typeName string) bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("filenameExtension:isValidForType:"), purego.NSString(filenameExtension), purego.NSString(typeName))
 	return _r
 }
 
 // TypeConformsToType returns a Boolean indicating that the first Uniform Type Identifier (UTI) conforms to the second UTI.
 func (w *Workspace) TypeConformsToType(firstTypeName string, secondTypeName string) bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("type:conformsToType:"), purego.NSString(firstTypeName), purego.NSString(secondTypeName))
 	return _r
 }
 
 // AccessibilityDisplayShouldIncreaseContrast wraps the corresponding Objective-C method.
 func (w *Workspace) AccessibilityDisplayShouldIncreaseContrast() bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("accessibilityDisplayShouldIncreaseContrast"))
 	return _r
 }
 
 // AccessibilityDisplayShouldDifferentiateWithoutColor wraps the corresponding Objective-C method.
 func (w *Workspace) AccessibilityDisplayShouldDifferentiateWithoutColor() bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("accessibilityDisplayShouldDifferentiateWithoutColor"))
 	return _r
 }
 
 // AccessibilityDisplayShouldReduceTransparency wraps the corresponding Objective-C method.
 func (w *Workspace) AccessibilityDisplayShouldReduceTransparency() bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("accessibilityDisplayShouldReduceTransparency"))
 	return _r
 }
 
 // AccessibilityDisplayShouldReduceMotion wraps the corresponding Objective-C method.
 func (w *Workspace) AccessibilityDisplayShouldReduceMotion() bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("accessibilityDisplayShouldReduceMotion"))
 	return _r
 }
 
 // AccessibilityDisplayShouldInvertColors wraps the corresponding Objective-C method.
 func (w *Workspace) AccessibilityDisplayShouldInvertColors() bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("accessibilityDisplayShouldInvertColors"))
 	return _r
 }
 
 // IsVoiceOverEnabled reports whether the object is voice over enabled.
 func (w *Workspace) IsVoiceOverEnabled() bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isVoiceOverEnabled"))
 	return _r
 }
 
 // IsSwitchControlEnabled reports whether the object is switch control enabled.
 func (w *Workspace) IsSwitchControlEnabled() bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isSwitchControlEnabled"))
 	return _r
 }
@@ -716,6 +824,7 @@ func (w *Workspace) IsSwitchControlEnabled() bool {
 //
 // RunningApplications returns the collection as a Go slice.
 func (w *Workspace) RunningApplications() []*RunningApplication {
+	defer runtime.KeepAlive(w)
 	_arr := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("runningApplications"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RunningApplication { return RunningApplicationFromID(_id) })
 }

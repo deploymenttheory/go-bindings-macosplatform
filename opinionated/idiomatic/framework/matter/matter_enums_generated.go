@@ -4514,6 +4514,32 @@ func (e MTRCommissioningFlow) String() string {
 	}
 }
 
+type MTRCommissioningStatus int64
+
+const (
+	MTRCommissioningStatusUnknown                MTRCommissioningStatus = 0
+	MTRCommissioningStatusSuccess                MTRCommissioningStatus = 1
+	MTRCommissioningStatusFailed                 MTRCommissioningStatus = 2
+	MTRCommissioningStatusDiscoveringMoreDevices MTRCommissioningStatus = 3
+)
+
+// String returns the MTRCommissioningStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRCommissioningStatus) String() string {
+	switch e {
+	case MTRCommissioningStatusUnknown:
+		return "MTRCommissioningStatusUnknown"
+	case MTRCommissioningStatusSuccess:
+		return "MTRCommissioningStatusSuccess"
+	case MTRCommissioningStatusFailed:
+		return "MTRCommissioningStatusFailed"
+	case MTRCommissioningStatusDiscoveringMoreDevices:
+		return "MTRCommissioningStatusDiscoveringMoreDevices"
+	default:
+		return fmt.Sprintf("MTRCommissioningStatus(%d)", int64(e))
+	}
+}
+
 type MTRDeviceState uint64
 
 const (
@@ -5134,6 +5160,78 @@ func (e MTROptionalQRCodeInfoType) String() string {
 		return "MTROptionalQRCodeInfoTypeInt32"
 	default:
 		return fmt.Sprintf("MTROptionalQRCodeInfoType(%d)", int64(e))
+	}
+}
+
+type MTRPairingStatus uint64
+
+const (
+	MTRPairingStatusUnknown                MTRPairingStatus = 0
+	MTRPairingStatusSuccess                MTRPairingStatus = 1
+	MTRPairingStatusFailed                 MTRPairingStatus = 2
+	MTRPairingStatusDiscoveringMoreDevices MTRPairingStatus = 3
+)
+
+// String returns the MTRPairingStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPairingStatus) String() string {
+	switch e {
+	case MTRPairingStatusUnknown:
+		return "MTRPairingStatusUnknown"
+	case MTRPairingStatusSuccess:
+		return "MTRPairingStatusSuccess"
+	case MTRPairingStatusFailed:
+		return "MTRPairingStatusFailed"
+	case MTRPairingStatusDiscoveringMoreDevices:
+		return "MTRPairingStatusDiscoveringMoreDevices"
+	default:
+		return fmt.Sprintf("MTRPairingStatus(%d)", int64(e))
+	}
+}
+
+type MTRStorageSecurityLevel uint64
+
+const (
+	MTRStorageSecurityLevelSecure    MTRStorageSecurityLevel = 0
+	MTRStorageSecurityLevelNotSecure MTRStorageSecurityLevel = 1
+)
+
+// String returns the MTRStorageSecurityLevel constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRStorageSecurityLevel) String() string {
+	switch e {
+	case MTRStorageSecurityLevelSecure:
+		return "MTRStorageSecurityLevelSecure"
+	case MTRStorageSecurityLevelNotSecure:
+		return "MTRStorageSecurityLevelNotSecure"
+	default:
+		return fmt.Sprintf("MTRStorageSecurityLevel(%d)", int64(e))
+	}
+}
+
+type MTRStorageSharingType uint64
+
+const (
+	MTRStorageSharingTypeNotShared    MTRStorageSharingType = 0
+	MTRStorageSharingTypeSameIdentity MTRStorageSharingType = 1
+	MTRStorageSharingTypeSameACLs     MTRStorageSharingType = 2
+	MTRStorageSharingTypeSameFabric   MTRStorageSharingType = 3
+)
+
+// String returns the MTRStorageSharingType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRStorageSharingType) String() string {
+	switch e {
+	case MTRStorageSharingTypeNotShared:
+		return "MTRStorageSharingTypeNotShared"
+	case MTRStorageSharingTypeSameIdentity:
+		return "MTRStorageSharingTypeSameIdentity"
+	case MTRStorageSharingTypeSameACLs:
+		return "MTRStorageSharingTypeSameACLs"
+	case MTRStorageSharingTypeSameFabric:
+		return "MTRStorageSharingTypeSameFabric"
+	default:
+		return fmt.Sprintf("MTRStorageSharingType(%d)", int64(e))
 	}
 }
 

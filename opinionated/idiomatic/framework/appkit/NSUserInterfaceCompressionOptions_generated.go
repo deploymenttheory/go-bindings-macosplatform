@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func userInterfaceCompressionOptionsAdopt(id objc.ID) *UserInterfaceCompressionO
 
 // Description returns the object's -description text.
 func (uico *UserInterfaceCompressionOptions) Description() string {
+	defer runtime.KeepAlive(uico)
 	return rt.Description(objref.IDOf(uico))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (uico *UserInterfaceCompressionOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(uico)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(uico), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (uico *UserInterfaceCompressionOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(uico)
 	return rt.IsKind(objref.IDOf(uico), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (uico *UserInterfaceCompressionOptions) String() string {
+	defer runtime.KeepAlive(uico)
 	return rt.Description(objref.IDOf(uico))
 }
 
@@ -74,6 +81,7 @@ func NewUserInterfaceCompressionOptions() *UserInterfaceCompressionOptions {
 
 // NewUserInterfaceCompressionOptionsWithCoder creates an option object from data in an unarchiver.
 func NewUserInterfaceCompressionOptionsWithCoder(coder obj.Object) *UserInterfaceCompressionOptions {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUserInterfaceCompressionOptions")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return userInterfaceCompressionOptionsAdopt(_id)
@@ -87,38 +95,47 @@ func NewUserInterfaceCompressionOptionsWithIdentifier(identifier string) *UserIn
 }
 
 // NewUserInterfaceCompressionOptionsWithCompressionOptions creates an option object that represents the union of the supplied options.
-func NewUserInterfaceCompressionOptionsWithCompressionOptions(options obj.Object) *UserInterfaceCompressionOptions {
+func NewUserInterfaceCompressionOptionsWithCompressionOptions(options []*UserInterfaceCompressionOptions) *UserInterfaceCompressionOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUserInterfaceCompressionOptions")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompressionOptions:"), objref.IDOf(options))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompressionOptions:"), rt.SliceToNSSet(options, func(_v *UserInterfaceCompressionOptions) objc.ID { return objref.IDOf(_v) }))
 	return userInterfaceCompressionOptionsAdopt(_id)
 }
 
-// ContainsOptions determines whether the supplied compression options are all present in the current instance.
-func (uico *UserInterfaceCompressionOptions) ContainsOptions(options *UserInterfaceCompressionOptions) bool {
+// Contains determines whether the supplied compression options are all present in the current instance.
+func (uico *UserInterfaceCompressionOptions) Contains(options *UserInterfaceCompressionOptions) bool {
+	defer runtime.KeepAlive(uico)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[bool](objref.IDOf(uico), objc.RegisterName("containsOptions:"), objref.IDOf(options))
 	return _r
 }
 
-// IntersectsOptions determines whether the supplied compression options intersect with the current instance’s options.
-func (uico *UserInterfaceCompressionOptions) IntersectsOptions(options *UserInterfaceCompressionOptions) bool {
+// Intersects determines whether the supplied compression options intersect with the current instance’s options.
+func (uico *UserInterfaceCompressionOptions) Intersects(options *UserInterfaceCompressionOptions) bool {
+	defer runtime.KeepAlive(uico)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[bool](objref.IDOf(uico), objc.RegisterName("intersectsOptions:"), objref.IDOf(options))
 	return _r
 }
 
-// OptionsByAddingOptions creates a new compression options object representing the union with the provided options.
-func (uico *UserInterfaceCompressionOptions) OptionsByAddingOptions(options *UserInterfaceCompressionOptions) *UserInterfaceCompressionOptions {
+// OptionsByAdding creates a new compression options object representing the union with the provided options.
+func (uico *UserInterfaceCompressionOptions) OptionsByAdding(options *UserInterfaceCompressionOptions) *UserInterfaceCompressionOptions {
+	defer runtime.KeepAlive(uico)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objref.IDOf(uico), objc.RegisterName("optionsByAddingOptions:"), objref.IDOf(options))
 	return UserInterfaceCompressionOptionsFromID(_r)
 }
 
-// OptionsByRemovingOptions creates a new compression options object with the supplied options removed.
-func (uico *UserInterfaceCompressionOptions) OptionsByRemovingOptions(options *UserInterfaceCompressionOptions) *UserInterfaceCompressionOptions {
+// OptionsByRemoving creates a new compression options object with the supplied options removed.
+func (uico *UserInterfaceCompressionOptions) OptionsByRemoving(options *UserInterfaceCompressionOptions) *UserInterfaceCompressionOptions {
+	defer runtime.KeepAlive(uico)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objref.IDOf(uico), objc.RegisterName("optionsByRemovingOptions:"), objref.IDOf(options))
 	return UserInterfaceCompressionOptionsFromID(_r)
 }
 
 // IsEmpty reports whether the object is empty.
 func (uico *UserInterfaceCompressionOptions) IsEmpty() bool {
+	defer runtime.KeepAlive(uico)
 	_r := objc.Send[bool](objref.IDOf(uico), objc.RegisterName("isEmpty"))
 	return _r
 }

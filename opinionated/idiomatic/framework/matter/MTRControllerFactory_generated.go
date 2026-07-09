@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRControllerFactoryAdopt(id objc.ID) *MTRControllerFactory {
 
 // Description returns the object's -description text.
 func (mcf *MTRControllerFactory) Description() string {
+	defer runtime.KeepAlive(mcf)
 	return rt.Description(objref.IDOf(mcf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcf *MTRControllerFactory) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcf *MTRControllerFactory) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcf)
 	return rt.IsKind(objref.IDOf(mcf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcf *MTRControllerFactory) String() string {
+	defer runtime.KeepAlive(mcf)
 	return rt.Description(objref.IDOf(mcf))
 }
 
@@ -72,29 +79,37 @@ func NewMTRControllerFactory() *MTRControllerFactory {
 
 // Startup wraps the corresponding Objective-C method.
 func (mcf *MTRControllerFactory) Startup(startupParams *MTRControllerFactoryParams) bool {
+	defer runtime.KeepAlive(mcf)
+	defer runtime.KeepAlive(startupParams)
 	_r := objc.Send[bool](objref.IDOf(mcf), objc.RegisterName("startup:"), objref.IDOf(startupParams))
 	return _r
 }
 
 // Shutdown wraps the corresponding Objective-C method.
 func (mcf *MTRControllerFactory) Shutdown() {
+	defer runtime.KeepAlive(mcf)
 	objc.Send[objc.ID](objref.IDOf(mcf), objc.RegisterName("shutdown"))
 }
 
 // StartControllerOnExistingFabric starts controller on existing fabric.
 func (mcf *MTRControllerFactory) StartControllerOnExistingFabric(startupParams *MTRDeviceControllerStartupParams) *MTRDeviceController {
+	defer runtime.KeepAlive(mcf)
+	defer runtime.KeepAlive(startupParams)
 	_r := objc.Send[objc.ID](objref.IDOf(mcf), objc.RegisterName("startControllerOnExistingFabric:"), objref.IDOf(startupParams))
 	return MTRDeviceControllerFromID(_r)
 }
 
 // StartControllerOnNewFabric starts controller on new fabric.
 func (mcf *MTRControllerFactory) StartControllerOnNewFabric(startupParams *MTRDeviceControllerStartupParams) *MTRDeviceController {
+	defer runtime.KeepAlive(mcf)
+	defer runtime.KeepAlive(startupParams)
 	_r := objc.Send[objc.ID](objref.IDOf(mcf), objc.RegisterName("startControllerOnNewFabric:"), objref.IDOf(startupParams))
 	return MTRDeviceControllerFromID(_r)
 }
 
 // IsRunning reports whether the object is running.
 func (mcf *MTRControllerFactory) IsRunning() bool {
+	defer runtime.KeepAlive(mcf)
 	_r := objc.Send[bool](objref.IDOf(mcf), objc.RegisterName("isRunning"))
 	return _r
 }

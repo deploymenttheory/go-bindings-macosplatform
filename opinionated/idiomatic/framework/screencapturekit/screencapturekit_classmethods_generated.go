@@ -6,6 +6,7 @@ package screencapturekit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -33,6 +34,8 @@ func SupportedContentTypes() []obj.Object {
 //
 // CaptureScreenshotWithFilterConfiguration blocks until the operation completes or ctx is cancelled.
 func CaptureScreenshotWithFilterConfiguration(ctx context.Context, contentFilter *ContentFilter, config *ScreenshotConfiguration) (result *ScreenshotOutput, err error) {
+	defer runtime.KeepAlive(contentFilter)
+	defer runtime.KeepAlive(config)
 	type _result struct {
 		val *ScreenshotOutput
 		err error
@@ -58,6 +61,7 @@ func CaptureScreenshotWithFilterConfiguration(ctx context.Context, contentFilter
 //
 // CaptureScreenshotWithRectConfiguration blocks until the operation completes or ctx is cancelled.
 func CaptureScreenshotWithRectConfiguration(ctx context.Context, rect corefoundation.CGRect, config *ScreenshotConfiguration) (result *ScreenshotOutput, err error) {
+	defer runtime.KeepAlive(config)
 	type _result struct {
 		val *ScreenshotOutput
 		err error
@@ -158,6 +162,7 @@ func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnly(ctx context.C
 //
 // GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyBelowWindow blocks until the operation completes or ctx is cancelled.
 func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyBelowWindow(ctx context.Context, excludeDesktopWindows bool, window *Window) (result *ShareableContent, err error) {
+	defer runtime.KeepAlive(window)
 	type _result struct {
 		val *ShareableContent
 		err error
@@ -183,6 +188,7 @@ func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyBelowWindow(ct
 //
 // GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyAboveWindow blocks until the operation completes or ctx is cancelled.
 func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyAboveWindow(ctx context.Context, excludeDesktopWindows bool, window *Window) (result *ShareableContent, err error) {
+	defer runtime.KeepAlive(window)
 	type _result struct {
 		val *ShareableContent
 		err error
@@ -206,6 +212,7 @@ func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyAboveWindow(ct
 
 // InfoForFilter retrieves any available sharable content information that matches the provided filter.
 func InfoForFilter(filter *ContentFilter) *ShareableContentInfo {
+	defer runtime.KeepAlive(filter)
 	_r := objc.Send[objc.ID](objc.ID(_class("SCShareableContent")), objc.RegisterName("infoForFilter:"), objref.IDOf(filter))
 	return ShareableContentInfoFromID(_r)
 }

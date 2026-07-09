@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTROvenCavityOperationalStateClusterOperationalErrorEventAdopt(id objc.ID) 
 
 // Description returns the object's -description text.
 func (mocoscoee *MTROvenCavityOperationalStateClusterOperationalErrorEvent) Description() string {
+	defer runtime.KeepAlive(mocoscoee)
 	return rt.Description(objref.IDOf(mocoscoee))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mocoscoee *MTROvenCavityOperationalStateClusterOperationalErrorEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mocoscoee)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mocoscoee), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mocoscoee *MTROvenCavityOperationalStateClusterOperationalErrorEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mocoscoee)
 	return rt.IsKind(objref.IDOf(mocoscoee), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mocoscoee *MTROvenCavityOperationalStateClusterOperationalErrorEvent) String() string {
+	defer runtime.KeepAlive(mocoscoee)
 	return rt.Description(objref.IDOf(mocoscoee))
 }
 
@@ -72,12 +79,14 @@ func NewMTROvenCavityOperationalStateClusterOperationalErrorEvent() *MTROvenCavi
 
 // WithErrorState sets the error state.
 func (mocoscoee *MTROvenCavityOperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *MTROvenCavityOperationalStateClusterErrorStateStruct) *MTROvenCavityOperationalStateClusterOperationalErrorEvent {
+	defer runtime.KeepAlive(errorState)
 	objc.Send[objc.ID](objref.IDOf(mocoscoee), objc.RegisterName("setErrorState:"), objref.IDOf(errorState))
 	return mocoscoee
 }
 
 // ErrorState returns the error state.
 func (mocoscoee *MTROvenCavityOperationalStateClusterOperationalErrorEvent) ErrorState() *MTROvenCavityOperationalStateClusterErrorStateStruct {
+	defer runtime.KeepAlive(mocoscoee)
 	_r := objc.Send[objc.ID](objref.IDOf(mocoscoee), objc.RegisterName("errorState"))
 	return MTROvenCavityOperationalStateClusterErrorStateStructFromID(_r)
 }

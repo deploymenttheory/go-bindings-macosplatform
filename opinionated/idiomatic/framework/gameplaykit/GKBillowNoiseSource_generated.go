@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -84,6 +86,7 @@ func (bns *BillowNoiseSource) WithSeed(seed int32) *BillowNoiseSource {
 
 // Persistence returns the persistence.
 func (bns *BillowNoiseSource) Persistence() float64 {
+	defer runtime.KeepAlive(bns)
 	_r := objc.Send[float64](objref.IDOf(bns), objc.RegisterName("persistence"))
 	return _r
 }

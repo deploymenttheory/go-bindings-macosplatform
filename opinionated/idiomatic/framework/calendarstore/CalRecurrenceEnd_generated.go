@@ -5,6 +5,9 @@
 package calendarstore
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +48,27 @@ func calRecurrenceEndAdopt(id objc.ID) *CalRecurrenceEnd {
 
 // Description returns the object's -description text.
 func (cre *CalRecurrenceEnd) Description() string {
+	defer runtime.KeepAlive(cre)
 	return rt.Description(objref.IDOf(cre))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cre *CalRecurrenceEnd) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cre)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cre), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cre *CalRecurrenceEnd) IsKind(className string) bool {
+	defer runtime.KeepAlive(cre)
 	return rt.IsKind(objref.IDOf(cre), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cre *CalRecurrenceEnd) String() string {
+	defer runtime.KeepAlive(cre)
 	return rt.Description(objref.IDOf(cre))
 }
 
@@ -72,18 +80,21 @@ func NewCalRecurrenceEnd() *CalRecurrenceEnd {
 
 // UsesEndDate wraps the corresponding Objective-C method.
 func (cre *CalRecurrenceEnd) UsesEndDate() bool {
+	defer runtime.KeepAlive(cre)
 	_r := objc.Send[bool](objref.IDOf(cre), objc.RegisterName("usesEndDate"))
 	return _r
 }
 
 // EndDate returns the end date.
-func (cre *CalRecurrenceEnd) EndDate() obj.Object {
+func (cre *CalRecurrenceEnd) EndDate() time.Time {
+	defer runtime.KeepAlive(cre)
 	_r := objc.Send[objc.ID](objref.IDOf(cre), objc.RegisterName("endDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // OccurrenceCount returns the occurrence count.
 func (cre *CalRecurrenceEnd) OccurrenceCount() int {
+	defer runtime.KeepAlive(cre)
 	_r := objc.Send[int](objref.IDOf(cre), objc.RegisterName("occurrenceCount"))
 	return _r
 }

@@ -212,7 +212,10 @@ func LoadAll(paths []string, modulePrefix string) (*Registry, error) {
 	for _, framework := range frameworks {
 		for name, class := range framework.Classes {
 			score := len(class.Methods) + len(class.Properties)
-			allEntries[name] = append(allEntries[name], classEntry{framework.Framework, score, class})
+			allEntries[name] = append(
+				allEntries[name],
+				classEntry{framework.Framework, score, class},
+			)
 		}
 	}
 
@@ -642,16 +645,21 @@ func resolvePaths(paths []string) ([]string, error) {
 			return nil, fmt.Errorf("stat %s: %w", p, err)
 		}
 		if info.IsDir() {
-			// Support both flat dirs (*.gometa.json) and metadata/<framework>/*.gometa.json
-			matches, err := filepath.Glob(filepath.Join(p, "*.gometa.json"))
-			if err != nil {
-				return nil, err
+			// Support flat dirs (*.gometa.json), per-framework dirs
+			// (metadata/<framework>/*.gometa.json), and the committed kind-split
+			// layout (metadata/{frameworks,libraries}/<name>/*.gometa.json).
+			var all []string
+			for _, pattern := range []string{
+				filepath.Join(p, "*.gometa.json"),
+				filepath.Join(p, "*", "*.gometa.json"),
+				filepath.Join(p, "*", "*", "*.gometa.json"),
+			} {
+				matches, err := filepath.Glob(pattern)
+				if err != nil {
+					return nil, err
+				}
+				all = append(all, matches...)
 			}
-			sub, err := filepath.Glob(filepath.Join(p, "*", "*.gometa.json"))
-			if err != nil {
-				return nil, err
-			}
-			all := append(matches, sub...)
 			out = append(out, selectBestArch(all)...)
 		} else {
 			if !strings.HasSuffix(p, ".gometa.json") {

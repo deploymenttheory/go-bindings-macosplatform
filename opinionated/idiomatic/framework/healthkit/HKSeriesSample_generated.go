@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func seriesSampleAdopt(id objc.ID) *SeriesSample {
 
 // Count returns the count.
 func (ss *SeriesSample) Count() int {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[int](objref.IDOf(ss), objc.RegisterName("count"))
 	return _r
 }

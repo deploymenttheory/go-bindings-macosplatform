@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,45 +51,54 @@ func diagnosticAdopt(id objc.ID) *Diagnostic {
 
 // Description returns the object's -description text.
 func (d *Diagnostic) Description() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (d *Diagnostic) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (d *Diagnostic) IsKind(className string) bool {
+	defer runtime.KeepAlive(d)
 	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (d *Diagnostic) String() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // JSONRepresentation returns the contents of the diagnostic in JSON format.
-func (d *Diagnostic) JSONRepresentation() obj.Object {
+func (d *Diagnostic) JSONRepresentation() []byte {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("JSONRepresentation"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // DictionaryRepresentation returns the contents of a diagnostic as a dictionary.
 func (d *Diagnostic) DictionaryRepresentation() obj.Object {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
 
 // MetaData returns the meta data.
 func (d *Diagnostic) MetaData() *MetaData {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("metaData"))
 	return MetaDataFromID(_r)
 }
 
 // ApplicationVersion returns an NSString representation of the application version from which this diagnostic was generated.
 func (d *Diagnostic) ApplicationVersion() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("applicationVersion"))
 	if _r == 0 {
 		return ""
@@ -99,6 +110,7 @@ func (d *Diagnostic) ApplicationVersion() string {
 //
 // SignpostData returns the collection as a Go slice.
 func (d *Diagnostic) SignpostData() []*SignpostRecord {
+	defer runtime.KeepAlive(d)
 	_arr := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("signpostData"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SignpostRecord { return SignpostRecordFromID(_id) })
 }

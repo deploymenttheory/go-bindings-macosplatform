@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func wKOpenPanelParametersAdopt(id objc.ID) *WKOpenPanelParameters {
 
 // Description returns the object's -description text.
 func (wopp *WKOpenPanelParameters) Description() string {
+	defer runtime.KeepAlive(wopp)
 	return rt.Description(objref.IDOf(wopp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wopp *WKOpenPanelParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wopp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wopp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wopp *WKOpenPanelParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(wopp)
 	return rt.IsKind(objref.IDOf(wopp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wopp *WKOpenPanelParameters) String() string {
+	defer runtime.KeepAlive(wopp)
 	return rt.Description(objref.IDOf(wopp))
 }
 
@@ -80,6 +87,7 @@ func NewWKOpenPanelParameters() *WKOpenPanelParameters {
 
 // AllowsMultipleSelection reports whether the file upload control supports multiple files.
 func (wopp *WKOpenPanelParameters) AllowsMultipleSelection() bool {
+	defer runtime.KeepAlive(wopp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -93,6 +101,7 @@ func (wopp *WKOpenPanelParameters) AllowsMultipleSelection() bool {
 
 // AllowsDirectories reports whether the file upload control supports selecting directories.
 func (wopp *WKOpenPanelParameters) AllowsDirectories() bool {
+	defer runtime.KeepAlive(wopp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

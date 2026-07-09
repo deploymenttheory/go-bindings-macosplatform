@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,33 +51,40 @@ func racingWheelInputStateAdopt(id objc.ID) *RacingWheelInputState {
 
 // Description returns the object's -description text.
 func (rwis *RacingWheelInputState) Description() string {
+	defer runtime.KeepAlive(rwis)
 	return rt.Description(objref.IDOf(rwis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rwis *RacingWheelInputState) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rwis)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rwis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rwis *RacingWheelInputState) IsKind(className string) bool {
+	defer runtime.KeepAlive(rwis)
 	return rt.IsKind(objref.IDOf(rwis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rwis *RacingWheelInputState) String() string {
+	defer runtime.KeepAlive(rwis)
 	return rt.Description(objref.IDOf(rwis))
 }
 
 // Wheel returns the steering wheel element.
 func (rwis *RacingWheelInputState) Wheel() *SteeringWheelElement {
+	defer runtime.KeepAlive(rwis)
 	_r := objc.Send[objc.ID](objref.IDOf(rwis), objc.RegisterName("wheel"))
 	return SteeringWheelElementFromID(_r)
 }
 
 // Shifter returns the element representing an attached gear shifter accessory. Note that this element only represents an external gear shifter accessory. Many racing wheels have a pair of built in paddle buttons that can be used for sequential gear shifting.  Those buttons are can be looked up with the \c GCInputLeftPaddle and \c GCInputRightPaddle input names.
 func (rwis *RacingWheelInputState) Shifter() *GearShifterElement {
+	defer runtime.KeepAlive(rwis)
 	_r := objc.Send[objc.ID](objref.IDOf(rwis), objc.RegisterName("shifter"))
 	return GearShifterElementFromID(_r)
 }

@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,6 +61,7 @@ func (mlfd *MTL4LibraryFunctionDescriptor) WithName(name string) *MTL4LibraryFun
 
 // Name returns assigns a name to the function.
 func (mlfd *MTL4LibraryFunctionDescriptor) Name() string {
+	defer runtime.KeepAlive(mlfd)
 	_r := objc.Send[objc.ID](objref.IDOf(mlfd), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

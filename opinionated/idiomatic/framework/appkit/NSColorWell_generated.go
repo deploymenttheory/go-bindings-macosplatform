@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -70,6 +72,7 @@ func (cw *ColorWell) WithBordered(bordered bool) *ColorWell {
 
 // WithColor sets the currently selected color for the color well.
 func (cw *ColorWell) WithColor(color *Color) *ColorWell {
+	defer runtime.KeepAlive(color)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setColor:"), objref.IDOf(color))
 	})
@@ -86,6 +89,7 @@ func (cw *ColorWell) WithColorWellStyle(colorWellStyle ColorWellStyle) *ColorWel
 
 // WithImage sets the image to display on the button portion of a color well that adopts the expanded style.
 func (cw *ColorWell) WithImage(image *Image) *ColorWell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -94,6 +98,7 @@ func (cw *ColorWell) WithImage(image *Image) *ColorWell {
 
 // WithPulldownTarget sets the target object that defines the action you want to perform when someone interacts with the color well.
 func (cw *ColorWell) WithPulldownTarget(pulldownTarget obj.Object) *ColorWell {
+	defer runtime.KeepAlive(pulldownTarget)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setPulldownTarget:"), objref.IDOf(pulldownTarget))
 	})
@@ -118,6 +123,7 @@ func (cw *ColorWell) WithMaximumLinearExposure(maximumLinearExposure float64) *C
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (cw *ColorWell) WithTarget(target obj.Object) *ColorWell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -182,6 +188,7 @@ func (cw *ColorWell) WithControlSize(controlSize ControlSize) *ColorWell {
 
 // WithFormatter sets the receiver’s formatter.
 func (cw *ColorWell) WithFormatter(formatter obj.Object) *ColorWell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -190,6 +197,7 @@ func (cw *ColorWell) WithFormatter(formatter obj.Object) *ColorWell {
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (cw *ColorWell) WithObjectValue(objectValue obj.Object) *ColorWell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -206,6 +214,7 @@ func (cw *ColorWell) WithStringValue(stringValue string) *ColorWell {
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (cw *ColorWell) WithAttributedStringValue(attributedStringValue obj.Object) *ColorWell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -246,6 +255,7 @@ func (cw *ColorWell) WithDoubleValue(doubleValue float64) *ColorWell {
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (cw *ColorWell) WithFont(font *Font) *ColorWell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -294,6 +304,7 @@ func (cw *ColorWell) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *
 
 // WithCell sets the cell.
 func (cw *ColorWell) WithCell(cell CellProvider) *ColorWell {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -439,6 +450,7 @@ func (cw *ColorWell) WithWantsLayer(wantsLayer bool) *ColorWell {
 
 // WithLayer sets the layer.
 func (cw *ColorWell) WithLayer(layer obj.Object) *ColorWell {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -488,6 +500,7 @@ func (cw *ColorWell) WithBackgroundFilters(items ...obj.Object) *ColorWell {
 
 // WithCompositingFilter sets the compositing filter.
 func (cw *ColorWell) WithCompositingFilter(compositingFilter obj.Object) *ColorWell {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -505,6 +518,7 @@ func (cw *ColorWell) WithContentFilters(items ...obj.Object) *ColorWell {
 
 // WithShadow sets the shadow.
 func (cw *ColorWell) WithShadow(shadow *Shadow) *ColorWell {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -553,6 +567,7 @@ func (cw *ColorWell) WithPreparedContentRect(preparedContentRect corefoundation.
 
 // WithNextKeyView sets the next key view.
 func (cw *ColorWell) WithNextKeyView(nextKeyView ViewProvider) *ColorWell {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -602,6 +617,7 @@ func (cw *ColorWell) WithPrefersCompactControlSizeMetrics(prefersCompactControlS
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (cw *ColorWell) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ColorWell {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -658,6 +674,7 @@ func (cw *ColorWell) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyn
 
 // WithPressureConfiguration sets the pressure configuration.
 func (cw *ColorWell) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ColorWell {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -666,6 +683,7 @@ func (cw *ColorWell) WithPressureConfiguration(pressureConfiguration *PressureCo
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (cw *ColorWell) WithNextResponder(nextResponder ResponderProvider) *ColorWell {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -674,6 +692,7 @@ func (cw *ColorWell) WithNextResponder(nextResponder ResponderProvider) *ColorWe
 
 // WithMenu sets returns the responder’s menu.
 func (cw *ColorWell) WithMenu(menu *Menu) *ColorWell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -682,6 +701,7 @@ func (cw *ColorWell) WithMenu(menu *Menu) *ColorWell {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (cw *ColorWell) WithUserActivity(userActivity obj.Object) *ColorWell {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -690,6 +710,7 @@ func (cw *ColorWell) WithUserActivity(userActivity obj.Object) *ColorWell {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (cw *ColorWell) WithTouchBar(touchBar *TouchBar) *ColorWell {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -698,6 +719,7 @@ func (cw *ColorWell) WithTouchBar(touchBar *TouchBar) *ColorWell {
 
 // Deactivate deactivates the color well.
 func (cw *ColorWell) Deactivate() {
+	defer runtime.KeepAlive(cw)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("deactivate"))
 	})
@@ -706,6 +728,7 @@ func (cw *ColorWell) Deactivate() {
 
 // Activate activates the color well, displays the color panel, and synchronizes the two UI elements.
 func (cw *ColorWell) Activate(exclusive bool) {
+	defer runtime.KeepAlive(cw)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("activate:"), exclusive)
 	})
@@ -714,6 +737,7 @@ func (cw *ColorWell) Activate(exclusive bool) {
 
 // DrawWellInside draws the area inside the color well at the specified location without drawing borders.
 func (cw *ColorWell) DrawWellInside(insideRect corefoundation.CGRect) {
+	defer runtime.KeepAlive(cw)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("drawWellInside:"), insideRect)
 	})
@@ -722,6 +746,8 @@ func (cw *ColorWell) DrawWellInside(insideRect corefoundation.CGRect) {
 
 // TakeColorFrom changes the currently selected color to the color of the specified object.
 func (cw *ColorWell) TakeColorFrom(sender obj.Object) {
+	defer runtime.KeepAlive(cw)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("takeColorFrom:"), objref.IDOf(sender))
 	})
@@ -730,6 +756,7 @@ func (cw *ColorWell) TakeColorFrom(sender obj.Object) {
 
 // IsActive reports whether the object is active.
 func (cw *ColorWell) IsActive() bool {
+	defer runtime.KeepAlive(cw)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -743,6 +770,7 @@ func (cw *ColorWell) IsActive() bool {
 
 // IsBordered reports whether the object is bordered.
 func (cw *ColorWell) IsBordered() bool {
+	defer runtime.KeepAlive(cw)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -756,6 +784,7 @@ func (cw *ColorWell) IsBordered() bool {
 
 // Color returns the color.
 func (cw *ColorWell) Color() *Color {
+	defer runtime.KeepAlive(cw)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -769,6 +798,7 @@ func (cw *ColorWell) Color() *Color {
 
 // ColorWellStyle returns the color well style.
 func (cw *ColorWell) ColorWellStyle() ColorWellStyle {
+	defer runtime.KeepAlive(cw)
 	var _mainthread0 ColorWellStyle
 	purego.Main(func() {
 		_mainthread0 = func() ColorWellStyle {
@@ -782,6 +812,7 @@ func (cw *ColorWell) ColorWellStyle() ColorWellStyle {
 
 // Image returns the image.
 func (cw *ColorWell) Image() *Image {
+	defer runtime.KeepAlive(cw)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {
@@ -795,6 +826,7 @@ func (cw *ColorWell) Image() *Image {
 
 // PulldownTarget returns the pulldown target.
 func (cw *ColorWell) PulldownTarget() obj.Object {
+	defer runtime.KeepAlive(cw)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -808,6 +840,7 @@ func (cw *ColorWell) PulldownTarget() obj.Object {
 
 // SupportsAlpha reports whether controls alpha support for the current color well, and the visibility of alpha slider in the color panel. When `NSColor.ignoresAlpha` (deprecated) is set to `YES`, this property will always return `NO` and alpha is not supported globally.
 func (cw *ColorWell) SupportsAlpha() bool {
+	defer runtime.KeepAlive(cw)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -821,6 +854,7 @@ func (cw *ColorWell) SupportsAlpha() bool {
 
 // MaximumLinearExposure returns the maximum linear exposure a color in this color well can be set to. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked for this well may have a linear exposure applied to it.
 func (cw *ColorWell) MaximumLinearExposure() float64 {
+	defer runtime.KeepAlive(cw)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {

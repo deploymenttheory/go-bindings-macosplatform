@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,39 +51,49 @@ func mediaSelectionAdopt(id objc.ID) *MediaSelection {
 
 // Description returns the object's -description text.
 func (ms *MediaSelection) Description() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ms *MediaSelection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ms)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ms *MediaSelection) IsKind(className string) bool {
+	defer runtime.KeepAlive(ms)
 	return rt.IsKind(objref.IDOf(ms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ms *MediaSelection) String() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
 // SelectedMediaOptionInMediaSelectionGroup returns the media selection option that’s currently selected in the specified group.
 func (ms *MediaSelection) SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) *MediaSelectionOption {
+	defer runtime.KeepAlive(ms)
+	defer runtime.KeepAlive(mediaSelectionGroup)
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("selectedMediaOptionInMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
 	return MediaSelectionOptionFromID(_r)
 }
 
 // MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup indicates whether the specified media selection group is subject to automatic media selection.
 func (ms *MediaSelection) MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) bool {
+	defer runtime.KeepAlive(ms)
+	defer runtime.KeepAlive(mediaSelectionGroup)
 	_r := objc.Send[bool](objref.IDOf(ms), objc.RegisterName("mediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
 	return _r
 }
 
 // Asset returns the asset.
 func (ms *MediaSelection) Asset() *Asset {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("asset"))
 	return AssetFromID(_r)
 }

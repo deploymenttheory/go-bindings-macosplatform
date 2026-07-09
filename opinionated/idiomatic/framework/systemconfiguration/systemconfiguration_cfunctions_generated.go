@@ -693,7 +693,7 @@ func SCNetworkInterfaceCopyAll() obj.Object {
 var _fnSCNetworkInterfaceCopyMTU func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
 
 // SCNetworkInterfaceCopyMTU calls the SystemConfiguration framework function SCNetworkInterfaceCopyMTU.
-func SCNetworkInterfaceCopyMTU(interface_ obj.Object) (result uint8, mtu_cur int32, mtu_min int32, mtu_max int32) {
+func SCNetworkInterfaceCopyMTU(interface_ obj.Object) (result uint8, mtuCur int32, mtuMin int32, mtuMax int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkInterfaceCopyMTU == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyMTU, _lib, "SCNetworkInterfaceCopyMTU")

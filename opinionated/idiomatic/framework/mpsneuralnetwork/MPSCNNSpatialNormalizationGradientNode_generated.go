@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,6 +47,9 @@ func cNNSpatialNormalizationGradientNodeAdopt(id objc.ID) *CNNSpatialNormalizati
 
 // NewCNNSpatialNormalizationGradientNodeWithSourceGradientSourceImageGradientStateKernelSize creates a new CNNSpatialNormalizationGradientNode.
 func NewCNNSpatialNormalizationGradientNodeWithSourceGradientSourceImageGradientStateKernelSize(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode, kernelSize int) *CNNSpatialNormalizationGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNSpatialNormalizationGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:kernelSize:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), kernelSize)
 	return cNNSpatialNormalizationGradientNodeAdopt(_id)
@@ -88,30 +93,35 @@ func (csngn *CNNSpatialNormalizationGradientNode) WithLabel(label string) *CNNSp
 
 // KernelWidth returns the kernel width.
 func (csngn *CNNSpatialNormalizationGradientNode) KernelWidth() int {
+	defer runtime.KeepAlive(csngn)
 	_r := objc.Send[int](objref.IDOf(csngn), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
 // KernelHeight returns the kernel height.
 func (csngn *CNNSpatialNormalizationGradientNode) KernelHeight() int {
+	defer runtime.KeepAlive(csngn)
 	_r := objc.Send[int](objref.IDOf(csngn), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
 // Alpha returns the value of alpha.  Default is 1.0. Must be non-negative.
 func (csngn *CNNSpatialNormalizationGradientNode) Alpha() float32 {
+	defer runtime.KeepAlive(csngn)
 	_r := objc.Send[float32](objref.IDOf(csngn), objc.RegisterName("alpha"))
 	return _r
 }
 
 // Beta returns the value of beta.  Default is 5.0
 func (csngn *CNNSpatialNormalizationGradientNode) Beta() float32 {
+	defer runtime.KeepAlive(csngn)
 	_r := objc.Send[float32](objref.IDOf(csngn), objc.RegisterName("beta"))
 	return _r
 }
 
 // Delta returns the value of delta.  Default is 1.0
 func (csngn *CNNSpatialNormalizationGradientNode) Delta() float32 {
+	defer runtime.KeepAlive(csngn)
 	_r := objc.Send[float32](objref.IDOf(csngn), objc.RegisterName("delta"))
 	return _r
 }

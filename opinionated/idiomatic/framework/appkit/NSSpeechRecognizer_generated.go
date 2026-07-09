@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func speechRecognizerAdopt(id objc.ID) *SpeechRecognizer {
 
 // Description returns the object's -description text.
 func (sr *SpeechRecognizer) Description() string {
+	defer runtime.KeepAlive(sr)
 	return rt.Description(objref.IDOf(sr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sr *SpeechRecognizer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sr *SpeechRecognizer) IsKind(className string) bool {
+	defer runtime.KeepAlive(sr)
 	return rt.IsKind(objref.IDOf(sr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sr *SpeechRecognizer) String() string {
+	defer runtime.KeepAlive(sr)
 	return rt.Description(objref.IDOf(sr))
 }
 
@@ -70,6 +78,16 @@ func (sr *SpeechRecognizer) String() string {
 func NewSpeechRecognizer() *SpeechRecognizer {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSSpeechRecognizer")), objc.RegisterName("new"))
 	return speechRecognizerAdopt(_id)
+}
+
+// WithDelegate sets the delegate for the speech recognizer object.
+func (sr *SpeechRecognizer) WithDelegate(delegate SpeechRecognizerDelegate) *SpeechRecognizer {
+	_shim := newSpeechRecognizerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(sr), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(sr), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return sr
 }
 
 // WithCommands sets an array of strings defining the commands for which the speech recognizer object should listen.
@@ -99,11 +117,13 @@ func (sr *SpeechRecognizer) WithBlocksOtherRecognizers(blocksOtherRecognizers bo
 
 // StartListening tells the speech recognition engine to begin listening for commands.
 func (sr *SpeechRecognizer) StartListening() {
+	defer runtime.KeepAlive(sr)
 	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("startListening"))
 }
 
 // StopListening tells the speech recognition engine to suspend listening for commands.
 func (sr *SpeechRecognizer) StopListening() {
+	defer runtime.KeepAlive(sr)
 	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("stopListening"))
 }
 
@@ -111,12 +131,14 @@ func (sr *SpeechRecognizer) StopListening() {
 //
 // Commands returns the collection as a Go slice.
 func (sr *SpeechRecognizer) Commands() []string {
+	defer runtime.KeepAlive(sr)
 	_arr := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("commands"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // DisplayedCommandsTitle returns the displayed commands title.
 func (sr *SpeechRecognizer) DisplayedCommandsTitle() string {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("displayedCommandsTitle"))
 	if _r == 0 {
 		return ""
@@ -126,12 +148,14 @@ func (sr *SpeechRecognizer) DisplayedCommandsTitle() string {
 
 // ListensInForegroundOnly wraps the corresponding Objective-C method.
 func (sr *SpeechRecognizer) ListensInForegroundOnly() bool {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[bool](objref.IDOf(sr), objc.RegisterName("listensInForegroundOnly"))
 	return _r
 }
 
 // BlocksOtherRecognizers wraps the corresponding Objective-C method.
 func (sr *SpeechRecognizer) BlocksOtherRecognizers() bool {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[bool](objref.IDOf(sr), objc.RegisterName("blocksOtherRecognizers"))
 	return _r
 }

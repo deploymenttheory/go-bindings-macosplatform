@@ -5,6 +5,7 @@
 package glkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -91,30 +92,35 @@ func (epf *EffectPropertyFog) WithEnd(end float32) *EffectPropertyFog {
 
 // Enabled returns the enabled.
 func (epf *EffectPropertyFog) Enabled() uint8 {
+	defer runtime.KeepAlive(epf)
 	_r := objc.Send[uint8](objref.IDOf(epf), objc.RegisterName("enabled"))
 	return _r
 }
 
 // Mode returns the mode.
 func (epf *EffectPropertyFog) Mode() int32 {
+	defer runtime.KeepAlive(epf)
 	_r := objc.Send[int32](objref.IDOf(epf), objc.RegisterName("mode"))
 	return _r
 }
 
 // Density returns the density.
 func (epf *EffectPropertyFog) Density() float32 {
+	defer runtime.KeepAlive(epf)
 	_r := objc.Send[float32](objref.IDOf(epf), objc.RegisterName("density"))
 	return _r
 }
 
 // Start returns the start.
 func (epf *EffectPropertyFog) Start() float32 {
+	defer runtime.KeepAlive(epf)
 	_r := objc.Send[float32](objref.IDOf(epf), objc.RegisterName("start"))
 	return _r
 }
 
 // End returns the end.
 func (epf *EffectPropertyFog) End() float32 {
+	defer runtime.KeepAlive(epf)
 	_r := objc.Send[float32](objref.IDOf(epf), objc.RegisterName("end"))
 	return _r
 }

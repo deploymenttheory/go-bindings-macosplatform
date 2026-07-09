@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func collectionViewCompositionalLayoutAdopt(id objc.ID) *CollectionViewCompositi
 
 // NewCollectionViewCompositionalLayoutWithSection creates a compositional layout object with a single section.
 func NewCollectionViewCompositionalLayoutWithSection(section *CollectionLayoutSection) *CollectionViewCompositionalLayout {
+	defer runtime.KeepAlive(section)
 	var _mainthread0 *CollectionViewCompositionalLayout
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewCompositionalLayout {
@@ -60,6 +63,8 @@ func NewCollectionViewCompositionalLayoutWithSection(section *CollectionLayoutSe
 
 // NewCollectionViewCompositionalLayoutWithSectionConfiguration creates a compositional layout object with a single section and an additional configuration.
 func NewCollectionViewCompositionalLayoutWithSectionConfiguration(section *CollectionLayoutSection, configuration *CollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout {
+	defer runtime.KeepAlive(section)
+	defer runtime.KeepAlive(configuration)
 	var _mainthread0 *CollectionViewCompositionalLayout
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewCompositionalLayout {
@@ -73,6 +78,7 @@ func NewCollectionViewCompositionalLayoutWithSectionConfiguration(section *Colle
 
 // WithConfiguration sets the layout’s configuration, such as its scroll direction and section spacing.
 func (cvcl *CollectionViewCompositionalLayout) WithConfiguration(configuration *CollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout {
+	defer runtime.KeepAlive(configuration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvcl), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	})
@@ -81,6 +87,7 @@ func (cvcl *CollectionViewCompositionalLayout) WithConfiguration(configuration *
 
 // Configuration returns the configuration.
 func (cvcl *CollectionViewCompositionalLayout) Configuration() *CollectionViewCompositionalLayoutConfiguration {
+	defer runtime.KeepAlive(cvcl)
 	var _mainthread0 *CollectionViewCompositionalLayoutConfiguration
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewCompositionalLayoutConfiguration {

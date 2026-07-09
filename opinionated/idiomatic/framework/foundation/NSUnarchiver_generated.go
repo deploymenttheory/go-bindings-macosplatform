@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,9 +51,9 @@ func unarchiverAdopt(id objc.ID) *Unarchiver {
 }
 
 // NewUnarchiverForReadingWithData returns an NSUnarchiver object initialized to read an archive from a given data object.
-func NewUnarchiverForReadingWithData(data *Data) *Unarchiver {
+func NewUnarchiverForReadingWithData(data []byte) *Unarchiver {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUnarchiver")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReadingWithData:"), objref.IDOf(data))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReadingWithData:"), rt.BytesToNSData(data))
 	return unarchiverAdopt(_id)
 }
 
@@ -62,18 +64,20 @@ func (u *Unarchiver) WithObservationInfo(observationInfo unsafe.Pointer) *Unarch
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (u *Unarchiver) WithScriptingProperties(scriptingProperties obj.Object) *Unarchiver {
-	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (u *Unarchiver) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Unarchiver {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return u
 }
 
 // DecodeClassNameAsClassName instructs the receiver to use the class with a given name when instantiating objects whose ostensible class, according to the archived data, is another given name.
 func (u *Unarchiver) DecodeClassNameAsClassName(inArchiveName string, trueName string) {
+	defer runtime.KeepAlive(u)
 	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("decodeClassName:asClassName:"), purego.NSString(inArchiveName), purego.NSString(trueName))
 }
 
 // ClassNameDecodedForArchiveClassName returns the name of the class that will be used when instantiating objects whose ostensible class, according to the archived data, is a given name.
 func (u *Unarchiver) ClassNameDecodedForArchiveClassName(inArchiveName string) string {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("classNameDecodedForArchiveClassName:"), purego.NSString(inArchiveName))
 	if _r == 0 {
 		return ""
@@ -83,11 +87,15 @@ func (u *Unarchiver) ClassNameDecodedForArchiveClassName(inArchiveName string) s
 
 // ReplaceObjectWithObject causes the receiver to substitute one given object for another whenever the latter is extracted from the archive.
 func (u *Unarchiver) ReplaceObjectWithObject(object obj.Object, newObject obj.Object) {
+	defer runtime.KeepAlive(u)
+	defer runtime.KeepAlive(object)
+	defer runtime.KeepAlive(newObject)
 	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("replaceObject:withObject:"), objref.IDOf(object), objref.IDOf(newObject))
 }
 
 // IsAtEnd reports whether the object is at end.
 func (u *Unarchiver) IsAtEnd() bool {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("isAtEnd"))
 	return _r
 }

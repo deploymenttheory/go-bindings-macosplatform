@@ -131,3 +131,14 @@ func Funcs(funcs []view.Func) ([]byte, error) {
 	}
 	return buf.Bytes(), nil
 }
+
+// Delegate renders one delegate protocol — the Go interface, the optional
+// upgrade interfaces, and the shim builder — as a Go source fragment (before
+// file assembly and gofmt).
+func Delegate(d view.Delegate) ([]byte, error) {
+	var buf bytes.Buffer
+	if err := templates.ExecuteTemplate(&buf, "delegate", d); err != nil {
+		return nil, fmt.Errorf("render delegate %s: %w", d.IfaceName, err)
+	}
+	return buf.Bytes(), nil
+}

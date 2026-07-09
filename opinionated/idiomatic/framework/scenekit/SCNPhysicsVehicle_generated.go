@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,21 +55,25 @@ func NewPhysicsVehicle() *PhysicsVehicle {
 
 // ApplyEngineForceForWheelAtIndex applies a force between the specified wheel and the ground under the vehicle.
 func (pv *PhysicsVehicle) ApplyEngineForceForWheelAtIndex(value float64, index int) {
+	defer runtime.KeepAlive(pv)
 	objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("applyEngineForce:forWheelAtIndex:"), value, index)
 }
 
 // SetSteeringAngleForWheelAtIndex pivots the specified wheel around its steering axis.
 func (pv *PhysicsVehicle) SetSteeringAngleForWheelAtIndex(value float64, index int) {
+	defer runtime.KeepAlive(pv)
 	objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("setSteeringAngle:forWheelAtIndex:"), value, index)
 }
 
 // ApplyBrakingForceForWheelAtIndex applies a force between the specified wheel and the ground under the vehicle.
 func (pv *PhysicsVehicle) ApplyBrakingForceForWheelAtIndex(value float64, index int) {
+	defer runtime.KeepAlive(pv)
 	objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("applyBrakingForce:forWheelAtIndex:"), value, index)
 }
 
 // SpeedInKilometersPerHour returns the speed in kilometers per hour.
 func (pv *PhysicsVehicle) SpeedInKilometersPerHour() float64 {
+	defer runtime.KeepAlive(pv)
 	_r := objc.Send[float64](objref.IDOf(pv), objc.RegisterName("speedInKilometersPerHour"))
 	return _r
 }
@@ -76,12 +82,14 @@ func (pv *PhysicsVehicle) SpeedInKilometersPerHour() float64 {
 //
 // Wheels returns the collection as a Go slice.
 func (pv *PhysicsVehicle) Wheels() []*PhysicsVehicleWheel {
+	defer runtime.KeepAlive(pv)
 	_arr := objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("wheels"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PhysicsVehicleWheel { return PhysicsVehicleWheelFromID(_id) })
 }
 
 // ChassisBody returns the chassis body.
 func (pv *PhysicsVehicle) ChassisBody() *PhysicsBody {
+	defer runtime.KeepAlive(pv)
 	_r := objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("chassisBody"))
 	return PhysicsBodyFromID(_r)
 }

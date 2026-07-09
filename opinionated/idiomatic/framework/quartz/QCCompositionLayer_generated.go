@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func qCCompositionLayerAdopt(id objc.ID) *QCCompositionLayer {
 
 // Description returns the object's -description text.
 func (qcl *QCCompositionLayer) Description() string {
+	defer runtime.KeepAlive(qcl)
 	return rt.Description(objref.IDOf(qcl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (qcl *QCCompositionLayer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(qcl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(qcl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (qcl *QCCompositionLayer) IsKind(className string) bool {
+	defer runtime.KeepAlive(qcl)
 	return rt.IsKind(objref.IDOf(qcl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (qcl *QCCompositionLayer) String() string {
+	defer runtime.KeepAlive(qcl)
 	return rt.Description(objref.IDOf(qcl))
 }
 
@@ -75,6 +82,7 @@ func NewQCCompositionLayerWithFile(path string) *QCCompositionLayer {
 
 // NewQCCompositionLayerWithComposition initializes and returns a composition layer using the provided Quartz Composer composition.
 func NewQCCompositionLayerWithComposition(composition *QCComposition) *QCCompositionLayer {
+	defer runtime.KeepAlive(composition)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QCCompositionLayer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComposition:"), objref.IDOf(composition))
 	return qCCompositionLayerAdopt(_id)
@@ -82,6 +90,7 @@ func NewQCCompositionLayerWithComposition(composition *QCComposition) *QCComposi
 
 // Composition returns the composition associated with the layer.
 func (qcl *QCCompositionLayer) Composition() *QCComposition {
+	defer runtime.KeepAlive(qcl)
 	_r := objc.Send[objc.ID](objref.IDOf(qcl), objc.RegisterName("composition"))
 	return QCCompositionFromID(_r)
 }

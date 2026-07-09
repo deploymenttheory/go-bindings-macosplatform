@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -55,32 +56,35 @@ func NewFetchWebAuthTokenOperation() *FetchWebAuthTokenOperation {
 }
 
 // NewFetchWebAuthTokenOperationWithAPIToken creates a fetch operation for the specified API token.
-func NewFetchWebAuthTokenOperationWithAPIToken(aPIToken string) *FetchWebAuthTokenOperation {
+func NewFetchWebAuthTokenOperationWithAPIToken(apiToken string) *FetchWebAuthTokenOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKFetchWebAuthTokenOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAPIToken:"), purego.NSString(aPIToken))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAPIToken:"), purego.NSString(apiToken))
 	return fetchWebAuthTokenOperationAdopt(_id)
 }
 
 // WithAPIToken sets the API token that allows access to an app’s container.
-func (fwato *FetchWebAuthTokenOperation) WithAPIToken(aPIToken string) *FetchWebAuthTokenOperation {
-	objc.Send[objc.ID](objref.IDOf(fwato), objc.RegisterName("setAPIToken:"), purego.NSString(aPIToken))
+func (fwato *FetchWebAuthTokenOperation) WithAPIToken(apiToken string) *FetchWebAuthTokenOperation {
+	objc.Send[objc.ID](objref.IDOf(fwato), objc.RegisterName("setAPIToken:"), purego.NSString(apiToken))
 	return fwato
 }
 
 // WithDatabase sets the database that the operation uses.
 func (fwato *FetchWebAuthTokenOperation) WithDatabase(database *Database) *FetchWebAuthTokenOperation {
+	defer runtime.KeepAlive(database)
 	objc.Send[objc.ID](objref.IDOf(fwato), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return fwato
 }
 
 // WithConfiguration sets the operation’s configuration.
 func (fwato *FetchWebAuthTokenOperation) WithConfiguration(configuration *OperationConfiguration) *FetchWebAuthTokenOperation {
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(fwato), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return fwato
 }
 
 // WithGroup sets the operation’s group.
 func (fwato *FetchWebAuthTokenOperation) WithGroup(group *OperationGroup) *FetchWebAuthTokenOperation {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(fwato), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return fwato
 }
@@ -93,6 +97,7 @@ func (fwato *FetchWebAuthTokenOperation) WithLongLivedOperationWasPersistedBlock
 
 // WithContainer sets the operation's container.
 func (fwato *FetchWebAuthTokenOperation) WithContainer(container *Container) *FetchWebAuthTokenOperation {
+	defer runtime.KeepAlive(container)
 	objc.Send[objc.ID](objref.IDOf(fwato), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return fwato
 }
@@ -123,6 +128,7 @@ func (fwato *FetchWebAuthTokenOperation) WithTimeoutIntervalForResource(timeoutI
 
 // APIToken returns the API token that allows access to an app's container.
 func (fwato *FetchWebAuthTokenOperation) APIToken() string {
+	defer runtime.KeepAlive(fwato)
 	_r := objc.Send[objc.ID](objref.IDOf(fwato), objc.RegisterName("APIToken"))
 	if _r == 0 {
 		return ""
@@ -134,6 +140,7 @@ func (fwato *FetchWebAuthTokenOperation) APIToken() string {
 //
 // SetFetchWebAuthTokenCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (fwato *FetchWebAuthTokenOperation) SetFetchWebAuthTokenCompletionBlock(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(fwato)
 	type _result struct {
 		val string
 		err error

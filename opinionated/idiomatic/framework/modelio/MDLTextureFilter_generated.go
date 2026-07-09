@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func textureFilterAdopt(id objc.ID) *TextureFilter {
 
 // Description returns the object's -description text.
 func (tf *TextureFilter) Description() string {
+	defer runtime.KeepAlive(tf)
 	return rt.Description(objref.IDOf(tf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tf *TextureFilter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tf *TextureFilter) IsKind(className string) bool {
+	defer runtime.KeepAlive(tf)
 	return rt.IsKind(objref.IDOf(tf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tf *TextureFilter) String() string {
+	defer runtime.KeepAlive(tf)
 	return rt.Description(objref.IDOf(tf))
 }
 
@@ -110,36 +117,42 @@ func (tf *TextureFilter) WithMipFilter(mipFilter MaterialMipMapFilterMode) *Text
 
 // SWrapMode returns the s wrap mode.
 func (tf *TextureFilter) SWrapMode() MaterialTextureWrapMode {
+	defer runtime.KeepAlive(tf)
 	_r := objc.Send[MaterialTextureWrapMode](objref.IDOf(tf), objc.RegisterName("sWrapMode"))
 	return _r
 }
 
 // TWrapMode returns the t wrap mode.
 func (tf *TextureFilter) TWrapMode() MaterialTextureWrapMode {
+	defer runtime.KeepAlive(tf)
 	_r := objc.Send[MaterialTextureWrapMode](objref.IDOf(tf), objc.RegisterName("tWrapMode"))
 	return _r
 }
 
 // RWrapMode returns the r wrap mode.
 func (tf *TextureFilter) RWrapMode() MaterialTextureWrapMode {
+	defer runtime.KeepAlive(tf)
 	_r := objc.Send[MaterialTextureWrapMode](objref.IDOf(tf), objc.RegisterName("rWrapMode"))
 	return _r
 }
 
 // MinFilter returns the min filter.
 func (tf *TextureFilter) MinFilter() MaterialTextureFilterMode {
+	defer runtime.KeepAlive(tf)
 	_r := objc.Send[MaterialTextureFilterMode](objref.IDOf(tf), objc.RegisterName("minFilter"))
 	return _r
 }
 
 // MagFilter returns the mag filter.
 func (tf *TextureFilter) MagFilter() MaterialTextureFilterMode {
+	defer runtime.KeepAlive(tf)
 	_r := objc.Send[MaterialTextureFilterMode](objref.IDOf(tf), objc.RegisterName("magFilter"))
 	return _r
 }
 
 // MipFilter returns the mip filter.
 func (tf *TextureFilter) MipFilter() MaterialMipMapFilterMode {
+	defer runtime.KeepAlive(tf)
 	_r := objc.Send[MaterialMipMapFilterMode](objref.IDOf(tf), objc.RegisterName("mipFilter"))
 	return _r
 }

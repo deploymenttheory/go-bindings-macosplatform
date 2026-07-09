@@ -388,9 +388,9 @@ func (o *NSPrintOperation) PDFPanel() *NSPDFPanel {
 	return _mainthread0
 }
 
-func (o *NSPrintOperation) SetPDFPanel(pDFPanel *NSPDFPanel) {
+func (o *NSPrintOperation) SetPDFPanel(pdfPanel *NSPDFPanel) {
 	purego.Main(func() {
-		o.Ptr().Send(_nSPrintOperationSelSetPDFPanel, pDFPanel.Ptr())
+		o.Ptr().Send(_nSPrintOperationSelSetPDFPanel, pdfPanel.Ptr())
 	})
 }
 

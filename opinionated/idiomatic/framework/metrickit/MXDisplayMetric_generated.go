@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,6 +56,7 @@ func NewDisplayMetric() *DisplayMetric {
 
 // AveragePixelLuminance returns the average pixel luminance.
 func (dm *DisplayMetric) AveragePixelLuminance() obj.Object {
+	defer runtime.KeepAlive(dm)
 	_r := objc.Send[objc.ID](objref.IDOf(dm), objc.RegisterName("averagePixelLuminance"))
 	return obj.Wrap(_r)
 }

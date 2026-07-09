@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func neuralEngineComputeDeviceAdopt(id objc.ID) *NeuralEngineComputeDevice {
 
 // Description returns the object's -description text.
 func (necd *NeuralEngineComputeDevice) Description() string {
+	defer runtime.KeepAlive(necd)
 	return rt.Description(objref.IDOf(necd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (necd *NeuralEngineComputeDevice) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(necd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(necd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (necd *NeuralEngineComputeDevice) IsKind(className string) bool {
+	defer runtime.KeepAlive(necd)
 	return rt.IsKind(objref.IDOf(necd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (necd *NeuralEngineComputeDevice) String() string {
+	defer runtime.KeepAlive(necd)
 	return rt.Description(objref.IDOf(necd))
 }
 
@@ -74,6 +81,7 @@ func NewNeuralEngineComputeDevice() *NeuralEngineComputeDevice {
 
 // TotalCoreCount returns the total core count.
 func (necd *NeuralEngineComputeDevice) TotalCoreCount() int {
+	defer runtime.KeepAlive(necd)
 	_r := objc.Send[int](objref.IDOf(necd), objc.RegisterName("totalCoreCount"))
 	return _r
 }

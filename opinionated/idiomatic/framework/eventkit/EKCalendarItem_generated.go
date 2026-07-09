@@ -5,7 +5,11 @@
 package eventkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,6 +53,7 @@ func calendarItemAdopt(id objc.ID) *CalendarItem {
 
 // WithCalendar sets the calendar for the calendar item.
 func (ci *CalendarItem) WithCalendar(calendar *Calendar) *CalendarItem {
+	defer runtime.KeepAlive(calendar)
 	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return ci
 }
@@ -72,13 +77,14 @@ func (ci *CalendarItem) WithNotes(notes string) *CalendarItem {
 }
 
 // WithURL sets the URL for the calendar item.
-func (ci *CalendarItem) WithURL(uRL string) *CalendarItem {
-	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (ci *CalendarItem) WithURL(url string) *CalendarItem {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return ci
 }
 
 // WithTimeZone sets the time zone for the calendar item.
 func (ci *CalendarItem) WithTimeZone(timeZone obj.Object) *CalendarItem {
+	defer runtime.KeepAlive(timeZone)
 	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return ci
 }
@@ -99,32 +105,42 @@ func (ci *CalendarItem) WithRecurrenceRules(items ...*RecurrenceRule) *CalendarI
 
 // AddAlarm adds an alarm to the receiver.
 func (ci *CalendarItem) AddAlarm(alarm *Alarm) {
+	defer runtime.KeepAlive(ci)
+	defer runtime.KeepAlive(alarm)
 	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("addAlarm:"), objref.IDOf(alarm))
 }
 
 // RemoveAlarm removes an alarm from the calendar item.
 func (ci *CalendarItem) RemoveAlarm(alarm *Alarm) {
+	defer runtime.KeepAlive(ci)
+	defer runtime.KeepAlive(alarm)
 	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("removeAlarm:"), objref.IDOf(alarm))
 }
 
 // AddRecurrenceRule adds a recurrence rule to the recurrence rule array.
 func (ci *CalendarItem) AddRecurrenceRule(rule *RecurrenceRule) {
+	defer runtime.KeepAlive(ci)
+	defer runtime.KeepAlive(rule)
 	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("addRecurrenceRule:"), objref.IDOf(rule))
 }
 
 // RemoveRecurrenceRule removes a recurrence rule from the recurrence rule array.
 func (ci *CalendarItem) RemoveRecurrenceRule(rule *RecurrenceRule) {
+	defer runtime.KeepAlive(ci)
+	defer runtime.KeepAlive(rule)
 	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("removeRecurrenceRule:"), objref.IDOf(rule))
 }
 
 // Calendar returns the calendar that this calendar item belongs to. This will be nil for new calendar items until you set it.
 func (ci *CalendarItem) Calendar() *Calendar {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("calendar"))
 	return CalendarFromID(_r)
 }
 
 // CalendarItemIdentifier returns a unique identifier for a calendar item. Item identifiers are not sync-proof in that a full sync will lose this identifier, so you should always have a back up plan for dealing with a reminder that is no longer fetchable by this property, e.g. by title, etc. Use [EKEventStore calendarItemWithIdentifier:] to look up the item by this value.
 func (ci *CalendarItem) CalendarItemIdentifier() string {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("calendarItemIdentifier"))
 	if _r == 0 {
 		return ""
@@ -134,6 +150,7 @@ func (ci *CalendarItem) CalendarItemIdentifier() string {
 
 // CalendarItemExternalIdentifier returns a server-provided identifier for this calendar item This identifier, provided by the server, allows you to reference the same event or reminder across multiple devices. For calendars stored locally on the device, including the birthday calendar, it simply passes through to calendarItemIdentifier. This identifier is unique as of creation for every calendar item.  However, there are some cases where duplicate copies of a calendar item can exist in the same database, including: - A calendar item was imported from an ICS file into multiple calendars - An event was created in a calendar shared with the user and the user was also invited to the event - The user is a delegate of a calendar that also has this event - A subscribed calendar was added to multiple accounts In such cases, you should choose between calendar items based on other factors, such as the calendar or source. This identifier is the same for all occurrences of a recurring event. If you wish to differentiate between occurrences, you may want to use the start date. This may be nil for new calendar items that do not yet belong to a calendar. In addition, there are two caveats for Exchange-based calendars: - This identifier will be different between EventKit on iOS versus OS X - This identifier will be different between devices for EKReminders
 func (ci *CalendarItem) CalendarItemExternalIdentifier() string {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("calendarItemExternalIdentifier"))
 	if _r == 0 {
 		return ""
@@ -143,6 +160,7 @@ func (ci *CalendarItem) CalendarItemExternalIdentifier() string {
 
 // Title returns the title of this calendar item. This will be an empty string for new calendar items until you set it.
 func (ci *CalendarItem) Title() string {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -152,6 +170,7 @@ func (ci *CalendarItem) Title() string {
 
 // Location returns the location.
 func (ci *CalendarItem) Location() string {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("location"))
 	if _r == 0 {
 		return ""
@@ -161,6 +180,7 @@ func (ci *CalendarItem) Location() string {
 
 // Notes returns the notes.
 func (ci *CalendarItem) Notes() string {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("notes"))
 	if _r == 0 {
 		return ""
@@ -169,49 +189,57 @@ func (ci *CalendarItem) Notes() string {
 }
 
 // URL returns the URL.
-func (ci *CalendarItem) URL() obj.Object {
+func (ci *CalendarItem) URL() string {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // LastModifiedDate returns the last modified date.
-func (ci *CalendarItem) LastModifiedDate() obj.Object {
+func (ci *CalendarItem) LastModifiedDate() time.Time {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("lastModifiedDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // CreationDate returns the creation date.
-func (ci *CalendarItem) CreationDate() obj.Object {
+func (ci *CalendarItem) CreationDate() time.Time {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("creationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // TimeZone returns the time zone.
-func (ci *CalendarItem) TimeZone() obj.Object {
+func (ci *CalendarItem) TimeZone() *foundation.TimeZone {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("timeZone"))
-	return obj.Wrap(_r)
+	return foundation.TimeZoneFromID(_r)
 }
 
 // HasAlarms reports whether the object has alarms.
 func (ci *CalendarItem) HasAlarms() bool {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("hasAlarms"))
 	return _r
 }
 
 // HasRecurrenceRules reports whether the object has recurrence rules.
 func (ci *CalendarItem) HasRecurrenceRules() bool {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("hasRecurrenceRules"))
 	return _r
 }
 
 // HasAttendees reports whether the object has attendees.
 func (ci *CalendarItem) HasAttendees() bool {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("hasAttendees"))
 	return _r
 }
 
 // HasNotes reports whether the object has notes.
 func (ci *CalendarItem) HasNotes() bool {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("hasNotes"))
 	return _r
 }
@@ -220,6 +248,7 @@ func (ci *CalendarItem) HasNotes() bool {
 //
 // Attendees returns the collection as a Go slice.
 func (ci *CalendarItem) Attendees() []*Participant {
+	defer runtime.KeepAlive(ci)
 	_arr := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("attendees"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Participant { return ParticipantFromID(_id) })
 }
@@ -228,6 +257,7 @@ func (ci *CalendarItem) Attendees() []*Participant {
 //
 // Alarms returns the collection as a Go slice.
 func (ci *CalendarItem) Alarms() []*Alarm {
+	defer runtime.KeepAlive(ci)
 	_arr := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("alarms"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Alarm { return AlarmFromID(_id) })
 }
@@ -236,6 +266,7 @@ func (ci *CalendarItem) Alarms() []*Alarm {
 //
 // RecurrenceRules returns the collection as a Go slice.
 func (ci *CalendarItem) RecurrenceRules() []*RecurrenceRule {
+	defer runtime.KeepAlive(ci)
 	_arr := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("recurrenceRules"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecurrenceRule { return RecurrenceRuleFromID(_id) })
 }

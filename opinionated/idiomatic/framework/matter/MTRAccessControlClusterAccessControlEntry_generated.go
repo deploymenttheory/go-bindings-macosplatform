@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,18 +54,21 @@ func NewMTRAccessControlClusterAccessControlEntry() *MTRAccessControlClusterAcce
 
 // WithPrivilege sets the privilege.
 func (maccace *MTRAccessControlClusterAccessControlEntry) WithPrivilege(privilege obj.Object) *MTRAccessControlClusterAccessControlEntry {
+	defer runtime.KeepAlive(privilege)
 	objc.Send[objc.ID](objref.IDOf(maccace), objc.RegisterName("setPrivilege:"), objref.IDOf(privilege))
 	return maccace
 }
 
 // WithAuthMode sets the auth mode.
 func (maccace *MTRAccessControlClusterAccessControlEntry) WithAuthMode(authMode obj.Object) *MTRAccessControlClusterAccessControlEntry {
+	defer runtime.KeepAlive(authMode)
 	objc.Send[objc.ID](objref.IDOf(maccace), objc.RegisterName("setAuthMode:"), objref.IDOf(authMode))
 	return maccace
 }
 
 // WithFabricIndex sets the fabric index.
 func (maccace *MTRAccessControlClusterAccessControlEntry) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlEntry {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(maccace), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return maccace
 }

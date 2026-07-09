@@ -16,17 +16,17 @@ type IOCallOnceFlag struct {
 }
 
 type IOHistogramReportValues struct {
-	Bucket_hits uint64
-	Bucket_min  int64
-	Bucket_max  int64
-	Bucket_sum  int64
+	BucketHits uint64
+	BucketMin  int64
+	BucketMax  int64
+	BucketSum  int64
 }
 
 type IOHistogramSegmentConfig struct {
-	Base_bucket_width    uint32
-	Scale_flag           uint32
-	Segment_idx          uint32
-	Segment_bucket_count uint32
+	BaseBucketWidth    uint32
+	ScaleFlag          uint32
+	SegmentIdx         uint32
+	SegmentBucketCount uint32
 }
 
 // A private structure for an interrupt dispatch source.
@@ -60,35 +60,35 @@ type IOPhysicalRange struct {
 }
 
 type IOReportChannel struct {
-	Channel_id   uint64
-	Channel_type IOReportChannelType
+	ChannelID   uint64
+	ChannelType IOReportChannelType
 }
 
 type IOReportChannelType struct {
-	Report_format uint8
-	Reserved      uint8
-	Categories    uint16
-	Nelements     uint16
-	Element_idx   int16
+	ReportFormat uint8
+	Reserved     uint8
+	Categories   uint16
+	Nelements    uint16
+	ElementIdx   int16
 }
 
 type IOReportInterest struct {
-	Provider_id uint64
-	Channel     IOReportChannel
+	ProviderID uint64
+	Channel    IOReportChannel
 }
 
 type IOSimpleReportValues struct {
-	Simple_value int64
-	Reserved1    uint64
-	Reserved2    uint64
-	Reserved3    uint64
+	SimpleValue int64
+	Reserved1   uint64
+	Reserved2   uint64
+	Reserved3   uint64
 }
 
 type IOStateReportValues struct {
-	State_id          uint64
-	Intransitions     uint64
-	Upticks           uint64
-	Last_intransition uint64
+	StateID          uint64
+	Intransitions    uint64
+	Upticks          uint64
+	LastIntransition uint64
 }
 
 type IOVirtualRange struct {

@@ -5,11 +5,13 @@
 package scenekit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -59,6 +61,7 @@ func NewReferenceNodeWithURL(referenceURL string) *ReferenceNode {
 
 // NewReferenceNodeWithCoder support coding and decoding via NSKeyedArchiver.
 func NewReferenceNodeWithCoder(aDecoder obj.Object) *ReferenceNode {
+	defer runtime.KeepAlive(aDecoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNReferenceNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return referenceNodeAdopt(_id)
@@ -84,30 +87,35 @@ func (rn *ReferenceNode) WithName(name string) *ReferenceNode {
 
 // WithLight sets the light attached to the node.
 func (rn *ReferenceNode) WithLight(light *Light) *ReferenceNode {
+	defer runtime.KeepAlive(light)
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setLight:"), objref.IDOf(light))
 	return rn
 }
 
 // WithCamera sets the camera attached to the node.
 func (rn *ReferenceNode) WithCamera(camera *Camera) *ReferenceNode {
+	defer runtime.KeepAlive(camera)
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setCamera:"), objref.IDOf(camera))
 	return rn
 }
 
 // WithGeometry sets the geometry attached to the node.
 func (rn *ReferenceNode) WithGeometry(geometry GeometryProvider) *ReferenceNode {
+	defer runtime.KeepAlive(geometry)
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setGeometry:"), objref.IDOf(geometry))
 	return rn
 }
 
 // WithSkinner sets the skinner object responsible for skeletal animations of node’s contents.
 func (rn *ReferenceNode) WithSkinner(skinner *Skinner) *ReferenceNode {
+	defer runtime.KeepAlive(skinner)
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSkinner:"), objref.IDOf(skinner))
 	return rn
 }
 
 // WithMorpher sets the morpher object responsible for blending the node’s geometry.
 func (rn *ReferenceNode) WithMorpher(morpher *Morpher) *ReferenceNode {
+	defer runtime.KeepAlive(morpher)
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setMorpher:"), objref.IDOf(morpher))
 	return rn
 }
@@ -162,12 +170,14 @@ func (rn *ReferenceNode) WithMovabilityHint(movabilityHint MovabilityHint) *Refe
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (rn *ReferenceNode) WithPhysicsBody(physicsBody *PhysicsBody) *ReferenceNode {
+	defer runtime.KeepAlive(physicsBody)
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return rn
 }
 
 // WithPhysicsField sets the physics field associated with the node.
 func (rn *ReferenceNode) WithPhysicsField(physicsField *PhysicsField) *ReferenceNode {
+	defer runtime.KeepAlive(physicsField)
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setPhysicsField:"), objref.IDOf(physicsField))
 	return rn
 }
@@ -192,68 +202,78 @@ func (rn *ReferenceNode) WithPaused(paused bool) *ReferenceNode {
 	return rn
 }
 
+// WithRendererDelegate sets an object responsible for rendering custom contents for the node using Metal or OpenGL.
+func (rn *ReferenceNode) WithRendererDelegate(rendererDelegate NodeRendererDelegate) *ReferenceNode {
+	_shim := newNodeRendererDelegateShim(rendererDelegate)
+	_sel := objc.RegisterName("setRendererDelegate:")
+	shim.Associate(objref.IDOf(rn), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(rn), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return rn
+}
+
 // WithCategoryBitMask sets a mask that defines which categories the node belongs to.
 func (rn *ReferenceNode) WithCategoryBitMask(categoryBitMask int) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
 	return rn
 }
 
-// WithSimdTransform sets the transform applied to the node relative to its parent. Animatable.
-func (rn *ReferenceNode) WithSimdTransform(simdTransform unsafe.Pointer) *ReferenceNode {
+// WithSIMDTransform sets the transform applied to the node relative to its parent. Animatable.
+func (rn *ReferenceNode) WithSIMDTransform(simdTransform unsafe.Pointer) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdTransform:"), simdTransform)
 	return rn
 }
 
-// WithSimdPosition sets the translation applied to the node. Animatable.
-func (rn *ReferenceNode) WithSimdPosition(simdPosition unsafe.Pointer) *ReferenceNode {
+// WithSIMDPosition sets the translation applied to the node. Animatable.
+func (rn *ReferenceNode) WithSIMDPosition(simdPosition unsafe.Pointer) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdPosition:"), simdPosition)
 	return rn
 }
 
-// WithSimdRotation sets the node’s orientation, expressed as a rotation angle about an axis. Animatable.
-func (rn *ReferenceNode) WithSimdRotation(simdRotation unsafe.Pointer) *ReferenceNode {
+// WithSIMDRotation sets the node’s orientation, expressed as a rotation angle about an axis. Animatable.
+func (rn *ReferenceNode) WithSIMDRotation(simdRotation unsafe.Pointer) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdRotation:"), simdRotation)
 	return rn
 }
 
-// WithSimdOrientation sets the node’s orientation, expressed as a quaternion. Animatable.
-func (rn *ReferenceNode) WithSimdOrientation(simdOrientation unsafe.Pointer) *ReferenceNode {
+// WithSIMDOrientation sets the node’s orientation, expressed as a quaternion. Animatable.
+func (rn *ReferenceNode) WithSIMDOrientation(simdOrientation unsafe.Pointer) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdOrientation:"), simdOrientation)
 	return rn
 }
 
-// WithSimdEulerAngles sets the node’s orientation, expressed as pitch, yaw, and roll angles in radians. Animatable.
-func (rn *ReferenceNode) WithSimdEulerAngles(simdEulerAngles unsafe.Pointer) *ReferenceNode {
+// WithSIMDEulerAngles sets the node’s orientation, expressed as pitch, yaw, and roll angles in radians. Animatable.
+func (rn *ReferenceNode) WithSIMDEulerAngles(simdEulerAngles unsafe.Pointer) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdEulerAngles:"), simdEulerAngles)
 	return rn
 }
 
-// WithSimdScale sets the scale factor applied to the node. Animatable.
-func (rn *ReferenceNode) WithSimdScale(simdScale unsafe.Pointer) *ReferenceNode {
+// WithSIMDScale sets the scale factor applied to the node. Animatable.
+func (rn *ReferenceNode) WithSIMDScale(simdScale unsafe.Pointer) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdScale:"), simdScale)
 	return rn
 }
 
-// WithSimdPivot sets the pivot point for the node’s position, rotation, and scale. Animatable.
-func (rn *ReferenceNode) WithSimdPivot(simdPivot unsafe.Pointer) *ReferenceNode {
+// WithSIMDPivot sets the pivot point for the node’s position, rotation, and scale. Animatable.
+func (rn *ReferenceNode) WithSIMDPivot(simdPivot unsafe.Pointer) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdPivot:"), simdPivot)
 	return rn
 }
 
-// WithSimdWorldPosition sets the node’s position relative to the scene’s world coordinate space.
-func (rn *ReferenceNode) WithSimdWorldPosition(simdWorldPosition unsafe.Pointer) *ReferenceNode {
+// WithSIMDWorldPosition sets the node’s position relative to the scene’s world coordinate space.
+func (rn *ReferenceNode) WithSIMDWorldPosition(simdWorldPosition unsafe.Pointer) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdWorldPosition:"), simdWorldPosition)
 	return rn
 }
 
-// WithSimdWorldOrientation sets the node’s orientation relative to the scene’s world coordinate space.
-func (rn *ReferenceNode) WithSimdWorldOrientation(simdWorldOrientation unsafe.Pointer) *ReferenceNode {
+// WithSIMDWorldOrientation sets the node’s orientation relative to the scene’s world coordinate space.
+func (rn *ReferenceNode) WithSIMDWorldOrientation(simdWorldOrientation unsafe.Pointer) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdWorldOrientation:"), simdWorldOrientation)
 	return rn
 }
 
-// WithSimdWorldTransform sets the world transform applied to the node.
-func (rn *ReferenceNode) WithSimdWorldTransform(simdWorldTransform unsafe.Pointer) *ReferenceNode {
+// WithSIMDWorldTransform sets the world transform applied to the node.
+func (rn *ReferenceNode) WithSIMDWorldTransform(simdWorldTransform unsafe.Pointer) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdWorldTransform:"), simdWorldTransform)
 	return rn
 }
@@ -266,28 +286,33 @@ func (rn *ReferenceNode) WithFocusBehavior(focusBehavior NodeFocusBehavior) *Ref
 
 // Load loads content into the node from its referenced external scene file.
 func (rn *ReferenceNode) Load() {
+	defer runtime.KeepAlive(rn)
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("load"))
 }
 
 // Unload removes the node’s children and marks the node as not loaded.
 func (rn *ReferenceNode) Unload() {
+	defer runtime.KeepAlive(rn)
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("unload"))
 }
 
 // ReferenceURL specifies the url to resolve.
-func (rn *ReferenceNode) ReferenceURL() obj.Object {
+func (rn *ReferenceNode) ReferenceURL() string {
+	defer runtime.KeepAlive(rn)
 	_r := objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("referenceURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // LoadingPolicy specifies when to load the reference. see SCNReferenceLoadingPolicy above. Defaults to SCNReferenceLoadingPolicyImmediately.
 func (rn *ReferenceNode) LoadingPolicy() ReferenceLoadingPolicy {
+	defer runtime.KeepAlive(rn)
 	_r := objc.Send[ReferenceLoadingPolicy](objref.IDOf(rn), objc.RegisterName("loadingPolicy"))
 	return _r
 }
 
 // IsLoaded reports whether the referenced URL has been loaded.
 func (rn *ReferenceNode) IsLoaded() bool {
+	defer runtime.KeepAlive(rn)
 	_r := objc.Send[bool](objref.IDOf(rn), objc.RegisterName("isLoaded"))
 	return _r
 }

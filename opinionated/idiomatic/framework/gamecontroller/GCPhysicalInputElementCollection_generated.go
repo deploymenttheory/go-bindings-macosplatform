@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func physicalInputElementCollectionAdopt(id objc.ID) *PhysicalInputElementCollec
 
 // Description returns the object's -description text.
 func (piec *PhysicalInputElementCollection) Description() string {
+	defer runtime.KeepAlive(piec)
 	return rt.Description(objref.IDOf(piec))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (piec *PhysicalInputElementCollection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(piec)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(piec), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (piec *PhysicalInputElementCollection) IsKind(className string) bool {
+	defer runtime.KeepAlive(piec)
 	return rt.IsKind(objref.IDOf(piec), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (piec *PhysicalInputElementCollection) String() string {
+	defer runtime.KeepAlive(piec)
 	return rt.Description(objref.IDOf(piec))
 }
 
@@ -74,24 +81,30 @@ func NewPhysicalInputElementCollection() *PhysicalInputElementCollection {
 
 // ElementForAlias returns the element associated with a given alias.
 func (piec *PhysicalInputElementCollection) ElementForAlias(alias obj.Object) obj.Object {
+	defer runtime.KeepAlive(piec)
+	defer runtime.KeepAlive(alias)
 	_r := objc.Send[objc.ID](objref.IDOf(piec), objc.RegisterName("elementForAlias:"), objref.IDOf(alias))
 	return obj.Wrap(_r)
 }
 
 // ObjectForKeyedSubscript wraps the corresponding Objective-C method.
 func (piec *PhysicalInputElementCollection) ObjectForKeyedSubscript(key obj.Object) obj.Object {
+	defer runtime.KeepAlive(piec)
+	defer runtime.KeepAlive(key)
 	_r := objc.Send[objc.ID](objref.IDOf(piec), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(key))
 	return obj.Wrap(_r)
 }
 
 // ElementEnumerator returns the element enumerator.
 func (piec *PhysicalInputElementCollection) ElementEnumerator() obj.Object {
+	defer runtime.KeepAlive(piec)
 	_r := objc.Send[objc.ID](objref.IDOf(piec), objc.RegisterName("elementEnumerator"))
 	return obj.Wrap(_r)
 }
 
 // Count returns the number of elements in the collection.
 func (piec *PhysicalInputElementCollection) Count() int {
+	defer runtime.KeepAlive(piec)
 	_r := objc.Send[int](objref.IDOf(piec), objc.RegisterName("count"))
 	return _r
 }

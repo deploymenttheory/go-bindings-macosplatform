@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,59 +50,72 @@ func predicateEditorRowTemplateAdopt(id objc.ID) *PredicateEditorRowTemplate {
 
 // Description returns the object's -description text.
 func (pert *PredicateEditorRowTemplate) Description() string {
+	defer runtime.KeepAlive(pert)
 	return rt.Description(objref.IDOf(pert))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pert *PredicateEditorRowTemplate) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pert)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pert), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pert *PredicateEditorRowTemplate) IsKind(className string) bool {
+	defer runtime.KeepAlive(pert)
 	return rt.IsKind(objref.IDOf(pert), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pert *PredicateEditorRowTemplate) String() string {
+	defer runtime.KeepAlive(pert)
 	return rt.Description(objref.IDOf(pert))
 }
 
 // NewPredicateEditorRowTemplateWithCompoundTypes initializes and returns a row template suitable for displaying compound predicates.
-func NewPredicateEditorRowTemplateWithCompoundTypes(compoundTypes []obj.Object) *PredicateEditorRowTemplate {
+func NewPredicateEditorRowTemplateWithCompoundTypes(compoundTypes []*foundation.Number) *PredicateEditorRowTemplate {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPredicateEditorRowTemplate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompoundTypes:"), purego.SliceToNSArray(compoundTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompoundTypes:"), purego.SliceToNSArray(compoundTypes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return predicateEditorRowTemplateAdopt(_id)
 }
 
 // MatchForPredicate returns a positive number if the receiver can represent a given predicate, and 0 if it cannot.
 func (pert *PredicateEditorRowTemplate) MatchForPredicate(predicate obj.Object) float64 {
+	defer runtime.KeepAlive(pert)
+	defer runtime.KeepAlive(predicate)
 	_r := objc.Send[float64](objref.IDOf(pert), objc.RegisterName("matchForPredicate:"), objref.IDOf(predicate))
 	return _r
 }
 
 // SetPredicate sets the value of the views according to the given predicate.
 func (pert *PredicateEditorRowTemplate) SetPredicate(predicate obj.Object) {
+	defer runtime.KeepAlive(pert)
+	defer runtime.KeepAlive(predicate)
 	objc.Send[objc.ID](objref.IDOf(pert), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
 }
 
 // PredicateWithSubpredicates returns the predicate represented by the receiver’s views’ values and the given sub-predicates.
-func (pert *PredicateEditorRowTemplate) PredicateWithSubpredicates(subpredicates []obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(pert), objc.RegisterName("predicateWithSubpredicates:"), purego.SliceToNSArray(subpredicates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-	return obj.Wrap(_r)
+func (pert *PredicateEditorRowTemplate) PredicateWithSubpredicates(subpredicates []*foundation.Predicate) *foundation.Predicate {
+	defer runtime.KeepAlive(pert)
+	_r := objc.Send[objc.ID](objref.IDOf(pert), objc.RegisterName("predicateWithSubpredicates:"), purego.SliceToNSArray(subpredicates, func(_v *foundation.Predicate) objc.ID { return objref.IDOf(_v) }))
+	return foundation.PredicateFromID(_r)
 }
 
 // DisplayableSubpredicatesOfPredicate returns the subpredicates that should be made sub-rows of a given predicate.
-func (pert *PredicateEditorRowTemplate) DisplayableSubpredicatesOfPredicate(predicate obj.Object) []obj.Object {
+func (pert *PredicateEditorRowTemplate) DisplayableSubpredicatesOfPredicate(predicate obj.Object) []*foundation.Predicate {
+	defer runtime.KeepAlive(pert)
+	defer runtime.KeepAlive(predicate)
 	_r := objc.Send[objc.ID](objref.IDOf(pert), objc.RegisterName("displayableSubpredicatesOfPredicate:"), objref.IDOf(predicate))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *foundation.Predicate { return foundation.PredicateFromID(_id) })
 }
 
 // TemplateViews returns the template views.
 //
 // TemplateViews returns the collection as a Go slice.
 func (pert *PredicateEditorRowTemplate) TemplateViews() []*View {
+	defer runtime.KeepAlive(pert)
 	_arr := objc.Send[objc.ID](objref.IDOf(pert), objc.RegisterName("templateViews"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *View { return ViewFromID(_id) })
 }
@@ -108,6 +124,7 @@ func (pert *PredicateEditorRowTemplate) TemplateViews() []*View {
 //
 // LeftExpressions returns the collection as a Go slice.
 func (pert *PredicateEditorRowTemplate) LeftExpressions() []obj.Object {
+	defer runtime.KeepAlive(pert)
 	_arr := objc.Send[objc.ID](objref.IDOf(pert), objc.RegisterName("leftExpressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -116,6 +133,7 @@ func (pert *PredicateEditorRowTemplate) LeftExpressions() []obj.Object {
 //
 // RightExpressions returns the collection as a Go slice.
 func (pert *PredicateEditorRowTemplate) RightExpressions() []obj.Object {
+	defer runtime.KeepAlive(pert)
 	_arr := objc.Send[objc.ID](objref.IDOf(pert), objc.RegisterName("rightExpressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -124,12 +142,14 @@ func (pert *PredicateEditorRowTemplate) RightExpressions() []obj.Object {
 //
 // Operators returns the collection as a Go slice.
 func (pert *PredicateEditorRowTemplate) Operators() []obj.Object {
+	defer runtime.KeepAlive(pert)
 	_arr := objc.Send[objc.ID](objref.IDOf(pert), objc.RegisterName("operators"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Options returns the options.
 func (pert *PredicateEditorRowTemplate) Options() int {
+	defer runtime.KeepAlive(pert)
 	_r := objc.Send[int](objref.IDOf(pert), objc.RegisterName("options"))
 	return _r
 }
@@ -138,6 +158,7 @@ func (pert *PredicateEditorRowTemplate) Options() int {
 //
 // CompoundTypes returns the collection as a Go slice.
 func (pert *PredicateEditorRowTemplate) CompoundTypes() []obj.Object {
+	defer runtime.KeepAlive(pert)
 	_arr := objc.Send[objc.ID](objref.IDOf(pert), objc.RegisterName("compoundTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

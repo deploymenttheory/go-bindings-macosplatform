@@ -5,6 +5,8 @@
 package mediaextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -58,6 +60,7 @@ func (rplep *RAWProcessingListElementParameter) WithEnabled(enabled bool) *RAWPr
 
 // ListElementID returns the list element ID.
 func (rplep *RAWProcessingListElementParameter) ListElementID() int {
+	defer runtime.KeepAlive(rplep)
 	_r := objc.Send[int](objref.IDOf(rplep), objc.RegisterName("listElementID"))
 	return _r
 }

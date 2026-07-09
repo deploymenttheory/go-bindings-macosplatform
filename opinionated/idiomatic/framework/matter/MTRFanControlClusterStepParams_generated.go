@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRFanControlClusterStepParamsAdopt(id objc.ID) *MTRFanControlClusterStepPa
 
 // Description returns the object's -description text.
 func (mfccsp *MTRFanControlClusterStepParams) Description() string {
+	defer runtime.KeepAlive(mfccsp)
 	return rt.Description(objref.IDOf(mfccsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mfccsp *MTRFanControlClusterStepParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mfccsp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mfccsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mfccsp *MTRFanControlClusterStepParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mfccsp)
 	return rt.IsKind(objref.IDOf(mfccsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mfccsp *MTRFanControlClusterStepParams) String() string {
+	defer runtime.KeepAlive(mfccsp)
 	return rt.Description(objref.IDOf(mfccsp))
 }
 
@@ -72,60 +80,70 @@ func NewMTRFanControlClusterStepParams() *MTRFanControlClusterStepParams {
 
 // WithDirection sets the direction.
 func (mfccsp *MTRFanControlClusterStepParams) WithDirection(direction obj.Object) *MTRFanControlClusterStepParams {
+	defer runtime.KeepAlive(direction)
 	objc.Send[objc.ID](objref.IDOf(mfccsp), objc.RegisterName("setDirection:"), objref.IDOf(direction))
 	return mfccsp
 }
 
 // WithWrap sets the wrap.
 func (mfccsp *MTRFanControlClusterStepParams) WithWrap(wrap obj.Object) *MTRFanControlClusterStepParams {
+	defer runtime.KeepAlive(wrap)
 	objc.Send[objc.ID](objref.IDOf(mfccsp), objc.RegisterName("setWrap:"), objref.IDOf(wrap))
 	return mfccsp
 }
 
 // WithLowestOff sets the lowest off.
 func (mfccsp *MTRFanControlClusterStepParams) WithLowestOff(lowestOff obj.Object) *MTRFanControlClusterStepParams {
+	defer runtime.KeepAlive(lowestOff)
 	objc.Send[objc.ID](objref.IDOf(mfccsp), objc.RegisterName("setLowestOff:"), objref.IDOf(lowestOff))
 	return mfccsp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mfccsp *MTRFanControlClusterStepParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRFanControlClusterStepParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mfccsp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mfccsp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mfccsp *MTRFanControlClusterStepParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRFanControlClusterStepParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mfccsp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mfccsp
 }
 
 // Direction returns the direction.
-func (mfccsp *MTRFanControlClusterStepParams) Direction() obj.Object {
+func (mfccsp *MTRFanControlClusterStepParams) Direction() *foundation.Number {
+	defer runtime.KeepAlive(mfccsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mfccsp), objc.RegisterName("direction"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Wrap returns the wrap.
-func (mfccsp *MTRFanControlClusterStepParams) Wrap() obj.Object {
+func (mfccsp *MTRFanControlClusterStepParams) Wrap() *foundation.Number {
+	defer runtime.KeepAlive(mfccsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mfccsp), objc.RegisterName("wrap"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // LowestOff returns the lowest off.
-func (mfccsp *MTRFanControlClusterStepParams) LowestOff() obj.Object {
+func (mfccsp *MTRFanControlClusterStepParams) LowestOff() *foundation.Number {
+	defer runtime.KeepAlive(mfccsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mfccsp), objc.RegisterName("lowestOff"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mfccsp *MTRFanControlClusterStepParams) TimedInvokeTimeoutMs() obj.Object {
+func (mfccsp *MTRFanControlClusterStepParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mfccsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mfccsp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mfccsp *MTRFanControlClusterStepParams) ServerSideProcessingTimeout() obj.Object {
+func (mfccsp *MTRFanControlClusterStepParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mfccsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mfccsp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

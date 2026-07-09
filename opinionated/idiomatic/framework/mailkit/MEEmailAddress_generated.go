@@ -5,6 +5,8 @@
 package mailkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func emailAddressAdopt(id objc.ID) *EmailAddress {
 
 // Description returns the object's -description text.
 func (ea *EmailAddress) Description() string {
+	defer runtime.KeepAlive(ea)
 	return rt.Description(objref.IDOf(ea))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ea *EmailAddress) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ea)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ea), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ea *EmailAddress) IsKind(className string) bool {
+	defer runtime.KeepAlive(ea)
 	return rt.IsKind(objref.IDOf(ea), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ea *EmailAddress) String() string {
+	defer runtime.KeepAlive(ea)
 	return rt.Description(objref.IDOf(ea))
 }
 
@@ -75,6 +82,7 @@ func NewEmailAddressWithRawString(rawString string) *EmailAddress {
 
 // RawString returns the raw string for the email address.
 func (ea *EmailAddress) RawString() string {
+	defer runtime.KeepAlive(ea)
 	_r := objc.Send[objc.ID](objref.IDOf(ea), objc.RegisterName("rawString"))
 	if _r == 0 {
 		return ""
@@ -84,6 +92,7 @@ func (ea *EmailAddress) RawString() string {
 
 // AddressString returns the simple address string portion of the raw string if it is valid. For example, the
 func (ea *EmailAddress) AddressString() string {
+	defer runtime.KeepAlive(ea)
 	_r := objc.Send[objc.ID](objref.IDOf(ea), objc.RegisterName("addressString"))
 	if _r == 0 {
 		return ""

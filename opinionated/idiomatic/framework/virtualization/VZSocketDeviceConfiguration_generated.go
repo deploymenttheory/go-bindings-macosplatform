@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func socketDeviceConfigurationAdopt(id objc.ID) *SocketDeviceConfiguration {
 
 // Description returns the object's -description text.
 func (sdc *SocketDeviceConfiguration) Description() string {
+	defer runtime.KeepAlive(sdc)
 	return rt.Description(objref.IDOf(sdc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sdc *SocketDeviceConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sdc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sdc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sdc *SocketDeviceConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(sdc)
 	return rt.IsKind(objref.IDOf(sdc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sdc *SocketDeviceConfiguration) String() string {
+	defer runtime.KeepAlive(sdc)
 	return rt.Description(objref.IDOf(sdc))
 }
 

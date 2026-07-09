@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -65,12 +67,14 @@ func (ic *ImageConversion) WithClipRect(clipRect metal.MTLRegion) *ImageConversi
 
 // SourceAlpha returns premultiplication description for the source texture Most colorspace conversion operations can not work directly on premultiplied data. Use this property to tag premultiplied data so that the source texture can be unpremultiplied prior to application of these transforms. Default: MPSPixelAlpha_AlphaIsOne
 func (ic *ImageConversion) SourceAlpha() AlphaType {
+	defer runtime.KeepAlive(ic)
 	_r := objc.Send[AlphaType](objref.IDOf(ic), objc.RegisterName("sourceAlpha"))
 	return _r
 }
 
 // DestinationAlpha returns premultiplication description for the destinationAlpha texture Colorspace conversion operations produce non-premultiplied data. Use this property to tag cases where premultiplied results are required. If MPSPixelAlpha_AlphaIsOne is used, the alpha channel will be set to 1. Default: MPSPixelAlpha_AlphaIsOne
 func (ic *ImageConversion) DestinationAlpha() AlphaType {
+	defer runtime.KeepAlive(ic)
 	_r := objc.Send[AlphaType](objref.IDOf(ic), objc.RegisterName("destinationAlpha"))
 	return _r
 }

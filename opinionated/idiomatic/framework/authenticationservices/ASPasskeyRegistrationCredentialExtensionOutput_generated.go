@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func passkeyRegistrationCredentialExtensionOutputAdopt(id objc.ID) *PasskeyRegis
 
 // Description returns the object's -description text.
 func (prceo *PasskeyRegistrationCredentialExtensionOutput) Description() string {
+	defer runtime.KeepAlive(prceo)
 	return rt.Description(objref.IDOf(prceo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (prceo *PasskeyRegistrationCredentialExtensionOutput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(prceo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(prceo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (prceo *PasskeyRegistrationCredentialExtensionOutput) IsKind(className string) bool {
+	defer runtime.KeepAlive(prceo)
 	return rt.IsKind(objref.IDOf(prceo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (prceo *PasskeyRegistrationCredentialExtensionOutput) String() string {
+	defer runtime.KeepAlive(prceo)
 	return rt.Description(objref.IDOf(prceo))
 }
 
 // NewPasskeyRegistrationCredentialExtensionOutputWithLargeBlobOutput creates a new PasskeyRegistrationCredentialExtensionOutput.
 func NewPasskeyRegistrationCredentialExtensionOutputWithLargeBlobOutput(largeBlob *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) *PasskeyRegistrationCredentialExtensionOutput {
+	defer runtime.KeepAlive(largeBlob)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasskeyRegistrationCredentialExtensionOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLargeBlobOutput:"), objref.IDOf(largeBlob))
 	return passkeyRegistrationCredentialExtensionOutputAdopt(_id)
@@ -75,6 +83,7 @@ func NewPasskeyRegistrationCredentialExtensionOutputWithLargeBlobOutput(largeBlo
 
 // LargeBlobRegistrationOutput returns the large blob registration output.
 func (prceo *PasskeyRegistrationCredentialExtensionOutput) LargeBlobRegistrationOutput() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput {
+	defer runtime.KeepAlive(prceo)
 	_r := objc.Send[objc.ID](objref.IDOf(prceo), objc.RegisterName("largeBlobRegistrationOutput"))
 	return AuthorizationPublicKeyCredentialLargeBlobRegistrationOutputFromID(_r)
 }

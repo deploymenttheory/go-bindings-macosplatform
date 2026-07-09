@@ -5,6 +5,8 @@
 package videosubscriberaccount
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func vSAppleSubscriptionAdopt(id objc.ID) *VSAppleSubscription {
 
 // Description returns the object's -description text.
 func (vas *VSAppleSubscription) Description() string {
+	defer runtime.KeepAlive(vas)
 	return rt.Description(objref.IDOf(vas))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vas *VSAppleSubscription) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vas)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vas), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vas *VSAppleSubscription) IsKind(className string) bool {
+	defer runtime.KeepAlive(vas)
 	return rt.IsKind(objref.IDOf(vas), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vas *VSAppleSubscription) String() string {
+	defer runtime.KeepAlive(vas)
 	return rt.Description(objref.IDOf(vas))
 }
 
@@ -88,6 +95,7 @@ func (vas *VSAppleSubscription) WithProductCodes(items ...obj.Object) *VSAppleSu
 
 // CustomerID returns the customer ID.
 func (vas *VSAppleSubscription) CustomerID() string {
+	defer runtime.KeepAlive(vas)
 	_r := objc.Send[objc.ID](objref.IDOf(vas), objc.RegisterName("customerID"))
 	if _r == 0 {
 		return ""
@@ -99,6 +107,7 @@ func (vas *VSAppleSubscription) CustomerID() string {
 //
 // ProductCodes returns the collection as a Go slice.
 func (vas *VSAppleSubscription) ProductCodes() []string {
+	defer runtime.KeepAlive(vas)
 	_arr := objc.Send[objc.ID](objref.IDOf(vas), objc.RegisterName("productCodes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

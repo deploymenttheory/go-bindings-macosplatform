@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,27 +55,35 @@ func NewCompositeBehavior() *CompositeBehavior {
 
 // SetWeightForBehavior sets the weight for the specified individual behavior’s influence on agents, adding that behavior to the composite behavior if it is not already present.
 func (cb *CompositeBehavior) SetWeightForBehavior(weight float32, behavior *Behavior) {
+	defer runtime.KeepAlive(cb)
+	defer runtime.KeepAlive(behavior)
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWeight:forBehavior:"), weight, objref.IDOf(behavior))
 }
 
 // WeightForBehavior returns the weight for the specified individual behavior’s influence on agents.
 func (cb *CompositeBehavior) WeightForBehavior(behavior *Behavior) float32 {
+	defer runtime.KeepAlive(cb)
+	defer runtime.KeepAlive(behavior)
 	_r := objc.Send[float32](objref.IDOf(cb), objc.RegisterName("weightForBehavior:"), objref.IDOf(behavior))
 	return _r
 }
 
 // RemoveBehavior removes the specified individual behavior from the composite behavior.
 func (cb *CompositeBehavior) RemoveBehavior(behavior *Behavior) {
+	defer runtime.KeepAlive(cb)
+	defer runtime.KeepAlive(behavior)
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("removeBehavior:"), objref.IDOf(behavior))
 }
 
 // RemoveAllBehaviors removes all individual behaviors from the composite behavior.
 func (cb *CompositeBehavior) RemoveAllBehaviors() {
+	defer runtime.KeepAlive(cb)
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("removeAllBehaviors"))
 }
 
 // BehaviorCount returns number of sub-behaviors in this behavior
 func (cb *CompositeBehavior) BehaviorCount() int {
+	defer runtime.KeepAlive(cb)
 	_r := objc.Send[int](objref.IDOf(cb), objc.RegisterName("behaviorCount"))
 	return _r
 }

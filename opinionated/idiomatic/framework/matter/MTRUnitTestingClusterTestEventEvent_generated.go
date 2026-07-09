@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,92 +50,111 @@ func mTRUnitTestingClusterTestEventEventAdopt(id objc.ID) *MTRUnitTestingCluster
 
 // Description returns the object's -description text.
 func (mutctee *MTRUnitTestingClusterTestEventEvent) Description() string {
+	defer runtime.KeepAlive(mutctee)
 	return rt.Description(objref.IDOf(mutctee))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mutctee *MTRUnitTestingClusterTestEventEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mutctee)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mutctee), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mutctee *MTRUnitTestingClusterTestEventEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mutctee)
 	return rt.IsKind(objref.IDOf(mutctee), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mutctee *MTRUnitTestingClusterTestEventEvent) String() string {
+	defer runtime.KeepAlive(mutctee)
 	return rt.Description(objref.IDOf(mutctee))
 }
 
 // WithArg1 sets the arg1.
 func (mutctee *MTRUnitTestingClusterTestEventEvent) WithArg1(arg1 obj.Object) *MTRUnitTestingClusterTestEventEvent {
+	defer runtime.KeepAlive(arg1)
 	objc.Send[objc.ID](objref.IDOf(mutctee), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mutctee
 }
 
 // WithArg2 sets the arg2.
 func (mutctee *MTRUnitTestingClusterTestEventEvent) WithArg2(arg2 obj.Object) *MTRUnitTestingClusterTestEventEvent {
+	defer runtime.KeepAlive(arg2)
 	objc.Send[objc.ID](objref.IDOf(mutctee), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
 	return mutctee
 }
 
 // WithArg3 sets the arg3.
 func (mutctee *MTRUnitTestingClusterTestEventEvent) WithArg3(arg3 obj.Object) *MTRUnitTestingClusterTestEventEvent {
+	defer runtime.KeepAlive(arg3)
 	objc.Send[objc.ID](objref.IDOf(mutctee), objc.RegisterName("setArg3:"), objref.IDOf(arg3))
 	return mutctee
 }
 
 // WithArg4 sets the arg4.
 func (mutctee *MTRUnitTestingClusterTestEventEvent) WithArg4(arg4 MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestEventEvent {
+	defer runtime.KeepAlive(arg4)
 	objc.Send[objc.ID](objref.IDOf(mutctee), objc.RegisterName("setArg4:"), objref.IDOf(arg4))
 	return mutctee
 }
 
 // Arg1 returns the arg1.
-func (mutctee *MTRUnitTestingClusterTestEventEvent) Arg1() obj.Object {
+func (mutctee *MTRUnitTestingClusterTestEventEvent) Arg1() *foundation.Number {
+	defer runtime.KeepAlive(mutctee)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctee), objc.RegisterName("arg1"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Arg2 returns the arg2.
-func (mutctee *MTRUnitTestingClusterTestEventEvent) Arg2() obj.Object {
+func (mutctee *MTRUnitTestingClusterTestEventEvent) Arg2() *foundation.Number {
+	defer runtime.KeepAlive(mutctee)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctee), objc.RegisterName("arg2"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Arg3 returns the arg3.
-func (mutctee *MTRUnitTestingClusterTestEventEvent) Arg3() obj.Object {
+func (mutctee *MTRUnitTestingClusterTestEventEvent) Arg3() *foundation.Number {
+	defer runtime.KeepAlive(mutctee)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctee), objc.RegisterName("arg3"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Arg4 returns the arg4.
 func (mutctee *MTRUnitTestingClusterTestEventEvent) Arg4() *MTRUnitTestingClusterSimpleStruct {
+	defer runtime.KeepAlive(mutctee)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctee), objc.RegisterName("arg4"))
 	return MTRUnitTestingClusterSimpleStructFromID(_r)
 }
 
 // Arg5 returns the arg5.
 func (mutctee *MTRUnitTestingClusterTestEventEvent) Arg5() obj.Object {
+	defer runtime.KeepAlive(mutctee)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctee), objc.RegisterName("arg5"))
 	return obj.Wrap(_r)
 }
 
 // SetArg5 wraps the corresponding Objective-C method.
 func (mutctee *MTRUnitTestingClusterTestEventEvent) SetArg5(arg5 obj.Object) {
+	defer runtime.KeepAlive(mutctee)
+	defer runtime.KeepAlive(arg5)
 	objc.Send[objc.ID](objref.IDOf(mutctee), objc.RegisterName("setArg5:"), objref.IDOf(arg5))
 }
 
 // Arg6 returns the arg6.
 func (mutctee *MTRUnitTestingClusterTestEventEvent) Arg6() obj.Object {
+	defer runtime.KeepAlive(mutctee)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctee), objc.RegisterName("arg6"))
 	return obj.Wrap(_r)
 }
 
 // SetArg6 wraps the corresponding Objective-C method.
 func (mutctee *MTRUnitTestingClusterTestEventEvent) SetArg6(arg6 obj.Object) {
+	defer runtime.KeepAlive(mutctee)
+	defer runtime.KeepAlive(arg6)
 	objc.Send[objc.ID](objref.IDOf(mutctee), objc.RegisterName("setArg6:"), objref.IDOf(arg6))
 }
 

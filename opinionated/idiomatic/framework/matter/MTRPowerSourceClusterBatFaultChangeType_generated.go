@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRPowerSourceClusterBatFaultChangeTypeAdopt(id objc.ID) *MTRPowerSourceClu
 
 // Description returns the object's -description text.
 func (mpscbfct *MTRPowerSourceClusterBatFaultChangeType) Description() string {
+	defer runtime.KeepAlive(mpscbfct)
 	return rt.Description(objref.IDOf(mpscbfct))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mpscbfct *MTRPowerSourceClusterBatFaultChangeType) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mpscbfct)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mpscbfct), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mpscbfct *MTRPowerSourceClusterBatFaultChangeType) IsKind(className string) bool {
+	defer runtime.KeepAlive(mpscbfct)
 	return rt.IsKind(objref.IDOf(mpscbfct), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mpscbfct *MTRPowerSourceClusterBatFaultChangeType) String() string {
+	defer runtime.KeepAlive(mpscbfct)
 	return rt.Description(objref.IDOf(mpscbfct))
 }
 
@@ -72,22 +79,28 @@ func NewMTRPowerSourceClusterBatFaultChangeType() *MTRPowerSourceClusterBatFault
 
 // Current returns the current.
 func (mpscbfct *MTRPowerSourceClusterBatFaultChangeType) Current() obj.Object {
+	defer runtime.KeepAlive(mpscbfct)
 	_r := objc.Send[objc.ID](objref.IDOf(mpscbfct), objc.RegisterName("current"))
 	return obj.Wrap(_r)
 }
 
 // SetCurrent wraps the corresponding Objective-C method.
 func (mpscbfct *MTRPowerSourceClusterBatFaultChangeType) SetCurrent(current obj.Object) {
+	defer runtime.KeepAlive(mpscbfct)
+	defer runtime.KeepAlive(current)
 	objc.Send[objc.ID](objref.IDOf(mpscbfct), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
 // Previous returns the previous.
 func (mpscbfct *MTRPowerSourceClusterBatFaultChangeType) Previous() obj.Object {
+	defer runtime.KeepAlive(mpscbfct)
 	_r := objc.Send[objc.ID](objref.IDOf(mpscbfct), objc.RegisterName("previous"))
 	return obj.Wrap(_r)
 }
 
 // SetPrevious wraps the corresponding Objective-C method.
 func (mpscbfct *MTRPowerSourceClusterBatFaultChangeType) SetPrevious(previous obj.Object) {
+	defer runtime.KeepAlive(mpscbfct)
+	defer runtime.KeepAlive(previous)
 	objc.Send[objc.ID](objref.IDOf(mpscbfct), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
 }

@@ -476,13 +476,13 @@ func MIDIObjectFindByUniqueID(inUniqueID int) (result int, outObject int, outObj
 var _fnMIDIObjectGetIntegerProperty func(int, objc.ID, unsafe.Pointer) int32
 
 // MIDIObjectGetIntegerProperty calls the CoreMIDI framework function MIDIObjectGetIntegerProperty.
-func MIDIObjectGetIntegerProperty(obj_ int, propertyID obj.Object) (result int, outValue int) {
+func MIDIObjectGetIntegerProperty(object int, propertyID obj.Object) (result int, outValue int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIObjectGetIntegerProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectGetIntegerProperty, _lib, "MIDIObjectGetIntegerProperty")
 	}
 	var _out0 int
-	_ret := int(_fnMIDIObjectGetIntegerProperty(obj_, objref.IDOf(propertyID), unsafe.Pointer(&_out0)))
+	_ret := int(_fnMIDIObjectGetIntegerProperty(object, objref.IDOf(propertyID), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 

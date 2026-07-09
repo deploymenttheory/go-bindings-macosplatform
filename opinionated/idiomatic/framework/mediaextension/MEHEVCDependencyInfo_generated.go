@@ -5,6 +5,8 @@
 package mediaextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func hEVCDependencyInfoAdopt(id objc.ID) *HEVCDependencyInfo {
 
 // Description returns the object's -description text.
 func (hdi *HEVCDependencyInfo) Description() string {
+	defer runtime.KeepAlive(hdi)
 	return rt.Description(objref.IDOf(hdi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hdi *HEVCDependencyInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hdi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hdi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hdi *HEVCDependencyInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(hdi)
 	return rt.IsKind(objref.IDOf(hdi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hdi *HEVCDependencyInfo) String() string {
+	defer runtime.KeepAlive(hdi)
 	return rt.Description(objref.IDOf(hdi))
 }
 
@@ -115,14 +122,14 @@ func (hdi *HEVCDependencyInfo) WithProfileIndex(profileIndex int16) *HEVCDepende
 }
 
 // WithProfileCompatibilityFlags sets the HEVC profile compatibility flags (4 bytes), if available.
-func (hdi *HEVCDependencyInfo) WithProfileCompatibilityFlags(profileCompatibilityFlags obj.Object) *HEVCDependencyInfo {
-	objc.Send[objc.ID](objref.IDOf(hdi), objc.RegisterName("setProfileCompatibilityFlags:"), objref.IDOf(profileCompatibilityFlags))
+func (hdi *HEVCDependencyInfo) WithProfileCompatibilityFlags(profileCompatibilityFlags []byte) *HEVCDependencyInfo {
+	objc.Send[objc.ID](objref.IDOf(hdi), objc.RegisterName("setProfileCompatibilityFlags:"), rt.BytesToNSData(profileCompatibilityFlags))
 	return hdi
 }
 
 // WithConstraintIndicatorFlags sets the HEVC constraint indicator flags (6 bytes), if available.
-func (hdi *HEVCDependencyInfo) WithConstraintIndicatorFlags(constraintIndicatorFlags obj.Object) *HEVCDependencyInfo {
-	objc.Send[objc.ID](objref.IDOf(hdi), objc.RegisterName("setConstraintIndicatorFlags:"), objref.IDOf(constraintIndicatorFlags))
+func (hdi *HEVCDependencyInfo) WithConstraintIndicatorFlags(constraintIndicatorFlags []byte) *HEVCDependencyInfo {
+	objc.Send[objc.ID](objref.IDOf(hdi), objc.RegisterName("setConstraintIndicatorFlags:"), rt.BytesToNSData(constraintIndicatorFlags))
 	return hdi
 }
 
@@ -134,60 +141,70 @@ func (hdi *HEVCDependencyInfo) WithLevelIndex(levelIndex int16) *HEVCDependencyI
 
 // HasTemporalSubLayerAccess reports whether the sample is an HEVC 'TSA' picture, false otherwise. Maps to the kCMSampleAttachmentKey_HEVCTemporalSubLayerAccess sample buffer attachment.
 func (hdi *HEVCDependencyInfo) HasTemporalSubLayerAccess() bool {
+	defer runtime.KeepAlive(hdi)
 	_r := objc.Send[bool](objref.IDOf(hdi), objc.RegisterName("hasTemporalSubLayerAccess"))
 	return _r
 }
 
 // HasStepwiseTemporalSubLayerAccess reports whether the sample is an HEVC 'STSA' picture, false otherwise. Maps to the kCMSampleAttachmentKey_HEVCStepwiseTemporalSubLayerAccess sample buffer attachment.
 func (hdi *HEVCDependencyInfo) HasStepwiseTemporalSubLayerAccess() bool {
+	defer runtime.KeepAlive(hdi)
 	_r := objc.Send[bool](objref.IDOf(hdi), objc.RegisterName("hasStepwiseTemporalSubLayerAccess"))
 	return _r
 }
 
 // SyncSampleNALUnitType returns the NAL unit type for HEVC 'sync' sample groups, or -1 if this information is not available. Maps to the kCMSampleAttachmentKey_HEVCSyncSampleNALUnitType sample buffer attachment.
 func (hdi *HEVCDependencyInfo) SyncSampleNALUnitType() int16 {
+	defer runtime.KeepAlive(hdi)
 	_r := objc.Send[int16](objref.IDOf(hdi), objc.RegisterName("syncSampleNALUnitType"))
 	return _r
 }
 
 // TemporalLevel returns the HEVC temporal level, or -1 if this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_TemporalLevel sample buffer attachment.
 func (hdi *HEVCDependencyInfo) TemporalLevel() int16 {
+	defer runtime.KeepAlive(hdi)
 	_r := objc.Send[int16](objref.IDOf(hdi), objc.RegisterName("temporalLevel"))
 	return _r
 }
 
 // ProfileSpace returns the HEVC profile space, or -1 if this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_ProfileSpace sample buffer attachment.
 func (hdi *HEVCDependencyInfo) ProfileSpace() int16 {
+	defer runtime.KeepAlive(hdi)
 	_r := objc.Send[int16](objref.IDOf(hdi), objc.RegisterName("profileSpace"))
 	return _r
 }
 
 // TierFlag returns the HEVC tier level flag, or -1 if this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_TierFlag sample buffer attachment.
 func (hdi *HEVCDependencyInfo) TierFlag() int16 {
+	defer runtime.KeepAlive(hdi)
 	_r := objc.Send[int16](objref.IDOf(hdi), objc.RegisterName("tierFlag"))
 	return _r
 }
 
 // ProfileIndex returns the HEVC profile index, or -1 if this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_ProfileIndex sample buffer attachment.
 func (hdi *HEVCDependencyInfo) ProfileIndex() int16 {
+	defer runtime.KeepAlive(hdi)
 	_r := objc.Send[int16](objref.IDOf(hdi), objc.RegisterName("profileIndex"))
 	return _r
 }
 
 // ProfileCompatibilityFlags returns the HEVC profile compatibility flags (4 bytes), or nil of this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_ProfileCompatibilityFlags sample buffer attachment.
-func (hdi *HEVCDependencyInfo) ProfileCompatibilityFlags() obj.Object {
+func (hdi *HEVCDependencyInfo) ProfileCompatibilityFlags() []byte {
+	defer runtime.KeepAlive(hdi)
 	_r := objc.Send[objc.ID](objref.IDOf(hdi), objc.RegisterName("profileCompatibilityFlags"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ConstraintIndicatorFlags returns the HEVC constraint indicator flags (6 bytes), or nil of this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags sample buffer attachment.
-func (hdi *HEVCDependencyInfo) ConstraintIndicatorFlags() obj.Object {
+func (hdi *HEVCDependencyInfo) ConstraintIndicatorFlags() []byte {
+	defer runtime.KeepAlive(hdi)
 	_r := objc.Send[objc.ID](objref.IDOf(hdi), objc.RegisterName("constraintIndicatorFlags"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // LevelIndex returns the HEVC level index, or -1 if this information is not available. Maps to the kCMHEVCTemporalLevelInfoKey_LevelIndex sample buffer attachment.
 func (hdi *HEVCDependencyInfo) LevelIndex() int16 {
+	defer runtime.KeepAlive(hdi)
 	_r := objc.Send[int16](objref.IDOf(hdi), objc.RegisterName("levelIndex"))
 	return _r
 }

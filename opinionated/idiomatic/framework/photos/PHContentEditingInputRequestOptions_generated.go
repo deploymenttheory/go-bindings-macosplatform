@@ -5,6 +5,7 @@
 package photos
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func contentEditingInputRequestOptionsAdopt(id objc.ID) *ContentEditingInputRequ
 
 // Description returns the object's -description text.
 func (ceiro *ContentEditingInputRequestOptions) Description() string {
+	defer runtime.KeepAlive(ceiro)
 	return rt.Description(objref.IDOf(ceiro))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ceiro *ContentEditingInputRequestOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ceiro)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ceiro), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ceiro *ContentEditingInputRequestOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(ceiro)
 	return rt.IsKind(objref.IDOf(ceiro), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ceiro *ContentEditingInputRequestOptions) String() string {
+	defer runtime.KeepAlive(ceiro)
 	return rt.Description(objref.IDOf(ceiro))
 }
 
@@ -94,6 +100,7 @@ func (ceiro *ContentEditingInputRequestOptions) WithProgressHandler(progressHand
 
 // IsNetworkAccessAllowed reports whether the object is network access allowed.
 func (ceiro *ContentEditingInputRequestOptions) IsNetworkAccessAllowed() bool {
+	defer runtime.KeepAlive(ceiro)
 	_r := objc.Send[bool](objref.IDOf(ceiro), objc.RegisterName("isNetworkAccessAllowed"))
 	return _r
 }

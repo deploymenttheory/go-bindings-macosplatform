@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -69,6 +71,7 @@ func (ddt *DOMDocumentType) WithTextContent(textContent string) *DOMDocumentType
 
 // Name returns the name.
 func (ddt *DOMDocumentType) Name() string {
+	defer runtime.KeepAlive(ddt)
 	_r := objc.Send[objc.ID](objref.IDOf(ddt), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -78,18 +81,21 @@ func (ddt *DOMDocumentType) Name() string {
 
 // Entities returns the entities.
 func (ddt *DOMDocumentType) Entities() *DOMNamedNodeMap {
+	defer runtime.KeepAlive(ddt)
 	_r := objc.Send[objc.ID](objref.IDOf(ddt), objc.RegisterName("entities"))
 	return DOMNamedNodeMapFromID(_r)
 }
 
 // Notations returns the notations.
 func (ddt *DOMDocumentType) Notations() *DOMNamedNodeMap {
+	defer runtime.KeepAlive(ddt)
 	_r := objc.Send[objc.ID](objref.IDOf(ddt), objc.RegisterName("notations"))
 	return DOMNamedNodeMapFromID(_r)
 }
 
 // PublicID returns the public ID.
 func (ddt *DOMDocumentType) PublicID() string {
+	defer runtime.KeepAlive(ddt)
 	_r := objc.Send[objc.ID](objref.IDOf(ddt), objc.RegisterName("publicId"))
 	if _r == 0 {
 		return ""
@@ -99,6 +105,7 @@ func (ddt *DOMDocumentType) PublicID() string {
 
 // SystemID returns the system ID.
 func (ddt *DOMDocumentType) SystemID() string {
+	defer runtime.KeepAlive(ddt)
 	_r := objc.Send[objc.ID](objref.IDOf(ddt), objc.RegisterName("systemId"))
 	if _r == 0 {
 		return ""
@@ -108,6 +115,7 @@ func (ddt *DOMDocumentType) SystemID() string {
 
 // InternalSubset returns the internal subset.
 func (ddt *DOMDocumentType) InternalSubset() string {
+	defer runtime.KeepAlive(ddt)
 	_r := objc.Send[objc.ID](objref.IDOf(ddt), objc.RegisterName("internalSubset"))
 	if _r == 0 {
 		return ""

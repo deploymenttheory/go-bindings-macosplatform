@@ -5,6 +5,8 @@
 package coremediaio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,34 @@ func extensionPropertyAttributesAdopt(id objc.ID) *ExtensionPropertyAttributes {
 
 // Description returns the object's -description text.
 func (epa *ExtensionPropertyAttributes) Description() string {
+	defer runtime.KeepAlive(epa)
 	return rt.Description(objref.IDOf(epa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (epa *ExtensionPropertyAttributes) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(epa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(epa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (epa *ExtensionPropertyAttributes) IsKind(className string) bool {
+	defer runtime.KeepAlive(epa)
 	return rt.IsKind(objref.IDOf(epa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (epa *ExtensionPropertyAttributes) String() string {
+	defer runtime.KeepAlive(epa)
 	return rt.Description(objref.IDOf(epa))
 }
 
 // NewExtensionPropertyAttributesWithMinValueMaxValueValidValuesReadOnly creates a property attributes object with the specified configuration.
 func NewExtensionPropertyAttributesWithMinValueMaxValueValidValuesReadOnly(minValue obj.Object, maxValue obj.Object, validValues []obj.Object, readOnly bool) *ExtensionPropertyAttributes {
+	defer runtime.KeepAlive(minValue)
+	defer runtime.KeepAlive(maxValue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionPropertyAttributes")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMinValue:maxValue:validValues:readOnly:"), objref.IDOf(minValue), objref.IDOf(maxValue), purego.SliceToNSArray(validValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), readOnly)
 	return extensionPropertyAttributesAdopt(_id)
@@ -75,24 +84,28 @@ func NewExtensionPropertyAttributesWithMinValueMaxValueValidValuesReadOnly(minVa
 
 // MinValue returns the minimum value of a property.
 func (epa *ExtensionPropertyAttributes) MinValue() obj.Object {
+	defer runtime.KeepAlive(epa)
 	_r := objc.Send[objc.ID](objref.IDOf(epa), objc.RegisterName("minValue"))
 	return obj.Wrap(_r)
 }
 
 // MaxValue returns the maximum value of a property.
 func (epa *ExtensionPropertyAttributes) MaxValue() obj.Object {
+	defer runtime.KeepAlive(epa)
 	_r := objc.Send[objc.ID](objref.IDOf(epa), objc.RegisterName("maxValue"))
 	return obj.Wrap(_r)
 }
 
 // ValidValues returns an array of valid values.
 func (epa *ExtensionPropertyAttributes) ValidValues() []obj.Object {
+	defer runtime.KeepAlive(epa)
 	_r := objc.Send[objc.ID](objref.IDOf(epa), objc.RegisterName("validValues"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // IsReadOnly reports whether the readOnly flag attribute.
 func (epa *ExtensionPropertyAttributes) IsReadOnly() bool {
+	defer runtime.KeepAlive(epa)
 	_r := objc.Send[bool](objref.IDOf(epa), objc.RegisterName("isReadOnly"))
 	return _r
 }

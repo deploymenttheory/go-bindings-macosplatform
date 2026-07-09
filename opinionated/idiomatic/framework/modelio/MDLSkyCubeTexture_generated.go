@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -100,6 +101,7 @@ func (sct *SkyCubeTexture) WithHorizonElevation(horizonElevation float32) *SkyCu
 
 // WithGroundColor sets the color of the simulated ground.
 func (sct *SkyCubeTexture) WithGroundColor(groundColor obj.Object) *SkyCubeTexture {
+	defer runtime.KeepAlive(groundColor)
 	objc.Send[objc.ID](objref.IDOf(sct), objc.RegisterName("setGroundColor:"), objref.IDOf(groundColor))
 	return sct
 }
@@ -154,77 +156,90 @@ func (sct *SkyCubeTexture) WithHasAlphaValues(hasAlphaValues bool) *SkyCubeTextu
 
 // UpdateTexture generates new texel data matching the current sky parameters.
 func (sct *SkyCubeTexture) UpdateTexture() {
+	defer runtime.KeepAlive(sct)
 	objc.Send[objc.ID](objref.IDOf(sct), objc.RegisterName("updateTexture"))
 }
 
 // Turbidity returns the turbidity.
 func (sct *SkyCubeTexture) Turbidity() float32 {
+	defer runtime.KeepAlive(sct)
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("turbidity"))
 	return _r
 }
 
 // SunElevation returns the sun elevation.
 func (sct *SkyCubeTexture) SunElevation() float32 {
+	defer runtime.KeepAlive(sct)
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("sunElevation"))
 	return _r
 }
 
 // SunAzimuth returns the sun azimuth.
 func (sct *SkyCubeTexture) SunAzimuth() float32 {
+	defer runtime.KeepAlive(sct)
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("sunAzimuth"))
 	return _r
 }
 
 // UpperAtmosphereScattering returns the upper atmosphere scattering.
 func (sct *SkyCubeTexture) UpperAtmosphereScattering() float32 {
+	defer runtime.KeepAlive(sct)
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("upperAtmosphereScattering"))
 	return _r
 }
 
 // GroundAlbedo returns the ground albedo.
 func (sct *SkyCubeTexture) GroundAlbedo() float32 {
+	defer runtime.KeepAlive(sct)
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("groundAlbedo"))
 	return _r
 }
 
 // HorizonElevation returns the horizon elevation.
 func (sct *SkyCubeTexture) HorizonElevation() float32 {
+	defer runtime.KeepAlive(sct)
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("horizonElevation"))
 	return _r
 }
 
 // GroundColor returns the ground color.
 func (sct *SkyCubeTexture) GroundColor() obj.Object {
+	defer runtime.KeepAlive(sct)
 	_r := objc.Send[objc.ID](objref.IDOf(sct), objc.RegisterName("groundColor"))
 	return obj.Wrap(_r)
 }
 
 // Gamma returns the gamma.
 func (sct *SkyCubeTexture) Gamma() float32 {
+	defer runtime.KeepAlive(sct)
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("gamma"))
 	return _r
 }
 
 // Exposure returns the exposure.
 func (sct *SkyCubeTexture) Exposure() float32 {
+	defer runtime.KeepAlive(sct)
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("exposure"))
 	return _r
 }
 
 // Brightness returns the brightness.
 func (sct *SkyCubeTexture) Brightness() float32 {
+	defer runtime.KeepAlive(sct)
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("brightness"))
 	return _r
 }
 
 // Contrast returns the contrast.
 func (sct *SkyCubeTexture) Contrast() float32 {
+	defer runtime.KeepAlive(sct)
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("contrast"))
 	return _r
 }
 
 // Saturation returns the saturation.
 func (sct *SkyCubeTexture) Saturation() float32 {
+	defer runtime.KeepAlive(sct)
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("saturation"))
 	return _r
 }

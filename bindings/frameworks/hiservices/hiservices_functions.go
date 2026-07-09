@@ -483,8 +483,8 @@ func GetProcessForPID(pid int, psn unsafe.Pointer) int {
 	return _fnGetProcessForPID(pid, psn)
 }
 
-func GetProcessInformation(pSN unsafe.Pointer, info *ProcessInfoRec) int16 {
-	return _fnGetProcessInformation(pSN, info)
+func GetProcessInformation(psn unsafe.Pointer, info *ProcessInfoRec) int16 {
+	return _fnGetProcessInformation(psn, info)
 }
 
 func GetProcessPID(psn unsafe.Pointer, pid *int) int {
@@ -879,12 +879,12 @@ func PlotIconRefInContext(inContext unsafe.Pointer, inRect *corefoundation.CGRec
 	return _fnPlotIconRefInContext(inContext, inRect, inAlign, inTransform, inLabelColor, inFlags, inIconRef)
 }
 
-func ProcessInformationCopyDictionary(pSN unsafe.Pointer, infoToReturn uint) unsafe.Pointer {
-	return _fnProcessInformationCopyDictionary(pSN, infoToReturn)
+func ProcessInformationCopyDictionary(psn unsafe.Pointer, infoToReturn uint) unsafe.Pointer {
+	return _fnProcessInformationCopyDictionary(psn, infoToReturn)
 }
 
-func SameProcess(pSN1 unsafe.Pointer, pSN2 unsafe.Pointer, result *uint8) int16 {
-	return _fnSameProcess(pSN1, pSN2, result)
+func SameProcess(psn1 unsafe.Pointer, psn2 unsafe.Pointer, result *uint8) int16 {
+	return _fnSameProcess(psn1, psn2, result)
 }
 
 func SetFrontProcess(pPSN unsafe.Pointer) int16 {
@@ -951,6 +951,6 @@ func UAZoomEnabled() uint8 {
 	return _fnUAZoomEnabled()
 }
 
-func WakeUpProcess(pSN unsafe.Pointer) int16 {
-	return _fnWakeUpProcess(pSN)
+func WakeUpProcess(psn unsafe.Pointer) int16 {
+	return _fnWakeUpProcess(psn)
 }

@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRWaterHeaterManagementClusterBoostStartedEventAdopt(id objc.ID) *MTRWater
 
 // Description returns the object's -description text.
 func (mwhmcbse *MTRWaterHeaterManagementClusterBoostStartedEvent) Description() string {
+	defer runtime.KeepAlive(mwhmcbse)
 	return rt.Description(objref.IDOf(mwhmcbse))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mwhmcbse *MTRWaterHeaterManagementClusterBoostStartedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mwhmcbse)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mwhmcbse), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mwhmcbse *MTRWaterHeaterManagementClusterBoostStartedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mwhmcbse)
 	return rt.IsKind(objref.IDOf(mwhmcbse), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mwhmcbse *MTRWaterHeaterManagementClusterBoostStartedEvent) String() string {
+	defer runtime.KeepAlive(mwhmcbse)
 	return rt.Description(objref.IDOf(mwhmcbse))
 }
 
@@ -72,12 +79,14 @@ func NewMTRWaterHeaterManagementClusterBoostStartedEvent() *MTRWaterHeaterManage
 
 // WithBoostInfo sets the boost info.
 func (mwhmcbse *MTRWaterHeaterManagementClusterBoostStartedEvent) WithBoostInfo(boostInfo *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) *MTRWaterHeaterManagementClusterBoostStartedEvent {
+	defer runtime.KeepAlive(boostInfo)
 	objc.Send[objc.ID](objref.IDOf(mwhmcbse), objc.RegisterName("setBoostInfo:"), objref.IDOf(boostInfo))
 	return mwhmcbse
 }
 
 // BoostInfo returns the boost info.
 func (mwhmcbse *MTRWaterHeaterManagementClusterBoostStartedEvent) BoostInfo() *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
+	defer runtime.KeepAlive(mwhmcbse)
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcbse), objc.RegisterName("boostInfo"))
 	return MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructFromID(_r)
 }

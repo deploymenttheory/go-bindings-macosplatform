@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -57,6 +58,7 @@ func NewFetchRecordZoneChangesOperation() *FetchRecordZoneChangesOperation {
 
 // NewFetchRecordZoneChangesOperationWithRecordZoneIDsConfigurationsByRecordZoneID creates an operation for fetching record zone changes.
 func NewFetchRecordZoneChangesOperationWithRecordZoneIDsConfigurationsByRecordZoneID(recordZoneIDs []*RecordZoneID, configurationsByRecordZoneID obj.Object) *FetchRecordZoneChangesOperation {
+	defer runtime.KeepAlive(configurationsByRecordZoneID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKFetchRecordZoneChangesOperation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordZoneIDs:configurationsByRecordZoneID:"), purego.SliceToNSArray(recordZoneIDs, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) }), objref.IDOf(configurationsByRecordZoneID))
 	return fetchRecordZoneChangesOperationAdopt(_id)
@@ -64,6 +66,7 @@ func NewFetchRecordZoneChangesOperationWithRecordZoneIDsConfigurationsByRecordZo
 
 // NewFetchRecordZoneChangesOperationWithRecordZoneIDsOptionsByRecordZoneID creates an operation for fetching record zone changes.
 func NewFetchRecordZoneChangesOperationWithRecordZoneIDsOptionsByRecordZoneID(recordZoneIDs []*RecordZoneID, optionsByRecordZoneID obj.Object) *FetchRecordZoneChangesOperation {
+	defer runtime.KeepAlive(optionsByRecordZoneID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKFetchRecordZoneChangesOperation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordZoneIDs:optionsByRecordZoneID:"), purego.SliceToNSArray(recordZoneIDs, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) }), objref.IDOf(optionsByRecordZoneID))
 	return fetchRecordZoneChangesOperationAdopt(_id)
@@ -78,6 +81,7 @@ func (frzco *FetchRecordZoneChangesOperation) WithRecordZoneIDs(items ...*Record
 
 // WithConfigurationsByRecordZoneID sets a dictionary of configurations for fetching change operations by zone identifier.
 func (frzco *FetchRecordZoneChangesOperation) WithConfigurationsByRecordZoneID(configurationsByRecordZoneID obj.Object) *FetchRecordZoneChangesOperation {
+	defer runtime.KeepAlive(configurationsByRecordZoneID)
 	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setConfigurationsByRecordZoneID:"), objref.IDOf(configurationsByRecordZoneID))
 	return frzco
 }
@@ -94,7 +98,7 @@ func (frzco *FetchRecordZoneChangesOperation) WithRecordChangedBlock(recordChang
 	return frzco
 }
 
-// WithRecordWithIDWasDeletedBlock sets the block to execute when a record no longer exists.
+// WithRecordWithIDWasDeletedBlock sets the closure to execute when a record no longer exists.
 func (frzco *FetchRecordZoneChangesOperation) WithRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(obj.Object, obj.Object)) *FetchRecordZoneChangesOperation {
 	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setRecordWithIDWasDeletedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) {
 		recordWithIDWasDeletedBlock(obj.Wrap(_b0), obj.Wrap(_b1))
@@ -112,24 +116,28 @@ func (frzco *FetchRecordZoneChangesOperation) WithRecordZoneChangeTokensUpdatedB
 
 // WithOptionsByRecordZoneID sets configuration options for each record zone that the operation retrieves.
 func (frzco *FetchRecordZoneChangesOperation) WithOptionsByRecordZoneID(optionsByRecordZoneID obj.Object) *FetchRecordZoneChangesOperation {
+	defer runtime.KeepAlive(optionsByRecordZoneID)
 	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setOptionsByRecordZoneID:"), objref.IDOf(optionsByRecordZoneID))
 	return frzco
 }
 
 // WithDatabase sets the database that the operation uses.
 func (frzco *FetchRecordZoneChangesOperation) WithDatabase(database *Database) *FetchRecordZoneChangesOperation {
+	defer runtime.KeepAlive(database)
 	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return frzco
 }
 
 // WithConfiguration sets the operation’s configuration.
 func (frzco *FetchRecordZoneChangesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchRecordZoneChangesOperation {
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return frzco
 }
 
 // WithGroup sets the operation’s group.
 func (frzco *FetchRecordZoneChangesOperation) WithGroup(group *OperationGroup) *FetchRecordZoneChangesOperation {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return frzco
 }
@@ -142,6 +150,7 @@ func (frzco *FetchRecordZoneChangesOperation) WithLongLivedOperationWasPersisted
 
 // WithContainer sets the operation's container.
 func (frzco *FetchRecordZoneChangesOperation) WithContainer(container *Container) *FetchRecordZoneChangesOperation {
+	defer runtime.KeepAlive(container)
 	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return frzco
 }
@@ -174,18 +183,21 @@ func (frzco *FetchRecordZoneChangesOperation) WithTimeoutIntervalForResource(tim
 //
 // RecordZoneIDs returns the collection as a Go slice.
 func (frzco *FetchRecordZoneChangesOperation) RecordZoneIDs() []*RecordZoneID {
+	defer runtime.KeepAlive(frzco)
 	_arr := objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("recordZoneIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }
 
 // ConfigurationsByRecordZoneID returns a dictionary of configurations for fetching change operations by zone identifier.
 func (frzco *FetchRecordZoneChangesOperation) ConfigurationsByRecordZoneID() obj.Object {
+	defer runtime.KeepAlive(frzco)
 	_r := objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("configurationsByRecordZoneID"))
 	return obj.Wrap(_r)
 }
 
 // FetchAllChanges reports whether to send repeated requests to the server. If <doc://com.apple.documentation/documentation/swift/true>, the operation sends repeat requests to the server until it fetches all changes. CloudKit executes the handler you set on the “CKFetchRecordZoneChangesOperation/recordZoneFetchResultBlock“ property with a change token after each request. The default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (frzco *FetchRecordZoneChangesOperation) FetchAllChanges() bool {
+	defer runtime.KeepAlive(frzco)
 	_r := objc.Send[bool](objref.IDOf(frzco), objc.RegisterName("fetchAllChanges"))
 	return _r
 }
@@ -194,6 +206,7 @@ func (frzco *FetchRecordZoneChangesOperation) FetchAllChanges() bool {
 //
 // SetFetchRecordZoneChangesCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (frzco *FetchRecordZoneChangesOperation) SetFetchRecordZoneChangesCompletionBlock(ctx context.Context) error {
+	defer runtime.KeepAlive(frzco)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -211,6 +224,7 @@ func (frzco *FetchRecordZoneChangesOperation) SetFetchRecordZoneChangesCompletio
 
 // OptionsByRecordZoneID returns configuration options for each record zone that the operation retrieves.
 func (frzco *FetchRecordZoneChangesOperation) OptionsByRecordZoneID() obj.Object {
+	defer runtime.KeepAlive(frzco)
 	_r := objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("optionsByRecordZoneID"))
 	return obj.Wrap(_r)
 }

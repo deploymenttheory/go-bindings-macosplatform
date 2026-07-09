@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func audioPCMBufferAdopt(id objc.ID) *AudioPCMBuffer {
 
 // NewAudioPCMBufferWithPCMFormatFrameCapacity creates a PCM audio buffer instance for PCM audio data.
 func NewAudioPCMBufferWithPCMFormatFrameCapacity(format *AudioFormat, frameCapacity uint32) *AudioPCMBuffer {
+	defer runtime.KeepAlive(format)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioPCMBuffer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPCMFormat:frameCapacity:"), objref.IDOf(format), frameCapacity)
 	return audioPCMBufferAdopt(_id)
@@ -60,18 +63,21 @@ func (apb *AudioPCMBuffer) WithFrameLength(frameLength uint32) *AudioPCMBuffer {
 
 // FrameCapacity returns the buffer's capacity, in audio sample frames.
 func (apb *AudioPCMBuffer) FrameCapacity() uint32 {
+	defer runtime.KeepAlive(apb)
 	_r := objc.Send[uint32](objref.IDOf(apb), objc.RegisterName("frameCapacity"))
 	return _r
 }
 
 // FrameLength returns the current number of valid sample frames in the buffer. You may modify the length of the buffer as part of an operation that modifies its contents. The length must be less than or equal to the frameCapacity. Modifying frameLength will update the mDataByteSize in each of the underlying AudioBufferList's AudioBuffer's correspondingly, and vice versa. Note that in the case of deinterleaved formats, mDataByteSize will refers the size of one channel's worth of audio samples.
 func (apb *AudioPCMBuffer) FrameLength() uint32 {
+	defer runtime.KeepAlive(apb)
 	_r := objc.Send[uint32](objref.IDOf(apb), objc.RegisterName("frameLength"))
 	return _r
 }
 
 // Stride returns the buffer's number of interleaved channels. Useful in conjunction with floatChannelData etc.
 func (apb *AudioPCMBuffer) Stride() int {
+	defer runtime.KeepAlive(apb)
 	_r := objc.Send[int](objref.IDOf(apb), objc.RegisterName("stride"))
 	return _r
 }

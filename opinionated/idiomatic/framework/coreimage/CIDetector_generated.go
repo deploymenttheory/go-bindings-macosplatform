@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func detectorAdopt(id objc.ID) *Detector {
 
 // Description returns the object's -description text.
 func (d *Detector) Description() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (d *Detector) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (d *Detector) IsKind(className string) bool {
+	defer runtime.KeepAlive(d)
 	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (d *Detector) String() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
@@ -74,12 +81,16 @@ func NewDetector() *Detector {
 
 // FeaturesInImage searches for features in an image.
 func (d *Detector) FeaturesInImage(image *Image) []*Feature {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(image)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("featuresInImage:"), objref.IDOf(image))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Feature { return FeatureFromID(_id) })
 }
 
 // FeaturesInImageOptions searches for features in an image based on the specified image orientation.
-func (d *Detector) FeaturesInImageOptions(image *Image, options obj.Object) []*Feature {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("featuresInImage:options:"), objref.IDOf(image), objref.IDOf(options))
+func (d *Detector) FeaturesInImageOptions(image *Image, options map[string]obj.Object) []*Feature {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(image)
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("featuresInImage:options:"), objref.IDOf(image), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Feature { return FeatureFromID(_id) })
 }

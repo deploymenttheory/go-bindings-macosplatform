@@ -5,6 +5,8 @@
 package installerplugins
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func installerStateAdopt(id objc.ID) *InstallerState {
 
 // Description returns the object's -description text.
 func (is *InstallerState) Description() string {
+	defer runtime.KeepAlive(is)
 	return rt.Description(objref.IDOf(is))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (is *InstallerState) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(is)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(is), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (is *InstallerState) IsKind(className string) bool {
+	defer runtime.KeepAlive(is)
 	return rt.IsKind(objref.IDOf(is), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (is *InstallerState) String() string {
+	defer runtime.KeepAlive(is)
 	return rt.Description(objref.IDOf(is))
 }
 
@@ -72,18 +79,21 @@ func NewInstallerState() *InstallerState {
 
 // ChoiceDictionaryForIdentifier retrieves choice dictionaries by identifier. See choiceDictionaries for the values returned.
 func (is *InstallerState) ChoiceDictionaryForIdentifier(choiceIdentifier string) obj.Object {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("choiceDictionaryForIdentifier:"), purego.NSString(choiceIdentifier))
 	return obj.Wrap(_r)
 }
 
 // LicenseAgreed reports whether specifies the user agreed to the license, if there is no license, this will return false.
 func (is *InstallerState) LicenseAgreed() bool {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("licenseAgreed"))
 	return _r
 }
 
 // LicenseAgreedLanguage specifies the language the language was last viewed or agreed with.
 func (is *InstallerState) LicenseAgreedLanguage() string {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("licenseAgreedLanguage"))
 	if _r == 0 {
 		return ""
@@ -93,6 +103,7 @@ func (is *InstallerState) LicenseAgreedLanguage() string {
 
 // TargetVolumePath specifies the mount point of the selected target Only Available after target has been selected.
 func (is *InstallerState) TargetVolumePath() string {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("targetVolumePath"))
 	if _r == 0 {
 		return ""
@@ -102,6 +113,7 @@ func (is *InstallerState) TargetVolumePath() string {
 
 // TargetPath returns full target path selected. Specifies the full path selected by the user.  This path contains the targetVolumePath.
 func (is *InstallerState) TargetPath() string {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("targetPath"))
 	if _r == 0 {
 		return ""
@@ -111,18 +123,21 @@ func (is *InstallerState) TargetPath() string {
 
 // ChoiceDictionaries returns an array of choice dictionaries. Each choice dictionary contains the keys InstallerState_Choice_Identifier,InstallerState_Choice_Installed, and optionally InstallerState_Choice_CustomLocation.  These keys specify a choice and whether they were installed or not.  This is only available after choice selections have been made.
 func (is *InstallerState) ChoiceDictionaries() obj.Object {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("choiceDictionaries"))
 	return obj.Wrap(_r)
 }
 
 // InstallStarted reports whether specifies if the install process has started or not. Will return true after an install has been initiated. If true is returned, you can assume the install has taken place.
 func (is *InstallerState) InstallStarted() bool {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("installStarted"))
 	return _r
 }
 
 // InstallSucceeded reports whether specifies if the install was successfull or not. This value is only valid if installStarted returns True.
 func (is *InstallerState) InstallSucceeded() bool {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("installSucceeded"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package sharedwithyou
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func removeParticipantAlertAdopt(id objc.ID) *RemoveParticipantAlert {
 
 // Description returns the object's -description text.
 func (rpa *RemoveParticipantAlert) Description() string {
+	defer runtime.KeepAlive(rpa)
 	return rt.Description(objref.IDOf(rpa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rpa *RemoveParticipantAlert) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rpa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rpa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rpa *RemoveParticipantAlert) IsKind(className string) bool {
+	defer runtime.KeepAlive(rpa)
 	return rt.IsKind(objref.IDOf(rpa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rpa *RemoveParticipantAlert) String() string {
+	defer runtime.KeepAlive(rpa)
 	return rt.Description(objref.IDOf(rpa))
 }
 

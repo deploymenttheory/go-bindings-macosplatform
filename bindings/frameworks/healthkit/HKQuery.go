@@ -187,8 +187,8 @@ func HKQueryPredicateForObjectsWithDevicePropertyAllowedValues(key *foundation.N
 }
 
 // Returns a predicate that matches an object with the specified universally unique identifier (UUID).
-func HKQueryPredicateForObjectWithUUID(uUID *foundation.NSUUID) *foundation.NSPredicate {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectWithUUID, uUID.Ptr())
+func HKQueryPredicateForObjectWithUUID(uuid *foundation.NSUUID) *foundation.NSPredicate {
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectWithUUID, uuid.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -196,8 +196,8 @@ func HKQueryPredicateForObjectWithUUID(uUID *foundation.NSUUID) *foundation.NSPr
 }
 
 // Returns a predicate that matches the objects with the specified universally unique identifiers (UUIDs).
-func HKQueryPredicateForObjectsWithUUIDs(uUIDs *foundation.NSSet[*foundation.NSUUID]) *foundation.NSPredicate {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectsWithUUIDs, uUIDs.Ptr())
+func HKQueryPredicateForObjectsWithUUIDs(uuids *foundation.NSSet[*foundation.NSUUID]) *foundation.NSPredicate {
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuery), _hKQuerySelPredicateForObjectsWithUUIDs, uuids.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

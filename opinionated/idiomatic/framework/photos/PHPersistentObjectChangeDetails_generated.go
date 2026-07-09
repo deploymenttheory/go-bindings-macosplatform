@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func persistentObjectChangeDetailsAdopt(id objc.ID) *PersistentObjectChangeDetai
 
 // Description returns the object's -description text.
 func (pocd *PersistentObjectChangeDetails) Description() string {
+	defer runtime.KeepAlive(pocd)
 	return rt.Description(objref.IDOf(pocd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pocd *PersistentObjectChangeDetails) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pocd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pocd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pocd *PersistentObjectChangeDetails) IsKind(className string) bool {
+	defer runtime.KeepAlive(pocd)
 	return rt.IsKind(objref.IDOf(pocd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pocd *PersistentObjectChangeDetails) String() string {
+	defer runtime.KeepAlive(pocd)
 	return rt.Description(objref.IDOf(pocd))
 }
 
@@ -74,24 +81,28 @@ func NewPersistentObjectChangeDetails() *PersistentObjectChangeDetails {
 
 // ObjectType returns the object type.
 func (pocd *PersistentObjectChangeDetails) ObjectType() ObjectType {
+	defer runtime.KeepAlive(pocd)
 	_r := objc.Send[ObjectType](objref.IDOf(pocd), objc.RegisterName("objectType"))
 	return _r
 }
 
-// InsertedLocalIdentifiers returns the inserted local identifiers.
-func (pocd *PersistentObjectChangeDetails) InsertedLocalIdentifiers() obj.Object {
+// InsertedLocalIdentifiers returns the order of the returned elements is unspecified.
+func (pocd *PersistentObjectChangeDetails) InsertedLocalIdentifiers() []string {
+	defer runtime.KeepAlive(pocd)
 	_r := objc.Send[objc.ID](objref.IDOf(pocd), objc.RegisterName("insertedLocalIdentifiers"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// UpdatedLocalIdentifiers returns the updated local identifiers.
-func (pocd *PersistentObjectChangeDetails) UpdatedLocalIdentifiers() obj.Object {
+// UpdatedLocalIdentifiers returns the order of the returned elements is unspecified.
+func (pocd *PersistentObjectChangeDetails) UpdatedLocalIdentifiers() []string {
+	defer runtime.KeepAlive(pocd)
 	_r := objc.Send[objc.ID](objref.IDOf(pocd), objc.RegisterName("updatedLocalIdentifiers"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// DeletedLocalIdentifiers returns the deleted local identifiers.
-func (pocd *PersistentObjectChangeDetails) DeletedLocalIdentifiers() obj.Object {
+// DeletedLocalIdentifiers returns the order of the returned elements is unspecified.
+func (pocd *PersistentObjectChangeDetails) DeletedLocalIdentifiers() []string {
+	defer runtime.KeepAlive(pocd)
 	_r := objc.Send[objc.ID](objref.IDOf(pocd), objc.RegisterName("deletedLocalIdentifiers"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }

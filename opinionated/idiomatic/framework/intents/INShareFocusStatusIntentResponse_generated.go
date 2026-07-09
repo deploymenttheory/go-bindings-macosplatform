@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func shareFocusStatusIntentResponseAdopt(id objc.ID) *ShareFocusStatusIntentResp
 
 // NewShareFocusStatusIntentResponseWithCodeUserActivity creates a response with the specified response code and user activity.
 func NewShareFocusStatusIntentResponseWithCodeUserActivity(code ShareFocusStatusIntentResponseCode, userActivity obj.Object) *ShareFocusStatusIntentResponse {
+	defer runtime.KeepAlive(userActivity)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INShareFocusStatusIntentResponse")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, objref.IDOf(userActivity))
 	return shareFocusStatusIntentResponseAdopt(_id)
@@ -55,12 +58,14 @@ func NewShareFocusStatusIntentResponseWithCodeUserActivity(code ShareFocusStatus
 
 // WithUserActivity sets the user activity object to use when launching the app.
 func (sfsir *ShareFocusStatusIntentResponse) WithUserActivity(userActivity obj.Object) *ShareFocusStatusIntentResponse {
+	defer runtime.KeepAlive(userActivity)
 	objc.Send[objc.ID](objref.IDOf(sfsir), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return sfsir
 }
 
 // Code returns the code.
 func (sfsir *ShareFocusStatusIntentResponse) Code() ShareFocusStatusIntentResponseCode {
+	defer runtime.KeepAlive(sfsir)
 	_r := objc.Send[ShareFocusStatusIntentResponseCode](objref.IDOf(sfsir), objc.RegisterName("code"))
 	return _r
 }

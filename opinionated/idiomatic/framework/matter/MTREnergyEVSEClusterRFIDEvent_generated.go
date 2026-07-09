@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTREnergyEVSEClusterRFIDEventAdopt(id objc.ID) *MTREnergyEVSEClusterRFIDEve
 
 // Description returns the object's -description text.
 func (meecre *MTREnergyEVSEClusterRFIDEvent) Description() string {
+	defer runtime.KeepAlive(meecre)
 	return rt.Description(objref.IDOf(meecre))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (meecre *MTREnergyEVSEClusterRFIDEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(meecre)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(meecre), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (meecre *MTREnergyEVSEClusterRFIDEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(meecre)
 	return rt.IsKind(objref.IDOf(meecre), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (meecre *MTREnergyEVSEClusterRFIDEvent) String() string {
+	defer runtime.KeepAlive(meecre)
 	return rt.Description(objref.IDOf(meecre))
 }
 
@@ -71,13 +78,14 @@ func NewMTREnergyEVSEClusterRFIDEvent() *MTREnergyEVSEClusterRFIDEvent {
 }
 
 // WithUID sets the UID.
-func (meecre *MTREnergyEVSEClusterRFIDEvent) WithUID(uid obj.Object) *MTREnergyEVSEClusterRFIDEvent {
-	objc.Send[objc.ID](objref.IDOf(meecre), objc.RegisterName("setUid:"), objref.IDOf(uid))
+func (meecre *MTREnergyEVSEClusterRFIDEvent) WithUID(uid []byte) *MTREnergyEVSEClusterRFIDEvent {
+	objc.Send[objc.ID](objref.IDOf(meecre), objc.RegisterName("setUid:"), rt.BytesToNSData(uid))
 	return meecre
 }
 
 // UID returns the UID.
-func (meecre *MTREnergyEVSEClusterRFIDEvent) UID() obj.Object {
+func (meecre *MTREnergyEVSEClusterRFIDEvent) UID() []byte {
+	defer runtime.KeepAlive(meecre)
 	_r := objc.Send[objc.ID](objref.IDOf(meecre), objc.RegisterName("uid"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

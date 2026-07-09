@@ -44,5 +44,5 @@ type MSCStatusInfo struct {
 // Protocol Control Information (PCI)
 type SCARDIOREQUEST struct {
 	DwProtocol  uint32
-	CbPciLength uint32
+	CbPCILength uint32
 }

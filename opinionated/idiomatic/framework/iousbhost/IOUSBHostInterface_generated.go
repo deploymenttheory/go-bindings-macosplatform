@@ -5,6 +5,7 @@
 package iousbhost
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -56,6 +57,7 @@ func NewHostInterface() *HostInterface {
 
 // SetIdleTimeout sets the desired idle suspend timeout for the interface.
 func (hi *HostInterface) SetIdleTimeout(idleTimeout float64) error {
+	defer runtime.KeepAlive(hi)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(hi), objc.RegisterName("setIdleTimeout:error:"), idleTimeout, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -66,6 +68,7 @@ func (hi *HostInterface) SetIdleTimeout(idleTimeout float64) error {
 
 // SelectAlternateSetting selects an alternative setting for the interface.
 func (hi *HostInterface) SelectAlternateSetting(alternateSetting int) error {
+	defer runtime.KeepAlive(hi)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(hi), objc.RegisterName("selectAlternateSetting:error:"), alternateSetting, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -74,8 +77,9 @@ func (hi *HostInterface) SelectAlternateSetting(alternateSetting int) error {
 	return nil
 }
 
-// CopyPipeWithAddressError copies a pipe for a specific endpoint address.
-func (hi *HostInterface) CopyPipeWithAddressError(address int) (result *HostPipe, err error) {
+// CopyPipeWithAddress copies a pipe for a specific endpoint address.
+func (hi *HostInterface) CopyPipeWithAddress(address int) (result *HostPipe, err error) {
+	defer runtime.KeepAlive(hi)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(hi), objc.RegisterName("copyPipeWithAddress:error:"), address, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -86,6 +90,7 @@ func (hi *HostInterface) CopyPipeWithAddressError(address int) (result *HostPipe
 
 // IdleTimeout returns retrieve the current idle suspend timeout. See
 func (hi *HostInterface) IdleTimeout() float64 {
+	defer runtime.KeepAlive(hi)
 	_r := objc.Send[float64](objref.IDOf(hi), objc.RegisterName("idleTimeout"))
 	return _r
 }

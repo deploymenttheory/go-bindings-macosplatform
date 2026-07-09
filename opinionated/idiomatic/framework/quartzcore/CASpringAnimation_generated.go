@@ -5,8 +5,11 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -91,18 +94,21 @@ func (sa *SpringAnimation) WithAllowsOverdamping(allowsOverdamping bool) *Spring
 
 // WithFromValue sets defines the value the receiver uses to start interpolation.
 func (sa *SpringAnimation) WithFromValue(fromValue obj.Object) *SpringAnimation {
+	defer runtime.KeepAlive(fromValue)
 	objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("setFromValue:"), objref.IDOf(fromValue))
 	return sa
 }
 
 // WithToValue sets defines the value the receiver uses to end interpolation.
 func (sa *SpringAnimation) WithToValue(toValue obj.Object) *SpringAnimation {
+	defer runtime.KeepAlive(toValue)
 	objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("setToValue:"), objref.IDOf(toValue))
 	return sa
 }
 
 // WithByValue sets defines the value the receiver uses to perform relative interpolation.
 func (sa *SpringAnimation) WithByValue(byValue obj.Object) *SpringAnimation {
+	defer runtime.KeepAlive(byValue)
 	objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("setByValue:"), objref.IDOf(byValue))
 	return sa
 }
@@ -127,13 +133,25 @@ func (sa *SpringAnimation) WithCumulative(cumulative bool) *SpringAnimation {
 
 // WithValueFunction sets an optional value function that is applied to interpolated values.
 func (sa *SpringAnimation) WithValueFunction(valueFunction *ValueFunction) *SpringAnimation {
+	defer runtime.KeepAlive(valueFunction)
 	objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("setValueFunction:"), objref.IDOf(valueFunction))
 	return sa
 }
 
 // WithTimingFunction sets an optional timing function defining the pacing of the animation.
 func (sa *SpringAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *SpringAnimation {
+	defer runtime.KeepAlive(timingFunction)
 	objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
+	return sa
+}
+
+// WithDelegate sets specifies the receiver’s delegate object.
+func (sa *SpringAnimation) WithDelegate(delegate AnimationDelegate) *SpringAnimation {
+	_shim := newAnimationDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(sa), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(sa), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
 	return sa
 }
 
@@ -145,42 +163,49 @@ func (sa *SpringAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *Sp
 
 // Mass returns the mass.
 func (sa *SpringAnimation) Mass() float64 {
+	defer runtime.KeepAlive(sa)
 	_r := objc.Send[float64](objref.IDOf(sa), objc.RegisterName("mass"))
 	return _r
 }
 
 // Stiffness returns the stiffness.
 func (sa *SpringAnimation) Stiffness() float64 {
+	defer runtime.KeepAlive(sa)
 	_r := objc.Send[float64](objref.IDOf(sa), objc.RegisterName("stiffness"))
 	return _r
 }
 
 // Damping returns the damping.
 func (sa *SpringAnimation) Damping() float64 {
+	defer runtime.KeepAlive(sa)
 	_r := objc.Send[float64](objref.IDOf(sa), objc.RegisterName("damping"))
 	return _r
 }
 
 // AllowsOverdamping wraps the corresponding Objective-C method.
 func (sa *SpringAnimation) AllowsOverdamping() bool {
+	defer runtime.KeepAlive(sa)
 	_r := objc.Send[bool](objref.IDOf(sa), objc.RegisterName("allowsOverdamping"))
 	return _r
 }
 
 // SettlingDuration returns the settling duration.
 func (sa *SpringAnimation) SettlingDuration() float64 {
+	defer runtime.KeepAlive(sa)
 	_r := objc.Send[float64](objref.IDOf(sa), objc.RegisterName("settlingDuration"))
 	return _r
 }
 
 // PerceptualDuration returns the perceptual duration.
 func (sa *SpringAnimation) PerceptualDuration() float64 {
+	defer runtime.KeepAlive(sa)
 	_r := objc.Send[float64](objref.IDOf(sa), objc.RegisterName("perceptualDuration"))
 	return _r
 }
 
 // Bounce returns the bounce.
 func (sa *SpringAnimation) Bounce() float64 {
+	defer runtime.KeepAlive(sa)
 	_r := objc.Send[float64](objref.IDOf(sa), objc.RegisterName("bounce"))
 	return _r
 }

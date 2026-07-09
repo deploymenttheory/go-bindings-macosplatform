@@ -5,9 +5,11 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,9 +53,10 @@ func NewCNNDropoutGradientState() *CNNDropoutGradientState {
 }
 
 // MaskData returns mask data accessor method.
-func (cdgs *CNNDropoutGradientState) MaskData() obj.Object {
+func (cdgs *CNNDropoutGradientState) MaskData() []byte {
+	defer runtime.KeepAlive(cdgs)
 	_r := objc.Send[objc.ID](objref.IDOf(cdgs), objc.RegisterName("maskData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ NNGradientStateProvider = (*CNNDropoutGradientState)(nil)

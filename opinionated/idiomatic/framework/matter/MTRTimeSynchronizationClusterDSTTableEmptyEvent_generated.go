@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRTimeSynchronizationClusterDSTTableEmptyEventAdopt(id objc.ID) *MTRTimeSy
 
 // Description returns the object's -description text.
 func (mtscdtee *MTRTimeSynchronizationClusterDSTTableEmptyEvent) Description() string {
+	defer runtime.KeepAlive(mtscdtee)
 	return rt.Description(objref.IDOf(mtscdtee))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtscdtee *MTRTimeSynchronizationClusterDSTTableEmptyEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtscdtee)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtscdtee), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtscdtee *MTRTimeSynchronizationClusterDSTTableEmptyEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtscdtee)
 	return rt.IsKind(objref.IDOf(mtscdtee), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtscdtee *MTRTimeSynchronizationClusterDSTTableEmptyEvent) String() string {
+	defer runtime.KeepAlive(mtscdtee)
 	return rt.Description(objref.IDOf(mtscdtee))
 }
 

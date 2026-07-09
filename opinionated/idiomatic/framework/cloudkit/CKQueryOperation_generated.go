@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -57,6 +58,7 @@ func NewQueryOperation() *QueryOperation {
 
 // NewQueryOperationWithQuery creates an operation that searches for records in the specified record zone.
 func NewQueryOperationWithQuery(query *Query) *QueryOperation {
+	defer runtime.KeepAlive(query)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKQueryOperation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQuery:"), objref.IDOf(query))
 	return queryOperationAdopt(_id)
@@ -64,6 +66,7 @@ func NewQueryOperationWithQuery(query *Query) *QueryOperation {
 
 // NewQueryOperationWithCursor creates an operation with additional results from a previous search.
 func NewQueryOperationWithCursor(cursor *QueryCursor) *QueryOperation {
+	defer runtime.KeepAlive(cursor)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKQueryOperation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCursor:"), objref.IDOf(cursor))
 	return queryOperationAdopt(_id)
@@ -71,18 +74,21 @@ func NewQueryOperationWithCursor(cursor *QueryCursor) *QueryOperation {
 
 // WithQuery sets the query for the search.
 func (qo *QueryOperation) WithQuery(query *Query) *QueryOperation {
+	defer runtime.KeepAlive(query)
 	objc.Send[objc.ID](objref.IDOf(qo), objc.RegisterName("setQuery:"), objref.IDOf(query))
 	return qo
 }
 
 // WithCursor sets the cursor for continuing the search.
 func (qo *QueryOperation) WithCursor(cursor *QueryCursor) *QueryOperation {
+	defer runtime.KeepAlive(cursor)
 	objc.Send[objc.ID](objref.IDOf(qo), objc.RegisterName("setCursor:"), objref.IDOf(cursor))
 	return qo
 }
 
 // WithZoneID sets the ID of the record zone that contains the records to search.
 func (qo *QueryOperation) WithZoneID(zoneID *RecordZoneID) *QueryOperation {
+	defer runtime.KeepAlive(zoneID)
 	objc.Send[objc.ID](objref.IDOf(qo), objc.RegisterName("setZoneID:"), objref.IDOf(zoneID))
 	return qo
 }
@@ -108,18 +114,21 @@ func (qo *QueryOperation) WithRecordFetchedBlock(recordFetchedBlock func(obj.Obj
 
 // WithDatabase sets the database that the operation uses.
 func (qo *QueryOperation) WithDatabase(database *Database) *QueryOperation {
+	defer runtime.KeepAlive(database)
 	objc.Send[objc.ID](objref.IDOf(qo), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return qo
 }
 
 // WithConfiguration sets the operation’s configuration.
 func (qo *QueryOperation) WithConfiguration(configuration *OperationConfiguration) *QueryOperation {
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(qo), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return qo
 }
 
 // WithGroup sets the operation’s group.
 func (qo *QueryOperation) WithGroup(group *OperationGroup) *QueryOperation {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(qo), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return qo
 }
@@ -132,6 +141,7 @@ func (qo *QueryOperation) WithLongLivedOperationWasPersistedBlock(longLivedOpera
 
 // WithContainer sets the operation's container.
 func (qo *QueryOperation) WithContainer(container *Container) *QueryOperation {
+	defer runtime.KeepAlive(container)
 	objc.Send[objc.ID](objref.IDOf(qo), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return qo
 }
@@ -162,24 +172,28 @@ func (qo *QueryOperation) WithTimeoutIntervalForResource(timeoutIntervalForResou
 
 // Query returns the query for the search. The initial value of this property is the query that you provide to the “CKQueryOperation/init(query:)“ method. When the value in the “CKQueryOperation/cursor“ property is `nil`, the operation uses this property's value to execute a new search and return its results to your completion handler. If “CKQueryOperation/cursor“ isn't `nil`, the operation uses the cursor instead. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue.
 func (qo *QueryOperation) Query() *Query {
+	defer runtime.KeepAlive(qo)
 	_r := objc.Send[objc.ID](objref.IDOf(qo), objc.RegisterName("query"))
 	return QueryFromID(_r)
 }
 
 // Cursor returns the cursor for continuing the search. The initial value of this property is the cursor that you provide to the “CKQueryOperation/init(cursor:)“ method. When you use a cursor, the operation ignores the contents of the “CKQueryOperation/query“ property. This property's value is an opaque value that CloudKit provides. For more information, see the “CKQueryOperation/queryCompletionBlock“ property. If you intend to specify or change the value in this property, do so before you execute the operation or submit it to a queue.
 func (qo *QueryOperation) Cursor() *QueryCursor {
+	defer runtime.KeepAlive(qo)
 	_r := objc.Send[objc.ID](objref.IDOf(qo), objc.RegisterName("cursor"))
 	return QueryCursorFromID(_r)
 }
 
 // ZoneID returns the ID of the record zone that contains the records to search. The value of this property limits the scope of the search to only the records in the specified record zone. If you don't specify a record zone, the search includes all record zones. When you create an operation using the “CKQueryOperation/init(cursor:)“ method, this property's value is `nil` and CloudKit ignores any changes that you make to it. When the operation executes, the cursor provides the record zone information from the original search that provides the cursor.
 func (qo *QueryOperation) ZoneID() *RecordZoneID {
+	defer runtime.KeepAlive(qo)
 	_r := objc.Send[objc.ID](objref.IDOf(qo), objc.RegisterName("zoneID"))
 	return RecordZoneIDFromID(_r)
 }
 
 // ResultsLimit returns the maximum number of records to return at one time. For most queries, leave the value of this property as the default value, which is the “CKQueryOperation/maximumResults“ constant. When using that value, CloudKit returns as many records as possible while minimizing delays in receiving those records. If you want to process a fixed number of results, change the value of this property accordingly.
 func (qo *QueryOperation) ResultsLimit() int {
+	defer runtime.KeepAlive(qo)
 	_r := objc.Send[int](objref.IDOf(qo), objc.RegisterName("resultsLimit"))
 	return _r
 }
@@ -188,6 +202,7 @@ func (qo *QueryOperation) ResultsLimit() int {
 //
 // DesiredKeys returns the collection as a Go slice.
 func (qo *QueryOperation) DesiredKeys() []obj.Object {
+	defer runtime.KeepAlive(qo)
 	_arr := objc.Send[objc.ID](objref.IDOf(qo), objc.RegisterName("desiredKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -196,6 +211,7 @@ func (qo *QueryOperation) DesiredKeys() []obj.Object {
 //
 // SetQueryCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (qo *QueryOperation) SetQueryCompletionBlock(ctx context.Context) (result *QueryCursor, err error) {
+	defer runtime.KeepAlive(qo)
 	type _result struct {
 		val *QueryCursor
 		err error

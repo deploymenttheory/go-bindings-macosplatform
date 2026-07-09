@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTROvenCavityOperationalStateClusterErrorStateStructAdopt(id objc.ID) *MTRO
 
 // Description returns the object's -description text.
 func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) Description() string {
+	defer runtime.KeepAlive(mocoscess)
 	return rt.Description(objref.IDOf(mocoscess))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mocoscess)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mocoscess), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mocoscess)
 	return rt.IsKind(objref.IDOf(mocoscess), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) String() string {
+	defer runtime.KeepAlive(mocoscess)
 	return rt.Description(objref.IDOf(mocoscess))
 }
 
@@ -72,6 +80,7 @@ func NewMTROvenCavityOperationalStateClusterErrorStateStruct() *MTROvenCavityOpe
 
 // WithErrorStateID sets the error state ID.
 func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) WithErrorStateID(errorStateID obj.Object) *MTROvenCavityOperationalStateClusterErrorStateStruct {
+	defer runtime.KeepAlive(errorStateID)
 	objc.Send[objc.ID](objref.IDOf(mocoscess), objc.RegisterName("setErrorStateID:"), objref.IDOf(errorStateID))
 	return mocoscess
 }
@@ -89,13 +98,15 @@ func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) WithError
 }
 
 // ErrorStateID returns the error state ID.
-func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) ErrorStateID() obj.Object {
+func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) ErrorStateID() *foundation.Number {
+	defer runtime.KeepAlive(mocoscess)
 	_r := objc.Send[objc.ID](objref.IDOf(mocoscess), objc.RegisterName("errorStateID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ErrorStateLabel returns the error state label.
 func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) ErrorStateLabel() string {
+	defer runtime.KeepAlive(mocoscess)
 	_r := objc.Send[objc.ID](objref.IDOf(mocoscess), objc.RegisterName("errorStateLabel"))
 	if _r == 0 {
 		return ""
@@ -105,6 +116,7 @@ func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) ErrorStat
 
 // ErrorStateDetails returns the error state details.
 func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) ErrorStateDetails() string {
+	defer runtime.KeepAlive(mocoscess)
 	_r := objc.Send[objc.ID](objref.IDOf(mocoscess), objc.RegisterName("errorStateDetails"))
 	if _r == 0 {
 		return ""

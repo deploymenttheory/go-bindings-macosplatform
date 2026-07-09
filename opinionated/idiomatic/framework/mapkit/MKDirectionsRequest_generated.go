@@ -5,6 +5,9 @@
 package mapkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func directionsRequestAdopt(id objc.ID) *DirectionsRequest {
 
 // Description returns the object's -description text.
 func (dr *DirectionsRequest) Description() string {
+	defer runtime.KeepAlive(dr)
 	return rt.Description(objref.IDOf(dr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dr *DirectionsRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dr *DirectionsRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(dr)
 	return rt.IsKind(objref.IDOf(dr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dr *DirectionsRequest) String() string {
+	defer runtime.KeepAlive(dr)
 	return rt.Description(objref.IDOf(dr))
 }
 
@@ -75,12 +83,14 @@ func NewDirectionsRequestWithContentsOfURL(url string) *DirectionsRequest {
 
 // WithSource sets the source.
 func (dr *DirectionsRequest) WithSource(source *MapItem) *DirectionsRequest {
+	defer runtime.KeepAlive(source)
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setSource:"), objref.IDOf(source))
 	return dr
 }
 
 // WithDestination sets the destination.
 func (dr *DirectionsRequest) WithDestination(destination *MapItem) *DirectionsRequest {
+	defer runtime.KeepAlive(destination)
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return dr
 }
@@ -98,14 +108,14 @@ func (dr *DirectionsRequest) WithRequestsAlternateRoutes(requestsAlternateRoutes
 }
 
 // WithDepartureDate sets the departure date.
-func (dr *DirectionsRequest) WithDepartureDate(departureDate obj.Object) *DirectionsRequest {
-	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setDepartureDate:"), objref.IDOf(departureDate))
+func (dr *DirectionsRequest) WithDepartureDate(departureDate time.Time) *DirectionsRequest {
+	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setDepartureDate:"), rt.TimeToNSDate(departureDate))
 	return dr
 }
 
 // WithArrivalDate sets the arrival date.
-func (dr *DirectionsRequest) WithArrivalDate(arrivalDate obj.Object) *DirectionsRequest {
-	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setArrivalDate:"), objref.IDOf(arrivalDate))
+func (dr *DirectionsRequest) WithArrivalDate(arrivalDate time.Time) *DirectionsRequest {
+	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setArrivalDate:"), rt.TimeToNSDate(arrivalDate))
 	return dr
 }
 
@@ -123,48 +133,56 @@ func (dr *DirectionsRequest) WithHighwayPreference(highwayPreference DirectionsR
 
 // Source returns the source.
 func (dr *DirectionsRequest) Source() *MapItem {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("source"))
 	return MapItemFromID(_r)
 }
 
 // Destination returns the destination.
 func (dr *DirectionsRequest) Destination() *MapItem {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("destination"))
 	return MapItemFromID(_r)
 }
 
 // TransportType returns the transport type.
 func (dr *DirectionsRequest) TransportType() DirectionsTransportType {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[DirectionsTransportType](objref.IDOf(dr), objc.RegisterName("transportType"))
 	return _r
 }
 
 // RequestsAlternateRoutes wraps the corresponding Objective-C method.
 func (dr *DirectionsRequest) RequestsAlternateRoutes() bool {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[bool](objref.IDOf(dr), objc.RegisterName("requestsAlternateRoutes"))
 	return _r
 }
 
 // DepartureDate returns the departure date.
-func (dr *DirectionsRequest) DepartureDate() obj.Object {
+func (dr *DirectionsRequest) DepartureDate() time.Time {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("departureDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ArrivalDate returns the arrival date.
-func (dr *DirectionsRequest) ArrivalDate() obj.Object {
+func (dr *DirectionsRequest) ArrivalDate() time.Time {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("arrivalDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // TollPreference returns the toll preference.
 func (dr *DirectionsRequest) TollPreference() DirectionsRoutePreference {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[DirectionsRoutePreference](objref.IDOf(dr), objc.RegisterName("tollPreference"))
 	return _r
 }
 
 // HighwayPreference returns the highway preference.
 func (dr *DirectionsRequest) HighwayPreference() DirectionsRoutePreference {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[DirectionsRoutePreference](objref.IDOf(dr), objc.RegisterName("highwayPreference"))
 	return _r
 }

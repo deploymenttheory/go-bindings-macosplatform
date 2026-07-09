@@ -5,9 +5,11 @@
 package avfoundation
 
 import (
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,14 +55,14 @@ func NewMutableDateRangeMetadataGroup() *MutableDateRangeMetadataGroup {
 }
 
 // WithStartDate sets the start date for the metadata date range group.
-func (mdrmg *MutableDateRangeMetadataGroup) WithStartDate(startDate obj.Object) *MutableDateRangeMetadataGroup {
-	objc.Send[objc.ID](objref.IDOf(mdrmg), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
+func (mdrmg *MutableDateRangeMetadataGroup) WithStartDate(startDate time.Time) *MutableDateRangeMetadataGroup {
+	objc.Send[objc.ID](objref.IDOf(mdrmg), objc.RegisterName("setStartDate:"), rt.TimeToNSDate(startDate))
 	return mdrmg
 }
 
 // WithEndDate sets the end date for the metadata date range group.
-func (mdrmg *MutableDateRangeMetadataGroup) WithEndDate(endDate obj.Object) *MutableDateRangeMetadataGroup {
-	objc.Send[objc.ID](objref.IDOf(mdrmg), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
+func (mdrmg *MutableDateRangeMetadataGroup) WithEndDate(endDate time.Time) *MutableDateRangeMetadataGroup {
+	objc.Send[objc.ID](objref.IDOf(mdrmg), objc.RegisterName("setEndDate:"), rt.TimeToNSDate(endDate))
 	return mdrmg
 }
 
