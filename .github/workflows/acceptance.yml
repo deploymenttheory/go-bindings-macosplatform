@@ -4,10 +4,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'bindings/frameworks/**'
-      - 'acceptance/**'
+      - 'bindings/**'
       - 'cmd/genacceptance/**'
-      - 'runtime/**'
       - 'internal/**'
       - 'metadata/**'
       - 'scripts/ci/**'
@@ -15,10 +13,8 @@ on:
   pull_request:
     types: [opened, synchronize]
     paths:
-      - 'bindings/frameworks/**'
-      - 'acceptance/**'
+      - 'bindings/**'
       - 'cmd/genacceptance/**'
-      - 'runtime/**'
       - 'internal/**'
       - 'metadata/**'
       - 'scripts/ci/**'
@@ -95,9 +91,15 @@ jobs:
             --libraries-out /tmp/lib-strict-check \
             --diagnostics-baseline metadata/diagnostics-baseline.json
 
-      - name: Build framework packages
+      - name: Build all binding packages
         if: steps.version.outputs.macos_major == '26'
-        run: go build ./bindings/frameworks/...
+        run: go build ./bindings/...
+
+      # Ratchet: the idiomatic public layer must keep covering every construct the
+      # raw layer emits. Fails only on a NEW gap beyond the committed baseline.
+      - name: Check idiomatic parity (ratchet)
+        if: steps.version.outputs.macos_major == '26'
+        run: go run ./cmd/generate/ parity --baseline metadata/parity-baseline.json
 
       - name: Generate acceptance tests
         if: steps.version.outputs.macos_major == '26'
@@ -110,7 +112,7 @@ jobs:
         if: steps.version.outputs.macos_major == '26'
         run: |
           GENACCEPT_ATTEST=acceptance-attestation.jsonl \
-          go test ./acceptance/ \
+          go test ./bindings/acceptance/ \
             -v \
             -timeout 600s \
             -count=1
@@ -122,5 +124,5 @@ jobs:
           name: acceptance-artifacts-${{ matrix.os }}-${{ github.run_id }}
           path: |
             acceptance-attestation.jsonl
-            acceptance/generated_acceptance_test.go
+            bindings/acceptance/generated_acceptance_test.go
           if-no-files-found: ignore

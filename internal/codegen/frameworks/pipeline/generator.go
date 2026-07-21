@@ -614,7 +614,7 @@ type IdiomaticConfig struct {
 	// Registry is the combined metadata for all frameworks.
 	Registry *Registry
 	// OutDir is the root output directory. Each framework writes to OutDir/<pkgname>/.
-	// Canonical value: <repo-root>/opinionated/idiomatic
+	// Canonical value: <repo-root>/bindings
 	OutDir string
 	// Frameworks is an optional filter; empty means all frameworks.
 	Frameworks []string
@@ -708,7 +708,7 @@ func GenerateIdiomatic(cfg IdiomaticConfig) error {
 		}
 	}
 
-	// The per-framework opinionated/idiomatic/<framework> packages are themselves the
+	// The per-framework bindings/frameworks/<framework> packages are themselves the
 	// fluent entry points: callers import only the frameworks they use. No
 	// all-frameworks aggregator is emitted — one would transitively import (and,
 	// via each raw package's init, eagerly dlopen) every framework, defeating

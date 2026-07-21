@@ -15,14 +15,14 @@ import (
 // They carry no per-framework data, so they are stored verbatim (as .txt to
 // keep them out of this package's own compilation) and written unchanged on
 // every generation — making the whole idiomatic tree regenerable from scratch:
-// delete opinionated/idiomatic and a single `generate idiomatic` run restores
+// delete the generated tree and a single `generate idiomatic` run restores
 // objref, errkit, and rt byte-for-byte.
 //
 //go:embed support/*.txt
 var supportFS embed.FS
 
 // supportFile maps an embedded payload to its destination, relative to the
-// idiomatic output root (cfg.OutDir, canonically <repo>/opinionated/idiomatic).
+// idiomatic output root (cfg.OutDir, canonically <repo>/bindings).
 type supportFile struct {
 	src string // name under support/
 	rel string // destination relative to the idiomatic root

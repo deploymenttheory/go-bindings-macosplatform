@@ -16,7 +16,7 @@ import (
 // IdiomaticConfig configures GenerateIdiomaticLibraries.
 type IdiomaticConfig struct {
 	Registry  *Registry
-	OutDir    string   // output root, e.g. ./opinionated/idiomatic/libraries
+	OutDir    string   // output root, e.g. ./bindings/libraries
 	Libraries []string // optional case-insensitive filter; empty = all libraries
 	Verbose   bool
 

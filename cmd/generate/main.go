@@ -119,7 +119,7 @@ func runIdiomatic(args []string) {
 		names = splitTrimmed(*framework, ",")
 	}
 
-	// ObjC frameworks → opinionated/idiomatic/framework (purego pipeline).
+	// ObjC frameworks → bindings/frameworks (purego pipeline).
 	reg := loadPureRegistry(*metaDir, defaultFrameworksModulePrefix, defaultLibrariesModulePrefix)
 	if err := purepipeline.GenerateIdiomatic(purepipeline.IdiomaticConfig{
 		Registry:   reg,
@@ -131,7 +131,7 @@ func runIdiomatic(args []string) {
 	}
 	log.Printf("idiomatic frameworks: done → %s", *out)
 
-	// CGo C libraries → opinionated/idiomatic/libraries (CGo pipeline).
+	// CGo C libraries → bindings/libraries (CGo pipeline).
 	cgoReg := loadCGORegistry(*metaDir, defaultLibrariesModulePrefix)
 	if err := cgopipeline.GenerateIdiomaticLibraries(cgopipeline.IdiomaticConfig{
 		Registry:      cgoReg,
