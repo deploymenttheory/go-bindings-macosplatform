@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.17.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.16.0...v0.17.0) (2026-07-21)
+
+
+### Features
+
+* make the idiomatic layer the sole public API under bindings/ ([#82](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/82)) ([2f52d47](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/2f52d47a8e55e0ba22e3e42eb47d25a1d63a04a6))
+* **parity:** close all 276 residual gaps — idiomatic now covers raw fully ([82f6513](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/82f65134d691adeec1ed9a3a455310b369913f73))
+
+
+### Bug Fixes
+
+* **idiomatic:** restore typedef-alias gather gate to stop library over-emission ([#86](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/86)) ([9c28b69](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/9c28b69f92e7d81dd82b1f5b4f7e875245635768))
+
 ## [0.16.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.15.0...v0.16.0) (2026-07-09)
 
 
