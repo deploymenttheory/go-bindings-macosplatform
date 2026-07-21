@@ -66,7 +66,11 @@ func EmitProtocols(
 // actually declare (mirroring buildProtocolView's filter: available,
 // non-optional, deduplicated by Go method name) into the parity manifest.
 // Methods are keyed on the protocol name plus the ObjC selector.
-func recordProtocol(rec *emitmanifest.Recorder, framework, pkgName, name, goName string, proto meta.Protocol) {
+func recordProtocol(
+	rec *emitmanifest.Recorder,
+	framework, pkgName, name, goName string,
+	proto meta.Protocol,
+) {
 	if rec == nil {
 		return
 	}
@@ -92,9 +96,14 @@ func recordProtocol(rec *emitmanifest.Recorder, framework, pkgName, name, goName
 			Style:     emitmanifest.StyleRaw,
 			Kind:      emitmanifest.KindProtocolMethod,
 			Framework: framework,
-			MetaKey:   emitmanifest.MetaKey(framework, emitmanifest.KindProtocolMethod, name, method.Selector),
-			GoPkg:     pkgName,
-			GoSymbol:  goMethodName,
+			MetaKey: emitmanifest.MetaKey(
+				framework,
+				emitmanifest.KindProtocolMethod,
+				name,
+				method.Selector,
+			),
+			GoPkg:    pkgName,
+			GoSymbol: goMethodName,
 		})
 	}
 }

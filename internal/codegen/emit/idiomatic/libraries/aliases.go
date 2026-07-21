@@ -23,7 +23,11 @@ import (
 // rather than re-derived from metadata, so it always matches exactly what the raw
 // layer exports — names, dedup, and skips included. Nothing is written when the
 // raw package has no re-exportable declarations.
-func EmitAliases(w *bytes.Buffer, pkgName, rawImportPath, rawSrcDir string, skip map[string]bool) error {
+func EmitAliases(
+	w *bytes.Buffer,
+	pkgName, rawImportPath, rawSrcDir string,
+	skip map[string]bool,
+) error {
 	types, consts, vars, err := collectRawExports(rawSrcDir)
 	if err != nil {
 		return err
@@ -186,7 +190,12 @@ func collectRawExports(rawSrcDir string) (types, consts, vars []string, err erro
 		if name == "cgo.go" || name == "doc.go" {
 			continue
 		}
-		file, perr := parser.ParseFile(fset, filepath.Join(rawSrcDir, name), nil, parser.SkipObjectResolution)
+		file, perr := parser.ParseFile(
+			fset,
+			filepath.Join(rawSrcDir, name),
+			nil,
+			parser.SkipObjectResolution,
+		)
 		if perr != nil {
 			return nil, nil, nil, fmt.Errorf("parse %s: %w", name, perr)
 		}

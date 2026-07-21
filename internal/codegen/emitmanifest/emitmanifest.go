@@ -66,11 +66,11 @@ type Entry struct {
 	// ".<field>", a method appends ".<selector>"). It must be identical across
 	// the two styles for the same construct — it is derived from metadata, never
 	// from the emitted Go name.
-	MetaKey string `json:"meta_key"`
+	MetaKey string `json:"metaKey"`
 	// GoPkg is the emitted Go package name (e.g. "foundation").
-	GoPkg string `json:"go_pkg"`
+	GoPkg string `json:"goPkg"`
 	// GoSymbol is the Go identifier actually emitted (e.g. "NSRange" or "Range").
-	GoSymbol string `json:"go_symbol"`
+	GoSymbol string `json:"goSymbol"`
 	// Derived marks helper constructs that are mechanically derived rather than
 	// direct SDK surface (proxy types, duck-typed interfaces). They are recorded
 	// for visibility but excluded from the parity denominator.

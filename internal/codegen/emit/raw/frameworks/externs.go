@@ -58,9 +58,14 @@ func EmitExterns(
 			Style:     emitmanifest.StyleRaw,
 			Kind:      emitmanifest.KindExtern,
 			Framework: framework.Framework,
-			MetaKey:   emitmanifest.MetaKey(framework.Framework, emitmanifest.KindExtern, ext.Name, ""),
-			GoPkg:     pkgName,
-			GoSymbol:  goName,
+			MetaKey: emitmanifest.MetaKey(
+				framework.Framework,
+				emitmanifest.KindExtern,
+				ext.Name,
+				"",
+			),
+			GoPkg:    pkgName,
+			GoSymbol: goName,
 		})
 	}
 	if len(externs) == 0 {
@@ -86,7 +91,10 @@ func EmitExterns(
 		if !isClassPtr {
 			fromIDCall = ""
 		}
-		views = append(views, buildExternTypedView(ext, goType, dylibVarName, mapper.IsEnumType(goType), fromIDCall))
+		views = append(
+			views,
+			buildExternTypedView(ext, goType, dylibVarName, mapper.IsEnumType(goType), fromIDCall),
+		)
 	}
 
 	out, err := render.Externs(views)
@@ -150,7 +158,12 @@ func isUnexportedXPkg(goType string) bool {
 // buildExternTypedView resolves an extern with a usable Go type into a typed
 // accessor view, selecting the body Form by the type's nature (ObjC object,
 // char* string, or value type).
-func buildExternTypedView(ext meta.Extern, goType, dylibVarName string, isEnum bool, fromIDCall string) view.Extern {
+func buildExternTypedView(
+	ext meta.Extern,
+	goType, dylibVarName string,
+	isEnum bool,
+	fromIDCall string,
+) view.Extern {
 	built := view.Extern{
 		CommentBlock: externCommentBlock(ext),
 		GoName:       exportedExternName(ext.Name),

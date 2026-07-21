@@ -148,7 +148,9 @@ func emitClass(
 	imports := make(typemap.ImportSet)
 
 	// Type declaration.
-	typeDeclOut, err := render.ClassTypeDecl(buildClassTypeDeclView(className, cls, isGeneric, genericParams, framework, reg, imports))
+	typeDeclOut, err := render.ClassTypeDecl(
+		buildClassTypeDeclView(className, cls, isGeneric, genericParams, framework, reg, imports),
+	)
 	if err != nil {
 		return err
 	}
@@ -162,7 +164,9 @@ func emitClass(
 	body.Write(classVarsOut)
 
 	// Constructor (XFromID).
-	fromIDOut, err := render.FromIDConstructor(buildFromIDConstructorView(className, isGeneric, genericParams))
+	fromIDOut, err := render.FromIDConstructor(
+		buildFromIDConstructorView(className, isGeneric, genericParams),
+	)
 	if err != nil {
 		return err
 	}
@@ -273,8 +277,12 @@ func buildClassTypeDeclView(
 	}
 	// Apple's class documentation URLs follow a deterministic lowercase scheme,
 	// so the link is computable from metadata alone (method URLs are not).
-	fmt.Fprintf(&comment, "// Apple documentation: https://developer.apple.com/documentation/%s/%s\n",
-		strings.ToLower(framework), strings.ToLower(className))
+	fmt.Fprintf(
+		&comment,
+		"// Apple documentation: https://developer.apple.com/documentation/%s/%s\n",
+		strings.ToLower(framework),
+		strings.ToLower(className),
+	)
 	comment.WriteString(deprecatedComment(cls.Availability))
 
 	typeHeader := className
@@ -381,7 +389,11 @@ func buildClassVarsView(className string, selectors []selectorEntry) view.ClassV
 // buildFromIDConstructorView resolves a class's XFromID factory: its signature
 // (generic when the class has type parameters) and the type literal allocated
 // for the wrapper.
-func buildFromIDConstructorView(className string, isGeneric bool, genericParams []string) view.FromIDConstructor {
+func buildFromIDConstructorView(
+	className string,
+	isGeneric bool,
+	genericParams []string,
+) view.FromIDConstructor {
 	signature := fmt.Sprintf("func %sFromID(id objc.ID) *%s", className, className)
 	if isGeneric {
 		// Generic version — use AnyObject constraint (= any) to accept both

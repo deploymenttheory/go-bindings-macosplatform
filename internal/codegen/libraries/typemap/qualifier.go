@@ -186,7 +186,7 @@ func (q qualifier) structType(name, owner string, addPointer bool) string {
 // bsdType returns the Go type for a POSIX/BSD struct from the bsd package
 // (e.g. bsd.Timespec, *bsd.EtherAddr). goName is the exported Go type name
 // in the bsd package (e.g. "Timespec", "EtherAddr"). The bsd import path is
-// derived from the module prefix by stripping the "/frameworks" suffix.
+// pinned to the public BsdModulePath (bsd stays outside bindings/internal/raw).
 func (q qualifier) bsdType(goName string, addPointer bool) string {
 	prefix := ""
 	if addPointer {
@@ -259,7 +259,11 @@ func (m *Mapper) qualifiedType(class, typeExpr string, ctx Context, imports Impo
 	return m.buildQualifier(ctx, imports).classType(class, typeExpr)
 }
 
-func (m *Mapper) qualifiedFrameworkCFType(name, owner string, ctx Context, imports ImportSet) string {
+func (m *Mapper) qualifiedFrameworkCFType(
+	name, owner string,
+	ctx Context,
+	imports ImportSet,
+) string {
 	return m.buildQualifier(ctx, imports).frameworkCFType(name, owner)
 }
 
@@ -275,11 +279,12 @@ func (m *Mapper) qualifiedProtocolIDType(proto string, ctx Context, imports Impo
 	return m.buildQualifier(ctx, imports).protocolIDType(proto, m.ProtocolProxyIndex)
 }
 
-func (m *Mapper) protocolGoName(proto, owner string, ctx Context, imports ImportSet) string {
-	return m.buildQualifier(ctx, imports).protocolGoName(proto, owner)
-}
-
-func (m *Mapper) qualifiedStructType(name, owner string, addPointer bool, ctx Context, imports ImportSet) string {
+func (m *Mapper) qualifiedStructType(
+	name, owner string,
+	addPointer bool,
+	ctx Context,
+	imports ImportSet,
+) string {
 	return m.buildQualifier(ctx, imports).structType(name, owner, addPointer)
 }
 
@@ -287,7 +292,12 @@ func (m *Mapper) qualifiedCFType(name string, ctx Context, imports ImportSet) st
 	return m.buildQualifier(ctx, imports).cfType(name)
 }
 
-func (m *Mapper) qualifiedBSDType(goName string, addPointer bool, ctx Context, imports ImportSet) string {
+func (m *Mapper) qualifiedBSDType(
+	goName string,
+	addPointer bool,
+	ctx Context,
+	imports ImportSet,
+) string {
 	return m.buildQualifier(ctx, imports).bsdType(goName, addPointer)
 }
 

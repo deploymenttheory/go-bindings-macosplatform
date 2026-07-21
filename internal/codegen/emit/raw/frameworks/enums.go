@@ -56,9 +56,14 @@ func EmitEnums(w io.Writer, framework *meta.FrameworkMeta, rec *emitmanifest.Rec
 				Style:     emitmanifest.StyleRaw,
 				Kind:      emitmanifest.KindEnum,
 				Framework: framework.Framework,
-				MetaKey:   emitmanifest.MetaKey(framework.Framework, emitmanifest.KindEnum, name, ""),
-				GoPkg:     pkgName,
-				GoSymbol:  built.GoName,
+				MetaKey: emitmanifest.MetaKey(
+					framework.Framework,
+					emitmanifest.KindEnum,
+					name,
+					"",
+				),
+				GoPkg:    pkgName,
+				GoSymbol: built.GoName,
 			})
 			recordEnumMembers(rec, framework.Framework, pkgName, enum, nil)
 		}
@@ -80,7 +85,12 @@ func EmitEnums(w io.Writer, framework *meta.FrameworkMeta, rec *emitmanifest.Rec
 // the owning enum) so the key matches regardless of how each style groups or
 // renames the enclosing type. namedMemberNames is non-nil only for anonymous
 // enums, where a member already covered by a named enum is not emitted here.
-func recordEnumMembers(rec *emitmanifest.Recorder, framework, pkgName string, enum meta.Enum, namedMemberNames map[string]bool) {
+func recordEnumMembers(
+	rec *emitmanifest.Recorder,
+	framework, pkgName string,
+	enum meta.Enum,
+	namedMemberNames map[string]bool,
+) {
 	if rec == nil {
 		return
 	}
@@ -95,9 +105,14 @@ func recordEnumMembers(rec *emitmanifest.Recorder, framework, pkgName string, en
 			Style:     emitmanifest.StyleRaw,
 			Kind:      emitmanifest.KindEnumMember,
 			Framework: framework,
-			MetaKey:   emitmanifest.MetaKey(framework, emitmanifest.KindEnumMember, member.Name, ""),
-			GoPkg:     pkgName,
-			GoSymbol:  naming.GoTypeName(member.Name),
+			MetaKey: emitmanifest.MetaKey(
+				framework,
+				emitmanifest.KindEnumMember,
+				member.Name,
+				"",
+			),
+			GoPkg:    pkgName,
+			GoSymbol: naming.GoTypeName(member.Name),
 		})
 	}
 }
@@ -150,7 +165,10 @@ func buildNamedEnumView(name string, enum meta.Enum) view.Enum {
 			if member.Availability.IsUnavailable || member.Value == "0" {
 				continue
 			}
-			built.StringMembers = append(built.StringMembers, view.EnumMember{ConstName: naming.GoTypeName(member.Name)})
+			built.StringMembers = append(
+				built.StringMembers,
+				view.EnumMember{ConstName: naming.GoTypeName(member.Name)},
+			)
 		}
 	} else {
 		emittedValues := make(map[string]bool)
@@ -159,7 +177,10 @@ func buildNamedEnumView(name string, enum meta.Enum) view.Enum {
 				continue
 			}
 			emittedValues[member.Value] = true
-			built.StringMembers = append(built.StringMembers, view.EnumMember{ConstName: naming.GoTypeName(member.Name)})
+			built.StringMembers = append(
+				built.StringMembers,
+				view.EnumMember{ConstName: naming.GoTypeName(member.Name)},
+			)
 		}
 	}
 	return built

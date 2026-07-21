@@ -50,9 +50,14 @@ func EmitFunctions(
 			Style:     emitmanifest.StyleRaw,
 			Kind:      emitmanifest.KindFunction,
 			Framework: framework.Framework,
-			MetaKey:   emitmanifest.MetaKey(framework.Framework, emitmanifest.KindFunction, fn.Name, ""),
-			GoPkg:     pkgName,
-			GoSymbol:  naming.ExportedFunctionName(fn.Name),
+			MetaKey: emitmanifest.MetaKey(
+				framework.Framework,
+				emitmanifest.KindFunction,
+				fn.Name,
+				"",
+			),
+			GoPkg:    pkgName,
+			GoSymbol: naming.ExportedFunctionName(fn.Name),
 		})
 	}
 
@@ -63,7 +68,10 @@ func EmitFunctions(
 	// wrapper functions use the high-level Go types.
 	functionFile := view.FunctionFile{}
 	for _, fn := range fns {
-		functionFile.Vars = append(functionFile.Vars, buildFunctionVarView(fn, ctx, mapper, imports, ownerIndex))
+		functionFile.Vars = append(
+			functionFile.Vars,
+			buildFunctionVarView(fn, ctx, mapper, imports, ownerIndex),
+		)
 	}
 
 	// Collect registration lines to be embedded in the runtime.go init()
@@ -86,7 +94,10 @@ func EmitFunctions(
 
 	// Gather the exported wrapper functions.
 	for _, fn := range fns {
-		functionFile.Wrappers = append(functionFile.Wrappers, buildFunctionWrapperView(fn, ctx, mapper, imports, ownerIndex))
+		functionFile.Wrappers = append(
+			functionFile.Wrappers,
+			buildFunctionWrapperView(fn, ctx, mapper, imports, ownerIndex),
+		)
 	}
 
 	out, err := render.Functions(functionFile)

@@ -101,9 +101,14 @@ func EmitFrameworkWrappers(
 			Style:     emitmanifest.StyleIdiomatic,
 			Kind:      emitmanifest.KindProtocol,
 			Framework: framework.Framework,
-			MetaKey:   emitmanifest.MetaKey(framework.Framework, emitmanifest.KindProtocol, delegate.protocolName, ""),
-			GoPkg:     pkgName,
-			GoSymbol:  delegate.view.IfaceName,
+			MetaKey: emitmanifest.MetaKey(
+				framework.Framework,
+				emitmanifest.KindProtocol,
+				delegate.protocolName,
+				"",
+			),
+			GoPkg:    pkgName,
+			GoSymbol: delegate.view.IfaceName,
 		})
 	}
 
@@ -150,9 +155,14 @@ func EmitFrameworkWrappers(
 			Style:     emitmanifest.StyleIdiomatic,
 			Kind:      emitmanifest.KindClass,
 			Framework: framework.Framework,
-			MetaKey:   emitmanifest.MetaKey(framework.Framework, emitmanifest.KindClass, className, ""),
-			GoPkg:     pkgName,
-			GoSymbol:  goTypeName,
+			MetaKey: emitmanifest.MetaKey(
+				framework.Framework,
+				emitmanifest.KindClass,
+				className,
+				"",
+			),
+			GoPkg:    pkgName,
+			GoSymbol: goTypeName,
 		})
 
 		fname := className + "_generated.go"
@@ -271,7 +281,15 @@ func EmitFrameworkWrappers(
 	}
 	// Go interfaces for the framework's Objective-C protocols not already surfaced
 	// as delegates. Runs after every other construct so takenNames is complete.
-	if err := emitProtocols(outDir, pkgName, rawPkgAlias, fc, mapper, trialNames, takenNames); err != nil {
+	if err := emitProtocols(
+		outDir,
+		pkgName,
+		rawPkgAlias,
+		fc,
+		mapper,
+		trialNames,
+		takenNames,
+	); err != nil {
 		return fmt.Errorf("emit protocols: %w", err)
 	}
 	// Named error values for errors.Is, derived from the framework's error-code

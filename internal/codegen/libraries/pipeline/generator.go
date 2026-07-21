@@ -10,7 +10,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries"
+	rawlib "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/typemap"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
 	swiftemit "github.com/deploymenttheory/go-bindings-macosplatform/internal/swift/emit"
@@ -190,12 +190,16 @@ func GenerateBindings(cfg BindingsConfig) error {
 		}
 	}
 
-	if err := forEachFramework(reg, nil, func(framework *macosplatformmetadata.FrameworkMeta) error {
-		if err := emitFramework(cfg, framework, m, reg); err != nil {
-			return fmt.Errorf("generate %s: %w", framework.Framework, err)
-		}
-		return nil
-	}); err != nil {
+	if err := forEachFramework(
+		reg,
+		nil,
+		func(framework *macosplatformmetadata.FrameworkMeta) error {
+			if err := emitFramework(cfg, framework, m, reg); err != nil {
+				return fmt.Errorf("generate %s: %w", framework.Framework, err)
+			}
+			return nil
+		},
+	); err != nil {
 		return err
 	}
 
@@ -244,7 +248,11 @@ func GenerateBindings(cfg BindingsConfig) error {
 // forEachFramework calls fn for each framework in topological dependency order.
 // When filter is non-empty, only frameworks whose lowercase name appears in the
 // filter set are processed; an empty filter means all frameworks.
-func forEachFramework(reg *Registry, filter []string, fn func(*macosplatformmetadata.FrameworkMeta) error) error {
+func forEachFramework(
+	reg *Registry,
+	filter []string,
+	fn func(*macosplatformmetadata.FrameworkMeta) error,
+) error {
 	filterSet := make(map[string]bool, len(filter))
 	for _, frameworkName := range filter {
 		filterSet[strings.ToLower(frameworkName)] = true
@@ -291,8 +299,9 @@ func sortFrameworksByDependency(reg *Registry) []*macosplatformmetadata.Framewor
 			inDegree[frameworkName] = 0
 		}
 		for dep := range deps[frameworkName] {
-			inDegree[dep] = inDegree[dep] // ensure present
-			_ = dep
+			if _, ok := inDegree[dep]; !ok {
+				inDegree[dep] = 0 // ensure every referenced node is present
+			}
 		}
 	}
 	// recalculate: inDegree[A] = number of frameworks that A depends on
@@ -849,7 +858,10 @@ func writeGoHeaderRuntime(buf *bytes.Buffer, pkgName string) {
 	fmt.Fprintf(buf, "package %s\n\n", pkgName)
 	fmt.Fprintf(buf, "import (\n")
 	fmt.Fprintf(buf, "\t\"unsafe\"\n")
-	fmt.Fprintf(buf, "\t\"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo\"\n")
+	fmt.Fprintf(
+		buf,
+		"\t\"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo\"\n",
+	)
 	fmt.Fprintf(buf, ")\n\n")
 	fmt.Fprintf(buf, "var _ unsafe.Pointer   // suppress unused import\n")
 	fmt.Fprintf(buf, "var _ cgo.Object = nil // suppress unused import\n\n")

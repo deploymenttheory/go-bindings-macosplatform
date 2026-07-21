@@ -9,7 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
@@ -117,9 +117,14 @@ func emitConstants(
 			Style:     emitmanifest.StyleIdiomatic,
 			Kind:      emitmanifest.KindExtern,
 			Framework: framework.Framework,
-			MetaKey:   emitmanifest.MetaKey(framework.Framework, emitmanifest.KindExtern, ext.Name, ""),
-			GoPkg:     pkgName,
-			GoSymbol:  goName,
+			MetaKey: emitmanifest.MetaKey(
+				framework.Framework,
+				emitmanifest.KindExtern,
+				ext.Name,
+				"",
+			),
+			GoPkg:    pkgName,
+			GoSymbol: goName,
 		})
 
 		_ = typedString // current accessors do not vary by typed-ness; reserved
@@ -186,7 +191,11 @@ func emitConstants(
 		}
 	}
 
-	constants := make([]view.Constant, 0, len(cfRefs)+len(strItems)+len(strIDs)+len(classItems)+len(valItems))
+	constants := make(
+		[]view.Constant,
+		0,
+		len(cfRefs)+len(strItems)+len(strIDs)+len(classItems)+len(valItems),
+	)
 	constants = append(constants, cfRefs...)
 	constants = append(constants, strItems...)
 	constants = append(constants, strIDs...)

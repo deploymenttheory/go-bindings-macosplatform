@@ -20,7 +20,11 @@ import (
 // recordIdiomaticEnum records an emitted idiomatic enum type and its available
 // members into the parity manifest, keyed on the ObjC/C name (identical to the
 // raw oracle's key) so the two styles join. It is a no-op on a nil recorder.
-func recordIdiomaticEnum(rec *emitmanifest.Recorder, framework, pkgName, objcKey, localName string, enum meta.Enum) {
+func recordIdiomaticEnum(
+	rec *emitmanifest.Recorder,
+	framework, pkgName, objcKey, localName string,
+	enum meta.Enum,
+) {
 	if rec == nil {
 		return
 	}
@@ -40,9 +44,14 @@ func recordIdiomaticEnum(rec *emitmanifest.Recorder, framework, pkgName, objcKey
 			Style:     emitmanifest.StyleIdiomatic,
 			Kind:      emitmanifest.KindEnumMember,
 			Framework: framework,
-			MetaKey:   emitmanifest.MetaKey(framework, emitmanifest.KindEnumMember, member.Name, ""),
-			GoPkg:     pkgName,
-			GoSymbol:  naming.GoTypeName(member.Name),
+			MetaKey: emitmanifest.MetaKey(
+				framework,
+				emitmanifest.KindEnumMember,
+				member.Name,
+				"",
+			),
+			GoPkg:    pkgName,
+			GoSymbol: naming.GoTypeName(member.Name),
 		})
 	}
 }
@@ -143,7 +152,14 @@ func emitEnums(
 		}
 		emittedTypeNames[localName] = true
 		usedConstNames[localName] = true
-		recordIdiomaticEnum(fc.manifest, framework.Framework, pkgName, goTypeToKey[goType], localName, enum)
+		recordIdiomaticEnum(
+			fc.manifest,
+			framework.Framework,
+			pkgName,
+			goTypeToKey[goType],
+			localName,
+			enum,
+		)
 		if v.IsBitmask {
 			needsStrings = true
 		} else {
@@ -155,7 +171,15 @@ func emitEnums(
 	// Anonymous (tag-less) enums: their members are emitted as one untyped const
 	// block, dropping any a named enum already covers and any whose name is not
 	// exportable, with the same first-wins collision resolution.
-	anonMembers := buildAnonConstMembers(anonEnums, framework.Framework, pkgName, fc.prefix, namedMemberNames, usedConstNames, fc.manifest)
+	anonMembers := buildAnonConstMembers(
+		anonEnums,
+		framework.Framework,
+		pkgName,
+		fc.prefix,
+		namedMemberNames,
+		usedConstNames,
+		fc.manifest,
+	)
 
 	if len(enums) == 0 && len(anonMembers) == 0 {
 		return nil
@@ -201,7 +225,8 @@ func buildAnonConstMembers(
 	var cands []meta.EnumMember
 	for _, enum := range anonEnums {
 		for _, member := range enum.Members {
-			if member.Availability.IsUnavailable || namedMemberNames[member.Name] || seenName[member.Name] {
+			if member.Availability.IsUnavailable || namedMemberNames[member.Name] ||
+				seenName[member.Name] {
 				continue
 			}
 			seenName[member.Name] = true
@@ -218,7 +243,10 @@ func buildAnonConstMembers(
 		}
 		constName := preferred
 		if usedConstNames[constName] {
-			if raw := naming.GoTypeName(member.Name); isExportedGoIdent(raw) && !usedConstNames[raw] {
+			if raw := naming.GoTypeName(
+				member.Name,
+			); isExportedGoIdent(raw) &&
+				!usedConstNames[raw] {
 				constName = raw
 			} else {
 				constName = uniquifyName(constName, usedConstNames)
@@ -229,9 +257,14 @@ func buildAnonConstMembers(
 			Style:     emitmanifest.StyleIdiomatic,
 			Kind:      emitmanifest.KindEnumMember,
 			Framework: framework,
-			MetaKey:   emitmanifest.MetaKey(framework, emitmanifest.KindEnumMember, member.Name, ""),
-			GoPkg:     pkgName,
-			GoSymbol:  constName,
+			MetaKey: emitmanifest.MetaKey(
+				framework,
+				emitmanifest.KindEnumMember,
+				member.Name,
+				"",
+			),
+			GoPkg:    pkgName,
+			GoSymbol: constName,
 		})
 		out = append(out, view.EnumMember{
 			ConstName:    constName,
@@ -264,7 +297,12 @@ func uniquifyName(name string, used map[string]bool) string {
 // namespace, so a member whose preferred idiomatic spelling is taken falls back
 // to its raw (un-deprefixed) spelling, then to a numeric suffix — first spelling
 // wins. Each emitted member's final name is added to usedConstNames.
-func buildEnumView(goName string, enum meta.Enum, prefix string, usedConstNames map[string]bool) view.Enum {
+func buildEnumView(
+	goName string,
+	enum meta.Enum,
+	prefix string,
+	usedConstNames map[string]bool,
+) view.Enum {
 	goType := enum.GoType
 	if goType == "" {
 		goType = "int64"

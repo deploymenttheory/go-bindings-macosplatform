@@ -137,7 +137,11 @@ func ComputeEmittableStructs(
 // local type rather than the raw package's. It must cover every struct emitStructs
 // will emit (not just the "simple" emittable set), or an own-enum field would name
 // a type emitEnums never wrote. takenNames is already fully populated at call time.
-func registerLocalStructEnumRefs(fc *frameworkContext, mapper *typemap.Mapper, takenNames map[string]bool) {
+func registerLocalStructEnumRefs(
+	fc *frameworkContext,
+	mapper *typemap.Mapper,
+	takenNames map[string]bool,
+) {
 	ctx := typemap.Context{Framework: fc.framework.Framework}
 	_, _, structOf := emittableStructNames(fc.framework, takenNames)
 	for _, s := range structOf {
@@ -174,7 +178,10 @@ func structFieldGoName(fieldName string) string {
 // gates same-package field references so a field never names a struct that was
 // skipped. taken is the fully-populated set of claimed names at struct-emission
 // time (structs are emitted last, after every other construct).
-func emittableStructNames(framework *meta.FrameworkMeta, taken map[string]bool) (goNames []string, keyOf map[string]string, structOf map[string]meta.Struct) {
+func emittableStructNames(
+	framework *meta.FrameworkMeta,
+	taken map[string]bool,
+) (goNames []string, keyOf map[string]string, structOf map[string]meta.Struct) {
 	keyOf = make(map[string]string)
 	structOf = make(map[string]meta.Struct)
 	seen := make(map[string]bool)
@@ -235,13 +242,21 @@ func emitStructs(
 				Style:     emitmanifest.StyleIdiomatic,
 				Kind:      emitmanifest.KindStruct,
 				Framework: framework.Framework,
-				MetaKey:   emitmanifest.MetaKey(framework.Framework, emitmanifest.KindStruct, keyOf[goName], ""),
-				GoPkg:     pkgName,
-				GoSymbol:  goName,
+				MetaKey: emitmanifest.MetaKey(
+					framework.Framework,
+					emitmanifest.KindStruct,
+					keyOf[goName],
+					"",
+				),
+				GoPkg:    pkgName,
+				GoSymbol: goName,
 			})
 		}
 		if len(s.Fields) == 0 {
-			structs = append(structs, view.Struct{GoName: goName, Doc: cleanDoc(s.Doc), IsOpaque: true})
+			structs = append(
+				structs,
+				view.Struct{GoName: goName, Doc: cleanDoc(s.Doc), IsOpaque: true},
+			)
 			continue
 		}
 		var fields []view.Field
@@ -264,7 +279,15 @@ func emitStructs(
 	// Typedef aliases (NSRect = CGRect, opaque-pointer FooRef = *Foo) share the
 	// file, matching the raw layer's single _structs.go. willEmit lets an alias
 	// reference a struct emitted just above; taken names avoid a redeclaration.
-	aliases := buildTypedefAliasViews(framework, mapper, fc, rawPkgAlias, willEmit, takenNames, imports)
+	aliases := buildTypedefAliasViews(
+		framework,
+		mapper,
+		fc,
+		rawPkgAlias,
+		willEmit,
+		takenNames,
+		imports,
+	)
 
 	if len(structs) == 0 && len(aliases) == 0 {
 		return nil
@@ -359,9 +382,14 @@ func buildTypedefAliasViews(
 				Style:     emitmanifest.StyleIdiomatic,
 				Kind:      emitmanifest.KindTypedefAlias,
 				Framework: framework.Framework,
-				MetaKey:   emitmanifest.MetaKey(framework.Framework, emitmanifest.KindTypedefAlias, goName, ""),
-				GoPkg:     naming.PackageName(framework.Framework),
-				GoSymbol:  goName,
+				MetaKey: emitmanifest.MetaKey(
+					framework.Framework,
+					emitmanifest.KindTypedefAlias,
+					goName,
+					"",
+				),
+				GoPkg:    naming.PackageName(framework.Framework),
+				GoSymbol: goName,
 			})
 		}
 		out = append(out, view.TypedefAlias{

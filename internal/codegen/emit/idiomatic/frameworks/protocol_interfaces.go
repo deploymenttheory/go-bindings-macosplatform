@@ -88,13 +88,22 @@ func emitProtocols(
 			Style:     emitmanifest.StyleIdiomatic,
 			Kind:      emitmanifest.KindProtocol,
 			Framework: framework.Framework,
-			MetaKey:   emitmanifest.MetaKey(framework.Framework, emitmanifest.KindProtocol, protocolName, ""),
-			GoPkg:     pkgName,
-			GoSymbol:  ifaceName,
+			MetaKey: emitmanifest.MetaKey(
+				framework.Framework,
+				emitmanifest.KindProtocol,
+				protocolName,
+				"",
+			),
+			GoPkg:    pkgName,
+			GoSymbol: ifaceName,
 		})
 
 		protocols = append(protocols, view.Protocol{
-			Doc:     fmt.Sprintf("%s is the Go form of the Objective-C protocol %s.", ifaceName, protocolName),
+			Doc: fmt.Sprintf(
+				"%s is the Go form of the Objective-C protocol %s.",
+				ifaceName,
+				protocolName,
+			),
 			GoName:  ifaceName,
 			Methods: methods,
 		})
@@ -148,16 +157,29 @@ func buildProtocolInterfaceMethods(
 		}
 		seenGoNames[goName] = true
 
-		signature := buildProtocolMethodSignature(method, fc, ctx, mapper, rawPkgAlias, trialNames, imports)
+		signature := buildProtocolMethodSignature(
+			method,
+			fc,
+			ctx,
+			mapper,
+			rawPkgAlias,
+			trialNames,
+			imports,
+		)
 		methods = append(methods, view.ProtocolMethod{GoName: goName, Signature: signature})
 
 		fc.manifest.Record(emitmanifest.Entry{
 			Style:     emitmanifest.StyleIdiomatic,
 			Kind:      emitmanifest.KindProtocolMethod,
 			Framework: framework,
-			MetaKey:   emitmanifest.MetaKey(framework, emitmanifest.KindProtocolMethod, protocolName, method.Selector),
-			GoPkg:     pkgName,
-			GoSymbol:  goName,
+			MetaKey: emitmanifest.MetaKey(
+				framework,
+				emitmanifest.KindProtocolMethod,
+				protocolName,
+				method.Selector,
+			),
+			GoPkg:    pkgName,
+			GoSymbol: goName,
 		})
 	}
 	return methods, imports
@@ -180,7 +202,7 @@ func buildProtocolMethodSignature(
 		return "obj.Object"
 	}
 
-	var params []string
+	params := make([]string, 0, len(method.Params))
 	usedNames := map[string]int{}
 	for i, param := range method.Params {
 		pName := safeParamName(naming.ParamName(param.Name))
@@ -191,7 +213,15 @@ func buildProtocolMethodSignature(
 		if usedNames[pName] > 1 {
 			pName = fmt.Sprintf("%s%d", pName, usedNames[pName])
 		}
-		sig, _, imps, ok := idiomaticArg(pName, param.ObjCType, ctx, mapper, fc, rawPkgAlias, trialNames)
+		sig, _, imps, ok := idiomaticArg(
+			pName,
+			param.ObjCType,
+			ctx,
+			mapper,
+			fc,
+			rawPkgAlias,
+			trialNames,
+		)
 		if !ok {
 			sig = degradeObj()
 		} else {
@@ -200,7 +230,14 @@ func buildProtocolMethodSignature(
 		params = append(params, pName+" "+sig)
 	}
 
-	retType, _, _, _, rimps, ok := idiomaticRet(method.Return.ObjCType, ctx, mapper, fc, rawPkgAlias, trialNames)
+	retType, _, _, _, rimps, ok := idiomaticRet(
+		method.Return.ObjCType,
+		ctx,
+		mapper,
+		fc,
+		rawPkgAlias,
+		trialNames,
+	)
 	retSig := ""
 	switch {
 	case !ok:

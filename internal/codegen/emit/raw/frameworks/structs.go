@@ -109,9 +109,14 @@ func EmitStructs(
 			Style:     emitmanifest.StyleRaw,
 			Kind:      emitmanifest.KindTypedefAlias,
 			Framework: framework.Framework,
-			MetaKey:   emitmanifest.MetaKey(framework.Framework, emitmanifest.KindTypedefAlias, alias.GoName, ""),
-			GoPkg:     pkgName,
-			GoSymbol:  alias.GoName,
+			MetaKey: emitmanifest.MetaKey(
+				framework.Framework,
+				emitmanifest.KindTypedefAlias,
+				alias.GoName,
+				"",
+			),
+			GoPkg:    pkgName,
+			GoSymbol: alias.GoName,
 		})
 	}
 	aliasOut, err := render.TypedefAliases(aliases)
@@ -264,15 +269,25 @@ func buildTypedefAliasViews(
 		}
 		if a.isPointer {
 			views = append(views, view.TypedefAlias{
-				CommentBlock: fmt.Sprintf("// %s is an opaque pointer to %s (C typedef %s).\n", goAliasName, a.target, a.name),
-				GoName:       goAliasName,
-				RHS:          "*" + targetType,
+				CommentBlock: fmt.Sprintf(
+					"// %s is an opaque pointer to %s (C typedef %s).\n",
+					goAliasName,
+					a.target,
+					a.name,
+				),
+				GoName: goAliasName,
+				RHS:    "*" + targetType,
 			})
 		} else {
 			views = append(views, view.TypedefAlias{
-				CommentBlock: fmt.Sprintf("// %s is an alias for %s (C typedef %s).\n", goAliasName, a.target, a.name),
-				GoName:       goAliasName,
-				RHS:          targetType,
+				CommentBlock: fmt.Sprintf(
+					"// %s is an alias for %s (C typedef %s).\n",
+					goAliasName,
+					a.target,
+					a.name,
+				),
+				GoName: goAliasName,
+				RHS:    targetType,
 			})
 		}
 	}
