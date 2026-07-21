@@ -4,6 +4,10 @@
 
 package imageio
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+)
+
 // An opaque type that you use to write image data to a URL, data object, or data consumer.
 type CGImageDestination struct{}
 
@@ -15,3 +19,6 @@ type CGImageMetadataTag struct{}
 
 // An opaque type that you use to read image data from a URL, data object, or data consumer.
 type CGImageSource struct{}
+
+// Id is an alias for the objc_object value type.
+type Id = *foundation.ObjcObject

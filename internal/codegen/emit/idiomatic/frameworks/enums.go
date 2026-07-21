@@ -80,7 +80,19 @@ func emitEnums(
 	// matching the raw layer, which never emits a constant twice.
 	namedMemberNames := make(map[string]bool)
 	var anonEnums []meta.Enum
-	for key, enum := range framework.Enums {
+	// Iterate enum keys in sorted order so the exported-name recovery below (which
+	// can make two tags collapse to the same spelling) resolves collisions
+	// deterministically rather than in Go's random map order.
+	enumKeys := make([]string, 0, len(framework.Enums))
+	for key := range framework.Enums {
+		enumKeys = append(enumKeys, key)
+	}
+	sort.Strings(enumKeys)
+	// usedGoTypes guards against two enum tags collapsing to the same Go type name
+	// (only possible once leading underscores are trimmed, below).
+	usedGoTypes := map[string]bool{}
+	for _, key := range enumKeys {
+		enum := framework.Enums[key]
 		if enum.Availability.IsUnavailable {
 			continue
 		}
@@ -93,8 +105,22 @@ func emitEnums(
 		}
 		goType := naming.GoTypeName(key)
 		if !isExportedGoIdent(goType) {
-			continue
+			// Many C enums carry an underscore-prefixed tag (__CFByteOrder,
+			// _CGLError, __CE_DataType) alongside a clean typedef. The raw layer
+			// emits them as unexported types, usable only inside their own
+			// package; trimming the leading underscores recovers an exported Go
+			// name so the type and every one of its constants surface in the
+			// public idiomatic package too.
+			stripped := strings.TrimLeft(goType, "_")
+			if !isExportedGoIdent(stripped) {
+				continue // still not an exportable identifier (e.g. leading digit)
+			}
+			goType = stripped
 		}
+		if usedGoTypes[goType] {
+			goType = uniquifyName(goType, usedGoTypes)
+		}
+		usedGoTypes[goType] = true
 		enumsByGoType[goType] = enum
 		goTypeToKey[goType] = key
 	}
@@ -146,10 +172,12 @@ func emitEnums(
 				localName = uniquifyName(localName, emittedTypeNames)
 			}
 		}
+		// Emit the enum type even when it has no available members. Raw does the
+		// same (a bare `type X int` + empty const block + default String), which
+		// matters for enums whose every member is macOS-unavailable — e.g. an
+		// iOS-only enum re-exported through an umbrella header. Dropping them here
+		// would silently lose the type from the public API.
 		v := buildEnumView(localName, enum, fc.prefix, usedConstNames)
-		if len(v.Members) == 0 {
-			continue
-		}
 		emittedTypeNames[localName] = true
 		usedConstNames[localName] = true
 		recordIdiomaticEnum(
@@ -239,7 +267,17 @@ func buildAnonConstMembers(
 	for _, member := range cands {
 		preferred := deprefixEnumName(naming.GoTypeName(member.Name), prefix)
 		if !isExportedGoIdent(preferred) {
-			continue // an unexported constant name is not usable by callers
+			// Recover an exported spelling for an underscore-prefixed C constant
+			// (_MixedModeMagic, _kIOPMWakeEventFullWake) by trimming the leading
+			// underscores before deriving the Go name — the same recovery the
+			// named-enum pass performs for underscore-tagged enum types.
+			preferred = deprefixEnumName(
+				naming.GoTypeName(strings.TrimLeft(member.Name, "_")),
+				prefix,
+			)
+			if !isExportedGoIdent(preferred) {
+				continue // still not a usable exported constant name
+			}
 		}
 		constName := preferred
 		if usedConstNames[constName] {

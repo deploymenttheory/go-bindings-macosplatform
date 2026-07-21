@@ -4,6 +4,10 @@
 
 package hypervisor
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+)
+
 // The structure that describes information about an exit from the virtual CPU (vCPU) to the host.
 type HvVcpuExitExceptionT struct {
 	Syndrome        uint64
@@ -21,3 +25,6 @@ type HvVcpuSmeStateT struct {
 	StreamingSVEModeEnabled bool
 	ZaStorageEnabled        bool
 }
+
+// Id is an alias for the objc_object value type.
+type Id = *foundation.ObjcObject

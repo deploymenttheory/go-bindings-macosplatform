@@ -4,6 +4,10 @@
 
 package metadata
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+)
+
 type MDItem struct{}
 
 // This is the type of a reference to an MDLabel.
@@ -19,3 +23,6 @@ type MDQueryBatchingParams struct {
 	UpdateMaxNum   uint
 	UpdateMaxMs    uint
 }
+
+// Id is an alias for the objc_object value type.
+type Id = *foundation.ObjcObject

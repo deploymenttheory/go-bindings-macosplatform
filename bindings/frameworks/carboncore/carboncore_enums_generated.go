@@ -857,6 +857,7 @@ const (
 	SoundDataID                                                             = 1397968452
 	UNORDERED                                                               = 3
 	WDEFNFnd                                                                = 87
+	MixedModeMagic                                                          = 43774
 	AbbrevDate                                                              = 2
 	AbortErr                                                                = -27
 	AcuteUprA                                                               = 231

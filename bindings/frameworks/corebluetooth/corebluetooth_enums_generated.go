@@ -542,6 +542,22 @@ func (e Type) String() string {
 	}
 }
 
+// An option set of device-specific features.
+// Bitmask — values may be combined with |.
+type CentralManagerFeature uint64
+
+const ()
+
+// String returns the CentralManagerFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CentralManagerFeature) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // Values that represent the current state of a central manager object.
 //
 // Deprecated: since macOS 10.13.

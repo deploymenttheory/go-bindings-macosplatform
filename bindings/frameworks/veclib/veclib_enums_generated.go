@@ -2534,6 +2534,32 @@ func (e Sparsegmresvariant) String() string {
 	}
 }
 
+type SparseIterativeMethod_t int32
+
+const (
+	// Conjugate Gradient
+	_SparseMethodCG SparseIterativeMethod_t = 0
+	// GMRES or variant
+	_SparseMethodGMRES SparseIterativeMethod_t = 1
+	// LSMR (Least Squares MINRES)
+	_SparseMethodLSMR SparseIterativeMethod_t = 2
+)
+
+// String returns the SparseIterativeMethod_t constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SparseIterativeMethod_t) String() string {
+	switch e {
+	case _SparseMethodCG:
+		return "_SparseMethodCG"
+	case _SparseMethodGMRES:
+		return "_SparseMethodGMRES"
+	case _SparseMethodLSMR:
+		return "_SparseMethodLSMR"
+	default:
+		return fmt.Sprintf("SparseIterativeMethod_t(%d)", int64(e))
+	}
+}
+
 type Sparseiterativestatus int32
 
 const (
