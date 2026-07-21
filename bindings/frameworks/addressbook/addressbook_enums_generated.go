@@ -9,6 +9,180 @@ import (
 	"strings"
 )
 
+type PropertyType int64
+
+const (
+	KABErrorInProperty             PropertyType = 0
+	KABStringProperty              PropertyType = 1
+	KABIntegerProperty             PropertyType = 2
+	KABRealProperty                PropertyType = 3
+	KABDateProperty                PropertyType = 4
+	KABArrayProperty               PropertyType = 5
+	KABDictionaryProperty          PropertyType = 6
+	KABDataProperty                PropertyType = 7
+	KABDateComponentsProperty      PropertyType = 8
+	KABMultiStringProperty         PropertyType = 257
+	KABMultiIntegerProperty        PropertyType = 258
+	KABMultiRealProperty           PropertyType = 259
+	KABMultiDateProperty           PropertyType = 260
+	KABMultiArrayProperty          PropertyType = 261
+	KABMultiDictionaryProperty     PropertyType = 262
+	KABMultiDataProperty           PropertyType = 263
+	KABMultiDateComponentsProperty PropertyType = 264
+)
+
+// String returns the PropertyType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PropertyType) String() string {
+	switch e {
+	case KABErrorInProperty:
+		return "KABErrorInProperty"
+	case KABStringProperty:
+		return "KABStringProperty"
+	case KABIntegerProperty:
+		return "KABIntegerProperty"
+	case KABRealProperty:
+		return "KABRealProperty"
+	case KABDateProperty:
+		return "KABDateProperty"
+	case KABArrayProperty:
+		return "KABArrayProperty"
+	case KABDictionaryProperty:
+		return "KABDictionaryProperty"
+	case KABDataProperty:
+		return "KABDataProperty"
+	case KABDateComponentsProperty:
+		return "KABDateComponentsProperty"
+	case KABMultiStringProperty:
+		return "KABMultiStringProperty"
+	case KABMultiIntegerProperty:
+		return "KABMultiIntegerProperty"
+	case KABMultiRealProperty:
+		return "KABMultiRealProperty"
+	case KABMultiDateProperty:
+		return "KABMultiDateProperty"
+	case KABMultiArrayProperty:
+		return "KABMultiArrayProperty"
+	case KABMultiDictionaryProperty:
+		return "KABMultiDictionaryProperty"
+	case KABMultiDataProperty:
+		return "KABMultiDataProperty"
+	case KABMultiDateComponentsProperty:
+		return "KABMultiDateComponentsProperty"
+	default:
+		return fmt.Sprintf("PropertyType(%d)", int64(e))
+	}
+}
+
+type SearchComparison int64
+
+const (
+	KABEqual                                  SearchComparison = 0
+	KABNotEqual                               SearchComparison = 1
+	KABLessThan                               SearchComparison = 2
+	KABLessThanOrEqual                        SearchComparison = 3
+	KABGreaterThan                            SearchComparison = 4
+	KABGreaterThanOrEqual                     SearchComparison = 5
+	KABEqualCaseInsensitive                   SearchComparison = 6
+	KABContainsSubString                      SearchComparison = 7
+	KABContainsSubStringCaseInsensitive       SearchComparison = 8
+	KABPrefixMatch                            SearchComparison = 9
+	KABPrefixMatchCaseInsensitive             SearchComparison = 10
+	KABBitsInBitFieldMatch                    SearchComparison = 11
+	KABDoesNotContainSubString                SearchComparison = 12
+	KABDoesNotContainSubStringCaseInsensitive SearchComparison = 13
+	KABNotEqualCaseInsensitive                SearchComparison = 14
+	KABSuffixMatch                            SearchComparison = 15
+	KABSuffixMatchCaseInsensitive             SearchComparison = 16
+	KABWithinIntervalAroundToday              SearchComparison = 17
+	KABWithinIntervalAroundTodayYearless      SearchComparison = 18
+	KABNotWithinIntervalAroundToday           SearchComparison = 19
+	KABNotWithinIntervalAroundTodayYearless   SearchComparison = 20
+	KABWithinIntervalFromToday                SearchComparison = 21
+	KABWithinIntervalFromTodayYearless        SearchComparison = 22
+	KABNotWithinIntervalFromToday             SearchComparison = 23
+	KABNotWithinIntervalFromTodayYearless     SearchComparison = 24
+)
+
+// String returns the SearchComparison constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SearchComparison) String() string {
+	switch e {
+	case KABEqual:
+		return "KABEqual"
+	case KABNotEqual:
+		return "KABNotEqual"
+	case KABLessThan:
+		return "KABLessThan"
+	case KABLessThanOrEqual:
+		return "KABLessThanOrEqual"
+	case KABGreaterThan:
+		return "KABGreaterThan"
+	case KABGreaterThanOrEqual:
+		return "KABGreaterThanOrEqual"
+	case KABEqualCaseInsensitive:
+		return "KABEqualCaseInsensitive"
+	case KABContainsSubString:
+		return "KABContainsSubString"
+	case KABContainsSubStringCaseInsensitive:
+		return "KABContainsSubStringCaseInsensitive"
+	case KABPrefixMatch:
+		return "KABPrefixMatch"
+	case KABPrefixMatchCaseInsensitive:
+		return "KABPrefixMatchCaseInsensitive"
+	case KABBitsInBitFieldMatch:
+		return "KABBitsInBitFieldMatch"
+	case KABDoesNotContainSubString:
+		return "KABDoesNotContainSubString"
+	case KABDoesNotContainSubStringCaseInsensitive:
+		return "KABDoesNotContainSubStringCaseInsensitive"
+	case KABNotEqualCaseInsensitive:
+		return "KABNotEqualCaseInsensitive"
+	case KABSuffixMatch:
+		return "KABSuffixMatch"
+	case KABSuffixMatchCaseInsensitive:
+		return "KABSuffixMatchCaseInsensitive"
+	case KABWithinIntervalAroundToday:
+		return "KABWithinIntervalAroundToday"
+	case KABWithinIntervalAroundTodayYearless:
+		return "KABWithinIntervalAroundTodayYearless"
+	case KABNotWithinIntervalAroundToday:
+		return "KABNotWithinIntervalAroundToday"
+	case KABNotWithinIntervalAroundTodayYearless:
+		return "KABNotWithinIntervalAroundTodayYearless"
+	case KABWithinIntervalFromToday:
+		return "KABWithinIntervalFromToday"
+	case KABWithinIntervalFromTodayYearless:
+		return "KABWithinIntervalFromTodayYearless"
+	case KABNotWithinIntervalFromToday:
+		return "KABNotWithinIntervalFromToday"
+	case KABNotWithinIntervalFromTodayYearless:
+		return "KABNotWithinIntervalFromTodayYearless"
+	default:
+		return fmt.Sprintf("SearchComparison(%d)", int64(e))
+	}
+}
+
+type SearchConjunction int64
+
+const (
+	KABSearchAnd SearchConjunction = 0
+	KABSearchOr  SearchConjunction = 1
+)
+
+// String returns the SearchConjunction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SearchConjunction) String() string {
+	switch e {
+	case KABSearchAnd:
+		return "KABSearchAnd"
+	case KABSearchOr:
+		return "KABSearchOr"
+	default:
+		return fmt.Sprintf("SearchConjunction(%d)", int64(e))
+	}
+}
+
 type EntryID int64
 
 const (

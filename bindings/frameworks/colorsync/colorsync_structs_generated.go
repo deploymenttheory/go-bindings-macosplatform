@@ -4,6 +4,10 @@
 
 package colorsync
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+)
+
 type ColorSyncCMM struct{}
 
 type ColorSyncMD5 struct {
@@ -13,3 +17,6 @@ type ColorSyncMD5 struct {
 type ColorSyncProfile struct{}
 
 type ColorSyncTransform struct{}
+
+// Id is an alias for the objc_object value type.
+type Id = *foundation.ObjcObject

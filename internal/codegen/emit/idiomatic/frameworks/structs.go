@@ -130,6 +130,32 @@ func ComputeEmittableStructs(
 	return emittable
 }
 
+// ComputeAllEmittedStructNames returns every value-struct Go name the idiomatic
+// layer physically writes across all frameworks — the broad, degrade-don't-drop
+// set emitStructs actually emits (available, exported, first-seen), INCLUDING
+// opaque structs and ones with degraded fields that ComputeEmittableStructs
+// (the clean subset) omits. A cross-framework typedef alias needs its target to
+// merely exist, so it consults this set. Name collisions with a class/enum in
+// the owning framework are resolved per-framework at emit time via `taken`,
+// which is not known globally here; the small over-approximation is harmless —
+// a genuinely skipped target would dangle and be caught by the build.
+func ComputeAllEmittedStructNames(frameworks []*meta.FrameworkMeta) map[string]bool {
+	all := make(map[string]bool)
+	for _, framework := range frameworks {
+		for name, s := range framework.Structs {
+			if s.Availability.IsUnavailable {
+				continue
+			}
+			goName := naming.ExportedTypeName(name)
+			if !isExportedGoIdent(goName) {
+				continue
+			}
+			all[goName] = true
+		}
+	}
+	return all
+}
+
 // registerLocalStructEnumRefs marks the framework's own enums that appear as
 // fields of a value struct this package emits (e.g. hv_vcpu_exit_t's reason field
 // of type Hv_exit_reason_t) as referenced, so emitEnums — which runs before
@@ -338,12 +364,16 @@ func buildTypedefAliasViews(
 		bare := strings.TrimSpace(strings.TrimPrefix(t, "struct "))
 		if base, isPtr := strings.CutSuffix(bare, "*"); isPtr {
 			base = strings.TrimSpace(base)
-			if _, ok := framework.Structs[base]; ok {
-				candidates = append(candidates, alias{tName, base, true})
-			}
+			// The target struct need not live in this framework: an opaque-pointer
+			// typedef often aliases a struct owned by another framework (e.g.
+			// AudioComponentInstance → CarbonCore's ComponentInstanceRecord, the
+			// Kerberos GSS typedefs → the gss package's structs). The resolution
+			// pass below localizes and existence-checks the target, so a
+			// non-nameable one is dropped there rather than here.
+			candidates = append(candidates, alias{tName, base, true})
 			continue
 		}
-		if _, ok := framework.Structs[bare]; ok && bare != tName {
+		if bare != tName {
 			candidates = append(candidates, alias{tName, bare, false})
 		}
 	}
@@ -364,11 +394,14 @@ func buildTypedefAliasViews(
 			continue
 		}
 		var rhsCore string
-		if resolved, imps, ok := crossFrameworkValueStruct(targetType, mapper, rawPkgAlias); ok {
+		if !strings.ContainsAny(targetType, ".*[] ") && willEmit[targetType] {
+			// Same-framework value struct emitted just above.
+			rhsCore = targetType
+		} else if resolved, imps, ok := crossFrameworkEmittedStruct(targetType, mapper, rawPkgAlias); ok {
+			// Cross-framework struct the idiomatic layer emits (opaque/degraded
+			// targets are fine — an alias names the type, never its fields).
 			maps.Copy(imports, imps)
 			rhsCore = resolved
-		} else if !strings.ContainsAny(targetType, ".*[] ") && willEmit[targetType] {
-			rhsCore = targetType
 		} else {
 			continue // not hermetically nameable
 		}

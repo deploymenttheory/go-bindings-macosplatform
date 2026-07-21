@@ -6,6 +6,8 @@ package cfnetwork
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 type CFHTTPAuthentication struct{}
@@ -39,3 +41,6 @@ type CFNetServiceClientContext struct {
 }
 
 type CFNetServiceMonitor struct{}
+
+// Id is an alias for the objc_object value type.
+type Id = *foundation.ObjcObject

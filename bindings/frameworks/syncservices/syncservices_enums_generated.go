@@ -325,6 +325,36 @@ func (e FilesecProperty) String() string {
 }
 
 // Deprecated: since macOS 10.7.
+type ISyncChangeType int64
+
+const (
+	// Deprecated: since macOS 10.7.
+	ISyncChangeTypeNone ISyncChangeType = 0
+	// Deprecated: since macOS 10.7.
+	ISyncChangeTypeAdd ISyncChangeType = 1
+	// Deprecated: since macOS 10.7.
+	ISyncChangeTypeModify ISyncChangeType = 2
+	ISyncChangeTypeDelete ISyncChangeType = 3
+)
+
+// String returns the ISyncChangeType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ISyncChangeType) String() string {
+	switch e {
+	case ISyncChangeTypeNone:
+		return "ISyncChangeTypeNone"
+	case ISyncChangeTypeAdd:
+		return "ISyncChangeTypeAdd"
+	case ISyncChangeTypeModify:
+		return "ISyncChangeTypeModify"
+	case ISyncChangeTypeDelete:
+		return "ISyncChangeTypeDelete"
+	default:
+		return fmt.Sprintf("ISyncChangeType(%d)", int64(e))
+	}
+}
+
+// Deprecated: since macOS 10.7.
 type ISyncServerDisabledReason int64
 
 const (
@@ -402,6 +432,45 @@ func (e ISyncSessionDriverMode) String() string {
 		return "ISyncSessionDriverModeRefresh"
 	default:
 		return fmt.Sprintf("ISyncSessionDriverMode(%d)", int64(e))
+	}
+}
+
+// Deprecated: since macOS 10.7.
+type ISyncStatus int64
+
+const (
+	// Deprecated: since macOS 10.7.
+	ISyncStatusRunning ISyncStatus = 1
+	// Deprecated: since macOS 10.7.
+	ISyncStatusSuccess ISyncStatus = 2
+	// Deprecated: since macOS 10.7.
+	ISyncStatusWarnings  ISyncStatus = 3
+	ISyncStatusErrors    ISyncStatus = 4
+	ISyncStatusCancelled ISyncStatus = 5
+	ISyncStatusFailed    ISyncStatus = 6
+	ISyncStatusNever     ISyncStatus = 7
+)
+
+// String returns the ISyncStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ISyncStatus) String() string {
+	switch e {
+	case ISyncStatusRunning:
+		return "ISyncStatusRunning"
+	case ISyncStatusSuccess:
+		return "ISyncStatusSuccess"
+	case ISyncStatusWarnings:
+		return "ISyncStatusWarnings"
+	case ISyncStatusErrors:
+		return "ISyncStatusErrors"
+	case ISyncStatusCancelled:
+		return "ISyncStatusCancelled"
+	case ISyncStatusFailed:
+		return "ISyncStatusFailed"
+	case ISyncStatusNever:
+		return "ISyncStatusNever"
+	default:
+		return fmt.Sprintf("ISyncStatus(%d)", int64(e))
 	}
 }
 

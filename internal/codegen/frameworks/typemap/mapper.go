@@ -51,8 +51,17 @@ type Mapper struct {
 	// EmittableStructs is the set of value-struct Go names (across all
 	// frameworks) the idiomatic layer actually emits a definition for, so a
 	// cross-framework reference targets only a struct that exists. Keyed by the
-	// struct's exported Go name (e.g. "CGRect").
+	// struct's exported Go name (e.g. "CGRect"). This is the CLEAN subset: a
+	// struct qualifies only when every field resolves to a hermetic Go type, so
+	// a typed field reference is always safe.
 	EmittableStructs map[string]bool
+	// AllEmittedStructs is the BROADER set of value-struct Go names the idiomatic
+	// layer physically writes — including opaque structs and ones with degraded
+	// (unsafe.Pointer) fields, which EmittableStructs omits. A cross-framework
+	// typedef alias (e.g. AudioComponentInstance = *carboncore.ComponentInstanceRecord)
+	// only needs the target type to EXIST, not to have all-clean fields, so it
+	// consults this set rather than EmittableStructs.
+	AllEmittedStructs map[string]bool
 	// IdiomaticClassIndex maps an ObjC class name to the idiomatic package and
 	// wrapper type name that own it ("NSProgress" → {foundation, Progress}),
 	// computed once during idiomatic generation. It lets one idiomatic package

@@ -1871,6 +1871,144 @@ func (e Type) String() string {
 	}
 }
 
+type CE_CrlDistributionPointNameType int64
+
+const (
+	CE_CDNT_FullName                CE_CrlDistributionPointNameType = 0
+	CE_CDNT_NameRelativeToCrlIssuer CE_CrlDistributionPointNameType = 1
+)
+
+// String returns the CE_CrlDistributionPointNameType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CE_CrlDistributionPointNameType) String() string {
+	switch e {
+	case CE_CDNT_FullName:
+		return "CE_CDNT_FullName"
+	case CE_CDNT_NameRelativeToCrlIssuer:
+		return "CE_CDNT_NameRelativeToCrlIssuer"
+	default:
+		return fmt.Sprintf("CE_CrlDistributionPointNameType(%d)", int64(e))
+	}
+}
+
+type CE_DataType int64
+
+const (
+	DT_AuthorityKeyID           CE_DataType = 0
+	DT_SubjectKeyID             CE_DataType = 1
+	DT_KeyUsage                 CE_DataType = 2
+	DT_SubjectAltName           CE_DataType = 3
+	DT_IssuerAltName            CE_DataType = 4
+	DT_ExtendedKeyUsage         CE_DataType = 5
+	DT_BasicConstraints         CE_DataType = 6
+	DT_CertPolicies             CE_DataType = 7
+	DT_NetscapeCertType         CE_DataType = 8
+	DT_CrlNumber                CE_DataType = 9
+	DT_DeltaCrl                 CE_DataType = 10
+	DT_CrlReason                CE_DataType = 11
+	DT_CrlDistributionPoints    CE_DataType = 12
+	DT_IssuingDistributionPoint CE_DataType = 13
+	DT_AuthorityInfoAccess      CE_DataType = 14
+	DT_Other                    CE_DataType = 15
+	DT_QC_Statements            CE_DataType = 16
+	DT_NameConstraints          CE_DataType = 17
+	DT_PolicyMappings           CE_DataType = 18
+	DT_PolicyConstraints        CE_DataType = 19
+	DT_InhibitAnyPolicy         CE_DataType = 20
+)
+
+// String returns the CE_DataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CE_DataType) String() string {
+	switch e {
+	case DT_AuthorityKeyID:
+		return "DT_AuthorityKeyID"
+	case DT_SubjectKeyID:
+		return "DT_SubjectKeyID"
+	case DT_KeyUsage:
+		return "DT_KeyUsage"
+	case DT_SubjectAltName:
+		return "DT_SubjectAltName"
+	case DT_IssuerAltName:
+		return "DT_IssuerAltName"
+	case DT_ExtendedKeyUsage:
+		return "DT_ExtendedKeyUsage"
+	case DT_BasicConstraints:
+		return "DT_BasicConstraints"
+	case DT_CertPolicies:
+		return "DT_CertPolicies"
+	case DT_NetscapeCertType:
+		return "DT_NetscapeCertType"
+	case DT_CrlNumber:
+		return "DT_CrlNumber"
+	case DT_DeltaCrl:
+		return "DT_DeltaCrl"
+	case DT_CrlReason:
+		return "DT_CrlReason"
+	case DT_CrlDistributionPoints:
+		return "DT_CrlDistributionPoints"
+	case DT_IssuingDistributionPoint:
+		return "DT_IssuingDistributionPoint"
+	case DT_AuthorityInfoAccess:
+		return "DT_AuthorityInfoAccess"
+	case DT_Other:
+		return "DT_Other"
+	case DT_QC_Statements:
+		return "DT_QC_Statements"
+	case DT_NameConstraints:
+		return "DT_NameConstraints"
+	case DT_PolicyMappings:
+		return "DT_PolicyMappings"
+	case DT_PolicyConstraints:
+		return "DT_PolicyConstraints"
+	case DT_InhibitAnyPolicy:
+		return "DT_InhibitAnyPolicy"
+	default:
+		return fmt.Sprintf("CE_DataType(%d)", int64(e))
+	}
+}
+
+type CE_GeneralNameType int64
+
+const (
+	GNT_OtherName     CE_GeneralNameType = 0
+	GNT_RFC822Name    CE_GeneralNameType = 1
+	GNT_DNSName       CE_GeneralNameType = 2
+	GNT_X400Address   CE_GeneralNameType = 3
+	GNT_DirectoryName CE_GeneralNameType = 4
+	GNT_EdiPartyName  CE_GeneralNameType = 5
+	GNT_URI           CE_GeneralNameType = 6
+	GNT_IPAddress     CE_GeneralNameType = 7
+	GNT_RegisteredID  CE_GeneralNameType = 8
+)
+
+// String returns the CE_GeneralNameType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CE_GeneralNameType) String() string {
+	switch e {
+	case GNT_OtherName:
+		return "GNT_OtherName"
+	case GNT_RFC822Name:
+		return "GNT_RFC822Name"
+	case GNT_DNSName:
+		return "GNT_DNSName"
+	case GNT_X400Address:
+		return "GNT_X400Address"
+	case GNT_DirectoryName:
+		return "GNT_DirectoryName"
+	case GNT_EdiPartyName:
+		return "GNT_EdiPartyName"
+	case GNT_URI:
+		return "GNT_URI"
+	case GNT_IPAddress:
+		return "GNT_IPAddress"
+	case GNT_RegisteredID:
+		return "GNT_RegisteredID"
+	default:
+		return fmt.Sprintf("CE_GeneralNameType(%d)", int64(e))
+	}
+}
+
 type Clockid int64
 
 const (

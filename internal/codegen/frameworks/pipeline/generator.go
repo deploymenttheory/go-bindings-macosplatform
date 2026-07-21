@@ -664,6 +664,10 @@ func GenerateIdiomatic(cfg IdiomaticConfig) error {
 	// every framework) gates both struct emission and cross-framework struct
 	// references so the two always agree.
 	mapper.EmittableStructs = idiofw.ComputeEmittableStructs(reg.Frameworks, mapper)
+	// The broader set (every struct physically emitted, incl. opaque/degraded) so
+	// a cross-framework typedef alias can target a struct that exists even when it
+	// is not in the all-clean-fields EmittableStructs subset.
+	mapper.AllEmittedStructs = idiofw.ComputeAllEmittedStructNames(reg.Frameworks)
 
 	// The class index spans every framework the idiomatic layer emits — not
 	// just the ones this invocation regenerates — so a partial regen resolves

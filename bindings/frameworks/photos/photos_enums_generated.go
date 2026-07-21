@@ -1412,6 +1412,20 @@ func (e OSClockid) String() string {
 	}
 }
 
+// Major distinctions between kinds of collection list, used by the collectionListType property and fetchCollectionListsWithType:subtype:options: method.
+type CollectionListType int64
+
+const ()
+
+// String returns the CollectionListType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CollectionListType) String() string {
+	switch e {
+	default:
+		return fmt.Sprintf("CollectionListType(%d)", int64(e))
+	}
+}
+
 // Options for requesting an image asset with or without adjustments, used by the version property.
 type ImageRequestOptionsVersion int64
 
@@ -1687,6 +1701,19 @@ func (e QosClass) String() string {
 		return "QosClassUnspecified"
 	default:
 		return fmt.Sprintf("QosClass(%d)", int64(e))
+	}
+}
+
+type UIImageOrientation int64
+
+const ()
+
+// String returns the UIImageOrientation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e UIImageOrientation) String() string {
+	switch e {
+	default:
+		return fmt.Sprintf("UIImageOrientation(%d)", int64(e))
 	}
 }
 

@@ -1033,6 +1033,7 @@ const (
 	HITTESTHook                                              = 12
 	TextWidthHook                                            = 28
 	WIDTHHook                                                = 8
+	KeyboardDispatch                                         = 43642
 	ActivMask                                                = 256
 	ActivateEvt                                              = 8
 	ActiveFlag                                               = 1
